@@ -24,7 +24,7 @@
  * - create a model in memory
  * - destroy a model in memory
  *
- * @version $Revision: 1.2 $ $Date: 2005-07-23 12:56:52 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-07-25 08:17:35 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -218,16 +218,6 @@ void allocate(void* p0, const void* p1, const void* p2, const void* p3) {
         if (r == 1) {
 
             allocate_internal_memory(p0, p1);
-        }
-    }
-
-    if (r != 1) {
-
-        compare_arrays(p2, p3, (void*) KNOWLEDGE_MEMORY_ABSTRACTION, (void*) KNOWLEDGE_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r == 1) {
-
-            allocate_string(p0, p1);
         }
     }
 }

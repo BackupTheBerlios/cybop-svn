@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.12 $ $Date: 2005-07-23 12:56:51 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2005-07-25 08:17:35 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -122,12 +122,6 @@ void send_message(const void* p0, const void* p1,
     void** md = NULL_POINTER;
     void** mdc = NULL_POINTER;
     void** mds = NULL_POINTER;
-
-    //
-    // The language name is taken directly.
-    // All other parameters are hierarchical names and used to
-    // determine the actual item from the knowledge tree.
-    //
 
     // Get language.
     get_compound_element_by_name(p0, p1,

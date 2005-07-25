@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2005-07-12 13:35:04 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-07-25 08:17:35 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -38,6 +38,20 @@ static const int INTERNAL_MEMORY_ABSTRACTION_COUNT_ARRAY[] = {16};
 static const int* INTERNAL_MEMORY_ABSTRACTION_COUNT = INTERNAL_MEMORY_ABSTRACTION_COUNT_ARRAY;
 
 //
+// Compound abstraction.
+//
+// Compound models consist of other compound or primitive models.
+//
+// CAUTION! This is also used as knowledge memory abstraction!
+//
+
+/** The compound abstraction. */
+static const char COMPOUND_ABSTRACTION_ARRAY[] = {'c', 'o', 'm', 'p', 'o', 'u', 'n', 'd'};
+static const char* COMPOUND_ABSTRACTION = COMPOUND_ABSTRACTION_ARRAY;
+static const int COMPOUND_ABSTRACTION_COUNT_ARRAY[] = {8};
+static const int* COMPOUND_ABSTRACTION_COUNT = COMPOUND_ABSTRACTION_COUNT_ARRAY;
+
+//
 // Signal memory abstraction.
 //
 
@@ -46,16 +60,6 @@ static const char SIGNAL_MEMORY_ABSTRACTION_ARRAY[] = {'s', 'i', 'g', 'n', 'a', 
 static const char* SIGNAL_MEMORY_ABSTRACTION = SIGNAL_MEMORY_ABSTRACTION_ARRAY;
 static const int SIGNAL_MEMORY_ABSTRACTION_COUNT_ARRAY[] = {13};
 static const int* SIGNAL_MEMORY_ABSTRACTION_COUNT = SIGNAL_MEMORY_ABSTRACTION_COUNT_ARRAY;
-
-//
-// Knowledge memory abstraction.
-//
-
-/** The knowledge memory abstraction. */
-static const char KNOWLEDGE_MEMORY_ABSTRACTION_ARRAY[] = {'k', 'n', 'o', 'w', 'l', 'e', 'd', 'g', 'e', '_', 'm', 'e', 'm', 'o', 'r', 'y'};
-static const char* KNOWLEDGE_MEMORY_ABSTRACTION = KNOWLEDGE_MEMORY_ABSTRACTION_ARRAY;
-static const int KNOWLEDGE_MEMORY_ABSTRACTION_COUNT_ARRAY[] = {16};
-static const int* KNOWLEDGE_MEMORY_ABSTRACTION_COUNT = KNOWLEDGE_MEMORY_ABSTRACTION_COUNT_ARRAY;
 
 //
 // Knowledge abstraction.
@@ -76,16 +80,14 @@ static const int ENCAPSULATED_KNOWLEDGE_ABSTRACTION_COUNT_ARRAY[] = {22};
 static const int* ENCAPSULATED_KNOWLEDGE_ABSTRACTION_COUNT = ENCAPSULATED_KNOWLEDGE_ABSTRACTION_COUNT_ARRAY;
 
 //
-// Compound abstraction.
-//
-// Compound models consist of other compound or primitive models.
+// Internal abstractions.
 //
 
-/** The compound abstraction. */
-static const char COMPOUND_ABSTRACTION_ARRAY[] = {'c', 'o', 'm', 'p', 'o', 'u', 'n', 'd'};
-static const char* COMPOUND_ABSTRACTION = COMPOUND_ABSTRACTION_ARRAY;
-static const int COMPOUND_ABSTRACTION_COUNT_ARRAY[] = {8};
-static const int* COMPOUND_ABSTRACTION_COUNT = COMPOUND_ABSTRACTION_COUNT_ARRAY;
+/** The textual user interface (tui) abstraction. */
+static const char TUI_ABSTRACTION_ARRAY[] = {'t', 'u', 'i'};
+static const char* TUI_ABSTRACTION = TUI_ABSTRACTION_ARRAY;
+static const int TUI_ABSTRACTION_COUNT_ARRAY[] = {9};
+static const int* TUI_ABSTRACTION_COUNT = TUI_ABSTRACTION_COUNT_ARRAY;
 
 //
 // Operation abstraction.

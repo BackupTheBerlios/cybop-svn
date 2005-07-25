@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.12 $ $Date: 2005-07-23 12:56:52 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2005-07-25 08:17:35 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -170,33 +170,43 @@ void send_linux_console(void* p0, void* p1, void* p2, const void* p3, const void
 
     log_message_debug("Send via linux console.");
 
-    // The encoded multi-dimensional tui.
+/*??
+    // The tui.
     void* t = NULL_POINTER;
     int* tc = NULL_POINTER;
     int* ts = NULL_POINTER;
 
-    // The tui internals.
+    // The tui internal.
     void** ti = NULL_POINTER;
     int** tic = NULL_POINTER;
     int** tis = NULL_POINTER;
 
-/*??
-    // Get tui internals.
+    // Get tui internal.
     get_array_elements(p0, (void*) TUI_INTERNAL, (void*) &ti, (void*) POINTER_ARRAY);
     get_array_elements(p0, (void*) TUI_COUNT_INTERNAL, (void*) &tic, (void*) POINTER_ARRAY);
     get_array_elements(p0, (void*) TUI_SIZE_INTERNAL, (void*) &tis, (void*) POINTER_ARRAY);
 
-    // Assign tui internals to real tui.
+    // Assign tui internal to real tui.
     t = *ti;
-    *tc = **tic;
-    *ts = **tis;
+    tc = *tic;
+    ts = *tis;
 
     if (t == NULL_POINTER) {
 
+        // Create tui count and size.
+        allocate((void*) &tc, (void*) VECTOR_COUNT, (void*) VECTOR_ABSTRACTION, (void*) VECTOR_ABSTRACTION_COUNT);
+        allocate((void*) &tS, (void*) VECTOR_COUNT, (void*) VECTOR_ABSTRACTION, (void*) VECTOR_ABSTRACTION_COUNT);
+
+        // Initialise tui count and size.
+        tcx = 0;
+        tcy = 0;
+        tcz = 0;
+        tsx = 0;
+        tsy = 0;
+        tsz = 0;
+
         // Create tui.
-        allocate_array((void*) &t, (void*) ts, (void*) &POINTER_ARRAY);
-        allocate((void*) &t, (void*) ts, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
-        allocate((void*) &t, (void*) ts, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+        allocate((void*) &t, (void*) ts, (void*) TUI_ABSTRACTION, (void*) TUI_ABSTRACTION_COUNT);
 
         // Set tui internals.
         set_array_elements(p0, (void*) TUI_INTERNAL, (void*) &t, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
