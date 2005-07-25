@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2005-07-22 17:38:22 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-07-25 21:01:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -60,8 +60,8 @@
  * @param p16 the direct execution flag
  */
 void handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
-    void* p7, const void* p8, const void* p9, const void* p10, const void* p11,
-    const void* p12, const void* p13, const  void* p14, const void* p15, const void* p16) {
+    void* p7, void* p8, void* p9, void* p10, void* p11,
+    void* p12, void* p13,  void* p14, void* p15, void* p16) {
 
     // The comparison result.
     int r = 0;

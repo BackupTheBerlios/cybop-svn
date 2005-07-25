@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2005-07-22 17:38:22 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-07-25 21:01:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -43,7 +43,7 @@
  * @param p2 the knowledge memory count
  * @param p3 the knowledge memory size
  */
-void send_x_window_system(void* p0, const void* p1, const void* p2, const void* p3) {
+void send_x_window_system(void* p0, void* p1, void* p2, void* p3) {
 
     log_message_debug("Send x window system message.");
 

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2005-07-23 12:56:52 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2005-07-25 21:01:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -43,7 +43,7 @@
  * @param p2 the knowledge memory count
  * @param p3 the knowledge memory size
  */
-void shutdown_linux_console(void* p0, const void* p1, const void* p2, const void* p3) {
+void shutdown_linux_console(void* p0, void* p1, void* p2, void* p3) {
 
     log_message_debug("Shutdown linux console.");
 

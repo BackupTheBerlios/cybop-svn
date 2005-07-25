@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2005-07-25 20:27:46 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2005-07-25 21:01:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -46,7 +46,7 @@
  * @param p1 the summand 1
  * @param p2 the summand 2
  */
-void add_integers(void* p0, const void* p1, const void* p2) {
+void add_integers(void* p0, void* p1, void* p2) {
 
     if (p2 != NULL_POINTER) {
 
@@ -140,7 +140,7 @@ void add_strings( void** res, int* res_count, int* res_size,
 // * @param p3 the abstraction
 // * @param p4 the abstraction count
 // */
-//void add_primitives(void* p0, const void* p1, const void* p2, const void* p3, const void* p4) {
+//void add_primitives(void* p0, void* p1, void* p2, void* p3, void* p4) {
 //
 //    if (p4 != NULL_POINTER) {
 //
@@ -185,7 +185,7 @@ void add_strings( void** res, int* res_count, int* res_size,
  * @param p3 the knowledge count
  * @param p4 the knowledge size
  */
-void add(const void* p0, const void* p1, void* p2, void* p3, void* p4) {
+void add(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
 /*??
     // The opernad 1 abstraction.

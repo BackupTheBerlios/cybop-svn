@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2005-07-25 20:27:58 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2005-07-25 21:01:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -56,15 +56,15 @@
  * @param p0 the run source
  * @param p1 the run source count
  */
-void manage(const void* p0, const void* p1) {
+void manage(void* p0, void* p1) {
 
     log_message_debug("\n\n");
     log_message_debug("Manage system.");
 
     // The internal memory.
     void* i = NULL_POINTER;
-    const int* ic = INTERNAL_MEMORY_ELEMENTS_COUNT;
-    const int* is = INTERNAL_MEMORY_ELEMENTS_COUNT;
+    int* ic = INTERNAL_MEMORY_ELEMENTS_COUNT;
+    int* is = INTERNAL_MEMORY_ELEMENTS_COUNT;
     // The knowledge memory.
     void* k = NULL_POINTER;
     int* kc = NULL_POINTER;

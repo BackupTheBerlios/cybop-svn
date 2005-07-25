@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2005-07-25 20:27:59 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2005-07-25 21:01:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -50,9 +50,9 @@
  * @param p10 the signal id
  */
 void set_signal(void* p0, void* p1, void* p2,
-    const void* p3, const void* p4, const void* p5,
-    const void* p6, const void* p7, const void* p8,
-    const void* p9, const void* p10) {
+    void* p3, void* p4, void* p5,
+    void* p6, void* p7, void* p8,
+    void* p9, void* p10) {
 
     if (p2 != NULL_POINTER) {
 
@@ -219,7 +219,7 @@ void set_signal(void* p0, void* p1, void* p2,
  * @param p2 the signal memory size
  * @param p3 the index
  */
-void remove_signal(void* p0, void* p1, void* p2, const void* p3) {
+void remove_signal(void* p0, void* p1, void* p2, void* p3) {
 
     if (p3 != NULL_POINTER) {
 
@@ -369,7 +369,7 @@ void remove_signal(void* p0, void* p1, void* p2, const void* p3) {
  * @param p9 the signal priority (Hand over as reference!)
  * @param p10 the main signal id (Hand over as reference!)
  */
-void get_signal(const void* p0, const void* p1, const void* p2, void* p3, void* p4,
+void get_signal(void* p0, void* p1, void* p2, void* p3, void* p4,
     void* p5, void* p6, void* p7, void* p8, void* p9, int* p10) {
 
     if (p2 != NULL_POINTER) {
@@ -500,7 +500,7 @@ void get_signal(const void* p0, const void* p1, const void* p2, void* p3, void* 
  * @param p1 the signal memory count
  * @param p2 the index (Hand over as reference!)
  */
-void get_highest_priority_index(const void* p0, const void* p1, void* p2) {
+void get_highest_priority_index(void* p0, void* p1, void* p2) {
 
     if (p2 != NULL_POINTER) {
 
@@ -578,7 +578,7 @@ void get_highest_priority_index(const void* p0, const void* p1, void* p2) {
  * @param p1 the signal memory count
  * @param p2 the signal identification (Hand over as reference!)
  */
-void get_new_signal_id(const void* p0, const void* p1, void* p2) {
+void get_new_signal_id(void* p0, void* p1, void* p2) {
 
     if (p2 != NULL_POINTER) {
 

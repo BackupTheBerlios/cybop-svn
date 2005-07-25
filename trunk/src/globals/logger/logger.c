@@ -27,7 +27,7 @@
  * Otherwise, an ENDLESS LOOP will be created, because cyboi's
  * array procedures call the logger in turn.
  *
- * @version $Revision: 1.4 $ $Date: 2005-07-22 17:38:22 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-07-25 21:01:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -49,7 +49,7 @@
  * @param p2 the log details
  * @param p3 the log details count
  */
-void add_log_details(void* p0, const void* p1, const void* p2, const void* p3) {
+void add_log_details(void* p0, void* p1, void* p2, void* p3) {
 
     // CAUTION! DO NOT use array functionality here!
     // The arrays use the logger which would cause circular references.
@@ -131,7 +131,7 @@ void add_log_details(void* p0, const void* p1, const void* p2, const void* p3) {
  * @param p2 the log entry count
  * @param p3 the log entry index
  */
-void add_log_level_name(const void* p0, void* p1, void* p2, void* p3) {
+void add_log_level_name(void* p0, void* p1, void* p2, void* p3) {
 
     // CAUTION! DO NOT use array functionality here!
     // The arrays use the logger which would cause circular references.
@@ -218,7 +218,7 @@ void add_log_level_name(const void* p0, void* p1, void* p2, void* p3) {
  * @param p1 the log message
  * @param p2 the log message count
  */
-void log_message(const void* p0, const void* p1, const void* p2) {
+void log_message(void* p0, void* p1, void* p2) {
 
     // CAUTION! DO NOT use array functionality here!
     // The arrays use the logger which would cause circular references.
@@ -296,7 +296,7 @@ void log_message(const void* p0, const void* p1, const void* p2) {
  *
  * @param p0 the log message as null terminated string
  */
-void log_message_debug(const void* p0) {
+void log_message_debug(void* p0) {
 
     // CAUTION! DO NOT use array functionality here!
     // The arrays use the logger which would cause circular references.

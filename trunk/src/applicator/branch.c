@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2005-07-25 20:27:58 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2005-07-25 21:01:01 $ $Author: christian $
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
@@ -42,8 +42,8 @@
 //
 
 void handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
-    void* p7, const void* p8, const void* p9, const void* p10, const void* p11,
-    const void* p12, const void* p13, const  void* p14, const void* p15, const void* p16);
+    void* p7, void* p8, void* p9, void* p10, void* p11,
+    void* p12, void* p13,  void* p14, void* p15, void* p16);
 
 /**
  * Branches the program flow, depending on a flag.
@@ -67,7 +67,7 @@ void handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
  * @param p11 the signal id
  */
 void branch(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
-    void* p7, const void* p8, const void* p9, const void* p10, const void* p11) {
+    void* p7, void* p8, void* p9, void* p10, void* p11) {
 
     log_message_debug("\n\n");
     log_message_debug("Branch program flow.");

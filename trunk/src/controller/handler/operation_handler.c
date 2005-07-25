@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2005-07-23 12:56:52 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2005-07-25 21:01:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -70,8 +70,8 @@
  * @param p13 the signal id
  */
 void handle_operation(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
-    void* p7, const void* p8, const void* p9, const void* p10, const void* p11,
-    const void* p12, const void* p13) {
+    void* p7, void* p8, void* p9, void* p10, void* p11,
+    void* p12, void* p13) {
 
     log_message_debug("\n\n");
     log_message((void*) INFO_LOG_LEVEL, (void*) HANDLE_OPERATION_MESSAGE, (void*) HANDLE_OPERATION_MESSAGE_COUNT);

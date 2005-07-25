@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2005-07-25 20:27:59 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-07-25 21:01:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -44,7 +44,7 @@
  * @param p3 the source character array
  * @param p4 the source count
  */
-void parse_integer(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
+void parse_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (p4 != NULL_POINTER) {
 
@@ -120,7 +120,7 @@ void parse_integer(void* p0, void* p1, void* p2, const void* p3, const void* p4)
  * @param p3 the source integer number
  * @param p4 the source count
  */
-void serialise_integer(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
+void serialise_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (p2 != NULL_POINTER) {
 

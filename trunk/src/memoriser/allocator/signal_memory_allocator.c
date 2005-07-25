@@ -23,7 +23,7 @@
  * This file contains the functionality to:
  * - create a signal memory in memory
  *
- * @version $Revision: 1.3 $ $Date: 2005-07-25 20:27:59 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-07-25 21:01:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -42,7 +42,7 @@
  * @param p0 the signal memory (Hand over as reference!)
  * @param p1 the signal memory size
  */
-void allocate_signal_memory(void* p0, const void* p1) {
+void allocate_signal_memory(void* p0, void* p1) {
 
     if (p0 != NULL_POINTER) {
 
@@ -98,7 +98,7 @@ void allocate_signal_memory(void* p0, const void* p1) {
  * @param p0 the signal memory (Hand over as reference!)
  * @param p1 the signal memory size
  */
-void deallocate_signal_memory(void* p0, const void* p1) {
+void deallocate_signal_memory(void* p0, void* p1) {
 
     if (p0 != NULL_POINTER) {
 

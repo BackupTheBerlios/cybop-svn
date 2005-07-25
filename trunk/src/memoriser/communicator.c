@@ -24,7 +24,7 @@
  * - read data from a device into a byte array
  * - write data from a byte array to a device
  *
- * @version $Revision: 1.4 $ $Date: 2005-07-23 10:11:20 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-07-25 21:01:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -59,8 +59,8 @@
  * @param p5 the type
  * @param p6 the type count
  */
-void read_data(void* p0, void* p1, void* p2, const void* p3, const void* p4,
-    const void* p5, const void* p6) {
+void read_data(void* p0, void* p1, void* p2, void* p3, void* p4,
+    void* p5, void* p6) {
 
     // The comparison result.
     int r = 0;
@@ -133,8 +133,8 @@ void read_data(void* p0, void* p1, void* p2, const void* p3, const void* p4,
  * @param p5 the type
  * @param p6 the type count
  */
-void write_data(void* p0, void* p1, void* p2, const void* p3, const void* p4,
-    const void* p5, const void* p6) {
+void write_data(void* p0, void* p1, void* p2, void* p3, void* p4,
+    void* p5, void* p6) {
 
     // The comparison result.
     int r = 0;

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2005-07-25 20:27:58 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2005-07-25 21:01:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -53,8 +53,8 @@
  * @param socket_port_model the socke port model
  * @param socket_port_model_count the socke port model count
  */
-void startup_tcp_socket( void* internals, const void* know,
-                         const void* know_count, const void* know_size,
+void startup_tcp_socket( void* internals, void* know,
+                         void* know_count, void* know_size,
                          void* socket_port_abstr, void* socket_port_abstr_count,
                          void* socket_port_model, void* socket_port_model_count )
 {

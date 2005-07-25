@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-07-08 13:48:18 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-07-25 21:01:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -47,8 +47,8 @@
  * @param p2 the knowledge count
  * @param p3 the knowledge size
  */
-void activate_tcp_socket( void* internals, const void* know,
-                         const void* know_count, const void* know_size,
+void activate_tcp_socket( void* internals, void* know,
+                         void* know_count, void* know_size,
                          void* socket_port_abstr, void* socket_port_abstr_count,
                          void* socket_port_model, void* socket_port_model_count )
 {

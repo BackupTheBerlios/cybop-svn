@@ -22,7 +22,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.6 $ $Date: 2005-07-23 12:56:51 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2005-07-25 21:01:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -48,7 +48,7 @@
  * @param p1 the abstraction
  * @param p2 the abstraction count
  */
-void check_primitive_model(void* p0, const void* p1, const void* p2) {
+void check_primitive_model(void* p0, void* p1, void* p2) {
 
     if (p0 != NULL_POINTER) {
 
@@ -150,8 +150,8 @@ void check_primitive_model(void* p0, const void* p1, const void* p2) {
  * @param p7 the source channel
  * @param p8 the source channel count
  */
-void create_primitive_model(void* p0, void* p1, void* p2, const void* p3, const void* p4,
-    const void* p5, const void* p6, const void* p7, const void* p8) {
+void create_primitive_model(void* p0, void* p1, void* p2, void* p3, void* p4,
+    void* p5, void* p6, void* p7, void* p8) {
 
     log_message_debug("Create primitive model.");
 
@@ -217,8 +217,8 @@ void create_primitive_model(void* p0, void* p1, void* p2, const void* p3, const 
  * @param p7 the source channel
  * @param p8 the source channel count
  */
-void create_compound_model(void* p0, void* p1, void* p2, const void* p3, const void* p4,
-    const void* p5, const void* p6, const void* p7, const void* p8) {
+void create_compound_model(void* p0, void* p1, void* p2, void* p3, void* p4,
+    void* p5, void* p6, void* p7, void* p8) {
 
     log_message_debug("Create compound model.");
 
@@ -330,8 +330,8 @@ void create_compound_model(void* p0, void* p1, void* p2, const void* p3, const v
  * @param p7 the source channel
  * @param p8 the source channel count
  */
-void create(void* p0, void* p1, void* p2, const void* p3, const void* p4,
-    const void* p5, const void* p6, const void* p7, const void* p8) {
+void create(void* p0, void* p1, void* p2, void* p3, void* p4,
+    void* p5, void* p6, void* p7, void* p8) {
 
     log_message_debug("Create model.");
 
@@ -366,7 +366,7 @@ void create(void* p0, void* p1, void* p2, const void* p3, const void* p4,
  * @param p3 the knowledge count
  * @param p4 the knowledge size
  */
-void create_part(const void* p0, const void* p1, void* p2, void* p3, void* p4) {
+void create_part(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     log_message_debug("Create part.");
 

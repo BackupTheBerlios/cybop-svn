@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.13 $ $Date: 2005-07-25 08:17:35 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2005-07-25 21:01:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -67,9 +67,9 @@
  * @param p8 the signal memory size
  * @param p9 the signal id
  */
-void send_message(const void* p0, const void* p1,
-    void* p2, const void* p3, const void* p4, const void* p5,
-    void* p6, void* p7, void* p8, const void* p9) {
+void send_message(void* p0, void* p1,
+    void* p2, void* p3, void* p4, void* p5,
+    void* p6, void* p7, void* p8, void* p9) {
 
     // The language abstraction.
     void** la = NULL_POINTER;
@@ -281,8 +281,8 @@ void send_message(const void* p0, const void* p1,
  * @param p5 the knowledge size
  * @param p6 the signal id
  */
-void refresh_url(const void* p0, const void* p1,
-    void* p2, const void* p3, const void* p4, const void* p5, const void* p6) {
+void refresh_url(void* p0, void* p1,
+    void* p2, void* p3, void* p4, void* p5, void* p6) {
 
     // The message abstraction.
     void** urla = NULL_POINTER;

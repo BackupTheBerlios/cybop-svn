@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2005-07-23 12:56:54 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-07-25 21:01:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -316,7 +316,7 @@ void read_button_press_x_windows_input(void* p0, void* p1, void* p2) {
  * @param p3 the source (graphics adapter array)
  * @param p4 the source count
  */
-void read_vga(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
+void read_vga(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
 /*??
     struct x_windows* x = (struct x_windows*) p1;
@@ -488,7 +488,7 @@ void mouse_clicked_action(void* p0, void* p1, void* p2, void* p3, void* p4) {
  * @param p3 the source (serialised x window model)
  * @param p4 the source count
  */
-void write_vga(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
+void write_vga(void* p0, void* p1, void* p2, void* p3, void* p4) {
 }
 
 /* VGA_COMMUNICATOR_SOURCE */

@@ -24,7 +24,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.7 $ $Date: 2005-07-25 20:27:59 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2005-07-25 21:01:03 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -474,7 +474,7 @@ void test_integer_parser() {
  * @param p1 the knowledge model count
  * @param level the level for the tree
  */
-void test_knowledge_model(const void* p0, const void* p1, int level) {
+void test_knowledge_model(void* p0, void* p1, int level) {
 
     fputs("Test knowledge model:\n", stdout);
 

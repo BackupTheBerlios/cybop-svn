@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2005-07-23 12:56:54 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-07-25 21:01:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -38,7 +38,7 @@
  * @param p0 the model (Hand over as reference!)
  * @param p1 the model size
  */
-void allocate_xml_node(void* p0, const void* p1) {
+void allocate_xml_node(void* p0, void* p1) {
 
     log_message_debug("Create xml node.");
 
@@ -68,7 +68,7 @@ void allocate_xml_node(void* p0, const void* p1) {
  * @param p0 the model (Hand over as reference!)
  * @param p1 the model size
  */
-void deallocate_xml_node(void* p0, const void* p1) {
+void deallocate_xml_node(void* p0, void* p1) {
 
     log_message_debug("Destroy xml node.");
 

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2005-07-25 20:27:59 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-07-25 21:01:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -147,7 +147,7 @@ void remove_relation_clientsocketnumber_mainsignalid(void* p0, void* p1) {
  * @param p1 the signal identification
  * @param p2 the index (hand over as reference)
  */
-void get_index_for_signal_id(void* p0, const void* p1, void* p2) {
+void get_index_for_signal_id(void* p0, void* p1, void* p2) {
 
     // The signal id.
     void** id = POINTER_NULL_POINTER;

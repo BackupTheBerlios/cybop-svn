@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2005-07-14 17:41:44 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2005-07-25 21:01:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description This module shuts down a service.
  */
@@ -51,8 +51,8 @@
  * @param p4 the knowledge size
  * @param p5 the internals
  */
-void shutdown_service(const void* p0, const void* p1,
-    const void* p2, const void* p3, const void* p4, void* p5) {
+void shutdown_service(void* p0, void* p1,
+    void* p2, void* p3, void* p4, void* p5) {
 
     log_message_debug("Shutdown.");
 

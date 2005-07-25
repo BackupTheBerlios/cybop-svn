@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2005-07-23 12:56:52 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-07-25 21:01:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -54,8 +54,8 @@
  * @param p5 the type
  * @param p6 the type count
  */
-void parse(void* p0, void* p1, void* p2, const void* p3, const void* p4,
-    const void* p5, const void* p6) {
+void parse(void* p0, void* p1, void* p2, void* p3, void* p4,
+    void* p5, void* p6) {
 
     // The comparison result.
     int r = 0;
@@ -219,8 +219,8 @@ void parse(void* p0, void* p1, void* p2, const void* p3, const void* p4,
  * @param p5 the type
  * @param p6 the type count
  */
-void serialise(void* p0, void* p1, void* p2, const void* p3, const void* p4,
-    const void* p5, const void* p6) {
+void serialise(void* p0, void* p1, void* p2, void* p3, void* p4,
+    void* p5, void* p6) {
 
     // The comparison result.
     int r = 0;

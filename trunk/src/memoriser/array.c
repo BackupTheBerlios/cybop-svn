@@ -49,7 +49,7 @@
  * the array size needs to be given extra here because sizeof will not work.
  * See: http://pegasus.rutgers.edu/~elflord/cpp/gotchas/index.shtml
  *
- * @version $Revision: 1.4 $ $Date: 2005-07-25 20:27:59 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-07-25 21:01:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -72,7 +72,7 @@
  * @param p1 the size
  * @param p2 the type
  */
-void allocate_array(void* p0, const void* p1, const void* p2) {
+void allocate_array(void* p0, void* p1, void* p2) {
 
     if (p2 != NULL_POINTER) {
 
@@ -112,7 +112,7 @@ void allocate_array(void* p0, const void* p1, const void* p2) {
  * @param p1 the size
  * @param p2 the type
  */
-void deallocate_array(void* p0, const void* p1, const void* p2) {
+void deallocate_array(void* p0, void* p1, void* p2) {
 
     if (p2 != NULL_POINTER) {
 
@@ -152,7 +152,7 @@ void deallocate_array(void* p0, const void* p1, const void* p2) {
  * @param p1 the size
  * @param p2 the type
  */
-void resize_array(void* p0, const void* p1, const void* p2) {
+void resize_array(void* p0, void* p1, void* p2) {
 
     if (p2 != NULL_POINTER) {
 
@@ -197,7 +197,7 @@ void resize_array(void* p0, const void* p1, const void* p2) {
  * @param p3 the result (Hand over as reference!)
  * @param p4 the type
  */
-void compare_array_elements(const void* p0, const void* p1, const void* p2, void* p3, const void* p4) {
+void compare_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (p4 != NULL_POINTER) {
 
@@ -243,7 +243,7 @@ void compare_array_elements(const void* p0, const void* p1, const void* p2, void
  * @param p4 the result (Hand over as reference!)
  * @param p5 the type
  */
-void compare_arrays(const void* p0, const void* p1, const void* p2, const void* p3, void* p4, const void* p5) {
+void compare_arrays(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
     if (p3 != NULL_POINTER) {
 
@@ -278,7 +278,7 @@ void compare_arrays(const void* p0, const void* p1, const void* p2, const void* 
  * @param p2 the elements (Hand over as array reference!)
  * @param p3 the type
  */
-void get_array_elements(const void* p0, const void* p1, void* p2, const void* p3) {
+void get_array_elements(void* p0, void* p1, void* p2, void* p3) {
 
     if (p3 != NULL_POINTER) {
 
@@ -325,7 +325,7 @@ void get_array_elements(const void* p0, const void* p1, void* p2, const void* p3
  * @param p4 the position (Hand over as reference!)
  * @param p5 the type
  */
-void get_index_in_array(const void* p0, const void* p1, const void* p2, const void* p3, void* p4, const void* p5) {
+void get_index_in_array(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
     if (p4 != NULL_POINTER) {
 
@@ -388,7 +388,7 @@ void get_index_in_array(const void* p0, const void* p1, const void* p2, const vo
  * @param p3 the count
  * @param p4 the type
  */
-void set_array_elements(void* p0, const void* p1, const void* p2, const void* p3, const void* p4) {
+void set_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (p4 != NULL_POINTER) {
 
@@ -430,7 +430,7 @@ void set_array_elements(void* p0, const void* p1, const void* p2, const void* p3
  * @param p3 the count
  * @param p4 the type
  */
-void remove_array_elements(void* p0, const void* p1, const void* p2, const void* p3, const void* p4) {
+void remove_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (p4 != NULL_POINTER) {
 
@@ -478,7 +478,7 @@ void remove_array_elements(void* p0, const void* p1, const void* p2, const void*
  * @param p4 the index (Hand over as reference!)
  * @param p5 the type
  */
-void get_array_elements_index(const void* p0, const void* p1, const void* p2, const void* p3, void* p4, const void* p5) {
+void get_array_elements_index(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
     if (p5 != NULL_POINTER) {
 

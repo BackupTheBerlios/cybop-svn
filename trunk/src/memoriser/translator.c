@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2005-07-12 15:23:38 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-07-25 21:01:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -43,8 +43,8 @@
  * @param p5 the type
  * @param p6 the type count
  */
-void decode(void* p0, void* p1, void* p2, const void* p3, const void* p4,
-    const void* p5, const void* p6) {
+void decode(void* p0, void* p1, void* p2, void* p3, void* p4,
+    void* p5, void* p6) {
 
     // The comparison result.
     int r = 0;
@@ -115,8 +115,8 @@ void decode(void* p0, void* p1, void* p2, const void* p3, const void* p4,
  * @param p5 the type
  * @param p6 the type count
  */
-void encode(void* p0, void* p1, void* p2, const void* p3, const void* p4,
-    const void* p5, const void* p6) {
+void encode(void* p0, void* p1, void* p2, void* p3, void* p4,
+    void* p5, void* p6) {
 
     // The comparison result.
     int r = 0;
@@ -195,11 +195,11 @@ void encode(void* p0, void* p1, void* p2, const void* p3, const void* p4,
  * @param know_size the knowledege memeory size
  */
 void encode_model(void** dest, int* dest_count, int* dest_size,
-                  const void* source_abstr, const int* source_abstr_count,
-                  const void* source_model, const int* source_model_count,
-                  const void* source_detail, const int* source_detail_count,
-                  const void* type, const int* type_count,
-                  const void* know, const int* know_count) {
+                  void* source_abstr, int* source_abstr_count,
+                  void* source_model, int* source_model_count,
+                  void* source_detail, int* source_detail_count,
+                  void* type, int* type_count,
+                  void* know, int* know_count) {
 
     // The comparison result.
     int r = 0;

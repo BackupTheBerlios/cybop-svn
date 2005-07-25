@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2005-07-23 12:56:54 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-07-25 21:01:03 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -40,10 +40,10 @@
 // Forward declarations.
 //
 void encode_html( void** dest, int* dest_count, int *dest_size,
-                  const void* source_abstr, const int* source_abstr_count,
-                  const void* source_model, const int* source_model_count,
-                  const void* source_detail, const int* source_detail_count,
-                  const void* know, const int* know_count );
+                  void* source_abstr, int* source_abstr_count,
+                  void* source_model, int* source_model_count,
+                  void* source_detail, int* source_detail_count,
+                  void* know, int* know_count );
 
 
 
@@ -61,9 +61,9 @@ void encode_html( void** dest, int* dest_count, int *dest_size,
  * @param know_count the knowledge memeory count
  */
 void encode_html_compound( void** dest, int* dest_count, int* dest_size,
-                           const void* source_model, const int* source_model_count,
-                           const void* source_detail, const int* source_detail_count,
-                           const void* know, const int* know_count )
+                           void* source_model, int* source_model_count,
+                           void* source_detail, int* source_detail_count,
+                           void* know, int* know_count )
 {
 
     // The compound abstraction.
@@ -120,9 +120,9 @@ void encode_html_compound( void** dest, int* dest_count, int* dest_size,
  */
 void encode_html_knowledgememory(
     void** dest, int* dest_count, int* dest_size,
-    const void* source_model, const int* source_model_count,
-    const void* source_detail, const int* source_detail_count,
-    const void* know, const int* know_count )
+    void* source_model, int* source_model_count,
+    void* source_detail, int* source_detail_count,
+    void* know, int* know_count )
 {
 
     if ( (source_model!=NULL_POINTER) &&
@@ -174,8 +174,8 @@ void encode_html_knowledgememory(
  * @param source_detail_count the source detail count
  */
 void encode_html_string( void** dest, int* dest_count, int* dest_size,
-                         const void* source_model, const int* source_model_count,
-                         const void* source_detail, const int* source_detail_count)
+                         void* source_model, int* source_model_count,
+                         void* source_detail, int* source_detail_count)
 {
 
     if ( (dest != NULL_POINTER ) &&
@@ -192,8 +192,8 @@ void encode_html_string( void** dest, int* dest_count, int* dest_size,
 
 
 void encode_html_integer( void** dest, int* dest_count, int* dest_size,
-                         const void* source_model, const int* source_model_count,
-                         const void* source_detail, const int* source_detail_count)
+                         void* source_model, int* source_model_count,
+                         void* source_detail, int* source_detail_count)
 {
 
     if ( (dest != NULL_POINTER ) &&
@@ -245,10 +245,10 @@ void encode_html_integer( void** dest, int* dest_count, int* dest_size,
  * @param p4 the source abstarction count
  */
 void encode_html( void** dest, int* dest_count, int *dest_size,
-                  const void* source_abstr, const int* source_abstr_count,
-                  const void* source_model, const int* source_model_count,
-                  const void* source_detail, const int* source_detail_count,
-                  const void* know, const int* know_count )
+                  void* source_abstr, int* source_abstr_count,
+                  void* source_model, int* source_model_count,
+                  void* source_detail, int* source_detail_count,
+                  void* know, int* know_count )
 {
 
     //check for destination

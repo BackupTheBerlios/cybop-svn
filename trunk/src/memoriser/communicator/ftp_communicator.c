@@ -24,7 +24,7 @@
  * - receive an ftp stream into a byte array
  * - send an ftp stream from a byte array
  *
- * @version $Revision: 1.3 $ $Date: 2005-07-23 10:11:20 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-07-25 21:01:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -47,7 +47,7 @@
  * ?? login
  * ?? password
  */
-void read_ftp(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
+void read_ftp(void* p0, void* p1, void* p2, void* p3, void* p4) {
 }
 
 /**
@@ -61,7 +61,7 @@ void read_ftp(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
  * ?? login
  * ?? password
  */
-void write_ftp(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
+void write_ftp(void* p0, void* p1, void* p2, void* p3, void* p4) {
 }
 
 /* FTP_COMMUNICATOR_SOURCE */

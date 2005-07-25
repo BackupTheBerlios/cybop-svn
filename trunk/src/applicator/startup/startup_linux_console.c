@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2005-07-25 20:27:58 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2005-07-25 21:01:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -52,7 +52,7 @@
  * @param p2 the knowledge memory count
  * @param p3 the knowledge memory size
  */
-void startup_linux_console(void* p0, const void* p1, const void* p2, const void* p3) {
+void startup_linux_console(void* p0, void* p1, void* p2, void* p3) {
 
     log_message_debug("Startup linux console.");
 

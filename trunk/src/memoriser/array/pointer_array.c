@@ -38,7 +38,7 @@
  *
  * Array elements are accessed over their index (array base pointer + index).
  *
- * @version $Revision: 1.3 $ $Date: 2005-07-23 12:56:54 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-07-25 21:01:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -57,7 +57,7 @@
  * @param p0 the array (Hand over as reference!)
  * @param p1 the size
  */
-void allocate_pointer_array(void* p0, const void* p1) {
+void allocate_pointer_array(void* p0, void* p1) {
 
     if (p1 != NULL_POINTER) {
 
@@ -98,7 +98,7 @@ void allocate_pointer_array(void* p0, const void* p1) {
  * @param p0 the array (Hand over as reference!)
  * @param p1 the size
  */
-void deallocate_pointer_array(void* p0, const void* p1) {
+void deallocate_pointer_array(void* p0, void* p1) {
 
     if (p1 != NULL_POINTER) {
 
@@ -129,7 +129,7 @@ void deallocate_pointer_array(void* p0, const void* p1) {
  * @param p0 the array (Hand over as reference!)
  * @param p1 the size
  */
-void resize_pointer_array(void* p0, const void* p1) {
+void resize_pointer_array(void* p0, void* p1) {
 
     if (p1 != NULL_POINTER) {
 
@@ -170,7 +170,7 @@ void resize_pointer_array(void* p0, const void* p1) {
  * @param p2 the count
  * @param p3 the result (Hand over as reference!)
  */
-void compare_pointer_array_elements(const void* p0, const void* p1, const void* p2, void* p3) {
+void compare_pointer_array_elements(void* p0, void* p1, void* p2, void* p3) {
 
     if (p3 != NULL_POINTER) {
 
@@ -248,7 +248,7 @@ void compare_pointer_array_elements(const void* p0, const void* p1, const void* 
  * @param p2 the elements (Hand over as array!)
  * @param p3 the count
  */
-void set_pointer_array_elements(void* p0, const void* p1, const void* p2, const void* p3) {
+void set_pointer_array_elements(void* p0, void* p1, void* p2, void* p3) {
 
     if (p3 != NULL_POINTER) {
 
@@ -322,7 +322,7 @@ void set_pointer_array_elements(void* p0, const void* p1, const void* p2, const 
  * @param p2 the index
  * @param p3 the count
  */
-void remove_pointer_array_elements(void* p0, const void* p1, const void* p2, const void* p3) {
+void remove_pointer_array_elements(void* p0, void* p1, void* p2, void* p3) {
 
     if (p3 != NULL_POINTER) {
 
@@ -414,7 +414,7 @@ void remove_pointer_array_elements(void* p0, const void* p1, const void* p2, con
  * @param p1 the index
  * @param p2 the elements (Hand over as array reference!)
  */
-void get_pointer_array_elements(const void* p0, const void* p1, void* p2) {
+void get_pointer_array_elements(void* p0, void* p1, void* p2) {
 
     if (p2 != NULL_POINTER) {
 
@@ -458,7 +458,7 @@ void get_pointer_array_elements(const void* p0, const void* p1, void* p2) {
  * @param p3 the elements count
  * @param p4 the index (Hand over as reference!)
  */
-void get_pointer_array_elements_index(const void* p0, const void* p1, const void* p2, const void* p3, void* p4) {
+void get_pointer_array_elements_index(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (p4 != NULL_POINTER) {
 

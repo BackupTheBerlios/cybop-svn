@@ -24,7 +24,7 @@
  * - parse an xml stream into an xml model
  * - serialise an xml model into an xml stream
  *
- * @version $Revision: 1.4 $ $Date: 2005-07-25 20:27:59 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-07-25 21:01:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -148,7 +148,7 @@ void parse_xml_comment_tag(void* p0, void* p1) {
  * @param p3 the xml stream
  * @param p4 the xml stream count
  */
-void parse_xml_tag(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
+void parse_xml_tag(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (p4 != NULL_POINTER) {
 
@@ -231,7 +231,7 @@ void parse_xml_tag(void* p0, void* p1, void* p2, const void* p3, const void* p4)
  * @param p3 the source
  * @param p4 the source count
  */
-void parse_xml(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
+void parse_xml(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (p4 != NULL_POINTER) {
 
@@ -408,7 +408,7 @@ void parse_xml(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
  * @param p3 the source
  * @param p4 the source count
  */
-void serialise_xml(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
+void serialise_xml(void* p0, void* p1, void* p2, void* p3, void* p4) {
 }
 
 /* XML_CONVERTER_SOURCE */

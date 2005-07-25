@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2005-07-22 22:42:50 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-07-25 21:01:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -65,8 +65,8 @@
  * @param p4 the knowledge memory count
  * @param p5 the knowledge memory size
  */
-void receive_message(const void* p0, const void* p1,
-    void* p2, const void* p3, const void* p4, const void* p5) {
+void receive_message(void* p0, void* p1,
+    void* p2, void* p3, void* p4, void* p5) {
 
     // The service abstraction.
     void** sa = NULL_POINTER;

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2005-07-25 20:27:59 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-07-25 21:01:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -34,24 +34,24 @@
 //
 
 /** The name attribute. */
-static const char NAME_ATTRIBUTE_ARRAY[] = {'n', 'a', 'm', 'e'};
-static const char* NAME_ATTRIBUTE = NAME_ATTRIBUTE_ARRAY;
-static const int* NAME_ATTRIBUTE_COUNT = NUMBER_4_INTEGER_ARRAY;
+static char NAME_ATTRIBUTE_ARRAY[] = {'n', 'a', 'm', 'e'};
+static char* NAME_ATTRIBUTE = NAME_ATTRIBUTE_ARRAY;
+static int* NAME_ATTRIBUTE_COUNT = NUMBER_4_INTEGER_ARRAY;
 
 /** The channel attribute. */
-static const char CHANNEL_ATTRIBUTE_ARRAY[] = {'c', 'h', 'a', 'n', 'n', 'e', 'l'};
-static const char* CHANNEL_ATTRIBUTE = CHANNEL_ATTRIBUTE_ARRAY;
-static const int* CHANNEL_ATTRIBUTE_COUNT = NUMBER_7_INTEGER_ARRAY;
+static char CHANNEL_ATTRIBUTE_ARRAY[] = {'c', 'h', 'a', 'n', 'n', 'e', 'l'};
+static char* CHANNEL_ATTRIBUTE = CHANNEL_ATTRIBUTE_ARRAY;
+static int* CHANNEL_ATTRIBUTE_COUNT = NUMBER_7_INTEGER_ARRAY;
 
 /** The abstraction attribute. */
-static const char ABSTRACTION_ATTRIBUTE_ARRAY[] = {'a', 'b', 's', 't', 'r', 'a', 'c', 't', 'i', 'o', 'n'};
-static const char* ABSTRACTION_ATTRIBUTE = ABSTRACTION_ATTRIBUTE_ARRAY;
-static const int* ABSTRACTION_ATTRIBUTE_COUNT = NUMBER_11_INTEGER_ARRAY;
+static char ABSTRACTION_ATTRIBUTE_ARRAY[] = {'a', 'b', 's', 't', 'r', 'a', 'c', 't', 'i', 'o', 'n'};
+static char* ABSTRACTION_ATTRIBUTE = ABSTRACTION_ATTRIBUTE_ARRAY;
+static int* ABSTRACTION_ATTRIBUTE_COUNT = NUMBER_11_INTEGER_ARRAY;
 
 /** The model attribute. */
-static const char MODEL_ATTRIBUTE_ARRAY[] = {'m', 'o', 'd', 'e', 'l'};
-static const char* MODEL_ATTRIBUTE = MODEL_ATTRIBUTE_ARRAY;
-static const int* MODEL_ATTRIBUTE_COUNT = NUMBER_5_INTEGER_ARRAY;
+static char MODEL_ATTRIBUTE_ARRAY[] = {'m', 'o', 'd', 'e', 'l'};
+static char* MODEL_ATTRIBUTE = MODEL_ATTRIBUTE_ARRAY;
+static int* MODEL_ATTRIBUTE_COUNT = NUMBER_5_INTEGER_ARRAY;
 
 /* CYBOL_CONSTANTS_SOURCE */
 #endif

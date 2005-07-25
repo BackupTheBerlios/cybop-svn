@@ -22,7 +22,7 @@
  *
  * This file destroys a transient model to a persistent model.
  *
- * @version $Revision: 1.4 $ $Date: 2005-07-23 12:56:51 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-07-25 21:01:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -45,7 +45,7 @@ void destroy(void** model, void* model_count, void* model_size,
  * @param p1 the abstraction
  * @param p2 the abstraction count
  */
-void check_compound_model(void* p0, const void* p1, const void* p2) {
+void check_compound_model(void* p0, void* p1, void* p2) {
 
     if (p0 != NULL_POINTER) {
 
@@ -212,7 +212,7 @@ void destroy(void** model, void* model_count, void* model_size,
  * @param p3 the knowledge count
  * @param p4 the knowledge size
  */
-void deallocate_part(const void* p0, const void* p1, void* p2, void* p3, void* p4) {
+void deallocate_part(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     log_message_debug("Destroy part.");
 

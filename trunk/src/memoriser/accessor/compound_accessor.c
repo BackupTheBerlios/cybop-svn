@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2005-07-25 20:27:59 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2005-07-25 21:01:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -36,11 +36,11 @@
 #include "../../memoriser/array.c"
 #include "../../memoriser/allocator/integer_allocator.c"
 
-void parse(void* p0, void* p1, void* p2, const void* p3, const void* p4,
-    const void* p5, const void* p6);
+void parse(void* p0, void* p1, void* p2, void* p3, void* p4,
+    void* p5, void* p6);
 
 void reindex_compound_for_listelements( void* compound, void* compound_count,
-    const void* basisname, int* basisname_count );
+    void* basisname, int* basisname_count );
 
 /**
  * Gets the compound element index.
@@ -51,7 +51,7 @@ void reindex_compound_for_listelements( void* compound, void* compound_count,
  * @param p3 the element name count
  * @param p4 the index
  */
-void get_compound_element_index(const void* p0, const void* p1, const void* p2, const void* p3, void* p4) {
+void get_compound_element_index(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (p4 != NULL_POINTER) {
 
@@ -160,7 +160,7 @@ void get_compound_element_index(const void* p0, const void* p1, const void* p2, 
  * @return the next index
  */
 /*??
-int get_next_map_element_index(const void* p0, const void* p1) {
+int get_next_map_element_index(void* p0, void* p1) {
 
     int index = INVALID_INDEX;
     int i = 0;
@@ -202,7 +202,7 @@ int get_next_map_element_index(const void* p0, const void* p1) {
  * @return the number of map elements whose name starts with the given base name
  */
 /*??
-int get_map_element_count(const void* p0, const void* p1) {
+int get_map_element_count(void* p0, void* p1) {
 
     int name_count = 0;
     int i = 0;
@@ -259,7 +259,7 @@ int get_map_element_count(const void* p0, const void* p1) {
  * @param p2 the extended name
  */
 /*??
-void build_next_map_element_name(const void* p0, const void* p1, void* p2) {
+void build_next_map_element_name(void* p0, void* p1, void* p2) {
 
     int count = get_map_element_count(p0, p1);
 
@@ -296,11 +296,11 @@ void build_next_map_element_name(const void* p0, const void* p1, void* p2) {
  * @param p14 the details count
  * @param p15 the details size
  */
-void set_compound_element_by_index(void* p0, void* p1, void* p2, const void* p3,
-    const void* p4, const void* p5, const void* p6,
-    const void* p7, const void* p8, const void* p9,
-    const void* p10, const void* p11, const void* p12,
-    const void* p13, const void* p14, const void* p15) {
+void set_compound_element_by_index(void* p0, void* p1, void* p2, void* p3,
+    void* p4, void* p5, void* p6,
+    void* p7, void* p8, void* p9,
+    void* p10, void* p11, void* p12,
+    void* p13, void* p14, void* p15) {
 
     if (p3 != NULL_POINTER) {
 
@@ -534,10 +534,10 @@ void set_compound_element_by_index(void* p0, void* p1, void* p2, const void* p3,
  * @param p14 the details size
  */
 void set_compound_element_by_name(void* p0, void* p1, void* p2,
-    const void* p3, const void* p4, const void* p5,
-    const void* p6, const void* p7, const void* p8,
-    const void* p9, const void* p10, const void* p11,
-    const void* p12, const void* p13, const void* p14) {
+    void* p3, void* p4, void* p5,
+    void* p6, void* p7, void* p8,
+    void* p9, void* p10, void* p11,
+    void* p12, void* p13, void* p14) {
 
     // The separator index.
     int i = -1;
@@ -757,7 +757,7 @@ void set_compound_element_by_name(void* p0, void* p1, void* p2,
  * @param p3 the reference
  * @param p4 the reference size
  */
-void add_compound_element(void* p0, const void* p1, const void* p2, const void* p3, const void* p4) {
+void add_compound_element(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
 /*??
     // This element name will get destroyed (free) in remove_map_element.
@@ -786,7 +786,7 @@ void add_compound_element(void* p0, const void* p1, const void* p2, const void* 
  * @param p2 the compound size
  * @param p3 the index
  */
-void remove_compound_element_by_index(void* p0, void* p1, void* p2, const void* p3) {
+void remove_compound_element_by_index(void* p0, void* p1, void* p2, void* p3) {
 
     if (p3 != NULL_POINTER) {
 
@@ -975,7 +975,7 @@ void remove_compound_element_by_index(void* p0, void* p1, void* p2, const void* 
  * @param p4 the name count
  */
 void remove_compound_element_by_name(void* p0, void* p1, void* p2,
-    const void* p3, const void* p4) {
+    void* p3, void* p4) {
 
     // The separator index.
     int i = -1;
@@ -1193,7 +1193,7 @@ void remove_compound_element_by_name(void* p0, void* p1, void* p2,
  * @param p10 the details count (Hand over as reference!)
  * @param p11 the details size (Hand over as reference!)
  */
-void get_compound_element_by_index(const void* p0, const void* p1, const void* p2,
+void get_compound_element_by_index(void* p0, void* p1, void* p2,
     void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11) {
 
     if (p2 != NULL_POINTER) {
@@ -1344,8 +1344,8 @@ void get_compound_element_by_index(const void* p0, const void* p1, const void* p
  * @param p11 the details count (Hand over as reference!)
  * @param p12 the details size (Hand over as reference!)
  */
-void get_compound_element_by_name(const void* p0, const void* p1,
-    const void* p2, const void* p3, void* p4, void* p5, void* p6,
+void get_compound_element_by_name(void* p0, void* p1,
+    void* p2, void* p3, void* p4, void* p5, void* p6,
     void* p7, void* p8, void* p9, void* p10, void* p11, void* p12) {
 
     // The separator index.
@@ -1547,8 +1547,8 @@ void get_compound_element_by_name(const void* p0, const void* p1,
  * @param p4 the name count (Hand over as reference!)
  * @param p5 the name size (Hand over as reference!)
  */
-void get_compound_element_name_by_index(const void* p0, const void* p1,
-    const void* p2, void* p3, void* p4, void* p5) {
+void get_compound_element_name_by_index(void* p0, void* p1,
+    void* p2, void* p3, void* p4, void* p5) {
 
     if (p2 != NULL_POINTER) {
 
@@ -1643,10 +1643,10 @@ void get_compound_element_name_by_index(const void* p0, const void* p1,
  * @param p13 the knowledge
  * @param p14 the knowledge count
  */
-void get_compound_element_by_encapsulated_name(const void* p0, const void* p1,
-    const void* p2, const void* p3, void* p4, void* p5, void* p6,
+void get_compound_element_by_encapsulated_name(void* p0, void* p1,
+    void* p2, void* p3, void* p4, void* p5, void* p6,
     void* p7, void* p8, void* p9, void* p10, void* p11, void* p12,
-    const void* p13, const void* p14) {
+    void* p13, void* p14) {
 
     log_message_debug("Get compound element by encapsulated name.");
 
@@ -1729,10 +1729,10 @@ void get_compound_element_by_encapsulated_name(const void* p0, const void* p1,
  * @param p13 the knowledge
  * @param p14 the knowledge count
  */
-void get_real_compound_element_by_name(const void* p0, const void* p1,
-    const void* p2, const void* p3, void* p4, void* p5, void* p6,
+void get_real_compound_element_by_name(void* p0, void* p1,
+    void* p2, void* p3, void* p4, void* p5, void* p6,
     void* p7, void* p8, void* p9, void* p10, void* p11, void* p12,
-    const void* p13, const void* p14) {
+    void* p13, void* p14) {
 
     log_message_debug("Get compound element by encapsulated name.");
 
@@ -1837,7 +1837,7 @@ void get_real_compound_element_by_name(const void* p0, const void* p1,
  * @param basisname the list basis name
  * @param basisname_count the liste basis name count
  */
-void reindex_compound_for_listelements(void* compound, void* compound_count, const void* basisname, int* basisname_count) {
+void reindex_compound_for_listelements(void* compound, void* compound_count, void* basisname, int* basisname_count) {
 
     if ((compound != NULL_POINTER) && (compound_count != NULL_POINTER)
         && (basisname != NULL_POINTER) && (basisname_count != NULL_POINTER)) {

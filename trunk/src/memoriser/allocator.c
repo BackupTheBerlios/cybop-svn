@@ -24,7 +24,7 @@
  * - create a model in memory
  * - destroy a model in memory
  *
- * @version $Revision: 1.3 $ $Date: 2005-07-25 08:17:35 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-07-25 21:01:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -56,7 +56,7 @@
  * @param p2 the abstraction
  * @param p3 the abstraction count
  */
-void allocate(void* p0, const void* p1, const void* p2, const void* p3) {
+void allocate(void* p0, void* p1, void* p2, void* p3) {
 
     // The comparison result.
     int r = 0;
@@ -230,7 +230,7 @@ void allocate(void* p0, const void* p1, const void* p2, const void* p3) {
  * @param p2 the abstraction
  * @param p3 the abstraction count
  */
-void deallocate(void* p0, const void* p1, const void* p2, const void* p3) {
+void deallocate(void* p0, void* p1, void* p2, void* p3) {
 
     // The comparison result.
     int r = 0;

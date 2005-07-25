@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2005-07-25 20:27:58 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2005-07-25 21:01:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -70,8 +70,8 @@
  * @param p7 the source channel
  * @param p8 the source channel count
  */
-void create(void* p0, void* p1, void* p2, const void* p3, const void* p4,
-    const void* p5, const void* p6, const void* p7, const void* p8);
+void create(void* p0, void* p1, void* p2, void* p3, void* p4,
+    void* p5, void* p6, void* p7, void* p8);
 
 /**
  * Get the request method from the complet request msg
@@ -1243,7 +1243,7 @@ void run_tcp_socket_server(void* p0) {
  * @param blocking_model the blocking model
  * @param blocking_model_count the blocking model count
  */
-void receive_tcp_socket(void* p0, const void* p1, const void* p2, const void* p3,
+void receive_tcp_socket(void* p0, void* p1, void* p2, void* p3,
     void* blocking_abstr, void* blocking_abstr_count, void* blocking_model, void* blocking_model_count) {
 
     log_message_debug("Receive via tcp socket.");

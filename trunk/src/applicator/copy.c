@@ -22,7 +22,7 @@
  *
  * this handel a loop
  *
- * @version $Revision: 1.3 $ $Date: 2005-07-25 20:27:58 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-07-25 21:01:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -89,7 +89,7 @@ void copy_string(void* source, int* source_count, int* source_size, void** dest,
  * @param proiority
  * @param signal_id
  */
-void copy(const void* param, const int* param_count, void* p2, void* p3, void* p4, const void* priority, const void* signal_id) {
+void copy(void* param, int* param_count, void* p2, void* p3, void* p4, void* priority, void* signal_id) {
 
     log_message_debug("Copy primitive model.");
 
@@ -198,7 +198,7 @@ void copy(const void* param, const int* param_count, void* p2, void* p3, void* p
  * @param proiority
  * @param signal_id
  */
-void copy_property(const void* param, const int* param_count, void* p2, void* p3, void* p4, const void* priority, const void* signal_id) {
+void copy_property(void* param, int* param_count, void* p2, void* p3, void* p4, void* priority, void* signal_id) {
 
     log_message_debug("Copy property.");
 

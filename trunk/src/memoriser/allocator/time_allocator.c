@@ -23,7 +23,7 @@
  * This file contains the functionality to:
  * - create a time model in memory
  *
- * @version $Revision: 1.2 $ $Date: 2005-07-23 12:56:52 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-07-25 21:01:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -41,7 +41,7 @@
  * @param p0 the model (Hand over as reference!)
  * @param p1 the model size
  */
-void allocate_time(void* p0, const void* p1) {
+void allocate_time(void* p0, void* p1) {
 
     log_message_debug("Create time.");
 
@@ -54,7 +54,7 @@ void allocate_time(void* p0, const void* p1) {
  * @param p0 the model (Hand over as reference!)
  * @param p1 the model size
  */
-void deallocate_time(void* p0, const void* p1) {
+void deallocate_time(void* p0, void* p1) {
 
     log_message_debug("Destroy time.");
 

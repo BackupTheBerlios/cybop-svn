@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2005-07-25 20:27:59 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-07-25 21:01:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -39,7 +39,7 @@
  * @param p0 the internal memory (Hand over as reference!)
  * @param p1 the internal memory size
  */
-void allocate_internal_memory(void* p0, const void* p1) {
+void allocate_internal_memory(void* p0, void* p1) {
 
     log_message_debug("Create internal memory.");
 
@@ -56,7 +56,7 @@ void allocate_internal_memory(void* p0, const void* p1) {
  * @param p0 the internal memory (Hand over as reference!)
  * @param p1 the internal memory size
  */
-void deallocate_internal_memory(void* p0, const void* p1) {
+void deallocate_internal_memory(void* p0, void* p1) {
 
     if (p1 != NULL_POINTER) {
 

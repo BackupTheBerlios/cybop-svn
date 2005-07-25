@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2005-07-23 12:56:54 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-07-25 21:01:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -56,14 +56,14 @@
  * @param p7 the source channel
  * @param p8 the source channel count
  */
-void create(void* p0, void* p1, void* p2, const void* p3, const void* p4,
-    const void* p5, const void* p6, const void* p7, const void* p8);
+void create(void* p0, void* p1, void* p2, void* p3, void* p4,
+    void* p5, void* p6, void* p7, void* p8);
 
 void set_compound_element_by_name(void* p0, void* p1, void* p2,
-    const void* p3, const void* p4, const void* p5,
-    const void* p6, const void* p7, const void* p8,
-    const void* p9, const void* p10, const void* p11,
-    const void* p12, const void* p13, const void* p14);
+    void* p3, void* p4, void* p5,
+    void* p6, void* p7, void* p8,
+    void* p9, void* p10, void* p11,
+    void* p12, void* p13, void* p14);
 
 //
 // Cybol property.
@@ -83,7 +83,7 @@ void set_compound_element_by_name(void* p0, void* p1, void* p2,
  * @param p8 the child node
  */
 void decode_cybol_property(void* p0, void* p1, void* p2, void* p3,
-    void* p4, void* p5, void* p6, void* p7, const void* p8) {
+    void* p4, void* p5, void* p6, void* p7, void* p8) {
 
     if (p8 != NULL_POINTER) {
 
@@ -275,7 +275,7 @@ void decode_cybol_property(void* p0, void* p1, void* p2, void* p3,
  * @param p3 the source
  * @param p4 the source count
  */
-void encode_cybol_property(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
+void encode_cybol_property(void* p0, void* p1, void* p2, void* p3, void* p4) {
 }
 
 //
@@ -291,7 +291,7 @@ void encode_cybol_property(void* p0, void* p1, void* p2, const void* p3, const v
  * @param p3 the source (xmlNode**)
  * @param p4 the source count (for this function not relevant void*)
  */
-void decode_cybol_node(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
+void decode_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (p3 != NULL_POINTER) {
 
@@ -489,7 +489,7 @@ void decode_cybol_node(void* p0, void* p1, void* p2, const void* p3, const void*
  * @param p3 the source
  * @param p4 the source count
  */
-void encode_cybol_node(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
+void encode_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4) {
 }
 
 //
@@ -505,7 +505,7 @@ void encode_cybol_node(void* p0, void* p1, void* p2, const void* p3, const void*
  * @param p3 the source
  * @param p4 the source count
  */
-void decode_cybol(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
+void decode_cybol(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     //??
     //?? BEGIN of temporary workaround for using the libxml2 parser.
@@ -553,7 +553,7 @@ void decode_cybol(void* p0, void* p1, void* p2, const void* p3, const void* p4) 
  * @param p3 the source
  * @param p4 the source count
  */
-void encode_cybol(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
+void encode_cybol(void* p0, void* p1, void* p2, void* p3, void* p4) {
 }
 
 /* CYBOL_TRANSLATOR_SOURCE */

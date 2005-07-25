@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2005-07-23 12:56:52 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-07-25 21:01:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -44,7 +44,7 @@
  * @param p2 the knowledge count
  * @param p3 the knowledge size
  */
-void receive_x_window_system(void* p0, const void* p1, const void* p2, const void* p3) {
+void receive_x_window_system(void* p0, void* p1, void* p2, void* p3) {
 
     log_message_debug("Receive x window system message.");
 

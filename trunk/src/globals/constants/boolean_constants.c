@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2005-07-25 20:27:58 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-07-25 21:01:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -34,10 +34,10 @@
 //
 
 /** The false boolean. */
-static const int* FALSE_BOOLEAN = NUMBER_0_INTEGER_ARRAY;
+static int* FALSE_BOOLEAN = NUMBER_0_INTEGER_ARRAY;
 
 /** The true boolean. */
-static const int* TRUE_BOOLEAN = NUMBER_1_INTEGER_ARRAY;
+static int* TRUE_BOOLEAN = NUMBER_1_INTEGER_ARRAY;
 
 /* BOOLEAN_CONSTANTS_SOURCE */
 #endif

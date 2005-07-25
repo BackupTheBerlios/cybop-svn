@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2005-07-12 15:23:38 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-07-25 21:01:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -72,15 +72,15 @@
  * @param p25 the result parameter details count
  * @param p26 the result parameter details size
  */
-void compare_equal(const void* p0, const void* p1, const void* p2,
-    const void* p3, const void* p4, const void* p5,
-    const void* p6, const void* p7, const void* p8,
-    const void* p9, const void* p10, const void* p11,
-    const void* p12, const void* p13, const void* p14,
-    const void* p15, const void* p16, const void* p17,
-    const void* p18, const void* p19, const void* p20,
+void compare_equal(void* p0, void* p1, void* p2,
+    void* p3, void* p4, void* p5,
+    void* p6, void* p7, void* p8,
+    void* p9, void* p10, void* p11,
+    void* p12, void* p13, void* p14,
+    void* p15, void* p16, void* p17,
+    void* p18, void* p19, void* p20,
     void* p21, void* p22, void* p23,
-    const void* p24, const void* p25, const void* p26) {
+    void* p24, void* p25, void* p26) {
 
     if (p21 != NULL_POINTER) {
 

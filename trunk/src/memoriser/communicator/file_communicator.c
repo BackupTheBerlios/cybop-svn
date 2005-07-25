@@ -24,7 +24,7 @@
  * - receive a file stream into a byte array
  * - send a file stream from a byte array
  *
- * @version $Revision: 1.8 $ $Date: 2005-07-25 20:27:59 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2005-07-25 21:01:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -49,7 +49,7 @@
  * @param p3 the source file name
  * @param p4 the source count
  */
-void read_file(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
+void read_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (p4 != NULL_POINTER) {
 
@@ -166,7 +166,7 @@ void read_file(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
  * @param p3 the source byte array
  * @param p4 the source count
  */
-void write_file(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
+void write_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
 /*??
     char r = NULL_CONTROL_CHARACTER;
