@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2005-07-25 21:01:02 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2005-07-27 13:30:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -99,22 +99,6 @@ static int* FRACTION_NUMERATOR_INDEX = NUMBER_0_INTEGER_ARRAY;
 
 /** The fraction denominator index. */
 static int* FRACTION_DENOMINATOR_INDEX = NUMBER_1_INTEGER_ARRAY;
-
-//
-// Vector.
-//
-
-/** The vector count. */
-static int* VECTOR_COUNT = NUMBER_3_INTEGER_ARRAY;
-
-/** The vector first element index. */
-static int* VECTOR_FIRST_ELEMENT_INDEX = NUMBER_0_INTEGER_ARRAY;
-
-/** The vector second element index. */
-static int* VECTOR_SECOND_ELEMENT_INDEX = NUMBER_1_INTEGER_ARRAY;
-
-/** The vector third element index. */
-static int* VECTOR_THIRD_ELEMENT_INDEX = NUMBER_2_INTEGER_ARRAY;
 
 //
 // Time.

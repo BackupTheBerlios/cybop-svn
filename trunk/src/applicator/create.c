@@ -22,7 +22,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.7 $ $Date: 2005-07-25 21:01:01 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2005-07-27 13:30:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -121,7 +121,7 @@ void check_primitive_model(void* p0, void* p1, void* p2) {
 }
 
 /**
- * Creates a primitive model.
+ * Allocates a primitive model.
  *
  * The creation happens in 2 steps and 3 models are involved.
  *
@@ -185,7 +185,7 @@ void create_primitive_model(void* p0, void* p1, void* p2, void* p3, void* p4,
 }
 
 /**
- * Creates a compound model.
+ * Allocates a compound model.
  *
  * The creation happens in 3 steps and 4 models are involved.
  *
@@ -305,7 +305,7 @@ void create_compound_model(void* p0, void* p1, void* p2, void* p3, void* p4,
 }
 
 /**
- * Creates a transient destination model from a persistent source model.
+ * Allocates a transient destination model from a persistent source model.
  *
  * Primitive models need a different creation than compound models.
  *
@@ -352,7 +352,7 @@ void create(void* p0, void* p1, void* p2, void* p3, void* p4,
 }
 
 /**
- * Creates a part and adds it to the knowledge model.
+ * Allocates a part and adds it to the knowledge model.
  *
  * Expected parameters:
  * - name

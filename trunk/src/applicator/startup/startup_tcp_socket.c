@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2005-07-25 21:01:01 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2005-07-27 13:30:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -83,7 +83,7 @@ void startup_tcp_socket( void* internals, void* know,
 
         if ( res == 1 ) {
 
-            log_message_debug("Create tcp server socket.");
+            log_message_debug("Allocate tcp server socket.");
 
             fprintf(stderr, "DEBUG: The port is: %d \n", *(int*)socket_port_model);
 

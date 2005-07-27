@@ -23,12 +23,12 @@
  * This file contains the functionality to:
  * - create a signal memory in memory
  *
- * @version $Revision: 1.4 $ $Date: 2005-07-25 21:01:02 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-07-27 13:30:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef SIGNAL_MEMORY_CREATOR_SOURCE
-#define SIGNAL_MEMORY_CREATOR_SOURCE
+#ifndef SIGNAL_MEMORY_ALLOCATOR_SOURCE
+#define SIGNAL_MEMORY_ALLOCATOR_SOURCE
 
 #include "../../globals/constants/integer_constants.c"
 #include "../../globals/constants/log_constants.c"
@@ -37,7 +37,7 @@
 #include "../../memoriser/array.c"
 
 /**
- * Creates the signal memory.
+ * Allocates the signal memory.
  *
  * @param p0 the signal memory (Hand over as reference!)
  * @param p1 the signal memory size
@@ -93,7 +93,7 @@ void allocate_signal_memory(void* p0, void* p1) {
 }
 
 /**
- * Destroys the signal memory.
+ * Deallocates the signal memory.
  *
  * @param p0 the signal memory (Hand over as reference!)
  * @param p1 the signal memory size
@@ -190,5 +190,5 @@ void deallocate_signal_memory(void* p0, void* p1) {
     }
 }
 
-/* SIGNAL_MEMORY_CREATOR_SOURCE */
+/* SIGNAL_MEMORY_ALLOCATOR_SOURCE */
 #endif

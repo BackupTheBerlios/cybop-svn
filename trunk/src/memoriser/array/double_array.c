@@ -38,7 +38,7 @@
  *
  * Array elements are accessed over their index (array base pointer + index).
  *
- * @version $Revision: 1.4 $ $Date: 2005-07-25 21:01:02 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-07-27 13:30:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -51,7 +51,7 @@
 #include "../../globals/logger/logger.c"
 
 /**
- * Creates the double array.
+ * Allocates the double array.
  *
  * @param p0 the array (Hand over as reference!)
  * @param p1 the size
@@ -89,7 +89,7 @@ void allocate_double_array(void* p0, void* p1) {
 }
 
 /**
- * Destroys the double array.
+ * Deallocates the double array.
  *
  * @param p0 the array (Hand over as reference!)
  * @param p1 the size

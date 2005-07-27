@@ -23,12 +23,12 @@
  * This file contains the functionality to:
  * - create a fraction model in memory
  *
- * @version $Revision: 1.3 $ $Date: 2005-07-25 21:01:02 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-07-27 13:30:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef FRACTION_CREATOR_SOURCE
-#define FRACTION_CREATOR_SOURCE
+#ifndef FRACTION_ALLOCATOR_SOURCE
+#define FRACTION_ALLOCATOR_SOURCE
 
 #include "../../globals/constants/log_constants.c"
 #include "../../globals/constants/structure_constants.c"
@@ -36,32 +36,32 @@
 #include "../../memoriser/array.c"
 
 /**
- * Creates the fraction.
+ * Allocates the fraction.
  *
  * @param p0 the model (Hand over as reference!)
  * @param p1 the model size
  */
 void allocate_fraction(void* p0, void* p1) {
 
-    log_message_debug("Create fraction.");
+    log_message_debug("Allocate fraction.");
 
     // Create fraction.
     allocate_array(p0, (void*) FRACTION_COUNT, (void*) INTEGER_ARRAY);
 }
 
 /**
- * Destroys the fraction.
+ * Deallocates the fraction.
  *
  * @param p0 the model (Hand over as reference!)
  * @param p1 the model size
  */
 void deallocate_fraction(void* p0, void* p1) {
 
-    log_message_debug("Destroy fraction.");
+    log_message_debug("Deallocate fraction.");
 
     // Destroy fraction.
     deallocate_array(p0, (void*) FRACTION_COUNT, (void*) INTEGER_ARRAY);
 }
 
-/* FRACTION_CREATOR_SOURCE */
+/* FRACTION_ALLOCATOR_SOURCE */
 #endif

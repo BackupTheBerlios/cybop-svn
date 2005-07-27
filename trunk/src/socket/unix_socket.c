@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.23 $ $Date: 2005-07-25 20:27:59 $ $Author: christian $
+ * @version $Revision: 1.24 $ $Date: 2005-07-27 13:30:20 $ $Author: christian $
  * @author Marcel Kiesling <makie2001@web.de>
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
@@ -36,7 +36,7 @@
 #include "../memoriser/accessor/compound_accessor.c"
 
 /**
- * Creates the unix server socket.
+ * Allocates the unix server socket.
  *
  * @param p0 the internals memory
  */
@@ -50,7 +50,7 @@ void allocate_unix_server_socket(void* p0) {
 
     if (f != POINTER_NULL_POINTER) {
 
-        log_message_debug("Create unix server socket.");
+        log_message_debug("Allocate unix server socket.");
 
         // The unix server socket.
         int* s = INTEGER_NULL_POINTER;
@@ -121,7 +121,7 @@ void allocate_unix_server_socket(void* p0) {
 }
 
 /**
- * Destroys the unix server socket.
+ * Deallocates the unix server socket.
  *
  * @param p0 the internals memory
  */
@@ -143,7 +143,7 @@ void deallocate_unix_server_socket(void* p0) {
 
         if (s != INTEGER_NULL_POINTER) {
 
-            log_message_debug("Destroy unix server socket.");
+            log_message_debug("Deallocate unix server socket.");
 
             // Close socket.
             close(*s);

@@ -20,12 +20,12 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2005-07-25 21:01:02 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-07-27 13:30:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef INTERNAL_MEMORY_CREATOR_SOURCE
-#define INTERNAL_MEMORY_CREATOR_SOURCE
+#ifndef INTERNAL_MEMORY_ALLOCATOR_SOURCE
+#define INTERNAL_MEMORY_ALLOCATOR_SOURCE
 
 #include "../../globals/constants/integer_constants.c"
 #include "../../globals/constants/log_constants.c"
@@ -34,21 +34,21 @@
 #include "../../memoriser/array.c"
 
 /**
- * Creates the internal memory.
+ * Allocates the internal memory.
  *
  * @param p0 the internal memory (Hand over as reference!)
  * @param p1 the internal memory size
  */
 void allocate_internal_memory(void* p0, void* p1) {
 
-    log_message_debug("Create internal memory.");
+    log_message_debug("Allocate internal memory.");
 
     // Create internal memory.
     allocate_array(p0, p1, (void*) POINTER_ARRAY);
 }
 
 /**
- * Destroys the internal memory.
+ * Deallocates the internal memory.
  *
  * All configuration parameters are destroyed first,
  * before the actual internal memory pointer array.
@@ -66,7 +66,7 @@ void deallocate_internal_memory(void* p0, void* p1) {
 
             void** i = (void**) p0;
 
-            log_message_debug("Destroy internal memory.");
+            log_message_debug("Deallocate internal memory.");
 
             // The loop variable.
             int j = 0;
@@ -161,5 +161,5 @@ void deallocate_internal_memory(void* p0, void* p1) {
     deallocate_array(p0, p1, (void*) POINTER_ARRAY);
 }
 
-/* INTERNAL_MEMORY_CREATOR_SOURCE */
+/* INTERNAL_MEMORY_ALLOCATOR_SOURCE */
 #endif

@@ -20,15 +20,12 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * This file contains the functionality to:
- * - create a vector model in memory
- *
- * @version $Revision: 1.3 $ $Date: 2005-07-25 21:01:02 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-07-27 13:30:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef VECTOR_CREATOR_SOURCE
-#define VECTOR_CREATOR_SOURCE
+#ifndef VECTOR_ALLOCATOR_SOURCE
+#define VECTOR_ALLOCATOR_SOURCE
 
 #include "../../globals/constants/log_constants.c"
 #include "../../globals/constants/structure_constants.c"
@@ -36,37 +33,32 @@
 #include "../../memoriser/array.c"
 
 /**
- * Creates the vector.
+ * Allocates the vector.
  *
  * @param p0 the model (Hand over as reference!)
  * @param p1 the model size
  */
 void allocate_vector(void* p0, void* p1) {
 
-    log_message_debug("Create vector.");
-
-    //?? OPEN QUESTION:
-    //?? Should vector always be 3-dimensional,
-    //?? or better of dynamic size?
-    //?? If dynamic, then use p1 as size.
+    log_message_debug("Allocate vector.");
 
     // Create vector.
-    allocate_array(p0, (void*) VECTOR_COUNT, (void*) INTEGER_ARRAY);
+    allocate_array(p0, p1, (void*) INTEGER_ARRAY);
 }
 
 /**
- * Destroys the vector.
+ * Deallocates the vector.
  *
  * @param p0 the model (Hand over as reference!)
  * @param p1 the model size
  */
 void deallocate_vector(void* p0, void* p1) {
 
-    log_message_debug("Destroy vector.");
+    log_message_debug("Deallocate vector.");
 
     // Destroy vector.
-    deallocate_array(p0, (void*) VECTOR_COUNT, (void*) INTEGER_ARRAY);
+    deallocate_array(p0, p1, (void*) INTEGER_ARRAY);
 }
 
-/* VECTOR_CREATOR_SOURCE */
+/* VECTOR_ALLOCATOR_SOURCE */
 #endif

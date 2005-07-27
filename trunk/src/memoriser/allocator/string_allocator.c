@@ -23,12 +23,12 @@
  * This file contains the functionality to:
  * - create a string model in memory
  *
- * @version $Revision: 1.3 $ $Date: 2005-07-25 21:01:02 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-07-27 13:30:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef STRING_CREATOR_SOURCE
-#define STRING_CREATOR_SOURCE
+#ifndef STRING_ALLOCATOR_SOURCE
+#define STRING_ALLOCATOR_SOURCE
 
 #include "../../globals/constants/log_constants.c"
 #include "../../globals/constants/structure_constants.c"
@@ -36,30 +36,30 @@
 #include "../../memoriser/array.c"
 
 /**
- * Creates the string.
+ * Allocates the string.
  *
  * @param p0 the model (Hand over as reference!)
  * @param p1 the model size
  */
 void allocate_string(void* p0, void* p1) {
 
-    log_message_debug("Create string.");
+    log_message_debug("Allocate string.");
 
     allocate_array(p0, p1, (void*) CHARACTER_ARRAY);
 }
 
 /**
- * Destroys the string.
+ * Deallocates the string.
  *
  * @param p0 the model (Hand over as reference!)
  * @param p1 the model size
  */
 void deallocate_string(void* p0, void* p1) {
 
-    log_message_debug("Destroy string.");
+    log_message_debug("Deallocate string.");
 
     deallocate_array(p0, p1, (void*) CHARACTER_ARRAY);
 }
 
-/* STRING_CREATOR_SOURCE */
+/* STRING_ALLOCATOR_SOURCE */
 #endif

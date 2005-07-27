@@ -23,12 +23,12 @@
  * This file contains the functionality to:
  * - create a time model in memory
  *
- * @version $Revision: 1.3 $ $Date: 2005-07-25 21:01:02 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-07-27 13:30:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef TIME_CREATOR_SOURCE
-#define TIME_CREATOR_SOURCE
+#ifndef TIME_ALLOCATOR_SOURCE
+#define TIME_ALLOCATOR_SOURCE
 
 #include "../../globals/constants/log_constants.c"
 #include "../../globals/constants/structure_constants.c"
@@ -36,30 +36,30 @@
 #include "../../memoriser/array.c"
 
 /**
- * Creates the time.
+ * Allocates the time.
  *
  * @param p0 the model (Hand over as reference!)
  * @param p1 the model size
  */
 void allocate_time(void* p0, void* p1) {
 
-    log_message_debug("Create time.");
+    log_message_debug("Allocate time.");
 
     allocate_array(p0, (void*) TIME_COUNT, (void*) INTEGER_ARRAY);
 }
 
 /**
- * Destroys the time.
+ * Deallocates the time.
  *
  * @param p0 the model (Hand over as reference!)
  * @param p1 the model size
  */
 void deallocate_time(void* p0, void* p1) {
 
-    log_message_debug("Destroy time.");
+    log_message_debug("Deallocate time.");
 
     deallocate_array(p0, (void*) TIME_COUNT, (void*) INTEGER_ARRAY);
 }
 
-/* TIME_CREATOR_SOURCE */
+/* TIME_ALLOCATOR_SOURCE */
 #endif

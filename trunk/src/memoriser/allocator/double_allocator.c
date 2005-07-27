@@ -20,12 +20,12 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2005-07-23 12:56:52 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-07-27 13:30:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef DOUBLE_CREATOR_SOURCE
-#define DOUBLE_CREATOR_SOURCE
+#ifndef DOUBLE_ALLOCATOR_SOURCE
+#define DOUBLE_ALLOCATOR_SOURCE
 
 #include "../../globals/constants/log_constants.c"
 #include "../../globals/constants/structure_constants.c"
@@ -33,30 +33,30 @@
 #include "../../memoriser/array.c"
 
 /**
- * Creates the double.
+ * Allocates the double.
  *
  * @param p0 the model (Hand over as reference!)
  */
 void allocate_double(void* p0) {
 
-    log_message_debug("Create double.");
+    log_message_debug("Allocate double.");
 
     // Create double array containing the actual double value.
     allocate_array(p0, (void*) DOUBLE_COUNT, (void*) DOUBLE_ARRAY);
 }
 
 /**
- * Destroys the double.
+ * Deallocates the double.
  *
  * @param p0 the model (Hand over as reference!)
  */
 void deallocate_double(void* p0) {
 
-    log_message_debug("Destroy double.");
+    log_message_debug("Deallocate double.");
 
     // Destroy double array containing the actual double value.
     deallocate_array(p0, (void*) DOUBLE_COUNT, (void*) DOUBLE_ARRAY);
 }
 
-/* DOUBLE_CREATOR_SOURCE */
+/* DOUBLE_ALLOCATOR_SOURCE */
 #endif

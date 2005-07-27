@@ -24,7 +24,7 @@
  * - create a model in memory
  * - destroy a model in memory
  *
- * @version $Revision: 1.4 $ $Date: 2005-07-25 21:01:02 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-07-27 13:30:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -49,7 +49,7 @@
 #include "../memoriser/allocator/xml_property_allocator.c"
 
 /**
- * Creates the model.
+ * Allocates the model.
  *
  * @param p0 the model (Hand over as reference!)
  * @param p1 the model size
@@ -223,7 +223,7 @@ void allocate(void* p0, void* p1, void* p2, void* p3) {
 }
 
 /**
- * Destroys the model.
+ * Deallocates the model.
  *
  * @param p0 the model (Hand over as reference!)
  * @param p1 the model size

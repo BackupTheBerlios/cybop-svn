@@ -20,12 +20,12 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2005-07-23 12:56:52 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-07-27 13:30:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef INTEGER_CREATOR_SOURCE
-#define INTEGER_CREATOR_SOURCE
+#ifndef INTEGER_ALLOCATOR_SOURCE
+#define INTEGER_ALLOCATOR_SOURCE
 
 #include "../../globals/constants/log_constants.c"
 #include "../../globals/constants/structure_constants.c"
@@ -33,30 +33,30 @@
 #include "../../memoriser/array.c"
 
 /**
- * Creates the integer.
+ * Allocates the integer.
  *
  * @param p0 the model (Hand over as reference!)
  */
 void allocate_integer(void* p0) {
 
-    log_message_debug("Create integer.");
+    log_message_debug("Allocate integer.");
 
     // Create integer array containing the actual integer value.
     allocate_array(p0, (void*) INTEGER_COUNT, (void*) INTEGER_ARRAY);
 }
 
 /**
- * Destroys the integer.
+ * Deallocates the integer.
  *
  * @param p0 the model (Hand over as reference!)
  */
 void deallocate_integer(void* p0) {
 
-    log_message_debug("Destroy integer.");
+    log_message_debug("Deallocate integer.");
 
     // Destroy integer array containing the actual integer value.
     deallocate_array(p0, (void*) INTEGER_COUNT, (void*) INTEGER_ARRAY);
 }
 
-/* INTEGER_CREATOR_SOURCE */
+/* INTEGER_ALLOCATOR_SOURCE */
 #endif

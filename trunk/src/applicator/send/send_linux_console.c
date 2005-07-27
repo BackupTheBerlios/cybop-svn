@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.15 $ $Date: 2005-07-25 21:01:01 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2005-07-27 13:30:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -193,19 +193,43 @@ void send_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (t == NULL_POINTER) {
 
-        // Create tui count and size.
-        allocate((void*) &tc, (void*) VECTOR_COUNT, (void*) VECTOR_ABSTRACTION, (void*) VECTOR_ABSTRACTION_COUNT);
-        allocate((void*) &tS, (void*) VECTOR_COUNT, (void*) VECTOR_ABSTRACTION, (void*) VECTOR_ABSTRACTION_COUNT);
+        // The vector count and size x, y, z elements.
+        int* tcx = NULL_POINTER;
+        int* tcy = NULL_POINTER;
+        int* tcz = NULL_POINTER;
+        int* tsx = NULL_POINTER;
+        int* tsy = NULL_POINTER;
+        int* tsz = NULL_POINTER;
+
+        // Allocate vector count and size x, y, z elements.
+        allocate((void*) &tcx, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+        allocate((void*) &tcy, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+        allocate((void*) &tcz, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+        allocate((void*) &tsx, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+        allocate((void*) &tsy, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+        allocate((void*) &tsz, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+
+        // Initialise vector count and size x, y, z elements.
+        *tcx = 0;
+        *tcy = 0;
+        *tcz = 0;
+        *tsx = 0;
+        *tsy = 0;
+        *tsz = 0;
+
+        // Allocate tui count and size.
+        allocate((void*) &tc, (void*) NUMBER_3_INTEGER, (void*) VECTOR_ABSTRACTION, (void*) VECTOR_ABSTRACTION_COUNT);
+        allocate((void*) &tS, (void*) NUMBER_3_INTEGER, (void*) VECTOR_ABSTRACTION, (void*) VECTOR_ABSTRACTION_COUNT);
 
         // Initialise tui count and size.
-        tcx = 0;
-        tcy = 0;
-        tcz = 0;
-        tsx = 0;
-        tsy = 0;
-        tsz = 0;
+        set_vector_element((void*) &tc, (void*) NUMBER_0_INTEGER, (void*) tcx);
+        set_vector_element((void*) &tc, (void*) NUMBER_1_INTEGER, (void*) tcy);
+        set_vector_element((void*) &tc, (void*) NUMBER_2_INTEGER, (void*) tcz);
+        set_vector_element((void*) &ts, (void*) NUMBER_0_INTEGER, (void*) tsx);
+        set_vector_element((void*) &ts, (void*) NUMBER_1_INTEGER, (void*) tsy);
+        set_vector_element((void*) &ts, (void*) NUMBER_2_INTEGER, (void*) tsz);
 
-        // Create tui.
+        // Allocate tui.
         allocate((void*) &t, (void*) ts, (void*) TUI_ABSTRACTION, (void*) TUI_ABSTRACTION_COUNT);
 
         // Set tui internals.

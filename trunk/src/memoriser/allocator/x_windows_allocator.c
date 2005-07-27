@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2005-07-23 12:56:54 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-07-27 13:30:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  *
@@ -34,11 +34,11 @@
  * a session- (display-) as well as a window manager.
  */
 
-#ifndef X_WINDOW_SYSTEM_CREATOR_SOURCE
-#define X_WINDOW_SYSTEM_CREATOR_SOURCE
+#ifndef X_WINDOW_SYSTEM_ALLOCATOR_SOURCE
+#define X_WINDOW_SYSTEM_ALLOCATOR_SOURCE
 
 /**
- * Creates an x window system window.
+ * Allocates an x window system window.
  *
  * @param p0 the internals memory
  */
@@ -46,12 +46,12 @@ void allocate_x_window_system_window(void* p0) {
 }
 
 /**
- * Destroys the x window system window.
+ * Deallocates the x window system window.
  *
  * @param p0 the internals memory
  */
 void deallocate_x_window_system_window(void* p0) {
 }
 
-/* X_WINDOW_SYSTEM_CREATOR_SOURCE */
+/* X_WINDOW_SYSTEM_ALLOCATOR_SOURCE */
 #endif

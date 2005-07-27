@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.12 $ $Date: 2005-07-25 21:01:01 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2005-07-27 13:30:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -110,7 +110,7 @@ void manage(void* p0, void* p1) {
     set_array_elements(i, (void*) SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &ss, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
 
     log_message_debug("\n\n");
-    log_message_debug("Create startup model.");
+    log_message_debug("Allocate startup model.");
 
     // The startup model abstraction, model, details.
     void* ma = NULL_POINTER;

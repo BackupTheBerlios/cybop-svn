@@ -20,12 +20,12 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2005-07-23 12:56:52 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-07-27 13:30:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef POINTER_CREATOR_SOURCE
-#define POINTER_CREATOR_SOURCE
+#ifndef POINTER_ALLOCATOR_SOURCE
+#define POINTER_ALLOCATOR_SOURCE
 
 #include "../../globals/constants/log_constants.c"
 #include "../../globals/constants/structure_constants.c"
@@ -33,30 +33,30 @@
 #include "../../memoriser/array.c"
 
 /**
- * Creates the pointer.
+ * Allocates the pointer.
  *
  * @param p0 the model (Hand over as reference!)
  */
 void allocate_pointer(void* p0) {
 
-    log_message_debug("Create pointer.");
+    log_message_debug("Allocate pointer.");
 
     // Create pointer array containing the actual pointer value.
     allocate_array(p0, (void*) POINTER_COUNT, (void*) POINTER_ARRAY);
 }
 
 /**
- * Destroys the pointer.
+ * Deallocates the pointer.
  *
  * @param p0 the model (Hand over as reference!)
  */
 void deallocate_pointer(void* p0) {
 
-    log_message_debug("Destroy pointer.");
+    log_message_debug("Deallocate pointer.");
 
     // Destroy pointer array containing the actual pointer value.
     deallocate_array(p0, (void*) POINTER_COUNT, (void*) POINTER_ARRAY);
 }
 
-/* POINTER_CREATOR_SOURCE */
+/* POINTER_ALLOCATOR_SOURCE */
 #endif

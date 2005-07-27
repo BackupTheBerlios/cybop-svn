@@ -23,12 +23,12 @@
  * This file contains the functionality to:
  * - create a complex model in memory
  *
- * @version $Revision: 1.3 $ $Date: 2005-07-25 21:01:02 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-07-27 13:30:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef COMPLEX_CREATOR_SOURCE
-#define COMPLEX_CREATOR_SOURCE
+#ifndef COMPLEX_ALLOCATOR_SOURCE
+#define COMPLEX_ALLOCATOR_SOURCE
 
 #include "../../globals/constants/log_constants.c"
 #include "../../globals/constants/structure_constants.c"
@@ -36,32 +36,32 @@
 #include "../../memoriser/array.c"
 
 /**
- * Creates the complex.
+ * Allocates the complex.
  *
  * @param p0 the model (Hand over as reference!)
  * @param p1 the model size
  */
 void allocate_complex(void* p0, void* p1) {
 
-    log_message_debug("Create complex.");
+    log_message_debug("Allocate complex.");
 
     // Create complex.
     allocate_array(p0, (void*) COMPLEX_COUNT, (void*) DOUBLE_ARRAY);
 }
 
 /**
- * Destroys the complex.
+ * Deallocates the complex.
  *
  * @param p0 the model (Hand over as reference!)
  * @param p1 the model size
  */
 void deallocate_complex(void* p0, void* p1) {
 
-    log_message_debug("Destroy complex.");
+    log_message_debug("Deallocate complex.");
 
     // Destroy complex.
     deallocate_array(p0, (void*) COMPLEX_COUNT, (void*) DOUBLE_ARRAY);
 }
 
-/* COMPLEX_CREATOR_SOURCE */
+/* COMPLEX_ALLOCATOR_SOURCE */
 #endif

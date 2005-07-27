@@ -20,12 +20,12 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2005-07-25 21:01:02 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-07-27 13:30:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef XML_PROPERTY_CREATOR_SOURCE
-#define XML_PROPERTY_CREATOR_SOURCE
+#ifndef XML_PROPERTY_ALLOCATOR_SOURCE
+#define XML_PROPERTY_ALLOCATOR_SOURCE
 
 #include "../../globals/constants/log_constants.c"
 #include "../../globals/constants/structure_constants.c"
@@ -33,14 +33,14 @@
 #include "../../memoriser/array.c"
 
 /**
- * Creates the xml property.
+ * Allocates the xml property.
  *
  * @param p0 the model (Hand over as reference!)
  * @param p1 the model size
  */
 void allocate_xml_property(void* p0, void* p1) {
 
-    log_message_debug("Create xml property.");
+    log_message_debug("Allocate xml property.");
 
     // Create xml attribute.
     allocate_array(p0, (void*) XML_ATTRIBUTE_COUNT, (void*) POINTER_ARRAY);
@@ -63,14 +63,14 @@ void allocate_xml_property(void* p0, void* p1) {
 }
 
 /**
- * Destroys the xml property.
+ * Deallocates the xml property.
  *
  * @param p0 the model (Hand over as reference!)
  * @param p1 the model size
  */
 void deallocate_xml_property(void* p0, void* p1) {
 
-    log_message_debug("Destroy xml property.");
+    log_message_debug("Deallocate xml property.");
 
     // Initialise xml attribute name, value.
     void* nv = NULL_POINTER;
@@ -96,5 +96,5 @@ void deallocate_xml_property(void* p0, void* p1) {
     deallocate_array(p0, (void*) XML_ATTRIBUTE_COUNT, (void*) POINTER_ARRAY);
 }
 
-/* XML_PROPERTY_CREATOR_SOURCE */
+/* XML_PROPERTY_ALLOCATOR_SOURCE */
 #endif

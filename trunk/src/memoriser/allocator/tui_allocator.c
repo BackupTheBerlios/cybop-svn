@@ -23,12 +23,12 @@
  * This file contains the functionality to:
  * - create a signal memory in memory
  *
- * @version $Revision: 1.4 $ $Date: 2005-07-25 21:01:02 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-07-27 13:30:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef TUI_CREATOR_SOURCE
-#define TUI_CREATOR_SOURCE
+#ifndef TUI_ALLOCATOR_SOURCE
+#define TUI_ALLOCATOR_SOURCE
 
 //?? #include "../../globals/constants/integer_constants.c"
 //?? #include "../../globals/constants/log_constants.c"
@@ -37,7 +37,7 @@
 //?? #include "../../memoriser/array.c"
 
 /**
- * Creates the textual user interface dimension.
+ * Allocates the textual user interface dimension.
  *
  * @param p0 the textual user interface (Hand over as reference!)
  * @param p1 the textual user interface size
@@ -49,7 +49,7 @@ void allocate_tui(void* p0, void* p1) {
 
         void** t = (void**) p0;
 
-        log_message_debug("Create textual user interface.");
+        log_message_debug("Allocate textual user interface.");
 
         // Create textual user interface.
         allocate_array(p0, (void*) TUI_COUNT, (void*) POINTER_ARRAY);
@@ -73,7 +73,7 @@ void allocate_tui(void* p0, void* p1) {
 }
 
 /**
- * Destroys the textual user interface.
+ * Deallocates the textual user interface.
  *
  * @param p0 the textual user interface (Hand over as reference!)
  * @param p1 the textual user interface size
@@ -85,7 +85,7 @@ void deallocate_tui(void* p0, void* p1) {
 
         void** t = (void**) p0;
 
-        log_message_debug("Destroy textual user interface.");
+        log_message_debug("Deallocate textual user interface.");
 
         // The panels.
         void* p = NULL_POINTER;
@@ -117,5 +117,5 @@ void deallocate_tui(void* p0, void* p1) {
 */
 }
 
-/* TUI_CREATOR_SOURCE */
+/* TUI_ALLOCATOR_SOURCE */
 #endif

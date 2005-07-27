@@ -23,12 +23,12 @@
  * This file contains the functionality to:
  * - create a compound model in memory
  *
- * @version $Revision: 1.4 $ $Date: 2005-07-25 21:01:02 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-07-27 13:30:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef COMPOUND_CREATOR_SOURCE
-#define COMPOUND_CREATOR_SOURCE
+#ifndef COMPOUND_ALLOCATOR_SOURCE
+#define COMPOUND_ALLOCATOR_SOURCE
 
 #include "../../globals/constants/integer_constants.c"
 #include "../../globals/constants/log_constants.c"
@@ -37,7 +37,7 @@
 #include "../../memoriser/array.c"
 
 /**
- * Creates the compound.
+ * Allocates the compound.
  *
  * @param p0 the compound (Hand over as reference!)
  * @param p1 the compound size
@@ -48,7 +48,7 @@ void allocate_compound(void* p0, void* p1) {
 
         void** c = (void**) p0;
 
-        log_message_debug("Create compound.");
+        log_message_debug("Allocate compound.");
 
         // Create compound.
         allocate_array(p0, (void*) COMPOUND_COUNT, (void*) POINTER_ARRAY);
@@ -105,7 +105,7 @@ void allocate_compound(void* p0, void* p1) {
 }
 
 /**
- * Destroys the compound.
+ * Deallocates the compound.
  *
  * @param p0 the compound (Hand over as reference!)
  * @param p1 the compound size
@@ -116,7 +116,7 @@ void deallocate_compound(void* p0, void* p1) {
 
         void** c = (void**) p0;
 
-        log_message_debug("Destroy compound.");
+        log_message_debug("Deallocate compound.");
 
         // The names, abstractions, models, details.
         void* n = NULL_POINTER;
@@ -191,5 +191,5 @@ void deallocate_compound(void* p0, void* p1) {
     }
 }
 
-/* COMPOUND_CREATOR_SOURCE */
+/* COMPOUND_ALLOCATOR_SOURCE */
 #endif

@@ -22,7 +22,7 @@
  *
  * This file destroys a transient model to a persistent model.
  *
- * @version $Revision: 1.5 $ $Date: 2005-07-25 21:01:01 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2005-07-27 13:30:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -157,7 +157,7 @@ void deallocate_compound_model( void** model, void* model_count, void* model_siz
 }
 
 /**
- * Destroys a transient destination model.
+ * Deallocates a transient destination model.
  *
  * Primitive models need a different creation than compound models.
  *
@@ -198,7 +198,7 @@ void destroy(void** model, void* model_count, void* model_size,
 }
 
 /**
- * Destroys a part and removes it from the knowledge model.
+ * Deallocates a part and removes it from the knowledge model.
  *
  * Expected parameters:
  * - name

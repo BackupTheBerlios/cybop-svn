@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2005-07-20 15:50:37 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2005-07-27 13:30:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -159,7 +159,7 @@ void startup_globals() {
 /**
  * Shuts down the global variables.
  *
- * Destroys allocated memory in descending order,
+ * Deallocates allocated memory in descending order,
  * as compared to the initialise_globals procedure.
  */
 void shutdown_globals() {

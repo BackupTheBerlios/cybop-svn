@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2005-07-25 21:01:01 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2005-07-27 13:30:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -1045,7 +1045,7 @@ void handle_tcp_socket_request(void* p0, void* p1) {
                 // query string handling
                 set_signals_for_all_parameters((void*) param, (void*) &param_count, p0);
 
-                log_message_debug("Create destination abstraction, model, details.");
+                log_message_debug("Allocate destination abstraction, model, details.");
 
                 // The source channel.
                 char c_sc[] = "file";
