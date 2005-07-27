@@ -23,13 +23,14 @@
  * This file contains the functionality to:
  * - create a signal memory in memory
  *
- * @version $Revision: 1.5 $ $Date: 2005-07-27 13:30:20 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2005-07-27 23:10:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef SIGNAL_MEMORY_ALLOCATOR_SOURCE
 #define SIGNAL_MEMORY_ALLOCATOR_SOURCE
 
+#include "../../globals/constants/abstraction_constants.c"
 #include "../../globals/constants/integer_constants.c"
 #include "../../globals/constants/log_constants.c"
 #include "../../globals/constants/structure_constants.c"

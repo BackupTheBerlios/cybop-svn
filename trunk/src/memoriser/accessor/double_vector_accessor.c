@@ -1,5 +1,5 @@
 /*
- * $RCSfile: vector_accessor.c,v $
+ * $RCSfile: double_vector_accessor.c,v $
  *
  * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
  *
@@ -20,12 +20,12 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-07-27 13:30:20 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2005-07-27 23:10:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef VECTOR_ACCESSOR_SOURCE
-#define VECTOR_ACCESSOR_SOURCE
+#ifndef DOUBLE_VECTOR_ACCESSOR_SOURCE
+#define DOUBLE_VECTOR_ACCESSOR_SOURCE
 
 #include "../../globals/constants/abstraction_constants.c"
 #include "../../globals/constants/integer_constants.c"
@@ -34,46 +34,46 @@
 #include "../../memoriser/array.c"
 
 /**
- * Sets the vector element.
+ * Sets the double vector element.
  *
- * @param p0 the vector
+ * @param p0 the double vector
  * @param p1 the index
  * @param p2 the element
  */
-void set_vector_element(void* p0, void* p1, void* p2) {
+void set_double_vector_element(void* p0, void* p1, void* p2) {
 
-    log_message_debug("Set vector element.");
+    log_message_debug("Set double vector element.");
 
-    set_array_elements(p0, p1, (void*) &p2, (void*) NUMBER_1_INTEGER, (void*) INTEGER_ARRAY);
+    set_array_elements(p0, p1, (void*) &p2, (void*) NUMBER_1_INTEGER, (void*) DOUBLE_ARRAY);
 }
 
 /**
- * Removes the vector element.
+ * Removes the double vector element.
  *
- * @param p0 the vector
+ * @param p0 the double vector
  * @param p1 the size
  * @param p2 the index
  */
-void remove_vector_element(void* p0, void* p1) {
+void remove_double_vector_element(void* p0, void* p1, void* p2) {
 
-    log_message_debug("Remove vector element.");
+    log_message_debug("Remove double vector element.");
 
-    remove_array_elements(p0, p1, p2, (void*) NUMBER_1_INTEGER, (void*) INTEGER_ARRAY);
+    remove_array_elements(p0, p1, p2, (void*) NUMBER_1_INTEGER, (void*) DOUBLE_ARRAY);
 }
 
 /**
- * Gets the vector element.
+ * Gets the double vector element.
  *
  * @param p0 the vector
  * @param p1 the index
  * @param p2 the vector element (Hand over as reference!)
  */
-void get_vector_element(void* p0, void* p1, void* p2) {
+void get_double_vector_element(void* p0, void* p1, void* p2) {
 
-    log_message_debug("Get vector element.");
+    log_message_debug("Get double vector element.");
 
-    get_array_elements(p0, p1, p2, (void*) INTEGER_ARRAY);
+    get_array_elements(p0, p1, p2, (void*) DOUBLE_ARRAY);
 }
 
-/* VECTOR_ACCESSOR_SOURCE */
+/* DOUBLE_VECTOR_ACCESSOR_SOURCE */
 #endif

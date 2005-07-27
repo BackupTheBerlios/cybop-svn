@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2005-07-25 21:01:02 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2005-07-27 23:10:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -132,11 +132,11 @@ void parse(void* p0, void* p1, void* p2, void* p3, void* p4,
 
     if (r != 1) {
 
-        compare_arrays(p5, p6, (void*) VECTOR_ABSTRACTION, (void*) VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p5, p6, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r == 1) {
 
-            parse_vector(p0, p1, p2, p3, p4);
+            parse_integer_vector(p0, p1, p2, p3, p4);
         }
     }
 
@@ -147,6 +147,16 @@ void parse(void* p0, void* p1, void* p2, void* p3, void* p4,
         if (r == 1) {
 
             parse_double(p0, p1, p2, p3, p4);
+        }
+    }
+
+    if (r != 1) {
+
+        compare_arrays(p5, p6, (void*) DOUBLE_VECTOR_ABSTRACTION, (void*) DOUBLE_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r == 1) {
+
+            parse_double_vector(p0, p1, p2, p3, p4);
         }
     }
 
@@ -277,11 +287,11 @@ void serialise(void* p0, void* p1, void* p2, void* p3, void* p4,
 
     if (r != 1) {
 
-        compare_arrays(p5, p6, (void*) VECTOR_ABSTRACTION, (void*) VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p5, p6, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r == 1) {
 
-            serialise_vector(p0, p1, p2, p3, p4);
+            serialise_integer_vector(p0, p1, p2, p3, p4);
         }
     }
 
@@ -292,6 +302,16 @@ void serialise(void* p0, void* p1, void* p2, void* p3, void* p4,
         if (r == 1) {
 
             serialise_double(p0, p1, p2, p3, p4);
+        }
+    }
+
+    if (r != 1) {
+
+        compare_arrays(p5, p6, (void*) DOUBLE_VECTOR_ABSTRACTION, (void*) DOUBLE_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r == 1) {
+
+            serialise_double_vector(p0, p1, p2, p3, p4);
         }
     }
 

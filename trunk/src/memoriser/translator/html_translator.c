@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2005-07-25 21:01:03 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2005-07-27 23:10:49 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -206,9 +206,9 @@ void encode_html_integer( void** dest, int* dest_count, int* dest_size,
         int* dest_int_count = INTEGER_NULL_POINTER;
         int* dest_int_size = INTEGER_NULL_POINTER;
 
-        allocate_integer( &dest_int_count );
+        allocate(&dest_int_count, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
         *dest_int_count = 0;
-        allocate_integer( &dest_int_size );
+        allocate(&dest_int_size, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
         *dest_int_size = 0;
         create((void*) &dest_int, (void*) dest_int_count, (void*) dest_int_size,
             (void*) SPACE_CHARACTER , (void*) SPACE_CHARACTER_COUNT,

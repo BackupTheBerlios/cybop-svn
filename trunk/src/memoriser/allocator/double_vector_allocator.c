@@ -1,5 +1,5 @@
 /*
- * $RCSfile: vector_allocator.c,v $
+ * $RCSfile: double_vector_allocator.c,v $
  *
  * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
  *
@@ -20,45 +20,43 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2005-07-27 13:30:20 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2005-07-27 23:10:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef VECTOR_ALLOCATOR_SOURCE
-#define VECTOR_ALLOCATOR_SOURCE
+#ifndef DOUBLE_VECTOR_ALLOCATOR_SOURCE
+#define DOUBLE_VECTOR_ALLOCATOR_SOURCE
 
+#include "../../globals/constants/abstraction_constants.c"
 #include "../../globals/constants/log_constants.c"
-#include "../../globals/constants/structure_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../memoriser/array.c"
 
 /**
- * Allocates the vector.
+ * Allocates the double vector.
  *
  * @param p0 the model (Hand over as reference!)
  * @param p1 the model size
  */
-void allocate_vector(void* p0, void* p1) {
+void allocate_double_vector(void* p0, void* p1) {
 
-    log_message_debug("Allocate vector.");
+    log_message_debug("Allocate double vector.");
 
-    // Create vector.
-    allocate_array(p0, p1, (void*) INTEGER_ARRAY);
+    allocate_array(p0, p1, (void*) DOUBLE_ARRAY);
 }
 
 /**
- * Deallocates the vector.
+ * Deallocates the double vector.
  *
  * @param p0 the model (Hand over as reference!)
  * @param p1 the model size
  */
-void deallocate_vector(void* p0, void* p1) {
+void deallocate_double_vector(void* p0, void* p1) {
 
-    log_message_debug("Deallocate vector.");
+    log_message_debug("Deallocate double vector.");
 
-    // Destroy vector.
-    deallocate_array(p0, p1, (void*) INTEGER_ARRAY);
+    deallocate_array(p0, p1, (void*) DOUBLE_ARRAY);
 }
 
-/* VECTOR_ALLOCATOR_SOURCE */
+/* DOUBLE_VECTOR_ALLOCATOR_SOURCE */
 #endif

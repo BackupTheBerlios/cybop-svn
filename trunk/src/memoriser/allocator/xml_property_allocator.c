@@ -20,15 +20,15 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2005-07-27 13:30:20 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-07-27 23:10:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef XML_PROPERTY_ALLOCATOR_SOURCE
 #define XML_PROPERTY_ALLOCATOR_SOURCE
 
+#include "../../globals/constants/abstraction_constants.c"
 #include "../../globals/constants/log_constants.c"
-#include "../../globals/constants/structure_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../memoriser/array.c"
 
@@ -43,7 +43,7 @@ void allocate_xml_property(void* p0, void* p1) {
     log_message_debug("Allocate xml property.");
 
     // Create xml attribute.
-    allocate_array(p0, (void*) XML_ATTRIBUTE_COUNT, (void*) POINTER_ARRAY);
+    allocate_array(p0, p1, (void*) POINTER_ARRAY);
 
     // Initialise xml attribute name, value.
     void* nv = NULL_POINTER;
@@ -93,7 +93,7 @@ void deallocate_xml_property(void* p0, void* p1) {
     deallocate_array((void*) &c, p1, (void*) INTEGER_ARRAY);
 
     // Destroy xml attribute.
-    deallocate_array(p0, (void*) XML_ATTRIBUTE_COUNT, (void*) POINTER_ARRAY);
+    deallocate_array(p0, p1, (void*) POINTER_ARRAY);
 }
 
 /* XML_PROPERTY_ALLOCATOR_SOURCE */

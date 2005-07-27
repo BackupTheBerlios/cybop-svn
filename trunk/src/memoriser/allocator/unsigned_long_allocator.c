@@ -20,15 +20,15 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2005-07-27 13:30:20 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-07-27 23:10:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef UNSIGNED_LONG_ALLOCATOR_SOURCE
 #define UNSIGNED_LONG_ALLOCATOR_SOURCE
 
+#include "../../globals/constants/abstraction_constants.c"
 #include "../../globals/constants/log_constants.c"
-#include "../../globals/constants/structure_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../memoriser/array.c"
 
@@ -36,26 +36,26 @@
  * Allocates the unsigned long.
  *
  * @param p0 the model (Hand over as reference!)
+ * @param p1 the model size
  */
-void allocate_unsigned_long(void* p0) {
+void allocate_unsigned_long(void* p0, void* p1) {
 
     log_message_debug("Allocate unsigned long.");
 
-    // Create unsigned long array containing the actual value.
-    allocate_array(p0, (void*) UNSIGNED_LONG_COUNT, (void*) UNSIGNED_LONG_ARRAY);
+    allocate_array(p0, p1, (void*) UNSIGNED_LONG_ARRAY);
 }
 
 /**
  * Deallocates the unsigned long.
  *
  * @param p0 the model (Hand over as reference!)
+ * @param p1 the model size
  */
-void deallocate_unsigned_long(void* p0) {
+void deallocate_unsigned_long(void* p0, void* p1) {
 
     log_message_debug("Deallocate unsigned long.");
 
-    // Destroy unsigned long array containing the actual value.
-    deallocate_array(p0, (void*) UNSIGNED_LONG_COUNT, (void*) UNSIGNED_LONG_ARRAY);
+    deallocate_array(p0, p1, (void*) UNSIGNED_LONG_ARRAY);
 }
 
 /* UNSIGNED_LONG_ALLOCATOR_SOURCE */

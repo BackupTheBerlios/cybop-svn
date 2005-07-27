@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.10 $ $Date: 2005-07-27 13:30:20 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2005-07-27 23:10:47 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -647,9 +647,9 @@ void set_signal_for_parameter(void* source, int* source_count, void* dest, int* 
         int* sds = INTEGER_NULL_POINTER;
 
         // Create signal abstraction.
-        allocate_integer( &sac );
+        allocate(&sac, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
         *sac = 0;
-        allocate_integer( &sas );
+        allocate(&sas, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
         *sas = 0;
         create((void*) &sa, (void*) sac, (void*) sas,
             (void*) OPERATION_ABSTRACTION, (void*) OPERATION_ABSTRACTION_COUNT,
@@ -657,9 +657,9 @@ void set_signal_for_parameter(void* source, int* source_count, void* dest, int* 
             (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
 
         // Create signal model.
-        allocate_integer( &smc );
+        allocate(&smc, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
         *smc = 0;
-        allocate_integer( &sms );
+        allocate(&sms, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
         *sms = 0;
         create((void*) &sm, (void*) smc, (void*) sms,
             (void*) COPY_MODEL, (void*) COPY_MODEL_COUNT,
@@ -667,9 +667,9 @@ void set_signal_for_parameter(void* source, int* source_count, void* dest, int* 
             (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
 
         // Create signal detail.
-        allocate_integer( &sdc );
+        allocate(&sdc, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
         *sdc = 0;
-        allocate_integer( &sds );
+        allocate(&sds, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
         *sds = 0;
         create((void*) &sd, (void*) sdc, (void*) sds,
             (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
@@ -702,9 +702,9 @@ void set_signal_for_parameter(void* source, int* source_count, void* dest, int* 
         int* pdds = INTEGER_NULL_POINTER;
 
         // Create property destination name.
-        allocate_integer( &pdnc );
+        allocate(&pdnc, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
         *pdnc = 0;
-        allocate_integer( &pdns );
+        allocate(&pdns, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
         *pdns = 0;
         create((void*) &pdn, (void*) pdnc, (void*) pdns,
             (void*) DESTINATION_NAME,
@@ -713,9 +713,9 @@ void set_signal_for_parameter(void* source, int* source_count, void* dest, int* 
             (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
 
         // Create property destination abstraction.
-        allocate_integer( &pdac );
+        allocate(&pdac, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
         *pdac = 0;
-        allocate_integer( &pdas );
+        allocate(&pdas, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
         *pdas = 0;
         create((void*) &pda, (void*) pdac, (void*) pdas,
             (void*) KNOWLEDGE_ABSTRACTION, (void*) KNOWLEDGE_ABSTRACTION_COUNT,
@@ -723,9 +723,9 @@ void set_signal_for_parameter(void* source, int* source_count, void* dest, int* 
             (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
 
         // Create property destination model.
-        allocate_integer( &pdmc );
+        allocate(&pdmc, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
         *pdmc = 0;
-        allocate_integer( &pdms );
+        allocate(&pdms, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
         *pdms = 0;
         create((void*) &pdm, (void*) pdmc, (void*) pdms,
             (void*) dest, (void*) dest_count,
@@ -760,9 +760,9 @@ void set_signal_for_parameter(void* source, int* source_count, void* dest, int* 
         int* psds = INTEGER_NULL_POINTER;
 
         // Create property source name.
-        allocate_integer( &psnc );
+        allocate(&psnc, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
         *psnc = 0;
-        allocate_integer( &psns );
+        allocate(&psns, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
         *psns = 0;
         create((void*) &psn, (void*) psnc, (void*) psns,
             (void*) SOURCE_NAME,
@@ -772,9 +772,9 @@ void set_signal_for_parameter(void* source, int* source_count, void* dest, int* 
 
 
         // Create property source abstraction.
-        allocate_integer( &psac );
+        allocate(&psac, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
         *psac = 0;
-        allocate_integer( &psas );
+        allocate(&psas, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
         *psas = 0;
         create((void*) &psa, (void*) psac, (void*) psas,
             (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT,
@@ -783,9 +783,9 @@ void set_signal_for_parameter(void* source, int* source_count, void* dest, int* 
 
         // Create property source model.
         // todo: expansion for other types
-        allocate_integer( &psmc );
+        allocate(&psmc, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
         *psmc = 0;
-        allocate_integer( &psms );
+        allocate(&psms, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
         *psms = 0;
         create((void*) &psm, (void*) psmc, (void*) psms,
             (void*) source, (void*) source_count,
@@ -828,7 +828,7 @@ void set_signal_for_parameter(void* source, int* source_count, void* dest, int* 
 
         // The signal id.
         int* id = INTEGER_NULL_POINTER;
-        allocate_integer( &id);
+        allocate(&id, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
         *id = 0;
         get_new_signal_id(*m, *mc, (void*) id);
 
@@ -872,15 +872,15 @@ void set_signals_for_all_parameters(void* p0, int* p1, void* p2) {
         int* value_count = INTEGER_NULL_POINTER;
         int* value_size = INTEGER_NULL_POINTER;
 
-        allocate_integer(&param_count);
+        allocate(&param_count, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
         *param_count = *p1;
-        allocate_integer(&param_size);
+        allocate(&param_size, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
         *param_size = *p1;
         allocate_string(&param, param_size);
 
-        allocate_integer(&value_count);
+        allocate(&value_count, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
         *value_count = *p1;
-        allocate_integer(&value_size);
+        allocate(&value_size, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
         *value_size = *p1;
         allocate_string(&value, value_size);
 
@@ -1051,47 +1051,47 @@ void handle_tcp_socket_request(void* p0, void* p1) {
                 char c_sc[] = "file";
                 char* sc = &c_sc[0];
                 int* scc = INTEGER_NULL_POINTER;
-                allocate_integer(&scc);
+                allocate(&scc, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
                 *scc = 4;
 
                 // The source abstraction.
                 char c_sa[] = "cybol";
                 char* sa = &c_sa[0];
                 int* sac = INTEGER_NULL_POINTER;
-                allocate_integer(&sac);
+                allocate(&sac, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
                 *sac = 5;
 
                 // The source model.
                 char* sm = url_basename;
                 int* smc = INTEGER_NULL_POINTER;
-                allocate_integer(&smc);
+                allocate(&smc, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
                 *smc = url_basename_count;
 
                 // The destination abstraction.
                 void* da = NULL_POINTER;
                 int* dac = INTEGER_NULL_POINTER;
-                allocate_integer(&dac);
+                allocate(&dac, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
                 *dac = 0;
                 int* das = INTEGER_NULL_POINTER;
-                allocate_integer(&das);
+                allocate(&das, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
                 *das = 0;
 
                 // The destination model.
                 void* dm = NULL_POINTER;
                 int* dmc = INTEGER_NULL_POINTER;
-                allocate_integer(&dmc);
+                allocate(&dmc, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
                 *dmc = 0;
                 int* dms = INTEGER_NULL_POINTER;
-                allocate_integer(&dms);
+                allocate(&dms, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
                 *dms = 0;
 
                 // The destination details.
                 void* dd = NULL_POINTER;
                 int* ddc = INTEGER_NULL_POINTER;
-                allocate_integer(&ddc);
+                allocate(&ddc, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
                 *ddc = 0;
                 int* dds = INTEGER_NULL_POINTER;
-                allocate_integer(&dds);
+                allocate(&dds, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
                 *dds = 0;
 
                 // Create destination abstraction.
@@ -1124,7 +1124,7 @@ void handle_tcp_socket_request(void* p0, void* p1) {
 
                 // The signal id.
                 int* id = INTEGER_NULL_POINTER;
-                allocate_integer( &id);
+                allocate(&id, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
                 *id = 0;
                 get_new_signal_id(*m, *mc, (void*) id);
 

@@ -1,5 +1,5 @@
 /*
- * $RCSfile: pointer_allocator.c,v $
+ * $RCSfile: integer_vector_allocator.c,v $
  *
  * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
  *
@@ -20,43 +20,43 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2005-07-27 13:30:20 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2005-07-27 23:10:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef POINTER_ALLOCATOR_SOURCE
-#define POINTER_ALLOCATOR_SOURCE
+#ifndef INTEGER_VECTOR_ALLOCATOR_SOURCE
+#define INTEGER_VECTOR_ALLOCATOR_SOURCE
 
+#include "../../globals/constants/abstraction_constants.c"
 #include "../../globals/constants/log_constants.c"
-#include "../../globals/constants/structure_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../memoriser/array.c"
 
 /**
- * Allocates the pointer.
+ * Allocates the integer vector.
  *
  * @param p0 the model (Hand over as reference!)
+ * @param p1 the model size
  */
-void allocate_pointer(void* p0) {
+void allocate_integer_vector(void* p0, void* p1) {
 
-    log_message_debug("Allocate pointer.");
+    log_message_debug("Allocate integer vector.");
 
-    // Create pointer array containing the actual pointer value.
-    allocate_array(p0, (void*) POINTER_COUNT, (void*) POINTER_ARRAY);
+    allocate_array(p0, p1, (void*) INTEGER_ARRAY);
 }
 
 /**
- * Deallocates the pointer.
+ * Deallocates the integer vector.
  *
  * @param p0 the model (Hand over as reference!)
+ * @param p1 the model size
  */
-void deallocate_pointer(void* p0) {
+void deallocate_integer_vector(void* p0, void* p1) {
 
-    log_message_debug("Deallocate pointer.");
+    log_message_debug("Deallocate integer vector.");
 
-    // Destroy pointer array containing the actual pointer value.
-    deallocate_array(p0, (void*) POINTER_COUNT, (void*) POINTER_ARRAY);
+    deallocate_array(p0, p1, (void*) INTEGER_ARRAY);
 }
 
-/* POINTER_ALLOCATOR_SOURCE */
+/* INTEGER_VECTOR_ALLOCATOR_SOURCE */
 #endif

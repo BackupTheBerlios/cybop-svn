@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.13 $ $Date: 2005-07-27 13:30:20 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2005-07-27 23:10:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -75,11 +75,11 @@ void manage(void* p0, void* p1) {
     int* ss = NULL_POINTER;
 
     // Create knowledge memory count, size.
-    allocate_integer((void*) &kc);
-    allocate_integer((void*) &ks);
+    allocate((void*) &kc, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+    allocate((void*) &ks, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
     // Create signal memory count, size.
-    allocate_integer((void*) &sc);
-    allocate_integer((void*) &ss);
+    allocate((void*) &sc, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+    allocate((void*) &ss, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
 
     // Initialise knowledge memory count, size.
     *kc = 0;
@@ -124,10 +124,10 @@ void manage(void* p0, void* p1) {
     int* mds = INTEGER_NULL_POINTER;
 
     // Create startup model abstraction, model, details.
-    allocate_integer((void*) &mac);
-    allocate_integer((void*) &mas);
-    allocate_integer((void*) &mmc);
-    allocate_integer((void*) &mms);
+    allocate((void*) &mac, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+    allocate((void*) &mas, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+    allocate((void*) &mmc, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+    allocate((void*) &mms, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
     // CAUTION! Do not create startup model details!
     // It is not needed for the startup signal.
 
@@ -156,7 +156,7 @@ void manage(void* p0, void* p1) {
 
     // The signal id.
     int* id = INTEGER_NULL_POINTER;
-    allocate_integer((void*) &id);
+    allocate((void*) &id, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
     *id = 0;
     get_new_signal_id(s, (void*) sc, (void*) id);
 
@@ -179,12 +179,12 @@ void manage(void* p0, void* p1) {
 
     // Destroy signal memory.
     deallocate((void*) &s, (void*) ss, (void*) SIGNAL_MEMORY_ABSTRACTION, (void*) SIGNAL_MEMORY_ABSTRACTION_COUNT);
-    deallocate_integer((void*) &sc);
-    deallocate_integer((void*) &ss);
+    deallocate((void*) &sc, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+    deallocate((void*) &ss, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
     // Destroy knowledge memory.
     deallocate((void*) &k, (void*) ks, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
-    deallocate_integer((void*) &kc);
-    deallocate_integer((void*) &ks);
+    deallocate((void*) &kc, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+    deallocate((void*) &ks, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
     // Destroy internal memory.
     deallocate((void*) &i, (void*) is, (void*) INTERNAL_MEMORY_ABSTRACTION, (void*) INTERNAL_MEMORY_ABSTRACTION_COUNT);
 }

@@ -20,15 +20,15 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2005-07-27 13:30:20 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-07-27 23:10:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef INTEGER_ALLOCATOR_SOURCE
 #define INTEGER_ALLOCATOR_SOURCE
 
+#include "../../globals/constants/abstraction_constants.c"
 #include "../../globals/constants/log_constants.c"
-#include "../../globals/constants/structure_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../memoriser/array.c"
 
@@ -36,26 +36,28 @@
  * Allocates the integer.
  *
  * @param p0 the model (Hand over as reference!)
+ * @param p1 the model size
  */
-void allocate_integer(void* p0) {
+void allocate_integer(void* p0, void* p1) {
 
     log_message_debug("Allocate integer.");
 
     // Create integer array containing the actual integer value.
-    allocate_array(p0, (void*) INTEGER_COUNT, (void*) INTEGER_ARRAY);
+    allocate_array(p0, p1, (void*) INTEGER_ARRAY);
 }
 
 /**
  * Deallocates the integer.
  *
  * @param p0 the model (Hand over as reference!)
+ * @param p1 the model size
  */
-void deallocate_integer(void* p0) {
+void deallocate_integer(void* p0, void* p1) {
 
     log_message_debug("Deallocate integer.");
 
     // Destroy integer array containing the actual integer value.
-    deallocate_array(p0, (void*) INTEGER_COUNT, (void*) INTEGER_ARRAY);
+    deallocate_array(p0, p1, (void*) INTEGER_ARRAY);
 }
 
 /* INTEGER_ALLOCATOR_SOURCE */

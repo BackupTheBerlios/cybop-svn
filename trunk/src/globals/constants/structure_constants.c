@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2005-07-27 13:30:20 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2005-07-27 23:10:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -139,6 +139,56 @@ static int* COMPLEX_REAL_INDEX = NUMBER_0_INTEGER_ARRAY;
 static int* COMPLEX_IMAGINARY_INDEX = NUMBER_1_INTEGER_ARRAY;
 
 //
+// Textual user interface (tui).
+//
+
+/** The tui count. */
+static int* TUI_COUNT = NUMBER_4_INTEGER_ARRAY;
+
+/** The tui z dimension index. */
+static int* TUI_Z_DIMENSION_INDEX = NUMBER_0_INTEGER_ARRAY;
+
+/** The tui y dimension index. */
+static int* TUI_Y_DIMENSION_INDEX = NUMBER_1_INTEGER_ARRAY;
+
+/** The tui x dimension index. */
+static int* TUI_X_DIMENSION_INDEX = NUMBER_2_INTEGER_ARRAY;
+
+/** The tui properties index. */
+static int* TUI_PROPERTIES_INDEX = NUMBER_3_INTEGER_ARRAY;
+
+//
+// Textual user interface (tui) properties.
+//
+
+/** The tui properties count. */
+static int* TUI_PROPERTIES_COUNT = NUMBER_8_INTEGER_ARRAY;
+
+/** The tui properties character index. */
+static int* TUI_PROPERTIES_CHARACTER_INDEX = NUMBER_0_INTEGER_ARRAY;
+
+/** The tui properties bold index. */
+static int* TUI_PROPERTIES_BOLD_INDEX = NUMBER_1_INTEGER_ARRAY;
+
+/** The tui properties underline index. */
+static int* TUI_PROPERTIES_UNDERLINE_INDEX = NUMBER_2_INTEGER_ARRAY;
+
+/** The tui properties blink index. */
+static int* TUI_PROPERTIES_BLINK_INDEX = NUMBER_3_INTEGER_ARRAY;
+
+/** The tui properties inverse index. */
+static int* TUI_PROPERTIES_INVERSE_INDEX = NUMBER_4_INTEGER_ARRAY;
+
+/** The tui properties hidden index. */
+static int* TUI_PROPERTIES_HIDDEN_INDEX = NUMBER_5_INTEGER_ARRAY;
+
+/** The tui properties foreground index. */
+static int* TUI_PROPERTIES_FOREGROUND_INDEX = NUMBER_6_INTEGER_ARRAY;
+
+/** The tui properties background index. */
+static int* TUI_PROPERTIES_BACKGROUND_INDEX = NUMBER_7_INTEGER_ARRAY;
+
+//
 // Compound.
 //
 
@@ -223,7 +273,7 @@ static int* SIGNALS_IDENTIFICATIONS_INDEX = NUMBER_7_INTEGER_ARRAY;
 //
 
 /** The internal memory elements count. */
-static int* INTERNAL_MEMORY_ELEMENTS_COUNT = NUMBER_47_INTEGER_ARRAY;
+static int* INTERNAL_MEMORY_ELEMENTS_COUNT = NUMBER_41_INTEGER_ARRAY;
 
 /** The knowledge memory. */
 static int* KNOWLEDGE_MEMORY_INTERNAL = NUMBER_0_INTEGER_ARRAY;
@@ -278,6 +328,11 @@ static int* X_WINDOW_SYSTEM_FONT_INTERNAL = NUMBER_34_INTEGER_ARRAY;
 static int* TERMINAL_FILE_DESCRIPTOR_INTERNAL = NUMBER_35_INTEGER_ARRAY;
 static int* TERMINAL_ORIGINAL_ATTRIBUTES_INTERNAL = NUMBER_36_INTEGER_ARRAY;
 static int* TERMINAL_WORKING_ATTRIBUTES_INTERNAL = NUMBER_37_INTEGER_ARRAY;
+
+/** The textual user interface (tui). */
+static int* TUI_INTERNAL = NUMBER_38_INTEGER_ARRAY;
+static int* TUI_COUNT_INTERNAL = NUMBER_39_INTEGER_ARRAY;
+static int* TUI_SIZE_INTERNAL = NUMBER_40_INTEGER_ARRAY;
 
 //
 // Xml tag.

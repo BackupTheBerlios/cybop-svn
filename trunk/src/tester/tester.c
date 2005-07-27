@@ -24,7 +24,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.8 $ $Date: 2005-07-25 21:01:03 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2005-07-27 23:10:49 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -215,7 +215,7 @@ void test_pointer_return() {
 
     // Create character array.
     c = (void*) "Hello World!";
-    allocate_integer((void*) &cs);
+    allocate((void*) &cs, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
     *cs = 13;
 
     // THIS is the important part of the test.
@@ -234,7 +234,7 @@ void test_pointer_return() {
     fprintf(stderr, "r: %s\n", (char*) r);
 
     // Destroy character array.
-    deallocate_integer((void*) &cs);
+    deallocate((void*) &cs, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
 }
 
 /**

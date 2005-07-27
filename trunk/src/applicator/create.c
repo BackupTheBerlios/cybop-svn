@@ -22,7 +22,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.8 $ $Date: 2005-07-27 13:30:20 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2005-07-27 23:10:47 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -76,17 +76,27 @@ void check_primitive_model(void* p0, void* p1, void* p2) {
 
         if (*p != 1) {
 
+            compare_arrays(p1, p2, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT, p0, (void*) CHARACTER_ARRAY);
+        }
+
+        if (*p != 1) {
+
             compare_arrays(p1, p2, (void*) DOUBLE_ABSTRACTION, (void*) DOUBLE_ABSTRACTION_COUNT, p0, (void*) CHARACTER_ARRAY);
         }
 
         if (*p != 1) {
 
-            compare_arrays(p1, p2, (void*) BOOLEAN_ABSTRACTION, (void*) BOOLEAN_ABSTRACTION_COUNT, p0, (void*) CHARACTER_ARRAY);
+            compare_arrays(p1, p2, (void*) DOUBLE_VECTOR_ABSTRACTION, (void*) DOUBLE_VECTOR_ABSTRACTION_COUNT, p0, (void*) CHARACTER_ARRAY);
         }
 
         if (*p != 1) {
 
-            compare_arrays(p1, p2, (void*) VECTOR_ABSTRACTION, (void*) VECTOR_ABSTRACTION_COUNT, p0, (void*) CHARACTER_ARRAY);
+            compare_arrays(p1, p2, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT, p0, (void*) CHARACTER_ARRAY);
+        }
+
+        if (*p != 1) {
+
+            compare_arrays(p1, p2, (void*) BOOLEAN_ABSTRACTION, (void*) BOOLEAN_ABSTRACTION_COUNT, p0, (void*) CHARACTER_ARRAY);
         }
 
         if (*p != 1) {
@@ -545,9 +555,9 @@ void create_part(void* p0, void* p1, void* p2, void* p3, void* p4) {
         int* pds = INTEGER_NULL_POINTER;
 
         // Create part name.
-        allocate_integer((void*) &pnc);
+        allocate((void*) &pnc, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
         *pnc = 0;
-        allocate_integer((void*) &pns);
+        allocate((void*) &pns, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
         *pns = 0;
         create((void*) &pn, (void*) pnc, (void*) pns, *nm, *nmc, *na, *nac,
             (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
@@ -556,17 +566,17 @@ void create_part(void* p0, void* p1, void* p2, void* p3, void* p4) {
         // for model loading.
 
         // Create part abstraction.
-        allocate_integer((void*) &pac);
+        allocate((void*) &pac, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
         *pac = 0;
-        allocate_integer((void*) &pas);
+        allocate((void*) &pas, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
         *pas = 0;
         create((void*) &pa, (void*) pac, (void*) pas, *am, *amc, *aa, *aac,
             (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
 
         // Create part model.
-        allocate_integer((void*) &pmc);
+        allocate((void*) &pmc, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
         *pmc = 0;
-        allocate_integer((void*) &pms);
+        allocate((void*) &pms, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
         *pms = 0;
         create((void*) &pm, (void*) pmc, (void*) pms, *mm, *mmc, *am, *amc,
             *cm, *cmc);

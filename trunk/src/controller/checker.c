@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2005-07-23 12:56:52 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-07-27 23:10:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -150,7 +150,7 @@ void check(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6)
             // The id was read from signal memory and is of type void**.
             // The expression (&*id) is the same like (id).
 //??            fprintf(stderr, "TEST check pre integer destroy i: %i\n", i);
-//??            deallocate_integer((void*) id);
+//??            deallocate((void*) id, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
 //??            fprintf(stderr, "TEST check post integer destroy i: %i\n", i);
 
             // Reset abstraction.

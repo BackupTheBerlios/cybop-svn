@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2005-07-25 21:01:02 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-07-27 23:10:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -37,7 +37,6 @@
 #include "../../globals/logger/logger.c"
 #include "../../memoriser/array.c"
 #include "../../memoriser/allocator.c"
-#include "../../memoriser/allocator/integer_allocator.c"
 
 //
 // Forward declarations.
@@ -363,9 +362,9 @@ void decode_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4) {
 //??        fprintf(stderr, "smc: %i\n", *((int*) smc));
 
                         // Create destination name.
-                        allocate_integer((void*) &dnc);
+                        allocate((void*) &dnc, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
                         *dnc = 0;
-                        allocate_integer((void*) &dns);
+                        allocate((void*) &dns, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
                         *dns = 0;
                         create((void*) &dn, (void*) dnc, (void*) dns,
                             sn, (void*) &snc,
@@ -376,9 +375,9 @@ void decode_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4) {
                         // since that is only needed temporarily for model loading.
 
                         // Create destination abstraction.
-                        allocate_integer((void*) &dac);
+                        allocate((void*) &dac, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
                         *dac = 0;
-                        allocate_integer((void*) &das);
+                        allocate((void*) &das, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
                         *das = 0;
                         create((void*) &da, (void*) dac, (void*) das,
                             sa, (void*) &sac,
@@ -386,9 +385,9 @@ void decode_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4) {
                             (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
 
                         // Create destination model.
-                        allocate_integer((void*) &dmc);
+                        allocate((void*) &dmc, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
                         *dmc = 0;
-                        allocate_integer((void*) &dms);
+                        allocate((void*) &dms, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
                         *dms = 0;
                         create((void*) &dm, (void*) dmc, (void*) dms,
                             sm, (void*) &smc,
@@ -399,9 +398,9 @@ void decode_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4) {
                         if (c->children != NULL_POINTER) {
 
                             // Create details model.
-                            allocate_integer((void*) &ddc);
+                            allocate((void*) &ddc, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
                             *ddc = 0;
-                            allocate_integer((void*) &dds);
+                            allocate((void*) &dds, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
                             *dds = 0;
                             allocate((void*) &dd, (void*) dds,
                                 (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);

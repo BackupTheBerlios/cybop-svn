@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.24 $ $Date: 2005-07-27 13:30:20 $ $Author: christian $
+ * @version $Revision: 1.25 $ $Date: 2005-07-27 23:10:49 $ $Author: christian $
  * @author Marcel Kiesling <makie2001@web.de>
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
@@ -56,7 +56,7 @@ void allocate_unix_server_socket(void* p0) {
         int* s = INTEGER_NULL_POINTER;
 
         // Create unix server socket.
-        allocate_integer((void*) &s);
+        allocate((void*) &s, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
 
         // Open socket and get its number.
         // AF stands for address format. AF_LOCAL is a synonym for AF_UNIX.
@@ -152,7 +152,7 @@ void deallocate_unix_server_socket(void* p0) {
             unlink((char*) f);
 
             // Destroy unix server socket.
-            deallocate_integer((void*) &s);
+            deallocate((void*) &s, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
 
         } else {
 

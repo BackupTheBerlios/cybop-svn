@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.16 $ $Date: 2005-07-27 13:30:20 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2005-07-27 23:10:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -29,11 +29,16 @@
 
 #include <stdio.h>
 #include <unistd.h>
+#include "../../globals/constants/boolean_constants.c"
 #include "../../globals/constants/channel_constants.c"
 #include "../../globals/constants/character_constants.c"
+#include "../../globals/constants/control_sequence_constants.c"
 #include "../../globals/constants/structure_constants.c"
 #include "../../globals/variables/variables.c"
 #include "../../memoriser/array.c"
+#include "../../memoriser/allocator.c"
+#include "../../memoriser/converter.c"
+#include "../../memoriser/translator.c"
 
 /**
  * Receives a tui source and writes it into a destination byte array.
@@ -170,7 +175,6 @@ void send_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     log_message_debug("Send via linux console.");
 
-/*??
     // The tui.
     void* t = NULL_POINTER;
     int* tc = NULL_POINTER;
@@ -193,41 +197,63 @@ void send_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (t == NULL_POINTER) {
 
-        // The vector count and size x, y, z elements.
-        int* tcx = NULL_POINTER;
-        int* tcy = NULL_POINTER;
+        // The vector count and size for z-, y-, x-dimension and properties.
         int* tcz = NULL_POINTER;
-        int* tsx = NULL_POINTER;
-        int* tsy = NULL_POINTER;
+        int* tcy = NULL_POINTER;
+        int* tcx = NULL_POINTER;
+        void* tcp = NULL_POINTER;
         int* tsz = NULL_POINTER;
+        int* tsy = NULL_POINTER;
+        int* tsx = NULL_POINTER;
+        void* tsp = NULL_POINTER;
 
-        // Allocate vector count and size x, y, z elements.
-        allocate((void*) &tcx, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
-        allocate((void*) &tcy, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
-        allocate((void*) &tcz, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
-        allocate((void*) &tsx, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
-        allocate((void*) &tsy, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
-        allocate((void*) &tsz, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+        // Allocate vector count and size for z-, y-, x-dimension and properties.
+        allocate((void*) &tcz, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+        allocate((void*) &tcy, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+        allocate((void*) &tcx, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+        allocate((void*) &tcp, (void*) TUI_PROPERTIES_COUNT, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        allocate((void*) &tsz, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+        allocate((void*) &tsy, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+        allocate((void*) &tsx, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+        allocate((void*) &tsp, (void*) TUI_PROPERTIES_COUNT, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-        // Initialise vector count and size x, y, z elements.
-        *tcx = 0;
-        *tcy = 0;
+        // Initialise vector count and size for z-, y-, x-dimension and properties.
         *tcz = 0;
-        *tsx = 0;
-        *tsy = 0;
+        *tcy = 0;
+        *tcx = 0;
+        set_pointer_vector_element(tcp, (void*) TUI_PROPERTIES_CHARACTER_INDEX, (void*) NULL_CONTROL_CHARACTER);
+        set_pointer_vector_element(tcp, (void*) TUI_PROPERTIES_BOLD_INDEX, (void*) FALSE_BOOLEAN);
+        set_pointer_vector_element(tcp, (void*) TUI_PROPERTIES_UNDERLINE_INDEX, (void*) FALSE_BOOLEAN);
+        set_pointer_vector_element(tcp, (void*) TUI_PROPERTIES_BLINK_INDEX, (void*) FALSE_BOOLEAN);
+        set_pointer_vector_element(tcp, (void*) TUI_PROPERTIES_INVERSE_INDEX, (void*) FALSE_BOOLEAN);
+        set_pointer_vector_element(tcp, (void*) TUI_PROPERTIES_HIDDEN_INDEX, (void*) FALSE_BOOLEAN);
+        set_pointer_vector_element(tcp, (void*) TUI_PROPERTIES_FOREGROUND_INDEX, (void*) WHITE_FOREGROUND_CONTROL_SEQUENCE);
+        set_pointer_vector_element(tcp, (void*) TUI_PROPERTIES_BACKGROUND_INDEX, (void*) BLACK_BACKGROUND_CONTROL_SEQUENCE);
         *tsz = 0;
+        *tsy = 0;
+        *tsx = 0;
+        set_pointer_vector_element(tsp, (void*) TUI_PROPERTIES_CHARACTER_INDEX, (void*) NULL_CONTROL_CHARACTER);
+        set_pointer_vector_element(tsp, (void*) TUI_PROPERTIES_BOLD_INDEX, (void*) FALSE_BOOLEAN);
+        set_pointer_vector_element(tsp, (void*) TUI_PROPERTIES_UNDERLINE_INDEX, (void*) FALSE_BOOLEAN);
+        set_pointer_vector_element(tsp, (void*) TUI_PROPERTIES_BLINK_INDEX, (void*) FALSE_BOOLEAN);
+        set_pointer_vector_element(tsp, (void*) TUI_PROPERTIES_INVERSE_INDEX, (void*) FALSE_BOOLEAN);
+        set_pointer_vector_element(tsp, (void*) TUI_PROPERTIES_HIDDEN_INDEX, (void*) FALSE_BOOLEAN);
+        set_pointer_vector_element(tsp, (void*) TUI_PROPERTIES_FOREGROUND_INDEX, (void*) WHITE_FOREGROUND_CONTROL_SEQUENCE);
+        set_pointer_vector_element(tsp, (void*) TUI_PROPERTIES_BACKGROUND_INDEX, (void*) BLACK_BACKGROUND_CONTROL_SEQUENCE);
 
         // Allocate tui count and size.
-        allocate((void*) &tc, (void*) NUMBER_3_INTEGER, (void*) VECTOR_ABSTRACTION, (void*) VECTOR_ABSTRACTION_COUNT);
-        allocate((void*) &tS, (void*) NUMBER_3_INTEGER, (void*) VECTOR_ABSTRACTION, (void*) VECTOR_ABSTRACTION_COUNT);
+        allocate((void*) &tc, (void*) TUI_COUNT, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        allocate((void*) &ts, (void*) TUI_COUNT, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
         // Initialise tui count and size.
-        set_vector_element((void*) &tc, (void*) NUMBER_0_INTEGER, (void*) tcx);
-        set_vector_element((void*) &tc, (void*) NUMBER_1_INTEGER, (void*) tcy);
-        set_vector_element((void*) &tc, (void*) NUMBER_2_INTEGER, (void*) tcz);
-        set_vector_element((void*) &ts, (void*) NUMBER_0_INTEGER, (void*) tsx);
-        set_vector_element((void*) &ts, (void*) NUMBER_1_INTEGER, (void*) tsy);
-        set_vector_element((void*) &ts, (void*) NUMBER_2_INTEGER, (void*) tsz);
+        set_pointer_vector_element(tc, (void*) TUI_Z_DIMENSION_INDEX, (void*) tcz);
+        set_pointer_vector_element(tc, (void*) TUI_Y_DIMENSION_INDEX, (void*) tcy);
+        set_pointer_vector_element(tc, (void*) TUI_X_DIMENSION_INDEX, (void*) tcx);
+        set_pointer_vector_element(tc, (void*) TUI_PROPERTIES_INDEX, tcp);
+        set_pointer_vector_element(ts, (void*) TUI_Z_DIMENSION_INDEX, (void*) tsz);
+        set_pointer_vector_element(ts, (void*) TUI_Y_DIMENSION_INDEX, (void*) tsy);
+        set_pointer_vector_element(ts, (void*) TUI_X_DIMENSION_INDEX, (void*) tsx);
+        set_pointer_vector_element(ts, (void*) TUI_PROPERTIES_INDEX, tsp);
 
         // Allocate tui.
         allocate((void*) &t, (void*) ts, (void*) TUI_ABSTRACTION, (void*) TUI_ABSTRACTION_COUNT);
@@ -239,7 +265,7 @@ void send_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
     }
 
     // Encode compound model into tui.
-    encode((void*) &t, (void*) tc, (void*) ts, p3, p4);
+//??    encode((void*) &t, (void*) tc, (void*) ts, p3, p4);
 
     // The serialised string array to be sent to the terminal.
     void* a = NULL_POINTER;
@@ -250,17 +276,19 @@ void send_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
     allocate((void*) &a, (void*) &as, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT);
 
     // Serialise multi-dimensional tui into array.
-    serialise((void*) &a, (void*) &ac, (void*) &as, t, (void*) tc);
+//??    serialise((void*) &a, (void*) &ac, (void*) &as, t, (void*) tc);
+
+    // CAUTION! The textual user interface (tui) needs to be deallocated at
+    // system shutdown.
 
     // Write serialised array as message to terminal.
-    write_data(p0, p1, p2, a, (void*) &ac);
+//??    write_data(p0, p1, p2, a, (void*) &ac);
 
     // Destroy array.
     deallocate((void*) &a, (void*) &as, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT);
-*/
 
     //?? TEST.
-    write_data(p0, p1, p2, p3, p4, (void*) TERMINAL_CHANNEL, (void*) TERMINAL_CHANNEL_COUNT);
+//??    write_data(p0, p1, p2, p3, p4, (void*) TERMINAL_CHANNEL, (void*) TERMINAL_CHANNEL_COUNT);
 }
 
 /* SEND_LINUX_CONSOLE_SOURCE */

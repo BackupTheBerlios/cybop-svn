@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.10 $ $Date: 2005-07-25 21:01:01 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2005-07-27 23:10:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -72,7 +72,7 @@ void startup_linux_console(void* p0, void* p1, void* p2, void* p3) {
         struct termios* tw = NULL_POINTER;
 
         // Create linux console internals.
-//??        allocate_integer((void*) &t);
+//??        allocate((void*) &t, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
         to = (struct termios*) malloc(sizeof(struct termios));
         tw = (struct termios*) malloc(sizeof(struct termios));
 

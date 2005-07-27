@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2005-07-25 21:01:01 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2005-07-27 23:10:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  *
@@ -49,8 +49,7 @@
 #include "../../globals/constants/integer_constants.c"
 #include "../../globals/constants/structure_constants.c"
 #include "../../globals/variables/variables.c"
-#include "../../memoriser/allocator/integer_allocator.c"
-#include "../../memoriser/allocator/unsigned_long_allocator.c"
+#include "../../memoriser/allocator.c"
 
 /**
  * Starts up the x window system.
@@ -116,13 +115,13 @@ void startup_x_window_system(void* p0, void* p1, void* p2, void* p3) {
         struct _XGC* gc = NULL_POINTER;
 
         // Create x window system internals.
-        allocate_integer((void*) &sn);
-        allocate_integer((void*) &cm);
-        allocate_unsigned_long((void*) &bg);
-        allocate_unsigned_long((void*) &fg);
-        allocate_integer((void*) &r);
-//??        allocate_integer((void*) &f);
-        allocate_unsigned_long((void*) &vm);
+        allocate((void*) &sn, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+        allocate((void*) &cm, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+        allocate((void*) &bg, (void*) UNSIGNED_LONG_COUNT, (void*) UNSIGNED_LONG_ABSTRACTION, (void*) UNSIGNED_LONG_ABSTRACTION_COUNT);
+        allocate((void*) &fg, (void*) UNSIGNED_LONG_COUNT, (void*) UNSIGNED_LONG_ABSTRACTION, (void*) UNSIGNED_LONG_ABSTRACTION_COUNT);
+        allocate((void*) &r, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+//??        allocate((void*) &f, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+        allocate((void*) &vm, (void*) UNSIGNED_LONG_COUNT, (void*) UNSIGNED_LONG_ABSTRACTION, (void*) UNSIGNED_LONG_ABSTRACTION_COUNT);
 
         // Initialise x window system internals.
         dn = "";

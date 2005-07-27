@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2005-07-25 21:01:01 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-07-27 23:10:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  *
@@ -48,8 +48,7 @@
 #include "../../globals/constants/integer_constants.c"
 #include "../../globals/constants/structure_constants.c"
 #include "../../globals/variables/variables.c"
-#include "../../memoriser/allocator/integer_allocator.c"
-#include "../../memoriser/allocator/unsigned_long_allocator.c"
+#include "../../memoriser/allocator.c"
 
 /**
  * Shuts down the x window system.
@@ -140,13 +139,13 @@ void shutdown_x_window_system(void* p0, void* p1, void* p2, void* p3) {
         // CAUTION! Use descending order, as opposed to the creation!
         // CAUTION! Do NOT use references &, because variables are **
         // and *&variable equals the variable alone.
-        deallocate_unsigned_long((void*) vm);
-//??        deallocate_integer((void*) f);
-        deallocate_integer((void*) r);
-        deallocate_unsigned_long((void*) fg);
-        deallocate_unsigned_long((void*) bg);
-        deallocate_integer((void*) cm);
-        deallocate_integer((void*) sn);
+        deallocate((void*) vm, (void*) UNSIGNED_LONG_COUNT, (void*) UNSIGNED_LONG_ABSTRACTION, (void*) UNSIGNED_LONG_ABSTRACTION_COUNT);
+//??        deallocate((void*) f, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+        deallocate((void*) r, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+        deallocate((void*) fg, (void*) UNSIGNED_LONG_COUNT, (void*) UNSIGNED_LONG_ABSTRACTION, (void*) UNSIGNED_LONG_ABSTRACTION_COUNT);
+        deallocate((void*) bg, (void*) UNSIGNED_LONG_COUNT, (void*) UNSIGNED_LONG_ABSTRACTION, (void*) UNSIGNED_LONG_ABSTRACTION_COUNT);
+        deallocate((void*) cm, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+        deallocate((void*) sn, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
 
     } else {
 

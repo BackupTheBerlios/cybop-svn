@@ -20,15 +20,15 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2005-07-27 13:30:20 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-07-27 23:10:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef DOUBLE_ALLOCATOR_SOURCE
 #define DOUBLE_ALLOCATOR_SOURCE
 
+#include "../../globals/constants/abstraction_constants.c"
 #include "../../globals/constants/log_constants.c"
-#include "../../globals/constants/structure_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../memoriser/array.c"
 
@@ -36,26 +36,28 @@
  * Allocates the double.
  *
  * @param p0 the model (Hand over as reference!)
+ * @param p1 the model size
  */
-void allocate_double(void* p0) {
+void allocate_double(void* p0, void* p1) {
 
     log_message_debug("Allocate double.");
 
     // Create double array containing the actual double value.
-    allocate_array(p0, (void*) DOUBLE_COUNT, (void*) DOUBLE_ARRAY);
+    allocate_array(p0, p1, (void*) DOUBLE_ARRAY);
 }
 
 /**
  * Deallocates the double.
  *
  * @param p0 the model (Hand over as reference!)
+ * @param p1 the model size
  */
-void deallocate_double(void* p0) {
+void deallocate_double(void* p0, void* p1) {
 
     log_message_debug("Deallocate double.");
 
     // Destroy double array containing the actual double value.
-    deallocate_array(p0, (void*) DOUBLE_COUNT, (void*) DOUBLE_ARRAY);
+    deallocate_array(p0, p1, (void*) DOUBLE_ARRAY);
 }
 
 /* DOUBLE_ALLOCATOR_SOURCE */

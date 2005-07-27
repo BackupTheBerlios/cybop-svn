@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2005-07-27 13:30:20 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2005-07-27 23:10:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -103,24 +103,24 @@ void startup_tcp_socket( void* internals, void* know,
             int* ids = INTEGER_NULL_POINTER;
 
             // Create tcp server socket.
-            allocate_integer((void*) &s);
+            allocate((void*) &s, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
             *s = socket(PF_INET, SOCK_STREAM, 0);
             // Create tcp client sockets.
-            allocate_integer((void*) &csc);
+            allocate((void*) &csc, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
             *csc = 0;
-            allocate_integer((void*) &css);
+            allocate((void*) &css, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
             *css = 0;
             allocate_array((void*) &cs, (void*) css, (void*) INTEGER_ARRAY);
             // Create activation flag.
-            allocate_integer(&af);
+            allocate(&af, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
             *af = 0;
             // Create blocking flag.
-            allocate_integer(&bf);
+            allocate(&bf, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
             *bf = 0;
             // Create tcp signal ids.
-            allocate_integer((void*) &idc);
+            allocate((void*) &idc, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
             *idc = 0;
-            allocate_integer((void*) &ids);
+            allocate((void*) &ids, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
             *ids = 0;
             allocate_array((void*) &id, (void*) ids, (void*) INTEGER_ARRAY);
 

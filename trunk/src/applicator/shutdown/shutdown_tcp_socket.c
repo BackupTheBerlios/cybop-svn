@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2005-07-25 21:01:01 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2005-07-27 23:10:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -85,19 +85,19 @@ void shutdown_tcp_socket(void* p0, void* p1, void* p2, void* p3) {
         close(**s);
 
         // Destroy tcp server socket.
-        deallocate_integer(s);
+        deallocate(s, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
         // Destroy tcp client sockets.
         deallocate_array((void*) cs, (void*) css, (void*) INTEGER_ARRAY);
-        deallocate_integer(csc);
-        deallocate_integer(css);
+        deallocate(csc, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+        deallocate(css, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
         // Destroy activation flag.
-        deallocate_integer(af);
+        deallocate(af, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
         // Destroy blocking flag.
-        deallocate_integer(bf);
+        deallocate(bf, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
         // Destroy tcp signal ids.
         deallocate_array((void*) id, (void*) ids, (void*) INTEGER_ARRAY);
-        deallocate_integer(idc);
-        deallocate_integer(ids);
+        deallocate(idc, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+        deallocate(ids, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
 
     } else {
 

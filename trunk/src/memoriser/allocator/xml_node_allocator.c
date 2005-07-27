@@ -20,13 +20,14 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2005-07-27 13:30:20 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-07-27 23:10:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef XML_NODE_ALLOCATOR_SOURCE
 #define XML_NODE_ALLOCATOR_SOURCE
 
+#include "../../globals/constants/abstraction_constants.c"
 #include "../../globals/constants/log_constants.c"
 #include "../../globals/constants/structure_constants.c"
 #include "../../globals/logger/logger.c"
@@ -43,7 +44,7 @@ void allocate_xml_node(void* p0, void* p1) {
     log_message_debug("Allocate xml node.");
 
     // Create xml node.
-    allocate_array(p0, (void*) XML_TAG_COUNT, (void*) POINTER_ARRAY);
+    allocate_array(p0, p1, (void*) POINTER_ARRAY);
 
     // Initialise xml node name, attributes, value.
     void* nav = NULL_POINTER;
@@ -93,7 +94,7 @@ void deallocate_xml_node(void* p0, void* p1) {
     deallocate_array((void*) &c, p1, (void*) INTEGER_ARRAY);
 
     // Destroy xml tag.
-    deallocate_array(p0, (void*) XML_TAG_COUNT, (void*) POINTER_ARRAY);
+    deallocate_array(p0, p1, (void*) POINTER_ARRAY);
 }
 
 /* XML_NODE_ALLOCATOR_SOURCE */

@@ -23,15 +23,15 @@
  * This file contains the functionality to:
  * - create a fraction model in memory
  *
- * @version $Revision: 1.4 $ $Date: 2005-07-27 13:30:20 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-07-27 23:10:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef FRACTION_ALLOCATOR_SOURCE
 #define FRACTION_ALLOCATOR_SOURCE
 
+#include "../../globals/constants/abstraction_constants.c"
 #include "../../globals/constants/log_constants.c"
-#include "../../globals/constants/structure_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../memoriser/array.c"
 
@@ -46,7 +46,7 @@ void allocate_fraction(void* p0, void* p1) {
     log_message_debug("Allocate fraction.");
 
     // Create fraction.
-    allocate_array(p0, (void*) FRACTION_COUNT, (void*) INTEGER_ARRAY);
+    allocate_array(p0, p1, (void*) INTEGER_ARRAY);
 }
 
 /**
@@ -60,7 +60,7 @@ void deallocate_fraction(void* p0, void* p1) {
     log_message_debug("Deallocate fraction.");
 
     // Destroy fraction.
-    deallocate_array(p0, (void*) FRACTION_COUNT, (void*) INTEGER_ARRAY);
+    deallocate_array(p0, p1, (void*) INTEGER_ARRAY);
 }
 
 /* FRACTION_ALLOCATOR_SOURCE */

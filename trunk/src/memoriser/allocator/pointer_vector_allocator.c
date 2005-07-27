@@ -1,5 +1,5 @@
 /*
- * $RCSfile: character_allocator.c,v $
+ * $RCSfile: pointer_vector_allocator.c,v $
  *
  * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
  *
@@ -20,43 +20,43 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2005-07-27 13:30:20 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2005-07-27 23:10:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef CHARACTER_ALLOCATOR_SOURCE
-#define CHARACTER_ALLOCATOR_SOURCE
+#ifndef POINTER_VECTOR_ALLOCATOR_SOURCE
+#define POINTER_VECTOR_ALLOCATOR_SOURCE
 
+#include "../../globals/constants/abstraction_constants.c"
 #include "../../globals/constants/log_constants.c"
-#include "../../globals/constants/structure_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../memoriser/array.c"
 
 /**
- * Allocates the character.
+ * Allocates the pointer vector.
  *
- * @param p0 the model (Hand over as reference!)
+ * @param p0 the pointer vector (Hand over as reference!)
+ * @param p1 the pointer vector size
  */
-void allocate_character(void* p0) {
+void allocate_pointer_vector(void* p0, void* p1) {
 
-    log_message_debug("Allocate character.");
+    log_message_debug("Allocate pointer vector.");
 
-    // Create character array containing the actual character value.
-    allocate_array(p0, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
+    allocate_array(p0, p1, (void*) POINTER_ARRAY);
 }
 
 /**
- * Deallocates the character.
+ * Deallocates the pointer vector.
  *
- * @param p0 the model (Hand over as reference!)
+ * @param p0 the pointer vector (Hand over as reference!)
+ * @param p1 the pointer vector size
  */
-void deallocate_character(void* p0) {
+void deallocate_pointer_vector(void* p0, void* p1) {
 
-    log_message_debug("Deallocate character.");
+    log_message_debug("Deallocate pointer vector.");
 
-    // Destroy character array containing the actual character value.
-    deallocate_array(p0, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
+    deallocate_array(p0, p1, (void*) POINTER_ARRAY);
 }
 
-/* CHARACTER_ALLOCATOR_SOURCE */
+/* POINTER_VECTOR_ALLOCATOR_SOURCE */
 #endif

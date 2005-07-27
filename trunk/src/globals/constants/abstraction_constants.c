@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2005-07-25 21:01:02 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2005-07-27 23:10:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -117,11 +117,6 @@ static int* OPERATION_ABSTRACTION_COUNT = NUMBER_9_INTEGER_ARRAY;
 // Primitive abstractions.
 //
 
-/** The pointer abstraction. */
-static char POINTER_ABSTRACTION_ARRAY[] = {'p', 'o', 'i', 'n', 't', 'e', 'r'};
-static char* POINTER_ABSTRACTION = POINTER_ABSTRACTION_ARRAY;
-static int* POINTER_ABSTRACTION_COUNT = NUMBER_7_INTEGER_ARRAY;
-
 /** The boolean abstraction. */
 static char BOOLEAN_ABSTRACTION_ARRAY[] = {'b', 'o', 'o', 'l', 'e', 'a', 'n'};
 static char* BOOLEAN_ABSTRACTION = BOOLEAN_ABSTRACTION_ARRAY;
@@ -132,10 +127,35 @@ static char INTEGER_ABSTRACTION_ARRAY[] = {'i', 'n', 't', 'e', 'g', 'e', 'r'};
 static char* INTEGER_ABSTRACTION = INTEGER_ABSTRACTION_ARRAY;
 static int* INTEGER_ABSTRACTION_COUNT = NUMBER_7_INTEGER_ARRAY;
 
+/** The integer vector abstraction. */
+static char INTEGER_VECTOR_ABSTRACTION_ARRAY[] = {'i', 'n', 't', 'e', 'g', 'e', 'r', '_', 'v', 'e', 'c', 't', 'o', 'r'};
+static char* INTEGER_VECTOR_ABSTRACTION = INTEGER_VECTOR_ABSTRACTION_ARRAY;
+static int* INTEGER_VECTOR_ABSTRACTION_COUNT = NUMBER_14_INTEGER_ARRAY;
+
 /** The double abstraction. */
 static char DOUBLE_ABSTRACTION_ARRAY[] = {'d', 'o', 'u', 'b', 'l', 'e'};
 static char* DOUBLE_ABSTRACTION = DOUBLE_ABSTRACTION_ARRAY;
 static int* DOUBLE_ABSTRACTION_COUNT = NUMBER_6_INTEGER_ARRAY;
+
+/** The double vector abstraction. */
+static char DOUBLE_VECTOR_ABSTRACTION_ARRAY[] = {'d', 'o', 'u', 'b', 'l', 'e', '_', 'v', 'e', 'c', 't', 'o', 'r'};
+static char* DOUBLE_VECTOR_ABSTRACTION = DOUBLE_VECTOR_ABSTRACTION_ARRAY;
+static int* DOUBLE_VECTOR_ABSTRACTION_COUNT = NUMBER_13_INTEGER_ARRAY;
+
+/** The unsigned long abstraction. */
+static char UNSIGNED_LONG_ABSTRACTION_ARRAY[] = {'u', 'n', 's', 'i', 'g', 'n', 'e', 'd', '_', 'l', 'o', 'n', 'g'};
+static char* UNSIGNED_LONG_ABSTRACTION = UNSIGNED_LONG_ABSTRACTION_ARRAY;
+static int* UNSIGNED_LONG_ABSTRACTION_COUNT = NUMBER_13_INTEGER_ARRAY;
+
+/** The unsigned long vector abstraction. */
+static char UNSIGNED_LONG_VECTOR_ABSTRACTION_ARRAY[] = {'u', 'n', 's', 'i', 'g', 'n', 'e', 'd', '_', 'l', 'o', 'n', 'g', '_', 'v', 'e', 'c', 't', 'o', 'r'};
+static char* UNSIGNED_LONG_VECTOR_ABSTRACTION = UNSIGNED_LONG_VECTOR_ABSTRACTION_ARRAY;
+static int* UNSIGNED_LONG_VECTOR_ABSTRACTION_COUNT = NUMBER_20_INTEGER_ARRAY;
+
+/** The pointer vector abstraction. */
+static char POINTER_VECTOR_ABSTRACTION_ARRAY[] = {'p', 'o', 'i', 'n', 't', 'e', 'r', '_', 'v', 'e', 'c', 't', 'o', 'r'};
+static char* POINTER_VECTOR_ABSTRACTION = POINTER_VECTOR_ABSTRACTION_ARRAY;
+static int* POINTER_VECTOR_ABSTRACTION_COUNT = NUMBER_14_INTEGER_ARRAY;
 
 /** The fraction abstraction. */
 static char FRACTION_ABSTRACTION_ARRAY[] = {'f', 'r', 'a', 'c', 't', 'i', 'o', 'n'};
@@ -146,11 +166,6 @@ static int* FRACTION_ABSTRACTION_COUNT = NUMBER_8_INTEGER_ARRAY;
 static char COMPLEX_ABSTRACTION_ARRAY[] = {'c', 'o', 'm', 'p', 'l', 'e', 'x'};
 static char* COMPLEX_ABSTRACTION = COMPLEX_ABSTRACTION_ARRAY;
 static int* COMPLEX_ABSTRACTION_COUNT = NUMBER_7_INTEGER_ARRAY;
-
-/** The vector abstraction. */
-static char VECTOR_ABSTRACTION_ARRAY[] = {'v', 'e', 'c', 't', 'o', 'r'};
-static char* VECTOR_ABSTRACTION = VECTOR_ABSTRACTION_ARRAY;
-static int* VECTOR_ABSTRACTION_COUNT = NUMBER_6_INTEGER_ARRAY;
 
 /** The string abstraction. */
 static char STRING_ABSTRACTION_ARRAY[] = {'s', 't', 'r', 'i', 'n', 'g'};

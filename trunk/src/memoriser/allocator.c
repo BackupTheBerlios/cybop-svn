@@ -24,7 +24,7 @@
  * - create a model in memory
  * - destroy a model in memory
  *
- * @version $Revision: 1.5 $ $Date: 2005-07-27 13:30:20 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2005-07-27 23:10:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -38,13 +38,16 @@
 #include "../memoriser/allocator/complex_allocator.c"
 #include "../memoriser/allocator/compound_allocator.c"
 #include "../memoriser/allocator/double_allocator.c"
+#include "../memoriser/allocator/double_vector_allocator.c"
 #include "../memoriser/allocator/fraction_allocator.c"
 #include "../memoriser/allocator/integer_allocator.c"
+#include "../memoriser/allocator/integer_vector_allocator.c"
 #include "../memoriser/allocator/internal_memory_allocator.c"
+#include "../memoriser/allocator/pointer_vector_allocator.c"
 #include "../memoriser/allocator/signal_memory_allocator.c"
 #include "../memoriser/allocator/string_allocator.c"
 #include "../memoriser/allocator/time_allocator.c"
-#include "../memoriser/allocator/vector_allocator.c"
+#include "../memoriser/allocator/unsigned_long_allocator.c"
 #include "../memoriser/allocator/xml_node_allocator.c"
 #include "../memoriser/allocator/xml_property_allocator.c"
 
@@ -117,7 +120,7 @@ void allocate(void* p0, void* p1, void* p2, void* p3) {
 
         if (r == 1) {
 
-            allocate_integer(p0);
+            allocate_integer(p0, p1);
         }
     }
 
@@ -127,17 +130,37 @@ void allocate(void* p0, void* p1, void* p2, void* p3) {
 
         if (r == 1) {
 
-            allocate_integer(p0);
+            allocate_integer(p0, p1);
         }
     }
 
     if (r != 1) {
 
-        compare_arrays(p2, p3, (void*) VECTOR_ABSTRACTION, (void*) VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p2, p3, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r == 1) {
 
-            allocate_vector(p0, p1);
+            allocate_integer_vector(p0, p1);
+        }
+    }
+
+    if (r != 1) {
+
+        compare_arrays(p2, p3, (void*) UNSIGNED_LONG_ABSTRACTION, (void*) UNSIGNED_LONG_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r == 1) {
+
+            allocate_unsigned_long(p0, p1);
+        }
+    }
+
+    if (r != 1) {
+
+        compare_arrays(p2, p3, (void*) UNSIGNED_LONG_VECTOR_ABSTRACTION, (void*) UNSIGNED_LONG_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r == 1) {
+
+            allocate_unsigned_long_vector(p0, p1);
         }
     }
 
@@ -147,7 +170,27 @@ void allocate(void* p0, void* p1, void* p2, void* p3) {
 
         if (r == 1) {
 
-            allocate_double(p0);
+            allocate_double(p0, p1);
+        }
+    }
+
+    if (r != 1) {
+
+        compare_arrays(p2, p3, (void*) DOUBLE_VECTOR_ABSTRACTION, (void*) DOUBLE_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r == 1) {
+
+            allocate_double_vector(p0, p1);
+        }
+    }
+
+    if (r != 1) {
+
+        compare_arrays(p2, p3, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r == 1) {
+
+            allocate_pointer_vector(p0, p1);
         }
     }
 
@@ -188,6 +231,16 @@ void allocate(void* p0, void* p1, void* p2, void* p3) {
         if (r == 1) {
 
             allocate_xml_node(p0, p1);
+        }
+    }
+
+    if (r != 1) {
+
+        compare_arrays(p2, p3, (void*) TUI_ABSTRACTION, (void*) TUI_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r == 1) {
+
+            allocate_tui(p0, p1);
         }
     }
 
@@ -271,7 +324,7 @@ void deallocate(void* p0, void* p1, void* p2, void* p3) {
 
         if (r == 1) {
 
-            deallocate_integer(p0);
+            deallocate_integer(p0, p1);
         }
     }
 
@@ -281,17 +334,37 @@ void deallocate(void* p0, void* p1, void* p2, void* p3) {
 
         if (r == 1) {
 
-            deallocate_integer(p0);
+            deallocate_integer(p0, p1);
         }
     }
 
     if (r != 1) {
 
-        compare_arrays(p2, p3, (void*) VECTOR_ABSTRACTION, (void*) VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p2, p3, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r == 1) {
 
-            deallocate_vector(p0, p1);
+            deallocate_integer_vector(p0, p1);
+        }
+    }
+
+    if (r != 1) {
+
+        compare_arrays(p2, p3, (void*) UNSIGNED_LONG_ABSTRACTION, (void*) UNSIGNED_LONG_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r == 1) {
+
+            deallocate_unsigned_long(p0, p1);
+        }
+    }
+
+    if (r != 1) {
+
+        compare_arrays(p2, p3, (void*) UNSIGNED_LONG_VECTOR_ABSTRACTION, (void*) UNSIGNED_LONG_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r == 1) {
+
+            deallocate_unsigned_long_vector(p0, p1);
         }
     }
 
@@ -301,7 +374,27 @@ void deallocate(void* p0, void* p1, void* p2, void* p3) {
 
         if (r == 1) {
 
-            deallocate_double(p0);
+            deallocate_double(p0, p1);
+        }
+    }
+
+    if (r != 1) {
+
+        compare_arrays(p2, p3, (void*) DOUBLE_VECTOR_ABSTRACTION, (void*) DOUBLE_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r == 1) {
+
+            deallocate_double_vector(p0, p1);
+        }
+    }
+
+    if (r != 1) {
+
+        compare_arrays(p2, p3, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r == 1) {
+
+            deallocate_pointer_vector(p0, p1);
         }
     }
 
@@ -342,6 +435,16 @@ void deallocate(void* p0, void* p1, void* p2, void* p3) {
         if (r == 1) {
 
             deallocate_xml_node(p0, p1);
+        }
+    }
+
+    if (r != 1) {
+
+        compare_arrays(p2, p3, (void*) TUI_ABSTRACTION, (void*) TUI_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r == 1) {
+
+            deallocate_tui(p0, p1);
         }
     }
 
