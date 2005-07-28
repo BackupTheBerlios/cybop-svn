@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.18 $ $Date: 2005-07-28 12:52:11 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2005-07-28 23:06:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -258,7 +258,7 @@ void send_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
         set(ts, (void*) TUI_PROPERTIES_INDEX, tsp, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
         // Allocate tui.
-        allocate((void*) &t, (void*) ts, (void*) TUI_ABSTRACTION, (void*) TUI_ABSTRACTION_COUNT);
+        allocate((void*) &t, (void*) ts, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
         // Set tui internals.
         set(p0, (void*) TUI_INTERNAL, (void*) t, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
@@ -267,7 +267,7 @@ void send_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
     }
 
     // Encode compound model into tui.
-//??    encode((void*) &t, (void*) tc, (void*) ts, p3, p4);
+    encode((void*) &t, (void*) tc, (void*) ts, p3, p4);
 
     // The serialised string array to be sent to the terminal.
     void* a = NULL_POINTER;

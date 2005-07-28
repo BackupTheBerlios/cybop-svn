@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2005-07-25 21:01:02 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2005-07-28 23:06:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -31,18 +31,37 @@
 #include "../../globals/constants/integer_constants.c"
 
 //
+// Textual user interface (tui) names.
+//
+
+/** The position name. */
+static char TUI_POSITION_NAME_ARRAY[] = {'p', 'o', 's', 'i', 't', 'i', 'o', 'n'};
+static char* TUI_POSITION_NAME = TUI_POSITION_NAME_ARRAY;
+static int* TUI_POSITION_NAME_COUNT = NUMBER_8_INTEGER_ARRAY;
+
+/** The size name. */
+static char TUI_SIZE_NAME_ARRAY[] = {'s', 'i', 'z', 'e'};
+static char* TUI_SIZE_NAME = TUI_SIZE_NAME_ARRAY;
+static int* TUI_SIZE_NAME_COUNT = NUMBER_4_INTEGER_ARRAY;
+
+/** The colour name. */
+static char TUI_COLOUR_NAME_ARRAY[] = {'c', 'o', 'l', 'o', 'u', 'r'};
+static char* TUI_COLOUR_NAME = TUI_COLOUR_NAME_ARRAY;
+static int* TUI_COLOUR_NAME_COUNT = NUMBER_6_INTEGER_ARRAY;
+
+//
 // Web user interface (wui) names.
 //
 
-/** Tag name. */
-static char TAG_NAME_ARRAY[] = {'t', 'a', 'g'};
-static char* TAG_NAME = TAG_NAME_ARRAY;
-static int* TAG_NAME_COUNT = NUMBER_3_INTEGER_ARRAY;
+/** The tag name. */
+static char WUI_TAG_NAME_ARRAY[] = {'t', 'a', 'g'};
+static char* WUI_TAG_NAME = WUI_TAG_NAME_ARRAY;
+static int* WUI_TAG_NAME_COUNT = NUMBER_3_INTEGER_ARRAY;
 
-/** Property name. */
-static char PROPERTY_NAME_ARRAY[] = {'p', 'r', 'o', 'p', 'e', 'r', 't', 'y'};
-static char* PROPERTY_NAME = PROPERTY_NAME_ARRAY;
-static int* PROPERTY_NAME_COUNT = NUMBER_8_INTEGER_ARRAY;
+/** The property name. */
+static char WUI_PROPERTY_NAME_ARRAY[] = {'p', 'r', 'o', 'p', 'e', 'r', 't', 'y'};
+static char* WUI_PROPERTY_NAME = WUI_PROPERTY_NAME_ARRAY;
+static int* WUI_PROPERTY_NAME_COUNT = NUMBER_8_INTEGER_ARRAY;
 
 //
 // Boolean names.

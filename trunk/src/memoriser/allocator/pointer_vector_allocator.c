@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-07-27 23:10:48 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-07-28 23:06:34 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -56,6 +56,19 @@ void deallocate_pointer_vector(void* p0, void* p1) {
     log_message_debug("Deallocate pointer vector.");
 
     deallocate_array(p0, p1, (void*) POINTER_ARRAY);
+}
+
+/**
+ * Resizes the pointer vector.
+ *
+ * @param p0 the pointer vector (Hand over as reference!)
+ * @param p1 the pointer vector size
+ */
+void resize_pointer_vector(void* p0, void* p1) {
+
+    log_message_debug("Resize pointer vector.");
+
+    resize_array(p0, p1, (void*) POINTER_ARRAY);
 }
 
 /* POINTER_VECTOR_ALLOCATOR_SOURCE */

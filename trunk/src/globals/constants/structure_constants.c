@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.10 $ $Date: 2005-07-27 23:10:48 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2005-07-28 23:06:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -46,16 +46,6 @@ static int* CHARACTER_VALUE_INDEX = NUMBER_0_INTEGER_ARRAY;
 
 /** The string resize factor. */
 static int* STRING_RESIZE_FACTOR = NUMBER_2_INTEGER_ARRAY;
-
-//
-// Pointer.
-//
-
-/** The pointer count. */
-static int* POINTER_COUNT = NUMBER_1_INTEGER_ARRAY;
-
-/** The pointer value index. */
-static int* POINTER_VALUE_INDEX = NUMBER_0_INTEGER_ARRAY;
 
 //
 // Integer.
@@ -86,6 +76,13 @@ static int* DOUBLE_COUNT = NUMBER_1_INTEGER_ARRAY;
 
 /** The double value index. */
 static int* DOUBLE_VALUE_INDEX = NUMBER_0_INTEGER_ARRAY;
+
+//
+// Pointer vector.
+//
+
+/** The pointer vector resize factor. */
+static int* POINTER_VECTOR_RESIZE_FACTOR = NUMBER_2_INTEGER_ARRAY;
 
 //
 // Fraction.

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2005-07-25 21:01:02 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-07-28 23:06:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -43,11 +43,20 @@
  * @param p5 the type
  * @param p6 the type count
  */
-void decode(void* p0, void* p1, void* p2, void* p3, void* p4,
-    void* p5, void* p6) {
+void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
     // The comparison result.
     int r = 0;
+
+    if (r != 1) {
+
+        compare_arrays(p5, p6, (void*) TUI_ABSTRACTION, (void*) TUI_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r == 1) {
+
+            decode_tui(p0, p1, p2, p3, p4);
+        }
+    }
 
     if (r != 1) {
 
@@ -115,11 +124,20 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4,
  * @param p5 the type
  * @param p6 the type count
  */
-void encode(void* p0, void* p1, void* p2, void* p3, void* p4,
-    void* p5, void* p6) {
+void encode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
     // The comparison result.
     int r = 0;
+
+    if (r != 1) {
+
+        compare_arrays(p5, p6, (void*) TUI_ABSTRACTION, (void*) TUI_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r == 1) {
+
+            encode_tui(p0, p1, p2, p3, p4);
+        }
+    }
 
     if (r != 1) {
 

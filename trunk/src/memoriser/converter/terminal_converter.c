@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2005-07-25 21:01:02 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2005-07-28 23:06:34 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -28,7 +28,7 @@
 #define TERMINAL_CONVERTER_SOURCE
 
 #include "../../globals/constants/log_constants.c"
-#include "../../globals/constants/structure_constants.c"
+//?? #include "../../globals/constants/structure_constants.c"
 #include "../../globals/logger/logger.c"
 
 /**
