@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.25 $ $Date: 2005-07-27 23:10:49 $ $Author: christian $
+ * @version $Revision: 1.26 $ $Date: 2005-07-28 12:52:13 $ $Author: christian $
  * @author Marcel Kiesling <makie2001@web.de>
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
@@ -46,7 +46,7 @@ void allocate_unix_server_socket(void* p0) {
     void* f = POINTER_NULL_POINTER;
 
     // Get unix server socket filename.
-    get_array_elements(p0, (void*) UNIX_SERVER_SOCKET_FILENAME_INTERNAL, (void*) &f, (void*) POINTER_ARRAY);
+    get(p0, (void*) UNIX_SERVER_SOCKET_FILENAME_INTERNAL, (void*) &f, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
     if (f != POINTER_NULL_POINTER) {
 
@@ -69,7 +69,7 @@ void allocate_unix_server_socket(void* p0) {
         *s = socket(AF_UNIX, SOCK_STREAM, 0);
 
         // Set unix server socket.
-        set_array_elements(p0, (void*) UNIX_SERVER_SOCKET_INTERNAL, (void*) &s, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
+        set(p0, (void*) UNIX_SERVER_SOCKET_INTERNAL, (void*) s, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
         if (*s >= 0) {
 
@@ -131,7 +131,7 @@ void deallocate_unix_server_socket(void* p0) {
     void* f = POINTER_NULL_POINTER;
 
     // Get unix server socket filename.
-    get_array_elements(p0, (void*) UNIX_SERVER_SOCKET_FILENAME_INTERNAL, (void*) &f, (void*) POINTER_ARRAY);
+    get(p0, (void*) UNIX_SERVER_SOCKET_FILENAME_INTERNAL, (void*) &f, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
     if (f != POINTER_NULL_POINTER) {
 
@@ -139,7 +139,7 @@ void deallocate_unix_server_socket(void* p0) {
         int* s = INTEGER_NULL_POINTER;
 
         // Get unix server socket.
-        get_array_elements(p0, (void*) UNIX_SERVER_SOCKET_INTERNAL, (void*) &s, (void*) POINTER_ARRAY);
+        get(p0, (void*) UNIX_SERVER_SOCKET_INTERNAL, (void*) &s, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
         if (s != INTEGER_NULL_POINTER) {
 
@@ -275,7 +275,7 @@ void read_unix_socket(void* p0) {
     int* s = INTEGER_NULL_POINTER;
 
     // Get unix server socket.
-    get_array_elements(p0, (void*) UNIX_SERVER_SOCKET_INTERNAL, (void*) &s, (void*) POINTER_ARRAY);
+    get(p0, (void*) UNIX_SERVER_SOCKET_INTERNAL, (void*) &s, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
     if (s != INTEGER_NULL_POINTER) {
 

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2005-07-27 23:10:48 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2005-07-28 12:52:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -39,10 +39,10 @@
 //?? #include <fcntl.h>
 #include <stdio.h>
 #include <termios.h>
-#include "../../memoriser/allocator/integer_allocator.c"
 #include "../../globals/constants/integer_constants.c"
 #include "../../globals/constants/structure_constants.c"
 #include "../../globals/variables/variables.c"
+#include "../../memoriser/allocator.c"
 
 /**
  * Starts up the linux console.
@@ -60,7 +60,7 @@ void startup_linux_console(void* p0, void* p1, void* p2, void* p3) {
     FILE** ti = NULL_POINTER;
 
     // Get terminal internal.
-    get_array_elements(p0, (void*) TERMINAL_FILE_DESCRIPTOR_INTERNAL, (void*) &ti, (void*) POINTER_ARRAY);
+    get(p0, (void*) TERMINAL_FILE_DESCRIPTOR_INTERNAL, (void*) &ti, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
     if (*ti == NULL_POINTER) {
 
@@ -107,9 +107,9 @@ void startup_linux_console(void* p0, void* p1, void* p2, void* p3) {
 */
 
         // Set linux console internals.
-        set_array_elements(p0, (void*) TERMINAL_FILE_DESCRIPTOR_INTERNAL, (void*) &t, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
-        set_array_elements(p0, (void*) TERMINAL_ORIGINAL_ATTRIBUTES_INTERNAL, (void*) &to, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
-        set_array_elements(p0, (void*) TERMINAL_WORKING_ATTRIBUTES_INTERNAL, (void*) &tw, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
+        set(p0, (void*) TERMINAL_FILE_DESCRIPTOR_INTERNAL, (void*) t, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        set(p0, (void*) TERMINAL_ORIGINAL_ATTRIBUTES_INTERNAL, (void*) to, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        set(p0, (void*) TERMINAL_WORKING_ATTRIBUTES_INTERNAL, (void*) tw, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
     } else {
 

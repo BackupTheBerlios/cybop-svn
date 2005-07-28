@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.14 $ $Date: 2005-07-27 23:10:48 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2005-07-28 12:52:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -101,13 +101,13 @@ void manage(void* p0, void* p1) {
     // to the internal memory, in order to be forwardable to threads.
 
     // Set knowledge memory internals.
-    set_array_elements(i, (void*) KNOWLEDGE_MEMORY_INTERNAL, (void*) &k, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
-    set_array_elements(i, (void*) KNOWLEDGE_MEMORY_COUNT_INTERNAL, (void*) &kc, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
-    set_array_elements(i, (void*) KNOWLEDGE_MEMORY_SIZE_INTERNAL, (void*) &ks, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
+    set(i, (void*) KNOWLEDGE_MEMORY_INTERNAL, (void*) k, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    set(i, (void*) KNOWLEDGE_MEMORY_COUNT_INTERNAL, (void*) kc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    set(i, (void*) KNOWLEDGE_MEMORY_SIZE_INTERNAL, (void*) ks, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     // Set signal memory internals.
-    set_array_elements(i, (void*) SIGNAL_MEMORY_INTERNAL, (void*) &s, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
-    set_array_elements(i, (void*) SIGNAL_MEMORY_COUNT_INTERNAL, (void*) &sc, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
-    set_array_elements(i, (void*) SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &ss, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
+    set(i, (void*) SIGNAL_MEMORY_INTERNAL, (void*) s, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    set(i, (void*) SIGNAL_MEMORY_COUNT_INTERNAL, (void*) sc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    set(i, (void*) SIGNAL_MEMORY_SIZE_INTERNAL, (void*) ss, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
     log_message_debug("\n\n");
     log_message_debug("Allocate startup model.");

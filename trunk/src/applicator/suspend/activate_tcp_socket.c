@@ -20,9 +20,8 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2005-07-25 21:01:01 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-07-28 12:52:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
- * @description
  */
 
 #ifndef ACTIVATE_TCP_SOCKET_SOURCE
@@ -47,29 +46,26 @@
  * @param p2 the knowledge count
  * @param p3 the knowledge size
  */
-void activate_tcp_socket( void* internals, void* know,
-                         void* know_count, void* know_size,
-                         void* socket_port_abstr, void* socket_port_abstr_count,
-                         void* socket_port_model, void* socket_port_model_count )
-{
+void activate_tcp_socket( void* internals, void* know, void* know_count, void* know_size,
+    void* socket_port_abstr, void* socket_port_abstr_count,
+    void* socket_port_model, void* socket_port_model_count) {
 
     log_message_debug("Startup tcp socket.");
 
-    //check of null pointer
-    if ( internals != NULL_POINTER ) {
+    // Check of null pointer.
+    if (internals != NULL_POINTER) {
 
         //set the activation flahg in the internal
         void** socket_flag = POINTER_NULL_POINTER;
 
-        get_array_elements( internals, (void*) TCP_SERVER_SOCKET_ACTIVE_INTERNAL,
-                            (void*) &socket_flag, (void*) POINTER_ARRAY );
+        get(internals, (void*) TCP_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &socket_flag, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-        if ( (socket_flag!=NULL_POINTER) && (*socket_flag!=NULL_POINTER) ) {
+        if ((socket_flag != NULL_POINTER) && (*socket_flag != NULL_POINTER)) {
 
             **((int**)socket_flag) = 1;
         }
-    }
-    else {
+
+    } else {
 
         log_message_debug("Could not activate tcp server socket. The internal is null.");
     }

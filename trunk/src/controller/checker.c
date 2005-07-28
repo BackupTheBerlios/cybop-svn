@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2005-07-27 23:10:48 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2005-07-28 12:52:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -91,8 +91,8 @@ void check(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6)
         //?? Wait for web input, if no signal is in memory.
         //?? TODO: Use a thread for this!
         //?? Testing from Rolf Holzmueller.
-        get_array_elements(p0, (void*) TCP_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &sf, (void*) POINTER_ARRAY);
-        get_array_elements(p0, (void*) TCP_SERVER_SOCKET_BLOCKING_INTERNAL, (void*) &bf, (void*) POINTER_ARRAY);
+        get(p0, (void*) TCP_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &sf, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        get(p0, (void*) TCP_SERVER_SOCKET_BLOCKING_INTERNAL, (void*) &bf, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
         if ((sf != POINTER_NULL_POINTER) && (bf != NULL_POINTER)) {
 

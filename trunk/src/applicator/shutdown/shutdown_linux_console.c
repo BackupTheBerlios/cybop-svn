@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2005-07-27 23:10:48 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2005-07-28 12:52:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -32,8 +32,7 @@
 #include "../../globals/constants/integer_constants.c"
 #include "../../globals/constants/structure_constants.c"
 #include "../../globals/variables/variables.c"
-#include "../../memoriser/allocator/integer_allocator.c"
-#include "../../memoriser/allocator/unsigned_long_allocator.c"
+#include "../../memoriser/allocator.c"
 
 /**
  * Shuts down the linux console.
@@ -51,7 +50,7 @@ void shutdown_linux_console(void* p0, void* p1, void* p2, void* p3) {
     int** t = NULL_POINTER;
 
     // Get terminal internal.
-    get_array_elements(p0, (void*) TERMINAL_FILE_DESCRIPTOR_INTERNAL, (void*) &t, (void*) POINTER_ARRAY);
+    get(p0, (void*) TERMINAL_FILE_DESCRIPTOR_INTERNAL, (void*) &t, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
     if (*t != NULL_POINTER) {
 
@@ -63,9 +62,9 @@ void shutdown_linux_console(void* p0, void* p1, void* p2, void* p3) {
         struct termios** tw = NULL_POINTER;
 
         // Get terminal internals.
-        get_array_elements(p0, (void*) TERMINAL_FILE_DESCRIPTOR_INTERNAL, (void*) &t, (void*) POINTER_ARRAY);
-        get_array_elements(p0, (void*) TERMINAL_ORIGINAL_ATTRIBUTES_INTERNAL, (void*) &to, (void*) POINTER_ARRAY);
-        get_array_elements(p0, (void*) TERMINAL_WORKING_ATTRIBUTES_INTERNAL, (void*) &tw, (void*) POINTER_ARRAY);
+        get(p0, (void*) TERMINAL_FILE_DESCRIPTOR_INTERNAL, (void*) &t, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        get(p0, (void*) TERMINAL_ORIGINAL_ATTRIBUTES_INTERNAL, (void*) &to, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        get(p0, (void*) TERMINAL_WORKING_ATTRIBUTES_INTERNAL, (void*) &tw, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
         // Finalise terminal internals.
         // Reset original terminal attributes.

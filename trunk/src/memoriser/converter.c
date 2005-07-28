@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2005-07-27 23:10:48 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2005-07-28 12:52:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,17 +30,18 @@
 #include "../globals/constants/abstraction_constants.c"
 #include "../globals/constants/log_constants.c"
 #include "../globals/logger/logger.c"
+#include "../memoriser/allocator.c"
 #include "../memoriser/array.c"
 #include "../memoriser/converter/boolean_converter.c"
 #include "../memoriser/converter/complex_converter.c"
 #include "../memoriser/converter/double_converter.c"
+#include "../memoriser/converter/double_vector_converter.c"
 #include "../memoriser/converter/fraction_converter.c"
 #include "../memoriser/converter/integer_converter.c"
+#include "../memoriser/converter/integer_vector_converter.c"
 #include "../memoriser/converter/string_converter.c"
 #include "../memoriser/converter/time_converter.c"
-#include "../memoriser/converter/vector_converter.c"
 #include "../memoriser/converter/xml_converter.c"
-#include "../memoriser/allocator/integer_allocator.c"
 
 /**
  * Parses the byte stream according to the given document type
@@ -54,8 +55,7 @@
  * @param p5 the type
  * @param p6 the type count
  */
-void parse(void* p0, void* p1, void* p2, void* p3, void* p4,
-    void* p5, void* p6) {
+void parse(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
     // The comparison result.
     int r = 0;
@@ -229,8 +229,7 @@ void parse(void* p0, void* p1, void* p2, void* p3, void* p4,
  * @param p5 the type
  * @param p6 the type count
  */
-void serialise(void* p0, void* p1, void* p2, void* p3, void* p4,
-    void* p5, void* p6) {
+void serialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
     // The comparison result.
     int r = 0;

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2005-07-25 21:01:02 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2005-07-28 12:52:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -33,8 +33,7 @@
 #include "../../globals/constants/log_constants.c"
 #include "../../globals/constants/structure_constants.c"
 #include "../../globals/logger/logger.c"
-#include "../../memoriser/allocator/integer_allocator.c"
-#include "../../memoriser/allocator/double_allocator.c"
+#include "../../memoriser/allocator.c"
 
 //
 // A double is a floating point number.

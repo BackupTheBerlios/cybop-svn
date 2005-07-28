@@ -23,7 +23,7 @@
  * This file contains the functionality to:
  * - create a signal memory in memory
  *
- * @version $Revision: 1.6 $ $Date: 2005-07-27 23:10:48 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2005-07-28 12:52:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -53,6 +53,7 @@ void allocate_tui(void* p0, void* p1) {
 
             log_message_debug("Allocate textual user interface.");
 
+/*??
             // The z-, y-, x-dimension and properties.
             // The z dimension is the actual tui, represented by the p0 parameter.
             void* yd = NULL_POINTER;
@@ -73,6 +74,7 @@ void allocate_tui(void* p0, void* p1) {
             // The p0 parameter needs to be dereferenced since it is handed over
             // as reference, but this procedure expects a normal array.
             set_array_elements(*t, (void*) TUI_PANELS_INDEX, (void*) &p, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
+*/
 
         } else {
 
@@ -99,6 +101,7 @@ void deallocate_tui(void* p0, void* p1) {
 
         log_message_debug("Deallocate textual user interface.");
 
+/*??
         // The panels.
         void* p = NULL_POINTER;
 
@@ -121,6 +124,7 @@ void deallocate_tui(void* p0, void* p1) {
 
         // Destroy signal memory.
         deallocate_array(p0, p1, (void*) POINTER_ARRAY);
+*/
 
     } else {
 

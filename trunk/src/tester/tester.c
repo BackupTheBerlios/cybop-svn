@@ -24,7 +24,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.9 $ $Date: 2005-07-27 23:10:49 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2005-07-28 12:52:14 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -36,9 +36,9 @@
 #include "../globals/constants/structure_constants.c"
 #include "../globals/variables/variables.c"
 #include "../memoriser/accessor/compound_accessor.c"
+#include "../memoriser/allocator.c"
 #include "../memoriser/array.c"
 #include "../memoriser/converter.c"
-#include "../memoriser/allocator/integer_allocator.c"
 
 /**
  * Tests the standard output and error stream.

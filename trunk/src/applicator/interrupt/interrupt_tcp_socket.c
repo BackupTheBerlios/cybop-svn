@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2005-07-25 21:01:01 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-07-28 12:52:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -58,7 +58,7 @@ void interrupt_tcp_socket(void* p0, void* p1, void* p2, void* p3) {
         // Reset activation flag.
         int** f = NULL_POINTER;
 
-        get_array_elements(p0, (void*) TCP_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &f, (void*) POINTER_ARRAY);
+        get(p0, (void*) TCP_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &f, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
         if ((f != NULL_POINTER) && (*f != NULL_POINTER)) {
 

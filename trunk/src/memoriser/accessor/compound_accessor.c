@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2005-07-25 21:01:02 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2005-07-28 12:52:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -33,14 +33,13 @@
 #include "../../globals/constants/log_constants.c"
 #include "../../globals/constants/structure_constants.c"
 #include "../../globals/logger/logger.c"
+#include "../../memoriser/allocator.c"
 #include "../../memoriser/array.c"
-#include "../../memoriser/allocator/integer_allocator.c"
 
-void parse(void* p0, void* p1, void* p2, void* p3, void* p4,
-    void* p5, void* p6);
+void parse(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6);
 
-void reindex_compound_for_listelements( void* compound, void* compound_count,
-    void* basisname, int* basisname_count );
+void reindex_compound_for_listelements(void* compound, void* compound_count,
+    void* basisname, int* basisname_count);
 
 /**
  * Gets the compound element index.

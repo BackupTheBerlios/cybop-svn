@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-07-27 23:10:48 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-07-28 12:52:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -64,7 +64,7 @@ void remove_double_vector_element(void* p0, void* p1, void* p2) {
 /**
  * Gets the double vector element.
  *
- * @param p0 the vector
+ * @param p0 the double vector
  * @param p1 the index
  * @param p2 the vector element (Hand over as reference!)
  */

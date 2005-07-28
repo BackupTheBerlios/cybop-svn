@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2005-07-27 23:10:48 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2005-07-28 12:52:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -39,7 +39,7 @@
 #include "../../globals/constants/structure_constants.c"
 #include "../../globals/variables/variables.c"
 #include "../../memoriser/array.c"
-#include "../../memoriser/allocator/integer_allocator.c"
+#include "../../memoriser/allocator.c"
 
 /**
  * Starts up the tcp socket service.
@@ -125,19 +125,19 @@ void startup_tcp_socket( void* internals, void* know,
             allocate_array((void*) &id, (void*) ids, (void*) INTEGER_ARRAY);
 
             // Set tcp server socket.
-            set_array_elements(internals, (void*) TCP_SERVER_SOCKET_INTERNAL, (void*) &s, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
+            set(internals, (void*) TCP_SERVER_SOCKET_INTERNAL, (void*) s, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
             // Set tcp client sockets.
-            set_array_elements(internals, (void*) TCP_CLIENT_SOCKETS_INTERNAL, (void*) &cs, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
-            set_array_elements(internals, (void*) TCP_CLIENT_SOCKETS_COUNT_INTERNAL, (void*) &csc, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
-            set_array_elements(internals, (void*) TCP_CLIENT_SOCKETS_SIZE_INTERNAL, (void*) &css, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
+            set(internals, (void*) TCP_CLIENT_SOCKETS_INTERNAL, (void*) cs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            set(internals, (void*) TCP_CLIENT_SOCKETS_COUNT_INTERNAL, (void*) csc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            set(internals, (void*) TCP_CLIENT_SOCKETS_SIZE_INTERNAL, (void*) css, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
             // Set activation flag.
-            set_array_elements(internals, (void*) TCP_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &af, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
+            set(internals, (void*) TCP_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) af, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
             // Set blocking flag.
-            set_array_elements(internals, (void*) TCP_SERVER_SOCKET_BLOCKING_INTERNAL, (void*) &bf, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
+            set(internals, (void*) TCP_SERVER_SOCKET_BLOCKING_INTERNAL, (void*) bf, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
             // Set tcp signal ids.
-            set_array_elements(internals, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_INTERNAL, (void*) &id, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
-            set_array_elements(internals, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_COUNT_INTERNAL, (void*) &idc, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
-            set_array_elements(internals, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_SIZE_INTERNAL, (void*) &ids, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
+            set(internals, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_INTERNAL, (void*) id, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            set(internals, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_COUNT_INTERNAL, (void*) idc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            set(internals, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_SIZE_INTERNAL, (void*) ids, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
             if (*s >= 0) {
 

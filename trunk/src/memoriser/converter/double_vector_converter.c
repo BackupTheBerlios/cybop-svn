@@ -1,5 +1,5 @@
 /*
- * $RCSfile: vector_converter.c,v $
+ * $RCSfile: double_vector_converter.c,v $
  *
  * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
  *
@@ -20,28 +20,27 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2005-07-25 21:01:02 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2005-07-28 12:52:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef VECTOR_CONVERTER_SOURCE
-#define VECTOR_CONVERTER_SOURCE
+#ifndef DOUBLE_VECTOR_CONVERTER_SOURCE
+#define DOUBLE_VECTOR_CONVERTER_SOURCE
 
 #include "../../globals/constants/character_constants.c"
 #include "../../globals/constants/log_constants.c"
 #include "../../globals/logger/logger.c"
-#include "../../memoriser/converter/integer_converter.c"
 
 /**
- * Parses the byte stream and creates a vector model from it.
+ * Parses the byte stream and creates a double vector model from it.
  *
- * @param p0 the destination vector array (Hand over as reference!)
+ * @param p0 the destination vector model (Hand over as reference!)
  * @param p1 the destination count
  * @param p2 the destination size
- * @param p3 the source array
+ * @param p3 the source byte stream
  * @param p4 the source count
  */
-void parse_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void parse_double_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (p4 != NULL_POINTER) {
 
@@ -55,16 +54,16 @@ void parse_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 void** d = (void**) p0;
 
-                log_message_debug("Parse vector.");
+                log_message_debug("Parse double vector.");
 
 /*??
                 // The loop count.
                 int j = 0;
                 // The comma index.
                 int i = -1;
-                // The vector element count.
+                // The double vector element count.
                 void* c = NULL_POINTER;
-                // The integer number.
+                // The double number.
                 int n = 0;
 
                 while (1) {
@@ -78,7 +77,7 @@ void parse_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                     if (i > 0) {
 
-                        // Determine vector element count.
+                        // Determine double vector element count.
                         c = *s + i;
 
                         // Example:
@@ -87,20 +86,20 @@ void parse_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
                         // Index of first comma: 3
                         // Handed over as vector element (source) count: index i
                         // (which is 3, as needed for the length)
-                        parse_integer(d, dc, ds, p3, &i);
+                        parse_double(d, dc, ds, p3, &i);
 
-                        // Recursively call this procedure for the remaining vector elements.
-                        parse_vector(d, dc, ds, new_start_vector, sc);
+                        // Recursively call this procedure for the remaining double vector elements.
+                        parse_double_vector(d, dc, ds, new_start_vector, sc);
 
                     } else {
 
-                        log_message_debug("ERROR: Could not parse vector. The source string starts with a comma character.");
+                        log_message_debug("ERROR: Could not parse double vector. The source string starts with a comma character.");
                     }
 
                     j++;
                 }
 
-                // Read input stream and transform to vector.
+                // Read input stream and transform to double vector.
                 //??    fscanf(p1, %d, &(m->x));
                 //??    fscanf(p1, %d, &(m->y));
                 //??    fscanf(p1, %d, &(m->z));
@@ -136,12 +135,12 @@ void parse_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                     } else {
 
-            //??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not create vector. The vector does not contain a z coordinate.");
+            //??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not create double vector. The vector does not contain a z coordinate.");
                     }
 
                 } else {
 
-            //??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not create vector. The vector does not contain an y coordinate.");
+            //??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not create double vector. The vector does not contain an y coordinate.");
                 }
 */
 
@@ -162,20 +161,20 @@ void parse_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 }
 
 /**
- * Serialises the vector model and creates a byte stream from it.
+ * Serialises the double vector model and creates a byte stream from it.
  *
- * @param p0 the destination (Hand over as reference!)
+ * @param p0 the destination byte stream (Hand over as reference!)
  * @param p1 the destination count
  * @param p2 the destination size
- * @param p3 the source
+ * @param p3 the source vector model
  * @param p4 the source count
  */
-void serialise_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void serialise_double_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
 /*??
-//??    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Finalise vector.");
+//??    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Finalise double vector.");
 
-    // Write output stream and transform from vector.
+    // Write output stream and transform from double vector.
 
     // Initialise elements.
     int z = 0;
@@ -188,9 +187,9 @@ void serialise_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
     get_array_elements(p0, (void*) INTEGER_ARRAY, (void*) &X_INDEX, (void*) &x);
 
     // Remove elements.
-    remove_array_elements(p0, (void*) INTEGER_ARRAY, (void*) &VECTOR_COUNT, (void*) &Z_INDEX);
-    remove_array_elements(p0, (void*) INTEGER_ARRAY, (void*) &VECTOR_COUNT, (void*) &Y_INDEX);
-    remove_array_elements(p0, (void*) INTEGER_ARRAY, (void*) &VECTOR_COUNT, (void*) &X_INDEX);
+    remove_array_elements(p0, (void*) INTEGER_ARRAY, (void*) &INTEGER_VECTOR_COUNT, (void*) &Z_INDEX);
+    remove_array_elements(p0, (void*) INTEGER_ARRAY, (void*) &INTEGER_VECTOR_COUNT, (void*) &Y_INDEX);
+    remove_array_elements(p0, (void*) INTEGER_ARRAY, (void*) &INTEGER_VECTOR_COUNT, (void*) &X_INDEX);
 
 //??    fprintf(p1, %d, &(m->x));
 //??    fprintf(p1, %d, &(m->y));
@@ -198,5 +197,5 @@ void serialise_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 */
 }
 
-/* VECTOR_CONVERTER_SOURCE */
+/* DOUBLE_VECTOR_CONVERTER_SOURCE */
 #endif

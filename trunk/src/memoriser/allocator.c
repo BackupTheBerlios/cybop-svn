@@ -24,12 +24,12 @@
  * - create a model in memory
  * - destroy a model in memory
  *
- * @version $Revision: 1.6 $ $Date: 2005-07-27 23:10:48 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2005-07-28 12:52:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef CREATOR_SOURCE
-#define CREATOR_SOURCE
+#ifndef ALLOCATOR_SOURCE
+#define ALLOCATOR_SOURCE
 
 #include "../globals/constants/abstraction_constants.c"
 #include "../globals/constants/log_constants.c"
@@ -47,7 +47,9 @@
 #include "../memoriser/allocator/signal_memory_allocator.c"
 #include "../memoriser/allocator/string_allocator.c"
 #include "../memoriser/allocator/time_allocator.c"
+#include "../memoriser/allocator/tui_allocator.c"
 #include "../memoriser/allocator/unsigned_long_allocator.c"
+#include "../memoriser/allocator/unsigned_long_vector_allocator.c"
 #include "../memoriser/allocator/xml_node_allocator.c"
 #include "../memoriser/allocator/xml_property_allocator.c"
 
@@ -479,5 +481,5 @@ void deallocate(void* p0, void* p1, void* p2, void* p3) {
     }
 }
 
-/* CREATOR_SOURCE */
+/* ALLOCATOR_SOURCE */
 #endif

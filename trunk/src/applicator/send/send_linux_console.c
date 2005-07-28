@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.17 $ $Date: 2005-07-27 23:10:48 $ $Author: christian $
+ * @version $Revision: 1.18 $ $Date: 2005-07-28 12:52:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -29,14 +29,16 @@
 
 #include <stdio.h>
 #include <unistd.h>
+#include "../../globals/constants/abstraction_constants.c"
 #include "../../globals/constants/boolean_constants.c"
 #include "../../globals/constants/channel_constants.c"
 #include "../../globals/constants/character_constants.c"
 #include "../../globals/constants/control_sequence_constants.c"
 #include "../../globals/constants/structure_constants.c"
 #include "../../globals/variables/variables.c"
-#include "../../memoriser/array.c"
+#include "../../memoriser/accessor.c"
 #include "../../memoriser/allocator.c"
+#include "../../memoriser/array.c"
 #include "../../memoriser/converter.c"
 #include "../../memoriser/translator.c"
 
@@ -186,9 +188,9 @@ void send_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
     int** tis = NULL_POINTER;
 
     // Get tui internal.
-    get_array_elements(p0, (void*) TUI_INTERNAL, (void*) &ti, (void*) POINTER_ARRAY);
-    get_array_elements(p0, (void*) TUI_COUNT_INTERNAL, (void*) &tic, (void*) POINTER_ARRAY);
-    get_array_elements(p0, (void*) TUI_SIZE_INTERNAL, (void*) &tis, (void*) POINTER_ARRAY);
+    get(p0, (void*) TUI_INTERNAL, (void*) &ti, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p0, (void*) TUI_COUNT_INTERNAL, (void*) &tic, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p0, (void*) TUI_SIZE_INTERNAL, (void*) &tis, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
     // Assign tui internal to real tui.
     t = *ti;
@@ -221,47 +223,47 @@ void send_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
         *tcz = 0;
         *tcy = 0;
         *tcx = 0;
-        set_pointer_vector_element(tcp, (void*) TUI_PROPERTIES_CHARACTER_INDEX, (void*) NULL_CONTROL_CHARACTER);
-        set_pointer_vector_element(tcp, (void*) TUI_PROPERTIES_BOLD_INDEX, (void*) FALSE_BOOLEAN);
-        set_pointer_vector_element(tcp, (void*) TUI_PROPERTIES_UNDERLINE_INDEX, (void*) FALSE_BOOLEAN);
-        set_pointer_vector_element(tcp, (void*) TUI_PROPERTIES_BLINK_INDEX, (void*) FALSE_BOOLEAN);
-        set_pointer_vector_element(tcp, (void*) TUI_PROPERTIES_INVERSE_INDEX, (void*) FALSE_BOOLEAN);
-        set_pointer_vector_element(tcp, (void*) TUI_PROPERTIES_HIDDEN_INDEX, (void*) FALSE_BOOLEAN);
-        set_pointer_vector_element(tcp, (void*) TUI_PROPERTIES_FOREGROUND_INDEX, (void*) WHITE_FOREGROUND_CONTROL_SEQUENCE);
-        set_pointer_vector_element(tcp, (void*) TUI_PROPERTIES_BACKGROUND_INDEX, (void*) BLACK_BACKGROUND_CONTROL_SEQUENCE);
+        set(tcp, (void*) TUI_PROPERTIES_CHARACTER_INDEX, (void*) NULL_CONTROL_CHARACTER, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        set(tcp, (void*) TUI_PROPERTIES_BOLD_INDEX, (void*) FALSE_BOOLEAN, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        set(tcp, (void*) TUI_PROPERTIES_UNDERLINE_INDEX, (void*) FALSE_BOOLEAN, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        set(tcp, (void*) TUI_PROPERTIES_BLINK_INDEX, (void*) FALSE_BOOLEAN, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        set(tcp, (void*) TUI_PROPERTIES_INVERSE_INDEX, (void*) FALSE_BOOLEAN, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        set(tcp, (void*) TUI_PROPERTIES_HIDDEN_INDEX, (void*) FALSE_BOOLEAN, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        set(tcp, (void*) TUI_PROPERTIES_FOREGROUND_INDEX, (void*) WHITE_FOREGROUND_CONTROL_SEQUENCE, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        set(tcp, (void*) TUI_PROPERTIES_BACKGROUND_INDEX, (void*) BLACK_BACKGROUND_CONTROL_SEQUENCE, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         *tsz = 0;
         *tsy = 0;
         *tsx = 0;
-        set_pointer_vector_element(tsp, (void*) TUI_PROPERTIES_CHARACTER_INDEX, (void*) NULL_CONTROL_CHARACTER);
-        set_pointer_vector_element(tsp, (void*) TUI_PROPERTIES_BOLD_INDEX, (void*) FALSE_BOOLEAN);
-        set_pointer_vector_element(tsp, (void*) TUI_PROPERTIES_UNDERLINE_INDEX, (void*) FALSE_BOOLEAN);
-        set_pointer_vector_element(tsp, (void*) TUI_PROPERTIES_BLINK_INDEX, (void*) FALSE_BOOLEAN);
-        set_pointer_vector_element(tsp, (void*) TUI_PROPERTIES_INVERSE_INDEX, (void*) FALSE_BOOLEAN);
-        set_pointer_vector_element(tsp, (void*) TUI_PROPERTIES_HIDDEN_INDEX, (void*) FALSE_BOOLEAN);
-        set_pointer_vector_element(tsp, (void*) TUI_PROPERTIES_FOREGROUND_INDEX, (void*) WHITE_FOREGROUND_CONTROL_SEQUENCE);
-        set_pointer_vector_element(tsp, (void*) TUI_PROPERTIES_BACKGROUND_INDEX, (void*) BLACK_BACKGROUND_CONTROL_SEQUENCE);
+        set(tsp, (void*) TUI_PROPERTIES_CHARACTER_INDEX, (void*) NULL_CONTROL_CHARACTER, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        set(tsp, (void*) TUI_PROPERTIES_BOLD_INDEX, (void*) FALSE_BOOLEAN, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        set(tsp, (void*) TUI_PROPERTIES_UNDERLINE_INDEX, (void*) FALSE_BOOLEAN, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        set(tsp, (void*) TUI_PROPERTIES_BLINK_INDEX, (void*) FALSE_BOOLEAN, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        set(tsp, (void*) TUI_PROPERTIES_INVERSE_INDEX, (void*) FALSE_BOOLEAN, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        set(tsp, (void*) TUI_PROPERTIES_HIDDEN_INDEX, (void*) FALSE_BOOLEAN, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        set(tsp, (void*) TUI_PROPERTIES_FOREGROUND_INDEX, (void*) WHITE_FOREGROUND_CONTROL_SEQUENCE, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        set(tsp, (void*) TUI_PROPERTIES_BACKGROUND_INDEX, (void*) BLACK_BACKGROUND_CONTROL_SEQUENCE, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
         // Allocate tui count and size.
         allocate((void*) &tc, (void*) TUI_COUNT, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         allocate((void*) &ts, (void*) TUI_COUNT, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
         // Initialise tui count and size.
-        set_pointer_vector_element(tc, (void*) TUI_Z_DIMENSION_INDEX, (void*) tcz);
-        set_pointer_vector_element(tc, (void*) TUI_Y_DIMENSION_INDEX, (void*) tcy);
-        set_pointer_vector_element(tc, (void*) TUI_X_DIMENSION_INDEX, (void*) tcx);
-        set_pointer_vector_element(tc, (void*) TUI_PROPERTIES_INDEX, tcp);
-        set_pointer_vector_element(ts, (void*) TUI_Z_DIMENSION_INDEX, (void*) tsz);
-        set_pointer_vector_element(ts, (void*) TUI_Y_DIMENSION_INDEX, (void*) tsy);
-        set_pointer_vector_element(ts, (void*) TUI_X_DIMENSION_INDEX, (void*) tsx);
-        set_pointer_vector_element(ts, (void*) TUI_PROPERTIES_INDEX, tsp);
+        set(tc, (void*) TUI_Z_DIMENSION_INDEX, (void*) tcz, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        set(tc, (void*) TUI_Y_DIMENSION_INDEX, (void*) tcy, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        set(tc, (void*) TUI_X_DIMENSION_INDEX, (void*) tcx, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        set(tc, (void*) TUI_PROPERTIES_INDEX, tcp, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        set(ts, (void*) TUI_Z_DIMENSION_INDEX, (void*) tsz, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        set(ts, (void*) TUI_Y_DIMENSION_INDEX, (void*) tsy, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        set(ts, (void*) TUI_X_DIMENSION_INDEX, (void*) tsx, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        set(ts, (void*) TUI_PROPERTIES_INDEX, tsp, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
         // Allocate tui.
         allocate((void*) &t, (void*) ts, (void*) TUI_ABSTRACTION, (void*) TUI_ABSTRACTION_COUNT);
 
         // Set tui internals.
-        set_array_elements(p0, (void*) TUI_INTERNAL, (void*) &t, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
-        set_array_elements(p0, (void*) TUI_COUNT_INTERNAL, (void*) &tc, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
-        set_array_elements(p0, (void*) TUI_SIZE_INTERNAL, (void*) &ts, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
+        set(p0, (void*) TUI_INTERNAL, (void*) t, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        set(p0, (void*) TUI_COUNT_INTERNAL, (void*) tc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        set(p0, (void*) TUI_SIZE_INTERNAL, (void*) ts, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     }
 
     // Encode compound model into tui.
