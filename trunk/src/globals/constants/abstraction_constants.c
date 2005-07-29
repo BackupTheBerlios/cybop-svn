@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2005-07-27 23:10:48 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2005-07-29 11:34:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -176,6 +176,11 @@ static int* STRING_ABSTRACTION_COUNT = NUMBER_6_INTEGER_ARRAY;
 static char TIME_ABSTRACTION_ARRAY[] = {'t', 'i', 'm', 'e'};
 static char* TIME_ABSTRACTION = TIME_ABSTRACTION_ARRAY;
 static int* TIME_ABSTRACTION_COUNT = NUMBER_4_INTEGER_ARRAY;
+
+/** The terminal abstraction. */
+static char TERMINAL_ABSTRACTION_ARRAY[] = {'t', 'e', 'r', 'm', 'i', 'n', 'a', 'l'};
+static char* TERMINAL_ABSTRACTION = TERMINAL_ABSTRACTION_ARRAY;
+static int* TERMINAL_ABSTRACTION_COUNT = NUMBER_8_INTEGER_ARRAY;
 
 //
 // Audio abstractions.

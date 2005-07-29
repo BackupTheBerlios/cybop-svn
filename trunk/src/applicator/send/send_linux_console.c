@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.19 $ $Date: 2005-07-28 23:06:33 $ $Author: christian $
+ * @version $Revision: 1.20 $ $Date: 2005-07-29 11:34:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -267,7 +267,7 @@ void send_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
     }
 
     // Encode compound model into tui.
-    encode((void*) &t, (void*) tc, (void*) ts, p3, p4);
+    encode((void*) &t, (void*) tc, (void*) ts, p3, p4, (void*) TUI_ABSTRACTION, (void*) TUI_ABSTRACTION_COUNT);
 
     // The serialised string array to be sent to the terminal.
     void* a = NULL_POINTER;
@@ -278,13 +278,15 @@ void send_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
     allocate((void*) &a, (void*) &as, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT);
 
     // Serialise multi-dimensional tui into array.
-//??    serialise((void*) &a, (void*) &ac, (void*) &as, t, (void*) tc);
+    serialise((void*) &a, (void*) &ac, (void*) &as, t, (void*) tc, (void*) TERMINAL_ABSTRACTION, (void*) TERMINAL_ABSTRACTION_COUNT);
 
     // CAUTION! The textual user interface (tui) needs to be deallocated at
     // system shutdown.
+    //?? For temporary testing, it is destroyed here. DELETE this line later!
+    deallocate((void*) &t, (void*) &ts, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
     // Write serialised array as message to terminal.
-//??    write_data(p0, p1, p2, a, (void*) &ac);
+    write_data(p0, p1, p2, a, (void*) &ac, (void*) TERMINAL_ABSTRACTION, (void*) TERMINAL_ABSTRACTION_COUNT);
 
     // Destroy array.
     deallocate((void*) &a, (void*) &as, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT);

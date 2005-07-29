@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2005-07-28 23:06:33 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2005-07-29 11:34:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -41,7 +41,7 @@ static int* CHARACTER_COUNT = NUMBER_1_INTEGER_ARRAY;
 static int* CHARACTER_VALUE_INDEX = NUMBER_0_INTEGER_ARRAY;
 
 //
-// String.
+// String (character vector).
 //
 
 /** The string resize factor. */
@@ -58,6 +58,13 @@ static int* INTEGER_COUNT = NUMBER_1_INTEGER_ARRAY;
 static int* INTEGER_VALUE_INDEX = NUMBER_0_INTEGER_ARRAY;
 
 //
+// Integer vector.
+//
+
+/** The integer vector resize factor. */
+static int* INTEGER_VECTOR_RESIZE_FACTOR = NUMBER_2_INTEGER_ARRAY;
+
+//
 // Unsigned long.
 //
 
@@ -68,6 +75,13 @@ static int* UNSIGNED_LONG_COUNT = NUMBER_1_INTEGER_ARRAY;
 static int* UNSIGNED_LONG_VALUE_INDEX = NUMBER_0_INTEGER_ARRAY;
 
 //
+// Unsigned long vector.
+//
+
+/** The unsigned long vector resize factor. */
+static int* UNSIGNED_LONG_VECTOR_RESIZE_FACTOR = NUMBER_2_INTEGER_ARRAY;
+
+//
 // Double.
 //
 
@@ -76,6 +90,13 @@ static int* DOUBLE_COUNT = NUMBER_1_INTEGER_ARRAY;
 
 /** The double value index. */
 static int* DOUBLE_VALUE_INDEX = NUMBER_0_INTEGER_ARRAY;
+
+//
+// Double vector.
+//
+
+/** The double vector resize factor. */
+static int* DOUBLE_VECTOR_RESIZE_FACTOR = NUMBER_2_INTEGER_ARRAY;
 
 //
 // Pointer vector.

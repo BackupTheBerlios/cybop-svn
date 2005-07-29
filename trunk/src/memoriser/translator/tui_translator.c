@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-07-28 23:06:34 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-07-29 11:34:23 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -61,22 +61,15 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         if (p2 != NULL_POINTER) {
 
-            int* dzs = (int*) p2;
+            int* des = (int*) p2;
 
             if (p1 != NULL_POINTER) {
 
-                int* dzc = (int*) p1;
+                int* dec = (int*) p1;
 
                 if (p0 != NULL_POINTER) {
 
-                    // The destination tui z layer.
-                    void** dz = (void**) p0;
-                    // The destination tui y row.
-                    void** dy = NULL_POINTER;
-                    // The destination tui x column (character).
-                    void** dx = NULL_POINTER;
-                    // The destination tui character properties.
-                    void** dp = NULL_POINTER;
+                    void** de = (void**) p0;
 
                     log_message_debug("Encode textual user interface.");
 
@@ -122,6 +115,8 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     void** cdc = POINTER_NULL_POINTER;
                     void** cds = POINTER_NULL_POINTER;
 
+                    // The part character.
+                    char* c = CHARACTER_NULL_POINTER;
                     // The part position x, y, z.
                     int* px = NULL_POINTER;
                     int* py = NULL_POINTER;
@@ -130,8 +125,23 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     int* sx = NULL_POINTER;
                     int* sy = NULL_POINTER;
                     int* sz = NULL_POINTER;
-                    // The part colour.
-                    void* c = NULL_POINTER;
+
+                    // The destination tui z layer.
+                    void* dz = NULL_POINTER;
+                    int* dzc = INTEGER_NULL_POINTER;
+                    int* dzs = INTEGER_NULL_POINTER;
+                    // The destination tui y row.
+                    void* dy = NULL_POINTER;
+                    int* dyc = INTEGER_NULL_POINTER;
+                    int* dys = INTEGER_NULL_POINTER;
+                    // The destination tui x column (character).
+                    void* dx = NULL_POINTER;
+                    int* dxc = INTEGER_NULL_POINTER;
+                    int* dxs = INTEGER_NULL_POINTER;
+                    // The destination tui character properties.
+                    void* dp = NULL_POINTER;
+                    int* dpc = INTEGER_NULL_POINTER;
+                    int* dps = INTEGER_NULL_POINTER;
 
                     // The loop count.
                     int j = 0;
@@ -139,7 +149,10 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     int x = 0;
                     int y = 0;
                     int z = 0;
+                    // The comparison result.
+                    int r = 0;
 
+                    // Iterate through compound parts.
                     while (1) {
 
                         if (j >= *sc) {
@@ -178,14 +191,9 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
                         get(*sm, (void*) TUI_SIZE_Y, (void*) &sy, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
                         get(*sm, (void*) TUI_SIZE_Z, (void*) &sz, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
-                        if (*dzs != *sz) {
-
-                            // Set tui size to given z dimension.
-                            *dzs = *sz;
-
-                            // Resize tui z dimension.
-                            resize(p0, p2, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-                        }
+                        // Set tui count and size to given z dimension size minus position.
+                        *dec = *sz - *pz;
+                        *des = *sz - *pz;
 
                         // Reset z loop index to first position.
                         z = *pz;
@@ -198,21 +206,33 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
                                 break;
                             }
 
-                            get(*dz, (void*) &z, (void*) &dy, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                            //?? In a later version, check first if tui z dimension
+                            //?? already exists, to speed up its handling!
+                            //?? get(*de, (void*) &z, (void*) &dz, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-                            // Set tui size to given y dimension.
-                            *dys = *sy;
+                            // Set z dimension count and size to given y dimension size minus position.
+                            *dzc = *sy - *py;
+                            *dzs = *sy - *py;
 
-                            if (*dy == NULL_POINTER) {
+//??                            if (*dz == NULL_POINTER) {
 
-                                // Allocate tui y dimension.
-                                allocate((void*) &dy, (void*) dys, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                                 // Allocate tui z dimension.
+                                allocate((void*) &dz, (void*) dzs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
+/*??
                             } else {
 
-                                // Resize tui y dimension.
-                                resize((void*) &dy, (void*) dys, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                                // Resize tui z dimension.
+                                // The resizing happens in either case, that is if the
+                                // new size is greater and if it is smaller than the old size.
+                                // If the new size is equal to the old size,
+                                // the z dimension pointer remains unchanged.
+                                resize((void*) &dz, (void*) dzs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
                             }
+*/
+
+                            // Add new z dimension to destination tui.
+                            set(*de, (void*) &z, *dz, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
                             // Reset y loop index to first position.
                             y = *py;
@@ -224,21 +244,33 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
                                     break;
                                 }
 
-                                get(*dy, (void*) &y, (void*) &dx, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                                //?? In a later version, check first if tui y dimension
+                                //?? already exists, to speed up its handling!
+                                //?? get(*dz, (void*) &y, (void*) &dy, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-                                // Set tui size to given y dimension.
-                                *dxs = *sx;
+                                // Set y dimension count and size to given x dimension size minus position.
+                                *dyc = *sx - *px;
+                                *dys = *sx - *px;
 
-                                if (*dx == NULL_POINTER) {
+//??                                if (*dy == NULL_POINTER) {
 
                                     // Allocate tui y dimension.
-                                    allocate((void*) &dx, (void*) dxs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                                    allocate((void*) &dy, (void*) dys, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
+/*??
                                 } else {
 
                                     // Resize tui y dimension.
-                                    resize((void*) &dx, (void*) dxs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                                    // The resizing happens in either case, that is if the
+                                    // new size is greater and if it is smaller than the old size.
+                                    // If the new size is equal to the old size,
+                                    // the y dimension pointer remains unchanged.
+                                    resize((void*) &dy, (void*) dys, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
                                 }
+*/
+
+                                // Add new y dimension to z dimension.
+                                set(*dz, (void*) &y, *dy, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
                                 // Reset x loop index to first position.
                                 x = *px;
@@ -250,27 +282,67 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
                                         break;
                                     }
 
-                                    get(*dx, (void*) &x, (void*) &dp, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                                    //?? In a later version, check first if tui x dimension
+                                    //?? already exists, to speed up its handling!
+                                    //?? get(*dy, (void*) &x, (void*) &dx, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-                                    if (r == 0) {
+                                    // Set x dimension count and size to character properties size.
+                                    *dxc = TUI_PROPERTIES_COUNT;
+                                    *dxs = TUI_PROPERTIES_COUNT;
 
-                                        // Set colour and character.
-                                        set(*dp, (void*) TUI_PROPERTIES_CHARACTER_INDEX, (void*) SPACE_CHARACTER, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-                                        set(*dp, (void*) TUI_PROPERTIES_BOLD_INDEX, (void*) source_properties_bold, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-                                        set(*dp, (void*) TUI_PROPERTIES_UNDERLINE_INDEX, (void*) SPACE_CHARACTER, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-                                        set(*dp, (void*) TUI_PROPERTIES_BLINK_INDEX, (void*) SPACE_CHARACTER, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-                                        set(*dp, (void*) TUI_PROPERTIES_INVERSE_INDEX, (void*) SPACE_CHARACTER, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-                                        set(*dp, (void*) TUI_PROPERTIES_HIDDEN_INDEX, (void*) SPACE_CHARACTER, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-                                        set(*dp, (void*) TUI_PROPERTIES_FOREGROUND_INDEX, (void*) SPACE_CHARACTER, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-                                        set(*dp, (void*) TUI_PROPERTIES_BACKGROUND_INDEX, (void*) SPACE_CHARACTER, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+//??                                    if (*dx == NULL_POINTER) {
+
+                                        // Allocate tui x dimension.
+                                        allocate((void*) &dx, (void*) dxs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
+/*??
+                                    } else {
+
+                                        // Resize tui x dimension.
+                                        // The resizing happens in either case, that is if the
+                                        // new size is greater and if it is smaller than the old size.
+                                        // If the new size is equal to the old size,
+                                        // the x dimension pointer remains unchanged.
+                                        resize((void*) &dx, (void*) dxs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                                    }
+*/
+
+                                    // Add new x dimension to y dimension.
+                                    set(*dy, (void*) &x, *dx, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
+                                    // Add character properties to x dimension.
+                                    set(*dx, (void*) TUI_PROPERTIES_CHARACTER_INDEX, (void*) SPACE_CHARACTER, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                                    set(*dx, (void*) TUI_PROPERTIES_BOLD_INDEX, (void*) source_properties_bold, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                                    set(*dx, (void*) TUI_PROPERTIES_UNDERLINE_INDEX, (void*) SPACE_CHARACTER, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                                    set(*dx, (void*) TUI_PROPERTIES_BLINK_INDEX, (void*) SPACE_CHARACTER, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                                    set(*dx, (void*) TUI_PROPERTIES_INVERSE_INDEX, (void*) SPACE_CHARACTER, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                                    set(*dx, (void*) TUI_PROPERTIES_HIDDEN_INDEX, (void*) SPACE_CHARACTER, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                                    set(*dx, (void*) TUI_PROPERTIES_FOREGROUND_INDEX, (void*) SPACE_CHARACTER, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                                    set(*dx, (void*) TUI_PROPERTIES_BACKGROUND_INDEX, (void*) SPACE_CHARACTER, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
+                                    // Reset comparison result.
+                                    r = 0;
+
+                                    compare_arrays(*a, *ac, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+                                    if (r != 0) {
+
+                                        // The part model is a character.
+
+                                        allocate((void*) &c, (void*) CHARACTER_COUNT, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT);
+
+                                        // Get part string with just one character at position x.
+                                        get_character_array_elements(*m, (void*) &x, (void*) c, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT);
+
+                                        // Add character to x dimension.
+                                        set(*dx, (void*) TUI_PROPERTIES_CHARACTER_INDEX, (void*) c, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
                                     } else {
 
-                                        // Set colour and character.
-                                        set(*dp, (void*) TUI_INTERNAL, (void*) SPACE_CHARACTER, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                                        // The part model is NOT a character.
 
-                                        // Get part string with just one character at position x.
-                                        get_character_array_elements(string, (void*) &x, (void*) &s);
+                                        // Add space character to x dimension.
+                                        set(*dx, (void*) TUI_PROPERTIES_CHARACTER_INDEX, (void*) SPACE_CHARACTER, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
                                     }
 
                                     x++;
@@ -282,17 +354,6 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
                             z++;
                         }
 
-                        // Destroy terminated part colour control sequence.
-                        deallocate_array((void*) &tcs, (void*) &tcss, (void*) CHARACTER_ARRAY);
-
-                        // Check if destination array size is large enough.
-
-                        printf("\033[2J");
-                        fputs("Set colour to \033[32mgreen\033[0m.\n", (FILE*) *d);
-
-                        if model's abstraction a equals string, then
-                        set foreground colour and print string into array
-
                         // Reset comparison result.
                         r = 0;
 
@@ -300,46 +361,13 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                         if (r != 0) {
 
+                            // The part model is a compound.
+
                             // Recursively call this procedure for compound part model.
-                            serialise_terminal(p0, p1, p2, *m, *mc);
+                            encode_tui(p0, p1, p2, *m, *mc);
                         }
 
                         j++;
-                    }
-
-                    if (*dc >= 0) {
-
-                        // The new destination string size.
-                        // (Not exactly the size, but the destination string index
-                        // increased by the source array count.)
-                        *ds = *dc + *sc;
-
-                        // Resize destination string.
-                        resize_array(p0, p2, (void*) CHARACTER_ARRAY);
-
-                        if (*dc <= (*ds - *sc)) {
-
-                            // Set source into destination string.
-                            set_array_elements(*d, p1, p3, p4, (void*) CHARACTER_ARRAY);
-
-                            // Increment count.
-                            // Example:
-                            // d = "helloworld"
-                            // dc (as index) = 5
-                            // s = "universe"
-                            // sc = 8
-                            // d (after set) = "hellouniverse"
-                            // dc = dc + sc = 13
-                            *dc = *dc + *sc;
-
-                        } else {
-
-                            log_message_debug("Could not encode textual user interface. The destination count exceeds the size.");
-                        }
-
-                    } else {
-
-                        log_message_debug("Could not encode textual user interface. The destination count is negative.");
                     }
 
                 } else {

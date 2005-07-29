@@ -22,7 +22,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.9 $ $Date: 2005-07-27 23:10:47 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2005-07-29 11:34:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -142,12 +142,12 @@ void check_primitive_model(void* p0, void* p1, void* p2) {
  * The "received model" and "parsed model" are temporary helper models;
  * they get created and destroyed during creation handling.
  *
- *                receive                           parse
+ *                read                              parse
  * source code  ----------> received/read model  ----------> parsed model
  * (persistent)             (transient)                      (transient)
  *
  * The counterparts of the creation procedures are:
- * - receive <--> send (read <--> write)
+ * - read <--> write
  * - parse <--> serialise
  *
  * @param p0 the destination (Hand over as reference!)
@@ -208,12 +208,12 @@ void create_primitive_model(void* p0, void* p1, void* p2, void* p3, void* p4,
  * The "received model" and "parsed model" are temporary helper models;
  * they get created and destroyed during creation handling.
  *
- *                receive                           parse                   decode
+ *                read                              parse                   decode
  * source code  ----------> received/read model  ----------> parsed model ----------> decoded model
  * (persistent)             (transient)                      (transient)              (transient)
  *
  * The counterparts of the creation procedures are:
- * - receive <--> send (read <--> write)
+ * - read <--> write
  * - parse <--> serialise
  * - decode <--> encode
  *

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2005-07-28 23:06:34 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2005-07-29 11:34:23 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -33,8 +33,33 @@
 #include "../../globals/constants/log_constants.c"
 #include "../../globals/constants/structure_constants.c"
 #include "../../globals/logger/logger.c"
-#include "../../memoriser/accessor.c"
 #include "../../memoriser/array.c"
+
+//
+// Forward declarations.
+//
+
+/**
+ * Sets the model element.
+ *
+ * @param p0 the model
+ * @param p1 the index
+ * @param p2 the element
+ * @param p3 the abstraction
+ * @param p4 the abstraction count
+ */
+void set(void* p0, void* p1, void* p2, void* p3, void* p4);
+
+/**
+ * Gets the model element.
+ *
+ * @param p0 the model
+ * @param p1 the index
+ * @param p2 the model element (Hand over as reference!)
+ * @param p3 the abstraction
+ * @param p4 the abstraction count
+ */
+void get(void* p0, void* p1, void* p2, void* p3, void* p4);
 
 /**
  * Add the client socket.
