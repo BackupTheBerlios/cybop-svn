@@ -38,7 +38,7 @@
  *
  * Array elements are accessed over their index (array base pointer + index).
  *
- * @version $Revision: 1.5 $ $Date: 2005-07-27 13:30:20 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2005-07-29 15:48:51 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -183,9 +183,9 @@ void compare_character_array_elements(void* p0, void* p1, void* p2, void* p3) {
                     // The loop variable.
                     int j = 0;
                     // The first element.
-                    char* e0 = CHARACTER_NULL_POINTER;
+                    char* e0 = NULL_POINTER;
                     // The second element.
-                    char* e1 = CHARACTER_NULL_POINTER;
+                    char* e1 = NULL_POINTER;
                     // The size.
                     int s = 0;
 
@@ -261,9 +261,9 @@ void set_character_array_elements(void* p0, void* p1, void* p2, void* p3) {
                     // The destination base.
                     void* db = (void*) (p0 + (*i * *CHARACTER_PRIMITIVE_SIZE));
                     // The source element.
-                    char* se = CHARACTER_NULL_POINTER;
+                    char* se = NULL_POINTER;
                     // The destination element.
-                    char* de = CHARACTER_NULL_POINTER;
+                    char* de = NULL_POINTER;
                     // The loop variable.
                     int j = 0;
                     // The size.
@@ -339,9 +339,9 @@ void remove_character_array_elements(void* p0, void* p1, void* p2, void* p3) {
                     // The source base.
                     void* sb = (void*) (db + (*c * *CHARACTER_PRIMITIVE_SIZE));
                     // The source element.
-                    char* se = CHARACTER_NULL_POINTER;
+                    char* se = NULL_POINTER;
                     // The destination element.
-                    char* de = CHARACTER_NULL_POINTER;
+                    char* de = NULL_POINTER;
                     // The remaining elements size.
                     int r = *m - (*i + *c);
                     // The loop variable.

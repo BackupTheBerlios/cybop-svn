@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2005-07-16 00:18:24 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-07-29 15:48:51 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,33 +30,14 @@
 #include <stdio.h>
 
 //
-// Null pointers.
+// Null pointer.
 //
-// CAUTION!
-// These must not be constant, because otherwise
-// one could not alter the values they point to.
+// CAUTION! It must not be constant, because otherwise
+// one could not alter the values it points to.
 //
 
 // The null pointer.
 static void* NULL_POINTER;
-
-// The pointer null pointer.
-static void** POINTER_NULL_POINTER;
-
-// The character null pointer.
-static char* CHARACTER_NULL_POINTER;
-
-// The integer null pointer.
-static int* INTEGER_NULL_POINTER;
-
-// The unsigned long null pointer.
-static unsigned long* UNSIGNED_LONG_NULL_POINTER;
-
-// The double null pointer.
-static double* DOUBLE_NULL_POINTER;
-
-// The file null pointer.
-static FILE* FILE_NULL_POINTER;
 
 //
 // Logging.

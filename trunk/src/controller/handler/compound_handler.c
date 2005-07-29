@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2005-07-25 21:01:02 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2005-07-29 15:48:51 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -78,12 +78,12 @@ void handle_compound(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
         log_message((void*) INFO_LOG_LEVEL, (void*) HANDLE_COMPOUND_MESSAGE, (void*) HANDLE_COMPOUND_MESSAGE_COUNT);
 
         // The abstractions, models, details.
-        void** pa = POINTER_NULL_POINTER;
-        void** pac = POINTER_NULL_POINTER;
-        void** pm = POINTER_NULL_POINTER;
-        void** pmc = POINTER_NULL_POINTER;
-        void** pd = POINTER_NULL_POINTER;
-        void** pdc = POINTER_NULL_POINTER;
+        void** pa = NULL_POINTER;
+        void** pac = NULL_POINTER;
+        void** pm = NULL_POINTER;
+        void** pmc = NULL_POINTER;
+        void** pd = NULL_POINTER;
+        void** pdc = NULL_POINTER;
 
         // Get abstractions, models, details.
         get_array_elements(p8, (void*) ABSTRACTIONS_INDEX, (void*) &pa, (void*) POINTER_ARRAY);
@@ -93,25 +93,25 @@ void handle_compound(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
         get_array_elements(p8, (void*) DETAILS_INDEX, (void*) &pd, (void*) POINTER_ARRAY);
         get_array_elements(p8, (void*) DETAILS_COUNTS_INDEX, (void*) &pdc, (void*) POINTER_ARRAY);
 
-        if (pa != POINTER_NULL_POINTER) {
+        if (pa != NULL_POINTER) {
 
-            if (pac != POINTER_NULL_POINTER) {
+            if (pac != NULL_POINTER) {
 
-                if (pm != POINTER_NULL_POINTER) {
+                if (pm != NULL_POINTER) {
 
-                    if (pmc != POINTER_NULL_POINTER) {
+                    if (pmc != NULL_POINTER) {
 
-                        if (pd != POINTER_NULL_POINTER) {
+                        if (pd != NULL_POINTER) {
 
-                            if (pdc != POINTER_NULL_POINTER) {
+                            if (pdc != NULL_POINTER) {
 
                                 // The abstraction, model, details.
-                                void** a = POINTER_NULL_POINTER;
-                                void** ac = POINTER_NULL_POINTER;
-                                void** m = POINTER_NULL_POINTER;
-                                void** mc = POINTER_NULL_POINTER;
-                                void** d = POINTER_NULL_POINTER;
-                                void** dc = POINTER_NULL_POINTER;
+                                void** a = NULL_POINTER;
+                                void** ac = NULL_POINTER;
+                                void** m = NULL_POINTER;
+                                void** mc = NULL_POINTER;
+                                void** d = NULL_POINTER;
+                                void** dc = NULL_POINTER;
 
                                 // The loop variable.
                                 int j = 0;
@@ -131,17 +131,17 @@ void handle_compound(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
                                     get_array_elements(*pd, (void*) &j, (void*) &d, (void*) POINTER_ARRAY);
                                     get_array_elements(*pdc, (void*) &j, (void*) &dc, (void*) INTEGER_ARRAY);
 
-                                    if (a != POINTER_NULL_POINTER) {
+                                    if (a != NULL_POINTER) {
 
-                                        if (ac != POINTER_NULL_POINTER) {
+                                        if (ac != NULL_POINTER) {
 
-                                            if (m != POINTER_NULL_POINTER) {
+                                            if (m != NULL_POINTER) {
 
-                                                if (mc != POINTER_NULL_POINTER) {
+                                                if (mc != NULL_POINTER) {
 
-                                                    if (d != POINTER_NULL_POINTER) {
+                                                    if (d != NULL_POINTER) {
 
-                                                        if (dc != POINTER_NULL_POINTER) {
+                                                        if (dc != NULL_POINTER) {
 
                                                             // Add part model (signal) to memory, using the whole signal's priority.
                                                             // (Each signal has a priority. A signal may consist of part
@@ -191,12 +191,12 @@ void handle_compound(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
                                     }
 
                                     // Reset abstraction, model, details.
-                                    a = POINTER_NULL_POINTER;
-                                    ac = POINTER_NULL_POINTER;
-                                    m = POINTER_NULL_POINTER;
-                                    mc = POINTER_NULL_POINTER;
-                                    d = POINTER_NULL_POINTER;
-                                    dc = POINTER_NULL_POINTER;
+                                    a = NULL_POINTER;
+                                    ac = NULL_POINTER;
+                                    m = NULL_POINTER;
+                                    mc = NULL_POINTER;
+                                    d = NULL_POINTER;
+                                    dc = NULL_POINTER;
 
                                     j++;
                                 }

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2005-07-25 21:01:01 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2005-07-29 15:48:51 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -51,43 +51,43 @@ void build_listname(void* p0, void* p1, void* p2, void* p3, void* p4) {
     log_message_debug("Build list name.");
 
     // The basisname abstraction.
-    void** bna = POINTER_NULL_POINTER;
-    void** bnac = POINTER_NULL_POINTER;
-    void** bnas = POINTER_NULL_POINTER;
+    void** bna = NULL_POINTER;
+    void** bnac = NULL_POINTER;
+    void** bnas = NULL_POINTER;
     // The basisname model.
-    void** bnm = POINTER_NULL_POINTER;
-    void** bnmc = POINTER_NULL_POINTER;
-    void** bnms = POINTER_NULL_POINTER;
+    void** bnm = NULL_POINTER;
+    void** bnmc = NULL_POINTER;
+    void** bnms = NULL_POINTER;
     // The basisname details.
-    void** bnd = POINTER_NULL_POINTER;
-    void** bndc = POINTER_NULL_POINTER;
-    void** bnds = POINTER_NULL_POINTER;
+    void** bnd = NULL_POINTER;
+    void** bndc = NULL_POINTER;
+    void** bnds = NULL_POINTER;
 
     // The index abstraction.
-    void** idxa = POINTER_NULL_POINTER;
-    void** idxac = POINTER_NULL_POINTER;
-    void** idxas = POINTER_NULL_POINTER;
+    void** idxa = NULL_POINTER;
+    void** idxac = NULL_POINTER;
+    void** idxas = NULL_POINTER;
     // The index model.
-    void** idxm = POINTER_NULL_POINTER;
-    void** idxmc = POINTER_NULL_POINTER;
-    void** idxms = POINTER_NULL_POINTER;
+    void** idxm = NULL_POINTER;
+    void** idxmc = NULL_POINTER;
+    void** idxms = NULL_POINTER;
     // The index details.
-    void** idxd = POINTER_NULL_POINTER;
-    void** idxdc = POINTER_NULL_POINTER;
-    void** idxds = POINTER_NULL_POINTER;
+    void** idxd = NULL_POINTER;
+    void** idxdc = NULL_POINTER;
+    void** idxds = NULL_POINTER;
 
     // The result abstraction.
-    void** resa = POINTER_NULL_POINTER;
-    void** resac = POINTER_NULL_POINTER;
-    void** resas = POINTER_NULL_POINTER;
+    void** resa = NULL_POINTER;
+    void** resac = NULL_POINTER;
+    void** resas = NULL_POINTER;
     // The result mxodel.
-    void** resm = POINTER_NULL_POINTER;
-    void** resmc = POINTER_NULL_POINTER;
-    void** resms = POINTER_NULL_POINTER;
+    void** resm = NULL_POINTER;
+    void** resmc = NULL_POINTER;
+    void** resms = NULL_POINTER;
     // The result details.
-    void** resd = POINTER_NULL_POINTER;
-    void** resdc = POINTER_NULL_POINTER;
-    void** resds = POINTER_NULL_POINTER;
+    void** resd = NULL_POINTER;
+    void** resdc = NULL_POINTER;
+    void** resds = NULL_POINTER;
 
     // get the basisname
     get_real_compound_element_by_name(p0, p1,
@@ -117,35 +117,35 @@ void build_listname(void* p0, void* p1, void* p2, void* p3, void* p4) {
         p2, p3);
 
     // Check basisname.
-    if ((bna != POINTER_NULL_POINTER)
-        && (bnac != POINTER_NULL_POINTER)
-        && (bnas != POINTER_NULL_POINTER)
-        && (bnm != POINTER_NULL_POINTER)
-        && (bnmc != POINTER_NULL_POINTER)
-        && (bnms != POINTER_NULL_POINTER)
-        && (bnd != POINTER_NULL_POINTER)
-        && (bndc != POINTER_NULL_POINTER)
-        && (bnds != POINTER_NULL_POINTER)
+    if ((bna != NULL_POINTER)
+        && (bnac != NULL_POINTER)
+        && (bnas != NULL_POINTER)
+        && (bnm != NULL_POINTER)
+        && (bnmc != NULL_POINTER)
+        && (bnms != NULL_POINTER)
+        && (bnd != NULL_POINTER)
+        && (bndc != NULL_POINTER)
+        && (bnds != NULL_POINTER)
         // Check index.
-        && (idxa != POINTER_NULL_POINTER)
-        && (idxac != POINTER_NULL_POINTER)
-        && (idxas != POINTER_NULL_POINTER)
-        && (idxm != POINTER_NULL_POINTER)
-        && (idxmc != POINTER_NULL_POINTER)
-        && (idxms != POINTER_NULL_POINTER)
-        && (idxd != POINTER_NULL_POINTER)
-        && (idxdc != POINTER_NULL_POINTER)
-        && (idxds != POINTER_NULL_POINTER)
+        && (idxa != NULL_POINTER)
+        && (idxac != NULL_POINTER)
+        && (idxas != NULL_POINTER)
+        && (idxm != NULL_POINTER)
+        && (idxmc != NULL_POINTER)
+        && (idxms != NULL_POINTER)
+        && (idxd != NULL_POINTER)
+        && (idxdc != NULL_POINTER)
+        && (idxds != NULL_POINTER)
         // Check result.
-        && (resa != POINTER_NULL_POINTER)
-        && (resac != POINTER_NULL_POINTER)
-        && (resas != POINTER_NULL_POINTER)
-        && (resm != POINTER_NULL_POINTER)
-        && (resmc != POINTER_NULL_POINTER)
-        && (resms != POINTER_NULL_POINTER)
-        && (resd != POINTER_NULL_POINTER)
-        && (resdc != POINTER_NULL_POINTER)
-        && (resds != POINTER_NULL_POINTER)) {
+        && (resa != NULL_POINTER)
+        && (resac != NULL_POINTER)
+        && (resas != NULL_POINTER)
+        && (resm != NULL_POINTER)
+        && (resmc != NULL_POINTER)
+        && (resms != NULL_POINTER)
+        && (resd != NULL_POINTER)
+        && (resdc != NULL_POINTER)
+        && (resds != NULL_POINTER)) {
 
         //check the abstraction for the operation element
         int comp_res1 = 0;
@@ -161,7 +161,7 @@ void build_listname(void* p0, void* p1, void* p2, void* p3, void* p4) {
             // changing the for the index
 
             // Create compare string.
-            char* int_string = CHARACTER_NULL_POINTER;
+            char* int_string = NULL_POINTER;
             // todo Konstante noch definieren
             int int_string_count = 0;
             int int_string_size = 10;

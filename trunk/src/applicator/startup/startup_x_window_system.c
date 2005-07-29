@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2005-07-28 12:52:11 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2005-07-29 15:48:51 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  *
@@ -82,7 +82,7 @@ void startup_x_window_system(void* p0, void* p1, void* p2, void* p3) {
         // xserver, screens, hardware (input devices etc.).
         struct _XDisplay* d = NULL_POINTER;
         // The screen number.
-        int* sn = INTEGER_NULL_POINTER;
+        int* sn = NULL_POINTER;
         // The screen.
 //??        Screen* s = NULL_POINTER;
         // The default colourmap id for allocation on the specified screen.

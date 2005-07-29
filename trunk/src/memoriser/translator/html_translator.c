@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2005-07-28 23:06:34 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2005-07-29 15:48:51 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -67,17 +67,17 @@ void encode_html_compound( void** dest, int* dest_count, int* dest_size,
 {
 
     // The compound abstraction.
-    void** comp_abstr = POINTER_NULL_POINTER;
-    void** comp_abstr_count = POINTER_NULL_POINTER;
-    void** comp_abstr_size = POINTER_NULL_POINTER;
+    void** comp_abstr = NULL_POINTER;
+    void** comp_abstr_count = NULL_POINTER;
+    void** comp_abstr_size = NULL_POINTER;
     // The compound model.
-    void** comp_model = POINTER_NULL_POINTER;
-    void** comp_model_count = POINTER_NULL_POINTER;
-    void** comp_model_size = POINTER_NULL_POINTER;
+    void** comp_model = NULL_POINTER;
+    void** comp_model_count = NULL_POINTER;
+    void** comp_model_size = NULL_POINTER;
     // The compound details.
-    void** comp_detail = POINTER_NULL_POINTER;
-    void** comp_detail_count = POINTER_NULL_POINTER;
-    void** comp_detail_size = POINTER_NULL_POINTER;
+    void** comp_detail = NULL_POINTER;
+    void** comp_detail_count = NULL_POINTER;
+    void** comp_detail_size = NULL_POINTER;
 
 
     int comp_index = 0;
@@ -130,17 +130,17 @@ void encode_html_knowledgememory(
     {
 
         // The compound abstraction.
-        void** comp_abstr = POINTER_NULL_POINTER;
-        void** comp_abstr_count = POINTER_NULL_POINTER;
-        void** comp_abstr_size = POINTER_NULL_POINTER;
+        void** comp_abstr = NULL_POINTER;
+        void** comp_abstr_count = NULL_POINTER;
+        void** comp_abstr_size = NULL_POINTER;
         // The compound model.
-        void** comp_model = POINTER_NULL_POINTER;
-        void** comp_model_count = POINTER_NULL_POINTER;
-        void** comp_model_size = POINTER_NULL_POINTER;
+        void** comp_model = NULL_POINTER;
+        void** comp_model_count = NULL_POINTER;
+        void** comp_model_size = NULL_POINTER;
         // The compound details.
-        void** comp_detail = POINTER_NULL_POINTER;
-        void** comp_detail_count = POINTER_NULL_POINTER;
-        void** comp_detail_size = POINTER_NULL_POINTER;
+        void** comp_detail = NULL_POINTER;
+        void** comp_detail_count = NULL_POINTER;
+        void** comp_detail_size = NULL_POINTER;
 
         get_compound_element_by_name(
             know, know_count,
@@ -202,9 +202,9 @@ void encode_html_integer( void** dest, int* dest_count, int* dest_size,
     {
 
         //parse the model
-        void* dest_int = POINTER_NULL_POINTER;
-        int* dest_int_count = INTEGER_NULL_POINTER;
-        int* dest_int_size = INTEGER_NULL_POINTER;
+        void* dest_int = NULL_POINTER;
+        int* dest_int_count = NULL_POINTER;
+        int* dest_int_size = NULL_POINTER;
 
         allocate(&dest_int_count, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
         *dest_int_count = 0;
@@ -259,30 +259,30 @@ void encode_html( void** dest, int* dest_count, int *dest_size,
 
 
         // The html tag abstraction.
-        void** tag_abstr = POINTER_NULL_POINTER;
-        void** tag_abstr_count = POINTER_NULL_POINTER;
-        void** tag_abstr_size = POINTER_NULL_POINTER;
+        void** tag_abstr = NULL_POINTER;
+        void** tag_abstr_count = NULL_POINTER;
+        void** tag_abstr_size = NULL_POINTER;
         // The html tag model.
-        void** tag_model = POINTER_NULL_POINTER;
-        void** tag_model_count = POINTER_NULL_POINTER;
-        void** tag_model_size = POINTER_NULL_POINTER;
+        void** tag_model = NULL_POINTER;
+        void** tag_model_count = NULL_POINTER;
+        void** tag_model_size = NULL_POINTER;
         // The html tag details.
-        void** tag_detail = POINTER_NULL_POINTER;
-        void** tag_detail_count = POINTER_NULL_POINTER;
-        void** tag_detail_size = POINTER_NULL_POINTER;
+        void** tag_detail = NULL_POINTER;
+        void** tag_detail_count = NULL_POINTER;
+        void** tag_detail_size = NULL_POINTER;
 
         // The html tag abstraction.
-        void** tag_prop_abstr = POINTER_NULL_POINTER;
-        void** tag_prop_abstr_count = POINTER_NULL_POINTER;
-        void** tag_prop_abstr_size = POINTER_NULL_POINTER;
+        void** tag_prop_abstr = NULL_POINTER;
+        void** tag_prop_abstr_count = NULL_POINTER;
+        void** tag_prop_abstr_size = NULL_POINTER;
         // The html tag_prop model.
-        void** tag_prop_model = POINTER_NULL_POINTER;
-        void** tag_prop_model_count = POINTER_NULL_POINTER;
-        void** tag_prop_model_size = POINTER_NULL_POINTER;
+        void** tag_prop_model = NULL_POINTER;
+        void** tag_prop_model_count = NULL_POINTER;
+        void** tag_prop_model_size = NULL_POINTER;
         // The html tag_prop details.
-        void** tag_prop_detail = POINTER_NULL_POINTER;
-        void** tag_prop_detail_count = POINTER_NULL_POINTER;
-        void** tag_prop_detail_size = POINTER_NULL_POINTER;
+        void** tag_prop_detail = NULL_POINTER;
+        void** tag_prop_detail_count = NULL_POINTER;
+        void** tag_prop_detail_size = NULL_POINTER;
 
         //in the source detail look for html_tag
         if ( (source_detail != NULL_POINTER) &&
@@ -308,9 +308,9 @@ void encode_html( void** dest, int* dest_count, int *dest_size,
         }
 
         //parse the begin tag
-        if ( (tag_model != POINTER_NULL_POINTER) &&
-             (tag_model_count != POINTER_NULL_POINTER) &&
-             (tag_model_size != POINTER_NULL_POINTER)
+        if ( (tag_model != NULL_POINTER) &&
+             (tag_model_count != NULL_POINTER) &&
+             (tag_model_size != NULL_POINTER)
            )
         {
 
@@ -330,9 +330,9 @@ void encode_html( void** dest, int* dest_count, int *dest_size,
                        STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT);
 
                 //parse the tag properties
-                if ( (tag_prop_model != POINTER_NULL_POINTER) &&
-                     (tag_prop_model_count != POINTER_NULL_POINTER) &&
-                     (tag_prop_model_size != POINTER_NULL_POINTER)
+                if ( (tag_prop_model != NULL_POINTER) &&
+                     (tag_prop_model_count != NULL_POINTER) &&
+                     (tag_prop_model_size != NULL_POINTER)
                    )
                 {
 
@@ -439,9 +439,9 @@ void encode_html( void** dest, int* dest_count, int *dest_size,
                STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT);
 
         //parse the end tag
-        if ( (tag_model != POINTER_NULL_POINTER) &&
-             (tag_model_count != POINTER_NULL_POINTER) &&
-             (tag_model_size != POINTER_NULL_POINTER)
+        if ( (tag_model != NULL_POINTER) &&
+             (tag_model_count != NULL_POINTER) &&
+             (tag_model_size != NULL_POINTER)
            )
         {
 

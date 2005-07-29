@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2005-07-28 12:52:13 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2005-07-29 15:48:51 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -146,7 +146,7 @@ void serialise_double(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 log_message_debug("Serialise double.");
 
                 // The double value.
-                double* v = DOUBLE_NULL_POINTER;
+                double* v = NULL_POINTER;
 
                 // Get double value.
                 get_array_elements(p3, (void*) DOUBLE_VALUE_INDEX, (void*) &v, (void*) DOUBLE_ARRAY);

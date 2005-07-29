@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2005-07-28 12:52:13 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2005-07-29 15:48:51 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -137,7 +137,7 @@ void serialise_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 log_message_debug("Serialise integer.");
 
                 // The integer value.
-                int* v = INTEGER_NULL_POINTER;
+                int* v = NULL_POINTER;
 
                 // Get integer value.
                 get_array_elements(p3, (void*) INTEGER_VALUE_INDEX, (void*) &v, (void*) INTEGER_ARRAY);

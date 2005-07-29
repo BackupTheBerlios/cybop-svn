@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.12 $ $Date: 2005-07-28 12:52:11 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2005-07-29 15:48:51 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -89,7 +89,7 @@ void get_request_method(char* req, int* req_count, char** req_method, int* req_m
     *req_method_count = 0;
 
     // The element.
-    char* e = CHARACTER_NULL_POINTER;
+    char* e = NULL_POINTER;
 
     while (1) {
 
@@ -136,7 +136,7 @@ void get_url_basename_from_request(char* req, int* req_count, char** urlbase, in
     int start_urlbase_flag = 0;
     int max_count = 0;
     // The element.
-    char* e = CHARACTER_NULL_POINTER;
+    char* e = NULL_POINTER;
 
     while (1) {
 
@@ -464,7 +464,7 @@ void get_parameter_from_request_for_post(char* req, int* req_count, char** param
     int start_param_index = -1;
     int max_count = 0;
     // The element.
-    char* e = CHARACTER_NULL_POINTER;
+    char* e = NULL_POINTER;
 
     //get the index for beginning the paramaters
     while (1) {
@@ -531,7 +531,7 @@ void get_parameter_from_request_for_get(char* req, int* req_count, char** param,
     int start_param_flag = 0;
     int max_count = 0;
     // The element.
-    char* e = CHARACTER_NULL_POINTER;
+    char* e = NULL_POINTER;
 
     while (1) {
 
@@ -617,9 +617,9 @@ void set_signal_for_parameter(void* source, int* source_count, void* dest, int* 
         (p4 != NULL_POINTER)) {
 
         // The knowledge memory.
-        void** km = POINTER_NULL_POINTER;
-        void** kmc = POINTER_NULL_POINTER;
-        void** kms = POINTER_NULL_POINTER;
+        void** km = NULL_POINTER;
+        void** kmc = NULL_POINTER;
+        void** kms = NULL_POINTER;
 
         // Get knowledge memory.
         get(p4, (void*) KNOWLEDGE_MEMORY_INTERNAL, (void*) &km, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
@@ -632,18 +632,18 @@ void set_signal_for_parameter(void* source, int* source_count, void* dest, int* 
 
         // The signal abstraction.
         void* sa = NULL_POINTER;
-        int* sac = INTEGER_NULL_POINTER;
-        int* sas = INTEGER_NULL_POINTER;
+        int* sac = NULL_POINTER;
+        int* sas = NULL_POINTER;
 
         // The signal model.
         void* sm = NULL_POINTER;
-        int* smc = INTEGER_NULL_POINTER;
-        int* sms = INTEGER_NULL_POINTER;
+        int* smc = NULL_POINTER;
+        int* sms = NULL_POINTER;
 
         // The signal details.
         void* sd = NULL_POINTER;
-        int* sdc = INTEGER_NULL_POINTER;
-        int* sds = INTEGER_NULL_POINTER;
+        int* sdc = NULL_POINTER;
+        int* sds = NULL_POINTER;
 
         // Create signal abstraction.
         allocate(&sac, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
@@ -682,23 +682,23 @@ void set_signal_for_parameter(void* source, int* source_count, void* dest, int* 
 
         // The property destination name.
         void* pdn = NULL_POINTER;
-        int* pdnc = INTEGER_NULL_POINTER;
-        int* pdns = INTEGER_NULL_POINTER;
+        int* pdnc = NULL_POINTER;
+        int* pdns = NULL_POINTER;
 
         // The property destination abstraction.
-        void* pda = POINTER_NULL_POINTER;
-        int* pdac = INTEGER_NULL_POINTER;
-        int* pdas = INTEGER_NULL_POINTER;
+        void* pda = NULL_POINTER;
+        int* pdac = NULL_POINTER;
+        int* pdas = NULL_POINTER;
 
         // The property destination model.
-        void* pdm = POINTER_NULL_POINTER;
-        int* pdmc = INTEGER_NULL_POINTER;
-        int* pdms = INTEGER_NULL_POINTER;
+        void* pdm = NULL_POINTER;
+        int* pdmc = NULL_POINTER;
+        int* pdms = NULL_POINTER;
 
         // The property destination details.
-        void* pdd = POINTER_NULL_POINTER;
-        int* pddc = INTEGER_NULL_POINTER;
-        int* pdds = INTEGER_NULL_POINTER;
+        void* pdd = NULL_POINTER;
+        int* pddc = NULL_POINTER;
+        int* pdds = NULL_POINTER;
 
         // Create property destination name.
         allocate(&pdnc, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
@@ -740,23 +740,23 @@ void set_signal_for_parameter(void* source, int* source_count, void* dest, int* 
 
         // The property source name.
         void* psn = NULL_POINTER;
-        int* psnc = INTEGER_NULL_POINTER;
-        int* psns = INTEGER_NULL_POINTER;
+        int* psnc = NULL_POINTER;
+        int* psns = NULL_POINTER;
 
         // The property  source abstraction.
         void* psa = NULL_POINTER;
-        int* psac = INTEGER_NULL_POINTER;
-        int* psas = INTEGER_NULL_POINTER;
+        int* psac = NULL_POINTER;
+        int* psas = NULL_POINTER;
 
         // The property  source model.
         void* psm = NULL_POINTER;
-        int* psmc = INTEGER_NULL_POINTER;
-        int* psms = INTEGER_NULL_POINTER;
+        int* psmc = NULL_POINTER;
+        int* psms = NULL_POINTER;
 
         // The property  source details.
         void* psd = NULL_POINTER;
-        int* psdc = INTEGER_NULL_POINTER;
-        int* psds = INTEGER_NULL_POINTER;
+        int* psdc = NULL_POINTER;
+        int* psds = NULL_POINTER;
 
         // Create property source name.
         allocate(&psnc, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
@@ -826,7 +826,7 @@ void set_signal_for_parameter(void* source, int* source_count, void* dest, int* 
         get(p4, (void*) SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &ms, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
         // The signal id.
-        int* id = INTEGER_NULL_POINTER;
+        int* id = NULL_POINTER;
         allocate(&id, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
         *id = 0;
         get_new_signal_id(*m, *mc, (void*) id);
@@ -862,14 +862,14 @@ void set_signals_for_all_parameters(void* p0, int* p1, void* p2) {
         int query_counter = 0;
 
         //paramater
-        char* param = CHARACTER_NULL_POINTER;
-        int* param_count = INTEGER_NULL_POINTER;
-        int* param_size = INTEGER_NULL_POINTER;
+        char* param = NULL_POINTER;
+        int* param_count = NULL_POINTER;
+        int* param_size = NULL_POINTER;
 
         //value for the parameter
-        char* value = CHARACTER_NULL_POINTER;
-        int* value_count = INTEGER_NULL_POINTER;
-        int* value_size = INTEGER_NULL_POINTER;
+        char* value = NULL_POINTER;
+        int* value_count = NULL_POINTER;
+        int* value_size = NULL_POINTER;
 
         allocate(&param_count, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
         *param_count = *p1;
@@ -996,7 +996,7 @@ void handle_tcp_socket_request(void* p0, void* p1) {
         log_message_debug("Handle tcp socket request.");
 
         // The message.
-        char* msg = CHARACTER_NULL_POINTER;
+        char* msg = NULL_POINTER;
         // The maximum message count.
         int max_msg_count = 2048;
 
@@ -1049,47 +1049,47 @@ void handle_tcp_socket_request(void* p0, void* p1) {
                 // The source channel.
                 char c_sc[] = "file";
                 char* sc = &c_sc[0];
-                int* scc = INTEGER_NULL_POINTER;
+                int* scc = NULL_POINTER;
                 allocate(&scc, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
                 *scc = 4;
 
                 // The source abstraction.
                 char c_sa[] = "cybol";
                 char* sa = &c_sa[0];
-                int* sac = INTEGER_NULL_POINTER;
+                int* sac = NULL_POINTER;
                 allocate(&sac, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
                 *sac = 5;
 
                 // The source model.
                 char* sm = url_basename;
-                int* smc = INTEGER_NULL_POINTER;
+                int* smc = NULL_POINTER;
                 allocate(&smc, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
                 *smc = url_basename_count;
 
                 // The destination abstraction.
                 void* da = NULL_POINTER;
-                int* dac = INTEGER_NULL_POINTER;
+                int* dac = NULL_POINTER;
                 allocate(&dac, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
                 *dac = 0;
-                int* das = INTEGER_NULL_POINTER;
+                int* das = NULL_POINTER;
                 allocate(&das, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
                 *das = 0;
 
                 // The destination model.
                 void* dm = NULL_POINTER;
-                int* dmc = INTEGER_NULL_POINTER;
+                int* dmc = NULL_POINTER;
                 allocate(&dmc, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
                 *dmc = 0;
-                int* dms = INTEGER_NULL_POINTER;
+                int* dms = NULL_POINTER;
                 allocate(&dms, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
                 *dms = 0;
 
                 // The destination details.
                 void* dd = NULL_POINTER;
-                int* ddc = INTEGER_NULL_POINTER;
+                int* ddc = NULL_POINTER;
                 allocate(&ddc, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
                 *ddc = 0;
-                int* dds = INTEGER_NULL_POINTER;
+                int* dds = NULL_POINTER;
                 allocate(&dds, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
                 *dds = 0;
 
@@ -1122,7 +1122,7 @@ void handle_tcp_socket_request(void* p0, void* p1) {
                 get(p0, (void*) SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &ms, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
                 // The signal id.
-                int* id = INTEGER_NULL_POINTER;
+                int* id = NULL_POINTER;
                 allocate(&id, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
                 *id = 0;
                 get_new_signal_id(*m, *mc, (void*) id);
@@ -1161,12 +1161,12 @@ void handle_tcp_socket_request(void* p0, void* p1) {
 void run_tcp_socket(void* p0) {
 
     // The tcp server socket.
-    void** s = POINTER_NULL_POINTER;
+    void** s = NULL_POINTER;
 
     // Get tcp server socket.
     get(p0, (void*) TCP_SERVER_SOCKET_INTERNAL, (void*) &s, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-    if (s != POINTER_NULL_POINTER) {
+    if (s != NULL_POINTER) {
 
         if (*s != NULL_POINTER) {
 
@@ -1213,7 +1213,7 @@ void run_tcp_socket(void* p0) {
  */
 void run_tcp_socket_server(void* p0) {
 
-    void** active_flag = POINTER_NULL_POINTER;
+    void** active_flag = NULL_POINTER;
 
     get(p0, (void*) TCP_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &active_flag, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
@@ -1275,7 +1275,7 @@ void receive_tcp_socket(void* p0, void* p1, void* p2, void* p3,
                 }
 
                 // Set the activation flag in the internal memory.
-                void** socket_flag = POINTER_NULL_POINTER;
+                void** socket_flag = NULL_POINTER;
 
                 get(p0, (void*) TCP_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &socket_flag, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
@@ -1285,7 +1285,7 @@ void receive_tcp_socket(void* p0, void* p1, void* p2, void* p3,
                 }
 
                 //set the blocking flag in the internal memory.
-                void** blocking_flag = POINTER_NULL_POINTER;
+                void** blocking_flag = NULL_POINTER;
 
                 get(p0, (void*) TCP_SERVER_SOCKET_BLOCKING_INTERNAL, (void*) &blocking_flag, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 

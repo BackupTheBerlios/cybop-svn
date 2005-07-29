@@ -24,7 +24,7 @@
  * - parse an xml stream into an xml model
  * - serialise an xml model into an xml stream
  *
- * @version $Revision: 1.7 $ $Date: 2005-07-28 12:52:13 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2005-07-29 15:48:51 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -283,7 +283,7 @@ void parse_xml(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
 /*??
             // The comparison result.
-            int* r = INTEGER_NULL_POINTER;
+            int* r = NULL_POINTER;
             allocate((void*) &r, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
             *r = 0;
             // The current byte within the stream.

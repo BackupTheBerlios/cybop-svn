@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2005-07-27 13:30:20 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2005-07-29 15:48:51 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -49,33 +49,14 @@ void startup_globals() {
     fputs("Info: Startup globals.\n", stdout);
 
     //
-    // Null pointers.
+    // Null pointer.
     //
-    // CAUTION!
-    // These cannot be constant, because otherwise
-    // one could not alter their values later.
+    // CAUTION! It must not be constant, because otherwise
+    // one could not alter the values it points to.
     //
 
     // The null pointer.
     NULL_POINTER = (void*) 0;
-
-    // The pointer null pointer.
-    POINTER_NULL_POINTER = (void**) 0;
-
-    // The integer null pointer.
-    INTEGER_NULL_POINTER = (int*) 0;
-
-    // The unsigned long null pointer.
-    UNSIGNED_LONG_NULL_POINTER = (unsigned long*) 0;
-
-    // The character null pointer.
-    CHARACTER_NULL_POINTER = (char*) 0;
-
-    // The double null pointer.
-    DOUBLE_NULL_POINTER = (double*) 0;
-
-    // The file null pointer.
-    FILE_NULL_POINTER = (FILE*) 0;
 
     //
     // Primitive type sizes.

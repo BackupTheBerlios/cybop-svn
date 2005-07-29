@@ -25,7 +25,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.7 $ $Date: 2005-07-28 12:52:12 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2005-07-29 15:48:51 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -76,12 +76,12 @@ int main(int p0, char** p1) {
             log_message_debug("Execute CYBOI.");
 
             // The run source name.
-            void** s = POINTER_NULL_POINTER;
+            void** s = NULL_POINTER;
 
             // Get run source name.
             get_array_elements((void*) p1, (void*) RUN_FILE_PARAMETER_INDEX, (void*) &s, (void*) POINTER_ARRAY);
 
-            if (s != POINTER_NULL_POINTER) {
+            if (s != NULL_POINTER) {
 
                 // CAUTION! This is a DIRTY workaround!
                 // The run source count (number of file path characters)

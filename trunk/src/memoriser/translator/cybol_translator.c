@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2005-07-27 23:10:48 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2005-07-29 15:48:51 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -322,20 +322,20 @@ void decode_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 int smc = 0;
                 // The destination name.
                 void* dn = NULL_POINTER;
-                int* dnc = INTEGER_NULL_POINTER;
-                int* dns = INTEGER_NULL_POINTER;
+                int* dnc = NULL_POINTER;
+                int* dns = NULL_POINTER;
                 // The destination abstraction.
                 void* da = NULL_POINTER;
-                int* dac = INTEGER_NULL_POINTER;
-                int* das = INTEGER_NULL_POINTER;
+                int* dac = NULL_POINTER;
+                int* das = NULL_POINTER;
                 // The destination model.
                 void* dm = NULL_POINTER;
-                int* dmc = INTEGER_NULL_POINTER;
-                int* dms = INTEGER_NULL_POINTER;
+                int* dmc = NULL_POINTER;
+                int* dms = NULL_POINTER;
                 // The destination details.
                 void* dd = NULL_POINTER;
-                int* ddc = INTEGER_NULL_POINTER;
-                int* dds = INTEGER_NULL_POINTER;
+                int* ddc = NULL_POINTER;
+                int* dds = NULL_POINTER;
 
                 while (1) {
 
@@ -444,20 +444,20 @@ void decode_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4) {
                         smc = 0;
                         // Reset destination name.
                         dn = NULL_POINTER;
-                        dnc = INTEGER_NULL_POINTER;
-                        dns = INTEGER_NULL_POINTER;
+                        dnc = NULL_POINTER;
+                        dns = NULL_POINTER;
                         // Reset destination abstraction.
                         da = NULL_POINTER;
-                        dac = INTEGER_NULL_POINTER;
-                        das = INTEGER_NULL_POINTER;
+                        dac = NULL_POINTER;
+                        das = NULL_POINTER;
                         // Reset destination model.
                         dm = NULL_POINTER;
-                        dmc = INTEGER_NULL_POINTER;
-                        dms = INTEGER_NULL_POINTER;
+                        dmc = NULL_POINTER;
+                        dms = NULL_POINTER;
                         // Reset destination details.
                         dd = NULL_POINTER;
-                        ddc = INTEGER_NULL_POINTER;
-                        dds = INTEGER_NULL_POINTER;
+                        ddc = NULL_POINTER;
+                        dds = NULL_POINTER;
                     }
 
                     c = c->next;

@@ -24,7 +24,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.10 $ $Date: 2005-07-28 12:52:14 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2005-07-29 15:48:51 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -118,7 +118,7 @@ void test_character_array_single_element() {
     fputs((char*) c, stdout);
 
     int i = 0;
-    char* catest = CHARACTER_NULL_POINTER;
+    char* catest = NULL_POINTER;
 
     while (1) {
 
@@ -211,7 +211,7 @@ void test_pointer_return() {
 
     // The character array (including new line and null termination character).
     void* c = NULL_POINTER;
-    int* cs = INTEGER_NULL_POINTER;
+    int* cs = NULL_POINTER;
 
     // Create character array.
     c = (void*) "Hello World!";
@@ -255,7 +255,7 @@ void test_pointer_array() {
     fprintf(stderr, "c: %s\n", (char*) c);
 
     // The pointer array.
-    void** p = POINTER_NULL_POINTER;
+    void** p = NULL_POINTER;
     int ps = 1;
 
     // Create pointer array.
@@ -500,21 +500,21 @@ void test_knowledge_model(void* p0, void* p1, int level) {
         // The loop index.
         int i = 0;
         // The element name.
-        void** n = POINTER_NULL_POINTER;
-        void** nc = POINTER_NULL_POINTER;
-        void** ns = POINTER_NULL_POINTER;
+        void** n = NULL_POINTER;
+        void** nc = NULL_POINTER;
+        void** ns = NULL_POINTER;
         // The element abstraction.
-        void** a = POINTER_NULL_POINTER;
-        void** ac = POINTER_NULL_POINTER;
-        void** as = POINTER_NULL_POINTER;
+        void** a = NULL_POINTER;
+        void** ac = NULL_POINTER;
+        void** as = NULL_POINTER;
         // The element model.
-        void** m = POINTER_NULL_POINTER;
-        void** mc = POINTER_NULL_POINTER;
-        void** ms = POINTER_NULL_POINTER;
+        void** m = NULL_POINTER;
+        void** mc = NULL_POINTER;
+        void** ms = NULL_POINTER;
         // The element details.
-        void** d = POINTER_NULL_POINTER;
-        void** dc = POINTER_NULL_POINTER;
-        void** ds = POINTER_NULL_POINTER;
+        void** d = NULL_POINTER;
+        void** dc = NULL_POINTER;
+        void** ds = NULL_POINTER;
         // The comparison result.
         int r = 0;
 
@@ -599,21 +599,21 @@ void test_knowledge_model(void* p0, void* p1, int level) {
             }
 
             // Reset element name.
-            n = POINTER_NULL_POINTER;
-            nc = POINTER_NULL_POINTER;
-            ns = POINTER_NULL_POINTER;
+            n = NULL_POINTER;
+            nc = NULL_POINTER;
+            ns = NULL_POINTER;
             // Reset element abstraction.
-            a = POINTER_NULL_POINTER;
-            ac = POINTER_NULL_POINTER;
-            as = POINTER_NULL_POINTER;
+            a = NULL_POINTER;
+            ac = NULL_POINTER;
+            as = NULL_POINTER;
             // Reset element model.
-            m = POINTER_NULL_POINTER;
-            mc = POINTER_NULL_POINTER;
-            ms = POINTER_NULL_POINTER;
+            m = NULL_POINTER;
+            mc = NULL_POINTER;
+            ms = NULL_POINTER;
             // Reset element details.
-            d = POINTER_NULL_POINTER;
-            dc = POINTER_NULL_POINTER;
-            ds = POINTER_NULL_POINTER;
+            d = NULL_POINTER;
+            dc = NULL_POINTER;
+            ds = NULL_POINTER;
             // Reset comparison result.
             r = 0;
 
@@ -635,18 +635,18 @@ void test_knowledge_model(void* p0, void* p1, int level) {
  */
 void test_compound(void* comp, int* comp_count, int* index) {
 
-    void** n = POINTER_NULL_POINTER;
-    void** nc = POINTER_NULL_POINTER;
-    void** ns = POINTER_NULL_POINTER;
-    void** a = POINTER_NULL_POINTER;
-    void** ac = POINTER_NULL_POINTER;
-    void** as = POINTER_NULL_POINTER;
-    void** m = POINTER_NULL_POINTER;
-    void** mc = POINTER_NULL_POINTER;
-    void** ms = POINTER_NULL_POINTER;
-    void** d = POINTER_NULL_POINTER;
-    void** dc = POINTER_NULL_POINTER;
-    void** ds = POINTER_NULL_POINTER;
+    void** n = NULL_POINTER;
+    void** nc = NULL_POINTER;
+    void** ns = NULL_POINTER;
+    void** a = NULL_POINTER;
+    void** ac = NULL_POINTER;
+    void** as = NULL_POINTER;
+    void** m = NULL_POINTER;
+    void** mc = NULL_POINTER;
+    void** ms = NULL_POINTER;
+    void** d = NULL_POINTER;
+    void** dc = NULL_POINTER;
+    void** ds = NULL_POINTER;
 
     get_compound_element_name_by_index(comp, comp_count, index,
         &n, &nc, &ns);

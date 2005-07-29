@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.27 $ $Date: 2005-07-29 11:34:23 $ $Author: christian $
+ * @version $Revision: 1.28 $ $Date: 2005-07-29 15:48:51 $ $Author: christian $
  * @author Marcel Kiesling <makie2001@web.de>
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
@@ -33,7 +33,7 @@
 #include "../globals/constants/constant.c"
 #include "../globals/constants/integer_constants.c"
 #include "../globals/variables/variables.c"
-#include "../memoriser/accessor/accessor.c"
+#include "../memoriser/accessor.c"
 
 /**
  * Allocates the unix server socket.
@@ -43,17 +43,17 @@
 void allocate_unix_server_socket(void* p0) {
 
     // The unix server socket filename.
-    void* f = POINTER_NULL_POINTER;
+    void* f = NULL_POINTER;
 
     // Get unix server socket filename.
     get(p0, (void*) UNIX_SERVER_SOCKET_FILENAME_INTERNAL, (void*) &f, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-    if (f != POINTER_NULL_POINTER) {
+    if (f != NULL_POINTER) {
 
         log_message_debug("Allocate unix server socket.");
 
         // The unix server socket.
-        int* s = INTEGER_NULL_POINTER;
+        int* s = NULL_POINTER;
 
         // Create unix server socket.
         allocate((void*) &s, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
@@ -128,20 +128,20 @@ void allocate_unix_server_socket(void* p0) {
 void deallocate_unix_server_socket(void* p0) {
 
     // The unix server socket filename.
-    void* f = POINTER_NULL_POINTER;
+    void* f = NULL_POINTER;
 
     // Get unix server socket filename.
     get(p0, (void*) UNIX_SERVER_SOCKET_FILENAME_INTERNAL, (void*) &f, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-    if (f != POINTER_NULL_POINTER) {
+    if (f != NULL_POINTER) {
 
         // The unix server socket.
-        int* s = INTEGER_NULL_POINTER;
+        int* s = NULL_POINTER;
 
         // Get unix server socket.
         get(p0, (void*) UNIX_SERVER_SOCKET_INTERNAL, (void*) &s, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-        if (s != INTEGER_NULL_POINTER) {
+        if (s != NULL_POINTER) {
 
             log_message_debug("Deallocate unix server socket.");
 
@@ -272,12 +272,12 @@ void write_unix_socket(void* p0) {
 void read_unix_socket(void* p0) {
 
     // The unix server socket.
-    int* s = INTEGER_NULL_POINTER;
+    int* s = NULL_POINTER;
 
     // Get unix server socket.
     get(p0, (void*) UNIX_SERVER_SOCKET_INTERNAL, (void*) &s, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-    if (s != INTEGER_NULL_POINTER) {
+    if (s != NULL_POINTER) {
 
         log_message_debug("Read from unix socket.");
 

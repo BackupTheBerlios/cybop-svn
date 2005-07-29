@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.15 $ $Date: 2005-07-28 12:52:12 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2005-07-29 15:48:51 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -114,14 +114,14 @@ void manage(void* p0, void* p1) {
 
     // The startup model abstraction, model, details.
     void* ma = NULL_POINTER;
-    int* mac = INTEGER_NULL_POINTER;
-    int* mas = INTEGER_NULL_POINTER;
+    int* mac = NULL_POINTER;
+    int* mas = NULL_POINTER;
     void* mm = NULL_POINTER;
-    int* mmc = INTEGER_NULL_POINTER;
-    int* mms = INTEGER_NULL_POINTER;
+    int* mmc = NULL_POINTER;
+    int* mms = NULL_POINTER;
     void* md = NULL_POINTER;
-    int* mdc = INTEGER_NULL_POINTER;
-    int* mds = INTEGER_NULL_POINTER;
+    int* mdc = NULL_POINTER;
+    int* mds = NULL_POINTER;
 
     // Create startup model abstraction, model, details.
     allocate((void*) &mac, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
@@ -155,7 +155,7 @@ void manage(void* p0, void* p1) {
     log_message_debug("Add startup model as signal to signal memory.");
 
     // The signal id.
-    int* id = INTEGER_NULL_POINTER;
+    int* id = NULL_POINTER;
     allocate((void*) &id, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
     *id = 0;
     get_new_signal_id(s, (void*) sc, (void*) id);

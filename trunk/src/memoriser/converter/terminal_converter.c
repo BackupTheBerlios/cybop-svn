@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2005-07-28 23:06:34 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2005-07-29 15:48:51 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -74,48 +74,48 @@ void serialise_terminal(void* p0, void* p1, void* p2, void* p3, void* p4) {
         log_message_debug("Serialise terminal.");
 
         // The part abstraction, model, details.
-        void** a = POINTER_NULL_POINTER;
-        void** ac = POINTER_NULL_POINTER;
-        void** as = POINTER_NULL_POINTER;
-        void** m = POINTER_NULL_POINTER;
-        void** mc = POINTER_NULL_POINTER;
-        void** ms = POINTER_NULL_POINTER;
-        void** d = POINTER_NULL_POINTER;
-        void** dc = POINTER_NULL_POINTER;
-        void** ds = POINTER_NULL_POINTER;
+        void** a = NULL_POINTER;
+        void** ac = NULL_POINTER;
+        void** as = NULL_POINTER;
+        void** m = NULL_POINTER;
+        void** mc = NULL_POINTER;
+        void** ms = NULL_POINTER;
+        void** d = NULL_POINTER;
+        void** dc = NULL_POINTER;
+        void** ds = NULL_POINTER;
 
         // The part position.
-        void** pa = POINTER_NULL_POINTER;
-        void** pac = POINTER_NULL_POINTER;
-        void** pas = POINTER_NULL_POINTER;
-        void** pm = POINTER_NULL_POINTER;
-        void** pmc = POINTER_NULL_POINTER;
-        void** pms = POINTER_NULL_POINTER;
-        void** pd = POINTER_NULL_POINTER;
-        void** pdc = POINTER_NULL_POINTER;
-        void** pds = POINTER_NULL_POINTER;
+        void** pa = NULL_POINTER;
+        void** pac = NULL_POINTER;
+        void** pas = NULL_POINTER;
+        void** pm = NULL_POINTER;
+        void** pmc = NULL_POINTER;
+        void** pms = NULL_POINTER;
+        void** pd = NULL_POINTER;
+        void** pdc = NULL_POINTER;
+        void** pds = NULL_POINTER;
 
         // The part size.
-        void** sa = POINTER_NULL_POINTER;
-        void** sac = POINTER_NULL_POINTER;
-        void** sas = POINTER_NULL_POINTER;
-        void** sm = POINTER_NULL_POINTER;
-        void** smc = POINTER_NULL_POINTER;
-        void** sms = POINTER_NULL_POINTER;
-        void** sd = POINTER_NULL_POINTER;
-        void** sdc = POINTER_NULL_POINTER;
-        void** sds = POINTER_NULL_POINTER;
+        void** sa = NULL_POINTER;
+        void** sac = NULL_POINTER;
+        void** sas = NULL_POINTER;
+        void** sm = NULL_POINTER;
+        void** smc = NULL_POINTER;
+        void** sms = NULL_POINTER;
+        void** sd = NULL_POINTER;
+        void** sdc = NULL_POINTER;
+        void** sds = NULL_POINTER;
 
         // The part colour.
-        void** ca = POINTER_NULL_POINTER;
-        void** cac = POINTER_NULL_POINTER;
-        void** cas = POINTER_NULL_POINTER;
-        void** cm = POINTER_NULL_POINTER;
-        void** cmc = POINTER_NULL_POINTER;
-        void** cms = POINTER_NULL_POINTER;
-        void** cd = POINTER_NULL_POINTER;
-        void** cdc = POINTER_NULL_POINTER;
-        void** cds = POINTER_NULL_POINTER;
+        void** ca = NULL_POINTER;
+        void** cac = NULL_POINTER;
+        void** cas = NULL_POINTER;
+        void** cm = NULL_POINTER;
+        void** cmc = NULL_POINTER;
+        void** cms = NULL_POINTER;
+        void** cd = NULL_POINTER;
+        void** cdc = NULL_POINTER;
+        void** cds = NULL_POINTER;
 
         // The part position x, y, z.
         int px = -1;

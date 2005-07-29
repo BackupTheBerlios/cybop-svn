@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2005-07-28 12:52:11 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2005-07-29 15:48:51 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -88,19 +88,19 @@ void startup_tcp_socket( void* internals, void* know,
             fprintf(stderr, "DEBUG: The port is: %d \n", *(int*)socket_port_model);
 
             // The tcp server socket.
-            int* s = INTEGER_NULL_POINTER;
+            int* s = NULL_POINTER;
             // The tcp client sockets.
             void* cs = NULL_POINTER;
-            int* csc = INTEGER_NULL_POINTER;
-            int* css = INTEGER_NULL_POINTER;
+            int* csc = NULL_POINTER;
+            int* css = NULL_POINTER;
             // The activation flag.
-            int* af = INTEGER_NULL_POINTER;
+            int* af = NULL_POINTER;
             // The blocking flag.
-            int* bf = INTEGER_NULL_POINTER;
+            int* bf = NULL_POINTER;
             // The tcp signal ids.
             void* id = NULL_POINTER;
-            int* idc = INTEGER_NULL_POINTER;
-            int* ids = INTEGER_NULL_POINTER;
+            int* idc = NULL_POINTER;
+            int* ids = NULL_POINTER;
 
             // Create tcp server socket.
             allocate((void*) &s, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.15 $ $Date: 2005-07-28 12:52:11 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2005-07-29 15:48:51 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -210,7 +210,7 @@ void send_message(void* p0, void* p1,
             if (i >= 0) {
 
                 // The client socket.
-                int* cs = INTEGER_NULL_POINTER;
+                int* cs = NULL_POINTER;
 
                 get_client_socket_number_for_index(p2, (void*) &i, (void*) &cs);
 
@@ -225,8 +225,8 @@ void send_message(void* p0, void* p1,
 
                     //create the destination for the send model
                     void* dest = NULL_POINTER;
-                    int* dest_count = INTEGER_NULL_POINTER;
-                    int* dest_size = INTEGER_NULL_POINTER;
+                    int* dest_count = NULL_POINTER;
+                    int* dest_size = NULL_POINTER;
 
                     allocate(&dest_count, INTEGER_COUNT, INTEGER_ABSTRACTION, INTEGER_ABSTRACTION_COUNT);
                     allocate(&dest_size, INTEGER_COUNT, INTEGER_ABSTRACTION, INTEGER_ABSTRACTION_COUNT);
@@ -326,7 +326,7 @@ void refresh_url(void* p0, void* p1,
         if (i >= 0) {
 
             // The client socket.
-            int* cs = INTEGER_NULL_POINTER;
+            int* cs = NULL_POINTER;
 
             get_client_socket_number_for_index(p2, (void*) &i, (void*) &cs);
 
@@ -339,8 +339,8 @@ void refresh_url(void* p0, void* p1,
 
                 //create the destination for the send model
                 void* dest = NULL_POINTER;
-                int* dest_count = INTEGER_NULL_POINTER;
-                int* dest_size = INTEGER_NULL_POINTER;
+                int* dest_count = NULL_POINTER;
+                int* dest_size = NULL_POINTER;
 
                 allocate(&dest_count, INTEGER_COUNT, INTEGER_ABSTRACTION, INTEGER_ABSTRACTION_COUNT);
                 allocate(&dest_size, INTEGER_COUNT, INTEGER_ABSTRACTION, INTEGER_ABSTRACTION_COUNT);

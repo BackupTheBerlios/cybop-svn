@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.12 $ $Date: 2005-07-29 11:34:22 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2005-07-29 15:48:51 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -205,6 +205,32 @@ static int* TUI_PROPERTIES_FOREGROUND_INDEX = NUMBER_6_INTEGER_ARRAY;
 
 /** The tui properties background index. */
 static int* TUI_PROPERTIES_BACKGROUND_INDEX = NUMBER_7_INTEGER_ARRAY;
+
+//
+// Textual user interface (tui) position.
+//
+
+/** The tui position x index. */
+static int* TUI_POSITION_X_INDEX = NUMBER_0_INTEGER_ARRAY;
+
+/** The tui position y index. */
+static int* TUI_POSITION_Y_INDEX = NUMBER_1_INTEGER_ARRAY;
+
+/** The tui position z index. */
+static int* TUI_POSITION_Z_INDEX = NUMBER_2_INTEGER_ARRAY;
+
+//
+// Textual user interface (tui) size.
+//
+
+/** The tui size x index. */
+static int* TUI_SIZE_X_INDEX = NUMBER_0_INTEGER_ARRAY;
+
+/** The tui size y index. */
+static int* TUI_SIZE_Y_INDEX = NUMBER_1_INTEGER_ARRAY;
+
+/** The tui size z index. */
+static int* TUI_SIZE_Z_INDEX = NUMBER_2_INTEGER_ARRAY;
 
 //
 // Compound.

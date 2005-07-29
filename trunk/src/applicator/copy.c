@@ -22,7 +22,7 @@
  *
  * this handel a loop
  *
- * @version $Revision: 1.4 $ $Date: 2005-07-25 21:01:01 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-07-29 15:48:51 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -94,30 +94,30 @@ void copy(void* param, int* param_count, void* p2, void* p3, void* p4, void* pri
     log_message_debug("Copy primitive model.");
 
     // The source name abstraction.
-    void** sa = POINTER_NULL_POINTER;
-    void** sac = POINTER_NULL_POINTER;
-    void** sas = POINTER_NULL_POINTER;
+    void** sa = NULL_POINTER;
+    void** sac = NULL_POINTER;
+    void** sas = NULL_POINTER;
     // The source model.
-    void** sm = POINTER_NULL_POINTER;
-    void** smc = POINTER_NULL_POINTER;
-    void** sms = POINTER_NULL_POINTER;
+    void** sm = NULL_POINTER;
+    void** smc = NULL_POINTER;
+    void** sms = NULL_POINTER;
     // The source details.
-    void** sd = POINTER_NULL_POINTER;
-    void** sdc = POINTER_NULL_POINTER;
-    void** sds = POINTER_NULL_POINTER;
+    void** sd = NULL_POINTER;
+    void** sdc = NULL_POINTER;
+    void** sds = NULL_POINTER;
 
     // The destination abstraction.
-    void** da = POINTER_NULL_POINTER;
-    void** dac = POINTER_NULL_POINTER;
-    void** das = POINTER_NULL_POINTER;
+    void** da = NULL_POINTER;
+    void** dac = NULL_POINTER;
+    void** das = NULL_POINTER;
     // The destination model.
-    void** dm = POINTER_NULL_POINTER;
-    void** dmc = POINTER_NULL_POINTER;
-    void** dms = POINTER_NULL_POINTER;
+    void** dm = NULL_POINTER;
+    void** dmc = NULL_POINTER;
+    void** dms = NULL_POINTER;
     // The destination details.
-    void** dd = POINTER_NULL_POINTER;
-    void** ddc = POINTER_NULL_POINTER;
-    void** dds = POINTER_NULL_POINTER;
+    void** dd = NULL_POINTER;
+    void** ddc = NULL_POINTER;
+    void** dds = NULL_POINTER;
 
     // Get source.
     get_real_compound_element_by_name(param, param_count,
@@ -138,25 +138,25 @@ void copy(void* param, int* param_count, void* p2, void* p3, void* p4, void* pri
         p2, p3);
 
     // Check source.
-    if ((sa != POINTER_NULL_POINTER)
-        && (sac != POINTER_NULL_POINTER)
-        && (sas != POINTER_NULL_POINTER)
-        && (sm != POINTER_NULL_POINTER)
-        && (smc != POINTER_NULL_POINTER)
-        && (sms != POINTER_NULL_POINTER)
-        && (sd != POINTER_NULL_POINTER)
-        && (sdc != POINTER_NULL_POINTER)
-        && (sds != POINTER_NULL_POINTER)
+    if ((sa != NULL_POINTER)
+        && (sac != NULL_POINTER)
+        && (sas != NULL_POINTER)
+        && (sm != NULL_POINTER)
+        && (smc != NULL_POINTER)
+        && (sms != NULL_POINTER)
+        && (sd != NULL_POINTER)
+        && (sdc != NULL_POINTER)
+        && (sds != NULL_POINTER)
         // Check destination.
-        && (da != POINTER_NULL_POINTER)
-        && (dac != POINTER_NULL_POINTER)
-        && (das != POINTER_NULL_POINTER)
-        && (dm != POINTER_NULL_POINTER)
-        && (dmc != POINTER_NULL_POINTER)
-        && (dms != POINTER_NULL_POINTER)
-        && (dd != POINTER_NULL_POINTER)
-        && (ddc != POINTER_NULL_POINTER)
-        && (dds != POINTER_NULL_POINTER)) {
+        && (da != NULL_POINTER)
+        && (dac != NULL_POINTER)
+        && (das != NULL_POINTER)
+        && (dm != NULL_POINTER)
+        && (dmc != NULL_POINTER)
+        && (dms != NULL_POINTER)
+        && (dd != NULL_POINTER)
+        && (ddc != NULL_POINTER)
+        && (dds != NULL_POINTER)) {
 
         int r1 = 0;
         int r2 = 0;
@@ -203,56 +203,56 @@ void copy_property(void* param, int* param_count, void* p2, void* p3, void* p4, 
     log_message_debug("Copy property.");
 
     // The source name abstraction.
-    void** sa = POINTER_NULL_POINTER;
-    void** sac = POINTER_NULL_POINTER;
-    void** sas = POINTER_NULL_POINTER;
+    void** sa = NULL_POINTER;
+    void** sac = NULL_POINTER;
+    void** sas = NULL_POINTER;
     // The source model.
-    void** sm = POINTER_NULL_POINTER;
-    void** smc = POINTER_NULL_POINTER;
-    void** sms = POINTER_NULL_POINTER;
+    void** sm = NULL_POINTER;
+    void** smc = NULL_POINTER;
+    void** sms = NULL_POINTER;
     // The source details.
-    void** sd = POINTER_NULL_POINTER;
-    void** sdc = POINTER_NULL_POINTER;
-    void** sds = POINTER_NULL_POINTER;
+    void** sd = NULL_POINTER;
+    void** sdc = NULL_POINTER;
+    void** sds = NULL_POINTER;
 
     // The destination abstraction.
-    void** da = POINTER_NULL_POINTER;
-    void** dac = POINTER_NULL_POINTER;
-    void** das = POINTER_NULL_POINTER;
+    void** da = NULL_POINTER;
+    void** dac = NULL_POINTER;
+    void** das = NULL_POINTER;
     // The destination model.
-    void** dm = POINTER_NULL_POINTER;
-    void** dmc = POINTER_NULL_POINTER;
-    void** dms = POINTER_NULL_POINTER;
+    void** dm = NULL_POINTER;
+    void** dmc = NULL_POINTER;
+    void** dms = NULL_POINTER;
     // The destination details.
-    void** dd = POINTER_NULL_POINTER;
-    void** ddc = POINTER_NULL_POINTER;
-    void** dds = POINTER_NULL_POINTER;
+    void** dd = NULL_POINTER;
+    void** ddc = NULL_POINTER;
+    void** dds = NULL_POINTER;
 
     // The destination property name abstraction.
-    void** dpa = POINTER_NULL_POINTER;
-    void** dpac = POINTER_NULL_POINTER;
-    void** dpas = POINTER_NULL_POINTER;
+    void** dpa = NULL_POINTER;
+    void** dpac = NULL_POINTER;
+    void** dpas = NULL_POINTER;
     // The destination property model.
-    void** dpm = POINTER_NULL_POINTER;
-    void** dpmc = POINTER_NULL_POINTER;
-    void** dpms = POINTER_NULL_POINTER;
+    void** dpm = NULL_POINTER;
+    void** dpmc = NULL_POINTER;
+    void** dpms = NULL_POINTER;
     // The destination property details.
-    void** dpd = POINTER_NULL_POINTER;
-    void** dpdc = POINTER_NULL_POINTER;
-    void** dpds = POINTER_NULL_POINTER;
+    void** dpd = NULL_POINTER;
+    void** dpdc = NULL_POINTER;
+    void** dpds = NULL_POINTER;
 
     // The destination property name abstraction.
-    void** pa = POINTER_NULL_POINTER;
-    void** pac = POINTER_NULL_POINTER;
-    void** pas = POINTER_NULL_POINTER;
+    void** pa = NULL_POINTER;
+    void** pac = NULL_POINTER;
+    void** pas = NULL_POINTER;
     // The destination property model.
-    void** pm = POINTER_NULL_POINTER;
-    void** pmc = POINTER_NULL_POINTER;
-    void** pms = POINTER_NULL_POINTER;
+    void** pm = NULL_POINTER;
+    void** pmc = NULL_POINTER;
+    void** pms = NULL_POINTER;
     // The destination property details.
-    void** pd = POINTER_NULL_POINTER;
-    void** pdc = POINTER_NULL_POINTER;
-    void** pds = POINTER_NULL_POINTER;
+    void** pd = NULL_POINTER;
+    void** pdc = NULL_POINTER;
+    void** pds = NULL_POINTER;
 
     // Get source.
     get_real_compound_element_by_name(param, param_count,
@@ -282,35 +282,35 @@ void copy_property(void* param, int* param_count, void* p2, void* p3, void* p4, 
         p2, p3);
 
     // Check source.
-    if ((sa != POINTER_NULL_POINTER)
-        && (sac != POINTER_NULL_POINTER)
-        && (sas != POINTER_NULL_POINTER)
-        && (sm != POINTER_NULL_POINTER)
-        && (smc != POINTER_NULL_POINTER)
-        && (sms != POINTER_NULL_POINTER)
-        && (sd != POINTER_NULL_POINTER)
-        && (sdc != POINTER_NULL_POINTER)
-        && (sds != POINTER_NULL_POINTER)
+    if ((sa != NULL_POINTER)
+        && (sac != NULL_POINTER)
+        && (sas != NULL_POINTER)
+        && (sm != NULL_POINTER)
+        && (smc != NULL_POINTER)
+        && (sms != NULL_POINTER)
+        && (sd != NULL_POINTER)
+        && (sdc != NULL_POINTER)
+        && (sds != NULL_POINTER)
         // Check destination.
-        && (da != POINTER_NULL_POINTER)
-        && (dac != POINTER_NULL_POINTER)
-        && (das != POINTER_NULL_POINTER)
-        && (dm != POINTER_NULL_POINTER)
-        && (dmc != POINTER_NULL_POINTER)
-        && (dms != POINTER_NULL_POINTER)
-        && (dd != POINTER_NULL_POINTER)
-        && (ddc != POINTER_NULL_POINTER)
-        && (dds != POINTER_NULL_POINTER)
+        && (da != NULL_POINTER)
+        && (dac != NULL_POINTER)
+        && (das != NULL_POINTER)
+        && (dm != NULL_POINTER)
+        && (dmc != NULL_POINTER)
+        && (dms != NULL_POINTER)
+        && (dd != NULL_POINTER)
+        && (ddc != NULL_POINTER)
+        && (dds != NULL_POINTER)
         //check destination property
-        && (dpa != POINTER_NULL_POINTER)
-        && (dpac != POINTER_NULL_POINTER)
-        && (dpas != POINTER_NULL_POINTER)
-        && (dpm != POINTER_NULL_POINTER)
-        && (dpmc != POINTER_NULL_POINTER)
-        && (dpms != POINTER_NULL_POINTER)
-        && (dpd != POINTER_NULL_POINTER)
-        && (dpdc != POINTER_NULL_POINTER)
-        && (dpds != POINTER_NULL_POINTER)) {
+        && (dpa != NULL_POINTER)
+        && (dpac != NULL_POINTER)
+        && (dpas != NULL_POINTER)
+        && (dpm != NULL_POINTER)
+        && (dpmc != NULL_POINTER)
+        && (dpms != NULL_POINTER)
+        && (dpd != NULL_POINTER)
+        && (dpdc != NULL_POINTER)
+        && (dpds != NULL_POINTER)) {
 
         //check the abstraction for the destination property
         //this must be a string
@@ -327,15 +327,15 @@ void copy_property(void* param, int* param_count, void* p2, void* p3, void* p4, 
                 (void*) &pm, (void*) &pmc, (void*) &pms,
                 (void*) &pd, (void*) &pdc, (void*) &pds);
 
-            if ((pa != POINTER_NULL_POINTER)
-                && (pac != POINTER_NULL_POINTER)
-                && (pas != POINTER_NULL_POINTER)
-                && (pm != POINTER_NULL_POINTER)
-                && (pmc != POINTER_NULL_POINTER)
-                && (pms != POINTER_NULL_POINTER)
-                && (pd != POINTER_NULL_POINTER)
-                && (pdc != POINTER_NULL_POINTER)
-                && (pds != POINTER_NULL_POINTER)) {
+            if ((pa != NULL_POINTER)
+                && (pac != NULL_POINTER)
+                && (pas != NULL_POINTER)
+                && (pm != NULL_POINTER)
+                && (pmc != NULL_POINTER)
+                && (pms != NULL_POINTER)
+                && (pd != NULL_POINTER)
+                && (pdc != NULL_POINTER)
+                && (pds != NULL_POINTER)) {
 
                 int r1 = 0;
                 int r2 = 0;

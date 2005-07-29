@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2005-07-25 21:01:01 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2005-07-29 15:48:51 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -189,43 +189,43 @@ void add(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
 /*??
     // The opernad 1 abstraction.
-    void** op1a = POINTER_NULL_POINTER;
-    void** op1ac = POINTER_NULL_POINTER;
-    void** op1as = POINTER_NULL_POINTER;
+    void** op1a = NULL_POINTER;
+    void** op1ac = NULL_POINTER;
+    void** op1as = NULL_POINTER;
     // The opmmand 1 model.
-    void** op1m = POINTER_NULL_POINTER;
-    void** op1mc = POINTER_NULL_POINTER;
-    void** op1ms = POINTER_NULL_POINTER;
+    void** op1m = NULL_POINTER;
+    void** op1mc = NULL_POINTER;
+    void** op1ms = NULL_POINTER;
     // The opmmand 1 details.
-    void** op1d = POINTER_NULL_POINTER;
-    void** op1dc = POINTER_NULL_POINTER;
-    void** op1ds = POINTER_NULL_POINTER;
+    void** op1d = NULL_POINTER;
+    void** op1dc = NULL_POINTER;
+    void** op1ds = NULL_POINTER;
 
     // The summand 2 abstraction.
-    void** op2a = POINTER_NULL_POINTER;
-    void** op2ac = POINTER_NULL_POINTER;
-    void** op2as = POINTER_NULL_POINTER;
+    void** op2a = NULL_POINTER;
+    void** op2ac = NULL_POINTER;
+    void** op2as = NULL_POINTER;
     // The opmmand 2 model.
-    void** op2m = POINTER_NULL_POINTER;
-    void** op2mc = POINTER_NULL_POINTER;
-    void** op2ms = POINTER_NULL_POINTER;
+    void** op2m = NULL_POINTER;
+    void** op2mc = NULL_POINTER;
+    void** op2ms = NULL_POINTER;
     // The opmmand 2 details.
-    void** op2d = POINTER_NULL_POINTER;
-    void** op2dc = POINTER_NULL_POINTER;
-    void** op2ds = POINTER_NULL_POINTER;
+    void** op2d = NULL_POINTER;
+    void** op2dc = NULL_POINTER;
+    void** op2ds = NULL_POINTER;
 
     // The result abstraction.
-    void** ra = POINTER_NULL_POINTER;
-    void** rac = POINTER_NULL_POINTER;
-    void** ras = POINTER_NULL_POINTER;
+    void** ra = NULL_POINTER;
+    void** rac = NULL_POINTER;
+    void** ras = NULL_POINTER;
     // The result index model.
-    void** rm = POINTER_NULL_POINTER;
-    void** rmc = POINTER_NULL_POINTER;
-    void** rms = POINTER_NULL_POINTER;
+    void** rm = NULL_POINTER;
+    void** rmc = NULL_POINTER;
+    void** rms = NULL_POINTER;
     // The result index details.
-    void** rd = POINTER_NULL_POINTER;
-    void** rdc = POINTER_NULL_POINTER;
-    void** rds = POINTER_NULL_POINTER;
+    void** rd = NULL_POINTER;
+    void** rdc = NULL_POINTER;
+    void** rds = NULL_POINTER;
 
     // get the operand 1
     get_real_compound_element_by_name( p0, p1,
@@ -255,35 +255,35 @@ void add(void* p0, void* p1, void* p2, void* p3, void* p4) {
         p2, p3 );
 
     // Check operand 1.
-    if (   (op1a != POINTER_NULL_POINTER)
-        && (op1ac != POINTER_NULL_POINTER)
-        && (op1as != POINTER_NULL_POINTER)
-        && (op1m != POINTER_NULL_POINTER)
-        && (op1mc != POINTER_NULL_POINTER)
-        && (op1ms != POINTER_NULL_POINTER)
-        && (op1d != POINTER_NULL_POINTER)
-        && (op1dc != POINTER_NULL_POINTER)
-        && (op1ds != POINTER_NULL_POINTER)
+    if (   (op1a != NULL_POINTER)
+        && (op1ac != NULL_POINTER)
+        && (op1as != NULL_POINTER)
+        && (op1m != NULL_POINTER)
+        && (op1mc != NULL_POINTER)
+        && (op1ms != NULL_POINTER)
+        && (op1d != NULL_POINTER)
+        && (op1dc != NULL_POINTER)
+        && (op1ds != NULL_POINTER)
         // Check operand 2.
-        && (op2a != POINTER_NULL_POINTER)
-        && (op2ac != POINTER_NULL_POINTER)
-        && (op2as != POINTER_NULL_POINTER)
-        && (op2m != POINTER_NULL_POINTER)
-        && (op2mc != POINTER_NULL_POINTER)
-        && (op2ms != POINTER_NULL_POINTER)
-        && (op2d != POINTER_NULL_POINTER)
-        && (op2dc != POINTER_NULL_POINTER)
-        && (op2ds != POINTER_NULL_POINTER)
+        && (op2a != NULL_POINTER)
+        && (op2ac != NULL_POINTER)
+        && (op2as != NULL_POINTER)
+        && (op2m != NULL_POINTER)
+        && (op2mc != NULL_POINTER)
+        && (op2ms != NULL_POINTER)
+        && (op2d != NULL_POINTER)
+        && (op2dc != NULL_POINTER)
+        && (op2ds != NULL_POINTER)
         // result.
-        && (ra != POINTER_NULL_POINTER)
-        && (rac != POINTER_NULL_POINTER)
-        && (ras != POINTER_NULL_POINTER)
-        && (rm != POINTER_NULL_POINTER)
-        && (rmc != POINTER_NULL_POINTER)
-        && (rms != POINTER_NULL_POINTER)
-        && (rd != POINTER_NULL_POINTER)
-        && (rdc != POINTER_NULL_POINTER)
-        && (rds != POINTER_NULL_POINTER)
+        && (ra != NULL_POINTER)
+        && (rac != NULL_POINTER)
+        && (ras != NULL_POINTER)
+        && (rm != NULL_POINTER)
+        && (rmc != NULL_POINTER)
+        && (rms != NULL_POINTER)
+        && (rd != NULL_POINTER)
+        && (rdc != NULL_POINTER)
+        && (rds != NULL_POINTER)
         )
     {
 

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.20 $ $Date: 2005-07-29 11:34:22 $ $Author: christian $
+ * @version $Revision: 1.21 $ $Date: 2005-07-29 15:48:51 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -71,7 +71,7 @@ void receive_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     int* ac = (int*) p1;
 
                     // Initialise terminated file name and its size.
-                    char* tn = CHARACTER_NULL_POINTER;
+                    char* tn = NULL_POINTER;
                     int tns = *nc + 1;
 
                     // Create terminated file name.
@@ -197,8 +197,25 @@ void send_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
     tc = *tic;
     ts = *tis;
 
-    if (t == NULL_POINTER) {
+    fprintf(stdout, "TEST: ti: %i\n", ti);
+    fprintf(stdout, "TEST: tic: %i\n", tic);
+    fprintf(stdout, "TEST: tis: %i\n", tis);
+    fprintf(stdout, "TEST: *ti: %i\n", *ti);
+    fprintf(stdout, "TEST: *tic: %i\n", *tic);
+    fprintf(stdout, "TEST: *tis: %i\n", *tis);
+//??    fprintf(stdout, "TEST: **tic: %i\n", **tic);
+//??    fprintf(stdout, "TEST: **tis: %i\n", **tis);
+    fprintf(stdout, "TEST: t: %i\n", t);
+    fprintf(stdout, "TEST: tc: %i\n", tc);
+    fprintf(stdout, "TEST: ts: %i\n", ts);
+//??    fprintf(stdout, "TEST: *tc: %i\n", *tc);
+//??    fprintf(stdout, "TEST: *ts: %i\n", *ts);
 
+//??    if (t == NULL_POINTER) {
+
+        log_message_debug("in");
+
+/*??
         // The vector count and size for z-, y-, x-dimension and properties.
         int* tcz = NULL_POINTER;
         int* tcy = NULL_POINTER;
@@ -256,6 +273,15 @@ void send_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
         set(ts, (void*) TUI_Y_DIMENSION_INDEX, (void*) tsy, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         set(ts, (void*) TUI_X_DIMENSION_INDEX, (void*) tsx, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         set(ts, (void*) TUI_PROPERTIES_INDEX, tsp, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+*/
+
+        // Allocate tui count and size.
+        allocate((void*) &tc, (void*) TUI_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+        allocate((void*) &ts, (void*) TUI_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+
+        // Initialise tui count and size.
+        set(tc, (void*) INTEGER_VALUE_INDEX, (void*) NUMBER_0_INTEGER, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+        set(tc, (void*) INTEGER_VALUE_INDEX, (void*) NUMBER_0_INTEGER, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
 
         // Allocate tui.
         allocate((void*) &t, (void*) ts, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
@@ -264,7 +290,9 @@ void send_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
         set(p0, (void*) TUI_INTERNAL, (void*) t, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         set(p0, (void*) TUI_COUNT_INTERNAL, (void*) tc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         set(p0, (void*) TUI_SIZE_INTERNAL, (void*) ts, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    }
+//??    }
+
+    log_message_debug("out");
 
     // Encode compound model into tui.
     encode((void*) &t, (void*) tc, (void*) ts, p3, p4, (void*) TUI_ABSTRACTION, (void*) TUI_ABSTRACTION_COUNT);

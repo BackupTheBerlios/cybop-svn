@@ -24,7 +24,7 @@
  * - receive a file stream into a byte array
  * - send a file stream from a byte array
  *
- * @version $Revision: 1.9 $ $Date: 2005-07-25 21:01:02 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2005-07-29 15:48:51 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -68,7 +68,7 @@ void read_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     void** d = (void**) p0;
 
                     // The terminated file name.
-                    void* tn = CHARACTER_NULL_POINTER;
+                    void* tn = NULL_POINTER;
                     int tns = *sc + 1;
 
                     // Create terminated file name.

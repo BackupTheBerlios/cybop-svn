@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2005-07-28 12:52:12 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2005-07-29 15:48:51 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -53,18 +53,18 @@ void check(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6)
     // The shutdown flag.
     int f = 0;
     // The abstraction.
-    void** a = POINTER_NULL_POINTER;
-    void** ac = POINTER_NULL_POINTER;
+    void** a = NULL_POINTER;
+    void** ac = NULL_POINTER;
     // The model (signal operation).
-    void** m = POINTER_NULL_POINTER;
-    void** mc = POINTER_NULL_POINTER;
+    void** m = NULL_POINTER;
+    void** mc = NULL_POINTER;
     // The details (parameters).
-    void** d = POINTER_NULL_POINTER;
-    void** dc = POINTER_NULL_POINTER;
+    void** d = NULL_POINTER;
+    void** dc = NULL_POINTER;
     // The priority.
-    void** p = POINTER_NULL_POINTER;
+    void** p = NULL_POINTER;
     // The signal id.
-    void** id = POINTER_NULL_POINTER;
+    void** id = NULL_POINTER;
     // The direct execution flag.
     int x = 0;
     // The highest priority index.
@@ -73,8 +73,8 @@ void check(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6)
     int r = 0;
 
     //?? TODO: Delete this testing stuff from Rolf Holzmueller.
-    void** sf = POINTER_NULL_POINTER;
-    void** bf = POINTER_NULL_POINTER;
+    void** sf = NULL_POINTER;
+    void** bf = NULL_POINTER;
 
     // Run endless loop checking signal memory for signals.
     while (1) {
@@ -94,7 +94,7 @@ void check(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6)
         get(p0, (void*) TCP_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &sf, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         get(p0, (void*) TCP_SERVER_SOCKET_BLOCKING_INTERNAL, (void*) &bf, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-        if ((sf != POINTER_NULL_POINTER) && (bf != NULL_POINTER)) {
+        if ((sf != NULL_POINTER) && (bf != NULL_POINTER)) {
 
             if ((*sf != NULL_POINTER) && (*bf != NULL_POINTER)) {
 
@@ -154,18 +154,18 @@ void check(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6)
 //??            fprintf(stderr, "TEST check post integer destroy i: %i\n", i);
 
             // Reset abstraction.
-            a = POINTER_NULL_POINTER;
-            ac = POINTER_NULL_POINTER;
+            a = NULL_POINTER;
+            ac = NULL_POINTER;
             // Reset model (signal operation).
-            m = POINTER_NULL_POINTER;
-            mc = POINTER_NULL_POINTER;
+            m = NULL_POINTER;
+            mc = NULL_POINTER;
             // Reset details (parameters).
-            d = POINTER_NULL_POINTER;
-            dc = POINTER_NULL_POINTER;
+            d = NULL_POINTER;
+            dc = NULL_POINTER;
             // Reset priority.
-            p = POINTER_NULL_POINTER;
+            p = NULL_POINTER;
             // Reset main signal id.
-            id = POINTER_NULL_POINTER;
+            id = NULL_POINTER;
             // Reset highest priority index.
             i = -1;
             // Reset comparison result.

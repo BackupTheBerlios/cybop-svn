@@ -22,7 +22,7 @@
  *
  * this handel a loop
  *
- * @version $Revision: 1.7 $ $Date: 2005-07-25 21:01:01 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2005-07-29 15:48:51 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -73,30 +73,30 @@ void loop(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
     log_message_debug("Loop program flow.");
 
     // The break flag abstraction.
-    void** bfa = POINTER_NULL_POINTER;
-    void** bfac = POINTER_NULL_POINTER;
-    void** bfas = POINTER_NULL_POINTER;
+    void** bfa = NULL_POINTER;
+    void** bfac = NULL_POINTER;
+    void** bfas = NULL_POINTER;
     // The break flag model.
-    void** bfm = POINTER_NULL_POINTER;
-    void** bfmc = POINTER_NULL_POINTER;
-    void** bfms = POINTER_NULL_POINTER;
+    void** bfm = NULL_POINTER;
+    void** bfmc = NULL_POINTER;
+    void** bfms = NULL_POINTER;
     // The break flag details.
-    void** bfd = POINTER_NULL_POINTER;
-    void** bfdc = POINTER_NULL_POINTER;
-    void** bfds = POINTER_NULL_POINTER;
+    void** bfd = NULL_POINTER;
+    void** bfdc = NULL_POINTER;
+    void** bfds = NULL_POINTER;
 
     // The model abstraction.
-    void** ma = POINTER_NULL_POINTER;
-    void** mac = POINTER_NULL_POINTER;
-    void** mas = POINTER_NULL_POINTER;
+    void** ma = NULL_POINTER;
+    void** mac = NULL_POINTER;
+    void** mas = NULL_POINTER;
     // The model model.
-    void** mm = POINTER_NULL_POINTER;
-    void** mmc = POINTER_NULL_POINTER;
-    void** mms = POINTER_NULL_POINTER;
+    void** mm = NULL_POINTER;
+    void** mmc = NULL_POINTER;
+    void** mms = NULL_POINTER;
     // The model details.
-    void** md = POINTER_NULL_POINTER;
-    void** mdc = POINTER_NULL_POINTER;
-    void** mds = POINTER_NULL_POINTER;
+    void** md = NULL_POINTER;
+    void** mdc = NULL_POINTER;
+    void** mds = NULL_POINTER;
 
     // Get break flag.
     get_real_compound_element_by_name(p8, p9,
@@ -115,25 +115,25 @@ void loop(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
         p1, p2);
 
     // Check break flag.
-    if ((bfa != POINTER_NULL_POINTER)
-        && (bfac != POINTER_NULL_POINTER)
-        && (bfas != POINTER_NULL_POINTER)
-        && (bfm != POINTER_NULL_POINTER)
-        && (bfmc != POINTER_NULL_POINTER)
-        && (bfms != POINTER_NULL_POINTER)
-        && (bfd != POINTER_NULL_POINTER)
-        && (bfdc != POINTER_NULL_POINTER)
-        && (bfds != POINTER_NULL_POINTER)
+    if ((bfa != NULL_POINTER)
+        && (bfac != NULL_POINTER)
+        && (bfas != NULL_POINTER)
+        && (bfm != NULL_POINTER)
+        && (bfmc != NULL_POINTER)
+        && (bfms != NULL_POINTER)
+        && (bfd != NULL_POINTER)
+        && (bfdc != NULL_POINTER)
+        && (bfds != NULL_POINTER)
         // Check model.
-        && (ma != POINTER_NULL_POINTER)
-        && (mac != POINTER_NULL_POINTER)
-        && (mas != POINTER_NULL_POINTER)
-        && (mm != POINTER_NULL_POINTER)
-        && (mmc != POINTER_NULL_POINTER)
-        && (mms != POINTER_NULL_POINTER)
-        && (md != POINTER_NULL_POINTER)
-        && (mdc != POINTER_NULL_POINTER)
-        && (mds != POINTER_NULL_POINTER)) {
+        && (ma != NULL_POINTER)
+        && (mac != NULL_POINTER)
+        && (mas != NULL_POINTER)
+        && (mm != NULL_POINTER)
+        && (mmc != NULL_POINTER)
+        && (mms != NULL_POINTER)
+        && (md != NULL_POINTER)
+        && (mdc != NULL_POINTER)
+        && (mds != NULL_POINTER)) {
 
         // The comparison result.
         int r = 0;

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-07-27 23:10:48 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-07-29 15:48:51 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -64,7 +64,7 @@ void remove_integer_vector_element(void* p0, void* p1, void* p2) {
 /**
  * Gets the integer vector element.
  *
- * @param p0 the vector
+ * @param p0 the integer vector
  * @param p1 the index
  * @param p2 the vector element (Hand over as reference!)
  */

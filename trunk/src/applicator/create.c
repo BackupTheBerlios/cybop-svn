@@ -22,7 +22,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.10 $ $Date: 2005-07-29 11:34:22 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2005-07-29 15:48:51 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -381,69 +381,69 @@ void create_part(void* p0, void* p1, void* p2, void* p3, void* p4) {
     log_message_debug("Create part.");
 
     // The name name abstraction.
-    void** na = POINTER_NULL_POINTER;
-    void** nac = POINTER_NULL_POINTER;
-    void** nas = POINTER_NULL_POINTER;
+    void** na = NULL_POINTER;
+    void** nac = NULL_POINTER;
+    void** nas = NULL_POINTER;
     // The name name model.
-    void** nm = POINTER_NULL_POINTER;
-    void** nmc = POINTER_NULL_POINTER;
-    void** nms = POINTER_NULL_POINTER;
+    void** nm = NULL_POINTER;
+    void** nmc = NULL_POINTER;
+    void** nms = NULL_POINTER;
     // The name name details.
-    void** nd = POINTER_NULL_POINTER;
-    void** ndc = POINTER_NULL_POINTER;
-    void** nds = POINTER_NULL_POINTER;
+    void** nd = NULL_POINTER;
+    void** ndc = NULL_POINTER;
+    void** nds = NULL_POINTER;
 
     // The channel name abstraction.
-    void** ca = POINTER_NULL_POINTER;
-    void** cac = POINTER_NULL_POINTER;
-    void** cas = POINTER_NULL_POINTER;
+    void** ca = NULL_POINTER;
+    void** cac = NULL_POINTER;
+    void** cas = NULL_POINTER;
     // The channel name model.
-    void** cm = POINTER_NULL_POINTER;
-    void** cmc = POINTER_NULL_POINTER;
-    void** cms = POINTER_NULL_POINTER;
+    void** cm = NULL_POINTER;
+    void** cmc = NULL_POINTER;
+    void** cms = NULL_POINTER;
     // The channel name details.
-    void** cd = POINTER_NULL_POINTER;
-    void** cdc = POINTER_NULL_POINTER;
-    void** cds = POINTER_NULL_POINTER;
+    void** cd = NULL_POINTER;
+    void** cdc = NULL_POINTER;
+    void** cds = NULL_POINTER;
 
     // The abstraction name abstraction.
-    void** aa = POINTER_NULL_POINTER;
-    void** aac = POINTER_NULL_POINTER;
-    void** aas = POINTER_NULL_POINTER;
+    void** aa = NULL_POINTER;
+    void** aac = NULL_POINTER;
+    void** aas = NULL_POINTER;
     // The abstraction name model.
-    void** am = POINTER_NULL_POINTER;
-    void** amc = POINTER_NULL_POINTER;
-    void** ams = POINTER_NULL_POINTER;
+    void** am = NULL_POINTER;
+    void** amc = NULL_POINTER;
+    void** ams = NULL_POINTER;
     // The abstraction name details.
-    void** ad = POINTER_NULL_POINTER;
-    void** adc = POINTER_NULL_POINTER;
-    void** ads = POINTER_NULL_POINTER;
+    void** ad = NULL_POINTER;
+    void** adc = NULL_POINTER;
+    void** ads = NULL_POINTER;
 
     // The model name abstraction.
-    void** ma = POINTER_NULL_POINTER;
-    void** mac = POINTER_NULL_POINTER;
-    void** mas = POINTER_NULL_POINTER;
+    void** ma = NULL_POINTER;
+    void** mac = NULL_POINTER;
+    void** mas = NULL_POINTER;
     // The model name model.
-    void** mm = POINTER_NULL_POINTER;
-    void** mmc = POINTER_NULL_POINTER;
-    void** mms = POINTER_NULL_POINTER;
+    void** mm = NULL_POINTER;
+    void** mmc = NULL_POINTER;
+    void** mms = NULL_POINTER;
     // The model name details.
-    void** md = POINTER_NULL_POINTER;
-    void** mdc = POINTER_NULL_POINTER;
-    void** mds = POINTER_NULL_POINTER;
+    void** md = NULL_POINTER;
+    void** mdc = NULL_POINTER;
+    void** mds = NULL_POINTER;
 
     // The whole abstraction.
-    void** wa = POINTER_NULL_POINTER;
-    void** wac = POINTER_NULL_POINTER;
-    void** was = POINTER_NULL_POINTER;
+    void** wa = NULL_POINTER;
+    void** wac = NULL_POINTER;
+    void** was = NULL_POINTER;
     // The whole model.
-    void** wm = POINTER_NULL_POINTER;
-    void** wmc = POINTER_NULL_POINTER;
-    void** wms = POINTER_NULL_POINTER;
+    void** wm = NULL_POINTER;
+    void** wmc = NULL_POINTER;
+    void** wms = NULL_POINTER;
     // The whole details.
-    void** wd = POINTER_NULL_POINTER;
-    void** wdc = POINTER_NULL_POINTER;
-    void** wds = POINTER_NULL_POINTER;
+    void** wd = NULL_POINTER;
+    void** wdc = NULL_POINTER;
+    void** wds = NULL_POINTER;
 
     // Get name name.
     get_real_compound_element_by_name(p0, p1,
@@ -486,73 +486,73 @@ void create_part(void* p0, void* p1, void* p2, void* p3, void* p4) {
         p2, p3);
 
     // Check name name.
-    if ((na != POINTER_NULL_POINTER)
-        && (nac != POINTER_NULL_POINTER)
-        && (nas != POINTER_NULL_POINTER)
-        && (nm != POINTER_NULL_POINTER)
-        && (nmc != POINTER_NULL_POINTER)
-        && (nms != POINTER_NULL_POINTER)
-        && (nd != POINTER_NULL_POINTER)
-        && (ndc != POINTER_NULL_POINTER)
-        && (nds != POINTER_NULL_POINTER)
+    if ((na != NULL_POINTER)
+        && (nac != NULL_POINTER)
+        && (nas != NULL_POINTER)
+        && (nm != NULL_POINTER)
+        && (nmc != NULL_POINTER)
+        && (nms != NULL_POINTER)
+        && (nd != NULL_POINTER)
+        && (ndc != NULL_POINTER)
+        && (nds != NULL_POINTER)
         // Check channel name.
-        && (ca != POINTER_NULL_POINTER)
-        && (cac != POINTER_NULL_POINTER)
-        && (cas != POINTER_NULL_POINTER)
-        && (cm != POINTER_NULL_POINTER)
-        && (cmc != POINTER_NULL_POINTER)
-        && (cms != POINTER_NULL_POINTER)
-        && (cd != POINTER_NULL_POINTER)
-        && (cdc != POINTER_NULL_POINTER)
-        && (cds != POINTER_NULL_POINTER)
+        && (ca != NULL_POINTER)
+        && (cac != NULL_POINTER)
+        && (cas != NULL_POINTER)
+        && (cm != NULL_POINTER)
+        && (cmc != NULL_POINTER)
+        && (cms != NULL_POINTER)
+        && (cd != NULL_POINTER)
+        && (cdc != NULL_POINTER)
+        && (cds != NULL_POINTER)
         // Check abstraction name.
-        && (aa != POINTER_NULL_POINTER)
-        && (aac != POINTER_NULL_POINTER)
-        && (aas != POINTER_NULL_POINTER)
-        && (am != POINTER_NULL_POINTER)
-        && (amc != POINTER_NULL_POINTER)
-        && (ams != POINTER_NULL_POINTER)
-        && (ad != POINTER_NULL_POINTER)
-        && (adc != POINTER_NULL_POINTER)
-        && (ads != POINTER_NULL_POINTER)
+        && (aa != NULL_POINTER)
+        && (aac != NULL_POINTER)
+        && (aas != NULL_POINTER)
+        && (am != NULL_POINTER)
+        && (amc != NULL_POINTER)
+        && (ams != NULL_POINTER)
+        && (ad != NULL_POINTER)
+        && (adc != NULL_POINTER)
+        && (ads != NULL_POINTER)
         // Check model name.
-        && (ma != POINTER_NULL_POINTER)
-        && (mac != POINTER_NULL_POINTER)
-        && (mas != POINTER_NULL_POINTER)
-        && (mm != POINTER_NULL_POINTER)
-        && (mmc != POINTER_NULL_POINTER)
-        && (mms != POINTER_NULL_POINTER)
-        && (md != POINTER_NULL_POINTER)
-        && (mdc != POINTER_NULL_POINTER)
-        && (mds != POINTER_NULL_POINTER)
+        && (ma != NULL_POINTER)
+        && (mac != NULL_POINTER)
+        && (mas != NULL_POINTER)
+        && (mm != NULL_POINTER)
+        && (mmc != NULL_POINTER)
+        && (mms != NULL_POINTER)
+        && (md != NULL_POINTER)
+        && (mdc != NULL_POINTER)
+        && (mds != NULL_POINTER)
 //        // Check whole name.
-//        && (wa != POINTER_NULL_POINTER)
-//        && (wac != POINTER_NULL_POINTER)
-//        && (was != POINTER_NULL_POINTER)
-//        && (wm != POINTER_NULL_POINTER)
-//        && (wmc != POINTER_NULL_POINTER)
-//        && (wms != POINTER_NULL_POINTER)
-//        && (wd != POINTER_NULL_POINTER)
-//        && (wdc != POINTER_NULL_POINTER)
-//        && (wds != POINTER_NULL_POINTER)
+//        && (wa != NULL_POINTER)
+//        && (wac != NULL_POINTER)
+//        && (was != NULL_POINTER)
+//        && (wm != NULL_POINTER)
+//        && (wmc != NULL_POINTER)
+//        && (wms != NULL_POINTER)
+//        && (wd != NULL_POINTER)
+//        && (wdc != NULL_POINTER)
+//        && (wds != NULL_POINTER)
         ) {
 
         // The part name.
         void* pn = NULL_POINTER;
-        int* pnc = INTEGER_NULL_POINTER;
-        int* pns = INTEGER_NULL_POINTER;
+        int* pnc = NULL_POINTER;
+        int* pns = NULL_POINTER;
         // The part abstraction.
         void* pa = NULL_POINTER;
-        int* pac = INTEGER_NULL_POINTER;
-        int* pas = INTEGER_NULL_POINTER;
+        int* pac = NULL_POINTER;
+        int* pas = NULL_POINTER;
         // The part model.
         void* pm = NULL_POINTER;
-        int* pmc = INTEGER_NULL_POINTER;
-        int* pms = INTEGER_NULL_POINTER;
+        int* pmc = NULL_POINTER;
+        int* pms = NULL_POINTER;
         // The part details.
         void* pd = NULL_POINTER;
-        int* pdc = INTEGER_NULL_POINTER;
-        int* pds = INTEGER_NULL_POINTER;
+        int* pdc = NULL_POINTER;
+        int* pds = NULL_POINTER;
 
         // Create part name.
         allocate((void*) &pnc, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);

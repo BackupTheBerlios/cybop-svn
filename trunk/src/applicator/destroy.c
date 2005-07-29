@@ -22,7 +22,7 @@
  *
  * This file destroys a transient model to a persistent model.
  *
- * @version $Revision: 1.6 $ $Date: 2005-07-27 13:30:20 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2005-07-29 15:48:51 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -112,21 +112,21 @@ void deallocate_compound_model( void** model, void* model_count, void* model_siz
         int compound_counter = 0;
 
         // The element name.
-        void** en = POINTER_NULL_POINTER;
-        void** enc = POINTER_NULL_POINTER;
-        void** ens = POINTER_NULL_POINTER;
+        void** en = NULL_POINTER;
+        void** enc = NULL_POINTER;
+        void** ens = NULL_POINTER;
         // The element abstraction.
-        void** ea = POINTER_NULL_POINTER;
-        void** eac = POINTER_NULL_POINTER;
-        void** eas = POINTER_NULL_POINTER;
+        void** ea = NULL_POINTER;
+        void** eac = NULL_POINTER;
+        void** eas = NULL_POINTER;
         // The element model.
-        void** em = POINTER_NULL_POINTER;
-        void** emc = POINTER_NULL_POINTER;
-        void** ems = POINTER_NULL_POINTER;
+        void** em = NULL_POINTER;
+        void** emc = NULL_POINTER;
+        void** ems = NULL_POINTER;
         // The element details.
-        void** ed = POINTER_NULL_POINTER;
-        void** edc = POINTER_NULL_POINTER;
-        void** eds = POINTER_NULL_POINTER;
+        void** ed = NULL_POINTER;
+        void** edc = NULL_POINTER;
+        void** eds = NULL_POINTER;
 
 
         while (1) {
@@ -217,17 +217,17 @@ void deallocate_part(void* p0, void* p1, void* p2, void* p3, void* p4) {
     log_message_debug("Destroy part.");
 
     // The name name abstraction.
-    void** na = POINTER_NULL_POINTER;
-    void** nac = POINTER_NULL_POINTER;
-    void** nas = POINTER_NULL_POINTER;
+    void** na = NULL_POINTER;
+    void** nac = NULL_POINTER;
+    void** nas = NULL_POINTER;
     // The name name model.
-    void** nm = POINTER_NULL_POINTER;
-    void** nmc = POINTER_NULL_POINTER;
-    void** nms = POINTER_NULL_POINTER;
+    void** nm = NULL_POINTER;
+    void** nmc = NULL_POINTER;
+    void** nms = NULL_POINTER;
     // The name name details.
-    void** nd = POINTER_NULL_POINTER;
-    void** ndc = POINTER_NULL_POINTER;
-    void** nds = POINTER_NULL_POINTER;
+    void** nd = NULL_POINTER;
+    void** ndc = NULL_POINTER;
+    void** nds = NULL_POINTER;
 
     // Get name name.
     get_real_compound_element_by_name(p0, p1,
@@ -239,15 +239,15 @@ void deallocate_part(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
 
     // Check name name.
-    if ((na != POINTER_NULL_POINTER)
-        && (nac != POINTER_NULL_POINTER)
-        && (nas != POINTER_NULL_POINTER)
-        && (nm != POINTER_NULL_POINTER)
-        && (nmc != POINTER_NULL_POINTER)
-        && (nms != POINTER_NULL_POINTER)
-        && (nd != POINTER_NULL_POINTER)
-        && (ndc != POINTER_NULL_POINTER)
-        && (nds != POINTER_NULL_POINTER)
+    if ((na != NULL_POINTER)
+        && (nac != NULL_POINTER)
+        && (nas != NULL_POINTER)
+        && (nm != NULL_POINTER)
+        && (nmc != NULL_POINTER)
+        && (nms != NULL_POINTER)
+        && (nd != NULL_POINTER)
+        && (ndc != NULL_POINTER)
+        && (nds != NULL_POINTER)
         )
     {
 
@@ -261,17 +261,17 @@ void deallocate_part(void* p0, void* p1, void* p2, void* p3, void* p4) {
         if ( r==1 ) {
 
             // The element abstraction.
-            void** ea = POINTER_NULL_POINTER;
-            void** eac = POINTER_NULL_POINTER;
-            void** eas = POINTER_NULL_POINTER;
+            void** ea = NULL_POINTER;
+            void** eac = NULL_POINTER;
+            void** eas = NULL_POINTER;
             // The element model.
-            void** em = POINTER_NULL_POINTER;
-            void** emc = POINTER_NULL_POINTER;
-            void** ems = POINTER_NULL_POINTER;
+            void** em = NULL_POINTER;
+            void** emc = NULL_POINTER;
+            void** ems = NULL_POINTER;
             // The element details.
-            void** ed = POINTER_NULL_POINTER;
-            void** edc = POINTER_NULL_POINTER;
-            void** eds = POINTER_NULL_POINTER;
+            void** ed = NULL_POINTER;
+            void** edc = NULL_POINTER;
+            void** eds = NULL_POINTER;
 
             get_real_compound_element_by_name(p2, p3,
                 (void*) *nm, (void*) *nmc,

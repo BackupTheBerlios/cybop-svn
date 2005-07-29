@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2005-07-29 11:34:23 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2005-07-29 15:48:51 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -70,9 +70,9 @@ void get(void* p0, void* p1, void* p2, void* p3, void* p4);
 void add_client_socket_number(void* p0, void* p1) {
 
     // The client sockets.
-    void** cs = POINTER_NULL_POINTER;
-    void** csc = POINTER_NULL_POINTER;
-    void** css = POINTER_NULL_POINTER;
+    void** cs = NULL_POINTER;
+    void** csc = NULL_POINTER;
+    void** css = NULL_POINTER;
 
     // Get client sockets.
     get(p0, (void*) TCP_CLIENT_SOCKETS_INTERNAL, (void*) &cs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
@@ -104,9 +104,9 @@ void add_client_socket_number(void* p0, void* p1) {
 void add_signal_id(void* p0, void* p1) {
 
     // Get main signal id from internal memory.
-    void** id = POINTER_NULL_POINTER;
-    void** idc = POINTER_NULL_POINTER;
-    void** ids = POINTER_NULL_POINTER;
+    void** id = NULL_POINTER;
+    void** idc = NULL_POINTER;
+    void** ids = NULL_POINTER;
 
     get(p0, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_INTERNAL, (void*) &id, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     get(p0, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_COUNT_INTERNAL, (void*) &idc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
@@ -137,9 +137,9 @@ void add_signal_id(void* p0, void* p1) {
 void remove_relation_clientsocketnumber_mainsignalid(void* p0, void* p1) {
 
     // The signal id.
-    void** id = POINTER_NULL_POINTER;
-    void** idc = POINTER_NULL_POINTER;
-    void** ids = POINTER_NULL_POINTER;
+    void** id = NULL_POINTER;
+    void** idc = NULL_POINTER;
+    void** ids = NULL_POINTER;
 
     // Get signal id.
     get(p0, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_INTERNAL, (void*) &id, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
@@ -152,9 +152,9 @@ void remove_relation_clientsocketnumber_mainsignalid(void* p0, void* p1) {
     (*((int*)*idc))--;
 
     // Get client socket.
-    void** cs = POINTER_NULL_POINTER;
-    void** csc = POINTER_NULL_POINTER;
-    void** css = POINTER_NULL_POINTER;
+    void** cs = NULL_POINTER;
+    void** csc = NULL_POINTER;
+    void** css = NULL_POINTER;
 
     get(p0, (void*) TCP_CLIENT_SOCKETS_INTERNAL, (void*) &cs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     get(p0, (void*) TCP_CLIENT_SOCKETS_COUNT_INTERNAL, (void*) &csc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
@@ -176,9 +176,9 @@ void remove_relation_clientsocketnumber_mainsignalid(void* p0, void* p1) {
 void get_index_for_signal_id(void* p0, void* p1, void* p2) {
 
     // The signal id.
-    void** id = POINTER_NULL_POINTER;
-    void** idc = POINTER_NULL_POINTER;
-    void** ids = POINTER_NULL_POINTER;
+    void** id = NULL_POINTER;
+    void** idc = NULL_POINTER;
+    void** ids = NULL_POINTER;
 
     // Get signal id.
     get(p0, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_INTERNAL, (void*) &id, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);

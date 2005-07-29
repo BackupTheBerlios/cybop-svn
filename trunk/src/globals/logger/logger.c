@@ -27,7 +27,7 @@
  * Otherwise, an ENDLESS LOOP will be created, because cyboi's
  * array procedures call the logger in turn.
  *
- * @version $Revision: 1.5 $ $Date: 2005-07-25 21:01:02 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2005-07-29 15:48:51 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -72,9 +72,9 @@ void add_log_details(void* p0, void* p1, void* p2, void* p3) {
                     // The loop index.
                     int j = 0;
                     // The destination character.
-                    char* dest = CHARACTER_NULL_POINTER;
+                    char* dest = NULL_POINTER;
                     // The source character.
-                    char* src = CHARACTER_NULL_POINTER;
+                    char* src = NULL_POINTER;
 
                     while (1) {
 

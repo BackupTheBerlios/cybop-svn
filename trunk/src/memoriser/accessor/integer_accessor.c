@@ -1,5 +1,5 @@
 /*
- * $RCSfile: pointer_vector_accessor.c,v $
+ * $RCSfile: integer_accessor.c,v $
  *
  * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
  *
@@ -20,12 +20,12 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2005-07-29 15:48:51 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2005-07-29 15:48:51 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef POINTER_VECTOR_ACCESSOR_SOURCE
-#define POINTER_VECTOR_ACCESSOR_SOURCE
+#ifndef INTEGER_ACCESSOR_SOURCE
+#define INTEGER_ACCESSOR_SOURCE
 
 #include "../../globals/constants/abstraction_constants.c"
 #include "../../globals/constants/integer_constants.c"
@@ -34,46 +34,46 @@
 #include "../../memoriser/array.c"
 
 /**
- * Sets the pointer vector element.
+ * Sets the integer element.
  *
- * @param p0 the pointer vector
+ * @param p0 the integer
  * @param p1 the index
  * @param p2 the element
  */
-void set_pointer_vector_element(void* p0, void* p1, void* p2) {
+void set_integer_element(void* p0, void* p1, void* p2) {
 
-    log_message_debug("Set pointer vector element.");
+    log_message_debug("Set integer element.");
 
-    set_array_elements(p0, p1, (void*) &p2, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
+    set_array_elements(p0, p1, (void*) p2, (void*) NUMBER_1_INTEGER, (void*) INTEGER_ARRAY);
 }
 
 /**
- * Removes the pointer vector element.
+ * Removes the integer element.
  *
- * @param p0 the pointer vector
+ * @param p0 the integer
  * @param p1 the size
  * @param p2 the index
  */
-void remove_pointer_vector_element(void* p0, void* p1, void* p2) {
+void remove_integer_element(void* p0, void* p1, void* p2) {
 
-    log_message_debug("Remove pointer vector element.");
+    log_message_debug("Remove integer element.");
 
-    remove_array_elements(p0, p1, p2, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
+    remove_array_elements(p0, p1, p2, (void*) NUMBER_1_INTEGER, (void*) INTEGER_ARRAY);
 }
 
 /**
- * Gets the pointer vector element.
+ * Gets the integer element.
  *
- * @param p0 the pointer vector
+ * @param p0 the integer
  * @param p1 the index
- * @param p2 the vector element (Hand over as reference!)
+ * @param p2 the element (Hand over as reference!)
  */
-void get_pointer_vector_element(void* p0, void* p1, void* p2) {
+void get_integer_element(void* p0, void* p1, void* p2) {
 
-    log_message_debug("Get pointer vector element.");
+    log_message_debug("Get integer element.");
 
-    get_array_elements(p0, p1, p2, (void*) POINTER_ARRAY);
+    get_array_elements(p0, p1, p2, (void*) INTEGER_ARRAY);
 }
 
-/* POINTER_VECTOR_ACCESSOR_SOURCE */
+/* INTEGER_ACCESSOR_SOURCE */
 #endif

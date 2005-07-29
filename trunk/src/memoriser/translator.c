@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2005-07-28 23:06:33 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-07-29 15:48:51 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -29,6 +29,7 @@
 
 #include "../memoriser/translator/cybol_translator.c"
 #include "../memoriser/translator/html_translator.c"
+#include "../memoriser/translator/tui_translator.c"
 #include "../memoriser/translator/x_window_system_translator.c"
 
 /**
