@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2005-07-25 21:01:01 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-07-29 16:46:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -73,38 +73,38 @@ void interupt_service(void* p0, void* p1,
     int r = 0;
 
 /*??
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays((void*) *sm, (void*) *smc, (void*) TUI_ABSTRACTION, (void*) TUI_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays((void*) *sm, (void*) *smc, (void*) X_WINDOW_SYSTEM_ABSTRACTION, (void*) X_WINDOW_SYSTEM_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
         }
     }
 */
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays((void*) *sm, (void*) *smc, (void*) UNIX_SOCKET_CHANNEL, (void*) UNIX_SOCKET_CHANNEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays((void*) *sm, (void*) *smc, (void*) TCP_SOCKET_CHANNEL, (void*) TCP_SOCKET_CHANNEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             interrupt_tcp_socket( p5, p2, p3, p4 );
         }

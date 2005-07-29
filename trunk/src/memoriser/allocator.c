@@ -24,7 +24,7 @@
  * - create a model in memory
  * - destroy a model in memory
  *
- * @version $Revision: 1.8 $ $Date: 2005-07-28 23:06:33 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2005-07-29 16:46:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -32,8 +32,6 @@
 #define ALLOCATOR_SOURCE
 
 #include "../globals/constants/abstraction_constants.c"
-#include "../globals/constants/log_constants.c"
-#include "../globals/logger/logger.c"
 #include "../memoriser/array.c"
 #include "../memoriser/allocator/complex_allocator.c"
 #include "../memoriser/allocator/compound_allocator.c"
@@ -66,211 +64,211 @@ void allocate(void* p0, void* p1, void* p2, void* p3) {
     // The comparison result.
     int r = 0;
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p2, p3, (void*) KNOWLEDGE_ABSTRACTION, (void*) KNOWLEDGE_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             allocate_string(p0, p1);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p2, p3, (void*) ENCAPSULATED_KNOWLEDGE_ABSTRACTION, (void*) ENCAPSULATED_KNOWLEDGE_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             allocate_string(p0, p1);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p2, p3, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             allocate_compound(p0, p1);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p2, p3, (void*) OPERATION_ABSTRACTION, (void*) OPERATION_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             allocate_string(p0, p1);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p2, p3, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             allocate_string(p0, p1);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p2, p3, (void*) BOOLEAN_ABSTRACTION, (void*) BOOLEAN_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             allocate_integer(p0, p1);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p2, p3, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             allocate_integer(p0, p1);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p2, p3, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             allocate_integer_vector(p0, p1);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p2, p3, (void*) UNSIGNED_LONG_ABSTRACTION, (void*) UNSIGNED_LONG_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             allocate_unsigned_long(p0, p1);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p2, p3, (void*) UNSIGNED_LONG_VECTOR_ABSTRACTION, (void*) UNSIGNED_LONG_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             allocate_unsigned_long_vector(p0, p1);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p2, p3, (void*) DOUBLE_ABSTRACTION, (void*) DOUBLE_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             allocate_double(p0, p1);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p2, p3, (void*) DOUBLE_VECTOR_ABSTRACTION, (void*) DOUBLE_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             allocate_double_vector(p0, p1);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p2, p3, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             allocate_pointer_vector(p0, p1);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p2, p3, (void*) FRACTION_ABSTRACTION, (void*) FRACTION_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             allocate_fraction(p0, p1);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p2, p3, (void*) COMPLEX_ABSTRACTION, (void*) COMPLEX_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             allocate_complex(p0, p1);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p2, p3, (void*) TIME_ABSTRACTION, (void*) TIME_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             allocate_time(p0, p1);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p2, p3, (void*) CYBOL_ABSTRACTION, (void*) CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             allocate_xml_node(p0, p1);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p2, p3, (void*) TUI_ABSTRACTION, (void*) TUI_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             allocate_tui(p0, p1);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p2, p3, (void*) HXP_ABSTRACTION, (void*) HXP_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             allocate_xml_node(p0, p1);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p2, p3, (void*) SIGNAL_MEMORY_ABSTRACTION, (void*) SIGNAL_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             allocate_signal_memory(p0, p1);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p2, p3, (void*) INTERNAL_MEMORY_ABSTRACTION, (void*) INTERNAL_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             allocate_internal_memory(p0, p1);
         }
@@ -290,191 +288,191 @@ void deallocate(void* p0, void* p1, void* p2, void* p3) {
     // The comparison result.
     int r = 0;
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p2, p3, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             deallocate_compound(p0, p1);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p2, p3, (void*) OPERATION_ABSTRACTION, (void*) OPERATION_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             deallocate_string(p0, p1);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p2, p3, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             deallocate_string(p0, p1);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p2, p3, (void*) BOOLEAN_ABSTRACTION, (void*) BOOLEAN_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             deallocate_integer(p0, p1);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p2, p3, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             deallocate_integer(p0, p1);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p2, p3, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             deallocate_integer_vector(p0, p1);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p2, p3, (void*) UNSIGNED_LONG_ABSTRACTION, (void*) UNSIGNED_LONG_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             deallocate_unsigned_long(p0, p1);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p2, p3, (void*) UNSIGNED_LONG_VECTOR_ABSTRACTION, (void*) UNSIGNED_LONG_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             deallocate_unsigned_long_vector(p0, p1);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p2, p3, (void*) DOUBLE_ABSTRACTION, (void*) DOUBLE_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             deallocate_double(p0, p1);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p2, p3, (void*) DOUBLE_VECTOR_ABSTRACTION, (void*) DOUBLE_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             deallocate_double_vector(p0, p1);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p2, p3, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             deallocate_pointer_vector(p0, p1);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p2, p3, (void*) FRACTION_ABSTRACTION, (void*) FRACTION_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             deallocate_fraction(p0, p1);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p2, p3, (void*) COMPLEX_ABSTRACTION, (void*) COMPLEX_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             deallocate_complex(p0, p1);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p2, p3, (void*) TIME_ABSTRACTION, (void*) TIME_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             deallocate_time(p0, p1);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p2, p3, (void*) CYBOL_ABSTRACTION, (void*) CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             deallocate_xml_node(p0, p1);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p2, p3, (void*) TUI_ABSTRACTION, (void*) TUI_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             deallocate_tui(p0, p1);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p2, p3, (void*) HXP_ABSTRACTION, (void*) HXP_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             deallocate_xml_node(p0, p1);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p2, p3, (void*) SIGNAL_MEMORY_ABSTRACTION, (void*) SIGNAL_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             deallocate_signal_memory(p0, p1);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p2, p3, (void*) INTERNAL_MEMORY_ABSTRACTION, (void*) INTERNAL_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             deallocate_internal_memory(p0, p1);
         }
@@ -494,191 +492,191 @@ void resize(void* p0, void* p1, void* p2, void* p3) {
     // The comparison result.
     int r = 0;
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p2, p3, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
 //??            resize_compound(p0, p1);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p2, p3, (void*) OPERATION_ABSTRACTION, (void*) OPERATION_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
 //??            resize_string(p0, p1);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p2, p3, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
 //??            resize_string(p0, p1);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p2, p3, (void*) BOOLEAN_ABSTRACTION, (void*) BOOLEAN_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
 //??            resize_integer(p0, p1);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p2, p3, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
 //??            resize_integer(p0, p1);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p2, p3, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
 //??            resize_integer_vector(p0, p1);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p2, p3, (void*) UNSIGNED_LONG_ABSTRACTION, (void*) UNSIGNED_LONG_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
 //??            resize_unsigned_long(p0, p1);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p2, p3, (void*) UNSIGNED_LONG_VECTOR_ABSTRACTION, (void*) UNSIGNED_LONG_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
 //??            resize_unsigned_long_vector(p0, p1);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p2, p3, (void*) DOUBLE_ABSTRACTION, (void*) DOUBLE_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
 //??            resize_double(p0, p1);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p2, p3, (void*) DOUBLE_VECTOR_ABSTRACTION, (void*) DOUBLE_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
 //??            resize_double_vector(p0, p1);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p2, p3, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             resize_pointer_vector(p0, p1);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p2, p3, (void*) FRACTION_ABSTRACTION, (void*) FRACTION_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
 //??            resize_fraction(p0, p1);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p2, p3, (void*) COMPLEX_ABSTRACTION, (void*) COMPLEX_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
 //??            resize_complex(p0, p1);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p2, p3, (void*) TIME_ABSTRACTION, (void*) TIME_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
 //??            resize_time(p0, p1);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p2, p3, (void*) CYBOL_ABSTRACTION, (void*) CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
 //??            resize_xml_node(p0, p1);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p2, p3, (void*) TUI_ABSTRACTION, (void*) TUI_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
 //??            resize_tui(p0, p1);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p2, p3, (void*) HXP_ABSTRACTION, (void*) HXP_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
 //??            resize_xml_node(p0, p1);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p2, p3, (void*) SIGNAL_MEMORY_ABSTRACTION, (void*) SIGNAL_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
 //??            resize_signal_memory(p0, p1);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p2, p3, (void*) INTERNAL_MEMORY_ABSTRACTION, (void*) INTERNAL_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
 //??            resize_internal_memory(p0, p1);
         }

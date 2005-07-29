@@ -22,7 +22,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.11 $ $Date: 2005-07-29 15:48:51 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2005-07-29 16:46:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -54,72 +54,72 @@ void check_primitive_model(void* p0, void* p1, void* p2) {
 
         int* p = (int*) p0;
 
-        if (*p != 1) {
+        if (*p == 0) {
 
             compare_arrays(p1, p2, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT, p0, (void*) CHARACTER_ARRAY);
         }
 
-        if (*p != 1) {
+        if (*p == 0) {
 
             compare_arrays(p1, p2, (void*) OPERATION_ABSTRACTION, (void*) OPERATION_ABSTRACTION_COUNT, p0, (void*) CHARACTER_ARRAY);
         }
 
-        if (*p != 1) {
+        if (*p == 0) {
 
             compare_arrays(p1, p2, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT, p0, (void*) CHARACTER_ARRAY);
         }
 
-        if (*p != 1) {
+        if (*p == 0) {
 
             compare_arrays(p1, p2, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT, p0, (void*) CHARACTER_ARRAY);
         }
 
-        if (*p != 1) {
+        if (*p == 0) {
 
             compare_arrays(p1, p2, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT, p0, (void*) CHARACTER_ARRAY);
         }
 
-        if (*p != 1) {
+        if (*p == 0) {
 
             compare_arrays(p1, p2, (void*) DOUBLE_ABSTRACTION, (void*) DOUBLE_ABSTRACTION_COUNT, p0, (void*) CHARACTER_ARRAY);
         }
 
-        if (*p != 1) {
+        if (*p == 0) {
 
             compare_arrays(p1, p2, (void*) DOUBLE_VECTOR_ABSTRACTION, (void*) DOUBLE_VECTOR_ABSTRACTION_COUNT, p0, (void*) CHARACTER_ARRAY);
         }
 
-        if (*p != 1) {
+        if (*p == 0) {
 
             compare_arrays(p1, p2, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT, p0, (void*) CHARACTER_ARRAY);
         }
 
-        if (*p != 1) {
+        if (*p == 0) {
 
             compare_arrays(p1, p2, (void*) BOOLEAN_ABSTRACTION, (void*) BOOLEAN_ABSTRACTION_COUNT, p0, (void*) CHARACTER_ARRAY);
         }
 
-        if (*p != 1) {
+        if (*p == 0) {
 
             compare_arrays(p1, p2, (void*) FRACTION_ABSTRACTION, (void*) FRACTION_ABSTRACTION_COUNT, p0, (void*) CHARACTER_ARRAY);
         }
 
-        if (*p != 1) {
+        if (*p == 0) {
 
             compare_arrays(p1, p2, (void*) TIME_ABSTRACTION, (void*) TIME_ABSTRACTION_COUNT, p0, (void*) CHARACTER_ARRAY);
         }
 
-        if (*p != 1) {
+        if (*p == 0) {
 
             compare_arrays(p1, p2, (void*) COMPLEX_ABSTRACTION, (void*) COMPLEX_ABSTRACTION_COUNT, p0, (void*) CHARACTER_ARRAY);
         }
 
-        if (*p != 1) {
+        if (*p == 0) {
 
             compare_arrays(p1, p2, (void*) KNOWLEDGE_ABSTRACTION, (void*) KNOWLEDGE_ABSTRACTION_COUNT, p0, (void*) CHARACTER_ARRAY);
         }
 
-        if (*p != 1) {
+        if (*p == 0) {
 
             compare_arrays(p1, p2, (void*) ENCAPSULATED_KNOWLEDGE_ABSTRACTION, (void*) ENCAPSULATED_KNOWLEDGE_ABSTRACTION_COUNT, p0, (void*) CHARACTER_ARRAY);
         }
@@ -351,7 +351,7 @@ void create(void* p0, void* p1, void* p2, void* p3, void* p4,
     // Check for primitive model.
     check_primitive_model((void*) &r, p5, p6);
 
-    if (r == 1) {
+    if (r != 0) {
 
         create_primitive_model(p0, p1, p2, p3, p4, p5, p6, p7, p8);
 

@@ -20,13 +20,15 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2005-07-29 15:48:51 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2005-07-29 16:46:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef TRANSLATOR_SOURCE
 #define TRANSLATOR_SOURCE
 
+#include "../globals/constants/abstraction_constants.c"
+#include "../memoriser/array.c"
 #include "../memoriser/translator/cybol_translator.c"
 #include "../memoriser/translator/html_translator.c"
 #include "../memoriser/translator/tui_translator.c"
@@ -49,63 +51,63 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
     // The comparison result.
     int r = 0;
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p5, p6, (void*) TUI_ABSTRACTION, (void*) TUI_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             decode_tui(p0, p1, p2, p3, p4);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p5, p6, (void*) CYBOL_ABSTRACTION, (void*) CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             decode_cybol(p0, p1, p2, p3, p4);
         }
     }
 
 /*??
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p5, p6, (void*) X_WINDOW_SYSTEM_ABSTRACTION, (void*) X_WINDOW_SYSTEM_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             decode_x_window_system(p0, p1, p2, p3, p4);
         }
     }
 */
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p5, p6, (void*) HTML_ABSTRACTION, (void*) HTML_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
 //??            decode_html(p0, p1, p2, p3, p4);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p5, p6, (void*) SXW_ABSTRACTION, (void*) SXW_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
 //??            decode_sxw(p0, p1, p2, p3, p4);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p5, p6, (void*) HXP_ABSTRACTION, (void*) HXP_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
 //??            decode_hxp(p0, p1, p2, p3, p4);
         }
@@ -130,63 +132,63 @@ void encode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
     // The comparison result.
     int r = 0;
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p5, p6, (void*) TUI_ABSTRACTION, (void*) TUI_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             encode_tui(p0, p1, p2, p3, p4);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p5, p6, (void*) CYBOL_ABSTRACTION, (void*) CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             encode_cybol(p0, p1, p2, p3, p4);
         }
     }
 
 /*??
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p5, p6, (void*) X_WINDOW_SYSTEM_ABSTRACTION, (void*) X_WINDOW_SYSTEM_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             encode_x_window_system(p0, p1, p2, p3, p4);
         }
     }
 */
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p5, p6, (void*) HTML_ABSTRACTION, (void*) HTML_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
 //??            encode_html(p0, p1, p2, p3, p4);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p5, p6, (void*) SXW_ABSTRACTION, (void*) SXW_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
 //??            encode_sxw(p0, p1, p2, p3, p4);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p5, p6, (void*) HXP_ABSTRACTION, (void*) HXP_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
 //??            encode_hxp(p0, p1, p2, p3, p4);
         }
@@ -223,11 +225,11 @@ void encode_model(void** dest, int* dest_count, int* dest_size,
     // The comparison result.
     int r = 0;
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(type, type_count, (void*) HTML_ABSTRACTION, (void*) HTML_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             encode_html(dest, dest_count, dest_size,
                         source_abstr, source_abstr_count,

@@ -24,17 +24,15 @@
  * - read data from a device into a byte array
  * - write data from a byte array to a device
  *
- * @version $Revision: 1.5 $ $Date: 2005-07-25 21:01:02 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2005-07-29 16:46:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef COMMUNICATOR_SOURCE
 #define COMMUNICATOR_SOURCE
 
-#include <stdio.h>
+#include "../globals/constants/abstraction_constants.c"
 #include "../globals/constants/channel_constants.c"
-#include "../globals/constants/log_constants.c"
-#include "../globals/logger/logger.c"
 #include "../memoriser/array.c"
 #include "../memoriser/communicator/file_communicator.c"
 #include "../memoriser/communicator/ftp_communicator.c"

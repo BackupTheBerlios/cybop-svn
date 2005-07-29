@@ -22,7 +22,7 @@
  *
  * This file destroys a transient model to a persistent model.
  *
- * @version $Revision: 1.7 $ $Date: 2005-07-29 15:48:51 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2005-07-29 16:46:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -98,7 +98,7 @@ void deallocate_primitive_model( void** model, void* model_count, void* model_si
  */
 void deallocate_compound_model( void** model, void* model_count, void* model_size,
     void* model_abstr, void* model_abstr_count) {
-        
+
     //das gesamte Compound durchgehen und f?r jedes Element im Compound wieder
     //destroy model aufrufen
 
@@ -184,7 +184,7 @@ void destroy(void** model, void* model_count, void* model_size,
     //?The comparison result.
     int r = 0;
 
-    // Check for primitive model.
+    // Check for compound (later better for primitive!!) model.
     check_compound_model((void*) &r, model_abstr, model_abstr_count);
 
     if (r == 0) {

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.21 $ $Date: 2005-07-29 15:48:51 $ $Author: christian $
+ * @version $Revision: 1.22 $ $Date: 2005-07-29 16:46:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -275,6 +275,7 @@ void send_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
         set(ts, (void*) TUI_PROPERTIES_INDEX, tsp, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 */
 
+/*??
         // Allocate tui count and size.
         allocate((void*) &tc, (void*) TUI_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
         allocate((void*) &ts, (void*) TUI_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
@@ -318,9 +319,10 @@ void send_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     // Destroy array.
     deallocate((void*) &a, (void*) &as, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT);
+*/
 
     //?? TEST.
-//??    write_data(p0, p1, p2, p3, p4, (void*) TERMINAL_CHANNEL, (void*) TERMINAL_CHANNEL_COUNT);
+    write_data(p0, p1, p2, p3, p4, (void*) TERMINAL_CHANNEL, (void*) TERMINAL_CHANNEL_COUNT);
 }
 
 /* SEND_LINUX_CONSOLE_SOURCE */

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2005-07-25 21:01:01 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-07-29 16:46:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -113,11 +113,11 @@ void receive_message(void* p0, void* p1,
     // The comparison result.
     int r = 0;
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays((void*) *sm, (void*) *smc, (void*) TUI_MODEL, (void*) TUI_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             //?? The temporary standard console output as destination.
             //?? Possibly use "sender" information instead, later.
@@ -129,11 +129,11 @@ void receive_message(void* p0, void* p1,
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays((void*) *sm, (void*) *smc, (void*) X_WINDOW_SYSTEM_MODEL, (void*) X_WINDOW_SYSTEM_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
 /*??
             blocking or non-blocking??
@@ -146,11 +146,11 @@ void receive_message(void* p0, void* p1,
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays((void*) *sm, (void*) *smc, (void*) UNIX_SOCKET_MODEL, (void*) UNIX_SOCKET_CHANNEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
 /*??
             send_unix_socket((void*) &dn, (void*) &dnc, (void*) &dns,
@@ -161,11 +161,11 @@ void receive_message(void* p0, void* p1,
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays((void*) *sm, (void*) *smc, (void*) TCP_SOCKET_MODEL, (void*) TCP_SOCKET_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             if ((ba != NULL_POINTER)
                 && (bac != NULL_POINTER)

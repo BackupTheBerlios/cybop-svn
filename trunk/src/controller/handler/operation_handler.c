@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2005-07-25 21:01:02 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2005-07-29 16:46:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -76,71 +76,71 @@ void handle_operation(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
     log_message_debug("\n\n");
     log_message((void*) INFO_LOG_LEVEL, (void*) HANDLE_OPERATION_MESSAGE, (void*) HANDLE_OPERATION_MESSAGE_COUNT);
 
-    // The comparison result.
-    int r = 0;
-
     fprintf(stderr, "Test: Operation: %s\n", (char*) p8);
     fprintf(stderr, "Test: Operation count: %i\n", *((int*) p9));
+
+    // The comparison result.
+    int r = 0;
 
     //
     // Program flow models.
     //
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p8, p9, (void*) COPY_MODEL, (void*) COPY_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             copy(p10, p11, p1, p2, p3, p12, p13);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p8, p9, (void*) COPY_PROPERTY_MODEL, (void*) COPY_PROPERTY_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             copy_property(p10, p11, p1, p2, p3, p12, p13);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p8, p9, (void*) BRANCH_MODEL, (void*) BRANCH_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             branch(p0, p1, p2, p3, p4, p5, p6, p7, p10, p11, p12, p13);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p8, p9, (void*) LOOP_MODEL, (void*) LOOP_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             loop(p0, p1, p2, p3, p4, p5, p6, p7, p10, p11, p12, p13);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p8, p9, (void*) COUNT_PARTS_MODEL, (void*) COUNT_PARTS_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             count_parts(p10, p11, p1, p2, p3);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p8, p9, (void*) BUILD_LISTNAME_MODEL, (void*) BUILD_LISTNAME_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             build_listname(p10, p11, p1, p2, p3);
         }
@@ -154,11 +154,11 @@ void handle_operation(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
     // Comparison models.
     //
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p8, p9, (void*) COMPARE_MODEL, (void*) COMPARE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             compare(p10, p11, p1, p2, p3);
         }
@@ -168,11 +168,11 @@ void handle_operation(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
     // Arithmetic models.
     //
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p8, p9, (void*) ADD_MODEL, (void*) ADD_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             add(p10, p11, p1, p2, p3);
         }
@@ -182,21 +182,21 @@ void handle_operation(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
     // Memory management models.
     //
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p8, p9, (void*) CREATE_PART_MODEL, (void*) CREATE_PART_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             create_part(p10, p11, p1, p2, p3);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p8, p9, (void*) DESTROY_PART_MODEL, (void*) DESTROY_PART_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             deallocate_part(p10, p11, p1, p2, p3);
         }
@@ -206,31 +206,31 @@ void handle_operation(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
     // Lifecycle models.
     //
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p8, p9, (void*) STARTUP_MODEL, (void*) STARTUP_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             startup_service(p10, p11, p1, p2, p3, p0);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p8, p9, (void*) SHUTDOWN_MODEL, (void*) SHUTDOWN_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             shutdown_service(p10, p11, p1, p2, p3, p0);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p8, p9, (void*) EXIT_MODEL, (void*) EXIT_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             log_message((void*) INFO_LOG_LEVEL, (void*) SET_SHUTDOWN_FLAG_MESSAGE, (void*) SET_SHUTDOWN_FLAG_MESSAGE_COUNT);
 
@@ -243,41 +243,41 @@ void handle_operation(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
     // Communication models.
     //
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p8, p9, (void*) SEND_MODEL, (void*) SEND_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             send_message(p10, p11, p0, p1, p2, p3, p4, p5, p6, p13);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p8, p9, (void*) RECEIVE_MODEL, (void*) RECEIVE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             receive_message(p10, p11, p0, p1, p2, p3);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p8, p9, (void*) INTERRUPT_MODEL, (void*) INTERRUPT_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
 //??            interrupt_service(p10, p11, p1, p2, p3, p0);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p8, p9, (void*) REFRESH_URL_MODEL, (void*) REFRESH_URL_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
 //??            refresh_url(p10, p11, p0, p1, p2, p3, p13);
         }

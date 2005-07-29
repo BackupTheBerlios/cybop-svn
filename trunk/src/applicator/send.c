@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.16 $ $Date: 2005-07-29 15:48:51 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2005-07-29 16:46:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -157,11 +157,11 @@ void send_message(void* p0, void* p1,
     // The comparison result.
     int r = 0;
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays((void*) *lm, (void*) *lmc, (void*) TUI_MODEL, (void*) TUI_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             // The terminal (device name).
             void** t = NULL_POINTER;
@@ -173,32 +173,32 @@ void send_message(void* p0, void* p1,
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays((void*) *lm, (void*) *lmc, (void*) X_WINDOW_SYSTEM_MODEL, (void*) X_WINDOW_SYSTEM_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             send_x_window_system(p2, p3, p4, p5);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays((void*) *lm, (void*) *lmc, (void*) SIGNAL_MODEL, (void*) SIGNAL_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             set_signal(p6, p7, p8, (void*) *ma, (void*) *mac, (void*) *mm, (void*) *mmc, (void*) *md, (void*) *mdc, (void*) NORMAL_PRIORITY, p9);
         }
     }
 
 /*??
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays((void*) *lm, (void*) *lmc, (void*) TCP_SOCKET_MODEL, (void*) TCP_SOCKET_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             // The socket number for the signal id.
             // The index for the signal id in the array is the same index

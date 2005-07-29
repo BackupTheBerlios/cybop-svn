@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2005-07-25 21:01:01 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2005-07-29 16:46:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -66,29 +66,29 @@ void handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
     // The comparison result.
     int r = 0;
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p8, p9, (void*) CYBOL_ABSTRACTION, (void*) CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             handle_compound(p0, p1, p2, p3, p4, p5, p6,
                 p7, p10, p11, p14, p15, p16);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p8, p9, (void*) OPERATION_ABSTRACTION, (void*) OPERATION_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             handle_operation(p0, p1, p2, p3, p4, p5, p6,
                 p7, p10, p11, p12, p13, p14, p15);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         log_message((void*) WARNING_LOG_LEVEL, (void*) COULD_NOT_HANDLE_SIGNAL_THE_SIGNAL_ABSTRACTION_IS_UNKNOWN_MESSAGE, (void*) COULD_NOT_HANDLE_SIGNAL_THE_SIGNAL_ABSTRACTION_IS_UNKNOWN_MESSAGE_COUNT);
     }

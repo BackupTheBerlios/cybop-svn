@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2005-07-25 21:01:01 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2005-07-29 16:46:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description This module shuts down a service.
  */
@@ -83,31 +83,31 @@ void shutdown_service(void* p0, void* p1,
     // Reset comparison result.
     r = 0;
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays((void*) *sm, (void*) *smc, (void*) LINUX_CONSOLE_MODEL, (void*) LINUX_CONSOLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             shutdown_linux_console(p5, p2, p3, p4);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays((void*) *sm, (void*) *smc, (void*) X_WINDOW_SYSTEM_MODEL, (void*) X_WINDOW_SYSTEM_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             shutdown_x_window_system(p5, p2, p3, p4);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays((void*) *sm, (void*) *smc, (void*) TCP_SOCKET_MODEL, (void*) TCP_SOCKET_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             shutdown_tcp_socket( p5, p2, p3, p4 );
         }

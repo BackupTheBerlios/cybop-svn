@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2005-07-29 15:48:51 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-07-29 16:46:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -28,8 +28,6 @@
 #define ACCESSOR_SOURCE
 
 #include "../globals/constants/abstraction_constants.c"
-#include "../globals/constants/log_constants.c"
-#include "../globals/logger/logger.c"
 #include "../memoriser/accessor/compound_accessor.c"
 #include "../memoriser/accessor/double_vector_accessor.c"
 #include "../memoriser/accessor/integer_accessor.c"
@@ -50,76 +48,74 @@
  */
 void set(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    log_message_debug("Set model element.");
-
     // The comparison result.
     int r = 0;
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p3, p4, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
 //??            set_compound_element(p0, p1, p2);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p3, p4, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             set_integer_element(p0, p1, p2);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p3, p4, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             set_integer_vector_element(p0, p1, p2);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p3, p4, (void*) DOUBLE_VECTOR_ABSTRACTION, (void*) DOUBLE_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             set_double_vector_element(p0, p1, p2);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p3, p4, (void*) INTERNAL_MEMORY_ABSTRACTION, (void*) INTERNAL_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
 //??            set_internal_memory_element(p0, p1, p2);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p3, p4, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             set_pointer_vector_element(p0, p1, p2);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p3, p4, (void*) SIGNAL_MEMORY_ABSTRACTION, (void*) SIGNAL_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
 //??            set_signal_memory_element(p0, p1, p2);
         }
@@ -140,76 +136,74 @@ void set(void* p0, void* p1, void* p2, void* p3, void* p4) {
  */
 void remove_element(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    log_message_debug("Remove model element.");
-
     // The comparison result.
     int r = 0;
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p3, p4, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
 //??            remove_compound_element(p0, p1, p2);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p3, p4, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             remove_integer_element(p0, p1, p2);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p3, p4, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             remove_integer_vector_element(p0, p1, p2);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p3, p4, (void*) DOUBLE_VECTOR_ABSTRACTION, (void*) DOUBLE_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             remove_double_vector_element(p0, p1, p2);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p3, p4, (void*) INTERNAL_MEMORY_ABSTRACTION, (void*) INTERNAL_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
 //??            remove_internal_memory_element(p0, p1, p2);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p3, p4, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             remove_pointer_vector_element(p0, p1, p2);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p3, p4, (void*) SIGNAL_MEMORY_ABSTRACTION, (void*) SIGNAL_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
 //??            remove_signal_memory_element(p0, p1, p2);
         }
@@ -227,76 +221,74 @@ void remove_element(void* p0, void* p1, void* p2, void* p3, void* p4) {
  */
 void get(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    log_message_debug("Get model element.");
-
     // The comparison result.
     int r = 0;
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p3, p4, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
 //??            get_compound_element(p0, p1, p2);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p3, p4, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             get_integer_element(p0, p1, p2);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p3, p4, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             get_integer_vector_element(p0, p1, p2);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p3, p4, (void*) DOUBLE_VECTOR_ABSTRACTION, (void*) DOUBLE_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             get_double_vector_element(p0, p1, p2);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p3, p4, (void*) INTERNAL_MEMORY_ABSTRACTION, (void*) INTERNAL_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
 //??            get_internal_memory_element(p0, p1, p2);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p3, p4, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             get_pointer_vector_element(p0, p1, p2);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p3, p4, (void*) SIGNAL_MEMORY_ABSTRACTION, (void*) SIGNAL_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
 //??            get_signal_memory_element(p0, p1, p2);
         }
