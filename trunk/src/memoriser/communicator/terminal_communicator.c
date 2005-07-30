@@ -24,7 +24,7 @@
  * - receive a file stream into a byte array
  * - send a file stream from a byte array
  *
- * @version $Revision: 1.4 $ $Date: 2005-07-25 21:01:02 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-07-30 14:03:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -35,18 +35,19 @@
 //?? #include "../../globals/constants/character_constants.c"
 //?? #include "../../globals/constants/constant.c"
 //?? #include "../../globals/constants/integer_constants.c"
+#include "../../globals/constants/log_constants.c"
 //?? #include "../../globals/constants/structure_constants.c"
-//?? #include "../../globals/logger/logger.c"
+#include "../../globals/logger/logger.c"
 #include "../../globals/variables/variables.c"
 //?? #include "../../memoriser/array.c"
 
 /**
- * Reads a terminal stream and writes it into a byte array.
+ * Reads the terminal into terminal control sequences.
  *
- * @param p0 the destination byte array (Hand over as reference!)
+ * @param p0 the destination terminal control sequences (Hand over as reference!)
  * @param p1 the destination count
  * @param p2 the destination size
- * @param p3 the source file name
+ * @param p3 the source terminal
  * @param p4 the source count
  */
 void read_terminal(void* p0, void* p1, void* p2, void* p3, void* p4) {
@@ -55,28 +56,40 @@ void read_terminal(void* p0, void* p1, void* p2, void* p3, void* p4) {
 }
 
 /**
- * Writes a terminal stream that was read from a byte array.
+ * Writes the terminal control sequences into terminal.
  *
- * @param p0 the destination file (Hand over as reference!)
+ * @param p0 the destination terminal (Hand over as reference!)
  * @param p1 the destination count
  * @param p2 the destination size
- * @param p3 the source byte array
+ * @param p3 the source terminal control sequences
  * @param p4 the source count
  */
 void write_terminal(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p0 != NULL_POINTER) {
+    if (p3 != NULL_POINTER) {
 
-        FILE** f = (FILE**) p0;
+        char* s = (char*) p3;
 
-        fprintf(*f, "%s", (char*) p3);
+        if (p0 != NULL_POINTER) {
 
-        //?? TODO: temporary. Move to receive loop into an own thread!?
-        getc(stdin);
+            FILE** d = (FILE**) p0;
+
+            log_message_debug("Write to terminal.");
+
+            // Write to terminal.
+            fputs(s, *d);
+
+            //?? TODO: temporary. Move to receive loop into an own thread!?
+            getc(stdin);
+
+        } else {
+
+            log_message_debug("Could not write to terminal. The destination terminal file is null.");
+        }
 
     } else {
 
-        log_message_debug("ERROR: Could not write to terminal. The destination file is null.");
+        log_message_debug("Could not write to terminal. The source terminal control sequences is null.");
     }
 
 /*??

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2005-07-30 09:38:16 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2005-07-30 14:03:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -35,9 +35,9 @@
 #include "../../globals/constants/name_constants.c"
 #include "../../globals/constants/structure_constants.c"
 #include "../../globals/logger/logger.c"
-#include "../../globals/mapper.c"
 #include "../../globals/variables/variables.c"
 #include "../../memoriser/accessor.c"
+#include "../../memoriser/mapper.c"
 
 /**
  * Decodes the tui model into a compound model.

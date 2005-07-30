@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-07-30 09:38:16 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-07-30 14:03:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -28,9 +28,9 @@
 #define MAPPER_SOURCE
 
 #include "../globals/constants/abstraction_constants.c"
-#include "../globals/mapper/terminal_background_mapper.c"
-#include "../globals/mapper/terminal_foreground_mapper.c"
 #include "../memoriser/array.c"
+#include "../memoriser/mapper/terminal_background_mapper.c"
+#include "../memoriser/mapper/terminal_foreground_mapper.c"
 
 /**
  * Maps the name to its code.

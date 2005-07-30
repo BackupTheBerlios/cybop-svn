@@ -20,12 +20,12 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-07-30 09:38:16 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-07-30 14:03:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef TERMINAL_FOREGROUND_COLOUR_MAPPER_SOURCE
-#define TERMINAL_FOREGROUND_COLOUR_MAPPER_SOURCE
+#ifndef TERMINAL_FOREGROUND_MAPPER_SOURCE
+#define TERMINAL_FOREGROUND_MAPPER_SOURCE
 
 #include "../../globals/constants/abstraction_constants.c"
 #include "../../globals/constants/control_sequence_constants.c"
@@ -33,6 +33,7 @@
 #include "../../globals/constants/model_constants.c"
 #include "../../globals/constants/structure_constants.c"
 #include "../../globals/logger/logger.c"
+#include "../../memoriser/accessor.c"
 #include "../../memoriser/array.c"
 
 /**
@@ -44,7 +45,7 @@
  * @param p3 the source colour name
  * @param p4 the source count
  */
-void mapto_terminal_foreground_colour(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void mapto_terminal_foreground(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (p1 != NULL_POINTER) {
 
@@ -157,8 +158,8 @@ void mapto_terminal_foreground_colour(void* p0, void* p1, void* p2, void* p3, vo
  * @param p3 the source control sequence code
  * @param p4 the source count
  */
-void mapfrom_terminal_foreground_colour(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
+void mapfrom_terminal_foreground(void* p0, void* p1, void* p2, void* p3, void* p4) {
 }
 
-/* TERMINAL_FOREGROUND_COLOUR_MAPPER_SOURCE */
+/* TERMINAL_FOREGROUND_MAPPER_SOURCE */
 #endif
