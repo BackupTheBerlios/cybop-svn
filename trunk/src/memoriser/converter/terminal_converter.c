@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.10 $ $Date: 2005-07-30 00:07:17 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2005-07-30 09:38:16 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -56,6 +56,7 @@ void serialise_terminal_properties(void* p0, void* p1, void* p2,
     void* p6, void* p7, void* p8, void* p9,
     void* p10, void* p11, void* p12, void* p13) {
 
+/*??
     if (p2 != NULL_POINTER) {
 
         int* ds = (int*) p2;
@@ -68,7 +69,6 @@ void serialise_terminal_properties(void* p0, void* p1, void* p2,
 
                 void** d = (void**) p0;
 
-/*??
                 // Calculate new destination string count.
                 *dc = *dc + *ESCAPE_CONTROL_SEQUENCE_COUNT;
                 // Calculate new destination string size.
@@ -106,6 +106,7 @@ void serialise_terminal_properties(void* p0, void* p1, void* p2,
 
         log_message_debug("Could not serialise terminal properties. The destination size is null.");
     }
+*/
 }
 
 /**
