@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2005-07-29 16:46:18 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2005-07-30 00:07:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -232,10 +232,10 @@ void encode_model(void** dest, int* dest_count, int* dest_size,
         if (r != 0) {
 
             encode_html(dest, dest_count, dest_size,
-                        source_abstr, source_abstr_count,
-                        source_model, source_model_count,
-                        source_detail, source_detail_count,
-                        know, know_count);
+                source_abstr, source_abstr_count,
+                source_model, source_model_count,
+                source_detail, source_detail_count,
+                know, know_count);
         }
     }
 }

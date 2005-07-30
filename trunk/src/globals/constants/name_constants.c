@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2005-07-28 23:06:33 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2005-07-30 00:07:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -44,10 +44,15 @@ static char TUI_SIZE_NAME_ARRAY[] = {'s', 'i', 'z', 'e'};
 static char* TUI_SIZE_NAME = TUI_SIZE_NAME_ARRAY;
 static int* TUI_SIZE_NAME_COUNT = NUMBER_4_INTEGER_ARRAY;
 
-/** The colour name. */
-static char TUI_COLOUR_NAME_ARRAY[] = {'c', 'o', 'l', 'o', 'u', 'r'};
-static char* TUI_COLOUR_NAME = TUI_COLOUR_NAME_ARRAY;
-static int* TUI_COLOUR_NAME_COUNT = NUMBER_6_INTEGER_ARRAY;
+/** The background colour name. */
+static char TUI_BACKGROUND_NAME_ARRAY[] = {'b', 'a', 'c', 'k', 'g', 'r', 'o', 'u', 'n', 'd'};
+static char* TUI_BACKGROUND_NAME = TUI_BACKGROUND_NAME_ARRAY;
+static int* TUI_BACKGROUND_NAME_COUNT = NUMBER_10_INTEGER_ARRAY;
+
+/** The foreground colour name. */
+static char TUI_FOREGROUND_NAME_ARRAY[] = {'f', 'o', 'r', 'e', 'g', 'r', 'o', 'u', 'n', 'd'};
+static char* TUI_FOREGROUND_NAME = TUI_FOREGROUND_NAME_ARRAY;
+static int* TUI_FOREGROUND_NAME_COUNT = NUMBER_10_INTEGER_ARRAY;
 
 //
 // Web user interface (wui) names.

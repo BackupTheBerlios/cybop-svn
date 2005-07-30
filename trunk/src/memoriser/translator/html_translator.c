@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2005-07-29 15:48:51 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2005-07-30 00:07:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -33,19 +33,18 @@
 #include "../../globals/constants/log_constants.c"
 #include "../../globals/constants/name_constants.c"
 #include "../../globals/logger/logger.c"
+#include "../../memoriser/accessor.c"
 #include "../../memoriser/accessor/compound_accessor.c"
 #include "../../memoriser/array.c"
 
 //
 // Forward declarations.
 //
-void encode_html( void** dest, int* dest_count, int *dest_size,
-                  void* source_abstr, int* source_abstr_count,
-                  void* source_model, int* source_model_count,
-                  void* source_detail, int* source_detail_count,
-                  void* know, int* know_count );
-
-
+void encode_html(void** dest, int* dest_count, int *dest_size,
+    void* source_abstr, int* source_abstr_count,
+    void* source_model, int* source_model_count,
+    void* source_detail, int* source_detail_count,
+    void* know, int* know_count);
 
 /**
  * encodes the cybol model compound into a html string
@@ -60,11 +59,10 @@ void encode_html( void** dest, int* dest_count, int *dest_size,
  * @param know the knowledge memeory
  * @param know_count the knowledge memeory count
  */
-void encode_html_compound( void** dest, int* dest_count, int* dest_size,
-                           void* source_model, int* source_model_count,
-                           void* source_detail, int* source_detail_count,
-                           void* know, int* know_count )
-{
+void encode_html_compound(void** dest, int* dest_count, int* dest_size,
+    void* source_model, int* source_model_count,
+    void* source_detail, int* source_detail_count,
+    void* know, int* know_count) {
 
     // The compound abstraction.
     void** comp_abstr = NULL_POINTER;
@@ -118,16 +116,13 @@ void encode_html_compound( void** dest, int* dest_count, int* dest_size,
  * @param know the knowledge memeory
  * @param know_count the knowledge memeory count
  */
-void encode_html_knowledgememory(
-    void** dest, int* dest_count, int* dest_size,
+void encode_html_knowledgememory(void** dest, int* dest_count, int* dest_size,
     void* source_model, int* source_model_count,
     void* source_detail, int* source_detail_count,
-    void* know, int* know_count )
-{
+    void* know, int* know_count) {
 
-    if ( (source_model!=NULL_POINTER) &&
-         (source_model_count!=NULL_POINTER) )
-    {
+    if ((source_model != NULL_POINTER)
+        && (source_model_count != NULL_POINTER)) {
 
         // The compound abstraction.
         void** comp_abstr = NULL_POINTER;
@@ -244,19 +239,16 @@ void encode_html_integer( void** dest, int* dest_count, int* dest_size,
  * @param p3 the source abstraction
  * @param p4 the source abstarction count
  */
-void encode_html( void** dest, int* dest_count, int *dest_size,
-                  void* source_abstr, int* source_abstr_count,
-                  void* source_model, int* source_model_count,
-                  void* source_detail, int* source_detail_count,
-                  void* know, int* know_count )
-{
+void encode_html(void** dest, int* dest_count, int *dest_size,
+    void* source_abstr, int* source_abstr_count,
+    void* source_model, int* source_model_count,
+    void* source_detail, int* source_detail_count,
+    void* know, int* know_count) {
 
     //check for destination
-    if ( (dest != NULL_POINTER ) &&
-         (dest_count != NULL_POINTER ) &&
-         (dest_size != NULL_POINTER ) )
-    {
-
+    if ((dest != NULL_POINTER)
+        && (dest_count != NULL_POINTER)
+        && (dest_size != NULL_POINTER)) {
 
         // The html tag abstraction.
         void** tag_abstr = NULL_POINTER;

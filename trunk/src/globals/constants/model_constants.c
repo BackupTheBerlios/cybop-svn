@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2005-07-25 21:01:02 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2005-07-30 00:07:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -42,6 +42,50 @@ static int* FALSE_MODEL_COUNT = NUMBER_5_INTEGER_ARRAY;
 static char TRUE_MODEL_ARRAY[] = {'t', 'r', 'u', 'e'};
 static char* TRUE_MODEL = TRUE_MODEL_ARRAY;
 static int* TRUE_MODEL_COUNT = NUMBER_4_INTEGER_ARRAY;
+
+//
+// Terminal colour models.
+//
+
+/** The black model. */
+static char TERMINAL_COLOUR_BLACK_MODEL_ARRAY[] = {'b', 'l', 'a', 'c', 'k'};
+static char* TERMINAL_COLOUR_BLACK_MODEL = TERMINAL_COLOUR_BLACK_MODEL_ARRAY;
+static int* TERMINAL_COLOUR_BLACK_MODEL_COUNT = NUMBER_5_INTEGER_ARRAY;
+
+/** The red model. */
+static char TERMINAL_COLOUR_RED_MODEL_ARRAY[] = {'r', 'e', 'd'};
+static char* TERMINAL_COLOUR_RED_MODEL = TERMINAL_COLOUR_RED_MODEL_ARRAY;
+static int* TERMINAL_COLOUR_RED_MODEL_COUNT = NUMBER_3_INTEGER_ARRAY;
+
+/** The green model. */
+static char TERMINAL_COLOUR_GREEN_MODEL_ARRAY[] = {'g', 'r', 'e', 'e', 'n'};
+static char* TERMINAL_COLOUR_GREEN_MODEL = TERMINAL_COLOUR_GREEN_MODEL_ARRAY;
+static int* TERMINAL_COLOUR_GREEN_MODEL_COUNT = NUMBER_5_INTEGER_ARRAY;
+
+/** The yellow model. */
+static char TERMINAL_COLOUR_YELLOW_MODEL_ARRAY[] = {'y', 'e', 'l', 'l', 'o', 'w'};
+static char* TERMINAL_COLOUR_YELLOW_MODEL = TERMINAL_COLOUR_YELLOW_MODEL_ARRAY;
+static int* TERMINAL_COLOUR_YELLOW_MODEL_COUNT = NUMBER_6_INTEGER_ARRAY;
+
+/** The blue model. */
+static char TERMINAL_COLOUR_BLUE_MODEL_ARRAY[] = {'b', 'l', 'u', 'e'};
+static char* TERMINAL_COLOUR_BLUE_MODEL = TERMINAL_COLOUR_BLUE_MODEL_ARRAY;
+static int* TERMINAL_COLOUR_BLUE_MODEL_COUNT = NUMBER_4_INTEGER_ARRAY;
+
+/** The magenta (violet, purple, mauve) model. */
+static char TERMINAL_COLOUR_MAGENTA_MODEL_ARRAY[] = {'m', 'a', 'g', 'e', 'n', 't', 'a'};
+static char* TERMINAL_COLOUR_MAGENTA_MODEL = TERMINAL_COLOUR_MAGENTA_MODEL_ARRAY;
+static int* TERMINAL_COLOUR_MAGENTA_MODEL_COUNT = NUMBER_7_INTEGER_ARRAY;
+
+/** The cobalt blue (china blue) model. */
+static char TERMINAL_COLOUR_COBALT_MODEL_ARRAY[] = {'c', 'o', 'b', 'a', 'l', 't'};
+static char* TERMINAL_COLOUR_COBALT_MODEL = TERMINAL_COLOUR_COBALT_MODEL_ARRAY;
+static int* TERMINAL_COLOUR_COBALT_MODEL_COUNT = NUMBER_6_INTEGER_ARRAY;
+
+/** The white model. */
+static char TERMINAL_COLOUR_WHITE_MODEL_ARRAY[] = {'w', 'h', 'i', 't', 'e'};
+static char* TERMINAL_COLOUR_WHITE_MODEL = TERMINAL_COLOUR_WHITE_MODEL_ARRAY;
+static int* TERMINAL_COLOUR_WHITE_MODEL_COUNT = NUMBER_5_INTEGER_ARRAY;
 
 //
 // Program flow models.

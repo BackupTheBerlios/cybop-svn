@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2005-07-25 21:01:02 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-07-30 00:07:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -29,6 +29,15 @@
 
 /**
  * Gets the escape code for the given character.
+/**
+ * Maps the terminal colour name to its control sequence code.
+ *
+ * @param p0 the destination terminal colour control sequence code
+ * @param p1 the destination count
+ * @param p2 the destination size
+ * @param p3 the source terminal colour name
+ * @param p4 the source count
+ * @param p3 the abstraction
  *
  * @param p0 the destination escape code
  * @param p1 the destination escape code count

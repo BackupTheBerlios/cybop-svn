@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2005-07-29 11:34:22 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2005-07-30 00:07:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -181,6 +181,16 @@ static int* TIME_ABSTRACTION_COUNT = NUMBER_4_INTEGER_ARRAY;
 static char TERMINAL_ABSTRACTION_ARRAY[] = {'t', 'e', 'r', 'm', 'i', 'n', 'a', 'l'};
 static char* TERMINAL_ABSTRACTION = TERMINAL_ABSTRACTION_ARRAY;
 static int* TERMINAL_ABSTRACTION_COUNT = NUMBER_8_INTEGER_ARRAY;
+
+/** The terminal foreground colour abstraction. */
+static char TERMINAL_FOREGROUND_ABSTRACTION_ARRAY[] = {'t', 'e', 'r', 'm', 'i', 'n', 'a', 'l', '_', 'f', 'o', 'r', 'e', 'g', 'r', 'o', 'u', 'n', 'd'};
+static char* TERMINAL_FOREGROUND_ABSTRACTION = TERMINAL_FOREGROUND_ABSTRACTION_ARRAY;
+static int* TERMINAL_FOREGROUND_ABSTRACTION_COUNT = NUMBER_19_INTEGER_ARRAY;
+
+/** The terminal background colour abstraction. */
+static char TERMINAL_BACKGROUND_ABSTRACTION_ARRAY[] = {'t', 'e', 'r', 'm', 'i', 'n', 'a', 'l', '_', 'b', 'a', 'c', 'k', 'g', 'r', 'o', 'u', 'n', 'd'};
+static char* TERMINAL_BACKGROUND_ABSTRACTION = TERMINAL_BACKGROUND_ABSTRACTION_ARRAY;
+static int* TERMINAL_BACKGROUND_ABSTRACTION_COUNT = NUMBER_19_INTEGER_ARRAY;
 
 //
 // Audio abstractions.

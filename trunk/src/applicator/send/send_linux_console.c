@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.22 $ $Date: 2005-07-29 16:46:18 $ $Author: christian $
+ * @version $Revision: 1.23 $ $Date: 2005-07-30 00:07:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -179,41 +179,18 @@ void send_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     // The tui.
     void* t = NULL_POINTER;
+    void** tp = &t;
     int* tc = NULL_POINTER;
+    int** tcp = &tc;
     int* ts = NULL_POINTER;
-
-    // The tui internal.
-    void** ti = NULL_POINTER;
-    int** tic = NULL_POINTER;
-    int** tis = NULL_POINTER;
+    int** tsp = &ts;
 
     // Get tui internal.
-    get(p0, (void*) TUI_INTERNAL, (void*) &ti, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    get(p0, (void*) TUI_COUNT_INTERNAL, (void*) &tic, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    get(p0, (void*) TUI_SIZE_INTERNAL, (void*) &tis, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p0, (void*) TUI_INTERNAL, (void*) &tp, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p0, (void*) TUI_COUNT_INTERNAL, (void*) &tcp, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p0, (void*) TUI_SIZE_INTERNAL, (void*) &tsp, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-    // Assign tui internal to real tui.
-    t = *ti;
-    tc = *tic;
-    ts = *tis;
-
-    fprintf(stdout, "TEST: ti: %i\n", ti);
-    fprintf(stdout, "TEST: tic: %i\n", tic);
-    fprintf(stdout, "TEST: tis: %i\n", tis);
-    fprintf(stdout, "TEST: *ti: %i\n", *ti);
-    fprintf(stdout, "TEST: *tic: %i\n", *tic);
-    fprintf(stdout, "TEST: *tis: %i\n", *tis);
-//??    fprintf(stdout, "TEST: **tic: %i\n", **tic);
-//??    fprintf(stdout, "TEST: **tis: %i\n", **tis);
-    fprintf(stdout, "TEST: t: %i\n", t);
-    fprintf(stdout, "TEST: tc: %i\n", tc);
-    fprintf(stdout, "TEST: ts: %i\n", ts);
-//??    fprintf(stdout, "TEST: *tc: %i\n", *tc);
-//??    fprintf(stdout, "TEST: *ts: %i\n", *ts);
-
-//??    if (t == NULL_POINTER) {
-
-        log_message_debug("in");
+    if (t == NULL_POINTER) {
 
 /*??
         // The vector count and size for z-, y-, x-dimension and properties.
@@ -275,7 +252,6 @@ void send_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
         set(ts, (void*) TUI_PROPERTIES_INDEX, tsp, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 */
 
-/*??
         // Allocate tui count and size.
         allocate((void*) &tc, (void*) TUI_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
         allocate((void*) &ts, (void*) TUI_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
@@ -291,9 +267,7 @@ void send_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
         set(p0, (void*) TUI_INTERNAL, (void*) t, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         set(p0, (void*) TUI_COUNT_INTERNAL, (void*) tc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         set(p0, (void*) TUI_SIZE_INTERNAL, (void*) ts, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-//??    }
-
-    log_message_debug("out");
+    }
 
     // Encode compound model into tui.
     encode((void*) &t, (void*) tc, (void*) ts, p3, p4, (void*) TUI_ABSTRACTION, (void*) TUI_ABSTRACTION_COUNT);
@@ -311,7 +285,9 @@ void send_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     // CAUTION! The textual user interface (tui) needs to be deallocated at
     // system shutdown.
-    //?? For temporary testing, it is destroyed here. DELETE this line later!
+    //?? For temporary testing, it is destroyed here. DELETE this line later,
+    //?? when tui is stored in internal memory for faster access,
+    //?? so that it does not have to be created every time again.
     deallocate((void*) &t, (void*) &ts, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
     // Write serialised array as message to terminal.
@@ -319,10 +295,9 @@ void send_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     // Destroy array.
     deallocate((void*) &a, (void*) &as, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT);
-*/
 
     //?? TEST.
-    write_data(p0, p1, p2, p3, p4, (void*) TERMINAL_CHANNEL, (void*) TERMINAL_CHANNEL_COUNT);
+//??    write_data(p0, p1, p2, p3, p4, (void*) TERMINAL_CHANNEL, (void*) TERMINAL_CHANNEL_COUNT);
 }
 
 /* SEND_LINUX_CONSOLE_SOURCE */
