@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.24 $ $Date: 2005-07-30 14:03:50 $ $Author: christian $
+ * @version $Revision: 1.25 $ $Date: 2005-08-01 00:18:03 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -177,20 +177,23 @@ void send_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     log_message_debug("Send via linux console.");
 
+    // The tui internal.
+    void** tp = NULL_POINTER;
+    int** tcp = NULL_POINTER;
+    int** tsp = NULL_POINTER;
     // The tui.
     void* t = NULL_POINTER;
-    void** tp = &t;
     int* tc = NULL_POINTER;
-    int** tcp = &tc;
     int* ts = NULL_POINTER;
-    int** tsp = &ts;
 
     // Get tui internal.
     get(p0, (void*) TUI_INTERNAL, (void*) &tp, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     get(p0, (void*) TUI_COUNT_INTERNAL, (void*) &tcp, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     get(p0, (void*) TUI_SIZE_INTERNAL, (void*) &tsp, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-    if (t == NULL_POINTER) {
+    if (*tp == NULL_POINTER) {
+
+        // The tui internal tp is null, so that a new tui t needs to be created.
 
         // The count and size z, y, x coordinates.
         int* tcz = NULL_POINTER;
@@ -235,6 +238,13 @@ void send_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
         set(p0, (void*) TUI_INTERNAL, (void*) t, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         set(p0, (void*) TUI_COUNT_INTERNAL, (void*) tc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         set(p0, (void*) TUI_SIZE_INTERNAL, (void*) ts, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
+    } else {
+
+        // Reinitialise tui with already existing tui internal.
+        t = *tp;
+        tc = *tcp;
+        ts = *tsp;
     }
 
     // Encode compound model into tui.
@@ -243,17 +253,19 @@ void send_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
     // The serialised string array to be sent to the terminal.
     void* a = NULL_POINTER;
     int ac = 0;
-    int as = 0;
+//??    int as = 0;
+    //?? TEST only!
+    int as = 100;
 
     // Create array.
     allocate((void*) &a, (void*) &as, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT);
 
-    printf("TEST 0: %s", a);
+    printf("TEST send 0: %s\n", (char*) a);
 
     // Serialise multi-dimensional tui into array.
     serialise((void*) &a, (void*) &ac, (void*) &as, t, (void*) tc, (void*) TERMINAL_ABSTRACTION, (void*) TERMINAL_ABSTRACTION_COUNT);
 
-    printf("TEST 4: %s", a);
+    printf("TEST send 1: %s\n", (char*) a);
 
     // CAUTION! The textual user interface (tui) needs to be deallocated at
     // system shutdown.
@@ -262,12 +274,26 @@ void send_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
     //?? so that it does not have to be created every time again.
     deallocate((void*) &t, (void*) &ts, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-    printf("TEST 5: %s", a);
+    printf("TEST send 2: %s\n", (char*) a);
+
+    //?? TEST only!
+//??    as = 100;
+//??    resize_array((void*) &a, (void*) &as, (void*) CHARACTER_ARRAY);
+//??    set(a, (void*) &ac, (void*) "Hallo, dies ist ein Test fuer Res Medicinae!", (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT);
+
+/*??
+    char* test = "\033[2JOn cleared screen,\
+        print in \033[32mgreen colour\033[0m and then\
+        \033[33myellow on \033[44mblue background\033[0m and try to\
+        position \033[10;15H and finally write in \
+        \033[1mbold and switch all \033[0m off.";
+    int testc = strlen(test);
+*/
 
     // Write serialised array as message to terminal.
     write_data(p0, p1, p2, a, (void*) &ac, (void*) TERMINAL_CHANNEL, (void*) TERMINAL_CHANNEL_COUNT);
-
-    printf("TEST 6: %s", a);
+    //?? TEST only!
+//??    write_data(p0, p1, p2, (void*) test, (void*) &testc, (void*) TERMINAL_CHANNEL, (void*) TERMINAL_CHANNEL_COUNT);
 
     // Destroy array.
     deallocate((void*) &a, (void*) &as, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT);

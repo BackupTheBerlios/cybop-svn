@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.13 $ $Date: 2005-07-29 15:48:51 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2005-08-01 00:18:03 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -1266,12 +1266,14 @@ void receive_tcp_socket(void* p0, void* p1, void* p2, void* p3,
                     pthread_t t;
 
                     // Create thread returning an error value.
+/*??
                     int e = pthread_create(&t, NULL_POINTER, (void*) &run_tcp_socket_server, p0);
 
                     if (e != 0) {
 
                         log_message_debug("Could not receive tcp socket. An error occured while creating the thread.");
                     }
+*/
                 }
 
                 // Set the activation flag in the internal memory.

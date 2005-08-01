@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2005-07-30 14:03:50 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2005-08-01 00:18:03 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -38,6 +38,7 @@
 #include "../../globals/variables/variables.c"
 #include "../../memoriser/accessor.c"
 #include "../../memoriser/mapper.c"
+#include "../../tester/tester.c"
 
 /**
  * Decodes the tui model into a compound model.
@@ -81,101 +82,56 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     log_message_debug("Encode compound into textual user interface.");
 
                     // The part abstraction, model, details.
-                    void* a = NULL_POINTER;
-                    void** ap = &a;
-                    void* ac = NULL_POINTER;
-                    void** acp = &ac;
-                    void* as = NULL_POINTER;
-                    void** asp = &as;
-                    void* m = NULL_POINTER;
-                    void** mp = &m;
-                    void* mc = NULL_POINTER;
-                    void** mcp = &mc;
-                    void* ms = NULL_POINTER;
-                    void** msp = &ms;
-                    void* d = NULL_POINTER;
-                    void** dp = &d;
-                    void* dc = NULL_POINTER;
-                    void** dcp = &dc;
-                    void* ds = NULL_POINTER;
-                    void** dsp = &ds;
+                    void** a = NULL_POINTER;
+                    void** ac = NULL_POINTER;
+                    void** as = NULL_POINTER;
+                    void** m = NULL_POINTER;
+                    void** mc = NULL_POINTER;
+                    void** ms = NULL_POINTER;
+                    void** d = NULL_POINTER;
+                    void** dc = NULL_POINTER;
+                    void** ds = NULL_POINTER;
 
                     // The part position.
-                    void* pa = NULL_POINTER;
-                    void** pap = &pa;
-                    void* pac = NULL_POINTER;
-                    void** pacp = &pac;
-                    void* pas = NULL_POINTER;
-                    void** pasp = &pas;
-                    void* pm = NULL_POINTER;
-                    void** pmp = &pm;
-                    void* pmc = NULL_POINTER;
-                    void** pmcp = &pmc;
-                    void* pms = NULL_POINTER;
-                    void** pmsp = &pms;
-                    void* pd = NULL_POINTER;
-                    void** pdp = &pd;
-                    void* pdc = NULL_POINTER;
-                    void** pdcp = &pdc;
-                    void* pds = NULL_POINTER;
-                    void** pdsp = &pds;
+                    void** pa = NULL_POINTER;
+                    void** pac = NULL_POINTER;
+                    void** pas = NULL_POINTER;
+                    void** pm = NULL_POINTER;
+                    void** pmc = NULL_POINTER;
+                    void** pms = NULL_POINTER;
+                    void** pd = NULL_POINTER;
+                    void** pdc = NULL_POINTER;
+                    void** pds = NULL_POINTER;
                     // The part size.
-                    void* sa = NULL_POINTER;
-                    void** sap = &sa;
-                    void* sac = NULL_POINTER;
-                    void** sacp = &sac;
-                    void* sas = NULL_POINTER;
-                    void** sasp = &sas;
-                    void* sm = NULL_POINTER;
-                    void** smp = &sm;
-                    void* smc = NULL_POINTER;
-                    void** smcp = &smc;
-                    void* sms = NULL_POINTER;
-                    void** smsp = &sms;
-                    void* sd = NULL_POINTER;
-                    void** sdp = &sd;
-                    void* sdc = NULL_POINTER;
-                    void** sdcp = &sdc;
-                    void* sds = NULL_POINTER;
-                    void** sdsp = &sds;
+                    void** sa = NULL_POINTER;
+                    void** sac = NULL_POINTER;
+                    void** sas = NULL_POINTER;
+                    void** sm = NULL_POINTER;
+                    void** smc = NULL_POINTER;
+                    void** sms = NULL_POINTER;
+                    void** sd = NULL_POINTER;
+                    void** sdc = NULL_POINTER;
+                    void** sds = NULL_POINTER;
                     // The part background colour.
-                    void* bga = NULL_POINTER;
-                    void** bgap = &bga;
-                    void* bgac = NULL_POINTER;
-                    void** bgacp = &bgac;
-                    void* bgas = NULL_POINTER;
-                    void** bgasp = &bgas;
-                    void* bgm = NULL_POINTER;
-                    void** bgmp = &bgm;
-                    void* bgmc = NULL_POINTER;
-                    void** bgmcp = &bgmc;
-                    void* bgms = NULL_POINTER;
-                    void** bgmsp = &bgms;
-                    void* bgd = NULL_POINTER;
-                    void** bgdp = &bgd;
-                    void* bgdc = NULL_POINTER;
-                    void** bgdcp = &bgdc;
-                    void* bgds = NULL_POINTER;
-                    void** bgdsp = &bgds;
+                    void** bga = NULL_POINTER;
+                    void** bgac = NULL_POINTER;
+                    void** bgas = NULL_POINTER;
+                    void** bgm = NULL_POINTER;
+                    void** bgmc = NULL_POINTER;
+                    void** bgms = NULL_POINTER;
+                    void** bgd = NULL_POINTER;
+                    void** bgdc = NULL_POINTER;
+                    void** bgds = NULL_POINTER;
                     // The part foreground colour.
-                    void* fga = NULL_POINTER;
-                    void** fgap = &fga;
-                    void* fgac = NULL_POINTER;
-                    void** fgacp = &fgac;
-                    void* fgas = NULL_POINTER;
-                    void** fgasp = &fgas;
-                    void* fgm = NULL_POINTER;
-                    void** fgmp = &fgm;
-                    void* fgmc = NULL_POINTER;
-                    void** fgmcp = &fgmc;
-                    void* fgms = NULL_POINTER;
-                    void** fgmsp = &fgms;
-                    void* fgd = NULL_POINTER;
-                    void** fgdp = &fgd;
-                    void* fgdc = NULL_POINTER;
-                    void** fgdcp = &fgdc;
-                    void* fgds = NULL_POINTER;
-                    void** fgdsp = &fgds;
+                    void** fga = NULL_POINTER;
+                    void** fgac = NULL_POINTER;
+                    void** fgas = NULL_POINTER;
+                    void** fgm = NULL_POINTER;
+                    void** fgmc = NULL_POINTER;
+                    void** fgms = NULL_POINTER;
+                    void** fgd = NULL_POINTER;
+                    void** fgdc = NULL_POINTER;
+                    void** fgds = NULL_POINTER;
 
                     // The part position x, y, z.
                     int* px = NULL_POINTER;
@@ -233,59 +189,83 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
                             break;
                         }
 
+    test_knowledge_model(p3, p4, 2);
+
                         // Get part at index j.
                         get_compound_element_by_index(p3, p4, (void*) &j,
-                            (void*) &ap, (void*) &acp, (void*) &asp,
-                            (void*) &mp, (void*) &mcp, (void*) &msp,
-                            (void*) &dp, (void*) &dcp, (void*) &dsp);
+                            (void*) &a, (void*) &ac, (void*) &as,
+                            (void*) &m, (void*) &mc, (void*) &ms,
+                            (void*) &d, (void*) &dc, (void*) &ds);
+
+    printf("TEST translator char a: %s\n", (char*) *a);
+    printf("TEST translator int ac: %i\n", *((int*) *ac));
+    printf("TEST translator mp: %i\n", *m);
+    printf("TEST translator m: %s\n", (char*) *m);
+    printf("TEST translator mc: %i\n", *((int*) *mc));
+    printf("TEST translator d: %i\n", d);
+    printf("TEST translator dc: %i\n", *((int*) *dc));
 
                         // Get part position from details.
-                        get_compound_element_by_name(d, dc,
+                        get_compound_element_by_name(*d, *dc,
                             (void*) TUI_POSITION_NAME, (void*) TUI_POSITION_NAME_COUNT,
-                            (void*) &pap, (void*) &pacp, (void*) &pasp,
-                            (void*) &pmp, (void*) &pmcp, (void*) &pmsp,
-                            (void*) &pdp, (void*) &pdcp, (void*) &pdsp);
+                            (void*) &pa, (void*) &pac, (void*) &pas,
+                            (void*) &pm, (void*) &pmc, (void*) &pms,
+                            (void*) &pd, (void*) &pdc, (void*) &pds);
                         // Get part size from details.
-                        get_compound_element_by_name(d, dc,
+                        get_compound_element_by_name(*d, *dc,
                             (void*) TUI_SIZE_NAME, (void*) TUI_SIZE_NAME_COUNT,
-                            (void*) &sap, (void*) &sacp, (void*) &sasp,
-                            (void*) &smp, (void*) &smcp, (void*) &smsp,
-                            (void*) &sdp, (void*) &sdcp, (void*) &sdsp);
+                            (void*) &sa, (void*) &sac, (void*) &sas,
+                            (void*) &sm, (void*) &smc, (void*) &sms,
+                            (void*) &sd, (void*) &sdc, (void*) &sds);
                         // Get part background colour from details.
-                        get_compound_element_by_name(d, dc,
+                        get_compound_element_by_name(*d, *dc,
                             (void*) TUI_BACKGROUND_NAME, (void*) TUI_BACKGROUND_NAME_COUNT,
-                            (void*) &bgap, (void*) &bgacp, (void*) &bgasp,
-                            (void*) &bgmp, (void*) &bgmcp, (void*) &bgmsp,
-                            (void*) &bgdp, (void*) &bgdcp, (void*) &bgdsp);
+                            (void*) &bga, (void*) &bgac, (void*) &bgas,
+                            (void*) &bgm, (void*) &bgmc, (void*) &bgms,
+                            (void*) &bgd, (void*) &bgdc, (void*) &bgds);
                         // Get part foreground colour from details.
-                        get_compound_element_by_name(d, dc,
+                        get_compound_element_by_name(*d, *dc,
                             (void*) TUI_FOREGROUND_NAME, (void*) TUI_FOREGROUND_NAME_COUNT,
-                            (void*) &fgap, (void*) &fgacp, (void*) &fgasp,
-                            (void*) &fgmp, (void*) &fgmcp, (void*) &fgmsp,
-                            (void*) &fgdp, (void*) &fgdcp, (void*) &fgdsp);
+                            (void*) &fga, (void*) &fgac, (void*) &fgas,
+                            (void*) &fgm, (void*) &fgmc, (void*) &fgms,
+                            (void*) &fgd, (void*) &fgdc, (void*) &fgds);
+
+    printf("TEST translator pa: %s\n", (char*) *pa);
+    printf("TEST translator pac: %i\n", *((int*) *pac));
+    printf("TEST translator pm pointer 1: %i\n", *pm);
+    printf("TEST translator pmc: %i\n", *((int*) *pmc));
 
                         // Get part position x, y, z.
-                        get(pm, (void*) TUI_POSITION_X_INDEX, (void*) &px, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-                        get(pm, (void*) TUI_POSITION_Y_INDEX, (void*) &py, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-                        get(pm, (void*) TUI_POSITION_Z_INDEX, (void*) &pz, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+                        get(*pm, (void*) TUI_POSITION_X_INDEX, (void*) &px, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+                        get(*pm, (void*) TUI_POSITION_Y_INDEX, (void*) &py, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+                        get(*pm, (void*) TUI_POSITION_Z_INDEX, (void*) &pz, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
                         // Get part size x, y, z.
-                        get(sm, (void*) TUI_SIZE_X_INDEX, (void*) &sx, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-                        get(sm, (void*) TUI_SIZE_Y_INDEX, (void*) &sy, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-                        get(sm, (void*) TUI_SIZE_Z_INDEX, (void*) &sz, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+                        get(*sm, (void*) TUI_SIZE_X_INDEX, (void*) &sx, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+                        get(*sm, (void*) TUI_SIZE_Y_INDEX, (void*) &sy, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+                        get(*sm, (void*) TUI_SIZE_Z_INDEX, (void*) &sz, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
                         //?? TODO: CAUTION!
                         //?? Possibly use normal int for px, py, pz and sx, sy, sz!
                         //?? They are got from an integer-, NOT pointer vector!
                         //?? TEST their values here to find out!
 
+    printf("TEST translator pm pointer 2: %i\n", *pm);
+
                         if (pz != NULL_POINTER) {
+
+    printf("TEST translator pm pointer 3: %i\n", *pm);
 
                             // Set tui count and size to given z dimension size minus position.
                             *dec = *sz - *pz;
                             *des = *sz - *pz;
 
+    printf("TEST translator pm pointer 4: %i\n", *pm);
+
                             // Reset z loop index to first position.
                             z = *pz;
+
+    printf("TEST translator pz: %i\n", *pz);
+    printf("TEST translator sz: %i\n", *sz);
 
                             // Position characters in their colour and with their size.
                             while (1) {
@@ -306,6 +286,9 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
                                 // Set z dimension count and size to given y dimension size minus position.
                                 *dzc = *sy - *py;
                                 *dzs = *sy - *py;
+
+    printf("TEST translator py: %i\n", *py);
+    printf("TEST translator sy: %i\n", *sy);
 
     //??                            if (dz == NULL_POINTER) {
 
@@ -349,6 +332,9 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
                                     *dyc = *sx - *px;
                                     *dys = *sx - *px;
 
+    printf("TEST translator px: %i\n", *px);
+    printf("TEST translator sx: %i\n", *sx);
+
     //??                                if (dy == NULL_POINTER) {
 
                                         // Allocate tui y dimension.
@@ -391,6 +377,9 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
                                         *dxc = *TUI_PROPERTIES_COUNT;
                                         *dxs = *TUI_PROPERTIES_COUNT;
 
+    printf("TEST translator dxc: %i\n", *dxc);
+    printf("TEST translator dxs: %i\n", *dxs);
+
 //??                                        if (dx == NULL_POINTER) {
 
                                             // Allocate tui x dimension.
@@ -421,30 +410,39 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
                                         allocate((void*) &b, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
                                         allocate((void*) &c, (void*) CHARACTER_COUNT, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT);
 
+    printf("TEST translator bgm string: %s\n", (char*) *bgm);
+
                                         // Get character properties.
-                                        mapto((void*) &bg, (void*) INTEGER_COUNT, (void*) INTEGER_COUNT, (void*) bgm, (void*) bgmc, (void*) TERMINAL_BACKGROUND_ABSTRACTION, (void*) TERMINAL_BACKGROUND_ABSTRACTION_COUNT);
-                                        mapto((void*) &fg, (void*) INTEGER_COUNT, (void*) INTEGER_COUNT, (void*) fgm, (void*) fgmc, (void*) TERMINAL_FOREGROUND_ABSTRACTION, (void*) TERMINAL_FOREGROUND_ABSTRACTION_COUNT);
+                                        mapto((void*) &bg, (void*) INTEGER_COUNT, (void*) INTEGER_COUNT, (void*) *bgm, (void*) *bgmc, (void*) TERMINAL_BACKGROUND_ABSTRACTION, (void*) TERMINAL_BACKGROUND_ABSTRACTION_COUNT);
+                                        mapto((void*) &fg, (void*) INTEGER_COUNT, (void*) INTEGER_COUNT, (void*) *fgm, (void*) *fgmc, (void*) TERMINAL_FOREGROUND_ABSTRACTION, (void*) TERMINAL_FOREGROUND_ABSTRACTION_COUNT);
                                         set((void*) h, (void*) INTEGER_VALUE_INDEX, (void*) NUMBER_0_INTEGER, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
                                         set((void*) i, (void*) INTEGER_VALUE_INDEX, (void*) NUMBER_0_INTEGER, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
                                         set((void*) bl, (void*) INTEGER_VALUE_INDEX, (void*) NUMBER_0_INTEGER, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
                                         set((void*) u, (void*) INTEGER_VALUE_INDEX, (void*) NUMBER_0_INTEGER, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
                                         set((void*) b, (void*) INTEGER_VALUE_INDEX, (void*) NUMBER_0_INTEGER, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
 
+    printf("TEST translator bgm integer: %i\n", *bg);
+    printf("TEST translator hidden flag: %i\n", *h);
+
                                         // Reset comparison result.
                                         r = 0;
 
-                                        compare_arrays(a, ac, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                                        compare_arrays(*a, *ac, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
                                         if (r != 0) {
 
                                             // Get character property (part string) at position x.
-                                            get(m, (void*) &x, (void*) c, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT);
+                                            get(*m, (void*) &x, (void*) c, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT);
+
+    printf("TEST translator part character: %s\n", (char*) *m);
 
                                         } else {
 
                                             // Set character property to space character,
                                             // because the part model is NOT a character.
                                             set((void*) c, (void*) CHARACTER_VALUE_INDEX, (void*) SPACE_CHARACTER, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT);
+
+    printf("TEST translator space character: %s\n", (char*) c);
                                         }
 
                                         // Add character properties to x dimension.
@@ -456,6 +454,8 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
                                         set(dx, (void*) TUI_PROPERTIES_UNDERLINE_INDEX, (void*) u, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
                                         set(dx, (void*) TUI_PROPERTIES_BOLD_INDEX, (void*) b, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
                                         set(dx, (void*) TUI_PROPERTIES_CHARACTER_INDEX, (void*) c, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
+    printf("TEST translator x loop count: %i\n", x);
 
                                         x++;
                                     }
@@ -477,6 +477,8 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
                         compare_arrays(a, ac, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
                         if (r != 0) {
+
+    printf("TEST translator recursive call follows r: %i\n", r);
 
                             // The part model is a compound.
 

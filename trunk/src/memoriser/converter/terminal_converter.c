@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.12 $ $Date: 2005-07-30 14:03:50 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2005-08-01 00:18:03 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -68,19 +68,22 @@ void serialise_terminal_properties(void* p0, void* p1, void* p2,
 
                 void** d = (void**) p0;
 
-    sprintf(*d, "TEST 1: %s", *d);
+    sprintf(*d, "TEST 1:\n %s", *d);
 
                 //?? TEST only!
                 *dc = 100;
                 *ds = 100;
 
-                resize_array(p0, (void*) ds, (void*) CHARACTER_ARRAY);
+                resize_array(p0, p2, (void*) CHARACTER_ARRAY);
 
-    sprintf(*d, "TEST 2: %s", *d);
+                //?? CAUTION! Resize returns a different pointer!
+                //?? Assign it here again to *d??
+
+    sprintf(*d, "TEST 2:\n %s", *d);
 
                 set(*d, dc, (void*) "Hallo, dies ist ein Test fuer Res Medicinae!", (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT);
 
-    sprintf(*d, "TEST 3: %s", *d);
+    sprintf(*d, "TEST 3:\n %s", *d);
 
 /*??
                 // Calculate new destination string count.
