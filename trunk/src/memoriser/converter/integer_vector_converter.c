@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-07-28 12:52:13 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-08-01 09:09:07 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -57,16 +57,20 @@ void parse_integer_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 log_message_debug("Parse integer vector.");
 
-/*??
                 // The loop count.
                 int j = 0;
                 // The comma index.
                 int i = -1;
+                // The integer number.
+                void* n = NULL_POINTER;
+                int nc = NULL_POINTER;
+                int ns = NULL_POINTER;
                 // The integer vector element count.
                 void* c = NULL_POINTER;
                 // The integer number.
                 int n = 0;
 
+                // Loop through source string containing comma-separated integers.
                 while (1) {
 
                     if (j >= *sc) {
@@ -74,32 +78,43 @@ void parse_integer_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
                         break;
                     }
 
-                    get_character_array_elements_index(p3, p4, (void*) COMMA_CHARACTER, (void*) COMMA_CHARACTER_COUNT, (void*) &i);
+                    // Find comma character index.
+                    get_array_elements_index(p3, p4, (void*) COMMA_CHARACTER, (void*) COMMA_CHARACTER_COUNT, (void*) &i, (void*) CHARACTER_ARRAY);
 
                     if (i > 0) {
 
                         // Determine integer vector element count.
                         c = *s + i;
 
+                        // Parse integer.
                         // Example:
                         // Vector elements: "200,300,400"
                         // The number 200 character array length is 3.
                         // Index of first comma: 3
                         // Handed over as vector element (source) count: index i
                         // (which is 3, as needed for the length)
-                        parse_integer(d, dc, ds, p3, &i);
+                        parse_integer((void*) &n, (void*) INTEGER_COUNT, (void*) INTEGER_COUNT, p3, (void*) &i);
+
+                        // Add integer to integer vector.
+
+                        // Assign part string with new, shorter count to local variables.
 
                         // Recursively call this procedure for the remaining integer vector elements.
                         parse_integer_vector(d, dc, ds, new_start_vector, sc);
+                        // Recursively process further integers found in the vector.
+                        // Hand over increased pointer, pointing to next integer element,
+                        // and its remaining size, cut shorter.
+                        parse_integer_vector();
 
                     } else {
 
-                        log_message_debug("ERROR: Could not parse integer vector. The source string starts with a comma character.");
+                        log_message_debug("Could not parse integer vector. The source string starts with a comma character.");
                     }
 
                     j++;
                 }
 
+/*??
                 // Read input stream and transform to integer vector.
                 //??    fscanf(p1, %d, &(m->x));
                 //??    fscanf(p1, %d, &(m->y));
@@ -147,17 +162,17 @@ void parse_integer_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             } else {
 
-//??                log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_PARSE_INTEGER_THE_DESTINATION_IS_NULL_MESSAGE, (void*) &COULD_NOT_PARSE_INTEGER_THE_DESTINATION_IS_NULL_MESSAGE_COUNT);
+                log_message_debug("Could not parse integer vector. The destination is null.");
             }
 
         } else {
 
-//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_PARSE_INTEGER_THE_SOURCE_IS_NULL_MESSAGE, (void*) &COULD_NOT_PARSE_INTEGER_THE_SOURCE_IS_NULL_MESSAGE_COUNT);
+            log_message_debug("Could not parse integer vector. The source is null.");
         }
 
     } else {
 
-//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_PARSE_INTEGER_THE_SOURCE_COUNT_IS_NULL_MESSAGE, (void*) &COULD_NOT_PARSE_INTEGER_THE_SOURCE_COUNT_IS_NULL_MESSAGE_COUNT);
+        log_message_debug("Could not parse integer vector. The source count is null.");
     }
 }
 
