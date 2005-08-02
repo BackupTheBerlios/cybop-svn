@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2005-07-30 00:07:17 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2005-08-02 16:27:07 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -40,6 +40,7 @@
 //
 // Forward declarations.
 //
+
 void encode_html(void** dest, int* dest_count, int *dest_size,
     void* source_abstr, int* source_abstr_count,
     void* source_model, int* source_model_count,
