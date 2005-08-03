@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.13 $ $Date: 2005-07-29 15:48:51 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2005-08-03 08:45:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -159,6 +159,9 @@ static int* COMPLEX_IMAGINARY_INDEX = NUMBER_1_INTEGER_ARRAY;
 //
 // Textual user interface (tui).
 //
+
+/** The tui resize factor. */
+static int* TUI_RESIZE_FACTOR = NUMBER_2_INTEGER_ARRAY;
 
 /** The tui count. */
 static int* TUI_COUNT = NUMBER_4_INTEGER_ARRAY;
