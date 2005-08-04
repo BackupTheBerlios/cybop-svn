@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2005-07-28 23:06:34 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-08-04 15:20:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -35,8 +35,8 @@
 /**
  * Allocates the pointer vector.
  *
- * @param p0 the pointer vector (Hand over as reference!)
- * @param p1 the pointer vector size
+ * @param p0 the vector (Hand over as reference!)
+ * @param p1 the vector size
  */
 void allocate_pointer_vector(void* p0, void* p1) {
 
@@ -48,8 +48,8 @@ void allocate_pointer_vector(void* p0, void* p1) {
 /**
  * Deallocates the pointer vector.
  *
- * @param p0 the pointer vector (Hand over as reference!)
- * @param p1 the pointer vector size
+ * @param p0 the vector (Hand over as reference!)
+ * @param p1 the vector size
  */
 void deallocate_pointer_vector(void* p0, void* p1) {
 
@@ -59,16 +59,17 @@ void deallocate_pointer_vector(void* p0, void* p1) {
 }
 
 /**
- * Resizes the pointer vector.
+ * Reallocates the pointer vector.
  *
- * @param p0 the pointer vector (Hand over as reference!)
- * @param p1 the pointer vector size
+ * @param p0 the vector (Hand over as reference!)
+ * @param p1 the vector count
+ * @param p2 the vector size
  */
-void resize_pointer_vector(void* p0, void* p1) {
+void reallocate_pointer_vector(void* p0, void* p1, void* p2) {
 
-    log_message_debug("Resize pointer vector.");
+    log_message_debug("Reallocate pointer vector.");
 
-    resize_array(p0, p1, (void*) POINTER_ARRAY);
+    reallocate_array(p0, p1, p2, (void*) POINTER_ARRAY);
 }
 
 /* POINTER_VECTOR_ALLOCATOR_SOURCE */

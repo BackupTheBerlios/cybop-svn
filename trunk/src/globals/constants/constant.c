@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2005-07-25 21:01:02 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2005-08-04 15:20:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -120,8 +120,8 @@ static int* ATTRIBUTE_VALUE_PARSE_MODE = NUMBER_6_INTEGER_ARRAY;
 // Cybol file.
 //
 
-/** The file resize factor. */
-static int* FILE_RESIZE_FACTOR = NUMBER_2_INTEGER_ARRAY;
+/** The file reallocate factor. */
+static int* FILE_REALLOCATE_FACTOR = NUMBER_2_INTEGER_ARRAY;
 
 /** The cybol path. */
 //?? static char CYBOL_PATH[] = {'/home/cybop/lib/cybop/'};

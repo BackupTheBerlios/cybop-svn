@@ -24,7 +24,7 @@
  * - create a model in memory
  * - destroy a model in memory
  *
- * @version $Revision: 1.10 $ $Date: 2005-08-02 16:27:07 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2005-08-04 15:20:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -276,205 +276,206 @@ void allocate(void* p0, void* p1, void* p2, void* p3) {
 }
 
 /**
- * Resizes the model.
+ * Reallocates the model.
  *
  * @param p0 the model (Hand over as reference!)
- * @param p1 the model size
- * @param p2 the abstraction
- * @param p3 the abstraction count
+ * @param p1 the model count
+ * @param p2 the model size
+ * @param p3 the abstraction
+ * @param p4 the abstraction count
  */
-void resize(void* p0, void* p1, void* p2, void* p3) {
+void reallocate(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     // The comparison result.
     int r = 0;
 
     if (r == 0) {
 
-        compare_arrays(p2, p3, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p3, p4, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-//??            resize_compound(p0, p1);
+//??            reallocate_compound(p0, p1, p2);
         }
     }
 
     if (r == 0) {
 
-        compare_arrays(p2, p3, (void*) OPERATION_ABSTRACTION, (void*) OPERATION_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p3, p4, (void*) OPERATION_ABSTRACTION, (void*) OPERATION_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-//??            resize_string(p0, p1);
+//??            reallocate_string(p0, p1, p2);
         }
     }
 
     if (r == 0) {
 
-        compare_arrays(p2, p3, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p3, p4, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-//??            resize_string(p0, p1);
+//??            reallocate_string(p0, p1, p2);
         }
     }
 
     if (r == 0) {
 
-        compare_arrays(p2, p3, (void*) BOOLEAN_ABSTRACTION, (void*) BOOLEAN_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p3, p4, (void*) BOOLEAN_ABSTRACTION, (void*) BOOLEAN_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-//??            resize_integer(p0, p1);
+//??            reallocate_integer(p0, p1, p2);
         }
     }
 
     if (r == 0) {
 
-        compare_arrays(p2, p3, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p3, p4, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-//??            resize_integer(p0, p1);
+//??            reallocate_integer(p0, p1, p2);
         }
     }
 
     if (r == 0) {
 
-        compare_arrays(p2, p3, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p3, p4, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-//??            resize_integer_vector(p0, p1);
+//??            reallocate_integer_vector(p0, p1, p2);
         }
     }
 
     if (r == 0) {
 
-        compare_arrays(p2, p3, (void*) UNSIGNED_LONG_ABSTRACTION, (void*) UNSIGNED_LONG_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p3, p4, (void*) UNSIGNED_LONG_ABSTRACTION, (void*) UNSIGNED_LONG_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-//??            resize_unsigned_long(p0, p1);
+//??            reallocate_unsigned_long(p0, p1, p2);
         }
     }
 
     if (r == 0) {
 
-        compare_arrays(p2, p3, (void*) UNSIGNED_LONG_VECTOR_ABSTRACTION, (void*) UNSIGNED_LONG_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p3, p4, (void*) UNSIGNED_LONG_VECTOR_ABSTRACTION, (void*) UNSIGNED_LONG_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-//??            resize_unsigned_long_vector(p0, p1);
+//??            reallocate_unsigned_long_vector(p0, p1, p2);
         }
     }
 
     if (r == 0) {
 
-        compare_arrays(p2, p3, (void*) DOUBLE_ABSTRACTION, (void*) DOUBLE_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p3, p4, (void*) DOUBLE_ABSTRACTION, (void*) DOUBLE_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-//??            resize_double(p0, p1);
+//??            reallocate_double(p0, p1, p2);
         }
     }
 
     if (r == 0) {
 
-        compare_arrays(p2, p3, (void*) DOUBLE_VECTOR_ABSTRACTION, (void*) DOUBLE_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p3, p4, (void*) DOUBLE_VECTOR_ABSTRACTION, (void*) DOUBLE_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-//??            resize_double_vector(p0, p1);
+//??            reallocate_double_vector(p0, p1, p2);
         }
     }
 
     if (r == 0) {
 
-        compare_arrays(p2, p3, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p3, p4, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-            resize_pointer_vector(p0, p1);
+            reallocate_pointer_vector(p0, p1, p2);
         }
     }
 
     if (r == 0) {
 
-        compare_arrays(p2, p3, (void*) FRACTION_ABSTRACTION, (void*) FRACTION_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p3, p4, (void*) FRACTION_ABSTRACTION, (void*) FRACTION_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-//??            resize_fraction(p0, p1);
+//??            reallocate_fraction(p0, p1, p2);
         }
     }
 
     if (r == 0) {
 
-        compare_arrays(p2, p3, (void*) COMPLEX_ABSTRACTION, (void*) COMPLEX_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p3, p4, (void*) COMPLEX_ABSTRACTION, (void*) COMPLEX_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-//??            resize_complex(p0, p1);
+//??            reallocate_complex(p0, p1, p2);
         }
     }
 
     if (r == 0) {
 
-        compare_arrays(p2, p3, (void*) TIME_ABSTRACTION, (void*) TIME_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p3, p4, (void*) TIME_ABSTRACTION, (void*) TIME_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-//??            resize_time(p0, p1);
+//??            reallocate_time(p0, p1, p2);
         }
     }
 
     if (r == 0) {
 
-        compare_arrays(p2, p3, (void*) CYBOL_ABSTRACTION, (void*) CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p3, p4, (void*) CYBOL_ABSTRACTION, (void*) CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-//??            resize_xml_node(p0, p1);
+//??            reallocate_xml_node(p0, p1, p2);
         }
     }
 
     if (r == 0) {
 
-        compare_arrays(p2, p3, (void*) TUI_ABSTRACTION, (void*) TUI_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p3, p4, (void*) TUI_ABSTRACTION, (void*) TUI_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-//??            resize_tui(p0, p1);
+//??            reallocate_tui(p0, p1, p2);
         }
     }
 
     if (r == 0) {
 
-        compare_arrays(p2, p3, (void*) HXP_ABSTRACTION, (void*) HXP_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p3, p4, (void*) HXP_ABSTRACTION, (void*) HXP_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-//??            resize_xml_node(p0, p1);
+//??            reallocate_xml_node(p0, p1, p2);
         }
     }
 
     if (r == 0) {
 
-        compare_arrays(p2, p3, (void*) SIGNAL_MEMORY_ABSTRACTION, (void*) SIGNAL_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p3, p4, (void*) SIGNAL_MEMORY_ABSTRACTION, (void*) SIGNAL_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-//??            resize_signal_memory(p0, p1);
+//??            reallocate_signal_memory(p0, p1, p2);
         }
     }
 
     if (r == 0) {
 
-        compare_arrays(p2, p3, (void*) INTERNAL_MEMORY_ABSTRACTION, (void*) INTERNAL_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p3, p4, (void*) INTERNAL_MEMORY_ABSTRACTION, (void*) INTERNAL_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-//??            resize_internal_memory(p0, p1);
+//??            reallocate_internal_memory(p0, p1, p2);
         }
     }
 }

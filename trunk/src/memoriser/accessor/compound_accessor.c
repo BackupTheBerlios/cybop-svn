@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.10 $ $Date: 2005-07-29 15:48:51 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2005-08-04 15:20:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -372,27 +372,27 @@ void set_compound_element_by_index(void* p0, void* p1, void* p2, void* p3,
                                                                     if (*i == *cs) {
 
                                                                         // Increase size.
-                                                                        *cs = (*cs * *COMPOUND_RESIZE_FACTOR) + 1;
+                                                                        *cs = (*cs * *COMPOUND_REALLOCATE_FACTOR) + 1;
 
-                                                                        // Resize names, abstractions, models, details.
-                                                                        resize_array(n, p2, (void*) POINTER_ARRAY);
-                                                                        resize_array(nc, p2, (void*) POINTER_ARRAY);
-                                                                        resize_array(ns, p2, (void*) POINTER_ARRAY);
-                                                                        resize_array(a, p2, (void*) POINTER_ARRAY);
-                                                                        resize_array(ac, p2, (void*) POINTER_ARRAY);
-                                                                        resize_array(as, p2, (void*) POINTER_ARRAY);
-                                                                        resize_array(m, p2, (void*) POINTER_ARRAY);
-                                                                        resize_array(mc, p2, (void*) POINTER_ARRAY);
-                                                                        resize_array(ms, p2, (void*) POINTER_ARRAY);
-                                                                        resize_array(d, p2, (void*) POINTER_ARRAY);
-                                                                        resize_array(dc, p2, (void*) POINTER_ARRAY);
-                                                                        resize_array(ds, p2, (void*) POINTER_ARRAY);
+                                                                        // Reallocate names, abstractions, models, details.
+                                                                        reallocate_array(n, p1, p2, (void*) POINTER_ARRAY);
+                                                                        reallocate_array(nc, p1, p2, (void*) POINTER_ARRAY);
+                                                                        reallocate_array(ns, p1, p2, (void*) POINTER_ARRAY);
+                                                                        reallocate_array(a, p1, p2, (void*) POINTER_ARRAY);
+                                                                        reallocate_array(ac, p1, p2, (void*) POINTER_ARRAY);
+                                                                        reallocate_array(as, p1, p2, (void*) POINTER_ARRAY);
+                                                                        reallocate_array(m, p1, p2, (void*) POINTER_ARRAY);
+                                                                        reallocate_array(mc, p1, p2, (void*) POINTER_ARRAY);
+                                                                        reallocate_array(ms, p1, p2, (void*) POINTER_ARRAY);
+                                                                        reallocate_array(d, p1, p2, (void*) POINTER_ARRAY);
+                                                                        reallocate_array(dc, p1, p2, (void*) POINTER_ARRAY);
+                                                                        reallocate_array(ds, p1, p2, (void*) POINTER_ARRAY);
 
                                                                         // Set new array reference.
-                                                                        // CAUTION! If an array gets resized, a new array is
+                                                                        // CAUTION! If an array gets reallocated, a new array is
                                                                         // created and the contents of the old array gets copied.
                                                                         // Therefore, the new array reference needs to be set.
-                                                                        // The old array gets destroyed automatically by resize.
+                                                                        // The old array gets destroyed automatically by reallocate.
                                                                         set_array_elements(p0, (void*) NAMES_INDEX, (void*) n, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
                                                                         set_array_elements(p0, (void*) NAMES_COUNTS_INDEX, (void*) nc, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
                                                                         set_array_elements(p0, (void*) NAMES_SIZES_INDEX, (void*) ns, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);

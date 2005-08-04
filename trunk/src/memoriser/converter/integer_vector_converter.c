@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2005-08-03 08:45:33 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-08-04 15:20:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -125,10 +125,10 @@ void parse_integer_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
                         if (*dc >= *ds) {
 
                             // Calculate new integer vector size.
-                            *ds = *ds * *INTEGER_VECTOR_RESIZE_FACTOR + 1;
+                            *ds = *ds * *INTEGER_VECTOR_REALLOCATE_FACTOR + 1;
 
                             // Reallocate integer vector.
-                            resize(p0, p2, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+                            reallocate(p0, p1, p2, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
                         }
 
                         // Add integer to end of integer vector.

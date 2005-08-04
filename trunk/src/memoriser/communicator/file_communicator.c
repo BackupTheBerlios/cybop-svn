@@ -24,7 +24,7 @@
  * - receive a file stream into a byte array
  * - send a file stream from a byte array
  *
- * @version $Revision: 1.10 $ $Date: 2005-07-29 15:48:51 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2005-08-04 15:20:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -101,10 +101,10 @@ void read_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
                             if (*dc == *ds) {
 
                                 // Increase size.
-                                *ds = (*ds * *FILE_RESIZE_FACTOR) + 1;
+                                *ds = (*ds * *FILE_REALLOCATE_FACTOR) + 1;
 
-                                // Resize array.
-                                resize_array(p0, p2, (void*) CHARACTER_ARRAY);
+                                // Reallocate array.
+                                reallocate_array(p0, p1, p2, (void*) CHARACTER_ARRAY);
                             }
 
                             if (*dc < *ds) {

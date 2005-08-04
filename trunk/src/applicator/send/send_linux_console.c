@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.28 $ $Date: 2005-08-03 13:20:29 $ $Author: christian $
+ * @version $Revision: 1.29 $ $Date: 2005-08-04 15:20:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -107,10 +107,10 @@ void receive_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
                             if (*ac == *as) {
 
                                 // Increase size.
-                                *as = *as * FILE_RESIZE_FACTOR + 1;
+                                *as = *as * FILE_REALLOCATE_FACTOR + 1;
 
-                                // Resize array.
-                                resize_array(p0, (void*) &CHARACTER_ARRAY, p2);
+                                // Reallocate array.
+                                reallocate_array(p0, (void*) &CHARACTER_ARRAY, p2);
                             }
 
                             if (*ac < *as) {
@@ -172,26 +172,34 @@ void receive_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
  * @param p2 the destination size
  * @param p3 the source tui compound model
  * @param p4 the source count
+ * @param p5 the internal memory
  */
-void send_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void send_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
     log_message_debug("Send via linux console.");
 
     // The tui internal.
-    void** tp = NULL_POINTER;
-    int** tcp = NULL_POINTER;
-    int** tsp = NULL_POINTER;
+    void** tp = &NULL_POINTER;
+    int** tcp = (int**) &NULL_POINTER;
+    int** tsp = (int**) &NULL_POINTER;
     // The tui.
     void* t = NULL_POINTER;
     void* tc = NULL_POINTER;
     void* ts = NULL_POINTER;
 
     // Get tui internal.
-    get(p0, (void*) TUI_INTERNAL, (void*) &tp, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    get(p0, (void*) TUI_COUNT_INTERNAL, (void*) &tcp, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    get(p0, (void*) TUI_SIZE_INTERNAL, (void*) &tsp, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p5, (void*) TUI_INTERNAL, (void*) &tp, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p5, (void*) TUI_COUNT_INTERNAL, (void*) &tcp, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p5, (void*) TUI_SIZE_INTERNAL, (void*) &tsp, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-    if (*tp == NULL_POINTER) {
+    if (*tp != NULL_POINTER) {
+
+        // Reinitialise tui with already existing tui internal.
+        t = *tp;
+        tc = *tcp;
+        ts = *tsp;
+
+    } else {
 
         // The tui internal tp is null, so that a new tui t needs to be created.
 
@@ -211,15 +219,6 @@ void send_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
         allocate((void*) &tsy, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
         allocate((void*) &tsx, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
 
-        //?? TEST
-        *tcz = 0;
-        *tcy = 0;
-        *tcx = 0;
-        *tsz = 0;
-        *tsy = 0;
-        *tsx = 0;
-
-/*??
         // Initialise count and size z, y, x coordinates.
         set(tcz, (void*) INTEGER_VALUE_INDEX, (void*) NUMBER_0_INTEGER, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
         set(tcy, (void*) INTEGER_VALUE_INDEX, (void*) NUMBER_0_INTEGER, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
@@ -227,7 +226,6 @@ void send_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
         set(tsz, (void*) INTEGER_VALUE_INDEX, (void*) NUMBER_0_INTEGER, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
         set(tsy, (void*) INTEGER_VALUE_INDEX, (void*) NUMBER_0_INTEGER, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
         set(tsx, (void*) INTEGER_VALUE_INDEX, (void*) NUMBER_0_INTEGER, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
-*/
 
         // Allocate tui count and size.
         allocate((void*) &tc, (void*) TUI_COUNT, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
@@ -244,22 +242,12 @@ void send_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
         // Allocate tui.
         allocate((void*) &t, (void*) tsz, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-        //?? TODO: Replace the following "p0" with the internal memory
-        //?? which is yet to be handed over!!
-
         // Set tui internals.
         // The tui is stored in internal memory for faster access,
         // so that it does not have to be created every time again.
-        set(p0, (void*) TUI_INTERNAL, (void*) t, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        set(p0, (void*) TUI_COUNT_INTERNAL, (void*) tc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        set(p0, (void*) TUI_SIZE_INTERNAL, (void*) ts, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-
-    } else {
-
-        // Reinitialise tui with already existing tui internal.
-        t = *tp;
-        tc = *tcp;
-        ts = *tsp;
+        set(p5, (void*) TUI_INTERNAL, (void*) t, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        set(p5, (void*) TUI_COUNT_INTERNAL, (void*) tc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        set(p5, (void*) TUI_SIZE_INTERNAL, (void*) ts, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     }
 
     // Encode compound model into tui.
@@ -268,9 +256,7 @@ void send_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
     // The serialised string array to be sent to the terminal.
     void* a = NULL_POINTER;
     int ac = 0;
-//??    int as = 0;
-    //?? TEST only!
-    int as = 100;
+    int as = 0;
 
     // Create array.
     allocate((void*) &a, (void*) &as, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT);
@@ -289,7 +275,7 @@ void send_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     //?? TEST only!
 //??    as = 100;
-//??    resize_array((void*) &a, (void*) &as, (void*) CHARACTER_ARRAY);
+//??    reallocate_array((void*) &a, (void*) &ac, (void*) &as, (void*) CHARACTER_ARRAY);
 //??    set(a, (void*) &ac, (void*) "Hallo, dies ist ein Test fuer Res Medicinae!", (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT);
 
 /*??

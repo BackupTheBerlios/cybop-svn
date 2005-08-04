@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.14 $ $Date: 2005-08-02 16:27:07 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2005-08-04 15:20:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -74,9 +74,9 @@ void serialise_terminal_properties(void* p0, void* p1, void* p2,
                 *dc = 100;
                 *ds = 100;
 
-                resize_array(p0, p2, (void*) CHARACTER_ARRAY);
+                reallocate_array(p0, p1, p2, (void*) CHARACTER_ARRAY);
 
-                //?? CAUTION! Resize returns a different pointer!
+                //?? CAUTION! The reallocate procedure returns a different pointer!
                 //?? Assign it here again to *d??
 
     sprintf(*d, "TEST serialise 2: %s\n", *d);
@@ -91,7 +91,7 @@ void serialise_terminal_properties(void* p0, void* p1, void* p2,
                 // Calculate new destination string size.
                 *ds = *ds + *ESCAPE_CONTROL_SEQUENCE_COUNT;
 
-                resize_array((void*) &d, (void*) ds, (void*) CHARACTER_ARRAY);
+                reallocate_array((void*) &d, (void*) dc, (void*) ds, (void*) CHARACTER_ARRAY);
 
                 set(*d, dc, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT);
 

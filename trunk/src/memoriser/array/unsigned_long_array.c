@@ -38,7 +38,7 @@
  *
  * Array elements are accessed over their index (array base pointer + index).
  *
- * @version $Revision: 1.6 $ $Date: 2005-07-29 15:48:51 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2005-08-04 15:20:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -68,14 +68,17 @@ void allocate_unsigned_long_array(void* p0, void* p1) {
 
             log_message((void*) INFO_LOG_LEVEL, (void*) CREATE_UNSIGNED_LONG_ARRAY_MESSAGE, (void*) CREATE_UNSIGNED_LONG_ARRAY_MESSAGE_COUNT);
 
-            // Determine the memory area to be allocated,
-            // as product of element count and type size.
+            // Determine the memory area to be allocated.
+            // It is the product of the given size and the type size.
             unsigned long m = *s * *UNSIGNED_LONG_PRIMITIVE_SIZE;
 
             // A minimal space in memory is always allocated,
             // even if the requested size is zero.
             // In other words, a handle to the new instance is always returned.
             *a = (void*) malloc(m);
+
+            // Initialise array elements with null pointer.
+            memset(*a, 0, m);
 
         } else {
 
@@ -120,33 +123,55 @@ void deallocate_unsigned_long_array(void* p0, void* p1) {
 }
 
 /**
- * Resizes the unsigned long array.
+ * Reallocates the unsigned long array.
  *
  * @param p0 the array (Hand over as reference!)
- * @param p1 the size
+ * @param p1 the count
+ * @param p2 the size
  */
-void resize_unsigned_long_array(void* p0, void* p1) {
+void reallocate_unsigned_long_array(void* p0, void* p1, void* p2) {
 
-    if (p1 != NULL_POINTER) {
+    if (p2 != NULL_POINTER) {
 
-        int* s = (int*) p1;
+        int* s = (int*) p2;
 
-        if (p0 != NULL_POINTER) {
+        if (p1 != NULL_POINTER) {
 
-            void** a = (void**) p0;
+            int* c = (int*) p1;
 
-            log_message((void*) INFO_LOG_LEVEL, (void*) RESIZE_UNSIGNED_LONG_ARRAY_MESSAGE, (void*) RESIZE_UNSIGNED_LONG_ARRAY_MESSAGE_COUNT);
+            if (p0 != NULL_POINTER) {
 
-            // Determine the memory area to be allocated,
-            // as product of element count and type size.
-            unsigned long m = *s * *UNSIGNED_LONG_PRIMITIVE_SIZE;
+                void** a = (void**) p0;
 
-            // Create a new array with extended size.
-            *a = (void*) realloc(*a, m);
+                log_message((void*) INFO_LOG_LEVEL, (void*) RESIZE_UNSIGNED_LONG_ARRAY_MESSAGE, (void*) RESIZE_UNSIGNED_LONG_ARRAY_MESSAGE_COUNT);
+
+                // Determine the memory area to be allocated.
+                // It is the product of the given size and the type size.
+                unsigned long m = *s * *UNSIGNED_LONG_PRIMITIVE_SIZE;
+
+                // Create a new array with extended size.
+                *a = (void*) realloc(*a, m);
+
+                // Determine the NEW memory area to be allocated.
+                // It is the product of the given size reduced by the
+                // existing element count, and the type size.
+                int n = (*s - *c) * *UNSIGNED_LONG_PRIMITIVE_SIZE;
+
+                // The new array elements.
+                void* e = *a + (m - n);
+
+                // Initialise ONLY NEW array elements with null pointer.
+                // Leave existing elements untouched.
+                memset(e, 0, n);
+
+            } else {
+
+                log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_RESIZE_UNSIGNED_LONG_ARRAY_THE_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_RESIZE_UNSIGNED_LONG_ARRAY_THE_ARRAY_IS_NULL_MESSAGE_COUNT);
+            }
 
         } else {
 
-            log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_RESIZE_UNSIGNED_LONG_ARRAY_THE_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_RESIZE_UNSIGNED_LONG_ARRAY_THE_ARRAY_IS_NULL_MESSAGE_COUNT);
+            log_message_debug("Could not reallocate unsigned long array. The array count parameter is null.");
         }
 
     } else {

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2005-08-01 09:09:07 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2005-08-04 15:20:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -91,7 +91,7 @@ void parse_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
             int v = strtol(tmp, &tail, 10);
 
             //?? p0 (Hand over as reference!)
-            //?? Doesn't p0 need to be resized from size 0 to size 1,
+            //?? Doesn't p0 need to be reallocated from size 0 to size 1,
             //?? to be able to take the double value?
 
             // Set integer value.
@@ -153,8 +153,8 @@ void serialise_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 // to have space for the terminating null character.
                 *ds = *dc + 1;
 
-                // Resize destination string.
-                resize_array(p0, p2, (void*) CHARACTER_ARRAY);
+                // Reallocate destination string.
+                reallocate_array(p0, p1, p2, (void*) CHARACTER_ARRAY);
 
                 // Transform source integer to destination string.
                 *dc = snprintf(*d, *ds, "%i", *v);

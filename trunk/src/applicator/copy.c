@@ -22,7 +22,7 @@
  *
  * this handel a loop
  *
- * @version $Revision: 1.5 $ $Date: 2005-07-29 15:48:51 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2005-08-04 15:20:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -73,7 +73,7 @@ void copy_string(void* source, int* source_count, int* source_size, void** dest,
         *dest_count = *source_count;
         *dest_size = *dest_count;
 
-        resize_array(dest, dest_size, CHARACTER_ARRAY);
+        reallocate_array(dest, dest_size, dest_size, CHARACTER_ARRAY);
         set_array_elements(*dest, (void*) NUMBER_0_INTEGER, source, source_count, (void*) CHARACTER_ARRAY);
     }
 }

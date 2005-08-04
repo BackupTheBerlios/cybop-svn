@@ -24,7 +24,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.11 $ $Date: 2005-07-29 15:48:51 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2005-08-04 15:20:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -183,7 +183,7 @@ void test_character_array_multiple_elements() {
     // including two places for new line '\n' and c string termination '\0'.
     int ns = 15;
 
-    resize_array((void*) &d, (void*) &ns, (void*) CHARACTER_ARRAY);
+    reallocate_array((void*) &d, (void*) &ns, (void*) &ns, (void*) CHARACTER_ARRAY);
 
     fputs((char*) d, stdout);
 

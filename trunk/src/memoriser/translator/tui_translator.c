@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.10 $ $Date: 2005-08-03 13:20:29 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2005-08-04 15:20:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -28,6 +28,7 @@
 #define TUI_TRANSLATOR_SOURCE
 
 #include "../../globals/constants/abstraction_constants.c"
+#include "../../globals/constants/character_constants.c"
 #include "../../globals/constants/control_sequence_constants.c"
 #include "../../globals/constants/log_constants.c"
 #include "../../globals/constants/name_constants.c"
@@ -73,100 +74,100 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
             log_message_debug("Encode compound into textual user interface.");
 
             // The source part abstraction, model, details.
-            void** a = NULL_POINTER;
-            void** ac = NULL_POINTER;
-            void** as = NULL_POINTER;
-            void** m = NULL_POINTER;
+            void** a = &NULL_POINTER;
+            void** ac = &NULL_POINTER;
+            void** as = &NULL_POINTER;
+            void** m = &NULL_POINTER;
             // CAUTION! This must be int** because its value is used below.
-            int** mc = NULL_POINTER;
-            void** ms = NULL_POINTER;
-            void** d = NULL_POINTER;
-            void** dc = NULL_POINTER;
-            void** ds = NULL_POINTER;
+            int** mc = (int**) &NULL_POINTER;
+            void** ms = &NULL_POINTER;
+            void** d = &NULL_POINTER;
+            void** dc = &NULL_POINTER;
+            void** ds = &NULL_POINTER;
 
             // The source part position.
-            void** pa = NULL_POINTER;
-            void** pac = NULL_POINTER;
-            void** pas = NULL_POINTER;
-            void** pm = NULL_POINTER;
-            void** pmc = NULL_POINTER;
-            void** pms = NULL_POINTER;
-            void** pd = NULL_POINTER;
-            void** pdc = NULL_POINTER;
-            void** pds = NULL_POINTER;
+            void** pa = &NULL_POINTER;
+            void** pac = &NULL_POINTER;
+            void** pas = &NULL_POINTER;
+            void** pm = &NULL_POINTER;
+            void** pmc = &NULL_POINTER;
+            void** pms = &NULL_POINTER;
+            void** pd = &NULL_POINTER;
+            void** pdc = &NULL_POINTER;
+            void** pds = &NULL_POINTER;
             // The source part size.
-            void** sa = NULL_POINTER;
-            void** sac = NULL_POINTER;
-            void** sas = NULL_POINTER;
-            void** sm = NULL_POINTER;
-            void** smc = NULL_POINTER;
-            void** sms = NULL_POINTER;
-            void** sd = NULL_POINTER;
-            void** sdc = NULL_POINTER;
-            void** sds = NULL_POINTER;
+            void** sa = &NULL_POINTER;
+            void** sac = &NULL_POINTER;
+            void** sas = &NULL_POINTER;
+            void** sm = &NULL_POINTER;
+            void** smc = &NULL_POINTER;
+            void** sms = &NULL_POINTER;
+            void** sd = &NULL_POINTER;
+            void** sdc = &NULL_POINTER;
+            void** sds = &NULL_POINTER;
             // The source part background colour.
-            void** bga = NULL_POINTER;
-            void** bgac = NULL_POINTER;
-            void** bgas = NULL_POINTER;
-            void** bgm = NULL_POINTER;
-            void** bgmc = NULL_POINTER;
-            void** bgms = NULL_POINTER;
-            void** bgd = NULL_POINTER;
-            void** bgdc = NULL_POINTER;
-            void** bgds = NULL_POINTER;
+            void** bga = &NULL_POINTER;
+            void** bgac = &NULL_POINTER;
+            void** bgas = &NULL_POINTER;
+            void** bgm = &NULL_POINTER;
+            void** bgmc = &NULL_POINTER;
+            void** bgms = &NULL_POINTER;
+            void** bgd = &NULL_POINTER;
+            void** bgdc = &NULL_POINTER;
+            void** bgds = &NULL_POINTER;
             // The source part foreground colour.
-            void** fga = NULL_POINTER;
-            void** fgac = NULL_POINTER;
-            void** fgas = NULL_POINTER;
-            void** fgm = NULL_POINTER;
-            void** fgmc = NULL_POINTER;
-            void** fgms = NULL_POINTER;
-            void** fgd = NULL_POINTER;
-            void** fgdc = NULL_POINTER;
-            void** fgds = NULL_POINTER;
+            void** fga = &NULL_POINTER;
+            void** fgac = &NULL_POINTER;
+            void** fgas = &NULL_POINTER;
+            void** fgm = &NULL_POINTER;
+            void** fgmc = &NULL_POINTER;
+            void** fgms = &NULL_POINTER;
+            void** fgd = &NULL_POINTER;
+            void** fgdc = &NULL_POINTER;
+            void** fgds = &NULL_POINTER;
 
             // The source part position x, y, z.
-            int** px = NULL_POINTER;
-            int** py = NULL_POINTER;
-            int** pz = NULL_POINTER;
+            int** px = (int**) &NULL_POINTER;
+            int** py = (int**) &NULL_POINTER;
+            int** pz = (int**) &NULL_POINTER;
             // The source part size x, y, z.
-            int** sx = NULL_POINTER;
-            int** sy = NULL_POINTER;
-            int** sz = NULL_POINTER;
+            int** sx = (int**) &NULL_POINTER;
+            int** sy = (int**) &NULL_POINTER;
+            int** sz = (int**) &NULL_POINTER;
 
-            // The already existing destination tui layers.
-            void** dzp = NULL_POINTER;
-            void** dyp = NULL_POINTER;
-            void** dxp = NULL_POINTER;
+            // The already existing destination tui layers, rows and columns (characters).
+            void** dzp = &NULL_POINTER;
+            void** dyp = &NULL_POINTER;
+            void** dxp = &NULL_POINTER;
             // The destination tui layers, rows and columns (characters).
             void* dz = NULL_POINTER;
             void* dy = NULL_POINTER;
             void* dx = NULL_POINTER;
             // The destination tui count and size z, y, x coordinates.
-            int** dcz = NULL_POINTER;
-            int** dcy = NULL_POINTER;
-            int** dcx = NULL_POINTER;
+            int** dcz = (int**) &NULL_POINTER;
+            int** dcy = (int**) &NULL_POINTER;
+            int** dcx = (int**) &NULL_POINTER;
             // The destination tui sizes.
-            int** dsz = NULL_POINTER;
-            int** dsy = NULL_POINTER;
-            int** dsx = NULL_POINTER;
+            int** dsz = (int**) &NULL_POINTER;
+            int** dsy = (int**) &NULL_POINTER;
+            int** dsx = (int**) &NULL_POINTER;
 
             // The already existing destination tui character background property.
-            void** bgp = NULL_POINTER;
+            void** bgp = &NULL_POINTER;
             // The already existing destination tui character foreground property.
-            void** fgp = NULL_POINTER;
+            void** fgp = &NULL_POINTER;
             // The already existing destination tui character hidden property.
-            void** hp = NULL_POINTER;
+            void** hp = &NULL_POINTER;
             // The already existing destination tui character inverse property.
-            void** ip = NULL_POINTER;
+            void** ip = &NULL_POINTER;
             // The already existing destination tui character blink property.
-            void** blp = NULL_POINTER;
+            void** blp = &NULL_POINTER;
             // The already existing destination tui character underline property.
-            void** up = NULL_POINTER;
+            void** up = &NULL_POINTER;
             // The already existing destination tui character bold property.
-            void** bp = NULL_POINTER;
+            void** bp = &NULL_POINTER;
             // The already existing destination tui character.
-            void** cp = NULL_POINTER;
+            void** cp = &NULL_POINTER;
 
             // The destination tui character background property.
             void* bg = NULL_POINTER;
@@ -197,10 +198,83 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
             // Iterate through compound parts.
             while (1) {
 
+    printf("TEST translator j: %i\n", j);
+
                 if (j >= *sc) {
 
                     break;
                 }
+
+                // Reset source part abstraction, model, details.
+                a = &NULL_POINTER;
+                ac = &NULL_POINTER;
+                as = &NULL_POINTER;
+                m = &NULL_POINTER;
+                // CAUTION! This must be int** because its value is used below.
+                mc = (int**) &NULL_POINTER;
+                ms = &NULL_POINTER;
+                d = &NULL_POINTER;
+                dc = &NULL_POINTER;
+                ds = &NULL_POINTER;
+
+                // Reset source part position.
+                pa = &NULL_POINTER;
+                pac = &NULL_POINTER;
+                pas = &NULL_POINTER;
+                pm = &NULL_POINTER;
+                pmc = &NULL_POINTER;
+                pms = &NULL_POINTER;
+                pd = &NULL_POINTER;
+                pdc = &NULL_POINTER;
+                pds = &NULL_POINTER;
+                // Reset source part size.
+                sa = &NULL_POINTER;
+                sac = &NULL_POINTER;
+                sas = &NULL_POINTER;
+                sm = &NULL_POINTER;
+                smc = &NULL_POINTER;
+                sms = &NULL_POINTER;
+                sd = &NULL_POINTER;
+                sdc = &NULL_POINTER;
+                sds = &NULL_POINTER;
+                // Reset source part background colour.
+                bga = &NULL_POINTER;
+                bgac = &NULL_POINTER;
+                bgas = &NULL_POINTER;
+                bgm = &NULL_POINTER;
+                bgmc = &NULL_POINTER;
+                bgms = &NULL_POINTER;
+                bgd = &NULL_POINTER;
+                bgdc = &NULL_POINTER;
+                bgds = &NULL_POINTER;
+                // Reset source part foreground colour.
+                fga = &NULL_POINTER;
+                fgac = &NULL_POINTER;
+                fgas = &NULL_POINTER;
+                fgm = &NULL_POINTER;
+                fgmc = &NULL_POINTER;
+                fgms = &NULL_POINTER;
+                fgd = &NULL_POINTER;
+                fgdc = &NULL_POINTER;
+                fgds = &NULL_POINTER;
+
+                // Reset source part position x, y, z.
+                px = (int**) &NULL_POINTER;
+                py = (int**) &NULL_POINTER;
+                pz = (int**) &NULL_POINTER;
+                // Reset source part size x, y, z.
+                sx = (int**) &NULL_POINTER;
+                sy = (int**) &NULL_POINTER;
+                sz = (int**) &NULL_POINTER;
+
+                // Reset destination tui count and size z, y, x coordinates.
+                dcz = (int**) &NULL_POINTER;
+                dcy = (int**) &NULL_POINTER;
+                dcx = (int**) &NULL_POINTER;
+                // The destination tui sizes.
+                dsz = (int**) &NULL_POINTER;
+                dsy = (int**) &NULL_POINTER;
+                dsx = (int**) &NULL_POINTER;
 
     test_knowledge_model(p3, p4, 2);
 
@@ -263,14 +337,12 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
     printf("TEST translator **sz: %i\n", **sz);
 
                 get(p1, (void*) TUI_Z_DIMENSION_INDEX, (void*) &dcz, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    printf("TEST translator 0: %i\n", **sz);
                 get(p1, (void*) TUI_Y_DIMENSION_INDEX, (void*) &dcy, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
                 get(p1, (void*) TUI_X_DIMENSION_INDEX, (void*) &dcx, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
                 get(p2, (void*) TUI_Z_DIMENSION_INDEX, (void*) &dsz, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
                 get(p2, (void*) TUI_Y_DIMENSION_INDEX, (void*) &dsy, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
                 get(p2, (void*) TUI_X_DIMENSION_INDEX, (void*) &dsx, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-    printf("TEST translator 1: %i\n", **sz);
                 if ((*pz != NULL_POINTER)
                     && (*py != NULL_POINTER)
                     && (*px != NULL_POINTER)
@@ -278,22 +350,19 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     && (*sy != NULL_POINTER)
                     && (*sx != NULL_POINTER)) {
 
-    printf("TEST translator 2: %i\n", **sz);
                     // The tui z position has to be smaller than the size.
                     if (**pz < **sz) {
 
-    printf("TEST translator 3 dsz: %i\n", dsz);
-    printf("TEST translator 3 *dsz: %i\n", *dsz);
-    printf("TEST translator 3 **dsz: %i\n", **dsz);
+    printf("TEST translator dsz: %i\n", dsz);
+    printf("TEST translator *dsz: %i\n", *dsz);
+    printf("TEST translator **dsz: %i\n", **dsz);
 
                         if ((**pz + **sz) > **dsz) {
 
-    printf("TEST translator 4: %i\n", **sz);
                             **dsz = **pz + **sz;
 
-    printf("TEST translator 5: %i\n", **sz);
                             // Reallocate tui.
-                            resize(p0, (void*) *dsz, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                            reallocate(p0, (void*) *dcz, (void*) *dsz, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
                         }
 
     printf("TEST translator **dsz: %i\n", **dsz);
@@ -301,73 +370,108 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
                         // Reset z loop index to first position.
                         z = **pz;
 
-    printf("TEST translator z: %i\n", z);
-
                         // Position characters in their colour and with their size.
                         while (1) {
+
+    printf("TEST translator z: %i\n", z);
 
                             if (z >= **sz) {
 
                                 break;
                             }
 
+                            // Reset already existing destination tui layer.
+                            void** dzp = &NULL_POINTER;
+                            // Reset destination tui layer.
+                            void* dz = NULL_POINTER;
+
                             // Check if tui z dimension already exists.
                             get(*de, (void*) &z, (void*) &dzp, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-                            if (*dzp == NULL_POINTER) {
+    printf("TEST translator *dzp: %i\n", *dzp);
+
+                            if (*dzp != NULL_POINTER) {
+
+                                // Use already existing tui z dimension.
+                                dz = *dzp;
+    printf("TEST translator else dz: %i\n", dz);
+
+                            } else {
 
                                 // Allocate tui z dimension.
                                 allocate((void*) &dz, (void*) NUMBER_0_INTEGER, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
+    printf("TEST translator dz: %i\n", dz);
+
                                 // Add new z dimension to tui.
                                 set(*de, (void*) &z, dz, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-                            } else {
-
-                                // Use already existing tui z dimension.
-                                dz = *dzp;
+    printf("TEST translator *de: %i\n", *de);
                             }
 
                             // The tui y position has to be smaller than the size.
                             if (**py < **sy) {
 
+    printf("TEST translator py: %i\n", py);
+    printf("TEST translator *py: %i\n", *py);
+    printf("TEST translator **py: %i\n", **py);
+
                                 if ((**py + **sy) > **dsy) {
+
+    printf("TEST translator sy: %i\n", sy);
+    printf("TEST translator *sy: %i\n", *sy);
+    printf("TEST translator **sy: %i\n", **sy);
 
                                     **dsy = **py + **sy;
 
+    printf("TEST translator dsy: %i\n", dsy);
+    printf("TEST translator *dsy: %i\n", *dsy);
+    printf("TEST translator **dsy: %i\n", **dsy);
+
                                     // Reallocate tui z layer.
-                                    resize((void*) &dz, (void*) *dsy, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                                    reallocate((void*) &dz, (void*) *dcy, (void*) *dsy, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
+                                    // Add new z dimension to tui.
+                                    // CAUTION! The reallocate procedure returns
+                                    // a different pointer, so that it has to be
+                                    // set again here.
+                                    set(*de, (void*) &z, dz, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
                                 }
 
-    printf("TEST translator **dsy: %i\n", **dsy);
+    printf("TEST translator dz: %i\n", dz);
 
                                 // Reset y loop index to first position.
                                 y = **py;
 
-    printf("TEST translator y: %i\n", y);
-
                                 while (1) {
+
+    printf("TEST translator y: %i\n", y);
 
                                     if (y >= **sy) {
 
                                         break;
                                     }
 
+                                    // Reset already existing row.
+                                    void** dyp = &NULL_POINTER;
+                                    // Reset destination tui row.
+                                    void* dy = NULL_POINTER;
+
                                     // Check if tui y dimension already exists.
                                     get(dz, (void*) &y, (void*) &dyp, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-                                    if (*dyp == NULL_POINTER) {
+                                    if (*dyp != NULL_POINTER) {
+
+                                        // Use already existing tui y dimension.
+                                        dy = *dyp;
+
+                                    } else {
 
                                         // Allocate tui y dimension.
                                         allocate((void*) &dy, (void*) NUMBER_0_INTEGER, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
                                         // Add new y dimension to z dimension.
                                         set(dz, (void*) &y, dy, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-
-                                    } else {
-
-                                        // Use already existing tui y dimension.
-                                        dy = *dyp;
                                     }
 
                                     // The tui x position has to be smaller than the size.
@@ -378,7 +482,13 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
                                             **dsx = **px + **sx;
 
                                             // Reallocate tui y layer.
-                                            resize((void*) &dy, (void*) *dsx, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                                            reallocate((void*) &dy, (void*) *dcx, (void*) *dsx, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
+                                            // Add new y dimension to z dimension.
+                                            // CAUTION! The reallocate procedure returns
+                                            // a different pointer, so that it has to be
+                                            // set again here.
+                                            set(dz, (void*) &y, dy, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
                                         }
 
     printf("TEST translator **dsx: %i\n", **dsx);
@@ -386,30 +496,69 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
                                         // Reset y loop index to first position.
                                         x = **px;
 
-    printf("TEST translator x: %i\n", x);
-
                                         while (1) {
+
+    printf("TEST translator x: %i\n", x);
 
                                             if (x >= **sx) {
 
                                                 break;
                                             }
 
+                                            // Reset already existing destination tui column (character).
+                                            void** dxp = &NULL_POINTER;
+                                            // Reset destination tui column (character).
+                                            void* dx = NULL_POINTER;
+
+                                            // Reset already existing destination tui character background property.
+                                            bgp = &NULL_POINTER;
+                                            // Reset already existing destination tui character foreground property.
+                                            fgp = &NULL_POINTER;
+                                            // Reset already existing destination tui character hidden property.
+                                            hp = &NULL_POINTER;
+                                            // Reset already existing destination tui character inverse property.
+                                            ip = &NULL_POINTER;
+                                            // Reset already existing destination tui character blink property.
+                                            blp = &NULL_POINTER;
+                                            // Reset already existing destination tui character underline property.
+                                            up = &NULL_POINTER;
+                                            // Reset already existing destination tui character bold property.
+                                            bp = &NULL_POINTER;
+                                            // Reset already existing destination tui character.
+                                            cp = &NULL_POINTER;
+
+                                            // Reset destination tui character background property.
+                                            bg = NULL_POINTER;
+                                            // Reset destination tui character foreground property.
+                                            fg = NULL_POINTER;
+                                            // Reset destination tui character hidden property.
+                                            h = NULL_POINTER;
+                                            // Reset destination tui character inverse property.
+                                            i = NULL_POINTER;
+                                            // Reset destination tui character blink property.
+                                            bl = NULL_POINTER;
+                                            // Reset destination tui character underline property.
+                                            u = NULL_POINTER;
+                                            // Reset destination tui character bold property.
+                                            b = NULL_POINTER;
+                                            // Reset destination tui character.
+                                            c = NULL_POINTER;
+
                                             // Check if tui x dimension already exists.
                                             get(dy, (void*) &x, (void*) &dxp, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-                                            if (*dxp == NULL_POINTER) {
+                                            if (*dxp != NULL_POINTER) {
+
+                                                // Use already existing tui x dimension.
+                                                dx = *dxp;
+
+                                            } else {
 
                                                 // Allocate tui x dimension.
                                                 allocate((void*) &dx, (void*) TUI_PROPERTIES_COUNT, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
                                                 // Add new x dimension to y dimension.
                                                 set(dy, (void*) &x, dx, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-
-                                            } else {
-
-                                                // Use already existing tui x dimension.
-                                                dx = *dxp;
                                             }
 
                                             // Check if tui character properties already exist.
@@ -422,116 +571,116 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
                                             get(dx, (void*) TUI_PROPERTIES_BOLD_INDEX, (void*) &bp, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
                                             get(dx, (void*) TUI_PROPERTIES_CHARACTER_INDEX, (void*) &cp, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-                                            if (*bgp == NULL_POINTER) {
+                                            if (*bgp != NULL_POINTER) {
+
+                                                // Use already existing tui character background property.
+                                                bg = *bgp;
+
+                                            } else {
 
                                                 // Allocate tui character background property.
                                                 allocate((void*) &bg, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
 
                                                 // Add tui character background property.
                                                 set(dx, (void*) TUI_PROPERTIES_BACKGROUND_INDEX, bg, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-
-                                            } else {
-
-                                                // Use already existing tui character background property.
-                                                bg = *bgp;
                                             }
 
-                                            if (*fgp == NULL_POINTER) {
+                                            if (*fgp != NULL_POINTER) {
+
+                                                // Use already existing tui character foreground property.
+                                                fg = *fgp;
+
+                                            } else {
 
                                                 // Allocate tui character foreground property.
                                                 allocate((void*) &fg, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
 
                                                 // Add tui character foreground property.
                                                 set(dx, (void*) TUI_PROPERTIES_FOREGROUND_INDEX, fg, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-
-                                            } else {
-
-                                                // Use already existing tui character foreground property.
-                                                fg = *fgp;
                                             }
 
-                                            if (*hp == NULL_POINTER) {
+                                            if (*hp != NULL_POINTER) {
+
+                                                // Use already existing tui character hidden property.
+                                                h = *hp;
+
+                                            } else {
 
                                                 // Allocate tui character hidden property.
                                                 allocate((void*) &h, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
 
                                                 // Add tui character hidden property.
                                                 set(dx, (void*) TUI_PROPERTIES_HIDDEN_INDEX, h, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-
-                                            } else {
-
-                                                // Use already existing tui character hidden property.
-                                                h = *hp;
                                             }
 
-                                            if (*ip == NULL_POINTER) {
+                                            if (*ip != NULL_POINTER) {
+
+                                                // Use already existing tui character inverse property.
+                                                i = *ip;
+
+                                            } else {
 
                                                 // Allocate tui character inverse property.
                                                 allocate((void*) &i, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
 
                                                 // Add tui character inverse property.
                                                 set(dx, (void*) TUI_PROPERTIES_INVERSE_INDEX, i, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-
-                                            } else {
-
-                                                // Use already existing tui character inverse property.
-                                                i = *ip;
                                             }
 
-                                            if (*blp == NULL_POINTER) {
+                                            if (*blp != NULL_POINTER) {
+
+                                                // Use already existing tui character blink property.
+                                                bl = *blp;
+
+                                            } else {
 
                                                 // Allocate tui character blink property.
                                                 allocate((void*) &bl, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
 
                                                 // Add tui character blink property.
                                                 set(dx, (void*) TUI_PROPERTIES_BLINK_INDEX, bl, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-
-                                            } else {
-
-                                                // Use already existing tui character blink property.
-                                                bl = *blp;
                                             }
 
-                                            if (*up == NULL_POINTER) {
+                                            if (*up != NULL_POINTER) {
+
+                                                // Use already existing tui character underline property.
+                                                u = *up;
+
+                                            } else {
 
                                                 // Allocate tui character underline property.
                                                 allocate((void*) &u, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
 
                                                 // Add tui character underline property.
                                                 set(dx, (void*) TUI_PROPERTIES_UNDERLINE_INDEX, u, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-
-                                            } else {
-
-                                                // Use already existing tui character underline property.
-                                                u = *up;
                                             }
 
-                                            if (*bp == NULL_POINTER) {
+                                            if (*bp != NULL_POINTER) {
+
+                                                // Use already existing tui character bold property.
+                                                b = *bp;
+
+                                            } else {
 
                                                 // Allocate tui character bold property.
                                                 allocate((void*) &b, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
 
                                                 // Add tui character bold property.
                                                 set(dx, (void*) TUI_PROPERTIES_BOLD_INDEX, b, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-
-                                            } else {
-
-                                                // Use already existing tui character bold property.
-                                                b = *bp;
                                             }
 
-                                            if (*cp == NULL_POINTER) {
+                                            if (*cp != NULL_POINTER) {
+
+                                                // Use already existing tui character.
+                                                c = *cp;
+
+                                            } else {
 
                                                 // Allocate tui character.
                                                 allocate((void*) &c, (void*) CHARACTER_COUNT, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT);
 
                                                 // Add tui character.
                                                 set(dx, (void*) TUI_PROPERTIES_CHARACTER_INDEX, c, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-
-                                            } else {
-
-                                                // Use already existing tui character.
-                                                c = *cp;
                                             }
 
     printf("TEST translator bgm string *bgm: %s\n", (char*) *bgm);
@@ -560,10 +709,8 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
                                             // the source string model count.
                                             if ((r != 0) && (x < **mc)) {
 
-                                                // Get character property (part string) at position x.
+                                                // Get character value at position x.
                                                 get(*m, (void*) &x, (void*) &c, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT);
-
-    printf("TEST translator part character *m: %s\n", (char*) *m);
 
                                             } else {
 
@@ -571,12 +718,11 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
                                                 // because the part model is NOT a character,
                                                 // or the string length is smaller than
                                                 // the length of the row.
-                                                set((void*) c, (void*) CHARACTER_VALUE_INDEX, (void*) SPACE_CHARACTER, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT);
-
-    printf("TEST translator space character c: %s\n", (char*) c);
+//??                                                set((void*) c, (void*) CHARACTER_VALUE_INDEX, (void*) SPACE_CHARACTER, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT);
+                                                c = SPACE_CHARACTER;
                                             }
 
-//??    printf("TEST translator x loop count: %i\n", x);
+    printf("TEST translator character c: %s\n", (char*) c);
 
                                             x++;
                                         }

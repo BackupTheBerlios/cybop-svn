@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2005-07-29 15:48:51 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2005-08-04 15:20:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -79,12 +79,12 @@ void add_client_socket_number(void* p0, void* p1) {
     get(p0, (void*) TCP_CLIENT_SOCKETS_COUNT_INTERNAL, (void*) &csc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     get(p0, (void*) TCP_CLIENT_SOCKETS_SIZE_INTERNAL, (void*) &css, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-    // Resize client sockets array.
+    // Reallocate client sockets array.
     if ( *((int*)*csc) >= *((int*)*css) ) {
 
         (*((int*)*css))++;
 
-        resize_array((void*) cs, (void*) *css, (void*) INTEGER_ARRAY);
+        reallocate_array((void*) cs, (void*) *css, (void*) *css, (void*) INTEGER_ARRAY);
 
         set(p0, (void*) TCP_CLIENT_SOCKETS_INTERNAL, *cs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     }
@@ -112,12 +112,12 @@ void add_signal_id(void* p0, void* p1) {
     get(p0, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_COUNT_INTERNAL, (void*) &idc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     get(p0, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_SIZE_INTERNAL, (void*) &ids, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-    // Resize the array for the client socket number as a requirement.
+    // Reallocate the array for the client socket number as a requirement.
     if ( **((int**)idc) >= **((int**)ids) ){
 
         (**((int**)ids))++;
 
-        resize_array((void*) id, (void*) *ids, (void*) INTEGER_ARRAY);
+        reallocate_array((void*) id, (void*) *ids, (void*) *ids, (void*) INTEGER_ARRAY);
 
         set(p0, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_INTERNAL, *id, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     }

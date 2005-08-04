@@ -27,7 +27,7 @@
  * Otherwise, an ENDLESS LOOP will be created, because cyboi's
  * array procedures call the logger in turn.
  *
- * @version $Revision: 1.6 $ $Date: 2005-07-29 15:48:51 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2005-08-04 15:20:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -248,7 +248,7 @@ void log_message(void* p0, void* p1, void* p2) {
                 // Add name of the given log level to log entry.
                 add_log_level_name(p0, (void*) &e, (void*) &ec, (void*) &ei);
 
-                // Resize log entry at once, for all following entries
+                // Reallocate log entry at once, for all following entries
                 // (colon + space + message + line feed).
                 ec = ec + 1 + 1 + *mc + 1;
                 e = (void*) realloc(e, ec);

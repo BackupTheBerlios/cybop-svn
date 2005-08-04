@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2005-07-29 15:48:51 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2005-08-04 15:20:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -106,23 +106,23 @@ void set_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
                                                 if (i == *s) {
 
                                                     // Increase size.
-                                                    *s = (*s * *SIGNAL_MEMORY_RESIZE_FACTOR) + 1;
+                                                    *s = (*s * *SIGNAL_MEMORY_REALLOCATE_FACTOR) + 1;
 
-                                                    // Resize abstractions, models, details, priorities, identifications.
-                                                    resize_array(a, p2, (void*) POINTER_ARRAY);
-                                                    resize_array(ac, p2, (void*) POINTER_ARRAY);
-                                                    resize_array(m, p2, (void*) POINTER_ARRAY);
-                                                    resize_array(mc, p2, (void*) POINTER_ARRAY);
-                                                    resize_array(d, p2, (void*) POINTER_ARRAY);
-                                                    resize_array(dc, p2, (void*) POINTER_ARRAY);
-                                                    resize_array(p, p2, (void*) POINTER_ARRAY);
-                                                    resize_array(id, p2, (void*) POINTER_ARRAY);
+                                                    // Reallocate abstractions, models, details, priorities, identifications.
+                                                    reallocate_array(a, p1, p2, (void*) POINTER_ARRAY);
+                                                    reallocate_array(ac, p1, p2, (void*) POINTER_ARRAY);
+                                                    reallocate_array(m, p1, p2, (void*) POINTER_ARRAY);
+                                                    reallocate_array(mc, p1, p2, (void*) POINTER_ARRAY);
+                                                    reallocate_array(d, p1, p2, (void*) POINTER_ARRAY);
+                                                    reallocate_array(dc, p1, p2, (void*) POINTER_ARRAY);
+                                                    reallocate_array(p, p1, p2, (void*) POINTER_ARRAY);
+                                                    reallocate_array(id, p1, p2, (void*) POINTER_ARRAY);
 
                                                     // Set new array reference.
-                                                    // CAUTION! If an array gets resized, a new array is
+                                                    // CAUTION! If an array gets reallocated, a new array is
                                                     // created and the contents of the old array gets copied.
                                                     // Therefore, the new array reference needs to be set.
-                                                    // The old array gets destroyed automatically by resize.
+                                                    // The old array gets destroyed automatically by reallocate.
                                                     set_array_elements(p0, (void*) SIGNALS_ABSTRACTIONS_INDEX, (void*) a, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
                                                     set_array_elements(p0, (void*) SIGNALS_ABSTRACTIONS_COUNTS_INDEX, (void*) ac, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
                                                     set_array_elements(p0, (void*) SIGNALS_MODELS_INDEX, (void*) m, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);

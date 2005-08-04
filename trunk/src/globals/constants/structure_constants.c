@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.14 $ $Date: 2005-08-03 08:45:33 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2005-08-04 15:20:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -44,8 +44,8 @@ static int* CHARACTER_VALUE_INDEX = NUMBER_0_INTEGER_ARRAY;
 // String (character vector).
 //
 
-/** The string resize factor. */
-static int* STRING_RESIZE_FACTOR = NUMBER_2_INTEGER_ARRAY;
+/** The string reallocate factor. */
+static int* STRING_REALLOCATE_FACTOR = NUMBER_2_INTEGER_ARRAY;
 
 //
 // Integer.
@@ -61,8 +61,8 @@ static int* INTEGER_VALUE_INDEX = NUMBER_0_INTEGER_ARRAY;
 // Integer vector.
 //
 
-/** The integer vector resize factor. */
-static int* INTEGER_VECTOR_RESIZE_FACTOR = NUMBER_2_INTEGER_ARRAY;
+/** The integer vector reallocate factor. */
+static int* INTEGER_VECTOR_REALLOCATE_FACTOR = NUMBER_2_INTEGER_ARRAY;
 
 //
 // Unsigned long.
@@ -78,8 +78,8 @@ static int* UNSIGNED_LONG_VALUE_INDEX = NUMBER_0_INTEGER_ARRAY;
 // Unsigned long vector.
 //
 
-/** The unsigned long vector resize factor. */
-static int* UNSIGNED_LONG_VECTOR_RESIZE_FACTOR = NUMBER_2_INTEGER_ARRAY;
+/** The unsigned long vector reallocate factor. */
+static int* UNSIGNED_LONG_VECTOR_REALLOCATE_FACTOR = NUMBER_2_INTEGER_ARRAY;
 
 //
 // Double.
@@ -95,15 +95,15 @@ static int* DOUBLE_VALUE_INDEX = NUMBER_0_INTEGER_ARRAY;
 // Double vector.
 //
 
-/** The double vector resize factor. */
-static int* DOUBLE_VECTOR_RESIZE_FACTOR = NUMBER_2_INTEGER_ARRAY;
+/** The double vector reallocate factor. */
+static int* DOUBLE_VECTOR_REALLOCATE_FACTOR = NUMBER_2_INTEGER_ARRAY;
 
 //
 // Pointer vector.
 //
 
-/** The pointer vector resize factor. */
-static int* POINTER_VECTOR_RESIZE_FACTOR = NUMBER_2_INTEGER_ARRAY;
+/** The pointer vector reallocate factor. */
+static int* POINTER_VECTOR_REALLOCATE_FACTOR = NUMBER_2_INTEGER_ARRAY;
 
 //
 // Fraction.
@@ -160,8 +160,8 @@ static int* COMPLEX_IMAGINARY_INDEX = NUMBER_1_INTEGER_ARRAY;
 // Textual user interface (tui).
 //
 
-/** The tui resize factor. */
-static int* TUI_RESIZE_FACTOR = NUMBER_2_INTEGER_ARRAY;
+/** The tui reallocate factor. */
+static int* TUI_REALLOCATE_FACTOR = NUMBER_2_INTEGER_ARRAY;
 
 /** The tui count. */
 static int* TUI_COUNT = NUMBER_4_INTEGER_ARRAY;
@@ -239,8 +239,8 @@ static int* TUI_SIZE_Z_INDEX = NUMBER_2_INTEGER_ARRAY;
 // Compound.
 //
 
-/** The compound resize factor. */
-static int* COMPOUND_RESIZE_FACTOR = NUMBER_2_INTEGER_ARRAY;
+/** The compound reallocate factor. */
+static int* COMPOUND_REALLOCATE_FACTOR = NUMBER_2_INTEGER_ARRAY;
 
 /** The compound count. */
 static int* COMPOUND_COUNT = NUMBER_12_INTEGER_ARRAY;
@@ -285,8 +285,8 @@ static int* DETAILS_SIZES_INDEX = NUMBER_11_INTEGER_ARRAY;
 // Signal memory.
 //
 
-/** The signal memory resize factor. */
-static int* SIGNAL_MEMORY_RESIZE_FACTOR = NUMBER_2_INTEGER_ARRAY;
+/** The signal memory reallocate factor. */
+static int* SIGNAL_MEMORY_REALLOCATE_FACTOR = NUMBER_2_INTEGER_ARRAY;
 
 /** The signal memory count. */
 static int* SIGNAL_MEMORY_COUNT = NUMBER_8_INTEGER_ARRAY;

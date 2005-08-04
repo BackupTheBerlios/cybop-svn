@@ -49,7 +49,7 @@
  * the array size needs to be given extra here because sizeof will not work.
  * See: http://pegasus.rutgers.edu/~elflord/cpp/gotchas/index.shtml
  *
- * @version $Revision: 1.6 $ $Date: 2005-07-27 13:30:20 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2005-08-04 15:20:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -146,37 +146,38 @@ void deallocate_array(void* p0, void* p1, void* p2) {
 }
 
 /**
- * Resizes the array.
+ * Reallocates the array.
  *
  * @param p0 the array (Hand over as reference!)
- * @param p1 the size
- * @param p2 the type
+ * @param p1 the count
+ * @param p2 the size
+ * @param p3 the type
  */
-void resize_array(void* p0, void* p1, void* p2) {
+void reallocate_array(void* p0, void* p1, void* p2, void* p3) {
 
-    if (p2 != NULL_POINTER) {
+    if (p3 != NULL_POINTER) {
 
-        int* t = (int*) p2;
+        int* t = (int*) p3;
 
         if (*t == *POINTER_ARRAY) {
 
-            resize_pointer_array(p0, p1);
+            reallocate_pointer_array(p0, p1, p2);
 
         } else if (*t == *INTEGER_ARRAY) {
 
-            resize_integer_array(p0, p1);
+            reallocate_integer_array(p0, p1, p2);
 
         } else if (*t == *UNSIGNED_LONG_ARRAY) {
 
-            resize_unsigned_long_array(p0, p1);
+            reallocate_unsigned_long_array(p0, p1, p2);
 
         } else if (*t == *DOUBLE_ARRAY) {
 
-            resize_double_array(p0, p1);
+            reallocate_double_array(p0, p1, p2);
 
         } else if (*t == *CHARACTER_ARRAY) {
 
-            resize_character_array(p0, p1);
+            reallocate_character_array(p0, p1, p2);
         }
 
     } else {

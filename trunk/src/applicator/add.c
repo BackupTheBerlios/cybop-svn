@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2005-07-29 15:48:51 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2005-08-04 15:20:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -92,43 +92,37 @@ void add_integers(void* p0, void* p1, void* p2) {
  * @param op2_count the operand 2 count
  * @param op2_size the operand 2 size
  */
-void add_strings( void** res, int* res_count, int* res_size,
-                  void* op1, int* op1_count, int* op1_size,
-                  void* op2, int* op2_count, int* op2_size )
-{
+void add_strings(void** res, int* res_count, int* res_size,
+    void* op1, int* op1_count, int* op1_size,
+    void* op2, int* op2_count, int* op2_size) {
 
-    //check operanden
-    if ( (op1 != NULL_POINTER) &&
-         (op1_count != NULL_POINTER) &&
-         (op1_size != NULL_POINTER) &&
-         (op2 != NULL_POINTER) &&
-         (op2_count != NULL_POINTER) &&
-         (op2_size != NULL_POINTER) )
-    {
+    // Check operanden.
+    if ((op1 != NULL_POINTER) &&
+        (op1_count != NULL_POINTER) &&
+        (op1_size != NULL_POINTER) &&
+        (op2 != NULL_POINTER) &&
+        (op2_count != NULL_POINTER) &&
+        (op2_size != NULL_POINTER)) {
 
-        //check result
-        if ( (res != NULL_POINTER) &&
-             (res_count != NULL_POINTER) &&
-             (res_size != NULL_POINTER) )
-        {
+        // Check result.
+        if ((res != NULL_POINTER) &&
+            (res_count != NULL_POINTER) &&
+            (res_size != NULL_POINTER)) {
 
-            //resize the result array
-            //if source and the destination the same, then
-            //must the coutn in a temp variable
+            // Reallocate result array.
+            // if source and the destination the same, then
+            // must the coutn in a temp variable
             int start_count = *op1_count;
             *res_size = *op1_count + *op2_count;
             *res_count = *op1_count + *op2_count;
-            resize_array( res, res_size, CHARACTER_ARRAY );
 
-            //set the result array
-            set_array_elements( *res, (void*) NUMBER_0_INTEGER,
-                                op1, op1_count,  (void*) CHARACTER_ARRAY);
+            reallocate_array(res, res_size, res_size, CHARACTER_ARRAY);
 
-            set_array_elements( *res, &start_count,
-                                op2, op2_count,  (void*) CHARACTER_ARRAY);
-        }  //check result
-
-    } //check operanden
+            // Set result array.
+            set_array_elements(*res, (void*) NUMBER_0_INTEGER, op1, op1_count, (void*) CHARACTER_ARRAY);
+            set_array_elements(*res, &start_count, op2, op2_count, (void*) CHARACTER_ARRAY);
+        }
+    }
 }
 
 ///**

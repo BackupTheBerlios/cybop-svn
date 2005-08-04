@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2005-07-29 15:48:51 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2005-08-04 15:20:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -174,8 +174,8 @@ void build_listname(void* p0, void* p1, void* p2, void* p3, void* p4) {
             *(int*)*resms = *((int*) *bnmc) + *LIST_SEPARATOR_COUNT + int_string_count;
             *(int*)*resmc = *((int*) *bnmc) + *LIST_SEPARATOR_COUNT + int_string_count;
 
-            //reszize the reseult array
-            resize_array(resm, *resms, CHARACTER_ARRAY);
+            // Reallocate result array.
+            reallocate_array(resm, *resms, *resms, CHARACTER_ARRAY);
 
             // set the result array
             set_array_elements(*resm, (void*) NUMBER_0_INTEGER, *bnm, *bnmc, (void*) CHARACTER_ARRAY);

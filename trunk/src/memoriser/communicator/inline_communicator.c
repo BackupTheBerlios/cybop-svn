@@ -24,7 +24,7 @@
  * - receive an inline stream into a byte array
  * - send an inline stream from a byte array
  *
- * @version $Revision: 1.4 $ $Date: 2005-07-25 21:01:02 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-08-04 15:20:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -66,8 +66,8 @@ void read_inline(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     // Set new array size.
                     *ds = *sc;
 
-                    // Resize array.
-                    resize_array(p0, p2, (void*) CHARACTER_ARRAY);
+                    // Reallocate array.
+                    reallocate_array(p0, p1, p2, (void*) CHARACTER_ARRAY);
 
                     // The destination array index to start writing at.
                     int i = 0;
