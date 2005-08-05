@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.12 $ $Date: 2005-08-05 11:55:31 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2005-08-05 22:09:07 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -362,7 +362,15 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
                             **dsz = **pz + **sz;
 
                             // Reallocate tui.
+                            // CAUTION! The old count dcz is used, so that
+                            // only new elements get initialised with NULL.
                             reallocate(p0, (void*) *dcz, (void*) *dsz, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
+                            // Initialise destination z dimension count.
+                            // CAUTION! It has to be set equal to the size here,
+                            // so that later reallocations will not overwrite
+                            // existing elements during initialisation with NULL.
+                            **dcz = **dsz;
                         }
 
     printf("TEST translator **dsz: %i\n", **dsz);
@@ -406,8 +414,8 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
                                 // Add new z dimension to tui.
                                 set(*de, (void*) &z, dz, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-                                // Increase destination z dimension count.
-                                (**dcz)++;
+                                // CAUTION! Do NOT increase z dimension count here!
+                                // It is already set at reallocation above.
 
     printf("TEST translator *de: %i\n", *de);
                             }
@@ -432,7 +440,15 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
     printf("TEST translator **dsy: %i\n", **dsy);
 
                                     // Reallocate tui z layer.
+                                    // CAUTION! The old count dcy is used, so that
+                                    // only new elements get initialised with NULL.
                                     reallocate((void*) &dz, (void*) *dcy, (void*) *dsy, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
+                                    // Initialise destination y dimension count.
+                                    // CAUTION! It has to be set equal to the size here,
+                                    // so that later reallocations will not overwrite
+                                    // existing elements during initialisation with NULL.
+                                    **dcy = **dsy;
 
                                     // Add new z dimension to tui.
                                     // CAUTION! The reallocate procedure returns
@@ -480,8 +496,8 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
                                         // Add new y dimension to z dimension.
                                         set(dz, (void*) &y, dy, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-                                        // Increase destination y dimension count.
-                                        (**dcy)++;
+                                        // CAUTION! Do NOT increase y dimension count here!
+                                        // It is already set at reallocation above.
                                     }
 
                                     // The tui x position has to be smaller than the size.
@@ -491,8 +507,24 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                                             **dsx = **px + **sx;
 
+    printf("TEST translator REALLOCATE **px: %i\n", **px);
+    printf("TEST translator REALLOCATE **sx: %i\n", **sx);
+    printf("TEST translator REALLOCATE *dsx: %i\n", *dsx);
+    printf("TEST translator REALLOCATE **dsx: %i\n", **dsx);
+
+    printf("TEST translator EXTRA 0 *dcx: %i\n", *dcx);
+    printf("TEST translator EXTRA 0 **dcx: %i\n", **dcx);
+
                                             // Reallocate tui y layer.
+                                            // CAUTION! The old count dcx is used, so that
+                                            // only new elements get initialised with NULL.
                                             reallocate((void*) &dy, (void*) *dcx, (void*) *dsx, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
+                                            // Initialise destination x dimension count.
+                                            // CAUTION! It has to be set equal to the size here,
+                                            // so that later reallocations will not overwrite
+                                            // existing elements during initialisation with NULL.
+                                            **dcx = **dsx;
 
                                             // Add new y dimension to z dimension.
                                             // CAUTION! The reallocate procedure returns
@@ -506,6 +538,9 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
                                         }
 
     printf("TEST translator **dsx: %i\n", **dsx);
+
+    printf("TEST translator EXTRA 1 *dcx: %i\n", *dcx);
+    printf("TEST translator EXTRA 1 **dcx: %i\n", **dcx);
 
                                         // Reset y loop index to first position.
                                         x = **px;
@@ -558,32 +593,32 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
                                             // Reset destination tui character.
                                             c = NULL_POINTER;
 
-    printf("TEST translator 0: %i\n", x);
+    printf("TEST translator 0 dy: %i\n", dy);
                                             // Check if tui x dimension already exists.
                                             get(dy, (void*) &x, (void*) &dxp, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-    printf("TEST translator 1: %i\n", x);
+    printf("TEST translator 1 dxp: %i\n", dxp);
                                             if (*dxp != NULL_POINTER) {
 
-    printf("TEST translator 2: %i\n", x);
+    printf("TEST translator 2 x: %i\n", x);
                                                 // Use already existing tui x dimension.
                                                 dx = *dxp;
 
                                             } else {
 
-    printf("TEST translator 3: %i\n", x);
+    printf("TEST translator 3 dx: %i\n", dx);
                                                 // Allocate tui x dimension.
                                                 allocate((void*) &dx, (void*) TUI_PROPERTIES_COUNT, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-    printf("TEST translator 4: %i\n", x);
+    printf("TEST translator 4 dx: %i\n", dx);
                                                 // Add new x dimension to y dimension.
                                                 set(dy, (void*) &x, dx, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-                                                // Increase destination x dimension count.
-                                                (**dcx)++;
+                                                // CAUTION! Do NOT increase x dimension count here!
+                                                // It is already set at reallocation above.
                                             }
 
-    printf("TEST translator 5: %i\n", x);
+    printf("TEST translator 5 **dcx: %i\n", **dcx);
                                             // Check if tui character properties already exist.
                                             get(dx, (void*) TUI_PROPERTIES_BACKGROUND_INDEX, (void*) &bgp, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     printf("TEST translator 6: %i\n", x);
