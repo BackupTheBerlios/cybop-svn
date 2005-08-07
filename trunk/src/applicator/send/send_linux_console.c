@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.30 $ $Date: 2005-08-07 18:11:18 $ $Author: christian $
+ * @version $Revision: 1.31 $ $Date: 2005-08-07 21:26:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -272,19 +272,17 @@ void send_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
 //??    reallocate_array((void*) &a, (void*) &ac, (void*) &as, (void*) CHARACTER_ARRAY);
 //??    set(a, (void*) &ac, (void*) "Hallo, dies ist ein Test fuer Res Medicinae!", (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT);
 
-/*??
-    char* test = "\033[2JOn cleared screen,\
+    void* test = "\033[2JOn cleared screen,\
         print in \033[32mgreen colour\033[0m and then\
         \033[33myellow on \033[44mblue background\033[0m and try to\
         position \033[10;15H and finally write in \
         \033[1mbold and switch all \033[0m off.";
     int testc = strlen(test);
-*/
 
     // Write serialised array as message to terminal.
-    write_data(p0, p1, p2, a, (void*) &ac, (void*) TERMINAL_CHANNEL, (void*) TERMINAL_CHANNEL_COUNT);
+//??    write_data(p0, p1, p2, a, (void*) &ac, (void*) TERMINAL_CHANNEL, (void*) TERMINAL_CHANNEL_COUNT);
     //?? TEST only!
-//??    write_data(p0, p1, p2, (void*) test, (void*) &testc, (void*) TERMINAL_CHANNEL, (void*) TERMINAL_CHANNEL_COUNT);
+    write_data(p0, p1, p2, test, (void*) &testc, (void*) TERMINAL_CHANNEL, (void*) TERMINAL_CHANNEL_COUNT);
 
     // Destroy array.
     deallocate((void*) &a, (void*) &as, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT);

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.16 $ $Date: 2005-08-07 18:11:18 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2005-08-07 21:26:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -28,6 +28,8 @@
 #define TERMINAL_CONVERTER_SOURCE
 
 #include "../../globals/constants/abstraction_constants.c"
+#include "../../globals/constants/boolean_constants.c"
+#include "../../globals/constants/control_sequence_constants.c"
 #include "../../globals/constants/log_constants.c"
 #include "../../globals/constants/structure_constants.c"
 #include "../../globals/logger/logger.c"
@@ -68,72 +70,139 @@ void serialise_terminal_properties(void* p0, void* p1, void* p2,
 
                 void** d = (void**) p0;
 
-/*??
-                if (*dc >= *ds) {
+                if (p13 != NULL_POINTER) {
 
-                    // Set destination string size.
-                    //?? TODO: Use different size here!
-                    //?? Count ALL properties and add corresponding size!
-                    *ds = *dc * *STRING_REALLOCATE_FACTOR + 1;
+                    if ((*dc + 100) >= *ds) {
 
-                    // Reallocate destination string.
-                    reallocate_array(p0, p1, p2, (void*) CHARACTER_ARRAY_ABSTRACTION);
-                }
+                        // Set destination string size.
+                        //?? TODO: Use different size here!
+                        //?? Count ALL properties and add corresponding size!
+                        *ds = *dc * *STRING_REALLOCATE_FACTOR + 100;
 
-                //?? CAUTION! The reallocate procedure returns a different pointer!
-                //?? Assign it here again to *d??
+                        // Reallocate destination string.
+                        reallocate_array(p0, p1, p2, (void*) CHARACTER_ARRAY);
 
-                // Add clear all attributes control sequence.
-                set_array_elements(*d, dc, (void*) &ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) CHARACTER_ARRAY_ABSTRACTION);
-                // Increase destination count by one.
-                *dc = *dc + *ESCAPE_CONTROL_SEQUENCE_COUNT;
+                        //?? CAUTION! The reallocate procedure returns a different pointer!
+                        //?? Assign it here again to *d??
+                    }
 
-                // The comparison result.
-                int r = 0;
+    /*??
+                    // Position cursor.
+                    // CAUTION! The top-left terminal corner is 1:1, but the given positions
+                    // start counting from 0, so that 1 has to be added to all positions.
+                    // Print to destination string d.
+                    sprintf(*d, "\033[%d;%dH", py + 1, px + 1);
+                    // Clear screen.
+                    sprintf(*d, "\033[2J");
+                    sprintf(*d, "Set colour to \033[32mgreen\033[0m.\n");
+    */
 
-                if (r == 0) {
+                    // Add attribute off control sequence.
+                    set_array_elements(*d, dc, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) CHARACTER_ARRAY);
+                    *dc = *dc + *ESCAPE_CONTROL_SEQUENCE_COUNT;
+                    set_array_elements(*d, dc, (void*) ATTRIBUTE_OFF_CONTROL_SEQUENCE, (void*) ATTRIBUTE_OFF_CONTROL_SEQUENCE_COUNT, (void*) CHARACTER_ARRAY);
+                    *dc = *dc + *ATTRIBUTE_OFF_CONTROL_SEQUENCE_COUNT;
 
-                    compare_arrays(p2, p3, (void*) KNOWLEDGE_ABSTRACTION, (void*) KNOWLEDGE_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+    /*??
+                    // Add background property.
+                    set_array_elements(*d, dc, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) CHARACTER_ARRAY);
+                    *dc = *dc + *ESCAPE_CONTROL_SEQUENCE_COUNT;
+                    set_array_elements(*d, dc, p6, (void*) ATTRIBUTE_OFF_CONTROL_SEQUENCE_COUNT, (void*) CHARACTER_ARRAY);
+                    *dc = *dc + *ATTRIBUTE_OFF_CONTROL_SEQUENCE_COUNT;
+
+                    // Add foreground property.
+                    set_array_elements(*d, dc, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) CHARACTER_ARRAY);
+                    *dc = *dc + *ESCAPE_CONTROL_SEQUENCE_COUNT;
+                    set_array_elements(*d, dc, p7, (void*) ATTRIBUTE_OFF_CONTROL_SEQUENCE_COUNT, (void*) CHARACTER_ARRAY);
+                    *dc = *dc + *ATTRIBUTE_OFF_CONTROL_SEQUENCE_COUNT;
+    */
+
+                    // The comparison result.
+                    int r = 0;
+
+                    // Compare hidden property.
+                    compare_arrays(p8, (void*) INTEGER_COUNT, (void*) TRUE_BOOLEAN, (void*) INTEGER_COUNT, (void*) &r, (void*) INTEGER_ARRAY);
 
                     if (r != 0) {
 
-                        allocate_string(p0, p1);
+                        // Set hidden property.
+                        set_array_elements(*d, dc, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) CHARACTER_ARRAY);
+                        *dc = *dc + *ESCAPE_CONTROL_SEQUENCE_COUNT;
+                        set_array_elements(*d, dc, (void*) HIDDEN_CONTROL_SEQUENCE, (void*) HIDDEN_CONTROL_SEQUENCE_COUNT, (void*) CHARACTER_ARRAY);
+                        *dc = *dc + *HIDDEN_CONTROL_SEQUENCE_COUNT;
                     }
+
+                    // Reset comparison result.
+                    r = 0;
+
+                    // Compare inverse property.
+                    compare_arrays(p9, (void*) INTEGER_COUNT, (void*) TRUE_BOOLEAN, (void*) INTEGER_COUNT, (void*) &r, (void*) INTEGER_ARRAY);
+
+                    if (r != 0) {
+
+                        // Set inverse property.
+                        set_array_elements(*d, dc, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) CHARACTER_ARRAY);
+                        *dc = *dc + *ESCAPE_CONTROL_SEQUENCE_COUNT;
+                        set_array_elements(*d, dc, (void*) INVERSE_CONTROL_SEQUENCE, (void*) INVERSE_CONTROL_SEQUENCE_COUNT, (void*) CHARACTER_ARRAY);
+                        *dc = *dc + *INVERSE_CONTROL_SEQUENCE_COUNT;
+                    }
+
+                    // Reset comparison result.
+                    r = 0;
+
+                    // Compare blink property.
+                    compare_arrays(p10, (void*) INTEGER_COUNT, (void*) TRUE_BOOLEAN, (void*) INTEGER_COUNT, (void*) &r, (void*) INTEGER_ARRAY);
+
+                    if (r != 0) {
+
+                        // Set blink property.
+                        set_array_elements(*d, dc, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) CHARACTER_ARRAY);
+                        *dc = *dc + *ESCAPE_CONTROL_SEQUENCE_COUNT;
+                        set_array_elements(*d, dc, (void*) BLINK_CONTROL_SEQUENCE, (void*) BLINK_CONTROL_SEQUENCE_COUNT, (void*) CHARACTER_ARRAY);
+                        *dc = *dc + *BLINK_CONTROL_SEQUENCE_COUNT;
+                    }
+
+                    // Reset comparison result.
+                    r = 0;
+
+                    // Compare underline property.
+                    compare_arrays(p11, (void*) INTEGER_COUNT, (void*) TRUE_BOOLEAN, (void*) INTEGER_COUNT, (void*) &r, (void*) INTEGER_ARRAY);
+
+                    if (r != 0) {
+
+                        // Set underline property.
+                        set_array_elements(*d, dc, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) CHARACTER_ARRAY);
+                        *dc = *dc + *ESCAPE_CONTROL_SEQUENCE_COUNT;
+                        set_array_elements(*d, dc, (void*) UNDERLINE_CONTROL_SEQUENCE, (void*) UNDERLINE_CONTROL_SEQUENCE_COUNT, (void*) CHARACTER_ARRAY);
+                        *dc = *dc + *UNDERLINE_CONTROL_SEQUENCE_COUNT;
+                    }
+
+                    // Reset comparison result.
+                    r = 0;
+
+                    // Compare bold property.
+                    compare_arrays(p12, (void*) INTEGER_COUNT, (void*) TRUE_BOOLEAN, (void*) INTEGER_COUNT, (void*) &r, (void*) INTEGER_ARRAY);
+
+                    if (r != 0) {
+
+                        // Set bold property.
+                        set_array_elements(*d, dc, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) CHARACTER_ARRAY);
+                        *dc = *dc + *ESCAPE_CONTROL_SEQUENCE_COUNT;
+                        set_array_elements(*d, dc, (void*) BOLD_CONTROL_SEQUENCE, (void*) BOLD_CONTROL_SEQUENCE_COUNT, (void*) CHARACTER_ARRAY);
+                        *dc = *dc + *BOLD_CONTROL_SEQUENCE_COUNT;
+                    }
+
+                    // Set character.
+                    set_array_elements(*d, dc, p13, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
+                    *dc = *dc + *CHARACTER_COUNT;
+
+                    //?? TEST
+                    set_array_elements(*d, dc, "Set colour to \033[32mgreen\033[0m.\n", (void*) NUMBER_29_INTEGER, (void*) CHARACTER_ARRAY);
+
+                } else {
+
+                    log_message_debug("WARNING: Could not serialise terminal properties. The character is null.");
                 }
-
-                get(*xm, (void*) TUI_PROPERTIES_BACKGROUND_INDEX, (void*) &bg, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-                get(*xm, (void*) TUI_PROPERTIES_FOREGROUND_INDEX, (void*) &fg, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-                get(*xm, (void*) TUI_PROPERTIES_HIDDEN_INDEX, (void*) &h, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-                get(*xm, (void*) TUI_PROPERTIES_INVERSE_INDEX, (void*) &i, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-                get(*xm, (void*) TUI_PROPERTIES_BLINK_INDEX, (void*) &bl, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-                get(*xm, (void*) TUI_PROPERTIES_UNDERLINE_INDEX, (void*) &u, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-                get(*xm, (void*) TUI_PROPERTIES_BOLD_INDEX, (void*) &b, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-                get(*xm, (void*) TUI_PROPERTIES_CHARACTER_INDEX, (void*) &c, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-
-/*??
-                // Calculate new destination string count.
-                *dc = *dc + *ESCAPE_CONTROL_SEQUENCE_COUNT;
-                // Calculate new destination string size.
-                *ds = *ds + *ESCAPE_CONTROL_SEQUENCE_COUNT;
-
-                reallocate_array((void*) &d, (void*) dc, (void*) ds, (void*) CHARACTER_ARRAY);
-
-                set(*d, dc, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT);
-
-                // Set terminated part colour control sequence by first copying the
-                // actual control sequence and then adding the null termination character.
-                set_array_elements(tcs, (void*) NUMBER_0_INTEGER, (void*) &cs, (void*) &csc, (void*) CHARACTER_ARRAY);
-                set_array_elements(tcs, (void*) &csc, (void*) NULL_CONTROL_CHARACTER, (void*) NULL_CONTROL_CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
-
-                // Position cursor.
-                // CAUTION! The top-left terminal corner is 1:1, but the given positions
-                // start counting from 0, so that 1 has to be added to all positions.
-                // Print to destination string d.
-                sprintf(*d, "\033[%d;%dH", py + 1, px + 1);
-                // Clear screen.
-                sprintf(*d, "\033[2J");
-                sprintf(*d, "Set colour to \033[32mgreen\033[0m.\n");
-*/
 
             } else {
 
