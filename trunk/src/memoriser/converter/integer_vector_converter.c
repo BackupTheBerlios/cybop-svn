@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2005-08-04 15:20:58 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2005-08-07 18:11:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,6 +30,7 @@
 #include "../../globals/constants/abstraction_constants.c"
 #include "../../globals/constants/character_constants.c"
 #include "../../globals/constants/log_constants.c"
+#include "../../globals/constants/structure_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../memoriser/accessor.c"
 #include "../../memoriser/allocator.c"
@@ -121,18 +122,18 @@ void parse_integer_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
                         // (which is 3, as needed for the length)
                         parse((void*) &n, (void*) INTEGER_COUNT, (void*) INTEGER_COUNT, p3, (void*) &fec, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
 
-                        // Check integer vector size.
+                        // Check integer (pointer) vector size.
                         if (*dc >= *ds) {
 
-                            // Calculate new integer vector size.
-                            *ds = *ds * *INTEGER_VECTOR_REALLOCATE_FACTOR + 1;
+                            // Calculate new integer (pointer) vector size.
+                            *ds = *ds * *POINTER_VECTOR_REALLOCATE_FACTOR + 1;
 
-                            // Reallocate integer vector.
-                            reallocate(p0, p1, p2, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+                            // Reallocate integer (pointer) vector.
+                            reallocate(p0, p1, p2, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
                         }
 
-                        // Add integer to end of integer vector.
-                        set(*d, p1, n, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+                        // Add integer to end of integer (pointer) vector.
+                        set(*d, p1, n, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
                         // Increase integer vector count by one, because of new element.
                         (*dc)++;

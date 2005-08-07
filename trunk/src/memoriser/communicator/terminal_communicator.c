@@ -24,7 +24,7 @@
  * - receive a file stream into a byte array
  * - send a file stream from a byte array
  *
- * @version $Revision: 1.5 $ $Date: 2005-07-30 14:03:50 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2005-08-07 18:11:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -32,6 +32,7 @@
 #define TERMINAL_COMMUNICATOR_SOURCE
 
 #include <stdio.h>
+#include "../../globals/constants/abstraction_constants.c"
 //?? #include "../../globals/constants/character_constants.c"
 //?? #include "../../globals/constants/constant.c"
 //?? #include "../../globals/constants/integer_constants.c"
@@ -51,46 +52,6 @@
  * @param p4 the source count
  */
 void read_terminal(void* p0, void* p1, void* p2, void* p3, void* p4) {
-
-    //?? getc(stdin);
-}
-
-/**
- * Writes the terminal control sequences into terminal.
- *
- * @param p0 the destination terminal (Hand over as reference!)
- * @param p1 the destination count
- * @param p2 the destination size
- * @param p3 the source terminal control sequences
- * @param p4 the source count
- */
-void write_terminal(void* p0, void* p1, void* p2, void* p3, void* p4) {
-
-    if (p3 != NULL_POINTER) {
-
-        char* s = (char*) p3;
-
-        if (p0 != NULL_POINTER) {
-
-            FILE** d = (FILE**) p0;
-
-            log_message_debug("Write to terminal.");
-
-            // Write to terminal.
-            fputs(s, *d);
-
-            //?? TODO: temporary. Move to receive loop into an own thread!?
-            getc(stdin);
-
-        } else {
-
-            log_message_debug("Could not write to terminal. The destination terminal file is null.");
-        }
-
-    } else {
-
-        log_message_debug("Could not write to terminal. The source terminal control sequences is null.");
-    }
 
 /*??
     char r = NULL_CONTROL_CHARACTER;
@@ -117,6 +78,61 @@ void write_terminal(void* p0, void* p1, void* p2, void* p3, void* p4) {
         j++;
     }
 */
+
+    //?? getc(stdin);
+}
+
+/**
+ * Writes the terminal control sequences into terminal.
+ *
+ * @param p0 the destination terminal (Hand over as reference!)
+ * @param p1 the destination count
+ * @param p2 the destination size
+ * @param p3 the source terminal control sequences
+ * @param p4 the source count
+ */
+void write_terminal(void* p0, void* p1, void* p2, void* p3, void* p4) {
+
+    if (p4 != NULL_POINTER) {
+
+        int* sc = (int*) p4;
+
+        if (p0 != NULL_POINTER) {
+
+            FILE** d = (FILE**) p0;
+
+            log_message_debug("Write to terminal.");
+
+            // The terminated control sequences string.
+            void* ts = NULL_POINTER;
+            int tss = *sc + 1;
+
+            // Create terminated control sequences string.
+            allocate_array((void*) &ts, (void*) &tss, (void*) CHARACTER_ARRAY);
+
+            // Set terminated control sequences string by first copying the actual
+            // control sequences and then adding the null termination character.
+            set_array_elements(ts, (void*) NUMBER_0_INTEGER, p3, p4, (void*) CHARACTER_ARRAY);
+            set_array_elements(ts, p4, (void*) NULL_CONTROL_CHARACTER, (void*) NULL_CONTROL_CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
+
+            // Write to terminal.
+            fputs((char*) ts, *d);
+
+            //?? TODO: temporary. Move to receive loop into an own thread!?
+            getc(stdin);
+
+            // Destroy terminated control sequences.
+            deallocate_array((void*) &ts, (void*) &tss, (void*) CHARACTER_ARRAY);
+
+        } else {
+
+            log_message_debug("Could not write to terminal. The destination terminal file is null.");
+        }
+
+    } else {
+
+        log_message_debug("Could not write to terminal. The source terminal control sequences count is null.");
+    }
 }
 
 /* TERMINAL_COMMUNICATOR_SOURCE */

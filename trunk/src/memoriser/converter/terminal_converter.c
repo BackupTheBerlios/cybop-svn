@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.15 $ $Date: 2005-08-04 15:20:58 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2005-08-07 18:11:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -68,22 +68,47 @@ void serialise_terminal_properties(void* p0, void* p1, void* p2,
 
                 void** d = (void**) p0;
 
-    sprintf(*d, "TEST serialise 1: %s\n", *d);
+/*??
+                if (*dc >= *ds) {
 
-                //?? TEST only!
-                *dc = 100;
-                *ds = 100;
+                    // Set destination string size.
+                    //?? TODO: Use different size here!
+                    //?? Count ALL properties and add corresponding size!
+                    *ds = *dc * *STRING_REALLOCATE_FACTOR + 1;
 
-                reallocate_array(p0, p1, p2, (void*) CHARACTER_ARRAY);
+                    // Reallocate destination string.
+                    reallocate_array(p0, p1, p2, (void*) CHARACTER_ARRAY_ABSTRACTION);
+                }
 
                 //?? CAUTION! The reallocate procedure returns a different pointer!
                 //?? Assign it here again to *d??
 
-    sprintf(*d, "TEST serialise 2: %s\n", *d);
+                // Add clear all attributes control sequence.
+                set_array_elements(*d, dc, (void*) &ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) CHARACTER_ARRAY_ABSTRACTION);
+                // Increase destination count by one.
+                *dc = *dc + *ESCAPE_CONTROL_SEQUENCE_COUNT;
 
-                set(*d, dc, (void*) "Hallo, dies ist ein Test fuer Res Medicinae!", (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT);
+                // The comparison result.
+                int r = 0;
 
-    sprintf(*d, "TEST serialise 3: %s\n", *d);
+                if (r == 0) {
+
+                    compare_arrays(p2, p3, (void*) KNOWLEDGE_ABSTRACTION, (void*) KNOWLEDGE_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+                    if (r != 0) {
+
+                        allocate_string(p0, p1);
+                    }
+                }
+
+                get(*xm, (void*) TUI_PROPERTIES_BACKGROUND_INDEX, (void*) &bg, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                get(*xm, (void*) TUI_PROPERTIES_FOREGROUND_INDEX, (void*) &fg, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                get(*xm, (void*) TUI_PROPERTIES_HIDDEN_INDEX, (void*) &h, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                get(*xm, (void*) TUI_PROPERTIES_INVERSE_INDEX, (void*) &i, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                get(*xm, (void*) TUI_PROPERTIES_BLINK_INDEX, (void*) &bl, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                get(*xm, (void*) TUI_PROPERTIES_UNDERLINE_INDEX, (void*) &u, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                get(*xm, (void*) TUI_PROPERTIES_BOLD_INDEX, (void*) &b, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                get(*xm, (void*) TUI_PROPERTIES_CHARACTER_INDEX, (void*) &c, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
 /*??
                 // Calculate new destination string count.
@@ -149,118 +174,144 @@ void parse_terminal(void* p0, void* p1, void* p2, void* p3, void* p4) {
  */
 void serialise_terminal(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p4 != NULL_POINTER) {
+    log_message_debug("Serialise textual user interface into terminal control sequences.");
 
-        void** sc = (void**) p4;
+    // The source count z, y, x coordinates.
+    int** scz = (int**) &NULL_POINTER;
+    int** scy = (int**) &NULL_POINTER;
+    int** scx = (int**) &NULL_POINTER;
 
-        log_message_debug("Serialise textual user interface into terminal control sequences.");
+    // Get source count z, y, x coordinates.
+    get(p4, (void*) TUI_Z_DIMENSION_INDEX, (void*) &scz, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p4, (void*) TUI_Y_DIMENSION_INDEX, (void*) &scy, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p4, (void*) TUI_X_DIMENSION_INDEX, (void*) &scx, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-        // The source count z, y, x coordinates.
-        int* scz = NULL_POINTER;
-        int* scy = NULL_POINTER;
-        int* scx = NULL_POINTER;
+    // The loop counts.
+    int z = 0;
+    int y = 0;
+    int x = 0;
 
-        // Get source count z, y, x coordinates.
-        get(*sc, (void*) TUI_Z_DIMENSION_INDEX, (void*) &scz, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-        get(*sc, (void*) TUI_Y_DIMENSION_INDEX, (void*) &scy, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-        get(*sc, (void*) TUI_X_DIMENSION_INDEX, (void*) &scx, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    // The z, y, x models.
+    void** zm = &NULL_POINTER;
+    void** ym = &NULL_POINTER;
+    void** xm = &NULL_POINTER;
 
-        // The loop counts.
-        int z = 0;
-        int y = 0;
-        int x = 0;
+    // The background property.
+    void** bg = &NULL_POINTER;
+    // The background property.
+    void** fg = &NULL_POINTER;
+    // The hidden property.
+    void** h = &NULL_POINTER;
+    // The inverse property.
+    void** i = &NULL_POINTER;
+    // The blink property.
+    void** bl = &NULL_POINTER;
+    // The underline property.
+    void** u = &NULL_POINTER;
+    // The bold property.
+    void** b = &NULL_POINTER;
+    // The character.
+    void** c = &NULL_POINTER;
 
-        // The z, y, x models.
-        void* zm = NULL_POINTER;
-        void** zmp = &zm;
-        void* ym = NULL_POINTER;
-        void** ymp = &ym;
-        void* xm = NULL_POINTER;
-        void** xmp = &xm;
+    // Reset z loop count.
+    z = 0;
 
-        // The background property.
-        int bg = -1;
-        // The background property.
-        int fg = -1;
-        // The hidden property.
-        int h = -1;
-        // The inverse property.
-        int i = -1;
-        // The blink property.
-        int bl = -1;
-        // The underline property.
-        int u = -1;
-        // The bold property.
-        int b = -1;
-        // The character.
-        int c = -1;
+    while (1) {
 
-        // Reset z loop count.
-        z = 0;
+    printf("TEST serialise z: %i\n", z);
 
-        while (1) {
+        if (z >= **scz) {
 
-            if (z >= *scz) {
+            break;
+        }
 
-                break;
-            }
+        // Reset z model.
+        zm = &NULL_POINTER;
 
-            // Get z dimension layer.
-            get(p3, (void*) &z, &zmp, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        // Get z dimension layer.
+        get(p3, (void*) &z, (void*) &zm, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
+        // Not existing layers are skipped.
+        if (*zm != NULL_POINTER) {
 
             // Reset y loop count.
             y = 0;
 
             while (1) {
 
-                if (y >= *scy) {
+    printf("TEST serialise y: %i\n", y);
+
+                if (y >= **scy) {
 
                     break;
                 }
 
+                // Reset y model.
+                ym = &NULL_POINTER;
+
                 // Get y dimension row.
-                get(zm, (void*) &y, &ymp, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                get(*zm, (void*) &y, (void*) &ym, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-                // Reset x loop count.
-                x = 0;
+                // Not existing rows are skipped.
+                if (*ym != NULL_POINTER) {
 
-                while (1) {
+                    // Reset x loop count.
+                    x = 0;
 
-                    if (x >= *scx) {
+                    while (1) {
 
-                        break;
+    printf("TEST serialise x: %i\n", x);
+
+                        if (x >= **scx) {
+
+                            break;
+                        }
+
+                        // Reset x model.
+                        xm = &NULL_POINTER;
+
+                        // Get x dimension column.
+                        get(*ym, (void*) &x, (void*) &xm, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
+                        // Not existing columns (characters) are skipped.
+                        if (*xm != NULL_POINTER) {
+
+                            // Get properties and the character itself.
+                            get(*xm, (void*) TUI_PROPERTIES_BACKGROUND_INDEX, (void*) &bg, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                            get(*xm, (void*) TUI_PROPERTIES_FOREGROUND_INDEX, (void*) &fg, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                            get(*xm, (void*) TUI_PROPERTIES_HIDDEN_INDEX, (void*) &h, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                            get(*xm, (void*) TUI_PROPERTIES_INVERSE_INDEX, (void*) &i, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                            get(*xm, (void*) TUI_PROPERTIES_BLINK_INDEX, (void*) &bl, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                            get(*xm, (void*) TUI_PROPERTIES_UNDERLINE_INDEX, (void*) &u, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                            get(*xm, (void*) TUI_PROPERTIES_BOLD_INDEX, (void*) &b, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                            get(*xm, (void*) TUI_PROPERTIES_CHARACTER_INDEX, (void*) &c, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
+                            serialise_terminal_properties(p0, p1, p2,
+                                (void*) &z, (void*) &y, (void*) &x,
+                                *bg, *fg, *h, *i, *bl, *u, *b, *c);
+
+                        } else {
+
+                            log_message_debug("WARNING: Could not serialise terminal. The x column (character) is null.");
+                        }
+
+                        x++;
                     }
 
-                    // Get x dimension column.
-                    get(ym, (void*) &x, &xmp, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                } else {
 
-                    // Get properties and the character itself.
-                    get(xm, (void*) TUI_PROPERTIES_BACKGROUND_INDEX, (void*) &bg, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-                    get(xm, (void*) TUI_PROPERTIES_FOREGROUND_INDEX, (void*) &fg, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-                    get(xm, (void*) TUI_PROPERTIES_HIDDEN_INDEX, (void*) &h, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-                    get(xm, (void*) TUI_PROPERTIES_INVERSE_INDEX, (void*) &i, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-                    get(xm, (void*) TUI_PROPERTIES_BLINK_INDEX, (void*) &bl, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-                    get(xm, (void*) TUI_PROPERTIES_UNDERLINE_INDEX, (void*) &u, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-                    get(xm, (void*) TUI_PROPERTIES_BOLD_INDEX, (void*) &b, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-                    get(xm, (void*) TUI_PROPERTIES_CHARACTER_INDEX, (void*) &c, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-
-                    serialise_terminal_properties(p0, p1, p2,
-                        (void*) &z, (void*) &y, (void*) &x,
-                        (void*) &bg, (void*) &fg, (void*) &h, (void*) &i,
-                        (void*) &bl, (void*) &u, (void*) &b, (void*) &c);
-
-                    x++;
+                    log_message_debug("WARNING: Could not serialise terminal. The y row is null.");
                 }
 
                 y++;
             }
 
-            z++;
+        } else {
+
+            log_message_debug("WARNING: Could not serialise terminal. The z layer is null.");
         }
 
-    } else {
-
-        log_message_debug("Could not serialise terminal. The source count is null.");
+        z++;
     }
 }
 

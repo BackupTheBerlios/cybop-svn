@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.13 $ $Date: 2005-08-05 22:09:07 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2005-08-07 18:11:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -143,6 +143,10 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
             void* dz = NULL_POINTER;
             void* dy = NULL_POINTER;
             void* dx = NULL_POINTER;
+            // The old tui count z, y, x coordinates.
+            int ocz = 0;
+            int ocy = 0;
+            int ocx = 0;
             // The destination tui count z, y, x coordinates.
             int** dcz = (int**) &NULL_POINTER;
             int** dcy = (int**) &NULL_POINTER;
@@ -267,11 +271,11 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 sy = (int**) &NULL_POINTER;
                 sz = (int**) &NULL_POINTER;
 
-                // Reset destination tui count and size z, y, x coordinates.
+                // Reset destination tui count z, y, x coordinates.
                 dcz = (int**) &NULL_POINTER;
                 dcy = (int**) &NULL_POINTER;
                 dcx = (int**) &NULL_POINTER;
-                // The destination tui sizes.
+                // Reset destination tui size z, y, x coordinates.
                 dsz = (int**) &NULL_POINTER;
                 dsy = (int**) &NULL_POINTER;
                 dsx = (int**) &NULL_POINTER;
@@ -343,6 +347,11 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 get(p2, (void*) TUI_Y_DIMENSION_INDEX, (void*) &dsy, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
                 get(p2, (void*) TUI_X_DIMENSION_INDEX, (void*) &dsx, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
+                // Store old tui count z, y, x coordinates.
+                ocz = **dcz;
+                ocy = **dcy;
+                ocx = **dcx;
+
                 if ((*pz != NULL_POINTER)
                     && (*py != NULL_POINTER)
                     && (*px != NULL_POINTER)
@@ -361,11 +370,6 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                             **dsz = **pz + **sz;
 
-                            // Reallocate tui.
-                            // CAUTION! The old count dcz is used, so that
-                            // only new elements get initialised with NULL.
-                            reallocate(p0, (void*) *dcz, (void*) *dsz, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-
                             // Initialise destination z dimension count.
                             // CAUTION! It has to be set equal to the size here,
                             // so that later reallocations will not overwrite
@@ -373,7 +377,10 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
                             **dcz = **dsz;
                         }
 
-    printf("TEST translator **dsz: %i\n", **dsz);
+                        // Reallocate tui.
+                        // CAUTION! The old count ocz is used, so that
+                        // only new elements get initialised with NULL.
+                        reallocate(p0, (void*) &ocz, (void*) *dsz, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
                         // Reset z loop index to first position.
                         z = **pz;
@@ -396,72 +403,51 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
                             // Check if tui z dimension already exists.
                             get(*de, (void*) &z, (void*) &dzp, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-    printf("TEST translator *dzp: %i\n", *dzp);
-
                             if (*dzp != NULL_POINTER) {
 
                                 // Use already existing tui z dimension.
                                 dz = *dzp;
-    printf("TEST translator else dz: %i\n", dz);
 
                             } else {
 
                                 // Allocate tui z dimension.
                                 allocate((void*) &dz, (void*) NUMBER_0_INTEGER, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-    printf("TEST translator dz: %i\n", dz);
-
                                 // Add new z dimension to tui.
                                 set(*de, (void*) &z, dz, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
                                 // CAUTION! Do NOT increase z dimension count here!
                                 // It is already set at reallocation above.
-
-    printf("TEST translator *de: %i\n", *de);
                             }
 
                             // The tui y position has to be smaller than the size.
                             if (**py < **sy) {
 
-    printf("TEST translator py: %i\n", py);
-    printf("TEST translator *py: %i\n", *py);
-    printf("TEST translator **py: %i\n", **py);
-
                                 if ((**py + **sy) > **dsy) {
 
-    printf("TEST translator sy: %i\n", sy);
-    printf("TEST translator *sy: %i\n", *sy);
-    printf("TEST translator **sy: %i\n", **sy);
-
                                     **dsy = **py + **sy;
-
-    printf("TEST translator dsy: %i\n", dsy);
-    printf("TEST translator *dsy: %i\n", *dsy);
-    printf("TEST translator **dsy: %i\n", **dsy);
-
-                                    // Reallocate tui z layer.
-                                    // CAUTION! The old count dcy is used, so that
-                                    // only new elements get initialised with NULL.
-                                    reallocate((void*) &dz, (void*) *dcy, (void*) *dsy, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
                                     // Initialise destination y dimension count.
                                     // CAUTION! It has to be set equal to the size here,
                                     // so that later reallocations will not overwrite
                                     // existing elements during initialisation with NULL.
                                     **dcy = **dsy;
-
-                                    // Add new z dimension to tui.
-                                    // CAUTION! The reallocate procedure returns
-                                    // a different pointer, so that it has to be
-                                    // set again here.
-                                    set(*de, (void*) &z, dz, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-
-                                    // CAUTION! Do NOT increase destination
-                                    // z dimension count here, since dz already
-                                    // exists within de and is just reallocated!
                                 }
 
-    printf("TEST translator dz: %i\n", dz);
+                                // Reallocate tui z layer.
+                                // CAUTION! The old count ocy is used, so that
+                                // only new elements get initialised with NULL.
+                                reallocate((void*) &dz, (void*) &ocy, (void*) *dsy, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
+                                // Add new z dimension to tui.
+                                // CAUTION! The reallocate procedure returns
+                                // a different pointer, so that it has to be
+                                // set again here.
+                                set(*de, (void*) &z, dz, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
+                                // CAUTION! Do NOT increase destination
+                                // z dimension count here, since dz already
+                                // exists within de and is just reallocated!
 
                                 // Reset y loop index to first position.
                                 y = **py;
@@ -507,40 +493,27 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                                             **dsx = **px + **sx;
 
-    printf("TEST translator REALLOCATE **px: %i\n", **px);
-    printf("TEST translator REALLOCATE **sx: %i\n", **sx);
-    printf("TEST translator REALLOCATE *dsx: %i\n", *dsx);
-    printf("TEST translator REALLOCATE **dsx: %i\n", **dsx);
-
-    printf("TEST translator EXTRA 0 *dcx: %i\n", *dcx);
-    printf("TEST translator EXTRA 0 **dcx: %i\n", **dcx);
-
-                                            // Reallocate tui y layer.
-                                            // CAUTION! The old count dcx is used, so that
-                                            // only new elements get initialised with NULL.
-                                            reallocate((void*) &dy, (void*) *dcx, (void*) *dsx, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-
                                             // Initialise destination x dimension count.
                                             // CAUTION! It has to be set equal to the size here,
                                             // so that later reallocations will not overwrite
                                             // existing elements during initialisation with NULL.
                                             **dcx = **dsx;
-
-                                            // Add new y dimension to z dimension.
-                                            // CAUTION! The reallocate procedure returns
-                                            // a different pointer, so that it has to be
-                                            // set again here.
-                                            set(dz, (void*) &y, dy, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-
-                                            // CAUTION! Do NOT increase destination
-                                            // y dimension count here, since dy already
-                                            // exists within dz and is just reallocated!
                                         }
 
-    printf("TEST translator **dsx: %i\n", **dsx);
+                                        // Reallocate tui y layer.
+                                        // CAUTION! The old count ocx is used, so that
+                                        // only new elements get initialised with NULL.
+                                        reallocate((void*) &dy, (void*) &ocx, (void*) *dsx, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-    printf("TEST translator EXTRA 1 *dcx: %i\n", *dcx);
-    printf("TEST translator EXTRA 1 **dcx: %i\n", **dcx);
+                                        // Add new y dimension to z dimension.
+                                        // CAUTION! The reallocate procedure returns
+                                        // a different pointer, so that it has to be
+                                        // set again here.
+                                        set(dz, (void*) &y, dy, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
+                                        // CAUTION! Do NOT increase destination
+                                        // y dimension count here, since dy already
+                                        // exists within dz and is just reallocated!
 
                                         // Reset y loop index to first position.
                                         x = **px;
@@ -593,24 +566,19 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
                                             // Reset destination tui character.
                                             c = NULL_POINTER;
 
-    printf("TEST translator 0 dy: %i\n", dy);
                                             // Check if tui x dimension already exists.
                                             get(dy, (void*) &x, (void*) &dxp, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-    printf("TEST translator 1 dxp: %i\n", dxp);
                                             if (*dxp != NULL_POINTER) {
 
-    printf("TEST translator 2 x: %i\n", x);
                                                 // Use already existing tui x dimension.
                                                 dx = *dxp;
 
                                             } else {
 
-    printf("TEST translator 3 dx: %i\n", dx);
                                                 // Allocate tui x dimension.
                                                 allocate((void*) &dx, (void*) TUI_PROPERTIES_COUNT, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-    printf("TEST translator 4 dx: %i\n", dx);
                                                 // Add new x dimension to y dimension.
                                                 set(dy, (void*) &x, dx, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
@@ -618,10 +586,8 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
                                                 // It is already set at reallocation above.
                                             }
 
-    printf("TEST translator 5 **dcx: %i\n", **dcx);
                                             // Check if tui character properties already exist.
                                             get(dx, (void*) TUI_PROPERTIES_BACKGROUND_INDEX, (void*) &bgp, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    printf("TEST translator 6: %i\n", x);
                                             get(dx, (void*) TUI_PROPERTIES_FOREGROUND_INDEX, (void*) &fgp, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
                                             get(dx, (void*) TUI_PROPERTIES_HIDDEN_INDEX, (void*) &hp, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
                                             get(dx, (void*) TUI_PROPERTIES_INVERSE_INDEX, (void*) &ip, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
@@ -630,47 +596,34 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
                                             get(dx, (void*) TUI_PROPERTIES_BOLD_INDEX, (void*) &bp, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
                                             get(dx, (void*) TUI_PROPERTIES_CHARACTER_INDEX, (void*) &cp, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-    printf("TEST translator 7 bgp: %i\n", bgp);
-//??    printf("TEST translator 7 *bgp: %i\n", *((void**) bgp));
-    printf("TEST translator 7 *bgp: %i\n", *bgp);
-
                                             if (*bgp != NULL_POINTER) {
 
-    printf("TEST translator 7 **bgp: %i\n", **((int**) bgp));
-    printf("TEST translator 8: %i\n", x);
                                                 // Use already existing tui character background property.
                                                 bg = *bgp;
 
                                             } else {
 
-    printf("TEST translator 9: %i\n", x);
                                                 // Allocate tui character background property.
                                                 allocate((void*) &bg, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
 
-    printf("TEST translator 10: %i\n", x);
                                                 // Add tui character background property.
                                                 set(dx, (void*) TUI_PROPERTIES_BACKGROUND_INDEX, bg, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
                                             }
 
-    printf("TEST translator 11: %i\n", x);
                                             if (*fgp != NULL_POINTER) {
 
-    printf("TEST translator 12: %i\n", x);
                                                 // Use already existing tui character foreground property.
                                                 fg = *fgp;
 
                                             } else {
 
-    printf("TEST translator 13: %i\n", x);
                                                 // Allocate tui character foreground property.
                                                 allocate((void*) &fg, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
 
-    printf("TEST translator 14: %i\n", x);
                                                 // Add tui character foreground property.
                                                 set(dx, (void*) TUI_PROPERTIES_FOREGROUND_INDEX, fg, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
                                             }
 
-    printf("TEST translator 15: %i\n", x);
                                             if (*hp != NULL_POINTER) {
 
                                                 // Use already existing tui character hidden property.
@@ -741,61 +694,46 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
                                                 set(dx, (void*) TUI_PROPERTIES_BOLD_INDEX, b, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
                                             }
 
-    printf("TEST translator 16: %i\n", x);
                                             if (*cp != NULL_POINTER) {
 
-    printf("TEST translator 17: %i\n", x);
                                                 // Use already existing tui character.
                                                 c = *cp;
 
                                             } else {
 
-    printf("TEST translator 18: %i\n", x);
                                                 // Allocate tui character.
                                                 allocate((void*) &c, (void*) CHARACTER_COUNT, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT);
 
-    printf("TEST translator 19: %i\n", x);
                                                 // Add tui character.
                                                 set(dx, (void*) TUI_PROPERTIES_CHARACTER_INDEX, c, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
                                             }
 
-    printf("TEST translator bgm string *bgm: %s\n", (char*) *bgm);
-
                                             // Get character properties.
                                             mapto((void*) &bg, (void*) INTEGER_COUNT, (void*) INTEGER_COUNT, (void*) *bgm, (void*) *bgmc, (void*) TERMINAL_BACKGROUND_ABSTRACTION, (void*) TERMINAL_BACKGROUND_ABSTRACTION_COUNT);
-    printf("TEST translator 20: %i\n", x);
                                             mapto((void*) &fg, (void*) INTEGER_COUNT, (void*) INTEGER_COUNT, (void*) *fgm, (void*) *fgmc, (void*) TERMINAL_FOREGROUND_ABSTRACTION, (void*) TERMINAL_FOREGROUND_ABSTRACTION_COUNT);
-    printf("TEST translator 21: %i\n", x);
                                             //?? TODO: Replace temporary test values like
                                             //?? NUMBER_0_INTEGER with real properties!
                                             set((void*) h, (void*) INTEGER_VALUE_INDEX, (void*) NUMBER_0_INTEGER, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
-    printf("TEST translator 22: %i\n", x);
                                             set((void*) i, (void*) INTEGER_VALUE_INDEX, (void*) NUMBER_0_INTEGER, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
                                             set((void*) bl, (void*) INTEGER_VALUE_INDEX, (void*) NUMBER_0_INTEGER, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
                                             set((void*) u, (void*) INTEGER_VALUE_INDEX, (void*) NUMBER_0_INTEGER, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
                                             set((void*) b, (void*) INTEGER_VALUE_INDEX, (void*) NUMBER_0_INTEGER, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
-
-    printf("TEST translator bgm integer *bg: %i\n", *((int*) bg));
-    printf("TEST translator hidden flag *h: %i\n", *((int*) h));
 
                                             // Reset comparison result.
                                             r = 0;
 
                                             compare_arrays(*a, *ac, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-    printf("TEST translator 23: %i\n", x);
                                             // CAUTION! The whole row may be much longer than the given string.
                                             // Therefore, only take characters if the index x is smaller than
                                             // the source string model count.
                                             if ((r != 0) && (x < **mc)) {
 
-    printf("TEST translator 24: %i\n", x);
                                                 // Get character value at position x.
                                                 get(*m, (void*) &x, (void*) &c, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT);
 
                                             } else {
 
-    printf("TEST translator 25: %i\n", x);
                                                 // Set character property to space character,
                                                 // because the part model is NOT a character,
                                                 // or the string length is smaller than
@@ -803,8 +741,6 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
 //??                                                set((void*) c, (void*) CHARACTER_VALUE_INDEX, (void*) SPACE_CHARACTER, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT);
                                                 c = SPACE_CHARACTER;
                                             }
-
-    printf("TEST translator character c: %s\n", (char*) c);
 
                                             x++;
                                         }

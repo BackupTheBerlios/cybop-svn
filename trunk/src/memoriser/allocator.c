@@ -24,7 +24,7 @@
  * - create a model in memory
  * - destroy a model in memory
  *
- * @version $Revision: 1.11 $ $Date: 2005-08-04 15:20:58 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2005-08-07 18:11:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -140,7 +140,14 @@ void allocate(void* p0, void* p1, void* p2, void* p3) {
 
         if (r != 0) {
 
-            allocate_integer_vector(p0, p1);
+            allocate_pointer_vector(p0, p1);
+
+            //?? CAUTION! The textual user interface (tui) translator and other files
+            //?? use pointer vectors for keeping integer primitives.
+            //?? Therefore, a pointer vector is used here.
+            //?? Possibly, true integer vectors (one integer primitive following another)
+            //?? are superfluous within CYBOI, since all primitives are allocated alone.
+//??            allocate_integer_vector(p0, p1);
         }
     }
 
@@ -345,6 +352,13 @@ void reallocate(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         if (r != 0) {
 
+            reallocate_pointer_vector(p0, p1, p2);
+
+            //?? CAUTION! The textual user interface (tui) translator and other files
+            //?? use pointer vectors for keeping integer primitives.
+            //?? Therefore, a pointer vector is used here.
+            //?? Possibly, true integer vectors (one integer primitive following another)
+            //?? are superfluous within CYBOI, since all primitives are allocated alone.
 //??            reallocate_integer_vector(p0, p1, p2);
         }
     }
@@ -549,7 +563,14 @@ void deallocate(void* p0, void* p1, void* p2, void* p3) {
 
         if (r != 0) {
 
-            deallocate_integer_vector(p0, p1);
+            deallocate_pointer_vector(p0, p1);
+
+            //?? CAUTION! The textual user interface (tui) translator and other files
+            //?? use pointer vectors for keeping integer primitives.
+            //?? Therefore, a pointer vector is used here.
+            //?? Possibly, true integer vectors (one integer primitive following another)
+            //?? are superfluous within CYBOI, since all primitives are allocated alone.
+//??            deallocate_integer_vector(p0, p1);
         }
     }
 

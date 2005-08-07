@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.29 $ $Date: 2005-08-04 15:20:58 $ $Author: christian $
+ * @version $Revision: 1.30 $ $Date: 2005-08-07 18:11:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -261,17 +261,11 @@ void send_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
     // Create array.
     allocate((void*) &a, (void*) &as, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT);
 
-    printf("TEST send 0: %s\n", (char*) a);
-
     // Serialise multi-dimensional tui into array.
     serialise((void*) &a, (void*) &ac, (void*) &as, t, (void*) tc, (void*) TERMINAL_ABSTRACTION, (void*) TERMINAL_ABSTRACTION_COUNT);
 
-    printf("TEST send 1: %s\n", (char*) a);
-
     // CAUTION! The textual user interface (tui) AND ALL ITS CONTENT
     // need to be deallocated at system shutdown!
-
-    printf("TEST send 2: %s\n", (char*) a);
 
     //?? TEST only!
 //??    as = 100;
