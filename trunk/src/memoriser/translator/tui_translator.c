@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.14 $ $Date: 2005-08-07 18:11:18 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2005-08-08 12:06:43 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -134,6 +134,9 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
             int** sx = (int**) &NULL_POINTER;
             int** sy = (int**) &NULL_POINTER;
             int** sz = (int**) &NULL_POINTER;
+
+            // The source part model index.
+            int mi = 0;
 
             // The already existing destination tui layers, rows and columns (characters).
             void** dzp = &NULL_POINTER;
@@ -270,6 +273,9 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 sx = (int**) &NULL_POINTER;
                 sy = (int**) &NULL_POINTER;
                 sz = (int**) &NULL_POINTER;
+
+                // Reset source part model index.
+                mi = 0;
 
                 // Reset destination tui count z, y, x coordinates.
                 dcz = (int**) &NULL_POINTER;
@@ -713,11 +719,11 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
                                             mapto((void*) &fg, (void*) INTEGER_COUNT, (void*) INTEGER_COUNT, (void*) *fgm, (void*) *fgmc, (void*) TERMINAL_FOREGROUND_ABSTRACTION, (void*) TERMINAL_FOREGROUND_ABSTRACTION_COUNT);
                                             //?? TODO: Replace temporary test values like
                                             //?? NUMBER_0_INTEGER with real properties!
-                                            set((void*) h, (void*) INTEGER_VALUE_INDEX, (void*) NUMBER_0_INTEGER, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
-                                            set((void*) i, (void*) INTEGER_VALUE_INDEX, (void*) NUMBER_0_INTEGER, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
-                                            set((void*) bl, (void*) INTEGER_VALUE_INDEX, (void*) NUMBER_0_INTEGER, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
-                                            set((void*) u, (void*) INTEGER_VALUE_INDEX, (void*) NUMBER_0_INTEGER, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
-                                            set((void*) b, (void*) INTEGER_VALUE_INDEX, (void*) NUMBER_0_INTEGER, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+                                            set(h, (void*) INTEGER_VALUE_INDEX, (void*) NUMBER_0_INTEGER, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+                                            set(i, (void*) INTEGER_VALUE_INDEX, (void*) NUMBER_0_INTEGER, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+                                            set(bl, (void*) INTEGER_VALUE_INDEX, (void*) NUMBER_0_INTEGER, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+                                            set(u, (void*) INTEGER_VALUE_INDEX, (void*) NUMBER_0_INTEGER, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+                                            set(b, (void*) INTEGER_VALUE_INDEX, (void*) NUMBER_0_INTEGER, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
 
                                             // Reset comparison result.
                                             r = 0;
@@ -727,10 +733,17 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
                                             // CAUTION! The whole row may be much longer than the given string.
                                             // Therefore, only take characters if the index x is smaller than
                                             // the source string model count.
-                                            if ((r != 0) && (x < **mc)) {
+                                            if ((r != 0) && (mi < **mc)) {
 
                                                 // Get character value at position x.
-                                                get(*m, (void*) &x, (void*) &c, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT);
+                                                get(*m, (void*) &mi, (void*) c, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT);
+
+    printf("TEST translator mi: %i\n", mi);
+    printf("TEST translator c: %i\n", c);
+    printf("TEST translator *c: %i\n", *((char*) c));
+
+                                                // Increase model index by one.
+                                                mi++;
 
                                             } else {
 
@@ -741,6 +754,13 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
 //??                                                set((void*) c, (void*) CHARACTER_VALUE_INDEX, (void*) SPACE_CHARACTER, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT);
                                                 c = SPACE_CHARACTER;
                                             }
+
+    void** ver = &NULL_POINTER;
+    get(dx, (void*) TUI_PROPERTIES_CHARACTER_INDEX, (void*) &ver, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+//??    get(dx, (void*) TUI_PROPERTIES_HIDDEN_INDEX, (void*) &ver, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    printf("VERIFICATION *ver: %i\n", (char*) *ver);
+    printf("VERIFICATION *ver: %i\n", *((char*) ver));
+//??    printf("VERIFICATION **ver: %i\n", **((int**) ver));
 
                                             x++;
                                         }

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.17 $ $Date: 2005-08-07 21:26:13 $ $Author: christian $
+ * @version $Revision: 1.18 $ $Date: 2005-08-08 12:06:43 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -77,7 +77,7 @@ void serialise_terminal_properties(void* p0, void* p1, void* p2,
                         // Set destination string size.
                         //?? TODO: Use different size here!
                         //?? Count ALL properties and add corresponding size!
-                        *ds = *dc * *STRING_REALLOCATE_FACTOR + 100;
+                        *ds = *dc /*??* *STRING_REALLOCATE_FACTOR*/ + 100;
 
                         // Reallocate destination string.
                         reallocate_array(p0, p1, p2, (void*) CHARACTER_ARRAY);
@@ -86,7 +86,7 @@ void serialise_terminal_properties(void* p0, void* p1, void* p2,
                         //?? Assign it here again to *d??
                     }
 
-    /*??
+/*??
                     // Position cursor.
                     // CAUTION! The top-left terminal corner is 1:1, but the given positions
                     // start counting from 0, so that 1 has to be added to all positions.
@@ -95,15 +95,16 @@ void serialise_terminal_properties(void* p0, void* p1, void* p2,
                     // Clear screen.
                     sprintf(*d, "\033[2J");
                     sprintf(*d, "Set colour to \033[32mgreen\033[0m.\n");
-    */
+*/
 
+/*??
                     // Add attribute off control sequence.
                     set_array_elements(*d, dc, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) CHARACTER_ARRAY);
                     *dc = *dc + *ESCAPE_CONTROL_SEQUENCE_COUNT;
                     set_array_elements(*d, dc, (void*) ATTRIBUTE_OFF_CONTROL_SEQUENCE, (void*) ATTRIBUTE_OFF_CONTROL_SEQUENCE_COUNT, (void*) CHARACTER_ARRAY);
                     *dc = *dc + *ATTRIBUTE_OFF_CONTROL_SEQUENCE_COUNT;
 
-    /*??
+/*??
                     // Add background property.
                     set_array_elements(*d, dc, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) CHARACTER_ARRAY);
                     *dc = *dc + *ESCAPE_CONTROL_SEQUENCE_COUNT;
@@ -115,8 +116,9 @@ void serialise_terminal_properties(void* p0, void* p1, void* p2,
                     *dc = *dc + *ESCAPE_CONTROL_SEQUENCE_COUNT;
                     set_array_elements(*d, dc, p7, (void*) ATTRIBUTE_OFF_CONTROL_SEQUENCE_COUNT, (void*) CHARACTER_ARRAY);
                     *dc = *dc + *ATTRIBUTE_OFF_CONTROL_SEQUENCE_COUNT;
-    */
+*/
 
+/*??
                     // The comparison result.
                     int r = 0;
 
@@ -191,13 +193,25 @@ void serialise_terminal_properties(void* p0, void* p1, void* p2,
                         set_array_elements(*d, dc, (void*) BOLD_CONTROL_SEQUENCE, (void*) BOLD_CONTROL_SEQUENCE_COUNT, (void*) CHARACTER_ARRAY);
                         *dc = *dc + *BOLD_CONTROL_SEQUENCE_COUNT;
                     }
+*/
 
                     // Set character.
                     set_array_elements(*d, dc, p13, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
                     *dc = *dc + *CHARACTER_COUNT;
 
-                    //?? TEST
-                    set_array_elements(*d, dc, "Set colour to \033[32mgreen\033[0m.\n", (void*) NUMBER_29_INTEGER, (void*) CHARACTER_ARRAY);
+    printf("TEST properties p13: %i\n", p13);
+    printf("TEST properties p13: %s\n", (char*) p13);
+    printf("TEST properties *dc: %i\n", *dc);
+
+/*??
+                    //?? TEST only
+                    void* test = "Halloechen";
+                    int testc = 10;
+                    void* test = "Set colour to \033[32mgreen\033[0m.\n";
+                    int testc = 29;
+                    set_array_elements(*d, dc, test, (void*) &testc, (void*) CHARACTER_ARRAY);
+                    *dc = *dc + testc;
+*/
 
                 } else {
 
