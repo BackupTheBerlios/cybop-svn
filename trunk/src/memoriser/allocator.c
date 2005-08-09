@@ -24,7 +24,7 @@
  * - create a model in memory
  * - destroy a model in memory
  *
- * @version $Revision: 1.12 $ $Date: 2005-08-07 18:11:18 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2005-08-09 13:04:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -33,20 +33,16 @@
 
 #include "../globals/constants/abstraction_constants.c"
 #include "../memoriser/array.c"
+#include "../memoriser/allocator/character_vector_allocator.c"
 #include "../memoriser/allocator/complex_allocator.c"
 #include "../memoriser/allocator/compound_allocator.c"
-#include "../memoriser/allocator/double_allocator.c"
 #include "../memoriser/allocator/double_vector_allocator.c"
 #include "../memoriser/allocator/fraction_allocator.c"
-#include "../memoriser/allocator/integer_allocator.c"
 #include "../memoriser/allocator/integer_vector_allocator.c"
 #include "../memoriser/allocator/internal_memory_allocator.c"
 #include "../memoriser/allocator/pointer_vector_allocator.c"
 #include "../memoriser/allocator/signal_memory_allocator.c"
-#include "../memoriser/allocator/string_allocator.c"
 #include "../memoriser/allocator/time_allocator.c"
-#include "../memoriser/allocator/tui_allocator.c"
-#include "../memoriser/allocator/unsigned_long_allocator.c"
 #include "../memoriser/allocator/unsigned_long_vector_allocator.c"
 #include "../memoriser/allocator/xml_node_allocator.c"
 #include "../memoriser/allocator/xml_property_allocator.c"
@@ -70,7 +66,7 @@ void allocate(void* p0, void* p1, void* p2, void* p3) {
 
         if (r != 0) {
 
-            allocate_string(p0, p1);
+            allocate_character_vector(p0, p1);
         }
     }
 
@@ -80,7 +76,7 @@ void allocate(void* p0, void* p1, void* p2, void* p3) {
 
         if (r != 0) {
 
-            allocate_string(p0, p1);
+            allocate_character_vector(p0, p1);
         }
     }
 
@@ -100,17 +96,17 @@ void allocate(void* p0, void* p1, void* p2, void* p3) {
 
         if (r != 0) {
 
-            allocate_string(p0, p1);
+            allocate_character_vector(p0, p1);
         }
     }
 
     if (r == 0) {
 
-        compare_arrays(p2, p3, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p2, p3, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-            allocate_string(p0, p1);
+            allocate_character_vector(p0, p1);
         }
     }
 
@@ -120,17 +116,7 @@ void allocate(void* p0, void* p1, void* p2, void* p3) {
 
         if (r != 0) {
 
-            allocate_integer(p0, p1);
-        }
-    }
-
-    if (r == 0) {
-
-        compare_arrays(p2, p3, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != 0) {
-
-            allocate_integer(p0, p1);
+            allocate_integer_vector(p0, p1);
         }
     }
 
@@ -140,24 +126,7 @@ void allocate(void* p0, void* p1, void* p2, void* p3) {
 
         if (r != 0) {
 
-            allocate_pointer_vector(p0, p1);
-
-            //?? CAUTION! The textual user interface (tui) translator and other files
-            //?? use pointer vectors for keeping integer primitives.
-            //?? Therefore, a pointer vector is used here.
-            //?? Possibly, true integer vectors (one integer primitive following another)
-            //?? are superfluous within CYBOI, since all primitives are allocated alone.
-//??            allocate_integer_vector(p0, p1);
-        }
-    }
-
-    if (r == 0) {
-
-        compare_arrays(p2, p3, (void*) UNSIGNED_LONG_ABSTRACTION, (void*) UNSIGNED_LONG_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != 0) {
-
-            allocate_unsigned_long(p0, p1);
+            allocate_integer_vector(p0, p1);
         }
     }
 
@@ -168,16 +137,6 @@ void allocate(void* p0, void* p1, void* p2, void* p3) {
         if (r != 0) {
 
             allocate_unsigned_long_vector(p0, p1);
-        }
-    }
-
-    if (r == 0) {
-
-        compare_arrays(p2, p3, (void*) DOUBLE_ABSTRACTION, (void*) DOUBLE_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != 0) {
-
-            allocate_double(p0, p1);
         }
     }
 
@@ -243,16 +202,6 @@ void allocate(void* p0, void* p1, void* p2, void* p3) {
 
     if (r == 0) {
 
-        compare_arrays(p2, p3, (void*) TUI_ABSTRACTION, (void*) TUI_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != 0) {
-
-            allocate_tui(p0, p1);
-        }
-    }
-
-    if (r == 0) {
-
         compare_arrays(p2, p3, (void*) HXP_ABSTRACTION, (void*) HXP_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
@@ -312,17 +261,17 @@ void reallocate(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         if (r != 0) {
 
-//??            reallocate_string(p0, p1, p2);
+//??            reallocate_character_vector(p0, p1, p2);
         }
     }
 
     if (r == 0) {
 
-        compare_arrays(p3, p4, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p3, p4, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-//??            reallocate_string(p0, p1, p2);
+//??            reallocate_character_vector(p0, p1, p2);
         }
     }
 
@@ -332,17 +281,7 @@ void reallocate(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         if (r != 0) {
 
-//??            reallocate_integer(p0, p1, p2);
-        }
-    }
-
-    if (r == 0) {
-
-        compare_arrays(p3, p4, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != 0) {
-
-//??            reallocate_integer(p0, p1, p2);
+//??            reallocate_integer_vector(p0, p1, p2);
         }
     }
 
@@ -352,24 +291,7 @@ void reallocate(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         if (r != 0) {
 
-            reallocate_pointer_vector(p0, p1, p2);
-
-            //?? CAUTION! The textual user interface (tui) translator and other files
-            //?? use pointer vectors for keeping integer primitives.
-            //?? Therefore, a pointer vector is used here.
-            //?? Possibly, true integer vectors (one integer primitive following another)
-            //?? are superfluous within CYBOI, since all primitives are allocated alone.
 //??            reallocate_integer_vector(p0, p1, p2);
-        }
-    }
-
-    if (r == 0) {
-
-        compare_arrays(p3, p4, (void*) UNSIGNED_LONG_ABSTRACTION, (void*) UNSIGNED_LONG_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != 0) {
-
-//??            reallocate_unsigned_long(p0, p1, p2);
         }
     }
 
@@ -380,16 +302,6 @@ void reallocate(void* p0, void* p1, void* p2, void* p3, void* p4) {
         if (r != 0) {
 
 //??            reallocate_unsigned_long_vector(p0, p1, p2);
-        }
-    }
-
-    if (r == 0) {
-
-        compare_arrays(p3, p4, (void*) DOUBLE_ABSTRACTION, (void*) DOUBLE_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != 0) {
-
-//??            reallocate_double(p0, p1, p2);
         }
     }
 
@@ -455,16 +367,6 @@ void reallocate(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (r == 0) {
 
-        compare_arrays(p3, p4, (void*) TUI_ABSTRACTION, (void*) TUI_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != 0) {
-
-//??            reallocate_tui(p0, p1, p2);
-        }
-    }
-
-    if (r == 0) {
-
         compare_arrays(p3, p4, (void*) HXP_ABSTRACTION, (void*) HXP_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
@@ -523,17 +425,17 @@ void deallocate(void* p0, void* p1, void* p2, void* p3) {
 
         if (r != 0) {
 
-            deallocate_string(p0, p1);
+            deallocate_character_vector(p0, p1);
         }
     }
 
     if (r == 0) {
 
-        compare_arrays(p2, p3, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p2, p3, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-            deallocate_string(p0, p1);
+            deallocate_character_vector(p0, p1);
         }
     }
 
@@ -543,17 +445,7 @@ void deallocate(void* p0, void* p1, void* p2, void* p3) {
 
         if (r != 0) {
 
-            deallocate_integer(p0, p1);
-        }
-    }
-
-    if (r == 0) {
-
-        compare_arrays(p2, p3, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != 0) {
-
-            deallocate_integer(p0, p1);
+            deallocate_integer_vector(p0, p1);
         }
     }
 
@@ -563,24 +455,7 @@ void deallocate(void* p0, void* p1, void* p2, void* p3) {
 
         if (r != 0) {
 
-            deallocate_pointer_vector(p0, p1);
-
-            //?? CAUTION! The textual user interface (tui) translator and other files
-            //?? use pointer vectors for keeping integer primitives.
-            //?? Therefore, a pointer vector is used here.
-            //?? Possibly, true integer vectors (one integer primitive following another)
-            //?? are superfluous within CYBOI, since all primitives are allocated alone.
-//??            deallocate_integer_vector(p0, p1);
-        }
-    }
-
-    if (r == 0) {
-
-        compare_arrays(p2, p3, (void*) UNSIGNED_LONG_ABSTRACTION, (void*) UNSIGNED_LONG_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != 0) {
-
-            deallocate_unsigned_long(p0, p1);
+            deallocate_integer_vector(p0, p1);
         }
     }
 
@@ -591,16 +466,6 @@ void deallocate(void* p0, void* p1, void* p2, void* p3) {
         if (r != 0) {
 
             deallocate_unsigned_long_vector(p0, p1);
-        }
-    }
-
-    if (r == 0) {
-
-        compare_arrays(p2, p3, (void*) DOUBLE_ABSTRACTION, (void*) DOUBLE_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != 0) {
-
-            deallocate_double(p0, p1);
         }
     }
 
@@ -661,16 +526,6 @@ void deallocate(void* p0, void* p1, void* p2, void* p3) {
         if (r != 0) {
 
             deallocate_xml_node(p0, p1);
-        }
-    }
-
-    if (r == 0) {
-
-        compare_arrays(p2, p3, (void*) TUI_ABSTRACTION, (void*) TUI_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != 0) {
-
-            deallocate_tui(p0, p1);
         }
     }
 

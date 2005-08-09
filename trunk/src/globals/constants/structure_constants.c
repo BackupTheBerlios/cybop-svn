@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.15 $ $Date: 2005-08-04 15:20:58 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2005-08-09 13:04:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -31,76 +31,33 @@
 #include "../../globals/constants/integer_constants.c"
 
 //
-// Character.
+// Primitive.
 //
 
-/** The character count. */
-static int* CHARACTER_COUNT = NUMBER_1_INTEGER_ARRAY;
+/** The primitive count. */
+static int* PRIMITIVE_COUNT = NUMBER_1_INTEGER_ARRAY;
 
-/** The character value index. */
-static int* CHARACTER_VALUE_INDEX = NUMBER_0_INTEGER_ARRAY;
-
-//
-// String (character vector).
-//
-
-/** The string reallocate factor. */
-static int* STRING_REALLOCATE_FACTOR = NUMBER_2_INTEGER_ARRAY;
+/** The primitive value index. */
+static int* PRIMITIVE_VALUE_INDEX = NUMBER_0_INTEGER_ARRAY;
 
 //
-// Integer.
+// Vectors.
 //
 
-/** The integer count. */
-static int* INTEGER_COUNT = NUMBER_1_INTEGER_ARRAY;
+/** The character vector reallocate factor. */
+static int* CHARACTER_VECTOR_REALLOCATE_FACTOR = NUMBER_2_INTEGER_ARRAY;
 
-/** The integer value index. */
-static int* INTEGER_VALUE_INDEX = NUMBER_0_INTEGER_ARRAY;
-
-//
-// Integer vector.
-//
+/** The wide character vector reallocate factor. */
+static int* WIDE_CHARACTER_VECTOR_REALLOCATE_FACTOR = NUMBER_2_INTEGER_ARRAY;
 
 /** The integer vector reallocate factor. */
 static int* INTEGER_VECTOR_REALLOCATE_FACTOR = NUMBER_2_INTEGER_ARRAY;
 
-//
-// Unsigned long.
-//
-
-/** The unsigned long count. */
-static int* UNSIGNED_LONG_COUNT = NUMBER_1_INTEGER_ARRAY;
-
-/** The unsigned long value index. */
-static int* UNSIGNED_LONG_VALUE_INDEX = NUMBER_0_INTEGER_ARRAY;
-
-//
-// Unsigned long vector.
-//
-
 /** The unsigned long vector reallocate factor. */
 static int* UNSIGNED_LONG_VECTOR_REALLOCATE_FACTOR = NUMBER_2_INTEGER_ARRAY;
 
-//
-// Double.
-//
-
-/** The double count. */
-static int* DOUBLE_COUNT = NUMBER_1_INTEGER_ARRAY;
-
-/** The double value index. */
-static int* DOUBLE_VALUE_INDEX = NUMBER_0_INTEGER_ARRAY;
-
-//
-// Double vector.
-//
-
 /** The double vector reallocate factor. */
 static int* DOUBLE_VECTOR_REALLOCATE_FACTOR = NUMBER_2_INTEGER_ARRAY;
-
-//
-// Pointer vector.
-//
 
 /** The pointer vector reallocate factor. */
 static int* POINTER_VECTOR_REALLOCATE_FACTOR = NUMBER_2_INTEGER_ARRAY;

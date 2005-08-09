@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.32 $ $Date: 2005-08-08 12:06:43 $ $Author: christian $
+ * @version $Revision: 1.33 $ $Date: 2005-08-09 13:04:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -83,7 +83,7 @@ void receive_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     // Set terminated file name by first copying the actual name and then
                     // adding the null termination character.
                     set_array_elements((void*) &tn, (void*) CHARACTER_ARRAY, (void*) &i, p3, p4);
-                    set_array_elements((void*) &tn, (void*) CHARACTER_ARRAY, p4, (void*) &NULL_CONTROL_CHARACTER, (void*) &NULL_CONTROL_CHARACTER_COUNT);
+                    set_array_elements((void*) &tn, (void*) CHARACTER_ARRAY, p4, (void*) &NULL_CONTROL_CHARACTER, (void*) &CHARACTER_COUNT);
 
                     // Open file.
                     // CAUTION! The file name cannot be handed over as is.
@@ -212,32 +212,32 @@ void send_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
         int* tsx = NULL_POINTER;
 
         // Allocate count and size z, y, x coordinates.
-        allocate((void*) &tcz, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
-        allocate((void*) &tcy, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
-        allocate((void*) &tcx, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
-        allocate((void*) &tsz, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
-        allocate((void*) &tsy, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
-        allocate((void*) &tsx, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+        allocate((void*) &tcz, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        allocate((void*) &tcy, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        allocate((void*) &tcx, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        allocate((void*) &tsz, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        allocate((void*) &tsy, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        allocate((void*) &tsx, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
         // Initialise count and size z, y, x coordinates.
-        set(tcz, (void*) INTEGER_VALUE_INDEX, (void*) NUMBER_0_INTEGER, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
-        set(tcy, (void*) INTEGER_VALUE_INDEX, (void*) NUMBER_0_INTEGER, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
-        set(tcx, (void*) INTEGER_VALUE_INDEX, (void*) NUMBER_0_INTEGER, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
-        set(tsz, (void*) INTEGER_VALUE_INDEX, (void*) NUMBER_0_INTEGER, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
-        set(tsy, (void*) INTEGER_VALUE_INDEX, (void*) NUMBER_0_INTEGER, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
-        set(tsx, (void*) INTEGER_VALUE_INDEX, (void*) NUMBER_0_INTEGER, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+        set(tcz, (void*) PRIMITIVE_VALUE_INDEX, (void*) NUMBER_0_INTEGER, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        set(tcy, (void*) PRIMITIVE_VALUE_INDEX, (void*) NUMBER_0_INTEGER, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        set(tcx, (void*) PRIMITIVE_VALUE_INDEX, (void*) NUMBER_0_INTEGER, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        set(tsz, (void*) PRIMITIVE_VALUE_INDEX, (void*) NUMBER_0_INTEGER, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        set(tsy, (void*) PRIMITIVE_VALUE_INDEX, (void*) NUMBER_0_INTEGER, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        set(tsx, (void*) PRIMITIVE_VALUE_INDEX, (void*) NUMBER_0_INTEGER, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
         // Allocate tui count and size.
         allocate((void*) &tc, (void*) TUI_COUNT, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         allocate((void*) &ts, (void*) TUI_COUNT, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
         // Initialise tui count and size.
-        set(tc, (void*) TUI_Z_DIMENSION_INDEX, (void*) tcz, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        set(tc, (void*) TUI_Y_DIMENSION_INDEX, (void*) tcy, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        set(tc, (void*) TUI_X_DIMENSION_INDEX, (void*) tcx, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        set(ts, (void*) TUI_Z_DIMENSION_INDEX, (void*) tsz, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        set(ts, (void*) TUI_Y_DIMENSION_INDEX, (void*) tsy, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        set(ts, (void*) TUI_X_DIMENSION_INDEX, (void*) tsx, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        set(tc, (void*) TUI_Z_DIMENSION_INDEX, (void*) &tcz, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        set(tc, (void*) TUI_Y_DIMENSION_INDEX, (void*) &tcy, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        set(tc, (void*) TUI_X_DIMENSION_INDEX, (void*) &tcx, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        set(ts, (void*) TUI_Z_DIMENSION_INDEX, (void*) &tsz, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        set(ts, (void*) TUI_Y_DIMENSION_INDEX, (void*) &tsy, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        set(ts, (void*) TUI_X_DIMENSION_INDEX, (void*) &tsx, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
         // Allocate tui.
         allocate((void*) &t, (void*) tsz, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
@@ -245,9 +245,9 @@ void send_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
         // Set tui internals.
         // The tui is stored in internal memory for faster access,
         // so that it does not have to be created every time again.
-        set(p5, (void*) TUI_INTERNAL, (void*) t, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        set(p5, (void*) TUI_COUNT_INTERNAL, (void*) tc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        set(p5, (void*) TUI_SIZE_INTERNAL, (void*) ts, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        set(p5, (void*) TUI_INTERNAL, (void*) &t, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        set(p5, (void*) TUI_COUNT_INTERNAL, (void*) &tc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        set(p5, (void*) TUI_SIZE_INTERNAL, (void*) &ts, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     }
 
     // Encode compound model into tui.
@@ -259,7 +259,7 @@ void send_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
     int as = 0;
 
     // Create array.
-    allocate((void*) &a, (void*) &as, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT);
+    allocate((void*) &a, (void*) &as, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
     // Serialise multi-dimensional tui into array.
     serialise((void*) &a, (void*) &ac, (void*) &as, t, (void*) tc, (void*) TERMINAL_ABSTRACTION, (void*) TERMINAL_ABSTRACTION_COUNT);
@@ -267,27 +267,11 @@ void send_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
     // CAUTION! The textual user interface (tui) AND ALL ITS CONTENT
     // need to be deallocated at system shutdown!
 
-    //?? TEST only!
-//??    as = 100;
-//??    reallocate_array((void*) &a, (void*) &ac, (void*) &as, (void*) CHARACTER_ARRAY);
-//??    set(a, (void*) &ac, (void*) "Hallo, dies ist ein Test fuer Res Medicinae!", (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT);
-
-/*??
-    void* test = "\033[2JOn cleared screen,\
-        print in \033[32mgreen colour\033[0m and then\
-        \033[33myellow on \033[44mblue background\033[0m and try to\
-        position \033[10;15H and finally write in \
-        \033[1mbold and switch all \033[0m off.";
-    int testc = strlen(test);
-*/
-
     // Write serialised array as message to terminal.
     write_data(p0, p1, p2, a, (void*) &ac, (void*) TERMINAL_CHANNEL, (void*) TERMINAL_CHANNEL_COUNT);
-    //?? TEST only!
-//??    write_data(p0, p1, p2, test, (void*) &testc, (void*) TERMINAL_CHANNEL, (void*) TERMINAL_CHANNEL_COUNT);
 
     // Destroy array.
-    deallocate((void*) &a, (void*) &as, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT);
+    deallocate((void*) &a, (void*) &as, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
 }
 
 /* SEND_LINUX_CONSOLE_SOURCE */

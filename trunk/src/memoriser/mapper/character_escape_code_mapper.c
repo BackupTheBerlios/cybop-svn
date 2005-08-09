@@ -20,12 +20,15 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-07-30 09:38:16 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-08-09 13:04:27 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef CHARACTER_ESCAPE_CODE_MAPPER_SOURCE
 #define CHARACTER_ESCAPE_CODE_MAPPER_SOURCE
+
+#include "../../globals/constants/character_constants.c"
+#include "../../globals/constants/structure_constants.c"
 
 /**
  * Gets the escape code for the given character.
@@ -51,7 +54,7 @@ void get_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             if (r == 0) {
 
-                compare_arrays(p3, p4, SPACE_CHARACTER, SPACE_CHARACTER_COUNT, &r, (void*) CHARACTER_ARRAY);
+                compare_arrays(p3, p4, SPACE_CHARACTER, CHARACTER_COUNT, &r, (void*) CHARACTER_ARRAY);
 
                 if (r == 1) {
 
@@ -62,7 +65,7 @@ void get_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             if (r == 0) {
 
-                compare_arrays(p3, p4, SPACE_CHARACTER, SPACE_CHARACTER_COUNT, &r, (void*) CHARACTER_ARRAY);
+                compare_arrays(p3, p4, SPACE_CHARACTER, CHARACTER_COUNT, &r, (void*) CHARACTER_ARRAY);
 
                 if (r == 1) {
 

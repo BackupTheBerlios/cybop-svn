@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2005-07-29 15:48:51 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-08-09 13:04:27 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -38,13 +38,13 @@
  *
  * @param p0 the integer vector
  * @param p1 the index
- * @param p2 the element
+ * @param p2 the element (Hand over as reference!)
  */
 void set_integer_vector_element(void* p0, void* p1, void* p2) {
 
     log_message_debug("Set integer vector element.");
 
-    set_array_elements(p0, p1, (void*) &p2, (void*) NUMBER_1_INTEGER, (void*) INTEGER_ARRAY);
+    set_array_elements(p0, p1, p2, (void*) NUMBER_1_INTEGER, (void*) INTEGER_ARRAY);
 }
 
 /**
@@ -66,7 +66,7 @@ void remove_integer_vector_element(void* p0, void* p1, void* p2) {
  *
  * @param p0 the integer vector
  * @param p1 the index
- * @param p2 the vector element (Hand over as reference!)
+ * @param p2 the element (Hand over as reference!)
  */
 void get_integer_vector_element(void* p0, void* p1, void* p2) {
 

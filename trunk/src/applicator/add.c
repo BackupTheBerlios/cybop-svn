@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2005-08-04 15:20:58 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2005-08-09 13:04:25 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -145,9 +145,9 @@ void add_strings(void** res, int* res_count, int* res_size,
 //
 //        if (r != 1) {
 //
-//            if (*ac == *INTEGER_ABSTRACTION_COUNT) {
+//            if (*ac == *INTEGER_VECTOR_ABSTRACTION_COUNT) {
 //
-//                compare_array_elements(p3, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+//                compare_array_elements(p3, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 //
 //                if (r == 1) {
 //
@@ -287,16 +287,16 @@ void add(void* p0, void* p1, void* p2, void* p3, void* p4) {
         //check the abstracton from operand_1 and operand_2
         //the abstrcation msut be the same
         compare_arrays( *op1a, *op1ac,
-                        (void*) INTEGER_ABSTRACTION,
-                        (void*) INTEGER_ABSTRACTION_COUNT,
+                        (void*) INTEGER_VECTOR_ABSTRACTION,
+                        (void*) INTEGER_VECTOR_ABSTRACTION_COUNT,
                         (void*) &r1, (void*) CHARACTER_ARRAY);
         compare_arrays( *op2a, *op2ac,
-                        (void*) INTEGER_ABSTRACTION,
-                        (void*) INTEGER_ABSTRACTION_COUNT,
+                        (void*) INTEGER_VECTOR_ABSTRACTION,
+                        (void*) INTEGER_VECTOR_ABSTRACTION_COUNT,
                         (void*) &r2, (void*) CHARACTER_ARRAY);
         compare_arrays( *ra, *rac,
-                        (void*) INTEGER_ABSTRACTION,
-                        (void*) INTEGER_ABSTRACTION_COUNT,
+                        (void*) INTEGER_VECTOR_ABSTRACTION,
+                        (void*) INTEGER_VECTOR_ABSTRACTION_COUNT,
                         (void*) &r3, (void*) CHARACTER_ARRAY);
 
         if ( (r1==1) && (r2==1) && (r3==1) ) {
@@ -310,16 +310,16 @@ void add(void* p0, void* p1, void* p2, void* p3, void* p4) {
         //check the abstracton from operand_1 and operand_2
         //the abstrcation msut be the same
         compare_arrays( *op1a, *op1ac,
-                        (void*) STRING_ABSTRACTION,
-                        (void*) STRING_ABSTRACTION_COUNT,
+                        (void*) CHARACTER_VECTOR_ABSTRACTION,
+                        (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
                         (void*) &r1, (void*) CHARACTER_ARRAY);
         compare_arrays( *op2a, *op2ac,
-                        (void*) STRING_ABSTRACTION,
-                        (void*) STRING_ABSTRACTION_COUNT,
+                        (void*) CHARACTER_VECTOR_ABSTRACTION,
+                        (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
                         (void*) &r2, (void*) CHARACTER_ARRAY);
         compare_arrays( *ra, *rac,
-                        (void*) STRING_ABSTRACTION,
-                        (void*) STRING_ABSTRACTION_COUNT,
+                        (void*) CHARACTER_VECTOR_ABSTRACTION,
+                        (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
                         (void*) &r3, (void*) CHARACTER_ARRAY);
 
         if ( (r1==1) && (r2==1) && (r3==1) ) {

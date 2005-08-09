@@ -1,5 +1,5 @@
 /*
- * $RCSfile: string_converter.c,v $
+ * $RCSfile: character_vector_converter.c,v $
  *
  * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
  *
@@ -20,19 +20,19 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2005-08-04 15:20:58 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2005-08-09 13:04:27 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef STRING_CONVERTER_SOURCE
-#define STRING_CONVERTER_SOURCE
+#ifndef CHARACTER_VECTOR_CONVERTER_SOURCE
+#define CHARACTER_VECTOR_CONVERTER_SOURCE
 
 #include "../../globals/constants/abstraction_constants.c"
 #include "../../globals/constants/log_constants.c"
 #include "../../globals/logger/logger.c"
 
 /**
- * Parses the byte stream and creates a string model from it.
+ * Parses the byte stream and creates a character vector model from it.
  *
  * @param p0 the destination (Hand over as reference!)
  * @param p1 the destination count
@@ -40,7 +40,7 @@
  * @param p3 the source
  * @param p4 the source count
  */
-void parse_string(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void parse_character_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (p4 != NULL_POINTER) {
 
@@ -60,19 +60,19 @@ void parse_string(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                     if (*dc >= 0) {
 
-                        log_message_debug("Parse string.");
+                        log_message_debug("Parse character vector.");
 
-                        // The new destination string size.
-                        // (Not exactly the size, but the destination string index
+                        // The new destination character vector size.
+                        // (Not exactly the size, but the destination character vector index
                         // increased by the source array count.)
                         *ds = *dc + *sc;
 
-                        // Reallocate destination string.
+                        // Reallocate destination character vector.
                         reallocate_array(p0, p1, p2, (void*) CHARACTER_ARRAY);
 
                         if (*dc <= (*ds - *sc)) {
 
-                            // Set source into destination string.
+                            // Set source into destination character vector.
                             set_array_elements(*d, p1, p3, p4, (void*) CHARACTER_ARRAY);
 
                             // Increment count.
@@ -87,37 +87,37 @@ void parse_string(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                         } else {
 
-                            log_message_debug("Could not parse string. The destination count exceeds the size.");
+                            log_message_debug("Could not parse character vector. The destination count exceeds the size.");
                         }
 
                     } else {
 
-                        log_message_debug("Could not parse string. The destination count is negative.");
+                        log_message_debug("Could not parse character vector. The destination count is negative.");
                     }
 
                 } else {
 
-                    log_message_debug("Could not parse string. The destination is null.");
+                    log_message_debug("Could not parse character vector. The destination is null.");
                 }
 
             } else {
 
-                log_message_debug("Could not parse string. The destination count is null.");
+                log_message_debug("Could not parse character vector. The destination count is null.");
             }
 
         } else {
 
-            log_message_debug("Could not parse string. The destination size is null.");
+            log_message_debug("Could not parse character vector. The destination size is null.");
         }
 
     } else {
 
-        log_message_debug("Could not parse string. The source count is null.");
+        log_message_debug("Could not parse character vector. The source count is null.");
     }
 }
 
 /**
- * Serialises the string model and creates a byte stream from it.
+ * Serialises the character vector model and creates a byte stream from it.
  *
  * @param p0 the destination (Hand over as reference!)
  * @param p1 the destination count
@@ -125,8 +125,8 @@ void parse_string(void* p0, void* p1, void* p2, void* p3, void* p4) {
  * @param p3 the source
  * @param p4 the source count
  */
-void serialise_string(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void serialise_character_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 }
 
-/* STRING_CONVERTER_SOURCE */
+/* CHARACTER_VECTOR_CONVERTER_SOURCE */
 #endif

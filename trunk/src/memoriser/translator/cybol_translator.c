@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2005-07-29 15:48:51 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2005-08-09 13:04:27 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -362,32 +362,32 @@ void decode_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4) {
 //??        fprintf(stderr, "smc: %i\n", *((int*) smc));
 
                         // Create destination name.
-                        allocate((void*) &dnc, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+                        allocate((void*) &dnc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
                         *dnc = 0;
-                        allocate((void*) &dns, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+                        allocate((void*) &dns, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
                         *dns = 0;
                         create((void*) &dn, (void*) dnc, (void*) dns,
                             sn, (void*) &snc,
-                            (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT,
+                            (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
                             (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
 
                         // CAUTION! A (transient) destination channel is not created,
                         // since that is only needed temporarily for model loading.
 
                         // Create destination abstraction.
-                        allocate((void*) &dac, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+                        allocate((void*) &dac, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
                         *dac = 0;
-                        allocate((void*) &das, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+                        allocate((void*) &das, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
                         *das = 0;
                         create((void*) &da, (void*) dac, (void*) das,
                             sa, (void*) &sac,
-                            (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT,
+                            (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
                             (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
 
                         // Create destination model.
-                        allocate((void*) &dmc, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+                        allocate((void*) &dmc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
                         *dmc = 0;
-                        allocate((void*) &dms, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+                        allocate((void*) &dms, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
                         *dms = 0;
                         create((void*) &dm, (void*) dmc, (void*) dms,
                             sm, (void*) &smc,
@@ -398,9 +398,9 @@ void decode_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4) {
                         if (c->children != NULL_POINTER) {
 
                             // Create details model.
-                            allocate((void*) &ddc, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+                            allocate((void*) &ddc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
                             *ddc = 0;
-                            allocate((void*) &dds, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+                            allocate((void*) &dds, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
                             *dds = 0;
                             allocate((void*) &dd, (void*) dds,
                                 (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);

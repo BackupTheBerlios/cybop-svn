@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2005-08-04 15:20:58 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2005-08-09 13:04:27 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -1892,14 +1892,14 @@ void reindex_compound_for_listelements(void* compound, void* compound_count, voi
                         *((int*) *cenc) = 0;
 
                         //parse the basisname
-                        parse(cen, *cenc, *cens, basisname, basisname_count, STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT);
+                        parse(cen, *cenc, *cens, basisname, basisname_count, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
                         //parse the list separator
-                        parse(cen, *cenc, *cens, LIST_SEPARATOR, LIST_SEPARATOR_COUNT, STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT);
+                        parse(cen, *cenc, *cens, LIST_SEPARATOR, LIST_SEPARATOR_COUNT, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
                         //parse the index
                         indexstr_count = snprintf(indexstr, indexstr_size, "%i", index_counter);
-                        parse(cen, *cenc, *cens, indexstr, &indexstr_count, STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT);
+                        parse(cen, *cenc, *cens, indexstr, &indexstr_count, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
                         index_counter = index_counter + 1;
                     }

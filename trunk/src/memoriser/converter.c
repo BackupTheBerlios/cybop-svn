@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2005-07-29 16:46:18 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2005-08-09 13:04:27 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,13 +30,11 @@
 #include "../globals/constants/abstraction_constants.c"
 #include "../memoriser/array.c"
 #include "../memoriser/converter/boolean_converter.c"
+#include "../memoriser/converter/character_vector_converter.c"
 #include "../memoriser/converter/complex_converter.c"
-#include "../memoriser/converter/double_converter.c"
 #include "../memoriser/converter/double_vector_converter.c"
 #include "../memoriser/converter/fraction_converter.c"
-#include "../memoriser/converter/integer_converter.c"
 #include "../memoriser/converter/integer_vector_converter.c"
-#include "../memoriser/converter/string_converter.c"
 #include "../memoriser/converter/terminal_converter.c"
 #include "../memoriser/converter/time_converter.c"
 #include "../memoriser/converter/xml_converter.c"
@@ -64,7 +62,7 @@ void parse(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6)
 
         if (r != 0) {
 
-            parse_string(p0, p1, p2, p3, p4);
+            parse_character_vector(p0, p1, p2, p3, p4);
         }
     }
 
@@ -74,7 +72,7 @@ void parse(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6)
 
         if (r != 0) {
 
-            parse_string(p0, p1, p2, p3, p4);
+            parse_character_vector(p0, p1, p2, p3, p4);
         }
     }
 
@@ -94,17 +92,17 @@ void parse(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6)
 
         if (r != 0) {
 
-            parse_string(p0, p1, p2, p3, p4);
+            parse_character_vector(p0, p1, p2, p3, p4);
         }
     }
 
     if (r == 0) {
 
-        compare_arrays(p5, p6, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p5, p6, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-            parse_string(p0, p1, p2, p3, p4);
+            parse_character_vector(p0, p1, p2, p3, p4);
         }
     }
 
@@ -120,31 +118,11 @@ void parse(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6)
 
     if (r == 0) {
 
-        compare_arrays(p5, p6, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != 0) {
-
-            parse_integer(p0, p1, p2, p3, p4);
-        }
-    }
-
-    if (r == 0) {
-
         compare_arrays(p5, p6, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
             parse_integer_vector(p0, p1, p2, p3, p4);
-        }
-    }
-
-    if (r == 0) {
-
-        compare_arrays(p5, p6, (void*) DOUBLE_ABSTRACTION, (void*) DOUBLE_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != 0) {
-
-            parse_double(p0, p1, p2, p3, p4);
         }
     }
 
@@ -258,17 +236,17 @@ void serialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
 
         if (r != 0) {
 
-            serialise_string(p0, p1, p2, p3, p4);
+            serialise_character_vector(p0, p1, p2, p3, p4);
         }
     }
 
     if (r == 0) {
 
-        compare_arrays(p5, p6, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p5, p6, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-            serialise_string(p0, p1, p2, p3, p4);
+            serialise_character_vector(p0, p1, p2, p3, p4);
         }
     }
 
@@ -284,31 +262,11 @@ void serialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
 
     if (r == 0) {
 
-        compare_arrays(p5, p6, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != 0) {
-
-            serialise_integer(p0, p1, p2, p3, p4);
-        }
-    }
-
-    if (r == 0) {
-
         compare_arrays(p5, p6, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
             serialise_integer_vector(p0, p1, p2, p3, p4);
-        }
-    }
-
-    if (r == 0) {
-
-        compare_arrays(p5, p6, (void*) DOUBLE_ABSTRACTION, (void*) DOUBLE_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != 0) {
-
-            serialise_double(p0, p1, p2, p3, p4);
         }
     }
 

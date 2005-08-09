@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2005-07-29 15:48:51 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2005-08-09 13:04:25 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -152,10 +152,10 @@ void count_parts(void* p0, void* p1, void* p2, void* p3, void* p4) {
         int comp_res2 = 0;
         int comp_res3 = 0;
 
-        compare_arrays(*bna, *bnac, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT, (void*) &comp_res1, (void*) CHARACTER_ARRAY);
+        compare_arrays(*bna, *bnac, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &comp_res1, (void*) CHARACTER_ARRAY);
         compare_arrays(*mdla, *mdlac, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT, (void*) &comp_res2, (void*) CHARACTER_ARRAY);
         compare_arrays(*mdla, *mdlac, (void*) CYBOL_ABSTRACTION, (void*) CYBOL_ABSTRACTION_COUNT, (void*) &comp_res2, (void*) CHARACTER_ARRAY);
-        compare_arrays(*resa, *resac, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT, (void*) &comp_res3, (void*) CHARACTER_ARRAY);
+        compare_arrays(*resa, *resac, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT, (void*) &comp_res3, (void*) CHARACTER_ARRAY);
 
         if ((comp_res1 == 1) && (comp_res2 == 1) && (comp_res3 == 1)) {
 

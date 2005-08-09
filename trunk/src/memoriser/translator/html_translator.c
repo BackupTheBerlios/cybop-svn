@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.10 $ $Date: 2005-08-02 16:27:07 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2005-08-09 13:04:27 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -29,9 +29,11 @@
 
 #include "../../globals/constants/abstraction_constants.c"
 #include "../../globals/constants/channel_constants.c"
+#include "../../globals/constants/character_constants.c"
 #include "../../globals/constants/constant.c"
 #include "../../globals/constants/log_constants.c"
 #include "../../globals/constants/name_constants.c"
+#include "../../globals/constants/structure_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../memoriser/accessor.c"
 #include "../../memoriser/accessor/compound_accessor.c"
@@ -182,7 +184,7 @@ void encode_html_string( void** dest, int* dest_count, int* dest_size,
         //parse the model
         parse( dest, dest_count, dest_size,
                source_model, source_model_count,
-               STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT);
+               CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
     }
 }
 
@@ -202,23 +204,23 @@ void encode_html_integer( void** dest, int* dest_count, int* dest_size,
         int* dest_int_count = NULL_POINTER;
         int* dest_int_size = NULL_POINTER;
 
-        allocate(&dest_int_count, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+        allocate(&dest_int_count, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
         *dest_int_count = 0;
-        allocate(&dest_int_size, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+        allocate(&dest_int_size, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
         *dest_int_size = 0;
         create((void*) &dest_int, (void*) dest_int_count, (void*) dest_int_size,
-            (void*) SPACE_CHARACTER , (void*) SPACE_CHARACTER_COUNT,
-            (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT,
+            (void*) SPACE_CHARACTER , (void*) CHARACTER_COUNT,
+            (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
             (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
 
         serialise( &dest_int, dest_int_count, dest_int_size,
                source_model, source_model_count,
-               INTEGER_ABSTRACTION, INTEGER_ABSTRACTION_COUNT);
+               INTEGER_VECTOR_ABSTRACTION, INTEGER_VECTOR_ABSTRACTION_COUNT);
 
         //parse the model
         parse( dest, dest_count, dest_size,
                dest_int, dest_int_count,
-               STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT);
+               CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
     }
 }
@@ -314,13 +316,13 @@ void encode_html(void** dest, int* dest_count, int *dest_size,
             {
                 //parse the <
                 parse( dest, dest_count, dest_size,
-                       LESS_THAN_SIGN_CHARACTER, LESS_THAN_SIGN_CHARACTER_COUNT,
-                       STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT);
+                       LESS_THAN_SIGN_CHARACTER, CHARACTER_COUNT,
+                       CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
                 //parse the html tag
                 parse( dest, dest_count, dest_size,
                        *tag_model, *tag_model_count,
-                       STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT);
+                       CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
                 //parse the tag properties
                 if ( (tag_prop_model != NULL_POINTER) &&
@@ -331,25 +333,25 @@ void encode_html(void** dest, int* dest_count, int *dest_size,
 
                     //parse the space
                     parse( dest, dest_count, dest_size,
-                           SPACE_CHARACTER, SPACE_CHARACTER_COUNT,
-                           STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT);
+                           SPACE_CHARACTER, CHARACTER_COUNT,
+                           CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
                     //parse the html tag properties
                     parse( dest, dest_count, dest_size,
                            *tag_prop_model, *tag_prop_model_count,
-                           STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT);
+                           CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
                 }
 
 
                 //parse the >
                 parse( dest, dest_count, dest_size,
-                       GREATER_THAN_SIGN_CHARACTER, GREATER_THAN_SIGN_CHARACTER_COUNT,
-                       STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT);
+                       GREATER_THAN_SIGN_CHARACTER, CHARACTER_COUNT,
+                       CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
                 //parse the line feed for better reading the html-source
                 parse( dest, dest_count, dest_size,
-                       LINE_FEED_CONTROL_CHARACTER, LINE_FEED_CONTROL_CHARACTER_COUNT,
-                       STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT);
+                       LINE_FEED_CONTROL_CHARACTER, CHARACTER_COUNT,
+                       CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
             }
         }
 
@@ -400,8 +402,8 @@ void encode_html(void** dest, int* dest_count, int *dest_size,
         if (r != 1) {
 
             compare_arrays( source_abstr, source_abstr_count,
-                            (void*) STRING_ABSTRACTION,
-                            (void*) STRING_ABSTRACTION_COUNT,
+                            (void*) CHARACTER_VECTOR_ABSTRACTION,
+                            (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
                             (void*) &r, (void*) CHARACTER_ARRAY);
             if (r == 1) {
 
@@ -414,8 +416,8 @@ void encode_html(void** dest, int* dest_count, int *dest_size,
         if (r != 1) {
 
             compare_arrays( source_abstr, source_abstr_count,
-                            (void*) INTEGER_ABSTRACTION,
-                            (void*) INTEGER_ABSTRACTION_COUNT,
+                            (void*) INTEGER_VECTOR_ABSTRACTION,
+                            (void*) INTEGER_VECTOR_ABSTRACTION_COUNT,
                             (void*) &r, (void*) CHARACTER_ARRAY);
             if (r == 1) {
 
@@ -428,8 +430,8 @@ void encode_html(void** dest, int* dest_count, int *dest_size,
 
         //parse the line feed for better reading the html-source
         parse( dest, dest_count, dest_size,
-               LINE_FEED_CONTROL_CHARACTER, LINE_FEED_CONTROL_CHARACTER_COUNT,
-               STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT);
+               LINE_FEED_CONTROL_CHARACTER, CHARACTER_COUNT,
+               CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
         //parse the end tag
         if ( (tag_model != NULL_POINTER) &&
@@ -445,28 +447,28 @@ void encode_html(void** dest, int* dest_count, int *dest_size,
             {
                 //parse the <
                 parse( dest, dest_count, dest_size,
-                       LESS_THAN_SIGN_CHARACTER, LESS_THAN_SIGN_CHARACTER_COUNT,
-                       STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT);
+                       LESS_THAN_SIGN_CHARACTER, CHARACTER_COUNT,
+                       CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
                 //parse the /
                 parse( dest, dest_count, dest_size,
-                       SOLIDUS_CHARACTER, SOLIDUS_CHARACTER_COUNT,
-                       STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT);
+                       SOLIDUS_CHARACTER, CHARACTER_COUNT,
+                       CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
                 //parse the html tag
                 parse( dest, dest_count, dest_size,
                        *tag_model, *tag_model_count,
-                       STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT);
+                       CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
                 //parse the >
                 parse( dest, dest_count, dest_size,
-                       GREATER_THAN_SIGN_CHARACTER, GREATER_THAN_SIGN_CHARACTER_COUNT,
-                       STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT);
+                       GREATER_THAN_SIGN_CHARACTER, CHARACTER_COUNT,
+                       CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
                 //parse the line feed for better reading the html-source
                 parse( dest, dest_count, dest_size,
-                       LINE_FEED_CONTROL_CHARACTER, LINE_FEED_CONTROL_CHARACTER_COUNT,
-                       STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT);
+                       LINE_FEED_CONTROL_CHARACTER, CHARACTER_COUNT,
+                       CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
             }
         }

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.16 $ $Date: 2005-08-09 06:58:56 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2005-08-09 13:04:27 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -424,7 +424,7 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
                                 allocate((void*) &dz, (void*) NUMBER_0_INTEGER, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
                                 // Add new z dimension to tui.
-                                set(*de, (void*) &z, dz, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                                set(*de, (void*) &z, &dz, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
                                 // CAUTION! Do NOT increase z dimension count here!
                                 // It is already set at reallocation above.
@@ -453,7 +453,7 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
                                 // CAUTION! The reallocate procedure returns
                                 // a different pointer, so that it has to be
                                 // set again here.
-                                set(*de, (void*) &z, dz, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                                set(*de, (void*) &z, &dz, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
                                 // CAUTION! Do NOT increase destination
                                 // z dimension count here, since dz already
@@ -490,7 +490,7 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
                                         allocate((void*) &dy, (void*) NUMBER_0_INTEGER, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
                                         // Add new y dimension to z dimension.
-                                        set(dz, (void*) &y, dy, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                                        set(dz, (void*) &y, &dy, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
                                         // CAUTION! Do NOT increase y dimension count here!
                                         // It is already set at reallocation above.
@@ -519,7 +519,7 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
                                         // CAUTION! The reallocate procedure returns
                                         // a different pointer, so that it has to be
                                         // set again here.
-                                        set(dz, (void*) &y, dy, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                                        set(dz, (void*) &y, &dy, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
                                         // CAUTION! Do NOT increase destination
                                         // y dimension count here, since dy already
@@ -590,7 +590,7 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
                                                 allocate((void*) &dx, (void*) TUI_PROPERTIES_COUNT, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
                                                 // Add new x dimension to y dimension.
-                                                set(dy, (void*) &x, dx, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                                                set(dy, (void*) &x, &dx, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
                                                 // CAUTION! Do NOT increase x dimension count here!
                                                 // It is already set at reallocation above.
@@ -614,10 +614,10 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
                                             } else {
 
                                                 // Allocate tui character background property.
-                                                allocate((void*) &bg, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+                                                allocate((void*) &bg, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
                                                 // Add tui character background property.
-                                                set(dx, (void*) TUI_PROPERTIES_BACKGROUND_INDEX, bg, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                                                set(dx, (void*) TUI_PROPERTIES_BACKGROUND_INDEX, &bg, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
                                             }
 
                                             if (*fgp != NULL_POINTER) {
@@ -628,10 +628,10 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
                                             } else {
 
                                                 // Allocate tui character foreground property.
-                                                allocate((void*) &fg, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+                                                allocate((void*) &fg, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
                                                 // Add tui character foreground property.
-                                                set(dx, (void*) TUI_PROPERTIES_FOREGROUND_INDEX, fg, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                                                set(dx, (void*) TUI_PROPERTIES_FOREGROUND_INDEX, &fg, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
                                             }
 
                                             if (*hp != NULL_POINTER) {
@@ -642,10 +642,10 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
                                             } else {
 
                                                 // Allocate tui character hidden property.
-                                                allocate((void*) &h, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+                                                allocate((void*) &h, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
                                                 // Add tui character hidden property.
-                                                set(dx, (void*) TUI_PROPERTIES_HIDDEN_INDEX, h, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                                                set(dx, (void*) TUI_PROPERTIES_HIDDEN_INDEX, &h, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
                                             }
 
                                             if (*ip != NULL_POINTER) {
@@ -656,10 +656,10 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
                                             } else {
 
                                                 // Allocate tui character inverse property.
-                                                allocate((void*) &i, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+                                                allocate((void*) &i, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
                                                 // Add tui character inverse property.
-                                                set(dx, (void*) TUI_PROPERTIES_INVERSE_INDEX, i, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                                                set(dx, (void*) TUI_PROPERTIES_INVERSE_INDEX, &i, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
                                             }
 
                                             if (*blp != NULL_POINTER) {
@@ -670,10 +670,10 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
                                             } else {
 
                                                 // Allocate tui character blink property.
-                                                allocate((void*) &bl, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+                                                allocate((void*) &bl, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
                                                 // Add tui character blink property.
-                                                set(dx, (void*) TUI_PROPERTIES_BLINK_INDEX, bl, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                                                set(dx, (void*) TUI_PROPERTIES_BLINK_INDEX, &bl, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
                                             }
 
                                             if (*up != NULL_POINTER) {
@@ -684,10 +684,10 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
                                             } else {
 
                                                 // Allocate tui character underline property.
-                                                allocate((void*) &u, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+                                                allocate((void*) &u, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
                                                 // Add tui character underline property.
-                                                set(dx, (void*) TUI_PROPERTIES_UNDERLINE_INDEX, u, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                                                set(dx, (void*) TUI_PROPERTIES_UNDERLINE_INDEX, &u, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
                                             }
 
                                             if (*bp != NULL_POINTER) {
@@ -698,10 +698,10 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
                                             } else {
 
                                                 // Allocate tui character bold property.
-                                                allocate((void*) &b, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+                                                allocate((void*) &b, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
                                                 // Add tui character bold property.
-                                                set(dx, (void*) TUI_PROPERTIES_BOLD_INDEX, b, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                                                set(dx, (void*) TUI_PROPERTIES_BOLD_INDEX, &b, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
                                             }
 
                                             if (*cp != NULL_POINTER) {
@@ -712,27 +712,27 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
                                             } else {
 
                                                 // Allocate tui character.
-                                                allocate((void*) &c, (void*) CHARACTER_COUNT, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT);
+                                                allocate((void*) &c, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
                                                 // Add tui character.
-                                                set(dx, (void*) TUI_PROPERTIES_CHARACTER_INDEX, c, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                                                set(dx, (void*) TUI_PROPERTIES_CHARACTER_INDEX, &c, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
                                             }
 
                                             // Set character properties.
-                                            mapto((void*) &bg, (void*) INTEGER_COUNT, (void*) INTEGER_COUNT, (void*) *bgm, (void*) *bgmc, (void*) TERMINAL_BACKGROUND_ABSTRACTION, (void*) TERMINAL_BACKGROUND_ABSTRACTION_COUNT);
-                                            mapto((void*) &fg, (void*) INTEGER_COUNT, (void*) INTEGER_COUNT, (void*) *fgm, (void*) *fgmc, (void*) TERMINAL_FOREGROUND_ABSTRACTION, (void*) TERMINAL_FOREGROUND_ABSTRACTION_COUNT);
+                                            mapto((void*) &bg, (void*) PRIMITIVE_COUNT, (void*) PRIMITIVE_COUNT, (void*) *bgm, (void*) *bgmc, (void*) TERMINAL_BACKGROUND_ABSTRACTION, (void*) TERMINAL_BACKGROUND_ABSTRACTION_COUNT);
+                                            mapto((void*) &fg, (void*) PRIMITIVE_COUNT, (void*) PRIMITIVE_COUNT, (void*) *fgm, (void*) *fgmc, (void*) TERMINAL_FOREGROUND_ABSTRACTION, (void*) TERMINAL_FOREGROUND_ABSTRACTION_COUNT);
                                             //?? TODO: Replace temporary test values like
                                             //?? NUMBER_0_INTEGER with real properties!
-                                            set(h, (void*) INTEGER_VALUE_INDEX, (void*) NUMBER_0_INTEGER, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
-                                            set(i, (void*) INTEGER_VALUE_INDEX, (void*) NUMBER_0_INTEGER, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
-                                            set(bl, (void*) INTEGER_VALUE_INDEX, (void*) NUMBER_0_INTEGER, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
-                                            set(u, (void*) INTEGER_VALUE_INDEX, (void*) NUMBER_0_INTEGER, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
-                                            set(b, (void*) INTEGER_VALUE_INDEX, (void*) NUMBER_0_INTEGER, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+                                            set(h, (void*) PRIMITIVE_VALUE_INDEX, (void*) NUMBER_0_INTEGER, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+                                            set(i, (void*) PRIMITIVE_VALUE_INDEX, (void*) NUMBER_0_INTEGER, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+                                            set(bl, (void*) PRIMITIVE_VALUE_INDEX, (void*) NUMBER_0_INTEGER, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+                                            set(u, (void*) PRIMITIVE_VALUE_INDEX, (void*) NUMBER_0_INTEGER, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+                                            set(b, (void*) PRIMITIVE_VALUE_INDEX, (void*) NUMBER_0_INTEGER, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
                                             // Reset comparison result.
                                             r = 0;
 
-                                            compare_arrays(*a, *ac, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                                            compare_arrays(*a, *ac, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
                                             // CAUTION! The whole row may be much longer than the given string.
                                             // Therefore, only take characters if the index x is smaller than
@@ -740,7 +740,7 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
                                             if ((r != 0) && (mi < **mc)) {
 
                                                 // Get character value at position x.
-                                                get(*m, (void*) &mi, (void*) &v, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT);
+                                                get(*m, (void*) &mi, (void*) &v, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
     printf("TEST translator mi: %i\n", mi);
     printf("TEST translator v: %i\n", v);
@@ -762,18 +762,16 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
                                             // CAUTION! The character has to be set,
                                             // because get returns another character pointer
                                             // than the one that was added to dx above.
-                                            *((char*) c) = *((char*) v);
-//??                                            set(c, (void*) CHARACTER_VALUE_INDEX, (void*) v, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT);
+//??                                            *((char*) c) = *((char*) v);
+                                            set(c, (void*) PRIMITIVE_VALUE_INDEX, (void*) v, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
     printf("TEST translator c: %i\n", c);
     printf("TEST translator *c: %i\n", *((char*) c));
 
     void** ver = &NULL_POINTER;
     get(dx, (void*) TUI_PROPERTIES_CHARACTER_INDEX, (void*) &ver, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-//??    get(dx, (void*) TUI_PROPERTIES_HIDDEN_INDEX, (void*) &ver, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     printf("VERIFICATION *ver: %i\n", (char*) *ver);
     printf("VERIFICATION *ver: %i\n", **((char**) ver));
-//??    printf("VERIFICATION **ver: %i\n", **((int**) ver));
 
                                             x++;
                                         }

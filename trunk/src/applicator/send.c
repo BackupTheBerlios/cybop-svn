@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.18 $ $Date: 2005-08-04 15:20:58 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2005-08-09 13:04:25 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -228,11 +228,11 @@ void send_message(void* p0, void* p1,
                     int* dest_count = NULL_POINTER;
                     int* dest_size = NULL_POINTER;
 
-                    allocate(&dest_count, INTEGER_COUNT, INTEGER_ABSTRACTION, INTEGER_ABSTRACTION_COUNT);
-                    allocate(&dest_size, INTEGER_COUNT, INTEGER_ABSTRACTION, INTEGER_ABSTRACTION_COUNT);
+                    allocate(&dest_count, PRIMITIVE_COUNT, INTEGER_VECTOR_ABSTRACTION, INTEGER_VECTOR_ABSTRACTION_COUNT);
+                    allocate(&dest_size, PRIMITIVE_COUNT, INTEGER_VECTOR_ABSTRACTION, INTEGER_VECTOR_ABSTRACTION_COUNT);
                     *dest_count = 0;
                     *dest_size  = 0;
-                    allocate(&dest, dest_size, STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT);
+                    allocate(&dest, dest_size, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
                     encode_model(&dest, dest_count, dest_size,
                         *ma, *mac, *mm, *mmc, *md, *mdc,
@@ -252,9 +252,9 @@ void send_message(void* p0, void* p1,
                     close(*cs);
 
                     // Destroy destination.
-                    deallocate(&dest, dest_size, STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT);
-                    deallocate(&dest_count, INTEGER_COUNT, INTEGER_ABSTRACTION, INTEGER_ABSTRACTION_COUNT);
-                    deallocate(&dest_size, INTEGER_COUNT, INTEGER_ABSTRACTION, INTEGER_ABSTRACTION_COUNT);
+                    deallocate(&dest, dest_size, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
+                    deallocate(&dest_count, PRIMITIVE_COUNT, INTEGER_VECTOR_ABSTRACTION, INTEGER_VECTOR_ABSTRACTION_COUNT);
+                    deallocate(&dest_size, PRIMITIVE_COUNT, INTEGER_VECTOR_ABSTRACTION, INTEGER_VECTOR_ABSTRACTION_COUNT);
 
                 } else {
 
@@ -342,15 +342,15 @@ void refresh_url(void* p0, void* p1,
                 int* dest_count = NULL_POINTER;
                 int* dest_size = NULL_POINTER;
 
-                allocate(&dest_count, INTEGER_COUNT, INTEGER_ABSTRACTION, INTEGER_ABSTRACTION_COUNT);
-                allocate(&dest_size, INTEGER_COUNT, INTEGER_ABSTRACTION, INTEGER_ABSTRACTION_COUNT);
+                allocate(&dest_count, PRIMITIVE_COUNT, INTEGER_VECTOR_ABSTRACTION, INTEGER_VECTOR_ABSTRACTION_COUNT);
+                allocate(&dest_size, PRIMITIVE_COUNT, INTEGER_VECTOR_ABSTRACTION, INTEGER_VECTOR_ABSTRACTION_COUNT);
                 *dest_count = 0;
                 *dest_size  = 0;
-                allocate(&dest, dest_size, STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT);
+                allocate(&dest, dest_size, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
-                parse(&dest, dest_count, dest_size, &msg_refresh_part_1[0], &msg_part_1_count, STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT);
-                parse(&dest, dest_count, dest_size, *urlm, *urlmc, STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT);
-                parse(&dest, dest_count, dest_size, &msg_refresh_part_3[0], &msg_part_3_count, STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT);
+                parse(&dest, dest_count, dest_size, &msg_refresh_part_1[0], &msg_part_1_count, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
+                parse(&dest, dest_count, dest_size, *urlm, *urlmc, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
+                parse(&dest, dest_count, dest_size, &msg_refresh_part_3[0], &msg_part_3_count, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
                 // The temporary count, size.
                 int tc = 0;
@@ -365,9 +365,9 @@ void refresh_url(void* p0, void* p1,
                 close(*cs);
 
                 // Destroy destination.
-                deallocate(&dest, dest_size, STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT);
-                deallocate(&dest_count, INTEGER_COUNT, INTEGER_ABSTRACTION, INTEGER_ABSTRACTION_COUNT);
-                deallocate(&dest_size, INTEGER_COUNT, INTEGER_ABSTRACTION, INTEGER_ABSTRACTION_COUNT);
+                deallocate(&dest, dest_size, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
+                deallocate(&dest_count, PRIMITIVE_COUNT, INTEGER_VECTOR_ABSTRACTION, INTEGER_VECTOR_ABSTRACTION_COUNT);
+                deallocate(&dest_size, PRIMITIVE_COUNT, INTEGER_VECTOR_ABSTRACTION, INTEGER_VECTOR_ABSTRACTION_COUNT);
             }
         }
     }

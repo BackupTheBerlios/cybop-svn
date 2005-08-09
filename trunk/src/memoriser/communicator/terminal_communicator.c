@@ -24,7 +24,7 @@
  * - receive a file stream into a byte array
  * - send a file stream from a byte array
  *
- * @version $Revision: 1.6 $ $Date: 2005-08-07 18:11:18 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2005-08-09 13:04:27 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -33,14 +33,13 @@
 
 #include <stdio.h>
 #include "../../globals/constants/abstraction_constants.c"
-//?? #include "../../globals/constants/character_constants.c"
-//?? #include "../../globals/constants/constant.c"
-//?? #include "../../globals/constants/integer_constants.c"
+#include "../../globals/constants/character_constants.c"
+#include "../../globals/constants/integer_constants.c"
 #include "../../globals/constants/log_constants.c"
-//?? #include "../../globals/constants/structure_constants.c"
+#include "../../globals/constants/structure_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../globals/variables/variables.c"
-//?? #include "../../memoriser/array.c"
+#include "../../memoriser/array.c"
 
 /**
  * Reads the terminal into terminal control sequences.
@@ -113,7 +112,7 @@ void write_terminal(void* p0, void* p1, void* p2, void* p3, void* p4) {
             // Set terminated control sequences string by first copying the actual
             // control sequences and then adding the null termination character.
             set_array_elements(ts, (void*) NUMBER_0_INTEGER, p3, p4, (void*) CHARACTER_ARRAY);
-            set_array_elements(ts, p4, (void*) NULL_CONTROL_CHARACTER, (void*) NULL_CONTROL_CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
+            set_array_elements(ts, p4, (void*) NULL_CONTROL_CHARACTER, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
 
             // Write to terminal.
             fputs((char*) ts, *d);

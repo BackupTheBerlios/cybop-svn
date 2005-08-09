@@ -24,7 +24,7 @@
  * - parse an xml stream into an xml model
  * - serialise an xml model into an xml stream
  *
- * @version $Revision: 1.8 $ $Date: 2005-07-29 15:48:51 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2005-08-09 13:04:27 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -260,7 +260,7 @@ void parse_xml(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 // Set terminated file name by first copying the actual name
                 // and then adding the null termination character.
                 set_array_elements(tmp, (void*) NUMBER_0_INTEGER, p3, p4, (void*) CHARACTER_ARRAY);
-                set_array_elements(tmp, p4, (void*) NULL_CONTROL_CHARACTER, (void*) NULL_CONTROL_CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
+                set_array_elements(tmp, p4, (void*) NULL_CONTROL_CHARACTER, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
 
                 // Initialise the library.
                 // Check potential ABI mismatches between the version
@@ -284,7 +284,7 @@ void parse_xml(void* p0, void* p1, void* p2, void* p3, void* p4) {
 /*??
             // The comparison result.
             int* r = NULL_POINTER;
-            allocate((void*) &r, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+            allocate((void*) &r, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
             *r = 0;
             // The current byte within the stream.
             void* b = *s;

@@ -24,7 +24,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.12 $ $Date: 2005-08-04 15:20:58 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2005-08-09 13:04:27 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -108,11 +108,11 @@ void test_character_array_single_element() {
     // Create character array.
     allocate_array((void*) &c, (void*) &cs, (void*) CHARACTER_ARRAY);
 
-    set_character_array_elements(c, (void*) NUMBER_0_INTEGER, (void*) LATIN_CAPITAL_LETTER_A_CHARACTER, (void*) LATIN_CAPITAL_LETTER_A_CHARACTER_COUNT);
-    set_character_array_elements(c, (void*) NUMBER_1_INTEGER, (void*) LATIN_CAPITAL_LETTER_B_CHARACTER, (void*) LATIN_CAPITAL_LETTER_B_CHARACTER_COUNT);
-    set_character_array_elements(c, (void*) NUMBER_2_INTEGER, (void*) LATIN_CAPITAL_LETTER_C_CHARACTER, (void*) LATIN_CAPITAL_LETTER_C_CHARACTER_COUNT);
-    set_character_array_elements(c, (void*) NUMBER_3_INTEGER, (void*) LINE_FEED_CONTROL_CHARACTER, (void*) LINE_FEED_CONTROL_CHARACTER_COUNT);
-    set_character_array_elements(c, (void*) NUMBER_4_INTEGER, (void*) NULL_CONTROL_CHARACTER, (void*) NULL_CONTROL_CHARACTER_COUNT);
+    set_character_array_elements(c, (void*) NUMBER_0_INTEGER, (void*) LATIN_CAPITAL_LETTER_A_CHARACTER, (void*) CHARACTER_COUNT);
+    set_character_array_elements(c, (void*) NUMBER_1_INTEGER, (void*) LATIN_CAPITAL_LETTER_B_CHARACTER, (void*) CHARACTER_COUNT);
+    set_character_array_elements(c, (void*) NUMBER_2_INTEGER, (void*) LATIN_CAPITAL_LETTER_C_CHARACTER, (void*) CHARACTER_COUNT);
+    set_character_array_elements(c, (void*) NUMBER_3_INTEGER, (void*) LINE_FEED_CONTROL_CHARACTER, (void*) CHARACTER_COUNT);
+    set_character_array_elements(c, (void*) NUMBER_4_INTEGER, (void*) NULL_CONTROL_CHARACTER, (void*) CHARACTER_COUNT);
 
     // Print out array contents.
     fputs((char*) c, stdout);
@@ -215,7 +215,7 @@ void test_pointer_return() {
 
     // Create character array.
     c = (void*) "Hello World!";
-    allocate((void*) &cs, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+    allocate((void*) &cs, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
     *cs = 13;
 
     // THIS is the important part of the test.
@@ -234,7 +234,7 @@ void test_pointer_return() {
     fprintf(stderr, "r: %s\n", (char*) r);
 
     // Destroy character array.
-    deallocate((void*) &cs, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+    deallocate((void*) &cs, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 }
 
 /**
@@ -437,7 +437,7 @@ void test_integer_parser() {
     int dis = -1;
 
     parse((void*) &di, (void*) &dic, (void*) &dis, (void*) &ss, (void*) &ssc,
-        (void*) &INTEGER_ABSTRACTION, (void*) &INTEGER_ABSTRACTION_COUNT);
+        (void*) &INTEGER_VECTOR_ABSTRACTION, (void*) &INTEGER_VECTOR_ABSTRACTION_COUNT);
 
     fprintf(stderr, "Parsed source string results in destination integer: %i\n", di);
 
@@ -454,7 +454,7 @@ void test_integer_parser() {
     allocate_array((void*) &ds, (void*) &CHARACTER_ARRAY, (void*) &dss);
 
     serialise((void*) &ds, (void*) &dsc, (void*) &dss, (void*) &si, (void*) &sic,
-        (void*) &INTEGER_ABSTRACTION, (void*) &INTEGER_ABSTRACTION_COUNT);
+        (void*) &INTEGER_VECTOR_ABSTRACTION, (void*) &INTEGER_VECTOR_ABSTRACTION_COUNT);
 
     fprintf(stderr, "Serialised source integer results in destination string: %s\n", ds);
 
@@ -571,7 +571,7 @@ void test_knowledge_model(void* p0, void* p1, int level) {
 
             if (r != 1) {
 
-                compare_arrays((void*) *a, (void*) *ac, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                compare_arrays((void*) *a, (void*) *ac, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
                 if (r == 1) {
 
@@ -583,7 +583,7 @@ void test_knowledge_model(void* p0, void* p1, int level) {
 
             if (r != 1) {
 
-                compare_arrays((void*) *a, (void*) *ac, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                compare_arrays((void*) *a, (void*) *ac, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
                 if (r == 1) {
 

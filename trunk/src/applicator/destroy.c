@@ -22,7 +22,7 @@
  *
  * This file destroys a transient model to a persistent model.
  *
- * @version $Revision: 1.8 $ $Date: 2005-07-29 16:46:17 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2005-08-09 13:04:25 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -255,7 +255,7 @@ void deallocate_part(void* p0, void* p1, void* p2, void* p3, void* p4) {
         //is must be a string
         int r = 0;
         compare_arrays( *na, *nac,
-                        STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT,
+                        CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT,
                         &r, CHARACTER_ARRAY );
 
         if ( r==1 ) {

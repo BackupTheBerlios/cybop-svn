@@ -22,7 +22,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.12 $ $Date: 2005-07-29 16:46:17 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2005-08-09 13:04:25 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -66,12 +66,7 @@ void check_primitive_model(void* p0, void* p1, void* p2) {
 
         if (*p == 0) {
 
-            compare_arrays(p1, p2, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT, p0, (void*) CHARACTER_ARRAY);
-        }
-
-        if (*p == 0) {
-
-            compare_arrays(p1, p2, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT, p0, (void*) CHARACTER_ARRAY);
+            compare_arrays(p1, p2, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT, p0, (void*) CHARACTER_ARRAY);
         }
 
         if (*p == 0) {
@@ -81,7 +76,12 @@ void check_primitive_model(void* p0, void* p1, void* p2) {
 
         if (*p == 0) {
 
-            compare_arrays(p1, p2, (void*) DOUBLE_ABSTRACTION, (void*) DOUBLE_ABSTRACTION_COUNT, p0, (void*) CHARACTER_ARRAY);
+            compare_arrays(p1, p2, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT, p0, (void*) CHARACTER_ARRAY);
+        }
+
+        if (*p == 0) {
+
+            compare_arrays(p1, p2, (void*) DOUBLE_VECTOR_ABSTRACTION, (void*) DOUBLE_VECTOR_ABSTRACTION_COUNT, p0, (void*) CHARACTER_ARRAY);
         }
 
         if (*p == 0) {
@@ -175,7 +175,7 @@ void create_primitive_model(void* p0, void* p1, void* p2, void* p3, void* p4,
     int rms = 0;
 
     // Create receive model of type character, to read single bytes.
-    allocate((void*) &rm, (void*) &rms, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT);
+    allocate((void*) &rm, (void*) &rms, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
     // Reads persistent byte stream over channel.
     read_data((void*) &rm, (void*) &rmc, (void*) &rms, p3, p4, p7, p8);
@@ -191,7 +191,7 @@ void create_primitive_model(void* p0, void* p1, void* p2, void* p3, void* p4,
     parse(p0, p1, p2, rm, (void*) &rmc, p5, p6);
 
     // Destroy receive model.
-    deallocate((void*) &rm, (void*) &rms, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT);
+    deallocate((void*) &rm, (void*) &rms, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
 }
 
 /**
@@ -254,7 +254,7 @@ void create_compound_model(void* p0, void* p1, void* p2, void* p3, void* p4,
     int rms = 0;
 
     // Create receive model of type character, to read single bytes.
-    allocate((void*) &rm, (void*) &rms, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT);
+    allocate((void*) &rm, (void*) &rms, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
     // Read persistent byte stream over channel.
     read_data((void*) &rm, (void*) &rmc, (void*) &rms, p3, p4, p7, p8);
@@ -282,7 +282,7 @@ void create_compound_model(void* p0, void* p1, void* p2, void* p3, void* p4,
     }
 
     // Destroy receive model.
-    deallocate((void*) &rm, (void*) &rms, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT);
+    deallocate((void*) &rm, (void*) &rms, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
     //
     // Decode.
@@ -555,9 +555,9 @@ void create_part(void* p0, void* p1, void* p2, void* p3, void* p4) {
         int* pds = NULL_POINTER;
 
         // Create part name.
-        allocate((void*) &pnc, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+        allocate((void*) &pnc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
         *pnc = 0;
-        allocate((void*) &pns, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+        allocate((void*) &pns, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
         *pns = 0;
         create((void*) &pn, (void*) pnc, (void*) pns, *nm, *nmc, *na, *nac,
             (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
@@ -566,17 +566,17 @@ void create_part(void* p0, void* p1, void* p2, void* p3, void* p4) {
         // for model loading.
 
         // Create part abstraction.
-        allocate((void*) &pac, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+        allocate((void*) &pac, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
         *pac = 0;
-        allocate((void*) &pas, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+        allocate((void*) &pas, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
         *pas = 0;
         create((void*) &pa, (void*) pac, (void*) pas, *am, *amc, *aa, *aac,
             (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
 
         // Create part model.
-        allocate((void*) &pmc, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+        allocate((void*) &pmc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
         *pmc = 0;
-        allocate((void*) &pms, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+        allocate((void*) &pms, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
         *pms = 0;
         create((void*) &pm, (void*) pmc, (void*) pms, *mm, *mmc, *am, *amc,
             *cm, *cmc);

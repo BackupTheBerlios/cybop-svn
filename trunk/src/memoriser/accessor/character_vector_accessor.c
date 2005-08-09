@@ -1,5 +1,5 @@
 /*
- * $RCSfile: string_accessor.c,v $
+ * $RCSfile: character_vector_accessor.c,v $
  *
  * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
  *
@@ -20,12 +20,12 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-08-04 15:20:58 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2005-08-09 13:04:27 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef STRING_ACCESSOR_SOURCE
-#define STRING_ACCESSOR_SOURCE
+#ifndef CHARACTER_VECTOR_ACCESSOR_SOURCE
+#define CHARACTER_VECTOR_ACCESSOR_SOURCE
 
 #include "../../globals/constants/abstraction_constants.c"
 #include "../../globals/constants/integer_constants.c"
@@ -34,46 +34,46 @@
 #include "../../memoriser/array.c"
 
 /**
- * Sets the string element.
+ * Sets the character vector element.
  *
- * @param p0 the string
+ * @param p0 the character vector
  * @param p1 the index
- * @param p2 the element
+ * @param p2 the element (Hand over as reference!)
  */
-void set_string_element(void* p0, void* p1, void* p2) {
+void set_character_vector_element(void* p0, void* p1, void* p2) {
 
-    log_message_debug("Set string element.");
+    log_message_debug("Set character vector element.");
 
-    set_array_elements(p0, p1, (void*) &p2, (void*) NUMBER_1_INTEGER, (void*) CHARACTER_ARRAY);
+    set_array_elements(p0, p1, p2, (void*) NUMBER_1_INTEGER, (void*) CHARACTER_ARRAY);
 }
 
 /**
- * Removes the string element.
+ * Removes the character vector element.
  *
- * @param p0 the string
+ * @param p0 the character vector
  * @param p1 the size
  * @param p2 the index
  */
-void remove_string_element(void* p0, void* p1, void* p2) {
+void remove_character_vector_element(void* p0, void* p1, void* p2) {
 
-    log_message_debug("Remove string element.");
+    log_message_debug("Remove character vector element.");
 
     remove_array_elements(p0, p1, p2, (void*) NUMBER_1_INTEGER, (void*) CHARACTER_ARRAY);
 }
 
 /**
- * Gets the string element.
+ * Gets the character vector element.
  *
- * @param p0 the string
+ * @param p0 the character vector
  * @param p1 the index
- * @param p2 the vector element (Hand over as reference!)
+ * @param p2 the element (Hand over as reference!)
  */
-void get_string_element(void* p0, void* p1, void* p2) {
+void get_character_vector_element(void* p0, void* p1, void* p2) {
 
-    log_message_debug("Get string element.");
+    log_message_debug("Get character vector element.");
 
     get_array_elements(p0, p1, p2, (void*) CHARACTER_ARRAY);
 }
 
-/* STRING_ACCESSOR_SOURCE */
+/* CHARACTER_VECTOR_ACCESSOR_SOURCE */
 #endif

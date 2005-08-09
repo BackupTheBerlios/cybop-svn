@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2005-07-28 12:52:11 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2005-08-09 13:04:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -74,7 +74,7 @@ void shutdown_linux_console(void* p0, void* p1, void* p2, void* p3) {
         // CAUTION! Use descending order, as opposed to the creation!
         // CAUTION! Do NOT use references &, because variables are **
         // and *&variable equals the variable alone.
-        deallocate((void*) t, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+        deallocate((void*) t, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
         free(*tw);
         free(*to);
 

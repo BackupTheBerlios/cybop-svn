@@ -22,7 +22,7 @@
  *
  * this handel a loop
  *
- * @version $Revision: 1.6 $ $Date: 2005-08-04 15:20:58 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2005-08-09 13:04:25 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -165,8 +165,8 @@ void copy(void* param, int* param_count, void* p2, void* p3, void* p4, void* pri
         r1 = 0;
         r2 = 0;
 
-        compare_arrays(*sa, *sac, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT, (void*) &r1, (void*) CHARACTER_ARRAY);
-        compare_arrays(*da, *dac, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT, (void*) &r2, (void*) CHARACTER_ARRAY);
+        compare_arrays(*sa, *sac, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT, (void*) &r1, (void*) CHARACTER_ARRAY);
+        compare_arrays(*da, *dac, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT, (void*) &r2, (void*) CHARACTER_ARRAY);
 
         if ((r1 == 1) && (r2 == 1)) {
 
@@ -177,8 +177,8 @@ void copy(void* param, int* param_count, void* p2, void* p3, void* p4, void* pri
         r1 = 0;
         r2 = 0;
 
-        compare_arrays(*sa, *sac, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT, (void*) &r1, (void*) CHARACTER_ARRAY);
-        compare_arrays(*da, *dac, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT, (void*) &r2, (void*) CHARACTER_ARRAY);
+        compare_arrays(*sa, *sac, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &r1, (void*) CHARACTER_ARRAY);
+        compare_arrays(*da, *dac, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &r2, (void*) CHARACTER_ARRAY);
 
         if ((r1 == 1) && (r2 == 1)) {
 
@@ -316,7 +316,7 @@ void copy_property(void* param, int* param_count, void* p2, void* p3, void* p4, 
         //this must be a string
         int r = 0;
 
-        compare_arrays(*dpa, *dpac, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(*dpa, *dpac, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r == 1) {
 
@@ -344,8 +344,8 @@ void copy_property(void* param, int* param_count, void* p2, void* p3, void* p4, 
                 r1 = 0;
                 r2 = 0;
 
-                compare_arrays(*sa, *sac, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT, (void*) &r1, (void*) CHARACTER_ARRAY);
-                compare_arrays(*pa, *pac, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT, (void*) &r2, (void*) CHARACTER_ARRAY);
+                compare_arrays(*sa, *sac, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT, (void*) &r1, (void*) CHARACTER_ARRAY);
+                compare_arrays(*pa, *pac, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT, (void*) &r2, (void*) CHARACTER_ARRAY);
 
                 if ((r1 == 1) && (r2 == 1)) {
 
@@ -356,8 +356,8 @@ void copy_property(void* param, int* param_count, void* p2, void* p3, void* p4, 
                 r1 = 0;
                 r2 = 0;
 
-                compare_arrays(*sa, *sac, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT, (void*) &r1, (void*) CHARACTER_ARRAY);
-                compare_arrays(*pa, *pac, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT, (void*) &r2, (void*) CHARACTER_ARRAY);
+                compare_arrays(*sa, *sac, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &r1, (void*) CHARACTER_ARRAY);
+                compare_arrays(*pa, *pac, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &r2, (void*) CHARACTER_ARRAY);
 
                 if ((r1 == 1) && (r2 == 1)) {
 

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.12 $ $Date: 2005-07-28 12:52:11 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2005-08-09 13:04:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -72,7 +72,7 @@ void startup_linux_console(void* p0, void* p1, void* p2, void* p3) {
         struct termios* tw = NULL_POINTER;
 
         // Create linux console internals.
-//??        allocate((void*) &t, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+//??        allocate((void*) &t, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
         to = (struct termios*) malloc(sizeof(struct termios));
         tw = (struct termios*) malloc(sizeof(struct termios));
 
@@ -107,9 +107,9 @@ void startup_linux_console(void* p0, void* p1, void* p2, void* p3) {
 */
 
         // Set linux console internals.
-        set(p0, (void*) TERMINAL_FILE_DESCRIPTOR_INTERNAL, (void*) t, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        set(p0, (void*) TERMINAL_ORIGINAL_ATTRIBUTES_INTERNAL, (void*) to, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        set(p0, (void*) TERMINAL_WORKING_ATTRIBUTES_INTERNAL, (void*) tw, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        set(p0, (void*) TERMINAL_FILE_DESCRIPTOR_INTERNAL, (void*) &t, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        set(p0, (void*) TERMINAL_ORIGINAL_ATTRIBUTES_INTERNAL, (void*) &to, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        set(p0, (void*) TERMINAL_WORKING_ATTRIBUTES_INTERNAL, (void*) &tw, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
     } else {
 

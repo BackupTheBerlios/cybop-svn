@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.10 $ $Date: 2005-07-29 15:48:51 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2005-08-09 13:04:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -77,8 +77,8 @@ void startup_tcp_socket( void* internals, void* know,
         //check the socket port of integer
         compare_arrays( (void*) socket_port_abstr,
                         (void*) socket_port_abstr_count,
-                        (void*) INTEGER_ABSTRACTION,
-                        (void*) INTEGER_ABSTRACTION_COUNT,
+                        (void*) INTEGER_VECTOR_ABSTRACTION,
+                        (void*) INTEGER_VECTOR_ABSTRACTION_COUNT,
                         (void*) &res, (void*) CHARACTER_ARRAY);
 
         if ( res == 1 ) {
@@ -103,41 +103,41 @@ void startup_tcp_socket( void* internals, void* know,
             int* ids = NULL_POINTER;
 
             // Create tcp server socket.
-            allocate((void*) &s, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+            allocate((void*) &s, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
             *s = socket(PF_INET, SOCK_STREAM, 0);
             // Create tcp client sockets.
-            allocate((void*) &csc, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+            allocate((void*) &csc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
             *csc = 0;
-            allocate((void*) &css, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+            allocate((void*) &css, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
             *css = 0;
             allocate_array((void*) &cs, (void*) css, (void*) INTEGER_ARRAY);
             // Create activation flag.
-            allocate(&af, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+            allocate(&af, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
             *af = 0;
             // Create blocking flag.
-            allocate(&bf, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+            allocate(&bf, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
             *bf = 0;
             // Create tcp signal ids.
-            allocate((void*) &idc, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+            allocate((void*) &idc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
             *idc = 0;
-            allocate((void*) &ids, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+            allocate((void*) &ids, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
             *ids = 0;
             allocate_array((void*) &id, (void*) ids, (void*) INTEGER_ARRAY);
 
             // Set tcp server socket.
-            set(internals, (void*) TCP_SERVER_SOCKET_INTERNAL, (void*) s, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            set(internals, (void*) TCP_SERVER_SOCKET_INTERNAL, (void*) &s, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
             // Set tcp client sockets.
-            set(internals, (void*) TCP_CLIENT_SOCKETS_INTERNAL, (void*) cs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-            set(internals, (void*) TCP_CLIENT_SOCKETS_COUNT_INTERNAL, (void*) csc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-            set(internals, (void*) TCP_CLIENT_SOCKETS_SIZE_INTERNAL, (void*) css, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            set(internals, (void*) TCP_CLIENT_SOCKETS_INTERNAL, (void*) &cs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            set(internals, (void*) TCP_CLIENT_SOCKETS_COUNT_INTERNAL, (void*) &csc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            set(internals, (void*) TCP_CLIENT_SOCKETS_SIZE_INTERNAL, (void*) &css, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
             // Set activation flag.
-            set(internals, (void*) TCP_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) af, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            set(internals, (void*) TCP_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &af, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
             // Set blocking flag.
-            set(internals, (void*) TCP_SERVER_SOCKET_BLOCKING_INTERNAL, (void*) bf, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            set(internals, (void*) TCP_SERVER_SOCKET_BLOCKING_INTERNAL, (void*) &bf, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
             // Set tcp signal ids.
-            set(internals, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_INTERNAL, (void*) id, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-            set(internals, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_COUNT_INTERNAL, (void*) idc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-            set(internals, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_SIZE_INTERNAL, (void*) ids, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            set(internals, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_INTERNAL, (void*) &id, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            set(internals, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_COUNT_INTERNAL, (void*) &idc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            set(internals, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_SIZE_INTERNAL, (void*) &ids, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
             if (*s >= 0) {
 

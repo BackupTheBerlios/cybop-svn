@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2005-07-25 21:01:01 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-08-09 13:04:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -114,8 +114,8 @@ void compare_smaller(void* p0, void* p1, void* p2,
                     rr = 0;
 
                     // Compare parameter abstractions.
-                    compare_arrays(p0, p1, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT, (void*) &lr, (void*) CHARACTER_ARRAY);
-                    compare_arrays(p9, p10, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT, (void*) &rr, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p0, p1, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &lr, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p9, p10, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &rr, (void*) CHARACTER_ARRAY);
 
                     if ((lr == 1) && (rr == 1)) {
 
@@ -140,8 +140,8 @@ void compare_smaller(void* p0, void* p1, void* p2,
                     rr = 0;
 
                     // Compare parameter abstractions.
-                    compare_arrays(p0, p1, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT, (void*) &lr, (void*) CHARACTER_ARRAY);
-                    compare_arrays(p9, p10, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT, (void*) &rr, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p0, p1, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT, (void*) &lr, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p9, p10, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT, (void*) &rr, (void*) CHARACTER_ARRAY);
 
                     if ((lr == 1) && (rr == 1)) {
 
@@ -166,8 +166,8 @@ void compare_smaller(void* p0, void* p1, void* p2,
                     rr = 0;
 
                     // Compare parameter abstractions.
-                    compare_arrays(p0, p1, (void*) DOUBLE_ABSTRACTION, (void*) DOUBLE_ABSTRACTION_COUNT, (void*) &lr, (void*) CHARACTER_ARRAY);
-                    compare_arrays(p9, p10, (void*) DOUBLE_ABSTRACTION, (void*) DOUBLE_ABSTRACTION_COUNT, (void*) &rr, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p0, p1, (void*) DOUBLE_VECTOR_ABSTRACTION, (void*) DOUBLE_VECTOR_ABSTRACTION_COUNT, (void*) &lr, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p9, p10, (void*) DOUBLE_VECTOR_ABSTRACTION, (void*) DOUBLE_VECTOR_ABSTRACTION_COUNT, (void*) &rr, (void*) CHARACTER_ARRAY);
 
                     if ((lr == 1) && (rr == 1)) {
 

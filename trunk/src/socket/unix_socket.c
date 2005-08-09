@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.28 $ $Date: 2005-07-29 15:48:51 $ $Author: christian $
+ * @version $Revision: 1.29 $ $Date: 2005-08-09 13:04:27 $ $Author: christian $
  * @author Marcel Kiesling <makie2001@web.de>
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
@@ -56,7 +56,7 @@ void allocate_unix_server_socket(void* p0) {
         int* s = NULL_POINTER;
 
         // Create unix server socket.
-        allocate((void*) &s, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+        allocate((void*) &s, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
         // Open socket and get its number.
         // AF stands for address format. AF_LOCAL is a synonym for AF_UNIX.
@@ -69,7 +69,7 @@ void allocate_unix_server_socket(void* p0) {
         *s = socket(AF_UNIX, SOCK_STREAM, 0);
 
         // Set unix server socket.
-        set(p0, (void*) UNIX_SERVER_SOCKET_INTERNAL, (void*) s, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        set(p0, (void*) UNIX_SERVER_SOCKET_INTERNAL, (void*) &s, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
         if (*s >= 0) {
 
@@ -152,7 +152,7 @@ void deallocate_unix_server_socket(void* p0) {
             unlink((char*) f);
 
             // Destroy unix server socket.
-            deallocate((void*) &s, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+            deallocate((void*) &s, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
         } else {
 

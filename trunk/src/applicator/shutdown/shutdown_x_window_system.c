@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2005-07-28 12:52:11 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2005-08-09 13:04:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  *
@@ -139,13 +139,13 @@ void shutdown_x_window_system(void* p0, void* p1, void* p2, void* p3) {
         // CAUTION! Use descending order, as opposed to the creation!
         // CAUTION! Do NOT use references &, because variables are **
         // and *&variable equals the variable alone.
-        deallocate((void*) vm, (void*) UNSIGNED_LONG_COUNT, (void*) UNSIGNED_LONG_ABSTRACTION, (void*) UNSIGNED_LONG_ABSTRACTION_COUNT);
-//??        deallocate((void*) f, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
-        deallocate((void*) r, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
-        deallocate((void*) fg, (void*) UNSIGNED_LONG_COUNT, (void*) UNSIGNED_LONG_ABSTRACTION, (void*) UNSIGNED_LONG_ABSTRACTION_COUNT);
-        deallocate((void*) bg, (void*) UNSIGNED_LONG_COUNT, (void*) UNSIGNED_LONG_ABSTRACTION, (void*) UNSIGNED_LONG_ABSTRACTION_COUNT);
-        deallocate((void*) cm, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
-        deallocate((void*) sn, (void*) INTEGER_COUNT, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+        deallocate((void*) vm, (void*) PRIMITIVE_COUNT, (void*) UNSIGNED_LONG_VECTOR_ABSTRACTION, (void*) UNSIGNED_LONG_VECTOR_ABSTRACTION_COUNT);
+//??        deallocate((void*) f, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        deallocate((void*) r, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        deallocate((void*) fg, (void*) PRIMITIVE_COUNT, (void*) UNSIGNED_LONG_VECTOR_ABSTRACTION, (void*) UNSIGNED_LONG_VECTOR_ABSTRACTION_COUNT);
+        deallocate((void*) bg, (void*) PRIMITIVE_COUNT, (void*) UNSIGNED_LONG_VECTOR_ABSTRACTION, (void*) UNSIGNED_LONG_VECTOR_ABSTRACTION_COUNT);
+        deallocate((void*) cm, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        deallocate((void*) sn, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
     } else {
 

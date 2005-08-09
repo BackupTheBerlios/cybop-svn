@@ -22,7 +22,7 @@
  *
  * this handel a loop
  *
- * @version $Revision: 1.8 $ $Date: 2005-07-29 15:48:51 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2005-08-09 13:04:25 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -148,12 +148,12 @@ void loop(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
                 void* b = NULL_POINTER;
 
                 // Get break flag.
-                get_array_elements(*bfm, (void*) INTEGER_VALUE_INDEX, (void*) &b, (void*) INTEGER_ARRAY);
+                get_array_elements(*bfm, (void*) PRIMITIVE_VALUE_INDEX, (void*) &b, (void*) INTEGER_ARRAY);
 
                 // Reset comparison flag.
                 r = 0;
 
-                compare_arrays(b, INTEGER_COUNT, (void*) TRUE_BOOLEAN, (void*) NUMBER_1_INTEGER, &r, (void*) INTEGER_ARRAY);
+                compare_arrays(b, PRIMITIVE_COUNT, (void*) TRUE_BOOLEAN, (void*) NUMBER_1_INTEGER, &r, (void*) INTEGER_ARRAY);
 
                 // The direct execution flag.
                 // CAUTION! The flag has to be set to true, because otherwise,

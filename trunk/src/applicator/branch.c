@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2005-07-29 15:48:51 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2005-08-09 13:04:25 $ $Author: christian $
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
@@ -179,12 +179,12 @@ void branch(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
             void* c = NULL_POINTER;
 
             // Get criterion.
-            get_array_elements(*cm, (void*) INTEGER_VALUE_INDEX, (void*) &c, (void*) INTEGER_ARRAY);
+            get_array_elements(*cm, (void*) PRIMITIVE_VALUE_INDEX, (void*) &c, (void*) INTEGER_ARRAY);
 
             // Reset comparison result.
             r = 0;
 
-            compare_arrays(c, (void*) INTEGER_COUNT, (void*) TRUE_BOOLEAN, (void*) NUMBER_1_INTEGER, &r, (void*) INTEGER_ARRAY);
+            compare_arrays(c, (void*) PRIMITIVE_COUNT, (void*) TRUE_BOOLEAN, (void*) NUMBER_1_INTEGER, &r, (void*) INTEGER_ARRAY);
 
             // The direct execution flag.
             int x = 0;

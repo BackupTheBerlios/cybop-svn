@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2005-07-30 14:03:50 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-08-09 13:04:27 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -64,7 +64,7 @@ void mapto_terminal_foreground(void* p0, void* p1, void* p2, void* p3, void* p4)
 
                 if (r != 0) {
 
-                    set(*d, (void*) INTEGER_VALUE_INDEX, (void*) BLACK_FOREGROUND_CONTROL_SEQUENCE, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+                    set(*d, (void*) PRIMITIVE_VALUE_INDEX, (void*) BLACK_FOREGROUND_CONTROL_SEQUENCE, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
                 }
             }
 
@@ -74,7 +74,7 @@ void mapto_terminal_foreground(void* p0, void* p1, void* p2, void* p3, void* p4)
 
                 if (r != 0) {
 
-                    set(*d, (void*) INTEGER_VALUE_INDEX, (void*) RED_FOREGROUND_CONTROL_SEQUENCE, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+                    set(*d, (void*) PRIMITIVE_VALUE_INDEX, (void*) RED_FOREGROUND_CONTROL_SEQUENCE, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
                 }
             }
 
@@ -84,7 +84,7 @@ void mapto_terminal_foreground(void* p0, void* p1, void* p2, void* p3, void* p4)
 
                 if (r != 0) {
 
-                    set(*d, (void*) INTEGER_VALUE_INDEX, (void*) GREEN_FOREGROUND_CONTROL_SEQUENCE, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+                    set(*d, (void*) PRIMITIVE_VALUE_INDEX, (void*) GREEN_FOREGROUND_CONTROL_SEQUENCE, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
                 }
             }
 
@@ -94,7 +94,7 @@ void mapto_terminal_foreground(void* p0, void* p1, void* p2, void* p3, void* p4)
 
                 if (r != 0) {
 
-                    set(*d, (void*) INTEGER_VALUE_INDEX, (void*) YELLOW_FOREGROUND_CONTROL_SEQUENCE, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+                    set(*d, (void*) PRIMITIVE_VALUE_INDEX, (void*) YELLOW_FOREGROUND_CONTROL_SEQUENCE, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
                 }
             }
 
@@ -104,7 +104,7 @@ void mapto_terminal_foreground(void* p0, void* p1, void* p2, void* p3, void* p4)
 
                 if (r != 0) {
 
-                    set(*d, (void*) INTEGER_VALUE_INDEX, (void*) BLUE_FOREGROUND_CONTROL_SEQUENCE, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+                    set(*d, (void*) PRIMITIVE_VALUE_INDEX, (void*) BLUE_FOREGROUND_CONTROL_SEQUENCE, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
                 }
             }
 
@@ -114,7 +114,7 @@ void mapto_terminal_foreground(void* p0, void* p1, void* p2, void* p3, void* p4)
 
                 if (r != 0) {
 
-                    set(*d, (void*) INTEGER_VALUE_INDEX, (void*) MAGENTA_FOREGROUND_CONTROL_SEQUENCE, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+                    set(*d, (void*) PRIMITIVE_VALUE_INDEX, (void*) MAGENTA_FOREGROUND_CONTROL_SEQUENCE, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
                 }
             }
 
@@ -124,7 +124,7 @@ void mapto_terminal_foreground(void* p0, void* p1, void* p2, void* p3, void* p4)
 
                 if (r != 0) {
 
-                    set(*d, (void*) INTEGER_VALUE_INDEX, (void*) COBALT_FOREGROUND_CONTROL_SEQUENCE, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+                    set(*d, (void*) PRIMITIVE_VALUE_INDEX, (void*) COBALT_FOREGROUND_CONTROL_SEQUENCE, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
                 }
             }
 
@@ -134,7 +134,7 @@ void mapto_terminal_foreground(void* p0, void* p1, void* p2, void* p3, void* p4)
 
                 if (r != 0) {
 
-                    set(*d, (void*) INTEGER_VALUE_INDEX, (void*) WHITE_FOREGROUND_CONTROL_SEQUENCE, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+                    set(*d, (void*) PRIMITIVE_VALUE_INDEX, (void*) WHITE_FOREGROUND_CONTROL_SEQUENCE, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
                 }
             }
 

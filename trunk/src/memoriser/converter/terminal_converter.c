@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.18 $ $Date: 2005-08-08 12:06:43 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2005-08-09 13:04:27 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -29,6 +29,7 @@
 
 #include "../../globals/constants/abstraction_constants.c"
 #include "../../globals/constants/boolean_constants.c"
+#include "../../globals/constants/character_constants.c"
 #include "../../globals/constants/control_sequence_constants.c"
 #include "../../globals/constants/log_constants.c"
 #include "../../globals/constants/structure_constants.c"
@@ -87,17 +88,32 @@ void serialise_terminal_properties(void* p0, void* p1, void* p2,
                     }
 
 /*??
-                    // Position cursor.
-                    // CAUTION! The top-left terminal corner is 1:1, but the given positions
-                    // start counting from 0, so that 1 has to be added to all positions.
-                    // Print to destination string d.
-                    sprintf(*d, "\033[%d;%dH", py + 1, px + 1);
-                    // Clear screen.
-                    sprintf(*d, "\033[2J");
-                    sprintf(*d, "Set colour to \033[32mgreen\033[0m.\n");
+    void* test = "\033[2JOn cleared screen,\
+        print in \033[32mgreen colour\033[0m and then\
+        \033[33myellow on \033[44mblue background\033[0m and try to\
+        position \033[10;15H and finally write in \
+        \033[1mbold and switch all \033[0m off.";
+    int testc = strlen(test);
 */
 
+                    // Position cursor.
+                    // CAUTION! The top-left terminal corner is 1:1, but the given positions
+                    // start counting from 0, so that 1 has to be added to all positions!
+                    // Print to destination string d.
 /*??
+                    set_array_elements(*d, dc, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) CHARACTER_ARRAY);
+                    *dc = *dc + *ESCAPE_CONTROL_SEQUENCE_COUNT;
+                    set_array_elements(*d, dc, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) CHARACTER_ARRAY);
+                    *dc = *dc + *ESCAPE_CONTROL_SEQUENCE_COUNT;
+                    set_array_elements(*d, dc, (void*) SEMICOLON_CHARACTER, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
+                    *dc = *dc + *CHARACTER_COUNT;
+                    set_array_elements(*d, dc, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) CHARACTER_ARRAY);
+                    *dc = *dc + *ESCAPE_CONTROL_SEQUENCE_COUNT;
+                    set_array_elements(*d, dc, (void*) LATIN_CAPITAL_LETTER_H_CHARACTER, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
+                    *dc = *dc + *CHARACTER_COUNT;
+                    %d;%dH", py + 1, px + 1
+*/
+
                     // Add attribute off control sequence.
                     set_array_elements(*d, dc, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) CHARACTER_ARRAY);
                     *dc = *dc + *ESCAPE_CONTROL_SEQUENCE_COUNT;
@@ -118,12 +134,11 @@ void serialise_terminal_properties(void* p0, void* p1, void* p2,
                     *dc = *dc + *ATTRIBUTE_OFF_CONTROL_SEQUENCE_COUNT;
 */
 
-/*??
                     // The comparison result.
                     int r = 0;
 
                     // Compare hidden property.
-                    compare_arrays(p8, (void*) INTEGER_COUNT, (void*) TRUE_BOOLEAN, (void*) INTEGER_COUNT, (void*) &r, (void*) INTEGER_ARRAY);
+                    compare_arrays(p8, (void*) PRIMITIVE_COUNT, (void*) TRUE_BOOLEAN, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) INTEGER_ARRAY);
 
                     if (r != 0) {
 
@@ -138,7 +153,7 @@ void serialise_terminal_properties(void* p0, void* p1, void* p2,
                     r = 0;
 
                     // Compare inverse property.
-                    compare_arrays(p9, (void*) INTEGER_COUNT, (void*) TRUE_BOOLEAN, (void*) INTEGER_COUNT, (void*) &r, (void*) INTEGER_ARRAY);
+                    compare_arrays(p9, (void*) PRIMITIVE_COUNT, (void*) TRUE_BOOLEAN, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) INTEGER_ARRAY);
 
                     if (r != 0) {
 
@@ -153,7 +168,7 @@ void serialise_terminal_properties(void* p0, void* p1, void* p2,
                     r = 0;
 
                     // Compare blink property.
-                    compare_arrays(p10, (void*) INTEGER_COUNT, (void*) TRUE_BOOLEAN, (void*) INTEGER_COUNT, (void*) &r, (void*) INTEGER_ARRAY);
+                    compare_arrays(p10, (void*) PRIMITIVE_COUNT, (void*) TRUE_BOOLEAN, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) INTEGER_ARRAY);
 
                     if (r != 0) {
 
@@ -168,7 +183,7 @@ void serialise_terminal_properties(void* p0, void* p1, void* p2,
                     r = 0;
 
                     // Compare underline property.
-                    compare_arrays(p11, (void*) INTEGER_COUNT, (void*) TRUE_BOOLEAN, (void*) INTEGER_COUNT, (void*) &r, (void*) INTEGER_ARRAY);
+                    compare_arrays(p11, (void*) PRIMITIVE_COUNT, (void*) TRUE_BOOLEAN, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) INTEGER_ARRAY);
 
                     if (r != 0) {
 
@@ -183,7 +198,7 @@ void serialise_terminal_properties(void* p0, void* p1, void* p2,
                     r = 0;
 
                     // Compare bold property.
-                    compare_arrays(p12, (void*) INTEGER_COUNT, (void*) TRUE_BOOLEAN, (void*) INTEGER_COUNT, (void*) &r, (void*) INTEGER_ARRAY);
+                    compare_arrays(p12, (void*) PRIMITIVE_COUNT, (void*) TRUE_BOOLEAN, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) INTEGER_ARRAY);
 
                     if (r != 0) {
 
@@ -193,7 +208,6 @@ void serialise_terminal_properties(void* p0, void* p1, void* p2,
                         set_array_elements(*d, dc, (void*) BOLD_CONTROL_SEQUENCE, (void*) BOLD_CONTROL_SEQUENCE_COUNT, (void*) CHARACTER_ARRAY);
                         *dc = *dc + *BOLD_CONTROL_SEQUENCE_COUNT;
                     }
-*/
 
                     // Set character.
                     set_array_elements(*d, dc, p13, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
@@ -202,16 +216,6 @@ void serialise_terminal_properties(void* p0, void* p1, void* p2,
     printf("TEST properties p13: %i\n", p13);
     printf("TEST properties p13: %s\n", (char*) p13);
     printf("TEST properties *dc: %i\n", *dc);
-
-/*??
-                    //?? TEST only
-                    void* test = "Halloechen";
-                    int testc = 10;
-                    void* test = "Set colour to \033[32mgreen\033[0m.\n";
-                    int testc = 29;
-                    set_array_elements(*d, dc, test, (void*) &testc, (void*) CHARACTER_ARRAY);
-                    *dc = *dc + testc;
-*/
 
                 } else {
 

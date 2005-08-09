@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2005-07-29 16:46:18 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2005-08-09 13:04:25 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description This module starts up a service.
  */
@@ -130,18 +130,16 @@ void startup_service(void* p0, void* p1,
 
         if (r != 0) {
 
-            if (    (spa != NULL_POINTER)
-                 && (spac != NULL_POINTER)
-                 && (spm != NULL_POINTER)
-                 && (spmc != NULL_POINTER) )
-            {
+            if ((spa != NULL_POINTER)
+                && (spac != NULL_POINTER)
+                && (spm != NULL_POINTER)
+                && (spmc != NULL_POINTER)) {
 
-                startup_tcp_socket( p5, p2, p3, p4,
-                                    *spa, *spac, *spm, *spmc );
-            }
-            else {
+                startup_tcp_socket(p5, p2, p3, p4, *spa, *spac, *spm, *spmc);
 
-                log_message_debug( "the socket port ist a null pointer" );
+            } else {
+
+                log_message_debug("Could not start service. The socket port is null.");
             }
         }
     }

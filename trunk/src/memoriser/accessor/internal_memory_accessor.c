@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.10 $ $Date: 2005-08-04 15:20:58 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2005-08-09 13:04:27 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -44,7 +44,7 @@
  *
  * @param p0 the model
  * @param p1 the index
- * @param p2 the element
+ * @param p2 the element (Hand over as reference!)
  * @param p3 the abstraction
  * @param p4 the abstraction count
  */
@@ -55,7 +55,7 @@ void set(void* p0, void* p1, void* p2, void* p3, void* p4);
  *
  * @param p0 the model
  * @param p1 the index
- * @param p2 the model element (Hand over as reference!)
+ * @param p2 the element (Hand over as reference!)
  * @param p3 the abstraction
  * @param p4 the abstraction count
  */
@@ -86,7 +86,7 @@ void add_client_socket_number(void* p0, void* p1) {
 
         reallocate_array((void*) cs, (void*) *css, (void*) *css, (void*) INTEGER_ARRAY);
 
-        set(p0, (void*) TCP_CLIENT_SOCKETS_INTERNAL, *cs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        set(p0, (void*) TCP_CLIENT_SOCKETS_INTERNAL, cs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     }
 
     // Add socket number.
@@ -119,7 +119,7 @@ void add_signal_id(void* p0, void* p1) {
 
         reallocate_array((void*) id, (void*) *ids, (void*) *ids, (void*) INTEGER_ARRAY);
 
-        set(p0, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_INTERNAL, *id, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        set(p0, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_INTERNAL, id, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     }
 
     // Add the socket number.

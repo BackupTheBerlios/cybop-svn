@@ -1,5 +1,5 @@
 /*
- * $RCSfile: integer_allocator.c,v $
+ * $RCSfile: character_vector_allocator.c,v $
  *
  * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
  *
@@ -20,12 +20,15 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2005-07-27 23:10:48 $ $Author: christian $
+ * This file contains the functionality to:
+ * - create a string model in memory
+ *
+ * @version $Revision: 1.1 $ $Date: 2005-08-09 13:04:27 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef INTEGER_ALLOCATOR_SOURCE
-#define INTEGER_ALLOCATOR_SOURCE
+#ifndef CHARACTER_VECTOR_ALLOCATOR_SOURCE
+#define CHARACTER_VECTOR_ALLOCATOR_SOURCE
 
 #include "../../globals/constants/abstraction_constants.c"
 #include "../../globals/constants/log_constants.c"
@@ -33,32 +36,30 @@
 #include "../../memoriser/array.c"
 
 /**
- * Allocates the integer.
+ * Allocates the character vector.
  *
  * @param p0 the model (Hand over as reference!)
  * @param p1 the model size
  */
-void allocate_integer(void* p0, void* p1) {
+void allocate_character_vector(void* p0, void* p1) {
 
-    log_message_debug("Allocate integer.");
+    log_message_debug("Allocate character vector.");
 
-    // Create integer array containing the actual integer value.
-    allocate_array(p0, p1, (void*) INTEGER_ARRAY);
+    allocate_array(p0, p1, (void*) CHARACTER_ARRAY);
 }
 
 /**
- * Deallocates the integer.
+ * Deallocates the character vector.
  *
  * @param p0 the model (Hand over as reference!)
  * @param p1 the model size
  */
-void deallocate_integer(void* p0, void* p1) {
+void deallocate_character_vector(void* p0, void* p1) {
 
-    log_message_debug("Deallocate integer.");
+    log_message_debug("Deallocate character vector.");
 
-    // Destroy integer array containing the actual integer value.
-    deallocate_array(p0, p1, (void*) INTEGER_ARRAY);
+    deallocate_array(p0, p1, (void*) CHARACTER_ARRAY);
 }
 
-/* INTEGER_ALLOCATOR_SOURCE */
+/* CHARACTER_VECTOR_ALLOCATOR_SOURCE */
 #endif
