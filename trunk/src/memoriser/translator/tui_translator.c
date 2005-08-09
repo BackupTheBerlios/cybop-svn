@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.15 $ $Date: 2005-08-08 12:06:43 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2005-08-09 06:58:56 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -135,6 +135,8 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
             int** sy = (int**) &NULL_POINTER;
             int** sz = (int**) &NULL_POINTER;
 
+            // The character value.
+            void* v = NULL_POINTER;
             // The source part model index.
             int mi = 0;
 
@@ -274,6 +276,8 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 sy = (int**) &NULL_POINTER;
                 sz = (int**) &NULL_POINTER;
 
+                // Reset character value.
+                v = NULL_POINTER;
                 // Reset source part model index.
                 mi = 0;
 
@@ -714,7 +718,7 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
                                                 set(dx, (void*) TUI_PROPERTIES_CHARACTER_INDEX, c, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
                                             }
 
-                                            // Get character properties.
+                                            // Set character properties.
                                             mapto((void*) &bg, (void*) INTEGER_COUNT, (void*) INTEGER_COUNT, (void*) *bgm, (void*) *bgmc, (void*) TERMINAL_BACKGROUND_ABSTRACTION, (void*) TERMINAL_BACKGROUND_ABSTRACTION_COUNT);
                                             mapto((void*) &fg, (void*) INTEGER_COUNT, (void*) INTEGER_COUNT, (void*) *fgm, (void*) *fgmc, (void*) TERMINAL_FOREGROUND_ABSTRACTION, (void*) TERMINAL_FOREGROUND_ABSTRACTION_COUNT);
                                             //?? TODO: Replace temporary test values like
@@ -736,11 +740,11 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
                                             if ((r != 0) && (mi < **mc)) {
 
                                                 // Get character value at position x.
-                                                get(*m, (void*) &mi, (void*) c, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT);
+                                                get(*m, (void*) &mi, (void*) &v, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT);
 
     printf("TEST translator mi: %i\n", mi);
-    printf("TEST translator c: %i\n", c);
-    printf("TEST translator *c: %i\n", *((char*) c));
+    printf("TEST translator v: %i\n", v);
+    printf("TEST translator *v: %i\n", *((char*) v));
 
                                                 // Increase model index by one.
                                                 mi++;
@@ -751,15 +755,24 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
                                                 // because the part model is NOT a character,
                                                 // or the string length is smaller than
                                                 // the length of the row.
-//??                                                set((void*) c, (void*) CHARACTER_VALUE_INDEX, (void*) SPACE_CHARACTER, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT);
-                                                c = SPACE_CHARACTER;
+                                                v = SPACE_CHARACTER;
                                             }
+
+                                            // Set character.
+                                            // CAUTION! The character has to be set,
+                                            // because get returns another character pointer
+                                            // than the one that was added to dx above.
+                                            *((char*) c) = *((char*) v);
+//??                                            set(c, (void*) CHARACTER_VALUE_INDEX, (void*) v, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT);
+
+    printf("TEST translator c: %i\n", c);
+    printf("TEST translator *c: %i\n", *((char*) c));
 
     void** ver = &NULL_POINTER;
     get(dx, (void*) TUI_PROPERTIES_CHARACTER_INDEX, (void*) &ver, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 //??    get(dx, (void*) TUI_PROPERTIES_HIDDEN_INDEX, (void*) &ver, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     printf("VERIFICATION *ver: %i\n", (char*) *ver);
-    printf("VERIFICATION *ver: %i\n", *((char*) ver));
+    printf("VERIFICATION *ver: %i\n", **((char**) ver));
 //??    printf("VERIFICATION **ver: %i\n", **((int**) ver));
 
                                             x++;
