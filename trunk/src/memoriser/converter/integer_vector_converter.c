@@ -20,18 +20,15 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2005-08-09 13:04:27 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2005-08-09 21:31:28 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef INTEGER_VECTOR_CONVERTER_SOURCE
 #define INTEGER_VECTOR_CONVERTER_SOURCE
 
-//?? #include <stdio.h>
-//?? #include <stdlib.h>
 #include "../../globals/constants/abstraction_constants.c"
 #include "../../globals/constants/character_constants.c"
-//?? #include "../../globals/constants/integer_constants.c"
 #include "../../globals/constants/log_constants.c"
 #include "../../globals/constants/structure_constants.c"
 #include "../../globals/logger/logger.c"
@@ -76,7 +73,7 @@ void parse_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
             i = *sc;
 
             // Add string termination to temporary null-terminated string.
-            set_array_elements((void*) tmp, (void*) &i, (void*) NULL_CONTROL_CHARACTER, (void*) NUMBER_1_INTEGER, (void*) CHARACTER_ARRAY);
+            set_array_elements((void*) tmp, (void*) &i, (void*) NULL_CONTROL_CHARACTER, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
 
             // The tail variable is useless here and only needed for the string
             // transformation function. If the whole string array consists of
@@ -98,7 +95,7 @@ void parse_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
             //?? to be able to take the double value?
 
             // Set integer value.
-            set_array_elements(*d, (void*) PRIMITIVE_VALUE_INDEX, (void*) &v, (void*) NUMBER_1_INTEGER, (void*) INTEGER_ARRAY);
+            set_array_elements(*d, (void*) PRIMITIVE_VALUE_INDEX, (void*) &v, (void*) PRIMITIVE_COUNT, (void*) INTEGER_ARRAY);
 
             // Destroy temporary null-terminated string.
             deallocate_array((void*) &tmp, (void*) &tmps, (void*) CHARACTER_ARRAY);
@@ -174,17 +171,17 @@ void serialise_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             } else {
 
-//??                log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_PARSE_INTEGER_THE_DESTINATION_IS_NULL_MESSAGE, (void*) &COULD_NOT_PARSE_INTEGER_THE_DESTINATION_IS_NULL_MESSAGE_COUNT);
+                log_message_debug("Could not serialise integer. The destination is null.");
             }
 
         } else {
 
-//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_PARSE_INTEGER_THE_DESTINATION_COUNT_IS_NULL_MESSAGE, (void*) &COULD_NOT_PARSE_INTEGER_THE_DESTINATION_COUNT_IS_NULL_MESSAGE_COUNT);
+            log_message_debug("Could not serialise integer. The destination count is null.");
         }
 
     } else {
 
-//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_PARSE_INTEGER_THE_DESTINATION_SIZE_IS_NULL_MESSAGE, (void*) &COULD_NOT_PARSE_INTEGER_THE_DESTINATION_SIZE_IS_NULL_MESSAGE_COUNT);
+        log_message_debug("Could not serialise integer. The destination size is null.");
     }
 }
 
@@ -257,17 +254,17 @@ void parse_integer_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
                         // (which is 3, as needed for the length)
                         parse_integer((void*) &n, (void*) PRIMITIVE_COUNT, (void*) PRIMITIVE_COUNT, p3, (void*) &fec);
 
-                        // Check integer (pointer) vector size.
+                        // Check vector size.
                         if (*dc >= *ds) {
 
-                            // Calculate new integer (pointer) vector size.
+                            // Calculate new vector size.
                             *ds = *ds * *POINTER_VECTOR_REALLOCATE_FACTOR + 1;
 
-                            // Reallocate integer (pointer) vector.
+                            // Reallocate vector.
                             reallocate(p0, p1, p2, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
                         }
 
-                        // Add integer to end of integer (pointer) vector.
+                        // Add integer to end of vector.
                         set(*d, p1, &n, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
                         // Increase integer vector count by one, because of new element.
@@ -327,30 +324,83 @@ void parse_integer_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
  */
 void serialise_integer_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-/*??
-//??    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Finalise integer vector.");
+    if (p4 != NULL_POINTER) {
 
-    // Write output stream and transform from integer vector.
+        int* sc = (int*) p4;
 
-    // Initialise elements.
-    int z = 0;
-    int y = 0;
-    int x = 0;
+        if (p2 != NULL_POINTER) {
 
-    // Get elements.
-    get_array_elements(p0, (void*) INTEGER_ARRAY, (void*) &Z_INDEX, (void*) &z);
-    get_array_elements(p0, (void*) INTEGER_ARRAY, (void*) &Y_INDEX, (void*) &y);
-    get_array_elements(p0, (void*) INTEGER_ARRAY, (void*) &X_INDEX, (void*) &x);
+            int* ds = (int*) p2;
 
-    // Remove elements.
-    remove_array_elements(p0, (void*) INTEGER_ARRAY, (void*) &INTEGER_VECTOR_COUNT, (void*) &Z_INDEX);
-    remove_array_elements(p0, (void*) INTEGER_ARRAY, (void*) &INTEGER_VECTOR_COUNT, (void*) &Y_INDEX);
-    remove_array_elements(p0, (void*) INTEGER_ARRAY, (void*) &INTEGER_VECTOR_COUNT, (void*) &X_INDEX);
+            if (p1 != NULL_POINTER) {
 
-//??    fprintf(p1, %d, &(m->x));
-//??    fprintf(p1, %d, &(m->y));
-//??    fprintf(p1, %d, &(m->z));
-*/
+                int* dc = (int*) p1;
+
+                if (p0 != NULL_POINTER) {
+
+                    void** d = (void**) p0;
+
+                    log_message_debug("Serialise integer vector.");
+
+                    // The integer.
+                    void** i = NULL_POINTER;
+                    // The integer character.
+                    void* c = NULL_POINTER;
+                    int cc = *NUMBER_0_INTEGER;
+                    int cs = *NUMBER_0_INTEGER;
+                    // The remaining vector elements.
+                    void* e = p3 + 1;
+                    int ec = *sc - 1;
+
+                    if (*sc > *NUMBER_0_INTEGER) {
+
+                        // Get integer from vector.
+                        get(p3, (void*) NUMBER_0_INTEGER, &i, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
+                        serialise_integer((void*) &c, (void*) &cc, (void*) &cs, *i, (void*) PRIMITIVE_COUNT);
+
+                        if ((*dc + cc + 1) >= *ds) {
+
+                            *ds = *ds + cc + 1;
+
+                            reallocate_array(p0, p1, p2, (void*) CHARACTER_ARRAY);
+                        }
+
+                        // Set integer characters.
+                        set_array_elements(*d, p1, c, (void*) &cc, (void*) CHARACTER_ARRAY);
+                        *dc = *dc + cc;
+
+                        // Set comma character.
+                        set_array_elements(*d, p1, (void*) COMMA_CHARACTER, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
+                        *dc = *dc + *CHARACTER_COUNT;
+
+                        // Recursively call this procedure for further integer numbers.
+                        serialise_integer_vector(p0, p1, p2, e, (void*) &ec);
+
+                    } else {
+
+                        log_message_debug("Could not serialise integer vector. The source count is zero.");
+                    }
+
+                } else {
+
+                    log_message_debug("Could not serialise integer vector. The destination is null.");
+                }
+
+            } else {
+
+                log_message_debug("Could not serialise integer vector. The destination count is null.");
+            }
+
+        } else {
+
+            log_message_debug("Could not serialise integer vector. The destination size is null.");
+        }
+
+    } else {
+
+        log_message_debug("Could not serialise integer vector. The source count is null.");
+    }
 }
 
 /* INTEGER_VECTOR_CONVERTER_SOURCE */

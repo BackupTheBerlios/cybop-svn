@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2005-07-30 00:07:17 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2005-08-09 21:31:27 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -83,6 +83,11 @@ static int* CURSOR_POSITION_CONTROL_SEQUENCE_COUNT = NUMBER_2_INTEGER_ARRAY;
 // Mnemonic:
 // SGR (Set Graphics Rendition)
 //
+
+/** The attribute suffix control sequence. */
+static char ATTRIBUTE_SUFFIX_CONTROL_SEQUENCE_ARRAY[] = {'m'};
+static char* ATTRIBUTE_SUFFIX_CONTROL_SEQUENCE = ATTRIBUTE_SUFFIX_CONTROL_SEQUENCE_ARRAY;
+static int* ATTRIBUTE_SUFFIX_CONTROL_SEQUENCE_COUNT = NUMBER_1_INTEGER_ARRAY;
 
 /** The attribute off control sequence. */
 static char ATTRIBUTE_OFF_CONTROL_SEQUENCE_ARRAY[] = {'0', 'm'};

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.17 $ $Date: 2005-08-09 13:04:27 $ $Author: christian $
+ * @version $Revision: 1.18 $ $Date: 2005-08-09 21:31:28 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -331,11 +331,6 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     (void*) &fgm, (void*) &fgmc, (void*) &fgms,
                     (void*) &fgd, (void*) &fgdc, (void*) &fgds);
 
-    printf("TEST translator pa: %s\n", (char*) *pa);
-    printf("TEST translator pac: %i\n", *((int*) *pac));
-    printf("TEST translator pm pointer 1: %i\n", *pm);
-    printf("TEST translator pmc: %i\n", *((int*) *pmc));
-
                 // Get part position x, y, z.
                 get(*pm, (void*) TUI_POSITION_X_INDEX, (void*) &px, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
                 get(*pm, (void*) TUI_POSITION_Y_INDEX, (void*) &py, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
@@ -344,11 +339,6 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 get(*sm, (void*) TUI_SIZE_X_INDEX, (void*) &sx, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
                 get(*sm, (void*) TUI_SIZE_Y_INDEX, (void*) &sy, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
                 get(*sm, (void*) TUI_SIZE_Z_INDEX, (void*) &sz, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-
-    printf("TEST translator *pz: %i\n", *pz);
-    printf("TEST translator **pz: %i\n", **pz);
-    printf("TEST translator *sz: %i\n", *sz);
-    printf("TEST translator **sz: %i\n", **sz);
 
                 get(p1, (void*) TUI_Z_DIMENSION_INDEX, (void*) &dcz, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
                 get(p1, (void*) TUI_Y_DIMENSION_INDEX, (void*) &dcy, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
@@ -371,10 +361,6 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                     // The tui z position has to be smaller than the size.
                     if (**pz < **sz) {
-
-    printf("TEST translator dsz: %i\n", dsz);
-    printf("TEST translator *dsz: %i\n", *dsz);
-    printf("TEST translator **dsz: %i\n", **dsz);
 
                         if ((**pz + **sz) > **dsz) {
 
@@ -400,7 +386,7 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     printf("TEST translator z: %i\n", z);
 
-                            if (z >= **sz) {
+                            if (z >= (**pz + **sz)) {
 
                                 break;
                             }
@@ -466,7 +452,7 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     printf("TEST translator y: %i\n", y);
 
-                                    if (y >= **sy) {
+                                    if (y >= (**py + **sy)) {
 
                                         break;
                                     }
@@ -532,7 +518,7 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     printf("TEST translator x: %i\n", x);
 
-                                            if (x >= **sx) {
+                                            if (x >= (**px + **sx)) {
 
                                                 break;
                                             }
@@ -742,10 +728,6 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
                                                 // Get character value at position x.
                                                 get(*m, (void*) &mi, (void*) &v, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
-    printf("TEST translator mi: %i\n", mi);
-    printf("TEST translator v: %i\n", v);
-    printf("TEST translator *v: %i\n", *((char*) v));
-
                                                 // Increase model index by one.
                                                 mi++;
 
@@ -762,16 +744,7 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
                                             // CAUTION! The character has to be set,
                                             // because get returns another character pointer
                                             // than the one that was added to dx above.
-//??                                            *((char*) c) = *((char*) v);
                                             set(c, (void*) PRIMITIVE_VALUE_INDEX, (void*) v, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
-
-    printf("TEST translator c: %i\n", c);
-    printf("TEST translator *c: %i\n", *((char*) c));
-
-    void** ver = &NULL_POINTER;
-    get(dx, (void*) TUI_PROPERTIES_CHARACTER_INDEX, (void*) &ver, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    printf("VERIFICATION *ver: %i\n", (char*) *ver);
-    printf("VERIFICATION *ver: %i\n", **((char**) ver));
 
                                             x++;
                                         }
