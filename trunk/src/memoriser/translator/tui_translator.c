@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.19 $ $Date: 2005-08-10 09:38:07 $ $Author: christian $
+ * @version $Revision: 1.20 $ $Date: 2005-08-10 10:45:27 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -38,7 +38,7 @@
 #include "../../memoriser/accessor.c"
 #include "../../memoriser/mapper.c"
 //?? TEST only
-#include "../../tester/tester.c"
+//?? #include "../../tester/tester.c"
 
 /**
  * Decodes the tui model into a compound model.
@@ -257,7 +257,7 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
             // Iterate through compound parts.
             while (1) {
 
-    printf("TEST translator j: %i\n", j);
+//??    printf("\nTEST translator j: %i\n", j);
 
                 if (j >= *sc) {
 
@@ -390,7 +390,7 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 dsy = (int**) &NULL_POINTER;
                 dsx = (int**) &NULL_POINTER;
 
-    test_knowledge_model(p3, p4, 2);
+//??    test_knowledge_model(p3, p4, 4);
 
                 // Get part at index j.
                 get_compound_element_by_index(p3, p4, (void*) &j,
@@ -398,13 +398,15 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     (void*) &m, (void*) &mc, (void*) &ms,
                     (void*) &d, (void*) &dc, (void*) &ds);
 
+/*??
     printf("TEST translator char a: %s\n", (char*) *a);
     printf("TEST translator int ac: %i\n", *((int*) *ac));
-    printf("TEST translator mp: %i\n", *m);
-    printf("TEST translator m: %s\n", (char*) *m);
+    printf("TEST translator m: %i\n", *m);
+    printf("TEST translator m as string: %s\n", (char*) *m);
     printf("TEST translator mc: %i\n", *((int*) *mc));
     printf("TEST translator d: %i\n", d);
     printf("TEST translator dc: %i\n", *((int*) *dc));
+*/
 
                 // Get part position from details.
                 get_compound_element_by_name(*d, *dc,
@@ -514,8 +516,6 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
                         // Position characters in their colour and with their size.
                         while (1) {
 
-    printf("TEST translator z: %i\n", z);
-
                             if (z >= (**pz + **sz)) {
 
                                 break;
@@ -580,8 +580,6 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                                 while (1) {
 
-    printf("TEST translator y: %i\n", y);
-
                                     if (y >= (**py + **sy)) {
 
                                         break;
@@ -645,8 +643,6 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
                                         x = **px;
 
                                         while (1) {
-
-    printf("TEST translator x: %i\n", x);
 
                                             if (x >= (**px + **sx)) {
 
@@ -908,16 +904,16 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 // Reset comparison result.
                 r = 0;
 
-                compare_arrays(a, ac, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                compare_arrays(*a, *ac, (void*) CYBOL_ABSTRACTION, (void*) CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
                 if (r != 0) {
 
-    printf("TEST translator recursive call follows r: %i\n", r);
+//??    printf("TEST translator recursive call follows r: %i\n", r);
 
                     // The part model is a compound.
 
                     // Recursively call this procedure for compound part model.
-                    encode_tui(p0, p1, p2, m, mc);
+                    encode_tui(p0, p1, p2, *m, (void*) *mc);
                 }
 
                 j++;

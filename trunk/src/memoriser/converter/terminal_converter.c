@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.20 $ $Date: 2005-08-09 21:31:28 $ $Author: christian $
+ * @version $Revision: 1.21 $ $Date: 2005-08-10 10:45:27 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -412,8 +412,6 @@ void serialise_terminal(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     while (1) {
 
-    printf("TEST serialise z: %i\n", z);
-
         if (z >= **scz) {
 
             break;
@@ -433,8 +431,6 @@ void serialise_terminal(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             while (1) {
 
-    printf("TEST serialise y: %i\n", y);
-
                 if (y >= **scy) {
 
                     break;
@@ -453,8 +449,6 @@ void serialise_terminal(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     x = 0;
 
                     while (1) {
-
-    printf("TEST serialise x: %i\n", x);
 
                         if (x >= **scx) {
 
