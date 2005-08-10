@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2005-07-30 00:07:17 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2005-08-10 09:38:07 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -53,6 +53,31 @@ static int* TUI_BACKGROUND_NAME_COUNT = NUMBER_10_INTEGER_ARRAY;
 static char TUI_FOREGROUND_NAME_ARRAY[] = {'f', 'o', 'r', 'e', 'g', 'r', 'o', 'u', 'n', 'd'};
 static char* TUI_FOREGROUND_NAME = TUI_FOREGROUND_NAME_ARRAY;
 static int* TUI_FOREGROUND_NAME_COUNT = NUMBER_10_INTEGER_ARRAY;
+
+/** The hidden property name. */
+static char TUI_HIDDEN_NAME_ARRAY[] = {'h', 'i', 'd', 'd', 'e', 'n'};
+static char* TUI_HIDDEN_NAME = TUI_HIDDEN_NAME_ARRAY;
+static int* TUI_HIDDEN_NAME_COUNT = NUMBER_6_INTEGER_ARRAY;
+
+/** The inverse property name. */
+static char TUI_INVERSE_NAME_ARRAY[] = {'i', 'n', 'v', 'e', 'r', 's', 'e'};
+static char* TUI_INVERSE_NAME = TUI_INVERSE_NAME_ARRAY;
+static int* TUI_INVERSE_NAME_COUNT = NUMBER_7_INTEGER_ARRAY;
+
+/** The blink property name. */
+static char TUI_BLINK_NAME_ARRAY[] = {'b', 'l', 'i', 'n', 'k'};
+static char* TUI_BLINK_NAME = TUI_BLINK_NAME_ARRAY;
+static int* TUI_BLINK_NAME_COUNT = NUMBER_5_INTEGER_ARRAY;
+
+/** The underline property name. */
+static char TUI_UNDERLINE_NAME_ARRAY[] = {'u', 'n', 'd', 'e', 'r', 'l', 'i', 'n', 'e'};
+static char* TUI_UNDERLINE_NAME = TUI_UNDERLINE_NAME_ARRAY;
+static int* TUI_UNDERLINE_NAME_COUNT = NUMBER_9_INTEGER_ARRAY;
+
+/** The bold property name. */
+static char TUI_BOLD_NAME_ARRAY[] = {'b', 'o', 'l', 'd'};
+static char* TUI_BOLD_NAME = TUI_BOLD_NAME_ARRAY;
+static int* TUI_BOLD_NAME_COUNT = NUMBER_4_INTEGER_ARRAY;
 
 //
 // Web user interface (wui) names.

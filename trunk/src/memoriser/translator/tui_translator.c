@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.18 $ $Date: 2005-08-09 21:31:28 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2005-08-10 09:38:07 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -125,6 +125,56 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
             void** fgd = &NULL_POINTER;
             void** fgdc = &NULL_POINTER;
             void** fgds = &NULL_POINTER;
+            // The source part hidden property.
+            void** ha = &NULL_POINTER;
+            void** hac = &NULL_POINTER;
+            void** has = &NULL_POINTER;
+            void** hm = &NULL_POINTER;
+            void** hmc = &NULL_POINTER;
+            void** hms = &NULL_POINTER;
+            void** hd = &NULL_POINTER;
+            void** hdc = &NULL_POINTER;
+            void** hds = &NULL_POINTER;
+            // The source part inverse property.
+            void** ia = &NULL_POINTER;
+            void** iac = &NULL_POINTER;
+            void** ias = &NULL_POINTER;
+            void** im = &NULL_POINTER;
+            void** imc = &NULL_POINTER;
+            void** ims = &NULL_POINTER;
+            void** id = &NULL_POINTER;
+            void** idc = &NULL_POINTER;
+            void** ids = &NULL_POINTER;
+            // The source part blink property.
+            void** bla = &NULL_POINTER;
+            void** blac = &NULL_POINTER;
+            void** blas = &NULL_POINTER;
+            void** blm = &NULL_POINTER;
+            void** blmc = &NULL_POINTER;
+            void** blms = &NULL_POINTER;
+            void** bld = &NULL_POINTER;
+            void** bldc = &NULL_POINTER;
+            void** blds = &NULL_POINTER;
+            // The source part underline property.
+            void** ua = &NULL_POINTER;
+            void** uac = &NULL_POINTER;
+            void** uas = &NULL_POINTER;
+            void** um = &NULL_POINTER;
+            void** umc = &NULL_POINTER;
+            void** ums = &NULL_POINTER;
+            void** ud = &NULL_POINTER;
+            void** udc = &NULL_POINTER;
+            void** uds = &NULL_POINTER;
+            // The source part bold property.
+            void** ba = &NULL_POINTER;
+            void** bac = &NULL_POINTER;
+            void** bas = &NULL_POINTER;
+            void** bm = &NULL_POINTER;
+            void** bmc = &NULL_POINTER;
+            void** bms = &NULL_POINTER;
+            void** bd = &NULL_POINTER;
+            void** bdc = &NULL_POINTER;
+            void** bds = &NULL_POINTER;
 
             // The source part position x, y, z.
             int** px = (int**) &NULL_POINTER;
@@ -266,6 +316,56 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 fgd = &NULL_POINTER;
                 fgdc = &NULL_POINTER;
                 fgds = &NULL_POINTER;
+                // Reset source part hidden property.
+                ha = &NULL_POINTER;
+                hac = &NULL_POINTER;
+                has = &NULL_POINTER;
+                hm = &NULL_POINTER;
+                hmc = &NULL_POINTER;
+                hms = &NULL_POINTER;
+                hd = &NULL_POINTER;
+                hdc = &NULL_POINTER;
+                hds = &NULL_POINTER;
+                // Reset source part inverse property.
+                ia = &NULL_POINTER;
+                iac = &NULL_POINTER;
+                ias = &NULL_POINTER;
+                im = &NULL_POINTER;
+                imc = &NULL_POINTER;
+                ims = &NULL_POINTER;
+                id = &NULL_POINTER;
+                idc = &NULL_POINTER;
+                ids = &NULL_POINTER;
+                // Reset source part blink property.
+                bla = &NULL_POINTER;
+                blac = &NULL_POINTER;
+                blas = &NULL_POINTER;
+                blm = &NULL_POINTER;
+                blmc = &NULL_POINTER;
+                blms = &NULL_POINTER;
+                bld = &NULL_POINTER;
+                bldc = &NULL_POINTER;
+                blds = &NULL_POINTER;
+                // Reset source part underline property.
+                ua = &NULL_POINTER;
+                uac = &NULL_POINTER;
+                uas = &NULL_POINTER;
+                um = &NULL_POINTER;
+                umc = &NULL_POINTER;
+                ums = &NULL_POINTER;
+                ud = &NULL_POINTER;
+                udc = &NULL_POINTER;
+                uds = &NULL_POINTER;
+                // Reset source part bold property.
+                ba = &NULL_POINTER;
+                bac = &NULL_POINTER;
+                bas = &NULL_POINTER;
+                bm = &NULL_POINTER;
+                bmc = &NULL_POINTER;
+                bms = &NULL_POINTER;
+                bd = &NULL_POINTER;
+                bdc = &NULL_POINTER;
+                bds = &NULL_POINTER;
 
                 // Reset source part position x, y, z.
                 px = (int**) &NULL_POINTER;
@@ -330,6 +430,36 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     (void*) &fga, (void*) &fgac, (void*) &fgas,
                     (void*) &fgm, (void*) &fgmc, (void*) &fgms,
                     (void*) &fgd, (void*) &fgdc, (void*) &fgds);
+                // Get part hidden property from details.
+                get_compound_element_by_name(*d, *dc,
+                    (void*) TUI_HIDDEN_NAME, (void*) TUI_HIDDEN_NAME_COUNT,
+                    (void*) &ha, (void*) &hac, (void*) &has,
+                    (void*) &hm, (void*) &hmc, (void*) &hms,
+                    (void*) &hd, (void*) &hdc, (void*) &hds);
+                // Get part inverse property from details.
+                get_compound_element_by_name(*d, *dc,
+                    (void*) TUI_INVERSE_NAME, (void*) TUI_INVERSE_NAME_COUNT,
+                    (void*) &ia, (void*) &iac, (void*) &ias,
+                    (void*) &im, (void*) &imc, (void*) &ims,
+                    (void*) &id, (void*) &idc, (void*) &ids);
+                // Get part blink property from details.
+                get_compound_element_by_name(*d, *dc,
+                    (void*) TUI_BLINK_NAME, (void*) TUI_BLINK_NAME_COUNT,
+                    (void*) &bla, (void*) &blac, (void*) &blas,
+                    (void*) &blm, (void*) &blmc, (void*) &blms,
+                    (void*) &bld, (void*) &bldc, (void*) &blds);
+                // Get part underline property from details.
+                get_compound_element_by_name(*d, *dc,
+                    (void*) TUI_UNDERLINE_NAME, (void*) TUI_UNDERLINE_NAME_COUNT,
+                    (void*) &ua, (void*) &uac, (void*) &uas,
+                    (void*) &um, (void*) &umc, (void*) &ums,
+                    (void*) &ud, (void*) &udc, (void*) &uds);
+                // Get part bold property from details.
+                get_compound_element_by_name(*d, *dc,
+                    (void*) TUI_BOLD_NAME, (void*) TUI_BOLD_NAME_COUNT,
+                    (void*) &ba, (void*) &bac, (void*) &bas,
+                    (void*) &bm, (void*) &bmc, (void*) &bms,
+                    (void*) &bd, (void*) &bdc, (void*) &bds);
 
                 // Get part position x, y, z.
                 get(*pm, (void*) TUI_POSITION_X_INDEX, (void*) &px, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
@@ -709,11 +839,11 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
                                             mapto((void*) &fg, (void*) PRIMITIVE_COUNT, (void*) PRIMITIVE_COUNT, (void*) *fgm, (void*) *fgmc, (void*) TERMINAL_FOREGROUND_ABSTRACTION, (void*) TERMINAL_FOREGROUND_ABSTRACTION_COUNT);
                                             //?? TODO: Replace temporary test values like
                                             //?? NUMBER_0_INTEGER with real properties!
-                                            set(h, (void*) PRIMITIVE_VALUE_INDEX, (void*) NUMBER_0_INTEGER, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-                                            set(i, (void*) PRIMITIVE_VALUE_INDEX, (void*) NUMBER_0_INTEGER, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-                                            set(bl, (void*) PRIMITIVE_VALUE_INDEX, (void*) NUMBER_0_INTEGER, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-                                            set(u, (void*) PRIMITIVE_VALUE_INDEX, (void*) NUMBER_0_INTEGER, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-                                            set(b, (void*) PRIMITIVE_VALUE_INDEX, (void*) NUMBER_0_INTEGER, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+                                            set(h, (void*) PRIMITIVE_VALUE_INDEX, (void*) *hm, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+                                            set(i, (void*) PRIMITIVE_VALUE_INDEX, (void*) *im, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+                                            set(bl, (void*) PRIMITIVE_VALUE_INDEX, (void*) *blm, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+                                            set(u, (void*) PRIMITIVE_VALUE_INDEX, (void*) *um, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+                                            set(b, (void*) PRIMITIVE_VALUE_INDEX, (void*) *bm, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
                                             // Reset comparison result.
                                             r = 0;
