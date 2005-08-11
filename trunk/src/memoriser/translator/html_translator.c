@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.12 $ $Date: 2005-08-11 11:36:11 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2005-08-11 22:33:47 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -79,7 +79,6 @@ void encode_html_compound(void** dest, int* dest_count, int* dest_size,
     void** comp_detail = &NULL_POINTER;
     void** comp_detail_count = &NULL_POINTER;
     void** comp_detail_size = &NULL_POINTER;
-
 
     int comp_index = 0;
 
@@ -302,46 +301,40 @@ void encode_html(void** dest, int* dest_count, int *dest_size,
 
         }
 
-        //parse the begin tag
-        if ( (tag_model != NULL_POINTER) &&
-             (tag_model_count != NULL_POINTER) &&
-             (tag_model_size != NULL_POINTER)
-           )
-        {
+        // Parse the begin tag.
+        if ((tag_model != NULL_POINTER)
+            && (tag_model_count != NULL_POINTER)
+            && (tag_model_size != NULL_POINTER)) {
 
-            if ( (*tag_model!=NULL_POINTER) &&
-                 (*tag_model_count!=NULL_POINTER) &&
-                 (*tag_model_size!=NULL_POINTER)
-               )
-            {
-                //parse the <
-                parse( dest, dest_count, dest_size,
-                       LESS_THAN_SIGN_CHARACTER, CHARACTER_COUNT,
-                       CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
+            if ((*tag_model!=NULL_POINTER)
+                && (*tag_model_count!=NULL_POINTER)
+                && (*tag_model_size!=NULL_POINTER)) {
+
+                // Parse the <
+                parse(dest, dest_count, dest_size,
+                    LESS_THAN_SIGN_CHARACTER, CHARACTER_COUNT,
+                    CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
                 //parse the html tag
                 parse( dest, dest_count, dest_size,
                        *tag_model, *tag_model_count,
                        CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
-                //parse the tag properties
-                if ( (tag_prop_model != NULL_POINTER) &&
-                     (tag_prop_model_count != NULL_POINTER) &&
-                     (tag_prop_model_size != NULL_POINTER)
-                   )
-                {
+                // Parse the tag properties.
+                if ((*tag_prop_model != NULL_POINTER)
+                    && (*tag_prop_model_count != NULL_POINTER)
+                    && (*tag_prop_model_size != NULL_POINTER)) {
 
-                    //parse the space
-                    parse( dest, dest_count, dest_size,
-                           SPACE_CHARACTER, CHARACTER_COUNT,
-                           CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
+                    // Parse the space.
+                    parse(dest, dest_count, dest_size,
+                        SPACE_CHARACTER, CHARACTER_COUNT,
+                        CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
-                    //parse the html tag properties
-                    parse( dest, dest_count, dest_size,
-                           *tag_prop_model, *tag_prop_model_count,
-                           CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
+                    // Parse the html tag properties.
+                    parse(dest, dest_count, dest_size,
+                        *tag_prop_model, *tag_prop_model_count,
+                        CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
                 }
-
 
                 //parse the >
                 parse( dest, dest_count, dest_size,
@@ -434,17 +427,14 @@ void encode_html(void** dest, int* dest_count, int *dest_size,
                CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
         //parse the end tag
-        if ( (tag_model != NULL_POINTER) &&
-             (tag_model_count != NULL_POINTER) &&
-             (tag_model_size != NULL_POINTER)
-           )
-        {
+        if ((tag_model != NULL_POINTER)
+            && (tag_model_count != NULL_POINTER)
+            && (tag_model_size != NULL_POINTER)) {
 
-            if ( (*tag_model!=NULL_POINTER) &&
-                 (*tag_model_count!=NULL_POINTER) &&
-                 (*tag_model_size!=NULL_POINTER)
-               )
-            {
+            if ((*tag_model != NULL_POINTER)
+                && (*tag_model_count != NULL_POINTER)
+                && (*tag_model_size != NULL_POINTER)) {
+
                 //parse the <
                 parse( dest, dest_count, dest_size,
                        LESS_THAN_SIGN_CHARACTER, CHARACTER_COUNT,
@@ -469,10 +459,9 @@ void encode_html(void** dest, int* dest_count, int *dest_size,
                 parse( dest, dest_count, dest_size,
                        LINE_FEED_CONTROL_CHARACTER, CHARACTER_COUNT,
                        CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
-
             }
         }
-    }  //check for destination
+    }
 }
 
 /* HTML_TRANSLATOR_SOURCE */

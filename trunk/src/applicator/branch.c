@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.10 $ $Date: 2005-08-11 11:36:11 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2005-08-11 22:33:45 $ $Author: christian $
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
@@ -135,37 +135,35 @@ void branch(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
         (void*) &fd, (void*) &fdc, (void*) &fds,
         p1, p2);
 
-    if ((ca != NULL_POINTER)
-        && (cac != NULL_POINTER)
-
-        && (cas != NULL_POINTER)
-        && (cm != NULL_POINTER)
-
-        && (cmc != NULL_POINTER)
-        && (cms != NULL_POINTER)
-        && (cd != NULL_POINTER)
-        && (cdc != NULL_POINTER)
-        && (cds != NULL_POINTER)
+    if ((*ca != NULL_POINTER)
+        && (*cac != NULL_POINTER)
+        && (*cas != NULL_POINTER)
+        && (*cm != NULL_POINTER)
+        && (*cmc != NULL_POINTER)
+        && (*cms != NULL_POINTER)
+        && (*cd != NULL_POINTER)
+        && (*cdc != NULL_POINTER)
+        && (*cds != NULL_POINTER)
         // Check true model.
-        && (ta != NULL_POINTER)
-        && (tac != NULL_POINTER)
-        && (tas != NULL_POINTER)
-        && (tm != NULL_POINTER)
-        && (tmc != NULL_POINTER)
-        && (tms != NULL_POINTER)
-        && (td != NULL_POINTER)
-        && (tdc != NULL_POINTER)
-        && (tds != NULL_POINTER)
+        && (*ta != NULL_POINTER)
+        && (*tac != NULL_POINTER)
+        && (*tas != NULL_POINTER)
+        && (*tm != NULL_POINTER)
+        && (*tmc != NULL_POINTER)
+        && (*tms != NULL_POINTER)
+        && (*td != NULL_POINTER)
+        && (*tdc != NULL_POINTER)
+        && (*tds != NULL_POINTER)
         // check false model
-        && (fa != NULL_POINTER)
-        && (fac != NULL_POINTER)
-        && (fas != NULL_POINTER)
-        && (fm != NULL_POINTER)
-        && (fmc != NULL_POINTER)
-        && (fms != NULL_POINTER)
-        && (fd != NULL_POINTER)
-        && (fdc != NULL_POINTER)
-        && (fds != NULL_POINTER)) {
+        && (*fa != NULL_POINTER)
+        && (*fac != NULL_POINTER)
+        && (*fas != NULL_POINTER)
+        && (*fm != NULL_POINTER)
+        && (*fmc != NULL_POINTER)
+        && (*fms != NULL_POINTER)
+        && (*fd != NULL_POINTER)
+        && (*fdc != NULL_POINTER)
+        && (*fds != NULL_POINTER)) {
 
         // The comparison result.
         int r = 0;

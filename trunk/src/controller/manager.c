@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.17 $ $Date: 2005-08-09 13:04:26 $ $Author: christian $
+ * @version $Revision: 1.18 $ $Date: 2005-08-11 22:33:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -147,7 +147,7 @@ void manage(void* p0, void* p1) {
     create((void*) &mm, (void*) mmc, (void*) mms,
         p0, p1,
         CYBOL_ABSTRACTION, CYBOL_ABSTRACTION_COUNT,
-        FILE_CHANNEL, FILE_CHANNEL_COUNT );
+        FILE_CHANNEL, FILE_CHANNEL_COUNT);
     // CAUTION! Do not create startup model details!
     // It is not needed for the startup signal.
 
@@ -159,14 +159,6 @@ void manage(void* p0, void* p1) {
     allocate((void*) &id, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
     *id = 0;
     get_new_signal_id(s, (void*) sc, (void*) id);
-
-/*??
-    fprintf(stderr, "p: %i\n", *NORMAL_PRIORITY);
-    fprintf(stderr, "id: %i\n", *id);
-    fprintf(stderr, "s: %i\n", s);
-    fprintf(stderr, "sc: %i\n", sc);
-    fprintf(stderr, "ss: %i\n", ss);
-*/
 
     // Add startup signal to signal memory.
     set_signal(s, (void*) sc, (void*) ss, ma, (void*) mac, mm, (void*) mmc, md, (void*) mdc, (void*) NORMAL_PRIORITY, (void*) id);

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.10 $ $Date: 2005-08-11 12:23:49 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2005-08-11 22:33:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -94,7 +94,7 @@ void check(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6)
         get(p0, (void*) TCP_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &sf, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         get(p0, (void*) TCP_SERVER_SOCKET_BLOCKING_INTERNAL, (void*) &bf, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-        if ((sf != NULL_POINTER) && (bf != NULL_POINTER)) {
+//??        if ((sf != NULL_POINTER) && (bf != NULL_POINTER)) {
 
             if ((*sf != NULL_POINTER) && (*bf != NULL_POINTER)) {
 
@@ -103,7 +103,7 @@ void check(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6)
                     run_tcp_socket(p0);
                 }
             }
-        }
+//??        }
 
         if (i >= 0) {
 
@@ -112,6 +112,7 @@ void check(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6)
                 (void*) &a, (void*) &ac, (void*) &m, (void*) &mc,
                 (void*) &d, (void*) &dc, (void*) &p, (void*) &id);
 
+/*??
             //?? For testing only. TODO: Delete these lines later!
             fprintf(stderr, "check i: %i\n", i);
             fprintf(stderr, "check a: %s\n", (char*) *a);
@@ -121,8 +122,13 @@ void check(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6)
             //?? d and dc are NULL. DO NOT try to print their values here!
             fprintf(stderr, "check p: %i\n", *((int*) *p));
             fprintf(stderr, "check id: %i\n", *((int*) *id));
-            fprintf(stderr, "check knowledge model: %s\n", "");
-            test_knowledge_model(*k, *kc, 0);
+*/
+
+/*??
+    //?? TEST
+    fprintf(stderr, "TEST checker k: %i\n", p1);
+    test_knowledge_model(p1, p2, 3);
+*/
 
             //
             // Handle signal.
@@ -152,18 +158,18 @@ void check(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6)
 //??            fprintf(stderr, "TEST check post integer destroy i: %i\n", i);
 
             // Reset abstraction.
-            a = NULL_POINTER;
-            ac = NULL_POINTER;
+            a = &NULL_POINTER;
+            ac = &NULL_POINTER;
             // Reset model (signal operation).
-            m = NULL_POINTER;
-            mc = NULL_POINTER;
+            m = &NULL_POINTER;
+            mc = &NULL_POINTER;
             // Reset details (parameters).
-            d = NULL_POINTER;
-            dc = NULL_POINTER;
+            d = &NULL_POINTER;
+            dc = &NULL_POINTER;
             // Reset priority.
-            p = NULL_POINTER;
+            p = &NULL_POINTER;
             // Reset main signal id.
-            id = NULL_POINTER;
+            id = &NULL_POINTER;
             // Reset direct execution flag.
             x = 0;
             // Reset highest priority index.

@@ -22,7 +22,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.14 $ $Date: 2005-08-11 11:36:11 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2005-08-11 22:33:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -39,7 +39,6 @@
 #include "../memoriser/converter.c"
 #include "../memoriser/allocator.c"
 #include "../memoriser/translator.c"
-#include "../tester/tester.c"
 
 /**
  * Checks for primitive model.
@@ -294,14 +293,6 @@ void create_compound_model(void* p0, void* p1, void* p2, void* p3, void* p4,
     // Decode document model according to given document type.
     decode(p0, p1, p2, pm, (void*) &pmc, p5, p6);
 
-//?? Start of TEMPORARY test from Rolf Holzmueller. Delete again later!
-//    if (c == 0) {
-//
-//        int index = 0;
-//        test_compound(*((void**) p0), p2, &index);
-//    }
-//?? End of TEMPORARY test from Rolf Holzmueller.
-
     if (w == 0) {
 
         // Destroy parse model.
@@ -377,8 +368,6 @@ void create(void* p0, void* p1, void* p2, void* p3, void* p4,
  * @param p4 the knowledge size
  */
 void create_part(void* p0, void* p1, void* p2, void* p3, void* p4) {
-
-    log_message_debug("Create part.");
 
     // The name name abstraction.
     void** na = &NULL_POINTER;
@@ -485,57 +474,61 @@ void create_part(void* p0, void* p1, void* p2, void* p3, void* p4) {
         (void*) &wd, (void*) &wdc, (void*) &wds,
         p2, p3);
 
+/*??
     // Check name name.
-    if ((na != NULL_POINTER)
-        && (nac != NULL_POINTER)
-        && (nas != NULL_POINTER)
-        && (nm != NULL_POINTER)
-        && (nmc != NULL_POINTER)
-        && (nms != NULL_POINTER)
-        && (nd != NULL_POINTER)
-        && (ndc != NULL_POINTER)
-        && (nds != NULL_POINTER)
+    if ((*na != NULL_POINTER)
+        && (*nac != NULL_POINTER)
+        && (*nas != NULL_POINTER)
+        && (*nm != NULL_POINTER)
+        && (*nmc != NULL_POINTER)
+        && (*nms != NULL_POINTER)
+        && (*nd != NULL_POINTER)
+        && (*ndc != NULL_POINTER)
+        && (*nds != NULL_POINTER)
         // Check channel name.
-        && (ca != NULL_POINTER)
-        && (cac != NULL_POINTER)
-        && (cas != NULL_POINTER)
-        && (cm != NULL_POINTER)
-        && (cmc != NULL_POINTER)
-        && (cms != NULL_POINTER)
-        && (cd != NULL_POINTER)
-        && (cdc != NULL_POINTER)
-        && (cds != NULL_POINTER)
+        && (*ca != NULL_POINTER)
+        && (*cac != NULL_POINTER)
+        && (*cas != NULL_POINTER)
+        && (*cm != NULL_POINTER)
+        && (*cmc != NULL_POINTER)
+        && (*cms != NULL_POINTER)
+        && (*cd != NULL_POINTER)
+        && (*cdc != NULL_POINTER)
+        && (*cds != NULL_POINTER)
         // Check abstraction name.
-        && (aa != NULL_POINTER)
-        && (aac != NULL_POINTER)
-        && (aas != NULL_POINTER)
-        && (am != NULL_POINTER)
-        && (amc != NULL_POINTER)
-        && (ams != NULL_POINTER)
-        && (ad != NULL_POINTER)
-        && (adc != NULL_POINTER)
-        && (ads != NULL_POINTER)
+        && (*aa != NULL_POINTER)
+        && (*aac != NULL_POINTER)
+        && (*aas != NULL_POINTER)
+        && (*am != NULL_POINTER)
+        && (*amc != NULL_POINTER)
+        && (*ams != NULL_POINTER)
+        && (*ad != NULL_POINTER)
+        && (*adc != NULL_POINTER)
+        && (*ads != NULL_POINTER)
         // Check model name.
-        && (ma != NULL_POINTER)
-        && (mac != NULL_POINTER)
-        && (mas != NULL_POINTER)
-        && (mm != NULL_POINTER)
-        && (mmc != NULL_POINTER)
-        && (mms != NULL_POINTER)
-        && (md != NULL_POINTER)
-        && (mdc != NULL_POINTER)
-        && (mds != NULL_POINTER)
+        && (*ma != NULL_POINTER)
+        && (*mac != NULL_POINTER)
+        && (*mas != NULL_POINTER)
+        && (*mm != NULL_POINTER)
+        && (*mmc != NULL_POINTER)
+        && (*mms != NULL_POINTER)
+        && (*md != NULL_POINTER)
+        && (*mdc != NULL_POINTER)
+        && (*mds != NULL_POINTER)
 //        // Check whole name.
-//        && (wa != NULL_POINTER)
-//        && (wac != NULL_POINTER)
-//        && (was != NULL_POINTER)
-//        && (wm != NULL_POINTER)
-//        && (wmc != NULL_POINTER)
-//        && (wms != NULL_POINTER)
-//        && (wd != NULL_POINTER)
-//        && (wdc != NULL_POINTER)
-//        && (wds != NULL_POINTER)
+//        && (*wa != NULL_POINTER)
+//        && (*wac != NULL_POINTER)
+//        && (*was != NULL_POINTER)
+//        && (*wm != NULL_POINTER)
+//        && (*wmc != NULL_POINTER)
+//        && (*wms != NULL_POINTER)
+//        && (*wd != NULL_POINTER)
+//        && (*wdc != NULL_POINTER)
+//        && (*wds != NULL_POINTER)
         ) {
+*/
+
+        log_message_debug("Create part.");
 
         // The part name.
         void* pn = NULL_POINTER;
@@ -559,8 +552,7 @@ void create_part(void* p0, void* p1, void* p2, void* p3, void* p4) {
         *pnc = 0;
         allocate((void*) &pns, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
         *pns = 0;
-        create((void*) &pn, (void*) pnc, (void*) pns, *nm, *nmc, *na, *nac,
-            (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
+        create((void*) &pn, (void*) pnc, (void*) pns, *nm, *nmc, *na, *nac, (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
 
         // A part channel is not created, since that is only needed temporarily
         // for model loading.
@@ -570,19 +562,19 @@ void create_part(void* p0, void* p1, void* p2, void* p3, void* p4) {
         *pac = 0;
         allocate((void*) &pas, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
         *pas = 0;
-        create((void*) &pa, (void*) pac, (void*) pas, *am, *amc, *aa, *aac,
-            (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
+        create((void*) &pa, (void*) pac, (void*) pas, *am, *amc, *aa, *aac, (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
 
         // Create part model.
         allocate((void*) &pmc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
         *pmc = 0;
         allocate((void*) &pms, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
         *pms = 0;
-        create((void*) &pm, (void*) pmc, (void*) pms, *mm, *mmc, *am, *amc,
-            *cm, *cmc);
+        create((void*) &pm, (void*) pmc, (void*) pms, *mm, *mmc, *am, *amc, *cm, *cmc);
 
         // Add part to whole.
-        if (wm == NULL_POINTER) {
+        if (*wm == NULL_POINTER) {
+
+            log_message_debug("Add part to knowledge model root.");
 
             // Use the knowledge model root if the determined whole model is null.
             set_compound_element_by_name(p2, p3, p4,
@@ -593,6 +585,8 @@ void create_part(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         } else {
 
+            log_message_debug("Add part to given whole model.");
+
             // Use the determined whole model normally, if it exists.
             set_compound_element_by_name(*wm, *wmc, *wms,
                 pn, (void*) pnc, (void*) pns,
@@ -601,10 +595,12 @@ void create_part(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 pd, (void*) pdc, (void*) pds);
         }
 
+/*??
     } else {
 
         log_message_debug("Could not create part. At least one of the given parameters is null.");
     }
+*/
 }
 
 /* CREATE_SOURCE */

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2005-07-25 21:01:02 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2005-08-11 22:33:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -927,12 +927,12 @@ static int* DESTROY_SIGNAL_MEMORY_MESSAGE_COUNT = NUMBER_22_INTEGER_ARRAY;
 /** The "Handle compound." message. */
 static char HANDLE_COMPOUND_MESSAGE_ARRAY[] = {'H', 'a', 'n', 'd', 'l', 'e', ' ', 'c', 'o', 'm', 'p', 'o', 'u', 'n', 'd', '.'};
 static char* HANDLE_COMPOUND_MESSAGE = HANDLE_COMPOUND_MESSAGE_ARRAY;
-static int* HANDLE_COMPOUND_MESSAGE_COUNT = NUMBER_23_INTEGER_ARRAY;
+static int* HANDLE_COMPOUND_MESSAGE_COUNT = NUMBER_16_INTEGER_ARRAY;
 
 /** The "Handle operation." message. */
 static char HANDLE_OPERATION_MESSAGE_ARRAY[] = {'H', 'a', 'n', 'd', 'l', 'e', ' ', 'o', 'p', 'e', 'r', 'a', 't', 'i', 'o', 'n', '.'};
 static char* HANDLE_OPERATION_MESSAGE = HANDLE_OPERATION_MESSAGE_ARRAY;
-static int* HANDLE_OPERATION_MESSAGE_COUNT = NUMBER_24_INTEGER_ARRAY;
+static int* HANDLE_OPERATION_MESSAGE_COUNT = NUMBER_17_INTEGER_ARRAY;
 
 /** The "Set shutdown flag." message. */
 static char SET_SHUTDOWN_FLAG_MESSAGE_ARRAY[] = {'S', 'e', 't', ' ', 's', 'h', 'u', 't', 'd', 'o', 'w', 'n', ' ', 'f', 'l', 'a', 'g', '.'};

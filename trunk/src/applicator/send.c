@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.20 $ $Date: 2005-08-11 11:36:11 $ $Author: christian $
+ * @version $Revision: 1.21 $ $Date: 2005-08-11 22:33:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -306,15 +306,15 @@ void refresh_url(void* p0, void* p1,
         p3, p4);
 
 /*??
-    if ((urla != NULL_POINTER)
-         && (urlac != NULL_POINTER)
-         && (urlas != NULL_POINTER)
-         && (urlm != NULL_POINTER)
-         && (urlmc != NULL_POINTER)
-         && (urlms != NULL_POINTER)
-         && (urld != NULL_POINTER)
-         && (urldc != NULL_POINTER)
-         && (urlds != NULL_POINTER)) {
+    if ((*urla != NULL_POINTER)
+         && (*urlac != NULL_POINTER)
+         && (*urlas != NULL_POINTER)
+         && (*urlm != NULL_POINTER)
+         && (*urlmc != NULL_POINTER)
+         && (*urlms != NULL_POINTER)
+         && (*urld != NULL_POINTER)
+         && (*urldc != NULL_POINTER)
+         && (*urlds != NULL_POINTER)) {
 
         // The socket number for the signal id.
         // The index for the signal id in the array is the same index

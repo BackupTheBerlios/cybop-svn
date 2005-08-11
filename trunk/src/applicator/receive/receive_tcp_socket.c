@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.17 $ $Date: 2005-08-11 11:36:11 $ $Author: christian $
+ * @version $Revision: 1.18 $ $Date: 2005-08-11 22:33:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -1213,13 +1213,13 @@ void run_tcp_socket(void* p0) {
  */
 void run_tcp_socket_server(void* p0) {
 
-    void** active_flag = &NULL_POINTER;
+    int** active_flag = (int**) &NULL_POINTER;
 
     get(p0, (void*) TCP_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &active_flag, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
     while (1) {
 
-        if (**((int**) active_flag) == *NUMBER_0_INTEGER) {
+        if (**active_flag == *NUMBER_0_INTEGER) {
 
             break;
         }
@@ -1277,23 +1277,23 @@ void receive_tcp_socket(void* p0, void* p1, void* p2, void* p3,
                 }
 
                 // Set the activation flag in the internal memory.
-                void** socket_flag = &NULL_POINTER;
+                int** socket_flag = (int**) &NULL_POINTER;
 
                 get(p0, (void*) TCP_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &socket_flag, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
                 if ((socket_flag != NULL_POINTER) && (*socket_flag != NULL_POINTER)) {
 
-                    **((int**) socket_flag) = 1;
+                    **socket_flag = 1;
                 }
 
                 //set the blocking flag in the internal memory.
-                void** blocking_flag = &NULL_POINTER;
+                int** blocking_flag = (int**) &NULL_POINTER;
 
                 get(p0, (void*) TCP_SERVER_SOCKET_BLOCKING_INTERNAL, (void*) &blocking_flag, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
                 if ((blocking_flag != NULL_POINTER) && (*blocking_flag != NULL_POINTER)) {
 
-                    **((int**) blocking_flag) = *((int*) blocking_model);
+                    **blocking_flag = *((int*) blocking_model);
                 }
             }
         }

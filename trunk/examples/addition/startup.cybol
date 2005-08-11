@@ -22,37 +22,37 @@
     http://www.cybop.net
     - Cybernetics Oriented Programming -
 
-    @version $Revision: 1.5 $ $Date: 2005-06-07 12:13:04 $ $Author: christian $
+    @version $Revision: 1.6 $ $Date: 2005-08-11 22:33:45 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->
 
 <model>
     <part name="create_domain" channel="inline" abstraction="operation" model="create_part">
-        <property name="name" channel="inline" abstraction="string" model="domain"/>
-        <property name="channel" channel="inline" abstraction="string" model="inline"/>
-        <property name="abstraction" channel="inline" abstraction="string" model="compound"/>
-        <property name="model" channel="inline" abstraction="string" model=""/>
+        <property name="name" channel="inline" abstraction="character" model="domain"/>
+        <property name="channel" channel="inline" abstraction="character" model="inline"/>
+        <property name="abstraction" channel="inline" abstraction="character" model="compound"/>
+        <property name="model" channel="inline" abstraction="character" model=""/>
     </part>
     <part name="create_summand_1" channel="inline" abstraction="operation" model="create_part">
         <property name="whole" channel="inline" abstraction="knowledge" model="domain"/>
-        <property name="name" channel="inline" abstraction="string" model="summand_1"/>
-        <property name="channel" channel="inline" abstraction="string" model="inline"/>
-        <property name="abstraction" channel="inline" abstraction="string" model="integer"/>
-        <property name="model" channel="inline" abstraction="string" model="6"/>
+        <property name="name" channel="inline" abstraction="character" model="summand_1"/>
+        <property name="channel" channel="inline" abstraction="character" model="inline"/>
+        <property name="abstraction" channel="inline" abstraction="character" model="integer"/>
+        <property name="model" channel="inline" abstraction="character" model="6"/>
     </part>
     <part name="create_summand_2" channel="inline" abstraction="operation" model="create_part">
         <property name="whole" channel="inline" abstraction="knowledge" model="domain"/>
-        <property name="name" channel="inline" abstraction="string" model="summand_2"/>
-        <property name="channel" channel="inline" abstraction="string" model="inline"/>
-        <property name="abstraction" channel="inline" abstraction="string" model="integer"/>
-        <property name="model" channel="inline" abstraction="string" model="4"/>
+        <property name="name" channel="inline" abstraction="character" model="summand_2"/>
+        <property name="channel" channel="inline" abstraction="character" model="inline"/>
+        <property name="abstraction" channel="inline" abstraction="character" model="integer"/>
+        <property name="model" channel="inline" abstraction="character" model="4"/>
     </part>
     <part name="create_sum" channel="inline" abstraction="operation" model="create_part">
         <property name="whole" channel="inline" abstraction="knowledge" model="domain"/>
-        <property name="name" channel="inline" abstraction="string" model="sum"/>
-        <property name="channel" channel="inline" abstraction="string" model="inline"/>
-        <property name="abstraction" channel="inline" abstraction="string" model="integer"/>
-        <property name="model" channel="inline" abstraction="string" model=""/>
+        <property name="name" channel="inline" abstraction="character" model="sum"/>
+        <property name="channel" channel="inline" abstraction="character" model="inline"/>
+        <property name="abstraction" channel="inline" abstraction="character" model="integer"/>
+        <property name="model" channel="inline" abstraction="character" model=""/>
     </part>
     <part name="add" channel="inline" abstraction="operation" model="add">
         <property name="summand_1" channel="inline" abstraction="knowledge" model="domain.summand_1"/>
@@ -60,8 +60,8 @@
         <property name="sum" channel="inline" abstraction="knowledge" model="domain.sum"/>
     </part>
     <part name="send_result" channel="inline" abstraction="operation" model="send">
-        <property name="language" channel="inline" abstraction="string" model="tui"/>
-        <property name="receiver" channel="inline" abstraction="string" model="user"/>
+        <property name="language" channel="inline" abstraction="character" model="tui"/>
+        <property name="receiver" channel="inline" abstraction="character" model="user"/>
         <property name="message" channel="inline" abstraction="knowledge" model="domain.sum"/>
     </part>
     <part name="destroy_domain" channel="inline" abstraction="operation" model="destroy_part">

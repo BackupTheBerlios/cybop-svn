@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.12 $ $Date: 2005-08-11 11:36:11 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2005-08-11 22:33:47 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -71,8 +71,8 @@ void add_client_socket_number(void* p0, void* p1) {
 
     // The client sockets.
     void** cs = &NULL_POINTER;
-    void** csc = &NULL_POINTER;
-    void** css = &NULL_POINTER;
+    int** csc = (int**) &NULL_POINTER;
+    int** css = (int**) &NULL_POINTER;
 
     // Get client sockets.
     get(p0, (void*) TCP_CLIENT_SOCKETS_INTERNAL, (void*) &cs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
@@ -80,9 +80,9 @@ void add_client_socket_number(void* p0, void* p1) {
     get(p0, (void*) TCP_CLIENT_SOCKETS_SIZE_INTERNAL, (void*) &css, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
     // Reallocate client sockets array.
-    if ( *((int*)*csc) >= *((int*)*css) ) {
+    if (**csc >= **css) {
 
-        (*((int*)*css))++;
+        (**css)++;
 
         reallocate_array((void*) cs, (void*) *css, (void*) *css, (void*) INTEGER_ARRAY);
 
@@ -92,7 +92,7 @@ void add_client_socket_number(void* p0, void* p1) {
     // Add socket number.
     set_array_elements(*cs, (void*) *csc, p1, (void*) NUMBER_1_INTEGER, (void*) INTEGER_ARRAY);
 
-    (*((int*)*csc))++;
+    (**csc)++;
 }
 
 /**
@@ -105,17 +105,17 @@ void add_signal_id(void* p0, void* p1) {
 
     // Get main signal id from internal memory.
     void** id = &NULL_POINTER;
-    void** idc = &NULL_POINTER;
-    void** ids = &NULL_POINTER;
+    int** idc = (int**) &NULL_POINTER;
+    int** ids = (int**) &NULL_POINTER;
 
     get(p0, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_INTERNAL, (void*) &id, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     get(p0, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_COUNT_INTERNAL, (void*) &idc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     get(p0, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_SIZE_INTERNAL, (void*) &ids, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
     // Reallocate the array for the client socket number as a requirement.
-    if ( **((int**)idc) >= **((int**)ids) ){
+    if (**idc >= **ids) {
 
-        (**((int**)ids))++;
+        (**ids)++;
 
         reallocate_array((void*) id, (void*) *ids, (void*) *ids, (void*) INTEGER_ARRAY);
 
@@ -125,7 +125,7 @@ void add_signal_id(void* p0, void* p1) {
     // Add the socket number.
     set_array_elements(*id, (void*) *idc, p1, (void*) NUMBER_1_INTEGER, (void*) INTEGER_ARRAY);
 
-    (*((int*)*idc))++;
+    (**idc)++;
 }
 
 /**
@@ -138,8 +138,8 @@ void remove_relation_clientsocketnumber_mainsignalid(void* p0, void* p1) {
 
     // The signal id.
     void** id = &NULL_POINTER;
-    void** idc = &NULL_POINTER;
-    void** ids = &NULL_POINTER;
+    int** idc = (int**) &NULL_POINTER;
+    int** ids = (int**) &NULL_POINTER;
 
     // Get signal id.
     get(p0, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_INTERNAL, (void*) &id, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
@@ -149,12 +149,12 @@ void remove_relation_clientsocketnumber_mainsignalid(void* p0, void* p1) {
     // Remove signal id.
     remove_array_elements(*id, *ids, p1, (void*) NUMBER_1_INTEGER, (void*) INTEGER_ARRAY);
 
-    (*((int*)*idc))--;
+    (**idc)--;
 
     // Get client socket.
     void** cs = &NULL_POINTER;
-    void** csc = &NULL_POINTER;
-    void** css = &NULL_POINTER;
+    int** csc = (int**) &NULL_POINTER;
+    int** css = (int**) &NULL_POINTER;
 
     get(p0, (void*) TCP_CLIENT_SOCKETS_INTERNAL, (void*) &cs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     get(p0, (void*) TCP_CLIENT_SOCKETS_COUNT_INTERNAL, (void*) &csc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
@@ -163,7 +163,7 @@ void remove_relation_clientsocketnumber_mainsignalid(void* p0, void* p1) {
     // Remove client socket.
     remove_array_elements(*cs, *css, p1, (void*) NUMBER_1_INTEGER, (void*) INTEGER_ARRAY);
 
-    (*((int*)*csc))--;
+    (**csc)--;
 }
 
 /**

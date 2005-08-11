@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.10 $ $Date: 2005-08-11 11:36:11 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2005-08-11 22:33:47 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -82,21 +82,21 @@ void set_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
             get_array_elements(p0, (void*) SIGNALS_PRIORITIES_INDEX, (void*) &p, (void*) POINTER_ARRAY);
             get_array_elements(p0, (void*) SIGNALS_IDENTIFICATIONS_INDEX, (void*) &id, (void*) POINTER_ARRAY);
 
-            if (a != NULL_POINTER) {
+            if (*a != NULL_POINTER) {
 
-                if (ac != NULL_POINTER) {
+                if (*ac != NULL_POINTER) {
 
-                    if (m != NULL_POINTER) {
+                    if (*m != NULL_POINTER) {
 
-                        if (mc != NULL_POINTER) {
+                        if (*mc != NULL_POINTER) {
 
-                            if (d != NULL_POINTER) {
+                            if (*d != NULL_POINTER) {
 
-                                if (dc != NULL_POINTER) {
+                                if (*dc != NULL_POINTER) {
 
-                                    if (p != NULL_POINTER) {
+                                    if (*p != NULL_POINTER) {
 
-                                        if (id != NULL_POINTER) {
+                                        if (*id != NULL_POINTER) {
 
                                             // The index.
                                             int i = *c;
@@ -253,21 +253,21 @@ void remove_signal(void* p0, void* p1, void* p2, void* p3) {
                 get_array_elements(p0, (void*) SIGNALS_PRIORITIES_INDEX, (void*) &p, (void*) POINTER_ARRAY);
                 get_array_elements(p0, (void*) SIGNALS_IDENTIFICATIONS_INDEX, (void*) &id, (void*) POINTER_ARRAY);
 
-                if (a != NULL_POINTER) {
+                if (*a != NULL_POINTER) {
 
-                    if (ac != NULL_POINTER) {
+                    if (*ac != NULL_POINTER) {
 
-                        if (m != NULL_POINTER) {
+                        if (*m != NULL_POINTER) {
 
-                            if (mc != NULL_POINTER) {
+                            if (*mc != NULL_POINTER) {
 
-                                if (d != NULL_POINTER) {
+                                if (*d != NULL_POINTER) {
 
-                                    if (dc != NULL_POINTER) {
+                                    if (*dc != NULL_POINTER) {
 
-                                        if (p != NULL_POINTER) {
+                                        if (*p != NULL_POINTER) {
 
-                                            if (id != NULL_POINTER) {
+                                            if (*id != NULL_POINTER) {
 
                                                 if (*i >= 0) {
 
@@ -400,21 +400,21 @@ void get_signal(void* p0, void* p1, void* p2, void* p3, void* p4,
             get_array_elements(p0, (void*) SIGNALS_PRIORITIES_INDEX, (void*) &p, (void*) POINTER_ARRAY);
             get_array_elements(p0, (void*) SIGNALS_IDENTIFICATIONS_INDEX, (void*) &id, (void*) POINTER_ARRAY);
 
-            if (a != NULL_POINTER) {
+            if (*a != NULL_POINTER) {
 
-                if (ac != NULL_POINTER) {
+                if (*ac != NULL_POINTER) {
 
-                    if (m != NULL_POINTER) {
+                    if (*m != NULL_POINTER) {
 
-                        if (mc != NULL_POINTER) {
+                        if (*mc != NULL_POINTER) {
 
-                            if (d != NULL_POINTER) {
+                            if (*d != NULL_POINTER) {
 
-                                if (dc != NULL_POINTER) {
+                                if (*dc != NULL_POINTER) {
 
-                                    if (p != NULL_POINTER) {
+                                    if (*p != NULL_POINTER) {
 
-                                        if (id != NULL_POINTER) {
+                                        if (*id != NULL_POINTER) {
 
                                             if (*i >= 0) {
 
@@ -514,12 +514,12 @@ void get_highest_priority_index(void* p0, void* p1, void* p2) {
             // Get signal priorities.
             get_array_elements(p0, (void*) SIGNALS_PRIORITIES_INDEX, (void*) &sp, (void*) POINTER_ARRAY);
 
-            if (sp != NULL_POINTER) {
+            if (*sp != NULL_POINTER) {
 
                 // The loop variable.
                 int j = 0;
                 // The priority.
-                int* prio = NULL_POINTER;
+                int** prio = (int**) &NULL_POINTER;
                 // The highest priority.
                 // CAUTION! Do not set it to zero, because then the priority
                 // will not be set, due to the comparison: if (prio > h)
@@ -536,9 +536,9 @@ void get_highest_priority_index(void* p0, void* p1, void* p2) {
                     // Get signal priority.
                     get_array_elements(*sp, (void*) &j, (void*) &prio, (void*) POINTER_ARRAY);
 
-                    if (*prio > h) {
+                    if (**prio > h) {
 
-                        h = *prio;
+                        h = **prio;
 
                         // If a signal with higher priority is found,
                         // then its index is the one to be returned.
@@ -546,7 +546,7 @@ void get_highest_priority_index(void* p0, void* p1, void* p2) {
                     }
 
                     // Reset priority.
-                    prio = NULL_POINTER;
+                    prio = (int**) &NULL_POINTER;
 
                     j++;
                 }
@@ -592,14 +592,14 @@ void get_new_signal_id(void* p0, void* p1, void* p2) {
             // Get signal identifications.
             get_array_elements(p0, (void*) SIGNALS_IDENTIFICATIONS_INDEX, (void*) &ids, (void*) POINTER_ARRAY);
 
-            if (ids != NULL_POINTER) {
+            if (*ids != NULL_POINTER) {
 
                 // The loop variable.
                 int j = 0;
                 // The maximum signal identification.
                 int max = -1;
                 // The identification.
-                void** id = &NULL_POINTER;
+                int** id = (int**) &NULL_POINTER;
 
                 while (1) {
 
@@ -611,13 +611,13 @@ void get_new_signal_id(void* p0, void* p1, void* p2) {
                     // Get signal identification.
                     get_array_elements(*ids, (void*) &j, (void*) &id, (void*) POINTER_ARRAY);
 
-                    if ( *((int*)*id) > max) {
+                    if (**id > max) {
 
-                        max = *((int*)*id);
+                        max = **id;
                     }
 
                     // Reset identification.
-                    id = NULL_POINTER;
+                    id = (int**) &NULL_POINTER;
 
                     j++;
                 }

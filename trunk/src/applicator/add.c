@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.10 $ $Date: 2005-08-11 11:36:11 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2005-08-11 22:33:45 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -249,41 +249,40 @@ void add(void* p0, void* p1, void* p2, void* p3, void* p4) {
         p2, p3 );
 
     // Check operand 1.
-    if (   (op1a != NULL_POINTER)
-        && (op1ac != NULL_POINTER)
-        && (op1as != NULL_POINTER)
-        && (op1m != NULL_POINTER)
-        && (op1mc != NULL_POINTER)
-        && (op1ms != NULL_POINTER)
-        && (op1d != NULL_POINTER)
-        && (op1dc != NULL_POINTER)
-        && (op1ds != NULL_POINTER)
+    if (   (*op1a != NULL_POINTER)
+        && (*op1ac != NULL_POINTER)
+        && (*op1as != NULL_POINTER)
+        && (*op1m != NULL_POINTER)
+        && (*op1mc != NULL_POINTER)
+        && (*op1ms != NULL_POINTER)
+        && (*op1d != NULL_POINTER)
+        && (*op1dc != NULL_POINTER)
+        && (*op1ds != NULL_POINTER)
         // Check operand 2.
-        && (op2a != NULL_POINTER)
-        && (op2ac != NULL_POINTER)
-        && (op2as != NULL_POINTER)
-        && (op2m != NULL_POINTER)
-        && (op2mc != NULL_POINTER)
-        && (op2ms != NULL_POINTER)
-        && (op2d != NULL_POINTER)
-        && (op2dc != NULL_POINTER)
-        && (op2ds != NULL_POINTER)
+        && (*op2a != NULL_POINTER)
+        && (*op2ac != NULL_POINTER)
+        && (*op2as != NULL_POINTER)
+        && (*op2m != NULL_POINTER)
+        && (*op2mc != NULL_POINTER)
+        && (*op2ms != NULL_POINTER)
+        && (*op2d != NULL_POINTER)
+        && (*op2dc != NULL_POINTER)
+        && (*op2ds != NULL_POINTER)
         // result.
-        && (ra != NULL_POINTER)
-        && (rac != NULL_POINTER)
-        && (ras != NULL_POINTER)
-        && (rm != NULL_POINTER)
-        && (rmc != NULL_POINTER)
-        && (rms != NULL_POINTER)
-        && (rd != NULL_POINTER)
-        && (rdc != NULL_POINTER)
-        && (rds != NULL_POINTER)
-        )
-    {
+        && (*ra != NULL_POINTER)
+        && (*rac != NULL_POINTER)
+        && (*ras != NULL_POINTER)
+        && (*rm != NULL_POINTER)
+        && (*rmc != NULL_POINTER)
+        && (*rms != NULL_POINTER)
+        && (*rd != NULL_POINTER)
+        && (*rdc != NULL_POINTER)
+        && (*rds != NULL_POINTER)) {
 
         int r1 = 0;
         int r2 = 0;
         int r3 = 0;
+
         //check the abstracton from operand_1 and operand_2
         //the abstrcation msut be the same
         compare_arrays( *op1a, *op1ac,
@@ -299,14 +298,15 @@ void add(void* p0, void* p1, void* p2, void* p3, void* p4) {
                         (void*) INTEGER_VECTOR_ABSTRACTION_COUNT,
                         (void*) &r3, (void*) CHARACTER_ARRAY);
 
-        if ( (r1==1) && (r2==1) && (r3==1) ) {
+        if ((r1 == 1) && (r2 == 1) && (r3 == 1)) {
 
-            add_integers( *rm, *op1m, *op2m );
+            add_integers(*rm, *op1m, *op2m);
         }
 
         r1 = 0;
         r2 = 0;
         r3 = 0;
+
         //check the abstracton from operand_1 and operand_2
         //the abstrcation msut be the same
         compare_arrays( *op1a, *op1ac,

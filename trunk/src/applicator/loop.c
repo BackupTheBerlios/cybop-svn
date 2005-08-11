@@ -22,7 +22,7 @@
  *
  * this handel a loop
  *
- * @version $Revision: 1.10 $ $Date: 2005-08-11 11:36:11 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2005-08-11 22:33:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -115,25 +115,25 @@ void loop(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
         p1, p2);
 
     // Check break flag.
-    if ((bfa != NULL_POINTER)
-        && (bfac != NULL_POINTER)
-        && (bfas != NULL_POINTER)
-        && (bfm != NULL_POINTER)
-        && (bfmc != NULL_POINTER)
-        && (bfms != NULL_POINTER)
-        && (bfd != NULL_POINTER)
-        && (bfdc != NULL_POINTER)
-        && (bfds != NULL_POINTER)
+    if ((*bfa != NULL_POINTER)
+        && (*bfac != NULL_POINTER)
+        && (*bfas != NULL_POINTER)
+        && (*bfm != NULL_POINTER)
+        && (*bfmc != NULL_POINTER)
+        && (*bfms != NULL_POINTER)
+        && (*bfd != NULL_POINTER)
+        && (*bfdc != NULL_POINTER)
+        && (*bfds != NULL_POINTER)
         // Check model.
-        && (ma != NULL_POINTER)
-        && (mac != NULL_POINTER)
-        && (mas != NULL_POINTER)
-        && (mm != NULL_POINTER)
-        && (mmc != NULL_POINTER)
-        && (mms != NULL_POINTER)
-        && (md != NULL_POINTER)
-        && (mdc != NULL_POINTER)
-        && (mds != NULL_POINTER)) {
+        && (*ma != NULL_POINTER)
+        && (*mac != NULL_POINTER)
+        && (*mas != NULL_POINTER)
+        && (*mm != NULL_POINTER)
+        && (*mmc != NULL_POINTER)
+        && (*mms != NULL_POINTER)
+        && (*md != NULL_POINTER)
+        && (*mdc != NULL_POINTER)
+        && (*mds != NULL_POINTER)) {
 
         // The comparison result.
         int r = 0;

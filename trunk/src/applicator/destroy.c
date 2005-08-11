@@ -22,7 +22,7 @@
  *
  * This file destroys a transient model to a persistent model.
  *
- * @version $Revision: 1.10 $ $Date: 2005-08-11 11:36:11 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2005-08-11 22:33:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -53,18 +53,12 @@ void check_compound_model(void* p0, void* p1, void* p2) {
 
         if (*p != 1) {
 
-            compare_arrays( p1, p2,
-                            (void*) COMPOUND_ABSTRACTION,
-                            (void*) COMPOUND_ABSTRACTION_COUNT,
-                            p0, (void*) CHARACTER_ARRAY);
+            compare_arrays(p1, p2, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT, p0, (void*) CHARACTER_ARRAY);
         }
 
         if (*p != 1) {
 
-            compare_arrays( p1, p2,
-                            (void*) CYBOL_ABSTRACTION,
-                            (void*) CYBOL_ABSTRACTION_COUNT,
-                            p0, (void*) CHARACTER_ARRAY);
+            compare_arrays(p1, p2, (void*) CYBOL_ABSTRACTION, (void*) CYBOL_ABSTRACTION_COUNT, p0, (void*) CHARACTER_ARRAY);
         }
     }
 }
@@ -78,13 +72,13 @@ void check_compound_model(void* p0, void* p1, void* p2) {
  * @param p3 the model abstraction
  * @param p4 the model abstraction count
  */
-void deallocate_primitive_model( void** model, void* model_count, void* model_size,
+void deallocate_primitive_model(void** model, void* model_count, void* model_size,
     void* model_abstr, void* model_abstr_count) {
 
     log_message_debug("Destroy primitive model.");
 
     // Destroy model of type given as abstraction.
-    deallocate( model, model_size, model_abstr, model_abstr_count );
+    deallocate(model, model_size, model_abstr, model_abstr_count);
 }
 
 /**
@@ -96,18 +90,16 @@ void deallocate_primitive_model( void** model, void* model_count, void* model_si
  * @param p3 the model abstraction
  * @param p4 the model abstraction count
  */
-void deallocate_compound_model( void** model, void* model_count, void* model_size,
+void deallocate_compound_model(void** model, void* model_count, void* model_size,
     void* model_abstr, void* model_abstr_count) {
 
     //das gesamte Compound durchgehen und f?r jedes Element im Compound wieder
     //destroy model aufrufen
-
-    if (    (model != NULL_POINTER)
-         && (model_count != NULL_POINTER)
-         && (model_size != NULL_POINTER)
-         && (model_abstr != NULL_POINTER)
-         && (model_abstr_count != NULL_POINTER) )
-    {
+    if ((model != NULL_POINTER)
+        && (model_count != NULL_POINTER)
+        && (model_size != NULL_POINTER)
+        && (model_abstr != NULL_POINTER)
+        && (model_abstr_count != NULL_POINTER)) {
 
         int compound_counter = 0;
 
@@ -128,10 +120,9 @@ void deallocate_compound_model( void** model, void* model_count, void* model_siz
         void** edc = &NULL_POINTER;
         void** eds = &NULL_POINTER;
 
-
         while (1) {
 
-            if ( compound_counter  >= *((int*)model_count) ) {
+            if (compound_counter >= *((int*) model_count)) {
 
                 break;
             }
@@ -151,7 +142,6 @@ void deallocate_compound_model( void** model, void* model_count, void* model_siz
             destroy( em, *emc, *ems, *ea, *eac);
 
             compound_counter = compound_counter + 1;
-
         }
     }
 }
@@ -181,7 +171,7 @@ void deallocate_compound_model( void** model, void* model_count, void* model_siz
 void destroy(void** model, void* model_count, void* model_size,
     void* model_abstr, void* model_abstr_count) {
 
-    //?The comparison result.
+    // The comparison result.
     int r = 0;
 
     // Check for compound (later better for primitive!!) model.
@@ -237,28 +227,24 @@ void deallocate_part(void* p0, void* p1, void* p2, void* p3, void* p4) {
         (void*) &nd, (void*) &ndc, (void*) &nds,
         p2, p3);
 
-
     // Check name name.
-    if ((na != NULL_POINTER)
-        && (nac != NULL_POINTER)
-        && (nas != NULL_POINTER)
-        && (nm != NULL_POINTER)
-        && (nmc != NULL_POINTER)
-        && (nms != NULL_POINTER)
-        && (nd != NULL_POINTER)
-        && (ndc != NULL_POINTER)
-        && (nds != NULL_POINTER)
-        )
-    {
+    if ((*na != NULL_POINTER)
+        && (*nac != NULL_POINTER)
+        && (*nas != NULL_POINTER)
+        && (*nm != NULL_POINTER)
+        && (*nmc != NULL_POINTER)
+        && (*nms != NULL_POINTER)
+        && (*nd != NULL_POINTER)
+        && (*ndc != NULL_POINTER)
+        && (*nds != NULL_POINTER)) {
 
-        //check the abstraction from the name
-        //is must be a string
+        // The comparison result.
         int r = 0;
-        compare_arrays( *na, *nac,
-                        CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT,
-                        &r, CHARACTER_ARRAY );
 
-        if ( r==1 ) {
+        // Check if the name abstraction is a string.
+        compare_arrays(*na, *nac, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT, &r, CHARACTER_ARRAY);
+
+        if (r != 0) {
 
             // The element abstraction.
             void** ea = &NULL_POINTER;
@@ -280,31 +266,27 @@ void deallocate_part(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 (void*) &ed, (void*) &edc, (void*) &eds,
                 p2, p3);
 
-            if (    (em != NULL_POINTER)
-                 && (emc != NULL_POINTER)
-                 && (ems != NULL_POINTER)
-                 && (ea != NULL_POINTER)
-                 && (eac != NULL_POINTER)
-                 && (eas != NULL_POINTER) )
-            {
+            if ((*em != NULL_POINTER)
+                && (*emc != NULL_POINTER)
+                && (*ems != NULL_POINTER)
+                && (*ea != NULL_POINTER)
+                && (*eac != NULL_POINTER)
+                && (*eas != NULL_POINTER)) {
 
-                //destroy model
-                destroy( em, *emc, *ems , *ea, *eac );
+                // Destroy model.
+                destroy(em, *emc, *ems , *ea, *eac);
             }
 
             //remove the part
             //this must after the destroy the model, because
             //some wrong pointer
-            remove_compound_element_by_name(p2, p3, p4,
-                (void*) *nm, (void*) *nmc );
-
+            remove_compound_element_by_name(p2, p3, p4, (void*) *nm, (void*) *nmc);
         }
 
     } else {
 
         log_message_debug("Could not destry the part. At least one of the given parameters is null.");
     }
-
 }
 
 /* DESTROY_SOURCE */

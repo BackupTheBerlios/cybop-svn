@@ -22,7 +22,7 @@
  *
  * this handel a loop
  *
- * @version $Revision: 1.8 $ $Date: 2005-08-11 11:36:11 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2005-08-11 22:33:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -138,25 +138,25 @@ void copy(void* param, int* param_count, void* p2, void* p3, void* p4, void* pri
         p2, p3);
 
     // Check source.
-    if ((sa != NULL_POINTER)
-        && (sac != NULL_POINTER)
-        && (sas != NULL_POINTER)
-        && (sm != NULL_POINTER)
-        && (smc != NULL_POINTER)
-        && (sms != NULL_POINTER)
-        && (sd != NULL_POINTER)
-        && (sdc != NULL_POINTER)
-        && (sds != NULL_POINTER)
+    if ((*sa != NULL_POINTER)
+        && (*sac != NULL_POINTER)
+        && (*sas != NULL_POINTER)
+        && (*sm != NULL_POINTER)
+        && (*smc != NULL_POINTER)
+        && (*sms != NULL_POINTER)
+        && (*sd != NULL_POINTER)
+        && (*sdc != NULL_POINTER)
+        && (*sds != NULL_POINTER)
         // Check destination.
-        && (da != NULL_POINTER)
-        && (dac != NULL_POINTER)
-        && (das != NULL_POINTER)
-        && (dm != NULL_POINTER)
-        && (dmc != NULL_POINTER)
-        && (dms != NULL_POINTER)
-        && (dd != NULL_POINTER)
-        && (ddc != NULL_POINTER)
-        && (dds != NULL_POINTER)) {
+        && (*da != NULL_POINTER)
+        && (*dac != NULL_POINTER)
+        && (*das != NULL_POINTER)
+        && (*dm != NULL_POINTER)
+        && (*dmc != NULL_POINTER)
+        && (*dms != NULL_POINTER)
+        && (*dd != NULL_POINTER)
+        && (*ddc != NULL_POINTER)
+        && (*dds != NULL_POINTER)) {
 
         int r1 = 0;
         int r2 = 0;
@@ -282,35 +282,35 @@ void copy_property(void* param, int* param_count, void* p2, void* p3, void* p4, 
         p2, p3);
 
     // Check source.
-    if ((sa != NULL_POINTER)
-        && (sac != NULL_POINTER)
-        && (sas != NULL_POINTER)
-        && (sm != NULL_POINTER)
-        && (smc != NULL_POINTER)
-        && (sms != NULL_POINTER)
-        && (sd != NULL_POINTER)
-        && (sdc != NULL_POINTER)
-        && (sds != NULL_POINTER)
+    if ((*sa != NULL_POINTER)
+        && (*sac != NULL_POINTER)
+        && (*sas != NULL_POINTER)
+        && (*sm != NULL_POINTER)
+        && (*smc != NULL_POINTER)
+        && (*sms != NULL_POINTER)
+        && (*sd != NULL_POINTER)
+        && (*sdc != NULL_POINTER)
+        && (*sds != NULL_POINTER)
         // Check destination.
-        && (da != NULL_POINTER)
-        && (dac != NULL_POINTER)
-        && (das != NULL_POINTER)
-        && (dm != NULL_POINTER)
-        && (dmc != NULL_POINTER)
-        && (dms != NULL_POINTER)
-        && (dd != NULL_POINTER)
-        && (ddc != NULL_POINTER)
-        && (dds != NULL_POINTER)
+        && (*da != NULL_POINTER)
+        && (*dac != NULL_POINTER)
+        && (*das != NULL_POINTER)
+        && (*dm != NULL_POINTER)
+        && (*dmc != NULL_POINTER)
+        && (*dms != NULL_POINTER)
+        && (*dd != NULL_POINTER)
+        && (*ddc != NULL_POINTER)
+        && (*dds != NULL_POINTER)
         //check destination property
-        && (dpa != NULL_POINTER)
-        && (dpac != NULL_POINTER)
-        && (dpas != NULL_POINTER)
-        && (dpm != NULL_POINTER)
-        && (dpmc != NULL_POINTER)
-        && (dpms != NULL_POINTER)
-        && (dpd != NULL_POINTER)
-        && (dpdc != NULL_POINTER)
-        && (dpds != NULL_POINTER)) {
+        && (*dpa != NULL_POINTER)
+        && (*dpac != NULL_POINTER)
+        && (*dpas != NULL_POINTER)
+        && (*dpm != NULL_POINTER)
+        && (*dpmc != NULL_POINTER)
+        && (*dpms != NULL_POINTER)
+        && (*dpd != NULL_POINTER)
+        && (*dpdc != NULL_POINTER)
+        && (*dpds != NULL_POINTER)) {
 
         //check the abstraction for the destination property
         //this must be a string
@@ -327,15 +327,15 @@ void copy_property(void* param, int* param_count, void* p2, void* p3, void* p4, 
                 (void*) &pm, (void*) &pmc, (void*) &pms,
                 (void*) &pd, (void*) &pdc, (void*) &pds);
 
-            if ((pa != NULL_POINTER)
-                && (pac != NULL_POINTER)
-                && (pas != NULL_POINTER)
-                && (pm != NULL_POINTER)
-                && (pmc != NULL_POINTER)
-                && (pms != NULL_POINTER)
-                && (pd != NULL_POINTER)
-                && (pdc != NULL_POINTER)
-                && (pds != NULL_POINTER)) {
+            if ((*pa != NULL_POINTER)
+                && (*pac != NULL_POINTER)
+                && (*pas != NULL_POINTER)
+                && (*pm != NULL_POINTER)
+                && (*pmc != NULL_POINTER)
+                && (*pms != NULL_POINTER)
+                && (*pd != NULL_POINTER)
+                && (*pdc != NULL_POINTER)
+                && (*pds != NULL_POINTER)) {
 
                 int r1 = 0;
                 int r2 = 0;

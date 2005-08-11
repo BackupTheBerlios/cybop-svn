@@ -24,7 +24,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.14 $ $Date: 2005-08-11 11:36:11 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2005-08-11 22:33:47 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -622,7 +622,7 @@ void test_knowledge_model(void* p0, void* p1, int level) {
 
     } else {
 
-        fputs("ERROR: Could not test knowledge model. The knowledge model is null.", stdout);
+        fputs("ERROR: Could not test knowledge model. The knowledge model is null.\n", stdout);
     }
 }
 

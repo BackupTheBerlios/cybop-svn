@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.10 $ $Date: 2005-07-29 16:46:18 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2005-08-11 22:33:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -42,14 +42,13 @@
 #include "../../applicator/send.c"
 #include "../../applicator/shutdown.c"
 #include "../../applicator/startup.c"
-//?? #include "../../globals/constants/model_constants.c"
-//?? #include "../../globals/logger/logger.c"
-//?? #include "../../memoriser/array.c"
-/*??
 #include "../../globals/constants/abstraction_constants.c"
-#include "../../globals/constants/integer_constants.c"
-#include "../../globals/constants/structure_constants.c"
-*/
+#include "../../globals/constants/log_constants.c"
+#include "../../globals/constants/model_constants.c"
+#include "../../globals/logger/logger.c"
+#include "../../memoriser/array.c"
+//?? TEST only
+#include "../../tester/tester.c"
 
 /**
  * Handles the operation signal.
@@ -76,8 +75,12 @@ void handle_operation(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
     log_message_debug("\n\n");
     log_message((void*) INFO_LOG_LEVEL, (void*) HANDLE_OPERATION_MESSAGE, (void*) HANDLE_OPERATION_MESSAGE_COUNT);
 
-    fprintf(stderr, "Test: Operation: %s\n", (char*) p8);
-    fprintf(stderr, "Test: Operation count: %i\n", *((int*) p9));
+    fprintf(stderr, "TEST: Operation: %s\n", (char*) p8);
+    fprintf(stderr, "TEST: Operation count: %i\n", *((int*) p9));
+
+    //?? TEST
+    fprintf(stderr, "TEST handler p1: %i\n", p1);
+    test_knowledge_model(p1, p2, 3);
 
     // The comparison result.
     int r = 0;

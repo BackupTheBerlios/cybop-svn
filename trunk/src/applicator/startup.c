@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.10 $ $Date: 2005-08-11 11:36:11 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2005-08-11 22:33:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description This module starts up a service.
  */
@@ -49,10 +49,10 @@
  *
  * @param p0 the parameters
  * @param p1 the parameters count
- * @param p2 the knowledge
- * @param p3 the knowledge count
- * @param p4 the knowledge size
- * @param p5 the internals
+ * @param p2 the knowledge memory
+ * @param p3 the knowledge memory count
+ * @param p4 the knowledge memory size
+ * @param p5 the internal memory
  */
 void startup_service(void* p0, void* p1,
     void* p2, void* p3, void* p4, void* p5) {
@@ -130,10 +130,10 @@ void startup_service(void* p0, void* p1,
 
         if (r != 0) {
 
-            if ((spa != NULL_POINTER)
-                && (spac != NULL_POINTER)
-                && (spm != NULL_POINTER)
-                && (spmc != NULL_POINTER)) {
+            if ((*spa != NULL_POINTER)
+                && (*spac != NULL_POINTER)
+                && (*spm != NULL_POINTER)
+                && (*spmc != NULL_POINTER)) {
 
                 startup_tcp_socket(p5, p2, p3, p4, *spa, *spac, *spm, *spmc);
 

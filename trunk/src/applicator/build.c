@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2005-08-11 11:36:11 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2005-08-11 22:33:45 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -117,35 +117,35 @@ void build_listname(void* p0, void* p1, void* p2, void* p3, void* p4) {
         p2, p3);
 
     // Check basisname.
-    if ((bna != NULL_POINTER)
-        && (bnac != NULL_POINTER)
-        && (bnas != NULL_POINTER)
-        && (bnm != NULL_POINTER)
-        && (bnmc != NULL_POINTER)
-        && (bnms != NULL_POINTER)
-        && (bnd != NULL_POINTER)
-        && (bndc != NULL_POINTER)
-        && (bnds != NULL_POINTER)
+    if ((*bna != NULL_POINTER)
+        && (*bnac != NULL_POINTER)
+        && (*bnas != NULL_POINTER)
+        && (*bnm != NULL_POINTER)
+        && (*bnmc != NULL_POINTER)
+        && (*bnms != NULL_POINTER)
+        && (*bnd != NULL_POINTER)
+        && (*bndc != NULL_POINTER)
+        && (*bnds != NULL_POINTER)
         // Check index.
-        && (idxa != NULL_POINTER)
-        && (idxac != NULL_POINTER)
-        && (idxas != NULL_POINTER)
-        && (idxm != NULL_POINTER)
-        && (idxmc != NULL_POINTER)
-        && (idxms != NULL_POINTER)
-        && (idxd != NULL_POINTER)
-        && (idxdc != NULL_POINTER)
-        && (idxds != NULL_POINTER)
+        && (*idxa != NULL_POINTER)
+        && (*idxac != NULL_POINTER)
+        && (*idxas != NULL_POINTER)
+        && (*idxm != NULL_POINTER)
+        && (*idxmc != NULL_POINTER)
+        && (*idxms != NULL_POINTER)
+        && (*idxd != NULL_POINTER)
+        && (*idxdc != NULL_POINTER)
+        && (*idxds != NULL_POINTER)
         // Check result.
-        && (resa != NULL_POINTER)
-        && (resac != NULL_POINTER)
-        && (resas != NULL_POINTER)
-        && (resm != NULL_POINTER)
-        && (resmc != NULL_POINTER)
-        && (resms != NULL_POINTER)
-        && (resd != NULL_POINTER)
-        && (resdc != NULL_POINTER)
-        && (resds != NULL_POINTER)) {
+        && (*resa != NULL_POINTER)
+        && (*resac != NULL_POINTER)
+        && (*resas != NULL_POINTER)
+        && (*resm != NULL_POINTER)
+        && (*resmc != NULL_POINTER)
+        && (*resms != NULL_POINTER)
+        && (*resd != NULL_POINTER)
+        && (*resdc != NULL_POINTER)
+        && (*resds != NULL_POINTER)) {
 
         //check the abstraction for the operation element
         int comp_res1 = 0;

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2005-08-11 11:36:11 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2005-08-11 22:33:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -167,10 +167,10 @@ void receive_message(void* p0, void* p1,
 
         if (r != 0) {
 
-            if ((ba != NULL_POINTER)
-                && (bac != NULL_POINTER)
-                && (bm != NULL_POINTER)
-                && (bmc != NULL_POINTER)) {
+            if ((*ba != NULL_POINTER)
+                && (*bac != NULL_POINTER)
+                && (*bm != NULL_POINTER)
+                && (*bmc != NULL_POINTER)) {
 
                 receive_tcp_socket(p2, p3, p4, p5, *ba, *bac, *bm, *bmc);
             }
