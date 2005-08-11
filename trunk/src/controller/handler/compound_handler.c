@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2005-07-29 15:48:51 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2005-08-11 11:36:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -78,12 +78,12 @@ void handle_compound(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
         log_message((void*) INFO_LOG_LEVEL, (void*) HANDLE_COMPOUND_MESSAGE, (void*) HANDLE_COMPOUND_MESSAGE_COUNT);
 
         // The abstractions, models, details.
-        void** pa = NULL_POINTER;
-        void** pac = NULL_POINTER;
-        void** pm = NULL_POINTER;
-        void** pmc = NULL_POINTER;
-        void** pd = NULL_POINTER;
-        void** pdc = NULL_POINTER;
+        void** pa = &NULL_POINTER;
+        void** pac = &NULL_POINTER;
+        void** pm = &NULL_POINTER;
+        void** pmc = &NULL_POINTER;
+        void** pd = &NULL_POINTER;
+        void** pdc = &NULL_POINTER;
 
         // Get abstractions, models, details.
         get_array_elements(p8, (void*) ABSTRACTIONS_INDEX, (void*) &pa, (void*) POINTER_ARRAY);
@@ -106,12 +106,12 @@ void handle_compound(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
                             if (pdc != NULL_POINTER) {
 
                                 // The abstraction, model, details.
-                                void** a = NULL_POINTER;
-                                void** ac = NULL_POINTER;
-                                void** m = NULL_POINTER;
-                                void** mc = NULL_POINTER;
-                                void** d = NULL_POINTER;
-                                void** dc = NULL_POINTER;
+                                void** a = &NULL_POINTER;
+                                void** ac = &NULL_POINTER;
+                                void** m = &NULL_POINTER;
+                                void** mc = &NULL_POINTER;
+                                void** d = &NULL_POINTER;
+                                void** dc = &NULL_POINTER;
 
                                 // The loop variable.
                                 int j = 0;

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2005-08-09 13:04:27 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2005-08-11 11:36:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -68,17 +68,17 @@ void encode_html_compound(void** dest, int* dest_count, int* dest_size,
     void* know, int* know_count) {
 
     // The compound abstraction.
-    void** comp_abstr = NULL_POINTER;
-    void** comp_abstr_count = NULL_POINTER;
-    void** comp_abstr_size = NULL_POINTER;
+    void** comp_abstr = &NULL_POINTER;
+    void** comp_abstr_count = &NULL_POINTER;
+    void** comp_abstr_size = &NULL_POINTER;
     // The compound model.
-    void** comp_model = NULL_POINTER;
-    void** comp_model_count = NULL_POINTER;
-    void** comp_model_size = NULL_POINTER;
+    void** comp_model = &NULL_POINTER;
+    void** comp_model_count = &NULL_POINTER;
+    void** comp_model_size = &NULL_POINTER;
     // The compound details.
-    void** comp_detail = NULL_POINTER;
-    void** comp_detail_count = NULL_POINTER;
-    void** comp_detail_size = NULL_POINTER;
+    void** comp_detail = &NULL_POINTER;
+    void** comp_detail_count = &NULL_POINTER;
+    void** comp_detail_size = &NULL_POINTER;
 
 
     int comp_index = 0;
@@ -128,17 +128,17 @@ void encode_html_knowledgememory(void** dest, int* dest_count, int* dest_size,
         && (source_model_count != NULL_POINTER)) {
 
         // The compound abstraction.
-        void** comp_abstr = NULL_POINTER;
-        void** comp_abstr_count = NULL_POINTER;
-        void** comp_abstr_size = NULL_POINTER;
+        void** comp_abstr = &NULL_POINTER;
+        void** comp_abstr_count = &NULL_POINTER;
+        void** comp_abstr_size = &NULL_POINTER;
         // The compound model.
-        void** comp_model = NULL_POINTER;
-        void** comp_model_count = NULL_POINTER;
-        void** comp_model_size = NULL_POINTER;
+        void** comp_model = &NULL_POINTER;
+        void** comp_model_count = &NULL_POINTER;
+        void** comp_model_size = &NULL_POINTER;
         // The compound details.
-        void** comp_detail = NULL_POINTER;
-        void** comp_detail_count = NULL_POINTER;
-        void** comp_detail_size = NULL_POINTER;
+        void** comp_detail = &NULL_POINTER;
+        void** comp_detail_count = &NULL_POINTER;
+        void** comp_detail_size = &NULL_POINTER;
 
         get_compound_element_by_name(
             know, know_count,
@@ -254,30 +254,30 @@ void encode_html(void** dest, int* dest_count, int *dest_size,
         && (dest_size != NULL_POINTER)) {
 
         // The html tag abstraction.
-        void** tag_abstr = NULL_POINTER;
-        void** tag_abstr_count = NULL_POINTER;
-        void** tag_abstr_size = NULL_POINTER;
+        void** tag_abstr = &NULL_POINTER;
+        void** tag_abstr_count = &NULL_POINTER;
+        void** tag_abstr_size = &NULL_POINTER;
         // The html tag model.
-        void** tag_model = NULL_POINTER;
-        void** tag_model_count = NULL_POINTER;
-        void** tag_model_size = NULL_POINTER;
+        void** tag_model = &NULL_POINTER;
+        void** tag_model_count = &NULL_POINTER;
+        void** tag_model_size = &NULL_POINTER;
         // The html tag details.
-        void** tag_detail = NULL_POINTER;
-        void** tag_detail_count = NULL_POINTER;
-        void** tag_detail_size = NULL_POINTER;
+        void** tag_detail = &NULL_POINTER;
+        void** tag_detail_count = &NULL_POINTER;
+        void** tag_detail_size = &NULL_POINTER;
 
         // The html tag abstraction.
-        void** tag_prop_abstr = NULL_POINTER;
-        void** tag_prop_abstr_count = NULL_POINTER;
-        void** tag_prop_abstr_size = NULL_POINTER;
+        void** tag_prop_abstr = &NULL_POINTER;
+        void** tag_prop_abstr_count = &NULL_POINTER;
+        void** tag_prop_abstr_size = &NULL_POINTER;
         // The html tag_prop model.
-        void** tag_prop_model = NULL_POINTER;
-        void** tag_prop_model_count = NULL_POINTER;
-        void** tag_prop_model_size = NULL_POINTER;
+        void** tag_prop_model = &NULL_POINTER;
+        void** tag_prop_model_count = &NULL_POINTER;
+        void** tag_prop_model_size = &NULL_POINTER;
         // The html tag_prop details.
-        void** tag_prop_detail = NULL_POINTER;
-        void** tag_prop_detail_count = NULL_POINTER;
-        void** tag_prop_detail_size = NULL_POINTER;
+        void** tag_prop_detail = &NULL_POINTER;
+        void** tag_prop_detail_count = &NULL_POINTER;
+        void** tag_prop_detail_size = &NULL_POINTER;
 
         //in the source detail look for html_tag
         if ( (source_detail != NULL_POINTER) &&

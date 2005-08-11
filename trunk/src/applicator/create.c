@@ -22,7 +22,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.13 $ $Date: 2005-08-09 13:04:25 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2005-08-11 11:36:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -381,69 +381,69 @@ void create_part(void* p0, void* p1, void* p2, void* p3, void* p4) {
     log_message_debug("Create part.");
 
     // The name name abstraction.
-    void** na = NULL_POINTER;
-    void** nac = NULL_POINTER;
-    void** nas = NULL_POINTER;
+    void** na = &NULL_POINTER;
+    void** nac = &NULL_POINTER;
+    void** nas = &NULL_POINTER;
     // The name name model.
-    void** nm = NULL_POINTER;
-    void** nmc = NULL_POINTER;
-    void** nms = NULL_POINTER;
+    void** nm = &NULL_POINTER;
+    void** nmc = &NULL_POINTER;
+    void** nms = &NULL_POINTER;
     // The name name details.
-    void** nd = NULL_POINTER;
-    void** ndc = NULL_POINTER;
-    void** nds = NULL_POINTER;
+    void** nd = &NULL_POINTER;
+    void** ndc = &NULL_POINTER;
+    void** nds = &NULL_POINTER;
 
     // The channel name abstraction.
-    void** ca = NULL_POINTER;
-    void** cac = NULL_POINTER;
-    void** cas = NULL_POINTER;
+    void** ca = &NULL_POINTER;
+    void** cac = &NULL_POINTER;
+    void** cas = &NULL_POINTER;
     // The channel name model.
-    void** cm = NULL_POINTER;
-    void** cmc = NULL_POINTER;
-    void** cms = NULL_POINTER;
+    void** cm = &NULL_POINTER;
+    void** cmc = &NULL_POINTER;
+    void** cms = &NULL_POINTER;
     // The channel name details.
-    void** cd = NULL_POINTER;
-    void** cdc = NULL_POINTER;
-    void** cds = NULL_POINTER;
+    void** cd = &NULL_POINTER;
+    void** cdc = &NULL_POINTER;
+    void** cds = &NULL_POINTER;
 
     // The abstraction name abstraction.
-    void** aa = NULL_POINTER;
-    void** aac = NULL_POINTER;
-    void** aas = NULL_POINTER;
+    void** aa = &NULL_POINTER;
+    void** aac = &NULL_POINTER;
+    void** aas = &NULL_POINTER;
     // The abstraction name model.
-    void** am = NULL_POINTER;
-    void** amc = NULL_POINTER;
-    void** ams = NULL_POINTER;
+    void** am = &NULL_POINTER;
+    void** amc = &NULL_POINTER;
+    void** ams = &NULL_POINTER;
     // The abstraction name details.
-    void** ad = NULL_POINTER;
-    void** adc = NULL_POINTER;
-    void** ads = NULL_POINTER;
+    void** ad = &NULL_POINTER;
+    void** adc = &NULL_POINTER;
+    void** ads = &NULL_POINTER;
 
     // The model name abstraction.
-    void** ma = NULL_POINTER;
-    void** mac = NULL_POINTER;
-    void** mas = NULL_POINTER;
+    void** ma = &NULL_POINTER;
+    void** mac = &NULL_POINTER;
+    void** mas = &NULL_POINTER;
     // The model name model.
-    void** mm = NULL_POINTER;
-    void** mmc = NULL_POINTER;
-    void** mms = NULL_POINTER;
+    void** mm = &NULL_POINTER;
+    void** mmc = &NULL_POINTER;
+    void** mms = &NULL_POINTER;
     // The model name details.
-    void** md = NULL_POINTER;
-    void** mdc = NULL_POINTER;
-    void** mds = NULL_POINTER;
+    void** md = &NULL_POINTER;
+    void** mdc = &NULL_POINTER;
+    void** mds = &NULL_POINTER;
 
     // The whole abstraction.
-    void** wa = NULL_POINTER;
-    void** wac = NULL_POINTER;
-    void** was = NULL_POINTER;
+    void** wa = &NULL_POINTER;
+    void** wac = &NULL_POINTER;
+    void** was = &NULL_POINTER;
     // The whole model.
-    void** wm = NULL_POINTER;
-    void** wmc = NULL_POINTER;
-    void** wms = NULL_POINTER;
+    void** wm = &NULL_POINTER;
+    void** wmc = &NULL_POINTER;
+    void** wms = &NULL_POINTER;
     // The whole details.
-    void** wd = NULL_POINTER;
-    void** wdc = NULL_POINTER;
-    void** wds = NULL_POINTER;
+    void** wd = &NULL_POINTER;
+    void** wdc = &NULL_POINTER;
+    void** wds = &NULL_POINTER;
 
     // Get name name.
     get_real_compound_element_by_name(p0, p1,

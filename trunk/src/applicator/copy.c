@@ -22,7 +22,7 @@
  *
  * this handel a loop
  *
- * @version $Revision: 1.7 $ $Date: 2005-08-09 13:04:25 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2005-08-11 11:36:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -94,30 +94,30 @@ void copy(void* param, int* param_count, void* p2, void* p3, void* p4, void* pri
     log_message_debug("Copy primitive model.");
 
     // The source name abstraction.
-    void** sa = NULL_POINTER;
-    void** sac = NULL_POINTER;
-    void** sas = NULL_POINTER;
+    void** sa = &NULL_POINTER;
+    void** sac = &NULL_POINTER;
+    void** sas = &NULL_POINTER;
     // The source model.
-    void** sm = NULL_POINTER;
-    void** smc = NULL_POINTER;
-    void** sms = NULL_POINTER;
+    void** sm = &NULL_POINTER;
+    void** smc = &NULL_POINTER;
+    void** sms = &NULL_POINTER;
     // The source details.
-    void** sd = NULL_POINTER;
-    void** sdc = NULL_POINTER;
-    void** sds = NULL_POINTER;
+    void** sd = &NULL_POINTER;
+    void** sdc = &NULL_POINTER;
+    void** sds = &NULL_POINTER;
 
     // The destination abstraction.
-    void** da = NULL_POINTER;
-    void** dac = NULL_POINTER;
-    void** das = NULL_POINTER;
+    void** da = &NULL_POINTER;
+    void** dac = &NULL_POINTER;
+    void** das = &NULL_POINTER;
     // The destination model.
-    void** dm = NULL_POINTER;
-    void** dmc = NULL_POINTER;
-    void** dms = NULL_POINTER;
+    void** dm = &NULL_POINTER;
+    void** dmc = &NULL_POINTER;
+    void** dms = &NULL_POINTER;
     // The destination details.
-    void** dd = NULL_POINTER;
-    void** ddc = NULL_POINTER;
-    void** dds = NULL_POINTER;
+    void** dd = &NULL_POINTER;
+    void** ddc = &NULL_POINTER;
+    void** dds = &NULL_POINTER;
 
     // Get source.
     get_real_compound_element_by_name(param, param_count,
@@ -203,56 +203,56 @@ void copy_property(void* param, int* param_count, void* p2, void* p3, void* p4, 
     log_message_debug("Copy property.");
 
     // The source name abstraction.
-    void** sa = NULL_POINTER;
-    void** sac = NULL_POINTER;
-    void** sas = NULL_POINTER;
+    void** sa = &NULL_POINTER;
+    void** sac = &NULL_POINTER;
+    void** sas = &NULL_POINTER;
     // The source model.
-    void** sm = NULL_POINTER;
-    void** smc = NULL_POINTER;
-    void** sms = NULL_POINTER;
+    void** sm = &NULL_POINTER;
+    void** smc = &NULL_POINTER;
+    void** sms = &NULL_POINTER;
     // The source details.
-    void** sd = NULL_POINTER;
-    void** sdc = NULL_POINTER;
-    void** sds = NULL_POINTER;
+    void** sd = &NULL_POINTER;
+    void** sdc = &NULL_POINTER;
+    void** sds = &NULL_POINTER;
 
     // The destination abstraction.
-    void** da = NULL_POINTER;
-    void** dac = NULL_POINTER;
-    void** das = NULL_POINTER;
+    void** da = &NULL_POINTER;
+    void** dac = &NULL_POINTER;
+    void** das = &NULL_POINTER;
     // The destination model.
-    void** dm = NULL_POINTER;
-    void** dmc = NULL_POINTER;
-    void** dms = NULL_POINTER;
+    void** dm = &NULL_POINTER;
+    void** dmc = &NULL_POINTER;
+    void** dms = &NULL_POINTER;
     // The destination details.
-    void** dd = NULL_POINTER;
-    void** ddc = NULL_POINTER;
-    void** dds = NULL_POINTER;
+    void** dd = &NULL_POINTER;
+    void** ddc = &NULL_POINTER;
+    void** dds = &NULL_POINTER;
 
     // The destination property name abstraction.
-    void** dpa = NULL_POINTER;
-    void** dpac = NULL_POINTER;
-    void** dpas = NULL_POINTER;
+    void** dpa = &NULL_POINTER;
+    void** dpac = &NULL_POINTER;
+    void** dpas = &NULL_POINTER;
     // The destination property model.
-    void** dpm = NULL_POINTER;
-    void** dpmc = NULL_POINTER;
-    void** dpms = NULL_POINTER;
+    void** dpm = &NULL_POINTER;
+    void** dpmc = &NULL_POINTER;
+    void** dpms = &NULL_POINTER;
     // The destination property details.
-    void** dpd = NULL_POINTER;
-    void** dpdc = NULL_POINTER;
-    void** dpds = NULL_POINTER;
+    void** dpd = &NULL_POINTER;
+    void** dpdc = &NULL_POINTER;
+    void** dpds = &NULL_POINTER;
 
     // The destination property name abstraction.
-    void** pa = NULL_POINTER;
-    void** pac = NULL_POINTER;
-    void** pas = NULL_POINTER;
+    void** pa = &NULL_POINTER;
+    void** pac = &NULL_POINTER;
+    void** pas = &NULL_POINTER;
     // The destination property model.
-    void** pm = NULL_POINTER;
-    void** pmc = NULL_POINTER;
-    void** pms = NULL_POINTER;
+    void** pm = &NULL_POINTER;
+    void** pmc = &NULL_POINTER;
+    void** pms = &NULL_POINTER;
     // The destination property details.
-    void** pd = NULL_POINTER;
-    void** pdc = NULL_POINTER;
-    void** pds = NULL_POINTER;
+    void** pd = &NULL_POINTER;
+    void** pdc = &NULL_POINTER;
+    void** pds = &NULL_POINTER;
 
     // Get source.
     get_real_compound_element_by_name(param, param_count,

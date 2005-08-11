@@ -22,7 +22,7 @@
  *
  * this handel a loop
  *
- * @version $Revision: 1.9 $ $Date: 2005-08-09 13:04:25 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2005-08-11 11:36:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -73,30 +73,30 @@ void loop(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
     log_message_debug("Loop program flow.");
 
     // The break flag abstraction.
-    void** bfa = NULL_POINTER;
-    void** bfac = NULL_POINTER;
-    void** bfas = NULL_POINTER;
+    void** bfa = &NULL_POINTER;
+    void** bfac = &NULL_POINTER;
+    void** bfas = &NULL_POINTER;
     // The break flag model.
-    void** bfm = NULL_POINTER;
-    void** bfmc = NULL_POINTER;
-    void** bfms = NULL_POINTER;
+    void** bfm = &NULL_POINTER;
+    void** bfmc = &NULL_POINTER;
+    void** bfms = &NULL_POINTER;
     // The break flag details.
-    void** bfd = NULL_POINTER;
-    void** bfdc = NULL_POINTER;
-    void** bfds = NULL_POINTER;
+    void** bfd = &NULL_POINTER;
+    void** bfdc = &NULL_POINTER;
+    void** bfds = &NULL_POINTER;
 
     // The model abstraction.
-    void** ma = NULL_POINTER;
-    void** mac = NULL_POINTER;
-    void** mas = NULL_POINTER;
+    void** ma = &NULL_POINTER;
+    void** mac = &NULL_POINTER;
+    void** mas = &NULL_POINTER;
     // The model model.
-    void** mm = NULL_POINTER;
-    void** mmc = NULL_POINTER;
-    void** mms = NULL_POINTER;
+    void** mm = &NULL_POINTER;
+    void** mmc = &NULL_POINTER;
+    void** mms = &NULL_POINTER;
     // The model details.
-    void** md = NULL_POINTER;
-    void** mdc = NULL_POINTER;
-    void** mds = NULL_POINTER;
+    void** md = &NULL_POINTER;
+    void** mdc = &NULL_POINTER;
+    void** mds = &NULL_POINTER;
 
     // Get break flag.
     get_real_compound_element_by_name(p8, p9,

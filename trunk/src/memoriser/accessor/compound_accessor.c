@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.12 $ $Date: 2005-08-09 13:04:27 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2005-08-11 11:36:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -63,8 +63,8 @@ void get_compound_element_index(void* p0, void* p1, void* p2, void* p3, void* p4
             log_message_debug("Get compound element index.");
 
             // The element names.
-            void** n = NULL_POINTER;
-            void** nc = NULL_POINTER;
+            void** n = &NULL_POINTER;
+            void** nc = &NULL_POINTER;
 
             // Get element names.
             get_array_elements(p0, (void*) NAMES_INDEX, (void*) &n, (void*) POINTER_ARRAY);
@@ -77,8 +77,8 @@ void get_compound_element_index(void* p0, void* p1, void* p2, void* p3, void* p4
                     // The loop variable.
                     int j = 0;
                     // The name.
-                    void** n1 = NULL_POINTER;
-                    void** nc1 = NULL_POINTER;
+                    void** n1 = &NULL_POINTER;
+                    void** nc1 = &NULL_POINTER;
                     // The comparison result.
                     int r = 0;
 
@@ -318,18 +318,18 @@ void set_compound_element_by_index(void* p0, void* p1, void* p2, void* p3,
                     log_message_debug("Set compound element by index.");
 
                     // The names, abstractions, models, details.
-                    void** n = NULL_POINTER;
-                    void** nc = NULL_POINTER;
-                    void** ns = NULL_POINTER;
-                    void** a = NULL_POINTER;
-                    void** ac = NULL_POINTER;
-                    void** as = NULL_POINTER;
-                    void** m = NULL_POINTER;
-                    void** mc = NULL_POINTER;
-                    void** ms = NULL_POINTER;
-                    void** d = NULL_POINTER;
-                    void** dc = NULL_POINTER;
-                    void** ds = NULL_POINTER;
+                    void** n = &NULL_POINTER;
+                    void** nc = &NULL_POINTER;
+                    void** ns = &NULL_POINTER;
+                    void** a = &NULL_POINTER;
+                    void** ac = &NULL_POINTER;
+                    void** as = &NULL_POINTER;
+                    void** m = &NULL_POINTER;
+                    void** mc = &NULL_POINTER;
+                    void** ms = &NULL_POINTER;
+                    void** d = &NULL_POINTER;
+                    void** dc = &NULL_POINTER;
+                    void** ds = &NULL_POINTER;
 
                     // Get names, abstractions, models, details.
                     get_array_elements(p0, (void*) NAMES_INDEX, (void*) &n, (void*) POINTER_ARRAY);
@@ -597,9 +597,9 @@ void set_compound_element_by_name(void* p0, void* p1, void* p2,
                                 if (index != -1) {
 
                                     // The models.
-                                    void** m = NULL_POINTER;
-                                    void** mc = NULL_POINTER;
-                                    void** ms = NULL_POINTER;
+                                    void** m = &NULL_POINTER;
+                                    void** mc = &NULL_POINTER;
+                                    void** ms = &NULL_POINTER;
 
                                     // Get models.
                                     get_array_elements(p0, (void*) MODELS_INDEX, (void*) &m, (void*) POINTER_ARRAY);
@@ -613,9 +613,9 @@ void set_compound_element_by_name(void* p0, void* p1, void* p2,
                                             if (ms != NULL_POINTER) {
 
                                                 // The element model.
-                                                void** em = NULL_POINTER;
-                                                void** emc = NULL_POINTER;
-                                                void** ems = NULL_POINTER;
+                                                void** em = &NULL_POINTER;
+                                                void** emc = &NULL_POINTER;
+                                                void** ems = &NULL_POINTER;
 
                                                 // Get element model.
                                                 get_array_elements(*m, (void*) &index, (void*) &em, (void*) POINTER_ARRAY);
@@ -804,18 +804,18 @@ void remove_compound_element_by_index(void* p0, void* p1, void* p2, void* p3) {
                     log_message_debug("Remove compound element by index.");
 
                     // The names, abstractions, models, details.
-                    void** n = NULL_POINTER;
-                    void** nc = NULL_POINTER;
-                    void** ns = NULL_POINTER;
-                    void** a = NULL_POINTER;
-                    void** ac = NULL_POINTER;
-                    void** as = NULL_POINTER;
-                    void** m = NULL_POINTER;
-                    void** mc = NULL_POINTER;
-                    void** ms = NULL_POINTER;
-                    void** d = NULL_POINTER;
-                    void** dc = NULL_POINTER;
-                    void** ds = NULL_POINTER;
+                    void** n = &NULL_POINTER;
+                    void** nc = &NULL_POINTER;
+                    void** ns = &NULL_POINTER;
+                    void** a = &NULL_POINTER;
+                    void** ac = &NULL_POINTER;
+                    void** as = &NULL_POINTER;
+                    void** m = &NULL_POINTER;
+                    void** mc = &NULL_POINTER;
+                    void** ms = &NULL_POINTER;
+                    void** d = &NULL_POINTER;
+                    void** dc = &NULL_POINTER;
+                    void** ds = &NULL_POINTER;
 
                     // Get names, abstractions, models, details.
                     get_array_elements(p0, (void*) NAMES_INDEX, (void*) &n, (void*) POINTER_ARRAY);
@@ -1034,9 +1034,9 @@ void remove_compound_element_by_name(void* p0, void* p1, void* p2,
                                 if (index != -1) {
 
                                     // The models.
-                                    void** m = NULL_POINTER;
-                                    void** mc = NULL_POINTER;
-                                    void** ms = NULL_POINTER;
+                                    void** m = &NULL_POINTER;
+                                    void** mc = &NULL_POINTER;
+                                    void** ms = &NULL_POINTER;
 
                                     // Get models.
                                     get_array_elements(p0, (void*) MODELS_INDEX, (void*) &m, (void*) POINTER_ARRAY);
@@ -1050,9 +1050,9 @@ void remove_compound_element_by_name(void* p0, void* p1, void* p2,
                                             if (ms != NULL_POINTER) {
 
                                                 // The element model.
-                                                void** em = NULL_POINTER;
-                                                void** emc = NULL_POINTER;
-                                                void** ems = NULL_POINTER;
+                                                void** em = &NULL_POINTER;
+                                                void** emc = &NULL_POINTER;
+                                                void** ems = &NULL_POINTER;
 
                                                 // Get element model.
                                                 get_array_elements(*m, (void*) &index, (void*) &em, (void*) POINTER_ARRAY);
@@ -1208,15 +1208,15 @@ void get_compound_element_by_index(void* p0, void* p1, void* p2,
                 log_message_debug("Get compound element by index.");
 
                 // The abstractions, models, details.
-                void** a = NULL_POINTER;
-                void** ac = NULL_POINTER;
-                void** as = NULL_POINTER;
-                void** m = NULL_POINTER;
-                void** mc = NULL_POINTER;
-                void** ms = NULL_POINTER;
-                void** d = NULL_POINTER;
-                void** dc = NULL_POINTER;
-                void** ds = NULL_POINTER;
+                void** a = &NULL_POINTER;
+                void** ac = &NULL_POINTER;
+                void** as = &NULL_POINTER;
+                void** m = &NULL_POINTER;
+                void** mc = &NULL_POINTER;
+                void** ms = &NULL_POINTER;
+                void** d = &NULL_POINTER;
+                void** dc = &NULL_POINTER;
+                void** ds = &NULL_POINTER;
 
                 // Get abstractions, models, details.
                 get_array_elements(p0, (void*) ABSTRACTIONS_INDEX, (void*) &a, (void*) POINTER_ARRAY);
@@ -1405,9 +1405,9 @@ void get_compound_element_by_name(void* p0, void* p1,
                                 if (index != -1) {
 
                                     // The models.
-                                    void** m = NULL_POINTER;
-                                    void** mc = NULL_POINTER;
-                                    void** ms = NULL_POINTER;
+                                    void** m = &NULL_POINTER;
+                                    void** mc = &NULL_POINTER;
+                                    void** ms = &NULL_POINTER;
 
                                     // Get models.
                                     get_array_elements(p0, (void*) MODELS_INDEX, (void*) &m, (void*) POINTER_ARRAY);
@@ -1421,9 +1421,9 @@ void get_compound_element_by_name(void* p0, void* p1,
                                             if (ms != NULL_POINTER) {
 
                                                 // The element model.
-                                                void** em = NULL_POINTER;
-                                                void** emc = NULL_POINTER;
-                                                void** ems = NULL_POINTER;
+                                                void** em = &NULL_POINTER;
+                                                void** emc = &NULL_POINTER;
+                                                void** ems = &NULL_POINTER;
 
                                                 // Get element model.
                                                 get_array_elements(*m, (void*) &index, (void*) &em, (void*) POINTER_ARRAY);
@@ -1562,9 +1562,9 @@ void get_compound_element_name_by_index(void* p0, void* p1,
                 log_message_debug("Get compound element name by index.");
 
                 // The names.
-                void** n = NULL_POINTER;
-                void** nc = NULL_POINTER;
-                void** ns = NULL_POINTER;
+                void** n = &NULL_POINTER;
+                void** nc = &NULL_POINTER;
+                void** ns = &NULL_POINTER;
 
                 // Get names.
                 get_array_elements(p0, (void*) NAMES_INDEX, (void*) &n, (void*) POINTER_ARRAY);
@@ -1650,15 +1650,15 @@ void get_compound_element_by_encapsulated_name(void* p0, void* p1,
     log_message_debug("Get compound element by encapsulated name.");
 
     // The abstraction, model, details.
-    void** a = NULL_POINTER;
-    void** ac = NULL_POINTER;
-    void** as = NULL_POINTER;
-    void** m = NULL_POINTER;
-    void** mc = NULL_POINTER;
-    void** ms = NULL_POINTER;
-    void** d = NULL_POINTER;
-    void** dc = NULL_POINTER;
-    void** ds = NULL_POINTER;
+    void** a = &NULL_POINTER;
+    void** ac = &NULL_POINTER;
+    void** as = &NULL_POINTER;
+    void** m = &NULL_POINTER;
+    void** mc = &NULL_POINTER;
+    void** ms = &NULL_POINTER;
+    void** d = &NULL_POINTER;
+    void** dc = &NULL_POINTER;
+    void** ds = &NULL_POINTER;
 
     // Get knowledge element name.
     get_compound_element_by_name(p0, p1,
@@ -1736,15 +1736,15 @@ void get_real_compound_element_by_name(void* p0, void* p1,
     log_message_debug("Get compound element by encapsulated name.");
 
     // The abstraction, model, details.
-    void** a = NULL_POINTER;
-    void** ac = NULL_POINTER;
-    void** as = NULL_POINTER;
-    void** m = NULL_POINTER;
-    void** mc = NULL_POINTER;
-    void** ms = NULL_POINTER;
-    void** d = NULL_POINTER;
-    void** dc = NULL_POINTER;
-    void** ds = NULL_POINTER;
+    void** a = &NULL_POINTER;
+    void** ac = &NULL_POINTER;
+    void** as = &NULL_POINTER;
+    void** m = &NULL_POINTER;
+    void** mc = &NULL_POINTER;
+    void** ms = &NULL_POINTER;
+    void** d = &NULL_POINTER;
+    void** dc = &NULL_POINTER;
+    void** ds = &NULL_POINTER;
 
     // Get knowledge element name.
     get_compound_element_by_name(p0, p1,
@@ -1779,15 +1779,15 @@ void get_real_compound_element_by_name(void* p0, void* p1,
         if ((r1 == 1) || (r2 == 1)) {
 
             // The abstraction, model, details for the encapsulated.
-            void** ea = NULL_POINTER;
-            void** eac = NULL_POINTER;
-            void** eas = NULL_POINTER;
-            void** em = NULL_POINTER;
-            void** emc = NULL_POINTER;
-            void** ems = NULL_POINTER;
-            void** ed = NULL_POINTER;
-            void** edc = NULL_POINTER;
-            void** eds = NULL_POINTER;
+            void** ea = &NULL_POINTER;
+            void** eac = &NULL_POINTER;
+            void** eas = &NULL_POINTER;
+            void** em = &NULL_POINTER;
+            void** emc = &NULL_POINTER;
+            void** ems = &NULL_POINTER;
+            void** ed = &NULL_POINTER;
+            void** edc = &NULL_POINTER;
+            void** eds = &NULL_POINTER;
 
             // Get knowledge element.
             get_compound_element_by_name(p13, p14, *m, *mc,
@@ -1845,9 +1845,9 @@ void reindex_compound_for_listelements(void* compound, void* compound_count, voi
         int index_counter = 0;
 
         // The compund element name.
-        void** cen = NULL_POINTER;
-        void** cenc = NULL_POINTER;
-        void** cens = NULL_POINTER;
+        void** cen = &NULL_POINTER;
+        void** cenc = &NULL_POINTER;
+        void** cens = &NULL_POINTER;
 
         // Create compare string.
         char* compstring = NULL_POINTER;

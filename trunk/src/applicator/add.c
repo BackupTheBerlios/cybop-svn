@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2005-08-09 13:04:25 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2005-08-11 11:36:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -183,43 +183,43 @@ void add(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
 /*??
     // The opernad 1 abstraction.
-    void** op1a = NULL_POINTER;
-    void** op1ac = NULL_POINTER;
-    void** op1as = NULL_POINTER;
+    void** op1a = &NULL_POINTER;
+    void** op1ac = &NULL_POINTER;
+    void** op1as = &NULL_POINTER;
     // The opmmand 1 model.
-    void** op1m = NULL_POINTER;
-    void** op1mc = NULL_POINTER;
-    void** op1ms = NULL_POINTER;
+    void** op1m = &NULL_POINTER;
+    void** op1mc = &NULL_POINTER;
+    void** op1ms = &NULL_POINTER;
     // The opmmand 1 details.
-    void** op1d = NULL_POINTER;
-    void** op1dc = NULL_POINTER;
-    void** op1ds = NULL_POINTER;
+    void** op1d = &NULL_POINTER;
+    void** op1dc = &NULL_POINTER;
+    void** op1ds = &NULL_POINTER;
 
     // The summand 2 abstraction.
-    void** op2a = NULL_POINTER;
-    void** op2ac = NULL_POINTER;
-    void** op2as = NULL_POINTER;
+    void** op2a = &NULL_POINTER;
+    void** op2ac = &NULL_POINTER;
+    void** op2as = &NULL_POINTER;
     // The opmmand 2 model.
-    void** op2m = NULL_POINTER;
-    void** op2mc = NULL_POINTER;
-    void** op2ms = NULL_POINTER;
+    void** op2m = &NULL_POINTER;
+    void** op2mc = &NULL_POINTER;
+    void** op2ms = &NULL_POINTER;
     // The opmmand 2 details.
-    void** op2d = NULL_POINTER;
-    void** op2dc = NULL_POINTER;
-    void** op2ds = NULL_POINTER;
+    void** op2d = &NULL_POINTER;
+    void** op2dc = &NULL_POINTER;
+    void** op2ds = &NULL_POINTER;
 
     // The result abstraction.
-    void** ra = NULL_POINTER;
-    void** rac = NULL_POINTER;
-    void** ras = NULL_POINTER;
+    void** ra = &NULL_POINTER;
+    void** rac = &NULL_POINTER;
+    void** ras = &NULL_POINTER;
     // The result index model.
-    void** rm = NULL_POINTER;
-    void** rmc = NULL_POINTER;
-    void** rms = NULL_POINTER;
+    void** rm = &NULL_POINTER;
+    void** rmc = &NULL_POINTER;
+    void** rms = &NULL_POINTER;
     // The result index details.
-    void** rd = NULL_POINTER;
-    void** rdc = NULL_POINTER;
-    void** rds = NULL_POINTER;
+    void** rd = &NULL_POINTER;
+    void** rdc = &NULL_POINTER;
+    void** rds = &NULL_POINTER;
 
     // get the operand 1
     get_real_compound_element_by_name( p0, p1,

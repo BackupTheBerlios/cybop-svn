@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2005-08-09 13:04:25 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2005-08-11 11:36:11 $ $Author: christian $
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
@@ -73,43 +73,43 @@ void branch(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
     log_message_debug("Branch program flow.");
 
     // The criterion abstraction.
-    void** ca = NULL_POINTER;
-    void** cac = NULL_POINTER;
-    void** cas = NULL_POINTER;
+    void** ca = &NULL_POINTER;
+    void** cac = &NULL_POINTER;
+    void** cas = &NULL_POINTER;
     // The criterion model.
-    void** cm = NULL_POINTER;
-    void** cmc = NULL_POINTER;
-    void** cms = NULL_POINTER;
+    void** cm = &NULL_POINTER;
+    void** cmc = &NULL_POINTER;
+    void** cms = &NULL_POINTER;
     // The criterion details.
-    void** cd = NULL_POINTER;
-    void** cdc = NULL_POINTER;
-    void** cds = NULL_POINTER;
+    void** cd = &NULL_POINTER;
+    void** cdc = &NULL_POINTER;
+    void** cds = &NULL_POINTER;
 
     // The true model abstraction.
-    void** ta = NULL_POINTER;
-    void** tac = NULL_POINTER;
-    void** tas = NULL_POINTER;
+    void** ta = &NULL_POINTER;
+    void** tac = &NULL_POINTER;
+    void** tas = &NULL_POINTER;
     // The true model model.
-    void** tm = NULL_POINTER;
-    void** tmc = NULL_POINTER;
-    void** tms = NULL_POINTER;
+    void** tm = &NULL_POINTER;
+    void** tmc = &NULL_POINTER;
+    void** tms = &NULL_POINTER;
     // The true model details.
-    void** td = NULL_POINTER;
-    void** tdc = NULL_POINTER;
-    void** tds = NULL_POINTER;
+    void** td = &NULL_POINTER;
+    void** tdc = &NULL_POINTER;
+    void** tds = &NULL_POINTER;
 
     // The false model abstraction.
-    void** fa = NULL_POINTER;
-    void** fac = NULL_POINTER;
-    void** fas = NULL_POINTER;
+    void** fa = &NULL_POINTER;
+    void** fac = &NULL_POINTER;
+    void** fas = &NULL_POINTER;
     // The false model model.
-    void** fm = NULL_POINTER;
-    void** fmc = NULL_POINTER;
-    void** fms = NULL_POINTER;
+    void** fm = &NULL_POINTER;
+    void** fmc = &NULL_POINTER;
+    void** fms = &NULL_POINTER;
     // The false model details.
-    void** fd = NULL_POINTER;
-    void** fdc = NULL_POINTER;
-    void** fds = NULL_POINTER;
+    void** fd = &NULL_POINTER;
+    void** fdc = &NULL_POINTER;
+    void** fds = &NULL_POINTER;
 
     // Get criterion.
     get_real_compound_element_by_name(p8, p9,

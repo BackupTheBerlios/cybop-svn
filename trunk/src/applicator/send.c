@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.19 $ $Date: 2005-08-09 13:04:25 $ $Author: christian $
+ * @version $Revision: 1.20 $ $Date: 2005-08-11 11:36:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -72,56 +72,56 @@ void send_message(void* p0, void* p1,
     void* p6, void* p7, void* p8, void* p9) {
 
     // The language abstraction.
-    void** la = NULL_POINTER;
-    void** lac = NULL_POINTER;
-    void** las = NULL_POINTER;
+    void** la = &NULL_POINTER;
+    void** lac = &NULL_POINTER;
+    void** las = &NULL_POINTER;
     // The language model.
-    void** lm = NULL_POINTER;
-    void** lmc = NULL_POINTER;
-    void** lms = NULL_POINTER;
+    void** lm = &NULL_POINTER;
+    void** lmc = &NULL_POINTER;
+    void** lms = &NULL_POINTER;
     // The language details.
-    void** ld = NULL_POINTER;
-    void** ldc = NULL_POINTER;
-    void** lds = NULL_POINTER;
+    void** ld = &NULL_POINTER;
+    void** ldc = &NULL_POINTER;
+    void** lds = &NULL_POINTER;
 
     // The sender abstraction.
-    void** sa = NULL_POINTER;
-    void** sac = NULL_POINTER;
-    void** sas = NULL_POINTER;
+    void** sa = &NULL_POINTER;
+    void** sac = &NULL_POINTER;
+    void** sas = &NULL_POINTER;
     // The sender model.
-    void** sm = NULL_POINTER;
-    void** smc = NULL_POINTER;
-    void** sms = NULL_POINTER;
+    void** sm = &NULL_POINTER;
+    void** smc = &NULL_POINTER;
+    void** sms = &NULL_POINTER;
     // The sender details.
-    void** sd = NULL_POINTER;
-    void** sdc = NULL_POINTER;
-    void** sds = NULL_POINTER;
+    void** sd = &NULL_POINTER;
+    void** sdc = &NULL_POINTER;
+    void** sds = &NULL_POINTER;
 
     // The receiver abstraction.
-    void** ra = NULL_POINTER;
-    void** rac = NULL_POINTER;
-    void** ras = NULL_POINTER;
+    void** ra = &NULL_POINTER;
+    void** rac = &NULL_POINTER;
+    void** ras = &NULL_POINTER;
     // The receiver model.
-    void** rm = NULL_POINTER;
-    void** rmc = NULL_POINTER;
-    void** rms = NULL_POINTER;
+    void** rm = &NULL_POINTER;
+    void** rmc = &NULL_POINTER;
+    void** rms = &NULL_POINTER;
     // The receiver details.
-    void** rd = NULL_POINTER;
-    void** rdc = NULL_POINTER;
-    void** rds = NULL_POINTER;
+    void** rd = &NULL_POINTER;
+    void** rdc = &NULL_POINTER;
+    void** rds = &NULL_POINTER;
 
     // The message abstraction.
-    void** ma = NULL_POINTER;
-    void** mac = NULL_POINTER;
-    void** mas = NULL_POINTER;
+    void** ma = &NULL_POINTER;
+    void** mac = &NULL_POINTER;
+    void** mas = &NULL_POINTER;
     // The message model.
-    void** mm = NULL_POINTER;
-    void** mmc = NULL_POINTER;
-    void** mms = NULL_POINTER;
+    void** mm = &NULL_POINTER;
+    void** mmc = &NULL_POINTER;
+    void** mms = &NULL_POINTER;
     // The message details.
-    void** md = NULL_POINTER;
-    void** mdc = NULL_POINTER;
-    void** mds = NULL_POINTER;
+    void** md = &NULL_POINTER;
+    void** mdc = &NULL_POINTER;
+    void** mds = &NULL_POINTER;
 
     // Get language.
     get_compound_element_by_name(p0, p1,
@@ -164,7 +164,7 @@ void send_message(void* p0, void* p1,
         if (r != 0) {
 
             // The terminal (device name).
-            void** t = NULL_POINTER;
+            void** t = &NULL_POINTER;
 
             // Get terminal.
             get_array_elements(p2, (void*) TERMINAL_FILE_DESCRIPTOR_INTERNAL, (void*) &t, (void*) POINTER_ARRAY);
@@ -285,17 +285,17 @@ void refresh_url(void* p0, void* p1,
     void* p2, void* p3, void* p4, void* p5, void* p6) {
 
     // The message abstraction.
-    void** urla = NULL_POINTER;
-    void** urlac = NULL_POINTER;
-    void** urlas = NULL_POINTER;
+    void** urla = &NULL_POINTER;
+    void** urlac = &NULL_POINTER;
+    void** urlas = &NULL_POINTER;
     // The message model.
-    void** urlm = NULL_POINTER;
-    void** urlmc = NULL_POINTER;
-    void** urlms = NULL_POINTER;
+    void** urlm = &NULL_POINTER;
+    void** urlmc = &NULL_POINTER;
+    void** urlms = &NULL_POINTER;
     // The message details.
-    void** urld = NULL_POINTER;
-    void** urldc = NULL_POINTER;
-    void** urlds = NULL_POINTER;
+    void** urld = &NULL_POINTER;
+    void** urldc = &NULL_POINTER;
+    void** urlds = &NULL_POINTER;
 
     // Get language.
     get_real_compound_element_by_name(p0, p1,

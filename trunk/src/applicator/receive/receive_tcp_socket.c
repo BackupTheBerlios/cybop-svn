@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.16 $ $Date: 2005-08-09 13:04:26 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2005-08-11 11:36:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -617,9 +617,9 @@ void set_signal_for_parameter(void* source, int* source_count, void* dest, int* 
         (p4 != NULL_POINTER)) {
 
         // The knowledge memory.
-        void** km = NULL_POINTER;
-        void** kmc = NULL_POINTER;
-        void** kms = NULL_POINTER;
+        void** km = &NULL_POINTER;
+        void** kmc = &NULL_POINTER;
+        void** kms = &NULL_POINTER;
 
         // Get knowledge memory.
         get(p4, (void*) KNOWLEDGE_MEMORY_INTERNAL, (void*) &km, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
@@ -816,9 +816,9 @@ void set_signal_for_parameter(void* source, int* source_count, void* dest, int* 
         log_message_debug("Set start signal.");
 
         // The signal memory.
-        void** m = NULL_POINTER;
-        void** mc = NULL_POINTER;
-        void** ms = NULL_POINTER;
+        void** m = &NULL_POINTER;
+        void** mc = &NULL_POINTER;
+        void** ms = &NULL_POINTER;
 
         // Get signal memory.
         get(p4, (void*) SIGNAL_MEMORY_INTERNAL, (void*) &m, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
@@ -1112,9 +1112,9 @@ void handle_tcp_socket_request(void* p0, void* p1) {
                 log_message_debug("Set start signal.");
 
                 // The signal memory.
-                void** m = NULL_POINTER;
-                void** mc = NULL_POINTER;
-                void** ms = NULL_POINTER;
+                void** m = &NULL_POINTER;
+                void** mc = &NULL_POINTER;
+                void** ms = &NULL_POINTER;
 
                 // Get signal memory.
                 get(p0, (void*) SIGNAL_MEMORY_INTERNAL, (void*) &m, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
@@ -1161,7 +1161,7 @@ void handle_tcp_socket_request(void* p0, void* p1) {
 void run_tcp_socket(void* p0) {
 
     // The tcp server socket.
-    void** s = NULL_POINTER;
+    void** s = &NULL_POINTER;
 
     // Get tcp server socket.
     get(p0, (void*) TCP_SERVER_SOCKET_INTERNAL, (void*) &s, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
@@ -1213,7 +1213,7 @@ void run_tcp_socket(void* p0) {
  */
 void run_tcp_socket_server(void* p0) {
 
-    void** active_flag = NULL_POINTER;
+    void** active_flag = &NULL_POINTER;
 
     get(p0, (void*) TCP_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &active_flag, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
@@ -1277,7 +1277,7 @@ void receive_tcp_socket(void* p0, void* p1, void* p2, void* p3,
                 }
 
                 // Set the activation flag in the internal memory.
-                void** socket_flag = NULL_POINTER;
+                void** socket_flag = &NULL_POINTER;
 
                 get(p0, (void*) TCP_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &socket_flag, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
@@ -1287,7 +1287,7 @@ void receive_tcp_socket(void* p0, void* p1, void* p2, void* p3,
                 }
 
                 //set the blocking flag in the internal memory.
-                void** blocking_flag = NULL_POINTER;
+                void** blocking_flag = &NULL_POINTER;
 
                 get(p0, (void*) TCP_SERVER_SOCKET_BLOCKING_INTERNAL, (void*) &blocking_flag, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 

@@ -38,7 +38,7 @@
  *
  * Array elements are accessed over their index (array base pointer + index).
  *
- * @version $Revision: 1.7 $ $Date: 2005-08-04 15:20:58 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2005-08-11 11:36:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -209,9 +209,9 @@ void compare_pointer_array_elements(void* p0, void* p1, void* p2, void* p3) {
                     // The loop variable.
                     int j = 0;
                     // The first element.
-                    void** e0 = NULL_POINTER;
+                    void** e0 = &NULL_POINTER;
                     // The second element.
-                    void** e1 = NULL_POINTER;
+                    void** e1 = &NULL_POINTER;
                     // The size.
                     int s = 0;
 
@@ -287,9 +287,9 @@ void set_pointer_array_elements(void* p0, void* p1, void* p2, void* p3) {
                     // The destination base.
                     void* db = (void*) (p0 + (*i * *POINTER_PRIMITIVE_SIZE));
                     // The source element.
-                    void** se = NULL_POINTER;
+                    void** se = &NULL_POINTER;
                     // The destination element.
-                    void** de = NULL_POINTER;
+                    void** de = &NULL_POINTER;
                     // The loop variable.
                     int j = 0;
                     // The size.
@@ -365,9 +365,9 @@ void remove_pointer_array_elements(void* p0, void* p1, void* p2, void* p3) {
                     // The source base.
                     void* sb = (void*) (db + (*c * *POINTER_PRIMITIVE_SIZE));
                     // The source element.
-                    void** se = NULL_POINTER;
+                    void** se = &NULL_POINTER;
                     // The destination element.
-                    void** de = NULL_POINTER;
+                    void** de = &NULL_POINTER;
                     // The remaining elements size.
                     int r = *m - (*i + *c);
                     // The loop variable.

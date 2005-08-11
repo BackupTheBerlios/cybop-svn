@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2005-08-09 21:31:28 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2005-08-11 11:36:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -343,7 +343,7 @@ void serialise_integer_vector(void* p0, void* p1, void* p2, void* p3, void* p4) 
                     log_message_debug("Serialise integer vector.");
 
                     // The integer.
-                    void** i = NULL_POINTER;
+                    void** i = &NULL_POINTER;
                     // The integer character.
                     void* c = NULL_POINTER;
                     int cc = *NUMBER_0_INTEGER;

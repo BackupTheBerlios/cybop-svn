@@ -22,7 +22,7 @@
  *
  * This file destroys a transient model to a persistent model.
  *
- * @version $Revision: 1.9 $ $Date: 2005-08-09 13:04:25 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2005-08-11 11:36:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -112,21 +112,21 @@ void deallocate_compound_model( void** model, void* model_count, void* model_siz
         int compound_counter = 0;
 
         // The element name.
-        void** en = NULL_POINTER;
-        void** enc = NULL_POINTER;
-        void** ens = NULL_POINTER;
+        void** en = &NULL_POINTER;
+        void** enc = &NULL_POINTER;
+        void** ens = &NULL_POINTER;
         // The element abstraction.
-        void** ea = NULL_POINTER;
-        void** eac = NULL_POINTER;
-        void** eas = NULL_POINTER;
+        void** ea = &NULL_POINTER;
+        void** eac = &NULL_POINTER;
+        void** eas = &NULL_POINTER;
         // The element model.
-        void** em = NULL_POINTER;
-        void** emc = NULL_POINTER;
-        void** ems = NULL_POINTER;
+        void** em = &NULL_POINTER;
+        void** emc = &NULL_POINTER;
+        void** ems = &NULL_POINTER;
         // The element details.
-        void** ed = NULL_POINTER;
-        void** edc = NULL_POINTER;
-        void** eds = NULL_POINTER;
+        void** ed = &NULL_POINTER;
+        void** edc = &NULL_POINTER;
+        void** eds = &NULL_POINTER;
 
 
         while (1) {
@@ -217,17 +217,17 @@ void deallocate_part(void* p0, void* p1, void* p2, void* p3, void* p4) {
     log_message_debug("Destroy part.");
 
     // The name name abstraction.
-    void** na = NULL_POINTER;
-    void** nac = NULL_POINTER;
-    void** nas = NULL_POINTER;
+    void** na = &NULL_POINTER;
+    void** nac = &NULL_POINTER;
+    void** nas = &NULL_POINTER;
     // The name name model.
-    void** nm = NULL_POINTER;
-    void** nmc = NULL_POINTER;
-    void** nms = NULL_POINTER;
+    void** nm = &NULL_POINTER;
+    void** nmc = &NULL_POINTER;
+    void** nms = &NULL_POINTER;
     // The name name details.
-    void** nd = NULL_POINTER;
-    void** ndc = NULL_POINTER;
-    void** nds = NULL_POINTER;
+    void** nd = &NULL_POINTER;
+    void** ndc = &NULL_POINTER;
+    void** nds = &NULL_POINTER;
 
     // Get name name.
     get_real_compound_element_by_name(p0, p1,
@@ -261,17 +261,17 @@ void deallocate_part(void* p0, void* p1, void* p2, void* p3, void* p4) {
         if ( r==1 ) {
 
             // The element abstraction.
-            void** ea = NULL_POINTER;
-            void** eac = NULL_POINTER;
-            void** eas = NULL_POINTER;
+            void** ea = &NULL_POINTER;
+            void** eac = &NULL_POINTER;
+            void** eas = &NULL_POINTER;
             // The element model.
-            void** em = NULL_POINTER;
-            void** emc = NULL_POINTER;
-            void** ems = NULL_POINTER;
+            void** em = &NULL_POINTER;
+            void** emc = &NULL_POINTER;
+            void** ems = &NULL_POINTER;
             // The element details.
-            void** ed = NULL_POINTER;
-            void** edc = NULL_POINTER;
-            void** eds = NULL_POINTER;
+            void** ed = &NULL_POINTER;
+            void** edc = &NULL_POINTER;
+            void** eds = &NULL_POINTER;
 
             get_real_compound_element_by_name(p2, p3,
                 (void*) *nm, (void*) *nmc,

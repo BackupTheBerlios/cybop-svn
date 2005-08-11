@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2005-07-29 15:48:51 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-08-11 11:36:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -56,7 +56,7 @@ void activate_tcp_socket( void* internals, void* know, void* know_count, void* k
     if (internals != NULL_POINTER) {
 
         //set the activation flahg in the internal
-        void** socket_flag = NULL_POINTER;
+        void** socket_flag = &NULL_POINTER;
 
         get(internals, (void*) TCP_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &socket_flag, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2005-08-04 15:20:58 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2005-08-11 11:36:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -63,14 +63,14 @@ void set_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
             log_message_debug("Set signal.");
 
             // The abstractions, models, details, priorities, identifications.
-            void** a = NULL_POINTER;
-            void** ac = NULL_POINTER;
-            void** m = NULL_POINTER;
-            void** mc = NULL_POINTER;
-            void** d = NULL_POINTER;
-            void** dc = NULL_POINTER;
-            void** p = NULL_POINTER;
-            void** id = NULL_POINTER;
+            void** a = &NULL_POINTER;
+            void** ac = &NULL_POINTER;
+            void** m = &NULL_POINTER;
+            void** mc = &NULL_POINTER;
+            void** d = &NULL_POINTER;
+            void** dc = &NULL_POINTER;
+            void** p = &NULL_POINTER;
+            void** id = &NULL_POINTER;
 
             // Get abstractions, models, details, priorities, identifications.
             get_array_elements(p0, (void*) SIGNALS_ABSTRACTIONS_INDEX, (void*) &a, (void*) POINTER_ARRAY);
@@ -234,14 +234,14 @@ void remove_signal(void* p0, void* p1, void* p2, void* p3) {
                 log_message_debug("Remove signal.");
 
                 // The abstractions, models, details, priorities, identifications.
-                void** a = NULL_POINTER;
-                void** ac = NULL_POINTER;
-                void** m = NULL_POINTER;
-                void** mc = NULL_POINTER;
-                void** d = NULL_POINTER;
-                void** dc = NULL_POINTER;
-                void** p = NULL_POINTER;
-                void** id = NULL_POINTER;
+                void** a = &NULL_POINTER;
+                void** ac = &NULL_POINTER;
+                void** m = &NULL_POINTER;
+                void** mc = &NULL_POINTER;
+                void** d = &NULL_POINTER;
+                void** dc = &NULL_POINTER;
+                void** p = &NULL_POINTER;
+                void** id = &NULL_POINTER;
 
                 // Get abstractions, models, details, priorities, identifications.
                 get_array_elements(p0, (void*) SIGNALS_ABSTRACTIONS_INDEX, (void*) &a, (void*) POINTER_ARRAY);
@@ -381,14 +381,14 @@ void get_signal(void* p0, void* p1, void* p2, void* p3, void* p4,
             log_message_debug("Get signal.");
 
             // The abstractions, models, details, priorities, identifications.
-            void** a = NULL_POINTER;
-            void** ac = NULL_POINTER;
-            void** m = NULL_POINTER;
-            void** mc = NULL_POINTER;
-            void** d = NULL_POINTER;
-            void** dc = NULL_POINTER;
-            void** p = NULL_POINTER;
-            void** id = NULL_POINTER;
+            void** a = &NULL_POINTER;
+            void** ac = &NULL_POINTER;
+            void** m = &NULL_POINTER;
+            void** mc = &NULL_POINTER;
+            void** d = &NULL_POINTER;
+            void** dc = &NULL_POINTER;
+            void** p = &NULL_POINTER;
+            void** id = &NULL_POINTER;
 
             // Get abstractions, models, details, priorities, identifications.
             get_array_elements(p0, (void*) SIGNALS_ABSTRACTIONS_INDEX, (void*) &a, (void*) POINTER_ARRAY);
@@ -509,7 +509,7 @@ void get_highest_priority_index(void* p0, void* p1, void* p2) {
             int* c = (int*) p1;
 
             // The signal priorities.
-            void** sp = NULL_POINTER;
+            void** sp = &NULL_POINTER;
 
             // Get signal priorities.
             get_array_elements(p0, (void*) SIGNALS_PRIORITIES_INDEX, (void*) &sp, (void*) POINTER_ARRAY);
@@ -587,7 +587,7 @@ void get_new_signal_id(void* p0, void* p1, void* p2) {
             int* mc = (int*) p1;
 
             // The signal identifications.
-            void** ids = NULL_POINTER;
+            void** ids = &NULL_POINTER;
 
             // Get signal identifications.
             get_array_elements(p0, (void*) SIGNALS_IDENTIFICATIONS_INDEX, (void*) &ids, (void*) POINTER_ARRAY);
@@ -599,7 +599,7 @@ void get_new_signal_id(void* p0, void* p1, void* p2) {
                 // The maximum signal identification.
                 int max = -1;
                 // The identification.
-                void** id = NULL_POINTER;
+                void** id = &NULL_POINTER;
 
                 while (1) {
 

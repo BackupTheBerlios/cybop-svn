@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2005-08-09 13:04:25 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2005-08-11 11:36:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description This module starts up a service.
  */
@@ -60,30 +60,30 @@ void startup_service(void* p0, void* p1,
     log_message_debug("Startup service.");
 
     // The service abstraction.
-    void** sa = NULL_POINTER;
-    void** sac = NULL_POINTER;
-    void** sas = NULL_POINTER;
+    void** sa = &NULL_POINTER;
+    void** sac = &NULL_POINTER;
+    void** sas = &NULL_POINTER;
     // The service model.
-    void** sm = NULL_POINTER;
-    void** smc = NULL_POINTER;
-    void** sms = NULL_POINTER;
+    void** sm = &NULL_POINTER;
+    void** smc = &NULL_POINTER;
+    void** sms = &NULL_POINTER;
     // The service details.
-    void** sd = NULL_POINTER;
-    void** sdc = NULL_POINTER;
-    void** sds = NULL_POINTER;
+    void** sd = &NULL_POINTER;
+    void** sdc = &NULL_POINTER;
+    void** sds = &NULL_POINTER;
 
     // The socket port abstraction.
-    void** spa = NULL_POINTER;
-    void** spac = NULL_POINTER;
-    void** spas = NULL_POINTER;
+    void** spa = &NULL_POINTER;
+    void** spac = &NULL_POINTER;
+    void** spas = &NULL_POINTER;
     // The socket port model.
-    void** spm = NULL_POINTER;
-    void** spmc = NULL_POINTER;
-    void** spms = NULL_POINTER;
+    void** spm = &NULL_POINTER;
+    void** spmc = &NULL_POINTER;
+    void** spms = &NULL_POINTER;
     // The socket port details.
-    void** spd = NULL_POINTER;
-    void** spdc = NULL_POINTER;
-    void** spds = NULL_POINTER;
+    void** spd = &NULL_POINTER;
+    void** spdc = &NULL_POINTER;
+    void** spds = &NULL_POINTER;
 
     // Get parameters.
     get_real_compound_element_by_name(p0, p1,

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2005-08-09 13:04:26 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2005-08-11 11:36:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -53,18 +53,18 @@ void check(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6)
     // The shutdown flag.
     int f = 0;
     // The abstraction.
-    void** a = NULL_POINTER;
-    void** ac = NULL_POINTER;
+    void** a = &NULL_POINTER;
+    void** ac = &NULL_POINTER;
     // The model (signal operation).
-    void** m = NULL_POINTER;
-    void** mc = NULL_POINTER;
+    void** m = &NULL_POINTER;
+    void** mc = &NULL_POINTER;
     // The details (parameters).
-    void** d = NULL_POINTER;
-    void** dc = NULL_POINTER;
+    void** d = &NULL_POINTER;
+    void** dc = &NULL_POINTER;
     // The priority.
-    void** p = NULL_POINTER;
+    void** p = &NULL_POINTER;
     // The signal id.
-    void** id = NULL_POINTER;
+    void** id = &NULL_POINTER;
     // The direct execution flag.
     int x = 0;
     // The highest priority index.
@@ -73,8 +73,8 @@ void check(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6)
     int r = 0;
 
     //?? TODO: Delete this testing stuff from Rolf Holzmueller.
-    void** sf = NULL_POINTER;
-    void** bf = NULL_POINTER;
+    void** sf = &NULL_POINTER;
+    void** bf = &NULL_POINTER;
 
     // Run endless loop checking signal memory for signals.
     while (1) {

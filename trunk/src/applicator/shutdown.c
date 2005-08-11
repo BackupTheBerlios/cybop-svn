@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2005-07-29 16:46:18 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2005-08-11 11:36:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description This module shuts down a service.
  */
@@ -57,17 +57,17 @@ void shutdown_service(void* p0, void* p1,
     log_message_debug("Shutdown.");
 
     // The service abstraction.
-    void** sa = NULL_POINTER;
-    void** sac = NULL_POINTER;
-    void** sas = NULL_POINTER;
+    void** sa = &NULL_POINTER;
+    void** sac = &NULL_POINTER;
+    void** sas = &NULL_POINTER;
     // The service model.
-    void** sm = NULL_POINTER;
-    void** smc = NULL_POINTER;
-    void** sms = NULL_POINTER;
+    void** sm = &NULL_POINTER;
+    void** smc = &NULL_POINTER;
+    void** sms = &NULL_POINTER;
     // The service details.
-    void** sd = NULL_POINTER;
-    void** sdc = NULL_POINTER;
-    void** sds = NULL_POINTER;
+    void** sd = &NULL_POINTER;
+    void** sdc = &NULL_POINTER;
+    void** sds = &NULL_POINTER;
 
     // Get parameters.
     get_real_compound_element_by_name(p0, p1,

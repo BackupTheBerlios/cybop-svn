@@ -24,7 +24,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.13 $ $Date: 2005-08-09 13:04:27 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2005-08-11 11:36:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -255,7 +255,7 @@ void test_pointer_array() {
     fprintf(stderr, "c: %s\n", (char*) c);
 
     // The pointer array.
-    void** p = NULL_POINTER;
+    void** p = &NULL_POINTER;
     int ps = 1;
 
     // Create pointer array.
@@ -264,7 +264,7 @@ void test_pointer_array() {
     fprintf(stderr, "p: %i\n", p);
 
     // The result array.
-    void** r = NULL_POINTER;
+    void** r = &NULL_POINTER;
 
     //
     // Testing.
@@ -500,21 +500,21 @@ void test_knowledge_model(void* p0, void* p1, int level) {
         // The loop index.
         int i = 0;
         // The element name.
-        void** n = NULL_POINTER;
-        void** nc = NULL_POINTER;
-        void** ns = NULL_POINTER;
+        void** n = &NULL_POINTER;
+        void** nc = &NULL_POINTER;
+        void** ns = &NULL_POINTER;
         // The element abstraction.
-        void** a = NULL_POINTER;
-        void** ac = NULL_POINTER;
-        void** as = NULL_POINTER;
+        void** a = &NULL_POINTER;
+        void** ac = &NULL_POINTER;
+        void** as = &NULL_POINTER;
         // The element model.
-        void** m = NULL_POINTER;
-        void** mc = NULL_POINTER;
-        void** ms = NULL_POINTER;
+        void** m = &NULL_POINTER;
+        void** mc = &NULL_POINTER;
+        void** ms = &NULL_POINTER;
         // The element details.
-        void** d = NULL_POINTER;
-        void** dc = NULL_POINTER;
-        void** ds = NULL_POINTER;
+        void** d = &NULL_POINTER;
+        void** dc = &NULL_POINTER;
+        void** ds = &NULL_POINTER;
         // The comparison result.
         int r = 0;
 
@@ -635,18 +635,18 @@ void test_knowledge_model(void* p0, void* p1, int level) {
  */
 void test_compound(void* comp, int* comp_count, int* index) {
 
-    void** n = NULL_POINTER;
-    void** nc = NULL_POINTER;
-    void** ns = NULL_POINTER;
-    void** a = NULL_POINTER;
-    void** ac = NULL_POINTER;
-    void** as = NULL_POINTER;
-    void** m = NULL_POINTER;
-    void** mc = NULL_POINTER;
-    void** ms = NULL_POINTER;
-    void** d = NULL_POINTER;
-    void** dc = NULL_POINTER;
-    void** ds = NULL_POINTER;
+    void** n = &NULL_POINTER;
+    void** nc = &NULL_POINTER;
+    void** ns = &NULL_POINTER;
+    void** a = &NULL_POINTER;
+    void** ac = &NULL_POINTER;
+    void** as = &NULL_POINTER;
+    void** m = &NULL_POINTER;
+    void** mc = &NULL_POINTER;
+    void** ms = &NULL_POINTER;
+    void** d = &NULL_POINTER;
+    void** dc = &NULL_POINTER;
+    void** ds = &NULL_POINTER;
 
     get_compound_element_name_by_index(comp, comp_count, index,
         &n, &nc, &ns);

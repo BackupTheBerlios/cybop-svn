@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2005-07-29 16:46:17 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2005-08-11 11:36:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -60,56 +60,56 @@ void compare(void* p0, void* p1, void* p2, void* p3, void* p4) {
     log_message_debug("Compare two parameters.");
 
     // The comparison abstraction.
-    void** ca = NULL_POINTER;
-    void** cac = NULL_POINTER;
-    void** cas = NULL_POINTER;
+    void** ca = &NULL_POINTER;
+    void** cac = &NULL_POINTER;
+    void** cas = &NULL_POINTER;
     // The comparison model.
-    void** cm = NULL_POINTER;
-    void** cmc = NULL_POINTER;
-    void** cms = NULL_POINTER;
+    void** cm = &NULL_POINTER;
+    void** cmc = &NULL_POINTER;
+    void** cms = &NULL_POINTER;
     // The comparison details.
-    void** cd = NULL_POINTER;
-    void** cdc = NULL_POINTER;
-    void** cds = NULL_POINTER;
+    void** cd = &NULL_POINTER;
+    void** cdc = &NULL_POINTER;
+    void** cds = &NULL_POINTER;
 
     // The left side abstraction.
-    void** lsa = NULL_POINTER;
-    void** lsac = NULL_POINTER;
-    void** lsas = NULL_POINTER;
+    void** lsa = &NULL_POINTER;
+    void** lsac = &NULL_POINTER;
+    void** lsas = &NULL_POINTER;
     // The left side model.
-    void** lsm = NULL_POINTER;
-    void** lsmc = NULL_POINTER;
-    void** lsms = NULL_POINTER;
+    void** lsm = &NULL_POINTER;
+    void** lsmc = &NULL_POINTER;
+    void** lsms = &NULL_POINTER;
     // The left side details.
-    void** lsd = NULL_POINTER;
-    void** lsdc = NULL_POINTER;
-    void** lsds = NULL_POINTER;
+    void** lsd = &NULL_POINTER;
+    void** lsdc = &NULL_POINTER;
+    void** lsds = &NULL_POINTER;
 
     // The right side abstraction.
-    void** rsa = NULL_POINTER;
-    void** rsac = NULL_POINTER;
-    void** rsas = NULL_POINTER;
+    void** rsa = &NULL_POINTER;
+    void** rsac = &NULL_POINTER;
+    void** rsas = &NULL_POINTER;
     // The right side model.
-    void** rsm = NULL_POINTER;
-    void** rsmc = NULL_POINTER;
-    void** rsms = NULL_POINTER;
+    void** rsm = &NULL_POINTER;
+    void** rsmc = &NULL_POINTER;
+    void** rsms = &NULL_POINTER;
     // The right side details.
-    void** rsd = NULL_POINTER;
-    void** rsdc = NULL_POINTER;
-    void** rsds = NULL_POINTER;
+    void** rsd = &NULL_POINTER;
+    void** rsdc = &NULL_POINTER;
+    void** rsds = &NULL_POINTER;
 
     // The result abstraction.
-    void** ra = NULL_POINTER;
-    void** rac = NULL_POINTER;
-    void** ras = NULL_POINTER;
+    void** ra = &NULL_POINTER;
+    void** rac = &NULL_POINTER;
+    void** ras = &NULL_POINTER;
     // The result model.
-    void** rm = NULL_POINTER;
-    void** rmc = NULL_POINTER;
-    void** rms = NULL_POINTER;
+    void** rm = &NULL_POINTER;
+    void** rmc = &NULL_POINTER;
+    void** rms = &NULL_POINTER;
     // The result details.
-    void** rd = NULL_POINTER;
-    void** rdc = NULL_POINTER;
-    void** rds = NULL_POINTER;
+    void** rd = &NULL_POINTER;
+    void** rdc = &NULL_POINTER;
+    void** rds = &NULL_POINTER;
 
     // Get comparison.
     get_real_compound_element_by_name(p0, p1,
