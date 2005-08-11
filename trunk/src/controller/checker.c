@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2005-08-11 11:36:11 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2005-08-11 12:23:49 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -112,7 +112,6 @@ void check(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6)
                 (void*) &a, (void*) &ac, (void*) &m, (void*) &mc,
                 (void*) &d, (void*) &dc, (void*) &p, (void*) &id);
 
-/*??
             //?? For testing only. TODO: Delete these lines later!
             fprintf(stderr, "check i: %i\n", i);
             fprintf(stderr, "check a: %s\n", (char*) *a);
@@ -123,8 +122,7 @@ void check(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6)
             fprintf(stderr, "check p: %i\n", *((int*) *p));
             fprintf(stderr, "check id: %i\n", *((int*) *id));
             fprintf(stderr, "check knowledge model: %s\n", "");
-//??            test_knowledge_model(*k, *kc, 0);
-*/
+            test_knowledge_model(*k, *kc, 0);
 
             //
             // Handle signal.
@@ -166,10 +164,16 @@ void check(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6)
             p = NULL_POINTER;
             // Reset main signal id.
             id = NULL_POINTER;
+            // Reset direct execution flag.
+            x = 0;
             // Reset highest priority index.
             i = -1;
             // Reset comparison result.
             r = 0;
+
+            //?? Reset. TODO: Delete this testing stuff from Rolf Holzmueller.
+            sf = &NULL_POINTER;
+            bf = &NULL_POINTER;
         }
     }
 }
