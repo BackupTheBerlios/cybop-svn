@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.20 $ $Date: 2005-08-10 10:45:27 $ $Author: christian $
+ * @version $Revision: 1.21 $ $Date: 2005-08-14 22:00:16 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -833,8 +833,6 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
                                             // Set character properties.
                                             mapto((void*) &bg, (void*) PRIMITIVE_COUNT, (void*) PRIMITIVE_COUNT, (void*) *bgm, (void*) *bgmc, (void*) TERMINAL_BACKGROUND_ABSTRACTION, (void*) TERMINAL_BACKGROUND_ABSTRACTION_COUNT);
                                             mapto((void*) &fg, (void*) PRIMITIVE_COUNT, (void*) PRIMITIVE_COUNT, (void*) *fgm, (void*) *fgmc, (void*) TERMINAL_FOREGROUND_ABSTRACTION, (void*) TERMINAL_FOREGROUND_ABSTRACTION_COUNT);
-                                            //?? TODO: Replace temporary test values like
-                                            //?? NUMBER_0_INTEGER with real properties!
                                             set(h, (void*) PRIMITIVE_VALUE_INDEX, (void*) *hm, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
                                             set(i, (void*) PRIMITIVE_VALUE_INDEX, (void*) *im, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
                                             set(bl, (void*) PRIMITIVE_VALUE_INDEX, (void*) *blm, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
