@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.21 $ $Date: 2005-08-14 22:00:16 $ $Author: christian $
+ * @version $Revision: 1.22 $ $Date: 2005-08-17 16:08:24 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -491,407 +491,383 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     && (*sy != NULL_POINTER)
                     && (*sx != NULL_POINTER)) {
 
-                    // The tui z position has to be smaller than the size.
-                    if (**pz < **sz) {
+                    if ((**pz + **sz) > **dsz) {
 
-                        if ((**pz + **sz) > **dsz) {
+                        **dsz = **pz + **sz;
 
-                            **dsz = **pz + **sz;
+                        // Initialise destination z dimension count.
+                        // CAUTION! It has to be set equal to the size here,
+                        // so that later reallocations will not overwrite
+                        // existing elements during initialisation with NULL.
+                        **dcz = **dsz;
+                    }
 
-                            // Initialise destination z dimension count.
+                    // Reallocate tui.
+                    // CAUTION! The old count ocz is used, so that
+                    // only new elements get initialised with NULL.
+                    reallocate(p0, (void*) &ocz, (void*) *dsz, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
+                    // Reset z loop index to first position.
+                    z = **pz;
+
+                    // Position characters in their colour and with their size.
+                    while (1) {
+
+                        if (z >= (**pz + **sz)) {
+
+                            break;
+                        }
+
+                        // Reset already existing destination tui layer.
+                        dzp = &NULL_POINTER;
+                        // Reset destination tui layer.
+                        dz = NULL_POINTER;
+
+                        // Check if tui z dimension already exists.
+                        get(*de, (void*) &z, (void*) &dzp, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
+                        if (*dzp != NULL_POINTER) {
+
+                            // Use already existing tui z dimension.
+                            dz = *dzp;
+
+                        } else {
+
+                            // Allocate tui z dimension.
+                            allocate((void*) &dz, (void*) NUMBER_0_INTEGER, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
+                            // Add new z dimension to tui.
+                            set(*de, (void*) &z, &dz, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
+                            // CAUTION! Do NOT increase z dimension count here!
+                            // It is already set at reallocation above.
+                        }
+
+                        if ((**py + **sy) > **dsy) {
+
+                            **dsy = **py + **sy;
+
+                            // Initialise destination y dimension count.
                             // CAUTION! It has to be set equal to the size here,
                             // so that later reallocations will not overwrite
                             // existing elements during initialisation with NULL.
-                            **dcz = **dsz;
+                            **dcy = **dsy;
                         }
 
-                        // Reallocate tui.
-                        // CAUTION! The old count ocz is used, so that
+                        // Reallocate tui z layer.
+                        // CAUTION! The old count ocy is used, so that
                         // only new elements get initialised with NULL.
-                        reallocate(p0, (void*) &ocz, (void*) *dsz, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                        reallocate((void*) &dz, (void*) &ocy, (void*) *dsy, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-                        // Reset z loop index to first position.
-                        z = **pz;
+                        // Add new z dimension to tui.
+                        // CAUTION! The reallocate procedure returns
+                        // a different pointer, so that it has to be
+                        // set again here.
+                        set(*de, (void*) &z, &dz, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-                        // Position characters in their colour and with their size.
+                        // CAUTION! Do NOT increase destination
+                        // z dimension count here, since dz already
+                        // exists within de and is just reallocated!
+
+                        // Reset y loop index to first position.
+                        y = **py;
+
                         while (1) {
 
-                            if (z >= (**pz + **sz)) {
+                            if (y >= (**py + **sy)) {
 
                                 break;
                             }
 
-                            // Reset already existing destination tui layer.
-                            dzp = &NULL_POINTER;
-                            // Reset destination tui layer.
-                            dz = NULL_POINTER;
+                            // Reset already existing row.
+                            dyp = &NULL_POINTER;
+                            // Reset destination tui row.
+                            dy = NULL_POINTER;
 
-                            // Check if tui z dimension already exists.
-                            get(*de, (void*) &z, (void*) &dzp, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                            // Check if tui y dimension already exists.
+                            get(dz, (void*) &y, (void*) &dyp, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-                            if (*dzp != NULL_POINTER) {
+                            if (*dyp != NULL_POINTER) {
 
-                                // Use already existing tui z dimension.
-                                dz = *dzp;
+                                // Use already existing tui y dimension.
+                                dy = *dyp;
 
                             } else {
 
-                                // Allocate tui z dimension.
-                                allocate((void*) &dz, (void*) NUMBER_0_INTEGER, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                                // Allocate tui y dimension.
+                                allocate((void*) &dy, (void*) NUMBER_0_INTEGER, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-                                // Add new z dimension to tui.
-                                set(*de, (void*) &z, &dz, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                                // Add new y dimension to z dimension.
+                                set(dz, (void*) &y, &dy, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-                                // CAUTION! Do NOT increase z dimension count here!
+                                // CAUTION! Do NOT increase y dimension count here!
                                 // It is already set at reallocation above.
                             }
 
-                            // The tui y position has to be smaller than the size.
-                            if (**py < **sy) {
-
-                                if ((**py + **sy) > **dsy) {
-
-                                    **dsy = **py + **sy;
-
-                                    // Initialise destination y dimension count.
-                                    // CAUTION! It has to be set equal to the size here,
-                                    // so that later reallocations will not overwrite
-                                    // existing elements during initialisation with NULL.
-                                    **dcy = **dsy;
-                                }
-
-                                // Reallocate tui z layer.
-                                // CAUTION! The old count ocy is used, so that
-                                // only new elements get initialised with NULL.
-                                reallocate((void*) &dz, (void*) &ocy, (void*) *dsy, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-
-                                // Add new z dimension to tui.
-                                // CAUTION! The reallocate procedure returns
-                                // a different pointer, so that it has to be
-                                // set again here.
-                                set(*de, (void*) &z, &dz, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-
-                                // CAUTION! Do NOT increase destination
-                                // z dimension count here, since dz already
-                                // exists within de and is just reallocated!
-
-                                // Reset y loop index to first position.
-                                y = **py;
-
-                                while (1) {
-
-                                    if (y >= (**py + **sy)) {
-
-                                        break;
-                                    }
-
-                                    // Reset already existing row.
-                                    dyp = &NULL_POINTER;
-                                    // Reset destination tui row.
-                                    dy = NULL_POINTER;
-
-                                    // Check if tui y dimension already exists.
-                                    get(dz, (void*) &y, (void*) &dyp, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-
-                                    if (*dyp != NULL_POINTER) {
-
-                                        // Use already existing tui y dimension.
-                                        dy = *dyp;
-
-                                    } else {
-
-                                        // Allocate tui y dimension.
-                                        allocate((void*) &dy, (void*) NUMBER_0_INTEGER, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-
-                                        // Add new y dimension to z dimension.
-                                        set(dz, (void*) &y, &dy, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-
-                                        // CAUTION! Do NOT increase y dimension count here!
-                                        // It is already set at reallocation above.
-                                    }
-
-                                    // The tui x position has to be smaller than the size.
-                                    if (**px < **sx) {
-
-                                        if ((**px + **sx) > **dsx) {
-
-                                            **dsx = **px + **sx;
-
-                                            // Initialise destination x dimension count.
-                                            // CAUTION! It has to be set equal to the size here,
-                                            // so that later reallocations will not overwrite
-                                            // existing elements during initialisation with NULL.
-                                            **dcx = **dsx;
-                                        }
-
-                                        // Reallocate tui y layer.
-                                        // CAUTION! The old count ocx is used, so that
-                                        // only new elements get initialised with NULL.
-                                        reallocate((void*) &dy, (void*) &ocx, (void*) *dsx, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-
-                                        // Add new y dimension to z dimension.
-                                        // CAUTION! The reallocate procedure returns
-                                        // a different pointer, so that it has to be
-                                        // set again here.
-                                        set(dz, (void*) &y, &dy, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-
-                                        // CAUTION! Do NOT increase destination
-                                        // y dimension count here, since dy already
-                                        // exists within dz and is just reallocated!
-
-                                        // Reset y loop index to first position.
-                                        x = **px;
-
-                                        while (1) {
-
-                                            if (x >= (**px + **sx)) {
-
-                                                break;
-                                            }
-
-                                            // Reset already existing destination tui column (character).
-                                            dxp = &NULL_POINTER;
-                                            // Reset destination tui column (character).
-                                            dx = NULL_POINTER;
-
-                                            // Reset already existing destination tui character background property.
-                                            bgp = &NULL_POINTER;
-                                            // Reset already existing destination tui character foreground property.
-                                            fgp = &NULL_POINTER;
-                                            // Reset already existing destination tui character hidden property.
-                                            hp = &NULL_POINTER;
-                                            // Reset already existing destination tui character inverse property.
-                                            ip = &NULL_POINTER;
-                                            // Reset already existing destination tui character blink property.
-                                            blp = &NULL_POINTER;
-                                            // Reset already existing destination tui character underline property.
-                                            up = &NULL_POINTER;
-                                            // Reset already existing destination tui character bold property.
-                                            bp = &NULL_POINTER;
-                                            // Reset already existing destination tui character.
-                                            cp = &NULL_POINTER;
-
-                                            // Reset destination tui character background property.
-                                            bg = NULL_POINTER;
-                                            // Reset destination tui character foreground property.
-                                            fg = NULL_POINTER;
-                                            // Reset destination tui character hidden property.
-                                            h = NULL_POINTER;
-                                            // Reset destination tui character inverse property.
-                                            i = NULL_POINTER;
-                                            // Reset destination tui character blink property.
-                                            bl = NULL_POINTER;
-                                            // Reset destination tui character underline property.
-                                            u = NULL_POINTER;
-                                            // Reset destination tui character bold property.
-                                            b = NULL_POINTER;
-                                            // Reset destination tui character.
-                                            c = NULL_POINTER;
-
-                                            // Check if tui x dimension already exists.
-                                            get(dy, (void*) &x, (void*) &dxp, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-
-                                            if (*dxp != NULL_POINTER) {
-
-                                                // Use already existing tui x dimension.
-                                                dx = *dxp;
-
-                                            } else {
-
-                                                // Allocate tui x dimension.
-                                                allocate((void*) &dx, (void*) TUI_PROPERTIES_COUNT, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-
-                                                // Add new x dimension to y dimension.
-                                                set(dy, (void*) &x, &dx, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-
-                                                // CAUTION! Do NOT increase x dimension count here!
-                                                // It is already set at reallocation above.
-                                            }
-
-                                            // Check if tui character properties already exist.
-                                            get(dx, (void*) TUI_PROPERTIES_BACKGROUND_INDEX, (void*) &bgp, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-                                            get(dx, (void*) TUI_PROPERTIES_FOREGROUND_INDEX, (void*) &fgp, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-                                            get(dx, (void*) TUI_PROPERTIES_HIDDEN_INDEX, (void*) &hp, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-                                            get(dx, (void*) TUI_PROPERTIES_INVERSE_INDEX, (void*) &ip, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-                                            get(dx, (void*) TUI_PROPERTIES_BLINK_INDEX, (void*) &blp, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-                                            get(dx, (void*) TUI_PROPERTIES_UNDERLINE_INDEX, (void*) &up, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-                                            get(dx, (void*) TUI_PROPERTIES_BOLD_INDEX, (void*) &bp, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-                                            get(dx, (void*) TUI_PROPERTIES_CHARACTER_INDEX, (void*) &cp, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-
-                                            if (*bgp != NULL_POINTER) {
-
-                                                // Use already existing tui character background property.
-                                                bg = *bgp;
-
-                                            } else {
-
-                                                // Allocate tui character background property.
-                                                allocate((void*) &bg, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-
-                                                // Add tui character background property.
-                                                set(dx, (void*) TUI_PROPERTIES_BACKGROUND_INDEX, &bg, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-                                            }
-
-                                            if (*fgp != NULL_POINTER) {
-
-                                                // Use already existing tui character foreground property.
-                                                fg = *fgp;
-
-                                            } else {
-
-                                                // Allocate tui character foreground property.
-                                                allocate((void*) &fg, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-
-                                                // Add tui character foreground property.
-                                                set(dx, (void*) TUI_PROPERTIES_FOREGROUND_INDEX, &fg, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-                                            }
-
-                                            if (*hp != NULL_POINTER) {
-
-                                                // Use already existing tui character hidden property.
-                                                h = *hp;
-
-                                            } else {
-
-                                                // Allocate tui character hidden property.
-                                                allocate((void*) &h, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-
-                                                // Add tui character hidden property.
-                                                set(dx, (void*) TUI_PROPERTIES_HIDDEN_INDEX, &h, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-                                            }
-
-                                            if (*ip != NULL_POINTER) {
-
-                                                // Use already existing tui character inverse property.
-                                                i = *ip;
-
-                                            } else {
-
-                                                // Allocate tui character inverse property.
-                                                allocate((void*) &i, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-
-                                                // Add tui character inverse property.
-                                                set(dx, (void*) TUI_PROPERTIES_INVERSE_INDEX, &i, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-                                            }
-
-                                            if (*blp != NULL_POINTER) {
-
-                                                // Use already existing tui character blink property.
-                                                bl = *blp;
-
-                                            } else {
-
-                                                // Allocate tui character blink property.
-                                                allocate((void*) &bl, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-
-                                                // Add tui character blink property.
-                                                set(dx, (void*) TUI_PROPERTIES_BLINK_INDEX, &bl, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-                                            }
-
-                                            if (*up != NULL_POINTER) {
-
-                                                // Use already existing tui character underline property.
-                                                u = *up;
-
-                                            } else {
-
-                                                // Allocate tui character underline property.
-                                                allocate((void*) &u, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-
-                                                // Add tui character underline property.
-                                                set(dx, (void*) TUI_PROPERTIES_UNDERLINE_INDEX, &u, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-                                            }
-
-                                            if (*bp != NULL_POINTER) {
-
-                                                // Use already existing tui character bold property.
-                                                b = *bp;
-
-                                            } else {
-
-                                                // Allocate tui character bold property.
-                                                allocate((void*) &b, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-
-                                                // Add tui character bold property.
-                                                set(dx, (void*) TUI_PROPERTIES_BOLD_INDEX, &b, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-                                            }
-
-                                            if (*cp != NULL_POINTER) {
-
-                                                // Use already existing tui character.
-                                                c = *cp;
-
-                                            } else {
-
-                                                // Allocate tui character.
-                                                allocate((void*) &c, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
-
-                                                // Add tui character.
-                                                set(dx, (void*) TUI_PROPERTIES_CHARACTER_INDEX, &c, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-                                            }
-
-                                            // Set character properties.
-                                            mapto((void*) &bg, (void*) PRIMITIVE_COUNT, (void*) PRIMITIVE_COUNT, (void*) *bgm, (void*) *bgmc, (void*) TERMINAL_BACKGROUND_ABSTRACTION, (void*) TERMINAL_BACKGROUND_ABSTRACTION_COUNT);
-                                            mapto((void*) &fg, (void*) PRIMITIVE_COUNT, (void*) PRIMITIVE_COUNT, (void*) *fgm, (void*) *fgmc, (void*) TERMINAL_FOREGROUND_ABSTRACTION, (void*) TERMINAL_FOREGROUND_ABSTRACTION_COUNT);
-                                            set(h, (void*) PRIMITIVE_VALUE_INDEX, (void*) *hm, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-                                            set(i, (void*) PRIMITIVE_VALUE_INDEX, (void*) *im, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-                                            set(bl, (void*) PRIMITIVE_VALUE_INDEX, (void*) *blm, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-                                            set(u, (void*) PRIMITIVE_VALUE_INDEX, (void*) *um, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-                                            set(b, (void*) PRIMITIVE_VALUE_INDEX, (void*) *bm, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-
-                                            // Reset comparison result.
-                                            r = 0;
-
-                                            compare_arrays(*a, *ac, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-                                            // CAUTION! The whole row may be much longer than the given string.
-                                            // Therefore, only take characters if the index x is smaller than
-                                            // the source string model count.
-                                            if ((r != 0) && (mi < **mc)) {
-
-                                                // Get character value at position x.
-                                                get(*m, (void*) &mi, (void*) &v, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
-
-                                                // Increase model index by one.
-                                                mi++;
-
-                                            } else {
-
-                                                // Set character property to space character,
-                                                // because the part model is NOT a character,
-                                                // or the string length is smaller than
-                                                // the length of the row.
-                                                v = SPACE_CHARACTER;
-                                            }
-
-                                            // Set character.
-                                            // CAUTION! The character has to be set,
-                                            // because get returns another character pointer
-                                            // than the one that was added to dx above.
-                                            set(c, (void*) PRIMITIVE_VALUE_INDEX, (void*) v, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
-
-                                            x++;
-                                        }
-
-                                    } else {
-
-                                        log_message_debug("Could not encode textual user interface. The x position is greater or equal to the size.");
-                                    }
-
-                                    y++;
-                                }
-
-                            } else {
-
-                                log_message_debug("Could not encode textual user interface. The y position is greater or equal to the size.");
+                            if ((**px + **sx) > **dsx) {
+
+                                **dsx = **px + **sx;
+
+                                // Initialise destination x dimension count.
+                                // CAUTION! It has to be set equal to the size here,
+                                // so that later reallocations will not overwrite
+                                // existing elements during initialisation with NULL.
+                                **dcx = **dsx;
                             }
 
-                            z++;
+                            // Reallocate tui y layer.
+                            // CAUTION! The old count ocx is used, so that
+                            // only new elements get initialised with NULL.
+                            reallocate((void*) &dy, (void*) &ocx, (void*) *dsx, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
+                            // Add new y dimension to z dimension.
+                            // CAUTION! The reallocate procedure returns
+                            // a different pointer, so that it has to be
+                            // set again here.
+                            set(dz, (void*) &y, &dy, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
+                            // CAUTION! Do NOT increase destination
+                            // y dimension count here, since dy already
+                            // exists within dz and is just reallocated!
+
+                            // Reset y loop index to first position.
+                            x = **px;
+
+                            while (1) {
+
+                                if (x >= (**px + **sx)) {
+
+                                    break;
+                                }
+
+                                // Reset already existing destination tui column (character).
+                                dxp = &NULL_POINTER;
+                                // Reset destination tui column (character).
+                                dx = NULL_POINTER;
+
+                                // Reset already existing destination tui character background property.
+                                bgp = &NULL_POINTER;
+                                // Reset already existing destination tui character foreground property.
+                                fgp = &NULL_POINTER;
+                                // Reset already existing destination tui character hidden property.
+                                hp = &NULL_POINTER;
+                                // Reset already existing destination tui character inverse property.
+                                ip = &NULL_POINTER;
+                                // Reset already existing destination tui character blink property.
+                                blp = &NULL_POINTER;
+                                // Reset already existing destination tui character underline property.
+                                up = &NULL_POINTER;
+                                // Reset already existing destination tui character bold property.
+                                bp = &NULL_POINTER;
+                                // Reset already existing destination tui character.
+                                cp = &NULL_POINTER;
+
+                                // Reset destination tui character background property.
+                                bg = NULL_POINTER;
+                                // Reset destination tui character foreground property.
+                                fg = NULL_POINTER;
+                                // Reset destination tui character hidden property.
+                                h = NULL_POINTER;
+                                // Reset destination tui character inverse property.
+                                i = NULL_POINTER;
+                                // Reset destination tui character blink property.
+                                bl = NULL_POINTER;
+                                // Reset destination tui character underline property.
+                                u = NULL_POINTER;
+                                // Reset destination tui character bold property.
+                                b = NULL_POINTER;
+                                // Reset destination tui character.
+                                c = NULL_POINTER;
+
+                                // Check if tui x dimension already exists.
+                                get(dy, (void*) &x, (void*) &dxp, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
+                                if (*dxp != NULL_POINTER) {
+
+                                    // Use already existing tui x dimension.
+                                    dx = *dxp;
+
+                                } else {
+
+                                    // Allocate tui x dimension.
+                                    allocate((void*) &dx, (void*) TUI_PROPERTIES_COUNT, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
+                                    // Add new x dimension to y dimension.
+                                    set(dy, (void*) &x, &dx, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
+                                    // CAUTION! Do NOT increase x dimension count here!
+                                    // It is already set at reallocation above.
+                                }
+
+                                // Check if tui character properties already exist.
+                                get(dx, (void*) TUI_PROPERTIES_BACKGROUND_INDEX, (void*) &bgp, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                                get(dx, (void*) TUI_PROPERTIES_FOREGROUND_INDEX, (void*) &fgp, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                                get(dx, (void*) TUI_PROPERTIES_HIDDEN_INDEX, (void*) &hp, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                                get(dx, (void*) TUI_PROPERTIES_INVERSE_INDEX, (void*) &ip, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                                get(dx, (void*) TUI_PROPERTIES_BLINK_INDEX, (void*) &blp, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                                get(dx, (void*) TUI_PROPERTIES_UNDERLINE_INDEX, (void*) &up, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                                get(dx, (void*) TUI_PROPERTIES_BOLD_INDEX, (void*) &bp, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                                get(dx, (void*) TUI_PROPERTIES_CHARACTER_INDEX, (void*) &cp, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
+                                if (*bgp != NULL_POINTER) {
+
+                                    // Use already existing tui character background property.
+                                    bg = *bgp;
+
+                                } else {
+
+                                    // Allocate tui character background property.
+                                    allocate((void*) &bg, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+
+                                    // Add tui character background property.
+                                    set(dx, (void*) TUI_PROPERTIES_BACKGROUND_INDEX, &bg, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                                }
+
+                                if (*fgp != NULL_POINTER) {
+
+                                    // Use already existing tui character foreground property.
+                                    fg = *fgp;
+
+                                } else {
+
+                                    // Allocate tui character foreground property.
+                                    allocate((void*) &fg, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+
+                                    // Add tui character foreground property.
+                                    set(dx, (void*) TUI_PROPERTIES_FOREGROUND_INDEX, &fg, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                                }
+
+                                if (*hp != NULL_POINTER) {
+
+                                    // Use already existing tui character hidden property.
+                                    h = *hp;
+
+                                } else {
+
+                                    // Allocate tui character hidden property.
+                                    allocate((void*) &h, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+
+                                    // Add tui character hidden property.
+                                    set(dx, (void*) TUI_PROPERTIES_HIDDEN_INDEX, &h, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                                }
+
+                                if (*ip != NULL_POINTER) {
+
+                                    // Use already existing tui character inverse property.
+                                    i = *ip;
+
+                                } else {
+
+                                    // Allocate tui character inverse property.
+                                    allocate((void*) &i, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+
+                                    // Add tui character inverse property.
+                                    set(dx, (void*) TUI_PROPERTIES_INVERSE_INDEX, &i, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                                }
+
+                                if (*blp != NULL_POINTER) {
+
+                                    // Use already existing tui character blink property.
+                                    bl = *blp;
+
+                                } else {
+
+                                    // Allocate tui character blink property.
+                                    allocate((void*) &bl, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+
+                                    // Add tui character blink property.
+                                    set(dx, (void*) TUI_PROPERTIES_BLINK_INDEX, &bl, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                                }
+
+                                if (*up != NULL_POINTER) {
+
+                                    // Use already existing tui character underline property.
+                                    u = *up;
+
+                                } else {
+
+                                    // Allocate tui character underline property.
+                                    allocate((void*) &u, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+
+                                    // Add tui character underline property.
+                                    set(dx, (void*) TUI_PROPERTIES_UNDERLINE_INDEX, &u, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                                }
+
+                                if (*bp != NULL_POINTER) {
+
+                                    // Use already existing tui character bold property.
+                                    b = *bp;
+
+                                } else {
+
+                                    // Allocate tui character bold property.
+                                    allocate((void*) &b, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+
+                                    // Add tui character bold property.
+                                    set(dx, (void*) TUI_PROPERTIES_BOLD_INDEX, &b, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                                }
+
+                                if (*cp != NULL_POINTER) {
+
+                                    // Use already existing tui character.
+                                    c = *cp;
+
+                                } else {
+
+                                    // Allocate tui character.
+                                    allocate((void*) &c, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+
+                                    // Add tui character.
+                                    set(dx, (void*) TUI_PROPERTIES_CHARACTER_INDEX, &c, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                                }
+
+                                // Set character properties.
+                                mapto((void*) &bg, (void*) PRIMITIVE_COUNT, (void*) PRIMITIVE_COUNT, (void*) *bgm, (void*) *bgmc, (void*) TERMINAL_BACKGROUND_ABSTRACTION, (void*) TERMINAL_BACKGROUND_ABSTRACTION_COUNT);
+                                mapto((void*) &fg, (void*) PRIMITIVE_COUNT, (void*) PRIMITIVE_COUNT, (void*) *fgm, (void*) *fgmc, (void*) TERMINAL_FOREGROUND_ABSTRACTION, (void*) TERMINAL_FOREGROUND_ABSTRACTION_COUNT);
+                                set(h, (void*) PRIMITIVE_VALUE_INDEX, (void*) *hm, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+                                set(i, (void*) PRIMITIVE_VALUE_INDEX, (void*) *im, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+                                set(bl, (void*) PRIMITIVE_VALUE_INDEX, (void*) *blm, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+                                set(u, (void*) PRIMITIVE_VALUE_INDEX, (void*) *um, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+                                set(b, (void*) PRIMITIVE_VALUE_INDEX, (void*) *bm, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+
+                                // Reset comparison result.
+                                r = 0;
+
+                                compare_arrays(*a, *ac, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+                                // CAUTION! The whole row may be much longer than the given string.
+                                // Therefore, only take characters if the index x is smaller than
+                                // the source string model count.
+                                if ((r != 0) && (mi < **mc)) {
+
+                                    // Get character value at position x.
+                                    get(*m, (void*) &mi, (void*) &v, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+
+                                    // Increase model index by one.
+                                    mi++;
+
+                                } else {
+
+                                    // Set character property to space character,
+                                    // because the part model is NOT a character,
+                                    // or the string length is smaller than
+                                    // the length of the row.
+                                    v = SPACE_CHARACTER;
+                                }
+
+                                // Set character.
+                                // CAUTION! The character has to be set,
+                                // because get returns another character pointer
+                                // than the one that was added to dx above.
+                                set(c, (void*) PRIMITIVE_VALUE_INDEX, (void*) v, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+
+                                x++;
+                            }
+
+                            y++;
                         }
 
-                    } else {
-
-                        log_message_debug("Could not encode textual user interface. The z position is greater or equal to the size.");
+                        z++;
                     }
 
                 } else {
