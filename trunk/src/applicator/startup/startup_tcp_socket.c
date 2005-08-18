@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2005-08-09 13:04:26 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2005-08-18 22:30:35 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -85,7 +85,7 @@ void startup_tcp_socket( void* internals, void* know,
 
             log_message_debug("Allocate tcp server socket.");
 
-            fprintf(stderr, "DEBUG: The port is: %d \n", *(int*)socket_port_model);
+            fprintf(stderr, "DEBUG: The port is: %d \n", *(int*) socket_port_model);
 
             // The tcp server socket.
             int* s = NULL_POINTER;

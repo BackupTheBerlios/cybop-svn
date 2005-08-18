@@ -24,7 +24,7 @@
  * - receive a file stream into a byte array
  * - send a file stream from a byte array
  *
- * @version $Revision: 1.7 $ $Date: 2005-08-09 13:04:27 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2005-08-18 22:30:35 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -116,9 +116,6 @@ void write_terminal(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             // Write to terminal.
             fputs((char*) ts, *d);
-
-            //?? TODO: temporary. Move to receive loop into an own thread!?
-            getc(stdin);
 
             // Destroy terminated control sequences.
             deallocate_array((void*) &ts, (void*) &tss, (void*) CHARACTER_ARRAY);

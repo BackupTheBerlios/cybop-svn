@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.13 $ $Date: 2005-08-09 13:04:26 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2005-08-18 22:30:35 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -80,7 +80,7 @@ void startup_linux_console(void* p0, void* p1, void* p2, void* p3) {
         // Set file stream.
         // CAUTION! Possibly, stdin must be used instead of stdout here!
         t = stdout;
-        fprintf(stdout, "TEST: The terminal file stream is: %i\n", t);
+
         // Get file descriptor for file stream.
         int d = fileno(t);
         // Copy termios attributes from file descriptor.

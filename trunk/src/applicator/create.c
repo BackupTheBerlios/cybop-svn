@@ -22,7 +22,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.15 $ $Date: 2005-08-11 22:33:46 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2005-08-18 22:30:35 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -363,9 +363,9 @@ void create(void* p0, void* p1, void* p2, void* p3, void* p4,
  *
  * @param p0 the parameters
  * @param p1 the parameters count
- * @param p2 the knowledge
- * @param p3 the knowledge count
- * @param p4 the knowledge size
+ * @param p2 the knowledge memory
+ * @param p3 the knowledge memory count
+ * @param p4 the knowledge memory size
  */
 void create_part(void* p0, void* p1, void* p2, void* p3, void* p4) {
 

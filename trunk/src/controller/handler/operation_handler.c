@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2005-08-11 22:33:46 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2005-08-18 22:30:35 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -75,12 +75,11 @@ void handle_operation(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
     log_message_debug("\n\n");
     log_message((void*) INFO_LOG_LEVEL, (void*) HANDLE_OPERATION_MESSAGE, (void*) HANDLE_OPERATION_MESSAGE_COUNT);
 
+    //?? TEST
     fprintf(stderr, "TEST: Operation: %s\n", (char*) p8);
     fprintf(stderr, "TEST: Operation count: %i\n", *((int*) p9));
-
-    //?? TEST
-    fprintf(stderr, "TEST handler p1: %i\n", p1);
-    test_knowledge_model(p1, p2, 3);
+//??    fprintf(stderr, "TEST handler p1: %i\n", p1);
+//??    test_knowledge_model(p1, p2, 3);
 
     // The comparison result.
     int r = 0;
@@ -262,7 +261,7 @@ void handle_operation(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
         if (r != 0) {
 
-            receive_message(p10, p11, p0, p1, p2, p3);
+            receive_message(p10, p11, p0, p1, p2, p3, p4, p5, p6);
         }
     }
 

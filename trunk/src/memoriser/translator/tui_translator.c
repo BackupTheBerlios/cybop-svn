@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.22 $ $Date: 2005-08-17 16:08:24 $ $Author: christian $
+ * @version $Revision: 1.23 $ $Date: 2005-08-18 22:30:35 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -37,8 +37,6 @@
 #include "../../globals/variables/variables.c"
 #include "../../memoriser/accessor.c"
 #include "../../memoriser/mapper.c"
-//?? TEST only
-//?? #include "../../tester/tester.c"
 
 /**
  * Decodes the tui model into a compound model.
@@ -257,8 +255,6 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
             // Iterate through compound parts.
             while (1) {
 
-//??    printf("\nTEST translator j: %i\n", j);
-
                 if (j >= *sc) {
 
                     break;
@@ -390,23 +386,11 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 dsy = (int**) &NULL_POINTER;
                 dsx = (int**) &NULL_POINTER;
 
-//??    test_knowledge_model(p3, p4, 4);
-
                 // Get part at index j.
                 get_compound_element_by_index(p3, p4, (void*) &j,
                     (void*) &a, (void*) &ac, (void*) &as,
                     (void*) &m, (void*) &mc, (void*) &ms,
                     (void*) &d, (void*) &dc, (void*) &ds);
-
-/*??
-    printf("TEST translator char a: %s\n", (char*) *a);
-    printf("TEST translator int ac: %i\n", *((int*) *ac));
-    printf("TEST translator m: %i\n", *m);
-    printf("TEST translator m as string: %s\n", (char*) *m);
-    printf("TEST translator mc: %i\n", *((int*) *mc));
-    printf("TEST translator d: %i\n", d);
-    printf("TEST translator dc: %i\n", *((int*) *dc));
-*/
 
                 // Get part position from details.
                 get_compound_element_by_name(*d, *dc,
@@ -881,8 +865,6 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 compare_arrays(*a, *ac, (void*) CYBOL_ABSTRACTION, (void*) CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
                 if (r != 0) {
-
-//??    printf("TEST translator recursive call follows r: %i\n", r);
 
                     // The part model is a compound.
 

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.21 $ $Date: 2005-08-11 22:33:46 $ $Author: christian $
+ * @version $Revision: 1.22 $ $Date: 2005-08-18 22:30:35 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -163,13 +163,7 @@ void send_message(void* p0, void* p1,
 
         if (r != 0) {
 
-            // The terminal (device name).
-            void** t = &NULL_POINTER;
-
-            // Get terminal.
-            get_array_elements(p2, (void*) TERMINAL_FILE_DESCRIPTOR_INTERNAL, (void*) &t, (void*) POINTER_ARRAY);
-
-            send_linux_console((void*) t, NULL_POINTER, NULL_POINTER, *mm, *mmc, p2);
+            send_linux_console(p2, *mm, *mmc);
         }
     }
 

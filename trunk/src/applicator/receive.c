@@ -20,14 +20,16 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2005-08-11 22:33:46 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2005-08-18 22:30:35 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef RECEIVE_SOURCE
 #define RECEIVE_SOURCE
 
+#include "../applicator/receive/receive_linux_console.c"
 #include "../applicator/receive/receive_tcp_socket.c"
+#include "../applicator/receive/receive_x_window_system.c"
 #include "../globals/constants/abstraction_constants.c"
 #include "../globals/constants/channel_constants.c"
 #include "../globals/constants/name_constants.c"
@@ -64,9 +66,12 @@
  * @param p3 the knowledge memory
  * @param p4 the knowledge memory count
  * @param p5 the knowledge memory size
+ * @param p6 the signal memory
+ * @param p7 the signal memory count
+ * @param p8 the signal memory size
  */
 void receive_message(void* p0, void* p1,
-    void* p2, void* p3, void* p4, void* p5) {
+    void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8) {
 
     // The service abstraction.
     void** sa = &NULL_POINTER;
@@ -102,13 +107,15 @@ void receive_message(void* p0, void* p1,
         (void*) &sd, (void*) &sdc, (void*) &sds,
         p3, p4);
 
-    // Get parameters.
+    // Get blocking.
     get_real_compound_element_by_name(p0, p1,
         (void*) BLOCKING_NAME, (void*) BLOCKING_NAME_COUNT,
         (void*) &ba, (void*) &bac, (void*) &bas,
         (void*) &bm, (void*) &bmc, (void*) &bms,
         (void*) &bd, (void*) &bdc, (void*) &bds,
         p3, p4);
+
+    log_message_debug("Receive.");
 
     // The comparison result.
     int r = 0;
@@ -119,13 +126,7 @@ void receive_message(void* p0, void* p1,
 
         if (r != 0) {
 
-            //?? The temporary standard console output as destination.
-            //?? Possibly use "sender" information instead, later.
-            void* tmpd = (void*) stdout;
-            void* tmpdc = NULL_POINTER;
-            void* tmpds = NULL_POINTER;
-
-//??            send_tui(tmpd, tmpdc, tmpds, *mm, *mmc);
+            receive_linux_console(p2, p3, p4, p5, p6, p7, p8);
         }
     }
 
