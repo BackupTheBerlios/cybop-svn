@@ -1,4 +1,3 @@
-
 #
 # $RCSfile: packaging_instructions.txt,v $
 #
@@ -22,7 +21,7 @@
 # - Cybernetics Oriented Programming -
 #
 # Version:
-# $Revision: 1.4 $ $Date: 2005-07-05 07:16:42 $ $Author: christian $
+# $Revision: 1.5 $ $Date: 2005-08-20 11:57:01 $ $Author: christian $
 #
 # Authors:
 # Andreas Tille <tille@debian.org>
@@ -130,4 +129,16 @@ Das habe ich auch gelesen. Das debhelper Programm dh_compress packt
 alles Dateien, die ins /usr/share/doc Verzeichnis kommen und grösser als 4
 kbyte sind.
 Man kann das aber wie ober geschrieben unterbinden.
+
+--
+
+http://people.debian.org/~tille/cdd/ap-bts.en.html#s-howto_itp
+
+I explained "How to ask for packages which are not yet included" especially
+for the field of Custom Debian Distributions (Debian-Med is one of these).
+
+--
+
+New maintainer's reference:
+http://www.debian.org/devel/join/newmaint
 
