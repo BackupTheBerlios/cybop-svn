@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2005-08-18 22:30:35 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2005-08-21 19:14:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -86,6 +86,19 @@ void receive_message(void* p0, void* p1,
     void** sdc = &NULL_POINTER;
     void** sds = &NULL_POINTER;
 
+    // The commands abstraction.
+    void** ca = &NULL_POINTER;
+    void** cac = &NULL_POINTER;
+    void** cas = &NULL_POINTER;
+    // The commands model.
+    void** cm = &NULL_POINTER;
+    void** cmc = &NULL_POINTER;
+    void** cms = &NULL_POINTER;
+    // The commands details.
+    void** cd = &NULL_POINTER;
+    void** cdc = &NULL_POINTER;
+    void** cds = &NULL_POINTER;
+
     // The blocking abstraction.
     void** ba = &NULL_POINTER;
     void** bac = &NULL_POINTER;
@@ -107,6 +120,14 @@ void receive_message(void* p0, void* p1,
         (void*) &sd, (void*) &sdc, (void*) &sds,
         p3, p4);
 
+    // Get commands.
+    get_real_compound_element_by_name(p0, p1,
+        (void*) COMMANDS_NAME, (void*) COMMANDS_NAME_COUNT,
+        (void*) &ca, (void*) &cac, (void*) &cas,
+        (void*) &cm, (void*) &cmc, (void*) &cms,
+        (void*) &cd, (void*) &cdc, (void*) &cds,
+        p3, p4);
+
     // Get blocking.
     get_real_compound_element_by_name(p0, p1,
         (void*) BLOCKING_NAME, (void*) BLOCKING_NAME_COUNT,
@@ -126,7 +147,7 @@ void receive_message(void* p0, void* p1,
 
         if (r != 0) {
 
-            receive_linux_console(p2, p3, p4, p5, p6, p7, p8);
+            receive_linux_console(p2, p3, p4, p5, p6, p7, p8, *cm, *cmc);
         }
     }
 

@@ -20,31 +20,19 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-08-18 22:30:35 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-08-21 19:14:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef RECEIVE_LINUX_CONSOLE_SOURCE
 #define RECEIVE_LINUX_CONSOLE_SOURCE
 
-//?? #include <stdio.h>
-//?? #include <unistd.h>
 #include "../../globals/constants/abstraction_constants.c"
-//?? #include "../../globals/constants/boolean_constants.c"
-//?? #include "../../globals/constants/channel_constants.c"
-//?? #include "../../globals/constants/character_constants.c"
-//?? #include "../../globals/constants/control_sequence_constants.c"
 #include "../../globals/constants/structure_constants.c"
 #include "../../globals/variables/variables.c"
-//?? #include "../../memoriser/accessor.c"
-//?? #include "../../memoriser/allocator.c"
+#include "../../memoriser/accessor/compound_accessor.c"
+#include "../../memoriser/allocator.c"
 #include "../../memoriser/array.c"
-//?? #include "../../memoriser/converter.c"
-//?? #include "../../memoriser/translator.c"
-
-//?? TEST
-#include "../../globals/constants/character_constants.c"
-#include "../../globals/constants/constant.c"
 
 /**
  * Receives a textual user interface (tui) via linux console.
@@ -56,8 +44,11 @@
  * @param p4 the signal memory
  * @param p5 the signal memory count
  * @param p6 the signal memory size
+ * @param p7 the commands
+ * @param p8 the commands count
  */
-void receive_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
+void receive_linux_console(void* p0, void* p1, void* p2, void* p3,
+    void* p4, void* p5, void* p6, void* p7, void* p8) {
 
     // The terminal (device name).
     void** t = &NULL_POINTER;
@@ -68,32 +59,38 @@ void receive_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, voi
     // The character.
     char c = *NULL_CONTROL_CHARACTER;
 
-    // Get character from stream.
+    // Get character from terminal.
     c = fgetc(stdin);
 
-    //?? Identify currently active (top-most) tui window,
-    //?? which is set as pointer in the internal memory.
+    // The command abstraction.
+    void** ca = &NULL_POINTER;
+    void** cac = &NULL_POINTER;
+    void** cas = &NULL_POINTER;
+    // The command model.
+    void** cm = &NULL_POINTER;
+    void** cmc = &NULL_POINTER;
+    void** cms = &NULL_POINTER;
+    // The command details.
+    void** cd = &NULL_POINTER;
+    void** cdc = &NULL_POINTER;
+    void** cds = &NULL_POINTER;
 
-    //?? Determine the command (signal) corresponding to the typed key.
-    //?? The key-command mapping has to be given by the CYBOL application,
-    //?? as mapping knowledge model.
+    // Get actual command belonging to the character.
+    get_compound_element_by_encapsulated_name(p7, p8,
+        (void*) &c, (void*) CHARACTER_COUNT,
+        (void*) &ca, (void*) &cac, (void*) &cas,
+        (void*) &cm, (void*) &cmc, (void*) &cms,
+        (void*) &cd, (void*) &cdc, (void*) &cds,
+        p1, p2);
 
-    if (c == 'b') {
+    // The signal id.
+    int* id = NULL_POINTER;
+    allocate((void*) &id, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    *id = 0;
+    get_new_signal_id(p4, p5, (void*) id);
 
-        // The signal id.
-        int* id = NULL_POINTER;
-        allocate((void*) &id, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-        *id = 0;
-        get_new_signal_id(p4, p5, (void*) id);
-
-        // Add signal to signal memory.
-        set_signal(p4, p5, p6, (void*) CYBOL_ABSTRACTION, (void*) CYBOL_ABSTRACTION_COUNT, (void*) "resmedicinae/logic/shutdown.cybol", (void*) NUMBER_33_INTEGER, NULL_POINTER, NULL_POINTER, (void*) NORMAL_PRIORITY, (void*) id);
-//??        set_signal(p4, p5, p6, (void*) OPERATION_ABSTRACTION, (void*) OPERATION_ABSTRACTION_COUNT, (void*) "exit", (void*) NUMBER_4_INTEGER, NULL_POINTER, NULL_POINTER, (void*) NORMAL_PRIORITY, (void*) id);
-
-    fprintf(stderr, "TEST in: %i\n", *t);
-    }
-
-    fprintf(stderr, "TEST out: %i\n", *t);
+    // Add signal to signal memory.
+    set_signal(p4, p5, p6, *ca, *cac, *cm, *cmc, *cd, *cdc, (void*) NORMAL_PRIORITY, (void*) id);
 }
 
 /* RECEIVE_LINUX_CONSOLE_SOURCE */

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.10 $ $Date: 2005-08-10 09:38:07 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2005-08-21 19:14:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -321,6 +321,11 @@ static int* MESSAGE_NAME_COUNT = NUMBER_7_INTEGER_ARRAY;
 static char URL_NAME_ARRAY[] = {'u', 'r', 'l'};
 static char* URL_NAME = URL_NAME_ARRAY;
 static int* URL_NAME_COUNT = NUMBER_3_INTEGER_ARRAY;
+
+/** The commands name. */
+static char COMMANDS_NAME_ARRAY[] = {'c', 'o', 'm', 'm', 'a', 'n', 'd', 's'};
+static char* COMMANDS_NAME = COMMANDS_NAME_ARRAY;
+static int* COMMANDS_NAME_COUNT = NUMBER_8_INTEGER_ARRAY;
 
 /** The blocking name. */
 static char BLOCKING_NAME_ARRAY[] = {'b', 'l', 'o', 'c', 'k', 'i', 'n', 'g'};
