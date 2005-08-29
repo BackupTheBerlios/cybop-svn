@@ -18,7 +18,7 @@
         - Cybernetics Oriented Programming -
     /-->
     <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1"/>
-    <meta name="date" content="$Revision: 1.2 $ $Date: 2005-07-23 11:00:36 $">
+    <meta name="date" content="$Revision: 1.3 $ $Date: 2005-08-29 11:57:34 $">
     <meta name="author" content="$Author: christian $">
     <link rel="stylesheet" type="text/css" href="../../cybop.css"/>
     <title>CYBOP 0.6.0.0</title>
@@ -51,38 +51,103 @@
                         </th>
                     </tr>
                     <tr bgcolor="#000000">
-                        <td bgcolor="#FFFFC0"/>
+                        <td bgcolor="#C0FFC0"/>
                         <td align="left" valign="top">
                             <h6>Project</h6>
                             <ul>
-                                <li>Sponsor Debian packages and upload to testing distribution</li>
-                                <li>Provide source code tar balls (tar.gz), as pre-condition</li>
+                                <li>Adapt Makefile to restructured source code directories</li>
                             </ul>
                         </td>
                         <td align="left" valign="top">
-                            Andreas Tille<br>
-                            <<a href="mailto:tille@debian.org">tille@debian.org</a>><br>
                             Christian Heller<br>
                             <<a href="mailto:christian.heller@tuxtax.de">christian.heller@tuxtax.de</a>><br>
                         </td>
                     </tr>
                     <tr bgcolor="#000000">
-                        <td bgcolor="#FFFFC0"/>
+                        <td bgcolor="#C0FFC0"/>
                         <td align="left" valign="top">
                             <h6>CYBOI</h6>
                             <ul>
-                                <li>Write log messages to a file instead of to console</li>
-                                <li>Hand over memories as parameters, instead of reading
-                                    them every time from <i>internal_memory</i></li>
+                                <li>Prepare terminal handling of <i>Textual User Interfaces</i> (TUI);
+                                    (see <a href="http://zemljanka.sourceforge.net/cursed/">Zemljanka</a>
+                                    and <a href="http://tvision.sourceforge.net/">TurboVision</a>)</li>
+                                <li>Debug many errors caused by NULL_POINTER checks
+                                    which tested the variables instead of their dereferenced values<br>
+                                    wrong: if (a != NULL_POINTER)<br>
+                                    right: if (*a != NULL_POINTER)<br>
+                                    this caused knowledge models not to be created/ added
+                                    to the knowledge root/ <i>whole</i> model</li>
+                                <li>Replace NULL_POINTER with &NULL_POINTER,
+                                    where a local void** variable is initialised</li>
+                                <li>Remove all <i>const</i> keywords before static variables
+                                    and before parameters in headers of procedures,
+                                    for less code, improved readability and because the
+                                    <i>const</i> keyword is considered useless now:
+                                    <ol>
+                                        <li>pointers that were handed over do mostly not
+                                            get manipulated directly anyway, only pointers
+                                            within the array pointed to</li>
+                                        <li>arrays defined with = {} are constant anyway</li>
+                                    </ol>
+                                </li>
+                                <li>Delete all character counts and replace them
+                                    with just one count constant</li>
+                                <li>Change and unify all comparisons, so that
+                                    their <i>if</i> expressions now compare for
+                                    equality with <i>0</i> instead of <i>1</i></li>
+                                <li>Replace constant count variables with the
+                                    already existing integer counts, to save
+                                    redundant code and also some memory, e.g.:<br>
+                                    static const int COMMA_CHARACTER_COUNT_ARRAY[] = {1};<br>
+                                    static const int* COMMA_CHARACTER_COUNT = COMMA_CHARACTER_COUNT_ARRAY;<br>
+                                    replaced with:<br>
+                                    static const int* COMMA_CHARACTER_COUNT = NUMBER_1_INTEGER_ARRAY;</li>
+                                <li>Delete superfluous source files for primitives;
+                                    only vectors are used now everywhere</li>
+                                <li>Rename <i>string</i> to <i>character vector</i></li>
+                                <li>Simplify source code by replacing
+                                    <i>POINTER_NULL_POINTER</i>, <i>INTEGER_NULL_POINTER</i>,
+                                    <i>FILE_NULL_POINTER</i> etc. in <i>all</i>
+                                    source files with just <i>NULL_POINTER</i></li>
+                                <li>Replace <i>allocate_integer</i> and others
+                                    with more general procedure <i>allocate</i></li>
+                                <li>Prepare <i>send_terminal</i> procedure for tui output</li>
                                 <li>Rename low-level <i>receive</i>/ <i>send</i> into
                                     <i>read</i>/ <i>write</i>, to better distinguish them from
                                     the high-level <i>receive</i>/ <i>send</i> CYBOL operations</li>
                                 <li>Rename low-level <i>create</i>/ <i>destroy</i> into
                                     <i>allocate</i>/ <i>deallocate</i>, to better distinguish them from
                                     the high-level <i>create</i>/ <i>destroy</i> CYBOL operations</li>
-                                <li>Implement terminal handling of <i>Textual User Interfaces</i> (TUI);
-                                    (see <a href="http://zemljanka.sourceforge.net/cursed/">Zemljanka</a>
-                                    and <a href="http://tvision.sourceforge.net/">TurboVision</a>)</li>
+                                <li>Rename file <i>set.c</i> to <i>copy.c</i></li>
+                                <li>Add knowledge memory and signal memory to internal memory;
+                                    this HAS TO BE DONE, because when using threads,
+                                    ONLY ONE parameter (the internal memory) can be
+                                    handed over to these</li>
+                                <li>Hand over <i>internal memory</i>, <i>knowledge memory</i>
+                                    and <i>signal memory</i> as parameters, instead of
+                                    reading them every time from <i>internal_memory</i></li>
+                                <li>Rename <i>internals_memory</i> to <i>internal_memory</i></li>
+                                <li>Adapt some include paths and procedure names after restructuring</li>
+                                <li>Delete memory managers and put code into general <i>manager.c</i></li>
+                                <li>Write log messages to a file instead of to console</li>
+                                <li>Replace all American English (e.g. <i>lize</i> suffixes)
+                                    with British (Commonwealth) English (e.g. <i>lise</i>)
+                                    which is now consistently used throughout all source code</li>
+                                <li>Move directories <i>communicator</i>, <i>converter</i>
+                                    and <i>translator</i> from parent directory
+                                    <i>controller</i> to parent directory <i>memoriser</i></li>
+                                <li>Rename directory <i>computer</i> to <i>applicator</i></li>
+                                <li>Restructure source code directories in relation
+                                    to <i>von Neumann</i> computer architecture,
+                                    i.e. consisting of the parts:
+                                    <ul>
+                                        <li>memoriser (Memory, containing states)</li>
+                                        <li>controller (Control Unit, coordinating flow)</li>
+                                        <li>applicator (Algorithmic Logic Unit = ALU, containing logic)</li>
+                                        <li>globals (additional, global constants and variables)</li>
+                                        <li>tester (additional, for testing)</li>
+                                    </ul>
+                                </li>
                             </ul>
                         </td>
                         <td align="left" valign="top">
@@ -91,13 +156,16 @@
                         </td>
                     </tr>
                     <tr bgcolor="#000000">
-                        <td bgcolor="#FF8080"/>
+                        <td bgcolor="#C0FFC0"/>
                         <td align="left" valign="top">
                             <h6>CYBOL</h6>
                             <ul>
+                                <li>Add some abstraction- and structure constants</li>
                             </ul>
                         </td>
                         <td align="left" valign="top">
+                            Christian Heller<br>
+                            <<a href="mailto:christian.heller@tuxtax.de">christian.heller@tuxtax.de</a>><br>
                         </td>
                     </tr>
                     </table>
@@ -110,7 +178,7 @@
         <td>
             <!-- Copyright Information. -->
             <hr noshade size="1"/>
-            <font size="1">Copyright (c) 2002-2005. <a href="mailto:cybop-webmasters@lists.berlios.de">The CYBOP Webmasters</a>. All rights reserved. GNU FDL license. Last Update: 2005-07-23</font>
+            <font size="1">Copyright (c) 2002-2005. <a href="mailto:cybop-webmasters@lists.berlios.de">The CYBOP Webmasters</a>. All rights reserved. GNU FDL license. Last Update: 2005-08-29</font>
         </td>
     </tr>
     </table>
