@@ -22,7 +22,7 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.33 $ $Date: 2005-07-12 15:23:38 $ $Author: christian $
+# @version $Revision: 1.34 $ $Date: 2005-08-30 07:16:16 $ $Author: christian $
 # @author Michael Simon <michael.simon@gmx.net>
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
@@ -267,19 +267,34 @@ $(OBJ)/tester/%.o: $(SRC)/tester/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
 #
-# Creates distribution file.
+# Creates cybop distribution tarball.
 #
-# - packs objects
-# - packs binaries
-# - packs cybol libraries
-# - packs documentation
-# - writes distribution file cyboi.tar.gz to directory /dist
-#
-dist:
-	clean
+cybop-dist:
+	@echo Create cybop distribution tarball.
+#	clean
 	-cd ..; mkdir dist
-	tar -cvzf dist/cyboi.tar.gz * -X admin/exclude
-	@echo Created distribution file.
+	tar -cvzf dist/cybop.tar.gz * -X admin/cybop-exclude
+	@echo Successfully finished creating cybop distribution tarball.
+
+#
+# Creates cyboi distribution tarball.
+#
+cyboi-dist:
+	@echo Create cyboi distribution tarball.
+#	clean
+	-cd ..; mkdir dist
+	tar -cvzf dist/cyboi.tar.gz * -X admin/cyboi-exclude
+	@echo Successfully finished creating cyboi distribution tarball.
+
+#
+# Creates cybol distribution tarball.
+#
+cybol-dist:
+	@echo Create cybol distribution tarball.
+#	clean
+	-cd ..; mkdir dist
+	tar -cvzf dist/cybol.tar.gz * -X admin/cybol-exclude
+	@echo Successfully finished creating cybol distribution tarball.
 
 #
 # Cleans cyboi files.
