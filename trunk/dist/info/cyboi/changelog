@@ -1,5 +1,53 @@
+cyboi (0.6.0-1) unstable; urgency=low
+
+  * Update debian package files using multi-binary packages
+  * Prepare terminal handling of Textual User Interfaces (TUI); (see Zemljanka and TurboVision)
+  * Debug many errors caused by NULL_POINTER checks which tested the variables instead of their dereferenced values
+    wrong: if (a != NULL_POINTER)
+    right: if (*a != NULL_POINTER)
+    this caused knowledge models not to be created/ added to the knowledge root/ whole model
+  * Replace NULL_POINTER with &NULL_POINTER, where a local void** variable is initialised
+  * Remove all const keywords before static variables and before parameters in headers of procedures, for less code, improved readability and because the const keyword is considered useless now:
+    pointers that were handed over do mostly not get manipulated directly anyway, only pointers within the array pointed to
+    arrays defined with = {} are constant anyway
+  * Delete all character counts and replace them with just one count constant
+  * Change and unify all comparisons, so that their if expressions now compare for equality with 0 instead of 1
+  * Replace constant count variables with the already existing integer counts, to save redundant code and also some memory, e.g.:
+    static const int COMMA_CHARACTER_COUNT_ARRAY[] = {1};
+    static const int* COMMA_CHARACTER_COUNT = COMMA_CHARACTER_COUNT_ARRAY;
+    replaced with:
+    static const int* COMMA_CHARACTER_COUNT = NUMBER_1_INTEGER_ARRAY;
+  * Delete superfluous source files for primitives; only vectors are used now everywhere
+  * Rename string to character vector
+  * Simplify source code by replacing POINTER_NULL_POINTER, INTEGER_NULL_POINTER, FILE_NULL_POINTER etc. in all source files with just NULL_POINTER
+  * Replace allocate_integer and others with more general procedure allocate
+  * Prepare send_terminal procedure for tui output
+  * Rename low-level receive/ send into read/ write, to better distinguish them from the high-level receive/ send CYBOL operations
+  * Rename low-level create/ destroy into allocate/ deallocate, to better distinguish them from the high-level create/ destroy CYBOL operations
+  * Rename file set.c to copy.c
+  * Add knowledge memory and signal memory to internal memory; this HAS TO BE DONE, because when using threads, ONLY ONE parameter (the internal memory) can be handed over to these
+  * Hand over internal memory, knowledge memory and signal memory as parameters, instead of reading them every time from internal_memory
+  * Rename internals_memory to internal_memory
+  * Adapt some include paths and procedure names after restructuring
+  * Delete memory managers and put code into general manager.c
+  * Write log messages to a file instead of to console
+  * Replace all American English (e.g. lize suffixes) with British (Commonwealth) English (e.g. lise) which is now consistently used throughout all source code
+  * Move directories communicator, converter and translator from parent directory controller to parent directory memoriser
+  * Rename directory computer to applicator
+  * Restructure source code directories in relation to von Neumann computer architecture, i.e. consisting of the parts:
+    memoriser (Memory, containing states)
+    controller (Control Unit, coordinating flow)
+    applicator (Algorithmic Logic Unit = ALU, containing logic)
+    globals (additional, global constants and variables)
+    tester (additional, for testing)
+
+ -- Christian Heller <christian.heller@tuxtax.de>  Tue, 30 Aug 2005 18:31:46 +0200
+
+
 cyboi (0.5.0.0) unstable; urgency=low
 
+  * Add Makefile and exclude file for compilation
+  * Move some paragraphs and change a few formulations in documentation
   * Complete implementation of the loop operation
   * Correct bug in get_new_signal_id of signal_memory_accessor.c
   * Implement Web User Interface (WUI) handling by generating (translating) HTML from CYBOL (comparable to XUL/ UIML)
@@ -22,6 +70,7 @@ cyboi (0.5.0.0) unstable; urgency=low
 
 cyboi (0.4.0.0) unstable; urgency=low
 
+  * Add first minimal CYBOI documentation manual (simple text file)
   * Move global variables and constants into special files
   * Use encapsulated primitives so that pointers
     can be handed through the system, instead of

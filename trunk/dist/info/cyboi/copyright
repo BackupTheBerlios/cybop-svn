@@ -1,5 +1,5 @@
-This package was debianized by Dennis Reichenbach <dennis.reichenbach@gmx.net> on
-Mon, 27 Jun 2005 07:00:00 +0200.
+This package was debianized by Christian Heller <christian.heller@tuxtax.de> on
+Tue, 30 Aug 2005 18:31:46 +0200.
 
 Original source can be found at:
 Website: http://www.cybop.net or http://developer.berlios.de/projects/cybop/
@@ -11,7 +11,9 @@ Copyrighted by various authors:
         Karsten Tellhelm <hrlm22@yahoo.de>
         Marcel Kiesling <makie2001@web.de>
         Martin Fache <martin.fache@myrbel.de>
+        Michael Simon <michael.simon@gmx.net>
         Rolf Holzmueller <rolf.holzmueller@gmx.de>
+        Teodora Kikova <teodora.kikova@stud.tu-ilmenau.de>
 
 License: Licensed under the terms of GNU GPL.
 See /usr/share/common-licenses/GPL for details.
