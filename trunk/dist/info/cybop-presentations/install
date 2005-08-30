@@ -1,1 +1,11 @@
 doc/presentations/* usr/share/doc/cybop/presentations
+
+doc/presentations/2002_internal/html
+doc/presentations/2002_internal/pics
+doc/presentations/2002_internal/index.html
+doc/presentations/2002_internal/architecture.kpr
+doc/presentations/2002_oshca/html
+doc/presentations/2002_oshca/pics
+doc/presentations/2002_oshca/index.html
+doc/presentations/2002_oshca/cybop.kpr
+doc/presentations/2005_cyboi_as_webserver/praesentation.pdf

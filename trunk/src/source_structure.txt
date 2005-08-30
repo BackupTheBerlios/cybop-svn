@@ -20,7 +20,7 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.7 $ $Date: 2005-07-08 16:24:21 $ $Author: christian $
+# @version $Revision: 1.8 $ $Date: 2005-08-30 15:12:52 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
@@ -51,7 +51,14 @@ are VERBS. Internally used files of CYBOI carry a NOUN as their name.
 Overview
 ________
 
-applicator (in the sense of: "applying logic operations to state models")
+applicator
+    compare
+    interrupt
+    receive
+    send
+    shutdown
+    startup
+    suspend
 controller
     handler
     manager
@@ -61,122 +68,11 @@ globaliser
     variables
 memoriser
     accessor
-    creator
-tester
-transformer (WHERE to put this --> applicator ??)
+    allocator
+    array
     communicator
     converter
+    mapper
     translator
-
-
-Details
-_______
-
-applicator
-    interrupt
-        interrupt_tcp_socket
-    receive
-        receive_tcp_socket
-        receive_x_window_system
-    send
-        send_tcp_socket
-        send_x_window_system
-    shutdown
-        shutdown_tcp_socket
-        shutdown_x_window_system
-    startup
-        startup_tcp_socket
-        startup_x_window_system
-    suspend
-        activate_tcp_socket (is this operation REALLY STILL needed??)
-    add
-    build
-    compare
-    copy (formerly "set")
-    count
-    create
-    destroy
-    interrupt
-    loop
-    move (formerly "set")
-    receive
-    selection
-    send
-    shutdown
-    startup
-controller
-    handler
-        compound_handler
-        operation_handler
-    manager
-        globals_manager
-        internals_memory_manager
-        knowledge_memory_manager
-        signal_memory_manager
-    checker
-    cyboi (starter; merge with system_manager; hand over all memories as params and NOT within internals memory)
-    handler
-globaliser
-    constants (stator)
-        abstraction_constants
-        channel_constants
-        character_constants
-        cybol_constants
-        escape_code_constants
-        integer_constants
-        log_constants
-        name_constants
-        structure_constants
-    logger
-    variables (changer)
-memoriser
-    accessor
-        character_array_accessor
-        compound_accessor
-        double_array_accessor
-        integer_array_accessor
-        internals_memory_accessor
-        pointer_array_accessor
-        signal_memory_accessor
-        unsigned_long_array_accessor
-    creator
-        character_creator
-        complex_creator
-        compound_creator
-        double_creator
-        fraction_creator
-        integer_creator
-        internals_memory_creator
-        pointer_creator
-        signal_memory_creator
-        string_creator
-        time_creator
-        unsigned_long_creator
-        vector_creator
-        xml_node_creator
-        xml_property_creator
 tester
-transformer
-    communicator: receive + send (auch socket, x window system etc.?)
-        file_communicator
-        ftp_communicator
-        http_communicator
-        inline_communicator
-        ms_windows_communicator
-        tcp_socket_communicator
-        unix_console_communicator
-        x_window_system_communicator
-    converter: parse + serialise (formerly: parser)
-        boolean_converter
-        complex_converter
-        double_converter
-        fraction_converter
-        integer_converter
-        string_converter
-        time_converter
-        vector_converter
-        xml_converter
-    translator: decode + encode
-        cybol_translator
-        html_translator
-        x_window_system_translator
+

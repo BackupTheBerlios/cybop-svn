@@ -1,7 +1,2 @@
 CVS
 CVSROOT
-dist/*
-doc/*
-download/*
-obj/*
-tmp/*
