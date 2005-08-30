@@ -1,7 +1,18 @@
+cybol (1.0.0-1) unstable; urgency=low
+
+  * Change package structure to better comply with debian maintainer guidelines
+
+ -- Christian Heller <christian.heller@tuxtax.de>  Tue, 30 Aug 2005 18:26:21 +0200
+
+
 cybol (1.0.0.0) unstable; urgency=low
 
+  * Add example application "helloworld_dynamic_logic"
+  * Add "addition" application
+  * Prepare empty Debian packages "core" and "healthcare"
+  * Add example applications "exit", "exit_text_file", "exit_cybol_file", "helloworld"
   * Add Document Type Definition (DTD)
   * Add XML Schema Definition (XSD)
 
- -- Christian Heller <christian.heller@tuxtax.de>  Mon, 27 Jun 2005 08:30:00 +0200
+ -- Christian Heller <christian.heller@tuxtax.de>  Mon, 28 Feb 2005 10:00:00 +0100
 
