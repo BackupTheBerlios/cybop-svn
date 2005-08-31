@@ -21,7 +21,7 @@
 # - Cybernetics Oriented Programming -
 #
 # Version:
-# $Revision: 1.6 $ $Date: 2005-08-31 19:28:25 $ $Author: christian $
+# $Revision: 1.7 $ $Date: 2005-08-31 20:39:39 $ $Author: christian $
 #
 # Authors:
 # Andreas Tille <tille@debian.org>
@@ -207,4 +207,28 @@ zu keinen doppelten Abhängigkeiten kommt.
 /usr/share/doc/debian-policy
 /usr/share/doc/developers-reference
 /usr/share/doc/maint-guide
+
+--
+
+> 1 Muss ich die Dateien "files" und "install" erstellen oder werden
+> diese erzeugt?
+
+Die Datei debian/files wird eigentlich automatisch erzeugt.  Was Du natürlich
+selbst anlegen mußt ist debian/install.  Schließlich kan dh_make nicht
+wissen, welche Dateien in welches Paket müssen.  Konkret sind das dann immer
+     debian/<paket1>.install
+     debian/<paket2>.install
+     ...
+     debian/<paketn>.install
+
+--
+
+> ich noch kein "dpkg-buildpackage -rfakeroot" aufgerufen habe.
+
+Es hat nichts mit Deinem Problem zu tun, aber Du solltest es mal mit
+
+      debuild
+
+anstelle von "dpkg-buildpackage -rfakeroot" versuchen - das macht noch
+etwas mehr und schreibt nebenbei einen build-log.
 
