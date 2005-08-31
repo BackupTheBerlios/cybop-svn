@@ -21,7 +21,7 @@
 # - Cybernetics Oriented Programming -
 #
 # Version:
-# $Revision: 1.5 $ $Date: 2005-08-20 11:57:01 $ $Author: christian $
+# $Revision: 1.6 $ $Date: 2005-08-31 19:28:25 $ $Author: christian $
 #
 # Authors:
 # Andreas Tille <tille@debian.org>
@@ -141,4 +141,70 @@ for the field of Custom Debian Distributions (Debian-Med is one of these).
 
 New maintainer's reference:
 http://www.debian.org/devel/join/newmaint
+
+--
+
+> 1 Muss ich die Dateien "files" und "install" erstellen oder werden
+> diese erzeugt?
+
+Soweit ich weiß, musst du die Dateien "files" und "install" nicht
+zwingend erstellen, aber die Datei "install" finde ich sehr hilfreich.
+Mit der Datei "install" kann man angeben, welche Dateien aus deinen
+Quellen in das Debian Paket (auch wohin im Debian Paket) kopiert werden.
+Aufgerufen wird dann diese Routine im Rules File durch den Befehl
+dh_install.
+Falls du die Datei "install" nicht verwendest, musst du die benötigten
+Dateien im Rules File unter dem Punkt "install:" durch verwenden von
+"cp..." usw. kopieren lassen.
+
+--
+
+> 2 Was soll der Fehler, dass "install" fehlt (siehe obige Meldungen)?
+> Muss ich da was in der "rules" Datei drehen? Ich habe in Dennis' alten
+> "rules" Dateien nachgeschaut, doch nichts geaendertes gefunden.
+> Beachtet, dass die "rules" Datei nun etwas anders aussieht, weil ich
+> "multi-binary" angegeben hatte! Wurde so generiert.
+> Uebrigens muss fuer das "cybol" Paket nichts compiliert werden.
+> Es handelt sich nur um Dokumentationen und XML-Beispiel-Dateien.
+
+In deinem Rules File verwendest du die folgenden zwei Zeilen:
+        -$(MAKE) clean
+        ...
+        $(MAKE) install DESTDIR=$(CURDIR)/debian/cybol.
+Diese rufen die Routinen "clean" und "install" in einem Makefile
+auf welches im Sourcecode vorhanden ist.
+Da du aber kein Makefile beim Sourcecode von Cybol hast kannst
+du auch nicht darauf zugreifen, deshalb musst du diese Zeilen entfernen.
+Die Routine "clean" ist zum Reinigen der Verzeichnisse und
+"install" zum installieren gedacht, welche du aber beim Paketbau
+nicht brauchst, da du dies ja mit der Routine "dh_clean" und
+"dh_install" machst.
+
+--
+
+> 3 In der "control" Datei gibt man nur eine Source an, kann aber
+> mehrere Pakete hinzufuegen = multi-binary. So habe ich es getan.
+> Leider kann man aber nur fuer die Source eine "Section" angeben, oder?
+> Ich wuerde die Pakete aber gerne in verschiedenen "Sections" haben, z.B.:
+> "cyboi" in "interpreters" und "cyboi-dev" in "devel".
+> Kann man bei jedem Multi-Binary Paket eine eigene "Section" angeben?
+
+Ja.
+
+--
+
+> Eine weitere Frage ist, was die folgende Zeile in der "control" Datei soll:
+> Depends: ${shlibs:Depends}, ${misc:Depends}
+
+das kannst du machen. Aber die Zeile:
+"Depends: ${shlibs:Depends}, ${misc:Depends}" ist besser,
+da dann die Abhängigkeiten durch den Befehl "dh_shlibdeps"
+im Rules File automatisch bestimmt und gesetzt werden und es
+zu keinen doppelten Abhängigkeiten kommt.
+
+--
+
+/usr/share/doc/debian-policy
+/usr/share/doc/developers-reference
+/usr/share/doc/maint-guide
 
