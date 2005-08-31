@@ -22,7 +22,7 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.35 $ $Date: 2005-08-30 15:12:52 $ $Author: christian $
+# @version $Revision: 1.36 $ $Date: 2005-08-31 16:04:08 $ $Author: christian $
 # @author Michael Simon <michael.simon@gmx.net>
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
@@ -305,4 +305,3 @@ clean:
 	-rm -f $(BIN)/cyboi
 	-rm -r $(OBJ)
 	@echo Cleaned compiled cyboi object files and binary.
-

@@ -1,12 +1,12 @@
 Source: cyboi
-Section: interpreters
 Priority: optional
 Maintainer: Christian Heller <christian.heller@tuxtax.de>
 Standards-Version: 3.6.1
 Build-Depends: debhelper (>= 4.0.0)
 
 Package: cyboi
-Architecture: i386
+Architecture: any
+Section: main/interpreters
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Recommends: cybol-examples
 Suggests: cyboi-doc, cyboi-dev
@@ -53,6 +53,7 @@ Description: Cybernetics Oriented Interpreter (CYBOI)
 
 Package: cyboi-doc
 Architecture: all
+Section: main/doc
 Recommends: cybop-papers, cybop-presentations
 Suggests: cyboi
 Description: Cybernetics Oriented Interpreter (CYBOI) documentation
@@ -98,7 +99,8 @@ Description: Cybernetics Oriented Interpreter (CYBOI) documentation
  http://developer.berlios.de/projects/cybop/
 
 Package: cyboi-dev
-Architecture: i386
+Architecture: any
+Section: main/devel
 Depends: libc6, xlibs, libxml2, libxml2-dev
 Suggests: cyboi
 Description: Cybernetics Oriented Interpreter (CYBOI) development files

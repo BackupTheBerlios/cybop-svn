@@ -1,1 +1,4 @@
 doc/cybol/cybol.dtd usr/share/xml/cybol/schema/dtd
+examples usr/share/doc/cybol
+cybol/core usr/share/cybol
+cybol/healthcare usr/share/cybol
