@@ -1,4 +1,2 @@
-bin/cyboi usr/bin
-doc/cyboi/manual.txt usr/share/doc/cyboi
 admin usr/share/cyboi-dev
 doc/tutorials usr/share/cyboi-dev
