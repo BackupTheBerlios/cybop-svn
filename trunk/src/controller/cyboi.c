@@ -25,13 +25,14 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.10 $ $Date: 2005-08-11 22:33:46 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2005-08-31 14:50:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef CYBOI_SOURCE
 #define CYBOI_SOURCE
 
+#include <string.h>
 #include "../controller/manager/globals_manager.c"
 #include "../controller/manager.c"
 #include "../globals/logger/logger.c"

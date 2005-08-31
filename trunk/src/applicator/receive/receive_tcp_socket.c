@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.18 $ $Date: 2005-08-11 22:33:46 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2005-08-31 14:50:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -1179,7 +1179,7 @@ void run_tcp_socket(void* p0) {
             int cas = sizeof(ca);
 
             // Accept client socket request and store client socket.
-            int cs = accept(**((int**) s), (struct sockaddr*) &ca, &cas);
+            int cs = accept(**((int**) s), (struct sockaddr*) &ca, (socklen_t*) &cas);
 
             if (cs >= 0) {
 

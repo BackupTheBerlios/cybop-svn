@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.29 $ $Date: 2005-08-09 13:04:27 $ $Author: christian $
+ * @version $Revision: 1.30 $ $Date: 2005-08-31 14:50:18 $ $Author: christian $
  * @author Marcel Kiesling <makie2001@web.de>
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
@@ -93,7 +93,7 @@ void allocate_unix_server_socket(void* p0) {
             // the real path/file size.
 
             // Determine socket address size.
-            int as = sizeof(struct sockaddr_un);
+            socklen_t as = sizeof(struct sockaddr_un);
 //??            int as = (offsetof(struct sockaddr_un, sun_path) + strlen(a.sun_path) + 1);
 
             // Bind number to address.
@@ -238,7 +238,7 @@ void write_unix_socket(void* p0) {
             // which is unnecessary here, since cyboi stores the
             // server socket that was created and bound at system startup,
             // and that server socket was handed over to this procedure.
-            connect(s, (struct sockaddr*) &a, as);
+            connect(s, (struct sockaddr_un*) &a, as);
 
             // Convert message to avoid byte-order problems. Many machines
             // use differing dialects (ASCII versus EBCDIC) to represent data.
@@ -285,7 +285,7 @@ void read_unix_socket(void* p0) {
         struct sockaddr_un ca;
 
         // Determine client socket address size.
-        int cas = sizeof(ca);
+        socklen_t cas = sizeof(ca);
 
         // CAUTION! This might block further processing!
         // The accept function waits if there are no connections pending,

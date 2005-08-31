@@ -38,7 +38,7 @@
  *
  * Array elements are accessed over their index (array base pointer + index).
  *
- * @version $Revision: 1.7 $ $Date: 2005-08-04 15:20:58 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2005-08-31 14:50:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -46,6 +46,7 @@
 #define CHARACTER_ARRAY_SOURCE
 
 #include <stdlib.h>
+#include <string.h>
 #include "../../globals/constants/log_constants.c"
 #include "../../globals/variables/variables.c"
 #include "../../globals/logger/logger.c"

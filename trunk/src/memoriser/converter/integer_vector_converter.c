@@ -20,13 +20,14 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2005-08-11 11:36:11 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2005-08-31 14:50:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef INTEGER_VECTOR_CONVERTER_SOURCE
 #define INTEGER_VECTOR_CONVERTER_SOURCE
 
+#include <string.h>
 #include "../../globals/constants/abstraction_constants.c"
 #include "../../globals/constants/character_constants.c"
 #include "../../globals/constants/log_constants.c"

@@ -20,13 +20,14 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2005-08-09 13:04:27 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-08-31 14:50:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef DOUBLE_VECTOR_CONVERTER_SOURCE
 #define DOUBLE_VECTOR_CONVERTER_SOURCE
 
+#include <string.h>
 //?? #include <stdio.h>
 //?? #include <stdlib.h>
 #include "../../globals/constants/character_constants.c"
