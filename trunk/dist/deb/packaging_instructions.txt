@@ -21,7 +21,7 @@
 # - Cybernetics Oriented Programming -
 #
 # Version:
-# $Revision: 1.8 $ $Date: 2005-09-01 07:35:51 $ $Author: christian $
+# $Revision: 1.9 $ $Date: 2005-09-01 12:04:13 $ $Author: christian $
 #
 # Authors:
 # Andreas Tille <tille@debian.org>
@@ -235,3 +235,39 @@ Es hat nichts mit Deinem Problem zu tun, aber Du solltest es mal mit
 anstelle von "dpkg-buildpackage -rfakeroot" versuchen - das macht noch
 etwas mehr und schreibt nebenbei einen build-log.
 
+--
+
+> Frage: Kann man eigentlich leere Pakete bauen, um die Abhaengigkeiten
+> anderer Pakete zu erfuellen?
+
+Ja, natürlich.
+
+> Meta Pakete z.B. enthalten doch selbst gar nichts?
+
+Im Prinzip ja.
+
+> Konkreter:
+> 1 Kann man leere "install" Dateien verwenden?
+
+Dann brauchst Du gar keine zu erzeugen - wie Du Lust hast.
+
+> 2 Kann man in einer "install" Datei einen Pfad bzw. Datei angeben,
+> die gar nicht existiert?
+
+Ne, die Quells muß existieren, das war ja einer Deiner Fehler.
+
+--
+
+> Neue Frage zu GPG -- dazu einige Log Meldungen:
+> ...
+> Ich dachte, dass ich in der Shell nach dem Passwort gefragt werde.
+> Es kam aber nichts. Wo soll ich das Passwort eingeben?
+
+Häh??? Na klar wirst Du gefragt.  Keine Ahnung, was da passiert ist.
+
+--
+
+> Wohin soll ich die manpage einfuegen? Direkt in das /debian Verzeichnis?
+
+Pack sie doch am besten in Dein Release, oder brauchen nur Debian-Nutzer
+eine Manpage???

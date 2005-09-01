@@ -84,7 +84,8 @@ install-arch:
 	# debian/tmp.
 #	$(MAKE) install DESTDIR=$(CURDIR)/debian/cybol
 
-	dh_install -s
+#	dh_install -s
+
 # Must not depend on anything. This is to be called by
 # binary-arch/binary-indep
 # in another 'make' thread.
