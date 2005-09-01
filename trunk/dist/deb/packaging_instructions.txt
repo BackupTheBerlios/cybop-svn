@@ -21,7 +21,7 @@
 # - Cybernetics Oriented Programming -
 #
 # Version:
-# $Revision: 1.7 $ $Date: 2005-08-31 20:39:39 $ $Author: christian $
+# $Revision: 1.8 $ $Date: 2005-09-01 07:35:51 $ $Author: christian $
 #
 # Authors:
 # Andreas Tille <tille@debian.org>
@@ -190,6 +190,9 @@ nicht brauchst, da du dies ja mit der Routine "dh_clean" und
 > Kann man bei jedem Multi-Binary Paket eine eigene "Section" angeben?
 
 Ja.
+
+Aber im Source Abschnitt muss AUCH eine section stehen,
+weil sonst eine Warnung beim Paketbauen kommt!
 
 --
 

@@ -1,4 +1,5 @@
 Source: cybol
+Section: misc
 Priority: optional
 Maintainer: Christian Heller <christian.heller@tuxtax.de>
 Standards-Version: 3.6.1
@@ -6,7 +7,7 @@ Build-Depends: debhelper (>= 4.0.0)
 
 Package: cybol
 Architecture: all
-Section: main/misc
+Section: misc
 Recommends: cybol-examples
 Description: Cybernetics Oriented Language (CYBOL) DTD and XSD
  The Cybernetics Oriented Programming (CYBOP) theory is a collection of new
@@ -52,7 +53,7 @@ Description: Cybernetics Oriented Language (CYBOL) DTD and XSD
 
 Package: cybol-examples
 Architecture: all
-Section: main/misc
+Section: misc
 Depends: cyboi
 Description: Cybernetics Oriented Language (CYBOL) example applications
  The Cybernetics Oriented Programming (CYBOP) theory is a collection of new
@@ -98,7 +99,7 @@ Description: Cybernetics Oriented Language (CYBOL) example applications
 
 Package: cybol-core
 Architecture: all
-Section: main/misc
+Section: misc
 Depends: cyboi
 Recommends: cybol-examples
 Suggests: cybol-healthcare
@@ -146,7 +147,7 @@ Description: Cybernetics Oriented Language (CYBOL) core libraries
 
 Package: cybol-healthcare
 Architecture: all
-Section: main/misc
+Section: misc
 Depends: cyboi, cybol-core
 Recommends: cybol-examples
 Suggests: resmedicinae

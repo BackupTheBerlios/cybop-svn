@@ -1,4 +1,5 @@
 Source: cybop
+Section: doc
 Priority: optional
 Maintainer: Christian Heller <christian.heller@tuxtax.de>
 Standards-Version: 3.6.1
@@ -6,7 +7,7 @@ Build-Depends: debhelper (>= 4.0.0)
 
 Package: cybop
 Architecture: all
-Section: main/doc
+Section: doc
 Depends: cybop-papers, cybop-presentations
 Description: Cybernetics Oriented Programming (CYBOP) documentation meta package
  The Cybernetics Oriented Programming (CYBOP) theory is a collection of new
@@ -52,7 +53,7 @@ Description: Cybernetics Oriented Programming (CYBOP) documentation meta package
 
 Package: cybop-books
 Architecture: all
-Section: main/doc
+Section: doc
 Recommends: cybop-papers, cybop-presentations
 Suggests: cyboi, cybol-examples
 Description: Cybernetics Oriented Programming (CYBOP) books
@@ -99,7 +100,7 @@ Description: Cybernetics Oriented Programming (CYBOP) books
 
 Package: cybop-papers
 Architecture: all
-Section: main/doc
+Section: doc
 Recommends: cybop-presentations
 Suggests: cyboi, cybol-examples
 Description: Cybernetics Oriented Programming (CYBOP) papers
@@ -146,7 +147,7 @@ Description: Cybernetics Oriented Programming (CYBOP) papers
 
 Package: cybop-presentations
 Architecture: all
-Section: main/doc
+Section: doc
 Recommends: cybop-papers
 Suggests: cyboi, cybol-examples
 Description: Cybernetics Oriented Programming (CYBOP) presentations

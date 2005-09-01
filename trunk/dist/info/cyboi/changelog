@@ -131,7 +131,7 @@ cyboi (0.3.0.0) unstable; urgency=low
  -- Christian Heller <christian.heller@tuxtax.de>  Mon, 13 Sep 2004 12:00:00 +0100
 
 
-cyboi(0.2.2.0) unstable; urgency=low
+cyboi (0.2.2.0) unstable; urgency=low
 
   * Fix several bugs in model handling
   * Create transient copies of all persistent sources, instead of pointing to persistent sources which get freed after some time which resulted in null pointers
@@ -141,7 +141,7 @@ cyboi(0.2.2.0) unstable; urgency=low
  -- Christian Heller <christian.heller@tuxtax.de>  Wed, 23 Jun 2004 12:00:00 +0100
 
 
-cyboi(0.2.1.0) unstable; urgency=low
+cyboi (0.2.1.0) unstable; urgency=low
 
   * Correct determination of highest priority index in signal memory
   * Restructure project directories: /constants --> /constant; /model --> /array; /model --> /state; /statics --> /state; /dynamics --> /logic
@@ -160,7 +160,7 @@ cyboi(0.2.1.0) unstable; urgency=low
  -- Christian Heller <christian.heller@tuxtax.de>  Fri, 11 Jun 2004 12:00:00 +0100
 
 
-cyboi(0.2.0.0) unstable; urgency=low
+cyboi (0.2.0.0) unstable; urgency=low
 
   * Rewrite CYBOI in C programming language
   * Start writing or using an existing XML parser (like libxml)
@@ -169,7 +169,7 @@ cyboi(0.2.0.0) unstable; urgency=low
  -- Christian Heller <christian.heller@tuxtax.de>  Thu, 29 Apr 2004 12:00:00 +0100
 
 
-cyboi(0.1.0.0) unstable; urgency=low
+cyboi (0.1.0.0) unstable; urgency=low
 
   * CYBOI is an interpreter that can read CYBOL files and create systems
   * Write CYBOI in Java
