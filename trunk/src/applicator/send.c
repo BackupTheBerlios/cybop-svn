@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.22 $ $Date: 2005-08-18 22:30:35 $ $Author: christian $
+ * @version $Revision: 1.23 $ $Date: 2005-09-15 20:49:23 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -173,7 +173,7 @@ void send_message(void* p0, void* p1,
 
         if (r != 0) {
 
-            send_x_window_system(p2, p3, p4, p5);
+            send_x_window_system(p2, *mm, *mmc);
         }
     }
 

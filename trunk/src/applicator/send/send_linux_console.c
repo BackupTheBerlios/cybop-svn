@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.34 $ $Date: 2005-08-18 22:30:35 $ $Author: christian $
+ * @version $Revision: 1.35 $ $Date: 2005-09-15 20:49:23 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -51,7 +51,7 @@
  */
 void send_linux_console(void* p0, void* p1, void* p2) {
 
-    log_message_debug("Send via linux console.");
+    log_message_debug("Send linux console message.");
 
     // The tui internal.
     void** tp = &NULL_POINTER;

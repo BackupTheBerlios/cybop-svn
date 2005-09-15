@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2005-08-21 19:14:46 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2005-09-15 20:49:23 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -157,14 +157,7 @@ void receive_message(void* p0, void* p1,
 
         if (r != 0) {
 
-/*??
-            blocking or non-blocking??
-            receive_x_window_system();
-
-            receive_vga
-            parse
-            decode-translate
-*/
+            receive_x_window_system(p2, p3, p4, p5);
         }
     }
 

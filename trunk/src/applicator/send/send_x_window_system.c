@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2005-07-28 12:52:11 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2005-09-15 20:49:24 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -39,142 +39,102 @@
  * Sends an x window system message.
  *
  * @param p0 the internal memory
- * @param p1 the knowledge memory
- * @param p2 the knowledge memory count
- * @param p3 the knowledge memory size
+ * @param p1 the source gui compound model
+ * @param p2 the source count
  */
-void send_x_window_system(void* p0, void* p1, void* p2, void* p3) {
+void send_x_window_system(void* p0, void* p1, void* p2) {
 
     log_message_debug("Send x window system message.");
 
-//??            knowledge model is given as param
-//??            create encode model em
-//??            encode-translate(em, km)
+    // The window internal.
+    void** wp = &NULL_POINTER;
+    int** wcp = (int**) &NULL_POINTER;
+    int** wsp = (int**) &NULL_POINTER;
+    // The window.
+    void* w = NULL_POINTER;
+    void* wc = NULL_POINTER;
+    void* ws = NULL_POINTER;
 
-//??            create serialise model sm
-//??            serialise(sm, em)
-//??            destroy em
+    // Get window internal.
+    get(p0, (void*) WINDOW_INTERNAL, (void*) &wp, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p0, (void*) WINDOW_COUNT_INTERNAL, (void*) &wcp, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p0, (void*) WINDOW_SIZE_INTERNAL, (void*) &wsp, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-//??            create vga model vm
-//??            send_vga(vm, sm)
-//??            destroy sm
-//??            ?? destroy or not vm??
+    if (*wp != NULL_POINTER) {
+
+        // Reinitialise tui with already existing tui internal.
+        w = *wp;
+        wc = *wcp;
+        ws = *wsp;
+
+    } else {
+
+        // The window internal wp is null, so that a new window w needs to be created.
+
+/*??
+        // The count and size z, y, x coordinates.
+        int* tcz = NULL_POINTER;
+        int* tcy = NULL_POINTER;
+        int* tcx = NULL_POINTER;
+        int* tsz = NULL_POINTER;
+        int* tsy = NULL_POINTER;
+        int* tsx = NULL_POINTER;
+
+        // Allocate count and size z, y, x coordinates.
+        allocate((void*) &tcz, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        allocate((void*) &tcy, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        allocate((void*) &tcx, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        allocate((void*) &tsz, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        allocate((void*) &tsy, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        allocate((void*) &tsx, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+
+        // Initialise count and size z, y, x coordinates.
+        set(tcz, (void*) PRIMITIVE_VALUE_INDEX, (void*) NUMBER_0_INTEGER, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        set(tcy, (void*) PRIMITIVE_VALUE_INDEX, (void*) NUMBER_0_INTEGER, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        set(tcx, (void*) PRIMITIVE_VALUE_INDEX, (void*) NUMBER_0_INTEGER, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        set(tsz, (void*) PRIMITIVE_VALUE_INDEX, (void*) NUMBER_0_INTEGER, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        set(tsy, (void*) PRIMITIVE_VALUE_INDEX, (void*) NUMBER_0_INTEGER, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        set(tsx, (void*) PRIMITIVE_VALUE_INDEX, (void*) NUMBER_0_INTEGER, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+
+        // Allocate tui count and size.
+        allocate((void*) &tc, (void*) TUI_COUNT, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        allocate((void*) &ts, (void*) TUI_COUNT, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
+        // Initialise tui count and size.
+        set(tc, (void*) TUI_Z_DIMENSION_INDEX, (void*) &tcz, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        set(tc, (void*) TUI_Y_DIMENSION_INDEX, (void*) &tcy, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        set(tc, (void*) TUI_X_DIMENSION_INDEX, (void*) &tcx, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        set(ts, (void*) TUI_Z_DIMENSION_INDEX, (void*) &tsz, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        set(ts, (void*) TUI_Y_DIMENSION_INDEX, (void*) &tsy, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        set(ts, (void*) TUI_X_DIMENSION_INDEX, (void*) &tsx, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+*/
+
+        // Allocate window.
+        allocate((void*) &w, (void*) wsz, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
+        // Set window internals.
+        // The window is stored in internal memory for faster access,
+        // so that it does not have to be created every time again.
+        set(p0, (void*) WINDOW_INTERNAL, (void*) &w, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        set(p0, (void*) WINDOW_COUNT_INTERNAL, (void*) &wc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        set(p0, (void*) WINDOW_SIZE_INTERNAL, (void*) &ws, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    }
+
+    // Encode compound model into x window system window.
+    encode((void*) &w, (void*) wc, (void*) ws, p1, p2, (void*) X_WINDOW_SYSTEM_ABSTRACTION, (void*) X_WINDOW_SYSTEM_ABSTRACTION_COUNT);
+
+    // CAUTION! The window AND ALL ITS CONTENT
+    // need to be deallocated at system shutdown!
 
     // The display, which is a subsumption of
     // xserver, screens, hardware (input devices etc.).
-    struct _XDisplay** d = NULL_POINTER;
-    // The default colourmap id for allocation on the specified screen.
-    // Most routine allocations of colour should be made out of this colormap.
-    int** cm = NULL_POINTER;
-    // The background pixel values.
-    unsigned long** bg = NULL_POINTER;
-    // The foreground pixel values.
-    unsigned long** fg = NULL_POINTER;
-    // The top-level root window for the given display and screen.
-    // This is sometimes called the root window of the window manager.
-    // Remember, CYBOI itself IS the window manager.
-    int** r = NULL_POINTER;
+    void** d = &NULL_POINTER;
 
-    // Get x window system internals.
-    get(p0, (void*) X_WINDOW_SYSTEM_DISPLAY_INTERNAL, (void*) &d, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    get(p0, (void*) X_WINDOW_SYSTEM_COLOUR_MAP_INTERNAL, (void*) &cm, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    get(p0, (void*) X_WINDOW_SYSTEM_BACKGROUND_INTERNAL, (void*) &bg, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    get(p0, (void*) X_WINDOW_SYSTEM_FOREGROUND_INTERNAL, (void*) &fg, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    get(p0, (void*) X_WINDOW_SYSTEM_ROOT_WINDOW_INTERNAL, (void*) &r, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    // Get display.
+    get_array_elements(p0, (void*) X_WINDOW_SYSTEM_DISPLAY_INTERNAL, (void*) &d, (void*) POINTER_ARRAY);
 
-    // The size hint.
-    XSizeHints sh;
-    sh.x = 100;
-    sh.y = 100;
-    sh.width = 400;
-    sh.height = 300;
-    sh.flags = PPosition | PSize;
-
-    // The window.
-    int w = XCreateSimpleWindow(*d, **r, sh.x, sh.y, sh.width, sh.height, 5, **fg, **bg);
-    XSetStandardProperties(*d, w, "Application", "Icon", None, NULL_POINTER, 0, (void*) &sh);
-
-    // The colours.
-    XColor gray;
-    XColor light_gray;
-    XColor vlight_gray;
-    XColor dark_gray;
-    // The menu graphic context.
-    struct _XGC* gc_menu = NULL_POINTER;
-    // The menu border top graphic context.
-    struct _XGC* gc_menu_border_top = NULL_POINTER;
-    // The menu border bottom graphic context.
-    struct _XGC* gc_menu_border_bottom = NULL_POINTER;
-    // The menu font graphic context.
-    struct _XGC* gc_menu_font = NULL_POINTER;
-
-    // Initialise x window system internals.
-    gray.red = 49125;
-    gray.green = 49125;
-    gray.blue = 49125;
-    light_gray.red = 56000;
-    light_gray.green = 58000;
-    light_gray.blue = 60000;
-    vlight_gray.red = 60000;
-    vlight_gray.green = 61000;
-    vlight_gray.blue = 62000;
-    dark_gray.red = 32768;
-    dark_gray.green = 32768;
-    dark_gray.blue = 32768;
-    gc_menu = XCreateGC(*d, w, 0, 0);
-    gc_menu_border_top = XCreateGC(*d, w, 0, 0);
-    gc_menu_border_bottom = XCreateGC(*d, w, 0, 0);
-    gc_menu_font = XCreateGC(*d, w, 0, 0);
-
-    // Assign x window system internals.
-    XAllocColor(*d, **cm, &gray);
-    XAllocColor(*d, **cm, &light_gray);
-    XAllocColor(*d, **cm, &vlight_gray);
-    XAllocColor(*d, **cm, &dark_gray);
-    XSetBackground(*d, gc_menu, **bg);
-    XSetForeground(*d, gc_menu, light_gray.pixel);
-    XSetBackground(*d, gc_menu_border_top, **bg);
-    XSetForeground(*d, gc_menu_border_top, vlight_gray.pixel);
-    XSetBackground(*d, gc_menu_border_bottom, **bg);
-    XSetForeground(*d, gc_menu_border_bottom, dark_gray.pixel);
-    XSetBackground(*d, gc_menu_font, light_gray.pixel);
-    XSetForeground(*d, gc_menu_font, **fg);
-
-    // Request input events (signals) to be put into event queue.
-    XSelectInput(*d, w, ButtonPressMask | KeyPressMask | ExposureMask);
-
-    // Map window.
-    // This procedure changes the order of all sister windows,
-    // so that the given window lies on top.
-    // Afterwards, all windows are displayed on the screen.
-    XMapRaised(*d, w);
-
-    // The window attributes.
-//??    XWindowAttributes* wa = NULL_POINTER;
-    XWindowAttributes wa;
-
-    // Draw window.
-    XGetWindowAttributes(*d, w, &wa);
-    //XDrawImageString (e.xexpose.display, e.xexpose.window, gc, 50, 50, "hello", strlen("hello"));
-    //XRectangle (e.xexpose.display, e.xexpose.window, gc_menu, 2, 2, (wa.width-4), 30);
-
-    // Draw menu bar.
-    XDrawLine(*d, w, gc_menu_border_bottom, 0, 21, wa.width, 21);
-    XDrawLine(*d, w, gc_menu_border_bottom, (wa.width-1), 1, (wa.width-1), 21);
-
-    //?? TODO: From xlib tutorial.
-    //?? Remove as soon as event loop (MappingNotify) functions!
-//??    XFlushGC(*d, gc);
-
-    sleep(5);
-
-/*??
-        XFreeGC(*d, *gc_menu_font);
-        XFreeGC(*d, *gc_menu_border_bottom);
-        XFreeGC(*d, *gc_menu_border_top);
-        XFreeGC(*d, *gc_menu);
-*/
-    XDestroyWindow(*d, w);
+    // Show window on display.
+    write_data(d, NULL_POINTER, NULL_POINTER, w, (void*) &wc, (void*) X_WINDOW_SYSTEM_CHANNEL, (void*) X_WINDOW_SYSTEM_CHANNEL_COUNT);
 }
 
 /* SEND_X_WINDOW_SYSTEM_SOURCE */

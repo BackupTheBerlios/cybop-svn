@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.10 $ $Date: 2005-08-09 13:04:26 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2005-09-15 20:49:24 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -103,6 +103,11 @@ static int* ENCAPSULATED_KNOWLEDGE_ABSTRACTION_COUNT = NUMBER_22_INTEGER_ARRAY;
 static char TUI_ABSTRACTION_ARRAY[] = {'t', 'u', 'i'};
 static char* TUI_ABSTRACTION = TUI_ABSTRACTION_ARRAY;
 static int* TUI_ABSTRACTION_COUNT = NUMBER_3_INTEGER_ARRAY;
+
+/** The x window system abstraction. */
+static char X_WINDOW_SYSTEM_ABSTRACTION_ARRAY[] = {'x', '_', 'w', 'i', 'n', 'd', 'o', 'w', '_', 's', 'y', 's', 't', 'e', 'm'};
+static char* X_WINDOW_SYSTEM_ABSTRACTION = X_WINDOW_SYSTEM_ABSTRACTION_ARRAY;
+static int* X_WINDOW_SYSTEM_ABSTRACTION_COUNT = NUMBER_15_INTEGER_ARRAY;
 
 //
 // Operation abstraction.
