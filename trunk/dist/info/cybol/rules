@@ -16,8 +16,6 @@
 # This has to be exported to make some magic below work.
 export DH_OPTIONS
 
-
-
 CFLAGS = -Wall -g
 
 ifneq (,$(findstring noopt,$(DEB_BUILD_OPTIONS)))
@@ -33,18 +31,19 @@ configure-stamp:
 
 	touch configure-stamp
 
-
 #Architecture
-build: build-arch build-indep
+#build: build-arch build-indep
+build: build-indep
 
-build-arch: build-arch-stamp
-build-arch-stamp: configure-stamp
+#build-arch: build-arch-stamp
+#build-arch-stamp: configure-stamp
 
 	# Add here commands to compile the arch part of the package.
 	#$(MAKE)
-	touch build-arch-stamp
+#	touch build-arch-stamp
 
 build-indep: build-indep-stamp
+
 build-indep-stamp: configure-stamp
 
 	# Add here commands to compile the indep part of the package.
@@ -54,14 +53,17 @@ build-indep-stamp: configure-stamp
 clean:
 	dh_testdir
 	dh_testroot
-	rm -f build-arch-stamp build-indep-stamp #CONFIGURE-STAMP#
+#	rm -f build-arch-stamp build-indep-stamp #CONFIGURE-STAMP#
+	rm -f build-indep-stamp #CONFIGURE-STAMP#
 
 	# Add here commands to clean up after the build process.
 #	-$(MAKE) clean
 
 	dh_clean
 
-install: install-indep install-arch
+#install: install-indep install-arch
+install: install-indep
+
 install-indep:
 	dh_testdir
 	dh_testroot
@@ -74,11 +76,11 @@ install-indep:
 
 	dh_install -i
 
-install-arch:
-	dh_testdir
-	dh_testroot
-	dh_clean -k -s
-	dh_installdirs -s
+#install-arch:
+#	dh_testdir
+#	dh_testroot
+#	dh_clean -k -s
+#	dh_installdirs -s
 
 	# Add here commands to install the arch part of the package into
 	# debian/tmp.
@@ -117,13 +119,17 @@ binary-common:
 	dh_gencontrol
 	dh_md5sums
 	dh_builddeb
+
 # Build architecture independant packages using the common target.
 binary-indep: build-indep install-indep
 	$(MAKE) -f debian/rules DH_OPTIONS=-i binary-common
 
 # Build architecture dependant packages using the common target.
-binary-arch: build-arch install-arch
-	$(MAKE) -f debian/rules DH_OPTIONS=-a binary-common
+#binary-arch: build-arch install-arch
+#	$(MAKE) -f debian/rules DH_OPTIONS=-a binary-common
 
-binary: binary-arch binary-indep
-.PHONY: build clean binary-indep binary-arch binary install install-indep install-arch configure
+#binary: binary-arch binary-indep
+binary: binary-indep
+
+#.PHONY: build clean binary-indep binary-arch binary install install-indep install-arch configure
+.PHONY: build clean binary-indep binary install install-indep configure

@@ -21,7 +21,7 @@
 # - Cybernetics Oriented Programming -
 #
 # Version:
-# $Revision: 1.9 $ $Date: 2005-09-01 12:04:13 $ $Author: christian $
+# $Revision: 1.10 $ $Date: 2005-09-15 20:47:48 $ $Author: christian $
 #
 # Authors:
 # Andreas Tille <tille@debian.org>
@@ -256,6 +256,13 @@ Dann brauchst Du gar keine zu erzeugen - wie Du Lust hast.
 
 Ne, die Quells muß existieren, das war ja einer Deiner Fehler.
 
+> Beim Bauen der "cybol" Pakete meldet er immer noch "no package",
+> obwohl ich die leeren "install" Dateien geloescht habe.
+
+Die leeren install Dateien haben nicht das geringste mit Deinem Problem
+zu tun.  Sie sind einfach überflüssig und können deshalb gelöscht werden,
+tun aber auch nicht weh, wenn sie da sind.
+
 --
 
 > Neue Frage zu GPG -- dazu einige Log Meldungen:
@@ -265,9 +272,40 @@ Ne, die Quells muß existieren, das war ja einer Deiner Fehler.
 
 Häh??? Na klar wirst Du gefragt.  Keine Ahnung, was da passiert ist.
 
+Im KGpg Tool darf nicht nur eine Photo ID angegeben sein;
+diese reicht nicht hin.
+Es muss auch eine "User ID" erstellt werden!
+
 --
 
 > Wohin soll ich die manpage einfuegen? Direkt in das /debian Verzeichnis?
 
 Pack sie doch am besten in Dein Release, oder brauchen nur Debian-Nutzer
 eine Manpage???
+
+--
+
+> Die Probleme mit dem angeblich "leeren" Paket bei CYBOL
+> und den Unterschieden in CYBOP bestehen nach wie vor.
+
+bei zwei Dingen kann ich Dir möglicherweise helfen:
+
+1. Angeblich veränderte Dateien bezüglich orig.tar.gz
+Scheinbar geistert in letzter Zeit ein Tool herum, daß kaputte
+Tarfiles erzeugt. Beim neuen GNUmed-client release habe ich
+jetzt genau die gleiche Beobachtung wie Du gemacht.
+Lösung
+
+tar -xzf <upstream-tarball>
+GZIP=-9 tar -czf <name>_<version>.orig.tar.gz <dirname>
+
+Beispiel fuer CYBOP 1.0.0:
+
+tar --extract --verbose --gzip --file=cybop-1.0.0.tar.gz
+GZIP=-9 tar --create --verbose --gzip --file=cybop_1.0.0.orig.tar.gz cybop-1.0.0/
+
+2. "I have no package to build"
+In dem per dh_make erzeugten debian/rules stehen Regeln für
+arch und indep drin. Die Regeln "binary-arch" und "install-arch"
+solltest Du löschen.
+
