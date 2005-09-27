@@ -20,13 +20,17 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2005-09-15 20:49:24 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-09-27 08:57:43 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef X_WINDOW_SYSTEM_TRANSLATOR_SOURCE
 #define X_WINDOW_SYSTEM_TRANSLATOR_SOURCE
 
+#include <X11/Xlib.h>
+#include <X11/Xutil.h>
+#include "../../globals/constants/abstraction_constants.c"
+#include "../../globals/constants/structure_constants.c"
 #include "../../globals/variables/variables.c"
 
 /**

@@ -24,7 +24,7 @@
  * - read data from a device into a byte array
  * - write data from a byte array to a device
  *
- * @version $Revision: 1.6 $ $Date: 2005-07-29 16:46:18 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2005-09-27 08:57:43 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -39,6 +39,7 @@
 #include "../memoriser/communicator/http_communicator.c"
 #include "../memoriser/communicator/inline_communicator.c"
 #include "../memoriser/communicator/terminal_communicator.c"
+#include "../memoriser/communicator/x_window_system_communicator.c"
 
 /**
  * Reads a stream according to the given communication channel type
@@ -80,6 +81,16 @@ void read_data(void* p0, void* p1, void* p2, void* p3, void* p4,
         if (r != 0) {
 
             read_terminal(p0, p1, p2, p3, p4);
+        }
+    }
+
+    if (r == 0) {
+
+        compare_arrays(p5, p6, (void*) X_WINDOW_SYSTEM_CHANNEL, (void*) X_WINDOW_SYSTEM_CHANNEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != 0) {
+
+            read_x_window_system(p0, p1, p2, p3, p4);
         }
     }
 
@@ -154,6 +165,16 @@ void write_data(void* p0, void* p1, void* p2, void* p3, void* p4,
         if (r != 0) {
 
             write_terminal(p0, p1, p2, p3, p4);
+        }
+    }
+
+    if (r == 0) {
+
+        compare_arrays(p5, p6, (void*) X_WINDOW_SYSTEM_CHANNEL, (void*) X_WINDOW_SYSTEM_CHANNEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != 0) {
+
+            write_x_window_system(p0, p1, p2, p3, p4);
         }
     }
 

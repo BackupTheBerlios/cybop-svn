@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2005-07-25 21:01:02 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-09-27 08:57:43 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -38,6 +38,11 @@ static int* INLINE_CHANNEL_COUNT = NUMBER_6_INTEGER_ARRAY;
 static char TERMINAL_CHANNEL_ARRAY[] = {'t', 'e', 'r', 'm', 'i', 'n', 'a', 'l'};
 static char* TERMINAL_CHANNEL = TERMINAL_CHANNEL_ARRAY;
 static int* TERMINAL_CHANNEL_COUNT = NUMBER_8_INTEGER_ARRAY;
+
+/** The x window system channel. */
+static char X_WINDOW_SYSTEM_CHANNEL_ARRAY[] = {'x', '_', 'w', 'i', 'n', 'd', 'o', 'w', '_', 's', 'y', 's', 't', 'e', 'm'};
+static char* X_WINDOW_SYSTEM_CHANNEL = X_WINDOW_SYSTEM_CHANNEL_ARRAY;
+static int* X_WINDOW_SYSTEM_CHANNEL_COUNT = NUMBER_8_INTEGER_ARRAY;
 
 /** The file channel. */
 static char FILE_CHANNEL_ARRAY[] = {'f', 'i', 'l', 'e'};
