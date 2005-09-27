@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2005-09-27 08:57:43 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-09-27 15:55:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -39,7 +39,7 @@
  * @param p0 the destination compound model (Hand over as reference!)
  * @param p1 the destination count
  * @param p2 the destination size
- * @param p3 the source x window system model
+ * @param p3 the internal memory containing all x window system windows
  * @param p4 the source count
  */
 void decode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
@@ -48,7 +48,7 @@ void decode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
 /**
  * Encodes the compound model into an x window system model.
  *
- * @param p0 the destination x window system model (Hand over as reference!)
+ * @param p0 the internal memory containing all x window system windows
  * @param p1 the destination count
  * @param p2 the destination size
  * @param p3 the source compound model
@@ -62,18 +62,23 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         // The display, which is a subsumption of
         // xserver, screens, hardware (input devices etc.).
-        struct _XDisplay** d = NULL_POINTER;
+        struct _XDisplay** d = (struct _XDisplay**) &NULL_POINTER;
         // The default colourmap id for allocation on the specified screen.
         // Most routine allocations of colour should be made out of this colormap.
-        int** cm = NULL_POINTER;
+        int** cm = (int**) &NULL_POINTER;
         // The background pixel values.
-        unsigned long** bg = NULL_POINTER;
+        unsigned long** bg = (unsigned long**) &NULL_POINTER;
         // The foreground pixel values.
-        unsigned long** fg = NULL_POINTER;
+        unsigned long** fg = (unsigned long**) &NULL_POINTER;
         // The top-level root window for the given display and screen.
         // This is sometimes called the root window of the window manager.
         // Remember, CYBOI itself IS the window manager.
-        int** r = NULL_POINTER;
+        int** r = (int**) &NULL_POINTER;
+        // The graphic context. Each graphic element needs one.
+        // It can be used with any destination drawable (window or pixmap)
+        // having the same root and depth as the specified drawable.
+        // Use with other drawables results in a BadMatch error.
+        struct _XGC** gc = (struct _XGC**) &NULL_POINTER;
 
         // Get x window system internals.
         get(p0, (void*) X_WINDOW_SYSTEM_DISPLAY_INTERNAL, (void*) &d, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
@@ -81,6 +86,7 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
         get(p0, (void*) X_WINDOW_SYSTEM_BACKGROUND_INTERNAL, (void*) &bg, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         get(p0, (void*) X_WINDOW_SYSTEM_FOREGROUND_INTERNAL, (void*) &fg, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         get(p0, (void*) X_WINDOW_SYSTEM_ROOT_WINDOW_INTERNAL, (void*) &r, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        get(p0, (void*) X_WINDOW_SYSTEM_GRAPHIC_CONTEXT_INTERNAL, (void*) &gc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
         // The size hint.
         XSizeHints sh;
@@ -92,6 +98,7 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         // The window.
         int w = XCreateSimpleWindow(*d, **r, sh.x, sh.y, sh.width, sh.height, 5, **fg, **bg);
+
         XSetStandardProperties(*d, w, "Application", "Icon", None, NULL_POINTER, 0, (void*) &sh);
 
         // The colours.
@@ -162,11 +169,14 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
         XDrawLine(*d, w, gc_menu_border_bottom, 0, 21, wa.width, 21);
         XDrawLine(*d, w, gc_menu_border_bottom, (wa.width-1), 1, (wa.width-1), 21);
 
+    fprintf(stderr, "TEST 10: %i\n", *sc);
+
         //?? TODO: From xlib tutorial.
         //?? Remove as soon as event loop (MappingNotify) functions!
-    //??    XFlushGC(*d, gc);
+//??        XFlushGC(*d, *gc);
 
-        sleep(5);
+    fprintf(stderr, "TEST 11 sleep and display: %i\n", *d);
+        sleep(3);
 
     /*??
             XFreeGC(*d, *gc_menu_font);

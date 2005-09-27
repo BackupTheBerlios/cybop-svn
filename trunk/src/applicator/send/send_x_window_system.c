@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2005-09-27 08:57:43 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2005-09-27 15:55:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -47,16 +47,9 @@ void send_x_window_system(void* p0, void* p1, void* p2) {
 
     log_message_debug("Send x window system message.");
 
-    // The window.
-    void* w = NULL_POINTER;
-    void* wc = NULL_POINTER;
-    void* ws = NULL_POINTER;
-
-    // Allocate window.
-    allocate((void*) &w, (void*) ws, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-
     // Encode compound model into x window system window.
-    encode((void*) &w, (void*) wc, (void*) ws, p1, p2, (void*) X_WINDOW_SYSTEM_ABSTRACTION, (void*) X_WINDOW_SYSTEM_ABSTRACTION_COUNT);
+    // The window gets allocated inside encode procedure.
+    encode(p0, NULL_POINTER, NULL_POINTER, p1, p2, (void*) X_WINDOW_SYSTEM_ABSTRACTION, (void*) X_WINDOW_SYSTEM_ABSTRACTION_COUNT);
 
     // The display, which is a subsumption of
     // xserver, screens, hardware (input devices etc.).
@@ -66,10 +59,9 @@ void send_x_window_system(void* p0, void* p1, void* p2) {
     get_array_elements(p0, (void*) X_WINDOW_SYSTEM_DISPLAY_INTERNAL, (void*) &d, (void*) POINTER_ARRAY);
 
     // Show window on display.
-    write_data(d, NULL_POINTER, NULL_POINTER, w, (void*) &wc, (void*) X_WINDOW_SYSTEM_CHANNEL, (void*) X_WINDOW_SYSTEM_CHANNEL_COUNT);
+    write_data(d, NULL_POINTER, NULL_POINTER, p0, NULL_POINTER, (void*) X_WINDOW_SYSTEM_CHANNEL, (void*) X_WINDOW_SYSTEM_CHANNEL_COUNT);
 
     // Destroy window.
-    deallocate((void*) &w, (void*) ws, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 }
 
 /* SEND_X_WINDOW_SYSTEM_SOURCE */

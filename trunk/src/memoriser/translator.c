@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2005-07-30 00:07:17 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2005-09-27 15:55:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -71,7 +71,6 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
         }
     }
 
-/*??
     if (r == 0) {
 
         compare_arrays(p5, p6, (void*) X_WINDOW_SYSTEM_ABSTRACTION, (void*) X_WINDOW_SYSTEM_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
@@ -81,7 +80,6 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
             decode_x_window_system(p0, p1, p2, p3, p4);
         }
     }
-*/
 
     if (r == 0) {
 
@@ -152,7 +150,6 @@ void encode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
         }
     }
 
-/*??
     if (r == 0) {
 
         compare_arrays(p5, p6, (void*) X_WINDOW_SYSTEM_ABSTRACTION, (void*) X_WINDOW_SYSTEM_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
@@ -162,7 +159,6 @@ void encode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
             encode_x_window_system(p0, p1, p2, p3, p4);
         }
     }
-*/
 
     if (r == 0) {
 

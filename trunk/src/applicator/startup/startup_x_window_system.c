@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.10 $ $Date: 2005-09-27 08:57:43 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2005-09-27 15:55:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  *
@@ -47,6 +47,7 @@
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
 #include "../../globals/constants/integer_constants.c"
+#include "../../globals/constants/log_constants.c"
 #include "../../globals/constants/structure_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../globals/variables/variables.c"
@@ -70,6 +71,7 @@ void startup_x_window_system(void* p0, void* p1, void* p2, void* p3) {
     // Get display internal.
     get(p0, (void*) X_WINDOW_SYSTEM_DISPLAY_INTERNAL, (void*) &di, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
+    // Only create display if not existent.
     if (*di == NULL_POINTER) {
 
         // The display name.
