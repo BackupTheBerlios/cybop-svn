@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2005-10-07 12:20:55 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2005-10-07 13:13:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -60,6 +60,22 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
     if (p4 != NULL_POINTER) {
 
         int* sc = (int*) p4;
+
+        log_message_debug("Encode compound into x window system window.");
+
+/*??
+        // The source part abstraction, model, details.
+        void** a = &NULL_POINTER;
+        void** ac = &NULL_POINTER;
+        void** as = &NULL_POINTER;
+        void** m = &NULL_POINTER;
+        // CAUTION! This must be int** because its value is used below.
+        int** mc = (int**) &NULL_POINTER;
+        void** ms = &NULL_POINTER;
+        void** d = &NULL_POINTER;
+        void** dc = &NULL_POINTER;
+        void** ds = &NULL_POINTER;
+*/
 
         // The display, which is a subsumption of
         // xserver, screens, hardware (input devices etc.).
