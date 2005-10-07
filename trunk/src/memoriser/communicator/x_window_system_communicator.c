@@ -24,23 +24,19 @@
  * - receive a file stream into a byte array
  * - send a file stream from a byte array
  *
- * @version $Revision: 1.1 $ $Date: 2005-09-27 08:57:43 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-10-07 12:20:55 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef X_WINDOW_SYSTEM_COMMUNICATOR_SOURCE
 #define X_WINDOW_SYSTEM_COMMUNICATOR_SOURCE
 
-/*??
+#include <X11/Xlib.h>
 #include "../../globals/constants/abstraction_constants.c"
-#include "../../globals/constants/character_constants.c"
-#include "../../globals/constants/integer_constants.c"
-#include "../../globals/constants/structure_constants.c"
-#include "../../memoriser/array.c"
-*/
 #include "../../globals/constants/log_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../globals/variables/variables.c"
+#include "../../memoriser/accessor.c"
 
 /**
  * Reads the x window system display into a window.
@@ -60,31 +56,61 @@ void read_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
  * @param p0 the destination display (Hand over as reference!)
  * @param p1 the destination count
  * @param p2 the destination size
- * @param p3 the source window
+ * @param p3 the internal memory
  * @param p4 the source count
  */
 void write_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p4 != NULL_POINTER) {
+    if (p0 != NULL_POINTER) {
 
-        int* sc = (int*) p4;
+        struct _XDisplay** d = (struct _XDisplay**) p0;
 
-        if (p0 != NULL_POINTER) {
+        log_message_debug("Write to x window system display.");
 
-//??            FILE** d = (FILE**) p0;
+        // The window.
+        int** w = (int**) &NULL_POINTER;
+        // The menu border bottom graphic context.
+        struct _XGC** gc_menu_border_bottom = (struct _XGC**) &NULL_POINTER;
 
-            log_message_debug("Write to x window system display.");
+        // Get x window system internals.
+        get(p3, (void*) X_WINDOW_SYSTEM_WINDOW_INTERNAL, (void*) &w, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        get(p3, (void*) X_WINDOW_SYSTEM_WINDOW_MENU_BORDER_BOTTOM_GC_INTERNAL, (void*) &gc_menu_border_bottom, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-            // Write to display.
+    fprintf(stderr, "TEST 4 comm: %i\n", **w);
 
-        } else {
+        // Request input events (signals) to be put into event queue.
+        XSelectInput(*d, **w, ButtonPressMask | KeyPressMask | ExposureMask);
 
-            log_message_debug("Could not write to x window system display. The destination display is null.");
-        }
+    fprintf(stderr, "TEST 5 comm: %i\n", **w);
+
+        // Map window.
+        // This procedure changes the order of all sister windows,
+        // so that the given window lies on top.
+        // Afterwards, all windows are displayed on the screen.
+        XMapRaised(*d, **w);
+
+        // The window attributes.
+//??        XWindowAttributes* wa = NULL_POINTER;
+        XWindowAttributes wa;
+
+        // Draw window.
+        XGetWindowAttributes(*d, **w, &wa);
+        //XDrawImageString(e.xexpose.display, e.xexpose.window, gc, 50, 50, "hello", strlen("hello"));
+        //XRectangle(e.xexpose.display, e.xexpose.window, gc_menu, 2, 2, (wa.width-4), 30);
+
+        // Draw menu bar.
+        XDrawLine(*d, **w, *gc_menu_border_bottom, 0, 21, wa.width, 21);
+        XDrawLine(*d, **w, *gc_menu_border_bottom, (wa.width-1), 1, (wa.width-1), 21);
+
+    fprintf(stderr, "TEST 6 comm: %i\n", *d);
+
+        //?? TODO: From xlib tutorial.
+        //?? Remove as soon as event loop (MappingNotify) functions!
+//??        XFlushGC(*d, *gc);
 
     } else {
 
-        log_message_debug("Could not write to x window system display. The source window count is null.");
+        log_message_debug("Could not write to x window system display. The destination display is null.");
     }
 }
 

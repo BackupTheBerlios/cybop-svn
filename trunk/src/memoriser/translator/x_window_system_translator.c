@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2005-09-27 15:55:50 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2005-10-07 12:20:55 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -32,6 +32,7 @@
 #include "../../globals/constants/abstraction_constants.c"
 #include "../../globals/constants/structure_constants.c"
 #include "../../globals/variables/variables.c"
+#include "../../memoriser/accessor.c"
 
 /**
  * Decodes the x window system model into a compound model.
@@ -79,28 +80,8 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
         // having the same root and depth as the specified drawable.
         // Use with other drawables results in a BadMatch error.
         struct _XGC** gc = (struct _XGC**) &NULL_POINTER;
-
-        // Get x window system internals.
-        get(p0, (void*) X_WINDOW_SYSTEM_DISPLAY_INTERNAL, (void*) &d, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        get(p0, (void*) X_WINDOW_SYSTEM_COLOUR_MAP_INTERNAL, (void*) &cm, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        get(p0, (void*) X_WINDOW_SYSTEM_BACKGROUND_INTERNAL, (void*) &bg, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        get(p0, (void*) X_WINDOW_SYSTEM_FOREGROUND_INTERNAL, (void*) &fg, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        get(p0, (void*) X_WINDOW_SYSTEM_ROOT_WINDOW_INTERNAL, (void*) &r, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        get(p0, (void*) X_WINDOW_SYSTEM_GRAPHIC_CONTEXT_INTERNAL, (void*) &gc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-
         // The size hint.
         XSizeHints sh;
-        sh.x = 100;
-        sh.y = 100;
-        sh.width = 400;
-        sh.height = 300;
-        sh.flags = PPosition | PSize;
-
-        // The window.
-        int w = XCreateSimpleWindow(*d, **r, sh.x, sh.y, sh.width, sh.height, 5, **fg, **bg);
-
-        XSetStandardProperties(*d, w, "Application", "Icon", None, NULL_POINTER, 0, (void*) &sh);
-
         // The colours.
         XColor gray;
         XColor light_gray;
@@ -114,8 +95,30 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
         struct _XGC* gc_menu_border_bottom = NULL_POINTER;
         // The menu font graphic context.
         struct _XGC* gc_menu_font = NULL_POINTER;
+        // The window.
+        int* w = NULL_POINTER;
+
+        // Get x window system internals.
+        get(p0, (void*) X_WINDOW_SYSTEM_DISPLAY_INTERNAL, (void*) &d, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        get(p0, (void*) X_WINDOW_SYSTEM_COLOUR_MAP_INTERNAL, (void*) &cm, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        get(p0, (void*) X_WINDOW_SYSTEM_BACKGROUND_INTERNAL, (void*) &bg, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        get(p0, (void*) X_WINDOW_SYSTEM_FOREGROUND_INTERNAL, (void*) &fg, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        get(p0, (void*) X_WINDOW_SYSTEM_ROOT_WINDOW_INTERNAL, (void*) &r, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        get(p0, (void*) X_WINDOW_SYSTEM_GRAPHIC_CONTEXT_INTERNAL, (void*) &gc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
+        // Create x window system internals.
+        allocate((void*) &w, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+
+    fprintf(stderr, "TEST 0 translator window: %i\n", *w);
 
         // Initialise x window system internals.
+        sh.x = 100;
+        sh.y = 100;
+        sh.width = 400;
+        sh.height = 300;
+        sh.flags = PPosition | PSize;
+        *w = XCreateSimpleWindow(*d, **r, sh.x, sh.y, sh.width, sh.height, 5, **fg, **bg);
+        XSetStandardProperties(*d, *w, "Application", "Icon", None, NULL_POINTER, 0, (void*) &sh);
         gray.red = 49125;
         gray.green = 49125;
         gray.blue = 49125;
@@ -128,16 +131,14 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
         dark_gray.red = 32768;
         dark_gray.green = 32768;
         dark_gray.blue = 32768;
-        gc_menu = XCreateGC(*d, w, 0, 0);
-        gc_menu_border_top = XCreateGC(*d, w, 0, 0);
-        gc_menu_border_bottom = XCreateGC(*d, w, 0, 0);
-        gc_menu_font = XCreateGC(*d, w, 0, 0);
-
-        // Assign x window system internals.
         XAllocColor(*d, **cm, &gray);
         XAllocColor(*d, **cm, &light_gray);
         XAllocColor(*d, **cm, &vlight_gray);
         XAllocColor(*d, **cm, &dark_gray);
+        gc_menu = XCreateGC(*d, *w, 0, 0);
+        gc_menu_border_top = XCreateGC(*d, *w, 0, 0);
+        gc_menu_border_bottom = XCreateGC(*d, *w, 0, 0);
+        gc_menu_font = XCreateGC(*d, *w, 0, 0);
         XSetBackground(*d, gc_menu, **bg);
         XSetForeground(*d, gc_menu, light_gray.pixel);
         XSetBackground(*d, gc_menu_border_top, **bg);
@@ -147,44 +148,11 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
         XSetBackground(*d, gc_menu_font, light_gray.pixel);
         XSetForeground(*d, gc_menu_font, **fg);
 
-        // Request input events (signals) to be put into event queue.
-        XSelectInput(*d, w, ButtonPressMask | KeyPressMask | ExposureMask);
+    fprintf(stderr, "TEST 1 translator window: %i\n", *w);
 
-        // Map window.
-        // This procedure changes the order of all sister windows,
-        // so that the given window lies on top.
-        // Afterwards, all windows are displayed on the screen.
-        XMapRaised(*d, w);
-
-        // The window attributes.
-    //??    XWindowAttributes* wa = NULL_POINTER;
-        XWindowAttributes wa;
-
-        // Draw window.
-        XGetWindowAttributes(*d, w, &wa);
-        //XDrawImageString(e.xexpose.display, e.xexpose.window, gc, 50, 50, "hello", strlen("hello"));
-        //XRectangle(e.xexpose.display, e.xexpose.window, gc_menu, 2, 2, (wa.width-4), 30);
-
-        // Draw menu bar.
-        XDrawLine(*d, w, gc_menu_border_bottom, 0, 21, wa.width, 21);
-        XDrawLine(*d, w, gc_menu_border_bottom, (wa.width-1), 1, (wa.width-1), 21);
-
-    fprintf(stderr, "TEST 10: %i\n", *sc);
-
-        //?? TODO: From xlib tutorial.
-        //?? Remove as soon as event loop (MappingNotify) functions!
-//??        XFlushGC(*d, *gc);
-
-    fprintf(stderr, "TEST 11 sleep and display: %i\n", *d);
-        sleep(3);
-
-    /*??
-            XFreeGC(*d, *gc_menu_font);
-            XFreeGC(*d, *gc_menu_border_bottom);
-            XFreeGC(*d, *gc_menu_border_top);
-            XFreeGC(*d, *gc_menu);
-    */
-        XDestroyWindow(*d, w);
+        // Set x window system internals.
+        set(p0, (void*) X_WINDOW_SYSTEM_WINDOW_INTERNAL, (void*) &w, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        set(p0, (void*) X_WINDOW_SYSTEM_WINDOW_MENU_BORDER_BOTTOM_GC_INTERNAL, (void*) &gc_menu_border_bottom, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
     } else {
 

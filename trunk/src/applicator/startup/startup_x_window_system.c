@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2005-09-27 15:55:50 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2005-10-07 12:20:55 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  *
@@ -51,6 +51,7 @@
 #include "../../globals/constants/structure_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../globals/variables/variables.c"
+#include "../../memoriser/accessor.c"
 #include "../../memoriser/allocator.c"
 
 /**
@@ -66,7 +67,7 @@ void startup_x_window_system(void* p0, void* p1, void* p2, void* p3) {
     log_message_debug("Startup x window system.");
 
     // The display internal.
-    struct _XDisplay** di = NULL_POINTER;
+    struct _XDisplay** di = (struct _XDisplay**) &NULL_POINTER;
 
     // Get display internal.
     get(p0, (void*) X_WINDOW_SYSTEM_DISPLAY_INTERNAL, (void*) &di, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
