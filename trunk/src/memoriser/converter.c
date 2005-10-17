@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.10 $ $Date: 2005-08-09 13:04:27 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2005-10-17 22:26:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -35,6 +35,7 @@
 #include "../memoriser/converter/double_vector_converter.c"
 #include "../memoriser/converter/fraction_converter.c"
 #include "../memoriser/converter/integer_vector_converter.c"
+#include "../memoriser/converter/latex_converter.c"
 #include "../memoriser/converter/terminal_converter.c"
 #include "../memoriser/converter/time_converter.c"
 #include "../memoriser/converter/xml_converter.c"
@@ -173,6 +174,16 @@ void parse(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6)
         if (r != 0) {
 
             parse_terminal(p0, p1, p2, p3, p4);
+        }
+    }
+
+    if (r == 0) {
+
+        compare_arrays(p5, p6, (void*) LATEX_ABSTRACTION, (void*) LATEX_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != 0) {
+
+            parse_latex(p0, p1, p2, p3, p4);
         }
     }
 
@@ -317,6 +328,16 @@ void serialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
         if (r != 0) {
 
             serialise_terminal(p0, p1, p2, p3, p4);
+        }
+    }
+
+    if (r == 0) {
+
+        compare_arrays(p5, p6, (void*) LATEX_ABSTRACTION, (void*) LATEX_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != 0) {
+
+            serialise_latex(p0, p1, p2, p3, p4);
         }
     }
 

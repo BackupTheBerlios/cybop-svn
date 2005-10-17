@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.23 $ $Date: 2005-09-15 20:49:23 $ $Author: christian $
+ * @version $Revision: 1.24 $ $Date: 2005-10-17 22:26:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -28,6 +28,7 @@
 #ifndef SEND_SOURCE
 #define SEND_SOURCE
 
+#include "../applicator/send/send_latex.c"
 #include "../applicator/send/send_linux_console.c"
 //?? #include "../applicator/send/send_tcp_socket.c"
 #include "../applicator/send/send_x_window_system.c"
@@ -262,6 +263,16 @@ void send_message(void* p0, void* p1,
         }
     }
 */
+
+    if (r == 0) {
+
+        compare_arrays((void*) *lm, (void*) *lmc, (void*) LATEX_MODEL, (void*) LATEX_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != 0) {
+
+            send_latex(p2, *mm, *mmc);
+        }
+    }
 }
 
 /**

@@ -20,13 +20,14 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.10 $ $Date: 2005-09-15 20:49:23 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2005-10-17 22:26:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef RECEIVE_SOURCE
 #define RECEIVE_SOURCE
 
+#include "../applicator/receive/receive_latex.c"
 #include "../applicator/receive/receive_linux_console.c"
 #include "../applicator/receive/receive_tcp_socket.c"
 #include "../applicator/receive/receive_x_window_system.c"
@@ -189,6 +190,16 @@ void receive_message(void* p0, void* p1,
 
                 receive_tcp_socket(p2, p3, p4, p5, *ba, *bac, *bm, *bmc);
             }
+        }
+    }
+
+    if (r == 0) {
+
+        compare_arrays((void*) *sm, (void*) *smc, (void*) LATEX_MODEL, (void*) LATEX_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != 0) {
+
+//??            receive_latex(p2, *mm, *mmc);
         }
     }
 }

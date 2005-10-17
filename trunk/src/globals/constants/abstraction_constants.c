@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2005-09-15 20:49:24 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2005-10-17 22:26:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -280,6 +280,11 @@ static int* ZIP_ABSTRACTION_COUNT = NUMBER_3_INTEGER_ARRAY;
 //
 // Application abstractions.
 //
+
+/** The latex abstraction. */
+static char LATEX_ABSTRACTION_ARRAY[] = {'l', 'a', 't', 'e', 'x'};
+static char* LATEX_ABSTRACTION = LATEX_ABSTRACTION_ARRAY;
+static int* LATEX_ABSTRACTION_COUNT = NUMBER_5_INTEGER_ARRAY;
 
 /** The koffice kword abstraction. */
 static char KWD_ABSTRACTION_ARRAY[] = {'k', 'w', 'd'};

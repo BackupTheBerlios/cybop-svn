@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2005-07-30 00:07:17 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2005-10-17 22:26:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -298,6 +298,11 @@ static int* UNIX_SOCKET_MODEL_COUNT = NUMBER_11_INTEGER_ARRAY;
 static char TCP_SOCKET_MODEL_ARRAY[] = {'t', 'c', 'p', '_', 's', 'o', 'c', 'k', 'e', 't'};
 static char* TCP_SOCKET_MODEL = TCP_SOCKET_MODEL_ARRAY;
 static int* TCP_SOCKET_MODEL_COUNT = NUMBER_10_INTEGER_ARRAY;
+
+/** The latex model. */
+static char LATEX_MODEL_ARRAY[] = {'l', 'a', 't', 'e', 'x'};
+static char* LATEX_MODEL = LATEX_MODEL_ARRAY;
+static int* LATEX_MODEL_COUNT = NUMBER_5_INTEGER_ARRAY;
 
 /** The signal model. */
 static char SIGNAL_MODEL_ARRAY[] = {'s', 'i', 'g', 'n', 'a', 'l'};
