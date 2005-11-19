@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<model>
+    <part name="title_page" channel="file" abstraction="cybol" model="document_generator/document/title_page.cybol">
+        <property name="type" channel="inline" abstraction="string" model="title_page"/>
+        <property name="position" channel="inline" abstraction="integer" model="1"/>
+    </part>
+    <part name="introduction" channel="file" abstraction="cybol" model="document_generator/document/introduction.cybol">
+        <property name="type" channel="inline" abstraction="string" model="chapter"/>
+        <property name="position" channel="inline" abstraction="integer" model="2"/>
+    </part>
+    <part name="basics" channel="file" abstraction="cybol" model="document_generator/document/basics.cybol">
+        <property name="type" channel="inline" abstraction="string" model="chapter"/>
+        <property name="position" channel="inline" abstraction="integer" model="3"/>
+    </part>
+    <part name="appendices" channel="file" abstraction="cybol" model="document_generator/document/appendices.cybol">
+        <property name="type" channel="inline" abstraction="string" model="chapter"/>
+        <property name="position" channel="inline" abstraction="integer" model="4"/>
+    </part>
+</model>
+
+<!--
+    $RCSfile: document.cybol,v $
+
+    Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
+
+    This knowledge model is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public License
+    as published by the Free Software Foundation; either version 2
+    of the License, or (at your option) any later version.
+
+    This knowledge model is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this knowledge model; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+    http://www.cybop.net
+    - Cybernetics Oriented Programming -
+
+    @version $Revision: 1.1 $ $Date: 2005-11-19 01:18:03 $ $Author: christian $
+    @author Christian Heller <christian.heller@tuxtax.de>
+/-->
