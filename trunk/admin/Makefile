@@ -22,7 +22,7 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.36 $ $Date: 2005-08-31 16:04:08 $ $Author: christian $
+# @version $Revision: 1.37 $ $Date: 2005-11-21 23:28:28 $ $Author: christian $
 # @author Michael Simon <michael.simon@gmx.net>
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
@@ -30,7 +30,7 @@
 #
 # CAUTION!
 #
-# TABS must not be replaced with SPACES!
+# TABS must NOT be replaced with SPACES!
 # Otherwise, the makefile will not work.
 #
 
@@ -53,10 +53,7 @@ SRC = $(ROOT)/src
 BINARY = cyboi
 COMPILER = gcc
 #-Wall -pedantic
-COMPILER_FLAGS = -g -I/usr/X11R6/include -I/usr/include/libxml2 # -fsjlj-exceptions
-# Compile with profiling support.
-#COMPILER_FLAGS = -pg -I/usr/X11R6/include
-#-pedantic
+COMPILER_FLAGS = -g -I/usr/include/libxml2 -I/usr/X11R6/include # -fsjlj-exceptions
 
 #
 # Wildcards.
@@ -104,6 +101,8 @@ GLOBALS_VARIABLES_SOURCES = $(wildcard $(SRC)/globals/variables/*.c)
 GLOBALS_VARIABLES_OBJECTS = $(patsubst $(SRC)/globals/variables/%.c,$(OBJ)/globals/variables/%.o,$(GLOBALS_VARIABLES_SOURCES))
 
 # Memoriser.
+MEMORISER_SOURCES = $(wildcard $(SRC)/memoriser/*.c)
+MEMORISER_OBJECTS = $(patsubst $(SRC)/memoriser/%.c,$(OBJ)/memoriser/%.o,$(MEMORISER_SOURCES))
 MEMORISER_ACCESSOR_SOURCES = $(wildcard $(SRC)/memoriser/accessor/*.c)
 MEMORISER_ACCESSOR_OBJECTS = $(patsubst $(SRC)/memoriser/accessor/%.c,$(OBJ)/memoriser/accessor/%.o,$(MEMORISER_ACCESSOR_SOURCES))
 MEMORISER_ARRAY_SOURCES = $(wildcard $(SRC)/memoriser/array/*.c)
@@ -128,14 +127,8 @@ TESTER_OBJECTS = $(patsubst $(SRC)/tester/%.c,$(OBJ)/tester/%.o,$(TESTER_SOURCES
 # - creates objects
 # - creates binary
 #
-# Do NOT add a "$@" at the end!
+# CAUTION! Do NOT add a "$@" at the end!
 # Otherwise, a compiler error will occur, because "make $@" is already used internally.
-#
-#       $(COMPILER) -I /usr/X11R6/include -L /usr/X11R6/lib $(OBJ)/cyboi.o -o $(BIN)/$(BINARY)
-#
-#all: create $(ACCESSOR_OBJECTS) $(ARRAY_OBJECTS) $(COMMUNICATOR_OBJECTS) $(CREATOR_OBJECTS) $(CYBOI_OBJECTS) $(CONSTANTS_OBJECTS) $(LOGGER_OBJECTS) $(APPLICATOR_OBJECTS) $(CONVERTER_OBJECTS) $(SIGNAL_OBJECTS) $(SOCKET_OBJECTS) $(STATE_OBJECTS) $(TESTER_OBJECTS) $(TRANSLATOR_OBJECTS) $(X_WINDOWS_OBJECTS)
-#       $(COMPILER) -L/usr/X11R6/lib -L/usr/lib \
-#               -o $(BIN)/$(BINARY) $(OBJ)/cyboi/cyboi.o -lX11 -lxml2
 #
 all: create \
 	$(APPLICATOR_OBJECTS) \
@@ -152,6 +145,7 @@ all: create \
 	$(GLOBALS_CONSTANTS_OBJECTS) \
 	$(GLOBALS_LOGGER_OBJECTS) \
 	$(GLOBALS_VARIABLES_OBJECTS) \
+	$(MEMORISER_OBJECTS) \
 	$(MEMORISER_ACCESSOR_OBJECTS) \
 	$(MEMORISER_ARRAY_OBJECTS) \
 	$(MEMORISER_COMMUNICATOR_OBJECTS) \
@@ -163,8 +157,8 @@ all: create \
 	$(COMPILER) -c $(COMPILER_FLAGS) $(SRC)/controller/cyboi.c \
 		-o $(OBJ)/controller/cyboi.o
 # Link object files.
-	$(COMPILER) -L/usr/X11R6/lib -L/usr/lib \
-		-o $(BIN)/$(BINARY) $(OBJ)/controller/cyboi.o -lX11 -lxml2
+	$(COMPILER) -L/lib -L/usr/lib -L/usr/X11R6/lib \
+		-o $(BIN)/$(BINARY) $(OBJ)/controller/cyboi.o -lxml2 -lpthread -lX11
 # Print ready message.
 	@echo Compiled cyboi files.
 
@@ -243,6 +237,9 @@ $(OBJ)/globals/logger/%.o: $(SRC)/globals/logger/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
 $(OBJ)/globals/variables/%.o: $(SRC)/globals/variables/%.c
+	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
+
+$(OBJ)/memoriser/%.o: $(SRC)/memoriser/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
 $(OBJ)/memoriser/accessor/%.o: $(SRC)/memoriser/accessor/%.c
