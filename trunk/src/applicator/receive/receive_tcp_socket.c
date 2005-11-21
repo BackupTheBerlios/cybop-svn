@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.19 $ $Date: 2005-08-31 14:50:18 $ $Author: christian $
+ * @version $Revision: 1.20 $ $Date: 2005-11-21 23:29:27 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -1192,7 +1192,7 @@ void run_tcp_socket(void* p0) {
                 pthread_exit(NULL_POINTER);
             }
 
-        }else {
+        } else {
 
             log_message_debug("Could not run tcp socket. The socket is null.");
         }

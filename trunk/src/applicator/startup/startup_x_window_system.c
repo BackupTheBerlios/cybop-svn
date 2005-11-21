@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.12 $ $Date: 2005-10-07 12:20:55 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2005-11-21 23:29:27 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  *
@@ -104,6 +104,23 @@ void startup_x_window_system(void* p0, void* p1, void* p2, void* p3) {
 //??        char* fn = NULL_POINTER;
         // The font id.
 //??        int* f = NULL_POINTER;
+        // The size hint.
+        XSizeHints sh;
+        // The colours.
+        XColor gray;
+        XColor light_gray;
+        XColor vlight_gray;
+        XColor dark_gray;
+        // The menu graphic context.
+        struct _XGC* gc_menu = NULL_POINTER;
+        // The menu border top graphic context.
+        struct _XGC* gc_menu_border_top = NULL_POINTER;
+        // The menu border bottom graphic context.
+        struct _XGC* gc_menu_border_bottom = NULL_POINTER;
+        // The menu font graphic context.
+        struct _XGC* gc_menu_font = NULL_POINTER;
+        // The window.
+        int* w = NULL_POINTER;
         // The value mask for the graphic context.
         // It specifies which components in the graphic context are to be set
         // using the information in the specified values structure.
@@ -118,13 +135,14 @@ void startup_x_window_system(void* p0, void* p1, void* p2, void* p3) {
         // Use with other drawables results in a BadMatch error.
         struct _XGC* gc = NULL_POINTER;
 
-        // Create x window system internals.
+        // Allocate x window system internals.
         allocate((void*) &sn, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
         allocate((void*) &cm, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
         allocate((void*) &bg, (void*) PRIMITIVE_COUNT, (void*) UNSIGNED_LONG_VECTOR_ABSTRACTION, (void*) UNSIGNED_LONG_VECTOR_ABSTRACTION_COUNT);
         allocate((void*) &fg, (void*) PRIMITIVE_COUNT, (void*) UNSIGNED_LONG_VECTOR_ABSTRACTION, (void*) UNSIGNED_LONG_VECTOR_ABSTRACTION_COUNT);
         allocate((void*) &r, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 //??        allocate((void*) &f, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        allocate((void*) &w, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
         allocate((void*) &vm, (void*) PRIMITIVE_COUNT, (void*) UNSIGNED_LONG_VECTOR_ABSTRACTION, (void*) UNSIGNED_LONG_VECTOR_ABSTRACTION_COUNT);
 
         // Initialise x window system internals.
@@ -139,11 +157,46 @@ void startup_x_window_system(void* p0, void* p1, void* p2, void* p3) {
 //??        *r = XRootWindowOfScreen(s);
 //??        fn = "Helvetica";
 //??        *f = XLoadFont(*d, fn);
+        sh.x = 100;
+        sh.y = 100;
+        sh.width = 400;
+        sh.height = 300;
+        sh.flags = PPosition | PSize;
+        *w = XCreateSimpleWindow(d, *r, sh.x, sh.y, sh.width, sh.height, 5, *fg, *bg);
         *vm = 0;
         v = NULL_POINTER;
-        gc = XCreateGC(d, *r, *vm, v);
+        gc = XCreateGC(d, *w, *vm, v);
+        gray.red = 49125;
+        gray.green = 49125;
+        gray.blue = 49125;
+        light_gray.red = 56000;
+        light_gray.green = 58000;
+        light_gray.blue = 60000;
+        vlight_gray.red = 60000;
+        vlight_gray.green = 61000;
+        vlight_gray.blue = 62000;
+        dark_gray.red = 32768;
+        dark_gray.green = 32768;
+        dark_gray.blue = 32768;
+        gc_menu = XCreateGC(d, *w, 0, 0);
+        gc_menu_border_top = XCreateGC(d, *w, 0, 0);
+        gc_menu_border_bottom = XCreateGC(d, *w, 0, 0);
+        gc_menu_font = XCreateGC(d, *w, 0, 0);
 
         // Assign x window system internals.
+        XSetStandardProperties(d, *w, "Application", "Icon", None, NULL_POINTER, 0, (void*) &sh);
+        XAllocColor(d, *cm, &gray);
+        XAllocColor(d, *cm, &light_gray);
+        XAllocColor(d, *cm, &vlight_gray);
+        XAllocColor(d, *cm, &dark_gray);
+        XSetBackground(d, gc_menu, *bg);
+        XSetForeground(d, gc_menu, light_gray.pixel);
+        XSetBackground(d, gc_menu_border_top, *bg);
+        XSetForeground(d, gc_menu_border_top, vlight_gray.pixel);
+        XSetBackground(d, gc_menu_border_bottom, *bg);
+        XSetForeground(d, gc_menu_border_bottom, dark_gray.pixel);
+        XSetBackground(d, gc_menu_font, light_gray.pixel);
+        XSetForeground(d, gc_menu_font, *fg);
         XSetBackground(d, gc, *bg);
         XSetForeground(d, gc, *fg);
 //??        XSetFont(*d, gc, f);
@@ -159,6 +212,8 @@ void startup_x_window_system(void* p0, void* p1, void* p2, void* p3) {
         set(p0, (void*) X_WINDOW_SYSTEM_ROOT_WINDOW_INTERNAL, (void*) &r, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 //??        set(p0, (void*) X_WINDOW_SYSTEM_FONT_NAME_INTERNAL, (void*) &fn, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 //??        set(p0, (void*) X_WINDOW_SYSTEM_FONT_INTERNAL, (void*) &f, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        set(p0, (void*) X_WINDOW_SYSTEM_WINDOW_MENU_BORDER_BOTTOM_GC_INTERNAL, (void*) &gc_menu_border_bottom, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        set(p0, (void*) X_WINDOW_SYSTEM_WINDOW_INTERNAL, (void*) &w, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         set(p0, (void*) X_WINDOW_SYSTEM_GRAPHIC_CONTEXT_VALUE_MASK_INTERNAL, (void*) &vm, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         set(p0, (void*) X_WINDOW_SYSTEM_GRAPHIC_CONTEXT_VALUES_INTERNAL, (void*) &v, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         set(p0, (void*) X_WINDOW_SYSTEM_GRAPHIC_CONTEXT_INTERNAL, (void*) &gc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2005-07-25 21:01:01 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-11-21 23:29:27 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -28,28 +28,28 @@
 #ifndef RECEIVE_X_WINDOW_SYSTEM_SOURCE
 #define RECEIVE_X_WINDOW_SYSTEM_SOURCE
 
-//?? #include <X11/Xlib.h>
+#include <X11/Xlib.h>
 //?? #include <X11/Xutil.h>
+#include <pthread.h>
 //?? #include "../../creator/integer_allocator.c"
 //?? #include "../../creator/unsigned_long_allocator.c"
-//?? #include "../../global/integer_constants.c"
-//?? #include "../../global/structure_constants.c"
-//?? #include "../../global/variables.c"
+#include "../../globals/constants/abstraction_constants.c"
+//?? #include "../../globals/integer_constants.c"
+#include "../../globals/constants/structure_constants.c"
+#include "../../globals/variables/variables.c"
+#include "../../memoriser/accessor.c"
 
 /**
- * Receives an x window system message.
+ * Receives x window system messages (events) in an own thread.
  *
  * @param p0 the internals memory
- * @param p1 the knowledge
- * @param p2 the knowledge count
- * @param p3 the knowledge size
  */
-void receive_x_window_system(void* p0, void* p1, void* p2, void* p3) {
+void receive_x_window_system_thread(void* p0) {
 
-    log_message_debug("Receive x window system message.");
+//??    Check in xlibs!!
+//??    XQueryPointer(display, w, root_return, child_return, root_x_return, root_y_return, win_x_return, win_y_return, mask_return);
 
 /*??
-    XEvent e;
     KeySym k;
     char text[10];
     char str_test[1000];
@@ -59,32 +59,73 @@ void receive_x_window_system(void* p0, void* p1, void* p2, void* p3) {
     // The temporary variables.
 //??    int k;
     int menu_eintrage_ende;
-    // Hauptschleife zum Lesen der Events
-    int done = 0;
     int window;
     int i = 0, count_menu, count_item, indent_x, indent_y, indent_menu_item_x;
+*/
 
-    while (done == 0) {
-        
-        // Event einlesen
-        XNextEvent (d, &e);
+    // The display, which is a subsumption of
+    // xserver, screens, hardware (input devices etc.).
+    struct _XDisplay** d = (struct _XDisplay**) &NULL_POINTER;
+    // The menu border bottom graphic context.
+    struct _XGC** gc_menu_border_bottom = NULL_POINTER;
+    // The window.
+    int** w = NULL_POINTER;
+    // The graphic context. Each graphic element needs one.
+    // It can be used with any destination drawable (window or pixmap)
+    // having the same root and depth as the specified drawable.
+    // Use with other drawables results in a BadMatch error.
+    struct _XGC** gc = (struct _XGC**) &NULL_POINTER;
 
-        switch (e.type) {
+    // Get x window system internals.
+    get(p0, (void*) X_WINDOW_SYSTEM_DISPLAY_INTERNAL, (void*) &d, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p0, (void*) X_WINDOW_SYSTEM_WINDOW_MENU_BORDER_BOTTOM_GC_INTERNAL, (void*) &gc_menu_border_bottom, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p0, (void*) X_WINDOW_SYSTEM_WINDOW_INTERNAL, (void*) &w, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p0, (void*) X_WINDOW_SYSTEM_GRAPHIC_CONTEXT_INTERNAL, (void*) &gc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-        // Das Window nach einem Expose wiederherstellen
-        case Expose:
+    // The event.
+    XEvent e;
+    // The event type.
+    int t;
+    // The activation flag.
+    int** f = (int**) &NULL_POINTER;
 
-            if (e.xexpose.count == 0) { // Bei mehreren Expose-Events nur der letzte beachtet
+    while (1) {
 
-                XGetWindowAttributes (d, w, &wa);
-                //XDrawImageString (e.xexpose.display, e.xexpose.window, gc, 50, 50, "hello", strlen("hello"));
-                //XRectangle (e.xexpose.display, e.xexpose.window, gc_menu, 2, 2, (wa.width-4), 30);
-    
-                /// Menuleiste zeichnen
-                XDrawLine (d, w, gc_menu_border_bottom, 0, 21, wa.width, 21);
-                XDrawLine (d, w, gc_menu_border_bottom, (wa.width-1), 1, (wa.width-1), 21);
-                XFillRectangle (e.xexpose.display, e.xexpose.window, gc_menu, 1, 1, (wa.width-2), 20);
-    
+        // Get activation flag.
+        get(p0, (void*) X_WINDOW_SYSTEM_ACTIVE_INTERNAL, (void*) &f, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
+        if (**f == *NUMBER_1_INTEGER) {
+
+            break;
+        }
+
+        // Get next event.
+        XNextEvent(*d, &e);
+
+        // Assign event type.
+        t = e.type;
+
+        if (t == Expose) {
+
+            // Repaint window after expose.
+            // With multiple expose events, only the last one is considered.
+            if (e.xexpose.count == 0) {
+
+                // The window attributes.
+                XWindowAttributes wa;
+
+                // Draw window.
+                XGetWindowAttributes(*d, **w, &wa);
+                //XDrawImageString(e.xexpose.display, e.xexpose.window, gc, 50, 50, "hello", strlen("hello"));
+                //XRectangle(e.xexpose.display, e.xexpose.window, gc_menu, 2, 2, (wa.width-4), 30);
+
+                // Draw menu bar.
+                XDrawLine(*d, **w, *gc_menu_border_bottom, 0, 21, wa.width, 21);
+                XDrawLine(*d, **w, *gc_menu_border_bottom, (wa.width-1), 1, (wa.width-1), 21);
+                XFillRectangle(*d, **w, *gc, 2, 2, 100, 30);
+//??                XFillRectangle (e.xexpose.display, e.xexpose.window, gc_menu, 1, 1, (wa.width-2), 20);
+
+/*??
                 /// Menueintraege zeichen
                 //k=1;
                 //while (menu_eintrage_ende==0) {
@@ -111,17 +152,17 @@ void receive_x_window_system(void* p0, void* p1, void* p2, void* p3) {
                     if (strlen(Anwendung.menu_bar1.menus[count_menu].name)>0) {
 
                         XDrawImageString (e.xexpose.display, e.xexpose.window, gc_menu_font, (5+indent_x), 16, Anwendung.menu_bar1.menus[count_menu].name, strlen(Anwendung.menu_bar1.menus[count_menu].name));
-        
+
                         for (count_item=0; ((count_item<9) && (Anwendung.menu_bar1.menus[count_menu].angeklickt==1)); count_item++) {
                             if ((strlen(Anwendung.menu_bar1.menus[count_menu].menu_items[count_item].name)*6)+6 > indent_menu_item_x) {
                             indent_menu_item_x = (strlen(Anwendung.menu_bar1.menus[count_menu].menu_items[count_item].name)*6)+6;
                             }
                         }
-        
+
                         for (count_item=0; ((count_item<9) && (Anwendung.menu_bar1.menus[count_menu].angeklickt==1)); count_item++) {
-                            
+
                             if (strlen(Anwendung.menu_bar1.menus[count_menu].menu_items[count_item].name)>0) {
-                            
+
                                 indent_y = indent_y + 17;
                                 //if ((strlen(Anwendung.menu_bar1.menus[count_menu].menu_items[count_item].name)*6)+6 > indent_menu_item_x) {
                                 //  XFillRectangle (e.xexpose.display, e.xexpose.window, gc_menu_border_bottom, indent_menu_item_x, 20 + (count_item*17), (strlen(Anwendung.menu_bar1.menus[count_menu].menu_items[count_item].name)*6)+6, 19);
@@ -141,24 +182,23 @@ void receive_x_window_system(void* p0, void* p1, void* p2, void* p3) {
                             XDrawLine (d, w, gc_menu_border_top, (3+indent_x), 19, (3+indent_x+indent_menu_item_x), 19);
                             XDrawLine (d, w, gc_menu_border_top, (3+indent_x), 19, (3+indent_x), (20+indent_y));
                         }
-        
+
                         indent_x = indent_x + (strlen(Anwendung.menu_bar1.menus[count_menu].name) * 6) +10;
                     }
                 }
+*/
             }
 
-            break;
-    
-        // Abbildungsaenderungen der Tastatur verarbeiten
-        case MappingNotify:
+        } else if (t == MappingNotify) {
 
-            XRefreshKeyboardMapping (&e);
+            // Process mapping changes of keyboard.
+//??            XRefreshKeyboardMapping(&e);
 
-            break;
+        } else if (t == ButtonPress) {
 
-        // Druecken der Maustaste verarbeiten
-        case ButtonPress: {
+            // Process mouse button press.
 
+/*??
             //struct XButtonEvent event;
             //event = e.xbutton.window;
             //if ()
@@ -173,21 +213,21 @@ void receive_x_window_system(void* p0, void* p1, void* p2, void* p3) {
                 Anwendung.menu_bar1.menus[0].angeklickt = 1;
                 Anwendung.menu_bar1.menus[1].angeklickt = 0;
                 Anwendung.menu_bar1.menus[2].angeklickt = 0;
-            
+
             } else if ((e.xbutton.x<65) && (e.xbutton.x>38) && (e.xbutton.y<21) && (e.xbutton.x>1)) {
 
                 XClearArea (d, w, 0, 0, 0, 0, True);
                 Anwendung.menu_bar1.menus[0].angeklickt = 0;
                 Anwendung.menu_bar1.menus[1].angeklickt = 1;
                 Anwendung.menu_bar1.menus[2].angeklickt = 0;
-            
+
             } else if ((e.xbutton.x<120) && (e.xbutton.x>70) && (e.xbutton.y<21) && (e.xbutton.x>1)) {
 
                 XClearArea (d, w, 0, 0, 0, 0, True);
                 Anwendung.menu_bar1.menus[0].angeklickt = 0;
                 Anwendung.menu_bar1.menus[1].angeklickt = 0;
                 Anwendung.menu_bar1.menus[2].angeklickt = 1;
-            
+
             } else {
 
                 XClearArea (d, w, 0, 0, 0, 0, True);
@@ -195,32 +235,32 @@ void receive_x_window_system(void* p0, void* p1, void* p2, void* p3) {
                 Anwendung.menu_bar1.menus[1].angeklickt = 0;
                 Anwendung.menu_bar1.menus[2].angeklickt = 0;
             }
-        
-            break;
-        }
+*/
 
-        // Tastatureingaben verarbeiten
-        case KeyPress:
+        } else if (t == KeyPress) {
 
-            i = XLookupString ( &e, text, 10, &k, 0);
-            
+            // Process keyboard press.
+
+/*??
+            i = XLookupString(&e, text, 10, &k, 0);
+
             //// Das gehoert hier eigentlich nicht her, nur zu Demonstartionszwecken
             //// Bei Tastendruck 'a' wird erstes Menue gezeichenet, bei b das Zweite, bei c das Dritte
-            
+
             if (i == 1 && text[0] == 'a') {
 
                 XClearArea (d, w, 0, 0, 0, 0, True);
                 Anwendung.menu_bar1.menus[0].angeklickt = 1;
                 Anwendung.menu_bar1.menus[1].angeklickt = 0;
                 Anwendung.menu_bar1.menus[2].angeklickt = 0;
-            
+
             } else if (i == 1 && text[0] == 'b') {
 
                 XClearArea (d, w, 0, 0, 0, 0, True);
                 Anwendung.menu_bar1.menus[0].angeklickt = 0;
                 Anwendung.menu_bar1.menus[1].angeklickt = 1;
                 Anwendung.menu_bar1.menus[2].angeklickt = 0;
-            
+
             } else if (i == 1 && text[0] == 'c') {
 
                 XClearArea (d, w, 0, 0, 0, 0, True);
@@ -236,13 +276,38 @@ void receive_x_window_system(void* p0, void* p1, void* p2, void* p3) {
                 Anwendung.menu_bar1.menus[0].angeklickt = 0;
                 Anwendung.menu_bar1.menus[1].angeklickt = 0;
                 Anwendung.menu_bar1.menus[2].angeklickt = 0;
-            
-            } else if ( i == 1 && text[0] == 'q') done = 1;
 
-                break;
+            } else if (i == 1 && text[0] == 'q') {
+
+                f = 1;
+            }
+*/
         }
     }
-*/
+
+    // An implicit call to pthread_exit() is made when this thread
+    // (other than the thread in which main() was first invoked)
+    // returns from the routine that was used to create it.
+    // The pthread_exit() function does therefore not have to be called here.
+}
+
+/**
+ * Receives x window system messages.
+ *
+ * @param p0 the internals memory
+ * @param p1 the knowledge
+ * @param p2 the knowledge count
+ * @param p3 the knowledge size
+ */
+void receive_x_window_system(void* p0, void* p1, void* p2, void* p3) {
+
+    log_message_debug("Receive x window system message.");
+
+    // The thread.
+    pthread_t t;
+
+    // Create thread.
+    pthread_create(&t, (pthread_attr_t*) NULL_POINTER, (void*) &receive_x_window_system_thread, p0);
 }
 
 /* RECEIVE_X_WINDOW_SYSTEM_SOURCE */

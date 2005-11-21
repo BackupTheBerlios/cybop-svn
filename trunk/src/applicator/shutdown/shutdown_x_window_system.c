@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2005-08-09 13:04:26 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2005-11-21 23:29:27 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  *
@@ -48,10 +48,13 @@
 #include "../../globals/constants/integer_constants.c"
 #include "../../globals/constants/structure_constants.c"
 #include "../../globals/variables/variables.c"
+#include "../../memoriser/accessor.c"
 #include "../../memoriser/allocator.c"
 
 /**
  * Shuts down the x window system.
+ *
+ * This is done in the reverse order that the x window system was started up.
  *
  * @param p0 the internals memory
  * @param p1 the knowledge
@@ -76,42 +79,46 @@ void shutdown_x_window_system(void* p0, void* p1, void* p2, void* p3) {
         // char* dn = "earth.cybop.net:0.1"
         //?? TODO: This has to be built dynamically, later on!
         //?? For now, it is just an empty string.
-        char** dn = NULL_POINTER;
+        char** dn = (char**) &NULL_POINTER;
         // The display, which is a subsumption of
         // xserver, screens, hardware (input devices etc.).
-        struct _XDisplay** d = NULL_POINTER;
+        struct _XDisplay** d = (struct _XDisplay**) &NULL_POINTER;
         // The screen number.
-        int** sn = NULL_POINTER;
+        int** sn = (int**) &NULL_POINTER;
         // The screen.
-//??        Screen** s = NULL_POINTER;
+//??        Screen** s = (Screen**) &NULL_POINTER;
         // The default colourmap id for allocation on the specified screen.
         // Most routine allocations of colour should be made out of this colormap.
-        int** cm = NULL_POINTER;
+        int** cm = (int**) &NULL_POINTER;
         // The background pixel values.
-        unsigned long** bg = NULL_POINTER;
+        unsigned long** bg = (unsigned long**) &NULL_POINTER;
         // The foreground pixel values.
-        unsigned long** fg = NULL_POINTER;
+        unsigned long** fg = (unsigned long**) &NULL_POINTER;
         // The top-level root window for the given display and screen.
         // This is sometimes called the root window of the window manager.
         // Remember, CYBOI itself IS the window manager.
-        int** r = NULL_POINTER;
+        int** r = (int**) &NULL_POINTER;
         // The font name.
-//??        char** fn = NULL_POINTER;
+//??        char** fn = (char**) &NULL_POINTER;
         // The font id.
-//??        int** f = NULL_POINTER;
+//??        int** f = (char**) &NULL_POINTER;
+        // The menu border bottom graphic context.
+        struct _XGC** gc_menu_border_bottom = NULL_POINTER;
+        // The window.
+        int** w = NULL_POINTER;
         // The value mask for the graphic context.
         // It specifies which components in the graphic context are to be set
         // using the information in the specified values structure.
         // This argument is the bitwise inclusive OR of zero or more of the
         // valid graphic context component mask bits.
-        unsigned long** vm = NULL_POINTER;
+        unsigned long** vm = (unsigned long**) &NULL_POINTER;
         // The values as specified by the value mask.
-        XGCValues** v = NULL_POINTER;
+        XGCValues** v = (XGCValues**) &NULL_POINTER;
         // The graphic context. Each graphic element needs one.
         // It can be used with any destination drawable (window or pixmap)
         // having the same root and depth as the specified drawable.
         // Use with other drawables results in a BadMatch error.
-        struct _XGC** gc = NULL_POINTER;
+        struct _XGC** gc = (struct _XGC**) &NULL_POINTER;
 
         // Get x window system internals.
         get(p0, (void*) X_WINDOW_SYSTEM_DISPLAY_NAME_INTERNAL, (void*) &dn, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
@@ -124,28 +131,28 @@ void shutdown_x_window_system(void* p0, void* p1, void* p2, void* p3) {
         get(p0, (void*) X_WINDOW_SYSTEM_ROOT_WINDOW_INTERNAL, (void*) &r, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 //??        get(p0, (void*) X_WINDOW_SYSTEM_FONT_NAME_INTERNAL, (void*) &fn, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 //??        get(p0, (void*) X_WINDOW_SYSTEM_FONT_INTERNAL, (void*) &f, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        get(p0, (void*) X_WINDOW_SYSTEM_WINDOW_MENU_BORDER_BOTTOM_GC_INTERNAL, (void*) &gc_menu_border_bottom, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        get(p0, (void*) X_WINDOW_SYSTEM_WINDOW_INTERNAL, (void*) &w, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         get(p0, (void*) X_WINDOW_SYSTEM_GRAPHIC_CONTEXT_VALUE_MASK_INTERNAL, (void*) &vm, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         get(p0, (void*) X_WINDOW_SYSTEM_GRAPHIC_CONTEXT_VALUES_INTERNAL, (void*) &v, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         get(p0, (void*) X_WINDOW_SYSTEM_GRAPHIC_CONTEXT_INTERNAL, (void*) &gc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-//??        XUnloadFont(*d, **f);
-//??        XSetBackground(d, gc, *bg);
-//??        XSetForeground(d, gc, *fg);
 
         // Free x window system internals.
         XFreeGC(*d, *gc);
+        XDestroyWindow(*d, **w);
         XCloseDisplay(*d);
 
         // Destroy x window system internals.
-        // CAUTION! Use descending order, as opposed to the creation!
         // CAUTION! Do NOT use references &, because variables are **
         // and *&variable equals the variable alone.
-        deallocate((void*) vm, (void*) PRIMITIVE_COUNT, (void*) UNSIGNED_LONG_VECTOR_ABSTRACTION, (void*) UNSIGNED_LONG_VECTOR_ABSTRACTION_COUNT);
-//??        deallocate((void*) f, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-        deallocate((void*) r, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-        deallocate((void*) fg, (void*) PRIMITIVE_COUNT, (void*) UNSIGNED_LONG_VECTOR_ABSTRACTION, (void*) UNSIGNED_LONG_VECTOR_ABSTRACTION_COUNT);
-        deallocate((void*) bg, (void*) PRIMITIVE_COUNT, (void*) UNSIGNED_LONG_VECTOR_ABSTRACTION, (void*) UNSIGNED_LONG_VECTOR_ABSTRACTION_COUNT);
-        deallocate((void*) cm, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
         deallocate((void*) sn, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        deallocate((void*) cm, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        deallocate((void*) bg, (void*) PRIMITIVE_COUNT, (void*) UNSIGNED_LONG_VECTOR_ABSTRACTION, (void*) UNSIGNED_LONG_VECTOR_ABSTRACTION_COUNT);
+        deallocate((void*) fg, (void*) PRIMITIVE_COUNT, (void*) UNSIGNED_LONG_VECTOR_ABSTRACTION, (void*) UNSIGNED_LONG_VECTOR_ABSTRACTION_COUNT);
+        deallocate((void*) r, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+//??        deallocate((void*) f, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        deallocate((void*) w, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        deallocate((void*) vm, (void*) PRIMITIVE_COUNT, (void*) UNSIGNED_LONG_VECTOR_ABSTRACTION, (void*) UNSIGNED_LONG_VECTOR_ABSTRACTION_COUNT);
 
     } else {
 

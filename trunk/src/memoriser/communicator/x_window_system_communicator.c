@@ -24,7 +24,7 @@
  * - receive a file stream into a byte array
  * - send a file stream from a byte array
  *
- * @version $Revision: 1.2 $ $Date: 2005-10-07 12:20:55 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-11-21 23:29:27 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -67,46 +67,29 @@ void write_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         log_message_debug("Write to x window system display.");
 
-        // The window.
-        int** w = (int**) &NULL_POINTER;
         // The menu border bottom graphic context.
         struct _XGC** gc_menu_border_bottom = (struct _XGC**) &NULL_POINTER;
+        // The window.
+        int** w = (int**) &NULL_POINTER;
+        // The graphic context. Each graphic element needs one.
+        // It can be used with any destination drawable (window or pixmap)
+        // having the same root and depth as the specified drawable.
+        // Use with other drawables results in a BadMatch error.
+        struct _XGC** gc = (struct _XGC**) &NULL_POINTER;
 
         // Get x window system internals.
-        get(p3, (void*) X_WINDOW_SYSTEM_WINDOW_INTERNAL, (void*) &w, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         get(p3, (void*) X_WINDOW_SYSTEM_WINDOW_MENU_BORDER_BOTTOM_GC_INTERNAL, (void*) &gc_menu_border_bottom, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-
-    fprintf(stderr, "TEST 4 comm: %i\n", **w);
+        get(p3, (void*) X_WINDOW_SYSTEM_WINDOW_INTERNAL, (void*) &w, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        get(p3, (void*) X_WINDOW_SYSTEM_GRAPHIC_CONTEXT_INTERNAL, (void*) &gc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
         // Request input events (signals) to be put into event queue.
         XSelectInput(*d, **w, ButtonPressMask | KeyPressMask | ExposureMask);
 
-    fprintf(stderr, "TEST 5 comm: %i\n", **w);
-
-        // Map window.
-        // This procedure changes the order of all sister windows,
-        // so that the given window lies on top.
-        // Afterwards, all windows are displayed on the screen.
+        // Display window. The following internal steps are done:
+        // 1 Map window and all of its subwindows, i.e. prepare for display.
+        // 2 Raise window to the top of the stack of all sister windows.
+        // 3 Display all windows on the screen.
         XMapRaised(*d, **w);
-
-        // The window attributes.
-//??        XWindowAttributes* wa = NULL_POINTER;
-        XWindowAttributes wa;
-
-        // Draw window.
-        XGetWindowAttributes(*d, **w, &wa);
-        //XDrawImageString(e.xexpose.display, e.xexpose.window, gc, 50, 50, "hello", strlen("hello"));
-        //XRectangle(e.xexpose.display, e.xexpose.window, gc_menu, 2, 2, (wa.width-4), 30);
-
-        // Draw menu bar.
-        XDrawLine(*d, **w, *gc_menu_border_bottom, 0, 21, wa.width, 21);
-        XDrawLine(*d, **w, *gc_menu_border_bottom, (wa.width-1), 1, (wa.width-1), 21);
-
-    fprintf(stderr, "TEST 6 comm: %i\n", *d);
-
-        //?? TODO: From xlib tutorial.
-        //?? Remove as soon as event loop (MappingNotify) functions!
-//??        XFlushGC(*d, *gc);
 
     } else {
 
