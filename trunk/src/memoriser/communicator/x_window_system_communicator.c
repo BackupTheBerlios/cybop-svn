@@ -24,7 +24,7 @@
  * - receive a file stream into a byte array
  * - send a file stream from a byte array
  *
- * @version $Revision: 1.3 $ $Date: 2005-11-21 23:29:27 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-11-28 13:42:54 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -90,6 +90,15 @@ void write_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
         // 2 Raise window to the top of the stack of all sister windows.
         // 3 Display all windows on the screen.
         XMapRaised(*d, **w);
+
+        //?? For some reason, the window is only drawn when its attributes
+        //?? are retrieved, as done below. Otherwise, it remains invisible.
+
+        // The window attributes.
+        XWindowAttributes wa;
+
+        // Draw window.
+        XGetWindowAttributes(*d, **w, &wa);
 
     } else {
 

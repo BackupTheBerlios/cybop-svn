@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2005-11-21 23:29:27 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-11-28 13:42:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -91,6 +91,9 @@ void receive_x_window_system_thread(void* p0) {
 
     while (1) {
 
+    fprintf(stderr, "TEST receive 2: %i\n", t);
+
+/*??
         // Get activation flag.
         get(p0, (void*) X_WINDOW_SYSTEM_ACTIVE_INTERNAL, (void*) &f, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
@@ -98,14 +101,25 @@ void receive_x_window_system_thread(void* p0) {
 
             break;
         }
+*/
+
+    fprintf(stderr, "TEST receive 3: %i\n", t);
 
         // Get next event.
+        // The XNextEvent function copies the first event from the event queue
+        // into the specified XEvent structure and then removes it from the queue.
+        // If the event queue is empty, XNextEvent flushes the output buffer
+        // and blocks until an event is received.
         XNextEvent(*d, &e);
 
         // Assign event type.
         t = e.type;
 
+    fprintf(stderr, "TEST receive 4 type: %i\n", t);
+
         if (t == Expose) {
+
+    fprintf(stderr, "TEST receive 5 expose: %i\n", t);
 
             // Repaint window after expose.
             // With multiple expose events, only the last one is considered.

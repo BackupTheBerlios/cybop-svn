@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2005-11-21 23:29:27 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2005-11-28 13:42:54 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -63,6 +63,25 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         log_message_debug("Encode compound into x window system window.");
 
+        // The display, which is a subsumption of
+        // xserver, screens, hardware (input devices etc.).
+        struct _XDisplay** d = (struct _XDisplay**) &NULL_POINTER;
+        // The menu border bottom graphic context.
+        struct _XGC** gc_menu_border_bottom = NULL_POINTER;
+        // The window.
+        int** w = NULL_POINTER;
+        // The graphic context. Each graphic element needs one.
+        // It can be used with any destination drawable (window or pixmap)
+        // having the same root and depth as the specified drawable.
+        // Use with other drawables results in a BadMatch error.
+        struct _XGC** gc = (struct _XGC**) &NULL_POINTER;
+
+        // Get x window system internals.
+        get(p0, (void*) X_WINDOW_SYSTEM_DISPLAY_INTERNAL, (void*) &d, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        get(p0, (void*) X_WINDOW_SYSTEM_WINDOW_MENU_BORDER_BOTTOM_GC_INTERNAL, (void*) &gc_menu_border_bottom, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        get(p0, (void*) X_WINDOW_SYSTEM_WINDOW_INTERNAL, (void*) &w, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        get(p0, (void*) X_WINDOW_SYSTEM_GRAPHIC_CONTEXT_INTERNAL, (void*) &gc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
 /*??
         // The source part abstraction, model, details.
         void** a = &NULL_POINTER;
@@ -84,7 +103,6 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         // Configure functions.
         XConfigureWindow(display, w, value_mask, values);
-        XResizeWindow(display, w, width, height);
         XChangeWindowAttributes(display, w, valuemask, attributes);
 
         // GC functions.
@@ -93,7 +111,20 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
         XSetFont(display, gc, font);
 
         // Graphics functions.
+        XResizeWindow(*d, **w, 200, 200);
+        XDrawImageString(e.xexpose.display, e.xexpose.window, gc, 50, 50, "hello", strlen("hello"));
+        XRectangle(e.xexpose.display, e.xexpose.window, gc_menu, 2, 2, (wa.width-4), 30);
+        // Draw menu bar.
+        //?? wa == windowAttributes
+        XDrawLine(*d, **w, *gc_menu_border_bottom, 0, 21, wa.width, 21);
+        XDrawLine(*d, **w, *gc_menu_border_bottom, (wa.width-1), 1, (wa.width-1), 21);
+        //?? TODO: From xlib tutorial.
+        //?? Remove as soon as event loop (MappingNotify) functions!
+//??        XFlushGC(*d, *gc);
 */
+
+    fprintf(stderr, "TEST encode 0: %i\n", *sc);
+    fprintf(stderr, "TEST encode 1: %i\n", *sc);
 
     } else {
 

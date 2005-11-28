@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2005-08-11 22:33:46 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2005-11-28 13:42:54 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -156,6 +156,13 @@ void check(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6)
 //??            fprintf(stderr, "TEST check pre integer destroy i: %i\n", i);
 //??            deallocate((void*) id, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 //??            fprintf(stderr, "TEST check post integer destroy i: %i\n", i);
+
+    //?? This signal checking loop causes the processor to run at 100%.
+    //?? This sleep call is necessary to allow other processes to get processor time.
+    //?? TODO: Delete this sleep procedure call later and use system signals
+    //?? to inform CYBOI about events like a mouse click or socket message etc.!
+    fprintf(stderr, "TEST sleep: %i\n", i);
+    sleep(1);
 
             // Reset abstraction.
             a = &NULL_POINTER;

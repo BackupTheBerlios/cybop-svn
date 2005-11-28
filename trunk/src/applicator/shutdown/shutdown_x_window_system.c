@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2005-11-21 23:29:27 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2005-11-28 13:42:54 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  *
@@ -71,6 +71,7 @@ void shutdown_x_window_system(void* p0, void* p1, void* p2, void* p3) {
     // Get display internal.
     get(p0, (void*) X_WINDOW_SYSTEM_DISPLAY_INTERNAL, (void*) &di, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
+    // Only destroy display if existent.
     if (*di != NULL_POINTER) {
 
         // The display name.
@@ -136,6 +137,13 @@ void shutdown_x_window_system(void* p0, void* p1, void* p2, void* p3) {
         get(p0, (void*) X_WINDOW_SYSTEM_GRAPHIC_CONTEXT_VALUE_MASK_INTERNAL, (void*) &vm, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         get(p0, (void*) X_WINDOW_SYSTEM_GRAPHIC_CONTEXT_VALUES_INTERNAL, (void*) &v, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         get(p0, (void*) X_WINDOW_SYSTEM_GRAPHIC_CONTEXT_INTERNAL, (void*) &gc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
+/*??
+    XFreeGC(*d, *gc_menu_font);
+    XFreeGC(*d, *gc_menu_border_bottom);
+    XFreeGC(*d, *gc_menu_border_top);
+    XFreeGC(*d, *gc_menu);
+*/
 
         // Free x window system internals.
         XFreeGC(*d, *gc);
