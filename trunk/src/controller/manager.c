@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.18 $ $Date: 2005-08-11 22:33:46 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2005-11-28 22:55:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -74,10 +74,10 @@ void manage(void* p0, void* p1) {
     int* sc = NULL_POINTER;
     int* ss = NULL_POINTER;
 
-    // Create knowledge memory count, size.
+    // Allocate knowledge memory count, size.
     allocate((void*) &kc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
     allocate((void*) &ks, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    // Create signal memory count, size.
+    // Allocate signal memory count, size.
     allocate((void*) &sc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
     allocate((void*) &ss, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
@@ -88,11 +88,11 @@ void manage(void* p0, void* p1) {
     *sc = 0;
     *ss = 0;
 
-    // Create internal memory.
+    // Allocate internal memory.
     allocate((void*) &i, (void*) is, (void*) INTERNAL_MEMORY_ABSTRACTION, (void*) INTERNAL_MEMORY_ABSTRACTION_COUNT);
-    // Create knowledge memory.
+    // Allocate knowledge memory.
     allocate((void*) &k, (void*) ks, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
-    // Create signal memory.
+    // Allocate signal memory.
     allocate((void*) &s, (void*) ss, (void*) SIGNAL_MEMORY_ABSTRACTION, (void*) SIGNAL_MEMORY_ABSTRACTION_COUNT);
 
     // CAUTION! ONLY ONE parameter can be handed over to threads!
@@ -123,12 +123,12 @@ void manage(void* p0, void* p1) {
     int* mdc = NULL_POINTER;
     int* mds = NULL_POINTER;
 
-    // Create startup model abstraction, model, details.
+    // Allocate startup model abstraction, model, details.
     allocate((void*) &mac, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
     allocate((void*) &mas, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
     allocate((void*) &mmc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
     allocate((void*) &mms, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    // CAUTION! Do not create startup model details!
+    // CAUTION! Do not allocate startup model details!
     // It is not needed for the startup signal.
 
     // Initialise startup model abstraction, model, details.
@@ -136,7 +136,7 @@ void manage(void* p0, void* p1) {
     *mas = 0;
     *mmc = 0;
     *mms = 0;
-    // CAUTION! Do not create startup model details!
+    // CAUTION! Do not allocate startup model details!
     // It is not needed for the startup signal.
 
     // Create startup model abstraction, model, details.
@@ -169,15 +169,15 @@ void manage(void* p0, void* p1) {
     // The loop is left as soon as its shutdown flag is set.
     check(i, k, (void*) kc, (void*) ks, s, (void*) sc, (void*) ss);
 
-    // Destroy signal memory.
+    // Deallocate signal memory.
     deallocate((void*) &s, (void*) ss, (void*) SIGNAL_MEMORY_ABSTRACTION, (void*) SIGNAL_MEMORY_ABSTRACTION_COUNT);
     deallocate((void*) &sc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
     deallocate((void*) &ss, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    // Destroy knowledge memory.
+    // Deallocate knowledge memory.
     deallocate((void*) &k, (void*) ks, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
     deallocate((void*) &kc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
     deallocate((void*) &ks, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    // Destroy internal memory.
+    // Deallocate internal memory.
     deallocate((void*) &i, (void*) is, (void*) INTERNAL_MEMORY_ABSTRACTION, (void*) INTERNAL_MEMORY_ABSTRACTION_COUNT);
 }
 

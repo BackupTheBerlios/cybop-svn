@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.18 $ $Date: 2005-11-21 23:29:27 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2005-11-28 22:55:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -338,6 +338,8 @@ static int* X_WINDOW_SYSTEM_GRAPHIC_CONTEXT_MENU_FONT_INTERNAL = NUMBER_336_INTE
 static int* X_WINDOW_SYSTEM_WINDOW_MENU_BORDER_BOTTOM_GC_INTERNAL = NUMBER_337_INTEGER_ARRAY;
 static int* X_WINDOW_SYSTEM_FONT_NAME_INTERNAL = NUMBER_350_INTEGER_ARRAY;
 static int* X_WINDOW_SYSTEM_FONT_INTERNAL = NUMBER_351_INTEGER_ARRAY;
+static int* X_WINDOW_SYSTEM_MODEL_REFERENCE_INTERNAL = NUMBER_360_INTEGER_ARRAY;
+static int* X_WINDOW_SYSTEM_MODEL_REFERENCE_COUNT_INTERNAL = NUMBER_361_INTEGER_ARRAY;
 
 //
 // Xml tag.

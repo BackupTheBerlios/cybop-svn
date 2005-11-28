@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2005-11-28 13:42:54 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2005-11-28 22:55:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -125,6 +125,86 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     fprintf(stderr, "TEST encode 0: %i\n", *sc);
     fprintf(stderr, "TEST encode 1: %i\n", *sc);
+
+    //?? The following block was copied from receive x window system --
+    //?? event handling of expose event (window paint / refresh).
+
+        // The window attributes.
+        XWindowAttributes wa;
+
+        // Draw window.
+        XGetWindowAttributes(*d, **w, &wa);
+        //XDrawImageString(e.xexpose.display, e.xexpose.window, gc, 50, 50, "hello", strlen("hello"));
+        //XRectangle(e.xexpose.display, e.xexpose.window, gc_menu, 2, 2, (wa.width-4), 30);
+
+        // Draw menu bar.
+        XDrawLine(*d, **w, *gc_menu_border_bottom, 0, 21, wa.width, 21);
+        XDrawLine(*d, **w, *gc_menu_border_bottom, (wa.width-1), 1, (wa.width-1), 21);
+        XFillRectangle(*d, **w, *gc, 2, 2, 100, 30);
+//??        XFillRectangle (e.xexpose.display, e.xexpose.window, gc_menu, 1, 1, (wa.width-2), 20);
+
+/*??
+        /// Menueintraege zeichen
+        //k=1;
+        //while (menu_eintrage_ende==0) {
+    //str_test= Anwendung.menu_bar1.menu1.name; //+ IntToStr(k);
+//        char str_test[20];
+            //strcpy(str_test,"fick dich");
+            //strcpy(str_menubar,"menubar");
+            //strcat(str_menubar,"1");
+            //dort = &str_menubar;
+            //strcpy(str_test, Anwendung.*dort.menu1.menu_item1.name);
+            //,".menu1.name";
+            //printf("%s",dort);
+            //Anwendung.menu_bar1.Datei.menu_item1.name
+            //XDrawImageString (e.xexpose.display, e.xexpose.window, gc, 50, 50, Anwendung.menu_bar1.Datei.name, strlen(Anwendung.menu_bar1.Datei.name));
+            //XDrawImageString (e.xexpose.display, e.xexpose.window, gc, 50, 50, str_test, strlen(str_test));
+            //XDrawImageString (e.xexpose.display, e.xexpose.window, gc, 50, 50, Anwendung.menu_bar1.menu1.name, strlen(Anwendung.menu_bar1.menu1.name));
+        //}
+        indent_x = 0;
+        indent_y = 0;
+        indent_menu_item_x = 0;
+
+        for (count_menu=0;count_menu<5;count_menu++) {
+
+            if (strlen(Anwendung.menu_bar1.menus[count_menu].name)>0) {
+
+                XDrawImageString (e.xexpose.display, e.xexpose.window, gc_menu_font, (5+indent_x), 16, Anwendung.menu_bar1.menus[count_menu].name, strlen(Anwendung.menu_bar1.menus[count_menu].name));
+
+                for (count_item=0; ((count_item<9) && (Anwendung.menu_bar1.menus[count_menu].angeklickt==1)); count_item++) {
+                    if ((strlen(Anwendung.menu_bar1.menus[count_menu].menu_items[count_item].name)*6)+6 > indent_menu_item_x) {
+                    indent_menu_item_x = (strlen(Anwendung.menu_bar1.menus[count_menu].menu_items[count_item].name)*6)+6;
+                    }
+                }
+
+                for (count_item=0; ((count_item<9) && (Anwendung.menu_bar1.menus[count_menu].angeklickt==1)); count_item++) {
+
+                    if (strlen(Anwendung.menu_bar1.menus[count_menu].menu_items[count_item].name)>0) {
+
+                        indent_y = indent_y + 17;
+                        //if ((strlen(Anwendung.menu_bar1.menus[count_menu].menu_items[count_item].name)*6)+6 > indent_menu_item_x) {
+                        //  XFillRectangle (e.xexpose.display, e.xexpose.window, gc_menu_border_bottom, indent_menu_item_x, 20 + (count_item*17), (strlen(Anwendung.menu_bar1.menus[count_menu].menu_items[count_item].name)*6)+6, 19);
+                        //  indent_menu_item_x = (strlen(Anwendung.menu_bar1.menus[count_menu].menu_items[count_item].name)*6)+6;
+                        //
+                        //}
+                        //XFillRectangle (e.xexpose.display, e.xexpose.window, gc_menu, (5+indent_x), 20 + (count_item*17), (5+indent_x+50), 19);
+                        XFillRectangle (e.xexpose.display, e.xexpose.window, gc_menu, (3+indent_x), 20 + (count_item*17), indent_menu_item_x, 19);
+                        XDrawImageString (e.xexpose.display, e.xexpose.window, gc_menu_font, (5+indent_x), 33 + (count_item*17), Anwendung.menu_bar1.menus[count_menu].menu_items[count_item].name, strlen(Anwendung.menu_bar1.menus[count_menu].menu_items[count_item].name));
+                    }
+                }
+
+                if (Anwendung.menu_bar1.menus[count_menu].angeklickt==1) {
+
+                    XDrawLine (d, w, gc_menu_border_bottom, (3+indent_x), (21+indent_y), (3+indent_x+indent_menu_item_x), (21+indent_y));
+                    XDrawLine (d, w, gc_menu_border_bottom, (3+indent_x+indent_menu_item_x), 20, (3+indent_x+indent_menu_item_x), (21+indent_y));
+                    XDrawLine (d, w, gc_menu_border_top, (3+indent_x), 19, (3+indent_x+indent_menu_item_x), 19);
+                    XDrawLine (d, w, gc_menu_border_top, (3+indent_x), 19, (3+indent_x), (20+indent_y));
+                }
+
+                indent_x = indent_x + (strlen(Anwendung.menu_bar1.menus[count_menu].name) * 6) +10;
+            }
+        }
+*/
 
     } else {
 

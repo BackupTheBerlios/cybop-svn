@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2005-11-28 13:42:53 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2005-11-28 22:55:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -46,36 +46,33 @@
  */
 void receive_x_window_system_thread(void* p0) {
 
-//??    Check in xlibs!!
-//??    XQueryPointer(display, w, root_return, child_return, root_x_return, root_y_return, win_x_return, win_y_return, mask_return);
-
-/*??
-    KeySym k;
-    char text[10];
-    char str_test[1000];
-    char str_zugriff[1000];
-    char str_menubar[100];
-    //??unsigned long //??double menu_foreground;
-    // The temporary variables.
-//??    int k;
-    int menu_eintrage_ende;
-    int window;
-    int i = 0, count_menu, count_item, indent_x, indent_y, indent_menu_item_x;
-*/
-
+    // The signal memory.
+    void** s = (void**) &NULL_POINTER;
+    void** sc = (void**) &NULL_POINTER;
+    void** ss = (void**) &NULL_POINTER;
+    // The x window system model reference internal.
+    void** m = (void**) &NULL_POINTER;
+    void** mc = (void**) &NULL_POINTER;
     // The display, which is a subsumption of
     // xserver, screens, hardware (input devices etc.).
     struct _XDisplay** d = (struct _XDisplay**) &NULL_POINTER;
     // The menu border bottom graphic context.
-    struct _XGC** gc_menu_border_bottom = NULL_POINTER;
+    struct _XGC** gc_menu_border_bottom = (struct _XGC**) &NULL_POINTER;
     // The window.
-    int** w = NULL_POINTER;
+    int** w = (int**) &NULL_POINTER;
     // The graphic context. Each graphic element needs one.
     // It can be used with any destination drawable (window or pixmap)
     // having the same root and depth as the specified drawable.
     // Use with other drawables results in a BadMatch error.
     struct _XGC** gc = (struct _XGC**) &NULL_POINTER;
 
+    // Get signal memory internals.
+    get(p0, (void*) SIGNAL_MEMORY_INTERNAL, (void*) &s, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p0, (void*) SIGNAL_MEMORY_COUNT_INTERNAL, (void*) &sc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p0, (void*) SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &ss, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    // Get x window system model reference internal.
+    get(p0, (void*) X_WINDOW_SYSTEM_MODEL_REFERENCE_INTERNAL, (void*) &m, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p0, (void*) X_WINDOW_SYSTEM_MODEL_REFERENCE_COUNT_INTERNAL, (void*) &mc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     // Get x window system internals.
     get(p0, (void*) X_WINDOW_SYSTEM_DISPLAY_INTERNAL, (void*) &d, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     get(p0, (void*) X_WINDOW_SYSTEM_WINDOW_MENU_BORDER_BOTTOM_GC_INTERNAL, (void*) &gc_menu_border_bottom, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
@@ -115,91 +112,60 @@ void receive_x_window_system_thread(void* p0) {
         // Assign event type.
         t = e.type;
 
-    fprintf(stderr, "TEST receive 4 type: %i\n", t);
-
         if (t == Expose) {
-
-    fprintf(stderr, "TEST receive 5 expose: %i\n", t);
 
             // Repaint window after expose.
             // With multiple expose events, only the last one is considered.
             if (e.xexpose.count == 0) {
 
-                // The window attributes.
-                XWindowAttributes wa;
-
-                // Draw window.
-                XGetWindowAttributes(*d, **w, &wa);
-                //XDrawImageString(e.xexpose.display, e.xexpose.window, gc, 50, 50, "hello", strlen("hello"));
-                //XRectangle(e.xexpose.display, e.xexpose.window, gc_menu, 2, 2, (wa.width-4), 30);
-
-                // Draw menu bar.
-                XDrawLine(*d, **w, *gc_menu_border_bottom, 0, 21, wa.width, 21);
-                XDrawLine(*d, **w, *gc_menu_border_bottom, (wa.width-1), 1, (wa.width-1), 21);
-                XFillRectangle(*d, **w, *gc, 2, 2, 100, 30);
-//??                XFillRectangle (e.xexpose.display, e.xexpose.window, gc_menu, 1, 1, (wa.width-2), 20);
-
 /*??
-                /// Menueintraege zeichen
-                //k=1;
-                //while (menu_eintrage_ende==0) {
-                    //str_test= Anwendung.menu_bar1.menu1.name; //+ IntToStr(k);
-    //            char str_test[20];
-                    //strcpy(str_test,"fick dich");
-                    //strcpy(str_menubar,"menubar");
-                    //strcat(str_menubar,"1");
-                    //dort = &str_menubar;
-                    //strcpy(str_test, Anwendung.*dort.menu1.menu_item1.name);
-                    //,".menu1.name";
-                    //printf("%s",dort);
-                    //Anwendung.menu_bar1.Datei.menu_item1.name
-                    //XDrawImageString (e.xexpose.display, e.xexpose.window, gc, 50, 50, Anwendung.menu_bar1.Datei.name, strlen(Anwendung.menu_bar1.Datei.name));
-                    //XDrawImageString (e.xexpose.display, e.xexpose.window, gc, 50, 50, str_test, strlen(str_test));
-                    //XDrawImageString (e.xexpose.display, e.xexpose.window, gc, 50, 50, Anwendung.menu_bar1.menu1.name, strlen(Anwendung.menu_bar1.menu1.name));
-                //}
-                indent_x = 0;
-                indent_y = 0;
-                indent_menu_item_x = 0;
+                //?? Add one more "destroy flag" to signals in signal memory!
+                //?? Destroy all signals in signal_checker, whose destroy flag is set.
+                //?? Mouse move events, for example, create MANY signals
+                //?? which have to be destroyed somewhere.
 
-                for (count_menu=0;count_menu<5;count_menu++) {
+                // The signal model, details.
+                void* sm = NULL_POINTER;
+                int* smc = NULL_POINTER;
+                int* sms = NULL_POINTER;
+                void* sd = NULL_POINTER;
+                int* sdc = NULL_POINTER;
+                int* sds = NULL_POINTER;
 
-                    if (strlen(Anwendung.menu_bar1.menus[count_menu].name)>0) {
+                // Allocate signal model, details.
+                allocate((void*) &smc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+                allocate((void*) &sms, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+                allocate((void*) &sdc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+                allocate((void*) &sds, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
-                        XDrawImageString (e.xexpose.display, e.xexpose.window, gc_menu_font, (5+indent_x), 16, Anwendung.menu_bar1.menus[count_menu].name, strlen(Anwendung.menu_bar1.menus[count_menu].name));
+                // Initialise signal model, details.
+                *smc = 0;
+                *sms = 0;
+                *sdc = 0;
+                *sds = 0;
 
-                        for (count_item=0; ((count_item<9) && (Anwendung.menu_bar1.menus[count_menu].angeklickt==1)); count_item++) {
-                            if ((strlen(Anwendung.menu_bar1.menus[count_menu].menu_items[count_item].name)*6)+6 > indent_menu_item_x) {
-                            indent_menu_item_x = (strlen(Anwendung.menu_bar1.menus[count_menu].menu_items[count_item].name)*6)+6;
-                            }
-                        }
+                // Create signal model, details.
+                create((void*) &sm, (void*) smc, (void*) sms,
+                    p0, p1,
+                    CYBOL_ABSTRACTION, CYBOL_ABSTRACTION_COUNT,
+                    FILE_CHANNEL, FILE_CHANNEL_COUNT);
+                create((void*) &sd, (void*) sdc, (void*) sds,
+                    (void*) CYBOL_ABSTRACTION, (void*) CYBOL_ABSTRACTION_COUNT,
+                    (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                    (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
 
-                        for (count_item=0; ((count_item<9) && (Anwendung.menu_bar1.menus[count_menu].angeklickt==1)); count_item++) {
+                // The signal id.
+                int* id = NULL_POINTER;
+                allocate((void*) &id, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+                *id = 0;
+                get_new_signal_id(s, (void*) sc, (void*) id);
 
-                            if (strlen(Anwendung.menu_bar1.menus[count_menu].menu_items[count_item].name)>0) {
+                //?? A signal model needs to be created here, as send operation!
+                //?? The actual knowledge model (gui) must be handed over in details,
+                //?? as operation parameter!
 
-                                indent_y = indent_y + 17;
-                                //if ((strlen(Anwendung.menu_bar1.menus[count_menu].menu_items[count_item].name)*6)+6 > indent_menu_item_x) {
-                                //  XFillRectangle (e.xexpose.display, e.xexpose.window, gc_menu_border_bottom, indent_menu_item_x, 20 + (count_item*17), (strlen(Anwendung.menu_bar1.menus[count_menu].menu_items[count_item].name)*6)+6, 19);
-                                //  indent_menu_item_x = (strlen(Anwendung.menu_bar1.menus[count_menu].menu_items[count_item].name)*6)+6;
-                                //
-                                //}
-                                //XFillRectangle (e.xexpose.display, e.xexpose.window, gc_menu, (5+indent_x), 20 + (count_item*17), (5+indent_x+50), 19);
-                                XFillRectangle (e.xexpose.display, e.xexpose.window, gc_menu, (3+indent_x), 20 + (count_item*17), indent_menu_item_x, 19);
-                                XDrawImageString (e.xexpose.display, e.xexpose.window, gc_menu_font, (5+indent_x), 33 + (count_item*17), Anwendung.menu_bar1.menus[count_menu].menu_items[count_item].name, strlen(Anwendung.menu_bar1.menus[count_menu].menu_items[count_item].name));
-                            }
-                        }
-
-                        if (Anwendung.menu_bar1.menus[count_menu].angeklickt==1) {
-
-                            XDrawLine (d, w, gc_menu_border_bottom, (3+indent_x), (21+indent_y), (3+indent_x+indent_menu_item_x), (21+indent_y));
-                            XDrawLine (d, w, gc_menu_border_bottom, (3+indent_x+indent_menu_item_x), 20, (3+indent_x+indent_menu_item_x), (21+indent_y));
-                            XDrawLine (d, w, gc_menu_border_top, (3+indent_x), 19, (3+indent_x+indent_menu_item_x), 19);
-                            XDrawLine (d, w, gc_menu_border_top, (3+indent_x), 19, (3+indent_x), (20+indent_y));
-                        }
-
-                        indent_x = indent_x + (strlen(Anwendung.menu_bar1.menus[count_menu].name) * 6) +10;
-                    }
-                }
+                // Add send signal to signal memory.
+                set_signal(*s, *sc, *ss, (void*) KNOWLEDGE_ABSTRACTION, (void*) KNOWLEDGE_ABSTRACTION_COUNT, *m, *mc, NULL_POINTER, NULL_POINTER, (void*) NORMAL_PRIORITY, (void*) id);
 */
             }
 
@@ -297,6 +263,23 @@ void receive_x_window_system_thread(void* p0) {
             }
 */
         }
+
+//??    Check in xlibs!!
+//??    XQueryPointer(display, w, root_return, child_return, root_x_return, root_y_return, win_x_return, win_y_return, mask_return);
+
+/*??
+    KeySym k;
+    char text[10];
+    char str_test[1000];
+    char str_zugriff[1000];
+    char str_menubar[100];
+    //??unsigned long //??double menu_foreground;
+    // The temporary variables.
+//??    int k;
+    int menu_eintrage_ende;
+    int window;
+    int i = 0, count_menu, count_item, indent_x, indent_y, indent_menu_item_x;
+*/
     }
 
     // An implicit call to pthread_exit() is made when this thread
