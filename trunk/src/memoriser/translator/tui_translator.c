@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.23 $ $Date: 2005-08-18 22:30:35 $ $Author: christian $
+ * @version $Revision: 1.24 $ $Date: 2006-01-02 11:56:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -47,6 +47,7 @@
  * @param p3 the source tui model
  * @param p4 the source count
  */
+/*??
 void decode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
 }
 
@@ -59,6 +60,7 @@ void decode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
  * @param p3 the source compound model
  * @param p4 the source count
  */
+/*??
 void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (p4 != NULL_POINTER) {
@@ -885,6 +887,7 @@ void encode_tui(void* p0, void* p1, void* p2, void* p3, void* p4) {
         log_message_debug("Could not encode textual user interface. The source count parameter is null.");
     }
 }
+*/
 
 /* TUI_TRANSLATOR_SOURCE */
 #endif

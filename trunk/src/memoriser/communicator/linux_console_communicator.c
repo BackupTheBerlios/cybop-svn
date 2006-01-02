@@ -1,5 +1,5 @@
 /*
- * $RCSfile: terminal_communicator.c,v $
+ * $RCSfile: linux_console_communicator.c,v $
  *
  * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
  *
@@ -24,12 +24,12 @@
  * - receive a file stream into a byte array
  * - send a file stream from a byte array
  *
- * @version $Revision: 1.9 $ $Date: 2006-01-02 11:56:02 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2006-01-02 11:56:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef TERMINAL_COMMUNICATOR_SOURCE
-#define TERMINAL_COMMUNICATOR_SOURCE
+#ifndef LINUX_CONSOLE_COMMUNICATOR_SOURCE
+#define LINUX_CONSOLE_COMMUNICATOR_SOURCE
 
 #include <stdio.h>
 #include "../../globals/constants/abstraction_constants.c"
@@ -42,7 +42,7 @@
 #include "../../memoriser/array.c"
 
 /**
- * Reads the terminal into terminal control sequences.
+ * Reads the linux console into terminal control sequences.
  *
  * @param p0 the destination terminal control sequences (Hand over as reference!)
  * @param p1 the destination count
@@ -50,8 +50,7 @@
  * @param p3 the source terminal
  * @param p4 the source count
  */
-/*??
-void read_terminal(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void read_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
 /*??
     char r = NULL_CONTROL_CHARACTER;
@@ -80,20 +79,18 @@ void read_terminal(void* p0, void* p1, void* p2, void* p3, void* p4) {
 */
 
     //?? getc(stdin);
-/*??
 }
 
 /**
- * Writes the terminal control sequences into terminal.
+ * Writes the terminal control sequences into a linux console.
  *
- * @param p0 the destination terminal (Hand over as reference!)
+ * @param p0 the destination linux console (Hand over as reference!)
  * @param p1 the destination count
  * @param p2 the destination size
  * @param p3 the source terminal control sequences
  * @param p4 the source count
  */
-/*??
-void write_terminal(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void write_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (p4 != NULL_POINTER) {
 
@@ -103,7 +100,7 @@ void write_terminal(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             FILE** d = (FILE**) p0;
 
-            log_message_debug("Write to terminal.");
+            log_message_debug("Write to linux console.");
 
             // The terminated control sequences string.
             void* ts = NULL_POINTER;
@@ -125,15 +122,14 @@ void write_terminal(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         } else {
 
-            log_message_debug("Could not write to terminal. The destination terminal file is null.");
+            log_message_debug("Could not write to linux console. The destination terminal file is null.");
         }
 
     } else {
 
-        log_message_debug("Could not write to terminal. The source terminal control sequences count is null.");
+        log_message_debug("Could not write to linux console. The source terminal control sequences count is null.");
     }
 }
-*/
 
-/* TERMINAL_COMMUNICATOR_SOURCE */
+/* LINUX_CONSOLE_COMMUNICATOR_SOURCE */
 #endif

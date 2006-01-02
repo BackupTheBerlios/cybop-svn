@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.12 $ $Date: 2005-10-17 22:26:30 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2006-01-02 11:56:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -96,20 +96,6 @@ static char* ENCAPSULATED_KNOWLEDGE_ABSTRACTION = ENCAPSULATED_KNOWLEDGE_ABSTRAC
 static int* ENCAPSULATED_KNOWLEDGE_ABSTRACTION_COUNT = NUMBER_22_INTEGER_ARRAY;
 
 //
-// Internal abstractions.
-//
-
-/** The textual user interface (tui) abstraction. */
-static char TUI_ABSTRACTION_ARRAY[] = {'t', 'u', 'i'};
-static char* TUI_ABSTRACTION = TUI_ABSTRACTION_ARRAY;
-static int* TUI_ABSTRACTION_COUNT = NUMBER_3_INTEGER_ARRAY;
-
-/** The x window system abstraction. */
-static char X_WINDOW_SYSTEM_ABSTRACTION_ARRAY[] = {'x', '_', 'w', 'i', 'n', 'd', 'o', 'w', '_', 's', 'y', 's', 't', 'e', 'm'};
-static char* X_WINDOW_SYSTEM_ABSTRACTION = X_WINDOW_SYSTEM_ABSTRACTION_ARRAY;
-static int* X_WINDOW_SYSTEM_ABSTRACTION_COUNT = NUMBER_15_INTEGER_ARRAY;
-
-//
 // Operation abstraction.
 //
 
@@ -166,11 +152,6 @@ static int* COMPLEX_ABSTRACTION_COUNT = NUMBER_7_INTEGER_ARRAY;
 static char TIME_ABSTRACTION_ARRAY[] = {'t', 'i', 'm', 'e'};
 static char* TIME_ABSTRACTION = TIME_ABSTRACTION_ARRAY;
 static int* TIME_ABSTRACTION_COUNT = NUMBER_4_INTEGER_ARRAY;
-
-/** The terminal abstraction. */
-static char TERMINAL_ABSTRACTION_ARRAY[] = {'t', 'e', 'r', 'm', 'i', 'n', 'a', 'l'};
-static char* TERMINAL_ABSTRACTION = TERMINAL_ABSTRACTION_ARRAY;
-static int* TERMINAL_ABSTRACTION_COUNT = NUMBER_8_INTEGER_ARRAY;
 
 /** The terminal foreground colour abstraction. */
 static char TERMINAL_FOREGROUND_ABSTRACTION_ARRAY[] = {'t', 'e', 'r', 'm', 'i', 'n', 'a', 'l', '_', 'f', 'o', 'r', 'e', 'g', 'r', 'o', 'u', 'n', 'd'};

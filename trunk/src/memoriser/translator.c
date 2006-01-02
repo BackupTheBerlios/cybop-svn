@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2005-09-27 15:55:50 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2006-01-02 11:56:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -28,10 +28,11 @@
 #define TRANSLATOR_SOURCE
 
 #include "../globals/constants/abstraction_constants.c"
+#include "../globals/constants/model_constants.c"
+#include "../globals/variables/variables.c"
 #include "../memoriser/array.c"
 #include "../memoriser/translator/cybol_translator.c"
 #include "../memoriser/translator/html_translator.c"
-#include "../memoriser/translator/tui_translator.c"
 #include "../memoriser/translator/x_window_system_translator.c"
 
 /**
@@ -53,16 +54,6 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
     if (r == 0) {
 
-        compare_arrays(p5, p6, (void*) TUI_ABSTRACTION, (void*) TUI_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != 0) {
-
-            decode_tui(p0, p1, p2, p3, p4);
-        }
-    }
-
-    if (r == 0) {
-
         compare_arrays(p5, p6, (void*) CYBOL_ABSTRACTION, (void*) CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
@@ -73,7 +64,7 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
     if (r == 0) {
 
-        compare_arrays(p5, p6, (void*) X_WINDOW_SYSTEM_ABSTRACTION, (void*) X_WINDOW_SYSTEM_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p5, p6, (void*) X_WINDOW_SYSTEM_MODEL, (void*) X_WINDOW_SYSTEM_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
@@ -132,16 +123,6 @@ void encode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
     if (r == 0) {
 
-        compare_arrays(p5, p6, (void*) TUI_ABSTRACTION, (void*) TUI_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != 0) {
-
-            encode_tui(p0, p1, p2, p3, p4);
-        }
-    }
-
-    if (r == 0) {
-
         compare_arrays(p5, p6, (void*) CYBOL_ABSTRACTION, (void*) CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
@@ -152,11 +133,11 @@ void encode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
     if (r == 0) {
 
-        compare_arrays(p5, p6, (void*) X_WINDOW_SYSTEM_ABSTRACTION, (void*) X_WINDOW_SYSTEM_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p5, p6, (void*) X_WINDOW_SYSTEM_MODEL, (void*) X_WINDOW_SYSTEM_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-            encode_x_window_system(p0, p1, p2, p3, p4);
+            encode_x_window_system(p0, p1, p2, p3, p4, NULL_POINTER, NULL_POINTER);
         }
     }
 

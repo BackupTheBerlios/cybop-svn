@@ -1,5 +1,5 @@
 /*
- * $RCSfile: activate_tcp_socket.c,v $
+ * $RCSfile: interrupt_unix_socket.c,v $
  *
  * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
  *
@@ -20,13 +20,19 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2006-01-02 11:56:01 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2006-01-02 11:56:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef ACTIVATE_TCP_SOCKET_SOURCE
-#define ACTIVATE_TCP_SOCKET_SOURCE
+#ifndef INTERRUPT_UNIX_SOCKET_SOURCE
+#define INTERRUPT_UNIX_SOCKET_SOURCE
 
+#include "../../globals/constants/abstraction_constants.c"
+#include "../../globals/constants/log_constants.c"
+#include "../../globals/constants/structure_constants.c"
+#include "../../globals/logger/logger.c"
+
+/*??
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <stdio.h>
@@ -34,42 +40,40 @@
 #include <arpa/inet.h>
 #include <unistd.h>
 #include "../../globals/constants/abstraction_constants.c"
+#include "../../globals/constants/character_constants.c"
 #include "../../globals/constants/integer_constants.c"
 #include "../../globals/constants/structure_constants.c"
 #include "../../globals/variables/variables.c"
+#include "../../memoriser/accessor.c"
+#include "../../memoriser/array.c"
+*/
 
 /**
- * Starts up the tcp socket service.
+ * Interrupts the unix socket service.
  *
- * @param p0 the internals memory
- * @param p1 the knowledge
- * @param p2 the knowledge count
- * @param p3 the knowledge size
+ * @param p0 the internal memory
+ * @param p1 the knowledge memory
+ * @param p2 the knowledge memory count
+ * @param p3 the knowledge memory size
  */
-void activate_tcp_socket( void* internals, void* know, void* know_count, void* know_size,
-    void* socket_port_abstr, void* socket_port_abstr_count,
-    void* socket_port_model, void* socket_port_model_count) {
+void interrupt_unix_socket(void* p0, void* p1, void* p2, void* p3) {
 
-    log_message_debug("Startup tcp socket.");
+    log_message_debug("Interrupt unix socket service.");
 
-    if (internals != NULL_POINTER) {
+    // The interrupt flag.
+    int** f = NULL_POINTER;
 
-        // The tcp socket interrupt flag.
-        int** f = (int**) &NULL_POINTER;
+    get(p0, (void*) UNIX_SOCKET_INTERRUPT_INTERNAL, (void*) &f, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-        get(internals, (void*) TCP_SOCKET_INTERRUPT_INTERNAL, (void*) &f, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    if ((f != NULL_POINTER) && (*f != NULL_POINTER)) {
 
-        if ((f != NULL_POINTER) && (*f != NULL_POINTER)) {
-
-            // Deactivate interrupt flag, since tcp socket is to be started.
-            **f = 0;
-        }
+        **f = 1;
 
     } else {
 
-        log_message_debug("Could not activate tcp server socket. The internal is null.");
+        log_message_debug("Could not interrupt unix socket service. The unix socket interrupt flag is null.");
     }
 }
 
-/* ACTIVATE_TCP_SOCKET_SOURCE */
+/* INTERRUPT_UNIX_SOCKET_SOURCE */
 #endif

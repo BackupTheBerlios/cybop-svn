@@ -24,7 +24,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.15 $ $Date: 2005-08-11 22:33:47 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2006-01-02 11:56:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -464,38 +464,41 @@ void test_integer_parser() {
 }
 
 /**
- * Tests the knowledge model.
+ * Tests the knowledge memory.
  *
- * The knowledge model is the root of a compound (tree).
- * But also a part of the knowledge model can be handed over,
+ * The knowledge memory is the root of a compound (tree).
+ * But also a part of the knowledge memory can be handed over,
  * in which case that part and its parts will be printed on screen.
  *
- * @param p0 the knowledge model
- * @param p1 the knowledge model count
- * @param level the level for the tree
+ * @param p0 the knowledge memory
+ * @param p1 the knowledge memory count
+ * @param p2 the tree depth to be displayed
  */
-void test_knowledge_model(void* p0, void* p1, int level) {
-
-    fputs("Test knowledge model:\n", stdout);
-
-    char prefix[level * 3 + 1];
-    int level_count;
-    int char_count;
-
-    for (level_count = 0; level_count < level; level_count++) {
-
-        for (char_count = 0; char_count <= 2; char_count++) {
-
-            prefix[level_count * 3 + char_count] = '_';
-        }
-    }
-
-    prefix[level * 3] = '\0';
-    level++;
+void test_knowledge_memory(void* p0, void* p1, int p2) {
 
     if (p1 != NULL_POINTER) {
 
-        int* c = (int*) p1;
+        int* kc = (int*) p1;
+
+        fputs("Test knowledge memory:\n", stdout);
+
+        // Create prefix.
+        char prefix[p2 * 2 + 1];
+        int level_count;
+        int char_count;
+
+        // Add underscores to prefix.
+        for (level_count = 0; level_count < p2; level_count++) {
+
+            for (char_count = 0; char_count <= 2; char_count++) {
+
+                prefix[level_count * 3 + char_count] = '_';
+            }
+        }
+
+        // Terminate prefix.
+        prefix[p2 * 2] = '\0';
+        p2++;
 
         // The loop index.
         int i = 0;
@@ -520,7 +523,7 @@ void test_knowledge_model(void* p0, void* p1, int level) {
 
         while (1) {
 
-            if (i >= *c) {
+            if (i >= *kc) {
 
                 break;
             }
@@ -553,7 +556,18 @@ void test_knowledge_model(void* p0, void* p1, int level) {
                 if (r == 1) {
 
                     fprintf(stderr, "model (compound): %s\n", "hierarchical, see below");
-                    test_knowledge_model((void*) *m, (void*) *mc, level);
+                    test_knowledge_memory((void*) *m, (void*) *mc, p2);
+                }
+            }
+
+            if (r != 1) {
+
+                compare_arrays((void*) *a, (void*) *ac, (void*) CYBOL_ABSTRACTION, (void*) CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+                if (r == 1) {
+
+                    fprintf(stderr, "model (cybol): %s\n", "hierarchical, see below");
+                    test_knowledge_memory((void*) *m, (void*) *mc, p2);
                 }
             }
 
@@ -566,6 +580,18 @@ void test_knowledge_model(void* p0, void* p1, int level) {
                     fprintf(stderr, "model (operation):         %s\n", (char*) *m);
                     fprintf(stderr, "model (operation) count:   %i\n", **((int**) mc));
                     fprintf(stderr, "model (operation) size:    %i\n", **((int**) ms));
+                }
+            }
+
+            if (r != 1) {
+
+                compare_arrays((void*) *a, (void*) *ac, (void*) KNOWLEDGE_ABSTRACTION, (void*) KNOWLEDGE_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+                if (r == 1) {
+
+                    fprintf(stderr, "model (knowledge):             %s\n", (char*) *m);
+                    fprintf(stderr, "model (knowledge) count:       %i\n", **((int**) mc));
+                    fprintf(stderr, "model (knowledge) size:        %i\n", **((int**) ms));
                 }
             }
 
@@ -595,25 +621,25 @@ void test_knowledge_model(void* p0, void* p1, int level) {
             if (d != NULL_POINTER) {
 
                 fprintf(stderr, "details: %s\n", "hierarchical, see below");
-                test_knowledge_model((void*) *d, (void*) *dc, level);
+                test_knowledge_memory((void*) *d, (void*) *dc, p2);
             }
 
             // Reset element name.
-            n = NULL_POINTER;
-            nc = NULL_POINTER;
-            ns = NULL_POINTER;
+            n = &NULL_POINTER;
+            nc = &NULL_POINTER;
+            ns = &NULL_POINTER;
             // Reset element abstraction.
-            a = NULL_POINTER;
-            ac = NULL_POINTER;
-            as = NULL_POINTER;
+            a = &NULL_POINTER;
+            ac = &NULL_POINTER;
+            as = &NULL_POINTER;
             // Reset element model.
-            m = NULL_POINTER;
-            mc = NULL_POINTER;
-            ms = NULL_POINTER;
+            m = &NULL_POINTER;
+            mc = &NULL_POINTER;
+            ms = &NULL_POINTER;
             // Reset element details.
-            d = NULL_POINTER;
-            dc = NULL_POINTER;
-            ds = NULL_POINTER;
+            d = &NULL_POINTER;
+            dc = &NULL_POINTER;
+            ds = &NULL_POINTER;
             // Reset comparison result.
             r = 0;
 
@@ -622,43 +648,8 @@ void test_knowledge_model(void* p0, void* p1, int level) {
 
     } else {
 
-        fputs("ERROR: Could not test knowledge model. The knowledge model is null.\n", stdout);
+        fputs("ERROR: Could not test knowledge memory. The knowledge memory is null.\n", stdout);
     }
-}
-
-/**
- * Tests the compound.
- *
- * @param p0 the compound
- * @param p1 the compound count
- * @param p2 the index
- */
-void test_compound(void* comp, int* comp_count, int* index) {
-
-    void** n = &NULL_POINTER;
-    void** nc = &NULL_POINTER;
-    void** ns = &NULL_POINTER;
-    void** a = &NULL_POINTER;
-    void** ac = &NULL_POINTER;
-    void** as = &NULL_POINTER;
-    void** m = &NULL_POINTER;
-    void** mc = &NULL_POINTER;
-    void** ms = &NULL_POINTER;
-    void** d = &NULL_POINTER;
-    void** dc = &NULL_POINTER;
-    void** ds = &NULL_POINTER;
-
-    get_compound_element_name_by_index(comp, comp_count, index,
-        &n, &nc, &ns);
-    get_compound_element_by_index(comp, comp_count, index,
-        &a, &ac, &as, &m, &mc, &ms, &d, &dc, &ds);
-
-    fprintf(stderr, "compound name:              %s\n", (char*) *n);
-    fprintf(stderr, "compound name count:        %i\n", *((int*) *nc));
-    fprintf(stderr, "compound abstraction:       %s\n", (char*) *a);
-    fprintf(stderr, "compound abstraction count: %i\n", *((int*) *ac));
-    fprintf(stderr, "compound model:             %s\n", (char*) *m);
-    fprintf(stderr, "compound model count:       %i\n", *((int*) *mc));
 }
 
 /**

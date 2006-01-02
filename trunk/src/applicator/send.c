@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.24 $ $Date: 2005-10-17 22:26:30 $ $Author: christian $
+ * @version $Revision: 1.25 $ $Date: 2006-01-02 11:56:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -30,7 +30,8 @@
 
 #include "../applicator/send/send_latex.c"
 #include "../applicator/send/send_linux_console.c"
-//?? #include "../applicator/send/send_tcp_socket.c"
+#include "../applicator/send/send_tcp_socket.c"
+#include "../applicator/send/send_unix_socket.c"
 #include "../applicator/send/send_x_window_system.c"
 #include "../globals/constants/abstraction_constants.c"
 #include "../globals/constants/channel_constants.c"
@@ -42,7 +43,6 @@
 #include "../memoriser/allocator.c"
 #include "../memoriser/communicator/tcp_socket_communicator.c"
 #include "../memoriser/translator.c"
-#include "../socket/unix_socket.c"
 
 /**
  * Sends a message in a special language.
@@ -50,11 +50,11 @@
  * CAUTION! Do NOT rename this procedure to "send",
  * as that name is already used by socket functionality.
  *
- * Expected parameters:
- * - language (channel): internal, tui, gui, socket, http
+ * Expected parameters (names in parentheses after Laswell):
+ * - channel (channel): linux_console, tcp_socket, unix_socket, x_window_system
  * - sender (who): ip address, socket port
  * - receiver (whom): ip address, socket port
- * - message (what): knowledge model to be sent in serialised form
+ * - message (what): dot-separated name of knowledge model to be sent
  * - waiting (blocking): whether the system shall wait until message is sent
  *
  * @param p0 the parameters
@@ -68,22 +68,23 @@
  * @param p8 the signal memory size
  * @param p9 the signal id
  */
-void send_message(void* p0, void* p1,
-    void* p2, void* p3, void* p4, void* p5,
+void send_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
     void* p6, void* p7, void* p8, void* p9) {
 
-    // The language abstraction.
-    void** la = &NULL_POINTER;
-    void** lac = &NULL_POINTER;
-    void** las = &NULL_POINTER;
-    // The language model.
-    void** lm = &NULL_POINTER;
-    void** lmc = &NULL_POINTER;
-    void** lms = &NULL_POINTER;
-    // The language details.
-    void** ld = &NULL_POINTER;
-    void** ldc = &NULL_POINTER;
-    void** lds = &NULL_POINTER;
+    log_message_debug("Send message.");
+
+    // The channel abstraction.
+    void** ca = &NULL_POINTER;
+    void** cac = &NULL_POINTER;
+    void** cas = &NULL_POINTER;
+    // The channel model.
+    void** cm = &NULL_POINTER;
+    void** cmc = &NULL_POINTER;
+    void** cms = &NULL_POINTER;
+    // The channel details.
+    void** cd = &NULL_POINTER;
+    void** cdc = &NULL_POINTER;
+    void** cds = &NULL_POINTER;
 
     // The sender abstraction.
     void** sa = &NULL_POINTER;
@@ -124,12 +125,12 @@ void send_message(void* p0, void* p1,
     void** mdc = &NULL_POINTER;
     void** mds = &NULL_POINTER;
 
-    // Get language.
+    // Get channel.
     get_compound_element_by_name(p0, p1,
-        (void*) LANGUAGE_NAME, (void*) LANGUAGE_NAME_COUNT,
-        (void*) &la, (void*) &lac, (void*) &las,
-        (void*) &lm, (void*) &lmc, (void*) &lms,
-        (void*) &ld, (void*) &ldc, (void*) &lds);
+        (void*) CHANNEL_NAME, (void*) CHANNEL_NAME_COUNT,
+        (void*) &ca, (void*) &cac, (void*) &cas,
+        (void*) &cm, (void*) &cmc, (void*) &cms,
+        (void*) &cd, (void*) &cdc, (void*) &cds);
 
     // Get sender.
     get_compound_element_by_name(p0, p1,
@@ -153,14 +154,22 @@ void send_message(void* p0, void* p1,
         (void*) &md, (void*) &mdc, (void*) &mds,
         p3, p4);
 
-    log_message_debug("Send.");
-
     // The comparison result.
     int r = 0;
 
     if (r == 0) {
 
-        compare_arrays((void*) *lm, (void*) *lmc, (void*) TUI_MODEL, (void*) TUI_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays((void*) *cm, (void*) *cmc, (void*) LATEX_MODEL, (void*) LATEX_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != 0) {
+
+            send_latex(p2, *mm, *mmc);
+        }
+    }
+
+    if (r == 0) {
+
+        compare_arrays((void*) *cm, (void*) *cmc, (void*) LINUX_CONSOLE_MODEL, (void*) LINUX_CONSOLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
@@ -170,17 +179,7 @@ void send_message(void* p0, void* p1,
 
     if (r == 0) {
 
-        compare_arrays((void*) *lm, (void*) *lmc, (void*) X_WINDOW_SYSTEM_MODEL, (void*) X_WINDOW_SYSTEM_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != 0) {
-
-            send_x_window_system(p2, *mm, *mmc);
-        }
-    }
-
-    if (r == 0) {
-
-        compare_arrays((void*) *lm, (void*) *lmc, (void*) SIGNAL_MODEL, (void*) SIGNAL_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays((void*) *cm, (void*) *cmc, (void*) SIGNAL_MODEL, (void*) SIGNAL_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
@@ -188,13 +187,13 @@ void send_message(void* p0, void* p1,
         }
     }
 
-/*??
     if (r == 0) {
 
-        compare_arrays((void*) *lm, (void*) *lmc, (void*) TCP_SOCKET_MODEL, (void*) TCP_SOCKET_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays((void*) *cm, (void*) *cmc, (void*) TCP_SOCKET_MODEL, (void*) TCP_SOCKET_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
+/*??
             // The socket number for the signal id.
             // The index for the signal id in the array is the same index
             // in the client socket number array.
@@ -260,17 +259,27 @@ void send_message(void* p0, void* p1,
 
                 log_message_debug("Could not send tcp socket message. The signal id index is invalid.");
             }
+*/
         }
     }
-*/
 
     if (r == 0) {
 
-        compare_arrays((void*) *lm, (void*) *lmc, (void*) LATEX_MODEL, (void*) LATEX_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays((void*) *cm, (void*) *cmc, (void*) UNIX_SOCKET_MODEL, (void*) UNIX_SOCKET_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-            send_latex(p2, *mm, *mmc);
+            send_unix_socket(p2, *mm, *mmc);
+        }
+    }
+
+    if (r == 0) {
+
+        compare_arrays((void*) *cm, (void*) *cmc, (void*) X_WINDOW_SYSTEM_MODEL, (void*) X_WINDOW_SYSTEM_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != 0) {
+
+            send_x_window_system(p2, *mm, *mmc);
         }
     }
 }
@@ -281,13 +290,14 @@ void send_message(void* p0, void* p1,
  * @param p0 the parameters
  * @param p1 the parameters count
  * @param p2 the internal memory
- * @param p3 the knowledge
- * @param p4 the knowledge count
- * @param p5 the knowledge size
+ * @param p3 the knowledge memory
+ * @param p4 the knowledge memory count
+ * @param p5 the knowledge memory size
  * @param p6 the signal id
  */
-void refresh_url(void* p0, void* p1,
-    void* p2, void* p3, void* p4, void* p5, void* p6) {
+void refresh_url(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
+
+    log_message_debug("Refresh URL.");
 
     // The message abstraction.
     void** urla = &NULL_POINTER;

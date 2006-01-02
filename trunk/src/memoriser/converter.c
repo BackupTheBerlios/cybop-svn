@@ -20,14 +20,14 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2005-10-17 22:26:30 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2006-01-02 11:56:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef CONVERTER_SOURCE
 #define CONVERTER_SOURCE
 
-#include "../globals/constants/abstraction_constants.c"
+#include "../globals/constants/model_constants.c"
 #include "../memoriser/array.c"
 #include "../memoriser/converter/boolean_converter.c"
 #include "../memoriser/converter/character_vector_converter.c"
@@ -36,7 +36,7 @@
 #include "../memoriser/converter/fraction_converter.c"
 #include "../memoriser/converter/integer_vector_converter.c"
 #include "../memoriser/converter/latex_converter.c"
-#include "../memoriser/converter/terminal_converter.c"
+#include "../memoriser/converter/linux_console_converter.c"
 #include "../memoriser/converter/time_converter.c"
 #include "../memoriser/converter/xml_converter.c"
 
@@ -169,11 +169,11 @@ void parse(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6)
 
     if (r == 0) {
 
-        compare_arrays(p5, p6, (void*) TERMINAL_ABSTRACTION, (void*) TERMINAL_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p5, p6, (void*) LINUX_CONSOLE_MODEL, (void*) LINUX_CONSOLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-            parse_terminal(p0, p1, p2, p3, p4);
+            parse_linux_console(p0, p1, p2, p3, p4);
         }
     }
 
@@ -323,11 +323,11 @@ void serialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
 
     if (r == 0) {
 
-        compare_arrays(p5, p6, (void*) TERMINAL_ABSTRACTION, (void*) TERMINAL_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p5, p6, (void*) LINUX_CONSOLE_MODEL, (void*) LINUX_CONSOLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-            serialise_terminal(p0, p1, p2, p3, p4);
+            serialise_linux_console(p0, p1, p2, p3, p4);
         }
     }
 

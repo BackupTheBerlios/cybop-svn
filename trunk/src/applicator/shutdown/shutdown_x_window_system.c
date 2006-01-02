@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2005-11-28 13:42:54 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2006-01-02 11:56:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  *
@@ -38,7 +38,7 @@
  * GC == struct _XGC*
  * Window == int
  * Colormap == int
- * Font == int
+ * Font (ID) == int
  */
 
 #ifndef SHUTDOWN_X_WINDOW_SYSTEM_SOURCE
@@ -74,6 +74,15 @@ void shutdown_x_window_system(void* p0, void* p1, void* p2, void* p3) {
     // Only destroy display if existent.
     if (*di != NULL_POINTER) {
 
+        // Remove temporary user interface root internal.
+        remove_element(p0, INTERNAL_MEMORY_ELEMENTS_COUNT, TEMPORARY_USER_INTERFACE_ROOT_INTERNAL, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        remove_element(p0, INTERNAL_MEMORY_ELEMENTS_COUNT, TEMPORARY_USER_INTERFACE_ROOT_COUNT_INTERNAL, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        remove_element(p0, INTERNAL_MEMORY_ELEMENTS_COUNT, TEMPORARY_USER_INTERFACE_ROOT_SIZE_INTERNAL, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        // Remove temporary user interface commands internal.
+        remove_element(p0, INTERNAL_MEMORY_ELEMENTS_COUNT, TEMPORARY_USER_INTERFACE_COMMANDS_INTERNAL, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        remove_element(p0, INTERNAL_MEMORY_ELEMENTS_COUNT, TEMPORARY_USER_INTERFACE_COMMANDS_COUNT_INTERNAL, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        remove_element(p0, INTERNAL_MEMORY_ELEMENTS_COUNT, TEMPORARY_USER_INTERFACE_COMMANDS_SIZE_INTERNAL, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
         // The display name.
         // An example identifying the second screen of the first
         // display of host computer earth.cybop.net would be:
@@ -99,10 +108,6 @@ void shutdown_x_window_system(void* p0, void* p1, void* p2, void* p3) {
         // This is sometimes called the root window of the window manager.
         // Remember, CYBOI itself IS the window manager.
         int** r = (int**) &NULL_POINTER;
-        // The font name.
-//??        char** fn = (char**) &NULL_POINTER;
-        // The font id.
-//??        int** f = (char**) &NULL_POINTER;
         // The menu border bottom graphic context.
         struct _XGC** gc_menu_border_bottom = NULL_POINTER;
         // The window.
@@ -130,8 +135,6 @@ void shutdown_x_window_system(void* p0, void* p1, void* p2, void* p3) {
         get(p0, (void*) X_WINDOW_SYSTEM_BACKGROUND_INTERNAL, (void*) &bg, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         get(p0, (void*) X_WINDOW_SYSTEM_FOREGROUND_INTERNAL, (void*) &fg, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         get(p0, (void*) X_WINDOW_SYSTEM_ROOT_WINDOW_INTERNAL, (void*) &r, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-//??        get(p0, (void*) X_WINDOW_SYSTEM_FONT_NAME_INTERNAL, (void*) &fn, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-//??        get(p0, (void*) X_WINDOW_SYSTEM_FONT_INTERNAL, (void*) &f, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         get(p0, (void*) X_WINDOW_SYSTEM_WINDOW_MENU_BORDER_BOTTOM_GC_INTERNAL, (void*) &gc_menu_border_bottom, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         get(p0, (void*) X_WINDOW_SYSTEM_WINDOW_INTERNAL, (void*) &w, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         get(p0, (void*) X_WINDOW_SYSTEM_GRAPHIC_CONTEXT_VALUE_MASK_INTERNAL, (void*) &vm, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
@@ -153,14 +156,18 @@ void shutdown_x_window_system(void* p0, void* p1, void* p2, void* p3) {
         // Destroy x window system internals.
         // CAUTION! Do NOT use references &, because variables are **
         // and *&variable equals the variable alone.
-        deallocate((void*) sn, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-        deallocate((void*) cm, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-        deallocate((void*) bg, (void*) PRIMITIVE_COUNT, (void*) UNSIGNED_LONG_VECTOR_ABSTRACTION, (void*) UNSIGNED_LONG_VECTOR_ABSTRACTION_COUNT);
-        deallocate((void*) fg, (void*) PRIMITIVE_COUNT, (void*) UNSIGNED_LONG_VECTOR_ABSTRACTION, (void*) UNSIGNED_LONG_VECTOR_ABSTRACTION_COUNT);
-        deallocate((void*) r, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-//??        deallocate((void*) f, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-        deallocate((void*) w, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        // CAUTION! Use descending order!
+        // Example: The values (v) are destroyed BEFORE the value mask (vm)
+        // attributes, since v might still reference vm internally.
+//??        free(*v);
         deallocate((void*) vm, (void*) PRIMITIVE_COUNT, (void*) UNSIGNED_LONG_VECTOR_ABSTRACTION, (void*) UNSIGNED_LONG_VECTOR_ABSTRACTION_COUNT);
+        deallocate((void*) w, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+//??        deallocate((void*) f, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        deallocate((void*) r, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        deallocate((void*) fg, (void*) PRIMITIVE_COUNT, (void*) UNSIGNED_LONG_VECTOR_ABSTRACTION, (void*) UNSIGNED_LONG_VECTOR_ABSTRACTION_COUNT);
+        deallocate((void*) bg, (void*) PRIMITIVE_COUNT, (void*) UNSIGNED_LONG_VECTOR_ABSTRACTION, (void*) UNSIGNED_LONG_VECTOR_ABSTRACTION_COUNT);
+        deallocate((void*) cm, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        deallocate((void*) sn, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
     } else {
 

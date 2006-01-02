@@ -1,5 +1,5 @@
 /*
- * $RCSfile: activate_tcp_socket.c,v $
+ * $RCSfile: startup_unix_socket.c,v $
  *
  * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
  *
@@ -20,13 +20,16 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2006-01-02 11:56:01 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2006-01-02 11:56:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
+ * @description
  */
 
-#ifndef ACTIVATE_TCP_SOCKET_SOURCE
-#define ACTIVATE_TCP_SOCKET_SOURCE
+#ifndef STARTUP_UNIX_SOCKET_SOURCE
+#define STARTUP_UNIX_SOCKET_SOURCE
 
+#include "../../globals/constants/log_constants.c"
+/*??
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <stdio.h>
@@ -37,39 +40,28 @@
 #include "../../globals/constants/integer_constants.c"
 #include "../../globals/constants/structure_constants.c"
 #include "../../globals/variables/variables.c"
+#include "../../memoriser/accessor.c"
+#include "../../memoriser/array.c"
+#include "../../memoriser/allocator.c"
+*/
 
 /**
- * Starts up the tcp socket service.
+ * Starts up the unix socket.
  *
  * @param p0 the internals memory
  * @param p1 the knowledge
  * @param p2 the knowledge count
  * @param p3 the knowledge size
+ * @param p4 the socke port abstraction
+ * @param p5 the socke port abstraction count
+ * @param p6 the socke port model
+ * @param p7 the socke port model count
  */
-void activate_tcp_socket( void* internals, void* know, void* know_count, void* know_size,
-    void* socket_port_abstr, void* socket_port_abstr_count,
-    void* socket_port_model, void* socket_port_model_count) {
+void startup_unix_socket(void* internals, void* know, void* know_count, void* know_size,
+    void* socket_port_abstr, void* socket_port_abstr_count, void* socket_port_model, void* socket_port_model_count) {
 
-    log_message_debug("Startup tcp socket.");
-
-    if (internals != NULL_POINTER) {
-
-        // The tcp socket interrupt flag.
-        int** f = (int**) &NULL_POINTER;
-
-        get(internals, (void*) TCP_SOCKET_INTERRUPT_INTERNAL, (void*) &f, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-
-        if ((f != NULL_POINTER) && (*f != NULL_POINTER)) {
-
-            // Deactivate interrupt flag, since tcp socket is to be started.
-            **f = 0;
-        }
-
-    } else {
-
-        log_message_debug("Could not activate tcp server socket. The internal is null.");
-    }
+    log_message_debug("Startup unix socket.");
 }
 
-/* ACTIVATE_TCP_SOCKET_SOURCE */
+/* STARTUP_UNIX_SOCKET_SOURCE */
 #endif

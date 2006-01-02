@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2005-10-17 22:26:30 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2006-01-02 11:56:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,13 +30,14 @@
 #include "../applicator/receive/receive_latex.c"
 #include "../applicator/receive/receive_linux_console.c"
 #include "../applicator/receive/receive_tcp_socket.c"
+#include "../applicator/receive/receive_unix_socket.c"
 #include "../applicator/receive/receive_x_window_system.c"
 #include "../globals/constants/abstraction_constants.c"
 #include "../globals/constants/channel_constants.c"
+#include "../globals/constants/model_constants.c"
 #include "../globals/constants/name_constants.c"
 #include "../globals/constants/structure_constants.c"
 #include "../globals/logger/logger.c"
-#include "../socket/unix_socket.c"
 
 /**
  * Receives a message in a special language.
@@ -48,18 +49,25 @@
  * In order to also catch signals of various devices,
  * special mechanisms for signal reception have to be started.
  * To the mechanisms belong:
- * - unix socket
+ * - linux console
  * - tcp socket
+ * - unix socket
  * - x window system
  *
- * These have their own internal signal/ action/ event/ interrupt
- * waiting loops which get activated here.
- * Whenever such a signal/ action/ event/ interrupt occurs, it gets transformed
- * into a cyboi signal and is finally placed in cyboi's signal memory.
+ * These have their own internal signal/ action/ event/ interrupt waiting loops
+ * which get activated here, running as parallel services in separate threads.
+ * Whenever an event occurs in one of these threads, it gets transformed into a
+ * cyboi signal and is finally placed in cyboi's signal memory.
  *
  * TODO: Since many internal waiting loops run in parallel,
  * the adding of signals to the signal memory must be synchronized!
  * How to do this properly in C?
+ *
+ * Expected parameters:
+ * - channel: linux_console, tcp_socket, unix_socket, x_window_system
+ * - root: dot-separated name to the root window knowledge model of the graphical user interface (gui)
+ * - commands: dot-separated name of commands knowledge model
+ * - blocking: true, false
  *
  * @param p0 the parameters
  * @param p1 the parameters count
@@ -71,34 +79,49 @@
  * @param p7 the signal memory count
  * @param p8 the signal memory size
  */
-void receive_message(void* p0, void* p1,
-    void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8) {
+void receive_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
+    void* p6, void* p7, void* p8) {
 
-    // The service abstraction.
-    void** sa = &NULL_POINTER;
-    void** sac = &NULL_POINTER;
-    void** sas = &NULL_POINTER;
-    // The service model.
-    void** sm = &NULL_POINTER;
-    void** smc = &NULL_POINTER;
-    void** sms = &NULL_POINTER;
-    // The service details.
-    void** sd = &NULL_POINTER;
-    void** sdc = &NULL_POINTER;
-    void** sds = &NULL_POINTER;
+    log_message_debug("Receive message.");
 
-    // The commands abstraction.
+    // The channel abstraction.
     void** ca = &NULL_POINTER;
     void** cac = &NULL_POINTER;
     void** cas = &NULL_POINTER;
-    // The commands model.
+    // The channel model.
     void** cm = &NULL_POINTER;
     void** cmc = &NULL_POINTER;
     void** cms = &NULL_POINTER;
-    // The commands details.
+    // The channel details.
     void** cd = &NULL_POINTER;
     void** cdc = &NULL_POINTER;
     void** cds = &NULL_POINTER;
+
+    // The root abstraction.
+    void** ra = &NULL_POINTER;
+    void** rac = &NULL_POINTER;
+    void** ras = &NULL_POINTER;
+    // The root model.
+    void** rm = &NULL_POINTER;
+    void** rmc = &NULL_POINTER;
+    void** rms = &NULL_POINTER;
+    // The root details.
+    void** rd = &NULL_POINTER;
+    void** rdc = &NULL_POINTER;
+    void** rds = &NULL_POINTER;
+
+    // The commands abstraction.
+    void** coa = &NULL_POINTER;
+    void** coac = &NULL_POINTER;
+    void** coas = &NULL_POINTER;
+    // The commands model.
+    void** com = &NULL_POINTER;
+    void** comc = &NULL_POINTER;
+    void** coms = &NULL_POINTER;
+    // The commands details.
+    void** cod = &NULL_POINTER;
+    void** codc = &NULL_POINTER;
+    void** cods = &NULL_POINTER;
 
     // The blocking abstraction.
     void** ba = &NULL_POINTER;
@@ -113,20 +136,28 @@ void receive_message(void* p0, void* p1,
     void** bdc = &NULL_POINTER;
     void** bds = &NULL_POINTER;
 
-    // Get service.
+    // Get channel.
     get_real_compound_element_by_name(p0, p1,
-        (void*) SERVICE_NAME, (void*) SERVICE_NAME_COUNT,
-        (void*) &sa, (void*) &sac, (void*) &sas,
-        (void*) &sm, (void*) &smc, (void*) &sms,
-        (void*) &sd, (void*) &sdc, (void*) &sds,
+        (void*) CHANNEL_NAME, (void*) CHANNEL_NAME_COUNT,
+        (void*) &ca, (void*) &cac, (void*) &cas,
+        (void*) &cm, (void*) &cmc, (void*) &cms,
+        (void*) &cd, (void*) &cdc, (void*) &cds,
+        p3, p4);
+
+    // Get root.
+    get_real_compound_element_by_name(p0, p1,
+        (void*) ROOT_NAME, (void*) ROOT_NAME_COUNT,
+        (void*) &ra, (void*) &rac, (void*) &ras,
+        (void*) &rm, (void*) &rmc, (void*) &rms,
+        (void*) &rd, (void*) &rdc, (void*) &rds,
         p3, p4);
 
     // Get commands.
     get_real_compound_element_by_name(p0, p1,
         (void*) COMMANDS_NAME, (void*) COMMANDS_NAME_COUNT,
-        (void*) &ca, (void*) &cac, (void*) &cas,
-        (void*) &cm, (void*) &cmc, (void*) &cms,
-        (void*) &cd, (void*) &cdc, (void*) &cds,
+        (void*) &coa, (void*) &coac, (void*) &coas,
+        (void*) &com, (void*) &comc, (void*) &coms,
+        (void*) &cod, (void*) &codc, (void*) &cods,
         p3, p4);
 
     // Get blocking.
@@ -137,69 +168,56 @@ void receive_message(void* p0, void* p1,
         (void*) &bd, (void*) &bdc, (void*) &bds,
         p3, p4);
 
-    log_message_debug("Receive.");
-
     // The comparison result.
     int r = 0;
 
     if (r == 0) {
 
-        compare_arrays((void*) *sm, (void*) *smc, (void*) TUI_MODEL, (void*) TUI_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != 0) {
-
-            receive_linux_console(p2, p3, p4, p5, p6, p7, p8, *cm, *cmc);
-        }
-    }
-
-    if (r == 0) {
-
-        compare_arrays((void*) *sm, (void*) *smc, (void*) X_WINDOW_SYSTEM_MODEL, (void*) X_WINDOW_SYSTEM_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != 0) {
-
-            receive_x_window_system(p2, p3, p4, p5);
-        }
-    }
-
-    if (r == 0) {
-
-        compare_arrays((void*) *sm, (void*) *smc, (void*) UNIX_SOCKET_MODEL, (void*) UNIX_SOCKET_CHANNEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != 0) {
-
-/*??
-            send_unix_socket((void*) &dn, (void*) &dnc, (void*) &dns,
-                (void*) &snm, (void*) &snmc,
-                (void*) &sna, (void*) &snac,
-                (void*) &INLINE_CHANNEL, (void*) &INLINE_CHANNEL_COUNT);
-*/
-        }
-    }
-
-    if (r == 0) {
-
-        compare_arrays((void*) *sm, (void*) *smc, (void*) TCP_SOCKET_MODEL, (void*) TCP_SOCKET_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != 0) {
-
-            if ((*ba != NULL_POINTER)
-                && (*bac != NULL_POINTER)
-                && (*bm != NULL_POINTER)
-                && (*bmc != NULL_POINTER)) {
-
-                receive_tcp_socket(p2, p3, p4, p5, *ba, *bac, *bm, *bmc);
-            }
-        }
-    }
-
-    if (r == 0) {
-
-        compare_arrays((void*) *sm, (void*) *smc, (void*) LATEX_MODEL, (void*) LATEX_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays((void*) *cm, (void*) *cmc, (void*) LATEX_MODEL, (void*) LATEX_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
 //??            receive_latex(p2, *mm, *mmc);
+        }
+    }
+
+    if (r == 0) {
+
+        compare_arrays((void*) *cm, (void*) *cmc, (void*) LINUX_CONSOLE_MODEL, (void*) LINUX_CONSOLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != 0) {
+
+            receive_linux_console(p2, p3, p4, p5, p6, p7, p8, *com, *comc);
+        }
+    }
+
+    if (r == 0) {
+
+        compare_arrays((void*) *cm, (void*) *cmc, (void*) TCP_SOCKET_MODEL, (void*) TCP_SOCKET_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != 0) {
+
+            receive_tcp_socket(p2, p3, p4, p5, *ba, *bac, *bm, *bmc);
+        }
+    }
+
+    if (r == 0) {
+
+        compare_arrays((void*) *cm, (void*) *cmc, (void*) UNIX_SOCKET_MODEL, (void*) UNIX_SOCKET_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != 0) {
+
+            receive_unix_socket(p2, p3, p4);
+        }
+    }
+
+    if (r == 0) {
+
+        compare_arrays((void*) *cm, (void*) *cmc, (void*) X_WINDOW_SYSTEM_MODEL, (void*) X_WINDOW_SYSTEM_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != 0) {
+
+            receive_x_window_system(p2, *rm, *rmc, *rms, *com, *comc, *coms);
         }
     }
 }

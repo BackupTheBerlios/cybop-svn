@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2005-08-21 19:14:46 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2006-01-02 11:56:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -78,6 +78,65 @@ static int* TUI_UNDERLINE_NAME_COUNT = NUMBER_9_INTEGER_ARRAY;
 static char TUI_BOLD_NAME_ARRAY[] = {'b', 'o', 'l', 'd'};
 static char* TUI_BOLD_NAME = TUI_BOLD_NAME_ARRAY;
 static int* TUI_BOLD_NAME_COUNT = NUMBER_4_INTEGER_ARRAY;
+
+//
+// Graphical user interface (gui) names.
+//
+
+/** The layout name. */
+static char GUI_LAYOUT_NAME_ARRAY[] = {'l', 'a', 'y', 'o', 'u', 't'};
+static char* GUI_LAYOUT_NAME = GUI_LAYOUT_NAME_ARRAY;
+static int* GUI_LAYOUT_NAME_COUNT = NUMBER_6_INTEGER_ARRAY;
+
+/** The cell name. */
+static char GUI_CELL_NAME_ARRAY[] = {'c', 'e', 'l', 'l'};
+static char* GUI_CELL_NAME = GUI_CELL_NAME_ARRAY;
+static int* GUI_CELL_NAME_COUNT = NUMBER_4_INTEGER_ARRAY;
+
+/** The position name. */
+static char GUI_POSITION_NAME_ARRAY[] = {'p', 'o', 's', 'i', 't', 'i', 'o', 'n'};
+static char* GUI_POSITION_NAME = GUI_POSITION_NAME_ARRAY;
+static int* GUI_POSITION_NAME_COUNT = NUMBER_8_INTEGER_ARRAY;
+
+/** The size name. */
+static char GUI_SIZE_NAME_ARRAY[] = {'s', 'i', 'z', 'e'};
+static char* GUI_SIZE_NAME = GUI_SIZE_NAME_ARRAY;
+static int* GUI_SIZE_NAME_COUNT = NUMBER_4_INTEGER_ARRAY;
+
+/** The background colour name. */
+static char GUI_BACKGROUND_NAME_ARRAY[] = {'b', 'a', 'c', 'k', 'g', 'r', 'o', 'u', 'n', 'd'};
+static char* GUI_BACKGROUND_NAME = GUI_BACKGROUND_NAME_ARRAY;
+static int* GUI_BACKGROUND_NAME_COUNT = NUMBER_10_INTEGER_ARRAY;
+
+/** The foreground colour name. */
+static char GUI_FOREGROUND_NAME_ARRAY[] = {'f', 'o', 'r', 'e', 'g', 'r', 'o', 'u', 'n', 'd'};
+static char* GUI_FOREGROUND_NAME = GUI_FOREGROUND_NAME_ARRAY;
+static int* GUI_FOREGROUND_NAME_COUNT = NUMBER_10_INTEGER_ARRAY;
+
+/** The title name. */
+static char GUI_TITLE_NAME_ARRAY[] = {'t', 'i', 't', 'l', 'e'};
+static char* GUI_TITLE_NAME = GUI_TITLE_NAME_ARRAY;
+static int* GUI_TITLE_NAME_COUNT = NUMBER_5_INTEGER_ARRAY;
+
+/** The icon name. */
+static char GUI_ICON_NAME_ARRAY[] = {'i', 'c', 'o', 'n'};
+static char* GUI_ICON_NAME = GUI_ICON_NAME_ARRAY;
+static int* GUI_ICON_NAME_COUNT = NUMBER_4_INTEGER_ARRAY;
+
+/** The expose command name. */
+static char GUI_EXPOSE_COMMAND_NAME_ARRAY[] = {'e', 'x', 'p', 'o', 's', 'e'};
+static char* GUI_EXPOSE_COMMAND_NAME = GUI_EXPOSE_COMMAND_NAME_ARRAY;
+static int* GUI_EXPOSE_COMMAND_NAME_COUNT = NUMBER_6_INTEGER_ARRAY;
+
+/** The left mouse button press command name. */
+static char GUI_LEFT_PRESS_COMMAND_NAME_ARRAY[] = {'l', 'e', 'f', 't', '_', 'p', 'r', 'e', 's', 's'};
+static char* GUI_LEFT_PRESS_COMMAND_NAME = GUI_LEFT_PRESS_COMMAND_NAME_ARRAY;
+static int* GUI_LEFT_PRESS_COMMAND_NAME_COUNT = NUMBER_10_INTEGER_ARRAY;
+
+/** The left mouse button release command name. */
+static char GUI_LEFT_RELEASE_COMMAND_NAME_ARRAY[] = {'l', 'e', 'f', 't', '_', 'r', 'e', 'l', 'e', 'a', 's', 'e'};
+static char* GUI_LEFT_RELEASE_COMMAND_NAME = GUI_LEFT_RELEASE_COMMAND_NAME_ARRAY;
+static int* GUI_LEFT_RELEASE_COMMAND_NAME_COUNT = NUMBER_12_INTEGER_ARRAY;
 
 //
 // Web user interface (wui) names.
@@ -297,10 +356,8 @@ static int* PORT_NAME_COUNT = NUMBER_4_INTEGER_ARRAY;
 // Send and receive names.
 //
 
-/** The language name. */
-static char LANGUAGE_NAME_ARRAY[] = {'l', 'a', 'n', 'g', 'u', 'a', 'g', 'e'};
-static char* LANGUAGE_NAME = LANGUAGE_NAME_ARRAY;
-static int* LANGUAGE_NAME_COUNT = NUMBER_8_INTEGER_ARRAY;
+/** The channel name. */
+// Already defined for create and destroy.
 
 /** The sender name. */
 static char SENDER_NAME_ARRAY[] = {'s', 'e', 'n', 'd', 'e', 'r'};
@@ -321,6 +378,11 @@ static int* MESSAGE_NAME_COUNT = NUMBER_7_INTEGER_ARRAY;
 static char URL_NAME_ARRAY[] = {'u', 'r', 'l'};
 static char* URL_NAME = URL_NAME_ARRAY;
 static int* URL_NAME_COUNT = NUMBER_3_INTEGER_ARRAY;
+
+/** The root name. */
+static char ROOT_NAME_ARRAY[] = {'r', 'o', 'o', 't'};
+static char* ROOT_NAME = ROOT_NAME_ARRAY;
+static int* ROOT_NAME_COUNT = NUMBER_4_INTEGER_ARRAY;
 
 /** The commands name. */
 static char COMMANDS_NAME_ARRAY[] = {'c', 'o', 'm', 'm', 'a', 'n', 'd', 's'};

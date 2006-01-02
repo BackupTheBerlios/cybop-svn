@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2005-08-11 22:33:46 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2006-01-02 11:56:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description This module starts up a service.
  */
@@ -30,6 +30,7 @@
 
 #include "../applicator/startup/startup_linux_console.c"
 #include "../applicator/startup/startup_tcp_socket.c"
+#include "../applicator/startup/startup_unix_socket.c"
 #include "../applicator/startup/startup_x_window_system.c"
 #include "../globals/constants/abstraction_constants.c"
 #include "../globals/constants/channel_constants.c"
@@ -45,7 +46,7 @@
  * Starts up a service.
  *
  * Expected parameters:
- * - service: unix_socket, tcp_socket, x_window_system, ms_windows
+ * - service: linux_console, tcp_socket, unix_socket, x_window_system
  *
  * @param p0 the parameters
  * @param p1 the parameters count
@@ -54,8 +55,7 @@
  * @param p4 the knowledge memory size
  * @param p5 the internal memory
  */
-void startup_service(void* p0, void* p1,
-    void* p2, void* p3, void* p4, void* p5) {
+void startup_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
     log_message_debug("Startup service.");
 
@@ -116,31 +116,31 @@ void startup_service(void* p0, void* p1,
 
     if (r == 0) {
 
-        compare_arrays((void*) *sm, (void*) *smc, (void*) X_WINDOW_SYSTEM_MODEL, (void*) X_WINDOW_SYSTEM_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays((void*) *sm, (void*) *smc, (void*) TCP_SOCKET_MODEL, (void*) TCP_SOCKET_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-            startup_x_window_system(p5, p2, p3, p4);
+            startup_tcp_socket(p5, p2, p3, p4, *spa, *spac, *spm, *spmc);
         }
     }
 
     if (r == 0) {
 
-        compare_arrays((void*) *sm, (void*) *smc, (void*) TCP_SOCKET_MODEL, (void*) TCP_SOCKET_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays((void*) *sm, (void*) *smc, (void*) UNIX_SOCKET_MODEL, (void*) UNIX_SOCKET_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-            if ((*spa != NULL_POINTER)
-                && (*spac != NULL_POINTER)
-                && (*spm != NULL_POINTER)
-                && (*spmc != NULL_POINTER)) {
+            startup_unix_socket(p5, p2, p3, p4, *spa, *spac, *spm, *spmc);
+        }
+    }
 
-                startup_tcp_socket(p5, p2, p3, p4, *spa, *spac, *spm, *spmc);
+    if (r == 0) {
 
-            } else {
+        compare_arrays((void*) *sm, (void*) *smc, (void*) X_WINDOW_SYSTEM_MODEL, (void*) X_WINDOW_SYSTEM_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-                log_message_debug("Could not start service. The socket port is null.");
-            }
+        if (r != 0) {
+
+            startup_x_window_system(p5, p2, p3, p4);
         }
     }
 }

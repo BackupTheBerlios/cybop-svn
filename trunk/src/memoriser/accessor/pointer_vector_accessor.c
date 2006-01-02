@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2005-08-09 13:04:27 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2006-01-02 11:56:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -66,7 +66,7 @@ void remove_pointer_vector_element(void* p0, void* p1, void* p2) {
  *
  * @param p0 the pointer vector
  * @param p1 the index
- * @param p2 the vector element (Hand over as reference!)
+ * @param p2 the element (Hand over as reference!)
  */
 void get_pointer_vector_element(void* p0, void* p1, void* p2) {
 

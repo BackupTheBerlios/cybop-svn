@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.20 $ $Date: 2005-11-21 23:29:27 $ $Author: christian $
+ * @version $Revision: 1.21 $ $Date: 2006-01-02 11:56:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -1164,7 +1164,7 @@ void run_tcp_socket(void* p0) {
     void** s = &NULL_POINTER;
 
     // Get tcp server socket.
-    get(p0, (void*) TCP_SERVER_SOCKET_INTERNAL, (void*) &s, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p0, (void*) TCP_SOCKET_INTERNAL, (void*) &s, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
     if (s != NULL_POINTER) {
 
@@ -1213,13 +1213,14 @@ void run_tcp_socket(void* p0) {
  */
 void run_tcp_socket_server(void* p0) {
 
-    int** active_flag = (int**) &NULL_POINTER;
+    // The interrupt flag.
+    int** f = (int**) &NULL_POINTER;
 
-    get(p0, (void*) TCP_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &active_flag, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p0, (void*) TCP_SOCKET_INTERRUPT_INTERNAL, (void*) &f, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
     while (1) {
 
-        if (**active_flag == *NUMBER_0_INTEGER) {
+        if (**f == *NUMBER_1_INTEGER) {
 
             break;
         }
@@ -1276,31 +1277,36 @@ void receive_tcp_socket(void* p0, void* p1, void* p2, void* p3,
 */
                 }
 
-                // Set the activation flag in the internal memory.
-                int** socket_flag = (int**) &NULL_POINTER;
+                // The interrupt flag.
+                int** f = (int**) &NULL_POINTER;
 
-                get(p0, (void*) TCP_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &socket_flag, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                get(p0, (void*) TCP_SOCKET_INTERRUPT_INTERNAL, (void*) &f, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-                if ((socket_flag != NULL_POINTER) && (*socket_flag != NULL_POINTER)) {
+                if ((f != NULL_POINTER) && (*f != NULL_POINTER)) {
 
-                    **socket_flag = 1;
+                    // Deactivate interrupt flag, since tcp socket service is now running.
+                    **f = 0;
                 }
 
-                //set the blocking flag in the internal memory.
-                int** blocking_flag = (int**) &NULL_POINTER;
+                // The blocking flag.
+                int** b = (int**) &NULL_POINTER;
 
-                get(p0, (void*) TCP_SERVER_SOCKET_BLOCKING_INTERNAL, (void*) &blocking_flag, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                get(p0, (void*) TCP_SOCKET_BLOCKING_INTERNAL, (void*) &b, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-                if ((blocking_flag != NULL_POINTER) && (*blocking_flag != NULL_POINTER)) {
+                if ((b != NULL_POINTER) && (*b != NULL_POINTER)) {
 
-                    **blocking_flag = *((int*) blocking_model);
+                    **b = *((int*) blocking_model);
                 }
             }
+
+        } else {
+
+            log_message_debug("Could not receive via tcp socket. The blocking flag is null.");
         }
 
     } else {
 
-        log_message_debug("Could not receive tcp socket. The internal memory is null.");
+        log_message_debug("Could not receive via tcp socket. The internal memory is null.");
     }
 }
 

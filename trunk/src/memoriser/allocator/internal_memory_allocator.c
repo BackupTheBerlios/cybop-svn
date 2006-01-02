@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2005-07-27 23:10:48 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2006-01-02 11:56:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -102,15 +102,15 @@ void deallocate_internal_memory(void* p0, void* p1) {
                     // all configuration parameters need to be distinguished here,
                     // via conditional if-else statements.
 
-                    if (j == *TCP_SERVER_SOCKET_INTERNAL) {
+                    if (j == *TCP_SOCKET_INTERNAL) {
 
                         deallocate_array(p, (void*) NUMBER_1_INTEGER, (void*) INTEGER_ARRAY);
 
-//                    } else if (j == *TCP_SERVER_SOCKET_PORT_INTERNAL) {
+//                    } else if (j == *TCP_SOCKET_PORT_INTERNAL) {
 //
 //                        deallocate_array(p, (void*) NUMBER_1_INTEGER, (void*) INTEGER_ARRAY);
 //
-                    } else if (j == *TCP_SERVER_SOCKET_ACTIVE_INTERNAL) {
+                    } else if (j == *TCP_SOCKET_INTERRUPT_INTERNAL) {
 
                         deallocate_array(p, (void*) NUMBER_1_INTEGER, (void*) INTEGER_ARRAY);
 

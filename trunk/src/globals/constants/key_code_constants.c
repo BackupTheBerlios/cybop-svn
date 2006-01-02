@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2005-08-21 19:14:46 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2006-01-02 11:56:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -408,10 +408,10 @@ static int NUMERIC_LEFT_KEY_CODE_ARRAY[] = {75};
 static int* NUMERIC_LEFT_KEY_CODE = NUMERIC_LEFT_KEY_CODE_ARRAY;
 static int* NUMERIC_LEFT_KEY_CODE_COUNT = NUMBER_1_INTEGER_ARRAY;
 
-/** The numeric center (five) key code. */
-static int NUMERIC_CENTER_KEY_CODE_ARRAY[] = {76};
-static int* NUMERIC_CENTER_KEY_CODE = NUMERIC_CENTER_KEY_CODE_ARRAY;
-static int* NUMERIC_CENTER_KEY_CODE_COUNT = NUMBER_1_INTEGER_ARRAY;
+/** The numeric centre (five) key code. */
+static int NUMERIC_CENTRE_KEY_CODE_ARRAY[] = {76};
+static int* NUMERIC_CENTRE_KEY_CODE = NUMERIC_CENTRE_KEY_CODE_ARRAY;
+static int* NUMERIC_CENTRE_KEY_CODE_COUNT = NUMBER_1_INTEGER_ARRAY;
 
 /** The numeric right (six) key code. */
 static int NUMERIC_RIGHT_KEY_CODE_ARRAY[] = {77};

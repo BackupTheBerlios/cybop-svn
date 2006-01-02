@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.13 $ $Date: 2005-11-21 23:29:27 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2006-01-02 11:56:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -43,35 +43,31 @@
 #include "../../memoriser/allocator.c"
 
 /**
- * Starts up the tcp socket service.
+ * Starts up the tcp socket.
  *
- * @param internals the internals memory
- * @param know the knowledge
- * @param know_count the knowledge count
- * @param know_size the knowledge size
- * @param socket_port_abstr the socke port abstraction
- * @param socket_port_abstr_count the socke port abstraction count
- * @param socket_port_model the socke port model
- * @param socket_port_model_count the socke port model count
+ * @param internals the internal memory
+ * @param know the knowledge memory
+ * @param know_count the knowledge memory count
+ * @param know_size the knowledge memory size
+ * @param socket_port_abstr the socket port abstraction
+ * @param socket_port_abstr_count the socket port abstraction count
+ * @param socket_port_model the socket port model
+ * @param socket_port_model_count the socket port model count
  */
-void startup_tcp_socket( void* internals, void* know,
-                         void* know_count, void* know_size,
-                         void* socket_port_abstr, void* socket_port_abstr_count,
-                         void* socket_port_model, void* socket_port_model_count )
-{
+void startup_tcp_socket(void* internals, void* know, void* know_count, void* know_size,
+    void* socket_port_abstr, void* socket_port_abstr_count, void* socket_port_model, void* socket_port_model_count) {
 
     log_message_debug("Startup tcp socket.");
 
     //check of null pointer
-    if (    (internals != NULL_POINTER)
+    if ((internals != NULL_POINTER)
          && (know != NULL_POINTER)
          && (know_count != NULL_POINTER)
          && (know_size != NULL_POINTER)
          && (socket_port_abstr != NULL_POINTER)
          && (socket_port_abstr_count != NULL_POINTER)
          && (socket_port_model != NULL_POINTER)
-         && (socket_port_model_count != NULL_POINTER) )
-    {
+         && (socket_port_model_count != NULL_POINTER)) {
 
         int res = 0;
 
@@ -125,16 +121,16 @@ void startup_tcp_socket( void* internals, void* know,
             *ids = 0;
             allocate_array((void*) &id, (void*) ids, (void*) INTEGER_ARRAY);
 
-            // Set tcp server socket.
-            set(internals, (void*) TCP_SERVER_SOCKET_INTERNAL, (void*) &s, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-            // Set tcp client sockets.
+            // Set server socket.
+            set(internals, (void*) TCP_SOCKET_INTERNAL, (void*) &s, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            // Set client sockets.
             set(internals, (void*) TCP_CLIENT_SOCKETS_INTERNAL, (void*) &cs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
             set(internals, (void*) TCP_CLIENT_SOCKETS_COUNT_INTERNAL, (void*) &csc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
             set(internals, (void*) TCP_CLIENT_SOCKETS_SIZE_INTERNAL, (void*) &css, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-            // Set activation flag.
-            set(internals, (void*) TCP_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &af, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            // Set interrupt flag.
+            set(internals, (void*) TCP_SOCKET_INTERRUPT_INTERNAL, (void*) &af, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
             // Set blocking flag.
-            set(internals, (void*) TCP_SERVER_SOCKET_BLOCKING_INTERNAL, (void*) &bf, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            set(internals, (void*) TCP_SOCKET_BLOCKING_INTERNAL, (void*) &bf, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
             // Set tcp signal ids.
             set(internals, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_INTERNAL, (void*) &id, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
             set(internals, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_COUNT_INTERNAL, (void*) &idc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
@@ -163,14 +159,18 @@ void startup_tcp_socket( void* internals, void* know,
 
                 } else {
 
-                    log_message_debug("ERROR: Could not create tcp server socket. The socket could not be bound to the address.");
+                    log_message_debug("ERROR: Could not start up tcp socket. The socket could not be bound to the address.");
                 }
 
             } else {
 
-                log_message_debug("ERROR: Could not create tcp server socket. The socket is smaller than zero.");
+                log_message_debug("ERROR: Could not start up tcp socket. The socket is smaller than zero.");
             }
         }
+
+    } else {
+
+        log_message_debug("ERROR: Could not start up tcp socket. The socket port is null.");
     }
 }
 

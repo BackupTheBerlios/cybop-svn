@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.12 $ $Date: 2005-11-28 13:42:54 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2006-01-02 11:56:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -73,7 +73,9 @@ void check(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6)
     int r = 0;
 
     //?? TODO: Delete this testing stuff from Rolf Holzmueller.
+    // The interrupt flag.
     void** sf = &NULL_POINTER;
+    // The blocking flag.
     void** bf = &NULL_POINTER;
 
     // Run endless loop checking signal memory for signals.
@@ -91,16 +93,16 @@ void check(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6)
         //?? Wait for web input, if no signal is in memory.
         //?? TODO: Use a thread for this!
         //?? Testing from Rolf Holzmueller.
-        get(p0, (void*) TCP_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &sf, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        get(p0, (void*) TCP_SERVER_SOCKET_BLOCKING_INTERNAL, (void*) &bf, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        get(p0, (void*) TCP_SOCKET_INTERRUPT_INTERNAL, (void*) &sf, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        get(p0, (void*) TCP_SOCKET_BLOCKING_INTERNAL, (void*) &bf, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
 //??        if ((sf != NULL_POINTER) && (bf != NULL_POINTER)) {
 
             if ((*sf != NULL_POINTER) && (*bf != NULL_POINTER)) {
 
-                if ((**((int**) sf) == 1) && (i < 0) && (**((int**) bf) == 1)) {
+                if ((**((int**) sf) == 0) && (i < 0) && (**((int**) bf) == 1)) {
 
-                    run_tcp_socket(p0);
+//??                    run_tcp_socket(p0);
                 }
             }
 //??        }
@@ -127,7 +129,7 @@ void check(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6)
 /*??
     //?? TEST
     fprintf(stderr, "TEST checker k: %i\n", p1);
-    test_knowledge_model(p1, p2, 3);
+    test_knowledge_memory(p1, p2, 5);
 */
 
             //
@@ -162,7 +164,7 @@ void check(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6)
     //?? TODO: Delete this sleep procedure call later and use system signals
     //?? to inform CYBOI about events like a mouse click or socket message etc.!
     fprintf(stderr, "TEST sleep: %i\n", i);
-    sleep(1);
+//??    sleep(1);
 
             // Reset abstraction.
             a = &NULL_POINTER;

@@ -24,7 +24,7 @@
  * - read data from a device into a byte array
  * - write data from a byte array to a device
  *
- * @version $Revision: 1.7 $ $Date: 2005-09-27 08:57:43 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2006-01-02 11:56:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -33,12 +33,13 @@
 
 #include "../globals/constants/abstraction_constants.c"
 #include "../globals/constants/channel_constants.c"
+#include "../globals/constants/model_constants.c"
 #include "../memoriser/array.c"
 #include "../memoriser/communicator/file_communicator.c"
 #include "../memoriser/communicator/ftp_communicator.c"
 #include "../memoriser/communicator/http_communicator.c"
 #include "../memoriser/communicator/inline_communicator.c"
-#include "../memoriser/communicator/terminal_communicator.c"
+#include "../memoriser/communicator/linux_console_communicator.c"
 #include "../memoriser/communicator/x_window_system_communicator.c"
 
 /**
@@ -76,26 +77,6 @@ void read_data(void* p0, void* p1, void* p2, void* p3, void* p4,
 
     if (r == 0) {
 
-        compare_arrays(p5, p6, (void*) TERMINAL_CHANNEL, (void*) TERMINAL_CHANNEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != 0) {
-
-            read_terminal(p0, p1, p2, p3, p4);
-        }
-    }
-
-    if (r == 0) {
-
-        compare_arrays(p5, p6, (void*) X_WINDOW_SYSTEM_CHANNEL, (void*) X_WINDOW_SYSTEM_CHANNEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != 0) {
-
-            read_x_window_system(p0, p1, p2, p3, p4);
-        }
-    }
-
-    if (r == 0) {
-
         compare_arrays(p5, p6, (void*) FILE_CHANNEL, (void*) FILE_CHANNEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
@@ -121,6 +102,26 @@ void read_data(void* p0, void* p1, void* p2, void* p3, void* p4,
         if (r != 0) {
 
             read_http(p0, p1, p2, p3, p4);
+        }
+    }
+
+    if (r == 0) {
+
+        compare_arrays(p5, p6, (void*) LINUX_CONSOLE_MODEL, (void*) LINUX_CONSOLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != 0) {
+
+            read_linux_console(p0, p1, p2, p3, p4);
+        }
+    }
+
+    if (r == 0) {
+
+        compare_arrays(p5, p6, (void*) X_WINDOW_SYSTEM_MODEL, (void*) X_WINDOW_SYSTEM_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != 0) {
+
+            read_x_window_system(p0, p1, p2, p3, p4);
         }
     }
 }
@@ -160,26 +161,6 @@ void write_data(void* p0, void* p1, void* p2, void* p3, void* p4,
 
     if (r == 0) {
 
-        compare_arrays(p5, p6, (void*) TERMINAL_CHANNEL, (void*) TERMINAL_CHANNEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != 0) {
-
-            write_terminal(p0, p1, p2, p3, p4);
-        }
-    }
-
-    if (r == 0) {
-
-        compare_arrays(p5, p6, (void*) X_WINDOW_SYSTEM_CHANNEL, (void*) X_WINDOW_SYSTEM_CHANNEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != 0) {
-
-            write_x_window_system(p0, p1, p2, p3, p4);
-        }
-    }
-
-    if (r == 0) {
-
         compare_arrays(p5, p6, (void*) FILE_CHANNEL, (void*) FILE_CHANNEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
@@ -205,6 +186,26 @@ void write_data(void* p0, void* p1, void* p2, void* p3, void* p4,
         if (r != 0) {
 
             write_http(p0, p1, p2, p3, p4);
+        }
+    }
+
+    if (r == 0) {
+
+        compare_arrays(p5, p6, (void*) LINUX_CONSOLE_MODEL, (void*) LINUX_CONSOLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != 0) {
+
+            write_linux_console(p0, p1, p2, p3, p4);
+        }
+    }
+
+    if (r == 0) {
+
+        compare_arrays(p5, p6, (void*) X_WINDOW_SYSTEM_MODEL, (void*) X_WINDOW_SYSTEM_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != 0) {
+
+            write_x_window_system(p0, p1, p2, p3, p4);
         }
     }
 }

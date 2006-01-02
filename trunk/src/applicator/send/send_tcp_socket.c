@@ -1,5 +1,5 @@
 /*
- * $RCSfile: interrupt_tcp_socket.c,v $
+ * $RCSfile: send_tcp_socket.c,v $
  *
  * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
  *
@@ -20,54 +20,43 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2006-01-02 11:56:01 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2006-01-02 11:56:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
- * @description
  */
 
-#ifndef INTERRUPT_TCP_SOCKET_SOURCE
-#define INTERRUPT_TCP_SOCKET_SOURCE
+#ifndef SEND_TCP_SOCKET_SOURCE
+#define SEND_TCP_SOCKET_SOURCE
 
-#include <sys/types.h>
-#include <sys/socket.h>
+#include "../../globals/constants/log_constants.c"
+#include "../../globals/logger/logger.c"
+/*??
 #include <stdio.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
 #include <unistd.h>
 #include "../../globals/constants/abstraction_constants.c"
+#include "../../globals/constants/boolean_constants.c"
+#include "../../globals/constants/channel_constants.c"
 #include "../../globals/constants/character_constants.c"
-#include "../../globals/constants/integer_constants.c"
+#include "../../globals/constants/control_sequence_constants.c"
 #include "../../globals/constants/structure_constants.c"
 #include "../../globals/variables/variables.c"
 #include "../../memoriser/accessor.c"
+#include "../../memoriser/allocator.c"
 #include "../../memoriser/array.c"
+#include "../../memoriser/converter.c"
+#include "../../memoriser/translator.c"
+*/
 
 /**
- * Interrupts the tcp socket service.
+ * Sends a message via tcp socket.
  *
  * @param p0 the internal memory
- * @param p1 the knowledge memory
- * @param p2 the knowledge memory count
- * @param p3 the knowledge memory size
+ * @param p1 the source tui compound model
+ * @param p2 the source count
  */
-void interrupt_tcp_socket(void* p0, void* p1, void* p2, void* p3) {
+void send_tcp_socket(void* p0, void* p1, void* p2) {
 
-    log_message_debug("Interrupt tcp socket service.");
-
-    // The interrupt flag.
-    int** f = NULL_POINTER;
-
-    get(p0, (void*) TCP_SOCKET_INTERRUPT_INTERNAL, (void*) &f, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-
-    if ((f != NULL_POINTER) && (*f != NULL_POINTER)) {
-
-        **f = 1;
-
-    } else {
-
-        log_message_debug("Could not interrupt tcp socket service. The tcp socket interrupt flag is null.");
-    }
+    log_message_debug("Send tcp socket.");
 }
 
-/* INTERRUPT_TCP_SOCKET_SOURCE */
+/* SEND_TCP_SOCKET_SOURCE */
 #endif

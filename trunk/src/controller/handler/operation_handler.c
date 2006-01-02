@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.12 $ $Date: 2005-08-18 22:30:35 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2006-01-02 11:56:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -79,7 +79,7 @@ void handle_operation(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
     fprintf(stderr, "TEST: Operation: %s\n", (char*) p8);
     fprintf(stderr, "TEST: Operation count: %i\n", *((int*) p9));
 //??    fprintf(stderr, "TEST handler p1: %i\n", p1);
-//??    test_knowledge_model(p1, p2, 3);
+//??    test_knowledge_memory(p1, p2, 5);
 
     // The comparison result.
     int r = 0;
@@ -284,35 +284,6 @@ void handle_operation(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 //??            refresh_url(p10, p11, p0, p1, p2, p3, p13);
         }
     }
-
-/*??
-    //?? Only for later, when mouse interrupt is handled directly here, and not in JavaEventHandler.
-    if (strcmp(l, "mouse_moved") == 0) {
-
-        Model statics = statics;
-
-        set_model_element(statics, "mouse.pointer_position.x_distance.quantity", new java.lang.Integer(((java.awt.event.MouseEvent) evt).getX()));
-        set_model_element(statics, "mouse.pointer_position.x_distance.unit", "pixel");
-        set_model_element(statics, "mouse.pointer_position.y_distance.quantity", new java.lang.Integer(((java.awt.event.MouseEvent) evt).getY()));
-        set_model_element(statics, "mouse.pointer_position.y_distance.unit", "pixel");
-
-    } else if (strcmp(l, "mouse_clicked") == 0) {
-
-        void* main_frame = get_statics_model_part(statics, (void*) "main_frame");
-        struct vector* pointer_position = get_statics_model_part(statics, (void*) "mouse.pointer_position");
-
-        reset_signal(s);
-
-        if (pointer_position != NULL_POINTER) {
-
-//??        mouse_clicked_action(main_frame, (void*) pointer_position->x, (void*) pointer_position->y, (void*) pointer_position->z, s->predicate);
-
-        } else {
-
-//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not handle mouse clicked action. The pointer position is null.");
-        }
-    }
-*/
 }
 
 /* OPERATION_HANDLER_SOURCE */

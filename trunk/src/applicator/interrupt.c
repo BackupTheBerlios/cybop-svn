@@ -20,33 +20,40 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2005-08-11 11:36:11 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2006-01-02 11:56:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef INTERUPT_SOURCE
-#define INTERUPT_SOURCE
+#ifndef INTERRUPT_SOURCE
+#define INTERRUPT_SOURCE
 
+#include "../applicator/interrupt/interrupt_linux_console.c"
 #include "../applicator/interrupt/interrupt_tcp_socket.c"
+#include "../applicator/interrupt/interrupt_unix_socket.c"
+#include "../applicator/interrupt/interrupt_x_window_system.c"
 #include "../globals/constants/abstraction_constants.c"
 #include "../globals/constants/channel_constants.c"
+#include "../globals/constants/model_constants.c"
 #include "../globals/constants/name_constants.c"
 #include "../globals/constants/structure_constants.c"
 #include "../globals/logger/logger.c"
-#include "../socket/unix_socket.c"
 
 /**
- * Interupt a service.
+ * Interrupts a service.
+ *
+ * Expected parameters:
+ * - service: linux_console, tcp_socket, unix_socket, x_window_system
  *
  * @param p0 the parameters
  * @param p1 the parameters count
- * @param p2 the knowledge
- * @param p3 the knowledge count
- * @param p4 the knowledge size
- * @param p5 the internals
+ * @param p2 the knowledge memory
+ * @param p3 the knowledge memory count
+ * @param p4 the knowledge memory size
+ * @param p5 the internal memory
  */
-void interupt_service(void* p0, void* p1,
-    void* p2, void* p3, void* p4, void* p5) {
+void interrupt_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
+
+    log_message_debug("Interrupt service.");
 
     // The service abstraction.
     void** sa = &NULL_POINTER;
@@ -67,49 +74,51 @@ void interupt_service(void* p0, void* p1,
         (void*) &sa, (void*) &sac, (void*) &sas,
         (void*) &sm, (void*) &smc, (void*) &sms,
         (void*) &sd, (void*) &sdc, (void*) &sds,
-        p2, p3 );
+        p2, p3);
 
     // The comparison result.
     int r = 0;
 
-/*??
     if (r == 0) {
 
-        compare_arrays((void*) *sm, (void*) *smc, (void*) TUI_ABSTRACTION, (void*) TUI_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays((void*) *sm, (void*) *smc, (void*) LINUX_CONSOLE_MODEL, (void*) LINUX_CONSOLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
+            interrupt_linux_console(p5, p2, p3, p4);
         }
     }
 
     if (r == 0) {
 
-        compare_arrays((void*) *sm, (void*) *smc, (void*) X_WINDOW_SYSTEM_ABSTRACTION, (void*) X_WINDOW_SYSTEM_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != 0) {
-        }
-    }
-*/
-
-    if (r == 0) {
-
-        compare_arrays((void*) *sm, (void*) *smc, (void*) UNIX_SOCKET_CHANNEL, (void*) UNIX_SOCKET_CHANNEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays((void*) *sm, (void*) *smc, (void*) TCP_SOCKET_MODEL, (void*) TCP_SOCKET_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
+            interrupt_tcp_socket(p5, p2, p3, p4);
         }
     }
 
     if (r == 0) {
 
-        compare_arrays((void*) *sm, (void*) *smc, (void*) TCP_SOCKET_CHANNEL, (void*) TCP_SOCKET_CHANNEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays((void*) *sm, (void*) *smc, (void*) UNIX_SOCKET_MODEL, (void*) UNIX_SOCKET_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-            interrupt_tcp_socket( p5, p2, p3, p4 );
+            interrupt_unix_socket(p5, p2, p3, p4);
+        }
+    }
+
+    if (r == 0) {
+
+        compare_arrays((void*) *sm, (void*) *smc, (void*) X_WINDOW_SYSTEM_MODEL, (void*) X_WINDOW_SYSTEM_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != 0) {
+
+            interrupt_x_window_system(p5, p2, p3, p4);
         }
     }
 }
 
-/* INTERUPT_SOURCE */
+/* INTERRUPT_SOURCE */
 #endif

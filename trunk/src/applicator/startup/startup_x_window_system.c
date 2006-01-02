@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.13 $ $Date: 2005-11-21 23:29:27 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2006-01-02 11:56:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  *
@@ -38,7 +38,7 @@
  * GC == struct _XGC*
  * Window == int
  * Colormap == int
- * Font == int
+ * Font (ID) == int
  */
 
 #ifndef STARTUP_X_WINDOW_SYSTEM_SOURCE
@@ -101,9 +101,11 @@ void startup_x_window_system(void* p0, void* p1, void* p2, void* p3) {
         // Remember, CYBOI itself IS the window manager.
         int* r = NULL_POINTER;
         // The font name.
-//??        char* fn = NULL_POINTER;
+        char* fn = NULL_POINTER;
+        // The font.
+        XFontStruct* f = NULL_POINTER;
         // The font id.
-//??        int* f = NULL_POINTER;
+        int fid = -1;
         // The size hint.
         XSizeHints sh;
         // The colours.
@@ -121,13 +123,12 @@ void startup_x_window_system(void* p0, void* p1, void* p2, void* p3) {
         struct _XGC* gc_menu_font = NULL_POINTER;
         // The window.
         int* w = NULL_POINTER;
-        // The value mask for the graphic context.
-        // It specifies which components in the graphic context are to be set
-        // using the information in the specified values structure.
-        // This argument is the bitwise inclusive OR of zero or more of the
-        // valid graphic context component mask bits.
+        // The value mask for the graphics context.
+        // It defines the attributes for the graphics context.
+        // This argument is the bitwise inclusive OR of zero or more
+        // of the valid graphic context component mask bits.
         unsigned long* vm = NULL_POINTER;
-        // The values as specified by the value mask.
+        // The values for the attributes defined in the value mask.
         XGCValues* v = NULL_POINTER;
         // The graphic context. Each graphic element needs one.
         // It can be used with any destination drawable (window or pixmap)
@@ -141,9 +142,9 @@ void startup_x_window_system(void* p0, void* p1, void* p2, void* p3) {
         allocate((void*) &bg, (void*) PRIMITIVE_COUNT, (void*) UNSIGNED_LONG_VECTOR_ABSTRACTION, (void*) UNSIGNED_LONG_VECTOR_ABSTRACTION_COUNT);
         allocate((void*) &fg, (void*) PRIMITIVE_COUNT, (void*) UNSIGNED_LONG_VECTOR_ABSTRACTION, (void*) UNSIGNED_LONG_VECTOR_ABSTRACTION_COUNT);
         allocate((void*) &r, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-//??        allocate((void*) &f, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
         allocate((void*) &w, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
         allocate((void*) &vm, (void*) PRIMITIVE_COUNT, (void*) UNSIGNED_LONG_VECTOR_ABSTRACTION, (void*) UNSIGNED_LONG_VECTOR_ABSTRACTION_COUNT);
+//??        v = (struct XGCValues*) malloc(sizeof(struct XGCValues));
 
         // Initialise x window system internals.
         dn = "";
@@ -155,16 +156,23 @@ void startup_x_window_system(void* p0, void* p1, void* p2, void* p3) {
         *fg = XBlackPixel(d, *sn);
         *r = DefaultRootWindow(d);
 //??        *r = XRootWindowOfScreen(s);
-//??        fn = "Helvetica";
-//??        *f = XLoadFont(*d, fn);
-        sh.x = 100;
-        sh.y = 100;
-        sh.width = 400;
-        sh.height = 300;
+        fn = "*-helvetica-*-12-*";
+        f = XLoadQueryFont(d, fn);
+
+        if (f != NULL_POINTER) {
+
+            fid = f->fid;
+        }
+
+        sh.x = 0;
+        sh.y = 0;
+        sh.width = 800;
+        sh.height = 600;
         sh.flags = PPosition | PSize;
         *w = XCreateSimpleWindow(d, *r, sh.x, sh.y, sh.width, sh.height, 5, *fg, *bg);
         *vm = 0;
-        v = NULL_POINTER;
+//??        *vm = GCCapStyle | GCJoinStyle;
+//??        *v = CapButt | JoinBevel;
         gc = XCreateGC(d, *w, *vm, v);
         gray.red = 49125;
         gray.green = 49125;
@@ -199,7 +207,7 @@ void startup_x_window_system(void* p0, void* p1, void* p2, void* p3) {
         XSetForeground(d, gc_menu_font, *fg);
         XSetBackground(d, gc, *bg);
         XSetForeground(d, gc, *fg);
-//??        XSetFont(*d, gc, f);
+        XSetFont(d, gc, fid);
 
         // Set x window system internals.
         set(p0, (void*) X_WINDOW_SYSTEM_DISPLAY_NAME_INTERNAL, (void*) &dn, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
@@ -210,8 +218,6 @@ void startup_x_window_system(void* p0, void* p1, void* p2, void* p3) {
         set(p0, (void*) X_WINDOW_SYSTEM_BACKGROUND_INTERNAL, (void*) &bg, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         set(p0, (void*) X_WINDOW_SYSTEM_FOREGROUND_INTERNAL, (void*) &fg, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         set(p0, (void*) X_WINDOW_SYSTEM_ROOT_WINDOW_INTERNAL, (void*) &r, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-//??        set(p0, (void*) X_WINDOW_SYSTEM_FONT_NAME_INTERNAL, (void*) &fn, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-//??        set(p0, (void*) X_WINDOW_SYSTEM_FONT_INTERNAL, (void*) &f, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         set(p0, (void*) X_WINDOW_SYSTEM_WINDOW_MENU_BORDER_BOTTOM_GC_INTERNAL, (void*) &gc_menu_border_bottom, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         set(p0, (void*) X_WINDOW_SYSTEM_WINDOW_INTERNAL, (void*) &w, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         set(p0, (void*) X_WINDOW_SYSTEM_GRAPHIC_CONTEXT_VALUE_MASK_INTERNAL, (void*) &vm, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);

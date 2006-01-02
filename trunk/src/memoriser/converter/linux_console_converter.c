@@ -1,5 +1,5 @@
 /*
- * $RCSfile: terminal_converter.c,v $
+ * $RCSfile: linux_console_converter.c,v $
  *
  * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
  *
@@ -20,42 +20,44 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.22 $ $Date: 2006-01-02 11:56:02 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2006-01-02 11:56:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef TERMINAL_CONVERTER_SOURCE
-#define TERMINAL_CONVERTER_SOURCE
+#ifndef LINUX_CONSOLE_CONVERTER_SOURCE
+#define LINUX_CONSOLE_CONVERTER_SOURCE
 
 #include "../../globals/constants/abstraction_constants.c"
 #include "../../globals/constants/boolean_constants.c"
 #include "../../globals/constants/character_constants.c"
 #include "../../globals/constants/control_sequence_constants.c"
 #include "../../globals/constants/log_constants.c"
+#include "../../globals/constants/name_constants.c"
 #include "../../globals/constants/structure_constants.c"
 #include "../../globals/logger/logger.c"
+#include "../../globals/variables/variables.c"
 #include "../../memoriser/accessor.c"
+#include "../../memoriser/mapper.c"
 
 /**
- * Serialises the tui model properties into a terminal model.
+ * Serialises the linux console model properties into a terminal model.
  *
  * @param p0 the destination terminal control sequences (Hand over as reference!)
  * @param p1 the destination count
  * @param p2 the destination size
- * @param p3 the source tui model z coordinate
- * @param p4 the source tui model y coordinate
- * @param p5 the source tui model x coordinate
- * @param p6 the source tui model background property
- * @param p7 the source tui model foreground property
- * @param p8 the source tui model hidden property
- * @param p9 the source tui model inverse property
- * @param p10 the source tui model blink property
- * @param p11 the source tui model underline property
- * @param p12 the source tui model bold property
- * @param p13 the source tui model character property
+ * @param p3 the source linux console model z coordinate
+ * @param p4 the source linux console model y coordinate
+ * @param p5 the source linux console model x coordinate
+ * @param p6 the source linux console model background property
+ * @param p7 the source linux console model foreground property
+ * @param p8 the source linux console model hidden property
+ * @param p9 the source linux console model inverse property
+ * @param p10 the source linux console model blink property
+ * @param p11 the source linux console model underline property
+ * @param p12 the source linux console model bold property
+ * @param p13 the source linux console model character property
  */
-/*??
-void serialise_terminal_properties(void* p0, void* p1, void* p2,
+void serialise_linux_console_properties(void* p0, void* p1, void* p2,
     void* p3, void* p4, void* p5,
     void* p6, void* p7, void* p8, void* p9,
     void* p10, void* p11, void* p12, void* p13) {
@@ -317,62 +319,429 @@ void serialise_terminal_properties(void* p0, void* p1, void* p2,
 
                         } else {
 
-                            log_message_debug("WARNING: Could not serialise terminal properties. The character is null.");
+                            log_message_debug("WARNING: Could not serialise linux console properties. The character is null.");
                         }
 
                     } else {
 
-                        log_message_debug("Could not serialise terminal properties. The destination is null.");
+                        log_message_debug("Could not serialise linux console properties. The destination is null.");
                     }
 
                 } else {
 
-                    log_message_debug("Could not serialise terminal properties. The destination count is null.");
+                    log_message_debug("Could not serialise linux console properties. The destination count is null.");
                 }
 
             } else {
 
-                log_message_debug("Could not serialise terminal properties. The destination size is null.");
+                log_message_debug("Could not serialise linux console properties. The destination size is null.");
             }
 
         } else {
 
-            log_message_debug("Could not serialise terminal properties. The source y is null.");
+            log_message_debug("Could not serialise linux console properties. The source y is null.");
         }
 
     } else {
 
-        log_message_debug("Could not serialise terminal properties. The source x is null.");
+        log_message_debug("Could not serialise linux console properties. The source x is null.");
     }
 }
 
 /**
- * Parses the terminal model into a tui model.
+ * Parses the linux console terminal control sequences into a compound model.
  *
- * @param p0 the destination tui model (Hand over as reference!)
+ * @param p0 the destination linux console model (Hand over as reference!)
  * @param p1 the destination count
  * @param p2 the destination size
  * @param p3 the source terminal control sequences
  * @param p4 the source count
  */
-/*??
-void parse_terminal(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void parse_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
 }
 
 /**
- * Serialises the tui model into a terminal model.
+ * Serialises the compound model into a linux console terminal control sequences.
  *
  * @param p0 the destination terminal control sequences (Hand over as reference!)
  * @param p1 the destination count
  * @param p2 the destination size
- * @param p3 the source tui model
+ * @param p3 the source linux console model
  * @param p4 the source count
  */
+void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
+
+    if (p4 != NULL_POINTER) {
+
+        int* sc = (int*) p4;
+
+        log_message_debug("Serialise compound model into linux console terminal control sequences.");
+
+        // The source part abstraction, model, details.
+        void** a = &NULL_POINTER;
+        void** ac = &NULL_POINTER;
+        void** as = &NULL_POINTER;
+        void** m = &NULL_POINTER;
+        // CAUTION! This must be int** because its value is used below.
+        int** mc = (int**) &NULL_POINTER;
+        void** ms = &NULL_POINTER;
+        void** d = &NULL_POINTER;
+        void** dc = &NULL_POINTER;
+        void** ds = &NULL_POINTER;
+
+        // The source part position.
+        void** pa = &NULL_POINTER;
+        void** pac = &NULL_POINTER;
+        void** pas = &NULL_POINTER;
+        void** pm = &NULL_POINTER;
+        void** pmc = &NULL_POINTER;
+        void** pms = &NULL_POINTER;
+        void** pd = &NULL_POINTER;
+        void** pdc = &NULL_POINTER;
+        void** pds = &NULL_POINTER;
+        // The source part size.
+        void** sa = &NULL_POINTER;
+        void** sac = &NULL_POINTER;
+        void** sas = &NULL_POINTER;
+        void** sm = &NULL_POINTER;
+        void** smc = &NULL_POINTER;
+        void** sms = &NULL_POINTER;
+        void** sd = &NULL_POINTER;
+        void** sdc = &NULL_POINTER;
+        void** sds = &NULL_POINTER;
+        // The source part background colour.
+        void** bga = &NULL_POINTER;
+        void** bgac = &NULL_POINTER;
+        void** bgas = &NULL_POINTER;
+        void** bgm = &NULL_POINTER;
+        void** bgmc = &NULL_POINTER;
+        void** bgms = &NULL_POINTER;
+        void** bgd = &NULL_POINTER;
+        void** bgdc = &NULL_POINTER;
+        void** bgds = &NULL_POINTER;
+        // The source part foreground colour.
+        void** fga = &NULL_POINTER;
+        void** fgac = &NULL_POINTER;
+        void** fgas = &NULL_POINTER;
+        void** fgm = &NULL_POINTER;
+        void** fgmc = &NULL_POINTER;
+        void** fgms = &NULL_POINTER;
+        void** fgd = &NULL_POINTER;
+        void** fgdc = &NULL_POINTER;
+        void** fgds = &NULL_POINTER;
+        // The source part hidden property.
+        void** ha = &NULL_POINTER;
+        void** hac = &NULL_POINTER;
+        void** has = &NULL_POINTER;
+        void** hm = &NULL_POINTER;
+        void** hmc = &NULL_POINTER;
+        void** hms = &NULL_POINTER;
+        void** hd = &NULL_POINTER;
+        void** hdc = &NULL_POINTER;
+        void** hds = &NULL_POINTER;
+        // The source part inverse property.
+        void** ia = &NULL_POINTER;
+        void** iac = &NULL_POINTER;
+        void** ias = &NULL_POINTER;
+        void** im = &NULL_POINTER;
+        void** imc = &NULL_POINTER;
+        void** ims = &NULL_POINTER;
+        void** id = &NULL_POINTER;
+        void** idc = &NULL_POINTER;
+        void** ids = &NULL_POINTER;
+        // The source part blink property.
+        void** bla = &NULL_POINTER;
+        void** blac = &NULL_POINTER;
+        void** blas = &NULL_POINTER;
+        void** blm = &NULL_POINTER;
+        void** blmc = &NULL_POINTER;
+        void** blms = &NULL_POINTER;
+        void** bld = &NULL_POINTER;
+        void** bldc = &NULL_POINTER;
+        void** blds = &NULL_POINTER;
+        // The source part underline property.
+        void** ua = &NULL_POINTER;
+        void** uac = &NULL_POINTER;
+        void** uas = &NULL_POINTER;
+        void** um = &NULL_POINTER;
+        void** umc = &NULL_POINTER;
+        void** ums = &NULL_POINTER;
+        void** ud = &NULL_POINTER;
+        void** udc = &NULL_POINTER;
+        void** uds = &NULL_POINTER;
+        // The source part bold property.
+        void** ba = &NULL_POINTER;
+        void** bac = &NULL_POINTER;
+        void** bas = &NULL_POINTER;
+        void** bm = &NULL_POINTER;
+        void** bmc = &NULL_POINTER;
+        void** bms = &NULL_POINTER;
+        void** bd = &NULL_POINTER;
+        void** bdc = &NULL_POINTER;
+        void** bds = &NULL_POINTER;
+
+        // The source part position x, y, z.
+        int** px = (int**) &NULL_POINTER;
+        int** py = (int**) &NULL_POINTER;
+        int** pz = (int**) &NULL_POINTER;
+        // The source part size x, y, z.
+        int** sx = (int**) &NULL_POINTER;
+        int** sy = (int**) &NULL_POINTER;
+        int** sz = (int**) &NULL_POINTER;
+
+        // The loop count.
+        int j = 0;
+        // The comparison result.
+        int r = 0;
+
+        // Iterate through compound parts.
+        while (1) {
+
+            if (j >= *sc) {
+
+                break;
+            }
+
+            // Reset source part abstraction, model, details.
+            a = &NULL_POINTER;
+            ac = &NULL_POINTER;
+            as = &NULL_POINTER;
+            m = &NULL_POINTER;
+            // CAUTION! This must be int** because its value is used below.
+            mc = (int**) &NULL_POINTER;
+            ms = &NULL_POINTER;
+            d = &NULL_POINTER;
+            dc = &NULL_POINTER;
+            ds = &NULL_POINTER;
+
+            // Reset source part position.
+            pa = &NULL_POINTER;
+            pac = &NULL_POINTER;
+            pas = &NULL_POINTER;
+            pm = &NULL_POINTER;
+            pmc = &NULL_POINTER;
+            pms = &NULL_POINTER;
+            pd = &NULL_POINTER;
+            pdc = &NULL_POINTER;
+            pds = &NULL_POINTER;
+            // Reset source part size.
+            sa = &NULL_POINTER;
+            sac = &NULL_POINTER;
+            sas = &NULL_POINTER;
+            sm = &NULL_POINTER;
+            smc = &NULL_POINTER;
+            sms = &NULL_POINTER;
+            sd = &NULL_POINTER;
+            sdc = &NULL_POINTER;
+            sds = &NULL_POINTER;
+            // Reset source part background colour.
+            bga = &NULL_POINTER;
+            bgac = &NULL_POINTER;
+            bgas = &NULL_POINTER;
+            bgm = &NULL_POINTER;
+            bgmc = &NULL_POINTER;
+            bgms = &NULL_POINTER;
+            bgd = &NULL_POINTER;
+            bgdc = &NULL_POINTER;
+            bgds = &NULL_POINTER;
+            // Reset source part foreground colour.
+            fga = &NULL_POINTER;
+            fgac = &NULL_POINTER;
+            fgas = &NULL_POINTER;
+            fgm = &NULL_POINTER;
+            fgmc = &NULL_POINTER;
+            fgms = &NULL_POINTER;
+            fgd = &NULL_POINTER;
+            fgdc = &NULL_POINTER;
+            fgds = &NULL_POINTER;
+            // Reset source part hidden property.
+            ha = &NULL_POINTER;
+            hac = &NULL_POINTER;
+            has = &NULL_POINTER;
+            hm = &NULL_POINTER;
+            hmc = &NULL_POINTER;
+            hms = &NULL_POINTER;
+            hd = &NULL_POINTER;
+            hdc = &NULL_POINTER;
+            hds = &NULL_POINTER;
+            // Reset source part inverse property.
+            ia = &NULL_POINTER;
+            iac = &NULL_POINTER;
+            ias = &NULL_POINTER;
+            im = &NULL_POINTER;
+            imc = &NULL_POINTER;
+            ims = &NULL_POINTER;
+            id = &NULL_POINTER;
+            idc = &NULL_POINTER;
+            ids = &NULL_POINTER;
+            // Reset source part blink property.
+            bla = &NULL_POINTER;
+            blac = &NULL_POINTER;
+            blas = &NULL_POINTER;
+            blm = &NULL_POINTER;
+            blmc = &NULL_POINTER;
+            blms = &NULL_POINTER;
+            bld = &NULL_POINTER;
+            bldc = &NULL_POINTER;
+            blds = &NULL_POINTER;
+            // Reset source part underline property.
+            ua = &NULL_POINTER;
+            uac = &NULL_POINTER;
+            uas = &NULL_POINTER;
+            um = &NULL_POINTER;
+            umc = &NULL_POINTER;
+            ums = &NULL_POINTER;
+            ud = &NULL_POINTER;
+            udc = &NULL_POINTER;
+            uds = &NULL_POINTER;
+            // Reset source part bold property.
+            ba = &NULL_POINTER;
+            bac = &NULL_POINTER;
+            bas = &NULL_POINTER;
+            bm = &NULL_POINTER;
+            bmc = &NULL_POINTER;
+            bms = &NULL_POINTER;
+            bd = &NULL_POINTER;
+            bdc = &NULL_POINTER;
+            bds = &NULL_POINTER;
+
+            // Reset source part position x, y, z.
+            px = (int**) &NULL_POINTER;
+            py = (int**) &NULL_POINTER;
+            pz = (int**) &NULL_POINTER;
+            // Reset source part size x, y, z.
+            sx = (int**) &NULL_POINTER;
+            sy = (int**) &NULL_POINTER;
+            sz = (int**) &NULL_POINTER;
+
+            // Get part at index j.
+            get_compound_element_by_index(p3, p4, (void*) &j,
+                (void*) &a, (void*) &ac, (void*) &as,
+                (void*) &m, (void*) &mc, (void*) &ms,
+                (void*) &d, (void*) &dc, (void*) &ds);
+
+            // Get part position from details.
+            get_compound_element_by_name(*d, *dc,
+                (void*) TUI_POSITION_NAME, (void*) TUI_POSITION_NAME_COUNT,
+                (void*) &pa, (void*) &pac, (void*) &pas,
+                (void*) &pm, (void*) &pmc, (void*) &pms,
+                (void*) &pd, (void*) &pdc, (void*) &pds);
+            // Get part size from details.
+            get_compound_element_by_name(*d, *dc,
+                (void*) TUI_SIZE_NAME, (void*) TUI_SIZE_NAME_COUNT,
+                (void*) &sa, (void*) &sac, (void*) &sas,
+                (void*) &sm, (void*) &smc, (void*) &sms,
+                (void*) &sd, (void*) &sdc, (void*) &sds);
+            // Get part background colour from details.
+            get_compound_element_by_name(*d, *dc,
+                (void*) TUI_BACKGROUND_NAME, (void*) TUI_BACKGROUND_NAME_COUNT,
+                (void*) &bga, (void*) &bgac, (void*) &bgas,
+                (void*) &bgm, (void*) &bgmc, (void*) &bgms,
+                (void*) &bgd, (void*) &bgdc, (void*) &bgds);
+            // Get part foreground colour from details.
+            get_compound_element_by_name(*d, *dc,
+                (void*) TUI_FOREGROUND_NAME, (void*) TUI_FOREGROUND_NAME_COUNT,
+                (void*) &fga, (void*) &fgac, (void*) &fgas,
+                (void*) &fgm, (void*) &fgmc, (void*) &fgms,
+                (void*) &fgd, (void*) &fgdc, (void*) &fgds);
+            // Get part hidden property from details.
+            get_compound_element_by_name(*d, *dc,
+                (void*) TUI_HIDDEN_NAME, (void*) TUI_HIDDEN_NAME_COUNT,
+                (void*) &ha, (void*) &hac, (void*) &has,
+                (void*) &hm, (void*) &hmc, (void*) &hms,
+                (void*) &hd, (void*) &hdc, (void*) &hds);
+            // Get part inverse property from details.
+            get_compound_element_by_name(*d, *dc,
+                (void*) TUI_INVERSE_NAME, (void*) TUI_INVERSE_NAME_COUNT,
+                (void*) &ia, (void*) &iac, (void*) &ias,
+                (void*) &im, (void*) &imc, (void*) &ims,
+                (void*) &id, (void*) &idc, (void*) &ids);
+            // Get part blink property from details.
+            get_compound_element_by_name(*d, *dc,
+                (void*) TUI_BLINK_NAME, (void*) TUI_BLINK_NAME_COUNT,
+                (void*) &bla, (void*) &blac, (void*) &blas,
+                (void*) &blm, (void*) &blmc, (void*) &blms,
+                (void*) &bld, (void*) &bldc, (void*) &blds);
+            // Get part underline property from details.
+            get_compound_element_by_name(*d, *dc,
+                (void*) TUI_UNDERLINE_NAME, (void*) TUI_UNDERLINE_NAME_COUNT,
+                (void*) &ua, (void*) &uac, (void*) &uas,
+                (void*) &um, (void*) &umc, (void*) &ums,
+                (void*) &ud, (void*) &udc, (void*) &uds);
+            // Get part bold property from details.
+            get_compound_element_by_name(*d, *dc,
+                (void*) TUI_BOLD_NAME, (void*) TUI_BOLD_NAME_COUNT,
+                (void*) &ba, (void*) &bac, (void*) &bas,
+                (void*) &bm, (void*) &bmc, (void*) &bms,
+                (void*) &bd, (void*) &bdc, (void*) &bds);
+
+            // Get part position x, y, z.
+            get(*pm, (void*) TUI_POSITION_X_INDEX, (void*) &px, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            get(*pm, (void*) TUI_POSITION_Y_INDEX, (void*) &py, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            get(*pm, (void*) TUI_POSITION_Z_INDEX, (void*) &pz, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            // Get part size x, y, z.
+            get(*sm, (void*) TUI_SIZE_X_INDEX, (void*) &sx, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            get(*sm, (void*) TUI_SIZE_Y_INDEX, (void*) &sy, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            get(*sm, (void*) TUI_SIZE_Z_INDEX, (void*) &sz, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
+            if ((*pz != NULL_POINTER)
+                && (*py != NULL_POINTER)
+                && (*px != NULL_POINTER)
+                && (*sz != NULL_POINTER)
+                && (*sy != NULL_POINTER)
+                && (*sx != NULL_POINTER)) {
+
+                // Reallocate tui.
+                // CAUTION! The old count ocz is used, so that
+                // only new elements get initialised with NULL.
+//??                reallocate(p0, (void*) &ocz, (void*) *dsz, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
 /*??
-void serialise_terminal(void* p0, void* p1, void* p2, void* p3, void* p4) {
+                // Not existing columns (characters) are skipped.
+                if (*xm != NULL_POINTER) {
 
-    log_message_debug("Serialise textual user interface into terminal control sequences.");
+                    // Get properties and the character itself.
+                    get(*xm, (void*) TUI_PROPERTIES_BACKGROUND_INDEX, (void*) &bg, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                    get(*xm, (void*) TUI_PROPERTIES_FOREGROUND_INDEX, (void*) &fg, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                    get(*xm, (void*) TUI_PROPERTIES_HIDDEN_INDEX, (void*) &h, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                    get(*xm, (void*) TUI_PROPERTIES_INVERSE_INDEX, (void*) &i, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                    get(*xm, (void*) TUI_PROPERTIES_BLINK_INDEX, (void*) &bl, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                    get(*xm, (void*) TUI_PROPERTIES_UNDERLINE_INDEX, (void*) &u, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                    get(*xm, (void*) TUI_PROPERTIES_BOLD_INDEX, (void*) &b, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                    get(*xm, (void*) TUI_PROPERTIES_CHARACTER_INDEX, (void*) &c, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
+                    serialise_linux_console_properties(p0, p1, p2,
+                        (void*) &z, (void*) &y, (void*) &x,
+                        *bg, *fg, *h, *i, *bl, *u, *b, *c);
+
+                } else {
+
+                    log_message_debug("WARNING: Could not serialise compound model. The x column (character) is null.");
+                }
+*/
+
+            } else {
+
+                log_message_debug("Could not serialise compound model into linux console terminal control sequences. At least one tui position or size is null.");
+            }
+
+            // Reset comparison result.
+            r = 0;
+
+            compare_arrays(*a, *ac, (void*) CYBOL_ABSTRACTION, (void*) CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+            if (r != 0) {
+
+                // The part model is a compound.
+
+                // Recursively call this procedure for compound part model.
+                serialise_linux_console(p0, p1, p2, *m, (void*) *mc);
+            }
+
+            j++;
+        }
+
+/*??
     // The source count z, y, x coordinates.
     int** scz = (int**) &NULL_POINTER;
     int** scy = (int**) &NULL_POINTER;
@@ -477,13 +846,13 @@ void serialise_terminal(void* p0, void* p1, void* p2, void* p3, void* p4) {
                             get(*xm, (void*) TUI_PROPERTIES_BOLD_INDEX, (void*) &b, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
                             get(*xm, (void*) TUI_PROPERTIES_CHARACTER_INDEX, (void*) &c, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-                            serialise_terminal_properties(p0, p1, p2,
+                            serialise_linux_console_properties(p0, p1, p2,
                                 (void*) &z, (void*) &y, (void*) &x,
                                 *bg, *fg, *h, *i, *bl, *u, *b, *c);
 
                         } else {
 
-                            log_message_debug("WARNING: Could not serialise terminal. The x column (character) is null.");
+                            log_message_debug("WARNING: Could not serialise compound model. The x column (character) is null.");
                         }
 
                         x++;
@@ -491,7 +860,7 @@ void serialise_terminal(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 } else {
 
-                    log_message_debug("WARNING: Could not serialise terminal. The y row is null.");
+                    log_message_debug("WARNING: Could not serialise compound model. The y row is null.");
                 }
 
                 y++;
@@ -499,13 +868,23 @@ void serialise_terminal(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         } else {
 
-            log_message_debug("WARNING: Could not serialise terminal. The z layer is null.");
+            log_message_debug("WARNING: Could not serialise compound model. The z layer is null.");
         }
 
         z++;
     }
-}
+
+    } else {
+
+        log_message_debug("Could not serialise compound model. The source count parameter is null.");
+    }
 */
 
-/* TERMINAL_CONVERTER_SOURCE */
+    } else {
+
+        log_message_debug("Could not serialise compound model into linux console terminal control sequences. The source count parameter is null.");
+    }
+}
+
+/* LINUX_CONSOLE_CONVERTER_SOURCE */
 #endif

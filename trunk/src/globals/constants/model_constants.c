@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2005-10-17 22:26:30 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2006-01-02 11:56:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -264,62 +264,89 @@ static int* REFRESH_URL_MODEL_COUNT = NUMBER_11_INTEGER_ARRAY;
 // Language models.
 //
 
-/** The textual user interface (tui) model. */
-static char TUI_MODEL_ARRAY[] = {'t', 'u', 'i'};
-static char* TUI_MODEL = TUI_MODEL_ARRAY;
-static int* TUI_MODEL_COUNT = NUMBER_3_INTEGER_ARRAY;
-
-/** The graphical user interface (gui) model. */
-static char GUI_MODEL_ARRAY[] = {'g', 'u', 'i'};
-static char* GUI_MODEL = GUI_MODEL_ARRAY;
-static int* GUI_MODEL_COUNT = NUMBER_3_INTEGER_ARRAY;
-
-/** The web user interface (wui) model. */
-static char WUI_MODEL_ARRAY[] = {'w', 'u', 'i'};
-static char* WUI_MODEL = WUI_MODEL_ARRAY;
-static int* WUI_MODEL_COUNT = NUMBER_3_INTEGER_ARRAY;
+/** The latex model. */
+static char LATEX_MODEL_ARRAY[] = {'l', 'a', 't', 'e', 'x'};
+static char* LATEX_MODEL = LATEX_MODEL_ARRAY;
+static int* LATEX_MODEL_COUNT = NUMBER_5_INTEGER_ARRAY;
 
 /** The linux console model. */
 static char LINUX_CONSOLE_MODEL_ARRAY[] = {'l', 'i', 'n', 'u', 'x', '_', 'c', 'o', 'n', 's', 'o', 'l', 'e'};
 static char* LINUX_CONSOLE_MODEL = LINUX_CONSOLE_MODEL_ARRAY;
 static int* LINUX_CONSOLE_MODEL_COUNT = NUMBER_13_INTEGER_ARRAY;
 
-/** The x window system model. */
-static char X_WINDOW_SYSTEM_MODEL_ARRAY[] = {'x', '_', 'w', 'i', 'n', 'd', 'o', 'w', '_', 's', 'y', 's', 't', 'e', 'm'};
-static char* X_WINDOW_SYSTEM_MODEL = X_WINDOW_SYSTEM_MODEL_ARRAY;
-static int* X_WINDOW_SYSTEM_MODEL_COUNT = NUMBER_15_INTEGER_ARRAY;
-
-/** The unix socket model. */
-static char UNIX_SOCKET_MODEL_ARRAY[] = {'u', 'n', 'i', 'x', '_', 's', 'o', 'c', 'k', 'e', 't'};
-static char* UNIX_SOCKET_MODEL = UNIX_SOCKET_MODEL_ARRAY;
-static int* UNIX_SOCKET_MODEL_COUNT = NUMBER_11_INTEGER_ARRAY;
-
-/** The tcp socket model. */
-static char TCP_SOCKET_MODEL_ARRAY[] = {'t', 'c', 'p', '_', 's', 'o', 'c', 'k', 'e', 't'};
-static char* TCP_SOCKET_MODEL = TCP_SOCKET_MODEL_ARRAY;
-static int* TCP_SOCKET_MODEL_COUNT = NUMBER_10_INTEGER_ARRAY;
-
-/** The latex model. */
-static char LATEX_MODEL_ARRAY[] = {'l', 'a', 't', 'e', 'x'};
-static char* LATEX_MODEL = LATEX_MODEL_ARRAY;
-static int* LATEX_MODEL_COUNT = NUMBER_5_INTEGER_ARRAY;
-
 /** The signal model. */
 static char SIGNAL_MODEL_ARRAY[] = {'s', 'i', 'g', 'n', 'a', 'l'};
 static char* SIGNAL_MODEL = SIGNAL_MODEL_ARRAY;
 static int* SIGNAL_MODEL_COUNT = NUMBER_6_INTEGER_ARRAY;
-
-/** The mouse model. */
-static char MOUSE_MODEL_ARRAY[] = {'m', 'o', 'u', 's', 'e'};
-static char* MOUSE_MODEL = MOUSE_MODEL_ARRAY;
-static int* MOUSE_MODEL_COUNT = NUMBER_5_INTEGER_ARRAY;
 
 /** The structured query language (sql). */
 static char SQL_MODEL_ARRAY[] = {'s', 'q', 'l'};
 static char* SQL_MODEL = SQL_MODEL_ARRAY;
 static int* SQL_MODEL_COUNT = NUMBER_3_INTEGER_ARRAY;
 
+/** The tcp socket model. */
+static char TCP_SOCKET_MODEL_ARRAY[] = {'t', 'c', 'p', '_', 's', 'o', 'c', 'k', 'e', 't'};
+static char* TCP_SOCKET_MODEL = TCP_SOCKET_MODEL_ARRAY;
+static int* TCP_SOCKET_MODEL_COUNT = NUMBER_10_INTEGER_ARRAY;
+
+/** The unix socket model. */
+static char UNIX_SOCKET_MODEL_ARRAY[] = {'u', 'n', 'i', 'x', '_', 's', 'o', 'c', 'k', 'e', 't'};
+static char* UNIX_SOCKET_MODEL = UNIX_SOCKET_MODEL_ARRAY;
+static int* UNIX_SOCKET_MODEL_COUNT = NUMBER_11_INTEGER_ARRAY;
+
+/** The x window system model. */
+static char X_WINDOW_SYSTEM_MODEL_ARRAY[] = {'x', '_', 'w', 'i', 'n', 'd', 'o', 'w', '_', 's', 'y', 's', 't', 'e', 'm'};
+static char* X_WINDOW_SYSTEM_MODEL = X_WINDOW_SYSTEM_MODEL_ARRAY;
+static int* X_WINDOW_SYSTEM_MODEL_COUNT = NUMBER_15_INTEGER_ARRAY;
+
 //
+// Layout models.
+//
+
+/** The root layout. */
+static char ROOT_LAYOUT_MODEL_ARRAY[] = {'r', 'o', 'o', 't'};
+static char* ROOT_LAYOUT_MODEL = ROOT_LAYOUT_MODEL_ARRAY;
+static int* ROOT_LAYOUT_MODEL_COUNT = NUMBER_4_INTEGER_ARRAY;
+
+/** The coordinates layout. */
+static char COORDINATES_LAYOUT_MODEL_ARRAY[] = {'c', 'o', 'o', 'r', 'd', 'i', 'n', 'a', 't', 'e', 's'};
+static char* COORDINATES_LAYOUT_MODEL = COORDINATES_LAYOUT_MODEL_ARRAY;
+static int* COORDINATES_LAYOUT_MODEL_COUNT = NUMBER_11_INTEGER_ARRAY;
+
+/** The compass layout. */
+static char COMPASS_LAYOUT_MODEL_ARRAY[] = {'c', 'o', 'm', 'p', 'a', 's', 's'};
+static char* COMPASS_LAYOUT_MODEL = COMPASS_LAYOUT_MODEL_ARRAY;
+static int* COMPASS_LAYOUT_MODEL_COUNT = NUMBER_7_INTEGER_ARRAY;
+
+//
+// Compass layout cell models.
+//
+
+/** The compass layout north cell. */
+static char NORTH_CELL_MODEL_ARRAY[] = {'n', 'o', 'r', 't', 'h'};
+static char* NORTH_CELL_MODEL = NORTH_CELL_MODEL_ARRAY;
+static int* NORTH_CELL_MODEL_COUNT = NUMBER_5_INTEGER_ARRAY;
+
+/** The compass layout south cell. */
+static char SOUTH_CELL_MODEL_ARRAY[] = {'s', 'o', 'u', 't', 'h'};
+static char* SOUTH_CELL_MODEL = SOUTH_CELL_MODEL_ARRAY;
+static int* SOUTH_CELL_MODEL_COUNT = NUMBER_5_INTEGER_ARRAY;
+
+/** The compass layout west cell. */
+static char WEST_CELL_MODEL_ARRAY[] = {'w', 'e', 's', 't'};
+static char* WEST_CELL_MODEL = WEST_CELL_MODEL_ARRAY;
+static int* WEST_CELL_MODEL_COUNT = NUMBER_4_INTEGER_ARRAY;
+
+/** The compass layout east cell. */
+static char EAST_CELL_MODEL_ARRAY[] = {'e', 'a', 's', 't'};
+static char* EAST_CELL_MODEL = EAST_CELL_MODEL_ARRAY;
+static int* EAST_CELL_MODEL_COUNT = NUMBER_4_INTEGER_ARRAY;
+
+/** The compass layout centre cell. */
+static char CENTRE_CELL_MODEL_ARRAY[] = {'c', 'e', 'n', 't', 'r', 'e'};
+static char* CENTRE_CELL_MODEL = CENTRE_CELL_MODEL_ARRAY;
+static int* CENTRE_CELL_MODEL_COUNT = NUMBER_6_INTEGER_ARRAY;
+
 //
 // Opcodes.
 //

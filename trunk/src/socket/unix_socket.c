@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.30 $ $Date: 2005-08-31 14:50:18 $ $Author: christian $
+ * @version $Revision: 1.31 $ $Date: 2006-01-02 11:56:02 $ $Author: christian $
  * @author Marcel Kiesling <makie2001@web.de>
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
@@ -40,6 +40,7 @@
  *
  * @param p0 the internals memory
  */
+/*??
 void allocate_unix_server_socket(void* p0) {
 
     // The unix server socket filename.
@@ -119,12 +120,14 @@ void allocate_unix_server_socket(void* p0) {
         log_message_debug("Could not create unix server socket. The filename is null.");
     }
 }
+*/
 
 /**
  * Deallocates the unix server socket.
  *
  * @param p0 the internals memory
  */
+/*??
 void deallocate_unix_server_socket(void* p0) {
 
     // The unix server socket filename.
@@ -164,15 +167,16 @@ void deallocate_unix_server_socket(void* p0) {
         log_message_debug("Could not destroy unix server socket. The filename is null.");
     }
 }
+*/
 
 /**
  * Writes to unix socket.
  *
  * @param p0 the internals memory
  */
+/*??
 void write_unix_socket(void* p0) {
 
-/*??
 @param p0 the receiver address
 @param p1 the receiver address count
 @param p2 the message
@@ -261,14 +265,15 @@ void write_unix_socket(void* p0) {
 
 //??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_EXECUTE_CYBOI_THE_COMMAND_LINE_ARGUMENT_VECTOR_IS_NULL_MESSAGE, (void*) &COULD_NOT_EXECUTE_CYBOI_THE_COMMAND_LINE_ARGUMENT_VECTOR_IS_NULL_MESSAGE_COUNT);
     }
-*/
 }
+*/
 
 /**
  * Reads from unix socket.
  *
  * @param p0 the internals memory
  */
+/*??
 void read_unix_socket(void* p0) {
 
     // The unix server socket.
@@ -321,6 +326,7 @@ void read_unix_socket(void* p0) {
         log_message_debug("Could not read unix server socket. The socket is null.");
     }
 }
+*/
 
 /* UNIX_SOCKET_SOURCE */
 #endif

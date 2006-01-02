@@ -24,7 +24,7 @@
  * - receive a file stream into a byte array
  * - send a file stream from a byte array
  *
- * @version $Revision: 1.4 $ $Date: 2005-11-28 13:42:54 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2006-01-02 11:56:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -67,38 +67,24 @@ void write_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         log_message_debug("Write to x window system display.");
 
-        // The menu border bottom graphic context.
-        struct _XGC** gc_menu_border_bottom = (struct _XGC**) &NULL_POINTER;
         // The window.
         int** w = (int**) &NULL_POINTER;
-        // The graphic context. Each graphic element needs one.
-        // It can be used with any destination drawable (window or pixmap)
-        // having the same root and depth as the specified drawable.
-        // Use with other drawables results in a BadMatch error.
-        struct _XGC** gc = (struct _XGC**) &NULL_POINTER;
 
         // Get x window system internals.
-        get(p3, (void*) X_WINDOW_SYSTEM_WINDOW_MENU_BORDER_BOTTOM_GC_INTERNAL, (void*) &gc_menu_border_bottom, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         get(p3, (void*) X_WINDOW_SYSTEM_WINDOW_INTERNAL, (void*) &w, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        get(p3, (void*) X_WINDOW_SYSTEM_GRAPHIC_CONTEXT_INTERNAL, (void*) &gc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
         // Request input events (signals) to be put into event queue.
-        XSelectInput(*d, **w, ButtonPressMask | KeyPressMask | ExposureMask);
+        XSelectInput(*d, **w, ExposureMask
+            | KeyPressMask | KeyReleaseMask
+            | ButtonPressMask | ButtonReleaseMask | PointerMotionMask | ButtonMotionMask
+            | Button1MotionMask | Button2MotionMask | Button3MotionMask | Button4MotionMask | Button5MotionMask
+            | EnterWindowMask | LeaveWindowMask);
 
-        // Display window. The following internal steps are done:
-        // 1 Map window and all of its subwindows, i.e. prepare for display.
-        // 2 Raise window to the top of the stack of all sister windows.
-        // 3 Display all windows on the screen.
-        XMapRaised(*d, **w);
+        // Show the window (make it visible).
+        XMapWindow(*d, **w);
 
-        //?? For some reason, the window is only drawn when its attributes
-        //?? are retrieved, as done below. Otherwise, it remains invisible.
-
-        // The window attributes.
-        XWindowAttributes wa;
-
-        // Draw window.
-        XGetWindowAttributes(*d, **w, &wa);
+        // Flush all pending requests to the X server.
+        XFlush(*d);
 
     } else {
 

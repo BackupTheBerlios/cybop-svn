@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2005-08-11 11:36:11 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2006-01-02 11:56:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description This module shuts down a service.
  */
@@ -30,6 +30,7 @@
 
 #include "../applicator/shutdown/shutdown_linux_console.c"
 #include "../applicator/shutdown/shutdown_tcp_socket.c"
+#include "../applicator/shutdown/shutdown_unix_socket.c"
 #include "../applicator/shutdown/shutdown_x_window_system.c"
 #include "../globals/constants/abstraction_constants.c"
 #include "../globals/constants/log_constants.c"
@@ -42,19 +43,18 @@
  * Shuts down a service.
  *
  * Expected parameters:
- * - service: unix_socket, tcp_socket, x_window_system, ms_windows
+ * - service: linux_console, tcp_socket, unix_socket, x_window_system
  *
  * @param p0 the parameters
  * @param p1 the parameters count
- * @param p2 the knowledge
- * @param p3 the knowledge count
- * @param p4 the knowledge size
- * @param p5 the internals
+ * @param p2 the knowledge memory
+ * @param p3 the knowledge memory count
+ * @param p4 the knowledge memory size
+ * @param p5 the internal memory
  */
-void shutdown_service(void* p0, void* p1,
-    void* p2, void* p3, void* p4, void* p5) {
+void shutdown_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
-    log_message_debug("Shutdown.");
+    log_message_debug("Shutdown service.");
 
     // The service abstraction.
     void** sa = &NULL_POINTER;
@@ -95,21 +95,31 @@ void shutdown_service(void* p0, void* p1,
 
     if (r == 0) {
 
-        compare_arrays((void*) *sm, (void*) *smc, (void*) X_WINDOW_SYSTEM_MODEL, (void*) X_WINDOW_SYSTEM_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays((void*) *sm, (void*) *smc, (void*) TCP_SOCKET_MODEL, (void*) TCP_SOCKET_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-            shutdown_x_window_system(p5, p2, p3, p4);
+            shutdown_tcp_socket(p5, p2, p3, p4);
         }
     }
 
     if (r == 0) {
 
-        compare_arrays((void*) *sm, (void*) *smc, (void*) TCP_SOCKET_MODEL, (void*) TCP_SOCKET_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays((void*) *sm, (void*) *smc, (void*) UNIX_SOCKET_MODEL, (void*) UNIX_SOCKET_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-            shutdown_tcp_socket( p5, p2, p3, p4 );
+            shutdown_unix_socket(p5, p2, p3, p4);
+        }
+    }
+
+    if (r == 0) {
+
+        compare_arrays((void*) *sm, (void*) *smc, (void*) X_WINDOW_SYSTEM_MODEL, (void*) X_WINDOW_SYSTEM_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != 0) {
+
+            shutdown_x_window_system(p5, p2, p3, p4);
         }
     }
 }
