@@ -1,0 +1,99 @@
+From systemmail@paperdyne.com Thu Oct 27 15:14:10 2005
+X-Envelope-From: <systemmail@paperdyne.com>
+X-Envelope-To: <christian.heller@tuxtax.de>
+X-Delivery-Time: 1130418852
+Received: from ebus011.informatik.uni-leipzig.de (ebus011.informatik.uni-leipzig.de [139.18.40.11])
+	by mailin.webmailer.de (8.13.1/8.13.1) with ESMTP id j9RDEBfn007086
+	for <christian.heller@tuxtax.de>; Thu, 27 Oct 2005 15:14:12 +0200 (MEST)
+Received: from ebus011 (localhost [127.0.0.1])
+	by ebus011.informatik.uni-leipzig.de (Postfix) with ESMTP
+	id BEC3B1FD4E; Thu, 27 Oct 2005 15:14:10 +0200 (CEST)
+Message-ID: <4364221.1130418850775.JavaMail.se06@ebus011>
+From: Paperdyne System Mail <systemmail@paperdyne.com>
+Reply-To: Volker Gruhn <gruhn@ebus.informatik.uni-leipzig.de>
+To: Christian Heller <christian.heller@tuxtax.de>
+Subject: SE 2006: Paper File Upload
+Cc: Periklis Sochos <periklis.sochos@tu-ilmenau.de>
+Cc: Ilka Philippow <ilka.philippow@tu-ilmenau.de>
+Mime-Version: 1.0
+Content-Type: text/plain;
+  charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
+Date: Thu, 27 Oct 2005 15:14:10 +0200 (CEST)
+X-Spam-Checker-Version: SpamAssassin 3.0.4 (2005-06-05) on pluto.tuxtax
+X-Spam-Level: 
+X-Spam-Status: No, score=-1.2 required=5.0 tests=AWL,BAYES_00 autolearn=ham 
+	version=3.0.4
+X-UID: 
+X-Bogosity: Spam, tests=bogofilter, spamicity=1.000000, version=0.94.13
+Status: R
+X-Status: NC
+X-KMail-EncryptionState:  
+X-KMail-SignatureState:  
+X-KMail-MDN-Sent:  
+
+Dear Christian,
+
+thank you for submitting your paper file for the paper "Reflexions
+on Knowledge Modelling" to "Software Engineering 2006".
+
+Please check all submitted details and change them, if necessary.
+
+---
+
+Your personal details:
+
+Login-ID: christian.heller
+Name: Christian Heller
+Gender: male
+Affiliation: Technische Universit=E4t Ilmenau
+AddressLine1:
+AddressLine2:
+Zip-Code:
+City:
+Country: Deutschland
+Phone:
+Phone2:
+Fax:
+Occupation:
+
+Paper details:
+
+Filename: heller.pdf
+Size: 768131 Bytes
+Revision: 1
+Co-Authors:
+- Periklis Sochos, male, periklis.sochos@tu-ilmenau.de, Technische
+Universit=E4t Ilmenau
+- Ilka Philippow, female, ilka.philippow@tu-ilmenau.de, Technische
+Universit=E4t Ilmenau
+Keywords: Knowledge Abstraction, Cybernetics Oriented Programming,
+CYBOP, Software Design
+Topics:
+- Origin=E4re Forschungsergebnisse
+
+Abstract:
+
+This article reports about an ongoing research investigating the
+possibilities for applying inter-disciplinary concepts to software
+system design. The new resulting programming philosophy is based on
+firstly, a distinction of statics and dynamics, secondly a knowledge
+ schema structuring models and their meta information
+hierarchically, and thirdly the separation of state- and logic
+knowledge. It solves many of the problems existing in classical
+programming paradigms and languages and may have the potential to
+replace these in the long run.
+
+---
+
+You will be notified about the acceptance decision of the program
+committee by December 15, 2005.
+
+With best regards,
+
+      your Paperdyne conference management system
+
+Please notice: this mail is automatically generated. Please do not
+reply. If you have any questions, please contact Volker Gruhn
+<gruhn@ebus.informatik.uni-leipzig.de>.
+

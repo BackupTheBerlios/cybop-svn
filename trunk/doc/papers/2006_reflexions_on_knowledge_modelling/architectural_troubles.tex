@@ -1,0 +1,73 @@
+%
+% $RCSfile: architectural_troubles.tex,v $
+%
+% Copyright (c) 2005-2006. Christian Heller. All rights reserved.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2006-01-03 08:21:45 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\section{Architectural Troubles}
+\label{architectural_troubles_heading}
+
+The conceptual mistakes mentioned in section \ref{introduction_heading} are
+partly the reason for, and partly they are caused by incomplete programming
+paradigms. Of the three abstraction principles of human thinking described in
+\cite{heller2004}, OOP implements \emph{Discrimination} and
+\emph{Categorisation} only. \emph{Composition} as third kind of abstraction
+leading to hierarchical (tree-like) models, is not considered.
+
+Hierarchies are not new, they are present in many ways in today's programming.
+There are object hierarchies, process hierarchies, design patterns modelling a
+hierarchy and more. But: the hierarchy as concept is not \emph{inherent} in the
+type system of current programming languages. If it were, then \emph{every}
+type would be a \emph{Container} by default. Section
+\ref{inter-disciplinary_ideas_heading} will introduce such a universal type.
+
+Yet what are the results of that incomplete type system? First and foremost,
+it is the reason for the existence of multiple kinds of container types, and
+therewith the reason for falsified contents when using container inheritance,
+as demonstrated in \cite{javaiaq}. The lack of a general, container-like type
+leads to many strong dependencies, which could be avoided when holding type
+attributes as neutral elements. The language and interpreter of this work use
+just one structure for knowledge representation, that covers many of the
+traditional forms of containers.
+
+Further, the bundling of attributes and methods in an OOP class forces classes
+to not only relate to other classes for accessing their attributes, but also
+for using the methods offered by them. This often leads to unfavourable
+bidirectional dependencies \cite{heller2005}, that many software patterns even
+use on purpose (which is a mistake, however \cite{heller2005}). A related
+problem is that, despite multiple relations in a huge class framework, it is
+often difficult or impossible to reach some instances along normal object
+associations, which necessitates the introduction of statically (globally)
+accessible parts, with all disadvantages \cite{heller2005}. The knowledge\\
+schema introduced later on allows to build models with unidirectional relations
+only, that are easy to navigate, without global access.
+
+Other software design solutions like \emph{Concern} interfaces used in
+\emph{Component Oriented Programming} (COP) \cite{avalon} or the
+\emph{Join Point Model} (JPM) known from \emph{Aspect Oriented Programming}
+(AOP) \cite{aspectj} have their own drawbacks. Concerns spread functionality
+and cause redundant code through overlapping interfaces \cite{heller2002},
+which would be avoidable using an ontological architecture \cite{hellerkunze}.
+The JPM contains some unsolved issues, pointed out by \cite{huttenhuis}. Models
+as proposed in this article are ontologies.
+
+\emph{System Family Engineering} applies a so-called \emph{Six-Pack} approach
+\cite{domainengg, esaps}, based on the separation of \emph{Domain Engineering}
+(DE) and \emph{Application Engineering} (AE). The work described in this
+article proposes a separation of knowledge and system control.

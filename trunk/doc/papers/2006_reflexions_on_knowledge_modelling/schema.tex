@@ -1,0 +1,55 @@
+%
+% $RCSfile: schema.tex,v $
+%
+% Copyright (c) 2005-2006. Christian Heller. All rights reserved.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2006-01-03 08:21:45 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsubsection{Schema}
+\label{schema_heading}
+
+A theoretical \emph{Model} is an abstract clip of the real world, and exists in
+the human mind. Another common word for \emph{Model} is \emph{Concept}. It is
+the subsumption of \emph{Item}, \emph{Category} and \emph{Compound}, resulting
+from three activities of abstraction: \emph{Discrimination},
+\emph{Categorisation} and \emph{Composition} \cite{heller2004}. Each model
+\emph{knows} about the parts it consists of.
+
+\begin{figure}[ht]
+    \begin{center}
+        \includegraphics[scale=0.2]{vector/schema.eps}
+        \caption{Knowledge Schema}
+        \label{schema_figure}
+    \end{center}
+\end{figure}
+
+Yet what does this knowledge of a compound model (whole) about its parts imply?
+Software developers call knowledge \emph{about} something
+\emph{Meta Information}. Figure \ref{schema_figure} illustrates a
+\emph{Schema} (structure) with four kinds of meta information in a whole-part
+relation.
+
+An obvious way is to give each part a unique \emph{Name} for identification.
+Secondly, a compound needs to know about the \emph{Model} of each part since a
+part may itself be seen as compound that needs to know about its parts. The
+distinction of the several kinds of models, in other words the kind of
+\emph{Abstraction} (compound, term, number etc.) of a model is the third kind
+of information a compound needs to know about its parts. It is comparable to a
+\emph{Type} in classical system programming languages. All further kinds of
+meta information are summed up by a fourth relation which is called
+\emph{Details}.

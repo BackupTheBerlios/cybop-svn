@@ -1,0 +1,64 @@
+%
+% $RCSfile: document_type_definition.tex,v $
+%
+% Copyright (c) 2005-2006. Christian Heller. All rights reserved.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2006-01-03 08:21:45 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Document Type Definition}
+\label{document_type_definition_heading}
+
+Since CYBOL is based on the \emph{Extensible Markup Language} (XML), a
+\emph{Document Type Definition} (DTD) can be given (figure \ref{dtd_figure}).
+
+\begin{figure}[ht]
+    \bigskip
+    \begin{scriptsize}
+        \begin{verbatim}
+<!ELEMENT model (part*)>
+<!ELEMENT part (property*)>
+<!ELEMENT property (constraint*)>
+<!ELEMENT constraint EMPTY>
+
+<!ATTLIST part
+    name CDATA #REQUIRED
+    channel CDATA #REQUIRED
+    abstraction CDATA #REQUIRED
+    model CDATA #REQUIRED>
+
+<!ATTLIST property
+    name CDATA #REQUIRED
+    channel CDATA #REQUIRED
+    abstraction CDATA #REQUIRED
+    model CDATA #REQUIRED>
+
+<!ATTLIST constraint
+    name CDATA #REQUIRED
+    channel CDATA #REQUIRED
+    abstraction CDATA #REQUIRED
+    model CDATA #REQUIRED>
+        \end{verbatim}
+        \caption{CYBOL DTD}
+        \label{dtd_figure}
+    \end{scriptsize}
+\end{figure}
+
+One can recognise the purely hierarchical structure as described by the CYBOP
+knowledge schema (section \ref{schema_heading}). The three elements
+\emph{part}, \emph{property} and \emph{constraint} have the same list of
+required attributes.
