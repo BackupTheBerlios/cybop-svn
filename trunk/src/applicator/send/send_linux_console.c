@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.36 $ $Date: 2006-01-02 11:56:01 $ $Author: christian $
+ * @version $Revision: 1.37 $ $Date: 2006-01-28 00:40:25 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -39,8 +39,8 @@
 #include "../../memoriser/accessor.c"
 #include "../../memoriser/allocator.c"
 #include "../../memoriser/array.c"
+#include "../../memoriser/communicator.c"
 #include "../../memoriser/converter.c"
-#include "../../memoriser/translator.c"
 
 /**
  * Sends a textual user interface (tui) via linux console.

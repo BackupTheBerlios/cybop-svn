@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2006-01-02 11:56:02 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2006-01-28 00:40:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -385,6 +385,16 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
         void** pd = &NULL_POINTER;
         void** pdc = &NULL_POINTER;
         void** pds = &NULL_POINTER;
+        // The source part shape.
+        void** sha = &NULL_POINTER;
+        void** shac = &NULL_POINTER;
+        void** shas = &NULL_POINTER;
+        void** shm = &NULL_POINTER;
+        void** shmc = &NULL_POINTER;
+        void** shms = &NULL_POINTER;
+        void** shd = &NULL_POINTER;
+        void** shdc = &NULL_POINTER;
+        void** shds = &NULL_POINTER;
         // The source part size.
         void** sa = &NULL_POINTER;
         void** sac = &NULL_POINTER;
@@ -476,11 +486,11 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
                 (void*) &sm, (void*) &smc, (void*) &sms,
                 (void*) &sd, (void*) &sdc, (void*) &sds);
 
-            // Determine source part position coordinates.
+            // Get source part position coordinates.
             get(*pm, (void*) NUMBER_0_INTEGER, (void*) &pmx, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
             get(*pm, (void*) NUMBER_1_INTEGER, (void*) &pmy, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
             get(*pm, (void*) NUMBER_2_INTEGER, (void*) &pmz, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-            // Determine source part size coordinates.
+            // Get source part size coordinates.
             get(*sm, (void*) NUMBER_0_INTEGER, (void*) &smx, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
             get(*sm, (void*) NUMBER_1_INTEGER, (void*) &smy, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
             get(*sm, (void*) NUMBER_2_INTEGER, (void*) &smz, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
