@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.37 $ $Date: 2006-01-28 00:40:25 $ $Author: christian $
+ * @version $Revision: 1.38 $ $Date: 2006-01-29 01:47:54 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -48,8 +48,10 @@
  * @param p0 the internal memory
  * @param p1 the source tui compound model
  * @param p2 the source count
+ * @param p3 the knowledge memory
+ * @param p4 the knowledge memory count
  */
-void send_linux_console(void* p0, void* p1, void* p2) {
+void send_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     log_message_debug("Send linux console message.");
 
@@ -64,7 +66,7 @@ void send_linux_console(void* p0, void* p1, void* p2) {
     allocate((void*) &a, (void*) &as, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
     // Serialise textual user interface (tui) into array.
-    serialise((void*) &a, (void*) &ac, (void*) &as, p1, p2, (void*) LINUX_CONSOLE_MODEL, (void*) LINUX_CONSOLE_MODEL_COUNT);
+    serialise((void*) &a, (void*) &ac, (void*) &as, p1, p2, (void*) LINUX_CONSOLE_MODEL, (void*) LINUX_CONSOLE_MODEL_COUNT, p3, p4);
 
     // The linux console terminal.
     void** t = &NULL_POINTER;

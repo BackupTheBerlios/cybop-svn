@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2006-01-02 11:56:01 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2006-01-29 01:47:55 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -33,7 +33,6 @@
 #include "../memoriser/array.c"
 #include "../memoriser/translator/cybol_translator.c"
 #include "../memoriser/translator/html_translator.c"
-#include "../memoriser/translator/x_window_system_translator.c"
 
 /**
  * Decodes the document model according to the given document type
@@ -59,16 +58,6 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
         if (r != 0) {
 
             decode_cybol(p0, p1, p2, p3, p4);
-        }
-    }
-
-    if (r == 0) {
-
-        compare_arrays(p5, p6, (void*) X_WINDOW_SYSTEM_MODEL, (void*) X_WINDOW_SYSTEM_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != 0) {
-
-            decode_x_window_system(p0, p1, p2, p3, p4);
         }
     }
 
@@ -128,16 +117,6 @@ void encode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
         if (r != 0) {
 
             encode_cybol(p0, p1, p2, p3, p4);
-        }
-    }
-
-    if (r == 0) {
-
-        compare_arrays(p5, p6, (void*) X_WINDOW_SYSTEM_MODEL, (void*) X_WINDOW_SYSTEM_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != 0) {
-
-            encode_x_window_system(p0, p1, p2, p3, p4, NULL_POINTER, NULL_POINTER);
         }
     }
 

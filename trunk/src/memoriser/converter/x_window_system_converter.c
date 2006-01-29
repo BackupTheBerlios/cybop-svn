@@ -1,5 +1,5 @@
 /*
- * $RCSfile: x_window_system_translator.c,v $
+ * $RCSfile: x_window_system_converter.c,v $
  *
  * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
  *
@@ -20,12 +20,12 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.12 $ $Date: 2006-01-28 00:40:29 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2006-01-29 01:47:55 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef X_WINDOW_SYSTEM_TRANSLATOR_SOURCE
-#define X_WINDOW_SYSTEM_TRANSLATOR_SOURCE
+#ifndef X_WINDOW_SYSTEM_CONVERTER_SOURCE
+#define X_WINDOW_SYSTEM_CONVERTER_SOURCE
 
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
@@ -34,6 +34,7 @@
 #include "../../globals/constants/name_constants.c"
 #include "../../globals/constants/structure_constants.c"
 #include "../../globals/variables/variables.c"
+#include "../../memoriser/basics/ui_basics.c"
 #include "../../memoriser/accessor.c"
 
 /**
@@ -49,198 +50,6 @@ void decode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
 }
 
 /**
- * Encodes the source compound model layout into x window system coordinates.
- *
- * @param p0 the cell position x (of the part)
- * @param p1 the cell position y
- * @param p2 the cell position z
- * @param p3 the cell size x (of the part)
- * @param p4 the cell size y
- * @param p5 the cell size z
- * @param p6 the free area position x (remaining space within the whole)
- * @param p7 the free area position y
- * @param p8 the free area position z
- * @param p9 the free area size x (remaining space within the whole)
- * @param p10 the free area size y
- * @param p11 the free area size z
- * @param p12 the layout cell
- * @param p13 the layout cell count
- */
-void encode_x_window_system_compass_layout(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
-    void* p6, void* p7, void* p8, void* p9, void* p10, void* p11,
-    void* p12, void* p13) {
-
-    int* cpx = (int*) p0;
-    int* cpy = (int*) p1;
-    int* cpz = (int*) p2;
-    int* csx = (int*) p3;
-    int* csy = (int*) p4;
-    int* csz = (int*) p5;
-    int* fapx = (int*) p6;
-    int* fapy = (int*) p7;
-    int* fapz = (int*) p8;
-    int* fasx = (int*) p9;
-    int* fasy = (int*) p10;
-    int* fasz = (int*) p11;
-
-    // The comparison result.
-    int r = 0;
-
-    if (r == 0) {
-
-        compare_arrays(p12, p13, (void*) NORTH_CELL_MODEL, (void*) NORTH_CELL_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != 0) {
-
-            // Set cell coordinates.
-            *cpx = *fapx;
-            *cpy = *fapy;
-            *cpz = *fapz;
-            *csx = *fasx;
-            *csy = 20;
-            *csz = *fasz;
-            // Set free area coordinates.
-            *fapy = *fapy + *csy;
-            *fasy = *fasy - *csy;
-        }
-    }
-
-    if (r == 0) {
-
-        compare_arrays(p12, p13, (void*) SOUTH_CELL_MODEL, (void*) SOUTH_CELL_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != 0) {
-
-            // Set cell coordinates.
-            *cpx = *fapx;
-            *cpy = (*fasy - 20);
-            *cpz = *fapz;
-            *csx = *fasx;
-            *csy = 20;
-            *csz = *fasz;
-            // Set free area coordinates.
-            *fasy = *fasy - *csy;
-        }
-    }
-
-    if (r == 0) {
-
-        compare_arrays(p12, p13, (void*) WEST_CELL_MODEL, (void*) WEST_CELL_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != 0) {
-
-            // Set cell coordinates.
-            *cpx = *fapx;
-            *cpy = *fapy;
-            *cpz = *fapz;
-            *csx = 20;
-            *csy = *fasy;
-            *csz = *fasz;
-            // Set free area coordinates.
-            *fapx = *fapx + *csx;
-            *fasx = *fasx - *csx;
-        }
-    }
-
-    if (r == 0) {
-
-        compare_arrays(p12, p13, (void*) EAST_CELL_MODEL, (void*) EAST_CELL_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != 0) {
-
-            // Set cell coordinates.
-            *cpx = (*fasx - 20);
-            *cpy = *fapy;
-            *cpz = *fapz;
-            *csx = 20;
-            *csy = *fasy;
-            *csz = *fasz;
-            // Set free area coordinates.
-            *fasx = *fasx - *csx;
-        }
-    }
-
-    if (r == 0) {
-
-        compare_arrays(p12, p13, (void*) CENTRE_CELL_MODEL, (void*) CENTRE_CELL_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != 0) {
-
-            // Set cell coordinates.
-            *cpx = *fapx;
-            *cpy = *fapy;
-            *cpz = *fapz;
-            *csx = *fasx;
-            *csy = *fasy;
-            *csz = *fasz;
-            // Set free area coordinates.
-            *fasx = *fasx - *fasx;
-            *fasy = *fasy - *fasy;
-            *fasz = *fasz - *fasz;
-        }
-    }
-}
-
-/**
- * Encodes the source compound model layout into x window system coordinates.
- *
- * @param p0 the cell position x (of the part)
- * @param p1 the cell position y
- * @param p2 the cell position z
- * @param p3 the cell size x (of the part)
- * @param p4 the cell size y
- * @param p5 the cell size z
- * @param p6 the free area position x (remaining space within the whole)
- * @param p7 the free area position y
- * @param p8 the free area position z
- * @param p9 the free area size x (remaining space within the whole)
- * @param p10 the free area size y
- * @param p11 the free area size z
- * @param p12 the original area position x (of the whole)
- * @param p13 the original area position y
- * @param p14 the original area position z
- * @param p15 the original area size x (of the whole)
- * @param p16 the original area size y
- * @param p17 the original area size z
- * @param p18 the layout cell
- * @param p19 the layout cell count
- * @param p20 the layout
- * @param p21 the layout count
- */
-void encode_x_window_system_layout(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
-    void* p6, void* p7, void* p8, void* p9, void* p10, void* p11,
-    void* p12, void* p13, void* p14, void* p15, void* p16, void* p17,
-    void* p18, void* p19, void* p20, void* p21) {
-
-    // The comparison result.
-    int r = 0;
-
-    if (r == 0) {
-
-        compare_arrays(p20, p21, (void*) COORDINATES_LAYOUT_MODEL, (void*) COORDINATES_LAYOUT_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != 0) {
-
-            // The position and size coordinates of the part are given directly
-            // in the CYBOL knowledge template. So nothing is to be done here.
-            // Nevertheless, this comparison is done in order to set the
-            // comparison flag to true, thus to avoid further comparisons below.
-        }
-    }
-
-    if (r == 0) {
-
-        compare_arrays(p20, p21, (void*) COMPASS_LAYOUT_MODEL, (void*) COMPASS_LAYOUT_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != 0) {
-
-            // Determine new position and size coordinates for part.
-            encode_x_window_system_compass_layout(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p18, p19);
-        }
-    }
-}
-
-/**
  * Encodes the source compound model into an x window system model.
  *
  * @param p0 the internal memory containing all x window system internals
@@ -252,6 +61,7 @@ void encode_x_window_system_layout(void* p0, void* p1, void* p2, void* p3, void*
  * @param p6 the source compound details count
  */
 void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
+/*??
 
     if (p4 != NULL_POINTER) {
 
@@ -315,7 +125,7 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
 
             // Get source whole size from details.
             get_compound_element_by_name(p5, p6,
-                (void*) GUI_SIZE_NAME, (void*) GUI_SIZE_NAME_COUNT,
+                (void*) UI_SIZE_NAME, (void*) UI_SIZE_NAME_COUNT,
                 (void*) &wsa, (void*) &wsac, (void*) &wsas,
                 (void*) &wsm, (void*) &wsmc, (void*) &wsms,
                 (void*) &wsd, (void*) &wsdc, (void*) &wsds);
@@ -354,7 +164,6 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
         void** d = &NULL_POINTER;
         void** dc = &NULL_POINTER;
         void** ds = &NULL_POINTER;
-
         // The source part layout.
         void** la = &NULL_POINTER;
         void** lac = &NULL_POINTER;
@@ -463,25 +272,25 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
 
             // Get source part layout from details.
             get_compound_element_by_name(*d, *dc,
-                (void*) GUI_LAYOUT_NAME, (void*) GUI_LAYOUT_NAME_COUNT,
+                (void*) UI_LAYOUT_NAME, (void*) UI_LAYOUT_NAME_COUNT,
                 (void*) &la, (void*) &lac, (void*) &las,
                 (void*) &lm, (void*) &lmc, (void*) &lms,
                 (void*) &ld, (void*) &ldc, (void*) &lds);
             // Get source part cell from details.
             get_compound_element_by_name(*d, *dc,
-                (void*) GUI_CELL_NAME, (void*) GUI_CELL_NAME_COUNT,
+                (void*) UI_CELL_NAME, (void*) UI_CELL_NAME_COUNT,
                 (void*) &ca, (void*) &cac, (void*) &cas,
                 (void*) &cm, (void*) &cmc, (void*) &cms,
                 (void*) &cd, (void*) &cdc, (void*) &cds);
             // Get source part position from details.
             get_compound_element_by_name(*d, *dc,
-                (void*) GUI_POSITION_NAME, (void*) GUI_POSITION_NAME_COUNT,
+                (void*) UI_POSITION_NAME, (void*) UI_POSITION_NAME_COUNT,
                 (void*) &pa, (void*) &pac, (void*) &pas,
                 (void*) &pm, (void*) &pmc, (void*) &pms,
                 (void*) &pd, (void*) &pdc, (void*) &pds);
             // Get source part size from details.
             get_compound_element_by_name(*d, *dc,
-                (void*) GUI_SIZE_NAME, (void*) GUI_SIZE_NAME_COUNT,
+                (void*) UI_SIZE_NAME, (void*) UI_SIZE_NAME_COUNT,
                 (void*) &sa, (void*) &sac, (void*) &sas,
                 (void*) &sm, (void*) &smc, (void*) &sms,
                 (void*) &sd, (void*) &sdc, (void*) &sds);
@@ -495,14 +304,14 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
             get(*sm, (void*) NUMBER_1_INTEGER, (void*) &smy, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
             get(*sm, (void*) NUMBER_2_INTEGER, (void*) &smz, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-            compare_arrays(*lm, *lmc, (void*) ROOT_LAYOUT_MODEL, (void*) ROOT_LAYOUT_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+            compare_arrays(*lm, *lmc, (void*) UI_ROOT_LAYOUT_MODEL, (void*) UI_ROOT_LAYOUT_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
             if (r == 0) {
 
                 // The source part is no root window.
 
                 // Calculate coordinates according to given layout.
-                encode_x_window_system_layout(
+                ui_basics_layout(
                     *pmx, *pmy, *pmz, *smx, *smy, *smz,
                     &fapx, &fapy, &fapz, &fasx, &fasy, &fasz,
                     &oapx, &oapy, &oapz, &oasx, &oasy, &oasz,
@@ -612,6 +421,7 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
                 }
 */
 
+/*??
             } else {
 
                 // The source part is a root window.
@@ -623,13 +433,13 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
 
                 // Get source part title from details.
                 get_compound_element_by_name(*d, *dc,
-                    (void*) GUI_TITLE_NAME, (void*) GUI_TITLE_NAME_COUNT,
+                    (void*) UI_TITLE_NAME, (void*) UI_TITLE_NAME_COUNT,
                     (void*) &ta, (void*) &tac, (void*) &tas,
                     (void*) &tm, (void*) &tmc, (void*) &tms,
                     (void*) &td, (void*) &tdc, (void*) &tds);
                 // Get source part icon from details.
                 get_compound_element_by_name(*d, *dc,
-                    (void*) GUI_ICON_NAME, (void*) GUI_ICON_NAME_COUNT,
+                    (void*) UI_ICON_NAME, (void*) UI_ICON_NAME_COUNT,
                     (void*) &ia, (void*) &iac, (void*) &ias,
                     (void*) &im, (void*) &imc, (void*) &ims,
                     (void*) &id, (void*) &idc, (void*) &ids);
@@ -689,7 +499,6 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
             d = &NULL_POINTER;
             dc = &NULL_POINTER;
             ds = &NULL_POINTER;
-
             // Reset source part layout.
             la = &NULL_POINTER;
             lac = &NULL_POINTER;
@@ -761,7 +570,8 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
 
         log_message_debug("Could not encode x window system. The source count is null.");
     }
+*/
 }
 
-/* X_WINDOW_SYSTEM_TRANSLATOR_SOURCE */
+/* X_WINDOW_SYSTEM_CONVERTER_SOURCE */
 #endif

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2006-01-02 11:56:01 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2006-01-29 01:47:54 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -300,52 +300,90 @@ static char* X_WINDOW_SYSTEM_MODEL = X_WINDOW_SYSTEM_MODEL_ARRAY;
 static int* X_WINDOW_SYSTEM_MODEL_COUNT = NUMBER_15_INTEGER_ARRAY;
 
 //
+// Shape models.
+//
+
+/** The rectangle shape model. */
+static char UI_RECTANGLE_SHAPE_MODEL_ARRAY[] = {'r', 'o', 'o', 't'};
+static char* UI_RECTANGLE_SHAPE_MODEL = UI_RECTANGLE_SHAPE_MODEL_ARRAY;
+static int* UI_RECTANGLE_SHAPE_MODEL_COUNT = NUMBER_4_INTEGER_ARRAY;
+
+/** The circle shape model. */
+static char UI_CIRCLE_SHAPE_MODEL_ARRAY[] = {'r', 'o', 'o', 't'};
+static char* UI_CIRCLE_SHAPE_MODEL = UI_CIRCLE_SHAPE_MODEL_ARRAY;
+static int* UI_CIRCLE_SHAPE_MODEL_COUNT = NUMBER_4_INTEGER_ARRAY;
+
+/** The polygon shape model. */
+static char UI_POLYGON_SHAPE_MODEL_ARRAY[] = {'r', 'o', 'o', 't'};
+static char* UI_POLYGON_SHAPE_MODEL = UI_POLYGON_SHAPE_MODEL_ARRAY;
+static int* UI_POLYGON_SHAPE_MODEL_COUNT = NUMBER_4_INTEGER_ARRAY;
+
+//
 // Layout models.
 //
 
-/** The root layout. */
-static char ROOT_LAYOUT_MODEL_ARRAY[] = {'r', 'o', 'o', 't'};
-static char* ROOT_LAYOUT_MODEL = ROOT_LAYOUT_MODEL_ARRAY;
-static int* ROOT_LAYOUT_MODEL_COUNT = NUMBER_4_INTEGER_ARRAY;
+/** The root layout model. */
+static char UI_ROOT_LAYOUT_MODEL_ARRAY[] = {'r', 'o', 'o', 't'};
+static char* UI_ROOT_LAYOUT_MODEL = UI_ROOT_LAYOUT_MODEL_ARRAY;
+static int* UI_ROOT_LAYOUT_MODEL_COUNT = NUMBER_4_INTEGER_ARRAY;
 
-/** The coordinates layout. */
-static char COORDINATES_LAYOUT_MODEL_ARRAY[] = {'c', 'o', 'o', 'r', 'd', 'i', 'n', 'a', 't', 'e', 's'};
-static char* COORDINATES_LAYOUT_MODEL = COORDINATES_LAYOUT_MODEL_ARRAY;
-static int* COORDINATES_LAYOUT_MODEL_COUNT = NUMBER_11_INTEGER_ARRAY;
+/** The coordinates layout model. */
+static char UI_COORDINATES_LAYOUT_MODEL_ARRAY[] = {'c', 'o', 'o', 'r', 'd', 'i', 'n', 'a', 't', 'e', 's'};
+static char* UI_COORDINATES_LAYOUT_MODEL = UI_COORDINATES_LAYOUT_MODEL_ARRAY;
+static int* UI_COORDINATES_LAYOUT_MODEL_COUNT = NUMBER_11_INTEGER_ARRAY;
 
-/** The compass layout. */
-static char COMPASS_LAYOUT_MODEL_ARRAY[] = {'c', 'o', 'm', 'p', 'a', 's', 's'};
-static char* COMPASS_LAYOUT_MODEL = COMPASS_LAYOUT_MODEL_ARRAY;
-static int* COMPASS_LAYOUT_MODEL_COUNT = NUMBER_7_INTEGER_ARRAY;
+/** The compass layout model. */
+static char UI_COMPASS_LAYOUT_MODEL_ARRAY[] = {'c', 'o', 'm', 'p', 'a', 's', 's'};
+static char* UI_COMPASS_LAYOUT_MODEL = UI_COMPASS_LAYOUT_MODEL_ARRAY;
+static int* UI_COMPASS_LAYOUT_MODEL_COUNT = NUMBER_7_INTEGER_ARRAY;
 
 //
 // Compass layout cell models.
 //
 
-/** The compass layout north cell. */
-static char NORTH_CELL_MODEL_ARRAY[] = {'n', 'o', 'r', 't', 'h'};
-static char* NORTH_CELL_MODEL = NORTH_CELL_MODEL_ARRAY;
-static int* NORTH_CELL_MODEL_COUNT = NUMBER_5_INTEGER_ARRAY;
+/** The compass layout north cell model. */
+static char UI_NORTH_CELL_MODEL_ARRAY[] = {'n', 'o', 'r', 't', 'h'};
+static char* UI_NORTH_CELL_MODEL = UI_NORTH_CELL_MODEL_ARRAY;
+static int* UI_NORTH_CELL_MODEL_COUNT = NUMBER_5_INTEGER_ARRAY;
 
-/** The compass layout south cell. */
-static char SOUTH_CELL_MODEL_ARRAY[] = {'s', 'o', 'u', 't', 'h'};
-static char* SOUTH_CELL_MODEL = SOUTH_CELL_MODEL_ARRAY;
-static int* SOUTH_CELL_MODEL_COUNT = NUMBER_5_INTEGER_ARRAY;
+/** The compass layout south cell model. */
+static char UI_SOUTH_CELL_MODEL_ARRAY[] = {'s', 'o', 'u', 't', 'h'};
+static char* UI_SOUTH_CELL_MODEL = UI_SOUTH_CELL_MODEL_ARRAY;
+static int* UI_SOUTH_CELL_MODEL_COUNT = NUMBER_5_INTEGER_ARRAY;
 
-/** The compass layout west cell. */
-static char WEST_CELL_MODEL_ARRAY[] = {'w', 'e', 's', 't'};
-static char* WEST_CELL_MODEL = WEST_CELL_MODEL_ARRAY;
-static int* WEST_CELL_MODEL_COUNT = NUMBER_4_INTEGER_ARRAY;
+/** The compass layout west cell model. */
+static char UI_WEST_CELL_MODEL_ARRAY[] = {'w', 'e', 's', 't'};
+static char* UI_WEST_CELL_MODEL = UI_WEST_CELL_MODEL_ARRAY;
+static int* UI_WEST_CELL_MODEL_COUNT = NUMBER_4_INTEGER_ARRAY;
 
-/** The compass layout east cell. */
-static char EAST_CELL_MODEL_ARRAY[] = {'e', 'a', 's', 't'};
-static char* EAST_CELL_MODEL = EAST_CELL_MODEL_ARRAY;
-static int* EAST_CELL_MODEL_COUNT = NUMBER_4_INTEGER_ARRAY;
+/** The compass layout east cell model. */
+static char UI_EAST_CELL_MODEL_ARRAY[] = {'e', 'a', 's', 't'};
+static char* UI_EAST_CELL_MODEL = UI_EAST_CELL_MODEL_ARRAY;
+static int* UI_EAST_CELL_MODEL_COUNT = NUMBER_4_INTEGER_ARRAY;
 
-/** The compass layout centre cell. */
-static char CENTRE_CELL_MODEL_ARRAY[] = {'c', 'e', 'n', 't', 'r', 'e'};
-static char* CENTRE_CELL_MODEL = CENTRE_CELL_MODEL_ARRAY;
-static int* CENTRE_CELL_MODEL_COUNT = NUMBER_6_INTEGER_ARRAY;
+/** The compass layout centre cell model. */
+static char UI_CENTRE_CELL_MODEL_ARRAY[] = {'c', 'e', 'n', 't', 'r', 'e'};
+static char* UI_CENTRE_CELL_MODEL = UI_CENTRE_CELL_MODEL_ARRAY;
+static int* UI_CENTRE_CELL_MODEL_COUNT = NUMBER_6_INTEGER_ARRAY;
+
+//
+// Border models.
+//
+
+/** The line border model. */
+static char UI_LINE_BORDER_MODEL_ARRAY[] = {'l', 'i', 'n', 'e'};
+static char* UI_LINE_BORDER_MODEL = UI_LINE_BORDER_MODEL_ARRAY;
+static int* UI_LINE_BORDER_MODEL_COUNT = NUMBER_4_INTEGER_ARRAY;
+
+/** The round line border model. */
+static char UI_ROUND_LINE_BORDER_MODEL_ARRAY[] = {'r', 'o', 'u', 'n', 'd'};
+static char* UI_ROUND_LINE_BORDER_MODEL = UI_ROUND_LINE_BORDER_MODEL_ARRAY;
+static int* UI_ROUND_LINE_BORDER_MODEL_COUNT = NUMBER_5_INTEGER_ARRAY;
+
+/** The double line border model. */
+static char UI_DOUBLE_LINE_BORDER_MODEL_ARRAY[] = {'d', 'o', 'u', 'b', 'l', 'e'};
+static char* UI_DOUBLE_LINE_BORDER_MODEL = UI_DOUBLE_LINE_BORDER_MODEL_ARRAY;
+static int* UI_DOUBLE_LINE_BORDER_MODEL_COUNT = NUMBER_6_INTEGER_ARRAY;
 
 //
 // Opcodes.

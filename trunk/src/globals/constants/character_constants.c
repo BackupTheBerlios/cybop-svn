@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2006-01-28 00:40:28 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2006-01-29 01:47:54 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -690,8 +690,8 @@ static char* LATIN_LETTER_DENTAL_CLICK_CHARACTER = LATIN_LETTER_DENTAL_CLICK_CHA
  * U+0296 LATIN LETTER INVERTED GLOTTAL STOP
  * U+2225 PARALLEL TO
  */
-static char LATIN_LETTER_DENTAL_CLICK_CHARACTER_ARRAY[] = {449};
-static char* LATIN_LETTER_DENTAL_CLICK_CHARACTER = LATIN_LETTER_DENTAL_CLICK_CHARACTER_ARRAY;
+static char LATIN_LETTER_LATERAL_CLICK_CHARACTER_ARRAY[] = {449};
+static char* LATIN_LETTER_LATERAL_CLICK_CHARACTER = LATIN_LETTER_LATERAL_CLICK_CHARACTER_ARRAY;
 
 //
 // Unicode block: Box Drawing (9472 - 9599).

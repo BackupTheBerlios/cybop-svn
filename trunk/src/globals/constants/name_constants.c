@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.12 $ $Date: 2006-01-02 11:56:01 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2006-01-29 01:47:54 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -31,97 +31,100 @@
 #include "../../globals/constants/integer_constants.c"
 
 //
+// General cybol names.
+//
+
+/** The super properties name. */
+static char SUPER_PROPERTIES_NAME_ARRAY[] = {'s', 'u', 'p', 'e', 'r'};
+static char* SUPER_PROPERTIES_NAME = SUPER_PROPERTIES_NAME_ARRAY;
+static int* SUPER_PROPERTIES_NAME_COUNT = NUMBER_5_INTEGER_ARRAY;
+
+//
+// User interface (ui) names.
+//
+
+/** The shape name. */
+static char UI_SHAPE_NAME_ARRAY[] = {'s', 'h', 'a', 'p', 'e'};
+static char* UI_SHAPE_NAME = UI_SHAPE_NAME_ARRAY;
+static int* UI_SHAPE_NAME_COUNT = NUMBER_5_INTEGER_ARRAY;
+
+/** The layout name. */
+static char UI_LAYOUT_NAME_ARRAY[] = {'l', 'a', 'y', 'o', 'u', 't'};
+static char* UI_LAYOUT_NAME = UI_LAYOUT_NAME_ARRAY;
+static int* UI_LAYOUT_NAME_COUNT = NUMBER_6_INTEGER_ARRAY;
+
+/** The cell name. */
+static char UI_CELL_NAME_ARRAY[] = {'c', 'e', 'l', 'l'};
+static char* UI_CELL_NAME = UI_CELL_NAME_ARRAY;
+static int* UI_CELL_NAME_COUNT = NUMBER_4_INTEGER_ARRAY;
+
+/** The position name. */
+static char UI_POSITION_NAME_ARRAY[] = {'p', 'o', 's', 'i', 't', 'i', 'o', 'n'};
+static char* UI_POSITION_NAME = UI_POSITION_NAME_ARRAY;
+static int* UI_POSITION_NAME_COUNT = NUMBER_8_INTEGER_ARRAY;
+
+/** The size name. */
+static char UI_SIZE_NAME_ARRAY[] = {'s', 'i', 'z', 'e'};
+static char* UI_SIZE_NAME = UI_SIZE_NAME_ARRAY;
+static int* UI_SIZE_NAME_COUNT = NUMBER_4_INTEGER_ARRAY;
+
+/** The background colour name. */
+static char UI_BACKGROUND_NAME_ARRAY[] = {'b', 'a', 'c', 'k', 'g', 'r', 'o', 'u', 'n', 'd'};
+static char* UI_BACKGROUND_NAME = UI_BACKGROUND_NAME_ARRAY;
+static int* UI_BACKGROUND_NAME_COUNT = NUMBER_10_INTEGER_ARRAY;
+
+/** The foreground colour name. */
+static char UI_FOREGROUND_NAME_ARRAY[] = {'f', 'o', 'r', 'e', 'g', 'r', 'o', 'u', 'n', 'd'};
+static char* UI_FOREGROUND_NAME = UI_FOREGROUND_NAME_ARRAY;
+static int* UI_FOREGROUND_NAME_COUNT = NUMBER_10_INTEGER_ARRAY;
+
+/** The border name. */
+static char UI_BORDER_NAME_ARRAY[] = {'b', 'o', 'r', 'd', 'e', 'r'};
+static char* UI_BORDER_NAME = UI_BORDER_NAME_ARRAY;
+static int* UI_BORDER_NAME_COUNT = NUMBER_6_INTEGER_ARRAY;
+
+//
 // Textual user interface (tui) names.
 //
 
-/** The position name. */
-static char TUI_POSITION_NAME_ARRAY[] = {'p', 'o', 's', 'i', 't', 'i', 'o', 'n'};
-static char* TUI_POSITION_NAME = TUI_POSITION_NAME_ARRAY;
-static int* TUI_POSITION_NAME_COUNT = NUMBER_8_INTEGER_ARRAY;
-
-/** The size name. */
-static char TUI_SIZE_NAME_ARRAY[] = {'s', 'i', 'z', 'e'};
-static char* TUI_SIZE_NAME = TUI_SIZE_NAME_ARRAY;
-static int* TUI_SIZE_NAME_COUNT = NUMBER_4_INTEGER_ARRAY;
-
-/** The background colour name. */
-static char TUI_BACKGROUND_NAME_ARRAY[] = {'b', 'a', 'c', 'k', 'g', 'r', 'o', 'u', 'n', 'd'};
-static char* TUI_BACKGROUND_NAME = TUI_BACKGROUND_NAME_ARRAY;
-static int* TUI_BACKGROUND_NAME_COUNT = NUMBER_10_INTEGER_ARRAY;
-
-/** The foreground colour name. */
-static char TUI_FOREGROUND_NAME_ARRAY[] = {'f', 'o', 'r', 'e', 'g', 'r', 'o', 'u', 'n', 'd'};
-static char* TUI_FOREGROUND_NAME = TUI_FOREGROUND_NAME_ARRAY;
-static int* TUI_FOREGROUND_NAME_COUNT = NUMBER_10_INTEGER_ARRAY;
-
 /** The hidden property name. */
-static char TUI_HIDDEN_NAME_ARRAY[] = {'h', 'i', 'd', 'd', 'e', 'n'};
-static char* TUI_HIDDEN_NAME = TUI_HIDDEN_NAME_ARRAY;
-static int* TUI_HIDDEN_NAME_COUNT = NUMBER_6_INTEGER_ARRAY;
+static char UI_HIDDEN_NAME_ARRAY[] = {'h', 'i', 'd', 'd', 'e', 'n'};
+static char* UI_HIDDEN_NAME = UI_HIDDEN_NAME_ARRAY;
+static int* UI_HIDDEN_NAME_COUNT = NUMBER_6_INTEGER_ARRAY;
 
 /** The inverse property name. */
-static char TUI_INVERSE_NAME_ARRAY[] = {'i', 'n', 'v', 'e', 'r', 's', 'e'};
-static char* TUI_INVERSE_NAME = TUI_INVERSE_NAME_ARRAY;
-static int* TUI_INVERSE_NAME_COUNT = NUMBER_7_INTEGER_ARRAY;
+static char UI_INVERSE_NAME_ARRAY[] = {'i', 'n', 'v', 'e', 'r', 's', 'e'};
+static char* UI_INVERSE_NAME = UI_INVERSE_NAME_ARRAY;
+static int* UI_INVERSE_NAME_COUNT = NUMBER_7_INTEGER_ARRAY;
 
 /** The blink property name. */
-static char TUI_BLINK_NAME_ARRAY[] = {'b', 'l', 'i', 'n', 'k'};
-static char* TUI_BLINK_NAME = TUI_BLINK_NAME_ARRAY;
-static int* TUI_BLINK_NAME_COUNT = NUMBER_5_INTEGER_ARRAY;
+static char UI_BLINK_NAME_ARRAY[] = {'b', 'l', 'i', 'n', 'k'};
+static char* UI_BLINK_NAME = UI_BLINK_NAME_ARRAY;
+static int* UI_BLINK_NAME_COUNT = NUMBER_5_INTEGER_ARRAY;
 
 /** The underline property name. */
-static char TUI_UNDERLINE_NAME_ARRAY[] = {'u', 'n', 'd', 'e', 'r', 'l', 'i', 'n', 'e'};
-static char* TUI_UNDERLINE_NAME = TUI_UNDERLINE_NAME_ARRAY;
-static int* TUI_UNDERLINE_NAME_COUNT = NUMBER_9_INTEGER_ARRAY;
+static char UI_UNDERLINE_NAME_ARRAY[] = {'u', 'n', 'd', 'e', 'r', 'l', 'i', 'n', 'e'};
+static char* UI_UNDERLINE_NAME = UI_UNDERLINE_NAME_ARRAY;
+static int* UI_UNDERLINE_NAME_COUNT = NUMBER_9_INTEGER_ARRAY;
 
 /** The bold property name. */
-static char TUI_BOLD_NAME_ARRAY[] = {'b', 'o', 'l', 'd'};
-static char* TUI_BOLD_NAME = TUI_BOLD_NAME_ARRAY;
-static int* TUI_BOLD_NAME_COUNT = NUMBER_4_INTEGER_ARRAY;
+static char UI_BOLD_NAME_ARRAY[] = {'b', 'o', 'l', 'd'};
+static char* UI_BOLD_NAME = UI_BOLD_NAME_ARRAY;
+static int* UI_BOLD_NAME_COUNT = NUMBER_4_INTEGER_ARRAY;
 
 //
 // Graphical user interface (gui) names.
 //
 
-/** The layout name. */
-static char GUI_LAYOUT_NAME_ARRAY[] = {'l', 'a', 'y', 'o', 'u', 't'};
-static char* GUI_LAYOUT_NAME = GUI_LAYOUT_NAME_ARRAY;
-static int* GUI_LAYOUT_NAME_COUNT = NUMBER_6_INTEGER_ARRAY;
-
-/** The cell name. */
-static char GUI_CELL_NAME_ARRAY[] = {'c', 'e', 'l', 'l'};
-static char* GUI_CELL_NAME = GUI_CELL_NAME_ARRAY;
-static int* GUI_CELL_NAME_COUNT = NUMBER_4_INTEGER_ARRAY;
-
-/** The position name. */
-static char GUI_POSITION_NAME_ARRAY[] = {'p', 'o', 's', 'i', 't', 'i', 'o', 'n'};
-static char* GUI_POSITION_NAME = GUI_POSITION_NAME_ARRAY;
-static int* GUI_POSITION_NAME_COUNT = NUMBER_8_INTEGER_ARRAY;
-
-/** The size name. */
-static char GUI_SIZE_NAME_ARRAY[] = {'s', 'i', 'z', 'e'};
-static char* GUI_SIZE_NAME = GUI_SIZE_NAME_ARRAY;
-static int* GUI_SIZE_NAME_COUNT = NUMBER_4_INTEGER_ARRAY;
-
-/** The background colour name. */
-static char GUI_BACKGROUND_NAME_ARRAY[] = {'b', 'a', 'c', 'k', 'g', 'r', 'o', 'u', 'n', 'd'};
-static char* GUI_BACKGROUND_NAME = GUI_BACKGROUND_NAME_ARRAY;
-static int* GUI_BACKGROUND_NAME_COUNT = NUMBER_10_INTEGER_ARRAY;
-
-/** The foreground colour name. */
-static char GUI_FOREGROUND_NAME_ARRAY[] = {'f', 'o', 'r', 'e', 'g', 'r', 'o', 'u', 'n', 'd'};
-static char* GUI_FOREGROUND_NAME = GUI_FOREGROUND_NAME_ARRAY;
-static int* GUI_FOREGROUND_NAME_COUNT = NUMBER_10_INTEGER_ARRAY;
-
 /** The title name. */
-static char GUI_TITLE_NAME_ARRAY[] = {'t', 'i', 't', 'l', 'e'};
-static char* GUI_TITLE_NAME = GUI_TITLE_NAME_ARRAY;
-static int* GUI_TITLE_NAME_COUNT = NUMBER_5_INTEGER_ARRAY;
+static char UI_TITLE_NAME_ARRAY[] = {'t', 'i', 't', 'l', 'e'};
+static char* UI_TITLE_NAME = UI_TITLE_NAME_ARRAY;
+static int* UI_TITLE_NAME_COUNT = NUMBER_5_INTEGER_ARRAY;
 
 /** The icon name. */
-static char GUI_ICON_NAME_ARRAY[] = {'i', 'c', 'o', 'n'};
-static char* GUI_ICON_NAME = GUI_ICON_NAME_ARRAY;
-static int* GUI_ICON_NAME_COUNT = NUMBER_4_INTEGER_ARRAY;
+static char UI_ICON_NAME_ARRAY[] = {'i', 'c', 'o', 'n'};
+static char* UI_ICON_NAME = UI_ICON_NAME_ARRAY;
+static int* UI_ICON_NAME_COUNT = NUMBER_4_INTEGER_ARRAY;
 
 /** The expose command name. */
 static char GUI_EXPOSE_COMMAND_NAME_ARRAY[] = {'e', 'x', 'p', 'o', 's', 'e'};

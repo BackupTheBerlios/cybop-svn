@@ -1,5 +1,5 @@
 /*
- * $RCSfile: linux_console_converter.c,v $
+ * $RCSfile: user_interface_converter.c,v $
  *
  * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
  *
@@ -20,27 +20,30 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2006-01-28 00:40:28 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2006-01-29 01:47:55 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef LINUX_CONSOLE_CONVERTER_SOURCE
-#define LINUX_CONSOLE_CONVERTER_SOURCE
+#ifndef USER_INTERFACE_CONVERTER_SOURCE
+#define USER_INTERFACE_CONVERTER_SOURCE
 
 #include "../../globals/constants/abstraction_constants.c"
-#include "../../globals/constants/boolean_constants.c"
-#include "../../globals/constants/character_constants.c"
 #include "../../globals/constants/control_sequence_constants.c"
 #include "../../globals/constants/log_constants.c"
+#include "../../globals/constants/model_constants.c"
 #include "../../globals/constants/name_constants.c"
-#include "../../globals/constants/structure_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../globals/variables/variables.c"
+/*??
+#include "../../globals/constants/boolean_constants.c"
+#include "../../globals/constants/character_constants.c"
+#include "../../globals/constants/structure_constants.c"
 #include "../../memoriser/accessor.c"
 #include "../../memoriser/mapper.c"
+*/
 
 /**
- * Serialises a linux console character.
+ * Serialises a user interface character for the linux console.
  *
  * @param p0 the destination terminal control sequences (Hand over as reference!)
  * @param p1 the destination count
@@ -57,7 +60,7 @@
  * @param p12 the bold property
  * @param p13 the character property
  */
-void serialise_linux_console_character(void* p0, void* p1, void* p2,
+void serialise_user_interface_character_linux_console(void* p0, void* p1, void* p2,
     void* p3, void* p4, void* p5,
     void* p6, void* p7, void* p8, void* p9,
     void* p10, void* p11, void* p12, void* p13) {
@@ -349,82 +352,479 @@ void serialise_linux_console_character(void* p0, void* p1, void* p2,
 }
 
 /**
- * Serialises a linux console rectangle border.
+ * Serialises a user interface rectangle border for the linux console.
  *
- * @param p0 the destination terminal control sequences (Hand over as reference!)
- * @param p1 the destination count
- * @param p2 the destination size
- * @param p3 the position x coordinate
- * @param p4 the position y coordinate
- * @param p5 the position z coordinate
- * @param p6 the size x coordinate
- * @param p7 the size y coordinate
- * @param p8 the size z coordinate
- * @param p6 the background
- * @param p7 the foreground
- * @param p7 the border
+ * @param p0 the horizontal character
+ * @param p1 the vertical character
+ * @param p2 the left top
+ * @param p3 the right top
+ * @param p4 the left bottom
+ * @param p5 the right bottom
+ * @param p6 the border
  * @param p7 the border count
- * @param p8 the hidden property
- * @param p9 the inverse property
- * @param p10 the blink property
- * @param p11 the underline property
- * @param p12 the bold property
- * @param p13 the character abstraction
- * @param p13 the character abstraction count
- * @param p13 the character
- * @param p13 the character count
- ******
- * @param p13 the horizontal character
- * @param p13 the vertical character
- * @param p13 the left top
- * @param p13 the right top
- * @param p13 the left bottom
- * @param p13 the right bottom
  */
-void serialise_linux_console_rectangle_border(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void serialise_user_interface_rectangle_border_linux_console(void* p0, void* p1,
+    void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
 
     // The comparison result.
     int r = 0;
 
-    compare_arrays(p10, p11, (void*) LINE_BORDER_MODEL_ABSTRACTION, (void*) LINE_BORDER_MODEL_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+    compare_arrays(p6, p7, (void*) UI_LINE_BORDER_MODEL, (void*) UI_LINE_BORDER_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
     if (r != 0) {
 
-        set_array_elements(p3, (void*) NUMBER_1_INTEGER, (void*) BOX_DRAWINGS_LIGHT_HORIZONTAL_CHARACTER, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
-        set_array_elements(p4, (void*) NUMBER_1_INTEGER, (void*) BOX_DRAWINGS_LIGHT_VERTICAL_CHARACTER, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
-        set_array_elements(p5, (void*) NUMBER_1_INTEGER, (void*) BOX_DRAWINGS_LIGHT_DOWN_AND_RIGHT_CHARACTER, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
-        set_array_elements(p6, (void*) NUMBER_1_INTEGER, (void*) BOX_DRAWINGS_LIGHT_DOWN_AND_LEFT_CHARACTER, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
-        set_array_elements(p7, (void*) NUMBER_1_INTEGER, (void*) BOX_DRAWINGS_LIGHT_UP_AND_RIGHT_CHARACTER, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
-        set_array_elements(p8, (void*) NUMBER_1_INTEGER, (void*) BOX_DRAWINGS_LIGHT_UP_AND_LEFT_CHARACTER, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
+        set_array_elements(p0, (void*) NUMBER_1_INTEGER, (void*) BOX_DRAWINGS_LIGHT_HORIZONTAL_CHARACTER, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
+        set_array_elements(p1, (void*) NUMBER_1_INTEGER, (void*) BOX_DRAWINGS_LIGHT_VERTICAL_CHARACTER, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
+        set_array_elements(p2, (void*) NUMBER_1_INTEGER, (void*) BOX_DRAWINGS_LIGHT_DOWN_AND_RIGHT_CHARACTER, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
+        set_array_elements(p3, (void*) NUMBER_1_INTEGER, (void*) BOX_DRAWINGS_LIGHT_DOWN_AND_LEFT_CHARACTER, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
+        set_array_elements(p4, (void*) NUMBER_1_INTEGER, (void*) BOX_DRAWINGS_LIGHT_UP_AND_RIGHT_CHARACTER, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
+        set_array_elements(p5, (void*) NUMBER_1_INTEGER, (void*) BOX_DRAWINGS_LIGHT_UP_AND_LEFT_CHARACTER, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
     }
 
-    compare_arrays(p10, p11, (void*) ROUND_LINE_BORDER_MODEL_ABSTRACTION, (void*) ROUND_LINE_BORDER_MODEL_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+    compare_arrays(p6, p7, (void*) UI_ROUND_LINE_BORDER_MODEL, (void*) UI_ROUND_LINE_BORDER_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
     if (r != 0) {
 
-        set_array_elements(p3, (void*) NUMBER_1_INTEGER, (void*) BOX_DRAWINGS_LIGHT_HORIZONTAL_CHARACTER, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
-        set_array_elements(p4, (void*) NUMBER_1_INTEGER, (void*) BOX_DRAWINGS_LIGHT_VERTICAL_CHARACTER, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
-        set_array_elements(p5, (void*) NUMBER_1_INTEGER, (void*) BOX_DRAWINGS_LIGHT_ARC_DOWN_AND_RIGHT_CHARACTER, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
-        set_array_elements(p6, (void*) NUMBER_1_INTEGER, (void*) BOX_DRAWINGS_LIGHT_ARC_DOWN_AND_LEFT_CHARACTER, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
-        set_array_elements(p7, (void*) NUMBER_1_INTEGER, (void*) BOX_DRAWINGS_LIGHT_ARC_UP_AND_LEFT_CHARACTER, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
-        set_array_elements(p8, (void*) NUMBER_1_INTEGER, (void*) BOX_DRAWINGS_LIGHT_ARC_UP_AND_RIGHT_CHARACTER, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
+        set_array_elements(p0, (void*) NUMBER_1_INTEGER, (void*) BOX_DRAWINGS_LIGHT_HORIZONTAL_CHARACTER, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
+        set_array_elements(p1, (void*) NUMBER_1_INTEGER, (void*) BOX_DRAWINGS_LIGHT_VERTICAL_CHARACTER, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
+        set_array_elements(p2, (void*) NUMBER_1_INTEGER, (void*) BOX_DRAWINGS_LIGHT_ARC_DOWN_AND_RIGHT_CHARACTER, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
+        set_array_elements(p3, (void*) NUMBER_1_INTEGER, (void*) BOX_DRAWINGS_LIGHT_ARC_DOWN_AND_LEFT_CHARACTER, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
+        set_array_elements(p4, (void*) NUMBER_1_INTEGER, (void*) BOX_DRAWINGS_LIGHT_ARC_UP_AND_LEFT_CHARACTER, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
+        set_array_elements(p5, (void*) NUMBER_1_INTEGER, (void*) BOX_DRAWINGS_LIGHT_ARC_UP_AND_RIGHT_CHARACTER, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
     }
 
-    compare_arrays(p10, p11, (void*) DOUBLE_LINE_BORDER_MODEL_ABSTRACTION, (void*) DOUBLE_LINE_BORDER_MODEL_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+    compare_arrays(p6, p7, (void*) UI_DOUBLE_LINE_BORDER_MODEL, (void*) UI_DOUBLE_LINE_BORDER_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
     if (r != 0) {
 
-        set_array_elements(p3, (void*) NUMBER_1_INTEGER, (void*) BOX_DRAWINGS_DOUBLE_HORIZONTAL_CHARACTER, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
-        set_array_elements(p4, (void*) NUMBER_1_INTEGER, (void*) BOX_DRAWINGS_DOUBLE_VERTICAL_CHARACTER, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
-        set_array_elements(p5, (void*) NUMBER_1_INTEGER, (void*) BOX_DRAWINGS_DOUBLE_DOWN_AND_RIGHT_CHARACTER, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
-        set_array_elements(p6, (void*) NUMBER_1_INTEGER, (void*) BOX_DRAWINGS_DOUBLE_DOWN_AND_LEFT_CHARACTER, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
-        set_array_elements(p7, (void*) NUMBER_1_INTEGER, (void*) BOX_DRAWINGS_DOUBLE_UP_AND_RIGHT_CHARACTER, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
-        set_array_elements(p8, (void*) NUMBER_1_INTEGER, (void*) BOX_DRAWINGS_DOUBLE_UP_AND_LEFT_CHARACTER, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
+        set_array_elements(p0, (void*) NUMBER_1_INTEGER, (void*) BOX_DRAWINGS_DOUBLE_HORIZONTAL_CHARACTER, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
+        set_array_elements(p1, (void*) NUMBER_1_INTEGER, (void*) BOX_DRAWINGS_DOUBLE_VERTICAL_CHARACTER, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
+        set_array_elements(p2, (void*) NUMBER_1_INTEGER, (void*) BOX_DRAWINGS_DOUBLE_DOWN_AND_RIGHT_CHARACTER, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
+        set_array_elements(p3, (void*) NUMBER_1_INTEGER, (void*) BOX_DRAWINGS_DOUBLE_DOWN_AND_LEFT_CHARACTER, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
+        set_array_elements(p4, (void*) NUMBER_1_INTEGER, (void*) BOX_DRAWINGS_DOUBLE_UP_AND_RIGHT_CHARACTER, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
+        set_array_elements(p5, (void*) NUMBER_1_INTEGER, (void*) BOX_DRAWINGS_DOUBLE_UP_AND_LEFT_CHARACTER, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
     }
 }
 
 /**
- * Serialises a linux console layout.
+ * Serialises a user interface rectangle for the x window system.
+ *
+ * @param p0 the destination terminal control sequences (Hand over as reference!)
+ * @param p1 the destination count
+ * @param p2 the destination size
+ * @param p3 the character
+ * @param p4 the character count
+ * @param p5 the hidden property
+ * @param p6 the inverse property
+ * @param p7 the blink property
+ * @param p8 the underline property
+ * @param p9 the bold property
+ * @param p10 the background
+ * @param p11 the foreground
+ * @param p12 the position x coordinate
+ * @param p13 the position y coordinate
+ * @param p14 the position z coordinate
+ * @param p15 the size x coordinate
+ * @param p16 the size y coordinate
+ * @param p17 the size z coordinate
+ * @param p18 the border
+ * @param p19 the border count
+ */
+void serialise_user_interface_rectangle_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
+    void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11,
+    void* p12, void* p13, void* p14, void* p15, void* p16, void* p17, void* p18, void* p19) {
+}
+
+/**
+ * Serialises a user interface rectangle for the linux console.
+ *
+ * @param p0 the destination terminal control sequences (Hand over as reference!)
+ * @param p1 the destination count
+ * @param p2 the destination size
+ * @param p3 the character
+ * @param p4 the character count
+ * @param p5 the hidden property
+ * @param p6 the inverse property
+ * @param p7 the blink property
+ * @param p8 the underline property
+ * @param p9 the bold property
+ * @param p10 the background
+ * @param p11 the foreground
+ * @param p12 the position x coordinate
+ * @param p13 the position y coordinate
+ * @param p14 the position z coordinate
+ * @param p15 the size x coordinate
+ * @param p16 the size y coordinate
+ * @param p17 the size z coordinate
+ * @param p18 the border
+ * @param p19 the border count
+ */
+void serialise_user_interface_rectangle_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4,
+    void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11,
+    void* p12, void* p13, void* p14, void* p15, void* p16, void* p17, void* p18, void* p19) {
+
+    if (p17 != NULL_POINTER) {
+
+        int* sz = (int*) p17;
+
+        if (p16 != NULL_POINTER) {
+
+            int* sy = (int*) p16;
+
+            if (p15 != NULL_POINTER) {
+
+                int* sx = (int*) p15;
+
+                if (p14 != NULL_POINTER) {
+
+                    int* pz = (int*) p14;
+
+                    if (p13 != NULL_POINTER) {
+
+                        int* py = (int*) p13;
+
+                        if (p12 != NULL_POINTER) {
+
+                            int* px = (int*) p12;
+
+                            if (p4 != NULL_POINTER) {
+
+                                int* cc = (int*) p4;
+
+                                // The horizontal character.
+                                char hc = *SPACE_CHARACTER;
+                                // The vertical character.
+                                char vc = *SPACE_CHARACTER;
+                                // The left top character.
+                                char ltc = *SPACE_CHARACTER;
+                                // The right top character.
+                                char rtc = *SPACE_CHARACTER;
+                                // The left bottom character.
+                                char lbc = *SPACE_CHARACTER;
+                                // The right bottom character.
+                                char rbc = *SPACE_CHARACTER;
+
+                                // Determine border characters.
+                                serialise_user_interface_rectangle_border_linux_console(&hc, &vc, &ltc, &rtc, &lbc, &rbc, p18, p19);
+
+                                // The z loop count.
+                                int z = *pz;
+                                // The y loop count.
+                                int y = *py;
+                                // The x loop count.
+                                int x = *px;
+                                // The z loop limit as sum of position and size.
+                                int zl = *pz + *sz;
+                                // The y loop limit as sum of position and size.
+                                int yl = *py + *sy;
+                                // The x loop limit as sum of position and size.
+                                int xl = *px + *sx;
+
+                                // The character index.
+                                int ci = 0;
+                                // The character.
+                                void* c = NULL_POINTER;
+
+                                while (1) {
+
+                                    if (z >= zl) {
+
+                                        break;
+                                    }
+
+                                    while (1) {
+
+                                        if (y >= yl) {
+
+                                            break;
+                                        }
+
+                                        while (1) {
+
+                                            if (x >= xl) {
+
+                                                break;
+                                            }
+
+                                            if (p18 == NULL_POINTER) {
+
+                                                // A border is NOT given.
+
+                                                // Calculate character index.
+                                                ci = x - *px;
+
+                                                if (ci < *cc) {
+
+                                                    // Get character value at position x.
+                                                    get(p3, (void*) &ci, (void*) &c, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+                                                }
+
+                                                // Serialise character using escape codes.
+                                                serialise_user_interface_character_linux_console(p0, p1, p2, &x, &y, &z,
+                                                    p10, p11, p5, p6, p7, p8, p9, c);
+
+                                            } else {
+
+                                                // A border IS given.
+
+                                                if (y == *py) {
+
+                                                    if (x == *px) {
+
+                                                        // Serialise left top border character using escape codes.
+                                                        serialise_user_interface_character_linux_console(p0, p1, p2, &x, &y, &z,
+                                                            p10, p11, p5, p6, p7, p8, p9, &ltc);
+
+                                                    } else if (x == (xl - 1)) {
+
+                                                        // Serialise right top border character using escape codes.
+                                                        serialise_user_interface_character_linux_console(p0, p1, p2, &x, &y, &z,
+                                                            p10, p11, p5, p6, p7, p8, p9, &rtc);
+
+                                                    } else {
+
+                                                        // Serialise horizontal border character using escape codes.
+                                                        serialise_user_interface_character_linux_console(p0, p1, p2, &x, &y, &z,
+                                                            p10, p11, p5, p6, p7, p8, p9, &hc);
+                                                    }
+
+                                                } else if (y == (yl - 1)) {
+
+                                                    if (x == *px) {
+
+                                                        // Serialise left bottom border character using escape codes.
+                                                        serialise_user_interface_character_linux_console(p0, p1, p2, &x, &y, &z,
+                                                            p10, p11, p5, p6, p7, p8, p9, &lbc);
+
+                                                    } else if (x == (xl - 1)) {
+
+                                                        // Serialise right bottom border character using escape codes.
+                                                        serialise_user_interface_character_linux_console(p0, p1, p2, &x, &y, &z,
+                                                            p10, p11, p5, p6, p7, p8, p9, &rbc);
+
+                                                    } else {
+
+                                                        // Serialise horizontal border character using escape codes.
+                                                        serialise_user_interface_character_linux_console(p0, p1, p2, &x, &y, &z,
+                                                            p10, p11, p5, p6, p7, p8, p9, &hc);
+                                                    }
+
+                                                } else {
+
+                                                    if (x == *px) {
+
+                                                        // Serialise left bottom border character using escape codes.
+                                                        serialise_user_interface_character_linux_console(p0, p1, p2, &x, &y, &z,
+                                                            p10, p11, p5, p6, p7, p8, p9, &vc);
+
+                                                    } else if (x == (xl - 1)) {
+
+                                                        // Serialise right bottom border character using escape codes.
+                                                        serialise_user_interface_character_linux_console(p0, p1, p2, &x, &y, &z,
+                                                            p10, p11, p5, p6, p7, p8, p9, &vc);
+
+                                                    } else {
+
+                                                        // Calculate character index.
+                                                        // CAUTION! Subtract one because of the border.
+                                                        ci = x - *px - 1;
+
+                                                        if (ci < *cc) {
+
+                                                            // Get character value at position x.
+                                                            get(p3, (void*) &ci, (void*) &c, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+                                                        }
+
+                                                        // Serialise character using escape codes.
+                                                        serialise_user_interface_character_linux_console(p0, p1, p2, &x, &y, &z,
+                                                            p10, p11, p5, p6, p7, p8, p9, &c);
+                                                    }
+                                                }
+                                            }
+
+                                            // Reset character.
+                                            c = NULL_POINTER;
+
+                                            x++;
+                                        }
+
+                                        y++;
+                                    }
+
+                                    z++;
+                                }
+
+                            } else {
+
+                                log_message_debug("Could not serialise user interface rectangle. The character count is null.");
+                            }
+
+                        } else {
+
+                            log_message_debug("Could not serialise user interface rectangle. The character count is null.");
+                        }
+
+                    } else {
+
+                        log_message_debug("Could not serialise user interface rectangle. The character count is null.");
+                    }
+
+                } else {
+
+                    log_message_debug("Could not serialise user interface rectangle. The character count is null.");
+                }
+
+            } else {
+
+                log_message_debug("Could not serialise user interface rectangle. The character count is null.");
+            }
+
+        } else {
+
+            log_message_debug("Could not serialise user interface rectangle. The character count is null.");
+        }
+
+    } else {
+
+        log_message_debug("Could not serialise user interface rectangle. The character count is null.");
+    }
+}
+
+/**
+ * Serialises a user interface rectangle compass layout.
+ *
+ * @param p0 the cell position x (of the part)
+ * @param p1 the cell position y
+ * @param p2 the cell position z
+ * @param p3 the cell size x (of the part)
+ * @param p4 the cell size y
+ * @param p5 the cell size z
+ * @param p6 the free area position x (remaining space within the whole)
+ * @param p7 the free area position y
+ * @param p8 the free area position z
+ * @param p9 the free area size x (remaining space within the whole)
+ * @param p10 the free area size y
+ * @param p11 the free area size z
+ * @param p12 the layout cell
+ * @param p13 the layout cell count
+ */
+void serialise_user_interface_rectangle_compass_layout(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
+    void* p6, void* p7, void* p8, void* p9, void* p10, void* p11,
+    void* p12, void* p13) {
+
+    int* cpx = (int*) p0;
+    int* cpy = (int*) p1;
+    int* cpz = (int*) p2;
+    int* csx = (int*) p3;
+    int* csy = (int*) p4;
+    int* csz = (int*) p5;
+    int* fapx = (int*) p6;
+    int* fapy = (int*) p7;
+    int* fapz = (int*) p8;
+    int* fasx = (int*) p9;
+    int* fasy = (int*) p10;
+    int* fasz = (int*) p11;
+
+    // The comparison result.
+    int r = 0;
+
+    if (r == 0) {
+
+        compare_arrays(p12, p13, (void*) UI_NORTH_CELL_MODEL, (void*) UI_NORTH_CELL_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != 0) {
+
+            // Set cell coordinates.
+            *cpx = *fapx;
+            *cpy = *fapy;
+            *cpz = *fapz;
+            *csx = *fasx;
+            *csy = 20;
+            *csz = *fasz;
+            // Set free area coordinates.
+            *fapy = *fapy + *csy;
+            *fasy = *fasy - *csy;
+        }
+    }
+
+    if (r == 0) {
+
+        compare_arrays(p12, p13, (void*) UI_SOUTH_CELL_MODEL, (void*) UI_SOUTH_CELL_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != 0) {
+
+            // Set cell coordinates.
+            *cpx = *fapx;
+            *cpy = (*fasy - 20);
+            *cpz = *fapz;
+            *csx = *fasx;
+            *csy = 20;
+            *csz = *fasz;
+            // Set free area coordinates.
+            *fasy = *fasy - *csy;
+        }
+    }
+
+    if (r == 0) {
+
+        compare_arrays(p12, p13, (void*) UI_WEST_CELL_MODEL, (void*) UI_WEST_CELL_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != 0) {
+
+            // Set cell coordinates.
+            *cpx = *fapx;
+            *cpy = *fapy;
+            *cpz = *fapz;
+            *csx = 20;
+            *csy = *fasy;
+            *csz = *fasz;
+            // Set free area coordinates.
+            *fapx = *fapx + *csx;
+            *fasx = *fasx - *csx;
+        }
+    }
+
+    if (r == 0) {
+
+        compare_arrays(p12, p13, (void*) UI_EAST_CELL_MODEL, (void*) UI_EAST_CELL_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != 0) {
+
+            // Set cell coordinates.
+            *cpx = (*fasx - 20);
+            *cpy = *fapy;
+            *cpz = *fapz;
+            *csx = 20;
+            *csy = *fasy;
+            *csz = *fasz;
+            // Set free area coordinates.
+            *fasx = *fasx - *csx;
+        }
+    }
+
+    if (r == 0) {
+
+        compare_arrays(p12, p13, (void*) UI_CENTRE_CELL_MODEL, (void*) UI_CENTRE_CELL_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != 0) {
+
+            // Set cell coordinates.
+            *cpx = *fapx;
+            *cpy = *fapy;
+            *cpz = *fapz;
+            *csx = *fasx;
+            *csy = *fasy;
+            *csz = *fasz;
+            // Set free area coordinates.
+            *fasx = *fasx - *fasx;
+            *fasy = *fasy - *fasy;
+            *fasz = *fasz - *fasz;
+        }
+    }
+}
+
+/**
+ * Serialises a user interface rectangle layout.
  *
  * @param p0 the cell position x (of the part)
  * @param p1 the cell position y
@@ -444,12 +844,14 @@ void serialise_linux_console_rectangle_border(void* p0, void* p1, void* p2, void
  * @param p15 the original area size x (of the whole)
  * @param p16 the original area size y
  * @param p17 the original area size z
+//?? The original area position and size are necessary to calculate
+//?? coordinates of further layout models.
  * @param p18 the layout cell
  * @param p19 the layout cell count
  * @param p20 the layout
  * @param p21 the layout count
  */
-void serialise_linux_console_layout(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
+void serialise_user_interface_rectangle_layout(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
     void* p6, void* p7, void* p8, void* p9, void* p10, void* p11,
     void* p12, void* p13, void* p14, void* p15, void* p16, void* p17,
     void* p18, void* p19, void* p20, void* p21) {
@@ -459,7 +861,7 @@ void serialise_linux_console_layout(void* p0, void* p1, void* p2, void* p3, void
 
     if (r == 0) {
 
-        compare_arrays(p18, p19, (void*) COORDINATE_LAYOUT_ABSTRACTION, (void*) COORDINATE_LAYOUT_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p20, p21, (void*) UI_COORDINATES_LAYOUT_MODEL, (void*) UI_COORDINATES_LAYOUT_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
@@ -472,18 +874,18 @@ void serialise_linux_console_layout(void* p0, void* p1, void* p2, void* p3, void
 
     if (r == 0) {
 
-        compare_arrays(p18, p19, (void*) BORDER_LAYOUT_ABSTRACTION, (void*) BORDER_LAYOUT_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p20, p21, (void*) UI_COMPASS_LAYOUT_MODEL, (void*) UI_COMPASS_LAYOUT_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
             // Determine new position and size coordinates for part.
-//??            serialise_linux_console_compass_layout(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p18, p19);
+            serialise_user_interface_rectangle_compass_layout(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p18, p19);
         }
     }
 }
 
 /**
- * Serialises a linux console rectangle.
+ * Serialises a user interface rectangle.
  *
  * @param p0 the destination terminal control sequences (Hand over as reference!)
  * @param p1 the destination count
@@ -501,215 +903,120 @@ void serialise_linux_console_layout(void* p0, void* p1, void* p2, void* p3, void
  * @param p13 the position count
  * @param p14 the size
  * @param p15 the size count
- * @param p16 the border
- * @param p17 the border count
- * @param p18 the layout
- * @param p19 the layout count
+ * @param p16 the whole model size
+ * @param p17 the whole model size count
+ * @param p18 the border
+ * @param p19 the border count
+ * @param p20 the layout cell
+ * @param p21 the layout cell count
+ * @param p22 the layout
+ * @param p23 the layout count
+ * @param p24 the user interface type
+ * @param p25 the user interface type count
  */
-void serialise_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, void* p4,
+void serialise_user_interface_rectangle(void* p0, void* p1, void* p2, void* p3, void* p4,
     void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11,
-    void* p12, void* p13, void* p14, void* p15, void* p16, void* p17, void* p18, void* p19) {
+    void* p12, void* p13, void* p14, void* p15, void* p16, void* p17,
+    void* p18, void* p19, void* p20, void* p21, void* p22, void* p23, void* p24, void* p25) {
 
-    if (p4 != NULL_POINTER) {
+    // The source part position x, y, z.
+    int** px = (int**) &NULL_POINTER;
+    int** py = (int**) &NULL_POINTER;
+    int** pz = (int**) &NULL_POINTER;
+    // The source part size x, y, z.
+    int** sx = (int**) &NULL_POINTER;
+    int** sy = (int**) &NULL_POINTER;
+    int** sz = (int**) &NULL_POINTER;
+    // The source whole size coordinates.
+    int** wsmx = (int**) &NULL_POINTER;
+    int** wsmy = (int**) &NULL_POINTER;
+    int** wsmz = (int**) &NULL_POINTER;
+    // The original area position coordinates, set to the zero origo.
+    int oapx = *NUMBER_0_INTEGER;
+    int oapy = *NUMBER_0_INTEGER;
+    int oapz = *NUMBER_0_INTEGER;
+    // The original area size coordinates, initialised with whole coordinates.
+    int oasx = *NUMBER_0_INTEGER;
+    int oasy = *NUMBER_0_INTEGER;
+    int oasz = *NUMBER_0_INTEGER;
+    // The free area position coordinates, initialised with original area position coordinates.
+    int fapx = oapx;
+    int fapy = oapy;
+    int fapz = oapz;
+    // The free area size coordinates, initialised with original area position coordinates.
+    int fasx = oasx;
+    int fasy = oasy;
+    int fasz = oasz;
 
-        int* cc = (int*) p4;
+    // Get part position x, y, z.
+    get(p12, (void*) UI_POSITION_X_INDEX, (void*) &px, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p12, (void*) UI_POSITION_Y_INDEX, (void*) &py, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p12, (void*) UI_POSITION_Z_INDEX, (void*) &pz, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    // Get part size x, y, z.
+    get(p14, (void*) UI_SIZE_X_INDEX, (void*) &sx, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p14, (void*) UI_SIZE_Y_INDEX, (void*) &sy, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p14, (void*) UI_SIZE_Z_INDEX, (void*) &sz, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-        // The source part position x, y, z.
-        int** px = (int**) &NULL_POINTER;
-        int** py = (int**) &NULL_POINTER;
-        int** pz = (int**) &NULL_POINTER;
-        // The source part size x, y, z.
-        int** sx = (int**) &NULL_POINTER;
-        int** sy = (int**) &NULL_POINTER;
-        int** sz = (int**) &NULL_POINTER;
+    if (p16 != NULL_POINTER) {
 
-        // Get part position x, y, z.
-        get(p12, (void*) TUI_POSITION_X_INDEX, (void*) &px, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        get(p12, (void*) TUI_POSITION_Y_INDEX, (void*) &py, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        get(p12, (void*) TUI_POSITION_Z_INDEX, (void*) &pz, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        // Get part size x, y, z.
-        get(p14, (void*) TUI_SIZE_X_INDEX, (void*) &sx, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        get(p14, (void*) TUI_SIZE_Y_INDEX, (void*) &sy, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        get(p14, (void*) TUI_SIZE_Z_INDEX, (void*) &sz, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        // Determine source whole size coordinates.
+        get(p16, (void*) NUMBER_0_INTEGER, (void*) &wsmx, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        get(p16, (void*) NUMBER_1_INTEGER, (void*) &wsmy, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        get(p16, (void*) NUMBER_2_INTEGER, (void*) &wsmz, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-        // Calculate coordinates according to given layout.
-        serialise_linux_console_layout(
-            *px, *py, *pz, *sx, *sy, *sz,
-            &fapx, &fapy, &fapz, &fasx, &fasy, &fasz,
-            &oapx, &oapy, &oapz, &oasx, &oasy, &oasz,
-            *cm, *cmc, p18, p19);
+        // Set original area position coordinates, set to the zero origo.
+        oapx = *NUMBER_0_INTEGER;
+        oapy = *NUMBER_0_INTEGER;
+        oapz = *NUMBER_0_INTEGER;
+        // Set original area size coordinates, initialised with whole coordinates.
+        oasx = **wsmx;
+        oasy = **wsmy;
+        oasz = **wsmz;
 
-        // The horizontal character.
-        char hc = '';
-        // The vertical character.
-        char vc = '';
-        // The left top character.
-        char ltc = '';
-        // The right top character.
-        char rtc = '';
-        // The left bottom character.
-        char lbc = '';
-        // The right bottom character.
-        char rbc = '';
+        // Set free area position coordinates, initialised with original area position coordinates.
+        fapx = oapx;
+        fapy = oapy;
+        fapz = oapz;
+        // Set free area size coordinates, initialised with original area position coordinates.
+        fasx = oasx;
+        fasy = oasy;
+        fasz = oasz;
+    }
 
-        // Determine border characters.
-        serialise_linux_console_rectangle_border(&hc, &vc, &ltc, &rtc, &lbc, &rbc, p16, p17);
+    // Calculate coordinates according to given layout.
+    serialise_user_interface_rectangle_layout(*px, *py, *pz, *sx, *sy, *sz,
+        &fapx, &fapy, &fapz, &fasx, &fasy, &fasz,
+        &oapx, &oapy, &oapz, &oasx, &oasy, &oasz,
+        p20, p21, p22, p23);
 
-        // The z loop count.
-        int z = **pz;
-        // The y loop count.
-        int y = **py;
-        // The x loop count.
-        int x = **px;
-        // The z loop limit as sum of position and size.
-        int zl = **pz + **sz;
-        // The y loop limit as sum of position and size.
-        int yl = **py + **sy;
-        // The x loop limit as sum of position and size.
-        int xl = **px + **sx;
+    // The comparison result.
+    int r = 0;
 
-        // The character index.
-        int ci = 0;
-        // The character.
-        void* c = NULL_POINTER;
+    if (r == 0) {
 
-        while (1) {
+        compare_arrays(p24, p25, (void*) LINUX_CONSOLE_MODEL, (void*) LINUX_CONSOLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-            if (z >= zl) {
+        if (r != 0) {
 
-                break;
-            }
-
-            while (1) {
-
-                if (y >= yl) {
-
-                    break;
-                }
-
-                while (1) {
-
-                    if (x >= xl) {
-
-                        break;
-                    }
-
-                    if (p16 == NULL_POINTER) {
-
-                        // A border is NOT given.
-
-                        // Calculate character index.
-                        ci = x - **px;
-
-                        if (ci < *cc) {
-
-                            // Get character value at position x.
-                            get(p3, (void*) &ci, (void*) &c, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
-                        }
-
-                        // Serialise character using escape codes.
-                        serialise_linux_console_character(p0, p1, p2, &x, &y, &z,
-                            &bg, &fg, &h, &i, &bl, &u, &b, c);
-
-                    } else {
-
-                        // A border IS given.
-
-                        if (y == py) {
-
-                            if (x == px) {
-
-                                // Serialise left top border character using escape codes.
-                                serialise_linux_console_character(p0, p1, p2, &x, &y, &z,
-                                    &bg, &fg, &h, &i, &bl, &u, &b, &ltc);
-
-                            } else if (x == (xl - 1)) {
-
-                                // Serialise right top border character using escape codes.
-                                serialise_linux_console_character(p0, p1, p2, &x, &y, &z,
-                                    &bg, &fg, &h, &i, &bl, &u, &b, &rtc);
-
-                            } else {
-
-                                // Serialise horizontal border character using escape codes.
-                                serialise_linux_console_character(p0, p1, p2, &x, &y, &z,
-                                    &bg, &fg, &h, &i, &bl, &u, &b, &hc);
-                            }
-
-                        } else if (y == (yl - 1)) {
-
-                            if (x == px) {
-
-                                // Serialise left bottom border character using escape codes.
-                                serialise_linux_console_character(p0, p1, p2, &x, &y, &z,
-                                    &bg, &fg, &h, &i, &bl, &u, &b, &lbc);
-
-                            } else if (x == (xl - 1)) {
-
-                                // Serialise right bottom border character using escape codes.
-                                serialise_linux_console_character(p0, p1, p2, &x, &y, &z,
-                                    &bg, &fg, &h, &i, &bl, &u, &b, &rbc);
-
-                            } else {
-
-                                // Serialise horizontal border character using escape codes.
-                                serialise_linux_console_character(p0, p1, p2, &x, &y, &z,
-                                    &bg, &fg, &h, &i, &bl, &u, &b, &hc);
-                            }
-
-                        } else {
-
-                            if (x == px) {
-
-                                // Serialise left bottom border character using escape codes.
-                                serialise_linux_console_character(p0, p1, p2, &x, &y, &z,
-                                    &bg, &fg, &h, &i, &bl, &u, &b, &vc);
-
-                            } else if (x == (xl - 1)) {
-
-                                // Serialise right bottom border character using escape codes.
-                                serialise_linux_console_character(p0, p1, p2, &x, &y, &z,
-                                    &bg, &fg, &h, &i, &bl, &u, &b, &vc);
-
-                            } else {
-
-                                // Calculate character index.
-                                // CAUTION! Subtract one because of the border.
-                                ci = x - **px - 1;
-
-                                if (ci < *cc) {
-
-                                    // Get character value at position x.
-                                    get(p3, (void*) &ci, (void*) &c, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
-                                }
-
-                                // Serialise character using escape codes.
-                                serialise_linux_console_character(p0, p1, p2, &x, &y, &z,
-                                    &bg, &fg, &h, &i, &bl, &u, &b, &c);
-                            }
-                        }
-                    }
-
-                    // Reset character.
-                    c = NULL_POINTER;
-
-                    x++;
-                }
-
-                y++;
-            }
-
-            z++;
+            serialise_user_interface_rectangle_linux_console(p0, p1, p2, p3, p4,
+                p5, p6, p7, p8, p9, p10, p11, *px, *py, *pz, *sx, *sy, *sz, p18, p19);
         }
+    }
 
-    } else {
+    if (r == 0) {
 
-        log_message_debug("Could not serialise linux console rectangle. The character count is null.");
+        compare_arrays(p24, p25, (void*) X_WINDOW_SYSTEM_MODEL, (void*) X_WINDOW_SYSTEM_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != 0) {
+
+            serialise_user_interface_rectangle_x_window_system(p0, p1, p2, p3, p4,
+                p5, p6, p7, p8, p9, p10, p11, *px, *py, *pz, *sx, *sy, *sz, p18, p19);
+        }
     }
 }
 
 /**
- * Serialises a linux console shape.
+ * Serialises a user interface shape.
  *
  * @param p0 the destination terminal control sequences (Hand over as reference!)
  * @param p1 the destination count
@@ -736,17 +1043,23 @@ void serialise_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, v
  * @param p22 the position count
  * @param p23 the size
  * @param p24 the size count
- * @param p25 the border
- * @param p26 the border count
- * @param p27 the layout
- * @param p28 the layout count
- * @param p29 the shape
- * @param p30 the shape count
+ * @param p25 the whole model size
+ * @param p26 the whole model size count
+ * @param p27 the border
+ * @param p28 the border count
+ * @param p29 the layout cell
+ * @param p30 the layout cell count
+ * @param p31 the layout
+ * @param p32 the layout count
+ * @param p33 the shape
+ * @param p34 the shape count
+ * @param p35 the user interface type
+ * @param p36 the user interface type count
  */
-void serialise_linux_console_shape(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
+void serialise_user_interface_shape(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
     void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14, void* p15, void* p16,
-    void* p17, void* p18, void* p19, void* p20, void* p21, void* p22,
-    void* p23, void* p24, void* p25, void* p26, void* p27, void* p28, void* p29, void* p30) {
+    void* p17, void* p18, void* p19, void* p20, void* p21, void* p22, void* p23, void* p24, void* p25, void* p26,
+    void* p27, void* p28, void* p29, void* p30, void* p31, void* p32, void* p33, void* p34, void* p35, void* p36) {
 
     // The character.
     void* c = NULL_POINTER;
@@ -782,7 +1095,7 @@ void serialise_linux_console_shape(void* p0, void* p1, void* p2, void* p3, void*
     // The comparison result.
     int r = 0;
 
-    compare_arrays(p5, p6, (void*) CHARACTER_ABSTRACTION, (void*) CHARACTER_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+    compare_arrays(p5, p6, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
     if (r != 0) {
 
@@ -796,17 +1109,46 @@ void serialise_linux_console_shape(void* p0, void* p1, void* p2, void* p3, void*
     // Reset comparison result.
     r = 0;
 
-    compare_arrays(p29, p30, (void*) RECTANGLE_MODEL_ABSTRACTION, (void*) RECTANGLE_MODEL_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+    if (r == 0) {
 
-    if (r != 0) {
+        compare_arrays(p33, p34, (void*) UI_RECTANGLE_SHAPE_MODEL, (void*) UI_RECTANGLE_SHAPE_MODEL, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        serialise_linux_console_rectangle(p0, p1, p2, c, cc, &h, &i, &bl, &u, &b,
-            &bg, &fg, p21, p22, p23, p24, p25, p26, p27, p28);
+        if (r != 0) {
+
+            serialise_user_interface_rectangle(p0, p1, p2, c, cc, &h, &i, &bl, &u, &b,
+                &bg, &fg, p21, p22, p23, p24, p25, p26, p27, p28, p29, p30, p31, p32, p35, p36);
+        }
+    }
+
+    if (r == 0) {
+
+        compare_arrays(p33, p34, (void*) UI_CIRCLE_SHAPE_MODEL, (void*) UI_CIRCLE_SHAPE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != 0) {
+
+/*??
+            serialise_user_interface_circle(p0, p1, p2, c, cc, &h, &i, &bl, &u, &b,
+                &bg, &fg, p21, p22, p23, p24, p25, p26, p27, p28, p29, p30, p31, p32, p35, p36);
+*/
+        }
+    }
+
+    if (r == 0) {
+
+        compare_arrays(p33, p34, (void*) UI_POLYGON_SHAPE_MODEL, (void*) UI_POLYGON_SHAPE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != 0) {
+
+/*??
+            serialise_user_interface_polygon(p0, p1, p2, c, cc, &h, &i, &bl, &u, &b,
+                &bg, &fg, p21, p22, p23, p24, p25, p26, p27, p28, p29, p30, p31, p32, p35, p36);
+*/
+        }
     }
 }
 
 /**
- * Parses the linux console terminal control sequences into a compound model.
+ * Parses a user interface into a compound model.
  *
  * @param p0 the destination linux console model (Hand over as reference!)
  * @param p1 the destination count
@@ -814,26 +1156,43 @@ void serialise_linux_console_shape(void* p0, void* p1, void* p2, void* p3, void*
  * @param p3 the source terminal control sequences
  * @param p4 the source count
  */
-void parse_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void parse_user_interface(void* p0, void* p1, void* p2, void* p3, void* p4) {
 }
 
 /**
- * Serialises the compound model into linux console terminal control sequences.
+ * Serialises a compound model into user interface statements.
  *
  * @param p0 the destination terminal control sequences (Hand over as reference!)
  * @param p1 the destination count
  * @param p2 the destination size
- * @param p3 the source linux console model
- * @param p4 the source count
+ * @param p3 the source compound model
+ * @param p4 the source compound model count
+ * @param p5 the source compound details
+ * @param p6 the source compound details count
+ * @param p7 the knowledge memory
+ * @param p8 the knowledge memory count
+ * @param p9 the user interface type
+ * @param p10 the user interface type count
  */
-void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void serialise_user_interface(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
+    void* p7, void* p8, void* p9, void* p10) {
 
     if (p4 != NULL_POINTER) {
 
         int* sc = (int*) p4;
 
-        log_message_debug("Serialise compound model into linux console terminal control sequences.");
+        log_message_debug("Serialise compound model into user interface statements.");
 
+        // The source whole size.
+        void** wsa = &NULL_POINTER;
+        void** wsac = &NULL_POINTER;
+        void** wsas = &NULL_POINTER;
+        void** wsm = &NULL_POINTER;
+        void** wsmc = &NULL_POINTER;
+        void** wsms = &NULL_POINTER;
+        void** wsd = &NULL_POINTER;
+        void** wsdc = &NULL_POINTER;
+        void** wsds = &NULL_POINTER;
         // The source part abstraction, model, details.
         void** a = &NULL_POINTER;
         void** ac = &NULL_POINTER;
@@ -844,7 +1203,6 @@ void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
         void** d = &NULL_POINTER;
         void** dc = &NULL_POINTER;
         void** ds = &NULL_POINTER;
-
         // The source part super properties.
         void** supera = &NULL_POINTER;
         void** superac = &NULL_POINTER;
@@ -875,6 +1233,16 @@ void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
         void** ld = &NULL_POINTER;
         void** ldc = &NULL_POINTER;
         void** lds = &NULL_POINTER;
+        // The source part cell.
+        void** ca = &NULL_POINTER;
+        void** cac = &NULL_POINTER;
+        void** cas = &NULL_POINTER;
+        void** cm = &NULL_POINTER;
+        void** cmc = &NULL_POINTER;
+        void** cms = &NULL_POINTER;
+        void** cd = &NULL_POINTER;
+        void** cdc = &NULL_POINTER;
+        void** cds = &NULL_POINTER;
         // The source part position.
         void** pa = &NULL_POINTER;
         void** pac = &NULL_POINTER;
@@ -975,6 +1343,26 @@ void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
         void** bd = &NULL_POINTER;
         void** bdc = &NULL_POINTER;
         void** bds = &NULL_POINTER;
+        // The source part title.
+        void** ta = &NULL_POINTER;
+        void** tac = &NULL_POINTER;
+        void** tas = &NULL_POINTER;
+        void** tm = &NULL_POINTER;
+        void** tmc = &NULL_POINTER;
+        void** tms = &NULL_POINTER;
+        void** td = &NULL_POINTER;
+        void** tdc = &NULL_POINTER;
+        void** tds = &NULL_POINTER;
+        // The source part icon.
+        void** icona = &NULL_POINTER;
+        void** iconac = &NULL_POINTER;
+        void** iconas = &NULL_POINTER;
+        void** iconm = &NULL_POINTER;
+        void** iconmc = &NULL_POINTER;
+        void** iconms = &NULL_POINTER;
+        void** icond = &NULL_POINTER;
+        void** icondc = &NULL_POINTER;
+        void** iconds = &NULL_POINTER;
 
         // The comparison result.
         int r = 0;
@@ -989,6 +1377,13 @@ void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 break;
             }
 
+            // Get source whole size from details.
+            get_compound_element_by_name(p5, p6,
+                (void*) UI_SIZE_NAME, (void*) UI_SIZE_NAME_COUNT,
+                (void*) &wsa, (void*) &wsac, (void*) &wsas,
+                (void*) &wsm, (void*) &wsmc, (void*) &wsms,
+                (void*) &wsd, (void*) &wsdc, (void*) &wsds);
+
             // Get part at index j.
             get_compound_element_by_index(p3, p4, (void*) &j,
                 (void*) &a, (void*) &ac, (void*) &as,
@@ -1001,7 +1396,7 @@ void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 (void*) &supera, (void*) &superac, (void*) &superas,
                 (void*) &superm, (void*) &supermc, (void*) &superms,
                 (void*) &superd, (void*) &superdc, (void*) &superds,
-                (void*) &k, (void*) &kc);
+                p7, p8);
 
             //
             // Get default property values from super part.
@@ -1009,76 +1404,94 @@ void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             // Get part shape from super part.
             get_compound_element_by_name(*superm, *supermc,
-                (void*) TUI_SHAPE_NAME, (void*) TUI_SHAPE_NAME_COUNT,
+                (void*) UI_SHAPE_NAME, (void*) UI_SHAPE_NAME_COUNT,
                 (void*) &sha, (void*) &shac, (void*) &shas,
                 (void*) &shm, (void*) &shmc, (void*) &shms,
                 (void*) &shd, (void*) &shdc, (void*) &shds);
             // Get source part layout from details.
             get_compound_element_by_name(*superm, *supermc,
-                (void*) TUI_LAYOUT_NAME, (void*) TUI_LAYOUT_NAME_COUNT,
+                (void*) UI_LAYOUT_NAME, (void*) UI_LAYOUT_NAME_COUNT,
                 (void*) &la, (void*) &lac, (void*) &las,
                 (void*) &lm, (void*) &lmc, (void*) &lms,
                 (void*) &ld, (void*) &ldc, (void*) &lds);
+            // Get source part cell from details.
+            get_compound_element_by_name(*superm, *supermc,
+                (void*) UI_CELL_NAME, (void*) UI_CELL_NAME_COUNT,
+                (void*) &ca, (void*) &cac, (void*) &cas,
+                (void*) &cm, (void*) &cmc, (void*) &cms,
+                (void*) &cd, (void*) &cdc, (void*) &cds);
             // Get part position from super part.
             get_compound_element_by_name(*superm, *supermc,
-                (void*) TUI_POSITION_NAME, (void*) TUI_POSITION_NAME_COUNT,
+                (void*) UI_POSITION_NAME, (void*) UI_POSITION_NAME_COUNT,
                 (void*) &pa, (void*) &pac, (void*) &pas,
                 (void*) &pm, (void*) &pmc, (void*) &pms,
                 (void*) &pd, (void*) &pdc, (void*) &pds);
             // Get part size from super part.
             get_compound_element_by_name(*superm, *supermc,
-                (void*) TUI_SIZE_NAME, (void*) TUI_SIZE_NAME_COUNT,
+                (void*) UI_SIZE_NAME, (void*) UI_SIZE_NAME_COUNT,
                 (void*) &sa, (void*) &sac, (void*) &sas,
                 (void*) &sm, (void*) &smc, (void*) &sms,
                 (void*) &sd, (void*) &sdc, (void*) &sds);
             // Get part background colour from super part.
             get_compound_element_by_name(*superm, *supermc,
-                (void*) TUI_BACKGROUND_NAME, (void*) TUI_BACKGROUND_NAME_COUNT,
+                (void*) UI_BACKGROUND_NAME, (void*) UI_BACKGROUND_NAME_COUNT,
                 (void*) &bga, (void*) &bgac, (void*) &bgas,
                 (void*) &bgm, (void*) &bgmc, (void*) &bgms,
                 (void*) &bgd, (void*) &bgdc, (void*) &bgds);
             // Get part foreground colour from super part.
             get_compound_element_by_name(*superm, *supermc,
-                (void*) TUI_FOREGROUND_NAME, (void*) TUI_FOREGROUND_NAME_COUNT,
+                (void*) UI_FOREGROUND_NAME, (void*) UI_FOREGROUND_NAME_COUNT,
                 (void*) &fga, (void*) &fgac, (void*) &fgas,
                 (void*) &fgm, (void*) &fgmc, (void*) &fgms,
                 (void*) &fgd, (void*) &fgdc, (void*) &fgds);
             // Get part border from super part.
             get_compound_element_by_name(*superm, *supermc,
-                (void*) TUI_BORDER_NAME, (void*) TUI_BORDER_NAME_COUNT,
+                (void*) UI_BORDER_NAME, (void*) UI_BORDER_NAME_COUNT,
                 (void*) &boa, (void*) &boac, (void*) &boas,
                 (void*) &bom, (void*) &bomc, (void*) &boms,
                 (void*) &bod, (void*) &bodc, (void*) &bods);
             // Get part hidden property from super part.
             get_compound_element_by_name(*superm, *supermc,
-                (void*) TUI_HIDDEN_NAME, (void*) TUI_HIDDEN_NAME_COUNT,
+                (void*) UI_HIDDEN_NAME, (void*) UI_HIDDEN_NAME_COUNT,
                 (void*) &ha, (void*) &hac, (void*) &has,
                 (void*) &hm, (void*) &hmc, (void*) &hms,
                 (void*) &hd, (void*) &hdc, (void*) &hds);
             // Get part inverse property from super part.
             get_compound_element_by_name(*superm, *supermc,
-                (void*) TUI_INVERSE_NAME, (void*) TUI_INVERSE_NAME_COUNT,
+                (void*) UI_INVERSE_NAME, (void*) UI_INVERSE_NAME_COUNT,
                 (void*) &ia, (void*) &iac, (void*) &ias,
                 (void*) &im, (void*) &imc, (void*) &ims,
                 (void*) &id, (void*) &idc, (void*) &ids);
             // Get part blink property from super part.
             get_compound_element_by_name(*superm, *supermc,
-                (void*) TUI_BLINK_NAME, (void*) TUI_BLINK_NAME_COUNT,
+                (void*) UI_BLINK_NAME, (void*) UI_BLINK_NAME_COUNT,
                 (void*) &bla, (void*) &blac, (void*) &blas,
                 (void*) &blm, (void*) &blmc, (void*) &blms,
                 (void*) &bld, (void*) &bldc, (void*) &blds);
             // Get part underline property from super part.
             get_compound_element_by_name(*superm, *supermc,
-                (void*) TUI_UNDERLINE_NAME, (void*) TUI_UNDERLINE_NAME_COUNT,
+                (void*) UI_UNDERLINE_NAME, (void*) UI_UNDERLINE_NAME_COUNT,
                 (void*) &ua, (void*) &uac, (void*) &uas,
                 (void*) &um, (void*) &umc, (void*) &ums,
                 (void*) &ud, (void*) &udc, (void*) &uds);
             // Get part bold property from super part.
             get_compound_element_by_name(*superm, *supermc,
-                (void*) TUI_BOLD_NAME, (void*) TUI_BOLD_NAME_COUNT,
+                (void*) UI_BOLD_NAME, (void*) UI_BOLD_NAME_COUNT,
                 (void*) &ba, (void*) &bac, (void*) &bas,
                 (void*) &bm, (void*) &bmc, (void*) &bms,
                 (void*) &bd, (void*) &bdc, (void*) &bds);
+            // Get source part title from super part.
+            get_compound_element_by_name(*superm, *supermc,
+                (void*) UI_TITLE_NAME, (void*) UI_TITLE_NAME_COUNT,
+                (void*) &ta, (void*) &tac, (void*) &tas,
+                (void*) &tm, (void*) &tmc, (void*) &tms,
+                (void*) &td, (void*) &tdc, (void*) &tds);
+            // Get source part icon from super part.
+            get_compound_element_by_name(*superm, *supermc,
+                (void*) UI_ICON_NAME, (void*) UI_ICON_NAME_COUNT,
+                (void*) &icona, (void*) &iconac, (void*) &iconas,
+                (void*) &iconm, (void*) &iconmc, (void*) &iconms,
+                (void*) &icond, (void*) &icondc, (void*) &iconds);
 
             //
             // Get standard property values from part.
@@ -1090,82 +1503,100 @@ void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             // Get part shape from details.
             get_compound_element_by_name(*d, *dc,
-                (void*) TUI_SHAPE_NAME, (void*) TUI_SHAPE_NAME_COUNT,
+                (void*) UI_SHAPE_NAME, (void*) UI_SHAPE_NAME_COUNT,
                 (void*) &sha, (void*) &shac, (void*) &shas,
                 (void*) &shm, (void*) &shmc, (void*) &shms,
                 (void*) &shd, (void*) &shdc, (void*) &shds);
             // Get source part layout from details.
             get_compound_element_by_name(*d, *dc,
-                (void*) TUI_LAYOUT_NAME, (void*) TUI_LAYOUT_NAME_COUNT,
+                (void*) UI_LAYOUT_NAME, (void*) UI_LAYOUT_NAME_COUNT,
                 (void*) &la, (void*) &lac, (void*) &las,
                 (void*) &lm, (void*) &lmc, (void*) &lms,
                 (void*) &ld, (void*) &ldc, (void*) &lds);
+            // Get source part cell from details.
+            get_compound_element_by_name(*d, *dc,
+                (void*) UI_CELL_NAME, (void*) UI_CELL_NAME_COUNT,
+                (void*) &ca, (void*) &cac, (void*) &cas,
+                (void*) &cm, (void*) &cmc, (void*) &cms,
+                (void*) &cd, (void*) &cdc, (void*) &cds);
             // Get part position from details.
             get_compound_element_by_name(*d, *dc,
-                (void*) TUI_POSITION_NAME, (void*) TUI_POSITION_NAME_COUNT,
+                (void*) UI_POSITION_NAME, (void*) UI_POSITION_NAME_COUNT,
                 (void*) &pa, (void*) &pac, (void*) &pas,
                 (void*) &pm, (void*) &pmc, (void*) &pms,
                 (void*) &pd, (void*) &pdc, (void*) &pds);
             // Get part size from details.
             get_compound_element_by_name(*d, *dc,
-                (void*) TUI_SIZE_NAME, (void*) TUI_SIZE_NAME_COUNT,
+                (void*) UI_SIZE_NAME, (void*) UI_SIZE_NAME_COUNT,
                 (void*) &sa, (void*) &sac, (void*) &sas,
                 (void*) &sm, (void*) &smc, (void*) &sms,
                 (void*) &sd, (void*) &sdc, (void*) &sds);
             // Get part background colour from details.
             get_compound_element_by_name(*d, *dc,
-                (void*) TUI_BACKGROUND_NAME, (void*) TUI_BACKGROUND_NAME_COUNT,
+                (void*) UI_BACKGROUND_NAME, (void*) UI_BACKGROUND_NAME_COUNT,
                 (void*) &bga, (void*) &bgac, (void*) &bgas,
                 (void*) &bgm, (void*) &bgmc, (void*) &bgms,
                 (void*) &bgd, (void*) &bgdc, (void*) &bgds);
             // Get part foreground colour from details.
             get_compound_element_by_name(*d, *dc,
-                (void*) TUI_FOREGROUND_NAME, (void*) TUI_FOREGROUND_NAME_COUNT,
+                (void*) UI_FOREGROUND_NAME, (void*) UI_FOREGROUND_NAME_COUNT,
                 (void*) &fga, (void*) &fgac, (void*) &fgas,
                 (void*) &fgm, (void*) &fgmc, (void*) &fgms,
                 (void*) &fgd, (void*) &fgdc, (void*) &fgds);
             // Get part border from details.
             get_compound_element_by_name(*d, *dc,
-                (void*) TUI_BORDER_NAME, (void*) TUI_BORDER_NAME_COUNT,
+                (void*) UI_BORDER_NAME, (void*) UI_BORDER_NAME_COUNT,
                 (void*) &boa, (void*) &boac, (void*) &boas,
                 (void*) &bom, (void*) &bomc, (void*) &boms,
                 (void*) &bod, (void*) &bodc, (void*) &bods);
             // Get part hidden property from details.
             get_compound_element_by_name(*d, *dc,
-                (void*) TUI_HIDDEN_NAME, (void*) TUI_HIDDEN_NAME_COUNT,
+                (void*) UI_HIDDEN_NAME, (void*) UI_HIDDEN_NAME_COUNT,
                 (void*) &ha, (void*) &hac, (void*) &has,
                 (void*) &hm, (void*) &hmc, (void*) &hms,
                 (void*) &hd, (void*) &hdc, (void*) &hds);
             // Get part inverse property from details.
             get_compound_element_by_name(*d, *dc,
-                (void*) TUI_INVERSE_NAME, (void*) TUI_INVERSE_NAME_COUNT,
+                (void*) UI_INVERSE_NAME, (void*) UI_INVERSE_NAME_COUNT,
                 (void*) &ia, (void*) &iac, (void*) &ias,
                 (void*) &im, (void*) &imc, (void*) &ims,
                 (void*) &id, (void*) &idc, (void*) &ids);
             // Get part blink property from details.
             get_compound_element_by_name(*d, *dc,
-                (void*) TUI_BLINK_NAME, (void*) TUI_BLINK_NAME_COUNT,
+                (void*) UI_BLINK_NAME, (void*) UI_BLINK_NAME_COUNT,
                 (void*) &bla, (void*) &blac, (void*) &blas,
                 (void*) &blm, (void*) &blmc, (void*) &blms,
                 (void*) &bld, (void*) &bldc, (void*) &blds);
             // Get part underline property from details.
             get_compound_element_by_name(*d, *dc,
-                (void*) TUI_UNDERLINE_NAME, (void*) TUI_UNDERLINE_NAME_COUNT,
+                (void*) UI_UNDERLINE_NAME, (void*) UI_UNDERLINE_NAME_COUNT,
                 (void*) &ua, (void*) &uac, (void*) &uas,
                 (void*) &um, (void*) &umc, (void*) &ums,
                 (void*) &ud, (void*) &udc, (void*) &uds);
             // Get part bold property from details.
             get_compound_element_by_name(*d, *dc,
-                (void*) TUI_BOLD_NAME, (void*) TUI_BOLD_NAME_COUNT,
+                (void*) UI_BOLD_NAME, (void*) UI_BOLD_NAME_COUNT,
                 (void*) &ba, (void*) &bac, (void*) &bas,
                 (void*) &bm, (void*) &bmc, (void*) &bms,
                 (void*) &bd, (void*) &bdc, (void*) &bds);
+            // Get source part title from details.
+            get_compound_element_by_name(*d, *dc,
+                (void*) UI_TITLE_NAME, (void*) UI_TITLE_NAME_COUNT,
+                (void*) &ta, (void*) &tac, (void*) &tas,
+                (void*) &tm, (void*) &tmc, (void*) &tms,
+                (void*) &td, (void*) &tdc, (void*) &tds);
+            // Get source part icon from details.
+            get_compound_element_by_name(*d, *dc,
+                (void*) UI_ICON_NAME, (void*) UI_ICON_NAME_COUNT,
+                (void*) &icona, (void*) &iconac, (void*) &iconas,
+                (void*) &iconm, (void*) &iconmc, (void*) &iconms,
+                (void*) &icond, (void*) &icondc, (void*) &iconds);
 
-            // Serialise linux console properties.
-            serialise_linux_console_shape(p0, p1, p2, *m, *mc, *a, *ac,
+            // Serialise shape.
+            serialise_shape(p0, p1, p2, *m, *mc, *a, *ac,
                 *hm, *hmc, *im, *imc, *blm, *blmc, *um, *umc, *bm, *bmc,
-                *bgm, *bgmc, *fgm, *fgmc, *pm, *pmc, *sm, *smc, *bom, *bomc,
-                *lm, *lmc, *shm, *shmc);
+                *bgm, *bgmc, *fgm, *fgmc, *pm, *pmc, *sm, *smc, *wsm, *wsmc, *bom, *bomc,
+                *cm, *cmc, *lm, *lmc, *shm, *shmc, p9, p10);
 
             compare_arrays(*a, *ac, (void*) CYBOL_ABSTRACTION, (void*) CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
@@ -1174,9 +1605,19 @@ void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 // The part model is a compound.
 
                 // Recursively call this procedure for compound part model.
-                serialise_linux_console(p0, p1, p2, *m, *mc);
+                serialise_user_interface(p0, p1, p2, *m, *mc, *d, *dc, p7, p8, p9, p10);
             }
 
+            // Reset source whole size.
+            wsa = &NULL_POINTER;
+            wsac = &NULL_POINTER;
+            wsas = &NULL_POINTER;
+            wsm = &NULL_POINTER;
+            wsmc = &NULL_POINTER;
+            wsms = &NULL_POINTER;
+            wsd = &NULL_POINTER;
+            wsdc = &NULL_POINTER;
+            wsds = &NULL_POINTER;
             // Reset source part abstraction, model, details.
             a = &NULL_POINTER;
             ac = &NULL_POINTER;
@@ -1187,7 +1628,6 @@ void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
             d = &NULL_POINTER;
             dc = &NULL_POINTER;
             ds = &NULL_POINTER;
-
             // Reset source part super properties.
             supera = &NULL_POINTER;
             superac = &NULL_POINTER;
@@ -1218,6 +1658,16 @@ void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
             ld = &NULL_POINTER;
             ldc = &NULL_POINTER;
             lds = &NULL_POINTER;
+            // Reset source part cell.
+            ca = &NULL_POINTER;
+            cac = &NULL_POINTER;
+            cas = &NULL_POINTER;
+            cm = &NULL_POINTER;
+            cmc = &NULL_POINTER;
+            cms = &NULL_POINTER;
+            cd = &NULL_POINTER;
+            cdc = &NULL_POINTER;
+            cds = &NULL_POINTER;
             // Reset source part position.
             pa = &NULL_POINTER;
             pac = &NULL_POINTER;
@@ -1318,6 +1768,26 @@ void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
             bd = &NULL_POINTER;
             bdc = &NULL_POINTER;
             bds = &NULL_POINTER;
+            // Reset source part title.
+            ta = &NULL_POINTER;
+            tac = &NULL_POINTER;
+            tas = &NULL_POINTER;
+            tm = &NULL_POINTER;
+            tmc = &NULL_POINTER;
+            tms = &NULL_POINTER;
+            td = &NULL_POINTER;
+            tdc = &NULL_POINTER;
+            tds = &NULL_POINTER;
+            // Reset source part icon.
+            icona = &NULL_POINTER;
+            iconac = &NULL_POINTER;
+            iconas = &NULL_POINTER;
+            iconm = &NULL_POINTER;
+            iconmc = &NULL_POINTER;
+            iconms = &NULL_POINTER;
+            icond = &NULL_POINTER;
+            icondc = &NULL_POINTER;
+            iconds = &NULL_POINTER;
 
             // Reset comparison result.
             r = 0;
@@ -1332,5 +1802,5 @@ void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
     }
 }
 
-/* LINUX_CONSOLE_CONVERTER_SOURCE */
+/* USER_INTERFACE_CONVERTER_SOURCE */
 #endif

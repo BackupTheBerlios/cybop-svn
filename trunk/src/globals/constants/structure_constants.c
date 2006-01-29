@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.20 $ $Date: 2006-01-02 11:56:01 $ $Author: christian $
+ * @version $Revision: 1.21 $ $Date: 2006-01-29 01:47:55 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -118,79 +118,79 @@ static int* COMPLEX_IMAGINARY_INDEX = NUMBER_1_INTEGER_ARRAY;
 //
 
 /** The tui reallocate factor. */
-static int* TUI_REALLOCATE_FACTOR = NUMBER_2_INTEGER_ARRAY;
+//?? static int* TUI_REALLOCATE_FACTOR = NUMBER_2_INTEGER_ARRAY;
 
 /** The tui count. */
-static int* TUI_COUNT = NUMBER_4_INTEGER_ARRAY;
+//?? static int* TUI_COUNT = NUMBER_4_INTEGER_ARRAY;
 
 /** The tui z dimension index. */
-static int* TUI_Z_DIMENSION_INDEX = NUMBER_0_INTEGER_ARRAY;
+//?? static int* TUI_Z_DIMENSION_INDEX = NUMBER_0_INTEGER_ARRAY;
 
 /** The tui y dimension index. */
-static int* TUI_Y_DIMENSION_INDEX = NUMBER_1_INTEGER_ARRAY;
+//?? static int* TUI_Y_DIMENSION_INDEX = NUMBER_1_INTEGER_ARRAY;
 
 /** The tui x dimension index. */
-static int* TUI_X_DIMENSION_INDEX = NUMBER_2_INTEGER_ARRAY;
+//?? static int* TUI_X_DIMENSION_INDEX = NUMBER_2_INTEGER_ARRAY;
 
 /** The tui properties index. */
-static int* TUI_PROPERTIES_INDEX = NUMBER_3_INTEGER_ARRAY;
+//?? static int* TUI_PROPERTIES_INDEX = NUMBER_3_INTEGER_ARRAY;
 
 //
 // Textual user interface (tui) properties.
 //
 
 /** The tui properties count. */
-static int* TUI_PROPERTIES_COUNT = NUMBER_8_INTEGER_ARRAY;
+//?? static int* TUI_PROPERTIES_COUNT = NUMBER_8_INTEGER_ARRAY;
 
 /** The tui properties character index. */
-static int* TUI_PROPERTIES_CHARACTER_INDEX = NUMBER_0_INTEGER_ARRAY;
+//?? static int* TUI_PROPERTIES_CHARACTER_INDEX = NUMBER_0_INTEGER_ARRAY;
 
 /** The tui properties bold index. */
-static int* TUI_PROPERTIES_BOLD_INDEX = NUMBER_1_INTEGER_ARRAY;
+//?? static int* TUI_PROPERTIES_BOLD_INDEX = NUMBER_1_INTEGER_ARRAY;
 
 /** The tui properties underline index. */
-static int* TUI_PROPERTIES_UNDERLINE_INDEX = NUMBER_2_INTEGER_ARRAY;
+//?? static int* TUI_PROPERTIES_UNDERLINE_INDEX = NUMBER_2_INTEGER_ARRAY;
 
 /** The tui properties blink index. */
-static int* TUI_PROPERTIES_BLINK_INDEX = NUMBER_3_INTEGER_ARRAY;
+//?? static int* TUI_PROPERTIES_BLINK_INDEX = NUMBER_3_INTEGER_ARRAY;
 
 /** The tui properties inverse index. */
-static int* TUI_PROPERTIES_INVERSE_INDEX = NUMBER_4_INTEGER_ARRAY;
+//?? static int* TUI_PROPERTIES_INVERSE_INDEX = NUMBER_4_INTEGER_ARRAY;
 
 /** The tui properties hidden index. */
-static int* TUI_PROPERTIES_HIDDEN_INDEX = NUMBER_5_INTEGER_ARRAY;
+//?? static int* TUI_PROPERTIES_HIDDEN_INDEX = NUMBER_5_INTEGER_ARRAY;
 
 /** The tui properties foreground index. */
-static int* TUI_PROPERTIES_FOREGROUND_INDEX = NUMBER_6_INTEGER_ARRAY;
+//?? static int* TUI_PROPERTIES_FOREGROUND_INDEX = NUMBER_6_INTEGER_ARRAY;
 
 /** The tui properties background index. */
-static int* TUI_PROPERTIES_BACKGROUND_INDEX = NUMBER_7_INTEGER_ARRAY;
+//?? static int* TUI_PROPERTIES_BACKGROUND_INDEX = NUMBER_7_INTEGER_ARRAY;
 
 //
-// Textual user interface (tui) position.
+// User interface (ui) position.
 //
 
-/** The tui position x index. */
-static int* TUI_POSITION_X_INDEX = NUMBER_0_INTEGER_ARRAY;
+/** The ui position x index. */
+static int* UI_POSITION_X_INDEX = NUMBER_0_INTEGER_ARRAY;
 
-/** The tui position y index. */
-static int* TUI_POSITION_Y_INDEX = NUMBER_1_INTEGER_ARRAY;
+/** The ui position y index. */
+static int* UI_POSITION_Y_INDEX = NUMBER_1_INTEGER_ARRAY;
 
-/** The tui position z index. */
-static int* TUI_POSITION_Z_INDEX = NUMBER_2_INTEGER_ARRAY;
+/** The ui position z index. */
+static int* UI_POSITION_Z_INDEX = NUMBER_2_INTEGER_ARRAY;
 
 //
-// Textual user interface (tui) size.
+// User interface (ui) size.
 //
 
-/** The tui size x index. */
-static int* TUI_SIZE_X_INDEX = NUMBER_0_INTEGER_ARRAY;
+/** The ui size x index. */
+static int* UI_SIZE_X_INDEX = NUMBER_0_INTEGER_ARRAY;
 
-/** The tui size y index. */
-static int* TUI_SIZE_Y_INDEX = NUMBER_1_INTEGER_ARRAY;
+/** The ui size y index. */
+static int* UI_SIZE_Y_INDEX = NUMBER_1_INTEGER_ARRAY;
 
-/** The tui size z index. */
-static int* TUI_SIZE_Z_INDEX = NUMBER_2_INTEGER_ARRAY;
+/** The ui size z index. */
+static int* UI_SIZE_Z_INDEX = NUMBER_2_INTEGER_ARRAY;
 
 //
 // Compound.

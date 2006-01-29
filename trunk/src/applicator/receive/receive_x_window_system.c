@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2006-01-02 11:56:01 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2006-01-29 01:47:54 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -271,13 +271,13 @@ void receive_x_window_system_part(void* p0, void* p1, void* p2, void* p3, void* 
 
                         // Get graphical part position from details.
                         get_compound_element_by_name(*d, *dc,
-                            (void*) GUI_POSITION_NAME, (void*) GUI_POSITION_NAME_COUNT,
+                            (void*) UI_POSITION_NAME, (void*) UI_POSITION_NAME_COUNT,
                             (void*) &pa, (void*) &pac, (void*) &pas,
                             (void*) &pm, (void*) &pmc, (void*) &pms,
                             (void*) &pd, (void*) &pdc, (void*) &pds);
                         // Get graphical part size from details.
                         get_compound_element_by_name(*d, *dc,
-                            (void*) GUI_SIZE_NAME, (void*) GUI_SIZE_NAME_COUNT,
+                            (void*) UI_SIZE_NAME, (void*) UI_SIZE_NAME_COUNT,
                             (void*) &sa, (void*) &sac, (void*) &sas,
                             (void*) &sm, (void*) &smc, (void*) &sms,
                             (void*) &sd, (void*) &sdc, (void*) &sds);

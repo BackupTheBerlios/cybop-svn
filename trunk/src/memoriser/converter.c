@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.12 $ $Date: 2006-01-02 11:56:01 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2006-01-29 01:47:55 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -36,8 +36,8 @@
 #include "../memoriser/converter/fraction_converter.c"
 #include "../memoriser/converter/integer_vector_converter.c"
 #include "../memoriser/converter/latex_converter.c"
-#include "../memoriser/converter/linux_console_converter.c"
 #include "../memoriser/converter/time_converter.c"
+#include "../memoriser/converter/user_interface_converter.c"
 #include "../memoriser/converter/xml_converter.c"
 
 /**
@@ -179,6 +179,16 @@ void parse(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6)
 
     if (r == 0) {
 
+        compare_arrays(p5, p6, (void*) X_WINDOW_SYSTEM_MODEL, (void*) X_WINDOW_SYSTEM_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != 0) {
+
+            decode_x_window_system(p0, p1, p2, p3, p4);
+        }
+    }
+
+    if (r == 0) {
+
         compare_arrays(p5, p6, (void*) LATEX_ABSTRACTION, (void*) LATEX_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
@@ -225,8 +235,11 @@ void parse(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6)
  * @param p4 the source count
  * @param p5 the type
  * @param p6 the type count
+ * @param p7 the knowledge memory
+ * @param p8 the knowledge memory count
  */
-void serialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
+void serialise(void* p0, void* p1, void* p2, void* p3, void* p4,
+    void* p5, void* p6, void* p7, void* p8) {
 
     // The comparison result.
     int r = 0;
@@ -327,7 +340,17 @@ void serialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
 
         if (r != 0) {
 
-            serialise_linux_console(p0, p1, p2, p3, p4);
+            serialise_user_interface(p0, p1, p2, p3, p4, NULL_POINTER, NULL_POINTER, p7, p8, (void*) LINUX_CONSOLE_MODEL, (void*) LINUX_CONSOLE_MODEL_COUNT);
+        }
+    }
+
+    if (r == 0) {
+
+        compare_arrays(p5, p6, (void*) X_WINDOW_SYSTEM_MODEL, (void*) X_WINDOW_SYSTEM_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != 0) {
+
+            serialise_user_interface(p0, p1, p2, p3, p4, NULL_POINTER, NULL_POINTER, p7, p8, (void*) X_WINDOW_SYSTEM_MODEL, (void*) X_WINDOW_SYSTEM_MODEL_COUNT);
         }
     }
 
