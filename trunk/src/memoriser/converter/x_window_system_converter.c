@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2006-01-29 01:47:55 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2006-01-30 21:30:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -34,11 +34,10 @@
 #include "../../globals/constants/name_constants.c"
 #include "../../globals/constants/structure_constants.c"
 #include "../../globals/variables/variables.c"
-#include "../../memoriser/basics/ui_basics.c"
 #include "../../memoriser/accessor.c"
 
 /**
- * Decodes the x window system model into a compound model.
+ * Parses the x window system model into a compound model.
  *
  * @param p0 the destination compound model (Hand over as reference!)
  * @param p1 the destination count
@@ -46,11 +45,11 @@
  * @param p3 the internal memory containing all x window system windows
  * @param p4 the source count
  */
-void decode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void parse_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
 }
 
 /**
- * Encodes the source compound model into an x window system model.
+ * Serialises the source compound model into an x window system model.
  *
  * @param p0 the internal memory containing all x window system internals
  * @param p1 the destination count
@@ -59,9 +58,11 @@ void decode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
  * @param p4 the source compound model count
  * @param p5 the source compound details
  * @param p6 the source compound details count
+ * @param p7 the knowledge memory
+ * @param p8 the knowledge memory count
  */
-void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
-/*??
+void serialise_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
+    void* p5, void* p6, void* p7, void* p8) {
 
     if (p4 != NULL_POINTER) {
 
@@ -311,11 +312,12 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
                 // The source part is no root window.
 
                 // Calculate coordinates according to given layout.
-                ui_basics_layout(
-                    *pmx, *pmy, *pmz, *smx, *smy, *smz,
+/*??
+                serialise_x_window_system_layout(*pmx, *pmy, *pmz, *smx, *smy, *smz,
                     &fapx, &fapy, &fapz, &fasx, &fasy, &fasz,
                     &oapx, &oapy, &oapz, &oasx, &oasy, &oasz,
                     *cm, *cmc, *lm, *lmc);
+*/
 
                 // Draw graphical element using given coordinates.
                 XDrawRectangle(*di, **w, *gc, **pmx, **pmy, **smx - 1, **smy - 1);
@@ -421,7 +423,6 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
                 }
 */
 
-/*??
             } else {
 
                 // The source part is a root window.
@@ -433,13 +434,13 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
 
                 // Get source part title from details.
                 get_compound_element_by_name(*d, *dc,
-                    (void*) UI_TITLE_NAME, (void*) UI_TITLE_NAME_COUNT,
+                    (void*) GUI_TITLE_NAME, (void*) GUI_TITLE_NAME_COUNT,
                     (void*) &ta, (void*) &tac, (void*) &tas,
                     (void*) &tm, (void*) &tmc, (void*) &tms,
                     (void*) &td, (void*) &tdc, (void*) &tds);
                 // Get source part icon from details.
                 get_compound_element_by_name(*d, *dc,
-                    (void*) UI_ICON_NAME, (void*) UI_ICON_NAME_COUNT,
+                    (void*) GUI_ICON_NAME, (void*) GUI_ICON_NAME_COUNT,
                     (void*) &ia, (void*) &iac, (void*) &ias,
                     (void*) &im, (void*) &imc, (void*) &ims,
                     (void*) &id, (void*) &idc, (void*) &ids);
@@ -486,7 +487,7 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
                 // The part model is a compound.
 
                 // Recursively call this procedure for compound part model.
-                encode_x_window_system(p0, p1, p2, *m, (void*) *mc, *d, *dc);
+                serialise_x_window_system(p0, p1, p2, *m, (void*) *mc, *d, *dc, p7, p8);
             }
 
             // Reset source part abstraction, model, details.
@@ -570,7 +571,6 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
 
         log_message_debug("Could not encode x window system. The source count is null.");
     }
-*/
 }
 
 /* X_WINDOW_SYSTEM_CONVERTER_SOURCE */

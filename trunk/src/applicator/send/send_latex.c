@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-10-17 22:26:30 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2006-01-30 21:30:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -37,8 +37,10 @@
  * @param p0 the internal memory
  * @param p1 the source compound model
  * @param p2 the source count
+ * @param p3 the knowledge memory
+ * @param p4 the knowledge memory count
  */
-void send_latex(void* p0, void* p1, void* p2) {
+void send_latex(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     log_message_debug("Send latex message.");
 }

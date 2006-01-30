@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.13 $ $Date: 2006-01-29 01:47:55 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2006-01-30 21:30:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -36,8 +36,9 @@
 #include "../memoriser/converter/fraction_converter.c"
 #include "../memoriser/converter/integer_vector_converter.c"
 #include "../memoriser/converter/latex_converter.c"
+#include "../memoriser/converter/linux_console_converter.c"
 #include "../memoriser/converter/time_converter.c"
-#include "../memoriser/converter/user_interface_converter.c"
+#include "../memoriser/converter/x_window_system_converter.c"
 #include "../memoriser/converter/xml_converter.c"
 
 /**
@@ -169,6 +170,16 @@ void parse(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6)
 
     if (r == 0) {
 
+        compare_arrays(p5, p6, (void*) LATEX_ABSTRACTION, (void*) LATEX_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != 0) {
+
+            parse_latex(p0, p1, p2, p3, p4);
+        }
+    }
+
+    if (r == 0) {
+
         compare_arrays(p5, p6, (void*) LINUX_CONSOLE_MODEL, (void*) LINUX_CONSOLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
@@ -183,17 +194,7 @@ void parse(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6)
 
         if (r != 0) {
 
-            decode_x_window_system(p0, p1, p2, p3, p4);
-        }
-    }
-
-    if (r == 0) {
-
-        compare_arrays(p5, p6, (void*) LATEX_ABSTRACTION, (void*) LATEX_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != 0) {
-
-            parse_latex(p0, p1, p2, p3, p4);
+            parse_x_window_system(p0, p1, p2, p3, p4);
         }
     }
 
@@ -336,11 +337,21 @@ void serialise(void* p0, void* p1, void* p2, void* p3, void* p4,
 
     if (r == 0) {
 
+        compare_arrays(p5, p6, (void*) LATEX_ABSTRACTION, (void*) LATEX_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != 0) {
+
+            serialise_latex(p0, p1, p2, p3, p4);
+        }
+    }
+
+    if (r == 0) {
+
         compare_arrays(p5, p6, (void*) LINUX_CONSOLE_MODEL, (void*) LINUX_CONSOLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-            serialise_user_interface(p0, p1, p2, p3, p4, NULL_POINTER, NULL_POINTER, p7, p8, (void*) LINUX_CONSOLE_MODEL, (void*) LINUX_CONSOLE_MODEL_COUNT);
+            serialise_linux_console(p0, p1, p2, p3, p4, NULL_POINTER, NULL_POINTER, p7, p8);
         }
     }
 
@@ -350,27 +361,9 @@ void serialise(void* p0, void* p1, void* p2, void* p3, void* p4,
 
         if (r != 0) {
 
-            serialise_user_interface(p0, p1, p2, p3, p4, NULL_POINTER, NULL_POINTER, p7, p8, (void*) X_WINDOW_SYSTEM_MODEL, (void*) X_WINDOW_SYSTEM_MODEL_COUNT);
+            serialise_x_window_system(p0, p1, p2, p3, p4, NULL_POINTER, NULL_POINTER, p7, p8);
         }
     }
-
-    if (r == 0) {
-
-        compare_arrays(p5, p6, (void*) LATEX_ABSTRACTION, (void*) LATEX_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != 0) {
-
-            serialise_latex(p0, p1, p2, p3, p4);
-        }
-    }
-
-    //
-    // CONFIGURATION_ABSTRACTION
-    //
-    // CAUTION! Parameters of the internals memory MUST NOT be written
-    // to the configuration file which was given at command line!
-    // The CYBOI configuration file can only be edited MANUALLY.
-    //
 
     //?? Later, distinguish file types according to abstraction,
     //?? for example xml, html, sxi, txt, rtf,

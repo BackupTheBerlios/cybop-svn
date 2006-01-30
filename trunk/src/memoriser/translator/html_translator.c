@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.13 $ $Date: 2005-08-11 22:33:47 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2006-01-30 21:30:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -170,35 +170,27 @@ void encode_html_knowledgememory(void** dest, int* dest_count, int* dest_size,
  * @param source_detail the source detail
  * @param source_detail_count the source detail count
  */
-void encode_html_string( void** dest, int* dest_count, int* dest_size,
-                         void* source_model, int* source_model_count,
-                         void* source_detail, int* source_detail_count)
-{
+void encode_html_string(void** dest, int* dest_count, int* dest_size,
+    void* source_model, int* source_model_count, void* source_detail, int* source_detail_count) {
 
-    if ( (dest != NULL_POINTER ) &&
-         (dest_count != NULL_POINTER ) &&
-         (dest_size != NULL_POINTER ) )
-    {
+    if ((dest != NULL_POINTER)
+        && (dest_count != NULL_POINTER)
+        && (dest_size != NULL_POINTER)) {
 
-        //parse the model
-        parse( dest, dest_count, dest_size,
-               source_model, source_model_count,
-               CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
+        // Parse the model.
+        parse(dest, dest_count, dest_size, source_model, source_model_count,
+            CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
     }
 }
 
+void encode_html_integer(void** dest, int* dest_count, int* dest_size,
+    void* source_model, int* source_model_count, void* source_detail, int* source_detail_count) {
 
-void encode_html_integer( void** dest, int* dest_count, int* dest_size,
-                         void* source_model, int* source_model_count,
-                         void* source_detail, int* source_detail_count)
-{
+    if ((dest != NULL_POINTER)
+        && (dest_count != NULL_POINTER)
+        && (dest_size != NULL_POINTER)) {
 
-    if ( (dest != NULL_POINTER ) &&
-         (dest_count != NULL_POINTER ) &&
-         (dest_size != NULL_POINTER ) )
-    {
-
-        //parse the model
+        // Parse the model.
         void* dest_int = NULL_POINTER;
         int* dest_int_count = NULL_POINTER;
         int* dest_int_size = NULL_POINTER;
@@ -212,15 +204,18 @@ void encode_html_integer( void** dest, int* dest_count, int* dest_size,
             (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
             (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
 
+/*??
+    //?? REACTIVATE THIS LATER! It was commented out because of the missing
+    //?? knowledge memory parameters to be handed over to the "serialise" procedure.
         serialise( &dest_int, dest_int_count, dest_int_size,
                source_model, source_model_count,
                INTEGER_VECTOR_ABSTRACTION, INTEGER_VECTOR_ABSTRACTION_COUNT);
+*/
 
         //parse the model
         parse( dest, dest_count, dest_size,
                dest_int, dest_int_count,
                CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
-
     }
 }
 

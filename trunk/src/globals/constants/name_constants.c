@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.13 $ $Date: 2006-01-29 01:47:54 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2006-01-30 21:30:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -78,53 +78,53 @@ static char UI_FOREGROUND_NAME_ARRAY[] = {'f', 'o', 'r', 'e', 'g', 'r', 'o', 'u'
 static char* UI_FOREGROUND_NAME = UI_FOREGROUND_NAME_ARRAY;
 static int* UI_FOREGROUND_NAME_COUNT = NUMBER_10_INTEGER_ARRAY;
 
-/** The border name. */
-static char UI_BORDER_NAME_ARRAY[] = {'b', 'o', 'r', 'd', 'e', 'r'};
-static char* UI_BORDER_NAME = UI_BORDER_NAME_ARRAY;
-static int* UI_BORDER_NAME_COUNT = NUMBER_6_INTEGER_ARRAY;
-
 //
 // Textual user interface (tui) names.
 //
 
+/** The border name. */
+static char TUI_BORDER_NAME_ARRAY[] = {'b', 'o', 'r', 'd', 'e', 'r'};
+static char* TUI_BORDER_NAME = TUI_BORDER_NAME_ARRAY;
+static int* TUI_BORDER_NAME_COUNT = NUMBER_6_INTEGER_ARRAY;
+
 /** The hidden property name. */
-static char UI_HIDDEN_NAME_ARRAY[] = {'h', 'i', 'd', 'd', 'e', 'n'};
-static char* UI_HIDDEN_NAME = UI_HIDDEN_NAME_ARRAY;
-static int* UI_HIDDEN_NAME_COUNT = NUMBER_6_INTEGER_ARRAY;
+static char TUI_HIDDEN_NAME_ARRAY[] = {'h', 'i', 'd', 'd', 'e', 'n'};
+static char* TUI_HIDDEN_NAME = TUI_HIDDEN_NAME_ARRAY;
+static int* TUI_HIDDEN_NAME_COUNT = NUMBER_6_INTEGER_ARRAY;
 
 /** The inverse property name. */
-static char UI_INVERSE_NAME_ARRAY[] = {'i', 'n', 'v', 'e', 'r', 's', 'e'};
-static char* UI_INVERSE_NAME = UI_INVERSE_NAME_ARRAY;
-static int* UI_INVERSE_NAME_COUNT = NUMBER_7_INTEGER_ARRAY;
+static char TUI_INVERSE_NAME_ARRAY[] = {'i', 'n', 'v', 'e', 'r', 's', 'e'};
+static char* TUI_INVERSE_NAME = TUI_INVERSE_NAME_ARRAY;
+static int* TUI_INVERSE_NAME_COUNT = NUMBER_7_INTEGER_ARRAY;
 
 /** The blink property name. */
-static char UI_BLINK_NAME_ARRAY[] = {'b', 'l', 'i', 'n', 'k'};
-static char* UI_BLINK_NAME = UI_BLINK_NAME_ARRAY;
-static int* UI_BLINK_NAME_COUNT = NUMBER_5_INTEGER_ARRAY;
+static char TUI_BLINK_NAME_ARRAY[] = {'b', 'l', 'i', 'n', 'k'};
+static char* TUI_BLINK_NAME = TUI_BLINK_NAME_ARRAY;
+static int* TUI_BLINK_NAME_COUNT = NUMBER_5_INTEGER_ARRAY;
 
 /** The underline property name. */
-static char UI_UNDERLINE_NAME_ARRAY[] = {'u', 'n', 'd', 'e', 'r', 'l', 'i', 'n', 'e'};
-static char* UI_UNDERLINE_NAME = UI_UNDERLINE_NAME_ARRAY;
-static int* UI_UNDERLINE_NAME_COUNT = NUMBER_9_INTEGER_ARRAY;
+static char TUI_UNDERLINE_NAME_ARRAY[] = {'u', 'n', 'd', 'e', 'r', 'l', 'i', 'n', 'e'};
+static char* TUI_UNDERLINE_NAME = TUI_UNDERLINE_NAME_ARRAY;
+static int* TUI_UNDERLINE_NAME_COUNT = NUMBER_9_INTEGER_ARRAY;
 
 /** The bold property name. */
-static char UI_BOLD_NAME_ARRAY[] = {'b', 'o', 'l', 'd'};
-static char* UI_BOLD_NAME = UI_BOLD_NAME_ARRAY;
-static int* UI_BOLD_NAME_COUNT = NUMBER_4_INTEGER_ARRAY;
+static char TUI_BOLD_NAME_ARRAY[] = {'b', 'o', 'l', 'd'};
+static char* TUI_BOLD_NAME = TUI_BOLD_NAME_ARRAY;
+static int* TUI_BOLD_NAME_COUNT = NUMBER_4_INTEGER_ARRAY;
 
 //
 // Graphical user interface (gui) names.
 //
 
 /** The title name. */
-static char UI_TITLE_NAME_ARRAY[] = {'t', 'i', 't', 'l', 'e'};
-static char* UI_TITLE_NAME = UI_TITLE_NAME_ARRAY;
-static int* UI_TITLE_NAME_COUNT = NUMBER_5_INTEGER_ARRAY;
+static char GUI_TITLE_NAME_ARRAY[] = {'t', 'i', 't', 'l', 'e'};
+static char* GUI_TITLE_NAME = GUI_TITLE_NAME_ARRAY;
+static int* GUI_TITLE_NAME_COUNT = NUMBER_5_INTEGER_ARRAY;
 
 /** The icon name. */
-static char UI_ICON_NAME_ARRAY[] = {'i', 'c', 'o', 'n'};
-static char* UI_ICON_NAME = UI_ICON_NAME_ARRAY;
-static int* UI_ICON_NAME_COUNT = NUMBER_4_INTEGER_ARRAY;
+static char GUI_ICON_NAME_ARRAY[] = {'i', 'c', 'o', 'n'};
+static char* GUI_ICON_NAME = GUI_ICON_NAME_ARRAY;
+static int* GUI_ICON_NAME_COUNT = NUMBER_4_INTEGER_ARRAY;
 
 /** The expose command name. */
 static char GUI_EXPOSE_COMMAND_NAME_ARRAY[] = {'e', 'x', 'p', 'o', 's', 'e'};

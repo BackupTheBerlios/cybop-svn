@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.12 $ $Date: 2006-01-02 11:56:01 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2006-01-30 21:30:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -43,15 +43,17 @@
  * @param p0 the internal memory
  * @param p1 the source gui compound model
  * @param p2 the source count
+ * @param p3 the knowledge memory
+ * @param p4 the knowledge memory count
  */
-void send_x_window_system(void* p0, void* p1, void* p2) {
+void send_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     log_message_debug("Send x window system message.");
 
     fprintf(stderr, "TEST send 0: %i\n", p0);
 
-    // Encode compound model into x window system window.
-    encode(p0, NULL_POINTER, NULL_POINTER, p1, p2, (void*) X_WINDOW_SYSTEM_MODEL, (void*) X_WINDOW_SYSTEM_MODEL_COUNT);
+    // Serialise compound model into x window system window.
+    serialise(p0, NULL_POINTER, NULL_POINTER, p1, p2, (void*) X_WINDOW_SYSTEM_MODEL, (void*) X_WINDOW_SYSTEM_MODEL_COUNT, p3, p4);
 
     fprintf(stderr, "TEST send 1: %i\n", p0);
 

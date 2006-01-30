@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.38 $ $Date: 2006-01-29 01:47:54 $ $Author: christian $
+ * @version $Revision: 1.39 $ $Date: 2006-01-30 21:30:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -59,8 +59,6 @@ void send_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
     void* a = NULL_POINTER;
     int ac = 0;
     int as = 0;
-
-    fprintf(stderr, "TEST send linux console 0: %i\n", p0);
 
     // Create array.
     allocate((void*) &a, (void*) &as, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
