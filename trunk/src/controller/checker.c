@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.13 $ $Date: 2006-01-02 11:56:01 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2006-02-01 11:42:52 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -163,7 +163,7 @@ void check(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6)
     //?? This sleep call is necessary to allow other processes to get processor time.
     //?? TODO: Delete this sleep procedure call later and use system signals
     //?? to inform CYBOI about events like a mouse click or socket message etc.!
-    fprintf(stderr, "TEST sleep: %i\n", i);
+//??    fprintf(stderr, "TEST sleep: %i\n", i);
 //??    sleep(1);
 
             // Reset abstraction.

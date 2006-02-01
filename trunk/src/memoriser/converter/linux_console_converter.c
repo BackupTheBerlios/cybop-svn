@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2006-02-01 09:12:58 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2006-02-01 11:42:52 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -817,7 +817,7 @@ void serialise_linux_console_rectangle_compass_layout(void* p0, void* p1, void* 
             *cpy = *fapy;
             *cpz = *fapz;
             *csx = *fasx;
-            *csy = 20;
+//??            *csy = 20;
             *csz = *fasz;
             // Set free area coordinates.
             *fapy = *fapy + *csy;
@@ -833,10 +833,10 @@ void serialise_linux_console_rectangle_compass_layout(void* p0, void* p1, void* 
 
             // Set cell coordinates.
             *cpx = *fapx;
-            *cpy = (*fasy - 20);
+            *cpy = *fapy + (*fasy - *csy);
             *cpz = *fapz;
             *csx = *fasx;
-            *csy = 20;
+//??            *csy = 20;
             *csz = *fasz;
             // Set free area coordinates.
             *fasy = *fasy - *csy;
@@ -853,7 +853,7 @@ void serialise_linux_console_rectangle_compass_layout(void* p0, void* p1, void* 
             *cpx = *fapx;
             *cpy = *fapy;
             *cpz = *fapz;
-            *csx = 20;
+//??            *csx = 20;
             *csy = *fasy;
             *csz = *fasz;
             // Set free area coordinates.
@@ -869,10 +869,10 @@ void serialise_linux_console_rectangle_compass_layout(void* p0, void* p1, void* 
         if (r != 0) {
 
             // Set cell coordinates.
-            *cpx = (*fasx - 20);
+            *cpx = *fapx + (*fasx - *csx);
             *cpy = *fapy;
             *cpz = *fapz;
-            *csx = 20;
+//??            *csx = 20;
             *csy = *fasy;
             *csz = *fasz;
             // Set free area coordinates.

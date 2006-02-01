@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2006-01-29 01:47:54 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2006-02-01 11:42:52 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -358,9 +358,9 @@ void receive_x_window_system_part(void* p0, void* p1, void* p2, void* p3, void* 
                         smz = (int**) &NULL_POINTER;
 
                         // Reset new mouse coordinates.
-                        int nx = *NUMBER_0_INTEGER;
-                        int ny = *NUMBER_0_INTEGER;
-                        int nz = *NUMBER_0_INTEGER;
+                        nx = *NUMBER_0_INTEGER;
+                        ny = *NUMBER_0_INTEGER;
+                        nz = *NUMBER_0_INTEGER;
 
                         // Reset comparison result.
                         r = 0;
