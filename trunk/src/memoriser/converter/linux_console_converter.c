@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2006-01-30 21:30:12 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2006-02-01 09:12:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -532,18 +532,9 @@ void serialise_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, v
                             // The right bottom character.
                             char rbc = *SPACE_CHARACTER;
 
-    fprintf(stderr, "TEST serialise rectangle 0 cc: %i\n", p4);
-
                             // Determine border characters.
                             serialise_linux_console_rectangle_border((void*) &hc, (void*) &vc,
                                 (void*) &ltc, (void*) &rtc, (void*) &lbc, (void*) &rbc, p18, p19);
-
-    fprintf(stderr, "TEST serialise rectangle init pz: %i\n", *pz);
-    fprintf(stderr, "TEST serialise rectangle init py: %i\n", *py);
-    fprintf(stderr, "TEST serialise rectangle init px: %i\n", *px);
-    fprintf(stderr, "TEST serialise rectangle init sz: %i\n", *sz);
-    fprintf(stderr, "TEST serialise rectangle init sy: %i\n", *sy);
-    fprintf(stderr, "TEST serialise rectangle init sx: %i\n", *sx);
 
                             // The z loop count.
                             int z = *pz;
@@ -558,17 +549,10 @@ void serialise_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, v
                             // The x loop limit as sum of position and size.
                             int xl = *px + *sx;
 
-    fprintf(stderr, "TEST serialise rectangle init z: %i\n", z);
-    fprintf(stderr, "TEST serialise rectangle init y: %i\n", y);
-    fprintf(stderr, "TEST serialise rectangle init x: %i\n", x);
-    fprintf(stderr, "TEST serialise rectangle init zl: %i\n", zl);
-    fprintf(stderr, "TEST serialise rectangle init yl: %i\n", yl);
-    fprintf(stderr, "TEST serialise rectangle init xl: %i\n", xl);
-
                             // The character index.
                             int ci = 0;
                             // The character.
-                            void* c = NULL_POINTER;
+                            void* c = SPACE_CHARACTER;
 
                             while (1) {
 
@@ -591,8 +575,6 @@ void serialise_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, v
                                             break;
                                         }
 
-    fprintf(stderr, "TEST serialise rectangle z, y, x: %i %i %i\n", z, y, x);
-
                                         if (p18 == NULL_POINTER) {
 
                                             // A border is NOT given.
@@ -601,9 +583,6 @@ void serialise_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, v
 
                                                 // Calculate character index.
                                                 ci = x - *px;
-
-    fprintf(stderr, "TEST serialise rectangle NO BORDER ci: %i\n", ci);
-    fprintf(stderr, "TEST serialise rectangle NO BORDER cc: %i\n", cc);
 
                                                 if (ci < *cc) {
 
@@ -623,8 +602,6 @@ void serialise_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, v
                                         } else {
 
                                             // A border IS given.
-
-    fprintf(stderr, "TEST serialise rectangle IS BORDER ci: %i\n", ci);
 
                                             if (y == *py) {
 
@@ -696,31 +673,35 @@ void serialise_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, v
                                                             get(p3, (void*) &ci, (void*) &c, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
                                                         }
 
-                                                        // Serialise character using escape codes.
-                                                        serialise_linux_console_character(p0, p1, p2, &x, &y, &z,
-                                                            p10, p11, p5, p6, p7, p8, p9, c);
-
                                                     } else {
 
                                                         log_message_debug("Could not serialise linux console rectangle. The character count is null.");
                                                     }
+
+                                                    // Serialise character using escape codes.
+                                                    serialise_linux_console_character(p0, p1, p2, &x, &y, &z,
+                                                        p10, p11, p5, p6, p7, p8, p9, c);
                                                 }
                                             }
                                         }
-
-    fprintf(stderr, "TEST serialise rectangle s: %c\n", c);
 
                                         // The character index ci does not have to be reset,
                                         // as it is always calculated before getting a character.
 
                                         // Reset character.
-                                        c = NULL_POINTER;
+                                        c = SPACE_CHARACTER;
 
                                         x++;
                                     }
 
+                                    // Reset x loop count.
+                                    x = *px;
+
                                     y++;
                                 }
+
+                                // Reset y loop count.
+                                y = *py;
 
                                 z++;
                             }
@@ -754,6 +735,38 @@ void serialise_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, v
 
         log_message_debug("Could not serialise user interface rectangle. The character count is null.");
     }
+}
+
+/**
+ * Serialises a linux console rectangle coordinates layout.
+ *
+ * @param p0 the cell position x (of the part)
+ * @param p1 the cell position y
+ * @param p2 the cell position z
+ * @param p3 the cell size x (of the part)
+ * @param p4 the cell size y
+ * @param p5 the cell size z
+ * @param p6 the original area position x (of the whole)
+ * @param p7 the original area position y
+ * @param p8 the original area position z
+ * @param p9 the original area size x (of the whole)
+ * @param p10 the original area size y
+ * @param p11 the original area size z
+ */
+void serialise_linux_console_rectangle_coordinates_layout(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
+    void* p6, void* p7, void* p8, void* p9, void* p10, void* p11) {
+
+    int* cpx = (int*) p0;
+    int* cpy = (int*) p1;
+    int* cpz = (int*) p2;
+    int* oapx = (int*) p6;
+    int* oapy = (int*) p7;
+    int* oapz = (int*) p8;
+
+    // Set cell coordinates.
+    *cpx = *oapx + *cpx;
+    *cpy = *oapy + *cpy;
+    *cpz = *oapz + *cpz;
 }
 
 /**
@@ -928,10 +941,8 @@ void serialise_linux_console_rectangle_layout(void* p0, void* p1, void* p2, void
 
         if (r != 0) {
 
-            // The position and size coordinates of the part are given directly
-            // in the CYBOL knowledge template. So nothing is to be done here.
-            // Nevertheless, this comparison is done in order to set the
-            // comparison flag to true, thus to avoid further comparisons below.
+            // Determine new position and size coordinates for part.
+            serialise_linux_console_rectangle_coordinates_layout(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11);
         }
     }
 
@@ -969,19 +980,21 @@ void serialise_linux_console_rectangle_layout(void* p0, void* p1, void* p2, void
  * @param p13 the position count
  * @param p14 the size
  * @param p15 the size count
- * @param p16 the whole model size
- * @param p17 the whole model size count
- * @param p18 the border
- * @param p19 the border count
- * @param p20 the layout cell
- * @param p21 the layout cell count
- * @param p22 the layout
- * @param p23 the layout count
+ * @param p16 the whole model position
+ * @param p17 the whole model position count
+ * @param p18 the whole model size
+ * @param p19 the whole model size count
+ * @param p20 the border
+ * @param p21 the border count
+ * @param p22 the layout cell
+ * @param p23 the layout cell count
+ * @param p24 the layout
+ * @param p25 the layout count
  */
 void serialise_linux_console_coordinates(void* p0, void* p1, void* p2, void* p3, void* p4,
     void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11,
     void* p12, void* p13, void* p14, void* p15, void* p16, void* p17,
-    void* p18, void* p19, void* p20, void* p21, void* p22, void* p23) {
+    void* p18, void* p19, void* p20, void* p21, void* p22, void* p23, void* p24, void* p25) {
 
     // The source part position x, y, z.
     int** px = (int**) &NULL_POINTER;
@@ -991,6 +1004,10 @@ void serialise_linux_console_coordinates(void* p0, void* p1, void* p2, void* p3,
     int** sx = (int**) &NULL_POINTER;
     int** sy = (int**) &NULL_POINTER;
     int** sz = (int**) &NULL_POINTER;
+    // The source whole position coordinates.
+    int** wpmx = (int**) &NULL_POINTER;
+    int** wpmy = (int**) &NULL_POINTER;
+    int** wpmz = (int**) &NULL_POINTER;
     // The source whole size coordinates.
     int** wsmx = (int**) &NULL_POINTER;
     int** wsmy = (int**) &NULL_POINTER;
@@ -1021,22 +1038,22 @@ void serialise_linux_console_coordinates(void* p0, void* p1, void* p2, void* p3,
     get(p14, (void*) UI_SIZE_Y_INDEX, (void*) &sy, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     get(p14, (void*) UI_SIZE_Z_INDEX, (void*) &sz, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-    fprintf(stderr, "TEST coordinates 0 sz: %i\n", **sz);
+    if (p18 != NULL_POINTER) {
 
-    if (p16 != NULL_POINTER) {
-
-    fprintf(stderr, "TEST coordinates 1 sz: %i\n", **sz);
-
+        // Determine source whole position coordinates.
+        get(p16, (void*) UI_POSITION_X_INDEX, (void*) &wpmx, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        get(p16, (void*) UI_POSITION_Y_INDEX, (void*) &wpmy, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        get(p16, (void*) UI_POSITION_Z_INDEX, (void*) &wpmz, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         // Determine source whole size coordinates.
-        get(p16, (void*) UI_SIZE_X_INDEX, (void*) &wsmx, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        get(p16, (void*) UI_SIZE_Y_INDEX, (void*) &wsmy, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        get(p16, (void*) UI_SIZE_Z_INDEX, (void*) &wsmz, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        get(p18, (void*) UI_SIZE_X_INDEX, (void*) &wsmx, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        get(p18, (void*) UI_SIZE_Y_INDEX, (void*) &wsmy, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        get(p18, (void*) UI_SIZE_Z_INDEX, (void*) &wsmz, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-        // Set original area position coordinates, set to the zero origo.
-        oapx = *NUMBER_0_INTEGER;
-        oapy = *NUMBER_0_INTEGER;
-        oapz = *NUMBER_0_INTEGER;
-        // Set original area size coordinates, initialised with whole coordinates.
+        // Set original area position coordinates, initialised with whole position.
+        oapx = **wpmx;
+        oapy = **wpmy;
+        oapz = **wpmz;
+        // Set original area size coordinates, initialised with whole size.
         oasx = **wsmx;
         oasy = **wsmy;
         oasz = **wsmz;
@@ -1055,12 +1072,10 @@ void serialise_linux_console_coordinates(void* p0, void* p1, void* p2, void* p3,
     serialise_linux_console_rectangle_layout(*px, *py, *pz, *sx, *sy, *sz,
         &fapx, &fapy, &fapz, &fasx, &fasy, &fasz,
         &oapx, &oapy, &oapz, &oasx, &oasy, &oasz,
-        p20, p21, p22, p23);
+        p22, p23, p24, p25);
 
     serialise_linux_console_rectangle(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9,
-        p10, p11, *px, *py, *pz, *sx, *sy, *sz, p18, p19);
-
-    fprintf(stderr, "TEST coordinates 2 sequences: %s\n", *((char**) p0));
+        p10, p11, *px, *py, *pz, *sx, *sy, *sz, p20, p21);
 }
 
 /**
@@ -1091,21 +1106,23 @@ void serialise_linux_console_coordinates(void* p0, void* p1, void* p2, void* p3,
  * @param p22 the position count
  * @param p23 the size
  * @param p24 the size count
- * @param p25 the whole model size
- * @param p26 the whole model size count
- * @param p27 the border
- * @param p28 the border count
- * @param p29 the layout cell
- * @param p30 the layout cell count
- * @param p31 the layout
- * @param p32 the layout count
- * @param p33 the shape
- * @param p34 the shape count
+ * @param p25 the whole model position
+ * @param p26 the whole model position count
+ * @param p27 the whole model size
+ * @param p28 the whole model size count
+ * @param p29 the border
+ * @param p30 the border count
+ * @param p31 the layout cell
+ * @param p32 the layout cell count
+ * @param p33 the layout
+ * @param p34 the layout count
+ * @param p35 the shape
+ * @param p36 the shape count
  */
 void serialise_linux_console_shape(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
     void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14, void* p15, void* p16,
     void* p17, void* p18, void* p19, void* p20, void* p21, void* p22, void* p23, void* p24, void* p25, void* p26,
-    void* p27, void* p28, void* p29, void* p30, void* p31, void* p32, void* p33, void* p34) {
+    void* p27, void* p28, void* p29, void* p30, void* p31, void* p32, void* p33, void* p34, void* p35, void* p36) {
 
     // The character.
     void* c = NULL_POINTER;
@@ -1157,37 +1174,37 @@ void serialise_linux_console_shape(void* p0, void* p1, void* p2, void* p3, void*
 
     if (r == 0) {
 
-        compare_arrays(p33, p34, (void*) UI_RECTANGLE_SHAPE_MODEL, (void*) UI_RECTANGLE_SHAPE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p35, p36, (void*) UI_RECTANGLE_SHAPE_MODEL, (void*) UI_RECTANGLE_SHAPE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
             serialise_linux_console_coordinates(p0, p1, p2, c, cc, &h, &i, &bl, &u, &b,
-                &bg, &fg, p21, p22, p23, p24, p25, p26, p27, p28, p29, p30, p31, p32);
+                &bg, &fg, p21, p22, p23, p24, p25, p26, p27, p28, p29, p30, p31, p32, p33, p34);
         }
     }
 
     if (r == 0) {
 
-        compare_arrays(p33, p34, (void*) UI_CIRCLE_SHAPE_MODEL, (void*) UI_CIRCLE_SHAPE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p35, p36, (void*) UI_CIRCLE_SHAPE_MODEL, (void*) UI_CIRCLE_SHAPE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
 /*??
             serialise_linux_console_coordinates(p0, p1, p2, c, cc, &h, &i, &bl, &u, &b,
-                &bg, &fg, p21, p22, p23, p24, p25, p26, p27, p28, p29, p30, p31, p32);
+                &bg, &fg, p21, p22, p23, p24, p25, p26, p27, p28, p29, p30, p31, p32, p33, p34);
 */
         }
     }
 
     if (r == 0) {
 
-        compare_arrays(p33, p34, (void*) UI_POLYGON_SHAPE_MODEL, (void*) UI_POLYGON_SHAPE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p35, p36, (void*) UI_POLYGON_SHAPE_MODEL, (void*) UI_POLYGON_SHAPE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
 /*??
             serialise_linux_console_coordinates(p0, p1, p2, c, cc, &h, &i, &bl, &u, &b,
-                &bg, &fg, p21, p22, p23, p24, p25, p26, p27, p28, p29, p30, p31, p32);
+                &bg, &fg, p21, p22, p23, p24, p25, p26, p27, p28, p29, p30, p31, p32, p33, p34);
 */
         }
     }
@@ -1225,8 +1242,18 @@ void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4,
 
         int* sc = (int*) p4;
 
-        log_message_debug("Serialise compound model into user interface statements.");
+        log_message_debug("Serialise compound model into linux console control sequences.");
 
+        // The source whole position.
+        void** wpa = &NULL_POINTER;
+        void** wpac = &NULL_POINTER;
+        void** wpas = &NULL_POINTER;
+        void** wpm = &NULL_POINTER;
+        void** wpmc = &NULL_POINTER;
+        void** wpms = &NULL_POINTER;
+        void** wpd = &NULL_POINTER;
+        void** wpdc = &NULL_POINTER;
+        void** wpds = &NULL_POINTER;
         // The source whole size.
         void** wsa = &NULL_POINTER;
         void** wsac = &NULL_POINTER;
@@ -1401,19 +1428,23 @@ void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4,
                 break;
             }
 
+            // Get source whole position from details.
+            get_compound_element_by_name(p5, p6,
+                (void*) UI_POSITION_NAME, (void*) UI_POSITION_NAME_COUNT,
+                (void*) &wpa, (void*) &wpac, (void*) &wpas,
+                (void*) &wpm, (void*) &wpmc, (void*) &wpms,
+                (void*) &wpd, (void*) &wpdc, (void*) &wpds);
             // Get source whole size from details.
             get_compound_element_by_name(p5, p6,
                 (void*) UI_SIZE_NAME, (void*) UI_SIZE_NAME_COUNT,
                 (void*) &wsa, (void*) &wsac, (void*) &wsas,
                 (void*) &wsm, (void*) &wsmc, (void*) &wsms,
                 (void*) &wsd, (void*) &wsdc, (void*) &wsds);
-
             // Get part at index j.
             get_compound_element_by_index(p3, p4, (void*) &j,
                 (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms,
                 (void*) &d, (void*) &dc, (void*) &ds);
-
             // Get part super properties from details.
             get_real_compound_element_by_name(*d, *dc,
                 (void*) SUPER_PROPERTIES_NAME, (void*) SUPER_PROPERTIES_NAME_COUNT,
@@ -1595,7 +1626,8 @@ void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4,
             // Serialise shape.
             serialise_linux_console_shape(p0, p1, p2, *m, *mc, *a, *ac,
                 *hm, *hmc, *im, *imc, *blm, *blmc, *um, *umc, *bm, *bmc,
-                *bgm, *bgmc, *fgm, *fgmc, *pm, *pmc, *sm, *smc, *wsm, *wsmc, *bom, *bomc,
+                *bgm, *bgmc, *fgm, *fgmc, *pm, *pmc, *sm, *smc,
+                *wpm, *wpmc, *wsm, *wsmc, *bom, *bomc,
                 *cm, *cmc, *lm, *lmc, *shm, *shmc);
 
             compare_arrays(*a, *ac, (void*) CYBOL_ABSTRACTION, (void*) CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
@@ -1608,6 +1640,16 @@ void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4,
                 serialise_linux_console(p0, p1, p2, *m, *mc, *d, *dc, p7, p8);
             }
 
+            // Reset source whole position.
+            wpa = &NULL_POINTER;
+            wpac = &NULL_POINTER;
+            wpas = &NULL_POINTER;
+            wpm = &NULL_POINTER;
+            wpmc = &NULL_POINTER;
+            wpms = &NULL_POINTER;
+            wpd = &NULL_POINTER;
+            wpdc = &NULL_POINTER;
+            wpds = &NULL_POINTER;
             // Reset source whole size.
             wsa = &NULL_POINTER;
             wsac = &NULL_POINTER;

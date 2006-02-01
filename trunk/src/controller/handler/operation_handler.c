@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.13 $ $Date: 2006-01-02 11:56:01 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2006-02-01 09:12:57 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -76,8 +76,8 @@ void handle_operation(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
     log_message((void*) INFO_LOG_LEVEL, (void*) HANDLE_OPERATION_MESSAGE, (void*) HANDLE_OPERATION_MESSAGE_COUNT);
 
     //?? TEST
-    fprintf(stderr, "TEST: Operation: %s\n", (char*) p8);
-    fprintf(stderr, "TEST: Operation count: %i\n", *((int*) p9));
+//??    fprintf(stderr, "TEST: Operation: %s\n", (char*) p8);
+//??    fprintf(stderr, "TEST: Operation count: %i\n", *((int*) p9));
 //??    fprintf(stderr, "TEST handler p1: %i\n", p1);
 //??    test_knowledge_memory(p1, p2, 5);
 
