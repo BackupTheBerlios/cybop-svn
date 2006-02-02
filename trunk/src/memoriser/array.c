@@ -49,7 +49,7 @@
  * the array size needs to be given extra here because sizeof will not work.
  * See: http://pegasus.rutgers.edu/~elflord/cpp/gotchas/index.shtml
  *
- * @version $Revision: 1.7 $ $Date: 2005-08-04 15:20:58 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2006-02-02 00:29:41 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -64,6 +64,7 @@
 #include "../memoriser/array/integer_array.c"
 #include "../memoriser/array/pointer_array.c"
 #include "../memoriser/array/unsigned_long_array.c"
+#include "../memoriser/array/wide_character_array.c"
 
 /**
  * Allocates the array.
@@ -97,6 +98,10 @@ void allocate_array(void* p0, void* p1, void* p2) {
         } else if (*t == *CHARACTER_ARRAY) {
 
             allocate_character_array(p0, p1);
+
+        } else if (*t == *WIDE_CHARACTER_ARRAY) {
+
+            allocate_wide_character_array(p0, p1);
         }
 
     } else {
@@ -137,6 +142,10 @@ void deallocate_array(void* p0, void* p1, void* p2) {
         } else if (*t == *CHARACTER_ARRAY) {
 
             deallocate_character_array(p0, p1);
+
+        } else if (*t == *WIDE_CHARACTER_ARRAY) {
+
+            deallocate_wide_character_array(p0, p1);
         }
 
     } else {
@@ -178,6 +187,10 @@ void reallocate_array(void* p0, void* p1, void* p2, void* p3) {
         } else if (*t == *CHARACTER_ARRAY) {
 
             reallocate_character_array(p0, p1, p2);
+
+        } else if (*t == *WIDE_CHARACTER_ARRAY) {
+
+            reallocate_wide_character_array(p0, p1, p2);
         }
 
     } else {
@@ -223,6 +236,10 @@ void compare_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4) {
         } else if (*t == *CHARACTER_ARRAY) {
 
             compare_character_array_elements(p0, p1, p2, p3);
+
+        } else if (*t == *WIDE_CHARACTER_ARRAY) {
+
+            compare_wide_character_array_elements(p0, p1, p2, p3);
         }
 
     } else {
@@ -303,6 +320,10 @@ void get_array_elements(void* p0, void* p1, void* p2, void* p3) {
         } else if (*t == *CHARACTER_ARRAY) {
 
             get_character_array_elements(p0, p1, p2);
+
+        } else if (*t == *WIDE_CHARACTER_ARRAY) {
+
+            get_wide_character_array_elements(p0, p1, p2);
         }
 
     } else {
@@ -345,7 +366,7 @@ void get_index_in_array(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
 
                 while (1) {
 
-                    if ( array_counter >= *ac-*sc+1 ) {
+                    if (array_counter >= *ac - *sc + 1) {
 
                         break;
                     }
@@ -358,10 +379,11 @@ void get_index_in_array(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
 
                         //the search array is founded in array
                         *position = array_counter;
+
                         break;
                     }
 
-                    array_counter = array_counter+1;
+                    array_counter = array_counter + 1;
                 }
 
             } else {
@@ -412,6 +434,10 @@ void set_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4) {
         } else if (*t == *CHARACTER_ARRAY) {
 
             set_character_array_elements(p0, p1, p2, p3);
+
+        } else if (*t == *WIDE_CHARACTER_ARRAY) {
+
+            set_wide_character_array_elements(p0, p1, p2, p3);
         }
 
     } else {
@@ -454,6 +480,10 @@ void remove_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4) {
         } else if (*t == *CHARACTER_ARRAY) {
 
             remove_character_array_elements(p0, p1, p2, p3);
+
+        } else if (*t == *WIDE_CHARACTER_ARRAY) {
+
+            remove_wide_character_array_elements(p0, p1, p2, p3);
         }
 
     } else {
@@ -502,6 +532,10 @@ void get_array_elements_index(void* p0, void* p1, void* p2, void* p3, void* p4, 
         } else if (*t == *CHARACTER_ARRAY) {
 
             get_character_array_elements_index(p0, p1, p2, p3, p4);
+
+        } else if (*t == *WIDE_CHARACTER_ARRAY) {
+
+            get_wide_character_array_elements_index(p0, p1, p2, p3, p4);
         }
 
     } else {

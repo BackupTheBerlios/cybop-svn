@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.13 $ $Date: 2006-01-02 11:56:01 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2006-02-02 00:29:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -36,17 +36,20 @@
 /** The character array constant. */
 static int* CHARACTER_ARRAY = NUMBER_0_INTEGER_ARRAY;
 
+/** The wide character array constant. */
+static int* WIDE_CHARACTER_ARRAY = NUMBER_1_INTEGER_ARRAY;
+
 /** The integer array constant. */
-static int* INTEGER_ARRAY = NUMBER_1_INTEGER_ARRAY;
+static int* INTEGER_ARRAY = NUMBER_2_INTEGER_ARRAY;
 
 /** The pointer array constant. */
-static int* POINTER_ARRAY = NUMBER_2_INTEGER_ARRAY;
+static int* POINTER_ARRAY = NUMBER_3_INTEGER_ARRAY;
 
 /** The double array constant. */
-static int* DOUBLE_ARRAY = NUMBER_3_INTEGER_ARRAY;
+static int* DOUBLE_ARRAY = NUMBER_4_INTEGER_ARRAY;
 
 /** The unsigned long array constant. */
-static int* UNSIGNED_LONG_ARRAY = NUMBER_4_INTEGER_ARRAY;
+static int* UNSIGNED_LONG_ARRAY = NUMBER_5_INTEGER_ARRAY;
 
 //
 // Internal memory abstraction.
@@ -117,6 +120,11 @@ static int* BOOLEAN_ABSTRACTION_COUNT = NUMBER_7_INTEGER_ARRAY;
 static char CHARACTER_VECTOR_ABSTRACTION_ARRAY[] = {'c', 'h', 'a', 'r', 'a', 'c', 't', 'e', 'r'};
 static char* CHARACTER_VECTOR_ABSTRACTION = CHARACTER_VECTOR_ABSTRACTION_ARRAY;
 static int* CHARACTER_VECTOR_ABSTRACTION_COUNT = NUMBER_9_INTEGER_ARRAY;
+
+/** The wide character vector abstraction. */
+static char WIDE_CHARACTER_VECTOR_ABSTRACTION_ARRAY[] = {'w', 'i', 'd', 'e', '_', 'c', 'h', 'a', 'r', 'a', 'c', 't', 'e', 'r'};
+static char* WIDE_CHARACTER_VECTOR_ABSTRACTION = WIDE_CHARACTER_VECTOR_ABSTRACTION_ARRAY;
+static int* WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT = NUMBER_14_INTEGER_ARRAY;
 
 /** The integer vector abstraction. */
 static char INTEGER_VECTOR_ABSTRACTION_ARRAY[] = {'i', 'n', 't', 'e', 'g', 'e', 'r'};

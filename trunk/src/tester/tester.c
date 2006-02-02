@@ -24,7 +24,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.16 $ $Date: 2006-01-02 11:56:02 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2006-02-02 00:29:42 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -33,6 +33,8 @@
 #define TEST_SOURCE
 
 #include <stdio.h>
+#include <termios.h>
+#include "../globals/constants/abstraction_constants.c"
 #include "../globals/constants/structure_constants.c"
 #include "../globals/variables/variables.c"
 #include "../memoriser/accessor/compound_accessor.c"
@@ -68,6 +70,71 @@ void test_character_array_with_termination() {
     char test[] = {'t', 'e', 's', 't', ' ', 'c', 'h', 'a', 'r', ' ', 'a', 'r', 'r', 'a', 'y', ' ', 'o', 'k', '\n', '\0'};
 
     fputs(test, stdout);
+}
+
+/**
+ * Tests the wide character output on linux console,
+ * in between escape control sequences.
+ */
+void test_wide_character_output() {
+
+    fputs("Test wide character array with termination:\n", stdout);
+
+    // The terminal (device name).
+    FILE* t = NULL_POINTER;
+    // The original termios interface.
+    struct termios* to = NULL_POINTER;
+    // The working termios interface.
+    struct termios* tw = NULL_POINTER;
+
+    // Create linux console internals.
+//??        allocate((void*) &t, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    to = (struct termios*) malloc(sizeof(struct termios));
+    tw = (struct termios*) malloc(sizeof(struct termios));
+
+    // Initialise linux console internals.
+    // Set file stream.
+    // CAUTION! Possibly, stdin must be used instead of stdout here!
+    t = stdout;
+
+    // Get file descriptor for file stream.
+    int d = fileno(t);
+    // Copy termios attributes from file descriptor.
+    tcgetattr(d, (void*) to);
+    tcgetattr(d, (void*) tw);
+    // Manipulate termios attributes.
+    tw->c_lflag &= ~ICANON;
+    tw->c_lflag &= ~ECHO;
+    // Set termios attributes.
+    tcsetattr(d, TCSANOW, (void*) tw);
+
+    // The terminated control sequences string.
+    void* ts = NULL_POINTER;
+    int tsc = 0;
+    int tss = 100;
+
+    // Create terminated control sequences string.
+    allocate_array((void*) &ts, (void*) &tss, (void*) WIDE_CHARACTER_ARRAY);
+
+    fprintf(stderr, "TEST ts: %s\n", (char*) ts);
+
+    // Set terminated control sequences string by first copying the actual
+    // control sequences and then adding the null termination character.
+    set_array_elements(ts, &tsc, (void*) LATIN_CAPITAL_LETTER_A_CHARACTER, (void*) CHARACTER_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+    tsc++;
+    set_array_elements(ts, &tsc, (void*) BOX_DRAWINGS_LIGHT_ARC_UP_AND_RIGHT_CHARACTER, (void*) CHARACTER_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+    tsc++;
+    fprintf(stderr, "TEST ts: %s\n", (char*) ts);
+
+    set_array_elements(ts, &tsc, (void*) NULL_CONTROL_CHARACTER, (void*) CHARACTER_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+    tsc++;
+    fprintf(stderr, "TEST ts: %s\n", (char*) ts);
+
+    // Write to terminal.
+    fputs((char*) ts, t);
+
+    // Destroy terminated control sequences.
+    deallocate_array((void*) &ts, (void*) &tss, (void*) WIDE_CHARACTER_ARRAY);
 }
 
 /**
@@ -669,11 +736,12 @@ void test() {
 
 //??    test_stdout_stderr();
 //??    test_character_array_with_termination();
+    test_wide_character_output();
 //??    test_pointer_cast();
 //??    test_character_array_single_element();
 //??    test_character_array_multiple_elements();
 //??    test_pointer_return();
-    test_pointer_array();
+//??    test_pointer_array();
 //??    test_file_read();
 //??    test_file_write();
 //??    test_console();

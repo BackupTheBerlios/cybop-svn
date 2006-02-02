@@ -20,13 +20,14 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2006-01-30 21:30:12 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2006-02-02 00:29:41 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef CHARACTER_CONSTANTS_SOURCE
 #define CHARACTER_CONSTANTS_SOURCE
 
+#include <stddef.h>
 #include "../../globals/constants/integer_constants.c"
 
 //?? See KDE menu: | Applications | Debian | Text | Unicode character map
@@ -37,6 +38,9 @@
 
 /** The character count. */
 static int* CHARACTER_COUNT = NUMBER_1_INTEGER_ARRAY;
+
+/** The wide character count. */
+static int* WIDE_CHARACTER_COUNT = NUMBER_4_INTEGER_ARRAY;
 
 //
 // ASCII characters (0 - 127).
@@ -271,7 +275,7 @@ static char* COMMA_CHARACTER = COMMA_CHARACTER_ARRAY;
  * U+2013 EN DASH
  * U+2212 MINUS SIGN
  */
-static char HYPHEN_MINUS_CHARACTER_ARRAY[] = {'-'};
+static char HYPHEN_MINUS_CHARACTER_ARRAY[] = {0x2D};
 static char* HYPHEN_MINUS_CHARACTER = HYPHEN_MINUS_CHARACTER_ARRAY;
 
 /** The full stop character. U+002E */
@@ -976,8 +980,8 @@ static char* BOX_DRAWINGS_LIGHT_ARC_UP_AND_LEFT_CHARACTER = BOX_DRAWINGS_LIGHT_A
  * Octal escaped UTF-8: \342\225\260
  * Decimal entity reference: &#9584;
  */
-static char BOX_DRAWINGS_LIGHT_ARC_UP_AND_RIGHT_CHARACTER_ARRAY[] = {'P'}; //?? {9584};
-static char* BOX_DRAWINGS_LIGHT_ARC_UP_AND_RIGHT_CHARACTER = BOX_DRAWINGS_LIGHT_ARC_UP_AND_RIGHT_CHARACTER_ARRAY;
+static wchar_t BOX_DRAWINGS_LIGHT_ARC_UP_AND_RIGHT_CHARACTER_ARRAY[] = {9584}; //?? {'P'};
+static wchar_t* BOX_DRAWINGS_LIGHT_ARC_UP_AND_RIGHT_CHARACTER = BOX_DRAWINGS_LIGHT_ARC_UP_AND_RIGHT_CHARACTER_ARRAY;
 
 /* CHARACTER_CONSTANTS_SOURCE */
 #endif

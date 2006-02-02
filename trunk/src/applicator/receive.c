@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.12 $ $Date: 2006-01-02 11:56:01 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2006-02-02 00:29:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -187,7 +187,7 @@ void receive_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
 
         if (r != 0) {
 
-            receive_linux_console(p2, p3, p4, p5, p6, p7, p8, *com, *comc);
+            receive_linux_console(p2, *com, *comc, *coms);
         }
     }
 

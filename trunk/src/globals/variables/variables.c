@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2005-07-29 15:48:51 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2006-02-02 00:29:41 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -55,6 +55,9 @@ static int LOG_OUTPUT;
 
 // The character primitive size.
 static int* CHARACTER_PRIMITIVE_SIZE;
+
+// The wide character primitive size.
+static int* WIDE_CHARACTER_PRIMITIVE_SIZE;
 
 // The pointer primitive size.
 static int* POINTER_PRIMITIVE_SIZE;

@@ -24,7 +24,7 @@
  * - create a model in memory
  * - destroy a model in memory
  *
- * @version $Revision: 1.13 $ $Date: 2005-08-09 13:04:26 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2006-02-02 00:29:41 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -44,6 +44,7 @@
 #include "../memoriser/allocator/signal_memory_allocator.c"
 #include "../memoriser/allocator/time_allocator.c"
 #include "../memoriser/allocator/unsigned_long_vector_allocator.c"
+#include "../memoriser/allocator/wide_character_vector_allocator.c"
 #include "../memoriser/allocator/xml_node_allocator.c"
 #include "../memoriser/allocator/xml_property_allocator.c"
 
@@ -107,6 +108,16 @@ void allocate(void* p0, void* p1, void* p2, void* p3) {
         if (r != 0) {
 
             allocate_character_vector(p0, p1);
+        }
+    }
+
+    if (r == 0) {
+
+        compare_arrays(p2, p3, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != 0) {
+
+            allocate_wide_character_vector(p0, p1);
         }
     }
 
@@ -277,6 +288,16 @@ void reallocate(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (r == 0) {
 
+        compare_arrays(p3, p4, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != 0) {
+
+//??            reallocate_wide_character_vector(p0, p1, p2);
+        }
+    }
+
+    if (r == 0) {
+
         compare_arrays(p3, p4, (void*) BOOLEAN_ABSTRACTION, (void*) BOOLEAN_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
@@ -436,6 +457,16 @@ void deallocate(void* p0, void* p1, void* p2, void* p3) {
         if (r != 0) {
 
             deallocate_character_vector(p0, p1);
+        }
+    }
+
+    if (r == 0) {
+
+        compare_arrays(p2, p3, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != 0) {
+
+            deallocate_wide_character_vector(p0, p1);
         }
     }
 

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2005-07-29 15:48:51 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2006-02-02 00:29:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -76,6 +76,10 @@ void startup_globals() {
     // The character primitive size.
     CHARACTER_PRIMITIVE_SIZE = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
     *CHARACTER_PRIMITIVE_SIZE = sizeof(char);
+
+    // The wide character primitive size.
+    WIDE_CHARACTER_PRIMITIVE_SIZE = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
+    *WIDE_CHARACTER_PRIMITIVE_SIZE = sizeof(wchar_t);
 
     // The unsigned long primitive size.
     UNSIGNED_LONG_PRIMITIVE_SIZE = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
@@ -189,6 +193,9 @@ void shutdown_globals() {
 
     // The pointer primitive size.
     free(POINTER_PRIMITIVE_SIZE);
+
+    // The wide character primitive size.
+    free(WIDE_CHARACTER_PRIMITIVE_SIZE);
 
     // The character primitive size.
     free(CHARACTER_PRIMITIVE_SIZE);
