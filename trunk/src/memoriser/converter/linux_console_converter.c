@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2006-02-01 11:42:52 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2006-02-06 23:41:34 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -126,15 +126,15 @@ void serialise_linux_console_character(void* p0, void* p1, void* p2, void* p3, v
                             serialise_integer((void*) &x, (void*) &xc, (void*) &xs, (void*) &cx, (void*) PRIMITIVE_COUNT);
 
                             if ((*dc + *ESCAPE_CONTROL_SEQUENCE_COUNT
-                                + yc + *CHARACTER_COUNT
-                                + xc + *CHARACTER_COUNT) >= *ds) {
+                                + yc + *PRIMITIVE_COUNT
+                                + xc + *PRIMITIVE_COUNT) >= *ds) {
 
                                 // Set destination character array size.
                                 // CAUTION! Add constant in case *dc is zero!
                                 *ds = *dc * *CHARACTER_VECTOR_REALLOCATE_FACTOR
                                     + *ESCAPE_CONTROL_SEQUENCE_COUNT
-                                    + yc + *CHARACTER_COUNT
-                                    + xc + *CHARACTER_COUNT;
+                                    + yc + *PRIMITIVE_COUNT
+                                    + xc + *PRIMITIVE_COUNT;
 
                                 // Reallocate destination character array.
                                 reallocate_array(p0, p1, p2, (void*) CHARACTER_ARRAY);
@@ -144,12 +144,12 @@ void serialise_linux_console_character(void* p0, void* p1, void* p2, void* p3, v
                             *dc = *dc + *ESCAPE_CONTROL_SEQUENCE_COUNT;
                             set_array_elements(*d, p1, y, (void*) &yc, (void*) CHARACTER_ARRAY);
                             *dc = *dc + yc;
-                            set_array_elements(*d, p1, (void*) SEMICOLON_CHARACTER, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
-                            *dc = *dc + *CHARACTER_COUNT;
+                            set_array_elements(*d, p1, (void*) SEMICOLON_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+                            *dc = *dc + *PRIMITIVE_COUNT;
                             set_array_elements(*d, p1, x, (void*) &xc, (void*) CHARACTER_ARRAY);
                             *dc = *dc + xc;
-                            set_array_elements(*d, p1, (void*) LATIN_CAPITAL_LETTER_H_CHARACTER, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
-                            *dc = *dc + *CHARACTER_COUNT;
+                            set_array_elements(*d, p1, (void*) LATIN_CAPITAL_LETTER_H_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+                            *dc = *dc + *PRIMITIVE_COUNT;
 
                             // Add attribute off control sequence.
                             if ((*dc + *ESCAPE_CONTROL_SEQUENCE_COUNT + *ATTRIBUTE_OFF_CONTROL_SEQUENCE_COUNT) >= *ds) {
@@ -221,7 +221,7 @@ void serialise_linux_console_character(void* p0, void* p1, void* p2, void* p3, v
                                 + *ESCAPE_CONTROL_SEQUENCE_COUNT + *BLINK_CONTROL_SEQUENCE_COUNT
                                 + *ESCAPE_CONTROL_SEQUENCE_COUNT + *UNDERLINE_CONTROL_SEQUENCE_COUNT
                                 + *ESCAPE_CONTROL_SEQUENCE_COUNT + *BOLD_CONTROL_SEQUENCE_COUNT
-                                + *CHARACTER_COUNT) >= *ds) {
+                                + *PRIMITIVE_COUNT) >= *ds) {
 
                                 // Set destination character array size.
                                 // CAUTION! Add constant in case *dc is zero!
@@ -231,7 +231,7 @@ void serialise_linux_console_character(void* p0, void* p1, void* p2, void* p3, v
                                     + *ESCAPE_CONTROL_SEQUENCE_COUNT + *BLINK_CONTROL_SEQUENCE_COUNT
                                     + *ESCAPE_CONTROL_SEQUENCE_COUNT + *UNDERLINE_CONTROL_SEQUENCE_COUNT
                                     + *ESCAPE_CONTROL_SEQUENCE_COUNT + *BOLD_CONTROL_SEQUENCE_COUNT
-                                    + *CHARACTER_COUNT;
+                                    + *PRIMITIVE_COUNT;
 
                                 // Reallocate destination character array.
                                 reallocate_array(p0, p1, p2, (void*) CHARACTER_ARRAY);
@@ -313,8 +313,8 @@ void serialise_linux_console_character(void* p0, void* p1, void* p2, void* p3, v
                             }
 
                             // Set character.
-                            set_array_elements(*d, p1, p13, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
-                            *dc = *dc + *CHARACTER_COUNT;
+                            set_array_elements(*d, p1, p13, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+                            *dc = *dc + *PRIMITIVE_COUNT;
 
                         } else {
 

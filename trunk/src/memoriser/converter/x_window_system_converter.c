@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2006-01-30 21:30:12 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2006-02-06 23:41:34 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -339,13 +339,61 @@ void serialise_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
                     // Set terminated text by first copying the actual name
                     // and then adding the null termination character.
                     set_array_elements(text, (void*) NUMBER_0_INTEGER, *m, *mc, (void*) CHARACTER_ARRAY);
-                    set_array_elements(text, *mc, (void*) NULL_CONTROL_CHARACTER, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
+                    set_array_elements(text, *mc, (void*) NULL_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
 
                     // Draw the text (character vector / string).
                     XDrawString(*di, **w, *gc, **pmx, **pmy + 20, text, texts);
 
                     // Destroy terminated text.
                     deallocate_array((void*) &text, (void*) &texts, (void*) CHARACTER_ARRAY);
+
+/*??
+    In the conventional `XFontStruct' model, an X client opens a font
+    using `XLoadQueryFont()', draw a string using `XDrawString()', and
+    close the font using `XFreeFont()'.  On the other hand, in the
+    internationalized `XFontSet' model, an X client opens a font using
+    `XCreateFontSet()', draw a string using `XmbDrawString()', and close
+    the font using `XFreeFontSet()'.  The following are a concise list of
+    substitution.
+
+    * `XFontStruct' -> `XFontSet'
+
+    * `XLoadQueryFont()' -> `XCreateFontSet()'
+
+    * both of `XDrawString()' and `XDrawString16' -> either of
+        `XmbDrawString()' or `XwcDrawString()'
+
+    * both of `XDrawImageString()' and `XDrawImageString16' -> either
+        of `XmbDrawImageString()' or `XwcDrawImageString()'
+
+    Note that `XFontStruct' is usually used as a pointer, while `XFontSet'
+    itself is a pointer.
+
+    Some people (ISO-8859-1-language speakers) may think that
+    `XFontSet'-related functions are not 8-bit clean.  This is wrong.
+    `XFontSet'-related functions work according to `LC_CTYPE' locale.  The
+    default LC_CTYPE locale uses ASCII.  Thus, if a user doesn't set
+    `LANG', `LC_CTYPE', nor `LC_ALL' environmental variable,
+    `XFontSet'-related functions will use ASCII, i.e., not 8-bit clean.
+    The user has to set `LANG', `LC_CTYPE', or `LC_ALL' environmental
+    variable properly (for example, `LANG=en_US').
+
+    The upstream developers of X clients sometimes hate to enforce users
+    to set such environmental variables.  [2] In such a case, The X
+    clients should have two ways to output text, i.e.,
+    `XFontStruct'-related conventional way and `XFontSet'-related
+    internationalized way.  If `setlocale()' returns `NULL', `"C"', or
+    `"POSIX"', use `XFontStruct' way.  Otherwise use `XFontSet' way.  The
+    author implemented this algorithm to a few window managers such as TWM
+    (version 4.0.1d), Blackbox (0.60.1), IceWM (1.0.0), sawmill (0.28),
+    and so on.
+
+[1]  Though UTF-8 is an encoding with single CCS, the current version of
+     XFree86 (4.0.1) needs multiple fonts to handle UTF-8.
+
+[2]  IMHO, all users will have to set LANG properly when UTF-8 will become
+     popular.
+*/
 
 /*??
                     //?? TODO: Move these before the coordinate calculation,
@@ -460,11 +508,11 @@ void serialise_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
                 // Set terminated title by first copying the actual name
                 // and then adding the null termination character.
                 set_array_elements(tt, (void*) NUMBER_0_INTEGER, *tm, *tmc, (void*) CHARACTER_ARRAY);
-                set_array_elements(tt, *tmc, (void*) NULL_CONTROL_CHARACTER, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
+                set_array_elements(tt, *tmc, (void*) NULL_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
                 // Set terminated icon name by first copying the actual name
                 // and then adding the null termination character.
                 set_array_elements(ti, (void*) NUMBER_0_INTEGER, *im, *imc, (void*) CHARACTER_ARRAY);
-                set_array_elements(ti, *imc, (void*) NULL_CONTROL_CHARACTER, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
+                set_array_elements(ti, *imc, (void*) NULL_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
 
                 // Set terminated window title.
                 XStoreName(*di, **w, (char*) tt);

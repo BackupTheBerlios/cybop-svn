@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2005-08-31 14:50:18 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2006-02-06 23:41:34 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -235,7 +235,7 @@ void parse_double_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
                         break;
                     }
 
-                    get_character_array_elements_index(p3, p4, (void*) COMMA_CHARACTER, (void*) CHARACTER_COUNT, (void*) &i);
+                    get_character_array_elements_index(p3, p4, (void*) COMMA_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &i);
 
                     if (i > 0) {
 

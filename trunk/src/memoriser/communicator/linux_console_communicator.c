@@ -24,14 +24,16 @@
  * - receive a file stream into a byte array
  * - send a file stream from a byte array
  *
- * @version $Revision: 1.1 $ $Date: 2006-01-02 11:56:02 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2006-02-06 23:41:34 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef LINUX_CONSOLE_COMMUNICATOR_SOURCE
 #define LINUX_CONSOLE_COMMUNICATOR_SOURCE
 
+#include <locale.h>
 #include <stdio.h>
+#include <wchar.h>
 #include "../../globals/constants/abstraction_constants.c"
 #include "../../globals/constants/character_constants.c"
 #include "../../globals/constants/integer_constants.c"
@@ -102,23 +104,30 @@ void write_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             log_message_debug("Write to linux console.");
 
+            // Possible locales are: LANG, LC_CTYPE, LC_ALL.
+            // CAUTION! This setting is necessary for UTF-8 Unicode characters to work.
+            char* loc = setlocale(LC_ALL, "");
+
             // The terminated control sequences string.
             void* ts = NULL_POINTER;
+            // Increase control sequences count by one, for termination character.
             int tss = *sc + 1;
 
             // Create terminated control sequences string.
-            allocate_array((void*) &ts, (void*) &tss, (void*) CHARACTER_ARRAY);
+            allocate_array((void*) &ts, (void*) &tss, (void*) WIDE_CHARACTER_ARRAY);
 
             // Set terminated control sequences string by first copying the actual
             // control sequences and then adding the null termination character.
-            set_array_elements(ts, (void*) NUMBER_0_INTEGER, p3, p4, (void*) CHARACTER_ARRAY);
-            set_array_elements(ts, p4, (void*) NULL_CONTROL_CHARACTER, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
+            set_array_elements(ts, (void*) NUMBER_0_INTEGER, p3, p4, (void*) WIDE_CHARACTER_ARRAY);
+//??            set_array_elements(ts, p4, (void*) NULL_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
 
             // Write to terminal.
-            fputs((char*) ts, *d);
+//??            fputs((char*) ts, *d);
+//??            fputws((wchar_t*) ts, *d);
+            fprintf(*d, "%ls", (wchar_t*) ts);
 
             // Destroy terminated control sequences.
-            deallocate_array((void*) &ts, (void*) &tss, (void*) CHARACTER_ARRAY);
+            deallocate_array((void*) &ts, (void*) &tss, (void*) WIDE_CHARACTER_ARRAY);
 
         } else {
 

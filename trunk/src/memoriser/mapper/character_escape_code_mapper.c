@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2005-08-09 13:04:27 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2006-02-06 23:41:34 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -54,7 +54,7 @@ void get_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             if (r == 0) {
 
-                compare_arrays(p3, p4, SPACE_CHARACTER, CHARACTER_COUNT, &r, (void*) CHARACTER_ARRAY);
+                compare_arrays(p3, p4, SPACE_CHARACTER, PRIMITIVE_COUNT, &r, (void*) CHARACTER_ARRAY);
 
                 if (r == 1) {
 
@@ -65,7 +65,7 @@ void get_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             if (r == 0) {
 
-                compare_arrays(p3, p4, SPACE_CHARACTER, CHARACTER_COUNT, &r, (void*) CHARACTER_ARRAY);
+                compare_arrays(p3, p4, SPACE_CHARACTER, PRIMITIVE_COUNT, &r, (void*) CHARACTER_ARRAY);
 
                 if (r == 1) {
 

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.21 $ $Date: 2006-01-02 11:56:01 $ $Author: christian $
+ * @version $Revision: 1.22 $ $Date: 2006-02-06 23:41:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -910,7 +910,7 @@ void set_signals_for_all_parameters(void* p0, int* p1, void* p2) {
 
                 get_array_elements((void*) p0, (void*) &query_counter, (void*) &element, CHARACTER_ARRAY);
 
-                compare_arrays(element, &temp_count, EQUALS_SIGN_CHARACTER, CHARACTER_COUNT, &r, CHARACTER_ARRAY);
+                compare_arrays(element, &temp_count, EQUALS_SIGN_CHARACTER, PRIMITIVE_COUNT, &r, CHARACTER_ARRAY);
 
                 if ((query_counter >= *p1) || (r == 1)) {
 
@@ -944,7 +944,7 @@ void set_signals_for_all_parameters(void* p0, int* p1, void* p2) {
 
                 get_array_elements((void*) p0, (void*) &query_counter, (void*) &element, CHARACTER_ARRAY);
 
-                compare_arrays(element, &temp_count, AMPERSAND_CHARACTER, CHARACTER_COUNT, &r, CHARACTER_ARRAY);
+                compare_arrays(element, &temp_count, AMPERSAND_CHARACTER, PRIMITIVE_COUNT, &r, CHARACTER_ARRAY);
 
                 if ((query_counter >= *p1) || (r == 1)) {
 

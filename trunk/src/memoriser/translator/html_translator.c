@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.14 $ $Date: 2006-01-30 21:30:12 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2006-02-06 23:41:34 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -200,7 +200,7 @@ void encode_html_integer(void** dest, int* dest_count, int* dest_size,
         allocate(&dest_int_size, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
         *dest_int_size = 0;
         create((void*) &dest_int, (void*) dest_int_count, (void*) dest_int_size,
-            (void*) SPACE_CHARACTER , (void*) CHARACTER_COUNT,
+            (void*) SPACE_CHARACTER , (void*) PRIMITIVE_COUNT,
             (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
             (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
 
@@ -307,7 +307,7 @@ void encode_html(void** dest, int* dest_count, int *dest_size,
 
                 // Parse the <
                 parse(dest, dest_count, dest_size,
-                    LESS_THAN_SIGN_CHARACTER, CHARACTER_COUNT,
+                    LESS_THAN_SIGN_CHARACTER, PRIMITIVE_COUNT,
                     CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
                 //parse the html tag
@@ -322,7 +322,7 @@ void encode_html(void** dest, int* dest_count, int *dest_size,
 
                     // Parse the space.
                     parse(dest, dest_count, dest_size,
-                        SPACE_CHARACTER, CHARACTER_COUNT,
+                        SPACE_CHARACTER, PRIMITIVE_COUNT,
                         CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
                     // Parse the html tag properties.
@@ -333,12 +333,12 @@ void encode_html(void** dest, int* dest_count, int *dest_size,
 
                 //parse the >
                 parse( dest, dest_count, dest_size,
-                       GREATER_THAN_SIGN_CHARACTER, CHARACTER_COUNT,
+                       GREATER_THAN_SIGN_CHARACTER, PRIMITIVE_COUNT,
                        CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
                 //parse the line feed for better reading the html-source
                 parse( dest, dest_count, dest_size,
-                       LINE_FEED_CONTROL_CHARACTER, CHARACTER_COUNT,
+                       LINE_FEED_CONTROL_CHARACTER, PRIMITIVE_COUNT,
                        CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
             }
         }
@@ -418,7 +418,7 @@ void encode_html(void** dest, int* dest_count, int *dest_size,
 
         //parse the line feed for better reading the html-source
         parse( dest, dest_count, dest_size,
-               LINE_FEED_CONTROL_CHARACTER, CHARACTER_COUNT,
+               LINE_FEED_CONTROL_CHARACTER, PRIMITIVE_COUNT,
                CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
         //parse the end tag
@@ -432,12 +432,12 @@ void encode_html(void** dest, int* dest_count, int *dest_size,
 
                 //parse the <
                 parse( dest, dest_count, dest_size,
-                       LESS_THAN_SIGN_CHARACTER, CHARACTER_COUNT,
+                       LESS_THAN_SIGN_CHARACTER, PRIMITIVE_COUNT,
                        CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
                 //parse the /
                 parse( dest, dest_count, dest_size,
-                       SOLIDUS_CHARACTER, CHARACTER_COUNT,
+                       SOLIDUS_CHARACTER, PRIMITIVE_COUNT,
                        CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
                 //parse the html tag
@@ -447,12 +447,12 @@ void encode_html(void** dest, int* dest_count, int *dest_size,
 
                 //parse the >
                 parse( dest, dest_count, dest_size,
-                       GREATER_THAN_SIGN_CHARACTER, CHARACTER_COUNT,
+                       GREATER_THAN_SIGN_CHARACTER, PRIMITIVE_COUNT,
                        CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
                 //parse the line feed for better reading the html-source
                 parse( dest, dest_count, dest_size,
-                       LINE_FEED_CONTROL_CHARACTER, CHARACTER_COUNT,
+                       LINE_FEED_CONTROL_CHARACTER, PRIMITIVE_COUNT,
                        CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
             }
         }

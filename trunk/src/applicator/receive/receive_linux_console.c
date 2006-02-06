@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2006-02-02 00:29:40 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2006-02-06 23:41:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -121,13 +121,15 @@ void receive_linux_console_thread(void* p0) {
 */
 
         // Get character from terminal.
+        // CAUTION! Use 'wint_t' instead of 'int' as return type for
+        // 'getwchar()', since that returns 'WEOF' instead of 'EOF'.
         e = fgetc(stdin);
 
         // Get actual command belonging to the character.
         // If the character is not known as name, the returned command is left
         // untouched, that is at its initial default value NULL.
         get_compound_element_by_encapsulated_name(*c, *cc,
-            (void*) &e, (void*) CHARACTER_COUNT,
+            (void*) &e, (void*) PRIMITIVE_COUNT,
             (void*) &ca, (void*) &cac, (void*) &cas,
             (void*) &cm, (void*) &cmc, (void*) &cms,
             (void*) &cd, (void*) &cdc, (void*) &cds,

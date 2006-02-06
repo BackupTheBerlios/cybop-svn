@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.10 $ $Date: 2005-08-31 14:50:18 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2006-02-06 23:41:34 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -74,7 +74,7 @@ void parse_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
             i = *sc;
 
             // Add string termination to temporary null-terminated string.
-            set_array_elements((void*) tmp, (void*) &i, (void*) NULL_CONTROL_CHARACTER, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
+            set_array_elements((void*) tmp, (void*) &i, (void*) NULL_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
 
             // The tail variable is useless here and only needed for the string
             // transformation function. If the whole string array consists of
@@ -226,7 +226,7 @@ void parse_integer_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     int ec = 0;
 
                     // Find comma character index.
-                    get_array_elements_index(p3, p4, (void*) COMMA_CHARACTER, (void*) CHARACTER_COUNT, (void*) &i, (void*) CHARACTER_ARRAY);
+                    get_array_elements_index(p3, p4, (void*) COMMA_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &i, (void*) CHARACTER_ARRAY);
 
                     // CAUTION! Do NOT change this comparison to greater than >
                     // or something else, because -1 must be allowed! See below.
@@ -372,8 +372,8 @@ void serialise_integer_vector(void* p0, void* p1, void* p2, void* p3, void* p4) 
                         *dc = *dc + cc;
 
                         // Set comma character.
-                        set_array_elements(*d, p1, (void*) COMMA_CHARACTER, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
-                        *dc = *dc + *CHARACTER_COUNT;
+                        set_array_elements(*d, p1, (void*) COMMA_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+                        *dc = *dc + *PRIMITIVE_COUNT;
 
                         // Recursively call this procedure for further integer numbers.
                         serialise_integer_vector(p0, p1, p2, e, (void*) &ec);

@@ -24,7 +24,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.18 $ $Date: 2006-02-06 10:24:14 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2006-02-06 23:41:34 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -82,6 +82,10 @@ void test_wide_character_output() {
 
     fputs("Test wide character array with termination:\n", stdout);
 
+    // Possible locales are: LANG, LC_CTYPE, LC_ALL.
+    // CAUTION! This setting is necessary for UTF-8 Unicode characters to work.
+    char* loc = setlocale(LC_ALL, "");
+
     // The terminal (device name).
     FILE* t = NULL_POINTER;
     // The original termios interface.
@@ -116,24 +120,25 @@ void test_wide_character_output() {
     int tss = 100;
 
     // Create terminated control sequences string.
-//??    allocate_array((void*) &ts, (void*) &tss, (void*) WIDE_CHARACTER_ARRAY);
-    allocate_array((void*) &ts, (void*) &tss, (void*) CHARACTER_ARRAY);
-
-    fprintf(stderr, "TEST 0 ts: %s\n", (char*) ts);
+    allocate_array((void*) &ts, (void*) &tss, (void*) WIDE_CHARACTER_ARRAY);
 
     // Set terminated control sequences string by first copying the actual
     // control sequences and then adding the null termination character.
-//??    set_array_elements(ts, &tsc, (void*) LATIN_CAPITAL_LETTER_A_CHARACTER, (void*) CHARACTER_COUNT, (void*) WIDE_CHARACTER_ARRAY);
-//??    tsc++;
-//??    set_array_elements(ts, &tsc, (void*) BOX_DRAWINGS_LIGHT_ARC_UP_AND_RIGHT_CHARACTER, (void*) CHARACTER_COUNT, (void*) WIDE_CHARACTER_ARRAY);
-//??    tsc++;
-//??    fprintf(stderr, "TEST ts 1: %s\n", (char*) ts);
+    set_array_elements(ts, (void*) &tsc, (void*) BOX_DRAWINGS_LIGHT_DOWN_AND_RIGHT_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+    tsc++;
+    set_array_elements(ts, (void*) &tsc, (void*) BOX_DRAWINGS_LIGHT_HORIZONTAL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+    tsc++;
+    set_array_elements(ts, (void*) &tsc, (void*) BOX_DRAWINGS_LIGHT_HORIZONTAL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+    tsc++;
+    set_array_elements(ts, (void*) &tsc, (void*) BOX_DRAWINGS_LIGHT_DOWN_AND_LEFT_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+    tsc++;
 
-//??    set_array_elements(ts, &tsc, (void*) NULL_CONTROL_CHARACTER, (void*) CHARACTER_COUNT, (void*) WIDE_CHARACTER_ARRAY);
-//??    tsc++;
+    // Write to terminal.
+    fprintf(t, "%ls", (wchar_t*) ts);
+//??    fputws((wchar_t*) ts, t);
 
-    // Possible locales are: LANG, LC_CTYPE, LC_ALL.
-    char* loc = setlocale(LC_ALL, "");
+    // Destroy terminated control sequences.
+    deallocate_array((void*) &ts, (void*) &tss, (void*) WIDE_CHARACTER_ARRAY);
 
     // UTF-8 still allows you to use C1 control characters such as CSI, even
     // though UTF-8 also uses bytes in the range 0x80-0x9F. It is important to
@@ -171,87 +176,59 @@ void test_wide_character_output() {
     }
 */
 
+/*??
     wchar_t c = 9584;
     char new = 65;
 
     if (c < 0x80) {
 
         new = (char) c;
-        set_array_elements(ts, &tsc, (void*) &new, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
+        set_array_elements(ts, &tsc, (void*) &new, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
         tsc++;
 
     } else if (c < 0x800) {
 
         new = 0xC0 | c >> 6;
-        set_array_elements(ts, &tsc, (void*) &new, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
+        set_array_elements(ts, &tsc, (void*) &new, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
         tsc++;
         new = 0x80 | c & 0x3F;
-        set_array_elements(ts, &tsc, (void*) &new, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
+        set_array_elements(ts, &tsc, (void*) &new, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
         tsc++;
 
     } else if (c < 0x10000) {
 
         new = 0xE0 | c >> 12;
-        set_array_elements(ts, &tsc, (void*) &new, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
+        set_array_elements(ts, &tsc, (void*) &new, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
         tsc++;
         new = 0x80 | c >> 6 & 0x3F;
-        set_array_elements(ts, &tsc, (void*) &new, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
+        set_array_elements(ts, &tsc, (void*) &new, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
         tsc++;
         new = 0x80 | c & 0x3F;
-        set_array_elements(ts, &tsc, (void*) &new, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
+        set_array_elements(ts, &tsc, (void*) &new, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
         tsc++;
 
     } else if (c < 0x200000) {
 
         new = 0xF0 | c >> 18;
-        set_array_elements(ts, &tsc, (void*) &new, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
+        set_array_elements(ts, &tsc, (void*) &new, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
         tsc++;
         new = 0x80 | c >> 12 & 0x3F;
-        set_array_elements(ts, &tsc, (void*) &new, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
+        set_array_elements(ts, &tsc, (void*) &new, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
         tsc++;
         new = 0x80 | c >> 6 & 0x3F;
-        set_array_elements(ts, &tsc, (void*) &new, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
+        set_array_elements(ts, &tsc, (void*) &new, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
         tsc++;
         new = 0x80 | c & 0x3F;
-        set_array_elements(ts, &tsc, (void*) &new, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
+        set_array_elements(ts, &tsc, (void*) &new, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
         tsc++;
     }
-
-    set_array_elements(ts, &tsc, (void*) NULL_CONTROL_CHARACTER, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
-    tsc++;
-    puts("\nEnd 1.");
-
-    puts(ts);
-    puts("\nEnd 2 s.");
-
-    fputws(ts, stdout);
-    puts("\nEnd 2 w.");
-
-    fwprintf(stdout, "%ls\n", ts); //?? 9584); //?? 65 (wchar_t*) ts);
-    puts("\nEnd 3 w w.");
-
-    fwprintf(stdout, "%s\n", ts); //?? 9584); //?? 65 (wchar_t*) ts);
-    puts("\nEnd 4 w c.");
-
-    fprintf(stdout, "%ls\n", ts); //?? 9584); //?? 65 (wchar_t*) ts);
-    puts("\nEnd 5 c w.");
-
-    fprintf(stdout, "%s\n", ts); //?? 9584); //?? 65 (wchar_t*) ts);
-    puts("\nEnd 6 c c.");
-
-    wchar_t test = 66;
-    putwchar(test);
-    puts("\nEnd 7 putwchar 66.");
-
-    test = 9584;
-    putwchar(test);
-    puts("\nEnd 8 putwchar 9584.");
-    puts("\n\n\n");
+*/
 
 /*??
-    A function to convert a multibyte string into a wide character string and display it could be written like this (this is not a really useful example):
+    A function to convert a multibyte string into a wide character string and
+    display it could be written like this (this is not a really useful example):
 
-    void showmbs (const char *src, FILE *fp) {
+    void showmbs(const char *src, FILE *fp) {
 
         mbstate_t state;
         int cnt = 0;
@@ -273,21 +250,6 @@ void test_wide_character_output() {
         }
     }
 */
-
-//??    size_t wcsrtombs(dest, wchar_t **src, size_t len, mbstate_t *ps);
-
-//??    fputs(ts, stdout);
-
-    printf("%lc", 0x2554); //?? 0x201c);
-    puts("\nEnd 9 double quotes.");
-
-    // Write to terminal.
-//??    fputs((char*) ts, t);
-//??    fputws((wchar_t*) ts, t);
-
-    // Destroy terminated control sequences.
-//??    deallocate_array((void*) &ts, (void*) &tss, (void*) WIDE_CHARACTER_ARRAY);
-    deallocate_array((void*) &ts, (void*) &tss, (void*) CHARACTER_ARRAY);
 }
 
 /**
@@ -328,11 +290,11 @@ void test_character_array_single_element() {
     // Create character array.
     allocate_array((void*) &c, (void*) &cs, (void*) CHARACTER_ARRAY);
 
-    set_character_array_elements(c, (void*) NUMBER_0_INTEGER, (void*) LATIN_CAPITAL_LETTER_A_CHARACTER, (void*) CHARACTER_COUNT);
-    set_character_array_elements(c, (void*) NUMBER_1_INTEGER, (void*) LATIN_CAPITAL_LETTER_B_CHARACTER, (void*) CHARACTER_COUNT);
-    set_character_array_elements(c, (void*) NUMBER_2_INTEGER, (void*) LATIN_CAPITAL_LETTER_C_CHARACTER, (void*) CHARACTER_COUNT);
-    set_character_array_elements(c, (void*) NUMBER_3_INTEGER, (void*) LINE_FEED_CONTROL_CHARACTER, (void*) CHARACTER_COUNT);
-    set_character_array_elements(c, (void*) NUMBER_4_INTEGER, (void*) NULL_CONTROL_CHARACTER, (void*) CHARACTER_COUNT);
+    set_character_array_elements(c, (void*) NUMBER_0_INTEGER, (void*) LATIN_CAPITAL_LETTER_A_CHARACTER, (void*) PRIMITIVE_COUNT);
+    set_character_array_elements(c, (void*) NUMBER_1_INTEGER, (void*) LATIN_CAPITAL_LETTER_B_CHARACTER, (void*) PRIMITIVE_COUNT);
+    set_character_array_elements(c, (void*) NUMBER_2_INTEGER, (void*) LATIN_CAPITAL_LETTER_C_CHARACTER, (void*) PRIMITIVE_COUNT);
+    set_character_array_elements(c, (void*) NUMBER_3_INTEGER, (void*) LINE_FEED_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT);
+    set_character_array_elements(c, (void*) NUMBER_4_INTEGER, (void*) NULL_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT);
 
     // Print out array contents.
     fputs((char*) c, stdout);
