@@ -24,7 +24,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.17 $ $Date: 2006-02-02 00:29:42 $ $Author: christian $
+ * @version $Revision: 1.18 $ $Date: 2006-02-06 10:24:14 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -32,8 +32,10 @@
 #ifndef TEST_SOURCE
 #define TEST_SOURCE
 
+#include <locale.h>
 #include <stdio.h>
 #include <termios.h>
+#include <wchar.h>
 #include "../globals/constants/abstraction_constants.c"
 #include "../globals/constants/structure_constants.c"
 #include "../globals/variables/variables.c"
@@ -114,27 +116,178 @@ void test_wide_character_output() {
     int tss = 100;
 
     // Create terminated control sequences string.
-    allocate_array((void*) &ts, (void*) &tss, (void*) WIDE_CHARACTER_ARRAY);
+//??    allocate_array((void*) &ts, (void*) &tss, (void*) WIDE_CHARACTER_ARRAY);
+    allocate_array((void*) &ts, (void*) &tss, (void*) CHARACTER_ARRAY);
 
-    fprintf(stderr, "TEST ts: %s\n", (char*) ts);
+    fprintf(stderr, "TEST 0 ts: %s\n", (char*) ts);
 
     // Set terminated control sequences string by first copying the actual
     // control sequences and then adding the null termination character.
-    set_array_elements(ts, &tsc, (void*) LATIN_CAPITAL_LETTER_A_CHARACTER, (void*) CHARACTER_COUNT, (void*) WIDE_CHARACTER_ARRAY);
-    tsc++;
-    set_array_elements(ts, &tsc, (void*) BOX_DRAWINGS_LIGHT_ARC_UP_AND_RIGHT_CHARACTER, (void*) CHARACTER_COUNT, (void*) WIDE_CHARACTER_ARRAY);
-    tsc++;
-    fprintf(stderr, "TEST ts: %s\n", (char*) ts);
+//??    set_array_elements(ts, &tsc, (void*) LATIN_CAPITAL_LETTER_A_CHARACTER, (void*) CHARACTER_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+//??    tsc++;
+//??    set_array_elements(ts, &tsc, (void*) BOX_DRAWINGS_LIGHT_ARC_UP_AND_RIGHT_CHARACTER, (void*) CHARACTER_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+//??    tsc++;
+//??    fprintf(stderr, "TEST ts 1: %s\n", (char*) ts);
 
-    set_array_elements(ts, &tsc, (void*) NULL_CONTROL_CHARACTER, (void*) CHARACTER_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+//??    set_array_elements(ts, &tsc, (void*) NULL_CONTROL_CHARACTER, (void*) CHARACTER_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+//??    tsc++;
+
+    // Possible locales are: LANG, LC_CTYPE, LC_ALL.
+    char* loc = setlocale(LC_ALL, "");
+
+    // UTF-8 still allows you to use C1 control characters such as CSI, even
+    // though UTF-8 also uses bytes in the range 0x80-0x9F. It is important to
+    // understand that a terminal emulator in UTF-8 mode must apply the UTF-8
+    // decoder to the incoming byte stream before interpreting any control
+    // characters. C1 characters are UTF-8 decoded just like any other character
+    // above U+007F.
+    // VT100 terminal emulators accept ISO 2022 (=ECMA-35) ESC sequences in
+    // order to switch between different character sets.
+
+/*??
+    char c = 67;
+
+    if (c < 0x80) {
+
+        putchar(c);
+
+    } else if (c < 0x800) {
+
+        putchar(0xC0 | c >> 6);
+        putchar(0x80 | c & 0x3F);
+
+    } else if (c < 0x10000) {
+
+        putchar(0xE0 | c >> 12);
+        putchar(0x80 | c >> 6 & 0x3F);
+        putchar(0x80 | c & 0x3F);
+
+    } else if (c < 0x200000) {
+
+        putchar(0xF0 | c >> 18);
+        putchar(0x80 | c >> 12 & 0x3F);
+        putchar(0x80 | c >> 6 & 0x3F);
+        putchar(0x80 | c & 0x3F);
+    }
+*/
+
+    wchar_t c = 9584;
+    char new = 65;
+
+    if (c < 0x80) {
+
+        new = (char) c;
+        set_array_elements(ts, &tsc, (void*) &new, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
+        tsc++;
+
+    } else if (c < 0x800) {
+
+        new = 0xC0 | c >> 6;
+        set_array_elements(ts, &tsc, (void*) &new, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
+        tsc++;
+        new = 0x80 | c & 0x3F;
+        set_array_elements(ts, &tsc, (void*) &new, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
+        tsc++;
+
+    } else if (c < 0x10000) {
+
+        new = 0xE0 | c >> 12;
+        set_array_elements(ts, &tsc, (void*) &new, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
+        tsc++;
+        new = 0x80 | c >> 6 & 0x3F;
+        set_array_elements(ts, &tsc, (void*) &new, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
+        tsc++;
+        new = 0x80 | c & 0x3F;
+        set_array_elements(ts, &tsc, (void*) &new, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
+        tsc++;
+
+    } else if (c < 0x200000) {
+
+        new = 0xF0 | c >> 18;
+        set_array_elements(ts, &tsc, (void*) &new, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
+        tsc++;
+        new = 0x80 | c >> 12 & 0x3F;
+        set_array_elements(ts, &tsc, (void*) &new, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
+        tsc++;
+        new = 0x80 | c >> 6 & 0x3F;
+        set_array_elements(ts, &tsc, (void*) &new, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
+        tsc++;
+        new = 0x80 | c & 0x3F;
+        set_array_elements(ts, &tsc, (void*) &new, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
+        tsc++;
+    }
+
+    set_array_elements(ts, &tsc, (void*) NULL_CONTROL_CHARACTER, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
     tsc++;
-    fprintf(stderr, "TEST ts: %s\n", (char*) ts);
+    puts("\nEnd 1.");
+
+    puts(ts);
+    puts("\nEnd 2 s.");
+
+    fputws(ts, stdout);
+    puts("\nEnd 2 w.");
+
+    fwprintf(stdout, "%ls\n", ts); //?? 9584); //?? 65 (wchar_t*) ts);
+    puts("\nEnd 3 w w.");
+
+    fwprintf(stdout, "%s\n", ts); //?? 9584); //?? 65 (wchar_t*) ts);
+    puts("\nEnd 4 w c.");
+
+    fprintf(stdout, "%ls\n", ts); //?? 9584); //?? 65 (wchar_t*) ts);
+    puts("\nEnd 5 c w.");
+
+    fprintf(stdout, "%s\n", ts); //?? 9584); //?? 65 (wchar_t*) ts);
+    puts("\nEnd 6 c c.");
+
+    wchar_t test = 66;
+    putwchar(test);
+    puts("\nEnd 7 putwchar 66.");
+
+    test = 9584;
+    putwchar(test);
+    puts("\nEnd 8 putwchar 9584.");
+    puts("\n\n\n");
+
+/*??
+    A function to convert a multibyte string into a wide character string and display it could be written like this (this is not a really useful example):
+
+    void showmbs (const char *src, FILE *fp) {
+
+        mbstate_t state;
+        int cnt = 0;
+        memset (state, '\0', sizeof (state));
+
+        while (1) {
+
+            wchar_t linebuf[100];
+            const char *endp = strchr (src, '\n');
+            size_t n;
+
+            // Exit if there is no more line.
+            if (endp == NULL)
+                break;
+
+            n = mbsnrtowcs(linebuf, src, endp - src, 99, state);
+            linebuf[n] = L'\0';
+            fprintf(fp, "line %d: \"%S\"\n", linebuf);
+        }
+    }
+*/
+
+//??    size_t wcsrtombs(dest, wchar_t **src, size_t len, mbstate_t *ps);
+
+//??    fputs(ts, stdout);
+
+    printf("%lc", 0x2554); //?? 0x201c);
+    puts("\nEnd 9 double quotes.");
 
     // Write to terminal.
-    fputs((char*) ts, t);
+//??    fputs((char*) ts, t);
+//??    fputws((wchar_t*) ts, t);
 
     // Destroy terminated control sequences.
-    deallocate_array((void*) &ts, (void*) &tss, (void*) WIDE_CHARACTER_ARRAY);
+//??    deallocate_array((void*) &ts, (void*) &tss, (void*) WIDE_CHARACTER_ARRAY);
+    deallocate_array((void*) &ts, (void*) &tss, (void*) CHARACTER_ARRAY);
 }
 
 /**
