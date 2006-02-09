@@ -24,7 +24,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.20 $ $Date: 2006-02-09 02:22:59 $ $Author: christian $
+ * @version $Revision: 1.21 $ $Date: 2006-02-09 23:13:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -275,6 +275,36 @@ void test_wide_character_output() {
         }
     }
 */
+}
+
+/**
+ * Tests the integer-to-wide character conversion.
+ */
+void test_integer_to_wide_character_conversion() {
+
+    fputs("Test integer-to-wide character conversion:\n", stdout);
+
+    // The test wide character array.
+    void* t = NULL_POINTER;
+    int tc = 0;
+    // One byte for the wide character and another for the trailing null.
+    int ts = 2;
+
+    // Allocate test wide character array.
+    allocate((void*) &t, (void*) &ts, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
+
+    // Transform source integer to destination string.
+    // A null wide character is written to mark the end of the string.
+    // The return value is the number of characters generated
+    // for the given input, excluding the trailing null.
+    // If not all output fits into the provided buffer,
+    // a negative value is returned.
+    tc = swprintf((wchar_t*) t, ts, L"%i", 2);
+
+    fprintf(stdout, "TEST tc %i\n", tc);
+
+    // Deallocate test wide character array.
+    deallocate((void*) &t, (void*) &ts, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
 }
 
 /**
@@ -876,7 +906,8 @@ void test() {
 
 //??    test_stdout_stderr();
 //??    test_character_array_with_termination();
-    test_wide_character_output();
+//??    test_wide_character_output();
+    test_integer_to_wide_character_conversion();
 //??    test_pointer_cast();
 //??    test_character_array_single_element();
 //??    test_character_array_multiple_elements();

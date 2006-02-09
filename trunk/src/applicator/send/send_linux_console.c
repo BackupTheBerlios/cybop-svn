@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.40 $ $Date: 2006-02-09 02:22:57 $ $Author: christian $
+ * @version $Revision: 1.41 $ $Date: 2006-02-09 23:13:52 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -57,10 +57,10 @@ void send_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
     // The serialised string array to be sent to the terminal.
     void* a = NULL_POINTER;
     int ac = 0;
-    int as = 0;
+    int as = 1000;
 
-    // Create array.
-    allocate((void*) &a, (void*) &as, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+    // Allocate array.
+    allocate((void*) &a, (void*) &as, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
     // Serialise textual user interface (tui) into array.
     serialise((void*) &a, (void*) &ac, (void*) &as, p1, p2, (void*) LINUX_CONSOLE_MODEL, (void*) LINUX_CONSOLE_MODEL_COUNT, p3, p4);
@@ -74,8 +74,8 @@ void send_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
     // Write serialised array as message to linux console terminal.
     write_data(t, NULL_POINTER, NULL_POINTER, a, (void*) &ac, (void*) LINUX_CONSOLE_MODEL, (void*) LINUX_CONSOLE_MODEL_COUNT);
 
-    // Destroy array.
-    deallocate((void*) &a, (void*) &as, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+    // Deallocate array.
+    deallocate((void*) &a, (void*) &as, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
 }
 
 /* SEND_LINUX_CONSOLE_SOURCE */

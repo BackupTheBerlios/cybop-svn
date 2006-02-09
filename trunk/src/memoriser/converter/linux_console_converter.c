@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2006-02-09 02:22:59 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2006-02-09 23:13:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -132,6 +132,10 @@ void serialise_linux_console_character(void* p0, void* p1, void* p2, void* p3, v
                                     // printf("\033[%d;%dH", y_row, x_column)
                                     //
 
+                                    // Allocate arrays.
+                                    allocate((void*) &y, (void*) &ys, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
+                                    allocate((void*) &x, (void*) &xs, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
+
                                     serialise_integer_wide((void*) &y, (void*) &yc, (void*) &ys, (void*) &cy, (void*) PRIMITIVE_COUNT);
                                     serialise_integer_wide((void*) &x, (void*) &xc, (void*) &xs, (void*) &cx, (void*) PRIMITIVE_COUNT);
 
@@ -176,6 +180,10 @@ void serialise_linux_console_character(void* p0, void* p1, void* p2, void* p3, v
                                     *dc = *dc + *ESCAPE_CONTROL_SEQUENCE_COUNT;
                                     set_array_elements(*d, p1, (void*) ATTRIBUTE_OFF_CONTROL_SEQUENCE, (void*) ATTRIBUTE_OFF_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
                                     *dc = *dc + *ATTRIBUTE_OFF_CONTROL_SEQUENCE_COUNT;
+
+                                    // Deallocate arrays.
+                                    deallocate((void*) &y, (void*) &ys, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
+                                    deallocate((void*) &x, (void*) &xs, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
                                     //
                                     // Add background and foreground properties.
@@ -417,10 +425,10 @@ void serialise_linux_console_rectangle_border(void* p0, void* p1,
 
                                     *hc = *BOX_DRAWINGS_LIGHT_HORIZONTAL_CHARACTER;
                                     *vc = *BOX_DRAWINGS_LIGHT_VERTICAL_CHARACTER;
-                                    *ltc = *BOX_DRAWINGS_LIGHT_UP_AND_RIGHT_CHARACTER;
-                                    *rtc = *BOX_DRAWINGS_LIGHT_UP_AND_LEFT_CHARACTER;
-                                    *lbc = *BOX_DRAWINGS_LIGHT_DOWN_AND_RIGHT_CHARACTER;
-                                    *rbc = *BOX_DRAWINGS_LIGHT_DOWN_AND_LEFT_CHARACTER;
+                                    *ltc = *BOX_DRAWINGS_LIGHT_DOWN_AND_RIGHT_CHARACTER;
+                                    *rtc = *BOX_DRAWINGS_LIGHT_DOWN_AND_LEFT_CHARACTER;
+                                    *lbc = *BOX_DRAWINGS_LIGHT_UP_AND_RIGHT_CHARACTER;
+                                    *rbc = *BOX_DRAWINGS_LIGHT_UP_AND_LEFT_CHARACTER;
                                 }
                             }
 
@@ -432,10 +440,10 @@ void serialise_linux_console_rectangle_border(void* p0, void* p1,
 
                                     *hc = *BOX_DRAWINGS_LIGHT_HORIZONTAL_CHARACTER;
                                     *vc = *BOX_DRAWINGS_LIGHT_VERTICAL_CHARACTER;
-                                    *ltc = *BOX_DRAWINGS_LIGHT_ARC_UP_AND_RIGHT_CHARACTER;
-                                    *rtc = *BOX_DRAWINGS_LIGHT_ARC_UP_AND_LEFT_CHARACTER;
-                                    *lbc = *BOX_DRAWINGS_LIGHT_ARC_DOWN_AND_RIGHT_CHARACTER;
-                                    *rbc = *BOX_DRAWINGS_LIGHT_ARC_DOWN_AND_LEFT_CHARACTER;
+                                    *ltc = *BOX_DRAWINGS_LIGHT_ARC_DOWN_AND_RIGHT_CHARACTER;
+                                    *rtc = *BOX_DRAWINGS_LIGHT_ARC_DOWN_AND_LEFT_CHARACTER;
+                                    *lbc = *BOX_DRAWINGS_LIGHT_ARC_UP_AND_RIGHT_CHARACTER;
+                                    *rbc = *BOX_DRAWINGS_LIGHT_ARC_UP_AND_LEFT_CHARACTER;
                                 }
                             }
 
@@ -447,10 +455,10 @@ void serialise_linux_console_rectangle_border(void* p0, void* p1,
 
                                     *hc = *BOX_DRAWINGS_DOUBLE_HORIZONTAL_CHARACTER;
                                     *vc = *BOX_DRAWINGS_DOUBLE_VERTICAL_CHARACTER;
-                                    *ltc = *BOX_DRAWINGS_DOUBLE_UP_AND_RIGHT_CHARACTER;
-                                    *rtc = *BOX_DRAWINGS_DOUBLE_UP_AND_LEFT_CHARACTER;
-                                    *lbc = *BOX_DRAWINGS_DOUBLE_DOWN_AND_RIGHT_CHARACTER;
-                                    *rbc = *BOX_DRAWINGS_DOUBLE_DOWN_AND_LEFT_CHARACTER;
+                                    *ltc = *BOX_DRAWINGS_DOUBLE_DOWN_AND_RIGHT_CHARACTER;
+                                    *rtc = *BOX_DRAWINGS_DOUBLE_DOWN_AND_LEFT_CHARACTER;
+                                    *lbc = *BOX_DRAWINGS_DOUBLE_UP_AND_RIGHT_CHARACTER;
+                                    *rbc = *BOX_DRAWINGS_DOUBLE_UP_AND_LEFT_CHARACTER;
                                 }
                             }
 
@@ -1148,94 +1156,157 @@ void serialise_linux_console_shape(void* p0, void* p1, void* p2, void* p3, void*
     void* p17, void* p18, void* p19, void* p20, void* p21, void* p22, void* p23, void* p24, void* p25, void* p26,
     void* p27, void* p28, void* p29, void* p30, void* p31, void* p32, void* p33, void* p34, void* p35, void* p36) {
 
-    // The character.
-    void* c = NULL_POINTER;
-    // The character count.
-    void* cc = NULL_POINTER;
-    // The hidden property.
-    int h = 0;
-    // The inverse property.
-    int i = 0;
-    // The blink property.
-    int bl = 0;
-    // The underline property.
-    int u = 0;
-    // The bold property.
-    int b = 0;
-    // The background colour.
-    void* bg = NULL_POINTER;
-    int bgc = 0;
-    // The foreground colour.
-    void* fg = NULL_POINTER;
-    int fgc = 0;
+    if (p4 != NULL_POINTER) {
 
-    //?? TODO: These values should later be given as boolean "true" or "false".
-    //?? Currently, they have to be given as "0" or "1" in CYBOL.
-    //?? Change this later by transforming boolean into integer values!
-    set(&h, (void*) PRIMITIVE_VALUE_INDEX, p7, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    set(&i, (void*) PRIMITIVE_VALUE_INDEX, p9, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    set(&bl, (void*) PRIMITIVE_VALUE_INDEX, p11, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    set(&u, (void*) PRIMITIVE_VALUE_INDEX, p13, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    set(&b, (void*) PRIMITIVE_VALUE_INDEX, p15, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    // Map colour names to control sequences.
-    mapto((void*) &bg, (void*) &bgc, NULL_POINTER, p17, p18, (void*) TERMINAL_BACKGROUND_ABSTRACTION, (void*) TERMINAL_BACKGROUND_ABSTRACTION_COUNT);
-    mapto((void*) &fg, (void*) &fgc, NULL_POINTER, p19, p20, (void*) TERMINAL_FOREGROUND_ABSTRACTION, (void*) TERMINAL_FOREGROUND_ABSTRACTION_COUNT);
+        int* sc = (int*) p4;
 
-    // The comparison result.
-    int r = 0;
+        // The character.
+        void* c = NULL_POINTER;
+        int cc = 0;
+        int cs = 0;
+        // The hidden property.
+        int h = 0;
+        // The inverse property.
+        int i = 0;
+        // The blink property.
+        int bl = 0;
+        // The underline property.
+        int u = 0;
+        // The bold property.
+        int b = 0;
+        // The background colour.
+        void* bg = NULL_POINTER;
+        int bgc = 0;
+        // The foreground colour.
+        void* fg = NULL_POINTER;
+        int fgc = 0;
 
-    compare_arrays(p5, p6, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        //?? TODO: These values should later be given as boolean "true" or "false".
+        //?? Currently, they have to be given as "0" or "1" in CYBOL.
+        //?? Change this later by transforming boolean into integer values!
+        set(&h, (void*) PRIMITIVE_VALUE_INDEX, p7, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        set(&i, (void*) PRIMITIVE_VALUE_INDEX, p9, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        set(&bl, (void*) PRIMITIVE_VALUE_INDEX, p11, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        set(&u, (void*) PRIMITIVE_VALUE_INDEX, p13, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        set(&b, (void*) PRIMITIVE_VALUE_INDEX, p15, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        // Map colour names to control sequences.
+        mapto((void*) &bg, (void*) &bgc, NULL_POINTER, p17, p18, (void*) TERMINAL_BACKGROUND_ABSTRACTION, (void*) TERMINAL_BACKGROUND_ABSTRACTION_COUNT);
+        mapto((void*) &fg, (void*) &fgc, NULL_POINTER, p19, p20, (void*) TERMINAL_FOREGROUND_ABSTRACTION, (void*) TERMINAL_FOREGROUND_ABSTRACTION_COUNT);
 
-    if (r != 0) {
+        // The comparison result.
+        int r = 0;
 
-        // Set character parameter to be handed over.
-        // If the part model is NOT of abstraction "character" (e.g. a "compound"),
-        // the parameter to be handed over remains a NULL_POINTER.
-        c = p3;
-        cc = p4;
-    }
+        if (r == 0) {
 
-    // Reset comparison result.
-    r = 0;
+            compare_arrays(p5, p6, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-    if (r == 0) {
+            if (r != 0) {
 
-        compare_arrays(p35, p36, (void*) UI_RECTANGLE_SHAPE_MODEL, (void*) UI_RECTANGLE_SHAPE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != 0) {
-
-            serialise_linux_console_coordinates(p0, p1, p2, c, cc, &h, &i, &bl, &u, &b,
-                bg, (void*) &bgc, fg, (void*) &fgc, p21, p22, p23, p24,
-                p25, p26, p27, p28, p29, p30, p31, p32, p33, p34);
+                // Set character parameter to be handed over.
+                c = p3;
+                cc = *sc;
+            }
         }
-    }
 
-    if (r == 0) {
+        if (r == 0) {
 
-        compare_arrays(p35, p36, (void*) UI_CIRCLE_SHAPE_MODEL, (void*) UI_CIRCLE_SHAPE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+            compare_arrays(p5, p6, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r != 0) {
+            if (r != 0) {
 
-/*??
-            serialise_linux_console_coordinates(p0, p1, p2, c, cc, &h, &i, &bl, &u, &b,
-                bg, (void*) &bgc, fg, (void*) &fgc, p21, p22, p23, p24,
-                p25, p26, p27, p28, p29, p30, p31, p32, p33, p34);
-*/
+                // The temporary ascii character array.
+                void* tmp = NULL_POINTER;
+                int tmps = *sc + 1;
+
+                // Allocate temporary ascii character array.
+                allocate((void*) &tmp, (void*) &tmps, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+
+                // Set temporary ascii character array by first copying the
+                // given array and then adding the null termination character.
+                set_array_elements(tmp, (void*) NUMBER_0_INTEGER, p3, p4, (void*) CHARACTER_ARRAY);
+                set_array_elements(tmp, p4, (void*) NULL_CONTROL_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+
+                // Initialise temporary wide character string size.
+                // CAUTION! One extra place is added for the null termination character.
+                cs = *sc + 100;
+
+                // Allocate temporary wide character string.
+                allocate((void*) &c, (void*) &cs, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
+
+                // Set character parameter to be handed over.
+                // The temporary wide character string count is returned.
+                cc = swprintf((wchar_t*) c, cs, L"%s", (char*) tmp);
+
+                // Deallocate temporary ascii character array.
+                deallocate((void*) &tmp, (void*) &tmps, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+            }
         }
-    }
 
-    if (r == 0) {
+        // If the part model is neither of abstraction "wide_character" nor of
+        // abstraction "character" (e.g. a "compound"), the parameter to be
+        // handed over remains a null pointer.
 
-        compare_arrays(p35, p36, (void*) UI_POLYGON_SHAPE_MODEL, (void*) UI_POLYGON_SHAPE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        // Reset comparison result.
+        r = 0;
 
-        if (r != 0) {
+        if (r == 0) {
 
-/*??
-            serialise_linux_console_coordinates(p0, p1, p2, c, cc, &h, &i, &bl, &u, &b,
-                bg, (void*) &bgc, fg, (void*) &fgc, p21, p22, p23, p24,
-                p25, p26, p27, p28, p29, p30, p31, p32, p33, p34);
-*/
+            compare_arrays(p35, p36, (void*) UI_RECTANGLE_SHAPE_MODEL, (void*) UI_RECTANGLE_SHAPE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+            if (r != 0) {
+
+                serialise_linux_console_coordinates(p0, p1, p2, c, (void*) &cc,
+                    &h, &i, &bl, &u, &b,
+                    bg, (void*) &bgc, fg, (void*) &fgc, p21, p22, p23, p24,
+                    p25, p26, p27, p28, p29, p30, p31, p32, p33, p34);
+            }
         }
+
+        if (r == 0) {
+
+            compare_arrays(p35, p36, (void*) UI_CIRCLE_SHAPE_MODEL, (void*) UI_CIRCLE_SHAPE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+            if (r != 0) {
+
+    /*??
+                serialise_linux_console_coordinates(p0, p1, p2, c, cc, &h, &i, &bl, &u, &b,
+                    bg, (void*) &bgc, fg, (void*) &fgc, p21, p22, p23, p24,
+                    p25, p26, p27, p28, p29, p30, p31, p32, p33, p34);
+    */
+            }
+        }
+
+        if (r == 0) {
+
+            compare_arrays(p35, p36, (void*) UI_POLYGON_SHAPE_MODEL, (void*) UI_POLYGON_SHAPE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+            if (r != 0) {
+
+    /*??
+                serialise_linux_console_coordinates(p0, p1, p2, c, cc, &h, &i, &bl, &u, &b,
+                    bg, (void*) &bgc, fg, (void*) &fgc, p21, p22, p23, p24,
+                    p25, p26, p27, p28, p29, p30, p31, p32, p33, p34);
+    */
+            }
+        }
+
+        // Reset comparison result.
+        r = 0;
+
+        if (r == 0) {
+
+            compare_arrays(p5, p6, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+            if (r != 0) {
+
+                // Deallocate temporary wide character string.
+                deallocate((void*) &c, (void*) &cs, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
+            }
+        }
+
+    } else {
+
+        log_message_debug("Could not serialise linux console shape. The character count is null.");
     }
 }
 

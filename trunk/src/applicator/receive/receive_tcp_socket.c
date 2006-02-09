@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.23 $ $Date: 2006-02-09 02:22:57 $ $Author: christian $
+ * @version $Revision: 1.24 $ $Date: 2006-02-09 23:13:52 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -795,14 +795,14 @@ void set_signal_for_parameter(void* source, int* source_count, void* dest, int* 
         // is empty
 
         // Add property source to the signal detail compound.
-        set_compound_element_by_name( sd, sdc, sds,
+        set_compound_element_by_name(sd, sdc, sds,
             psn, (void*) psnc, (void*) psns,
             psa, (void*) psac, (void*) psas,
             psm, (void*) psmc, (void*) psms,
             psd, (void*) psdc, (void*) psds);
 
         // Add property destination to the detail compound.
-        set_compound_element_by_name( sd, sdc, sds,
+        set_compound_element_by_name(sd, sdc, sds,
             pdn, (void*) pdnc, (void*) pdns,
             pda, (void*) pdac, (void*) pdas,
             pdm, (void*) pdmc, (void*) pdms,

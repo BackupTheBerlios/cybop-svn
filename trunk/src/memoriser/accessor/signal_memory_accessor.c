@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2005-08-11 22:33:47 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2006-02-09 23:13:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -521,8 +521,8 @@ void get_highest_priority_index(void* p0, void* p1, void* p2) {
                 // The priority.
                 int** prio = (int**) &NULL_POINTER;
                 // The highest priority.
-                // CAUTION! Do not set it to zero, because then the priority
-                // will not be set, due to the comparison: if (prio > h)
+                // CAUTION! Do not initialise it with zero, because then the
+                // priority will not be set, due to the comparison: if (prio > h).
                 // The smallest possible priority is zero and greater than minus one.
                 int h = -1;
 
@@ -597,6 +597,9 @@ void get_new_signal_id(void* p0, void* p1, void* p2) {
                 // The loop variable.
                 int j = 0;
                 // The maximum signal identification.
+                // CAUTION! Do not initialise it with zero, because then the
+                // maximum will not be set, due to the comparison: if (id > max).
+                // The smallest possible priority is zero and greater than minus one.
                 int max = -1;
                 // The identification.
                 int** id = (int**) &NULL_POINTER;

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.12 $ $Date: 2006-02-09 02:22:59 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2006-02-09 23:13:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -218,32 +218,38 @@ void serialise_integer_wide(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 // Get integer value.
                 get_array_elements(p3, (void*) PRIMITIVE_VALUE_INDEX, (void*) &v, (void*) INTEGER_ARRAY);
 
-                //?? TODO: set_array_elements is missing!
-                //?? The get_array_elements procedure does NOT copy values;
-                //?? it returns just a reference to the corresponding value!
+                // Initialise destination count to -1.
+                // CAUTION! It must be negative for the loop to run.
+                *dc = -1;
 
-                // Transform source integer to destination string.
-                *dc = swprintf(*d, *ds, "%i", *v);
+                while (1) {
 
-                // Set destination string size one greater than the count
-                // to have space for the terminating null character.
-                *ds = *dc + 1;
+                    if (*dc >= 0) {
 
-                // Reallocate destination string.
-                reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_ARRAY);
+                        break;
+                    }
 
-                // Transform source integer to destination string.
-                *dc = swprintf(*d, *ds, "%i", *v);
+                    // Initialise destination string count to zero.
+                    // CAUTION! This is essential because otherwise,
+                    // the array reallocation calculates wrong values.
+                    *dc = 0;
 
-                // CAUTION! Recalculate string count because only in versions
-                // of the GNU C library prior to 2.1, the snprintf function
-                // returns the number of characters stored, not including the
-                // terminating null; unless there was not enough space in the
-                // string to store the result in which case -1 is returned.
-                // This was CHANGED in order to comply with the ISO C99 standard.
-                // As usual, the string count does NOT contain the terminating
-                // null character.
-                *dc = wcslen(*d);
+                    // Set destination string size one greater than the count
+                    // to have space for the terminating null character and
+                    // to avoid a zero value in case destination string size is zero.
+                    *ds = *ds * *WIDE_CHARACTER_VECTOR_REALLOCATE_FACTOR + 1;
+
+                    // Reallocate destination string.
+                    reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_ARRAY);
+
+                    // Transform source integer to destination string.
+                    // A null wide character is written to mark the end of the string.
+                    // The return value is the number of characters generated
+                    // for the given input, excluding the trailing null.
+                    // If not all output fits into the provided buffer,
+                    // a negative value is returned.
+                    *dc = swprintf(*d, *ds, L"%i", *v);
+                }
 
             } else {
 
