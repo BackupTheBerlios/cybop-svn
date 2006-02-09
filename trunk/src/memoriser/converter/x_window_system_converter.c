@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2006-02-06 23:41:34 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2006-02-09 02:22:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,6 +30,7 @@
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
 #include "../../globals/constants/abstraction_constants.c"
+#include "../../globals/constants/ascii_character_constants.c"
 #include "../../globals/constants/model_constants.c"
 #include "../../globals/constants/name_constants.c"
 #include "../../globals/constants/structure_constants.c"
@@ -339,7 +340,7 @@ void serialise_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
                     // Set terminated text by first copying the actual name
                     // and then adding the null termination character.
                     set_array_elements(text, (void*) NUMBER_0_INTEGER, *m, *mc, (void*) CHARACTER_ARRAY);
-                    set_array_elements(text, *mc, (void*) NULL_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+                    set_array_elements(text, *mc, (void*) NULL_CONTROL_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
 
                     // Draw the text (character vector / string).
                     XDrawString(*di, **w, *gc, **pmx, **pmy + 20, text, texts);
@@ -508,11 +509,11 @@ void serialise_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
                 // Set terminated title by first copying the actual name
                 // and then adding the null termination character.
                 set_array_elements(tt, (void*) NUMBER_0_INTEGER, *tm, *tmc, (void*) CHARACTER_ARRAY);
-                set_array_elements(tt, *tmc, (void*) NULL_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+                set_array_elements(tt, *tmc, (void*) NULL_CONTROL_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
                 // Set terminated icon name by first copying the actual name
                 // and then adding the null termination character.
                 set_array_elements(ti, (void*) NUMBER_0_INTEGER, *im, *imc, (void*) CHARACTER_ARRAY);
-                set_array_elements(ti, *imc, (void*) NULL_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+                set_array_elements(ti, *imc, (void*) NULL_CONTROL_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
 
                 // Set terminated window title.
                 XStoreName(*di, **w, (char*) tt);

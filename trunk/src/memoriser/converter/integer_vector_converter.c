@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2006-02-06 23:41:34 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2006-02-09 02:22:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -28,6 +28,7 @@
 #define INTEGER_VECTOR_CONVERTER_SOURCE
 
 #include <string.h>
+#include <wchar.h>
 #include "../../globals/constants/abstraction_constants.c"
 #include "../../globals/constants/character_constants.c"
 #include "../../globals/constants/log_constants.c"
@@ -74,7 +75,7 @@ void parse_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
             i = *sc;
 
             // Add string termination to temporary null-terminated string.
-            set_array_elements((void*) tmp, (void*) &i, (void*) NULL_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+            set_array_elements((void*) tmp, (void*) &i, (void*) NULL_CONTROL_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
 
             // The tail variable is useless here and only needed for the string
             // transformation function. If the whole string array consists of
@@ -187,6 +188,80 @@ void serialise_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
 }
 
 /**
+ * Serialises the integer model and creates a wide character byte stream from it.
+ *
+ * @param p0 the destination wide character array (Hand over as reference!)
+ * @param p1 the destination count
+ * @param p2 the destination size
+ * @param p3 the source integer number
+ * @param p4 the source count
+ */
+void serialise_integer_wide(void* p0, void* p1, void* p2, void* p3, void* p4) {
+
+    if (p2 != NULL_POINTER) {
+
+        int* ds = (int*) p2;
+
+        if (p1 != NULL_POINTER) {
+
+            int* dc = (int*) p1;
+
+            if (p0 != NULL_POINTER) {
+
+                wchar_t** d = (wchar_t**) p0;
+
+                log_message_debug("Serialise integer into wide character.");
+
+                // The integer value.
+                int* v = NULL_POINTER;
+
+                // Get integer value.
+                get_array_elements(p3, (void*) PRIMITIVE_VALUE_INDEX, (void*) &v, (void*) INTEGER_ARRAY);
+
+                //?? TODO: set_array_elements is missing!
+                //?? The get_array_elements procedure does NOT copy values;
+                //?? it returns just a reference to the corresponding value!
+
+                // Transform source integer to destination string.
+                *dc = swprintf(*d, *ds, "%i", *v);
+
+                // Set destination string size one greater than the count
+                // to have space for the terminating null character.
+                *ds = *dc + 1;
+
+                // Reallocate destination string.
+                reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_ARRAY);
+
+                // Transform source integer to destination string.
+                *dc = swprintf(*d, *ds, "%i", *v);
+
+                // CAUTION! Recalculate string count because only in versions
+                // of the GNU C library prior to 2.1, the snprintf function
+                // returns the number of characters stored, not including the
+                // terminating null; unless there was not enough space in the
+                // string to store the result in which case -1 is returned.
+                // This was CHANGED in order to comply with the ISO C99 standard.
+                // As usual, the string count does NOT contain the terminating
+                // null character.
+                *dc = wcslen(*d);
+
+            } else {
+
+                log_message_debug("Could not serialise integer into wide character. The destination is null.");
+            }
+
+        } else {
+
+            log_message_debug("Could not serialise integer into wide character. The destination count is null.");
+        }
+
+    } else {
+
+        log_message_debug("Could not serialise integer into wide character. The destination size is null.");
+    }
+}
+
+/**
  * Parses the byte stream and creates an integer vector model from it.
  *
  * @param p0 the destination vector model (Hand over as reference!)
@@ -226,7 +301,7 @@ void parse_integer_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     int ec = 0;
 
                     // Find comma character index.
-                    get_array_elements_index(p3, p4, (void*) COMMA_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &i, (void*) CHARACTER_ARRAY);
+                    get_array_elements_index(p3, p4, (void*) COMMA_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &i, (void*) CHARACTER_ARRAY);
 
                     // CAUTION! Do NOT change this comparison to greater than >
                     // or something else, because -1 must be allowed! See below.
@@ -372,7 +447,7 @@ void serialise_integer_vector(void* p0, void* p1, void* p2, void* p3, void* p4) 
                         *dc = *dc + cc;
 
                         // Set comma character.
-                        set_array_elements(*d, p1, (void*) COMMA_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+                        set_array_elements(*d, p1, (void*) COMMA_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
                         *dc = *dc + *PRIMITIVE_COUNT;
 
                         // Recursively call this procedure for further integer numbers.

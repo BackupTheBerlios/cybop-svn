@@ -20,14 +20,14 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2005-08-04 15:20:58 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2006-02-09 02:22:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef CONSTANT_SOURCE
 #define CONSTANT_SOURCE
 
-#include "../../globals/constants/character_constants.c"
+#include "../../globals/constants/ascii_character_constants.c"
 #include "../../globals/constants/integer_constants.c"
 
 //
@@ -177,7 +177,8 @@ static int* REQEUST_METHOD_POST_COUNT = NUMBER_4_INTEGER_ARRAY;
 //
 
 /** The compound element separator. */
-static char* COMPOUND_ELEMENT_SEPARATOR = FULL_STOP_CHARACTER_ARRAY;
+static char COMPOUND_ELEMENT_SEPARATOR_ARRAY[] = {'.'};
+static char* COMPOUND_ELEMENT_SEPARATOR = COMPOUND_ELEMENT_SEPARATOR_ARRAY;
 static int* COMPOUND_ELEMENT_SEPARATOR_COUNT = NUMBER_1_INTEGER_ARRAY;
 
 //
@@ -185,7 +186,8 @@ static int* COMPOUND_ELEMENT_SEPARATOR_COUNT = NUMBER_1_INTEGER_ARRAY;
 //
 
 /** The operation parameter separator. */
-static char* OPERATION_PARAMETER_SEPARATOR = COMMA_CHARACTER_ARRAY;
+static char OPERATION_PARAMETER_SEPARATOR_ARRAY[] = {','};
+static char* OPERATION_PARAMETER_SEPARATOR = OPERATION_PARAMETER_SEPARATOR_ARRAY;
 static int* OPERATION_PARAMETER_SEPARATOR_COUNT = NUMBER_1_INTEGER_ARRAY;
 
 //

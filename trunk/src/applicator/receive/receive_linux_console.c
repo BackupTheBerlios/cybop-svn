@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2006-02-06 23:41:33 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2006-02-09 02:22:57 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,6 +30,7 @@
 #include <pthread.h>
 #include <stdio.h>
 #include "../../globals/constants/abstraction_constants.c"
+#include "../../globals/constants/ascii_character_constants.c"
 #include "../../globals/constants/integer_constants.c"
 #include "../../globals/constants/name_constants.c"
 #include "../../globals/constants/structure_constants.c"
@@ -102,7 +103,7 @@ void receive_linux_console_thread(void* p0) {
     // of information.
     // NEVERTHELESS, a char is used here since EOF is not of importance below,
     // in the "get_compound_element_by_encapsulated_name" procedure.
-    int e = *NULL_CONTROL_CHARACTER;
+    int e = *NULL_CONTROL_ASCII_CHARACTER;
     // The signal id.
     int* id = NULL_POINTER;
     // The activation flag.

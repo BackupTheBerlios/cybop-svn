@@ -27,7 +27,7 @@
  * Otherwise, an ENDLESS LOOP will be created, because cyboi's
  * array procedures call the logger in turn.
  *
- * @version $Revision: 1.10 $ $Date: 2006-02-06 23:41:34 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2006-02-09 02:22:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -38,7 +38,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#include "../../globals/constants/character_constants.c"
+#include "../../globals/constants/ascii_character_constants.c"
 #include "../../globals/constants/log_constants.c"
 #include "../../globals/constants/structure_constants.c"
 #include "../../globals/variables/variables.c"
@@ -256,11 +256,11 @@ void log_message(void* p0, void* p1, void* p2) {
                 e = (void*) realloc(e, ec);
 
                 // Add colon to log entry.
-                add_log_details((void*) &e, (void*) &ei, (void*) COLON_CHARACTER, (void*) PRIMITIVE_COUNT);
+                add_log_details((void*) &e, (void*) &ei, (void*) COLON_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT);
                 ei = ei + 1;
 
                 // Add space to log entry.
-                add_log_details((void*) &e, (void*) &ei, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT);
+                add_log_details((void*) &e, (void*) &ei, (void*) SPACE_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT);
                 ei = ei + 1;
 
                 // Add message to log entry.
@@ -268,7 +268,7 @@ void log_message(void* p0, void* p1, void* p2) {
                 ei = ei + *mc;
 
                 // Add new line to log entry.
-                add_log_details((void*) &e, (void*) &ei, (void*) LINE_FEED_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT);
+                add_log_details((void*) &e, (void*) &ei, (void*) LINE_FEED_CONTROL_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT);
                 ei = ei + 1;
 
                 // Log entry to output.

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.22 $ $Date: 2006-02-06 23:41:33 $ $Author: christian $
+ * @version $Revision: 1.23 $ $Date: 2006-02-09 02:22:57 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -100,7 +100,7 @@ void get_request_method(char* req, int* req_count, char** req_method, int* req_m
 
         get_array_elements(req, req_method_count, (void*) &e, (void*) CHARACTER_ARRAY);
 
-        if (*e == *SPACE_CHARACTER) {
+        if (*e == *SPACE_ASCII_CHARACTER) {
 
             // Reached end of request method.
             break;
@@ -148,7 +148,7 @@ void get_url_basename_from_request(char* req, int* req_count, char** urlbase, in
         get_array_elements(req, (void*) &req_index, (void*) &e, (void*) CHARACTER_ARRAY);
 
         // Check of ending the paramaters.
-        if ((start_urlbase_flag == 1) && ((*e == *SPACE_CHARACTER) || (*e == *QUESTION_MARK_CHARACTER))) {
+        if ((start_urlbase_flag == 1) && ((*e == *SPACE_ASCII_CHARACTER) || (*e == *QUESTION_MARK_ASCII_CHARACTER))) {
 
             break;
         }
@@ -165,7 +165,7 @@ void get_url_basename_from_request(char* req, int* req_count, char** urlbase, in
         }
 
         // Check of beginning the paramaters.
-        if (*e == *SOLIDUS_CHARACTER) {
+        if (*e == *SOLIDUS_ASCII_CHARACTER) {
 
             // Begin from the parameters.
             start_urlbase_flag = 1;
@@ -203,7 +203,7 @@ void* get_character_from_escape_code(void* source, int* source_count, char** des
 
                 if (r == 1) {
 
-                    *dest = (char*) SPACE_CHARACTER;
+                    *dest = (char*) SPACE_ASCII_CHARACTER;
                 }
             }
 
@@ -214,7 +214,7 @@ void* get_character_from_escape_code(void* source, int* source_count, char** des
 
                 if (r == 1) {
 
-                    *dest = (char*) LESS_THAN_SIGN_CHARACTER;
+                    *dest = (char*) LESS_THAN_SIGN_ASCII_CHARACTER;
                 }
             }
 
@@ -225,7 +225,7 @@ void* get_character_from_escape_code(void* source, int* source_count, char** des
 
                 if (r == 1) {
 
-                    *dest = (char*) GREATER_THAN_SIGN_CHARACTER;
+                    *dest = (char*) GREATER_THAN_SIGN_ASCII_CHARACTER;
                 }
             }
 
@@ -236,7 +236,7 @@ void* get_character_from_escape_code(void* source, int* source_count, char** des
 
                 if (r == 1) {
 
-                    *dest = (char*) NUMBER_SIGN_CHARACTER;
+                    *dest = (char*) NUMBER_SIGN_ASCII_CHARACTER;
                 }
             }
 
@@ -247,7 +247,7 @@ void* get_character_from_escape_code(void* source, int* source_count, char** des
 
                 if (r == 1) {
 
-                    *dest = (char*) PERCENT_SIGN_CHARACTER;
+                    *dest = (char*) PERCENT_SIGN_ASCII_CHARACTER;
                 }
             }
 
@@ -258,7 +258,7 @@ void* get_character_from_escape_code(void* source, int* source_count, char** des
 
                 if (r == 1) {
 
-                    *dest = (char*) LEFT_CURLY_BRACKET_CHARACTER;
+                    *dest = (char*) LEFT_CURLY_BRACKET_ASCII_CHARACTER;
                 }
             }
 
@@ -269,7 +269,7 @@ void* get_character_from_escape_code(void* source, int* source_count, char** des
 
                 if (r == 1) {
 
-                    *dest = (char*) RIGHT_CURLY_BRACKET_CHARACTER;
+                    *dest = (char*) RIGHT_CURLY_BRACKET_ASCII_CHARACTER;
                 }
             }
 
@@ -280,7 +280,7 @@ void* get_character_from_escape_code(void* source, int* source_count, char** des
 
                 if (r == 1) {
 
-                    *dest = (char*) VERTICAL_LINE_CHARACTER;
+                    *dest = (char*) VERTICAL_LINE_ASCII_CHARACTER;
                 }
             }
 
@@ -291,7 +291,7 @@ void* get_character_from_escape_code(void* source, int* source_count, char** des
 
                 if (r == 1) {
 
-                    *dest = (char*) REVERSE_SOLIDUS_CHARACTER;
+                    *dest = (char*) REVERSE_SOLIDUS_ASCII_CHARACTER;
                 }
             }
 
@@ -302,7 +302,7 @@ void* get_character_from_escape_code(void* source, int* source_count, char** des
 
                 if (r == 1) {
 
-                    *dest = (char*) CIRCUMFLEX_ACCENT_CHARACTER;
+                    *dest = (char*) CIRCUMFLEX_ACCENT_ASCII_CHARACTER;
                 }
             }
 
@@ -313,7 +313,7 @@ void* get_character_from_escape_code(void* source, int* source_count, char** des
 
                 if (r == 1) {
 
-                    *dest = (char*) TILDE_CHARACTER;
+                    *dest = (char*) TILDE_ASCII_CHARACTER;
                 }
             }
 
@@ -324,7 +324,7 @@ void* get_character_from_escape_code(void* source, int* source_count, char** des
 
                 if (r == 1) {
 
-                    *dest = (char*) LEFT_SQUARE_BRACKET_CHARACTER;
+                    *dest = (char*) LEFT_SQUARE_BRACKET_ASCII_CHARACTER;
                 }
             }
 
@@ -335,7 +335,7 @@ void* get_character_from_escape_code(void* source, int* source_count, char** des
 
                 if (r == 1) {
 
-                    *dest = (char*) RIGHT_SQUARE_BRACKET_CHARACTER;
+                    *dest = (char*) RIGHT_SQUARE_BRACKET_ASCII_CHARACTER;
                 }
             }
 
@@ -346,7 +346,7 @@ void* get_character_from_escape_code(void* source, int* source_count, char** des
 
                 if (r == 1) {
 
-                    *dest = (char*) GRAVE_ACCENT_CHARACTER;
+                    *dest = (char*) GRAVE_ACCENT_ASCII_CHARACTER;
                 }
             }
 
@@ -357,7 +357,7 @@ void* get_character_from_escape_code(void* source, int* source_count, char** des
 
                 if (r == 1) {
 
-                    *dest = (char*) SEMICOLON_CHARACTER;
+                    *dest = (char*) SEMICOLON_ASCII_CHARACTER;
                 }
             }
 
@@ -368,7 +368,7 @@ void* get_character_from_escape_code(void* source, int* source_count, char** des
 
                 if (r == 1) {
 
-                    *dest = (char*) SOLIDUS_CHARACTER;
+                    *dest = (char*) SOLIDUS_ASCII_CHARACTER;
                 }
             }
 
@@ -379,7 +379,7 @@ void* get_character_from_escape_code(void* source, int* source_count, char** des
 
                 if (r == 1) {
 
-                    *dest = (char*) QUESTION_MARK_CHARACTER;
+                    *dest = (char*) QUESTION_MARK_ASCII_CHARACTER;
                 }
             }
 
@@ -390,7 +390,7 @@ void* get_character_from_escape_code(void* source, int* source_count, char** des
 
                 if (r == 1) {
 
-                    *dest = (char*) COLON_CHARACTER;
+                    *dest = (char*) COLON_ASCII_CHARACTER;
                 }
             }
 
@@ -401,7 +401,7 @@ void* get_character_from_escape_code(void* source, int* source_count, char** des
 
                 if (r == 1) {
 
-                    *dest = (char*) COMMERCIAL_AT_CHARACTER;
+                    *dest = (char*) COMMERCIAL_AT_ASCII_CHARACTER;
                 }
             }
 
@@ -412,7 +412,7 @@ void* get_character_from_escape_code(void* source, int* source_count, char** des
 
                 if (r == 1) {
 
-                    *dest = (char*) EQUALS_SIGN_CHARACTER;
+                    *dest = (char*) EQUALS_SIGN_ASCII_CHARACTER;
                 }
             }
 
@@ -423,7 +423,7 @@ void* get_character_from_escape_code(void* source, int* source_count, char** des
 
                 if (r == 1) {
 
-                    *dest = (char*) AMPERSAND_CHARACTER;
+                    *dest = (char*) AMPERSAND_ASCII_CHARACTER;
                 }
             }
 
@@ -434,7 +434,7 @@ void* get_character_from_escape_code(void* source, int* source_count, char** des
 
                 if (r == 1) {
 
-                    *dest = (char*) DOLLAR_SIGN_CHARACTER;
+                    *dest = (char*) DOLLAR_SIGN_ASCII_CHARACTER;
                 }
             }
         }
@@ -477,7 +477,7 @@ void get_parameter_from_request_for_post(char* req, int* req_count, char** param
         get_array_elements(req, (void*) &req_index, (void*) &e, (void*) CHARACTER_ARRAY);
 
         // Check of beginning  the paramaters.
-        if ((*e == *LINE_FEED_CONTROL_CHARACTER)) {
+        if ((*e == *LINE_FEED_CONTROL_ASCII_CHARACTER)) {
 
             start_param_index = req_index + 1;
             break;
@@ -543,7 +543,7 @@ void get_parameter_from_request_for_get(char* req, int* req_count, char** param,
         get_array_elements(req, (void*) &req_index, (void*) &e, (void*) CHARACTER_ARRAY);
 
         // Check of ending the paramaters.
-        if ((start_param_flag == 1) && (*e == *SPACE_CHARACTER)) {
+        if ((start_param_flag == 1) && (*e == *SPACE_ASCII_CHARACTER)) {
 
             break;
         }
@@ -560,7 +560,7 @@ void get_parameter_from_request_for_get(char* req, int* req_count, char** param,
         }
 
         // Check of beginning the paramaters.
-        if (*e == *QUESTION_MARK_CHARACTER) {
+        if (*e == *QUESTION_MARK_ASCII_CHARACTER) {
 
             // Begin from the parameters.
             start_param_flag = 1;
@@ -910,7 +910,7 @@ void set_signals_for_all_parameters(void* p0, int* p1, void* p2) {
 
                 get_array_elements((void*) p0, (void*) &query_counter, (void*) &element, CHARACTER_ARRAY);
 
-                compare_arrays(element, &temp_count, EQUALS_SIGN_CHARACTER, PRIMITIVE_COUNT, &r, CHARACTER_ARRAY);
+                compare_arrays(element, &temp_count, EQUALS_SIGN_ASCII_CHARACTER, PRIMITIVE_COUNT, &r, CHARACTER_ARRAY);
 
                 if ((query_counter >= *p1) || (r == 1)) {
 
@@ -944,7 +944,7 @@ void set_signals_for_all_parameters(void* p0, int* p1, void* p2) {
 
                 get_array_elements((void*) p0, (void*) &query_counter, (void*) &element, CHARACTER_ARRAY);
 
-                compare_arrays(element, &temp_count, AMPERSAND_CHARACTER, PRIMITIVE_COUNT, &r, CHARACTER_ARRAY);
+                compare_arrays(element, &temp_count, AMPERSAND_ASCII_CHARACTER, PRIMITIVE_COUNT, &r, CHARACTER_ARRAY);
 
                 if ((query_counter >= *p1) || (r == 1)) {
 

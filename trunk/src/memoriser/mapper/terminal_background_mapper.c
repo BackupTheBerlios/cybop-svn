@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2006-01-28 00:40:29 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2006-02-09 02:22:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -47,87 +47,113 @@
  */
 void mapto_terminal_background(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    // The comparison result.
-    int r = 0;
+    if (p1 != NULL_POINTER) {
 
-    if (r == 0) {
+        int* dc = (int*) p1;
 
-        compare_arrays(p3, p4, TERMINAL_COLOUR_BLACK_MODEL, TERMINAL_COLOUR_BLACK_MODEL_COUNT, &r, (void*) CHARACTER_ARRAY);
+        if (p0 != NULL_POINTER) {
 
-        if (r != 0) {
+            void** d = (void**) p0;
 
-            set(p0, (void*) PRIMITIVE_VALUE_INDEX, (void*) BLACK_BACKGROUND_CONTROL_SEQUENCE, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+            // The comparison result.
+            int r = 0;
+
+            if (r == 0) {
+
+                compare_arrays(p3, p4, TERMINAL_COLOUR_BLACK_MODEL, TERMINAL_COLOUR_BLACK_MODEL_COUNT, &r, (void*) CHARACTER_ARRAY);
+
+                if (r != 0) {
+
+                    *d = BLACK_BACKGROUND_CONTROL_SEQUENCE;
+                    *dc = *BLACK_BACKGROUND_CONTROL_SEQUENCE_COUNT;
+                }
+            }
+
+            if (r == 0) {
+
+                compare_arrays(p3, p4, TERMINAL_COLOUR_RED_MODEL, TERMINAL_COLOUR_RED_MODEL_COUNT, &r, (void*) CHARACTER_ARRAY);
+
+                if (r != 0) {
+
+                    *d = RED_BACKGROUND_CONTROL_SEQUENCE;
+                    *dc = *RED_BACKGROUND_CONTROL_SEQUENCE_COUNT;
+                }
+            }
+
+            if (r == 0) {
+
+                compare_arrays(p3, p4, TERMINAL_COLOUR_GREEN_MODEL, TERMINAL_COLOUR_GREEN_MODEL_COUNT, &r, (void*) CHARACTER_ARRAY);
+
+                if (r != 0) {
+
+                    *d = GREEN_BACKGROUND_CONTROL_SEQUENCE;
+                    *dc = *GREEN_BACKGROUND_CONTROL_SEQUENCE_COUNT;
+                }
+            }
+
+            if (r == 0) {
+
+                compare_arrays(p3, p4, TERMINAL_COLOUR_YELLOW_MODEL, TERMINAL_COLOUR_YELLOW_MODEL_COUNT, &r, (void*) CHARACTER_ARRAY);
+
+                if (r != 0) {
+
+                    *d = YELLOW_BACKGROUND_CONTROL_SEQUENCE;
+                    *dc = *YELLOW_BACKGROUND_CONTROL_SEQUENCE_COUNT;
+                }
+            }
+
+            if (r == 0) {
+
+                compare_arrays(p3, p4, TERMINAL_COLOUR_BLUE_MODEL, TERMINAL_COLOUR_BLUE_MODEL_COUNT, &r, (void*) CHARACTER_ARRAY);
+
+                if (r != 0) {
+
+                    *d = BLUE_BACKGROUND_CONTROL_SEQUENCE;
+                    *dc = *BLUE_BACKGROUND_CONTROL_SEQUENCE_COUNT;
+                }
+            }
+
+            if (r == 0) {
+
+                compare_arrays(p3, p4, TERMINAL_COLOUR_MAGENTA_MODEL, TERMINAL_COLOUR_MAGENTA_MODEL_COUNT, &r, (void*) CHARACTER_ARRAY);
+
+                if (r != 0) {
+
+                    *d = MAGENTA_BACKGROUND_CONTROL_SEQUENCE;
+                    *dc = *MAGENTA_BACKGROUND_CONTROL_SEQUENCE_COUNT;
+                }
+            }
+
+            if (r == 0) {
+
+                compare_arrays(p3, p4, TERMINAL_COLOUR_COBALT_MODEL, TERMINAL_COLOUR_COBALT_MODEL_COUNT, &r, (void*) CHARACTER_ARRAY);
+
+                if (r != 0) {
+
+                    *d = COBALT_BACKGROUND_CONTROL_SEQUENCE;
+                    *dc = *COBALT_BACKGROUND_CONTROL_SEQUENCE_COUNT;
+                }
+            }
+
+            if (r == 0) {
+
+                compare_arrays(p3, p4, TERMINAL_COLOUR_WHITE_MODEL, TERMINAL_COLOUR_WHITE_MODEL_COUNT, &r, (void*) CHARACTER_ARRAY);
+
+                if (r != 0) {
+
+                    *d = WHITE_BACKGROUND_CONTROL_SEQUENCE;
+                    *dc = *WHITE_BACKGROUND_CONTROL_SEQUENCE_COUNT;
+                }
+            }
+
+        } else {
+
+            log_message_debug("Could not map terminal background colour name to its control sequence code. The destination is null.");
         }
-    }
 
-    if (r == 0) {
+    } else {
 
-        compare_arrays(p3, p4, TERMINAL_COLOUR_RED_MODEL, TERMINAL_COLOUR_RED_MODEL_COUNT, &r, (void*) CHARACTER_ARRAY);
-
-        if (r != 0) {
-
-            set(p0, (void*) PRIMITIVE_VALUE_INDEX, (void*) RED_BACKGROUND_CONTROL_SEQUENCE, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-        }
-    }
-
-    if (r == 0) {
-
-        compare_arrays(p3, p4, TERMINAL_COLOUR_GREEN_MODEL, TERMINAL_COLOUR_GREEN_MODEL_COUNT, &r, (void*) CHARACTER_ARRAY);
-
-        if (r != 0) {
-
-            set(p0, (void*) PRIMITIVE_VALUE_INDEX, (void*) GREEN_BACKGROUND_CONTROL_SEQUENCE, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-        }
-    }
-
-    if (r == 0) {
-
-        compare_arrays(p3, p4, TERMINAL_COLOUR_YELLOW_MODEL, TERMINAL_COLOUR_YELLOW_MODEL_COUNT, &r, (void*) CHARACTER_ARRAY);
-
-        if (r != 0) {
-
-            set(p0, (void*) PRIMITIVE_VALUE_INDEX, (void*) YELLOW_BACKGROUND_CONTROL_SEQUENCE, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-        }
-    }
-
-    if (r == 0) {
-
-        compare_arrays(p3, p4, TERMINAL_COLOUR_BLUE_MODEL, TERMINAL_COLOUR_BLUE_MODEL_COUNT, &r, (void*) CHARACTER_ARRAY);
-
-        if (r != 0) {
-
-            set(p0, (void*) PRIMITIVE_VALUE_INDEX, (void*) BLUE_BACKGROUND_CONTROL_SEQUENCE, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-        }
-    }
-
-    if (r == 0) {
-
-        compare_arrays(p3, p4, TERMINAL_COLOUR_MAGENTA_MODEL, TERMINAL_COLOUR_MAGENTA_MODEL_COUNT, &r, (void*) CHARACTER_ARRAY);
-
-        if (r != 0) {
-
-            set(p0, (void*) PRIMITIVE_VALUE_INDEX, (void*) MAGENTA_BACKGROUND_CONTROL_SEQUENCE, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-        }
-    }
-
-    if (r == 0) {
-
-        compare_arrays(p3, p4, TERMINAL_COLOUR_COBALT_MODEL, TERMINAL_COLOUR_COBALT_MODEL_COUNT, &r, (void*) CHARACTER_ARRAY);
-
-        if (r != 0) {
-
-            set(p0, (void*) PRIMITIVE_VALUE_INDEX, (void*) COBALT_BACKGROUND_CONTROL_SEQUENCE, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-        }
-    }
-
-    if (r == 0) {
-
-        compare_arrays(p3, p4, TERMINAL_COLOUR_WHITE_MODEL, TERMINAL_COLOUR_WHITE_MODEL_COUNT, &r, (void*) CHARACTER_ARRAY);
-
-        if (r != 0) {
-
-            set(p0, (void*) PRIMITIVE_VALUE_INDEX, (void*) WHITE_BACKGROUND_CONTROL_SEQUENCE, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-        }
+        log_message_debug("Could not map terminal background colour name to its control sequence code. The destination count is null.");
     }
 }
 

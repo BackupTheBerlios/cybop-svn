@@ -24,7 +24,7 @@
  * - parse an xml stream into an xml model
  * - serialise an xml model into an xml stream
  *
- * @version $Revision: 1.10 $ $Date: 2006-02-06 23:41:34 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2006-02-09 02:22:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -260,7 +260,7 @@ void parse_xml(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 // Set terminated file name by first copying the actual name
                 // and then adding the null termination character.
                 set_array_elements(tmp, (void*) NUMBER_0_INTEGER, p3, p4, (void*) CHARACTER_ARRAY);
-                set_array_elements(tmp, p4, (void*) NULL_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+                set_array_elements(tmp, p4, (void*) NULL_CONTROL_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
 
                 // Initialise the library.
                 // Check potential ABI mismatches between the version

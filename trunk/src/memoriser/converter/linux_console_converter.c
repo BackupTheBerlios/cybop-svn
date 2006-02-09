@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2006-02-06 23:41:34 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2006-02-09 02:22:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -50,300 +50,320 @@
  * @param p4 the y coordinate
  * @param p5 the z coordinate
  * @param p6 the background property
- * @param p7 the foreground property
- * @param p8 the hidden property
- * @param p9 the inverse property
- * @param p10 the blink property
- * @param p11 the underline property
- * @param p12 the bold property
- * @param p13 the character property
+ * @param p7 the background property count
+ * @param p8 the foreground property
+ * @param p9 the foreground property count
+ * @param p10 the hidden property
+ * @param p11 the inverse property
+ * @param p12 the blink property
+ * @param p13 the underline property
+ * @param p14 the bold property
+ * @param p15 the character property
  */
 void serialise_linux_console_character(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
-    void* p6, void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13) {
+    void* p6, void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14, void* p15) {
 
-    if (p4 != NULL_POINTER) {
+    if (p9 != NULL_POINTER) {
 
-        int* sy = (int*) p4;
+        int* fc = (int*) p9;
 
-        if (p3 != NULL_POINTER) {
+        if (p7 != NULL_POINTER) {
 
-            int* sx = (int*) p3;
+            int* bc = (int*) p7;
 
-            if (p2 != NULL_POINTER) {
+            if (p4 != NULL_POINTER) {
 
-                int* ds = (int*) p2;
+                int* sy = (int*) p4;
 
-                if (p1 != NULL_POINTER) {
+                if (p3 != NULL_POINTER) {
 
-                    int* dc = (int*) p1;
+                    int* sx = (int*) p3;
 
-                    if (p0 != NULL_POINTER) {
+                    if (p2 != NULL_POINTER) {
 
-                        void** d = (void**) p0;
+                        int* ds = (int*) p2;
 
-                        if (p13 != NULL_POINTER) {
+                        if (p1 != NULL_POINTER) {
 
-                            //
-                            // The *CHARACTER_VECTOR_REALLOCATE_FACTOR is not necessary
-                            // to calculate the new character array size.
-                            // However, it is useful to faster increase the character
-                            // array size, thus avoiding steady reallocation.
-                            //
+                            int* dc = (int*) p1;
 
-                            // CAUTION! The top-left terminal corner is 1:1, but the given positions
-                            // start counting from 0, so that 1 has to be added to all positions!
-                            // Therefore, the coordinates handed over need to be corrected.
+                            if (p0 != NULL_POINTER) {
 
-                            // The corrected y.
-                            int cy = *sy + *NUMBER_1_INTEGER;
-                            // The corrected x.
-                            int cx = *sx + *NUMBER_1_INTEGER;
-                            // The y coordinate.
-                            void* y = NULL_POINTER;
-                            int yc = 0;
-                            int ys = 0;
-                            // The x coordinate.
-                            void* x = NULL_POINTER;
-                            int xc = 0;
-                            int xs = 0;
-                            // The background colour.
-                            void* b = NULL_POINTER;
-                            int bc = 0;
-                            int bs = 0;
-                            // The foreground colour.
-                            void* f = NULL_POINTER;
-                            int fc = 0;
-                            int fs = 0;
+                                void** d = (void**) p0;
 
-                            //
-                            // Position cursor.
-                            //
-                            // Example:
-                            // printf("\033[%d;%dH", y_row, x_column)
-                            //
+                                if (p15 != NULL_POINTER) {
 
-                            serialise_integer((void*) &y, (void*) &yc, (void*) &ys, (void*) &cy, (void*) PRIMITIVE_COUNT);
-                            serialise_integer((void*) &x, (void*) &xc, (void*) &xs, (void*) &cx, (void*) PRIMITIVE_COUNT);
+                                    //
+                                    // The *CHARACTER_VECTOR_REALLOCATE_FACTOR is not necessary
+                                    // to calculate the new character array size.
+                                    // However, it is useful to faster increase the character
+                                    // array size, thus avoiding steady reallocation.
+                                    //
 
-                            if ((*dc + *ESCAPE_CONTROL_SEQUENCE_COUNT
-                                + yc + *PRIMITIVE_COUNT
-                                + xc + *PRIMITIVE_COUNT) >= *ds) {
+                                    // CAUTION! The top-left terminal corner is 1:1, but the given positions
+                                    // start counting from 0, so that 1 has to be added to all positions!
+                                    // Therefore, the coordinates handed over need to be corrected.
 
-                                // Set destination character array size.
-                                // CAUTION! Add constant in case *dc is zero!
-                                *ds = *dc * *CHARACTER_VECTOR_REALLOCATE_FACTOR
-                                    + *ESCAPE_CONTROL_SEQUENCE_COUNT
-                                    + yc + *PRIMITIVE_COUNT
-                                    + xc + *PRIMITIVE_COUNT;
+                                    // The corrected y.
+                                    int cy = *sy + *NUMBER_1_INTEGER;
+                                    // The corrected x.
+                                    int cx = *sx + *NUMBER_1_INTEGER;
+                                    // The y coordinate.
+                                    void* y = NULL_POINTER;
+                                    int yc = 0;
+                                    int ys = 0;
+                                    // The x coordinate.
+                                    void* x = NULL_POINTER;
+                                    int xc = 0;
+                                    int xs = 0;
+                                    // The background colour.
+//??                                    void* b = NULL_POINTER;
+//??                                    int bc = 0;
+//??                                    int bs = 0;
+                                    // The foreground colour.
+//??                                    void* f = NULL_POINTER;
+//??                                    int fc = 0;
+//??                                    int fs = 0;
 
-                                // Reallocate destination character array.
-                                reallocate_array(p0, p1, p2, (void*) CHARACTER_ARRAY);
+                                    //
+                                    // Position cursor.
+                                    //
+                                    // Example:
+                                    // printf("\033[%d;%dH", y_row, x_column)
+                                    //
+
+                                    serialise_integer_wide((void*) &y, (void*) &yc, (void*) &ys, (void*) &cy, (void*) PRIMITIVE_COUNT);
+                                    serialise_integer_wide((void*) &x, (void*) &xc, (void*) &xs, (void*) &cx, (void*) PRIMITIVE_COUNT);
+
+                                    if ((*dc + *ESCAPE_CONTROL_SEQUENCE_COUNT
+                                        + yc + *PRIMITIVE_COUNT
+                                        + xc + *PRIMITIVE_COUNT) >= *ds) {
+
+                                        // Set destination character array size.
+                                        // CAUTION! Add constant in case *dc is zero!
+                                        *ds = *dc * *WIDE_CHARACTER_VECTOR_REALLOCATE_FACTOR
+                                            + *ESCAPE_CONTROL_SEQUENCE_COUNT
+                                            + yc + *PRIMITIVE_COUNT
+                                            + xc + *PRIMITIVE_COUNT;
+
+                                        // Reallocate destination character array.
+                                        reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_ARRAY);
+                                    }
+
+                                    set_array_elements(*d, p1, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+                                    *dc = *dc + *ESCAPE_CONTROL_SEQUENCE_COUNT;
+                                    set_array_elements(*d, p1, y, (void*) &yc, (void*) WIDE_CHARACTER_ARRAY);
+                                    *dc = *dc + yc;
+                                    set_array_elements(*d, p1, (void*) SEMICOLON_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+                                    *dc = *dc + *PRIMITIVE_COUNT;
+                                    set_array_elements(*d, p1, x, (void*) &xc, (void*) WIDE_CHARACTER_ARRAY);
+                                    *dc = *dc + xc;
+                                    set_array_elements(*d, p1, (void*) LATIN_CAPITAL_LETTER_H_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+                                    *dc = *dc + *PRIMITIVE_COUNT;
+
+                                    // Add attribute off control sequence.
+                                    if ((*dc + *ESCAPE_CONTROL_SEQUENCE_COUNT + *ATTRIBUTE_OFF_CONTROL_SEQUENCE_COUNT) >= *ds) {
+
+                                        // Set destination character array size.
+                                        // CAUTION! Add constant in case *dc is zero!
+                                        *ds = *dc * *WIDE_CHARACTER_VECTOR_REALLOCATE_FACTOR + *ESCAPE_CONTROL_SEQUENCE_COUNT + *ATTRIBUTE_OFF_CONTROL_SEQUENCE_COUNT;
+
+                                        // Reallocate destination character array.
+                                        reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_ARRAY);
+                                    }
+
+                                    set_array_elements(*d, p1, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+                                    *dc = *dc + *ESCAPE_CONTROL_SEQUENCE_COUNT;
+                                    set_array_elements(*d, p1, (void*) ATTRIBUTE_OFF_CONTROL_SEQUENCE, (void*) ATTRIBUTE_OFF_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+                                    *dc = *dc + *ATTRIBUTE_OFF_CONTROL_SEQUENCE_COUNT;
+
+                                    //
+                                    // Add background and foreground properties.
+                                    //
+                                    // Example:
+                                    // printf("\033[32mgreen colour\033[0mswitched off.")
+                                    //
+
+                                    // Serialise background colour integer into character array.
+        //??                            serialise_integer_wide((void*) &b, (void*) &bc, (void*) &bs, p6, (void*) PRIMITIVE_COUNT);
+                                    // Serialise foreground colour integer into character array.
+        //??                            serialise_integer_wide((void*) &f, (void*) &fc, (void*) &fs, p7, (void*) PRIMITIVE_COUNT);
+
+                                    if ((*dc
+                                        + *ESCAPE_CONTROL_SEQUENCE_COUNT + *bc + *ATTRIBUTE_SUFFIX_CONTROL_SEQUENCE_COUNT
+                                        + *ESCAPE_CONTROL_SEQUENCE_COUNT + *fc + *ATTRIBUTE_SUFFIX_CONTROL_SEQUENCE_COUNT) >= *ds) {
+
+                                        // Set destination character array size.
+                                        // CAUTION! Add constant in case *dc is zero!
+                                        *ds = *dc * *WIDE_CHARACTER_VECTOR_REALLOCATE_FACTOR
+                                            + *ESCAPE_CONTROL_SEQUENCE_COUNT + *bc + *ATTRIBUTE_SUFFIX_CONTROL_SEQUENCE_COUNT
+                                            + *ESCAPE_CONTROL_SEQUENCE_COUNT + *fc + *ATTRIBUTE_SUFFIX_CONTROL_SEQUENCE_COUNT;
+
+                                        // Reallocate destination character array.
+                                        reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_ARRAY);
+                                    }
+
+                                    set_array_elements(*d, p1, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+                                    *dc = *dc + *ESCAPE_CONTROL_SEQUENCE_COUNT;
+                                    set_array_elements(*d, p1, p6, p7, (void*) WIDE_CHARACTER_ARRAY);
+                                    *dc = *dc + *bc;
+                                    set_array_elements(*d, p1, (void*) ATTRIBUTE_SUFFIX_CONTROL_SEQUENCE, (void*) ATTRIBUTE_SUFFIX_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+                                    *dc = *dc + *ATTRIBUTE_SUFFIX_CONTROL_SEQUENCE_COUNT;
+                                    set_array_elements(*d, p1, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+                                    *dc = *dc + *ESCAPE_CONTROL_SEQUENCE_COUNT;
+                                    set_array_elements(*d, p1, p8, p9, (void*) WIDE_CHARACTER_ARRAY);
+                                    *dc = *dc + *fc;
+                                    set_array_elements(*d, p1, (void*) ATTRIBUTE_SUFFIX_CONTROL_SEQUENCE, (void*) ATTRIBUTE_SUFFIX_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+                                    *dc = *dc + *ATTRIBUTE_SUFFIX_CONTROL_SEQUENCE_COUNT;
+
+                                    //
+                                    // Set character properties.
+                                    //
+                                    // Example:
+                                    // printf("\033[1mbold \033[0mswitched off.")
+                                    //
+
+                                    // Reallocate array to have capacity for all of the
+                                    // following properties, even if some of them are not used.
+                                    if ((*dc + *ESCAPE_CONTROL_SEQUENCE_COUNT + *ATTRIBUTE_OFF_CONTROL_SEQUENCE_COUNT
+                                        + *ESCAPE_CONTROL_SEQUENCE_COUNT + *HIDDEN_CONTROL_SEQUENCE_COUNT
+                                        + *ESCAPE_CONTROL_SEQUENCE_COUNT + *INVERSE_CONTROL_SEQUENCE_COUNT
+                                        + *ESCAPE_CONTROL_SEQUENCE_COUNT + *BLINK_CONTROL_SEQUENCE_COUNT
+                                        + *ESCAPE_CONTROL_SEQUENCE_COUNT + *UNDERLINE_CONTROL_SEQUENCE_COUNT
+                                        + *ESCAPE_CONTROL_SEQUENCE_COUNT + *BOLD_CONTROL_SEQUENCE_COUNT
+                                        + *PRIMITIVE_COUNT) >= *ds) {
+
+                                        // Set destination character array size.
+                                        // CAUTION! Add constant in case *dc is zero!
+                                        *ds = *dc * *WIDE_CHARACTER_VECTOR_REALLOCATE_FACTOR
+                                            + *ESCAPE_CONTROL_SEQUENCE_COUNT + *HIDDEN_CONTROL_SEQUENCE_COUNT
+                                            + *ESCAPE_CONTROL_SEQUENCE_COUNT + *INVERSE_CONTROL_SEQUENCE_COUNT
+                                            + *ESCAPE_CONTROL_SEQUENCE_COUNT + *BLINK_CONTROL_SEQUENCE_COUNT
+                                            + *ESCAPE_CONTROL_SEQUENCE_COUNT + *UNDERLINE_CONTROL_SEQUENCE_COUNT
+                                            + *ESCAPE_CONTROL_SEQUENCE_COUNT + *BOLD_CONTROL_SEQUENCE_COUNT
+                                            + *PRIMITIVE_COUNT;
+
+                                        // Reallocate destination character array.
+                                        reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_ARRAY);
+                                    }
+
+                                    // The comparison result.
+                                    int r = 0;
+
+                                    // Compare hidden property.
+                                    compare_arrays(p10, (void*) PRIMITIVE_COUNT, (void*) TRUE_BOOLEAN, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) INTEGER_ARRAY);
+
+                                    if (r != 0) {
+
+                                        // Set hidden property.
+                                        set_array_elements(*d, p1, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+                                        *dc = *dc + *ESCAPE_CONTROL_SEQUENCE_COUNT;
+                                        set_array_elements(*d, p1, (void*) HIDDEN_CONTROL_SEQUENCE, (void*) HIDDEN_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+                                        *dc = *dc + *HIDDEN_CONTROL_SEQUENCE_COUNT;
+                                    }
+
+                                    // Reset comparison result.
+                                    r = 0;
+
+                                    // Compare inverse property.
+                                    compare_arrays(p11, (void*) PRIMITIVE_COUNT, (void*) TRUE_BOOLEAN, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) INTEGER_ARRAY);
+
+                                    if (r != 0) {
+
+                                        // Set inverse property.
+                                        set_array_elements(*d, p1, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+                                        *dc = *dc + *ESCAPE_CONTROL_SEQUENCE_COUNT;
+                                        set_array_elements(*d, p1, (void*) INVERSE_CONTROL_SEQUENCE, (void*) INVERSE_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+                                        *dc = *dc + *INVERSE_CONTROL_SEQUENCE_COUNT;
+                                    }
+
+                                    // Reset comparison result.
+                                    r = 0;
+
+                                    // Compare blink property.
+                                    compare_arrays(p12, (void*) PRIMITIVE_COUNT, (void*) TRUE_BOOLEAN, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) INTEGER_ARRAY);
+
+                                    if (r != 0) {
+
+                                        // Set blink property.
+                                        set_array_elements(*d, p1, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+                                        *dc = *dc + *ESCAPE_CONTROL_SEQUENCE_COUNT;
+                                        set_array_elements(*d, p1, (void*) BLINK_CONTROL_SEQUENCE, (void*) BLINK_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+                                        *dc = *dc + *BLINK_CONTROL_SEQUENCE_COUNT;
+                                    }
+
+                                    // Reset comparison result.
+                                    r = 0;
+
+                                    // Compare underline property.
+                                    compare_arrays(p13, (void*) PRIMITIVE_COUNT, (void*) TRUE_BOOLEAN, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) INTEGER_ARRAY);
+
+                                    if (r != 0) {
+
+                                        // Set underline property.
+                                        set_array_elements(*d, p1, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+                                        *dc = *dc + *ESCAPE_CONTROL_SEQUENCE_COUNT;
+                                        set_array_elements(*d, p1, (void*) UNDERLINE_CONTROL_SEQUENCE, (void*) UNDERLINE_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+                                        *dc = *dc + *UNDERLINE_CONTROL_SEQUENCE_COUNT;
+                                    }
+
+                                    // Reset comparison result.
+                                    r = 0;
+
+                                    // Compare bold property.
+                                    compare_arrays(p14, (void*) PRIMITIVE_COUNT, (void*) TRUE_BOOLEAN, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) INTEGER_ARRAY);
+
+                                    if (r != 0) {
+
+                                        // Set bold property.
+                                        set_array_elements(*d, p1, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+                                        *dc = *dc + *ESCAPE_CONTROL_SEQUENCE_COUNT;
+                                        set_array_elements(*d, p1, (void*) BOLD_CONTROL_SEQUENCE, (void*) BOLD_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+                                        *dc = *dc + *BOLD_CONTROL_SEQUENCE_COUNT;
+                                    }
+
+                                    // Set character.
+                                    set_array_elements(*d, p1, p15, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+                                    *dc = *dc + *PRIMITIVE_COUNT;
+
+                                } else {
+
+                                    log_message_debug("WARNING: Could not serialise linux console properties. The character is null.");
+                                }
+
+                            } else {
+
+                                log_message_debug("Could not serialise linux console properties. The destination is null.");
                             }
-
-                            set_array_elements(*d, p1, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) CHARACTER_ARRAY);
-                            *dc = *dc + *ESCAPE_CONTROL_SEQUENCE_COUNT;
-                            set_array_elements(*d, p1, y, (void*) &yc, (void*) CHARACTER_ARRAY);
-                            *dc = *dc + yc;
-                            set_array_elements(*d, p1, (void*) SEMICOLON_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
-                            *dc = *dc + *PRIMITIVE_COUNT;
-                            set_array_elements(*d, p1, x, (void*) &xc, (void*) CHARACTER_ARRAY);
-                            *dc = *dc + xc;
-                            set_array_elements(*d, p1, (void*) LATIN_CAPITAL_LETTER_H_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
-                            *dc = *dc + *PRIMITIVE_COUNT;
-
-                            // Add attribute off control sequence.
-                            if ((*dc + *ESCAPE_CONTROL_SEQUENCE_COUNT + *ATTRIBUTE_OFF_CONTROL_SEQUENCE_COUNT) >= *ds) {
-
-                                // Set destination character array size.
-                                // CAUTION! Add constant in case *dc is zero!
-                                *ds = *dc * *CHARACTER_VECTOR_REALLOCATE_FACTOR + *ESCAPE_CONTROL_SEQUENCE_COUNT + *ATTRIBUTE_OFF_CONTROL_SEQUENCE_COUNT;
-
-                                // Reallocate destination character array.
-                                reallocate_array(p0, p1, p2, (void*) CHARACTER_ARRAY);
-                            }
-
-                            set_array_elements(*d, p1, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) CHARACTER_ARRAY);
-                            *dc = *dc + *ESCAPE_CONTROL_SEQUENCE_COUNT;
-                            set_array_elements(*d, p1, (void*) ATTRIBUTE_OFF_CONTROL_SEQUENCE, (void*) ATTRIBUTE_OFF_CONTROL_SEQUENCE_COUNT, (void*) CHARACTER_ARRAY);
-                            *dc = *dc + *ATTRIBUTE_OFF_CONTROL_SEQUENCE_COUNT;
-
-                            //
-                            // Add background and foreground properties.
-                            //
-                            // Example:
-                            // printf("\033[32mgreen colour\033[0mswitched off.")
-                            //
-
-                            // Serialise background colour integer into character array.
-                            serialise_integer((void*) &b, (void*) &bc, (void*) &bs, p6, (void*) PRIMITIVE_COUNT);
-                            // Serialise foreground colour integer into character array.
-                            serialise_integer((void*) &f, (void*) &fc, (void*) &fs, p7, (void*) PRIMITIVE_COUNT);
-
-                            if ((*dc
-                                + *ESCAPE_CONTROL_SEQUENCE_COUNT + bc + *ATTRIBUTE_SUFFIX_CONTROL_SEQUENCE_COUNT
-                                + *ESCAPE_CONTROL_SEQUENCE_COUNT + fc + *ATTRIBUTE_SUFFIX_CONTROL_SEQUENCE_COUNT) >= *ds) {
-
-                                // Set destination character array size.
-                                // CAUTION! Add constant in case *dc is zero!
-                                *ds = *dc * *CHARACTER_VECTOR_REALLOCATE_FACTOR
-                                    + *ESCAPE_CONTROL_SEQUENCE_COUNT + bc + *ATTRIBUTE_SUFFIX_CONTROL_SEQUENCE_COUNT
-                                    + *ESCAPE_CONTROL_SEQUENCE_COUNT + fc + *ATTRIBUTE_SUFFIX_CONTROL_SEQUENCE_COUNT;
-
-                                // Reallocate destination character array.
-                                reallocate_array(p0, p1, p2, (void*) CHARACTER_ARRAY);
-                            }
-
-                            set_array_elements(*d, p1, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) CHARACTER_ARRAY);
-                            *dc = *dc + *ESCAPE_CONTROL_SEQUENCE_COUNT;
-                            set_array_elements(*d, p1, b, (void*) &bc, (void*) CHARACTER_ARRAY);
-                            *dc = *dc + bc;
-                            set_array_elements(*d, p1, (void*) ATTRIBUTE_SUFFIX_CONTROL_SEQUENCE, (void*) ATTRIBUTE_SUFFIX_CONTROL_SEQUENCE_COUNT, (void*) CHARACTER_ARRAY);
-                            *dc = *dc + *ATTRIBUTE_SUFFIX_CONTROL_SEQUENCE_COUNT;
-                            set_array_elements(*d, p1, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) CHARACTER_ARRAY);
-                            *dc = *dc + *ESCAPE_CONTROL_SEQUENCE_COUNT;
-                            set_array_elements(*d, p1, f, (void*) &fc, (void*) CHARACTER_ARRAY);
-                            *dc = *dc + fc;
-                            set_array_elements(*d, p1, (void*) ATTRIBUTE_SUFFIX_CONTROL_SEQUENCE, (void*) ATTRIBUTE_SUFFIX_CONTROL_SEQUENCE_COUNT, (void*) CHARACTER_ARRAY);
-                            *dc = *dc + *ATTRIBUTE_SUFFIX_CONTROL_SEQUENCE_COUNT;
-
-                            //
-                            // Set character properties.
-                            //
-                            // Example:
-                            // printf("\033[1mbold \033[0mswitched off.")
-                            //
-
-                            // Reallocate array to have capacity for all of the
-                            // following properties, even if some of them are not used.
-                            if ((*dc + *ESCAPE_CONTROL_SEQUENCE_COUNT + *ATTRIBUTE_OFF_CONTROL_SEQUENCE_COUNT
-                                + *ESCAPE_CONTROL_SEQUENCE_COUNT + *HIDDEN_CONTROL_SEQUENCE_COUNT
-                                + *ESCAPE_CONTROL_SEQUENCE_COUNT + *INVERSE_CONTROL_SEQUENCE_COUNT
-                                + *ESCAPE_CONTROL_SEQUENCE_COUNT + *BLINK_CONTROL_SEQUENCE_COUNT
-                                + *ESCAPE_CONTROL_SEQUENCE_COUNT + *UNDERLINE_CONTROL_SEQUENCE_COUNT
-                                + *ESCAPE_CONTROL_SEQUENCE_COUNT + *BOLD_CONTROL_SEQUENCE_COUNT
-                                + *PRIMITIVE_COUNT) >= *ds) {
-
-                                // Set destination character array size.
-                                // CAUTION! Add constant in case *dc is zero!
-                                *ds = *dc * *CHARACTER_VECTOR_REALLOCATE_FACTOR
-                                    + *ESCAPE_CONTROL_SEQUENCE_COUNT + *HIDDEN_CONTROL_SEQUENCE_COUNT
-                                    + *ESCAPE_CONTROL_SEQUENCE_COUNT + *INVERSE_CONTROL_SEQUENCE_COUNT
-                                    + *ESCAPE_CONTROL_SEQUENCE_COUNT + *BLINK_CONTROL_SEQUENCE_COUNT
-                                    + *ESCAPE_CONTROL_SEQUENCE_COUNT + *UNDERLINE_CONTROL_SEQUENCE_COUNT
-                                    + *ESCAPE_CONTROL_SEQUENCE_COUNT + *BOLD_CONTROL_SEQUENCE_COUNT
-                                    + *PRIMITIVE_COUNT;
-
-                                // Reallocate destination character array.
-                                reallocate_array(p0, p1, p2, (void*) CHARACTER_ARRAY);
-                            }
-
-                            // The comparison result.
-                            int r = 0;
-
-                            // Compare hidden property.
-                            compare_arrays(p8, (void*) PRIMITIVE_COUNT, (void*) TRUE_BOOLEAN, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) INTEGER_ARRAY);
-
-                            if (r != 0) {
-
-                                // Set hidden property.
-                                set_array_elements(*d, p1, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) CHARACTER_ARRAY);
-                                *dc = *dc + *ESCAPE_CONTROL_SEQUENCE_COUNT;
-                                set_array_elements(*d, p1, (void*) HIDDEN_CONTROL_SEQUENCE, (void*) HIDDEN_CONTROL_SEQUENCE_COUNT, (void*) CHARACTER_ARRAY);
-                                *dc = *dc + *HIDDEN_CONTROL_SEQUENCE_COUNT;
-                            }
-
-                            // Reset comparison result.
-                            r = 0;
-
-                            // Compare inverse property.
-                            compare_arrays(p9, (void*) PRIMITIVE_COUNT, (void*) TRUE_BOOLEAN, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) INTEGER_ARRAY);
-
-                            if (r != 0) {
-
-                                // Set inverse property.
-                                set_array_elements(*d, p1, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) CHARACTER_ARRAY);
-                                *dc = *dc + *ESCAPE_CONTROL_SEQUENCE_COUNT;
-                                set_array_elements(*d, p1, (void*) INVERSE_CONTROL_SEQUENCE, (void*) INVERSE_CONTROL_SEQUENCE_COUNT, (void*) CHARACTER_ARRAY);
-                                *dc = *dc + *INVERSE_CONTROL_SEQUENCE_COUNT;
-                            }
-
-                            // Reset comparison result.
-                            r = 0;
-
-                            // Compare blink property.
-                            compare_arrays(p10, (void*) PRIMITIVE_COUNT, (void*) TRUE_BOOLEAN, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) INTEGER_ARRAY);
-
-                            if (r != 0) {
-
-                                // Set blink property.
-                                set_array_elements(*d, p1, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) CHARACTER_ARRAY);
-                                *dc = *dc + *ESCAPE_CONTROL_SEQUENCE_COUNT;
-                                set_array_elements(*d, p1, (void*) BLINK_CONTROL_SEQUENCE, (void*) BLINK_CONTROL_SEQUENCE_COUNT, (void*) CHARACTER_ARRAY);
-                                *dc = *dc + *BLINK_CONTROL_SEQUENCE_COUNT;
-                            }
-
-                            // Reset comparison result.
-                            r = 0;
-
-                            // Compare underline property.
-                            compare_arrays(p11, (void*) PRIMITIVE_COUNT, (void*) TRUE_BOOLEAN, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) INTEGER_ARRAY);
-
-                            if (r != 0) {
-
-                                // Set underline property.
-                                set_array_elements(*d, p1, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) CHARACTER_ARRAY);
-                                *dc = *dc + *ESCAPE_CONTROL_SEQUENCE_COUNT;
-                                set_array_elements(*d, p1, (void*) UNDERLINE_CONTROL_SEQUENCE, (void*) UNDERLINE_CONTROL_SEQUENCE_COUNT, (void*) CHARACTER_ARRAY);
-                                *dc = *dc + *UNDERLINE_CONTROL_SEQUENCE_COUNT;
-                            }
-
-                            // Reset comparison result.
-                            r = 0;
-
-                            // Compare bold property.
-                            compare_arrays(p12, (void*) PRIMITIVE_COUNT, (void*) TRUE_BOOLEAN, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) INTEGER_ARRAY);
-
-                            if (r != 0) {
-
-                                // Set bold property.
-                                set_array_elements(*d, p1, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) CHARACTER_ARRAY);
-                                *dc = *dc + *ESCAPE_CONTROL_SEQUENCE_COUNT;
-                                set_array_elements(*d, p1, (void*) BOLD_CONTROL_SEQUENCE, (void*) BOLD_CONTROL_SEQUENCE_COUNT, (void*) CHARACTER_ARRAY);
-                                *dc = *dc + *BOLD_CONTROL_SEQUENCE_COUNT;
-                            }
-
-                            // Set character.
-                            set_array_elements(*d, p1, p13, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
-                            *dc = *dc + *PRIMITIVE_COUNT;
 
                         } else {
 
-                            log_message_debug("WARNING: Could not serialise linux console properties. The character is null.");
+                            log_message_debug("Could not serialise linux console properties. The destination count is null.");
                         }
 
                     } else {
 
-                        log_message_debug("Could not serialise linux console properties. The destination is null.");
+                        log_message_debug("Could not serialise linux console properties. The destination size is null.");
                     }
 
                 } else {
 
-                    log_message_debug("Could not serialise linux console properties. The destination count is null.");
+                    log_message_debug("Could not serialise linux console properties. The source y is null.");
                 }
 
             } else {
 
-                log_message_debug("Could not serialise linux console properties. The destination size is null.");
+                log_message_debug("Could not serialise linux console properties. The source x is null.");
             }
 
         } else {
 
-            log_message_debug("Could not serialise linux console properties. The source y is null.");
+            log_message_debug("Could not serialise linux console properties. The background count is null.");
         }
 
     } else {
 
-        log_message_debug("Could not serialise linux console properties. The source x is null.");
+        log_message_debug("Could not serialise linux console properties. The foreground count is null.");
     }
 }
 
@@ -364,27 +384,27 @@ void serialise_linux_console_rectangle_border(void* p0, void* p1,
 
     if (p5 != NULL_POINTER) {
 
-        char* rbc = (char*) p5;
+        wchar_t* rbc = (wchar_t*) p5;
 
         if (p4 != NULL_POINTER) {
 
-            char* lbc = (char*) p4;
+            wchar_t* lbc = (wchar_t*) p4;
 
             if (p3 != NULL_POINTER) {
 
-                char* rtc = (char*) p3;
+                wchar_t* rtc = (wchar_t*) p3;
 
                 if (p2 != NULL_POINTER) {
 
-                    char* ltc = (char*) p2;
+                    wchar_t* ltc = (wchar_t*) p2;
 
                     if (p1 != NULL_POINTER) {
 
-                        char* vc = (char*) p1;
+                        wchar_t* vc = (wchar_t*) p1;
 
                         if (p0 != NULL_POINTER) {
 
-                            char* hc = (char*) p0;
+                            wchar_t* hc = (wchar_t*) p0;
 
                             // The comparison result.
                             int r = 0;
@@ -479,62 +499,64 @@ void serialise_linux_console_rectangle_border(void* p0, void* p1,
  * @param p8 the underline property
  * @param p9 the bold property
  * @param p10 the background
- * @param p11 the foreground
- * @param p12 the position x coordinate
- * @param p13 the position y coordinate
- * @param p14 the position z coordinate
- * @param p15 the size x coordinate
- * @param p16 the size y coordinate
- * @param p17 the size z coordinate
- * @param p18 the border
- * @param p19 the border count
+ * @param p11 the background count
+ * @param p12 the foreground
+ * @param p13 the foreground count
+ * @param p14 the position x coordinate
+ * @param p15 the position y coordinate
+ * @param p16 the position z coordinate
+ * @param p17 the size x coordinate
+ * @param p18 the size y coordinate
+ * @param p19 the size z coordinate
+ * @param p20 the border
+ * @param p21 the border count
  */
 void serialise_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, void* p4,
-    void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11,
-    void* p12, void* p13, void* p14, void* p15, void* p16, void* p17, void* p18, void* p19) {
+    void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13,
+    void* p14, void* p15, void* p16, void* p17, void* p18, void* p19, void* p20, void* p21) {
 
-    if (p17 != NULL_POINTER) {
+    if (p19 != NULL_POINTER) {
 
-        int* sz = (int*) p17;
+        int* sz = (int*) p19;
 
-        if (p16 != NULL_POINTER) {
+        if (p18 != NULL_POINTER) {
 
-            int* sy = (int*) p16;
+            int* sy = (int*) p18;
 
-            if (p15 != NULL_POINTER) {
+            if (p17 != NULL_POINTER) {
 
-                int* sx = (int*) p15;
+                int* sx = (int*) p17;
 
-                if (p14 != NULL_POINTER) {
+                if (p16 != NULL_POINTER) {
 
-                    int* pz = (int*) p14;
+                    int* pz = (int*) p16;
 
-                    if (p13 != NULL_POINTER) {
+                    if (p15 != NULL_POINTER) {
 
-                        int* py = (int*) p13;
+                        int* py = (int*) p15;
 
-                        if (p12 != NULL_POINTER) {
+                        if (p14 != NULL_POINTER) {
 
-                            int* px = (int*) p12;
+                            int* px = (int*) p14;
 
                             int* cc = (int*) p4;
 
                             // The horizontal character.
-                            char hc = *SPACE_CHARACTER;
+                            wchar_t hc = *SPACE_CHARACTER;
                             // The vertical character.
-                            char vc = *SPACE_CHARACTER;
+                            wchar_t vc = *SPACE_CHARACTER;
                             // The left top character.
-                            char ltc = *SPACE_CHARACTER;
+                            wchar_t ltc = *SPACE_CHARACTER;
                             // The right top character.
-                            char rtc = *SPACE_CHARACTER;
+                            wchar_t rtc = *SPACE_CHARACTER;
                             // The left bottom character.
-                            char lbc = *SPACE_CHARACTER;
+                            wchar_t lbc = *SPACE_CHARACTER;
                             // The right bottom character.
-                            char rbc = *SPACE_CHARACTER;
+                            wchar_t rbc = *SPACE_CHARACTER;
 
                             // Determine border characters.
                             serialise_linux_console_rectangle_border((void*) &hc, (void*) &vc,
-                                (void*) &ltc, (void*) &rtc, (void*) &lbc, (void*) &rbc, p18, p19);
+                                (void*) &ltc, (void*) &rtc, (void*) &lbc, (void*) &rbc, p20, p21);
 
                             // The z loop count.
                             int z = *pz;
@@ -552,7 +574,7 @@ void serialise_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, v
                             // The character index.
                             int ci = 0;
                             // The character.
-                            void* c = SPACE_CHARACTER;
+                            wchar_t* c = SPACE_CHARACTER;
 
                             while (1) {
 
@@ -575,7 +597,7 @@ void serialise_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, v
                                             break;
                                         }
 
-                                        if (p18 == NULL_POINTER) {
+                                        if (p20 == NULL_POINTER) {
 
                                             // A border is NOT given.
 
@@ -587,12 +609,12 @@ void serialise_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, v
                                                 if (ci < *cc) {
 
                                                     // Get character value at position x.
-                                                    get(p3, (void*) &ci, (void*) &c, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+                                                    get(p3, (void*) &ci, (void*) &c, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
                                                 }
 
                                                 // Serialise character using escape codes.
                                                 serialise_linux_console_character(p0, p1, p2, &x, &y, &z,
-                                                    p10, p11, p5, p6, p7, p8, p9, c);
+                                                    p10, p11, p12, p13, p5, p6, p7, p8, p9, c);
 
                                             } else {
 
@@ -609,19 +631,19 @@ void serialise_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, v
 
                                                     // Serialise left top border character using escape codes.
                                                     serialise_linux_console_character(p0, p1, p2, &x, &y, &z,
-                                                        p10, p11, p5, p6, p7, p8, p9, &ltc);
+                                                        p10, p11, p12, p13, p5, p6, p7, p8, p9, &ltc);
 
                                                 } else if (x == (xl - 1)) {
 
                                                     // Serialise right top border character using escape codes.
                                                     serialise_linux_console_character(p0, p1, p2, &x, &y, &z,
-                                                        p10, p11, p5, p6, p7, p8, p9, &rtc);
+                                                        p10, p11, p12, p13, p5, p6, p7, p8, p9, &rtc);
 
                                                 } else {
 
                                                     // Serialise horizontal border character using escape codes.
                                                     serialise_linux_console_character(p0, p1, p2, &x, &y, &z,
-                                                        p10, p11, p5, p6, p7, p8, p9, &hc);
+                                                        p10, p11, p12, p13, p5, p6, p7, p8, p9, &hc);
                                                 }
 
                                             } else if (y == (yl - 1)) {
@@ -630,19 +652,19 @@ void serialise_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, v
 
                                                     // Serialise left bottom border character using escape codes.
                                                     serialise_linux_console_character(p0, p1, p2, &x, &y, &z,
-                                                        p10, p11, p5, p6, p7, p8, p9, &lbc);
+                                                        p10, p11, p12, p13, p5, p6, p7, p8, p9, &lbc);
 
                                                 } else if (x == (xl - 1)) {
 
                                                     // Serialise right bottom border character using escape codes.
                                                     serialise_linux_console_character(p0, p1, p2, &x, &y, &z,
-                                                        p10, p11, p5, p6, p7, p8, p9, &rbc);
+                                                        p10, p11, p12, p13, p5, p6, p7, p8, p9, &rbc);
 
                                                 } else {
 
                                                     // Serialise horizontal border character using escape codes.
                                                     serialise_linux_console_character(p0, p1, p2, &x, &y, &z,
-                                                        p10, p11, p5, p6, p7, p8, p9, &hc);
+                                                        p10, p11, p12, p13, p5, p6, p7, p8, p9, &hc);
                                                 }
 
                                             } else {
@@ -651,13 +673,13 @@ void serialise_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, v
 
                                                     // Serialise left bottom border character using escape codes.
                                                     serialise_linux_console_character(p0, p1, p2, &x, &y, &z,
-                                                        p10, p11, p5, p6, p7, p8, p9, &vc);
+                                                        p10, p11, p12, p13, p5, p6, p7, p8, p9, &vc);
 
                                                 } else if (x == (xl - 1)) {
 
                                                     // Serialise right bottom border character using escape codes.
                                                     serialise_linux_console_character(p0, p1, p2, &x, &y, &z,
-                                                        p10, p11, p5, p6, p7, p8, p9, &vc);
+                                                        p10, p11, p12, p13, p5, p6, p7, p8, p9, &vc);
 
                                                 } else {
 
@@ -670,7 +692,7 @@ void serialise_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, v
                                                         if (ci < *cc) {
 
                                                             // Get character value at position x.
-                                                            get(p3, (void*) &ci, (void*) &c, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+                                                            get(p3, (void*) &ci, (void*) &c, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
                                                         }
 
                                                     } else {
@@ -680,7 +702,7 @@ void serialise_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, v
 
                                                     // Serialise character using escape codes.
                                                     serialise_linux_console_character(p0, p1, p2, &x, &y, &z,
-                                                        p10, p11, p5, p6, p7, p8, p9, c);
+                                                        p10, p11, p12, p13, p5, p6, p7, p8, p9, c);
                                                 }
                                             }
                                         }
@@ -975,26 +997,28 @@ void serialise_linux_console_rectangle_layout(void* p0, void* p1, void* p2, void
  * @param p8 the underline property
  * @param p9 the bold property
  * @param p10 the background
- * @param p11 the foreground
- * @param p12 the position
- * @param p13 the position count
- * @param p14 the size
- * @param p15 the size count
- * @param p16 the whole model position
- * @param p17 the whole model position count
- * @param p18 the whole model size
- * @param p19 the whole model size count
- * @param p20 the border
- * @param p21 the border count
- * @param p22 the layout cell
- * @param p23 the layout cell count
- * @param p24 the layout
- * @param p25 the layout count
+ * @param p11 the background count
+ * @param p12 the foreground
+ * @param p13 the foreground count
+ * @param p14 the position
+ * @param p15 the position count
+ * @param p16 the size
+ * @param p17 the size count
+ * @param p18 the whole model position
+ * @param p19 the whole model position count
+ * @param p20 the whole model size
+ * @param p21 the whole model size count
+ * @param p22 the border
+ * @param p23 the border count
+ * @param p24 the layout cell
+ * @param p25 the layout cell count
+ * @param p26 the layout
+ * @param p27 the layout count
  */
 void serialise_linux_console_coordinates(void* p0, void* p1, void* p2, void* p3, void* p4,
-    void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11,
-    void* p12, void* p13, void* p14, void* p15, void* p16, void* p17,
-    void* p18, void* p19, void* p20, void* p21, void* p22, void* p23, void* p24, void* p25) {
+    void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13,
+    void* p14, void* p15, void* p16, void* p17, void* p18, void* p19, void* p20, void* p21,
+    void* p22, void* p23, void* p24, void* p25, void* p26, void* p27) {
 
     // The source part position x, y, z.
     int** px = (int**) &NULL_POINTER;
@@ -1030,24 +1054,24 @@ void serialise_linux_console_coordinates(void* p0, void* p1, void* p2, void* p3,
     int fasz = oasz;
 
     // Get part position x, y, z.
-    get(p12, (void*) UI_POSITION_X_INDEX, (void*) &px, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    get(p12, (void*) UI_POSITION_Y_INDEX, (void*) &py, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    get(p12, (void*) UI_POSITION_Z_INDEX, (void*) &pz, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p14, (void*) UI_POSITION_X_INDEX, (void*) &px, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p14, (void*) UI_POSITION_Y_INDEX, (void*) &py, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p14, (void*) UI_POSITION_Z_INDEX, (void*) &pz, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     // Get part size x, y, z.
-    get(p14, (void*) UI_SIZE_X_INDEX, (void*) &sx, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    get(p14, (void*) UI_SIZE_Y_INDEX, (void*) &sy, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    get(p14, (void*) UI_SIZE_Z_INDEX, (void*) &sz, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p16, (void*) UI_SIZE_X_INDEX, (void*) &sx, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p16, (void*) UI_SIZE_Y_INDEX, (void*) &sy, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p16, (void*) UI_SIZE_Z_INDEX, (void*) &sz, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-    if (p18 != NULL_POINTER) {
+    if (p20 != NULL_POINTER) {
 
         // Determine source whole position coordinates.
-        get(p16, (void*) UI_POSITION_X_INDEX, (void*) &wpmx, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        get(p16, (void*) UI_POSITION_Y_INDEX, (void*) &wpmy, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        get(p16, (void*) UI_POSITION_Z_INDEX, (void*) &wpmz, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        get(p18, (void*) UI_POSITION_X_INDEX, (void*) &wpmx, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        get(p18, (void*) UI_POSITION_Y_INDEX, (void*) &wpmy, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        get(p18, (void*) UI_POSITION_Z_INDEX, (void*) &wpmz, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         // Determine source whole size coordinates.
-        get(p18, (void*) UI_SIZE_X_INDEX, (void*) &wsmx, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        get(p18, (void*) UI_SIZE_Y_INDEX, (void*) &wsmy, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        get(p18, (void*) UI_SIZE_Z_INDEX, (void*) &wsmz, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        get(p20, (void*) UI_SIZE_X_INDEX, (void*) &wsmx, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        get(p20, (void*) UI_SIZE_Y_INDEX, (void*) &wsmy, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        get(p20, (void*) UI_SIZE_Z_INDEX, (void*) &wsmz, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
         // Set original area position coordinates, initialised with whole position.
         oapx = **wpmx;
@@ -1072,10 +1096,10 @@ void serialise_linux_console_coordinates(void* p0, void* p1, void* p2, void* p3,
     serialise_linux_console_rectangle_layout(*px, *py, *pz, *sx, *sy, *sz,
         &fapx, &fapy, &fapz, &fasx, &fasy, &fasz,
         &oapx, &oapy, &oapz, &oasx, &oasy, &oasz,
-        p22, p23, p24, p25);
+        p24, p25, p26, p27);
 
     serialise_linux_console_rectangle(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9,
-        p10, p11, *px, *py, *pz, *sx, *sy, *sz, p20, p21);
+        p10, p11, p12, p13, *px, *py, *pz, *sx, *sy, *sz, p22, p23);
 }
 
 /**
@@ -1139,9 +1163,11 @@ void serialise_linux_console_shape(void* p0, void* p1, void* p2, void* p3, void*
     // The bold property.
     int b = 0;
     // The background colour.
-    int bg = -1;
+    void* bg = NULL_POINTER;
+    int bgc = 0;
     // The foreground colour.
-    int fg = -1;
+    void* fg = NULL_POINTER;
+    int fgc = 0;
 
     //?? TODO: These values should later be given as boolean "true" or "false".
     //?? Currently, they have to be given as "0" or "1" in CYBOL.
@@ -1151,14 +1177,14 @@ void serialise_linux_console_shape(void* p0, void* p1, void* p2, void* p3, void*
     set(&bl, (void*) PRIMITIVE_VALUE_INDEX, p11, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
     set(&u, (void*) PRIMITIVE_VALUE_INDEX, p13, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
     set(&b, (void*) PRIMITIVE_VALUE_INDEX, p15, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    // Map colour names to integer values.
-    mapto((void*) &bg, (void*) PRIMITIVE_COUNT, (void*) PRIMITIVE_COUNT, p17, p18, (void*) TERMINAL_BACKGROUND_ABSTRACTION, (void*) TERMINAL_BACKGROUND_ABSTRACTION_COUNT);
-    mapto((void*) &fg, (void*) PRIMITIVE_COUNT, (void*) PRIMITIVE_COUNT, p19, p20, (void*) TERMINAL_FOREGROUND_ABSTRACTION, (void*) TERMINAL_FOREGROUND_ABSTRACTION_COUNT);
+    // Map colour names to control sequences.
+    mapto((void*) &bg, (void*) &bgc, NULL_POINTER, p17, p18, (void*) TERMINAL_BACKGROUND_ABSTRACTION, (void*) TERMINAL_BACKGROUND_ABSTRACTION_COUNT);
+    mapto((void*) &fg, (void*) &fgc, NULL_POINTER, p19, p20, (void*) TERMINAL_FOREGROUND_ABSTRACTION, (void*) TERMINAL_FOREGROUND_ABSTRACTION_COUNT);
 
     // The comparison result.
     int r = 0;
 
-    compare_arrays(p5, p6, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+    compare_arrays(p5, p6, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
     if (r != 0) {
 
@@ -1179,7 +1205,8 @@ void serialise_linux_console_shape(void* p0, void* p1, void* p2, void* p3, void*
         if (r != 0) {
 
             serialise_linux_console_coordinates(p0, p1, p2, c, cc, &h, &i, &bl, &u, &b,
-                &bg, &fg, p21, p22, p23, p24, p25, p26, p27, p28, p29, p30, p31, p32, p33, p34);
+                bg, (void*) &bgc, fg, (void*) &fgc, p21, p22, p23, p24,
+                p25, p26, p27, p28, p29, p30, p31, p32, p33, p34);
         }
     }
 
@@ -1191,7 +1218,8 @@ void serialise_linux_console_shape(void* p0, void* p1, void* p2, void* p3, void*
 
 /*??
             serialise_linux_console_coordinates(p0, p1, p2, c, cc, &h, &i, &bl, &u, &b,
-                &bg, &fg, p21, p22, p23, p24, p25, p26, p27, p28, p29, p30, p31, p32, p33, p34);
+                bg, (void*) &bgc, fg, (void*) &fgc, p21, p22, p23, p24,
+                p25, p26, p27, p28, p29, p30, p31, p32, p33, p34);
 */
         }
     }
@@ -1204,7 +1232,8 @@ void serialise_linux_console_shape(void* p0, void* p1, void* p2, void* p3, void*
 
 /*??
             serialise_linux_console_coordinates(p0, p1, p2, c, cc, &h, &i, &bl, &u, &b,
-                &bg, &fg, p21, p22, p23, p24, p25, p26, p27, p28, p29, p30, p31, p32, p33, p34);
+                bg, (void*) &bgc, fg, (void*) &fgc, p21, p22, p23, p24,
+                p25, p26, p27, p28, p29, p30, p31, p32, p33, p34);
 */
         }
     }
