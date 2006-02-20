@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 
+<model>
+    <part name="startup" channel="inline" abstraction="operation" model="send">
+        <property name="channel" channel="inline" abstraction="character" model="signal"/>
+        <property name="message" channel="inline" abstraction="operation" model="exit"/>
+    </part>
+</model>
+
+<!--
+    This example contains just one "exit" operation.
+    It shuts down the application, right after startup.
+    That's all.
+/-->
+
 <!--
     $RCSfile: run.cybol,v $
 
@@ -22,19 +35,6 @@
     http://www.cybop.net
     - Cybernetics Oriented Programming -
 
-    @version $Revision: 1.3 $ $Date: 2005-08-11 22:33:45 $ $Author: christian $
+    @version $Revision: 1.4 $ $Date: 2006-02-20 16:35:35 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->
-
-<!--
-    This example contains just one "exit" operation.
-    It shuts down the application, right after startup.
-    That's all.
-/-->
-
-<model>
-    <part name="startup" channel="inline" abstraction="operation" model="send">
-        <property name="language" channel="inline" abstraction="character" model="signal"/>
-        <property name="message" channel="inline" abstraction="operation" model="exit"/>
-    </part>
-</model>

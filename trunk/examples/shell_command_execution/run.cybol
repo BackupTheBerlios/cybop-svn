@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 
+<model>
+    <part name="startup" channel="inline" abstraction="operation" model="send">
+        <property name="channel" channel="inline" abstraction="character" model="signal"/>
+        <property name="message" channel="file" abstraction="cybol" model="shell_command_execution/startup.cybol"/>
+    </part>
+</model>
+
+<!--
+    This example executes a shell command.
+/-->
+
 <!--
     $RCSfile: run.cybol,v $
 
@@ -22,27 +33,6 @@
     http://www.cybop.net
     - Cybernetics Oriented Programming -
 
-    @version $Revision: 1.4 $ $Date: 2006-02-20 16:35:35 $ $Author: christian $
+    @version $Revision: 1.1 $ $Date: 2006-02-20 16:35:35 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->
-
-<!--
-    This example contains just one "exit" operation.
-    It shuts down the application, right after startup.
-    That's all.
-
-    The difference to the simple "exit" example is that here,
-    the "exit" operation is NOT written directly into the model,
-    but is standing in another file instead. Therefore, the path
-    to that file is given as model.
-
-    The file is called "exit.cybol" and contains only one operation "exit",
-    encoded in CYBOL/XML format.
-/-->
-
-<model>
-    <part name="startup" channel="inline" abstraction="operation" model="send">
-        <property name="channel" channel="inline" abstraction="character" model="signal"/>
-        <property name="message" channel="file" abstraction="cybol" model="exit_cybol_file/exit.cybol"/>
-    </part>
-</model>
