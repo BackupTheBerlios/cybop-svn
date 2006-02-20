@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2006-01-02 11:56:02 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2006-02-20 16:17:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -51,112 +51,30 @@ void allocate_internal_memory(void* p0, void* p1) {
 /**
  * Deallocates the internal memory.
  *
- * All configuration parameters are destroyed first,
- * before the actual internal memory pointer array.
+ * The configuration parameters existing in the internal memory have to be
+ * deallocated (destroyed) where they were allocated (created)!
+ *
+ * If, for example, parameters were added by the x window system modules,
+ * then these x window system modules are also responsible for destroying them.
+ *
+ * Configuration parameter allocation/ deallocation is thus clearly in the
+ * responsibility of the module developer and no effort is undertaken here
+ * to automatically deallocate those configuration parameters which are still
+ * existent in internal memory (unequal NULL_POINTER).
  *
  * @param p0 the internal memory (Hand over as reference!)
  * @param p1 the internal memory size
  */
 void deallocate_internal_memory(void* p0, void* p1) {
 
-    if (p1 != NULL_POINTER) {
+    log_message_debug("Deallocate internal memory.");
 
-        int* s = (int*) p1;
-
-        if (p0 != NULL_POINTER) {
-
-            void** i = (void**) p0;
-
-            log_message_debug("Deallocate internal memory.");
-
-            // The loop variable.
-            int j = 0;
-            // The configuration parameter.
-            void* p = NULL_POINTER;
-
-            while (1) {
-
-                if (j >= *s) {
-
-                    break;
-                }
-
-                // Get all configuration parameters from internal memory and
-                // destroy those which are existent (unequal NULL_POINTER).
-                // The p0 parameter needs to be dereferenced since it is handed over
-                // as reference, but this procedure expects a normal array.
-                get_array_elements(*i, (void*) &j, (void*) &p, (void*) POINTER_ARRAY);
-
-                // CAUTION! Do not try to remove the parameters!
-                // Each configuration parameter has a fixed position within the
-                // internal memory and CANNOT be removed.
-
-                if (p != NULL_POINTER) {
-
-                    // The internal memory is a simple pointer array and does NOT
-                    // hold type information about its stored configuration parameters.
-                    // This is possible because the type information is known
-                    // IN CONTEXT, wherever a configuration parameter is used.
-                    // In order to call the correct array desctruction procedure
-                    // (in other words: the correct array type),
-                    // all configuration parameters need to be distinguished here,
-                    // via conditional if-else statements.
-
-                    if (j == *TCP_SOCKET_INTERNAL) {
-
-                        deallocate_array(p, (void*) NUMBER_1_INTEGER, (void*) INTEGER_ARRAY);
-
-//                    } else if (j == *TCP_SOCKET_PORT_INTERNAL) {
-//
-//                        deallocate_array(p, (void*) NUMBER_1_INTEGER, (void*) INTEGER_ARRAY);
-//
-                    } else if (j == *TCP_SOCKET_INTERRUPT_INTERNAL) {
-
-                        deallocate_array(p, (void*) NUMBER_1_INTEGER, (void*) INTEGER_ARRAY);
-
-                    } else if (j == *TCP_CLIENT_SOCKETS_INTERNAL) {
-
-                        deallocate_array(p, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
-
-                    } else if (j == *TCP_CLIENT_SOCKETS_COUNT_INTERNAL) {
-
-                        deallocate_array(p, (void*) NUMBER_1_INTEGER, (void*) INTEGER_ARRAY);
-
-                    } else if (j == *TCP_CLIENT_SOCKETS_SIZE_INTERNAL) {
-
-                        deallocate_array(p, (void*) NUMBER_1_INTEGER, (void*) INTEGER_ARRAY);
-
-                    } else if (j == *TCP_CLIENT_SOCKET_SIGNAL_IDS_INTERNAL) {
-
-                        deallocate_array(p, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
-
-                    } else if (j == *TCP_CLIENT_SOCKET_SIGNAL_IDS_COUNT_INTERNAL) {
-
-                        deallocate_array(p, (void*) NUMBER_1_INTEGER, (void*) INTEGER_ARRAY);
-
-                    } else if (j == *TCP_CLIENT_SOCKET_SIGNAL_IDS_SIZE_INTERNAL) {
-
-                        deallocate_array(p, (void*) NUMBER_1_INTEGER, (void*) INTEGER_ARRAY);
-                    }
-
-                    //?? TODO: some variables are missing here which causes memory leaks!!
-                }
-
-                // Reset configuration parameter.
-                p = NULL_POINTER;
-
-                j++;
-            }
-
-        } else {
-
-            log_message_debug("Could not destroy internal memory. The internal memory parameter is null.");
-        }
-
-    } else {
-
-//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get highest priority index. The signal memory count is null.");
-    }
+    // CAUTION! Do NOT try to REMOVE the parameters!
+    // Each configuration parameter has a fixed position within
+    // the internal memory and CANNOT be removed.
+    // Trying to do so, would result in a runtime error:
+    // *** glibc detected *** double free or corruption (fasttop)
+    // because the internal memory is already freed below.
 
     // Deallocate internal memory.
     deallocate_array(p0, p1, (void*) POINTER_ARRAY);

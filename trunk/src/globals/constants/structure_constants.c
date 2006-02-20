@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.21 $ $Date: 2006-01-29 01:47:55 $ $Author: christian $
+ * @version $Revision: 1.22 $ $Date: 2006-02-20 16:17:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -112,59 +112,6 @@ static int* COMPLEX_REAL_INDEX = NUMBER_0_INTEGER_ARRAY;
 
 /** The complex imaginary index. */
 static int* COMPLEX_IMAGINARY_INDEX = NUMBER_1_INTEGER_ARRAY;
-
-//
-// Textual user interface (tui).
-//
-
-/** The tui reallocate factor. */
-//?? static int* TUI_REALLOCATE_FACTOR = NUMBER_2_INTEGER_ARRAY;
-
-/** The tui count. */
-//?? static int* TUI_COUNT = NUMBER_4_INTEGER_ARRAY;
-
-/** The tui z dimension index. */
-//?? static int* TUI_Z_DIMENSION_INDEX = NUMBER_0_INTEGER_ARRAY;
-
-/** The tui y dimension index. */
-//?? static int* TUI_Y_DIMENSION_INDEX = NUMBER_1_INTEGER_ARRAY;
-
-/** The tui x dimension index. */
-//?? static int* TUI_X_DIMENSION_INDEX = NUMBER_2_INTEGER_ARRAY;
-
-/** The tui properties index. */
-//?? static int* TUI_PROPERTIES_INDEX = NUMBER_3_INTEGER_ARRAY;
-
-//
-// Textual user interface (tui) properties.
-//
-
-/** The tui properties count. */
-//?? static int* TUI_PROPERTIES_COUNT = NUMBER_8_INTEGER_ARRAY;
-
-/** The tui properties character index. */
-//?? static int* TUI_PROPERTIES_CHARACTER_INDEX = NUMBER_0_INTEGER_ARRAY;
-
-/** The tui properties bold index. */
-//?? static int* TUI_PROPERTIES_BOLD_INDEX = NUMBER_1_INTEGER_ARRAY;
-
-/** The tui properties underline index. */
-//?? static int* TUI_PROPERTIES_UNDERLINE_INDEX = NUMBER_2_INTEGER_ARRAY;
-
-/** The tui properties blink index. */
-//?? static int* TUI_PROPERTIES_BLINK_INDEX = NUMBER_3_INTEGER_ARRAY;
-
-/** The tui properties inverse index. */
-//?? static int* TUI_PROPERTIES_INVERSE_INDEX = NUMBER_4_INTEGER_ARRAY;
-
-/** The tui properties hidden index. */
-//?? static int* TUI_PROPERTIES_HIDDEN_INDEX = NUMBER_5_INTEGER_ARRAY;
-
-/** The tui properties foreground index. */
-//?? static int* TUI_PROPERTIES_FOREGROUND_INDEX = NUMBER_6_INTEGER_ARRAY;
-
-/** The tui properties background index. */
-//?? static int* TUI_PROPERTIES_BACKGROUND_INDEX = NUMBER_7_INTEGER_ARRAY;
 
 //
 // User interface (ui) position.
@@ -288,6 +235,12 @@ static int* KNOWLEDGE_MEMORY_SIZE_INTERNAL = NUMBER_2_INTEGER_ARRAY;
 static int* SIGNAL_MEMORY_INTERNAL = NUMBER_3_INTEGER_ARRAY;
 static int* SIGNAL_MEMORY_COUNT_INTERNAL = NUMBER_4_INTEGER_ARRAY;
 static int* SIGNAL_MEMORY_SIZE_INTERNAL = NUMBER_5_INTEGER_ARRAY;
+
+/** The signal memory blocked flag. */
+static int* SIGNAL_MEMORY_BLOCKED_INTERNAL = NUMBER_10_INTEGER_ARRAY;
+
+/** The interrupt request flag. */
+static int* INTERRUPT_REQUEST_INTERNAL = NUMBER_20_INTEGER_ARRAY;
 
 /** The unix socket. */
 static int* UNIX_SOCKET_INTERRUPT_INTERNAL = NUMBER_100_INTEGER_ARRAY;

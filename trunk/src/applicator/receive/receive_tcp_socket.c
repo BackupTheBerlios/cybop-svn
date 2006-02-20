@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.24 $ $Date: 2006-02-09 23:13:52 $ $Author: christian $
+ * @version $Revision: 1.25 $ $Date: 2006-02-20 16:17:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -988,6 +988,11 @@ void set_signals_for_all_parameters(void* p0, int* p1, void* p2) {
  * @param p1 the client socket
  */
 void handle_tcp_socket_request(void* p0, void* p1) {
+
+/*??
+    For web frontend testing, use:
+    http://localhost:3456/resadmin/logic/send_name.cybol
+*/
 
     if (p1 != NULL_POINTER) {
 

@@ -20,15 +20,18 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2006-02-09 02:22:59 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2006-02-20 16:17:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef CHARACTER_ESCAPE_CODE_MAPPER_SOURCE
 #define CHARACTER_ESCAPE_CODE_MAPPER_SOURCE
 
-#include "../../globals/constants/character_constants.c"
+#include "../../globals/constants/abstraction_constants.c"
+#include "../../globals/constants/ascii_character_constants.c"
+#include "../../globals/constants/escape_code_constants.c"
 #include "../../globals/constants/structure_constants.c"
+#include "../../globals/variables/variables.c"
 
 /**
  * Gets the escape code for the given character.
@@ -68,7 +71,7 @@ void get_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 if (r == 1) {
 
                     *d = SPACE_CHARACTER_ESCAPE_CODE;
-                    *dc = SPACE_CHARACTER_ESCAPE_CODE_COUNT;
+//??                    *dc = SPACE_CHARACTER_ESCAPE_CODE_COUNT;
                 }
             }
 
@@ -79,7 +82,7 @@ void get_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 if (r == 1) {
 
                     *d = SPACE_CHARACTER_ESCAPE_CODE;
-                    *dc = SPACE_CHARACTER_ESCAPE_CODE_COUNT;
+//??                    *dc = SPACE_CHARACTER_ESCAPE_CODE_COUNT;
                 }
             }
 

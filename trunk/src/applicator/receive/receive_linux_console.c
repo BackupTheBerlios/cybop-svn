@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2006-02-09 02:22:57 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2006-02-20 16:17:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -28,9 +28,13 @@
 #define RECEIVE_LINUX_CONSOLE_SOURCE
 
 #include <pthread.h>
+#include <signal.h>
 #include <stdio.h>
+//?? #include <wchar.h>
 #include "../../globals/constants/abstraction_constants.c"
 #include "../../globals/constants/ascii_character_constants.c"
+#include "../../globals/constants/character_constants.c"
+#include "../../globals/constants/control_sequence_constants.c"
 #include "../../globals/constants/integer_constants.c"
 #include "../../globals/constants/name_constants.c"
 #include "../../globals/constants/structure_constants.c"
@@ -42,11 +46,13 @@
 #include "../../memoriser/array.c"
 
 /**
- * Receives linux console messages (events) in an own thread.
+ * Receives linux console signal.
  *
  * @param p0 the internal memory
+ * @param p1 the command name string
+ * @param p2 the command name string count
  */
-void receive_linux_console_thread(void* p0) {
+void receive_linux_console_signal(void* p0, void* p1, void* p2) {
 
     // The knowledge memory.
     void** k = (void**) &NULL_POINTER;
@@ -56,27 +62,14 @@ void receive_linux_console_thread(void* p0) {
     void** s = (void**) &NULL_POINTER;
     void** sc = (void**) &NULL_POINTER;
     void** ss = (void**) &NULL_POINTER;
+    // The signal memory blocked flag.
+    sig_atomic_t** smb = (sig_atomic_t**) &NULL_POINTER;
+    // The interrupt request flag.
+    sig_atomic_t** irq = (sig_atomic_t**) &NULL_POINTER;
     // The user interface commands.
     void** c = (void**) &NULL_POINTER;
     void** cc = (void**) &NULL_POINTER;
     void** cs = (void**) &NULL_POINTER;
-    // The terminal (device name).
-    void** t = &NULL_POINTER;
-
-    // Get knowledge memory internal.
-    get(p0, (void*) KNOWLEDGE_MEMORY_INTERNAL, (void*) &k, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    get(p0, (void*) KNOWLEDGE_MEMORY_COUNT_INTERNAL, (void*) &kc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    get(p0, (void*) KNOWLEDGE_MEMORY_SIZE_INTERNAL, (void*) &ks, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    // Get signal memory internal.
-    get(p0, (void*) SIGNAL_MEMORY_INTERNAL, (void*) &s, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    get(p0, (void*) SIGNAL_MEMORY_COUNT_INTERNAL, (void*) &sc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    get(p0, (void*) SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &ss, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    // Get user interface commands internal.
-    get(p0, (void*) TEMPORARY_USER_INTERFACE_COMMANDS_INTERNAL, (void*) &c, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    get(p0, (void*) TEMPORARY_USER_INTERFACE_COMMANDS_COUNT_INTERNAL, (void*) &cc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    get(p0, (void*) TEMPORARY_USER_INTERFACE_COMMANDS_SIZE_INTERNAL, (void*) &cs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    // Get terminal.
-    get_array_elements(p0, (void*) TERMINAL_FILE_DESCRIPTOR_INTERNAL, (void*) &t, (void*) POINTER_ARRAY);
 
     // The command abstraction.
     void** ca = &NULL_POINTER;
@@ -91,6 +84,88 @@ void receive_linux_console_thread(void* p0) {
     void** cdc = &NULL_POINTER;
     void** cds = &NULL_POINTER;
 
+    // The signal id.
+    int* id = NULL_POINTER;
+
+    // Get knowledge memory internal.
+    get(p0, (void*) KNOWLEDGE_MEMORY_INTERNAL, (void*) &k, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p0, (void*) KNOWLEDGE_MEMORY_COUNT_INTERNAL, (void*) &kc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p0, (void*) KNOWLEDGE_MEMORY_SIZE_INTERNAL, (void*) &ks, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    // Get signal memory internal.
+    get(p0, (void*) SIGNAL_MEMORY_INTERNAL, (void*) &s, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p0, (void*) SIGNAL_MEMORY_COUNT_INTERNAL, (void*) &sc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p0, (void*) SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &ss, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    // Get signal memory blocked internal.
+    get(p0, (void*) SIGNAL_MEMORY_BLOCKED_INTERNAL, (void*) &smb, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    // Get interrupt request internal.
+    get(p0, (void*) INTERRUPT_REQUEST_INTERNAL, (void*) &irq, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    // Get user interface commands internal.
+    get(p0, (void*) TEMPORARY_USER_INTERFACE_COMMANDS_INTERNAL, (void*) &c, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p0, (void*) TEMPORARY_USER_INTERFACE_COMMANDS_COUNT_INTERNAL, (void*) &cc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p0, (void*) TEMPORARY_USER_INTERFACE_COMMANDS_SIZE_INTERNAL, (void*) &cs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
+    fprintf(stdout, "TEST signal p1 %ls\n", (char*) p1);
+
+    // Get actual command belonging to the command name.
+    // If the name is not known, the command parameter is left untouched.
+    get_compound_element_by_encapsulated_name(*c, *cc,
+        p1, p2,
+        (void*) &ca, (void*) &cac, (void*) &cas,
+        (void*) &cm, (void*) &cmc, (void*) &cms,
+        (void*) &cd, (void*) &cdc, (void*) &cds,
+        *k, *kc);
+
+    fprintf(stdout, "TEST signal cm %s\n", (char*) *cm);
+
+    // Allocate signal id.
+    allocate((void*) &id, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    *id = 0;
+    get_new_signal_id(*s, *sc, (void*) id);
+
+    // Wait while signal memory is blocked.
+    while (**smb != *NUMBER_0_INTEGER) {
+
+        sleep(1);
+    }
+
+    // Block signal memory.
+    **smb = *NUMBER_1_INTEGER;
+
+    // Add signal to signal memory.
+    set_signal(*s, *sc, *ss, *ca, *cac, *cm, *cmc, *cd, *cdc, (void*) NORMAL_PRIORITY, (void*) id);
+
+    // Unblock signal memory.
+    **smb = *NUMBER_0_INTEGER;
+
+    // Set interrupt request flag, in order to notify the signal checker
+    // that a new signal has been placed in the signal memory.
+    **irq = *NUMBER_1_INTEGER;
+
+/*?? A simple sleep(1) is used instead of signals now!
+    // Send signal to the calling process, that is this process itself.
+    // An alternative which might be more portable to older systems is:
+    // kill(getpid(), signum);
+    // The kill function is not just for killing,
+    // but also for sending general signals!
+    raise(SIGIO);
+*/
+}
+
+/**
+ * Receives linux console messages (events) in an own thread.
+ *
+ * @param p0 the internal memory
+ */
+void receive_linux_console_thread(void* p0) {
+
+    // The terminal (device name).
+    void** t = &NULL_POINTER;
+
+    // Get terminal.
+//??    get_array_elements(p0, (void*) TERMINAL_FILE_DESCRIPTOR_INTERNAL, (void*) &t, (void*) POINTER_ARRAY);
+    //?? For now, the standard stream is used for input. Possibly changed later.
+    *t = stdin;
+
     // The event character.
     // CAUTION! For the narrow stream functions it is important to store the
     // result of these functions in a variable of type int instead of char,
@@ -103,11 +178,23 @@ void receive_linux_console_thread(void* p0) {
     // of information.
     // NEVERTHELESS, a char is used here since EOF is not of importance below,
     // in the "get_compound_element_by_encapsulated_name" procedure.
-    int e = *NULL_CONTROL_ASCII_CHARACTER;
-    // The signal id.
-    int* id = NULL_POINTER;
+//??    wint_t e = *NULL_CONTROL_CHARACTER;
+    char e = *NULL_CONTROL_ASCII_CHARACTER;
+    // The escape character mode.
+    int esc = *NUMBER_0_INTEGER;
+    // The escape control sequence mode.
+    int csi = *NUMBER_0_INTEGER;
+    // The character buffer.
+    // Its size is set to three, because no longer escape sequences are known.
+    // Example: An up arrow delivers 'ESC' + '[' + 'A'
+    void* b = NULL_POINTER;
+    int bc = *NUMBER_0_INTEGER;
+    int bs = *NUMBER_3_INTEGER;
     // The activation flag.
 //??    int** f = (int**) &NULL_POINTER;
+
+    // Allocate character buffer.
+    allocate((void*) &b, (void*) &bs, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
     while (1) {
 
@@ -124,42 +211,147 @@ void receive_linux_console_thread(void* p0) {
         // Get character from terminal.
         // CAUTION! Use 'wint_t' instead of 'int' as return type for
         // 'getwchar()', since that returns 'WEOF' instead of 'EOF'.
-        e = fgetc(stdin);
+//??        e = fgetwc(*t);
+        e = fgetc(*t);
 
-        // Get actual command belonging to the character.
-        // If the character is not known as name, the returned command is left
-        // untouched, that is at its initial default value NULL.
-        get_compound_element_by_encapsulated_name(*c, *cc,
-            (void*) &e, (void*) PRIMITIVE_COUNT,
-            (void*) &ca, (void*) &cac, (void*) &cas,
-            (void*) &cm, (void*) &cmc, (void*) &cms,
-            (void*) &cd, (void*) &cdc, (void*) &cds,
-            *k, *kc);
+    fprintf(stdout, "TEST character %i\n", e);
 
-        // Allocate signal id.
-        allocate((void*) &id, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-        *id = 0;
-        get_new_signal_id(*s, *sc, (void*) id);
+        if (csi == *NUMBER_1_INTEGER) {
 
-        // Add signal to signal memory.
-        set_signal(*s, *sc, *ss, *ca, *cac, *cm, *cmc, *cd, *cdc, (void*) NORMAL_PRIORITY, (void*) id);
+            // Reset escape control sequence mode.
+            csi = *NUMBER_0_INTEGER;
 
-        // Reset command abstraction.
-        ca = &NULL_POINTER;
-        cac = &NULL_POINTER;
-        cas = &NULL_POINTER;
-        // Reset command model.
-        cm = &NULL_POINTER;
-        cmc = &NULL_POINTER;
-        cms = &NULL_POINTER;
-        // Reset command details.
-        cd = &NULL_POINTER;
-        cdc = &NULL_POINTER;
-        cds = &NULL_POINTER;
+    fprintf(stdout, "TEST csi mode %i\n", e);
 
-        // Reset signal id.
-        id = NULL_POINTER;
+            // An escape character followed by a left square bracket character
+            // were read before. So this is an escape control sequence.
+
+            // Add character to buffer.
+            set(b, (void*) &bc, (void*) &e, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+            bc++;
+
+    fprintf(stdout, "TEST csi b %s\n", (char*) b);
+    fprintf(stdout, "TEST csi bc %i\n", bc);
+    fprintf(stdout, "TEST csi bs %i\n", bs);
+
+            // The comparison result.
+            int r = 0;
+
+            // Determine escape control sequence and send a corresponding signal.
+            if (r == 0) {
+
+                compare_arrays(b, (void*) &bc, (void*) ARROW_UP_CONTROL_SEQUENCE, (void*) ARROW_UP_CONTROL_SEQUENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+                if (r != 0) {
+
+                    receive_linux_console_signal(p0, (void*) UI_ARROW_UP_NAME, (void*) UI_ARROW_UP_NAME_COUNT);
+                }
+            }
+
+            if (r == 0) {
+
+                compare_arrays(b, (void*) &bc, (void*) ARROW_DOWN_CONTROL_SEQUENCE, (void*) ARROW_DOWN_CONTROL_SEQUENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+                if (r != 0) {
+
+    fprintf(stdout, "TEST csi mode down %i\n", e);
+
+                    receive_linux_console_signal(p0, (void*) UI_ARROW_DOWN_NAME, (void*) UI_ARROW_DOWN_NAME_COUNT);
+                }
+            }
+
+            if (r == 0) {
+
+                compare_arrays(b, (void*) &bc, (void*) ARROW_LEFT_CONTROL_SEQUENCE, (void*) ARROW_LEFT_CONTROL_SEQUENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+                if (r != 0) {
+
+                    receive_linux_console_signal(p0, (void*) UI_ARROW_LEFT_NAME, (void*) UI_ARROW_LEFT_NAME_COUNT);
+                }
+            }
+
+            if (r == 0) {
+
+                compare_arrays(b, (void*) &bc, (void*) ARROW_RIGHT_CONTROL_SEQUENCE, (void*) ARROW_RIGHT_CONTROL_SEQUENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+                if (r != 0) {
+
+                    receive_linux_console_signal(p0, (void*) UI_ARROW_RIGHT_NAME, (void*) UI_ARROW_RIGHT_NAME_COUNT);
+                }
+            }
+
+            // The loop count.
+            int j = bc - 1;
+
+            while (1) {
+
+                if (j < 0) {
+
+                    break;
+                }
+
+                // Remove all characters from buffer.
+                remove_element(b, (void*) &bs, (void*) &j, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+
+                // Decrease loop count.
+                j--;
+                // Decrease character buffer count.
+                bc--;
+            }
+
+        } else if (esc == *NUMBER_1_INTEGER) {
+
+            // Reset escape character mode.
+            esc = *NUMBER_0_INTEGER;
+
+    fprintf(stdout, "TEST esc mode %i\n", e);
+
+            // An escape character was read before.
+            // Find out if it was just that escape character,
+            // or if a left square bracket character follows now,
+            // in which case this is the start of an escape control sequence.
+
+            if (e == *LEFT_SQUARE_BRACKET_CHARACTER) {
+
+                // This is the start of an escape control sequence.
+
+                // Set escape control sequence flag.
+                csi = *NUMBER_1_INTEGER;
+
+                // Add character to buffer.
+                set(b, (void*) &bc, (void*) &e, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+                bc++;
+
+            } else {
+
+                // This is not going to be an escape control sequence.
+                // Send both, the formerly read escape character and the
+                // current character as two independent signals.
+                receive_linux_console_signal(p0, (void*) ESCAPE_CONTROL_CHARACTER, (void*) NUMBER_1_INTEGER);
+                receive_linux_console_signal(p0, (void*) &e, (void*) NUMBER_1_INTEGER);
+            }
+
+        } else if (e == *ESCAPE_CONTROL_CHARACTER) {
+
+    fprintf(stdout, "TEST if esc char %i\n", e);
+
+            // Set escape character flag.
+            esc = *NUMBER_1_INTEGER;
+
+            // Add character to buffer.
+            set(b, (void*) &bc, (void*) &e, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+            bc++;
+
+        } else {
+
+    fprintf(stdout, "TEST rest %i\n", e);
+
+            receive_linux_console_signal(p0, (void*) &e, (void*) NUMBER_1_INTEGER);
+        }
     }
+
+    // Deallocate character buffer.
+    deallocate((void*) &b, (void*) &bs, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
     // An implicit call to pthread_exit() is made when this thread
     // (other than the thread in which main() was first invoked)

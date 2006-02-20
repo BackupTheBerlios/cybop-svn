@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2005-08-11 22:33:45 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2006-02-20 16:17:26 $ $Author: christian $
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
@@ -43,7 +43,7 @@
 
 void handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
     void* p7, void* p8, void* p9, void* p10, void* p11,
-    void* p12, void* p13,  void* p14, void* p15, void* p16);
+    void* p12, void* p13,  void* p14, void* p15, void* p16, void* p17, void* p18);
 
 /**
  * Branches the program flow, depending on a flag.
@@ -60,14 +60,16 @@ void handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
  * @param p4 the signal memory
  * @param p5 the signal memory count
  * @param p6 the signal memory size
- * @param p7 the shutdown flag
- * @param p8 the parameters
- * @param p9 the parameters count
- * @param p10 the priority
- * @param p11 the signal id
+ * @param p7 the signal memory blocked flag
+ * @param p8 the interrupt request flag
+ * @param p9 the shutdown flag
+ * @param p10 the parameters
+ * @param p11 the parameters count
+ * @param p12 the priority
+ * @param p13 the signal id
  */
 void branch(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
-    void* p7, void* p8, void* p9, void* p10, void* p11) {
+    void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13) {
 
     log_message_debug("\n\n");
     log_message_debug("Branch program flow.");
@@ -112,7 +114,7 @@ void branch(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
     void** fds = &NULL_POINTER;
 
     // Get criterion.
-    get_real_compound_element_by_name(p8, p9,
+    get_real_compound_element_by_name(p10, p11,
         (void*) CRITERION_NAME, (void*) CRITERION_NAME_COUNT,
         (void*) &ca, (void*) &cac, (void*) &cas,
         (void*) &cm, (void*) &cmc, (void*) &cms,
@@ -120,7 +122,7 @@ void branch(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
         p1, p2);
 
     // Get true model.
-    get_real_compound_element_by_name(p8, p9,
+    get_real_compound_element_by_name(p10, p11,
         (void*) FALSE_MODEL_NAME, (void*) FALSE_MODEL_NAME_COUNT,
         (void*) &ta, (void*) &tac, (void*) &tas,
         (void*) &tm, (void*) &tmc, (void*) &tms,
@@ -128,7 +130,7 @@ void branch(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
         p1, p2);
 
     // Get false model.
-    get_real_compound_element_by_name(p8, p9,
+    get_real_compound_element_by_name(p10, p11,
         (void*) TRUE_MODEL_NAME, (void*) TRUE_MODEL_NAME_COUNT,
         (void*) &fa, (void*) &fac, (void*) &fas,
         (void*) &fm, (void*) &fmc, (void*) &fms,
@@ -190,16 +192,14 @@ void branch(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
             if (r == 1) {
 
                 // The criterion is true.
-                handle(p0, p1, p2, p3, p4, p5, p6,
-                    p7, *ta, *tac, *tm, *tmc, *td, *tdc,
-                    p10, p11, (void*) &x);
+                handle(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9,
+                    *ta, *tac, *tm, *tmc, *td, *tdc, p12, p13, (void*) &x);
 
             } else {
 
                 // The criterion is false.
-                handle(p0, p1, p2, p3, p4, p5, p6,
-                    p7, *fa, *fac, *fm, *fmc, *fd, *fdc,
-                    p10, p11, (void*) &x);
+                handle(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9,
+                    *fa, *fac, *fm, *fmc, *fd, *fdc, p12, p13, (void*) &x);
             }
         }
     }

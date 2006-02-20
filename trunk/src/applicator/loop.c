@@ -22,7 +22,7 @@
  *
  * this handel a loop
  *
- * @version $Revision: 1.11 $ $Date: 2005-08-11 22:33:46 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2006-02-20 16:17:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -44,7 +44,7 @@
 
 void handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
     void* p7, void* p8, void* p9, void* p10, void* p11,
-    void* p12, void* p13,  void* p14, void* p15, void* p16);
+    void* p12, void* p13,  void* p14, void* p15, void* p16, void* p17, void* p18);
 
 /**
  * Loops the program flow, depending on a flag.
@@ -60,14 +60,16 @@ void handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
  * @param p4 the signal memory
  * @param p5 the signal memory count
  * @param p6 the signal memory size
- * @param p7 the shutdown flag
- * @param p8 the parameters
- * @param p9 the parameters count
- * @param p10 the priority
- * @param p11 the signal id
+ * @param p7 the signal memory blocked flag
+ * @param p8 the interrupt request flag
+ * @param p9 the shutdown flag
+ * @param p10 the parameters
+ * @param p11 the parameters count
+ * @param p12 the priority
+ * @param p13 the signal id
  */
 void loop(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
-    void* p7, void* p8, void* p9, void* p10, void* p11) {
+    void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13) {
 
     log_message_debug("\n\n");
     log_message_debug("Loop program flow.");
@@ -99,7 +101,7 @@ void loop(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
     void** mds = &NULL_POINTER;
 
     // Get break flag.
-    get_real_compound_element_by_name(p8, p9,
+    get_real_compound_element_by_name(p10, p11,
         (void*) BREAK_FLAG_NAME, (void*) BREAK_FLAG_NAME_COUNT,
         (void*) &bfa, (void*) &bfac, (void*) &bfas,
         (void*) &bfm, (void*) &bfmc, (void*) &bfms,
@@ -107,7 +109,7 @@ void loop(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
         p1, p2);
 
     // Get model.
-    get_real_compound_element_by_name(p8, p9,
+    get_real_compound_element_by_name(p10, p11,
         (void*) LOOP_MODEL_NAME, (void*) LOOP_MODEL_NAME_COUNT,
         (void*) &ma, (void*) &mac, (void*) &mas,
         (void*) &mm, (void*) &mmc, (void*) &mms,
@@ -172,9 +174,8 @@ void loop(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
 
                     // Send the loop model as new signal,
                     // as long as the break flag is false (not set).
-                    handle(p0, p1, p2, p3, p4, p5, p6,
-                        p7, *ma, *mac, *mm, *mmc, *md, *mdc,
-                        p10, p11, (void*) &x);
+                    handle(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9,
+                        *ma, *mac, *mm, *mmc, *md, *mdc, p12, p13, (void*) &x);
                 }
             }
         }

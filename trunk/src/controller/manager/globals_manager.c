@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2006-02-02 00:29:40 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2006-02-20 16:17:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -46,7 +46,7 @@ void startup_globals() {
 
     // CAUTION! DO NOT use logging functionality here!
     // The logger will not work before these global variables are set.
-    fputs("Info: Startup globals.\n", stdout);
+//??    fputs("Info: Startup globals.\n", stdout);
 
     //
     // Null pointer.
@@ -55,7 +55,7 @@ void startup_globals() {
     // one could not alter the values it points to.
     //
 
-    // The null pointer.
+    // Initialise null pointer.
     NULL_POINTER = (void*) 0;
 
     //
@@ -65,31 +65,33 @@ void startup_globals() {
     // The arrays use the logger which would cause circular references.
     // Instead, use malloc and similar functions directly!
     //
+    // CAUTION! The integer size needs to be initialised FIRST,
+    // BEFORE all other initialisations below.
+    //
 
-    // The integer primitive size.
-    // CAUTION! The sizeof operator must be used twice here,
-    // because INTEGER_PRIMITIVE_SIZE cannot be used before being initialised.
-    // CAUTION! The integer size need to be initialised FIRST!
+    // Allocate integer primitive size.
+    // CAUTION! The sizeof operator must be used twice here, because
+    // INTEGER_PRIMITIVE_SIZE cannot be used before having being initialised.
     INTEGER_PRIMITIVE_SIZE = (int*) malloc(sizeof(int));
     *INTEGER_PRIMITIVE_SIZE = sizeof(int);
 
-    // The character primitive size.
+    // Allocate character primitive size.
     CHARACTER_PRIMITIVE_SIZE = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
     *CHARACTER_PRIMITIVE_SIZE = sizeof(char);
 
-    // The wide character primitive size.
+    // Allocate wide character primitive size.
     WIDE_CHARACTER_PRIMITIVE_SIZE = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
     *WIDE_CHARACTER_PRIMITIVE_SIZE = sizeof(wchar_t);
 
-    // The unsigned long primitive size.
+    // Allocate unsigned long primitive size.
     UNSIGNED_LONG_PRIMITIVE_SIZE = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
     *UNSIGNED_LONG_PRIMITIVE_SIZE = sizeof(unsigned long);
 
-    // The pointer primitive size.
+    // Allocate pointer primitive size.
     POINTER_PRIMITIVE_SIZE = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
     *POINTER_PRIMITIVE_SIZE = sizeof(void*);
 
-    // The double primitive size.
+    // Allocate double primitive size.
     DOUBLE_PRIMITIVE_SIZE = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
     *DOUBLE_PRIMITIVE_SIZE = sizeof(double);
 
@@ -101,7 +103,7 @@ void startup_globals() {
     // Instead, use malloc and similar functions directly!
     //
 
-    // The log level.
+    // Allocate log level.
     LOG_LEVEL = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
     *LOG_LEVEL = *DEBUG_LOG_LEVEL;
 
@@ -149,7 +151,7 @@ void startup_globals() {
  */
 void shutdown_globals() {
 
-    fputs("Shutdown globals.\n", stdout);
+//??    fputs("Info: Shutdown globals.\n", stdout);
 
     //
     // Logging.
@@ -174,7 +176,7 @@ void shutdown_globals() {
         fputs("Error: Could not close log file. A file error occured.\n", stdout);
     }
 
-    // The log level.
+    // Free log level.
     free(LOG_LEVEL);
 
     //
@@ -185,22 +187,22 @@ void shutdown_globals() {
     // Instead, use malloc and similar functions directly!
     //
 
-    // The double primitive size.
+    // Free double primitive size.
     free(DOUBLE_PRIMITIVE_SIZE);
 
-    // The unsigned long primitive size.
+    // Free unsigned long primitive size.
     free(UNSIGNED_LONG_PRIMITIVE_SIZE);
 
-    // The pointer primitive size.
+    // Free pointer primitive size.
     free(POINTER_PRIMITIVE_SIZE);
 
-    // The wide character primitive size.
+    // Free wide character primitive size.
     free(WIDE_CHARACTER_PRIMITIVE_SIZE);
 
-    // The character primitive size.
+    // Free character primitive size.
     free(CHARACTER_PRIMITIVE_SIZE);
 
-    // The integer primitive size.
+    // Free integer primitive size.
     free(INTEGER_PRIMITIVE_SIZE);
 }
 

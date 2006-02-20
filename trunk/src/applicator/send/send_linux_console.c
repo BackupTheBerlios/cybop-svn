@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.41 $ $Date: 2006-02-09 23:13:52 $ $Author: christian $
+ * @version $Revision: 1.42 $ $Date: 2006-02-20 16:17:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -57,10 +57,29 @@ void send_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
     // The serialised string array to be sent to the terminal.
     void* a = NULL_POINTER;
     int ac = 0;
-    int as = 1000;
+    int as = 0;
 
     // Allocate array.
     allocate((void*) &a, (void*) &as, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
+
+    // Resize destiation character array for erase display control sequence.
+    if ((ac + *ESCAPE_CONTROL_SEQUENCE_COUNT + *ERASE_DISPLAY_CONTROL_SEQUENCE_COUNT) >= as) {
+
+        // Set destination character array size.
+        // CAUTION! Add constant in case ac is zero!
+        as = ac * *WIDE_CHARACTER_VECTOR_REALLOCATE_FACTOR
+            + *ESCAPE_CONTROL_SEQUENCE_COUNT
+            + *ERASE_DISPLAY_CONTROL_SEQUENCE_COUNT;
+
+        // Reallocate destination character array.
+        reallocate_array((void*) &a, (void*) &ac, (void*) &as, (void*) WIDE_CHARACTER_ARRAY);
+    }
+
+    // Set erase display control sequence.
+    set_array_elements(a, (void*) &ac, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+    ac = ac + *ESCAPE_CONTROL_SEQUENCE_COUNT;
+    set_array_elements(a, (void*) &ac, (void*) ERASE_DISPLAY_CONTROL_SEQUENCE, (void*) ERASE_DISPLAY_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+    ac = ac + *ERASE_DISPLAY_CONTROL_SEQUENCE_COUNT;
 
     // Serialise textual user interface (tui) into array.
     serialise((void*) &a, (void*) &ac, (void*) &as, p1, p2, (void*) LINUX_CONSOLE_MODEL, (void*) LINUX_CONSOLE_MODEL_COUNT, p3, p4);

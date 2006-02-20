@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2005-08-11 22:33:46 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2006-02-20 16:17:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -40,7 +40,7 @@
 
 void handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
     void* p7, void* p8, void* p9, void* p10, void* p11,
-    void* p12, void* p13,  void* p14, void* p15, void* p16);
+    void* p12, void* p13,  void* p14, void* p15, void* p16, void* p17, void* p18);
 
 /**
  * Handles the compound signal.
@@ -52,26 +52,28 @@ void handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
  * @param p4 the signal memory
  * @param p5 the signal memory count
  * @param p6 the signal memory size
- * @param p7 the shutdown flag
- * @param p8 the signal
- * @param p9 the signal count
- * @param p10 the signal priority
- * @param p11 the signal id
- * @param p12 the direct execution flag
+ * @param p7 the signal memory blocked flag
+ * @param p8 the interrupt request flag
+ * @param p9 the shutdown flag
+ * @param p10 the signal
+ * @param p11 the signal count
+ * @param p12 the signal priority
+ * @param p13 the signal id
+ * @param p14 the direct execution flag
  */
 void handle_compound(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
-    void* p7, void* p8, void* p9, void* p10, void* p11, void* p12) {
+    void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14) {
 
-    if (p9 != NULL_POINTER) {
+    if (p11 != NULL_POINTER) {
 
-        int* sc = (int*) p9;
+        int* sc = (int*) p11;
 
         // The direct execution flag.
         int* x = NULL_POINTER;
 
-        if (p12 != NULL_POINTER) {
+        if (p14 != NULL_POINTER) {
 
-            x = (int*) p12;
+            x = (int*) p14;
         };
 
         log_message_debug("\n\n");
@@ -86,12 +88,12 @@ void handle_compound(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
         void** pdc = &NULL_POINTER;
 
         // Get abstractions, models, details.
-        get_array_elements(p8, (void*) ABSTRACTIONS_INDEX, (void*) &pa, (void*) POINTER_ARRAY);
-        get_array_elements(p8, (void*) ABSTRACTIONS_COUNTS_INDEX, (void*) &pac, (void*) POINTER_ARRAY);
-        get_array_elements(p8, (void*) MODELS_INDEX, (void*) &pm, (void*) POINTER_ARRAY);
-        get_array_elements(p8, (void*) MODELS_COUNTS_INDEX, (void*) &pmc, (void*) POINTER_ARRAY);
-        get_array_elements(p8, (void*) DETAILS_INDEX, (void*) &pd, (void*) POINTER_ARRAY);
-        get_array_elements(p8, (void*) DETAILS_COUNTS_INDEX, (void*) &pdc, (void*) POINTER_ARRAY);
+        get_array_elements(p10, (void*) ABSTRACTIONS_INDEX, (void*) &pa, (void*) POINTER_ARRAY);
+        get_array_elements(p10, (void*) ABSTRACTIONS_COUNTS_INDEX, (void*) &pac, (void*) POINTER_ARRAY);
+        get_array_elements(p10, (void*) MODELS_INDEX, (void*) &pm, (void*) POINTER_ARRAY);
+        get_array_elements(p10, (void*) MODELS_COUNTS_INDEX, (void*) &pmc, (void*) POINTER_ARRAY);
+        get_array_elements(p10, (void*) DETAILS_INDEX, (void*) &pd, (void*) POINTER_ARRAY);
+        get_array_elements(p10, (void*) DETAILS_COUNTS_INDEX, (void*) &pdc, (void*) POINTER_ARRAY);
 
         if (*pa != NULL_POINTER) {
 
@@ -131,64 +133,23 @@ void handle_compound(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
                                     get_array_elements(*pd, (void*) &j, (void*) &d, (void*) POINTER_ARRAY);
                                     get_array_elements(*pdc, (void*) &j, (void*) &dc, (void*) INTEGER_ARRAY);
 
-                                    if (*a != NULL_POINTER) {
-
-                                        if (*ac != NULL_POINTER) {
-
-                                            if (*m != NULL_POINTER) {
-
-                                                if (*mc != NULL_POINTER) {
-
-                                                    if (*d != NULL_POINTER) {
-
-                                                        if (*dc != NULL_POINTER) {
-
-                                                            // Add part model (signal) to memory, using the whole signal's priority.
-                                                            // (Each signal has a priority. A signal may consist of part
-                                                            // signals. The part signals cannot have higher / lower priority
-                                                            // than their original whole signal.)
+                                    // Add part model (signal) to memory, using the whole signal's priority.
+                                    // (Each signal has a priority. A signal may consist of part
+                                    // signals. The part signals cannot have higher / lower priority
+                                    // than their original whole signal.)
 /*??
-                                                            if (*x == 0) {
+                                    if (*x == 0) {
 
-                                                                set_signal(p4, p5, p6, *a, *ac, *m, *mc, *d, *dc, p10, p11);
-
-                                                            } else {
-*/
-                                                                handle(p0, p1, p2, p3, p4, p5, p6,
-                                                                    p7, *a, *ac, *m, *mc, *d, *dc, p10, p11, p12);
-/*??
-                                                            }
-*/
-
-                                                        } else {
-
-                                                            log_message_debug("Could not handle compound. The details count is null.");
-                                                        }
-
-                                                    } else {
-
-                                                        log_message_debug("Could not handle compound. The details is null.");
-                                                    }
-
-                                                } else {
-
-                                                    log_message_debug("Could not handle compound. The model count is null.");
-                                                }
-
-                                            } else {
-
-                                                log_message_debug("Could not handle compound. The model is null.");
-                                            }
-
-                                        } else {
-
-                                            log_message_debug("Could not handle compound. The abstraction count is null.");
-                                        }
+                                        set_signal(p4, p5, p6, *a, *ac, *m, *mc, *d, *dc, p12, p13);
 
                                     } else {
+*/
 
-                                        log_message_debug("Could not handle compound. The abstraction is null.");
+                                        handle(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9,
+                                            *a, *ac, *m, *mc, *d, *dc, p12, p13, p14);
+/*??
                                     }
+*/
 
                                     // Reset abstraction, model, details.
                                     a = &NULL_POINTER;

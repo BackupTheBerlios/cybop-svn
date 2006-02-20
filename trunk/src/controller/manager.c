@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.19 $ $Date: 2005-11-28 22:55:48 $ $Author: christian $
+ * @version $Revision: 1.20 $ $Date: 2006-02-20 16:17:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -33,6 +33,7 @@
 #include "../globals/constants/log_constants.c"
 #include "../globals/logger/logger.c"
 #include "../globals/variables/variables.c"
+#include "../memoriser/allocator.c"
 
 /**
  * Manages the system.
@@ -59,7 +60,7 @@
 void manage(void* p0, void* p1) {
 
     log_message_debug("\n\n");
-    log_message_debug("Manage system.");
+    log_message_debug("Info: Manage system.");
 
     // The internal memory.
     void* i = NULL_POINTER;
@@ -73,6 +74,34 @@ void manage(void* p0, void* p1) {
     void* s = NULL_POINTER;
     int* sc = NULL_POINTER;
     int* ss = NULL_POINTER;
+    // The signal memory blocked flag.
+    volatile sig_atomic_t* smb = NULL_POINTER;
+    //
+    // The interrupt request flag.
+    //
+    // Unix system signal handlers that return normally must modify some global
+    // variable in order to have any effect. Typically, the variable is one that
+    // is examined periodically by the program during normal operation.
+    //
+    // Whether the data in an application concerns atoms, or mere text, one has to
+    // be careful about the fact that access to a single datum is not necessarily
+    // atomic. This means that it can take more than one instruction to read or
+    // write a single object. In such cases, a signal handler might be invoked in
+    // the middle of reading or writing the object.
+    // The usage of data types that are always accessed atomically is one way to
+    // cope with this problem. Therefore, this flag is of type sig_atomic_t.
+    //
+    // Reading and writing this data type is guaranteed to happen in a single
+    // instruction, so there's no way for a handler to run in the middle of an access.
+    // The type sig_atomic_t is always an integer data type, but which one it is,
+    // and how many bits it contains, may vary from machine to machine.
+    // In practice, one can assume that int and other integer types no longer than
+    // int are atomic, that is objects of this type are always accessed atomically.
+    // One can also assume that pointer types are atomic; that is very convenient.
+    // Both of these assumptions are true on all of the machines that the GNU C
+    // library supports and on all known POSIX systems.
+    //
+    volatile sig_atomic_t* irq = NULL_POINTER;
 
     // Allocate knowledge memory count, size.
     allocate((void*) &kc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
@@ -80,13 +109,31 @@ void manage(void* p0, void* p1) {
     // Allocate signal memory count, size.
     allocate((void*) &sc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
     allocate((void*) &ss, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    // Allocate signal memory blocked flag.
+    // Actually, the flag is of type sig_atomic_t.
+    // But because sig_atomic_t is always an integer data type and in practice,
+    // one can assume that int and other integer types no longer than int are
+    // atomic, the integer vector procedures can be used here (instead of
+    // writing identical but new procedures for the type sig_atomic_t).
+    allocate((void*) &smb, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    // Allocate interrupt request flag.
+    // Actually, the flag is of type sig_atomic_t.
+    // But because sig_atomic_t is always an integer data type and in practice,
+    // one can assume that int and other integer types no longer than int are
+    // atomic, the integer vector procedures can be used here (instead of
+    // writing identical but new procedures for the type sig_atomic_t).
+    allocate((void*) &irq, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
     // Initialise knowledge memory count, size.
-    *kc = 0;
-    *ks = 0;
+    *kc = *NUMBER_0_INTEGER;
+    *ks = *NUMBER_0_INTEGER;
     // Initialise signal memory count, size.
-    *sc = 0;
-    *ss = 0;
+    *sc = *NUMBER_0_INTEGER;
+    *ss = *NUMBER_0_INTEGER;
+    // Initialise signal memory blocked flag.
+    *smb = *NUMBER_0_INTEGER;
+    // Initialise interrupt request flag.
+    *irq = *NUMBER_0_INTEGER;
 
     // Allocate internal memory.
     allocate((void*) &i, (void*) is, (void*) INTERNAL_MEMORY_ABSTRACTION, (void*) INTERNAL_MEMORY_ABSTRACTION_COUNT);
@@ -108,9 +155,13 @@ void manage(void* p0, void* p1) {
     set(i, (void*) SIGNAL_MEMORY_INTERNAL, (void*) &s, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     set(i, (void*) SIGNAL_MEMORY_COUNT_INTERNAL, (void*) &sc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     set(i, (void*) SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &ss, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    // Set signal memory blocked flag.
+    set(i, (void*) SIGNAL_MEMORY_BLOCKED_INTERNAL, (void*) &smb, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    // Set interrupt request flag.
+    set(i, (void*) INTERRUPT_REQUEST_INTERNAL, (void*) &irq, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
     log_message_debug("\n\n");
-    log_message_debug("Allocate startup model.");
+    log_message_debug("Info: Allocate startup model.");
 
     // The startup model abstraction, model, details.
     void* ma = NULL_POINTER;
@@ -152,7 +203,7 @@ void manage(void* p0, void* p1) {
     // It is not needed for the startup signal.
 
     log_message_debug("\n\n");
-    log_message_debug("Add startup model as signal to signal memory.");
+    log_message_debug("Info: Add startup model as signal to signal memory.");
 
     // The signal id.
     int* id = NULL_POINTER;
@@ -167,8 +218,12 @@ void manage(void* p0, void* p1) {
     // can be entered, checking for signals (events/ interrupts)
     // which are stored/ found in the signal memory.
     // The loop is left as soon as its shutdown flag is set.
-    check(i, k, (void*) kc, (void*) ks, s, (void*) sc, (void*) ss);
+    check(i, k, (void*) kc, (void*) ks, s, (void*) sc, (void*) ss, (void*) smb, (void*) irq);
 
+    // Deallocate interrupt request flag.
+    deallocate((void*) &irq, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    // Deallocate signal memory blocked flag.
+    deallocate((void*) &smb, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
     // Deallocate signal memory.
     deallocate((void*) &s, (void*) ss, (void*) SIGNAL_MEMORY_ABSTRACTION, (void*) SIGNAL_MEMORY_ABSTRACTION_COUNT);
     deallocate((void*) &sc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);

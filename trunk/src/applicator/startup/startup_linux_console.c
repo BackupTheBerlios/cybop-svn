@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.15 $ $Date: 2005-11-21 23:29:27 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2006-02-20 16:17:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -40,8 +40,10 @@
 #include <stdio.h>
 #include <termios.h>
 #include "../../globals/constants/integer_constants.c"
+#include "../../globals/constants/log_constants.c"
 #include "../../globals/constants/structure_constants.c"
 #include "../../globals/variables/variables.c"
+#include "../../globals/logger/logger.c"
 #include "../../memoriser/accessor.c"
 #include "../../memoriser/allocator.c"
 
@@ -58,7 +60,7 @@ void startup_linux_console(void* p0, void* p1, void* p2, void* p3) {
     log_message_debug("Startup linux console.");
 
     // The terminal (device name) internal.
-    FILE** ti = NULL_POINTER;
+    FILE** ti = (FILE**) &NULL_POINTER;
 
     // Get terminal internal.
     get(p0, (void*) TERMINAL_FILE_DESCRIPTOR_INTERNAL, (void*) &ti, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
@@ -85,13 +87,13 @@ void startup_linux_console(void* p0, void* p1, void* p2, void* p3) {
         // Get file descriptor for file stream.
         int d = fileno(t);
         // Copy termios attributes from file descriptor.
-        tcgetattr(d, (void*) to);
-        tcgetattr(d, (void*) tw);
+        tcgetattr(d, to);
+        tcgetattr(d, tw);
         // Manipulate termios attributes.
         tw->c_lflag &= ~ICANON;
         tw->c_lflag &= ~ECHO;
         // Set termios attributes.
-        tcsetattr(d, TCSANOW, (void*) tw);
+        tcsetattr(d, TCSANOW, tw);
 
 /*??
         // Check for linux console.

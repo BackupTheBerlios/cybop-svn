@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2006-02-01 11:42:52 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2006-02-20 16:17:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -711,7 +711,7 @@ void receive_x_window_system_thread(void* p0) {
         cdc = &NULL_POINTER;
         cds = &NULL_POINTER;
 
-        //?? TODO: Reset temporary graphical part abstraction, model, details.
+        //?? Reset temporary graphical part abstraction, model, details.
         tmpa = &NULL_POINTER;
         tmpac = &NULL_POINTER;
         tmpas = &NULL_POINTER;

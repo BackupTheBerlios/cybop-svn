@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2006-02-09 23:13:53 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2006-02-20 16:17:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -60,7 +60,7 @@ static char EXCLAMATION_MARK_ASCII_CHARACTER_ARRAY[] = {'!'};
 static char* EXCLAMATION_MARK_ASCII_CHARACTER = EXCLAMATION_MARK_ASCII_CHARACTER_ARRAY;
 
 /** The quotation mark character. U+0022 */
-static char QUOTATION_MARK_ASCII_CHARACTER_ARRAY[] = {' '};
+static char QUOTATION_MARK_ASCII_CHARACTER_ARRAY[] = {'"'};
 static char* QUOTATION_MARK_ASCII_CHARACTER = QUOTATION_MARK_ASCII_CHARACTER_ARRAY;
 
 /** The number sign character. U+0023 */

@@ -23,7 +23,7 @@
  * This file contains the functionality to:
  * - create a signal memory in memory
  *
- * @version $Revision: 1.6 $ $Date: 2005-07-27 23:10:48 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2006-02-20 16:17:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -51,7 +51,7 @@ void allocate_signal_memory(void* p0, void* p1) {
 
         log_message((void*) INFO_LOG_LEVEL, (void*) CREATE_SIGNAL_MEMORY_MESSAGE, (void*) CREATE_SIGNAL_MEMORY_MESSAGE_COUNT);
 
-        // Create signal memory.
+        // Allocate signal memory.
         allocate_array(p0, (void*) SIGNAL_MEMORY_COUNT, (void*) POINTER_ARRAY);
 
         // The abstractions, models, details, priorities, identifications.
@@ -64,7 +64,7 @@ void allocate_signal_memory(void* p0, void* p1) {
         void* p = NULL_POINTER;
         void* id = NULL_POINTER;
 
-        // Create abstractions, models, details, priorities, identifications.
+        // Allocate abstractions, models, details, priorities, identifications.
         allocate_array((void*) &a, p1, (void*) POINTER_ARRAY);
         allocate_array((void*) &ac, p1, (void*) POINTER_ARRAY);
         allocate_array((void*) &m, p1, (void*) POINTER_ARRAY);
@@ -75,7 +75,6 @@ void allocate_signal_memory(void* p0, void* p1) {
         allocate_array((void*) &id, p1, (void*) POINTER_ARRAY);
 
         // Set abstractions, models, details, priorities, identifications.
-        // CAUTION! Use ascending order, as compared to destruction!
         // The p0 parameter needs to be dereferenced since it is handed over
         // as reference, but this procedure expects a normal array.
         set_array_elements(*s, (void*) SIGNALS_ABSTRACTIONS_INDEX, (void*) &a, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
@@ -89,7 +88,7 @@ void allocate_signal_memory(void* p0, void* p1) {
 
     } else {
 
-        log_message_debug("Could not create signal memory. The signal memory parameter is null.");
+        log_message_debug("Could not allocate signal memory. The signal memory parameter is null.");
     }
 }
 
@@ -108,14 +107,14 @@ void deallocate_signal_memory(void* p0, void* p1) {
         log_message((void*) INFO_LOG_LEVEL, (void*) DESTROY_SIGNAL_MEMORY_MESSAGE, (void*) DESTROY_SIGNAL_MEMORY_MESSAGE_COUNT);
 
         // The abstractions, models, details, priorities, identifications.
-        void* a = NULL_POINTER;
-        void* ac = NULL_POINTER;
-        void* m = NULL_POINTER;
-        void* mc = NULL_POINTER;
-        void* d = NULL_POINTER;
-        void* dc = NULL_POINTER;
-        void* p = NULL_POINTER;
-        void* id = NULL_POINTER;
+        void** a = &NULL_POINTER;
+        void** ac = &NULL_POINTER;
+        void** m = &NULL_POINTER;
+        void** mc = &NULL_POINTER;
+        void** d = &NULL_POINTER;
+        void** dc = &NULL_POINTER;
+        void** p = &NULL_POINTER;
+        void** id = &NULL_POINTER;
 
     /*??
         log_message((void*) &INFO_LOG_LEVEL, (void*) &"Destroy all signals left in signal memory.");
@@ -145,8 +144,8 @@ void deallocate_signal_memory(void* p0, void* p1) {
     */
 
         // Get abstractions, models, details, priorities, identifications.
-        // The p0 parameter needs to be dereferenced since it is handed over
-        // as reference, but this procedure expects a normal array.
+        // The p0 parameter (s) needs to be dereferenced since it is handed
+        // over as reference, but this procedure expects a normal array.
         get_array_elements(*s, (void*) SIGNALS_ABSTRACTIONS_INDEX, (void*) &a, (void*) POINTER_ARRAY);
         get_array_elements(*s, (void*) SIGNALS_ABSTRACTIONS_COUNTS_INDEX, (void*) &ac, (void*) POINTER_ARRAY);
         get_array_elements(*s, (void*) SIGNALS_MODELS_INDEX, (void*) &m, (void*) POINTER_ARRAY);
@@ -156,20 +155,15 @@ void deallocate_signal_memory(void* p0, void* p1) {
         get_array_elements(*s, (void*) SIGNALS_PRIORITIES_INDEX, (void*) &p, (void*) POINTER_ARRAY);
         get_array_elements(*s, (void*) SIGNALS_IDENTIFICATIONS_INDEX, (void*) &id, (void*) POINTER_ARRAY);
 
-        // Remove abstractions, models, details, priorities, identifications.
-        // CAUTION! Use descending order as compared to creation, for faster removal.
-        // The p0 parameter needs to be dereferenced since it is handed over
-        // as reference, but this procedure expects a normal array.
-        remove_array_elements(*s, (void*) SIGNAL_MEMORY_COUNT, (void*) SIGNALS_IDENTIFICATIONS_INDEX, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
-        remove_array_elements(*s, (void*) SIGNAL_MEMORY_COUNT, (void*) SIGNALS_PRIORITIES_INDEX, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
-        remove_array_elements(*s, (void*) SIGNAL_MEMORY_COUNT, (void*) SIGNALS_DETAILS_COUNTS_INDEX, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
-        remove_array_elements(*s, (void*) SIGNAL_MEMORY_COUNT, (void*) SIGNALS_DETAILS_INDEX, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
-        remove_array_elements(*s, (void*) SIGNAL_MEMORY_COUNT, (void*) SIGNALS_MODELS_COUNTS_INDEX, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
-        remove_array_elements(*s, (void*) SIGNAL_MEMORY_COUNT, (void*) SIGNALS_MODELS_INDEX, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
-        remove_array_elements(*s, (void*) SIGNAL_MEMORY_COUNT, (void*) SIGNALS_ABSTRACTIONS_COUNTS_INDEX, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
-        remove_array_elements(*s, (void*) SIGNAL_MEMORY_COUNT, (void*) SIGNALS_ABSTRACTIONS_INDEX, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
+        // CAUTION! Do NOT try to REMOVE the abstractions, models, details,
+        // priorities, identifications!
+        // Each of them has a fixed position within the signal memory and
+        // CANNOT be removed.
+        // Trying to do so, would result in a runtime error:
+        // *** glibc detected *** double free or corruption (fasttop)
+        // because the signal memory is already freed below.
 
-        // Destroy abstractions, models, details, priorities, identifications.
+        // Deallocate abstractions, models, details, priorities, identifications.
         // CAUTION! Do NOT hand over as reference!
         // The variables are of type void**.
         // The expression (&*variable) is the same like (variable).
@@ -182,12 +176,12 @@ void deallocate_signal_memory(void* p0, void* p1) {
         deallocate_array((void*) p, p1, (void*) POINTER_ARRAY);
         deallocate_array((void*) id, p1, (void*) POINTER_ARRAY);
 
-        // Destroy signal memory.
+        // Deallocate signal memory.
         deallocate_array(p0, (void*) SIGNAL_MEMORY_COUNT, (void*) POINTER_ARRAY);
 
     } else {
 
-        log_message_debug("Could not destroy signal memory. The signal memory parameter is null.");
+        log_message_debug("Could not deallocate signal memory. The signal memory parameter is null.");
     }
 }
 

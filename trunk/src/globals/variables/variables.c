@@ -20,13 +20,14 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2006-02-02 00:29:41 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2006-02-20 16:17:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef VARIABLES_SOURCE
 #define VARIABLES_SOURCE
 
+#include <signal.h>
 #include <stdio.h>
 
 //

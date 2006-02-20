@@ -23,7 +23,7 @@
  * This file contains the functionality to:
  * - create a compound model in memory
  *
- * @version $Revision: 1.6 $ $Date: 2005-07-27 23:10:48 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2006-02-20 16:17:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -51,7 +51,7 @@ void allocate_compound(void* p0, void* p1) {
 
         log_message_debug("Allocate compound.");
 
-        // Create compound.
+        // Allocate compound.
         allocate_array(p0, (void*) COMPOUND_COUNT, (void*) POINTER_ARRAY);
 
         // The names, abstractions, models, details.
@@ -68,7 +68,7 @@ void allocate_compound(void* p0, void* p1) {
         void* dc = NULL_POINTER;
         void* ds = NULL_POINTER;
 
-        // Create names, abstractions, models, details.
+        // Allocate names, abstractions, models, details.
         allocate_array((void*) &n, p1, (void*) POINTER_ARRAY);
         allocate_array((void*) &nc, p1, (void*) POINTER_ARRAY);
         allocate_array((void*) &ns, p1, (void*) POINTER_ARRAY);
@@ -83,7 +83,6 @@ void allocate_compound(void* p0, void* p1) {
         allocate_array((void*) &ds, p1, (void*) POINTER_ARRAY);
 
         // Set names, abstractions, models, details.
-        // CAUTION! Use ascending order, as compared to destruction!
         // The p0 parameter needs to be dereferenced since it is handed over
         // as reference, but this procedure expects a normal array.
         set_array_elements(*c, (void*) NAMES_INDEX, (void*) &n, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
@@ -101,7 +100,7 @@ void allocate_compound(void* p0, void* p1) {
 
     } else {
 
-        log_message_debug("Could not create compound. The model parameter is null.");
+        log_message_debug("Could not allocate compound. The compound is null.");
     }
 }
 
@@ -120,22 +119,22 @@ void deallocate_compound(void* p0, void* p1) {
         log_message_debug("Deallocate compound.");
 
         // The names, abstractions, models, details.
-        void* n = NULL_POINTER;
-        void* nc = NULL_POINTER;
-        void* ns = NULL_POINTER;
-        void* a = NULL_POINTER;
-        void* ac = NULL_POINTER;
-        void* as = NULL_POINTER;
-        void* m = NULL_POINTER;
-        void* mc = NULL_POINTER;
-        void* ms = NULL_POINTER;
-        void* d = NULL_POINTER;
-        void* dc = NULL_POINTER;
-        void* ds = NULL_POINTER;
+        void** n = &NULL_POINTER;
+        void** nc = &NULL_POINTER;
+        void** ns = &NULL_POINTER;
+        void** a = &NULL_POINTER;
+        void** ac = &NULL_POINTER;
+        void** as = &NULL_POINTER;
+        void** m = &NULL_POINTER;
+        void** mc = &NULL_POINTER;
+        void** ms = &NULL_POINTER;
+        void** d = &NULL_POINTER;
+        void** dc = &NULL_POINTER;
+        void** ds = &NULL_POINTER;
 
         // Get names, abstractions, models, details.
-        // The p0 parameter needs to be dereferenced since it is handed over
-        // as reference, but this procedure expects a normal array.
+        // The p0 parameter (c) needs to be dereferenced since it is handed
+        // over as reference, but this procedure expects a normal array.
         get_array_elements(*c, (void*) NAMES_INDEX, (void*) &n, (void*) POINTER_ARRAY);
         get_array_elements(*c, (void*) NAMES_COUNTS_INDEX, (void*) &nc, (void*) POINTER_ARRAY);
         get_array_elements(*c, (void*) NAMES_SIZES_INDEX, (void*) &ns, (void*) POINTER_ARRAY);
@@ -149,24 +148,14 @@ void deallocate_compound(void* p0, void* p1) {
         get_array_elements(*c, (void*) DETAILS_COUNTS_INDEX, (void*) &dc, (void*) POINTER_ARRAY);
         get_array_elements(*c, (void*) DETAILS_SIZES_INDEX, (void*) &ds, (void*) POINTER_ARRAY);
 
-        // Remove names, abstractions, models, details.
-        // CAUTION! Use descending order, as compared to creation!
-        // The p0 parameter needs to be dereferenced since it is handed over
-        // as reference, but this procedure expects a normal array.
-        remove_array_elements(*c, (void*) COMPOUND_COUNT, (void*) DETAILS_SIZES_INDEX, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
-        remove_array_elements(*c, (void*) COMPOUND_COUNT, (void*) DETAILS_COUNTS_INDEX, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
-        remove_array_elements(*c, (void*) COMPOUND_COUNT, (void*) DETAILS_INDEX, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
-        remove_array_elements(*c, (void*) COMPOUND_COUNT, (void*) MODELS_SIZES_INDEX, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
-        remove_array_elements(*c, (void*) COMPOUND_COUNT, (void*) MODELS_COUNTS_INDEX, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
-        remove_array_elements(*c, (void*) COMPOUND_COUNT, (void*) MODELS_INDEX, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
-        remove_array_elements(*c, (void*) COMPOUND_COUNT, (void*) ABSTRACTIONS_SIZES_INDEX, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
-        remove_array_elements(*c, (void*) COMPOUND_COUNT, (void*) ABSTRACTIONS_COUNTS_INDEX, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
-        remove_array_elements(*c, (void*) COMPOUND_COUNT, (void*) ABSTRACTIONS_INDEX, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
-        remove_array_elements(*c, (void*) COMPOUND_COUNT, (void*) NAMES_SIZES_INDEX, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
-        remove_array_elements(*c, (void*) COMPOUND_COUNT, (void*) NAMES_COUNTS_INDEX, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
-        remove_array_elements(*c, (void*) COMPOUND_COUNT, (void*) NAMES_INDEX, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
+        // CAUTION! Do NOT try to REMOVE the names, abstractions, models, details!
+        // Each of them has a fixed position within the compound and
+        // CANNOT be removed.
+        // Trying to do so, would result in a runtime error:
+        // *** glibc detected *** double free or corruption (fasttop)
+        // because the compound is already freed below.
 
-        // Destroy names, abstractions, models, details.
+        // Deallocate names, abstractions, models, details.
         // CAUTION! Do NOT hand over as reference!
         // The variables are of type void**.
         // The expression (&*variable) is the same like (variable).
@@ -183,12 +172,12 @@ void deallocate_compound(void* p0, void* p1) {
         deallocate_array((void*) dc, p1, (void*) POINTER_ARRAY);
         deallocate_array((void*) ds, p1, (void*) POINTER_ARRAY);
 
-        // Destroy compound.
+        // Deallocate compound.
         deallocate_array(p0, (void*) COMPOUND_COUNT, (void*) POINTER_ARRAY);
 
     } else {
 
-        log_message_debug("Could not destroy compound. The model parameter is null.");
+        log_message_debug("Could not deallocate compound. The compound is null.");
     }
 }
 

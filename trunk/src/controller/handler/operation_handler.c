@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.16 $ $Date: 2006-02-09 23:13:53 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2006-02-20 16:17:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -39,6 +39,7 @@
 #include "../../applicator/interrupt.c"
 #include "../../applicator/loop.c"
 #include "../../applicator/receive.c"
+#include "../../applicator/run.c"
 #include "../../applicator/send.c"
 #include "../../applicator/shutdown.c"
 #include "../../applicator/startup.c"
@@ -60,24 +61,25 @@
  * @param p4 the signal memory
  * @param p5 the signal memory count
  * @param p6 the signal memory size
- * @param p7 the shutdown flag
- * @param p8 the signal (operation)
- * @param p9 the signal count
- * @param p10 the parameters (details)
- * @param p11 the parameters count
- * @param p12 the signal priority
- * @param p13 the signal id
+ * @param p7 the signal memory blocked flag
+ * @param p8 the interrupt request flag
+ * @param p9 the shutdown flag
+ * @param p10 the signal (operation)
+ * @param p11 the signal count
+ * @param p12 the parameters (details)
+ * @param p13 the parameters count
+ * @param p14 the signal priority
+ * @param p15 the signal id
  */
 void handle_operation(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
-    void* p7, void* p8, void* p9, void* p10, void* p11,
-    void* p12, void* p13) {
+    void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14, void* p15) {
 
     log_message_debug("\n\n");
     log_message((void*) INFO_LOG_LEVEL, (void*) HANDLE_OPERATION_MESSAGE, (void*) HANDLE_OPERATION_MESSAGE_COUNT);
 
     //?? TEST
-//??    fprintf(stderr, "TEST: Operation: %s\n", (char*) p8);
-//??    fprintf(stderr, "TEST: Operation count: %i\n", *((int*) p9));
+//??    fprintf(stderr, "TEST: Operation: %s\n", (char*) p10);
+//??    fprintf(stderr, "TEST: Operation count: %i\n", *((int*) p11));
 //??    fprintf(stderr, "TEST handler p1: %i\n", p1);
 //??    test_knowledge_memory(p1, p2, 5);
 
@@ -90,61 +92,61 @@ void handle_operation(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
     if (r == 0) {
 
-        compare_arrays(p8, p9, (void*) COPY_MODEL, (void*) COPY_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p10, p11, (void*) COPY_MODEL, (void*) COPY_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-            copy(p10, p11, p1, p2, p3, p12, p13);
+            copy(p12, p13, p1, p2, p3, p14, p15);
         }
     }
 
     if (r == 0) {
 
-        compare_arrays(p8, p9, (void*) COPY_PROPERTY_MODEL, (void*) COPY_PROPERTY_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p10, p11, (void*) COPY_PROPERTY_MODEL, (void*) COPY_PROPERTY_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-            copy_property(p10, p11, p1, p2, p3, p12, p13);
+            copy_property(p12, p13, p1, p2, p3, p14, p15);
         }
     }
 
     if (r == 0) {
 
-        compare_arrays(p8, p9, (void*) BRANCH_MODEL, (void*) BRANCH_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p10, p11, (void*) BRANCH_MODEL, (void*) BRANCH_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-            branch(p0, p1, p2, p3, p4, p5, p6, p7, p10, p11, p12, p13);
+            branch(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p12, p13, p14, p15);
         }
     }
 
     if (r == 0) {
 
-        compare_arrays(p8, p9, (void*) LOOP_MODEL, (void*) LOOP_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p10, p11, (void*) LOOP_MODEL, (void*) LOOP_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-            loop(p0, p1, p2, p3, p4, p5, p6, p7, p10, p11, p12, p13);
+            loop(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p12, p13, p14, p15);
         }
     }
 
     if (r == 0) {
 
-        compare_arrays(p8, p9, (void*) COUNT_PARTS_MODEL, (void*) COUNT_PARTS_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p10, p11, (void*) COUNT_PARTS_MODEL, (void*) COUNT_PARTS_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-            count_parts(p10, p11, p1, p2, p3);
+            count_parts(p12, p13, p1, p2, p3);
         }
     }
 
     if (r == 0) {
 
-        compare_arrays(p8, p9, (void*) BUILD_LISTNAME_MODEL, (void*) BUILD_LISTNAME_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p10, p11, (void*) BUILD_LISTNAME_MODEL, (void*) BUILD_LISTNAME_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-            build_listname(p10, p11, p1, p2, p3);
+            build_listname(p12, p13, p1, p2, p3);
         }
     }
 
@@ -158,11 +160,11 @@ void handle_operation(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
     if (r == 0) {
 
-        compare_arrays(p8, p9, (void*) COMPARE_MODEL, (void*) COMPARE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p10, p11, (void*) COMPARE_MODEL, (void*) COMPARE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-            compare(p10, p11, p1, p2, p3);
+            compare(p12, p13, p1, p2, p3);
         }
     }
 
@@ -172,11 +174,11 @@ void handle_operation(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
     if (r == 0) {
 
-        compare_arrays(p8, p9, (void*) ADD_MODEL, (void*) ADD_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p10, p11, (void*) ADD_MODEL, (void*) ADD_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-            add(p10, p11, p1, p2, p3);
+            add(p12, p13, p1, p2, p3);
         }
     }
 
@@ -186,21 +188,21 @@ void handle_operation(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
     if (r == 0) {
 
-        compare_arrays(p8, p9, (void*) CREATE_PART_MODEL, (void*) CREATE_PART_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p10, p11, (void*) CREATE_PART_MODEL, (void*) CREATE_PART_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-            create_part(p10, p11, p1, p2, p3);
+            create_part(p12, p13, p1, p2, p3);
         }
     }
 
     if (r == 0) {
 
-        compare_arrays(p8, p9, (void*) DESTROY_PART_MODEL, (void*) DESTROY_PART_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p10, p11, (void*) DESTROY_PART_MODEL, (void*) DESTROY_PART_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-            deallocate_part(p10, p11, p1, p2, p3);
+            deallocate_part(p12, p13, p1, p2, p3);
         }
     }
 
@@ -210,33 +212,33 @@ void handle_operation(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
     if (r == 0) {
 
-        compare_arrays(p8, p9, (void*) STARTUP_MODEL, (void*) STARTUP_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p10, p11, (void*) STARTUP_MODEL, (void*) STARTUP_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-            startup_service(p10, p11, p1, p2, p3, p0);
+            startup_service(p12, p13, p1, p2, p3, p0);
         }
     }
 
     if (r == 0) {
 
-        compare_arrays(p8, p9, (void*) SHUTDOWN_MODEL, (void*) SHUTDOWN_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p10, p11, (void*) SHUTDOWN_MODEL, (void*) SHUTDOWN_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-            shutdown_service(p10, p11, p1, p2, p3, p0);
+            shutdown_service(p12, p13, p1, p2, p3, p0);
         }
     }
 
     if (r == 0) {
 
-        compare_arrays(p8, p9, (void*) EXIT_MODEL, (void*) EXIT_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p10, p11, (void*) EXIT_MODEL, (void*) EXIT_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
             log_message((void*) INFO_LOG_LEVEL, (void*) SET_SHUTDOWN_FLAG_MESSAGE, (void*) SET_SHUTDOWN_FLAG_MESSAGE_COUNT);
 
-            int* f = (int*) p7;
+            int* f = (int*) p9;
             *f = 1;
         }
     }
@@ -247,41 +249,55 @@ void handle_operation(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
     if (r == 0) {
 
-        compare_arrays(p8, p9, (void*) SEND_MODEL, (void*) SEND_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p10, p11, (void*) SEND_MODEL, (void*) SEND_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-            send_message(p10, p11, p0, p1, p2, p3, p4, p5, p6, p13);
+            send_message(p12, p13, p0, p1, p2, p3, p4, p5, p6, p15);
         }
     }
 
     if (r == 0) {
 
-        compare_arrays(p8, p9, (void*) RECEIVE_MODEL, (void*) RECEIVE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p10, p11, (void*) RECEIVE_MODEL, (void*) RECEIVE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-            receive_message(p10, p11, p0, p1, p2, p3, p4, p5, p6);
+            receive_message(p12, p13, p0, p1, p2, p3, p4, p5, p6);
         }
     }
 
     if (r == 0) {
 
-        compare_arrays(p8, p9, (void*) INTERRUPT_MODEL, (void*) INTERRUPT_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p10, p11, (void*) INTERRUPT_MODEL, (void*) INTERRUPT_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-//??            interrupt_service(p10, p11, p1, p2, p3, p0);
+//??            interrupt_service(p12, p13, p1, p2, p3, p0);
         }
     }
 
     if (r == 0) {
 
-        compare_arrays(p8, p9, (void*) REFRESH_URL_MODEL, (void*) REFRESH_URL_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p10, p11, (void*) REFRESH_URL_MODEL, (void*) REFRESH_URL_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-//??            refresh_url(p10, p11, p0, p1, p2, p3, p13);
+//??            refresh_url(p12, p13, p0, p1, p2, p3, p15);
+        }
+    }
+
+    //
+    // Shell command models.
+    //
+
+    if (r == 0) {
+
+        compare_arrays(p10, p11, (void*) RUN_MODEL, (void*) RUN_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != 0) {
+
+            run(p12, p13);
         }
     }
 }

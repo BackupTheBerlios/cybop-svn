@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.10 $ $Date: 2006-02-09 23:13:53 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2006-02-20 16:17:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -199,6 +199,39 @@ static int* COBALT_BACKGROUND_CONTROL_SEQUENCE_COUNT = NUMBER_2_INTEGER_ARRAY;
 static wchar_t WHITE_BACKGROUND_CONTROL_SEQUENCE_ARRAY[] = {0x0034, 0x0037};
 static wchar_t* WHITE_BACKGROUND_CONTROL_SEQUENCE = WHITE_BACKGROUND_CONTROL_SEQUENCE_ARRAY;
 static int* WHITE_BACKGROUND_CONTROL_SEQUENCE_COUNT = NUMBER_2_INTEGER_ARRAY;
+
+//
+// Terminal input control sequences.
+//
+// Example: The "arrow up" key delivers: ESC[A
+//
+
+//?? TODO: These constants should be of type wchar_t in future!
+//?? But that means that then also the linux console input needs to be changed.
+
+/** The arrow up control sequence. */
+//?? static wchar_t ARROW_UP_CONTROL_SEQUENCE_ARRAY[] = {0x001B, 0x005B, 0x0041};
+static char ARROW_UP_CONTROL_SEQUENCE_ARRAY[] = {27, 91, 65};
+static char* ARROW_UP_CONTROL_SEQUENCE = ARROW_UP_CONTROL_SEQUENCE_ARRAY;
+static int* ARROW_UP_CONTROL_SEQUENCE_COUNT = NUMBER_3_INTEGER_ARRAY;
+
+/** The arrow down control sequence. */
+//?? static wchar_t ARROW_DOWN_CONTROL_SEQUENCE_ARRAY[] = {0x001B, 0x005B, 0x0042};
+static char ARROW_DOWN_CONTROL_SEQUENCE_ARRAY[] = {27, 91, 66};
+static char* ARROW_DOWN_CONTROL_SEQUENCE = ARROW_DOWN_CONTROL_SEQUENCE_ARRAY;
+static int* ARROW_DOWN_CONTROL_SEQUENCE_COUNT = NUMBER_3_INTEGER_ARRAY;
+
+/** The arrow left control sequence. */
+//?? static wchar_t ARROW_LEFT_CONTROL_SEQUENCE_ARRAY[] = {0x001B, 0x005B, 0x0044};
+static char ARROW_LEFT_CONTROL_SEQUENCE_ARRAY[] = {27, 91, 68};
+static char* ARROW_LEFT_CONTROL_SEQUENCE = ARROW_LEFT_CONTROL_SEQUENCE_ARRAY;
+static int* ARROW_LEFT_CONTROL_SEQUENCE_COUNT = NUMBER_3_INTEGER_ARRAY;
+
+/** The arrow right control sequence. */
+//?? static wchar_t ARROW_RIGHT_CONTROL_SEQUENCE_ARRAY[] = {0x001B, 0x005B, 0x0043};
+static char ARROW_RIGHT_CONTROL_SEQUENCE_ARRAY[] = {27, 91, 67};
+static char* ARROW_RIGHT_CONTROL_SEQUENCE = ARROW_RIGHT_CONTROL_SEQUENCE_ARRAY;
+static int* ARROW_RIGHT_CONTROL_SEQUENCE_COUNT = NUMBER_3_INTEGER_ARRAY;
 
 /* CONTROL_SEQUENCE_CONSTANTS_SOURCE */
 #endif

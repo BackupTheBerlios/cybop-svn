@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.27 $ $Date: 2006-01-30 21:30:12 $ $Author: christian $
+ * @version $Revision: 1.28 $ $Date: 2006-02-20 16:17:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -50,7 +50,7 @@
  * CAUTION! Do NOT rename this procedure to "send",
  * as that name is already used by socket functionality.
  *
- * Expected parameters (names in parentheses after Laswell):
+ * Expected parameters (names in parentheses after Lasswell):
  * - channel (channel): linux_console, tcp_socket, unix_socket, x_window_system
  * - sender (who): ip address, socket port
  * - receiver (whom): ip address, socket port

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.14 $ $Date: 2006-01-30 21:30:12 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2006-02-20 16:17:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -77,6 +77,30 @@ static int* UI_BACKGROUND_NAME_COUNT = NUMBER_10_INTEGER_ARRAY;
 static char UI_FOREGROUND_NAME_ARRAY[] = {'f', 'o', 'r', 'e', 'g', 'r', 'o', 'u', 'n', 'd'};
 static char* UI_FOREGROUND_NAME = UI_FOREGROUND_NAME_ARRAY;
 static int* UI_FOREGROUND_NAME_COUNT = NUMBER_10_INTEGER_ARRAY;
+
+//
+// User interface (ui) input names.
+//
+
+/** The arrow up name. */
+static char UI_ARROW_UP_NAME_ARRAY[] = {'a', 'r', 'r', 'o', 'w', '_', 'u', 'p'};
+static char* UI_ARROW_UP_NAME = UI_ARROW_UP_NAME_ARRAY;
+static int* UI_ARROW_UP_NAME_COUNT = NUMBER_8_INTEGER_ARRAY;
+
+/** The arrow down name. */
+static char UI_ARROW_DOWN_NAME_ARRAY[] = {'a', 'r', 'r', 'o', 'w', '_', 'd', 'o', 'w', 'n'};
+static char* UI_ARROW_DOWN_NAME = UI_ARROW_DOWN_NAME_ARRAY;
+static int* UI_ARROW_DOWN_NAME_COUNT = NUMBER_10_INTEGER_ARRAY;
+
+/** The arrow left name. */
+static char UI_ARROW_LEFT_NAME_ARRAY[] = {'a', 'r', 'r', 'o', 'w', '_', 'l', 'e', 'f', 't'};
+static char* UI_ARROW_LEFT_NAME = UI_ARROW_LEFT_NAME_ARRAY;
+static int* UI_ARROW_LEFT_NAME_COUNT = NUMBER_10_INTEGER_ARRAY;
+
+/** The arrow right name. */
+static char UI_ARROW_RIGHT_NAME_ARRAY[] = {'a', 'r', 'r', 'o', 'w', '_', 'r', 'i', 'g', 'h', 't'};
+static char* UI_ARROW_RIGHT_NAME = UI_ARROW_RIGHT_NAME_ARRAY;
+static int* UI_ARROW_RIGHT_NAME_COUNT = NUMBER_11_INTEGER_ARRAY;
 
 //
 // Textual user interface (tui) names.
@@ -396,6 +420,25 @@ static int* COMMANDS_NAME_COUNT = NUMBER_8_INTEGER_ARRAY;
 static char BLOCKING_NAME_ARRAY[] = {'b', 'l', 'o', 'c', 'k', 'i', 'n', 'g'};
 static char* BLOCKING_NAME = BLOCKING_NAME_ARRAY;
 static int* BLOCKING_NAME_COUNT = NUMBER_8_INTEGER_ARRAY;
+
+//
+// Run names.
+//
+
+/** The command name. */
+static char COMMAND_NAME_ARRAY[] = {'c', 'o', 'm', 'm', 'a', 'n', 'd'};
+static char* COMMAND_NAME = COMMAND_NAME_ARRAY;
+static int* COMMAND_NAME_COUNT = NUMBER_7_INTEGER_ARRAY;
+
+/** The all name. */
+static char LIST_DIRECTORY_CONTENTS_ALL_NAME_ARRAY[] = {'a', 'l', 'l'};
+static char* LIST_DIRECTORY_CONTENTS_ALL_NAME = LIST_DIRECTORY_CONTENTS_ALL_NAME_ARRAY;
+static int* LIST_DIRECTORY_CONTENTS_ALL_NAME_COUNT = NUMBER_3_INTEGER_ARRAY;
+
+/** The long listing name. */
+static char LIST_DIRECTORY_CONTENTS_LONG_LISTING_NAME_ARRAY[] = {'l', 'o', 'n', 'g', '_', 'l', 'i', 's', 't', 'i', 'n', 'g'};
+static char* LIST_DIRECTORY_CONTENTS_LONG_LISTING_NAME = LIST_DIRECTORY_CONTENTS_LONG_LISTING_NAME_ARRAY;
+static int* LIST_DIRECTORY_CONTENTS_LONG_LISTING_NAME_COUNT = NUMBER_12_INTEGER_ARRAY;
 
 /* NAME_CONSTANTS_SOURCE */
 #endif

@@ -24,7 +24,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.21 $ $Date: 2006-02-09 23:13:53 $ $Author: christian $
+ * @version $Revision: 1.22 $ $Date: 2006-02-20 16:17:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -37,6 +37,7 @@
 #include <termios.h>
 #include <wchar.h>
 #include "../globals/constants/abstraction_constants.c"
+#include "../globals/constants/character_constants.c"
 #include "../globals/constants/structure_constants.c"
 #include "../globals/variables/variables.c"
 #include "../memoriser/accessor/compound_accessor.c"
@@ -200,81 +201,6 @@ void test_wide_character_output() {
         putchar(0x80 | c & 0x3F);
     }
 */
-
-/*??
-    wchar_t c = 9584;
-    char new = 65;
-
-    if (c < 0x80) {
-
-        new = (char) c;
-        set_array_elements(ts, &tsc, (void*) &new, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
-        tsc++;
-
-    } else if (c < 0x800) {
-
-        new = 0xC0 | c >> 6;
-        set_array_elements(ts, &tsc, (void*) &new, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
-        tsc++;
-        new = 0x80 | c & 0x3F;
-        set_array_elements(ts, &tsc, (void*) &new, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
-        tsc++;
-
-    } else if (c < 0x10000) {
-
-        new = 0xE0 | c >> 12;
-        set_array_elements(ts, &tsc, (void*) &new, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
-        tsc++;
-        new = 0x80 | c >> 6 & 0x3F;
-        set_array_elements(ts, &tsc, (void*) &new, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
-        tsc++;
-        new = 0x80 | c & 0x3F;
-        set_array_elements(ts, &tsc, (void*) &new, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
-        tsc++;
-
-    } else if (c < 0x200000) {
-
-        new = 0xF0 | c >> 18;
-        set_array_elements(ts, &tsc, (void*) &new, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
-        tsc++;
-        new = 0x80 | c >> 12 & 0x3F;
-        set_array_elements(ts, &tsc, (void*) &new, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
-        tsc++;
-        new = 0x80 | c >> 6 & 0x3F;
-        set_array_elements(ts, &tsc, (void*) &new, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
-        tsc++;
-        new = 0x80 | c & 0x3F;
-        set_array_elements(ts, &tsc, (void*) &new, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
-        tsc++;
-    }
-*/
-
-/*??
-    A function to convert a multibyte string into a wide character string and
-    display it could be written like this (this is not a really useful example):
-
-    void showmbs(const char *src, FILE *fp) {
-
-        mbstate_t state;
-        int cnt = 0;
-        memset (state, '\0', sizeof (state));
-
-        while (1) {
-
-            wchar_t linebuf[100];
-            const char *endp = strchr (src, '\n');
-            size_t n;
-
-            // Exit if there is no more line.
-            if (endp == NULL)
-                break;
-
-            n = mbsnrtowcs(linebuf, src, endp - src, 99, state);
-            linebuf[n] = L'\0';
-            fprintf(fp, "line %d: \"%S\"\n", linebuf);
-        }
-    }
-*/
 }
 
 /**
@@ -305,6 +231,25 @@ void test_integer_to_wide_character_conversion() {
 
     // Deallocate test wide character array.
     deallocate((void*) &t, (void*) &ts, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
+}
+
+/**
+ * Tests the ascii character - wide character equality.
+ */
+void test_ascii_character_wide_character_equality() {
+
+    fputs("Test ascii character - wide character equality:\n", stdout);
+
+    char test = 'a';
+
+    if (test = *LATIN_SMALL_LETTER_A_CHARACTER) {
+
+        fputs("Characters ARE equal.\n", stdout);
+
+    } else {
+
+        fputs("Characters are NOT equal.\n", stdout);
+    }
 }
 
 /**
@@ -907,7 +852,8 @@ void test() {
 //??    test_stdout_stderr();
 //??    test_character_array_with_termination();
 //??    test_wide_character_output();
-    test_integer_to_wide_character_conversion();
+//??    test_integer_to_wide_character_conversion();
+    test_ascii_character_wide_character_equality();
 //??    test_pointer_cast();
 //??    test_character_array_single_element();
 //??    test_character_array_multiple_elements();
