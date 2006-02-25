@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!--
+    $RCSfile: xml.cybol,v $
+
+    Copyright (c) 2002-2006. Christian Heller and the CYBOP developers.
+
+    This knowledge model is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public License
+    as published by the Free Software Foundation; either version 2
+    of the License, or (at your option) any later version.
+
+    This knowledge model is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this knowledge model; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+    http://www.cybop.net
+    - Cybernetics Oriented Programming -
+
+    @version $Revision: 1.1 $ $Date: 2006-02-25 15:40:33 $ $Author: christian $
+    @author Christian Heller <christian.heller@tuxtax.de>
+/-->
+
+<!-- tag.cybol -->
+<model>
+    <part name="tag" channel="file" abstraction="cybol" model="tag.cybol">
+        <property name="number" channel="inline" abstraction="integer" model="*"/>
+        <property name="attributes" channel="file" abstraction="cybol" model="attributes.cybol">
+            <constraint name="number" channel="inline" abstraction="integer" model="*"/>
+        </property>
+    </part>
+</model>
+
+<!-- attributes.cybol -->
+<model>
+    <part name="attribute" channel="file" abstraction="cybol" model="">
+        <constraint name="choice" channel="inline" abstraction="character" model="CDATA"/>
+    </part>
+</model>
