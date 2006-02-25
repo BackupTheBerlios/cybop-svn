@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!DOCTYPE model SYSTEM "http://www.cybop.net/cybol.dtd">
+
+<note
+xmlns="http://www.cybop.net"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.cybop.net cybol.xsd">
+    <part name="" model="" model_abstraction="" position="" position_abstraction=""/>
+    <part>
+        <part name="" model="" model_abstraction=""/>
+        <part name="" model="" model_abstraction=""/>
+    </part>
+</model>

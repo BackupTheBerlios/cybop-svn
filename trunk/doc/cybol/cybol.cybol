@@ -3,7 +3,7 @@
 <!--
     $RCSfile: cybol.cybol,v $
 
-    Copyright (c) 2003-2005. Christian Heller and the CYBOP developers.
+    Copyright (c) 2002-2006. Christian Heller and the CYBOP developers.
 
     This knowledge model is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License
@@ -22,46 +22,68 @@
     http://www.cybop.net
     - Cybernetics Oriented Programming -
 
-    @version $Revision: 1.1 $ $Date: 2005-07-14 10:31:36 $ $Author: christian $
+    @version $Revision: 1.2 $ $Date: 2006-02-25 15:40:33 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->
 
 <model>
-    <part name="model" channel="file" abstraction="cybol" model="part.cybol"/>
+    <part name="model" channel="file" abstraction="cybol" model="part.cybol">
+        <property name="parts" channel="inline" abstraction="integer" model="*"/>
+    </part>
+</model>
+
+<model>
     <part name="part" channel="file" abstraction="cybol" model="property.cybol">
-        <property name="name" channel="inline" abstraction="string" model=""/>
-        <property name="channel" channel="inline" abstraction="string" model=""/>
-        <property name="abstraction" channel="inline" abstraction="string" model=""/>
-        <property name="model" channel="inline" abstraction="string" model=""/>
+        <property name="parts" channel="inline" abstraction="integer" model="*"/>
+        <property name="name" channel="inline" abstraction="character" model=""/>
+        <property name="channel" channel="inline" abstraction="character" model="">
+            <constraint name="choice" channel="inline" abstraction="character" model="inline,file,http,ftp"/>
+        </property>
+        <property name="abstraction" channel="inline" abstraction="character" model="">
+            <constraint name="choice" channel="inline" abstraction="character" model="cybol,knowledge,boolean,integer,float,character"/>
+        </property>
+        <property name="model" channel="inline" abstraction="character" model=""/>
     </part>
+</model>
+
+<model>
     <part name="property" channel="file" abstraction="cybol" model="constraint.cybol">
-        <property name="name" channel="inline" abstraction="string" model=""/>
-        <property name="channel" channel="inline" abstraction="string" model=""/>
-        <property name="abstraction" channel="inline" abstraction="string" model=""/>
-        <property name="model" channel="inline" abstraction="string" model=""/>
+        <property name="parts" channel="inline" abstraction="integer" model="*"/>
+        <property name="name" channel="inline" abstraction="character" model=""/>
+        <property name="channel" channel="inline" abstraction="character" model="">
+            <constraint name="choice" channel="inline" abstraction="character" model="inline,file,http,ftp"/>
+        </property>
+        <property name="abstraction" channel="inline" abstraction="character" model="">
+            <constraint name="choice" channel="inline" abstraction="character" model="cybol,knowledge,boolean,integer,float,character"/>
+        </property>
+        <property name="model" channel="inline" abstraction="character" model=""/>
     </part>
+</model>
+
+<model>
     <part name="constraint" channel="file" abstraction="cybol" model="">
-        <property name="name" channel="inline" abstraction="string" model=""/>
-        <property name="channel" channel="inline" abstraction="string" model=""/>
-        <property name="abstraction" channel="inline" abstraction="string" model=""/>
-        <property name="model" channel="inline" abstraction="string" model=""/>
+        <property name="parts" channel="inline" abstraction="integer" model="0"/>
+        <property name="name" channel="inline" abstraction="character" model=""/>
+        <property name="channel" channel="inline" abstraction="character" model="">
+            <constraint name="choice" channel="inline" abstraction="character" model="inline,file,http,ftp"/>
+        </property>
+        <property name="abstraction" channel="inline" abstraction="character" model="">
+            <constraint name="choice" channel="inline" abstraction="character" model="cybol,knowledge,boolean,integer,float,character"/>
+        </property>
+        <property name="model" channel="inline" abstraction="character" model=""/>
     </part>
 </model>
 
 <!-- Short version. -->
 
-    <part name="schema" channel="file" abstraction="cybol" model="schema.cybol">
-        <property name="name" channel="inline" abstraction="string" model=""/>
-        <property name="channel" channel="inline" abstraction="string" model=""/>
-        <property name="abstraction" channel="inline" abstraction="string" model=""/>
-        <property name="model" channel="inline" abstraction="string" model=""/>
-    </part>
-
-TEST
-
-    <part name="schema" channel="file" abstraction="cybol" model="schema.cybol">
-        <property name="name" channel="inline" abstraction="string" model=""/>
-        <property name="channel" channel="inline" abstraction="string" model=""/>
-        <property name="abstraction" channel="inline" abstraction="string" model=""/>
-        <property name="model" channel="inline" abstraction="string" model=""/>
-    </part>
+<name="schema" channel="file" abstraction="cybol" model="schema.cybol">
+    <name="number" channel="inline" abstraction="integer" model="*"/>
+    <name="name" channel="inline" abstraction="character" model=""/>
+    <name="channel" channel="inline" abstraction="character" model="">
+        <name="choice" channel="inline" abstraction="character" model="inline,file,http,ftp"/>
+    </>
+    <name="abstraction" channel="inline" abstraction="character" model="">
+        <name="choice" channel="inline" abstraction="character" model="cybol,knowledge,boolean,integer,float,character"/>
+    </>
+    <name="model" channel="inline" abstraction="character" model=""/>
+</>
