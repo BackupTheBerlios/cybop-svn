@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2006-02-20 16:17:26 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2006-03-09 22:45:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -126,7 +126,9 @@ void startup_globals() {
         chown(n, o, g);
 
         // The file access rights.
-        int r = S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP;
+        //?? TODO: When trying to cross-compile cyboi for windows,
+        //?? the two S_IRGRP and S_IWGRP were not recognised by mingw.
+        int r = S_IRUSR | S_IWUSR; //?? | S_IRGRP | S_IWGRP;
 
         // Set file access rights.
         chmod(n, r);

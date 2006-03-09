@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.12 $ $Date: 2006-02-20 16:17:26 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2006-03-09 22:45:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -394,10 +394,25 @@ static char RUN_MODEL_ARRAY[] = {'r', 'u', 'n'};
 static char* RUN_MODEL = RUN_MODEL_ARRAY;
 static int* RUN_MODEL_COUNT = NUMBER_3_INTEGER_ARRAY;
 
+/** The run archive model. */
+static char RUN_ARCHIVE_MODEL_ARRAY[] = {'a', 'r', 'c', 'h', 'i', 'v', 'e'};
+static char* RUN_ARCHIVE_MODEL = RUN_ARCHIVE_MODEL_ARRAY;
+static int* RUN_ARCHIVE_MODEL_COUNT = NUMBER_7_INTEGER_ARRAY;
+
+/** The run copy model. */
+static char RUN_COPY_MODEL_ARRAY[] = {'c', 'o', 'p', 'y'};
+static char* RUN_COPY_MODEL = RUN_COPY_MODEL_ARRAY;
+static int* RUN_COPY_MODEL_COUNT = NUMBER_4_INTEGER_ARRAY;
+
 /** The list directory contents model. */
-static char LIST_DIRECTORY_CONTENTS_MODEL_ARRAY[] = {'l', 'i', 's', 't', '_', 'd', 'i', 'r', 'e', 'c', 't', 'o', 'r', 'y', '_', 'c', 'o', 'n', 't', 'e', 'n', 't', 's'};
-static char* LIST_DIRECTORY_CONTENTS_MODEL = LIST_DIRECTORY_CONTENTS_MODEL_ARRAY;
-static int* LIST_DIRECTORY_CONTENTS_MODEL_COUNT = NUMBER_23_INTEGER_ARRAY;
+static char RUN_LIST_DIRECTORY_CONTENTS_MODEL_ARRAY[] = {'l', 'i', 's', 't', '_', 'd', 'i', 'r', 'e', 'c', 't', 'o', 'r', 'y', '_', 'c', 'o', 'n', 't', 'e', 'n', 't', 's'};
+static char* RUN_LIST_DIRECTORY_CONTENTS_MODEL = RUN_LIST_DIRECTORY_CONTENTS_MODEL_ARRAY;
+static int* RUN_LIST_DIRECTORY_CONTENTS_MODEL_COUNT = NUMBER_23_INTEGER_ARRAY;
+
+/** The run program model. */
+static char RUN_PROGRAM_MODEL_ARRAY[] = {'p', 'r', 'o', 'g', 'r', 'a', 'm'};
+static char* RUN_PROGRAM_MODEL = RUN_PROGRAM_MODEL_ARRAY;
+static int* RUN_PROGRAM_MODEL_COUNT = NUMBER_7_INTEGER_ARRAY;
 
 /* MODEL_CONSTANTS_SOURCE */
 #endif

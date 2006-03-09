@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2006-02-20 16:17:26 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2006-03-09 22:45:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -81,14 +81,14 @@ void run_list_directory_contents(void* p0, void* p1) {
 
     // Get all option.
     get_compound_element_by_name(p0, p1,
-        (void*) LIST_DIRECTORY_CONTENTS_ALL_NAME, (void*) LIST_DIRECTORY_CONTENTS_ALL_NAME_COUNT,
+        (void*) RUN_LIST_DIRECTORY_CONTENTS_ALL_NAME, (void*) RUN_LIST_DIRECTORY_CONTENTS_ALL_NAME_COUNT,
         (void*) &alla, (void*) &allac, (void*) &allas,
         (void*) &allm, (void*) &allmc, (void*) &allms,
         (void*) &alld, (void*) &alldc, (void*) &allds);
 
     // Get long listing option.
     get_compound_element_by_name(p0, p1,
-        (void*) LIST_DIRECTORY_CONTENTS_LONG_LISTING_NAME, (void*) LIST_DIRECTORY_CONTENTS_LONG_LISTING_NAME_COUNT,
+        (void*) RUN_LIST_DIRECTORY_CONTENTS_LONG_LISTING_NAME, (void*) RUN_LIST_DIRECTORY_CONTENTS_LONG_LISTING_NAME_COUNT,
         (void*) &longlistinga, (void*) &longlistingac, (void*) &longlistingas,
         (void*) &longlistingm, (void*) &longlistingmc, (void*) &longlistingms,
         (void*) &longlistingd, (void*) &longlistingdc, (void*) &longlistingds);
@@ -243,8 +243,6 @@ void run_list_directory_contents(void* p0, void* p1) {
     // Assemble command option by adding the null termination character.
     set_array_elements(command, (void*) &commandc, (void*) NULL_CONTROL_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
     commandc = commandc + *PRIMITIVE_COUNT;
-
-    fprintf(stdout, "TEST command %s\n", (char*) command);
 
     //
     // Null pointer argument.

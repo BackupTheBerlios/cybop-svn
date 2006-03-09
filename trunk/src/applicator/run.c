@@ -20,14 +20,17 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2006-02-20 16:17:26 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2006-03-09 22:45:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef RUN_SOURCE
 #define RUN_SOURCE
 
+#include "../applicator/run/run_archive.c"
+#include "../applicator/run/run_copy.c"
 #include "../applicator/run/run_list_directory_contents.c"
+#include "../applicator/run/run_program.c"
 #include "../globals/constants/abstraction_constants.c"
 #include "../globals/constants/log_constants.c"
 #include "../globals/constants/model_constants.c"
@@ -71,7 +74,7 @@ void run(void* p0, void* p1) {
 
     // Get command.
     get_compound_element_by_name(p0, p1,
-        (void*) COMMAND_NAME, (void*) COMMAND_NAME_COUNT,
+        (void*) RUN_COMMAND_NAME, (void*) RUN_COMMAND_NAME_COUNT,
         (void*) &ca, (void*) &cac, (void*) &cas,
         (void*) &cm, (void*) &cmc, (void*) &cms,
         (void*) &cd, (void*) &cdc, (void*) &cds);
@@ -81,11 +84,41 @@ void run(void* p0, void* p1) {
 
     if (r == 0) {
 
-        compare_arrays(*cm, *cmc, (void*) LIST_DIRECTORY_CONTENTS_MODEL, (void*) LIST_DIRECTORY_CONTENTS_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(*cm, *cmc, (void*) RUN_PROGRAM_MODEL, (void*) RUN_PROGRAM_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != 0) {
+
+            run_program(p0, p1);
+        }
+    }
+
+    if (r == 0) {
+
+        compare_arrays(*cm, *cmc, (void*) RUN_LIST_DIRECTORY_CONTENTS_MODEL, (void*) RUN_LIST_DIRECTORY_CONTENTS_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
             run_list_directory_contents(p0, p1);
+        }
+    }
+
+    if (r == 0) {
+
+        compare_arrays(*cm, *cmc, (void*) RUN_COPY_MODEL, (void*) RUN_COPY_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != 0) {
+
+            run_copy(p0, p1);
+        }
+    }
+
+    if (r == 0) {
+
+        compare_arrays(*cm, *cmc, (void*) RUN_ARCHIVE_MODEL, (void*) RUN_ARCHIVE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != 0) {
+
+            run_archive(p0, p1);
         }
     }
 }

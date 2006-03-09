@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.15 $ $Date: 2006-02-20 16:17:26 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2006-03-09 22:45:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -426,19 +426,54 @@ static int* BLOCKING_NAME_COUNT = NUMBER_8_INTEGER_ARRAY;
 //
 
 /** The command name. */
-static char COMMAND_NAME_ARRAY[] = {'c', 'o', 'm', 'm', 'a', 'n', 'd'};
-static char* COMMAND_NAME = COMMAND_NAME_ARRAY;
-static int* COMMAND_NAME_COUNT = NUMBER_7_INTEGER_ARRAY;
+static char RUN_COMMAND_NAME_ARRAY[] = {'c', 'o', 'm', 'm', 'a', 'n', 'd'};
+static char* RUN_COMMAND_NAME = RUN_COMMAND_NAME_ARRAY;
+static int* RUN_COMMAND_NAME_COUNT = NUMBER_7_INTEGER_ARRAY;
 
-/** The all name. */
-static char LIST_DIRECTORY_CONTENTS_ALL_NAME_ARRAY[] = {'a', 'l', 'l'};
-static char* LIST_DIRECTORY_CONTENTS_ALL_NAME = LIST_DIRECTORY_CONTENTS_ALL_NAME_ARRAY;
-static int* LIST_DIRECTORY_CONTENTS_ALL_NAME_COUNT = NUMBER_3_INTEGER_ARRAY;
+/** The archive create name. */
+static char RUN_ARCHIVE_CREATE_NAME_ARRAY[] = {'c', 'r', 'e', 'a', 't', 'e'};
+static char* RUN_ARCHIVE_CREATE_NAME = RUN_ARCHIVE_CREATE_NAME_ARRAY;
+static int* RUN_ARCHIVE_CREATE_NAME_COUNT = NUMBER_6_INTEGER_ARRAY;
 
-/** The long listing name. */
-static char LIST_DIRECTORY_CONTENTS_LONG_LISTING_NAME_ARRAY[] = {'l', 'o', 'n', 'g', '_', 'l', 'i', 's', 't', 'i', 'n', 'g'};
-static char* LIST_DIRECTORY_CONTENTS_LONG_LISTING_NAME = LIST_DIRECTORY_CONTENTS_LONG_LISTING_NAME_ARRAY;
-static int* LIST_DIRECTORY_CONTENTS_LONG_LISTING_NAME_COUNT = NUMBER_12_INTEGER_ARRAY;
+/** The archive update name. */
+static char RUN_ARCHIVE_UPDATE_NAME_ARRAY[] = {'u', 'p', 'd', 'a', 't', 'e'};
+static char* RUN_ARCHIVE_UPDATE_NAME = RUN_ARCHIVE_UPDATE_NAME_ARRAY;
+static int* RUN_ARCHIVE_UPDATE_NAME_COUNT = NUMBER_6_INTEGER_ARRAY;
+
+/** The archive bzip2 name. */
+static char RUN_ARCHIVE_BZIP2_NAME_ARRAY[] = {'b', 'z', 'i', 'p', '2'};
+static char* RUN_ARCHIVE_BZIP2_NAME = RUN_ARCHIVE_BZIP2_NAME_ARRAY;
+static int* RUN_ARCHIVE_BZIP2_NAME_COUNT = NUMBER_5_INTEGER_ARRAY;
+
+/** The copy recursive name. */
+static char RUN_COPY_RECURSIVE_NAME_ARRAY[] = {'r', 'e', 'c', 'u', 'r', 's', 'i', 'v', 'e'};
+static char* RUN_COPY_RECURSIVE_NAME = RUN_COPY_RECURSIVE_NAME_ARRAY;
+static int* RUN_COPY_RECURSIVE_NAME_COUNT = NUMBER_9_INTEGER_ARRAY;
+
+/** The copy source name. */
+static char RUN_COPY_SOURCE_NAME_ARRAY[] = {'s', 'o', 'u', 'r', 'c', 'e'};
+static char* RUN_COPY_SOURCE_NAME = RUN_COPY_SOURCE_NAME_ARRAY;
+static int* RUN_COPY_SOURCE_NAME_COUNT = NUMBER_6_INTEGER_ARRAY;
+
+/** The copy destination name. */
+static char RUN_COPY_DESTINATION_NAME_ARRAY[] = {'d', 'e', 's', 't', 'i', 'n', 'a', 't', 'i', 'o', 'n'};
+static char* RUN_COPY_DESTINATION_NAME = RUN_COPY_DESTINATION_NAME_ARRAY;
+static int* RUN_COPY_DESTINATION_NAME_COUNT = NUMBER_11_INTEGER_ARRAY;
+
+/** The list directory contents all name. */
+static char RUN_LIST_DIRECTORY_CONTENTS_ALL_NAME_ARRAY[] = {'a', 'l', 'l'};
+static char* RUN_LIST_DIRECTORY_CONTENTS_ALL_NAME = RUN_LIST_DIRECTORY_CONTENTS_ALL_NAME_ARRAY;
+static int* RUN_LIST_DIRECTORY_CONTENTS_ALL_NAME_COUNT = NUMBER_3_INTEGER_ARRAY;
+
+/** The list directory contents long listing name. */
+static char RUN_LIST_DIRECTORY_CONTENTS_LONG_LISTING_NAME_ARRAY[] = {'l', 'o', 'n', 'g', '_', 'l', 'i', 's', 't', 'i', 'n', 'g'};
+static char* RUN_LIST_DIRECTORY_CONTENTS_LONG_LISTING_NAME = RUN_LIST_DIRECTORY_CONTENTS_LONG_LISTING_NAME_ARRAY;
+static int* RUN_LIST_DIRECTORY_CONTENTS_LONG_LISTING_NAME_COUNT = NUMBER_12_INTEGER_ARRAY;
+
+/** The program program name. */
+static char RUN_PROGRAM_PROGRAM_NAME_ARRAY[] = {'p', 'r', 'o', 'g', 'r', 'a', 'm'};
+static char* RUN_PROGRAM_PROGRAM_NAME = RUN_PROGRAM_PROGRAM_NAME_ARRAY;
+static int* RUN_PROGRAM_PROGRAM_NAME_COUNT = NUMBER_7_INTEGER_ARRAY;
 
 /* NAME_CONSTANTS_SOURCE */
 #endif
