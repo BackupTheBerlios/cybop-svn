@@ -20,13 +20,15 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2006-02-20 16:17:26 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2006-03-13 23:16:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
 
 #ifndef SHUTDOWN_LINUX_CONSOLE_SOURCE
 #define SHUTDOWN_LINUX_CONSOLE_SOURCE
+
+#ifdef LINUX_OPERATING_SYSTEM
 
 #include <termios.h>
 #include "../../globals/constants/integer_constants.c"
@@ -88,6 +90,9 @@ void shutdown_linux_console(void* p0, void* p1, void* p2, void* p3) {
         log_message_debug("WARNING: Could not shutdown linux console. There is no linux console running.");
     }
 }
+
+/* LINUX_OPERATING_SYSTEM */
+#endif
 
 /* SHUTDOWN_LINUX_CONSOLE_SOURCE */
 #endif

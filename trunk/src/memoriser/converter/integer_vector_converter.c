@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.13 $ $Date: 2006-02-09 23:13:53 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2006-03-13 23:16:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -200,7 +200,7 @@ void serialise_integer_wide(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (p2 != NULL_POINTER) {
 
-        int* ds = (int*) p2;
+        size_t* ds = (size_t*) p2;
 
         if (p1 != NULL_POINTER) {
 

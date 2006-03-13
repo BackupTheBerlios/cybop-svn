@@ -24,7 +24,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.22 $ $Date: 2006-02-20 16:17:26 $ $Author: christian $
+ * @version $Revision: 1.23 $ $Date: 2006-03-13 23:16:54 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -34,7 +34,10 @@
 
 #include <locale.h>
 #include <stdio.h>
+#ifdef LINUX_OPERATING_SYSTEM
 #include <termios.h>
+/* LINUX_OPERATING_SYSTEM */
+#endif
 #include <wchar.h>
 #include "../globals/constants/abstraction_constants.c"
 #include "../globals/constants/character_constants.c"
@@ -44,6 +47,23 @@
 #include "../memoriser/allocator.c"
 #include "../memoriser/array.c"
 #include "../memoriser/converter.c"
+
+/**
+ * Tests the preprocessor directives.
+ */
+void test_preprocessor_directives() {
+
+    fputs("Test preprocessor directives:\n", stdout);
+
+#ifdef LINUX_OPERATING_SYSTEM
+    fputs("LINUX\n", stdout);
+#elif WINDOWS_OPERATING_SYSTEM
+    fputs("WINDOWS\n", stdout);
+#else
+    fputs("OTHER\n", stdout);
+/* LINUX_OPERATING_SYSTEM */
+#endif
+}
 
 /**
  * Tests the standard output and error stream.
@@ -83,6 +103,7 @@ void test_wide_character_output() {
 
     fputs("Test wide character array with termination:\n", stdout);
 
+#ifdef LINUX_OPERATING_SYSTEM
     // Possible locales are: LANG, LC_CTYPE, LC_ALL.
     // CAUTION! This setting is necessary for UTF-8 Unicode characters to work.
     char* loc = setlocale(LC_ALL, "");
@@ -201,6 +222,7 @@ void test_wide_character_output() {
         putchar(0x80 | c & 0x3F);
     }
 */
+#endif
 }
 
 /**
@@ -214,7 +236,7 @@ void test_integer_to_wide_character_conversion() {
     void* t = NULL_POINTER;
     int tc = 0;
     // One byte for the wide character and another for the trailing null.
-    int ts = 2;
+    size_t ts = 2;
 
     // Allocate test wide character array.
     allocate((void*) &t, (void*) &ts, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
@@ -849,11 +871,12 @@ void test() {
     // int x = 2;
     // fprintf(stderr, "The value of x is: %d\n", x);
 
+    test_preprocessor_directives();
 //??    test_stdout_stderr();
 //??    test_character_array_with_termination();
 //??    test_wide_character_output();
 //??    test_integer_to_wide_character_conversion();
-    test_ascii_character_wide_character_equality();
+//??    test_ascii_character_wide_character_equality();
 //??    test_pointer_cast();
 //??    test_character_array_single_element();
 //??    test_character_array_multiple_elements();

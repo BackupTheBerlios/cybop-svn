@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2006-02-09 23:13:53 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2006-03-13 23:16:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -1163,7 +1163,7 @@ void serialise_linux_console_shape(void* p0, void* p1, void* p2, void* p3, void*
         // The character.
         void* c = NULL_POINTER;
         int cc = 0;
-        int cs = 0;
+        size_t cs = 0;
         // The hidden property.
         int h = 0;
         // The inverse property.

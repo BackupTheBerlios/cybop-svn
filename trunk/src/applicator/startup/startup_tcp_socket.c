@@ -20,13 +20,15 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.14 $ $Date: 2006-01-02 11:56:01 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2006-03-13 23:16:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
 
 #ifndef STARTUP_TCP_SOCKET_SOURCE
 #define STARTUP_TCP_SOCKET_SOURCE
+
+#ifdef LINUX_OPERATING_SYSTEM
 
 #include <sys/types.h>
 #include <sys/socket.h>
@@ -173,6 +175,9 @@ void startup_tcp_socket(void* internals, void* know, void* know_count, void* kno
         log_message_debug("ERROR: Could not start up tcp socket. The socket port is null.");
     }
 }
+
+/* LINUX_OPERATING_SYSTEM */
+#endif
 
 /* STARTUP_TCP_SOCKET_SOURCE */
 #endif

@@ -20,12 +20,14 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2006-02-20 16:17:26 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2006-03-13 23:16:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef RECEIVE_LINUX_CONSOLE_SOURCE
 #define RECEIVE_LINUX_CONSOLE_SOURCE
+
+#ifdef LINUX_OPERATING_SYSTEM
 
 #include <pthread.h>
 #include <signal.h>
@@ -382,6 +384,9 @@ void receive_linux_console(void* p0, void* p1, void* p2, void* p3) {
     // Create thread.
     pthread_create(&t, (pthread_attr_t*) NULL_POINTER, (void*) &receive_linux_console_thread, p0);
 }
+
+/* LINUX_OPERATING_SYSTEM */
+#endif
 
 /* RECEIVE_LINUX_CONSOLE_SOURCE */
 #endif

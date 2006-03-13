@@ -20,13 +20,15 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2006-01-02 11:56:01 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2006-03-13 23:16:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
 
 #ifndef STARTUP_UNIX_SOCKET_SOURCE
 #define STARTUP_UNIX_SOCKET_SOURCE
+
+#ifdef LINUX_OPERATING_SYSTEM
 
 #include "../../globals/constants/log_constants.c"
 /*??
@@ -62,6 +64,9 @@ void startup_unix_socket(void* internals, void* know, void* know_count, void* kn
 
     log_message_debug("Startup unix socket.");
 }
+
+/* LINUX_OPERATING_SYSTEM */
+#endif
 
 /* STARTUP_UNIX_SOCKET_SOURCE */
 #endif

@@ -20,13 +20,15 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.25 $ $Date: 2006-02-20 16:17:26 $ $Author: christian $
+ * @version $Revision: 1.26 $ $Date: 2006-03-13 23:16:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
 
 #ifndef RECEIVE_TCP_SOCKET_SOURCE
 #define RECEIVE_TCP_SOCKET_SOURCE
+
+#ifdef LINUX_OPERATING_SYSTEM
 
 #include <arpa/inet.h>
 #include <sys/types.h>
@@ -1314,6 +1316,9 @@ void receive_tcp_socket(void* p0, void* p1, void* p2, void* p3,
         log_message_debug("Could not receive via tcp socket. The internal memory is null.");
     }
 }
+
+/* LINUX_OPERATING_SYSTEM */
+#endif
 
 /* RECEIVE_TCP_SOCKET_SOURCE */
 #endif

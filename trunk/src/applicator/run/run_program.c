@@ -1,5 +1,5 @@
 /*
- * $RCSfile: run_list_directory_contents.c,v $
+ * $RCSfile: run_program.c,v $
  *
  * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
  *
@@ -20,12 +20,12 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2006-03-13 23:16:53 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2006-03-13 23:16:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef RUN_LIST_DIRECTORY_CONTENTS_SOURCE
-#define RUN_LIST_DIRECTORY_CONTENTS_SOURCE
+#ifndef RUN_PROGRAM_SOURCE
+#define RUN_PROGRAM_SOURCE
 
 #include <unistd.h>
 #include "../../applicator/run/run_execute.c"
@@ -43,54 +43,34 @@
 #include "../../memoriser/allocator/character_vector_allocator.c"
 
 /**
- * Runs the list directory contents command.
+ * Runs a program.
  *
  * @param p0 the parameters
  * @param p1 the parameters count
  */
-void run_list_directory_contents(void* p0, void* p1) {
+void run_program(void* p0, void* p1) {
 
-    log_message_debug("Run list directory contents command.");
+    log_message_debug("Run program command.");
 
-    // The all abstraction.
-    void** alla = &NULL_POINTER;
-    void** allac = &NULL_POINTER;
-    void** allas = &NULL_POINTER;
-    // The all model.
-    int** allm = (int**) &NULL_POINTER;
-    void** allmc = &NULL_POINTER;
-    void** allms = &NULL_POINTER;
-    // The all details.
-    void** alld = &NULL_POINTER;
-    void** alldc = &NULL_POINTER;
-    void** allds = &NULL_POINTER;
+    // The program abstraction.
+    void** programa = &NULL_POINTER;
+    void** programac = &NULL_POINTER;
+    void** programas = &NULL_POINTER;
+    // The program model.
+    int** programm = (int**) &NULL_POINTER;
+    void** programmc = &NULL_POINTER;
+    void** programms = &NULL_POINTER;
+    // The program details.
+    void** programd = &NULL_POINTER;
+    void** programdc = &NULL_POINTER;
+    void** programds = &NULL_POINTER;
 
-    // The long listing abstraction.
-    void** longlistinga = &NULL_POINTER;
-    void** longlistingac = &NULL_POINTER;
-    void** longlistingas = &NULL_POINTER;
-    // The long listing model.
-    int** longlistingm = (int**) &NULL_POINTER;
-    void** longlistingmc = &NULL_POINTER;
-    void** longlistingms = &NULL_POINTER;
-    // The long listing details.
-    void** longlistingd = &NULL_POINTER;
-    void** longlistingdc = &NULL_POINTER;
-    void** longlistingds = &NULL_POINTER;
-
-    // Get all option.
+    // Get program option.
     get_compound_element_by_name(p0, p1,
-        (void*) RUN_LIST_DIRECTORY_CONTENTS_ALL_NAME, (void*) RUN_LIST_DIRECTORY_CONTENTS_ALL_NAME_COUNT,
-        (void*) &alla, (void*) &allac, (void*) &allas,
-        (void*) &allm, (void*) &allmc, (void*) &allms,
-        (void*) &alld, (void*) &alldc, (void*) &allds);
-
-    // Get long listing option.
-    get_compound_element_by_name(p0, p1,
-        (void*) RUN_LIST_DIRECTORY_CONTENTS_LONG_LISTING_NAME, (void*) RUN_LIST_DIRECTORY_CONTENTS_LONG_LISTING_NAME_COUNT,
-        (void*) &longlistinga, (void*) &longlistingac, (void*) &longlistingas,
-        (void*) &longlistingm, (void*) &longlistingmc, (void*) &longlistingms,
-        (void*) &longlistingd, (void*) &longlistingdc, (void*) &longlistingds);
+        (void*) RUN_PROGRAM_PROGRAM_NAME, (void*) RUN_PROGRAM_PROGRAM_NAME_COUNT,
+        (void*) &programa, (void*) &programac, (void*) &programas,
+        (void*) &programm, (void*) &programmc, (void*) &programms,
+        (void*) &programd, (void*) &programdc, (void*) &programds);
 
     // The arguments vector.
     void* arg = NULL_POINTER;
@@ -158,72 +138,17 @@ void run_list_directory_contents(void* p0, void* p1) {
     //
 
     // Determine command size.
-    commands = *LIST_DIRECTORY_CONTENTS_UNIX_SHELL_COMMAND_COUNT;
+    commands = *((int*) programmc);
 
     // Allocate command.
     allocate_array((void*) &command, (void*) &commands, (void*) CHARACTER_ARRAY);
 
-    // Assemble command by first copying the actual command
-    // and then adding the null termination character.
-    set_array_elements(command, (void*) &commandc, (void*) LIST_DIRECTORY_CONTENTS_UNIX_SHELL_COMMAND, (void*) LIST_DIRECTORY_CONTENTS_UNIX_SHELL_COMMAND_COUNT, (void*) CHARACTER_ARRAY);
-    commandc = commandc + *LIST_DIRECTORY_CONTENTS_UNIX_SHELL_COMMAND_COUNT;
+    // Assemble command by copying the actual command.
+    set_array_elements(command, (void*) &commandc, *programm, *programmc, (void*) CHARACTER_ARRAY);
+    commandc = commandc + *((int*) *programmc);
 
     // Increase arguments vector size for command argument.
     args++;
-
-    //
-    // All option.
-    //
-
-    if (*allm != NULL_POINTER) {
-
-        if (**allm == 1) {
-
-            // Resize command, if necessary.
-            // One extra place for space character.
-            if ((commandc + *PRIMITIVE_COUNT + *LIST_DIRECTORY_CONTENTS_UNIX_SHELL_COMMAND_ALL_COUNT) >= commands) {
-
-                // Determine command size.
-                commands = commandc * *POINTER_VECTOR_REALLOCATE_FACTOR + *PRIMITIVE_COUNT + *LIST_DIRECTORY_CONTENTS_UNIX_SHELL_COMMAND_ALL_COUNT;
-
-                reallocate_pointer_vector((void*) &command, (void*) &commandc, (void*) &commands);
-            }
-
-            // Assemble all option by first copying the actual argument
-            // and then adding the null termination character.
-            set_array_elements(command, (void*) &commandc, (void*) SPACE_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
-            commandc = commandc + *PRIMITIVE_COUNT;
-            set_array_elements(command, (void*) &commandc, (void*) LIST_DIRECTORY_CONTENTS_UNIX_SHELL_COMMAND_ALL, (void*) LIST_DIRECTORY_CONTENTS_UNIX_SHELL_COMMAND_ALL_COUNT, (void*) CHARACTER_ARRAY);
-            commandc = commandc + *LIST_DIRECTORY_CONTENTS_UNIX_SHELL_COMMAND_ALL_COUNT;
-        }
-    }
-
-    //
-    // Long listing option.
-    //
-
-    if (*longlistingm != NULL_POINTER) {
-
-        if (**longlistingm == 1) {
-
-            // Resize command, if necessary.
-            // One extra place for space character.
-            if ((commandc + *PRIMITIVE_COUNT + *LIST_DIRECTORY_CONTENTS_UNIX_SHELL_COMMAND_LONG_LISTING_COUNT) >= commands) {
-
-                // Determine command size.
-                commands = commandc * *POINTER_VECTOR_REALLOCATE_FACTOR + *PRIMITIVE_COUNT + *LIST_DIRECTORY_CONTENTS_UNIX_SHELL_COMMAND_LONG_LISTING_COUNT;
-
-                reallocate_pointer_vector((void*) &command, (void*) &commandc, (void*) &commands);
-            }
-
-            // Assemble long listing option by first copying the actual argument
-            // and then adding the null termination character.
-            set_array_elements(command, (void*) &commandc, (void*) SPACE_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
-            commandc = commandc + *PRIMITIVE_COUNT;
-            set_array_elements(command, (void*) &commandc, (void*) LIST_DIRECTORY_CONTENTS_UNIX_SHELL_COMMAND_LONG_LISTING, (void*) LIST_DIRECTORY_CONTENTS_UNIX_SHELL_COMMAND_LONG_LISTING_COUNT, (void*) CHARACTER_ARRAY);
-            commandc = commandc + *LIST_DIRECTORY_CONTENTS_UNIX_SHELL_COMMAND_LONG_LISTING_COUNT;
-        }
-    }
 
     //
     // Null termination.
@@ -242,6 +167,8 @@ void run_list_directory_contents(void* p0, void* p1) {
     // Assemble command option by adding the null termination character.
     set_array_elements(command, (void*) &commandc, (void*) NULL_CONTROL_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
     commandc = commandc + *PRIMITIVE_COUNT;
+
+    fprintf(stdout, "TEST command %s\n", (char*) command);
 
     //
     // Null pointer argument.
@@ -300,5 +227,5 @@ void run_list_directory_contents(void* p0, void* p1) {
     deallocate_pointer_vector((void*) &arg, (void*) &args);
 }
 
-/* RUN_LIST_DIRECTORY_CONTENTS_SOURCE */
+/* RUN_PROGRAM_SOURCE */
 #endif

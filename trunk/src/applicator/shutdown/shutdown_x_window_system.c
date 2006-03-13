@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.10 $ $Date: 2006-01-02 11:56:01 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2006-03-13 23:16:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  *
@@ -43,6 +43,8 @@
 
 #ifndef SHUTDOWN_X_WINDOW_SYSTEM_SOURCE
 #define SHUTDOWN_X_WINDOW_SYSTEM_SOURCE
+
+#ifdef LINUX_OPERATING_SYSTEM
 
 #include <X11/Xlib.h>
 #include "../../globals/constants/integer_constants.c"
@@ -174,6 +176,9 @@ void shutdown_x_window_system(void* p0, void* p1, void* p2, void* p3) {
         log_message_debug("WARNING: Could not shutdown x window system. There is no x window system running.");
     }
 }
+
+/* LINUX_OPERATING_SYSTEM */
+#endif
 
 /* SHUTDOWN_X_WINDOW_SYSTEM_SOURCE */
 #endif

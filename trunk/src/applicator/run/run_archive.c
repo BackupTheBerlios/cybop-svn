@@ -1,5 +1,5 @@
 /*
- * $RCSfile: run_list_directory_contents.c,v $
+ * $RCSfile: run_archive.c,v $
  *
  * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
  *
@@ -20,12 +20,12 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2006-03-13 23:16:53 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2006-03-13 23:16:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef RUN_LIST_DIRECTORY_CONTENTS_SOURCE
-#define RUN_LIST_DIRECTORY_CONTENTS_SOURCE
+#ifndef RUN_ARCHIVE_SOURCE
+#define RUN_ARCHIVE_SOURCE
 
 #include <unistd.h>
 #include "../../applicator/run/run_execute.c"
@@ -43,54 +43,74 @@
 #include "../../memoriser/allocator/character_vector_allocator.c"
 
 /**
- * Runs the list directory contents command.
+ * Runs the archive command.
  *
  * @param p0 the parameters
  * @param p1 the parameters count
  */
-void run_list_directory_contents(void* p0, void* p1) {
+void run_archive(void* p0, void* p1) {
 
-    log_message_debug("Run list directory contents command.");
+    log_message_debug("Run archive command.");
 
-    // The all abstraction.
-    void** alla = &NULL_POINTER;
-    void** allac = &NULL_POINTER;
-    void** allas = &NULL_POINTER;
-    // The all model.
-    int** allm = (int**) &NULL_POINTER;
-    void** allmc = &NULL_POINTER;
-    void** allms = &NULL_POINTER;
-    // The all details.
-    void** alld = &NULL_POINTER;
-    void** alldc = &NULL_POINTER;
-    void** allds = &NULL_POINTER;
+    // The create abstraction.
+    void** createa = &NULL_POINTER;
+    void** createac = &NULL_POINTER;
+    void** createas = &NULL_POINTER;
+    // The create model.
+    int** createm = (int**) &NULL_POINTER;
+    void** createmc = &NULL_POINTER;
+    void** createms = &NULL_POINTER;
+    // The create details.
+    void** created = &NULL_POINTER;
+    void** createdc = &NULL_POINTER;
+    void** createds = &NULL_POINTER;
 
-    // The long listing abstraction.
-    void** longlistinga = &NULL_POINTER;
-    void** longlistingac = &NULL_POINTER;
-    void** longlistingas = &NULL_POINTER;
-    // The long listing model.
-    int** longlistingm = (int**) &NULL_POINTER;
-    void** longlistingmc = &NULL_POINTER;
-    void** longlistingms = &NULL_POINTER;
-    // The long listing details.
-    void** longlistingd = &NULL_POINTER;
-    void** longlistingdc = &NULL_POINTER;
-    void** longlistingds = &NULL_POINTER;
+    // The update abstraction.
+    void** updatea = &NULL_POINTER;
+    void** updateac = &NULL_POINTER;
+    void** updateas = &NULL_POINTER;
+    // The update model.
+    int** updatem = (int**) &NULL_POINTER;
+    void** updatemc = &NULL_POINTER;
+    void** updatems = &NULL_POINTER;
+    // The update details.
+    void** updated = &NULL_POINTER;
+    void** updatedc = &NULL_POINTER;
+    void** updateds = &NULL_POINTER;
 
-    // Get all option.
+    // The bzip2 abstraction.
+    void** bzip2a = &NULL_POINTER;
+    void** bzip2ac = &NULL_POINTER;
+    void** bzip2as = &NULL_POINTER;
+    // The bzip2 model.
+    int** bzip2m = (int**) &NULL_POINTER;
+    void** bzip2mc = &NULL_POINTER;
+    void** bzip2ms = &NULL_POINTER;
+    // The bzip2 details.
+    void** bzip2d = &NULL_POINTER;
+    void** bzip2dc = &NULL_POINTER;
+    void** bzip2ds = &NULL_POINTER;
+
+    // Get create option.
     get_compound_element_by_name(p0, p1,
-        (void*) RUN_LIST_DIRECTORY_CONTENTS_ALL_NAME, (void*) RUN_LIST_DIRECTORY_CONTENTS_ALL_NAME_COUNT,
-        (void*) &alla, (void*) &allac, (void*) &allas,
-        (void*) &allm, (void*) &allmc, (void*) &allms,
-        (void*) &alld, (void*) &alldc, (void*) &allds);
+        (void*) RUN_ARCHIVE_CREATE_NAME, (void*) RUN_ARCHIVE_CREATE_NAME_COUNT,
+        (void*) &createa, (void*) &createac, (void*) &createas,
+        (void*) &createm, (void*) &createmc, (void*) &createms,
+        (void*) &created, (void*) &createdc, (void*) &createds);
 
-    // Get long listing option.
+    // Get update option.
     get_compound_element_by_name(p0, p1,
-        (void*) RUN_LIST_DIRECTORY_CONTENTS_LONG_LISTING_NAME, (void*) RUN_LIST_DIRECTORY_CONTENTS_LONG_LISTING_NAME_COUNT,
-        (void*) &longlistinga, (void*) &longlistingac, (void*) &longlistingas,
-        (void*) &longlistingm, (void*) &longlistingmc, (void*) &longlistingms,
-        (void*) &longlistingd, (void*) &longlistingdc, (void*) &longlistingds);
+        (void*) RUN_ARCHIVE_UPDATE_NAME, (void*) RUN_ARCHIVE_UPDATE_NAME_COUNT,
+        (void*) &updatea, (void*) &updateac, (void*) &updateas,
+        (void*) &updatem, (void*) &updatemc, (void*) &updatems,
+        (void*) &updated, (void*) &updatedc, (void*) &updateds);
+
+    // Get bzip2 option.
+    get_compound_element_by_name(p0, p1,
+        (void*) RUN_ARCHIVE_BZIP2_NAME, (void*) RUN_ARCHIVE_BZIP2_NAME_COUNT,
+        (void*) &bzip2a, (void*) &bzip2ac, (void*) &bzip2as,
+        (void*) &bzip2m, (void*) &bzip2mc, (void*) &bzip2ms,
+        (void*) &bzip2d, (void*) &bzip2dc, (void*) &bzip2ds);
 
     // The arguments vector.
     void* arg = NULL_POINTER;
@@ -158,70 +178,97 @@ void run_list_directory_contents(void* p0, void* p1) {
     //
 
     // Determine command size.
-    commands = *LIST_DIRECTORY_CONTENTS_UNIX_SHELL_COMMAND_COUNT;
+    commands = *ARCHIVE_UNIX_SHELL_COMMAND_COUNT;
 
     // Allocate command.
     allocate_array((void*) &command, (void*) &commands, (void*) CHARACTER_ARRAY);
 
     // Assemble command by first copying the actual command
     // and then adding the null termination character.
-    set_array_elements(command, (void*) &commandc, (void*) LIST_DIRECTORY_CONTENTS_UNIX_SHELL_COMMAND, (void*) LIST_DIRECTORY_CONTENTS_UNIX_SHELL_COMMAND_COUNT, (void*) CHARACTER_ARRAY);
-    commandc = commandc + *LIST_DIRECTORY_CONTENTS_UNIX_SHELL_COMMAND_COUNT;
+    set_array_elements(command, (void*) &commandc, (void*) ARCHIVE_UNIX_SHELL_COMMAND, (void*) ARCHIVE_UNIX_SHELL_COMMAND_COUNT, (void*) CHARACTER_ARRAY);
+    commandc = commandc + *ARCHIVE_UNIX_SHELL_COMMAND_COUNT;
 
     // Increase arguments vector size for command argument.
     args++;
 
     //
-    // All option.
+    // Create option.
     //
 
-    if (*allm != NULL_POINTER) {
+    if (*createm != NULL_POINTER) {
 
-        if (**allm == 1) {
+        if (**createm == 1) {
 
             // Resize command, if necessary.
             // One extra place for space character.
-            if ((commandc + *PRIMITIVE_COUNT + *LIST_DIRECTORY_CONTENTS_UNIX_SHELL_COMMAND_ALL_COUNT) >= commands) {
+            if ((commandc + *PRIMITIVE_COUNT + *ARCHIVE_UNIX_SHELL_COMMAND_CREATE_COUNT) >= commands) {
 
                 // Determine command size.
-                commands = commandc * *POINTER_VECTOR_REALLOCATE_FACTOR + *PRIMITIVE_COUNT + *LIST_DIRECTORY_CONTENTS_UNIX_SHELL_COMMAND_ALL_COUNT;
+                commands = commandc * *POINTER_VECTOR_REALLOCATE_FACTOR + *PRIMITIVE_COUNT + *ARCHIVE_UNIX_SHELL_COMMAND_CREATE_COUNT;
 
                 reallocate_pointer_vector((void*) &command, (void*) &commandc, (void*) &commands);
             }
 
-            // Assemble all option by first copying the actual argument
+            // Assemble option by first copying the actual argument
             // and then adding the null termination character.
             set_array_elements(command, (void*) &commandc, (void*) SPACE_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
             commandc = commandc + *PRIMITIVE_COUNT;
-            set_array_elements(command, (void*) &commandc, (void*) LIST_DIRECTORY_CONTENTS_UNIX_SHELL_COMMAND_ALL, (void*) LIST_DIRECTORY_CONTENTS_UNIX_SHELL_COMMAND_ALL_COUNT, (void*) CHARACTER_ARRAY);
-            commandc = commandc + *LIST_DIRECTORY_CONTENTS_UNIX_SHELL_COMMAND_ALL_COUNT;
+            set_array_elements(command, (void*) &commandc, (void*) ARCHIVE_UNIX_SHELL_COMMAND_CREATE, (void*) ARCHIVE_UNIX_SHELL_COMMAND_CREATE_COUNT, (void*) CHARACTER_ARRAY);
+            commandc = commandc + *ARCHIVE_UNIX_SHELL_COMMAND_CREATE_COUNT;
         }
     }
 
     //
-    // Long listing option.
+    // Update option.
     //
 
-    if (*longlistingm != NULL_POINTER) {
+    if (*updatem != NULL_POINTER) {
 
-        if (**longlistingm == 1) {
+        if (**updatem == 1) {
 
             // Resize command, if necessary.
             // One extra place for space character.
-            if ((commandc + *PRIMITIVE_COUNT + *LIST_DIRECTORY_CONTENTS_UNIX_SHELL_COMMAND_LONG_LISTING_COUNT) >= commands) {
+            if ((commandc + *PRIMITIVE_COUNT + *ARCHIVE_UNIX_SHELL_COMMAND_UPDATE_COUNT) >= commands) {
 
                 // Determine command size.
-                commands = commandc * *POINTER_VECTOR_REALLOCATE_FACTOR + *PRIMITIVE_COUNT + *LIST_DIRECTORY_CONTENTS_UNIX_SHELL_COMMAND_LONG_LISTING_COUNT;
+                commands = commandc * *POINTER_VECTOR_REALLOCATE_FACTOR + *PRIMITIVE_COUNT + *ARCHIVE_UNIX_SHELL_COMMAND_UPDATE_COUNT;
 
                 reallocate_pointer_vector((void*) &command, (void*) &commandc, (void*) &commands);
             }
 
-            // Assemble long listing option by first copying the actual argument
+            // Assemble option by first copying the actual argument
             // and then adding the null termination character.
             set_array_elements(command, (void*) &commandc, (void*) SPACE_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
             commandc = commandc + *PRIMITIVE_COUNT;
-            set_array_elements(command, (void*) &commandc, (void*) LIST_DIRECTORY_CONTENTS_UNIX_SHELL_COMMAND_LONG_LISTING, (void*) LIST_DIRECTORY_CONTENTS_UNIX_SHELL_COMMAND_LONG_LISTING_COUNT, (void*) CHARACTER_ARRAY);
-            commandc = commandc + *LIST_DIRECTORY_CONTENTS_UNIX_SHELL_COMMAND_LONG_LISTING_COUNT;
+            set_array_elements(command, (void*) &commandc, (void*) ARCHIVE_UNIX_SHELL_COMMAND_UPDATE, (void*) ARCHIVE_UNIX_SHELL_COMMAND_UPDATE_COUNT, (void*) CHARACTER_ARRAY);
+            commandc = commandc + *ARCHIVE_UNIX_SHELL_COMMAND_UPDATE_COUNT;
+        }
+    }
+
+    //
+    // Bzip2 option.
+    //
+
+    if (*bzip2m != NULL_POINTER) {
+
+        if (**bzip2m == 1) {
+
+            // Resize command, if necessary.
+            // One extra place for space character.
+            if ((commandc + *PRIMITIVE_COUNT + *ARCHIVE_UNIX_SHELL_COMMAND_BZIP2_COUNT) >= commands) {
+
+                // Determine command size.
+                commands = commandc * *POINTER_VECTOR_REALLOCATE_FACTOR + *PRIMITIVE_COUNT + *ARCHIVE_UNIX_SHELL_COMMAND_BZIP2_COUNT;
+
+                reallocate_pointer_vector((void*) &command, (void*) &commandc, (void*) &commands);
+            }
+
+            // Assemble option by first copying the actual argument
+            // and then adding the null termination character.
+            set_array_elements(command, (void*) &commandc, (void*) SPACE_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+            commandc = commandc + *PRIMITIVE_COUNT;
+            set_array_elements(command, (void*) &commandc, (void*) ARCHIVE_UNIX_SHELL_COMMAND_BZIP2, (void*) ARCHIVE_UNIX_SHELL_COMMAND_BZIP2_COUNT, (void*) CHARACTER_ARRAY);
+            commandc = commandc + *ARCHIVE_UNIX_SHELL_COMMAND_BZIP2_COUNT;
         }
     }
 
@@ -242,6 +289,8 @@ void run_list_directory_contents(void* p0, void* p1) {
     // Assemble command option by adding the null termination character.
     set_array_elements(command, (void*) &commandc, (void*) NULL_CONTROL_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
     commandc = commandc + *PRIMITIVE_COUNT;
+
+    fprintf(stdout, "TEST command %s\n", (char*) command);
 
     //
     // Null pointer argument.
@@ -300,5 +349,5 @@ void run_list_directory_contents(void* p0, void* p1) {
     deallocate_pointer_vector((void*) &arg, (void*) &args);
 }
 
-/* RUN_LIST_DIRECTORY_CONTENTS_SOURCE */
+/* RUN_ARCHIVE_SOURCE */
 #endif

@@ -20,13 +20,15 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.16 $ $Date: 2006-02-20 16:17:26 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2006-03-13 23:16:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
 
 #ifndef STARTUP_LINUX_CONSOLE_SOURCE
 #define STARTUP_LINUX_CONSOLE_SOURCE
+
+#ifdef LINUX_OPERATING_SYSTEM
 
 //?? #include <sys/ioctl.h>
 //?? #include <sys/vt.h>
@@ -119,6 +121,9 @@ void startup_linux_console(void* p0, void* p1, void* p2, void* p3) {
         log_message_debug("WARNING: Could not startup linux console. The linux console is already running.");
     }
 }
+
+/* LINUX_OPERATING_SYSTEM */
+#endif
 
 /* STARTUP_LINUX_CONSOLE_SOURCE */
 #endif

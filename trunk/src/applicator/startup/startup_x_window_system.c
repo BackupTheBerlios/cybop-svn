@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.14 $ $Date: 2006-01-02 11:56:01 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2006-03-13 23:16:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  *
@@ -43,6 +43,8 @@
 
 #ifndef STARTUP_X_WINDOW_SYSTEM_SOURCE
 #define STARTUP_X_WINDOW_SYSTEM_SOURCE
+
+#ifdef LINUX_OPERATING_SYSTEM
 
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
@@ -229,6 +231,9 @@ void startup_x_window_system(void* p0, void* p1, void* p2, void* p3) {
         log_message_debug("WARNING: Could not startup x window system. The x window system is already running.");
     }
 }
+
+/* LINUX_OPERATING_SYSTEM */
+#endif
 
 /* STARTUP_X_WINDOW_SYSTEM_SOURCE */
 #endif

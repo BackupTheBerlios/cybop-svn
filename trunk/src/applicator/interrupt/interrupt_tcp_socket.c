@@ -20,13 +20,15 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2006-02-09 02:22:56 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2006-03-13 23:16:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
 
 #ifndef INTERRUPT_TCP_SOCKET_SOURCE
 #define INTERRUPT_TCP_SOCKET_SOURCE
+
+#ifdef LINUX_OPERATING_SYSTEM
 
 #include <sys/types.h>
 #include <sys/socket.h>
@@ -67,6 +69,9 @@ void interrupt_tcp_socket(void* p0, void* p1, void* p2, void* p3) {
         log_message_debug("Could not interrupt tcp socket service. The tcp socket interrupt flag is null.");
     }
 }
+
+/* LINUX_OPERATING_SYSTEM */
+#endif
 
 /* INTERRUPT_TCP_SOCKET_SOURCE */
 #endif

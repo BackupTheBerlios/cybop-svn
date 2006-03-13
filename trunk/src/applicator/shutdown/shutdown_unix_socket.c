@@ -20,13 +20,15 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2006-01-02 11:56:01 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2006-03-13 23:16:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
 
 #ifndef SHUTDOWN_UNIX_SOCKET_SOURCE
 #define SHUTDOWN_UNIX_SOCKET_SOURCE
+
+#ifdef LINUX_OPERATING_SYSTEM
 
 #include "../../globals/constants/log_constants.c"
 #include "../../globals/logger/logger.c"
@@ -50,6 +52,9 @@ void shutdown_unix_socket(void* p0, void* p1, void* p2, void* p3) {
 
     log_message_debug("Shutdown unix socket.");
 }
+
+/* LINUX_OPERATING_SYSTEM */
+#endif
 
 /* SHUTDOWN_UNIX_SOCKET_SOURCE */
 #endif

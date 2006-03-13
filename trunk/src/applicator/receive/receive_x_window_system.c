@@ -20,13 +20,15 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.10 $ $Date: 2006-02-20 16:17:26 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2006-03-13 23:16:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
 
 #ifndef RECEIVE_X_WINDOW_SYSTEM_SOURCE
 #define RECEIVE_X_WINDOW_SYSTEM_SOURCE
+
+#ifdef LINUX_OPERATING_SYSTEM
 
 #include <X11/Xlib.h>
 //?? #include <X11/Xutil.h>
@@ -764,6 +766,9 @@ void receive_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, v
     // Create thread.
     pthread_create(&t, (pthread_attr_t*) NULL_POINTER, (void*) &receive_x_window_system_thread, p0);
 }
+
+/* LINUX_OPERATING_SYSTEM */
+#endif
 
 /* RECEIVE_X_WINDOW_SYSTEM_SOURCE */
 #endif
