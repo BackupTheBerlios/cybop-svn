@@ -6,6 +6,12 @@
         <property name="all" channel="inline" abstraction="boolean" model="true"/>
         <property name="long_listing" channel="inline" abstraction="boolean" model="true"/>
     </part>
+<!--
+    <part name="test" channel="inline" abstraction="operation" model="run">
+        <property name="command" channel="inline" abstraction="character" model="program"/>
+        <property name="program" channel="inline" abstraction="character" model="xdosemu"/>
+    </part>
+-->
     <part name="exit" channel="inline" abstraction="operation" model="exit"/>
 </model>
 
@@ -31,6 +37,6 @@
     http://www.cybop.net
     - Cybernetics Oriented Programming -
 
-    @version $Revision: 1.1 $ $Date: 2006-02-20 16:35:35 $ $Author: christian $
+    @version $Revision: 1.2 $ $Date: 2006-03-13 23:17:25 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->
