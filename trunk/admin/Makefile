@@ -2,7 +2,7 @@
 # $RCSfile: Makefile,v $
 #
 # Copyright (c) 2003. Michael Simon. All rights reserved.
-# Copyright (c) 2004-2005. Christian Heller. All rights reserved.
+# Copyright (c) 2004-2006. Christian Heller. All rights reserved.
 #
 # This software is published under the GPL GNU General Public License.
 # This program is free software; you can redistribute it and/or
@@ -22,16 +22,60 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.37 $ $Date: 2005-11-21 23:28:28 $ $Author: christian $
+# @version $Revision: 1.38 $ $Date: 2006-03-13 23:09:19 $ $Author: christian $
 # @author Michael Simon <michael.simon@gmx.net>
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
 #
-# CAUTION!
+# Required packages:
+# - gcc
+# - libc6-dev
+# - libxml2
+# - xlibs-dev
 #
-# TABS must NOT be replaced with SPACES!
+# CAUTION! TABS must NOT be replaced with SPACES!
 # Otherwise, the makefile will not work.
+#
+# Example for compiling a program:
+# gcc hello.c -o hello.exe
+#
+# if SYSTEM_1
+#     include "system_1.h"
+# elif SYSTEM_2
+#     include "system_2.h"
+# elif SYSTEM_3
+#     ...
+# endif
+#
+# define FOO 4
+# x = FOO;        expands to x = 4;
+# undef FOO
+# x = FOO;        expands to x = FOO;
+#
+# #if, #ifdef, or #ifndef
+#
+# Conditionals can be nested. Example:
+#
+# ifdef MACRO
+#     controlled text
+# endif /* MACRO */
+#
+# if i >= 10
+#     text-if-true
+# else /* Not expression */
+#     text-if-false
+# endif /* Not expression */
+#
+# if X == 1
+#     ...
+# elif X == 2
+#     ...
+# else /* X != 2 and X != 1 */
+# ...
+# endif /* X != 2 and X != 1 */
+#
+# The #else is allowed after any number of #elif directives, but #elif may not follow #else.
 #
 
 #
@@ -51,9 +95,19 @@ SRC = $(ROOT)/src
 #
 
 BINARY = cyboi
+# Normal compiler to generate a linux executable.
 COMPILER = gcc
+# Cross-compiler to generate a windows executable.
+#COMPILER = /usr/bin/i586-mingw32msvc-gcc
 #-Wall -pedantic
-COMPILER_FLAGS = -g -I/usr/include/libxml2 -I/usr/X11R6/include # -fsjlj-exceptions
+COMPILER_FLAGS = -g -I/usr/include/libxml2 -I/usr/X11R6/include \
+	-D LINUX_OPERATING_SYSTEM
+#	-D WIN32_OPERATING_SYSTEM
+# INTEL_300_PROCESSOR // 80386
+# INTEL_400_PROCESSOR // 80486
+# BLEND_500_PROCESSOR
+# PENTIUM_500_PROCESSOR
+# PENTIUM_PRO_600_PROCESSOR
 
 #
 # Wildcards.
@@ -63,8 +117,6 @@ COMPILER_FLAGS = -g -I/usr/include/libxml2 -I/usr/X11R6/include # -fsjlj-excepti
 #vpath %.o $(OBJ)
 
 MAIN_SOURCE = $(SRC)/controller/cyboi.c
-#ROOT_SOURCES = $(wildcard $(SRC)/*.c)
-#ROOT_OBJECTS = $(patsubst $(SRC)/%.c,$(OBJ)/%.o,$(ROOT_SOURCES))
 
 # Applicator.
 APPLICATOR_SOURCES = $(wildcard $(SRC)/applicator/*.c)
@@ -75,6 +127,8 @@ APPLICATOR_INTERRUPT_SOURCES = $(wildcard $(SRC)/applicator/interrupt/*.c)
 APPLICATOR_INTERRUPT_OBJECTS = $(patsubst $(SRC)/applicator/interrupt/%.c,$(OBJ)/applicator/interrupt/%.o,$(APPLICATOR_INTERRUPT_SOURCES))
 APPLICATOR_RECEIVE_SOURCES = $(wildcard $(SRC)/applicator/receive/*.c)
 APPLICATOR_RECEIVE_OBJECTS = $(patsubst $(SRC)/applicator/receive/%.c,$(OBJ)/applicator/receive/%.o,$(APPLICATOR_RECEIVE_SOURCES))
+APPLICATOR_RUN_SOURCES = $(wildcard $(SRC)/applicator/run/*.c)
+APPLICATOR_RUN_OBJECTS = $(patsubst $(SRC)/applicator/run/%.c,$(OBJ)/applicator/run/%.o,$(APPLICATOR_RUN_SOURCES))
 APPLICATOR_SEND_SOURCES = $(wildcard $(SRC)/applicator/send/*.c)
 APPLICATOR_SEND_OBJECTS = $(patsubst $(SRC)/applicator/send/%.c,$(OBJ)/applicator/send/%.o,$(APPLICATOR_SEND_SOURCES))
 APPLICATOR_SHUTDOWN_SOURCES = $(wildcard $(SRC)/applicator/shutdown/*.c)
@@ -95,6 +149,8 @@ CONTROLLER_MANAGER_OBJECTS = $(patsubst $(SRC)/controller/manager/%.c,$(OBJ)/con
 # Globals.
 GLOBALS_CONSTANTS_SOURCES = $(wildcard $(SRC)/globals/constants/*.c)
 GLOBALS_CONSTANTS_OBJECTS = $(patsubst $(SRC)/globals/constants/%.c,$(OBJ)/globals/constants/%.o,$(GLOBALS_CONSTANTS_SOURCES))
+GLOBALS_CONSTANTS_SHELL_COMMAND_SOURCES = $(wildcard $(SRC)/globals/constants/shell_command/*.c)
+GLOBALS_CONSTANTS_SHELL_COMMAND_OBJECTS = $(patsubst $(SRC)/globals/constants/shell_command/%.c,$(OBJ)/globals/constants/shell_command/%.o,$(GLOBALS_CONSTANTS_SHELL_COMMAND_SOURCES))
 GLOBALS_LOGGER_SOURCES = $(wildcard $(SRC)/globals/logger/*.c)
 GLOBALS_LOGGER_OBJECTS = $(patsubst $(SRC)/globals/logger/%.c,$(OBJ)/globals/logger/%.o,$(GLOBALS_LOGGER_SOURCES))
 GLOBALS_VARIABLES_SOURCES = $(wildcard $(SRC)/globals/variables/*.c)
@@ -105,14 +161,16 @@ MEMORISER_SOURCES = $(wildcard $(SRC)/memoriser/*.c)
 MEMORISER_OBJECTS = $(patsubst $(SRC)/memoriser/%.c,$(OBJ)/memoriser/%.o,$(MEMORISER_SOURCES))
 MEMORISER_ACCESSOR_SOURCES = $(wildcard $(SRC)/memoriser/accessor/*.c)
 MEMORISER_ACCESSOR_OBJECTS = $(patsubst $(SRC)/memoriser/accessor/%.c,$(OBJ)/memoriser/accessor/%.o,$(MEMORISER_ACCESSOR_SOURCES))
+MEMORISER_ALLOCATOR_SOURCES = $(wildcard $(SRC)/memoriser/allocator/*.c)
+MEMORISER_ALLOCATOR_OBJECTS = $(patsubst $(SRC)/memoriser/allocator/%.c,$(OBJ)/memoriser/allocator/%.o,$(MEMORISER_ALLOCATOR_SOURCES))
 MEMORISER_ARRAY_SOURCES = $(wildcard $(SRC)/memoriser/array/*.c)
 MEMORISER_ARRAY_OBJECTS = $(patsubst $(SRC)/memoriser/array/%.c,$(OBJ)/memoriser/array/%.o,$(MEMORISER_ARRAY_SOURCES))
 MEMORISER_COMMUNICATOR_SOURCES = $(wildcard $(SRC)/memoriser/communicator/*.c)
 MEMORISER_COMMUNICATOR_OBJECTS = $(patsubst $(SRC)/memoriser/communicator/%.c,$(OBJ)/memoriser/communicator/%.o,$(MEMORISER_COMMUNICATOR_SOURCES))
 MEMORISER_CONVERTER_SOURCES = $(wildcard $(SRC)/memoriser/converter/*.c)
 MEMORISER_CONVERTER_OBJECTS = $(patsubst $(SRC)/memoriser/converter/%.c,$(OBJ)/memoriser/converter/%.o,$(MEMORISER_CONVERTER_SOURCES))
-MEMORISER_CREATOR_SOURCES = $(wildcard $(SRC)/memoriser/creator/*.c)
-MEMORISER_CREATOR_OBJECTS = $(patsubst $(SRC)/memoriser/creator/%.c,$(OBJ)/memoriser/creator/%.o,$(MEMORISER_CREATOR_SOURCES))
+MEMORISER_MAPPER_SOURCES = $(wildcard $(SRC)/memoriser/mapper/*.c)
+MEMORISER_MAPPER_OBJECTS = $(patsubst $(SRC)/memoriser/mapper/%.c,$(OBJ)/memoriser/mapper/%.o,$(MEMORISER_MAPPER_SOURCES))
 MEMORISER_TRANSLATOR_SOURCES = $(wildcard $(SRC)/memoriser/translator/*.c)
 MEMORISER_TRANSLATOR_OBJECTS = $(patsubst $(SRC)/memoriser/translator/%.c,$(OBJ)/memoriser/translator/%.o,$(MEMORISER_TRANSLATOR_SOURCES))
 
@@ -130,11 +188,13 @@ TESTER_OBJECTS = $(patsubst $(SRC)/tester/%.c,$(OBJ)/tester/%.o,$(TESTER_SOURCES
 # CAUTION! Do NOT add a "$@" at the end!
 # Otherwise, a compiler error will occur, because "make $@" is already used internally.
 #
-all: create \
+all: export \
+	create \
 	$(APPLICATOR_OBJECTS) \
 	$(APPLICATOR_COMPARE_OBJECTS) \
 	$(APPLICATOR_INTERRUPT_OBJECTS) \
 	$(APPLICATOR_RECEIVE_OBJECTS) \
+	$(APPLICATOR_RUN_OBJECTS) \
 	$(APPLICATOR_SEND_OBJECTS) \
 	$(APPLICATOR_SHUTDOWN_OBJECTS) \
 	$(APPLICATOR_STARTUP_OBJECTS) \
@@ -143,17 +203,22 @@ all: create \
 	$(CONTROLLER_HANDLER_OBJECTS) \
 	$(CONTROLLER_MANAGER_OBJECTS) \
 	$(GLOBALS_CONSTANTS_OBJECTS) \
+	$(GLOBALS_CONSTANTS_SHELL_COMMANDS_OBJECTS) \
 	$(GLOBALS_LOGGER_OBJECTS) \
 	$(GLOBALS_VARIABLES_OBJECTS) \
 	$(MEMORISER_OBJECTS) \
 	$(MEMORISER_ACCESSOR_OBJECTS) \
+	$(MEMORISER_ALLOCATOR_OBJECTS) \
 	$(MEMORISER_ARRAY_OBJECTS) \
 	$(MEMORISER_COMMUNICATOR_OBJECTS) \
 	$(MEMORISER_CONVERTER_OBJECTS) \
-	$(MEMORISER_CREATOR_OBJECTS) \
+	$(MEMORISER_MAPPER_OBJECTS) \
 	$(MEMORISER_TRANSLATOR_OBJECTS) \
 	$(TESTER_OBJECTS) \
 # Compile source files.
+# The -mwindows switch is needed to create Windows executables instead of console applications.
+# It assures the appropriate Windows libraries are linked in for you. To get a console screen
+# along with a standard windows application, add the -mconsole flag as well as -mwindows.
 	$(COMPILER) -c $(COMPILER_FLAGS) $(SRC)/controller/cyboi.c \
 		-o $(OBJ)/controller/cyboi.o
 # Link object files.
@@ -161,6 +226,18 @@ all: create \
 		-o $(BIN)/$(BINARY) $(OBJ)/controller/cyboi.o -lxml2 -lpthread -lX11
 # Print ready message.
 	@echo Compiled cyboi files.
+
+#
+# Exports variables for cross-compilation under linux.
+#
+# If working with configure, then use the following flags:
+# ./configure --host=i586-mingw32 --build=$(./config.guess) \
+# --with-included-gettext --enable-client=win32 --prefix=.
+#
+export:
+	export CC=i586-mingw32-gcc
+	export AR=i586-mingw32-ar
+	export RANLIB=i586-mingw32-ranlib
 
 #
 # Creates object directories and compiles cyboi source files into these.
@@ -174,6 +251,7 @@ create:
 	-cd $(OBJ); mkdir applicator/compare
 	-cd $(OBJ); mkdir applicator/interrupt
 	-cd $(OBJ); mkdir applicator/receive
+	-cd $(OBJ); mkdir applicator/run
 	-cd $(OBJ); mkdir applicator/send
 	-cd $(OBJ); mkdir applicator/shutdown
 	-cd $(OBJ); mkdir applicator/startup
@@ -183,14 +261,16 @@ create:
 	-cd $(OBJ); mkdir controller/manager
 	-cd $(OBJ); mkdir globals
 	-cd $(OBJ); mkdir globals/constants
+	-cd $(OBJ); mkdir globals/constants/shell_commands
 	-cd $(OBJ); mkdir globals/logger
 	-cd $(OBJ); mkdir globals/variables
 	-cd $(OBJ); mkdir memoriser
 	-cd $(OBJ); mkdir memoriser/accessor
+	-cd $(OBJ); mkdir memoriser/allocator
 	-cd $(OBJ); mkdir memoriser/array
 	-cd $(OBJ); mkdir memoriser/communicator
 	-cd $(OBJ); mkdir memoriser/converter
-	-cd $(OBJ); mkdir memoriser/creator
+	-cd $(OBJ); mkdir memoriser/mapper
 	-cd $(OBJ); mkdir memoriser/translator
 	-cd $(OBJ); mkdir tester
 
@@ -207,6 +287,9 @@ $(OBJ)/applicator/interrupt/%.o: $(SRC)/applicator/interrupt/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
 $(OBJ)/applicator/receive/%.o: $(SRC)/applicator/receive/%.c
+	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
+
+$(OBJ)/applicator/run/%.o: $(SRC)/applicator/run/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
 $(OBJ)/applicator/send/%.o: $(SRC)/applicator/send/%.c
@@ -233,6 +316,9 @@ $(OBJ)/controller/manager/%.o: $(SRC)/controller/manager/%.c
 $(OBJ)/globals/constants/%.o: $(SRC)/globals/constants/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
+$(OBJ)/globals/constants/shell_commands/%.o: $(SRC)/globals/constants/shell_commands/%.c
+	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
+
 $(OBJ)/globals/logger/%.o: $(SRC)/globals/logger/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
@@ -245,6 +331,9 @@ $(OBJ)/memoriser/%.o: $(SRC)/memoriser/%.c
 $(OBJ)/memoriser/accessor/%.o: $(SRC)/memoriser/accessor/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
+$(OBJ)/memoriser/allocator/%.o: $(SRC)/memoriser/allocator/%.c
+	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
+
 $(OBJ)/memoriser/array/%.o: $(SRC)/memoriser/array/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
@@ -254,7 +343,7 @@ $(OBJ)/memoriser/communicator/%.o: $(SRC)/memoriser/communicator/%.c
 $(OBJ)/memoriser/converter/%.o: $(SRC)/memoriser/converter/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
-$(OBJ)/memoriser/creator/%.o: $(SRC)/memoriser/creator/%.c
+$(OBJ)/memoriser/mapper/%.o: $(SRC)/memoriser/mapper/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
 $(OBJ)/memoriser/translator/%.o: $(SRC)/memoriser/translator/%.c
