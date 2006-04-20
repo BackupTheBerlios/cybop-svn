@@ -22,7 +22,7 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.38 $ $Date: 2006-03-13 23:09:19 $ $Author: christian $
+# @version $Revision: 1.39 $ $Date: 2006-04-20 22:26:50 $ $Author: christian $
 # @author Michael Simon <michael.simon@gmx.net>
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
@@ -100,7 +100,7 @@ COMPILER = gcc
 # Cross-compiler to generate a windows executable.
 #COMPILER = /usr/bin/i586-mingw32msvc-gcc
 #-Wall -pedantic
-COMPILER_FLAGS = -g -I/usr/include/libxml2 -I/usr/X11R6/include \
+COMPILER_FLAGS = -g -l/usr/include -I/usr/include/libxml2 -I/usr/X11R6/include \
 	-D LINUX_OPERATING_SYSTEM
 #	-D WIN32_OPERATING_SYSTEM
 # INTEL_300_PROCESSOR // 80386
@@ -223,7 +223,7 @@ all: export \
 		-o $(OBJ)/controller/cyboi.o
 # Link object files.
 	$(COMPILER) -L/lib -L/usr/lib -L/usr/X11R6/lib \
-		-o $(BIN)/$(BINARY) $(OBJ)/controller/cyboi.o -lxml2 -lpthread -lX11
+		-o $(BIN)/$(BINARY) $(OBJ)/controller/cyboi.o -lpthread -lxml2 -lX11
 # Print ready message.
 	@echo Compiled cyboi files.
 
