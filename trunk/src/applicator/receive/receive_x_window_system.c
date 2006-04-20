@@ -1,7 +1,7 @@
 /*
  * $RCSfile: receive_x_window_system.c,v $
  *
- * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2006. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2006-03-13 23:16:53 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2006-04-20 22:36:09 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -33,7 +33,9 @@
 #include <X11/Xlib.h>
 //?? #include <X11/Xutil.h>
 #include <pthread.h>
+#include <signal.h>
 #include "../../globals/constants/abstraction_constants.c"
+#include "../../globals/constants/cyboi_constants.c"
 #include "../../globals/constants/integer_constants.c"
 #include "../../globals/constants/name_constants.c"
 #include "../../globals/constants/structure_constants.c"
@@ -393,6 +395,34 @@ void receive_x_window_system_part(void* p0, void* p1, void* p2, void* p3, void* 
 }
 
 /**
+ * Checks for x window system messages (events).
+ *
+ * As an exception to other procedures in CYBOI, parameters are NOT handed over
+ * as void* to this procedure, in order to avoid type casts and to gain faster
+ * processing results.
+ *
+ * Another exception is that this procedure is actually a function, since it
+ * returns a value, as opposed to other procedures in CYBOI which return
+ * nothing (void).
+ *
+ * @param d the display, which is a subsumption of xserver, screens, hardware
+ * @param xmt the x window system mutex
+ */
+int receive_x_window_system_check_events(struct _XDisplay* d, pthread_mutex_t* xmt) {
+
+    // The number of events.
+    int n = 0;
+
+    pthread_mutex_lock(xmt);
+
+    n = XEventsQueued(d, QueuedAfterReading);
+
+    pthread_mutex_unlock(xmt);
+
+    return n;
+}
+
+/**
  * Receives x window system messages (events) in an own thread.
  *
  * @param p0 the internal memory
@@ -407,6 +437,12 @@ void receive_x_window_system_thread(void* p0) {
     void** s = (void**) &NULL_POINTER;
     void** sc = (void**) &NULL_POINTER;
     void** ss = (void**) &NULL_POINTER;
+    // The signal memory mutex.
+    pthread_mutex_t** smt = (pthread_mutex_t**) &NULL_POINTER;
+    // The x window system mutex.
+    pthread_mutex_t** xmt = (pthread_mutex_t**) &NULL_POINTER;
+    // The signal memory interrupt request flag.
+    sig_atomic_t** sirq = (sig_atomic_t**) &NULL_POINTER;
     // The user interface root.
     void** r = (void**) &NULL_POINTER;
     void** rc = (void**) &NULL_POINTER;
@@ -429,6 +465,12 @@ void receive_x_window_system_thread(void* p0) {
     get(p0, (void*) SIGNAL_MEMORY_INTERNAL, (void*) &s, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     get(p0, (void*) SIGNAL_MEMORY_COUNT_INTERNAL, (void*) &sc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     get(p0, (void*) SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &ss, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    // Get signal memory mutex.
+    get(p0, (void*) SIGNAL_MEMORY_MUTEX_INTERNAL, (void*) &smt, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    // Get x window system mutex.
+    get(p0, (void*) X_WINDOW_SYSTEM_MUTEX_INTERNAL, (void*) &xmt, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    // Get interrupt request internal.
+    get(p0, (void*) INTERRUPT_REQUEST_INTERNAL, (void*) &sirq, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     // Get user interface root internal.
     get(p0, (void*) TEMPORARY_USER_INTERFACE_ROOT_INTERNAL, (void*) &r, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     get(p0, (void*) TEMPORARY_USER_INTERFACE_ROOT_COUNT_INTERNAL, (void*) &rc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
@@ -471,20 +513,68 @@ void receive_x_window_system_thread(void* p0) {
     int t = -1;
     // The signal id.
     int* id = NULL_POINTER;
-    // The activation flag.
-    int** f = (int**) &NULL_POINTER;
 
     while (1) {
 
-/*??
-        // Get activation flag.
-        get(p0, (void*) X_WINDOW_SYSTEM_ACTIVE_INTERNAL, (void*) &f, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        // A break condition does not exist here because the loop
+        // is blocking neverendingly while waiting for signals.
+        // The loop and this thread can only be exited by an external signal
+        // which is sent in the corresponding interrupt service procedure
+        // (situated in the applicator/interrupt/ directory)
+        // and processed in the system signal handler procedure
+        // (situated in the controller/checker.c module).
 
-        if (**f == *NUMBER_1_INTEGER) {
+        // Check the number of events in the event queue.
+        // XEventsQueued always returns immediately without
+        // input/ output if there are events already in the queue.
+        //
+        // There are three possible modes:
+        // 1 QueuedAlready: XEventsQueued returns the number of events
+        //   already in the event queue (and never performs a system call).
+        //   XEventsQueued with mode QueuedAlready is identical
+        //   to the XQLength function.
+        // 2 QueuedAfterFlush: XEventsQueued returns the number of events
+        //   already in the queue if the number is nonzero. If there are no
+        //   events in the queue, XEventsQueued flushes the output buffer,
+        //   attempts to read more events out of the applications connection,
+        //   and returns the number read.
+        // 3 QueuedAfterReading: XEventsQueued returns the number of events
+        //   already in the queue if the number is nonzero. If there are no
+        //   events in the queue, XEventsQueued attempts to read more events
+        //   out of the applications connection WITHOUT flushing the output
+        //   buffer and returns the number read.
+        //
+        // The decision fell on mode number 3, because:
+        // - mode number 1 did not display the x window initially, since
+        //   probably no expose events are placed in the queue at startup
+        // - mode number 2 is undesirable, since it would flush the output
+        //   buffer and might thus cause this receive-thread to conflict
+        //   with the send_x_window_system procedure of the main thread
 
-            break;
+        // CAUTION! Do NOT use the following statement directly here:
+        // while (XEventsQueued(*d, QueuedAfterReading) == 0) { ...}
+        //
+        // The direct call to XEventsQueued causes the following error:
+        // Xlib: sequence lost (0x10025 > 0x36) in reply type 0x7!
+        //
+        // This is because the x window system may process events in the
+        // main thread of CYBOI while XEventsQueued tries to read events.
+        // As workaround to this problem, an extra function has been defined
+        // that locks the x window system mutex before calling XEventsQueued.
+        //
+        // There is no alternative to using busy waiting (while + sleep) here.
+        // If XNextEvent was used already here (to block/ save processing time),
+        // no x windows could ever be painted by send_x_window_system meanwhile,
+        // since the x mutex is set before XNextEvent and denies access to X
+        // (which is necessary to avoid "Xlib: unexpected async reply" errors).
+        // Note that send_x_window_system runs in CYBOI's main thread,
+        // while receive_x_window_system runs in its own thread!
+        while (!receive_x_window_system_check_events(*d, *xmt)) {
+
+            sleep(1);
         }
-*/
+
+        pthread_mutex_lock(*xmt);
 
         // Get next event.
         // The XNextEvent function copies the first event from the event queue
@@ -492,6 +582,8 @@ void receive_x_window_system_thread(void* p0) {
         // If the event queue is empty, XNextEvent flushes the output buffer
         // and blocks until an event is received.
         XNextEvent(*d, &e);
+
+        pthread_mutex_unlock(*xmt);
 
         // Assign event type.
         t = e.type;
@@ -512,6 +604,11 @@ void receive_x_window_system_thread(void* p0) {
                     (void*) &cd, (void*) &cdc, (void*) &cds,
                     *k, *kc);
 
+    fprintf(stderr, "TEST expose receive t: %i\n", t);
+
+                // Lock signal memory mutex.
+                pthread_mutex_lock(*smt);
+
                 // Allocate signal id.
                 allocate((void*) &id, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
                 *id = 0;
@@ -520,22 +617,12 @@ void receive_x_window_system_thread(void* p0) {
                 // Add signal to signal memory.
                 set_signal(*s, *sc, *ss, *ca, *cac, *cm, *cmc, *cd, *cdc, (void*) NORMAL_PRIORITY, (void*) id);
 
-/*??
-                //
-                // The kind of mutex decides what happens when a thread tries
-                // to set a mutex it already owns. Linux has three kinds of mutex:
-                // - fast: the thread is waiting forever
-                // - recursive: immediately returns with a success
-                // - error check: delivers an error
-                //
+                // Set interrupt request flag, in order to notify the signal checker
+                // that a new signal has been placed in the signal memory.
+                **sirq = *NUMBER_1_INTEGER;
 
-                int pthread_mutex_init(pthread_mutex_t* m, const pthread_mutexattr_t* a);
-                pthread_mutex_init(&mutex, NULL);
-
-                pthread_mutex_destroy(&mutex, );
-                pthread_mutex_lock(&mutex, );
-                pthread_mutex_unlock(&mutex, );
-*/
+                // Unlock signal memory mutex.
+                pthread_mutex_unlock(*smt);
             }
 
         } else if (t == MappingNotify) {
@@ -641,7 +728,7 @@ void receive_x_window_system_thread(void* p0) {
 
         } else if ((t == ButtonPress) || (t == ButtonRelease)) {
 
-    fprintf(stderr, "TEST receive t: %i\n", t);
+    fprintf(stderr, "TEST button press receive t: %i\n", t);
 
             //?? TODO: This is a temporary solution!
             //?? There is no meta information (such as position or size) known
@@ -659,6 +746,9 @@ void receive_x_window_system_thread(void* p0) {
                 *tmpm, *tmpmc, &(e.xbutton.x), &(e.xbutton.y), (void*) NUMBER_0_INTEGER,
                 &t, &(e.xbutton.button), *k, *kc);
 
+            // Lock signal memory mutex.
+            pthread_mutex_lock(*smt);
+
             // Allocate signal id.
             allocate((void*) &id, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
             *id = 0;
@@ -666,6 +756,13 @@ void receive_x_window_system_thread(void* p0) {
 
             // Add signal to signal memory.
             set_signal(*s, *sc, *ss, *ca, *cac, *cm, *cmc, *cd, *cdc, (void*) NORMAL_PRIORITY, (void*) id);
+
+            // Set interrupt request flag, in order to notify the signal checker
+            // that a new signal has been placed in the signal memory.
+            **sirq = *NUMBER_1_INTEGER;
+
+            // Unlock signal memory mutex.
+            pthread_mutex_unlock(*smt);
 
         } else if (t == MotionNotify) {
 
@@ -734,6 +831,13 @@ void receive_x_window_system_thread(void* p0) {
     // (other than the thread in which main() was first invoked)
     // returns from the routine that was used to create it.
     // The pthread_exit() function does therefore not have to be called here.
+    //
+    // However, since this procedure runs an endless loop and is NEVER left,
+    // the loop and this thread can only be exited by an external signal
+    // which is sent in the corresponding interrupt service procedure
+    // (situated in the applicator/interrupt/ directory)
+    // and processed in the system signal handler procedure
+    // (situated in the controller/checker.c module).
 }
 
 /**
@@ -760,11 +864,8 @@ void receive_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, v
     set(p0, (void*) TEMPORARY_USER_INTERFACE_COMMANDS_COUNT_INTERNAL, (void*) &p5, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     set(p0, (void*) TEMPORARY_USER_INTERFACE_COMMANDS_SIZE_INTERNAL, (void*) &p6, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-    // The thread.
-    pthread_t t;
-
     // Create thread.
-    pthread_create(&t, (pthread_attr_t*) NULL_POINTER, (void*) &receive_x_window_system_thread, p0);
+    pthread_create(X_WINDOW_SYSTEM_THREAD, NULL_POINTER, (void*) &receive_x_window_system_thread, p0);
 }
 
 /* LINUX_OPERATING_SYSTEM */

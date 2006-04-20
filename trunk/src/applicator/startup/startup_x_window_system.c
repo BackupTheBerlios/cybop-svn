@@ -1,7 +1,7 @@
 /*
  * $RCSfile: startup_x_window_system.c,v $
  *
- * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2006. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.15 $ $Date: 2006-03-13 23:16:53 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2006-04-20 22:36:09 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  *
@@ -107,7 +107,7 @@ void startup_x_window_system(void* p0, void* p1, void* p2, void* p3) {
         // The font.
         XFontStruct* f = NULL_POINTER;
         // The font id.
-        int fid = -1;
+//??        int fid = -1;
         // The size hint.
         XSizeHints sh;
         // The colours.
@@ -158,6 +158,7 @@ void startup_x_window_system(void* p0, void* p1, void* p2, void* p3) {
         *fg = XBlackPixel(d, *sn);
         *r = DefaultRootWindow(d);
 //??        *r = XRootWindowOfScreen(s);
+/*??
         fn = "*-helvetica-*-12-*";
         f = XLoadQueryFont(d, fn);
 
@@ -165,6 +166,7 @@ void startup_x_window_system(void* p0, void* p1, void* p2, void* p3) {
 
             fid = f->fid;
         }
+*/
 
         sh.x = 0;
         sh.y = 0;
@@ -209,7 +211,7 @@ void startup_x_window_system(void* p0, void* p1, void* p2, void* p3) {
         XSetForeground(d, gc_menu_font, *fg);
         XSetBackground(d, gc, *bg);
         XSetForeground(d, gc, *fg);
-        XSetFont(d, gc, fid);
+//??        XSetFont(d, gc, fid);
 
         // Set x window system internals.
         set(p0, (void*) X_WINDOW_SYSTEM_DISPLAY_NAME_INTERNAL, (void*) &dn, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);

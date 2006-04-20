@@ -1,7 +1,7 @@
 /*
  * $RCSfile: startup_linux_console.c,v $
  *
- * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2006. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.17 $ $Date: 2006-03-13 23:16:53 $ $Author: christian $
+ * @version $Revision: 1.18 $ $Date: 2006-04-20 22:36:09 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -30,15 +30,6 @@
 
 #ifdef LINUX_OPERATING_SYSTEM
 
-//?? #include <sys/ioctl.h>
-//?? #include <sys/vt.h>
-//?? #include <sys/stat.h>
-//?? #include <sys/types.h>
-//?? #include <sys/wait.h>
-//?? #include <unistd.h>
-//?? #include <stdlib.h>
-//?? #include <signal.h>
-//?? #include <fcntl.h>
 #include <stdio.h>
 #include <termios.h>
 #include "../../globals/constants/integer_constants.c"
@@ -94,7 +85,8 @@ void startup_linux_console(void* p0, void* p1, void* p2, void* p3) {
         // Manipulate termios attributes.
         tw->c_lflag &= ~ICANON;
         tw->c_lflag &= ~ECHO;
-        // Set termios attributes.
+
+        // Assign termios attributes.
         tcsetattr(d, TCSANOW, tw);
 
 /*??

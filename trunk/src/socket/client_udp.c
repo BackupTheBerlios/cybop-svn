@@ -1,7 +1,7 @@
 /*
  * $RCSfile: client_udp.c,v $
  *
- * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2006. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,7 +22,7 @@
  *
  * This file handles a client UDP socket.
  *
- * @version $Revision: 1.7 $ $Date: 2005-03-30 14:15:42 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2006-04-20 22:36:12 $ $Author: christian $
  * @author Marcel Kiesling <makie2001@web.de>
  * @author Christian Heller <christian.heller@tuxtax.de>
  */

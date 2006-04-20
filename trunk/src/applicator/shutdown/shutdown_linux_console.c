@@ -1,7 +1,7 @@
 /*
  * $RCSfile: shutdown_linux_console.c,v $
  *
- * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2006. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.12 $ $Date: 2006-03-13 23:16:53 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2006-04-20 22:36:09 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -58,6 +58,9 @@ void shutdown_linux_console(void* p0, void* p1, void* p2, void* p3) {
     get(p0, (void*) TERMINAL_FILE_DESCRIPTOR_INTERNAL, (void*) &ti, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
     if (*ti != NULL_POINTER) {
+
+        // Interrupt receive signal thread.
+        interrupt_linux_console();
 
         // The terminal (device name).
         FILE** t = (FILE**) &NULL_POINTER;

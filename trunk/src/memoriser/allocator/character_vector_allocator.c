@@ -1,7 +1,7 @@
 /*
  * $RCSfile: character_vector_allocator.c,v $
  *
- * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2006. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,7 +23,7 @@
  * This file contains the functionality to:
  * - create a string model in memory
  *
- * @version $Revision: 1.1 $ $Date: 2005-08-09 13:04:27 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2006-04-20 22:36:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

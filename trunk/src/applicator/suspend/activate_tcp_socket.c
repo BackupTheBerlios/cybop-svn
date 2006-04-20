@@ -1,7 +1,7 @@
 /*
  * $RCSfile: activate_tcp_socket.c,v $
  *
- * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2006. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2006-01-02 11:56:01 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2006-04-20 22:36:09 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -57,7 +57,7 @@ void activate_tcp_socket( void* internals, void* know, void* know_count, void* k
         // The tcp socket interrupt flag.
         int** f = (int**) &NULL_POINTER;
 
-        get(internals, (void*) TCP_SOCKET_INTERRUPT_INTERNAL, (void*) &f, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+//??        get(internals, (void*) TCP_SOCKET_INTERRUPT_INTERNAL, (void*) &f, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
         if ((f != NULL_POINTER) && (*f != NULL_POINTER)) {
 

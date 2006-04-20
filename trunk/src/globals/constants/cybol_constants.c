@@ -1,7 +1,7 @@
 /*
  * $RCSfile: cybol_constants.c,v $
  *
- * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2006. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2005-07-25 21:01:02 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2006-04-20 22:36:10 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,7 +30,7 @@
 #include "../../globals/constants/integer_constants.c"
 
 //
-// Cybol tag (node) attributes (properties).
+// Cybol tag attributes.
 //
 
 /** The name attribute. */
@@ -52,6 +52,84 @@ static int* ABSTRACTION_ATTRIBUTE_COUNT = NUMBER_11_INTEGER_ARRAY;
 static char MODEL_ATTRIBUTE_ARRAY[] = {'m', 'o', 'd', 'e', 'l'};
 static char* MODEL_ATTRIBUTE = MODEL_ATTRIBUTE_ARRAY;
 static int* MODEL_ATTRIBUTE_COUNT = NUMBER_5_INTEGER_ARRAY;
+
+//
+// Knowledge model separators.
+//
+
+/** The compound part separator. */
+static char COMPOUND_PART_SEPARATOR_ARRAY[] = {'.'};
+static char* COMPOUND_PART_SEPARATOR = COMPOUND_PART_SEPARATOR_ARRAY;
+static int* COMPOUND_PART_SEPARATOR_COUNT = NUMBER_1_INTEGER_ARRAY;
+
+/** The compound meta separator. */
+static char COMPOUND_META_SEPARATOR_ARRAY[] = {'#'};
+static char* COMPOUND_META_SEPARATOR = COMPOUND_META_SEPARATOR_ARRAY;
+static int* COMPOUND_META_SEPARATOR_COUNT = NUMBER_1_INTEGER_ARRAY;
+
+/** The operation parameter separator. */
+static char OPERATION_PARAMETER_SEPARATOR_ARRAY[] = {','};
+static char* OPERATION_PARAMETER_SEPARATOR = OPERATION_PARAMETER_SEPARATOR_ARRAY;
+static int* OPERATION_PARAMETER_SEPARATOR_COUNT = NUMBER_1_INTEGER_ARRAY;
+
+/** The list separator between base name and index. */
+static char LIST_SEPARATOR_ARRAY[] = {'_', '$'};
+static char* LIST_SEPARATOR = LIST_SEPARATOR_ARRAY;
+static int* LIST_SEPARATOR_COUNT = NUMBER_2_INTEGER_ARRAY;
+
+//
+// Xml markups.
+//
+
+/** The begin comment tag array, pointer, count. */
+static char BEGIN_COMMENT_TAG_ARRAY[] = {'<', '!', '-', '-'};
+static char* BEGIN_COMMENT_TAG = BEGIN_COMMENT_TAG_ARRAY;
+static int* BEGIN_COMMENT_TAG_COUNT = NUMBER_4_INTEGER_ARRAY;
+
+/** The end comment tag array, pointer, count. */
+static char END_COMMENT_TAG_ARRAY[] = {'/', '-', '-', '>'};
+static char* END_COMMENT_TAG = END_COMMENT_TAG_ARRAY;
+static int* END_COMMENT_TAG_COUNT = NUMBER_4_INTEGER_ARRAY;
+
+/** The short end comment tag array, pointer, count. */
+static char SHORT_END_COMMENT_TAG_ARRAY[] = {'-', '-', '>'};
+static char* SHORT_END_COMMENT_TAG = SHORT_END_COMMENT_TAG_ARRAY;
+static int* SHORT_END_COMMENT_TAG_COUNT = NUMBER_3_INTEGER_ARRAY;
+
+/** The begin tag begin array, pointer, count. */
+static char BEGIN_TAG_BEGIN_ARRAY[] = {'<'};
+static char* BEGIN_TAG_BEGIN = BEGIN_TAG_BEGIN_ARRAY;
+static int* BEGIN_TAG_BEGIN_COUNT = NUMBER_1_INTEGER_ARRAY;
+
+/** The end tag begin array, pointer, count. */
+static char END_TAG_BEGIN_ARRAY[] = {'<', '/'};
+static char* END_TAG_BEGIN = END_TAG_BEGIN_ARRAY;
+static int* END_TAG_BEGIN_COUNT = NUMBER_2_INTEGER_ARRAY;
+
+/** The tag end array, pointer, count. */
+static char TAG_END_ARRAY[] = {'>'};
+static char* TAG_END = TAG_END_ARRAY;
+static int* TAG_END_COUNT = NUMBER_1_INTEGER_ARRAY;
+
+/** The empty tag end array, pointer, count. */
+static char EMPTY_TAG_END_ARRAY[] = {'/', '>'};
+static char* EMPTY_TAG_END = EMPTY_TAG_END_ARRAY;
+static int* EMPTY_TAG_END_COUNT = NUMBER_2_INTEGER_ARRAY;
+
+/** The attribute begin array, pointer, count. */
+static char ATTRIBUTE_BEGIN_ARRAY[] = {' '};
+static char* ATTRIBUTE_BEGIN = ATTRIBUTE_BEGIN_ARRAY;
+static int* ATTRIBUTE_BEGIN_COUNT = NUMBER_1_INTEGER_ARRAY;
+
+/** The attribute value begin array, pointer, count. */
+static char ATTRIBUTE_VALUE_BEGIN_ARRAY[] = {'=', '"'};
+static char* ATTRIBUTE_VALUE_BEGIN = ATTRIBUTE_VALUE_BEGIN_ARRAY;
+static int* ATTRIBUTE_VALUE_BEGIN_COUNT = NUMBER_1_INTEGER_ARRAY;
+
+/** The attribute value end array, pointer, count. */
+static char ATTRIBUTE_VALUE_END_ARRAY[] = {'"'};
+static char* ATTRIBUTE_VALUE_END = ATTRIBUTE_VALUE_END_ARRAY;
+static int* ATTRIBUTE_VALUE_END_COUNT = NUMBER_1_INTEGER_ARRAY;
 
 /* CYBOL_CONSTANTS_SOURCE */
 #endif

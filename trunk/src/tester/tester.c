@@ -1,7 +1,7 @@
 /*
  * $RCSfile: tester.c,v $
  *
- * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2006. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,7 +24,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.23 $ $Date: 2006-03-13 23:16:54 $ $Author: christian $
+ * @version $Revision: 1.24 $ $Date: 2006-04-20 22:36:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -32,12 +32,18 @@
 #ifndef TEST_SOURCE
 #define TEST_SOURCE
 
-#include <locale.h>
-#include <stdio.h>
 #ifdef LINUX_OPERATING_SYSTEM
 #include <termios.h>
 /* LINUX_OPERATING_SYSTEM */
 #endif
+
+#ifdef CYGWIN_ENVIRONMENT
+#include <windows.h>
+/* CYGWIN_ENVIRONMENT */
+#endif
+
+#include <locale.h>
+#include <stdio.h>
 #include <wchar.h>
 #include "../globals/constants/abstraction_constants.c"
 #include "../globals/constants/character_constants.c"
@@ -247,7 +253,13 @@ void test_integer_to_wide_character_conversion() {
     // for the given input, excluding the trailing null.
     // If not all output fits into the provided buffer,
     // a negative value is returned.
+#ifdef CYGWIN_ENVIRONMENT
+    tc = wsprintfW((wchar_t*) t, L"%i", 2);
+/* CYGWIN_ENVIRONMENT */
+#else
     tc = swprintf((wchar_t*) t, ts, L"%i", 2);
+/* CYGWIN_ENVIRONMENT */
+#endif
 
     fprintf(stdout, "TEST tc %i\n", tc);
 

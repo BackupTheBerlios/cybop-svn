@@ -1,7 +1,7 @@
 /*
  * $RCSfile: compound_handler.c,v $
  *
- * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2006. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.10 $ $Date: 2006-02-20 16:17:26 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2006-04-20 22:36:09 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -140,7 +140,17 @@ void handle_compound(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
 /*??
                                     if (*x == 0) {
 
+                                        // Lock signal memory mutex.
+                                        pthread_mutex_lock(*mt);
+
                                         set_signal(p4, p5, p6, *a, *ac, *m, *mc, *d, *dc, p12, p13);
+
+                                        // Set interrupt request flag, in order to notify the signal checker
+                                        // that a new signal has been placed in the signal memory.
+                                        **irq = *NUMBER_1_INTEGER;
+
+                                        // Unlock signal memory mutex.
+                                        pthread_mutex_unlock(*mt);
 
                                     } else {
 */

@@ -1,7 +1,7 @@
 /*
  * $RCSfile: shutdown_tcp_socket.c,v $
  *
- * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2006. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2006-03-13 23:16:53 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2006-04-20 22:36:09 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -49,9 +49,6 @@ void shutdown_tcp_socket(void* p0, void* p1, void* p2, void* p3) {
 
     log_message_debug("Shutdown tcp socket.");
 
-    // Deactivate tcp socket service.
-    interrupt_tcp_socket(p0, p1, p2, p3);
-
     // The tcp server socket.
     int** s = NULL_POINTER;
     // The tcp client sockets.
@@ -74,7 +71,7 @@ void shutdown_tcp_socket(void* p0, void* p1, void* p2, void* p3) {
     get(p0, (void*) TCP_CLIENT_SOCKETS_COUNT_INTERNAL, (void*) &csc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     get(p0, (void*) TCP_CLIENT_SOCKETS_SIZE_INTERNAL, (void*) &css, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     // Get interrupt flag.
-    get(p0, (void*) TCP_SOCKET_INTERRUPT_INTERNAL, (void*) &af, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+//??    get(p0, (void*) TCP_SOCKET_INTERRUPT_INTERNAL, (void*) &af, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     // Get blocking flag.
     get(p0, (void*) TCP_SOCKET_BLOCKING_INTERNAL, (void*) &bf, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     // Get signal ids.
@@ -83,6 +80,9 @@ void shutdown_tcp_socket(void* p0, void* p1, void* p2, void* p3) {
     get(p0, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_SIZE_INTERNAL, (void*) &ids, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
     if (*s != NULL_POINTER) {
+
+        // Interrupt receive signal thread.
+        interrupt_tcp_socket();
 
         // Close tcp server socket.
         close(**s);

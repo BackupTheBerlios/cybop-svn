@@ -1,7 +1,7 @@
 /*
  * $RCSfile: interrupt_x_window_system.c,v $
  *
- * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2006. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2006-03-13 23:16:53 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2006-04-20 22:36:09 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -29,51 +29,40 @@
 
 #ifdef LINUX_OPERATING_SYSTEM
 
+#include <sys/signal.h>
+#include <pthread.h>
 #include "../../globals/constants/abstraction_constants.c"
+#include "../../globals/constants/integer_constants.c"
 #include "../../globals/constants/log_constants.c"
 #include "../../globals/constants/structure_constants.c"
 #include "../../globals/logger/logger.c"
 
-/*??
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <stdio.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
-#include <unistd.h>
-#include "../../globals/constants/abstraction_constants.c"
-#include "../../globals/constants/integer_constants.c"
-#include "../../globals/constants/structure_constants.c"
-#include "../../globals/variables/variables.c"
-#include "../../memoriser/accessor.c"
-#include "../../memoriser/array.c"
-*/
-
 /**
  * Interrupts the x window system service.
- *
- * @param p0 the internal memory
- * @param p1 the knowledge memory
- * @param p2 the knowledge memory count
- * @param p3 the knowledge memory size
  */
-void interrupt_x_window_system(void* p0, void* p1, void* p2, void* p3) {
+void interrupt_x_window_system() {
 
     log_message_debug("Interrupt x window system service.");
 
-    // The interrupt flag.
-    int** f = NULL_POINTER;
+    // Set thread interrupt flag.
+    *X_WINDOW_SYSTEM_THREAD_INTERRUPT = *NUMBER_1_INTEGER;
 
-    get(p0, (void*) X_WINDOW_SYSTEM_INTERRUPT_INTERNAL, (void*) &f, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    // Send signal to thread.
+    // CAUTION! Sending a SIGKILL signal to a thread using pthread_kill()
+    // ends the ENTIRE PROCESS, not simply the target thread.
+    // SIGKILL is defined to end the entire process, regardless
+    // of the thread it is delivered to, or how it is sent.
+    // The user signal SIGUSR1 is used here instead.
+    pthread_kill(*X_WINDOW_SYSTEM_THREAD, SIGUSR1);
 
-    if ((f != NULL_POINTER) && (*f != NULL_POINTER)) {
+    // Wait for thread to finish.
+    pthread_join(*X_WINDOW_SYSTEM_THREAD, NULL_POINTER);
 
-        **f = 1;
+    // Reset thread.
+    *X_WINDOW_SYSTEM_THREAD = -1;
 
-    } else {
-
-        log_message_debug("Could not interrupt x window system service. The x window system interrupt flag is null.");
-    }
+    // Reset thread interrupt flag.
+    *X_WINDOW_SYSTEM_THREAD_INTERRUPT = *NUMBER_0_INTEGER;
 }
 
 /* LINUX_OPERATING_SYSTEM */

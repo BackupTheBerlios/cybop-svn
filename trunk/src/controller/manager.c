@@ -1,7 +1,7 @@
 /*
  * $RCSfile: manager.c,v $
  *
- * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2006. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,13 +20,15 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.20 $ $Date: 2006-02-20 16:17:26 $ $Author: christian $
+ * @version $Revision: 1.21 $ $Date: 2006-04-20 22:36:09 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef MANAGER_SOURCE
 #define MANAGER_SOURCE
 
+#include <pthread.h>
+#include "../controller/manager/system_signal_handler_manager.c"
 #include "../controller/checker.c"
 #include "../globals/constants/abstraction_constants.c"
 #include "../globals/constants/channel_constants.c"
@@ -74,10 +76,12 @@ void manage(void* p0, void* p1) {
     void* s = NULL_POINTER;
     int* sc = NULL_POINTER;
     int* ss = NULL_POINTER;
-    // The signal memory blocked flag.
-    volatile sig_atomic_t* smb = NULL_POINTER;
+    // The signal memory mutex.
+    pthread_mutex_t* smt = NULL_POINTER;
+    // The x window system mutex.
+    pthread_mutex_t* xmt = NULL_POINTER;
     //
-    // The interrupt request flag.
+    // The signal memory interrupt request flag.
     //
     // Unix system signal handlers that return normally must modify some global
     // variable in order to have any effect. Typically, the variable is one that
@@ -109,20 +113,12 @@ void manage(void* p0, void* p1) {
     // Allocate signal memory count, size.
     allocate((void*) &sc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
     allocate((void*) &ss, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    // Allocate signal memory blocked flag.
-    // Actually, the flag is of type sig_atomic_t.
-    // But because sig_atomic_t is always an integer data type and in practice,
-    // one can assume that int and other integer types no longer than int are
-    // atomic, the integer vector procedures can be used here (instead of
-    // writing identical but new procedures for the type sig_atomic_t).
-    allocate((void*) &smb, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    // Allocate interrupt request flag.
-    // Actually, the flag is of type sig_atomic_t.
-    // But because sig_atomic_t is always an integer data type and in practice,
-    // one can assume that int and other integer types no longer than int are
-    // atomic, the integer vector procedures can be used here (instead of
-    // writing identical but new procedures for the type sig_atomic_t).
-    allocate((void*) &irq, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    // Allocate signal memory mutex.
+    smt = (pthread_mutex_t*) malloc(sizeof(pthread_mutex_t));
+    // Allocate x window system mutex.
+    xmt = (pthread_mutex_t*) malloc(sizeof(pthread_mutex_t));
+    // Allocate signal memory interrupt request flag.
+    irq = (volatile sig_atomic_t*) malloc(sizeof(volatile sig_atomic_t));
 
     // Initialise knowledge memory count, size.
     *kc = *NUMBER_0_INTEGER;
@@ -130,9 +126,11 @@ void manage(void* p0, void* p1) {
     // Initialise signal memory count, size.
     *sc = *NUMBER_0_INTEGER;
     *ss = *NUMBER_0_INTEGER;
-    // Initialise signal memory blocked flag.
-    *smb = *NUMBER_0_INTEGER;
-    // Initialise interrupt request flag.
+    // Initialise signal memory mutex.
+    pthread_mutex_init(smt, NULL_POINTER);
+    // Initialise x window system mutex.
+    pthread_mutex_init(xmt, NULL_POINTER);
+    // Initialise signal memory interrupt request flag.
     *irq = *NUMBER_0_INTEGER;
 
     // Allocate internal memory.
@@ -155,10 +153,15 @@ void manage(void* p0, void* p1) {
     set(i, (void*) SIGNAL_MEMORY_INTERNAL, (void*) &s, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     set(i, (void*) SIGNAL_MEMORY_COUNT_INTERNAL, (void*) &sc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     set(i, (void*) SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &ss, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    // Set signal memory blocked flag.
-    set(i, (void*) SIGNAL_MEMORY_BLOCKED_INTERNAL, (void*) &smb, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    // Set interrupt request flag.
+    // Set signal memory mutex.
+    set(i, (void*) SIGNAL_MEMORY_MUTEX_INTERNAL, (void*) &smt, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    // Set x window system mutex.
+    set(i, (void*) X_WINDOW_SYSTEM_MUTEX_INTERNAL, (void*) &xmt, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    // Set signal memory interrupt request flag.
     set(i, (void*) INTERRUPT_REQUEST_INTERNAL, (void*) &irq, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
+    // Start up system signal handler.
+    startup_system_signal_handler();
 
     log_message_debug("\n\n");
     log_message_debug("Info: Allocate startup model.");
@@ -218,12 +221,19 @@ void manage(void* p0, void* p1) {
     // can be entered, checking for signals (events/ interrupts)
     // which are stored/ found in the signal memory.
     // The loop is left as soon as its shutdown flag is set.
-    check(i, k, (void*) kc, (void*) ks, s, (void*) sc, (void*) ss, (void*) smb, (void*) irq);
+    check(i, k, (void*) kc, (void*) ks, s, (void*) sc, (void*) ss, (void*) smt, (void*) irq);
 
-    // Deallocate interrupt request flag.
-    deallocate((void*) &irq, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    // Deallocate signal memory blocked flag.
-    deallocate((void*) &smb, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    // Destroy signal memory mutex.
+    pthread_mutex_destroy(smt);
+    // Destroy x window system mutex.
+    pthread_mutex_destroy(xmt);
+
+    // Deallocate signal memory interrupt request flag.
+    free((void*) irq);
+    // Deallocate signal memory mutex.
+    free((void*) smt);
+    // Deallocate x window system mutex.
+    free((void*) xmt);
     // Deallocate signal memory.
     deallocate((void*) &s, (void*) ss, (void*) SIGNAL_MEMORY_ABSTRACTION, (void*) SIGNAL_MEMORY_ABSTRACTION_COUNT);
     deallocate((void*) &sc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);

@@ -1,7 +1,7 @@
 /*
  * $RCSfile: linux_console_converter.c,v $
  *
- * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2006. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,13 +20,20 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.10 $ $Date: 2006-03-13 23:16:53 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2006-04-20 22:36:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef LINUX_CONSOLE_CONVERTER_SOURCE
 #define LINUX_CONSOLE_CONVERTER_SOURCE
 
+#ifdef CYGWIN_ENVIRONMENT
+#include <windows.h>
+/* CYGWIN_ENVIRONMENT */
+#endif
+
+#include <stdio.h>
+#include <wchar.h>
 #include "../../globals/constants/abstraction_constants.c"
 #include "../../globals/constants/boolean_constants.c"
 #include "../../globals/constants/character_constants.c"
@@ -1235,7 +1242,13 @@ void serialise_linux_console_shape(void* p0, void* p1, void* p2, void* p3, void*
 
                 // Set character parameter to be handed over.
                 // The temporary wide character string count is returned.
+#ifdef CYGWIN_ENVIRONMENT
+                cc = wsprintfW((wchar_t*) c, L"%s", (char*) tmp);
+/* CYGWIN_ENVIRONMENT */
+#else
                 cc = swprintf((wchar_t*) c, cs, L"%s", (char*) tmp);
+/* CYGWIN_ENVIRONMENT */
+#endif
 
                 // Deallocate temporary ascii character array.
                 deallocate((void*) &tmp, (void*) &tmps, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);

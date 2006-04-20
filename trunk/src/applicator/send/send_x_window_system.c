@@ -1,7 +1,7 @@
 /*
  * $RCSfile: send_x_window_system.c,v $
  *
- * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2006. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.13 $ $Date: 2006-01-30 21:30:12 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2006-04-20 22:36:09 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -50,6 +50,14 @@ void send_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     log_message_debug("Send x window system message.");
 
+    // The x window system mutex.
+    pthread_mutex_t** xmt = (pthread_mutex_t**) &NULL_POINTER;
+
+    // Get x window system mutex.
+    get(p0, (void*) X_WINDOW_SYSTEM_MUTEX_INTERNAL, (void*) &xmt, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
+    pthread_mutex_lock(*xmt);
+
     fprintf(stderr, "TEST send 0: %i\n", p0);
 
     // Serialise compound model into x window system window.
@@ -66,6 +74,8 @@ void send_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     // Show window on display.
     write_data(d, NULL_POINTER, NULL_POINTER, p0, NULL_POINTER, (void*) X_WINDOW_SYSTEM_MODEL, (void*) X_WINDOW_SYSTEM_MODEL_COUNT);
+
+    pthread_mutex_unlock(*xmt);
 
     // TODO?? Destroy here ALL other things that were created in encode_x_window_system!!
 }

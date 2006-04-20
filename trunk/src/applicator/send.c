@@ -1,7 +1,7 @@
 /*
  * $RCSfile: send.c,v $
  *
- * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2006. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.28 $ $Date: 2006-02-20 16:17:26 $ $Author: christian $
+ * @version $Revision: 1.29 $ $Date: 2006-04-20 22:36:09 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -28,6 +28,7 @@
 #ifndef SEND_SOURCE
 #define SEND_SOURCE
 
+#include <signal.h>
 #include "../applicator/send/send_latex.c"
 #include "../applicator/send/send_linux_console.c"
 #include "../applicator/send/send_tcp_socket.c"
@@ -72,6 +73,11 @@ void send_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
     void* p6, void* p7, void* p8, void* p9) {
 
     log_message_debug("Send message.");
+
+    // The signal memory mutex.
+    pthread_mutex_t** mt = (pthread_mutex_t**) &NULL_POINTER;
+    // The interrupt request flag.
+    sig_atomic_t** irq = (sig_atomic_t**) &NULL_POINTER;
 
     // The channel abstraction.
     void** ca = &NULL_POINTER;
@@ -124,6 +130,11 @@ void send_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
     void** md = &NULL_POINTER;
     void** mdc = &NULL_POINTER;
     void** mds = &NULL_POINTER;
+
+    // Get signal memory mutex.
+    get(p2, (void*) SIGNAL_MEMORY_MUTEX_INTERNAL, (void*) &mt, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    // Get interrupt request internal.
+    get(p2, (void*) INTERRUPT_REQUEST_INTERNAL, (void*) &irq, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
     // Get channel.
     get_compound_element_by_name(p0, p1,
@@ -183,7 +194,17 @@ void send_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
 
         if (r != 0) {
 
+            // Lock signal memory mutex.
+            pthread_mutex_lock(*mt);
+
             set_signal(p6, p7, p8, (void*) *ma, (void*) *mac, (void*) *mm, (void*) *mmc, (void*) *md, (void*) *mdc, (void*) NORMAL_PRIORITY, p9);
+
+            // Set interrupt request flag, in order to notify the signal checker
+            // that a new signal has been placed in the signal memory.
+            **irq = *NUMBER_1_INTEGER;
+
+            // Unlock signal memory mutex.
+            pthread_mutex_unlock(*mt);
         }
     }
 

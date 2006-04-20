@@ -1,5 +1,5 @@
 /*
- * $RCSfile: boolean_constants.c,v $
+ * $RCSfile: tcp_socket_constants.c,v $
  *
  * Copyright (c) 1999-2006. Christian Heller and the CYBOP developers.
  *
@@ -20,24 +20,28 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2006-04-20 22:36:09 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2006-04-20 22:36:10 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef BOOLEAN_CONSTANTS_SOURCE
-#define BOOLEAN_CONSTANTS_SOURCE
+#ifndef TCP_SOCKET_CONSTANTS_SOURCE
+#define TCP_SOCKET_CONSTANTS_SOURCE
 
 #include "../../globals/constants/integer_constants.c"
 
 //
-// The two boolean values.
+// Request method.
 //
 
-/** The false boolean. */
-static int* FALSE_BOOLEAN = NUMBER_0_INTEGER_ARRAY;
+/** The get request method. */
+static char GET_REQUEST_METHOD_ARRAY[] = {'G', 'E', 'T'};
+static char* GET_REQUEST_METHOD = GET_REQUEST_METHOD_ARRAY;
+static int* GET_REQUEST_METHOD_COUNT = NUMBER_3_INTEGER_ARRAY;
 
-/** The true boolean. */
-static int* TRUE_BOOLEAN = NUMBER_1_INTEGER_ARRAY;
+/** The post request method. */
+static char POST_REQUEST_METHOD_ARRAY[] = {'P', 'O', 'S', 'T'};
+static char* POST_REQUEST_METHOD = POST_REQUEST_METHOD_ARRAY;
+static int* POST_REQUEST_METHOD_COUNT = NUMBER_4_INTEGER_ARRAY;
 
-/* BOOLEAN_CONSTANTS_SOURCE */
+/* TCP_SOCKET_CONSTANTS_SOURCE */
 #endif

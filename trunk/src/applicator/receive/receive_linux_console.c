@@ -1,7 +1,7 @@
 /*
  * $RCSfile: receive_linux_console.c,v $
  *
- * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2006. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2006-03-13 23:16:53 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2006-04-20 22:36:09 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -37,6 +37,7 @@
 #include "../../globals/constants/ascii_character_constants.c"
 #include "../../globals/constants/character_constants.c"
 #include "../../globals/constants/control_sequence_constants.c"
+#include "../../globals/constants/cyboi_constants.c"
 #include "../../globals/constants/integer_constants.c"
 #include "../../globals/constants/name_constants.c"
 #include "../../globals/constants/structure_constants.c"
@@ -64,8 +65,8 @@ void receive_linux_console_signal(void* p0, void* p1, void* p2) {
     void** s = (void**) &NULL_POINTER;
     void** sc = (void**) &NULL_POINTER;
     void** ss = (void**) &NULL_POINTER;
-    // The signal memory blocked flag.
-    sig_atomic_t** smb = (sig_atomic_t**) &NULL_POINTER;
+    // The signal memory mutex.
+    pthread_mutex_t** mt = (pthread_mutex_t**) &NULL_POINTER;
     // The interrupt request flag.
     sig_atomic_t** irq = (sig_atomic_t**) &NULL_POINTER;
     // The user interface commands.
@@ -97,8 +98,8 @@ void receive_linux_console_signal(void* p0, void* p1, void* p2) {
     get(p0, (void*) SIGNAL_MEMORY_INTERNAL, (void*) &s, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     get(p0, (void*) SIGNAL_MEMORY_COUNT_INTERNAL, (void*) &sc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     get(p0, (void*) SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &ss, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    // Get signal memory blocked internal.
-    get(p0, (void*) SIGNAL_MEMORY_BLOCKED_INTERNAL, (void*) &smb, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    // Get signal memory mutex.
+    get(p0, (void*) SIGNAL_MEMORY_MUTEX_INTERNAL, (void*) &mt, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     // Get interrupt request internal.
     get(p0, (void*) INTERRUPT_REQUEST_INTERNAL, (void*) &irq, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     // Get user interface commands internal.
@@ -119,38 +120,23 @@ void receive_linux_console_signal(void* p0, void* p1, void* p2) {
 
     fprintf(stdout, "TEST signal cm %s\n", (char*) *cm);
 
+    // Lock signal memory mutex.
+    pthread_mutex_lock(*mt);
+
     // Allocate signal id.
     allocate((void*) &id, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
     *id = 0;
     get_new_signal_id(*s, *sc, (void*) id);
 
-    // Wait while signal memory is blocked.
-    while (**smb != *NUMBER_0_INTEGER) {
-
-        sleep(1);
-    }
-
-    // Block signal memory.
-    **smb = *NUMBER_1_INTEGER;
-
     // Add signal to signal memory.
     set_signal(*s, *sc, *ss, *ca, *cac, *cm, *cmc, *cd, *cdc, (void*) NORMAL_PRIORITY, (void*) id);
-
-    // Unblock signal memory.
-    **smb = *NUMBER_0_INTEGER;
 
     // Set interrupt request flag, in order to notify the signal checker
     // that a new signal has been placed in the signal memory.
     **irq = *NUMBER_1_INTEGER;
 
-/*?? A simple sleep(1) is used instead of signals now!
-    // Send signal to the calling process, that is this process itself.
-    // An alternative which might be more portable to older systems is:
-    // kill(getpid(), signum);
-    // The kill function is not just for killing,
-    // but also for sending general signals!
-    raise(SIGIO);
-*/
+    // Unlock signal memory mutex.
+    pthread_mutex_unlock(*mt);
 }
 
 /**
@@ -192,23 +178,21 @@ void receive_linux_console_thread(void* p0) {
     void* b = NULL_POINTER;
     int bc = *NUMBER_0_INTEGER;
     int bs = *NUMBER_3_INTEGER;
-    // The activation flag.
-//??    int** f = (int**) &NULL_POINTER;
+    // The interrupt flag.
+    int** f = (int**) &NULL_POINTER;
 
     // Allocate character buffer.
     allocate((void*) &b, (void*) &bs, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
     while (1) {
 
-/*??
-        // Get activation flag.
-        get(p0, (void*) LINUX_CONSOLE_ACTIVE_INTERNAL, (void*) &f, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-
-        if (**f == *NUMBER_1_INTEGER) {
-
-            break;
-        }
-*/
+        // A break condition does not exist here because the loop
+        // is blocking neverendingly while waiting for signals.
+        // The loop and this thread can only be exited by an external signal
+        // which is sent in the corresponding interrupt service procedure
+        // (situated in the applicator/interrupt/ directory)
+        // and processed in the system signal handler procedure
+        // (situated in the controller/checker.c module).
 
         // Get character from terminal.
         // CAUTION! Use 'wint_t' instead of 'int' as return type for
@@ -359,6 +343,14 @@ void receive_linux_console_thread(void* p0) {
     // (other than the thread in which main() was first invoked)
     // returns from the routine that was used to create it.
     // The pthread_exit() function does therefore not have to be called here.
+    //
+    // However, a break condition does not exist here because the loop
+    // is blocking neverendingly while waiting for signals.
+    // The loop and this thread can only be exited by an external signal
+    // which is sent in the corresponding interrupt service procedure
+    // (situated in the applicator/interrupt/ directory)
+    // and processed in the system signal handler procedure
+    // (situated in the controller/checker.c module).
 }
 
 /**
@@ -378,11 +370,8 @@ void receive_linux_console(void* p0, void* p1, void* p2, void* p3) {
     set(p0, (void*) TEMPORARY_USER_INTERFACE_COMMANDS_COUNT_INTERNAL, (void*) &p2, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     set(p0, (void*) TEMPORARY_USER_INTERFACE_COMMANDS_SIZE_INTERNAL, (void*) &p3, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-    // The thread.
-    pthread_t t;
-
     // Create thread.
-    pthread_create(&t, (pthread_attr_t*) NULL_POINTER, (void*) &receive_linux_console_thread, p0);
+    pthread_create(LINUX_CONSOLE_THREAD, NULL_POINTER, (void*) &receive_linux_console_thread, p0);
 }
 
 /* LINUX_OPERATING_SYSTEM */

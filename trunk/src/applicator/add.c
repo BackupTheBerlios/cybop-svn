@@ -1,7 +1,7 @@
 /*
  * $RCSfile: add.c,v $
  *
- * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2006. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2005-08-11 22:33:45 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2006-04-20 22:36:08 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

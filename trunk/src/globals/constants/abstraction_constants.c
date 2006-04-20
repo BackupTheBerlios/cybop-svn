@@ -1,7 +1,7 @@
 /*
  * $RCSfile: abstraction_constants.c,v $
  *
- * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2006. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.14 $ $Date: 2006-02-02 00:29:40 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2006-04-20 22:36:09 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -121,55 +121,55 @@ static char CHARACTER_VECTOR_ABSTRACTION_ARRAY[] = {'c', 'h', 'a', 'r', 'a', 'c'
 static char* CHARACTER_VECTOR_ABSTRACTION = CHARACTER_VECTOR_ABSTRACTION_ARRAY;
 static int* CHARACTER_VECTOR_ABSTRACTION_COUNT = NUMBER_9_INTEGER_ARRAY;
 
-/** The wide character vector abstraction. */
-static char WIDE_CHARACTER_VECTOR_ABSTRACTION_ARRAY[] = {'w', 'i', 'd', 'e', '_', 'c', 'h', 'a', 'r', 'a', 'c', 't', 'e', 'r'};
-static char* WIDE_CHARACTER_VECTOR_ABSTRACTION = WIDE_CHARACTER_VECTOR_ABSTRACTION_ARRAY;
-static int* WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT = NUMBER_14_INTEGER_ARRAY;
-
-/** The integer vector abstraction. */
-static char INTEGER_VECTOR_ABSTRACTION_ARRAY[] = {'i', 'n', 't', 'e', 'g', 'e', 'r'};
-static char* INTEGER_VECTOR_ABSTRACTION = INTEGER_VECTOR_ABSTRACTION_ARRAY;
-static int* INTEGER_VECTOR_ABSTRACTION_COUNT = NUMBER_7_INTEGER_ARRAY;
+/** The complex abstraction. */
+static char COMPLEX_ABSTRACTION_ARRAY[] = {'c', 'o', 'm', 'p', 'l', 'e', 'x'};
+static char* COMPLEX_ABSTRACTION = COMPLEX_ABSTRACTION_ARRAY;
+static int* COMPLEX_ABSTRACTION_COUNT = NUMBER_7_INTEGER_ARRAY;
 
 /** The double vector abstraction. */
 static char DOUBLE_VECTOR_ABSTRACTION_ARRAY[] = {'d', 'o', 'u', 'b', 'l', 'e'};
 static char* DOUBLE_VECTOR_ABSTRACTION = DOUBLE_VECTOR_ABSTRACTION_ARRAY;
 static int* DOUBLE_VECTOR_ABSTRACTION_COUNT = NUMBER_6_INTEGER_ARRAY;
 
-/** The unsigned long vector abstraction. */
-static char UNSIGNED_LONG_VECTOR_ABSTRACTION_ARRAY[] = {'u', 'n', 's', 'i', 'g', 'n', 'e', 'd', '_', 'l', 'o', 'n', 'g'};
-static char* UNSIGNED_LONG_VECTOR_ABSTRACTION = UNSIGNED_LONG_VECTOR_ABSTRACTION_ARRAY;
-static int* UNSIGNED_LONG_VECTOR_ABSTRACTION_COUNT = NUMBER_13_INTEGER_ARRAY;
+/** The fraction abstraction. */
+static char FRACTION_ABSTRACTION_ARRAY[] = {'f', 'r', 'a', 'c', 't', 'i', 'o', 'n'};
+static char* FRACTION_ABSTRACTION = FRACTION_ABSTRACTION_ARRAY;
+static int* FRACTION_ABSTRACTION_COUNT = NUMBER_8_INTEGER_ARRAY;
+
+/** The integer vector abstraction. */
+static char INTEGER_VECTOR_ABSTRACTION_ARRAY[] = {'i', 'n', 't', 'e', 'g', 'e', 'r'};
+static char* INTEGER_VECTOR_ABSTRACTION = INTEGER_VECTOR_ABSTRACTION_ARRAY;
+static int* INTEGER_VECTOR_ABSTRACTION_COUNT = NUMBER_7_INTEGER_ARRAY;
 
 /** The pointer vector abstraction. */
 static char POINTER_VECTOR_ABSTRACTION_ARRAY[] = {'p', 'o', 'i', 'n', 't', 'e', 'r', '_', 'v', 'e', 'c', 't', 'o', 'r'};
 static char* POINTER_VECTOR_ABSTRACTION = POINTER_VECTOR_ABSTRACTION_ARRAY;
 static int* POINTER_VECTOR_ABSTRACTION_COUNT = NUMBER_14_INTEGER_ARRAY;
 
-/** The fraction abstraction. */
-static char FRACTION_ABSTRACTION_ARRAY[] = {'f', 'r', 'a', 'c', 't', 'i', 'o', 'n'};
-static char* FRACTION_ABSTRACTION = FRACTION_ABSTRACTION_ARRAY;
-static int* FRACTION_ABSTRACTION_COUNT = NUMBER_8_INTEGER_ARRAY;
-
-/** The complex abstraction. */
-static char COMPLEX_ABSTRACTION_ARRAY[] = {'c', 'o', 'm', 'p', 'l', 'e', 'x'};
-static char* COMPLEX_ABSTRACTION = COMPLEX_ABSTRACTION_ARRAY;
-static int* COMPLEX_ABSTRACTION_COUNT = NUMBER_7_INTEGER_ARRAY;
-
-/** The time abstraction. */
-static char TIME_ABSTRACTION_ARRAY[] = {'t', 'i', 'm', 'e'};
-static char* TIME_ABSTRACTION = TIME_ABSTRACTION_ARRAY;
-static int* TIME_ABSTRACTION_COUNT = NUMBER_4_INTEGER_ARRAY;
+/** The terminal background colour abstraction. */
+static char TERMINAL_BACKGROUND_ABSTRACTION_ARRAY[] = {'t', 'e', 'r', 'm', 'i', 'n', 'a', 'l', '_', 'b', 'a', 'c', 'k', 'g', 'r', 'o', 'u', 'n', 'd'};
+static char* TERMINAL_BACKGROUND_ABSTRACTION = TERMINAL_BACKGROUND_ABSTRACTION_ARRAY;
+static int* TERMINAL_BACKGROUND_ABSTRACTION_COUNT = NUMBER_19_INTEGER_ARRAY;
 
 /** The terminal foreground colour abstraction. */
 static char TERMINAL_FOREGROUND_ABSTRACTION_ARRAY[] = {'t', 'e', 'r', 'm', 'i', 'n', 'a', 'l', '_', 'f', 'o', 'r', 'e', 'g', 'r', 'o', 'u', 'n', 'd'};
 static char* TERMINAL_FOREGROUND_ABSTRACTION = TERMINAL_FOREGROUND_ABSTRACTION_ARRAY;
 static int* TERMINAL_FOREGROUND_ABSTRACTION_COUNT = NUMBER_19_INTEGER_ARRAY;
 
-/** The terminal background colour abstraction. */
-static char TERMINAL_BACKGROUND_ABSTRACTION_ARRAY[] = {'t', 'e', 'r', 'm', 'i', 'n', 'a', 'l', '_', 'b', 'a', 'c', 'k', 'g', 'r', 'o', 'u', 'n', 'd'};
-static char* TERMINAL_BACKGROUND_ABSTRACTION = TERMINAL_BACKGROUND_ABSTRACTION_ARRAY;
-static int* TERMINAL_BACKGROUND_ABSTRACTION_COUNT = NUMBER_19_INTEGER_ARRAY;
+/** The time abstraction. */
+static char TIME_ABSTRACTION_ARRAY[] = {'t', 'i', 'm', 'e'};
+static char* TIME_ABSTRACTION = TIME_ABSTRACTION_ARRAY;
+static int* TIME_ABSTRACTION_COUNT = NUMBER_4_INTEGER_ARRAY;
+
+/** The unsigned long vector abstraction. */
+static char UNSIGNED_LONG_VECTOR_ABSTRACTION_ARRAY[] = {'u', 'n', 's', 'i', 'g', 'n', 'e', 'd', '_', 'l', 'o', 'n', 'g'};
+static char* UNSIGNED_LONG_VECTOR_ABSTRACTION = UNSIGNED_LONG_VECTOR_ABSTRACTION_ARRAY;
+static int* UNSIGNED_LONG_VECTOR_ABSTRACTION_COUNT = NUMBER_13_INTEGER_ARRAY;
+
+/** The wide character vector abstraction. */
+static char WIDE_CHARACTER_VECTOR_ABSTRACTION_ARRAY[] = {'w', 'i', 'd', 'e', '_', 'c', 'h', 'a', 'r', 'a', 'c', 't', 'e', 'r'};
+static char* WIDE_CHARACTER_VECTOR_ABSTRACTION = WIDE_CHARACTER_VECTOR_ABSTRACTION_ARRAY;
+static int* WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT = NUMBER_14_INTEGER_ARRAY;
 
 //
 // Audio abstractions.

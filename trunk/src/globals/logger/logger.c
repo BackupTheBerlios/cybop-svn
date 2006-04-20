@@ -1,7 +1,7 @@
 /*
  * $RCSfile: logger.c,v $
  *
- * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2006. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,7 +27,7 @@
  * Otherwise, an ENDLESS LOOP will be created, because cyboi's
  * array procedures call the logger in turn.
  *
- * @version $Revision: 1.11 $ $Date: 2006-02-09 02:22:58 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2006-04-20 22:36:10 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -35,6 +35,7 @@
 #ifndef LOGGER_SOURCE
 #define LOGGER_SOURCE
 
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>

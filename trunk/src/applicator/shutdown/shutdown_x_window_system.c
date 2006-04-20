@@ -1,7 +1,7 @@
 /*
  * $RCSfile: shutdown_x_window_system.c,v $
  *
- * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2006. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2006-03-13 23:16:53 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2006-04-20 22:36:09 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  *
@@ -76,6 +76,9 @@ void shutdown_x_window_system(void* p0, void* p1, void* p2, void* p3) {
     // Only destroy display if existent.
     if (*di != NULL_POINTER) {
 
+        // Interrupt receive signal thread.
+        interrupt_x_window_system();
+
         // Remove temporary user interface root internal.
         remove_element(p0, INTERNAL_MEMORY_ELEMENTS_COUNT, TEMPORARY_USER_INTERFACE_ROOT_INTERNAL, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         remove_element(p0, INTERNAL_MEMORY_ELEMENTS_COUNT, TEMPORARY_USER_INTERFACE_ROOT_COUNT_INTERNAL, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
@@ -127,6 +130,8 @@ void shutdown_x_window_system(void* p0, void* p1, void* p2, void* p3) {
         // having the same root and depth as the specified drawable.
         // Use with other drawables results in a BadMatch error.
         struct _XGC** gc = (struct _XGC**) &NULL_POINTER;
+        // The interrupt flag.
+        int* ir = NULL_POINTER;
 
         // Get x window system internals.
         get(p0, (void*) X_WINDOW_SYSTEM_DISPLAY_NAME_INTERNAL, (void*) &dn, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
@@ -142,6 +147,7 @@ void shutdown_x_window_system(void* p0, void* p1, void* p2, void* p3) {
         get(p0, (void*) X_WINDOW_SYSTEM_GRAPHIC_CONTEXT_VALUE_MASK_INTERNAL, (void*) &vm, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         get(p0, (void*) X_WINDOW_SYSTEM_GRAPHIC_CONTEXT_VALUES_INTERNAL, (void*) &v, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         get(p0, (void*) X_WINDOW_SYSTEM_GRAPHIC_CONTEXT_INTERNAL, (void*) &gc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+//??        get(p0, (void*) X_WINDOW_SYSTEM_INTERRUPT_INTERNAL, (void*) &ir, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
 /*??
     XFreeGC(*d, *gc_menu_font);
@@ -161,6 +167,7 @@ void shutdown_x_window_system(void* p0, void* p1, void* p2, void* p3) {
         // CAUTION! Use descending order!
         // Example: The values (v) are destroyed BEFORE the value mask (vm)
         // attributes, since v might still reference vm internally.
+        deallocate((void*) ir, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 //??        free(*v);
         deallocate((void*) vm, (void*) PRIMITIVE_COUNT, (void*) UNSIGNED_LONG_VECTOR_ABSTRACTION, (void*) UNSIGNED_LONG_VECTOR_ABSTRACTION_COUNT);
         deallocate((void*) w, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);

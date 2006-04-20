@@ -1,7 +1,7 @@
 /*
  * $RCSfile: xml_converter.c,v $
  *
- * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2006. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,7 +24,7 @@
  * - parse an xml stream into an xml model
  * - serialise an xml model into an xml stream
  *
- * @version $Revision: 1.11 $ $Date: 2006-02-09 02:22:59 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2006-04-20 22:36:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -33,7 +33,7 @@
 
 #include <libxml/parser.h>
 #include "../../globals/constants/character_constants.c"
-#include "../../globals/constants/constant.c"
+#include "../../globals/constants/cybol_constants.c"
 #include "../../globals/constants/integer_constants.c"
 #include "../../globals/constants/log_constants.c"
 #include "../../globals/logger/logger.c"

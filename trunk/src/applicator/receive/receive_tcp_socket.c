@@ -1,7 +1,7 @@
 /*
  * $RCSfile: receive_tcp_socket.c,v $
  *
- * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2006. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.26 $ $Date: 2006-03-13 23:16:53 $ $Author: christian $
+ * @version $Revision: 1.27 $ $Date: 2006-04-20 22:36:09 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -41,13 +41,13 @@
 #include "../../globals/constants/abstraction_constants.c"
 #include "../../globals/constants/channel_constants.c"
 #include "../../globals/constants/character_constants.c"
-#include "../../globals/constants/constant.c"
 #include "../../globals/constants/escape_code_constants.c"
 #include "../../globals/constants/integer_constants.c"
 #include "../../globals/constants/log_constants.c"
 #include "../../globals/constants/model_constants.c"
 #include "../../globals/constants/name_constants.c"
 #include "../../globals/constants/structure_constants.c"
+#include "../../globals/constants/tcp_socket_constants.c"
 #include "../../globals/variables/variables.c"
 #include "../../memoriser/accessor/compound_accessor.c"
 #include "../../memoriser/accessor/internal_memory_accessor.c"
@@ -585,7 +585,7 @@ void get_parameter_from_request(char* req, int* req_count, char** param, int* pa
     // Check the request method ( post or get );
     int req_meth_post_res = 0;
 
-    compare_arrays(req, REQEUST_METHOD_POST_COUNT, REQEUST_METHOD_POST, REQEUST_METHOD_POST_COUNT, &req_meth_post_res, CHARACTER_ARRAY);
+    compare_arrays(req, POST_REQUEST_METHOD_COUNT, POST_REQUEST_METHOD, POST_REQUEST_METHOD_COUNT, &req_meth_post_res, CHARACTER_ARRAY);
 
     if (req_meth_post_res == 0) {
 
@@ -827,6 +827,9 @@ void set_signal_for_parameter(void* source, int* source_count, void* dest, int* 
         get(p4, (void*) SIGNAL_MEMORY_COUNT_INTERNAL, (void*) &mc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         get(p4, (void*) SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &ms, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
+        // Lock signal memory mutex.
+//??        pthread_mutex_lock(*mt);
+
         // The signal id.
         int* id = NULL_POINTER;
         allocate(&id, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
@@ -834,11 +837,14 @@ void set_signal_for_parameter(void* source, int* source_count, void* dest, int* 
         get_new_signal_id(*m, *mc, (void*) id);
 
         // Set signal.
-        set_signal(*m, *mc, *ms,
-            (void*) sa, (void*) sac,
-            (void*) sm, (void*) smc,
-            (void*) sd, (void*) sdc,
-            (void*) NORMAL_PRIORITY, (void*) id);
+        set_signal(*m, *mc, *ms, (void*) sa, (void*) sac, (void*) sm, (void*) smc, (void*) sd, (void*) sdc, (void*) NORMAL_PRIORITY, (void*) id);
+
+        // Set interrupt request flag, in order to notify the signal checker
+        // that a new signal has been placed in the signal memory.
+//??        **irq = *NUMBER_1_INTEGER;
+
+        // Unlock signal memory mutex.
+//??        pthread_mutex_unlock(*mt);
     }
 }
 
@@ -1128,6 +1134,9 @@ void handle_tcp_socket_request(void* p0, void* p1) {
                 get(p0, (void*) SIGNAL_MEMORY_COUNT_INTERNAL, (void*) &mc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
                 get(p0, (void*) SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &ms, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
+                // Lock signal memory mutex.
+//??                pthread_mutex_lock(*mt);
+
                 // The signal id.
                 int* id = NULL_POINTER;
                 allocate(&id, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
@@ -1143,6 +1152,13 @@ void handle_tcp_socket_request(void* p0, void* p1) {
 
                 add_signal_id(p0, (void*) id);
                 add_client_socket_number(p0, (void*) cs);
+
+                // Set interrupt request flag, in order to notify the signal checker
+                // that a new signal has been placed in the signal memory.
+//??                **irq = *NUMBER_1_INTEGER;
+
+                // Unlock signal memory mutex.
+//??                pthread_mutex_unlock(*mt);
 
             } else {
 
@@ -1223,7 +1239,7 @@ void run_tcp_socket_server(void* p0) {
     // The interrupt flag.
     int** f = (int**) &NULL_POINTER;
 
-    get(p0, (void*) TCP_SOCKET_INTERRUPT_INTERNAL, (void*) &f, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+//??    get(p0, (void*) TCP_SOCKET_INTERRUPT_INTERNAL, (void*) &f, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
     while (1) {
 
@@ -1287,7 +1303,7 @@ void receive_tcp_socket(void* p0, void* p1, void* p2, void* p3,
                 // The interrupt flag.
                 int** f = (int**) &NULL_POINTER;
 
-                get(p0, (void*) TCP_SOCKET_INTERRUPT_INTERNAL, (void*) &f, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+//??                get(p0, (void*) TCP_SOCKET_INTERRUPT_INTERNAL, (void*) &f, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
                 if ((f != NULL_POINTER) && (*f != NULL_POINTER)) {
 

@@ -1,7 +1,7 @@
 /*
  * $RCSfile: x_window_system_converter.c,v $
  *
- * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2006. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2006-02-09 02:22:59 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2006-04-20 22:36:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -348,53 +348,48 @@ void serialise_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
                     // Destroy terminated text.
                     deallocate_array((void*) &text, (void*) &texts, (void*) CHARACTER_ARRAY);
 
-/*??
-    In the conventional `XFontStruct' model, an X client opens a font
-    using `XLoadQueryFont()', draw a string using `XDrawString()', and
-    close the font using `XFreeFont()'.  On the other hand, in the
-    internationalized `XFontSet' model, an X client opens a font using
-    `XCreateFontSet()', draw a string using `XmbDrawString()', and close
-    the font using `XFreeFontSet()'.  The following are a concise list of
-    substitution.
+                    /*
+                    In the conventional 'XFontStruct' model, an X client opens
+                    a font using 'XLoadQueryFont()', draws a string using
+                    'XDrawString()', and closes the font using 'XFreeFont()'.
+                    On the other hand, in the internationalised 'XFontSet'
+                    model, an X client opens a font using 'XCreateFontSet()',
+                    draws a string using 'XmbDrawString()', and closes the font
+                    using 'XFreeFontSet()'.
 
-    * `XFontStruct' -> `XFontSet'
+                    Following is a concise list of substitutions:
+                    - 'XFontStruct' -> 'XFontSet'
+                    - 'XLoadQueryFont()' -> 'XCreateFontSet()'
+                    - both of 'XDrawString()' and 'XDrawString16'
+                      -> either of 'XmbDrawString()' or 'XwcDrawString()'
+                    - both of 'XDrawImageString()' and 'XDrawImageString16'
+                      -> either of 'XmbDrawImageString()' or 'XwcDrawImageString()'
 
-    * `XLoadQueryFont()' -> `XCreateFontSet()'
+                    Note that 'XFontStruct' is usually used as a pointer,
+                    while 'XFontSet' itself is a pointer.
 
-    * both of `XDrawString()' and `XDrawString16' -> either of
-        `XmbDrawString()' or `XwcDrawString()'
+                    Some people (ISO-8859-1-language speakers) may think that
+                    'XFontSet'-related functions are not 8-bit clean. This is wrong.
+                    'XFontSet'-related functions work according to 'LC_CTYPE' locale.
+                    The default LC_CTYPE locale uses ASCII. Thus, if a user doesn't
+                    set the 'LANG', 'LC_CTYPE', nor 'LC_ALL' environmental variable,
+                    'XFontSet'-related functions will use ASCII, i.e. are not 8-bit clean.
+                    The user has to set the 'LANG', 'LC_CTYPE', or 'LC_ALL'
+                    environmental variable properly (for example, 'LANG=en_US').
 
-    * both of `XDrawImageString()' and `XDrawImageString16' -> either
-        of `XmbDrawImageString()' or `XwcDrawImageString()'
+                    The upstream developers of X clients sometimes hate to
+                    enforce users to set such environmental variables.
+                    In such a case, The X clients should have two ways to
+                    output text, i.e. the 'XFontStruct'-related conventional
+                    way and the 'XFontSet'-related internationalized way.
+                    If 'setlocale()' returns 'NULL', '"C"', or '"POSIX"', one
+                    should use the 'XFontStruct' way, otherwise the 'XFontSet' way.
+                    The author implemented this algorithm to a few window managers
 
-    Note that `XFontStruct' is usually used as a pointer, while `XFontSet'
-    itself is a pointer.
-
-    Some people (ISO-8859-1-language speakers) may think that
-    `XFontSet'-related functions are not 8-bit clean.  This is wrong.
-    `XFontSet'-related functions work according to `LC_CTYPE' locale.  The
-    default LC_CTYPE locale uses ASCII.  Thus, if a user doesn't set
-    `LANG', `LC_CTYPE', nor `LC_ALL' environmental variable,
-    `XFontSet'-related functions will use ASCII, i.e., not 8-bit clean.
-    The user has to set `LANG', `LC_CTYPE', or `LC_ALL' environmental
-    variable properly (for example, `LANG=en_US').
-
-    The upstream developers of X clients sometimes hate to enforce users
-    to set such environmental variables.  [2] In such a case, The X
-    clients should have two ways to output text, i.e.,
-    `XFontStruct'-related conventional way and `XFontSet'-related
-    internationalized way.  If `setlocale()' returns `NULL', `"C"', or
-    `"POSIX"', use `XFontStruct' way.  Otherwise use `XFontSet' way.  The
-    author implemented this algorithm to a few window managers such as TWM
-    (version 4.0.1d), Blackbox (0.60.1), IceWM (1.0.0), sawmill (0.28),
-    and so on.
-
-[1]  Though UTF-8 is an encoding with single CCS, the current version of
-     XFree86 (4.0.1) needs multiple fonts to handle UTF-8.
-
-[2]  IMHO, all users will have to set LANG properly when UTF-8 will become
-     popular.
-*/
+                    [1] Though UTF-8 is an encoding with single CCS, the current
+                    version of XFree86 (4.0.1) needs multiple fonts to handle UTF-8.
+                    [2] All users will have to set LANG properly when UTF-8 will become popular.
+                    */
 
 /*??
                     //?? TODO: Move these before the coordinate calculation,

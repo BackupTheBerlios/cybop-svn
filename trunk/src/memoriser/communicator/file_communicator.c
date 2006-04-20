@@ -1,7 +1,7 @@
 /*
  * $RCSfile: file_communicator.c,v $
  *
- * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2006. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,7 +24,7 @@
  * - receive a file stream into a byte array
  * - send a file stream from a byte array
  *
- * @version $Revision: 1.15 $ $Date: 2006-02-09 23:13:53 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2006-04-20 22:36:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -33,7 +33,7 @@
 
 #include <stdio.h>
 #include "../../globals/constants/ascii_character_constants.c"
-#include "../../globals/constants/constant.c"
+#include "../../globals/constants/cyboi_constants.c"
 #include "../../globals/constants/integer_constants.c"
 #include "../../globals/constants/structure_constants.c"
 #include "../../globals/logger/logger.c"

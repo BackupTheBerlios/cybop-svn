@@ -1,7 +1,7 @@
 /*
  * $RCSfile: integer_vector_converter.c,v $
  *
- * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2006. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,13 +20,19 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.14 $ $Date: 2006-03-13 23:16:53 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2006-04-20 22:36:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef INTEGER_VECTOR_CONVERTER_SOURCE
 #define INTEGER_VECTOR_CONVERTER_SOURCE
 
+#ifdef CYGWIN_ENVIRONMENT
+#include <windows.h>
+/* CYGWIN_ENVIRONMENT */
+#endif
+
+#include <stdio.h>
 #include <string.h>
 #include <wchar.h>
 #include "../../globals/constants/abstraction_constants.c"
@@ -248,7 +254,13 @@ void serialise_integer_wide(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     // for the given input, excluding the trailing null.
                     // If not all output fits into the provided buffer,
                     // a negative value is returned.
+#ifdef CYGWIN_ENVIRONMENT
+                    *dc = wsprintfW(*d, L"%i", *v);
+/* CYGWIN_ENVIRONMENT */
+#else
                     *dc = swprintf(*d, *ds, L"%i", *v);
+/* CYGWIN_ENVIRONMENT */
+#endif
                 }
 
             } else {

@@ -1,7 +1,7 @@
 /*
  * $RCSfile: variables.c,v $
  *
- * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2006. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,15 +20,14 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2006-02-20 16:17:26 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2006-04-20 22:36:10 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef VARIABLES_SOURCE
 #define VARIABLES_SOURCE
 
-#include <signal.h>
-#include <stdio.h>
+#include <pthread.h>
 
 //
 // Null pointer.
@@ -39,16 +38,6 @@
 
 // The null pointer.
 static void* NULL_POINTER;
-
-//
-// Logging.
-//
-
-// The log level.
-static int* LOG_LEVEL;
-
-// The log output.
-static int LOG_OUTPUT;
 
 //
 // Primitive type sizes.
@@ -71,6 +60,38 @@ static int* UNSIGNED_LONG_PRIMITIVE_SIZE;
 
 // The double primitive size.
 static int* DOUBLE_PRIMITIVE_SIZE;
+
+//
+// Thread identifications and service interrupt flags.
+//
+
+// The linux console thread.
+static pthread_t* LINUX_CONSOLE_THREAD;
+// The unix socket thread.
+static pthread_t* UNIX_SOCKET_THREAD;
+// The tcp socket thread.
+static pthread_t* TCP_SOCKET_THREAD;
+// The x window system thread.
+static pthread_t* X_WINDOW_SYSTEM_THREAD;
+
+// The linux console interrupt flag.
+static int* LINUX_CONSOLE_THREAD_INTERRUPT;
+// The unix socket interrupt flag.
+static int* UNIX_SOCKET_THREAD_INTERRUPT;
+// The tcp socket interrupt flag.
+static int* TCP_SOCKET_THREAD_INTERRUPT;
+// The x window system interrupt flag.
+static int* X_WINDOW_SYSTEM_THREAD_INTERRUPT;
+
+//
+// Logging.
+//
+
+// The log level.
+static int* LOG_LEVEL;
+
+// The log output.
+static int LOG_OUTPUT;
 
 /* VARIABLES_SOURCE */
 #endif
