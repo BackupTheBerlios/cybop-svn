@@ -22,21 +22,21 @@
  *
  * this handel a loop
  *
- * @version $Revision: 1.10 $ $Date: 2006-04-20 22:36:09 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2006-04-21 23:49:10 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef SET_SOURCE
-#define SET_SOURCE
+#ifndef COPY_SOURCE
+#define COPY_SOURCE
 
 #include "../globals/constants/abstraction_constants.c"
 #include "../globals/constants/log_constants.c"
 #include "../globals/constants/name_constants.c"
 #include "../globals/logger/logger.c"
+#include "../memoriser/allocator.c"
 #include "../memoriser/array.c"
 #include "../memoriser/communicator.c"
 #include "../memoriser/converter.c"
-#include "../memoriser/allocator.c"
 #include "../memoriser/translator.c"
 
 /**
@@ -368,5 +368,5 @@ void copy_property(void* param, int* param_count, void* p2, void* p3, void* p4, 
     }
 }
 
-/* SET_SOURCE */
+/* COPY_SOURCE */
 #endif

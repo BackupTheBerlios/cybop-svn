@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.13 $ $Date: 2006-04-20 22:36:09 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2006-04-21 23:49:10 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description This module starts up a service.
  */
@@ -34,7 +34,6 @@
 #include "../applicator/startup/startup_x_window_system.c"
 #include "../globals/constants/abstraction_constants.c"
 #include "../globals/constants/channel_constants.c"
-#include "../globals/constants/constant.c"
 #include "../globals/constants/log_constants.c"
 #include "../globals/constants/model_constants.c"
 #include "../globals/constants/name_constants.c"

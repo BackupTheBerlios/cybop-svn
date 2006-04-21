@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.15 $ $Date: 2006-04-20 22:36:11 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2006-04-21 23:49:10 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -853,11 +853,8 @@ void set_compound_element_by_name(void* p0, void* p1, void* p2,
     // The meta separator index.
     int j = -1;
 
-    get_array_elements_index(p3, p4, (void*) COMPOUND_PART_SEPARATOR, (void*) NUMBER_1_INTEGER, (void*) &i, (void*) CHARACTER_ARRAY);
-    get_array_elements_index(p3, p4, (void*) COMPOUND_META_SEPARATOR, (void*) NUMBER_1_INTEGER, (void*) &j, (void*) CHARACTER_ARRAY);
-
-    fprintf(stderr, "TEST i: %i\n", i);
-    fprintf(stderr, "TEST j: %i\n", j);
+    get_array_elements_index(p3, p4, (void*) COMPOUND_PART_SEPARATOR, (void*) COMPOUND_PART_SEPARATOR_COUNT, (void*) &i, (void*) CHARACTER_ARRAY);
+    get_array_elements_index(p3, p4, (void*) COMPOUND_META_SEPARATOR, (void*) COMPOUND_PART_SEPARATOR_COUNT, (void*) &j, (void*) CHARACTER_ARRAY);
 
     if ((i >= 0) && (j == -1)) {
 
@@ -1486,11 +1483,8 @@ void remove_compound_element_by_name(void* p0, void* p1, void* p2, void* p3, voi
     // The meta separator index.
     int j = -1;
 
-    get_array_elements_index(p3, p4, (void*) COMPOUND_PART_SEPARATOR, (void*) NUMBER_1_INTEGER, (void*) &i, (void*) CHARACTER_ARRAY);
-    get_array_elements_index(p3, p4, (void*) COMPOUND_META_SEPARATOR, (void*) NUMBER_1_INTEGER, (void*) &j, (void*) CHARACTER_ARRAY);
-
-    fprintf(stderr, "TEST i: %i\n", i);
-    fprintf(stderr, "TEST j: %i\n", j);
+    get_array_elements_index(p3, p4, (void*) COMPOUND_PART_SEPARATOR, (void*) COMPOUND_PART_SEPARATOR_COUNT, (void*) &i, (void*) CHARACTER_ARRAY);
+    get_array_elements_index(p3, p4, (void*) COMPOUND_META_SEPARATOR, (void*) COMPOUND_PART_SEPARATOR_COUNT, (void*) &j, (void*) CHARACTER_ARRAY);
 
     if ((i >= 0) && (j == -1)) {
 
@@ -2105,11 +2099,14 @@ void get_compound_element_by_name(void* p0, void* p1,
     // The meta separator index.
     int j = -1;
 
-    get_array_elements_index(p3, p4, (void*) COMPOUND_PART_SEPARATOR, (void*) NUMBER_1_INTEGER, (void*) &i, (void*) CHARACTER_ARRAY);
-    get_array_elements_index(p3, p4, (void*) COMPOUND_META_SEPARATOR, (void*) NUMBER_1_INTEGER, (void*) &j, (void*) CHARACTER_ARRAY);
+    get_array_elements_index(p2, p3, (void*) COMPOUND_PART_SEPARATOR, (void*) COMPOUND_PART_SEPARATOR_COUNT, (void*) &i, (void*) CHARACTER_ARRAY);
+    get_array_elements_index(p2, p3, (void*) COMPOUND_META_SEPARATOR, (void*) COMPOUND_PART_SEPARATOR_COUNT, (void*) &j, (void*) CHARACTER_ARRAY);
 
-    fprintf(stderr, "TEST i: %i\n", i);
-    fprintf(stderr, "TEST j: %i\n", j);
+/*??
+    fprintf(stderr, "TEST get name: %s\n", (char*) p2);
+    fprintf(stderr, "TEST get i: %i\n", i);
+    fprintf(stderr, "TEST get j: %i\n", j);
+*/
 
     if ((i >= 0) && (j == -1)) {
 

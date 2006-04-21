@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.14 $ $Date: 2006-04-20 22:36:11 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2006-04-21 23:49:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -28,7 +28,6 @@
 #ifndef INTERNAL_MEMORY_ACCESSOR_SOURCE
 #define INTERNAL_MEMORY_ACCESSOR_SOURCE
 
-#include "../../globals/constants/constant.c"
 #include "../../globals/constants/integer_constants.c"
 #include "../../globals/constants/log_constants.c"
 #include "../../globals/constants/structure_constants.c"
