@@ -22,7 +22,7 @@
  *
  * this handel a loop
  *
- * @version $Revision: 1.11 $ $Date: 2006-04-21 23:49:10 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2006-04-23 09:56:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -81,19 +81,19 @@ void copy_string(void* source, int* source_count, int* source_size, void** dest,
 /**
  * Copies a primitive model.
  *
- * @param param the parameters
- * @param param_count the parameters count
+ * @param p0 the parameters
+ * @param p1 the parameters count
  * @param p2 the knowledge memory
  * @param p3 the knowledge memory count
  * @param p4 the knowledge memory size
- * @param proiority
- * @param signal_id
+ * @param p5 the priority
+ * @param p6 the signal id
  */
-void copy(void* param, int* param_count, void* p2, void* p3, void* p4, void* priority, void* signal_id) {
+void copy(void* p0, int* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
     log_message_debug("Copy primitive model.");
 
-    // The source name abstraction.
+    // The source abstraction.
     void** sa = &NULL_POINTER;
     void** sac = &NULL_POINTER;
     void** sas = &NULL_POINTER;
@@ -120,7 +120,7 @@ void copy(void* param, int* param_count, void* p2, void* p3, void* p4, void* pri
     void** dds = &NULL_POINTER;
 
     // Get source.
-    get_real_compound_element_by_name(param, param_count,
+    get_universal_compound_element_by_name(p0, p1,
         (void*) SOURCE_NAME,
         (void*) SOURCE_NAME_COUNT,
         (void*) &sa, (void*) &sac, (void*) &sas,
@@ -129,7 +129,7 @@ void copy(void* param, int* param_count, void* p2, void* p3, void* p4, void* pri
         p2, p3);
 
     // Get destination.
-    get_real_compound_element_by_name(param, param_count,
+    get_universal_compound_element_by_name(p0, p1,
         (void*) DESTINATION_NAME,
         (void*) DESTINATION_NAME_COUNT,
         (void*) &da, (void*) &dac, (void*) &das,
@@ -190,15 +190,15 @@ void copy(void* param, int* param_count, void* p2, void* p3, void* p4, void* pri
 /**
  * Copies a model property.
  *
- * @param param the parameters
- * @param param_count the parameters count
+ * @param p0 the parameters
+ * @param p1 the parameters count
  * @param p2 the knowledge memory
  * @param p3 the knowledge memory count
  * @param p4 the knowledge memory size
- * @param proiority
- * @param signal_id
+ * @param p5 the priority
+ * @param p6 the signal id
  */
-void copy_property(void* param, int* param_count, void* p2, void* p3, void* p4, void* priority, void* signal_id) {
+void copy_property(void* p0, int* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
     log_message_debug("Copy property.");
 
@@ -255,7 +255,7 @@ void copy_property(void* param, int* param_count, void* p2, void* p3, void* p4, 
     void** pds = &NULL_POINTER;
 
     // Get source.
-    get_real_compound_element_by_name(param, param_count,
+    get_universal_compound_element_by_name(p0, p1,
         (void*) SOURCE_NAME,
         (void*) SOURCE_NAME_COUNT,
         (void*) &sa, (void*) &sac, (void*) &sas,
@@ -264,7 +264,7 @@ void copy_property(void* param, int* param_count, void* p2, void* p3, void* p4, 
         p2, p3);
 
     // Get destination.
-    get_real_compound_element_by_name(param, param_count,
+    get_universal_compound_element_by_name(p0, p1,
         (void*) DESTINATION_NAME,
         (void*) DESTINATION_NAME_COUNT,
         (void*) &da, (void*) &dac, (void*) &das,
@@ -273,7 +273,7 @@ void copy_property(void* param, int* param_count, void* p2, void* p3, void* p4, 
         p2, p3);
 
     // Get destination property.
-    get_real_compound_element_by_name(param, param_count,
+    get_universal_compound_element_by_name(p0, p1,
         (void*) DESTINATION_PROPERTY_NAME,
         (void*) DESTINATION_PROPERTY_NAME_COUNT,
         (void*) &dpa, (void*) &dpac, (void*) &dpas,
@@ -321,11 +321,12 @@ void copy_property(void* param, int* param_count, void* p2, void* p3, void* p4, 
         if (r == 1) {
 
             // Get the property from the destination
-            get_compound_element_by_name(*dd, *ddc,
+            get_universal_compound_element_by_name(*dd, *ddc,
                 (void*) *dpm, (void*) *dpmc,
                 (void*) &pa, (void*) &pac, (void*) &pas,
                 (void*) &pm, (void*) &pmc, (void*) &pms,
-                (void*) &pd, (void*) &pdc, (void*) &pds);
+                (void*) &pd, (void*) &pdc, (void*) &pds,
+                p2, p3);
 
             if ((*pa != NULL_POINTER)
                 && (*pac != NULL_POINTER)

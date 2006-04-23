@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2006-04-20 22:36:11 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2006-04-23 09:56:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -1542,24 +1542,26 @@ void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4,
             }
 
             // Get source whole position from details.
-            get_compound_element_by_name(p5, p6,
+            get_universal_compound_element_by_name(p5, p6,
                 (void*) UI_POSITION_NAME, (void*) UI_POSITION_NAME_COUNT,
                 (void*) &wpa, (void*) &wpac, (void*) &wpas,
                 (void*) &wpm, (void*) &wpmc, (void*) &wpms,
-                (void*) &wpd, (void*) &wpdc, (void*) &wpds);
+                (void*) &wpd, (void*) &wpdc, (void*) &wpds,
+                p7, p8);
             // Get source whole size from details.
-            get_compound_element_by_name(p5, p6,
+            get_universal_compound_element_by_name(p5, p6,
                 (void*) UI_SIZE_NAME, (void*) UI_SIZE_NAME_COUNT,
                 (void*) &wsa, (void*) &wsac, (void*) &wsas,
                 (void*) &wsm, (void*) &wsmc, (void*) &wsms,
-                (void*) &wsd, (void*) &wsdc, (void*) &wsds);
+                (void*) &wsd, (void*) &wsdc, (void*) &wsds,
+                p7, p8);
             // Get part at index j.
             get_compound_element_by_index(p3, p4, (void*) &j,
                 (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms,
                 (void*) &d, (void*) &dc, (void*) &ds);
             // Get part super properties from details.
-            get_real_compound_element_by_name(*d, *dc,
+            get_universal_compound_element_by_name(*d, *dc,
                 (void*) SUPER_PROPERTIES_NAME, (void*) SUPER_PROPERTIES_NAME_COUNT,
                 (void*) &supera, (void*) &superac, (void*) &superas,
                 (void*) &superm, (void*) &supermc, (void*) &superms,
@@ -1571,83 +1573,96 @@ void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4,
             //
 
             // Get part shape from super part.
-            get_compound_element_by_name(*superm, *supermc,
+            get_universal_compound_element_by_name(*superm, *supermc,
                 (void*) UI_SHAPE_NAME, (void*) UI_SHAPE_NAME_COUNT,
                 (void*) &sha, (void*) &shac, (void*) &shas,
                 (void*) &shm, (void*) &shmc, (void*) &shms,
-                (void*) &shd, (void*) &shdc, (void*) &shds);
+                (void*) &shd, (void*) &shdc, (void*) &shds,
+                p7, p8);
             // Get source part layout from details.
-            get_compound_element_by_name(*superm, *supermc,
+            get_universal_compound_element_by_name(*superm, *supermc,
                 (void*) UI_LAYOUT_NAME, (void*) UI_LAYOUT_NAME_COUNT,
                 (void*) &la, (void*) &lac, (void*) &las,
                 (void*) &lm, (void*) &lmc, (void*) &lms,
-                (void*) &ld, (void*) &ldc, (void*) &lds);
+                (void*) &ld, (void*) &ldc, (void*) &lds,
+                p7, p8);
             // Get source part cell from details.
-            get_compound_element_by_name(*superm, *supermc,
+            get_universal_compound_element_by_name(*superm, *supermc,
                 (void*) UI_CELL_NAME, (void*) UI_CELL_NAME_COUNT,
                 (void*) &ca, (void*) &cac, (void*) &cas,
                 (void*) &cm, (void*) &cmc, (void*) &cms,
-                (void*) &cd, (void*) &cdc, (void*) &cds);
+                (void*) &cd, (void*) &cdc, (void*) &cds,
+                p7, p8);
             // Get part position from super part.
-            get_compound_element_by_name(*superm, *supermc,
+            get_universal_compound_element_by_name(*superm, *supermc,
                 (void*) UI_POSITION_NAME, (void*) UI_POSITION_NAME_COUNT,
                 (void*) &pa, (void*) &pac, (void*) &pas,
                 (void*) &pm, (void*) &pmc, (void*) &pms,
-                (void*) &pd, (void*) &pdc, (void*) &pds);
+                (void*) &pd, (void*) &pdc, (void*) &pds,
+                p7, p8);
             // Get part size from super part.
-            get_compound_element_by_name(*superm, *supermc,
+            get_universal_compound_element_by_name(*superm, *supermc,
                 (void*) UI_SIZE_NAME, (void*) UI_SIZE_NAME_COUNT,
                 (void*) &sa, (void*) &sac, (void*) &sas,
                 (void*) &sm, (void*) &smc, (void*) &sms,
-                (void*) &sd, (void*) &sdc, (void*) &sds);
+                (void*) &sd, (void*) &sdc, (void*) &sds,
+                p7, p8);
             // Get part background colour from super part.
-            get_compound_element_by_name(*superm, *supermc,
+            get_universal_compound_element_by_name(*superm, *supermc,
                 (void*) UI_BACKGROUND_NAME, (void*) UI_BACKGROUND_NAME_COUNT,
                 (void*) &bga, (void*) &bgac, (void*) &bgas,
                 (void*) &bgm, (void*) &bgmc, (void*) &bgms,
-                (void*) &bgd, (void*) &bgdc, (void*) &bgds);
+                (void*) &bgd, (void*) &bgdc, (void*) &bgds,
+                p7, p8);
             // Get part foreground colour from super part.
-            get_compound_element_by_name(*superm, *supermc,
+            get_universal_compound_element_by_name(*superm, *supermc,
                 (void*) UI_FOREGROUND_NAME, (void*) UI_FOREGROUND_NAME_COUNT,
                 (void*) &fga, (void*) &fgac, (void*) &fgas,
                 (void*) &fgm, (void*) &fgmc, (void*) &fgms,
-                (void*) &fgd, (void*) &fgdc, (void*) &fgds);
+                (void*) &fgd, (void*) &fgdc, (void*) &fgds,
+                p7, p8);
             // Get part border from super part.
-            get_compound_element_by_name(*superm, *supermc,
+            get_universal_compound_element_by_name(*superm, *supermc,
                 (void*) TUI_BORDER_NAME, (void*) TUI_BORDER_NAME_COUNT,
                 (void*) &boa, (void*) &boac, (void*) &boas,
                 (void*) &bom, (void*) &bomc, (void*) &boms,
-                (void*) &bod, (void*) &bodc, (void*) &bods);
+                (void*) &bod, (void*) &bodc, (void*) &bods,
+                p7, p8);
             // Get part hidden property from super part.
-            get_compound_element_by_name(*superm, *supermc,
+            get_universal_compound_element_by_name(*superm, *supermc,
                 (void*) TUI_HIDDEN_NAME, (void*) TUI_HIDDEN_NAME_COUNT,
                 (void*) &ha, (void*) &hac, (void*) &has,
                 (void*) &hm, (void*) &hmc, (void*) &hms,
-                (void*) &hd, (void*) &hdc, (void*) &hds);
+                (void*) &hd, (void*) &hdc, (void*) &hds,
+                p7, p8);
             // Get part inverse property from super part.
-            get_compound_element_by_name(*superm, *supermc,
+            get_universal_compound_element_by_name(*superm, *supermc,
                 (void*) TUI_INVERSE_NAME, (void*) TUI_INVERSE_NAME_COUNT,
                 (void*) &ia, (void*) &iac, (void*) &ias,
                 (void*) &im, (void*) &imc, (void*) &ims,
-                (void*) &id, (void*) &idc, (void*) &ids);
+                (void*) &id, (void*) &idc, (void*) &ids,
+                p7, p8);
             // Get part blink property from super part.
-            get_compound_element_by_name(*superm, *supermc,
+            get_universal_compound_element_by_name(*superm, *supermc,
                 (void*) TUI_BLINK_NAME, (void*) TUI_BLINK_NAME_COUNT,
                 (void*) &bla, (void*) &blac, (void*) &blas,
                 (void*) &blm, (void*) &blmc, (void*) &blms,
-                (void*) &bld, (void*) &bldc, (void*) &blds);
+                (void*) &bld, (void*) &bldc, (void*) &blds,
+                p7, p8);
             // Get part underline property from super part.
-            get_compound_element_by_name(*superm, *supermc,
+            get_universal_compound_element_by_name(*superm, *supermc,
                 (void*) TUI_UNDERLINE_NAME, (void*) TUI_UNDERLINE_NAME_COUNT,
                 (void*) &ua, (void*) &uac, (void*) &uas,
                 (void*) &um, (void*) &umc, (void*) &ums,
-                (void*) &ud, (void*) &udc, (void*) &uds);
+                (void*) &ud, (void*) &udc, (void*) &uds,
+                p7, p8);
             // Get part bold property from super part.
-            get_compound_element_by_name(*superm, *supermc,
+            get_universal_compound_element_by_name(*superm, *supermc,
                 (void*) TUI_BOLD_NAME, (void*) TUI_BOLD_NAME_COUNT,
                 (void*) &ba, (void*) &bac, (void*) &bas,
                 (void*) &bm, (void*) &bmc, (void*) &bms,
-                (void*) &bd, (void*) &bdc, (void*) &bds);
+                (void*) &bd, (void*) &bdc, (void*) &bds,
+                p7, p8);
 
             //
             // Get standard property values from part.
@@ -1658,83 +1673,96 @@ void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4,
             //
 
             // Get part shape from details.
-            get_compound_element_by_name(*d, *dc,
+            get_universal_compound_element_by_name(*d, *dc,
                 (void*) UI_SHAPE_NAME, (void*) UI_SHAPE_NAME_COUNT,
                 (void*) &sha, (void*) &shac, (void*) &shas,
                 (void*) &shm, (void*) &shmc, (void*) &shms,
-                (void*) &shd, (void*) &shdc, (void*) &shds);
+                (void*) &shd, (void*) &shdc, (void*) &shds,
+                p7, p8);
             // Get source part layout from details.
-            get_compound_element_by_name(*d, *dc,
+            get_universal_compound_element_by_name(*d, *dc,
                 (void*) UI_LAYOUT_NAME, (void*) UI_LAYOUT_NAME_COUNT,
                 (void*) &la, (void*) &lac, (void*) &las,
                 (void*) &lm, (void*) &lmc, (void*) &lms,
-                (void*) &ld, (void*) &ldc, (void*) &lds);
+                (void*) &ld, (void*) &ldc, (void*) &lds,
+                p7, p8);
             // Get source part cell from details.
-            get_compound_element_by_name(*d, *dc,
+            get_universal_compound_element_by_name(*d, *dc,
                 (void*) UI_CELL_NAME, (void*) UI_CELL_NAME_COUNT,
                 (void*) &ca, (void*) &cac, (void*) &cas,
                 (void*) &cm, (void*) &cmc, (void*) &cms,
-                (void*) &cd, (void*) &cdc, (void*) &cds);
+                (void*) &cd, (void*) &cdc, (void*) &cds,
+                p7, p8);
             // Get part position from details.
-            get_compound_element_by_name(*d, *dc,
+            get_universal_compound_element_by_name(*d, *dc,
                 (void*) UI_POSITION_NAME, (void*) UI_POSITION_NAME_COUNT,
                 (void*) &pa, (void*) &pac, (void*) &pas,
                 (void*) &pm, (void*) &pmc, (void*) &pms,
-                (void*) &pd, (void*) &pdc, (void*) &pds);
+                (void*) &pd, (void*) &pdc, (void*) &pds,
+                p7, p8);
             // Get part size from details.
-            get_compound_element_by_name(*d, *dc,
+            get_universal_compound_element_by_name(*d, *dc,
                 (void*) UI_SIZE_NAME, (void*) UI_SIZE_NAME_COUNT,
                 (void*) &sa, (void*) &sac, (void*) &sas,
                 (void*) &sm, (void*) &smc, (void*) &sms,
-                (void*) &sd, (void*) &sdc, (void*) &sds);
+                (void*) &sd, (void*) &sdc, (void*) &sds,
+                p7, p8);
             // Get part background colour from details.
-            get_compound_element_by_name(*d, *dc,
+            get_universal_compound_element_by_name(*d, *dc,
                 (void*) UI_BACKGROUND_NAME, (void*) UI_BACKGROUND_NAME_COUNT,
                 (void*) &bga, (void*) &bgac, (void*) &bgas,
                 (void*) &bgm, (void*) &bgmc, (void*) &bgms,
-                (void*) &bgd, (void*) &bgdc, (void*) &bgds);
+                (void*) &bgd, (void*) &bgdc, (void*) &bgds,
+                p7, p8);
             // Get part foreground colour from details.
-            get_compound_element_by_name(*d, *dc,
+            get_universal_compound_element_by_name(*d, *dc,
                 (void*) UI_FOREGROUND_NAME, (void*) UI_FOREGROUND_NAME_COUNT,
                 (void*) &fga, (void*) &fgac, (void*) &fgas,
                 (void*) &fgm, (void*) &fgmc, (void*) &fgms,
-                (void*) &fgd, (void*) &fgdc, (void*) &fgds);
+                (void*) &fgd, (void*) &fgdc, (void*) &fgds,
+                p7, p8);
             // Get part border from details.
-            get_compound_element_by_name(*d, *dc,
+            get_universal_compound_element_by_name(*d, *dc,
                 (void*) TUI_BORDER_NAME, (void*) TUI_BORDER_NAME_COUNT,
                 (void*) &boa, (void*) &boac, (void*) &boas,
                 (void*) &bom, (void*) &bomc, (void*) &boms,
-                (void*) &bod, (void*) &bodc, (void*) &bods);
+                (void*) &bod, (void*) &bodc, (void*) &bods,
+                p7, p8);
             // Get part hidden property from details.
-            get_compound_element_by_name(*d, *dc,
+            get_universal_compound_element_by_name(*d, *dc,
                 (void*) TUI_HIDDEN_NAME, (void*) TUI_HIDDEN_NAME_COUNT,
                 (void*) &ha, (void*) &hac, (void*) &has,
                 (void*) &hm, (void*) &hmc, (void*) &hms,
-                (void*) &hd, (void*) &hdc, (void*) &hds);
+                (void*) &hd, (void*) &hdc, (void*) &hds,
+                p7, p8);
             // Get part inverse property from details.
-            get_compound_element_by_name(*d, *dc,
+            get_universal_compound_element_by_name(*d, *dc,
                 (void*) TUI_INVERSE_NAME, (void*) TUI_INVERSE_NAME_COUNT,
                 (void*) &ia, (void*) &iac, (void*) &ias,
                 (void*) &im, (void*) &imc, (void*) &ims,
-                (void*) &id, (void*) &idc, (void*) &ids);
+                (void*) &id, (void*) &idc, (void*) &ids,
+                p7, p8);
             // Get part blink property from details.
-            get_compound_element_by_name(*d, *dc,
+            get_universal_compound_element_by_name(*d, *dc,
                 (void*) TUI_BLINK_NAME, (void*) TUI_BLINK_NAME_COUNT,
                 (void*) &bla, (void*) &blac, (void*) &blas,
                 (void*) &blm, (void*) &blmc, (void*) &blms,
-                (void*) &bld, (void*) &bldc, (void*) &blds);
+                (void*) &bld, (void*) &bldc, (void*) &blds,
+                p7, p8);
             // Get part underline property from details.
-            get_compound_element_by_name(*d, *dc,
+            get_universal_compound_element_by_name(*d, *dc,
                 (void*) TUI_UNDERLINE_NAME, (void*) TUI_UNDERLINE_NAME_COUNT,
                 (void*) &ua, (void*) &uac, (void*) &uas,
                 (void*) &um, (void*) &umc, (void*) &ums,
-                (void*) &ud, (void*) &udc, (void*) &uds);
+                (void*) &ud, (void*) &udc, (void*) &uds,
+                p7, p8);
             // Get part bold property from details.
-            get_compound_element_by_name(*d, *dc,
+            get_universal_compound_element_by_name(*d, *dc,
                 (void*) TUI_BOLD_NAME, (void*) TUI_BOLD_NAME_COUNT,
                 (void*) &ba, (void*) &bac, (void*) &bas,
                 (void*) &bm, (void*) &bmc, (void*) &bms,
-                (void*) &bd, (void*) &bdc, (void*) &bds);
+                (void*) &bd, (void*) &bdc, (void*) &bds,
+                p7, p8);
 
             // Serialise shape.
             serialise_linux_console_shape(p0, p1, p2, *m, *mc, *a, *ac,

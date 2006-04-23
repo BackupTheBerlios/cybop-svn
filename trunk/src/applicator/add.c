@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.12 $ $Date: 2006-04-20 22:36:08 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2006-04-23 09:56:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -222,7 +222,7 @@ void add(void* p0, void* p1, void* p2, void* p3, void* p4) {
     void** rds = &NULL_POINTER;
 
     // get the operand 1
-    get_real_compound_element_by_name( p0, p1,
+    get_universal_compound_element_by_name( p0, p1,
         (void*) ADD_OPERAND_1_NAME_ABSTRACTION,
         (void*) ADD_OPERAND_1_NAME_ABSTRACTION_COUNT,
         (void*) &op1a, (void*) &op1ac, (void*) &op1as,
@@ -231,7 +231,7 @@ void add(void* p0, void* p1, void* p2, void* p3, void* p4) {
         p2, p3 );
 
     // get the operand 2
-    get_real_compound_element_by_name( p0, p1,
+    get_universal_compound_element_by_name( p0, p1,
         (void*) ADD_OPERAND_2_NAME_ABSTRACTION,
         (void*) ADD_OPERAND_2_NAME_ABSTRACTION_COUNT,
         (void*) &op2a, (void*) &op2ac, (void*) &op2as,
@@ -240,7 +240,7 @@ void add(void* p0, void* p1, void* p2, void* p3, void* p4) {
         p2, p3 );
 
     // get the result
-    get_real_compound_element_by_name( p0, p1,
+    get_universal_compound_element_by_name( p0, p1,
         (void*) ADD_RESULT_NAME_ABSTRACTION,
         (void*) ADD_RESULT_NAME_ABSTRACTION_COUNT,
         (void*) &ra, (void*) &rac, (void*) &ras,

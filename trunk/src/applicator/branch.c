@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.13 $ $Date: 2006-04-20 22:36:09 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2006-04-23 09:56:12 $ $Author: christian $
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
@@ -114,7 +114,7 @@ void branch(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
     void** fds = &NULL_POINTER;
 
     // Get criterion.
-    get_real_compound_element_by_name(p10, p11,
+    get_universal_compound_element_by_name(p10, p11,
         (void*) CRITERION_NAME, (void*) CRITERION_NAME_COUNT,
         (void*) &ca, (void*) &cac, (void*) &cas,
         (void*) &cm, (void*) &cmc, (void*) &cms,
@@ -122,7 +122,7 @@ void branch(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
         p1, p2);
 
     // Get true model.
-    get_real_compound_element_by_name(p10, p11,
+    get_universal_compound_element_by_name(p10, p11,
         (void*) FALSE_MODEL_NAME, (void*) FALSE_MODEL_NAME_COUNT,
         (void*) &ta, (void*) &tac, (void*) &tas,
         (void*) &tm, (void*) &tmc, (void*) &tms,
@@ -130,7 +130,7 @@ void branch(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
         p1, p2);
 
     // Get false model.
-    get_real_compound_element_by_name(p10, p11,
+    get_universal_compound_element_by_name(p10, p11,
         (void*) TRUE_MODEL_NAME, (void*) TRUE_MODEL_NAME_COUNT,
         (void*) &fa, (void*) &fac, (void*) &fas,
         (void*) &fm, (void*) &fmc, (void*) &fms,

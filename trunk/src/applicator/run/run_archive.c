@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2006-04-20 22:36:09 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2006-04-23 09:56:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -47,8 +47,10 @@
  *
  * @param p0 the parameters
  * @param p1 the parameters count
+ * @param p2 the knowledge memory
+ * @param p3 the knowledge memory count
  */
-void run_archive(void* p0, void* p1) {
+void run_archive(void* p0, void* p1, void* p2, void* p3) {
 
     log_message_debug("Run archive command.");
 
@@ -92,25 +94,28 @@ void run_archive(void* p0, void* p1) {
     void** bzip2ds = &NULL_POINTER;
 
     // Get create option.
-    get_compound_element_by_name(p0, p1,
+    get_universal_compound_element_by_name(p0, p1,
         (void*) RUN_ARCHIVE_CREATE_NAME, (void*) RUN_ARCHIVE_CREATE_NAME_COUNT,
         (void*) &createa, (void*) &createac, (void*) &createas,
         (void*) &createm, (void*) &createmc, (void*) &createms,
-        (void*) &created, (void*) &createdc, (void*) &createds);
+        (void*) &created, (void*) &createdc, (void*) &createds,
+        p2, p3);
 
     // Get update option.
-    get_compound_element_by_name(p0, p1,
+    get_universal_compound_element_by_name(p0, p1,
         (void*) RUN_ARCHIVE_UPDATE_NAME, (void*) RUN_ARCHIVE_UPDATE_NAME_COUNT,
         (void*) &updatea, (void*) &updateac, (void*) &updateas,
         (void*) &updatem, (void*) &updatemc, (void*) &updatems,
-        (void*) &updated, (void*) &updatedc, (void*) &updateds);
+        (void*) &updated, (void*) &updatedc, (void*) &updateds,
+        p2, p3);
 
     // Get bzip2 option.
-    get_compound_element_by_name(p0, p1,
+    get_universal_compound_element_by_name(p0, p1,
         (void*) RUN_ARCHIVE_BZIP2_NAME, (void*) RUN_ARCHIVE_BZIP2_NAME_COUNT,
         (void*) &bzip2a, (void*) &bzip2ac, (void*) &bzip2as,
         (void*) &bzip2m, (void*) &bzip2mc, (void*) &bzip2ms,
-        (void*) &bzip2d, (void*) &bzip2dc, (void*) &bzip2ds);
+        (void*) &bzip2d, (void*) &bzip2dc, (void*) &bzip2ds,
+        p2, p3);
 
     // The arguments vector.
     void* arg = NULL_POINTER;

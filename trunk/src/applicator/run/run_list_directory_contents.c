@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2006-04-20 22:36:09 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2006-04-23 09:56:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -47,8 +47,10 @@
  *
  * @param p0 the parameters
  * @param p1 the parameters count
+ * @param p2 the knowledge memory
+ * @param p3 the knowledge memory count
  */
-void run_list_directory_contents(void* p0, void* p1) {
+void run_list_directory_contents(void* p0, void* p1, void* p2, void* p3) {
 
     log_message_debug("Run list directory contents command.");
 
@@ -79,18 +81,20 @@ void run_list_directory_contents(void* p0, void* p1) {
     void** longlistingds = &NULL_POINTER;
 
     // Get all option.
-    get_compound_element_by_name(p0, p1,
+    get_universal_compound_element_by_name(p0, p1,
         (void*) RUN_LIST_DIRECTORY_CONTENTS_ALL_NAME, (void*) RUN_LIST_DIRECTORY_CONTENTS_ALL_NAME_COUNT,
         (void*) &alla, (void*) &allac, (void*) &allas,
         (void*) &allm, (void*) &allmc, (void*) &allms,
-        (void*) &alld, (void*) &alldc, (void*) &allds);
+        (void*) &alld, (void*) &alldc, (void*) &allds,
+        p2, p3);
 
     // Get long listing option.
-    get_compound_element_by_name(p0, p1,
+    get_universal_compound_element_by_name(p0, p1,
         (void*) RUN_LIST_DIRECTORY_CONTENTS_LONG_LISTING_NAME, (void*) RUN_LIST_DIRECTORY_CONTENTS_LONG_LISTING_NAME_COUNT,
         (void*) &longlistinga, (void*) &longlistingac, (void*) &longlistingas,
         (void*) &longlistingm, (void*) &longlistingmc, (void*) &longlistingms,
-        (void*) &longlistingd, (void*) &longlistingdc, (void*) &longlistingds);
+        (void*) &longlistingd, (void*) &longlistingdc, (void*) &longlistingds,
+        p2, p3);
 
     // The arguments vector.
     void* arg = NULL_POINTER;

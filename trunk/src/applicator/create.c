@@ -22,7 +22,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.17 $ $Date: 2006-04-20 22:36:09 $ $Author: christian $
+ * @version $Revision: 1.18 $ $Date: 2006-04-23 09:56:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -435,7 +435,7 @@ void create_part(void* p0, void* p1, void* p2, void* p3, void* p4) {
     void** wds = &NULL_POINTER;
 
     // Get name name.
-    get_real_compound_element_by_name(p0, p1,
+    get_universal_compound_element_by_name(p0, p1,
         (void*) NAME_NAME, (void*) NAME_NAME_COUNT,
         (void*) &na, (void*) &nac, (void*) &nas,
         (void*) &nm, (void*) &nmc, (void*) &nms,
@@ -443,7 +443,7 @@ void create_part(void* p0, void* p1, void* p2, void* p3, void* p4) {
         p2, p3);
 
     // Get channel name.
-    get_real_compound_element_by_name(p0, p1,
+    get_universal_compound_element_by_name(p0, p1,
         (void*) CHANNEL_NAME, (void*) CHANNEL_NAME_COUNT,
         (void*) &ca, (void*) &cac, (void*) &cas,
         (void*) &cm, (void*) &cmc, (void*) &cms,
@@ -451,7 +451,7 @@ void create_part(void* p0, void* p1, void* p2, void* p3, void* p4) {
         p2, p3);
 
     // Get abstraction name.
-    get_real_compound_element_by_name(p0, p1,
+    get_universal_compound_element_by_name(p0, p1,
         (void*) ABSTRACTION_NAME, (void*) ABSTRACTION_NAME_COUNT,
         (void*) &aa, (void*) &aac, (void*) &aas,
         (void*) &am, (void*) &amc, (void*) &ams,
@@ -459,7 +459,7 @@ void create_part(void* p0, void* p1, void* p2, void* p3, void* p4) {
         p2, p3);
 
     // Get model name.
-    get_real_compound_element_by_name(p0, p1,
+    get_universal_compound_element_by_name(p0, p1,
         (void*) MODEL_NAME, (void*) MODEL_NAME_COUNT,
         (void*) &ma, (void*) &mac, (void*) &mas,
         (void*) &mm, (void*) &mmc, (void*) &mms,
@@ -467,7 +467,7 @@ void create_part(void* p0, void* p1, void* p2, void* p3, void* p4) {
         p2, p3);
 
     // Get whole.
-    get_real_compound_element_by_name(p0, p1,
+    get_universal_compound_element_by_name(p0, p1,
         (void*) WHOLE_NAME, (void*) WHOLE_NAME_COUNT,
         (void*) &wa, (void*) &wac, (void*) &was,
         (void*) &wm, (void*) &wmc, (void*) &wms,

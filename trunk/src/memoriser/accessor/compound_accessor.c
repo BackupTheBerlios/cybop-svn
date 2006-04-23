@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.16 $ $Date: 2006-04-21 23:49:10 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2006-04-23 09:56:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -103,10 +103,14 @@ void get_compound_element_by_name(void* p0, void* p1,
 void parse(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6);
 
 /**
- * ??
+ * Reindex those parts of the compound, which represent a common list.
+ *
+ * @param p0 the compound
+ * @param p1 the compound count
+ * @param p2 the base name equal to all parts of the compound representing a list
+ * @param p3 the base name count
  */
-void reindex_compound_for_listelements(void* compound, void* compound_count,
-    void* basisname, int* basisname_count);
+void reindex_compound_elements_forming_list(void* p0, void* p1, void* p2, int* p3);
 
 /**
  * Gets the compound part index.
@@ -1549,7 +1553,7 @@ void remove_compound_element_by_name(void* p0, void* p1, void* p2, void* p3, voi
 
             if (position > 0) {
 
-                reindex_compound_for_listelements(p0, p1, p3, &position);
+                reindex_compound_elements_forming_list(p0, p1, p3, &position);
             }
 
         } else {
@@ -2170,6 +2174,137 @@ void get_compound_element_by_name(void* p0, void* p1,
     }
 }
 
+/**
+ * Gets the compound element identified by the given name.
+ *
+ * The model may specify:
+ * - the element directly (e.g.: an integer or character value)
+ * - the hierarchical name of the element (e.g.: application.gui.window.title)
+ * - the hierarchical name of the name of the element (e.g.: application.name)
+ *
+ * Example procedure for the second case:
+ * At first, the part name needs to be determined within the parameters.
+ * Only then, that name can be used to determine the actual compound part.
+ *
+ * @param p0 the compound
+ * @param p1 the compound count
+ * @param p2 the name
+ * @param p3 the name count
+ * @param p4 the abstraction (Hand over as reference!)
+ * @param p5 the abstraction count (Hand over as reference!)
+ * @param p6 the abstraction size (Hand over as reference!)
+ * @param p7 the model (Hand over as reference!)
+ * @param p8 the model count (Hand over as reference!)
+ * @param p9 the model size (Hand over as reference!)
+ * @param p10 the details (Hand over as reference!)
+ * @param p11 the details count (Hand over as reference!)
+ * @param p12 the details size (Hand over as reference!)
+ * @param p13 the knowledge
+ * @param p14 the knowledge count
+ */
+void get_universal_compound_element_by_name(void* p0, void* p1,
+    void* p2, void* p3, void* p4, void* p5, void* p6,
+    void* p7, void* p8, void* p9, void* p10, void* p11, void* p12,
+    void* p13, void* p14) {
+
+    log_message_debug("Get universal compound element by name.");
+
+    // The part abstraction, model, details.
+    void** a = &NULL_POINTER;
+    void** ac = &NULL_POINTER;
+    void** as = &NULL_POINTER;
+    void** m = &NULL_POINTER;
+    void** mc = &NULL_POINTER;
+    void** ms = &NULL_POINTER;
+    void** d = &NULL_POINTER;
+    void** dc = &NULL_POINTER;
+    void** ds = &NULL_POINTER;
+
+    // The encapsulated part abstraction, model, details.
+    void** ea = &NULL_POINTER;
+    void** eac = &NULL_POINTER;
+    void** eas = &NULL_POINTER;
+    void** em = &NULL_POINTER;
+    void** emc = &NULL_POINTER;
+    void** ems = &NULL_POINTER;
+    void** ed = &NULL_POINTER;
+    void** edc = &NULL_POINTER;
+    void** eds = &NULL_POINTER;
+
+    // Get compound element.
+    get_compound_element_by_name(p0, p1,
+        p2, p3,
+        (void*) &a, (void*) &ac, (void*) &as,
+        (void*) &m, (void*) &mc, (void*) &ms,
+        (void*) &d, (void*) &dc, (void*) &ds);
+
+    // The comparison result.
+    int r = 0;
+
+    //
+    // The following comparisons do, in this order, get a part as:
+    // - encapsulated knowledge (a model pointing to another model containing a part name)
+    // - knowledge (a model containing a hierarchical part name)
+    // - direct model
+    //
+
+    if (r == 0) {
+
+        compare_arrays(*a, *ac, (void*) ENCAPSULATED_KNOWLEDGE_ABSTRACTION, (void*) ENCAPSULATED_KNOWLEDGE_ABSTRACTION_COUNT, &r, (void*) CHARACTER_ARRAY);
+
+        if (r != 0) {
+
+            // Get compound element as double-encapsulated model.
+            //
+            // CAUTION!
+            // The abstraction of an encapsulated name must always be "character".
+            // The details are uninteresting, since an encapsulated name cannot have
+            // constraints. That is, only the model is of interest. It contains the
+            // hierarchical name of the knowledge part to be retrieved.
+            //
+            // Example of a model pointing to another model containing a part name:
+            // model="application.record.name"
+            //
+            get_compound_element_by_name(p13, p14, *m, *mc,
+                (void*) &ea, (void*) &eac, (void*) &eas,
+                (void*) &em, (void*) &emc, (void*) &ems,
+                (void*) &ed, (void*) &edc, (void*) &eds);
+
+            get_compound_element_by_name(p13, p14, *em, *emc,
+                p4, p5, p6, p7, p8, p9, p10, p11, p12);
+        }
+    }
+
+    if (r == 0) {
+
+        compare_arrays(*a, *ac, (void*) KNOWLEDGE_ABSTRACTION, (void*) KNOWLEDGE_ABSTRACTION_COUNT, &r, (void*) CHARACTER_ARRAY);
+
+        if (r != 0) {
+
+            // Get compound element as encapsulated model.
+            //
+            // CAUTION!
+            // The abstraction of an encapsulated name must always be "character".
+            // The details are uninteresting, since an encapsulated name cannot have
+            // constraints. That is, only the model is of interest. It contains the
+            // hierarchical name of the knowledge part to be retrieved.
+            //
+            // Example of a model containing a hierarchical part name:
+            // model="application.communication.partners.hostname"
+            //
+            get_compound_element_by_name(p13, p14, *m, *mc,
+                p4, p5, p6, p7, p8, p9, p10, p11, p12);
+        }
+    }
+
+    if (r == 0) {
+
+        // Get compound element as direct model.
+        get_compound_element_by_name(p0, p1, p2, p3,
+            p4, p5, p6, p7, p8, p9, p10, p11, p12);
+    }
+}
+
 //
 // Name.
 //
@@ -2258,240 +2393,43 @@ void get_compound_element_name_by_index(void* p0, void* p1,
     }
 }
 
+//
+// Reindex.
+//
+
 /**
- * Gets the compound element by encapsulated name.
- *
- * An example would be a part name that is handed over as parameter.
- * At first, the part name needs to be determined within the parameters.
- * Only then, that name can be used to determine the actual compound part.
+ * Reindex those parts of the compound, which represent a common list.
  *
  * @param p0 the compound
  * @param p1 the compound count
- * @param p2 the name
- * @param p3 the name count
- * @param p4 the abstraction (Hand over as reference!)
- * @param p5 the abstraction count (Hand over as reference!)
- * @param p6 the abstraction size (Hand over as reference!)
- * @param p7 the model (Hand over as reference!)
- * @param p8 the model count (Hand over as reference!)
- * @param p9 the model size (Hand over as reference!)
- * @param p10 the details (Hand over as reference!)
- * @param p11 the details count (Hand over as reference!)
- * @param p12 the details size (Hand over as reference!)
- * @param p13 the knowledge
- * @param p14 the knowledge count
+ * @param p2 the base name equal to all parts of the compound representing a list
+ * @param p3 the base name count
  */
-void get_compound_element_by_encapsulated_name(void* p0, void* p1,
-    void* p2, void* p3, void* p4, void* p5, void* p6,
-    void* p7, void* p8, void* p9, void* p10, void* p11, void* p12,
-    void* p13, void* p14) {
+void reindex_compound_elements_forming_list(void* p0, void* p1, void* p2, int* p3) {
 
-    log_message_debug("Get compound part by encapsulated name.");
+    if ((p0 != NULL_POINTER) && (p1 != NULL_POINTER)
+        && (p2 != NULL_POINTER) && (p3 != NULL_POINTER)) {
 
-    // The abstraction, model, details.
-    void** a = &NULL_POINTER;
-    void** ac = &NULL_POINTER;
-    void** as = &NULL_POINTER;
-    void** m = &NULL_POINTER;
-    void** mc = &NULL_POINTER;
-    void** ms = &NULL_POINTER;
-    void** d = &NULL_POINTER;
-    void** dc = &NULL_POINTER;
-    void** ds = &NULL_POINTER;
-
-    // Get compound element name.
-    get_compound_element_by_name(p0, p1,
-        p2, p3,
-        (void*) &a, (void*) &ac, (void*) &as,
-        (void*) &m, (void*) &mc, (void*) &ms,
-        (void*) &d, (void*) &dc, (void*) &ds);
-
-    if (*m != NULL_POINTER) {
-
-        if (*mc != NULL_POINTER) {
-
-            //
-            // CAUTION!
-            // The part below must be determined within the knowledge model,
-            // NOT within the logic operation's parameters as before!
-            //
-            // The abstraction of an encapsulated name must always be "character".
-            // The details are uninteresting, since an encapsulated name cannot have
-            // constraints. That is, only the model is of interest. It contains the
-            // hierarchical name of the knowledge part to be retrieved. This
-            // hierarchical name is finally used to determine the actual part.
-            //
-            // Example of a hierarchical name:
-            // application.communication.partners.hostname.address
-            //
-
-            // Get compound element.
-            get_compound_element_by_name(p13, p14, *m, *mc,
-                p4, p5, p6, p7, p8, p9, p10, p11, p12);
-
-        } else {
-
-            log_message_debug("Could not get compound part by encapsulated name. The knowledge part name count is null.");
-        }
-
-    } else {
-
-        log_message_debug("Could not get compound part by encapsulated name. The knowledge part name is null.");
-    }
-}
-
-/**
- * Gets the compound element by encapsulated name.
- *
- * At first, the part name needs to be determined within the parameters.
- * Only then, it can be used to determine the actual compound part.
- *
- * @param p0 the compound
- * @param p1 the compound count
- * @param p2 the name
- * @param p3 the name count
- * @param p4 the abstraction (Hand over as reference!)
- * @param p5 the abstraction count (Hand over as reference!)
- * @param p6 the abstraction size (Hand over as reference!)
- * @param p7 the model (Hand over as reference!)
- * @param p8 the model count (Hand over as reference!)
- * @param p9 the model size (Hand over as reference!)
- * @param p10 the details (Hand over as reference!)
- * @param p11 the details count (Hand over as reference!)
- * @param p12 the details size (Hand over as reference!)
- * @param p13 the knowledge
- * @param p14 the knowledge count
- */
-void get_real_compound_element_by_name(void* p0, void* p1,
-    void* p2, void* p3, void* p4, void* p5, void* p6,
-    void* p7, void* p8, void* p9, void* p10, void* p11, void* p12,
-    void* p13, void* p14) {
-
-    log_message_debug("Get compound part by encapsulated name.");
-
-    // The abstraction, model, details.
-    void** a = &NULL_POINTER;
-    void** ac = &NULL_POINTER;
-    void** as = &NULL_POINTER;
-    void** m = &NULL_POINTER;
-    void** mc = &NULL_POINTER;
-    void** ms = &NULL_POINTER;
-    void** d = &NULL_POINTER;
-    void** dc = &NULL_POINTER;
-    void** ds = &NULL_POINTER;
-
-    // Get compound element name.
-    get_compound_element_by_name(p0, p1,
-        p2, p3,
-        (void*) &a, (void*) &ac, (void*) &as,
-        (void*) &m, (void*) &mc, (void*) &ms,
-        (void*) &d, (void*) &dc, (void*) &ds);
-
-    if ( (p4 != NULL_POINTER) &&
-         (p5 != NULL_POINTER) &&
-         (p6 != NULL_POINTER) &&
-         (p7 != NULL_POINTER) &&
-         (p8 != NULL_POINTER) &&
-         (p9 != NULL_POINTER) &&
-         (p10 != NULL_POINTER) &&
-         (p11 != NULL_POINTER) &&
-         (p12 != NULL_POINTER) &&
-         (*a != NULL_POINTER) &&
-         (*ac != NULL_POINTER) &&
-         (*as != NULL_POINTER) &&
-         (*m != NULL_POINTER) &&
-         (*mc != NULL_POINTER) &&
-         (*ms != NULL_POINTER)) {
-
-        int r1 = 0;
-        compare_arrays(*a, *ac, (void*) KNOWLEDGE_ABSTRACTION, (void*) KNOWLEDGE_ABSTRACTION_COUNT, &r1, (void*) CHARACTER_ARRAY);
-
-        int r2 = 0;
-        compare_arrays(*a, *ac, (void*) ENCAPSULATED_KNOWLEDGE_ABSTRACTION, (void*) ENCAPSULATED_KNOWLEDGE_ABSTRACTION_COUNT, &r2, (void*) CHARACTER_ARRAY);
-
-        if ((r1 == 1) || (r2 == 1)) {
-
-            // The abstraction, model, details for the encapsulated.
-            void** ea = &NULL_POINTER;
-            void** eac = &NULL_POINTER;
-            void** eas = &NULL_POINTER;
-            void** em = &NULL_POINTER;
-            void** emc = &NULL_POINTER;
-            void** ems = &NULL_POINTER;
-            void** ed = &NULL_POINTER;
-            void** edc = &NULL_POINTER;
-            void** eds = &NULL_POINTER;
-
-            // Get compound element.
-            get_compound_element_by_name(p13, p14, *m, *mc,
-                (void*) &ea, (void*) &eac, (void*) &eas,
-                (void*) &em, (void*) &emc, (void*) &ems,
-                (void*) &ed, (void*) &edc, (void*) &eds);
-
-            if (r2 == 1) {
-
-                get_compound_element_by_name(p13, p14, *em, *emc,
-                    p4, p5, p6, p7, p8, p9, p10, p11, p12);
-
-            } else {
-
-                *(void**)p4  = ea;
-                *(void**)p5  = eac;
-                *(void**)p6  = eas;
-                *(void**)p7  = em;
-                *(void**)p8  = emc;
-                *(void**)p9  = ems;
-                *(void**)p10 = ed;
-                *(void**)p11 = edc;
-                *(void**)p12 = eds;
-            }
-
-        } else {
-
-            *(void**)p4  = a;
-            *(void**)p5  = ac;
-            *(void**)p6  = as;
-            *(void**)p7  = m;
-            *(void**)p8  = mc;
-            *(void**)p9  = ms;
-            *(void**)p10 = d;
-            *(void**)p11 = dc;
-            *(void**)p12 = ds;
-        }
-    }
-}
-
-/**
- * Reindex the list parts in the compound.
- *
- * @param compound
- * @param compound_count
- * @param basisname the list basis name
- * @param basisname_count the liste basis name count
- */
-void reindex_compound_for_listelements(void* compound, void* compound_count, void* basisname, int* basisname_count) {
-
-    if ((compound != NULL_POINTER) && (compound_count != NULL_POINTER)
-        && (basisname != NULL_POINTER) && (basisname_count != NULL_POINTER)) {
-
-        int compound_counter = 0;
-        int index_counter = 0;
+        // The compound counter.
+        int cc = 0;
+        // The index counter.
+        int ic = 0;
 
         // The compund part name.
-        void** cen = &NULL_POINTER;
-        void** cenc = &NULL_POINTER;
-        void** cens = &NULL_POINTER;
+        void** n = &NULL_POINTER;
+        void** nc = &NULL_POINTER;
+        void** ns = &NULL_POINTER;
 
-        // Create compare string.
-        char* compstring = NULL_POINTER;
-        int compstring_count = *((int*)basisname_count) + *LIST_SEPARATOR_COUNT;
+        // The prefix equal to all parts of the compound representing a list.
+        char* p = NULL_POINTER;
+        int pc = *((int*) p3) + *LIST_SEPARATOR_COUNT;
 
-        allocate_array((void*) &compstring, (void*) &compstring_count, (void*) CHARACTER_ARRAY);
+        // Allocate prefix.
+        allocate_array((void*) &p, (void*) &pc, (void*) CHARACTER_ARRAY);
 
-        // Set the compare string
-        //this is the basisname and the list separat
-        set_array_elements(compstring, (void*) NUMBER_0_INTEGER, basisname, basisname_count, (void*) CHARACTER_ARRAY);
-        set_array_elements(compstring, basisname_count, LIST_SEPARATOR, LIST_SEPARATOR_COUNT, (void*) CHARACTER_ARRAY);
+        // Set prefix as concatenation of base name and list separator.
+        set_array_elements(p, (void*) NUMBER_0_INTEGER, p2, p3, (void*) CHARACTER_ARRAY);
+        set_array_elements(p, p3, LIST_SEPARATOR, LIST_SEPARATOR_COUNT, (void*) CHARACTER_ARRAY);
 
         //create integer model for the index
         void* indexstr = NULL_POINTER;
@@ -2500,55 +2438,62 @@ void reindex_compound_for_listelements(void* compound, void* compound_count, voi
 
         allocate_array((void*) &indexstr, (void*) &indexstr_size, (void*) CHARACTER_ARRAY);
 
-        int comp_res = 0;
+        // The comparison result.
+        int r = 0;
 
         while (1) {
 
-            if (compound_counter >= *((int*) compound_count)) {
+            if (cc >= *((int*) p1)) {
 
                 break;
             }
 
-            get_compound_element_name_by_index(compound, compound_count, &compound_counter, &cen, &cenc, &cens);
+            get_compound_element_name_by_index(p0, p1, &cc, &n, &nc, &ns);
 
-            if ((*cen != NULL_POINTER) && (*cenc != NULL_POINTER) && (*cens != NULL_POINTER)) {
+            if ((*n != NULL_POINTER) && (*nc != NULL_POINTER) && (*ns != NULL_POINTER)) {
 
-                if (*((int*) *cenc) > compstring_count) {
+                if (*((int*) *nc) > pc) {
 
-                    comp_res = 0;
-                    compare_arrays(compstring, &compstring_count, *cen, &compstring_count, &comp_res, CHARACTER_ARRAY);
+                    // Reset comparison result.
+                    r = 0;
 
-                    //if teh begiining of the two arrays ident, then
-                    //the compound part is a part of the list
-                    if (comp_res == 1) {
+                    compare_arrays(p, &pc, *n, &pc, &r, CHARACTER_ARRAY);
 
-                        *((int*) *cenc) = 0;
+                    if (r == 1) {
+
+                        // The beginning of the two arrays are identical.
+                        // The compound part belongs to the list.
+
+                        *((int*) *nc) = 0;
 
                         //parse the basisname
-                        parse(cen, *cenc, *cens, basisname, basisname_count, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
+                        parse(n, *nc, *ns, p2, p3, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
                         //parse the list separator
-                        parse(cen, *cenc, *cens, LIST_SEPARATOR, LIST_SEPARATOR_COUNT, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
+                        parse(n, *nc, *ns, LIST_SEPARATOR, LIST_SEPARATOR_COUNT, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
                         //parse the index
-                        indexstr_count = snprintf(indexstr, indexstr_size, "%i", index_counter);
-                        parse(cen, *cenc, *cens, indexstr, &indexstr_count, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
+                        indexstr_count = snprintf(indexstr, indexstr_size, "%i", ic);
+                        parse(n, *nc, *ns, indexstr, &indexstr_count, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
-                        index_counter = index_counter + 1;
+                        ic = ic + 1;
                     }
                 }
             }
 
-            compound_counter = compound_counter + 1;
+            cc = cc + 1;
         }
 
-        // destroy compare string.
-        deallocate_array((void*) &compstring, (void*) &compstring_count, (void*) CHARACTER_ARRAY);
-
-        // destroy index string.
+        // Deallocate prefix.
+        deallocate_array((void*) &p, (void*) &pc, (void*) CHARACTER_ARRAY);
+        // Deallocate index string.
         deallocate_array((void*) &indexstr, (void*) &indexstr_count, (void*) CHARACTER_ARRAY);
     }
 }
+
+//
+// ?? OLD procedures. May be deleted later.
+//
 
 /**
  * Returns the next index that can be used to set a map element.
@@ -2690,9 +2635,9 @@ void build_next_map_element_name(void* p0, void* p1, void* p2) {
  * @param p3 the reference
  * @param p4 the reference size
  */
+/*??
 void add_compound_part(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-/*??
     // This element name will get destroyed (free) in remove_map_element.
     void* n = malloc(0);
 
@@ -2708,8 +2653,8 @@ void add_compound_part(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         set_map_element_at_index(p0, (void*) &NAMES_COUNTS_ARRAY_INDEX, p1, p3);
     }
-*/
 }
+*/
 
 /* COMPOUND_ACCESSOR_SOURCE */
 #endif

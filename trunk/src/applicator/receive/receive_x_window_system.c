@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.12 $ $Date: 2006-04-20 22:36:09 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2006-04-23 09:56:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -82,14 +82,14 @@ void receive_x_window_system_mouse_command(void* p0, void* p1, void* p2, void* p
                 if (*t == ButtonPress) {
 
                     // Get actual command belonging to the button and event.
-                    get_compound_element_by_encapsulated_name(p9, p10,
+                    get_universal_compound_element_by_name(p9, p10,
                         (void*) GUI_LEFT_PRESS_COMMAND_NAME, (void*) GUI_LEFT_PRESS_COMMAND_NAME_COUNT,
                         p0, p1, p2, p3, p4, p5, p6, p7, p8, p13, p14);
 
                 } else if (*t == ButtonRelease) {
 
                     // Get actual command belonging to the button and event.
-                    get_compound_element_by_encapsulated_name(p9, p10,
+                    get_universal_compound_element_by_name(p9, p10,
                         (void*) GUI_LEFT_RELEASE_COMMAND_NAME, (void*) GUI_LEFT_RELEASE_COMMAND_NAME_COUNT,
                         p0, p1, p2, p3, p4, p5, p6, p7, p8, p13, p14);
                 }
@@ -274,17 +274,19 @@ void receive_x_window_system_part(void* p0, void* p1, void* p2, void* p3, void* 
                             (void*) &d, (void*) &dc, (void*) &ds);
 
                         // Get graphical part position from details.
-                        get_compound_element_by_name(*d, *dc,
+                        get_universal_compound_element_by_name(*d, *dc,
                             (void*) UI_POSITION_NAME, (void*) UI_POSITION_NAME_COUNT,
                             (void*) &pa, (void*) &pac, (void*) &pas,
                             (void*) &pm, (void*) &pmc, (void*) &pms,
-                            (void*) &pd, (void*) &pdc, (void*) &pds);
+                            (void*) &pd, (void*) &pdc, (void*) &pds,
+                            p16, p17);
                         // Get graphical part size from details.
-                        get_compound_element_by_name(*d, *dc,
+                        get_universal_compound_element_by_name(*d, *dc,
                             (void*) UI_SIZE_NAME, (void*) UI_SIZE_NAME_COUNT,
                             (void*) &sa, (void*) &sac, (void*) &sas,
                             (void*) &sm, (void*) &smc, (void*) &sms,
-                            (void*) &sd, (void*) &sdc, (void*) &sds);
+                            (void*) &sd, (void*) &sdc, (void*) &sds,
+                            p16, p17);
 
                         // Determine graphical part position coordinates.
                         get(*pm, (void*) NUMBER_0_INTEGER, (void*) &pmx, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
@@ -597,7 +599,7 @@ void receive_x_window_system_thread(void* p0) {
             if (e.xexpose.count == 0) {
 
                 // Get actual command belonging to the x window system expose event.
-                get_compound_element_by_encapsulated_name(*c, *cc,
+                get_universal_compound_element_by_name(*c, *cc,
                     (void*) GUI_EXPOSE_COMMAND_NAME, (void*) GUI_EXPOSE_COMMAND_NAME_COUNT,
                     (void*) &ca, (void*) &cac, (void*) &cas,
                     (void*) &cm, (void*) &cmc, (void*) &cms,

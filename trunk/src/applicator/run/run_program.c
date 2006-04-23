@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2006-04-20 22:36:09 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2006-04-23 09:56:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -47,8 +47,10 @@
  *
  * @param p0 the parameters
  * @param p1 the parameters count
+ * @param p2 the knowledge memory
+ * @param p3 the knowledge memory count
  */
-void run_program(void* p0, void* p1) {
+void run_program(void* p0, void* p1, void* p2, void* p3) {
 
     log_message_debug("Run program command.");
 
@@ -66,11 +68,12 @@ void run_program(void* p0, void* p1) {
     void** programds = &NULL_POINTER;
 
     // Get program option.
-    get_compound_element_by_name(p0, p1,
+    get_universal_compound_element_by_name(p0, p1,
         (void*) RUN_PROGRAM_PROGRAM_NAME, (void*) RUN_PROGRAM_PROGRAM_NAME_COUNT,
         (void*) &programa, (void*) &programac, (void*) &programas,
         (void*) &programm, (void*) &programmc, (void*) &programms,
-        (void*) &programd, (void*) &programdc, (void*) &programds);
+        (void*) &programd, (void*) &programdc, (void*) &programds,
+        p2, p3);
 
     // The arguments vector.
     void* arg = NULL_POINTER;

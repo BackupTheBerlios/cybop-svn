@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2006-04-20 22:36:09 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2006-04-23 09:56:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -46,16 +46,10 @@
  *
  * @param p0 the parameters
  * @param p1 the parameters count
- * @param p2 the internal memory
- * @param p3 the knowledge memory
- * @param p4 the knowledge memory count
- * @param p5 the knowledge memory size
- * @param p6 the signal memory
- * @param p7 the signal memory count
- * @param p8 the signal memory size
- * @param p9 the signal id
+ * @param p2 the knowledge memory
+ * @param p3 the knowledge memory count
  */
-void run(void* p0, void* p1) {
+void run(void* p0, void* p1, void* p2, void* p3) {
 
     log_message_debug("Run a command.");
 
@@ -73,11 +67,12 @@ void run(void* p0, void* p1) {
     void** cds = &NULL_POINTER;
 
     // Get command.
-    get_compound_element_by_name(p0, p1,
+    get_universal_compound_element_by_name(p0, p1,
         (void*) RUN_COMMAND_NAME, (void*) RUN_COMMAND_NAME_COUNT,
         (void*) &ca, (void*) &cac, (void*) &cas,
         (void*) &cm, (void*) &cmc, (void*) &cms,
-        (void*) &cd, (void*) &cdc, (void*) &cds);
+        (void*) &cd, (void*) &cdc, (void*) &cds,
+        p2, p3);
 
     // The comparison result.
     int r = 0;
@@ -88,7 +83,7 @@ void run(void* p0, void* p1) {
 
         if (r != 0) {
 
-            run_program(p0, p1);
+            run_program(p0, p1, p2, p3);
         }
     }
 
@@ -98,7 +93,7 @@ void run(void* p0, void* p1) {
 
         if (r != 0) {
 
-            run_list_directory_contents(p0, p1);
+            run_list_directory_contents(p0, p1, p2, p3);
         }
     }
 
@@ -108,7 +103,7 @@ void run(void* p0, void* p1) {
 
         if (r != 0) {
 
-            run_copy(p0, p1);
+            run_copy(p0, p1, p2, p3);
         }
     }
 
@@ -118,7 +113,7 @@ void run(void* p0, void* p1) {
 
         if (r != 0) {
 
-            run_archive(p0, p1);
+            run_archive(p0, p1, p2, p3);
         }
     }
 }

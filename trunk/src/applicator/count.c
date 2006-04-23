@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.12 $ $Date: 2006-04-20 22:36:09 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2006-04-23 09:56:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -90,7 +90,7 @@ void count_parts(void* p0, void* p1, void* p2, void* p3, void* p4) {
     void** resds = &NULL_POINTER;
 
     // get the basisname
-    get_real_compound_element_by_name(p0, p1,
+    get_universal_compound_element_by_name(p0, p1,
         (void*) PART_NAME_NAME,
         (void*) PART_NAME_NAME_COUNT,
         (void*) &bna, (void*) &bnac, (void*) &bnas,
@@ -99,7 +99,7 @@ void count_parts(void* p0, void* p1, void* p2, void* p3, void* p4) {
         p2, p3);
 
     // get the model
-    get_real_compound_element_by_name(p0, p1,
+    get_universal_compound_element_by_name(p0, p1,
         (void*) WHOLE_MODEL_NAME,
         (void*) WHOLE_MODEL_NAME_COUNT,
         (void*) &mdla, (void*) &mdlac, (void*) &mdlas,
@@ -108,7 +108,7 @@ void count_parts(void* p0, void* p1, void* p2, void* p3, void* p4) {
         p2, p3);
 
     // get the result
-    get_real_compound_element_by_name(p0, p1,
+    get_universal_compound_element_by_name(p0, p1,
         (void*) COUNTER_NAME,
         (void*) COUNTER_NAME_COUNT,
         (void*) &resa, (void*) &resac, (void*) &resas,

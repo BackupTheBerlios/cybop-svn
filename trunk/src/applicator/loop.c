@@ -22,7 +22,7 @@
  *
  * this handel a loop
  *
- * @version $Revision: 1.13 $ $Date: 2006-04-20 22:36:09 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2006-04-23 09:56:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -101,7 +101,7 @@ void loop(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
     void** mds = &NULL_POINTER;
 
     // Get break flag.
-    get_real_compound_element_by_name(p10, p11,
+    get_universal_compound_element_by_name(p10, p11,
         (void*) BREAK_FLAG_NAME, (void*) BREAK_FLAG_NAME_COUNT,
         (void*) &bfa, (void*) &bfac, (void*) &bfas,
         (void*) &bfm, (void*) &bfmc, (void*) &bfms,
@@ -109,7 +109,7 @@ void loop(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
         p1, p2);
 
     // Get model.
-    get_real_compound_element_by_name(p10, p11,
+    get_universal_compound_element_by_name(p10, p11,
         (void*) LOOP_MODEL_NAME, (void*) LOOP_MODEL_NAME_COUNT,
         (void*) &ma, (void*) &mac, (void*) &mas,
         (void*) &mm, (void*) &mmc, (void*) &mms,

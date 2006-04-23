@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.14 $ $Date: 2006-04-21 23:49:10 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2006-04-23 09:56:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description This module starts up a service.
  */
@@ -85,7 +85,7 @@ void startup_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5)
     void** spds = &NULL_POINTER;
 
     // Get parameters.
-    get_real_compound_element_by_name(p0, p1,
+    get_universal_compound_element_by_name(p0, p1,
         (void*) SERVICE_NAME, (void*) SERVICE_NAME_COUNT,
         (void*) &sa, (void*) &sac, (void*) &sas,
         (void*) &sm, (void*) &smc, (void*) &sms,
@@ -93,7 +93,7 @@ void startup_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5)
         p2, p3);
 
     // Get parameters.
-    get_real_compound_element_by_name(p0, p1,
+    get_universal_compound_element_by_name(p0, p1,
         (void*) PORT_NAME, (void*) PORT_NAME_COUNT,
         (void*) &spa, (void*) &spac, (void*) &spas,
         (void*) &spm, (void*) &spmc, (void*) &spms,

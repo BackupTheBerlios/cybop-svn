@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2006-04-20 22:36:09 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2006-04-23 09:56:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -111,8 +111,7 @@ void receive_linux_console_signal(void* p0, void* p1, void* p2) {
 
     // Get actual command belonging to the command name.
     // If the name is not known, the command parameter is left untouched.
-    get_compound_element_by_encapsulated_name(*c, *cc,
-        p1, p2,
+    get_universal_compound_element_by_name(*c, *cc, p1, p2,
         (void*) &ca, (void*) &cac, (void*) &cas,
         (void*) &cm, (void*) &cmc, (void*) &cms,
         (void*) &cd, (void*) &cdc, (void*) &cds,
@@ -165,7 +164,7 @@ void receive_linux_console_thread(void* p0) {
     // EOF, you can be sure that it will fit in a char variable without loss
     // of information.
     // NEVERTHELESS, a char is used here since EOF is not of importance below,
-    // in the "get_compound_element_by_encapsulated_name" procedure.
+    // in the "get_universal_compound_element_by_name" procedure.
 //??    wint_t e = *NULL_CONTROL_CHARACTER;
     char e = *NULL_CONTROL_ASCII_CHARACTER;
     // The escape character mode.

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2006-04-20 22:36:09 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2006-04-23 09:56:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -112,7 +112,7 @@ void compare(void* p0, void* p1, void* p2, void* p3, void* p4) {
     void** rds = &NULL_POINTER;
 
     // Get comparison.
-    get_real_compound_element_by_name(p0, p1,
+    get_universal_compound_element_by_name(p0, p1,
         (void*) COMPARISON_NAME, (void*) COMPARISON_NAME_COUNT,
         (void*) &ca, (void*) &cac, (void*) &cas,
         (void*) &cm, (void*) &cmc, (void*) &cms,
@@ -120,7 +120,7 @@ void compare(void* p0, void* p1, void* p2, void* p3, void* p4) {
         p2, p3);
 
     // Get left side.
-    get_real_compound_element_by_name(p0, p1,
+    get_universal_compound_element_by_name(p0, p1,
         (void*) LEFT_SIDE_NAME, (void*) LEFT_SIDE_NAME_COUNT,
         (void*) &lsa, (void*) &lsac, (void*) &lsas,
         (void*) &lsm, (void*) &lsmc, (void*) &lsms,
@@ -128,7 +128,7 @@ void compare(void* p0, void* p1, void* p2, void* p3, void* p4) {
         p2, p3);
 
     // Get right side.
-    get_real_compound_element_by_name(p0, p1,
+    get_universal_compound_element_by_name(p0, p1,
         (void*) RIGHT_SIDE_NAME, (void*) RIGHT_SIDE_NAME_COUNT,
         (void*) &rsa, (void*) &rsac, (void*) &rsas,
         (void*) &rsm, (void*) &rsmc, (void*) &rsms,
@@ -136,7 +136,7 @@ void compare(void* p0, void* p1, void* p2, void* p3, void* p4) {
         p2, p3);
 
     // Get result.
-    get_real_compound_element_by_name(p0, p1,
+    get_universal_compound_element_by_name(p0, p1,
         (void*) RESULT_NAME, (void*) RESULT_NAME_COUNT,
         (void*) &ra, (void*) &rac, (void*) &ras,
         (void*) &rm, (void*) &rmc, (void*) &rms,

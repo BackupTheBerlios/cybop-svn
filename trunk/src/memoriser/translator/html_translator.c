@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.18 $ $Date: 2006-04-21 23:49:12 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2006-04-23 09:56:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -138,12 +138,13 @@ void encode_html_knowledgememory(void** dest, int* dest_count, int* dest_size,
         void** comp_detail_count = &NULL_POINTER;
         void** comp_detail_size = &NULL_POINTER;
 
-        get_compound_element_by_name(
+        get_universal_compound_element_by_name(
             know, know_count,
             source_model, source_model_count,
             &comp_abstr, &comp_abstr_count, &comp_abstr_size,
             &comp_model, &comp_model_count, &comp_model_size,
-            &comp_detail, &comp_detail_count, &comp_detail_size );
+            &comp_detail, &comp_detail_count, &comp_detail_size,
+            know, know_count);
 
         encode_html( dest, dest_count, dest_size,
                      *comp_abstr, *comp_abstr_count,

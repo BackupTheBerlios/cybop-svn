@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2006-04-20 22:36:11 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2006-04-23 09:56:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -126,11 +126,12 @@ void serialise_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
         if (p5 != NULL_POINTER) {
 
             // Get source whole size from details.
-            get_compound_element_by_name(p5, p6,
+            get_universal_compound_element_by_name(p5, p6,
                 (void*) UI_SIZE_NAME, (void*) UI_SIZE_NAME_COUNT,
                 (void*) &wsa, (void*) &wsac, (void*) &wsas,
                 (void*) &wsm, (void*) &wsmc, (void*) &wsms,
-                (void*) &wsd, (void*) &wsdc, (void*) &wsds);
+                (void*) &wsd, (void*) &wsdc, (void*) &wsds,
+                p7, p8);
 
             // Determine source whole size coordinates.
             get(*wsm, (void*) NUMBER_0_INTEGER, (void*) &wsmx, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
@@ -273,29 +274,33 @@ void serialise_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
                 (void*) &d, (void*) &dc, (void*) &ds);
 
             // Get source part layout from details.
-            get_compound_element_by_name(*d, *dc,
+            get_universal_compound_element_by_name(*d, *dc,
                 (void*) UI_LAYOUT_NAME, (void*) UI_LAYOUT_NAME_COUNT,
                 (void*) &la, (void*) &lac, (void*) &las,
                 (void*) &lm, (void*) &lmc, (void*) &lms,
-                (void*) &ld, (void*) &ldc, (void*) &lds);
+                (void*) &ld, (void*) &ldc, (void*) &lds,
+                p7, p8);
             // Get source part cell from details.
-            get_compound_element_by_name(*d, *dc,
+            get_universal_compound_element_by_name(*d, *dc,
                 (void*) UI_CELL_NAME, (void*) UI_CELL_NAME_COUNT,
                 (void*) &ca, (void*) &cac, (void*) &cas,
                 (void*) &cm, (void*) &cmc, (void*) &cms,
-                (void*) &cd, (void*) &cdc, (void*) &cds);
+                (void*) &cd, (void*) &cdc, (void*) &cds,
+                p7, p8);
             // Get source part position from details.
-            get_compound_element_by_name(*d, *dc,
+            get_universal_compound_element_by_name(*d, *dc,
                 (void*) UI_POSITION_NAME, (void*) UI_POSITION_NAME_COUNT,
                 (void*) &pa, (void*) &pac, (void*) &pas,
                 (void*) &pm, (void*) &pmc, (void*) &pms,
-                (void*) &pd, (void*) &pdc, (void*) &pds);
+                (void*) &pd, (void*) &pdc, (void*) &pds,
+                p7, p8);
             // Get source part size from details.
-            get_compound_element_by_name(*d, *dc,
+            get_universal_compound_element_by_name(*d, *dc,
                 (void*) UI_SIZE_NAME, (void*) UI_SIZE_NAME_COUNT,
                 (void*) &sa, (void*) &sac, (void*) &sas,
                 (void*) &sm, (void*) &smc, (void*) &sms,
-                (void*) &sd, (void*) &sdc, (void*) &sds);
+                (void*) &sd, (void*) &sdc, (void*) &sds,
+                p7, p8);
 
             // Get source part position coordinates.
             get(*pm, (void*) NUMBER_0_INTEGER, (void*) &pmx, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
@@ -477,17 +482,19 @@ void serialise_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
                 XResizeWindow(*di, **w, **smx, **smy);
 
                 // Get source part title from details.
-                get_compound_element_by_name(*d, *dc,
+                get_universal_compound_element_by_name(*d, *dc,
                     (void*) GUI_TITLE_NAME, (void*) GUI_TITLE_NAME_COUNT,
                     (void*) &ta, (void*) &tac, (void*) &tas,
                     (void*) &tm, (void*) &tmc, (void*) &tms,
-                    (void*) &td, (void*) &tdc, (void*) &tds);
+                    (void*) &td, (void*) &tdc, (void*) &tds,
+                    p7, p8);
                 // Get source part icon from details.
-                get_compound_element_by_name(*d, *dc,
+                get_universal_compound_element_by_name(*d, *dc,
                     (void*) GUI_ICON_NAME, (void*) GUI_ICON_NAME_COUNT,
                     (void*) &ia, (void*) &iac, (void*) &ias,
                     (void*) &im, (void*) &imc, (void*) &ims,
-                    (void*) &id, (void*) &idc, (void*) &ids);
+                    (void*) &id, (void*) &idc, (void*) &ids,
+                    p7, p8);
 
                 // The terminated title.
                 tt = NULL_POINTER;

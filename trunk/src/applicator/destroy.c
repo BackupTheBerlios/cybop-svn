@@ -22,7 +22,7 @@
  *
  * This file destroys a transient model to a persistent model.
  *
- * @version $Revision: 1.12 $ $Date: 2006-04-20 22:36:09 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2006-04-23 09:56:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -220,7 +220,7 @@ void deallocate_part(void* p0, void* p1, void* p2, void* p3, void* p4) {
     void** nds = &NULL_POINTER;
 
     // Get name name.
-    get_real_compound_element_by_name(p0, p1,
+    get_universal_compound_element_by_name(p0, p1,
         (void*) NAME_NAME, (void*) NAME_NAME_COUNT,
         (void*) &na, (void*) &nac, (void*) &nas,
         (void*) &nm, (void*) &nmc, (void*) &nms,
@@ -259,7 +259,7 @@ void deallocate_part(void* p0, void* p1, void* p2, void* p3, void* p4) {
             void** edc = &NULL_POINTER;
             void** eds = &NULL_POINTER;
 
-            get_real_compound_element_by_name(p2, p3,
+            get_universal_compound_element_by_name(p2, p3,
                 (void*) *nm, (void*) *nmc,
                 (void*) &ea, (void*) &eac, (void*) &eas,
                 (void*) &em, (void*) &emc, (void*) &ems,
