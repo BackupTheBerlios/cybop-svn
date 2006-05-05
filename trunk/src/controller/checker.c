@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.16 $ $Date: 2006-04-20 22:36:09 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2006-05-05 22:56:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -110,11 +110,9 @@ void check(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
     fprintf(stderr, "check id: %i\n", *((int*) *id));
 */
 
-/*??
     //?? TEST
     fprintf(stderr, "TEST checker k: %i\n", p1);
     test_knowledge_memory(p1, p2, 5);
-*/
 
                 // Lock signal memory mutex.
                 pthread_mutex_lock((pthread_mutex_t*) p7);

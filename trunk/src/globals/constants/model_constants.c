@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.14 $ $Date: 2006-04-20 22:36:10 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2006-05-05 22:56:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -88,7 +88,7 @@ static char* TERMINAL_COLOUR_WHITE_MODEL = TERMINAL_COLOUR_WHITE_MODEL_ARRAY;
 static int* TERMINAL_COLOUR_WHITE_MODEL_COUNT = NUMBER_5_INTEGER_ARRAY;
 
 //
-// Program flow models.
+// Data transfer models.
 //
 
 /** The copy (set, assign) model. */
@@ -110,6 +110,10 @@ static int* COPY_PROPERTY_MODEL_COUNT = NUMBER_13_INTEGER_ARRAY;
 static char MOVE_PROPERTY_MODEL_ARRAY[] = {'m', 'o', 'v', 'e', '_', 'p', 'r', 'o', 'p', 'e', 'r', 't', 'y'};
 static char* MOVE_PROPERTY_MODEL = MOVE_PROPERTY_MODEL_ARRAY;
 static int* MOVE_PROPERTY_MODEL_COUNT = NUMBER_13_INTEGER_ARRAY;
+
+//
+// Program flow models.
+//
 
 /** The branch model. */
 static char BRANCH_MODEL_ARRAY[] = {'b', 'r', 'a', 'n', 'c', 'h'};
@@ -135,6 +139,16 @@ static int* BUILD_LISTNAME_MODEL_COUNT = NUMBER_14_INTEGER_ARRAY;
 // Boolean logic models.
 //
 
+/** The not model. This is the ones complement (all bits negated). */
+static char NOT_MODEL_ARRAY[] = {'n', 'o', 't'};
+static char* NOT_MODEL = NOT_MODEL_ARRAY;
+static int* NOT_MODEL_COUNT = NUMBER_3_INTEGER_ARRAY;
+
+/** The neg model. This is the two's complement (all bits negated and added one). */
+static char NEG_MODEL_ARRAY[] = {'n', 'e', 'g'};
+static char* NEG_MODEL = NEG_MODEL_ARRAY;
+static int* NEG_MODEL_COUNT = NUMBER_3_INTEGER_ARRAY;
+
 /** The and model. */
 static char AND_MODEL_ARRAY[] = {'a', 'n', 'd'};
 static char* AND_MODEL = AND_MODEL_ARRAY;
@@ -144,6 +158,50 @@ static int* AND_MODEL_COUNT = NUMBER_3_INTEGER_ARRAY;
 static char OR_MODEL_ARRAY[] = {'o', 'r'};
 static char* OR_MODEL = OR_MODEL_ARRAY;
 static int* OR_MODEL_COUNT = NUMBER_2_INTEGER_ARRAY;
+
+/** The xor model. */
+static char XOR_MODEL_ARRAY[] = {'x', 'o', 'r'};
+static char* XOR_MODEL = XOR_MODEL_ARRAY;
+static int* XOR_MODEL_COUNT = NUMBER_3_INTEGER_ARRAY;
+
+//
+// Bit manipulation models.
+//
+
+/** The shift left model. It corresponds to "SHL" assembler command. */
+static char SHIFT_LEFT_MODEL_ARRAY[] = {'s', 'h', 'i', 'f', 't', '_', 'l', 'e', 'f', 't'};
+static char* SHIFT_LEFT_MODEL = SHIFT_LEFT_MODEL_ARRAY;
+static int* SHIFT_LEFT_MODEL_COUNT = NUMBER_10_INTEGER_ARRAY;
+
+/** The shift right model. It corresponds to "SHR" assembler command. */
+static char SHIFT_RIGHT_MODEL_ARRAY[] = {'s', 'h', 'i', 'f', 't', '_', 'r', 'i', 'g', 'h', 't'};
+static char* SHIFT_RIGHT_MODEL = SHIFT_RIGHT_MODEL_ARRAY;
+static int* SHIFT_RIGHT_MODEL_COUNT = NUMBER_11_INTEGER_ARRAY;
+
+/** The rotate left model. It corresponds to "ROL" assembler command. */
+static char ROTATE_LEFT_MODEL_ARRAY[] = {'r', 'o', 't', 'a', 't', 'e', '_', 'l', 'e', 'f', 't'};
+static char* ROTATE_LEFT_MODEL = ROTATE_LEFT_MODEL_ARRAY;
+static int* ROTATE_LEFT_MODEL_COUNT = NUMBER_11_INTEGER_ARRAY;
+
+/** The rotate right model. It corresponds to "ROR" assembler command. */
+static char ROTATE_RIGHT_MODEL_ARRAY[] = {'r', 'o', 't', 'a', 't', 'e', '_', 'r', 'i', 'g', 'h', 't'};
+static char* ROTATE_RIGHT_MODEL = ROTATE_RIGHT_MODEL_ARRAY;
+static int* ROTATE_RIGHT_MODEL_COUNT = NUMBER_12_INTEGER_ARRAY;
+
+/** The set bit model. It corresponds to "BTS" assembler command. */
+static char SET_BIT_MODEL_ARRAY[] = {'s', 'e', 't', '_', 'b', 'i', 't'};
+static char* SET_BIT_MODEL = SET_BIT_MODEL_ARRAY;
+static int* SET_BIT_MODEL_COUNT = NUMBER_7_INTEGER_ARRAY;
+
+/** The reset bit model. It corresponds to "BTR" assembler command. */
+static char RESET_BIT_MODEL_ARRAY[] = {'r', 'e', 's', 'e', 't', '_', 'b', 'i', 't'};
+static char* RESET_BIT_MODEL = RESET_BIT_MODEL_ARRAY;
+static int* RESET_BIT_MODEL_COUNT = NUMBER_9_INTEGER_ARRAY;
+
+/** The get bit model. It corresponds to "BT" assembler command. */
+static char GET_BIT_MODEL_ARRAY[] = {'g', 'e', 't', '_', 'b', 'i', 't'};
+static char* GET_BIT_MODEL = GET_BIT_MODEL_ARRAY;
+static int* GET_BIT_MODEL_COUNT = NUMBER_7_INTEGER_ARRAY;
 
 //
 // Comparison models.

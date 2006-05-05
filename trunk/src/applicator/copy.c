@@ -22,7 +22,7 @@
  *
  * this handel a loop
  *
- * @version $Revision: 1.12 $ $Date: 2006-04-23 09:56:12 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2006-05-05 22:56:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -40,41 +40,92 @@
 #include "../memoriser/translator.c"
 
 /**
- * Copies an integer model.
+ * Copies an integer vector.
  *
- * @param
+ * @param p0 the destination (Hand over as reference!)
+ * @param p1 the destination count
+ * @param p2 the destination size
+ * @param p3 the source
+ * @param p4 the source count
  */
-void copy_integer(void* source, int* source_count, void* dest, int* dest_count) {
+void copy_integer_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    //the source and the destinatione are integers
+    if (p3 != NULL_POINTER) {
 
-    if ((source != NULL_POINTER) && (dest != NULL_POINTER)) {
+        int* s = (int*) p3;
 
-        *((int*) dest) = *((int*) source);
+        if (p0 != NULL_POINTER) {
+
+            int* d = (int*) p0;
+
+            *d = *s;
+
+        } else {
+
+            log_message_debug("Could not copy integer vector. The destination is null.");
+        }
+
+    } else {
+
+        log_message_debug("Could not copy integer vector. The source is null.");
     }
 }
 
 /**
- * Copies a string model.
+ * Copies a character vector.
  *
- * @param
+ * @param p0 the destination (Hand over as reference!)
+ * @param p1 the destination count
+ * @param p2 the destination size
+ * @param p3 the source
+ * @param p4 the source count
  */
-void copy_string(void* source, int* source_count, int* source_size, void** dest, int* dest_count, int* dest_size) {
+void copy_character_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    // the source and the destinatione are arrays of string
+    if (p4 != NULL_POINTER) {
 
-    if ((source != NULL_POINTER) &&
-        (source_count != NULL_POINTER) &&
-        (source_size != NULL_POINTER) &&
-        (dest   != NULL_POINTER)  &&
-        (dest_count   != NULL_POINTER)  &&
-        (dest_size   != NULL_POINTER)) {
+        int* sc = (int*) p4;
 
-        *dest_count = *source_count;
-        *dest_size = *dest_count;
+        if (p2 != NULL_POINTER) {
 
-        reallocate_array(dest, dest_size, dest_size, CHARACTER_ARRAY);
-        set_array_elements(*dest, (void*) NUMBER_0_INTEGER, source, source_count, (void*) CHARACTER_ARRAY);
+            int* ds = (int*) p2;
+
+            if (p1 != NULL_POINTER) {
+
+                int* dc = (int*) p1;
+
+                if (p0 != NULL_POINTER) {
+
+                    void** d = (void**) p0;
+
+                    if (*sc > *dc) {
+
+                        *dc = *sc;
+                        *ds = *dc;
+
+                        reallocate_array(p0, p1, p2, (void*) CHARACTER_ARRAY);
+                    }
+
+                    set_array_elements(*d, (void*) NUMBER_0_INTEGER, p3, p4, (void*) CHARACTER_ARRAY);
+
+                } else {
+
+                    log_message_debug("Could not copy character vector. The destination is null.");
+                }
+
+            } else {
+
+                log_message_debug("Could not copy character vector. The source is null.");
+            }
+
+        } else {
+
+            log_message_debug("Could not copy character vector. The source is null.");
+        }
+
+    } else {
+
+        log_message_debug("Could not copy character vector. The source count is null.");
     }
 }
 
@@ -86,10 +137,8 @@ void copy_string(void* source, int* source_count, int* source_size, void** dest,
  * @param p2 the knowledge memory
  * @param p3 the knowledge memory count
  * @param p4 the knowledge memory size
- * @param p5 the priority
- * @param p6 the signal id
  */
-void copy(void* p0, int* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
+void copy(void* p0, int* p1, void* p2, void* p3, void* p4) {
 
     log_message_debug("Copy primitive model.");
 
@@ -121,8 +170,7 @@ void copy(void* p0, int* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
     // Get source.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) SOURCE_NAME,
-        (void*) SOURCE_NAME_COUNT,
+        (void*) SOURCE_NAME, (void*) SOURCE_NAME_COUNT,
         (void*) &sa, (void*) &sac, (void*) &sas,
         (void*) &sm, (void*) &smc, (void*) &sms,
         (void*) &sd, (void*) &sdc, (void*) &sds,
@@ -130,60 +178,41 @@ void copy(void* p0, int* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
     // Get destination.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) DESTINATION_NAME,
-        (void*) DESTINATION_NAME_COUNT,
+        (void*) DESTINATION_NAME, (void*) DESTINATION_NAME_COUNT,
         (void*) &da, (void*) &dac, (void*) &das,
         (void*) &dm, (void*) &dmc, (void*) &dms,
         (void*) &dd, (void*) &ddc, (void*) &dds,
         p2, p3);
 
-    // Check source.
-    if ((*sa != NULL_POINTER)
-        && (*sac != NULL_POINTER)
-        && (*sas != NULL_POINTER)
-        && (*sm != NULL_POINTER)
-        && (*smc != NULL_POINTER)
-        && (*sms != NULL_POINTER)
-        && (*sd != NULL_POINTER)
-        && (*sdc != NULL_POINTER)
-        && (*sds != NULL_POINTER)
-        // Check destination.
-        && (*da != NULL_POINTER)
-        && (*dac != NULL_POINTER)
-        && (*das != NULL_POINTER)
-        && (*dm != NULL_POINTER)
-        && (*dmc != NULL_POINTER)
-        && (*dms != NULL_POINTER)
-        && (*dd != NULL_POINTER)
-        && (*ddc != NULL_POINTER)
-        && (*dds != NULL_POINTER)) {
+    // The first comparison result.
+    int r1 = 0;
+    // The second comparison result.
+    int r2 = 0;
 
-        int r1 = 0;
-        int r2 = 0;
+    // Reset first comparison result.
+    r1 = 0;
+    // Reset second comparison result.
+    r2 = 0;
 
-        //set for integer
-        r1 = 0;
-        r2 = 0;
+    compare_arrays(*sa, *sac, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT, (void*) &r1, (void*) CHARACTER_ARRAY);
+    compare_arrays(*da, *dac, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT, (void*) &r2, (void*) CHARACTER_ARRAY);
 
-        compare_arrays(*sa, *sac, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT, (void*) &r1, (void*) CHARACTER_ARRAY);
-        compare_arrays(*da, *dac, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT, (void*) &r2, (void*) CHARACTER_ARRAY);
+    if ((r1 == 1) && (r2 == 1)) {
 
-        if ((r1 == 1) && (r2 == 1)) {
+        copy_integer_vector(dm, *dmc, *dms, *sm, *smc);
+    }
 
-            copy_integer(*sm, *smc, *dm, *dmc);
-        }
+    // Reset first comparison result.
+    r1 = 0;
+    // Reset second comparison result.
+    r2 = 0;
 
-        // Set for string.
-        r1 = 0;
-        r2 = 0;
+    compare_arrays(*sa, *sac, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &r1, (void*) CHARACTER_ARRAY);
+    compare_arrays(*da, *dac, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &r2, (void*) CHARACTER_ARRAY);
 
-        compare_arrays(*sa, *sac, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &r1, (void*) CHARACTER_ARRAY);
-        compare_arrays(*da, *dac, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &r2, (void*) CHARACTER_ARRAY);
+    if ((r1 == 1) && (r2 == 1)) {
 
-        if ((r1 == 1) && (r2 == 1)) {
-
-            copy_string(*sm, *smc, *sms, dm, *dmc, *dms);
-        }
+        copy_character_vector(dm, *dmc, *dms, *sm, *smc);
     }
 }
 
@@ -195,10 +224,8 @@ void copy(void* p0, int* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
  * @param p2 the knowledge memory
  * @param p3 the knowledge memory count
  * @param p4 the knowledge memory size
- * @param p5 the priority
- * @param p6 the signal id
  */
-void copy_property(void* p0, int* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
+void copy_property(void* p0, int* p1, void* p2, void* p3, void* p4) {
 
     log_message_debug("Copy property.");
 
@@ -350,7 +377,7 @@ void copy_property(void* p0, int* p1, void* p2, void* p3, void* p4, void* p5, vo
 
                 if ((r1 == 1) && (r2 == 1)) {
 
-                    copy_integer(*sm, *smc, *pm, *pmc);
+                    copy_integer_vector(*pm, *pmc, *pms, *sm, *smc);
                 }
 
                 // Set for string.
@@ -362,7 +389,7 @@ void copy_property(void* p0, int* p1, void* p2, void* p3, void* p4, void* p5, vo
 
                 if ((r1 == 1) && (r2 == 1)) {
 
-                    copy_string(*sm, *smc, *sms, pm, *pmc, *pms);
+                    copy_character_vector(pm, *pmc, *pms, *sm, *smc);
                 }
             }
         }

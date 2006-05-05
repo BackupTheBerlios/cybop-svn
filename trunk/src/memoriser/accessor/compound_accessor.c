@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.17 $ $Date: 2006-04-23 09:56:13 $ $Author: christian $
+ * @version $Revision: 1.18 $ $Date: 2006-05-05 22:56:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -153,12 +153,16 @@ void get_compound_part_index(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     // The comparison result.
                     int r = 0;
 
+//??    fprintf(stderr, "TEST cc: %i\n", *cc);
+
                     while (1) {
 
                         if (j >= *cc) {
 
                             break;
                         }
+
+//??    fprintf(stderr, "TEST j: %i\n", j);
 
                         // Get part name.
                         get_array_elements(*n, (void*) &j, (void*) &n1, (void*) POINTER_ARRAY);
@@ -167,6 +171,9 @@ void get_compound_part_index(void* p0, void* p1, void* p2, void* p3, void* p4) {
                         if (*n1 != NULL_POINTER) {
 
                             if (*nc1 != NULL_POINTER) {
+
+//??    fprintf(stderr, "TEST index n1: %s\n", (char*) *n1);
+//??    fprintf(stderr, "TEST index nc1: %i\n", *((int*) *nc1));
 
                                 compare_arrays(p2, p3, (void*) *n1, (void*) *nc1, (void*) &r, (void*) CHARACTER_ARRAY);
 
@@ -2106,12 +2113,6 @@ void get_compound_element_by_name(void* p0, void* p1,
     get_array_elements_index(p2, p3, (void*) COMPOUND_PART_SEPARATOR, (void*) COMPOUND_PART_SEPARATOR_COUNT, (void*) &i, (void*) CHARACTER_ARRAY);
     get_array_elements_index(p2, p3, (void*) COMPOUND_META_SEPARATOR, (void*) COMPOUND_PART_SEPARATOR_COUNT, (void*) &j, (void*) CHARACTER_ARRAY);
 
-/*??
-    fprintf(stderr, "TEST get name: %s\n", (char*) p2);
-    fprintf(stderr, "TEST get i: %i\n", i);
-    fprintf(stderr, "TEST get j: %i\n", j);
-*/
-
     if ((i >= 0) && (j == -1)) {
 
         // The full name is hierarchical.
@@ -2158,7 +2159,11 @@ void get_compound_element_by_name(void* p0, void* p1,
         // The index of the part name.
         int index = -1;
 
+//??    fprintf(stderr, "TEST before: %i\n", index);
+
         get_compound_part_index(p0, p1, p2, p3, (void*) &index);
+
+//??    fprintf(stderr, "TEST after: %i\n", index);
 
         if (index != -1) {
 

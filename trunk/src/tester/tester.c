@@ -24,7 +24,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.24 $ $Date: 2006-04-20 22:36:12 $ $Author: christian $
+ * @version $Revision: 1.25 $ $Date: 2006-05-05 22:56:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -53,6 +53,42 @@
 #include "../memoriser/allocator.c"
 #include "../memoriser/array.c"
 #include "../memoriser/converter.c"
+
+/**
+ * Tests the inline assembler code.
+ */
+void test_inline_assembler_code() {
+
+    fputs("Test inline assembler code:\n", stdout);
+
+    // Gegeben ist ein zusammenhängender Block von Worten im RAM.
+    // Die Startadresse des Blockes ist im Register ESI angegeben,
+    // die Anzahl der Werte im Register ECX.
+    // Schreiben Sie ein Programmstück, welches die Anzahl der Worte
+    // in diesem Block zählt, deren Wert gleich dem ist, welcher im
+    // Register DI vorgegeben ist.
+    // Das Ergebnis soll nach Abarbeitung des Programms im Register EAX stehen.
+    //
+    // - block of words in RAM
+    // - ESI = start address
+    // - ECX = number of values
+    // - count number of words in RAM block with value == DI
+    // - write result to EAX
+
+/*??
+            MOV EAX, 0; initial word count
+            MOV EDX, 0; loop count
+    loop:   CMP ECX, 0
+            JZ end
+            DEC ECX
+            MOV EBX, [ESI + EDX * 2]
+            CMP EBX, DI
+            JNZ loop
+            INC EAX
+            JMP loop
+    end:    NOP
+*/
+}
 
 /**
  * Tests the preprocessor directives.
@@ -883,7 +919,8 @@ void test() {
     // int x = 2;
     // fprintf(stderr, "The value of x is: %d\n", x);
 
-    test_preprocessor_directives();
+    test_inline_assembler_code();
+//??    test_preprocessor_directives();
 //??    test_stdout_stderr();
 //??    test_character_array_with_termination();
 //??    test_wide_character_output();

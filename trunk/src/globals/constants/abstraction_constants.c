@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.15 $ $Date: 2006-04-20 22:36:09 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2006-05-05 22:56:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -94,9 +94,9 @@ static char* KNOWLEDGE_ABSTRACTION = KNOWLEDGE_ABSTRACTION_ARRAY;
 static int* KNOWLEDGE_ABSTRACTION_COUNT = NUMBER_9_INTEGER_ARRAY;
 
 /** The encapsulated knowledge abstraction. */
-static char ENCAPSULATED_KNOWLEDGE_ABSTRACTION_ARRAY[] = {'e', 'n', 'c', 'a', 'p', 's', 'u', 'l', 'a', 't', 'e', 'd', '_', 'k', 'n', 'o', 'w', 'l', 'e', 'd', 'g', 'e'};
+static char ENCAPSULATED_KNOWLEDGE_ABSTRACTION_ARRAY[] = {'e', 'n', 'c', 'a', 'p', 's', 'u', 'l', 'a', 't', 'e', 'd'};
 static char* ENCAPSULATED_KNOWLEDGE_ABSTRACTION = ENCAPSULATED_KNOWLEDGE_ABSTRACTION_ARRAY;
-static int* ENCAPSULATED_KNOWLEDGE_ABSTRACTION_COUNT = NUMBER_22_INTEGER_ARRAY;
+static int* ENCAPSULATED_KNOWLEDGE_ABSTRACTION_COUNT = NUMBER_12_INTEGER_ARRAY;
 
 //
 // Operation abstraction.
