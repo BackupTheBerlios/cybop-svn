@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.12 $ $Date: 2006-04-23 09:56:13 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2006-05-11 22:44:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -979,7 +979,7 @@ void serialise_linux_console_rectangle_layout(void* p0, void* p1, void* p2, void
         if (r != 0) {
 
             // Determine new position and size coordinates for part.
-            serialise_linux_console_rectangle_coordinates_layout(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11);
+            serialise_linux_console_rectangle_coordinates_layout(p0, p1, p2, p3, p4, p5, p12, p13, p14, p15, p16, p17);
         }
     }
 
@@ -1043,6 +1043,14 @@ void serialise_linux_console_coordinates(void* p0, void* p1, void* p2, void* p3,
     int** sx = (int**) &NULL_POINTER;
     int** sy = (int**) &NULL_POINTER;
     int** sz = (int**) &NULL_POINTER;
+    // The current position x, y, z.
+    int cpx = *NUMBER_0_INTEGER;
+    int cpy = *NUMBER_0_INTEGER;
+    int cpz = *NUMBER_0_INTEGER;
+    // The current size x, y, z.
+    int csx = *NUMBER_0_INTEGER;
+    int csy = *NUMBER_0_INTEGER;
+    int csz = *NUMBER_0_INTEGER;
     // The source whole position coordinates.
     int** wpmx = (int**) &NULL_POINTER;
     int** wpmy = (int**) &NULL_POINTER;
@@ -1077,6 +1085,15 @@ void serialise_linux_console_coordinates(void* p0, void* p1, void* p2, void* p3,
     get(p16, (void*) UI_SIZE_Y_INDEX, (void*) &sy, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     get(p16, (void*) UI_SIZE_Z_INDEX, (void*) &sz, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
+    // Set current position coordinates, initialised with part position.
+    cpx = **px;
+    cpy = **py;
+    cpz = **pz;
+    // Set current size coordinates, initialised with part size.
+    csx = **sx;
+    csy = **sy;
+    csz = **sz;
+
     if (p20 != NULL_POINTER) {
 
         // Determine source whole position coordinates.
@@ -1108,13 +1125,13 @@ void serialise_linux_console_coordinates(void* p0, void* p1, void* p2, void* p3,
     }
 
     // Calculate coordinates according to given layout.
-    serialise_linux_console_rectangle_layout(*px, *py, *pz, *sx, *sy, *sz,
+    serialise_linux_console_rectangle_layout(&cpx, &cpy, &cpz, &csx, &csy, &csz,
         &fapx, &fapy, &fapz, &fasx, &fasy, &fasz,
         &oapx, &oapy, &oapz, &oasx, &oasy, &oasz,
         p24, p25, p26, p27);
 
     serialise_linux_console_rectangle(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9,
-        p10, p11, p12, p13, *px, *py, *pz, *sx, *sy, *sz, p22, p23);
+        p10, p11, p12, p13, &cpx, &cpy, &cpz, &csx, &csy, &csz, p22, p23);
 }
 
 /**
