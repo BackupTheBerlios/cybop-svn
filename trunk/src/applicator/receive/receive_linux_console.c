@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.10 $ $Date: 2006-04-23 09:56:12 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2006-05-14 19:35:56 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -58,21 +58,21 @@
 void receive_linux_console_signal(void* p0, void* p1, void* p2) {
 
     // The knowledge memory.
-    void** k = (void**) &NULL_POINTER;
-    void** kc = (void**) &NULL_POINTER;
-    void** ks = (void**) &NULL_POINTER;
+    void** k = &NULL_POINTER;
+    void** kc = &NULL_POINTER;
+    void** ks = &NULL_POINTER;
     // The signal memory.
-    void** s = (void**) &NULL_POINTER;
-    void** sc = (void**) &NULL_POINTER;
-    void** ss = (void**) &NULL_POINTER;
+    void** s = &NULL_POINTER;
+    void** sc = &NULL_POINTER;
+    void** ss = &NULL_POINTER;
     // The signal memory mutex.
     pthread_mutex_t** mt = (pthread_mutex_t**) &NULL_POINTER;
     // The interrupt request flag.
     sig_atomic_t** irq = (sig_atomic_t**) &NULL_POINTER;
     // The user interface commands.
-    void** c = (void**) &NULL_POINTER;
-    void** cc = (void**) &NULL_POINTER;
-    void** cs = (void**) &NULL_POINTER;
+    void** c = &NULL_POINTER;
+    void** cc = &NULL_POINTER;
+    void** cs = &NULL_POINTER;
 
     // The command abstraction.
     void** ca = &NULL_POINTER;

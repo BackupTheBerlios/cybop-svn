@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.12 $ $Date: 2006-04-20 22:36:09 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2006-05-14 19:35:56 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -50,7 +50,7 @@ void shutdown_tcp_socket(void* p0, void* p1, void* p2, void* p3) {
     log_message_debug("Shutdown tcp socket.");
 
     // The tcp server socket.
-    int** s = NULL_POINTER;
+    int** s = (int**) &NULL_POINTER;
     // The tcp client sockets.
     void* cs = NULL_POINTER;
     void* csc = NULL_POINTER;

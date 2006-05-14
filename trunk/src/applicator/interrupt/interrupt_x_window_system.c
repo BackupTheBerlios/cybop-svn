@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2006-04-20 22:36:09 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2006-05-14 19:35:55 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -47,19 +47,26 @@ void interrupt_x_window_system() {
     // Set thread interrupt flag.
     *X_WINDOW_SYSTEM_THREAD_INTERRUPT = *NUMBER_1_INTEGER;
 
-    // Send signal to thread.
-    // CAUTION! Sending a SIGKILL signal to a thread using pthread_kill()
-    // ends the ENTIRE PROCESS, not simply the target thread.
-    // SIGKILL is defined to end the entire process, regardless
-    // of the thread it is delivered to, or how it is sent.
-    // The user signal SIGUSR1 is used here instead.
-    pthread_kill(*X_WINDOW_SYSTEM_THREAD, SIGUSR1);
+    if (*X_WINDOW_SYSTEM_THREAD != -1) {
 
-    // Wait for thread to finish.
-    pthread_join(*X_WINDOW_SYSTEM_THREAD, NULL_POINTER);
+        // Send signal to thread.
+        // CAUTION! Sending a SIGKILL signal to a thread using pthread_kill()
+        // ends the ENTIRE PROCESS, not simply the target thread.
+        // SIGKILL is defined to end the entire process, regardless
+        // of the thread it is delivered to, or how it is sent.
+        // The user signal SIGUSR1 is used here instead.
+        pthread_kill(*X_WINDOW_SYSTEM_THREAD, SIGUSR1);
 
-    // Reset thread.
-    *X_WINDOW_SYSTEM_THREAD = -1;
+        // Wait for thread to finish.
+        pthread_join(*X_WINDOW_SYSTEM_THREAD, NULL_POINTER);
+
+        // Reset thread.
+        *X_WINDOW_SYSTEM_THREAD = -1;
+
+    } else {
+
+        log_message_debug("Warning: Could not interrupt x window system. The x window system thread is invalid.");
+    }
 
     // Reset thread interrupt flag.
     *X_WINDOW_SYSTEM_THREAD_INTERRUPT = *NUMBER_0_INTEGER;

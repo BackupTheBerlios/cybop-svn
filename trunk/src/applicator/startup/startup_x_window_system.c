@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.16 $ $Date: 2006-04-20 22:36:09 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2006-05-14 19:35:56 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  *
@@ -190,10 +190,12 @@ void startup_x_window_system(void* p0, void* p1, void* p2, void* p3) {
         dark_gray.red = 32768;
         dark_gray.green = 32768;
         dark_gray.blue = 32768;
+/*??
         gc_menu = XCreateGC(d, *w, 0, 0);
         gc_menu_border_top = XCreateGC(d, *w, 0, 0);
         gc_menu_border_bottom = XCreateGC(d, *w, 0, 0);
         gc_menu_font = XCreateGC(d, *w, 0, 0);
+*/
 
         // Assign x window system internals.
         XSetStandardProperties(d, *w, "Application", "Icon", None, NULL_POINTER, 0, (void*) &sh);
@@ -201,6 +203,7 @@ void startup_x_window_system(void* p0, void* p1, void* p2, void* p3) {
         XAllocColor(d, *cm, &light_gray);
         XAllocColor(d, *cm, &vlight_gray);
         XAllocColor(d, *cm, &dark_gray);
+/*??
         XSetBackground(d, gc_menu, *bg);
         XSetForeground(d, gc_menu, light_gray.pixel);
         XSetBackground(d, gc_menu_border_top, *bg);
@@ -209,6 +212,7 @@ void startup_x_window_system(void* p0, void* p1, void* p2, void* p3) {
         XSetForeground(d, gc_menu_border_bottom, dark_gray.pixel);
         XSetBackground(d, gc_menu_font, light_gray.pixel);
         XSetForeground(d, gc_menu_font, *fg);
+*/
         XSetBackground(d, gc, *bg);
         XSetForeground(d, gc, *fg);
 //??        XSetFont(d, gc, fid);
