@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.13 $ $Date: 2006-05-11 22:44:46 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2006-05-27 08:10:57 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -1577,6 +1577,17 @@ void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4,
                 (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms,
                 (void*) &d, (void*) &dc, (void*) &ds);
+
+/*??
+            // TEST BEGIN
+            char** testname;
+            int* testcount;
+            int* testsize;
+            get_compound_element_name_by_index(p3, p4, (void*) &j,
+                (void*) &testname, (void*) &testcount, (void*) &testsize);
+            fprintf(stderr, "TEST serialise name: %s\n", *testname);
+*/
+
             // Get part super properties from details.
             get_universal_compound_element_by_name(*d, *dc,
                 (void*) SUPER_PROPERTIES_NAME, (void*) SUPER_PROPERTIES_NAME_COUNT,

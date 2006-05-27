@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2006-05-14 19:35:56 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2006-05-27 08:10:56 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -333,6 +333,9 @@ void receive_linux_console_thread(void* p0) {
 
             receive_linux_console_signal(p0, (void*) &e, (void*) NUMBER_1_INTEGER);
         }
+
+        //?? TEST only; remove the following line later!
+        break;
     }
 
     // Deallocate character buffer.

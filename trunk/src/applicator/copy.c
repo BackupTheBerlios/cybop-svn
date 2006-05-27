@@ -22,7 +22,7 @@
  *
  * this handel a loop
  *
- * @version $Revision: 1.13 $ $Date: 2006-05-05 22:56:01 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2006-05-27 08:10:56 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -50,24 +50,50 @@
  */
 void copy_integer_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p3 != NULL_POINTER) {
+    if (p4 != NULL_POINTER) {
 
-        int* s = (int*) p3;
+        int* sc = (int*) p4;
 
-        if (p0 != NULL_POINTER) {
+        if (p2 != NULL_POINTER) {
 
-            int* d = (int*) p0;
+            int* ds = (int*) p2;
 
-            *d = *s;
+            if (p1 != NULL_POINTER) {
+
+                int* dc = (int*) p1;
+
+                if (p0 != NULL_POINTER) {
+
+                    void** d = (void**) p0;
+
+                    if (*sc > *dc) {
+
+                        *dc = *sc;
+                        *ds = *dc;
+
+                        reallocate_array(p0, p1, p2, (void*) INTEGER_ARRAY);
+                    }
+
+                    set_array_elements(*d, (void*) NUMBER_0_INTEGER, p3, p4, (void*) INTEGER_ARRAY);
+
+                } else {
+
+                    log_message_debug("Could not copy integer vector. The destination is null.");
+                }
+
+            } else {
+
+                log_message_debug("Could not copy integer vector. The destination count is null.");
+            }
 
         } else {
 
-            log_message_debug("Could not copy integer vector. The destination is null.");
+            log_message_debug("Could not copy integer vector. The destination size is null.");
         }
 
     } else {
 
-        log_message_debug("Could not copy integer vector. The source is null.");
+        log_message_debug("Could not copy integer vector. The source count is null.");
     }
 }
 
@@ -115,12 +141,12 @@ void copy_character_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             } else {
 
-                log_message_debug("Could not copy character vector. The source is null.");
+                log_message_debug("Could not copy character vector. The destination count is null.");
             }
 
         } else {
 
-            log_message_debug("Could not copy character vector. The source is null.");
+            log_message_debug("Could not copy character vector. The destination size is null.");
         }
 
     } else {
@@ -168,6 +194,19 @@ void copy(void* p0, int* p1, void* p2, void* p3, void* p4) {
     void** ddc = &NULL_POINTER;
     void** dds = &NULL_POINTER;
 
+    // The abstraction abstraction.
+    void** aa = &NULL_POINTER;
+    void** aac = &NULL_POINTER;
+    void** aas = &NULL_POINTER;
+    // The abstraction model.
+    void** am = &NULL_POINTER;
+    void** amc = &NULL_POINTER;
+    void** ams = &NULL_POINTER;
+    // The abstraction details.
+    void** ad = &NULL_POINTER;
+    void** adc = &NULL_POINTER;
+    void** ads = &NULL_POINTER;
+
     // Get source.
     get_universal_compound_element_by_name(p0, p1,
         (void*) SOURCE_NAME, (void*) SOURCE_NAME_COUNT,
@@ -184,35 +223,35 @@ void copy(void* p0, int* p1, void* p2, void* p3, void* p4) {
         (void*) &dd, (void*) &ddc, (void*) &dds,
         p2, p3);
 
-    // The first comparison result.
-    int r1 = 0;
-    // The second comparison result.
-    int r2 = 0;
+    // Get abstraction.
+    get_universal_compound_element_by_name(p0, p1,
+        (void*) ABSTRACTION_NAME, (void*) ABSTRACTION_NAME_COUNT,
+        (void*) &aa, (void*) &aac, (void*) &aas,
+        (void*) &am, (void*) &amc, (void*) &ams,
+        (void*) &ad, (void*) &adc, (void*) &ads,
+        p2, p3);
 
-    // Reset first comparison result.
-    r1 = 0;
-    // Reset second comparison result.
-    r2 = 0;
+    // The comparison result.
+    int r = 0;
 
-    compare_arrays(*sa, *sac, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT, (void*) &r1, (void*) CHARACTER_ARRAY);
-    compare_arrays(*da, *dac, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT, (void*) &r2, (void*) CHARACTER_ARRAY);
+    if (r == 0) {
 
-    if ((r1 == 1) && (r2 == 1)) {
+        compare_arrays(*am, *amc, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        copy_integer_vector(dm, *dmc, *dms, *sm, *smc);
+        if (r != 0) {
+
+            copy_integer_vector(dm, *dmc, *dms, *sm, *smc);
+        }
     }
 
-    // Reset first comparison result.
-    r1 = 0;
-    // Reset second comparison result.
-    r2 = 0;
+    if (r == 0) {
 
-    compare_arrays(*sa, *sac, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &r1, (void*) CHARACTER_ARRAY);
-    compare_arrays(*da, *dac, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &r2, (void*) CHARACTER_ARRAY);
+        compare_arrays(*am, *amc, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-    if ((r1 == 1) && (r2 == 1)) {
+        if (r != 0) {
 
-        copy_character_vector(dm, *dmc, *dms, *sm, *smc);
+            copy_character_vector(dm, *dmc, *dms, *sm, *smc);
+        }
     }
 }
 

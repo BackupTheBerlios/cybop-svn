@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.18 $ $Date: 2006-05-05 22:56:01 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2006-05-27 08:10:56 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -2123,6 +2123,9 @@ void get_compound_element_by_name(void* p0, void* p1,
 
     } else if ((i == -1) && (j >= 0)) {
 
+    fprintf(stdout, "TEST 0 i: %i\n", i);
+    fprintf(stdout, "TEST 0 j: %i\n", j);
+
         // The full name is hierarchical.
         // A part separator has NOT been found.
         // A meta separator has been found.
@@ -2133,6 +2136,9 @@ void get_compound_element_by_name(void* p0, void* p1,
 
         if (i < j) {
 
+    fprintf(stdout, "TEST 1 i: %i\n", i);
+    fprintf(stdout, "TEST 1 j: %i\n", j);
+
             // The full name is hierarchical.
             // A part separator has been found.
             // A meta separator has been found.
@@ -2141,6 +2147,9 @@ void get_compound_element_by_name(void* p0, void* p1,
             get_compound_part_element_by_name(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, (void*) &i);
 
         } else {
+
+    fprintf(stdout, "TEST 2 i: %i\n", i);
+    fprintf(stdout, "TEST 2 j: %i\n", j);
 
             // The full name is hierarchical.
             // A part separator has been found.
@@ -2159,11 +2168,7 @@ void get_compound_element_by_name(void* p0, void* p1,
         // The index of the part name.
         int index = -1;
 
-//??    fprintf(stderr, "TEST before: %i\n", index);
-
         get_compound_part_index(p0, p1, p2, p3, (void*) &index);
-
-//??    fprintf(stderr, "TEST after: %i\n", index);
 
         if (index != -1) {
 
@@ -2186,10 +2191,10 @@ void get_compound_element_by_name(void* p0, void* p1,
  * - the element directly (e.g.: an integer or character value)
  * - the hierarchical name of the element (e.g.: application.gui.window.title)
  * - the hierarchical name of the name of the element (e.g.: application.name)
- *
- * Example procedure for the second case:
- * At first, the part name needs to be determined within the parameters.
- * Only then, that name can be used to determine the actual compound part.
+ *   where application.name itself contains a hierarchical name
+ *   that points to an element;
+ *   at first, the part name needs to be determined within the parameters;
+ *   only then, that name can be used to determine the actual compound part
  *
  * @param p0 the compound
  * @param p1 the compound count
