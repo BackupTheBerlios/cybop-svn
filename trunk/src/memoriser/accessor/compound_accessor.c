@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.20 $ $Date: 2006-06-02 06:03:33 $ $Author: christian $
+ * @version $Revision: 1.21 $ $Date: 2006-06-03 16:13:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -284,7 +284,7 @@ void get_compound_element_name_and_remaining_name(void* p0, void* p1, void* p2, 
                                     // CAUTION! Only call this procedure if a prefix was found!
                                     get_compound_element_name_without_prefix((void*) &n, (void*) &nc, p0, p1, (void*) COMPOUND_PART_SEPARATOR_COUNT);
 
-    fprintf(stderr, "TEST part f %i\n", *f);
+//??    fprintf(stderr, "TEST part f %i\n", *f);
 
                                 } else if (m == 0) {
 
@@ -301,7 +301,7 @@ void get_compound_element_name_and_remaining_name(void* p0, void* p1, void* p2, 
                                     // CAUTION! Only call this procedure if a prefix was found!
                                     get_compound_element_name_without_prefix((void*) &n, (void*) &nc, p0, p1, (void*) COMPOUND_META_SEPARATOR_COUNT);
 
-    fprintf(stderr, "TEST meta f %i\n", *f);
+//??    fprintf(stderr, "TEST meta f %i\n", *f);
                                 }
 
                                 if ((*f == 0) || (*f == 1)) {
@@ -313,7 +313,7 @@ void get_compound_element_name_and_remaining_name(void* p0, void* p1, void* p2, 
 
                                     get_compound_element_name_length(n, (void*) &nc, (void*) &l);
 
-    fprintf(stderr, "TEST length %i\n", l);
+//??    fprintf(stderr, "TEST length %i\n", l);
 
                                     // Determine element name.
                                     // It equals the name without prefix.
@@ -340,12 +340,20 @@ void get_compound_element_name_and_remaining_name(void* p0, void* p1, void* p2, 
 
                                 } else {
 
-                                    // No part separator "." or meta separator "#" has been found.
+                                    // The hierarchical name does not start with a prefix
+                                    // (part separator '.' or meta separator '#').
+                                    // This does not necessarily have to be an error,
+                                    // since property (meta) names are given without prefix.
+                                    // Therefore, the element name is set to the full name below.
 
-/*??
-                                    log_message_debug("Could not get the compound element name and remaining name. The hierarchical name does not start with a prefix (part separator '.' or meta separator '#')." \
-                                        "This does not necessarily have to be an error, since property (meta) names are given without prefix. Therefore, the element name is set to the full name now.");
-*/
+                                    // Set meta hierarchy flag to zero, because
+                                    // the element name did not have a prefix
+                                    // and is thus taken to be a part element.
+                                    // Example:
+                                    // A CYBOL property name is given without
+                                    // prefix and is a part element of the
+                                    // corresponding CYBOL details container.
+                                    *f = 0;
 
                                     // Set element name to full name.
                                     *e = p0;
@@ -391,17 +399,101 @@ void get_compound_element_name_and_remaining_name(void* p0, void* p1, void* p2, 
 }
 
 /**
- * Gets the compound part element.
+ * Gets the compound element name by index.
+ *
+ * @param p0 the compound
+ * @param p1 the compound count
+ * @param p2 the index
+ * @param p3 the name (Hand over as reference!)
+ * @param p4 the name count (Hand over as reference!)
+ * @param p5 the name size (Hand over as reference!)
+ */
+void get_compound_element_name_by_index(void* p0, void* p1,
+    void* p2, void* p3, void* p4, void* p5) {
+
+    if (p2 != NULL_POINTER) {
+
+        int* i = (int*) p2;
+
+        if (p1 != NULL_POINTER) {
+
+            int* cc = (int*) p1;
+
+            if (*i >= 0) {
+
+                log_message_debug("Get compound element name by index.");
+
+                // The names.
+                void** n = &NULL_POINTER;
+                void** nc = &NULL_POINTER;
+                void** ns = &NULL_POINTER;
+
+                // Get names.
+                get_array_elements(p0, (void*) NAMES_INDEX, (void*) &n, (void*) POINTER_ARRAY);
+                get_array_elements(p0, (void*) NAMES_COUNTS_INDEX, (void*) &nc, (void*) POINTER_ARRAY);
+                get_array_elements(p0, (void*) NAMES_SIZES_INDEX, (void*) &ns, (void*) POINTER_ARRAY);
+
+                if (*n != NULL_POINTER) {
+
+                    if (*nc != NULL_POINTER) {
+
+                        if (*ns != NULL_POINTER) {
+
+                            if (*i < *cc) {
+
+                                // Get part name.
+                                get_array_elements(*n, p2, p3, (void*) POINTER_ARRAY);
+                                get_array_elements(*nc, p2, p4, (void*) POINTER_ARRAY);
+                                get_array_elements(*ns, p2, p5, (void*) POINTER_ARRAY);
+
+                            } else {
+
+                                log_message_debug("Could not get compound part name by index. The index exceeds the count.");
+                            }
+
+                        } else {
+
+                            log_message_debug("Could not get compound part name by index. The names sizes is null.");
+                        }
+
+                    } else {
+
+                        log_message_debug("Could not get compound part name by index. The names counts is null.");
+                    }
+
+                } else {
+
+                    log_message_debug("Could not get compound part name by index. The names is null.");
+                }
+
+            } else {
+
+                log_message_debug("Could not get compound part name by index. The index is negativ.");
+            }
+
+        } else {
+
+            log_message_debug("Could not get compound part name by index. The compound count is null.");
+        }
+
+    } else {
+
+        log_message_debug("Could not get compound part name by index. The index is null.");
+    }
+}
+
+/**
+ * Gets the compound element model.
  *
  * @param p0 the compound
  * @param p1 the index
- * @param p2 the part element (Hand over as reference!)
- * @param p3 the part element count (Hand over as reference!)
- * @param p4 the part element size (Hand over as reference!)
+ * @param p2 the compound element model (Hand over as reference!)
+ * @param p3 the compound element model count (Hand over as reference!)
+ * @param p4 the compound element model size (Hand over as reference!)
  */
-void get_compound_part_element(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void get_compound_element_model(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    log_message_debug("Get compound part element.");
+    log_message_debug("Get compound element model.");
 
     // The models.
     void** m = &NULL_POINTER;
@@ -419,39 +511,39 @@ void get_compound_part_element(void* p0, void* p1, void* p2, void* p3, void* p4)
 
             if (*ms != NULL_POINTER) {
 
-                // Get part element model.
+                // Get compound element model.
                 get_array_elements(*m, p1, p2, (void*) POINTER_ARRAY);
                 get_array_elements(*mc, p1, p3, (void*) POINTER_ARRAY);
                 get_array_elements(*ms, p1, p4, (void*) POINTER_ARRAY);
 
             } else {
 
-                log_message_debug("Could not get compound part element. The models sizes is null.");
+                log_message_debug("Could not get compound element model. The models sizes is null.");
             }
 
         } else {
 
-            log_message_debug("Could not get compound part element. The models counts is null.");
+            log_message_debug("Could not get compound element model. The models counts is null.");
         }
 
     } else {
 
-        log_message_debug("Could not get compound part element. The models is null.");
+        log_message_debug("Could not get compound element model. The models is null.");
     }
 }
 
 /**
- * Gets the compound meta element.
+ * Gets the compound element details.
  *
  * @param p0 the compound
  * @param p1 the index
- * @param p2 the meta element (Hand over as reference!)
- * @param p3 the meta element count (Hand over as reference!)
- * @param p4 the meta element size (Hand over as reference!)
+ * @param p2 the compound element details (Hand over as reference!)
+ * @param p3 the compound element details count (Hand over as reference!)
+ * @param p4 the compound element details size (Hand over as reference!)
  */
-void get_compound_meta_element(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void get_compound_element_details(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    log_message_debug("Get compound meta element.");
+    log_message_debug("Get compound element details.");
 
     // The details.
     void** d = &NULL_POINTER;
@@ -469,24 +561,24 @@ void get_compound_meta_element(void* p0, void* p1, void* p2, void* p3, void* p4)
 
             if (*ds != NULL_POINTER) {
 
-                // Get meta element model.
+                // Get compound element details.
                 get_array_elements(*d, p1, p2, (void*) POINTER_ARRAY);
                 get_array_elements(*dc, p1, p3, (void*) POINTER_ARRAY);
                 get_array_elements(*ds, p1, p4, (void*) POINTER_ARRAY);
 
             } else {
 
-                log_message_debug("Could not get compound meta element. The details sizes is null.");
+                log_message_debug("Could not get compound element details. The details sizes is null.");
             }
 
         } else {
 
-            log_message_debug("Could not get compound meta element. The details counts is null.");
+            log_message_debug("Could not get compound elementn details. The details counts is null.");
         }
 
     } else {
 
-        log_message_debug("Could not get compound meta element. The details is null.");
+        log_message_debug("Could not get compound element details. The details is null.");
     }
 }
 
@@ -838,30 +930,31 @@ void set_compound_element_by_index(void* p0, void* p1, void* p2, void* p3,
 /**
  * Sets the compound element by name.
  *
- * @param p0 the compound
- * @param p1 the compound count
- * @param p2 the compound size
- * @param p3 the name
- * @param p4 the name count
- * @param p5 the name size
- * @param p6 the abstraction
- * @param p7 the abstraction count
- * @param p8 the abstraction size
- * @param p9 the model
- * @param p10 the model count
- * @param p11 the model size
- * @param p12 the details
- * @param p13 the details count
- * @param p14 the details size
+ * @param p0 the compound model
+ * @param p1 the compound model count
+ * @param p2 the compound model size
+ * @param p3 the compound details
+ * @param p4 the compound details count
+ * @param p5 the compound details size
+ * @param p6 the name
+ * @param p7 the name count
+ * @param p8 the name size
+ * @param p9 the abstraction
+ * @param p10 the abstraction count
+ * @param p11 the abstraction size
+ * @param p12 the model
+ * @param p13 the model count
+ * @param p14 the model size
+ * @param p15 the details
+ * @param p16 the details count
+ * @param p17 the details size
  */
-void set_compound_element_by_name(void* p0, void* p1, void* p2,
-    void* p3, void* p4, void* p5,
-    void* p6, void* p7, void* p8,
-    void* p9, void* p10, void* p11,
-    void* p12, void* p13, void* p14) {
+void set_compound_element_by_name(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
+    void* p6, void* p7, void* p8, void* p9, void* p10, void* p11,
+    void* p12, void* p13, void* p14, void* p15, void* p16, void* p17) {
 
     log_message_debug("Set compound element by name.");
-    log_message_debug((char*) p3);
+    log_message_debug((char*) p6);
 
     // The element name.
     void* e = NULL_POINTER;
@@ -878,77 +971,152 @@ void set_compound_element_by_name(void* p0, void* p1, void* p2,
     int f = -1;
     // The element name index.
     int i = -1;
+    // The compound element model.
+    void** m = &NULL_POINTER;
+    void** mc = &NULL_POINTER;
+    void** ms = &NULL_POINTER;
+    // The compound element details.
+    void** d = &NULL_POINTER;
+    void** dc = &NULL_POINTER;
+    void** ds = &NULL_POINTER;
 
-    get_compound_element_name_and_remaining_name(p3, p4, (void*) &e, (void*) &ec, (void*) &r, (void*) &rc, (void*) &f);
-    get_compound_element_index(p0, p1, e, (void*) &ec, (void*) &i);
+    // Get compound element name and remaining name,
+    // as well as the flag indicating a part- or meta element.
+    get_compound_element_name_and_remaining_name(p6, p7, (void*) &e, (void*) &ec, (void*) &r, (void*) &rc, (void*) &f);
 
-    if (i >= 0) {
+//??    fprintf(stderr, "TEST r %s\n", (char*) r);
+//??    fprintf(stderr, "TEST rc %i\n", rc);
+//??    fprintf(stderr, "TEST f %i\n", f);
 
-        if (rc > 0) {
+    if (f == 0) {
 
-            // A remaining name exists.
-            // The compound element hierarchy is processed further.
+        // Get compound element index.
+        get_compound_element_index(p0, p1, e, (void*) &ec, (void*) &i);
 
-            // The element model or details.
-            void** md = &NULL_POINTER;
-            void** mdc = &NULL_POINTER;
-            void** mds = &NULL_POINTER;
+//??    fprintf(stderr, "TEST part index %i\n", i);
 
-            if (f == 0) {
+        if (i >= 0) {
 
-                // Get part element.
-                get_compound_part_element(p0, (void*) &i, (void*) &md, (void*) &mdc, (void*) &mds);
+            log_message_debug("Could not set compound element by name. A compound element with that name does already exist.");
 
-            } else if (f == 1) {
+/*??
+            if (rc > 0) {
 
-                // Get meta element.
-                get_compound_meta_element(p0, (void*) &i, (void*) &md, (void*) &mdc, (void*) &mds);
+                // A remaining name exists.
+                // The compound element hierarchy is processed further.
+
+                // Get compound element model.
+                get_compound_element_model(p0, (void*) &i, (void*) &m, (void*) &mc, (void*) &ms);
+
+                // Get compound element details.
+                get_compound_element_details(p0, (void*) &i, (void*) &d, (void*) &dc, (void*) &ds);
+
+                // Recursively continue to process along the hierarchical name.
+                rs = rc;
+                set_compound_element_by_name(*m, *mc, *ms, *d, *dc, *ds, r, (void*) &rc, (void*) &rs, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17);
 
             } else {
 
-                log_message_debug("Could not get compound element by name. The name does not represent a compound knowledge hierarchy.");
-            }
+                // No remaining name exists. A separator could NOT be found.
+                // The name is NOT hierarchical and represents an element name directly.
+                // The given compound contains elements which are primitive models.
 
-            // Recursively continue to process along the hierarchical name.
-            rs = rc;
-            set_compound_element_by_name(*md, *mdc, *mds, r, (void*) &rc, (void*) &rs, p6, p7, p8, p9, p10, p11, p12, p13, p14);
+                // Nothing is done here.
+                // CAUTION! It is NOT allowed to replace existing elements!
+                // If it were, then the memory area allocated by the element
+                // that is overwritten would never be accessible and freeable
+                // anymore, since the pointer to the previous element would be lost.
+
+                // Primitive types are set by retrieving the corresponding
+                // knowledge node using the "get_compound_element_by_name"
+                // procedure and then copying the primitive value.
+            }
+*/
 
         } else {
 
-            // No remaining name exists. A separator could NOT be found.
-            // The name is NOT hierarchical and represents an element name directly.
-            // The given compound contains elements which are primitive models.
+            // Could not get compound element index. An element with that name does not exist.
+            // Therefore, add compound element by name.
+            log_message_debug("Add compound part element by name.");
+            log_message_debug((char*) e);
+
+            // CAUTION! Use compound count as index for adding new elements.
+            // CAUTION! Do NOT use e, ec and es as name parameters!
+            // These were created only locally in this procedure and
+            // will thus be destroyed when the procedure is left.
+            // DO USE the name, name count and name size that were
+            // handed over as parameters to this procedure!
+            // They were allocated by a translator while parsing CYBOL files.
+            set_compound_element_by_index(p0, p1, p2, p1,
+                p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17);
+        }
+
+    } else if (f == 1) {
+
+        // Get compound element index.
+        get_compound_element_index(p3, p4, e, (void*) &ec, (void*) &i);
+
+//??    fprintf(stderr, "TEST meta index %i\n", i);
+
+        if (i >= 0) {
+
+            log_message_debug("Could not set compound element by name. A compound element with that name does already exist.");
 
 /*??
-            //?? TODO:
-            //?? - Do NOT just replace existing parts; otherwise the reference
-            //??   to them is lost and they can not be destroyed properly.
-            //?? - Allow replacement for primitive types (integer, double) that
-            //??   do not have to be destroyed!
-            //?? - Check the abstraction of the model to be set:
-            //??   If it is compound, then do NOT replace --> error message; otherwise DO replace!
+            if (rc > 0) {
 
-            // Replace already existing element.
-            set_compound_element_by_index(p0, p1, p2, (void*) &i,
-                p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14);
+                // A remaining name exists.
+                // The compound element hierarchy is processed further.
+
+                // Get compound element model.
+                get_compound_element_model(p3, (void*) &i, (void*) &m, (void*) &mc, (void*) &ms);
+
+                // Get compound element details.
+                get_compound_element_details(p3, (void*) &i, (void*) &d, (void*) &dc, (void*) &ds);
+
+                // Recursively continue to process along the hierarchical name.
+                rs = rc;
+                set_compound_element_by_name(*m, *mc, *ms, *d, *dc, *ds, r, (void*) &rc, (void*) &rs, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17);
+
+            } else {
+
+                // No remaining name exists. A separator could NOT be found.
+                // The name is NOT hierarchical and represents an element name directly.
+                // The given compound contains elements which are primitive models.
+
+                // Nothing is done here.
+                // CAUTION! It is NOT allowed to replace existing elements!
+                // If it were, then the memory area allocated by the element
+                // that is overwritten would never be accessible and freeable
+                // anymore, since the pointer to the previous element would be lost.
+
+                // Primitive types are set by retrieving the corresponding
+                // knowledge node using the "get_compound_element_by_name"
+                // procedure and then copying the primitive value.
+            }
 */
+
+        } else {
+
+            // Could not get compound element index. An element with that name does not exist.
+            // Therefore, add compound element by name.
+            log_message_debug("Add compound meta element by name.");
+            log_message_debug((char*) e);
+
+            // CAUTION! Use compound count as index for adding new elements.
+            // CAUTION! Do NOT use e, ec and es as name parameters!
+            // These were created only locally in this procedure and
+            // will thus be destroyed when the procedure is left.
+            // DO USE the name, name count and name size that were
+            // handed over as parameters to this procedure!
+            // They were allocated by a translator while parsing CYBOL files.
+            set_compound_element_by_index(p3, p4, p5, p4,
+                p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17);
         }
 
     } else {
 
-        // Could not get compound element by name. An element with that name does not exist.
-        // Therefore, add compound element by name.
-        log_message_debug((char*) e);
-
-        // CAUTION! Use compound count as index for adding new elements.
-        // CAUTION! Do NOT use e, ec and es as name parameters!
-        // These were created only locally in this procedure and
-        // will thus be destroyed when the procedure is left.
-        // DO USE the name, name count and name size that were
-        // handed over as parameters to this procedure!
-        // They were allocated by a translator while parsing CYBOL files.
-        set_compound_element_by_index(p0, p1, p2, p1,
-            p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14);
+        log_message_debug("Could not set compound element by name. The name does not represent a compound knowledge element or -hierarchy.");
     }
 }
 
@@ -1143,90 +1311,6 @@ void remove_compound_element_by_index(void* p0, void* p1, void* p2, void* p3) {
 }
 
 /**
- * Gets the compound element name by index.
- *
- * @param p0 the compound
- * @param p1 the compound count
- * @param p2 the index
- * @param p3 the name (Hand over as reference!)
- * @param p4 the name count (Hand over as reference!)
- * @param p5 the name size (Hand over as reference!)
- */
-void get_compound_element_name_by_index(void* p0, void* p1,
-    void* p2, void* p3, void* p4, void* p5) {
-
-    if (p2 != NULL_POINTER) {
-
-        int* i = (int*) p2;
-
-        if (p1 != NULL_POINTER) {
-
-            int* cc = (int*) p1;
-
-            if (*i >= 0) {
-
-                log_message_debug("Get compound element name by index.");
-
-                // The names.
-                void** n = &NULL_POINTER;
-                void** nc = &NULL_POINTER;
-                void** ns = &NULL_POINTER;
-
-                // Get names.
-                get_array_elements(p0, (void*) NAMES_INDEX, (void*) &n, (void*) POINTER_ARRAY);
-                get_array_elements(p0, (void*) NAMES_COUNTS_INDEX, (void*) &nc, (void*) POINTER_ARRAY);
-                get_array_elements(p0, (void*) NAMES_SIZES_INDEX, (void*) &ns, (void*) POINTER_ARRAY);
-
-                if (*n != NULL_POINTER) {
-
-                    if (*nc != NULL_POINTER) {
-
-                        if (*ns != NULL_POINTER) {
-
-                            if (*i < *cc) {
-
-                                // Get part name.
-                                get_array_elements(*n, p2, p3, (void*) POINTER_ARRAY);
-                                get_array_elements(*nc, p2, p4, (void*) POINTER_ARRAY);
-                                get_array_elements(*ns, p2, p5, (void*) POINTER_ARRAY);
-
-                            } else {
-
-                                log_message_debug("Could not get compound part name by index. The index exceeds the count.");
-                            }
-
-                        } else {
-
-                            log_message_debug("Could not get compound part name by index. The names sizes is null.");
-                        }
-
-                    } else {
-
-                        log_message_debug("Could not get compound part name by index. The names counts is null.");
-                    }
-
-                } else {
-
-                    log_message_debug("Could not get compound part name by index. The names is null.");
-                }
-
-            } else {
-
-                log_message_debug("Could not get compound part name by index. The index is negativ.");
-            }
-
-        } else {
-
-            log_message_debug("Could not get compound part name by index. The compound count is null.");
-        }
-
-    } else {
-
-        log_message_debug("Could not get compound part name by index. The index is null.");
-    }
-}
-
-/**
  * Reindex those parts of the compound, which represent a common list.
  *
  * @param p0 the compound
@@ -1325,15 +1409,19 @@ void reindex_compound_elements_forming_list(void* p0, void* p1, void* p2, int* p
 /**
  * Removes the compound element by name.
  *
- * @param p0 the compound
- * @param p1 the compound count
- * @param p2 the compound size
- * @param p3 the name
- * @param p4 the name count
+ * @param p0 the compound model
+ * @param p1 the compound model count
+ * @param p2 the compound model size
+ * @param p3 the compound details
+ * @param p4 the compound details count
+ * @param p5 the compound details size
+ * @param p6 the name
+ * @param p7 the name count
  */
-void remove_compound_element_by_name(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void remove_compound_element_by_name(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
 
     log_message_debug("Remove compound element by name.");
+    log_message_debug((char*) p6);
 
     // The element name.
     void* e = NULL_POINTER;
@@ -1348,63 +1436,128 @@ void remove_compound_element_by_name(void* p0, void* p1, void* p2, void* p3, voi
     int f = -1;
     // The element name index.
     int i = -1;
+    // The compound element model.
+    void** m = &NULL_POINTER;
+    void** mc = &NULL_POINTER;
+    void** ms = &NULL_POINTER;
+    // The compound element details.
+    void** d = &NULL_POINTER;
+    void** dc = &NULL_POINTER;
+    void** ds = &NULL_POINTER;
 
-    get_compound_element_name_and_remaining_name(p3, p4, (void*) &e, (void*) &ec, (void*) &r, (void*) &rc, (void*) &f);
-    get_compound_element_index(p0, p1, e, (void*) &ec, (void*) &i);
+    // Get compound element name and remaining name,
+    // as well as the flag indicating a part- or meta element.
+    get_compound_element_name_and_remaining_name(p6, p7, (void*) &e, (void*) &ec, (void*) &r, (void*) &rc, (void*) &f);
 
-    if (i >= 0) {
+//??    fprintf(stderr, "TEST r %s\n", (char*) r);
+//??    fprintf(stderr, "TEST rc %i\n", rc);
+//??    fprintf(stderr, "TEST f %i\n", f);
 
-        if (rc > 0) {
+    if (f == 0) {
 
-            // A remaining name exists.
-            // The compound element hierarchy is processed further.
+        // Get compound element index.
+        get_compound_element_index(p0, p1, e, (void*) &ec, (void*) &i);
 
-            // The element model or details.
-            void** md = &NULL_POINTER;
-            void** mdc = &NULL_POINTER;
-            void** mds = &NULL_POINTER;
+//??    fprintf(stderr, "TEST part index %i\n", i);
 
-            if (f == 0) {
+        if (i >= 0) {
 
-                // Get part element.
-                get_compound_part_element(p0, (void*) &i, (void*) &md, (void*) &mdc, (void*) &mds);
+            if (rc > 0) {
 
-            } else if (f == 1) {
+                // A remaining name exists.
+                // The compound element hierarchy is processed further.
 
-                // Get meta element.
-                get_compound_meta_element(p0, (void*) &i, (void*) &md, (void*) &mdc, (void*) &mds);
+                // Get compound element model.
+                get_compound_element_model(p0, (void*) &i, (void*) &m, (void*) &mc, (void*) &ms);
+
+                // Get compound element details.
+                get_compound_element_details(p0, (void*) &i, (void*) &d, (void*) &dc, (void*) &ds);
+
+                // Recursively continue to process along the hierarchical name.
+                remove_compound_element_by_name(*m, *mc, *ms, *d, *dc, *ds, r, (void*) &rc);
 
             } else {
 
-                log_message_debug("Could not remove compound element by name. The name does not represent a compound knowledge hierarchy.");
-            }
+                log_message_debug("TEST: Remove the following compound element by index.");
+                log_message_debug((char*) e);
 
-            // Recursively continue to process along the hierarchical name.
-            remove_compound_element_by_name(*md, *mdc, *mds, r, (void*) &rc);
+                // No remaining name exists. A separator could NOT be found.
+                // The name is NOT hierarchical and represents an element name directly.
+                // The given compound contains elements which are primitive models.
+
+                // The list element separator.
+                int s = -1;
+
+                get_index_in_array(p6, p7, LIST_SEPARATOR, LIST_SEPARATOR_COUNT, &s, CHARACTER_ARRAY);
+
+                remove_compound_element_by_index(p0, p1, p2, (void*) &i);
+
+                if (s > 0) {
+
+                    // If element is part of a list, reindex list after element removal.
+                    reindex_compound_elements_forming_list(p0, p1, p6, &s);
+                }
+            }
 
         } else {
 
-            // No remaining name exists. A separator could NOT be found.
-            // The name is NOT hierarchical and represents an element name directly.
-            // The given compound contains elements which are primitive models.
+            log_message_debug("Could not remove compound element by name. An element with that name does not exist.");
+        }
 
-            // The list element separator.
-            int s = -1;
+    } else if (f == 1) {
 
-            get_index_in_array(p3, p4, LIST_SEPARATOR, LIST_SEPARATOR_COUNT, &s, CHARACTER_ARRAY);
+        // Get compound element index.
+        get_compound_element_index(p3, p4, e, (void*) &ec, (void*) &i);
 
-            remove_compound_element_by_index(p0, p1, p2, (void*) &i);
+//??    fprintf(stderr, "TEST meta index %i\n", i);
 
-            if (s > 0) {
+        if (i >= 0) {
 
-                // If element is part of a list, reindex list after element removal.
-                reindex_compound_elements_forming_list(p0, p1, p3, &s);
+            if (rc > 0) {
+
+                // A remaining name exists.
+                // The compound element hierarchy is processed further.
+
+                // Get compound element model.
+                get_compound_element_model(p3, (void*) &i, (void*) &m, (void*) &mc, (void*) &ms);
+
+                // Get compound element details.
+                get_compound_element_details(p3, (void*) &i, (void*) &d, (void*) &dc, (void*) &ds);
+
+                // Recursively continue to process along the hierarchical name.
+                remove_compound_element_by_name(*m, *mc, *ms, *d, *dc, *ds, r, (void*) &rc);
+
+            } else {
+
+                log_message_debug("TEST: Remove the following compound element by index.");
+                log_message_debug((char*) e);
+
+                // No remaining name exists. A separator could NOT be found.
+                // The name is NOT hierarchical and represents an element name directly.
+                // The given compound contains elements which are primitive models.
+
+                // The list element separator.
+                int s = -1;
+
+                get_index_in_array(p6, p7, LIST_SEPARATOR, LIST_SEPARATOR_COUNT, &s, CHARACTER_ARRAY);
+
+                remove_compound_element_by_index(p3, p4, p5, (void*) &i);
+
+                if (s > 0) {
+
+                    // If element is part of a list, reindex list after element removal.
+                    reindex_compound_elements_forming_list(p3, p4, p6, &s);
+                }
             }
+
+        } else {
+
+            log_message_debug("Could not remove compound element by name. An element with that name does not exist.");
         }
 
     } else {
 
-        log_message_debug("Could not remove compound element by name. An element with that name does not exist.");
+        log_message_debug("Could not remove compound element by name. The name does not represent a compound knowledge element or -hierarchy.");
     }
 }
 
@@ -1565,26 +1718,28 @@ void get_compound_element_by_index(void* p0, void* p1, void* p2,
 /**
  * Gets the compound element by name.
  *
- * @param p0 the compound
- * @param p1 the compound count
- * @param p2 the name
- * @param p3 the name count
- * @param p4 the abstraction (Hand over as reference!)
- * @param p5 the abstraction count (Hand over as reference!)
- * @param p6 the abstraction size (Hand over as reference!)
- * @param p7 the model (Hand over as reference!)
- * @param p8 the model count (Hand over as reference!)
- * @param p9 the model size (Hand over as reference!)
- * @param p10 the details (Hand over as reference!)
- * @param p11 the details count (Hand over as reference!)
- * @param p12 the details size (Hand over as reference!)
+ * @param p0 the compound model
+ * @param p1 the compound model count
+ * @param p2 the compound details
+ * @param p3 the compound details count
+ * @param p4 the name
+ * @param p5 the name count
+ * @param p6 the abstraction (Hand over as reference!)
+ * @param p7 the abstraction count (Hand over as reference!)
+ * @param p8 the abstraction size (Hand over as reference!)
+ * @param p9 the model (Hand over as reference!)
+ * @param p10 the model count (Hand over as reference!)
+ * @param p11 the model size (Hand over as reference!)
+ * @param p12 the details (Hand over as reference!)
+ * @param p13 the details count (Hand over as reference!)
+ * @param p14 the details size (Hand over as reference!)
  */
-void get_compound_element_by_name(void* p0, void* p1,
-    void* p2, void* p3, void* p4, void* p5, void* p6,
-    void* p7, void* p8, void* p9, void* p10, void* p11, void* p12) {
+void get_compound_element_by_name(void* p0, void* p1, void* p2, void* p3,
+    void* p4, void* p5, void* p6, void* p7, void* p8,
+    void* p9, void* p10, void* p11, void* p12, void* p13, void* p14) {
 
     log_message_debug("Get compound element by name.");
-    log_message_debug((char*) p2);
+    log_message_debug((char*) p4);
 
     // The element name.
     void* e = NULL_POINTER;
@@ -1599,64 +1754,104 @@ void get_compound_element_by_name(void* p0, void* p1,
     int f = -1;
     // The element name index.
     int i = -1;
+    // The compound element model.
+    void** m = &NULL_POINTER;
+    void** mc = &NULL_POINTER;
+    void** ms = &NULL_POINTER;
+    // The compound element details.
+    void** d = &NULL_POINTER;
+    void** dc = &NULL_POINTER;
+    void** ds = &NULL_POINTER;
 
-    get_compound_element_name_and_remaining_name(p2, p3, (void*) &e, (void*) &ec, (void*) &r, (void*) &rc, (void*) &f);
-    get_compound_element_index(p0, p1, e, (void*) &ec, (void*) &i);
+    // Get compound element name and remaining name,
+    // as well as the flag indicating a part- or meta element.
+    get_compound_element_name_and_remaining_name(p4, p5, (void*) &e, (void*) &ec, (void*) &r, (void*) &rc, (void*) &f);
 
-    fprintf(stderr, "TEST index %i\n", i);
-    fprintf(stderr, "TEST f %i\n", f);
+//??    fprintf(stderr, "TEST r %s\n", (char*) r);
+//??    fprintf(stderr, "TEST rc %i\n", rc);
+//??    fprintf(stderr, "TEST f %i\n", f);
 
-    if (i >= 0) {
+    if (f == 0) {
 
-    fprintf(stderr, "TEST r %s\n", (char*) r);
-    fprintf(stderr, "TEST rc %i\n", rc);
+        // Get compound element index.
+        get_compound_element_index(p0, p1, e, (void*) &ec, (void*) &i);
 
-        if (rc > 0) {
+//??    fprintf(stderr, "TEST part index %i\n", i);
 
-            // A remaining name exists.
-            // The compound element hierarchy is processed further.
+        if (i >= 0) {
 
-            // The element model or details.
-            void** md = &NULL_POINTER;
-            void** mdc = &NULL_POINTER;
-            void** mds = &NULL_POINTER;
+            if (rc > 0) {
 
-            if (f == 0) {
+                // A remaining name exists.
+                // The compound element hierarchy is processed further.
 
-    fprintf(stderr, "TEST part %i\n", i);
+                // Get compound element model.
+                get_compound_element_model(p0, (void*) &i, (void*) &m, (void*) &mc, (void*) &ms);
 
-                // Get part element.
-                get_compound_part_element(p0, (void*) &i, (void*) &md, (void*) &mdc, (void*) &mds);
+                // Get compound element details.
+                get_compound_element_details(p0, (void*) &i, (void*) &d, (void*) &dc, (void*) &ds);
 
-            } else if (f == 1) {
-
-    fprintf(stderr, "TEST meta %i\n", i);
-
-                // Get meta element.
-                get_compound_meta_element(p0, (void*) &i, (void*) &md, (void*) &mdc, (void*) &mds);
+                // Recursively continue to process along the hierarchical name.
+                get_compound_element_by_name(*m, *mc, *d, *dc, r, (void*) &rc, p6, p7, p8, p9, p10, p11, p12, p13, p14);
 
             } else {
 
-                log_message_debug("Could not get compound element by name. The name does not represent a compound knowledge hierarchy.");
-            }
+                log_message_debug("TEST: Get the following compound element by index.");
+                log_message_debug((char*) e);
 
-            // Recursively continue to process along the hierarchical name.
-            get_compound_element_by_name(*md, *mdc, r, (void*) &rc, p4, p5, p6, p7, p8, p9, p10, p11, p12);
+                // No remaining name exists. A separator could NOT be found.
+                // The name is NOT hierarchical and represents an element name directly.
+                // The given compound contains elements which are primitive models.
+                get_compound_element_by_index(p0, p1, (void*) &i, p6, p7, p8, p9, p10, p11, p12, p13, p14);
+            }
 
         } else {
 
-            log_message_debug("Get the following compound element by index.");
-            log_message_debug((char*) e);
+            log_message_debug("Could not get compound element by name. An element with that name does not exist.");
+        }
 
-            // No remaining name exists. A separator could NOT be found.
-            // The name is NOT hierarchical and represents an element name directly.
-            // The given compound contains elements which are primitive models.
-            get_compound_element_by_index(p0, p1, (void*) &i, p4, p5, p6, p7, p8, p9, p10, p11, p12);
+    } else if (f == 1) {
+
+        // Get compound element index.
+        get_compound_element_index(p2, p3, e, (void*) &ec, (void*) &i);
+
+//??    fprintf(stderr, "TEST meta index %i\n", i);
+
+        if (i >= 0) {
+
+            if (rc > 0) {
+
+                // A remaining name exists.
+                // The compound element hierarchy is processed further.
+
+                // Get compound element model.
+                get_compound_element_model(p2, (void*) &i, (void*) &m, (void*) &mc, (void*) &ms);
+
+                // Get compound element details.
+                get_compound_element_details(p2, (void*) &i, (void*) &d, (void*) &dc, (void*) &ds);
+
+                // Recursively continue to process along the hierarchical name.
+                get_compound_element_by_name(*m, *mc, *d, *dc, r, (void*) &rc, p6, p7, p8, p9, p10, p11, p12, p13, p14);
+
+            } else {
+
+                log_message_debug("TEST: Get the following compound element by index.");
+                log_message_debug((char*) e);
+
+                // No remaining name exists. A separator could NOT be found.
+                // The name is NOT hierarchical and represents an element name directly.
+                // The given compound contains elements which are primitive models.
+                get_compound_element_by_index(p2, p3, (void*) &i, p6, p7, p8, p9, p10, p11, p12, p13, p14);
+            }
+
+        } else {
+
+            log_message_debug("Could not get compound element by name. An element with that name does not exist.");
         }
 
     } else {
 
-        log_message_debug("Could not get compound element by name. An element with that name does not exist.");
+        log_message_debug("Could not get compound element by name. The name does not represent a compound knowledge element or -hierarchy.");
     }
 }
 
@@ -1672,8 +1867,8 @@ void get_compound_element_by_name(void* p0, void* p1,
  *   at first, the part name needs to be determined within the parameters;
  *   only then, that name can be used to determine the actual compound part
  *
- * @param p0 the compound
- * @param p1 the compound count
+ * @param p0 the compound model
+ * @param p1 the compound model count
  * @param p2 the name
  * @param p3 the name count
  * @param p4 the abstraction (Hand over as reference!)
@@ -1688,10 +1883,9 @@ void get_compound_element_by_name(void* p0, void* p1,
  * @param p13 the knowledge
  * @param p14 the knowledge count
  */
-void get_universal_compound_element_by_name(void* p0, void* p1,
-    void* p2, void* p3, void* p4, void* p5, void* p6,
-    void* p7, void* p8, void* p9, void* p10, void* p11, void* p12,
-    void* p13, void* p14) {
+void get_universal_compound_element_by_name(void* p0, void* p1, void* p2, void* p3,
+    void* p4, void* p5, void* p6, void* p7, void* p8, void* p9,
+    void* p10, void* p11, void* p12, void* p13, void* p14) {
 
     log_message_debug("Get universal compound element by name.");
 
@@ -1718,7 +1912,7 @@ void get_universal_compound_element_by_name(void* p0, void* p1,
     void** eds = &NULL_POINTER;
 
     // Get compound element.
-    get_compound_element_by_name(p0, p1,
+    get_compound_element_by_name(p0, p1, NULL_POINTER, NULL_POINTER,
         p2, p3,
         (void*) &a, (void*) &ac, (void*) &as,
         (void*) &m, (void*) &mc, (void*) &ms,
@@ -1753,13 +1947,18 @@ void get_universal_compound_element_by_name(void* p0, void* p1,
             // Example of a model pointing to another model containing a part name:
             // model="application.record.name"
             //
-            get_compound_element_by_name(p13, p14, *m, *mc,
+            // The knowledge root does not have a details container with meta
+            // information, which is why a null pointer is handed over here twice.
+            get_compound_element_by_name(p13, p14, NULL_POINTER, NULL_POINTER,
+                *m, *mc,
                 (void*) &ea, (void*) &eac, (void*) &eas,
                 (void*) &em, (void*) &emc, (void*) &ems,
                 (void*) &ed, (void*) &edc, (void*) &eds);
 
-            get_compound_element_by_name(p13, p14, *em, *emc,
-                p4, p5, p6, p7, p8, p9, p10, p11, p12);
+            // The knowledge root does not have a details container with meta
+            // information, which is why a null pointer is handed over here twice.
+            get_compound_element_by_name(p13, p14, NULL_POINTER, NULL_POINTER,
+                *em, *emc, p4, p5, p6, p7, p8, p9, p10, p11, p12);
         }
     }
 
@@ -1782,8 +1981,10 @@ void get_universal_compound_element_by_name(void* p0, void* p1,
             // Example of a model containing a hierarchical part name:
             // model="application.communication.partners.hostname"
             //
-            get_compound_element_by_name(p13, p14, *m, *mc,
-                p4, p5, p6, p7, p8, p9, p10, p11, p12);
+            // The knowledge root does not have a details container with meta
+            // information, which is why a null pointer is handed over here twice.
+            get_compound_element_by_name(p13, p14, NULL_POINTER, NULL_POINTER,
+                *m, *mc, p4, p5, p6, p7, p8, p9, p10, p11, p12);
         }
     }
 
@@ -1792,8 +1993,8 @@ void get_universal_compound_element_by_name(void* p0, void* p1,
         log_message_debug("Get universal compound element as inline.");
 
         // Get compound element as direct model.
-        get_compound_element_by_name(p0, p1, p2, p3,
-            p4, p5, p6, p7, p8, p9, p10, p11, p12);
+        get_compound_element_by_name(p0, p1, NULL_POINTER, NULL_POINTER,
+            p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12);
     }
 }
 

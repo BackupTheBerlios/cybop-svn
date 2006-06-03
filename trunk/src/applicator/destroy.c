@@ -22,7 +22,7 @@
  *
  * This file destroys a transient model to a persistent model.
  *
- * @version $Revision: 1.14 $ $Date: 2006-06-02 06:03:33 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2006-06-03 16:13:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -281,7 +281,7 @@ void deallocate_part(void* p0, void* p1, void* p2, void* p3, void* p4) {
             //remove the part
             //this must after the destroy the model, because
             //some wrong pointer
-            remove_compound_element_by_name(p2, p3, p4, (void*) *nm, (void*) *nmc);
+            remove_compound_element_by_name(p2, p3, p4, NULL_POINTER, NULL_POINTER, NULL_POINTER, (void*) *nm, (void*) *nmc);
         }
 
     } else {

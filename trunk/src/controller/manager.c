@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.21 $ $Date: 2006-04-20 22:36:09 $ $Author: christian $
+ * @version $Revision: 1.22 $ $Date: 2006-06-03 16:13:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -68,18 +68,35 @@ void manage(void* p0, void* p1) {
     void* i = NULL_POINTER;
     int* ic = INTERNAL_MEMORY_ELEMENTS_COUNT;
     int* is = INTERNAL_MEMORY_ELEMENTS_COUNT;
+
     // The knowledge memory.
     void* k = NULL_POINTER;
     int* kc = NULL_POINTER;
     int* ks = NULL_POINTER;
+
+    // A meta knowledge memory?
+    // Theoretically, a meta knowledge memory could be created, too, and be
+    // forwarded throughout the system, just like the normal knowledge memory.
+    // In practice, however, it does not make sense to keep meta knowledge
+    // about the knowledge memory root.
+    // And also without that root meta knowledge memory, it is possible for
+    // parts of the standard knowledge memory to keep meta knowledge,
+    // just that for the very root of the knowledge memory it is not.
+    // Example:
+    // .resmedicinae.gui.menubar#background     --> background colour as meta knowledge about menubar
+    // .resmedicinae#name                       --> name as meta knowledge about resmedicinae application
+    // #something                               --> meta knowledge about knowledge root = nonsense
+
     // The signal memory.
     void* s = NULL_POINTER;
     int* sc = NULL_POINTER;
     int* ss = NULL_POINTER;
+
     // The signal memory mutex.
     pthread_mutex_t* smt = NULL_POINTER;
     // The x window system mutex.
     pthread_mutex_t* xmt = NULL_POINTER;
+
     //
     // The signal memory interrupt request flag.
     //

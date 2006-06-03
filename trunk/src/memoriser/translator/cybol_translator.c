@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2006-04-20 22:36:11 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2006-06-03 16:13:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -62,7 +62,8 @@ void set_compound_element_by_name(void* p0, void* p1, void* p2,
     void* p3, void* p4, void* p5,
     void* p6, void* p7, void* p8,
     void* p9, void* p10, void* p11,
-    void* p12, void* p13, void* p14);
+    void* p12, void* p13, void* p14,
+    void* p15, void* p16, void* p17);
 
 //
 // Cybol property.
@@ -417,7 +418,7 @@ void decode_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4) {
                         }
 
                         // Add model to compound.
-                        set_compound_element_by_name(*d, p1, p2,
+                        set_compound_element_by_name(*d, p1, p2, NULL_POINTER, NULL_POINTER, NULL_POINTER,
                             dn, (void*) dnc, (void*) dns,
                             da, (void*) dac, (void*) das,
                             dm, (void*) dmc, (void*) dms,

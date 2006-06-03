@@ -22,7 +22,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.19 $ $Date: 2006-06-02 06:03:33 $ $Author: christian $
+ * @version $Revision: 1.20 $ $Date: 2006-06-03 16:13:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -524,7 +524,7 @@ void create_part(void* p0, void* p1, void* p2, void* p3, void* p4) {
         log_message_debug("Add part to knowledge model root.");
 
         // Use the knowledge model root if the determined whole model is null.
-        set_compound_element_by_name(p2, p3, p4,
+        set_compound_element_by_name(p2, p3, p4, NULL_POINTER, NULL_POINTER, NULL_POINTER,
             pn, (void*) pnc, (void*) pns,
             pa, (void*) pac, (void*) pas,
             pm, (void*) pmc, (void*) pms,
@@ -535,7 +535,7 @@ void create_part(void* p0, void* p1, void* p2, void* p3, void* p4) {
         log_message_debug("Add part to given whole model.");
 
         // Use the determined whole model normally, if it exists.
-        set_compound_element_by_name(*wm, *wmc, *wms,
+        set_compound_element_by_name(*wm, *wmc, *wms, NULL_POINTER, NULL_POINTER, NULL_POINTER,
             pn, (void*) pnc, (void*) pns,
             pa, (void*) pac, (void*) pas,
             pm, (void*) pmc, (void*) pms,

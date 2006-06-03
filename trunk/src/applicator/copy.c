@@ -22,7 +22,7 @@
  *
  * this handel a loop
  *
- * @version $Revision: 1.15 $ $Date: 2006-06-02 06:03:33 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2006-06-03 16:13:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -323,8 +323,7 @@ void copy_property(void* p0, int* p1, void* p2, void* p3, void* p4) {
 
     // Get source.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) SOURCE_NAME,
-        (void*) SOURCE_NAME_COUNT,
+        (void*) SOURCE_NAME, (void*) SOURCE_NAME_COUNT,
         (void*) &sa, (void*) &sac, (void*) &sas,
         (void*) &sm, (void*) &smc, (void*) &sms,
         (void*) &sd, (void*) &sdc, (void*) &sds,
@@ -332,8 +331,7 @@ void copy_property(void* p0, int* p1, void* p2, void* p3, void* p4) {
 
     // Get destination.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) DESTINATION_NAME,
-        (void*) DESTINATION_NAME_COUNT,
+        (void*) DESTINATION_NAME, (void*) DESTINATION_NAME_COUNT,
         (void*) &da, (void*) &dac, (void*) &das,
         (void*) &dm, (void*) &dmc, (void*) &dms,
         (void*) &dd, (void*) &ddc, (void*) &dds,
@@ -341,8 +339,7 @@ void copy_property(void* p0, int* p1, void* p2, void* p3, void* p4) {
 
     // Get destination property.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) DESTINATION_PROPERTY_NAME,
-        (void*) DESTINATION_PROPERTY_NAME_COUNT,
+        (void*) DESTINATION_PROPERTY_NAME, (void*) DESTINATION_PROPERTY_NAME_COUNT,
         (void*) &dpa, (void*) &dpac, (void*) &dpas,
         (void*) &dpm, (void*) &dpmc, (void*) &dpms,
         (void*) &dpd, (void*) &dpdc, (void*) &dpds,

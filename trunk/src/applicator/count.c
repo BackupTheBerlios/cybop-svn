@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.14 $ $Date: 2006-06-02 06:03:33 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2006-06-03 16:13:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -92,8 +92,7 @@ void count_parts(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     // get the basisname
     get_universal_compound_element_by_name(p0, p1,
-        (void*) PART_NAME_NAME,
-        (void*) PART_NAME_NAME_COUNT,
+        (void*) PART_NAME_NAME, (void*) PART_NAME_NAME_COUNT,
         (void*) &bna, (void*) &bnac, (void*) &bnas,
         (void*) &bnm, (void*) &bnmc, (void*) &bnms,
         (void*) &bnd, (void*) &bndc, (void*) &bnds,
@@ -101,8 +100,7 @@ void count_parts(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     // get the model
     get_universal_compound_element_by_name(p0, p1,
-        (void*) WHOLE_MODEL_NAME,
-        (void*) WHOLE_MODEL_NAME_COUNT,
+        (void*) WHOLE_MODEL_NAME, (void*) WHOLE_MODEL_NAME_COUNT,
         (void*) &mdla, (void*) &mdlac, (void*) &mdlas,
         (void*) &mdlm, (void*) &mdlmc, (void*) &mdlms,
         (void*) &mdld, (void*) &mdldc, (void*) &mdlds,
@@ -110,8 +108,7 @@ void count_parts(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     // get the result
     get_universal_compound_element_by_name(p0, p1,
-        (void*) COUNTER_NAME,
-        (void*) COUNTER_NAME_COUNT,
+        (void*) COUNTER_NAME, (void*) COUNTER_NAME_COUNT,
         (void*) &resa, (void*) &resac, (void*) &resas,
         (void*) &resm, (void*) &resmc, (void*) &resms,
         (void*) &resd, (void*) &resdc, (void*) &resds,

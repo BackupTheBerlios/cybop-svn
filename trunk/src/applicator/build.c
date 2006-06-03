@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.15 $ $Date: 2006-06-02 06:03:33 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2006-06-03 16:13:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -92,8 +92,7 @@ void build_listname(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     // get the basisname
     get_universal_compound_element_by_name(p0, p1,
-        (void*) BASE_NAME_NAME,
-        (void*) BASE_NAME_NAME_COUNT,
+        (void*) BASE_NAME_NAME, (void*) BASE_NAME_NAME_COUNT,
         (void*) &bna, (void*) &bnac, (void*) &bnas,
         (void*) &bnm, (void*) &bnmc, (void*) &bnms,
         (void*) &bnd, (void*) &bndc, (void*) &bnds,
@@ -101,8 +100,7 @@ void build_listname(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     // get the index
     get_universal_compound_element_by_name(p0, p1,
-        (void*) INDEX_NAME_NAME,
-        (void*) INDEX_NAME_NAME_COUNT,
+        (void*) INDEX_NAME_NAME, (void*) INDEX_NAME_NAME_COUNT,
         (void*) &idxa, (void*) &idxac, (void*) &idxas,
         (void*) &idxm, (void*) &idxmc, (void*) &idxms,
         (void*) &idxd, (void*) &idxdc, (void*) &idxds,
@@ -110,8 +108,7 @@ void build_listname(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     // get the result
     get_universal_compound_element_by_name(p0, p1,
-        (void*) COMPOSED_NAME_NAME,
-        (void*) COMPOSED_NAME_NAME_COUNT,
+        (void*) COMPOSED_NAME_NAME, (void*) COMPOSED_NAME_NAME_COUNT,
         (void*) &resa, (void*) &resac, (void*) &resas,
         (void*) &resm, (void*) &resmc, (void*) &resms,
         (void*) &resd, (void*) &resdc, (void*) &resds,

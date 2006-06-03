@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.12 $ $Date: 2006-05-27 08:10:56 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2006-06-03 16:13:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -111,7 +111,8 @@ void receive_linux_console_signal(void* p0, void* p1, void* p2) {
 
     // Get actual command belonging to the command name.
     // If the name is not known, the command parameter is left untouched.
-    get_universal_compound_element_by_name(*c, *cc, p1, p2,
+    get_universal_compound_element_by_name(*c, *cc,
+        p1, p2,
         (void*) &ca, (void*) &cac, (void*) &cas,
         (void*) &cm, (void*) &cmc, (void*) &cms,
         (void*) &cd, (void*) &cdc, (void*) &cds,

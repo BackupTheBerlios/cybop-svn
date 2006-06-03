@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2006-04-23 09:56:12 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2006-06-03 16:13:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -40,7 +40,9 @@
 #include "../../globals/constants/system_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../globals/variables/variables.c"
+#include "../../memoriser/accessor/compound_accessor.c"
 #include "../../memoriser/allocator/character_vector_allocator.c"
+#include "../../memoriser/allocator/pointer_vector_allocator.c"
 
 /**
  * Runs the archive command.
