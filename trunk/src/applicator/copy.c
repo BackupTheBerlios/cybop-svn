@@ -22,7 +22,7 @@
  *
  * this handel a loop
  *
- * @version $Revision: 1.16 $ $Date: 2006-06-03 16:13:32 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2006-06-04 00:54:44 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -67,7 +67,25 @@ void copy_integer_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                     void** d = (void**) p0;
 
-                    if (*sc > *dc) {
+                    log_message_debug("Copy integer vector.");
+
+                    // CAUTION! The destination array needs to be resized not only
+                    // if the source array is greater, but also if it is smaller!
+                    // If this is not done, false results may occur.
+                    // Example: A colour gets copied from source to destination.
+                    // The source colour is "red" with a count of 3.
+                    // The destination colour is "green" with a count of 5.
+                    // If the source colour gets copied to the destination,
+                    // the resulting destination array is "reden" with a count of 5.
+                    // This colour value does not exist and will cause errors!
+                    // Therefore, the destination array count and size ALWAYS
+                    // have to be adapted to the source array count and size.
+                    // If this had been done in the example, the resulting
+                    // destination array would have been "red" with a count of 3,
+                    // which is correct.
+
+                    // CAUTION! Do NOT use < or > here, for the reasons explained above!
+                    if (*sc != *dc) {
 
                         *dc = *sc;
                         *ds = *dc;
@@ -125,7 +143,31 @@ void copy_character_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                     void** d = (void**) p0;
 
-                    if (*sc > *dc) {
+                    log_message_debug("Copy character vector.");
+
+                    // CAUTION! The destination array needs to be resized not only
+                    // if the source array is greater, but also if it is smaller!
+                    // If this is not done, false results may occur.
+                    // Example: A colour gets copied from source to destination.
+                    // The source colour is "red" with a count of 3.
+                    // The destination colour is "green" with a count of 5.
+                    // If the source colour gets copied to the destination,
+                    // the resulting destination array is "reden" with a count of 5.
+                    // This colour value does not exist and will cause errors!
+                    // Therefore, the destination array count and size ALWAYS
+                    // have to be adapted to the source array count and size.
+                    // If this had been done in the example, the resulting
+                    // destination array would have been "red" with a count of 3,
+                    // which is correct.
+
+                    fprintf(stdout, "TEST 1 s: %s\n", (char*) p3);
+                    fprintf(stdout, "TEST 1 sc: %i\n", *sc);
+                    fprintf(stdout, "TEST 1 d: %s\n", (char*) *d);
+                    fprintf(stdout, "TEST 1 dc: %i\n", *dc);
+                    fprintf(stdout, "TEST 1 ds: %i\n", *ds);
+
+                    // CAUTION! Do NOT use < or > here, for the reasons explained above!
+                    if (*sc != *dc) {
 
                         *dc = *sc;
                         *ds = *dc;
@@ -134,6 +176,12 @@ void copy_character_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     }
 
                     set_array_elements(*d, (void*) NUMBER_0_INTEGER, p3, p4, (void*) CHARACTER_ARRAY);
+
+                    fprintf(stdout, "TEST 2 s: %s\n", (char*) p3);
+                    fprintf(stdout, "TEST 2 sc: %i\n", *sc);
+                    fprintf(stdout, "TEST 2 d: %s\n", (char*) *d);
+                    fprintf(stdout, "TEST 2 dc: %i\n", *dc);
+                    fprintf(stdout, "TEST 2 ds: %i\n", *ds);
 
                 } else {
 

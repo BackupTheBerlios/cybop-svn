@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.14 $ $Date: 2006-01-30 21:30:12 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2006-06-04 00:54:45 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -60,6 +60,16 @@ void parse(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6)
 
     if (r == 0) {
 
+        compare_arrays(p5, p6, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != 0) {
+
+            parse_xml(p0, p1, p2, p3, p4);
+        }
+    }
+
+    if (r == 0) {
+
         compare_arrays(p5, p6, (void*) KNOWLEDGE_ABSTRACTION, (void*) KNOWLEDGE_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
@@ -75,16 +85,6 @@ void parse(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6)
         if (r != 0) {
 
             parse_character_vector(p0, p1, p2, p3, p4);
-        }
-    }
-
-    if (r == 0) {
-
-        compare_arrays(p5, p6, (void*) CYBOL_ABSTRACTION, (void*) CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != 0) {
-
-            parse_xml(p0, p1, p2, p3, p4);
         }
     }
 
@@ -247,7 +247,7 @@ void serialise(void* p0, void* p1, void* p2, void* p3, void* p4,
 
     if (r == 0) {
 
-        compare_arrays(p5, p6, (void*) CYBOL_ABSTRACTION, (void*) CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p5, p6, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 

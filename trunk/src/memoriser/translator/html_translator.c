@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.20 $ $Date: 2006-06-03 16:13:32 $ $Author: christian $
+ * @version $Revision: 1.21 $ $Date: 2006-06-04 00:54:45 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -376,7 +376,7 @@ void encode_html(void** dest, int* dest_count, int *dest_size,
 
         if (r != 1) {
 
-            compare_arrays(source_abstr, source_abstr_count, (void*) CYBOL_ABSTRACTION, (void*) CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+            compare_arrays(source_abstr, source_abstr_count, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
             if (r == 1) {
 

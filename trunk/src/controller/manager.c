@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.22 $ $Date: 2006-06-03 16:13:32 $ $Author: christian $
+ * @version $Revision: 1.23 $ $Date: 2006-06-04 00:54:45 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -212,12 +212,12 @@ void manage(void* p0, void* p1) {
 
     // Create startup model abstraction, model, details.
     create((void*) &ma, (void*) mac, (void*) mas,
-        (void*) CYBOL_ABSTRACTION, (void*) CYBOL_ABSTRACTION_COUNT,
+        (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
         (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
         (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
     create((void*) &mm, (void*) mmc, (void*) mms,
         p0, p1,
-        CYBOL_ABSTRACTION, CYBOL_ABSTRACTION_COUNT,
+        COMPOUND_ABSTRACTION, COMPOUND_ABSTRACTION_COUNT,
         FILE_CHANNEL, FILE_CHANNEL_COUNT);
     // CAUTION! Do not create startup model details!
     // It is not needed for the startup signal.

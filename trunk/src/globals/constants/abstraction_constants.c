@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.16 $ $Date: 2006-05-05 22:56:01 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2006-06-04 00:54:45 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -202,11 +202,6 @@ static int* BMP_ABSTRACTION_COUNT = NUMBER_3_INTEGER_ARRAY;
 //
 // Text abstractions.
 //
-
-/** The cybol abstraction. */
-static char CYBOL_ABSTRACTION_ARRAY[] = {'c', 'y', 'b', 'o', 'l'};
-static char* CYBOL_ABSTRACTION = CYBOL_ABSTRACTION_ARRAY;
-static int* CYBOL_ABSTRACTION_COUNT = NUMBER_5_INTEGER_ARRAY;
 
 /** The sgml abstraction. */
 static char SGML_ABSTRACTION_ARRAY[] = {'s', 'g', 'm', 'l'};

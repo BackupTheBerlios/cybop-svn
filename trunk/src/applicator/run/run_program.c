@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2006-04-23 09:56:13 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2006-06-04 00:54:44 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -59,7 +59,7 @@ void run_program(void* p0, void* p1, void* p2, void* p3) {
     void** programac = &NULL_POINTER;
     void** programas = &NULL_POINTER;
     // The program model.
-    int** programm = (int**) &NULL_POINTER;
+    void** programm = &NULL_POINTER;
     void** programmc = &NULL_POINTER;
     void** programms = &NULL_POINTER;
     // The program details.
@@ -170,8 +170,6 @@ void run_program(void* p0, void* p1, void* p2, void* p3) {
     // Assemble command option by adding the null termination character.
     set_array_elements(command, (void*) &commandc, (void*) NULL_CONTROL_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
     commandc = commandc + *PRIMITIVE_COUNT;
-
-    fprintf(stdout, "TEST command %s\n", (char*) command);
 
     //
     // Null pointer argument.

@@ -24,7 +24,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.25 $ $Date: 2006-05-05 22:56:01 $ $Author: christian $
+ * @version $Revision: 1.26 $ $Date: 2006-06-04 00:54:45 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -719,11 +719,11 @@ void test_integer_parser() {
  * Tests the knowledge memory.
  *
  * The knowledge memory is the root of a compound (tree).
- * But also a part of the knowledge memory can be handed over,
- * in which case that part and its parts will be printed on screen.
+ * But also a compound element of the knowledge memory can be handed over,
+ * in which case that element and its parts will be printed on screen.
  *
- * @param p0 the knowledge memory
- * @param p1 the knowledge memory count
+ * @param p0 the knowledge memory or compound element
+ * @param p1 the knowledge memory or compound element count
  * @param p2 the tree depth to be displayed
  */
 void test_knowledge_memory(void* p0, void* p1, int p2) {
@@ -752,7 +752,7 @@ void test_knowledge_memory(void* p0, void* p1, int p2) {
         prefix[p2 * 2] = '\0';
         p2++;
 
-        // The loop index.
+        // The loop count.
         int i = 0;
         // The element name.
         void** n = &NULL_POINTER;
@@ -791,12 +791,12 @@ void test_knowledge_memory(void* p0, void* p1, int p2) {
                 (void*) &d, (void*) &dc, (void*) &ds);
 
             // Print element name.
-            fprintf(stderr, "name:              %s%s\n", prefix, *n);
+            fprintf(stderr, "name:              %s%s\n", prefix, (char*) *n);
             fprintf(stderr, "name count:        %s%i\n", prefix, **((int**) nc));
             fprintf(stderr, "name size:         %s%i\n", prefix, **((int**) ns));
 
             // Print element abstraction.
-            fprintf(stderr, "abstraction:       %s%s\n", prefix, *a);
+            fprintf(stderr, "abstraction:       %s%s\n", prefix, (char*) *a);
             fprintf(stderr, "abstraction count: %s%i\n", prefix, **((int**) ac));
             fprintf(stderr, "abstraction size:  %s%i\n", prefix, **((int**) as));
 
@@ -808,17 +808,6 @@ void test_knowledge_memory(void* p0, void* p1, int p2) {
                 if (r == 1) {
 
                     fprintf(stderr, "model (compound): %s\n", "hierarchical, see below");
-                    test_knowledge_memory((void*) *m, (void*) *mc, p2);
-                }
-            }
-
-            if (r != 1) {
-
-                compare_arrays((void*) *a, (void*) *ac, (void*) CYBOL_ABSTRACTION, (void*) CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-                if (r == 1) {
-
-                    fprintf(stderr, "model (cybol): %s\n", "hierarchical, see below");
                     test_knowledge_memory((void*) *m, (void*) *mc, p2);
                 }
             }

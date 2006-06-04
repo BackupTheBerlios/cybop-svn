@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.21 $ $Date: 2006-06-03 16:13:32 $ $Author: christian $
+ * @version $Revision: 1.22 $ $Date: 2006-06-04 00:54:45 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -1796,7 +1796,7 @@ void get_compound_element_by_name(void* p0, void* p1, void* p2, void* p3,
 
             } else {
 
-                log_message_debug("TEST: Get the following compound element by index.");
+                log_message_debug("TEST: Get the following compound part element by index.");
                 log_message_debug((char*) e);
 
                 // No remaining name exists. A separator could NOT be found.
@@ -1807,7 +1807,7 @@ void get_compound_element_by_name(void* p0, void* p1, void* p2, void* p3,
 
         } else {
 
-            log_message_debug("Could not get compound element by name. An element with that name does not exist.");
+            log_message_debug("Could not get compound element by name. A part element with that name does not exist.");
         }
 
     } else if (f == 1) {
@@ -1835,7 +1835,7 @@ void get_compound_element_by_name(void* p0, void* p1, void* p2, void* p3,
 
             } else {
 
-                log_message_debug("TEST: Get the following compound element by index.");
+                log_message_debug("TEST: Get the following compound meta element by index.");
                 log_message_debug((char*) e);
 
                 // No remaining name exists. A separator could NOT be found.
@@ -1846,7 +1846,7 @@ void get_compound_element_by_name(void* p0, void* p1, void* p2, void* p3,
 
         } else {
 
-            log_message_debug("Could not get compound element by name. An element with that name does not exist.");
+            log_message_debug("Could not get compound element by name. A meta element with that name does not exist.");
         }
 
     } else {

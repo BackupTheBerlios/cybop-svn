@@ -24,7 +24,7 @@
  * - create a model in memory
  * - destroy a model in memory
  *
- * @version $Revision: 1.15 $ $Date: 2006-04-20 22:36:11 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2006-06-04 00:54:45 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -203,16 +203,6 @@ void allocate(void* p0, void* p1, void* p2, void* p3) {
 
     if (r == 0) {
 
-        compare_arrays(p2, p3, (void*) CYBOL_ABSTRACTION, (void*) CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != 0) {
-
-            allocate_xml_node(p0, p1);
-        }
-    }
-
-    if (r == 0) {
-
         compare_arrays(p2, p3, (void*) HXP_ABSTRACTION, (void*) HXP_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
@@ -378,16 +368,6 @@ void reallocate(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (r == 0) {
 
-        compare_arrays(p3, p4, (void*) CYBOL_ABSTRACTION, (void*) CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != 0) {
-
-//??            reallocate_xml_node(p0, p1, p2);
-        }
-    }
-
-    if (r == 0) {
-
         compare_arrays(p3, p4, (void*) HXP_ABSTRACTION, (void*) HXP_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
@@ -547,16 +527,6 @@ void deallocate(void* p0, void* p1, void* p2, void* p3) {
         if (r != 0) {
 
             deallocate_time(p0, p1);
-        }
-    }
-
-    if (r == 0) {
-
-        compare_arrays(p2, p3, (void*) CYBOL_ABSTRACTION, (void*) CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != 0) {
-
-            deallocate_xml_node(p0, p1);
         }
     }
 

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.15 $ $Date: 2006-06-03 16:13:32 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2006-06-04 00:54:44 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -152,7 +152,6 @@ void count_parts(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         compare_arrays(*bna, *bnac, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &comp_res1, (void*) CHARACTER_ARRAY);
         compare_arrays(*mdla, *mdlac, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT, (void*) &comp_res2, (void*) CHARACTER_ARRAY);
-        compare_arrays(*mdla, *mdlac, (void*) CYBOL_ABSTRACTION, (void*) CYBOL_ABSTRACTION_COUNT, (void*) &comp_res2, (void*) CHARACTER_ARRAY);
         compare_arrays(*resa, *resac, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT, (void*) &comp_res3, (void*) CHARACTER_ARRAY);
 
         if ((comp_res1 == 1) && (comp_res2 == 1) && (comp_res3 == 1)) {

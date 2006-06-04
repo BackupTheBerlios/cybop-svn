@@ -22,7 +22,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.20 $ $Date: 2006-06-03 16:13:32 $ $Author: christian $
+ * @version $Revision: 1.21 $ $Date: 2006-06-04 00:54:44 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -56,11 +56,6 @@ void check_primitive_model(void* p0, void* p1, void* p2) {
 
         if (*p == 0) {
 
-            compare_arrays(p1, p2, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT, p0, (void*) CHARACTER_ARRAY);
-        }
-
-        if (*p == 0) {
-
             compare_arrays(p1, p2, (void*) OPERATION_ABSTRACTION, (void*) OPERATION_ABSTRACTION_COUNT, p0, (void*) CHARACTER_ARRAY);
         }
 
@@ -72,16 +67,6 @@ void check_primitive_model(void* p0, void* p1, void* p2) {
         if (*p == 0) {
 
             compare_arrays(p1, p2, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT, p0, (void*) CHARACTER_ARRAY);
-        }
-
-        if (*p == 0) {
-
-            compare_arrays(p1, p2, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT, p0, (void*) CHARACTER_ARRAY);
-        }
-
-        if (*p == 0) {
-
-            compare_arrays(p1, p2, (void*) DOUBLE_VECTOR_ABSTRACTION, (void*) DOUBLE_VECTOR_ABSTRACTION_COUNT, p0, (void*) CHARACTER_ARRAY);
         }
 
         if (*p == 0) {
@@ -240,7 +225,7 @@ void create_compound_model(void* p0, void* p1, void* p2, void* p3, void* p4,
     // Comparison can be done one-after-the-other, because results are only set
     // to 1, if true, but they are NOT set to 0, if false.
     // So, later comparisons won't affect the result of earlier ones.
-    compare_arrays(p5, p6, (void*) CYBOL_ABSTRACTION, (void*) CYBOL_ABSTRACTION_COUNT, (void*) &w, (void*) CHARACTER_ARRAY);
+    compare_arrays(p5, p6, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT, (void*) &w, (void*) CHARACTER_ARRAY);
     compare_arrays(p5, p6, (void*) XML_ABSTRACTION, (void*) XML_ABSTRACTION_COUNT, (void*) &w, (void*) CHARACTER_ARRAY);
     compare_arrays(p5, p6, (void*) HXP_ABSTRACTION, (void*) HXP_ABSTRACTION_COUNT, (void*) &w, (void*) CHARACTER_ARRAY);
 
@@ -301,8 +286,15 @@ void create_compound_model(void* p0, void* p1, void* p2, void* p3, void* p4,
 
     } else {
 
-        // Free xml dom document.
-        xmlFreeDoc((xmlDoc*) *((void**) pm));
+        if (pm != NULL_POINTER) {
+
+            // Free xml dom document.
+            xmlFreeDoc((xmlDoc*) *((void**) pm));
+
+        } else {
+
+            log_message_debug("Could not free parse model (xml document). Probably, the given cybol file name was empty.");
+        }
     }
 }
 

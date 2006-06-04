@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.14 $ $Date: 2006-05-14 19:35:56 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2006-06-04 00:54:44 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -305,7 +305,7 @@ void receive_x_window_system_part(void* p0, void* p1, void* p2, void* p3, void* 
                             // Receive the graphical part's command.
                             receive_x_window_system_command(p0, p1, p2, p3, p4, p5, p6, p7, p8, *d, *dc, p14, p15, p16, p17);
 
-                            compare_arrays(*a, *ac, (void*) CYBOL_ABSTRACTION, (void*) CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                            compare_arrays(*a, *ac, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
                             if (r != 0) {
 

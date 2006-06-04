@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2006-06-03 16:13:32 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2006-06-04 00:54:45 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -301,57 +301,55 @@ void decode_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             void** d = (void**) p0;
 
-            if (s != NULL_POINTER) {
+            log_message_debug("Decode cybol node.");
 
-                log_message_debug("Decode cybol node.");
+            // Determine first child node.
+            xmlNode* c = s->children;
+            // The child count.
+            int cc = 0;
+            // The source name.
+            void* sn = NULL_POINTER;
+            int snc = 0;
+            // The source channel.
+            void* sc = NULL_POINTER;
+            int scc = 0;
+            // The source abstraction.
+            void* sa = NULL_POINTER;
+            int sac = 0;
+            // The source model.
+            void* sm = NULL_POINTER;
+            int smc = 0;
+            // The destination name.
+            void* dn = NULL_POINTER;
+            int* dnc = NULL_POINTER;
+            int* dns = NULL_POINTER;
+            // The destination abstraction.
+            void* da = NULL_POINTER;
+            int* dac = NULL_POINTER;
+            int* das = NULL_POINTER;
+            // The destination model.
+            void* dm = NULL_POINTER;
+            int* dmc = NULL_POINTER;
+            int* dms = NULL_POINTER;
+            // The destination details.
+            void* dd = NULL_POINTER;
+            int* ddc = NULL_POINTER;
+            int* dds = NULL_POINTER;
 
-                // Determine first child node.
-                xmlNode* c = s->children;
-                // The child count.
-                int cc = 0;
-                // The source name.
-                void* sn = NULL_POINTER;
-                int snc = 0;
-                // The source channel.
-                void* sc = NULL_POINTER;
-                int scc = 0;
-                // The source abstraction.
-                void* sa = NULL_POINTER;
-                int sac = 0;
-                // The source model.
-                void* sm = NULL_POINTER;
-                int smc = 0;
-                // The destination name.
-                void* dn = NULL_POINTER;
-                int* dnc = NULL_POINTER;
-                int* dns = NULL_POINTER;
-                // The destination abstraction.
-                void* da = NULL_POINTER;
-                int* dac = NULL_POINTER;
-                int* das = NULL_POINTER;
-                // The destination model.
-                void* dm = NULL_POINTER;
-                int* dmc = NULL_POINTER;
-                int* dms = NULL_POINTER;
-                // The destination details.
-                void* dd = NULL_POINTER;
-                int* ddc = NULL_POINTER;
-                int* dds = NULL_POINTER;
+            while (1) {
 
-                while (1) {
+                if (c == NULL_POINTER) {
 
-                    if (c == NULL_POINTER) {
+                    break;
+                }
 
-                        break;
-                    }
+                if (c->type == XML_ELEMENT_NODE) {
 
-                    if (c->type == XML_ELEMENT_NODE) {
-
-                        // Decode child node properties.
-                        decode_cybol_property(
-                            (void*) &sn, (void*) &snc, (void*) &sc, (void*) &scc,
-                            (void*) &sa, (void*) &sac, (void*) &sm, (void*) &smc,
-                            (void*) c);
+                    // Decode child node properties.
+                    decode_cybol_property(
+                        (void*) &sn, (void*) &snc, (void*) &sc, (void*) &scc,
+                        (void*) &sa, (void*) &sac, (void*) &sm, (void*) &smc,
+                        (void*) c);
 
 //??        fprintf(stderr, "sn: %s\n", (char*) sn);
 //??        fprintf(stderr, "snc: %i\n", *((int*) snc));
@@ -362,121 +360,116 @@ void decode_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4) {
 //??        fprintf(stderr, "sm: %s\n", (char*) sm);
 //??        fprintf(stderr, "smc: %i\n", *((int*) smc));
 
-                        // Create destination name.
-                        allocate((void*) &dnc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-                        *dnc = 0;
-                        allocate((void*) &dns, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-                        *dns = 0;
-                        create((void*) &dn, (void*) dnc, (void*) dns,
-                            sn, (void*) &snc,
-                            (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
-                            (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
+                    // Create destination name.
+                    allocate((void*) &dnc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+                    *dnc = 0;
+                    allocate((void*) &dns, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+                    *dns = 0;
+                    create((void*) &dn, (void*) dnc, (void*) dns,
+                        sn, (void*) &snc,
+                        (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                        (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
 
-                        // CAUTION! A (transient) destination channel is not created,
-                        // since that is only needed temporarily for model loading.
+                    // CAUTION! A (transient) destination channel is not created,
+                    // since that is only needed temporarily for model loading.
 
-                        // Create destination abstraction.
-                        allocate((void*) &dac, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-                        *dac = 0;
-                        allocate((void*) &das, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-                        *das = 0;
-                        create((void*) &da, (void*) dac, (void*) das,
-                            sa, (void*) &sac,
-                            (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
-                            (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
+                    // Create destination abstraction.
+                    allocate((void*) &dac, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+                    *dac = 0;
+                    allocate((void*) &das, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+                    *das = 0;
+                    create((void*) &da, (void*) dac, (void*) das,
+                        sa, (void*) &sac,
+                        (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                        (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
 
-                        // Create destination model.
-                        allocate((void*) &dmc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-                        *dmc = 0;
-                        allocate((void*) &dms, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-                        *dms = 0;
-                        create((void*) &dm, (void*) dmc, (void*) dms,
-                            sm, (void*) &smc,
-                            sa, (void*) &sac,
-                            sc, (void*) &scc);
+                    // Create destination model.
+                    allocate((void*) &dmc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+                    *dmc = 0;
+                    allocate((void*) &dms, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+                    *dms = 0;
+                    create((void*) &dm, (void*) dmc, (void*) dms,
+                        sm, (void*) &smc,
+                        sa, (void*) &sac,
+                        sc, (void*) &scc);
 
-                        // If child node has children, then create details model for it.
-                        if (c->children != NULL_POINTER) {
+                    // If child node has children, then create details model for it.
+                    if (c->children != NULL_POINTER) {
 
-                            // Create details model.
-                            allocate((void*) &ddc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-                            *ddc = 0;
-                            allocate((void*) &dds, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-                            *dds = 0;
-                            allocate((void*) &dd, (void*) dds,
-                                (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
+                        // Create details model.
+                        allocate((void*) &ddc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+                        *ddc = 0;
+                        allocate((void*) &dds, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+                        *dds = 0;
+                        allocate((void*) &dd, (void*) dds,
+                            (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
 
-                            // Decode child node children.
-                            decode_cybol_node((void*) &dd, (void*) ddc, (void*) dds,
-                                (void*) c, (void*) &cc);
+                        // Decode child node children.
+                        decode_cybol_node((void*) &dd, (void*) ddc, (void*) dds,
+                            (void*) c, (void*) &cc);
 
-                            //?? Read details??
-                            // Filter out all tags with name attribute value "super" and
-                            // hand over model to create parts of super model.
-                            // Add all details to details model.
-                            // Do NOT add super tags to details model!
-                        }
-
-                        // Add model to compound.
-                        set_compound_element_by_name(*d, p1, p2, NULL_POINTER, NULL_POINTER, NULL_POINTER,
-                            dn, (void*) dnc, (void*) dns,
-                            da, (void*) dac, (void*) das,
-                            dm, (void*) dmc, (void*) dms,
-                            dd, (void*) ddc, (void*) dds);
-
-                        //?? If "add", then first check if name exists in whole;
-                        //?? if yes, add "_0" or "_1" or "_2" etc.
-                        //?? to name, taking first non-existing suffix!
-                        //?? If "set", then just replace the model
-                        //?? with equal name; but where to destroy it if
-                        //?? no whole keeps a reference to it anymore?
-
-                        // Reset source name.
-                        sn = NULL_POINTER;
-                        snc = 0;
-                        // Reset source channel.
-                        sc = NULL_POINTER;
-                        scc = 0;
-                        // Reset source abstraction.
-                        sa = NULL_POINTER;
-                        sac = 0;
-                        // Reset source model.
-                        sm = NULL_POINTER;
-                        smc = 0;
-                        // Reset destination name.
-                        dn = NULL_POINTER;
-                        dnc = NULL_POINTER;
-                        dns = NULL_POINTER;
-                        // Reset destination abstraction.
-                        da = NULL_POINTER;
-                        dac = NULL_POINTER;
-                        das = NULL_POINTER;
-                        // Reset destination model.
-                        dm = NULL_POINTER;
-                        dmc = NULL_POINTER;
-                        dms = NULL_POINTER;
-                        // Reset destination details.
-                        dd = NULL_POINTER;
-                        ddc = NULL_POINTER;
-                        dds = NULL_POINTER;
+                        //?? Read details??
+                        // Filter out all tags with name attribute value "super" and
+                        // hand over model to create parts of super model.
+                        // Add all details to details model.
+                        // Do NOT add super tags to details model!
                     }
 
-                    c = c->next;
+                    // Add model to compound.
+                    set_compound_element_by_name(*d, p1, p2, NULL_POINTER, NULL_POINTER, NULL_POINTER,
+                        dn, (void*) dnc, (void*) dns,
+                        da, (void*) dac, (void*) das,
+                        dm, (void*) dmc, (void*) dms,
+                        dd, (void*) ddc, (void*) dds);
+
+                    //?? If "add", then first check if name exists in whole;
+                    //?? if yes, add "_0" or "_1" or "_2" etc.
+                    //?? to name, taking first non-existing suffix!
+                    //?? If "set", then just replace the model
+                    //?? with equal name; but where to destroy it if
+                    //?? no whole keeps a reference to it anymore?
+
+                    // Reset source name.
+                    sn = NULL_POINTER;
+                    snc = 0;
+                    // Reset source channel.
+                    sc = NULL_POINTER;
+                    scc = 0;
+                    // Reset source abstraction.
+                    sa = NULL_POINTER;
+                    sac = 0;
+                    // Reset source model.
+                    sm = NULL_POINTER;
+                    smc = 0;
+                    // Reset destination name.
+                    dn = NULL_POINTER;
+                    dnc = NULL_POINTER;
+                    dns = NULL_POINTER;
+                    // Reset destination abstraction.
+                    da = NULL_POINTER;
+                    dac = NULL_POINTER;
+                    das = NULL_POINTER;
+                    // Reset destination model.
+                    dm = NULL_POINTER;
+                    dmc = NULL_POINTER;
+                    dms = NULL_POINTER;
+                    // Reset destination details.
+                    dd = NULL_POINTER;
+                    ddc = NULL_POINTER;
+                    dds = NULL_POINTER;
                 }
 
-            } else {
-
-//??                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not translate xml node. The source is null.");
+                c = c->next;
             }
 
         } else {
 
-//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not translate xml node. The source is null.");
+            log_message_debug("Error: Could not decode cybol node. The destination compound is null.");
         }
 
     } else {
 
-//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not translate xml node. The source parameter is null.");
+        log_message_debug("Error: Could not decode cybol node. The source xml node is null.");
     }
 }
 
