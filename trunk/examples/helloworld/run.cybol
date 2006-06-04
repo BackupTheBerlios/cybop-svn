@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 
 <!--
+    This example creates a small, hierarchical domain model consisting
+    of a compound called "domain" and its part called "greeting".
+    The greeting model contains the famous "Hello, World!" character.
+
+    As next step, the greeting model is sent to (printed on) the console.
+    Finally, an "exit" operation shuts down the application.
+/-->
+
+<model>
+    <part name="startup" channel="inline" abstraction="operation" model="send">
+        <property name="channel" channel="inline" abstraction="character" model="signal"/>
+        <property name="message" channel="file" abstraction="compound" model="helloworld/startup.cybol"/>
+    </part>
+</model>
+
+<!--
     $RCSfile: run.cybol,v $
 
     Copyright (c) 1999-2006. Christian Heller and the CYBOP developers.
@@ -22,22 +38,6 @@
     http://www.cybop.net
     - Cybernetics Oriented Programming -
 
-    @version $Revision: 1.5 $ $Date: 2006-04-20 22:27:22 $ $Author: christian $
+    @version $Revision: 1.6 $ $Date: 2006-06-04 00:59:13 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->
-
-<!--
-    This example creates a small, hierarchical domain model consisting
-    of a compound called "domain" and its part called "greeting".
-    The greeting model contains the famous "Hello, World!" character.
-
-    As next step, the greeting model is sent to (printed on) the console.
-    Finally, an "exit" operation shuts down the application.
-/-->
-
-<model>
-    <part name="startup" channel="inline" abstraction="operation" model="send">
-        <property name="channel" channel="inline" abstraction="character" model="signal"/>
-        <property name="message" channel="file" abstraction="cybol" model="helloworld/startup.cybol"/>
-    </part>
-</model>

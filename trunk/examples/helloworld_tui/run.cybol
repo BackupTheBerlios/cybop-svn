@@ -1,15 +1,25 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 
+<!--
+    This example creates a small, hierarchical domain model consisting
+    of a compound called "domain" and its part called "greeting".
+    The greeting model contains the famous "Hello, World!" character.
+
+    Additionally, this example creates a logic model "send_greeting" at startup.
+    It may be accessed in memory at runtime, and sent as signal.
+
+    Exactly this is done in the next step. The "send_greeting" part sends the
+    greeting model to the "Textual User Interface" (TUI), in other words console.
+    Finally, the domain- and logic models are destroyed by the "shutdown" part
+    and the "exit" operation quits the application.
+/-->
+
 <model>
     <part name="startup" channel="inline" abstraction="operation" model="send">
         <property name="channel" channel="inline" abstraction="character" model="signal"/>
-        <property name="message" channel="file" abstraction="compound" model="shell_command_execution/startup.cybol"/>
+        <property name="message" channel="file" abstraction="compound" model="helloworld_tui/startup.cybol"/>
     </part>
 </model>
-
-<!--
-    This example executes a shell command.
-/-->
 
 <!--
     $RCSfile: run.cybol,v $
@@ -33,6 +43,6 @@
     http://www.cybop.net
     - Cybernetics Oriented Programming -
 
-    @version $Revision: 1.3 $ $Date: 2006-06-04 00:59:13 $ $Author: christian $
+    @version $Revision: 1.1 $ $Date: 2006-06-04 00:59:13 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->

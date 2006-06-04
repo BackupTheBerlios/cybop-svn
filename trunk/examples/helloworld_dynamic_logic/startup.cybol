@@ -1,5 +1,42 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 
+<model>
+    <part name="create_domain" channel="inline" abstraction="operation" model="create_part">
+        <property name="name" channel="inline" abstraction="character" model="domain"/>
+        <property name="channel" channel="inline" abstraction="character" model="inline"/>
+        <property name="abstraction" channel="inline" abstraction="character" model="compound"/>
+        <property name="model" channel="inline" abstraction="character" model=""/>
+    </part>
+    <part name="create_greeting" channel="inline" abstraction="operation" model="create_part">
+        <property name="whole" channel="inline" abstraction="knowledge" model=".domain"/>
+        <property name="name" channel="inline" abstraction="character" model="greeting"/>
+        <property name="channel" channel="inline" abstraction="character" model="inline"/>
+        <property name="abstraction" channel="inline" abstraction="character" model="character"/>
+        <property name="model" channel="inline" abstraction="character" model="Hello, World!"/>
+    </part>
+    <part name="create_logic" channel="inline" abstraction="operation" model="create_part">
+        <property name="name" channel="inline" abstraction="character" model="logic"/>
+        <property name="channel" channel="inline" abstraction="character" model="inline"/>
+        <property name="abstraction" channel="inline" abstraction="character" model="compound"/>
+        <property name="model" channel="inline" abstraction="character" model=""/>
+    </part>
+    <part name="create_send_greeting" channel="inline" abstraction="operation" model="create_part">
+        <property name="whole" channel="inline" abstraction="knowledge" model=".logic"/>
+        <property name="name" channel="inline" abstraction="character" model="send_greeting"/>
+        <property name="channel" channel="inline" abstraction="character" model="file"/>
+        <property name="abstraction" channel="inline" abstraction="character" model="compound"/>
+        <property name="model" channel="inline" abstraction="character" model="helloworld_dynamic_logic/send_greeting.cybol"/>
+    </part>
+    <part name="send_greeting" channel="inline" abstraction="operation" model="send">
+        <property name="language" channel="inline" abstraction="character" model="signal"/>
+        <property name="message" channel="inline" abstraction="knowledge" model=".logic.send_greeting.send"/>
+    </part>
+    <part name="shutdown" channel="inline" abstraction="operation" model="send">
+        <property name="language" channel="inline" abstraction="character" model="signal"/>
+        <property name="message" channel="file" abstraction="compound" model="helloworld_dynamic_logic/shutdown.cybol"/>
+    </part>
+</model>
+
 <!--
     $RCSfile: startup.cybol,v $
 
@@ -22,43 +59,6 @@
     http://www.cybop.net
     - Cybernetics Oriented Programming -
 
-    @version $Revision: 1.4 $ $Date: 2006-04-20 22:27:23 $ $Author: christian $
+    @version $Revision: 1.5 $ $Date: 2006-06-04 00:59:13 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->
-
-<model>
-    <part name="create_domain" channel="inline" abstraction="operation" model="create_part">
-        <property name="name" channel="inline" abstraction="character" model="domain"/>
-        <property name="channel" channel="inline" abstraction="character" model="inline"/>
-        <property name="abstraction" channel="inline" abstraction="character" model="compound"/>
-        <property name="model" channel="inline" abstraction="character" model=""/>
-    </part>
-    <part name="create_greeting" channel="inline" abstraction="operation" model="create_part">
-        <property name="whole" channel="inline" abstraction="knowledge" model="domain"/>
-        <property name="name" channel="inline" abstraction="character" model="greeting"/>
-        <property name="channel" channel="inline" abstraction="character" model="inline"/>
-        <property name="abstraction" channel="inline" abstraction="character" model="character"/>
-        <property name="model" channel="inline" abstraction="character" model="Hello, World!"/>
-    </part>
-    <part name="create_logic" channel="inline" abstraction="operation" model="create_part">
-        <property name="name" channel="inline" abstraction="character" model="logic"/>
-        <property name="channel" channel="inline" abstraction="character" model="inline"/>
-        <property name="abstraction" channel="inline" abstraction="character" model="compound"/>
-        <property name="model" channel="inline" abstraction="character" model=""/>
-    </part>
-    <part name="create_send_greeting" channel="inline" abstraction="operation" model="create_part">
-        <property name="whole" channel="inline" abstraction="knowledge" model="logic"/>
-        <property name="name" channel="inline" abstraction="character" model="send_greeting"/>
-        <property name="channel" channel="inline" abstraction="character" model="file"/>
-        <property name="abstraction" channel="inline" abstraction="character" model="cybol"/>
-        <property name="model" channel="inline" abstraction="character" model="helloworld_dynamic_logic/send_greeting.cybol"/>
-    </part>
-    <part name="send_greeting" channel="inline" abstraction="operation" model="send">
-        <property name="language" channel="inline" abstraction="character" model="signal"/>
-        <property name="message" channel="inline" abstraction="knowledge" model="logic.send_greeting.send"/>
-    </part>
-    <part name="shutdown" channel="inline" abstraction="operation" model="send">
-        <property name="language" channel="inline" abstraction="character" model="signal"/>
-        <property name="message" channel="file" abstraction="cybol" model="helloworld_dynamic_logic/shutdown.cybol"/>
-    </part>
-</model>
