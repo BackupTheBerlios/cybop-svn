@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.20 $ $Date: 2006-05-05 22:56:01 $ $Author: christian $
+ * @version $Revision: 1.21 $ $Date: 2006-06-11 20:19:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -97,16 +97,6 @@ void handle_operation(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
         if (r != 0) {
 
             copy(p12, p13, p1, p2, p3);
-        }
-    }
-
-    if (r == 0) {
-
-        compare_arrays(p10, p11, (void*) COPY_PROPERTY_MODEL, (void*) COPY_PROPERTY_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != 0) {
-
-            copy_property(p12, p13, p1, p2, p3);
         }
     }
 

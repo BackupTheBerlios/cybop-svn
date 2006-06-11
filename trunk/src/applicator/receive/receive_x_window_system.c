@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.15 $ $Date: 2006-06-04 00:54:44 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2006-06-11 20:19:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -856,6 +856,10 @@ void receive_x_window_system_thread(void* p0) {
 void receive_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
     log_message_debug("Receive x window system message.");
+
+    // Adding the following parameters to the internal memory is necessary,
+    // because only one parameter (the internal memory p0) can be forwarded
+    // to the thread procedure further below. Thus, p0 must contain any others.
 
     // Set temporary user interface root internal.
     set(p0, (void*) TEMPORARY_USER_INTERFACE_ROOT_INTERNAL, (void*) &p1, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);

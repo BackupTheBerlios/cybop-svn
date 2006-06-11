@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.13 $ $Date: 2006-06-03 16:13:32 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2006-06-11 20:19:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -107,8 +107,6 @@ void receive_linux_console_signal(void* p0, void* p1, void* p2) {
     get(p0, (void*) TEMPORARY_USER_INTERFACE_COMMANDS_COUNT_INTERNAL, (void*) &cc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     get(p0, (void*) TEMPORARY_USER_INTERFACE_COMMANDS_SIZE_INTERNAL, (void*) &cs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-    fprintf(stdout, "TEST signal p1 %ls\n", (char*) p1);
-
     // Get actual command belonging to the command name.
     // If the name is not known, the command parameter is left untouched.
     get_universal_compound_element_by_name(*c, *cc,
@@ -117,8 +115,6 @@ void receive_linux_console_signal(void* p0, void* p1, void* p2) {
         (void*) &cm, (void*) &cmc, (void*) &cms,
         (void*) &cd, (void*) &cdc, (void*) &cds,
         *k, *kc);
-
-    fprintf(stdout, "TEST signal cm %s\n", (char*) *cm);
 
     // Lock signal memory mutex.
     pthread_mutex_lock(*mt);
@@ -157,13 +153,13 @@ void receive_linux_console_thread(void* p0) {
     // The event character.
     // CAUTION! For the narrow stream functions it is important to store the
     // result of these functions in a variable of type int instead of char,
-    // even if you plan to use it only as a character. Storing EOF in a char
+    // even if one plans to use it only as a character. Storing EOF in a char
     // variable truncates its value to the size of a character, so that it
     // is no longer distinguishable from the valid character (char) -1.
-    // So always use an int for the result of getc and friends, and check
-    // for EOF after the call; once you've verified that the result is NOT
-    // EOF, you can be sure that it will fit in a char variable without loss
-    // of information.
+    // So, one should always use an int for the result of getc and friends,
+    // and check for EOF after the call; once it is verified that the result
+    // is NOT EOF, one can be sure that it will fit in a char variable
+    // without loss of information.
     // NEVERTHELESS, a char is used here since EOF is not of importance below,
     // in the "get_universal_compound_element_by_name" procedure.
 //??    wint_t e = *NULL_CONTROL_CHARACTER;
@@ -173,13 +169,15 @@ void receive_linux_console_thread(void* p0) {
     // The escape control sequence mode.
     int csi = *NUMBER_0_INTEGER;
     // The character buffer.
-    // Its size is set to three, because no longer escape sequences are known.
+    // Its size is set to three, because longer escape sequences are not known.
     // Example: An up arrow delivers 'ESC' + '[' + 'A'
     void* b = NULL_POINTER;
     int bc = *NUMBER_0_INTEGER;
     int bs = *NUMBER_3_INTEGER;
     // The interrupt flag.
     int** f = (int**) &NULL_POINTER;
+    // The loop count.
+    int j = 0;
 
     // Allocate character buffer.
     allocate((void*) &b, (void*) &bs, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
@@ -200,14 +198,14 @@ void receive_linux_console_thread(void* p0) {
 //??        e = fgetwc(*t);
         e = fgetc(*t);
 
-    fprintf(stdout, "TEST character %i\n", e);
+//??    fprintf(stdout, "TEST character %i\n", e);
 
         if (csi == *NUMBER_1_INTEGER) {
 
             // Reset escape control sequence mode.
             csi = *NUMBER_0_INTEGER;
 
-    fprintf(stdout, "TEST csi mode %i\n", e);
+//??    fprintf(stdout, "TEST csi mode %i\n", e);
 
             // An escape character followed by a left square bracket character
             // were read before. So this is an escape control sequence.
@@ -216,9 +214,11 @@ void receive_linux_console_thread(void* p0) {
             set(b, (void*) &bc, (void*) &e, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
             bc++;
 
+/*??
     fprintf(stdout, "TEST csi b %s\n", (char*) b);
     fprintf(stdout, "TEST csi bc %i\n", bc);
     fprintf(stdout, "TEST csi bs %i\n", bs);
+*/
 
             // The comparison result.
             int r = 0;
@@ -240,7 +240,7 @@ void receive_linux_console_thread(void* p0) {
 
                 if (r != 0) {
 
-    fprintf(stdout, "TEST csi mode down %i\n", e);
+//??    fprintf(stdout, "TEST csi mode down %i\n", e);
 
                     receive_linux_console_signal(p0, (void*) UI_ARROW_DOWN_NAME, (void*) UI_ARROW_DOWN_NAME_COUNT);
                 }
@@ -266,9 +266,10 @@ void receive_linux_console_thread(void* p0) {
                 }
             }
 
-            // The loop count.
-            int j = bc - 1;
+            // Initialise loop count.
+            j = bc - 1;
 
+            // Empty the buffer for future results.
             while (1) {
 
                 if (j < 0) {
@@ -290,7 +291,7 @@ void receive_linux_console_thread(void* p0) {
             // Reset escape character mode.
             esc = *NUMBER_0_INTEGER;
 
-    fprintf(stdout, "TEST esc mode %i\n", e);
+//??    fprintf(stdout, "TEST esc mode %i\n", e);
 
             // An escape character was read before.
             // Find out if it was just that escape character,
@@ -319,7 +320,7 @@ void receive_linux_console_thread(void* p0) {
 
         } else if (e == *ESCAPE_CONTROL_CHARACTER) {
 
-    fprintf(stdout, "TEST if esc char %i\n", e);
+//??    fprintf(stdout, "TEST if esc char %i\n", e);
 
             // Set escape character flag.
             esc = *NUMBER_1_INTEGER;
@@ -330,13 +331,10 @@ void receive_linux_console_thread(void* p0) {
 
         } else {
 
-    fprintf(stdout, "TEST rest %i\n", e);
+//??    fprintf(stdout, "TEST rest %i\n", e);
 
             receive_linux_console_signal(p0, (void*) &e, (void*) NUMBER_1_INTEGER);
         }
-
-        //?? TEST only; remove the following line later!
-        break;
     }
 
     // Deallocate character buffer.
@@ -367,6 +365,10 @@ void receive_linux_console_thread(void* p0) {
 void receive_linux_console(void* p0, void* p1, void* p2, void* p3) {
 
     log_message_debug("Receive linux console message.");
+
+    // Adding the following parameters to the internal memory is necessary,
+    // because only one parameter (the internal memory p0) can be forwarded
+    // to the thread procedure further below. Thus, p0 must contain any others.
 
     // Set temporary user interface commands internal.
     set(p0, (void*) TEMPORARY_USER_INTERFACE_COMMANDS_INTERNAL, (void*) &p1, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
