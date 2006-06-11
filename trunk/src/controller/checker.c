@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.19 $ $Date: 2006-06-03 16:13:32 $ $Author: christian $
+ * @version $Revision: 1.20 $ $Date: 2006-06-11 21:47:09 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -137,18 +137,22 @@ void check(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
                 // A signal only encapsulates an abstraction and a logic model,
                 // which are stored in the knowledge tree.
                 // That knowledge tree and all its models get created at
-                // system startup and destroyed at system shutdown.
+                // system startup or later and destroyed at system shutdown.
 
                 // CAUTION! Do NOT destroy the signal priority!
                 // It is a FIXED system constant.
 
-                // Destroy signal id.
+                // Deallocate signal id.
                 // CAUTION! Do NOT hand over as reference!
                 // The id was read from signal memory and is of type void**.
                 // The expression (&*id) is the same like (id).
-//??                fprintf(stderr, "TEST check pre integer destroy i: %i\n", i);
-//??                deallocate((void*) id, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-//??                fprintf(stderr, "TEST check post integer destroy i: %i\n", i);
+/*??
+                //?? TODO: For some reason, signals are not  processed properly
+                //?? (wrong signal abstraction), if deallocating the signal id.
+                fprintf(stderr, "TEST check pre integer destroy id: %i\n", **((int**) id));
+                deallocate((void*) id, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+                fprintf(stderr, "TEST check post integer destroy id: %i\n", *((int*) *id));
+*/
 
                 // Reset abstraction.
                 a = &NULL_POINTER;

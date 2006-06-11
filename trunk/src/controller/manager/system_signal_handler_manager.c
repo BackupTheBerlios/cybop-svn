@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2006-04-20 22:36:09 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2006-06-11 21:47:09 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -49,8 +49,6 @@
  */
 void interrupt_service_system_signal_handler(int p0) {
 
-    fprintf(stdout, "TEST signal handler 0 p0%i\n", p0);
-
     // This thread itself.
     pthread_t t = pthread_self();
 /*??
@@ -64,15 +62,15 @@ void interrupt_service_system_signal_handler(int p0) {
     // Get unique thread id.
 //??    pthread_id_np_t id = pthread_getthreadid_np();
 
-    fprintf(stdout, "TEST signal handler 1 t %l\n", t);
+//??    fprintf(stdout, "TEST signal handler 1 t %l\n", t);
 
     if (t == *LINUX_CONSOLE_THREAD) {
 
-    fprintf(stdout, "TEST signal handler linux console %i\n", p0);
+//??    fprintf(stdout, "TEST signal handler linux console %i\n", p0);
 
         if (*LINUX_CONSOLE_THREAD_INTERRUPT != *NUMBER_0_INTEGER) {
 
-    fprintf(stdout, "TEST signal handler linux console irq %i\n", p0);
+//??    fprintf(stdout, "TEST signal handler linux console irq %i\n", p0);
 
             pthread_exit(NULL_POINTER);
         }
@@ -80,11 +78,11 @@ void interrupt_service_system_signal_handler(int p0) {
 
     if (t == *UNIX_SOCKET_THREAD) {
 
-    fprintf(stdout, "TEST signal handler unix socket %i\n", p0);
+//??    fprintf(stdout, "TEST signal handler unix socket %i\n", p0);
 
         if (*UNIX_SOCKET_THREAD_INTERRUPT != *NUMBER_0_INTEGER) {
 
-    fprintf(stdout, "TEST signal handler unix socket irq %i\n", p0);
+//??    fprintf(stdout, "TEST signal handler unix socket irq %i\n", p0);
 
             pthread_exit(NULL_POINTER);
         }
@@ -92,11 +90,11 @@ void interrupt_service_system_signal_handler(int p0) {
 
     if (t == *TCP_SOCKET_THREAD) {
 
-    fprintf(stdout, "TEST signal handler tcp socket %i\n", p0);
+//??    fprintf(stdout, "TEST signal handler tcp socket %i\n", p0);
 
         if (*TCP_SOCKET_THREAD_INTERRUPT != *NUMBER_0_INTEGER) {
 
-    fprintf(stdout, "TEST signal handler tcp socket irq %i\n", p0);
+//??    fprintf(stdout, "TEST signal handler tcp socket irq %i\n", p0);
 
             pthread_exit(NULL_POINTER);
         }
@@ -104,11 +102,11 @@ void interrupt_service_system_signal_handler(int p0) {
 
     if (t == *X_WINDOW_SYSTEM_THREAD) {
 
-    fprintf(stdout, "TEST signal handler x window system %i\n", p0);
+//??    fprintf(stdout, "TEST signal handler x window system %i\n", p0);
 
         if (*X_WINDOW_SYSTEM_THREAD_INTERRUPT != *NUMBER_0_INTEGER) {
 
-    fprintf(stdout, "TEST signal handler x window system irq %i\n", p0);
+//??    fprintf(stdout, "TEST signal handler x window system irq %i\n", p0);
 
             pthread_exit(NULL_POINTER);
         }

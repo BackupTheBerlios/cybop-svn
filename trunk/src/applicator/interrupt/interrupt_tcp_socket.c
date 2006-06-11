@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2006-05-14 19:35:55 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2006-06-11 21:47:09 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -62,6 +62,9 @@ void interrupt_tcp_socket() {
         // SIGKILL is defined to end the entire process, regardless
         // of the thread it is delivered to, or how it is sent.
         // The user signal SIGUSR1 is used here instead.
+        // It is processed in the interrupt_service_system_signal_handler
+        // procedure, situated in the following module:
+        // controller/manager/system_signal_handler_manager.c
         pthread_kill(*TCP_SOCKET_THREAD, SIGUSR1);
 
         // Wait for thread to finish.
@@ -72,7 +75,7 @@ void interrupt_tcp_socket() {
 
     } else {
 
-        log_message_debug("Warning: Could not interrupt x window system. The x window system thread is invalid.");
+        log_message_debug("Warning: Could not interrupt tcp socket. The tcp socket thread is invalid.");
     }
 
     // Reset thread interrupt flag.

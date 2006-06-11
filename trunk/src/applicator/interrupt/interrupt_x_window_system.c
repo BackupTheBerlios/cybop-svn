@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2006-05-14 19:35:55 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2006-06-11 21:47:09 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -55,6 +55,9 @@ void interrupt_x_window_system() {
         // SIGKILL is defined to end the entire process, regardless
         // of the thread it is delivered to, or how it is sent.
         // The user signal SIGUSR1 is used here instead.
+        // It is processed in the interrupt_service_system_signal_handler
+        // procedure, situated in the following module:
+        // controller/manager/system_signal_handler_manager.c
         pthread_kill(*X_WINDOW_SYSTEM_THREAD, SIGUSR1);
 
         // Wait for thread to finish.

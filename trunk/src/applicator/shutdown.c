@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.12 $ $Date: 2006-06-02 06:03:33 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2006-06-11 21:47:09 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description This module shuts down a service.
  */
@@ -70,7 +70,7 @@ void shutdown_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
     void** sdc = &NULL_POINTER;
     void** sds = &NULL_POINTER;
 
-    // Get parameters.
+    // Get service.
     get_universal_compound_element_by_name(p0, p1,
         (void*) SERVICE_NAME, (void*) SERVICE_NAME_COUNT,
         (void*) &sa, (void*) &sac, (void*) &sas,

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.16 $ $Date: 2006-06-11 20:19:53 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2006-06-11 21:47:09 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -834,12 +834,13 @@ void receive_x_window_system_thread(void* p0) {
     // returns from the routine that was used to create it.
     // The pthread_exit() function does therefore not have to be called here.
     //
-    // However, since this procedure runs an endless loop and is NEVER left,
+    // However, since this procedure runs an endless loop waiting for input,
+    // and is NEVER left (does not have a "break" condition),
     // the loop and this thread can only be exited by an external signal
-    // which is sent in the corresponding interrupt service procedure
-    // (situated in the applicator/interrupt/ directory)
-    // and processed in the system signal handler procedure
-    // (situated in the controller/checker.c module).
+    // which is sent in the corresponding interrupt service procedure,
+    // situated in the applicator/interrupt/ directory,
+    // and processed in the interrupt_service_system_signal_handler procedure:
+    // controller/manager/system_signal_handler_manager.c
 }
 
 /**
