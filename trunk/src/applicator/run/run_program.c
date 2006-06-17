@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2006-06-04 00:54:44 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2006-06-17 10:32:38 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -141,12 +141,13 @@ void run_program(void* p0, void* p1, void* p2, void* p3) {
     //
 
     // Determine command size.
-    commands = *((int*) programmc);
+    commands = *((int*) *programmc);
 
     // Allocate command.
     allocate_array((void*) &command, (void*) &commands, (void*) CHARACTER_ARRAY);
 
     // Assemble command by copying the actual command.
+    // A null termination character is added behind the last argument, see below!
     set_array_elements(command, (void*) &commandc, *programm, *programmc, (void*) CHARACTER_ARRAY);
     commandc = commandc + *((int*) *programmc);
 
@@ -167,7 +168,7 @@ void run_program(void* p0, void* p1, void* p2, void* p3) {
         reallocate_pointer_vector((void*) &command, (void*) &commandc, (void*) &commands);
     }
 
-    // Assemble command option by adding the null termination character.
+    // Assemble command by adding the null termination character.
     set_array_elements(command, (void*) &commandc, (void*) NULL_CONTROL_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
     commandc = commandc + *PRIMITIVE_COUNT;
 

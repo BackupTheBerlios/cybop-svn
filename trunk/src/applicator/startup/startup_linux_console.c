@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.18 $ $Date: 2006-04-20 22:36:09 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2006-06-17 10:32:38 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -66,11 +66,19 @@ void startup_linux_console(void* p0, void* p1, void* p2, void* p3) {
         struct termios* to = NULL_POINTER;
         // The working termios interface.
         struct termios* tw = NULL_POINTER;
+        // The character buffer that will be used in the thread procedure.
+        void* b = NULL_POINTER;
+        int* bc = NULL_POINTER;
+        int* bs = NULL_POINTER;
 
         // Create linux console internals.
 //??        allocate((void*) &t, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
         to = (struct termios*) malloc(sizeof(struct termios));
         tw = (struct termios*) malloc(sizeof(struct termios));
+
+        // Allocate character buffer count, size.
+        allocate((void*) &bc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        allocate((void*) &bs, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
         // Initialise linux console internals.
         // Set file stream.
@@ -88,6 +96,15 @@ void startup_linux_console(void* p0, void* p1, void* p2, void* p3) {
 
         // Assign termios attributes.
         tcsetattr(d, TCSANOW, tw);
+
+        // Initialise character buffer count, size.
+        // Its size is initialised with three, because longer escape sequences are not known.
+        // Example: An up arrow delivers 'ESC' + '[' + 'A'
+        *bc = *NUMBER_0_INTEGER;
+        *bs = *NUMBER_3_INTEGER;
+
+        // Allocate character buffer.
+        allocate((void*) &b, (void*) bs, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
 /*??
         // Check for linux console.
@@ -107,6 +124,9 @@ void startup_linux_console(void* p0, void* p1, void* p2, void* p3) {
         set(p0, (void*) TERMINAL_FILE_DESCRIPTOR_INTERNAL, (void*) &t, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         set(p0, (void*) TERMINAL_ORIGINAL_ATTRIBUTES_INTERNAL, (void*) &to, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         set(p0, (void*) TERMINAL_WORKING_ATTRIBUTES_INTERNAL, (void*) &tw, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        set(p0, (void*) LINUX_CONSOLE_THREAD_CHARACTER_BUFFER_INTERNAL, (void*) &b, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        set(p0, (void*) LINUX_CONSOLE_THREAD_CHARACTER_BUFFER_COUNT_INTERNAL, (void*) &bc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        set(p0, (void*) LINUX_CONSOLE_THREAD_CHARACTER_BUFFER_SIZE_INTERNAL, (void*) &bs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
     } else {
 

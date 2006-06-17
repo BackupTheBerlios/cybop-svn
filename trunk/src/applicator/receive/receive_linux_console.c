@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.15 $ $Date: 2006-06-11 21:47:09 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2006-06-17 10:32:38 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -103,9 +103,9 @@ void receive_linux_console_signal(void* p0, void* p1, void* p2) {
     // Get interrupt request internal.
     get(p0, (void*) INTERRUPT_REQUEST_INTERNAL, (void*) &irq, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     // Get user interface commands internal.
-    get(p0, (void*) TEMPORARY_USER_INTERFACE_COMMANDS_INTERNAL, (void*) &c, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    get(p0, (void*) TEMPORARY_USER_INTERFACE_COMMANDS_COUNT_INTERNAL, (void*) &cc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    get(p0, (void*) TEMPORARY_USER_INTERFACE_COMMANDS_SIZE_INTERNAL, (void*) &cs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p0, (void*) LINUX_CONSOLE_THREAD_COMMANDS_INTERNAL, (void*) &c, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p0, (void*) LINUX_CONSOLE_THREAD_COMMANDS_COUNT_INTERNAL, (void*) &cc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p0, (void*) LINUX_CONSOLE_THREAD_COMMANDS_SIZE_INTERNAL, (void*) &cs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
     // Get actual command belonging to the command name.
     // If the name is not known, the command parameter is left untouched.
@@ -169,18 +169,18 @@ void receive_linux_console_thread(void* p0) {
     // The escape control sequence mode.
     int csi = *NUMBER_0_INTEGER;
     // The character buffer.
-    // Its size is set to three, because longer escape sequences are not known.
-    // Example: An up arrow delivers 'ESC' + '[' + 'A'
-    void* b = NULL_POINTER;
-    int bc = *NUMBER_0_INTEGER;
-    int bs = *NUMBER_3_INTEGER;
+    void** b = &NULL_POINTER;
+    int** bc = (int**) &NULL_POINTER;
+    int** bs = (int**) &NULL_POINTER;
     // The interrupt flag.
     int** f = (int**) &NULL_POINTER;
     // The loop count.
     int j = 0;
 
-    // Allocate character buffer.
-    allocate((void*) &b, (void*) &bs, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+    // Get character buffer.
+    get(p0, (void*) LINUX_CONSOLE_THREAD_CHARACTER_BUFFER_INTERNAL, (void*) &b, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p0, (void*) LINUX_CONSOLE_THREAD_CHARACTER_BUFFER_COUNT_INTERNAL, (void*) &bc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p0, (void*) LINUX_CONSOLE_THREAD_CHARACTER_BUFFER_SIZE_INTERNAL, (void*) &bs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
     while (1) {
 
@@ -211,13 +211,13 @@ void receive_linux_console_thread(void* p0) {
             // were read before. So this is an escape control sequence.
 
             // Add character to buffer.
-            set(b, (void*) &bc, (void*) &e, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
-            bc++;
+            set(*b, (void*) *bc, (void*) &e, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+            (**bc)++;
 
 /*??
-    fprintf(stdout, "TEST csi b %s\n", (char*) b);
-    fprintf(stdout, "TEST csi bc %i\n", bc);
-    fprintf(stdout, "TEST csi bs %i\n", bs);
+    fprintf(stdout, "TEST csi b %s\n", (char*) *b);
+    fprintf(stdout, "TEST csi bc %i\n", **bc);
+    fprintf(stdout, "TEST csi bs %i\n", **bs);
 */
 
             // The comparison result.
@@ -226,7 +226,7 @@ void receive_linux_console_thread(void* p0) {
             // Determine escape control sequence and send a corresponding signal.
             if (r == 0) {
 
-                compare_arrays(b, (void*) &bc, (void*) ARROW_UP_CONTROL_SEQUENCE, (void*) ARROW_UP_CONTROL_SEQUENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                compare_arrays(*b, (void*) *bc, (void*) ARROW_UP_CONTROL_SEQUENCE, (void*) ARROW_UP_CONTROL_SEQUENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
                 if (r != 0) {
 
@@ -236,7 +236,7 @@ void receive_linux_console_thread(void* p0) {
 
             if (r == 0) {
 
-                compare_arrays(b, (void*) &bc, (void*) ARROW_DOWN_CONTROL_SEQUENCE, (void*) ARROW_DOWN_CONTROL_SEQUENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                compare_arrays(*b, (void*) *bc, (void*) ARROW_DOWN_CONTROL_SEQUENCE, (void*) ARROW_DOWN_CONTROL_SEQUENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
                 if (r != 0) {
 
@@ -248,7 +248,7 @@ void receive_linux_console_thread(void* p0) {
 
             if (r == 0) {
 
-                compare_arrays(b, (void*) &bc, (void*) ARROW_LEFT_CONTROL_SEQUENCE, (void*) ARROW_LEFT_CONTROL_SEQUENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                compare_arrays(*b, (void*) *bc, (void*) ARROW_LEFT_CONTROL_SEQUENCE, (void*) ARROW_LEFT_CONTROL_SEQUENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
                 if (r != 0) {
 
@@ -258,7 +258,7 @@ void receive_linux_console_thread(void* p0) {
 
             if (r == 0) {
 
-                compare_arrays(b, (void*) &bc, (void*) ARROW_RIGHT_CONTROL_SEQUENCE, (void*) ARROW_RIGHT_CONTROL_SEQUENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                compare_arrays(*b, (void*) *bc, (void*) ARROW_RIGHT_CONTROL_SEQUENCE, (void*) ARROW_RIGHT_CONTROL_SEQUENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
                 if (r != 0) {
 
@@ -267,7 +267,7 @@ void receive_linux_console_thread(void* p0) {
             }
 
             // Initialise loop count.
-            j = bc - 1;
+            j = **bc - 1;
 
             // Empty the buffer for future results.
             while (1) {
@@ -278,12 +278,12 @@ void receive_linux_console_thread(void* p0) {
                 }
 
                 // Remove all characters from buffer.
-                remove_element(b, (void*) &bs, (void*) &j, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+                remove_element(*b, (void*) *bs, (void*) &j, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
                 // Decrease loop count.
                 j--;
                 // Decrease character buffer count.
-                bc--;
+                (**bc)--;
             }
 
         } else if (esc == *NUMBER_1_INTEGER) {
@@ -306,8 +306,8 @@ void receive_linux_console_thread(void* p0) {
                 csi = *NUMBER_1_INTEGER;
 
                 // Add character to buffer.
-                set(b, (void*) &bc, (void*) &e, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
-                bc++;
+                set(*b, (void*) *bc, (void*) &e, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+                (**bc)++;
 
             } else {
 
@@ -326,8 +326,8 @@ void receive_linux_console_thread(void* p0) {
             esc = *NUMBER_1_INTEGER;
 
             // Add character to buffer.
-            set(b, (void*) &bc, (void*) &e, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
-            bc++;
+            set(*b, (void*) *bc, (void*) &e, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+            (**bc)++;
 
         } else {
 
@@ -336,9 +336,6 @@ void receive_linux_console_thread(void* p0) {
             receive_linux_console_signal(p0, (void*) &e, (void*) NUMBER_1_INTEGER);
         }
     }
-
-    // Deallocate character buffer.
-    deallocate((void*) &b, (void*) &bs, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
     // An implicit call to pthread_exit() is made when this thread
     // (other than the thread in which main() was first invoked)
@@ -371,11 +368,25 @@ void receive_linux_console(void* p0, void* p1, void* p2, void* p3) {
     // to the thread procedure further below. Thus, p0 must contain any others.
 
     // Set temporary user interface commands internal.
-    set(p0, (void*) TEMPORARY_USER_INTERFACE_COMMANDS_INTERNAL, (void*) &p1, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    set(p0, (void*) TEMPORARY_USER_INTERFACE_COMMANDS_COUNT_INTERNAL, (void*) &p2, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    set(p0, (void*) TEMPORARY_USER_INTERFACE_COMMANDS_SIZE_INTERNAL, (void*) &p3, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    set(p0, (void*) LINUX_CONSOLE_THREAD_COMMANDS_INTERNAL, (void*) &p1, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    set(p0, (void*) LINUX_CONSOLE_THREAD_COMMANDS_COUNT_INTERNAL, (void*) &p2, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    set(p0, (void*) LINUX_CONSOLE_THREAD_COMMANDS_SIZE_INTERNAL, (void*) &p3, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
     // Create thread.
+    //
+    // CAUTION! Do NOT allocate any resources within the thread procedure!
+    // The reason is that this main process thread gets forked when executing
+    // external programs. A "fork" duplicates ALL resources of the parent process,
+    // including ALL resources of any threads running within the parent process.
+    // However, since the created child process does not have those threads running,
+    // their duplicated resources will never be deallocated, which eats up memory.
+    // See source code file: applicator/run/run_execute.c
+    //
+    // Any dynamically allocated resources needed within the thread have to be:
+    // - allocated at service startup
+    // - added to the internal memory
+    // - handed over to the thread procedure HERE
+    // - deallocated at service shutdown
     pthread_create(LINUX_CONSOLE_THREAD, NULL_POINTER, (void*) &receive_linux_console_thread, p0);
 }
 

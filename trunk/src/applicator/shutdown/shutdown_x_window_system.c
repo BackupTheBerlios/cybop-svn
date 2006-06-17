@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.13 $ $Date: 2006-05-14 19:35:56 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2006-06-17 10:32:38 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  *
@@ -78,15 +78,6 @@ void shutdown_x_window_system(void* p0, void* p1, void* p2, void* p3) {
 
         // Interrupt receive signal thread.
         interrupt_x_window_system();
-
-        // Remove temporary user interface root internal.
-        remove_element(p0, INTERNAL_MEMORY_ELEMENTS_COUNT, TEMPORARY_USER_INTERFACE_ROOT_INTERNAL, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        remove_element(p0, INTERNAL_MEMORY_ELEMENTS_COUNT, TEMPORARY_USER_INTERFACE_ROOT_COUNT_INTERNAL, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        remove_element(p0, INTERNAL_MEMORY_ELEMENTS_COUNT, TEMPORARY_USER_INTERFACE_ROOT_SIZE_INTERNAL, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        // Remove temporary user interface commands internal.
-        remove_element(p0, INTERNAL_MEMORY_ELEMENTS_COUNT, TEMPORARY_USER_INTERFACE_COMMANDS_INTERNAL, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        remove_element(p0, INTERNAL_MEMORY_ELEMENTS_COUNT, TEMPORARY_USER_INTERFACE_COMMANDS_COUNT_INTERNAL, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        remove_element(p0, INTERNAL_MEMORY_ELEMENTS_COUNT, TEMPORARY_USER_INTERFACE_COMMANDS_SIZE_INTERNAL, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
         // The display name.
         // An example identifying the second screen of the first
@@ -157,15 +148,9 @@ void shutdown_x_window_system(void* p0, void* p1, void* p2, void* p3) {
 */
 
         // Free x window system internals.
-    fprintf(stdout, "TEST null d %i\n", NULL_POINTER);
-    fprintf(stdout, "TEST 0 d %i\n", *d);
-    fprintf(stdout, "TEST 1 gc %i\n", *gc);
         XFreeGC(*d, *gc);
-    fprintf(stdout, "TEST 2 w %i\n", **w);
         XDestroyWindow(*d, **w);
-    fprintf(stdout, "TEST 3 d %i\n", *d);
         XCloseDisplay(*d);
-    fprintf(stdout, "TEST 4 d %i\n", *d);
 
         // Destroy x window system internals.
         // CAUTION! Do NOT use references &, because variables are **
@@ -174,7 +159,6 @@ void shutdown_x_window_system(void* p0, void* p1, void* p2, void* p3) {
         // Example: The values (v) are destroyed BEFORE the value mask (vm)
         // attributes, since v might still reference vm internally.
         deallocate((void*) ir, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    fprintf(stdout, "TEST 5 ir %i\n", ir);
 //??        free(*v);
         deallocate((void*) vm, (void*) PRIMITIVE_COUNT, (void*) UNSIGNED_LONG_VECTOR_ABSTRACTION, (void*) UNSIGNED_LONG_VECTOR_ABSTRACTION_COUNT);
         deallocate((void*) w, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);

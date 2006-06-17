@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2006-04-23 09:56:13 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2006-06-17 10:32:38 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -188,8 +188,8 @@ void run_copy(void* p0, void* p1, void* p2, void* p3) {
     // Allocate command.
     allocate_array((void*) &command, (void*) &commands, (void*) CHARACTER_ARRAY);
 
-    // Assemble command by first copying the actual command
-    // and then adding the null termination character.
+    // Assemble command by copying the actual command.
+    // A null termination character is added behind the last argument, see below!
     set_array_elements(command, (void*) &commandc, (void*) COPY_UNIX_SHELL_COMMAND, (void*) COPY_UNIX_SHELL_COMMAND_COUNT, (void*) CHARACTER_ARRAY);
     commandc = commandc + *COPY_UNIX_SHELL_COMMAND_COUNT;
 
@@ -214,8 +214,8 @@ void run_copy(void* p0, void* p1, void* p2, void* p3) {
                 reallocate_pointer_vector((void*) &command, (void*) &commandc, (void*) &commands);
             }
 
-            // Assemble recursive option by first copying the actual argument
-            // and then adding the null termination character.
+            // Assemble option by copying the actual argument.
+            // A null termination character is added behind the last argument, see below!
             set_array_elements(command, (void*) &commandc, (void*) SPACE_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
             commandc = commandc + *PRIMITIVE_COUNT;
             set_array_elements(command, (void*) &commandc, (void*) COPY_UNIX_SHELL_COMMAND_RECURSIVE, (void*) COPY_UNIX_SHELL_COMMAND_RECURSIVE_COUNT, (void*) CHARACTER_ARRAY);
@@ -241,8 +241,8 @@ void run_copy(void* p0, void* p1, void* p2, void* p3) {
                 reallocate_pointer_vector((void*) &command, (void*) &commandc, (void*) &commands);
             }
 
-            // Assemble option by first copying the actual argument
-            // and then adding the null termination character.
+            // Assemble option by copying the actual argument.
+            // A null termination character is added behind the last argument, see below!
             set_array_elements(command, (void*) &commandc, (void*) SPACE_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
             commandc = commandc + *PRIMITIVE_COUNT;
             set_array_elements(command, (void*) &commandc, (void*) COPY_UNIX_SHELL_COMMAND_SOURCE, (void*) COPY_UNIX_SHELL_COMMAND_SOURCE_COUNT, (void*) CHARACTER_ARRAY);
@@ -268,8 +268,8 @@ void run_copy(void* p0, void* p1, void* p2, void* p3) {
                 reallocate_pointer_vector((void*) &command, (void*) &commandc, (void*) &commands);
             }
 
-            // Assemble option by first copying the actual argument
-            // and then adding the null termination character.
+            // Assemble option by copying the actual argument.
+            // A null termination character is added behind the last argument, see below!
             set_array_elements(command, (void*) &commandc, (void*) SPACE_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
             commandc = commandc + *PRIMITIVE_COUNT;
             set_array_elements(command, (void*) &commandc, (void*) COPY_UNIX_SHELL_COMMAND_DESTINATION, (void*) COPY_UNIX_SHELL_COMMAND_DESTINATION_COUNT, (void*) CHARACTER_ARRAY);
@@ -291,11 +291,9 @@ void run_copy(void* p0, void* p1, void* p2, void* p3) {
         reallocate_pointer_vector((void*) &command, (void*) &commandc, (void*) &commands);
     }
 
-    // Assemble command option by adding the null termination character.
+    // Assemble command by adding the null termination character.
     set_array_elements(command, (void*) &commandc, (void*) NULL_CONTROL_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
     commandc = commandc + *PRIMITIVE_COUNT;
-
-    fprintf(stdout, "TEST command %s\n", (char*) command);
 
     //
     // Null pointer argument.

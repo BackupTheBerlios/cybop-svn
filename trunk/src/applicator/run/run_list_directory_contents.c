@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2006-04-23 09:56:13 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2006-06-17 10:32:38 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -29,13 +29,14 @@
 
 #include <unistd.h>
 #include "../../applicator/run/run_execute.c"
-#include "../../globals/constants/shell_command/unix_shell_command_constants.c"
 #include "../../globals/constants/abstraction_constants.c"
 #include "../../globals/constants/ascii_character_constants.c"
+#include "../../globals/constants/boolean_constants.c"
 #include "../../globals/constants/integer_constants.c"
 #include "../../globals/constants/log_constants.c"
 #include "../../globals/constants/model_constants.c"
 #include "../../globals/constants/name_constants.c"
+#include "../../globals/constants/shell_command/unix_shell_command_constants.c"
 #include "../../globals/constants/structure_constants.c"
 #include "../../globals/constants/system_constants.c"
 #include "../../globals/logger/logger.c"
@@ -167,8 +168,8 @@ void run_list_directory_contents(void* p0, void* p1, void* p2, void* p3) {
     // Allocate command.
     allocate_array((void*) &command, (void*) &commands, (void*) CHARACTER_ARRAY);
 
-    // Assemble command by first copying the actual command
-    // and then adding the null termination character.
+    // Assemble command by copying the actual command.
+    // A null termination character is added behind the last argument, see below!
     set_array_elements(command, (void*) &commandc, (void*) LIST_DIRECTORY_CONTENTS_UNIX_SHELL_COMMAND, (void*) LIST_DIRECTORY_CONTENTS_UNIX_SHELL_COMMAND_COUNT, (void*) CHARACTER_ARRAY);
     commandc = commandc + *LIST_DIRECTORY_CONTENTS_UNIX_SHELL_COMMAND_COUNT;
 
@@ -181,7 +182,7 @@ void run_list_directory_contents(void* p0, void* p1, void* p2, void* p3) {
 
     if (*allm != NULL_POINTER) {
 
-        if (**allm == 1) {
+        if (**allm == *TRUE_BOOLEAN) {
 
             // Resize command, if necessary.
             // One extra place for space character.
@@ -193,8 +194,8 @@ void run_list_directory_contents(void* p0, void* p1, void* p2, void* p3) {
                 reallocate_pointer_vector((void*) &command, (void*) &commandc, (void*) &commands);
             }
 
-            // Assemble all option by first copying the actual argument
-            // and then adding the null termination character.
+            // Assemble option by copying the actual argument.
+            // A null termination character is added behind the last argument, see below!
             set_array_elements(command, (void*) &commandc, (void*) SPACE_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
             commandc = commandc + *PRIMITIVE_COUNT;
             set_array_elements(command, (void*) &commandc, (void*) LIST_DIRECTORY_CONTENTS_UNIX_SHELL_COMMAND_ALL, (void*) LIST_DIRECTORY_CONTENTS_UNIX_SHELL_COMMAND_ALL_COUNT, (void*) CHARACTER_ARRAY);
@@ -208,7 +209,7 @@ void run_list_directory_contents(void* p0, void* p1, void* p2, void* p3) {
 
     if (*longlistingm != NULL_POINTER) {
 
-        if (**longlistingm == 1) {
+        if (**longlistingm == *TRUE_BOOLEAN) {
 
             // Resize command, if necessary.
             // One extra place for space character.
@@ -220,8 +221,8 @@ void run_list_directory_contents(void* p0, void* p1, void* p2, void* p3) {
                 reallocate_pointer_vector((void*) &command, (void*) &commandc, (void*) &commands);
             }
 
-            // Assemble long listing option by first copying the actual argument
-            // and then adding the null termination character.
+            // Assemble option by copying the actual argument.
+            // A null termination character is added behind the last argument, see below!
             set_array_elements(command, (void*) &commandc, (void*) SPACE_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
             commandc = commandc + *PRIMITIVE_COUNT;
             set_array_elements(command, (void*) &commandc, (void*) LIST_DIRECTORY_CONTENTS_UNIX_SHELL_COMMAND_LONG_LISTING, (void*) LIST_DIRECTORY_CONTENTS_UNIX_SHELL_COMMAND_LONG_LISTING_COUNT, (void*) CHARACTER_ARRAY);
@@ -243,7 +244,7 @@ void run_list_directory_contents(void* p0, void* p1, void* p2, void* p3) {
         reallocate_pointer_vector((void*) &command, (void*) &commandc, (void*) &commands);
     }
 
-    // Assemble command option by adding the null termination character.
+    // Assemble command by adding the null termination character.
     set_array_elements(command, (void*) &commandc, (void*) NULL_CONTROL_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
     commandc = commandc + *PRIMITIVE_COUNT;
 
