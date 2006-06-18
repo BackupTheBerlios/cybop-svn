@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.16 $ $Date: 2006-06-02 06:03:33 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2006-06-18 14:57:34 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -139,7 +139,7 @@ void receive_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
 
     // Get channel.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) CHANNEL_NAME, (void*) CHANNEL_NAME_COUNT,
+        (void*) RECEIVE_CHANNEL_NAME, (void*) RECEIVE_CHANNEL_NAME_COUNT,
         (void*) &ca, (void*) &cac, (void*) &cas,
         (void*) &cm, (void*) &cmc, (void*) &cms,
         (void*) &cd, (void*) &cdc, (void*) &cds,
@@ -147,7 +147,7 @@ void receive_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
 
     // Get root.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) ROOT_NAME, (void*) ROOT_NAME_COUNT,
+        (void*) RECEIVE_ROOT_NAME, (void*) RECEIVE_ROOT_NAME_COUNT,
         (void*) &ra, (void*) &rac, (void*) &ras,
         (void*) &rm, (void*) &rmc, (void*) &rms,
         (void*) &rd, (void*) &rdc, (void*) &rds,
@@ -155,7 +155,7 @@ void receive_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
 
     // Get commands.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) COMMANDS_NAME, (void*) COMMANDS_NAME_COUNT,
+        (void*) RECEIVE_COMMANDS_NAME, (void*) RECEIVE_COMMANDS_NAME_COUNT,
         (void*) &coa, (void*) &coac, (void*) &coas,
         (void*) &com, (void*) &comc, (void*) &coms,
         (void*) &cod, (void*) &codc, (void*) &cods,
@@ -163,7 +163,7 @@ void receive_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
 
     // Get blocking.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) BLOCKING_NAME, (void*) BLOCKING_NAME_COUNT,
+        (void*) RECEIVE_BLOCKING_NAME, (void*) RECEIVE_BLOCKING_NAME_COUNT,
         (void*) &ba, (void*) &bac, (void*) &bas,
         (void*) &bm, (void*) &bmc, (void*) &bms,
         (void*) &bd, (void*) &bdc, (void*) &bds,

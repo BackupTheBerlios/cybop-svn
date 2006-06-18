@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.18 $ $Date: 2006-06-11 20:19:53 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2006-06-18 14:57:34 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -90,7 +90,7 @@ void copy(void* p0, int* p1, void* p2, void* p3, void* p4) {
 
     // Get source.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) SOURCE_NAME, (void*) SOURCE_NAME_COUNT,
+        (void*) COPY_SOURCE_NAME, (void*) COPY_SOURCE_NAME_COUNT,
         (void*) &sa, (void*) &sac, (void*) &sas,
         (void*) &sm, (void*) &smc, (void*) &sms,
         (void*) &sd, (void*) &sdc, (void*) &sds,
@@ -98,7 +98,7 @@ void copy(void* p0, int* p1, void* p2, void* p3, void* p4) {
 
     // Get destination.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) DESTINATION_NAME, (void*) DESTINATION_NAME_COUNT,
+        (void*) COPY_DESTINATION_NAME, (void*) COPY_DESTINATION_NAME_COUNT,
         (void*) &da, (void*) &dac, (void*) &das,
         (void*) &dm, (void*) &dmc, (void*) &dms,
         (void*) &dd, (void*) &ddc, (void*) &dds,
@@ -106,7 +106,7 @@ void copy(void* p0, int* p1, void* p2, void* p3, void* p4) {
 
     // Get abstraction.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) ABSTRACTION_NAME, (void*) ABSTRACTION_NAME_COUNT,
+        (void*) COPY_ABSTRACTION_NAME, (void*) COPY_ABSTRACTION_NAME_COUNT,
         (void*) &aa, (void*) &aac, (void*) &aas,
         (void*) &am, (void*) &amc, (void*) &ams,
         (void*) &ad, (void*) &adc, (void*) &ads,

@@ -24,7 +24,7 @@
  * - receive an inline stream into a byte array
  * - send an inline stream from a byte array
  *
- * @version $Revision: 1.7 $ $Date: 2006-04-21 23:49:11 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2006-06-18 14:57:34 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -78,22 +78,22 @@ void read_inline(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 } else {
 
-//??                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not read inline. The array count is null.");
+                    log_message_debug("Could not read inline. The array count is null.");
                 }
 
             } else {
 
-//??                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not read inline. The array count is null.");
+                log_message_debug("Could not read inline. The array count is null.");
             }
 
         } else {
 
-//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not read inline. The array size is null.");
+            log_message_debug("Could not read inline. The array size is null.");
         }
 
     } else {
 
-//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not read inline. The inline byte stream count is null.");
+        log_message_debug("Could not read inline. The inline byte stream count is null.");
     }
 }
 

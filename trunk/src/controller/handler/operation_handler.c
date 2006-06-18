@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.21 $ $Date: 2006-06-11 20:19:53 $ $Author: christian $
+ * @version $Revision: 1.22 $ $Date: 2006-06-18 14:57:34 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -178,7 +178,7 @@ void handle_operation(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
     if (r == 0) {
 
-        compare_arrays(p10, p11, (void*) CREATE_PART_MODEL, (void*) CREATE_PART_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p10, p11, (void*) CREATE_MODEL, (void*) CREATE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
@@ -188,7 +188,7 @@ void handle_operation(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
     if (r == 0) {
 
-        compare_arrays(p10, p11, (void*) DESTROY_PART_MODEL, (void*) DESTROY_PART_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p10, p11, (void*) DESTROY_MODEL, (void*) DESTROY_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 

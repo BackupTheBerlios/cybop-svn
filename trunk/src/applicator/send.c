@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.31 $ $Date: 2006-06-02 06:03:33 $ $Author: christian $
+ * @version $Revision: 1.32 $ $Date: 2006-06-18 14:57:34 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -139,7 +139,7 @@ void send_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
 
     // Get channel.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) CHANNEL_NAME, (void*) CHANNEL_NAME_COUNT,
+        (void*) SEND_CHANNEL_NAME, (void*) SEND_CHANNEL_NAME_COUNT,
         (void*) &ca, (void*) &cac, (void*) &cas,
         (void*) &cm, (void*) &cmc, (void*) &cms,
         (void*) &cd, (void*) &cdc, (void*) &cds,
@@ -147,7 +147,7 @@ void send_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
 
     // Get sender.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) SENDER_NAME, (void*) SENDER_NAME_COUNT,
+        (void*) SEND_SENDER_NAME, (void*) SEND_SENDER_NAME_COUNT,
         (void*) &sa, (void*) &sac, (void*) &sas,
         (void*) &sm, (void*) &smc, (void*) &sms,
         (void*) &sd, (void*) &sdc, (void*) &sds,
@@ -155,7 +155,7 @@ void send_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
 
     // Get receiver.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) RECEIVER_NAME, (void*) RECEIVER_NAME_COUNT,
+        (void*) SEND_RECEIVER_NAME, (void*) SEND_RECEIVER_NAME_COUNT,
         (void*) &ra, (void*) &rac, (void*) &ras,
         (void*) &rm, (void*) &rmc, (void*) &rms,
         (void*) &rd, (void*) &rdc, (void*) &rds,
@@ -163,7 +163,7 @@ void send_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
 
     // Get message.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) MESSAGE_NAME, (void*) MESSAGE_NAME_COUNT,
+        (void*) SEND_MESSAGE_NAME, (void*) SEND_MESSAGE_NAME_COUNT,
         (void*) &ma, (void*) &mac, (void*) &mas,
         (void*) &mm, (void*) &mmc, (void*) &mms,
         (void*) &md, (void*) &mdc, (void*) &mds,
@@ -322,7 +322,7 @@ void send_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
  */
 void refresh_url(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
-    log_message_debug("Refresh URL.");
+    log_message_debug("Refresh url.");
 
     // The message abstraction.
     void** urla = &NULL_POINTER;
@@ -339,7 +339,7 @@ void refresh_url(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, voi
 
     // Get language.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) URL_NAME, (void*) URL_NAME_COUNT,
+        (void*) SEND_URL_NAME, (void*) SEND_URL_NAME_COUNT,
         (void*) &urla, (void*) &urlac, (void*) &urlas,
         (void*) &urlm, (void*) &urlmc, (void*) &urlms,
         (void*) &urld, (void*) &urldc, (void*) &urlds,

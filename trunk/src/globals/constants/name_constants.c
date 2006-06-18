@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.17 $ $Date: 2006-04-20 22:36:10 $ $Author: christian $
+ * @version $Revision: 1.18 $ $Date: 2006-06-18 14:57:34 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -245,20 +245,20 @@ static int* RESULT_OPERAND_NAME_COUNT = NUMBER_6_INTEGER_ARRAY;
 // Copy and move names.
 //
 
-/** The source name. */
-static char SOURCE_NAME_ARRAY[] = {'s', 'o', 'u', 'r', 'c', 'e'};
-static char* SOURCE_NAME = SOURCE_NAME_ARRAY;
-static int* SOURCE_NAME_COUNT = NUMBER_6_INTEGER_ARRAY;
+/** The copy source name. */
+static char COPY_SOURCE_NAME_ARRAY[] = {'s', 'o', 'u', 'r', 'c', 'e'};
+static char* COPY_SOURCE_NAME = COPY_SOURCE_NAME_ARRAY;
+static int* COPY_SOURCE_NAME_COUNT = NUMBER_6_INTEGER_ARRAY;
 
-/** The destination name. */
-static char DESTINATION_NAME_ARRAY[] = {'d', 'e', 's', 't', 'i', 'n', 'a', 't', 'i', 'o', 'n'};
-static char* DESTINATION_NAME = DESTINATION_NAME_ARRAY;
-static int* DESTINATION_NAME_COUNT = NUMBER_11_INTEGER_ARRAY;
+/** The copy destination name. */
+static char COPY_DESTINATION_NAME_ARRAY[] = {'d', 'e', 's', 't', 'i', 'n', 'a', 't', 'i', 'o', 'n'};
+static char* COPY_DESTINATION_NAME = COPY_DESTINATION_NAME_ARRAY;
+static int* COPY_DESTINATION_NAME_COUNT = NUMBER_11_INTEGER_ARRAY;
 
-/** The destination property name. */
-static char DESTINATION_PROPERTY_NAME_ARRAY[] = {'d', 'e', 's', 't', 'i', 'n', 'a', 't', 'i', 'o', 'n', '_', 'p', 'r', 'o', 'p', 'e', 'r', 't', 'y'};
-static char* DESTINATION_PROPERTY_NAME = DESTINATION_PROPERTY_NAME_ARRAY;
-static int* DESTINATION_PROPERTY_NAME_COUNT = NUMBER_20_INTEGER_ARRAY;
+/** The copy abstraction name. */
+static char COPY_ABSTRACTION_NAME_ARRAY[] = {'a', 'b', 's', 't', 'r', 'a', 'c', 't', 'i', 'o', 'n'};
+static char* COPY_ABSTRACTION_NAME = COPY_ABSTRACTION_NAME_ARRAY;
+static int* COPY_ABSTRACTION_NAME_COUNT = NUMBER_11_INTEGER_ARRAY;
 
 //
 // Branch names.
@@ -332,33 +332,47 @@ static char* COUNTER_NAME = COUNTER_NAME_ARRAY;
 static int* COUNTER_NAME_COUNT = NUMBER_7_INTEGER_ARRAY;
 
 //
-// Create and destroy names.
+// Create names.
 //
 
-/** The name name. */
-static char NAME_NAME_ARRAY[] = {'n', 'a', 'm', 'e'};
-static char* NAME_NAME = NAME_NAME_ARRAY;
-static int* NAME_NAME_COUNT = NUMBER_4_INTEGER_ARRAY;
+/** The create element name. */
+static char CREATE_ELEMENT_NAME_ARRAY[] = {'e', 'l', 'e', 'm', 'e', 'n', 't'};
+static char* CREATE_ELEMENT_NAME = CREATE_ELEMENT_NAME_ARRAY;
+static int* CREATE_ELEMENT_NAME_COUNT = NUMBER_7_INTEGER_ARRAY;
 
-/** The channel name. */
-static char CHANNEL_NAME_ARRAY[] = {'c', 'h', 'a', 'n', 'n', 'e', 'l'};
-static char* CHANNEL_NAME = CHANNEL_NAME_ARRAY;
-static int* CHANNEL_NAME_COUNT = NUMBER_7_INTEGER_ARRAY;
+/** The create whole name. */
+static char CREATE_WHOLE_NAME_ARRAY[] = {'w', 'h', 'o', 'l', 'e'};
+static char* CREATE_WHOLE_NAME = CREATE_WHOLE_NAME_ARRAY;
+static int* CREATE_WHOLE_NAME_COUNT = NUMBER_5_INTEGER_ARRAY;
 
-/** The abstraction name. */
-static char ABSTRACTION_NAME_ARRAY[] = {'a', 'b', 's', 't', 'r', 'a', 'c', 't', 'i', 'o', 'n'};
-static char* ABSTRACTION_NAME = ABSTRACTION_NAME_ARRAY;
-static int* ABSTRACTION_NAME_COUNT = NUMBER_11_INTEGER_ARRAY;
+/** The create name name. */
+static char CREATE_NAME_NAME_ARRAY[] = {'n', 'a', 'm', 'e'};
+static char* CREATE_NAME_NAME = CREATE_NAME_NAME_ARRAY;
+static int* CREATE_NAME_NAME_COUNT = NUMBER_4_INTEGER_ARRAY;
 
-/** The model name. */
-static char MODEL_NAME_ARRAY[] = {'m', 'o', 'd', 'e', 'l'};
-static char* MODEL_NAME = MODEL_NAME_ARRAY;
-static int* MODEL_NAME_COUNT = NUMBER_5_INTEGER_ARRAY;
+/** The create channel name. */
+static char CREATE_CHANNEL_NAME_ARRAY[] = {'c', 'h', 'a', 'n', 'n', 'e', 'l'};
+static char* CREATE_CHANNEL_NAME = CREATE_CHANNEL_NAME_ARRAY;
+static int* CREATE_CHANNEL_NAME_COUNT = NUMBER_7_INTEGER_ARRAY;
 
-/** The whole name. */
-static char WHOLE_NAME_ARRAY[] = {'w', 'h', 'o', 'l', 'e'};
-static char* WHOLE_NAME = WHOLE_NAME_ARRAY;
-static int* WHOLE_NAME_COUNT = NUMBER_5_INTEGER_ARRAY;
+/** The create abstraction name. */
+static char CREATE_ABSTRACTION_NAME_ARRAY[] = {'a', 'b', 's', 't', 'r', 'a', 'c', 't', 'i', 'o', 'n'};
+static char* CREATE_ABSTRACTION_NAME = CREATE_ABSTRACTION_NAME_ARRAY;
+static int* CREATE_ABSTRACTION_NAME_COUNT = NUMBER_11_INTEGER_ARRAY;
+
+/** The create model name. */
+static char CREATE_MODEL_NAME_ARRAY[] = {'m', 'o', 'd', 'e', 'l'};
+static char* CREATE_MODEL_NAME = CREATE_MODEL_NAME_ARRAY;
+static int* CREATE_MODEL_NAME_COUNT = NUMBER_5_INTEGER_ARRAY;
+
+//
+// Destroy names.
+//
+
+/** The destroy model. */
+static char DESTROY_MODEL_NAME_ARRAY[] = {'m', 'o', 'd', 'e', 'l'};
+static char* DESTROY_MODEL_NAME = DESTROY_MODEL_NAME_ARRAY;
+static int* DESTROY_MODEL_NAME_COUNT = NUMBER_5_INTEGER_ARRAY;
 
 //
 // Startup and shutdown names.
@@ -380,46 +394,57 @@ static char* PORT_NAME = PORT_NAME_ARRAY;
 static int* PORT_NAME_COUNT = NUMBER_4_INTEGER_ARRAY;
 
 //
-// Send and receive names.
+// Send names.
 //
 
-/** The channel name. */
-// Already defined for create and destroy.
+/** The send channel name. */
+static char SEND_CHANNEL_NAME_ARRAY[] = {'c', 'h', 'a', 'n', 'n', 'e', 'l'};
+static char* SEND_CHANNEL_NAME = SEND_CHANNEL_NAME_ARRAY;
+static int* SEND_CHANNEL_NAME_COUNT = NUMBER_7_INTEGER_ARRAY;
 
-/** The sender name. */
-static char SENDER_NAME_ARRAY[] = {'s', 'e', 'n', 'd', 'e', 'r'};
-static char* SENDER_NAME = SENDER_NAME_ARRAY;
-static int* SENDER_NAME_COUNT = NUMBER_6_INTEGER_ARRAY;
+/** The send sender name. */
+static char SEND_SENDER_NAME_ARRAY[] = {'s', 'e', 'n', 'd', 'e', 'r'};
+static char* SEND_SENDER_NAME = SEND_SENDER_NAME_ARRAY;
+static int* SEND_SENDER_NAME_COUNT = NUMBER_6_INTEGER_ARRAY;
 
-/** The receiver name. */
-static char RECEIVER_NAME_ARRAY[] = {'r', 'e', 'c', 'e', 'i', 'v', 'e', 'r'};
-static char* RECEIVER_NAME = RECEIVER_NAME_ARRAY;
-static int* RECEIVER_NAME_COUNT = NUMBER_8_INTEGER_ARRAY;
+/** The send receiver name. */
+static char SEND_RECEIVER_NAME_ARRAY[] = {'r', 'e', 'c', 'e', 'i', 'v', 'e', 'r'};
+static char* SEND_RECEIVER_NAME = SEND_RECEIVER_NAME_ARRAY;
+static int* SEND_RECEIVER_NAME_COUNT = NUMBER_8_INTEGER_ARRAY;
 
-/** The message name. */
-static char MESSAGE_NAME_ARRAY[] = {'m', 'e', 's', 's', 'a', 'g', 'e'};
-static char* MESSAGE_NAME = MESSAGE_NAME_ARRAY;
-static int* MESSAGE_NAME_COUNT = NUMBER_7_INTEGER_ARRAY;
+/** The send message name. */
+static char SEND_MESSAGE_NAME_ARRAY[] = {'m', 'e', 's', 's', 'a', 'g', 'e'};
+static char* SEND_MESSAGE_NAME = SEND_MESSAGE_NAME_ARRAY;
+static int* SEND_MESSAGE_NAME_COUNT = NUMBER_7_INTEGER_ARRAY;
 
-/** The url name. */
-static char URL_NAME_ARRAY[] = {'u', 'r', 'l'};
-static char* URL_NAME = URL_NAME_ARRAY;
-static int* URL_NAME_COUNT = NUMBER_3_INTEGER_ARRAY;
+/** The send url name. */
+static char SEND_URL_NAME_ARRAY[] = {'u', 'r', 'l'};
+static char* SEND_URL_NAME = SEND_URL_NAME_ARRAY;
+static int* SEND_URL_NAME_COUNT = NUMBER_3_INTEGER_ARRAY;
 
-/** The root name. */
-static char ROOT_NAME_ARRAY[] = {'r', 'o', 'o', 't'};
-static char* ROOT_NAME = ROOT_NAME_ARRAY;
-static int* ROOT_NAME_COUNT = NUMBER_4_INTEGER_ARRAY;
+//
+// Receive names.
+//
 
-/** The commands name. */
-static char COMMANDS_NAME_ARRAY[] = {'c', 'o', 'm', 'm', 'a', 'n', 'd', 's'};
-static char* COMMANDS_NAME = COMMANDS_NAME_ARRAY;
-static int* COMMANDS_NAME_COUNT = NUMBER_8_INTEGER_ARRAY;
+/** The receive channel name. */
+static char RECEIVE_CHANNEL_NAME_ARRAY[] = {'c', 'h', 'a', 'n', 'n', 'e', 'l'};
+static char* RECEIVE_CHANNEL_NAME = RECEIVE_CHANNEL_NAME_ARRAY;
+static int* RECEIVE_CHANNEL_NAME_COUNT = NUMBER_7_INTEGER_ARRAY;
 
-/** The blocking name. */
-static char BLOCKING_NAME_ARRAY[] = {'b', 'l', 'o', 'c', 'k', 'i', 'n', 'g'};
-static char* BLOCKING_NAME = BLOCKING_NAME_ARRAY;
-static int* BLOCKING_NAME_COUNT = NUMBER_8_INTEGER_ARRAY;
+/** The receive root name. */
+static char RECEIVE_ROOT_NAME_ARRAY[] = {'r', 'o', 'o', 't'};
+static char* RECEIVE_ROOT_NAME = RECEIVE_ROOT_NAME_ARRAY;
+static int* RECEIVE_ROOT_NAME_COUNT = NUMBER_4_INTEGER_ARRAY;
+
+/** The receive commands name. */
+static char RECEIVE_COMMANDS_NAME_ARRAY[] = {'c', 'o', 'm', 'm', 'a', 'n', 'd', 's'};
+static char* RECEIVE_COMMANDS_NAME = RECEIVE_COMMANDS_NAME_ARRAY;
+static int* RECEIVE_COMMANDS_NAME_COUNT = NUMBER_8_INTEGER_ARRAY;
+
+/** The receive blocking name. */
+static char RECEIVE_BLOCKING_NAME_ARRAY[] = {'b', 'l', 'o', 'c', 'k', 'i', 'n', 'g'};
+static char* RECEIVE_BLOCKING_NAME = RECEIVE_BLOCKING_NAME_ARRAY;
+static int* RECEIVE_BLOCKING_NAME_COUNT = NUMBER_8_INTEGER_ARRAY;
 
 //
 // Run names.

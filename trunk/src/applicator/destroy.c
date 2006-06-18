@@ -22,7 +22,7 @@
  *
  * This file destroys a transient model to a persistent model.
  *
- * @version $Revision: 1.16 $ $Date: 2006-06-04 00:54:44 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2006-06-18 14:57:34 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -200,89 +200,55 @@ void destroy(void** model, void* model_count, void* model_size,
  */
 void deallocate_part(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    log_message_debug("Destroy part.");
+    log_message_debug("Destroy knowledge model.");
 
-    // The name name abstraction.
+    // The knowledge model name abstraction.
     void** na = &NULL_POINTER;
     void** nac = &NULL_POINTER;
     void** nas = &NULL_POINTER;
-    // The name name model.
+    // The knowledge model name model.
     void** nm = &NULL_POINTER;
     void** nmc = &NULL_POINTER;
     void** nms = &NULL_POINTER;
-    // The name name details.
+    // The knowledge model name details.
     void** nd = &NULL_POINTER;
     void** ndc = &NULL_POINTER;
     void** nds = &NULL_POINTER;
 
-    // Get name name.
+    // Get knowledge model name.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) NAME_NAME, (void*) NAME_NAME_COUNT,
+        (void*) DESTROY_MODEL_NAME, (void*) DESTROY_MODEL_NAME_COUNT,
         (void*) &na, (void*) &nac, (void*) &nas,
         (void*) &nm, (void*) &nmc, (void*) &nms,
         (void*) &nd, (void*) &ndc, (void*) &nds,
         p2, p3);
 
-    // Check name name.
-    if ((*na != NULL_POINTER)
-        && (*nac != NULL_POINTER)
-        && (*nas != NULL_POINTER)
-        && (*nm != NULL_POINTER)
-        && (*nmc != NULL_POINTER)
-        && (*nms != NULL_POINTER)
-        && (*nd != NULL_POINTER)
-        && (*ndc != NULL_POINTER)
-        && (*nds != NULL_POINTER)) {
+    // The knowledge model abstraction.
+    void** ea = &NULL_POINTER;
+    void** eac = &NULL_POINTER;
+    void** eas = &NULL_POINTER;
+    // The knowledge model model.
+    void** em = &NULL_POINTER;
+    void** emc = &NULL_POINTER;
+    void** ems = &NULL_POINTER;
+    // The knowledge model details.
+    void** ed = &NULL_POINTER;
+    void** edc = &NULL_POINTER;
+    void** eds = &NULL_POINTER;
 
-        // The comparison result.
-        int r = 0;
+    // Get knowledge model.
+    get_universal_compound_element_by_name(p2, p3,
+        (void*) *nm, (void*) *nmc,
+        (void*) &ea, (void*) &eac, (void*) &eas,
+        (void*) &em, (void*) &emc, (void*) &ems,
+        (void*) &ed, (void*) &edc, (void*) &eds,
+        p2, p3);
 
-        // Check if the name abstraction is a string.
-        compare_arrays(*na, *nac, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT, &r, CHARACTER_ARRAY);
+    // Destroy knowledge model.
+    destroy(em, *emc, *ems , *ea, *eac);
 
-        if (r != 0) {
-
-            // The element abstraction.
-            void** ea = &NULL_POINTER;
-            void** eac = &NULL_POINTER;
-            void** eas = &NULL_POINTER;
-            // The element model.
-            void** em = &NULL_POINTER;
-            void** emc = &NULL_POINTER;
-            void** ems = &NULL_POINTER;
-            // The element details.
-            void** ed = &NULL_POINTER;
-            void** edc = &NULL_POINTER;
-            void** eds = &NULL_POINTER;
-
-            get_universal_compound_element_by_name(p2, p3,
-                (void*) *nm, (void*) *nmc,
-                (void*) &ea, (void*) &eac, (void*) &eas,
-                (void*) &em, (void*) &emc, (void*) &ems,
-                (void*) &ed, (void*) &edc, (void*) &eds,
-                p2, p3);
-
-            if ((*em != NULL_POINTER)
-                && (*emc != NULL_POINTER)
-                && (*ems != NULL_POINTER)
-                && (*ea != NULL_POINTER)
-                && (*eac != NULL_POINTER)
-                && (*eas != NULL_POINTER)) {
-
-                // Destroy model.
-                destroy(em, *emc, *ems , *ea, *eac);
-            }
-
-            //remove the part
-            //this must after the destroy the model, because
-            //some wrong pointer
-            remove_compound_element_by_name(p2, p3, p4, NULL_POINTER, NULL_POINTER, NULL_POINTER, (void*) *nm, (void*) *nmc);
-        }
-
-    } else {
-
-        log_message_debug("Could not destry the part. At least one of the given parameters is null.");
-    }
+    // Remove knowledge model from given whole model.
+    remove_compound_element_by_name(p2, p3, p4, NULL_POINTER, NULL_POINTER, NULL_POINTER, (void*) *nm, (void*) *nmc);
 }
 
 /* DESTROY_SOURCE */

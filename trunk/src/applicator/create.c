@@ -22,7 +22,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.21 $ $Date: 2006-06-04 00:54:44 $ $Author: christian $
+ * @version $Revision: 1.22 $ $Date: 2006-06-18 14:57:34 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -31,6 +31,7 @@
 
 #include <libxml/tree.h>
 #include "../globals/constants/abstraction_constants.c"
+#include "../globals/constants/channel_constants.c"
 #include "../globals/constants/log_constants.c"
 #include "../globals/constants/name_constants.c"
 #include "../globals/logger/logger.c"
@@ -346,9 +347,12 @@ void create(void* p0, void* p1, void* p2, void* p3, void* p4,
 }
 
 /**
- * Allocates a part and adds it to the knowledge model.
+ * Creates a knowledge model and adds it to the given whole element,
+ * or to the knowledge memory root directly, if no whole element is given.
  *
  * Expected parameters:
+ * - element (may be "part" or "meta")
+ * - whole
  * - name
  * - channel
  * - abstraction
@@ -361,6 +365,32 @@ void create(void* p0, void* p1, void* p2, void* p3, void* p4,
  * @param p4 the knowledge memory size
  */
 void create_part(void* p0, void* p1, void* p2, void* p3, void* p4) {
+
+    // The element abstraction.
+    void** ea = &NULL_POINTER;
+    void** eac = &NULL_POINTER;
+    void** eas = &NULL_POINTER;
+    // The element model.
+    void** em = &NULL_POINTER;
+    void** emc = &NULL_POINTER;
+    void** ems = &NULL_POINTER;
+    // The element details.
+    void** ed = &NULL_POINTER;
+    void** edc = &NULL_POINTER;
+    void** eds = &NULL_POINTER;
+
+    // The whole abstraction.
+    void** wa = &NULL_POINTER;
+    void** wac = &NULL_POINTER;
+    void** was = &NULL_POINTER;
+    // The whole model.
+    void** wm = &NULL_POINTER;
+    void** wmc = &NULL_POINTER;
+    void** wms = &NULL_POINTER;
+    // The whole details.
+    void** wd = &NULL_POINTER;
+    void** wdc = &NULL_POINTER;
+    void** wds = &NULL_POINTER;
 
     // The name name abstraction.
     void** na = &NULL_POINTER;
@@ -414,22 +444,25 @@ void create_part(void* p0, void* p1, void* p2, void* p3, void* p4) {
     void** mdc = &NULL_POINTER;
     void** mds = &NULL_POINTER;
 
-    // The whole abstraction.
-    void** wa = &NULL_POINTER;
-    void** wac = &NULL_POINTER;
-    void** was = &NULL_POINTER;
-    // The whole model.
-    void** wm = &NULL_POINTER;
-    void** wmc = &NULL_POINTER;
-    void** wms = &NULL_POINTER;
-    // The whole details.
-    void** wd = &NULL_POINTER;
-    void** wdc = &NULL_POINTER;
-    void** wds = &NULL_POINTER;
+    // Get element.
+    get_universal_compound_element_by_name(p0, p1,
+        (void*) CREATE_ELEMENT_NAME, (void*) CREATE_ELEMENT_NAME_COUNT,
+        (void*) &ea, (void*) &eac, (void*) &eas,
+        (void*) &em, (void*) &emc, (void*) &ems,
+        (void*) &ed, (void*) &edc, (void*) &eds,
+        p2, p3);
+
+    // Get whole.
+    get_universal_compound_element_by_name(p0, p1,
+        (void*) CREATE_WHOLE_NAME, (void*) CREATE_WHOLE_NAME_COUNT,
+        (void*) &wa, (void*) &wac, (void*) &was,
+        (void*) &wm, (void*) &wmc, (void*) &wms,
+        (void*) &wd, (void*) &wdc, (void*) &wds,
+        p2, p3);
 
     // Get name name.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) NAME_NAME, (void*) NAME_NAME_COUNT,
+        (void*) CREATE_NAME_NAME, (void*) CREATE_NAME_NAME_COUNT,
         (void*) &na, (void*) &nac, (void*) &nas,
         (void*) &nm, (void*) &nmc, (void*) &nms,
         (void*) &nd, (void*) &ndc, (void*) &nds,
@@ -437,7 +470,7 @@ void create_part(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     // Get channel name.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) CHANNEL_NAME, (void*) CHANNEL_NAME_COUNT,
+        (void*) CREATE_CHANNEL_NAME, (void*) CREATE_CHANNEL_NAME_COUNT,
         (void*) &ca, (void*) &cac, (void*) &cas,
         (void*) &cm, (void*) &cmc, (void*) &cms,
         (void*) &cd, (void*) &cdc, (void*) &cds,
@@ -445,7 +478,7 @@ void create_part(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     // Get abstraction name.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) ABSTRACTION_NAME, (void*) ABSTRACTION_NAME_COUNT,
+        (void*) CREATE_ABSTRACTION_NAME, (void*) CREATE_ABSTRACTION_NAME_COUNT,
         (void*) &aa, (void*) &aac, (void*) &aas,
         (void*) &am, (void*) &amc, (void*) &ams,
         (void*) &ad, (void*) &adc, (void*) &ads,
@@ -453,85 +486,118 @@ void create_part(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     // Get model name.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) MODEL_NAME, (void*) MODEL_NAME_COUNT,
+        (void*) CREATE_MODEL_NAME, (void*) CREATE_MODEL_NAME_COUNT,
         (void*) &ma, (void*) &mac, (void*) &mas,
         (void*) &mm, (void*) &mmc, (void*) &mms,
         (void*) &md, (void*) &mdc, (void*) &mds,
         p2, p3);
 
-    // Get whole.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) WHOLE_NAME, (void*) WHOLE_NAME_COUNT,
-        (void*) &wa, (void*) &wac, (void*) &was,
-        (void*) &wm, (void*) &wmc, (void*) &wms,
-        (void*) &wd, (void*) &wdc, (void*) &wds,
-        p2, p3);
+    log_message_debug("Create knowledge model.");
 
-    log_message_debug("Create part.");
+    // The knowledge model name.
+    void* kmn = NULL_POINTER;
+    int* kmnc = NULL_POINTER;
+    int* kmns = NULL_POINTER;
+    // The knowledge model abstraction.
+    void* kma = NULL_POINTER;
+    int* kmac = NULL_POINTER;
+    int* kmas = NULL_POINTER;
+    // The knowledge model model.
+    void* kmm = NULL_POINTER;
+    int* kmmc = NULL_POINTER;
+    int* kmms = NULL_POINTER;
+    // The knowledge model details.
+    void* kmd = NULL_POINTER;
+    int* kmdc = NULL_POINTER;
+    int* kmds = NULL_POINTER;
 
-    // The part name.
-    void* pn = NULL_POINTER;
-    int* pnc = NULL_POINTER;
-    int* pns = NULL_POINTER;
-    // The part abstraction.
-    void* pa = NULL_POINTER;
-    int* pac = NULL_POINTER;
-    int* pas = NULL_POINTER;
-    // The part model.
-    void* pm = NULL_POINTER;
-    int* pmc = NULL_POINTER;
-    int* pms = NULL_POINTER;
-    // The part details.
-    void* pd = NULL_POINTER;
-    int* pdc = NULL_POINTER;
-    int* pds = NULL_POINTER;
+    // Create knowledge model name.
+    allocate((void*) &kmnc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    *kmnc = 0;
+    allocate((void*) &kmns, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    *kmns = 0;
+    create((void*) &kmn, (void*) kmnc, (void*) kmns, *nm, *nmc, *na, *nac, (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
 
-    // Create part name.
-    allocate((void*) &pnc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    *pnc = 0;
-    allocate((void*) &pns, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    *pns = 0;
-    create((void*) &pn, (void*) pnc, (void*) pns, *nm, *nmc, *na, *nac, (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
+    // A knowledge model channel is not created,
+    // since that is only needed temporarily for model loading.
 
-    // A part channel is not created, since that is only needed temporarily
-    // for model loading.
+    // Create knowledge model abstraction.
+    allocate((void*) &kmac, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    *kmac = 0;
+    allocate((void*) &kmas, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    *kmas = 0;
+    create((void*) &kma, (void*) kmac, (void*) kmas, *am, *amc, *aa, *aac, (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
 
-    // Create part abstraction.
-    allocate((void*) &pac, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    *pac = 0;
-    allocate((void*) &pas, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    *pas = 0;
-    create((void*) &pa, (void*) pac, (void*) pas, *am, *amc, *aa, *aac, (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
+    // Create knowledge model model.
+    allocate((void*) &kmmc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    *kmmc = 0;
+    allocate((void*) &kmms, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    *kmms = 0;
+    create((void*) &kmm, (void*) kmmc, (void*) kmms, *mm, *mmc, *am, *amc, *cm, *cmc);
 
-    // Create part model.
-    allocate((void*) &pmc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    *pmc = 0;
-    allocate((void*) &pms, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    *pms = 0;
-    create((void*) &pm, (void*) pmc, (void*) pms, *mm, *mmc, *am, *amc, *cm, *cmc);
+    // Create knowledge model details.
+    allocate((void*) &kmdc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    *kmdc = 0;
+    allocate((void*) &kmds, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    *kmds = 0;
+    create((void*) &kmd, (void*) kmdc, (void*) kmds, EMPTY_MODEL, EMPTY_MODEL_COUNT, COMPOUND_ABSTRACTION, COMPOUND_ABSTRACTION_COUNT, INLINE_CHANNEL, INLINE_CHANNEL_COUNT);
 
-    // Add part to whole.
-    if (*wm == NULL_POINTER) {
+    // The comparison result.
+    int r = *NUMBER_0_INTEGER;
 
-        log_message_debug("Add part to knowledge model root.");
+    if (r == *NUMBER_0_INTEGER) {
 
-        // Use the knowledge model root if the determined whole model is null.
-        set_compound_element_by_name(p2, p3, p4, NULL_POINTER, NULL_POINTER, NULL_POINTER,
-            pn, (void*) pnc, (void*) pns,
-            pa, (void*) pac, (void*) pas,
-            pm, (void*) pmc, (void*) pms,
-            pd, (void*) pdc, (void*) pds);
+        compare_arrays(*em, *emc, (void*) CREATE_PART_ELEMENT_MODEL, (void*) CREATE_PART_ELEMENT_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-    } else {
+        if (r != *NUMBER_0_INTEGER) {
 
-        log_message_debug("Add part to given whole model.");
+            if (*wm != NULL_POINTER) {
 
-        // Use the determined whole model normally, if it exists.
-        set_compound_element_by_name(*wm, *wmc, *wms, NULL_POINTER, NULL_POINTER, NULL_POINTER,
-            pn, (void*) pnc, (void*) pns,
-            pa, (void*) pac, (void*) pas,
-            pm, (void*) pmc, (void*) pms,
-            pd, (void*) pdc, (void*) pds);
+                log_message_debug("Add part knowledge model to whole model.");
+
+                // Use the determined whole model, if it exists.
+                set_compound_element_by_name(*wm, *wmc, *wms, NULL_POINTER, NULL_POINTER, NULL_POINTER,
+                    kmn, (void*) kmnc, (void*) kmns,
+                    kma, (void*) kmac, (void*) kmas,
+                    kmm, (void*) kmmc, (void*) kmms,
+                    kmd, (void*) kmdc, (void*) kmds);
+
+            } else {
+
+                log_message_debug("Add part knowledge model to knowledge memory root.");
+
+                // Use the knowledge memory root if the determined whole model is null.
+                set_compound_element_by_name(p2, p3, p4, NULL_POINTER, NULL_POINTER, NULL_POINTER,
+                    kmn, (void*) kmnc, (void*) kmns,
+                    kma, (void*) kmac, (void*) kmas,
+                    kmm, (void*) kmmc, (void*) kmms,
+                    kmd, (void*) kmdc, (void*) kmds);
+            }
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER) {
+
+        compare_arrays(*em, *emc, (void*) CREATE_META_ELEMENT_MODEL, (void*) CREATE_META_ELEMENT_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != *NUMBER_0_INTEGER) {
+
+            if (*wd != NULL_POINTER) {
+
+                log_message_debug("Add meta knowledge model to whole details.");
+
+                // Use the determined whole model, if it exists.
+                set_compound_element_by_name(*wd, *wdc, *wds, NULL_POINTER, NULL_POINTER, NULL_POINTER,
+                    kmn, (void*) kmnc, (void*) kmns,
+                    kma, (void*) kmac, (void*) kmas,
+                    kmm, (void*) kmmc, (void*) kmms,
+                    kmd, (void*) kmdc, (void*) kmds);
+
+            } else {
+
+                log_message_debug("Could not add meta knowledge model to whole details. The whole details is null.");
+            }
+        }
     }
 }
 

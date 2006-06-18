@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.28 $ $Date: 2006-06-03 16:13:32 $ $Author: christian $
+ * @version $Revision: 1.29 $ $Date: 2006-06-18 14:57:34 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -708,8 +708,7 @@ void set_signal_for_parameter(void* source, int* source_count, void* dest, int* 
         allocate(&pdns, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
         *pdns = 0;
         create((void*) &pdn, (void*) pdnc, (void*) pdns,
-            (void*) DESTINATION_NAME,
-            (void*) DESTINATION_NAME_COUNT,
+            (void*) COPY_DESTINATION_NAME, (void*) COPY_DESTINATION_NAME_COUNT,
             (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
             (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
 
@@ -766,8 +765,7 @@ void set_signal_for_parameter(void* source, int* source_count, void* dest, int* 
         allocate(&psns, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
         *psns = 0;
         create((void*) &psn, (void*) psnc, (void*) psns,
-            (void*) SOURCE_NAME,
-            (void*) SOURCE_NAME_COUNT,
+            (void*) COPY_SOURCE_NAME, (void*) COPY_SOURCE_NAME_COUNT,
             (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
             (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
 

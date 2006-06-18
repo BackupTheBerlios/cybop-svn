@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2006-06-17 10:32:38 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2006-06-18 14:57:34 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -35,12 +35,6 @@
 #include "../../globals/constants/system_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../globals/variables/variables.c"
-
-/**
- * Cleans up any thread resources that were duplicated by a call to "fork".
- */
-void run_execute_clean_duplicated_thread_resources() {
-}
 
 /**
  * Execute command as process.
@@ -70,7 +64,7 @@ void run_execute(void* p0) {
         // This is the child process.
         // The following code is only executed by the child process.
         // CAUTION! Remember that BOTH processes are now executing!
-        // DO THEREFORE NOT USE logging functionality of the parent here!
+        // Do therefore NOT USE logging functionality of the parent here!
 
         // There are two reasons why POSIX programmers call "fork":
         // 1 Create a new thread of control within the same program
@@ -81,63 +75,33 @@ void run_execute(void* p0) {
         //
         // The general problem with making "fork" work in a multi-threaded world is:
         // "What to do with all of the threads?". There are two alternatives:
-        // 1 Copy all of the threads into the new process.
-        //   This causes the programmer or implementation to deal with threads
-        //   that are suspended on system calls or that might be about to
+        // 1 Copy all of the threads into the new process, using "pthread_create".
+        //   This causes the programmer or implementation to deal with (duplicated)
+        //   threads that are suspended on system calls or that might be about to
         //   execute system calls that should not be executed in the new process.
         // 2 The other alternative is to copy only the thread that calls "fork".
         //   This creates the difficulty that the state of process-local resources
         //   is usually held in process memory.
         //   If a thread that is not calling "fork" holds a resource, that resource
-        //   is never released in the child process because the thread whose job it is
-        //   to release the resource does not exist in the child process.
-        //
-        // When a programmer is writing a multi-threaded program, the first
-        // described use of "fork", creating (duplicating) new threads in the
-        // same program, is provided by the "pthread_create" function.
-        // The "fork" function is thus used only to run new programs,
-        // and the effects of calling functions that require certain resources
-        // between the call to "fork" and the call to an "exec" function are undefined.
-        // In other words, the "fork" child is only allowed to call
-        // async-signal-safe functions until it performs an "exec".
+        //   is NEVER RELEASED in the child process because the thread whose job
+        //   it is to release the resource does not exist in the child process.
+        //   The "fork" function is used only to run new programs, and the
+        //   effects of calling functions that require certain resources between
+        //   the call to "fork" and the call to an "exec" function are undefined.
+        //   In other words, the "fork" child is only allowed to call
+        //   async-signal-safe functions until it performs an "exec".
         //
         // http://www.opengroup.org/onlinepubs/009695399/functions/fork.html
         //
         // CYBOI uses many threads, one for each input mechanism.
-        // The second alternative is used here. A simple "fork" was used, so that
-        // only the main thread (which called "fork") gets duplicated in the child process.
-        // Since the resources of any other threads running in the parent process
-        // have been duplicated, they have to be deallocated in the child process,
-        // which is done here.
-        run_execute_clean_duplicated_thread_resources();
-
-        // Execute file (given as first parameter) as new process image.
-        //
-        // The "exec" function may be used to make a child process
-        // execute a new program after it has been forked.
-        // By the call to "exec", the child replaces itself with the code
-        // of a different program (specified by the file to be executed).
-        // In other words, the new program overlays the existing program, so one
-        // can never return to the original code unless the call to "exec" fails.
-        // The new child process will have the same files open as the parent,
-        // except those whose close-on-exec flag was set with fcntl.
-        //
-        // The point at which the file is closed again is not specified,
-        // but is at some point before the process exits
-        // or before another process image is executed.
-        //
-        // Since the program to be executed cannot be predicted, a system shell
-        // is executed instead, and the program (as its command) within the shell.
-        // Arguments are specified individually and handed over as strings.
-        // The first argument represents the name of the program being executed.
-        // That is why the SYSTEM_SHELL constant is supplied once to name the
-        // program to execute and a second time to supply a value for argv[0].
-        // A null pointer must be passed as the last such argument, to indicate the end!
-        //
-        // Example:
-        // execl(SYSTEM_SHELL, SYSTEM_SHELL, "-c", ARCHIVE_UNIX_SHELL_COMMAND, NULL_POINTER);
-        // execl(SYSTEM_SHELL, SYSTEM_SHELL, "-c", "xdosemu", NULL_POINTER);
-    fprintf(stdout, "TEST pre-exec: %i\n", p0);
+        // The second alternative is used here. A simple "fork" was used,
+        // so that only the main thread (the one calling "fork") gets
+        // duplicated in the child process.
+        // It was taken care, that NONE of the CYBOI threads allocates any resources.
+        // All resources needed within a thread of the parent process have been
+        // created at service startup and will be deallocated at service shutdown.
+        // Thus, there is NO NEED to deallocate any thread resources here
+        // (that is in the child process), since there are none.
 
         //?? TEMPORARY TEST!
         char** args = (char**) p0;
@@ -151,11 +115,39 @@ void run_execute(void* p0) {
             fprintf(stdout, "TEST args 3 is NOT null pointer: %i\n", *(args + 3));
         }
 
+    fprintf(stdout, "TEST pre-exec: %i\n", p0);
+
         // Initialise error number.
-        // It is a global variable/function and other operations
+        // It is a global variable/ function and other operations
         // may have set some value that is not wanted here.
         errno = 0;
 
+        // Execute file (given as first parameter) as new process image.
+        //
+        // The "exec" function may be used to make a child process
+        // execute a new program after it has been forked.
+        // By the call to "exec", the child replaces itself with the code
+        // of a different program (specified by the file to be executed).
+        // In other words, the new program overlays the existing program, so one
+        // can never return to the original code unless the call to "exec" fails.
+        // The new child process will have the same files open as the parent,
+        // except those whose close-on-exec flag was set with fcntl.
+        //
+        // The point at which the file is closed again is not specified,
+        // but is at some point before the child process exits
+        // or before another child process image is executed.
+        //
+        // Since the program to be executed cannot be predicted, a system shell
+        // is executed instead, and the program (as its command) within the shell.
+        // Arguments are specified individually and handed over as strings.
+        // The first argument represents the name of the program being executed.
+        // That is why the SYSTEM_SHELL constant is supplied once to name the
+        // program to execute and a second time to supply a value for argv[0].
+        // A null pointer must be passed as the last such argument, to indicate the end!
+        //
+        // Example:
+        // execl(SYSTEM_SHELL, SYSTEM_SHELL, "-c", ARCHIVE_UNIX_SHELL_COMMAND, NULL_POINTER);
+        // execl(SYSTEM_SHELL, SYSTEM_SHELL, "-c", "xdosemu", NULL_POINTER);
         int e = execv(SYSTEM_SHELL, (char**) p0);
 
     fprintf(stdout, "TEST post-exec e: %i\n", e);
@@ -256,7 +248,7 @@ void run_execute(void* p0) {
             // which means the child has to exit independently from its original parent.
             // So the following call to "_exit" should NORMALLY NOT be reached.
             // If "exec" fails, something must be done to make the child process terminate.
-            // Just returning a bad status code with return would leave TWO PROCESSES
+            // Just returning a bad status code with "return" would leave TWO PROCESSES
             // running the original program. Instead, the right behavior is for the
             // child process to report failure to its parent process.
             //
@@ -285,14 +277,12 @@ void run_execute(void* p0) {
 
     fprintf(stdout, "TEST post-exit errno: %i\n", errno);
 
-//??        log_message_debug("Error: Could not execute command as process. The child process returned an error.");
-
     } else if (pid < 0) {
 
     fprintf(stdout, "TEST pid < 0 pid: %i\n", pid);
 
-        // The "fork" did not succeed.
-        // An error occured.
+        // The "fork" did not succeed. An error occured.
+        // This is still the parent process.
         // A child process could not be created.
 
         log_message_debug("Error: Could not execute command as process. The process fork failed.");
@@ -302,13 +292,17 @@ void run_execute(void* p0) {
         // The "fork" was successful.
         // This is the parent process.
         // The following code is only executed by the parent process.
-        // A pid > 0 represents the child's process id.
+        // A pid > 0 represents the child process's id.
+
+        log_message_debug("Information: Executed command as process. The process fork succeeded. Now waiting for the child process to exit.");
 
     fprintf(stdout, "TEST pid > 0 pid: %i\n", pid);
 
         // Request status information from child process.
         // In the GNU C library, pid_t corresponds to the int type.
         waitpid(pid, (int*) NULL_POINTER, 0);
+
+        log_message_debug("Information: The child process exited. Continue executing parent process.");
 
     fprintf(stdout, "TEST post-waitpid pid: %i\n", pid);
     }

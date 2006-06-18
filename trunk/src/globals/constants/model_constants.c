@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.15 $ $Date: 2006-05-05 22:56:01 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2006-06-18 14:57:34 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -28,6 +28,15 @@
 #define MODEL_CONSTANTS_SOURCE
 
 #include "../../globals/constants/integer_constants.c"
+
+//
+// Special models.
+//
+
+/** The empty model. */
+static char EMPTY_MODEL_ARRAY[] = {};
+static char* EMPTY_MODEL = EMPTY_MODEL_ARRAY;
+static int* EMPTY_MODEL_COUNT = NUMBER_0_INTEGER_ARRAY;
 
 //
 // Boolean models.
@@ -100,16 +109,6 @@ static int* COPY_MODEL_COUNT = NUMBER_4_INTEGER_ARRAY;
 static char MOVE_MODEL_ARRAY[] = {'m', 'o', 'v', 'e'};
 static char* MOVE_MODEL = MOVE_MODEL_ARRAY;
 static int* MOVE_MODEL_COUNT = NUMBER_4_INTEGER_ARRAY;
-
-/** The copy property model. */
-static char COPY_PROPERTY_MODEL_ARRAY[] = {'c', 'o', 'p', 'y', '_', 'p', 'r', 'o', 'p', 'e', 'r', 't', 'y'};
-static char* COPY_PROPERTY_MODEL = COPY_PROPERTY_MODEL_ARRAY;
-static int* COPY_PROPERTY_MODEL_COUNT = NUMBER_13_INTEGER_ARRAY;
-
-/** The move property model. */
-static char MOVE_PROPERTY_MODEL_ARRAY[] = {'m', 'o', 'v', 'e', '_', 'p', 'r', 'o', 'p', 'e', 'r', 't', 'y'};
-static char* MOVE_PROPERTY_MODEL = MOVE_PROPERTY_MODEL_ARRAY;
-static int* MOVE_PROPERTY_MODEL_COUNT = NUMBER_13_INTEGER_ARRAY;
 
 //
 // Program flow models.
@@ -265,15 +264,25 @@ static int* DIVIDE_MODEL_COUNT = NUMBER_6_INTEGER_ARRAY;
 // Memory management models.
 //
 
-/** The create part model. */
-static char CREATE_PART_MODEL_ARRAY[] = {'c', 'r', 'e', 'a', 't', 'e', '_', 'p', 'a', 'r', 't'};
-static char* CREATE_PART_MODEL = CREATE_PART_MODEL_ARRAY;
-static int* CREATE_PART_MODEL_COUNT = NUMBER_11_INTEGER_ARRAY;
+/** The create model. */
+static char CREATE_MODEL_ARRAY[] = {'c', 'r', 'e', 'a', 't', 'e'};
+static char* CREATE_MODEL = CREATE_MODEL_ARRAY;
+static int* CREATE_MODEL_COUNT = NUMBER_6_INTEGER_ARRAY;
 
-/** The destroy part model. */
-static char DESTROY_PART_MODEL_ARRAY[] = {'d', 'e', 's', 't', 'r', 'o', 'y', '_', 'p', 'a', 'r', 't'};
-static char* DESTROY_PART_MODEL = DESTROY_PART_MODEL_ARRAY;
-static int* DESTROY_PART_MODEL_COUNT = NUMBER_12_INTEGER_ARRAY;
+/** The create part element model. */
+static char CREATE_PART_ELEMENT_MODEL_ARRAY[] = {'p', 'a', 'r', 't'};
+static char* CREATE_PART_ELEMENT_MODEL = CREATE_PART_ELEMENT_MODEL_ARRAY;
+static int* CREATE_PART_ELEMENT_MODEL_COUNT = NUMBER_4_INTEGER_ARRAY;
+
+/** The create meta element model. */
+static char CREATE_META_ELEMENT_MODEL_ARRAY[] = {'m', 'e', 't', 'a'};
+static char* CREATE_META_ELEMENT_MODEL = CREATE_META_ELEMENT_MODEL_ARRAY;
+static int* CREATE_META_ELEMENT_MODEL_COUNT = NUMBER_4_INTEGER_ARRAY;
+
+/** The destroy model. */
+static char DESTROY_MODEL_ARRAY[] = {'d', 'e', 's', 't', 'r', 'o', 'y'};
+static char* DESTROY_MODEL = DESTROY_MODEL_ARRAY;
+static int* DESTROY_MODEL_COUNT = NUMBER_7_INTEGER_ARRAY;
 
 //
 // Lifecycle models.
