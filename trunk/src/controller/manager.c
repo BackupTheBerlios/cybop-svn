@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.23 $ $Date: 2006-06-04 00:54:45 $ $Author: christian $
+ * @version $Revision: 1.24 $ $Date: 2006-06-20 16:16:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -28,8 +28,8 @@
 #define MANAGER_SOURCE
 
 #include <pthread.h>
-#include "../controller/manager/system_signal_handler_manager.c"
 #include "../controller/checker.c"
+#include "../controller/manager/system_signal_handler_manager.c"
 #include "../globals/constants/abstraction_constants.c"
 #include "../globals/constants/channel_constants.c"
 #include "../globals/constants/log_constants.c"
@@ -211,11 +211,11 @@ void manage(void* p0, void* p1) {
     // It is not needed for the startup signal.
 
     // Create startup model abstraction, model, details.
-    create((void*) &ma, (void*) mac, (void*) mas,
+    receive_file_system_model((void*) &ma, (void*) mac, (void*) mas,
         (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
         (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
         (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
-    create((void*) &mm, (void*) mmc, (void*) mms,
+    receive_file_system_model((void*) &mm, (void*) mmc, (void*) mms,
         p0, p1,
         COMPOUND_ABSTRACTION, COMPOUND_ABSTRACTION_COUNT,
         FILE_CHANNEL, FILE_CHANNEL_COUNT);

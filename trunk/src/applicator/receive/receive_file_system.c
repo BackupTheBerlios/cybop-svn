@@ -1,5 +1,5 @@
 /*
- * $RCSfile: create.c,v $
+ * $RCSfile: receive_file_system.c,v $
  *
  * Copyright (c) 1999-2006. Christian Heller and the CYBOP developers.
  *
@@ -20,32 +20,29 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * This file creates a transient model from a persistent model.
- *
- * @version $Revision: 1.23 $ $Date: 2006-06-20 16:16:29 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2006-06-20 16:16:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef CREATE_SOURCE
-#define CREATE_SOURCE
+#ifndef RECEIVE_FILE_SYSTEM_SOURCE
+#define RECEIVE_FILE_SYSTEM_SOURCE
 
-#include <libxml/tree.h>
-#include "../globals/constants/abstraction_constants.c"
-#include "../globals/constants/channel_constants.c"
-#include "../globals/constants/log_constants.c"
-#include "../globals/constants/name_constants.c"
-#include "../globals/logger/logger.c"
-#include "../memoriser/accessor/compound_accessor.c"
-#include "../memoriser/array.c"
-#include "../memoriser/communicator.c"
-#include "../memoriser/converter.c"
-#include "../memoriser/allocator.c"
-#include "../memoriser/translator.c"
+#ifdef LINUX_OPERATING_SYSTEM
+
+#include "../../globals/constants/abstraction_constants.c"
+#include "../../globals/constants/log_constants.c"
+#include "../../globals/logger/logger.c"
+#include "../../memoriser/accessor/compound_accessor.c"
+#include "../../memoriser/allocator.c"
+#include "../../memoriser/array.c"
+#include "../../memoriser/communicator.c"
+#include "../../memoriser/converter.c"
+#include "../../memoriser/translator.c"
 
 /**
- * Creates a primitive model.
+ * Receives a primitive model from the file system.
  *
- * The creation happens in 2 steps and 3 models are involved.
+ * The reception happens in 2 steps and 3 models are involved.
  *
  * 1 source code: persistent, probably stored in files, for example cybol/xml
  * 2 receive model: transient byte/character stream, as read from channel/location
@@ -58,7 +55,7 @@
  * source code  ----------> received/read model  ----------> parsed model
  * (persistent)             (transient)                      (transient)
  *
- * The counterparts of the creation procedures are:
+ * The counterparts of the reception procedures are:
  * - read <--> write
  * - parse <--> serialise
  *
@@ -72,10 +69,10 @@
  * @param p7 the source channel
  * @param p8 the source channel count
  */
-void create_primitive_model(void* p0, void* p1, void* p2, void* p3, void* p4,
+void receive_file_system_primitive_model(void* p0, void* p1, void* p2, void* p3, void* p4,
     void* p5, void* p6, void* p7, void* p8) {
 
-    log_message_debug("Create primitive model.");
+    log_message_debug("Receive file system primitive model.");
 
     //
     // Receive.
@@ -107,9 +104,9 @@ void create_primitive_model(void* p0, void* p1, void* p2, void* p3, void* p4,
 }
 
 /**
- * Creates a compound model.
+ * Receives a compound model from the file system.
  *
- * The creation happens in 3 steps and 4 models are involved.
+ * The reception happens in 3 steps and 4 models are involved.
  *
  * 1 source code: persistent, probably stored in files, for example cybol/xml
  * 2 receive model: transient byte/character stream, as read from channel/location
@@ -124,7 +121,7 @@ void create_primitive_model(void* p0, void* p1, void* p2, void* p3, void* p4,
  * source code  ----------> received/read model  ----------> parsed model ----------> decoded model
  * (persistent)             (transient)                      (transient)              (transient)
  *
- * The counterparts of the creation procedures are:
+ * The counterparts of the reception procedures are:
  * - read <--> write
  * - parse <--> serialise
  * - decode <--> encode
@@ -139,12 +136,12 @@ void create_primitive_model(void* p0, void* p1, void* p2, void* p3, void* p4,
  * @param p7 the source channel
  * @param p8 the source channel count
  */
-void create_compound_model(void* p0, void* p1, void* p2, void* p3, void* p4,
+void receive_file_system_compound_model(void* p0, void* p1, void* p2, void* p3, void* p4,
     void* p5, void* p6, void* p7, void* p8) {
 
-    log_message_debug("Create compound model.");
+    log_message_debug("Receive file system compound model.");
 
-    //?The temporary workaround flag to use the libxml2 parser.
+    //?? The temporary workaround flag to use the libxml2 parser.
     //?? Later, when an own xml parser is implemented in cyboi,
     //?? delete this flag and change the corresponding blocks below!
     int w = 1;
@@ -219,9 +216,10 @@ void create_compound_model(void* p0, void* p1, void* p2, void* p3, void* p4,
 }
 
 /**
- * Creates a transient destination model from a persistent source model.
+ * Receives and creates a transient destination model
+ * from a persistent source model.
  *
- * Primitive models need a different creation than compound models.
+ * Primitive models need to be handled differently than compound models.
  *
  * persistent:
  * - stored permanently
@@ -244,10 +242,10 @@ void create_compound_model(void* p0, void* p1, void* p2, void* p3, void* p4,
  * @param p7 the source channel
  * @param p8 the source channel count
  */
-void create_model(void* p0, void* p1, void* p2, void* p3, void* p4,
+void receive_file_system_model(void* p0, void* p1, void* p2, void* p3, void* p4,
     void* p5, void* p6, void* p7, void* p8) {
 
-    log_message_debug("Create.");
+    log_message_debug("Receive file system model.");
 
     // The comparison result.
     int r = *NUMBER_0_INTEGER;
@@ -256,161 +254,59 @@ void create_model(void* p0, void* p1, void* p2, void* p3, void* p4,
 
     if (r != *NUMBER_0_INTEGER) {
 
-        create_compound_model(p0, p1, p2, p3, p4, p5, p6, p7, p8);
+        receive_file_system_compound_model(p0, p1, p2, p3, p4, p5, p6, p7, p8);
 
     } else {
 
-        create_primitive_model(p0, p1, p2, p3, p4, p5, p6, p7, p8);
+        receive_file_system_primitive_model(p0, p1, p2, p3, p4, p5, p6, p7, p8);
     }
 }
 
 /**
- * Creates a knowledge model and adds it to the given whole element,
+ * Receives a message from the file system.
+ *
+ * This procedure reads the given file, creates a knowledge model and adds it to the given whole element,
  * or to the knowledge memory root directly, if no whole element is given.
  *
  * Expected parameters:
- * - element (may be "part" or "meta")
- * - whole
  * - name
  * - channel
  * - abstraction
  * - model
+ * - element (may be "part" or "meta")
+ * - whole
  *
- * @param p0 the parameters
- * @param p1 the parameters count
- * @param p2 the knowledge memory
- * @param p3 the knowledge memory count
- * @param p4 the knowledge memory size
+ * @param p0 the knowledge memory
+ * @param p1 the knowledge memory count
+ * @param p2 the knowledge memory size
+ * @param p3 the whole model
+ * @param p4 the whole model count
+ * @param p5 the whole model size
+ * @param p6 the whole details
+ * @param p7 the whole details count
+ * @param p8 the whole details size
+ * @param p9 the name model
+ * @param p10 the name model count
+ * @param p11 the name abstraction
+ * @param p12 the name abstraction count
+ * @param p13 the abstraction model
+ * @param p14 the abstraction model count
+ * @param p15 the abstraction abstraction
+ * @param p16 the abstraction abstraction count
+ * @param p17 the channel model
+ * @param p18 the channel model count
+ * @param p19 the model model
+ * @param p20 the model model count
+ * @param p21 the element model
+ * @param p22 the element model count
  */
-void create(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void receive_file_system(void* p0, void* p1, void* p2,
+    void* p3, void* p4, void* p5, void* p6, void* p7, void* p8,
+    void* p9, void* p10, void* p11, void* p12,
+    void* p13, void* p14, void* p15, void* p16,
+    void* p17, void* p18, void* p19, void* p20, void* p21, void* p22) {
 
-    // The name abstraction.
-    void** na = &NULL_POINTER;
-    void** nac = &NULL_POINTER;
-    void** nas = &NULL_POINTER;
-    // The name model.
-    void** nm = &NULL_POINTER;
-    void** nmc = &NULL_POINTER;
-    void** nms = &NULL_POINTER;
-    // The name details.
-    void** nd = &NULL_POINTER;
-    void** ndc = &NULL_POINTER;
-    void** nds = &NULL_POINTER;
-
-    // The channel abstraction.
-    void** ca = &NULL_POINTER;
-    void** cac = &NULL_POINTER;
-    void** cas = &NULL_POINTER;
-    // The channel model.
-    void** cm = &NULL_POINTER;
-    void** cmc = &NULL_POINTER;
-    void** cms = &NULL_POINTER;
-    // The channel details.
-    void** cd = &NULL_POINTER;
-    void** cdc = &NULL_POINTER;
-    void** cds = &NULL_POINTER;
-
-    // The abstraction abstraction.
-    void** aa = &NULL_POINTER;
-    void** aac = &NULL_POINTER;
-    void** aas = &NULL_POINTER;
-    // The abstraction model.
-    void** am = &NULL_POINTER;
-    void** amc = &NULL_POINTER;
-    void** ams = &NULL_POINTER;
-    // The abstraction details.
-    void** ad = &NULL_POINTER;
-    void** adc = &NULL_POINTER;
-    void** ads = &NULL_POINTER;
-
-    // The model abstraction.
-    void** ma = &NULL_POINTER;
-    void** mac = &NULL_POINTER;
-    void** mas = &NULL_POINTER;
-    // The model model.
-    void** mm = &NULL_POINTER;
-    void** mmc = &NULL_POINTER;
-    void** mms = &NULL_POINTER;
-    // The model details.
-    void** md = &NULL_POINTER;
-    void** mdc = &NULL_POINTER;
-    void** mds = &NULL_POINTER;
-
-    // The element abstraction.
-    void** ea = &NULL_POINTER;
-    void** eac = &NULL_POINTER;
-    void** eas = &NULL_POINTER;
-    // The element model.
-    void** em = &NULL_POINTER;
-    void** emc = &NULL_POINTER;
-    void** ems = &NULL_POINTER;
-    // The element details.
-    void** ed = &NULL_POINTER;
-    void** edc = &NULL_POINTER;
-    void** eds = &NULL_POINTER;
-
-    // The whole abstraction.
-    void** wa = &NULL_POINTER;
-    void** wac = &NULL_POINTER;
-    void** was = &NULL_POINTER;
-    // The whole model.
-    void** wm = &NULL_POINTER;
-    void** wmc = &NULL_POINTER;
-    void** wms = &NULL_POINTER;
-    // The whole details.
-    void** wd = &NULL_POINTER;
-    void** wdc = &NULL_POINTER;
-    void** wds = &NULL_POINTER;
-
-    // Get name.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) CREATE_NAME_NAME, (void*) CREATE_NAME_NAME_COUNT,
-        (void*) &na, (void*) &nac, (void*) &nas,
-        (void*) &nm, (void*) &nmc, (void*) &nms,
-        (void*) &nd, (void*) &ndc, (void*) &nds,
-        p2, p3);
-
-    // Get channel.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) CREATE_CHANNEL_NAME, (void*) CREATE_CHANNEL_NAME_COUNT,
-        (void*) &ca, (void*) &cac, (void*) &cas,
-        (void*) &cm, (void*) &cmc, (void*) &cms,
-        (void*) &cd, (void*) &cdc, (void*) &cds,
-        p2, p3);
-
-    // Get abstraction.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) CREATE_ABSTRACTION_NAME, (void*) CREATE_ABSTRACTION_NAME_COUNT,
-        (void*) &aa, (void*) &aac, (void*) &aas,
-        (void*) &am, (void*) &amc, (void*) &ams,
-        (void*) &ad, (void*) &adc, (void*) &ads,
-        p2, p3);
-
-    // Get model.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) CREATE_MODEL_NAME, (void*) CREATE_MODEL_NAME_COUNT,
-        (void*) &ma, (void*) &mac, (void*) &mas,
-        (void*) &mm, (void*) &mmc, (void*) &mms,
-        (void*) &md, (void*) &mdc, (void*) &mds,
-        p2, p3);
-
-    // Get element.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) CREATE_ELEMENT_NAME, (void*) CREATE_ELEMENT_NAME_COUNT,
-        (void*) &ea, (void*) &eac, (void*) &eas,
-        (void*) &em, (void*) &emc, (void*) &ems,
-        (void*) &ed, (void*) &edc, (void*) &eds,
-        p2, p3);
-
-    // Get whole.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) CREATE_WHOLE_NAME, (void*) CREATE_WHOLE_NAME_COUNT,
-        (void*) &wa, (void*) &wac, (void*) &was,
-        (void*) &wm, (void*) &wmc, (void*) &wms,
-        (void*) &wd, (void*) &wdc, (void*) &wds,
-        p2, p3);
-
-    log_message_debug("Create knowledge model.");
+    log_message_debug("Receive file system message.");
 
     // The knowledge model name.
     void* kmn = NULL_POINTER;
@@ -434,9 +330,9 @@ void create(void* p0, void* p1, void* p2, void* p3, void* p4) {
     *kmnc = 0;
     allocate((void*) &kmns, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
     *kmns = 0;
-    create_model((void*) &kmn, (void*) kmnc, (void*) kmns, *nm, *nmc, *na, *nac, (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
+    receive_file_system_model((void*) &kmn, (void*) kmnc, (void*) kmns, p9, p10, p11, p12, (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
 
-    // A knowledge model channel is not created,
+    // A knowledge model channel is not received (created),
     // since that is only needed temporarily for model loading.
 
     // Create knowledge model abstraction.
@@ -444,37 +340,37 @@ void create(void* p0, void* p1, void* p2, void* p3, void* p4) {
     *kmac = 0;
     allocate((void*) &kmas, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
     *kmas = 0;
-    create_model((void*) &kma, (void*) kmac, (void*) kmas, *am, *amc, *aa, *aac, (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
+    receive_file_system_model((void*) &kma, (void*) kmac, (void*) kmas, p13, p14, p15, p16, (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
 
     // Create knowledge model model.
     allocate((void*) &kmmc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
     *kmmc = 0;
     allocate((void*) &kmms, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
     *kmms = 0;
-    create_model((void*) &kmm, (void*) kmmc, (void*) kmms, *mm, *mmc, *am, *amc, *cm, *cmc);
+    receive_file_system_model((void*) &kmm, (void*) kmmc, (void*) kmms, p19, p20, p13, p14, p17, p18);
 
     // Create knowledge model details.
     allocate((void*) &kmdc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
     *kmdc = 0;
     allocate((void*) &kmds, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
     *kmds = 0;
-    create_model((void*) &kmd, (void*) kmdc, (void*) kmds, EMPTY_MODEL, EMPTY_MODEL_COUNT, COMPOUND_ABSTRACTION, COMPOUND_ABSTRACTION_COUNT, INLINE_CHANNEL, INLINE_CHANNEL_COUNT);
+    receive_file_system_model((void*) &kmd, (void*) kmdc, (void*) kmds, EMPTY_MODEL, EMPTY_MODEL_COUNT, COMPOUND_ABSTRACTION, COMPOUND_ABSTRACTION_COUNT, INLINE_CHANNEL, INLINE_CHANNEL_COUNT);
 
     // The comparison result.
     int r = *NUMBER_0_INTEGER;
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(*em, *emc, (void*) CREATE_PART_ELEMENT_MODEL, (void*) CREATE_PART_ELEMENT_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p21, p22, (void*) CREATE_PART_ELEMENT_MODEL, (void*) CREATE_PART_ELEMENT_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
-            if (*wm != NULL_POINTER) {
+            if (p3 != NULL_POINTER) {
 
                 log_message_debug("Add part knowledge model to whole model.");
 
                 // Use the determined whole model, if it exists.
-                set_compound_element_by_name(*wm, *wmc, *wms, NULL_POINTER, NULL_POINTER, NULL_POINTER,
+                set_compound_element_by_name(p3, p4, p5, NULL_POINTER, NULL_POINTER, NULL_POINTER,
                     kmn, (void*) kmnc, (void*) kmns,
                     kma, (void*) kmac, (void*) kmas,
                     kmm, (void*) kmmc, (void*) kmms,
@@ -485,7 +381,7 @@ void create(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 log_message_debug("Add part knowledge model to knowledge memory root.");
 
                 // Use the knowledge memory root if the determined whole model is null.
-                set_compound_element_by_name(p2, p3, p4, NULL_POINTER, NULL_POINTER, NULL_POINTER,
+                set_compound_element_by_name(p0, p1, p2, NULL_POINTER, NULL_POINTER, NULL_POINTER,
                     kmn, (void*) kmnc, (void*) kmns,
                     kma, (void*) kmac, (void*) kmas,
                     kmm, (void*) kmmc, (void*) kmms,
@@ -496,16 +392,16 @@ void create(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(*em, *emc, (void*) CREATE_META_ELEMENT_MODEL, (void*) CREATE_META_ELEMENT_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p21, p22, (void*) CREATE_META_ELEMENT_MODEL, (void*) CREATE_META_ELEMENT_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
-            if (*wd != NULL_POINTER) {
+            if (p6 != NULL_POINTER) {
 
                 log_message_debug("Add meta knowledge model to whole details.");
 
                 // Use the determined whole model, if it exists.
-                set_compound_element_by_name(*wd, *wdc, *wds, NULL_POINTER, NULL_POINTER, NULL_POINTER,
+                set_compound_element_by_name(p6, p7, p8, NULL_POINTER, NULL_POINTER, NULL_POINTER,
                     kmn, (void*) kmnc, (void*) kmns,
                     kma, (void*) kmac, (void*) kmas,
                     kmm, (void*) kmmc, (void*) kmms,
@@ -519,5 +415,8 @@ void create(void* p0, void* p1, void* p2, void* p3, void* p4) {
     }
 }
 
-/* CREATE_SOURCE */
+/* LINUX_OPERATING_SYSTEM */
+#endif
+
+/* RECEIVE_FILE_SYSTEM_SOURCE */
 #endif

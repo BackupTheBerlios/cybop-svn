@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2006-06-17 10:32:38 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2006-06-20 16:16:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -80,6 +80,52 @@ void run_program(void* p0, void* p1, void* p2, void* p3) {
     int argc = *NUMBER_0_INTEGER;
     int args = *NUMBER_0_INTEGER;
 
+    // Determine arguments size.
+    args = *((int*) *programmc);
+
+    // Allocate arguments vector.
+    allocate((void*) &arg, (void*) &args, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+
+    // Assemble arguments by copying the actual command.
+    // A null termination character is added behind the last argument, see below!
+    set_array_elements(arg, (void*) &argc, *programm, *programmc, (void*) CHARACTER_ARRAY);
+    argc = argc + *((int*) *programmc);
+
+    //
+    // Null termination.
+    //
+
+    // Resize arguments, if necessary.
+    // One extra place for null termination character.
+    if ((argc + *PRIMITIVE_COUNT) >= args) {
+
+        // Determine arguments size.
+        args = argc * *POINTER_VECTOR_REALLOCATE_FACTOR + *PRIMITIVE_COUNT;
+
+        reallocate_pointer_vector((void*) &arg, (void*) &argc, (void*) &args);
+    }
+
+    // Assemble arguments by adding the null termination character.
+    set_array_elements(arg, (void*) &argc, (void*) NULL_CONTROL_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+    argc = argc + *PRIMITIVE_COUNT;
+
+    // Execute command as process.
+    run_execute(arg);
+
+    // Deallocate arguments vector.
+    deallocate((void*) &arg, (void*) &args, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+
+/*??
+    //?? The following block assembles all arguments for using "fork/execv/wait" in "run_execute.c".
+    //?? But since "run_execute.c" is using system("program_name"),
+    //?? this block has been commented out.
+    //?? It may be either reactivated together with "fork/execv/wait"
+    //?? in "run_execute.c" or deleted later.
+
+    // The arguments vector.
+    void* arg = NULL_POINTER;
+    int argc = *NUMBER_0_INTEGER;
+    int args = *NUMBER_0_INTEGER;
     // The system shell as null terminated string.
     void* shell = NULL_POINTER;
     int shellc = *NUMBER_0_INTEGER;
@@ -227,6 +273,7 @@ void run_program(void* p0, void* p1, void* p2, void* p3) {
 
     // Deallocate arguments vector.
     deallocate_pointer_vector((void*) &arg, (void*) &args);
+*/
 }
 
 /* RUN_PROGRAM_SOURCE */

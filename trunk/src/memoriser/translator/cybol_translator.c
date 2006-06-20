@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.10 $ $Date: 2006-06-04 00:54:45 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2006-06-20 16:16:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -43,7 +43,7 @@
 //
 
 /**
- * Creates a model.
+ * Receives a file system model.
  *
  * @param p0 the destination
  * @param p1 the destination count
@@ -55,7 +55,7 @@
  * @param p7 the source channel
  * @param p8 the source channel count
  */
-void create(void* p0, void* p1, void* p2, void* p3, void* p4,
+void receive_file_system_model(void* p0, void* p1, void* p2, void* p3, void* p4,
     void* p5, void* p6, void* p7, void* p8);
 
 void set_compound_element_by_name(void* p0, void* p1, void* p2,
@@ -365,7 +365,7 @@ void decode_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     *dnc = 0;
                     allocate((void*) &dns, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
                     *dns = 0;
-                    create((void*) &dn, (void*) dnc, (void*) dns,
+                    receive_file_system_model((void*) &dn, (void*) dnc, (void*) dns,
                         sn, (void*) &snc,
                         (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
                         (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
@@ -378,7 +378,7 @@ void decode_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     *dac = 0;
                     allocate((void*) &das, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
                     *das = 0;
-                    create((void*) &da, (void*) dac, (void*) das,
+                    receive_file_system_model((void*) &da, (void*) dac, (void*) das,
                         sa, (void*) &sac,
                         (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
                         (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
@@ -388,7 +388,7 @@ void decode_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     *dmc = 0;
                     allocate((void*) &dms, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
                     *dms = 0;
-                    create((void*) &dm, (void*) dmc, (void*) dms,
+                    receive_file_system_model((void*) &dm, (void*) dmc, (void*) dms,
                         sm, (void*) &smc,
                         sa, (void*) &sac,
                         sc, (void*) &scc);

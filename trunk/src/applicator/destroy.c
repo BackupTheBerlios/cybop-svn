@@ -22,7 +22,7 @@
  *
  * This file destroys a transient model to a persistent model.
  *
- * @version $Revision: 1.17 $ $Date: 2006-06-18 14:57:34 $ $Author: christian $
+ * @version $Revision: 1.18 $ $Date: 2006-06-20 16:16:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -36,7 +36,33 @@
 #include "../memoriser/accessor/compound_accessor.c"
 #include "../memoriser/array.c"
 
-void destroy(void** model, void* model_count, void* model_size,
+//
+// Forward declarations.
+//
+
+/**
+ * Deallocates a transient destination model.
+ *
+ * Primitive models need a different creation than compound models.
+ *
+ * persistent:
+ * - stored permanently
+ * - outside CYBOI
+ * - longer than CYBOI lives
+ *
+ * transient:
+ * - stored in computer memory (RAM)
+ * - only accessible from within CYBOI
+ * - created and destroyed by CYBOI
+ * - not available anymore after CYBOI has been destroyed
+ *
+ * @param p0 the model
+ * @param p1 the model count
+ * @param p2 the model size
+ * @param p3 the model abstraction
+ * @param p4 the model abstraction count
+ */
+void destroy_model(void** model, void* model_count, void* model_size,
     void* model_abstr, void* model_abstr_count);
 
 /**
@@ -60,7 +86,7 @@ void check_compound_model(void* p0, void* p1, void* p2) {
 }
 
 /**
- * destroy a primitive model
+ * Destroys a primitive model
  *
  * @param p0 the model
  * @param p1 the model count
@@ -68,7 +94,7 @@ void check_compound_model(void* p0, void* p1, void* p2) {
  * @param p3 the model abstraction
  * @param p4 the model abstraction count
  */
-void deallocate_primitive_model(void** model, void* model_count, void* model_size,
+void destroy_primitive_model(void** model, void* model_count, void* model_size,
     void* model_abstr, void* model_abstr_count) {
 
     log_message_debug("Destroy primitive model.");
@@ -78,7 +104,7 @@ void deallocate_primitive_model(void** model, void* model_count, void* model_siz
 }
 
 /**
- * destroy a primitive model
+ * Destroy a primitive model
  *
  * @param p0 the model
  * @param p1 the model count
@@ -86,7 +112,7 @@ void deallocate_primitive_model(void** model, void* model_count, void* model_siz
  * @param p3 the model abstraction
  * @param p4 the model abstraction count
  */
-void deallocate_compound_model(void** model, void* model_count, void* model_size,
+void destroy_compound_model(void** model, void* model_count, void* model_size,
     void* model_abstr, void* model_abstr_count) {
 
     //das gesamte Compound durchgehen und f?r jedes Element im Compound wieder
@@ -135,7 +161,7 @@ void deallocate_compound_model(void** model, void* model_count, void* model_size
                 (void*) &em, (void*) &emc, (void*) &ems,
                 (void*) &ed, (void*) &edc, (void*) &eds);
 
-            destroy( em, *emc, *ems, *ea, *eac);
+            destroy_model(em, *emc, *ems, *ea, *eac);
 
             compound_counter = compound_counter + 1;
         }
@@ -164,7 +190,7 @@ void deallocate_compound_model(void** model, void* model_count, void* model_size
  * @param p3 the model abstraction
  * @param p4 the model abstraction count
  */
-void destroy(void** model, void* model_count, void* model_size,
+void destroy_model(void** model, void* model_count, void* model_size,
     void* model_abstr, void* model_abstr_count) {
 
     // The comparison result.
@@ -175,11 +201,11 @@ void destroy(void** model, void* model_count, void* model_size,
 
     if (r == 0) {
 
-        deallocate_primitive_model(model, model_count, model_size, model_abstr, model_abstr_count);
+        destroy_primitive_model(model, model_count, model_size, model_abstr, model_abstr_count);
 
     } else {
 
-        deallocate_compound_model(model, model_count, model_size, model_abstr, model_abstr_count);
+        destroy_compound_model(model, model_count, model_size, model_abstr, model_abstr_count);
     }
 }
 
@@ -198,7 +224,7 @@ void destroy(void** model, void* model_count, void* model_size,
  * @param p3 the knowledge count
  * @param p4 the knowledge size
  */
-void deallocate_part(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void destroy(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     log_message_debug("Destroy knowledge model.");
 
@@ -245,7 +271,7 @@ void deallocate_part(void* p0, void* p1, void* p2, void* p3, void* p4) {
         p2, p3);
 
     // Destroy knowledge model.
-    destroy(em, *emc, *ems , *ea, *eac);
+    destroy_model(em, *emc, *ems , *ea, *eac);
 
     // Remove knowledge model from given whole model.
     remove_compound_element_by_name(p2, p3, p4, NULL_POINTER, NULL_POINTER, NULL_POINTER, (void*) *nm, (void*) *nmc);

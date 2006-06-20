@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.29 $ $Date: 2006-06-18 14:57:34 $ $Author: christian $
+ * @version $Revision: 1.30 $ $Date: 2006-06-20 16:16:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -37,7 +37,7 @@
 #include <stdio.h>
 #include <pthread.h>
 #include <unistd.h>
-#include "../../applicator/create.c"
+#include "../../applicator/receive/receive_file_system.c"
 #include "../../globals/constants/abstraction_constants.c"
 #include "../../globals/constants/channel_constants.c"
 #include "../../globals/constants/character_constants.c"
@@ -60,7 +60,7 @@
 //
 
 /**
- * Creates a model.
+ * Receives a file system model.
  *
  * @param p0 the destination
  * @param p1 the destination count
@@ -72,7 +72,7 @@
  * @param p7 the source channel
  * @param p8 the source channel count
  */
-void create(void* p0, void* p1, void* p2, void* p3, void* p4,
+void receive_file_system_model(void* p0, void* p1, void* p2, void* p3, void* p4,
     void* p5, void* p6, void* p7, void* p8);
 
 /**
@@ -652,7 +652,7 @@ void set_signal_for_parameter(void* source, int* source_count, void* dest, int* 
         *sac = 0;
         allocate(&sas, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
         *sas = 0;
-        create((void*) &sa, (void*) sac, (void*) sas,
+        receive_file_system_model((void*) &sa, (void*) sac, (void*) sas,
             (void*) OPERATION_ABSTRACTION, (void*) OPERATION_ABSTRACTION_COUNT,
             (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
             (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
@@ -662,7 +662,7 @@ void set_signal_for_parameter(void* source, int* source_count, void* dest, int* 
         *smc = 0;
         allocate(&sms, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
         *sms = 0;
-        create((void*) &sm, (void*) smc, (void*) sms,
+        receive_file_system_model((void*) &sm, (void*) smc, (void*) sms,
             (void*) COPY_MODEL, (void*) COPY_MODEL_COUNT,
             (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
             (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
@@ -672,7 +672,7 @@ void set_signal_for_parameter(void* source, int* source_count, void* dest, int* 
         *sdc = 0;
         allocate(&sds, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
         *sds = 0;
-        create((void*) &sd, (void*) sdc, (void*) sds,
+        receive_file_system_model((void*) &sd, (void*) sdc, (void*) sds,
             (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
             (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
             (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
@@ -707,7 +707,7 @@ void set_signal_for_parameter(void* source, int* source_count, void* dest, int* 
         *pdnc = 0;
         allocate(&pdns, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
         *pdns = 0;
-        create((void*) &pdn, (void*) pdnc, (void*) pdns,
+        receive_file_system_model((void*) &pdn, (void*) pdnc, (void*) pdns,
             (void*) COPY_DESTINATION_NAME, (void*) COPY_DESTINATION_NAME_COUNT,
             (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
             (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
@@ -717,7 +717,7 @@ void set_signal_for_parameter(void* source, int* source_count, void* dest, int* 
         *pdac = 0;
         allocate(&pdas, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
         *pdas = 0;
-        create((void*) &pda, (void*) pdac, (void*) pdas,
+        receive_file_system_model((void*) &pda, (void*) pdac, (void*) pdas,
             (void*) KNOWLEDGE_ABSTRACTION, (void*) KNOWLEDGE_ABSTRACTION_COUNT,
             (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
             (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
@@ -727,7 +727,7 @@ void set_signal_for_parameter(void* source, int* source_count, void* dest, int* 
         *pdmc = 0;
         allocate(&pdms, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
         *pdms = 0;
-        create((void*) &pdm, (void*) pdmc, (void*) pdms,
+        receive_file_system_model((void*) &pdm, (void*) pdmc, (void*) pdms,
             (void*) dest, (void*) dest_count,
             (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
             (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
@@ -764,7 +764,7 @@ void set_signal_for_parameter(void* source, int* source_count, void* dest, int* 
         *psnc = 0;
         allocate(&psns, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
         *psns = 0;
-        create((void*) &psn, (void*) psnc, (void*) psns,
+        receive_file_system_model((void*) &psn, (void*) psnc, (void*) psns,
             (void*) COPY_SOURCE_NAME, (void*) COPY_SOURCE_NAME_COUNT,
             (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
             (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
@@ -775,7 +775,7 @@ void set_signal_for_parameter(void* source, int* source_count, void* dest, int* 
         *psac = 0;
         allocate(&psas, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
         *psas = 0;
-        create((void*) &psa, (void*) psac, (void*) psas,
+        receive_file_system_model((void*) &psa, (void*) psac, (void*) psas,
             (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
             (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
             (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
@@ -786,7 +786,7 @@ void set_signal_for_parameter(void* source, int* source_count, void* dest, int* 
         *psmc = 0;
         allocate(&psms, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
         *psms = 0;
-        create((void*) &psm, (void*) psmc, (void*) psms,
+        receive_file_system_model((void*) &psm, (void*) psmc, (void*) psms,
             (void*) source, (void*) source_count,
             (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
             (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
@@ -1105,13 +1105,13 @@ void handle_tcp_socket_request(void* p0, void* p1) {
                 *dds = 0;
 
                 // Create destination abstraction.
-                create((void*) &da, (void*) dac, (void*) das,
+                receive_file_system_model((void*) &da, (void*) dac, (void*) das,
                     (void*) sa, (void*) sac,
                     (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
                     (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
 
                 // Create destination model.
-                create((void*) &dm, (void*) dmc, (void*) dms,
+                receive_file_system_model((void*) &dm, (void*) dmc, (void*) dms,
                     (void*) sm, (void*) smc,
                     (void*) sa, (void*) sac,
                     (void*) sc, (void*) scc);

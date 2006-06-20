@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2006-06-18 14:57:34 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2006-06-20 16:16:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -37,13 +37,61 @@
 #include "../../globals/variables/variables.c"
 
 /**
- * Execute command as process.
+ * Execute command/ program as process.
  *
  * @param p0 the arguments
  */
 void run_execute(void* p0) {
 
-    log_message_debug("Execute command as process.");
+    log_message_debug("Execute command/ program as process.");
+
+    // Initialise error number.
+    // It is a global variable/ function and other operations
+    // may have set some value that is not wanted here.
+    errno = 0;
+
+    // Run a command/ program as shell command in an own process.
+    // The "system" function provides a simple, portable mechanism for running
+    // another program; it does all three steps (fork/execv/wait) automatically.
+    // The function does all the work of running a subprogram, but it doesn't
+    // give much control over the details. One has to wait until the subprogram
+    // terminates before being able to do anything else.
+    // In the GNU C library, it always uses the default shell "sh" to run the command.
+    // In particular, it searches the directories in "PATH" to find programs to execute.
+    // The return value is -1 if it wasn't possible to create the shell process,
+    // and otherwise is the status of the shell process.
+    int r = system(p0);
+
+    if (r == -1) {
+
+        log_message_debug("Warning: Could not execute command/ program as process. A negative value was returned.");
+
+        if (errno == EINTR) {
+
+            log_message_debug("Error: Could not execute command/ program as process. The function was interrupted by delivery of a signal to the calling process.");
+
+        } else if (errno == ECHILD) {
+
+            log_message_debug("Error: Could not execute command/ program as process. There are no child processes to wait for, or the specified pid is not a child of the calling process.");
+
+        } else if (errno == EINVAL) {
+
+            log_message_debug("Error: Could not execute command/ program as process. An invalid value was provided for the options argument.");
+        }
+
+    } else {
+
+        log_message_debug("Information: Successfully executed command/ program as process. The child process was left; the parent process continues.");
+    }
+
+/*??
+    //?? The following block implements the same three primitive functions
+    //?? (fork/execv/wait) that the "system" function calls automatically.
+    //?? The block was commented out since it did not function reliably.
+    //?? The bug could not be found, but presumably it has to do with the
+    //?? threads/ mutexes/ signal checker loop running in CYBOI.
+    //?? Therefore, the "system" function (see above) was used for now.
+    //?? It might be even better, since it is platform-neutral (portable).
 
     fprintf(stdout, "TEST pre-fork: %i\n", p0);
 
@@ -306,6 +354,7 @@ void run_execute(void* p0) {
 
     fprintf(stdout, "TEST post-waitpid pid: %i\n", pid);
     }
+*/
 }
 
 /* LINUX_OPERATING_SYSTEM */

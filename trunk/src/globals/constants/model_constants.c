@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.16 $ $Date: 2006-06-18 14:57:34 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2006-06-20 16:16:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -328,23 +328,93 @@ static char* REFRESH_URL_MODEL = REFRESH_URL_MODEL_ARRAY;
 static int* REFRESH_URL_MODEL_COUNT = NUMBER_11_INTEGER_ARRAY;
 
 //
-// Language models.
+// Channel models.
 //
+
+/** The common object request broker architecture (corba) model. */
+static char CORBA_MODEL_ARRAY[] = {'c', 'o', 'r', 'b', 'a'};
+static char* CORBA_MODEL = CORBA_MODEL_ARRAY;
+static int* CORBA_MODEL_COUNT = NUMBER_5_INTEGER_ARRAY;
+
+/** The file system model. */
+static char FILE_SYSTEM_MODEL_ARRAY[] = {'f', 'i', 'l', 'e', '_', 's', 'y', 's', 't', 'e', 'm'};
+static char* FILE_SYSTEM_MODEL = FILE_SYSTEM_MODEL_ARRAY;
+static int* FILE_SYSTEM_MODEL_COUNT = NUMBER_11_INTEGER_ARRAY;
+
+/** The floppy model. */
+static char FLOPPY_MODEL_ARRAY[] = {'f', 'l', 'o', 'p', 'p', 'y'};
+static char* FLOPPY_MODEL = FLOPPY_MODEL_ARRAY;
+static int* FLOPPY_MODEL_COUNT = NUMBER_6_INTEGER_ARRAY;
+
+/** The imap model. */
+static char IMAP_MODEL_ARRAY[] = {'i', 'm', 'a', 'p'};
+static char* IMAP_MODEL = IMAP_MODEL_ARRAY;
+static int* IMAP_MODEL_COUNT = NUMBER_4_INTEGER_ARRAY;
+
+/** The imaps model. */
+static char IMAPS_MODEL_ARRAY[] = {'i', 'm', 'a', 'p', 's'};
+static char* IMAPS_MODEL = IMAPS_MODEL_ARRAY;
+static int* IMAPS_MODEL_COUNT = NUMBER_5_INTEGER_ARRAY;
+
+/** The java messaging service (jms) model. */
+static char JMS_MODEL_ARRAY[] = {'j', 'm', 's'};
+static char* JMS_MODEL = JMS_MODEL_ARRAY;
+static int* JMS_MODEL_COUNT = NUMBER_3_INTEGER_ARRAY;
 
 /** The latex model. */
 static char LATEX_MODEL_ARRAY[] = {'l', 'a', 't', 'e', 'x'};
 static char* LATEX_MODEL = LATEX_MODEL_ARRAY;
 static int* LATEX_MODEL_COUNT = NUMBER_5_INTEGER_ARRAY;
 
+/** The ldap model. */
+static char LDAP_MODEL_ARRAY[] = {'l', 'd', 'a', 'p'};
+static char* LDAP_MODEL = LDAP_MODEL_ARRAY;
+static int* LDAP_MODEL_COUNT = NUMBER_4_INTEGER_ARRAY;
+
 /** The linux console model. */
 static char LINUX_CONSOLE_MODEL_ARRAY[] = {'l', 'i', 'n', 'u', 'x', '_', 'c', 'o', 'n', 's', 'o', 'l', 'e'};
 static char* LINUX_CONSOLE_MODEL = LINUX_CONSOLE_MODEL_ARRAY;
 static int* LINUX_CONSOLE_MODEL_COUNT = NUMBER_13_INTEGER_ARRAY;
 
+/** The nfs model. */
+static char NFS_MODEL_ARRAY[] = {'n', 'f', 's'};
+static char* NFS_MODEL = NFS_MODEL_ARRAY;
+static int* NFS_MODEL_COUNT = NUMBER_3_INTEGER_ARRAY;
+
+/** The nntp model. */
+static char NNTP_MODEL_ARRAY[] = {'n', 'n', 't', 'p'};
+static char* NNTP_MODEL = NNTP_MODEL_ARRAY;
+static int* NNTP_MODEL_COUNT = NUMBER_4_INTEGER_ARRAY;
+
+/** The remote method invocation (rmi) model. */
+static char RMI_MODEL_ARRAY[] = {'r', 'm', 'i'};
+static char* RMI_MODEL = RMI_MODEL_ARRAY;
+static int* RMI_MODEL_COUNT = NUMBER_3_INTEGER_ARRAY;
+
 /** The signal model. */
 static char SIGNAL_MODEL_ARRAY[] = {'s', 'i', 'g', 'n', 'a', 'l'};
 static char* SIGNAL_MODEL = SIGNAL_MODEL_ARRAY;
 static int* SIGNAL_MODEL_COUNT = NUMBER_6_INTEGER_ARRAY;
+
+/** The simple object access protocol (soap) model. */
+static char SOAP_MODEL_ARRAY[] = {'s', 'o', 'a', 'p'};
+static char* SOAP_MODEL = SOAP_MODEL_ARRAY;
+static int* SOAP_MODEL_COUNT = NUMBER_4_INTEGER_ARRAY;
+
+/** The smb model. */
+static char SMB_MODEL_ARRAY[] = {'s', 'm', 'b'};
+static char* SMB_MODEL = SMB_MODEL_ARRAY;
+static int* SMB_MODEL_COUNT = NUMBER_3_INTEGER_ARRAY;
+
+/** The smtp model. */
+static char SMTP_MODEL_ARRAY[] = {'s', 'm', 't', 'p'};
+static char* SMTP_MODEL = SMTP_MODEL_ARRAY;
+static int* SMTP_MODEL_COUNT = NUMBER_4_INTEGER_ARRAY;
+
+/** The smtps model. */
+static char SMTPS_MODEL_ARRAY[] = {'s', 'm', 't', 'p', 's'};
+static char* SMTPS_MODEL = SMTPS_MODEL_ARRAY;
+static int* SMTPS_MODEL_COUNT = NUMBER_5_INTEGER_ARRAY;
 
 /** The structured query language (sql). */
 static char SQL_MODEL_ARRAY[] = {'s', 'q', 'l'};

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.43 $ $Date: 2006-04-20 22:36:09 $ $Author: christian $
+ * @version $Revision: 1.44 $ $Date: 2006-06-20 16:16:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -62,7 +62,7 @@ void send_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
     // Allocate array.
     allocate((void*) &a, (void*) &as, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
-    // Resize destiation character array for erase display control sequence.
+    // Resize destination character array for erase display control sequence.
     if ((ac + *ESCAPE_CONTROL_SEQUENCE_COUNT + *ERASE_DISPLAY_CONTROL_SEQUENCE_COUNT) >= as) {
 
         // Set destination character array size.

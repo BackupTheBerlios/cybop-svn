@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2006-06-17 10:32:38 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2006-06-20 16:16:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -124,6 +124,133 @@ void run_archive(void* p0, void* p1, void* p2, void* p3) {
     int argc = *NUMBER_0_INTEGER;
     int args = *NUMBER_0_INTEGER;
 
+    // Determine arguments size.
+    args = *ARCHIVE_UNIX_SHELL_COMMAND_COUNT;
+
+    // Allocate arguments vector.
+    allocate((void*) &arg, (void*) &args, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+
+    // Assemble arguments by copying the actual command.
+    // A null termination character is added behind the last argument, see below!
+    set_array_elements(arg, (void*) &argc, (void*) ARCHIVE_UNIX_SHELL_COMMAND, (void*) ARCHIVE_UNIX_SHELL_COMMAND_COUNT, (void*) CHARACTER_ARRAY);
+    argc = argc + *ARCHIVE_UNIX_SHELL_COMMAND_COUNT;
+
+    //
+    // Create option.
+    //
+
+    if (*createm != NULL_POINTER) {
+
+        if (**createm == 1) {
+
+            // Resize arguments, if necessary.
+            // One extra place for space character.
+            if ((argc + *PRIMITIVE_COUNT + *ARCHIVE_UNIX_SHELL_COMMAND_CREATE_COUNT) >= args) {
+
+                // Determine arguments size.
+                args = argc * *POINTER_VECTOR_REALLOCATE_FACTOR + *PRIMITIVE_COUNT + *ARCHIVE_UNIX_SHELL_COMMAND_CREATE_COUNT;
+
+                reallocate_pointer_vector((void*) &arg, (void*) &argc, (void*) &args);
+            }
+
+            // Assemble option by copying the actual argument.
+            // A null termination character is added behind the last argument, see below!
+            set_array_elements(arg, (void*) &argc, (void*) SPACE_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+            argc = argc + *PRIMITIVE_COUNT;
+            set_array_elements(arg, (void*) &argc, (void*) ARCHIVE_UNIX_SHELL_COMMAND_CREATE, (void*) ARCHIVE_UNIX_SHELL_COMMAND_CREATE_COUNT, (void*) CHARACTER_ARRAY);
+            argc = argc + *ARCHIVE_UNIX_SHELL_COMMAND_CREATE_COUNT;
+        }
+    }
+
+    //
+    // Update option.
+    //
+
+    if (*updatem != NULL_POINTER) {
+
+        if (**updatem == 1) {
+
+            // Resize arguments, if necessary.
+            // One extra place for space character.
+            if ((argc + *PRIMITIVE_COUNT + *ARCHIVE_UNIX_SHELL_COMMAND_UPDATE_COUNT) >= args) {
+
+                // Determine arguments size.
+                args = argc * *POINTER_VECTOR_REALLOCATE_FACTOR + *PRIMITIVE_COUNT + *ARCHIVE_UNIX_SHELL_COMMAND_UPDATE_COUNT;
+
+                reallocate_pointer_vector((void*) &arg, (void*) &argc, (void*) &args);
+            }
+
+            // Assemble option by copying the actual argument.
+            // A null termination character is added behind the last argument, see below!
+            set_array_elements(arg, (void*) &argc, (void*) SPACE_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+            argc = argc + *PRIMITIVE_COUNT;
+            set_array_elements(arg, (void*) &argc, (void*) ARCHIVE_UNIX_SHELL_COMMAND_UPDATE, (void*) ARCHIVE_UNIX_SHELL_COMMAND_UPDATE_COUNT, (void*) CHARACTER_ARRAY);
+            argc = argc + *ARCHIVE_UNIX_SHELL_COMMAND_UPDATE_COUNT;
+        }
+    }
+
+    //
+    // Bzip2 option.
+    //
+
+    if (*bzip2m != NULL_POINTER) {
+
+        if (**bzip2m == 1) {
+
+            // Resize arguments, if necessary.
+            // One extra place for space character.
+            if ((argc + *PRIMITIVE_COUNT + *ARCHIVE_UNIX_SHELL_COMMAND_BZIP2_COUNT) >= args) {
+
+                // Determine arguments size.
+                args = argc * *POINTER_VECTOR_REALLOCATE_FACTOR + *PRIMITIVE_COUNT + *ARCHIVE_UNIX_SHELL_COMMAND_BZIP2_COUNT;
+
+                reallocate_pointer_vector((void*) &arg, (void*) &argc, (void*) &args);
+            }
+
+            // Assemble option by copying the actual argument.
+            // A null termination character is added behind the last argument, see below!
+            set_array_elements(arg, (void*) &argc, (void*) SPACE_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+            argc = argc + *PRIMITIVE_COUNT;
+            set_array_elements(arg, (void*) &argc, (void*) ARCHIVE_UNIX_SHELL_COMMAND_BZIP2, (void*) ARCHIVE_UNIX_SHELL_COMMAND_BZIP2_COUNT, (void*) CHARACTER_ARRAY);
+            argc = argc + *ARCHIVE_UNIX_SHELL_COMMAND_BZIP2_COUNT;
+        }
+    }
+
+    //
+    // Null termination.
+    //
+
+    // Resize arguments, if necessary.
+    // One extra place for null termination character.
+    if ((argc + *PRIMITIVE_COUNT) >= args) {
+
+        // Determine arguments size.
+        args = argc * *POINTER_VECTOR_REALLOCATE_FACTOR + *PRIMITIVE_COUNT;
+
+        reallocate_pointer_vector((void*) &arg, (void*) &argc, (void*) &args);
+    }
+
+    // Assemble arguments by adding the null termination character.
+    set_array_elements(arg, (void*) &argc, (void*) NULL_CONTROL_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+    argc = argc + *PRIMITIVE_COUNT;
+
+    // Execute arguments as process.
+    run_execute(arg);
+
+    // Deallocate arguments vector.
+    deallocate((void*) &arg, (void*) &args, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+
+/*??
+    //?? The following block assembles all arguments for using "fork/execv/wait" in "run_execute.c".
+    //?? But since "run_execute.c" is using system("program_name"),
+    //?? this block has been commented out.
+    //?? It may be either reactivated together with "fork/execv/wait"
+    //?? in "run_execute.c" or deleted later.
+
+    // The arguments vector.
+    void* arg = NULL_POINTER;
+    int argc = *NUMBER_0_INTEGER;
+    int args = *NUMBER_0_INTEGER;
     // The system shell as null terminated string.
     void* shell = NULL_POINTER;
     int shellc = *NUMBER_0_INTEGER;
@@ -352,6 +479,7 @@ void run_archive(void* p0, void* p1, void* p2, void* p3) {
 
     // Deallocate arguments vector.
     deallocate_pointer_vector((void*) &arg, (void*) &args);
+*/
 }
 
 /* RUN_ARCHIVE_SOURCE */

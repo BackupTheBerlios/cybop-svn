@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.22 $ $Date: 2006-06-18 14:57:34 $ $Author: christian $
+ * @version $Revision: 1.23 $ $Date: 2006-06-20 16:16:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -182,7 +182,7 @@ void handle_operation(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
         if (r != 0) {
 
-            create_part(p12, p13, p1, p2, p3);
+            create(p12, p13, p1, p2, p3);
         }
     }
 
@@ -192,7 +192,7 @@ void handle_operation(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
         if (r != 0) {
 
-            deallocate_part(p12, p13, p1, p2, p3);
+            destroy(p12, p13, p1, p2, p3);
         }
     }
 

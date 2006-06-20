@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.21 $ $Date: 2006-06-04 00:54:45 $ $Author: christian $
+ * @version $Revision: 1.22 $ $Date: 2006-06-20 16:16:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -199,14 +199,15 @@ void encode_html_integer(void** dest, int* dest_count, int* dest_size,
         *dest_int_count = 0;
         allocate(&dest_int_size, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
         *dest_int_size = 0;
+
+/*??
+    //?? REACTIVATE THIS LATER! It was commented out because of the missing
+    //?? knowledge memory parameters to be handed over to the "serialise" procedure.
         create((void*) &dest_int, (void*) dest_int_count, (void*) dest_int_size,
             (void*) SPACE_ASCII_CHARACTER , (void*) PRIMITIVE_COUNT,
             (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
             (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
 
-/*??
-    //?? REACTIVATE THIS LATER! It was commented out because of the missing
-    //?? knowledge memory parameters to be handed over to the "serialise" procedure.
         serialise( &dest_int, dest_int_count, dest_int_size,
                source_model, source_model_count,
                INTEGER_VECTOR_ABSTRACTION, INTEGER_VECTOR_ABSTRACTION_COUNT);

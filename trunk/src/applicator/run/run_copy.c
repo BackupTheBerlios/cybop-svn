@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2006-06-17 10:32:38 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2006-06-20 16:16:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -116,6 +116,134 @@ void run_copy(void* p0, void* p1, void* p2, void* p3) {
         (void*) &destinationm, (void*) &destinationmc, (void*) &destinationms,
         (void*) &destinationd, (void*) &destinationdc, (void*) &destinationds,
         p2, p3);
+
+    // The arguments vector.
+    void* arg = NULL_POINTER;
+    int argc = *NUMBER_0_INTEGER;
+    int args = *NUMBER_0_INTEGER;
+
+    // Determine arguments size.
+    args = *COPY_UNIX_SHELL_COMMAND_COUNT;
+
+    // Allocate arguments vector.
+    allocate((void*) &arg, (void*) &args, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+
+    // Assemble arguments by copying the actual command.
+    // A null termination character is added behind the last argument, see below!
+    set_array_elements(arg, (void*) &argc, (void*) COPY_UNIX_SHELL_COMMAND, (void*) COPY_UNIX_SHELL_COMMAND_COUNT, (void*) CHARACTER_ARRAY);
+    argc = argc + *COPY_UNIX_SHELL_COMMAND_COUNT;
+
+    //
+    // Recursive option.
+    //
+
+    if (*recursivem != NULL_POINTER) {
+
+        if (**recursivem == 1) {
+
+            // Resize arguments, if necessary.
+            // One extra place for space character.
+            if ((argc + *PRIMITIVE_COUNT + *COPY_UNIX_SHELL_COMMAND_RECURSIVE_COUNT) >= args) {
+
+                // Determine arguments size.
+                args = argc * *POINTER_VECTOR_REALLOCATE_FACTOR + *PRIMITIVE_COUNT + *COPY_UNIX_SHELL_COMMAND_RECURSIVE_COUNT;
+
+                reallocate_pointer_vector((void*) &arg, (void*) &argc, (void*) &args);
+            }
+
+            // Assemble option by copying the actual argument.
+            // A null termination character is added behind the last argument, see below!
+            set_array_elements(arg, (void*) &argc, (void*) SPACE_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+            argc = argc + *PRIMITIVE_COUNT;
+            set_array_elements(arg, (void*) &argc, (void*) COPY_UNIX_SHELL_COMMAND_RECURSIVE, (void*) COPY_UNIX_SHELL_COMMAND_RECURSIVE_COUNT, (void*) CHARACTER_ARRAY);
+            argc = argc + *COPY_UNIX_SHELL_COMMAND_RECURSIVE_COUNT;
+        }
+    }
+
+    //
+    // Source option.
+    //
+
+    if (*sourcem != NULL_POINTER) {
+
+        if (**sourcem == 1) {
+
+            // Resize arguments, if necessary.
+            // One extra place for space character.
+            if ((argc + *PRIMITIVE_COUNT + *COPY_UNIX_SHELL_COMMAND_SOURCE_COUNT) >= args) {
+
+                // Determine arguments size.
+                args = argc * *POINTER_VECTOR_REALLOCATE_FACTOR + *PRIMITIVE_COUNT + *COPY_UNIX_SHELL_COMMAND_SOURCE_COUNT;
+
+                reallocate_pointer_vector((void*) &arg, (void*) &argc, (void*) &args);
+            }
+
+            // Assemble option by copying the actual argument.
+            // A null termination character is added behind the last argument, see below!
+            set_array_elements(arg, (void*) &argc, (void*) SPACE_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+            argc = argc + *PRIMITIVE_COUNT;
+            set_array_elements(arg, (void*) &argc, (void*) COPY_UNIX_SHELL_COMMAND_SOURCE, (void*) COPY_UNIX_SHELL_COMMAND_SOURCE_COUNT, (void*) CHARACTER_ARRAY);
+            argc = argc + *COPY_UNIX_SHELL_COMMAND_SOURCE_COUNT;
+        }
+    }
+
+    //
+    // Destination option.
+    //
+
+    if (*destinationm != NULL_POINTER) {
+
+        if (**destinationm == 1) {
+
+            // Resize arguments, if necessary.
+            // One extra place for space character.
+            if ((argc + *PRIMITIVE_COUNT + *COPY_UNIX_SHELL_COMMAND_DESTINATION_COUNT) >= args) {
+
+                // Determine arguments size.
+                args = argc * *POINTER_VECTOR_REALLOCATE_FACTOR + *PRIMITIVE_COUNT + *COPY_UNIX_SHELL_COMMAND_DESTINATION_COUNT;
+
+                reallocate_pointer_vector((void*) &arg, (void*) &argc, (void*) &args);
+            }
+
+            // Assemble option by copying the actual argument.
+            // A null termination character is added behind the last argument, see below!
+            set_array_elements(arg, (void*) &argc, (void*) SPACE_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+            argc = argc + *PRIMITIVE_COUNT;
+            set_array_elements(arg, (void*) &argc, (void*) COPY_UNIX_SHELL_COMMAND_DESTINATION, (void*) COPY_UNIX_SHELL_COMMAND_DESTINATION_COUNT, (void*) CHARACTER_ARRAY);
+            argc = argc + *COPY_UNIX_SHELL_COMMAND_DESTINATION_COUNT;
+        }
+    }
+
+    //
+    // Null termination.
+    //
+
+    // Resize arguments, if necessary.
+    // One extra place for null termination character.
+    if ((argc + *PRIMITIVE_COUNT) >= args) {
+
+        // Determine arguments size.
+        args = argc * *POINTER_VECTOR_REALLOCATE_FACTOR + *PRIMITIVE_COUNT;
+
+        reallocate_pointer_vector((void*) &arg, (void*) &argc, (void*) &args);
+    }
+
+    // Assemble arguments by adding the null termination character.
+    set_array_elements(arg, (void*) &argc, (void*) NULL_CONTROL_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+    argc = argc + *PRIMITIVE_COUNT;
+
+    // Execute arguments as process.
+    run_execute(arg);
+
+    // Deallocate arguments vector.
+    deallocate((void*) &arg, (void*) &args, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+
+/*??
+    //?? The following block assembles all arguments for using "fork/execv/wait" in "run_execute.c".
+    //?? But since "run_execute.c" is using system("program_name"),
+    //?? this block has been commented out.
+    //?? It may be either reactivated together with "fork/execv/wait"
+    //?? in "run_execute.c" or deleted later.
 
     // The arguments vector.
     void* arg = NULL_POINTER;
@@ -350,6 +478,7 @@ void run_copy(void* p0, void* p1, void* p2, void* p3) {
 
     // Deallocate arguments vector.
     deallocate_pointer_vector((void*) &arg, (void*) &args);
+*/
 }
 
 /* RUN_COPY_SOURCE */

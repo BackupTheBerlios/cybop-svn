@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.18 $ $Date: 2006-06-18 14:57:34 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2006-06-20 16:16:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -335,16 +335,6 @@ static int* COUNTER_NAME_COUNT = NUMBER_7_INTEGER_ARRAY;
 // Create names.
 //
 
-/** The create element name. */
-static char CREATE_ELEMENT_NAME_ARRAY[] = {'e', 'l', 'e', 'm', 'e', 'n', 't'};
-static char* CREATE_ELEMENT_NAME = CREATE_ELEMENT_NAME_ARRAY;
-static int* CREATE_ELEMENT_NAME_COUNT = NUMBER_7_INTEGER_ARRAY;
-
-/** The create whole name. */
-static char CREATE_WHOLE_NAME_ARRAY[] = {'w', 'h', 'o', 'l', 'e'};
-static char* CREATE_WHOLE_NAME = CREATE_WHOLE_NAME_ARRAY;
-static int* CREATE_WHOLE_NAME_COUNT = NUMBER_5_INTEGER_ARRAY;
-
 /** The create name name. */
 static char CREATE_NAME_NAME_ARRAY[] = {'n', 'a', 'm', 'e'};
 static char* CREATE_NAME_NAME = CREATE_NAME_NAME_ARRAY;
@@ -364,6 +354,16 @@ static int* CREATE_ABSTRACTION_NAME_COUNT = NUMBER_11_INTEGER_ARRAY;
 static char CREATE_MODEL_NAME_ARRAY[] = {'m', 'o', 'd', 'e', 'l'};
 static char* CREATE_MODEL_NAME = CREATE_MODEL_NAME_ARRAY;
 static int* CREATE_MODEL_NAME_COUNT = NUMBER_5_INTEGER_ARRAY;
+
+/** The create element name. */
+static char CREATE_ELEMENT_NAME_ARRAY[] = {'e', 'l', 'e', 'm', 'e', 'n', 't'};
+static char* CREATE_ELEMENT_NAME = CREATE_ELEMENT_NAME_ARRAY;
+static int* CREATE_ELEMENT_NAME_COUNT = NUMBER_7_INTEGER_ARRAY;
+
+/** The create whole name. */
+static char CREATE_WHOLE_NAME_ARRAY[] = {'w', 'h', 'o', 'l', 'e'};
+static char* CREATE_WHOLE_NAME = CREATE_WHOLE_NAME_ARRAY;
+static int* CREATE_WHOLE_NAME_COUNT = NUMBER_5_INTEGER_ARRAY;
 
 //
 // Destroy names.
@@ -426,10 +426,35 @@ static int* SEND_URL_NAME_COUNT = NUMBER_3_INTEGER_ARRAY;
 // Receive names.
 //
 
+/** The receive name name. */
+static char RECEIVE_NAME_NAME_ARRAY[] = {'n', 'a', 'm', 'e'};
+static char* RECEIVE_NAME_NAME = RECEIVE_NAME_NAME_ARRAY;
+static int* RECEIVE_NAME_NAME_COUNT = NUMBER_4_INTEGER_ARRAY;
+
 /** The receive channel name. */
 static char RECEIVE_CHANNEL_NAME_ARRAY[] = {'c', 'h', 'a', 'n', 'n', 'e', 'l'};
 static char* RECEIVE_CHANNEL_NAME = RECEIVE_CHANNEL_NAME_ARRAY;
 static int* RECEIVE_CHANNEL_NAME_COUNT = NUMBER_7_INTEGER_ARRAY;
+
+/** The receive abstraction name. */
+static char RECEIVE_ABSTRACTION_NAME_ARRAY[] = {'a', 'b', 's', 't', 'r', 'a', 'c', 't', 'i', 'o', 'n'};
+static char* RECEIVE_ABSTRACTION_NAME = RECEIVE_ABSTRACTION_NAME_ARRAY;
+static int* RECEIVE_ABSTRACTION_NAME_COUNT = NUMBER_11_INTEGER_ARRAY;
+
+/** The receive model name. */
+static char RECEIVE_MODEL_NAME_ARRAY[] = {'m', 'o', 'd', 'e', 'l'};
+static char* RECEIVE_MODEL_NAME = RECEIVE_MODEL_NAME_ARRAY;
+static int* RECEIVE_MODEL_NAME_COUNT = NUMBER_5_INTEGER_ARRAY;
+
+/** The receive element name. */
+static char RECEIVE_ELEMENT_NAME_ARRAY[] = {'e', 'l', 'e', 'm', 'e', 'n', 't'};
+static char* RECEIVE_ELEMENT_NAME = RECEIVE_ELEMENT_NAME_ARRAY;
+static int* RECEIVE_ELEMENT_NAME_COUNT = NUMBER_7_INTEGER_ARRAY;
+
+/** The receive whole name. */
+static char RECEIVE_WHOLE_NAME_ARRAY[] = {'w', 'h', 'o', 'l', 'e'};
+static char* RECEIVE_WHOLE_NAME = RECEIVE_WHOLE_NAME_ARRAY;
+static int* RECEIVE_WHOLE_NAME_COUNT = NUMBER_5_INTEGER_ARRAY;
 
 /** The receive root name. */
 static char RECEIVE_ROOT_NAME_ARRAY[] = {'r', 'o', 'o', 't'};
