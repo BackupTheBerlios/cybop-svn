@@ -22,7 +22,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.23 $ $Date: 2006-06-20 16:16:29 $ $Author: christian $
+ * @version $Revision: 1.24 $ $Date: 2006-06-20 22:35:08 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -269,12 +269,10 @@ void create_model(void* p0, void* p1, void* p2, void* p3, void* p4,
  * or to the knowledge memory root directly, if no whole element is given.
  *
  * Expected parameters:
+ * - name
+ * - abstraction
  * - element (may be "part" or "meta")
  * - whole
- * - name
- * - channel
- * - abstraction
- * - model
  *
  * @param p0 the parameters
  * @param p1 the parameters count
@@ -283,6 +281,8 @@ void create_model(void* p0, void* p1, void* p2, void* p3, void* p4,
  * @param p4 the knowledge memory size
  */
 void create(void* p0, void* p1, void* p2, void* p3, void* p4) {
+
+    log_message_debug("Create knowledge model.");
 
     // The name abstraction.
     void** na = &NULL_POINTER;
@@ -297,19 +297,6 @@ void create(void* p0, void* p1, void* p2, void* p3, void* p4) {
     void** ndc = &NULL_POINTER;
     void** nds = &NULL_POINTER;
 
-    // The channel abstraction.
-    void** ca = &NULL_POINTER;
-    void** cac = &NULL_POINTER;
-    void** cas = &NULL_POINTER;
-    // The channel model.
-    void** cm = &NULL_POINTER;
-    void** cmc = &NULL_POINTER;
-    void** cms = &NULL_POINTER;
-    // The channel details.
-    void** cd = &NULL_POINTER;
-    void** cdc = &NULL_POINTER;
-    void** cds = &NULL_POINTER;
-
     // The abstraction abstraction.
     void** aa = &NULL_POINTER;
     void** aac = &NULL_POINTER;
@@ -322,19 +309,6 @@ void create(void* p0, void* p1, void* p2, void* p3, void* p4) {
     void** ad = &NULL_POINTER;
     void** adc = &NULL_POINTER;
     void** ads = &NULL_POINTER;
-
-    // The model abstraction.
-    void** ma = &NULL_POINTER;
-    void** mac = &NULL_POINTER;
-    void** mas = &NULL_POINTER;
-    // The model model.
-    void** mm = &NULL_POINTER;
-    void** mmc = &NULL_POINTER;
-    void** mms = &NULL_POINTER;
-    // The model details.
-    void** md = &NULL_POINTER;
-    void** mdc = &NULL_POINTER;
-    void** mds = &NULL_POINTER;
 
     // The element abstraction.
     void** ea = &NULL_POINTER;
@@ -370,28 +344,12 @@ void create(void* p0, void* p1, void* p2, void* p3, void* p4) {
         (void*) &nd, (void*) &ndc, (void*) &nds,
         p2, p3);
 
-    // Get channel.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) CREATE_CHANNEL_NAME, (void*) CREATE_CHANNEL_NAME_COUNT,
-        (void*) &ca, (void*) &cac, (void*) &cas,
-        (void*) &cm, (void*) &cmc, (void*) &cms,
-        (void*) &cd, (void*) &cdc, (void*) &cds,
-        p2, p3);
-
     // Get abstraction.
     get_universal_compound_element_by_name(p0, p1,
         (void*) CREATE_ABSTRACTION_NAME, (void*) CREATE_ABSTRACTION_NAME_COUNT,
         (void*) &aa, (void*) &aac, (void*) &aas,
         (void*) &am, (void*) &amc, (void*) &ams,
         (void*) &ad, (void*) &adc, (void*) &ads,
-        p2, p3);
-
-    // Get model.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) CREATE_MODEL_NAME, (void*) CREATE_MODEL_NAME_COUNT,
-        (void*) &ma, (void*) &mac, (void*) &mas,
-        (void*) &mm, (void*) &mmc, (void*) &mms,
-        (void*) &md, (void*) &mdc, (void*) &mds,
         p2, p3);
 
     // Get element.
@@ -409,8 +367,6 @@ void create(void* p0, void* p1, void* p2, void* p3, void* p4) {
         (void*) &wm, (void*) &wmc, (void*) &wms,
         (void*) &wd, (void*) &wdc, (void*) &wds,
         p2, p3);
-
-    log_message_debug("Create knowledge model.");
 
     // The knowledge model name.
     void* kmn = NULL_POINTER;
@@ -451,7 +407,7 @@ void create(void* p0, void* p1, void* p2, void* p3, void* p4) {
     *kmmc = 0;
     allocate((void*) &kmms, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
     *kmms = 0;
-    create_model((void*) &kmm, (void*) kmmc, (void*) kmms, *mm, *mmc, *am, *amc, *cm, *cmc);
+    create_model((void*) &kmm, (void*) kmmc, (void*) kmms, EMPTY_MODEL, EMPTY_MODEL_COUNT, *am, *amc, INLINE_CHANNEL, INLINE_CHANNEL_COUNT);
 
     // Create knowledge model details.
     allocate((void*) &kmdc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);

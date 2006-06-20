@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.17 $ $Date: 2006-06-20 16:16:29 $ $Author: christian $
+ * @version $Revision: 1.18 $ $Date: 2006-06-20 22:35:09 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -337,9 +337,9 @@ static char* CORBA_MODEL = CORBA_MODEL_ARRAY;
 static int* CORBA_MODEL_COUNT = NUMBER_5_INTEGER_ARRAY;
 
 /** The file system model. */
-static char FILE_SYSTEM_MODEL_ARRAY[] = {'f', 'i', 'l', 'e', '_', 's', 'y', 's', 't', 'e', 'm'};
+static char FILE_SYSTEM_MODEL_ARRAY[] = {'f', 'i', 'l', 'e'};
 static char* FILE_SYSTEM_MODEL = FILE_SYSTEM_MODEL_ARRAY;
-static int* FILE_SYSTEM_MODEL_COUNT = NUMBER_11_INTEGER_ARRAY;
+static int* FILE_SYSTEM_MODEL_COUNT = NUMBER_4_INTEGER_ARRAY;
 
 /** The floppy model. */
 static char FLOPPY_MODEL_ARRAY[] = {'f', 'l', 'o', 'p', 'p', 'y'};
