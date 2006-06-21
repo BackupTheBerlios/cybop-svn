@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.32 $ $Date: 2006-06-18 14:57:34 $ $Author: christian $
+ * @version $Revision: 1.33 $ $Date: 2006-06-21 23:18:37 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -132,6 +132,32 @@ void send_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
     void** mdc = &NULL_POINTER;
     void** mds = &NULL_POINTER;
 
+    // The area abstraction.
+    void** aa = &NULL_POINTER;
+    void** aac = &NULL_POINTER;
+    void** aas = &NULL_POINTER;
+    // The area model.
+    void** am = &NULL_POINTER;
+    void** amc = &NULL_POINTER;
+    void** ams = &NULL_POINTER;
+    // The area details.
+    void** ad = &NULL_POINTER;
+    void** adc = &NULL_POINTER;
+    void** ads = &NULL_POINTER;
+
+    // The clean abstraction.
+    void** cla = &NULL_POINTER;
+    void** clac = &NULL_POINTER;
+    void** clas = &NULL_POINTER;
+    // The clean model.
+    void** clm = &NULL_POINTER;
+    void** clmc = &NULL_POINTER;
+    void** clms = &NULL_POINTER;
+    // The clean details.
+    void** cld = &NULL_POINTER;
+    void** cldc = &NULL_POINTER;
+    void** clds = &NULL_POINTER;
+
     // Get signal memory mutex.
     get(p2, (void*) SIGNAL_MEMORY_MUTEX_INTERNAL, (void*) &mt, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     // Get interrupt request internal.
@@ -169,6 +195,22 @@ void send_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
         (void*) &md, (void*) &mdc, (void*) &mds,
         p3, p4);
 
+    // Get area.
+    get_universal_compound_element_by_name(p0, p1,
+        (void*) SEND_AREA_NAME, (void*) SEND_AREA_NAME_COUNT,
+        (void*) &aa, (void*) &aac, (void*) &aas,
+        (void*) &am, (void*) &amc, (void*) &ams,
+        (void*) &ad, (void*) &adc, (void*) &ads,
+        p3, p4);
+
+    // Get clean flag.
+    get_universal_compound_element_by_name(p0, p1,
+        (void*) SEND_CLEAN_NAME, (void*) SEND_CLEAN_NAME_COUNT,
+        (void*) &cla, (void*) &clac, (void*) &clas,
+        (void*) &clm, (void*) &clmc, (void*) &clms,
+        (void*) &cld, (void*) &cldc, (void*) &clds,
+        p3, p4);
+
     // The comparison result.
     int r = 0;
 
@@ -188,7 +230,7 @@ void send_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
 
         if (r != 0) {
 
-            send_linux_console(p2, *mm, *mmc, p3, p4);
+            send_linux_console(p2, *mm, *mmc, *am, *amc, *clm, *clmc, p3, p4);
         }
     }
 

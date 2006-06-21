@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.19 $ $Date: 2006-06-20 16:16:29 $ $Author: christian $
+ * @version $Revision: 1.20 $ $Date: 2006-06-21 23:18:38 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -416,6 +416,16 @@ static int* SEND_RECEIVER_NAME_COUNT = NUMBER_8_INTEGER_ARRAY;
 static char SEND_MESSAGE_NAME_ARRAY[] = {'m', 'e', 's', 's', 'a', 'g', 'e'};
 static char* SEND_MESSAGE_NAME = SEND_MESSAGE_NAME_ARRAY;
 static int* SEND_MESSAGE_NAME_COUNT = NUMBER_7_INTEGER_ARRAY;
+
+/** The send area name. */
+static char SEND_AREA_NAME_ARRAY[] = {'a', 'r', 'e', 'a'};
+static char* SEND_AREA_NAME = SEND_AREA_NAME_ARRAY;
+static int* SEND_AREA_NAME_COUNT = NUMBER_4_INTEGER_ARRAY;
+
+/** The send clean name. */
+static char SEND_CLEAN_NAME_ARRAY[] = {'c', 'l', 'e', 'a', 'n'};
+static char* SEND_CLEAN_NAME = SEND_CLEAN_NAME_ARRAY;
+static int* SEND_CLEAN_NAME_COUNT = NUMBER_5_INTEGER_ARRAY;
 
 /** The send url name. */
 static char SEND_URL_NAME_ARRAY[] = {'u', 'r', 'l'};

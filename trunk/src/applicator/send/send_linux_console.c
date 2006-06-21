@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.44 $ $Date: 2006-06-20 16:16:29 $ $Author: christian $
+ * @version $Revision: 1.45 $ $Date: 2006-06-21 23:18:37 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -45,12 +45,16 @@
  * Sends a textual user interface (tui) via linux console.
  *
  * @param p0 the internal memory
- * @param p1 the source tui compound model
- * @param p2 the source count
- * @param p3 the knowledge memory
- * @param p4 the knowledge memory count
+ * @param p1 the source root window compound model
+ * @param p2 the source root count
+ * @param p3 the source part name (area to be repainted)
+ * @param p4 the source part name count
+ * @param p5 the source clean flag
+ * @param p6 the source clean flag count
+ * @param p7 the knowledge memory
+ * @param p8 the knowledge memory count
  */
-void send_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void send_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8) {
 
     log_message_debug("Send linux console message.");
 
@@ -62,27 +66,36 @@ void send_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
     // Allocate array.
     allocate((void*) &a, (void*) &as, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
-    // Resize destination character array for erase display control sequence.
-    if ((ac + *ESCAPE_CONTROL_SEQUENCE_COUNT + *ERASE_DISPLAY_CONTROL_SEQUENCE_COUNT) >= as) {
+    if (p5 != NULL_POINTER) {
 
-        // Set destination character array size.
-        // CAUTION! Add constant in case ac is zero!
-        as = ac * *WIDE_CHARACTER_VECTOR_REALLOCATE_FACTOR
-            + *ESCAPE_CONTROL_SEQUENCE_COUNT
-            + *ERASE_DISPLAY_CONTROL_SEQUENCE_COUNT;
+        int* f = (int*) p5;
 
-        // Reallocate destination character array.
-        reallocate_array((void*) &a, (void*) &ac, (void*) &as, (void*) WIDE_CHARACTER_ARRAY);
+        if (*f != *NUMBER_0_INTEGER) {
+
+            // Resize destination character array for erase display control sequence.
+            if ((ac + *ESCAPE_CONTROL_SEQUENCE_COUNT + *ERASE_DISPLAY_CONTROL_SEQUENCE_COUNT) >= as) {
+
+                // Set destination character array size.
+                // CAUTION! Add constant in case ac is zero!
+                as = ac * *WIDE_CHARACTER_VECTOR_REALLOCATE_FACTOR
+                    + *ESCAPE_CONTROL_SEQUENCE_COUNT
+                    + *ERASE_DISPLAY_CONTROL_SEQUENCE_COUNT;
+
+                // Reallocate destination character array.
+                reallocate_array((void*) &a, (void*) &ac, (void*) &as, (void*) WIDE_CHARACTER_ARRAY);
+            }
+
+            // Set erase display control sequence.
+            set_array_elements(a, (void*) &ac, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+            ac = ac + *ESCAPE_CONTROL_SEQUENCE_COUNT;
+            set_array_elements(a, (void*) &ac, (void*) ERASE_DISPLAY_CONTROL_SEQUENCE, (void*) ERASE_DISPLAY_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+            ac = ac + *ERASE_DISPLAY_CONTROL_SEQUENCE_COUNT;
+        }
     }
 
-    // Set erase display control sequence.
-    set_array_elements(a, (void*) &ac, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
-    ac = ac + *ESCAPE_CONTROL_SEQUENCE_COUNT;
-    set_array_elements(a, (void*) &ac, (void*) ERASE_DISPLAY_CONTROL_SEQUENCE, (void*) ERASE_DISPLAY_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
-    ac = ac + *ERASE_DISPLAY_CONTROL_SEQUENCE_COUNT;
-
     // Serialise textual user interface (tui) into array.
-    serialise((void*) &a, (void*) &ac, (void*) &as, p1, p2, (void*) LINUX_CONSOLE_MODEL, (void*) LINUX_CONSOLE_MODEL_COUNT, p3, p4);
+//??    serialise((void*) &a, (void*) &ac, (void*) &as, p1, p2, (void*) LINUX_CONSOLE_MODEL, (void*) LINUX_CONSOLE_MODEL_COUNT, p3, p4);
+    serialise_linux_console((void*) &a, (void*) &ac, (void*) &as, p1, p2, NULL_POINTER, NULL_POINTER, p3, p4, p7, p8);
 
     // The linux console terminal.
     void** t = &NULL_POINTER;

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.15 $ $Date: 2006-06-04 00:54:45 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2006-06-21 23:18:39 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -44,6 +44,7 @@
 #include "../../globals/constants/structure_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../globals/variables/variables.c"
+#include "../../memoriser/accessor/compound_accessor.c"
 #include "../../memoriser/accessor.c"
 #include "../../memoriser/mapper.c"
 
@@ -1362,11 +1363,13 @@ void parse_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
  * @param p4 the source compound model count
  * @param p5 the source compound details
  * @param p6 the source compound details count
- * @param p7 the knowledge memory
- * @param p8 the knowledge memory count
+ * @param p7 the source part name (area to be repainted)
+ * @param p8 the source part name count
+ * @param p9 the knowledge memory
+ * @param p10 the knowledge memory count
  */
 void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4,
-    void* p5, void* p6, void* p7, void* p8) {
+    void* p5, void* p6, void* p7, void* p8, void* p9, void* p10) {
 
     if (p4 != NULL_POINTER) {
 
@@ -1545,487 +1548,564 @@ void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4,
         void** bdc = &NULL_POINTER;
         void** bds = &NULL_POINTER;
 
-        // The comparison result.
-        int r = 0;
+        // The element name.
+        void* en = NULL_POINTER;
+        int enc = 0;
+        // The remaining name.
+        void* rn = NULL_POINTER;
+        int rnc = 0;
+        // The meta hierarchy flag with the following meanings:
+        // -1: not a compound knowledge hierarchy
+        // 0: part hierarchy
+        // 1: meta hierarchy
+        int f = -1;
         // The loop count.
         int j = 0;
+        // The name of the current compound part element.
+        void** n = &NULL_POINTER;
+        void** nc = &NULL_POINTER;
+        void** ns = &NULL_POINTER;
+        // The name comparison result.
+        int nr = 0;
+        // The abstraction comparison result.
+        int ar = 0;
 
-        // Iterate through compound parts.
-        while (1) {
+        // Get compound element (area to be repainted) name and remaining name,
+        // as well as the flag indicating a part- or meta element.
+        get_compound_element_name_and_remaining_name(p7, p8, (void*) &en, (void*) &enc, (void*) &rn, (void*) &rnc, (void*) &f);
 
-            if (j >= *sc) {
+        if ((p7 == NULL_POINTER) || (*((int*) p8) == 0) || (f == 0)) {
 
-                break;
+            // Either, no hierarchical element name (repaint area) was given
+            // (p7 == NULL_POINTER), in which case not just a small area
+            // but the whole textual user interface (tui) window is repainted,
+            // (CAUTION! (*((int*) p8) == 0) is also necessary!)
+            // OR:
+            // the expected compound element (area to be repainted) pointed to
+            // by the hierarchical name is a "part" element (not a "meta" element),
+            // which is correct, so that the element can be processed/ repainted.
+
+            // Iterate through compound parts.
+            while (1) {
+
+                if (j >= *sc) {
+
+                    break;
+                }
+
+                // Get part name at current index.
+                get_compound_element_name_by_index(p3, p4, (void*) &j, (void*) &n, (void*) &nc, (void*) &ns);
+
+                // Compare expected name with that of the current compound part element.
+                compare_arrays(*n, *nc, en, (void*) &enc, (void*) &nr, (void*) CHARACTER_ARRAY);
+
+                if ((p7 == NULL_POINTER) || (*((int*) p8) == 0) || (nr != 0)) {
+
+                    // Either, no hierarchical element name (repaint area) was given
+                    // (p7 == NULL_POINTER), in which case not just a small area
+                    // but the whole textual user interface (tui) window is repainted,
+                    // (CAUTION! (*((int*) p8) == 0) is also necessary!)
+                    // OR:
+                    // the compound part name matches the next name in the
+                    // given cascade of separated names, pointing to a knowledge model.
+
+                    // Get part at index j.
+                    get_compound_element_by_index(p3, p4, (void*) &j,
+                        (void*) &a, (void*) &ac, (void*) &as,
+                        (void*) &m, (void*) &mc, (void*) &ms,
+                        (void*) &d, (void*) &dc, (void*) &ds);
+
+                    // Get source whole position from details.
+                    get_universal_compound_element_by_name(p5, p6,
+                        (void*) UI_POSITION_NAME, (void*) UI_POSITION_NAME_COUNT,
+                        (void*) &wpa, (void*) &wpac, (void*) &wpas,
+                        (void*) &wpm, (void*) &wpmc, (void*) &wpms,
+                        (void*) &wpd, (void*) &wpdc, (void*) &wpds,
+                        p9, p10);
+                    // Get source whole size from details.
+                    get_universal_compound_element_by_name(p5, p6,
+                        (void*) UI_SIZE_NAME, (void*) UI_SIZE_NAME_COUNT,
+                        (void*) &wsa, (void*) &wsac, (void*) &wsas,
+                        (void*) &wsm, (void*) &wsmc, (void*) &wsms,
+                        (void*) &wsd, (void*) &wsdc, (void*) &wsds,
+                        p9, p10);
+
+                    // Get part super properties from details.
+                    get_universal_compound_element_by_name(*d, *dc,
+                        (void*) SUPER_PROPERTIES_NAME, (void*) SUPER_PROPERTIES_NAME_COUNT,
+                        (void*) &supera, (void*) &superac, (void*) &superas,
+                        (void*) &superm, (void*) &supermc, (void*) &superms,
+                        (void*) &superd, (void*) &superdc, (void*) &superds,
+                        p9, p10);
+
+                    //
+                    // Get standard property values from part.
+                    // If a standard property value DOES exist, previously gotten
+                    // default property values (from super part) are overwritten.
+                    // If a standard property value does NOT exist, the default
+                    // property value remains untouched.
+                    //
+
+                    // Get part shape from details.
+                    get_universal_compound_element_by_name(*d, *dc,
+                        (void*) UI_SHAPE_NAME, (void*) UI_SHAPE_NAME_COUNT,
+                        (void*) &sha, (void*) &shac, (void*) &shas,
+                        (void*) &shm, (void*) &shmc, (void*) &shms,
+                        (void*) &shd, (void*) &shdc, (void*) &shds,
+                        p9, p10);
+                    // Get source part layout from details.
+                    get_universal_compound_element_by_name(*d, *dc,
+                        (void*) UI_LAYOUT_NAME, (void*) UI_LAYOUT_NAME_COUNT,
+                        (void*) &la, (void*) &lac, (void*) &las,
+                        (void*) &lm, (void*) &lmc, (void*) &lms,
+                        (void*) &ld, (void*) &ldc, (void*) &lds,
+                        p9, p10);
+                    // Get source part cell from details.
+                    get_universal_compound_element_by_name(*d, *dc,
+                        (void*) UI_CELL_NAME, (void*) UI_CELL_NAME_COUNT,
+                        (void*) &ca, (void*) &cac, (void*) &cas,
+                        (void*) &cm, (void*) &cmc, (void*) &cms,
+                        (void*) &cd, (void*) &cdc, (void*) &cds,
+                        p9, p10);
+                    // Get part position from details.
+                    get_universal_compound_element_by_name(*d, *dc,
+                        (void*) UI_POSITION_NAME, (void*) UI_POSITION_NAME_COUNT,
+                        (void*) &pa, (void*) &pac, (void*) &pas,
+                        (void*) &pm, (void*) &pmc, (void*) &pms,
+                        (void*) &pd, (void*) &pdc, (void*) &pds,
+                        p9, p10);
+                    // Get part size from details.
+                    get_universal_compound_element_by_name(*d, *dc,
+                        (void*) UI_SIZE_NAME, (void*) UI_SIZE_NAME_COUNT,
+                        (void*) &sa, (void*) &sac, (void*) &sas,
+                        (void*) &sm, (void*) &smc, (void*) &sms,
+                        (void*) &sd, (void*) &sdc, (void*) &sds,
+                        p9, p10);
+                    // Get part background colour from details.
+                    get_universal_compound_element_by_name(*d, *dc,
+                        (void*) UI_BACKGROUND_NAME, (void*) UI_BACKGROUND_NAME_COUNT,
+                        (void*) &bga, (void*) &bgac, (void*) &bgas,
+                        (void*) &bgm, (void*) &bgmc, (void*) &bgms,
+                        (void*) &bgd, (void*) &bgdc, (void*) &bgds,
+                        p9, p10);
+                    // Get part foreground colour from details.
+                    get_universal_compound_element_by_name(*d, *dc,
+                        (void*) UI_FOREGROUND_NAME, (void*) UI_FOREGROUND_NAME_COUNT,
+                        (void*) &fga, (void*) &fgac, (void*) &fgas,
+                        (void*) &fgm, (void*) &fgmc, (void*) &fgms,
+                        (void*) &fgd, (void*) &fgdc, (void*) &fgds,
+                        p9, p10);
+                    // Get part border from details.
+                    get_universal_compound_element_by_name(*d, *dc,
+                        (void*) TUI_BORDER_NAME, (void*) TUI_BORDER_NAME_COUNT,
+                        (void*) &boa, (void*) &boac, (void*) &boas,
+                        (void*) &bom, (void*) &bomc, (void*) &boms,
+                        (void*) &bod, (void*) &bodc, (void*) &bods,
+                        p9, p10);
+                    // Get part hidden property from details.
+                    get_universal_compound_element_by_name(*d, *dc,
+                        (void*) TUI_HIDDEN_NAME, (void*) TUI_HIDDEN_NAME_COUNT,
+                        (void*) &ha, (void*) &hac, (void*) &has,
+                        (void*) &hm, (void*) &hmc, (void*) &hms,
+                        (void*) &hd, (void*) &hdc, (void*) &hds,
+                        p9, p10);
+                    // Get part inverse property from details.
+                    get_universal_compound_element_by_name(*d, *dc,
+                        (void*) TUI_INVERSE_NAME, (void*) TUI_INVERSE_NAME_COUNT,
+                        (void*) &ia, (void*) &iac, (void*) &ias,
+                        (void*) &im, (void*) &imc, (void*) &ims,
+                        (void*) &id, (void*) &idc, (void*) &ids,
+                        p9, p10);
+                    // Get part blink property from details.
+                    get_universal_compound_element_by_name(*d, *dc,
+                        (void*) TUI_BLINK_NAME, (void*) TUI_BLINK_NAME_COUNT,
+                        (void*) &bla, (void*) &blac, (void*) &blas,
+                        (void*) &blm, (void*) &blmc, (void*) &blms,
+                        (void*) &bld, (void*) &bldc, (void*) &blds,
+                        p9, p10);
+                    // Get part underline property from details.
+                    get_universal_compound_element_by_name(*d, *dc,
+                        (void*) TUI_UNDERLINE_NAME, (void*) TUI_UNDERLINE_NAME_COUNT,
+                        (void*) &ua, (void*) &uac, (void*) &uas,
+                        (void*) &um, (void*) &umc, (void*) &ums,
+                        (void*) &ud, (void*) &udc, (void*) &uds,
+                        p9, p10);
+                    // Get part bold property from details.
+                    get_universal_compound_element_by_name(*d, *dc,
+                        (void*) TUI_BOLD_NAME, (void*) TUI_BOLD_NAME_COUNT,
+                        (void*) &ba, (void*) &bac, (void*) &bas,
+                        (void*) &bm, (void*) &bmc, (void*) &bms,
+                        (void*) &bd, (void*) &bdc, (void*) &bds,
+                        p9, p10);
+
+                    //
+                    // Get default property values from super part.
+                    //
+
+                    if (*shm == NULL_POINTER) {
+
+                        // Get part shape from super part.
+                        get_universal_compound_element_by_name(*superm, *supermc,
+                            (void*) UI_SHAPE_NAME, (void*) UI_SHAPE_NAME_COUNT,
+                            (void*) &sha, (void*) &shac, (void*) &shas,
+                            (void*) &shm, (void*) &shmc, (void*) &shms,
+                            (void*) &shd, (void*) &shdc, (void*) &shds,
+                            p9, p10);
+                    }
+
+                    if (*lm == NULL_POINTER) {
+
+                        // Get source part layout from details.
+                        get_universal_compound_element_by_name(*superm, *supermc,
+                            (void*) UI_LAYOUT_NAME, (void*) UI_LAYOUT_NAME_COUNT,
+                            (void*) &la, (void*) &lac, (void*) &las,
+                            (void*) &lm, (void*) &lmc, (void*) &lms,
+                            (void*) &ld, (void*) &ldc, (void*) &lds,
+                            p9, p10);
+                    }
+
+                    if (*cm == NULL_POINTER) {
+
+                        // Get source part cell from details.
+                        get_universal_compound_element_by_name(*superm, *supermc,
+                            (void*) UI_CELL_NAME, (void*) UI_CELL_NAME_COUNT,
+                            (void*) &ca, (void*) &cac, (void*) &cas,
+                            (void*) &cm, (void*) &cmc, (void*) &cms,
+                            (void*) &cd, (void*) &cdc, (void*) &cds,
+                            p9, p10);
+                    }
+
+                    if (*pm == NULL_POINTER) {
+
+                        // Get part position from super part.
+                        get_universal_compound_element_by_name(*superm, *supermc,
+                            (void*) UI_POSITION_NAME, (void*) UI_POSITION_NAME_COUNT,
+                            (void*) &pa, (void*) &pac, (void*) &pas,
+                            (void*) &pm, (void*) &pmc, (void*) &pms,
+                            (void*) &pd, (void*) &pdc, (void*) &pds,
+                            p9, p10);
+                    }
+
+                    if (*sm == NULL_POINTER) {
+
+                        // Get part size from super part.
+                        get_universal_compound_element_by_name(*superm, *supermc,
+                            (void*) UI_SIZE_NAME, (void*) UI_SIZE_NAME_COUNT,
+                            (void*) &sa, (void*) &sac, (void*) &sas,
+                            (void*) &sm, (void*) &smc, (void*) &sms,
+                            (void*) &sd, (void*) &sdc, (void*) &sds,
+                            p9, p10);
+                    }
+
+                    if (*bgm == NULL_POINTER) {
+
+                        // Get part background colour from super part.
+                        get_universal_compound_element_by_name(*superm, *supermc,
+                            (void*) UI_BACKGROUND_NAME, (void*) UI_BACKGROUND_NAME_COUNT,
+                            (void*) &bga, (void*) &bgac, (void*) &bgas,
+                            (void*) &bgm, (void*) &bgmc, (void*) &bgms,
+                            (void*) &bgd, (void*) &bgdc, (void*) &bgds,
+                            p9, p10);
+                    }
+
+                    if (*fgm == NULL_POINTER) {
+
+                        // Get part foreground colour from super part.
+                        get_universal_compound_element_by_name(*superm, *supermc,
+                            (void*) UI_FOREGROUND_NAME, (void*) UI_FOREGROUND_NAME_COUNT,
+                            (void*) &fga, (void*) &fgac, (void*) &fgas,
+                            (void*) &fgm, (void*) &fgmc, (void*) &fgms,
+                            (void*) &fgd, (void*) &fgdc, (void*) &fgds,
+                            p9, p10);
+                    }
+
+                    if (*bom == NULL_POINTER) {
+
+                        // Get part border from super part.
+                        get_universal_compound_element_by_name(*superm, *supermc,
+                            (void*) TUI_BORDER_NAME, (void*) TUI_BORDER_NAME_COUNT,
+                            (void*) &boa, (void*) &boac, (void*) &boas,
+                            (void*) &bom, (void*) &bomc, (void*) &boms,
+                            (void*) &bod, (void*) &bodc, (void*) &bods,
+                            p9, p10);
+                    }
+
+                    if (*hm == NULL_POINTER) {
+
+                        // Get part hidden property from super part.
+                        get_universal_compound_element_by_name(*superm, *supermc,
+                            (void*) TUI_HIDDEN_NAME, (void*) TUI_HIDDEN_NAME_COUNT,
+                            (void*) &ha, (void*) &hac, (void*) &has,
+                            (void*) &hm, (void*) &hmc, (void*) &hms,
+                            (void*) &hd, (void*) &hdc, (void*) &hds,
+                            p9, p10);
+                    }
+
+                    if (*im == NULL_POINTER) {
+
+                        // Get part inverse property from super part.
+                        get_universal_compound_element_by_name(*superm, *supermc,
+                            (void*) TUI_INVERSE_NAME, (void*) TUI_INVERSE_NAME_COUNT,
+                            (void*) &ia, (void*) &iac, (void*) &ias,
+                            (void*) &im, (void*) &imc, (void*) &ims,
+                            (void*) &id, (void*) &idc, (void*) &ids,
+                            p9, p10);
+                    }
+
+                    if (*blm == NULL_POINTER) {
+
+                        // Get part blink property from super part.
+                        get_universal_compound_element_by_name(*superm, *supermc,
+                            (void*) TUI_BLINK_NAME, (void*) TUI_BLINK_NAME_COUNT,
+                            (void*) &bla, (void*) &blac, (void*) &blas,
+                            (void*) &blm, (void*) &blmc, (void*) &blms,
+                            (void*) &bld, (void*) &bldc, (void*) &blds,
+                            p9, p10);
+                    }
+
+                    if (*um == NULL_POINTER) {
+
+                        // Get part underline property from super part.
+                        get_universal_compound_element_by_name(*superm, *supermc,
+                            (void*) TUI_UNDERLINE_NAME, (void*) TUI_UNDERLINE_NAME_COUNT,
+                            (void*) &ua, (void*) &uac, (void*) &uas,
+                            (void*) &um, (void*) &umc, (void*) &ums,
+                            (void*) &ud, (void*) &udc, (void*) &uds,
+                            p9, p10);
+                    }
+
+                    if (*bm == NULL_POINTER) {
+
+                        // Get part bold property from super part.
+                        get_universal_compound_element_by_name(*superm, *supermc,
+                            (void*) TUI_BOLD_NAME, (void*) TUI_BOLD_NAME_COUNT,
+                            (void*) &ba, (void*) &bac, (void*) &bas,
+                            (void*) &bm, (void*) &bmc, (void*) &bms,
+                            (void*) &bd, (void*) &bdc, (void*) &bds,
+                            p9, p10);
+                    }
+
+                    if ((p7 == NULL_POINTER) || (*((int*) p8) == 0) || (rn == NULL_POINTER)) {
+
+                        // Either, no hierarchical element name (repaint area) was given
+                        // (p7 == NULL_POINTER), in which case not just a small area
+                        // but the whole textual user interface (tui) window is repainted,
+                        // (CAUTION! (*((int*) p8) == 0) is also necessary!)
+                        // OR:
+                        // the remaining compound element name (area to be repainted)
+                        // is null, which means the final element in the hierarchical
+                        // name has been reached and can be repainted.
+                        // Previous names pointing to surrounding areas higher
+                        // in the hierarchy are not painted that way, to be more efficient.
+
+                        // Serialise shape.
+                        serialise_linux_console_shape(p0, p1, p2, *m, *mc, *a, *ac,
+                            *hm, *hmc, *im, *imc, *blm, *blmc, *um, *umc, *bm, *bmc,
+                            *bgm, *bgmc, *fgm, *fgmc, *pm, *pmc, *sm, *smc,
+                            *wpm, *wpmc, *wsm, *wsmc, *bom, *bomc,
+                            *cm, *cmc, *lm, *lmc, *shm, *shmc);
+                    }
+
+                    compare_arrays(*a, *ac, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT, (void*) &ar, (void*) CHARACTER_ARRAY);
+
+                    if (ar != 0) {
+
+                        // The part model is a compound.
+
+                        // Recursively call this procedure for compound part model.
+                        serialise_linux_console(p0, p1, p2, *m, *mc, *d, *dc, rn, (void*) &rnc, p9, p10);
+                    }
+
+                    // Reset source whole position.
+                    wpa = &NULL_POINTER;
+                    wpac = &NULL_POINTER;
+                    wpas = &NULL_POINTER;
+                    wpm = &NULL_POINTER;
+                    wpmc = &NULL_POINTER;
+                    wpms = &NULL_POINTER;
+                    wpd = &NULL_POINTER;
+                    wpdc = &NULL_POINTER;
+                    wpds = &NULL_POINTER;
+                    // Reset source whole size.
+                    wsa = &NULL_POINTER;
+                    wsac = &NULL_POINTER;
+                    wsas = &NULL_POINTER;
+                    wsm = &NULL_POINTER;
+                    wsmc = &NULL_POINTER;
+                    wsms = &NULL_POINTER;
+                    wsd = &NULL_POINTER;
+                    wsdc = &NULL_POINTER;
+                    wsds = &NULL_POINTER;
+                    // Reset source part super properties.
+                    supera = &NULL_POINTER;
+                    superac = &NULL_POINTER;
+                    superas = &NULL_POINTER;
+                    superm = &NULL_POINTER;
+                    supermc = &NULL_POINTER;
+                    superms = &NULL_POINTER;
+                    superd = &NULL_POINTER;
+                    superdc = &NULL_POINTER;
+                    superds = &NULL_POINTER;
+                    // Reset source part shape.
+                    sha = &NULL_POINTER;
+                    shac = &NULL_POINTER;
+                    shas = &NULL_POINTER;
+                    shm = &NULL_POINTER;
+                    shmc = &NULL_POINTER;
+                    shms = &NULL_POINTER;
+                    shd = &NULL_POINTER;
+                    shdc = &NULL_POINTER;
+                    shds = &NULL_POINTER;
+                    // Reset source part layout.
+                    la = &NULL_POINTER;
+                    lac = &NULL_POINTER;
+                    las = &NULL_POINTER;
+                    lm = &NULL_POINTER;
+                    lmc = &NULL_POINTER;
+                    lms = &NULL_POINTER;
+                    ld = &NULL_POINTER;
+                    ldc = &NULL_POINTER;
+                    lds = &NULL_POINTER;
+                    // Reset source part cell.
+                    ca = &NULL_POINTER;
+                    cac = &NULL_POINTER;
+                    cas = &NULL_POINTER;
+                    cm = &NULL_POINTER;
+                    cmc = &NULL_POINTER;
+                    cms = &NULL_POINTER;
+                    cd = &NULL_POINTER;
+                    cdc = &NULL_POINTER;
+                    cds = &NULL_POINTER;
+                    // Reset source part position.
+                    pa = &NULL_POINTER;
+                    pac = &NULL_POINTER;
+                    pas = &NULL_POINTER;
+                    pm = &NULL_POINTER;
+                    pmc = &NULL_POINTER;
+                    pms = &NULL_POINTER;
+                    pd = &NULL_POINTER;
+                    pdc = &NULL_POINTER;
+                    pds = &NULL_POINTER;
+                    // Reset source part size.
+                    sa = &NULL_POINTER;
+                    sac = &NULL_POINTER;
+                    sas = &NULL_POINTER;
+                    sm = &NULL_POINTER;
+                    smc = &NULL_POINTER;
+                    sms = &NULL_POINTER;
+                    sd = &NULL_POINTER;
+                    sdc = &NULL_POINTER;
+                    sds = &NULL_POINTER;
+                    // Reset source part background colour.
+                    bga = &NULL_POINTER;
+                    bgac = &NULL_POINTER;
+                    bgas = &NULL_POINTER;
+                    bgm = &NULL_POINTER;
+                    bgmc = &NULL_POINTER;
+                    bgms = &NULL_POINTER;
+                    bgd = &NULL_POINTER;
+                    bgdc = &NULL_POINTER;
+                    bgds = &NULL_POINTER;
+                    // Reset source part foreground colour.
+                    fga = &NULL_POINTER;
+                    fgac = &NULL_POINTER;
+                    fgas = &NULL_POINTER;
+                    fgm = &NULL_POINTER;
+                    fgmc = &NULL_POINTER;
+                    fgms = &NULL_POINTER;
+                    fgd = &NULL_POINTER;
+                    fgdc = &NULL_POINTER;
+                    fgds = &NULL_POINTER;
+                    // Reset source part border.
+                    boa = &NULL_POINTER;
+                    boac = &NULL_POINTER;
+                    boas = &NULL_POINTER;
+                    bom = &NULL_POINTER;
+                    bomc = &NULL_POINTER;
+                    boms = &NULL_POINTER;
+                    bod = &NULL_POINTER;
+                    bodc = &NULL_POINTER;
+                    bods = &NULL_POINTER;
+                    // Reset source part hidden property.
+                    ha = &NULL_POINTER;
+                    hac = &NULL_POINTER;
+                    has = &NULL_POINTER;
+                    hm = &NULL_POINTER;
+                    hmc = &NULL_POINTER;
+                    hms = &NULL_POINTER;
+                    hd = &NULL_POINTER;
+                    hdc = &NULL_POINTER;
+                    hds = &NULL_POINTER;
+                    // Reset source part inverse property.
+                    ia = &NULL_POINTER;
+                    iac = &NULL_POINTER;
+                    ias = &NULL_POINTER;
+                    im = &NULL_POINTER;
+                    imc = &NULL_POINTER;
+                    ims = &NULL_POINTER;
+                    id = &NULL_POINTER;
+                    idc = &NULL_POINTER;
+                    ids = &NULL_POINTER;
+                    // Reset source part blink property.
+                    bla = &NULL_POINTER;
+                    blac = &NULL_POINTER;
+                    blas = &NULL_POINTER;
+                    blm = &NULL_POINTER;
+                    blmc = &NULL_POINTER;
+                    blms = &NULL_POINTER;
+                    bld = &NULL_POINTER;
+                    bldc = &NULL_POINTER;
+                    blds = &NULL_POINTER;
+                    // Reset source part underline property.
+                    ua = &NULL_POINTER;
+                    uac = &NULL_POINTER;
+                    uas = &NULL_POINTER;
+                    um = &NULL_POINTER;
+                    umc = &NULL_POINTER;
+                    ums = &NULL_POINTER;
+                    ud = &NULL_POINTER;
+                    udc = &NULL_POINTER;
+                    uds = &NULL_POINTER;
+                    // Reset source part bold property.
+                    ba = &NULL_POINTER;
+                    bac = &NULL_POINTER;
+                    bas = &NULL_POINTER;
+                    bm = &NULL_POINTER;
+                    bmc = &NULL_POINTER;
+                    bms = &NULL_POINTER;
+                    bd = &NULL_POINTER;
+                    bdc = &NULL_POINTER;
+                    bds = &NULL_POINTER;
+
+                    // Reset source part abstraction, model, details.
+                    a = &NULL_POINTER;
+                    ac = &NULL_POINTER;
+                    as = &NULL_POINTER;
+                    m = &NULL_POINTER;
+                    mc = &NULL_POINTER;
+                    ms = &NULL_POINTER;
+                    d = &NULL_POINTER;
+                    dc = &NULL_POINTER;
+                    ds = &NULL_POINTER;
+
+                    // Reset abstraction comparison result.
+                    ar = 0;
+                }
+
+                // Reset name comparison result.
+                nr = 0;
+                // Reset name of the current compound part element.
+                n = &NULL_POINTER;
+                nc = &NULL_POINTER;
+                ns = &NULL_POINTER;
+
+                // Increment loop count.
+                j++;
             }
 
-            // Get source whole position from details.
-            get_universal_compound_element_by_name(p5, p6,
-                (void*) UI_POSITION_NAME, (void*) UI_POSITION_NAME_COUNT,
-                (void*) &wpa, (void*) &wpac, (void*) &wpas,
-                (void*) &wpm, (void*) &wpmc, (void*) &wpms,
-                (void*) &wpd, (void*) &wpdc, (void*) &wpds,
-                p7, p8);
-            // Get source whole size from details.
-            get_universal_compound_element_by_name(p5, p6,
-                (void*) UI_SIZE_NAME, (void*) UI_SIZE_NAME_COUNT,
-                (void*) &wsa, (void*) &wsac, (void*) &wsas,
-                (void*) &wsm, (void*) &wsmc, (void*) &wsms,
-                (void*) &wsd, (void*) &wsdc, (void*) &wsds,
-                p7, p8);
-            // Get part at index j.
-            get_compound_element_by_index(p3, p4, (void*) &j,
-                (void*) &a, (void*) &ac, (void*) &as,
-                (void*) &m, (void*) &mc, (void*) &ms,
-                (void*) &d, (void*) &dc, (void*) &ds);
+        } else {
 
-            // Get part super properties from details.
-            get_universal_compound_element_by_name(*d, *dc,
-                (void*) SUPER_PROPERTIES_NAME, (void*) SUPER_PROPERTIES_NAME_COUNT,
-                (void*) &supera, (void*) &superac, (void*) &superas,
-                (void*) &superm, (void*) &supermc, (void*) &superms,
-                (void*) &superd, (void*) &superdc, (void*) &superds,
-                p7, p8);
-
-            //
-            // Get standard property values from part.
-            // If a standard property value DOES exist, previously gotten
-            // default property values (from super part) are overwritten.
-            // If a standard property value does NOT exist, the default
-            // property value remains untouched.
-            //
-
-            // Get part shape from details.
-            get_universal_compound_element_by_name(*d, *dc,
-                (void*) UI_SHAPE_NAME, (void*) UI_SHAPE_NAME_COUNT,
-                (void*) &sha, (void*) &shac, (void*) &shas,
-                (void*) &shm, (void*) &shmc, (void*) &shms,
-                (void*) &shd, (void*) &shdc, (void*) &shds,
-                p7, p8);
-            // Get source part layout from details.
-            get_universal_compound_element_by_name(*d, *dc,
-                (void*) UI_LAYOUT_NAME, (void*) UI_LAYOUT_NAME_COUNT,
-                (void*) &la, (void*) &lac, (void*) &las,
-                (void*) &lm, (void*) &lmc, (void*) &lms,
-                (void*) &ld, (void*) &ldc, (void*) &lds,
-                p7, p8);
-            // Get source part cell from details.
-            get_universal_compound_element_by_name(*d, *dc,
-                (void*) UI_CELL_NAME, (void*) UI_CELL_NAME_COUNT,
-                (void*) &ca, (void*) &cac, (void*) &cas,
-                (void*) &cm, (void*) &cmc, (void*) &cms,
-                (void*) &cd, (void*) &cdc, (void*) &cds,
-                p7, p8);
-            // Get part position from details.
-            get_universal_compound_element_by_name(*d, *dc,
-                (void*) UI_POSITION_NAME, (void*) UI_POSITION_NAME_COUNT,
-                (void*) &pa, (void*) &pac, (void*) &pas,
-                (void*) &pm, (void*) &pmc, (void*) &pms,
-                (void*) &pd, (void*) &pdc, (void*) &pds,
-                p7, p8);
-            // Get part size from details.
-            get_universal_compound_element_by_name(*d, *dc,
-                (void*) UI_SIZE_NAME, (void*) UI_SIZE_NAME_COUNT,
-                (void*) &sa, (void*) &sac, (void*) &sas,
-                (void*) &sm, (void*) &smc, (void*) &sms,
-                (void*) &sd, (void*) &sdc, (void*) &sds,
-                p7, p8);
-            // Get part background colour from details.
-            get_universal_compound_element_by_name(*d, *dc,
-                (void*) UI_BACKGROUND_NAME, (void*) UI_BACKGROUND_NAME_COUNT,
-                (void*) &bga, (void*) &bgac, (void*) &bgas,
-                (void*) &bgm, (void*) &bgmc, (void*) &bgms,
-                (void*) &bgd, (void*) &bgdc, (void*) &bgds,
-                p7, p8);
-            // Get part foreground colour from details.
-            get_universal_compound_element_by_name(*d, *dc,
-                (void*) UI_FOREGROUND_NAME, (void*) UI_FOREGROUND_NAME_COUNT,
-                (void*) &fga, (void*) &fgac, (void*) &fgas,
-                (void*) &fgm, (void*) &fgmc, (void*) &fgms,
-                (void*) &fgd, (void*) &fgdc, (void*) &fgds,
-                p7, p8);
-            // Get part border from details.
-            get_universal_compound_element_by_name(*d, *dc,
-                (void*) TUI_BORDER_NAME, (void*) TUI_BORDER_NAME_COUNT,
-                (void*) &boa, (void*) &boac, (void*) &boas,
-                (void*) &bom, (void*) &bomc, (void*) &boms,
-                (void*) &bod, (void*) &bodc, (void*) &bods,
-                p7, p8);
-            // Get part hidden property from details.
-            get_universal_compound_element_by_name(*d, *dc,
-                (void*) TUI_HIDDEN_NAME, (void*) TUI_HIDDEN_NAME_COUNT,
-                (void*) &ha, (void*) &hac, (void*) &has,
-                (void*) &hm, (void*) &hmc, (void*) &hms,
-                (void*) &hd, (void*) &hdc, (void*) &hds,
-                p7, p8);
-            // Get part inverse property from details.
-            get_universal_compound_element_by_name(*d, *dc,
-                (void*) TUI_INVERSE_NAME, (void*) TUI_INVERSE_NAME_COUNT,
-                (void*) &ia, (void*) &iac, (void*) &ias,
-                (void*) &im, (void*) &imc, (void*) &ims,
-                (void*) &id, (void*) &idc, (void*) &ids,
-                p7, p8);
-            // Get part blink property from details.
-            get_universal_compound_element_by_name(*d, *dc,
-                (void*) TUI_BLINK_NAME, (void*) TUI_BLINK_NAME_COUNT,
-                (void*) &bla, (void*) &blac, (void*) &blas,
-                (void*) &blm, (void*) &blmc, (void*) &blms,
-                (void*) &bld, (void*) &bldc, (void*) &blds,
-                p7, p8);
-            // Get part underline property from details.
-            get_universal_compound_element_by_name(*d, *dc,
-                (void*) TUI_UNDERLINE_NAME, (void*) TUI_UNDERLINE_NAME_COUNT,
-                (void*) &ua, (void*) &uac, (void*) &uas,
-                (void*) &um, (void*) &umc, (void*) &ums,
-                (void*) &ud, (void*) &udc, (void*) &uds,
-                p7, p8);
-            // Get part bold property from details.
-            get_universal_compound_element_by_name(*d, *dc,
-                (void*) TUI_BOLD_NAME, (void*) TUI_BOLD_NAME_COUNT,
-                (void*) &ba, (void*) &bac, (void*) &bas,
-                (void*) &bm, (void*) &bmc, (void*) &bms,
-                (void*) &bd, (void*) &bdc, (void*) &bds,
-                p7, p8);
-
-            //
-            // Get default property values from super part.
-            //
-
-            if (*shm == NULL_POINTER) {
-
-                // Get part shape from super part.
-                get_universal_compound_element_by_name(*superm, *supermc,
-                    (void*) UI_SHAPE_NAME, (void*) UI_SHAPE_NAME_COUNT,
-                    (void*) &sha, (void*) &shac, (void*) &shas,
-                    (void*) &shm, (void*) &shmc, (void*) &shms,
-                    (void*) &shd, (void*) &shdc, (void*) &shds,
-                    p7, p8);
-            }
-
-            if (*lm == NULL_POINTER) {
-
-                // Get source part layout from details.
-                get_universal_compound_element_by_name(*superm, *supermc,
-                    (void*) UI_LAYOUT_NAME, (void*) UI_LAYOUT_NAME_COUNT,
-                    (void*) &la, (void*) &lac, (void*) &las,
-                    (void*) &lm, (void*) &lmc, (void*) &lms,
-                    (void*) &ld, (void*) &ldc, (void*) &lds,
-                    p7, p8);
-            }
-
-            if (*cm == NULL_POINTER) {
-
-                // Get source part cell from details.
-                get_universal_compound_element_by_name(*superm, *supermc,
-                    (void*) UI_CELL_NAME, (void*) UI_CELL_NAME_COUNT,
-                    (void*) &ca, (void*) &cac, (void*) &cas,
-                    (void*) &cm, (void*) &cmc, (void*) &cms,
-                    (void*) &cd, (void*) &cdc, (void*) &cds,
-                    p7, p8);
-            }
-
-            if (*pm == NULL_POINTER) {
-
-                // Get part position from super part.
-                get_universal_compound_element_by_name(*superm, *supermc,
-                    (void*) UI_POSITION_NAME, (void*) UI_POSITION_NAME_COUNT,
-                    (void*) &pa, (void*) &pac, (void*) &pas,
-                    (void*) &pm, (void*) &pmc, (void*) &pms,
-                    (void*) &pd, (void*) &pdc, (void*) &pds,
-                    p7, p8);
-            }
-
-            if (*sm == NULL_POINTER) {
-
-                // Get part size from super part.
-                get_universal_compound_element_by_name(*superm, *supermc,
-                    (void*) UI_SIZE_NAME, (void*) UI_SIZE_NAME_COUNT,
-                    (void*) &sa, (void*) &sac, (void*) &sas,
-                    (void*) &sm, (void*) &smc, (void*) &sms,
-                    (void*) &sd, (void*) &sdc, (void*) &sds,
-                    p7, p8);
-            }
-
-            if (*bgm == NULL_POINTER) {
-
-                // Get part background colour from super part.
-                get_universal_compound_element_by_name(*superm, *supermc,
-                    (void*) UI_BACKGROUND_NAME, (void*) UI_BACKGROUND_NAME_COUNT,
-                    (void*) &bga, (void*) &bgac, (void*) &bgas,
-                    (void*) &bgm, (void*) &bgmc, (void*) &bgms,
-                    (void*) &bgd, (void*) &bgdc, (void*) &bgds,
-                    p7, p8);
-            }
-
-            if (*fgm == NULL_POINTER) {
-
-                // Get part foreground colour from super part.
-                get_universal_compound_element_by_name(*superm, *supermc,
-                    (void*) UI_FOREGROUND_NAME, (void*) UI_FOREGROUND_NAME_COUNT,
-                    (void*) &fga, (void*) &fgac, (void*) &fgas,
-                    (void*) &fgm, (void*) &fgmc, (void*) &fgms,
-                    (void*) &fgd, (void*) &fgdc, (void*) &fgds,
-                    p7, p8);
-            }
-
-            if (*bom == NULL_POINTER) {
-
-                // Get part border from super part.
-                get_universal_compound_element_by_name(*superm, *supermc,
-                    (void*) TUI_BORDER_NAME, (void*) TUI_BORDER_NAME_COUNT,
-                    (void*) &boa, (void*) &boac, (void*) &boas,
-                    (void*) &bom, (void*) &bomc, (void*) &boms,
-                    (void*) &bod, (void*) &bodc, (void*) &bods,
-                    p7, p8);
-            }
-
-            if (*hm == NULL_POINTER) {
-
-                // Get part hidden property from super part.
-                get_universal_compound_element_by_name(*superm, *supermc,
-                    (void*) TUI_HIDDEN_NAME, (void*) TUI_HIDDEN_NAME_COUNT,
-                    (void*) &ha, (void*) &hac, (void*) &has,
-                    (void*) &hm, (void*) &hmc, (void*) &hms,
-                    (void*) &hd, (void*) &hdc, (void*) &hds,
-                    p7, p8);
-            }
-
-            if (*im == NULL_POINTER) {
-
-                // Get part inverse property from super part.
-                get_universal_compound_element_by_name(*superm, *supermc,
-                    (void*) TUI_INVERSE_NAME, (void*) TUI_INVERSE_NAME_COUNT,
-                    (void*) &ia, (void*) &iac, (void*) &ias,
-                    (void*) &im, (void*) &imc, (void*) &ims,
-                    (void*) &id, (void*) &idc, (void*) &ids,
-                    p7, p8);
-            }
-
-            if (*blm == NULL_POINTER) {
-
-                // Get part blink property from super part.
-                get_universal_compound_element_by_name(*superm, *supermc,
-                    (void*) TUI_BLINK_NAME, (void*) TUI_BLINK_NAME_COUNT,
-                    (void*) &bla, (void*) &blac, (void*) &blas,
-                    (void*) &blm, (void*) &blmc, (void*) &blms,
-                    (void*) &bld, (void*) &bldc, (void*) &blds,
-                    p7, p8);
-            }
-
-            if (*um == NULL_POINTER) {
-
-                // Get part underline property from super part.
-                get_universal_compound_element_by_name(*superm, *supermc,
-                    (void*) TUI_UNDERLINE_NAME, (void*) TUI_UNDERLINE_NAME_COUNT,
-                    (void*) &ua, (void*) &uac, (void*) &uas,
-                    (void*) &um, (void*) &umc, (void*) &ums,
-                    (void*) &ud, (void*) &udc, (void*) &uds,
-                    p7, p8);
-            }
-
-            if (*bm == NULL_POINTER) {
-
-                // Get part bold property from super part.
-                get_universal_compound_element_by_name(*superm, *supermc,
-                    (void*) TUI_BOLD_NAME, (void*) TUI_BOLD_NAME_COUNT,
-                    (void*) &ba, (void*) &bac, (void*) &bas,
-                    (void*) &bm, (void*) &bmc, (void*) &bms,
-                    (void*) &bd, (void*) &bdc, (void*) &bds,
-                    p7, p8);
-            }
-
-            // Serialise shape.
-            serialise_linux_console_shape(p0, p1, p2, *m, *mc, *a, *ac,
-                *hm, *hmc, *im, *imc, *blm, *blmc, *um, *umc, *bm, *bmc,
-                *bgm, *bgmc, *fgm, *fgmc, *pm, *pmc, *sm, *smc,
-                *wpm, *wpmc, *wsm, *wsmc, *bom, *bomc,
-                *cm, *cmc, *lm, *lmc, *shm, *shmc);
-
-            compare_arrays(*a, *ac, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-            if (r != 0) {
-
-                // The part model is a compound.
-
-                // Recursively call this procedure for compound part model.
-                serialise_linux_console(p0, p1, p2, *m, *mc, *d, *dc, p7, p8);
-            }
-
-            // Reset source whole position.
-            wpa = &NULL_POINTER;
-            wpac = &NULL_POINTER;
-            wpas = &NULL_POINTER;
-            wpm = &NULL_POINTER;
-            wpmc = &NULL_POINTER;
-            wpms = &NULL_POINTER;
-            wpd = &NULL_POINTER;
-            wpdc = &NULL_POINTER;
-            wpds = &NULL_POINTER;
-            // Reset source whole size.
-            wsa = &NULL_POINTER;
-            wsac = &NULL_POINTER;
-            wsas = &NULL_POINTER;
-            wsm = &NULL_POINTER;
-            wsmc = &NULL_POINTER;
-            wsms = &NULL_POINTER;
-            wsd = &NULL_POINTER;
-            wsdc = &NULL_POINTER;
-            wsds = &NULL_POINTER;
-            // Reset source part abstraction, model, details.
-            a = &NULL_POINTER;
-            ac = &NULL_POINTER;
-            as = &NULL_POINTER;
-            m = &NULL_POINTER;
-            mc = &NULL_POINTER;
-            ms = &NULL_POINTER;
-            d = &NULL_POINTER;
-            dc = &NULL_POINTER;
-            ds = &NULL_POINTER;
-            // Reset source part super properties.
-            supera = &NULL_POINTER;
-            superac = &NULL_POINTER;
-            superas = &NULL_POINTER;
-            superm = &NULL_POINTER;
-            supermc = &NULL_POINTER;
-            superms = &NULL_POINTER;
-            superd = &NULL_POINTER;
-            superdc = &NULL_POINTER;
-            superds = &NULL_POINTER;
-            // Reset source part shape.
-            sha = &NULL_POINTER;
-            shac = &NULL_POINTER;
-            shas = &NULL_POINTER;
-            shm = &NULL_POINTER;
-            shmc = &NULL_POINTER;
-            shms = &NULL_POINTER;
-            shd = &NULL_POINTER;
-            shdc = &NULL_POINTER;
-            shds = &NULL_POINTER;
-            // Reset source part layout.
-            la = &NULL_POINTER;
-            lac = &NULL_POINTER;
-            las = &NULL_POINTER;
-            lm = &NULL_POINTER;
-            lmc = &NULL_POINTER;
-            lms = &NULL_POINTER;
-            ld = &NULL_POINTER;
-            ldc = &NULL_POINTER;
-            lds = &NULL_POINTER;
-            // Reset source part cell.
-            ca = &NULL_POINTER;
-            cac = &NULL_POINTER;
-            cas = &NULL_POINTER;
-            cm = &NULL_POINTER;
-            cmc = &NULL_POINTER;
-            cms = &NULL_POINTER;
-            cd = &NULL_POINTER;
-            cdc = &NULL_POINTER;
-            cds = &NULL_POINTER;
-            // Reset source part position.
-            pa = &NULL_POINTER;
-            pac = &NULL_POINTER;
-            pas = &NULL_POINTER;
-            pm = &NULL_POINTER;
-            pmc = &NULL_POINTER;
-            pms = &NULL_POINTER;
-            pd = &NULL_POINTER;
-            pdc = &NULL_POINTER;
-            pds = &NULL_POINTER;
-            // Reset source part size.
-            sa = &NULL_POINTER;
-            sac = &NULL_POINTER;
-            sas = &NULL_POINTER;
-            sm = &NULL_POINTER;
-            smc = &NULL_POINTER;
-            sms = &NULL_POINTER;
-            sd = &NULL_POINTER;
-            sdc = &NULL_POINTER;
-            sds = &NULL_POINTER;
-            // Reset source part background colour.
-            bga = &NULL_POINTER;
-            bgac = &NULL_POINTER;
-            bgas = &NULL_POINTER;
-            bgm = &NULL_POINTER;
-            bgmc = &NULL_POINTER;
-            bgms = &NULL_POINTER;
-            bgd = &NULL_POINTER;
-            bgdc = &NULL_POINTER;
-            bgds = &NULL_POINTER;
-            // Reset source part foreground colour.
-            fga = &NULL_POINTER;
-            fgac = &NULL_POINTER;
-            fgas = &NULL_POINTER;
-            fgm = &NULL_POINTER;
-            fgmc = &NULL_POINTER;
-            fgms = &NULL_POINTER;
-            fgd = &NULL_POINTER;
-            fgdc = &NULL_POINTER;
-            fgds = &NULL_POINTER;
-            // Reset source part border.
-            boa = &NULL_POINTER;
-            boac = &NULL_POINTER;
-            boas = &NULL_POINTER;
-            bom = &NULL_POINTER;
-            bomc = &NULL_POINTER;
-            boms = &NULL_POINTER;
-            bod = &NULL_POINTER;
-            bodc = &NULL_POINTER;
-            bods = &NULL_POINTER;
-            // Reset source part hidden property.
-            ha = &NULL_POINTER;
-            hac = &NULL_POINTER;
-            has = &NULL_POINTER;
-            hm = &NULL_POINTER;
-            hmc = &NULL_POINTER;
-            hms = &NULL_POINTER;
-            hd = &NULL_POINTER;
-            hdc = &NULL_POINTER;
-            hds = &NULL_POINTER;
-            // Reset source part inverse property.
-            ia = &NULL_POINTER;
-            iac = &NULL_POINTER;
-            ias = &NULL_POINTER;
-            im = &NULL_POINTER;
-            imc = &NULL_POINTER;
-            ims = &NULL_POINTER;
-            id = &NULL_POINTER;
-            idc = &NULL_POINTER;
-            ids = &NULL_POINTER;
-            // Reset source part blink property.
-            bla = &NULL_POINTER;
-            blac = &NULL_POINTER;
-            blas = &NULL_POINTER;
-            blm = &NULL_POINTER;
-            blmc = &NULL_POINTER;
-            blms = &NULL_POINTER;
-            bld = &NULL_POINTER;
-            bldc = &NULL_POINTER;
-            blds = &NULL_POINTER;
-            // Reset source part underline property.
-            ua = &NULL_POINTER;
-            uac = &NULL_POINTER;
-            uas = &NULL_POINTER;
-            um = &NULL_POINTER;
-            umc = &NULL_POINTER;
-            ums = &NULL_POINTER;
-            ud = &NULL_POINTER;
-            udc = &NULL_POINTER;
-            uds = &NULL_POINTER;
-            // Reset source part bold property.
-            ba = &NULL_POINTER;
-            bac = &NULL_POINTER;
-            bas = &NULL_POINTER;
-            bm = &NULL_POINTER;
-            bmc = &NULL_POINTER;
-            bms = &NULL_POINTER;
-            bd = &NULL_POINTER;
-            bdc = &NULL_POINTER;
-            bds = &NULL_POINTER;
-
-            // Reset comparison result.
-            r = 0;
-
-            // Increment loop count.
-            j++;
+            log_message_debug("Could not serialise compound model into linux console control sequences. The hierarchical compound element name contains a meta element, while only part elements are permitted.");
         }
 
     } else {

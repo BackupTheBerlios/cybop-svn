@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.15 $ $Date: 2006-06-04 00:54:45 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2006-06-21 23:18:38 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -351,7 +351,7 @@ void serialise(void* p0, void* p1, void* p2, void* p3, void* p4,
 
         if (r != 0) {
 
-            serialise_linux_console(p0, p1, p2, p3, p4, NULL_POINTER, NULL_POINTER, p7, p8);
+//??            serialise_linux_console(p0, p1, p2, p3, p4, NULL_POINTER, NULL_POINTER, p7, p8);
         }
     }
 
