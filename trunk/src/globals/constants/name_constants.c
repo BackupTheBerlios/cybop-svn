@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.20 $ $Date: 2006-06-21 23:18:38 $ $Author: christian $
+ * @version $Revision: 1.21 $ $Date: 2006-06-23 00:25:27 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -227,19 +227,44 @@ static int* RESULT_NAME_COUNT = NUMBER_6_INTEGER_ARRAY;
 //
 
 /** The operand 1 name. */
+/*??
 static char OPERAND_1_NAME_ARRAY[] = {'o', 'p', 'e', 'r', 'a', 'n', 'd', '_', '1'};
 static char* OPERAND_1_NAME = OPERAND_1_NAME_ARRAY;
 static int* OPERAND_1_NAME_COUNT = NUMBER_9_INTEGER_ARRAY;
+*/
 
 /** The operand 2 name. */
+/*??
 static char OPERAND_2_NAME_ARRAY[] = {'o', 'p', 'e', 'r', 'a', 'n', 'd', '_', '2'};
 static char* OPERAND_2_NAME = OPERAND_2_NAME_ARRAY;
 static int* OPERAND_2_NAME_COUNT = NUMBER_9_INTEGER_ARRAY;
+*/
 
 /** The result operand name. */
+/*??
 static char RESULT_OPERAND_NAME_ARRAY[] = {'r', 'e', 's', 'u', 'l', 't'};
 static char* RESULT_OPERAND_NAME = RESULT_OPERAND_NAME_ARRAY;
 static int* RESULT_OPERAND_NAME_COUNT = NUMBER_6_INTEGER_ARRAY;
+*/
+
+//
+// Add names.
+//
+
+/** The add summand 1 name. */
+static char ADD_SUMMAND_1_NAME_ARRAY[] = {'s', 'u', 'm', 'm', 'a', 'n', 'd', '_', '1'};
+static char* ADD_SUMMAND_1_NAME = ADD_SUMMAND_1_NAME_ARRAY;
+static int* ADD_SUMMAND_1_NAME_COUNT = NUMBER_9_INTEGER_ARRAY;
+
+/** The add summand 2 name. */
+static char ADD_SUMMAND_2_NAME_ARRAY[] = {'s', 'u', 'm', 'm', 'a', 'n', 'd', '_', '2'};
+static char* ADD_SUMMAND_2_NAME = ADD_SUMMAND_2_NAME_ARRAY;
+static int* ADD_SUMMAND_2_NAME_COUNT = NUMBER_9_INTEGER_ARRAY;
+
+/** The add sum name. */
+static char ADD_SUM_NAME_ARRAY[] = {'s', 'u', 'm'};
+static char* ADD_SUM_NAME = ADD_SUM_NAME_ARRAY;
+static int* ADD_SUM_NAME_COUNT = NUMBER_3_INTEGER_ARRAY;
 
 //
 // Copy and move names.

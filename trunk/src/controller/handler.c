@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2006-06-04 00:54:45 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2006-06-23 00:25:27 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -74,8 +74,7 @@ void handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
         if (r != 0) {
 
-            handle_compound(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9,
-                p12, p13, p16, p17, p18);
+            handle_compound(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p12, p13, p16, p17, p18);
         }
     }
 
@@ -85,8 +84,7 @@ void handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
         if (r != 0) {
 
-            handle_operation(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9,
-                p12, p13, p14, p15, p16, p17);
+            handle_operation(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p12, p13, p14, p15, p16, p17);
         }
     }
 
