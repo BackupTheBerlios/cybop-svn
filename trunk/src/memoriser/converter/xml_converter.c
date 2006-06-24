@@ -24,7 +24,7 @@
  * - parse an xml stream into an xml model
  * - serialise an xml model into an xml stream
  *
- * @version $Revision: 1.12 $ $Date: 2006-04-20 22:36:11 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2006-06-24 18:06:57 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -245,41 +245,47 @@ void parse_xml(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 void** d = (void**) p0;
 
-                //??
                 //?? BEGIN of temporary workaround for using the libxml2 parser.
                 //?? Parameter p3 represents the xml file name!
-                //??
 
-                // The temporary null-terminated file name.
-                void* tmp = NULL_POINTER;
-                int tmps = *sc + 1;
+                // Following is a special check to avoid:
+                // I/O warning : failed to load external entity ""
+                // messages of the xml parser.
+                if (*sc > 0) {
 
-                // Create temporary null-terminated file name.
-                allocate_array((void*) &tmp, (void*) &tmps, (void*) CHARACTER_ARRAY);
+                    // The temporary null-terminated file name.
+                    void* tmp = NULL_POINTER;
+                    int tmps = *sc + 1;
 
-                // Set terminated file name by first copying the actual name
-                // and then adding the null termination character.
-                set_array_elements(tmp, (void*) NUMBER_0_INTEGER, p3, p4, (void*) CHARACTER_ARRAY);
-                set_array_elements(tmp, p4, (void*) NULL_CONTROL_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+                    // Create temporary null-terminated file name.
+                    allocate_array((void*) &tmp, (void*) &tmps, (void*) CHARACTER_ARRAY);
 
-                // Initialise the library.
-                // Check potential ABI mismatches between the version
-                // it was compiled for and the actual shared library used.
-                LIBXML_TEST_VERSION
+                    // Set terminated file name by first copying the actual name
+                    // and then adding the null termination character.
+                    set_array_elements(tmp, (void*) NUMBER_0_INTEGER, p3, p4, (void*) CHARACTER_ARRAY);
+                    set_array_elements(tmp, p4, (void*) NULL_CONTROL_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
 
-                // Parse file and get xml document.
-                // This function returns a pointer to type: xmlDoc*
-                *d = (void*) xmlParseFile((char*) tmp);
+                    // Initialise the library.
+                    // Check potential ABI mismatches between the version
+                    // it was compiled for and the actual shared library used.
+                    LIBXML_TEST_VERSION
 
-                // Free global variables that may have been allocated by the parser.
-                xmlCleanupParser();
+                    // Parse file and get xml document.
+                    // This function returns a pointer to type: xmlDoc*
+                    *d = (void*) xmlParseFile((char*) tmp);
 
-                // Destroy temporary null-terminated file name.
-                deallocate_array((void*) &tmp, (void*) &tmps, (void*) CHARACTER_ARRAY);
+                    // Free global variables that may have been allocated by the parser.
+                    xmlCleanupParser();
 
-                //??
+                    // Destroy temporary null-terminated file name.
+                    deallocate_array((void*) &tmp, (void*) &tmps, (void*) CHARACTER_ARRAY);
+
+                } else {
+
+                    log_message_debug("Could not parse xml. The file name count is null.");
+                }
+
                 //?? END of temporary workaround for using the libxml2 parser.
-                //??
 
 /*??
             // The comparison result.

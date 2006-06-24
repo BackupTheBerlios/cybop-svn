@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2006-06-20 16:16:29 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2006-06-24 18:06:57 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -33,6 +33,7 @@
 #include "../../globals/constants/channel_constants.c"
 #include "../../globals/constants/cybol_constants.c"
 #include "../../globals/constants/integer_constants.c"
+#include "../../globals/constants/model_constants.c"
 #include "../../globals/constants/name_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../memoriser/array.c"
@@ -500,41 +501,44 @@ void encode_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4) {
  */
 void decode_cybol(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    //??
     //?? BEGIN of temporary workaround for using the libxml2 parser.
     //?? The strings contained in the xml tree are terminated by a null character
     //?? which must be deleted for the cyboi model,
     //?? or neglected in the "count" number!
-    //??
 
     if (p4 != NULL_POINTER) {
 
         int* sc = (int*) p4;
 
-        if (p0 != NULL_POINTER) {
+        if (p3 != NULL_POINTER) {
 
-            void** d = (void**) p0;
+            if (p0 != NULL_POINTER) {
 
-            log_message_debug("Decode cybol.");
+                void** d = (void**) p0;
 
-            // Get root element node.
-            xmlNode* r = xmlDocGetRootElement((xmlDoc*) p3);
+                log_message_debug("Decode cybol.");
 
-            decode_cybol_node(p0, p1, p2, (void*) r, p4);
+                // Get root element node.
+                xmlNode* r = xmlDocGetRootElement((xmlDoc*) p3);
+
+                decode_cybol_node(p0, p1, p2, (void*) r, p4);
+
+            } else {
+
+                log_message_debug("Could not decode cybol. The destination is null.");
+            }
 
         } else {
 
-//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not translate xml. The destination is null.");
+            log_message_debug("Could not decode cybol. The source is null.");
         }
 
     } else {
 
-//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not translate xml. The source count is null.");
+        log_message_debug("Could not decode cybol. The source count is null.");
     }
 
-    //??
     //?? END of temporary workaround for using the libxml2 parser.
-    //??
 }
 
 /**
