@@ -24,7 +24,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.26 $ $Date: 2006-06-04 00:54:45 $ $Author: christian $
+ * @version $Revision: 1.27 $ $Date: 2006-06-25 22:08:25 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -135,6 +135,52 @@ void test_character_array_with_termination() {
     char test[] = {'t', 'e', 's', 't', ' ', 'c', 'h', 'a', 'r', ' ', 'a', 'r', 'r', 'a', 'y', ' ', 'o', 'k', '\n', '\0'};
 
     fputs(test, stdout);
+}
+
+/**
+ * Tests the character array with termination.
+ */
+void test_array_resizing() {
+
+    fputs("Test array resizing:\n", stdout);
+
+    // The text.
+    char ta[] = {'t', 'e', 's', 't', '\n', '\0'};
+    char* t = ta;
+    int* tc = NUMBER_6_INTEGER_ARRAY;
+
+    // The original array.
+    void* o = NULL_POINTER;
+    int oc = 0;
+    int os = *tc;
+    // The copied array.
+    void* c = NULL_POINTER;
+    int cc = 0;
+    int cs = 0;
+
+    // Allocate original array.
+    allocate_array((void*) &o, (void*) &os, (void*) CHARACTER_ARRAY);
+    // Allocate copied array.
+    allocate_array((void*) &c, (void*) &cs, (void*) CHARACTER_ARRAY);
+
+    // Fill original array with text.
+    set_array_elements(o, (void*) &oc, (void*) t, (void*) tc, (void*) CHARACTER_ARRAY);
+    oc = oc + *tc;
+
+    // Print original array content.
+    fputs(t, stdout);
+
+    // Reallocate copied array.
+    os = os + 10;
+    reallocate_array((void*) &o, (void*) &oc, (void*) &os, (void*) CHARACTER_ARRAY);
+
+    // Print original array content.
+    fputs(t, stdout);
+
+    // Deallocate original array.
+    deallocate_array((void*) &o, (void*) &os, (void*) CHARACTER_ARRAY);
+    // Deallocate copied array.
+    deallocate_array((void*) &c, (void*) &cs, (void*) CHARACTER_ARRAY);
 }
 
 /**
@@ -908,10 +954,11 @@ void test() {
     // int x = 2;
     // fprintf(stderr, "The value of x is: %d\n", x);
 
-    test_inline_assembler_code();
+//??    test_inline_assembler_code();
 //??    test_preprocessor_directives();
 //??    test_stdout_stderr();
 //??    test_character_array_with_termination();
+    test_array_resizing();
 //??    test_wide_character_output();
 //??    test_integer_to_wide_character_conversion();
 //??    test_ascii_character_wide_character_equality();

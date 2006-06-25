@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2006-06-23 00:25:27 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2006-06-25 22:08:25 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -68,21 +68,52 @@ void add_character_vector(void* p0, void* p1, void* p2, void* p3, void* p4, void
 
                         log_message_debug("Add character vectors.");
 
+                        // CAUTION! STORE ALL INPUT operands in temporary variables!
+                        // In the possible case that an input operand pointer
+                        // points to the same operand as the output pointer
+                        // (or even ALL operands reference the same resource),
+                        // it is important to leave the input operands untouched
+                        // until the operation has been executed completely.
+                        // Otherwise, when writing the result into an output operand,
+                        // the input operand would be overwritten at the same time,
+                        // as both are pointing to the same operand.
+
+                        // The summand 1.
+                        void* summand1 = NULL_POINTER;
+                        int summand1c = *s1c;
+                        // The summand 2.
+                        void* summand2 = NULL_POINTER;
+                        int summand2c = *s2c;
+
+                        // Allocate temporary operand arrays.
+                        allocate_array((void*) &summand1, (void*) &summand1c, (void*) CHARACTER_ARRAY);
+                        allocate_array((void*) &summand2, (void*) &summand2c, (void*) CHARACTER_ARRAY);
+
+                        // Set temporary input operand arrays.
+                        set_array_elements(summand1, (void*) NUMBER_0_INTEGER, p3, p4, (void*) CHARACTER_ARRAY);
+                        set_array_elements(summand2, (void*) NUMBER_0_INTEGER, p5, p6, (void*) CHARACTER_ARRAY);
+
                         // CAUTION! In order to achieve correct results,
                         // the sum array needs to be resized to the exact size
                         // of summand 1 count and summand 2 count added together!
                         // If the sum array got a greater size than needed,
                         // unpredictable results might occur when using it for
                         // comparison with other strings, for example.
-                        *ss = *s1c + *s2c;
+                        *ss = summand1c + summand2c;
                         *sc = *NUMBER_0_INTEGER;
 
+                        // Reallocate output operand arrays.
                         reallocate_array(p0, p1, p2, (void*) CHARACTER_ARRAY);
 
-                        set_array_elements(*s, (void*) sc, p3, p4, (void*) CHARACTER_ARRAY);
-                        *sc = *sc + *s1c;
-                        set_array_elements(*s, (void*) sc, p5, p6, (void*) CHARACTER_ARRAY);
-                        *sc = *sc + *s2c;
+                        // Set output operand arrays.
+                        set_array_elements(*s, (void*) sc, summand1, (void*) &summand1c, (void*) CHARACTER_ARRAY);
+                        *sc = *sc + summand1c;
+                        set_array_elements(*s, (void*) sc, summand2, (void*) &summand2c, (void*) CHARACTER_ARRAY);
+                        *sc = *sc + summand2c;
+
+                        // Deallocate temporary operand arrays.
+                        deallocate_array((void*) &summand1, (void*) &summand1c, (void*) CHARACTER_ARRAY);
+                        deallocate_array((void*) &summand2, (void*) &summand2c, (void*) CHARACTER_ARRAY);
 
                     } else {
 
