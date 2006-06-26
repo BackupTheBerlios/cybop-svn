@@ -22,7 +22,7 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.39 $ $Date: 2006-04-20 22:26:50 $ $Author: christian $
+# @version $Revision: 1.40 $ $Date: 2006-06-26 18:38:38 $ $Author: christian $
 # @author Michael Simon <michael.simon@gmx.net>
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
@@ -123,6 +123,8 @@ APPLICATOR_SOURCES = $(wildcard $(SRC)/applicator/*.c)
 APPLICATOR_OBJECTS = $(patsubst $(SRC)/applicator/%.c,$(OBJ)/applicator/%.o,$(APPLICATOR_SOURCES))
 APPLICATOR_COMPARE_SOURCES = $(wildcard $(SRC)/applicator/compare/*.c)
 APPLICATOR_COMPARE_OBJECTS = $(patsubst $(SRC)/applicator/compare/%.c,$(OBJ)/applicator/compare/%.o,$(APPLICATOR_COMPARE_SOURCES))
+APPLICATOR_COPY_SOURCES = $(wildcard $(SRC)/applicator/copy/*.c)
+APPLICATOR_COPY_OBJECTS = $(patsubst $(SRC)/applicator/copy/%.c,$(OBJ)/applicator/copy/%.o,$(APPLICATOR_COPY_SOURCES))
 APPLICATOR_INTERRUPT_SOURCES = $(wildcard $(SRC)/applicator/interrupt/*.c)
 APPLICATOR_INTERRUPT_OBJECTS = $(patsubst $(SRC)/applicator/interrupt/%.c,$(OBJ)/applicator/interrupt/%.o,$(APPLICATOR_INTERRUPT_SOURCES))
 APPLICATOR_RECEIVE_SOURCES = $(wildcard $(SRC)/applicator/receive/*.c)
@@ -192,6 +194,7 @@ all: export \
 	create \
 	$(APPLICATOR_OBJECTS) \
 	$(APPLICATOR_COMPARE_OBJECTS) \
+	$(APPLICATOR_COPY_OBJECTS) \
 	$(APPLICATOR_INTERRUPT_OBJECTS) \
 	$(APPLICATOR_RECEIVE_OBJECTS) \
 	$(APPLICATOR_RUN_OBJECTS) \
@@ -249,6 +252,7 @@ create:
 	-cd ..; mkdir obj; mkdir bin
 	-cd $(OBJ); mkdir applicator
 	-cd $(OBJ); mkdir applicator/compare
+	-cd $(OBJ); mkdir applicator/copy
 	-cd $(OBJ); mkdir applicator/interrupt
 	-cd $(OBJ); mkdir applicator/receive
 	-cd $(OBJ); mkdir applicator/run
@@ -281,6 +285,9 @@ $(OBJ)/applicator/%.o: $(SRC)/applicator/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
 $(OBJ)/applicator/compare/%.o: $(SRC)/applicator/compare/%.c
+	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
+
+$(OBJ)/applicator/copy/%.o: $(SRC)/applicator/copy/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
 $(OBJ)/applicator/interrupt/%.o: $(SRC)/applicator/interrupt/%.c

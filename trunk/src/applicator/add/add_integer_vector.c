@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2006-06-23 00:25:27 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2006-06-26 18:38:38 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -68,30 +68,58 @@ void add_integer_vector(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
 
                         log_message_debug("Add integer vectors.");
 
+                        // CAUTION! STORE ALL INPUT operands in temporary variables!
+                        // In the possible case that an input operand pointer
+                        // points to the same operand as the output pointer
+                        // (or even ALL operands reference the same resource),
+                        // it is important to leave the input operands untouched
+                        // until the operation has been executed completely.
+                        // Otherwise, when writing the result into an output operand,
+                        // the input operand would be overwritten at the same time,
+                        // as both are pointing to the same operand.
+
+                        // The summand 1 vector.
+                        void* summand1 = NULL_POINTER;
+                        int summand1c = *s1c;
+                        // The summand 2 vector.
+                        void* summand2 = NULL_POINTER;
+                        int summand2c = *s2c;
+
+                        // Allocate temporary operand arrays.
+                        allocate_array((void*) &summand1, (void*) &summand1c, (void*) INTEGER_ARRAY);
+                        allocate_array((void*) &summand2, (void*) &summand2c, (void*) INTEGER_ARRAY);
+
+                        // Set temporary input operand arrays.
+                        set_array_elements(summand1, (void*) NUMBER_0_INTEGER, p3, p4, (void*) INTEGER_ARRAY);
+                        set_array_elements(summand2, (void*) NUMBER_0_INTEGER, p5, p6, (void*) INTEGER_ARRAY);
+
                         // CAUTION! In order to achieve correct results,
                         // the sum array needs to be resized to the exact size
                         // of the summand with the SMALLER count!
                         // Otherwise, the array borders of the summand with the
                         // smaller count would be crossed.
 
-                        if (*s1c < *s2c) {
+                        if (summand1c < summand2c) {
 
-                            *ss = *s1c;
+                            *ss = summand1c;
 
                         } else {
 
-                            *ss = *s2c;
+                            *ss = summand2c;
                         }
 
                         // The sum count serves as loop count below.
                         *sc = *NUMBER_0_INTEGER;
 
+                        // Reallocate output operand arrays.
                         reallocate_array(p0, p1, p2, (void*) INTEGER_ARRAY);
 
-                        // The temporary values.
-                        int summand1 = 0;
-                        int summand2 = 0;
-                        int sum = 0;
+                        // The temporary summand 1 vector element.
+                        int tmps1 = 0;
+                        // The temporary summand 2 vector element.
+                        int tmps2 = 0;
+                        // The temporary sum vector element.
+                        int tmps = 0;
 
                         while (1) {
 
@@ -100,16 +128,19 @@ void add_integer_vector(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
                                 break;
                             }
 
-                            get_array_elements(*s, (void*) sc, (void*) &sum, (void*) INTEGER_ARRAY);
-                            get_array_elements(p3, (void*) sc, (void*) &summand1, (void*) INTEGER_ARRAY);
-                            get_array_elements(p5, (void*) sc, (void*) &summand2, (void*) INTEGER_ARRAY);
+                            get_array_elements(summand1, (void*) &summand1c, (void*) &tmps1, (void*) INTEGER_ARRAY);
+                            get_array_elements(summand2, (void*) &summand2c, (void*) &tmps2, (void*) INTEGER_ARRAY);
 
-                            sum = summand1 + summand2;
+                            tmps = tmps1 + tmps2;
 
-                            set_array_elements(*s, (void*) sc, (void*) &sum, (void*) PRIMITIVE_COUNT, (void*) INTEGER_ARRAY);
+                            set_array_elements(*s, (void*) sc, (void*) &tmps, (void*) PRIMITIVE_COUNT, (void*) INTEGER_ARRAY);
 
                             (*sc)++;
                         }
+
+                        // Deallocate temporary operand arrays.
+                        deallocate_array((void*) &summand1, (void*) &summand1c, (void*) INTEGER_ARRAY);
+                        deallocate_array((void*) &summand2, (void*) &summand2c, (void*) INTEGER_ARRAY);
 
                     } else {
 
