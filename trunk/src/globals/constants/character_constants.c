@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2006-04-20 22:36:09 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2006-06-27 21:07:27 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -111,7 +111,7 @@ static wchar_t* LINE_TABULATION_CONTROL_CHARACTER = LINE_TABULATION_CONTROL_CHAR
 static wchar_t FORM_FEED_CONTROL_CHARACTER_ARRAY[] = {0x000C};
 static wchar_t* FORM_FEED_CONTROL_CHARACTER = FORM_FEED_CONTROL_CHARACTER_ARRAY;
 
-/** The carriage return control character. U+000D */
+/** The carriage return (enter) control character. U+000D */
 static wchar_t CARRIAGE_RETURN_CONTROL_CHARACTER_ARRAY[] = {0x000D};
 static wchar_t* CARRIAGE_RETURN_CONTROL_CHARACTER = CARRIAGE_RETURN_CONTROL_CHARACTER_ARRAY;
 

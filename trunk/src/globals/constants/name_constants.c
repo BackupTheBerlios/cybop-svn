@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.21 $ $Date: 2006-06-23 00:25:27 $ $Author: christian $
+ * @version $Revision: 1.22 $ $Date: 2006-06-27 21:07:27 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -81,6 +81,16 @@ static int* UI_FOREGROUND_NAME_COUNT = NUMBER_10_INTEGER_ARRAY;
 //
 // User interface (ui) input names.
 //
+
+/** The enter name. */
+static char UI_ENTER_NAME_ARRAY[] = {'e', 'n', 't', 'e', 'r'};
+static char* UI_ENTER_NAME = UI_ENTER_NAME_ARRAY;
+static int* UI_ENTER_NAME_COUNT = NUMBER_5_INTEGER_ARRAY;
+
+/** The escape name. */
+static char UI_ESCAPE_NAME_ARRAY[] = {'e', 's', 'c', 'a', 'p', 'e'};
+static char* UI_ESCAPE_NAME = UI_ESCAPE_NAME_ARRAY;
+static int* UI_ESCAPE_NAME_COUNT = NUMBER_6_INTEGER_ARRAY;
 
 /** The arrow up name. */
 static char UI_ARROW_UP_NAME_ARRAY[] = {'a', 'r', 'r', 'o', 'w', '_', 'u', 'p'};

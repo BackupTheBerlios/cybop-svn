@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.16 $ $Date: 2006-06-17 10:32:38 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2006-06-27 21:07:27 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -136,6 +136,89 @@ void receive_linux_console_signal(void* p0, void* p1, void* p2) {
 }
 
 /**
+ * Receives a linux console escape control sequence and
+ * forwards the corresponding command, to be sent as signal.
+ *
+ * @param p0 the internal memory
+ * @param p1 the character buffer
+ * @param p2 the character buffer count
+ */
+void receive_linux_console_escape_control_sequence(void* p0, void* p1, void* p2) {
+
+    // The comparison result.
+    int r = 0;
+
+    // Determine escape control sequence and send a corresponding signal.
+    if (r == 0) {
+
+        compare_arrays(p1, p2, (void*) ARROW_UP_CONTROL_SEQUENCE, (void*) ARROW_UP_CONTROL_SEQUENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != 0) {
+
+            receive_linux_console_signal(p0, (void*) UI_ARROW_UP_NAME, (void*) UI_ARROW_UP_NAME_COUNT);
+        }
+    }
+
+    if (r == 0) {
+
+        compare_arrays(p1, p2, (void*) ARROW_DOWN_CONTROL_SEQUENCE, (void*) ARROW_DOWN_CONTROL_SEQUENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != 0) {
+
+            receive_linux_console_signal(p0, (void*) UI_ARROW_DOWN_NAME, (void*) UI_ARROW_DOWN_NAME_COUNT);
+        }
+    }
+
+    if (r == 0) {
+
+        compare_arrays(p1, p2, (void*) ARROW_LEFT_CONTROL_SEQUENCE, (void*) ARROW_LEFT_CONTROL_SEQUENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != 0) {
+
+            receive_linux_console_signal(p0, (void*) UI_ARROW_LEFT_NAME, (void*) UI_ARROW_LEFT_NAME_COUNT);
+        }
+    }
+
+    if (r == 0) {
+
+        compare_arrays(p1, p2, (void*) ARROW_RIGHT_CONTROL_SEQUENCE, (void*) ARROW_RIGHT_CONTROL_SEQUENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != 0) {
+
+            receive_linux_console_signal(p0, (void*) UI_ARROW_RIGHT_NAME, (void*) UI_ARROW_RIGHT_NAME_COUNT);
+        }
+    }
+}
+
+/**
+ * Receives a linux console character and
+ * forwards the corresponding command, to be sent as signal.
+ *
+ * @param p0 the internal memory
+ * @param p1 the character
+ */
+void receive_linux_console_character(void* p0, void* p1) {
+
+    if (p1 != NULL_POINTER) {
+
+        char* e = (char*) p1;
+
+        if (*e == *LINE_FEED_CONTROL_CHARACTER) {
+
+            receive_linux_console_signal(p0, (void*) UI_ENTER_NAME, (void*) UI_ENTER_NAME_COUNT);
+
+        } else {
+
+            receive_linux_console_signal(p0, p1, (void*) NUMBER_1_INTEGER);
+        }
+
+    } else {
+
+        log_message_debug("Could not receive linux console character. The character is null.");
+    }
+}
+
+/**
  * Receives linux console messages (events) in an own thread.
  *
  * @param p0 the internal memory
@@ -205,8 +288,6 @@ void receive_linux_console_thread(void* p0) {
             // Reset escape control sequence mode.
             csi = *NUMBER_0_INTEGER;
 
-//??    fprintf(stdout, "TEST csi mode %i\n", e);
-
             // An escape character followed by a left square bracket character
             // were read before. So this is an escape control sequence.
 
@@ -214,57 +295,7 @@ void receive_linux_console_thread(void* p0) {
             set(*b, (void*) *bc, (void*) &e, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
             (**bc)++;
 
-/*??
-    fprintf(stdout, "TEST csi b %s\n", (char*) *b);
-    fprintf(stdout, "TEST csi bc %i\n", **bc);
-    fprintf(stdout, "TEST csi bs %i\n", **bs);
-*/
-
-            // The comparison result.
-            int r = 0;
-
-            // Determine escape control sequence and send a corresponding signal.
-            if (r == 0) {
-
-                compare_arrays(*b, (void*) *bc, (void*) ARROW_UP_CONTROL_SEQUENCE, (void*) ARROW_UP_CONTROL_SEQUENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-                if (r != 0) {
-
-                    receive_linux_console_signal(p0, (void*) UI_ARROW_UP_NAME, (void*) UI_ARROW_UP_NAME_COUNT);
-                }
-            }
-
-            if (r == 0) {
-
-                compare_arrays(*b, (void*) *bc, (void*) ARROW_DOWN_CONTROL_SEQUENCE, (void*) ARROW_DOWN_CONTROL_SEQUENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-                if (r != 0) {
-
-//??    fprintf(stdout, "TEST csi mode down %i\n", e);
-
-                    receive_linux_console_signal(p0, (void*) UI_ARROW_DOWN_NAME, (void*) UI_ARROW_DOWN_NAME_COUNT);
-                }
-            }
-
-            if (r == 0) {
-
-                compare_arrays(*b, (void*) *bc, (void*) ARROW_LEFT_CONTROL_SEQUENCE, (void*) ARROW_LEFT_CONTROL_SEQUENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-                if (r != 0) {
-
-                    receive_linux_console_signal(p0, (void*) UI_ARROW_LEFT_NAME, (void*) UI_ARROW_LEFT_NAME_COUNT);
-                }
-            }
-
-            if (r == 0) {
-
-                compare_arrays(*b, (void*) *bc, (void*) ARROW_RIGHT_CONTROL_SEQUENCE, (void*) ARROW_RIGHT_CONTROL_SEQUENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-                if (r != 0) {
-
-                    receive_linux_console_signal(p0, (void*) UI_ARROW_RIGHT_NAME, (void*) UI_ARROW_RIGHT_NAME_COUNT);
-                }
-            }
+            receive_linux_console_escape_control_sequence(p0, *b, (void*) *bc);
 
             // Initialise loop count.
             j = **bc - 1;
@@ -291,8 +322,6 @@ void receive_linux_console_thread(void* p0) {
             // Reset escape character mode.
             esc = *NUMBER_0_INTEGER;
 
-//??    fprintf(stdout, "TEST esc mode %i\n", e);
-
             // An escape character was read before.
             // Find out if it was just that escape character,
             // or if a left square bracket character follows now,
@@ -311,16 +340,14 @@ void receive_linux_console_thread(void* p0) {
 
             } else {
 
-                // This is not going to be an escape control sequence.
+                // This is NOT going to be an escape control sequence.
                 // Send both, the formerly read escape character and the
                 // current character as two independent signals.
-                receive_linux_console_signal(p0, (void*) ESCAPE_CONTROL_CHARACTER, (void*) NUMBER_1_INTEGER);
-                receive_linux_console_signal(p0, (void*) &e, (void*) NUMBER_1_INTEGER);
+                receive_linux_console_signal(p0, (void*) UI_ESCAPE_NAME, (void*) UI_ESCAPE_NAME_COUNT);
+                receive_linux_console_character(p0, (void*) &e);
             }
 
         } else if (e == *ESCAPE_CONTROL_CHARACTER) {
-
-//??    fprintf(stdout, "TEST if esc char %i\n", e);
 
             // Set escape character flag.
             esc = *NUMBER_1_INTEGER;
@@ -331,9 +358,7 @@ void receive_linux_console_thread(void* p0) {
 
         } else {
 
-//??    fprintf(stdout, "TEST rest %i\n", e);
-
-            receive_linux_console_signal(p0, (void*) &e, (void*) NUMBER_1_INTEGER);
+            receive_linux_console_character(p0, (void*) &e);
         }
     }
 

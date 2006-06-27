@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.18 $ $Date: 2006-06-17 10:32:38 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2006-06-27 21:07:27 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -573,7 +573,7 @@ void receive_x_window_system_thread(void* p0) {
         // while receive_x_window_system runs in its own thread!
         while (!receive_x_window_system_check_events(*d, *xmt)) {
 
-            sleep(1);
+            sleep(0.1);
         }
 
         pthread_mutex_lock(*xmt);
