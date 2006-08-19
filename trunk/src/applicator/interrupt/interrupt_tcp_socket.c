@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.12 $ $Date: 2006-06-11 21:47:09 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2006-08-19 02:04:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -40,6 +40,7 @@
 #include "../../globals/constants/abstraction_constants.c"
 #include "../../globals/constants/integer_constants.c"
 #include "../../globals/constants/structure_constants.c"
+#include "../../globals/constants/system_constants.c"
 #include "../../globals/variables/variables.c"
 #include "../../memoriser/accessor.c"
 #include "../../memoriser/array.c"
@@ -51,10 +52,10 @@ void interrupt_tcp_socket() {
 
     log_message_debug("Interrupt tcp socket service.");
 
-    // Set thread interrupt flag.
-    *TCP_SOCKET_THREAD_INTERRUPT = *NUMBER_1_INTEGER;
+    if (*TCP_SOCKET_THREAD != *INVALID_VALUE) {
 
-    if (*TCP_SOCKET_THREAD != -1) {
+        // Set thread interrupt flag for signal handler.
+        *TCP_SOCKET_THREAD_INTERRUPT = *NUMBER_1_INTEGER;
 
         // Send signal to thread.
         // CAUTION! Sending a SIGKILL signal to a thread using pthread_kill()
@@ -71,15 +72,15 @@ void interrupt_tcp_socket() {
         pthread_join(*TCP_SOCKET_THREAD, NULL_POINTER);
 
         // Reset thread.
-        *TCP_SOCKET_THREAD = -1;
+        *TCP_SOCKET_THREAD = *INVALID_VALUE;
+
+        // Reset thread interrupt flag for signal handler.
+        *TCP_SOCKET_THREAD_INTERRUPT = *NUMBER_0_INTEGER;
 
     } else {
 
         log_message_debug("Warning: Could not interrupt tcp socket. The tcp socket thread is invalid.");
     }
-
-    // Reset thread interrupt flag.
-    *TCP_SOCKET_THREAD_INTERRUPT = *NUMBER_0_INTEGER;
 }
 
 /* LINUX_OPERATING_SYSTEM */

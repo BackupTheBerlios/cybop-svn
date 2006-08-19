@@ -20,12 +20,20 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2006-04-20 22:36:10 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2006-08-19 02:04:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef INTEGER_CONSTANTS_SOURCE
 #define INTEGER_CONSTANTS_SOURCE
+
+//
+// Negative values.
+//
+
+/** The number -1 (minus one) integer. */
+static int NUMBER_MINUS_1_INTEGER_ARRAY[] = {-1};
+static int* NUMBER_MINUS_1_INTEGER = NUMBER_MINUS_1_INTEGER_ARRAY;
 
 //
 // Digits 0 - 9.

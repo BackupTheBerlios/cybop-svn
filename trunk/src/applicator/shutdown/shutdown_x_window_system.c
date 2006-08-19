@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.14 $ $Date: 2006-06-17 10:32:38 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2006-08-19 02:04:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  *
@@ -76,7 +76,7 @@ void shutdown_x_window_system(void* p0, void* p1, void* p2, void* p3) {
     // Only destroy display if existent.
     if (*di != NULL_POINTER) {
 
-        // Interrupt receive signal thread.
+        // Interrupt x window system service thread.
         interrupt_x_window_system();
 
         // The display name.
@@ -148,9 +148,11 @@ void shutdown_x_window_system(void* p0, void* p1, void* p2, void* p3) {
 */
 
         // Free x window system internals.
-        XFreeGC(*d, *gc);
-        XDestroyWindow(*d, **w);
-        XCloseDisplay(*d);
+//??        XFreeGC(*d, *gc);
+
+//??        XDestroyWindow(*d, **w);
+
+//??        XCloseDisplay(*d);
 
         // Destroy x window system internals.
         // CAUTION! Do NOT use references &, because variables are **

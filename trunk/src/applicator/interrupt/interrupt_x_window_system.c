@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2006-06-11 21:47:09 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2006-08-19 02:04:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -35,6 +35,7 @@
 #include "../../globals/constants/integer_constants.c"
 #include "../../globals/constants/log_constants.c"
 #include "../../globals/constants/structure_constants.c"
+#include "../../globals/constants/system_constants.c"
 #include "../../globals/logger/logger.c"
 
 /**
@@ -44,10 +45,10 @@ void interrupt_x_window_system() {
 
     log_message_debug("Interrupt x window system service.");
 
-    // Set thread interrupt flag.
-    *X_WINDOW_SYSTEM_THREAD_INTERRUPT = *NUMBER_1_INTEGER;
+    if (*X_WINDOW_SYSTEM_THREAD != *INVALID_VALUE) {
 
-    if (*X_WINDOW_SYSTEM_THREAD != -1) {
+        // Set thread interrupt flag for signal handler.
+        *X_WINDOW_SYSTEM_THREAD_INTERRUPT = *NUMBER_1_INTEGER;
 
         // Send signal to thread.
         // CAUTION! Sending a SIGKILL signal to a thread using pthread_kill()
@@ -64,15 +65,15 @@ void interrupt_x_window_system() {
         pthread_join(*X_WINDOW_SYSTEM_THREAD, NULL_POINTER);
 
         // Reset thread.
-        *X_WINDOW_SYSTEM_THREAD = -1;
+        *X_WINDOW_SYSTEM_THREAD = *INVALID_VALUE;
+
+        // Reset thread interrupt flag for signal handler.
+        *X_WINDOW_SYSTEM_THREAD_INTERRUPT = *NUMBER_0_INTEGER;
 
     } else {
 
         log_message_debug("Warning: Could not interrupt x window system. The x window system thread is invalid.");
     }
-
-    // Reset thread interrupt flag.
-    *X_WINDOW_SYSTEM_THREAD_INTERRUPT = *NUMBER_0_INTEGER;
 }
 
 /* LINUX_OPERATING_SYSTEM */

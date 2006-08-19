@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2006-04-20 22:36:10 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2006-08-19 02:04:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -28,6 +28,13 @@
 #define SYSTEM_CONSTANTS_SOURCE
 
 #include "../../globals/constants/integer_constants.c"
+
+//
+// Special values.
+//
+
+/** The invalid value. */
+static int* INVALID_VALUE = NUMBER_MINUS_1_INTEGER_ARRAY;
 
 //
 // Shell.

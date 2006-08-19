@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.22 $ $Date: 2006-06-04 00:54:45 $ $Author: christian $
+ * @version $Revision: 1.23 $ $Date: 2006-08-19 02:04:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -1993,6 +1993,15 @@ void get_universal_compound_element_by_name(void* p0, void* p1, void* p2, void* 
         log_message_debug("Get universal compound element as inline.");
 
         // Get compound element as direct model.
+        //
+        // It would actually be possible to remember the values of
+        // the first call to "get_compound_element_by_name" above,
+        // and assign these to the parameters here, which might lead to
+        // some optimisation and better performance.
+        // For reasons of clearity of code, however, the introduction and
+        // usage of those many additional local variables was avoided
+        // and the "get_compound_element_by_name" procedure
+        // is called here a second time instead.
         get_compound_element_by_name(p0, p1, NULL_POINTER, NULL_POINTER,
             p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12);
     }

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2006-06-11 21:47:09 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2006-08-19 02:04:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -34,6 +34,7 @@
 #include "../../globals/constants/integer_constants.c"
 #include "../../globals/constants/log_constants.c"
 #include "../../globals/constants/structure_constants.c"
+#include "../../globals/constants/system_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../globals/variables/variables.c"
 #include "../../memoriser/accessor.c"
@@ -45,17 +46,19 @@ void interrupt_linux_console() {
 
     log_message_debug("Interrupt linux console service.");
 
-    // Set thread interrupt flag.
-    *LINUX_CONSOLE_THREAD_INTERRUPT = *NUMBER_1_INTEGER;
+    if (*LINUX_CONSOLE_THREAD != *INVALID_VALUE) {
 
-    if (*LINUX_CONSOLE_THREAD != -1) {
+        // Set thread interrupt flag for signal handler.
+        *LINUX_CONSOLE_THREAD_INTERRUPT = *NUMBER_1_INTEGER;
 
         // Send signal to thread.
+        //
         // CAUTION! Sending a SIGKILL signal to a thread using pthread_kill()
-        // ends the ENTIRE PROCESS, not simply the target thread.
+        // would end the ENTIRE PROCESS, not simply the target thread.
         // SIGKILL is defined to end the entire process, regardless
         // of the thread it is delivered to, or how it is sent.
-        // The user signal SIGUSR1 is used here instead.
+        //
+        // Therefore, the user signal SIGUSR1 is used here instead.
         // It is processed in the interrupt_service_system_signal_handler
         // procedure, situated in the following module:
         // controller/manager/system_signal_handler_manager.c
@@ -65,15 +68,15 @@ void interrupt_linux_console() {
         pthread_join(*LINUX_CONSOLE_THREAD, NULL_POINTER);
 
         // Reset thread.
-        *LINUX_CONSOLE_THREAD = -1;
+        *LINUX_CONSOLE_THREAD = *INVALID_VALUE;
+
+        // Reset thread interrupt flag for signal handler.
+        *LINUX_CONSOLE_THREAD_INTERRUPT = *NUMBER_0_INTEGER;
 
     } else {
 
         log_message_debug("Warning: Could not interrupt linux console. The linux console thread is invalid.");
     }
-
-    // Reset thread interrupt flag.
-    *LINUX_CONSOLE_THREAD_INTERRUPT = *NUMBER_0_INTEGER;
 }
 
 /* LINUX_OPERATING_SYSTEM */

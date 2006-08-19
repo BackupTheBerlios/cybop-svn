@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.14 $ $Date: 2006-06-17 10:32:38 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2006-08-19 02:04:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -51,18 +51,18 @@ void shutdown_linux_console(void* p0, void* p1, void* p2, void* p3) {
 
     log_message_debug("Shutdown linux console.");
 
-    // The terminal (device name) internal.
+    // The linux console (terminal device name) internal.
     FILE** ti = (FILE**) &NULL_POINTER;
 
-    // Get terminal internal.
-    get(p0, (void*) TERMINAL_FILE_DESCRIPTOR_INTERNAL, (void*) &ti, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    // Get linux console internal.
+    get(p0, (void*) LINUX_CONSOLE_FILE_DESCRIPTOR_INTERNAL, (void*) &ti, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
     if (*ti != NULL_POINTER) {
 
-        // Interrupt receive signal thread.
+        // Interrupt linux console service thread.
         interrupt_linux_console();
 
-        // The terminal (device name).
+        // The linux console (terminal device name).
         FILE** t = (FILE**) &NULL_POINTER;
         // The original termios interface.
         struct termios** to = (struct termios**) &NULL_POINTER;
@@ -73,10 +73,10 @@ void shutdown_linux_console(void* p0, void* p1, void* p2, void* p3) {
         void** bc = &NULL_POINTER;
         void** bs = &NULL_POINTER;
 
-        // Get terminal internals.
-        get(p0, (void*) TERMINAL_FILE_DESCRIPTOR_INTERNAL, (void*) &t, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        get(p0, (void*) TERMINAL_ORIGINAL_ATTRIBUTES_INTERNAL, (void*) &to, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        get(p0, (void*) TERMINAL_WORKING_ATTRIBUTES_INTERNAL, (void*) &tw, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        // Get linux console internals.
+        get(p0, (void*) LINUX_CONSOLE_FILE_DESCRIPTOR_INTERNAL, (void*) &t, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        get(p0, (void*) LINUX_CONSOLE_ORIGINAL_ATTRIBUTES_INTERNAL, (void*) &to, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        get(p0, (void*) LINUX_CONSOLE_WORKING_ATTRIBUTES_INTERNAL, (void*) &tw, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         // Get character buffer.
         get(p0, (void*) LINUX_CONSOLE_THREAD_CHARACTER_BUFFER_INTERNAL, (void*) &b, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         get(p0, (void*) LINUX_CONSOLE_THREAD_CHARACTER_BUFFER_COUNT_INTERNAL, (void*) &bc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
@@ -84,10 +84,10 @@ void shutdown_linux_console(void* p0, void* p1, void* p2, void* p3) {
 
         // Get file descriptor for file stream.
         int d = fileno(*t);
-        // Reset original terminal attributes.
+        // Reset original linux console attributes.
         tcsetattr(d, TCSANOW, *to);
 
-        // Destroy terminal internals.
+        // Destroy linux console internals.
         // CAUTION! Use descending order, as opposed to the creation!
         // CAUTION! Do NOT use references &, because variables are **
         // and *&variable equals the variable alone.

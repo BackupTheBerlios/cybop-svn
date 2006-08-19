@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2006-04-20 22:36:09 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2006-08-19 02:04:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -45,7 +45,7 @@ void shutdown_unix_socket(void* p0, void* p1, void* p2, void* p3) {
 
     log_message_debug("Shutdown unix socket.");
 
-    // Interrupt receive signal thread.
+    // Interrupt unix socket service thread.
     interrupt_unix_socket();
 }
 

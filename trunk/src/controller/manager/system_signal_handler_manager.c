@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2006-06-11 21:47:09 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2006-08-19 02:04:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -31,6 +31,7 @@
 #include <signal.h>
 #include "../../globals/constants/integer_constants.c"
 #include "../../globals/constants/log_constants.c"
+#include "../../globals/constants/system_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../globals/variables/variables.c"
 
@@ -57,12 +58,12 @@ void interrupt_service_system_signal_handler(int p0) {
 
     // Get this thread's identification.
     pthread_getunique_np(&t, &id);
-*/
 
     // Get unique thread id.
 //??    pthread_id_np_t id = pthread_getthreadid_np();
+*/
 
-//??    fprintf(stdout, "TEST signal handler 1 t %l\n", t);
+//??    fprintf(stdout, "TEST signal handler thread t: %l\n", t);
 
     if (t == *LINUX_CONSOLE_THREAD) {
 
@@ -73,6 +74,13 @@ void interrupt_service_system_signal_handler(int p0) {
 //??    fprintf(stdout, "TEST signal handler linux console irq %i\n", p0);
 
             pthread_exit(NULL_POINTER);
+
+            // CAUTION! The thread CANNOT be reset here with:
+            // *LINUX_CONSOLE_THREAD = *INVALID_VALUE;
+            // because this line would NOT be reached anymore,
+            // after "pthread_exit" has been called above!
+            // Therefore, do the reset in the corresponding
+            // "interrupt" procedure where "kill" was called!
         }
     }
 
@@ -85,6 +93,13 @@ void interrupt_service_system_signal_handler(int p0) {
 //??    fprintf(stdout, "TEST signal handler unix socket irq %i\n", p0);
 
             pthread_exit(NULL_POINTER);
+
+            // CAUTION! The thread CANNOT be reset here with:
+            // *UNIX_SOCKET_THREAD = *INVALID_VALUE;
+            // because this line would NOT be reached anymore,
+            // after "pthread_exit" has been called above!
+            // Therefore, do the reset in the corresponding
+            // "interrupt" procedure where "kill" was called!
         }
     }
 
@@ -97,6 +112,13 @@ void interrupt_service_system_signal_handler(int p0) {
 //??    fprintf(stdout, "TEST signal handler tcp socket irq %i\n", p0);
 
             pthread_exit(NULL_POINTER);
+
+            // CAUTION! The thread CANNOT be reset here with:
+            // *TCP_SOCKET_THREAD = *INVALID_VALUE;
+            // because this line would NOT be reached anymore,
+            // after "pthread_exit" has been called above!
+            // Therefore, do the reset in the corresponding
+            // "interrupt" procedure where "kill" was called!
         }
     }
 
@@ -109,6 +131,13 @@ void interrupt_service_system_signal_handler(int p0) {
 //??    fprintf(stdout, "TEST signal handler x window system irq %i\n", p0);
 
             pthread_exit(NULL_POINTER);
+
+            // CAUTION! The thread CANNOT be reset here with:
+            // *X_WINDOW_SYSTEM_THREAD = *INVALID_VALUE;
+            // because this line would NOT be reached anymore,
+            // after "pthread_exit" has been called above!
+            // Therefore, do the reset in the corresponding
+            // "interrupt" procedure where "kill" was called!
         }
     }
 }

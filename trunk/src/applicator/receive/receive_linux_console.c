@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.17 $ $Date: 2006-06-27 21:07:27 $ $Author: christian $
+ * @version $Revision: 1.18 $ $Date: 2006-08-19 02:04:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -41,6 +41,7 @@
 #include "../../globals/constants/integer_constants.c"
 #include "../../globals/constants/name_constants.c"
 #include "../../globals/constants/structure_constants.c"
+#include "../../globals/constants/system_constants.c"
 #include "../../globals/variables/variables.c"
 #include "../../memoriser/accessor/compound_accessor.c"
 #include "../../memoriser/accessor/signal_memory_accessor.c"
@@ -66,7 +67,9 @@ void receive_linux_console_signal(void* p0, void* p1, void* p2) {
     void** sc = &NULL_POINTER;
     void** ss = &NULL_POINTER;
     // The signal memory mutex.
-    pthread_mutex_t** mt = (pthread_mutex_t**) &NULL_POINTER;
+    pthread_mutex_t** smt = (pthread_mutex_t**) &NULL_POINTER;
+    // The linux console mutex.
+    pthread_mutex_t** lmt = (pthread_mutex_t**) &NULL_POINTER;
     // The interrupt request flag.
     sig_atomic_t** irq = (sig_atomic_t**) &NULL_POINTER;
     // The user interface commands.
@@ -99,13 +102,29 @@ void receive_linux_console_signal(void* p0, void* p1, void* p2) {
     get(p0, (void*) SIGNAL_MEMORY_COUNT_INTERNAL, (void*) &sc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     get(p0, (void*) SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &ss, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     // Get signal memory mutex.
-    get(p0, (void*) SIGNAL_MEMORY_MUTEX_INTERNAL, (void*) &mt, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p0, (void*) SIGNAL_MEMORY_MUTEX_INTERNAL, (void*) &smt, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    // Get linux console mutex.
+    get(p0, (void*) LINUX_CONSOLE_MUTEX_INTERNAL, (void*) &lmt, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     // Get interrupt request internal.
     get(p0, (void*) INTERRUPT_REQUEST_INTERNAL, (void*) &irq, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
+    // Lock linux console mutex.
+    //
+    // CAUTION! A mutex is needed here to ensure that the commands internal
+    // and its associated count and size are retrieved at once and belong together.
+    // Otherwise, a commands internal might be got in this "receive" thread,
+    // then the "main" thread of cyboi might set a new commands internal, count
+    // and size, and finally this "receive" thread would get a wrong count or size
+    // (of the new commands internal), not belonging to the commands internal got before.
+    pthread_mutex_lock(*lmt);
+
     // Get user interface commands internal.
     get(p0, (void*) LINUX_CONSOLE_THREAD_COMMANDS_INTERNAL, (void*) &c, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     get(p0, (void*) LINUX_CONSOLE_THREAD_COMMANDS_COUNT_INTERNAL, (void*) &cc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     get(p0, (void*) LINUX_CONSOLE_THREAD_COMMANDS_SIZE_INTERNAL, (void*) &cs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
+    // Unlock linux console mutex.
+    pthread_mutex_unlock(*lmt);
 
     // Get actual command belonging to the command name.
     // If the name is not known, the command parameter is left untouched.
@@ -117,7 +136,7 @@ void receive_linux_console_signal(void* p0, void* p1, void* p2) {
         *k, *kc);
 
     // Lock signal memory mutex.
-    pthread_mutex_lock(*mt);
+    pthread_mutex_lock(*smt);
 
     // Allocate signal id.
     allocate((void*) &id, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
@@ -132,7 +151,7 @@ void receive_linux_console_signal(void* p0, void* p1, void* p2) {
     **irq = *NUMBER_1_INTEGER;
 
     // Unlock signal memory mutex.
-    pthread_mutex_unlock(*mt);
+    pthread_mutex_unlock(*smt);
 }
 
 /**
@@ -194,6 +213,10 @@ void receive_linux_console_escape_control_sequence(void* p0, void* p1, void* p2)
  * Receives a linux console character and
  * forwards the corresponding command, to be sent as signal.
  *
+ * This procedure changes some key codes into real names as defined by CYBOL.
+ * Example: The LINE_FEED_CONTROL_CHARACTER (<enter> key)
+ * gets converted into UI_ENTER_NAME ("enter"), which is used in CYBOL files.
+ *
  * @param p0 the internal memory
  * @param p1 the character
  */
@@ -206,6 +229,10 @@ void receive_linux_console_character(void* p0, void* p1) {
         if (*e == *LINE_FEED_CONTROL_CHARACTER) {
 
             receive_linux_console_signal(p0, (void*) UI_ENTER_NAME, (void*) UI_ENTER_NAME_COUNT);
+
+        } else if (*e == *ESCAPE_CONTROL_CHARACTER) {
+
+            receive_linux_console_signal(p0, (void*) UI_ESCAPE_NAME, (void*) UI_ESCAPE_NAME_COUNT);
 
         } else {
 
@@ -225,11 +252,11 @@ void receive_linux_console_character(void* p0, void* p1) {
  */
 void receive_linux_console_thread(void* p0) {
 
-    // The terminal (device name).
+    // The linux console (terminal device name).
     void** t = &NULL_POINTER;
 
-    // Get terminal.
-//??    get_array_elements(p0, (void*) TERMINAL_FILE_DESCRIPTOR_INTERNAL, (void*) &t, (void*) POINTER_ARRAY);
+    // Get linux console.
+//??    get_array_elements(p0, (void*) LINUX_CONSOLE_FILE_DESCRIPTOR_INTERNAL, (void*) &t, (void*) POINTER_ARRAY);
     //?? For now, the standard stream is used for input. Possibly changed later.
     *t = stdin;
 
@@ -275,7 +302,7 @@ void receive_linux_console_thread(void* p0) {
         // and processed in the system signal handler procedure
         // (situated in the controller/checker.c module).
 
-        // Get character from terminal.
+        // Get character from linux console.
         // CAUTION! Use 'wint_t' instead of 'int' as return type for
         // 'getwchar()', since that returns 'WEOF' instead of 'EOF'.
 //??        e = fgetwc(*t);
@@ -344,7 +371,12 @@ void receive_linux_console_thread(void* p0) {
                 // Send both, the formerly read escape character and the
                 // current character as two independent signals.
                 receive_linux_console_signal(p0, (void*) UI_ESCAPE_NAME, (void*) UI_ESCAPE_NAME_COUNT);
-                receive_linux_console_character(p0, (void*) &e);
+
+                if (e != EOF) {
+
+                    // Forward character if it is not the end of the console stream.
+                    receive_linux_console_character(p0, (void*) &e);
+                }
             }
 
         } else if (e == *ESCAPE_CONTROL_CHARACTER) {
@@ -356,8 +388,9 @@ void receive_linux_console_thread(void* p0) {
             set(*b, (void*) *bc, (void*) &e, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
             (**bc)++;
 
-        } else {
+        } else if (e != EOF) {
 
+            // Forward character if it is not the end of the console stream.
             receive_linux_console_character(p0, (void*) &e);
         }
     }
@@ -388,31 +421,58 @@ void receive_linux_console(void* p0, void* p1, void* p2, void* p3) {
 
     log_message_debug("Receive linux console message.");
 
+    // The linux console mutex.
+    pthread_mutex_t** mt = (pthread_mutex_t**) &NULL_POINTER;
+
+    // Get linux console mutex.
+    get(p0, (void*) LINUX_CONSOLE_MUTEX_INTERNAL, (void*) &mt, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
+    // Lock linux console mutex.
+    pthread_mutex_lock(*mt);
+
     // Adding the following parameters to the internal memory is necessary,
     // because only one parameter (the internal memory p0) can be forwarded
     // to the thread procedure further below. Thus, p0 must contain any others.
 
     // Set temporary user interface commands internal.
+    //
+    // CAUTION! A mutex is ACTUALLY not necessary, since the thread
+    // procedures only read, but NOT write internal memory values.
+    //
+    // However, a mutex IS NECESSARY anyway, since the commands
+    // internal and its count and size should be set together, at once.
+    // Otherwise, the thread procedures might read a new commands internal
+    // with the count or size of the old commands internal,
+    // which would lead to a segmentation fault and possibly system crash.
     set(p0, (void*) LINUX_CONSOLE_THREAD_COMMANDS_INTERNAL, (void*) &p1, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     set(p0, (void*) LINUX_CONSOLE_THREAD_COMMANDS_COUNT_INTERNAL, (void*) &p2, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     set(p0, (void*) LINUX_CONSOLE_THREAD_COMMANDS_SIZE_INTERNAL, (void*) &p3, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-    // Create thread.
-    //
-    // CAUTION! Do NOT allocate any resources within the thread procedure!
-    // The reason is that this main process thread gets forked when executing
-    // external programs. A "fork" duplicates ALL resources of the parent process,
-    // including ALL resources of any threads running within the parent process.
-    // However, since the created child process does not have those threads running,
-    // their duplicated resources will never be deallocated, which eats up memory.
-    // See source code file: applicator/run/run_execute.c
-    //
-    // Any dynamically allocated resources needed within the thread have to be:
-    // - allocated at service startup
-    // - added to the internal memory
-    // - handed over to the thread procedure HERE
-    // - deallocated at service shutdown
-    pthread_create(LINUX_CONSOLE_THREAD, NULL_POINTER, (void*) &receive_linux_console_thread, p0);
+    // Unlock linux console mutex.
+    pthread_mutex_unlock(*mt);
+
+    // Only create thread, if not existent.
+    if (*LINUX_CONSOLE_THREAD == *INVALID_VALUE) {
+
+    log_message_debug("Create new linux console receive service thread.");
+
+        // Create thread.
+        //
+        // CAUTION! Do NOT allocate any resources within the thread procedure!
+        // The reason is that this main process thread gets forked when executing
+        // external programs. A "fork" duplicates ALL resources of the parent process,
+        // including ALL resources of any threads running within the parent process.
+        // However, since the created child process does not have those threads running,
+        // their duplicated resources will never be deallocated, which eats up memory.
+        // See source code file: applicator/run/run_execute.c
+        //
+        // Any dynamically allocated resources needed within the thread have to be:
+        // - allocated at service startup
+        // - added to the internal memory
+        // - handed over to the thread procedure HERE
+        // - deallocated at service shutdown
+        pthread_create(LINUX_CONSOLE_THREAD, NULL_POINTER, (void*) &receive_linux_console_thread, p0);
+    }
 }
 
 /* LINUX_OPERATING_SYSTEM */

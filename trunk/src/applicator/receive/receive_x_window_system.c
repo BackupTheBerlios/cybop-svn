@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.19 $ $Date: 2006-06-27 21:07:27 $ $Author: christian $
+ * @version $Revision: 1.20 $ $Date: 2006-08-19 02:04:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -39,6 +39,7 @@
 #include "../../globals/constants/integer_constants.c"
 #include "../../globals/constants/name_constants.c"
 #include "../../globals/constants/structure_constants.c"
+#include "../../globals/constants/system_constants.c"
 #include "../../globals/variables/variables.c"
 #include "../../memoriser/accessor.c"
 #include "../../memoriser/allocator.c"
@@ -871,22 +872,26 @@ void receive_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, v
     set(p0, (void*) X_WINDOW_SYSTEM_THREAD_COMMANDS_COUNT_INTERNAL, (void*) &p5, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     set(p0, (void*) X_WINDOW_SYSTEM_THREAD_COMMANDS_SIZE_INTERNAL, (void*) &p6, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-    // Create thread.
-    //
-    // CAUTION! Do NOT allocate any resources within the thread procedure!
-    // The reason is that this main process thread gets forked when executing
-    // external programs. A "fork" duplicates ALL resources of the parent process,
-    // including ALL resources of any threads running within the parent process.
-    // However, since the created child process does not have those threads running,
-    // their duplicated resources will never be deallocated, which eats up memory.
-    // See source code file: applicator/run/run_execute.c
-    //
-    // Any dynamically allocated resources needed within the thread have to be:
-    // - allocated at service startup
-    // - added to the internal memory
-    // - handed over to the thread procedure HERE
-    // - deallocated at service shutdown
-    pthread_create(X_WINDOW_SYSTEM_THREAD, NULL_POINTER, (void*) &receive_x_window_system_thread, p0);
+    // Only create thread, if not existent.
+    if (*LINUX_CONSOLE_THREAD == *INVALID_VALUE) {
+
+        // Create thread.
+        //
+        // CAUTION! Do NOT allocate any resources within the thread procedure!
+        // The reason is that this main process thread gets forked when executing
+        // external programs. A "fork" duplicates ALL resources of the parent process,
+        // including ALL resources of any threads running within the parent process.
+        // However, since the created child process does not have those threads running,
+        // their duplicated resources will never be deallocated, which eats up memory.
+        // See source code file: applicator/run/run_execute.c
+        //
+        // Any dynamically allocated resources needed within the thread have to be:
+        // - allocated at service startup
+        // - added to the internal memory
+        // - handed over to the thread procedure HERE
+        // - deallocated at service shutdown
+        pthread_create(X_WINDOW_SYSTEM_THREAD, NULL_POINTER, (void*) &receive_x_window_system_thread, p0);
+    }
 }
 
 /* LINUX_OPERATING_SYSTEM */

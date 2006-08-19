@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2006-06-11 21:47:09 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2006-08-19 02:04:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -34,6 +34,7 @@
 #include "../../globals/constants/integer_constants.c"
 #include "../../globals/constants/log_constants.c"
 #include "../../globals/constants/structure_constants.c"
+#include "../../globals/constants/system_constants.c"
 #include "../../globals/logger/logger.c"
 
 /**
@@ -43,10 +44,10 @@ void interrupt_unix_socket() {
 
     log_message_debug("Interrupt unix socket service.");
 
-    // Set thread interrupt flag.
-    *UNIX_SOCKET_THREAD_INTERRUPT = *NUMBER_1_INTEGER;
+    if (*UNIX_SOCKET_THREAD != *INVALID_VALUE) {
 
-    if (*UNIX_SOCKET_THREAD != -1) {
+        // Set thread interrupt flag for signal handler.
+        *UNIX_SOCKET_THREAD_INTERRUPT = *NUMBER_1_INTEGER;
 
         // Send signal to thread.
         // CAUTION! Sending a SIGKILL signal to a thread using pthread_kill()
@@ -63,15 +64,15 @@ void interrupt_unix_socket() {
         pthread_join(*UNIX_SOCKET_THREAD, NULL_POINTER);
 
         // Reset thread.
-        *UNIX_SOCKET_THREAD = -1;
+        *UNIX_SOCKET_THREAD = *INVALID_VALUE;
+
+        // Reset thread interrupt flag for signal handler.
+        *UNIX_SOCKET_THREAD_INTERRUPT = *NUMBER_0_INTEGER;
 
     } else {
 
         log_message_debug("Warning: Could not interrupt unix socket. The unix socket thread is invalid.");
     }
-
-    // Reset thread interrupt flag.
-    *UNIX_SOCKET_THREAD_INTERRUPT = *NUMBER_0_INTEGER;
 }
 
 /* LINUX_OPERATING_SYSTEM */

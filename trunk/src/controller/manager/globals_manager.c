@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.12 $ $Date: 2006-06-18 14:57:34 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2006-08-19 02:04:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -33,6 +33,7 @@
 #include <unistd.h>
 #include "../../globals/constants/integer_constants.c"
 #include "../../globals/constants/log_constants.c"
+#include "../../globals/constants/system_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../globals/variables/variables.c"
 
@@ -104,16 +105,16 @@ void startup_globals() {
 
     // Allocate and initialise linux console thread.
     LINUX_CONSOLE_THREAD = (pthread_t*) malloc(sizeof(pthread_t));
-    *LINUX_CONSOLE_THREAD = -1;
+    *LINUX_CONSOLE_THREAD = *INVALID_VALUE;
     // Allocate unix socket thread.
     UNIX_SOCKET_THREAD = (pthread_t*) malloc(sizeof(pthread_t));
-    *UNIX_SOCKET_THREAD = -1;
+    *UNIX_SOCKET_THREAD = *INVALID_VALUE;
     // Allocate tcp socket thread.
     TCP_SOCKET_THREAD = (pthread_t*) malloc(sizeof(pthread_t));
-    *TCP_SOCKET_THREAD = -1;
+    *TCP_SOCKET_THREAD = *INVALID_VALUE;
     // Allocate x window system thread.
     X_WINDOW_SYSTEM_THREAD = (pthread_t*) malloc(sizeof(pthread_t));
-    *X_WINDOW_SYSTEM_THREAD = -1;
+    *X_WINDOW_SYSTEM_THREAD = *INVALID_VALUE;
 
     // Allocate and initialise linux console thread interrupt flag.
     LINUX_CONSOLE_THREAD_INTERRUPT = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
@@ -151,10 +152,10 @@ void startup_globals() {
     if (f >= 0) {
 
         // The file owner.
-        int o = -1;
+        int o = *INVALID_VALUE;
 
         // The file group.
-        int g = -1;
+        int g = *INVALID_VALUE;
 
         // Set file owner.
         chown(n, o, g);

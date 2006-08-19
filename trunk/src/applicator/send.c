@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.33 $ $Date: 2006-06-21 23:18:37 $ $Author: christian $
+ * @version $Revision: 1.34 $ $Date: 2006-08-19 02:04:47 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -230,7 +230,7 @@ void send_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
 
         if (r != 0) {
 
-            send_linux_console(p2, *mm, *mmc, *am, *amc, *clm, *clmc, p3, p4);
+            send_linux_console(p2, *ma, *mac, *mm, *mmc, *md, *mdc, *am, *amc, *clm, *clmc, p3, p4);
         }
     }
 

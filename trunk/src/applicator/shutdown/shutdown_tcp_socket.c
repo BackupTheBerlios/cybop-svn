@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.13 $ $Date: 2006-05-14 19:35:56 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2006-08-19 02:04:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -49,6 +49,10 @@ void shutdown_tcp_socket(void* p0, void* p1, void* p2, void* p3) {
 
     log_message_debug("Shutdown tcp socket.");
 
+    // Interrupt tcp socket service thread.
+    interrupt_tcp_socket();
+
+/*??
     // The tcp server socket.
     int** s = (int**) &NULL_POINTER;
     // The tcp client sockets.
@@ -81,7 +85,7 @@ void shutdown_tcp_socket(void* p0, void* p1, void* p2, void* p3) {
 
     if (*s != NULL_POINTER) {
 
-        // Interrupt receive signal thread.
+        // Interrupt tcp socket service thread.
         interrupt_tcp_socket();
 
         // Close tcp server socket.
@@ -106,6 +110,7 @@ void shutdown_tcp_socket(void* p0, void* p1, void* p2, void* p3) {
 
         log_message_debug("WARNING: Could not shutdown tcp socket. There is no tcp socket service running.");
     }
+*/
 }
 
 /* LINUX_OPERATING_SYSTEM */

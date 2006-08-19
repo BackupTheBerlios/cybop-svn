@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.24 $ $Date: 2006-06-20 16:16:29 $ $Author: christian $
+ * @version $Revision: 1.25 $ $Date: 2006-08-19 02:04:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -29,6 +29,8 @@
 
 #include <pthread.h>
 #include "../controller/checker.c"
+#include "../controller/manager/initial_signal_manager.c"
+#include "../controller/manager/internal_memory_manager.c"
 #include "../controller/manager/system_signal_handler_manager.c"
 #include "../globals/constants/abstraction_constants.c"
 #include "../globals/constants/channel_constants.c"
@@ -94,6 +96,8 @@ void manage(void* p0, void* p1) {
 
     // The signal memory mutex.
     pthread_mutex_t* smt = NULL_POINTER;
+    // The linux console mutex.
+    pthread_mutex_t* lmt = NULL_POINTER;
     // The x window system mutex.
     pthread_mutex_t* xmt = NULL_POINTER;
 
@@ -132,6 +136,8 @@ void manage(void* p0, void* p1) {
     allocate((void*) &ss, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
     // Allocate signal memory mutex.
     smt = (pthread_mutex_t*) malloc(sizeof(pthread_mutex_t));
+    // Allocate linux console mutex.
+    lmt = (pthread_mutex_t*) malloc(sizeof(pthread_mutex_t));
     // Allocate x window system mutex.
     xmt = (pthread_mutex_t*) malloc(sizeof(pthread_mutex_t));
     // Allocate signal memory interrupt request flag.
@@ -145,6 +151,8 @@ void manage(void* p0, void* p1) {
     *ss = *NUMBER_0_INTEGER;
     // Initialise signal memory mutex.
     pthread_mutex_init(smt, NULL_POINTER);
+    // Initialise linux console mutex.
+    pthread_mutex_init(lmt, NULL_POINTER);
     // Initialise x window system mutex.
     pthread_mutex_init(xmt, NULL_POINTER);
     // Initialise signal memory interrupt request flag.
@@ -157,29 +165,34 @@ void manage(void* p0, void* p1) {
     // Allocate signal memory.
     allocate((void*) &s, (void*) ss, (void*) SIGNAL_MEMORY_ABSTRACTION, (void*) SIGNAL_MEMORY_ABSTRACTION_COUNT);
 
+    // Start up internal memory.
+    //
+    // CAUTION! The internal memory items have a fixed position,
+    // determined by constants. The items HAVE TO be assigned an
+    // initial value, since all source code relies on them.
+    //
+    // Most values are compared against the NULL_POINTER constant
+    // to find out whether they are set or not. If now initial values
+    // would be arbitrary pointers, the program would follow a wrong path,
+    // because it would guess that an instance was properly allocated,
+    // while in reality the value was just an arbitrary initial one.
+    // Therefore, such values are initialised with the well-defined NULL_POINTER.
+    //
     // CAUTION! ONLY ONE parameter can be handed over to threads!
     // For example, the tcp socket is running in an own thread.
     // Therefore, the knowledge memory and signal memory NEED TO BE ADDED
     // to the internal memory, in order to be forwardable to threads.
-
-    // Set knowledge memory internals.
-    set(i, (void*) KNOWLEDGE_MEMORY_INTERNAL, (void*) &k, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    set(i, (void*) KNOWLEDGE_MEMORY_COUNT_INTERNAL, (void*) &kc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    set(i, (void*) KNOWLEDGE_MEMORY_SIZE_INTERNAL, (void*) &ks, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    // Set signal memory internals.
-    set(i, (void*) SIGNAL_MEMORY_INTERNAL, (void*) &s, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    set(i, (void*) SIGNAL_MEMORY_COUNT_INTERNAL, (void*) &sc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    set(i, (void*) SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &ss, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    // Set signal memory mutex.
-    set(i, (void*) SIGNAL_MEMORY_MUTEX_INTERNAL, (void*) &smt, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    // Set x window system mutex.
-    set(i, (void*) X_WINDOW_SYSTEM_MUTEX_INTERNAL, (void*) &xmt, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    // Set signal memory interrupt request flag.
-    set(i, (void*) INTERRUPT_REQUEST_INTERNAL, (void*) &irq, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-
+    startup_internal_memory(i,
+        (void*) &k, (void*) &kc, (void*) &ks,
+        (void*) &s, (void*) &sc, (void*) &ss,
+        (void*) &smt, (void*) &lmt, (void*) &xmt,
+        (void*) &irq);
     // Start up system signal handler.
     startup_system_signal_handler();
+    // Start up initial signal.
+//??    startup_initial_signal(s, (void*) sc, (void*) ss);
 
+//?? --
     log_message_debug("\n\n");
     log_message_debug("Info: Allocate startup model.");
 
@@ -233,6 +246,7 @@ void manage(void* p0, void* p1) {
 
     // Add startup signal to signal memory.
     set_signal(s, (void*) sc, (void*) ss, ma, (void*) mac, mm, (void*) mmc, md, (void*) mdc, (void*) NORMAL_PRIORITY, (void*) id);
+//?? --
 
     // The system is now started up and complete so that a loop
     // can be entered, checking for signals (events/ interrupts)
@@ -240,8 +254,30 @@ void manage(void* p0, void* p1) {
     // The loop is left as soon as its shutdown flag is set.
     check(i, k, (void*) kc, (void*) ks, s, (void*) sc, (void*) ss, (void*) smt, (void*) irq);
 
+    // The following calls of "shutdown" procedures are just to be sure,
+    // in case a cybol application developer has forgotten to call the
+    // corresponding service shutdown operation in cybol logic templates.
+    // The "interrupt" procedures are called within the "shutdown" procedures.
+
+    // Shutdown linux console.
+    shutdown_linux_console(i, k, (void*) kc, (void*) ks);
+    // Shutdown unix socket.
+    shutdown_unix_socket(i, k, (void*) kc, (void*) ks);
+    // Shutdown tcp socket.
+    shutdown_tcp_socket(i, k, (void*) kc, (void*) ks);
+    // Shutdown x window system.
+    shutdown_x_window_system(i, k, (void*) kc, (void*) ks);
+
+    // CAUTION! Do NOT remove any internal memory internals!
+    // The internals have a fixed position within the internal memory.
+    // Removing them would shift all entries by one position and
+    // thus make all entries invalid, since they could not be found
+    // at their original index anymore.
+
     // Destroy signal memory mutex.
     pthread_mutex_destroy(smt);
+    // Destroy linux console mutex.
+    pthread_mutex_destroy(lmt);
     // Destroy x window system mutex.
     pthread_mutex_destroy(xmt);
 
@@ -249,6 +285,8 @@ void manage(void* p0, void* p1) {
     free((void*) irq);
     // Deallocate signal memory mutex.
     free((void*) smt);
+    // Deallocate linux console mutex.
+    free((void*) lmt);
     // Deallocate x window system mutex.
     free((void*) xmt);
     // Deallocate signal memory.
