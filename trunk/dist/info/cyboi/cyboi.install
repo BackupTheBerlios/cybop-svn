@@ -1,1 +1,9 @@
+admin/cybop_16x16.xpm usr/share/pixmaps
+admin/cybop_24x24.xpm usr/share/pixmaps
+admin/cybop_32x32.xpm usr/share/pixmaps
+admin/cybop_48x48.xpm usr/share/pixmaps
+admin/cybop_64x64.xpm usr/share/pixmaps
+#admin/cybop.ai usr/share/pixmaps
+#admin/cybop.eps usr/share/pixmaps
+#admin/cybop.svg usr/share/pixmaps
 bin/cyboi usr/bin
