@@ -1,1 +1,9 @@
-doc/cybol/cybol.dtd /usr/share/xml/cybol/schema/dtd/cybol.dtd
+#
+# To understand how "dh_installxmlcatalogs" function, and to install a CYBOL DTD in Debian, read:
+# http://debian-xml-sgml.alioth.debian.org/xml-policy/index.html (besonders Chapter 3)
+#
+# Proposed CYBOL DTD header:
+# <?xml version="1.0"?>
+# <!DOCTYPE book PUBLIC "-//CYBOP//DTD CYBOL XML V1.0//EN" "http://www.cybop.net/cybol.dtd">
+#
+doc/cybol/cybol.dtd usr/share/xml/cybol/schema/dtd

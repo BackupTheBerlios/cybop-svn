@@ -1,3 +1,11 @@
+cybol (1.1.0-1) unstable; urgency=low
+
+  * Add EBNF and XSD schema files
+  * Add new CYBOL example applications
+
+ -- Christian Heller <christian.heller@tuxtax.de>  Sat, 09 Sep 2006 18:00:00 +0200
+
+
 cybol (1.0.0-1) unstable; urgency=low
 
   * Change package structure to better comply with debian maintainer guidelines

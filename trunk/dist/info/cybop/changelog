@@ -1,3 +1,13 @@
+cybop (1.1.0-1) unstable; urgency=low
+
+  * Add "Linux World" 2005 poster
+    Authors: Christian Heller <christian.heller@tuxtax.de>
+  * Add "Reflexions on Knowledge Modelling" 2006 paper
+    Authors: Christian Heller <christian.heller@tuxtax.de>
+
+ -- Christian Heller <christian.heller@tuxtax.de>  Sat, 09 Sep 2006 18:00:00 +0200
+
+
 cybop (1.0.0-1) unstable; urgency=low
 
   * Add "Untersuchung der Realisierungsmoeglichkeiten von CYBOL-Webfrontends,
@@ -15,7 +25,7 @@ cybop (0.1.0.0) unstable; urgency=low
     Authors: Christian Heller <christian.heller@tuxtax.de>
   * Add "Cybernetics Oriented Programming (CYBOP) in Res Medicinae" presentation
     Authors: Christian Heller <christian.heller@tuxtax.de>
-  * Add "Medizinische Informatik: Open Source erreicht die Medizin" paper;
+  * Add "Medizinische Informatik: Open Source erreicht die Medizin" paper
     Authors: Christian Heller <christian.heller@tuxtax.de>
   * Add "Res Medicinae Design Paper (Outdated!!)" paper
     Authors: Christian Heller <christian.heller@tuxtax.de>

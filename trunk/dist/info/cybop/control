@@ -2,14 +2,14 @@ Source: cybop
 Section: doc
 Priority: optional
 Maintainer: Christian Heller <christian.heller@tuxtax.de>
-Standards-Version: 3.6.1
-Build-Depends: debhelper (>= 4.0.0)
+Build-Depends: debhelper (>= 5)
+Standards-Version: 3.7.2
 
 Package: cybop
 Architecture: all
 Section: doc
-Depends: cybop-papers, cybop-presentations
-Description: Cybernetics Oriented Programming (CYBOP) documentation meta package
+Depends: cybop-books, cybop-papers, cybop-presentations
+Description: Cybernetics Oriented Programming (CYBOP) Meta Package
  The Cybernetics Oriented Programming (CYBOP) theory is a collection of new
  concepts for software design, which are taken from sciences like philosophy,
  psychology, physics or biology, and nature directly.
@@ -56,7 +56,7 @@ Architecture: all
 Section: doc
 Recommends: cybop-papers, cybop-presentations
 Suggests: cyboi, cybol-examples
-Description: Cybernetics Oriented Programming (CYBOP) books
+Description: Cybernetics Oriented Programming (CYBOP) Books
  The Cybernetics Oriented Programming (CYBOP) theory is a collection of new
  concepts for software design, which are taken from sciences like philosophy,
  psychology, physics or biology, and nature directly.
@@ -101,9 +101,9 @@ Description: Cybernetics Oriented Programming (CYBOP) books
 Package: cybop-papers
 Architecture: all
 Section: doc
-Recommends: cybop-presentations
+Recommends: cybop-books, cybop-presentations
 Suggests: cyboi, cybol-examples
-Description: Cybernetics Oriented Programming (CYBOP) papers
+Description: Cybernetics Oriented Programming (CYBOP) Papers
  The Cybernetics Oriented Programming (CYBOP) theory is a collection of new
  concepts for software design, which are taken from sciences like philosophy,
  psychology, physics or biology, and nature directly.
@@ -148,9 +148,9 @@ Description: Cybernetics Oriented Programming (CYBOP) papers
 Package: cybop-presentations
 Architecture: all
 Section: doc
-Recommends: cybop-papers
+Recommends: cybop-books, cybop-papers
 Suggests: cyboi, cybol-examples
-Description: Cybernetics Oriented Programming (CYBOP) presentations
+Description: Cybernetics Oriented Programming (CYBOP) Presentations
  The Cybernetics Oriented Programming (CYBOP) theory is a collection of new
  concepts for software design, which are taken from sciences like philosophy,
  psychology, physics or biology, and nature directly.

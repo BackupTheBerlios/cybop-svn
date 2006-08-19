@@ -1,22 +1,25 @@
 This package was debianized by Christian Heller <christian.heller@tuxtax.de> on
-Tue, 30 Aug 2005 18:32:17 +0200.
+Sat, 09 Sep 2006 18:00:00 +0200.
 
 Original source can be found at:
 Website: http://www.cybop.net or http://developer.berlios.de/projects/cybop/
 Download: http://developer.berlios.de/project/showfiles.php?group_id=669
 
-Copyrighted by various authors:
-        Authors (in alphabetical order, using first name):
+Upstream Authors:
         Christian Heller <christian.heller@tuxtax.de>
-        Detlef Streitferdt <detlef.streitferdt@tu-ilmenau.de>
-        Dirk Behrendt <behrendt.dirk@web.de>
-        Ilka Philippow <ilka.philippow@tu-ilmenau.de>
-        Jens Bohl <info@jens-bohl.de>
-        Jens Kleinschmidt <jens.kleinschmidt@gmx.de>
-        Kumanan Kanagasabapathy <kumanan@uni.de>
-        Rolf Holzmueller <rolf.holzmueller@gmx.de>
         Torsten Kunze <info@torstenkunze.de>
+        Jens Bohl <info@jens-bohl.de>
+        Rolf Holzmueller <rolf.holzmueller@gmx.de>
+        Dirk Behrendt <behrendt.dirk@web.de>
+        Kumanan Kanagasabapathy <kumanan@uni.de>
+        Jens Kleinschmidt <jens.kleinschmidt@gmx.de>
 
-License: Licensed under the terms of GNU GPL.
+Thanks to:
+        Detlef Streitferdt <detlef.streitferdt@tu-ilmenau.de>
+        Ilka Philippow <ilka.philippow@tu-ilmenau.de>
+
+Copyright: 2002-2006. Christian Heller and the CYBOP developers.
+
+License: The Debian packaging is licensed under the terms of GNU GPL.
 See /usr/share/common-licenses/GPL for details.
 Documentation stands under the License of GNU FDL.

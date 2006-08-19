@@ -2,13 +2,14 @@ Source: cybol
 Section: misc
 Priority: optional
 Maintainer: Christian Heller <christian.heller@tuxtax.de>
-Standards-Version: 3.6.1
-Build-Depends: debhelper (>= 4.0.0)
+Build-Depends: debhelper (>= 5)
+Standards-Version: 3.7.2
 
 Package: cybol
 Architecture: all
 Section: misc
 Recommends: cybol-examples
+Suggests: cybol-core, cybol-healthcare
 Description: Cybernetics Oriented Language (CYBOL) DTD and XSD
  The Cybernetics Oriented Programming (CYBOP) theory is a collection of new
  concepts for software design, which are taken from sciences like philosophy,

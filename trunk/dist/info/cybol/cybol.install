@@ -1,1 +1,4 @@
 doc/cybol/cybol.dtd usr/share/xml/cybol/schema/dtd
+doc/cybol/cybol.ebnf usr/share/xml/cybol/schema/ebnf
+doc/cybol/cybol.xsd usr/share/xml/cybol/schema/xsd
+doc/cybol/cybol_with_types.xsd usr/share/xml/cybol/schema/xsd

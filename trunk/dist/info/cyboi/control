@@ -2,8 +2,8 @@ Source: cyboi
 Section: interpreters
 Priority: optional
 Maintainer: Christian Heller <christian.heller@tuxtax.de>
-Standards-Version: 3.6.1
-Build-Depends: debhelper (>= 4.0.0)
+Build-Depends: debhelper (>= 5)
+Standards-Version: 3.7.2
 
 Package: cyboi
 Architecture: any
@@ -55,8 +55,7 @@ Description: Cybernetics Oriented Interpreter (CYBOI)
 Package: cyboi-doc
 Architecture: all
 Section: doc
-Recommends: cybop-papers, cybop-presentations
-Suggests: cyboi
+Recommends: cyboi, cybop
 Description: Cybernetics Oriented Interpreter (CYBOI) documentation
  The Cybernetics Oriented Programming (CYBOP) theory is a collection of new
  concepts for software design, which are taken from sciences like philosophy,
@@ -102,8 +101,7 @@ Description: Cybernetics Oriented Interpreter (CYBOI) documentation
 Package: cyboi-dev
 Architecture: any
 Section: devel
-Depends: libc6, xlibs, libxml2, libxml2-dev
-Suggests: cyboi
+Depends: cyboi, libc6, xlibs, libxml2, libxml2-dev
 Description: Cybernetics Oriented Interpreter (CYBOI) development files
  The Cybernetics Oriented Programming (CYBOP) theory is a collection of new
  concepts for software design, which are taken from sciences like philosophy,
