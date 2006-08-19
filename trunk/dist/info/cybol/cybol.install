@@ -1,3 +1,4 @@
+doc/books/cybol/cybol.pdf usr/share/doc/cybol
 doc/cybol/cybol.dtd usr/share/xml/cybol/schema/dtd
 doc/cybol/cybol.ebnf usr/share/xml/cybol/schema/ebnf
 doc/cybol/cybol.xsd usr/share/xml/cybol/schema/xsd
