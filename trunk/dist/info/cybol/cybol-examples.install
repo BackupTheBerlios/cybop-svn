@@ -1,7 +1,5 @@
 examples/exit usr/share/doc/cybol/examples
-examples/exit_text_file usr/share/doc/cybol/examples
 examples/exit_cybol_file usr/share/doc/cybol/examples
-examples/shell_command_execution usr/share/doc/cybol/examples
+examples/exit_text_file usr/share/doc/cybol/examples
 examples/helloworld usr/share/doc/cybol/examples
-examples/helloworld_dynamic_logic usr/share/doc/cybol/examples
-examples/helloworld_tui usr/share/doc/cybol/examples
+examples/shell_command_execution usr/share/doc/cybol/examples
