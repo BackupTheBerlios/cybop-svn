@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 
 <model>
-    <part name="a" channel="inline" abstraction="knowledge" model=".change"/>
+    <part name="string" channel="inline" abstraction="character" model="Hello, World!">
+        <property name="position" channel="inline" abstraction="integer" model="0,0,0"/>
+        <property name="size" channel="inline" abstraction="integer" model="80,3,1"/>
+        <property name="shape" channel="inline" abstraction="character" model="rectangle"/>
+        <property name="layout" channel="inline" abstraction="character" model="coordinates"/>
+    </part>
 </model>
 
 <!--
-    $RCSfile: commands.cybol,v $
+    $RCSfile: greeting.cybol,v $
 
     Copyright (c) 1999-2006. Christian Heller and the Res Medicinae developers.
 
@@ -26,6 +31,6 @@
     http://www.resmedicinae.org
     - Information in Medicine -
 
-    @version $Revision: 1.1 $ $Date: 2006-06-04 00:59:13 $ $Author: christian $
+    @version $Revision: 1.1 $ $Date: 2006-08-20 21:25:47 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->
