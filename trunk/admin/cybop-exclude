@@ -1,5 +1,11 @@
 CVS
 CVSROOT
+backup
+dist
+download
+mailinglists
+obj
+tmp
 *.aux
 *.bbl
 *.blg
@@ -14,6 +20,6 @@ CVSROOT
 *.log
 *.lot
 *.toc
-doc/papers/2006_reflections_on_knowledge_modelling
+doc/papers/2007_an_investigation
 doc/presentations/cybop
 doc/presentations/photos

@@ -1,2 +1,10 @@
-doc/cybol
-examples
+admin/cybol.5.gz
+doc/cybol/cybol.dtd
+doc/cybol/cybol.ebnf
+doc/cybol/cybol_with_types.xsd
+doc/cybol/cybol.xsd
+examples/exit
+examples/exit_cybol_file
+examples/exit_text_file
+examples/helloworld
+examples/shell_command_execution

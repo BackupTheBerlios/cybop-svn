@@ -1,6 +1,9 @@
 CVS
 CVSROOT
+backup
+dist
+download
+mailinglists
+obj
+tmp
 *.log
-examples/cybol
-examples/cybos
-examples/directories.txt
