@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.14 $ $Date: 2006-08-23 05:57:10 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2006-09-16 13:39:34 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -139,8 +139,8 @@ void startup_globals() {
 
     // Allocate log level.
     LOG_LEVEL = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
-//??    *LOG_LEVEL = *DEBUG_LOG_LEVEL;
-    *LOG_LEVEL = *OFF_LOG_LEVEL;
+    *LOG_LEVEL = *DEBUG_LOG_LEVEL;
+//??    *LOG_LEVEL = *OFF_LOG_LEVEL;
 
     // The log file name.
     char* n = "cyboi.log";
