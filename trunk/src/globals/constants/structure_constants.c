@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.25 $ $Date: 2006-08-19 02:04:48 $ $Author: christian $
+ * @version $Revision: 1.26 $ $Date: 2006-12-21 22:13:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -267,6 +267,9 @@ static int* UNIX_SOCKET_MUTEX_INTERNAL = NUMBER_202_INTEGER_ARRAY;
 static int* TCP_SOCKET_INTERNAL = NUMBER_210_INTEGER_ARRAY;
 static int* TCP_SOCKET_BLOCKING_INTERNAL = NUMBER_211_INTEGER_ARRAY;
 static int* TCP_SOCKET_MUTEX_INTERNAL = NUMBER_212_INTEGER_ARRAY;
+static int* TCP_SOCKET_THREAD_CHARACTER_BUFFER_INTERNAL = NUMBER_213_INTEGER_ARRAY;
+static int* TCP_SOCKET_THREAD_CHARACTER_BUFFER_COUNT_INTERNAL = NUMBER_214_INTEGER_ARRAY;
+static int* TCP_SOCKET_THREAD_CHARACTER_BUFFER_SIZE_INTERNAL = NUMBER_215_INTEGER_ARRAY;
 
 /** The tcp client sockets. */
 static int* TCP_CLIENT_SOCKETS_INTERNAL = NUMBER_220_INTEGER_ARRAY;

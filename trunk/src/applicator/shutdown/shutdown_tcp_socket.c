@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.14 $ $Date: 2006-08-19 02:04:48 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2006-12-21 22:13:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -49,44 +49,46 @@ void shutdown_tcp_socket(void* p0, void* p1, void* p2, void* p3) {
 
     log_message_debug("Shutdown tcp socket.");
 
-    // Interrupt tcp socket service thread.
-    interrupt_tcp_socket();
+    // The tcp server socket internal.
+    int** si = (int**) &NULL_POINTER;
 
-/*??
-    // The tcp server socket.
-    int** s = (int**) &NULL_POINTER;
-    // The tcp client sockets.
-    void* cs = NULL_POINTER;
-    void* csc = NULL_POINTER;
-    void* css = NULL_POINTER;
-    // The activation flag.
-    void* af = NULL_POINTER;
-    // The blocking flag.
-    void* bf = NULL_POINTER;
-    // The tcp signal ids.
-    void* id = NULL_POINTER;
-    void* idc = NULL_POINTER;
-    void* ids = NULL_POINTER;
+    // Get tcp server socket internal.
+    get(p0, (void*) TCP_SOCKET_INTERNAL, (void*) &si, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-    // Get server socket.
-    get(p0, (void*) TCP_SOCKET_INTERNAL, (void*) &s, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    // Get client sockets.
-    get(p0, (void*) TCP_CLIENT_SOCKETS_INTERNAL, (void*) &cs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    get(p0, (void*) TCP_CLIENT_SOCKETS_COUNT_INTERNAL, (void*) &csc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    get(p0, (void*) TCP_CLIENT_SOCKETS_SIZE_INTERNAL, (void*) &css, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    // Get interrupt flag.
-//??    get(p0, (void*) TCP_SOCKET_INTERRUPT_INTERNAL, (void*) &af, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    // Get blocking flag.
-    get(p0, (void*) TCP_SOCKET_BLOCKING_INTERNAL, (void*) &bf, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    // Get signal ids.
-    get(p0, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_INTERNAL, (void*) &id, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    get(p0, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_COUNT_INTERNAL, (void*) &idc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    get(p0, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_SIZE_INTERNAL, (void*) &ids, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-
-    if (*s != NULL_POINTER) {
+    if (*si != NULL_POINTER) {
 
         // Interrupt tcp socket service thread.
         interrupt_tcp_socket();
+
+        // The tcp server socket.
+        int** s = (int**) &NULL_POINTER;
+        // The tcp client sockets.
+        void** cs = NULL_POINTER;
+        void** csc = NULL_POINTER;
+        void** css = NULL_POINTER;
+        // The activation flag.
+        void** af = NULL_POINTER;
+        // The blocking flag.
+        void** bf = NULL_POINTER;
+        // The tcp signal ids.
+        void** id = NULL_POINTER;
+        void** idc = NULL_POINTER;
+        void** ids = NULL_POINTER;
+
+        // Get server socket.
+        get(p0, (void*) TCP_SOCKET_INTERNAL, (void*) &s, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        // Get client sockets.
+        get(p0, (void*) TCP_CLIENT_SOCKETS_INTERNAL, (void*) &cs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        get(p0, (void*) TCP_CLIENT_SOCKETS_COUNT_INTERNAL, (void*) &csc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        get(p0, (void*) TCP_CLIENT_SOCKETS_SIZE_INTERNAL, (void*) &css, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        // Get interrupt flag.
+    //??    get(p0, (void*) TCP_SOCKET_INTERRUPT_INTERNAL, (void*) &af, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        // Get blocking flag.
+        get(p0, (void*) TCP_SOCKET_BLOCKING_INTERNAL, (void*) &bf, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        // Get signal ids.
+        get(p0, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_INTERNAL, (void*) &id, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        get(p0, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_COUNT_INTERNAL, (void*) &idc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        get(p0, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_SIZE_INTERNAL, (void*) &ids, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
         // Close tcp server socket.
         close(**s);
@@ -110,7 +112,6 @@ void shutdown_tcp_socket(void* p0, void* p1, void* p2, void* p3) {
 
         log_message_debug("WARNING: Could not shutdown tcp socket. There is no tcp socket service running.");
     }
-*/
 }
 
 /* LINUX_OPERATING_SYSTEM */

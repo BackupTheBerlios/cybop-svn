@@ -20,9 +20,8 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.16 $ $Date: 2006-04-20 22:36:09 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2006-12-21 22:13:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
- * @description
  */
 
 #ifndef STARTUP_TCP_SOCKET_SOURCE
@@ -47,134 +46,141 @@
 /**
  * Starts up the tcp socket.
  *
- * @param internals the internal memory
- * @param know the knowledge memory
- * @param know_count the knowledge memory count
- * @param know_size the knowledge memory size
- * @param socket_port_abstr the socket port abstraction
- * @param socket_port_abstr_count the socket port abstraction count
- * @param socket_port_model the socket port model
- * @param socket_port_model_count the socket port model count
+ * @param p0 the internals memory
+ * @param p1 the knowledge memory
+ * @param p2 the knowledge memory count
+ * @param p3 the knowledge memory size
+ * @param p4 the socket port abstraction
+ * @param p5 the socket port abstraction count
+ * @param p6 the socket port model
+ * @param p7 the socket port model count
  */
-void startup_tcp_socket(void* internals, void* know, void* know_count, void* know_size,
-    void* socket_port_abstr, void* socket_port_abstr_count, void* socket_port_model, void* socket_port_model_count) {
+void startup_tcp_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
 
     log_message_debug("Startup tcp socket.");
 
-    //check of null pointer
-    if ((internals != NULL_POINTER)
-         && (know != NULL_POINTER)
-         && (know_count != NULL_POINTER)
-         && (know_size != NULL_POINTER)
-         && (socket_port_abstr != NULL_POINTER)
-         && (socket_port_abstr_count != NULL_POINTER)
-         && (socket_port_model != NULL_POINTER)
-         && (socket_port_model_count != NULL_POINTER)) {
+    // The tcp server socket internal.
+    int** si = (int**) &NULL_POINTER;
 
-        int res = 0;
+    // Get tcp server socket internal.
+    get(p0, (void*) TCP_SOCKET_INTERNAL, (void*) &si, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-        //check the socket port of integer
-        compare_arrays( (void*) socket_port_abstr,
-                        (void*) socket_port_abstr_count,
-                        (void*) INTEGER_VECTOR_ABSTRACTION,
-                        (void*) INTEGER_VECTOR_ABSTRACTION_COUNT,
-                        (void*) &res, (void*) CHARACTER_ARRAY);
+    if (*si == NULL_POINTER) {
 
-        if ( res == 1 ) {
+    fprintf(stderr, "TEST: The tcp socket port is: %i \n", *(int*) p6);
 
-            log_message_debug("Allocate tcp server socket.");
+        // The tcp server socket.
+        int* s = NULL_POINTER;
+        // The tcp client sockets.
+        void* cs = NULL_POINTER;
+        int* csc = NULL_POINTER;
+        int* css = NULL_POINTER;
+        // The character buffer that will be used in the thread procedure.
+        void* b = NULL_POINTER;
+        int* bc = NULL_POINTER;
+        int* bs = NULL_POINTER;
+        // The blocking flag.
+        int* bf = NULL_POINTER;
+        // The tcp signal ids.
+        void* id = NULL_POINTER;
+        int* idc = NULL_POINTER;
+        int* ids = NULL_POINTER;
+        // The error code.
+        int e = *NUMBER_0_INTEGER;
 
-            fprintf(stderr, "DEBUG: The port is: %d \n", *(int*) socket_port_model);
+        //?? TODO: TCP interrupt flag.
 
-            // The tcp server socket.
-            int* s = NULL_POINTER;
-            // The tcp client sockets.
-            void* cs = NULL_POINTER;
-            int* csc = NULL_POINTER;
-            int* css = NULL_POINTER;
-            // The activation flag.
-            int* af = NULL_POINTER;
-            // The blocking flag.
-            int* bf = NULL_POINTER;
-            // The tcp signal ids.
-            void* id = NULL_POINTER;
-            int* idc = NULL_POINTER;
-            int* ids = NULL_POINTER;
+        // Allocate tcp server socket.
+        allocate((void*) &s, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        // Allocate tcp client sockets.
+        allocate((void*) &csc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        allocate((void*) &css, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        allocate_array((void*) &cs, (void*) css, (void*) INTEGER_ARRAY);
+        // Allocate character buffer count, size.
+        allocate((void*) &bc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        allocate((void*) &bs, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        // Allocate blocking flag.
+        allocate((void*) &bf, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        // Allocate tcp signal ids.
+        allocate((void*) &idc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        allocate((void*) &ids, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        allocate_array((void*) &id, (void*) ids, (void*) INTEGER_ARRAY);
 
-            //?? TODO: TCP interrupt flag.
+        // Initialise tcp server socket.
+        // param 0: namespace
+        // param 1: style
+        // param 2: protocol
+        *s = socket(PF_INET, SOCK_STREAM, *NUMBER_0_INTEGER);
+        // Initialise tcp client sockets.
+        *csc = *NUMBER_0_INTEGER;
+        *css = *NUMBER_0_INTEGER;
+        // Initialise character buffer count, size.
+        // Its size is initialised with 2048,
+        // which should suffice for transferring standard data over tcp/ip.
+        *bc = *NUMBER_0_INTEGER;
+        *bs = 2048;
+        // Initialise blocking flag.
+        *bf = *NUMBER_0_INTEGER;
+        // Initialise tcp signal ids.
+        *idc = *NUMBER_0_INTEGER;
+        *ids = *NUMBER_0_INTEGER;
 
-            // Create tcp server socket.
-            allocate((void*) &s, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-            *s = socket(PF_INET, SOCK_STREAM, 0);
-            // Create tcp client sockets.
-            allocate((void*) &csc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-            *csc = 0;
-            allocate((void*) &css, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-            *css = 0;
-            allocate_array((void*) &cs, (void*) css, (void*) INTEGER_ARRAY);
-            // Create activation flag.
-            allocate(&af, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-            *af = 0;
-            // Create blocking flag.
-            allocate(&bf, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-            *bf = 0;
-            // Create tcp signal ids.
-            allocate((void*) &idc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-            *idc = 0;
-            allocate((void*) &ids, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-            *ids = 0;
-            allocate_array((void*) &id, (void*) ids, (void*) INTEGER_ARRAY);
+        // Allocate character buffer.
+        allocate((void*) &b, (void*) bs, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
-            // Set server socket.
-            set(internals, (void*) TCP_SOCKET_INTERNAL, (void*) &s, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-            // Set client sockets.
-            set(internals, (void*) TCP_CLIENT_SOCKETS_INTERNAL, (void*) &cs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-            set(internals, (void*) TCP_CLIENT_SOCKETS_COUNT_INTERNAL, (void*) &csc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-            set(internals, (void*) TCP_CLIENT_SOCKETS_SIZE_INTERNAL, (void*) &css, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-            // Set interrupt flag.
-//??            set(internals, (void*) TCP_SOCKET_INTERRUPT_INTERNAL, (void*) &af, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-            // Set blocking flag.
-            set(internals, (void*) TCP_SOCKET_BLOCKING_INTERNAL, (void*) &bf, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-            // Set tcp signal ids.
-            set(internals, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_INTERNAL, (void*) &id, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-            set(internals, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_COUNT_INTERNAL, (void*) &idc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-            set(internals, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_SIZE_INTERNAL, (void*) &ids, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        // Set tcp server socket.
+        set(p0, (void*) TCP_SOCKET_INTERNAL, (void*) &s, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        // Set tcp client sockets.
+        set(p0, (void*) TCP_CLIENT_SOCKETS_INTERNAL, (void*) &cs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        set(p0, (void*) TCP_CLIENT_SOCKETS_COUNT_INTERNAL, (void*) &csc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        set(p0, (void*) TCP_CLIENT_SOCKETS_SIZE_INTERNAL, (void*) &css, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        set(p0, (void*) TCP_SOCKET_THREAD_CHARACTER_BUFFER_INTERNAL, (void*) &b, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        set(p0, (void*) TCP_SOCKET_THREAD_CHARACTER_BUFFER_COUNT_INTERNAL, (void*) &bc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        set(p0, (void*) TCP_SOCKET_THREAD_CHARACTER_BUFFER_SIZE_INTERNAL, (void*) &bs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        // Set tcp blocking flag.
+        set(p0, (void*) TCP_SOCKET_BLOCKING_INTERNAL, (void*) &bf, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        // Set tcp signal ids.
+        set(p0, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_INTERNAL, (void*) &id, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        set(p0, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_COUNT_INTERNAL, (void*) &idc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        set(p0, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_SIZE_INTERNAL, (void*) &ids, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-            if (*s >= 0) {
+        if (*s >= *NUMBER_0_INTEGER) {
 
-                fprintf(stderr, "DEBUG: The tcp server socket is: %d \n", *s);
+            fprintf(stderr, "DEBUG: The tcp server socket is: %d \n", *s);
 
-                // The socket address.
-                struct sockaddr_in a;
+            // The socket address.
+            struct sockaddr_in a;
 
-                // Set address format.
-                a.sin_family = AF_INET;
-                a.sin_addr.s_addr = INADDR_ANY;
-                a.sin_port = htons(*((int*)socket_port_model) );
+            // Set address format.
+            a.sin_family = AF_INET;
+            a.sin_addr.s_addr = INADDR_ANY;
+            a.sin_port = htons(*((int*) p6));
 
-                // Determine socket address size.
-                int as = sizeof(struct sockaddr_in);
+            // Determine socket address size.
+            int as = sizeof(struct sockaddr_in);
 
-                // Bind number to address.
-                if (bind(*s, (struct sockaddr*) &a, as) >= 0) {
+            // Bind socket number to socket address.
+            e = bind(*s, (struct sockaddr*) &a, as);
 
-                    // Set the number of possible pending client connection requests.
-                    listen(*s, 1);
+            if (e >= *NUMBER_0_INTEGER) {
 
-                } else {
-
-                    log_message_debug("ERROR: Could not start up tcp socket. The socket could not be bound to the address.");
-                }
+                // Enable socket to accept connections, thus making it a server socket.
+                // Set the number of possible pending client connection requests.
+                listen(*s, *NUMBER_1_INTEGER);
 
             } else {
 
-                log_message_debug("ERROR: Could not start up tcp socket. The socket is smaller than zero.");
+                log_message_debug("ERROR: Could not start up tcp socket. The tcp socket could not be bound to the address.");
             }
+
+        } else {
+
+            log_message_debug("ERROR: Could not start up tcp socket. The tcp socket could not be created.");
         }
 
     } else {
 
-        log_message_debug("ERROR: Could not start up tcp socket. The socket port is null.");
+        log_message_debug("WARNING: Could not start up tcp socket. The tcp socket is already running.");
     }
 }
 

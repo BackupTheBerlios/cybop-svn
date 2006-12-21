@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.30 $ $Date: 2006-06-20 16:16:29 $ $Author: christian $
+ * @version $Revision: 1.31 $ $Date: 2006-12-21 22:13:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -31,11 +31,12 @@
 #ifdef LINUX_OPERATING_SYSTEM
 
 #include <arpa/inet.h>
-#include <sys/types.h>
-#include <sys/socket.h>
 #include <netinet/in.h>
-#include <stdio.h>
+#include <sys/socket.h>
+#include <sys/types.h>
 #include <pthread.h>
+#include <signal.h>
+#include <stdio.h>
 #include <unistd.h>
 #include "../../applicator/receive/receive_file_system.c"
 #include "../../globals/constants/abstraction_constants.c"
@@ -47,6 +48,7 @@
 #include "../../globals/constants/model_constants.c"
 #include "../../globals/constants/name_constants.c"
 #include "../../globals/constants/structure_constants.c"
+#include "../../globals/constants/system_constants.c"
 #include "../../globals/constants/tcp_socket_constants.c"
 #include "../../globals/variables/variables.c"
 #include "../../memoriser/accessor/compound_accessor.c"
@@ -72,6 +74,7 @@
  * @param p7 the source channel
  * @param p8 the source channel count
  */
+/*??
 void receive_file_system_model(void* p0, void* p1, void* p2, void* p3, void* p4,
     void* p5, void* p6, void* p7, void* p8);
 
@@ -86,6 +89,7 @@ void receive_file_system_model(void* p0, void* p1, void* p2, void* p3, void* p4,
  * @param req_row return the request row
  * @param reg_row_count return the count of the request row
  */
+/*??
 void get_request_method(char* req, int* req_count, char** req_method, int* req_method_count) {
 
     *req_method_count = 0;
@@ -131,7 +135,8 @@ void get_request_method(char* req, int* req_count, char** req_method, int* req_m
  * @param param the parameter from the request
  * @param param_count the count from the parameter
  */
-void get_url_basename_from_request(char* req, int* req_count, char** urlbase, int* urlbase_count) {
+/*??
+void receive_tcp_socket_url(char* req, int* req_count, char** urlbase, int* urlbase_count) {
 
     *urlbase_count = 0;
     int req_index = 0;
@@ -189,6 +194,7 @@ void get_url_basename_from_request(char* req, int* req_count, char** urlbase, in
  * @param source_count the count of the request row
  * @param dest param the parameter from the request
  */
+/*??
 void* get_character_from_escape_code(void* source, int* source_count, char** dest) {
 
     if ((source != NULL_POINTER) && (source_count != NULL_POINTER) && (dest != NULL_POINTER)) {
@@ -458,7 +464,8 @@ void* get_character_from_escape_code(void* source, int* source_count, char** des
  * @param param the parameter
  * @param param_count the paramater count
  */
-void get_parameter_from_request_for_post(char* req, int* req_count, char** param, int* param_count) {
+/*??
+void receive_tcp_socket_parameter_for_post(char* req, int* req_count, char** param, int* param_count) {
 
     *param_count = 0;
     int req_index = *req_count-1;
@@ -526,7 +533,8 @@ void get_parameter_from_request_for_post(char* req, int* req_count, char** param
  * @param param the parameter
  * @param param_count the paramater count
  */
-void get_parameter_from_request_for_get(char* req, int* req_count, char** param, int* param_count) {
+/*??
+void receive_tcp_socket_parameter_for_get(char* req, int* req_count, char** param, int* param_count) {
 
     *param_count = 0;
     int req_index = 0;
@@ -580,7 +588,8 @@ void get_parameter_from_request_for_get(char* req, int* req_count, char** param,
  * @param param the parameter
  * @param param_count the paramater count
  */
-void get_parameter_from_request(char* req, int* req_count, char** param, int* param_count) {
+/*??
+void receive_tcp_socket_parameter(char* req, int* req_count, char** param, int* param_count) {
 
     // Check the request method ( post or get );
     int req_meth_post_res = 0;
@@ -589,11 +598,11 @@ void get_parameter_from_request(char* req, int* req_count, char** param, int* pa
 
     if (req_meth_post_res == 0) {
 
-        get_parameter_from_request_for_get(req, req_count, param, param_count);
+        receive_tcp_socket_parameter_for_get(req, req_count, param, param_count);
 
     } else {
 
-        get_parameter_from_request_for_post(req, req_count, param, param_count);
+        receive_tcp_socket_parameter_for_post(req, req_count, param, param_count);
     }
 }
 
@@ -609,6 +618,7 @@ void get_parameter_from_request(char* req, int* req_count, char** param, int* pa
  * @param dest_count the detsination count
  * @param p4 the internal memory
  */
+/*??
 void set_signal_for_parameter(void* source, int* source_count, void* dest, int* dest_count, void* p4) {
 
     // check of null pointer
@@ -860,6 +870,7 @@ void set_signal_for_parameter(void* source, int* source_count, void* dest, int* 
  * @param p1 the query count
  * @param p2 the internal memory
  */
+/*??
 void set_signals_for_all_parameters(void* p0, int* p1, void* p2) {
 
     //check of null pointer
@@ -985,349 +996,303 @@ void set_signals_for_all_parameters(void* p0, int* p1, void* p2) {
 }
 
 /**
- * Handles a tcp socket request.
+ * Receives tcp socket signal.
  *
- * The http request must be parsed for parameters.
- * A signal is created and added to the signal memory, for each parameter.
+ * The http request must be parsed for parameters!
+ * A cyboi-internal signal is created and added to the signal memory, for each parameter.
  *
  * @param p0 the internal memory
- * @param p1 the client socket
+ * @param p1 the buffer
+ * @param p2 the buffer count
+ * @param p3 the client socket
  */
-void handle_tcp_socket_request(void* p0, void* p1) {
+void receive_tcp_socket_signal(void* p0, void* p1, void* p2, void* p3) {
 
+    log_message_debug("TEST: Receive tcp socket signal.");
+
+    // The knowledge memory.
+    void** k = &NULL_POINTER;
+    void** kc = &NULL_POINTER;
+    void** ks = &NULL_POINTER;
+    // The signal memory.
+    void** s = &NULL_POINTER;
+    void** sc = &NULL_POINTER;
+    void** ss = &NULL_POINTER;
+    // The signal memory mutex.
+    pthread_mutex_t** smt = (pthread_mutex_t**) &NULL_POINTER;
+    // The tcp socket mutex.
+    pthread_mutex_t** tmt = (pthread_mutex_t**) &NULL_POINTER;
+    // The interrupt request flag.
+    sig_atomic_t** irq = (sig_atomic_t**) &NULL_POINTER;
 /*??
-    For web frontend testing, use:
-    http://localhost:3456/resadmin/logic/send_name.cybol
+    // The user interface commands.
+    void** c = &NULL_POINTER;
+    void** cc = &NULL_POINTER;
+    void** cs = &NULL_POINTER;
+
+    // The command abstraction.
+    void** ca = &NULL_POINTER;
+    void** cac = &NULL_POINTER;
+    void** cas = &NULL_POINTER;
+    // The command model.
+    void** cm = &NULL_POINTER;
+    void** cmc = &NULL_POINTER;
+    void** cms = &NULL_POINTER;
+    // The command details.
+    void** cd = &NULL_POINTER;
+    void** cdc = &NULL_POINTER;
+    void** cds = &NULL_POINTER;
 */
 
-    if (p1 != NULL_POINTER) {
+    // The signal id.
+    int* id = NULL_POINTER;
 
-        int* cs = (int*) p1;
+    // Get knowledge memory internal.
+    get(p0, (void*) KNOWLEDGE_MEMORY_INTERNAL, (void*) &k, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p0, (void*) KNOWLEDGE_MEMORY_COUNT_INTERNAL, (void*) &kc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p0, (void*) KNOWLEDGE_MEMORY_SIZE_INTERNAL, (void*) &ks, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    // Get signal memory internal.
+    get(p0, (void*) SIGNAL_MEMORY_INTERNAL, (void*) &s, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p0, (void*) SIGNAL_MEMORY_COUNT_INTERNAL, (void*) &sc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p0, (void*) SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &ss, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    // Get signal memory mutex.
+    get(p0, (void*) SIGNAL_MEMORY_MUTEX_INTERNAL, (void*) &smt, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    // Get tcp socket mutex.
+    get(p0, (void*) TCP_SOCKET_MUTEX_INTERNAL, (void*) &tmt, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    // Get interrupt request internal.
+    get(p0, (void*) INTERRUPT_REQUEST_INTERNAL, (void*) &irq, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-        log_message_debug("Handle tcp socket request.");
+/*??
+    // Lock tcp socket mutex.
+    //
+    // CAUTION! A mutex is needed here to ensure that the commands internal
+    // and its associated count and size are retrieved at once and belong together.
+    // Otherwise, a commands internal might be got in this "receive" thread,
+    // then the "main" thread of cyboi might set a new commands internal, count
+    // and size, and finally this "receive" thread would get a wrong count or size
+    // (of the new commands internal), not belonging to the commands internal got before.
+    pthread_mutex_lock(*tmt);
 
-        // The message.
-        char* msg = NULL_POINTER;
-        // The maximum message count.
-        int max_msg_count = 2048;
+    // Get user interface commands internal.
+    get(p0, (void*) TCP_SOCKET_THREAD_COMMANDS_INTERNAL, (void*) &c, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p0, (void*) TCP_SOCKET_THREAD_COMMANDS_COUNT_INTERNAL, (void*) &cc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p0, (void*) TCP_SOCKET_THREAD_COMMANDS_SIZE_INTERNAL, (void*) &cs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-        // Create message.
-        allocate_array((void*) &msg, (void*) &max_msg_count, (void*) CHARACTER_ARRAY);
+    // Unlock tcp socket mutex.
+    pthread_mutex_unlock(*lmt);
+*/
 
-        // Receive message from client.
-        int msg_count = recv(*cs, msg, max_msg_count, 0);
+/*??
+    // Get actual command belonging to the command name.
+    // If the name is not known, the command parameter is left untouched.
+    get_universal_compound_element_by_name(*c, *cc,
+        p1, p2,
+        (void*) &ca, (void*) &cac, (void*) &cas,
+        (void*) &cm, (void*) &cmc, (void*) &cms,
+        (void*) &cd, (void*) &cdc, (void*) &cds,
+        *k, *kc);
 
-        if (msg_count != -1) {
+    // Lock signal memory mutex.
+    pthread_mutex_lock(*smt);
 
-            // The url basename.
-            char* url_basename = NULL_POINTER;
-            int url_basename_count = 0;
+    // Allocate signal id.
+    allocate((void*) &id, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    *id = 0;
+    get_new_signal_id(*s, *sc, (void*) id);
 
-            // Create url basename.
-            allocate_array((void*) &url_basename, (void*) &url_basename_count, (void*) CHARACTER_ARRAY);
+    // Add signal to signal memory.
+    set_signal(*s, *sc, *ss, *ca, *cac, *cm, *cmc, *cd, *cdc, (void*) NORMAL_PRIORITY, (void*) id);
 
-            // Get url base name.
-            get_url_basename_from_request(msg, &msg_count, &url_basename, &url_basename_count);
+/*??
+    add_signal_id(p0, (void*) id);
+    add_client_socket_number(p0, (void*) cs);
+*/
 
-            // The parameter.
-            char* param = NULL_POINTER;
-            int param_count = 0;
+/*??
+    // Set interrupt request flag, in order to notify the signal checker
+    // that a new signal has been placed in the signal memory.
+    **irq = *NUMBER_1_INTEGER;
 
-            // Create paramater.
-            allocate_array((void*) &param, (void*) &param_count, (void*) CHARACTER_ARRAY);
-
-            // Get parameters.
-            get_parameter_from_request(msg, &msg_count, &param, &param_count);
-
-            // The firefox web browser makes a second request
-            // to determine the favicon.
-            char firefox_request[] = "favicon.ico";
-            char* p_firefox_request = &firefox_request[0];
-            int firefox_request_count = 11;
-
-            // The comparison result.
-            int r = 0;
-
-            compare_arrays((void*) url_basename, (void*) &url_basename_count, (void*) p_firefox_request, (void*) &firefox_request_count, (void*) &r, (void*) CHARACTER_ARRAY);
-
-            if (r != 1) {
-
-                // query string handling
-                set_signals_for_all_parameters((void*) param, (void*) &param_count, p0);
-
-                log_message_debug("Allocate destination abstraction, model, details.");
-
-                // The source channel.
-                char c_sc[] = "file";
-                char* sc = &c_sc[0];
-                int* scc = NULL_POINTER;
-                allocate(&scc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-                *scc = 4;
-
-                // The source abstraction.
-                char c_sa[] = "cybol";
-                char* sa = &c_sa[0];
-                int* sac = NULL_POINTER;
-                allocate(&sac, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-                *sac = 5;
-
-                // The source model.
-                char* sm = url_basename;
-                int* smc = NULL_POINTER;
-                allocate(&smc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-                *smc = url_basename_count;
-
-                // The destination abstraction.
-                void* da = NULL_POINTER;
-                int* dac = NULL_POINTER;
-                allocate(&dac, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-                *dac = 0;
-                int* das = NULL_POINTER;
-                allocate(&das, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-                *das = 0;
-
-                // The destination model.
-                void* dm = NULL_POINTER;
-                int* dmc = NULL_POINTER;
-                allocate(&dmc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-                *dmc = 0;
-                int* dms = NULL_POINTER;
-                allocate(&dms, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-                *dms = 0;
-
-                // The destination details.
-                void* dd = NULL_POINTER;
-                int* ddc = NULL_POINTER;
-                allocate(&ddc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-                *ddc = 0;
-                int* dds = NULL_POINTER;
-                allocate(&dds, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-                *dds = 0;
-
-                // Create destination abstraction.
-                receive_file_system_model((void*) &da, (void*) dac, (void*) das,
-                    (void*) sa, (void*) sac,
-                    (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
-                    (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
-
-                // Create destination model.
-                receive_file_system_model((void*) &dm, (void*) dmc, (void*) dms,
-                    (void*) sm, (void*) smc,
-                    (void*) sa, (void*) sac,
-                    (void*) sc, (void*) scc);
-
-                //
-                // Signal.
-                //
-
-                log_message_debug("Set start signal.");
-
-                // The signal memory.
-                void** m = &NULL_POINTER;
-                void** mc = &NULL_POINTER;
-                void** ms = &NULL_POINTER;
-
-                // Get signal memory.
-                get(p0, (void*) SIGNAL_MEMORY_INTERNAL, (void*) &m, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-                get(p0, (void*) SIGNAL_MEMORY_COUNT_INTERNAL, (void*) &mc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-                get(p0, (void*) SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &ms, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-
-                // Lock signal memory mutex.
-//??                pthread_mutex_lock(*mt);
-
-                // The signal id.
-                int* id = NULL_POINTER;
-                allocate(&id, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-                *id = 0;
-                get_new_signal_id(*m, *mc, (void*) id);
-
-                // Set signal.
-                set_signal(*m, *mc,* ms,
-                    (void*) da, (void*) dac,
-                    (void*) dm, (void*) dmc,
-                    (void*) dd, (void*) ddc,
-                    (void*) NORMAL_PRIORITY, (void*) id);
-
-                add_signal_id(p0, (void*) id);
-                add_client_socket_number(p0, (void*) cs);
-
-                // Set interrupt request flag, in order to notify the signal checker
-                // that a new signal has been placed in the signal memory.
-//??                **irq = *NUMBER_1_INTEGER;
-
-                // Unlock signal memory mutex.
-//??                pthread_mutex_unlock(*mt);
-
-            } else {
-
-                close(*cs);
-            }
-
-        } else {
-
-            log_message_debug("ERROR: Could not handle tcp socket request. The received message is invalid.");
-        }
-
-    } else {
-
-        log_message_debug("ERROR: Could not handle tcp socket request. The client socket is null.");
-    }
+    // Unlock signal memory mutex.
+    pthread_mutex_unlock(*smt);
+*/
 }
 
 /**
- * Runs the tcp socket server for one accept.
+ * Receives tcp socket messages (http requests) in an own thread.
+ *
+ * For web frontend testing, use:
+ * http://localhost:3456/residenz.logic.send_name
  *
  * @param p0 the internal memory
  */
-void run_tcp_socket(void* p0) {
+void receive_tcp_socket_thread(void* p0) {
 
     // The tcp server socket.
-    void** s = &NULL_POINTER;
+    int** s = (int**) &NULL_POINTER;
 
     // Get tcp server socket.
     get(p0, (void*) TCP_SOCKET_INTERNAL, (void*) &s, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-    if (s != NULL_POINTER) {
+    // The client socket address.
+    struct sockaddr_in ca;
+    // Get client socket address size.
+    int cas = sizeof(ca);
+    // The client socket.
+    int cs;
+    // The character buffer.
+    void** b = &NULL_POINTER;
+    int** bc = (int**) &NULL_POINTER;
+    // The maximum buffer size.
+    // CAUTION! A message MUST NOT be longer!
+    int** bs = (int**) &NULL_POINTER;
 
-        if (*s != NULL_POINTER) {
-
-            log_message_debug("Run tcp socket.");
-
-            // The client socket address.
-            struct sockaddr_in ca;
-
-            // Determine client socket address size.
-            int cas = sizeof(ca);
-
-            // Accept client socket request and store client socket.
-            int cs = accept(**((int**) s), (struct sockaddr*) &ca, (socklen_t*) &cas);
-
-            if (cs >= 0) {
-
-                log_message_debug("DEBUG: Accepted tcp client socket request.");
-                handle_tcp_socket_request(p0, (void*) &cs);
-
-            } else {
-
-                fprintf(stderr, "Could not run tcp socket. The accept failed.");
-                pthread_exit(NULL_POINTER);
-            }
-
-        } else {
-
-            log_message_debug("Could not run tcp socket. The socket is null.");
-        }
-
-    } else {
-
-        log_message_debug("Could not run tcp socket. The socket is null.");
-    }
-}
-
-/**
- * Runs a thread listening on the tcp socket.
- *
- * It is to avoid blocking of the main signal checker loop.
- * The thread exits if the active flag is false.
- *
- * @param p0 the internal memory
- */
-void run_tcp_socket_server(void* p0) {
-
-    // The interrupt flag.
-    int** f = (int**) &NULL_POINTER;
-
-//??    get(p0, (void*) TCP_SOCKET_INTERRUPT_INTERNAL, (void*) &f, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    // Get character buffer.
+    get(p0, (void*) TCP_SOCKET_THREAD_CHARACTER_BUFFER_INTERNAL, (void*) &b, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p0, (void*) TCP_SOCKET_THREAD_CHARACTER_BUFFER_COUNT_INTERNAL, (void*) &bc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p0, (void*) TCP_SOCKET_THREAD_CHARACTER_BUFFER_SIZE_INTERNAL, (void*) &bs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
     while (1) {
 
-        if (**f == *NUMBER_1_INTEGER) {
+        // A break condition does not exist here because the loop
+        // is blocking neverendingly while waiting for signals.
+        // The loop and this thread can only be exited by an external signal
+        // which is sent in the corresponding interrupt service procedure
+        // (situated in the applicator/interrupt/ directory)
+        // and processed in the system signal handler procedure
+        // (situated in the controller/checker.c module).
 
-            break;
+        // Accept client socket request and store client socket.
+        //
+        // Accepting a connection does not make the client socket part of the
+        // connection. Instead, it creates a new socket which becomes connected.
+        // The normal return value of "accept" is the file descriptor for the new socket.
+        //
+        // After "accept", the original socket socket remains open and
+        // unconnected, and continues listening until it gets closed.
+        // One can accept further connections with socket by calling
+        // "accept" again -- therefore the loop!
+        //
+        // CAUTION! This function is defined as a cancellation point in
+        // multi-threaded programs, so one has to be prepared for this and
+        // make sure that allocated resources (like memory, files descriptors,
+        // semaphores or whatever) are freed even if the thread is canceled!
+        cs = accept(**s, (struct sockaddr*) &ca, (socklen_t*) &cas);
+
+        if (cs >= *NUMBER_0_INTEGER) {
+
+            // Receive message from client.
+            // If the flags argument (fourth one) is zero, then one can
+            // just as well use the "read" instead of the "recv" procedure.
+            // Normally, "recv" blocks until there is input available to be read.
+            // CAUTION! A message MUST NOT be longer than the given buffer size!
+            **bc = recv(cs, *b, **bs, *NUMBER_0_INTEGER);
+
+            if (**bc >= *NUMBER_0_INTEGER) {
+
+                // Receive tcp socket signal.
+                receive_tcp_socket_signal(p0, *b, (void*) *bc, (void*) &cs);
+
+/*??
+                // The url basename.
+                char* url_basename = NULL_POINTER;
+                int url_basename_count = 0;
+                // Create url basename.
+                allocate_array((void*) &url_basename, (void*) &url_basename_count, (void*) CHARACTER_ARRAY);
+                // Get url base name.
+                receive_tcp_socket_url(msg, &msg_count, &url_basename, &url_basename_count);
+
+                // The parameter.
+                char* param = NULL_POINTER;
+                int param_count = 0;
+                // Create paramater.
+                allocate_array((void*) &param, (void*) &param_count, (void*) CHARACTER_ARRAY);
+                // Get parameters.
+                receive_tcp_socket_parameter(msg, &msg_count, &param, &param_count);
+
+                // The firefox web browser makes a second request
+                // to determine the favicon.
+                char firefox_request[] = "favicon.ico";
+                char* p_firefox_request = &firefox_request[0];
+                int firefox_request_count = 11;
+
+                // The comparison result.
+                int r = 0;
+                compare_arrays((void*) url_basename, (void*) &url_basename_count, (void*) p_firefox_request, (void*) &firefox_request_count, (void*) &r, (void*) CHARACTER_ARRAY);
+
+                if (r != 1) {
+
+                    // query string handling
+                    set_signals_for_all_parameters((void*) param, (void*) &param_count, p0);
+
+                    //?? The OLD solution created a signal here from a cybol knowledge template.
+                    //?? This is NOW easier, since the commands already exist in the knowledge tree
+                    //?? and only have to be referenced from here.
+
+                } else {
+
+                    close(*cs);
+                }
+*/
+
+            } else {
+
+                log_message_debug("ERROR: Could not receive tcp socket thread. The receive operation failed.");
+            }
+
+        } else if (cs < *NUMBER_0_INTEGER) {
+
+            log_message_debug("ERROR: Could not receive tcp socket thread. The client socket is invalid.");
         }
-
-        run_tcp_socket(p0);
     }
 
-    pthread_exit(NULL_POINTER);
+    // An implicit call to pthread_exit() is made when this thread
+    // (other than the thread in which main() was first invoked)
+    // returns from the routine that was used to create it.
+    // The pthread_exit() function does therefore not have to be called here.
+    //
+    // However, since this procedure runs an endless loop waiting for input,
+    // and is NEVER left (does not have a "break" condition),
+    // the loop and this thread can only be exited by an external signal
+    // which is sent in the corresponding interrupt service procedure,
+    // situated in the applicator/interrupt/ directory,
+    // and processed in the interrupt_service_system_signal_handler procedure:
+    // controller/manager/system_signal_handler_manager.c
 }
 
 /**
- * Receives via tcp socket.
+ * Receives web user interface (wui) messages via tcp socket.
  *
  * @param p0 the internal memory
  * @param p1 the knowledge memory
  * @param p2 the knowledge memory count
  * @param p3 the knowledge memory size
- * @param blocking_abstr the blocking abtsraction
- * @param blocking_abstr_count the blocking abtsraction count
- * @param blocking_model the blocking model
- * @param blocking_model_count the blocking model count
  */
-void receive_tcp_socket(void* p0, void* p1, void* p2, void* p3,
-    void* blocking_abstr, void* blocking_abstr_count, void* blocking_model, void* blocking_model_count) {
+void receive_tcp_socket(void* p0) {
 
-    log_message_debug("Receive via tcp socket.");
+    log_message_debug("Receive tcp socket message.");
 
-    if (p0 != NULL_POINTER) {
+    // Only create thread, if not existent.
+    if (*TCP_SOCKET_THREAD == *INVALID_VALUE) {
 
-        if ((blocking_abstr != NULL_POINTER)
-            && (blocking_abstr_count != NULL_POINTER)
-            && (blocking_model != NULL_POINTER)
-            && (blocking_model_count != NULL_POINTER)) {
+        log_message_debug("Create new tcp socket receive service thread.");
 
-            int r = 0;
-
-            compare_arrays((void*) blocking_abstr, (void*) blocking_abstr_count, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-            if (r == 1) {
-
-                if (*((int*) blocking_model) == *NUMBER_0_INTEGER) {
-
-                    // The thread.
-                    pthread_t t;
-
-                    // Create thread returning an error value.
-/*??
-                    int e = pthread_create(&t, NULL_POINTER, (void*) &run_tcp_socket_server, p0);
-
-                    if (e != 0) {
-
-                        log_message_debug("Could not receive tcp socket. An error occured while creating the thread.");
-                    }
-*/
-                }
-
-                // The interrupt flag.
-                int** f = (int**) &NULL_POINTER;
-
-//??                get(p0, (void*) TCP_SOCKET_INTERRUPT_INTERNAL, (void*) &f, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-
-                if ((f != NULL_POINTER) && (*f != NULL_POINTER)) {
-
-                    // Deactivate interrupt flag, since tcp socket service is now running.
-                    **f = 0;
-                }
-
-                // The blocking flag.
-                int** b = (int**) &NULL_POINTER;
-
-                get(p0, (void*) TCP_SOCKET_BLOCKING_INTERNAL, (void*) &b, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-
-                if ((b != NULL_POINTER) && (*b != NULL_POINTER)) {
-
-                    **b = *((int*) blocking_model);
-                }
-            }
-
-        } else {
-
-            log_message_debug("Could not receive via tcp socket. The blocking flag is null.");
-        }
-
-    } else {
-
-        log_message_debug("Could not receive via tcp socket. The internal memory is null.");
+        // Create thread.
+        //
+        // CAUTION! Do NOT allocate any resources within the thread procedure!
+        // The reason is that this main process thread gets forked when executing
+        // external programs. A "fork" duplicates ALL resources of the parent process,
+        // including ALL resources of any threads running within the parent process.
+        // However, since the created child process does not have those threads running,
+        // their duplicated resources will never be deallocated, which eats up memory.
+        // See source code file: applicator/run/run_execute.c
+        //
+        // Any dynamically allocated resources needed within the thread have to be:
+        // - allocated at service startup
+        // - added to the internal memory
+        // - handed over to the thread procedure HERE
+        // - deallocated at service shutdown
+        pthread_create(TCP_SOCKET_THREAD, NULL_POINTER, (void*) &receive_tcp_socket_thread, p0);
     }
 }
 

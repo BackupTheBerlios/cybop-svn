@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.18 $ $Date: 2006-08-19 02:04:48 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2006-12-21 22:13:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -257,6 +257,7 @@ void receive_linux_console_thread(void* p0) {
 
     // Get linux console.
 //??    get_array_elements(p0, (void*) LINUX_CONSOLE_FILE_DESCRIPTOR_INTERNAL, (void*) &t, (void*) POINTER_ARRAY);
+
     //?? For now, the standard stream is used for input. Possibly changed later.
     *t = stdin;
 
@@ -454,7 +455,7 @@ void receive_linux_console(void* p0, void* p1, void* p2, void* p3) {
     // Only create thread, if not existent.
     if (*LINUX_CONSOLE_THREAD == *INVALID_VALUE) {
 
-    log_message_debug("Create new linux console receive service thread.");
+        log_message_debug("Create new linux console receive service thread.");
 
         // Create thread.
         //

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.13 $ $Date: 2006-08-19 02:04:48 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2006-12-21 22:13:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -58,11 +58,13 @@ void interrupt_tcp_socket() {
         *TCP_SOCKET_THREAD_INTERRUPT = *NUMBER_1_INTEGER;
 
         // Send signal to thread.
+        //
         // CAUTION! Sending a SIGKILL signal to a thread using pthread_kill()
         // ends the ENTIRE PROCESS, not simply the target thread.
         // SIGKILL is defined to end the entire process, regardless
         // of the thread it is delivered to, or how it is sent.
-        // The user signal SIGUSR1 is used here instead.
+        //
+        // Therefore, the user signal SIGUSR1 is used here instead.
         // It is processed in the interrupt_service_system_signal_handler
         // procedure, situated in the following module:
         // controller/manager/system_signal_handler_manager.c
