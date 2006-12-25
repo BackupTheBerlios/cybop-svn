@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.25 $ $Date: 2006-08-19 02:04:48 $ $Author: christian $
+ * @version $Revision: 1.26 $ $Date: 2006-12-25 12:41:49 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -98,6 +98,10 @@ void manage(void* p0, void* p1) {
     pthread_mutex_t* smt = NULL_POINTER;
     // The linux console mutex.
     pthread_mutex_t* lmt = NULL_POINTER;
+    // The unix socket mutex.
+    pthread_mutex_t* umt = NULL_POINTER;
+    // The tcp socket mutex.
+    pthread_mutex_t* tmt = NULL_POINTER;
     // The x window system mutex.
     pthread_mutex_t* xmt = NULL_POINTER;
 
@@ -138,6 +142,10 @@ void manage(void* p0, void* p1) {
     smt = (pthread_mutex_t*) malloc(sizeof(pthread_mutex_t));
     // Allocate linux console mutex.
     lmt = (pthread_mutex_t*) malloc(sizeof(pthread_mutex_t));
+    // Allocate unix socket mutex.
+    umt = (pthread_mutex_t*) malloc(sizeof(pthread_mutex_t));
+    // Allocate tcp socket mutex.
+    tmt = (pthread_mutex_t*) malloc(sizeof(pthread_mutex_t));
     // Allocate x window system mutex.
     xmt = (pthread_mutex_t*) malloc(sizeof(pthread_mutex_t));
     // Allocate signal memory interrupt request flag.
@@ -153,6 +161,10 @@ void manage(void* p0, void* p1) {
     pthread_mutex_init(smt, NULL_POINTER);
     // Initialise linux console mutex.
     pthread_mutex_init(lmt, NULL_POINTER);
+    // Initialise unix socket mutex.
+    pthread_mutex_init(umt, NULL_POINTER);
+    // Initialise tcp socket mutex.
+    pthread_mutex_init(tmt, NULL_POINTER);
     // Initialise x window system mutex.
     pthread_mutex_init(xmt, NULL_POINTER);
     // Initialise signal memory interrupt request flag.
@@ -185,7 +197,7 @@ void manage(void* p0, void* p1) {
     startup_internal_memory(i,
         (void*) &k, (void*) &kc, (void*) &ks,
         (void*) &s, (void*) &sc, (void*) &ss,
-        (void*) &smt, (void*) &lmt, (void*) &xmt,
+        (void*) &smt, (void*) &lmt, (void*) &umt, (void*) &tmt, (void*) &xmt,
         (void*) &irq);
     // Start up system signal handler.
     startup_system_signal_handler();
@@ -278,6 +290,10 @@ void manage(void* p0, void* p1) {
     pthread_mutex_destroy(smt);
     // Destroy linux console mutex.
     pthread_mutex_destroy(lmt);
+    // Destroy unix socket mutex.
+    pthread_mutex_destroy(umt);
+    // Destroy tcp socket mutex.
+    pthread_mutex_destroy(tmt);
     // Destroy x window system mutex.
     pthread_mutex_destroy(xmt);
 
@@ -287,6 +303,10 @@ void manage(void* p0, void* p1) {
     free((void*) smt);
     // Deallocate linux console mutex.
     free((void*) lmt);
+    // Deallocate unix socket mutex.
+    free((void*) umt);
+    // Deallocate tcp socket mutex.
+    free((void*) tmt);
     // Deallocate x window system mutex.
     free((void*) xmt);
     // Deallocate signal memory.

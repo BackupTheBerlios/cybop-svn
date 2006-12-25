@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.17 $ $Date: 2006-12-21 22:13:58 $ $Author: christian $
+ * @version $Revision: 1.18 $ $Date: 2006-12-25 12:41:49 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -67,7 +67,10 @@ void startup_tcp_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
 
     if (*si == NULL_POINTER) {
 
-    fprintf(stderr, "TEST: The tcp socket port is: %i \n", *(int*) p6);
+    fprintf(stderr, "TEST: The tcp socket port abstraction is: %s \n", (char*) p4);
+    fprintf(stderr, "TEST: The tcp socket port abstraction count is: %i \n", *((int*) p5));
+    fprintf(stderr, "TEST: The tcp socket port model is: %i \n", **((int**) p6));
+    fprintf(stderr, "TEST: The tcp socket port model count is: %i \n", *((int*) p7));
 
         // The tcp server socket.
         int* s = NULL_POINTER;
@@ -151,22 +154,35 @@ void startup_tcp_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
             // The socket address.
             struct sockaddr_in a;
 
+            // CAUTION! Since the address is a structure and not a pointer,
+            // a check for null is NOT necessary here!
+
             // Set address format.
+            //
+            // CAUTION! Convert uint16_t integer hostshort from host byte order
+            // to network byte order:
+            // - "htons" and "ntohs" to convert values for the sin_port member
+            // - "htonl" and "ntohl" to convert IPv4 addresses for the sin_addr member
+            // (Remember, struct in_addr is equivalent to uint32_t.)
+            //
             a.sin_family = AF_INET;
-            a.sin_addr.s_addr = INADDR_ANY;
-            a.sin_port = htons(*((int*) p6));
+            a.sin_addr.s_addr = inet_addr("127.0.0.1"); //?? htonl(INADDR_ANY);
+            a.sin_port = 3456; //?? htons(*((uint16_t*) p6));
 
             // Determine socket address size.
-            int as = sizeof(struct sockaddr_in);
+            socklen_t as = sizeof(struct sockaddr_in);
 
             // Bind socket number to socket address.
             e = bind(*s, (struct sockaddr*) &a, as);
 
             if (e >= *NUMBER_0_INTEGER) {
 
+    fprintf(stderr, "TEST: pre listen: %d \n", *s);
                 // Enable socket to accept connections, thus making it a server socket.
-                // Set the number of possible pending client connection requests.
+                // The second parameter determines the number of possible
+                // pending client connection requests.
                 listen(*s, *NUMBER_1_INTEGER);
+    fprintf(stderr, "TEST: post listen: %d \n", *s);
 
             } else {
 
