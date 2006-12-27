@@ -24,7 +24,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.27 $ $Date: 2006-06-25 22:08:25 $ $Author: christian $
+ * @version $Revision: 1.28 $ $Date: 2006-12-27 09:50:44 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -971,6 +971,7 @@ void test() {
 //??    test_file_write();
 //??    test_console();
 //??    test_integer_parser();
+//??    test_knowledge_memory(k, kc, 5);
 }
 
 /* TEST_SOURCE */

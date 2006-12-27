@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.19 $ $Date: 2006-12-21 22:13:58 $ $Author: christian $
+ * @version $Revision: 1.20 $ $Date: 2006-12-27 09:50:44 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -315,7 +315,7 @@ void receive_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
 
         if (r != 0) {
 
-            receive_tcp_socket(p2);
+            receive_tcp_socket(p2, *com, *comc, *coms);
         }
     }
 

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.17 $ $Date: 2006-06-11 21:47:09 $ $Author: christian $
+ * @version $Revision: 1.18 $ $Date: 2006-12-27 09:50:44 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description This module starts up a service.
  */
@@ -72,18 +72,44 @@ void startup_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5)
     void** sdc = &NULL_POINTER;
     void** sds = &NULL_POINTER;
 
-    // The socket port abstraction.
-    void** spa = &NULL_POINTER;
-    void** spac = &NULL_POINTER;
-    void** spas = &NULL_POINTER;
-    // The socket port model.
-    void** spm = &NULL_POINTER;
-    void** spmc = &NULL_POINTER;
-    void** spms = &NULL_POINTER;
-    // The socket port details.
-    void** spd = &NULL_POINTER;
-    void** spdc = &NULL_POINTER;
-    void** spds = &NULL_POINTER;
+    // The namespace abstraction.
+    void** na = &NULL_POINTER;
+    void** nac = &NULL_POINTER;
+    void** nas = &NULL_POINTER;
+    // The namespace model.
+    void** nm = &NULL_POINTER;
+    void** nmc = &NULL_POINTER;
+    void** nms = &NULL_POINTER;
+    // The namespace details.
+    void** nd = &NULL_POINTER;
+    void** ndc = &NULL_POINTER;
+    void** nds = &NULL_POINTER;
+
+    // The style abstraction.
+    void** sta = &NULL_POINTER;
+    void** stac = &NULL_POINTER;
+    void** stas = &NULL_POINTER;
+    // The style model.
+    void** stm = &NULL_POINTER;
+    void** stmc = &NULL_POINTER;
+    void** stms = &NULL_POINTER;
+    // The style details.
+    void** std = &NULL_POINTER;
+    void** stdc = &NULL_POINTER;
+    void** stds = &NULL_POINTER;
+
+    // The address abstraction.
+    void** aa = &NULL_POINTER;
+    void** aac = &NULL_POINTER;
+    void** aas = &NULL_POINTER;
+    // The address model.
+    void** am = &NULL_POINTER;
+    void** amc = &NULL_POINTER;
+    void** ams = &NULL_POINTER;
+    // The address details.
+    void** ad = &NULL_POINTER;
+    void** adc = &NULL_POINTER;
+    void** ads = &NULL_POINTER;
 
     // Get service.
     get_universal_compound_element_by_name(p0, p1,
@@ -93,16 +119,36 @@ void startup_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5)
         (void*) &sd, (void*) &sdc, (void*) &sds,
         p2, p3);
 
-    // Get port.
+    // Get namespace.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) PORT_NAME, (void*) PORT_NAME_COUNT,
-        (void*) &spa, (void*) &spac, (void*) &spas,
-        (void*) &spm, (void*) &spmc, (void*) &spms,
-        (void*) &spd, (void*) &spdc, (void*) &spds,
+        (void*) SERVICE_NAMESPACE_NAME, (void*) SERVICE_NAMESPACE_NAME_COUNT,
+        (void*) &na, (void*) &nac, (void*) &nas,
+        (void*) &nm, (void*) &nmc, (void*) &nms,
+        (void*) &nd, (void*) &ndc, (void*) &nds,
+        p2, p3);
+
+    // Get communication style.
+    get_universal_compound_element_by_name(p0, p1,
+        (void*) SERVICE_COMMUNICATION_STYLE_NAME, (void*) SERVICE_COMMUNICATION_STYLE_NAME_COUNT,
+        (void*) &sta, (void*) &stac, (void*) &stas,
+        (void*) &stm, (void*) &stmc, (void*) &stms,
+        (void*) &std, (void*) &stdc, (void*) &stds,
+        p2, p3);
+
+    // Get address.
+    get_universal_compound_element_by_name(p0, p1,
+        (void*) SERVICE_ADDRESS_NAME, (void*) SERVICE_ADDRESS_NAME_COUNT,
+        (void*) &aa, (void*) &aac, (void*) &aas,
+        (void*) &am, (void*) &amc, (void*) &ams,
+        (void*) &ad, (void*) &adc, (void*) &ads,
         p2, p3);
 
     // The comparison result.
     int r = 0;
+    // The server socket internal.
+    int** s = (int**) &NULL_POINTER;
+    // The server socket base internal.
+    int b = *INVALID_VALUE;
 
     if (r == 0) {
 
@@ -116,31 +162,45 @@ void startup_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5)
 
     if (r == 0) {
 
-        compare_arrays((void*) *sm, (void*) *smc, (void*) UNIX_SOCKET_MODEL, (void*) UNIX_SOCKET_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != 0) {
-
-            startup_unix_socket(p5, p2, p3, p4, *spa, *spac, *spm, *spmc);
-        }
-    }
-
-    if (r == 0) {
-
-        compare_arrays((void*) *sm, (void*) *smc, (void*) TCP_SOCKET_MODEL, (void*) TCP_SOCKET_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != 0) {
-
-            startup_tcp_socket(p5, p2, p3, p4, *spa, *spac, *spm, *spmc);
-        }
-    }
-
-    if (r == 0) {
-
         compare_arrays((void*) *sm, (void*) *smc, (void*) X_WINDOW_SYSTEM_MODEL, (void*) X_WINDOW_SYSTEM_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
             startup_x_window_system(p5, p2, p3, p4);
+        }
+    }
+
+    if (r == 0) {
+
+        compare_arrays((void*) *sm, (void*) *smc, (void*) WWW_SERVICE_MODEL, (void*) WWW_SERVICE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != 0) {
+
+            // Get server socket internal.
+            get(p5, (void*) WWW_SERVICE_SOCKET_INTERNAL, (void*) &s, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
+            if (*s == NULL_POINTER) {
+
+                // Determine base number to store the server socket parameters at.
+                b = *SERVER_SOCKET_BASE_INTERNAL + (*WWW_PORT * (*SERVER_SOCKET_COUNT_INTERNAL));
+
+                // Startup server socket if it does not already exist.
+                startup_socket(p5, (void*) nm, (void*) nmc, (void*) stm, (void*) stmc, (void*) am, (void*) amc, (void*) WWW_PORT, (void*) &b, p2, p3, p4);
+
+            } else {
+
+                log_message_debug("Warning: Could not start up service. The www service is already running.");
+            }
+        }
+    }
+
+    if (r == 0) {
+
+        compare_arrays((void*) *sm, (void*) *smc, (void*) UNIX_SOCKET_MODEL, (void*) UNIX_SOCKET_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != 0) {
+
+            startup_unix_socket(p5, p2, p3, p4, *spa, *spac, *spm, *spmc);
         }
     }
 }

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.34 $ $Date: 2006-08-19 02:04:47 $ $Author: christian $
+ * @version $Revision: 1.35 $ $Date: 2006-12-27 09:50:44 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -216,26 +216,6 @@ void send_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
 
     if (r == 0) {
 
-        compare_arrays((void*) *cm, (void*) *cmc, (void*) LATEX_MODEL, (void*) LATEX_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != 0) {
-
-            send_latex(p2, *mm, *mmc, p3, p4);
-        }
-    }
-
-    if (r == 0) {
-
-        compare_arrays((void*) *cm, (void*) *cmc, (void*) LINUX_CONSOLE_MODEL, (void*) LINUX_CONSOLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != 0) {
-
-            send_linux_console(p2, *ma, *mac, *mm, *mmc, *md, *mdc, *am, *amc, *clm, *clmc, p3, p4);
-        }
-    }
-
-    if (r == 0) {
-
         compare_arrays((void*) *cm, (void*) *cmc, (void*) SIGNAL_MODEL, (void*) SIGNAL_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
@@ -256,77 +236,11 @@ void send_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
 
     if (r == 0) {
 
-        compare_arrays((void*) *cm, (void*) *cmc, (void*) TCP_SOCKET_MODEL, (void*) TCP_SOCKET_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays((void*) *cm, (void*) *cmc, (void*) LINUX_CONSOLE_MODEL, (void*) LINUX_CONSOLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-/*??
-            // The socket number for the signal id.
-            // The index for the signal id in the array is the same index
-            // in the client socket number array.
-            int i = -1;
-
-            get_index_for_signal_id(p2, p9, (void*) &i);
-
-            if (i >= 0) {
-
-                // The client socket.
-                int* cs = NULL_POINTER;
-
-                get_client_socket_number_for_index(p2, (void*) &i, (void*) &cs);
-
-                if (*cs >= 0) {
-
-                    //in abh?ngigkeit vom empf?nger
-                    //m?ssen die Daten verschieden aufbereitet werden
-                    //zur Zeit nur TCP socket f?r webanwednung
-                    //darum z.Z. immer html-Aufbereitung
-                    //--> das bedeuet, das ermittelte Modell
-                    //muss noch f?r die Ausgabe aufbereuitet (tranlate) werden.
-
-                    //create the destination for the send model
-                    void* dest = NULL_POINTER;
-                    int* dest_count = NULL_POINTER;
-                    int* dest_size = NULL_POINTER;
-
-                    allocate(&dest_count, PRIMITIVE_COUNT, INTEGER_VECTOR_ABSTRACTION, INTEGER_VECTOR_ABSTRACTION_COUNT);
-                    allocate(&dest_size, PRIMITIVE_COUNT, INTEGER_VECTOR_ABSTRACTION, INTEGER_VECTOR_ABSTRACTION_COUNT);
-                    *dest_count = 0;
-                    *dest_size  = 0;
-                    allocate(&dest, dest_size, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
-
-                    encode_model(&dest, dest_count, dest_size,
-                        *ma, *mac, *mm, *mmc, *md, *mdc,
-                        (void*) HTML_ABSTRACTION, (void*) HTML_ABSTRACTION_COUNT,
-                        p3, p4);
-
-                    // The temporary count, size.
-                    int tc = 0;
-                    int ts = 0;
-
-                    send_tcp_socket((void*) &cs, (void*) &tc, (void*) &ts, (void*) dest, (void*) dest_count);
-
-                    // Remove client socket number and main signal id from internal memory.
-                    remove_relation_clientsocketnumber_mainsignalid(p2, (void*) &i);
-
-                    // Close socket.
-                    close(*cs);
-
-                    // Destroy destination.
-                    deallocate(&dest, dest_size, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
-                    deallocate(&dest_count, PRIMITIVE_COUNT, INTEGER_VECTOR_ABSTRACTION, INTEGER_VECTOR_ABSTRACTION_COUNT);
-                    deallocate(&dest_size, PRIMITIVE_COUNT, INTEGER_VECTOR_ABSTRACTION, INTEGER_VECTOR_ABSTRACTION_COUNT);
-
-                } else {
-
-                    log_message_debug("Could not send tcp socket message. The client socket number was not found.");
-                }
-
-            } else {
-
-                log_message_debug("Could not send tcp socket message. The signal id index is invalid.");
-            }
-*/
+            send_linux_console(p2, *ma, *mac, *mm, *mmc, *md, *mdc, *am, *amc, *clm, *clmc, p3, p4);
         }
     }
 
@@ -342,11 +256,31 @@ void send_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
 
     if (r == 0) {
 
+        compare_arrays((void*) *cm, (void*) *cmc, (void*) TCP_SOCKET_MODEL, (void*) TCP_SOCKET_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != 0) {
+
+            send_tcp_socket(p2, *ra, *rac, *rm, *rmc, *rd, *rdc, *ma, *mac, *mm, *mmc, *md, *mdc, p3, p4);
+        }
+    }
+
+    if (r == 0) {
+
         compare_arrays((void*) *cm, (void*) *cmc, (void*) X_WINDOW_SYSTEM_MODEL, (void*) X_WINDOW_SYSTEM_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
             send_x_window_system(p2, *mm, *mmc, p3, p4);
+        }
+    }
+
+    if (r == 0) {
+
+        compare_arrays((void*) *cm, (void*) *cmc, (void*) LATEX_MODEL, (void*) LATEX_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != 0) {
+
+            send_latex(p2, *mm, *mmc, p3, p4);
         }
     }
 }

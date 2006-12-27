@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.18 $ $Date: 2006-06-20 22:35:09 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2006-12-27 09:50:44 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -328,7 +328,112 @@ static char* REFRESH_URL_MODEL = REFRESH_URL_MODEL_ARRAY;
 static int* REFRESH_URL_MODEL_COUNT = NUMBER_11_INTEGER_ARRAY;
 
 //
-// Channel models.
+// Service models.
+//
+
+/** The signal model. */
+static char SIGNAL_MODEL_ARRAY[] = {'s', 'i', 'g', 'n', 'a', 'l'};
+static char* SIGNAL_MODEL = SIGNAL_MODEL_ARRAY;
+static int* SIGNAL_MODEL_COUNT = NUMBER_6_INTEGER_ARRAY;
+
+/** The linux console model. */
+static char LINUX_CONSOLE_MODEL_ARRAY[] = {'l', 'i', 'n', 'u', 'x', '_', 'c', 'o', 'n', 's', 'o', 'l', 'e'};
+static char* LINUX_CONSOLE_MODEL = LINUX_CONSOLE_MODEL_ARRAY;
+static int* LINUX_CONSOLE_MODEL_COUNT = NUMBER_13_INTEGER_ARRAY;
+
+/** The unix socket model. */
+static char UNIX_SOCKET_MODEL_ARRAY[] = {'u', 'n', 'i', 'x', '_', 's', 'o', 'c', 'k', 'e', 't'};
+static char* UNIX_SOCKET_MODEL = UNIX_SOCKET_MODEL_ARRAY;
+static int* UNIX_SOCKET_MODEL_COUNT = NUMBER_11_INTEGER_ARRAY;
+
+/** The tcp socket model. */
+static char TCP_SOCKET_MODEL_ARRAY[] = {'t', 'c', 'p', '_', 's', 'o', 'c', 'k', 'e', 't'};
+static char* TCP_SOCKET_MODEL = TCP_SOCKET_MODEL_ARRAY;
+static int* TCP_SOCKET_MODEL_COUNT = NUMBER_10_INTEGER_ARRAY;
+
+/** The x window system model. */
+static char X_WINDOW_SYSTEM_MODEL_ARRAY[] = {'x', '_', 'w', 'i', 'n', 'd', 'o', 'w', '_', 's', 'y', 's', 't', 'e', 'm'};
+static char* X_WINDOW_SYSTEM_MODEL = X_WINDOW_SYSTEM_MODEL_ARRAY;
+static int* X_WINDOW_SYSTEM_MODEL_COUNT = NUMBER_15_INTEGER_ARRAY;
+
+/** The world wide web (www) service model. */
+static char WWW_SERVICE_MODEL_ARRAY[] = {'w', 'w', 'w'};
+static char* WWW_SERVICE_MODEL = WWW_SERVICE_MODEL_ARRAY;
+static int* WWW_SERVICE_MODEL_COUNT = NUMBER_3_INTEGER_ARRAY;
+
+//
+// Local namespace models.
+//
+
+/** The local namespace model. */
+static char LOCAL_NAMESPACE_MODEL_ARRAY[] = {'l', 'o', 'c', 'a', 'l'};
+static char* LOCAL_NAMESPACE_MODEL = LOCAL_NAMESPACE_MODEL_ARRAY;
+static int* LOCAL_NAMESPACE_MODEL_COUNT = NUMBER_5_INTEGER_ARRAY;
+
+//
+// Internet namespace models.
+//
+
+/** The internet protocol version 4 (ipv4) namespace model. */
+static char INET_NAMESPACE_MODEL_ARRAY[] = {'i', 'p', 'v', '4'};
+static char* INET_NAMESPACE_MODEL = INET_NAMESPACE_MODEL_ARRAY;
+static int* INET_NAMESPACE_MODEL_COUNT = NUMBER_4_INTEGER_ARRAY;
+
+/** The internet protocol version 6 (ipv6) namespace model. */
+static char INET6_NAMESPACE_MODEL_ARRAY[] = {'i', 'p', 'v', '6'};
+static char* INET6_NAMESPACE_MODEL = INET6_NAMESPACE_MODEL_ARRAY;
+static int* INET6_NAMESPACE_MODEL_COUNT = NUMBER_4_INTEGER_ARRAY;
+
+//
+// Other namespace models.
+//
+
+/** The xerox network software protocols namespace model. */
+static char NS_NAMESPACE_MODEL_ARRAY[] = {'n', 's'};
+static char* NS_NAMESPACE_MODEL = NS_NAMESPACE_MODEL_ARRAY;
+static int* NS_NAMESPACE_MODEL_COUNT = NUMBER_2_INTEGER_ARRAY;
+
+/** The open systems interconnect (osi) namespace model. */
+static char ISO_NAMESPACE_MODEL_ARRAY[] = {'i', 's', 'o'};
+static char* ISO_NAMESPACE_MODEL = ISO_NAMESPACE_MODEL_ARRAY;
+static int* ISO_NAMESPACE_MODEL_COUNT = NUMBER_3_INTEGER_ARRAY;
+
+/** The ccitt namespace model. */
+static char CCITT_NAMESPACE_MODEL_ARRAY[] = {'c', 'c', 'i', 't', 't'};
+static char* CCITT_NAMESPACE_MODEL = CCITT_NAMESPACE_MODEL_ARRAY;
+static int* CCITT_NAMESPACE_MODEL_COUNT = NUMBER_5_INTEGER_ARRAY;
+
+/** The internet message processor namespace model. */
+static char IMPLINK_NAMESPACE_MODEL_ARRAY[] = {'i', 'm', 'p', 'l', 'i', 'n', 'k'};
+static char* IMPLINK_NAMESPACE_MODEL = IMPLINK_NAMESPACE_MODEL_ARRAY;
+static int* IMPLINK_NAMESPACE_MODEL_COUNT = NUMBER_7_INTEGER_ARRAY;
+
+/** The local area routing protocol namespace model. */
+static char ROUTE_NAMESPACE_MODEL_ARRAY[] = {'r', 'o', 'u', 't', 'e'};
+static char* ROUTE_NAMESPACE_MODEL = ROUTE_NAMESPACE_MODEL_ARRAY;
+static int* ROUTE_NAMESPACE_MODEL_COUNT = NUMBER_5_INTEGER_ARRAY;
+
+//
+// Communication style models.
+//
+
+/** The stream communication style model. */
+static char STREAM_COMMUNICATION_STYLE_MODEL_ARRAY[] = {'s', 't', 'r', 'e', 'a', 'm'};
+static char* STREAM_COMMUNICATION_STYLE_MODEL = STREAM_COMMUNICATION_STYLE_MODEL_ARRAY;
+static int* STREAM_COMMUNICATION_STYLE_MODEL_COUNT = NUMBER_6_INTEGER_ARRAY;
+
+/** The datagram communication style model. */
+static char DATAGRAM_COMMUNICATION_STYLE_MODEL_ARRAY[] = {'d', 'a', 't', 'a', 'g', 'r', 'a', 'm'};
+static char* DATAGRAM_COMMUNICATION_STYLE_MODEL = DATAGRAM_COMMUNICATION_STYLE_MODEL_ARRAY;
+static int* DATAGRAM_COMMUNICATION_STYLE_MODEL_COUNT = NUMBER_8_INTEGER_ARRAY;
+
+/** The raw communication style model. */
+static char RAW_COMMUNICATION_STYLE_MODEL_ARRAY[] = {'r', 'a', 'w'};
+static char* RAW_COMMUNICATION_STYLE_MODEL = RAW_COMMUNICATION_STYLE_MODEL_ARRAY;
+static int* RAW_COMMUNICATION_STYLE_MODEL_COUNT = NUMBER_3_INTEGER_ARRAY;
+
+//
+// Protocol models.
 //
 
 /** The common object request broker architecture (corba) model. */
@@ -371,11 +476,6 @@ static char LDAP_MODEL_ARRAY[] = {'l', 'd', 'a', 'p'};
 static char* LDAP_MODEL = LDAP_MODEL_ARRAY;
 static int* LDAP_MODEL_COUNT = NUMBER_4_INTEGER_ARRAY;
 
-/** The linux console model. */
-static char LINUX_CONSOLE_MODEL_ARRAY[] = {'l', 'i', 'n', 'u', 'x', '_', 'c', 'o', 'n', 's', 'o', 'l', 'e'};
-static char* LINUX_CONSOLE_MODEL = LINUX_CONSOLE_MODEL_ARRAY;
-static int* LINUX_CONSOLE_MODEL_COUNT = NUMBER_13_INTEGER_ARRAY;
-
 /** The nfs model. */
 static char NFS_MODEL_ARRAY[] = {'n', 'f', 's'};
 static char* NFS_MODEL = NFS_MODEL_ARRAY;
@@ -390,11 +490,6 @@ static int* NNTP_MODEL_COUNT = NUMBER_4_INTEGER_ARRAY;
 static char RMI_MODEL_ARRAY[] = {'r', 'm', 'i'};
 static char* RMI_MODEL = RMI_MODEL_ARRAY;
 static int* RMI_MODEL_COUNT = NUMBER_3_INTEGER_ARRAY;
-
-/** The signal model. */
-static char SIGNAL_MODEL_ARRAY[] = {'s', 'i', 'g', 'n', 'a', 'l'};
-static char* SIGNAL_MODEL = SIGNAL_MODEL_ARRAY;
-static int* SIGNAL_MODEL_COUNT = NUMBER_6_INTEGER_ARRAY;
 
 /** The simple object access protocol (soap) model. */
 static char SOAP_MODEL_ARRAY[] = {'s', 'o', 'a', 'p'};
@@ -420,21 +515,6 @@ static int* SMTPS_MODEL_COUNT = NUMBER_5_INTEGER_ARRAY;
 static char SQL_MODEL_ARRAY[] = {'s', 'q', 'l'};
 static char* SQL_MODEL = SQL_MODEL_ARRAY;
 static int* SQL_MODEL_COUNT = NUMBER_3_INTEGER_ARRAY;
-
-/** The tcp socket model. */
-static char TCP_SOCKET_MODEL_ARRAY[] = {'t', 'c', 'p', '_', 's', 'o', 'c', 'k', 'e', 't'};
-static char* TCP_SOCKET_MODEL = TCP_SOCKET_MODEL_ARRAY;
-static int* TCP_SOCKET_MODEL_COUNT = NUMBER_10_INTEGER_ARRAY;
-
-/** The unix socket model. */
-static char UNIX_SOCKET_MODEL_ARRAY[] = {'u', 'n', 'i', 'x', '_', 's', 'o', 'c', 'k', 'e', 't'};
-static char* UNIX_SOCKET_MODEL = UNIX_SOCKET_MODEL_ARRAY;
-static int* UNIX_SOCKET_MODEL_COUNT = NUMBER_11_INTEGER_ARRAY;
-
-/** The x window system model. */
-static char X_WINDOW_SYSTEM_MODEL_ARRAY[] = {'x', '_', 'w', 'i', 'n', 'd', 'o', 'w', '_', 's', 'y', 's', 't', 'e', 'm'};
-static char* X_WINDOW_SYSTEM_MODEL = X_WINDOW_SYSTEM_MODEL_ARRAY;
-static int* X_WINDOW_SYSTEM_MODEL_COUNT = NUMBER_15_INTEGER_ARRAY;
 
 //
 // Shape models.
