@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2006-12-28 16:04:26 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2006-12-28 17:21:52 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -277,23 +277,43 @@ void startup_socket_initialise_local_socket_address(void* p0, void* p1, void* p2
 
                 log_message_debug("Startup socket initialise local socket address.");
 
+/*??
                 // Set namespace (address format/ family).
                 //
                 // CAUTION! Use the prefix "AF_" here and NOT "PF_"!
                 // The latter is to be used for socket creation.
                 (*a)->sun_family = AF_LOCAL;
 
-                // The terminated file name.
-                char* t = NULL_POINTER;
-                int ts = *fc + NUMBER_1_INTEGER;
+                // CAUTION! For some strange reason, the socket file name length
+                // is limited to 108 ascii characters in the GNU C library!
+                // The documentation called it a "magic number" and does not
+                // know why this limit exists.
+                if (*fc < 108) {
 
-                if
+                    // The new file name count.
+                    int nc = *fc + *NUMBER_1_INTEGER;
 
-                // Set file name.
-                //
-                // CAUTION! For some strange reason, the file name's length is
-                // limited to 108 ascii characters in the GNU C library!
-                (*a)->sun_path = f;
+    fprintf(stderr, "TEST: fc: %i \n", *fc);
+    fprintf(stderr, "TEST: nc: %i \n", nc);
+
+    fprintf(stderr, "TEST: f: %s \n", f);
+    fprintf(stderr, "TEST: (*a)->sun_path pre: %s \n", (*a)->sun_path);
+
+                    // Reallocate file name array, being a field of the socket address structure.
+                    reallocate_array((void*) &((*a)->sun_path), p2, (void*) &nc, (void*) CHARACTER_ARRAY);
+
+                    // Set terminated file name by first copying the actual name
+                    // and then adding the null termination character.
+                    set_array_elements((*a)->sun_path, (void*) NUMBER_0_INTEGER, p1, p2, (void*) CHARACTER_ARRAY);
+                    set_array_elements((*a)->sun_path, p2, (void*) NULL_CONTROL_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+
+    fprintf(stderr, "TEST: (*a)->sun_path post: %s \n", (*a)->sun_path);
+
+                } else {
+
+                    log_message_debug("Error: Could not initialise local socket address. The socket file name is longer than the limit 108, as set by the gnu c library.");
+                }
+*/
 
             } else {
 
@@ -406,7 +426,7 @@ void startup_socket_initialise_ipv6_socket_address(void* p0, void* p1, void* p2)
                 //
                 // CAUTION! Use the prefix "AF_" here and NOT "PF_"!
                 // The latter is to be used for socket creation.
-                (*a)->sin_family = AF_INET6;
+                (*a)->sin6_family = AF_INET6;
 
                 // Set host address.
                 //
@@ -423,14 +443,19 @@ void startup_socket_initialise_ipv6_socket_address(void* p0, void* p1, void* p2)
                 // - "htonl" and "ntohl" to convert IPv4 addresses for the sin_addr member
 //??                inet_aton(htonl(INADDR_ANY), (struct in_addr*) &(a->sin_addr));
 //??                inet_aton(ipv6, (struct in_addr*) &((*a)->sin_addr));
-                (*a)->sin_addr = *h;
+                (*a)->sin6_addr = *h;
+
+                // Set flow information.
+                // CAUTION! This is a currently unimplemented field,
+                // as written in the gnu c library documentation.
+                // (*a)->sin6_flowinfo = ??
 
                 // Set socket port.
                 //
                 // CAUTION! The port number MUST BE represented in a canonical
                 // format called "network byte order".
 //??                a->sin_port = htons(*((uint16_t*) p6));
-                (*a)->sin_port = *p;
+                (*a)->sin6_port = *p;
 
             } else {
 
@@ -456,8 +481,8 @@ void startup_socket_initialise_ipv6_socket_address(void* p0, void* p1, void* p2)
  * @param p2 the namespace model count
  * @param p3 the style model
  * @param p4 the style model count
- * @param p5 the host address model
- * @param p6 the host address model count
+ * @param p5 the socket file name or host address model, depending on the socket type (local, ipv4, ipv6)
+ * @param p6 the socket file name or host address model count
  * @param p7 the port model
  * @param p8 the base internal
  * @param p9 the knowledge memory
@@ -520,11 +545,11 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
         startup_socket_get_style((void*) &st, p3, p4);
 
         // Get host address constant.
-        if (*an == AF_INET) {
+        if (an == AF_INET) {
 
             startup_socket_get_ipv4_host_address((void*) &ha4, p5, p6);
 
-        } else if (*an == AF_INET6) {
+        } else if (an == AF_INET6) {
 
             startup_socket_get_ipv6_host_address((void*) &ha6, p5, p6);
         }
@@ -557,21 +582,21 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
         // param 1: style
         // param 2: protocol
         //
-        // CAUTION! Use "PF_INET" here and NOT "AF_INET"!
+        // CAUTION! Use prefix "PF_" here and NOT "AF_"!
         // The latter is to be used for address family assignment.
         // See further below!
         *s = socket(sn, st, *NUMBER_0_INTEGER);
 
         // Initialise socket address size.
-        if (*an == AF_LOCAL) {
+        if (an == AF_LOCAL) {
 
-            *as = sizeof(struct sockaddr_un);
+//??            *as = sizeof(struct sockaddr_un);
 
-        } else if (*an == AF_INET4) {
+        } else if (an == AF_INET) {
 
             *as = sizeof(struct sockaddr_in);
 
-        } else if (*an == AF_INET6) {
+        } else if (an == AF_INET6) {
 
             *as = sizeof(struct sockaddr_in6);
         }
@@ -595,15 +620,15 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
 */
 
         // Allocate socket address.
-        if (*an == AF_LOCAL) {
+        if (an == AF_LOCAL) {
 
             la = (struct sockaddr_un*) malloc(*as);
 
-        } else if (*an == AF_INET4) {
+        } else if (an == AF_INET) {
 
             ia4 = (struct sockaddr_in*) malloc(*as);
 
-        } else if (*an == AF_INET6) {
+        } else if (an == AF_INET6) {
 
             ia6 = (struct sockaddr_in6*) malloc(*as);
         }
@@ -612,15 +637,15 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
         allocate((void*) &b, (void*) bs, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
         // Initialise socket address.
-        if (*an == AF_LOCAL) {
+        if (an == AF_LOCAL) {
 
-            startup_socket_initialise_local_socket_address((void*) &la, (void*) &ha4, p7);
+            startup_socket_initialise_local_socket_address((void*) &la, p5, p6);
 
-        } else if (*an == AF_INET4) {
+        } else if (an == AF_INET) {
 
             startup_socket_initialise_ipv4_socket_address((void*) &ia4, (void*) &ha4, p7);
 
-        } else if (*an == AF_INET6) {
+        } else if (an == AF_INET6) {
 
             startup_socket_initialise_ipv6_socket_address((void*) &ia6, (void*) &ha6, p7);
         }
@@ -630,7 +655,20 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
         set(p0, (void*) &i, (void*) &s, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         // Set socket address.
         i = *base + *SERVER_SOCKET_ADDRESS_INTERNAL;
-        set(p0, (void*) &i, (void*) &a, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
+        if (an == AF_LOCAL) {
+
+            set(p0, (void*) &i, (void*) &la, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
+        } else if (an == AF_INET) {
+
+            set(p0, (void*) &i, (void*) &ia4, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
+        } else if (an == AF_INET6) {
+
+            set(p0, (void*) &i, (void*) &ia6, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        }
+
         i = *base + *SERVER_SOCKET_ADDRESS_SIZE_INTERNAL;
         set(p0, (void*) &i, (void*) &as, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 /*??
@@ -658,8 +696,22 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
 
     fprintf(stderr, "TEST: The server socket is: %d \n", *s);
 
+            // The result.
+            int r = *INVALID_VALUE;
+
             // Bind socket number to socket address.
-            int r = bind(*s, (struct sockaddr*) a, *((socklen_t*) as));
+            if (an == AF_LOCAL) {
+
+                r = bind(*s, (struct sockaddr*) la, *((socklen_t*) as));
+
+            } else if (an == AF_INET) {
+
+                r = bind(*s, (struct sockaddr*) ia4, *((socklen_t*) as));
+
+            } else if (an == AF_INET6) {
+
+                r = bind(*s, (struct sockaddr*) ia6, *((socklen_t*) as));
+            }
 
             if (r >= *NUMBER_0_INTEGER) {
 
