@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2006-12-28 17:21:52 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2006-12-28 20:27:35 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -273,47 +273,69 @@ void startup_socket_initialise_local_socket_address(void* p0, void* p1, void* p2
 
             if (p0 != NULL_POINTER) {
 
-                struct sockaddr_un** a = (struct sockaddr_un**) p0;
+                // CAUTION! The compiler brings an error if the "struct sockaddr_un"
+                // type is used, because pointer calculation is done below!
+                // Therefore, a cast to void** is done here instead.
+                void** a = (void**) p0;
 
                 log_message_debug("Startup socket initialise local socket address.");
 
-/*??
+                // Determine position of namespace
+                // ("sun_family" field within the "sockaddr_un" structure).
+                //
+                // Do NOT access the "sun_family" field directly with:
+                // (*a)->sun_family = AF_LOCAL;
+                // It won't work because the "sockaddr_un" structure, due to
+                // the unknown size of its "sun_path" field (a character array),
+                // is considered an incomplete type, so that the compiler
+                // brings an error.
+                short int* family = (short int*) (*a + *NUMBER_0_INTEGER);
+
                 // Set namespace (address format/ family).
                 //
                 // CAUTION! Use the prefix "AF_" here and NOT "PF_"!
                 // The latter is to be used for socket creation.
-                (*a)->sun_family = AF_LOCAL;
+                *family = AF_LOCAL;
 
                 // CAUTION! For some strange reason, the socket file name length
-                // is limited to 108 ascii characters in the GNU C library!
+                // is limited to 108 ascii characters in the gnu c library!
                 // The documentation called it a "magic number" and does not
                 // know why this limit exists.
                 if (*fc < 108) {
 
-                    // The new file name count.
-                    int nc = *fc + *NUMBER_1_INTEGER;
+                    // CAUTION! Do NOT reallocate the file name array with:
+                    // int nc = *fc + *NUMBER_1_INTEGER;
+                    // reallocate_array((void*) &((*a)->sun_path), p2, (void*) &nc, (void*) CHARACTER_ARRAY);
+                    //
+                    // The reason is that the size of the "sun_path" field of
+                    // the "sockaddr_un" structure had to be fixed (to 108,
+                    // for reasons explained above), in order to be able to
+                    // calculate the overall size of the "sockaddr_un" structure.
+                    //
+                    // It is no problem if the "sun_path" array size is greater
+                    // than the actual file name size, since the file name is
+                    // terminated with a null character.
 
-    fprintf(stderr, "TEST: fc: %i \n", *fc);
-    fprintf(stderr, "TEST: nc: %i \n", nc);
-
-    fprintf(stderr, "TEST: f: %s \n", f);
-    fprintf(stderr, "TEST: (*a)->sun_path pre: %s \n", (*a)->sun_path);
-
-                    // Reallocate file name array, being a field of the socket address structure.
-                    reallocate_array((void*) &((*a)->sun_path), p2, (void*) &nc, (void*) CHARACTER_ARRAY);
+                    // Determine position of file name
+                    // ("sun_path" field within the "sockaddr_un" structure).
+                    //
+                    // Do NOT access the "sun_path" field directly with:
+                    // (*a)->sun_path
+                    // It won't work because the "sockaddr_un" structure, due to
+                    // the unknown size of its "sun_path" field (a character array),
+                    // is considered an incomplete type, so that the compiler
+                    // brings an error.
+                    void* path = (void*) (*a + sizeof(short int));
 
                     // Set terminated file name by first copying the actual name
                     // and then adding the null termination character.
-                    set_array_elements((*a)->sun_path, (void*) NUMBER_0_INTEGER, p1, p2, (void*) CHARACTER_ARRAY);
-                    set_array_elements((*a)->sun_path, p2, (void*) NULL_CONTROL_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
-
-    fprintf(stderr, "TEST: (*a)->sun_path post: %s \n", (*a)->sun_path);
+                    set_array_elements(path, (void*) NUMBER_0_INTEGER, p1, p2, (void*) CHARACTER_ARRAY);
+                    set_array_elements(path, p2, (void*) NULL_CONTROL_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
 
                 } else {
 
                     log_message_debug("Error: Could not initialise local socket address. The socket file name is longer than the limit 108, as set by the gnu c library.");
                 }
-*/
 
             } else {
 
@@ -446,6 +468,7 @@ void startup_socket_initialise_ipv6_socket_address(void* p0, void* p1, void* p2)
                 (*a)->sin6_addr = *h;
 
                 // Set flow information.
+                //
                 // CAUTION! This is a currently unimplemented field,
                 // as written in the gnu c library documentation.
                 // (*a)->sin6_flowinfo = ??
@@ -590,7 +613,23 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
         // Initialise socket address size.
         if (an == AF_LOCAL) {
 
-//??            *as = sizeof(struct sockaddr_un);
+            // CAUTION! The following line CANNOT be used:
+            // *as = sizeof(struct sockaddr_un);
+            // because the compiler brings the error
+            // "invalid application of 'sizeof' to incomplete type 'struct sockaddr_un'".
+            // The reason is the "sun_path" field of the "sockaddr_un" structure,
+            // which is a character array whose size is unknown at compilation time.
+            //
+            // The size of the "sun_path" character array is therefore set
+            // to the fixed size of 108.
+            // The number "108" is the limit as set by the gnu c library!
+            // Its documentation called it a "magic number" and does not
+            // know why this limit exists.
+            //
+            // With the known type "short int" of the "sun_family" field and
+            // a fixed size "108" of the "sun_path" field, the overall size of
+            // the "sockaddr_un" structure can be calculated as sum.
+            *as = sizeof(short int) + 108;
 
         } else if (an == AF_INET) {
 
