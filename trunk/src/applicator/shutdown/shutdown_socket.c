@@ -1,5 +1,5 @@
 /*
- * $RCSfile: shutdown_tcp_socket.c,v $
+ * $RCSfile: shutdown_socket.c,v $
  *
  * Copyright (c) 1999-2006. Christian Heller and the CYBOP developers.
  *
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.15 $ $Date: 2006-12-21 22:13:58 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2006-12-28 01:10:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */

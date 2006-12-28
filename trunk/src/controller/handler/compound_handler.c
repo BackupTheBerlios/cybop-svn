@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2006-04-20 22:36:09 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2006-12-28 01:10:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -52,8 +52,8 @@ void handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
  * @param p4 the signal memory
  * @param p5 the signal memory count
  * @param p6 the signal memory size
- * @param p7 the signal memory blocked flag
- * @param p8 the interrupt request flag
+ * @param p7 the interrupt request flag
+ * @param p8 the signal memory mutex
  * @param p9 the shutdown flag
  * @param p10 the signal
  * @param p11 the signal count

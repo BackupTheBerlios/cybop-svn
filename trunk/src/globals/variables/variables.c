@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2006-04-20 22:36:10 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2006-12-28 01:10:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -67,21 +67,17 @@ static int* DOUBLE_PRIMITIVE_SIZE;
 
 // The linux console thread.
 static pthread_t* LINUX_CONSOLE_THREAD;
-// The unix socket thread.
-static pthread_t* UNIX_SOCKET_THREAD;
-// The tcp socket thread.
-static pthread_t* TCP_SOCKET_THREAD;
 // The x window system thread.
 static pthread_t* X_WINDOW_SYSTEM_THREAD;
+// The www service thread.
+static pthread_t* WWW_SERVICE_THREAD;
 
 // The linux console interrupt flag.
 static int* LINUX_CONSOLE_THREAD_INTERRUPT;
-// The unix socket interrupt flag.
-static int* UNIX_SOCKET_THREAD_INTERRUPT;
-// The tcp socket interrupt flag.
-static int* TCP_SOCKET_THREAD_INTERRUPT;
 // The x window system interrupt flag.
 static int* X_WINDOW_SYSTEM_THREAD_INTERRUPT;
+// The www service interrupt flag.
+static int* WWW_SERVICE_THREAD_INTERRUPT;
 
 //
 // Logging.

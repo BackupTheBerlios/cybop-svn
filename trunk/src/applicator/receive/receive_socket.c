@@ -1,5 +1,5 @@
 /*
- * $RCSfile: receive_tcp_socket.c,v $
+ * $RCSfile: receive_socket.c,v $
  *
  * Copyright (c) 1999-2006. Christian Heller and the CYBOP developers.
  *
@@ -20,13 +20,13 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.33 $ $Date: 2006-12-27 09:50:44 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2006-12-28 01:10:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
 
-#ifndef RECEIVE_TCP_SOCKET_SOURCE
-#define RECEIVE_TCP_SOCKET_SOURCE
+#ifndef RECEIVE_SOCKET_SOURCE
+#define RECEIVE_SOCKET_SOURCE
 
 #ifdef LINUX_OPERATING_SYSTEM
 
@@ -136,7 +136,7 @@ void get_request_method(char* req, int* req_count, char** req_method, int* req_m
  * @param param_count the count from the parameter
  */
 /*??
-void receive_tcp_socket_url(char* req, int* req_count, char** urlbase, int* urlbase_count) {
+void receive_socket_url(char* req, int* req_count, char** urlbase, int* urlbase_count) {
 
     *urlbase_count = 0;
     int req_index = 0;
@@ -465,7 +465,7 @@ void* get_character_from_escape_code(void* source, int* source_count, char** des
  * @param param_count the paramater count
  */
 /*??
-void receive_tcp_socket_parameter_for_post(char* req, int* req_count, char** param, int* param_count) {
+void receive_socket_parameter_for_post(char* req, int* req_count, char** param, int* param_count) {
 
     *param_count = 0;
     int req_index = *req_count-1;
@@ -534,7 +534,7 @@ void receive_tcp_socket_parameter_for_post(char* req, int* req_count, char** par
  * @param param_count the paramater count
  */
 /*??
-void receive_tcp_socket_parameter_for_get(char* req, int* req_count, char** param, int* param_count) {
+void receive_socket_parameter_for_get(char* req, int* req_count, char** param, int* param_count) {
 
     *param_count = 0;
     int req_index = 0;
@@ -589,7 +589,7 @@ void receive_tcp_socket_parameter_for_get(char* req, int* req_count, char** para
  * @param param_count the paramater count
  */
 /*??
-void receive_tcp_socket_parameter(char* req, int* req_count, char** param, int* param_count) {
+void receive_socket_parameter(char* req, int* req_count, char** param, int* param_count) {
 
     // Check the request method ( post or get );
     int req_meth_post_res = 0;
@@ -598,11 +598,11 @@ void receive_tcp_socket_parameter(char* req, int* req_count, char** param, int* 
 
     if (req_meth_post_res == 0) {
 
-        receive_tcp_socket_parameter_for_get(req, req_count, param, param_count);
+        receive_socket_parameter_for_get(req, req_count, param, param_count);
 
     } else {
 
-        receive_tcp_socket_parameter_for_post(req, req_count, param, param_count);
+        receive_socket_parameter_for_post(req, req_count, param, param_count);
     }
 }
 
@@ -996,7 +996,7 @@ void set_signals_for_all_parameters(void* p0, int* p1, void* p2) {
 }
 
 /**
- * Receives tcp socket signal.
+ * Receives socket signal.
  *
  * The http request must be parsed for parameters!
  * A cyboi-internal signal is created and added to the signal memory, for each parameter.
@@ -1006,12 +1006,12 @@ void set_signals_for_all_parameters(void* p0, int* p1, void* p2) {
  * @param p2 the buffer count
  * @param p3 the client socket
  */
-void receive_tcp_socket_signal(void* p0, void* p1, void* p2, void* p3) {
+void receive_socket_signal(void* p0, void* p1, void* p2, void* p3) {
 
-    log_message_debug("TEST: Receive tcp socket signal.");
+    log_message_debug("TEST: Receive socket signal.");
 
-fprintf(stderr, "TEST: receive tcp socket signal buffer: %s \n", (char*) p1);
-fprintf(stderr, "TEST: receive tcp socket signal buffer count: %i \n", *((int*) p2));
+fprintf(stderr, "TEST: receive socket signal buffer: %s \n", (char*) p1);
+fprintf(stderr, "TEST: receive socket signal buffer count: %i \n", *((int*) p2));
 
     // The knowledge memory.
     void** k = &NULL_POINTER;
@@ -1023,7 +1023,7 @@ fprintf(stderr, "TEST: receive tcp socket signal buffer count: %i \n", *((int*) 
     void** ss = &NULL_POINTER;
     // The signal memory mutex.
     pthread_mutex_t** smt = (pthread_mutex_t**) &NULL_POINTER;
-    // The tcp socket mutex.
+    // The socket mutex.
     pthread_mutex_t** tmt = (pthread_mutex_t**) &NULL_POINTER;
     // The interrupt request flag.
     sig_atomic_t** irq = (sig_atomic_t**) &NULL_POINTER;
@@ -1058,12 +1058,12 @@ fprintf(stderr, "TEST: receive tcp socket signal buffer count: %i \n", *((int*) 
     get(p0, (void*) SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &ss, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     // Get signal memory mutex.
     get(p0, (void*) SIGNAL_MEMORY_MUTEX_INTERNAL, (void*) &smt, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    // Get tcp socket mutex.
-    get(p0, (void*) TCP_SOCKET_MUTEX_INTERNAL, (void*) &tmt, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    // Get socket mutex.
+    get(p0, (void*) SOCKET_MUTEX_INTERNAL, (void*) &tmt, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     // Get interrupt request internal.
     get(p0, (void*) INTERRUPT_REQUEST_INTERNAL, (void*) &irq, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-    // Lock tcp socket mutex.
+    // Lock socket mutex.
     //
     // CAUTION! A mutex is needed here to ensure that the commands internal
     // and its associated count and size are retrieved at once and belong together.
@@ -1074,11 +1074,11 @@ fprintf(stderr, "TEST: receive tcp socket signal buffer count: %i \n", *((int*) 
     pthread_mutex_lock(*tmt);
 
     // Get user interface commands internal.
-    get(p0, (void*) TCP_SOCKET_THREAD_COMMANDS_INTERNAL, (void*) &c, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    get(p0, (void*) TCP_SOCKET_THREAD_COMMANDS_COUNT_INTERNAL, (void*) &cc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    get(p0, (void*) TCP_SOCKET_THREAD_COMMANDS_SIZE_INTERNAL, (void*) &cs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p0, (void*) SOCKET_THREAD_COMMANDS_INTERNAL, (void*) &c, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p0, (void*) SOCKET_THREAD_COMMANDS_COUNT_INTERNAL, (void*) &cc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p0, (void*) SOCKET_THREAD_COMMANDS_SIZE_INTERNAL, (void*) &cs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-    // Unlock tcp socket mutex.
+    // Unlock socket mutex.
     pthread_mutex_unlock(*tmt);
 
     // Get actual command belonging to the command name.
@@ -1115,16 +1115,16 @@ fprintf(stderr, "TEST: receive tcp socket signal buffer count: %i \n", *((int*) 
 }
 
 /**
- * Receives tcp socket messages (http requests) in an own thread.
+ * Receives socket messages (http requests) in an own thread.
  *
  * For web frontend testing, use:
  * http://localhost:3456/residenz.logic.send_name
  *
  * @param p0 the internal memory
  */
-void receive_tcp_socket_thread(void* p0) {
+void receive_socket_thread(void* p0) {
 
-    // The tcp server socket.
+    // The server socket.
     int** s = (int**) &NULL_POINTER;
     // The socket address.
     struct sockaddr_in** a = (struct sockaddr_in**) &NULL_POINTER;
@@ -1139,15 +1139,15 @@ void receive_tcp_socket_thread(void* p0) {
     // CAUTION! A message MUST NOT be longer!
     int** bs = (int**) &NULL_POINTER;
 
-    // Get tcp server socket.
-    get(p0, (void*) TCP_SOCKET_INTERNAL, (void*) &s, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    // Get server socket.
+    get(p0, (void*) SOCKET_INTERNAL, (void*) &s, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     // Get socket address.
-    get(p0, (void*) TCP_SOCKET_ADDRESS_INTERNAL, (void*) &a, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    get(p0, (void*) TCP_SOCKET_ADDRESS_SIZE_INTERNAL, (void*) &as, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p0, (void*) SOCKET_ADDRESS_INTERNAL, (void*) &a, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p0, (void*) SOCKET_ADDRESS_SIZE_INTERNAL, (void*) &as, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     // Get character buffer.
-    get(p0, (void*) TCP_SOCKET_THREAD_CHARACTER_BUFFER_INTERNAL, (void*) &b, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    get(p0, (void*) TCP_SOCKET_THREAD_CHARACTER_BUFFER_COUNT_INTERNAL, (void*) &bc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    get(p0, (void*) TCP_SOCKET_THREAD_CHARACTER_BUFFER_SIZE_INTERNAL, (void*) &bs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p0, (void*) SOCKET_THREAD_CHARACTER_BUFFER_INTERNAL, (void*) &b, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p0, (void*) SOCKET_THREAD_CHARACTER_BUFFER_COUNT_INTERNAL, (void*) &bc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p0, (void*) SOCKET_THREAD_CHARACTER_BUFFER_SIZE_INTERNAL, (void*) &bs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
     while (1) {
 
@@ -1174,17 +1174,17 @@ void receive_tcp_socket_thread(void* p0) {
         // multi-threaded programs, so one has to be prepared for this and
         // make sure that allocated resources (like memory, files descriptors,
         // semaphores or whatever) are freed even if the thread is canceled!
-fprintf(stderr, "TEST: receive tcp socket thread server socket: %i \n", **s);
+fprintf(stderr, "TEST: receive socket thread server socket: %i \n", **s);
 
-fprintf(stderr, "TEST: receive tcp socket thread address family: %i \n", (*((struct sockaddr_in*) *a)).sin_family);
-fprintf(stderr, "TEST: receive tcp socket thread address addr: %i \n", (*((struct sockaddr_in*) *a)).sin_addr.s_addr);
-fprintf(stderr, "TEST: receive tcp socket thread address port: %i \n", (*((struct sockaddr_in*) *a)).sin_port);
+fprintf(stderr, "TEST: receive socket thread address family: %i \n", (*((struct sockaddr_in*) *a)).sin_family);
+fprintf(stderr, "TEST: receive socket thread address addr: %i \n", (*((struct sockaddr_in*) *a)).sin_addr.s_addr);
+fprintf(stderr, "TEST: receive socket thread address port: %i \n", (*((struct sockaddr_in*) *a)).sin_port);
 
-fprintf(stderr, "TEST: receive tcp socket thread client socket pre: %i \n", cs);
+fprintf(stderr, "TEST: receive socket thread client socket pre: %i \n", cs);
 
         cs = accept(**s, (struct sockaddr*) *a, (socklen_t*) *as);
 
-fprintf(stderr, "TEST: receive tcp socket thread client socket post: %i \n", cs);
+fprintf(stderr, "TEST: receive socket thread client socket post: %i \n", cs);
 
         if (cs >= *NUMBER_0_INTEGER) {
 
@@ -1197,8 +1197,8 @@ fprintf(stderr, "TEST: receive tcp socket thread client socket post: %i \n", cs)
 
             if (**bc >= *NUMBER_0_INTEGER) {
 
-                // Receive tcp socket signal.
-                receive_tcp_socket_signal(p0, *b, (void*) *bc, (void*) &cs);
+                // Receive socket signal.
+                receive_socket_signal(p0, *b, (void*) *bc, (void*) &cs);
 
 /*??
                 // The url basename.
@@ -1207,7 +1207,7 @@ fprintf(stderr, "TEST: receive tcp socket thread client socket post: %i \n", cs)
                 // Create url basename.
                 allocate_array((void*) &url_basename, (void*) &url_basename_count, (void*) CHARACTER_ARRAY);
                 // Get url base name.
-                receive_tcp_socket_url(msg, &msg_count, &url_basename, &url_basename_count);
+                receive_socket_url(msg, &msg_count, &url_basename, &url_basename_count);
 
                 // The parameter.
                 char* param = NULL_POINTER;
@@ -1215,7 +1215,7 @@ fprintf(stderr, "TEST: receive tcp socket thread client socket post: %i \n", cs)
                 // Create paramater.
                 allocate_array((void*) &param, (void*) &param_count, (void*) CHARACTER_ARRAY);
                 // Get parameters.
-                receive_tcp_socket_parameter(msg, &msg_count, &param, &param_count);
+                receive_socket_parameter(msg, &msg_count, &param, &param_count);
 
                 // The firefox web browser makes a second request
                 // to determine the favicon.
@@ -1244,12 +1244,12 @@ fprintf(stderr, "TEST: receive tcp socket thread client socket post: %i \n", cs)
 
             } else {
 
-                log_message_debug("ERROR: Could not receive tcp socket thread. The receive operation failed.");
+                log_message_debug("ERROR: Could not receive socket thread. The receive operation failed.");
             }
 
         } else if (cs < *NUMBER_0_INTEGER) {
 
-            log_message_debug("ERROR: Could not receive tcp socket thread. The client socket is invalid.");
+            log_message_debug("ERROR: Could not receive socket thread. The client socket is invalid.");
         }
 
         // Reset client socket.
@@ -1271,115 +1271,131 @@ fprintf(stderr, "TEST: receive tcp socket thread client socket post: %i \n", cs)
 }
 
 /**
- * Receives web user interface (wui) messages via tcp socket.
+ * Receives messages via socket.
  *
  * @param p0 the internal memory
  * @param p1 the temporary user interface commands internal
  * @param p2 the temporary user interface commands count internal
  * @param p3 the temporary user interface commands size internal
+ * @param p4 the base internal
  */
-void receive_tcp_socket(void* p0, void* p1, void* p2, void* p3) {
+void receive_socket(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    log_message_debug("Receive tcp socket message.");
+    if (p4 != NULL_POINTER) {
 
-    // The tcp socket mutex.
-    pthread_mutex_t** mt = (pthread_mutex_t**) &NULL_POINTER;
+        int* base = (int*) p4;
 
-    // Get tcp socket mutex.
-    get(p0, (void*) TCP_SOCKET_MUTEX_INTERNAL, (void*) &mt, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        log_message_debug("Receive socket message.");
 
-    // Lock tcp socket mutex.
-    pthread_mutex_lock(*mt);
+        // The internal memory socket parameter index.
+        int i = *INVALID_VALUE;
+        // The socket mutex.
+        pthread_mutex_t** mt = (pthread_mutex_t**) &NULL_POINTER;
 
-    // Adding the following parameters to the internal memory is necessary,
-    // because only one parameter (the internal memory p0) can be forwarded
-    // to the thread procedure further below. Thus, p0 must contain any others.
+        // Get socket mutex.
+        i = *base + *SERVER_SOCKET_MUTEX_INTERNAL;
+        get(p0, (void*) &i, (void*) &mt, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-    // Set temporary user interface commands internal.
-    //
-    // CAUTION! A mutex is ACTUALLY not necessary, since the thread
-    // procedures only read, but NOT write internal memory values.
-    //
-    // However, a mutex IS NECESSARY anyway, since the commands
-    // internal and its count and size should be set together, at once.
-    // Otherwise, the thread procedures might read a new commands internal
-    // with the count or size of the old commands internal,
-    // which would lead to a segmentation fault and possibly system crash.
-    set(p0, (void*) TCP_SOCKET_THREAD_COMMANDS_INTERNAL, (void*) &p1, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    set(p0, (void*) TCP_SOCKET_THREAD_COMMANDS_COUNT_INTERNAL, (void*) &p2, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    set(p0, (void*) TCP_SOCKET_THREAD_COMMANDS_SIZE_INTERNAL, (void*) &p3, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        // Lock socket mutex.
+        pthread_mutex_lock(*mt);
 
-    // Unlock tcp socket mutex.
-    pthread_mutex_unlock(*mt);
+        // Adding the following parameters to the internal memory is necessary,
+        // because only one parameter (the internal memory p0) can be forwarded
+        // to the thread procedure further below. Thus, p0 must contain any others.
 
-    // Only create thread, if not existent.
-    if (*TCP_SOCKET_THREAD == *INVALID_VALUE) {
-
-        log_message_debug("Create new tcp socket receive service thread.");
-
-        // Create thread.
+        // Set temporary user interface commands internal.
         //
-        // CAUTION! Do NOT allocate any resources within the thread procedure!
-        // The reason is that this main process thread gets forked when executing
-        // external programs. A "fork" duplicates ALL resources of the parent process,
-        // including ALL resources of any threads running within the parent process.
-        // However, since the created child process does not have those threads running,
-        // their duplicated resources will never be deallocated, which eats up memory.
-        // See source code file: applicator/run/run_execute.c
+        // CAUTION! A mutex is ACTUALLY not necessary, since the thread
+        // procedures only read, but NOT write internal memory values.
         //
-        // Any dynamically allocated resources needed within the thread have to be:
-        // - allocated at service startup
-        // - added to the internal memory
-        // - handed over to the thread procedure HERE
-        // - deallocated at service shutdown
-        pthread_create(TCP_SOCKET_THREAD, NULL_POINTER, (void*) &receive_tcp_socket_thread, p0);
+        // However, a mutex IS NECESSARY anyway, since the commands
+        // internal and its count and size should be set together, at once.
+        // Otherwise, the thread procedures might read a new commands internal
+        // with the count or size of the old commands internal,
+        // which would lead to a segmentation fault and possibly system crash.
+        i = *base + *SERVER_SOCKET_THREAD_COMMANDS_INTERNAL;
+        set(p0, (void*) SERVER_SOCKET_THREAD_COMMANDS_INTERNAL, (void*) &p1, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        i = *base + *SERVER_SOCKET_THREAD_COMMANDS_COUNT_INTERNAL;
+        set(p0, (void*) SERVER_SOCKET_THREAD_COMMANDS_COUNT_INTERNAL, (void*) &p2, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        i = *base + *SERVER_SOCKET_THREAD_COMMANDS_SIZE_INTERNAL;
+        set(p0, (void*) SERVER_SOCKET_THREAD_COMMANDS_SIZE_INTERNAL, (void*) &p3, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-/*?? Following is a TEST -- delete later!
+        // Unlock socket mutex.
+        pthread_mutex_unlock(*mt);
 
-        sleep(2);
+        // Only create thread, if not existent.
+        if (*SOCKET_THREAD == *INVALID_VALUE) {
 
-        printf("Bitte geben Sie ein Wort ein! ");
-        char eingabe[sizeof(*stdin)];
-        scanf("%s", eingabe);
+            log_message_debug("Create new socket receive service thread.");
 
-        int socketnummer=socket(AF_INET,SOCK_STREAM,0);
-        fprintf(stderr, "TEST: socketnummer: %i \n", socketnummer);
+            // Create thread.
+            //
+            // CAUTION! Do NOT allocate any resources within the thread procedure!
+            // The reason is that this main process thread gets forked when executing
+            // external programs. A "fork" duplicates ALL resources of the parent process,
+            // including ALL resources of any threads running within the parent process.
+            // However, since the created child process does not have those threads running,
+            // their duplicated resources will never be deallocated, which eats up memory.
+            // See source code file: applicator/run/run_execute.c
+            //
+            // Any dynamically allocated resources needed within the thread have to be:
+            // - allocated at service startup
+            // - added to the internal memory
+            // - handed over to the thread procedure HERE
+            // - deallocated at service shutdown
+            pthread_create(SOCKET_THREAD, NULL_POINTER, (void*) &receive_socket_thread, p0);
 
-        struct sockaddr_in adressstruktur;
-        adressstruktur.sin_family=AF_INET;
-        adressstruktur.sin_addr.s_addr=inet_addr("127.0.0.1");
-        adressstruktur.sin_port=3456; //?? 9735;
-        int laenge=sizeof(adressstruktur);
-        int result=connect(socketnummer, (struct sockaddr *) &adressstruktur, laenge);
-
-        if(result== -1) {
-            perror("huch der client hat einen Fehler");
-            exit(1);
-        } else{
-            printf("Verbindung zum Server hergestellt\n");
-        }
-
-        int i=0;
-
-        while (i<10) {
+    /*?? Following is a TEST -- delete later!
 
             sleep(2);
-            write(socketnummer, &eingabe, 5);
-            printf("sende: %s\n", eingabe);
-            read(socketnummer, &eingabe, 5);
-            printf("empfange: %s\n", eingabe);
-            i++;
+
+            printf("Bitte geben Sie ein Wort ein! ");
+            char eingabe[sizeof(*stdin)];
+            scanf("%s", eingabe);
+
+            int socketnummer=socket(AF_INET,SOCK_STREAM,0);
+            fprintf(stderr, "TEST: socketnummer: %i \n", socketnummer);
+
+            struct sockaddr_in adressstruktur;
+            adressstruktur.sin_family=AF_INET;
+            adressstruktur.sin_addr.s_addr=inet_addr("127.0.0.1");
+            adressstruktur.sin_port=3456; //?? 9735;
+            int laenge=sizeof(adressstruktur);
+            int result=connect(socketnummer, (struct sockaddr *) &adressstruktur, laenge);
+
+            if(result== -1) {
+                perror("huch der client hat einen Fehler");
+                exit(1);
+            } else{
+                printf("Verbindung zum Server hergestellt\n");
+            }
+
+            int i=0;
+
+            while (i<10) {
+
+                sleep(2);
+                write(socketnummer, &eingabe, 5);
+                printf("sende: %s\n", eingabe);
+                read(socketnummer, &eingabe, 5);
+                printf("empfange: %s\n", eingabe);
+                i++;
+            }
+
+            close(socketnummer);
+
+            printf("Done: %i\n", i);
+    */
         }
 
-        close(socketnummer);
+    } else {
 
-        printf("Done: %i\n", i);
-*/
+        log_message_debug("ERROR: Could not receive socket. The base internal is null.");
     }
 }
 
 /* LINUX_OPERATING_SYSTEM */
 #endif
 
-/* RECEIVE_TCP_SOCKET_SOURCE */
+/* RECEIVE_SOCKET_SOURCE */
 #endif

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2006-08-19 02:04:48 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2006-12-28 01:10:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -84,44 +84,6 @@ void interrupt_service_system_signal_handler(int p0) {
         }
     }
 
-    if (t == *UNIX_SOCKET_THREAD) {
-
-//??    fprintf(stdout, "TEST signal handler unix socket %i\n", p0);
-
-        if (*UNIX_SOCKET_THREAD_INTERRUPT != *NUMBER_0_INTEGER) {
-
-//??    fprintf(stdout, "TEST signal handler unix socket irq %i\n", p0);
-
-            pthread_exit(NULL_POINTER);
-
-            // CAUTION! The thread CANNOT be reset here with:
-            // *UNIX_SOCKET_THREAD = *INVALID_VALUE;
-            // because this line would NOT be reached anymore,
-            // after "pthread_exit" has been called above!
-            // Therefore, do the reset in the corresponding
-            // "interrupt" procedure where "kill" was called!
-        }
-    }
-
-    if (t == *TCP_SOCKET_THREAD) {
-
-//??    fprintf(stdout, "TEST signal handler tcp socket %i\n", p0);
-
-        if (*TCP_SOCKET_THREAD_INTERRUPT != *NUMBER_0_INTEGER) {
-
-//??    fprintf(stdout, "TEST signal handler tcp socket irq %i\n", p0);
-
-            pthread_exit(NULL_POINTER);
-
-            // CAUTION! The thread CANNOT be reset here with:
-            // *TCP_SOCKET_THREAD = *INVALID_VALUE;
-            // because this line would NOT be reached anymore,
-            // after "pthread_exit" has been called above!
-            // Therefore, do the reset in the corresponding
-            // "interrupt" procedure where "kill" was called!
-        }
-    }
-
     if (t == *X_WINDOW_SYSTEM_THREAD) {
 
 //??    fprintf(stdout, "TEST signal handler x window system %i\n", p0);
@@ -134,6 +96,25 @@ void interrupt_service_system_signal_handler(int p0) {
 
             // CAUTION! The thread CANNOT be reset here with:
             // *X_WINDOW_SYSTEM_THREAD = *INVALID_VALUE;
+            // because this line would NOT be reached anymore,
+            // after "pthread_exit" has been called above!
+            // Therefore, do the reset in the corresponding
+            // "interrupt" procedure where "kill" was called!
+        }
+    }
+
+    if (t == *WWW_SERVICE_THREAD) {
+
+//??    fprintf(stdout, "TEST signal handler www service %i\n", p0);
+
+        if (*WWW_SERVICE_THREAD_INTERRUPT != *NUMBER_0_INTEGER) {
+
+//??    fprintf(stdout, "TEST signal handler www service irq %i\n", p0);
+
+            pthread_exit(NULL_POINTER);
+
+            // CAUTION! The thread CANNOT be reset here with:
+            // *WWW_SERVICE_THREAD = *INVALID_VALUE;
             // because this line would NOT be reached anymore,
             // after "pthread_exit" has been called above!
             // Therefore, do the reset in the corresponding

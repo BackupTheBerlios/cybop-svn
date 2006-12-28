@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.21 $ $Date: 2006-06-27 21:07:27 $ $Author: christian $
+ * @version $Revision: 1.22 $ $Date: 2006-12-28 01:10:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -45,14 +45,14 @@
  * @param p4 the signal memory
  * @param p5 the signal memory count
  * @param p6 the signal memory size
- * @param p7 the signal memory mutex
- * @param p8 the interrupt request flag
+ * @param p7 the interrupt request flag
+ * @param p8 the signal memory mutex
  */
 void check(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8) {
 
-    if (p8 != NULL_POINTER) {
+    if (p7 != NULL_POINTER) {
 
-        int* irq = (int*) p8;
+        int* irq = (int*) p7;
 
         log_message_debug("\n\n");
         log_message((void*) INFO_LOG_LEVEL, (void*) CHECK_FOR_SIGNALS_MESSAGE, (void*) CHECK_FOR_SIGNALS_MESSAGE_COUNT);
@@ -115,13 +115,13 @@ void check(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
 //??    test_knowledge_memory(p1, p2, 5);
 
                 // Lock signal memory mutex.
-                pthread_mutex_lock((pthread_mutex_t*) p7);
+                pthread_mutex_lock((pthread_mutex_t*) p8);
 
                 // Remove signal from signal memory.
                 remove_signal(p4, p5, p6, (void*) &i);
 
                 // Unlock signal memory mutex.
-                pthread_mutex_unlock((pthread_mutex_t*) p7);
+                pthread_mutex_unlock((pthread_mutex_t*) p8);
 
                 //?? CAUTION! TODO? UNCERTAIN!
                 //?? The handle procedure possibly needs to stand
@@ -260,7 +260,7 @@ void check(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
                 }
 
                 // Lock signal memory mutex.
-                pthread_mutex_lock((pthread_mutex_t*) p7);
+                pthread_mutex_lock((pthread_mutex_t*) p8);
 
                 // Reset interrupt request flag.
                 // The interrupt is reset to zero here because its purpose of
@@ -271,7 +271,7 @@ void check(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
                 *irq = *NUMBER_0_INTEGER;
 
                 // Unlock signal memory mutex.
-                pthread_mutex_unlock((pthread_mutex_t*) p7);
+                pthread_mutex_unlock((pthread_mutex_t*) p8);
             }
         }
 

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.24 $ $Date: 2006-06-20 22:35:09 $ $Author: christian $
+ * @version $Revision: 1.25 $ $Date: 2006-12-28 01:10:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -61,8 +61,8 @@
  * @param p4 the signal memory
  * @param p5 the signal memory count
  * @param p6 the signal memory size
- * @param p7 the signal memory blocked flag
- * @param p8 the interrupt request flag
+ * @param p7 the interrupt request flag
+ * @param p8 the signal memory mutex
  * @param p9 the shutdown flag
  * @param p10 the signal (operation)
  * @param p11 the signal count

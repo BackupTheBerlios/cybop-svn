@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2006-12-25 12:41:49 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2006-12-28 01:10:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -61,14 +61,13 @@
  * @param p5 the signal memory count (Hand over as reference!)
  * @param p6 the signal memory size (Hand over as reference!)
  * @param p7 the signal memory mutex (Hand over as reference!)
- * @param p8 the linux console mutex (Hand over as reference!)
- * @param p9 the unix socket mutex (Hand over as reference!)
- * @param p10 the tcp socket mutex (Hand over as reference!)
- * @param p11 the x window system mutex (Hand over as reference!)
- * @param p12 the signal memory interrupt request flag (Hand over as reference!)
+ * @param p8 the signal memory interrupt request flag (Hand over as reference!)
+ * @param p9 the linux console mutex (Hand over as reference!)
+ * @param p10 the x window system mutex (Hand over as reference!)
+ * @param p11 the www service mutex (Hand over as reference!)
  */
 void startup_internal_memory(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
-    void* p7, void* p8, void* p9, void* p10, void* p11, void* p12) {
+    void* p7, void* p8, void* p9, void* p10, void* p11) {
 
     log_message_debug("\n\n");
     log_message_debug("Information: Startup internal memory.");
@@ -113,16 +112,14 @@ void startup_internal_memory(void* p0, void* p1, void* p2, void* p3, void* p4, v
 
     // Set signal memory mutex.
     set(p0, (void*) SIGNAL_MEMORY_MUTEX_INTERNAL, p7, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    // Set linux console mutex.
-    set(p0, (void*) LINUX_CONSOLE_MUTEX_INTERNAL, p8, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    // Set unix socket mutex.
-    set(p0, (void*) UNIX_SOCKET_MUTEX_INTERNAL, p9, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    // Set tcp socket mutex.
-    set(p0, (void*) TCP_SOCKET_MUTEX_INTERNAL, p10, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    // Set x window system mutex.
-    set(p0, (void*) X_WINDOW_SYSTEM_MUTEX_INTERNAL, p11, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     // Set signal memory interrupt request flag.
-    set(p0, (void*) INTERRUPT_REQUEST_INTERNAL, p12, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    set(p0, (void*) INTERRUPT_REQUEST_INTERNAL, p8, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    // Set linux console mutex.
+    set(p0, (void*) LINUX_CONSOLE_MUTEX_INTERNAL, p9, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    // Set x window system mutex.
+    set(p0, (void*) X_WINDOW_SYSTEM_MUTEX_INTERNAL, p10, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    // Set www service mutex.
+    set(p0, (void*) WWW_SERVICE_MUTEX_INTERNAL, p11, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 }
 
 /* INTERNAL_MEMORY_MANAGER_SOURCE */

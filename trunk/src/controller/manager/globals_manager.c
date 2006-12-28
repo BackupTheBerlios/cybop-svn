@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.15 $ $Date: 2006-09-16 13:39:34 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2006-12-28 01:10:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -106,28 +106,22 @@ void startup_globals() {
     // Allocate and initialise linux console thread.
     LINUX_CONSOLE_THREAD = (pthread_t*) malloc(sizeof(pthread_t));
     *LINUX_CONSOLE_THREAD = *INVALID_VALUE;
-    // Allocate unix socket thread.
-    UNIX_SOCKET_THREAD = (pthread_t*) malloc(sizeof(pthread_t));
-    *UNIX_SOCKET_THREAD = *INVALID_VALUE;
-    // Allocate tcp socket thread.
-    TCP_SOCKET_THREAD = (pthread_t*) malloc(sizeof(pthread_t));
-    *TCP_SOCKET_THREAD = *INVALID_VALUE;
     // Allocate x window system thread.
     X_WINDOW_SYSTEM_THREAD = (pthread_t*) malloc(sizeof(pthread_t));
     *X_WINDOW_SYSTEM_THREAD = *INVALID_VALUE;
+    // Allocate www service thread.
+    WWW_SERVICE_THREAD = (pthread_t*) malloc(sizeof(pthread_t));
+    *WWW_SERVICE_THREAD = *INVALID_VALUE;
 
     // Allocate and initialise linux console thread interrupt flag.
     LINUX_CONSOLE_THREAD_INTERRUPT = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
     *LINUX_CONSOLE_THREAD_INTERRUPT = *NUMBER_0_INTEGER;
-    // Allocate and initialise unix socket thread interrupt flag.
-    UNIX_SOCKET_THREAD_INTERRUPT = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
-    *UNIX_SOCKET_THREAD_INTERRUPT = *NUMBER_0_INTEGER;
-    // Allocate and initialise tcp socket thread interrupt flag.
-    TCP_SOCKET_THREAD_INTERRUPT = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
-    *TCP_SOCKET_THREAD_INTERRUPT = *NUMBER_0_INTEGER;
     // Allocate and initialise x window system thread interrupt flag.
     X_WINDOW_SYSTEM_THREAD_INTERRUPT = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
     *X_WINDOW_SYSTEM_THREAD_INTERRUPT = *NUMBER_0_INTEGER;
+    // Allocate and initialise www service thread interrupt flag.
+    WWW_SERVICE_THREAD_INTERRUPT = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
+    *WWW_SERVICE_THREAD_INTERRUPT = *NUMBER_0_INTEGER;
 
     //
     // Logging.
@@ -223,21 +217,17 @@ void shutdown_globals() {
 
     // Free linux console thread interrupt flag.
     free(LINUX_CONSOLE_THREAD_INTERRUPT);
-    // Free unix socket thread interrupt flag.
-    free(UNIX_SOCKET_THREAD_INTERRUPT);
-    // Free tcp socket thread interrupt flag.
-    free(TCP_SOCKET_THREAD_INTERRUPT);
     // Free x window system thread interrupt flag.
     free(X_WINDOW_SYSTEM_THREAD_INTERRUPT);
+    // Free www service thread interrupt flag.
+    free(WWW_SERVICE_THREAD_INTERRUPT);
 
     // Free linux console thread.
     free(LINUX_CONSOLE_THREAD);
-    // Free unix socket thread.
-    free(UNIX_SOCKET_THREAD);
-    // Free tcp socket thread.
-    free(TCP_SOCKET_THREAD);
     // Free x window system thread.
     free(X_WINDOW_SYSTEM_THREAD);
+    // Free www service thread.
+    free(WWW_SERVICE_THREAD);
 
     //
     // Primitive type sizes.

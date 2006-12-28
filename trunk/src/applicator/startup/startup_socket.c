@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2006-12-27 01:19:08 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2006-12-28 01:10:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -368,6 +368,8 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
         int* idc = NULL_POINTER;
         int* ids = NULL_POINTER;
 */
+        // The internal index.
+        int i = *INVALID_VALUE;
 
         // Get socket- and address namespace.
         startup_socket_get_namespace((void*) &sn, (void*) &an, p1, p2);

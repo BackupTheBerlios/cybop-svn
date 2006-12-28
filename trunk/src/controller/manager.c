@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.26 $ $Date: 2006-12-25 12:41:49 $ $Author: christian $
+ * @version $Revision: 1.27 $ $Date: 2006-12-28 01:10:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -94,17 +94,6 @@ void manage(void* p0, void* p1) {
     int* sc = NULL_POINTER;
     int* ss = NULL_POINTER;
 
-    // The signal memory mutex.
-    pthread_mutex_t* smt = NULL_POINTER;
-    // The linux console mutex.
-    pthread_mutex_t* lmt = NULL_POINTER;
-    // The unix socket mutex.
-    pthread_mutex_t* umt = NULL_POINTER;
-    // The tcp socket mutex.
-    pthread_mutex_t* tmt = NULL_POINTER;
-    // The x window system mutex.
-    pthread_mutex_t* xmt = NULL_POINTER;
-
     //
     // The signal memory interrupt request flag.
     //
@@ -132,24 +121,31 @@ void manage(void* p0, void* p1) {
     //
     volatile sig_atomic_t* irq = NULL_POINTER;
 
+    // The signal memory mutex.
+    pthread_mutex_t* signal_memory_mutex = NULL_POINTER;
+    // The linux console mutex.
+    pthread_mutex_t* linux_console_mutex = NULL_POINTER;
+    // The x window system mutex.
+    pthread_mutex_t* x_window_system_mutex = NULL_POINTER;
+    // The www service mutex.
+    pthread_mutex_t* www_service_mutex = NULL_POINTER;
+
     // Allocate knowledge memory count, size.
     allocate((void*) &kc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
     allocate((void*) &ks, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
     // Allocate signal memory count, size.
     allocate((void*) &sc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
     allocate((void*) &ss, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    // Allocate signal memory mutex.
-    smt = (pthread_mutex_t*) malloc(sizeof(pthread_mutex_t));
-    // Allocate linux console mutex.
-    lmt = (pthread_mutex_t*) malloc(sizeof(pthread_mutex_t));
-    // Allocate unix socket mutex.
-    umt = (pthread_mutex_t*) malloc(sizeof(pthread_mutex_t));
-    // Allocate tcp socket mutex.
-    tmt = (pthread_mutex_t*) malloc(sizeof(pthread_mutex_t));
-    // Allocate x window system mutex.
-    xmt = (pthread_mutex_t*) malloc(sizeof(pthread_mutex_t));
     // Allocate signal memory interrupt request flag.
     irq = (volatile sig_atomic_t*) malloc(sizeof(volatile sig_atomic_t));
+    // Allocate signal memory mutex.
+    signal_memory_mutex = (pthread_mutex_t*) malloc(sizeof(pthread_mutex_t));
+    // Allocate linux console mutex.
+    linux_console_mutex = (pthread_mutex_t*) malloc(sizeof(pthread_mutex_t));
+    // Allocate x window system mutex.
+    x_window_system_mutex = (pthread_mutex_t*) malloc(sizeof(pthread_mutex_t));
+    // Allocate www service mutex.
+    www_service_mutex = (pthread_mutex_t*) malloc(sizeof(pthread_mutex_t));
 
     // Initialise knowledge memory count, size.
     *kc = *NUMBER_0_INTEGER;
@@ -157,18 +153,16 @@ void manage(void* p0, void* p1) {
     // Initialise signal memory count, size.
     *sc = *NUMBER_0_INTEGER;
     *ss = *NUMBER_0_INTEGER;
-    // Initialise signal memory mutex.
-    pthread_mutex_init(smt, NULL_POINTER);
-    // Initialise linux console mutex.
-    pthread_mutex_init(lmt, NULL_POINTER);
-    // Initialise unix socket mutex.
-    pthread_mutex_init(umt, NULL_POINTER);
-    // Initialise tcp socket mutex.
-    pthread_mutex_init(tmt, NULL_POINTER);
-    // Initialise x window system mutex.
-    pthread_mutex_init(xmt, NULL_POINTER);
     // Initialise signal memory interrupt request flag.
     *irq = *NUMBER_0_INTEGER;
+    // Initialise signal memory mutex.
+    pthread_mutex_init(signal_memory_mutex, NULL_POINTER);
+    // Initialise linux console mutex.
+    pthread_mutex_init(linux_console_mutex, NULL_POINTER);
+    // Initialise x window system mutex.
+    pthread_mutex_init(x_window_system_mutex, NULL_POINTER);
+    // Initialise www service mutex.
+    pthread_mutex_init(www_service_mutex, NULL_POINTER);
 
     // Allocate internal memory.
     allocate((void*) &i, (void*) is, (void*) INTERNAL_MEMORY_ABSTRACTION, (void*) INTERNAL_MEMORY_ABSTRACTION_COUNT);
@@ -264,7 +258,7 @@ void manage(void* p0, void* p1) {
     // can be entered, checking for signals (events/ interrupts)
     // which are stored/ found in the signal memory.
     // The loop is left as soon as its shutdown flag is set.
-    check(i, k, (void*) kc, (void*) ks, s, (void*) sc, (void*) ss, (void*) smt, (void*) irq);
+    check(i, k, (void*) kc, (void*) ks, s, (void*) sc, (void*) ss, (void*) irq, (void*) signal_memory_mutex);
 
     // The following calls of "shutdown" procedures are just to be sure,
     // in case a cybol application developer has forgotten to call the
@@ -273,12 +267,10 @@ void manage(void* p0, void* p1) {
 
     // Shutdown linux console.
     shutdown_linux_console(i, k, (void*) kc, (void*) ks);
-    // Shutdown unix socket.
-    shutdown_unix_socket(i, k, (void*) kc, (void*) ks);
-    // Shutdown tcp socket.
-    shutdown_tcp_socket(i, k, (void*) kc, (void*) ks);
     // Shutdown x window system.
     shutdown_x_window_system(i, k, (void*) kc, (void*) ks);
+    // Shutdown www service.
+    shutdown_www_service(i, k, (void*) kc, (void*) ks);
 
     // CAUTION! Do NOT remove any internal memory internals!
     // The internals have a fixed position within the internal memory.
@@ -287,28 +279,25 @@ void manage(void* p0, void* p1) {
     // at their original index anymore.
 
     // Destroy signal memory mutex.
-    pthread_mutex_destroy(smt);
+    pthread_mutex_destroy(signal_memory_mutex);
     // Destroy linux console mutex.
-    pthread_mutex_destroy(lmt);
-    // Destroy unix socket mutex.
-    pthread_mutex_destroy(umt);
-    // Destroy tcp socket mutex.
-    pthread_mutex_destroy(tmt);
+    pthread_mutex_destroy(linux_console_mutex);
     // Destroy x window system mutex.
-    pthread_mutex_destroy(xmt);
+    pthread_mutex_destroy(x_window_system_mutex);
+    // Destroy www service mutex.
+    pthread_mutex_destroy(www_service_mutex);
 
     // Deallocate signal memory interrupt request flag.
     free((void*) irq);
     // Deallocate signal memory mutex.
-    free((void*) smt);
+    free((void*) signal_memory_mutex);
     // Deallocate linux console mutex.
-    free((void*) lmt);
-    // Deallocate unix socket mutex.
-    free((void*) umt);
-    // Deallocate tcp socket mutex.
-    free((void*) tmt);
+    free((void*) linux_console_mutex);
     // Deallocate x window system mutex.
-    free((void*) xmt);
+    free((void*) x_window_system_mutex);
+    // Deallocate www service mutex.
+    free((void*) www_service_mutex);
+
     // Deallocate signal memory.
     deallocate((void*) &s, (void*) ss, (void*) SIGNAL_MEMORY_ABSTRACTION, (void*) SIGNAL_MEMORY_ABSTRACTION_COUNT);
     deallocate((void*) &sc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);

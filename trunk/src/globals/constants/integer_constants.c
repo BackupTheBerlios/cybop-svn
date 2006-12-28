@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2006-12-27 09:50:44 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2006-12-28 01:10:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -2242,6 +2242,50 @@ static int* NUMBER_499_INTEGER = NUMBER_499_INTEGER_ARRAY;
 /** The number 500 integer. */
 static int NUMBER_500_INTEGER_ARRAY[] = {500};
 static int* NUMBER_500_INTEGER = NUMBER_500_INTEGER_ARRAY;
+
+//
+// Numbers 600 - 609.
+//
+
+/** The number 600 integer. */
+static int NUMBER_600_INTEGER_ARRAY[] = {600};
+static int* NUMBER_600_INTEGER = NUMBER_600_INTEGER_ARRAY;
+
+//
+// Numbers 700 - 709.
+//
+
+/** The number 700 integer. */
+static int NUMBER_700_INTEGER_ARRAY[] = {700};
+static int* NUMBER_700_INTEGER = NUMBER_700_INTEGER_ARRAY;
+
+//
+// Numbers 800 - 809.
+//
+
+/** The number 800 integer. */
+static int NUMBER_800_INTEGER_ARRAY[] = {800};
+static int* NUMBER_800_INTEGER = NUMBER_800_INTEGER_ARRAY;
+
+//
+// Numbers 900 - 909.
+//
+
+/** The number 900 integer. */
+static int NUMBER_900_INTEGER_ARRAY[] = {900};
+static int* NUMBER_900_INTEGER = NUMBER_900_INTEGER_ARRAY;
+
+//
+// Large numbers.
+//
+
+/** The number 1000 integer. */
+static int NUMBER_1000_INTEGER_ARRAY[] = {1000};
+static int* NUMBER_1000_INTEGER = NUMBER_1000_INTEGER_ARRAY;
+
+/** The number 10000 integer. */
+static int NUMBER_10000_INTEGER_ARRAY[] = {10000};
+static int* NUMBER_10000_INTEGER = NUMBER_10000_INTEGER_ARRAY;
 
 /* INTEGER_CONSTANTS_SOURCE */
 #endif

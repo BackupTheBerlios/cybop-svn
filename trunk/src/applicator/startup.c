@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.18 $ $Date: 2006-12-27 09:50:44 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2006-12-28 01:10:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description This module starts up a service.
  */
@@ -29,8 +29,7 @@
 #define STARTUP_SOURCE
 
 #include "../applicator/startup/startup_linux_console.c"
-#include "../applicator/startup/startup_tcp_socket.c"
-#include "../applicator/startup/startup_unix_socket.c"
+#include "../applicator/startup/startup_socket.c"
 #include "../applicator/startup/startup_x_window_system.c"
 #include "../globals/constants/abstraction_constants.c"
 #include "../globals/constants/channel_constants.c"
@@ -147,8 +146,6 @@ void startup_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5)
     int r = 0;
     // The server socket internal.
     int** s = (int**) &NULL_POINTER;
-    // The server socket base internal.
-    int b = *INVALID_VALUE;
 
     if (r == 0) {
 
@@ -181,11 +178,8 @@ void startup_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5)
 
             if (*s == NULL_POINTER) {
 
-                // Determine base number to store the server socket parameters at.
-                b = *SERVER_SOCKET_BASE_INTERNAL + (*WWW_PORT * (*SERVER_SOCKET_COUNT_INTERNAL));
-
                 // Startup server socket if it does not already exist.
-                startup_socket(p5, (void*) nm, (void*) nmc, (void*) stm, (void*) stmc, (void*) am, (void*) amc, (void*) WWW_PORT, (void*) &b, p2, p3, p4);
+                startup_socket(p5, (void*) nm, (void*) nmc, (void*) stm, (void*) stmc, (void*) am, (void*) amc, (void*) WWW_PORT, (void*) WWW_BASE_INTERNAL, p2, p3, p4);
 
             } else {
 
@@ -194,15 +188,28 @@ void startup_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5)
         }
     }
 
+/*??
     if (r == 0) {
 
         compare_arrays((void*) *sm, (void*) *smc, (void*) UNIX_SOCKET_MODEL, (void*) UNIX_SOCKET_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-            startup_unix_socket(p5, p2, p3, p4, *spa, *spac, *spm, *spmc);
+            // Get server socket internal.
+            get(p5, (void*) WWW_SERVICE_SOCKET_INTERNAL, (void*) &s, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
+            if (*s == NULL_POINTER) {
+
+                // Startup server socket if it does not already exist.
+                startup_socket(p5, (void*) nm, (void*) nmc, (void*) stm, (void*) stmc, (void*) am, (void*) amc, (void*) WWW_PORT, (void*) SOME_LOCAL_UNIX_SERVICE_BASE_INTERNAL, p2, p3, p4);
+
+            } else {
+
+                log_message_debug("Warning: Could not start up service. The www service is already running.");
+            }
         }
     }
+*/
 }
 
 /* STARTUP_SOURCE */

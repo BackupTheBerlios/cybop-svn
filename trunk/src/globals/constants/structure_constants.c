@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.28 $ $Date: 2006-12-27 09:50:44 $ $Author: christian $
+ * @version $Revision: 1.29 $ $Date: 2006-12-28 01:10:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -285,17 +285,23 @@ static int* X_WINDOW_SYSTEM_THREAD_COMMANDS_COUNT_INTERNAL = NUMBER_294_INTEGER_
 static int* X_WINDOW_SYSTEM_THREAD_COMMANDS_SIZE_INTERNAL = NUMBER_295_INTEGER_ARRAY;
 
 /**
- * The server socket.
- *
- * A space is reserved from 1000 to 10,000.
- * The https port, for example, is 443.
- * Multiplied with the SERVER_SOCKET_COUNT_INTERNAL that is about 10,000.
- *
- * The port number of the corresponding service is used to find a base.
+ * The server socket base numbers.
+ * There is one for each service.
+ * The difference between base numbers depends on the amount of index numbers.
+ * See further below!
  */
-static int* SERVER_SOCKET_BASE_INTERNAL = 1000;
-static int* SERVER_SOCKET_COUNT_INTERNAL = NUMBER_20_INTEGER_ARRAY;
+static int* TCP_MUX_BASE_INTERNAL = NUMBER_500_INTEGER_ARRAY;
+static int* FTP_DATA_BASE_INTERNAL = NUMBER_520_INTEGER_ARRAY;
+static int* FTP_BASE_INTERNAL = NUMBER_540_INTEGER_ARRAY;
+static int* FSP_BASE_INTERNAL = NUMBER_560_INTEGER_ARRAY;
+static int* SSH_BASE_INTERNAL = NUMBER_580_INTEGER_ARRAY;
+static int* TELNET_BASE_INTERNAL = NUMBER_600_INTEGER_ARRAY;
+static int* SMTP_BASE_INTERNAL = NUMBER_620_INTEGER_ARRAY;
+static int* WWW_BASE_INTERNAL = NUMBER_640_INTEGER_ARRAY;
+static int* POP3_BASE_INTERNAL = NUMBER_660_INTEGER_ARRAY;
+static int* HTTPS_BASE_INTERNAL = NUMBER_680_INTEGER_ARRAY;
 
+/** The server socket index numbers, to be added on top of a base number. */
 static int* SERVER_SOCKET_INTERNAL = NUMBER_1_INTEGER_ARRAY;
 static int* SERVER_SOCKET_ADDRESS_INTERNAL = NUMBER_2_INTEGER_ARRAY;
 static int* SERVER_SOCKET_ADDRESS_SIZE_INTERNAL = NUMBER_3_INTEGER_ARRAY;
