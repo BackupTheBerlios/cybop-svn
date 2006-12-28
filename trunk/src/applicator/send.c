@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.35 $ $Date: 2006-12-27 09:50:44 $ $Author: christian $
+ * @version $Revision: 1.36 $ $Date: 2006-12-28 16:04:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -31,8 +31,7 @@
 #include <signal.h>
 #include "../applicator/send/send_latex.c"
 #include "../applicator/send/send_linux_console.c"
-#include "../applicator/send/send_tcp_socket.c"
-#include "../applicator/send/send_unix_socket.c"
+#include "../applicator/send/send_socket.c"
 #include "../applicator/send/send_x_window_system.c"
 #include "../globals/constants/abstraction_constants.c"
 #include "../globals/constants/channel_constants.c"
@@ -246,31 +245,21 @@ void send_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
 
     if (r == 0) {
 
-        compare_arrays((void*) *cm, (void*) *cmc, (void*) UNIX_SOCKET_MODEL, (void*) UNIX_SOCKET_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != 0) {
-
-            send_unix_socket(p2, *mm, *mmc, p3, p4);
-        }
-    }
-
-    if (r == 0) {
-
-        compare_arrays((void*) *cm, (void*) *cmc, (void*) TCP_SOCKET_MODEL, (void*) TCP_SOCKET_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != 0) {
-
-            send_tcp_socket(p2, *ra, *rac, *rm, *rmc, *rd, *rdc, *ma, *mac, *mm, *mmc, *md, *mdc, p3, p4);
-        }
-    }
-
-    if (r == 0) {
-
         compare_arrays((void*) *cm, (void*) *cmc, (void*) X_WINDOW_SYSTEM_MODEL, (void*) X_WINDOW_SYSTEM_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
             send_x_window_system(p2, *mm, *mmc, p3, p4);
+        }
+    }
+
+    if (r == 0) {
+
+        compare_arrays((void*) *cm, (void*) *cmc, (void*) WWW_SERVICE_MODEL, (void*) WWW_SERVICE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != 0) {
+
+            send_socket(p2, *ra, *rac, *rm, *rmc, *rd, *rdc, *ma, *mac, *mm, *mmc, *md, *mdc, (void*) WWW_BASE_INTERNAL, p3, p4);
         }
     }
 

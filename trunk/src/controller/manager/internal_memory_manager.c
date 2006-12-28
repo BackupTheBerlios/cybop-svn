@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2006-12-28 01:10:48 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2006-12-28 16:04:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,6 +30,7 @@
 #include "../../globals/constants/abstraction_constants.c"
 #include "../../globals/constants/log_constants.c"
 #include "../../globals/constants/structure_constants.c"
+#include "../../globals/constants/system_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../globals/variables/variables.c"
 #include "../../memoriser/accessor.c"
@@ -60,8 +61,8 @@
  * @param p4 the signal memory (Hand over as reference!)
  * @param p5 the signal memory count (Hand over as reference!)
  * @param p6 the signal memory size (Hand over as reference!)
- * @param p7 the signal memory mutex (Hand over as reference!)
- * @param p8 the signal memory interrupt request flag (Hand over as reference!)
+ * @param p7 the signal memory interrupt request flag (Hand over as reference!)
+ * @param p8 the signal memory mutex (Hand over as reference!)
  * @param p9 the linux console mutex (Hand over as reference!)
  * @param p10 the x window system mutex (Hand over as reference!)
  * @param p11 the www service mutex (Hand over as reference!)
@@ -100,6 +101,9 @@ void startup_internal_memory(void* p0, void* p1, void* p2, void* p3, void* p4, v
     // Set special values.
     //
 
+    // The internal memory index.
+    int i = *INVALID_VALUE;
+
     // Set knowledge memory internals.
     set(p0, (void*) KNOWLEDGE_MEMORY_INTERNAL, p1, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     set(p0, (void*) KNOWLEDGE_MEMORY_COUNT_INTERNAL, p2, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
@@ -110,16 +114,17 @@ void startup_internal_memory(void* p0, void* p1, void* p2, void* p3, void* p4, v
     set(p0, (void*) SIGNAL_MEMORY_COUNT_INTERNAL, p5, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     set(p0, (void*) SIGNAL_MEMORY_SIZE_INTERNAL, p6, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-    // Set signal memory mutex.
-    set(p0, (void*) SIGNAL_MEMORY_MUTEX_INTERNAL, p7, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     // Set signal memory interrupt request flag.
-    set(p0, (void*) INTERRUPT_REQUEST_INTERNAL, p8, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    set(p0, (void*) INTERRUPT_REQUEST_INTERNAL, p7, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    // Set signal memory mutex.
+    set(p0, (void*) SIGNAL_MEMORY_MUTEX_INTERNAL, p8, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     // Set linux console mutex.
     set(p0, (void*) LINUX_CONSOLE_MUTEX_INTERNAL, p9, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     // Set x window system mutex.
     set(p0, (void*) X_WINDOW_SYSTEM_MUTEX_INTERNAL, p10, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     // Set www service mutex.
-    set(p0, (void*) WWW_SERVICE_MUTEX_INTERNAL, p11, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    i = *WWW_BASE_INTERNAL + *SERVER_SOCKET_MUTEX_INTERNAL;
+    set(p0, (void*) &i, p11, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 }
 
 /* INTERNAL_MEMORY_MANAGER_SOURCE */

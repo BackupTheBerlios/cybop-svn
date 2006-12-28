@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2006-12-27 09:53:07 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2006-12-28 16:04:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,40 +30,31 @@
 #include "../../globals/constants/integer_constants.c"
 
 /** The internet protocol (ip). This is a pseudo protocol number. */
-static int IP_PROTOCOL_ARRAY[] = NUMBER_0_INTEGER;
-static int* IP_PROTOCOL = IP_PROTOCOL_ARRAY;
+static int* IP_PROTOCOL = NUMBER_0_INTEGER_ARRAY;
 
 /** The transmission control protocol (tcp). */
-static int TCP_PROTOCOL_ARRAY[] = NUMBER_6_INTEGER;
-static int* TCP_PROTOCOL = TCP_PROTOCOL_ARRAY;
+static int* TCP_PROTOCOL = NUMBER_6_INTEGER_ARRAY;
 
 /** The user datagram protocol (udp). */
-static int UDP_PROTOCOL_ARRAY[] = NUMBER_17_INTEGER;
-static int* UDP_PROTOCOL = UDP_PROTOCOL_ARRAY;
+static int* UDP_PROTOCOL = NUMBER_17_INTEGER_ARRAY;
 
 /** The internet protocol version 6 (ipv6). */
-static int IPV6_PROTOCOL_ARRAY[] = NUMBER_41_INTEGER;
-static int* IPV6_PROTOCOL = IPV6_PROTOCOL_ARRAY;
+static int* IPV6_PROTOCOL = NUMBER_41_INTEGER_ARRAY;
 
 /** The routing header for ipv6. */
-static int IPV6_ROUTE_PROTOCOL_ARRAY[] = NUMBER_43_INTEGER;
-static int* IPV6_ROUTE_PROTOCOL = IPV6_ROUTE_PROTOCOL_ARRAY;
+static int* IPV6_ROUTE_PROTOCOL = NUMBER_43_INTEGER_ARRAY;
 
 /** The fragment header for ipv6. */
-static int IPV6_FRAG_PROTOCOL_ARRAY[] = NUMBER_44_INTEGER;
-static int* IPV6_FRAG_PROTOCOL = IPV6_FRAG_PROTOCOL_ARRAY;
+static int* IPV6_FRAG_PROTOCOL = NUMBER_44_INTEGER_ARRAY;
 
 /** The icmp for ipv6. */
-static int IPV6_ICMP_PROTOCOL_ARRAY[] = NUMBER_58_INTEGER;
-static int* IPV6_ICMP_PROTOCOL = IPV6_ICMP_PROTOCOL_ARRAY;
+static int* IPV6_ICMP_PROTOCOL = NUMBER_58_INTEGER_ARRAY;
 
 /** The no next header for ipv6. */
-static int IPV6_NONXT_PROTOCOL_ARRAY[] = NUMBER_59_INTEGER;
-static int* IPV6_NONXT_PROTOCOL = IPV6_NONXT_PROTOCOL_ARRAY;
+static int* IPV6_NONXT_PROTOCOL = NUMBER_59_INTEGER_ARRAY;
 
 /** The destination options for ipv6. */
-static int IPV6_OPTS_PROTOCOL_ARRAY[] = NUMBER_60_INTEGER;
-static int* IPV6_OPTS_PROTOCOL = IPV6_OPTS_PROTOCOL_ARRAY;
+static int* IPV6_OPTS_PROTOCOL = NUMBER_60_INTEGER_ARRAY;
 
 /* INTERNET_PROTOCOL_CONSTANTS_SOURCE */
 #endif

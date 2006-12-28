@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.23 $ $Date: 2006-12-27 09:50:44 $ $Author: christian $
+ * @version $Revision: 1.24 $ $Date: 2006-12-28 16:04:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -423,31 +423,15 @@ static char SERVICE_NAMESPACE_NAME_ARRAY[] = {'n', 'a', 'm', 'e', 's', 'p', 'a',
 static char* SERVICE_NAMESPACE_NAME = SERVICE_NAMESPACE_NAME_ARRAY;
 static int* SERVICE_NAMESPACE_NAME_COUNT = NUMBER_9_INTEGER_ARRAY;
 
-/** The service communication style name. */
-static char SERVICE_COMMUNICATION_STYLE_NAME_ARRAY[] = {'s', 't', 'y', 'l', 'e'};
-static char* SERVICE_COMMUNICATION_STYLE_NAME = SERVICE_COMMUNICATION_STYLE_NAME_ARRAY;
-static int* SERVICE_COMMUNICATION_STYLE_NAME_COUNT = NUMBER_5_INTEGER_ARRAY;
+/** The service style name. */
+static char SERVICE_STYLE_NAME_ARRAY[] = {'s', 't', 'y', 'l', 'e'};
+static char* SERVICE_STYLE_NAME = SERVICE_STYLE_NAME_ARRAY;
+static int* SERVICE_STYLE_NAME_COUNT = NUMBER_5_INTEGER_ARRAY;
 
 /** The service address name. */
-/*??
 static char SERVICE_ADDRESS_NAME_ARRAY[] = {'a', 'd', 'd', 'r', 'e', 's', 's'};
 static char* SERVICE_ADDRESS_NAME = SERVICE_ADDRESS_NAME_ARRAY;
 static int* SERVICE_ADDRESS_NAME_COUNT = NUMBER_7_INTEGER_ARRAY;
-*/
-
-/** The service port name. */
-/*??
-static char PORT_NAME_ARRAY[] = {'p', 'o', 'r', 't'};
-static char* PORT_NAME = PORT_NAME_ARRAY;
-static int* PORT_NAME_COUNT = NUMBER_4_INTEGER_ARRAY;
-*/
-
-/** The service platform name. */
-/*??
-static char PLATFORM_NAME_ARRAY[] = {'p', 'l', 'a', 't', 'f', 'o', 'r', 'm'};
-static char* PLATFORM_NAME = PLATFORM_NAME_ARRAY;
-static int* PLATFORM_NAME_COUNT = NUMBER_8_INTEGER_ARRAY;
-*/
 
 //
 // Send names.

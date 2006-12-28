@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.21 $ $Date: 2006-12-28 01:10:48 $ $Author: christian $
+ * @version $Revision: 1.22 $ $Date: 2006-12-28 16:04:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -290,16 +290,6 @@ void receive_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
 
     if (r == 0) {
 
-        compare_arrays((void*) *cm, (void*) *cmc, (void*) LATEX_MODEL, (void*) LATEX_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != 0) {
-
-//??            receive_latex(p2, *mm, *mmc);
-        }
-    }
-
-    if (r == 0) {
-
         compare_arrays((void*) *cm, (void*) *cmc, (void*) LINUX_CONSOLE_MODEL, (void*) LINUX_CONSOLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
@@ -324,7 +314,6 @@ void receive_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
 
         if (r != 0) {
 
-            // Receive server socket.
             receive_socket(p2, *com, *comc, *coms, (void*) WWW_BASE_INTERNAL);
         }
     }
@@ -340,6 +329,16 @@ void receive_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
         }
     }
 */
+
+    if (r == 0) {
+
+        compare_arrays((void*) *cm, (void*) *cmc, (void*) LATEX_MODEL, (void*) LATEX_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != 0) {
+
+//??            receive_latex(p2, *mm, *mmc);
+        }
+    }
 }
 
 /* RECEIVE_SOURCE */

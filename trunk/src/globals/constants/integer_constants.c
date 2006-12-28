@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2006-12-28 01:10:48 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2006-12-28 16:04:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -2243,6 +2243,438 @@ static int* NUMBER_499_INTEGER = NUMBER_499_INTEGER_ARRAY;
 static int NUMBER_500_INTEGER_ARRAY[] = {500};
 static int* NUMBER_500_INTEGER = NUMBER_500_INTEGER_ARRAY;
 
+/** The number 501 integer. */
+static int NUMBER_501_INTEGER_ARRAY[] = {501};
+static int* NUMBER_501_INTEGER = NUMBER_501_INTEGER_ARRAY;
+
+/** The number 502 integer. */
+static int NUMBER_502_INTEGER_ARRAY[] = {502};
+static int* NUMBER_502_INTEGER = NUMBER_502_INTEGER_ARRAY;
+
+/** The number 503 integer. */
+static int NUMBER_503_INTEGER_ARRAY[] = {503};
+static int* NUMBER_503_INTEGER = NUMBER_503_INTEGER_ARRAY;
+
+/** The number 504 integer. */
+static int NUMBER_504_INTEGER_ARRAY[] = {504};
+static int* NUMBER_504_INTEGER = NUMBER_504_INTEGER_ARRAY;
+
+/** The number 505 integer. */
+static int NUMBER_505_INTEGER_ARRAY[] = {505};
+static int* NUMBER_505_INTEGER = NUMBER_505_INTEGER_ARRAY;
+
+/** The number 506 integer. */
+static int NUMBER_506_INTEGER_ARRAY[] = {506};
+static int* NUMBER_506_INTEGER = NUMBER_506_INTEGER_ARRAY;
+
+/** The number 507 integer. */
+static int NUMBER_507_INTEGER_ARRAY[] = {507};
+static int* NUMBER_507_INTEGER = NUMBER_507_INTEGER_ARRAY;
+
+/** The number 508 integer. */
+static int NUMBER_508_INTEGER_ARRAY[] = {508};
+static int* NUMBER_508_INTEGER = NUMBER_508_INTEGER_ARRAY;
+
+/** The number 509 integer. */
+static int NUMBER_509_INTEGER_ARRAY[] = {509};
+static int* NUMBER_509_INTEGER = NUMBER_509_INTEGER_ARRAY;
+
+//
+// Numbers 510 - 519.
+//
+
+/** The number 510 integer. */
+static int NUMBER_510_INTEGER_ARRAY[] = {510};
+static int* NUMBER_510_INTEGER = NUMBER_510_INTEGER_ARRAY;
+
+/** The number 511 integer. */
+static int NUMBER_511_INTEGER_ARRAY[] = {511};
+static int* NUMBER_511_INTEGER = NUMBER_511_INTEGER_ARRAY;
+
+/** The number 512 integer. */
+static int NUMBER_512_INTEGER_ARRAY[] = {512};
+static int* NUMBER_512_INTEGER = NUMBER_512_INTEGER_ARRAY;
+
+/** The number 513 integer. */
+static int NUMBER_513_INTEGER_ARRAY[] = {513};
+static int* NUMBER_513_INTEGER = NUMBER_513_INTEGER_ARRAY;
+
+/** The number 514 integer. */
+static int NUMBER_514_INTEGER_ARRAY[] = {514};
+static int* NUMBER_514_INTEGER = NUMBER_514_INTEGER_ARRAY;
+
+/** The number 515 integer. */
+static int NUMBER_515_INTEGER_ARRAY[] = {515};
+static int* NUMBER_515_INTEGER = NUMBER_515_INTEGER_ARRAY;
+
+/** The number 516 integer. */
+static int NUMBER_516_INTEGER_ARRAY[] = {516};
+static int* NUMBER_516_INTEGER = NUMBER_516_INTEGER_ARRAY;
+
+/** The number 517 integer. */
+static int NUMBER_517_INTEGER_ARRAY[] = {517};
+static int* NUMBER_517_INTEGER = NUMBER_517_INTEGER_ARRAY;
+
+/** The number 518 integer. */
+static int NUMBER_518_INTEGER_ARRAY[] = {518};
+static int* NUMBER_518_INTEGER = NUMBER_518_INTEGER_ARRAY;
+
+/** The number 519 integer. */
+static int NUMBER_519_INTEGER_ARRAY[] = {519};
+static int* NUMBER_519_INTEGER = NUMBER_519_INTEGER_ARRAY;
+
+//
+// Numbers 520 - 529.
+//
+
+/** The number 520 integer. */
+static int NUMBER_520_INTEGER_ARRAY[] = {520};
+static int* NUMBER_520_INTEGER = NUMBER_520_INTEGER_ARRAY;
+
+/** The number 521 integer. */
+static int NUMBER_521_INTEGER_ARRAY[] = {521};
+static int* NUMBER_521_INTEGER = NUMBER_521_INTEGER_ARRAY;
+
+/** The number 522 integer. */
+static int NUMBER_522_INTEGER_ARRAY[] = {522};
+static int* NUMBER_522_INTEGER = NUMBER_522_INTEGER_ARRAY;
+
+/** The number 523 integer. */
+static int NUMBER_523_INTEGER_ARRAY[] = {523};
+static int* NUMBER_523_INTEGER = NUMBER_523_INTEGER_ARRAY;
+
+/** The number 524 integer. */
+static int NUMBER_524_INTEGER_ARRAY[] = {524};
+static int* NUMBER_524_INTEGER = NUMBER_524_INTEGER_ARRAY;
+
+/** The number 525 integer. */
+static int NUMBER_525_INTEGER_ARRAY[] = {525};
+static int* NUMBER_525_INTEGER = NUMBER_525_INTEGER_ARRAY;
+
+/** The number 526 integer. */
+static int NUMBER_526_INTEGER_ARRAY[] = {526};
+static int* NUMBER_526_INTEGER = NUMBER_526_INTEGER_ARRAY;
+
+/** The number 527 integer. */
+static int NUMBER_527_INTEGER_ARRAY[] = {527};
+static int* NUMBER_527_INTEGER = NUMBER_527_INTEGER_ARRAY;
+
+/** The number 528 integer. */
+static int NUMBER_528_INTEGER_ARRAY[] = {528};
+static int* NUMBER_528_INTEGER = NUMBER_528_INTEGER_ARRAY;
+
+/** The number 529 integer. */
+static int NUMBER_529_INTEGER_ARRAY[] = {529};
+static int* NUMBER_529_INTEGER = NUMBER_529_INTEGER_ARRAY;
+
+//
+// Numbers 530 - 539.
+//
+
+/** The number 530 integer. */
+static int NUMBER_530_INTEGER_ARRAY[] = {530};
+static int* NUMBER_530_INTEGER = NUMBER_530_INTEGER_ARRAY;
+
+/** The number 531 integer. */
+static int NUMBER_531_INTEGER_ARRAY[] = {531};
+static int* NUMBER_531_INTEGER = NUMBER_531_INTEGER_ARRAY;
+
+/** The number 532 integer. */
+static int NUMBER_532_INTEGER_ARRAY[] = {532};
+static int* NUMBER_532_INTEGER = NUMBER_532_INTEGER_ARRAY;
+
+/** The number 533 integer. */
+static int NUMBER_533_INTEGER_ARRAY[] = {533};
+static int* NUMBER_533_INTEGER = NUMBER_533_INTEGER_ARRAY;
+
+/** The number 534 integer. */
+static int NUMBER_534_INTEGER_ARRAY[] = {534};
+static int* NUMBER_534_INTEGER = NUMBER_534_INTEGER_ARRAY;
+
+/** The number 535 integer. */
+static int NUMBER_535_INTEGER_ARRAY[] = {535};
+static int* NUMBER_535_INTEGER = NUMBER_535_INTEGER_ARRAY;
+
+/** The number 536 integer. */
+static int NUMBER_536_INTEGER_ARRAY[] = {536};
+static int* NUMBER_536_INTEGER = NUMBER_536_INTEGER_ARRAY;
+
+/** The number 537 integer. */
+static int NUMBER_537_INTEGER_ARRAY[] = {537};
+static int* NUMBER_537_INTEGER = NUMBER_537_INTEGER_ARRAY;
+
+/** The number 538 integer. */
+static int NUMBER_538_INTEGER_ARRAY[] = {538};
+static int* NUMBER_538_INTEGER = NUMBER_538_INTEGER_ARRAY;
+
+/** The number 539 integer. */
+static int NUMBER_539_INTEGER_ARRAY[] = {539};
+static int* NUMBER_539_INTEGER = NUMBER_539_INTEGER_ARRAY;
+
+//
+// Numbers 540 - 549.
+//
+
+/** The number 540 integer. */
+static int NUMBER_540_INTEGER_ARRAY[] = {540};
+static int* NUMBER_540_INTEGER = NUMBER_540_INTEGER_ARRAY;
+
+/** The number 541 integer. */
+static int NUMBER_541_INTEGER_ARRAY[] = {541};
+static int* NUMBER_541_INTEGER = NUMBER_541_INTEGER_ARRAY;
+
+/** The number 542 integer. */
+static int NUMBER_542_INTEGER_ARRAY[] = {542};
+static int* NUMBER_542_INTEGER = NUMBER_542_INTEGER_ARRAY;
+
+/** The number 543 integer. */
+static int NUMBER_543_INTEGER_ARRAY[] = {543};
+static int* NUMBER_543_INTEGER = NUMBER_543_INTEGER_ARRAY;
+
+/** The number 544 integer. */
+static int NUMBER_544_INTEGER_ARRAY[] = {544};
+static int* NUMBER_544_INTEGER = NUMBER_544_INTEGER_ARRAY;
+
+/** The number 545 integer. */
+static int NUMBER_545_INTEGER_ARRAY[] = {545};
+static int* NUMBER_545_INTEGER = NUMBER_545_INTEGER_ARRAY;
+
+/** The number 546 integer. */
+static int NUMBER_546_INTEGER_ARRAY[] = {546};
+static int* NUMBER_546_INTEGER = NUMBER_546_INTEGER_ARRAY;
+
+/** The number 547 integer. */
+static int NUMBER_547_INTEGER_ARRAY[] = {547};
+static int* NUMBER_547_INTEGER = NUMBER_547_INTEGER_ARRAY;
+
+/** The number 548 integer. */
+static int NUMBER_548_INTEGER_ARRAY[] = {548};
+static int* NUMBER_548_INTEGER = NUMBER_548_INTEGER_ARRAY;
+
+/** The number 549 integer. */
+static int NUMBER_549_INTEGER_ARRAY[] = {549};
+static int* NUMBER_549_INTEGER = NUMBER_549_INTEGER_ARRAY;
+
+//
+// Numbers 550 - 559.
+//
+
+/** The number 550 integer. */
+static int NUMBER_550_INTEGER_ARRAY[] = {550};
+static int* NUMBER_550_INTEGER = NUMBER_550_INTEGER_ARRAY;
+
+/** The number 551 integer. */
+static int NUMBER_551_INTEGER_ARRAY[] = {551};
+static int* NUMBER_551_INTEGER = NUMBER_551_INTEGER_ARRAY;
+
+/** The number 552 integer. */
+static int NUMBER_552_INTEGER_ARRAY[] = {552};
+static int* NUMBER_552_INTEGER = NUMBER_552_INTEGER_ARRAY;
+
+/** The number 553 integer. */
+static int NUMBER_553_INTEGER_ARRAY[] = {553};
+static int* NUMBER_553_INTEGER = NUMBER_553_INTEGER_ARRAY;
+
+/** The number 554 integer. */
+static int NUMBER_554_INTEGER_ARRAY[] = {554};
+static int* NUMBER_554_INTEGER = NUMBER_554_INTEGER_ARRAY;
+
+/** The number 555 integer. */
+static int NUMBER_555_INTEGER_ARRAY[] = {555};
+static int* NUMBER_555_INTEGER = NUMBER_555_INTEGER_ARRAY;
+
+/** The number 556 integer. */
+static int NUMBER_556_INTEGER_ARRAY[] = {556};
+static int* NUMBER_556_INTEGER = NUMBER_556_INTEGER_ARRAY;
+
+/** The number 557 integer. */
+static int NUMBER_557_INTEGER_ARRAY[] = {557};
+static int* NUMBER_557_INTEGER = NUMBER_557_INTEGER_ARRAY;
+
+/** The number 558 integer. */
+static int NUMBER_558_INTEGER_ARRAY[] = {558};
+static int* NUMBER_558_INTEGER = NUMBER_558_INTEGER_ARRAY;
+
+/** The number 559 integer. */
+static int NUMBER_559_INTEGER_ARRAY[] = {559};
+static int* NUMBER_559_INTEGER = NUMBER_559_INTEGER_ARRAY;
+
+//
+// Numbers 560 - 569.
+//
+
+/** The number 560 integer. */
+static int NUMBER_560_INTEGER_ARRAY[] = {560};
+static int* NUMBER_560_INTEGER = NUMBER_560_INTEGER_ARRAY;
+
+/** The number 561 integer. */
+static int NUMBER_561_INTEGER_ARRAY[] = {561};
+static int* NUMBER_561_INTEGER = NUMBER_561_INTEGER_ARRAY;
+
+/** The number 562 integer. */
+static int NUMBER_562_INTEGER_ARRAY[] = {562};
+static int* NUMBER_562_INTEGER = NUMBER_562_INTEGER_ARRAY;
+
+/** The number 563 integer. */
+static int NUMBER_563_INTEGER_ARRAY[] = {563};
+static int* NUMBER_563_INTEGER = NUMBER_563_INTEGER_ARRAY;
+
+/** The number 564 integer. */
+static int NUMBER_564_INTEGER_ARRAY[] = {564};
+static int* NUMBER_564_INTEGER = NUMBER_564_INTEGER_ARRAY;
+
+/** The number 565 integer. */
+static int NUMBER_565_INTEGER_ARRAY[] = {565};
+static int* NUMBER_565_INTEGER = NUMBER_565_INTEGER_ARRAY;
+
+/** The number 566 integer. */
+static int NUMBER_566_INTEGER_ARRAY[] = {566};
+static int* NUMBER_566_INTEGER = NUMBER_566_INTEGER_ARRAY;
+
+/** The number 567 integer. */
+static int NUMBER_567_INTEGER_ARRAY[] = {567};
+static int* NUMBER_567_INTEGER = NUMBER_567_INTEGER_ARRAY;
+
+/** The number 568 integer. */
+static int NUMBER_568_INTEGER_ARRAY[] = {568};
+static int* NUMBER_568_INTEGER = NUMBER_568_INTEGER_ARRAY;
+
+/** The number 569 integer. */
+static int NUMBER_569_INTEGER_ARRAY[] = {569};
+static int* NUMBER_569_INTEGER = NUMBER_569_INTEGER_ARRAY;
+
+//
+// Numbers 570 - 579.
+//
+
+/** The number 570 integer. */
+static int NUMBER_570_INTEGER_ARRAY[] = {570};
+static int* NUMBER_570_INTEGER = NUMBER_570_INTEGER_ARRAY;
+
+/** The number 571 integer. */
+static int NUMBER_571_INTEGER_ARRAY[] = {571};
+static int* NUMBER_571_INTEGER = NUMBER_571_INTEGER_ARRAY;
+
+/** The number 572 integer. */
+static int NUMBER_572_INTEGER_ARRAY[] = {572};
+static int* NUMBER_572_INTEGER = NUMBER_572_INTEGER_ARRAY;
+
+/** The number 573 integer. */
+static int NUMBER_573_INTEGER_ARRAY[] = {573};
+static int* NUMBER_573_INTEGER = NUMBER_573_INTEGER_ARRAY;
+
+/** The number 574 integer. */
+static int NUMBER_574_INTEGER_ARRAY[] = {574};
+static int* NUMBER_574_INTEGER = NUMBER_574_INTEGER_ARRAY;
+
+/** The number 575 integer. */
+static int NUMBER_575_INTEGER_ARRAY[] = {575};
+static int* NUMBER_575_INTEGER = NUMBER_575_INTEGER_ARRAY;
+
+/** The number 576 integer. */
+static int NUMBER_576_INTEGER_ARRAY[] = {576};
+static int* NUMBER_576_INTEGER = NUMBER_576_INTEGER_ARRAY;
+
+/** The number 577 integer. */
+static int NUMBER_577_INTEGER_ARRAY[] = {577};
+static int* NUMBER_577_INTEGER = NUMBER_577_INTEGER_ARRAY;
+
+/** The number 578 integer. */
+static int NUMBER_578_INTEGER_ARRAY[] = {578};
+static int* NUMBER_578_INTEGER = NUMBER_578_INTEGER_ARRAY;
+
+/** The number 579 integer. */
+static int NUMBER_579_INTEGER_ARRAY[] = {579};
+static int* NUMBER_579_INTEGER = NUMBER_579_INTEGER_ARRAY;
+
+//
+// Numbers 580 - 589.
+//
+
+/** The number 580 integer. */
+static int NUMBER_580_INTEGER_ARRAY[] = {580};
+static int* NUMBER_580_INTEGER = NUMBER_580_INTEGER_ARRAY;
+
+/** The number 581 integer. */
+static int NUMBER_581_INTEGER_ARRAY[] = {581};
+static int* NUMBER_581_INTEGER = NUMBER_581_INTEGER_ARRAY;
+
+/** The number 582 integer. */
+static int NUMBER_582_INTEGER_ARRAY[] = {582};
+static int* NUMBER_582_INTEGER = NUMBER_582_INTEGER_ARRAY;
+
+/** The number 583 integer. */
+static int NUMBER_583_INTEGER_ARRAY[] = {583};
+static int* NUMBER_583_INTEGER = NUMBER_583_INTEGER_ARRAY;
+
+/** The number 584 integer. */
+static int NUMBER_584_INTEGER_ARRAY[] = {584};
+static int* NUMBER_584_INTEGER = NUMBER_584_INTEGER_ARRAY;
+
+/** The number 585 integer. */
+static int NUMBER_585_INTEGER_ARRAY[] = {585};
+static int* NUMBER_585_INTEGER = NUMBER_585_INTEGER_ARRAY;
+
+/** The number 586 integer. */
+static int NUMBER_586_INTEGER_ARRAY[] = {586};
+static int* NUMBER_586_INTEGER = NUMBER_586_INTEGER_ARRAY;
+
+/** The number 587 integer. */
+static int NUMBER_587_INTEGER_ARRAY[] = {587};
+static int* NUMBER_587_INTEGER = NUMBER_587_INTEGER_ARRAY;
+
+/** The number 588 integer. */
+static int NUMBER_588_INTEGER_ARRAY[] = {588};
+static int* NUMBER_588_INTEGER = NUMBER_588_INTEGER_ARRAY;
+
+/** The number 589 integer. */
+static int NUMBER_589_INTEGER_ARRAY[] = {589};
+static int* NUMBER_589_INTEGER = NUMBER_589_INTEGER_ARRAY;
+
+//
+// Numbers 590 - 599.
+//
+
+/** The number 590 integer. */
+static int NUMBER_590_INTEGER_ARRAY[] = {590};
+static int* NUMBER_590_INTEGER = NUMBER_590_INTEGER_ARRAY;
+
+/** The number 591 integer. */
+static int NUMBER_591_INTEGER_ARRAY[] = {591};
+static int* NUMBER_591_INTEGER = NUMBER_591_INTEGER_ARRAY;
+
+/** The number 592 integer. */
+static int NUMBER_592_INTEGER_ARRAY[] = {592};
+static int* NUMBER_592_INTEGER = NUMBER_592_INTEGER_ARRAY;
+
+/** The number 593 integer. */
+static int NUMBER_593_INTEGER_ARRAY[] = {593};
+static int* NUMBER_593_INTEGER = NUMBER_593_INTEGER_ARRAY;
+
+/** The number 594 integer. */
+static int NUMBER_594_INTEGER_ARRAY[] = {594};
+static int* NUMBER_594_INTEGER = NUMBER_594_INTEGER_ARRAY;
+
+/** The number 595 integer. */
+static int NUMBER_595_INTEGER_ARRAY[] = {595};
+static int* NUMBER_595_INTEGER = NUMBER_595_INTEGER_ARRAY;
+
+/** The number 596 integer. */
+static int NUMBER_596_INTEGER_ARRAY[] = {596};
+static int* NUMBER_596_INTEGER = NUMBER_596_INTEGER_ARRAY;
+
+/** The number 597 integer. */
+static int NUMBER_597_INTEGER_ARRAY[] = {597};
+static int* NUMBER_597_INTEGER = NUMBER_597_INTEGER_ARRAY;
+
+/** The number 598 integer. */
+static int NUMBER_598_INTEGER_ARRAY[] = {598};
+static int* NUMBER_598_INTEGER = NUMBER_598_INTEGER_ARRAY;
+
+/** The number 599 integer. */
+static int NUMBER_599_INTEGER_ARRAY[] = {599};
+static int* NUMBER_599_INTEGER = NUMBER_599_INTEGER_ARRAY;
+
 //
 // Numbers 600 - 609.
 //
@@ -2250,6 +2682,438 @@ static int* NUMBER_500_INTEGER = NUMBER_500_INTEGER_ARRAY;
 /** The number 600 integer. */
 static int NUMBER_600_INTEGER_ARRAY[] = {600};
 static int* NUMBER_600_INTEGER = NUMBER_600_INTEGER_ARRAY;
+
+/** The number 601 integer. */
+static int NUMBER_601_INTEGER_ARRAY[] = {601};
+static int* NUMBER_601_INTEGER = NUMBER_601_INTEGER_ARRAY;
+
+/** The number 602 integer. */
+static int NUMBER_602_INTEGER_ARRAY[] = {602};
+static int* NUMBER_602_INTEGER = NUMBER_602_INTEGER_ARRAY;
+
+/** The number 603 integer. */
+static int NUMBER_603_INTEGER_ARRAY[] = {603};
+static int* NUMBER_603_INTEGER = NUMBER_603_INTEGER_ARRAY;
+
+/** The number 604 integer. */
+static int NUMBER_604_INTEGER_ARRAY[] = {604};
+static int* NUMBER_604_INTEGER = NUMBER_604_INTEGER_ARRAY;
+
+/** The number 605 integer. */
+static int NUMBER_605_INTEGER_ARRAY[] = {605};
+static int* NUMBER_605_INTEGER = NUMBER_605_INTEGER_ARRAY;
+
+/** The number 606 integer. */
+static int NUMBER_606_INTEGER_ARRAY[] = {606};
+static int* NUMBER_606_INTEGER = NUMBER_606_INTEGER_ARRAY;
+
+/** The number 607 integer. */
+static int NUMBER_607_INTEGER_ARRAY[] = {607};
+static int* NUMBER_607_INTEGER = NUMBER_607_INTEGER_ARRAY;
+
+/** The number 608 integer. */
+static int NUMBER_608_INTEGER_ARRAY[] = {608};
+static int* NUMBER_608_INTEGER = NUMBER_608_INTEGER_ARRAY;
+
+/** The number 609 integer. */
+static int NUMBER_609_INTEGER_ARRAY[] = {609};
+static int* NUMBER_609_INTEGER = NUMBER_609_INTEGER_ARRAY;
+
+//
+// Numbers 610 - 619.
+//
+
+/** The number 610 integer. */
+static int NUMBER_610_INTEGER_ARRAY[] = {610};
+static int* NUMBER_610_INTEGER = NUMBER_610_INTEGER_ARRAY;
+
+/** The number 611 integer. */
+static int NUMBER_611_INTEGER_ARRAY[] = {611};
+static int* NUMBER_611_INTEGER = NUMBER_611_INTEGER_ARRAY;
+
+/** The number 612 integer. */
+static int NUMBER_612_INTEGER_ARRAY[] = {612};
+static int* NUMBER_612_INTEGER = NUMBER_612_INTEGER_ARRAY;
+
+/** The number 613 integer. */
+static int NUMBER_613_INTEGER_ARRAY[] = {613};
+static int* NUMBER_613_INTEGER = NUMBER_613_INTEGER_ARRAY;
+
+/** The number 614 integer. */
+static int NUMBER_614_INTEGER_ARRAY[] = {614};
+static int* NUMBER_614_INTEGER = NUMBER_614_INTEGER_ARRAY;
+
+/** The number 615 integer. */
+static int NUMBER_615_INTEGER_ARRAY[] = {615};
+static int* NUMBER_615_INTEGER = NUMBER_615_INTEGER_ARRAY;
+
+/** The number 616 integer. */
+static int NUMBER_616_INTEGER_ARRAY[] = {616};
+static int* NUMBER_616_INTEGER = NUMBER_616_INTEGER_ARRAY;
+
+/** The number 617 integer. */
+static int NUMBER_617_INTEGER_ARRAY[] = {617};
+static int* NUMBER_617_INTEGER = NUMBER_617_INTEGER_ARRAY;
+
+/** The number 618 integer. */
+static int NUMBER_618_INTEGER_ARRAY[] = {618};
+static int* NUMBER_618_INTEGER = NUMBER_618_INTEGER_ARRAY;
+
+/** The number 619 integer. */
+static int NUMBER_619_INTEGER_ARRAY[] = {619};
+static int* NUMBER_619_INTEGER = NUMBER_619_INTEGER_ARRAY;
+
+//
+// Numbers 620 - 629.
+//
+
+/** The number 620 integer. */
+static int NUMBER_620_INTEGER_ARRAY[] = {620};
+static int* NUMBER_620_INTEGER = NUMBER_620_INTEGER_ARRAY;
+
+/** The number 621 integer. */
+static int NUMBER_621_INTEGER_ARRAY[] = {621};
+static int* NUMBER_621_INTEGER = NUMBER_621_INTEGER_ARRAY;
+
+/** The number 622 integer. */
+static int NUMBER_622_INTEGER_ARRAY[] = {622};
+static int* NUMBER_622_INTEGER = NUMBER_622_INTEGER_ARRAY;
+
+/** The number 623 integer. */
+static int NUMBER_623_INTEGER_ARRAY[] = {623};
+static int* NUMBER_623_INTEGER = NUMBER_623_INTEGER_ARRAY;
+
+/** The number 624 integer. */
+static int NUMBER_624_INTEGER_ARRAY[] = {624};
+static int* NUMBER_624_INTEGER = NUMBER_624_INTEGER_ARRAY;
+
+/** The number 625 integer. */
+static int NUMBER_625_INTEGER_ARRAY[] = {625};
+static int* NUMBER_625_INTEGER = NUMBER_625_INTEGER_ARRAY;
+
+/** The number 626 integer. */
+static int NUMBER_626_INTEGER_ARRAY[] = {626};
+static int* NUMBER_626_INTEGER = NUMBER_626_INTEGER_ARRAY;
+
+/** The number 627 integer. */
+static int NUMBER_627_INTEGER_ARRAY[] = {627};
+static int* NUMBER_627_INTEGER = NUMBER_627_INTEGER_ARRAY;
+
+/** The number 628 integer. */
+static int NUMBER_628_INTEGER_ARRAY[] = {628};
+static int* NUMBER_628_INTEGER = NUMBER_628_INTEGER_ARRAY;
+
+/** The number 629 integer. */
+static int NUMBER_629_INTEGER_ARRAY[] = {629};
+static int* NUMBER_629_INTEGER = NUMBER_629_INTEGER_ARRAY;
+
+//
+// Numbers 630 - 639.
+//
+
+/** The number 630 integer. */
+static int NUMBER_630_INTEGER_ARRAY[] = {630};
+static int* NUMBER_630_INTEGER = NUMBER_630_INTEGER_ARRAY;
+
+/** The number 631 integer. */
+static int NUMBER_631_INTEGER_ARRAY[] = {631};
+static int* NUMBER_631_INTEGER = NUMBER_631_INTEGER_ARRAY;
+
+/** The number 632 integer. */
+static int NUMBER_632_INTEGER_ARRAY[] = {632};
+static int* NUMBER_632_INTEGER = NUMBER_632_INTEGER_ARRAY;
+
+/** The number 633 integer. */
+static int NUMBER_633_INTEGER_ARRAY[] = {633};
+static int* NUMBER_633_INTEGER = NUMBER_633_INTEGER_ARRAY;
+
+/** The number 634 integer. */
+static int NUMBER_634_INTEGER_ARRAY[] = {634};
+static int* NUMBER_634_INTEGER = NUMBER_634_INTEGER_ARRAY;
+
+/** The number 635 integer. */
+static int NUMBER_635_INTEGER_ARRAY[] = {635};
+static int* NUMBER_635_INTEGER = NUMBER_635_INTEGER_ARRAY;
+
+/** The number 636 integer. */
+static int NUMBER_636_INTEGER_ARRAY[] = {636};
+static int* NUMBER_636_INTEGER = NUMBER_636_INTEGER_ARRAY;
+
+/** The number 637 integer. */
+static int NUMBER_637_INTEGER_ARRAY[] = {637};
+static int* NUMBER_637_INTEGER = NUMBER_637_INTEGER_ARRAY;
+
+/** The number 638 integer. */
+static int NUMBER_638_INTEGER_ARRAY[] = {638};
+static int* NUMBER_638_INTEGER = NUMBER_638_INTEGER_ARRAY;
+
+/** The number 639 integer. */
+static int NUMBER_639_INTEGER_ARRAY[] = {639};
+static int* NUMBER_639_INTEGER = NUMBER_639_INTEGER_ARRAY;
+
+//
+// Numbers 640 - 649.
+//
+
+/** The number 640 integer. */
+static int NUMBER_640_INTEGER_ARRAY[] = {640};
+static int* NUMBER_640_INTEGER = NUMBER_640_INTEGER_ARRAY;
+
+/** The number 641 integer. */
+static int NUMBER_641_INTEGER_ARRAY[] = {641};
+static int* NUMBER_641_INTEGER = NUMBER_641_INTEGER_ARRAY;
+
+/** The number 642 integer. */
+static int NUMBER_642_INTEGER_ARRAY[] = {642};
+static int* NUMBER_642_INTEGER = NUMBER_642_INTEGER_ARRAY;
+
+/** The number 643 integer. */
+static int NUMBER_643_INTEGER_ARRAY[] = {643};
+static int* NUMBER_643_INTEGER = NUMBER_643_INTEGER_ARRAY;
+
+/** The number 644 integer. */
+static int NUMBER_644_INTEGER_ARRAY[] = {644};
+static int* NUMBER_644_INTEGER = NUMBER_644_INTEGER_ARRAY;
+
+/** The number 645 integer. */
+static int NUMBER_645_INTEGER_ARRAY[] = {645};
+static int* NUMBER_645_INTEGER = NUMBER_645_INTEGER_ARRAY;
+
+/** The number 646 integer. */
+static int NUMBER_646_INTEGER_ARRAY[] = {646};
+static int* NUMBER_646_INTEGER = NUMBER_646_INTEGER_ARRAY;
+
+/** The number 647 integer. */
+static int NUMBER_647_INTEGER_ARRAY[] = {647};
+static int* NUMBER_647_INTEGER = NUMBER_647_INTEGER_ARRAY;
+
+/** The number 648 integer. */
+static int NUMBER_648_INTEGER_ARRAY[] = {648};
+static int* NUMBER_648_INTEGER = NUMBER_648_INTEGER_ARRAY;
+
+/** The number 649 integer. */
+static int NUMBER_649_INTEGER_ARRAY[] = {649};
+static int* NUMBER_649_INTEGER = NUMBER_649_INTEGER_ARRAY;
+
+//
+// Numbers 650 - 659.
+//
+
+/** The number 650 integer. */
+static int NUMBER_650_INTEGER_ARRAY[] = {650};
+static int* NUMBER_650_INTEGER = NUMBER_650_INTEGER_ARRAY;
+
+/** The number 651 integer. */
+static int NUMBER_651_INTEGER_ARRAY[] = {651};
+static int* NUMBER_651_INTEGER = NUMBER_651_INTEGER_ARRAY;
+
+/** The number 652 integer. */
+static int NUMBER_652_INTEGER_ARRAY[] = {652};
+static int* NUMBER_652_INTEGER = NUMBER_652_INTEGER_ARRAY;
+
+/** The number 653 integer. */
+static int NUMBER_653_INTEGER_ARRAY[] = {653};
+static int* NUMBER_653_INTEGER = NUMBER_653_INTEGER_ARRAY;
+
+/** The number 654 integer. */
+static int NUMBER_654_INTEGER_ARRAY[] = {654};
+static int* NUMBER_654_INTEGER = NUMBER_654_INTEGER_ARRAY;
+
+/** The number 655 integer. */
+static int NUMBER_655_INTEGER_ARRAY[] = {655};
+static int* NUMBER_655_INTEGER = NUMBER_655_INTEGER_ARRAY;
+
+/** The number 656 integer. */
+static int NUMBER_656_INTEGER_ARRAY[] = {656};
+static int* NUMBER_656_INTEGER = NUMBER_656_INTEGER_ARRAY;
+
+/** The number 657 integer. */
+static int NUMBER_657_INTEGER_ARRAY[] = {657};
+static int* NUMBER_657_INTEGER = NUMBER_657_INTEGER_ARRAY;
+
+/** The number 658 integer. */
+static int NUMBER_658_INTEGER_ARRAY[] = {658};
+static int* NUMBER_658_INTEGER = NUMBER_658_INTEGER_ARRAY;
+
+/** The number 659 integer. */
+static int NUMBER_659_INTEGER_ARRAY[] = {659};
+static int* NUMBER_659_INTEGER = NUMBER_659_INTEGER_ARRAY;
+
+//
+// Numbers 660 - 669.
+//
+
+/** The number 660 integer. */
+static int NUMBER_660_INTEGER_ARRAY[] = {660};
+static int* NUMBER_660_INTEGER = NUMBER_660_INTEGER_ARRAY;
+
+/** The number 661 integer. */
+static int NUMBER_661_INTEGER_ARRAY[] = {661};
+static int* NUMBER_661_INTEGER = NUMBER_661_INTEGER_ARRAY;
+
+/** The number 662 integer. */
+static int NUMBER_662_INTEGER_ARRAY[] = {662};
+static int* NUMBER_662_INTEGER = NUMBER_662_INTEGER_ARRAY;
+
+/** The number 663 integer. */
+static int NUMBER_663_INTEGER_ARRAY[] = {663};
+static int* NUMBER_663_INTEGER = NUMBER_663_INTEGER_ARRAY;
+
+/** The number 664 integer. */
+static int NUMBER_664_INTEGER_ARRAY[] = {664};
+static int* NUMBER_664_INTEGER = NUMBER_664_INTEGER_ARRAY;
+
+/** The number 665 integer. */
+static int NUMBER_665_INTEGER_ARRAY[] = {665};
+static int* NUMBER_665_INTEGER = NUMBER_665_INTEGER_ARRAY;
+
+/** The number 666 integer. */
+static int NUMBER_666_INTEGER_ARRAY[] = {666};
+static int* NUMBER_666_INTEGER = NUMBER_666_INTEGER_ARRAY;
+
+/** The number 667 integer. */
+static int NUMBER_667_INTEGER_ARRAY[] = {667};
+static int* NUMBER_667_INTEGER = NUMBER_667_INTEGER_ARRAY;
+
+/** The number 668 integer. */
+static int NUMBER_668_INTEGER_ARRAY[] = {668};
+static int* NUMBER_668_INTEGER = NUMBER_668_INTEGER_ARRAY;
+
+/** The number 669 integer. */
+static int NUMBER_669_INTEGER_ARRAY[] = {669};
+static int* NUMBER_669_INTEGER = NUMBER_669_INTEGER_ARRAY;
+
+//
+// Numbers 670 - 679.
+//
+
+/** The number 670 integer. */
+static int NUMBER_670_INTEGER_ARRAY[] = {670};
+static int* NUMBER_670_INTEGER = NUMBER_670_INTEGER_ARRAY;
+
+/** The number 671 integer. */
+static int NUMBER_671_INTEGER_ARRAY[] = {671};
+static int* NUMBER_671_INTEGER = NUMBER_671_INTEGER_ARRAY;
+
+/** The number 672 integer. */
+static int NUMBER_672_INTEGER_ARRAY[] = {672};
+static int* NUMBER_672_INTEGER = NUMBER_672_INTEGER_ARRAY;
+
+/** The number 673 integer. */
+static int NUMBER_673_INTEGER_ARRAY[] = {673};
+static int* NUMBER_673_INTEGER = NUMBER_673_INTEGER_ARRAY;
+
+/** The number 674 integer. */
+static int NUMBER_674_INTEGER_ARRAY[] = {674};
+static int* NUMBER_674_INTEGER = NUMBER_674_INTEGER_ARRAY;
+
+/** The number 675 integer. */
+static int NUMBER_675_INTEGER_ARRAY[] = {675};
+static int* NUMBER_675_INTEGER = NUMBER_675_INTEGER_ARRAY;
+
+/** The number 676 integer. */
+static int NUMBER_676_INTEGER_ARRAY[] = {676};
+static int* NUMBER_676_INTEGER = NUMBER_676_INTEGER_ARRAY;
+
+/** The number 677 integer. */
+static int NUMBER_677_INTEGER_ARRAY[] = {677};
+static int* NUMBER_677_INTEGER = NUMBER_677_INTEGER_ARRAY;
+
+/** The number 678 integer. */
+static int NUMBER_678_INTEGER_ARRAY[] = {678};
+static int* NUMBER_678_INTEGER = NUMBER_678_INTEGER_ARRAY;
+
+/** The number 679 integer. */
+static int NUMBER_679_INTEGER_ARRAY[] = {679};
+static int* NUMBER_679_INTEGER = NUMBER_679_INTEGER_ARRAY;
+
+//
+// Numbers 680 - 689.
+//
+
+/** The number 680 integer. */
+static int NUMBER_680_INTEGER_ARRAY[] = {680};
+static int* NUMBER_680_INTEGER = NUMBER_680_INTEGER_ARRAY;
+
+/** The number 681 integer. */
+static int NUMBER_681_INTEGER_ARRAY[] = {681};
+static int* NUMBER_681_INTEGER = NUMBER_681_INTEGER_ARRAY;
+
+/** The number 682 integer. */
+static int NUMBER_682_INTEGER_ARRAY[] = {682};
+static int* NUMBER_682_INTEGER = NUMBER_682_INTEGER_ARRAY;
+
+/** The number 683 integer. */
+static int NUMBER_683_INTEGER_ARRAY[] = {683};
+static int* NUMBER_683_INTEGER = NUMBER_683_INTEGER_ARRAY;
+
+/** The number 684 integer. */
+static int NUMBER_684_INTEGER_ARRAY[] = {684};
+static int* NUMBER_684_INTEGER = NUMBER_684_INTEGER_ARRAY;
+
+/** The number 685 integer. */
+static int NUMBER_685_INTEGER_ARRAY[] = {685};
+static int* NUMBER_685_INTEGER = NUMBER_685_INTEGER_ARRAY;
+
+/** The number 686 integer. */
+static int NUMBER_686_INTEGER_ARRAY[] = {686};
+static int* NUMBER_686_INTEGER = NUMBER_686_INTEGER_ARRAY;
+
+/** The number 687 integer. */
+static int NUMBER_687_INTEGER_ARRAY[] = {687};
+static int* NUMBER_687_INTEGER = NUMBER_687_INTEGER_ARRAY;
+
+/** The number 688 integer. */
+static int NUMBER_688_INTEGER_ARRAY[] = {688};
+static int* NUMBER_688_INTEGER = NUMBER_688_INTEGER_ARRAY;
+
+/** The number 689 integer. */
+static int NUMBER_689_INTEGER_ARRAY[] = {689};
+static int* NUMBER_689_INTEGER = NUMBER_689_INTEGER_ARRAY;
+
+//
+// Numbers 690 - 699.
+//
+
+/** The number 690 integer. */
+static int NUMBER_690_INTEGER_ARRAY[] = {690};
+static int* NUMBER_690_INTEGER = NUMBER_690_INTEGER_ARRAY;
+
+/** The number 691 integer. */
+static int NUMBER_691_INTEGER_ARRAY[] = {691};
+static int* NUMBER_691_INTEGER = NUMBER_691_INTEGER_ARRAY;
+
+/** The number 692 integer. */
+static int NUMBER_692_INTEGER_ARRAY[] = {692};
+static int* NUMBER_692_INTEGER = NUMBER_692_INTEGER_ARRAY;
+
+/** The number 693 integer. */
+static int NUMBER_693_INTEGER_ARRAY[] = {693};
+static int* NUMBER_693_INTEGER = NUMBER_693_INTEGER_ARRAY;
+
+/** The number 694 integer. */
+static int NUMBER_694_INTEGER_ARRAY[] = {694};
+static int* NUMBER_694_INTEGER = NUMBER_694_INTEGER_ARRAY;
+
+/** The number 695 integer. */
+static int NUMBER_695_INTEGER_ARRAY[] = {695};
+static int* NUMBER_695_INTEGER = NUMBER_695_INTEGER_ARRAY;
+
+/** The number 696 integer. */
+static int NUMBER_696_INTEGER_ARRAY[] = {696};
+static int* NUMBER_696_INTEGER = NUMBER_696_INTEGER_ARRAY;
+
+/** The number 697 integer. */
+static int NUMBER_697_INTEGER_ARRAY[] = {697};
+static int* NUMBER_697_INTEGER = NUMBER_697_INTEGER_ARRAY;
+
+/** The number 698 integer. */
+static int NUMBER_698_INTEGER_ARRAY[] = {698};
+static int* NUMBER_698_INTEGER = NUMBER_698_INTEGER_ARRAY;
+
+/** The number 699 integer. */
+static int NUMBER_699_INTEGER_ARRAY[] = {699};
+static int* NUMBER_699_INTEGER = NUMBER_699_INTEGER_ARRAY;
 
 //
 // Numbers 700 - 709.
@@ -2259,6 +3123,438 @@ static int* NUMBER_600_INTEGER = NUMBER_600_INTEGER_ARRAY;
 static int NUMBER_700_INTEGER_ARRAY[] = {700};
 static int* NUMBER_700_INTEGER = NUMBER_700_INTEGER_ARRAY;
 
+/** The number 701 integer. */
+static int NUMBER_701_INTEGER_ARRAY[] = {701};
+static int* NUMBER_701_INTEGER = NUMBER_701_INTEGER_ARRAY;
+
+/** The number 702 integer. */
+static int NUMBER_702_INTEGER_ARRAY[] = {702};
+static int* NUMBER_702_INTEGER = NUMBER_702_INTEGER_ARRAY;
+
+/** The number 703 integer. */
+static int NUMBER_703_INTEGER_ARRAY[] = {703};
+static int* NUMBER_703_INTEGER = NUMBER_703_INTEGER_ARRAY;
+
+/** The number 704 integer. */
+static int NUMBER_704_INTEGER_ARRAY[] = {704};
+static int* NUMBER_704_INTEGER = NUMBER_704_INTEGER_ARRAY;
+
+/** The number 705 integer. */
+static int NUMBER_705_INTEGER_ARRAY[] = {705};
+static int* NUMBER_705_INTEGER = NUMBER_705_INTEGER_ARRAY;
+
+/** The number 706 integer. */
+static int NUMBER_706_INTEGER_ARRAY[] = {706};
+static int* NUMBER_706_INTEGER = NUMBER_706_INTEGER_ARRAY;
+
+/** The number 707 integer. */
+static int NUMBER_707_INTEGER_ARRAY[] = {707};
+static int* NUMBER_707_INTEGER = NUMBER_707_INTEGER_ARRAY;
+
+/** The number 708 integer. */
+static int NUMBER_708_INTEGER_ARRAY[] = {708};
+static int* NUMBER_708_INTEGER = NUMBER_708_INTEGER_ARRAY;
+
+/** The number 709 integer. */
+static int NUMBER_709_INTEGER_ARRAY[] = {709};
+static int* NUMBER_709_INTEGER = NUMBER_709_INTEGER_ARRAY;
+
+//
+// Numbers 710 - 719.
+//
+
+/** The number 710 integer. */
+static int NUMBER_710_INTEGER_ARRAY[] = {710};
+static int* NUMBER_710_INTEGER = NUMBER_710_INTEGER_ARRAY;
+
+/** The number 711 integer. */
+static int NUMBER_711_INTEGER_ARRAY[] = {711};
+static int* NUMBER_711_INTEGER = NUMBER_711_INTEGER_ARRAY;
+
+/** The number 712 integer. */
+static int NUMBER_712_INTEGER_ARRAY[] = {712};
+static int* NUMBER_712_INTEGER = NUMBER_712_INTEGER_ARRAY;
+
+/** The number 713 integer. */
+static int NUMBER_713_INTEGER_ARRAY[] = {713};
+static int* NUMBER_713_INTEGER = NUMBER_713_INTEGER_ARRAY;
+
+/** The number 714 integer. */
+static int NUMBER_714_INTEGER_ARRAY[] = {714};
+static int* NUMBER_714_INTEGER = NUMBER_714_INTEGER_ARRAY;
+
+/** The number 715 integer. */
+static int NUMBER_715_INTEGER_ARRAY[] = {715};
+static int* NUMBER_715_INTEGER = NUMBER_715_INTEGER_ARRAY;
+
+/** The number 716 integer. */
+static int NUMBER_716_INTEGER_ARRAY[] = {716};
+static int* NUMBER_716_INTEGER = NUMBER_716_INTEGER_ARRAY;
+
+/** The number 717 integer. */
+static int NUMBER_717_INTEGER_ARRAY[] = {717};
+static int* NUMBER_717_INTEGER = NUMBER_717_INTEGER_ARRAY;
+
+/** The number 718 integer. */
+static int NUMBER_718_INTEGER_ARRAY[] = {718};
+static int* NUMBER_718_INTEGER = NUMBER_718_INTEGER_ARRAY;
+
+/** The number 719 integer. */
+static int NUMBER_719_INTEGER_ARRAY[] = {719};
+static int* NUMBER_719_INTEGER = NUMBER_719_INTEGER_ARRAY;
+
+//
+// Numbers 720 - 729.
+//
+
+/** The number 720 integer. */
+static int NUMBER_720_INTEGER_ARRAY[] = {720};
+static int* NUMBER_720_INTEGER = NUMBER_720_INTEGER_ARRAY;
+
+/** The number 721 integer. */
+static int NUMBER_721_INTEGER_ARRAY[] = {721};
+static int* NUMBER_721_INTEGER = NUMBER_721_INTEGER_ARRAY;
+
+/** The number 722 integer. */
+static int NUMBER_722_INTEGER_ARRAY[] = {722};
+static int* NUMBER_722_INTEGER = NUMBER_722_INTEGER_ARRAY;
+
+/** The number 723 integer. */
+static int NUMBER_723_INTEGER_ARRAY[] = {723};
+static int* NUMBER_723_INTEGER = NUMBER_723_INTEGER_ARRAY;
+
+/** The number 724 integer. */
+static int NUMBER_724_INTEGER_ARRAY[] = {724};
+static int* NUMBER_724_INTEGER = NUMBER_724_INTEGER_ARRAY;
+
+/** The number 725 integer. */
+static int NUMBER_725_INTEGER_ARRAY[] = {725};
+static int* NUMBER_725_INTEGER = NUMBER_725_INTEGER_ARRAY;
+
+/** The number 726 integer. */
+static int NUMBER_726_INTEGER_ARRAY[] = {726};
+static int* NUMBER_726_INTEGER = NUMBER_726_INTEGER_ARRAY;
+
+/** The number 727 integer. */
+static int NUMBER_727_INTEGER_ARRAY[] = {727};
+static int* NUMBER_727_INTEGER = NUMBER_727_INTEGER_ARRAY;
+
+/** The number 728 integer. */
+static int NUMBER_728_INTEGER_ARRAY[] = {728};
+static int* NUMBER_728_INTEGER = NUMBER_728_INTEGER_ARRAY;
+
+/** The number 729 integer. */
+static int NUMBER_729_INTEGER_ARRAY[] = {729};
+static int* NUMBER_729_INTEGER = NUMBER_729_INTEGER_ARRAY;
+
+//
+// Numbers 730 - 739.
+//
+
+/** The number 730 integer. */
+static int NUMBER_730_INTEGER_ARRAY[] = {730};
+static int* NUMBER_730_INTEGER = NUMBER_730_INTEGER_ARRAY;
+
+/** The number 731 integer. */
+static int NUMBER_731_INTEGER_ARRAY[] = {731};
+static int* NUMBER_731_INTEGER = NUMBER_731_INTEGER_ARRAY;
+
+/** The number 732 integer. */
+static int NUMBER_732_INTEGER_ARRAY[] = {732};
+static int* NUMBER_732_INTEGER = NUMBER_732_INTEGER_ARRAY;
+
+/** The number 733 integer. */
+static int NUMBER_733_INTEGER_ARRAY[] = {733};
+static int* NUMBER_733_INTEGER = NUMBER_733_INTEGER_ARRAY;
+
+/** The number 734 integer. */
+static int NUMBER_734_INTEGER_ARRAY[] = {734};
+static int* NUMBER_734_INTEGER = NUMBER_734_INTEGER_ARRAY;
+
+/** The number 735 integer. */
+static int NUMBER_735_INTEGER_ARRAY[] = {735};
+static int* NUMBER_735_INTEGER = NUMBER_735_INTEGER_ARRAY;
+
+/** The number 736 integer. */
+static int NUMBER_736_INTEGER_ARRAY[] = {736};
+static int* NUMBER_736_INTEGER = NUMBER_736_INTEGER_ARRAY;
+
+/** The number 737 integer. */
+static int NUMBER_737_INTEGER_ARRAY[] = {737};
+static int* NUMBER_737_INTEGER = NUMBER_737_INTEGER_ARRAY;
+
+/** The number 738 integer. */
+static int NUMBER_738_INTEGER_ARRAY[] = {738};
+static int* NUMBER_738_INTEGER = NUMBER_738_INTEGER_ARRAY;
+
+/** The number 739 integer. */
+static int NUMBER_739_INTEGER_ARRAY[] = {739};
+static int* NUMBER_739_INTEGER = NUMBER_739_INTEGER_ARRAY;
+
+//
+// Numbers 740 - 749.
+//
+
+/** The number 740 integer. */
+static int NUMBER_740_INTEGER_ARRAY[] = {740};
+static int* NUMBER_740_INTEGER = NUMBER_740_INTEGER_ARRAY;
+
+/** The number 741 integer. */
+static int NUMBER_741_INTEGER_ARRAY[] = {741};
+static int* NUMBER_741_INTEGER = NUMBER_741_INTEGER_ARRAY;
+
+/** The number 742 integer. */
+static int NUMBER_742_INTEGER_ARRAY[] = {742};
+static int* NUMBER_742_INTEGER = NUMBER_742_INTEGER_ARRAY;
+
+/** The number 743 integer. */
+static int NUMBER_743_INTEGER_ARRAY[] = {743};
+static int* NUMBER_743_INTEGER = NUMBER_743_INTEGER_ARRAY;
+
+/** The number 744 integer. */
+static int NUMBER_744_INTEGER_ARRAY[] = {744};
+static int* NUMBER_744_INTEGER = NUMBER_744_INTEGER_ARRAY;
+
+/** The number 745 integer. */
+static int NUMBER_745_INTEGER_ARRAY[] = {745};
+static int* NUMBER_745_INTEGER = NUMBER_745_INTEGER_ARRAY;
+
+/** The number 746 integer. */
+static int NUMBER_746_INTEGER_ARRAY[] = {746};
+static int* NUMBER_746_INTEGER = NUMBER_746_INTEGER_ARRAY;
+
+/** The number 747 integer. */
+static int NUMBER_747_INTEGER_ARRAY[] = {747};
+static int* NUMBER_747_INTEGER = NUMBER_747_INTEGER_ARRAY;
+
+/** The number 748 integer. */
+static int NUMBER_748_INTEGER_ARRAY[] = {748};
+static int* NUMBER_748_INTEGER = NUMBER_748_INTEGER_ARRAY;
+
+/** The number 749 integer. */
+static int NUMBER_749_INTEGER_ARRAY[] = {749};
+static int* NUMBER_749_INTEGER = NUMBER_749_INTEGER_ARRAY;
+
+//
+// Numbers 750 - 759.
+//
+
+/** The number 750 integer. */
+static int NUMBER_750_INTEGER_ARRAY[] = {750};
+static int* NUMBER_750_INTEGER = NUMBER_750_INTEGER_ARRAY;
+
+/** The number 751 integer. */
+static int NUMBER_751_INTEGER_ARRAY[] = {751};
+static int* NUMBER_751_INTEGER = NUMBER_751_INTEGER_ARRAY;
+
+/** The number 752 integer. */
+static int NUMBER_752_INTEGER_ARRAY[] = {752};
+static int* NUMBER_752_INTEGER = NUMBER_752_INTEGER_ARRAY;
+
+/** The number 753 integer. */
+static int NUMBER_753_INTEGER_ARRAY[] = {753};
+static int* NUMBER_753_INTEGER = NUMBER_753_INTEGER_ARRAY;
+
+/** The number 754 integer. */
+static int NUMBER_754_INTEGER_ARRAY[] = {754};
+static int* NUMBER_754_INTEGER = NUMBER_754_INTEGER_ARRAY;
+
+/** The number 755 integer. */
+static int NUMBER_755_INTEGER_ARRAY[] = {755};
+static int* NUMBER_755_INTEGER = NUMBER_755_INTEGER_ARRAY;
+
+/** The number 756 integer. */
+static int NUMBER_756_INTEGER_ARRAY[] = {756};
+static int* NUMBER_756_INTEGER = NUMBER_756_INTEGER_ARRAY;
+
+/** The number 757 integer. */
+static int NUMBER_757_INTEGER_ARRAY[] = {757};
+static int* NUMBER_757_INTEGER = NUMBER_757_INTEGER_ARRAY;
+
+/** The number 758 integer. */
+static int NUMBER_758_INTEGER_ARRAY[] = {758};
+static int* NUMBER_758_INTEGER = NUMBER_758_INTEGER_ARRAY;
+
+/** The number 759 integer. */
+static int NUMBER_759_INTEGER_ARRAY[] = {759};
+static int* NUMBER_759_INTEGER = NUMBER_759_INTEGER_ARRAY;
+
+//
+// Numbers 760 - 769.
+//
+
+/** The number 760 integer. */
+static int NUMBER_760_INTEGER_ARRAY[] = {760};
+static int* NUMBER_760_INTEGER = NUMBER_760_INTEGER_ARRAY;
+
+/** The number 761 integer. */
+static int NUMBER_761_INTEGER_ARRAY[] = {761};
+static int* NUMBER_761_INTEGER = NUMBER_761_INTEGER_ARRAY;
+
+/** The number 762 integer. */
+static int NUMBER_762_INTEGER_ARRAY[] = {762};
+static int* NUMBER_762_INTEGER = NUMBER_762_INTEGER_ARRAY;
+
+/** The number 763 integer. */
+static int NUMBER_763_INTEGER_ARRAY[] = {763};
+static int* NUMBER_763_INTEGER = NUMBER_763_INTEGER_ARRAY;
+
+/** The number 764 integer. */
+static int NUMBER_764_INTEGER_ARRAY[] = {764};
+static int* NUMBER_764_INTEGER = NUMBER_764_INTEGER_ARRAY;
+
+/** The number 765 integer. */
+static int NUMBER_765_INTEGER_ARRAY[] = {765};
+static int* NUMBER_765_INTEGER = NUMBER_765_INTEGER_ARRAY;
+
+/** The number 766 integer. */
+static int NUMBER_766_INTEGER_ARRAY[] = {766};
+static int* NUMBER_766_INTEGER = NUMBER_766_INTEGER_ARRAY;
+
+/** The number 767 integer. */
+static int NUMBER_767_INTEGER_ARRAY[] = {767};
+static int* NUMBER_767_INTEGER = NUMBER_767_INTEGER_ARRAY;
+
+/** The number 768 integer. */
+static int NUMBER_768_INTEGER_ARRAY[] = {768};
+static int* NUMBER_768_INTEGER = NUMBER_768_INTEGER_ARRAY;
+
+/** The number 769 integer. */
+static int NUMBER_769_INTEGER_ARRAY[] = {769};
+static int* NUMBER_769_INTEGER = NUMBER_769_INTEGER_ARRAY;
+
+//
+// Numbers 770 - 779.
+//
+
+/** The number 770 integer. */
+static int NUMBER_770_INTEGER_ARRAY[] = {770};
+static int* NUMBER_770_INTEGER = NUMBER_770_INTEGER_ARRAY;
+
+/** The number 771 integer. */
+static int NUMBER_771_INTEGER_ARRAY[] = {771};
+static int* NUMBER_771_INTEGER = NUMBER_771_INTEGER_ARRAY;
+
+/** The number 772 integer. */
+static int NUMBER_772_INTEGER_ARRAY[] = {772};
+static int* NUMBER_772_INTEGER = NUMBER_772_INTEGER_ARRAY;
+
+/** The number 773 integer. */
+static int NUMBER_773_INTEGER_ARRAY[] = {773};
+static int* NUMBER_773_INTEGER = NUMBER_773_INTEGER_ARRAY;
+
+/** The number 774 integer. */
+static int NUMBER_774_INTEGER_ARRAY[] = {774};
+static int* NUMBER_774_INTEGER = NUMBER_774_INTEGER_ARRAY;
+
+/** The number 775 integer. */
+static int NUMBER_775_INTEGER_ARRAY[] = {775};
+static int* NUMBER_775_INTEGER = NUMBER_775_INTEGER_ARRAY;
+
+/** The number 776 integer. */
+static int NUMBER_776_INTEGER_ARRAY[] = {776};
+static int* NUMBER_776_INTEGER = NUMBER_776_INTEGER_ARRAY;
+
+/** The number 777 integer. */
+static int NUMBER_777_INTEGER_ARRAY[] = {777};
+static int* NUMBER_777_INTEGER = NUMBER_777_INTEGER_ARRAY;
+
+/** The number 778 integer. */
+static int NUMBER_778_INTEGER_ARRAY[] = {778};
+static int* NUMBER_778_INTEGER = NUMBER_778_INTEGER_ARRAY;
+
+/** The number 779 integer. */
+static int NUMBER_779_INTEGER_ARRAY[] = {779};
+static int* NUMBER_779_INTEGER = NUMBER_779_INTEGER_ARRAY;
+
+//
+// Numbers 780 - 789.
+//
+
+/** The number 780 integer. */
+static int NUMBER_780_INTEGER_ARRAY[] = {780};
+static int* NUMBER_780_INTEGER = NUMBER_780_INTEGER_ARRAY;
+
+/** The number 781 integer. */
+static int NUMBER_781_INTEGER_ARRAY[] = {781};
+static int* NUMBER_781_INTEGER = NUMBER_781_INTEGER_ARRAY;
+
+/** The number 782 integer. */
+static int NUMBER_782_INTEGER_ARRAY[] = {782};
+static int* NUMBER_782_INTEGER = NUMBER_782_INTEGER_ARRAY;
+
+/** The number 783 integer. */
+static int NUMBER_783_INTEGER_ARRAY[] = {783};
+static int* NUMBER_783_INTEGER = NUMBER_783_INTEGER_ARRAY;
+
+/** The number 784 integer. */
+static int NUMBER_784_INTEGER_ARRAY[] = {784};
+static int* NUMBER_784_INTEGER = NUMBER_784_INTEGER_ARRAY;
+
+/** The number 785 integer. */
+static int NUMBER_785_INTEGER_ARRAY[] = {785};
+static int* NUMBER_785_INTEGER = NUMBER_785_INTEGER_ARRAY;
+
+/** The number 786 integer. */
+static int NUMBER_786_INTEGER_ARRAY[] = {786};
+static int* NUMBER_786_INTEGER = NUMBER_786_INTEGER_ARRAY;
+
+/** The number 787 integer. */
+static int NUMBER_787_INTEGER_ARRAY[] = {787};
+static int* NUMBER_787_INTEGER = NUMBER_787_INTEGER_ARRAY;
+
+/** The number 788 integer. */
+static int NUMBER_788_INTEGER_ARRAY[] = {788};
+static int* NUMBER_788_INTEGER = NUMBER_788_INTEGER_ARRAY;
+
+/** The number 789 integer. */
+static int NUMBER_789_INTEGER_ARRAY[] = {789};
+static int* NUMBER_789_INTEGER = NUMBER_789_INTEGER_ARRAY;
+
+//
+// Numbers 790 - 799.
+//
+
+/** The number 790 integer. */
+static int NUMBER_790_INTEGER_ARRAY[] = {790};
+static int* NUMBER_790_INTEGER = NUMBER_790_INTEGER_ARRAY;
+
+/** The number 791 integer. */
+static int NUMBER_791_INTEGER_ARRAY[] = {791};
+static int* NUMBER_791_INTEGER = NUMBER_791_INTEGER_ARRAY;
+
+/** The number 792 integer. */
+static int NUMBER_792_INTEGER_ARRAY[] = {792};
+static int* NUMBER_792_INTEGER = NUMBER_792_INTEGER_ARRAY;
+
+/** The number 793 integer. */
+static int NUMBER_793_INTEGER_ARRAY[] = {793};
+static int* NUMBER_793_INTEGER = NUMBER_793_INTEGER_ARRAY;
+
+/** The number 794 integer. */
+static int NUMBER_794_INTEGER_ARRAY[] = {794};
+static int* NUMBER_794_INTEGER = NUMBER_794_INTEGER_ARRAY;
+
+/** The number 795 integer. */
+static int NUMBER_795_INTEGER_ARRAY[] = {795};
+static int* NUMBER_795_INTEGER = NUMBER_795_INTEGER_ARRAY;
+
+/** The number 796 integer. */
+static int NUMBER_796_INTEGER_ARRAY[] = {796};
+static int* NUMBER_796_INTEGER = NUMBER_796_INTEGER_ARRAY;
+
+/** The number 797 integer. */
+static int NUMBER_797_INTEGER_ARRAY[] = {797};
+static int* NUMBER_797_INTEGER = NUMBER_797_INTEGER_ARRAY;
+
+/** The number 798 integer. */
+static int NUMBER_798_INTEGER_ARRAY[] = {798};
+static int* NUMBER_798_INTEGER = NUMBER_798_INTEGER_ARRAY;
+
+/** The number 799 integer. */
+static int NUMBER_799_INTEGER_ARRAY[] = {799};
+static int* NUMBER_799_INTEGER = NUMBER_799_INTEGER_ARRAY;
+
 //
 // Numbers 800 - 809.
 //
@@ -2267,6 +3563,438 @@ static int* NUMBER_700_INTEGER = NUMBER_700_INTEGER_ARRAY;
 static int NUMBER_800_INTEGER_ARRAY[] = {800};
 static int* NUMBER_800_INTEGER = NUMBER_800_INTEGER_ARRAY;
 
+/** The number 801 integer. */
+static int NUMBER_801_INTEGER_ARRAY[] = {801};
+static int* NUMBER_801_INTEGER = NUMBER_801_INTEGER_ARRAY;
+
+/** The number 802 integer. */
+static int NUMBER_802_INTEGER_ARRAY[] = {802};
+static int* NUMBER_802_INTEGER = NUMBER_802_INTEGER_ARRAY;
+
+/** The number 803 integer. */
+static int NUMBER_803_INTEGER_ARRAY[] = {803};
+static int* NUMBER_803_INTEGER = NUMBER_803_INTEGER_ARRAY;
+
+/** The number 804 integer. */
+static int NUMBER_804_INTEGER_ARRAY[] = {804};
+static int* NUMBER_804_INTEGER = NUMBER_804_INTEGER_ARRAY;
+
+/** The number 805 integer. */
+static int NUMBER_805_INTEGER_ARRAY[] = {805};
+static int* NUMBER_805_INTEGER = NUMBER_805_INTEGER_ARRAY;
+
+/** The number 806 integer. */
+static int NUMBER_806_INTEGER_ARRAY[] = {806};
+static int* NUMBER_806_INTEGER = NUMBER_806_INTEGER_ARRAY;
+
+/** The number 807 integer. */
+static int NUMBER_807_INTEGER_ARRAY[] = {807};
+static int* NUMBER_807_INTEGER = NUMBER_807_INTEGER_ARRAY;
+
+/** The number 808 integer. */
+static int NUMBER_808_INTEGER_ARRAY[] = {808};
+static int* NUMBER_808_INTEGER = NUMBER_808_INTEGER_ARRAY;
+
+/** The number 809 integer. */
+static int NUMBER_809_INTEGER_ARRAY[] = {809};
+static int* NUMBER_809_INTEGER = NUMBER_809_INTEGER_ARRAY;
+
+//
+// Numbers 810 - 819.
+//
+
+/** The number 810 integer. */
+static int NUMBER_810_INTEGER_ARRAY[] = {810};
+static int* NUMBER_810_INTEGER = NUMBER_810_INTEGER_ARRAY;
+
+/** The number 811 integer. */
+static int NUMBER_811_INTEGER_ARRAY[] = {811};
+static int* NUMBER_811_INTEGER = NUMBER_811_INTEGER_ARRAY;
+
+/** The number 812 integer. */
+static int NUMBER_812_INTEGER_ARRAY[] = {812};
+static int* NUMBER_812_INTEGER = NUMBER_812_INTEGER_ARRAY;
+
+/** The number 813 integer. */
+static int NUMBER_813_INTEGER_ARRAY[] = {813};
+static int* NUMBER_813_INTEGER = NUMBER_813_INTEGER_ARRAY;
+
+/** The number 814 integer. */
+static int NUMBER_814_INTEGER_ARRAY[] = {814};
+static int* NUMBER_814_INTEGER = NUMBER_814_INTEGER_ARRAY;
+
+/** The number 815 integer. */
+static int NUMBER_815_INTEGER_ARRAY[] = {815};
+static int* NUMBER_815_INTEGER = NUMBER_815_INTEGER_ARRAY;
+
+/** The number 816 integer. */
+static int NUMBER_816_INTEGER_ARRAY[] = {816};
+static int* NUMBER_816_INTEGER = NUMBER_816_INTEGER_ARRAY;
+
+/** The number 817 integer. */
+static int NUMBER_817_INTEGER_ARRAY[] = {817};
+static int* NUMBER_817_INTEGER = NUMBER_817_INTEGER_ARRAY;
+
+/** The number 818 integer. */
+static int NUMBER_818_INTEGER_ARRAY[] = {818};
+static int* NUMBER_818_INTEGER = NUMBER_818_INTEGER_ARRAY;
+
+/** The number 819 integer. */
+static int NUMBER_819_INTEGER_ARRAY[] = {819};
+static int* NUMBER_819_INTEGER = NUMBER_819_INTEGER_ARRAY;
+
+//
+// Numbers 820 - 829.
+//
+
+/** The number 820 integer. */
+static int NUMBER_820_INTEGER_ARRAY[] = {820};
+static int* NUMBER_820_INTEGER = NUMBER_820_INTEGER_ARRAY;
+
+/** The number 821 integer. */
+static int NUMBER_821_INTEGER_ARRAY[] = {821};
+static int* NUMBER_821_INTEGER = NUMBER_821_INTEGER_ARRAY;
+
+/** The number 822 integer. */
+static int NUMBER_822_INTEGER_ARRAY[] = {822};
+static int* NUMBER_822_INTEGER = NUMBER_822_INTEGER_ARRAY;
+
+/** The number 823 integer. */
+static int NUMBER_823_INTEGER_ARRAY[] = {823};
+static int* NUMBER_823_INTEGER = NUMBER_823_INTEGER_ARRAY;
+
+/** The number 824 integer. */
+static int NUMBER_824_INTEGER_ARRAY[] = {824};
+static int* NUMBER_824_INTEGER = NUMBER_824_INTEGER_ARRAY;
+
+/** The number 825 integer. */
+static int NUMBER_825_INTEGER_ARRAY[] = {825};
+static int* NUMBER_825_INTEGER = NUMBER_825_INTEGER_ARRAY;
+
+/** The number 826 integer. */
+static int NUMBER_826_INTEGER_ARRAY[] = {826};
+static int* NUMBER_826_INTEGER = NUMBER_826_INTEGER_ARRAY;
+
+/** The number 827 integer. */
+static int NUMBER_827_INTEGER_ARRAY[] = {827};
+static int* NUMBER_827_INTEGER = NUMBER_827_INTEGER_ARRAY;
+
+/** The number 828 integer. */
+static int NUMBER_828_INTEGER_ARRAY[] = {828};
+static int* NUMBER_828_INTEGER = NUMBER_828_INTEGER_ARRAY;
+
+/** The number 829 integer. */
+static int NUMBER_829_INTEGER_ARRAY[] = {829};
+static int* NUMBER_829_INTEGER = NUMBER_829_INTEGER_ARRAY;
+
+//
+// Numbers 830 - 839.
+//
+
+/** The number 830 integer. */
+static int NUMBER_830_INTEGER_ARRAY[] = {830};
+static int* NUMBER_830_INTEGER = NUMBER_830_INTEGER_ARRAY;
+
+/** The number 831 integer. */
+static int NUMBER_831_INTEGER_ARRAY[] = {831};
+static int* NUMBER_831_INTEGER = NUMBER_831_INTEGER_ARRAY;
+
+/** The number 832 integer. */
+static int NUMBER_832_INTEGER_ARRAY[] = {832};
+static int* NUMBER_832_INTEGER = NUMBER_832_INTEGER_ARRAY;
+
+/** The number 833 integer. */
+static int NUMBER_833_INTEGER_ARRAY[] = {833};
+static int* NUMBER_833_INTEGER = NUMBER_833_INTEGER_ARRAY;
+
+/** The number 834 integer. */
+static int NUMBER_834_INTEGER_ARRAY[] = {834};
+static int* NUMBER_834_INTEGER = NUMBER_834_INTEGER_ARRAY;
+
+/** The number 835 integer. */
+static int NUMBER_835_INTEGER_ARRAY[] = {835};
+static int* NUMBER_835_INTEGER = NUMBER_835_INTEGER_ARRAY;
+
+/** The number 836 integer. */
+static int NUMBER_836_INTEGER_ARRAY[] = {836};
+static int* NUMBER_836_INTEGER = NUMBER_836_INTEGER_ARRAY;
+
+/** The number 837 integer. */
+static int NUMBER_837_INTEGER_ARRAY[] = {837};
+static int* NUMBER_837_INTEGER = NUMBER_837_INTEGER_ARRAY;
+
+/** The number 838 integer. */
+static int NUMBER_838_INTEGER_ARRAY[] = {838};
+static int* NUMBER_838_INTEGER = NUMBER_838_INTEGER_ARRAY;
+
+/** The number 839 integer. */
+static int NUMBER_839_INTEGER_ARRAY[] = {839};
+static int* NUMBER_839_INTEGER = NUMBER_839_INTEGER_ARRAY;
+
+//
+// Numbers 840 - 849.
+//
+
+/** The number 840 integer. */
+static int NUMBER_840_INTEGER_ARRAY[] = {840};
+static int* NUMBER_840_INTEGER = NUMBER_840_INTEGER_ARRAY;
+
+/** The number 841 integer. */
+static int NUMBER_841_INTEGER_ARRAY[] = {841};
+static int* NUMBER_841_INTEGER = NUMBER_841_INTEGER_ARRAY;
+
+/** The number 842 integer. */
+static int NUMBER_842_INTEGER_ARRAY[] = {842};
+static int* NUMBER_842_INTEGER = NUMBER_842_INTEGER_ARRAY;
+
+/** The number 843 integer. */
+static int NUMBER_843_INTEGER_ARRAY[] = {843};
+static int* NUMBER_843_INTEGER = NUMBER_843_INTEGER_ARRAY;
+
+/** The number 844 integer. */
+static int NUMBER_844_INTEGER_ARRAY[] = {844};
+static int* NUMBER_844_INTEGER = NUMBER_844_INTEGER_ARRAY;
+
+/** The number 845 integer. */
+static int NUMBER_845_INTEGER_ARRAY[] = {845};
+static int* NUMBER_845_INTEGER = NUMBER_845_INTEGER_ARRAY;
+
+/** The number 846 integer. */
+static int NUMBER_846_INTEGER_ARRAY[] = {846};
+static int* NUMBER_846_INTEGER = NUMBER_846_INTEGER_ARRAY;
+
+/** The number 847 integer. */
+static int NUMBER_847_INTEGER_ARRAY[] = {847};
+static int* NUMBER_847_INTEGER = NUMBER_847_INTEGER_ARRAY;
+
+/** The number 848 integer. */
+static int NUMBER_848_INTEGER_ARRAY[] = {848};
+static int* NUMBER_848_INTEGER = NUMBER_848_INTEGER_ARRAY;
+
+/** The number 849 integer. */
+static int NUMBER_849_INTEGER_ARRAY[] = {849};
+static int* NUMBER_849_INTEGER = NUMBER_849_INTEGER_ARRAY;
+
+//
+// Numbers 850 - 859.
+//
+
+/** The number 850 integer. */
+static int NUMBER_850_INTEGER_ARRAY[] = {850};
+static int* NUMBER_850_INTEGER = NUMBER_850_INTEGER_ARRAY;
+
+/** The number 851 integer. */
+static int NUMBER_851_INTEGER_ARRAY[] = {851};
+static int* NUMBER_851_INTEGER = NUMBER_851_INTEGER_ARRAY;
+
+/** The number 852 integer. */
+static int NUMBER_852_INTEGER_ARRAY[] = {852};
+static int* NUMBER_852_INTEGER = NUMBER_852_INTEGER_ARRAY;
+
+/** The number 853 integer. */
+static int NUMBER_853_INTEGER_ARRAY[] = {853};
+static int* NUMBER_853_INTEGER = NUMBER_853_INTEGER_ARRAY;
+
+/** The number 854 integer. */
+static int NUMBER_854_INTEGER_ARRAY[] = {854};
+static int* NUMBER_854_INTEGER = NUMBER_854_INTEGER_ARRAY;
+
+/** The number 855 integer. */
+static int NUMBER_855_INTEGER_ARRAY[] = {855};
+static int* NUMBER_855_INTEGER = NUMBER_855_INTEGER_ARRAY;
+
+/** The number 856 integer. */
+static int NUMBER_856_INTEGER_ARRAY[] = {856};
+static int* NUMBER_856_INTEGER = NUMBER_856_INTEGER_ARRAY;
+
+/** The number 857 integer. */
+static int NUMBER_857_INTEGER_ARRAY[] = {857};
+static int* NUMBER_857_INTEGER = NUMBER_857_INTEGER_ARRAY;
+
+/** The number 858 integer. */
+static int NUMBER_858_INTEGER_ARRAY[] = {858};
+static int* NUMBER_858_INTEGER = NUMBER_858_INTEGER_ARRAY;
+
+/** The number 859 integer. */
+static int NUMBER_859_INTEGER_ARRAY[] = {859};
+static int* NUMBER_859_INTEGER = NUMBER_859_INTEGER_ARRAY;
+
+//
+// Numbers 860 - 869.
+//
+
+/** The number 860 integer. */
+static int NUMBER_860_INTEGER_ARRAY[] = {860};
+static int* NUMBER_860_INTEGER = NUMBER_860_INTEGER_ARRAY;
+
+/** The number 861 integer. */
+static int NUMBER_861_INTEGER_ARRAY[] = {861};
+static int* NUMBER_861_INTEGER = NUMBER_861_INTEGER_ARRAY;
+
+/** The number 862 integer. */
+static int NUMBER_862_INTEGER_ARRAY[] = {862};
+static int* NUMBER_862_INTEGER = NUMBER_862_INTEGER_ARRAY;
+
+/** The number 863 integer. */
+static int NUMBER_863_INTEGER_ARRAY[] = {863};
+static int* NUMBER_863_INTEGER = NUMBER_863_INTEGER_ARRAY;
+
+/** The number 864 integer. */
+static int NUMBER_864_INTEGER_ARRAY[] = {864};
+static int* NUMBER_864_INTEGER = NUMBER_864_INTEGER_ARRAY;
+
+/** The number 865 integer. */
+static int NUMBER_865_INTEGER_ARRAY[] = {865};
+static int* NUMBER_865_INTEGER = NUMBER_865_INTEGER_ARRAY;
+
+/** The number 866 integer. */
+static int NUMBER_866_INTEGER_ARRAY[] = {866};
+static int* NUMBER_866_INTEGER = NUMBER_866_INTEGER_ARRAY;
+
+/** The number 867 integer. */
+static int NUMBER_867_INTEGER_ARRAY[] = {867};
+static int* NUMBER_867_INTEGER = NUMBER_867_INTEGER_ARRAY;
+
+/** The number 868 integer. */
+static int NUMBER_868_INTEGER_ARRAY[] = {868};
+static int* NUMBER_868_INTEGER = NUMBER_868_INTEGER_ARRAY;
+
+/** The number 869 integer. */
+static int NUMBER_869_INTEGER_ARRAY[] = {869};
+static int* NUMBER_869_INTEGER = NUMBER_869_INTEGER_ARRAY;
+
+//
+// Numbers 870 - 879.
+//
+
+/** The number 870 integer. */
+static int NUMBER_870_INTEGER_ARRAY[] = {870};
+static int* NUMBER_870_INTEGER = NUMBER_870_INTEGER_ARRAY;
+
+/** The number 871 integer. */
+static int NUMBER_871_INTEGER_ARRAY[] = {871};
+static int* NUMBER_871_INTEGER = NUMBER_871_INTEGER_ARRAY;
+
+/** The number 872 integer. */
+static int NUMBER_872_INTEGER_ARRAY[] = {872};
+static int* NUMBER_872_INTEGER = NUMBER_872_INTEGER_ARRAY;
+
+/** The number 873 integer. */
+static int NUMBER_873_INTEGER_ARRAY[] = {873};
+static int* NUMBER_873_INTEGER = NUMBER_873_INTEGER_ARRAY;
+
+/** The number 874 integer. */
+static int NUMBER_874_INTEGER_ARRAY[] = {874};
+static int* NUMBER_874_INTEGER = NUMBER_874_INTEGER_ARRAY;
+
+/** The number 875 integer. */
+static int NUMBER_875_INTEGER_ARRAY[] = {875};
+static int* NUMBER_875_INTEGER = NUMBER_875_INTEGER_ARRAY;
+
+/** The number 876 integer. */
+static int NUMBER_876_INTEGER_ARRAY[] = {876};
+static int* NUMBER_876_INTEGER = NUMBER_876_INTEGER_ARRAY;
+
+/** The number 877 integer. */
+static int NUMBER_877_INTEGER_ARRAY[] = {877};
+static int* NUMBER_877_INTEGER = NUMBER_877_INTEGER_ARRAY;
+
+/** The number 878 integer. */
+static int NUMBER_878_INTEGER_ARRAY[] = {878};
+static int* NUMBER_878_INTEGER = NUMBER_878_INTEGER_ARRAY;
+
+/** The number 879 integer. */
+static int NUMBER_879_INTEGER_ARRAY[] = {879};
+static int* NUMBER_879_INTEGER = NUMBER_879_INTEGER_ARRAY;
+
+//
+// Numbers 880 - 889.
+//
+
+/** The number 880 integer. */
+static int NUMBER_880_INTEGER_ARRAY[] = {880};
+static int* NUMBER_880_INTEGER = NUMBER_880_INTEGER_ARRAY;
+
+/** The number 881 integer. */
+static int NUMBER_881_INTEGER_ARRAY[] = {881};
+static int* NUMBER_881_INTEGER = NUMBER_881_INTEGER_ARRAY;
+
+/** The number 882 integer. */
+static int NUMBER_882_INTEGER_ARRAY[] = {882};
+static int* NUMBER_882_INTEGER = NUMBER_882_INTEGER_ARRAY;
+
+/** The number 883 integer. */
+static int NUMBER_883_INTEGER_ARRAY[] = {883};
+static int* NUMBER_883_INTEGER = NUMBER_883_INTEGER_ARRAY;
+
+/** The number 884 integer. */
+static int NUMBER_884_INTEGER_ARRAY[] = {884};
+static int* NUMBER_884_INTEGER = NUMBER_884_INTEGER_ARRAY;
+
+/** The number 885 integer. */
+static int NUMBER_885_INTEGER_ARRAY[] = {885};
+static int* NUMBER_885_INTEGER = NUMBER_885_INTEGER_ARRAY;
+
+/** The number 886 integer. */
+static int NUMBER_886_INTEGER_ARRAY[] = {886};
+static int* NUMBER_886_INTEGER = NUMBER_886_INTEGER_ARRAY;
+
+/** The number 887 integer. */
+static int NUMBER_887_INTEGER_ARRAY[] = {887};
+static int* NUMBER_887_INTEGER = NUMBER_887_INTEGER_ARRAY;
+
+/** The number 888 integer. */
+static int NUMBER_888_INTEGER_ARRAY[] = {888};
+static int* NUMBER_888_INTEGER = NUMBER_888_INTEGER_ARRAY;
+
+/** The number 889 integer. */
+static int NUMBER_889_INTEGER_ARRAY[] = {889};
+static int* NUMBER_889_INTEGER = NUMBER_889_INTEGER_ARRAY;
+
+//
+// Numbers 890 - 899.
+//
+
+/** The number 890 integer. */
+static int NUMBER_890_INTEGER_ARRAY[] = {890};
+static int* NUMBER_890_INTEGER = NUMBER_890_INTEGER_ARRAY;
+
+/** The number 891 integer. */
+static int NUMBER_891_INTEGER_ARRAY[] = {891};
+static int* NUMBER_891_INTEGER = NUMBER_891_INTEGER_ARRAY;
+
+/** The number 892 integer. */
+static int NUMBER_892_INTEGER_ARRAY[] = {892};
+static int* NUMBER_892_INTEGER = NUMBER_892_INTEGER_ARRAY;
+
+/** The number 893 integer. */
+static int NUMBER_893_INTEGER_ARRAY[] = {893};
+static int* NUMBER_893_INTEGER = NUMBER_893_INTEGER_ARRAY;
+
+/** The number 894 integer. */
+static int NUMBER_894_INTEGER_ARRAY[] = {894};
+static int* NUMBER_894_INTEGER = NUMBER_894_INTEGER_ARRAY;
+
+/** The number 895 integer. */
+static int NUMBER_895_INTEGER_ARRAY[] = {895};
+static int* NUMBER_895_INTEGER = NUMBER_895_INTEGER_ARRAY;
+
+/** The number 896 integer. */
+static int NUMBER_896_INTEGER_ARRAY[] = {896};
+static int* NUMBER_896_INTEGER = NUMBER_896_INTEGER_ARRAY;
+
+/** The number 897 integer. */
+static int NUMBER_897_INTEGER_ARRAY[] = {897};
+static int* NUMBER_897_INTEGER = NUMBER_897_INTEGER_ARRAY;
+
+/** The number 898 integer. */
+static int NUMBER_898_INTEGER_ARRAY[] = {898};
+static int* NUMBER_898_INTEGER = NUMBER_898_INTEGER_ARRAY;
+
+/** The number 899 integer. */
+static int NUMBER_899_INTEGER_ARRAY[] = {899};
+static int* NUMBER_899_INTEGER = NUMBER_899_INTEGER_ARRAY;
+
 //
 // Numbers 900 - 909.
 //
@@ -2274,6 +4002,438 @@ static int* NUMBER_800_INTEGER = NUMBER_800_INTEGER_ARRAY;
 /** The number 900 integer. */
 static int NUMBER_900_INTEGER_ARRAY[] = {900};
 static int* NUMBER_900_INTEGER = NUMBER_900_INTEGER_ARRAY;
+
+/** The number 901 integer. */
+static int NUMBER_901_INTEGER_ARRAY[] = {901};
+static int* NUMBER_901_INTEGER = NUMBER_901_INTEGER_ARRAY;
+
+/** The number 902 integer. */
+static int NUMBER_902_INTEGER_ARRAY[] = {902};
+static int* NUMBER_902_INTEGER = NUMBER_902_INTEGER_ARRAY;
+
+/** The number 903 integer. */
+static int NUMBER_903_INTEGER_ARRAY[] = {903};
+static int* NUMBER_903_INTEGER = NUMBER_903_INTEGER_ARRAY;
+
+/** The number 904 integer. */
+static int NUMBER_904_INTEGER_ARRAY[] = {904};
+static int* NUMBER_904_INTEGER = NUMBER_904_INTEGER_ARRAY;
+
+/** The number 905 integer. */
+static int NUMBER_905_INTEGER_ARRAY[] = {905};
+static int* NUMBER_905_INTEGER = NUMBER_905_INTEGER_ARRAY;
+
+/** The number 906 integer. */
+static int NUMBER_906_INTEGER_ARRAY[] = {906};
+static int* NUMBER_906_INTEGER = NUMBER_906_INTEGER_ARRAY;
+
+/** The number 907 integer. */
+static int NUMBER_907_INTEGER_ARRAY[] = {907};
+static int* NUMBER_907_INTEGER = NUMBER_907_INTEGER_ARRAY;
+
+/** The number 908 integer. */
+static int NUMBER_908_INTEGER_ARRAY[] = {908};
+static int* NUMBER_908_INTEGER = NUMBER_908_INTEGER_ARRAY;
+
+/** The number 909 integer. */
+static int NUMBER_909_INTEGER_ARRAY[] = {909};
+static int* NUMBER_909_INTEGER = NUMBER_909_INTEGER_ARRAY;
+
+//
+// Numbers 910 - 919.
+//
+
+/** The number 910 integer. */
+static int NUMBER_910_INTEGER_ARRAY[] = {910};
+static int* NUMBER_910_INTEGER = NUMBER_910_INTEGER_ARRAY;
+
+/** The number 911 integer. */
+static int NUMBER_911_INTEGER_ARRAY[] = {911};
+static int* NUMBER_911_INTEGER = NUMBER_911_INTEGER_ARRAY;
+
+/** The number 912 integer. */
+static int NUMBER_912_INTEGER_ARRAY[] = {912};
+static int* NUMBER_912_INTEGER = NUMBER_912_INTEGER_ARRAY;
+
+/** The number 913 integer. */
+static int NUMBER_913_INTEGER_ARRAY[] = {913};
+static int* NUMBER_913_INTEGER = NUMBER_913_INTEGER_ARRAY;
+
+/** The number 914 integer. */
+static int NUMBER_914_INTEGER_ARRAY[] = {914};
+static int* NUMBER_914_INTEGER = NUMBER_914_INTEGER_ARRAY;
+
+/** The number 915 integer. */
+static int NUMBER_915_INTEGER_ARRAY[] = {915};
+static int* NUMBER_915_INTEGER = NUMBER_915_INTEGER_ARRAY;
+
+/** The number 916 integer. */
+static int NUMBER_916_INTEGER_ARRAY[] = {916};
+static int* NUMBER_916_INTEGER = NUMBER_916_INTEGER_ARRAY;
+
+/** The number 917 integer. */
+static int NUMBER_917_INTEGER_ARRAY[] = {917};
+static int* NUMBER_917_INTEGER = NUMBER_917_INTEGER_ARRAY;
+
+/** The number 918 integer. */
+static int NUMBER_918_INTEGER_ARRAY[] = {918};
+static int* NUMBER_918_INTEGER = NUMBER_918_INTEGER_ARRAY;
+
+/** The number 919 integer. */
+static int NUMBER_919_INTEGER_ARRAY[] = {919};
+static int* NUMBER_919_INTEGER = NUMBER_919_INTEGER_ARRAY;
+
+//
+// Numbers 920 - 929.
+//
+
+/** The number 920 integer. */
+static int NUMBER_920_INTEGER_ARRAY[] = {920};
+static int* NUMBER_920_INTEGER = NUMBER_920_INTEGER_ARRAY;
+
+/** The number 921 integer. */
+static int NUMBER_921_INTEGER_ARRAY[] = {921};
+static int* NUMBER_921_INTEGER = NUMBER_921_INTEGER_ARRAY;
+
+/** The number 922 integer. */
+static int NUMBER_922_INTEGER_ARRAY[] = {922};
+static int* NUMBER_922_INTEGER = NUMBER_922_INTEGER_ARRAY;
+
+/** The number 923 integer. */
+static int NUMBER_923_INTEGER_ARRAY[] = {923};
+static int* NUMBER_923_INTEGER = NUMBER_923_INTEGER_ARRAY;
+
+/** The number 924 integer. */
+static int NUMBER_924_INTEGER_ARRAY[] = {924};
+static int* NUMBER_924_INTEGER = NUMBER_924_INTEGER_ARRAY;
+
+/** The number 925 integer. */
+static int NUMBER_925_INTEGER_ARRAY[] = {925};
+static int* NUMBER_925_INTEGER = NUMBER_925_INTEGER_ARRAY;
+
+/** The number 926 integer. */
+static int NUMBER_926_INTEGER_ARRAY[] = {926};
+static int* NUMBER_926_INTEGER = NUMBER_926_INTEGER_ARRAY;
+
+/** The number 927 integer. */
+static int NUMBER_927_INTEGER_ARRAY[] = {927};
+static int* NUMBER_927_INTEGER = NUMBER_927_INTEGER_ARRAY;
+
+/** The number 928 integer. */
+static int NUMBER_928_INTEGER_ARRAY[] = {928};
+static int* NUMBER_928_INTEGER = NUMBER_928_INTEGER_ARRAY;
+
+/** The number 929 integer. */
+static int NUMBER_929_INTEGER_ARRAY[] = {929};
+static int* NUMBER_929_INTEGER = NUMBER_929_INTEGER_ARRAY;
+
+//
+// Numbers 930 - 939.
+//
+
+/** The number 930 integer. */
+static int NUMBER_930_INTEGER_ARRAY[] = {930};
+static int* NUMBER_930_INTEGER = NUMBER_930_INTEGER_ARRAY;
+
+/** The number 931 integer. */
+static int NUMBER_931_INTEGER_ARRAY[] = {931};
+static int* NUMBER_931_INTEGER = NUMBER_931_INTEGER_ARRAY;
+
+/** The number 932 integer. */
+static int NUMBER_932_INTEGER_ARRAY[] = {932};
+static int* NUMBER_932_INTEGER = NUMBER_932_INTEGER_ARRAY;
+
+/** The number 933 integer. */
+static int NUMBER_933_INTEGER_ARRAY[] = {933};
+static int* NUMBER_933_INTEGER = NUMBER_933_INTEGER_ARRAY;
+
+/** The number 934 integer. */
+static int NUMBER_934_INTEGER_ARRAY[] = {934};
+static int* NUMBER_934_INTEGER = NUMBER_934_INTEGER_ARRAY;
+
+/** The number 935 integer. */
+static int NUMBER_935_INTEGER_ARRAY[] = {935};
+static int* NUMBER_935_INTEGER = NUMBER_935_INTEGER_ARRAY;
+
+/** The number 936 integer. */
+static int NUMBER_936_INTEGER_ARRAY[] = {936};
+static int* NUMBER_936_INTEGER = NUMBER_936_INTEGER_ARRAY;
+
+/** The number 937 integer. */
+static int NUMBER_937_INTEGER_ARRAY[] = {937};
+static int* NUMBER_937_INTEGER = NUMBER_937_INTEGER_ARRAY;
+
+/** The number 938 integer. */
+static int NUMBER_938_INTEGER_ARRAY[] = {938};
+static int* NUMBER_938_INTEGER = NUMBER_938_INTEGER_ARRAY;
+
+/** The number 939 integer. */
+static int NUMBER_939_INTEGER_ARRAY[] = {939};
+static int* NUMBER_939_INTEGER = NUMBER_939_INTEGER_ARRAY;
+
+//
+// Numbers 940 - 949.
+//
+
+/** The number 940 integer. */
+static int NUMBER_940_INTEGER_ARRAY[] = {940};
+static int* NUMBER_940_INTEGER = NUMBER_940_INTEGER_ARRAY;
+
+/** The number 941 integer. */
+static int NUMBER_941_INTEGER_ARRAY[] = {941};
+static int* NUMBER_941_INTEGER = NUMBER_941_INTEGER_ARRAY;
+
+/** The number 942 integer. */
+static int NUMBER_942_INTEGER_ARRAY[] = {942};
+static int* NUMBER_942_INTEGER = NUMBER_942_INTEGER_ARRAY;
+
+/** The number 943 integer. */
+static int NUMBER_943_INTEGER_ARRAY[] = {943};
+static int* NUMBER_943_INTEGER = NUMBER_943_INTEGER_ARRAY;
+
+/** The number 944 integer. */
+static int NUMBER_944_INTEGER_ARRAY[] = {944};
+static int* NUMBER_944_INTEGER = NUMBER_944_INTEGER_ARRAY;
+
+/** The number 945 integer. */
+static int NUMBER_945_INTEGER_ARRAY[] = {945};
+static int* NUMBER_945_INTEGER = NUMBER_945_INTEGER_ARRAY;
+
+/** The number 946 integer. */
+static int NUMBER_946_INTEGER_ARRAY[] = {946};
+static int* NUMBER_946_INTEGER = NUMBER_946_INTEGER_ARRAY;
+
+/** The number 947 integer. */
+static int NUMBER_947_INTEGER_ARRAY[] = {947};
+static int* NUMBER_947_INTEGER = NUMBER_947_INTEGER_ARRAY;
+
+/** The number 948 integer. */
+static int NUMBER_948_INTEGER_ARRAY[] = {948};
+static int* NUMBER_948_INTEGER = NUMBER_948_INTEGER_ARRAY;
+
+/** The number 949 integer. */
+static int NUMBER_949_INTEGER_ARRAY[] = {949};
+static int* NUMBER_949_INTEGER = NUMBER_949_INTEGER_ARRAY;
+
+//
+// Numbers 950 - 959.
+//
+
+/** The number 950 integer. */
+static int NUMBER_950_INTEGER_ARRAY[] = {950};
+static int* NUMBER_950_INTEGER = NUMBER_950_INTEGER_ARRAY;
+
+/** The number 951 integer. */
+static int NUMBER_951_INTEGER_ARRAY[] = {951};
+static int* NUMBER_951_INTEGER = NUMBER_951_INTEGER_ARRAY;
+
+/** The number 952 integer. */
+static int NUMBER_952_INTEGER_ARRAY[] = {952};
+static int* NUMBER_952_INTEGER = NUMBER_952_INTEGER_ARRAY;
+
+/** The number 953 integer. */
+static int NUMBER_953_INTEGER_ARRAY[] = {953};
+static int* NUMBER_953_INTEGER = NUMBER_953_INTEGER_ARRAY;
+
+/** The number 954 integer. */
+static int NUMBER_954_INTEGER_ARRAY[] = {954};
+static int* NUMBER_954_INTEGER = NUMBER_954_INTEGER_ARRAY;
+
+/** The number 955 integer. */
+static int NUMBER_955_INTEGER_ARRAY[] = {955};
+static int* NUMBER_955_INTEGER = NUMBER_955_INTEGER_ARRAY;
+
+/** The number 956 integer. */
+static int NUMBER_956_INTEGER_ARRAY[] = {956};
+static int* NUMBER_956_INTEGER = NUMBER_956_INTEGER_ARRAY;
+
+/** The number 957 integer. */
+static int NUMBER_957_INTEGER_ARRAY[] = {957};
+static int* NUMBER_957_INTEGER = NUMBER_957_INTEGER_ARRAY;
+
+/** The number 958 integer. */
+static int NUMBER_958_INTEGER_ARRAY[] = {958};
+static int* NUMBER_958_INTEGER = NUMBER_958_INTEGER_ARRAY;
+
+/** The number 959 integer. */
+static int NUMBER_959_INTEGER_ARRAY[] = {959};
+static int* NUMBER_959_INTEGER = NUMBER_959_INTEGER_ARRAY;
+
+//
+// Numbers 960 - 969.
+//
+
+/** The number 960 integer. */
+static int NUMBER_960_INTEGER_ARRAY[] = {960};
+static int* NUMBER_960_INTEGER = NUMBER_960_INTEGER_ARRAY;
+
+/** The number 961 integer. */
+static int NUMBER_961_INTEGER_ARRAY[] = {961};
+static int* NUMBER_961_INTEGER = NUMBER_961_INTEGER_ARRAY;
+
+/** The number 962 integer. */
+static int NUMBER_962_INTEGER_ARRAY[] = {962};
+static int* NUMBER_962_INTEGER = NUMBER_962_INTEGER_ARRAY;
+
+/** The number 963 integer. */
+static int NUMBER_963_INTEGER_ARRAY[] = {963};
+static int* NUMBER_963_INTEGER = NUMBER_963_INTEGER_ARRAY;
+
+/** The number 964 integer. */
+static int NUMBER_964_INTEGER_ARRAY[] = {964};
+static int* NUMBER_964_INTEGER = NUMBER_964_INTEGER_ARRAY;
+
+/** The number 965 integer. */
+static int NUMBER_965_INTEGER_ARRAY[] = {965};
+static int* NUMBER_965_INTEGER = NUMBER_965_INTEGER_ARRAY;
+
+/** The number 966 integer. */
+static int NUMBER_966_INTEGER_ARRAY[] = {966};
+static int* NUMBER_966_INTEGER = NUMBER_966_INTEGER_ARRAY;
+
+/** The number 967 integer. */
+static int NUMBER_967_INTEGER_ARRAY[] = {967};
+static int* NUMBER_967_INTEGER = NUMBER_967_INTEGER_ARRAY;
+
+/** The number 968 integer. */
+static int NUMBER_968_INTEGER_ARRAY[] = {968};
+static int* NUMBER_968_INTEGER = NUMBER_968_INTEGER_ARRAY;
+
+/** The number 969 integer. */
+static int NUMBER_969_INTEGER_ARRAY[] = {969};
+static int* NUMBER_969_INTEGER = NUMBER_969_INTEGER_ARRAY;
+
+//
+// Numbers 970 - 979.
+//
+
+/** The number 970 integer. */
+static int NUMBER_970_INTEGER_ARRAY[] = {970};
+static int* NUMBER_970_INTEGER = NUMBER_970_INTEGER_ARRAY;
+
+/** The number 971 integer. */
+static int NUMBER_971_INTEGER_ARRAY[] = {971};
+static int* NUMBER_971_INTEGER = NUMBER_971_INTEGER_ARRAY;
+
+/** The number 972 integer. */
+static int NUMBER_972_INTEGER_ARRAY[] = {972};
+static int* NUMBER_972_INTEGER = NUMBER_972_INTEGER_ARRAY;
+
+/** The number 973 integer. */
+static int NUMBER_973_INTEGER_ARRAY[] = {973};
+static int* NUMBER_973_INTEGER = NUMBER_973_INTEGER_ARRAY;
+
+/** The number 974 integer. */
+static int NUMBER_974_INTEGER_ARRAY[] = {974};
+static int* NUMBER_974_INTEGER = NUMBER_974_INTEGER_ARRAY;
+
+/** The number 975 integer. */
+static int NUMBER_975_INTEGER_ARRAY[] = {975};
+static int* NUMBER_975_INTEGER = NUMBER_975_INTEGER_ARRAY;
+
+/** The number 976 integer. */
+static int NUMBER_976_INTEGER_ARRAY[] = {976};
+static int* NUMBER_976_INTEGER = NUMBER_976_INTEGER_ARRAY;
+
+/** The number 977 integer. */
+static int NUMBER_977_INTEGER_ARRAY[] = {977};
+static int* NUMBER_977_INTEGER = NUMBER_977_INTEGER_ARRAY;
+
+/** The number 978 integer. */
+static int NUMBER_978_INTEGER_ARRAY[] = {978};
+static int* NUMBER_978_INTEGER = NUMBER_978_INTEGER_ARRAY;
+
+/** The number 979 integer. */
+static int NUMBER_979_INTEGER_ARRAY[] = {979};
+static int* NUMBER_979_INTEGER = NUMBER_979_INTEGER_ARRAY;
+
+//
+// Numbers 980 - 989.
+//
+
+/** The number 980 integer. */
+static int NUMBER_980_INTEGER_ARRAY[] = {980};
+static int* NUMBER_980_INTEGER = NUMBER_980_INTEGER_ARRAY;
+
+/** The number 981 integer. */
+static int NUMBER_981_INTEGER_ARRAY[] = {981};
+static int* NUMBER_981_INTEGER = NUMBER_981_INTEGER_ARRAY;
+
+/** The number 982 integer. */
+static int NUMBER_982_INTEGER_ARRAY[] = {982};
+static int* NUMBER_982_INTEGER = NUMBER_982_INTEGER_ARRAY;
+
+/** The number 983 integer. */
+static int NUMBER_983_INTEGER_ARRAY[] = {983};
+static int* NUMBER_983_INTEGER = NUMBER_983_INTEGER_ARRAY;
+
+/** The number 984 integer. */
+static int NUMBER_984_INTEGER_ARRAY[] = {984};
+static int* NUMBER_984_INTEGER = NUMBER_984_INTEGER_ARRAY;
+
+/** The number 985 integer. */
+static int NUMBER_985_INTEGER_ARRAY[] = {985};
+static int* NUMBER_985_INTEGER = NUMBER_985_INTEGER_ARRAY;
+
+/** The number 986 integer. */
+static int NUMBER_986_INTEGER_ARRAY[] = {986};
+static int* NUMBER_986_INTEGER = NUMBER_986_INTEGER_ARRAY;
+
+/** The number 987 integer. */
+static int NUMBER_987_INTEGER_ARRAY[] = {987};
+static int* NUMBER_987_INTEGER = NUMBER_987_INTEGER_ARRAY;
+
+/** The number 988 integer. */
+static int NUMBER_988_INTEGER_ARRAY[] = {988};
+static int* NUMBER_988_INTEGER = NUMBER_988_INTEGER_ARRAY;
+
+/** The number 989 integer. */
+static int NUMBER_989_INTEGER_ARRAY[] = {989};
+static int* NUMBER_989_INTEGER = NUMBER_989_INTEGER_ARRAY;
+
+//
+// Numbers 990 - 999.
+//
+
+/** The number 990 integer. */
+static int NUMBER_990_INTEGER_ARRAY[] = {990};
+static int* NUMBER_990_INTEGER = NUMBER_990_INTEGER_ARRAY;
+
+/** The number 991 integer. */
+static int NUMBER_991_INTEGER_ARRAY[] = {991};
+static int* NUMBER_991_INTEGER = NUMBER_991_INTEGER_ARRAY;
+
+/** The number 992 integer. */
+static int NUMBER_992_INTEGER_ARRAY[] = {992};
+static int* NUMBER_992_INTEGER = NUMBER_992_INTEGER_ARRAY;
+
+/** The number 993 integer. */
+static int NUMBER_993_INTEGER_ARRAY[] = {993};
+static int* NUMBER_993_INTEGER = NUMBER_993_INTEGER_ARRAY;
+
+/** The number 994 integer. */
+static int NUMBER_994_INTEGER_ARRAY[] = {994};
+static int* NUMBER_994_INTEGER = NUMBER_994_INTEGER_ARRAY;
+
+/** The number 995 integer. */
+static int NUMBER_995_INTEGER_ARRAY[] = {995};
+static int* NUMBER_995_INTEGER = NUMBER_995_INTEGER_ARRAY;
+
+/** The number 996 integer. */
+static int NUMBER_996_INTEGER_ARRAY[] = {996};
+static int* NUMBER_996_INTEGER = NUMBER_996_INTEGER_ARRAY;
+
+/** The number 997 integer. */
+static int NUMBER_997_INTEGER_ARRAY[] = {997};
+static int* NUMBER_997_INTEGER = NUMBER_997_INTEGER_ARRAY;
+
+/** The number 998 integer. */
+static int NUMBER_998_INTEGER_ARRAY[] = {998};
+static int* NUMBER_998_INTEGER = NUMBER_998_INTEGER_ARRAY;
+
+/** The number 999 integer. */
+static int NUMBER_999_INTEGER_ARRAY[] = {999};
+static int* NUMBER_999_INTEGER = NUMBER_999_INTEGER_ARRAY;
 
 //
 // Large numbers.

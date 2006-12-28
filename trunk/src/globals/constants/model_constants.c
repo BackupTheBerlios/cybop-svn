@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.19 $ $Date: 2006-12-27 09:50:44 $ $Author: christian $
+ * @version $Revision: 1.20 $ $Date: 2006-12-28 16:04:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -341,16 +341,6 @@ static char LINUX_CONSOLE_MODEL_ARRAY[] = {'l', 'i', 'n', 'u', 'x', '_', 'c', 'o
 static char* LINUX_CONSOLE_MODEL = LINUX_CONSOLE_MODEL_ARRAY;
 static int* LINUX_CONSOLE_MODEL_COUNT = NUMBER_13_INTEGER_ARRAY;
 
-/** The unix socket model. */
-static char UNIX_SOCKET_MODEL_ARRAY[] = {'u', 'n', 'i', 'x', '_', 's', 'o', 'c', 'k', 'e', 't'};
-static char* UNIX_SOCKET_MODEL = UNIX_SOCKET_MODEL_ARRAY;
-static int* UNIX_SOCKET_MODEL_COUNT = NUMBER_11_INTEGER_ARRAY;
-
-/** The tcp socket model. */
-static char TCP_SOCKET_MODEL_ARRAY[] = {'t', 'c', 'p', '_', 's', 'o', 'c', 'k', 'e', 't'};
-static char* TCP_SOCKET_MODEL = TCP_SOCKET_MODEL_ARRAY;
-static int* TCP_SOCKET_MODEL_COUNT = NUMBER_10_INTEGER_ARRAY;
-
 /** The x window system model. */
 static char X_WINDOW_SYSTEM_MODEL_ARRAY[] = {'x', '_', 'w', 'i', 'n', 'd', 'o', 'w', '_', 's', 'y', 's', 't', 'e', 'm'};
 static char* X_WINDOW_SYSTEM_MODEL = X_WINDOW_SYSTEM_MODEL_ARRAY;
@@ -431,6 +421,20 @@ static int* DATAGRAM_COMMUNICATION_STYLE_MODEL_COUNT = NUMBER_8_INTEGER_ARRAY;
 static char RAW_COMMUNICATION_STYLE_MODEL_ARRAY[] = {'r', 'a', 'w'};
 static char* RAW_COMMUNICATION_STYLE_MODEL = RAW_COMMUNICATION_STYLE_MODEL_ARRAY;
 static int* RAW_COMMUNICATION_STYLE_MODEL_COUNT = NUMBER_3_INTEGER_ARRAY;
+
+//
+// Address models.
+//
+
+/** The loopback address model. */
+static char LOOPBACK_ADDRESS_MODEL_ARRAY[] = {'l', 'o', 'o', 'p', 'b', 'a', 'c', 'k'};
+static char* LOOPBACK_ADDRESS_MODEL = LOOPBACK_ADDRESS_MODEL_ARRAY;
+static int* LOOPBACK_ADDRESS_MODEL_COUNT = NUMBER_8_INTEGER_ARRAY;
+
+/** The any address model. */
+static char ANY_ADDRESS_MODEL_ARRAY[] = {'a', 'n', 'y'};
+static char* ANY_ADDRESS_MODEL = ANY_ADDRESS_MODEL_ARRAY;
+static int* ANY_ADDRESS_MODEL_COUNT = NUMBER_3_INTEGER_ARRAY;
 
 //
 // Protocol models.

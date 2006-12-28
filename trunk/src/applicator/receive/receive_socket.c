@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2006-12-28 01:10:48 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2006-12-28 16:04:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -1059,7 +1059,7 @@ fprintf(stderr, "TEST: receive socket signal buffer count: %i \n", *((int*) p2))
     // Get signal memory mutex.
     get(p0, (void*) SIGNAL_MEMORY_MUTEX_INTERNAL, (void*) &smt, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     // Get socket mutex.
-    get(p0, (void*) SOCKET_MUTEX_INTERNAL, (void*) &tmt, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p0, (void*) SERVER_SOCKET_MUTEX_INTERNAL, (void*) &tmt, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     // Get interrupt request internal.
     get(p0, (void*) INTERRUPT_REQUEST_INTERNAL, (void*) &irq, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
@@ -1074,9 +1074,9 @@ fprintf(stderr, "TEST: receive socket signal buffer count: %i \n", *((int*) p2))
     pthread_mutex_lock(*tmt);
 
     // Get user interface commands internal.
-    get(p0, (void*) SOCKET_THREAD_COMMANDS_INTERNAL, (void*) &c, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    get(p0, (void*) SOCKET_THREAD_COMMANDS_COUNT_INTERNAL, (void*) &cc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    get(p0, (void*) SOCKET_THREAD_COMMANDS_SIZE_INTERNAL, (void*) &cs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p0, (void*) SERVER_SOCKET_THREAD_COMMANDS_INTERNAL, (void*) &c, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p0, (void*) SERVER_SOCKET_THREAD_COMMANDS_COUNT_INTERNAL, (void*) &cc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p0, (void*) SERVER_SOCKET_THREAD_COMMANDS_SIZE_INTERNAL, (void*) &cs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
     // Unlock socket mutex.
     pthread_mutex_unlock(*tmt);
@@ -1140,14 +1140,14 @@ void receive_socket_thread(void* p0) {
     int** bs = (int**) &NULL_POINTER;
 
     // Get server socket.
-    get(p0, (void*) SOCKET_INTERNAL, (void*) &s, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p0, (void*) SERVER_SOCKET_INTERNAL, (void*) &s, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     // Get socket address.
-    get(p0, (void*) SOCKET_ADDRESS_INTERNAL, (void*) &a, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    get(p0, (void*) SOCKET_ADDRESS_SIZE_INTERNAL, (void*) &as, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p0, (void*) SERVER_SOCKET_ADDRESS_INTERNAL, (void*) &a, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p0, (void*) SERVER_SOCKET_ADDRESS_SIZE_INTERNAL, (void*) &as, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     // Get character buffer.
-    get(p0, (void*) SOCKET_THREAD_CHARACTER_BUFFER_INTERNAL, (void*) &b, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    get(p0, (void*) SOCKET_THREAD_CHARACTER_BUFFER_COUNT_INTERNAL, (void*) &bc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    get(p0, (void*) SOCKET_THREAD_CHARACTER_BUFFER_SIZE_INTERNAL, (void*) &bs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p0, (void*) SERVER_SOCKET_THREAD_CHARACTER_BUFFER_INTERNAL, (void*) &b, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p0, (void*) SERVER_SOCKET_THREAD_CHARACTER_BUFFER_COUNT_INTERNAL, (void*) &bc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p0, (void*) SERVER_SOCKET_THREAD_CHARACTER_BUFFER_SIZE_INTERNAL, (void*) &bs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
     while (1) {
 
@@ -1324,7 +1324,7 @@ void receive_socket(void* p0, void* p1, void* p2, void* p3, void* p4) {
         pthread_mutex_unlock(*mt);
 
         // Only create thread, if not existent.
-        if (*SOCKET_THREAD == *INVALID_VALUE) {
+        if (*WWW_SERVICE_THREAD == *INVALID_VALUE) {
 
             log_message_debug("Create new socket receive service thread.");
 
@@ -1343,7 +1343,7 @@ void receive_socket(void* p0, void* p1, void* p2, void* p3, void* p4) {
             // - added to the internal memory
             // - handed over to the thread procedure HERE
             // - deallocated at service shutdown
-            pthread_create(SOCKET_THREAD, NULL_POINTER, (void*) &receive_socket_thread, p0);
+            pthread_create(WWW_SERVICE_THREAD, NULL_POINTER, (void*) &receive_socket_thread, p0);
 
     /*?? Following is a TEST -- delete later!
 

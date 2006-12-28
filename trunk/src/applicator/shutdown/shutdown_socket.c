@@ -20,13 +20,13 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2006-12-28 01:10:48 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2006-12-28 16:04:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
 
-#ifndef SHUTDOWN_TCP_SOCKET_SOURCE
-#define SHUTDOWN_TCP_SOCKET_SOURCE
+#ifndef SHUTDOWN_SOCKET_SOURCE
+#define SHUTDOWN_SOCKET_SOURCE
 
 #ifdef LINUX_OPERATING_SYSTEM
 
@@ -38,84 +38,97 @@
 #include "../../memoriser/array.c"
 
 /**
- * Shuts down the tcp socket service.
+ * Shuts down the socket service.
  *
  * @param p0 the internals memory
- * @param p1 the knowledge
- * @param p2 the knowledge count
- * @param p3 the knowledge size
+ * @param p1 the base internal
+ * @param p2 the knowledge
+ * @param p3 the knowledge count
+ * @param p4 the knowledge size
  */
-void shutdown_tcp_socket(void* p0, void* p1, void* p2, void* p3) {
+void shutdown_socket(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    log_message_debug("Shutdown tcp socket.");
+    log_message_debug("Shutdown socket.");
 
-    // The tcp server socket internal.
+    // The server socket internal.
     int** si = (int**) &NULL_POINTER;
 
-    // Get tcp server socket internal.
-    get(p0, (void*) TCP_SOCKET_INTERNAL, (void*) &si, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    // Get server socket internal.
+    get(p0, (void*) SERVER_SOCKET_INTERNAL, (void*) &si, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
     if (*si != NULL_POINTER) {
 
-        // Interrupt tcp socket service thread.
-        interrupt_tcp_socket();
+        // Interrupt server socket service thread.
+        interrupt_socket();
 
-        // The tcp server socket.
+        // The server socket.
         int** s = (int**) &NULL_POINTER;
-        // The tcp client sockets.
+/*??
+        // The client sockets.
         void** cs = NULL_POINTER;
         void** csc = NULL_POINTER;
         void** css = NULL_POINTER;
+*/
         // The activation flag.
         void** af = NULL_POINTER;
         // The blocking flag.
         void** bf = NULL_POINTER;
-        // The tcp signal ids.
+/*??
+        // The signal ids.
         void** id = NULL_POINTER;
         void** idc = NULL_POINTER;
         void** ids = NULL_POINTER;
+*/
 
         // Get server socket.
-        get(p0, (void*) TCP_SOCKET_INTERNAL, (void*) &s, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        get(p0, (void*) SERVER_SOCKET_INTERNAL, (void*) &s, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+/*??
         // Get client sockets.
-        get(p0, (void*) TCP_CLIENT_SOCKETS_INTERNAL, (void*) &cs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        get(p0, (void*) TCP_CLIENT_SOCKETS_COUNT_INTERNAL, (void*) &csc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        get(p0, (void*) TCP_CLIENT_SOCKETS_SIZE_INTERNAL, (void*) &css, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        get(p0, (void*) SERVER_CLIENT_SOCKETS_INTERNAL, (void*) &cs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        get(p0, (void*) SERVER_CLIENT_SOCKETS_COUNT_INTERNAL, (void*) &csc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        get(p0, (void*) SERVER_CLIENT_SOCKETS_SIZE_INTERNAL, (void*) &css, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+*/
         // Get interrupt flag.
-    //??    get(p0, (void*) TCP_SOCKET_INTERRUPT_INTERNAL, (void*) &af, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    //??    get(p0, (void*) SERVER_SOCKET_INTERRUPT_INTERNAL, (void*) &af, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         // Get blocking flag.
-        get(p0, (void*) TCP_SOCKET_BLOCKING_INTERNAL, (void*) &bf, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        get(p0, (void*) SERVER_SOCKET_BLOCKING_INTERNAL, (void*) &bf, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+/*??
         // Get signal ids.
-        get(p0, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_INTERNAL, (void*) &id, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        get(p0, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_COUNT_INTERNAL, (void*) &idc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        get(p0, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_SIZE_INTERNAL, (void*) &ids, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        get(p0, (void*) SERVER_CLIENT_SOCKET_SIGNAL_IDS_INTERNAL, (void*) &id, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        get(p0, (void*) SERVER_CLIENT_SOCKET_SIGNAL_IDS_COUNT_INTERNAL, (void*) &idc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        get(p0, (void*) SERVER_CLIENT_SOCKET_SIGNAL_IDS_SIZE_INTERNAL, (void*) &ids, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+*/
 
-        // Close tcp server socket.
+        // Close server socket.
         close(**s);
 
-        // Destroy tcp server socket.
+        // Destroy server socket.
         deallocate(s, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-        // Destroy tcp client sockets.
+/*??
+        // Destroy client sockets.
         deallocate_array((void*) cs, (void*) css, (void*) INTEGER_ARRAY);
         deallocate(csc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
         deallocate(css, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+*/
         // Destroy activation flag.
         deallocate(af, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
         // Destroy blocking flag.
         deallocate(bf, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-        // Destroy tcp signal ids.
+/*??
+        // Destroy signal ids.
         deallocate_array((void*) id, (void*) ids, (void*) INTEGER_ARRAY);
         deallocate(idc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
         deallocate(ids, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+*/
 
     } else {
 
-        log_message_debug("WARNING: Could not shutdown tcp socket. There is no tcp socket service running.");
+        log_message_debug("WARNING: Could not shutdown socket. There is no server socket running.");
     }
 }
 
 /* LINUX_OPERATING_SYSTEM */
 #endif
 
-/* SHUTDOWN_TCP_SOCKET_SOURCE */
+/* SHUTDOWN_SOCKET_SOURCE */
 #endif

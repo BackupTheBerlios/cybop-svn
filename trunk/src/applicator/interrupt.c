@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2006-06-02 06:03:33 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2006-12-28 16:04:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -28,8 +28,7 @@
 #define INTERRUPT_SOURCE
 
 #include "../applicator/interrupt/interrupt_linux_console.c"
-#include "../applicator/interrupt/interrupt_tcp_socket.c"
-#include "../applicator/interrupt/interrupt_unix_socket.c"
+#include "../applicator/interrupt/interrupt_socket.c"
 #include "../applicator/interrupt/interrupt_x_window_system.c"
 #include "../globals/constants/abstraction_constants.c"
 #include "../globals/constants/channel_constants.c"
@@ -92,31 +91,21 @@ void interrupt_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
 
     if (r == 0) {
 
-        compare_arrays((void*) *sm, (void*) *smc, (void*) TCP_SOCKET_MODEL, (void*) TCP_SOCKET_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != 0) {
-
-            interrupt_tcp_socket(p5, p2, p3, p4);
-        }
-    }
-
-    if (r == 0) {
-
-        compare_arrays((void*) *sm, (void*) *smc, (void*) UNIX_SOCKET_MODEL, (void*) UNIX_SOCKET_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != 0) {
-
-            interrupt_unix_socket(p5, p2, p3, p4);
-        }
-    }
-
-    if (r == 0) {
-
         compare_arrays((void*) *sm, (void*) *smc, (void*) X_WINDOW_SYSTEM_MODEL, (void*) X_WINDOW_SYSTEM_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
             interrupt_x_window_system(p5, p2, p3, p4);
+        }
+    }
+
+    if (r == 0) {
+
+        compare_arrays((void*) *sm, (void*) *smc, (void*) WWW_SERVICE_MODEL, (void*) WWW_SERVICE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != 0) {
+
+            interrupt_socket(p5, (void*) WWW_BASE_INTERNAL, p2, p3, p4);
         }
     }
 }

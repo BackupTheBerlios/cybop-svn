@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.27 $ $Date: 2006-12-28 01:10:48 $ $Author: christian $
+ * @version $Revision: 1.28 $ $Date: 2006-12-28 16:04:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -191,8 +191,8 @@ void manage(void* p0, void* p1) {
     startup_internal_memory(i,
         (void*) &k, (void*) &kc, (void*) &ks,
         (void*) &s, (void*) &sc, (void*) &ss,
-        (void*) &smt, (void*) &lmt, (void*) &umt, (void*) &tmt, (void*) &xmt,
-        (void*) &irq);
+        (void*) &irq,
+        (void*) &signal_memory_mutex, (void*) &linux_console_mutex, (void*) &x_window_system_mutex, (void*) &www_service_mutex);
     // Start up system signal handler.
     startup_system_signal_handler();
     // Start up initial signal.
@@ -270,7 +270,7 @@ void manage(void* p0, void* p1) {
     // Shutdown x window system.
     shutdown_x_window_system(i, k, (void*) kc, (void*) ks);
     // Shutdown www service.
-    shutdown_www_service(i, k, (void*) kc, (void*) ks);
+    shutdown_socket(i, (void*) WWW_BASE_INTERNAL, k, (void*) kc, (void*) ks);
 
     // CAUTION! Do NOT remove any internal memory internals!
     // The internals have a fixed position within the internal memory.

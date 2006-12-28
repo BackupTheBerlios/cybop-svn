@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.13 $ $Date: 2006-06-11 21:47:09 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2006-12-28 16:04:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description This module shuts down a service.
  */
@@ -29,8 +29,7 @@
 #define SHUTDOWN_SOURCE
 
 #include "../applicator/shutdown/shutdown_linux_console.c"
-#include "../applicator/shutdown/shutdown_tcp_socket.c"
-#include "../applicator/shutdown/shutdown_unix_socket.c"
+#include "../applicator/shutdown/shutdown_socket.c"
 #include "../applicator/shutdown/shutdown_x_window_system.c"
 #include "../globals/constants/abstraction_constants.c"
 #include "../globals/constants/log_constants.c"
@@ -81,9 +80,6 @@ void shutdown_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
     // The comparison result.
     int r = 0;
 
-    // Reset comparison result.
-    r = 0;
-
     if (r == 0) {
 
         compare_arrays((void*) *sm, (void*) *smc, (void*) LINUX_CONSOLE_MODEL, (void*) LINUX_CONSOLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
@@ -96,31 +92,21 @@ void shutdown_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
     if (r == 0) {
 
-        compare_arrays((void*) *sm, (void*) *smc, (void*) UNIX_SOCKET_MODEL, (void*) UNIX_SOCKET_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != 0) {
-
-            shutdown_unix_socket(p5, p2, p3, p4);
-        }
-    }
-
-    if (r == 0) {
-
-        compare_arrays((void*) *sm, (void*) *smc, (void*) TCP_SOCKET_MODEL, (void*) TCP_SOCKET_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != 0) {
-
-            shutdown_tcp_socket(p5, p2, p3, p4);
-        }
-    }
-
-    if (r == 0) {
-
         compare_arrays((void*) *sm, (void*) *smc, (void*) X_WINDOW_SYSTEM_MODEL, (void*) X_WINDOW_SYSTEM_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
             shutdown_x_window_system(p5, p2, p3, p4);
+        }
+    }
+
+    if (r == 0) {
+
+        compare_arrays((void*) *sm, (void*) *smc, (void*) WWW_SERVICE_MODEL, (void*) WWW_SERVICE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != 0) {
+
+            shutdown_socket(p5, (void*) WWW_BASE_INTERNAL, p2, p3, p4);
         }
     }
 }

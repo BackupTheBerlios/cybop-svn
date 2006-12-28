@@ -20,12 +20,12 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2006-12-28 01:10:48 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2006-12-28 16:04:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef SEND_TCP_SOCKET_SOURCE
-#define SEND_TCP_SOCKET_SOURCE
+#ifndef SEND_SOCKET_SOURCE
+#define SEND_SOCKET_SOURCE
 
 #include <netinet/in.h>
 #include <sys/socket.h>
@@ -35,7 +35,7 @@
 #include "../../globals/logger/logger.c"
 
 /**
- * Sends a web user interface (wui) via tcp socket.
+ * Sends a message via socket.
  *
  * @param p0 the internal memory
  * @param p1 the receiver abstraction
@@ -50,33 +50,34 @@
  * @param p10 the source wui model count
  * @param p11 the source wui details (meta properties of root compound model)
  * @param p12 the source wui details count
- * @param p13 the knowledge memory
- * @param p14 the knowledge memory count
+ * @param p13 the base internal
+ * @param p14 the knowledge memory
+ * @param p15 the knowledge memory count
  */
-void send_tcp_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
-    void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14) {
+void send_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
+    void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14, void* p15) {
 
-    log_message_debug("Send tcp socket message.");
+    log_message_debug("Send socket message.");
 
-    // The tcp server socket.
+    // The server socket.
     //?? TODO: Determine socket here, depending on service,
     // e.g. "80" for http, "21" for ftp etc.
     int s = 3456;
-    // The tcp socket address.
+    // The socket address.
     struct sockaddr_in* a = NULL_POINTER;
     int* as = NULL_POINTER;
     // The client socket.
     int cs = *INVALID_VALUE;
-    // The serialised string buffer array to be sent to the tcp socket.
+    // The serialised string buffer array to be sent to the socket.
 //??    void* b = NULL_POINTER;
     void* b = "close";
     int bc = *NUMBER_0_INTEGER;
     int bs = *NUMBER_0_INTEGER;
 
-    // Allocate tcp socket address size.
+    // Allocate socket address size.
     allocate((void*) &as, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
-    // Initialise tcp client socket.
+    // Initialise client socket.
     //
     // param 0: namespace
     // param 1: style
@@ -86,12 +87,12 @@ void send_tcp_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
     // The latter is to be used for address family assignment.
     // See further below!
     cs = socket(PF_INET, SOCK_STREAM, *NUMBER_0_INTEGER);
-    // Initialise tcp client socket address size.
+    // Initialise client socket address size.
     *as = sizeof(struct sockaddr_in);
 
     fprintf(stderr, "TEST: cs: %i \n", cs);
 
-    // Allocate tcp socket address.
+    // Allocate socket address.
     a = (struct sockaddr_in*) malloc(*as);
 
     // Initialise socket address.
@@ -116,7 +117,7 @@ void send_tcp_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
 
     } else {
 
-        log_message_debug("Error: Could not send message via tcp socket. The tcp socket address is null.");
+        log_message_debug("Error: Could not send message via socket. The socket address is null.");
     }
 
     // Connect client socket "cs" to the server socket whose address is
@@ -147,7 +148,7 @@ void send_tcp_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
 //??            allocate((void*) &b, (void*) &bs, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
             // Serialise web user interface (wui) into buffer array.
-//??            serialise_tcp_socket((void*) &b, (void*) &bc, (void*) &bs, p1, p2, p3, p4, p5, p6, NULL_POINTER, NULL_POINTER, p7, p8, p11, p12);
+//??            serialise_socket((void*) &b, (void*) &bc, (void*) &bs, p1, p2, p3, p4, p5, p6, NULL_POINTER, NULL_POINTER, p7, p8, p11, p12);
 
 /*??
             encode_model((void*) &b, (void*) &bc, (void*) &bs,
@@ -165,8 +166,8 @@ void send_tcp_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
         // received without error.
         bc = send(cs, b, /*??bs*/5, *NUMBER_0_INTEGER);
 
-            // Write serialised buffer array as message to tcp socket.
-//??            write_data(cs, NULL_POINTER, NULL_POINTER, b, (void*) &bc, (void*) TCP_SOCKET_MODEL, (void*) TCP_SOCKET_MODEL_COUNT);
+            // Write serialised buffer array as message to socket.
+//??            write_data(cs, NULL_POINTER, NULL_POINTER, b, (void*) &bc, (void*) SERVER_SOCKET_MODEL, (void*) SERVER_SOCKET_MODEL_COUNT);
 
         printf("TEST: sende: %s\n", b);
 
@@ -175,7 +176,7 @@ void send_tcp_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
 
     } else {
 
-        log_message_debug("Could not send message via tcp socket. The send operation failed.");
+        log_message_debug("Could not send message via socket. The send operation failed.");
     }
 
 /*??
@@ -187,15 +188,15 @@ void send_tcp_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
 
         } else {
 
-            log_message_debug("Could not send message via tcp socket. The client socket number was not found.");
+            log_message_debug("Could not send message via socket. The client socket number was not found.");
         }
 
     } else {
 
-        log_message_debug("Could not send message via tcp socket. The signal id index is invalid.");
+        log_message_debug("Could not send message via socket. The signal id index is invalid.");
     }
 */
 }
 
-/* SEND_TCP_SOCKET_SOURCE */
+/* SEND_SOCKET_SOURCE */
 #endif

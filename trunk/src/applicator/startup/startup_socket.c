@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2006-12-28 01:10:48 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2006-12-28 16:04:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -37,7 +37,9 @@
 #include <unistd.h>
 #include "../../globals/constants/abstraction_constants.c"
 #include "../../globals/constants/integer_constants.c"
+#include "../../globals/constants/model_constants.c"
 #include "../../globals/constants/structure_constants.c"
+#include "../../globals/constants/system_constants.c"
 #include "../../globals/variables/variables.c"
 #include "../../memoriser/accessor.c"
 #include "../../memoriser/array.c"
@@ -165,147 +167,284 @@ void startup_socket_get_style(void* p0, void* p1, void* p2) {
 }
 
 /**
- * Gets the address in ipv4 and ipv6 format.
+ * Gets the ipv4 host address.
  *
- * @param p0 the ipv4 address (Hand over as reference!)
- * @param p1 the ipv6 address (Hand over as reference!)
- * @param p2 the address model
- * @param p3 the address model count
+ * @param p0 the ipv4 host address (Hand over as reference!)
+ * @param p1 the address model
+ * @param p2 the address model count
  */
-void startup_socket_get_address(void* p0, void* p1, void* p2, void* p3) {
+void startup_socket_get_ipv4_host_address(void* p0, void* p1, void* p2) {
 
-    if (p1 != NULL_POINTER) {
+    if (p0 != NULL_POINTER) {
 
-        int* a6 = (int*) p1;
+        int* a = (int*) p0;
 
-        if (p0 != NULL_POINTER) {
+        log_message_debug("Startup socket get ipv4 host address.");
 
-            int* a4 = (int*) p0;
+        // The comparison result.
+        int r = 0;
 
-            log_message_debug("Startup socket get address.");
+        if (r == 0) {
 
-            // The comparison result.
-            int r = 0;
+            compare_arrays(p1, p2, (void*) LOOPBACK_ADDRESS_MODEL, (void*) LOOPBACK_ADDRESS_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-            if (r == 0) {
+            if (r != 0) {
 
-                compare_arrays(p2, p3, (void*) LOOPBACK_ADDRESS_MODEL, (void*) LOOPBACK_ADDRESS_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-                if (r != 0) {
-
-                    *a4 = INADDR_LOOPBACK;
-                    *a6 = IN6ADDR_LOOPBACK_INIT;
-                }
+                *a = INADDR_LOOPBACK;
             }
+        }
 
-            if (r == 0) {
+        if (r == 0) {
 
-                compare_arrays(p2, p3, (void*) ANY_ADDRESS_MODEL, (void*) ANY_ADDRESS_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+            compare_arrays(p1, p2, (void*) ANY_ADDRESS_MODEL, (void*) ANY_ADDRESS_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-                if (r != 0) {
+            if (r != 0) {
 
-                    *a4 = INADDR_ANY;
-                    *a6 = IN6ADDR_ANY_INIT;
-                }
+                *a = INADDR_ANY;
             }
-
-        } else {
-
-            log_message_debug("Could not get address. The ipv4 address is null.");
         }
 
     } else {
 
-        log_message_debug("Could not get address. The ipv6 address is null.");
+        log_message_debug("Could not get ipv4 host address. The ipv4 host address is null.");
     }
 }
 
 /**
- * Initialises the socket address.
+ * Gets the ipv6 host address.
  *
- * @param p0 the socket address
- * @param p1 the address namespace
- * @param p2 the ipv4 address
- * @param p3 the ipv6 address
- * @param p4 the socket port
+ * @param p0 the ipv6 host address (Hand over as reference!)
+ * @param p1 the address model
+ * @param p2 the address model count
  */
-void startup_socket_initialise_address(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void startup_socket_get_ipv6_host_address(void* p0, void* p1, void* p2) {
 
-    if (p4 != NULL_POINTER) {
+    if (p0 != NULL_POINTER) {
 
-        int* p = (int*) p4;
+        struct in6_addr* a = (struct in6_addr*) p0;
 
-        if (p3 != NULL_POINTER) {
+        log_message_debug("Startup socket get ipv6 host address.");
 
-            int* ipv6 = (int*) p3;
+        // The comparison result.
+        int r = 0;
 
-            if (p2 != NULL_POINTER) {
+        if (r == 0) {
 
-                int* ipv4 = (int*) p2;
+            compare_arrays(p1, p2, (void*) LOOPBACK_ADDRESS_MODEL, (void*) LOOPBACK_ADDRESS_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-                if (p1 != NULL_POINTER) {
+            if (r != 0) {
 
-                    int* n = (int*) p1;
-
-                    if (p0 != NULL_POINTER) {
-
-                        struct sockaddr_in** a = (struct sockaddr_in**) p0;
-
-                        log_message_debug("Startup socket initialise address.");
-
-                        // Set namespace (address format/ family).
-                        //
-                        // CAUTION! Use "AF_INET" here and NOT "PF_INET"!
-                        // The latter is to be used for socket creation.
-                        *a->sin_family = *n;
-
-                        // Set host address.
-                        //
-                        // The "a.sin_addr" field is of type "struct in_addr".
-                        // This data type is used in certain contexts to contain an IPv4 internet host address.
-                        // It has just one field, named "s_addr", which records the host address number as an "uint32_t".
-                        //
-                        // CAUTION! Convert uint16_t integer hostshort from host byte order
-                        // to network byte order:
-                        // - "htons" and "ntohs" to convert values for the sin_port member
-                        // - "htonl" and "ntohl" to convert IPv4 addresses for the sin_addr member
-                        if (*n == PF_INET6) {
-
-//??                            inet_aton(htonl(INADDR_ANY), (struct in_addr*) &(a->sin_addr));
-                            inet_aton(ipv6, (struct in_addr*) &((*a)->sin_addr));
-
-                        } else {
-
-                            inet_aton(ipv4, (struct in_addr*) &((*a)->sin_addr));
-                        }
-
-                        // Set socket port.
-//??                        a->sin_port = htons(*((uint16_t*) p6));
-                        *a->sin_port = *p;
-
-                    } else {
-
-                        log_message_debug("Error: Could not initialise socket address. The socket address is null.");
-                    }
-
-                } else {
-
-                    log_message_debug("Error: Could not initialise socket address. The address namespace is null.");
-                }
-
-            } else {
-
-                log_message_debug("Error: Could not initialise socket address. The ipv4 address is null.");
+                *a = in6addr_loopback; //?? IN6ADDR_LOOPBACK_INIT
             }
+        }
 
-        } else {
+        if (r == 0) {
 
-            log_message_debug("Error: Could not initialise socket address. The ipv6 address is null.");
+            compare_arrays(p1, p2, (void*) ANY_ADDRESS_MODEL, (void*) ANY_ADDRESS_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+            if (r != 0) {
+
+                *a = in6addr_any; //?? IN6ADDR_ANY_INIT
+            }
         }
 
     } else {
 
-        log_message_debug("Error: Could not initialise socket address. The socket port is null.");
+        log_message_debug("Could not get ipv6 host address. The ipv6 host address is null.");
+    }
+}
+
+/**
+ * Initialises the local socket address.
+ *
+ * @param p0 the local socket address (Hand over as reference!)
+ * @param p1 the file name
+ * @param p2 the file name count
+ */
+void startup_socket_initialise_local_socket_address(void* p0, void* p1, void* p2) {
+
+    if (p2 != NULL_POINTER) {
+
+        int* fc = (int*) p2;
+
+        if (p1 != NULL_POINTER) {
+
+            char* f = (char*) p1;
+
+            if (p0 != NULL_POINTER) {
+
+                struct sockaddr_un** a = (struct sockaddr_un**) p0;
+
+                log_message_debug("Startup socket initialise local socket address.");
+
+                // Set namespace (address format/ family).
+                //
+                // CAUTION! Use the prefix "AF_" here and NOT "PF_"!
+                // The latter is to be used for socket creation.
+                (*a)->sun_family = AF_LOCAL;
+
+                // The terminated file name.
+                char* t = NULL_POINTER;
+                int ts = *fc + NUMBER_1_INTEGER;
+
+                if
+
+                // Set file name.
+                //
+                // CAUTION! For some strange reason, the file name's length is
+                // limited to 108 ascii characters in the GNU C library!
+                (*a)->sun_path = f;
+
+            } else {
+
+                log_message_debug("Error: Could not initialise local socket address. The socket address is null.");
+            }
+
+        } else {
+
+            log_message_debug("Error: Could not initialise local socket address. The file name is null.");
+        }
+
+    } else {
+
+        log_message_debug("Error: Could not initialise local socket address. The file name count is null.");
+    }
+}
+
+/**
+ * Initialises the ipv4 socket address.
+ *
+ * @param p0 the ipv4 socket address (Hand over as reference!)
+ * @param p1 the host address
+ * @param p2 the socket port
+ */
+void startup_socket_initialise_ipv4_socket_address(void* p0, void* p1, void* p2) {
+
+    if (p2 != NULL_POINTER) {
+
+        int* p = (int*) p2;
+
+        if (p1 != NULL_POINTER) {
+
+            int* h = (int*) p1;
+
+            if (p0 != NULL_POINTER) {
+
+                struct sockaddr_in** a = (struct sockaddr_in**) p0;
+
+                log_message_debug("Startup socket initialise ipv4 socket address.");
+
+                // Set namespace (address format/ family).
+                //
+                // CAUTION! Use the prefix "AF_" here and NOT "PF_"!
+                // The latter is to be used for socket creation.
+                (*a)->sin_family = AF_INET;
+
+                // Set host address.
+                //
+                // CAUTION! The address MUST BE represented in a canonical
+                // format called "network byte order".
+                //
+                // The "a.sin_addr" field is of type "struct in_addr".
+                // This data type is used in certain contexts to contain an IPv4 internet host address.
+                // It has just one field, named "s_addr", which records the host address number as an "uint32_t".
+                //
+                // CAUTION! Convert uint16_t integer hostshort from host byte order
+                // to network byte order:
+                // - "htons" and "ntohs" to convert values for the sin_port member
+                // - "htonl" and "ntohl" to convert IPv4 addresses for the sin_addr member
+//??                inet_aton(ipv4, (struct in_addr*) &((*a)->sin_addr));
+                (*a)->sin_addr.s_addr = *h;
+
+                // Set socket port.
+                //
+                // CAUTION! The port number MUST BE represented in a canonical
+                // format called "network byte order".
+//??                a->sin_port = htons(*((uint16_t*) p6));
+                (*a)->sin_port = *p;
+
+            } else {
+
+                log_message_debug("Error: Could not initialise ipv4 socket address. The socket address is null.");
+            }
+
+        } else {
+
+            log_message_debug("Error: Could not initialise ipv4 socket address. The host address is null.");
+        }
+
+    } else {
+
+        log_message_debug("Error: Could not initialise ipv4 socket address. The socket port is null.");
+    }
+}
+
+/**
+ * Initialises the ipv6 socket address.
+ *
+ * @param p0 the ipv6 socket address (Hand over as reference!)
+ * @param p1 the host address
+ * @param p2 the socket port
+ */
+void startup_socket_initialise_ipv6_socket_address(void* p0, void* p1, void* p2) {
+
+    if (p2 != NULL_POINTER) {
+
+        int* p = (int*) p2;
+
+        if (p1 != NULL_POINTER) {
+
+            struct in6_addr* h = (struct in6_addr*) p1;
+
+            if (p0 != NULL_POINTER) {
+
+                struct sockaddr_in6** a = (struct sockaddr_in6**) p0;
+
+                log_message_debug("Startup socket initialise ipv6 socket address.");
+
+                // Set namespace (address format/ family).
+                //
+                // CAUTION! Use the prefix "AF_" here and NOT "PF_"!
+                // The latter is to be used for socket creation.
+                (*a)->sin_family = AF_INET6;
+
+                // Set host address.
+                //
+                // CAUTION! The address MUST BE represented in a canonical
+                // format called "network byte order".
+                //
+                // The "a.sin_addr" field is of type "struct in_addr".
+                // This data type is used in certain contexts to contain an IPv4 internet host address.
+                // It has just one field, named "s_addr", which records the host address number as an "uint32_t".
+                //
+                // CAUTION! Convert uint16_t integer hostshort from host byte order
+                // to network byte order:
+                // - "htons" and "ntohs" to convert values for the sin_port member
+                // - "htonl" and "ntohl" to convert IPv4 addresses for the sin_addr member
+//??                inet_aton(htonl(INADDR_ANY), (struct in_addr*) &(a->sin_addr));
+//??                inet_aton(ipv6, (struct in_addr*) &((*a)->sin_addr));
+                (*a)->sin_addr = *h;
+
+                // Set socket port.
+                //
+                // CAUTION! The port number MUST BE represented in a canonical
+                // format called "network byte order".
+//??                a->sin_port = htons(*((uint16_t*) p6));
+                (*a)->sin_port = *p;
+
+            } else {
+
+                log_message_debug("Error: Could not initialise ipv6 socket address. The socket address is null.");
+            }
+
+        } else {
+
+            log_message_debug("Error: Could not initialise ipv6 socket address. The host address is null.");
+        }
+
+    } else {
+
+        log_message_debug("Error: Could not initialise ipv6 socket address. The socket port is null.");
     }
 }
 
@@ -317,8 +456,8 @@ void startup_socket_initialise_address(void* p0, void* p1, void* p2, void* p3, v
  * @param p2 the namespace model count
  * @param p3 the style model
  * @param p4 the style model count
- * @param p5 the ip address model
- * @param p6 the ip address model count
+ * @param p5 the host address model
+ * @param p6 the host address model count
  * @param p7 the port model
  * @param p8 the base internal
  * @param p9 the knowledge memory
@@ -340,15 +479,19 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
         int an = *INVALID_VALUE;
         // The communication style.
         int st = *INVALID_VALUE;
-        // The ipv4 address.
-        int ipv4 = *INVALID_VALUE;
-        // The ipv6 address.
-        struct in6_addr ipv6 = *INVALID_VALUE;
-
+        // The ipv4 host address.
+        uint32_t ha4 = *INVALID_VALUE;
+        // The ipv6 host address.
+        struct in6_addr ha6 = in6addr_loopback; //?? IN6ADDR_LOOPBACK_INIT
         // The server socket.
         int* s = NULL_POINTER;
-        // The socket address.
-        struct sockaddr_in* a = NULL_POINTER;
+        // The local socket address.
+        struct sockaddr_un* la = NULL_POINTER;
+        // The ipv4 internet socket address.
+        struct sockaddr_in* ia4 = NULL_POINTER;
+        // The ipv6 internet socket address.
+        struct sockaddr_in6* ia6 = NULL_POINTER;
+        // The socket address size.
         int* as = NULL_POINTER;
 /*??
         // The client sockets.
@@ -368,15 +511,23 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
         int* idc = NULL_POINTER;
         int* ids = NULL_POINTER;
 */
-        // The internal index.
+        // The internal memory index.
         int i = *INVALID_VALUE;
 
         // Get socket- and address namespace.
         startup_socket_get_namespace((void*) &sn, (void*) &an, p1, p2);
         // Get socket communication style.
         startup_socket_get_style((void*) &st, p3, p4);
-        // Get ip address.
-        startup_socket_get_address((void*) &ipv4, (void*) &ipv6, p5, p6);
+
+        // Get host address constant.
+        if (*an == AF_INET) {
+
+            startup_socket_get_ipv4_host_address((void*) &ha4, p5, p6);
+
+        } else if (*an == AF_INET6) {
+
+            startup_socket_get_ipv6_host_address((void*) &ha6, p5, p6);
+        }
 
         // Allocate server socket.
         allocate((void*) &s, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
@@ -393,10 +544,12 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
         allocate((void*) &bs, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
         // Allocate blocking flag.
         allocate((void*) &bf, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+/*??
         // Allocate signal ids.
         allocate((void*) &idc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
         allocate((void*) &ids, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
         allocate_array((void*) &id, (void*) ids, (void*) INTEGER_ARRAY);
+*/
 
         // Initialise server socket.
         //
@@ -408,8 +561,21 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
         // The latter is to be used for address family assignment.
         // See further below!
         *s = socket(sn, st, *NUMBER_0_INTEGER);
+
         // Initialise socket address size.
-        *as = sizeof(struct sockaddr_in);
+        if (*an == AF_LOCAL) {
+
+            *as = sizeof(struct sockaddr_un);
+
+        } else if (*an == AF_INET4) {
+
+            *as = sizeof(struct sockaddr_in);
+
+        } else if (*an == AF_INET6) {
+
+            *as = sizeof(struct sockaddr_in6);
+        }
+
 /*??
         // Initialise client sockets.
         *csc = *NUMBER_0_INTEGER;
@@ -422,17 +588,42 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
         *bs = 2048;
         // Initialise blocking flag.
         *bf = *NUMBER_0_INTEGER;
+/*??
         // Initialise signal ids.
         *idc = *NUMBER_0_INTEGER;
         *ids = *NUMBER_0_INTEGER;
+*/
 
         // Allocate socket address.
-        a = (struct sockaddr_in*) malloc(*as);
+        if (*an == AF_LOCAL) {
+
+            la = (struct sockaddr_un*) malloc(*as);
+
+        } else if (*an == AF_INET4) {
+
+            ia4 = (struct sockaddr_in*) malloc(*as);
+
+        } else if (*an == AF_INET6) {
+
+            ia6 = (struct sockaddr_in6*) malloc(*as);
+        }
+
         // Allocate character buffer.
         allocate((void*) &b, (void*) bs, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
         // Initialise socket address.
-        startup_socket_initialise_address((void*) &a, (void*) &an, (void*) &ipv4, (void*) &ipv6, p7, sn);
+        if (*an == AF_LOCAL) {
+
+            startup_socket_initialise_local_socket_address((void*) &la, (void*) &ha4, p7);
+
+        } else if (*an == AF_INET4) {
+
+            startup_socket_initialise_ipv4_socket_address((void*) &ia4, (void*) &ha4, p7);
+
+        } else if (*an == AF_INET6) {
+
+            startup_socket_initialise_ipv6_socket_address((void*) &ia6, (void*) &ha6, p7);
+        }
 
         // Set server socket.
         i = *base + *SERVER_SOCKET_INTERNAL;

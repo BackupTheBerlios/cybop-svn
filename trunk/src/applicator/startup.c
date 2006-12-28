@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.19 $ $Date: 2006-12-28 01:10:48 $ $Author: christian $
+ * @version $Revision: 1.20 $ $Date: 2006-12-28 16:04:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description This module starts up a service.
  */
@@ -36,6 +36,8 @@
 #include "../globals/constants/log_constants.c"
 #include "../globals/constants/model_constants.c"
 #include "../globals/constants/name_constants.c"
+#include "../globals/constants/service_port_constants.c"
+#include "../globals/constants/structure_constants.c"
 #include "../globals/logger/logger.c"
 #include "../memoriser/accessor/compound_accessor.c"
 #include "../memoriser/array.c"
@@ -126,9 +128,9 @@ void startup_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5)
         (void*) &nd, (void*) &ndc, (void*) &nds,
         p2, p3);
 
-    // Get communication style.
+    // Get style.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) SERVICE_COMMUNICATION_STYLE_NAME, (void*) SERVICE_COMMUNICATION_STYLE_NAME_COUNT,
+        (void*) SERVICE_STYLE_NAME, (void*) SERVICE_STYLE_NAME_COUNT,
         (void*) &sta, (void*) &stac, (void*) &stas,
         (void*) &stm, (void*) &stmc, (void*) &stms,
         (void*) &std, (void*) &stdc, (void*) &stds,
@@ -144,6 +146,8 @@ void startup_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5)
 
     // The comparison result.
     int r = 0;
+    // The internal memory index.
+    int i = *INVALID_VALUE;
     // The server socket internal.
     int** s = (int**) &NULL_POINTER;
 
@@ -174,7 +178,8 @@ void startup_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5)
         if (r != 0) {
 
             // Get server socket internal.
-            get(p5, (void*) WWW_SERVICE_SOCKET_INTERNAL, (void*) &s, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            i = *WWW_BASE_INTERNAL + *SERVER_SOCKET_INTERNAL;
+            get(p5, (void*) &i, (void*) &s, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
             if (*s == NULL_POINTER) {
 
