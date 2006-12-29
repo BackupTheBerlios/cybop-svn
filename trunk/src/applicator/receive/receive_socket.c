@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2006-12-29 00:50:14 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2006-12-29 10:44:39 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -1074,9 +1074,9 @@ fprintf(stderr, "TEST: receive socket signal buffer count: %i \n", *((int*) p2))
     pthread_mutex_lock(*tmt);
 
     // Get user interface commands internal.
-    get(p0, (void*) SERVER_SOCKET_THREAD_COMMANDS_INTERNAL, (void*) &c, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    get(p0, (void*) SERVER_SOCKET_THREAD_COMMANDS_COUNT_INTERNAL, (void*) &cc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    get(p0, (void*) SERVER_SOCKET_THREAD_COMMANDS_SIZE_INTERNAL, (void*) &cs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p0, (void*) SERVER_SOCKET_COMMANDS_INTERNAL, (void*) &c, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p0, (void*) SERVER_SOCKET_COMMANDS_COUNT_INTERNAL, (void*) &cc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p0, (void*) SERVER_SOCKET_COMMANDS_SIZE_INTERNAL, (void*) &cs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
     // Unlock socket mutex.
     pthread_mutex_unlock(*tmt);
@@ -1121,160 +1121,211 @@ fprintf(stderr, "TEST: receive socket signal buffer count: %i \n", *((int*) p2))
  * http://localhost:3456/residenz.logic.send_name
  *
  * @param p0 the internal memory
+ * @param p1 the base internal
  */
-void receive_stream_socket_thread(void* p0) {
+void receive_stream_socket_thread(void* p0, void* p1) {
 
-    // The server socket.
-    int** s = (int**) &NULL_POINTER;
-    // The socket address.
-    struct sockaddr_in** a = (struct sockaddr_in**) &NULL_POINTER;
-    // Get socket address size.
-    int** as = (int**) &NULL_POINTER;
-    // The client socket.
-    int cs = *INVALID_VALUE;
-    // The character buffer.
-    void** b = &NULL_POINTER;
-    int** bc = (int**) &NULL_POINTER;
-    // The maximum buffer size.
-    // CAUTION! A message MUST NOT be longer!
-    int** bs = (int**) &NULL_POINTER;
-    // The internal memory index.
-    int i = *INVALID_VALUE;
+    if (p1 != NULL_POINTER) {
 
-    // Get server socket.
-    i = *base + *SERVER_SOCKET_INTERNAL;
-    get(p0, (void*) SERVER_SOCKET_INTERNAL, (void*) &s, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    // Get socket address.
-    i = *base + *SERVER_SOCKET_ADDRESS_INTERNAL;
-    get(p0, (void*) SERVER_SOCKET_ADDRESS_INTERNAL, (void*) &a, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    i = *base + *SERVER_SOCKET_ADDRESS_SIZE_INTERNAL;
-    get(p0, (void*) SERVER_SOCKET_ADDRESS_SIZE_INTERNAL, (void*) &as, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    // Get character buffer.
-    i = *base + *SERVER_SOCKET_THREAD_CHARACTER_BUFFER_INTERNAL;
-    get(p0, (void*) SERVER_SOCKET_THREAD_CHARACTER_BUFFER_INTERNAL, (void*) &b, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    i = *base + *SERVER_SOCKET_THREAD_CHARACTER_BUFFER_COUNT_INTERNAL;
-    get(p0, (void*) SERVER_SOCKET_THREAD_CHARACTER_BUFFER_COUNT_INTERNAL, (void*) &bc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    i = *base + *SERVER_SOCKET_THREAD_CHARACTER_BUFFER_SIZE_INTERNAL;
-    get(p0, (void*) SERVER_SOCKET_THREAD_CHARACTER_BUFFER_SIZE_INTERNAL, (void*) &bs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        int* base = (int*) p1;
 
-    fprintf(stderr, "TEST: receive socket thread server socket: %i \n", **s);
+        // The server socket.
+        int** s = (int**) &NULL_POINTER;
+        // The socket address.
+        struct sockaddr_in** a = (struct sockaddr_in**) &NULL_POINTER;
+        // Get socket address size.
+        int** as = (int**) &NULL_POINTER;
+        // The client socket.
+        int cs = *INVALID_VALUE;
+        // The character buffer.
+        void** b = &NULL_POINTER;
+        int** bc = (int**) &NULL_POINTER;
+        // The maximum buffer size.
+        // CAUTION! A message MUST NOT be longer!
+        int** bs = (int**) &NULL_POINTER;
+        // The internal memory index.
+        int i = *INVALID_VALUE;
 
-    while (1) {
+        // Get server socket.
+        i = *base + *SERVER_SOCKET_INTERNAL;
+        get(p0, (void*) SERVER_SOCKET_INTERNAL, (void*) &s, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        // Get socket address.
+        i = *base + *SERVER_SOCKET_ADDRESS_INTERNAL;
+        get(p0, (void*) SERVER_SOCKET_ADDRESS_INTERNAL, (void*) &a, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        i = *base + *SERVER_SOCKET_ADDRESS_SIZE_INTERNAL;
+        get(p0, (void*) SERVER_SOCKET_ADDRESS_SIZE_INTERNAL, (void*) &as, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        // Get character buffer.
+        i = *base + *SERVER_SOCKET_CHARACTER_BUFFER_INTERNAL;
+        get(p0, (void*) SERVER_SOCKET_CHARACTER_BUFFER_INTERNAL, (void*) &b, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        i = *base + *SERVER_SOCKET_CHARACTER_BUFFER_COUNT_INTERNAL;
+        get(p0, (void*) SERVER_SOCKET_CHARACTER_BUFFER_COUNT_INTERNAL, (void*) &bc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        i = *base + *SERVER_SOCKET_CHARACTER_BUFFER_SIZE_INTERNAL;
+        get(p0, (void*) SERVER_SOCKET_CHARACTER_BUFFER_SIZE_INTERNAL, (void*) &bs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-        // A break condition does not exist here because the loop
-        // is blocking neverendingly while waiting for signals.
-        // The loop and this thread can only be exited by an external signal
-        // which is sent in the corresponding interrupt service procedure
-        // (situated in the applicator/interrupt/ directory)
-        // and processed in the system signal handler procedure
-        // (situated in the controller/checker.c module).
+        fprintf(stderr, "TEST: receive socket thread server socket: %i \n", **s);
 
-        if (st == SOCK_STREAM) {
+        while (1) {
 
-            // Accept client socket request and store client socket.
-            //
-            // Accepting a connection does not make the client socket part of the
-            // connection. Instead, it creates a new socket which becomes connected.
-            // The normal return value of "accept" is the file descriptor for the new socket.
-            //
-            // After "accept", the original socket socket remains open and
-            // unconnected, and continues listening until it gets closed.
-            // One can accept further connections with socket by calling
-            // "accept" again -- therefore the loop!
-            //
-            // CAUTION! This function is defined as a cancellation point in
-            // multi-threaded programs, so one has to be prepared for this and
-            // make sure that allocated resources (like memory, files descriptors,
-            // semaphores or whatever) are freed even if the thread is canceled!
-            cs = accept(**s, (struct sockaddr*) *a, (socklen_t*) *as);
+            // A break condition does not exist here because the loop
+            // is blocking neverendingly while waiting for signals.
+            // The loop and this thread can only be exited by an external signal
+            // which is sent in the corresponding interrupt service procedure
+            // (situated in the applicator/interrupt/ directory)
+            // and processed in the system signal handler procedure
+            // (situated in the controller/checker.c module).
 
-    fprintf(stderr, "TEST: receive socket thread client socket: %i \n", cs);
+            // The comparison result.
+            int r = 0;
 
-            if (cs >= *NUMBER_0_INTEGER) {
+            if (r == 0) {
+
+                compare_arrays(p1, p2, (void*) STREAM_COMMUNICATION_STYLE_MODEL, (void*) STREAM_COMMUNICATION_STYLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+                if (r != 0) {
+
+                    log_message_debug("Create stream socket receive service thread.");
+
+                    pthread_create(t, NULL_POINTER, (void*) &receive_stream_socket_thread, p0);
+                }
+            }
+
+            if (r == 0) {
+
+                compare_arrays(p1, p2, (void*) DATAGRAM_COMMUNICATION_STYLE_MODEL, (void*) STREAM_COMMUNICATION_STYLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+                if (r != 0) {
+
+                    log_message_debug("Create datagram socket receive service thread.");
+
+                    pthread_create(t, NULL_POINTER, (void*) &receive_datagram_socket_thread, p0);
+                }
+            }
+
+            if (r == 0) {
+
+                compare_arrays(p1, p2, (void*) RAW_COMMUNICATION_STYLE_MODEL, (void*) STREAM_COMMUNICATION_STYLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+                if (r != 0) {
+
+                    log_message_debug("Create raw socket receive service thread.");
+
+                    pthread_create(t, NULL_POINTER, (void*) &receive_raw_socket_thread, p0);
+                }
+            }
+
+    ==
+
+            if (st == SOCK_STREAM) {
+
+                // Accept client socket request and store client socket.
+                //
+                // Accepting a connection does not make the client socket part of the
+                // connection. Instead, it creates a new socket which becomes connected.
+                // The normal return value of "accept" is the file descriptor for the new socket.
+                //
+                // After "accept", the original socket socket remains open and
+                // unconnected, and continues listening until it gets closed.
+                // One can accept further connections with socket by calling
+                // "accept" again -- therefore the loop!
+                //
+                // CAUTION! This function is defined as a cancellation point in
+                // multi-threaded programs, so one has to be prepared for this and
+                // make sure that allocated resources (like memory, files descriptors,
+                // semaphores or whatever) are freed even if the thread is canceled!
+                cs = accept(**s, (struct sockaddr*) *a, (socklen_t*) *as);
+
+        fprintf(stderr, "TEST: receive socket thread client socket: %i \n", cs);
+
+                if (cs >= *NUMBER_0_INTEGER) {
+
+                    // Receive message from client.
+                    // If the flags argument (fourth one) is zero, then one can
+                    // just as well use the "read" instead of the "recv" procedure.
+                    // Normally, "recv" blocks until there is input available to be read.
+                    // CAUTION! A message MUST NOT be longer than the given buffer size!
+                    **bc = recv(cs, *b, **bs, *NUMBER_0_INTEGER);
+
+                } else if (cs < *NUMBER_0_INTEGER) {
+
+                    log_message_debug("ERROR: Could not receive socket thread. The client socket is invalid.");
+                }
+
+                // Close client socket.
+                close(cs);
+
+                // Reset client socket.
+                cs = *INVALID_VALUE;
+
+            } else if (st == SOCK_DGRAM) {
 
                 // Receive message from client.
                 // If the flags argument (fourth one) is zero, then one can
                 // just as well use the "read" instead of the "recv" procedure.
                 // Normally, "recv" blocks until there is input available to be read.
                 // CAUTION! A message MUST NOT be longer than the given buffer size!
-                **bc = recv(cs, *b, **bs, *NUMBER_0_INTEGER);
+                **bc = recvfrom(**s, *b, **bs, *NUMBER_0_INTEGER, (struct sockaddr*) *a, (socklen_t*) *as);
 
-            } else if (cs < *NUMBER_0_INTEGER) {
+            } else if (st == SOCK_RAW) {
 
-                log_message_debug("ERROR: Could not receive socket thread. The client socket is invalid.");
+                // Not implemented.
             }
 
-            // Close client socket.
-            close(cs);
+            if (**bc >= *NUMBER_0_INTEGER) {
 
-            // Reset client socket.
-            cs = *INVALID_VALUE;
+                // Receive socket signal.
+                receive_socket_signal(p0, *b, (void*) *bc, (void*) &cs);
 
-        } else if (st == SOCK_DGRAM) {
+    /*??
+                // The url basename.
+                char* url_basename = NULL_POINTER;
+                int url_basename_count = 0;
+                // Create url basename.
+                allocate_array((void*) &url_basename, (void*) &url_basename_count, (void*) CHARACTER_ARRAY);
+                // Get url base name.
+                receive_socket_url(msg, &msg_count, &url_basename, &url_basename_count);
 
-            // Receive message from client.
-            // If the flags argument (fourth one) is zero, then one can
-            // just as well use the "read" instead of the "recv" procedure.
-            // Normally, "recv" blocks until there is input available to be read.
-            // CAUTION! A message MUST NOT be longer than the given buffer size!
-            **bc = recvfrom(**s, *b, **bs, *NUMBER_0_INTEGER, (struct sockaddr*) *a, (socklen_t*) *as);
+                // The parameter.
+                char* param = NULL_POINTER;
+                int param_count = 0;
+                // Create paramater.
+                allocate_array((void*) &param, (void*) &param_count, (void*) CHARACTER_ARRAY);
+                // Get parameters.
+                receive_socket_parameter(msg, &msg_count, &param, &param_count);
 
-        } else if (st == SOCK_RAW) {
+                // The firefox web browser makes a second request
+                // to determine the favicon.
+                char firefox_request[] = "favicon.ico";
+                char* p_firefox_request = &firefox_request[0];
+                int firefox_request_count = 11;
 
-            // Not implemented.
-        }
+                // The comparison result.
+                int r = 0;
+                compare_arrays((void*) url_basename, (void*) &url_basename_count, (void*) p_firefox_request, (void*) &firefox_request_count, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (**bc >= *NUMBER_0_INTEGER) {
+                if (r != 1) {
 
-            // Receive socket signal.
-            receive_socket_signal(p0, *b, (void*) *bc, (void*) &cs);
+                    // query string handling
+                    set_signals_for_all_parameters((void*) param, (void*) &param_count, p0);
 
-/*??
-            // The url basename.
-            char* url_basename = NULL_POINTER;
-            int url_basename_count = 0;
-            // Create url basename.
-            allocate_array((void*) &url_basename, (void*) &url_basename_count, (void*) CHARACTER_ARRAY);
-            // Get url base name.
-            receive_socket_url(msg, &msg_count, &url_basename, &url_basename_count);
+                    //?? The OLD solution created a signal here from a cybol knowledge template.
+                    //?? This is NOW easier, since the commands already exist in the knowledge tree
+                    //?? and only have to be referenced from here.
 
-            // The parameter.
-            char* param = NULL_POINTER;
-            int param_count = 0;
-            // Create paramater.
-            allocate_array((void*) &param, (void*) &param_count, (void*) CHARACTER_ARRAY);
-            // Get parameters.
-            receive_socket_parameter(msg, &msg_count, &param, &param_count);
+                } else {
 
-            // The firefox web browser makes a second request
-            // to determine the favicon.
-            char firefox_request[] = "favicon.ico";
-            char* p_firefox_request = &firefox_request[0];
-            int firefox_request_count = 11;
-
-            // The comparison result.
-            int r = 0;
-            compare_arrays((void*) url_basename, (void*) &url_basename_count, (void*) p_firefox_request, (void*) &firefox_request_count, (void*) &r, (void*) CHARACTER_ARRAY);
-
-            if (r != 1) {
-
-                // query string handling
-                set_signals_for_all_parameters((void*) param, (void*) &param_count, p0);
-
-                //?? The OLD solution created a signal here from a cybol knowledge template.
-                //?? This is NOW easier, since the commands already exist in the knowledge tree
-                //?? and only have to be referenced from here.
+                    close(*cs);
+                }
+    */
 
             } else {
 
-                close(*cs);
+                log_message_debug("Error: Could not receive socket thread. No data could be read.");
             }
-*/
-
-        } else {
-
-            log_message_debug("ERROR: Could not receive socket thread. No data could be read.");
         }
+
+    } else {
+
+        log_message_debug("Error: Could not receive socket thread. The base internal is null.");
     }
 
     // An implicit call to pthread_exit() is made when this thread
@@ -1292,86 +1343,80 @@ void receive_stream_socket_thread(void* p0) {
 }
 
 /**
- * Receives datagram socket messages in an own thread.
+ * Receives www messages via socket.
  *
  * @param p0 the internal memory
  */
-void receive_datagram_socket_thread(void* p0) {
+void receive_socket_thread_www(void* p0) {
 
-    //?? Empty.
-}
+    log_message_debug("Receive www messages via socket.");
 
-/**
- * Receives raw socket messages in an own thread.
- *
- * @param p0 the internal memory
- */
-void receive_raw_socket_thread(void* p0) {
-
-    //?? Empty.
+    receive_socket_thread(p0, (void*) WWW_BASE_INTERNAL);
 }
 
 /**
  * Receives messages via socket.
  *
  * @param p0 the internal memory
- * @param p1 the communication style
- * @param p2 the communication style count
- * @param p3 the communication style size
- * @param p4 the commands
- * @param p5 the commands count
- * @param p6 the commands size
- * @param p7 the base internal
- * @param p8 the service thread
+ * @param p1 the commands model
+ * @param p2 the commands model count
+ * @param p3 the communication style model
+ * @param p4 the communication style model count
+ * @param p5 the base internal
+ * @param p6 the receive socket thread procedure
+ * @param p7 the service thread
  */
-void receive_socket(void* p0, void* p1, void* p2, void* p3,
-    void* p4, void* p5, void* p6, void* p7, void* p8) {
+void receive_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
 
-    if (p8 != NULL_POINTER) {
+    if (p7 != NULL_POINTER) {
 
-        pthread_t* t = (pthread_t*) p8;
+        int* t = (int*) p7;
 
-        if (p7 != NULL_POINTER) {
+        if (p5 != NULL_POINTER) {
 
-            int* base = (int*) p7;
-
-            log_message_debug("Receive socket message.");
+            int* b = (int*) p5;
 
             // The internal memory index.
             int i = *INVALID_VALUE;
             // The socket mutex.
-            pthread_mutex_t** mt = (pthread_mutex_t**) &NULL_POINTER;
+            pthread_mutex_t** m = (pthread_mutex_t**) &NULL_POINTER;
 
             // Get socket mutex.
-            i = *base + *SERVER_SOCKET_MUTEX_INTERNAL;
-            get(p0, (void*) &i, (void*) &mt, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            i = *b + *SERVER_SOCKET_MUTEX_INTERNAL;
+            get(p0, (void*) &i, (void*) &m, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
             // Lock socket mutex.
-            pthread_mutex_lock(*mt);
+            pthread_mutex_lock(*m);
 
             // Adding the following parameters to the internal memory is necessary,
             // because only one parameter (the internal memory p0) can be forwarded
-            // to the thread procedure further below. Thus, p0 must contain any others.
+            // to the thread procedure further below. Thus, p0 MUST contain any others.
 
-            // Set commands internal.
+            // Set internals.
             //
             // CAUTION! A mutex is ACTUALLY not necessary, since the thread
             // procedures only read, but NOT write internal memory values.
             //
-            // However, a mutex IS NECESSARY anyway, since the commands
-            // internal and its count and size should be set together, at once.
-            // Otherwise, the thread procedures might read a new commands internal
-            // with the count or size of the old commands internal,
-            // which would lead to a segmentation fault and possibly system crash.
-            i = *base + *SERVER_SOCKET_THREAD_COMMANDS_INTERNAL;
-            set(p0, (void*) SERVER_SOCKET_THREAD_COMMANDS_INTERNAL, (void*) &p4, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-            i = *base + *SERVER_SOCKET_THREAD_COMMANDS_COUNT_INTERNAL;
-            set(p0, (void*) SERVER_SOCKET_THREAD_COMMANDS_COUNT_INTERNAL, (void*) &p5, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-            i = *base + *SERVER_SOCKET_THREAD_COMMANDS_SIZE_INTERNAL;
-            set(p0, (void*) SERVER_SOCKET_THREAD_COMMANDS_SIZE_INTERNAL, (void*) &p6, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            // However, a mutex IS NECESSARY anyway, since the internal values
+            // and their count and size should be set together, at once.
+            // Otherwise, the thread procedures might read a new internal value
+            // with the count or size of an old internal value, which would
+            // lead to a segmentation fault and possibly system crash.
+
+            // Set commands internal.
+            i = *b + *SERVER_SOCKET_COMMANDS_INTERNAL;
+            set(p0, (void*) &i, (void*) &p1, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            i = *b + *SERVER_SOCKET_COMMANDS_COUNT_INTERNAL;
+            set(p0, (void*) &i, (void*) &p2, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
+            // Set communication style internal.
+            i = *b + *SERVER_SOCKET_STYLE_INTERNAL;
+            set(p0, (void*) &i, (void*) &p3, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            i = *b + *SERVER_SOCKET_STYLE_COUNT_INTERNAL;
+            set(p0, (void*) &i, (void*) &p4, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
             // Unlock socket mutex.
-            pthread_mutex_unlock(*mt);
+            pthread_mutex_unlock(*m);
 
             // Only create thread, if not existent.
             if (*t == *INVALID_VALUE) {
@@ -1392,44 +1437,11 @@ void receive_socket(void* p0, void* p1, void* p2, void* p3,
                 // - handed over to the thread procedure HERE
                 // - deallocated at service shutdown
 
-                // The comparison result.
-                int r = 0;
+                log_message_debug("Create socket receive thread.");
 
-                if (r == 0) {
-
-                    compare_arrays(p1, p2, (void*) STREAM_COMMUNICATION_STYLE_MODEL, (void*) STREAM_COMMUNICATION_STYLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-                    if (r != 0) {
-
-                        log_message_debug("Create stream socket receive service thread.");
-
-                        pthread_create(t, NULL_POINTER, (void*) &receive_stream_socket_thread, p0);
-                    }
-                }
-
-                if (r == 0) {
-
-                    compare_arrays(p1, p2, (void*) DATAGRAM_COMMUNICATION_STYLE_MODEL, (void*) STREAM_COMMUNICATION_STYLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-                    if (r != 0) {
-
-                        log_message_debug("Create datagram socket receive service thread.");
-
-                        pthread_create(t, NULL_POINTER, (void*) &receive_datagram_socket_thread, p0);
-                    }
-                }
-
-                if (r == 0) {
-
-                    compare_arrays(p1, p2, (void*) RAW_COMMUNICATION_STYLE_MODEL, (void*) STREAM_COMMUNICATION_STYLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-                    if (r != 0) {
-
-                        log_message_debug("Create raw socket receive service thread.");
-
-                        pthread_create(t, NULL_POINTER, (void*) &receive_raw_socket_thread, p0);
-                    }
-                }
+                // Create thread.
+                // The third parameter is the procedure to be called.
+                pthread_create(t, NULL_POINTER, p6, p0);
 
         /*?? Following is a TEST -- delete later!
 
@@ -1476,12 +1488,12 @@ void receive_socket(void* p0, void* p1, void* p2, void* p3,
 
         } else {
 
-            log_message_debug("ERROR: Could not receive socket. The base internal is null.");
+            log_message_debug("Could not receive socket. The base internal is null.");
         }
 
     } else {
 
-        log_message_debug("ERROR: Could not receive socket. The service thread is null.");
+        log_message_debug("Could not receive socket. The service thread is null.");
     }
 }
 
