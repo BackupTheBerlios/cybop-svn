@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2006-12-28 16:04:26 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2006-12-29 18:49:24 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -68,12 +68,10 @@ void shutdown_socket(void* p0, void* p1, void* p2, void* p3, void* p4) {
         void** cs = NULL_POINTER;
         void** csc = NULL_POINTER;
         void** css = NULL_POINTER;
-*/
         // The activation flag.
         void** af = NULL_POINTER;
         // The blocking flag.
         void** bf = NULL_POINTER;
-/*??
         // The signal ids.
         void** id = NULL_POINTER;
         void** idc = NULL_POINTER;
@@ -87,12 +85,10 @@ void shutdown_socket(void* p0, void* p1, void* p2, void* p3, void* p4) {
         get(p0, (void*) SERVER_CLIENT_SOCKETS_INTERNAL, (void*) &cs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         get(p0, (void*) SERVER_CLIENT_SOCKETS_COUNT_INTERNAL, (void*) &csc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         get(p0, (void*) SERVER_CLIENT_SOCKETS_SIZE_INTERNAL, (void*) &css, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-*/
         // Get interrupt flag.
-    //??    get(p0, (void*) SERVER_SOCKET_INTERRUPT_INTERNAL, (void*) &af, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        get(p0, (void*) SERVER_SOCKET_INTERRUPT_INTERNAL, (void*) &af, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         // Get blocking flag.
         get(p0, (void*) SERVER_SOCKET_BLOCKING_INTERNAL, (void*) &bf, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-/*??
         // Get signal ids.
         get(p0, (void*) SERVER_CLIENT_SOCKET_SIGNAL_IDS_INTERNAL, (void*) &id, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         get(p0, (void*) SERVER_CLIENT_SOCKET_SIGNAL_IDS_COUNT_INTERNAL, (void*) &idc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
@@ -109,12 +105,10 @@ void shutdown_socket(void* p0, void* p1, void* p2, void* p3, void* p4) {
         deallocate_array((void*) cs, (void*) css, (void*) INTEGER_ARRAY);
         deallocate(csc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
         deallocate(css, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-*/
         // Destroy activation flag.
         deallocate(af, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
         // Destroy blocking flag.
         deallocate(bf, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-/*??
         // Destroy signal ids.
         deallocate_array((void*) id, (void*) ids, (void*) INTEGER_ARRAY);
         deallocate(idc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);

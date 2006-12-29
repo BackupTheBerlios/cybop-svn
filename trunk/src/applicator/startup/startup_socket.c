@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2006-12-29 00:50:14 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2006-12-29 18:49:24 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -717,11 +717,11 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
         set(p0, (void*) TCP_CLIENT_SOCKETS_COUNT_INTERNAL, (void*) &csc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         set(p0, (void*) TCP_CLIENT_SOCKETS_SIZE_INTERNAL, (void*) &css, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 */
-        i = *base + *SERVER_SOCKET_THREAD_CHARACTER_BUFFER_INTERNAL;
+        i = *base + *SERVER_SOCKET_CHARACTER_BUFFER_INTERNAL;
         set(p0, (void*) &i, (void*) &b, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        i = *base + *SERVER_SOCKET_THREAD_CHARACTER_BUFFER_COUNT_INTERNAL;
+        i = *base + *SERVER_SOCKET_CHARACTER_BUFFER_COUNT_INTERNAL;
         set(p0, (void*) &i, (void*) &bc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        i = *base + *SERVER_SOCKET_THREAD_CHARACTER_BUFFER_SIZE_INTERNAL;
+        i = *base + *SERVER_SOCKET_CHARACTER_BUFFER_SIZE_INTERNAL;
         set(p0, (void*) &i, (void*) &bs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         // Set blocking flag.
 //??        set(p0, (void*) SERVER_SOCKET_BLOCKING_INTERNAL, (void*) &bf, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
@@ -738,8 +738,6 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
         errno = 0;
 
         if (*s >= *NUMBER_0_INTEGER) {
-
-    fprintf(stderr, "TEST: The server socket is: %d \n", *s);
 
             // The result.
             int r = *INVALID_VALUE;
