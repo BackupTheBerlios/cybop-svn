@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.22 $ $Date: 2006-12-28 16:04:26 $ $Author: christian $
+ * @version $Revision: 1.23 $ $Date: 2006-12-29 00:50:14 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -51,9 +51,8 @@
  * special mechanisms for signal reception have to be started.
  * To the mechanisms belong:
  * - linux console
- * - tcp socket
- * - unix socket
  * - x window system
+ * - socket
  *
  * These have their own internal signal/ action/ event/ interrupt waiting loops
  * which get activated here, running as parallel services in separate threads.
@@ -176,6 +175,19 @@ void receive_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
     void** rdc = &NULL_POINTER;
     void** rds = &NULL_POINTER;
 
+    // The socket communication style abstraction.
+    void** sta = &NULL_POINTER;
+    void** stac = &NULL_POINTER;
+    void** stas = &NULL_POINTER;
+    // The socket communication style model.
+    void** stm = &NULL_POINTER;
+    void** stmc = &NULL_POINTER;
+    void** stms = &NULL_POINTER;
+    // The socket communication style details.
+    void** std = &NULL_POINTER;
+    void** stdc = &NULL_POINTER;
+    void** stds = &NULL_POINTER;
+
     // The commands abstraction.
     void** coa = &NULL_POINTER;
     void** coac = &NULL_POINTER;
@@ -258,6 +270,14 @@ void receive_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
         (void*) &rd, (void*) &rdc, (void*) &rds,
         p3, p4);
 
+    // Get socket communication style.
+    get_universal_compound_element_by_name(p0, p1,
+        (void*) RECEIVE_STYLE_NAME, (void*) RECEIVE_STYLE_NAME_COUNT,
+        (void*) &sta, (void*) &stac, (void*) &stas,
+        (void*) &stm, (void*) &stmc, (void*) &stms,
+        (void*) &std, (void*) &stdc, (void*) &stds,
+        p3, p4);
+
     // Get commands.
     get_universal_compound_element_by_name(p0, p1,
         (void*) RECEIVE_COMMANDS_NAME, (void*) RECEIVE_COMMANDS_NAME_COUNT,
@@ -314,7 +334,7 @@ void receive_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
 
         if (r != 0) {
 
-            receive_socket(p2, *com, *comc, *coms, (void*) WWW_BASE_INTERNAL);
+            receive_socket(p2, *stm, *stmc, *stms, *com, *comc, *coms, (void*) WWW_BASE_INTERNAL, (void*) WWW_SERVICE_THREAD);
         }
     }
 

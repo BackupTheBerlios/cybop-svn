@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.20 $ $Date: 2006-12-28 16:04:26 $ $Author: christian $
+ * @version $Revision: 1.21 $ $Date: 2006-12-29 00:50:14 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description This module starts up a service.
  */
@@ -73,41 +73,41 @@ void startup_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5)
     void** sdc = &NULL_POINTER;
     void** sds = &NULL_POINTER;
 
-    // The namespace abstraction.
+    // The socket namespace abstraction.
     void** na = &NULL_POINTER;
     void** nac = &NULL_POINTER;
     void** nas = &NULL_POINTER;
-    // The namespace model.
+    // The socket namespace model.
     void** nm = &NULL_POINTER;
     void** nmc = &NULL_POINTER;
     void** nms = &NULL_POINTER;
-    // The namespace details.
+    // The socket namespace details.
     void** nd = &NULL_POINTER;
     void** ndc = &NULL_POINTER;
     void** nds = &NULL_POINTER;
 
-    // The style abstraction.
+    // The communication style abstraction.
     void** sta = &NULL_POINTER;
     void** stac = &NULL_POINTER;
     void** stas = &NULL_POINTER;
-    // The style model.
+    // The communication style model.
     void** stm = &NULL_POINTER;
     void** stmc = &NULL_POINTER;
     void** stms = &NULL_POINTER;
-    // The style details.
+    // The communication style details.
     void** std = &NULL_POINTER;
     void** stdc = &NULL_POINTER;
     void** stds = &NULL_POINTER;
 
-    // The address abstraction.
+    // The host address abstraction.
     void** aa = &NULL_POINTER;
     void** aac = &NULL_POINTER;
     void** aas = &NULL_POINTER;
-    // The address model.
+    // The host address model.
     void** am = &NULL_POINTER;
     void** amc = &NULL_POINTER;
     void** ams = &NULL_POINTER;
-    // The address details.
+    // The host address details.
     void** ad = &NULL_POINTER;
     void** adc = &NULL_POINTER;
     void** ads = &NULL_POINTER;
@@ -120,7 +120,7 @@ void startup_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5)
         (void*) &sd, (void*) &sdc, (void*) &sds,
         p2, p3);
 
-    // Get namespace.
+    // Get socket namespace.
     get_universal_compound_element_by_name(p0, p1,
         (void*) SERVICE_NAMESPACE_NAME, (void*) SERVICE_NAMESPACE_NAME_COUNT,
         (void*) &na, (void*) &nac, (void*) &nas,
@@ -128,7 +128,7 @@ void startup_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5)
         (void*) &nd, (void*) &ndc, (void*) &nds,
         p2, p3);
 
-    // Get style.
+    // Get communication style.
     get_universal_compound_element_by_name(p0, p1,
         (void*) SERVICE_STYLE_NAME, (void*) SERVICE_STYLE_NAME_COUNT,
         (void*) &sta, (void*) &stac, (void*) &stas,
@@ -136,7 +136,7 @@ void startup_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5)
         (void*) &std, (void*) &stdc, (void*) &stds,
         p2, p3);
 
-    // Get address.
+    // Get host address.
     get_universal_compound_element_by_name(p0, p1,
         (void*) SERVICE_ADDRESS_NAME, (void*) SERVICE_ADDRESS_NAME_COUNT,
         (void*) &aa, (void*) &aac, (void*) &aas,
@@ -184,7 +184,7 @@ void startup_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5)
             if (*s == NULL_POINTER) {
 
                 // Startup server socket if it does not already exist.
-                startup_socket(p5, (void*) nm, (void*) nmc, (void*) stm, (void*) stmc, (void*) am, (void*) amc, (void*) WWW_PORT, (void*) WWW_BASE_INTERNAL, p2, p3, p4);
+                startup_socket(p5, *nm, *nmc, *stm, *stmc, *am, *amc, (void*) WWW_PORT, (void*) WWW_BASE_INTERNAL, p2, p3, p4);
 
             } else {
 
@@ -206,7 +206,7 @@ void startup_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5)
             if (*s == NULL_POINTER) {
 
                 // Startup server socket if it does not already exist.
-                startup_socket(p5, (void*) nm, (void*) nmc, (void*) stm, (void*) stmc, (void*) am, (void*) amc, (void*) WWW_PORT, (void*) SOME_LOCAL_UNIX_SERVICE_BASE_INTERNAL, p2, p3, p4);
+                startup_socket(p5, *nm, *nmc, *stm, *stmc, *am, *amc, (void*) WWW_PORT, (void*) SOME_LOCAL_UNIX_SERVICE_BASE_INTERNAL, p2, p3, p4);
 
             } else {
 

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2006-12-28 20:27:35 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2006-12-29 00:50:14 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -29,11 +29,12 @@
 
 #ifdef LINUX_OPERATING_SYSTEM
 
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <stdio.h>
-#include <netinet/in.h>
 #include <arpa/inet.h>
+#include <netinet/in.h>
+#include <sys/socket.h>
+#include <sys/types.h>
+#include <errno.h>
+#include <stdio.h>
 #include <unistd.h>
 #include "../../globals/constants/abstraction_constants.c"
 #include "../../globals/constants/integer_constants.c"
@@ -731,6 +732,11 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
         set(p0, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_SIZE_INTERNAL, (void*) &ids, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 */
 
+        // Initialise error number.
+        // It is a global variable/ function and other operations
+        // may have set some value that is not wanted here.
+        errno = 0;
+
         if (*s >= *NUMBER_0_INTEGER) {
 
     fprintf(stderr, "TEST: The server socket is: %d \n", *s);
@@ -760,12 +766,10 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
                     // which is why the "listen" procedure is only called
                     // for stream sockets here.
 
-    fprintf(stderr, "TEST: pre listen: %d \n", *s);
                     // Enable socket to accept connections, thus making it a server socket.
                     // The second parameter determines the number of possible
                     // pending client connection requests.
                     listen(*s, *NUMBER_1_INTEGER);
-    fprintf(stderr, "TEST: post listen: %d \n", *s);
                 }
 
             } else {
@@ -775,7 +779,30 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
 
         } else {
 
-            log_message_debug("Error: Could not start up socket. The socket could not be created.");
+            if (errno == EPROTONOSUPPORT) {
+
+                log_message_debug("Error: Could not start up socket. The protocol or style is not supported by the namespace specified.");
+
+            } else if (errno == EMFILE) {
+
+                log_message_debug("Error: Could not start up socket. The process already has too many file descriptors open.");
+
+            } else if (errno == ENFILE) {
+
+                log_message_debug("Error: Could not start up socket. The system already has too many file descriptors open.");
+
+            } else if (errno == EACCES) {
+
+                log_message_debug("Error: Could not start up socket. The process does not have the privilege to create a socket of the specified style or protocol.");
+
+            } else if (errno == ENOBUFS) {
+
+                log_message_debug("Error: Could not start up socket. The system ran out of internal buffer space.");
+
+            } else {
+
+                log_message_debug("Error: Could not start up socket. An unknown error occured.");
+            }
         }
 
     } else {

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.24 $ $Date: 2006-12-28 16:04:26 $ $Author: christian $
+ * @version $Revision: 1.25 $ $Date: 2006-12-29 00:50:14 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -510,6 +510,11 @@ static int* RECEIVE_WHOLE_NAME_COUNT = NUMBER_5_INTEGER_ARRAY;
 static char RECEIVE_ROOT_NAME_ARRAY[] = {'r', 'o', 'o', 't'};
 static char* RECEIVE_ROOT_NAME = RECEIVE_ROOT_NAME_ARRAY;
 static int* RECEIVE_ROOT_NAME_COUNT = NUMBER_4_INTEGER_ARRAY;
+
+/** The receive style name. */
+static char RECEIVE_STYLE_NAME_ARRAY[] = {'s', 't', 'y', 'l', 'e'};
+static char* RECEIVE_STYLE_NAME = RECEIVE_STYLE_NAME_ARRAY;
+static int* RECEIVE_STYLE_NAME_COUNT = NUMBER_5_INTEGER_ARRAY;
 
 /** The receive commands name. */
 static char RECEIVE_COMMANDS_NAME_ARRAY[] = {'c', 'o', 'm', 'm', 'a', 'n', 'd', 's'};
