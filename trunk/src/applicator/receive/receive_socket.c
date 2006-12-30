@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2006-12-29 18:49:24 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2006-12-30 13:42:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -33,6 +33,7 @@
 #include <netinet/in.h>
 #include <sys/socket.h>
 #include <sys/types.h>
+#include <errno.h>
 #include <pthread.h>
 #include <signal.h>
 #include <stdio.h>
@@ -1056,7 +1057,7 @@ fprintf(stderr, "TEST: receive socket signal buffer count: %i \n", *((int*) p2))
     // Get signal memory mutex.
     get(p0, (void*) SIGNAL_MEMORY_MUTEX_INTERNAL, (void*) &smt, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     // Get socket mutex.
-    get(p0, (void*) SERVER_SOCKET_MUTEX_INTERNAL, (void*) &somt, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p0, (void*) SOCKET_MUTEX_INTERNAL, (void*) &somt, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     // Get interrupt request internal.
     get(p0, (void*) INTERRUPT_REQUEST_INTERNAL, (void*) &irq, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
@@ -1071,8 +1072,8 @@ fprintf(stderr, "TEST: receive socket signal buffer count: %i \n", *((int*) p2))
     pthread_mutex_lock(*somt);
 
     // Get commands internal.
-    get(p0, (void*) SERVER_SOCKET_COMMANDS_INTERNAL, (void*) &c, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    get(p0, (void*) SERVER_SOCKET_COMMANDS_COUNT_INTERNAL, (void*) &cc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p0, (void*) SOCKET_COMMANDS_INTERNAL, (void*) &c, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p0, (void*) SOCKET_COMMANDS_COUNT_INTERNAL, (void*) &cc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
     // Unlock socket mutex.
     pthread_mutex_unlock(*somt);
@@ -1145,26 +1146,31 @@ void receive_socket_thread(void* p0, void* p1) {
         int** bs = (int**) &NULL_POINTER;
         // The comparison result.
         int r = *NUMBER_0_INTEGER;
+        // The error number.
+        // CAUTION! This extra error number (besides "errno") is necessary
+        // to remember "errno" values of the "recv" and "recvfrom" procedures,
+        // across the various if-else sections.
+        int e = *NUMBER_0_INTEGER;
 
         // Get communication style.
-        i = *base + *SERVER_SOCKET_STYLE_INTERNAL;
+        i = *base + *SOCKET_STYLE_INTERNAL;
         get(p0, (void*) &i, (void*) &st, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        i = *base + *SERVER_SOCKET_STYLE_COUNT_INTERNAL;
+        i = *base + *SOCKET_STYLE_COUNT_INTERNAL;
         get(p0, (void*) &i, (void*) &stc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         // Get server socket.
-        i = *base + *SERVER_SOCKET_INTERNAL;
+        i = *base + *SOCKET_INTERNAL;
         get(p0, (void*) &i, (void*) &s, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         // Get socket address.
-        i = *base + *SERVER_SOCKET_ADDRESS_INTERNAL;
+        i = *base + *SOCKET_ADDRESS_INTERNAL;
         get(p0, (void*) &i, (void*) &a, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        i = *base + *SERVER_SOCKET_ADDRESS_SIZE_INTERNAL;
+        i = *base + *SOCKET_ADDRESS_SIZE_INTERNAL;
         get(p0, (void*) &i, (void*) &as, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         // Get character buffer.
-        i = *base + *SERVER_SOCKET_CHARACTER_BUFFER_INTERNAL;
+        i = *base + *SOCKET_CHARACTER_BUFFER_INTERNAL;
         get(p0, (void*) &i, (void*) &b, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        i = *base + *SERVER_SOCKET_CHARACTER_BUFFER_COUNT_INTERNAL;
+        i = *base + *SOCKET_CHARACTER_BUFFER_COUNT_INTERNAL;
         get(p0, (void*) &i, (void*) &bc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        i = *base + *SERVER_SOCKET_CHARACTER_BUFFER_SIZE_INTERNAL;
+        i = *base + *SOCKET_CHARACTER_BUFFER_SIZE_INTERNAL;
         get(p0, (void*) &i, (void*) &bs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
         fprintf(stderr, "TEST: receive socket thread server socket: %i \n", **s);
@@ -1185,6 +1191,14 @@ void receive_socket_thread(void* p0, void* p1) {
 
                 if (r != 0) {
 
+                    // Initialise error number.
+                    // It is a global variable/ function and other operations
+                    // may have set some value that is not wanted here.
+                    //
+                    // CAUTION! Initialise the error number BEFORE calling the procedure
+                    // that might cause an error.
+                    errno = *NUMBER_0_INTEGER;
+
                     // Accept client socket request and store client socket.
                     //
                     // Accepting a connection does not make the client socket part of the
@@ -1194,17 +1208,22 @@ void receive_socket_thread(void* p0, void* p1) {
                     // After "accept", the original socket socket remains open and
                     // unconnected, and continues listening until it gets closed.
                     // One can accept further connections with socket by calling
-                    // "accept" again -- therefore the loop!
+                    // "accept" again -- therefore this "while" loop!
                     //
-                    // CAUTION! This function is defined as a cancellation point in
-                    // multi-threaded programs, so one has to be prepared for this and
-                    // make sure that allocated resources (like memory, files descriptors,
-                    // semaphores or whatever) are freed even if the thread is canceled!
+                    // The socket was set to "non-blocking" mode at startup,
+                    // which means that the "accept" procedure returns always,
+                    // even if no stream socket connection could be established.
                     cs = accept(**s, (struct sockaddr*) *a, (socklen_t*) *as);
 
-            fprintf(stderr, "TEST: receive socket thread client socket: %i \n", cs);
-
                     if (cs >= *NUMBER_0_INTEGER) {
+
+                        // Initialise error number.
+                        // It is a global variable/ function and other operations
+                        // may have set some value that is not wanted here.
+                        //
+                        // CAUTION! Initialise the error number BEFORE calling the procedure
+                        // that might cause an error.
+                        errno = *NUMBER_0_INTEGER;
 
                         // Receive message from client.
                         // If the flags argument (fourth one) is zero, then one can
@@ -1213,16 +1232,41 @@ void receive_socket_thread(void* p0, void* p1) {
                         // CAUTION! A message MUST NOT be longer than the given buffer size!
                         **bc = recv(cs, *b, **bs, *NUMBER_0_INTEGER);
 
-                    } else if (cs < *NUMBER_0_INTEGER) {
+                        // Remember error number.
+                        e = errno;
 
-                        log_message_debug("ERROR: Could not receive socket thread. The client socket is invalid.");
+                    } else {
+
+                        if (errno == EBADF) {
+
+                            log_message_debug("Error: Could not receive socket thread. The socket argument is not a valid file descriptor.");
+
+                        } else if (errno == ENOTSOCK) {
+
+                            log_message_debug("Error: Could not receive socket thread. The descriptor socket argument is not a socket.");
+
+                        } else if (errno == EOPNOTSUPP) {
+
+                            log_message_debug("Error: Could not receive socket thread. The descriptor socket does not support this operation.");
+
+                        } else if (errno == EWOULDBLOCK) {
+
+                            // CAUTION! Do NOT log the following error:
+                            // log_message_debug("Error: Could not receive socket thread. The socket has nonblocking mode set, and there are no pending connections immediately available.");
+                            //
+                            // The reason is that the socket is non-blocking,
+                            // so that the "accept" procedure returns always,
+                            // even if no connection was established,
+                            // which would unnecessarily fill up the log file.
+
+                        } else {
+
+                            log_message_debug("Error: Could not receive socket thread. An unknown error occured while accepting a socket connection.");
+                        }
                     }
 
                     // Close client socket.
                     close(cs);
-
-                    // Reset client socket.
-                    cs = *INVALID_VALUE;
                 }
             }
 
@@ -1232,12 +1276,23 @@ void receive_socket_thread(void* p0, void* p1) {
 
                 if (r != 0) {
 
+                    // Initialise error number.
+                    // It is a global variable/ function and other operations
+                    // may have set some value that is not wanted here.
+                    //
+                    // CAUTION! Initialise the error number BEFORE calling the procedure
+                    // that might cause an error.
+                    errno = *NUMBER_0_INTEGER;
+
                     // Receive message from client.
                     // If the flags argument (fourth one) is zero, then one can
                     // just as well use the "read" instead of the "recv" procedure.
                     // Normally, "recv" blocks until there is input available to be read.
                     // CAUTION! A message MUST NOT be longer than the given buffer size!
                     **bc = recvfrom(**s, *b, **bs, *NUMBER_0_INTEGER, (struct sockaddr*) *a, (socklen_t*) *as);
+
+                    // Remember error number.
+                    e = errno;
                 }
             }
 
@@ -1251,7 +1306,7 @@ void receive_socket_thread(void* p0, void* p1) {
                 }
             }
 
-            if (**bc >= *NUMBER_0_INTEGER) {
+            if (**bc > *NUMBER_0_INTEGER) {
 
                 // Receive socket signal.
                 receive_socket_signal(p0, *b, (void*) *bc, (void*) &cs);
@@ -1298,13 +1353,68 @@ void receive_socket_thread(void* p0, void* p1) {
                 }
     */
 
-            } else {
+            } else if (**bc = *NUMBER_0_INTEGER) {
 
                 log_message_debug("Error: Could not receive socket thread. No data could be received.");
+
+            } else {
+
+                if (e == EBADF) {
+
+                    log_message_debug("Error: Could not receive socket thread. The socket argument is not a valid file descriptor.");
+
+                } else if (e == ENOTSOCK) {
+
+                    log_message_debug("Error: Could not receive socket thread. The descriptor socket is not a socket.");
+
+                } else if (e == EWOULDBLOCK) {
+
+                    log_message_debug("Error: Could not receive socket thread. The read operation would block even though nonblocking mode has been set on the socket.");
+
+                } else if (e == EINTR) {
+
+                    log_message_debug("Error: Could not receive socket thread. The operation was interrupted by a signal before any data was read.");
+
+                } else if (e == ENOTCONN) {
+
+                    log_message_debug("Error: Could not receive socket thread. The socket was never connected.");
+
+                } else {
+
+                    // CAUTION! Do NOT log the following error:
+                    // log_message_debug("Error: Could not receive socket thread. An unknown error occured while receiving data.");
+                    //
+                    // The reason is that the socket is non-blocking,
+                    // so that the "accept" procedure returns always,
+                    // even if no connection was established.
+                    // But if no connection and client socket are there,
+                    // then the "recv" or "recvfrom" procedure returns an error,
+                    // which would unnecessarily fill up the log file.
+                }
             }
 
+            // Sleep for some time to give the central processing unit (cpu)
+            // time to breathe.
+            sleep(1);
+    printf("TEST: sleep ...");
+
+            // Reset client socket.
+            cs = *INVALID_VALUE;
+            // Reset character buffer.
+            //
+            // CAUTION! Do NOT deallocate the character buffer!
+            // It was allocated at socket startup and must remain unchanged.
+            // Therefore, its elements are just set to null pointers here.
+            //
+            // CAUTION! Do NOT reset the maximum buffer size!
+            // It was allocated and initialised at socket startup
+            // and must remain unchanged.
+            memset(*b, 0, **bs);
+            **bc = *NUMBER_0_INTEGER;
             // Reset comparison result.
             r = *NUMBER_0_INTEGER;
+            // Reset error number.
+            e = *NUMBER_0_INTEGER;
         }
 
     } else {
@@ -1366,7 +1476,7 @@ void receive_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, 
             pthread_mutex_t** m = (pthread_mutex_t**) &NULL_POINTER;
 
             // Get socket mutex.
-            i = *b + *SERVER_SOCKET_MUTEX_INTERNAL;
+            i = *b + *SOCKET_MUTEX_INTERNAL;
             get(p0, (void*) &i, (void*) &m, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
             // Lock socket mutex.
@@ -1388,15 +1498,15 @@ void receive_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, 
             // lead to a segmentation fault and possibly system crash.
 
             // Set commands internal.
-            i = *b + *SERVER_SOCKET_COMMANDS_INTERNAL;
+            i = *b + *SOCKET_COMMANDS_INTERNAL;
             set(p0, (void*) &i, (void*) &p1, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-            i = *b + *SERVER_SOCKET_COMMANDS_COUNT_INTERNAL;
+            i = *b + *SOCKET_COMMANDS_COUNT_INTERNAL;
             set(p0, (void*) &i, (void*) &p2, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
             // Set communication style internal.
-            i = *b + *SERVER_SOCKET_STYLE_INTERNAL;
+            i = *b + *SOCKET_STYLE_INTERNAL;
             set(p0, (void*) &i, (void*) &p3, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-            i = *b + *SERVER_SOCKET_STYLE_COUNT_INTERNAL;
+            i = *b + *SOCKET_STYLE_COUNT_INTERNAL;
             set(p0, (void*) &i, (void*) &p4, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
             // Unlock socket mutex.

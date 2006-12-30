@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.21 $ $Date: 2006-12-29 00:50:14 $ $Author: christian $
+ * @version $Revision: 1.22 $ $Date: 2006-12-30 13:42:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description This module starts up a service.
  */
@@ -178,7 +178,7 @@ void startup_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5)
         if (r != 0) {
 
             // Get server socket internal.
-            i = *WWW_BASE_INTERNAL + *SERVER_SOCKET_INTERNAL;
+            i = *WWW_BASE_INTERNAL + *SOCKET_INTERNAL;
             get(p5, (void*) &i, (void*) &s, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
             if (*s == NULL_POINTER) {

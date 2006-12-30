@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2006-12-28 16:04:26 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2006-12-30 13:42:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -38,6 +38,8 @@
  * Sends a message via socket.
  *
  * @param p0 the internal memory
+ * @param p1 the source gui compound model ??
+ * @param p2 the source count ??
  * @param p1 the receiver abstraction
  * @param p2 the receiver abstraction count
  * @param p3 the receiver model
@@ -59,15 +61,39 @@ void send_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, voi
 
     log_message_debug("Send socket message.");
 
-    // The server socket.
-    //?? TODO: Determine socket here, depending on service,
-    // e.g. "80" for http, "21" for ftp etc.
-    int s = 3456;
+    // The socket mutex.
+    pthread_mutex_t** mt = (pthread_mutex_t**) &NULL_POINTER;
+
+    // Get socket mutex.
+    get(p0, (void*) SOCKET_MUTEX_INTERNAL, (void*) &mt, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
+    pthread_mutex_lock(*mt);
+
+/*??
+    // Serialise compound model into www service message.
+    serialise(p0, NULL_POINTER, NULL_POINTER, p1, p2, (void*) WWW_SERVICE_MODEL, (void*) WWW_SERVICE_MODEL_COUNT, p3, p4);
+
+    // The socket.
+    //
+    // CAUTION! Although this socket is used as client socket here, it is also
+    // used as server socket for signal reception in the "receive_socket" procedure.
+    // However, this is not a problem, since a special socket mutex is set
+    // whenever a message is sent or received via the socket.
+    void** s = &NULL_POINTER;
+
+    // Get display.
+    get_array_elements(p0, (void*) X_WINDOW_SYSTEM_DISPLAY_INTERNAL, (void*) &d, (void*) POINTER_ARRAY);
+
+    // Show window on display.
+    write_data(d, NULL_POINTER, NULL_POINTER, p0, NULL_POINTER, (void*) X_WINDOW_SYSTEM_MODEL, (void*) X_WINDOW_SYSTEM_MODEL_COUNT);
+--
+*/
+
+    // The client socket.
+    int cs = *INVALID_VALUE;
     // The socket address.
     struct sockaddr_in* a = NULL_POINTER;
     int* as = NULL_POINTER;
-    // The client socket.
-    int cs = *INVALID_VALUE;
     // The serialised string buffer array to be sent to the socket.
 //??    void* b = NULL_POINTER;
     void* b = "close";
@@ -160,14 +186,14 @@ void send_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, voi
         // If the flags argument (fourth one) is zero, then one can
         // just as well use the "write" instead of the "send" procedure.
         // If the socket is nonblocking, then "send" (like "write")
-        // can return after sending just part of the data.
+        // can return after sending just PART OF the data.
         // Note, however, that a successful return value merely indicates that the
         // message has been sent without error, not necessarily that it has been
         // received without error.
         bc = send(cs, b, /*??bs*/5, *NUMBER_0_INTEGER);
 
             // Write serialised buffer array as message to socket.
-//??            write_data(cs, NULL_POINTER, NULL_POINTER, b, (void*) &bc, (void*) SERVER_SOCKET_MODEL, (void*) SERVER_SOCKET_MODEL_COUNT);
+//??            write_data(cs, NULL_POINTER, NULL_POINTER, b, (void*) &bc, (void*) SOCKET_MODEL, (void*) SOCKET_MODEL_COUNT);
 
         printf("TEST: sende: %s\n", b);
 
@@ -196,6 +222,10 @@ void send_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, voi
         log_message_debug("Could not send message via socket. The signal id index is invalid.");
     }
 */
+
+    pthread_mutex_unlock(*mt);
+
+    // TODO?? Destroy here ALL other things that were created in encode_www!!
 }
 
 /* SEND_SOCKET_SOURCE */

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2006-12-28 16:04:26 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2006-12-30 13:42:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -123,7 +123,7 @@ void startup_internal_memory(void* p0, void* p1, void* p2, void* p3, void* p4, v
     // Set x window system mutex.
     set(p0, (void*) X_WINDOW_SYSTEM_MUTEX_INTERNAL, p10, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     // Set www service mutex.
-    i = *WWW_BASE_INTERNAL + *SERVER_SOCKET_MUTEX_INTERNAL;
+    i = *WWW_BASE_INTERNAL + *SOCKET_MUTEX_INTERNAL;
     set(p0, (void*) &i, p11, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 }
 

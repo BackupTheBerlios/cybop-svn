@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2006-12-29 18:49:24 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2006-12-30 13:42:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -34,6 +34,7 @@
 #include <sys/socket.h>
 #include <sys/types.h>
 #include <errno.h>
+#include <fcntl.h>
 #include <stdio.h>
 #include <unistd.h>
 #include "../../globals/constants/abstraction_constants.c"
@@ -552,8 +553,6 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
         void* b = NULL_POINTER;
         int* bc = NULL_POINTER;
         int* bs = NULL_POINTER;
-        // The blocking flag.
-        int* bf = NULL_POINTER;
 /*??
         // The signal ids.
         void* id = NULL_POINTER;
@@ -591,14 +590,20 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
         // Allocate character buffer count, size.
         allocate((void*) &bc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
         allocate((void*) &bs, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-        // Allocate blocking flag.
-        allocate((void*) &bf, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 /*??
         // Allocate signal ids.
         allocate((void*) &idc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
         allocate((void*) &ids, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
         allocate_array((void*) &id, (void*) ids, (void*) INTEGER_ARRAY);
 */
+
+        // Initialise error number.
+        // It is a global variable/ function and other operations
+        // may have set some value that is not wanted here.
+        //
+        // CAUTION! Initialise the error number BEFORE calling the procedure
+        // that might cause an error.
+        errno = *NUMBER_0_INTEGER;
 
         // Initialise server socket.
         //
@@ -611,136 +616,119 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
         // See further below!
         *s = socket(sn, st, *NUMBER_0_INTEGER);
 
-        // Initialise socket address size.
-        if (an == AF_LOCAL) {
-
-            // CAUTION! The following line CANNOT be used:
-            // *as = sizeof(struct sockaddr_un);
-            // because the compiler brings the error
-            // "invalid application of 'sizeof' to incomplete type 'struct sockaddr_un'".
-            // The reason is the "sun_path" field of the "sockaddr_un" structure,
-            // which is a character array whose size is unknown at compilation time.
-            //
-            // The size of the "sun_path" character array is therefore set
-            // to the fixed size of 108.
-            // The number "108" is the limit as set by the gnu c library!
-            // Its documentation called it a "magic number" and does not
-            // know why this limit exists.
-            //
-            // With the known type "short int" of the "sun_family" field and
-            // a fixed size "108" of the "sun_path" field, the overall size of
-            // the "sockaddr_un" structure can be calculated as sum.
-            *as = sizeof(short int) + 108;
-
-        } else if (an == AF_INET) {
-
-            *as = sizeof(struct sockaddr_in);
-
-        } else if (an == AF_INET6) {
-
-            *as = sizeof(struct sockaddr_in6);
-        }
-
-/*??
-        // Initialise client sockets.
-        *csc = *NUMBER_0_INTEGER;
-        *css = *NUMBER_0_INTEGER;
-*/
-        // Initialise character buffer count, size.
-        // Its size is initialised with 2048,
-        // which should suffice for transferring standard data over tcp/ip.
-        *bc = *NUMBER_0_INTEGER;
-        *bs = 2048;
-        // Initialise blocking flag.
-        *bf = *NUMBER_0_INTEGER;
-/*??
-        // Initialise signal ids.
-        *idc = *NUMBER_0_INTEGER;
-        *ids = *NUMBER_0_INTEGER;
-*/
-
-        // Allocate socket address.
-        if (an == AF_LOCAL) {
-
-            la = (struct sockaddr_un*) malloc(*as);
-
-        } else if (an == AF_INET) {
-
-            ia4 = (struct sockaddr_in*) malloc(*as);
-
-        } else if (an == AF_INET6) {
-
-            ia6 = (struct sockaddr_in6*) malloc(*as);
-        }
-
-        // Allocate character buffer.
-        allocate((void*) &b, (void*) bs, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
-
-        // Initialise socket address.
-        if (an == AF_LOCAL) {
-
-            startup_socket_initialise_local_socket_address((void*) &la, p5, p6);
-
-        } else if (an == AF_INET) {
-
-            startup_socket_initialise_ipv4_socket_address((void*) &ia4, (void*) &ha4, p7);
-
-        } else if (an == AF_INET6) {
-
-            startup_socket_initialise_ipv6_socket_address((void*) &ia6, (void*) &ha6, p7);
-        }
-
-        // Set server socket.
-        i = *base + *SERVER_SOCKET_INTERNAL;
-        set(p0, (void*) &i, (void*) &s, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        // Set socket address.
-        i = *base + *SERVER_SOCKET_ADDRESS_INTERNAL;
-
-        if (an == AF_LOCAL) {
-
-            set(p0, (void*) &i, (void*) &la, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-
-        } else if (an == AF_INET) {
-
-            set(p0, (void*) &i, (void*) &ia4, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-
-        } else if (an == AF_INET6) {
-
-            set(p0, (void*) &i, (void*) &ia6, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        }
-
-        i = *base + *SERVER_SOCKET_ADDRESS_SIZE_INTERNAL;
-        set(p0, (void*) &i, (void*) &as, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-/*??
-        // Set client sockets.
-        set(p0, (void*) TCP_CLIENT_SOCKETS_INTERNAL, (void*) &cs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        set(p0, (void*) TCP_CLIENT_SOCKETS_COUNT_INTERNAL, (void*) &csc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        set(p0, (void*) TCP_CLIENT_SOCKETS_SIZE_INTERNAL, (void*) &css, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-*/
-        i = *base + *SERVER_SOCKET_CHARACTER_BUFFER_INTERNAL;
-        set(p0, (void*) &i, (void*) &b, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        i = *base + *SERVER_SOCKET_CHARACTER_BUFFER_COUNT_INTERNAL;
-        set(p0, (void*) &i, (void*) &bc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        i = *base + *SERVER_SOCKET_CHARACTER_BUFFER_SIZE_INTERNAL;
-        set(p0, (void*) &i, (void*) &bs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        // Set blocking flag.
-//??        set(p0, (void*) SERVER_SOCKET_BLOCKING_INTERNAL, (void*) &bf, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-/*??
-        // Set signal ids.
-        set(p0, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_INTERNAL, (void*) &id, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        set(p0, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_COUNT_INTERNAL, (void*) &idc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        set(p0, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_SIZE_INTERNAL, (void*) &ids, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-*/
-
-        // Initialise error number.
-        // It is a global variable/ function and other operations
-        // may have set some value that is not wanted here.
-        errno = 0;
-
         if (*s >= *NUMBER_0_INTEGER) {
+
+            // Set non-blocking mode for the socket file descriptor.
+            //
+            // If the O_NONBLOCK flag (a bit) is set, read requests on the socket
+            // (file) can return immediately with a failure status if there is no
+            // input immediately available, instead of blocking. Likewise, write
+            // requests can also return immediately with a failure status if the
+            // output can't be written immediately.
+
+            // Get file status flags.
+            int fl = fcntl(*s, F_GETFL, NUMBER_0_INTEGER);
+
+            if (fl != *INVALID_VALUE) {
+
+                // Set non-blocking flag (bit).
+                fl |= O_NONBLOCK;
+
+                // Store modified flag word in the file descriptor.
+                fcntl(*s, F_SETFL, fl);
+
+            } else {
+
+                log_message_debug("Error: Could not start up socket / set non-blocking mode. The socket file descriptor flags could not be read.");
+            }
+
+            // Initialise socket address size.
+            if (an == AF_LOCAL) {
+
+                // CAUTION! The following line CANNOT be used:
+                // *as = sizeof(struct sockaddr_un);
+                // because the compiler brings the error
+                // "invalid application of 'sizeof' to incomplete type 'struct sockaddr_un'".
+                // The reason is the "sun_path" field of the "sockaddr_un" structure,
+                // which is a character array whose size is unknown at compilation time.
+                //
+                // The size of the "sun_path" character array is therefore set
+                // to the fixed size of 108.
+                // The number "108" is the limit as set by the gnu c library!
+                // Its documentation called it a "magic number" and does not
+                // know why this limit exists.
+                //
+                // With the known type "short int" of the "sun_family" field and
+                // a fixed size "108" of the "sun_path" field, the overall size of
+                // the "sockaddr_un" structure can be calculated as sum.
+                *as = sizeof(short int) + 108;
+
+            } else if (an == AF_INET) {
+
+                *as = sizeof(struct sockaddr_in);
+
+            } else if (an == AF_INET6) {
+
+                *as = sizeof(struct sockaddr_in6);
+            }
+
+/*??
+            // Initialise client sockets.
+            *csc = *NUMBER_0_INTEGER;
+            *css = *NUMBER_0_INTEGER;
+*/
+            // Initialise character buffer count, size.
+            // Its size is initialised with 2048,
+            // which should suffice for transferring standard data over tcp/ip.
+            *bc = *NUMBER_0_INTEGER;
+            *bs = 2048;
+/*??
+            // Initialise signal ids.
+            *idc = *NUMBER_0_INTEGER;
+            *ids = *NUMBER_0_INTEGER;
+*/
+
+            // Allocate socket address.
+            if (an == AF_LOCAL) {
+
+                la = (struct sockaddr_un*) malloc(*as);
+
+            } else if (an == AF_INET) {
+
+                ia4 = (struct sockaddr_in*) malloc(*as);
+
+            } else if (an == AF_INET6) {
+
+                ia6 = (struct sockaddr_in6*) malloc(*as);
+            }
+
+            // Allocate character buffer.
+            allocate((void*) &b, (void*) bs, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+
+            // Initialise socket address.
+            if (an == AF_LOCAL) {
+
+                startup_socket_initialise_local_socket_address((void*) &la, p5, p6);
+
+            } else if (an == AF_INET) {
+
+                startup_socket_initialise_ipv4_socket_address((void*) &ia4, (void*) &ha4, p7);
+
+            } else if (an == AF_INET6) {
+
+                startup_socket_initialise_ipv6_socket_address((void*) &ia6, (void*) &ha6, p7);
+            }
 
             // The result.
             int r = *INVALID_VALUE;
+
+            // Initialise error number.
+            // It is a global variable/ function and other operations
+            // may have set some value that is not wanted here.
+            //
+            // CAUTION! Initialise the error number BEFORE calling the procedure
+            // that might cause an error.
+            errno = *NUMBER_0_INTEGER;
 
             // Bind socket number to socket address.
             if (an == AF_LOCAL) {
@@ -758,7 +746,58 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
 
             if (r >= *NUMBER_0_INTEGER) {
 
+                // Set server socket.
+                i = *base + *SOCKET_INTERNAL;
+                set(p0, (void*) &i, (void*) &s, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                // Set socket address.
+                i = *base + *SOCKET_ADDRESS_INTERNAL;
+
+                if (an == AF_LOCAL) {
+
+                    set(p0, (void*) &i, (void*) &la, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
+                } else if (an == AF_INET) {
+
+                    set(p0, (void*) &i, (void*) &ia4, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
+                } else if (an == AF_INET6) {
+
+                    set(p0, (void*) &i, (void*) &ia6, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                }
+
+                i = *base + *SOCKET_ADDRESS_SIZE_INTERNAL;
+                set(p0, (void*) &i, (void*) &as, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+/*??
+                // Set client sockets.
+                set(p0, (void*) TCP_CLIENT_SOCKETS_INTERNAL, (void*) &cs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                set(p0, (void*) TCP_CLIENT_SOCKETS_COUNT_INTERNAL, (void*) &csc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                set(p0, (void*) TCP_CLIENT_SOCKETS_SIZE_INTERNAL, (void*) &css, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    */
+                i = *base + *SOCKET_CHARACTER_BUFFER_INTERNAL;
+                set(p0, (void*) &i, (void*) &b, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                i = *base + *SOCKET_CHARACTER_BUFFER_COUNT_INTERNAL;
+                set(p0, (void*) &i, (void*) &bc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                i = *base + *SOCKET_CHARACTER_BUFFER_SIZE_INTERNAL;
+                set(p0, (void*) &i, (void*) &bs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+/*??
+                // Set signal ids.
+                set(p0, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_INTERNAL, (void*) &id, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                set(p0, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_COUNT_INTERNAL, (void*) &idc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                set(p0, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_SIZE_INTERNAL, (void*) &ids, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+*/
+
                 if (st == SOCK_STREAM) {
+
+                    // Reset result.
+                    r = *INVALID_VALUE;
+
+                    // Initialise error number.
+                    // It is a global variable/ function and other operations
+                    // may have set some value that is not wanted here.
+                    //
+                    // CAUTION! Initialise the error number BEFORE calling the procedure
+                    // that might cause an error.
+                    errno = *NUMBER_0_INTEGER;
 
                     // CAUTION! Datagram sockets do NOT have connections,
                     // which is why the "listen" procedure is only called
@@ -767,12 +806,59 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
                     // Enable socket to accept connections, thus making it a server socket.
                     // The second parameter determines the number of possible
                     // pending client connection requests.
-                    listen(*s, *NUMBER_1_INTEGER);
+                    r = listen(*s, *NUMBER_1_INTEGER);
+
+                    if (r < *NUMBER_0_INTEGER) {
+
+                        if (errno == EBADF) {
+
+                            log_message_debug("Error: Could not start up socket. The argument socket is not a valid file descriptor.");
+
+                        } else if (errno == ENOTSOCK) {
+
+                            log_message_debug("Error: Could not start up socket. The argument socket is not a socket.");
+
+                        } else if (errno == EOPNOTSUPP) {
+
+                            log_message_debug("Error: Could not start up socket. The socket does not support this operation.");
+
+                        } else {
+
+                            log_message_debug("Error: Could not start up socket. An unknown error occured while listening at the socket.");
+                        }
+                    }
                 }
 
             } else {
 
-                log_message_debug("Error: Could not start up socket. The socket could not be bound to the address.");
+                if (errno == EBADF) {
+
+                    log_message_debug("Error: Could not start up socket. The socket argument is not a valid file descriptor.");
+
+                } else if (errno == ENOTSOCK) {
+
+                    log_message_debug("Error: Could not start up socket. The descriptor socket is not a socket.");
+
+                } else if (errno == EADDRNOTAVAIL) {
+
+                    log_message_debug("Error: Could not start up socket. The specified address is not available on this machine.");
+
+                } else if (errno == EADDRINUSE) {
+
+                    log_message_debug("Error: Could not start up socket. The specified address is already used by some other socket.");
+
+                } else if (errno == EINVAL) {
+
+                    log_message_debug("Error: Could not start up socket. The socket socket already has an address.");
+
+                } else if (errno == EACCES) {
+
+                    log_message_debug("Error: Could not start up socket. The permission to access the requested address is missing. (In the internet domain, only the super-user is allowed to specify a port number in the range 0 through IPPORT_RESERVED minus one; see the section called 'Internet Ports'.");
+
+                } else {
+
+                    log_message_debug("Error: Could not start up socket. An unknown error occured while binding the socket to the address.");
+                }
             }
 
         } else {
@@ -799,7 +885,7 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
 
             } else {
 
-                log_message_debug("Error: Could not start up socket. An unknown error occured.");
+                log_message_debug("Error: Could not start up socket. An unknown error occured while initialising the socket.");
             }
         }
 
