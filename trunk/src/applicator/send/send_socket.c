@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2006-12-30 13:42:26 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2006-12-30 21:55:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -59,128 +59,58 @@
 void send_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
     void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14, void* p15) {
 
-    log_message_debug("Send socket message.");
+    if (p5 != NULL_POINTER) {
 
-    // The socket mutex.
-    pthread_mutex_t** mt = (pthread_mutex_t**) &NULL_POINTER;
+        int* base = (int*) p5;
 
-    // Get socket mutex.
-    get(p0, (void*) SOCKET_MUTEX_INTERNAL, (void*) &mt, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        // The internal memory index.
+        int i = *INVALID_VALUE;
+        // The serialised string buffer array to be sent to the socket.
+//??        void* b = NULL_POINTER;
+        void* b = "close";
+        int bc = *NUMBER_0_INTEGER;
+        int bs = *NUMBER_0_INTEGER;
+        // The socket mutex.
+        pthread_mutex_t** mt = (pthread_mutex_t**) &NULL_POINTER;
 
-    pthread_mutex_lock(*mt);
+        log_message_debug("Information: Send message via socket.");
 
-/*??
-    // Serialise compound model into www service message.
-    serialise(p0, NULL_POINTER, NULL_POINTER, p1, p2, (void*) WWW_SERVICE_MODEL, (void*) WWW_SERVICE_MODEL_COUNT, p3, p4);
+        // Get socket mutex.
+        i = *base + *SOCKET_MUTEX_INTERNAL;
+        get(p0, (void*) &i, (void*) &mt, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-    // The socket.
-    //
-    // CAUTION! Although this socket is used as client socket here, it is also
-    // used as server socket for signal reception in the "receive_socket" procedure.
-    // However, this is not a problem, since a special socket mutex is set
-    // whenever a message is sent or received via the socket.
-    void** s = &NULL_POINTER;
+        // Allocate buffer array.
+        allocate((void*) &b, (void*) &bs, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
-    // Get display.
-    get_array_elements(p0, (void*) X_WINDOW_SYSTEM_DISPLAY_INTERNAL, (void*) &d, (void*) POINTER_ARRAY);
-
-    // Show window on display.
-    write_data(d, NULL_POINTER, NULL_POINTER, p0, NULL_POINTER, (void*) X_WINDOW_SYSTEM_MODEL, (void*) X_WINDOW_SYSTEM_MODEL_COUNT);
---
-*/
-
-    // The client socket.
-    int cs = *INVALID_VALUE;
-    // The socket address.
-    struct sockaddr_in* a = NULL_POINTER;
-    int* as = NULL_POINTER;
-    // The serialised string buffer array to be sent to the socket.
-//??    void* b = NULL_POINTER;
-    void* b = "close";
-    int bc = *NUMBER_0_INTEGER;
-    int bs = *NUMBER_0_INTEGER;
-
-    // Allocate socket address size.
-    allocate((void*) &as, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-
-    // Initialise client socket.
-    //
-    // param 0: namespace
-    // param 1: style
-    // param 2: protocol
-    //
-    // CAUTION! Use "PF_INET" here and NOT "AF_INET"!
-    // The latter is to be used for address family assignment.
-    // See further below!
-    cs = socket(PF_INET, SOCK_STREAM, *NUMBER_0_INTEGER);
-    // Initialise client socket address size.
-    *as = sizeof(struct sockaddr_in);
-
-    fprintf(stderr, "TEST: cs: %i \n", cs);
-
-    // Allocate socket address.
-    a = (struct sockaddr_in*) malloc(*as);
-
-    // Initialise socket address.
-    //
-    // CAUTION! Convert uint16_t integer hostshort from host byte order
-    // to network byte order:
-    // - "htons" and "ntohs" to convert values for the sin_port member
-    // - "htonl" and "ntohl" to convert IPv4 addresses for the sin_addr member
-    if (a != NULL_POINTER) {
-
-        // CAUTION! Use "AF_INET" here and NOT "PF_INET"!
-        // The latter is to be used for socket creation.
-        // See further above!
-        a->sin_family = AF_INET;
-        // The "a.sin_addr" field is of type "struct in_addr".
-        // This data type is used in certain contexts to contain an IPv4 internet host address.
-        // It has just one field, named "s_addr", which records the host address number as an "uint32_t".
-//??        inet_aton(htonl(INADDR_ANY), (struct in_addr*) &(a->sin_addr));
-        inet_aton("127.0.0.1", (struct in_addr*) &(a->sin_addr));
-//??        a->sin_port = htons(*((uint16_t*) p6));
-        a->sin_port = 3456;
-
-    } else {
-
-        log_message_debug("Error: Could not send message via socket. The socket address is null.");
-    }
-
-    // Connect client socket "cs" to the server socket whose address is
-    // specified by the "a" and "as" arguments.
-    int r = connect(cs, (struct sockaddr*) a, *((socklen_t*) as));
-
-    if (r >= *NUMBER_0_INTEGER) {
-
-/*??
-        // The socket number for the signal id.
-        // The index for the signal id in the array is the same index
-        // in the client socket number array.
-        int i = -1;
-
-        get_index_for_signal_id(p2, p9, (void*) &i);
-
-        if (i >= 0) {
-
-            // The client socket.
-            int* cs = NULL_POINTER;
-
-            get_client_socket_number_for_index(p2, (void*) &i, (void*) &cs);
-
-            if (*cs >= 0) {
-*/
-
-            // Allocate buffer array.
-//??            allocate((void*) &b, (void*) &bs, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
-
-            // Serialise web user interface (wui) into buffer array.
-//??            serialise_socket((void*) &b, (void*) &bc, (void*) &bs, p1, p2, p3, p4, p5, p6, NULL_POINTER, NULL_POINTER, p7, p8, p11, p12);
-
+        // Serialise compound model into www service message buffer array.
+//??        serialise(p0, NULL_POINTER, NULL_POINTER, p1, p2, (void*) WWW_SERVICE_MODEL, (void*) WWW_SERVICE_MODEL_COUNT, p3, p4);
+//??        serialise_socket((void*) &b, (void*) &bc, (void*) &bs, p1, p2, p3, p4, p5, p6, NULL_POINTER, NULL_POINTER, p7, p8, p11, p12);
 /*??
             encode_model((void*) &b, (void*) &bc, (void*) &bs,
                 *ma, *mac, *mm, *mmc, *md, *mdc,
                 (void*) HTML_ABSTRACTION, (void*) HTML_ABSTRACTION_COUNT, p3, p4);
 */
+
+        // The socket.
+        //
+        // CAUTION! Although this socket is used as client socket here, it is also
+        // used as server socket for signal reception in the "receive_socket" procedure.
+        // However, this is not a problem, since a special socket mutex is set
+        // whenever a message is sent or received via the socket.
+        void** s = &NULL_POINTER;
+
+        // Get socket.
+        i = *base + *SOCKET_INTERNAL;
+        get_array_elements(p0, (void*) &i, (void*) &s, (void*) POINTER_ARRAY);
+
+    fprintf(stderr, "TEST: send socket s: %i \n", *((int*) *s));
+
+        // Lock socket mutex.
+        pthread_mutex_lock(*mt);
+
+/*??
+        // Send message via socket.
+        write_data(s, NULL_POINTER, NULL_POINTER, b, bc, (void*) WWW_SERVICE_MODEL, (void*) WWW_SERVICE_MODEL_COUNT);
 
         // Send message to client.
         // If the flags argument (fourth one) is zero, then one can
@@ -190,42 +120,91 @@ void send_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, voi
         // Note, however, that a successful return value merely indicates that the
         // message has been sent without error, not necessarily that it has been
         // received without error.
-        bc = send(cs, b, /*??bs*/5, *NUMBER_0_INTEGER);
+        bc = send(cs, b, bs, *NUMBER_0_INTEGER);
+*/
 
-            // Write serialised buffer array as message to socket.
-//??            write_data(cs, NULL_POINTER, NULL_POINTER, b, (void*) &bc, (void*) SOCKET_MODEL, (void*) SOCKET_MODEL_COUNT);
-
-        printf("TEST: sende: %s\n", b);
+        // Unlock socket mutex.
+        pthread_mutex_unlock(*mt);
 
         // Deallocate buffer array.
         deallocate((void*) &b, (void*) &bs, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
-    } else {
-
-        log_message_debug("Could not send message via socket. The send operation failed.");
-    }
-
 /*??
-            // Remove client socket number and main signal id from internal memory.
-            remove_relation_clientsocketnumber_mainsignalid(p2, (void*) &i);
+    --
+        // The remote socket address.
+        struct sockaddr_in a = NULL_POINTER;
+        int as = NULL_POINTER;
 
-            // Close client socket.
-            close(*cs);
+        // Initialise client socket address size.
+        as = sizeof(struct sockaddr_in);
+
+        // Initialise socket address.
+        //
+        // CAUTION! Convert uint16_t integer hostshort from host byte order
+        // to network byte order:
+        // - "htons" and "ntohs" to convert values for the sin_port member
+        // - "htonl" and "ntohl" to convert IPv4 addresses for the sin_addr member
+
+        // CAUTION! Use "AF_INET" here and NOT "PF_INET"!
+        // The latter is to be used for socket creation.
+        // See further above!
+        a.sin_family = AF_INET;
+        // The "a.sin_addr" field is of type "struct in_addr".
+        // This data type is used in certain contexts to contain an IPv4 internet host address.
+        // It has just one field, named "s_addr", which records the host address number as an "uint32_t".
+//??        inet_aton(htonl(INADDR_ANY), (struct in_addr*) &(a->sin_addr));
+        inet_aton("127.0.0.1", (struct in_addr*) &(a.sin_addr));
+//??        a->sin_port = htons(*((uint16_t*) p6));
+        a.sin_port = 3456;
+
+        // Connect client socket "cs" to the server socket whose address is
+        // specified by the "a" and "as" arguments.
+        int r = connect(cs, (struct sockaddr*) &a, *((socklen_t*) &as));
+
+        if (r >= *NUMBER_0_INTEGER) {
+
+            // The socket number for the signal id.
+            // The index for the signal id in the array is the same index
+            // in the client socket number array.
+            int i = -1;
+
+            get_index_for_signal_id(p2, p9, (void*) &i);
+
+            if (i >= 0) {
+
+                // The client socket.
+                int* cs = NULL_POINTER;
+
+                get_client_socket_number_for_index(p2, (void*) &i, (void*) &cs);
+
+                if (*cs >= 0) {
 
         } else {
 
-            log_message_debug("Could not send message via socket. The client socket number was not found.");
+            log_message_debug("Could not send message via socket. The send operation failed.");
         }
+
+                // Remove client socket number and main signal id from internal memory.
+                remove_relation_clientsocketnumber_mainsignalid(p2, (void*) &i);
+
+                // Close client socket.
+                close(*cs);
+
+            } else {
+
+                log_message_debug("Could not send message via socket. The client socket number was not found.");
+            }
+
+        } else {
+
+            log_message_debug("Could not send message via socket. The signal id index is invalid.");
+        }
+    */
 
     } else {
 
-        log_message_debug("Could not send message via socket. The signal id index is invalid.");
+        log_message_debug("Error: Could not send message via socket. The base internal is null.");
     }
-*/
-
-    pthread_mutex_unlock(*mt);
-
-    // TODO?? Destroy here ALL other things that were created in encode_www!!
 }
 
 /* SEND_SOCKET_SOURCE */

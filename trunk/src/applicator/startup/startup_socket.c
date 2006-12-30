@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2006-12-30 13:42:26 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2006-12-30 21:55:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -625,6 +625,13 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
             // input immediately available, instead of blocking. Likewise, write
             // requests can also return immediately with a failure status if the
             // output can't be written immediately.
+            //
+            // CAUTION! The "select" procedure was NOT used to make this socket
+            // non-blocking, because it has some overhead in that other sockets
+            // need to be considered and their file descriptors handed over as
+            // parameter.
+            // A simple "sleep" procedure is considered to be a more simple and
+            // clean solution here.
 
             // Get file status flags.
             int fl = fcntl(*s, F_GETFL, NUMBER_0_INTEGER);

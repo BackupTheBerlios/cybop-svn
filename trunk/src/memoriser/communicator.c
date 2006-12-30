@@ -24,7 +24,7 @@
  * - read data from a device into a byte array
  * - write data from a byte array to a device
  *
- * @version $Revision: 1.9 $ $Date: 2006-04-20 22:36:11 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2006-12-30 21:55:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -40,6 +40,7 @@
 #include "../memoriser/communicator/http_communicator.c"
 #include "../memoriser/communicator/inline_communicator.c"
 #include "../memoriser/communicator/linux_console_communicator.c"
+#include "../memoriser/communicator/socket_communicator.c"
 #include "../memoriser/communicator/x_window_system_communicator.c"
 
 /**
@@ -124,6 +125,16 @@ void read_data(void* p0, void* p1, void* p2, void* p3, void* p4,
             read_x_window_system(p0, p1, p2, p3, p4);
         }
     }
+
+    if (r == 0) {
+
+        compare_arrays(p5, p6, (void*) WWW_SERVICE_MODEL, (void*) WWW_SERVICE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != 0) {
+
+//??            read_socket(p0, p1, p2, p3, p4);
+        }
+    }
 }
 
 /**
@@ -206,6 +217,16 @@ void write_data(void* p0, void* p1, void* p2, void* p3, void* p4,
         if (r != 0) {
 
             write_x_window_system(p0, p1, p2, p3, p4);
+        }
+    }
+
+    if (r == 0) {
+
+        compare_arrays(p5, p6, (void*) WWW_SERVICE_MODEL, (void*) WWW_SERVICE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != 0) {
+
+            write_socket(p0, p1, p2, p3, p4);
         }
     }
 }

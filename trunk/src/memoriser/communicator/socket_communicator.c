@@ -1,5 +1,5 @@
 /*
- * $RCSfile: tcp_socket_communicator.c,v $
+ * $RCSfile: socket_communicator.c,v $
  *
  * Copyright (c) 1999-2006. Christian Heller and the CYBOP developers.
  *
@@ -24,13 +24,13 @@
  * - receive an http stream into a byte array
  * - send an http stream from a byte array
  *
- * @version $Revision: 1.7 $ $Date: 2006-04-21 23:49:11 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2006-12-30 21:55:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
 
-#ifndef TCP_SOCKET_COMMUNICATOR_SOURCE
-#define TCP_SOCKET_COMMUNICATOR_SOURCE
+#ifndef SOCKET_COMMUNICATOR_SOURCE
+#define SOCKET_COMMUNICATOR_SOURCE
 
 #include <stdio.h>
 #include "../../globals/constants/structure_constants.c"
@@ -39,29 +39,29 @@
 #include "../../memoriser/array.c"
 
 /**
- * Reads an http stream and writes it into a byte array.
+ * Reads a byte array stream from the socket.
  *
- * @param p0 the destination (byte array) (Hand over as reference!)
+ * @param p0 the destination byte array (Hand over as reference!)
  * @param p1 the destination count
  * @param p2 the destination size
- * @param p3 the source (http url)
+ * @param p3 the source socket
  * @param p4 the source count
  */
 /*??
-void read_tcp_socket(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void read_socket(void* p0, void* p1, void* p2, void* p3, void* p4) {
 }
 */
 
 /**
- * Writes an http stream that was read from a byte array.
+ * Writes a byte array stream to the socket.
  *
- * @param p0 the destination (client socket number) (Hand over as reference!)
+ * @param p0 the destination socket (Hand over as reference!)
  * @param p1 the destination count
  * @param p2 the destination size
- * @param p3 the source (byte array)
+ * @param p3 the source byte array
  * @param p4 the source count
  */
-void write_tcp_socket(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void write_socket(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (p4 != NULL_POINTER) {
 
@@ -80,19 +80,19 @@ void write_tcp_socket(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             if (b < 0) {
 
-                log_message_debug("ERROR: Could not write to tcp socket.");
+                log_message_debug("Error: Could not write to socket.");
             }
 
         } else {
 
-            log_message_debug("ERROR: The destination (client socket number) is null.");
+            log_message_debug("Error: The destination (client socket number) is null.");
         }
 
     } else {
 
-        log_message_debug("ERROR: The source count is null.");
+        log_message_debug("Error: The source count is null.");
     }
 }
 
-/* TCP_SOCKET_COMMUNICATOR_SOURCE */
+/* SOCKET_COMMUNICATOR_SOURCE */
 #endif

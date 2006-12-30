@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2006-12-30 13:42:26 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2006-12-30 21:55:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -1004,111 +1004,125 @@ void set_signals_for_all_parameters(void* p0, int* p1, void* p2) {
  * @param p0 the internal memory
  * @param p1 the buffer
  * @param p2 the buffer count
- * @param p3 the client socket
+ * @param p3 the base internal
  */
 void receive_socket_signal(void* p0, void* p1, void* p2, void* p3) {
 
-    log_message_debug("TEST: Receive socket signal.");
+    if (p3 != NULL_POINTER) {
 
-fprintf(stderr, "TEST: receive socket signal buffer: %s \n", (char*) p1);
-fprintf(stderr, "TEST: receive socket signal buffer count: %i \n", *((int*) p2));
+        int* base = (int*) p3;
 
-    // The knowledge memory.
-    void** k = &NULL_POINTER;
-    void** kc = &NULL_POINTER;
-    void** ks = &NULL_POINTER;
-    // The signal memory.
-    void** s = &NULL_POINTER;
-    void** sc = &NULL_POINTER;
-    void** ss = &NULL_POINTER;
-    // The signal memory mutex.
-    pthread_mutex_t** smt = (pthread_mutex_t**) &NULL_POINTER;
-    // The socket mutex.
-    pthread_mutex_t** somt = (pthread_mutex_t**) &NULL_POINTER;
-    // The interrupt request flag.
-    sig_atomic_t** irq = (sig_atomic_t**) &NULL_POINTER;
-    // The commands.
-    void** c = &NULL_POINTER;
-    void** cc = &NULL_POINTER;
-    void** cs = &NULL_POINTER;
-    // The command abstraction.
-    void** ca = &NULL_POINTER;
-    void** cac = &NULL_POINTER;
-    void** cas = &NULL_POINTER;
-    // The command model.
-    void** cm = &NULL_POINTER;
-    void** cmc = &NULL_POINTER;
-    void** cms = &NULL_POINTER;
-    // The command details.
-    void** cd = &NULL_POINTER;
-    void** cdc = &NULL_POINTER;
-    void** cds = &NULL_POINTER;
-    // The signal id.
-    int* id = NULL_POINTER;
+        log_message_debug("Information: Receive socket signal.");
 
-    // Get knowledge memory internal.
-    get(p0, (void*) KNOWLEDGE_MEMORY_INTERNAL, (void*) &k, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    get(p0, (void*) KNOWLEDGE_MEMORY_COUNT_INTERNAL, (void*) &kc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    get(p0, (void*) KNOWLEDGE_MEMORY_SIZE_INTERNAL, (void*) &ks, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    // Get signal memory internal.
-    get(p0, (void*) SIGNAL_MEMORY_INTERNAL, (void*) &s, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    get(p0, (void*) SIGNAL_MEMORY_COUNT_INTERNAL, (void*) &sc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    get(p0, (void*) SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &ss, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    // Get signal memory mutex.
-    get(p0, (void*) SIGNAL_MEMORY_MUTEX_INTERNAL, (void*) &smt, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    // Get socket mutex.
-    get(p0, (void*) SOCKET_MUTEX_INTERNAL, (void*) &somt, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    // Get interrupt request internal.
-    get(p0, (void*) INTERRUPT_REQUEST_INTERNAL, (void*) &irq, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    fprintf(stderr, "TEST: receive socket signal buffer: %s \n", (char*) p1);
+    fprintf(stderr, "TEST: receive socket signal buffer count: %i \n", *((int*) p2));
 
-    // Lock socket mutex.
-    //
-    // CAUTION! A mutex is needed here to ensure that the commands internal
-    // and its associated count and size are retrieved at once and belong together.
-    // Otherwise, a commands internal might be got in this "receive" thread,
-    // then the "main" thread of cyboi might set a new commands internal, count
-    // and size, and finally this "receive" thread would get a wrong count or size
-    // (of the new commands internal), not belonging to the commands internal got before.
-    pthread_mutex_lock(*somt);
+        // The knowledge memory.
+        void** k = &NULL_POINTER;
+        void** kc = &NULL_POINTER;
+        void** ks = &NULL_POINTER;
+        // The signal memory.
+        void** s = &NULL_POINTER;
+        void** sc = &NULL_POINTER;
+        void** ss = &NULL_POINTER;
+        // The interrupt request flag.
+        sig_atomic_t** irq = (sig_atomic_t**) &NULL_POINTER;
+        // The signal memory mutex.
+        pthread_mutex_t** smt = (pthread_mutex_t**) &NULL_POINTER;
+        // The internal memory index.
+        int i = *INVALID_VALUE;
+        // The socket mutex.
+        pthread_mutex_t** somt = (pthread_mutex_t**) &NULL_POINTER;
+        // The commands.
+        void** c = &NULL_POINTER;
+        void** cc = &NULL_POINTER;
+        void** cs = &NULL_POINTER;
+        // The command abstraction.
+        void** ca = &NULL_POINTER;
+        void** cac = &NULL_POINTER;
+        void** cas = &NULL_POINTER;
+        // The command model.
+        void** cm = &NULL_POINTER;
+        void** cmc = &NULL_POINTER;
+        void** cms = &NULL_POINTER;
+        // The command details.
+        void** cd = &NULL_POINTER;
+        void** cdc = &NULL_POINTER;
+        void** cds = &NULL_POINTER;
+        // The signal id.
+        int* id = NULL_POINTER;
 
-    // Get commands internal.
-    get(p0, (void*) SOCKET_COMMANDS_INTERNAL, (void*) &c, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    get(p0, (void*) SOCKET_COMMANDS_COUNT_INTERNAL, (void*) &cc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        // Get knowledge memory internal.
+        get(p0, (void*) KNOWLEDGE_MEMORY_INTERNAL, (void*) &k, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        get(p0, (void*) KNOWLEDGE_MEMORY_COUNT_INTERNAL, (void*) &kc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        get(p0, (void*) KNOWLEDGE_MEMORY_SIZE_INTERNAL, (void*) &ks, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        // Get signal memory internal.
+        get(p0, (void*) SIGNAL_MEMORY_INTERNAL, (void*) &s, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        get(p0, (void*) SIGNAL_MEMORY_COUNT_INTERNAL, (void*) &sc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        get(p0, (void*) SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &ss, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        // Get interrupt request internal.
+        get(p0, (void*) INTERRUPT_REQUEST_INTERNAL, (void*) &irq, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        // Get signal memory mutex.
+        get(p0, (void*) SIGNAL_MEMORY_MUTEX_INTERNAL, (void*) &smt, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        // Get socket mutex.
+        i = *base + *SOCKET_MUTEX_INTERNAL;
+        get(p0, (void*) &i, (void*) &somt, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-    // Unlock socket mutex.
-    pthread_mutex_unlock(*somt);
+        // Lock socket mutex.
+        //
+        // CAUTION! A mutex is needed here to ensure that the commands internal
+        // and its associated count and size are retrieved at once and belong together.
+        // Otherwise, a commands internal might be got in this "receive" thread,
+        // then the "main" thread of cyboi might set a new commands internal, count
+        // and size, and finally this "receive" thread would get a wrong count or size
+        // (of the new commands internal), not belonging to the commands internal got before.
+        pthread_mutex_lock(*somt);
 
-    // Get actual command belonging to the command name.
-    // If the name is not known, the command parameter is left untouched.
-    get_universal_compound_element_by_name(*c, *cc,
-        p1, p2,
-        (void*) &ca, (void*) &cac, (void*) &cas,
-        (void*) &cm, (void*) &cmc, (void*) &cms,
-        (void*) &cd, (void*) &cdc, (void*) &cds,
-        *k, *kc);
+        // Get commands internal.
+        i = *base + *SOCKET_COMMANDS_INTERNAL;
+        get(p0, (void*) &i, (void*) &c, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        i = *base + *SOCKET_COMMANDS_COUNT_INTERNAL;
+        get(p0, (void*) &i, (void*) &cc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-    // Lock signal memory mutex.
-    pthread_mutex_lock(*smt);
+        // Unlock socket mutex.
+        pthread_mutex_unlock(*somt);
 
-    // Allocate signal id.
-    allocate((void*) &id, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    *id = 0;
-    get_new_signal_id(*s, *sc, (void*) id);
+        // Get actual command belonging to the command name.
+        // If the name is not known, the command parameter is left untouched.
+        get_universal_compound_element_by_name(*c, *cc,
+            p1, p2,
+            (void*) &ca, (void*) &cac, (void*) &cas,
+            (void*) &cm, (void*) &cmc, (void*) &cms,
+            (void*) &cd, (void*) &cdc, (void*) &cds,
+            *k, *kc);
 
-    // Add signal to signal memory.
-    set_signal(*s, *sc, *ss, *ca, *cac, *cm, *cmc, *cd, *cdc, (void*) NORMAL_PRIORITY, (void*) id);
+        // Lock signal memory mutex.
+        pthread_mutex_lock(*smt);
+
+        // Allocate signal id.
+        allocate((void*) &id, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        *id = 0;
+        get_new_signal_id(*s, *sc, (void*) id);
+
+        // Add signal to signal memory.
+        set_signal(*s, *sc, *ss, *ca, *cac, *cm, *cmc, *cd, *cdc, (void*) NORMAL_PRIORITY, (void*) id);
 
 /*??
-    add_signal_id(p0, (void*) id);
-    add_client_socket_number(p0, (void*) cs);
+        add_signal_id(p0, (void*) id);
+        add_client_socket_number(p0, (void*) cs);
 */
 
-    // Set interrupt request flag, in order to notify the signal checker
-    // that a new signal has been placed in the signal memory.
-    **irq = *NUMBER_1_INTEGER;
+        // Set interrupt request flag, in order to notify the signal checker
+        // that a new signal has been placed in the signal memory.
+        **irq = *NUMBER_1_INTEGER;
 
-    // Unlock signal memory mutex.
-    pthread_mutex_unlock(*smt);
+        // Unlock signal memory mutex.
+        pthread_mutex_unlock(*smt);
+
+    } else {
+
+        log_message_debug("Error: Could not receive socket signal. The base internal is null.");
+    }
 }
 
 /**
@@ -1131,6 +1145,8 @@ void receive_socket_thread(void* p0, void* p1) {
         // The communication style.
         void** st = &NULL_POINTER;
         void** stc = &NULL_POINTER;
+        // The socket mutex.
+        pthread_mutex_t** mt = (pthread_mutex_t**) &NULL_POINTER;
         // The server socket.
         int** s = (int**) &NULL_POINTER;
         // The socket address.
@@ -1157,6 +1173,9 @@ void receive_socket_thread(void* p0, void* p1) {
         get(p0, (void*) &i, (void*) &st, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         i = *base + *SOCKET_STYLE_COUNT_INTERNAL;
         get(p0, (void*) &i, (void*) &stc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        // Get socket mutex.
+        i = *base + *SOCKET_MUTEX_INTERNAL;
+        get(p0, (void*) &i, (void*) &mt, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         // Get server socket.
         i = *base + *SOCKET_INTERNAL;
         get(p0, (void*) &i, (void*) &s, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
@@ -1173,7 +1192,7 @@ void receive_socket_thread(void* p0, void* p1) {
         i = *base + *SOCKET_CHARACTER_BUFFER_SIZE_INTERNAL;
         get(p0, (void*) &i, (void*) &bs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-        fprintf(stderr, "TEST: receive socket thread server socket: %i \n", **s);
+    fprintf(stderr, "TEST: receive socket thread server socket: %i \n", **s);
 
         while (1) {
 
@@ -1198,6 +1217,9 @@ void receive_socket_thread(void* p0, void* p1) {
                     // CAUTION! Initialise the error number BEFORE calling the procedure
                     // that might cause an error.
                     errno = *NUMBER_0_INTEGER;
+
+                    // Lock socket mutex.
+                    pthread_mutex_lock(*mt);
 
                     // Accept client socket request and store client socket.
                     //
@@ -1235,6 +1257,9 @@ void receive_socket_thread(void* p0, void* p1) {
                         // Remember error number.
                         e = errno;
 
+                        // Close client socket.
+                        close(cs);
+
                     } else {
 
                         if (errno == EBADF) {
@@ -1265,8 +1290,8 @@ void receive_socket_thread(void* p0, void* p1) {
                         }
                     }
 
-                    // Close client socket.
-                    close(cs);
+                    // Unlock socket mutex.
+                    pthread_mutex_unlock(*mt);
                 }
             }
 
@@ -1284,12 +1309,18 @@ void receive_socket_thread(void* p0, void* p1) {
                     // that might cause an error.
                     errno = *NUMBER_0_INTEGER;
 
+                    // Lock socket mutex.
+                    pthread_mutex_lock(*mt);
+
                     // Receive message from client.
                     // If the flags argument (fourth one) is zero, then one can
                     // just as well use the "read" instead of the "recv" procedure.
                     // Normally, "recv" blocks until there is input available to be read.
                     // CAUTION! A message MUST NOT be longer than the given buffer size!
                     **bc = recvfrom(**s, *b, **bs, *NUMBER_0_INTEGER, (struct sockaddr*) *a, (socklen_t*) *as);
+
+                    // Unlock socket mutex.
+                    pthread_mutex_unlock(*mt);
 
                     // Remember error number.
                     e = errno;
@@ -1309,9 +1340,9 @@ void receive_socket_thread(void* p0, void* p1) {
             if (**bc > *NUMBER_0_INTEGER) {
 
                 // Receive socket signal.
-                receive_socket_signal(p0, *b, (void*) *bc, (void*) &cs);
+                receive_socket_signal(p0, *b, (void*) *bc, p1);
 
-    /*??
+/*??
                 // The url basename.
                 char* url_basename = NULL_POINTER;
                 int url_basename_count = 0;
@@ -1394,9 +1425,15 @@ void receive_socket_thread(void* p0, void* p1) {
             }
 
             // Sleep for some time to give the central processing unit (cpu)
-            // time to breathe.
+            // time to breathe, that is to be idle or to process other signals.
+            //
+            // CAUTION! The "select" procedure was NOT used to make this socket
+            // non-blocking, because it has some overhead in that other sockets
+            // need to be considered and their file descriptors handed over as
+            // parameter.
+            // A simple "sleep" procedure is considered to be a more simple and
+            // clean solution here.
             sleep(1);
-    printf("TEST: sleep ...");
 
             // Reset client socket.
             cs = *INVALID_VALUE;
@@ -1473,14 +1510,14 @@ void receive_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, 
             // The internal memory index.
             int i = *INVALID_VALUE;
             // The socket mutex.
-            pthread_mutex_t** m = (pthread_mutex_t**) &NULL_POINTER;
+            pthread_mutex_t** mt = (pthread_mutex_t**) &NULL_POINTER;
 
             // Get socket mutex.
             i = *b + *SOCKET_MUTEX_INTERNAL;
-            get(p0, (void*) &i, (void*) &m, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            get(p0, (void*) &i, (void*) &mt, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
             // Lock socket mutex.
-            pthread_mutex_lock(*m);
+            pthread_mutex_lock(*mt);
 
             // Adding the following parameters to the internal memory is necessary,
             // because only one parameter (the internal memory p0) can be forwarded
@@ -1510,7 +1547,7 @@ void receive_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, 
             set(p0, (void*) &i, (void*) &p4, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
             // Unlock socket mutex.
-            pthread_mutex_unlock(*m);
+            pthread_mutex_unlock(*mt);
 
             // Only create thread, if not existent.
             // The "" type is an integer, so both can be compared.
