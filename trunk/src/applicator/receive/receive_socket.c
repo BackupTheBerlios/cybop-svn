@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2006-12-30 21:55:02 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2007-01-07 23:51:05 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -1251,6 +1251,8 @@ void receive_socket_thread(void* p0, void* p1) {
                         // If the flags argument (fourth one) is zero, then one can
                         // just as well use the "read" instead of the "recv" procedure.
                         // Normally, "recv" blocks until there is input available to be read.
+                        // Not so here, as the socket was set to "non-blocking" mode at startup.
+                        //
                         // CAUTION! A message MUST NOT be longer than the given buffer size!
                         **bc = recv(cs, *b, **bs, *NUMBER_0_INTEGER);
 
@@ -1316,6 +1318,8 @@ void receive_socket_thread(void* p0, void* p1) {
                     // If the flags argument (fourth one) is zero, then one can
                     // just as well use the "read" instead of the "recv" procedure.
                     // Normally, "recv" blocks until there is input available to be read.
+                    // Not so here, as the socket was set to "non-blocking" mode at startup.
+                    //
                     // CAUTION! A message MUST NOT be longer than the given buffer size!
                     **bc = recvfrom(**s, *b, **bs, *NUMBER_0_INTEGER, (struct sockaddr*) *a, (socklen_t*) *as);
 
@@ -1550,7 +1554,7 @@ void receive_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, 
             pthread_mutex_unlock(*mt);
 
             // Only create thread, if not existent.
-            // The "" type is an integer, so both can be compared.
+            // The "pthread_t" type is an integer, so both can be compared.
             if (*t == *INVALID_VALUE) {
 
                 // Create thread.

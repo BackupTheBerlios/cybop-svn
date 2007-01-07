@@ -24,7 +24,7 @@
  * - read data from a device into a byte array
  * - write data from a byte array to a device
  *
- * @version $Revision: 1.10 $ $Date: 2006-12-30 21:55:02 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2007-01-07 23:51:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -226,7 +226,7 @@ void write_data(void* p0, void* p1, void* p2, void* p3, void* p4,
 
         if (r != 0) {
 
-            write_socket(p0, p1, p2, p3, p4);
+//??            write_socket(p0, p1, p2, p3, p4);
         }
     }
 }

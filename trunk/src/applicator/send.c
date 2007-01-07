@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.37 $ $Date: 2006-12-30 21:55:02 $ $Author: christian $
+ * @version $Revision: 1.38 $ $Date: 2007-01-07 23:51:05 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -90,6 +90,32 @@ void send_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
     void** cd = &NULL_POINTER;
     void** cdc = &NULL_POINTER;
     void** cds = &NULL_POINTER;
+
+    // The socket namespace abstraction.
+    void** na = &NULL_POINTER;
+    void** nac = &NULL_POINTER;
+    void** nas = &NULL_POINTER;
+    // The socket namespace model.
+    void** nm = &NULL_POINTER;
+    void** nmc = &NULL_POINTER;
+    void** nms = &NULL_POINTER;
+    // The socket namespace details.
+    void** nd = &NULL_POINTER;
+    void** ndc = &NULL_POINTER;
+    void** nds = &NULL_POINTER;
+
+    // The communication style abstraction.
+    void** sta = &NULL_POINTER;
+    void** stac = &NULL_POINTER;
+    void** stas = &NULL_POINTER;
+    // The communication style model.
+    void** stm = &NULL_POINTER;
+    void** stmc = &NULL_POINTER;
+    void** stms = &NULL_POINTER;
+    // The communication style details.
+    void** std = &NULL_POINTER;
+    void** stdc = &NULL_POINTER;
+    void** stds = &NULL_POINTER;
 
     // The sender abstraction.
     void** sa = &NULL_POINTER;
@@ -258,7 +284,7 @@ void send_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
 
         if (r != 0) {
 
-            send_socket(p2, *ra, *rac, *rm, *rmc, *rd, *rdc, *ma, *mac, *mm, *mmc, *md, *mdc, (void*) WWW_BASE_INTERNAL, p3, p4);
+            send_socket(p2, *nm, *nmc, *stm, *stmc, *rm, *rmc, *ma, *mac, *mm, *mmc, *md, *mdc, (void*) WWW_BASE_INTERNAL, p3, p4);
         }
     }
 

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2006-12-30 21:55:02 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2007-01-07 23:51:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -48,7 +48,7 @@
 #include "../../memoriser/allocator.c"
 
 /**
- * Gets the socket- and address namespace.
+ * Gets the startup socket socket- and address namespace.
  *
  * @param p0 the socket namespace (Hand over as reference!)
  * @param p1 the address namespace (Hand over as reference!)
@@ -105,17 +105,17 @@ void startup_socket_get_namespace(void* p0, void* p1, void* p2, void* p3) {
 
         } else {
 
-            log_message_debug("Could not get namespace. The socket namespace is null.");
+            log_message_debug("Could not get startup socket namespace. The socket namespace is null.");
         }
 
     } else {
 
-        log_message_debug("Could not get namespace. The address namespace is null.");
+        log_message_debug("Could not get startup socket namespace. The address namespace is null.");
     }
 }
 
 /**
- * Gets the communication style.
+ * Gets the startup socket communication style.
  *
  * @param p0 the communication style (Hand over as reference!)
  * @param p1 the communication style model
@@ -164,12 +164,12 @@ void startup_socket_get_style(void* p0, void* p1, void* p2) {
 
     } else {
 
-        log_message_debug("Could not get style. The communication style is null.");
+        log_message_debug("Could not get startup socket style. The communication style is null.");
     }
 }
 
 /**
- * Gets the ipv4 host address.
+ * Gets the startup socket ipv4 host address.
  *
  * @param p0 the ipv4 host address (Hand over as reference!)
  * @param p1 the address model
@@ -208,12 +208,12 @@ void startup_socket_get_ipv4_host_address(void* p0, void* p1, void* p2) {
 
     } else {
 
-        log_message_debug("Could not get ipv4 host address. The ipv4 host address is null.");
+        log_message_debug("Could not get startup socket ipv4 host address. The ipv4 host address is null.");
     }
 }
 
 /**
- * Gets the ipv6 host address.
+ * Gets the startup socket ipv6 host address.
  *
  * @param p0 the ipv6 host address (Hand over as reference!)
  * @param p1 the address model
@@ -252,7 +252,7 @@ void startup_socket_get_ipv6_host_address(void* p0, void* p1, void* p2) {
 
     } else {
 
-        log_message_debug("Could not get ipv6 host address. The ipv6 host address is null.");
+        log_message_debug("Could not get startup socket ipv6 host address. The ipv6 host address is null.");
     }
 }
 
@@ -501,7 +501,7 @@ void startup_socket_initialise_ipv6_socket_address(void* p0, void* p1, void* p2)
 /**
  * Starts up socket.
  *
- * @param p0 the internals memory
+ * @param p0 the internal memory
  * @param p1 the namespace model
  * @param p2 the namespace model count
  * @param p3 the style model
@@ -561,6 +561,8 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
 */
         // The internal memory index.
         int i = *INVALID_VALUE;
+        // The result.
+        int r = *INVALID_VALUE;
 
         // Get socket- and address namespace.
         startup_socket_get_namespace((void*) &sn, (void*) &an, p1, p2);
@@ -725,9 +727,6 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
 
                 startup_socket_initialise_ipv6_socket_address((void*) &ia6, (void*) &ha6, p7);
             }
-
-            // The result.
-            int r = *INVALID_VALUE;
 
             // Initialise error number.
             // It is a global variable/ function and other operations
