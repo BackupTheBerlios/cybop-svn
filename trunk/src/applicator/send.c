@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.38 $ $Date: 2007-01-07 23:51:05 $ $Author: christian $
+ * @version $Revision: 1.39 $ $Date: 2007-01-11 22:30:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -37,6 +37,7 @@
 #include "../globals/constants/channel_constants.c"
 #include "../globals/constants/model_constants.c"
 #include "../globals/constants/name_constants.c"
+#include "../globals/constants/service_port_constants.c"
 #include "../globals/constants/structure_constants.c"
 #include "../globals/logger/logger.c"
 #include "../memoriser/accessor/compound_accessor.c"
@@ -195,6 +196,22 @@ void send_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
         (void*) &cd, (void*) &cdc, (void*) &cds,
         p3, p4);
 
+    // Get socket namespace.
+    get_universal_compound_element_by_name(p0, p1,
+        (void*) SEND_NAMESPACE_NAME, (void*) SEND_NAMESPACE_NAME_COUNT,
+        (void*) &na, (void*) &nac, (void*) &nas,
+        (void*) &nm, (void*) &nmc, (void*) &nms,
+        (void*) &nd, (void*) &ndc, (void*) &nds,
+        p3, p4);
+
+    // Get communication style.
+    get_universal_compound_element_by_name(p0, p1,
+        (void*) SEND_STYLE_NAME, (void*) SEND_STYLE_NAME_COUNT,
+        (void*) &sta, (void*) &stac, (void*) &stas,
+        (void*) &stm, (void*) &stmc, (void*) &stms,
+        (void*) &std, (void*) &stdc, (void*) &stds,
+        p3, p4);
+
     // Get sender.
     get_universal_compound_element_by_name(p0, p1,
         (void*) SEND_SENDER_NAME, (void*) SEND_SENDER_NAME_COUNT,
@@ -284,7 +301,7 @@ void send_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
 
         if (r != 0) {
 
-            send_socket(p2, *nm, *nmc, *stm, *stmc, *rm, *rmc, *ma, *mac, *mm, *mmc, *md, *mdc, (void*) WWW_BASE_INTERNAL, p3, p4);
+            send_socket(p2, *nm, *nmc, *stm, *stmc, *rm, *rmc, (void*) WWW_PORT, *ma, *mac, *mm, *mmc, *md, *mdc, (void*) WWW_BASE_INTERNAL, p3, p4);
         }
     }
 
@@ -314,6 +331,7 @@ void refresh_url(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, voi
 
     log_message_debug("Refresh url.");
 
+/*??
     // The message abstraction.
     void** urla = &NULL_POINTER;
     void** urlac = &NULL_POINTER;
@@ -335,7 +353,6 @@ void refresh_url(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, voi
         (void*) &urld, (void*) &urldc, (void*) &urlds,
         p3, p4);
 
-/*??
     if ((*urla != NULL_POINTER)
          && (*urlac != NULL_POINTER)
          && (*urlas != NULL_POINTER)

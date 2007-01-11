@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2007-01-07 23:51:05 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2007-01-11 22:30:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -1237,7 +1237,13 @@ void receive_socket_thread(void* p0, void* p1) {
                     // even if no stream socket connection could be established.
                     cs = accept(**s, (struct sockaddr*) *a, (socklen_t*) *as);
 
+    fprintf(stderr, "TEST: receive socket thread client socket pre: %i \n", cs);
+    sleep(2);
+
                     if (cs >= *NUMBER_0_INTEGER) {
+
+    fprintf(stderr, "TEST: receive socket thread client socket post: %i \n", cs);
+    sleep(2);
 
                         // Initialise error number.
                         // It is a global variable/ function and other operations

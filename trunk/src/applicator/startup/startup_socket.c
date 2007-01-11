@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.10 $ $Date: 2007-01-07 23:51:06 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2007-01-11 22:30:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -179,7 +179,7 @@ void startup_socket_get_ipv4_host_address(void* p0, void* p1, void* p2) {
 
     if (p0 != NULL_POINTER) {
 
-        int* a = (int*) p0;
+        struct in_addr* a = (struct in_addr*) p0;
 
         log_message_debug("Startup socket get ipv4 host address.");
 
@@ -192,7 +192,7 @@ void startup_socket_get_ipv4_host_address(void* p0, void* p1, void* p2) {
 
             if (r != 0) {
 
-                *a = INADDR_LOOPBACK;
+                (*a).s_addr = INADDR_LOOPBACK;
             }
         }
 
@@ -202,8 +202,19 @@ void startup_socket_get_ipv4_host_address(void* p0, void* p1, void* p2) {
 
             if (r != 0) {
 
-                *a = INADDR_ANY;
+    printf("TEST any address");
+
+                (*a).s_addr = INADDR_ANY;
             }
+        }
+
+        if (r == 0) {
+
+    printf("TEST direct host address");
+
+            // If none of the above address models was found, then the given
+            // address is supposed to be the host address directly.
+            inet_aton((char*) p1, a);
         }
 
     } else {
@@ -529,20 +540,26 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
         int an = *INVALID_VALUE;
         // The communication style.
         int st = *INVALID_VALUE;
-        // The ipv4 host address.
+        // The ipv4 host address of the receiver (this system).
         uint32_t ha4 = *INVALID_VALUE;
-        // The ipv6 host address.
+        // The ipv6 host address of the receiver (this system).
         struct in6_addr ha6 = in6addr_loopback; //?? IN6ADDR_LOOPBACK_INIT
-        // The server socket.
-        int* s = NULL_POINTER;
-        // The local socket address.
+        // The local socket address of the receiver (this system).
+        // CAUTION! Do use a pointer here and not only the structure as type,
+        // so that the different socket addresses can be processed uniformly below!
         struct sockaddr_un* la = NULL_POINTER;
-        // The ipv4 internet socket address.
+        // The ipv4 internet socket address of the receiver (this system).
+        // CAUTION! Do use a pointer here and not only the structure as type,
+        // so that the different socket addresses can be processed uniformly below!
         struct sockaddr_in* ia4 = NULL_POINTER;
-        // The ipv6 internet socket address.
+        // The ipv6 internet socket address of the receiver (this system).
+        // CAUTION! Do use a pointer here and not only the structure as type,
+        // so that the different socket addresses can be processed uniformly below!
         struct sockaddr_in6* ia6 = NULL_POINTER;
         // The socket address size.
         int* as = NULL_POINTER;
+        // The server socket of the receiver (this system).
+        int* s = NULL_POINTER;
 /*??
         // The client sockets.
         void* cs = NULL_POINTER;
@@ -635,6 +652,7 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
             // A simple "sleep" procedure is considered to be a more simple and
             // clean solution here.
 
+/*??
             // Get file status flags.
             int fl = fcntl(*s, F_GETFL, NUMBER_0_INTEGER);
 
@@ -650,6 +668,7 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
 
                 log_message_debug("Error: Could not start up socket / set non-blocking mode. The socket file descriptor flags could not be read.");
             }
+*/
 
             // Initialise socket address size.
             if (an == AF_LOCAL) {
@@ -745,6 +764,9 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
 
                 r = bind(*s, (struct sockaddr*) ia4, *((socklen_t*) as));
 
+    fprintf(stderr, "TEST: startup socket bind s: %i \n", *s);
+    sleep(2);
+
             } else if (an == AF_INET6) {
 
                 r = bind(*s, (struct sockaddr*) ia6, *((socklen_t*) as));
@@ -813,6 +835,9 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
                     // The second parameter determines the number of possible
                     // pending client connection requests.
                     r = listen(*s, *NUMBER_1_INTEGER);
+
+    fprintf(stderr, "TEST: startup socket listen s: %i \n", *s);
+    sleep(2);
 
                     if (r < *NUMBER_0_INTEGER) {
 

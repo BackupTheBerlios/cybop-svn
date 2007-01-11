@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.28 $ $Date: 2006-12-28 16:04:26 $ $Author: christian $
+ * @version $Revision: 1.29 $ $Date: 2007-01-11 22:30:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -156,12 +156,24 @@ void manage(void* p0, void* p1) {
     // Initialise signal memory interrupt request flag.
     *irq = *NUMBER_0_INTEGER;
     // Initialise signal memory mutex.
+    // The second parameter specifies attributes that are to be used to
+    // initialise the mutex. If the parameter is null, the mutex is
+    // initialised with default attributes.
     pthread_mutex_init(signal_memory_mutex, NULL_POINTER);
     // Initialise linux console mutex.
+    // The second parameter specifies attributes that are to be used to
+    // initialise the mutex. If the parameter is null, the mutex is
+    // initialised with default attributes.
     pthread_mutex_init(linux_console_mutex, NULL_POINTER);
     // Initialise x window system mutex.
+    // The second parameter specifies attributes that are to be used to
+    // initialise the mutex. If the parameter is null, the mutex is
+    // initialised with default attributes.
     pthread_mutex_init(x_window_system_mutex, NULL_POINTER);
     // Initialise www service mutex.
+    // The second parameter specifies attributes that are to be used to
+    // initialise the mutex. If the parameter is null, the mutex is
+    // initialised with default attributes.
     pthread_mutex_init(www_service_mutex, NULL_POINTER);
 
     // Allocate internal memory.

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.25 $ $Date: 2006-12-29 00:50:14 $ $Author: christian $
+ * @version $Revision: 1.26 $ $Date: 2007-01-11 22:30:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -442,6 +442,16 @@ static char SEND_CHANNEL_NAME_ARRAY[] = {'c', 'h', 'a', 'n', 'n', 'e', 'l'};
 static char* SEND_CHANNEL_NAME = SEND_CHANNEL_NAME_ARRAY;
 static int* SEND_CHANNEL_NAME_COUNT = NUMBER_7_INTEGER_ARRAY;
 
+/** The send socket namespace name. */
+static char SEND_NAMESPACE_NAME_ARRAY[] = {'n', 'a', 'm', 'e', 's', 'p', 'a', 'c', 'e'};
+static char* SEND_NAMESPACE_NAME = SEND_NAMESPACE_NAME_ARRAY;
+static int* SEND_NAMESPACE_NAME_COUNT = NUMBER_9_INTEGER_ARRAY;
+
+/** The send communication style name. */
+static char SEND_STYLE_NAME_ARRAY[] = {'s', 't', 'y', 'l', 'e'};
+static char* SEND_STYLE_NAME = SEND_STYLE_NAME_ARRAY;
+static int* SEND_STYLE_NAME_COUNT = NUMBER_5_INTEGER_ARRAY;
+
 /** The send sender name. */
 static char SEND_SENDER_NAME_ARRAY[] = {'s', 'e', 'n', 'd', 'e', 'r'};
 static char* SEND_SENDER_NAME = SEND_SENDER_NAME_ARRAY;
@@ -468,9 +478,11 @@ static char* SEND_CLEAN_NAME = SEND_CLEAN_NAME_ARRAY;
 static int* SEND_CLEAN_NAME_COUNT = NUMBER_5_INTEGER_ARRAY;
 
 /** The send url name. */
+/*??
 static char SEND_URL_NAME_ARRAY[] = {'u', 'r', 'l'};
 static char* SEND_URL_NAME = SEND_URL_NAME_ARRAY;
 static int* SEND_URL_NAME_COUNT = NUMBER_3_INTEGER_ARRAY;
+*/
 
 //
 // Receive names.

@@ -24,7 +24,7 @@
  * - receive an http stream into a byte array
  * - send an http stream from a byte array
  *
- * @version $Revision: 1.2 $ $Date: 2007-01-07 23:51:06 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2007-01-11 22:30:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -74,7 +74,7 @@ void write_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
 
         if (p5 != NULL_POINTER) {
 
-            int** so = (int**) p5;
+            int* so = (int*) p5;
 
             if (p4 != NULL_POINTER) {
 
@@ -86,14 +86,14 @@ void write_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
 
                     if (p0 != NULL_POINTER) {
 
-                        struct sockaddr* d = (struct sockaddr*) p0;
+                        struct sockaddr** d = (struct sockaddr**) p0;
 
                         log_message_debug("Information: Write to socket.");
 
                         // The result.
                         int r = *INVALID_VALUE;
 
-        fprintf(stderr, "TEST: write socket d: %i \n", *((int*) *so));
+        fprintf(stderr, "TEST: write socket d: %i \n", *so);
 
                         if (*st == SOCK_STREAM) {
 
@@ -107,7 +107,7 @@ void write_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
 
                             // Connect this system whose socket is given
                             // to another system whose address is given.
-                            r = connect(**so, d, *ds);
+                            r = connect(*so, *d, *ds);
 
                             if (r >= *NUMBER_0_INTEGER) {
 
@@ -132,7 +132,7 @@ void write_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
                                 // that it has been received without error!
                                 // The function returns the number of bytes transmitted
                                 // or -1 on failure.
-                                r = send(**so, p3, *sc, *NUMBER_0_INTEGER);
+                                r = send(*so, p3, *sc, *NUMBER_0_INTEGER);
 
                                 if (r < *NUMBER_0_INTEGER) {
 
@@ -238,7 +238,7 @@ void write_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
 
                         } else if (*st == SOCK_DGRAM) {
 
-                            r = sendto(**so, p3, *sc, *NUMBER_0_INTEGER, d, *ds);
+                            r = sendto(*so, p3, *sc, *NUMBER_0_INTEGER, *d, *ds);
 
                             if (r < *NUMBER_0_INTEGER) {
 

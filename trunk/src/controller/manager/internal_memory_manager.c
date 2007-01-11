@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2006-12-30 13:42:26 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2007-01-11 22:30:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -88,6 +88,7 @@ void startup_internal_memory(void* p0, void* p1, void* p2, void* p3, void* p4, v
         }
 
         // Set null pointer at index.
+        //
         // CAUTION! The standard "set" procedure could have been used here as well.
         // However, to speed up the program, the "set_pointer_array_elements"
         // procedure was used directly, as it does not do so many comparisons
