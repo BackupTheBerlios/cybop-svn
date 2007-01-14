@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.12 $ $Date: 2007-01-14 01:38:01 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2007-01-14 21:42:45 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -241,6 +241,9 @@ void startup_socket_get_host_address(void* p0, void* p1, void* p2, void* p3) {
 
                 if (r == 0) {
 
+                    // If none of the above address models was found, then the given
+                    // address is supposed to be the host address directly.
+
                     // The terminated address model.
                     char* s = NULL_POINTER;
                     int ss = *amc + *NUMBER_1_INTEGER;
@@ -253,8 +256,8 @@ void startup_socket_get_host_address(void* p0, void* p1, void* p2, void* p3) {
                     set_array_elements(s, (void*) NUMBER_0_INTEGER, p1, p2, (void*) CHARACTER_ARRAY);
                     set_array_elements(s, p2, (void*) NULL_CONTROL_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
 
-                    // If none of the above address models was found, then the given
-                    // address is supposed to be the host address directly.
+                    // Convert uint16_t integer hostshort from host byte order
+                    // to network byte order.
                     inet_pton(*an, s, p0);
 
                     // Deallocate terminated address model.
@@ -380,8 +383,8 @@ void startup_socket_initialise_local_socket_address(void* p0, void* p1, void* p2
 * Initialises the ipv4 socket address.
 *
 * @param p0 the ipv4 socket address (Hand over as reference!)
-* @param p1 the host address
-* @param p2 the socket port
+* @param p1 the host address (in network byte order)
+* @param p2 the socket port (in host byte order)
 */
 void startup_socket_initialise_ipv4_socket_address(void* p0, void* p1, void* p2) {
 
@@ -407,26 +410,20 @@ void startup_socket_initialise_ipv4_socket_address(void* p0, void* p1, void* p2)
 
                 // Set host address.
                 //
-                // CAUTION! The address MUST BE represented in a canonical
-                // format called "network byte order".
-                //
                 // The "a.sin_addr" field is of type "struct in_addr".
-                // This data type is used in certain contexts to contain an IPv4 internet host address.
-                // It has just one field, named "s_addr", which records the host address number as an "uint32_t".
+                // This data type is used in certain contexts to contain an
+                // IPv4 internet host address. It has just one field, named
+                // "s_addr", which records the host address number as an "uint32_t".
                 //
-                // CAUTION! Convert uint16_t integer hostshort from host byte order
-                // to network byte order:
-                // - "htons" and "ntohs" to convert values for the sin_port member
-                // - "htonl" and "ntohl" to convert IPv4 addresses for the sin_addr member
-//??                inet_aton(ipv4, (struct in_addr*) &((*a)->sin_addr));
+                // CAUTION! The host address parameter is already given in
+                // network byte order, so that it does NOT have to be converted!
                 (*a)->sin_addr.s_addr = *h;
 
                 // Set socket port.
                 //
-                // CAUTION! The port number MUST BE represented in a canonical
-                // format called "network byte order".
-//??                a->sin_port = htons(*((uint16_t*) p6));
-                (*a)->sin_port = *p;
+                // CAUTION! The port number is given in host byte order and
+                // HAS TO BE converted into network byte order!
+                (*a)->sin_port = htons(*p);
 
             } else {
 
@@ -448,8 +445,8 @@ void startup_socket_initialise_ipv4_socket_address(void* p0, void* p1, void* p2)
 * Initialises the ipv6 socket address.
 *
 * @param p0 the ipv6 socket address (Hand over as reference!)
-* @param p1 the host address
-* @param p2 the socket port
+* @param p1 the host address (in network byte order)
+* @param p2 the socket port (in host byte order)
 */
 void startup_socket_initialise_ipv6_socket_address(void* p0, void* p1, void* p2) {
 
@@ -475,19 +472,13 @@ void startup_socket_initialise_ipv6_socket_address(void* p0, void* p1, void* p2)
 
                 // Set host address.
                 //
-                // CAUTION! The address MUST BE represented in a canonical
-                // format called "network byte order".
-                //
                 // The "a.sin_addr" field is of type "struct in_addr".
-                // This data type is used in certain contexts to contain an IPv4 internet host address.
-                // It has just one field, named "s_addr", which records the host address number as an "uint32_t".
+                // This data type is used in certain contexts to contain an
+                // IPv4 internet host address. It has just one field, named
+                // "s_addr", which records the host address number as an "uint32_t".
                 //
-                // CAUTION! Convert uint16_t integer hostshort from host byte order
-                // to network byte order:
-                // - "htons" and "ntohs" to convert values for the sin_port member
-                // - "htonl" and "ntohl" to convert IPv4 addresses for the sin_addr member
-//??                inet_aton(htonl(INADDR_ANY), (struct in_addr*) &(a->sin_addr));
-//??                inet_aton(ipv6, (struct in_addr*) &((*a)->sin_addr));
+                // CAUTION! The host address parameter is already given in
+                // network byte order, so that it does NOT have to be converted!
                 (*a)->sin6_addr = *h;
 
                 // Set flow information.
@@ -498,10 +489,9 @@ void startup_socket_initialise_ipv6_socket_address(void* p0, void* p1, void* p2)
 
                 // Set socket port.
                 //
-                // CAUTION! The port number MUST BE represented in a canonical
-                // format called "network byte order".
-//??                a->sin_port = htons(*((uint16_t*) p6));
-                (*a)->sin6_port = *p;
+                // CAUTION! The port number is given in host byte order and
+                // HAS TO BE converted into network byte order!
+                (*a)->sin6_port = htons(*p);
 
             } else {
 

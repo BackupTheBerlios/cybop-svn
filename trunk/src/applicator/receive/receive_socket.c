@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.10 $ $Date: 2007-01-14 01:38:01 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2007-01-14 21:42:45 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -1130,6 +1130,7 @@ void receive_socket_signal(void* p0, void* p1, void* p2, void* p3) {
  *
  * For web frontend testing, use for example:
  * http://localhost:3456/residenz.logic.send_name
+ * http://127.0.0.1:1971/residenz.logic.send_name
  *
  * @param p0 the internal memory
  * @param p1 the base internal
@@ -1167,6 +1168,27 @@ void receive_socket_thread(void* p0, void* p1) {
         // to remember "errno" values of the "recv" and "recvfrom" procedures,
         // across the various if-else sections.
         int e = *NUMBER_0_INTEGER;
+        // The schema.
+        void* schema = NULL_POINTER;
+        int schemac = *NUMBER_0_INTEGER;
+        // The host.
+        void* host = NULL_POINTER;
+        int hostc = *NUMBER_0_INTEGER;
+        // The port.
+        void* port = NULL_POINTER;
+        int portc = *NUMBER_0_INTEGER;
+        // The path.
+        void* path = NULL_POINTER;
+        int pathc = *NUMBER_0_INTEGER;
+        // The parameters.
+        void* parameters = NULL_POINTER;
+        int parametersc = *NUMBER_0_INTEGER;
+        // The query.
+        void* query = NULL_POINTER;
+        int queryc = *NUMBER_0_INTEGER;
+        // The fragment.
+        void* fragment = NULL_POINTER;
+        int fragmentc = *NUMBER_0_INTEGER;
 
         // Get communication style.
         i = *base + *SOCKET_STYLE_INTERNAL;
@@ -1263,15 +1285,16 @@ void receive_socket_thread(void* p0, void* p1) {
     fprintf(stderr, "TEST: receive socket thread client socket: %i \n", cs);
     sleep(2);
 
-//??    char* test = "<html><head></head><body>Blu Bla</body></html>";
-//??    write(**s, test, strlen(test) + 1);
-    fprintf(stderr, "TEST: send html data: %s\n", *b);
-    write(cs, *b, **bc + 1);
-    fprintf(stderr, "TEST: done send html data bc: %s\n", **bc);
 /*??
-    read(socketnummer, &eingabe, 5);
-    printf("empfange: %s\n", eingabe);
+    char* test = "HTTP/1.1 200 OK\r\n\r\n\
+        <html><head></head><body>Blu Bla</body></html>";
+    write(cs, test, strlen(test));
+    sleep(2);
 */
+
+    fprintf(stderr, "TEST: send html data: %s\n", *b);
+    write(cs, *b, **bc);
+    sleep(2);
 
                         // Close client socket.
                         close(cs);
@@ -1357,11 +1380,63 @@ void receive_socket_thread(void* p0, void* p1) {
 
             if (**bc > *NUMBER_0_INTEGER) {
 
-                // Receive socket signal.
-                receive_socket_signal(p0, *b, (void*) *bc, p1);
+                // Translate the path.
+                //
+                // A uniform resource locator (url) consists of the following components:
+                // - schema
+                // - host
+                // - port
+                // - path
+                // - parameters
+                // - query
+                // - fragment
+                //
+                // Its structure is defined as follows:
+                // schema://host:port/path;parameter_one;parameter_two;parameter_n?query#fragment
+                //
+                // Example:
+                // GET /residenz/test.html HTTP/1.1
+                // User-Agent: Mozilla/5.0 (compatible; Konqueror/3.5; Linux) KHTML/3.5.5 (like Gecko) (Debian)
+                // Accept: text/html, image/jpeg, image/png, text/*, image/*, */*
+                // Accept-Encoding: x-gzip, x-deflate, gzip, deflate
+                // Accept-Charset: utf-8, utf-8;q=0.5, *;q=0.5
+                // Accept-Language: en, de, pl
+                // Host: 127.0.0.1:1971
+                // Connection: Keep-Alive
+                //
+                // The url path specified by the client is relative to the
+                // server's root directory. Consider the following url as it
+                // would be requested by a client:
+                // http://www.example.com/path/file.html
+                // The client's web browser will translate it into a connection
+                // to www.example.com with the following http 1.1 request:
+                // GET /path/file.html HTTP/1.1
+                // Host: www.example.com
+                // The Web server on www.example.com will append the given path
+                // to the path of its root directory. On Unix machines, this is
+                // commonly /var/www/htdocs.
+                // The result is the local file system resource:
+                // /var/www/htdocs/path/file.html
+                // The Web server will then read the file, if it exists, and
+                // send a response to the client's web browser. The response
+                // will describe the content of the file and contain the file itself.
 
-                // The general structure of a url looks like this:
-                // schema://host:port/pfad;parameter_one;parameter_two;parameter_n?query#fragment
+/*??
+                // Translate schema.
+                receive_socket_get_schema((void*) &schema, (void*) &schemac, *b, (void*) *bc);
+                // Translate host.
+                receive_socket_get_host((void*) &host, (void*) &hostc, *b, (void*) *bc);
+                // Translate port.
+                receive_socket_get_port((void*) &port, (void*) &portc, *b, (void*) *bc);
+                // Translate path.
+                receive_socket_get_path((void*) &path, (void*) &pathc, *b, (void*) *bc);
+                // Translate parameters.
+                receive_socket_get_parameters((void*) &parameters, (void*) &parametersc, *b, (void*) *bc);
+                // Translate query.
+                receive_socket_get_query((void*) &query, (void*) &queryc, *b, (void*) *bc);
+                // Translate fragment.
+                receive_socket_get_fragment((void*) &fragment, (void*) &fragmentc, *b, (void*) *bc);
+*/
 
 /*??
                 // The url basename.
@@ -1404,6 +1479,9 @@ void receive_socket_thread(void* p0, void* p1) {
                     close(*cs);
                 }
     */
+
+                // Receive socket signal.
+//??                receive_socket_signal(p0, *b, (void*) *bc, p1);
 
             } else if (**bc = *NUMBER_0_INTEGER) {
 
