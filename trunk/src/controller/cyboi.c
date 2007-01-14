@@ -1,7 +1,7 @@
 /*
  * $RCSfile: cyboi.c,v $
  *
- * Copyright (c) 1999-2006. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,7 +25,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.17 $ $Date: 2006-06-25 22:08:25 $ $Author: christian $
+ * @version $Revision: 1.18 $ $Date: 2007-01-14 22:06:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

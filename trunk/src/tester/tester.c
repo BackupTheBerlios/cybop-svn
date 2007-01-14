@@ -1,7 +1,7 @@
 /*
  * $RCSfile: tester.c,v $
  *
- * Copyright (c) 1999-2006. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,7 +24,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.28 $ $Date: 2006-12-27 09:50:44 $ $Author: christian $
+ * @version $Revision: 1.29 $ $Date: 2007-01-14 22:06:49 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -61,11 +61,11 @@ void test_inline_assembler_code() {
 
     fputs("Test inline assembler code:\n", stdout);
 
-    // Gegeben ist ein zusammenhängender Block von Worten im RAM.
+    // Gegeben ist ein zusammenhï¿½gender Block von Worten im RAM.
     // Die Startadresse des Blockes ist im Register ESI angegeben,
     // die Anzahl der Werte im Register ECX.
-    // Schreiben Sie ein Programmstück, welches die Anzahl der Worte
-    // in diesem Block zählt, deren Wert gleich dem ist, welcher im
+    // Schreiben Sie ein Programmstck, welches die Anzahl der Worte
+    // in diesem Block zï¿½lt, deren Wert gleich dem ist, welcher im
     // Register DI vorgegeben ist.
     // Das Ergebnis soll nach Abarbeitung des Programms im Register EAX stehen.
     //

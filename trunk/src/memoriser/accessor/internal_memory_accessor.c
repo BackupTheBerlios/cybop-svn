@@ -1,7 +1,7 @@
 /*
  * $RCSfile: internal_memory_accessor.c,v $
  *
- * Copyright (c) 1999-2006. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.15 $ $Date: 2006-04-21 23:49:11 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2007-01-14 22:06:49 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */

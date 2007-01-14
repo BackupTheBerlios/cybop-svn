@@ -1,7 +1,7 @@
 /*
  * $RCSfile: signal_memory_allocator.c,v $
  *
- * Copyright (c) 1999-2006. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,7 +23,7 @@
  * This file contains the functionality to:
  * - create a signal memory in memory
  *
- * @version $Revision: 1.8 $ $Date: 2006-04-20 22:36:11 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2007-01-14 22:06:49 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

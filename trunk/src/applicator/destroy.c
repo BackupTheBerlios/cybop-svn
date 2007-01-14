@@ -1,7 +1,7 @@
 /*
  * $RCSfile: destroy.c,v $
  *
- * Copyright (c) 1999-2006. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,7 +22,7 @@
  *
  * This file destroys a transient model to a persistent model.
  *
- * @version $Revision: 1.18 $ $Date: 2006-06-20 16:16:29 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2007-01-14 22:06:47 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

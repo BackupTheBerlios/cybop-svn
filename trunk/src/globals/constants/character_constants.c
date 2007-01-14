@@ -1,7 +1,7 @@
 /*
  * $RCSfile: character_constants.c,v $
  *
- * Copyright (c) 1999-2006. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.12 $ $Date: 2006-06-27 21:07:27 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2007-01-14 22:06:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
