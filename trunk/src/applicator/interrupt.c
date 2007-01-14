@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.10 $ $Date: 2006-12-28 16:04:26 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2007-01-14 01:38:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -106,6 +106,16 @@ void interrupt_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
         if (r != 0) {
 
             interrupt_socket(p5, (void*) WWW_BASE_INTERNAL, p2, p3, p4);
+        }
+    }
+
+    if (r == 0) {
+
+        compare_arrays((void*) *sm, (void*) *smc, (void*) CYBOI_SERVICE_MODEL, (void*) CYBOI_SERVICE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != 0) {
+
+            interrupt_socket(p5, (void*) CYBOI_BASE_INTERNAL, p2, p3, p4);
         }
     }
 }

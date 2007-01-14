@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.29 $ $Date: 2007-01-11 22:30:13 $ $Author: christian $
+ * @version $Revision: 1.30 $ $Date: 2007-01-14 01:38:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -129,6 +129,8 @@ void manage(void* p0, void* p1) {
     pthread_mutex_t* x_window_system_mutex = NULL_POINTER;
     // The www service mutex.
     pthread_mutex_t* www_service_mutex = NULL_POINTER;
+    // The cyboi service mutex.
+    pthread_mutex_t* cyboi_service_mutex = NULL_POINTER;
 
     // Allocate knowledge memory count, size.
     allocate((void*) &kc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
@@ -146,6 +148,8 @@ void manage(void* p0, void* p1) {
     x_window_system_mutex = (pthread_mutex_t*) malloc(sizeof(pthread_mutex_t));
     // Allocate www service mutex.
     www_service_mutex = (pthread_mutex_t*) malloc(sizeof(pthread_mutex_t));
+    // Allocate cyboi service mutex.
+    cyboi_service_mutex = (pthread_mutex_t*) malloc(sizeof(pthread_mutex_t));
 
     // Initialise knowledge memory count, size.
     *kc = *NUMBER_0_INTEGER;
@@ -175,6 +179,11 @@ void manage(void* p0, void* p1) {
     // initialise the mutex. If the parameter is null, the mutex is
     // initialised with default attributes.
     pthread_mutex_init(www_service_mutex, NULL_POINTER);
+    // Initialise cyboi service mutex.
+    // The second parameter specifies attributes that are to be used to
+    // initialise the mutex. If the parameter is null, the mutex is
+    // initialised with default attributes.
+    pthread_mutex_init(cyboi_service_mutex, NULL_POINTER);
 
     // Allocate internal memory.
     allocate((void*) &i, (void*) is, (void*) INTERNAL_MEMORY_ABSTRACTION, (void*) INTERNAL_MEMORY_ABSTRACTION_COUNT);
@@ -204,7 +213,12 @@ void manage(void* p0, void* p1) {
         (void*) &k, (void*) &kc, (void*) &ks,
         (void*) &s, (void*) &sc, (void*) &ss,
         (void*) &irq,
-        (void*) &signal_memory_mutex, (void*) &linux_console_mutex, (void*) &x_window_system_mutex, (void*) &www_service_mutex);
+        (void*) &signal_memory_mutex,
+        (void*) &linux_console_mutex,
+        (void*) &x_window_system_mutex,
+        (void*) &www_service_mutex,
+        (void*) &cyboi_service_mutex);
+
     // Start up system signal handler.
     startup_system_signal_handler();
     // Start up initial signal.
@@ -283,6 +297,8 @@ void manage(void* p0, void* p1) {
     shutdown_x_window_system(i, k, (void*) kc, (void*) ks);
     // Shutdown www service.
     shutdown_socket(i, (void*) WWW_BASE_INTERNAL, k, (void*) kc, (void*) ks);
+    // Shutdown cyboi service.
+    shutdown_socket(i, (void*) CYBOI_BASE_INTERNAL, k, (void*) kc, (void*) ks);
 
     // CAUTION! Do NOT remove any internal memory internals!
     // The internals have a fixed position within the internal memory.
@@ -298,6 +314,8 @@ void manage(void* p0, void* p1) {
     pthread_mutex_destroy(x_window_system_mutex);
     // Destroy www service mutex.
     pthread_mutex_destroy(www_service_mutex);
+    // Destroy cyboi service mutex.
+    pthread_mutex_destroy(cyboi_service_mutex);
 
     // Deallocate signal memory interrupt request flag.
     free((void*) irq);
@@ -309,6 +327,8 @@ void manage(void* p0, void* p1) {
     free((void*) x_window_system_mutex);
     // Deallocate www service mutex.
     free((void*) www_service_mutex);
+    // Deallocate cyboi service mutex.
+    free((void*) cyboi_service_mutex);
 
     // Deallocate signal memory.
     deallocate((void*) &s, (void*) ss, (void*) SIGNAL_MEMORY_ABSTRACTION, (void*) SIGNAL_MEMORY_ABSTRACTION_COUNT);

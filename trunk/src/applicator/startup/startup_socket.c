@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2007-01-11 22:30:13 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2007-01-14 01:38:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -48,7 +48,7 @@
 #include "../../memoriser/allocator.c"
 
 /**
- * Gets the startup socket socket- and address namespace.
+ * Gets the socket- and address namespace.
  *
  * @param p0 the socket namespace (Hand over as reference!)
  * @param p1 the address namespace (Hand over as reference!)
@@ -115,7 +115,7 @@ void startup_socket_get_namespace(void* p0, void* p1, void* p2, void* p3) {
 }
 
 /**
- * Gets the startup socket communication style.
+ * Gets the communication style.
  *
  * @param p0 the communication style (Hand over as reference!)
  * @param p1 the communication style model
@@ -169,111 +169,121 @@ void startup_socket_get_style(void* p0, void* p1, void* p2) {
 }
 
 /**
- * Gets the startup socket ipv4 host address.
+ * Gets the host address.
  *
- * @param p0 the ipv4 host address (Hand over as reference!)
+ * @param p0 the ipv4 or ipv6 host address, depending on the address namespace (Hand over as reference!)
  * @param p1 the address model
  * @param p2 the address model count
+ * @param p3 the address namespace
  */
-void startup_socket_get_ipv4_host_address(void* p0, void* p1, void* p2) {
+void startup_socket_get_host_address(void* p0, void* p1, void* p2, void* p3) {
 
-    if (p0 != NULL_POINTER) {
+    if (p3 != NULL_POINTER) {
 
-        struct in_addr* a = (struct in_addr*) p0;
+        int* an = (int*) p3;
 
-        log_message_debug("Startup socket get ipv4 host address.");
+        if (p2 != NULL_POINTER) {
 
-        // The comparison result.
-        int r = 0;
+            int* amc = (int*) p2;
 
-        if (r == 0) {
+            if (p0 != NULL_POINTER) {
 
-            compare_arrays(p1, p2, (void*) LOOPBACK_ADDRESS_MODEL, (void*) LOOPBACK_ADDRESS_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                struct in_addr* a4 = NULL_POINTER;
+                struct in6_addr* a6 = NULL_POINTER;
 
-            if (r != 0) {
+                if (*an == AF_INET) {
 
-                (*a).s_addr = INADDR_LOOPBACK;
+                    a4 = (struct in_addr*) p0;
+
+                } else if (*an == AF_INET6) {
+
+                    a6 = (struct in6_addr*) p0;
+                }
+
+                log_message_debug("Startup socket get host address.");
+
+                // The comparison result.
+                int r = 0;
+
+                if (r == 0) {
+
+                    compare_arrays(p1, p2, (void*) LOOPBACK_ADDRESS_MODEL, (void*) LOOPBACK_ADDRESS_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+                    if (r != 0) {
+
+                        if (*an == AF_INET) {
+
+                            (*a4).s_addr = INADDR_LOOPBACK;
+
+                        } else if (*an == AF_INET6) {
+
+                            *a6 = in6addr_loopback;
+                        }
+                    }
+                }
+
+                if (r == 0) {
+
+                    compare_arrays(p1, p2, (void*) ANY_ADDRESS_MODEL, (void*) ANY_ADDRESS_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+                    if (r != 0) {
+
+                        if (*an == AF_INET) {
+
+                            (*a4).s_addr = INADDR_ANY;
+
+                        } else if (*an == AF_INET6) {
+
+                            *a6 = in6addr_any;
+                        }
+                    }
+                }
+
+                if (r == 0) {
+
+                    // The terminated address model.
+                    char* s = NULL_POINTER;
+                    int ss = *amc + *NUMBER_1_INTEGER;
+
+                    // Allocate terminated address model.
+                    allocate_array((void*) &s, (void*) &ss, (void*) CHARACTER_ARRAY);
+
+                    // Set terminated address model by first copying the actual address model
+                    // and then adding the null termination character.
+                    set_array_elements(s, (void*) NUMBER_0_INTEGER, p1, p2, (void*) CHARACTER_ARRAY);
+                    set_array_elements(s, p2, (void*) NULL_CONTROL_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+
+                    // If none of the above address models was found, then the given
+                    // address is supposed to be the host address directly.
+                    inet_pton(*an, s, p0);
+
+                    // Deallocate terminated address model.
+                    deallocate_array((void*) &s, (void*) &ss, (void*) CHARACTER_ARRAY);
+                }
+
+            } else {
+
+                log_message_debug("Could not get startup socket host address. The host address is null.");
             }
-        }
 
-        if (r == 0) {
+        } else {
 
-            compare_arrays(p1, p2, (void*) ANY_ADDRESS_MODEL, (void*) ANY_ADDRESS_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-            if (r != 0) {
-
-    printf("TEST any address");
-
-                (*a).s_addr = INADDR_ANY;
-            }
-        }
-
-        if (r == 0) {
-
-    printf("TEST direct host address");
-
-            // If none of the above address models was found, then the given
-            // address is supposed to be the host address directly.
-            inet_aton((char*) p1, a);
+            log_message_debug("Could not get startup socket host address. The address model count is null.");
         }
 
     } else {
 
-        log_message_debug("Could not get startup socket ipv4 host address. The ipv4 host address is null.");
+        log_message_debug("Could not get startup socket host address. The address namespace is null.");
     }
 }
 
 /**
- * Gets the startup socket ipv6 host address.
- *
- * @param p0 the ipv6 host address (Hand over as reference!)
- * @param p1 the address model
- * @param p2 the address model count
- */
-void startup_socket_get_ipv6_host_address(void* p0, void* p1, void* p2) {
-
-    if (p0 != NULL_POINTER) {
-
-        struct in6_addr* a = (struct in6_addr*) p0;
-
-        log_message_debug("Startup socket get ipv6 host address.");
-
-        // The comparison result.
-        int r = 0;
-
-        if (r == 0) {
-
-            compare_arrays(p1, p2, (void*) LOOPBACK_ADDRESS_MODEL, (void*) LOOPBACK_ADDRESS_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-            if (r != 0) {
-
-                *a = in6addr_loopback; //?? IN6ADDR_LOOPBACK_INIT
-            }
-        }
-
-        if (r == 0) {
-
-            compare_arrays(p1, p2, (void*) ANY_ADDRESS_MODEL, (void*) ANY_ADDRESS_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-            if (r != 0) {
-
-                *a = in6addr_any; //?? IN6ADDR_ANY_INIT
-            }
-        }
-
-    } else {
-
-        log_message_debug("Could not get startup socket ipv6 host address. The ipv6 host address is null.");
-    }
-}
-
-/**
- * Initialises the local socket address.
- *
- * @param p0 the local socket address (Hand over as reference!)
- * @param p1 the file name
- * @param p2 the file name count
- */
+* Initialises the local socket address.
+*
+* @param p0 the local socket address (Hand over as reference!)
+* @param p1 the file name
+* @param p2 the file name count
+*/
 void startup_socket_initialise_local_socket_address(void* p0, void* p1, void* p2) {
 
     if (p2 != NULL_POINTER) {
@@ -367,12 +377,12 @@ void startup_socket_initialise_local_socket_address(void* p0, void* p1, void* p2
 }
 
 /**
- * Initialises the ipv4 socket address.
- *
- * @param p0 the ipv4 socket address (Hand over as reference!)
- * @param p1 the host address
- * @param p2 the socket port
- */
+* Initialises the ipv4 socket address.
+*
+* @param p0 the ipv4 socket address (Hand over as reference!)
+* @param p1 the host address
+* @param p2 the socket port
+*/
 void startup_socket_initialise_ipv4_socket_address(void* p0, void* p1, void* p2) {
 
     if (p2 != NULL_POINTER) {
@@ -435,12 +445,12 @@ void startup_socket_initialise_ipv4_socket_address(void* p0, void* p1, void* p2)
 }
 
 /**
- * Initialises the ipv6 socket address.
- *
- * @param p0 the ipv6 socket address (Hand over as reference!)
- * @param p1 the host address
- * @param p2 the socket port
- */
+* Initialises the ipv6 socket address.
+*
+* @param p0 the ipv6 socket address (Hand over as reference!)
+* @param p1 the host address
+* @param p2 the socket port
+*/
 void startup_socket_initialise_ipv6_socket_address(void* p0, void* p1, void* p2) {
 
     if (p2 != NULL_POINTER) {
@@ -510,21 +520,21 @@ void startup_socket_initialise_ipv6_socket_address(void* p0, void* p1, void* p2)
 }
 
 /**
- * Starts up socket.
- *
- * @param p0 the internal memory
- * @param p1 the namespace model
- * @param p2 the namespace model count
- * @param p3 the style model
- * @param p4 the style model count
- * @param p5 the socket file name or host address model, depending on the socket type (local, ipv4, ipv6)
- * @param p6 the socket file name or host address model count
- * @param p7 the port model
- * @param p8 the base internal
- * @param p9 the knowledge memory
- * @param p10 the knowledge memory count
- * @param p11 the knowledge memory size
- */
+* Starts up socket.
+*
+* @param p0 the internal memory
+* @param p1 the namespace model
+* @param p2 the namespace model count
+* @param p3 the style model
+* @param p4 the style model count
+* @param p5 the socket file name or host address model, depending on the socket type (local, ipv4, ipv6)
+* @param p6 the socket file name or host address model count
+* @param p7 the port model
+* @param p8 the base internal
+* @param p9 the knowledge memory
+* @param p10 the knowledge memory count
+* @param p11 the knowledge memory size
+*/
 void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
     void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11) {
 
@@ -541,9 +551,9 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
         // The communication style.
         int st = *INVALID_VALUE;
         // The ipv4 host address of the receiver (this system).
-        uint32_t ha4 = *INVALID_VALUE;
+        struct in_addr ha4;
         // The ipv6 host address of the receiver (this system).
-        struct in6_addr ha6 = in6addr_loopback; //?? IN6ADDR_LOOPBACK_INIT
+        struct in6_addr ha6;
         // The local socket address of the receiver (this system).
         // CAUTION! Do use a pointer here and not only the structure as type,
         // so that the different socket addresses can be processed uniformly below!
@@ -589,11 +599,11 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
         // Get host address constant.
         if (an == AF_INET) {
 
-            startup_socket_get_ipv4_host_address((void*) &ha4, p5, p6);
+            startup_socket_get_host_address((void*) &ha4, p5, p6, (void*) &an);
 
         } else if (an == AF_INET6) {
 
-            startup_socket_get_ipv6_host_address((void*) &ha6, p5, p6);
+            startup_socket_get_host_address((void*) &ha6, p5, p6, (void*) &an);
         }
 
         // Allocate server socket.
@@ -709,7 +719,7 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
             // Its size is initialised with 2048,
             // which should suffice for transferring standard data over tcp/ip.
             *bc = *NUMBER_0_INTEGER;
-            *bs = 2048;
+            *bs = 8192;
 /*??
             // Initialise signal ids.
             *idc = *NUMBER_0_INTEGER;

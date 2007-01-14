@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.39 $ $Date: 2007-01-11 22:30:12 $ $Author: christian $
+ * @version $Revision: 1.40 $ $Date: 2007-01-14 01:38:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -302,6 +302,16 @@ void send_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
         if (r != 0) {
 
             send_socket(p2, *nm, *nmc, *stm, *stmc, *rm, *rmc, (void*) WWW_PORT, *ma, *mac, *mm, *mmc, *md, *mdc, (void*) WWW_BASE_INTERNAL, p3, p4);
+        }
+    }
+
+    if (r == 0) {
+
+        compare_arrays((void*) *cm, (void*) *cmc, (void*) CYBOI_SERVICE_MODEL, (void*) CYBOI_SERVICE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != 0) {
+
+            send_socket(p2, *nm, *nmc, *stm, *stmc, *rm, *rmc, (void*) CYBOI_PORT, *ma, *mac, *mm, *mmc, *md, *mdc, (void*) CYBOI_BASE_INTERNAL, p3, p4);
         }
     }
 

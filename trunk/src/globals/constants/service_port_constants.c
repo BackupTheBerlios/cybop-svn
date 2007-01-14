@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2006-12-28 01:10:48 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2007-01-14 01:38:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -62,6 +62,9 @@ static int* POP3_PORT = NUMBER_110_INTEGER_ARRAY;
 
 /** The hypertext transfer protocol over tls/ ssl (https) port. */
 static int* HTTPS_PORT = NUMBER_443_INTEGER_ARRAY;
+
+/** The cybernetics oriented interpreter (cyboi) port. */
+static int* CYBOI_PORT = NUMBER_1971_INTEGER_ARRAY;
 
 /* SERVICE_PORT_CONSTANTS_SOURCE */
 #endif

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.16 $ $Date: 2006-12-28 01:10:48 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2007-01-14 01:38:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -112,6 +112,9 @@ void startup_globals() {
     // Allocate www service thread.
     WWW_SERVICE_THREAD = (pthread_t*) malloc(sizeof(pthread_t));
     *WWW_SERVICE_THREAD = *INVALID_VALUE;
+    // Allocate cyboi service thread.
+    CYBOI_SERVICE_THREAD = (pthread_t*) malloc(sizeof(pthread_t));
+    *CYBOI_SERVICE_THREAD = *INVALID_VALUE;
 
     // Allocate and initialise linux console thread interrupt flag.
     LINUX_CONSOLE_THREAD_INTERRUPT = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
@@ -122,6 +125,9 @@ void startup_globals() {
     // Allocate and initialise www service thread interrupt flag.
     WWW_SERVICE_THREAD_INTERRUPT = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
     *WWW_SERVICE_THREAD_INTERRUPT = *NUMBER_0_INTEGER;
+    // Allocate and initialise cyboi service thread interrupt flag.
+    CYBOI_SERVICE_THREAD_INTERRUPT = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
+    *CYBOI_SERVICE_THREAD_INTERRUPT = *NUMBER_0_INTEGER;
 
     //
     // Logging.
@@ -221,6 +227,8 @@ void shutdown_globals() {
     free(X_WINDOW_SYSTEM_THREAD_INTERRUPT);
     // Free www service thread interrupt flag.
     free(WWW_SERVICE_THREAD_INTERRUPT);
+    // Free cyboi service thread interrupt flag.
+    free(CYBOI_SERVICE_THREAD_INTERRUPT);
 
     // Free linux console thread.
     free(LINUX_CONSOLE_THREAD);
@@ -228,6 +236,8 @@ void shutdown_globals() {
     free(X_WINDOW_SYSTEM_THREAD);
     // Free www service thread.
     free(WWW_SERVICE_THREAD);
+    // Free cyboi service thread.
+    free(CYBOI_SERVICE_THREAD);
 
     //
     // Primitive type sizes.

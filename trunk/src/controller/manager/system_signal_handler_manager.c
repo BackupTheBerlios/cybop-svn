@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2006-12-28 01:10:48 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2007-01-14 01:38:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -115,6 +115,25 @@ void interrupt_service_system_signal_handler(int p0) {
 
             // CAUTION! The thread CANNOT be reset here with:
             // *WWW_SERVICE_THREAD = *INVALID_VALUE;
+            // because this line would NOT be reached anymore,
+            // after "pthread_exit" has been called above!
+            // Therefore, do the reset in the corresponding
+            // "interrupt" procedure where "kill" was called!
+        }
+    }
+
+    if (t == *CYBOI_SERVICE_THREAD) {
+
+//??    fprintf(stdout, "TEST signal handler cyboi service %i\n", p0);
+
+        if (*CYBOI_SERVICE_THREAD_INTERRUPT != *NUMBER_0_INTEGER) {
+
+//??    fprintf(stdout, "TEST signal handler cyboi service irq %i\n", p0);
+
+            pthread_exit(NULL_POINTER);
+
+            // CAUTION! The thread CANNOT be reset here with:
+            // *CYBOI_SERVICE_THREAD = *INVALID_VALUE;
             // because this line would NOT be reached anymore,
             // after "pthread_exit" has been called above!
             // Therefore, do the reset in the corresponding

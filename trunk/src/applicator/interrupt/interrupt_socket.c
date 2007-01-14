@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2006-12-28 16:04:26 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2007-01-14 01:38:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -81,7 +81,39 @@ void interrupt_socket() {
 
     } else {
 
-        log_message_debug("Warning: Could not interrupt socket. The server socket thread is invalid.");
+        log_message_debug("Warning: Could not interrupt socket. The www service thread is invalid.");
+    }
+
+    if (*CYBOI_SERVICE_THREAD != *INVALID_VALUE) {
+
+        // Set thread interrupt flag for signal handler.
+        *CYBOI_SERVICE_THREAD_INTERRUPT = *NUMBER_1_INTEGER;
+
+        // Send signal to thread.
+        //
+        // CAUTION! Sending a SIGKILL signal to a thread using pthread_kill()
+        // ends the ENTIRE PROCESS, not simply the target thread.
+        // SIGKILL is defined to end the entire process, regardless
+        // of the thread it is delivered to, or how it is sent.
+        //
+        // Therefore, the user signal SIGUSR1 is used here instead.
+        // It is processed in the interrupt_service_system_signal_handler
+        // procedure, situated in the following module:
+        // controller/manager/system_signal_handler_manager.c
+        pthread_kill(*CYBOI_SERVICE_THREAD, SIGUSR1);
+
+        // Wait for thread to finish.
+        pthread_join(*CYBOI_SERVICE_THREAD, NULL_POINTER);
+
+        // Reset thread.
+        *CYBOI_SERVICE_THREAD = *INVALID_VALUE;
+
+        // Reset thread interrupt flag for signal handler.
+        *CYBOI_SERVICE_THREAD_INTERRUPT = *NUMBER_0_INTEGER;
+
+    } else {
+
+        log_message_debug("Warning: Could not interrupt socket. The cyboi service thread is invalid.");
     }
 }
 

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2006-12-28 01:10:48 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2007-01-14 01:38:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -71,6 +71,8 @@ static pthread_t* LINUX_CONSOLE_THREAD;
 static pthread_t* X_WINDOW_SYSTEM_THREAD;
 // The www service thread.
 static pthread_t* WWW_SERVICE_THREAD;
+// The cyboi service thread.
+static pthread_t* CYBOI_SERVICE_THREAD;
 
 // The linux console interrupt flag.
 static int* LINUX_CONSOLE_THREAD_INTERRUPT;
@@ -78,6 +80,8 @@ static int* LINUX_CONSOLE_THREAD_INTERRUPT;
 static int* X_WINDOW_SYSTEM_THREAD_INTERRUPT;
 // The www service interrupt flag.
 static int* WWW_SERVICE_THREAD_INTERRUPT;
+// The cyboi service interrupt flag.
+static int* CYBOI_SERVICE_THREAD_INTERRUPT;
 
 //
 // Logging.

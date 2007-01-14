@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2007-01-11 22:30:13 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2007-01-14 01:38:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -105,10 +105,9 @@ void send_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, voi
         // The client socket of the sender (this system).
         int s = *NUMBER_0_INTEGER;
         // The serialised string buffer array to be sent to the socket.
-//??        void* b = NULL_POINTER;
-        void* b = "close";
-        int bc = 5; //?? *NUMBER_0_INTEGER;
-        int bs = 5; //?? *NUMBER_0_INTEGER;
+        void* b = NULL_POINTER;
+        int bc = *NUMBER_0_INTEGER;
+        int bs = *NUMBER_0_INTEGER;
         // The internal memory index.
         int i = *INVALID_VALUE;
         // The result.
@@ -124,11 +123,11 @@ void send_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, voi
         // Get host address constant.
         if (an == AF_INET) {
 
-            startup_socket_get_ipv4_host_address((void*) &ha4, p5, p6);
+            startup_socket_get_host_address((void*) &ha4, p5, p6, (void*) &an);
 
         } else if (an == AF_INET6) {
 
-            startup_socket_get_ipv6_host_address((void*) &ha6, p5, p6);
+            startup_socket_get_host_address((void*) &ha6, p5, p6, (void*) &an);
         }
 
 /*??
@@ -165,8 +164,9 @@ void send_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, voi
         // CAUTION! Use prefix "PF_" here and NOT "AF_"!
         // The latter is to be used for address family assignment.
         // See further below!
-/*??
         s = socket(sn, st, *NUMBER_0_INTEGER);
+
+    fprintf(stderr, "TEST: send to server socket: %i \n", s);
 
         if (s >= *NUMBER_0_INTEGER) {
 
@@ -262,7 +262,7 @@ void send_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, voi
             }
 
             // Allocate buffer array.
-//??            allocate((void*) &b, (void*) &bs, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+            allocate((void*) &b, (void*) &bs, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
             // Serialise compound model into www service message buffer array.
 //??            serialise(p0, NULL_POINTER, NULL_POINTER, p1, p2, (void*) WWW_SERVICE_MODEL, (void*) WWW_SERVICE_MODEL_COUNT);
@@ -296,64 +296,23 @@ void send_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, voi
                 // Lock socket mutex.
 //??                pthread_mutex_lock(*mt);
 
-/*??
                 // Send message via socket.
                 if (an == AF_LOCAL) {
 
-//??                    write_data(*s, NULL_POINTER, NULL_POINTER, b, (void*) &bc, (void*) WWW_SERVICE_MODEL, (void*) WWW_SERVICE_MODEL_COUNT);
                     write_socket((void*) &la, NULL_POINTER, (void*) &as, b, (void*) &bc, (void*) &s, (void*) &st);
 
                 } else if (an == AF_INET) {
 
-//??                    write_data(*s, NULL_POINTER, NULL_POINTER, b, (void*) &bc, (void*) WWW_SERVICE_MODEL, (void*) WWW_SERVICE_MODEL_COUNT);
-                    write_socket((void*) &ia4, NULL_POINTER, (void*) &as, b, (void*) &bc, (void*) &s, (void*) &st);
+                    write_socket((void*) &ia4, NULL_POINTER, (void*) &as, p10, p11, (void*) &s, (void*) &st);
+//??                    write_socket((void*) &ia4, NULL_POINTER, (void*) &as, b, (void*) &bc, (void*) &s, (void*) &st);
 
                 } else if (an == AF_INET6) {
 
-//??                    write_data(*s, NULL_POINTER, NULL_POINTER, b, (void*) &bc, (void*) WWW_SERVICE_MODEL, (void*) WWW_SERVICE_MODEL_COUNT);
                     write_socket((void*) &ia6, NULL_POINTER, (void*) &as, b, (void*) &bc, (void*) &s, (void*) &st);
                 }
 
                 // Unlock socket mutex.
 //??                pthread_mutex_unlock(*mt);
-*/
-
-//?? --
-                sleep(2);
-                printf("Bitte geben Sie ein Wort ein! ");
-                char eingabe[sizeof(*stdin)];
-                scanf("%s", eingabe);
-                int socketnummer=socket(AF_INET,SOCK_STREAM,0);
-                fprintf(stderr, "TEST: socketnummer: %i \n", socketnummer);
-/*??
-                struct sockaddr_in adressstruktur;
-                adressstruktur.sin_family=AF_INET;
-                adressstruktur.sin_addr.s_addr=inet_addr("127.0.0.1");
-                adressstruktur.sin_port=80; //?? 3456;
-                int laenge=sizeof(adressstruktur);
-                int result=connect(socketnummer, (struct sockaddr *) &adressstruktur, laenge);
-*/
-                int result = connect(socketnummer, (struct sockaddr*) ia4, as);
-                if (result == -1) {
-                    perror("huch der client hat einen Fehler");
-                    exit(1);
-                } else{
-                    printf("Verbindung zum Server hergestellt\n");
-                }
-                int j=0;
-                int test=5;
-                while (j<10) {
-                    sleep(2);
-//??                    write_socket((void*) &ia4, NULL_POINTER, (void*) &as, &eingabe, (void*) &test, (void*) &socketnummer, (void*) &st);
-                    write(socketnummer, &eingabe, 5);
-                    printf("sende: %s\n", eingabe);
-                    read(socketnummer, &eingabe, 5);
-                    printf("empfange: %s\n", eingabe);
-                    j++;
-                }
-                close(socketnummer);
-                printf("Done: %i\n", j);
-//?? --
 
 /*??
             // Connect client socket "cs" to the server socket whose address is
@@ -408,12 +367,10 @@ void send_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, voi
 */
 
             // Deallocate buffer array.
-//??            deallocate((void*) &b, (void*) &bs, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+            deallocate((void*) &b, (void*) &bs, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
-/*??
             // Close socket.
             close(s);
-*/
 
             // Deallocate socket address.
             if (an == AF_LOCAL) {
@@ -429,7 +386,6 @@ void send_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, voi
                 free(ia6);
             }
 
-/*??
         } else {
 
             if (errno == EPROTONOSUPPORT) {
@@ -457,7 +413,6 @@ void send_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, voi
                 log_message_debug("Error: Could not send socket. An unknown error occured while initialising the socket.");
             }
         }
-*/
 
     } else {
 

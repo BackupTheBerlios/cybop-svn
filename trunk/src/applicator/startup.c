@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.22 $ $Date: 2006-12-30 13:42:26 $ $Author: christian $
+ * @version $Revision: 1.23 $ $Date: 2007-01-14 01:38:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description This module starts up a service.
  */
@@ -193,28 +193,27 @@ void startup_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5)
         }
     }
 
-/*??
     if (r == 0) {
 
-        compare_arrays((void*) *sm, (void*) *smc, (void*) UNIX_SOCKET_MODEL, (void*) UNIX_SOCKET_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays((void*) *sm, (void*) *smc, (void*) CYBOI_SERVICE_MODEL, (void*) CYBOI_SERVICE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
             // Get server socket internal.
-            get(p5, (void*) WWW_SERVICE_SOCKET_INTERNAL, (void*) &s, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            i = *CYBOI_BASE_INTERNAL + *SOCKET_INTERNAL;
+            get(p5, (void*) &i, (void*) &s, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
             if (*s == NULL_POINTER) {
 
                 // Startup server socket if it does not already exist.
-                startup_socket(p5, *nm, *nmc, *stm, *stmc, *am, *amc, (void*) WWW_PORT, (void*) SOME_LOCAL_UNIX_SERVICE_BASE_INTERNAL, p2, p3, p4);
+                startup_socket(p5, *nm, *nmc, *stm, *stmc, *am, *amc, (void*) CYBOI_PORT, (void*) CYBOI_BASE_INTERNAL, p2, p3, p4);
 
             } else {
 
-                log_message_debug("Warning: Could not start up service. The www service is already running.");
+                log_message_debug("Warning: Could not start up service. The cyboi service is already running.");
             }
         }
     }
-*/
 }
 
 /* STARTUP_SOURCE */

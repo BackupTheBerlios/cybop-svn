@@ -24,7 +24,7 @@
  * - receive an http stream into a byte array
  * - send an http stream from a byte array
  *
- * @version $Revision: 1.3 $ $Date: 2007-01-11 22:30:13 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2007-01-14 01:38:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -93,8 +93,6 @@ void write_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
                         // The result.
                         int r = *INVALID_VALUE;
 
-        fprintf(stderr, "TEST: write socket d: %i \n", *so);
-
                         if (*st == SOCK_STREAM) {
 
                             // Initialise error number.
@@ -111,6 +109,8 @@ void write_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
 
                             if (r >= *NUMBER_0_INTEGER) {
 
+                                // The sum of transmitted bytes.
+                                int sum = *NUMBER_0_INTEGER;
                                 // Reset result.
                                 r = *INVALID_VALUE;
 
@@ -122,65 +122,94 @@ void write_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
                                 // that might cause an error.
                                 errno = *NUMBER_0_INTEGER;
 
-                                // Send message to destination (server) socket.
-                                // If the flags argument (fourth one) is zero, then one can
-                                // just as well use the "write" instead of the "send" procedure.
-                                // If the socket is nonblocking, then "send" can return after
-                                // sending just PART OF the data.
-                                // Note, however, that a successful return value merely indicates
-                                // that the message has been SENT without error, NOT necessarily
-                                // that it has been received without error!
-                                // The function returns the number of bytes transmitted
-                                // or -1 on failure.
-                                r = send(*so, p3, *sc, *NUMBER_0_INTEGER);
+                                // CAUTION! The send operation does not necessarily
+                                // handle all the bytes handed over to it, because
+                                // its major focus is handling the network buffers.
+                                // In general, it returns when the associated
+                                // network buffers have been filled.
+                                // It then returns the number of handled bytes.
+                                //
+                                // The "sent" operation therefore has to be
+                                // CALLED AGAIN AND AGAIN, in a loop, until
+                                // the complete message has been transmitted!
+                                while (1) {
 
-                                if (r < *NUMBER_0_INTEGER) {
+                                    if (sum >= *sc) {
 
-                                    if (errno == EBADF) {
+                                        break;
+                                    }
 
-                                        log_message_debug("Error: Could not write to socket. The socket argument is not a valid file descriptor.");
+                                    // Send message to destination (server) socket.
+                                    //
+                                    // If the flags argument (fourth one) is zero, then one can
+                                    // just as well use the "write" instead of the "send" procedure.
+                                    // If the socket is nonblocking, then "send" can return after
+                                    // sending just PART OF the data.
+                                    // Note, however, that a successful return value merely indicates
+                                    // that the message has been SENT without error, NOT necessarily
+                                    // that it has been received without error!
+                                    //
+                                    // The function returns the number of bytes transmitted
+                                    // or -1 on failure.
+                                    r = send(*so, p3, *sc, *NUMBER_0_INTEGER);
 
-                                    } else if (errno == EINTR) {
+                                    if (r >= *NUMBER_0_INTEGER) {
 
-                                        log_message_debug("Error: Could not write to socket. The operation was interrupted by a signal before any data was sent.");
-
-                                    } else if (errno == ENOTSOCK) {
-
-                                        log_message_debug("Error: Could not write to socket. The descriptor socket is not a socket.");
-
-                                    } else if (errno == EMSGSIZE) {
-
-                                        log_message_debug("Error: Could not write to socket. The socket type requires that the message be sent atomically, but the message is too large for this to be possible.");
-
-                                    } else if (errno == EWOULDBLOCK) {
-
-                                        log_message_debug("Error: Could not write to socket. Nonblocking mode has been set on the socket, and the write operation would block.");
-
-                                        //?? TODO: DELETE the following comment block OR the log message above!
-
-                                        // CAUTION! Do NOT log the following error:
-                                        // log_message_debug("Error: Could not write to socket. Nonblocking mode has been set on the socket, and the write operation would block.");
-                                        //
-                                        // The reason is that the socket is non-blocking,
-                                        // so that the "accept" procedure returns always,
-                                        // even if no connection was established,
-                                        // which would unnecessarily fill up the log file.
-
-                                    } else if (errno == ENOBUFS) {
-
-                                        log_message_debug("Error: Could not write to socket. There is not enough internal buffer space available.");
-
-                                    } else if (errno == ENOTCONN) {
-
-                                        log_message_debug("Error: Could not write to socket. You never connected this socket.");
-
-                                    } else if (errno == EPIPE) {
-
-                                        log_message_debug("Error: Could not write to socket. This socket was connected but the connection is now broken. In this case, send generates a SIGPIPE signal first; if that signal is ignored or blocked, or if its handler returns, then send fails with EPIPE.");
+                                        // Sum up the number of bytes transmitted.
+                                        sum = sum + r;
 
                                     } else {
 
-                                        log_message_debug("Error: Could not write to socket. An unknown error occured.");
+                                        // Set sum to maximum value, so that the
+                                        // loop gets broken before the next cycle.
+                                        sum = *sc;
+
+                                        if (errno == EBADF) {
+
+                                            log_message_debug("Error: Could not write to socket. The socket argument is not a valid file descriptor.");
+
+                                        } else if (errno == EINTR) {
+
+                                            log_message_debug("Error: Could not write to socket. The operation was interrupted by a signal before any data was sent.");
+
+                                        } else if (errno == ENOTSOCK) {
+
+                                            log_message_debug("Error: Could not write to socket. The descriptor socket is not a socket.");
+
+                                        } else if (errno == EMSGSIZE) {
+
+                                            log_message_debug("Error: Could not write to socket. The socket type requires that the message be sent atomically, but the message is too large for this to be possible.");
+
+                                        } else if (errno == EWOULDBLOCK) {
+
+                                            log_message_debug("Error: Could not write to socket. Nonblocking mode has been set on the socket, and the write operation would block.");
+
+                                            //?? TODO: DELETE the following comment block OR the log message above!
+
+                                            // CAUTION! Do NOT log the following error:
+                                            // log_message_debug("Error: Could not write to socket. Nonblocking mode has been set on the socket, and the write operation would block.");
+                                            //
+                                            // The reason is that the socket is non-blocking,
+                                            // so that the "accept" procedure returns always,
+                                            // even if no connection was established,
+                                            // which would unnecessarily fill up the log file.
+
+                                        } else if (errno == ENOBUFS) {
+
+                                            log_message_debug("Error: Could not write to socket. There is not enough internal buffer space available.");
+
+                                        } else if (errno == ENOTCONN) {
+
+                                            log_message_debug("Error: Could not write to socket. You never connected this socket.");
+
+                                        } else if (errno == EPIPE) {
+
+                                            log_message_debug("Error: Could not write to socket. This socket was connected but the connection is now broken. In this case, send generates a SIGPIPE signal first; if that signal is ignored or blocked, or if its handler returns, then send fails with EPIPE.");
+
+                                        } else {
+
+                                            log_message_debug("Error: Could not write to socket. An unknown error occured.");
+                                        }
                                     }
                                 }
 

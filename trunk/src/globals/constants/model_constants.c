@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.20 $ $Date: 2006-12-28 16:04:26 $ $Author: christian $
+ * @version $Revision: 1.21 $ $Date: 2007-01-14 01:38:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -350,6 +350,11 @@ static int* X_WINDOW_SYSTEM_MODEL_COUNT = NUMBER_15_INTEGER_ARRAY;
 static char WWW_SERVICE_MODEL_ARRAY[] = {'w', 'w', 'w'};
 static char* WWW_SERVICE_MODEL = WWW_SERVICE_MODEL_ARRAY;
 static int* WWW_SERVICE_MODEL_COUNT = NUMBER_3_INTEGER_ARRAY;
+
+/** The cybernetics oriented interpreter (cyboi) service model. */
+static char CYBOI_SERVICE_MODEL_ARRAY[] = {'c', 'y', 'b', 'o', 'i'};
+static char* CYBOI_SERVICE_MODEL = CYBOI_SERVICE_MODEL_ARRAY;
+static int* CYBOI_SERVICE_MODEL_COUNT = NUMBER_5_INTEGER_ARRAY;
 
 //
 // Local namespace models.

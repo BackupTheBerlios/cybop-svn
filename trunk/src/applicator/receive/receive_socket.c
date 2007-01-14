@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2007-01-11 22:30:12 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2007-01-14 01:38:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -1237,13 +1237,7 @@ void receive_socket_thread(void* p0, void* p1) {
                     // even if no stream socket connection could be established.
                     cs = accept(**s, (struct sockaddr*) *a, (socklen_t*) *as);
 
-    fprintf(stderr, "TEST: receive socket thread client socket pre: %i \n", cs);
-    sleep(2);
-
                     if (cs >= *NUMBER_0_INTEGER) {
-
-    fprintf(stderr, "TEST: receive socket thread client socket post: %i \n", cs);
-    sleep(2);
 
                         // Initialise error number.
                         // It is a global variable/ function and other operations
@@ -1254,6 +1248,7 @@ void receive_socket_thread(void* p0, void* p1) {
                         errno = *NUMBER_0_INTEGER;
 
                         // Receive message from client.
+                        //
                         // If the flags argument (fourth one) is zero, then one can
                         // just as well use the "read" instead of the "recv" procedure.
                         // Normally, "recv" blocks until there is input available to be read.
@@ -1264,6 +1259,19 @@ void receive_socket_thread(void* p0, void* p1) {
 
                         // Remember error number.
                         e = errno;
+
+    fprintf(stderr, "TEST: receive socket thread client socket: %i \n", cs);
+    sleep(2);
+
+//??    char* test = "<html><head></head><body>Blu Bla</body></html>";
+//??    write(**s, test, strlen(test) + 1);
+    fprintf(stderr, "TEST: send html data: %s\n", *b);
+    write(cs, *b, **bc + 1);
+    fprintf(stderr, "TEST: done send html data bc: %s\n", **bc);
+/*??
+    read(socketnummer, &eingabe, 5);
+    printf("empfange: %s\n", eingabe);
+*/
 
                         // Close client socket.
                         close(cs);
@@ -1351,6 +1359,9 @@ void receive_socket_thread(void* p0, void* p1) {
 
                 // Receive socket signal.
                 receive_socket_signal(p0, *b, (void*) *bc, p1);
+
+                // The general structure of a url looks like this:
+                // schema://host:port/pfad;parameter_one;parameter_two;parameter_n?query#fragment
 
 /*??
                 // The url basename.
@@ -1496,6 +1507,18 @@ void receive_socket_thread_www(void* p0) {
 }
 
 /**
+ * Receives cyboi messages via socket.
+ *
+ * @param p0 the internal memory
+ */
+void receive_socket_thread_cyboi(void* p0) {
+
+    log_message_debug("Receive cyboi messages via socket.");
+
+    receive_socket_thread(p0, (void*) CYBOI_BASE_INTERNAL);
+}
+
+/**
  * Receives messages via socket.
  *
  * @param p0 the internal memory
@@ -1584,48 +1607,6 @@ void receive_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, 
                 // Create thread.
                 // The third parameter is the procedure to be called.
                 pthread_create((pthread_t*) t, NULL_POINTER, p6, p0);
-
-/*?? Following is a TEST -- delete later!
-
-                sleep(2);
-
-                printf("Bitte geben Sie ein Wort ein! ");
-                char eingabe[sizeof(*stdin)];
-                scanf("%s", eingabe);
-
-                int socketnummer=socket(AF_INET,SOCK_STREAM,0);
-                fprintf(stderr, "TEST: socketnummer: %i \n", socketnummer);
-
-                struct sockaddr_in adressstruktur;
-                adressstruktur.sin_family=AF_INET;
-                adressstruktur.sin_addr.s_addr=inet_addr("127.0.0.1");
-                adressstruktur.sin_port=80; //?? 3456;
-                int laenge=sizeof(adressstruktur);
-                int result=connect(socketnummer, (struct sockaddr *) &adressstruktur, laenge);
-
-                if(result== -1) {
-                    perror("huch der client hat einen Fehler");
-                    exit(1);
-                } else{
-                    printf("Verbindung zum Server hergestellt\n");
-                }
-
-                int i=0;
-
-                while (i<10) {
-
-                    sleep(2);
-                    write(socketnummer, &eingabe, 5);
-                    printf("sende: %s\n", eingabe);
-                    read(socketnummer, &eingabe, 5);
-                    printf("empfange: %s\n", eingabe);
-                    i++;
-                }
-
-                close(socketnummer);
-
-                printf("Done: %i\n", i);
-*/
             }
 
         } else {

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.10 $ $Date: 2006-12-28 16:04:26 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2007-01-14 01:38:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -4442,6 +4442,10 @@ static int* NUMBER_999_INTEGER = NUMBER_999_INTEGER_ARRAY;
 /** The number 1000 integer. */
 static int NUMBER_1000_INTEGER_ARRAY[] = {1000};
 static int* NUMBER_1000_INTEGER = NUMBER_1000_INTEGER_ARRAY;
+
+/** The number 1971 integer. */
+static int NUMBER_1971_INTEGER_ARRAY[] = {1971};
+static int* NUMBER_1971_INTEGER = NUMBER_1971_INTEGER_ARRAY;
 
 /** The number 10000 integer. */
 static int NUMBER_10000_INTEGER_ARRAY[] = {10000};

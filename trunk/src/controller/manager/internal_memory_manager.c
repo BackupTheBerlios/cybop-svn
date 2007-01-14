@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2007-01-11 22:30:13 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2007-01-14 01:38:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -66,9 +66,10 @@
  * @param p9 the linux console mutex (Hand over as reference!)
  * @param p10 the x window system mutex (Hand over as reference!)
  * @param p11 the www service mutex (Hand over as reference!)
+ * @param p12 the cyboi service mutex (Hand over as reference!)
  */
 void startup_internal_memory(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
-    void* p7, void* p8, void* p9, void* p10, void* p11) {
+    void* p7, void* p8, void* p9, void* p10, void* p11, void* p12) {
 
     log_message_debug("\n\n");
     log_message_debug("Information: Startup internal memory.");
@@ -126,6 +127,9 @@ void startup_internal_memory(void* p0, void* p1, void* p2, void* p3, void* p4, v
     // Set www service mutex.
     i = *WWW_BASE_INTERNAL + *SOCKET_MUTEX_INTERNAL;
     set(p0, (void*) &i, p11, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    // Set cyboi service mutex.
+    i = *CYBOI_BASE_INTERNAL + *SOCKET_MUTEX_INTERNAL;
+    set(p0, (void*) &i, p12, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 }
 
 /* INTERNAL_MEMORY_MANAGER_SOURCE */
