@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.13 $ $Date: 2007-01-18 19:29:01 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2007-01-18 22:51:04 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -39,6 +39,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include "../../applicator/receive/receive_file_system.c"
+#include "../../globals/constants/http/http_request_method_constants.c"
 #include "../../globals/constants/abstraction_constants.c"
 #include "../../globals/constants/channel_constants.c"
 #include "../../globals/constants/character_constants.c"
@@ -49,7 +50,6 @@
 #include "../../globals/constants/name_constants.c"
 #include "../../globals/constants/structure_constants.c"
 #include "../../globals/constants/system_constants.c"
-#include "../../globals/constants/tcp_socket_constants.c"
 #include "../../globals/variables/variables.c"
 #include "../../memoriser/accessor/compound_accessor.c"
 #include "../../memoriser/accessor/internal_memory_accessor.c"
@@ -456,17 +456,145 @@ void* get_character_from_escape_code(void* source, int* source_count, char** des
 }
 
 /**
- * Get the parameters from the request for the request method post.
- * The parameters are in the last row from the request
+ * Extract parameters from url without "get" request method prefix.
  *
+ * Example request :
+ * GET /lib/ausgabe.cybol?param1=value1&param2=value2 HTTP/1.1 ...
+ *
+ * The result of the function is:
+ * param1=value1&param2=value2
+ *
+ * @param p0 the name (Hand over as reference!)
+ * @param p1 the name count (Hand over as reference!)
+ * @param p2 the channel (Hand over as reference!)
+ * @param p3 the channel count (Hand over as reference!)
+ * @param p4 the abstraction (Hand over as reference!)
+ * @param p5 the abstraction count (Hand over as reference!)
+ * @param p6 the model (Hand over as reference!)
+ * @param p7 the model count (Hand over as reference!)
+ * @param p8 the url (source) (Hand over as reference!)
+ * @param p9 the url count (Hand over as reference!)
+--
  * @param req the request
  * @param req_count the request count
  * @param param the parameter
  * @param param_count the paramater count
  */
-/*??
-void receive_socket_parameter_for_post(char* req, int* req_count, char** param, int* param_count) {
+void receive_socket_get_parameters_get_request(void* p0, void* p1, void* p2, void* p3,
+    void* p4, void* p5, void* p6, void* p7, void* p8, void* p9) {
+//?? (char* req, int* req_count, char** param, int* param_count) {
 
+    if (p9 != NULL_POINTER) {
+
+        int* urlc = (int*) p9;
+
+        if (p8 != NULL_POINTER) {
+
+            void** url = (void**) p8;
+
+            if (p1 != NULL_POINTER) {
+
+                int* nc = (int*) p1;
+
+                if (p0 != NULL_POINTER) {
+
+                    void** n = (void**) p0;
+
+                    log_message_debug("Information: Receive socket get parameters get request.");
+
+                    *n = *url;
+                    *nc = *urlc;
+
+                } else {
+
+                    log_message_debug("Error: Could not receive socket get parameters get request. The name is null.");
+                }
+
+            } else {
+
+                log_message_debug("Error: Could not receive socket get parameters get request. The name count is null.");
+            }
+
+        } else {
+
+            log_message_debug("Error: Could not receive socket get parameters get request. The url is null.");
+        }
+
+    } else {
+
+        log_message_debug("Error: Could not receive socket get parameters get request. The url count is null.");
+    }
+
+/*??
+    *param_count = 0;
+    int req_index = 0;
+    int start_param_flag = 0;
+    int max_count = 0;
+    // The element.
+    char* e = NULL_POINTER;
+
+    while (1) {
+
+        if (req_index >= *req_count) {
+
+            break;
+        }
+
+        get_array_elements(req, (void*) &req_index, (void*) &e, (void*) CHARACTER_ARRAY);
+
+        // Check of ending the paramaters.
+        if ((start_param_flag == 1) && (*e == *SPACE_ASCII_CHARACTER)) {
+
+            break;
+        }
+
+        // Complete the parameters.
+        if (start_param_flag == 1) {
+
+            max_count = *param_count + 1;
+
+            reallocate_array((void*) param, (void*) &max_count, (void*) &max_count, (void*) CHARACTER_ARRAY);
+            set_array_elements(*param, param_count, (void*) e, (void*) NUMBER_1_INTEGER, (void*) CHARACTER_ARRAY);
+
+            *param_count = *param_count + 1;
+        }
+
+        // Check of beginning the paramaters.
+        if (*e == *QUESTION_MARK_ASCII_CHARACTER) {
+
+            // Begin from the parameters.
+            start_param_flag = 1;
+        }
+
+        req_index++;
+    }
+*/
+}
+
+/**
+ * Extract parameters from url without "post" request method prefix.
+ *
+ * @param p0 the name (Hand over as reference!)
+ * @param p1 the name count (Hand over as reference!)
+ * @param p2 the channel (Hand over as reference!)
+ * @param p3 the channel count (Hand over as reference!)
+ * @param p4 the abstraction (Hand over as reference!)
+ * @param p5 the abstraction count (Hand over as reference!)
+ * @param p6 the model (Hand over as reference!)
+ * @param p7 the model count (Hand over as reference!)
+ * @param p8 the url (source) (Hand over as reference!)
+ * @param p9 the url count (Hand over as reference!)
+--
+ * @param req the request
+ * @param req_count the request count
+ * @param param the parameter
+ * @param param_count the paramater count
+ */
+void receive_socket_get_parameters_post_request(void* p0, void* p1, void* p2, void* p3,
+    void* p4, void* p5, void* p6, void* p7, void* p8, void* p9) {
+//?? (char* req, int* req_count, char** param, int* param_count) {
+
+/*??
     *param_count = 0;
     int req_index = *req_count-1;
     int req_last_count = 0;
@@ -517,92 +645,143 @@ void receive_socket_parameter_for_post(char* req, int* req_count, char** param, 
             req_index = req_index + 1;
         }
     }
+*/
 }
 
 /**
- * Get the parameters from the request for the request method get.
+ * Translate uniform resource locator (url).
  *
- * Example request :
- * GET /lib/ausgabe.cybol?param1=value1&param2=value2 HTTP/1.1 ...
+ * A uniform resource locator (url) consists of the following components:
+ * - schema
+ * - host
+ * - port
+ * - path
+ * - parameters
+ * - query
+ * - fragment (an anchor pointing to a special section within the document specified by "path")
  *
- * The result of the function is:
- * param1=value1&param2=value2
+ * Its structure is defined as follows:
+ * schema://host:port/path;parameter_one;parameter_two;parameter_n?query#fragment
+ * The ";" is often replaced with "&".
  *
- * @param req the request
- * @param req_count the request count
- * @param param the parameter
- * @param param_count the paramater count
+ * Example:
+ * http://127.0.0.1:1971?name=close&channel=inline&abstraction=knowledge&model=.residenz.logic.exit_program
+ * http://de.wikipedia.org/w/index.php?title=Uniform_Resource_Locator&action=edit
+ *
+ * Quoting:
+ * There are a number of reserved characters, to which belong:
+ * ! # $ % & ' ( ) * + , / : ; = ? @ [ ]
+ * The following url contains the reserved # character:
+ * http://www.example.net/index.html?session=A54C6FE2#info
+ * which should be encoded as %23 like:
+ * http://www.example.net/index.html?session=A54C6FE2%23info
+ *
+ * Example:
+ * GET /residenz/test.html HTTP/1.1
+ * User-Agent: Mozilla/5.0 (compatible; Konqueror/3.5; Linux) KHTML/3.5.5 (like Gecko) (Debian)
+ * Accept: text/html, image/jpeg, image/png, text/*, image/*, * /*
+ * Accept-Encoding: x-gzip, x-deflate, gzip, deflate
+ * Accept-Charset: utf-8, utf-8;q=0.5, *;q=0.5
+ * Accept-Language: en, de, pl
+ * Host: 127.0.0.1:1971
+ * Connection: Keep-Alive
+ *
+ * The url path specified by the client is relative to the
+ * server's root directory. Consider the following url as it
+ * would be requested by a client:
+ * http://www.example.com/path/file.html
+ * The client's web browser will translate it into a connection
+ * to www.example.com with the following http 1.1 request:
+ * GET /path/file.html HTTP/1.1
+ * Host: www.example.com
+ * The Web server on www.example.com will append the given path
+ * to the path of its root directory. On Unix machines, this is
+ * commonly /var/www/htdocs.
+ * The result is the local file system resource:
+ * /var/www/htdocs/path/file.html
+ * The Web server will then read the file, if it exists, and
+ * send a response to the client's web browser. The response
+ * will describe the content of the file and contain the file itself.
+ *
+ * @param p0 the name (Hand over as reference!)
+ * @param p1 the name count (Hand over as reference!)
+ * @param p2 the channel (Hand over as reference!)
+ * @param p3 the channel count (Hand over as reference!)
+ * @param p4 the abstraction (Hand over as reference!)
+ * @param p5 the abstraction count (Hand over as reference!)
+ * @param p6 the model (Hand over as reference!)
+ * @param p7 the model count (Hand over as reference!)
+ * @param p8 the url (source) (Hand over as reference!)
+ * @param p9 the url count (Hand over as reference!)
  */
-/*??
-void receive_socket_parameter_for_get(char* req, int* req_count, char** param, int* param_count) {
+void receive_socket_get_parameters(void* p0, void* p1, void* p2, void* p3,
+    void* p4, void* p5, void* p6, void* p7, void* p8, void* p9) {
 
-    *param_count = 0;
-    int req_index = 0;
-    int start_param_flag = 0;
-    int max_count = 0;
-    // The element.
-    char* e = NULL_POINTER;
+    if (p9 != NULL_POINTER) {
 
-    while (1) {
+        int* urlc = (int*) p9;
 
-        if (req_index >= *req_count) {
+        if (p8 != NULL_POINTER) {
 
-            break;
+            void** url = (void**) p8;
+
+            log_message_debug("Information: Receive socket get parameters.");
+
+            // The comparison result.
+            int r = 0;
+            // The content pointer.
+            void* c = NULL_POINTER;
+            int cc = *NUMBER_0_INTEGER;
+
+            if (r == 0) {
+
+                compare_arrays(*url, (void*) HTTP_GET_REQUEST_METHOD_COUNT, (void*) HTTP_GET_REQUEST_METHOD, (void*) HTTP_GET_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+                if (r != 0) {
+
+        fprintf(stderr, "TEST pre: %s\n", (char*) *url);
+
+                    // Set content pointer.
+                    // To the original pointer are added the length of the "get"
+                    // string and one place for the "space" character after "get".
+//??                    c = *url + *HTTP_GET_REQUEST_METHOD_COUNT + *PRIMITIVE_COUNT;
+//??                    cc = *urlc - *HTTP_GET_REQUEST_METHOD_COUNT - *PRIMITIVE_COUNT;
+
+                    //?? TEST with placeholders for / and ?
+                    c = *url + *HTTP_GET_REQUEST_METHOD_COUNT + *PRIMITIVE_COUNT + 1 + 1;
+                    //?? The "close" signal is of length 5.
+                    cc = 5;
+
+        fprintf(stderr, "TEST post: %s\n", (char*) c);
+
+                    receive_socket_get_parameters_get_request(p0, p1, p2, p3, p4, p5, p6, p7, (void*) &c, (void*) &cc);
+                }
+            }
+
+            if (r == 0) {
+
+                compare_arrays(*url, (void*) HTTP_POST_REQUEST_METHOD_COUNT, (void*) HTTP_POST_REQUEST_METHOD, (void*) HTTP_POST_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+                if (r != 0) {
+
+                    // Set content pointer.
+                    // To the original pointer are added the length of the "post"
+                    // string and one place for the "space" character after "post".
+                    c = *url + *HTTP_POST_REQUEST_METHOD_COUNT + *PRIMITIVE_COUNT;
+                    cc = *urlc - *HTTP_POST_REQUEST_METHOD_COUNT - *PRIMITIVE_COUNT;
+
+                    receive_socket_get_parameters_post_request(p0, p1, p2, p3, p4, p5, p6, p7, (void*) &c, (void*) &cc);
+                }
+            }
+
+        } else {
+
+            log_message_debug("Error: Could not receive socket get parameters. The url is null.");
         }
-
-        get_array_elements(req, (void*) &req_index, (void*) &e, (void*) CHARACTER_ARRAY);
-
-        // Check of ending the paramaters.
-        if ((start_param_flag == 1) && (*e == *SPACE_ASCII_CHARACTER)) {
-
-            break;
-        }
-
-        // Complete the parameters.
-        if (start_param_flag == 1) {
-
-            max_count = *param_count + 1;
-
-            reallocate_array((void*) param, (void*) &max_count, (void*) &max_count, (void*) CHARACTER_ARRAY);
-            set_array_elements(*param, param_count, (void*) e, (void*) NUMBER_1_INTEGER, (void*) CHARACTER_ARRAY);
-
-            *param_count = *param_count + 1;
-        }
-
-        // Check of beginning the paramaters.
-        if (*e == *QUESTION_MARK_ASCII_CHARACTER) {
-
-            // Begin from the parameters.
-            start_param_flag = 1;
-        }
-
-        req_index++;
-    }
-}
-
-/**
- * Get the paramaters from the request
- *
- * @param req the request
- * @param req_count the request count
- * @param param the parameter
- * @param param_count the paramater count
- */
-/*??
-void receive_socket_parameter(char* req, int* req_count, char** param, int* param_count) {
-
-    // Check the request method ( post or get );
-    int req_meth_post_res = 0;
-
-    compare_arrays(req, POST_REQUEST_METHOD_COUNT, POST_REQUEST_METHOD, POST_REQUEST_METHOD_COUNT, &req_meth_post_res, CHARACTER_ARRAY);
-
-    if (req_meth_post_res == 0) {
-
-        receive_socket_parameter_for_get(req, req_count, param, param_count);
 
     } else {
 
-        receive_socket_parameter_for_post(req, req_count, param, param_count);
+        log_message_debug("Error: Could not receive socket get parameters. The url count is null.");
     }
 }
 
@@ -746,118 +925,14 @@ void set_signals_for_all_parameters(void* p0, int* p1, void* p2) {
 }
 
 /**
- * Translate uniform resource locator (url).
- *
- * A uniform resource locator (url) consists of the following components:
- * - schema
- * - host
- * - port
- * - path
- * - parameters
- * - query
- * - fragment (an anchor pointing to a special section within the document specified by "path")
- *
- * Its structure is defined as follows:
- * schema://host:port/path;parameter_one;parameter_two;parameter_n?query#fragment
- * The ";" is often replaced with "&".
- *
- * Example:
- * http://127.0.0.1:1971?name=close&channel=inline&abstraction=knowledge&model=.residenz.logic.exit_program
- * http://de.wikipedia.org/w/index.php?title=Uniform_Resource_Locator&action=edit
- *
- * Quoting:
- * There are a number of reserved characters, to which belong:
- * ! # $ % & ' ( ) * + , / : ; = ? @ [ ]
- * The following url contains the reserved # character:
- * http://www.example.net/index.html?session=A54C6FE2#info
- * which should be encoded as %23 like:
- * http://www.example.net/index.html?session=A54C6FE2%23info
- *
- * Example:
- * GET /residenz/test.html HTTP/1.1
- * User-Agent: Mozilla/5.0 (compatible; Konqueror/3.5; Linux) KHTML/3.5.5 (like Gecko) (Debian)
- * Accept: text/html, image/jpeg, image/png, text/*, image/*, * /*
- * Accept-Encoding: x-gzip, x-deflate, gzip, deflate
- * Accept-Charset: utf-8, utf-8;q=0.5, *;q=0.5
- * Accept-Language: en, de, pl
- * Host: 127.0.0.1:1971
- * Connection: Keep-Alive
- *
- * The url path specified by the client is relative to the
- * server's root directory. Consider the following url as it
- * would be requested by a client:
- * http://www.example.com/path/file.html
- * The client's web browser will translate it into a connection
- * to www.example.com with the following http 1.1 request:
- * GET /path/file.html HTTP/1.1
- * Host: www.example.com
- * The Web server on www.example.com will append the given path
- * to the path of its root directory. On Unix machines, this is
- * commonly /var/www/htdocs.
- * The result is the local file system resource:
- * /var/www/htdocs/path/file.html
- * The Web server will then read the file, if it exists, and
- * send a response to the client's web browser. The response
- * will describe the content of the file and contain the file itself.
- *
- * @param p0 the name
- * @param p1 the name count
- * @param p2 the channel
- * @param p3 the channel count
- * @param p4 the abstraction
- * @param p5 the abstraction count
- * @param p6 the model
- * @param p7 the model count
- * @param p8 the url (source)
- * @param p9 the url count
- */
-void receive_socket_get_parameters(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9) {
-
-    if (p9 != NULL_POINTER) {
-
-        int* urlc = (int*) p9;
-
-        log_message_debug("Information: Receive socket get parameters.");
-
-        // The comparison result.
-        int r = 0;
-
-        if (r == 0) {
-
-            compare_arrays((void*) *cm, (void*) *cmc, (void*) HTTP_GET_REQUEST_METHOD, (void*) HTTP_GET_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-            if (r != 0) {
-
-                receive_file_system(p3, p4, p5, *wm, *wmc, *wms, *wd, *wdc, *wds,
-                    *nm, *nmc, *na, *nac, *am, *amc, *aa, *aac, *cm, *cmc, *mm, *mmc, *em, *emc);
-            }
-        }
-
-        if (r == 0) {
-
-            compare_arrays((void*) *cm, (void*) *cmc, (void*) HTTP_POST_REQUEST_METHOD, (void*) HTTP_POST_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-            if (r != 0) {
-
-                receive_linux_console(p2, *com, *comc, *coms);
-            }
-        }
-
-    } else {
-
-        log_message_debug("Error: Could not receive socket get parameters. The url count is null.");
-    }
-}
-
-/**
  * Receives socket signal.
  *
  * The http request must be parsed for parameters!
  * A cyboi-internal signal is created and added to the signal memory, for each parameter.
  *
  * @param p0 the internal memory
- * @param p1 the buffer
- * @param p2 the buffer count
+ * @param p1 the command name
+ * @param p2 the command name count
  * @param p3 the base internal
  */
 void receive_socket_signal(void* p0, void* p1, void* p2, void* p3) {
@@ -868,8 +943,8 @@ void receive_socket_signal(void* p0, void* p1, void* p2, void* p3) {
 
         log_message_debug("Information: Receive socket signal.");
 
-    fprintf(stderr, "TEST: receive socket signal buffer: %s \n", (char*) p1);
-    fprintf(stderr, "TEST: receive socket signal buffer count: %i \n", *((int*) p2));
+    fprintf(stderr, "TEST: receive socket command name: %s \n", (char*) p1);
+    fprintf(stderr, "TEST: receive socket command name count: %i \n", *((int*) p2));
 
         // The knowledge memory.
         void** k = &NULL_POINTER;
@@ -1230,7 +1305,7 @@ void receive_socket_thread(void* p0, void* p1) {
                     (void*) &channel, (void*) &channelc,
                     (void*) &abstraction, (void*) &abstractionc,
                     (void*) &model, (void*) &modelc,
-                    *b, (void*) *bc);
+                    (void*) b, (void*) *bc);
 
 /*??
                 // The url basename.
@@ -1272,10 +1347,10 @@ void receive_socket_thread(void* p0, void* p1) {
 
                     close(*cs);
                 }
-    */
+*/
 
                 // Receive socket signal.
-//??                receive_socket_signal(p0, *b, (void*) *bc, p1);
+                receive_socket_signal(p0, name, (void*) &namec, p1);
 
             } else if (**bc = *NUMBER_0_INTEGER) {
 

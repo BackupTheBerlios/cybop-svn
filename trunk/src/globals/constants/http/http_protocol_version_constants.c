@@ -20,14 +20,14 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2007-01-18 19:29:01 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2007-01-18 22:51:04 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef HTTP_PROTOCOL_VERSION_CONSTANTS_SOURCE
 #define HTTP_PROTOCOL_VERSION_CONSTANTS_SOURCE
 
-#include "../../globals/constants/integer_constants.c"
+#include "../../../globals/constants/integer_constants.c"
 
 /** The http 1.0 protocol version. */
 static char HTTP_1_0_PROTOCOL_VERSION_ARRAY[] = {'H', 'T', 'T', 'P', '/', '1', '.', '0'};
