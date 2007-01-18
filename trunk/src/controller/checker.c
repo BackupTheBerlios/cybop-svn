@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.23 $ $Date: 2007-01-14 22:06:48 $ $Author: christian $
+ * @version $Revision: 1.24 $ $Date: 2007-01-18 19:29:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -256,7 +256,8 @@ void check(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
                 // Sleep for some time.
                 while (*irq == *NUMBER_0_INTEGER) {
 
-                    sleep(0.1);
+//??                    sleep(0.1);
+                    sleep(1.0);
                 }
 
                 // Lock signal memory mutex.

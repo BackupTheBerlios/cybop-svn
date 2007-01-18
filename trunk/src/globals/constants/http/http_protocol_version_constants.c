@@ -1,5 +1,5 @@
 /*
- * $RCSfile: tcp_socket_constants.c,v $
+ * $RCSfile: http_protocol_version_constants.c,v $
  *
  * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
  *
@@ -20,28 +20,24 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2007-01-14 22:06:49 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2007-01-18 19:29:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef TCP_SOCKET_CONSTANTS_SOURCE
-#define TCP_SOCKET_CONSTANTS_SOURCE
+#ifndef HTTP_PROTOCOL_VERSION_CONSTANTS_SOURCE
+#define HTTP_PROTOCOL_VERSION_CONSTANTS_SOURCE
 
 #include "../../globals/constants/integer_constants.c"
 
-//
-// Request method.
-//
+/** The http 1.0 protocol version. */
+static char HTTP_1_0_PROTOCOL_VERSION_ARRAY[] = {'H', 'T', 'T', 'P', '/', '1', '.', '0'};
+static char* HTTP_1_0_PROTOCOL_VERSION = HTTP_1_0_PROTOCOL_VERSION_ARRAY;
+static int* HTTP_1_0_PROTOCOL_VERSION_COUNT = NUMBER_8_INTEGER_ARRAY;
 
-/** The get request method. */
-static char GET_REQUEST_METHOD_ARRAY[] = {'G', 'E', 'T'};
-static char* GET_REQUEST_METHOD = GET_REQUEST_METHOD_ARRAY;
-static int* GET_REQUEST_METHOD_COUNT = NUMBER_3_INTEGER_ARRAY;
+/** The http 1.1 protocol version. */
+static char HTTP_1_1_PROTOCOL_VERSION_ARRAY[] = {'H', 'T', 'T', 'P', '/', '1', '.', '1'};
+static char* HTTP_1_1_PROTOCOL_VERSION = HTTP_1_1_PROTOCOL_VERSION_ARRAY;
+static int* HTTP_1_1_PROTOCOL_VERSION_COUNT = NUMBER_8_INTEGER_ARRAY;
 
-/** The post request method. */
-static char POST_REQUEST_METHOD_ARRAY[] = {'P', 'O', 'S', 'T'};
-static char* POST_REQUEST_METHOD = POST_REQUEST_METHOD_ARRAY;
-static int* POST_REQUEST_METHOD_COUNT = NUMBER_4_INTEGER_ARRAY;
-
-/* TCP_SOCKET_CONSTANTS_SOURCE */
+/* HTTP_PROTOCOL_VERSION_CONSTANTS_SOURCE */
 #endif

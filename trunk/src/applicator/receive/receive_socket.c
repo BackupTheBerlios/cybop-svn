@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.12 $ $Date: 2007-01-14 22:06:48 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2007-01-18 19:29:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -607,256 +607,6 @@ void receive_socket_parameter(char* req, int* req_count, char** param, int* para
 }
 
 /**
- * create a signal with the set operation
- * dest must for the abstraction a knowledge
- * source must be a string, depenc from the abstraction
- * of the source
- *
- * @param source the source
- * @param source_count the source count
- * @param dest the destination
- * @param dest_count the detsination count
- * @param p4 the internal memory
- */
-/*??
-void set_signal_for_parameter(void* source, int* source_count, void* dest, int* dest_count, void* p4) {
-
-    // check of null pointer
-    if ((source != NULL_POINTER) &&
-        (source_count != NULL_POINTER) &&
-        (dest != NULL_POINTER) &&
-        (dest_count != NULL_POINTER) &&
-        (p4 != NULL_POINTER)) {
-
-        // The knowledge memory.
-        void** km = &NULL_POINTER;
-        void** kmc = &NULL_POINTER;
-        void** kms = &NULL_POINTER;
-
-        // Get knowledge memory.
-        get(p4, (void*) KNOWLEDGE_MEMORY_INTERNAL, (void*) &km, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        get(p4, (void*) KNOWLEDGE_MEMORY_COUNT_INTERNAL, (void*) &kmc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        get(p4, (void*) KNOWLEDGE_MEMORY_SIZE_INTERNAL, (void*) &kms, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-
-        //
-        //  the signal
-        //
-
-        // The signal abstraction.
-        void* sa = NULL_POINTER;
-        int* sac = NULL_POINTER;
-        int* sas = NULL_POINTER;
-
-        // The signal model.
-        void* sm = NULL_POINTER;
-        int* smc = NULL_POINTER;
-        int* sms = NULL_POINTER;
-
-        // The signal details.
-        void* sd = NULL_POINTER;
-        int* sdc = NULL_POINTER;
-        int* sds = NULL_POINTER;
-
-        // Create signal abstraction.
-        allocate(&sac, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-        *sac = 0;
-        allocate(&sas, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-        *sas = 0;
-        receive_file_system_model((void*) &sa, (void*) sac, (void*) sas,
-            (void*) OPERATION_ABSTRACTION, (void*) OPERATION_ABSTRACTION_COUNT,
-            (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
-            (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
-
-        // Create signal model.
-        allocate(&smc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-        *smc = 0;
-        allocate(&sms, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-        *sms = 0;
-        receive_file_system_model((void*) &sm, (void*) smc, (void*) sms,
-            (void*) COPY_MODEL, (void*) COPY_MODEL_COUNT,
-            (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
-            (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
-
-        // Create signal detail.
-        allocate(&sdc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-        *sdc = 0;
-        allocate(&sds, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-        *sds = 0;
-        receive_file_system_model((void*) &sd, (void*) sdc, (void*) sds,
-            (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
-            (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
-            (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
-
-
-        //
-        //  the property destination
-        //
-
-        // The property destination name.
-        void* pdn = NULL_POINTER;
-        int* pdnc = NULL_POINTER;
-        int* pdns = NULL_POINTER;
-
-        // The property destination abstraction.
-        void* pda = NULL_POINTER;
-        int* pdac = NULL_POINTER;
-        int* pdas = NULL_POINTER;
-
-        // The property destination model.
-        void* pdm = NULL_POINTER;
-        int* pdmc = NULL_POINTER;
-        int* pdms = NULL_POINTER;
-
-        // The property destination details.
-        void* pdd = NULL_POINTER;
-        int* pddc = NULL_POINTER;
-        int* pdds = NULL_POINTER;
-
-        // Create property destination name.
-        allocate(&pdnc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-        *pdnc = 0;
-        allocate(&pdns, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-        *pdns = 0;
-        receive_file_system_model((void*) &pdn, (void*) pdnc, (void*) pdns,
-            (void*) COPY_DESTINATION_NAME, (void*) COPY_DESTINATION_NAME_COUNT,
-            (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
-            (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
-
-        // Create property destination abstraction.
-        allocate(&pdac, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-        *pdac = 0;
-        allocate(&pdas, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-        *pdas = 0;
-        receive_file_system_model((void*) &pda, (void*) pdac, (void*) pdas,
-            (void*) KNOWLEDGE_ABSTRACTION, (void*) KNOWLEDGE_ABSTRACTION_COUNT,
-            (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
-            (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
-
-        // Create property destination model.
-        allocate(&pdmc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-        *pdmc = 0;
-        allocate(&pdms, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-        *pdms = 0;
-        receive_file_system_model((void*) &pdm, (void*) pdmc, (void*) pdms,
-            (void*) dest, (void*) dest_count,
-            (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
-            (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
-
-        // Create property source detail.
-        // is empty
-
-        //
-        //  the property source
-        //
-
-        // The property source name.
-        void* psn = NULL_POINTER;
-        int* psnc = NULL_POINTER;
-        int* psns = NULL_POINTER;
-
-        // The property  source abstraction.
-        void* psa = NULL_POINTER;
-        int* psac = NULL_POINTER;
-        int* psas = NULL_POINTER;
-
-        // The property  source model.
-        void* psm = NULL_POINTER;
-        int* psmc = NULL_POINTER;
-        int* psms = NULL_POINTER;
-
-        // The property  source details.
-        void* psd = NULL_POINTER;
-        int* psdc = NULL_POINTER;
-        int* psds = NULL_POINTER;
-
-        // Create property source name.
-        allocate(&psnc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-        *psnc = 0;
-        allocate(&psns, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-        *psns = 0;
-        receive_file_system_model((void*) &psn, (void*) psnc, (void*) psns,
-            (void*) COPY_SOURCE_NAME, (void*) COPY_SOURCE_NAME_COUNT,
-            (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
-            (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
-
-
-        // Create property source abstraction.
-        allocate(&psac, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-        *psac = 0;
-        allocate(&psas, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-        *psas = 0;
-        receive_file_system_model((void*) &psa, (void*) psac, (void*) psas,
-            (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
-            (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
-            (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
-
-        // Create property source model.
-        // todo: expansion for other types
-        allocate(&psmc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-        *psmc = 0;
-        allocate(&psms, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-        *psms = 0;
-        receive_file_system_model((void*) &psm, (void*) psmc, (void*) psms,
-            (void*) source, (void*) source_count,
-            (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
-            (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
-
-        // Create property source detail.
-        // is empty
-
-        // Add property source to the signal detail compound.
-        set_compound_element_by_name(sd, sdc, sds, NULL_POINTER, NULL_POINTER, NULL_POINTER,
-            psn, (void*) psnc, (void*) psns,
-            psa, (void*) psac, (void*) psas,
-            psm, (void*) psmc, (void*) psms,
-            psd, (void*) psdc, (void*) psds);
-
-        // Add property destination to the detail compound.
-        set_compound_element_by_name(sd, sdc, sds, NULL_POINTER, NULL_POINTER, NULL_POINTER,
-            pdn, (void*) pdnc, (void*) pdns,
-            pda, (void*) pdac, (void*) pdas,
-            pdm, (void*) pdmc, (void*) pdms,
-            pdd, (void*) pddc, (void*) pdds);
-
-
-        //
-        // Signal.
-        //
-
-        log_message_debug("Set start signal.");
-
-        // The signal memory.
-        void** m = &NULL_POINTER;
-        void** mc = &NULL_POINTER;
-        void** ms = &NULL_POINTER;
-
-        // Get signal memory.
-        get(p4, (void*) SIGNAL_MEMORY_INTERNAL, (void*) &m, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        get(p4, (void*) SIGNAL_MEMORY_COUNT_INTERNAL, (void*) &mc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        get(p4, (void*) SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &ms, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-
-        // Lock signal memory mutex.
-//??        pthread_mutex_lock(*mt);
-
-        // The signal id.
-        int* id = NULL_POINTER;
-        allocate(&id, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-        *id = 0;
-        get_new_signal_id(*m, *mc, (void*) id);
-
-        // Set signal.
-        set_signal(*m, *mc, *ms, (void*) sa, (void*) sac, (void*) sm, (void*) smc, (void*) sd, (void*) sdc, (void*) NORMAL_PRIORITY, (void*) id);
-
-        // Set interrupt request flag, in order to notify the signal checker
-        // that a new signal has been placed in the signal memory.
-//??        **irq = *NUMBER_1_INTEGER;
-
-        // Unlock signal memory mutex.
-//??        pthread_mutex_unlock(*mt);
-    }
-}
-
-/**
  * Separates the query string into single parameters.
  *
  * A signal is created for each single parameter.
@@ -992,6 +742,110 @@ void set_signals_for_all_parameters(void* p0, int* p1, void* p2) {
                 set_signal_for_parameter(value, value_count, param, param_count, p2);
             }
         }
+    }
+}
+
+/**
+ * Translate uniform resource locator (url).
+ *
+ * A uniform resource locator (url) consists of the following components:
+ * - schema
+ * - host
+ * - port
+ * - path
+ * - parameters
+ * - query
+ * - fragment (an anchor pointing to a special section within the document specified by "path")
+ *
+ * Its structure is defined as follows:
+ * schema://host:port/path;parameter_one;parameter_two;parameter_n?query#fragment
+ * The ";" is often replaced with "&".
+ *
+ * Example:
+ * http://127.0.0.1:1971?name=close&channel=inline&abstraction=knowledge&model=.residenz.logic.exit_program
+ * http://de.wikipedia.org/w/index.php?title=Uniform_Resource_Locator&action=edit
+ *
+ * Quoting:
+ * There are a number of reserved characters, to which belong:
+ * ! # $ % & ' ( ) * + , / : ; = ? @ [ ]
+ * The following url contains the reserved # character:
+ * http://www.example.net/index.html?session=A54C6FE2#info
+ * which should be encoded as %23 like:
+ * http://www.example.net/index.html?session=A54C6FE2%23info
+ *
+ * Example:
+ * GET /residenz/test.html HTTP/1.1
+ * User-Agent: Mozilla/5.0 (compatible; Konqueror/3.5; Linux) KHTML/3.5.5 (like Gecko) (Debian)
+ * Accept: text/html, image/jpeg, image/png, text/*, image/*, * /*
+ * Accept-Encoding: x-gzip, x-deflate, gzip, deflate
+ * Accept-Charset: utf-8, utf-8;q=0.5, *;q=0.5
+ * Accept-Language: en, de, pl
+ * Host: 127.0.0.1:1971
+ * Connection: Keep-Alive
+ *
+ * The url path specified by the client is relative to the
+ * server's root directory. Consider the following url as it
+ * would be requested by a client:
+ * http://www.example.com/path/file.html
+ * The client's web browser will translate it into a connection
+ * to www.example.com with the following http 1.1 request:
+ * GET /path/file.html HTTP/1.1
+ * Host: www.example.com
+ * The Web server on www.example.com will append the given path
+ * to the path of its root directory. On Unix machines, this is
+ * commonly /var/www/htdocs.
+ * The result is the local file system resource:
+ * /var/www/htdocs/path/file.html
+ * The Web server will then read the file, if it exists, and
+ * send a response to the client's web browser. The response
+ * will describe the content of the file and contain the file itself.
+ *
+ * @param p0 the name
+ * @param p1 the name count
+ * @param p2 the channel
+ * @param p3 the channel count
+ * @param p4 the abstraction
+ * @param p5 the abstraction count
+ * @param p6 the model
+ * @param p7 the model count
+ * @param p8 the url (source)
+ * @param p9 the url count
+ */
+void receive_socket_get_parameters(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9) {
+
+    if (p9 != NULL_POINTER) {
+
+        int* urlc = (int*) p9;
+
+        log_message_debug("Information: Receive socket get parameters.");
+
+        // The comparison result.
+        int r = 0;
+
+        if (r == 0) {
+
+            compare_arrays((void*) *cm, (void*) *cmc, (void*) HTTP_GET_REQUEST_METHOD, (void*) HTTP_GET_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+            if (r != 0) {
+
+                receive_file_system(p3, p4, p5, *wm, *wmc, *wms, *wd, *wdc, *wds,
+                    *nm, *nmc, *na, *nac, *am, *amc, *aa, *aac, *cm, *cmc, *mm, *mmc, *em, *emc);
+            }
+        }
+
+        if (r == 0) {
+
+            compare_arrays((void*) *cm, (void*) *cmc, (void*) HTTP_POST_REQUEST_METHOD, (void*) HTTP_POST_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+            if (r != 0) {
+
+                receive_linux_console(p2, *com, *comc, *coms);
+            }
+        }
+
+    } else {
+
+        log_message_debug("Error: Could not receive socket get parameters. The url count is null.");
     }
 }
 
@@ -1168,27 +1022,18 @@ void receive_socket_thread(void* p0, void* p1) {
         // to remember "errno" values of the "recv" and "recvfrom" procedures,
         // across the various if-else sections.
         int e = *NUMBER_0_INTEGER;
-        // The schema.
-        void* schema = NULL_POINTER;
-        int schemac = *NUMBER_0_INTEGER;
-        // The host.
-        void* host = NULL_POINTER;
-        int hostc = *NUMBER_0_INTEGER;
-        // The port.
-        void* port = NULL_POINTER;
-        int portc = *NUMBER_0_INTEGER;
-        // The path.
-        void* path = NULL_POINTER;
-        int pathc = *NUMBER_0_INTEGER;
-        // The parameters.
-        void* parameters = NULL_POINTER;
-        int parametersc = *NUMBER_0_INTEGER;
-        // The query.
-        void* query = NULL_POINTER;
-        int queryc = *NUMBER_0_INTEGER;
-        // The fragment.
-        void* fragment = NULL_POINTER;
-        int fragmentc = *NUMBER_0_INTEGER;
+        // The name.
+        void* name = NULL_POINTER;
+        int namec = *NUMBER_0_INTEGER;
+        // The channel.
+        void* channel = NULL_POINTER;
+        int channelc = *NUMBER_0_INTEGER;
+        // The abstraction.
+        void* abstraction = NULL_POINTER;
+        int abstractionc = *NUMBER_0_INTEGER;
+        // The model.
+        void* model = NULL_POINTER;
+        int modelc = *NUMBER_0_INTEGER;
 
         // Get communication style.
         i = *base + *SOCKET_STYLE_INTERNAL;
@@ -1380,63 +1225,12 @@ void receive_socket_thread(void* p0, void* p1) {
 
             if (**bc > *NUMBER_0_INTEGER) {
 
-                // Translate the path.
-                //
-                // A uniform resource locator (url) consists of the following components:
-                // - schema
-                // - host
-                // - port
-                // - path
-                // - parameters
-                // - query
-                // - fragment
-                //
-                // Its structure is defined as follows:
-                // schema://host:port/path;parameter_one;parameter_two;parameter_n?query#fragment
-                //
-                // Example:
-                // GET /residenz/test.html HTTP/1.1
-                // User-Agent: Mozilla/5.0 (compatible; Konqueror/3.5; Linux) KHTML/3.5.5 (like Gecko) (Debian)
-                // Accept: text/html, image/jpeg, image/png, text/*, image/*, */*
-                // Accept-Encoding: x-gzip, x-deflate, gzip, deflate
-                // Accept-Charset: utf-8, utf-8;q=0.5, *;q=0.5
-                // Accept-Language: en, de, pl
-                // Host: 127.0.0.1:1971
-                // Connection: Keep-Alive
-                //
-                // The url path specified by the client is relative to the
-                // server's root directory. Consider the following url as it
-                // would be requested by a client:
-                // http://www.example.com/path/file.html
-                // The client's web browser will translate it into a connection
-                // to www.example.com with the following http 1.1 request:
-                // GET /path/file.html HTTP/1.1
-                // Host: www.example.com
-                // The Web server on www.example.com will append the given path
-                // to the path of its root directory. On Unix machines, this is
-                // commonly /var/www/htdocs.
-                // The result is the local file system resource:
-                // /var/www/htdocs/path/file.html
-                // The Web server will then read the file, if it exists, and
-                // send a response to the client's web browser. The response
-                // will describe the content of the file and contain the file itself.
-
-/*??
-                // Translate schema.
-                receive_socket_get_schema((void*) &schema, (void*) &schemac, *b, (void*) *bc);
-                // Translate host.
-                receive_socket_get_host((void*) &host, (void*) &hostc, *b, (void*) *bc);
-                // Translate port.
-                receive_socket_get_port((void*) &port, (void*) &portc, *b, (void*) *bc);
-                // Translate path.
-                receive_socket_get_path((void*) &path, (void*) &pathc, *b, (void*) *bc);
-                // Translate parameters.
-                receive_socket_get_parameters((void*) &parameters, (void*) &parametersc, *b, (void*) *bc);
-                // Translate query.
-                receive_socket_get_query((void*) &query, (void*) &queryc, *b, (void*) *bc);
-                // Translate fragment.
-                receive_socket_get_fragment((void*) &fragment, (void*) &fragmentc, *b, (void*) *bc);
-*/
+                // Translate uniform resource locator (url).
+                receive_socket_get_parameters((void*) &name, (void*) &namec,
+                    (void*) &channel, (void*) &channelc,
+                    (void*) &abstraction, (void*) &abstractionc,
+                    (void*) &model, (void*) &modelc,
+                    *b, (void*) *bc);
 
 /*??
                 // The url basename.
@@ -1532,7 +1326,7 @@ void receive_socket_thread(void* p0, void* p1) {
             // parameter.
             // A simple "sleep" procedure is considered to be a more simple and
             // clean solution here.
-            sleep(1);
+            sleep(1.0);
 
             // Reset client socket.
             cs = *INVALID_VALUE;
