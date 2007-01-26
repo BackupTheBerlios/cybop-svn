@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.14 $ $Date: 2007-01-14 22:06:48 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2007-01-26 00:38:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -540,42 +540,44 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
         int an = *INVALID_VALUE;
         // The communication style.
         int st = *INVALID_VALUE;
-        // The ipv4 host address of the receiver (this system).
+        // The ipv4 host address of this system.
         struct in_addr ha4;
-        // The ipv6 host address of the receiver (this system).
+        // The ipv6 host address of this system.
         struct in6_addr ha6;
-        // The local socket address of the receiver (this system).
-        // CAUTION! Do use a pointer here and not only the structure as type,
-        // so that the different socket addresses can be processed uniformly below!
+        // CAUTION! Do use pointers for the addresses declared below,
+        // and not only the structure as type, so that the different
+        // socket addresses can be processed uniformly below!
+        // The local socket address of this system.
         struct sockaddr_un* la = NULL_POINTER;
-        // The ipv4 internet socket address of the receiver (this system).
-        // CAUTION! Do use a pointer here and not only the structure as type,
-        // so that the different socket addresses can be processed uniformly below!
+        // The ipv4 internet socket address of this system.
         struct sockaddr_in* ia4 = NULL_POINTER;
-        // The ipv6 internet socket address of the receiver (this system).
-        // CAUTION! Do use a pointer here and not only the structure as type,
-        // so that the different socket addresses can be processed uniformly below!
+        // The ipv6 internet socket address of this system.
         struct sockaddr_in6* ia6 = NULL_POINTER;
-        // The socket address size.
+        // The communication partner local socket address.
+        struct sockaddr_un* pla = NULL_POINTER;
+        // The communication partner ipv4 internet socket address.
+        struct sockaddr_in* pia4 = NULL_POINTER;
+        // The communication partner ipv6 internet socket address.
+        struct sockaddr_in6* pia6 = NULL_POINTER;
+        // The socket address size of this system.
         int* as = NULL_POINTER;
-        // The server socket of the receiver (this system).
+        // The communication partner socket address size.
+        int* pas = NULL_POINTER;
+        // The socket of this system.
         int* s = NULL_POINTER;
-/*??
-        // The client sockets.
-        void* cs = NULL_POINTER;
-        int* csc = NULL_POINTER;
-        int* css = NULL_POINTER;
-*/
-        // The character buffer that will be used in the thread procedure.
-        void* b = NULL_POINTER;
-        int* bc = NULL_POINTER;
-        int* bs = NULL_POINTER;
+        // The communication partner socket.
+        int* ps = NULL_POINTER;
 /*??
         // The signal ids.
         void* id = NULL_POINTER;
         int* idc = NULL_POINTER;
         int* ids = NULL_POINTER;
 */
+        // The character buffer that will be used in the thread procedure
+        // receiving messages via socket.
+        void* b = NULL_POINTER;
+        int* bc = NULL_POINTER;
+        int* bs = NULL_POINTER;
         // The internal memory index.
         int i = *INVALID_VALUE;
         // The result.
@@ -596,24 +598,157 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
             startup_socket_get_host_address((void*) &ha6, p5, p6, (void*) &an);
         }
 
-        // Allocate server socket.
-        allocate((void*) &s, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-        // Allocate socket address size.
+        // Allocate socket address size of this system.
         allocate((void*) &as, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-/*??
-        // Allocate client sockets.
-        allocate((void*) &csc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-        allocate((void*) &css, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-        allocate_array((void*) &cs, (void*) css, (void*) INTEGER_ARRAY);
-*/
-        // Allocate character buffer count, size.
-        allocate((void*) &bc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-        allocate((void*) &bs, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        // Allocate communication partner socket address size.
+        allocate((void*) &pas, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        // Allocate socket of this system.
+        allocate((void*) &s, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        // Allocate communication partner socket.
+        allocate((void*) &ps, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 /*??
         // Allocate signal ids.
         allocate((void*) &idc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
         allocate((void*) &ids, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
         allocate_array((void*) &id, (void*) ids, (void*) INTEGER_ARRAY);
+*/
+
+        // Initialise socket address size of this system.
+        // Initialise communication partner socket address size.
+        if (an == AF_LOCAL) {
+
+            // CAUTION! The following line CANNOT be used:
+            // *as = sizeof(struct sockaddr_un);
+            // because the compiler brings the error
+            // "invalid application of 'sizeof' to incomplete type 'struct sockaddr_un'".
+            // The reason is the "sun_path" field of the "sockaddr_un" structure,
+            // which is a character array whose size is unknown at compilation time.
+            //
+            // The size of the "sun_path" character array is therefore set
+            // to the fixed size of 108.
+            // The number "108" is the limit as set by the gnu c library!
+            // Its documentation called it a "magic number" and does not
+            // know why this limit exists.
+            //
+            // With the known type "short int" of the "sun_family" field and
+            // a fixed size "108" of the "sun_path" field, the overall size of
+            // the "sockaddr_un" structure can be calculated as sum.
+            *as = sizeof(short int) + 108;
+            *pas = sizeof(short int) + 108;
+
+        } else if (an == AF_INET) {
+
+            *as = sizeof(struct sockaddr_in);
+            *pas = sizeof(struct sockaddr_in);
+
+        } else if (an == AF_INET6) {
+
+            *as = sizeof(struct sockaddr_in6);
+            *pas = sizeof(struct sockaddr_in6);
+        }
+
+        // Allocate socket address of this system.
+        // Allocate communication partner socket address.
+        if (an == AF_LOCAL) {
+
+            la = (struct sockaddr_un*) malloc(*as);
+            pla = (struct sockaddr_un*) malloc(*pas);
+
+        } else if (an == AF_INET) {
+
+            ia4 = (struct sockaddr_in*) malloc(*as);
+            pia4 = (struct sockaddr_in*) malloc(*pas);
+
+        } else if (an == AF_INET6) {
+
+            ia6 = (struct sockaddr_in6*) malloc(*as);
+            pia6 = (struct sockaddr_in6*) malloc(*pas);
+        }
+
+        // Initialise socket address of this system.
+        // CAUTION! Do NOT initialise communication partner socket address!
+        // It gets initialised only before sending, or at reception of a message.
+        if (an == AF_LOCAL) {
+
+            startup_socket_initialise_local_socket_address((void*) &la, p5, p6);
+
+        } else if (an == AF_INET) {
+
+            startup_socket_initialise_ipv4_socket_address((void*) &ia4, (void*) &ha4, p7);
+
+        } else if (an == AF_INET6) {
+
+            startup_socket_initialise_ipv6_socket_address((void*) &ia6, (void*) &ha6, p7);
+        }
+
+/*??
+        // Initialise signal ids.
+        *idc = *NUMBER_0_INTEGER;
+        *ids = *NUMBER_0_INTEGER;
+*/
+
+        // Allocate character buffer count, size.
+        allocate((void*) &bc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        allocate((void*) &bs, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        // Allocate character buffer.
+        allocate((void*) &b, (void*) bs, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+
+        // Initialise character buffer count, size.
+        // Its size is initialised with 2048,
+        // which should suffice for transferring standard data over tcp/ip.
+        *bc = *NUMBER_0_INTEGER;
+        *bs = 8192;
+
+        // Set socket address of this system.
+        // Set communication partner socket address.
+        if (an == AF_LOCAL) {
+
+            i = *base + *SOCKET_ADDRESS_INTERNAL;
+            set(p0, (void*) &i, (void*) &la, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            i = *base + *SOCKET_COMMUNICATION_PARTNER_ADDRESS_INTERNAL;
+            set(p0, (void*) &i, (void*) &pla, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
+        } else if (an == AF_INET) {
+
+            i = *base + *SOCKET_ADDRESS_INTERNAL;
+            set(p0, (void*) &i, (void*) &ia4, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            i = *base + *SOCKET_COMMUNICATION_PARTNER_ADDRESS_INTERNAL;
+            set(p0, (void*) &i, (void*) &pia4, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
+        } else if (an == AF_INET6) {
+
+            i = *base + *SOCKET_ADDRESS_INTERNAL;
+            set(p0, (void*) &i, (void*) &ia6, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            i = *base + *SOCKET_COMMUNICATION_PARTNER_ADDRESS_INTERNAL;
+            set(p0, (void*) &i, (void*) &pia6, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        }
+
+        // Set socket address size of this system.
+        i = *base + *SOCKET_ADDRESS_SIZE_INTERNAL;
+        set(p0, (void*) &i, (void*) &as, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        // Set communication partner socket address size.
+        i = *base + *SOCKET_COMMUNICATION_PARTNER_ADDRESS_SIZE_INTERNAL;
+        set(p0, (void*) &i, (void*) &pas, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
+        // Set socket of this system.
+        i = *base + *SOCKET_INTERNAL;
+        set(p0, (void*) &i, (void*) &s, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        // Set communication partner socket.
+        i = *base + *SOCKET_COMMUNICATION_PARTNER_INTERNAL;
+        set(p0, (void*) &i, (void*) &ps, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
+        // Set character buffer.
+        i = *base + *SOCKET_CHARACTER_BUFFER_INTERNAL;
+        set(p0, (void*) &i, (void*) &b, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        i = *base + *SOCKET_CHARACTER_BUFFER_COUNT_INTERNAL;
+        set(p0, (void*) &i, (void*) &bc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        i = *base + *SOCKET_CHARACTER_BUFFER_SIZE_INTERNAL;
+        set(p0, (void*) &i, (void*) &bs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+/*??
+        // Set signal ids.
+        set(p0, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_INTERNAL, (void*) &id, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        set(p0, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_COUNT_INTERNAL, (void*) &idc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        set(p0, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_SIZE_INTERNAL, (void*) &ids, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 */
 
         // Initialise error number.
@@ -670,83 +805,6 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
             }
 */
 
-            // Initialise socket address size.
-            if (an == AF_LOCAL) {
-
-                // CAUTION! The following line CANNOT be used:
-                // *as = sizeof(struct sockaddr_un);
-                // because the compiler brings the error
-                // "invalid application of 'sizeof' to incomplete type 'struct sockaddr_un'".
-                // The reason is the "sun_path" field of the "sockaddr_un" structure,
-                // which is a character array whose size is unknown at compilation time.
-                //
-                // The size of the "sun_path" character array is therefore set
-                // to the fixed size of 108.
-                // The number "108" is the limit as set by the gnu c library!
-                // Its documentation called it a "magic number" and does not
-                // know why this limit exists.
-                //
-                // With the known type "short int" of the "sun_family" field and
-                // a fixed size "108" of the "sun_path" field, the overall size of
-                // the "sockaddr_un" structure can be calculated as sum.
-                *as = sizeof(short int) + 108;
-
-            } else if (an == AF_INET) {
-
-                *as = sizeof(struct sockaddr_in);
-
-            } else if (an == AF_INET6) {
-
-                *as = sizeof(struct sockaddr_in6);
-            }
-
-/*??
-            // Initialise client sockets.
-            *csc = *NUMBER_0_INTEGER;
-            *css = *NUMBER_0_INTEGER;
-*/
-            // Initialise character buffer count, size.
-            // Its size is initialised with 2048,
-            // which should suffice for transferring standard data over tcp/ip.
-            *bc = *NUMBER_0_INTEGER;
-            *bs = 8192;
-/*??
-            // Initialise signal ids.
-            *idc = *NUMBER_0_INTEGER;
-            *ids = *NUMBER_0_INTEGER;
-*/
-
-            // Allocate socket address.
-            if (an == AF_LOCAL) {
-
-                la = (struct sockaddr_un*) malloc(*as);
-
-            } else if (an == AF_INET) {
-
-                ia4 = (struct sockaddr_in*) malloc(*as);
-
-            } else if (an == AF_INET6) {
-
-                ia6 = (struct sockaddr_in6*) malloc(*as);
-            }
-
-            // Allocate character buffer.
-            allocate((void*) &b, (void*) bs, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
-
-            // Initialise socket address.
-            if (an == AF_LOCAL) {
-
-                startup_socket_initialise_local_socket_address((void*) &la, p5, p6);
-
-            } else if (an == AF_INET) {
-
-                startup_socket_initialise_ipv4_socket_address((void*) &ia4, (void*) &ha4, p7);
-
-            } else if (an == AF_INET6) {
-
-                startup_socket_initialise_ipv6_socket_address((void*) &ia6, (void*) &ha6, p7);
-            }
-
             // Initialise error number.
             // It is a global variable/ function and other operations
             // may have set some value that is not wanted here.
@@ -773,46 +831,6 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
             }
 
             if (r >= *NUMBER_0_INTEGER) {
-
-                // Set server socket.
-                i = *base + *SOCKET_INTERNAL;
-                set(p0, (void*) &i, (void*) &s, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-                // Set socket address.
-                i = *base + *SOCKET_ADDRESS_INTERNAL;
-
-                if (an == AF_LOCAL) {
-
-                    set(p0, (void*) &i, (void*) &la, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-
-                } else if (an == AF_INET) {
-
-                    set(p0, (void*) &i, (void*) &ia4, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-
-                } else if (an == AF_INET6) {
-
-                    set(p0, (void*) &i, (void*) &ia6, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-                }
-
-                i = *base + *SOCKET_ADDRESS_SIZE_INTERNAL;
-                set(p0, (void*) &i, (void*) &as, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-/*??
-                // Set client sockets.
-                set(p0, (void*) TCP_CLIENT_SOCKETS_INTERNAL, (void*) &cs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-                set(p0, (void*) TCP_CLIENT_SOCKETS_COUNT_INTERNAL, (void*) &csc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-                set(p0, (void*) TCP_CLIENT_SOCKETS_SIZE_INTERNAL, (void*) &css, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    */
-                i = *base + *SOCKET_CHARACTER_BUFFER_INTERNAL;
-                set(p0, (void*) &i, (void*) &b, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-                i = *base + *SOCKET_CHARACTER_BUFFER_COUNT_INTERNAL;
-                set(p0, (void*) &i, (void*) &bc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-                i = *base + *SOCKET_CHARACTER_BUFFER_SIZE_INTERNAL;
-                set(p0, (void*) &i, (void*) &bs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-/*??
-                // Set signal ids.
-                set(p0, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_INTERNAL, (void*) &id, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-                set(p0, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_COUNT_INTERNAL, (void*) &idc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-                set(p0, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_SIZE_INTERNAL, (void*) &ids, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-*/
 
                 if (st == SOCK_STREAM) {
 

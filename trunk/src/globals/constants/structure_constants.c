@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.34 $ $Date: 2007-01-14 22:06:49 $ $Author: christian $
+ * @version $Revision: 1.35 $ $Date: 2007-01-26 00:38:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -314,6 +314,9 @@ static int* SOCKET_COMMANDS_COUNT_INTERNAL = NUMBER_8_INTEGER_ARRAY;
 static int* SOCKET_CHARACTER_BUFFER_INTERNAL = NUMBER_9_INTEGER_ARRAY;
 static int* SOCKET_CHARACTER_BUFFER_COUNT_INTERNAL = NUMBER_10_INTEGER_ARRAY;
 static int* SOCKET_CHARACTER_BUFFER_SIZE_INTERNAL = NUMBER_11_INTEGER_ARRAY;
+static int* SOCKET_COMMUNICATION_PARTNER_INTERNAL = NUMBER_12_INTEGER_ARRAY;
+static int* SOCKET_COMMUNICATION_PARTNER_ADDRESS_INTERNAL = NUMBER_13_INTEGER_ARRAY;
+static int* SOCKET_COMMUNICATION_PARTNER_ADDRESS_SIZE_INTERNAL = NUMBER_14_INTEGER_ARRAY;
 
 /** The tcp client sockets. */
 static int* TCP_CLIENT_SOCKETS_INTERNAL = NUMBER_800_INTEGER_ARRAY;

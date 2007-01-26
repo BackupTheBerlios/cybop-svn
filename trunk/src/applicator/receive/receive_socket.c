@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.14 $ $Date: 2007-01-18 22:51:04 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2007-01-26 00:38:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -1077,13 +1077,16 @@ void receive_socket_thread(void* p0, void* p1) {
         void** stc = &NULL_POINTER;
         // The socket mutex.
         pthread_mutex_t** mt = (pthread_mutex_t**) &NULL_POINTER;
-        // The server socket.
+        // The socket of this system.
         int** s = (int**) &NULL_POINTER;
-        // The socket address.
+        // The socket address of this system.
         void** a = &NULL_POINTER;
         void** as = &NULL_POINTER;
-        // The client socket.
-        int cs = *INVALID_VALUE;
+        // The communication partner socket.
+        int** ps = (int**) &NULL_POINTER;
+        // The communication partner socket address.
+        void** pa = &NULL_POINTER;
+        void** pas = &NULL_POINTER;
         // The character buffer.
         void** b = &NULL_POINTER;
         int** bc = (int**) &NULL_POINTER;
@@ -1118,14 +1121,22 @@ void receive_socket_thread(void* p0, void* p1) {
         // Get socket mutex.
         i = *base + *SOCKET_MUTEX_INTERNAL;
         get(p0, (void*) &i, (void*) &mt, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        // Get server socket.
+        // Get socket of this system.
         i = *base + *SOCKET_INTERNAL;
         get(p0, (void*) &i, (void*) &s, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        // Get socket address.
+        // Get socket address of this system.
         i = *base + *SOCKET_ADDRESS_INTERNAL;
         get(p0, (void*) &i, (void*) &a, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         i = *base + *SOCKET_ADDRESS_SIZE_INTERNAL;
         get(p0, (void*) &i, (void*) &as, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        // Get communication partner socket.
+        i = *base + *SOCKET_COMMUNICATION_PARTNER_INTERNAL;
+        get(p0, (void*) &i, (void*) &ps, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        // Get communication partner socket address.
+        i = *base + *SOCKET_COMMUNICATION_PARTNER_ADDRESS_INTERNAL;
+        get(p0, (void*) &i, (void*) &pa, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        i = *base + *SOCKET_COMMUNICATION_PARTNER_ADDRESS_SIZE_INTERNAL;
+        get(p0, (void*) &i, (void*) &pas, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         // Get character buffer.
         i = *base + *SOCKET_CHARACTER_BUFFER_INTERNAL;
         get(p0, (void*) &i, (void*) &b, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
@@ -1165,21 +1176,21 @@ void receive_socket_thread(void* p0, void* p1) {
 
                     // Accept client socket request and store client socket.
                     //
-                    // Accepting a connection does not make the client socket part of the
-                    // connection. Instead, it creates a new socket which becomes connected.
-                    // The normal return value of "accept" is the file descriptor for the new socket.
+                    // Accepting a connection does NOT make the original socket
+                    // part of the connection. Instead, it creates a new socket
+                    // which becomes connected. The normal return value of
+                    // "accept" is the file descriptor for the new socket.
                     //
-                    // After "accept", the original socket socket remains open and
+                    // After "accept", the original socket remains open and
                     // unconnected, and continues listening until it gets closed.
-                    // One can accept further connections with socket by calling
-                    // "accept" again -- therefore this "while" loop!
+                    // One can accept further connections with the original
+                    // socket by calling "accept" again -- therefore this loop!
                     //
-                    // The socket was set to "non-blocking" mode at startup,
-                    // which means that the "accept" procedure returns always,
-                    // even if no stream socket connection could be established.
-                    cs = accept(**s, (struct sockaddr*) *a, (socklen_t*) *as);
+                    // The address "pa" returns information about the name of the
+                    // communication partner socket that initiated the connection.
+                    **ps = accept(**s, (struct sockaddr*) *pa, (socklen_t*) *pas);
 
-                    if (cs >= *NUMBER_0_INTEGER) {
+                    if (**ps >= *NUMBER_0_INTEGER) {
 
                         // Initialise error number.
                         // It is a global variable/ function and other operations
@@ -1197,27 +1208,27 @@ void receive_socket_thread(void* p0, void* p1) {
                         // Not so here, as the socket was set to "non-blocking" mode at startup.
                         //
                         // CAUTION! A message MUST NOT be longer than the given buffer size!
-                        **bc = recv(cs, *b, **bs, *NUMBER_0_INTEGER);
+                        **bc = recv(**ps, *b, **bs, *NUMBER_0_INTEGER);
 
                         // Remember error number.
                         e = errno;
 
-    fprintf(stderr, "TEST: receive socket thread client socket: %i \n", cs);
+    fprintf(stderr, "TEST: receive socket thread client socket: %i \n", **ps);
     sleep(2);
 
 /*??
     char* test = "HTTP/1.1 200 OK\r\n\r\n\
         <html><head></head><body>Blu Bla</body></html>";
-    write(cs, test, strlen(test));
+    write(**ps, test, strlen(test));
     sleep(2);
 */
 
     fprintf(stderr, "TEST: send html data: %s\n", *b);
-    write(cs, *b, **bc);
+    write(**ps, *b, **bc);
     sleep(2);
 
                         // Close client socket.
-                        close(cs);
+                        close(**ps);
 
                     } else {
 
@@ -1345,7 +1356,7 @@ void receive_socket_thread(void* p0, void* p1) {
 
                 } else {
 
-                    close(*cs);
+                    close(**ps);
                 }
 */
 
@@ -1401,10 +1412,16 @@ void receive_socket_thread(void* p0, void* p1) {
             // parameter.
             // A simple "sleep" procedure is considered to be a more simple and
             // clean solution here.
-            sleep(1.0);
+            //
+            // CAUTION! This is ONLY necessary if using a non-blocking socket!
+            // sleep(1.0);
 
-            // Reset client socket.
-            cs = *INVALID_VALUE;
+            // Reset communication partner socket.
+            //
+            // CAUTION! This is NOT necessary, since in each new loop cycle,
+            // the "accept" function returns a new value.
+            // **ps = *INVALID_VALUE;
+
             // Reset character buffer.
             //
             // CAUTION! Do NOT deallocate the character buffer!

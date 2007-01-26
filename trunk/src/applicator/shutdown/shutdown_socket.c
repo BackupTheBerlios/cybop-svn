@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2007-01-14 22:06:48 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2007-01-26 00:38:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -51,75 +51,118 @@ void shutdown_socket(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (p1 != NULL_POINTER) {
 
-        int* b = (int*) p1;
+        int* base = (int*) p1;
 
         log_message_debug("Shutdown socket.");
 
         // The internal memory index.
         int i = *INVALID_VALUE;
-        // The server socket internal.
+        // The socket internal of this system.
         int** si = (int**) &NULL_POINTER;
 
-        // Get server socket internal.
-        i = *b + *SOCKET_INTERNAL;
+        // Get socket internal of this system.
+        i = *base + *SOCKET_INTERNAL;
         get(p0, (void*) &i, (void*) &si, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
         if (*si != NULL_POINTER) {
 
-            // Interrupt server socket service thread.
+            // Interrupt ALL socket service threads of this system.
             interrupt_socket();
 
-            // The server socket.
-            int** s = (int**) &NULL_POINTER;
-    /*??
-            // The client sockets.
-            void** cs = NULL_POINTER;
-            void** csc = NULL_POINTER;
-            void** css = NULL_POINTER;
-            // The activation flag.
-            void** af = NULL_POINTER;
+    fprintf(stderr, "TEST: after interrupt socket internal: %i \n", **si);
+
+/*??
             // The signal ids.
             void** id = NULL_POINTER;
             void** idc = NULL_POINTER;
             void** ids = NULL_POINTER;
-    */
+*/
+            // The character buffer used in the thread procedure.
+            void** b = &NULL_POINTER;
+            void** bc = &NULL_POINTER;
+            void** bs = &NULL_POINTER;
+            // The socket of this system.
+            int** s = (int**) &NULL_POINTER;
+            // The communication partner socket.
+            int** ps = (int**) &NULL_POINTER;
+            // The socket address of this system.
+            void** a = &NULL_POINTER;
+            // The communication partner socket address.
+            void** pa = &NULL_POINTER;
+            // The socket address size of this system.
+            void** as = &NULL_POINTER;
+            // The communication partner socket address size.
+            void** pas = &NULL_POINTER;
 
-            // Get server socket.
-            get(p0, (void*) SOCKET_INTERNAL, (void*) &s, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    /*??
-            // Get client sockets.
-            get(p0, (void*) SERVER_CLIENT_SOCKETS_INTERNAL, (void*) &cs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-            get(p0, (void*) SERVER_CLIENT_SOCKETS_COUNT_INTERNAL, (void*) &csc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-            get(p0, (void*) SERVER_CLIENT_SOCKETS_SIZE_INTERNAL, (void*) &css, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-            // Get interrupt flag.
-            get(p0, (void*) SOCKET_INTERRUPT_INTERNAL, (void*) &af, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+/*??
             // Get signal ids.
             get(p0, (void*) SERVER_CLIENT_SOCKET_SIGNAL_IDS_INTERNAL, (void*) &id, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
             get(p0, (void*) SERVER_CLIENT_SOCKET_SIGNAL_IDS_COUNT_INTERNAL, (void*) &idc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
             get(p0, (void*) SERVER_CLIENT_SOCKET_SIGNAL_IDS_SIZE_INTERNAL, (void*) &ids, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    */
+*/
+            // Get character buffer.
+            i = *base + *SOCKET_CHARACTER_BUFFER_INTERNAL;
+            get(p0, (void*) &i, (void*) &b, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            i = *base + *SOCKET_CHARACTER_BUFFER_COUNT_INTERNAL;
+            get(p0, (void*) &i, (void*) &bc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            i = *base + *SOCKET_CHARACTER_BUFFER_SIZE_INTERNAL;
+            get(p0, (void*) &i, (void*) &bs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            // Get socket of this system.
+            i = *base + *SOCKET_INTERNAL;
+            get(p0, (void*) &i, (void*) &s, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            // Get communication partner socket.
+            i = *base + *SOCKET_COMMUNICATION_PARTNER_INTERNAL;
+            get(p0, (void*) &i, (void*) &ps, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            // Get socket address of this system.
+            i = *base + *SOCKET_ADDRESS_INTERNAL;
+            get(p0, (void*) &i, (void*) &a, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            // Get communication partner socket address.
+            i = *base + *SOCKET_COMMUNICATION_PARTNER_ADDRESS_INTERNAL;
+            get(p0, (void*) &i, (void*) &pa, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            // Get socket address size of this system.
+            i = *base + *SOCKET_ADDRESS_SIZE_INTERNAL;
+            get(p0, (void*) &i, (void*) &as, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            // Get communication partner socket address size.
+            i = *base + *SOCKET_COMMUNICATION_PARTNER_ADDRESS_SIZE_INTERNAL;
+            get(p0, (void*) &i, (void*) &pas, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-            // Close server socket.
+    fprintf(stderr, "TEST: after get socket: %i \n", **s);
+
+            // Close socket of this system.
             close(**s);
+            // Close communication partner socket.
+//??            close(**ps);
 
-            // Destroy server socket.
-            deallocate(s, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    /*??
-            // Destroy client sockets.
-            deallocate_array((void*) cs, (void*) css, (void*) INTEGER_ARRAY);
-            deallocate(csc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-            deallocate(css, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-            // Destroy activation flag.
-            deallocate(af, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    fprintf(stderr, "TEST: after close socket: %i \n", **s);
+
+/*??
             // Destroy signal ids.
             deallocate_array((void*) id, (void*) ids, (void*) INTEGER_ARRAY);
             deallocate(idc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
             deallocate(ids, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    */
+*/
+            // Deallocate character buffer.
+            deallocate((void*) b, *bs, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+            deallocate((void*) bc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+            deallocate((void*) bs, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+            // Deallocate socket of this system.
+            deallocate((void*) s, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+            // Deallocate communication partner socket.
+            deallocate((void*) ps, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+            // Deallocate socket address of this system.
+            free(*a);
+            // Deallocate communication partner socket address.
+            free(*pa);
+            // Deallocate socket address size of this system.
+            deallocate((void*) as, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+            // Deallocate communication partner socket address size.
+            deallocate((void*) pas, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+
+    fprintf(stderr, "TEST: after deallocate socket: %i \n", 10);
 
         } else {
 
-            log_message_debug("WARNING: Could not shutdown socket. There is no server socket running.");
+            log_message_debug("WARNING: Could not shutdown socket. There is no socket of this system running.");
         }
 
     } else {

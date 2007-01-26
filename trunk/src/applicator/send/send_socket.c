@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2007-01-14 22:06:48 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2007-01-26 00:38:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -166,7 +166,7 @@ void send_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, voi
         // See further below!
         s = socket(sn, st, *NUMBER_0_INTEGER);
 
-    fprintf(stderr, "TEST: send to server socket: %i \n", s);
+    fprintf(stderr, "TEST: send to communication partner socket: %i \n", s);
 
         if (s >= *NUMBER_0_INTEGER) {
 

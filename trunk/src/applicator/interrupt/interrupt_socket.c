@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2007-01-14 22:06:48 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2007-01-26 00:38:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -86,8 +86,12 @@ void interrupt_socket() {
 
     if (*CYBOI_SERVICE_THREAD != *INVALID_VALUE) {
 
+    fprintf(stderr, "TEST: interrupt socket 0 thread: %i \n", *CYBOI_SERVICE_THREAD);
+
         // Set thread interrupt flag for signal handler.
         *CYBOI_SERVICE_THREAD_INTERRUPT = *NUMBER_1_INTEGER;
+
+    fprintf(stderr, "TEST: interrupt socket 1 thread irq flag: %i \n", *CYBOI_SERVICE_THREAD_INTERRUPT);
 
         // Send signal to thread.
         //
@@ -102,11 +106,17 @@ void interrupt_socket() {
         // controller/manager/system_signal_handler_manager.c
         pthread_kill(*CYBOI_SERVICE_THREAD, SIGUSR1);
 
+    fprintf(stderr, "TEST: interrupt socket 2 thread irq flag: %i \n", *CYBOI_SERVICE_THREAD_INTERRUPT);
+
         // Wait for thread to finish.
         pthread_join(*CYBOI_SERVICE_THREAD, NULL_POINTER);
 
+    fprintf(stderr, "TEST: interrupt socket 3 thread irq flag: %i \n", *CYBOI_SERVICE_THREAD_INTERRUPT);
+
         // Reset thread.
         *CYBOI_SERVICE_THREAD = *INVALID_VALUE;
+
+    fprintf(stderr, "TEST: interrupt socket 4 thread irq flag: %i \n", *CYBOI_SERVICE_THREAD_INTERRUPT);
 
         // Reset thread interrupt flag for signal handler.
         *CYBOI_SERVICE_THREAD_INTERRUPT = *NUMBER_0_INTEGER;
