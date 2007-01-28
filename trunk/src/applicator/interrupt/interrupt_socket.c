@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2007-01-26 00:38:17 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2007-01-28 01:22:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -52,6 +52,7 @@ void interrupt_socket() {
 
     log_message_debug("Interrupt socket service.");
 
+/*??
     if (*WWW_SERVICE_THREAD != *INVALID_VALUE) {
 
         // Set thread interrupt flag for signal handler.
@@ -83,6 +84,7 @@ void interrupt_socket() {
 
         log_message_debug("Warning: Could not interrupt socket. The www service thread is invalid.");
     }
+*/
 
     if (*CYBOI_SERVICE_THREAD != *INVALID_VALUE) {
 

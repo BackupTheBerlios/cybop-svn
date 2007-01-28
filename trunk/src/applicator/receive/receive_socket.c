@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.15 $ $Date: 2007-01-26 00:38:17 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2007-01-28 01:22:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -1082,7 +1082,7 @@ void receive_socket_thread(void* p0, void* p1) {
         // The socket address of this system.
         void** a = &NULL_POINTER;
         void** as = &NULL_POINTER;
-        // The communication partner socket.
+        // The partner-connected socket of this system.
         int** ps = (int**) &NULL_POINTER;
         // The communication partner socket address.
         void** pa = &NULL_POINTER;
@@ -1221,14 +1221,14 @@ void receive_socket_thread(void* p0, void* p1) {
         <html><head></head><body>Blu Bla</body></html>";
     write(**ps, test, strlen(test));
     sleep(2);
-*/
 
     fprintf(stderr, "TEST: send html data: %s\n", *b);
     write(**ps, *b, **bc);
     sleep(2);
+*/
 
                         // Close client socket.
-                        close(**ps);
+//??                        close(**ps);
 
                     } else {
 
@@ -1363,6 +1363,13 @@ void receive_socket_thread(void* p0, void* p1) {
                 // Receive socket signal.
                 receive_socket_signal(p0, name, (void*) &namec, p1);
 
+    fprintf(stderr, "TEST: receive socket after signal: %i \n", i);
+    //?? CAUTION! This sleep procedure is temporarily necessary for testing!
+    //?? Otherwise, the loop runs into the next cycle and the socket mutex
+    //?? gets locked, so that the "send_socket" procedure in the main thread
+    //?? cannot send its message.
+    sleep(10);
+
             } else if (**bc = *NUMBER_0_INTEGER) {
 
                 log_message_debug("Error: Could not receive socket thread. No data could be received.");
@@ -1431,12 +1438,18 @@ void receive_socket_thread(void* p0, void* p1) {
             // CAUTION! Do NOT reset the maximum buffer size!
             // It was allocated and initialised at socket startup
             // and must remain unchanged.
+    fprintf(stderr, "TEST: receive socket loop 0: %i \n", *base);
             memset(*b, 0, **bs);
+    fprintf(stderr, "TEST: receive socket loop 1: %i \n", *base);
             **bc = *NUMBER_0_INTEGER;
+    fprintf(stderr, "TEST: receive socket loop 2: %i \n", *base);
             // Reset comparison result.
             r = *NUMBER_0_INTEGER;
+    fprintf(stderr, "TEST: receive socket loop 3: %i \n", *base);
             // Reset error number.
             e = *NUMBER_0_INTEGER;
+
+    fprintf(stderr, "TEST: receive socket loop end 4: %i \n", *base);
         }
 
     } else {

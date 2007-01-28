@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.22 $ $Date: 2007-01-14 22:06:49 $ $Author: christian $
+ * @version $Revision: 1.23 $ $Date: 2007-01-28 01:22:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -357,17 +357,27 @@ static char* CYBOI_SERVICE_MODEL = CYBOI_SERVICE_MODEL_ARRAY;
 static int* CYBOI_SERVICE_MODEL_COUNT = NUMBER_5_INTEGER_ARRAY;
 
 //
-// Local namespace models.
+// Communication mode models.
+//
+
+/** The client communication mode model. */
+static char CLIENT_COMMUNICATION_MODE_MODEL_ARRAY[] = {'c', 'l', 'i', 'e', 'n', 't'};
+static char* CLIENT_COMMUNICATION_MODE_MODEL = CLIENT_COMMUNICATION_MODE_MODEL_ARRAY;
+static int* CLIENT_COMMUNICATION_MODE_MODEL_COUNT = NUMBER_6_INTEGER_ARRAY;
+
+/** The server communication mode model. */
+static char SERVER_COMMUNICATION_MODE_MODEL_ARRAY[] = {'s', 'e', 'r', 'v', 'e', 'r'};
+static char* SERVER_COMMUNICATION_MODE_MODEL = SERVER_COMMUNICATION_MODE_MODEL_ARRAY;
+static int* SERVER_COMMUNICATION_MODE_MODEL_COUNT = NUMBER_6_INTEGER_ARRAY;
+
+//
+// Namespace models.
 //
 
 /** The local namespace model. */
 static char LOCAL_NAMESPACE_MODEL_ARRAY[] = {'l', 'o', 'c', 'a', 'l'};
 static char* LOCAL_NAMESPACE_MODEL = LOCAL_NAMESPACE_MODEL_ARRAY;
 static int* LOCAL_NAMESPACE_MODEL_COUNT = NUMBER_5_INTEGER_ARRAY;
-
-//
-// Internet namespace models.
-//
 
 /** The internet protocol version 4 (ipv4) namespace model. */
 static char INET_NAMESPACE_MODEL_ARRAY[] = {'i', 'p', 'v', '4'};
@@ -378,10 +388,6 @@ static int* INET_NAMESPACE_MODEL_COUNT = NUMBER_4_INTEGER_ARRAY;
 static char INET6_NAMESPACE_MODEL_ARRAY[] = {'i', 'p', 'v', '6'};
 static char* INET6_NAMESPACE_MODEL = INET6_NAMESPACE_MODEL_ARRAY;
 static int* INET6_NAMESPACE_MODEL_COUNT = NUMBER_4_INTEGER_ARRAY;
-
-//
-// Other namespace models.
-//
 
 /** The xerox network software protocols namespace model. */
 static char NS_NAMESPACE_MODEL_ARRAY[] = {'n', 's'};

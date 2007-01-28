@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2007-01-26 00:38:17 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2007-01-28 01:22:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -37,7 +37,10 @@
 #include "../../globals/logger/logger.c"
 
 /**
- * Sends a message via socket.
+ * Sends a message via socket in client mode.
+ *
+ * Client mode means that this system acts as client asking a server system,
+ * which is its (local or remote) communication partner.
  *
  * @param p0 the internal memory
  * @param p1 the namespace model
@@ -57,14 +60,14 @@
  * @param p15 the knowledge memory
  * @param p16 the knowledge memory count
  */
-void send_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7,
+void send_socket_client_mode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7,
     void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14, void* p15, void* p16) {
 
     if (p14 != NULL_POINTER) {
 
         int* base = (int*) p14;
 
-        log_message_debug("Information: Send message via socket.");
+        log_message_debug("Information: Send message via socket in client mode.");
 
         // The socket namespace.
         int sn = *INVALID_VALUE;
@@ -299,16 +302,16 @@ void send_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, voi
                 // Send message via socket.
                 if (an == AF_LOCAL) {
 
-                    write_socket((void*) &la, NULL_POINTER, (void*) &as, b, (void*) &bc, (void*) &s, (void*) &st);
+                    write_socket((void*) &la, NULL_POINTER, (void*) &as, b, (void*) &bc, (void*) &s, p17, p18, (void*) &st);
 
                 } else if (an == AF_INET) {
 
-                    write_socket((void*) &ia4, NULL_POINTER, (void*) &as, p10, p11, (void*) &s, (void*) &st);
-//??                    write_socket((void*) &ia4, NULL_POINTER, (void*) &as, b, (void*) &bc, (void*) &s, (void*) &st);
+                    write_socket((void*) &ia4, NULL_POINTER, (void*) &as, p10, p11, (void*) &s, p17, p18, (void*) &st);
+//??                    write_socket((void*) &ia4, NULL_POINTER, (void*) &as, b, (void*) &bc, (void*) &s, p17, p18, (void*) &st);
 
                 } else if (an == AF_INET6) {
 
-                    write_socket((void*) &ia6, NULL_POINTER, (void*) &as, b, (void*) &bc, (void*) &s, (void*) &st);
+                    write_socket((void*) &ia6, NULL_POINTER, (void*) &as, b, (void*) &bc, (void*) &s, p17, p18, (void*) &st);
                 }
 
                 // Unlock socket mutex.
@@ -417,6 +420,149 @@ void send_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, voi
     } else {
 
         log_message_debug("Error: Could not send message via socket. The base internal is null.");
+    }
+}
+
+/**
+ * Sends a message via socket in server mode.
+ *
+ * Server mode means that this system acts as server replying to a client system
+ * which is its (local or remote) communication partner.
+ *
+ * @param p0 the internal memory
+ * @param p1 the namespace model
+ * @param p2 the namespace model count
+ * @param p3 the style model
+ * @param p4 the style model count
+ * @param p5 the receiver socket file name or host address model, depending on the socket type (local, ipv4, ipv6)
+ * @param p6 the receiver socket file name or host address model count
+ * @param p7 the port model
+ * @param p8 the message abstraction
+ * @param p9 the message abstraction count
+ * @param p10 the message model
+ * @param p11 the message model count
+ * @param p12 the message details
+ * @param p13 the message details count
+ * @param p14 the base internal
+ * @param p15 the knowledge memory
+ * @param p16 the knowledge memory count
+ */
+void send_socket_server_mode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7,
+    void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14, void* p15, void* p16) {
+
+    if (p14 != NULL_POINTER) {
+
+        int* base = (int*) p14;
+
+        log_message_debug("Information: Send message via socket in server mode.");
+
+        // The internal memory index.
+        int i = *INVALID_VALUE;
+        // The socket mutex.
+        pthread_mutex_t** mt = (pthread_mutex_t**) &NULL_POINTER;
+        // The communication partner socket.
+        int** ps = (int**) &NULL_POINTER;
+
+        // Get socket mutex.
+        i = *base + *SOCKET_MUTEX_INTERNAL;
+        get(p0, (void*) &i, (void*) &mt, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        // Get communication partner socket.
+        i = *base + *SOCKET_COMMUNICATION_PARTNER_INTERNAL;
+        get(p0, (void*) &i, (void*) &ps, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
+        // Lock socket mutex.
+        pthread_mutex_lock(*mt);
+
+/*??
+        char* test = "HTTP/1.1 200 OK\r\n\r\n\
+            <html><head></head><body>Blu Bla direct</body></html>";
+        write(**ps, test, strlen(test));
+        sleep(2);
+*/
+
+/*??
+        fprintf(stderr, "TEST: send html data: %s\n", (char*) p10);
+        write(**ps, (char*) p10, *((int*) p11));
+        sleep(2);
+*/
+
+                // Send message via socket.
+                if (an == AF_LOCAL) {
+
+                    write_socket((void*) &la, NULL_POINTER, (void*) &as, b, (void*) &bc, (void*) &s, p17, p18, (void*) &st);
+
+                } else if (an == AF_INET) {
+
+                    write_socket((void*) &ia4, NULL_POINTER, (void*) &as, p10, p11, (void*) &s, p17, p18, (void*) &st);
+                    //?? write_socket((void*) &ia4, NULL_POINTER, (void*) &as, b, (void*) &bc, (void*) &s, p17, p18, (void*) &st);
+
+                } else if (an == AF_INET6) {
+
+                    write_socket((void*) &ia6, NULL_POINTER, (void*) &as, b, (void*) &bc, (void*) &s, p17, p18, (void*) &st);
+                }
+
+        // Close client socket.
+        close(**ps);
+
+        // Unlock socket mutex.
+        pthread_mutex_unlock(*mt);
+
+    } else {
+
+        log_message_debug("Error: Could not send message via socket in server mode. The base internal is null.");
+    }
+}
+
+/**
+ * Sends a message via socket.
+ *
+ * @param p0 the internal memory
+ * @param p1 the namespace model
+ * @param p2 the namespace model count
+ * @param p3 the style model
+ * @param p4 the style model count
+ * @param p5 the receiver socket file name or host address model, depending on the socket type (local, ipv4, ipv6)
+ * @param p6 the receiver socket file name or host address model count
+ * @param p7 the port model
+ * @param p8 the message abstraction
+ * @param p9 the message abstraction count
+ * @param p10 the message model
+ * @param p11 the message model count
+ * @param p12 the message details
+ * @param p13 the message details count
+ * @param p14 the base internal
+ * @param p15 the knowledge memory
+ * @param p16 the knowledge memory count
+ * @param p17 the communication mode
+ * @param p18 the communication mode count
+ */
+void send_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7,
+    void* p8, void* p9, void* p10, void* p11, void* p12, void* p13,
+    void* p14, void* p15, void* p16, void* p17, void* p18) {
+
+    log_message_debug("Information: Send message via socket.");
+
+    // The comparison result.
+    int r = 0;
+
+    if (r == 0) {
+
+        compare_arrays(p17, p18, (void*) CLIENT_COMMUNICATION_MODE_MODEL, (void*) CLIENT_COMMUNICATION_MODE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != 0) {
+
+            send_socket_client_mode(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17, p18);
+        }
+    }
+
+    if (r == 0) {
+
+        compare_arrays(p17, p18, (void*) SERVER_COMMUNICATION_MODE_MODEL, (void*) SERVER_COMMUNICATION_MODE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != 0) {
+
+            send_socket_server_mode(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17, p18);
+        }
     }
 }
 

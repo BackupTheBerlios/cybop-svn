@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.41 $ $Date: 2007-01-14 22:06:47 $ $Author: christian $
+ * @version $Revision: 1.42 $ $Date: 2007-01-28 01:22:28 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -91,6 +91,19 @@ void send_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
     void** cd = &NULL_POINTER;
     void** cdc = &NULL_POINTER;
     void** cds = &NULL_POINTER;
+
+    // The communication mode abstraction.
+    void** moa = &NULL_POINTER;
+    void** moac = &NULL_POINTER;
+    void** moas = &NULL_POINTER;
+    // The communication mode model.
+    void** mom = &NULL_POINTER;
+    void** momc = &NULL_POINTER;
+    void** moms = &NULL_POINTER;
+    // The communication mode details.
+    void** mod = &NULL_POINTER;
+    void** modc = &NULL_POINTER;
+    void** mods = &NULL_POINTER;
 
     // The socket namespace abstraction.
     void** na = &NULL_POINTER;
@@ -194,6 +207,14 @@ void send_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
         (void*) &ca, (void*) &cac, (void*) &cas,
         (void*) &cm, (void*) &cmc, (void*) &cms,
         (void*) &cd, (void*) &cdc, (void*) &cds,
+        p3, p4);
+
+    // Get communication mode.
+    get_universal_compound_element_by_name(p0, p1,
+        (void*) SEND_COMMUNICATION_MODE_NAME, (void*) SEND_COMMUNICATION_MODE_NAME_COUNT,
+        (void*) &moa, (void*) &moac, (void*) &moas,
+        (void*) &mom, (void*) &momc, (void*) &moms,
+        (void*) &mod, (void*) &modc, (void*) &mods,
         p3, p4);
 
     // Get socket namespace.
@@ -301,7 +322,7 @@ void send_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
 
         if (r != 0) {
 
-            send_socket(p2, *nm, *nmc, *stm, *stmc, *rm, *rmc, (void*) WWW_PORT, *ma, *mac, *mm, *mmc, *md, *mdc, (void*) WWW_BASE_INTERNAL, p3, p4);
+            send_socket(p2, *nm, *nmc, *stm, *stmc, *rm, *rmc, (void*) WWW_PORT, *ma, *mac, *mm, *mmc, *md, *mdc, (void*) WWW_BASE_INTERNAL, p3, p4, *mom, *momc);
         }
     }
 
@@ -311,7 +332,7 @@ void send_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
 
         if (r != 0) {
 
-            send_socket(p2, *nm, *nmc, *stm, *stmc, *rm, *rmc, (void*) CYBOI_PORT, *ma, *mac, *mm, *mmc, *md, *mdc, (void*) CYBOI_BASE_INTERNAL, p3, p4);
+            send_socket(p2, *nm, *nmc, *stm, *stmc, *rm, *rmc, (void*) CYBOI_PORT, *ma, *mac, *mm, *mmc, *md, *mdc, (void*) CYBOI_BASE_INTERNAL, p3, p4, *mom, *momc);
         }
     }
 
