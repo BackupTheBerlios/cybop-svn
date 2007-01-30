@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.18 $ $Date: 2007-01-14 22:06:48 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2007-01-30 01:11:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -203,6 +203,11 @@ static int* BMP_ABSTRACTION_COUNT = NUMBER_3_INTEGER_ARRAY;
 // Text abstractions.
 //
 
+/** The xhtml abstraction. */
+static char XHTML_ABSTRACTION_ARRAY[] = {'x', 'h', 't', 'm', 'l'};
+static char* XHTML_ABSTRACTION = XHTML_ABSTRACTION_ARRAY;
+static int* XHTML_ABSTRACTION_COUNT = NUMBER_5_INTEGER_ARRAY;
+
 /** The sgml abstraction. */
 static char SGML_ABSTRACTION_ARRAY[] = {'s', 'g', 'm', 'l'};
 static char* SGML_ABSTRACTION = SGML_ABSTRACTION_ARRAY;
@@ -213,11 +218,6 @@ static char XML_ABSTRACTION_ARRAY[] = {'x', 'm', 'l'};
 static char* XML_ABSTRACTION = XML_ABSTRACTION_ARRAY;
 static int* XML_ABSTRACTION_COUNT = NUMBER_3_INTEGER_ARRAY;
 
-/** The html abstraction. */
-static char HTML_ABSTRACTION_ARRAY[] = {'h', 't', 'm', 'l'};
-static char* HTML_ABSTRACTION = HTML_ABSTRACTION_ARRAY;
-static int* HTML_ABSTRACTION_COUNT = NUMBER_4_INTEGER_ARRAY;
-
 /** The rtf abstraction. */
 static char RTF_ABSTRACTION_ARRAY[] = {'r', 't', 'f'};
 static char* RTF_ABSTRACTION = RTF_ABSTRACTION_ARRAY;
@@ -227,6 +227,11 @@ static int* RTF_ABSTRACTION_COUNT = NUMBER_3_INTEGER_ARRAY;
 static char TEX_ABSTRACTION_ARRAY[] = {'t', 'e', 'x'};
 static char* TEX_ABSTRACTION = TEX_ABSTRACTION_ARRAY;
 static int* TEX_ABSTRACTION_COUNT = NUMBER_3_INTEGER_ARRAY;
+
+/** The latex abstraction. */
+static char LATEX_ABSTRACTION_ARRAY[] = {'l', 'a', 't', 'e', 'x'};
+static char* LATEX_ABSTRACTION = LATEX_ABSTRACTION_ARRAY;
+static int* LATEX_ABSTRACTION_COUNT = NUMBER_5_INTEGER_ARRAY;
 
 /** The healthcare exchange protocol abstraction. */
 static char HXP_ABSTRACTION_ARRAY[] = {'h', 'x', 'p'};
@@ -264,11 +269,6 @@ static int* ZIP_ABSTRACTION_COUNT = NUMBER_3_INTEGER_ARRAY;
 //
 // Application abstractions.
 //
-
-/** The latex abstraction. */
-static char LATEX_ABSTRACTION_ARRAY[] = {'l', 'a', 't', 'e', 'x'};
-static char* LATEX_ABSTRACTION = LATEX_ABSTRACTION_ARRAY;
-static int* LATEX_ABSTRACTION_COUNT = NUMBER_5_INTEGER_ARRAY;
 
 /** The koffice kword abstraction. */
 static char KWD_ABSTRACTION_ARRAY[] = {'k', 'w', 'd'};

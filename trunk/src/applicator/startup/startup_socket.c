@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.15 $ $Date: 2007-01-26 00:38:17 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2007-01-30 01:11:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -281,12 +281,12 @@ void startup_socket_get_host_address(void* p0, void* p1, void* p2, void* p3) {
 }
 
 /**
-* Initialises the local socket address.
-*
-* @param p0 the local socket address (Hand over as reference!)
-* @param p1 the file name
-* @param p2 the file name count
-*/
+ * Initialises the local socket address.
+ *
+ * @param p0 the local socket address (Hand over as reference!)
+ * @param p1 the file name
+ * @param p2 the file name count
+ */
 void startup_socket_initialise_local_socket_address(void* p0, void* p1, void* p2) {
 
     if (p2 != NULL_POINTER) {
@@ -380,12 +380,12 @@ void startup_socket_initialise_local_socket_address(void* p0, void* p1, void* p2
 }
 
 /**
-* Initialises the ipv4 socket address.
-*
-* @param p0 the ipv4 socket address (Hand over as reference!)
-* @param p1 the host address (in network byte order)
-* @param p2 the socket port (in host byte order)
-*/
+ * Initialises the ipv4 socket address.
+ *
+ * @param p0 the ipv4 socket address (Hand over as reference!)
+ * @param p1 the host address (in network byte order)
+ * @param p2 the socket port (in host byte order)
+ */
 void startup_socket_initialise_ipv4_socket_address(void* p0, void* p1, void* p2) {
 
     if (p2 != NULL_POINTER) {
@@ -442,12 +442,12 @@ void startup_socket_initialise_ipv4_socket_address(void* p0, void* p1, void* p2)
 }
 
 /**
-* Initialises the ipv6 socket address.
-*
-* @param p0 the ipv6 socket address (Hand over as reference!)
-* @param p1 the host address (in network byte order)
-* @param p2 the socket port (in host byte order)
-*/
+ * Initialises the ipv6 socket address.
+ *
+ * @param p0 the ipv6 socket address (Hand over as reference!)
+ * @param p1 the host address (in network byte order)
+ * @param p2 the socket port (in host byte order)
+ */
 void startup_socket_initialise_ipv6_socket_address(void* p0, void* p1, void* p2) {
 
     if (p2 != NULL_POINTER) {
@@ -510,21 +510,21 @@ void startup_socket_initialise_ipv6_socket_address(void* p0, void* p1, void* p2)
 }
 
 /**
-* Starts up socket.
-*
-* @param p0 the internal memory
-* @param p1 the namespace model
-* @param p2 the namespace model count
-* @param p3 the style model
-* @param p4 the style model count
-* @param p5 the socket file name or host address model, depending on the socket type (local, ipv4, ipv6)
-* @param p6 the socket file name or host address model count
-* @param p7 the port model
-* @param p8 the base internal
-* @param p9 the knowledge memory
-* @param p10 the knowledge memory count
-* @param p11 the knowledge memory size
-*/
+ * Starts up socket.
+ *
+ * @param p0 the internal memory
+ * @param p1 the namespace model
+ * @param p2 the namespace model count
+ * @param p3 the style model
+ * @param p4 the style model count
+ * @param p5 the socket file name or host address model, depending on the socket type (local, ipv4, ipv6)
+ * @param p6 the socket file name or host address model count
+ * @param p7 the port model
+ * @param p8 the base internal
+ * @param p9 the knowledge memory
+ * @param p10 the knowledge memory count
+ * @param p11 the knowledge memory size
+ */
 void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
     void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11) {
 

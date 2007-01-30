@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.16 $ $Date: 2007-01-28 01:22:29 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2007-01-30 01:11:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -1214,21 +1214,11 @@ void receive_socket_thread(void* p0, void* p1) {
                         e = errno;
 
     fprintf(stderr, "TEST: receive socket thread client socket: %i \n", **ps);
-    sleep(2);
 
-/*??
-    char* test = "HTTP/1.1 200 OK\r\n\r\n\
-        <html><head></head><body>Blu Bla</body></html>";
-    write(**ps, test, strlen(test));
-    sleep(2);
-
-    fprintf(stderr, "TEST: send html data: %s\n", *b);
-    write(**ps, *b, **bc);
-    sleep(2);
-*/
-
-                        // Close client socket.
-//??                        close(**ps);
+                        // CAUTION! Do NOT close client socket here!
+                        // It is stored in the internal memory and only closed in
+                        // the "send_socket" operation, when replying to the client.
+                        // close(**ps);
 
                     } else {
 

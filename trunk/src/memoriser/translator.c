@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.13 $ $Date: 2007-01-14 22:06:49 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2007-01-30 01:11:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -32,7 +32,6 @@
 #include "../globals/variables/variables.c"
 #include "../memoriser/array.c"
 #include "../memoriser/translator/cybol_translator.c"
-#include "../memoriser/translator/html_translator.c"
 
 /**
  * Decodes the document model according to the given document type
@@ -58,16 +57,6 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
         if (r != 0) {
 
             decode_cybol(p0, p1, p2, p3, p4);
-        }
-    }
-
-    if (r == 0) {
-
-        compare_arrays(p5, p6, (void*) HTML_ABSTRACTION, (void*) HTML_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != 0) {
-
-//??            decode_html(p0, p1, p2, p3, p4);
         }
     }
 
@@ -122,16 +111,6 @@ void encode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
     if (r == 0) {
 
-        compare_arrays(p5, p6, (void*) HTML_ABSTRACTION, (void*) HTML_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != 0) {
-
-//??            encode_html(p0, p1, p2, p3, p4);
-        }
-    }
-
-    if (r == 0) {
-
         compare_arrays(p5, p6, (void*) SXW_ABSTRACTION, (void*) SXW_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
@@ -147,51 +126,6 @@ void encode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
         if (r != 0) {
 
 //??            encode_hxp(p0, p1, p2, p3, p4);
-        }
-    }
-
-}
-
-/**
- * Encodes a cyboi model according to the given document type
- * and creates a document model from it.
- *
- * @param dest the destination (Hand over as reference!)
- * @param dest_count the destination count
- * @param dest_size the destination size
- * @param source_abstr the source abstraction
- * @param source_abstr_count the source abstraction count
- * @param source_model the source model
- * @param source_model_count the source model count
- * @param source_detail the source detail
- * @param source_detail_count the source detail count
- * @param type the type
- * @param type_count the type count
- * @param know the knowledege memeory
- * @param know_count the knowledege memeory count
- * @param know_size the knowledege memeory size
- */
-void encode_model(void** dest, int* dest_count, int* dest_size,
-                  void* source_abstr, int* source_abstr_count,
-                  void* source_model, int* source_model_count,
-                  void* source_detail, int* source_detail_count,
-                  void* type, int* type_count,
-                  void* know, int* know_count) {
-
-    // The comparison result.
-    int r = 0;
-
-    if (r == 0) {
-
-        compare_arrays(type, type_count, (void*) HTML_ABSTRACTION, (void*) HTML_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != 0) {
-
-            encode_html(dest, dest_count, dest_size,
-                source_abstr, source_abstr_count,
-                source_model, source_model_count,
-                source_detail, source_detail_count,
-                know, know_count);
         }
     }
 }

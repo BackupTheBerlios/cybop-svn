@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.42 $ $Date: 2007-01-28 01:22:28 $ $Author: christian $
+ * @version $Revision: 1.43 $ $Date: 2007-01-30 01:11:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -322,7 +322,7 @@ void send_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
 
         if (r != 0) {
 
-            send_socket(p2, *nm, *nmc, *stm, *stmc, *rm, *rmc, (void*) WWW_PORT, *ma, *mac, *mm, *mmc, *md, *mdc, (void*) WWW_BASE_INTERNAL, p3, p4, *mom, *momc);
+            send_socket(p2, (void*) WWW_BASE_INTERNAL, *rm, *rmc, (void*) WWW_PORT, *nm, *nmc, *stm, *stmc, *mom, *momc, *ma, *mac, *mm, *mmc, *md, *mdc, p3, p4);
         }
     }
 
@@ -332,7 +332,7 @@ void send_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
 
         if (r != 0) {
 
-            send_socket(p2, *nm, *nmc, *stm, *stmc, *rm, *rmc, (void*) CYBOI_PORT, *ma, *mac, *mm, *mmc, *md, *mdc, (void*) CYBOI_BASE_INTERNAL, p3, p4, *mom, *momc);
+            send_socket(p2, (void*) CYBOI_BASE_INTERNAL, *rm, *rmc, (void*) CYBOI_PORT, *nm, *nmc, *stm, *stmc, *mom, *momc, *ma, *mac, *mm, *mmc, *md, *mdc, p3, p4);
         }
     }
 

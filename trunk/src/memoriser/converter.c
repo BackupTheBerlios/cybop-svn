@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.16 $ $Date: 2006-06-21 23:18:38 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2007-01-30 01:11:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -39,6 +39,7 @@
 #include "../memoriser/converter/linux_console_converter.c"
 #include "../memoriser/converter/time_converter.c"
 #include "../memoriser/converter/x_window_system_converter.c"
+#include "../memoriser/converter/xhtml_converter.c"
 #include "../memoriser/converter/xml_converter.c"
 
 /**
@@ -170,16 +171,6 @@ void parse(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6)
 
     if (r == 0) {
 
-        compare_arrays(p5, p6, (void*) LATEX_ABSTRACTION, (void*) LATEX_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != 0) {
-
-            parse_latex(p0, p1, p2, p3, p4);
-        }
-    }
-
-    if (r == 0) {
-
         compare_arrays(p5, p6, (void*) LINUX_CONSOLE_MODEL, (void*) LINUX_CONSOLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
@@ -195,6 +186,26 @@ void parse(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6)
         if (r != 0) {
 
             parse_x_window_system(p0, p1, p2, p3, p4);
+        }
+    }
+
+    if (r == 0) {
+
+        compare_arrays(p5, p6, (void*) XHTML_ABSTRACTION, (void*) XHTML_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != 0) {
+
+            parse_xhtml(p0, p1, p2, p3, p4);
+        }
+    }
+
+    if (r == 0) {
+
+        compare_arrays(p5, p6, (void*) LATEX_ABSTRACTION, (void*) LATEX_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != 0) {
+
+            parse_latex(p0, p1, p2, p3, p4);
         }
     }
 
@@ -337,16 +348,6 @@ void serialise(void* p0, void* p1, void* p2, void* p3, void* p4,
 
     if (r == 0) {
 
-        compare_arrays(p5, p6, (void*) LATEX_ABSTRACTION, (void*) LATEX_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != 0) {
-
-            serialise_latex(p0, p1, p2, p3, p4);
-        }
-    }
-
-    if (r == 0) {
-
         compare_arrays(p5, p6, (void*) LINUX_CONSOLE_MODEL, (void*) LINUX_CONSOLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
@@ -365,10 +366,28 @@ void serialise(void* p0, void* p1, void* p2, void* p3, void* p4,
         }
     }
 
-    //?? Later, distinguish file types according to abstraction,
-    //?? for example xml, html, sxi, txt, rtf,
-    //?? adl (from OpenEHR), KIF, ODL etc.!
-    //?? For now, only the cybol file format is considered.
+    if (r == 0) {
+
+        compare_arrays(p5, p6, (void*) XHTML_ABSTRACTION, (void*) XHTML_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != 0) {
+
+//??            serialise_xhtml(p0, p1, p2, p3, p4);
+        }
+    }
+
+    if (r == 0) {
+
+        compare_arrays(p5, p6, (void*) LATEX_ABSTRACTION, (void*) LATEX_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != 0) {
+
+            serialise_latex(p0, p1, p2, p3, p4);
+        }
+    }
+
+    //?? Later, distinguish file types by abstraction, e.g.:
+    //?? xml, sxi, txt, rtf, adl (from OpenEHR), KIF, ODL etc.
 }
 
 /* CONVERTER_SOURCE */

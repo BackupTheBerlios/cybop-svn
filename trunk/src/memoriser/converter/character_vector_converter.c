@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2007-01-14 22:06:49 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2007-01-30 01:11:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -126,6 +126,60 @@ void parse_character_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
  * @param p4 the source count
  */
 void serialise_character_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
+
+    if (p4 != NULL_POINTER) {
+
+        int* sc = (int*) p4;
+
+        if (p2 != NULL_POINTER) {
+
+            int* ds = (int*) p2;
+
+            if (p1 != NULL_POINTER) {
+
+                int* dc = (int*) p1;
+
+                if (p0 != NULL_POINTER) {
+
+                    void** d = (void**) p0;
+
+                    log_message_debug("Serialise character vector.");
+
+                    if ((*dc + *sc) >= *ds) {
+
+                        // The new destination character vector size.
+                        // CAUTION! Add constant in case *dc is zero!
+                        *ds = (*dc * *CHARACTER_VECTOR_REALLOCATE_FACTOR) + *sc;
+
+                        // Reallocate destination character vector.
+                        reallocate_array(p0, p1, p2, (void*) CHARACTER_ARRAY);
+
+                        // Set source into destination character vector.
+                        set_array_elements(*d, p1, p3, p4, (void*) CHARACTER_ARRAY);
+
+                        // Increment destination count.
+                        *dc = *dc + *sc;
+                    }
+
+                } else {
+
+                    log_message_debug("Could not serialise character vector. The destination is null.");
+                }
+
+            } else {
+
+                log_message_debug("Could not serialise character vector. The destination count is null.");
+            }
+
+        } else {
+
+            log_message_debug("Could not serialise character vector. The destination size is null.");
+        }
+
+    } else {
+
+        log_message_debug("Could not serialise character vector. The source count is null.");
+    }
 }
 
 /* CHARACTER_VECTOR_CONVERTER_SOURCE */
