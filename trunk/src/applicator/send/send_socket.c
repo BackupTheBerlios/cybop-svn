@@ -20,12 +20,16 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2007-01-30 01:11:06 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2007-02-01 00:12:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef SEND_SOCKET_SOURCE
 #define SEND_SOCKET_SOURCE
+
+//?? TEST for test file
+#include <fcntl.h>
+#include <sys/stat.h>
 
 #include <netinet/in.h>
 #include <sys/socket.h>
@@ -500,11 +504,51 @@ void send_socket(void* p0, void* p1, void* p2, void* p3,
     // Initialise socket address.
     send_socket_initialise_socket_address((void*) &sa, p2, p3, ha, p4, (void*) &an);
 
-    // Serialise compound model into html format buffer array.
-    serialise_xhtml((void*) &b, (void*) &bc, (void*) &bs, p11, p12, p13, p14, p15, p16, p17, p18);
-//??    serialise_xhtml((void*) &b, (void*) &bc, (void*) &bs, p8, p9, (void*) XHTML_ABSTRACTION, (void*) XHTML_ABSTRACTION_COUNT);
+    // The indentation level.
+    int l = *NUMBER_0_INTEGER;
 
-    fprintf(stderr, "TEST: send message: %s \n", (char*) b);
+    // Serialise compound model into html format buffer array.
+    serialise_xhtml((void*) &b, (void*) &bc, (void*) &bs, p11, p12, p13, p14, p15, p16, p17, p18, (void*) &l);
+
+//??    fprintf(stderr, "TEST: send message: %s \n", (char*) b);
+
+//?? -- START TEST
+    // The log file name.
+    char* n = "xhtml.log";
+    // The log file status flags.
+    int status = O_TRUNC | O_CREAT | O_WRONLY;
+    // The log file.
+    int f = open(n, status);
+
+    if (f >= 0) {
+
+        // The file owner.
+        int o = *INVALID_VALUE;
+
+        // The file group.
+        int g = *INVALID_VALUE;
+
+        // Set file owner.
+        chown(n, o, g);
+
+        // The file access rights.
+        //?? TODO: When trying to cross-compile cyboi for windows,
+        //?? the two S_IRGRP and S_IWGRP were not recognised by mingw.
+        int r = S_IRUSR | S_IWUSR; //?? | S_IRGRP | S_IWGRP;
+
+        // Set file access rights.
+        chmod(n, r);
+
+        // Log xhtml to output.
+        write(f, b, bc);
+
+    } else {
+
+        // CAUTION! DO NOT use logging functionality here!
+        // The logger will not work before these global variables are set.
+        fputs("Error: Could open xhtml log file. A file error occured.\n", stdout);
+    }
+//?? -- END TEST
 
     // One might think that a deadlock may occur if this system
     // sends a message to itself. However, this could only occur if

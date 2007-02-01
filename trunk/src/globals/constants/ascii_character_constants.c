@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2007-01-14 22:06:48 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2007-02-01 00:12:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -37,6 +37,18 @@
  */
 static char NULL_CONTROL_ASCII_CHARACTER_ARRAY[] = {'\0'};
 static char* NULL_CONTROL_ASCII_CHARACTER = NULL_CONTROL_ASCII_CHARACTER_ARRAY;
+
+/**
+ * The character tabulation control character.
+ *
+ * U+0009
+ *
+ * Alias names:
+ * horizontal tabulation (HT)
+ * tab
+ */
+static char CHARACTER_TABULATION_CONTROL_ASCII_CHARACTER_ARRAY[] = {0x09};
+static char* CHARACTER_TABULATION_CONTROL_ASCII_CHARACTER = CHARACTER_TABULATION_CONTROL_ASCII_CHARACTER_ARRAY;
 
 /**
  * The line feed control character.
@@ -83,12 +95,12 @@ static char* AMPERSAND_ASCII_CHARACTER = AMPERSAND_ASCII_CHARACTER_ARRAY;
 static char COMMA_ASCII_CHARACTER_ARRAY[] = {','};
 static char* COMMA_ASCII_CHARACTER = COMMA_ASCII_CHARACTER_ARRAY;
 
-/** The full stop character. U+002E */
+/** The full stop (period) character. U+002E */
 static char FULL_STOP_ASCII_CHARACTER_ARRAY[] = {'.'};
 static char* FULL_STOP_ASCII_CHARACTER = FULL_STOP_ASCII_CHARACTER_ARRAY;
 
-/** The solidus character. U+002F */
-static char SOLIDUS_ASCII_CHARACTER_ARRAY[] = {'*'};
+/** The solidus (slash) character. U+002F */
+static char SOLIDUS_ASCII_CHARACTER_ARRAY[] = {'/'};
 static char* SOLIDUS_ASCII_CHARACTER = SOLIDUS_ASCII_CHARACTER_ARRAY;
 
 /** The colon character. U+003A */
@@ -147,7 +159,7 @@ static char RIGHT_SQUARE_BRACKET_ASCII_CHARACTER_ARRAY[] = {']'};
 static char* RIGHT_SQUARE_BRACKET_ASCII_CHARACTER = RIGHT_SQUARE_BRACKET_ASCII_CHARACTER_ARRAY;
 
 /** The circumflex accent character. U+005E */
-static char CIRCUMFLEX_ACCENT_ASCII_CHARACTER_ARRAY[] = {' '};
+static char CIRCUMFLEX_ACCENT_ASCII_CHARACTER_ARRAY[] = {'^'};
 static char* CIRCUMFLEX_ACCENT_ASCII_CHARACTER = CIRCUMFLEX_ACCENT_ASCII_CHARACTER_ARRAY;
 
 /** The low line character. U+005F */
@@ -155,7 +167,7 @@ static char LOW_LINE_ASCII_CHARACTER_ARRAY[] = {'_'};
 static char* LOW_LINE_ASCII_CHARACTER = LOW_LINE_ASCII_CHARACTER_ARRAY;
 
 /** The grave accent character. U+0060 */
-static char GRAVE_ACCENT_ASCII_CHARACTER_ARRAY[] = {' '};
+static char GRAVE_ACCENT_ASCII_CHARACTER_ARRAY[] = {'`'};
 static char* GRAVE_ACCENT_ASCII_CHARACTER = GRAVE_ACCENT_ASCII_CHARACTER_ARRAY;
 
 /** The left curly bracket character. U+007B */

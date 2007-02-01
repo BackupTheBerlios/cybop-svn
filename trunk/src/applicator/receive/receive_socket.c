@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.17 $ $Date: 2007-01-30 01:11:06 $ $Author: christian $
+ * @version $Revision: 1.18 $ $Date: 2007-02-01 00:12:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -739,8 +739,6 @@ void receive_socket_get_parameters(void* p0, void* p1, void* p2, void* p3,
 
                 if (r != 0) {
 
-        fprintf(stderr, "TEST pre: %s\n", (char*) *url);
-
                     // Set content pointer.
                     // To the original pointer are added the length of the "get"
                     // string and one place for the "space" character after "get".
@@ -752,7 +750,7 @@ void receive_socket_get_parameters(void* p0, void* p1, void* p2, void* p3,
                     //?? The "close" signal is of length 5.
                     cc = 5;
 
-        fprintf(stderr, "TEST post: %s\n", (char*) c);
+        fprintf(stderr, "TEST: %s\n", (char*) c);
 
                     receive_socket_get_parameters_get_request(p0, p1, p2, p3, p4, p5, p6, p7, (void*) &c, (void*) &cc);
                 }
@@ -1358,7 +1356,7 @@ void receive_socket_thread(void* p0, void* p1) {
     //?? Otherwise, the loop runs into the next cycle and the socket mutex
     //?? gets locked, so that the "send_socket" procedure in the main thread
     //?? cannot send its message.
-    sleep(10);
+    sleep(30);
 
             } else if (**bc = *NUMBER_0_INTEGER) {
 
@@ -1428,18 +1426,12 @@ void receive_socket_thread(void* p0, void* p1) {
             // CAUTION! Do NOT reset the maximum buffer size!
             // It was allocated and initialised at socket startup
             // and must remain unchanged.
-    fprintf(stderr, "TEST: receive socket loop 0: %i \n", *base);
             memset(*b, 0, **bs);
-    fprintf(stderr, "TEST: receive socket loop 1: %i \n", *base);
             **bc = *NUMBER_0_INTEGER;
-    fprintf(stderr, "TEST: receive socket loop 2: %i \n", *base);
             // Reset comparison result.
             r = *NUMBER_0_INTEGER;
-    fprintf(stderr, "TEST: receive socket loop 3: %i \n", *base);
             // Reset error number.
             e = *NUMBER_0_INTEGER;
-
-    fprintf(stderr, "TEST: receive socket loop end 4: %i \n", *base);
         }
 
     } else {

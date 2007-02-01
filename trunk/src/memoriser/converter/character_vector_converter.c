@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2007-01-30 01:11:06 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2007-02-01 00:12:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -153,13 +153,13 @@ void serialise_character_vector(void* p0, void* p1, void* p2, void* p3, void* p4
 
                         // Reallocate destination character vector.
                         reallocate_array(p0, p1, p2, (void*) CHARACTER_ARRAY);
-
-                        // Set source into destination character vector.
-                        set_array_elements(*d, p1, p3, p4, (void*) CHARACTER_ARRAY);
-
-                        // Increment destination count.
-                        *dc = *dc + *sc;
                     }
+
+                    // Set source into destination character vector.
+                    set_array_elements(*d, p1, p3, p4, (void*) CHARACTER_ARRAY);
+
+                    // Increment destination count.
+                    *dc = *dc + *sc;
 
                 } else {
 

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.28 $ $Date: 2007-01-28 01:22:29 $ $Author: christian $
+ * @version $Revision: 1.29 $ $Date: 2007-02-01 00:12:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -176,7 +176,7 @@ static char* GUI_LEFT_RELEASE_COMMAND_NAME = GUI_LEFT_RELEASE_COMMAND_NAME_ARRAY
 static int* GUI_LEFT_RELEASE_COMMAND_NAME_COUNT = NUMBER_12_INTEGER_ARRAY;
 
 //
-// Web user interface (wui) names.
+// Web user interface (wui) tag names.
 //
 
 /** The tag name. */
@@ -188,6 +188,17 @@ static int* WUI_TAG_NAME_COUNT = NUMBER_3_INTEGER_ARRAY;
 static char WUI_PROPERTY_NAME_ARRAY[] = {'p', 'r', 'o', 'p', 'e', 'r', 't', 'y'};
 static char* WUI_PROPERTY_NAME = WUI_PROPERTY_NAME_ARRAY;
 static int* WUI_PROPERTY_NAME_COUNT = NUMBER_8_INTEGER_ARRAY;
+
+//
+// Web user interface (wui) attribute names.
+//
+
+/** The align attribute name. */
+/*??
+static char WUI_ALIGN_ATTRIBUTE_NAME_ARRAY[] = {'a', 'l', 'i', 'g', 'n'};
+static char* WUI_ALIGN_ATTRIBUTE_NAME = WUI_ALIGN_ATTRIBUTE_NAME_ARRAY;
+static int* WUI_ALIGN_ATTRIBUTE_NAME_COUNT = NUMBER_5_INTEGER_ARRAY;
+*/
 
 //
 // Boolean names.
