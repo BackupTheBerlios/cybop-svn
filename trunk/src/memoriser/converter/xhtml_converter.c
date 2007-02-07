@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2007-02-01 00:12:40 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2007-02-07 00:13:35 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -31,6 +31,7 @@
 #include "../../globals/constants/channel_constants.c"
 #include "../../globals/constants/ascii_character_constants.c"
 #include "../../globals/constants/log_constants.c"
+#include "../../globals/constants/model_constants.c"
 #include "../../globals/constants/name_constants.c"
 #include "../../globals/constants/structure_constants.c"
 #include "../../globals/logger/logger.c"
@@ -274,12 +275,27 @@ void serialise_xhtml_end_tag(void* p0, void* p1, void* p2, void* p3, void* p4, v
  */
 void serialise_xhtml_tag_content(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
-    // Serialise indentation.
-    serialise_xhtml_indentation(p0, p1, p2, p5);
-    // Serialise source part model.
-    serialise_character_vector(p0, p1, p2, p3, p4);
-    // Serialise line feed character, for better source reading.
-    serialise_character_vector(p0, p1, p2, (void*) LINE_FEED_CONTROL_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT);
+    if (p4 != NULL_POINTER) {
+
+        int* mc = (int*) p4;
+
+        if (*mc > *NUMBER_0_INTEGER) {
+
+            // Only add tabulation, model and line feed,
+            // if the source part model is NOT empty.
+
+            // Serialise indentation.
+            serialise_xhtml_indentation(p0, p1, p2, p5);
+            // Serialise source part model.
+            serialise_character_vector(p0, p1, p2, p3, p4);
+            // Serialise line feed character, for better source reading.
+            serialise_character_vector(p0, p1, p2, (void*) LINE_FEED_CONTROL_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT);
+        }
+
+    } else {
+
+        log_message_debug("Error: Could not serialise xhtml tag content. The model count is null.");
+    }
 }
 
 /**

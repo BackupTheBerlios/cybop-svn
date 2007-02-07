@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.18 $ $Date: 2007-02-01 00:12:40 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2007-02-07 00:13:35 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -1356,7 +1356,7 @@ void receive_socket_thread(void* p0, void* p1) {
     //?? Otherwise, the loop runs into the next cycle and the socket mutex
     //?? gets locked, so that the "send_socket" procedure in the main thread
     //?? cannot send its message.
-    sleep(30);
+//??    sleep(30);
 
             } else if (**bc = *NUMBER_0_INTEGER) {
 
@@ -1432,6 +1432,10 @@ void receive_socket_thread(void* p0, void* p1) {
             r = *NUMBER_0_INTEGER;
             // Reset error number.
             e = *NUMBER_0_INTEGER;
+
+    log_message_debug("TEST: Break loop now ...");
+            //?? TESTING only; delete later!
+            break;
         }
 
     } else {

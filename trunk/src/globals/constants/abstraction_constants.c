@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.19 $ $Date: 2007-01-30 01:11:06 $ $Author: christian $
+ * @version $Revision: 1.20 $ $Date: 2007-02-07 00:13:35 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -203,40 +203,45 @@ static int* BMP_ABSTRACTION_COUNT = NUMBER_3_INTEGER_ARRAY;
 // Text abstractions.
 //
 
-/** The xhtml abstraction. */
-static char XHTML_ABSTRACTION_ARRAY[] = {'x', 'h', 't', 'm', 'l'};
-static char* XHTML_ABSTRACTION = XHTML_ABSTRACTION_ARRAY;
-static int* XHTML_ABSTRACTION_COUNT = NUMBER_5_INTEGER_ARRAY;
+/** The (german) behandlungsdaten-transfer abstraction. */
+static char BDT_ABSTRACTION_ARRAY[] = {'b', 'd', 't'};
+static char* BDT_ABSTRACTION = BDT_ABSTRACTION_ARRAY;
+static int* BDT_ABSTRACTION_COUNT = NUMBER_3_INTEGER_ARRAY;
 
-/** The sgml abstraction. */
-static char SGML_ABSTRACTION_ARRAY[] = {'s', 'g', 'm', 'l'};
-static char* SGML_ABSTRACTION = SGML_ABSTRACTION_ARRAY;
-static int* SGML_ABSTRACTION_COUNT = NUMBER_4_INTEGER_ARRAY;
-
-/** The xml abstraction. */
-static char XML_ABSTRACTION_ARRAY[] = {'x', 'm', 'l'};
-static char* XML_ABSTRACTION = XML_ABSTRACTION_ARRAY;
-static int* XML_ABSTRACTION_COUNT = NUMBER_3_INTEGER_ARRAY;
-
-/** The rtf abstraction. */
-static char RTF_ABSTRACTION_ARRAY[] = {'r', 't', 'f'};
-static char* RTF_ABSTRACTION = RTF_ABSTRACTION_ARRAY;
-static int* RTF_ABSTRACTION_COUNT = NUMBER_3_INTEGER_ARRAY;
-
-/** The tex abstraction. */
-static char TEX_ABSTRACTION_ARRAY[] = {'t', 'e', 'x'};
-static char* TEX_ABSTRACTION = TEX_ABSTRACTION_ARRAY;
-static int* TEX_ABSTRACTION_COUNT = NUMBER_3_INTEGER_ARRAY;
+/** The healthcare exchange protocol abstraction. */
+static char HXP_ABSTRACTION_ARRAY[] = {'h', 'x', 'p'};
+static char* HXP_ABSTRACTION = HXP_ABSTRACTION_ARRAY;
+static int* HXP_ABSTRACTION_COUNT = NUMBER_3_INTEGER_ARRAY;
 
 /** The latex abstraction. */
 static char LATEX_ABSTRACTION_ARRAY[] = {'l', 'a', 't', 'e', 'x'};
 static char* LATEX_ABSTRACTION = LATEX_ABSTRACTION_ARRAY;
 static int* LATEX_ABSTRACTION_COUNT = NUMBER_5_INTEGER_ARRAY;
 
-/** The healthcare exchange protocol abstraction. */
-static char HXP_ABSTRACTION_ARRAY[] = {'h', 'x', 'p'};
-static char* HXP_ABSTRACTION = HXP_ABSTRACTION_ARRAY;
-static int* HXP_ABSTRACTION_COUNT = NUMBER_3_INTEGER_ARRAY;
+/** The rtf abstraction. */
+static char RTF_ABSTRACTION_ARRAY[] = {'r', 't', 'f'};
+static char* RTF_ABSTRACTION = RTF_ABSTRACTION_ARRAY;
+static int* RTF_ABSTRACTION_COUNT = NUMBER_3_INTEGER_ARRAY;
+
+/** The sgml abstraction. */
+static char SGML_ABSTRACTION_ARRAY[] = {'s', 'g', 'm', 'l'};
+static char* SGML_ABSTRACTION = SGML_ABSTRACTION_ARRAY;
+static int* SGML_ABSTRACTION_COUNT = NUMBER_4_INTEGER_ARRAY;
+
+/** The tex abstraction. */
+static char TEX_ABSTRACTION_ARRAY[] = {'t', 'e', 'x'};
+static char* TEX_ABSTRACTION = TEX_ABSTRACTION_ARRAY;
+static int* TEX_ABSTRACTION_COUNT = NUMBER_3_INTEGER_ARRAY;
+
+/** The xhtml abstraction. */
+static char XHTML_ABSTRACTION_ARRAY[] = {'x', 'h', 't', 'm', 'l'};
+static char* XHTML_ABSTRACTION = XHTML_ABSTRACTION_ARRAY;
+static int* XHTML_ABSTRACTION_COUNT = NUMBER_5_INTEGER_ARRAY;
+
+/** The xml abstraction. */
+static char XML_ABSTRACTION_ARRAY[] = {'x', 'm', 'l'};
+static char* XML_ABSTRACTION = XML_ABSTRACTION_ARRAY;
+static int* XML_ABSTRACTION_COUNT = NUMBER_3_INTEGER_ARRAY;
 
 //
 // Video abstractions.

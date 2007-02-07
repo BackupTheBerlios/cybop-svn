@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2007-01-14 22:06:48 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2007-02-07 00:13:34 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -144,7 +144,11 @@ void receive_file_system_compound_model(void* p0, void* p1, void* p2, void* p3, 
     //?? The temporary workaround flag to use the libxml2 parser.
     //?? Later, when an own xml parser is implemented in cyboi,
     //?? delete this flag and change the corresponding blocks below!
-    int w = 1;
+    int w = 0;
+    //?? If the abstraction is "compound", then a cybol (xml) file representing
+    //?? a compound model is expected, so that the libxml2 parser is to be used.
+    //?? Otherwise, the flag remains zero and the file is parsed/ decoded normally.
+    compare_arrays(p5, p6, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT, (void*) &w, (void*) CHARACTER_ARRAY);
 
     //
     // Receive.
@@ -173,7 +177,14 @@ void receive_file_system_compound_model(void* p0, void* p1, void* p2, void* p3, 
     if (w == 0) {
 
         // Create parse model of type given as abstraction.
-        allocate((void*) &pm, (void*) &pms, p5, p6);
+//??        allocate((void*) &pm, (void*) &pms, p5, p6);
+        //?? Possibly ALWAYS use a "compound" model here?
+        //?? The external file in whatever format gets parsed and needs to be
+        //?? represented in memory with some structure.
+        //?? The standard "compound" structure of cyboi seems to be suitable
+        //?? best and all operations for its processing already exist.
+        //?? What else should be used instead?
+        allocate((void*) &pm, (void*) &pms, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
 
         // Parse byte stream according to given document type.
         parse((void*) &pm, (void*) &pmc, (void*) &pms, rm, (void*) &rmc, p5, p6);
@@ -199,7 +210,8 @@ void receive_file_system_compound_model(void* p0, void* p1, void* p2, void* p3, 
     if (w == 0) {
 
         // Destroy parse model.
-        deallocate((void*) &pm, (void*) &pms, p5, p6);
+//??        deallocate((void*) &pm, (void*) &pms, p5, p6);
+        deallocate((void*) &pm, (void*) &pms, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
 
     } else {
 

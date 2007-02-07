@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.17 $ $Date: 2007-01-30 01:11:06 $ $Author: christian $
+ * @version $Revision: 1.18 $ $Date: 2007-02-07 00:13:35 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -29,6 +29,7 @@
 
 #include "../globals/constants/model_constants.c"
 #include "../memoriser/array.c"
+#include "../memoriser/converter/bdt_converter.c"
 #include "../memoriser/converter/boolean_converter.c"
 #include "../memoriser/converter/character_vector_converter.c"
 #include "../memoriser/converter/complex_converter.c"
@@ -196,6 +197,16 @@ void parse(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6)
         if (r != 0) {
 
             parse_xhtml(p0, p1, p2, p3, p4);
+        }
+    }
+
+    if (r == 0) {
+
+        compare_arrays(p5, p6, (void*) BDT_ABSTRACTION, (void*) BDT_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != 0) {
+
+            parse_bdt(p0, p1, p2, p3, p4);
         }
     }
 
@@ -373,6 +384,16 @@ void serialise(void* p0, void* p1, void* p2, void* p3, void* p4,
         if (r != 0) {
 
 //??            serialise_xhtml(p0, p1, p2, p3, p4);
+        }
+    }
+
+    if (r == 0) {
+
+        compare_arrays(p5, p6, (void*) BDT_ABSTRACTION, (void*) BDT_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != 0) {
+
+            serialise_bdt(p0, p1, p2, p3, p4);
         }
     }
 

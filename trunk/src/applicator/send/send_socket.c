@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.12 $ $Date: 2007-02-01 00:12:40 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2007-02-07 00:13:35 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -60,8 +60,17 @@ void send_socket_get_socket_server_mode(void* p0, void* p1, void* p2) {
 
         // The internal memory index.
         int i = *INVALID_VALUE;
+        // The socket mutex.
+        pthread_mutex_t** mt = (pthread_mutex_t**) &NULL_POINTER;
+
+/*??
+        ONLY necessary when writing or deleting a socket from internal memory.
+        This may become necessary if many sockets are hold in a queue, soon to be implemented.
 
         // Get socket mutex.
+        i = *base + *SOCKET_MUTEX_INTERNAL;
+        get(p1, (void*) &i, (void*) &mt, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+*/
         // Get communication partner socket.
         i = *base + *SOCKET_COMMUNICATION_PARTNER_INTERNAL;
         get(p1, (void*) &i, p0, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
@@ -480,6 +489,7 @@ void send_socket(void* p0, void* p1, void* p2, void* p3,
     int bc = *NUMBER_0_INTEGER;
     int bs = *NUMBER_0_INTEGER;
 
+/*??
     // Get socket- and address namespace.
     startup_socket_get_namespace((void*) &sn, (void*) &an, p5, p6);
     // Get socket communication style.
@@ -488,21 +498,26 @@ void send_socket(void* p0, void* p1, void* p2, void* p3,
     send_socket_get_socket((void*) &s, p0, p1, (void*) &sn, (void*) &st, p9, p10);
 
     fprintf(stderr, "TEST: send socket: %i \n", **s);
+*/
 
     // Set non-blocking mode for socket.
 //??    send_socket_set_nonblocking_mode((void*) *s);
 
+/*??
     // Allocate host address.
     send_socket_allocate_host_address((void*) &ha, (void*) &an);
     // Allocate socket address.
     send_socket_allocate_socket_address((void*) &sa, (void*) &sas, (void*) &an);
+*/
     // Allocate buffer array.
     allocate((void*) &b, (void*) &bs, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
+/*??
     // Initialise host address.
     startup_socket_get_host_address(ha, p2, p3, (void*) &an);
     // Initialise socket address.
     send_socket_initialise_socket_address((void*) &sa, p2, p3, ha, p4, (void*) &an);
+*/
 
     // The indentation level.
     int l = *NUMBER_0_INTEGER;
@@ -510,11 +525,12 @@ void send_socket(void* p0, void* p1, void* p2, void* p3,
     // Serialise compound model into html format buffer array.
     serialise_xhtml((void*) &b, (void*) &bc, (void*) &bs, p11, p12, p13, p14, p15, p16, p17, p18, (void*) &l);
 
+    fputs("SUCCESS! Generated xhtml file.\n", stdout);
 //??    fprintf(stderr, "TEST: send message: %s \n", (char*) b);
 
 //?? -- START TEST
     // The log file name.
-    char* n = "xhtml.log";
+    char* n = "send.xhtml";
     // The log file status flags.
     int status = O_TRUNC | O_CREAT | O_WRONLY;
     // The log file.
@@ -566,8 +582,7 @@ void send_socket(void* p0, void* p1, void* p2, void* p3,
     // not necessary here!
 
     // Send message via socket.
-    write_socket((void*) *s, b, (void*) &bc, (void*) &sa, (void*) &sas, p9, p10, (void*) &st);
-//??    write_socket((void*) *s, p13, p14, (void*) &sa, (void*) &sas, p9, p10, (void*) &st);
+//??    write_socket((void*) *s, b, (void*) &bc, (void*) &sa, (void*) &sas, p9, p10, (void*) &st);
 
     /*??
         // The socket number for the signal id.
@@ -608,14 +623,16 @@ void send_socket(void* p0, void* p1, void* p2, void* p3,
     // CAUTION! The socket is always closed, no matter whether it was created in:
     // - this "send_socket" operation (client mode)
     // - the "receive_socket" operation (server mode) and retrieved from internal memory here
-    close(**s);
+//??    close(**s);
 
     // Deallocate buffer array.
     deallocate((void*) &b, (void*) &bs, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+/*??
     // Deallocate socket address.
     free(sa);
     // Deallocate host address.
     free(ha);
+*/
 }
 
 /* SEND_SOCKET_SOURCE */
