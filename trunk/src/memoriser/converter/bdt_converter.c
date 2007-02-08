@@ -20,24 +20,271 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2007-02-07 00:13:35 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2007-02-08 23:52:56 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef BDT_CONVERTER_SOURCE
 #define BDT_CONVERTER_SOURCE
 
-#include "../../globals/constants/abstraction_constants.c"
-#include "../../globals/constants/channel_constants.c"
-#include "../../globals/constants/ascii_character_constants.c"
+#include "../../globals/constants/xdt/bdt_field_constants.c"
+#include "../../globals/constants/xdt/bdt_record_constants.c"
 #include "../../globals/constants/log_constants.c"
-#include "../../globals/constants/model_constants.c"
-#include "../../globals/constants/name_constants.c"
-#include "../../globals/constants/structure_constants.c"
 #include "../../globals/logger/logger.c"
-#include "../../memoriser/accessor.c"
-#include "../../memoriser/accessor/compound_accessor.c"
 #include "../../memoriser/array.c"
+#include "../../memoriser/converter/integer_vector_converter.c"
+
+/**
+ * Parses the bdt record.
+ *
+ * @param p0 the destination compound model (Hand over as reference!)
+ * @param p1 the destination count
+ * @param p2 the destination size
+ * @param p3 the field identification
+ * @param p4 the field identification count
+ * @param p5 the field content
+ * @param p6 the field content count
+ * @param p7 the parse mode
+ */
+void parse_bdt_record(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
+
+    if (p7 != NULL_POINTER) {
+
+        int* m = (int*) p7;
+
+        log_message_debug("Information: Parse bdt record.");
+
+        // The comparison result.
+        int r = *NUMBER_0_INTEGER;
+
+        if (r == *NUMBER_0_INTEGER) {
+
+            compare_arrays(p3, p4, (void*) RECORD_IDENTIFICATION_BDT_FIELD, (void*) BDT_FIELD_IDENTIFICATION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+            if (r != *NUMBER_0_INTEGER) {
+
+    sleep(1.0);
+    fprintf(stderr, "TEST parse bdt record content record id: %s\n", (char*) p5);
+
+                // Set data record identification as parse mode.
+                parse_integer((void*) &m, NULL_POINTER, NULL_POINTER, p5, p6);
+            }
+        }
+
+    } else {
+
+        log_message_debug("Error: Could not parse bdt record. The parse mode is null.");
+    }
+}
+
+/**
+ * Parses the bdt record data medium header.
+ *
+ * @param p0 the destination compound model (Hand over as reference!)
+ * @param p1 the destination count
+ * @param p2 the destination size
+ * @param p3 the field identification
+ * @param p4 the field identification count
+ * @param p5 the field content
+ * @param p6 the field content count
+ * @param p7 the parse mode
+ */
+void parse_bdt_record_data_medium_header(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
+
+    if (p7 != NULL_POINTER) {
+
+        int* m = (int*) p7;
+
+        log_message_debug("Information: Parse bdt record data medium header.");
+
+        // The comparison result.
+        int r = *NUMBER_0_INTEGER;
+
+        if (r == *NUMBER_0_INTEGER) {
+
+            compare_arrays(p3, p4, (void*) RECORD_IDENTIFICATION_BDT_FIELD, (void*) BDT_FIELD_IDENTIFICATION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+            if (r != *NUMBER_0_INTEGER) {
+
+    sleep(1.0);
+    fprintf(stderr, "TEST parse bdt record data medium header content record id: %s\n", (char*) p5);
+
+                // Set data record identification as parse mode.
+                parse_integer((void*) &m, NULL_POINTER, NULL_POINTER, p5, p6);
+            }
+        }
+
+    } else {
+
+        log_message_debug("Error: Could not parse bdt record data medium header. The parse mode is null.");
+    }
+}
+
+/**
+ * Parses the bdt record data package header.
+ *
+ * @param p0 the destination compound model (Hand over as reference!)
+ * @param p1 the destination count
+ * @param p2 the destination size
+ * @param p3 the field identification
+ * @param p4 the field identification count
+ * @param p5 the field content
+ * @param p6 the field content count
+ * @param p7 the parse mode
+ */
+void parse_bdt_record_data_package_header(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
+
+    if (p7 != NULL_POINTER) {
+
+        int* m = (int*) p7;
+
+        log_message_debug("Information: Parse bdt record data package header.");
+
+    sleep(1.0);
+    fprintf(stderr, "TEST parse bdt record data package header content record id: %s\n", (char*) p5);
+
+        // The comparison result.
+        int r = *NUMBER_0_INTEGER;
+
+        if (r == *NUMBER_0_INTEGER) {
+
+            compare_arrays(p3, p4, (void*) RECORD_IDENTIFICATION_BDT_FIELD, (void*) BDT_FIELD_IDENTIFICATION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+            if (r != *NUMBER_0_INTEGER) {
+
+    sleep(1.0);
+    fprintf(stderr, "TEST parse bdt record data package header content record id AGAIN: %s\n", (char*) p5);
+
+                // Set data record identification as parse mode.
+                parse_integer((void*) &m, NULL_POINTER, NULL_POINTER, p5, p6);
+            }
+        }
+
+    } else {
+
+        log_message_debug("Error: Could not parse bdt record data medium header. The parse mode is null.");
+    }
+}
+
+/**
+ * Parses the bdt record patient master data.
+ *
+ * @param p0 the destination compound model (Hand over as reference!)
+ * @param p1 the destination count
+ * @param p2 the destination size
+ * @param p3 the field identification
+ * @param p4 the field identification count
+ * @param p5 the field content
+ * @param p6 the field content count
+ * @param p7 the parse mode
+ */
+void parse_bdt_record_patient_master_data(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
+
+    if (p7 != NULL_POINTER) {
+
+        int* m = (int*) p7;
+
+        log_message_debug("Information: Parse bdt record patient master data.");
+
+        // The comparison result.
+        int r = *NUMBER_0_INTEGER;
+
+        if (r == *NUMBER_0_INTEGER) {
+
+            compare_arrays(p3, p4, (void*) PATIENT_LAST_NAME_BDT_FIELD, (void*) BDT_FIELD_IDENTIFICATION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+            if (r != *NUMBER_0_INTEGER) {
+
+    sleep(1.0);
+                fprintf(stderr, "TEST last name: %s\n", (char*) p5);
+                //?? TODO: Do something with the patient last name!
+            }
+        }
+
+        if (r == *NUMBER_0_INTEGER) {
+
+            compare_arrays(p3, p4, (void*) PATIENT_FIRST_NAME_BDT_FIELD, (void*) BDT_FIELD_IDENTIFICATION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+            if (r != *NUMBER_0_INTEGER) {
+
+    sleep(1.0);
+                fprintf(stderr, "TEST first name: %s\n", (char*) p5);
+                //?? TODO: Do something with the patient first name!
+            }
+        }
+
+        if (r == *NUMBER_0_INTEGER) {
+
+            compare_arrays(p3, p4, (void*) PATIENT_BIRTH_DATE_BDT_FIELD, (void*) BDT_FIELD_IDENTIFICATION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+            if (r != *NUMBER_0_INTEGER) {
+
+    sleep(1.0);
+                fprintf(stderr, "TEST birth date: %s\n", (char*) p5);
+                //?? TODO: Do something with the patient birth date!
+            }
+        }
+
+        if (r == *NUMBER_0_INTEGER) {
+
+            compare_arrays(p3, p4, (void*) PATIENT_SEX_BDT_FIELD, (void*) BDT_FIELD_IDENTIFICATION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+            if (r != *NUMBER_0_INTEGER) {
+
+    sleep(1.0);
+                fprintf(stderr, "TEST sex: %s\n", (char*) p5);
+                //?? TODO: Do something with the patient sex!
+            }
+        }
+
+    } else {
+
+        log_message_debug("Error: Could not parse bdt record data medium header. The parse mode is null.");
+    }
+}
+
+/**
+ * Parses a bdt field.
+ *
+ * @param p0 the destination compound model (Hand over as reference!)
+ * @param p1 the destination count
+ * @param p2 the destination size
+ * @param p3 the field identification
+ * @param p4 the field identification count
+ * @param p5 the field content
+ * @param p6 the field content count
+ * @param p7 the parse mode
+ */
+void parse_bdt_field(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
+
+    if (p7 != NULL_POINTER) {
+
+        int* m = (int*) p7;
+
+        log_message_debug("Information: Parse bdt field.");
+
+        if (*m == *NUMBER_0_INTEGER) {
+
+            parse_bdt_record(p0, p1, p2, p3, p4, p5, p6, p7);
+
+        } else if (*m == *DATA_MEDIUM_HEADER_BDT_RECORD) {
+
+            parse_bdt_record_data_medium_header(p0, p1, p2, p3, p4, p5, p6, p7);
+
+        } else if (*m == *DATA_PACKAGE_HEADER_BDT_RECORD) {
+
+            parse_bdt_record_data_package_header(p0, p1, p2, p3, p4, p5, p6, p7);
+
+        } else if (*m == *PATIENT_MASTER_DATA_BDT_RECORD) {
+
+            parse_bdt_record_patient_master_data(p0, p1, p2, p3, p4, p5, p6, p7);
+        }
+
+    } else {
+
+        log_message_debug("Error: Could not parse bdt field. The parse mode is null.");
+    }
+}
 
 /**
  * Parses a bdt format byte array into a compound model.
@@ -111,63 +358,137 @@ void parse_bdt(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         int* sc = (int*) p4;
 
-        log_message_debug("Parse bdt format into compound model.");
+        log_message_debug("Information: Parse bdt format into compound model.");
 
-        // The loop variable.
-        int j = *NUMBER_0_INTEGER;
         // The source bdt byte array index.
-        void* i = NULL_POINTER;
+        void* i = p3;
         int ic = *sc;
+        // The moved flag indicating whether or not the source
+        // bdt byte array index was moved (increased).
+        int f = *NUMBER_0_INTEGER;
+        // The field size.
+        int* fs = NULL_POINTER;
         // The field identification.
-        void* id = NULL_POINTER;
-        int idc = *NUMBER_0_INTEGER;
+        void* fid = NULL_POINTER;
+        int fidc = *NUMBER_0_INTEGER;
         // The field content.
-        void* c = NULL_POINTER;
-        int cc = *NUMBER_0_INTEGER;
-        // The comparison result.
-        int r = *NUMBER_0_INTEGER;
+        void* fc = NULL_POINTER;
+        int fcc = *NUMBER_0_INTEGER;
+        // The parse mode.
+        int m = *NUMBER_0_INTEGER;
+
+        // Allocate field size.
+        allocate((void*) &fs, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+
+        // Initialise field size.
+        *fs = *NUMBER_0_INTEGER;
 
         // Iterate through source bdt byte array.
         while (*NUMBER_1_INTEGER) {
 
-            if (j >= *sc) {
+            if (ic <= *NUMBER_0_INTEGER) {
 
                 break;
             }
 
-/*??
-            // Parse bdt field.
-            parse_bdt_field((void*) &id, (void*) &c, (void*) &cc, (void*) &i, (void*) &ic);
+            if (ic >= *BDT_FIELD_SIZE_COUNT) {
 
-            compare_arrays(id, (void*) RECORD_IDENTIFICATION_BDT_FIELD_COUNT, (void*) RECORD_IDENTIFICATION_BDT_FIELD, (void*) RECORD_IDENTIFICATION_BDT_FIELD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                // Parse bdt field size.
+                parse_integer((void*) &fs, NULL_POINTER, NULL_POINTER, i, (void*) BDT_FIELD_SIZE_COUNT);
 
-            if (r != *NUMBER_0_INTEGER) {
+                // Increment source bdt byte array index.
+                i = i + *BDT_FIELD_SIZE_COUNT;
+                ic = ic - *BDT_FIELD_SIZE_COUNT;
 
-                // Recursively call this operation for the part model.
-                parse_patient_record(p0, p1, p2, *a, *ac, *m, *mc, *d, *dc, p9, p10, (void*) &nl);
+                // Set moved flag.
+                f = *NUMBER_1_INTEGER;
             }
 
-            // Increment source bdt byte array index with counts for:
-            // - field count (3 Byte)
-            // - field identification (4 Byte)
-            // - content count (dynamic)
-            // - carriage return character (1 Byte)
-            // - line feed character (1 Byte)
-            i = i + *BDT_FIELD_COUNT_COUNT + *BDT_FIELD_IDENTIFICATION_COUNT + cc + *PRIMITIVE_COUNT + *PRIMITIVE_COUNT;
+            if (ic >= *BDT_FIELD_IDENTIFICATION_COUNT) {
 
+                // Parse bdt field identification.
+                fid = i;
+                fidc = *BDT_FIELD_IDENTIFICATION_COUNT;
+
+                // Increment source bdt byte array index.
+                i = i + *BDT_FIELD_IDENTIFICATION_COUNT;
+                ic = ic - *BDT_FIELD_IDENTIFICATION_COUNT;
+
+                // Set moved flag.
+                f = *NUMBER_1_INTEGER;
+            }
+
+            // Calculate bdt field content size.
+            //
+            // CAUTION! The bdt field size comprises all characters:
+            // - field size (3 bytes)
+            // - field identification (4 bytes)
+            // - field content (VARIABLE!)
+            // - carriage return (1 byte)
+            // - line feed (1 byte)
+            //
+            // It therefore has to be decremented here, so that only the
+            // actual bdt field content size remains.
+            *fs = *fs - *BDT_FIELD_SIZE_COUNT - *BDT_FIELD_IDENTIFICATION_COUNT - *PRIMITIVE_COUNT - *PRIMITIVE_COUNT;
+
+            if (ic >= *fs) {
+
+                // Parse bdt field content.
+                fc = i;
+                fcc = *fs;
+
+                // Increment source bdt byte array index.
+                i = i + *fs;
+                ic = ic - *fs;
+
+                // Set moved flag.
+                f = *NUMBER_1_INTEGER;
+            }
+
+            if (ic >= (*PRIMITIVE_COUNT + *PRIMITIVE_COUNT)) {
+
+                // Parse bdt field carriage return and line feed.
+
+                // Increment source bdt byte array index.
+                i = i + *PRIMITIVE_COUNT + *PRIMITIVE_COUNT;
+                ic = ic - *PRIMITIVE_COUNT - *PRIMITIVE_COUNT;
+
+                // Set moved flag.
+                f = *NUMBER_1_INTEGER;
+            }
+
+            // Process the field.
+            parse_bdt_field(p0, p1, p2, fid, (void*) &fidc, fc, (void*) &fcc, (void*) &m);
+
+            if (f == *NUMBER_0_INTEGER) {
+
+                // CAUTION! If the moved flag is false (zero), then the
+                // bdt byte array index was not incremented at all.
+                // Probably, the remaining byte array count was too small,
+                // so that none of the sections above was entered.
+                // Therefore, the bdt byte array index is incremented by one
+                // here, so that the loop will eventually find an end.
+
+                // Increment source bdt byte array index.
+                i++;
+                ic--;
+            }
+
+            // Reset field size.
+            *fs = *NUMBER_0_INTEGER;
             // Reset field identification.
-            id = NULL_POINTER;
-            idc = *NUMBER_0_INTEGER;
+            fid = NULL_POINTER;
+            fidc = *NUMBER_0_INTEGER;
             // Reset field content.
-            c = NULL_POINTER;
-            cc = *NUMBER_0_INTEGER;
-            // Reset comparison result.
-            r = *NUMBER_0_INTEGER;
-*/
-
-            // Increment loop variable.
-            j++;
+            fc = NULL_POINTER;
+            fcc = *NUMBER_0_INTEGER;
+            // Reset moved flag.
+            // CAUTION! It has to be reset BELOW the comparison above!
+            f = *NUMBER_0_INTEGER;
         }
+
+        // Deallocate field size.
+        deallocate((void*) &fs, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
     } else {
 

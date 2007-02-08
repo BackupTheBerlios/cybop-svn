@@ -20,14 +20,28 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2007-02-07 00:13:35 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2007-02-08 23:52:56 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef BDT_FIELD_CONSTANTS_SOURCE
 #define BDT_FIELD_CONSTANTS_SOURCE
 
-#include "../../globals/constants/integer_constants.c"
+#include "../../../globals/constants/integer_constants.c"
+
+/**
+ * The bdt field size count.
+ *
+ * All bdt field sizes have the same length: 3 ASCII characters (bytes).
+ */
+static int* BDT_FIELD_SIZE_COUNT = NUMBER_3_INTEGER_ARRAY;
+
+/**
+ * The bdt field identification count.
+ *
+ * All bdt field identifications have the same length: 4 ASCII characters (bytes).
+ */
+static int* BDT_FIELD_IDENTIFICATION_COUNT = NUMBER_4_INTEGER_ARRAY;
 
 /**
  * The kbv pruefnummer field.
@@ -39,7 +53,6 @@
  */
 static char KBV_PRUEFNUMMER_BDT_FIELD_ARRAY[] = {'0', '1', '0', '1'};
 static char* KBV_PRUEFNUMMER_BDT_FIELD = KBV_PRUEFNUMMER_BDT_FIELD_ARRAY;
-static int* KBV_PRUEFNUMMER_BDT_FIELD_COUNT = NUMBER_4_INTEGER_ARRAY;
 
 /**
  * The patient identification field.
@@ -51,7 +64,6 @@ static int* KBV_PRUEFNUMMER_BDT_FIELD_COUNT = NUMBER_4_INTEGER_ARRAY;
  */
 static char PATIENT_IDENTIFICATION_BDT_FIELD_ARRAY[] = {'3', '0', '0', '0'};
 static char* PATIENT_IDENTIFICATION_BDT_FIELD = PATIENT_IDENTIFICATION_BDT_FIELD_ARRAY;
-static int* PATIENT_IDENTIFICATION_BDT_FIELD_COUNT = NUMBER_4_INTEGER_ARRAY;
 
 /**
  * The name affix field.
@@ -63,7 +75,6 @@ static int* PATIENT_IDENTIFICATION_BDT_FIELD_COUNT = NUMBER_4_INTEGER_ARRAY;
  */
 static char NAME_AFFIX_BDT_FIELD_ARRAY[] = {'3', '1', '0', '0'};
 static char* NAME_AFFIX_BDT_FIELD = NAME_AFFIX_BDT_FIELD_ARRAY;
-static int* NAME_AFFIX_BDT_FIELD_COUNT = NUMBER_4_INTEGER_ARRAY;
 
 /**
  * The patient last name field.
@@ -75,7 +86,6 @@ static int* NAME_AFFIX_BDT_FIELD_COUNT = NUMBER_4_INTEGER_ARRAY;
  */
 static char PATIENT_LAST_NAME_BDT_FIELD_ARRAY[] = {'3', '1', '0', '1'};
 static char* PATIENT_LAST_NAME_BDT_FIELD = PATIENT_LAST_NAME_BDT_FIELD_ARRAY;
-static int* PATIENT_LAST_NAME_BDT_FIELD_COUNT = NUMBER_4_INTEGER_ARRAY;
 
 /**
  * The patient first name field.
@@ -87,7 +97,6 @@ static int* PATIENT_LAST_NAME_BDT_FIELD_COUNT = NUMBER_4_INTEGER_ARRAY;
  */
 static char PATIENT_FIRST_NAME_BDT_FIELD_ARRAY[] = {'3', '1', '0', '2'};
 static char* PATIENT_FIRST_NAME_BDT_FIELD = PATIENT_FIRST_NAME_BDT_FIELD_ARRAY;
-static int* PATIENT_FIRST_NAME_BDT_FIELD_COUNT = NUMBER_4_INTEGER_ARRAY;
 
 /**
  * The patient birth date field.
@@ -99,7 +108,6 @@ static int* PATIENT_FIRST_NAME_BDT_FIELD_COUNT = NUMBER_4_INTEGER_ARRAY;
  */
 static char PATIENT_BIRTH_DATE_BDT_FIELD_ARRAY[] = {'3', '1', '0', '3'};
 static char* PATIENT_BIRTH_DATE_BDT_FIELD = PATIENT_BIRTH_DATE_BDT_FIELD_ARRAY;
-static int* PATIENT_BIRTH_DATE_BDT_FIELD_COUNT = NUMBER_4_INTEGER_ARRAY;
 
 /**
  * The patient title field.
@@ -111,7 +119,6 @@ static int* PATIENT_BIRTH_DATE_BDT_FIELD_COUNT = NUMBER_4_INTEGER_ARRAY;
  */
 static char PATIENT_TITLE_BDT_FIELD_ARRAY[] = {'3', '1', '0', '4'};
 static char* PATIENT_TITLE_BDT_FIELD = PATIENT_TITLE_BDT_FIELD_ARRAY;
-static int* PATIENT_TITLE_BDT_FIELD_COUNT = NUMBER_4_INTEGER_ARRAY;
 
 /**
  * The patient health insurance number field.
@@ -123,7 +130,6 @@ static int* PATIENT_TITLE_BDT_FIELD_COUNT = NUMBER_4_INTEGER_ARRAY;
  */
 static char PATIENT_HEALTH_INSURANCE_NUMBER_BDT_FIELD_ARRAY[] = {'3', '1', '0', '5'};
 static char* PATIENT_HEALTH_INSURANCE_NUMBER_BDT_FIELD = PATIENT_HEALTH_INSURANCE_NUMBER_BDT_FIELD_ARRAY;
-static int* PATIENT_HEALTH_INSURANCE_NUMBER_BDT_FIELD_COUNT = NUMBER_4_INTEGER_ARRAY;
 
 /**
  * The patient residence field.
@@ -135,7 +141,6 @@ static int* PATIENT_HEALTH_INSURANCE_NUMBER_BDT_FIELD_COUNT = NUMBER_4_INTEGER_A
  */
 static char PATIENT_RESIDENCE_BDT_FIELD_ARRAY[] = {'3', '1', '0', '6'};
 static char* PATIENT_RESIDENCE_BDT_FIELD = PATIENT_RESIDENCE_BDT_FIELD_ARRAY;
-static int* PATIENT_RESIDENCE_BDT_FIELD_COUNT = NUMBER_4_INTEGER_ARRAY;
 
 /**
  * The patient street field.
@@ -147,7 +152,6 @@ static int* PATIENT_RESIDENCE_BDT_FIELD_COUNT = NUMBER_4_INTEGER_ARRAY;
  */
 static char PATIENT_STREET_BDT_FIELD_ARRAY[] = {'3', '1', '0', '7'};
 static char* PATIENT_STREET_BDT_FIELD = PATIENT_STREET_BDT_FIELD_ARRAY;
-static int* PATIENT_STREET_BDT_FIELD_COUNT = NUMBER_4_INTEGER_ARRAY;
 
 /**
  * The health insurance type field.
@@ -164,7 +168,6 @@ static int* PATIENT_STREET_BDT_FIELD_COUNT = NUMBER_4_INTEGER_ARRAY;
  */
 static char HEALTH_INSURANCE_TYPE_BDT_FIELD_ARRAY[] = {'3', '1', '0', '8'};
 static char* HEALTH_INSURANCE_TYPE_BDT_FIELD = HEALTH_INSURANCE_TYPE_BDT_FIELD_ARRAY;
-static int* HEALTH_INSURANCE_TYPE_BDT_FIELD_COUNT = NUMBER_4_INTEGER_ARRAY;
 
 /**
  * The patient sex field.
@@ -176,7 +179,6 @@ static int* HEALTH_INSURANCE_TYPE_BDT_FIELD_COUNT = NUMBER_4_INTEGER_ARRAY;
  */
 static char PATIENT_SEX_BDT_FIELD_ARRAY[] = {'3', '1', '1', '0'};
 static char* PATIENT_SEX_BDT_FIELD = PATIENT_SEX_BDT_FIELD_ARRAY;
-static int* PATIENT_SEX_BDT_FIELD_COUNT = NUMBER_4_INTEGER_ARRAY;
 
 /**
  * The record identification field.
@@ -188,7 +190,6 @@ static int* PATIENT_SEX_BDT_FIELD_COUNT = NUMBER_4_INTEGER_ARRAY;
  */
 static char RECORD_IDENTIFICATION_BDT_FIELD_ARRAY[] = {'8', '0', '0', '0'};
 static char* RECORD_IDENTIFICATION_BDT_FIELD = RECORD_IDENTIFICATION_BDT_FIELD_ARRAY;
-static int* RECORD_IDENTIFICATION_BDT_FIELD_COUNT = NUMBER_4_INTEGER_ARRAY;
 
 /**
  * The record size field.
@@ -200,7 +201,6 @@ static int* RECORD_IDENTIFICATION_BDT_FIELD_COUNT = NUMBER_4_INTEGER_ARRAY;
  */
 static char RECORD_SIZE_BDT_FIELD_ARRAY[] = {'8', '1', '0', '0'};
 static char* RECORD_SIZE_BDT_FIELD = RECORD_SIZE_BDT_FIELD_ARRAY;
-static int* RECORD_SIZE_BDT_FIELD_COUNT = NUMBER_4_INTEGER_ARRAY;
 
 /**
  * The sender medical doctor number field.
@@ -212,7 +212,6 @@ static int* RECORD_SIZE_BDT_FIELD_COUNT = NUMBER_4_INTEGER_ARRAY;
  */
 static char SENDER_MEDICAL_DOCTOR_NUMBER_BDT_FIELD_ARRAY[] = {'9', '1', '0', '0'};
 static char* SENDER_MEDICAL_DOCTOR_NUMBER_BDT_FIELD = SENDER_MEDICAL_DOCTOR_NUMBER_BDT_FIELD_ARRAY;
-static int* SENDER_MEDICAL_DOCTOR_NUMBER_BDT_FIELD_COUNT = NUMBER_4_INTEGER_ARRAY;
 
 /**
  * The creation date field.
@@ -224,7 +223,6 @@ static int* SENDER_MEDICAL_DOCTOR_NUMBER_BDT_FIELD_COUNT = NUMBER_4_INTEGER_ARRA
  */
 static char CREATION_DATE_BDT_FIELD_ARRAY[] = {'9', '1', '0', '3'};
 static char* CREATION_DATE_BDT_FIELD = CREATION_DATE_BDT_FIELD_ARRAY;
-static int* CREATION_DATE_BDT_FIELD_COUNT = NUMBER_4_INTEGER_ARRAY;
 
 /**
  * The data medium running numeration field.
@@ -236,7 +234,6 @@ static int* CREATION_DATE_BDT_FIELD_COUNT = NUMBER_4_INTEGER_ARRAY;
  */
 static char DATA_MEDIUM_RUNNING_NUMERATION_BDT_FIELD_ARRAY[] = {'9', '1', '0', '5'};
 static char* DATA_MEDIUM_RUNNING_NUMERATION_BDT_FIELD = DATA_MEDIUM_RUNNING_NUMERATION_BDT_FIELD_ARRAY;
-static int* DATA_MEDIUM_RUNNING_NUMERATION_BDT_FIELD_COUNT = NUMBER_4_INTEGER_ARRAY;
 
 /**
  * The character code field.
@@ -248,7 +245,6 @@ static int* DATA_MEDIUM_RUNNING_NUMERATION_BDT_FIELD_COUNT = NUMBER_4_INTEGER_AR
  */
 static char CHARACTER_CODE_BDT_FIELD_ARRAY[] = {'9', '1', '0', '6'};
 static char* CHARACTER_CODE_BDT_FIELD = CHARACTER_CODE_BDT_FIELD_ARRAY;
-static int* CHARACTER_CODE_BDT_FIELD_COUNT = NUMBER_4_INTEGER_ARRAY;
 
 /**
  * The data package size field.
@@ -260,7 +256,6 @@ static int* CHARACTER_CODE_BDT_FIELD_COUNT = NUMBER_4_INTEGER_ARRAY;
  */
 static char DATA_PACKAGE_SIZE_BDT_FIELD_ARRAY[] = {'9', '2', '0', '2'};
 static char* DATA_PACKAGE_SIZE_BDT_FIELD = DATA_PACKAGE_SIZE_BDT_FIELD_ARRAY;
-static int* DATA_PACKAGE_SIZE_BDT_FIELD_COUNT = NUMBER_4_INTEGER_ARRAY;
 
 /**
  * The data medium count field.
@@ -272,7 +267,6 @@ static int* DATA_PACKAGE_SIZE_BDT_FIELD_COUNT = NUMBER_4_INTEGER_ARRAY;
  */
 static char DATA_MEDIUM_COUNT_BDT_FIELD_ARRAY[] = {'9', '2', '0', '3'};
 static char* DATA_MEDIUM_COUNT_BDT_FIELD = DATA_MEDIUM_COUNT_BDT_FIELD_ARRAY;
-static int* DATA_MEDIUM_COUNT_BDT_FIELD_COUNT = NUMBER_4_INTEGER_ARRAY;
 
 /**
  * The abrechnungs-datentransfer (adt) record specification version field.
@@ -284,7 +278,6 @@ static int* DATA_MEDIUM_COUNT_BDT_FIELD_COUNT = NUMBER_4_INTEGER_ARRAY;
  */
 static char ADT_RECORD_SPECIFICATION_VERSION_BDT_FIELD_ARRAY[] = {'9', '2', '1', '0'};
 static char* ADT_RECORD_SPECIFICATION_VERSION_BDT_FIELD = ADT_RECORD_SPECIFICATION_VERSION_BDT_FIELD_ARRAY;
-static int* ADT_RECORD_SPECIFICATION_VERSION_BDT_FIELD_COUNT = NUMBER_4_INTEGER_ARRAY;
 
 /**
  * The behandlungs-datentransfer (bdt) version field.
@@ -296,7 +289,6 @@ static int* ADT_RECORD_SPECIFICATION_VERSION_BDT_FIELD_COUNT = NUMBER_4_INTEGER_
  */
 static char BDT_VERSION_BDT_FIELD_ARRAY[] = {'9', '2', '1', '3'};
 static char* BDT_VERSION_BDT_FIELD = BDT_VERSION_BDT_FIELD_ARRAY;
-static int* BDT_VERSION_BDT_FIELD_COUNT = NUMBER_4_INTEGER_ARRAY;
 
 /**
  * The archiving type field.
@@ -308,7 +300,6 @@ static int* BDT_VERSION_BDT_FIELD_COUNT = NUMBER_4_INTEGER_ARRAY;
  */
 static char ARCHIVING_TYPE_BDT_FIELD_ARRAY[] = {'9', '6', '0', '0'};
 static char* ARCHIVING_TYPE_BDT_FIELD = ARCHIVING_TYPE_BDT_FIELD_ARRAY;
-static int* ARCHIVING_TYPE_BDT_FIELD_COUNT = NUMBER_4_INTEGER_ARRAY;
 
 /**
  * The data storage period field.
@@ -320,7 +311,6 @@ static int* ARCHIVING_TYPE_BDT_FIELD_COUNT = NUMBER_4_INTEGER_ARRAY;
  */
 static char DATA_STORAGE_PERIOD_BDT_FIELD_ARRAY[] = {'9', '6', '0', '1'};
 static char* DATA_STORAGE_PERIOD_BDT_FIELD = DATA_STORAGE_PERIOD_BDT_FIELD_ARRAY;
-static int* DATA_STORAGE_PERIOD_BDT_FIELD_COUNT = NUMBER_4_INTEGER_ARRAY;
 
 /**
  * The transfer begin field.
@@ -332,7 +322,6 @@ static int* DATA_STORAGE_PERIOD_BDT_FIELD_COUNT = NUMBER_4_INTEGER_ARRAY;
  */
 static char TRANSFER_BEGIN_BDT_FIELD_ARRAY[] = {'9', '6', '0', '2'};
 static char* TRANSFER_BEGIN_BDT_FIELD = TRANSFER_BEGIN_BDT_FIELD_ARRAY;
-static int* TRANSFER_BEGIN_BDT_FIELD_COUNT = NUMBER_4_INTEGER_ARRAY;
 
 /**
  * The system internal parameter field.
@@ -344,7 +333,6 @@ static int* TRANSFER_BEGIN_BDT_FIELD_COUNT = NUMBER_4_INTEGER_ARRAY;
  */
 static char SYSTEM_INTERNAL_PARAMETER_BDT_FIELD_ARRAY[] = {'9', '9', '0', '1'};
 static char* SYSTEM_INTERNAL_PARAMETER_BDT_FIELD = SYSTEM_INTERNAL_PARAMETER_BDT_FIELD_ARRAY;
-static int* SYSTEM_INTERNAL_PARAMETER_BDT_FIELD_COUNT = NUMBER_4_INTEGER_ARRAY;
 
 /* BDT_FIELD_CONSTANTS_SOURCE */
 #endif
