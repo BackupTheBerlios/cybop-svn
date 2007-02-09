@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2007-02-08 23:52:56 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2007-02-09 22:30:08 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -36,6 +36,9 @@
  */
 static int* BDT_RECORD_IDENTIFICATION_COUNT = NUMBER_4_INTEGER_ARRAY;
 
+/** The medical practice data record. */
+static int* MEDICAL_PRACTICE_DATA_BDT_RECORD = NUMBER_10_INTEGER_ARRAY;
+
 /** The data medium header record. */
 static int* DATA_MEDIUM_HEADER_BDT_RECORD = NUMBER_20_INTEGER_ARRAY;
 
@@ -48,8 +51,14 @@ static int* DATA_PACKAGE_HEADER_BDT_RECORD = NUMBER_22_INTEGER_ARRAY;
 /** The data package footer record. */
 static int* DATA_PACKAGE_FOOTER_BDT_RECORD = NUMBER_23_INTEGER_ARRAY;
 
+/** The medical treatment record. */
+static int* MEDICAL_TREATMENT_BDT_RECORD = NUMBER_101_INTEGER_ARRAY;
+
 /** The patient master data record. */
 static int* PATIENT_MASTER_DATA_BDT_RECORD = NUMBER_6100_INTEGER_ARRAY;
+
+/** The medical treatment data record. */
+static int* MEDICAL_TREATMENT_DATA_BDT_RECORD = NUMBER_6200_INTEGER_ARRAY;
 
 /* BDT_RECORD_CONSTANTS_SOURCE */
 #endif

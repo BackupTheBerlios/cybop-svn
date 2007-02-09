@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2007-02-08 23:52:56 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2007-02-09 22:30:08 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -63,8 +63,7 @@ void parse_bdt_record(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
             if (r != *NUMBER_0_INTEGER) {
 
-    sleep(1.0);
-    fprintf(stderr, "TEST parse bdt record content record id: %s\n", (char*) p5);
+    fprintf(stderr, "TEST parse bdt record content count: %i\n\n", *((int*) p6));
 
                 // Set data record identification as parse mode.
                 parse_integer((void*) &m, NULL_POINTER, NULL_POINTER, p5, p6);
@@ -74,6 +73,48 @@ void parse_bdt_record(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
     } else {
 
         log_message_debug("Error: Could not parse bdt record. The parse mode is null.");
+    }
+}
+
+/**
+ * Parses the bdt record medical practice data.
+ *
+ * @param p0 the destination compound model (Hand over as reference!)
+ * @param p1 the destination count
+ * @param p2 the destination size
+ * @param p3 the field identification
+ * @param p4 the field identification count
+ * @param p5 the field content
+ * @param p6 the field content count
+ * @param p7 the parse mode
+ */
+void parse_bdt_record_medical_practice_data(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
+
+    if (p7 != NULL_POINTER) {
+
+        int* m = (int*) p7;
+
+        log_message_debug("Information: Parse bdt record medical practice data.");
+
+        // The comparison result.
+        int r = *NUMBER_0_INTEGER;
+
+        if (r == *NUMBER_0_INTEGER) {
+
+            compare_arrays(p3, p4, (void*) RECORD_IDENTIFICATION_BDT_FIELD, (void*) BDT_FIELD_IDENTIFICATION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+            if (r != *NUMBER_0_INTEGER) {
+
+    fprintf(stderr, "TEST parse bdt record medical practice data content count: %i\n\n", *((int*) p6));
+
+                // Set data record identification as parse mode.
+                parse_integer((void*) &m, NULL_POINTER, NULL_POINTER, p5, p6);
+            }
+        }
+
+    } else {
+
+        log_message_debug("Error: Could not parse bdt record medical practice data. The parse mode is null.");
     }
 }
 
@@ -106,8 +147,7 @@ void parse_bdt_record_data_medium_header(void* p0, void* p1, void* p2, void* p3,
 
             if (r != *NUMBER_0_INTEGER) {
 
-    sleep(1.0);
-    fprintf(stderr, "TEST parse bdt record data medium header content record id: %s\n", (char*) p5);
+    fprintf(stderr, "TEST parse bdt record data medium header content count: %i\n\n", *((int*) p6));
 
                 // Set data record identification as parse mode.
                 parse_integer((void*) &m, NULL_POINTER, NULL_POINTER, p5, p6);
@@ -117,6 +157,48 @@ void parse_bdt_record_data_medium_header(void* p0, void* p1, void* p2, void* p3,
     } else {
 
         log_message_debug("Error: Could not parse bdt record data medium header. The parse mode is null.");
+    }
+}
+
+/**
+ * Parses the bdt record data medium footer.
+ *
+ * @param p0 the destination compound model (Hand over as reference!)
+ * @param p1 the destination count
+ * @param p2 the destination size
+ * @param p3 the field identification
+ * @param p4 the field identification count
+ * @param p5 the field content
+ * @param p6 the field content count
+ * @param p7 the parse mode
+ */
+void parse_bdt_record_data_medium_footer(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
+
+    if (p7 != NULL_POINTER) {
+
+        int* m = (int*) p7;
+
+        log_message_debug("Information: Parse bdt record data medium footer.");
+
+        // The comparison result.
+        int r = *NUMBER_0_INTEGER;
+
+        if (r == *NUMBER_0_INTEGER) {
+
+            compare_arrays(p3, p4, (void*) RECORD_IDENTIFICATION_BDT_FIELD, (void*) BDT_FIELD_IDENTIFICATION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+            if (r != *NUMBER_0_INTEGER) {
+
+    fprintf(stderr, "TEST parse bdt record data medium footer content count: %i\n\n", *((int*) p6));
+
+                // Set data record identification as parse mode.
+                parse_integer((void*) &m, NULL_POINTER, NULL_POINTER, p5, p6);
+            }
+        }
+
+    } else {
+
+        log_message_debug("Error: Could not parse bdt record data medium footer. The parse mode is null.");
     }
 }
 
@@ -140,8 +222,47 @@ void parse_bdt_record_data_package_header(void* p0, void* p1, void* p2, void* p3
 
         log_message_debug("Information: Parse bdt record data package header.");
 
-    sleep(1.0);
-    fprintf(stderr, "TEST parse bdt record data package header content record id: %s\n", (char*) p5);
+        // The comparison result.
+        int r = *NUMBER_0_INTEGER;
+
+        if (r == *NUMBER_0_INTEGER) {
+
+            compare_arrays(p3, p4, (void*) RECORD_IDENTIFICATION_BDT_FIELD, (void*) BDT_FIELD_IDENTIFICATION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+            if (r != *NUMBER_0_INTEGER) {
+
+    fprintf(stderr, "TEST parse bdt record data package header content count: %i\n\n", *((int*) p6));
+
+                // Set data record identification as parse mode.
+                parse_integer((void*) &m, NULL_POINTER, NULL_POINTER, p5, p6);
+            }
+        }
+
+    } else {
+
+        log_message_debug("Error: Could not parse bdt record data package header. The parse mode is null.");
+    }
+}
+
+/**
+ * Parses the bdt record data package footer.
+ *
+ * @param p0 the destination compound model (Hand over as reference!)
+ * @param p1 the destination count
+ * @param p2 the destination size
+ * @param p3 the field identification
+ * @param p4 the field identification count
+ * @param p5 the field content
+ * @param p6 the field content count
+ * @param p7 the parse mode
+ */
+void parse_bdt_record_data_package_footer(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
+
+    if (p7 != NULL_POINTER) {
+
+        int* m = (int*) p7;
+
+        log_message_debug("Information: Parse bdt record data package footer.");
 
         // The comparison result.
         int r = *NUMBER_0_INTEGER;
@@ -152,8 +273,7 @@ void parse_bdt_record_data_package_header(void* p0, void* p1, void* p2, void* p3
 
             if (r != *NUMBER_0_INTEGER) {
 
-    sleep(1.0);
-    fprintf(stderr, "TEST parse bdt record data package header content record id AGAIN: %s\n", (char*) p5);
+    fprintf(stderr, "TEST parse bdt record data package footer content count: %i\n\n", *((int*) p6));
 
                 // Set data record identification as parse mode.
                 parse_integer((void*) &m, NULL_POINTER, NULL_POINTER, p5, p6);
@@ -162,7 +282,49 @@ void parse_bdt_record_data_package_header(void* p0, void* p1, void* p2, void* p3
 
     } else {
 
-        log_message_debug("Error: Could not parse bdt record data medium header. The parse mode is null.");
+        log_message_debug("Error: Could not parse bdt record data package footer. The parse mode is null.");
+    }
+}
+
+/**
+ * Parses the bdt record medical treatment.
+ *
+ * @param p0 the destination compound model (Hand over as reference!)
+ * @param p1 the destination count
+ * @param p2 the destination size
+ * @param p3 the field identification
+ * @param p4 the field identification count
+ * @param p5 the field content
+ * @param p6 the field content count
+ * @param p7 the parse mode
+ */
+void parse_bdt_record_medical_treatment(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
+
+    if (p7 != NULL_POINTER) {
+
+        int* m = (int*) p7;
+
+        log_message_debug("Information: Parse bdt record medical treatment.");
+
+        // The comparison result.
+        int r = *NUMBER_0_INTEGER;
+
+        if (r == *NUMBER_0_INTEGER) {
+
+            compare_arrays(p3, p4, (void*) RECORD_IDENTIFICATION_BDT_FIELD, (void*) BDT_FIELD_IDENTIFICATION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+            if (r != *NUMBER_0_INTEGER) {
+
+    fprintf(stderr, "TEST parse bdt record medical treatment content count: %i\n\n", *((int*) p6));
+
+                // Set data record identification as parse mode.
+                parse_integer((void*) &m, NULL_POINTER, NULL_POINTER, p5, p6);
+            }
+        }
+
+    } else {
+
+        log_message_debug("Error: Could not parse bdt record medical treatment. The parse mode is null.");
     }
 }
 
@@ -195,8 +357,9 @@ void parse_bdt_record_patient_master_data(void* p0, void* p1, void* p2, void* p3
 
             if (r != *NUMBER_0_INTEGER) {
 
-    sleep(1.0);
-                fprintf(stderr, "TEST last name: %s\n", (char*) p5);
+    fprintf(stderr, "TEST parse patient master data last name count: %i\n\n", *((int*) p6));
+//??    fprintf(stderr, "TEST parse patient master data last name: %s\n", (char*) p5);
+
                 //?? TODO: Do something with the patient last name!
             }
         }
@@ -207,8 +370,9 @@ void parse_bdt_record_patient_master_data(void* p0, void* p1, void* p2, void* p3
 
             if (r != *NUMBER_0_INTEGER) {
 
-    sleep(1.0);
-                fprintf(stderr, "TEST first name: %s\n", (char*) p5);
+    fprintf(stderr, "TEST parse patient master data first name count: %i\n\n", *((int*) p6));
+//??    fprintf(stderr, "TEST first name: %s\n", (char*) p5);
+
                 //?? TODO: Do something with the patient first name!
             }
         }
@@ -219,8 +383,9 @@ void parse_bdt_record_patient_master_data(void* p0, void* p1, void* p2, void* p3
 
             if (r != *NUMBER_0_INTEGER) {
 
-    sleep(1.0);
-                fprintf(stderr, "TEST birth date: %s\n", (char*) p5);
+    fprintf(stderr, "TEST parse patient master data birth date count: %i\n\n", *((int*) p6));
+//??    fprintf(stderr, "TEST birth date: %s\n", (char*) p5);
+
                 //?? TODO: Do something with the patient birth date!
             }
         }
@@ -231,15 +396,71 @@ void parse_bdt_record_patient_master_data(void* p0, void* p1, void* p2, void* p3
 
             if (r != *NUMBER_0_INTEGER) {
 
-    sleep(1.0);
-                fprintf(stderr, "TEST sex: %s\n", (char*) p5);
+    fprintf(stderr, "TEST parse patient master data sex count: %i\n\n", *((int*) p6));
+//??    fprintf(stderr, "TEST sex: %s\n", (char*) p5);
+
                 //?? TODO: Do something with the patient sex!
+            }
+        }
+
+        if (r == *NUMBER_0_INTEGER) {
+
+            compare_arrays(p3, p4, (void*) RECORD_IDENTIFICATION_BDT_FIELD, (void*) BDT_FIELD_IDENTIFICATION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+            if (r != *NUMBER_0_INTEGER) {
+
+    fprintf(stderr, "TEST parse bdt record patient master data content count: %i\n\n", *((int*) p6));
+
+                // Set data record identification as parse mode.
+                parse_integer((void*) &m, NULL_POINTER, NULL_POINTER, p5, p6);
             }
         }
 
     } else {
 
-        log_message_debug("Error: Could not parse bdt record data medium header. The parse mode is null.");
+        log_message_debug("Error: Could not parse bdt record patient master data. The parse mode is null.");
+    }
+}
+
+/**
+ * Parses the bdt record medical treatment data.
+ *
+ * @param p0 the destination compound model (Hand over as reference!)
+ * @param p1 the destination count
+ * @param p2 the destination size
+ * @param p3 the field identification
+ * @param p4 the field identification count
+ * @param p5 the field content
+ * @param p6 the field content count
+ * @param p7 the parse mode
+ */
+void parse_bdt_record_medical_treatment_data(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
+
+    if (p7 != NULL_POINTER) {
+
+        int* m = (int*) p7;
+
+        log_message_debug("Information: Parse bdt record medical treatment data.");
+
+        // The comparison result.
+        int r = *NUMBER_0_INTEGER;
+
+        if (r == *NUMBER_0_INTEGER) {
+
+            compare_arrays(p3, p4, (void*) RECORD_IDENTIFICATION_BDT_FIELD, (void*) BDT_FIELD_IDENTIFICATION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+            if (r != *NUMBER_0_INTEGER) {
+
+    fprintf(stderr, "TEST parse bdt record medical treatment data content count: %i\n\n", *((int*) p6));
+
+                // Set data record identification as parse mode.
+                parse_integer((void*) &m, NULL_POINTER, NULL_POINTER, p5, p6);
+            }
+        }
+
+    } else {
+
+        log_message_debug("Error: Could not parse bdt record medical treatment data. The parse mode is null.");
     }
 }
 
@@ -263,21 +484,44 @@ void parse_bdt_field(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
 
         log_message_debug("Information: Parse bdt field.");
 
+//??    fprintf(stderr, "TEST field content: %s\n", (char*) p5);
+    fprintf(stderr, "TEST field content count: %i\n\n", *((int*) p6));
+
         if (*m == *NUMBER_0_INTEGER) {
 
             parse_bdt_record(p0, p1, p2, p3, p4, p5, p6, p7);
+
+        } else if (*m == *MEDICAL_PRACTICE_DATA_BDT_RECORD) {
+
+            parse_bdt_record_medical_practice_data(p0, p1, p2, p3, p4, p5, p6, p7);
 
         } else if (*m == *DATA_MEDIUM_HEADER_BDT_RECORD) {
 
             parse_bdt_record_data_medium_header(p0, p1, p2, p3, p4, p5, p6, p7);
 
+        } else if (*m == *DATA_MEDIUM_FOOTER_BDT_RECORD) {
+
+            parse_bdt_record_data_medium_footer(p0, p1, p2, p3, p4, p5, p6, p7);
+
         } else if (*m == *DATA_PACKAGE_HEADER_BDT_RECORD) {
 
             parse_bdt_record_data_package_header(p0, p1, p2, p3, p4, p5, p6, p7);
 
+        } else if (*m == *DATA_PACKAGE_FOOTER_BDT_RECORD) {
+
+            parse_bdt_record_data_package_footer(p0, p1, p2, p3, p4, p5, p6, p7);
+
+        } else if (*m == *MEDICAL_TREATMENT_BDT_RECORD) {
+
+            parse_bdt_record_medical_treatment(p0, p1, p2, p3, p4, p5, p6, p7);
+
         } else if (*m == *PATIENT_MASTER_DATA_BDT_RECORD) {
 
             parse_bdt_record_patient_master_data(p0, p1, p2, p3, p4, p5, p6, p7);
+
+        } else if (*m == *MEDICAL_TREATMENT_DATA_BDT_RECORD) {
+
+            parse_bdt_record_medical_treatment_data(p0, p1, p2, p3, p4, p5, p6, p7);
         }
 
     } else {
@@ -388,6 +632,8 @@ void parse_bdt(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             if (ic <= *NUMBER_0_INTEGER) {
 
+    fprintf(stderr, "TEST BREAK ic: %i\n\n", ic);
+
                 break;
             }
 
@@ -468,6 +714,8 @@ void parse_bdt(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 // so that none of the sections above was entered.
                 // Therefore, the bdt byte array index is incremented by one
                 // here, so that the loop will eventually find an end.
+
+    fprintf(stderr, "TEST INCREMENT MANUALLY flag f: %i\n\n", f);
 
                 // Increment source bdt byte array index.
                 i++;
