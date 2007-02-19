@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2007-02-09 22:30:08 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2007-02-19 21:46:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -32,6 +32,7 @@
 #include "../../globals/constants/log_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../memoriser/array.c"
+#include "../../memoriser/converter/character_vector_converter.c"
 #include "../../memoriser/converter/integer_vector_converter.c"
 
 /**
@@ -360,7 +361,16 @@ void parse_bdt_record_patient_master_data(void* p0, void* p1, void* p2, void* p3
     fprintf(stderr, "TEST parse patient master data last name count: %i\n\n", *((int*) p6));
 //??    fprintf(stderr, "TEST parse patient master data last name: %s\n", (char*) p5);
 
-                //?? TODO: Do something with the patient last name!
+                // The last name array.
+                void* ln = NULL_POINTER;
+                int lnc = *NUMBER_0_INTEGER;
+                int lns = *NUMBER_0_INTEGER;
+
+                // Allocate last name array.
+                allocate((void*) &ln, (void*) &lns, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+
+                // Parse last name.
+                parse_character_vector((void*) &ln, (void*) &lnc, (void*) &lns, p5, p6);
             }
         }
 
