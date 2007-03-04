@@ -1,0 +1,175 @@
+/*
+ * $RCSfile: xdt_field_name_constants.c,v $
+ *
+ * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ *
+ * http://www.cybop.net
+ * - Cybernetics Oriented Programming -
+ *
+ * @version $Revision: 1.1 $ $Date: 2007-03-04 23:33:21 $ $Author: christian $
+ * @author Christian Heller <christian.heller@tuxtax.de>
+ */
+
+#ifndef XDT_FIELD_NAME_CONSTANTS_SOURCE
+#define XDT_FIELD_NAME_CONSTANTS_SOURCE
+
+#include "../../../globals/constants/integer_constants.c"
+
+/** The kbv pruefnummer field name. */
+static char KBV_PRUEFNUMMER_XDT_FIELD_NAME_ARRAY[] = {'k', 'b', 'v', '_', 'p', 'r', 'u', 'e', 'f', 'n', 'u', 'm', 'm', 'e', 'r'};
+static char* KBV_PRUEFNUMMER_XDT_FIELD_NAME = KBV_PRUEFNUMMER_XDT_FIELD_NAME_ARRAY;
+static int* KBV_PRUEFNUMMER_XDT_FIELD_NAME_COUNT = NUMBER_15_INTEGER_ARRAY;
+
+/** The patient identification field name. */
+static char PATIENT_IDENTIFICATION_XDT_FIELD_NAME_ARRAY[] = {'p', 'a', 't', 'i', 'e', 'n', 't', '_', 'i', 'd', 'e', 'n', 't', 'i', 'f', 'i', 'c', 'a', 't', 'i', 'o', 'n'};
+static char* PATIENT_IDENTIFICATION_XDT_FIELD_NAME = PATIENT_IDENTIFICATION_XDT_FIELD_NAME_ARRAY;
+static int* PATIENT_IDENTIFICATION_XDT_FIELD_NAME_COUNT = NUMBER_22_INTEGER_ARRAY;
+
+/** The name affix field name. */
+static char NAME_AFFIX_XDT_FIELD_NAME_ARRAY[] = {'n', 'a', 'm', 'e', '_', 'a', 'f', 'f', 'i', 'x'};
+static char* NAME_AFFIX_XDT_FIELD_NAME = NAME_AFFIX_XDT_FIELD_NAME_ARRAY;
+static int* NAME_AFFIX_XDT_FIELD_NAME_COUNT = NUMBER_10_INTEGER_ARRAY;
+
+/** The patient last name field name. */
+static char PATIENT_LAST_NAME_XDT_FIELD_NAME_ARRAY[] = {'p', 'a', 't', 'i', 'e', 'n', 't', '_', 'l', 'a', 's', 't', '_', 'n', 'a', 'm', 'e'};
+static char* PATIENT_LAST_NAME_XDT_FIELD_NAME = PATIENT_LAST_NAME_XDT_FIELD_NAME_ARRAY;
+static int* PATIENT_LAST_NAME_XDT_FIELD_NAME_COUNT = NUMBER_17_INTEGER_ARRAY;
+
+/** The patient first name field name. */
+static char PATIENT_FIRST_NAME_XDT_FIELD_NAME_ARRAY[] = {'p', 'a', 't', 'i', 'e', 'n', 't', '_', 'f', 'i', 'r', 's', 't', '_', 'n', 'a', 'm', 'e'};
+static char* PATIENT_FIRST_NAME_XDT_FIELD_NAME = PATIENT_FIRST_NAME_XDT_FIELD_NAME_ARRAY;
+static int* PATIENT_FIRST_NAME_XDT_FIELD_NAME_COUNT = NUMBER_18_INTEGER_ARRAY;
+
+/** The patient birth date field name. */
+static char PATIENT_BIRTH_DATE_XDT_FIELD_NAME_ARRAY[] = {'p', 'a', 't', 'i', 'e', 'n', 't', '_', 'b', 'i', 'r', 't', 'h', '_', 'd', 'a', 't', 'e'};
+static char* PATIENT_BIRTH_DATE_XDT_FIELD_NAME = PATIENT_BIRTH_DATE_XDT_FIELD_NAME_ARRAY;
+static int* PATIENT_BIRTH_DATE_XDT_FIELD_NAME_COUNT = NUMBER_18_INTEGER_ARRAY;
+
+/** The patient title field name. */
+static char PATIENT_TITLE_XDT_FIELD_NAME_ARRAY[] = {'p', 'a', 't', 'i', 'e', 'n', 't', '_', 't', 'i', 't', 'l', 'e'};
+static char* PATIENT_TITLE_XDT_FIELD_NAME = PATIENT_TITLE_XDT_FIELD_NAME_ARRAY;
+static int* PATIENT_TITLE_XDT_FIELD_NAME_COUNT = NUMBER_13_INTEGER_ARRAY;
+
+/** The patient health insurance number field name. */
+static char PATIENT_HEALTH_INSURANCE_NUMBER_XDT_FIELD_NAME_ARRAY[] = {'p', 'a', 't', 'i', 'e', 'n', 't', '_', 'h', 'e', 'a', 'l', 't', 'h', '_', 'i', 'n', 's', 'u', 'r', 'a', 'n', 'c', 'e', '_', 'n', 'u', 'm', 'b', 'e', 'r'};
+static char* PATIENT_HEALTH_INSURANCE_NUMBER_XDT_FIELD_NAME = PATIENT_HEALTH_INSURANCE_NUMBER_XDT_FIELD_NAME_ARRAY;
+static int* PATIENT_HEALTH_INSURANCE_NUMBER_XDT_FIELD_NAME_COUNT = NUMBER_31_INTEGER_ARRAY;
+
+/** The patient residence field name. */
+static char PATIENT_RESIDENCE_XDT_FIELD_NAME_ARRAY[] = {'p', 'a', 't', 'i', 'e', 'n', 't', '_', 'r', 'e', 's', 'i', 'd', 'e', 'n', 'c', 'e'};
+static char* PATIENT_RESIDENCE_XDT_FIELD_NAME = PATIENT_RESIDENCE_XDT_FIELD_NAME_ARRAY;
+static int* PATIENT_RESIDENCE_XDT_FIELD_NAME_COUNT = NUMBER_17_INTEGER_ARRAY;
+
+/** The patient street field name. */
+static char PATIENT_STREET_XDT_FIELD_NAME_ARRAY[] = {'p', 'a', 't', 'i', 'e', 'n', 't', '_', 's', 't', 'r', 'e', 'e', 't'};
+static char* PATIENT_STREET_XDT_FIELD_NAME = PATIENT_STREET_XDT_FIELD_NAME_ARRAY;
+static int* PATIENT_STREET_XDT_FIELD_NAME_COUNT = NUMBER_14_INTEGER_ARRAY;
+
+/** The health insurance type field name. */
+static char HEALTH_INSURANCE_TYPE_XDT_FIELD_NAME_ARRAY[] = {'h', 'e', 'a', 'l', 't', 'h', '_', 'i', 'n', 's', 'u', 'r', 'a', 'n', 'c', 'e', '_', 't', 'y', 'p', 'e'};
+static char* HEALTH_INSURANCE_TYPE_XDT_FIELD_NAME = HEALTH_INSURANCE_TYPE_XDT_FIELD_NAME_ARRAY;
+static int* HEALTH_INSURANCE_TYPE_XDT_FIELD_NAME_COUNT = NUMBER_21_INTEGER_ARRAY;
+
+/** The patient sex field name. */
+static char PATIENT_SEX_XDT_FIELD_NAME_ARRAY[] = {'p', 'a', 't', 'i', 'e', 'n', 't', '_', 's', 'e', 'x'};
+static char* PATIENT_SEX_XDT_FIELD_NAME = PATIENT_SEX_XDT_FIELD_NAME_ARRAY;
+static int* PATIENT_SEX_XDT_FIELD_NAME_COUNT = NUMBER_11_INTEGER_ARRAY;
+
+/** The record identification field name. */
+/*??
+static char RECORD_IDENTIFICATION_XDT_FIELD_NAME_ARRAY[] = {'r', 'e', 'c', 'o', 'r', 'd', '_', 'i', 'd', 'e', 'n', 't', 'i', 'f', 'i', 'c', 'a', 't', 'i', 'o', 'n'};
+static char* RECORD_IDENTIFICATION_XDT_FIELD_NAME = RECORD_IDENTIFICATION_XDT_FIELD_NAME_ARRAY;
+static int* RECORD_IDENTIFICATION_XDT_FIELD_NAME_COUNT = NUMBER_21_INTEGER_ARRAY;
+
+/** The record size field name. */
+/*??
+static char RECORD_SIZE_XDT_FIELD_NAME_ARRAY[] = {'r', 'e', 'c', 'o', 'r', 'd', '_', 's', 'i', 'z', 'e'};
+static char* RECORD_SIZE_XDT_FIELD_NAME = RECORD_SIZE_XDT_FIELD_NAME_ARRAY;
+static int* RECORD_SIZE_XDT_FIELD_NAME_COUNT = NUMBER_11_INTEGER_ARRAY;
+
+/** The sender medical doctor number field name. */
+static char SENDER_MEDICAL_DOCTOR_NUMBER_XDT_FIELD_NAME_ARRAY[] = {'s', 'e', 'n', 'd', 'e', 'r', '_', 'm', 'e', 'd', 'i', 'c', 'a', 'l', '_', 'd', 'o', 'c', 't', 'o', 'r', '_', 'n', 'u', 'm', 'b', 'e', 'r'};
+static char* SENDER_MEDICAL_DOCTOR_NUMBER_XDT_FIELD_NAME = SENDER_MEDICAL_DOCTOR_NUMBER_XDT_FIELD_NAME_ARRAY;
+static int* SENDER_MEDICAL_DOCTOR_NUMBER_XDT_FIELD_NAME_COUNT = NUMBER_28_INTEGER_ARRAY;
+
+/** The creation date field name. */
+static char CREATION_DATE_XDT_FIELD_NAME_ARRAY[] = {'c', 'r', 'e', 'a', 't', 'i', 'o', 'n', '_', 'd', 'a', 't', 'e'};
+static char* CREATION_DATE_XDT_FIELD_NAME = CREATION_DATE_XDT_FIELD_NAME_ARRAY;
+static int* CREATION_DATE_XDT_FIELD_NAME_COUNT = NUMBER_13_INTEGER_ARRAY;
+
+/** The data medium running numeration field name. */
+/*??
+static char DATA_MEDIUM_RUNNING_NUMERATION_XDT_FIELD_NAME_ARRAY[] = {'d', 'a', 't', 'a', '_', 'm', 'e', 'd', 'i', 'u', 'm', '_', 'r', 'u', 'n', 'n', 'i', 'n', 'g', '_', 'n', 'u', 'm', 'e', 'r', 'a', 't', 'i', 'o', 'n'};
+static char* DATA_MEDIUM_RUNNING_NUMERATION_XDT_FIELD_NAME = DATA_MEDIUM_RUNNING_NUMERATION_XDT_FIELD_NAME_ARRAY;
+static int* DATA_MEDIUM_RUNNING_NUMERATION_XDT_FIELD_NAME_COUNT = NUMBER_30_INTEGER_ARRAY;
+
+/** The character code field name. */
+/*??
+static char CHARACTER_CODE_XDT_FIELD_NAME_ARRAY[] = {'c', 'h', 'a', 'r', 'a', 'c', 't', 'e', 'r', '_', 'c', 'o', 'd', 'e'};
+static char* CHARACTER_CODE_XDT_FIELD_NAME = CHARACTER_CODE_XDT_FIELD_NAME_ARRAY;
+static int* CHARACTER_CODE_XDT_FIELD_NAME_COUNT = NUMBER_14_INTEGER_ARRAY;
+
+/** The data package size field name. */
+/*??
+static char DATA_PACKAGE_SIZE_XDT_FIELD_NAME_ARRAY[] = {'d', 'a', 't', 'a', '_', 'p', 'a', 'c', 'k', 'a', 'g', 'e', '_', 's', 'i', 'z', 'e'};
+static char* DATA_PACKAGE_SIZE_XDT_FIELD_NAME = DATA_PACKAGE_SIZE_XDT_FIELD_NAME_ARRAY;
+static int* DATA_PACKAGE_SIZE_XDT_FIELD_NAME_COUNT = NUMBER_17_INTEGER_ARRAY;
+
+/** The data medium count field name. */
+/*??
+static char DATA_MEDIUM_COUNT_XDT_FIELD_NAME_ARRAY[] = {'d', 'a', 't', 'a', '_', 'm', 'e', 'd', 'i', 'u', 'm', '_', 'c', 'o', 'u', 'n', 't'};
+static char* DATA_MEDIUM_COUNT_XDT_FIELD_NAME = DATA_MEDIUM_COUNT_XDT_FIELD_NAME_ARRAY;
+static int* DATA_MEDIUM_COUNT_XDT_FIELD_NAME_COUNT = NUMBER_17_INTEGER_ARRAY;
+
+/** The abrechnungs-datentransfer (adt) record specification version field name. */
+/*??
+static char ADT_RECORD_SPECIFICATION_VERSION_XDT_FIELD_NAME_ARRAY[] = {'a', 'd', 't', '_', 'r', 'e', 'c', 'o', 'r', 'd', '_', 's', 'p', 'e', 'c', 'i', 'f', 'i', 'c', 'a', 't', 'i', 'o', 'n', '_', 'v', 'e', 'r', 's', 'i', 'o', 'n'};
+static char* ADT_RECORD_SPECIFICATION_VERSION_XDT_FIELD_NAME = ADT_RECORD_SPECIFICATION_VERSION_XDT_FIELD_NAME_ARRAY;
+static int* ADT_RECORD_SPECIFICATION_VERSION_XDT_FIELD_NAME_COUNT = NUMBER_32_INTEGER_ARRAY;
+
+/** The behandlungs-datentransfer (bdt) version field name. */
+/*??
+static char BDT_VERSION_XDT_FIELD_NAME_ARRAY[] = {'b', 'd', 't', '_', 'v', 'e', 'r', 's', 'i', 'o', 'n'};
+static char* BDT_VERSION_XDT_FIELD_NAME = BDT_VERSION_XDT_FIELD_NAME_ARRAY;
+static int* BDT_VERSION_XDT_FIELD_NAME_COUNT = NUMBER_11_INTEGER_ARRAY;
+
+/** The archiving type field name. */
+/*??
+static char ARCHIVING_TYPE_XDT_FIELD_NAME_ARRAY[] = {'a', 'r', 'c', 'h', 'i', 'v', 'i', 'n', 'g', '_', 't', 'y', 'p', 'e'};
+static char* ARCHIVING_TYPE_XDT_FIELD_NAME = ARCHIVING_TYPE_XDT_FIELD_NAME_ARRAY;
+static int* ARCHIVING_TYPE_XDT_FIELD_NAME_COUNT = NUMBER_14_INTEGER_ARRAY;
+
+/** The data storage period field name. */
+/*??
+static char DATA_STORAGE_PERIOD_XDT_FIELD_NAME_ARRAY[] = {'d', 'a', 't', 'a', '_', 's', 't', 'o', 'r', 'a', 'g', 'e', '_', 'p', 'e', 'r', 'i', 'o', 'd'};
+static char* DATA_STORAGE_PERIOD_XDT_FIELD_NAME = DATA_STORAGE_PERIOD_XDT_FIELD_NAME_ARRAY;
+static int* DATA_STORAGE_PERIOD_XDT_FIELD_NAME_COUNT = NUMBER_19_INTEGER_ARRAY;
+
+/** The transfer begin field name. */
+/*??
+static char TRANSFER_BEGIN_XDT_FIELD_NAME_ARRAY[] = {'t', 'r', 'a', 'n', 's', 'f', 'e', 'r', '_', 'b', 'e', 'g', 'i', 'n'};
+static char* TRANSFER_BEGIN_XDT_FIELD_NAME = TRANSFER_BEGIN_XDT_FIELD_NAME_ARRAY;
+static int* TRANSFER_BEGIN_XDT_FIELD_NAME_COUNT = NUMBER_14_INTEGER_ARRAY;
+
+/** The system internal parameter field name. */
+/*??
+static char SYSTEM_INTERNAL_PARAMETER_XDT_FIELD_NAME_ARRAY[] = {'s', 'y', 's', 't', 'e', 'm', '_', 'i', 'n', 't', 'e', 'r', 'n', 'a', 'l', '_', 'p', 'a', 'r', 'a', 'm', 'e', 't', 'e', 'r'};
+static char* SYSTEM_INTERNAL_PARAMETER_XDT_FIELD_NAME = SYSTEM_INTERNAL_PARAMETER_XDT_FIELD_NAME_ARRAY;
+static int* SYSTEM_INTERNAL_PARAMETER_XDT_FIELD_NAME_COUNT = NUMBER_25_INTEGER_ARRAY;
+
+/* XDT_FIELD_NAME_CONSTANTS_SOURCE */
+#endif

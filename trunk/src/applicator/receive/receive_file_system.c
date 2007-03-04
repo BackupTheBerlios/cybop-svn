@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2007-02-07 00:13:34 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2007-03-04 23:33:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -339,9 +339,9 @@ void receive_file_system(void* p0, void* p1, void* p2,
 
     // Create knowledge model name.
     allocate((void*) &kmnc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    *kmnc = 0;
+    *kmnc = *NUMBER_0_INTEGER;
     allocate((void*) &kmns, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    *kmns = 0;
+    *kmns = *NUMBER_0_INTEGER;
     receive_file_system_model((void*) &kmn, (void*) kmnc, (void*) kmns, p9, p10, p11, p12, (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
 
     // A knowledge model channel is not received (created),
@@ -349,23 +349,23 @@ void receive_file_system(void* p0, void* p1, void* p2,
 
     // Create knowledge model abstraction.
     allocate((void*) &kmac, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    *kmac = 0;
+    *kmac = *NUMBER_0_INTEGER;
     allocate((void*) &kmas, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    *kmas = 0;
+    *kmas = *NUMBER_0_INTEGER;
     receive_file_system_model((void*) &kma, (void*) kmac, (void*) kmas, p13, p14, p15, p16, (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
 
     // Create knowledge model model.
     allocate((void*) &kmmc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    *kmmc = 0;
+    *kmmc = *NUMBER_0_INTEGER;
     allocate((void*) &kmms, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    *kmms = 0;
+    *kmms = *NUMBER_0_INTEGER;
     receive_file_system_model((void*) &kmm, (void*) kmmc, (void*) kmms, p19, p20, p13, p14, p17, p18);
 
     // Create knowledge model details.
     allocate((void*) &kmdc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    *kmdc = 0;
+    *kmdc = *NUMBER_0_INTEGER;
     allocate((void*) &kmds, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    *kmds = 0;
+    *kmds = *NUMBER_0_INTEGER;
     receive_file_system_model((void*) &kmd, (void*) kmdc, (void*) kmds, EMPTY_MODEL, EMPTY_MODEL_COUNT, COMPOUND_ABSTRACTION, COMPOUND_ABSTRACTION_COUNT, INLINE_CHANNEL, INLINE_CHANNEL_COUNT);
 
     // The comparison result.

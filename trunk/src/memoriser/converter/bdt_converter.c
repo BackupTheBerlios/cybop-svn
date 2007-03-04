@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2007-02-19 21:46:33 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2007-03-04 23:33:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -29,6 +29,7 @@
 
 #include "../../globals/constants/xdt/bdt_field_constants.c"
 #include "../../globals/constants/xdt/bdt_record_constants.c"
+#include "../../globals/constants/xdt/xdt_field_name_constants.c"
 #include "../../globals/constants/log_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../memoriser/array.c"
@@ -332,20 +333,28 @@ void parse_bdt_record_medical_treatment(void* p0, void* p1, void* p2, void* p3, 
 /**
  * Parses the bdt record patient master data.
  *
- * @param p0 the destination compound model (Hand over as reference!)
- * @param p1 the destination count
- * @param p2 the destination size
- * @param p3 the field identification
- * @param p4 the field identification count
- * @param p5 the field content
- * @param p6 the field content count
- * @param p7 the parse mode
+ * @param p0 the destination knowledge model name (Hand over as reference!)
+ * @param p1 the destination knowledge model name count
+ * @param p2 the destination knowledge model name size
+ * @param p3 the destination knowledge model abstraction (Hand over as reference!)
+ * @param p4 the destination knowledge model abstraction count
+ * @param p5 the destination knowledge model abstraction size
+ * @param p6 the destination knowledge model model (Hand over as reference!)
+ * @param p7 the destination knowledge model model count
+ * @param p8 the destination knowledge model model size
+ * @param p9 the field identification
+ * @param p10 the field identification count
+ * @param p11 the field content
+ * @param p12 the field content count
+ * @param p13 the parse mode
  */
-void parse_bdt_record_patient_master_data(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
+void parse_bdt_record_patient_master_data(void* p0, void* p1, void* p2,
+    void* p3, void* p4, void* p5, void* p6, void* p7, void* p8,
+    void* p9, void* p10, void* p11, void* p12, void* p13) {
 
-    if (p7 != NULL_POINTER) {
+    if (p13 != NULL_POINTER) {
 
-        int* m = (int*) p7;
+        int* m = (int*) p13;
 
         log_message_debug("Information: Parse bdt record patient master data.");
 
@@ -354,68 +363,99 @@ void parse_bdt_record_patient_master_data(void* p0, void* p1, void* p2, void* p3
 
         if (r == *NUMBER_0_INTEGER) {
 
-            compare_arrays(p3, p4, (void*) PATIENT_LAST_NAME_BDT_FIELD, (void*) BDT_FIELD_IDENTIFICATION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+            compare_arrays(p9, p10, (void*) PATIENT_LAST_NAME_BDT_FIELD, (void*) BDT_FIELD_IDENTIFICATION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
             if (r != *NUMBER_0_INTEGER) {
 
-    fprintf(stderr, "TEST parse patient master data last name count: %i\n\n", *((int*) p6));
-//??    fprintf(stderr, "TEST parse patient master data last name: %s\n", (char*) p5);
+                // Parse name.
+                parse_character_vector(p0, p1, p2, PATIENT_LAST_NAME_XDT_FIELD_NAME, PATIENT_LAST_NAME_XDT_FIELD_NAME_COUNT);
 
-                // The last name array.
-                void* ln = NULL_POINTER;
-                int lnc = *NUMBER_0_INTEGER;
-                int lns = *NUMBER_0_INTEGER;
+                // Parse abstraction.
+                parse_character_vector(p3, p4, p5, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
-                // Allocate last name array.
-                allocate((void*) &ln, (void*) &lns, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+                // Allocate model.
+                allocate(p6, p8, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
-                // Parse last name.
-                parse_character_vector((void*) &ln, (void*) &lnc, (void*) &lns, p5, p6);
+                // Parse model.
+                parse_character_vector(p6, p7, p8, p11, p12);
+
+    fprintf(stderr, "TEST parse patient master data last name: %s\n", *((char**) p6));
+    fprintf(stderr, "TEST parse patient master data last name count: %i\n\n", *((int*) p7));
             }
         }
 
         if (r == *NUMBER_0_INTEGER) {
 
-            compare_arrays(p3, p4, (void*) PATIENT_FIRST_NAME_BDT_FIELD, (void*) BDT_FIELD_IDENTIFICATION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+            compare_arrays(p9, p10, (void*) PATIENT_FIRST_NAME_BDT_FIELD, (void*) BDT_FIELD_IDENTIFICATION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
             if (r != *NUMBER_0_INTEGER) {
 
-    fprintf(stderr, "TEST parse patient master data first name count: %i\n\n", *((int*) p6));
-//??    fprintf(stderr, "TEST first name: %s\n", (char*) p5);
+                // Parse name.
+                parse_character_vector(p0, p1, p2, PATIENT_FIRST_NAME_XDT_FIELD_NAME, PATIENT_FIRST_NAME_XDT_FIELD_NAME_COUNT);
 
-                //?? TODO: Do something with the patient first name!
+                // Parse abstraction.
+                parse_character_vector(p3, p4, p5, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+
+                // Allocate model.
+                allocate(p6, p8, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+
+                // Parse model.
+                parse_character_vector(p6, p7, p8, p11, p12);
+
+    fprintf(stderr, "TEST parse patient master data first name: %s\n", *((char**) p6));
+    fprintf(stderr, "TEST parse patient master data first name count: %i\n\n", *((int*) p7));
             }
         }
 
         if (r == *NUMBER_0_INTEGER) {
 
-            compare_arrays(p3, p4, (void*) PATIENT_BIRTH_DATE_BDT_FIELD, (void*) BDT_FIELD_IDENTIFICATION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+            compare_arrays(p9, p10, (void*) PATIENT_BIRTH_DATE_BDT_FIELD, (void*) BDT_FIELD_IDENTIFICATION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
             if (r != *NUMBER_0_INTEGER) {
 
-    fprintf(stderr, "TEST parse patient master data birth date count: %i\n\n", *((int*) p6));
-//??    fprintf(stderr, "TEST birth date: %s\n", (char*) p5);
+                // Parse name.
+                parse_character_vector(p0, p1, p2, PATIENT_BIRTH_DATE_XDT_FIELD_NAME, PATIENT_BIRTH_DATE_XDT_FIELD_NAME_COUNT);
 
-                //?? TODO: Do something with the patient birth date!
+                // Parse abstraction.
+                parse_character_vector(p3, p4, p5, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+
+                // Allocate model.
+                allocate(p6, p8, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+
+                // Parse model.
+                parse_character_vector(p6, p7, p8, p11, p12);
+
+    fprintf(stderr, "TEST parse patient master data date: %s\n", *((char**) p6));
+    fprintf(stderr, "TEST parse patient master data date count: %i\n\n", *((int*) p7));
             }
         }
 
         if (r == *NUMBER_0_INTEGER) {
 
-            compare_arrays(p3, p4, (void*) PATIENT_SEX_BDT_FIELD, (void*) BDT_FIELD_IDENTIFICATION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+            compare_arrays(p9, p10, (void*) PATIENT_SEX_BDT_FIELD, (void*) BDT_FIELD_IDENTIFICATION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
             if (r != *NUMBER_0_INTEGER) {
 
-    fprintf(stderr, "TEST parse patient master data sex count: %i\n\n", *((int*) p6));
-//??    fprintf(stderr, "TEST sex: %s\n", (char*) p5);
+                // Parse name.
+                parse_character_vector(p0, p1, p2, PATIENT_SEX_XDT_FIELD_NAME, PATIENT_SEX_XDT_FIELD_NAME_COUNT);
 
-                //?? TODO: Do something with the patient sex!
+                // Parse abstraction.
+                parse_character_vector(p3, p4, p5, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+
+                // Allocate model.
+                allocate(p6, p8, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+
+                // Parse model.
+                parse_integer_vector(p6, p7, p8, p11, p12);
+
+    fprintf(stderr, "TEST parse patient master data sex: %i\n", **((int**) p6));
+    fprintf(stderr, "TEST parse patient master data sex count: %i\n\n", *((int*) p7));
             }
         }
 
         if (r == *NUMBER_0_INTEGER) {
 
-            compare_arrays(p3, p4, (void*) RECORD_IDENTIFICATION_BDT_FIELD, (void*) BDT_FIELD_IDENTIFICATION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+            compare_arrays(p9, p10, (void*) RECORD_IDENTIFICATION_BDT_FIELD, (void*) BDT_FIELD_IDENTIFICATION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
             if (r != *NUMBER_0_INTEGER) {
 
@@ -497,41 +537,165 @@ void parse_bdt_field(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
 //??    fprintf(stderr, "TEST field content: %s\n", (char*) p5);
     fprintf(stderr, "TEST field content count: %i\n\n", *((int*) p6));
 
+        // The knowledge model name.
+        void* kmn = NULL_POINTER;
+        int* kmnc = NULL_POINTER;
+        int* kmns = NULL_POINTER;
+        // The knowledge model abstraction.
+        void* kma = NULL_POINTER;
+        int* kmac = NULL_POINTER;
+        int* kmas = NULL_POINTER;
+        // The knowledge model model.
+        void* kmm = NULL_POINTER;
+        int* kmmc = NULL_POINTER;
+        int* kmms = NULL_POINTER;
+        // The knowledge model details.
+        void* kmd = NULL_POINTER;
+        int* kmdc = NULL_POINTER;
+        int* kmds = NULL_POINTER;
+
+        // Allocate knowledge model name.
+        allocate((void*) &kmnc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        *kmnc = *NUMBER_0_INTEGER;
+        allocate((void*) &kmns, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        *kmns = *NUMBER_0_INTEGER;
+        allocate((void*) &kmn, (void*) kmns, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+
+        // A knowledge model channel is not received (allocated),
+        // since that is only needed temporarily for model loading.
+
+        // Allocate knowledge model abstraction.
+        allocate((void*) &kmac, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        *kmac = *NUMBER_0_INTEGER;
+        allocate((void*) &kmas, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        *kmas = *NUMBER_0_INTEGER;
+        allocate((void*) &kma, (void*) kmas, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+
+        // Allocate knowledge model model.
+        allocate((void*) &kmmc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        *kmmc = *NUMBER_0_INTEGER;
+        allocate((void*) &kmms, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        *kmms = *NUMBER_0_INTEGER;
+        // CAUTION! The knowledge model model may be of different abstractions,
+        // such as "character", "integer", "double", "date" etc.
+        // Since the abstraction is still unknown here, the model does NOT get
+        // allocated here, but only later, in one of the "parse" operations below!
+
+        // The knowledge model details are set to null.
+        // All data received are stored only in the knowledge model.
+
+        // The valid flag indicating that a valid parse mode was found.
+        int v = *NUMBER_0_INTEGER;
+
         if (*m == *NUMBER_0_INTEGER) {
 
             parse_bdt_record(p0, p1, p2, p3, p4, p5, p6, p7);
+
+            // Set valid flag as a valid parse mode was found.
+            v = *NUMBER_1_INTEGER;
 
         } else if (*m == *MEDICAL_PRACTICE_DATA_BDT_RECORD) {
 
             parse_bdt_record_medical_practice_data(p0, p1, p2, p3, p4, p5, p6, p7);
 
+            // Set valid flag as a valid parse mode was found.
+            v = *NUMBER_1_INTEGER;
+
         } else if (*m == *DATA_MEDIUM_HEADER_BDT_RECORD) {
 
             parse_bdt_record_data_medium_header(p0, p1, p2, p3, p4, p5, p6, p7);
+
+            // Set valid flag as a valid parse mode was found.
+            v = *NUMBER_1_INTEGER;
 
         } else if (*m == *DATA_MEDIUM_FOOTER_BDT_RECORD) {
 
             parse_bdt_record_data_medium_footer(p0, p1, p2, p3, p4, p5, p6, p7);
 
+            // Set valid flag as a valid parse mode was found.
+            v = *NUMBER_1_INTEGER;
+
         } else if (*m == *DATA_PACKAGE_HEADER_BDT_RECORD) {
 
             parse_bdt_record_data_package_header(p0, p1, p2, p3, p4, p5, p6, p7);
+
+            // Set valid flag as a valid parse mode was found.
+            v = *NUMBER_1_INTEGER;
 
         } else if (*m == *DATA_PACKAGE_FOOTER_BDT_RECORD) {
 
             parse_bdt_record_data_package_footer(p0, p1, p2, p3, p4, p5, p6, p7);
 
+            // Set valid flag as a valid parse mode was found.
+            v = *NUMBER_1_INTEGER;
+
         } else if (*m == *MEDICAL_TREATMENT_BDT_RECORD) {
 
             parse_bdt_record_medical_treatment(p0, p1, p2, p3, p4, p5, p6, p7);
 
+            // Set valid flag as a valid parse mode was found.
+            v = *NUMBER_1_INTEGER;
+
         } else if (*m == *PATIENT_MASTER_DATA_BDT_RECORD) {
 
-            parse_bdt_record_patient_master_data(p0, p1, p2, p3, p4, p5, p6, p7);
+            parse_bdt_record_patient_master_data(
+                (void*) &kmn, (void*) kmnc, (void*) kmns,
+                (void*) &kma, (void*) kmac, (void*) kmas,
+                (void*) &kmm, (void*) kmmc, (void*) kmms,
+                p3, p4, p5, p6, p7);
+
+            // Set valid flag as a valid parse mode was found.
+            v = *NUMBER_1_INTEGER;
 
         } else if (*m == *MEDICAL_TREATMENT_DATA_BDT_RECORD) {
 
             parse_bdt_record_medical_treatment_data(p0, p1, p2, p3, p4, p5, p6, p7);
+
+            // Set valid flag as a valid parse mode was found.
+            v = *NUMBER_1_INTEGER;
+        }
+
+        if (v != *NUMBER_0_INTEGER) {
+
+            // The valid flag is true, which means that a valid parse mode was
+            // found and the knowledge model was correctly filled with data.
+            // The knowledge model is therefore added to the knowledge memory.
+
+            // Add knowledge model to knowledge memory.
+            set_compound_element_by_name(p0, p1, p2, NULL_POINTER, NULL_POINTER, NULL_POINTER,
+                kmn, (void*) kmnc, (void*) kmns,
+                kma, (void*) kmac, (void*) kmas,
+                kmm, (void*) kmmc, (void*) kmms,
+                kmd, (void*) kmdc, (void*) kmds);
+
+        } else {
+
+            // The valid flag is false, which means that no valid parse mode was
+            // found and the knowledge model was left empty.
+            // The empty knowledge model is therefore deallocated again.
+
+            // Deallocate knowledge model name.
+            deallocate((void*) &kmn, (void*) kmns, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+            deallocate((void*) &kmnc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+            deallocate((void*) &kmns, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+
+            // A knowledge model channel is not received (deallocated),
+            // since that is only needed temporarily for model loading.
+
+            // Deallocate knowledge model abstraction.
+            deallocate((void*) &kma, (void*) kmas, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+            deallocate((void*) &kmac, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+            deallocate((void*) &kmas, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+
+            // Deallocate knowledge model model.
+            // CAUTION! If no valid parse mode was found, then no knowledge model model
+            // was created, as this would have been done in one of the "parse" operations.
+            // Therefore, the model does NOT have to get deallocated here.
+            deallocate((void*) &kmmc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+            deallocate((void*) &kmms, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+
+            // The knowledge model details are set to null.
+            // All data received are stored only in the knowledge model.
         }
 
     } else {
