@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2007-03-04 23:33:21 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2007-03-06 00:11:38 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -34,6 +34,7 @@
 #include "../../globals/logger/logger.c"
 #include "../../memoriser/array.c"
 #include "../../memoriser/converter/character_vector_converter.c"
+#include "../../memoriser/converter/date_time_converter.c"
 #include "../../memoriser/converter/integer_vector_converter.c"
 
 /**
@@ -417,15 +418,15 @@ void parse_bdt_record_patient_master_data(void* p0, void* p1, void* p2,
                 parse_character_vector(p0, p1, p2, PATIENT_BIRTH_DATE_XDT_FIELD_NAME, PATIENT_BIRTH_DATE_XDT_FIELD_NAME_COUNT);
 
                 // Parse abstraction.
-                parse_character_vector(p3, p4, p5, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+                parse_character_vector(p3, p4, p5, (void*) DATE_TIME_ABSTRACTION, (void*) DATE_TIME_ABSTRACTION_COUNT);
 
                 // Allocate model.
-                allocate(p6, p8, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+                allocate(p6, p8, (void*) DATE_TIME_ABSTRACTION, (void*) DATE_TIME_ABSTRACTION_COUNT);
 
                 // Parse model.
-                parse_character_vector(p6, p7, p8, p11, p12);
+                parse_ddmmyyyy_date_time(p6, p7, p8, p11, p12);
 
-    fprintf(stderr, "TEST parse patient master data date: %s\n", *((char**) p6));
+    fprintf(stderr, "TEST parse patient master data date: %i\n", **((int**) p6));
     fprintf(stderr, "TEST parse patient master data date count: %i\n\n", *((int*) p7));
             }
         }

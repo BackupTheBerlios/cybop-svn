@@ -24,7 +24,7 @@
  * - create a model in memory
  * - destroy a model in memory
  *
- * @version $Revision: 1.17 $ $Date: 2007-01-14 22:06:49 $ $Author: christian $
+ * @version $Revision: 1.18 $ $Date: 2007-03-06 00:11:38 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -36,13 +36,13 @@
 #include "../memoriser/allocator/character_vector_allocator.c"
 #include "../memoriser/allocator/complex_allocator.c"
 #include "../memoriser/allocator/compound_allocator.c"
+#include "../memoriser/allocator/date_time_allocator.c"
 #include "../memoriser/allocator/double_vector_allocator.c"
 #include "../memoriser/allocator/fraction_allocator.c"
 #include "../memoriser/allocator/integer_vector_allocator.c"
 #include "../memoriser/allocator/internal_memory_allocator.c"
 #include "../memoriser/allocator/pointer_vector_allocator.c"
 #include "../memoriser/allocator/signal_memory_allocator.c"
-#include "../memoriser/allocator/time_allocator.c"
 #include "../memoriser/allocator/unsigned_long_vector_allocator.c"
 #include "../memoriser/allocator/wide_character_vector_allocator.c"
 #include "../memoriser/allocator/xml_node_allocator.c"
@@ -193,11 +193,11 @@ void allocate(void* p0, void* p1, void* p2, void* p3) {
 
     if (r == 0) {
 
-        compare_arrays(p2, p3, (void*) TIME_ABSTRACTION, (void*) TIME_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p2, p3, (void*) DATE_TIME_ABSTRACTION, (void*) DATE_TIME_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-            allocate_time(p0, p1);
+            allocate_date_time(p0, p1);
         }
     }
 
@@ -358,11 +358,11 @@ void reallocate(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (r == 0) {
 
-        compare_arrays(p3, p4, (void*) TIME_ABSTRACTION, (void*) TIME_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p3, p4, (void*) DATE_TIME_ABSTRACTION, (void*) DATE_TIME_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-//??            reallocate_time(p0, p1, p2);
+//??            reallocate_date_time(p0, p1, p2);
         }
     }
 
@@ -522,11 +522,11 @@ void deallocate(void* p0, void* p1, void* p2, void* p3) {
 
     if (r == 0) {
 
-        compare_arrays(p2, p3, (void*) TIME_ABSTRACTION, (void*) TIME_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p2, p3, (void*) DATE_TIME_ABSTRACTION, (void*) DATE_TIME_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-            deallocate_time(p0, p1);
+            deallocate_date_time(p0, p1);
         }
     }
 

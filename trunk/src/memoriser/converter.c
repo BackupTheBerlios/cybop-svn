@@ -1,7 +1,7 @@
 /*
  * $RCSfile: converter.c,v $
  *
- * Copyright (c) 2002-2004. Christian Heller. All rights reserved.
+ * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.18 $ $Date: 2007-02-07 00:13:35 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2007-03-06 00:11:38 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -33,12 +33,12 @@
 #include "../memoriser/converter/boolean_converter.c"
 #include "../memoriser/converter/character_vector_converter.c"
 #include "../memoriser/converter/complex_converter.c"
+#include "../memoriser/converter/date_time_converter.c"
 #include "../memoriser/converter/double_vector_converter.c"
 #include "../memoriser/converter/fraction_converter.c"
 #include "../memoriser/converter/integer_vector_converter.c"
 #include "../memoriser/converter/latex_converter.c"
 #include "../memoriser/converter/linux_console_converter.c"
-#include "../memoriser/converter/time_converter.c"
 #include "../memoriser/converter/x_window_system_converter.c"
 #include "../memoriser/converter/xhtml_converter.c"
 #include "../memoriser/converter/xml_converter.c"
@@ -162,11 +162,21 @@ void parse(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6)
 
     if (r == 0) {
 
-        compare_arrays(p5, p6, (void*) TIME_ABSTRACTION, (void*) TIME_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p5, p6, (void*) DATE_TIME_ABSTRACTION, (void*) DATE_TIME_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-            parse_time(p0, p1, p2, p3, p4);
+            parse_date_time(p0, p1, p2, p3, p4);
+        }
+    }
+
+    if (r == 0) {
+
+        compare_arrays(p5, p6, (void*) DDMMYYYY_DATE_TIME_ABSTRACTION, (void*) DDMMYYYY_DATE_TIME_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != 0) {
+
+            parse_ddmmyyyy_date_time(p0, p1, p2, p3, p4);
         }
     }
 
@@ -261,8 +271,7 @@ void parse(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6)
  * @param p7 the knowledge memory
  * @param p8 the knowledge memory count
  */
-void serialise(void* p0, void* p1, void* p2, void* p3, void* p4,
-    void* p5, void* p6, void* p7, void* p8) {
+void serialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8) {
 
     // The comparison result.
     int r = 0;
@@ -349,11 +358,21 @@ void serialise(void* p0, void* p1, void* p2, void* p3, void* p4,
 
     if (r == 0) {
 
-        compare_arrays(p5, p6, (void*) TIME_ABSTRACTION, (void*) TIME_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p5, p6, (void*) DATE_TIME_ABSTRACTION, (void*) DATE_TIME_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-            serialise_time(p0, p1, p2, p3, p4);
+            serialise_date_time(p0, p1, p2, p3, p4);
+        }
+    }
+
+    if (r == 0) {
+
+        compare_arrays(p5, p6, (void*) DDMMYYYY_DATE_TIME_ABSTRACTION, (void*) DDMMYYYY_DATE_TIME_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != 0) {
+
+            serialise_ddmmyyyy_date_time(p0, p1, p2, p3, p4);
         }
     }
 

@@ -1,5 +1,5 @@
 /*
- * $RCSfile: time_allocator.c,v $
+ * $RCSfile: date_time_allocator.c,v $
  *
  * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
  *
@@ -20,15 +20,12 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * This file contains the functionality to:
- * - create a time model in memory
- *
- * @version $Revision: 1.7 $ $Date: 2007-01-14 22:06:49 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2007-03-06 00:11:38 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef TIME_ALLOCATOR_SOURCE
-#define TIME_ALLOCATOR_SOURCE
+#ifndef DATE_TIME_ALLOCATOR_SOURCE
+#define DATE_TIME_ALLOCATOR_SOURCE
 
 #include "../../globals/constants/abstraction_constants.c"
 #include "../../globals/constants/log_constants.c"
@@ -36,30 +33,38 @@
 #include "../../memoriser/array.c"
 
 /**
- * Allocates the time.
+ * Allocates the date time.
+ *
+ * It consists of the following parts:
+ * year (y)
+ * month (m)
+ * day (d)
+ * hour (h)
+ * minute (m)
+ * second (s)
  *
  * @param p0 the model (Hand over as reference!)
  * @param p1 the model size
  */
-void allocate_time(void* p0, void* p1) {
+void allocate_date_time(void* p0, void* p1) {
 
-    log_message_debug("Allocate time.");
+    log_message_debug("Allocate date time.");
 
     allocate_array(p0, p1, (void*) INTEGER_ARRAY);
 }
 
 /**
- * Deallocates the time.
+ * Deallocates the date time.
  *
  * @param p0 the model (Hand over as reference!)
  * @param p1 the model size
  */
-void deallocate_time(void* p0, void* p1) {
+void deallocate_date_time(void* p0, void* p1) {
 
-    log_message_debug("Deallocate time.");
+    log_message_debug("Deallocate date time.");
 
     deallocate_array(p0, p1, (void*) INTEGER_ARRAY);
 }
 
-/* TIME_ALLOCATOR_SOURCE */
+/* DATE_TIME_ALLOCATOR_SOURCE */
 #endif

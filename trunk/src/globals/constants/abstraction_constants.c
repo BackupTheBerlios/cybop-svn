@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.20 $ $Date: 2007-02-07 00:13:35 $ $Author: christian $
+ * @version $Revision: 1.21 $ $Date: 2007-03-06 00:11:38 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -156,10 +156,15 @@ static char TERMINAL_FOREGROUND_ABSTRACTION_ARRAY[] = {'t', 'e', 'r', 'm', 'i', 
 static char* TERMINAL_FOREGROUND_ABSTRACTION = TERMINAL_FOREGROUND_ABSTRACTION_ARRAY;
 static int* TERMINAL_FOREGROUND_ABSTRACTION_COUNT = NUMBER_19_INTEGER_ARRAY;
 
-/** The time abstraction. */
-static char TIME_ABSTRACTION_ARRAY[] = {'t', 'i', 'm', 'e'};
-static char* TIME_ABSTRACTION = TIME_ABSTRACTION_ARRAY;
-static int* TIME_ABSTRACTION_COUNT = NUMBER_4_INTEGER_ARRAY;
+/** The date time abstraction. */
+static char DATE_TIME_ABSTRACTION_ARRAY[] = {'d', 'a', 't', 'e', '_', 't', 'i', 'm', 'e'};
+static char* DATE_TIME_ABSTRACTION = DATE_TIME_ABSTRACTION_ARRAY;
+static int* DATE_TIME_ABSTRACTION_COUNT = NUMBER_9_INTEGER_ARRAY;
+
+/** The ddmmyyyy date time abstraction. */
+static char DDMMYYYY_DATE_TIME_ABSTRACTION_ARRAY[] = {'d', 'd', 'm', 'm', 'y', 'y', 'y', 'y', '_', 'd', 'a', 't', 'e', '_', 't', 'i', 'm', 'e'};
+static char* DDMMYYYY_DATE_TIME_ABSTRACTION = DDMMYYYY_DATE_TIME_ABSTRACTION_ARRAY;
+static int* DDMMYYYY_DATE_TIME_ABSTRACTION_COUNT = NUMBER_18_INTEGER_ARRAY;
 
 /** The unsigned long vector abstraction. */
 static char UNSIGNED_LONG_VECTOR_ABSTRACTION_ARRAY[] = {'u', 'n', 's', 'i', 'g', 'n', 'e', 'd', '_', 'l', 'o', 'n', 'g'};

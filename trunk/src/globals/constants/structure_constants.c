@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.35 $ $Date: 2007-01-26 00:38:17 $ $Author: christian $
+ * @version $Revision: 1.36 $ $Date: 2007-03-06 00:11:38 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -76,29 +76,29 @@ static int* FRACTION_NUMERATOR_INDEX = NUMBER_0_INTEGER_ARRAY;
 static int* FRACTION_DENOMINATOR_INDEX = NUMBER_1_INTEGER_ARRAY;
 
 //
-// Time.
+// Date time.
 //
 
-/** The time count. */
-static int* TIME_COUNT = NUMBER_6_INTEGER_ARRAY;
+/** The date time count. */
+static int* DATE_TIME_COUNT = NUMBER_6_INTEGER_ARRAY;
 
-/** The time year index. */
-static int* TIME_YEAR_INDEX = NUMBER_0_INTEGER_ARRAY;
+/** The date time year (y) index. */
+static int* DATE_TIME_YEAR_INDEX = NUMBER_0_INTEGER_ARRAY;
 
-/** The time month index. */
-static int* TIME_MONTH_INDEX = NUMBER_1_INTEGER_ARRAY;
+/** The date time month (m) index. */
+static int* DATE_TIME_MONTH_INDEX = NUMBER_1_INTEGER_ARRAY;
 
-/** The time day index. */
-static int* TIME_DAY_INDEX = NUMBER_2_INTEGER_ARRAY;
+/** The date time day (d) index. */
+static int* DATE_TIME_DAY_INDEX = NUMBER_2_INTEGER_ARRAY;
 
-/** The time hour index. */
-static int* TIME_HOUR_INDEX = NUMBER_3_INTEGER_ARRAY;
+/** The date time hour (h) index. */
+static int* DATE_TIME_HOUR_INDEX = NUMBER_3_INTEGER_ARRAY;
 
-/** The time minute index. */
-static int* TIME_MINUTE_INDEX = NUMBER_4_INTEGER_ARRAY;
+/** The date time minute (m) index. */
+static int* DATE_TIME_MINUTE_INDEX = NUMBER_4_INTEGER_ARRAY;
 
-/** The time second index. */
-static int* TIME_SECOND_INDEX = NUMBER_5_INTEGER_ARRAY;
+/** The date time second (s) index. */
+static int* DATE_TIME_SECOND_INDEX = NUMBER_5_INTEGER_ARRAY;
 
 //
 // Complex.

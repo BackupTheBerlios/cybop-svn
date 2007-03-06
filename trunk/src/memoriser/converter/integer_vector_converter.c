@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.16 $ $Date: 2007-01-14 22:06:49 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2007-03-06 00:11:39 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -62,7 +62,7 @@ void parse_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             void** d = (void**) p0;
 
-            log_message_debug("Parse integer.");
+            log_message_debug("Information: Parse integer.");
 
             // The temporary null-terminated string.
             char* tmp = NULL_POINTER;
@@ -142,7 +142,7 @@ void serialise_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 char** d = (char**) p0;
 
-                log_message_debug("Serialise integer.");
+                log_message_debug("Information: Serialise integer.");
 
                 // The integer value.
                 int* v = NULL_POINTER;
