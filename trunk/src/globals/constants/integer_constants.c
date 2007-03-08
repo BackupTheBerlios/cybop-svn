@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.14 $ $Date: 2007-02-09 22:30:08 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2007-03-08 23:56:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -4436,7 +4436,7 @@ static int NUMBER_999_INTEGER_ARRAY[] = {999};
 static int* NUMBER_999_INTEGER = NUMBER_999_INTEGER_ARRAY;
 
 //
-// Large numbers.
+// Numbers 1,000 - 9,999.
 //
 
 /** The number 1000 integer. */
@@ -4447,6 +4447,50 @@ static int* NUMBER_1000_INTEGER = NUMBER_1000_INTEGER_ARRAY;
 static int NUMBER_1971_INTEGER_ARRAY[] = {1971};
 static int* NUMBER_1971_INTEGER = NUMBER_1971_INTEGER_ARRAY;
 
+/** The number 3000 integer. */
+static int NUMBER_3000_INTEGER_ARRAY[] = {3000};
+static int* NUMBER_3000_INTEGER = NUMBER_3000_INTEGER_ARRAY;
+
+/** The number 3100 integer. */
+static int NUMBER_3100_INTEGER_ARRAY[] = {3100};
+static int* NUMBER_3100_INTEGER = NUMBER_3100_INTEGER_ARRAY;
+
+/** The number 3101 integer. */
+static int NUMBER_3101_INTEGER_ARRAY[] = {3101};
+static int* NUMBER_3101_INTEGER = NUMBER_3101_INTEGER_ARRAY;
+
+/** The number 3102 integer. */
+static int NUMBER_3102_INTEGER_ARRAY[] = {3102};
+static int* NUMBER_3102_INTEGER = NUMBER_3102_INTEGER_ARRAY;
+
+/** The number 3103 integer. */
+static int NUMBER_3103_INTEGER_ARRAY[] = {3103};
+static int* NUMBER_3103_INTEGER = NUMBER_3103_INTEGER_ARRAY;
+
+/** The number 3104 integer. */
+static int NUMBER_3104_INTEGER_ARRAY[] = {3104};
+static int* NUMBER_3104_INTEGER = NUMBER_3104_INTEGER_ARRAY;
+
+/** The number 3105 integer. */
+static int NUMBER_3105_INTEGER_ARRAY[] = {3105};
+static int* NUMBER_3105_INTEGER = NUMBER_3105_INTEGER_ARRAY;
+
+/** The number 3106 integer. */
+static int NUMBER_3106_INTEGER_ARRAY[] = {3106};
+static int* NUMBER_3106_INTEGER = NUMBER_3106_INTEGER_ARRAY;
+
+/** The number 3107 integer. */
+static int NUMBER_3107_INTEGER_ARRAY[] = {3107};
+static int* NUMBER_3107_INTEGER = NUMBER_3107_INTEGER_ARRAY;
+
+/** The number 3108 integer. */
+static int NUMBER_3108_INTEGER_ARRAY[] = {3108};
+static int* NUMBER_3108_INTEGER = NUMBER_3108_INTEGER_ARRAY;
+
+/** The number 3110 integer. */
+static int NUMBER_3110_INTEGER_ARRAY[] = {3110};
+static int* NUMBER_3110_INTEGER = NUMBER_3110_INTEGER_ARRAY;
+
 /** The number 6100 integer. */
 static int NUMBER_6100_INTEGER_ARRAY[] = {6100};
 static int* NUMBER_6100_INTEGER = NUMBER_6100_INTEGER_ARRAY;
@@ -4454,6 +4498,66 @@ static int* NUMBER_6100_INTEGER = NUMBER_6100_INTEGER_ARRAY;
 /** The number 6200 integer. */
 static int NUMBER_6200_INTEGER_ARRAY[] = {6200};
 static int* NUMBER_6200_INTEGER = NUMBER_6100_INTEGER_ARRAY;
+
+/** The number 8000 integer. */
+static int NUMBER_8000_INTEGER_ARRAY[] = {8000};
+static int* NUMBER_8000_INTEGER = NUMBER_8000_INTEGER_ARRAY;
+
+/** The number 8100 integer. */
+static int NUMBER_8100_INTEGER_ARRAY[] = {8100};
+static int* NUMBER_8100_INTEGER = NUMBER_8100_INTEGER_ARRAY;
+
+/** The number 9100 integer. */
+static int NUMBER_9100_INTEGER_ARRAY[] = {9100};
+static int* NUMBER_9100_INTEGER = NUMBER_9100_INTEGER_ARRAY;
+
+/** The number 9103 integer. */
+static int NUMBER_9103_INTEGER_ARRAY[] = {9103};
+static int* NUMBER_9103_INTEGER = NUMBER_9103_INTEGER_ARRAY;
+
+/** The number 9105 integer. */
+static int NUMBER_9105_INTEGER_ARRAY[] = {9105};
+static int* NUMBER_9105_INTEGER = NUMBER_9105_INTEGER_ARRAY;
+
+/** The number 9106 integer. */
+static int NUMBER_9106_INTEGER_ARRAY[] = {9106};
+static int* NUMBER_9106_INTEGER = NUMBER_9106_INTEGER_ARRAY;
+
+/** The number 9202 integer. */
+static int NUMBER_9202_INTEGER_ARRAY[] = {9202};
+static int* NUMBER_9202_INTEGER = NUMBER_9202_INTEGER_ARRAY;
+
+/** The number 9203 integer. */
+static int NUMBER_9203_INTEGER_ARRAY[] = {9203};
+static int* NUMBER_9203_INTEGER = NUMBER_9203_INTEGER_ARRAY;
+
+/** The number 9210 integer. */
+static int NUMBER_9210_INTEGER_ARRAY[] = {9210};
+static int* NUMBER_9210_INTEGER = NUMBER_9210_INTEGER_ARRAY;
+
+/** The number 9213 integer. */
+static int NUMBER_9213_INTEGER_ARRAY[] = {9213};
+static int* NUMBER_9213_INTEGER = NUMBER_9213_INTEGER_ARRAY;
+
+/** The number 9600 integer. */
+static int NUMBER_9600_INTEGER_ARRAY[] = {9600};
+static int* NUMBER_9600_INTEGER = NUMBER_9600_INTEGER_ARRAY;
+
+/** The number 9601 integer. */
+static int NUMBER_9601_INTEGER_ARRAY[] = {9601};
+static int* NUMBER_9601_INTEGER = NUMBER_9601_INTEGER_ARRAY;
+
+/** The number 9602 integer. */
+static int NUMBER_9602_INTEGER_ARRAY[] = {9602};
+static int* NUMBER_9602_INTEGER = NUMBER_9602_INTEGER_ARRAY;
+
+/** The number 9901 integer. */
+static int NUMBER_9901_INTEGER_ARRAY[] = {9901};
+static int* NUMBER_9901_INTEGER = NUMBER_9901_INTEGER_ARRAY;
+
+//
+// Numbers 10,000 - 99,999.
+//
 
 /** The number 10000 integer. */
 static int NUMBER_10000_INTEGER_ARRAY[] = {10000};

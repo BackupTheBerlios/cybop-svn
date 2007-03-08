@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2007-02-01 00:12:40 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2007-03-08 23:56:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -62,6 +62,14 @@ static char* CHARACTER_TABULATION_CONTROL_ASCII_CHARACTER = CHARACTER_TABULATION
  */
 static char LINE_FEED_CONTROL_ASCII_CHARACTER_ARRAY[] = {0x0A};
 static char* LINE_FEED_CONTROL_ASCII_CHARACTER = LINE_FEED_CONTROL_ASCII_CHARACTER_ARRAY;
+
+/**
+ * The carriage return (enter) control character.
+ *
+ * U+000D
+ */
+static char CARRIAGE_RETURN_CONTROL_ASCII_CHARACTER_ARRAY[] = {0x0D};
+static char* CARRIAGE_RETURN_CONTROL_ASCII_CHARACTER = CARRIAGE_RETURN_CONTROL_ASCII_CHARACTER_ARRAY;
 
 /** The space character. U+0020 */
 static char SPACE_ASCII_CHARACTER_ARRAY[] = {' '};
