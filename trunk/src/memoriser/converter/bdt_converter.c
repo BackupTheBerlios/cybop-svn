@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2007-03-08 23:56:30 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2007-03-09 23:21:41 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -756,15 +756,15 @@ void parse_bdt_next_field(void* p0, void* p1, void* p2) {
 }
 
 /**
- * Parses a bdt package.
+ * Parses the bdt package model.
  *
  * @param p0 the destination model (Hand over as reference!)
  * @param p1 the destination model count (Hand over as reference!)
  * @param p2 the destination model size (Hand over as reference!)
- * @param p3 the source package
- * @param p4 the source package count
+ * @param p3 the source package model
+ * @param p4 the source package model count
  */
-void parse_bdt_package(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void parse_bdt_package_model(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (p4 != NULL_POINTER) {
 
@@ -774,7 +774,7 @@ void parse_bdt_package(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             void* s = (void*) p3;
 
-            log_message_debug("Information: Parse bdt package.");
+            log_message_debug("Information: Parse bdt package model.");
 
             // The remaining bytes in the source byte array.
             int rc = *sc;
@@ -884,6 +884,7 @@ void parse_bdt_package(void* p0, void* p1, void* p2, void* p3, void* p4) {
                             parse_bdt_record_medical_treatment(p0, p1, p2, p3, p4, p5, p6, p7);
 
                         } else if (m == *PATIENT_MASTER_DATA_BDT_RECORD) {
+*/
 
 /*??
                             parse_bdt_record_patient_master_data(
@@ -990,13 +991,27 @@ void parse_bdt_package(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         } else {
 
-            log_message_debug("Error: Could not parse bdt. The source byte array is null.");
+            log_message_debug("Error: Could not parse bdt package model. The source byte array is null.");
         }
 
     } else {
 
-        log_message_debug("Error: Could not parse bdt. The source count is null.");
+        log_message_debug("Error: Could not parse bdt package model. The source count is null.");
     }
+}
+
+/**
+ * Parses the bdt package details.
+ *
+ * @param p0 the destination details (Hand over as reference!)
+ * @param p1 the destination details count (Hand over as reference!)
+ * @param p2 the destination details size (Hand over as reference!)
+ * @param p3 the source package header or footer details
+ * @param p4 the source package header or footer details count
+ */
+void parse_bdt_package_details(void* p0, void* p1, void* p2, void* p3, void* p4) {
+
+    log_message_debug("Information: Parse bdt package details.");
 }
 
 /**
@@ -1060,20 +1075,23 @@ void parse_bdt_package(void* p0, void* p1, void* p2, void* p3, void* p4) {
  * ab Stelle 8: ab Stelle 3 der APW-PatNr
  *
  * @param p0 the destination compound model (Hand over as reference!)
- * @param p1 the destination count
- * @param p2 the destination size
- * @param p3 the source bdt byte array
- * @param p4 the source count
+ * @param p1 the destination compound model count
+ * @param p2 the destination compound model size
+ * @param p3 the destination compound details (Hand over as reference!)
+ * @param p4 the destination compound details count
+ * @param p5 the destination compound details size
+ * @param p6 the source bdt byte array
+ * @param p7 the source bdt byte arraycount
  */
-void parse_bdt(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void parse_bdt(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
 
-    if (p4 != NULL_POINTER) {
+    if (p7 != NULL_POINTER) {
 
-        int* sc = (int*) p4;
+        int* sc = (int*) p7;
 
-        if (p3 != NULL_POINTER) {
+        if (p6 != NULL_POINTER) {
 
-            void* s = (void*) p3;
+            void* s = (void*) p6;
 
             log_message_debug("Information: Parse bdt format into compound model.");
 
@@ -1094,9 +1112,21 @@ void parse_bdt(void* p0, void* p1, void* p2, void* p3, void* p4) {
             int nc = *NUMBER_0_INTEGER;
             // The parse mode.
             int m = *NUMBER_0_INTEGER;
-            // The data package.
-            void* p = NULL_POINTER;
-            int pc = *NUMBER_0_INTEGER;
+            // The loop variable.
+            int j = *NUMBER_0_INTEGER;
+            // The old loop variable.
+            // It is needed by some code sections below, that do NOT want to
+            // count the record identification field of the next record.
+            int o = j;
+            // The data package model.
+            void* pm = NULL_POINTER;
+            int pmc = *NUMBER_0_INTEGER;
+            // The data package details 1.
+            void* pd1 = NULL_POINTER;
+            int pd1c = *NUMBER_0_INTEGER;
+            // The data package details 2.
+            void* pd2 = NULL_POINTER;
+            int pd2c = *NUMBER_0_INTEGER;
 
             // The knowledge model name.
             void* kmn = NULL_POINTER;
@@ -1150,81 +1180,151 @@ void parse_bdt(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     s = s + *fs;
                     rc = rc - *fs;
 
-                    // Increment data package count.
-                    // It is reset to zero when a data package header is found.
-                    pc = pc + *fs;
+                    // Store old loop variable.
+                    o = j;
+                    // Increment loop variable.
+                    j = j + *fs;
 
                     if (*fid == *RECORD_IDENTIFICATION_BDT_FIELD) {
 
-                        // Parse bdt field content containing a record identification.
-                        parse_integer((void*) &rid, NULL_POINTER, NULL_POINTER, fc, (void*) &fcc);
+                        // The following parse modes are defined:
+                        // 0: start mode (no record found yet)
+                        // 1: header mode (data package header had been found)
+                        // 2: content mode (first record after the data package header appeared)
+                        // 3: footer mode (data package footer had been found)
 
-                        if (m == *DATA_PACKAGE_HEADER_BDT_RECORD) {
+                        if (m == *NUMBER_0_INTEGER) {
 
-                            // This parse mode means that a data package
-                            // header had been found before.
+                            // This is the header parse mode.
+
+                            // Parse bdt field content containing a record identification.
+                            parse_integer((void*) &rid, NULL_POINTER, NULL_POINTER, fc, (void*) &fcc);
+
+                            if (*rid == *DATA_PACKAGE_HEADER_BDT_RECORD) {
+
+                                // Set header parse mode.
+                                m = *NUMBER_1_INTEGER;
+                                // Store data package header details (meta data 1) begin pointer.
+                                pd1 = s;
+                                // Reset loop variable.
+                                j = *NUMBER_0_INTEGER;
+
+    fprintf(stderr, "TEST set header mode rid: %i\n", *rid);
+                            }
+
+                        } else if (m == *NUMBER_1_INTEGER) {
+
+                            // This is the header parse mode.
+                            // This is the begin of the first record following
+                            // the data package header record.
+                            // Therefore, all bytes counted to here contain
+                            // meta data about the data package.
+
+                            // Set content parse mode.
+                            m = *NUMBER_2_INTEGER;
+                            // Store data package header details (meta data 1) count.
+                            pd1c = o;
+                            // Store data package model begin pointer.
+                            pm = s;
+                            // Reset loop variable.
+                            j = *NUMBER_0_INTEGER;
+
+    fprintf(stderr, "TEST set content mode pd1c: %i\n", pd1c);
+
+                        } else if (m == *NUMBER_2_INTEGER) {
+
+                            // This is the content parse mode.
+                            // It means that a data package header
+                            // had been found before and all meta information
+                            // of the data package have been parsed.
+                            // The actual data package content is following now.
+
+                            // Parse bdt field content containing a record identification.
+                            parse_integer((void*) &rid, NULL_POINTER, NULL_POINTER, fc, (void*) &fcc);
 
                             if (*rid == *DATA_PACKAGE_FOOTER_BDT_RECORD) {
 
-    fprintf(stderr, "TEST footer rid: %i\n", *rid);
+                                // Set footer parse mode.
+                                m = *NUMBER_3_INTEGER;
+                                // Store data package model count.
+                                pmc = o;
+                                // Store data package footer details (meta data 2) begin pointer.
+                                pd2 = s;
+                                // Reset loop variable.
+                                j = *NUMBER_0_INTEGER;
 
-                                // Allocate knowledge model name.
-                                allocate((void*) &kmnc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-                                *kmnc = *NUMBER_0_INTEGER;
-                                allocate((void*) &kmns, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-                                *kmns = *NUMBER_0_INTEGER;
-                                allocate((void*) &kmn, (void*) kmns, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+    fprintf(stderr, "TEST footer mode pmc: %i\n", pmc);
+                            }
 
-                                // A knowledge model channel is not received (allocated),
-                                // since that is only needed temporarily for model loading.
+                        } else if (m == *NUMBER_3_INTEGER) {
 
-                                // Allocate knowledge model abstraction.
-                                allocate((void*) &kmac, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-                                *kmac = *NUMBER_0_INTEGER;
-                                allocate((void*) &kmas, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-                                *kmas = *NUMBER_0_INTEGER;
-                                allocate((void*) &kma, (void*) kmas, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+                            // This is the footer parse mode.
 
-                                // Allocate knowledge model model.
-                                allocate((void*) &kmmc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-                                *kmmc = *NUMBER_0_INTEGER;
-                                allocate((void*) &kmms, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-                                *kmms = *NUMBER_0_INTEGER;
-                                allocate((void*) &kmm, (void*) kmms, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
+                            // Set start parse mode, so that new data
+                            // package headers may be found.
+                            m = *NUMBER_0_INTEGER;
+                            // Store data package footer details (meta data 2) count.
+                            pd2c = o;
+                            // Reset loop variable.
+                            j = *NUMBER_0_INTEGER;
 
-                                // The knowledge model details are set to null.
-                                // All data received are stored only in the knowledge model.
+    fprintf(stderr, "TEST start mode pd2c: %i\n", pd2c);
+
+                            // Allocate knowledge model name.
+                            allocate((void*) &kmnc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+                            *kmnc = *NUMBER_0_INTEGER;
+                            allocate((void*) &kmns, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+                            *kmns = *NUMBER_0_INTEGER;
+                            allocate((void*) &kmn, (void*) kmns, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+
+                            // A knowledge model channel is not received (allocated),
+                            // since that is only needed temporarily for model loading.
+
+                            // Allocate knowledge model abstraction.
+                            allocate((void*) &kmac, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+                            *kmac = *NUMBER_0_INTEGER;
+                            allocate((void*) &kmas, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+                            *kmas = *NUMBER_0_INTEGER;
+                            allocate((void*) &kma, (void*) kmas, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+
+                            // Allocate knowledge model model.
+                            allocate((void*) &kmmc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+                            *kmmc = *NUMBER_0_INTEGER;
+                            allocate((void*) &kmms, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+                            *kmms = *NUMBER_0_INTEGER;
+                            allocate((void*) &kmm, (void*) kmms, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
+
+                            // Allocate knowledge model details.
+                            allocate((void*) &kmdc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+                            *kmdc = *NUMBER_0_INTEGER;
+                            allocate((void*) &kmds, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+                            *kmds = *NUMBER_0_INTEGER;
+                            allocate((void*) &kmd, (void*) kmds, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
 
     fprintf(stderr, "TEST s: %i\n", s);
     fprintf(stderr, "TEST rc: %i\n", rc);
-    fprintf(stderr, "TEST p: %i\n", p);
-    fprintf(stderr, "TEST pc: %i\n", pc);
+    fprintf(stderr, "TEST pm: %i\n", pm);
+    fprintf(stderr, "TEST pmc: %i\n", pmc);
+    fprintf(stderr, "TEST pd1: %i\n", pd1);
+    fprintf(stderr, "TEST pd1c: %i\n", pd1c);
+    fprintf(stderr, "TEST pd2: %i\n", pd2);
+    fprintf(stderr, "TEST pd2c: %i\n", pd2c);
 
-                                // Parse bdt package.
-                                parse_bdt_package((void*) &kmm, (void*) kmmc, (void*) kmms, p, (void*) &pc);
+                            // Parse bdt package model.
+                            parse_bdt_package_model((void*) &kmm, (void*) kmmc, (void*) kmms, pm, (void*) &pmc);
 
-                                // Add knowledge model to knowledge memory.
-                                set_compound_element_by_name(p0, p1, p2, NULL_POINTER, NULL_POINTER, NULL_POINTER,
-                                    kmn, (void*) kmnc, (void*) kmns,
-                                    kma, (void*) kmac, (void*) kmas,
-                                    kmm, (void*) kmmc, (void*) kmms,
-                                    kmd, (void*) kmdc, (void*) kmds);
+                            // Parse bdt package header details.
+                            parse_bdt_package_details((void*) &kmd, (void*) kmdc, (void*) kmds, pd1, (void*) &pd1c);
 
-                                // Reset parse mode, so that new data
-                                // package headers may be found.
-                                m = *NUMBER_0_INTEGER;
-                            }
+                            // Parse bdt package footer details.
+                            parse_bdt_package_details((void*) &kmd, (void*) kmdc, (void*) kmds, pd2, (void*) &pd2c);
 
-                        } else if (*rid == *DATA_PACKAGE_HEADER_BDT_RECORD) {
-
-    fprintf(stderr, "TEST header rid: %i\n", *rid);
-
-                            // Store data package begin pointer.
-                            p = s;
-                            pc = *NUMBER_0_INTEGER;
-
-                            // Set parse mode.
-                            m = *DATA_PACKAGE_HEADER_BDT_RECORD;
+                            // Add knowledge model to knowledge memory.
+                            set_compound_element_by_name(p0, p1, p2, p3, p4, p5,
+                                kmn, (void*) kmnc, (void*) kmns,
+                                kma, (void*) kmac, (void*) kmas,
+                                kmm, (void*) kmmc, (void*) kmms,
+                                kmd, (void*) kmdc, (void*) kmds);
                         }
                     }
 
@@ -1245,9 +1345,10 @@ void parse_bdt(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     s = s + nc;
                     rc = rc - nc;
 
-                    // Increment data package count.
-                    // It is reset to zero when a data package header is found.
-                    pc = pc + nc;
+                    // Store old loop variable.
+                    o = j;
+                    // Increment loop variable.
+                    j = j + nc;
 
     fprintf(stderr, "TEST verification failed nc: %i\n\n", nc);
                 }

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.19 $ $Date: 2007-03-06 00:11:38 $ $Author: christian $
+ * @version $Revision: 1.20 $ $Date: 2007-03-09 23:21:41 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -47,186 +47,189 @@
  * Parses the byte stream according to the given document type
  * and creates a document model from it.
  *
- * @param p0 the destination (Hand over as reference!)
- * @param p1 the destination count
- * @param p2 the destination size
- * @param p3 the source
- * @param p4 the source count
- * @param p5 the type
- * @param p6 the type count
+ * @param p0 the destination model (Hand over as reference!)
+ * @param p1 the destination model count
+ * @param p2 the destination model size
+ * @param p3 the destination details (Hand over as reference!)
+ * @param p4 the destination details count
+ * @param p5 the destination details size
+ * @param p6 the source
+ * @param p7 the source count
+ * @param p8 the type
+ * @param p9 the type count
  */
-void parse(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
+void parse(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9) {
 
     // The comparison result.
     int r = 0;
 
     if (r == 0) {
 
-        compare_arrays(p5, p6, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p8, p9, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-            parse_xml(p0, p1, p2, p3, p4);
+            parse_xml(p0, p1, p2, p6, p7);
         }
     }
 
     if (r == 0) {
 
-        compare_arrays(p5, p6, (void*) KNOWLEDGE_ABSTRACTION, (void*) KNOWLEDGE_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p8, p9, (void*) KNOWLEDGE_ABSTRACTION, (void*) KNOWLEDGE_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-            parse_character_vector(p0, p1, p2, p3, p4);
+            parse_character_vector(p0, p1, p2, p6, p7);
         }
     }
 
     if (r == 0) {
 
-        compare_arrays(p5, p6, (void*) ENCAPSULATED_KNOWLEDGE_ABSTRACTION, (void*) ENCAPSULATED_KNOWLEDGE_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p8, p9, (void*) ENCAPSULATED_KNOWLEDGE_ABSTRACTION, (void*) ENCAPSULATED_KNOWLEDGE_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-            parse_character_vector(p0, p1, p2, p3, p4);
+            parse_character_vector(p0, p1, p2, p6, p7);
         }
     }
 
     if (r == 0) {
 
-        compare_arrays(p5, p6, (void*) OPERATION_ABSTRACTION, (void*) OPERATION_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p8, p9, (void*) OPERATION_ABSTRACTION, (void*) OPERATION_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-            parse_character_vector(p0, p1, p2, p3, p4);
+            parse_character_vector(p0, p1, p2, p6, p7);
         }
     }
 
     if (r == 0) {
 
-        compare_arrays(p5, p6, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p8, p9, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-            parse_character_vector(p0, p1, p2, p3, p4);
+            parse_character_vector(p0, p1, p2, p6, p7);
         }
     }
 
     if (r == 0) {
 
-        compare_arrays(p5, p6, (void*) BOOLEAN_ABSTRACTION, (void*) BOOLEAN_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p8, p9, (void*) BOOLEAN_ABSTRACTION, (void*) BOOLEAN_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-            parse_boolean(p0, p1, p2, p3, p4);
+            parse_boolean(p0, p1, p2, p6, p7);
         }
     }
 
     if (r == 0) {
 
-        compare_arrays(p5, p6, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p8, p9, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-            parse_integer_vector(p0, p1, p2, p3, p4);
+            parse_integer_vector(p0, p1, p2, p6, p7);
         }
     }
 
     if (r == 0) {
 
-        compare_arrays(p5, p6, (void*) DOUBLE_VECTOR_ABSTRACTION, (void*) DOUBLE_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p8, p9, (void*) DOUBLE_VECTOR_ABSTRACTION, (void*) DOUBLE_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-            parse_double_vector(p0, p1, p2, p3, p4);
+            parse_double_vector(p0, p1, p2, p6, p7);
         }
     }
 
     if (r == 0) {
 
-        compare_arrays(p5, p6, (void*) FRACTION_ABSTRACTION, (void*) FRACTION_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p8, p9, (void*) FRACTION_ABSTRACTION, (void*) FRACTION_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-            parse_fraction(p0, p1, p2, p3, p4);
+            parse_fraction(p0, p1, p2, p6, p7);
         }
     }
 
     if (r == 0) {
 
-        compare_arrays(p5, p6, (void*) COMPLEX_ABSTRACTION, (void*) COMPLEX_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p8, p9, (void*) COMPLEX_ABSTRACTION, (void*) COMPLEX_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-            parse_complex(p0, p1, p2, p3, p4);
+            parse_complex(p0, p1, p2, p6, p7);
         }
     }
 
     if (r == 0) {
 
-        compare_arrays(p5, p6, (void*) DATE_TIME_ABSTRACTION, (void*) DATE_TIME_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p8, p9, (void*) DATE_TIME_ABSTRACTION, (void*) DATE_TIME_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-            parse_date_time(p0, p1, p2, p3, p4);
+            parse_date_time(p0, p1, p2, p6, p7);
         }
     }
 
     if (r == 0) {
 
-        compare_arrays(p5, p6, (void*) DDMMYYYY_DATE_TIME_ABSTRACTION, (void*) DDMMYYYY_DATE_TIME_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p8, p9, (void*) DDMMYYYY_DATE_TIME_ABSTRACTION, (void*) DDMMYYYY_DATE_TIME_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-            parse_ddmmyyyy_date_time(p0, p1, p2, p3, p4);
+            parse_ddmmyyyy_date_time(p0, p1, p2, p6, p7);
         }
     }
 
     if (r == 0) {
 
-        compare_arrays(p5, p6, (void*) LINUX_CONSOLE_MODEL, (void*) LINUX_CONSOLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p8, p9, (void*) LINUX_CONSOLE_MODEL, (void*) LINUX_CONSOLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-            parse_linux_console(p0, p1, p2, p3, p4);
+            parse_linux_console(p0, p1, p2, p6, p7);
         }
     }
 
     if (r == 0) {
 
-        compare_arrays(p5, p6, (void*) X_WINDOW_SYSTEM_MODEL, (void*) X_WINDOW_SYSTEM_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p8, p9, (void*) X_WINDOW_SYSTEM_MODEL, (void*) X_WINDOW_SYSTEM_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-            parse_x_window_system(p0, p1, p2, p3, p4);
+            parse_x_window_system(p0, p1, p2, p6, p7);
         }
     }
 
     if (r == 0) {
 
-        compare_arrays(p5, p6, (void*) XHTML_ABSTRACTION, (void*) XHTML_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p8, p9, (void*) XHTML_ABSTRACTION, (void*) XHTML_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-            parse_xhtml(p0, p1, p2, p3, p4);
+            parse_xhtml(p0, p1, p2, p6, p7);
         }
     }
 
     if (r == 0) {
 
-        compare_arrays(p5, p6, (void*) BDT_ABSTRACTION, (void*) BDT_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p8, p9, (void*) BDT_ABSTRACTION, (void*) BDT_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-            parse_bdt(p0, p1, p2, p3, p4);
+            parse_bdt(p0, p1, p2, p3, p4, p5, p6, p7);
         }
     }
 
     if (r == 0) {
 
-        compare_arrays(p5, p6, (void*) LATEX_ABSTRACTION, (void*) LATEX_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p8, p9, (void*) LATEX_ABSTRACTION, (void*) LATEX_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-            parse_latex(p0, p1, p2, p3, p4);
+            parse_latex(p0, p1, p2, p6, p7);
         }
     }
 
@@ -238,7 +241,7 @@ void parse(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6)
 
     if (r == 0) {
 
-        compare_arrays(p5, p6, (void*) SXW_ABSTRACTION, (void*) SXW_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p8, p9, (void*) SXW_ABSTRACTION, (void*) SXW_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 

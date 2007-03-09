@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.24 $ $Date: 2007-01-14 22:06:49 $ $Author: christian $
+ * @version $Revision: 1.25 $ $Date: 2007-03-09 23:21:41 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -44,15 +44,18 @@
  * Parses the byte stream according to the given document type
  * and creates a document model from it.
  *
- * @param p0 the destination (Hand over as reference!)
- * @param p1 the destination count
- * @param p2 the destination size
- * @param p3 the source
- * @param p4 the source count
- * @param p5 the type
- * @param p6 the type count
+ * @param p0 the destination model (Hand over as reference!)
+ * @param p1 the destination model count
+ * @param p2 the destination model size
+ * @param p3 the destination details (Hand over as reference!)
+ * @param p4 the destination details count
+ * @param p5 the destination details size
+ * @param p6 the source
+ * @param p7 the source count
+ * @param p8 the type
+ * @param p9 the type count
  */
-void parse(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6);
+void parse(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9);
 
 //
 // Hierarchical name handling.
@@ -1382,14 +1385,14 @@ void reindex_compound_elements_forming_list(void* p0, void* p1, void* p2, int* p
                         *((int*) *nc) = 0;
 
                         //parse the basisname
-                        parse(n, *nc, *ns, p2, p3, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
+                        parse(n, *nc, *ns, NULL_POINTER, NULL_POINTER, NULL_POINTER, p2, p3, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
                         //parse the list separator
-                        parse(n, *nc, *ns, LIST_SEPARATOR, LIST_SEPARATOR_COUNT, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
+                        parse(n, *nc, *ns, NULL_POINTER, NULL_POINTER, NULL_POINTER, LIST_SEPARATOR, LIST_SEPARATOR_COUNT, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
                         //parse the index
                         indexstr_count = snprintf(indexstr, indexstr_size, "%i", ic);
-                        parse(n, *nc, *ns, indexstr, &indexstr_count, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
+                        parse(n, *nc, *ns, NULL_POINTER, NULL_POINTER, NULL_POINTER, indexstr, &indexstr_count, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
                         ic = ic + 1;
                     }

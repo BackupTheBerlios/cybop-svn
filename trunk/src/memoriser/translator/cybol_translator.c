@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.14 $ $Date: 2007-01-14 22:06:49 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2007-03-09 23:21:41 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -43,27 +43,63 @@
 //
 
 /**
- * Receives a file system model.
+ * Receives and creates a transient destination model
+ * from a persistent source model.
  *
- * @param p0 the destination
- * @param p1 the destination count
- * @param p2 the destination size
- * @param p3 the source model
- * @param p4 the source model count
- * @param p5 the source abstraction
- * @param p6 the source abstraction count
- * @param p7 the source channel
- * @param p8 the source channel count
+ * Primitive models need to be handled differently than compound models.
+ *
+ * persistent:
+ * - stored permanently
+ * - outside CYBOI
+ * - longer than CYBOI lives
+ *
+ * transient:
+ * - stored in computer memory (RAM)
+ * - only accessible from within CYBOI
+ * - created and destroyed by CYBOI
+ * - not available anymore after CYBOI has been destroyed
+ *
+ * @param p0 the destination model (Hand over as reference!)
+ * @param p1 the destination model count
+ * @param p2 the destination model size
+ * @param p3 the destination details (Hand over as reference!)
+ * @param p4 the destination details count
+ * @param p5 the destination details size
+ * @param p6 the source model
+ * @param p7 the source model count
+ * @param p8 the source abstraction
+ * @param p9 the source abstraction count
+ * @param p10 the source channel
+ * @param p11 the source channel count
  */
-void receive_file_system_model(void* p0, void* p1, void* p2, void* p3, void* p4,
-    void* p5, void* p6, void* p7, void* p8);
+void receive_file_system_model(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
+    void* p6, void* p7, void* p8, void* p9, void* p10, void* p11);
 
-void set_compound_element_by_name(void* p0, void* p1, void* p2,
-    void* p3, void* p4, void* p5,
-    void* p6, void* p7, void* p8,
-    void* p9, void* p10, void* p11,
-    void* p12, void* p13, void* p14,
-    void* p15, void* p16, void* p17);
+/**
+ * Sets the compound element by name.
+ *
+ * @param p0 the compound model
+ * @param p1 the compound model count
+ * @param p2 the compound model size
+ * @param p3 the compound details
+ * @param p4 the compound details count
+ * @param p5 the compound details size
+ * @param p6 the name
+ * @param p7 the name count
+ * @param p8 the name size
+ * @param p9 the abstraction
+ * @param p10 the abstraction count
+ * @param p11 the abstraction size
+ * @param p12 the model
+ * @param p13 the model count
+ * @param p14 the model size
+ * @param p15 the details
+ * @param p16 the details count
+ * @param p17 the details size
+ */
+void set_compound_element_by_name(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
+    void* p6, void* p7, void* p8, void* p9, void* p10, void* p11,
+    void* p12, void* p13, void* p14, void* p15, void* p16, void* p17);
 
 //
 // Cybol property.
@@ -366,6 +402,7 @@ void decode_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     allocate((void*) &dns, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
                     *dns = 0;
                     receive_file_system_model((void*) &dn, (void*) dnc, (void*) dns,
+                        NULL_POINTER, NULL_POINTER, NULL_POINTER,
                         sn, (void*) &snc,
                         (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
                         (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
@@ -379,6 +416,7 @@ void decode_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     allocate((void*) &das, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
                     *das = 0;
                     receive_file_system_model((void*) &da, (void*) dac, (void*) das,
+                        NULL_POINTER, NULL_POINTER, NULL_POINTER,
                         sa, (void*) &sac,
                         (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
                         (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
@@ -389,6 +427,7 @@ void decode_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     allocate((void*) &dms, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
                     *dms = 0;
                     receive_file_system_model((void*) &dm, (void*) dmc, (void*) dms,
+                        NULL_POINTER, NULL_POINTER, NULL_POINTER,
                         sm, (void*) &smc,
                         sa, (void*) &sac,
                         sc, (void*) &scc);

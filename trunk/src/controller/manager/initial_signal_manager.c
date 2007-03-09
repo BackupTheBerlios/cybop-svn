@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2007-01-14 22:06:48 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2007-03-09 23:21:41 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -81,11 +81,13 @@ void startup_initial_signal(void* p0, void* p1, void* p2) {
 
     // Allocate and initialise initial signal abstraction.
     receive_file_system_model((void*) &a, (void*) ac, (void*) as,
+        NULL_POINTER, NULL_POINTER, NULL_POINTER,
         (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
         (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
         (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
     // Allocate and initialise initial signal model.
     receive_file_system_model((void*) &m, (void*) mc, (void*) ms,
+        NULL_POINTER, NULL_POINTER, NULL_POINTER,
         p0, p1,
         COMPOUND_ABSTRACTION, COMPOUND_ABSTRACTION_COUNT,
         FILE_CHANNEL, FILE_CHANNEL_COUNT);

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.31 $ $Date: 2007-01-14 22:06:48 $ $Author: christian $
+ * @version $Revision: 1.32 $ $Date: 2007-03-09 23:21:41 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -257,10 +257,12 @@ void manage(void* p0, void* p1) {
 
     // Create startup model abstraction, model, details.
     receive_file_system_model((void*) &ma, (void*) mac, (void*) mas,
+        NULL_POINTER, NULL_POINTER, NULL_POINTER,
         (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
         (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
         (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
     receive_file_system_model((void*) &mm, (void*) mmc, (void*) mms,
+        NULL_POINTER, NULL_POINTER, NULL_POINTER,
         p0, p1,
         COMPOUND_ABSTRACTION, COMPOUND_ABSTRACTION_COUNT,
         FILE_CHANNEL, FILE_CHANNEL_COUNT);

@@ -22,7 +22,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.25 $ $Date: 2007-01-14 22:06:47 $ $Author: christian $
+ * @version $Revision: 1.26 $ $Date: 2007-03-09 23:21:41 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -100,7 +100,7 @@ void create_primitive_model(void* p0, void* p1, void* p2, void* p3, void* p4,
     allocate(p0, p2, p5, p6);
 
     // Parse byte stream according to given document type.
-    parse(p0, p1, p2, rm, (void*) &rmc, p5, p6);
+    parse(p0, p1, p2, NULL_POINTER, NULL_POINTER, NULL_POINTER, rm, (void*) &rmc, p5, p6);
 
     // Destroy receive model.
     deallocate((void*) &rm, (void*) &rms, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
@@ -179,11 +179,11 @@ void create_compound_model(void* p0, void* p1, void* p2, void* p3, void* p4,
         allocate((void*) &pm, (void*) &pms, p5, p6);
 
         // Parse byte stream according to given document type.
-        parse((void*) &pm, (void*) &pmc, (void*) &pms, rm, (void*) &rmc, p5, p6);
+        parse((void*) &pm, (void*) &pmc, (void*) &pms, NULL_POINTER, NULL_POINTER, NULL_POINTER, rm, (void*) &rmc, p5, p6);
 
     } else {
 
-        parse((void*) &pm, (void*) &pmc, (void*) &pms, p3, p4, p5, p6);
+        parse((void*) &pm, (void*) &pmc, (void*) &pms, NULL_POINTER, NULL_POINTER, NULL_POINTER, p3, p4, p5, p6);
     }
 
     // Destroy receive model.

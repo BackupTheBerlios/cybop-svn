@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2007-03-04 23:33:21 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2007-03-09 23:21:41 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -59,18 +59,21 @@
  * - read <--> write
  * - parse <--> serialise
  *
- * @param p0 the destination (Hand over as reference!)
- * @param p1 the destination count
- * @param p2 the destination size
- * @param p3 the source model
- * @param p4 the source model count
- * @param p5 the source abstraction
- * @param p6 the source abstraction count
- * @param p7 the source channel
- * @param p8 the source channel count
+ * @param p0 the destination model (Hand over as reference!)
+ * @param p1 the destination model count
+ * @param p2 the destination model size
+ * @param p3 the destination details (Hand over as reference!)
+ * @param p4 the destination details count
+ * @param p5 the destination details size
+ * @param p6 the source model
+ * @param p7 the source model count
+ * @param p8 the source abstraction
+ * @param p9 the source abstraction count
+ * @param p10 the source channel
+ * @param p11 the source channel count
  */
-void receive_file_system_primitive_model(void* p0, void* p1, void* p2, void* p3, void* p4,
-    void* p5, void* p6, void* p7, void* p8) {
+void receive_file_system_primitive_model(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
+    void* p6, void* p7, void* p8, void* p9, void* p10, void* p11) {
 
     log_message_debug("Receive file system primitive model.");
 
@@ -80,26 +83,28 @@ void receive_file_system_primitive_model(void* p0, void* p1, void* p2, void* p3,
 
     // The receive model.
     void* rm = NULL_POINTER;
-    int rmc = 0;
-    int rms = 0;
+    int rmc = *NUMBER_0_INTEGER;
+    int rms = *NUMBER_0_INTEGER;
 
-    // Create receive model of type character, to read single bytes.
+    // Allocate receive model of type character, to read single bytes.
     allocate((void*) &rm, (void*) &rms, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
     // Reads persistent byte stream over channel.
-    read_data((void*) &rm, (void*) &rmc, (void*) &rms, p3, p4, p7, p8);
+    read_data((void*) &rm, (void*) &rmc, (void*) &rms, p6, p7, p10, p11);
 
     //
     // Parse.
     //
 
-    // Create parse model of type given as abstraction.
-    allocate(p0, p2, p5, p6);
+    // Allocate parse model of type given as abstraction.
+    allocate(p0, p2, p8, p9);
+    // Allocate parse details, which are always of type "compound".
+    allocate(p3, p5, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
 
     // Parse byte stream according to given document type.
-    parse(p0, p1, p2, rm, (void*) &rmc, p5, p6);
+    parse(p0, p1, p2, p3, p4, p5, rm, (void*) &rmc, p8, p9);
 
-    // Destroy receive model.
+    // Deallocate receive model.
     deallocate((void*) &rm, (void*) &rms, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
 }
 
@@ -126,29 +131,32 @@ void receive_file_system_primitive_model(void* p0, void* p1, void* p2, void* p3,
  * - parse <--> serialise
  * - decode <--> encode
  *
- * @param p0 the destination (Hand over as reference!)
- * @param p1 the destination count
- * @param p2 the destination size
- * @param p3 the source model
- * @param p4 the source model count
- * @param p5 the source abstraction
- * @param p6 the source abstraction count
- * @param p7 the source channel
- * @param p8 the source channel count
+ * @param p0 the destination model (Hand over as reference!)
+ * @param p1 the destination model count
+ * @param p2 the destination model size
+ * @param p3 the destination details (Hand over as reference!)
+ * @param p4 the destination details count
+ * @param p5 the destination details size
+ * @param p6 the source model
+ * @param p7 the source model count
+ * @param p8 the source abstraction
+ * @param p9 the source abstraction count
+ * @param p10 the source channel
+ * @param p11 the source channel count
  */
-void receive_file_system_compound_model(void* p0, void* p1, void* p2, void* p3, void* p4,
-    void* p5, void* p6, void* p7, void* p8) {
+void receive_file_system_compound_model(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
+    void* p6, void* p7, void* p8, void* p9, void* p10, void* p11) {
 
     log_message_debug("Receive file system compound model.");
 
     //?? The temporary workaround flag to use the libxml2 parser.
     //?? Later, when an own xml parser is implemented in cyboi,
     //?? delete this flag and change the corresponding blocks below!
-    int w = 0;
+    int w = *NUMBER_0_INTEGER;
     //?? If the abstraction is "compound", then a cybol (xml) file representing
     //?? a compound model is expected, so that the libxml2 parser is to be used.
     //?? Otherwise, the flag remains zero and the file is parsed/ decoded normally.
-    compare_arrays(p5, p6, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT, (void*) &w, (void*) CHARACTER_ARRAY);
+    compare_arrays(p8, p9, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT, (void*) &w, (void*) CHARACTER_ARRAY);
 
     //
     // Receive.
@@ -156,14 +164,14 @@ void receive_file_system_compound_model(void* p0, void* p1, void* p2, void* p3, 
 
     // The receive model.
     void* rm = NULL_POINTER;
-    int rmc = 0;
-    int rms = 0;
+    int rmc = *NUMBER_0_INTEGER;
+    int rms = *NUMBER_0_INTEGER;
 
-    // Create receive model of type character, to read single bytes.
+    // Allocate receive model of type character, to read single bytes.
     allocate((void*) &rm, (void*) &rms, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
     // Read persistent byte stream over channel.
-    read_data((void*) &rm, (void*) &rmc, (void*) &rms, p3, p4, p7, p8);
+    read_data((void*) &rm, (void*) &rmc, (void*) &rms, p6, p7, p10, p11);
 
     //
     // Parse.
@@ -171,12 +179,16 @@ void receive_file_system_compound_model(void* p0, void* p1, void* p2, void* p3, 
 
     // The parse model.
     void* pm = NULL_POINTER;
-    int pmc = 0;
-    int pms = 0;
+    int pmc = *NUMBER_0_INTEGER;
+    int pms = *NUMBER_0_INTEGER;
+    // The parse details.
+    void* pd = NULL_POINTER;
+    int pdc = *NUMBER_0_INTEGER;
+    int pds = *NUMBER_0_INTEGER;
 
-    if (w == 0) {
+    if (w == *NUMBER_0_INTEGER) {
 
-        // Create parse model of type given as abstraction.
+        // Allocate parse model of type given as abstraction.
 //??        allocate((void*) &pm, (void*) &pms, p5, p6);
         //?? Possibly ALWAYS use a "compound" model here?
         //?? The external file in whatever format gets parsed and needs to be
@@ -185,33 +197,37 @@ void receive_file_system_compound_model(void* p0, void* p1, void* p2, void* p3, 
         //?? best and all operations for its processing already exist.
         //?? What else should be used instead?
         allocate((void*) &pm, (void*) &pms, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
+        // Allocate parse details, which are always of type "compound".
+        allocate((void*) &pd, (void*) &pds, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
 
         // Parse byte stream according to given document type.
-        parse((void*) &pm, (void*) &pmc, (void*) &pms, rm, (void*) &rmc, p5, p6);
+        parse((void*) &pm, (void*) &pmc, (void*) &pms, (void*) &pd, (void*) &pdc, (void*) &pds, rm, (void*) &rmc, p8, p9);
 
     } else {
 
-        parse((void*) &pm, (void*) &pmc, (void*) &pms, p3, p4, p5, p6);
+        parse((void*) &pm, (void*) &pmc, (void*) &pms, (void*) &pd, (void*) &pdc, (void*) &pds, p6, p7, p8, p9);
     }
 
-    // Destroy receive model.
+    // Deallocate receive model.
     deallocate((void*) &rm, (void*) &rms, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
     //
     // Decode.
     //
 
-    // Create compound decode model.
+    // Allocate compound decode model.
     allocate(p0, p2, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
 
     // Decode document model according to given document type.
-    decode(p0, p1, p2, pm, (void*) &pmc, p5, p6);
+    decode(p0, p1, p2, pm, (void*) &pmc, p8, p9);
 
-    if (w == 0) {
+    if (w == *NUMBER_0_INTEGER) {
 
-        // Destroy parse model.
-//??        deallocate((void*) &pm, (void*) &pms, p5, p6);
+        // Deallocate parse model.
+//??        deallocate((void*) &pm, (void*) &pms, p8, p9);
         deallocate((void*) &pm, (void*) &pms, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
+        // Deallocate parse details, which are always of type "compound".
+        deallocate((void*) &pd, (void*) &pds, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
 
     } else {
 
@@ -244,33 +260,36 @@ void receive_file_system_compound_model(void* p0, void* p1, void* p2, void* p3, 
  * - created and destroyed by CYBOI
  * - not available anymore after CYBOI has been destroyed
  *
- * @param p0 the destination (Hand over as reference!)
- * @param p1 the destination count
- * @param p2 the destination size
- * @param p3 the source model
- * @param p4 the source model count
- * @param p5 the source abstraction
- * @param p6 the source abstraction count
- * @param p7 the source channel
- * @param p8 the source channel count
+ * @param p0 the destination model (Hand over as reference!)
+ * @param p1 the destination model count
+ * @param p2 the destination model size
+ * @param p3 the destination details (Hand over as reference!)
+ * @param p4 the destination details count
+ * @param p5 the destination details size
+ * @param p6 the source model
+ * @param p7 the source model count
+ * @param p8 the source abstraction
+ * @param p9 the source abstraction count
+ * @param p10 the source channel
+ * @param p11 the source channel count
  */
-void receive_file_system_model(void* p0, void* p1, void* p2, void* p3, void* p4,
-    void* p5, void* p6, void* p7, void* p8) {
+void receive_file_system_model(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
+    void* p6, void* p7, void* p8, void* p9, void* p10, void* p11) {
 
     log_message_debug("Receive file system model.");
 
     // The comparison result.
     int r = *NUMBER_0_INTEGER;
 
-    compare_arrays(p5, p6, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+    compare_arrays(p8, p9, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
     if (r != *NUMBER_0_INTEGER) {
 
-        receive_file_system_compound_model(p0, p1, p2, p3, p4, p5, p6, p7, p8);
+        receive_file_system_compound_model(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11);
 
     } else {
 
-        receive_file_system_primitive_model(p0, p1, p2, p3, p4, p5, p6, p7, p8);
+        receive_file_system_primitive_model(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11);
     }
 }
 
@@ -342,7 +361,7 @@ void receive_file_system(void* p0, void* p1, void* p2,
     *kmnc = *NUMBER_0_INTEGER;
     allocate((void*) &kmns, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
     *kmns = *NUMBER_0_INTEGER;
-    receive_file_system_model((void*) &kmn, (void*) kmnc, (void*) kmns, p9, p10, p11, p12, (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
+    receive_file_system_model((void*) &kmn, (void*) kmnc, (void*) kmns, NULL_POINTER, NULL_POINTER, NULL_POINTER, p9, p10, p11, p12, (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
 
     // A knowledge model channel is not received (created),
     // since that is only needed temporarily for model loading.
@@ -352,21 +371,26 @@ void receive_file_system(void* p0, void* p1, void* p2,
     *kmac = *NUMBER_0_INTEGER;
     allocate((void*) &kmas, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
     *kmas = *NUMBER_0_INTEGER;
-    receive_file_system_model((void*) &kma, (void*) kmac, (void*) kmas, p13, p14, p15, p16, (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
+    receive_file_system_model((void*) &kma, (void*) kmac, (void*) kmas, NULL_POINTER, NULL_POINTER, NULL_POINTER, p13, p14, p15, p16, (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
 
     // Create knowledge model model.
     allocate((void*) &kmmc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
     *kmmc = *NUMBER_0_INTEGER;
     allocate((void*) &kmms, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
     *kmms = *NUMBER_0_INTEGER;
-    receive_file_system_model((void*) &kmm, (void*) kmmc, (void*) kmms, p19, p20, p13, p14, p17, p18);
+    // CAUTION! The knowledge model model is received TOGETHER with the
+    // knowledge model details, in just one operation. See below!
 
     // Create knowledge model details.
     allocate((void*) &kmdc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
     *kmdc = *NUMBER_0_INTEGER;
     allocate((void*) &kmds, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
     *kmds = *NUMBER_0_INTEGER;
-    receive_file_system_model((void*) &kmd, (void*) kmdc, (void*) kmds, EMPTY_MODEL, EMPTY_MODEL_COUNT, COMPOUND_ABSTRACTION, COMPOUND_ABSTRACTION_COUNT, INLINE_CHANNEL, INLINE_CHANNEL_COUNT);
+    // CAUTION! The knowledge model details is received TOGETHER with the
+    // knowledge model model, in just one operation. See below!
+
+    // Receive knowledge model model and details.
+    receive_file_system_model((void*) &kmm, (void*) kmmc, (void*) kmms, (void*) &kmd, (void*) kmdc, (void*) kmds, p19, p20, p13, p14, p17, p18);
 
     // The comparison result.
     int r = *NUMBER_0_INTEGER;
@@ -412,7 +436,7 @@ void receive_file_system(void* p0, void* p1, void* p2,
 
                 log_message_debug("Add meta knowledge model to whole details.");
 
-                // Use the determined whole model, if it exists.
+                // Use the determined whole details model, if it exists.
                 set_compound_element_by_name(p6, p7, p8, NULL_POINTER, NULL_POINTER, NULL_POINTER,
                     kmn, (void*) kmnc, (void*) kmns,
                     kma, (void*) kmac, (void*) kmas,
