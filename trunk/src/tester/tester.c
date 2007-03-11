@@ -24,7 +24,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.29 $ $Date: 2007-01-14 22:06:49 $ $Author: christian $
+ * @version $Revision: 1.30 $ $Date: 2007-03-11 20:09:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -116,6 +116,228 @@ void test_stdout_stderr() {
 
     fputs("test stdout ok\n", stdout);
     fputs("test stderr ok\n", stderr);
+}
+
+/**
+ * Tests the integer array.
+ */
+void test_type_sizes() {
+
+    fputs("Test type sizes:\n", stdout);
+
+    fprintf(stderr, "null: %i\n", NULL_POINTER);
+    fprintf(stderr, "int size: %i\n", *INTEGER_PRIMITIVE_SIZE);
+    fprintf(stderr, "char size: %i\n", *CHARACTER_PRIMITIVE_SIZE);
+    fprintf(stderr, "wchar_t size: %i\n", *WIDE_CHARACTER_PRIMITIVE_SIZE);
+    fprintf(stderr, "unsigned long size: %i\n", *UNSIGNED_LONG_PRIMITIVE_SIZE);
+    fprintf(stderr, "void* size: %i\n", *POINTER_PRIMITIVE_SIZE);
+    fprintf(stderr, "double size: %i\n", *DOUBLE_PRIMITIVE_SIZE);
+}
+
+/**
+ * Tests the pointer addition.
+ *
+ * CAUTION! The following two lines calculate DIFFERENT results!
+ * void* b = (void*) (m + (*NUMBER_0_INTEGER * *INTEGER_PRIMITIVE_SIZE));
+ * void* b = (void*) m + (*NUMBER_0_INTEGER * *INTEGER_PRIMITIVE_SIZE);
+ * The first line is wrong and adds 16 instead of just 4.
+ * The problem are the parentheses.
+ *
+ * The following addition adds 8 instead of just 2.
+ * int* m = NULL_POINTER;
+ * allocate((void*) &m, (void*) NUMBER_1_INTEGER, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+ * set(m, (void*) NUMBER_0_INTEGER, (void*) NUMBER_10_INTEGER, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+ * int* c = m + 2;
+ * should be: = 10 + 2 = 12
+ * but it is: = 10 + (2 * sizeof(int)) = 10 + 8 = 18
+ */
+void test_pointer_addition() {
+
+    fputs("Test pointer addition:\n", stdout);
+
+    // Allocate arrays of an arbitrary size.
+    void* v = (void*) malloc(*NUMBER_10_INTEGER);
+    int* i = (int*) malloc(*NUMBER_10_INTEGER);
+    double* d = (double*) malloc(*NUMBER_10_INTEGER);
+    char* c = (char*) malloc(*NUMBER_10_INTEGER);
+    wchar_t* wc = (wchar_t*) malloc(*NUMBER_10_INTEGER);
+    unsigned long* ul = (unsigned long*) malloc(*NUMBER_10_INTEGER);
+
+    // Calculate void pointer addresses using various formulas and casts.
+    void* v0 = v; // unchanged
+    void* v1 = v + *NUMBER_1_INTEGER; // increased by 1
+    void* v2 = (void*) v + *NUMBER_1_INTEGER; // increased by 1
+    void* v3 = ((void*) v) + *NUMBER_1_INTEGER; // increased by 1
+    void* v4 = (void*) (v + *NUMBER_1_INTEGER); // increased by 1
+    void* v5 = (void*) v + *NUMBER_1_INTEGER; // increased by 1
+    void* v6 = ((void*) v) + *NUMBER_1_INTEGER; // increased by 1
+    void* v7 = (void*) (v + *NUMBER_1_INTEGER); // increased by 1
+
+    fprintf(stderr, "void pointer v0: %i\n", v0);
+    fprintf(stderr, "void pointer v1: %i\n", v1);
+    fprintf(stderr, "void pointer v2: %i\n", v2);
+    fprintf(stderr, "void pointer v3: %i\n", v3);
+    fprintf(stderr, "void pointer v4: %i\n", v4);
+    fprintf(stderr, "void pointer v5: %i\n", v5);
+    fprintf(stderr, "void pointer v6: %i\n", v6);
+    fprintf(stderr, "void pointer v7: %i\n", v7);
+
+    // Calculate int pointer addresses using various formulas and casts.
+    int* i0 = i; // unchanged
+    int* i1 = i + *NUMBER_1_INTEGER; // increased by 4
+    int* i2 = (int*) i + *NUMBER_1_INTEGER; // increased by 4
+    int* i3 = ((int*) i) + *NUMBER_1_INTEGER; // increased by 4
+    int* i4 = (int*) (i + *NUMBER_1_INTEGER); // increased by 4
+    int* i5 = (void*) i + *NUMBER_1_INTEGER; // increased by 1
+    int* i6 = ((void*) i) + *NUMBER_1_INTEGER; // increased by 1
+    int* i7 = (void*) (i + *NUMBER_1_INTEGER); // increased by 4
+
+    fprintf(stderr, "int pointer i0: %i\n", i0);
+    fprintf(stderr, "int pointer i1: %i\n", i1);
+    fprintf(stderr, "int pointer i2: %i\n", i2);
+    fprintf(stderr, "int pointer i3: %i\n", i3);
+    fprintf(stderr, "int pointer i4: %i\n", i4);
+    fprintf(stderr, "int pointer i5: %i\n", i5);
+    fprintf(stderr, "int pointer i6: %i\n", i6);
+    fprintf(stderr, "int pointer i7: %i\n", i7);
+
+    // Calculate double pointer addresses using various formulas and casts.
+    double* d0 = d; // unchanged
+    double* d1 = d + *NUMBER_1_INTEGER; // increased by 8
+    double* d2 = (double*) d + *NUMBER_1_INTEGER; // increased by 8
+    double* d3 = ((double*) d) + *NUMBER_1_INTEGER; // increased by 8
+    double* d4 = (double*) (d + *NUMBER_1_INTEGER); // increased by 8
+    double* d5 = (void*) d + *NUMBER_1_INTEGER; // increased by 1
+    double* d6 = ((void*) d) + *NUMBER_1_INTEGER; // increased by 1
+    double* d7 = (void*) (d + *NUMBER_1_INTEGER); // increased by 8
+
+    fprintf(stderr, "double pointer d0: %i\n", d0);
+    fprintf(stderr, "double pointer d1: %i\n", d1);
+    fprintf(stderr, "double pointer d2: %i\n", d2);
+    fprintf(stderr, "double pointer d3: %i\n", d3);
+    fprintf(stderr, "double pointer d4: %i\n", d4);
+    fprintf(stderr, "double pointer d5: %i\n", d5);
+    fprintf(stderr, "double pointer d6: %i\n", d6);
+    fprintf(stderr, "double pointer d7: %i\n", d7);
+
+    // Calculate char pointer addresses using various formulas and casts.
+    char* c0 = c; // unchanged
+    char* c1 = c + *NUMBER_1_INTEGER; // increased by 1
+    char* c2 = (char*) c + *NUMBER_1_INTEGER; // increased by 1
+    char* c3 = ((char*) c) + *NUMBER_1_INTEGER; // increased by 1
+    char* c4 = (char*) (c + *NUMBER_1_INTEGER); // increased by 1
+    char* c5 = (void*) c + *NUMBER_1_INTEGER; // increased by 1
+    char* c6 = ((void*) c) + *NUMBER_1_INTEGER; // increased by 1
+    char* c7 = (void*) (c + *NUMBER_1_INTEGER); // increased by 1
+
+    fprintf(stderr, "char pointer c0: %i\n", c0);
+    fprintf(stderr, "char pointer c1: %i\n", c1);
+    fprintf(stderr, "char pointer c2: %i\n", c2);
+    fprintf(stderr, "char pointer c3: %i\n", c3);
+    fprintf(stderr, "char pointer c4: %i\n", c4);
+    fprintf(stderr, "char pointer c5: %i\n", c5);
+    fprintf(stderr, "char pointer c6: %i\n", c6);
+    fprintf(stderr, "char pointer c7: %i\n", c7);
+
+    // Calculate wchar_t pointer addresses using various formulas and casts.
+    wchar_t* wc0 = wc; // unchanged
+    wchar_t* wc1 = wc + *NUMBER_1_INTEGER; // increased by 4
+    wchar_t* wc2 = (wchar_t*) wc + *NUMBER_1_INTEGER; // increased by 4
+    wchar_t* wc3 = ((wchar_t*) wc) + *NUMBER_1_INTEGER; // increased by 4
+    wchar_t* wc4 = (wchar_t*) (wc + *NUMBER_1_INTEGER); // increased by 4
+    wchar_t* wc5 = (void*) wc + *NUMBER_1_INTEGER; // increased by 1
+    wchar_t* wc6 = ((void*) wc) + *NUMBER_1_INTEGER; // increased by 1
+    wchar_t* wc7 = (void*) (wc + *NUMBER_1_INTEGER); // increased by 4
+
+    fprintf(stderr, "wchar_t pointer wc0: %i\n", wc0);
+    fprintf(stderr, "wchar_t pointer wc1: %i\n", wc1);
+    fprintf(stderr, "wchar_t pointer wc2: %i\n", wc2);
+    fprintf(stderr, "wchar_t pointer wc3: %i\n", wc3);
+    fprintf(stderr, "wchar_t pointer wc4: %i\n", wc4);
+    fprintf(stderr, "wchar_t pointer wc5: %i\n", wc5);
+    fprintf(stderr, "wchar_t pointer wc6: %i\n", wc6);
+    fprintf(stderr, "wchar_t pointer wc7: %i\n", wc7);
+
+    // Calculate unsigned long pointer addresses using various formulas and casts.
+    unsigned long* ul0 = ul; // unchanged
+    unsigned long* ul1 = ul + *NUMBER_1_INTEGER; // increased by 4
+    unsigned long* ul2 = (unsigned long*) ul + *NUMBER_1_INTEGER; // increased by 4
+    unsigned long* ul3 = ((unsigned long*) ul) + *NUMBER_1_INTEGER; // increased by 4
+    unsigned long* ul4 = (unsigned long*) (ul + *NUMBER_1_INTEGER); // increased by 4
+    unsigned long* ul5 = (void*) ul + *NUMBER_1_INTEGER; // increased by 1
+    unsigned long* ul6 = ((void*) ul) + *NUMBER_1_INTEGER; // increased by 1
+    unsigned long* ul7 = (void*) (ul + *NUMBER_1_INTEGER); // increased by 4
+
+    fprintf(stderr, "unsigned long pointer ul0: %i\n", ul0);
+    fprintf(stderr, "unsigned long pointer ul1: %i\n", ul1);
+    fprintf(stderr, "unsigned long pointer ul2: %i\n", ul2);
+    fprintf(stderr, "unsigned long pointer ul3: %i\n", ul3);
+    fprintf(stderr, "unsigned long pointer ul4: %i\n", ul4);
+    fprintf(stderr, "unsigned long pointer ul5: %i\n", ul5);
+    fprintf(stderr, "unsigned long pointer ul6: %i\n", ul6);
+    fprintf(stderr, "unsigned long pointer ul7: %i\n", ul7);
+
+    // Free arrays.
+    free(v);
+    free(i);
+    free(d);
+    free(c);
+    free(wc);
+    free(ul);
+}
+
+/**
+ * Tests the integer array.
+ */
+void test_integer_array() {
+
+    fputs("Test integer array:\n", stdout);
+
+    // The test value.
+    char* test = "2,3,4";
+    int testc = *NUMBER_5_INTEGER;
+
+    // The test knowledge model.
+    int* m = NULL_POINTER;
+    int* mc = NULL_POINTER;
+    int* ms = NULL_POINTER;
+
+    // Allocate test knowledge model.
+    allocate((void*) &mc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    *mc = *NUMBER_0_INTEGER;
+    allocate((void*) &ms, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    *ms = *NUMBER_0_INTEGER;
+    allocate((void*) &m, (void*) ms, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+
+    fprintf(stderr, "pre mc: %i\n", *mc);
+    fprintf(stderr, "pre ms: %i\n", *ms);
+    fprintf(stderr, "pre m: %i\n", *m);
+
+    // Parse test value and assign to test knowledge model.
+    parse((void*) &m, (void*) mc, (void*) ms, NULL_POINTER, NULL_POINTER, NULL_POINTER,
+        (void*) test, (void*) &testc, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+
+    // The result values read out from the integer vector.
+    int* result0 = NULL_POINTER;
+    int* result1 = NULL_POINTER;
+    int* result2 = NULL_POINTER;
+
+    // Get result values.
+    get(m, (void*) NUMBER_0_INTEGER, (void*) &result0, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    get(m, (void*) NUMBER_1_INTEGER, (void*) &result1, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    get(m, (void*) NUMBER_2_INTEGER, (void*) &result2, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+
+    fprintf(stderr, "post mc: %i\n", *mc);
+    fprintf(stderr, "post ms: %i\n", *ms);
+    fprintf(stderr, "post m: %i\n", *m);
+    fprintf(stderr, "post result0: %i\n", *result0);
+    fprintf(stderr, "post result1: %i\n", *result1);
+    fprintf(stderr, "post result2: %i\n", *result2);
+
+    // Deallocate test knowledge model.
+    deallocate((void*) &m, (void*) ms, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    deallocate((void*) &mc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    deallocate((void*) &ms, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 }
 
 /**
@@ -957,8 +1179,11 @@ void test() {
 //??    test_inline_assembler_code();
 //??    test_preprocessor_directives();
 //??    test_stdout_stderr();
+//??    test_type_sizes();
+//??    test_pointer_addition();
+    test_integer_array();
 //??    test_character_array_with_termination();
-    test_array_resizing();
+//??    test_array_resizing();
 //??    test_wide_character_output();
 //??    test_integer_to_wide_character_conversion();
 //??    test_ascii_character_wide_character_equality();

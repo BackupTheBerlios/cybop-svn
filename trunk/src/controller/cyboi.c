@@ -25,7 +25,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.18 $ $Date: 2007-01-14 22:06:48 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2007-03-11 20:09:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -57,8 +57,15 @@
  */
 int main(int p0, char** p1) {
 
+    // One note about dynamic memory allocation:
+    // There is no point in freeing blocks at the end of a program, because all
+    // of the program's space is given back to the system when the process terminates.
+    // Of course, all dynamically allocated memory should also be freed properly.
+    // However, if some memory to be freed is forgotten, it will not harm
+    // the operating system, as it will be freed automatically on process shutdown.
+
     // Return 1 to indicate an error, by default.
-    int r = 1;
+    int r = *NUMBER_1_INTEGER;
 
     // Startup global variables.
     // CAUTION! They have to be created BEFORE the command line parameter check below!
@@ -68,7 +75,7 @@ int main(int p0, char** p1) {
     // Call testing procedures. Comment/ uncomment this as needed!
     // CAUTION! This has to stand AFTER the initialization of the
     // global variables because these are used by the testing code.
-//??    test(); r = 0; shutdown_globals(); return r;
+//??    test(); r = *NUMBER_0_INTEGER; shutdown_globals(); return r;
 
     if (p1 != NULL_POINTER) {
 
@@ -100,7 +107,7 @@ int main(int p0, char** p1) {
                 log_message((void*) INFO_LOG_LEVEL, (void*) EXIT_CYBOI_NORMALLY_MESSAGE, (void*) EXIT_CYBOI_NORMALLY_MESSAGE_COUNT);
 
                 // Set return value to 0, to indicate proper shutdown.
-                r = 0;
+                r = *NUMBER_0_INTEGER;
 
             } else {
 

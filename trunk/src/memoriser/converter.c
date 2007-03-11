@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.20 $ $Date: 2007-03-09 23:21:41 $ $Author: christian $
+ * @version $Revision: 1.21 $ $Date: 2007-03-11 20:09:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -36,6 +36,7 @@
 #include "../memoriser/converter/date_time_converter.c"
 #include "../memoriser/converter/double_vector_converter.c"
 #include "../memoriser/converter/fraction_converter.c"
+#include "../memoriser/converter/integer_converter.c"
 #include "../memoriser/converter/integer_vector_converter.c"
 #include "../memoriser/converter/latex_converter.c"
 #include "../memoriser/converter/linux_console_converter.c"
@@ -59,6 +60,8 @@
  * @param p9 the type count
  */
 void parse(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9) {
+
+    log_message_debug("Information: Parse byte stream.");
 
     // The comparison result.
     int r = 0;

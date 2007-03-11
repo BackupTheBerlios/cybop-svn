@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2007-03-09 23:21:41 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2007-03-11 20:09:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -340,57 +340,61 @@ void receive_file_system(void* p0, void* p1, void* p2,
     log_message_debug("Receive file system message.");
 
     // The knowledge model name.
-    void* kmn = NULL_POINTER;
-    int* kmnc = NULL_POINTER;
-    int* kmns = NULL_POINTER;
+    void* n = NULL_POINTER;
+    int* nc = NULL_POINTER;
+    int* ns = NULL_POINTER;
     // The knowledge model abstraction.
-    void* kma = NULL_POINTER;
-    int* kmac = NULL_POINTER;
-    int* kmas = NULL_POINTER;
+    void* a = NULL_POINTER;
+    int* ac = NULL_POINTER;
+    int* as = NULL_POINTER;
     // The knowledge model model.
-    void* kmm = NULL_POINTER;
-    int* kmmc = NULL_POINTER;
-    int* kmms = NULL_POINTER;
+    void* m = NULL_POINTER;
+    int* mc = NULL_POINTER;
+    int* ms = NULL_POINTER;
     // The knowledge model details.
-    void* kmd = NULL_POINTER;
-    int* kmdc = NULL_POINTER;
-    int* kmds = NULL_POINTER;
+    void* d = NULL_POINTER;
+    int* dc = NULL_POINTER;
+    int* ds = NULL_POINTER;
 
     // Create knowledge model name.
-    allocate((void*) &kmnc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    *kmnc = *NUMBER_0_INTEGER;
-    allocate((void*) &kmns, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    *kmns = *NUMBER_0_INTEGER;
-    receive_file_system_model((void*) &kmn, (void*) kmnc, (void*) kmns, NULL_POINTER, NULL_POINTER, NULL_POINTER, p9, p10, p11, p12, (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
+    allocate((void*) &nc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    *nc = *NUMBER_0_INTEGER;
+    allocate((void*) &ns, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    *ns = *NUMBER_0_INTEGER;
+    allocate((void*) &n, (void*) ns, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
-    // A knowledge model channel is not received (created),
+    // A knowledge model channel is not allocated,
     // since that is only needed temporarily for model loading.
 
     // Create knowledge model abstraction.
-    allocate((void*) &kmac, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    *kmac = *NUMBER_0_INTEGER;
-    allocate((void*) &kmas, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    *kmas = *NUMBER_0_INTEGER;
-    receive_file_system_model((void*) &kma, (void*) kmac, (void*) kmas, NULL_POINTER, NULL_POINTER, NULL_POINTER, p13, p14, p15, p16, (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
+    allocate((void*) &ac, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    *ac = *NUMBER_0_INTEGER;
+    allocate((void*) &as, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    *as = *NUMBER_0_INTEGER;
+    allocate((void*) &a, (void*) as, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
     // Create knowledge model model.
-    allocate((void*) &kmmc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    *kmmc = *NUMBER_0_INTEGER;
-    allocate((void*) &kmms, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    *kmms = *NUMBER_0_INTEGER;
-    // CAUTION! The knowledge model model is received TOGETHER with the
-    // knowledge model details, in just one operation. See below!
+    allocate((void*) &mc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    *mc = *NUMBER_0_INTEGER;
+    allocate((void*) &ms, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    *ms = *NUMBER_0_INTEGER;
+    allocate((void*) &m, (void*) ms, p13, p14);
 
     // Create knowledge model details.
-    allocate((void*) &kmdc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    *kmdc = *NUMBER_0_INTEGER;
-    allocate((void*) &kmds, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    *kmds = *NUMBER_0_INTEGER;
-    // CAUTION! The knowledge model details is received TOGETHER with the
-    // knowledge model model, in just one operation. See below!
+    allocate((void*) &dc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    *dc = *NUMBER_0_INTEGER;
+    allocate((void*) &ds, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    *ds = *NUMBER_0_INTEGER;
+    allocate((void*) &d, (void*) ds, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
 
+    // Receive knowledge model name.
+    receive_file_system_model((void*) &n, (void*) nc, (void*) ns, NULL_POINTER, NULL_POINTER, NULL_POINTER, p9, p10, p11, p12, (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
+    // Receive knowledge model abstraction.
+    receive_file_system_model((void*) &a, (void*) ac, (void*) as, NULL_POINTER, NULL_POINTER, NULL_POINTER, p13, p14, p15, p16, (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
     // Receive knowledge model model and details.
-    receive_file_system_model((void*) &kmm, (void*) kmmc, (void*) kmms, (void*) &kmd, (void*) kmdc, (void*) kmds, p19, p20, p13, p14, p17, p18);
+    // CAUTION! The knowledge model model is received TOGETHER with the
+    // knowledge model details, in just one operation.
+    receive_file_system_model((void*) &m, (void*) mc, (void*) ms, (void*) &d, (void*) dc, (void*) ds, p19, p20, p13, p14, p17, p18);
 
     // The comparison result.
     int r = *NUMBER_0_INTEGER;
@@ -407,10 +411,10 @@ void receive_file_system(void* p0, void* p1, void* p2,
 
                 // Use the determined whole model, if it exists.
                 set_compound_element_by_name(p3, p4, p5, NULL_POINTER, NULL_POINTER, NULL_POINTER,
-                    kmn, (void*) kmnc, (void*) kmns,
-                    kma, (void*) kmac, (void*) kmas,
-                    kmm, (void*) kmmc, (void*) kmms,
-                    kmd, (void*) kmdc, (void*) kmds);
+                    n, (void*) nc, (void*) ns,
+                    a, (void*) ac, (void*) as,
+                    m, (void*) mc, (void*) ms,
+                    d, (void*) dc, (void*) ds);
 
             } else {
 
@@ -418,10 +422,10 @@ void receive_file_system(void* p0, void* p1, void* p2,
 
                 // Use the knowledge memory root if the determined whole model is null.
                 set_compound_element_by_name(p0, p1, p2, NULL_POINTER, NULL_POINTER, NULL_POINTER,
-                    kmn, (void*) kmnc, (void*) kmns,
-                    kma, (void*) kmac, (void*) kmas,
-                    kmm, (void*) kmmc, (void*) kmms,
-                    kmd, (void*) kmdc, (void*) kmds);
+                    n, (void*) nc, (void*) ns,
+                    a, (void*) ac, (void*) as,
+                    m, (void*) mc, (void*) ms,
+                    d, (void*) dc, (void*) ds);
             }
         }
     }
@@ -438,10 +442,10 @@ void receive_file_system(void* p0, void* p1, void* p2,
 
                 // Use the determined whole details model, if it exists.
                 set_compound_element_by_name(p6, p7, p8, NULL_POINTER, NULL_POINTER, NULL_POINTER,
-                    kmn, (void*) kmnc, (void*) kmns,
-                    kma, (void*) kmac, (void*) kmas,
-                    kmm, (void*) kmmc, (void*) kmms,
-                    kmd, (void*) kmdc, (void*) kmds);
+                    n, (void*) nc, (void*) ns,
+                    a, (void*) ac, (void*) as,
+                    m, (void*) mc, (void*) ms,
+                    d, (void*) dc, (void*) ds);
 
             } else {
 

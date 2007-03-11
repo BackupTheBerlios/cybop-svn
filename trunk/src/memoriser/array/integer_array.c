@@ -38,7 +38,7 @@
  *
  * Array elements are accessed over their index (array base pointer + index).
  *
- * @version $Revision: 1.10 $ $Date: 2007-01-14 22:06:49 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2007-03-11 20:09:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -207,20 +207,20 @@ void compare_integer_array_elements(void* p0, void* p1, void* p2, void* p3) {
                 if (p0 != NULL_POINTER) {
 
                     // The loop variable.
-                    int j = 0;
+                    int j = *NUMBER_0_INTEGER;
                     // The first element.
                     int* e0 = NULL_POINTER;
                     // The second element.
                     int* e1 = NULL_POINTER;
                     // The size.
-                    int s = 0;
+                    int s = *NUMBER_0_INTEGER;
 
-                    while (1) {
+                    while (*NUMBER_1_INTEGER) {
 
                         if (j >= *c) {
 
                             // All elements have been compared and are equal.
-                            *r = 1;
+                            *r = *NUMBER_1_INTEGER;
 
                             break;
                         }
@@ -265,16 +265,16 @@ void compare_integer_array_elements(void* p0, void* p1, void* p2, void* p3) {
 /**
  * Sets the integer array elements.
  *
- * @param p0 the array
- * @param p1 the index
- * @param p2 the elements (Hand over as array!)
- * @param p3 the count
+ * @param p0 the destination array
+ * @param p1 the destination index
+ * @param p2 the source elements
+ * @param p3 the source count
  */
 void set_integer_array_elements(void* p0, void* p1, void* p2, void* p3) {
 
     if (p3 != NULL_POINTER) {
 
-        int* c = (int*) p3;
+        int* sc = (int*) p3;
 
         if (p2 != NULL_POINTER) {
 
@@ -291,23 +291,23 @@ void set_integer_array_elements(void* p0, void* p1, void* p2, void* p3) {
                     // The destination element.
                     int* de = NULL_POINTER;
                     // The loop variable.
-                    int j = 0;
-                    // The size.
-                    int s = 0;
+                    int j = *NUMBER_0_INTEGER;
+                    // The offset.
+                    int o = *NUMBER_0_INTEGER;
 
-                    while (1) {
+                    while (*NUMBER_1_INTEGER) {
 
-                        if (j >= *c) {
+                        if (j >= *sc) {
 
                             break;
                         }
 
                         // Determine size.
-                        s = j * *INTEGER_PRIMITIVE_SIZE;
+                        o = j * *INTEGER_PRIMITIVE_SIZE;
 
                         // Determine source and destination element.
-                        se = (int*) (p2 + s);
-                        de = (int*) (db + s);
+                        se = (int*) (p2 + o);
+                        de = (int*) (db + o);
 
                         // Set destination element.
                         *de = *se;
@@ -339,7 +339,7 @@ void set_integer_array_elements(void* p0, void* p1, void* p2, void* p3) {
 /**
  * Removes the integer array elements.
  *
- * @param p0 the array
+ * @param p0 the destination array
  * @param p1 the size
  * @param p2 the index
  * @param p3 the count
@@ -371,9 +371,9 @@ void remove_integer_array_elements(void* p0, void* p1, void* p2, void* p3) {
                     // The remaining elements size.
                     int r = *m - (*i + *c);
                     // The loop variable.
-                    int j = 0;
+                    int j = *NUMBER_0_INTEGER;
                     // The size.
-                    int s = 0;
+                    int s = *NUMBER_0_INTEGER;
 
                     // Starting from the given index, move all remaining elements
                     // one place towards the beginning of the elements.
@@ -382,7 +382,7 @@ void remove_integer_array_elements(void* p0, void* p1, void* p2, void* p3) {
                     // index = 4 (remove "..")
                     // count = 2
                     // rest = 11 - (4 + 2) = 11 - 6 = 5
-                    while (1) {
+                    while (*NUMBER_1_INTEGER) {
 
                         if (j >= r) {
 
@@ -432,15 +432,15 @@ void remove_integer_array_elements(void* p0, void* p1, void* p2, void* p3) {
 /**
  * Gets the integer array elements.
  *
- * @param p0 the array
- * @param p1 the index
- * @param p2 the elements (Hand over as array reference!)
+ * @param p0 the source array
+ * @param p1 the source index
+ * @param p2 the destination elements (Hand over as array reference!)
  */
 void get_integer_array_elements(void* p0, void* p1, void* p2) {
 
     if (p2 != NULL_POINTER) {
 
-        void** e = (void**) p2;
+        void** d = (void**) p2;
 
         if (p1 != NULL_POINTER) {
 
@@ -449,7 +449,7 @@ void get_integer_array_elements(void* p0, void* p1, void* p2) {
             if (p0 != NULL_POINTER) {
 
                 // Determine element.
-                *e = (void*) (p0 + (*i * *INTEGER_PRIMITIVE_SIZE));
+                *d = (void*) (p0 + (*i * *INTEGER_PRIMITIVE_SIZE));
 
             } else {
 
@@ -497,15 +497,15 @@ void get_integer_array_elements_index(void* p0, void* p1, void* p2, void* p3, vo
                 if (p0 != NULL_POINTER) {
 
                     // The iteration limit.
-                    int l = *ac - *ec + 1;
+                    int l = *ac - *ec + *NUMBER_1_INTEGER;
                     // The element.
                     void* e = NULL_POINTER;
                     // The loop variable.
-                    int j = 0;
+                    int j = *NUMBER_0_INTEGER;
                     // The comparison result.
-                    int r = 0;
+                    int r = *NUMBER_0_INTEGER;
 
-                    while (1) {
+                    while (*NUMBER_1_INTEGER) {
 
                         if (j >= l) {
 
@@ -516,7 +516,7 @@ void get_integer_array_elements_index(void* p0, void* p1, void* p2, void* p3, vo
                         get_integer_array_elements(p0, (void*) &j, (void*) &e);
                         compare_integer_array_elements(e, p2, p3, (void*) &r);
 
-                        if (r == 1) {
+                        if (r == *NUMBER_1_INTEGER) {
 
                             // The element has been found.
                             *i = j;

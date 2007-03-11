@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.25 $ $Date: 2007-03-09 23:21:41 $ $Author: christian $
+ * @version $Revision: 1.26 $ $Date: 2007-03-11 20:09:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -451,37 +451,37 @@ void get_compound_element_name_by_index(void* p0, void* p1,
 
                             } else {
 
-                                log_message_debug("Could not get compound part name by index. The index exceeds the count.");
+                                log_message_debug("Could not get compound element name by index. The index exceeds the count.");
                             }
 
                         } else {
 
-                            log_message_debug("Could not get compound part name by index. The names sizes is null.");
+                            log_message_debug("Could not get compound element name by index. The names sizes is null.");
                         }
 
                     } else {
 
-                        log_message_debug("Could not get compound part name by index. The names counts is null.");
+                        log_message_debug("Could not get compound element name by index. The names counts is null.");
                     }
 
                 } else {
 
-                    log_message_debug("Could not get compound part name by index. The names is null.");
+                    log_message_debug("Could not get compound element name by index. The names is null.");
                 }
 
             } else {
 
-                log_message_debug("Could not get compound part name by index. The index is negativ.");
+                log_message_debug("Could not get compound element name by index. The index is negativ.");
             }
 
         } else {
 
-            log_message_debug("Could not get compound part name by index. The compound count is null.");
+            log_message_debug("Could not get compound element name by index. The compound count is null.");
         }
 
     } else {
 
-        log_message_debug("Could not get compound part name by index. The index is null.");
+        log_message_debug("Could not get compound element name by index. The index is null.");
     }
 }
 
@@ -732,7 +732,7 @@ void set_compound_element_by_index(void* p0, void* p1, void* p2, void* p3,
 
                 if (*i >= 0) {
 
-                    log_message_debug("Set compound part by index.");
+                    log_message_debug("Set compound element by index.");
 
                     // The names, abstractions, models, details.
                     void** n = &NULL_POINTER;
@@ -786,7 +786,7 @@ void set_compound_element_by_index(void* p0, void* p1, void* p2, void* p3,
 
                                                                 if (*ds != NULL_POINTER) {
 
-                                                                    if (*i == *cs) {
+                                                                    if (*i >= *cs) {
 
                                                                         // Increase size.
                                                                         *cs = (*cs * *COMPOUND_REALLOCATE_FACTOR) + 1;
@@ -846,87 +846,87 @@ void set_compound_element_by_index(void* p0, void* p1, void* p2, void* p3,
 
                                                                     } else {
 
-                                                                        log_message_debug("Could not set compound part by index. The index exceeds the size.");
+                                                                        log_message_debug("Could not set compound element by index. The index exceeds the size.");
                                                                     }
 
                                                                 } else {
 
-                                                                    log_message_debug("Could not set compound part by index. The details sizes is null.");
+                                                                    log_message_debug("Could not set compound element by index. The details sizes is null.");
                                                                 }
 
                                                             } else {
 
-                                                                log_message_debug("Could not set compound part by index. The details counts is null.");
+                                                                log_message_debug("Could not set compound element by index. The details counts is null.");
                                                             }
 
                                                         } else {
 
-                                                            log_message_debug("Could not set compound part by index. The details is null.");
+                                                            log_message_debug("Could not set compound element by index. The details is null.");
                                                         }
 
                                                     } else {
 
-                                                        log_message_debug("Could not set compound part by index. The models sizes is null.");
+                                                        log_message_debug("Could not set compound element by index. The models sizes is null.");
                                                     }
 
                                                 } else {
 
-                                                    log_message_debug("Could not set compound part by index. The models counts is null.");
+                                                    log_message_debug("Could not set compound element by index. The models counts is null.");
                                                 }
 
                                             } else {
 
-                                                log_message_debug("Could not set compound part by index. The models is null.");
+                                                log_message_debug("Could not set compound element by index. The models is null.");
                                             }
 
                                         } else {
 
-                                            log_message_debug("Could not set compound part by index. The abstractions sizes is null.");
+                                            log_message_debug("Could not set compound element by index. The abstractions sizes is null.");
                                         }
 
                                     } else {
 
-                                        log_message_debug("Could not set compound part by index. The abstractions counts is null.");
+                                        log_message_debug("Could not set compound element by index. The abstractions counts is null.");
                                     }
 
                                 } else {
 
-                                    log_message_debug("Could not set compound part by index. The abstractions is null.");
+                                    log_message_debug("Could not set compound element by index. The abstractions is null.");
                                 }
 
                             } else {
 
-                                log_message_debug("Could not set compound part by index. The names sizes is null.");
+                                log_message_debug("Could not set compound element by index. The names sizes is null.");
                             }
 
                         } else {
 
-                            log_message_debug("Could not set compound part by index. The names counts is null.");
+                            log_message_debug("Could not set compound element by index. The names counts is null.");
                         }
 
                     } else {
 
-                        log_message_debug("Could not set compound part by index. The names is null.");
+                        log_message_debug("Could not set compound element by index. The names is null.");
                     }
 
                 } else {
 
-                    log_message_debug("Could not set compound part by index. The index is negative.");
+                    log_message_debug("Could not set compound element by index. The index is negative.");
                 }
 
             } else {
 
-                log_message_debug("Could not set compound part by index. The compound count is null.");
+                log_message_debug("Could not set compound element by index. The compound count is null.");
             }
 
         } else {
 
-            log_message_debug("Could not set compound part by index. The compound sizes is null.");
+            log_message_debug("Could not set compound element by index. The compound sizes is null.");
         }
 
     } else {
 
-        log_message_debug("Could not set compound part by index. The index is null.");
+        log_message_debug("Could not set compound element by index. The index is null.");
     }
 }
 
@@ -1040,7 +1040,7 @@ void set_compound_element_by_name(void* p0, void* p1, void* p2, void* p3, void* 
 
             // Could not get compound element index. An element with that name does not exist.
             // Therefore, add compound element by name.
-            log_message_debug("Add compound part element by name.");
+            log_message_debug("Add compound element element by name.");
             log_message_debug((char*) e);
 
             // CAUTION! Use compound count as index for adding new elements.
@@ -1151,7 +1151,7 @@ void remove_compound_element_by_index(void* p0, void* p1, void* p2, void* p3) {
 
                 if (*i >= 0) {
 
-                    log_message_debug("Remove compound part by index.");
+                    log_message_debug("Remove compound element by index.");
 
                     // The names, abstractions, models, details.
                     void** n = &NULL_POINTER;
@@ -1229,87 +1229,87 @@ void remove_compound_element_by_index(void* p0, void* p1, void* p2, void* p3) {
 
                                                                     } else {
 
-                                                                        log_message_debug("Could not remove compound part by index. The index exceeds the count.");
+                                                                        log_message_debug("Could not remove compound element by index. The index exceeds the count.");
                                                                     }
 
                                                                 } else {
 
-                                                                    log_message_debug("Could not remove compound part by index. The details sizes is null.");
+                                                                    log_message_debug("Could not remove compound element by index. The details sizes is null.");
                                                                 }
 
                                                             } else {
 
-                                                                log_message_debug("Could not remove compound part by index. The details counts is null.");
+                                                                log_message_debug("Could not remove compound element by index. The details counts is null.");
                                                             }
 
                                                         } else {
 
-                                                            log_message_debug("Could not remove compound part by index. The details is null.");
+                                                            log_message_debug("Could not remove compound element by index. The details is null.");
                                                         }
 
                                                     } else {
 
-                                                        log_message_debug("Could not remove compound part by index. The models sizes is null.");
+                                                        log_message_debug("Could not remove compound element by index. The models sizes is null.");
                                                     }
 
                                                 } else {
 
-                                                    log_message_debug("Could not remove compound part by index. The models counts is null.");
+                                                    log_message_debug("Could not remove compound element by index. The models counts is null.");
                                                 }
 
                                             } else {
 
-                                                log_message_debug("Could not remove compound part by index. The models is null.");
+                                                log_message_debug("Could not remove compound element by index. The models is null.");
                                             }
 
                                         } else {
 
-                                            log_message_debug("Could not remove compound part by index. The abstractions sizes is null.");
+                                            log_message_debug("Could not remove compound element by index. The abstractions sizes is null.");
                                         }
 
                                     } else {
 
-                                        log_message_debug("Could not remove compound part by index. The abstractions counts is null.");
+                                        log_message_debug("Could not remove compound element by index. The abstractions counts is null.");
                                     }
 
                                 } else {
 
-                                    log_message_debug("Could not remove compound part by index. The abstractions is null.");
+                                    log_message_debug("Could not remove compound element by index. The abstractions is null.");
                                 }
 
                             } else {
 
-                                log_message_debug("Could not remove compound part by index. The names sizes is null.");
+                                log_message_debug("Could not remove compound element by index. The names sizes is null.");
                             }
 
                         } else {
 
-                            log_message_debug("Could not remove compound part by index. The names counts is null.");
+                            log_message_debug("Could not remove compound element by index. The names counts is null.");
                         }
 
                     } else {
 
-                        log_message_debug("Could not remove compound part by index. The names is null.");
+                        log_message_debug("Could not remove compound element by index. The names is null.");
                     }
 
                 } else {
 
-                    log_message_debug("Could not remove compound part by index. The index is negativ.");
+                    log_message_debug("Could not remove compound element by index. The index is negativ.");
                 }
 
             } else {
 
-                log_message_debug("Could not remove compound part by index. The compound count is null.");
+                log_message_debug("Could not remove compound element by index. The compound count is null.");
             }
 
         } else {
 
-            log_message_debug("Could not remove compound part by index. The compound size is null.");
+            log_message_debug("Could not remove compound element by index. The compound size is null.");
         }
 
     } else {
 
-        log_message_debug("Could not remove compound part by index. The index is null.");
+        log_message_debug("Could not remove compound element by index. The index is null.");
     }
 }
 
@@ -1380,7 +1380,7 @@ void reindex_compound_elements_forming_list(void* p0, void* p1, void* p2, int* p
                     if (r == 1) {
 
                         // The beginning of the two arrays are identical.
-                        // The compound part belongs to the list.
+                        // The compound element belongs to the list.
 
                         *((int*) *nc) = 0;
 
@@ -1654,67 +1654,67 @@ void get_compound_element_by_index(void* p0, void* p1, void* p2,
 
                                                     } else {
 
-                                                        log_message_debug("Could not get compound part by index. The index exceeds the count.");
+                                                        log_message_debug("Could not get compound element by index. The index exceeds the count.");
                                                     }
 
                                                 } else {
 
-                                                    log_message_debug("Could not get compound part by index. The details sizes is null.");
+                                                    log_message_debug("Could not get compound element by index. The details sizes is null.");
                                                 }
 
                                             } else {
 
-                                                log_message_debug("Could not get compound part by index. The details counts is null.");
+                                                log_message_debug("Could not get compound element by index. The details counts is null.");
                                             }
 
                                         } else {
 
-                                            log_message_debug("Could not get compound part by index. The details is null.");
+                                            log_message_debug("Could not get compound element by index. The details is null.");
                                         }
 
                                     } else {
 
-                                        log_message_debug("Could not get compound part by index. The models sizes is null.");
+                                        log_message_debug("Could not get compound element by index. The models sizes is null.");
                                     }
 
                                 } else {
 
-                                    log_message_debug("Could not get compound part by index. The models counts is null.");
+                                    log_message_debug("Could not get compound element by index. The models counts is null.");
                                 }
 
                             } else {
 
-                                log_message_debug("Could not get compound part by index. The models is null.");
+                                log_message_debug("Could not get compound element by index. The models is null.");
                             }
 
                         } else {
 
-                            log_message_debug("Could not get compound part by index. The abstractions sizes is null.");
+                            log_message_debug("Could not get compound element by index. The abstractions sizes is null.");
                         }
 
                     } else {
 
-                        log_message_debug("Could not get compound part by index. The abstractions counts is null.");
+                        log_message_debug("Could not get compound element by index. The abstractions counts is null.");
                     }
 
                 } else {
 
-                    log_message_debug("Could not get compound part by index. The abstractions is null.");
+                    log_message_debug("Could not get compound element by index. The abstractions is null.");
                 }
 
             } else {
 
-                log_message_debug("Could not get compound part by index. The index is negativ.");
+                log_message_debug("Could not get compound element by index. The index is negativ.");
             }
 
         } else {
 
-            log_message_debug("Could not get compound part by index. The compound count is null.");
+            log_message_debug("Could not get compound element by index. The compound count is null.");
         }
 
     } else {
 
-        log_message_debug("Could not get compound part by index. The index is null.");
+        log_message_debug("Could not get compound element by index. The index is null.");
     }
 }
 
@@ -1799,7 +1799,7 @@ void get_compound_element_by_name(void* p0, void* p1, void* p2, void* p3,
 
             } else {
 
-                log_message_debug("TEST: Get the following compound part element by index.");
+                log_message_debug("TEST: Get the following compound element element by index.");
                 log_message_debug((char*) e);
 
                 // No remaining name exists. A separator could NOT be found.
@@ -1868,7 +1868,7 @@ void get_compound_element_by_name(void* p0, void* p1, void* p2, void* p3,
  *   where application.name itself contains a hierarchical name
  *   that points to an element;
  *   at first, the part name needs to be determined within the parameters;
- *   only then, that name can be used to determine the actual compound part
+ *   only then, that name can be used to determine the actual compound element
  *
  * @param p0 the compound model
  * @param p1 the compound model count

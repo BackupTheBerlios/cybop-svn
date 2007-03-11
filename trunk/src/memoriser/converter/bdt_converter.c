@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2007-03-09 23:21:41 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2007-03-11 20:09:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -36,48 +36,6 @@
 #include "../../memoriser/converter/character_vector_converter.c"
 #include "../../memoriser/converter/date_time_converter.c"
 #include "../../memoriser/converter/integer_vector_converter.c"
-
-/**
- * Parses the bdt record.
- *
- * @param p0 the destination compound model (Hand over as reference!)
- * @param p1 the destination count
- * @param p2 the destination size
- * @param p3 the field identification
- * @param p4 the field identification count
- * @param p5 the field content
- * @param p6 the field content count
- * @param p7 the parse mode
- */
-void parse_bdt_record(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
-
-    if (p7 != NULL_POINTER) {
-
-        int* m = (int*) p7;
-
-        log_message_debug("Information: Parse bdt record.");
-
-        // The comparison result.
-        int r = *NUMBER_0_INTEGER;
-
-        if (r == *NUMBER_0_INTEGER) {
-
-            compare_arrays(p3, p4, (void*) RECORD_IDENTIFICATION_BDT_FIELD, (void*) BDT_FIELD_IDENTIFICATION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-            if (r != *NUMBER_0_INTEGER) {
-
-    fprintf(stderr, "TEST parse bdt record content count: %i\n\n", *((int*) p6));
-
-                // Set data record identification as parse mode.
-                parse_integer((void*) &m, NULL_POINTER, NULL_POINTER, p5, p6);
-            }
-        }
-
-    } else {
-
-        log_message_debug("Error: Could not parse bdt record. The parse mode is null.");
-    }
-}
 
 /**
  * Parses the bdt record medical practice data.
@@ -111,7 +69,7 @@ void parse_bdt_record_medical_practice_data(void* p0, void* p1, void* p2, void* 
     fprintf(stderr, "TEST parse bdt record medical practice data content count: %i\n\n", *((int*) p6));
 
                 // Set data record identification as parse mode.
-                parse_integer((void*) &m, NULL_POINTER, NULL_POINTER, p5, p6);
+                parse_integer((void*) m, NULL_POINTER, NULL_POINTER, p5, p6);
             }
         }
 
@@ -153,7 +111,7 @@ void parse_bdt_record_data_medium_header(void* p0, void* p1, void* p2, void* p3,
     fprintf(stderr, "TEST parse bdt record data medium header content count: %i\n\n", *((int*) p6));
 
                 // Set data record identification as parse mode.
-                parse_integer((void*) &m, NULL_POINTER, NULL_POINTER, p5, p6);
+                parse_integer((void*) m, NULL_POINTER, NULL_POINTER, p5, p6);
             }
         }
 
@@ -195,7 +153,7 @@ void parse_bdt_record_data_medium_footer(void* p0, void* p1, void* p2, void* p3,
     fprintf(stderr, "TEST parse bdt record data medium footer content count: %i\n\n", *((int*) p6));
 
                 // Set data record identification as parse mode.
-                parse_integer((void*) &m, NULL_POINTER, NULL_POINTER, p5, p6);
+                parse_integer((void*) m, NULL_POINTER, NULL_POINTER, p5, p6);
             }
         }
 
@@ -237,7 +195,7 @@ void parse_bdt_record_data_package_header(void* p0, void* p1, void* p2, void* p3
     fprintf(stderr, "TEST parse bdt record data package header content count: %i\n\n", *((int*) p6));
 
                 // Set data record identification as parse mode.
-                parse_integer((void*) &m, NULL_POINTER, NULL_POINTER, p5, p6);
+                parse_integer((void*) m, NULL_POINTER, NULL_POINTER, p5, p6);
             }
         }
 
@@ -279,7 +237,7 @@ void parse_bdt_record_data_package_footer(void* p0, void* p1, void* p2, void* p3
     fprintf(stderr, "TEST parse bdt record data package footer content count: %i\n\n", *((int*) p6));
 
                 // Set data record identification as parse mode.
-                parse_integer((void*) &m, NULL_POINTER, NULL_POINTER, p5, p6);
+                parse_integer((void*) m, NULL_POINTER, NULL_POINTER, p5, p6);
             }
         }
 
@@ -321,7 +279,7 @@ void parse_bdt_record_medical_treatment(void* p0, void* p1, void* p2, void* p3, 
     fprintf(stderr, "TEST parse bdt record medical treatment content count: %i\n\n", *((int*) p6));
 
                 // Set data record identification as parse mode.
-                parse_integer((void*) &m, NULL_POINTER, NULL_POINTER, p5, p6);
+                parse_integer((void*) m, NULL_POINTER, NULL_POINTER, p5, p6);
             }
         }
 
@@ -463,7 +421,7 @@ void parse_bdt_record_patient_master_data(void* p0, void* p1, void* p2,
     fprintf(stderr, "TEST parse bdt record patient master data content count: %i\n\n", *((int*) p6));
 
                 // Set data record identification as parse mode.
-                parse_integer((void*) &m, NULL_POINTER, NULL_POINTER, p11, p12);
+                parse_integer((void*) m, NULL_POINTER, NULL_POINTER, p11, p12);
             }
         }
 
@@ -505,7 +463,7 @@ void parse_bdt_record_medical_treatment_data(void* p0, void* p1, void* p2, void*
     fprintf(stderr, "TEST parse bdt record medical treatment data content count: %i\n\n", *((int*) p6));
 
                 // Set data record identification as parse mode.
-                parse_integer((void*) &m, NULL_POINTER, NULL_POINTER, p5, p6);
+                parse_integer((void*) m, NULL_POINTER, NULL_POINTER, p5, p6);
             }
         }
 
@@ -582,7 +540,7 @@ void parse_bdt_field(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
 
                         if (p0 != NULL_POINTER) {
 
-                            int** fs = (int**) p0;
+                            int* fs = (int*) p0;
 
                             log_message_debug("Information: Parse bdt field.");
 
@@ -620,7 +578,7 @@ void parse_bdt_field(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
                             //
                             // It therefore has to be decremented here, so that
                             // only the actual bdt field content count remains.
-                            *fcc = **fs - *BDT_FIELD_SIZE_COUNT - *BDT_FIELD_IDENTIFICATION_COUNT - *PRIMITIVE_COUNT - *PRIMITIVE_COUNT;
+                            *fcc = *fs - *BDT_FIELD_SIZE_COUNT - *BDT_FIELD_IDENTIFICATION_COUNT - *PRIMITIVE_COUNT - *PRIMITIVE_COUNT;
 
                             if (rc >= *fcc) {
 
@@ -756,15 +714,133 @@ void parse_bdt_next_field(void* p0, void* p1, void* p2) {
 }
 
 /**
- * Parses the bdt package model.
+ * Processes the bdt field.
  *
- * @param p0 the destination model (Hand over as reference!)
- * @param p1 the destination model count (Hand over as reference!)
- * @param p2 the destination model size (Hand over as reference!)
- * @param p3 the source package model
- * @param p4 the source package model count
+ * @param p0 the destination compound (Hand over as reference!)
+ * @param p1 the destination compound count (Hand over as reference!)
+ * @param p2 the destination compound size (Hand over as reference!)
+ * @param p3 the field content
+ * @param p4 the field content count
+ * @param p5 the field abstraction
+ * @param p6 the field abstraction count
+ * @param p7 the field name
+ * @param p8 the field name count
  */
-void parse_bdt_package_model(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void parse_bdt_record_process_field(void* p0, void* p1, void* p2,
+    void* p3, void* p4, void* p5, void* p6, void* p7, void* p8) {
+
+    log_message_debug("Information: Parse bdt record process field.");
+
+    // The knowledge model name.
+    void* n = NULL_POINTER;
+    int* nc = NULL_POINTER;
+    int* ns = NULL_POINTER;
+    // The knowledge model abstraction.
+    void* a = NULL_POINTER;
+    int* ac = NULL_POINTER;
+    int* as = NULL_POINTER;
+    // The knowledge model model.
+    void* m = NULL_POINTER;
+    int* mc = NULL_POINTER;
+    int* ms = NULL_POINTER;
+    // The knowledge model details.
+    void* d = NULL_POINTER;
+    int* dc = NULL_POINTER;
+    int* ds = NULL_POINTER;
+
+    // Allocate knowledge model name.
+    allocate((void*) &nc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    *nc = *NUMBER_0_INTEGER;
+    allocate((void*) &ns, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    *ns = *NUMBER_0_INTEGER;
+    allocate((void*) &n, (void*) ns, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+
+    // A knowledge model channel is not received (allocated),
+    // since that is only needed temporarily for model loading.
+
+    // Allocate knowledge model abstraction.
+    allocate((void*) &ac, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    *ac = *NUMBER_0_INTEGER;
+    allocate((void*) &as, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    *as = *NUMBER_0_INTEGER;
+    allocate((void*) &a, (void*) as, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+
+    // Allocate knowledge model model.
+    allocate((void*) &mc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    *mc = *NUMBER_0_INTEGER;
+    allocate((void*) &ms, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    *ms = *NUMBER_0_INTEGER;
+    allocate((void*) &m, (void*) ms, p5, p6);
+
+    // Allocate knowledge model details.
+    allocate((void*) &dc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    *dc = *NUMBER_0_INTEGER;
+    allocate((void*) &ds, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    *ds = *NUMBER_0_INTEGER;
+    allocate((void*) &d, (void*) ds, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
+
+    // Parse name.
+    parse_character_vector((void*) &n, (void*) nc, (void*) ns, p7, p8);
+    // Parse abstraction.
+    parse_character_vector((void*) &a, (void*) ac, (void*) as, p5, p6);
+    // Parse model.
+    parse((void*) &m, (void*) mc, (void*) ms, (void*) &d, (void*) dc, (void*) ds, p3, p4, p5, p6);
+
+    // Add knowledge model to knowledge memory.
+    set_compound_element_by_name(p0, p1, p2, NULL_POINTER, NULL_POINTER, NULL_POINTER,
+        n, (void*) nc, (void*) ns,
+        a, (void*) ac, (void*) as,
+        m, (void*) mc, (void*) ms,
+        d, (void*) dc, (void*) ds);
+}
+
+/**
+ * Selects the bdt field.
+ *
+ * @param p0 the destination compound (Hand over as reference!)
+ * @param p1 the destination compound count (Hand over as reference!)
+ * @param p2 the destination compound size (Hand over as reference!)
+ * @param p3 the field content
+ * @param p4 the field content count
+ * @param p5 the field identification
+ */
+void parse_bdt_record_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
+
+    if (p5 != NULL_POINTER) {
+
+        int* id = (int*) p5;
+
+        log_message_debug("Information: Parse bdt record select field.");
+
+        if (*id == *RECORD_SIZE_BDT_FIELD) {
+
+            parse_bdt_record_process_field(p0, p1, p2, p3, p4,
+                (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT,
+                (void*) RECORD_SIZE_XDT_FIELD_NAME, (void*) RECORD_SIZE_XDT_FIELD_NAME_COUNT);
+
+        } else if (*id == *ADT_RECORD_SPECIFICATION_VERSION_BDT_FIELD) {
+
+            parse_bdt_record_process_field(p0, p1, p2, p3, p4,
+                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) ADT_RECORD_SPECIFICATION_VERSION_XDT_FIELD_NAME, (void*) ADT_RECORD_SPECIFICATION_VERSION_XDT_FIELD_NAME_COUNT);
+        }
+
+    } else {
+
+        log_message_debug("Error: Could not select bdt field. The field identification is null.");
+    }
+}
+
+/**
+ * Parses the bdt record.
+ *
+ * @param p0 the destination compound (Hand over as reference!)
+ * @param p1 the destination compound count (Hand over as reference!)
+ * @param p2 the destination compound size (Hand over as reference!)
+ * @param p3 the source byte array
+ * @param p4 the source byte array count
+ */
+void parse_bdt_record(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (p4 != NULL_POINTER) {
 
@@ -774,21 +850,111 @@ void parse_bdt_package_model(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             void* s = (void*) p3;
 
-            log_message_debug("Information: Parse bdt package model.");
+            log_message_debug("Information: Parse bdt record.");
 
             // The remaining bytes in the source byte array.
             int rc = *sc;
             // The field size.
-            int* fs = NULL_POINTER;
+            int fs = *NUMBER_0_INTEGER;
             // The field identification.
-            int* fid = NULL_POINTER;
+            int fid = *NUMBER_0_INTEGER;
+            // The field content.
+            void* fc = NULL_POINTER;
+            int fcc = *NUMBER_0_INTEGER;
+            // The verification flag.
+            int v = *NUMBER_0_INTEGER;
+            // The next field count.
+            int nc = *NUMBER_0_INTEGER;
+
+            while (*NUMBER_1_INTEGER) {
+
+                if (rc <= *NUMBER_0_INTEGER) {
+
+                    break;
+                }
+
+                // Parse bdt field (size, identification, content).
+                parse_bdt_field((void*) &fs, (void*) &fid, (void*) &fc, (void*) &fcc, (void*) &v, s, (void*) &rc);
+
+                if (v == *NUMBER_1_INTEGER) {
+
+                    // The verification flag is set, which means that
+                    // the bdt field was parsed correctly and the carriage
+                    // return plus line feed characters were reached.
+
+                    // Increment source bdt byte array index, so that following
+                    // fields may be found in the next loop cycle.
+                    s = s + fs;
+                    rc = rc - fs;
+
+                    parse_bdt_record_select_field(p0, p1, p2, fc, (void*) &fcc, (void*) &fid);
+
+                } else {
+
+                    // The verification flag is NOT set, which means that
+                    // the bdt field was NOT parsed correctly.
+
+                    // Reset next field count.
+                    nc = *NUMBER_0_INTEGER;
+
+                    // Count the number of bytes to the next carriage return-
+                    // plus line feed character.
+                    parse_bdt_next_field((void*) &nc, s, (void*) &rc);
+
+                    // Increment source bdt byte array index, so that following
+                    // fields may be found in the next loop cycle.
+                    s = s + nc;
+                    rc = rc - nc;
+
+                    log_message_debug("Error: Could not parse bdt record. An invalid field was detected. The parsing will now continue with the next valid field.");
+                }
+            }
+
+        } else {
+
+            log_message_debug("Error: Could not parse bdt record. The source byte array is null.");
+        }
+
+    } else {
+
+        log_message_debug("Error: Could not parse bdt record. The source count is null.");
+    }
+}
+
+/**
+ * Parses the bdt package.
+ *
+ * @param p0 the destination model (Hand over as reference!)
+ * @param p1 the destination model count (Hand over as reference!)
+ * @param p2 the destination model size (Hand over as reference!)
+ * @param p3 the source bdt package byte stream
+ * @param p4 the source bdt package byte stream count
+ */
+void parse_bdt_package(void* p0, void* p1, void* p2, void* p3, void* p4) {
+
+    if (p4 != NULL_POINTER) {
+
+        int* sc = (int*) p4;
+
+        if (p3 != NULL_POINTER) {
+
+            void* s = (void*) p3;
+
+            log_message_debug("Information: Parse bdt package.");
+
+            // The remaining bytes in the source byte array.
+            int rc = *sc;
+            // The field size.
+            int fs = *NUMBER_0_INTEGER;
+            // The field identification.
+            int fid = *NUMBER_0_INTEGER;
             // The field content.
             void* fc = NULL_POINTER;
             int fcc = *NUMBER_0_INTEGER;
             // The verification flag.
             int v = *NUMBER_0_INTEGER;
             // The record identification.
-            int* rid = NULL_POINTER;
+            int rid = *NUMBER_0_INTEGER;
             // The next field count.
             int nc = *NUMBER_0_INTEGER;
             // The parse mode.
@@ -814,20 +980,6 @@ void parse_bdt_package_model(void* p0, void* p1, void* p2, void* p3, void* p4) {
             int* kmdc = NULL_POINTER;
             int* kmds = NULL_POINTER;
 
-            // Allocate field size.
-            allocate((void*) &fs, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-            // Allocate field identification.
-            allocate((void*) &fid, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-            // Allocate record identification.
-            allocate((void*) &rid, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-
-            // Initialise field size.
-            *fs = *NUMBER_0_INTEGER;
-            // Initialise field identification.
-            *fid = *NUMBER_0_INTEGER;
-            // Initialise record identification.
-            *rid = *NUMBER_0_INTEGER;
-
 /*??
             while (*NUMBER_1_INTEGER) {
 
@@ -847,14 +999,14 @@ void parse_bdt_package_model(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                     // Increment source bdt byte array index, so that following
                     // fields may be found in the next loop cycle.
-                    s = s + *fs;
-                    rc = rc - *fs;
+                    s = s + fs;
+                    rc = rc - fs;
 
                     // Increment data package count.
                     // It is reset to zero when a data package header is found.
-                    pc = pc + *fs;
+                    pc = pc + fs;
 
-                    if (*fid == *RECORD_IDENTIFICATION_BDT_FIELD) {
+                    if (fid == *RECORD_IDENTIFICATION_BDT_FIELD) {
 
                         // Parse bdt field content containing a record identification.
                         parse_integer((void*) &rid, NULL_POINTER, NULL_POINTER, fc, (void*) &fcc);
@@ -943,9 +1095,9 @@ void parse_bdt_package_model(void* p0, void* p1, void* p2, void* p3, void* p4) {
 */
 
 /*??
-                        } else if (*rid == *DATA_PACKAGE_HEADER_BDT_RECORD) {
+                        } else if (rid == *DATA_PACKAGE_HEADER_BDT_RECORD) {
 
-    fprintf(stderr, "TEST package header rid: %i\n", *rid);
+    fprintf(stderr, "TEST package header rid: %i\n", rid);
 
                             // Store data package begin pointer.
                             p = s;
@@ -982,36 +1134,15 @@ void parse_bdt_package_model(void* p0, void* p1, void* p2, void* p3, void* p4) {
             }
 */
 
-            // Deallocate record identification.
-            deallocate((void*) &rid, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-            // Deallocate field identification.
-            deallocate((void*) &fid, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-            // Deallocate field size.
-            deallocate((void*) &fs, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-
         } else {
 
-            log_message_debug("Error: Could not parse bdt package model. The source byte array is null.");
+            log_message_debug("Error: Could not parse bdt package. The source byte array is null.");
         }
 
     } else {
 
-        log_message_debug("Error: Could not parse bdt package model. The source count is null.");
+        log_message_debug("Error: Could not parse bdt package. The source count is null.");
     }
-}
-
-/**
- * Parses the bdt package details.
- *
- * @param p0 the destination details (Hand over as reference!)
- * @param p1 the destination details count (Hand over as reference!)
- * @param p2 the destination details size (Hand over as reference!)
- * @param p3 the source package header or footer details
- * @param p4 the source package header or footer details count
- */
-void parse_bdt_package_details(void* p0, void* p1, void* p2, void* p3, void* p4) {
-
-    log_message_debug("Information: Parse bdt package details.");
 }
 
 /**
@@ -1098,16 +1229,16 @@ void parse_bdt(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
             // The remaining bytes in the source byte array.
             int rc = *sc;
             // The field size.
-            int* fs = NULL_POINTER;
+            int fs = *NUMBER_0_INTEGER;
             // The field identification.
-            int* fid = NULL_POINTER;
+            int fid = *NUMBER_0_INTEGER;
             // The field content.
             void* fc = NULL_POINTER;
             int fcc = *NUMBER_0_INTEGER;
             // The verification flag.
             int v = *NUMBER_0_INTEGER;
             // The record identification.
-            int* rid = NULL_POINTER;
+            int rid = *NUMBER_0_INTEGER;
             // The next field count.
             int nc = *NUMBER_0_INTEGER;
             // The parse mode.
@@ -1145,20 +1276,6 @@ void parse_bdt(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
             int* kmdc = NULL_POINTER;
             int* kmds = NULL_POINTER;
 
-            // Allocate field size.
-            allocate((void*) &fs, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-            // Allocate field identification.
-            allocate((void*) &fid, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-            // Allocate record identification.
-            allocate((void*) &rid, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-
-            // Initialise field size.
-            *fs = *NUMBER_0_INTEGER;
-            // Initialise field identification.
-            *fid = *NUMBER_0_INTEGER;
-            // Initialise record identification.
-            *rid = *NUMBER_0_INTEGER;
-
             while (*NUMBER_1_INTEGER) {
 
                 if (rc <= *NUMBER_0_INTEGER) {
@@ -1177,15 +1294,15 @@ void parse_bdt(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
 
                     // Increment source bdt byte array index, so that following
                     // fields may be found in the next loop cycle.
-                    s = s + *fs;
-                    rc = rc - *fs;
+                    s = s + fs;
+                    rc = rc - fs;
 
                     // Store old loop variable.
                     o = j;
                     // Increment loop variable.
-                    j = j + *fs;
+                    j = j + fs;
 
-                    if (*fid == *RECORD_IDENTIFICATION_BDT_FIELD) {
+                    if (fid == *RECORD_IDENTIFICATION_BDT_FIELD) {
 
                         // The following parse modes are defined:
                         // 0: start mode (no record found yet)
@@ -1200,7 +1317,7 @@ void parse_bdt(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
                             // Parse bdt field content containing a record identification.
                             parse_integer((void*) &rid, NULL_POINTER, NULL_POINTER, fc, (void*) &fcc);
 
-                            if (*rid == *DATA_PACKAGE_HEADER_BDT_RECORD) {
+                            if (rid == *DATA_PACKAGE_HEADER_BDT_RECORD) {
 
                                 // Set header parse mode.
                                 m = *NUMBER_1_INTEGER;
@@ -1209,7 +1326,7 @@ void parse_bdt(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
                                 // Reset loop variable.
                                 j = *NUMBER_0_INTEGER;
 
-    fprintf(stderr, "TEST set header mode rid: %i\n", *rid);
+    fprintf(stderr, "TEST set header mode rid: %i\n", rid);
                             }
 
                         } else if (m == *NUMBER_1_INTEGER) {
@@ -1242,7 +1359,7 @@ void parse_bdt(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
                             // Parse bdt field content containing a record identification.
                             parse_integer((void*) &rid, NULL_POINTER, NULL_POINTER, fc, (void*) &fcc);
 
-                            if (*rid == *DATA_PACKAGE_FOOTER_BDT_RECORD) {
+                            if (rid == *DATA_PACKAGE_FOOTER_BDT_RECORD) {
 
                                 // Set footer parse mode.
                                 m = *NUMBER_3_INTEGER;
@@ -1310,14 +1427,14 @@ void parse_bdt(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
     fprintf(stderr, "TEST pd2: %i\n", pd2);
     fprintf(stderr, "TEST pd2c: %i\n", pd2c);
 
-                            // Parse bdt package model.
-                            parse_bdt_package_model((void*) &kmm, (void*) kmmc, (void*) kmms, pm, (void*) &pmc);
+                            // Parse bdt package.
+                            parse_bdt_package((void*) &kmm, (void*) kmmc, (void*) kmms, pm, (void*) &pmc);
 
-                            // Parse bdt package header details.
-                            parse_bdt_package_details((void*) &kmd, (void*) kmdc, (void*) kmds, pd1, (void*) &pd1c);
+                            // Parse bdt package header details (meta data 1).
+                            parse_bdt_record((void*) &kmd, (void*) kmdc, (void*) kmds, pd1, (void*) &pd1c);
 
-                            // Parse bdt package footer details.
-                            parse_bdt_package_details((void*) &kmd, (void*) kmdc, (void*) kmds, pd2, (void*) &pd2c);
+                            // Parse bdt package footer details (meta data 2).
+                            parse_bdt_record((void*) &kmd, (void*) kmdc, (void*) kmds, pd2, (void*) &pd2c);
 
                             // Add knowledge model to knowledge memory.
                             set_compound_element_by_name(p0, p1, p2, p3, p4, p5,
@@ -1325,6 +1442,8 @@ void parse_bdt(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
                                 kma, (void*) kmac, (void*) kmas,
                                 kmm, (void*) kmmc, (void*) kmms,
                                 kmd, (void*) kmdc, (void*) kmds);
+
+    fprintf(stderr, "TEST 2 s: %i\n", s);
                         }
                     }
 
@@ -1350,16 +1469,9 @@ void parse_bdt(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
                     // Increment loop variable.
                     j = j + nc;
 
-    fprintf(stderr, "TEST verification failed nc: %i\n\n", nc);
+                    log_message_debug("Error: Could not parse bdt. An invalid field was detected. The parsing will now continue with the next valid field.");
                 }
             }
-
-            // Deallocate record identification.
-            deallocate((void*) &rid, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-            // Deallocate field identification.
-            deallocate((void*) &fid, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-            // Deallocate field size.
-            deallocate((void*) &fs, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
         } else {
 

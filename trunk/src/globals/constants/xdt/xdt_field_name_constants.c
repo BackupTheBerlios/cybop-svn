@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2007-03-04 23:33:21 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2007-03-11 20:09:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -96,7 +96,6 @@ static char* RECORD_IDENTIFICATION_XDT_FIELD_NAME = RECORD_IDENTIFICATION_XDT_FI
 static int* RECORD_IDENTIFICATION_XDT_FIELD_NAME_COUNT = NUMBER_21_INTEGER_ARRAY;
 
 /** The record size field name. */
-/*??
 static char RECORD_SIZE_XDT_FIELD_NAME_ARRAY[] = {'r', 'e', 'c', 'o', 'r', 'd', '_', 's', 'i', 'z', 'e'};
 static char* RECORD_SIZE_XDT_FIELD_NAME = RECORD_SIZE_XDT_FIELD_NAME_ARRAY;
 static int* RECORD_SIZE_XDT_FIELD_NAME_COUNT = NUMBER_11_INTEGER_ARRAY;
@@ -136,7 +135,6 @@ static char* DATA_MEDIUM_COUNT_XDT_FIELD_NAME = DATA_MEDIUM_COUNT_XDT_FIELD_NAME
 static int* DATA_MEDIUM_COUNT_XDT_FIELD_NAME_COUNT = NUMBER_17_INTEGER_ARRAY;
 
 /** The abrechnungs-datentransfer (adt) record specification version field name. */
-/*??
 static char ADT_RECORD_SPECIFICATION_VERSION_XDT_FIELD_NAME_ARRAY[] = {'a', 'd', 't', '_', 'r', 'e', 'c', 'o', 'r', 'd', '_', 's', 'p', 'e', 'c', 'i', 'f', 'i', 'c', 'a', 't', 'i', 'o', 'n', '_', 'v', 'e', 'r', 's', 'i', 'o', 'n'};
 static char* ADT_RECORD_SPECIFICATION_VERSION_XDT_FIELD_NAME = ADT_RECORD_SPECIFICATION_VERSION_XDT_FIELD_NAME_ARRAY;
 static int* ADT_RECORD_SPECIFICATION_VERSION_XDT_FIELD_NAME_COUNT = NUMBER_32_INTEGER_ARRAY;
