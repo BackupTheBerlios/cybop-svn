@@ -1,5 +1,5 @@
 /*
- * $RCSfile: bdt_rule_constants.c,v $
+ * $RCSfile: xdt_rule_constants.c,v $
  *
  * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
  *
@@ -20,12 +20,12 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2007-02-07 00:13:35 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2007-03-16 22:05:24 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef BDT_RULE_CONSTANTS_SOURCE
-#define BDT_RULE_CONSTANTS_SOURCE
+#ifndef XDT_RULE_CONSTANTS_SOURCE
+#define XDT_RULE_CONSTANTS_SOURCE
 
 #include "../../globals/constants/integer_constants.c"
 
@@ -41,7 +41,7 @@
  *
  * Possible values: 0000-2359
  */
-static int* HHMM_BDT_RULE = NUMBER_5_INTEGER_ARRAY;
+static int* HHMM_XDT_RULE = NUMBER_5_INTEGER_ARRAY;
 
 /**
  * The hhmmhhmm rule.
@@ -49,7 +49,7 @@ static int* HHMM_BDT_RULE = NUMBER_5_INTEGER_ARRAY;
  * HH: Stunde
  * MM: Minute
  */
-static int* HHMMHHMM_BDT_RULE = NUMBER_6_INTEGER_ARRAY;
+static int* HHMMHHMM_XDT_RULE = NUMBER_6_INTEGER_ARRAY;
 
 /**
  * The jjmmnnn rule.
@@ -58,7 +58,7 @@ static int* HHMMHHMM_BDT_RULE = NUMBER_6_INTEGER_ARRAY;
  * MM: Monat
  * NNN: laufende Nummer
  */
-static int* JJMMNNN_BDT_RULE = NUMBER_7_INTEGER_ARRAY;
+static int* JJMMNNN_XDT_RULE = NUMBER_7_INTEGER_ARRAY;
 
 /**
  * The ttmmjjjj rule.
@@ -67,7 +67,7 @@ static int* JJMMNNN_BDT_RULE = NUMBER_7_INTEGER_ARRAY;
  * MM: Monat
  * JJJJ: Jahr
  */
-static int* TTMMJJJJ_BDT_RULE = NUMBER_8_INTEGER_ARRAY;
+static int* TTMMJJJJ_XDT_RULE = NUMBER_8_INTEGER_ARRAY;
 
 /**
  * The mmjj rule.
@@ -75,14 +75,14 @@ static int* TTMMJJJJ_BDT_RULE = NUMBER_8_INTEGER_ARRAY;
  * MM: Monat
  * JJ: Jahr
  */
-static int* MMJJ_BDT_RULE = NUMBER_14_INTEGER_ARRAY;
+static int* MMJJ_XDT_RULE = NUMBER_14_INTEGER_ARRAY;
 
 /**
  * The arztname zuordnungszeichen rule.
  *
  * Possible values: 0-9, A-Z, #, $, <, >, *
  */
-static int* ARZTNAME_ZUORDNUNGSZEICHEN_BDT_RULE = NUMBER_15_INTEGER_ARRAY;
+static int* ARZTNAME_ZUORDNUNGSZEICHEN_XDT_RULE = NUMBER_15_INTEGER_ARRAY;
 
 /**
  * The qjjjj rule.
@@ -90,21 +90,21 @@ static int* ARZTNAME_ZUORDNUNGSZEICHEN_BDT_RULE = NUMBER_15_INTEGER_ARRAY;
  * Q: Quartal
  * JJJJ: Jahr
  */
-static int* QJJJJ_BDT_RULE = NUMBER_16_INTEGER_ARRAY;
+static int* QJJJJ_XDT_RULE = NUMBER_16_INTEGER_ARRAY;
 
 /**
  * The vknr rule.
  *
  * Format: nnnnn
  */
-static int* VKNR_BDT_RULE = NUMBER_17_INTEGER_ARRAY;
+static int* VKNR_XDT_RULE = NUMBER_17_INTEGER_ARRAY;
 
 /**
  * The krankenkassennummer rule.
  *
  * Format: nnnnnnn
  */
-static int* KRANKENKASSENNUMMER_BDT_RULE = NUMBER_18_INTEGER_ARRAY;
+static int* KRANKENKASSENNUMMER_XDT_RULE = NUMBER_18_INTEGER_ARRAY;
 
 /**
  * The ttmmjjjjttmmjjjj rule.
@@ -113,7 +113,7 @@ static int* KRANKENKASSENNUMMER_BDT_RULE = NUMBER_18_INTEGER_ARRAY;
  * MM: Monat
  * JJJJ: Jahr
  */
-static int* TTMMJJJJTTMMJJJJ_BDT_RULE = NUMBER_19_INTEGER_ARRAY;
+static int* TTMMJJJJTTMMJJJJ_XDT_RULE = NUMBER_19_INTEGER_ARRAY;
 
 /**
  * The ttmmjjjj rule.
@@ -127,7 +127,7 @@ static int* TTMMJJJJTTMMJJJJ_BDT_RULE = NUMBER_19_INTEGER_ARRAY;
  * MM=00-12
  * JJJJ=0000-9999
  */
-static int* TTMMJJJJ_BESCHRAENKT_BDT_RULE = NUMBER_20_INTEGER_ARRAY;
+static int* TTMMJJJJ_BESCHRAENKT_XDT_RULE = NUMBER_20_INTEGER_ARRAY;
 
 //
 // Content checking rules.
@@ -141,7 +141,7 @@ static int* TTMMJJJJ_BESCHRAENKT_BDT_RULE = NUMBER_20_INTEGER_ARRAY;
  * Description:
  * 1: Feld angekreuzt/ vorhanden
  */
-static int* FELD_ANGEKREUZT_BDT_RULE = NUMBER_101_INTEGER_ARRAY;
+static int* FELD_ANGEKREUZT_XDT_RULE = NUMBER_101_INTEGER_ARRAY;
 
 //
 // Existence checking rules.
@@ -152,7 +152,7 @@ static int* FELD_ANGEKREUZT_BDT_RULE = NUMBER_101_INTEGER_ARRAY;
  *
  * VKNR vorhanden und 5-stellig
  */
-static int* KASSENDATEI_VKNR_VORHANDEN_BDT_RULE = NUMBER_201_INTEGER_ARRAY;
+static int* KASSENDATEI_VKNR_VORHANDEN_XDT_RULE = NUMBER_201_INTEGER_ARRAY;
 
 //
 // Context checking rules.
@@ -161,7 +161,7 @@ static int* KASSENDATEI_VKNR_VORHANDEN_BDT_RULE = NUMBER_201_INTEGER_ARRAY;
 /**
  * The datum kleiner oder gleich maschinendatum rule.
  */
-static int* DATUM_KLEINER_ODER_GLEICH_MASCHINENDATUM_BDT_RULE = NUMBER_304_INTEGER_ARRAY;
+static int* DATUM_KLEINER_ODER_GLEICH_MASCHINENDATUM_XDT_RULE = NUMBER_304_INTEGER_ARRAY;
 
-/* BDT_RULE_CONSTANTS_SOURCE */
+/* XDT_RULE_CONSTANTS_SOURCE */
 #endif

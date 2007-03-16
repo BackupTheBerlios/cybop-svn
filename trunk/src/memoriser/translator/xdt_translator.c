@@ -1,5 +1,5 @@
 /*
- * $RCSfile: bdt_translator.c,v $
+ * $RCSfile: xdt_translator.c,v $
  *
  * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
  *
@@ -20,12 +20,12 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2007-02-07 00:13:35 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2007-03-16 22:05:24 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef BDT_TRANSLATOR_SOURCE
-#define BDT_TRANSLATOR_SOURCE
+#ifndef XDT_TRANSLATOR_SOURCE
+#define XDT_TRANSLATOR_SOURCE
 
 #include <string.h>
 #include <libxml/tree.h>
@@ -39,28 +39,28 @@
 #include "../../memoriser/allocator.c"
 
 /**
- * Decodes the bdt model into a compound.
+ * Decodes the xdt model into a compound.
  *
  * @param p0 the destination compound (Hand over as reference!)
  * @param p1 the destination count
  * @param p2 the destination size
- * @param p3 the source bdt model
+ * @param p3 the source xdt model
  * @param p4 the source count
  */
-void decode_bdt(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void decode_xdt(void* p0, void* p1, void* p2, void* p3, void* p4) {
 }
 
 /**
- * Encodes the compound into a bdt model.
+ * Encodes the compound into a xdt model.
  *
- * @param p0 the destination bdt model (Hand over as reference!)
+ * @param p0 the destination xdt model (Hand over as reference!)
  * @param p1 the destination count
  * @param p2 the destination size
  * @param p3 the source compound
  * @param p4 the source count
  */
-void encode_bdt(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void encode_xdt(void* p0, void* p1, void* p2, void* p3, void* p4) {
 }
 
-/* BDT_TRANSLATOR_SOURCE */
+/* XDT_TRANSLATOR_SOURCE */
 #endif

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.15 $ $Date: 2007-02-07 00:13:35 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2007-03-16 22:05:24 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -31,7 +31,7 @@
 #include "../globals/constants/model_constants.c"
 #include "../globals/variables/variables.c"
 #include "../memoriser/array.c"
-#include "../memoriser/translator/bdt_translator.c"
+#include "../memoriser/translator/xdt_translator.c"
 #include "../memoriser/translator/cybol_translator.c"
 
 /**
@@ -73,11 +73,11 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
     if (r == 0) {
 
-        compare_arrays(p5, p6, (void*) BDT_ABSTRACTION, (void*) BDT_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p5, p6, (void*) XDT_ABSTRACTION, (void*) XDT_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-            decode_bdt(p0, p1, p2, p3, p4);
+            decode_xdt(p0, p1, p2, p3, p4);
         }
     }
 
@@ -121,11 +121,11 @@ void encode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
     if (r == 0) {
 
-        compare_arrays(p5, p6, (void*) BDT_ABSTRACTION, (void*) BDT_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p5, p6, (void*) XDT_ABSTRACTION, (void*) XDT_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-            encode_bdt(p0, p1, p2, p3, p4);
+            encode_xdt(p0, p1, p2, p3, p4);
         }
     }
 

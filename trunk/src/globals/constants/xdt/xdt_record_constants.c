@@ -1,5 +1,5 @@
 /*
- * $RCSfile: bdt_record_constants.c,v $
+ * $RCSfile: xdt_record_constants.c,v $
  *
  * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
  *
@@ -20,45 +20,45 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2007-02-09 22:30:08 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2007-03-16 22:05:24 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef BDT_RECORD_CONSTANTS_SOURCE
-#define BDT_RECORD_CONSTANTS_SOURCE
+#ifndef XDT_RECORD_CONSTANTS_SOURCE
+#define XDT_RECORD_CONSTANTS_SOURCE
 
 #include "../../../globals/constants/integer_constants.c"
 
 /**
- * The bdt record identification count.
+ * The xdt record identification count.
  *
- * All bdt record identifications have the same length: 4 ASCII characters (bytes).
+ * All xdt record identifications have the same length: 4 ASCII characters (bytes).
  */
-static int* BDT_RECORD_IDENTIFICATION_COUNT = NUMBER_4_INTEGER_ARRAY;
+static int* XDT_RECORD_IDENTIFICATION_COUNT = NUMBER_4_INTEGER_ARRAY;
 
 /** The medical practice data record. */
-static int* MEDICAL_PRACTICE_DATA_BDT_RECORD = NUMBER_10_INTEGER_ARRAY;
+static int* MEDICAL_PRACTICE_DATA_XDT_RECORD = NUMBER_10_INTEGER_ARRAY;
 
 /** The data medium header record. */
-static int* DATA_MEDIUM_HEADER_BDT_RECORD = NUMBER_20_INTEGER_ARRAY;
+static int* DATA_MEDIUM_HEADER_XDT_RECORD = NUMBER_20_INTEGER_ARRAY;
 
 /** The data medium footer record. */
-static int* DATA_MEDIUM_FOOTER_BDT_RECORD = NUMBER_21_INTEGER_ARRAY;
+static int* DATA_MEDIUM_FOOTER_XDT_RECORD = NUMBER_21_INTEGER_ARRAY;
 
 /** The data package header record. */
-static int* DATA_PACKAGE_HEADER_BDT_RECORD = NUMBER_22_INTEGER_ARRAY;
+static int* DATA_PACKAGE_HEADER_XDT_RECORD = NUMBER_22_INTEGER_ARRAY;
 
 /** The data package footer record. */
-static int* DATA_PACKAGE_FOOTER_BDT_RECORD = NUMBER_23_INTEGER_ARRAY;
+static int* DATA_PACKAGE_FOOTER_XDT_RECORD = NUMBER_23_INTEGER_ARRAY;
 
 /** The medical treatment record. */
-static int* MEDICAL_TREATMENT_BDT_RECORD = NUMBER_101_INTEGER_ARRAY;
+static int* MEDICAL_TREATMENT_XDT_RECORD = NUMBER_101_INTEGER_ARRAY;
 
 /** The patient master data record. */
-static int* PATIENT_MASTER_DATA_BDT_RECORD = NUMBER_6100_INTEGER_ARRAY;
+static int* PATIENT_MASTER_DATA_XDT_RECORD = NUMBER_6100_INTEGER_ARRAY;
 
 /** The medical treatment data record. */
-static int* MEDICAL_TREATMENT_DATA_BDT_RECORD = NUMBER_6200_INTEGER_ARRAY;
+static int* MEDICAL_TREATMENT_DATA_XDT_RECORD = NUMBER_6200_INTEGER_ARRAY;
 
-/* BDT_RECORD_CONSTANTS_SOURCE */
+/* XDT_RECORD_CONSTANTS_SOURCE */
 #endif

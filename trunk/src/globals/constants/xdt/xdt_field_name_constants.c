@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2007-03-11 20:09:30 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2007-03-16 22:05:24 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -28,6 +28,53 @@
 #define XDT_FIELD_NAME_CONSTANTS_SOURCE
 
 #include "../../../globals/constants/integer_constants.c"
+
+//
+// Xdt package names.
+//
+
+/** The standard package name. */
+static char STANDARD_XDT_PACKAGE_NAME_ARRAY[] = {'s', 't', 'a', 'n', 'd', 'a', 'r', 'd'};
+static char* STANDARD_XDT_PACKAGE_NAME = STANDARD_XDT_PACKAGE_NAME_ARRAY;
+static int* STANDARD_XDT_PACKAGE_NAME_COUNT = NUMBER_8_INTEGER_ARRAY;
+
+//
+// Xdt record names.
+//
+
+/** The package header name. */
+static char PACKAGE_HEADER_XDT_RECORD_NAME_ARRAY[] = {'h', 'e', 'a', 'd', 'e', 'r'};
+static char* PACKAGE_HEADER_XDT_RECORD_NAME = PACKAGE_HEADER_XDT_RECORD_NAME_ARRAY;
+static int* PACKAGE_HEADER_XDT_RECORD_NAME_COUNT = NUMBER_6_INTEGER_ARRAY;
+
+/** The package footer name. */
+static char PACKAGE_FOOTER_XDT_RECORD_NAME_ARRAY[] = {'f', 'o', 'o', 't', 'e', 'r'};
+static char* PACKAGE_FOOTER_XDT_RECORD_NAME = PACKAGE_FOOTER_XDT_RECORD_NAME_ARRAY;
+static int* PACKAGE_FOOTER_XDT_RECORD_NAME_COUNT = NUMBER_6_INTEGER_ARRAY;
+
+/** The medical practice data record name. */
+static char MEDICAL_PRACTICE_DATA_XDT_RECORD_NAME_ARRAY[] = {'m', 'e', 'd', 'i', 'c', 'a', 'l', '_', 'p', 'r', 'a', 'c', 't', 'i', 'c', 'e', '_', 'd', 'a', 't', 'a'};
+static char* MEDICAL_PRACTICE_DATA_XDT_RECORD_NAME = MEDICAL_PRACTICE_DATA_XDT_RECORD_NAME_ARRAY;
+static int* MEDICAL_PRACTICE_DATA_XDT_RECORD_NAME_COUNT = NUMBER_21_INTEGER_ARRAY;
+
+/** The medical treatment record name. */
+static char MEDICAL_TREATMENT_XDT_RECORD_NAME_ARRAY[] = {'m', 'e', 'd', 'i', 'c', 'a', 'l', '_', 't', 'r', 'e', 'a', 't', 'm', 'e', 'n', 't'};
+static char* MEDICAL_TREATMENT_XDT_RECORD_NAME = MEDICAL_TREATMENT_XDT_RECORD_NAME_ARRAY;
+static int* MEDICAL_TREATMENT_XDT_RECORD_NAME_COUNT = NUMBER_17_INTEGER_ARRAY;
+
+/** The patient master data record name. */
+static char PATIENT_MASTER_DATA_XDT_RECORD_NAME_ARRAY[] = {'p', 'a', 't', 'i', 'e', 'n', 't', '_', 'm', 'a', 's', 't', 'e', 'r', '_', 'd', 'a', 't', 'a'};
+static char* PATIENT_MASTER_DATA_XDT_RECORD_NAME = PATIENT_MASTER_DATA_XDT_RECORD_NAME_ARRAY;
+static int* PATIENT_MASTER_DATA_XDT_RECORD_NAME_COUNT = NUMBER_19_INTEGER_ARRAY;
+
+/** The medical treatment data record name. */
+static char MEDICAL_TREATMENT_DATA_XDT_RECORD_NAME_ARRAY[] = {'m', 'e', 'd', 'i', 'c', 'a', 'l', '_', 't', 'r', 'e', 'a', 't', 'm', 'e', 'n', 't', '_', 'd', 'a', 't', 'a'};
+static char* MEDICAL_TREATMENT_DATA_XDT_RECORD_NAME = MEDICAL_TREATMENT_DATA_XDT_RECORD_NAME_ARRAY;
+static int* MEDICAL_TREATMENT_DATA_XDT_RECORD_NAME_COUNT = NUMBER_22_INTEGER_ARRAY;
+
+//
+// Xdt field names.
+//
 
 /** The kbv pruefnummer field name. */
 static char KBV_PRUEFNUMMER_XDT_FIELD_NAME_ARRAY[] = {'k', 'b', 'v', '_', 'p', 'r', 'u', 'e', 'f', 'n', 'u', 'm', 'm', 'e', 'r'};
