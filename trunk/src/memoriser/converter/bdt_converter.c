@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.10 $ $Date: 2007-03-14 03:11:55 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2007-03-16 00:11:27 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -38,521 +38,71 @@
 #include "../../memoriser/converter/integer_vector_converter.c"
 
 /**
- * Parses the bdt record medical practice data.
+ * Parses the model.
  *
- * @param p0 the destination compound model (Hand over as reference!)
- * @param p1 the destination count
- * @param p2 the destination size
- * @param p3 the field identification
- * @param p4 the field identification count
- * @param p5 the field content
- * @param p6 the field content count
- * @param p7 the parse mode
- */
-void parse_bdt_record_medical_practice_data(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
-
-    if (p7 != NULL_POINTER) {
-
-        int* m = (int*) p7;
-
-        log_message_debug("Information: Parse bdt record medical practice data.");
-
-        // The comparison result.
-        int r = *NUMBER_0_INTEGER;
-
-        if (r == *NUMBER_0_INTEGER) {
-
-            compare_arrays(p3, p4, (void*) RECORD_IDENTIFICATION_BDT_FIELD, (void*) BDT_FIELD_IDENTIFICATION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-            if (r != *NUMBER_0_INTEGER) {
-
-    fprintf(stderr, "TEST parse bdt record medical practice data content count: %i\n\n", *((int*) p6));
-
-                // Set data record identification as parse mode.
-                parse_integer((void*) m, NULL_POINTER, NULL_POINTER, p5, p6);
-            }
-        }
-
-    } else {
-
-        log_message_debug("Error: Could not parse bdt record medical practice data. The parse mode is null.");
-    }
-}
-
-/**
- * Parses the bdt record data medium header.
- *
- * @param p0 the destination compound model (Hand over as reference!)
- * @param p1 the destination count
- * @param p2 the destination size
- * @param p3 the field identification
- * @param p4 the field identification count
- * @param p5 the field content
- * @param p6 the field content count
- * @param p7 the parse mode
- */
-void parse_bdt_record_data_medium_header(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
-
-    if (p7 != NULL_POINTER) {
-
-        int* m = (int*) p7;
-
-        log_message_debug("Information: Parse bdt record data medium header.");
-
-        // The comparison result.
-        int r = *NUMBER_0_INTEGER;
-
-        if (r == *NUMBER_0_INTEGER) {
-
-            compare_arrays(p3, p4, (void*) RECORD_IDENTIFICATION_BDT_FIELD, (void*) BDT_FIELD_IDENTIFICATION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-            if (r != *NUMBER_0_INTEGER) {
-
-    fprintf(stderr, "TEST parse bdt record data medium header content count: %i\n\n", *((int*) p6));
-
-                // Set data record identification as parse mode.
-                parse_integer((void*) m, NULL_POINTER, NULL_POINTER, p5, p6);
-            }
-        }
-
-    } else {
-
-        log_message_debug("Error: Could not parse bdt record data medium header. The parse mode is null.");
-    }
-}
-
-/**
- * Parses the bdt record data medium footer.
- *
- * @param p0 the destination compound model (Hand over as reference!)
- * @param p1 the destination count
- * @param p2 the destination size
- * @param p3 the field identification
- * @param p4 the field identification count
- * @param p5 the field content
- * @param p6 the field content count
- * @param p7 the parse mode
- */
-void parse_bdt_record_data_medium_footer(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
-
-    if (p7 != NULL_POINTER) {
-
-        int* m = (int*) p7;
-
-        log_message_debug("Information: Parse bdt record data medium footer.");
-
-        // The comparison result.
-        int r = *NUMBER_0_INTEGER;
-
-        if (r == *NUMBER_0_INTEGER) {
-
-            compare_arrays(p3, p4, (void*) RECORD_IDENTIFICATION_BDT_FIELD, (void*) BDT_FIELD_IDENTIFICATION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-            if (r != *NUMBER_0_INTEGER) {
-
-    fprintf(stderr, "TEST parse bdt record data medium footer content count: %i\n\n", *((int*) p6));
-
-                // Set data record identification as parse mode.
-                parse_integer((void*) m, NULL_POINTER, NULL_POINTER, p5, p6);
-            }
-        }
-
-    } else {
-
-        log_message_debug("Error: Could not parse bdt record data medium footer. The parse mode is null.");
-    }
-}
-
-/**
- * Parses the bdt record data package header.
- *
- * @param p0 the destination compound model (Hand over as reference!)
- * @param p1 the destination count
- * @param p2 the destination size
- * @param p3 the field identification
- * @param p4 the field identification count
- * @param p5 the field content
- * @param p6 the field content count
- * @param p7 the parse mode
- */
-void parse_bdt_record_data_package_header(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
-
-    if (p7 != NULL_POINTER) {
-
-        int* m = (int*) p7;
-
-        log_message_debug("Information: Parse bdt record data package header.");
-
-        // The comparison result.
-        int r = *NUMBER_0_INTEGER;
-
-        if (r == *NUMBER_0_INTEGER) {
-
-            compare_arrays(p3, p4, (void*) RECORD_IDENTIFICATION_BDT_FIELD, (void*) BDT_FIELD_IDENTIFICATION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-            if (r != *NUMBER_0_INTEGER) {
-
-    fprintf(stderr, "TEST parse bdt record data package header content count: %i\n\n", *((int*) p6));
-
-                // Set data record identification as parse mode.
-                parse_integer((void*) m, NULL_POINTER, NULL_POINTER, p5, p6);
-            }
-        }
-
-    } else {
-
-        log_message_debug("Error: Could not parse bdt record data package header. The parse mode is null.");
-    }
-}
-
-/**
- * Parses the bdt record data package footer.
- *
- * @param p0 the destination compound model (Hand over as reference!)
- * @param p1 the destination count
- * @param p2 the destination size
- * @param p3 the field identification
- * @param p4 the field identification count
- * @param p5 the field content
- * @param p6 the field content count
- * @param p7 the parse mode
- */
-void parse_bdt_record_data_package_footer(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
-
-    if (p7 != NULL_POINTER) {
-
-        int* m = (int*) p7;
-
-        log_message_debug("Information: Parse bdt record data package footer.");
-
-        // The comparison result.
-        int r = *NUMBER_0_INTEGER;
-
-        if (r == *NUMBER_0_INTEGER) {
-
-            compare_arrays(p3, p4, (void*) RECORD_IDENTIFICATION_BDT_FIELD, (void*) BDT_FIELD_IDENTIFICATION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-            if (r != *NUMBER_0_INTEGER) {
-
-    fprintf(stderr, "TEST parse bdt record data package footer content count: %i\n\n", *((int*) p6));
-
-                // Set data record identification as parse mode.
-                parse_integer((void*) m, NULL_POINTER, NULL_POINTER, p5, p6);
-            }
-        }
-
-    } else {
-
-        log_message_debug("Error: Could not parse bdt record data package footer. The parse mode is null.");
-    }
-}
-
-/**
- * Parses the bdt record medical treatment.
- *
- * @param p0 the destination compound model (Hand over as reference!)
- * @param p1 the destination count
- * @param p2 the destination size
- * @param p3 the field identification
- * @param p4 the field identification count
- * @param p5 the field content
- * @param p6 the field content count
- * @param p7 the parse mode
- */
-void parse_bdt_record_medical_treatment(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
-
-    if (p7 != NULL_POINTER) {
-
-        int* m = (int*) p7;
-
-        log_message_debug("Information: Parse bdt record medical treatment.");
-
-        // The comparison result.
-        int r = *NUMBER_0_INTEGER;
-
-        if (r == *NUMBER_0_INTEGER) {
-
-            compare_arrays(p3, p4, (void*) RECORD_IDENTIFICATION_BDT_FIELD, (void*) BDT_FIELD_IDENTIFICATION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-            if (r != *NUMBER_0_INTEGER) {
-
-    fprintf(stderr, "TEST parse bdt record medical treatment content count: %i\n\n", *((int*) p6));
-
-                // Set data record identification as parse mode.
-                parse_integer((void*) m, NULL_POINTER, NULL_POINTER, p5, p6);
-            }
-        }
-
-    } else {
-
-        log_message_debug("Error: Could not parse bdt record medical treatment. The parse mode is null.");
-    }
-}
-
-/**
- * Parses the bdt record patient master data.
- *
- * @param p0 the destination knowledge model name (Hand over as reference!)
- * @param p1 the destination knowledge model name count
- * @param p2 the destination knowledge model name size
- * @param p3 the destination knowledge model abstraction (Hand over as reference!)
- * @param p4 the destination knowledge model abstraction count
- * @param p5 the destination knowledge model abstraction size
- * @param p6 the destination knowledge model model (Hand over as reference!)
- * @param p7 the destination knowledge model model count
- * @param p8 the destination knowledge model model size
- * @param p9 the field identification
- * @param p10 the field identification count
- * @param p11 the field content
- * @param p12 the field content count
- * @param p13 the parse mode
- */
-void parse_bdt_record_patient_master_data(void* p0, void* p1, void* p2,
-    void* p3, void* p4, void* p5, void* p6, void* p7, void* p8,
-    void* p9, void* p10, void* p11, void* p12, void* p13) {
-
-    if (p13 != NULL_POINTER) {
-
-        int* m = (int*) p13;
-
-        log_message_debug("Information: Parse bdt record patient master data.");
-
-        // The comparison result.
-        int r = *NUMBER_0_INTEGER;
-
-        if (r == *NUMBER_0_INTEGER) {
-
-            compare_arrays(p9, p10, (void*) PATIENT_LAST_NAME_BDT_FIELD, (void*) BDT_FIELD_IDENTIFICATION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-            if (r != *NUMBER_0_INTEGER) {
-
-                // Parse name.
-                parse_character_vector(p0, p1, p2, PATIENT_LAST_NAME_XDT_FIELD_NAME, PATIENT_LAST_NAME_XDT_FIELD_NAME_COUNT);
-
-                // Parse abstraction.
-                parse_character_vector(p3, p4, p5, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
-
-                // Allocate model.
-                allocate(p6, p8, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
-
-                // Parse model.
-                parse_character_vector(p6, p7, p8, p11, p12);
-
-    fprintf(stderr, "TEST parse patient master data last name: %s\n", *((char**) p6));
-    fprintf(stderr, "TEST parse patient master data last name count: %i\n\n", *((int*) p7));
-            }
-        }
-
-        if (r == *NUMBER_0_INTEGER) {
-
-            compare_arrays(p9, p10, (void*) PATIENT_FIRST_NAME_BDT_FIELD, (void*) BDT_FIELD_IDENTIFICATION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-            if (r != *NUMBER_0_INTEGER) {
-
-                // Parse name.
-                parse_character_vector(p0, p1, p2, PATIENT_FIRST_NAME_XDT_FIELD_NAME, PATIENT_FIRST_NAME_XDT_FIELD_NAME_COUNT);
-
-                // Parse abstraction.
-                parse_character_vector(p3, p4, p5, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
-
-                // Allocate model.
-                allocate(p6, p8, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
-
-                // Parse model.
-                parse_character_vector(p6, p7, p8, p11, p12);
-
-    fprintf(stderr, "TEST parse patient master data first name: %s\n", *((char**) p6));
-    fprintf(stderr, "TEST parse patient master data first name count: %i\n\n", *((int*) p7));
-            }
-        }
-
-        if (r == *NUMBER_0_INTEGER) {
-
-            compare_arrays(p9, p10, (void*) PATIENT_BIRTH_DATE_BDT_FIELD, (void*) BDT_FIELD_IDENTIFICATION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-            if (r != *NUMBER_0_INTEGER) {
-
-                // Parse name.
-                parse_character_vector(p0, p1, p2, PATIENT_BIRTH_DATE_XDT_FIELD_NAME, PATIENT_BIRTH_DATE_XDT_FIELD_NAME_COUNT);
-
-                // Parse abstraction.
-                parse_character_vector(p3, p4, p5, (void*) DATE_TIME_ABSTRACTION, (void*) DATE_TIME_ABSTRACTION_COUNT);
-
-                // Allocate model.
-                allocate(p6, p8, (void*) DATE_TIME_ABSTRACTION, (void*) DATE_TIME_ABSTRACTION_COUNT);
-
-                // Parse model.
-                parse_ddmmyyyy_date_time(p6, p7, p8, p11, p12);
-
-    fprintf(stderr, "TEST parse patient master data date: %i\n", **((int**) p6));
-    fprintf(stderr, "TEST parse patient master data date count: %i\n\n", *((int*) p7));
-            }
-        }
-
-        if (r == *NUMBER_0_INTEGER) {
-
-            compare_arrays(p9, p10, (void*) PATIENT_SEX_BDT_FIELD, (void*) BDT_FIELD_IDENTIFICATION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-            if (r != *NUMBER_0_INTEGER) {
-
-                // Parse name.
-                parse_character_vector(p0, p1, p2, PATIENT_SEX_XDT_FIELD_NAME, PATIENT_SEX_XDT_FIELD_NAME_COUNT);
-
-                // Parse abstraction.
-                parse_character_vector(p3, p4, p5, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-
-                // Allocate model.
-                allocate(p6, p8, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-
-                // Parse model.
-                parse_integer_vector(p6, p7, p8, p11, p12);
-
-    fprintf(stderr, "TEST parse patient master data sex: %i\n", **((int**) p6));
-    fprintf(stderr, "TEST parse patient master data sex count: %i\n\n", *((int*) p7));
-            }
-        }
-
-        if (r == *NUMBER_0_INTEGER) {
-
-            compare_arrays(p9, p10, (void*) RECORD_IDENTIFICATION_BDT_FIELD, (void*) BDT_FIELD_IDENTIFICATION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-            if (r != *NUMBER_0_INTEGER) {
-
-    fprintf(stderr, "TEST parse bdt record patient master data content count: %i\n\n", *((int*) p6));
-
-                // Set data record identification as parse mode.
-                parse_integer((void*) m, NULL_POINTER, NULL_POINTER, p11, p12);
-            }
-        }
-
-    } else {
-
-        log_message_debug("Error: Could not parse bdt record patient master data. The parse mode is null.");
-    }
-}
-
-/**
- * Parses the bdt record medical treatment data.
- *
- * @param p0 the destination compound model (Hand over as reference!)
- * @param p1 the destination count
- * @param p2 the destination size
- * @param p3 the field identification
- * @param p4 the field identification count
- * @param p5 the field content
- * @param p6 the field content count
- * @param p7 the parse mode
- */
-void parse_bdt_record_medical_treatment_data(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
-
-    if (p7 != NULL_POINTER) {
-
-        int* m = (int*) p7;
-
-        log_message_debug("Information: Parse bdt record medical treatment data.");
-
-        // The comparison result.
-        int r = *NUMBER_0_INTEGER;
-
-        if (r == *NUMBER_0_INTEGER) {
-
-            compare_arrays(p3, p4, (void*) RECORD_IDENTIFICATION_BDT_FIELD, (void*) BDT_FIELD_IDENTIFICATION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-            if (r != *NUMBER_0_INTEGER) {
-
-    fprintf(stderr, "TEST parse bdt record medical treatment data content count: %i\n\n", *((int*) p6));
-
-                // Set data record identification as parse mode.
-                parse_integer((void*) m, NULL_POINTER, NULL_POINTER, p5, p6);
-            }
-        }
-
-    } else {
-
-        log_message_debug("Error: Could not parse bdt record medical treatment data. The parse mode is null.");
-    }
-}
-
-/**
- * Processes the bdt field.
- *
- * @param p0 the destination compound (Hand over as reference!)
- * @param p1 the destination compound count (Hand over as reference!)
- * @param p2 the destination compound size (Hand over as reference!)
- * @param p3 the field content
- * @param p4 the field content count
- * @param p5 the field abstraction
- * @param p6 the field abstraction count
- * @param p7 the field name
- * @param p8 the field name count
+ * @param p0 the destination name (Hand over as reference!)
+ * @param p1 the destination name count (Hand over as reference!)
+ * @param p2 the destination name size (Hand over as reference!)
+ * @param p3 the destination abstraction (Hand over as reference!)
+ * @param p4 the destination abstraction count (Hand over as reference!)
+ * @param p5 the destination abstraction size (Hand over as reference!)
+ * @param p6 the destination model (Hand over as reference!)
+ * @param p7 the destination model count (Hand over as reference!)
+ * @param p8 the destination model size (Hand over as reference!)
+ * @param p9 the destination details (Hand over as reference!)
+ * @param p10 the destination details count (Hand over as reference!)
+ * @param p11 the destination details size (Hand over as reference!)
+ * @param p12 the source model
+ * @param p13 the source model count
+ * @param p14 the source abstraction
+ * @param p15 the source abstraction count
+ * @param p16 the source name
+ * @param p17 the source name count
  */
 /*??
-void parse_bdt_process_field(void* p0, void* p1, void* p2,
-    void* p3, void* p4, void* p5, void* p6, void* p7, void* p8) {
+void parse_bdt_parse_model(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
+    void* p6, void* p7, void* p8, void* p9, void* p10, void* p11,
+    void* p12, void* p13, void* p14, void* p15, void* p16, void* p17) {
 
-    log_message_debug("Information: Process bdt field.");
-
-    // The knowledge model name.
-    void* n = NULL_POINTER;
-    int* nc = NULL_POINTER;
-    int* ns = NULL_POINTER;
-    // The knowledge model abstraction.
-    void* a = NULL_POINTER;
-    int* ac = NULL_POINTER;
-    int* as = NULL_POINTER;
-    // The knowledge model model.
-    void* m = NULL_POINTER;
-    int* mc = NULL_POINTER;
-    int* ms = NULL_POINTER;
-    // The knowledge model details.
-    void* d = NULL_POINTER;
-    int* dc = NULL_POINTER;
-    int* ds = NULL_POINTER;
+    log_message_debug("Information: Parse model.");
 
     // Allocate knowledge model name.
-    allocate((void*) &nc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    allocate(p1, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
     *nc = *NUMBER_0_INTEGER;
-    allocate((void*) &ns, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    allocate(p2, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
     *ns = *NUMBER_0_INTEGER;
-    allocate((void*) &n, (void*) ns, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+    allocate(p0, p2, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
     // A knowledge model channel is not received (allocated),
     // since that is only needed temporarily for model loading.
 
     // Allocate knowledge model abstraction.
-    allocate((void*) &ac, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    allocate(p4, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
     *ac = *NUMBER_0_INTEGER;
-    allocate((void*) &as, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    allocate(p5, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
     *as = *NUMBER_0_INTEGER;
-    allocate((void*) &a, (void*) as, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+    allocate(p3, p5, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
     // Allocate knowledge model model.
-    allocate((void*) &mc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    allocate(p7, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
     *mc = *NUMBER_0_INTEGER;
-    allocate((void*) &ms, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    allocate(p8, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
     *ms = *NUMBER_0_INTEGER;
-    allocate((void*) &m, (void*) ms, p5, p6);
+    allocate(p6, p8, p14, p15);
 
     // Allocate knowledge model details.
-    allocate((void*) &dc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    allocate(p10, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
     *dc = *NUMBER_0_INTEGER;
-    allocate((void*) &ds, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    allocate(p11, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
     *ds = *NUMBER_0_INTEGER;
-    allocate((void*) &d, (void*) ds, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
+    allocate(p9, p11, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
 
     // Parse name.
-    parse_character_vector((void*) &n, (void*) nc, (void*) ns, p7, p8);
+    parse_character_vector(p0, p1, p2, p16, p17);
     // Parse abstraction.
-    parse_character_vector((void*) &a, (void*) ac, (void*) as, p5, p6);
+    parse_character_vector(p3, p4, p5, p14, p15);
     // Parse model.
-    parse((void*) &m, (void*) mc, (void*) ms, (void*) &d, (void*) dc, (void*) ds, p3, p4, p5, p6);
-
-    // Add knowledge model to knowledge memory.
-    set_compound_element_by_name(p0, p1, p2, NULL_POINTER, NULL_POINTER, NULL_POINTER,
-        n, (void*) nc, (void*) ns,
-        a, (void*) ac, (void*) as,
-        m, (void*) mc, (void*) ms,
-        d, (void*) dc, (void*) ds);
+    parse(p6, p7, p8, p9, p10, p11, p12, p13, p14, p15);
 }
 
 /**
@@ -561,9 +111,9 @@ void parse_bdt_process_field(void* p0, void* p1, void* p2,
  * @param p0 the destination compound (Hand over as reference!)
  * @param p1 the destination compound count (Hand over as reference!)
  * @param p2 the destination compound size (Hand over as reference!)
- * @param p3 the field content
- * @param p4 the field content count
- * @param p5 the field identification
+ * @param p3 the source field content byte stream
+ * @param p4 the source field content byte stream count
+ * @param p5 the source field identification
  */
 /*??
 void parse_bdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
@@ -574,18 +124,47 @@ void parse_bdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, vo
 
         log_message_debug("Information: Select bdt field.");
 
+        // The knowledge model name.
+        void* n = NULL_POINTER;
+        int* nc = NULL_POINTER;
+        int* ns = NULL_POINTER;
+        // The knowledge model abstraction.
+        void* a = NULL_POINTER;
+        int* ac = NULL_POINTER;
+        int* as = NULL_POINTER;
+        // The knowledge model model.
+        void* m = NULL_POINTER;
+        int* mc = NULL_POINTER;
+        int* ms = NULL_POINTER;
+        // The knowledge model details.
+        void* d = NULL_POINTER;
+        int* dc = NULL_POINTER;
+        int* ds = NULL_POINTER;
+
         if (*id == *RECORD_SIZE_BDT_FIELD) {
 
-            parse_bdt_process_field(p0, p1, p2, p3, p4,
+            parse_bdt_parse_model(n, nc, ns, a, ac, as, m, mc, ms, d, dc, ds,
+                p3, p4,
                 (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT,
                 (void*) RECORD_SIZE_XDT_FIELD_NAME, (void*) RECORD_SIZE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *ADT_RECORD_SPECIFICATION_VERSION_BDT_FIELD) {
 
-            parse_bdt_process_field(p0, p1, p2, p3, p4,
+            parse_bdt_parse_model(n, nc, ns, a, ac, as, m, mc, ms, d, dc, ds,
+                p3, p4,
                 (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) ADT_RECORD_SPECIFICATION_VERSION_XDT_FIELD_NAME, (void*) ADT_RECORD_SPECIFICATION_VERSION_XDT_FIELD_NAME_COUNT);
         }
+
+        // Process bdt field content.
+        parse_bdt_process_record((void*) m, (void*) mc, (void*) ms, p3, p4);
+
+        // Add knowledge model to knowledge memory.
+        set_compound_element_by_name(p0, p1, p2, p3, p4, p5,
+            n, (void*) nc, (void*) ns,
+            a, (void*) ac, (void*) as,
+            m, (void*) mc, (void*) ms,
+            d, (void*) dc, (void*) ds);
 
     } else {
 
@@ -616,7 +195,7 @@ void parse_bdt_process_record(void* p0, void* p1, void* p2, void* p3, void* p4) 
             log_message_debug("Information: Process bdt record.");
 
             // The remaining bytes in the source byte array.
-            int rc = *sc;
+            int rem = *sc;
             // The field size.
             int fs = *NUMBER_0_INTEGER;
             // The field identification.
@@ -631,13 +210,13 @@ void parse_bdt_process_record(void* p0, void* p1, void* p2, void* p3, void* p4) 
 
             while (*NUMBER_1_INTEGER) {
 
-                if (rc <= *NUMBER_0_INTEGER) {
+                if (rem <= *NUMBER_0_INTEGER) {
 
                     break;
                 }
 
                 // Parse bdt field (size, identification, content).
-                parse_bdt_field((void*) &fs, (void*) &fid, (void*) &fc, (void*) &fcc, (void*) &v, s, (void*) &rc);
+                parse_bdt_field((void*) &fs, (void*) &fid, (void*) &fc, (void*) &fcc, (void*) &v, s, (void*) &rem);
 
                 if (v == *NUMBER_1_INTEGER) {
 
@@ -645,31 +224,32 @@ void parse_bdt_process_record(void* p0, void* p1, void* p2, void* p3, void* p4) 
                     // the bdt field was parsed correctly and the carriage
                     // return plus line feed characters were reached.
 
-                    // Increment source bdt byte array index, so that following
-                    // fields may be found in the next loop cycle.
+                    // Increment source bdt byte array index,
+                    // so that following fields may be found
+                    // in the next loop cycle.
                     s = s + fs;
-                    rc = rc - fs;
+                    rem = rem - fs;
 
                     parse_bdt_select_field(p0, p1, p2, fc, (void*) &fcc, (void*) &fid);
 
                 } else {
 
-                    // The verification flag is NOT set, which means that
-                    // the bdt field was NOT parsed correctly.
+                    // The verification flag is NOT set, which means
+                    // that the bdt field was NOT parsed correctly.
+
+                    log_message_debug("Error: Could not process bdt record. An invalid field was detected. The parsing will now continue with the next valid field.");
 
                     // Reset next field count.
                     nc = *NUMBER_0_INTEGER;
 
                     // Count the number of bytes to the next carriage return-
                     // plus line feed character.
-                    parse_bdt_next_field((void*) &nc, s, (void*) &rc);
+                    parse_bdt_next_field((void*) &nc, s, (void*) &rem);
 
                     // Increment source bdt byte array index, so that following
                     // fields may be found in the next loop cycle.
                     s = s + nc;
-                    rc = rc - nc;
-
-                    log_message_debug("Error: Could not process bdt record. An invalid field was detected. The parsing will now continue with the next valid field.");
+                    rem = rem - nc;
                 }
             }
 
@@ -690,91 +270,79 @@ void parse_bdt_process_record(void* p0, void* p1, void* p2, void* p3, void* p4) 
  * @param p0 the destination model (Hand over as reference!)
  * @param p1 the destination model count (Hand over as reference!)
  * @param p2 the destination model size (Hand over as reference!)
- * @param p3 the source bdt package byte stream
- * @param p4 the source bdt package byte stream count
+ * @param p3 the source record content byte stream
+ * @param p4 the source record content byte stream count
+ * @param p5 the source record identification
  */
 /*??
-void parse_bdt_select_record(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void parse_bdt_select_record(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
-/*??
     if (p5 != NULL_POINTER) {
 
         int* id = (int*) p5;
 
         log_message_debug("Information: Select bdt record.");
 
-        if (*id == *RECORD_SIZE_BDT_FIELD) {
+        // The knowledge model name.
+        void* n = NULL_POINTER;
+        int* nc = NULL_POINTER;
+        int* ns = NULL_POINTER;
+        // The knowledge model abstraction.
+        void* a = NULL_POINTER;
+        int* ac = NULL_POINTER;
+        int* as = NULL_POINTER;
+        // The knowledge model model.
+        void* m = NULL_POINTER;
+        int* mc = NULL_POINTER;
+        int* ms = NULL_POINTER;
+        // The knowledge model details.
+        void* d = NULL_POINTER;
+        int* dc = NULL_POINTER;
+        int* ds = NULL_POINTER;
 
-            parse_bdt_record_process_field(p0, p1, p2, p3, p4,
-                (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT,
-                (void*) RECORD_SIZE_XDT_FIELD_NAME, (void*) RECORD_SIZE_XDT_FIELD_NAME_COUNT);
+        if (*id == *MEDICAL_PRACTICE_DATA_BDT_RECORD) {
 
-        } else if (*id == *ADT_RECORD_SPECIFICATION_VERSION_BDT_FIELD) {
+            parse_bdt_parse_model(n, nc, ns, a, ac, as, m, mc, ms, d, dc, ds,
+                p3, p4,
+                (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
+                (void*) MEDICAL_PRACTICE_DATA_BDT_RECORD_NAME, (void*) MEDICAL_PRACTICE_DATA_BDT_RECORD_NAME_COUNT);
 
-            parse_bdt_record_process_field(p0, p1, p2, p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
-                (void*) ADT_RECORD_SPECIFICATION_VERSION_XDT_FIELD_NAME, (void*) ADT_RECORD_SPECIFICATION_VERSION_XDT_FIELD_NAME_COUNT);
+        } else if (*id == *MEDICAL_TREATMENT_BDT_RECORD) {
+
+            parse_bdt_parse_model(n, nc, ns, a, ac, as, m, mc, ms, d, dc, ds,
+                p3, p4,
+                (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
+                (void*) MEDICAL_TREATMENT_BDT_RECORD_NAME, (void*) MEDICAL_TREATMENT_BDT_RECORD_NAME_COUNT);
+
+        } else if (*id == *PATIENT_MASTER_DATA_BDT_RECORD) {
+
+            parse_bdt_parse_model(n, nc, ns, a, ac, as, m, mc, ms, d, dc, ds,
+                p3, p4,
+                (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
+                (void*) PATIENT_MASTER_DATA_BDT_RECORD_NAME, (void*) PATIENT_MASTER_DATA_BDT_RECORD_NAME_COUNT);
+
+        } else if (*id == *MEDICAL_TREATMENT_DATA_BDT_RECORD) {
+
+            parse_bdt_parse_model(n, nc, ns, a, ac, as, m, mc, ms, d, dc, ds,
+                p3, p4,
+                (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
+                (void*) MEDICAL_TREATMENT_DATA_BDT_RECORD_NAME, (void*) MEDICAL_TREATMENT_DATA_BDT_RECORD_NAME_COUNT);
         }
 
-/*??
-    if (fid == *RECORD_IDENTIFICATION_BDT_FIELD) {
+        // Process bdt record content.
+        parse_bdt_process_record((void*) m, (void*) mc, (void*) ms, p3, p4);
 
-        // Parse bdt field content containing a record identification.
-        parse_integer((void*) &rid, NULL_POINTER, NULL_POINTER, fc, (void*) &fcc);
-
-        if (m == *MEDICAL_PRACTICE_DATA_BDT_RECORD) {
-
-            parse_bdt_record_medical_practice_data(p0, p1, p2, p3, p4, p5, p6, p7);
-
-        } else if (m == *DATA_MEDIUM_HEADER_BDT_RECORD) {
-
-            parse_bdt_record_data_medium_header(p0, p1, p2, p3, p4, p5, p6, p7);
-
-        } else if (m == *DATA_MEDIUM_FOOTER_BDT_RECORD) {
-
-            parse_bdt_record_data_medium_footer(p0, p1, p2, p3, p4, p5, p6, p7);
-
-        } else if (m == *DATA_PACKAGE_HEADER_BDT_RECORD) {
-
-            parse_bdt_record_data_package_header(p0, p1, p2, p3, p4, p5, p6, p7);
-
-        } else if (m == *DATA_PACKAGE_FOOTER_BDT_RECORD) {
-
-            parse_bdt_record_data_package_footer(p0, p1, p2, p3, p4, p5, p6, p7);
-
-        } else if (m == *MEDICAL_TREATMENT_BDT_RECORD) {
-
-            parse_bdt_record_medical_treatment(p0, p1, p2, p3, p4, p5, p6, p7);
-
-        } else if (m == *PATIENT_MASTER_DATA_BDT_RECORD) {
-
-            parse_bdt_record_patient_master_data(
-                (void*) &kmn, (void*) kmnc, (void*) kmns,
-                (void*) &kma, (void*) kmac, (void*) kmas,
-                (void*) &kmm, (void*) kmmc, (void*) kmms,
-                p3, p4, p5, p6, p7);
-
-        } else if (m == *MEDICAL_TREATMENT_DATA_BDT_RECORD) {
-
-            parse_bdt_record_medical_treatment_data(p0, p1, p2, p3, p4, p5, p6, p7);
-
-        } else if (rid == *DATA_PACKAGE_HEADER_BDT_RECORD) {
-
-            // Store data package begin pointer.
-            p = s;
-            pc = *NUMBER_0_INTEGER;
-
-            // Set parse mode.
-            m = *DATA_PACKAGE_HEADER_BDT_RECORD;
-        }
-    }
+        // Add knowledge model to knowledge memory.
+        set_compound_element_by_name(p0, p1, p2, p3, p4, p5,
+            n, (void*) nc, (void*) ns,
+            a, (void*) ac, (void*) as,
+            m, (void*) mc, (void*) ms,
+            d, (void*) dc, (void*) ds);
 
     } else {
 
-        log_message_debug("Error: Could not select bdt record. The field identification is null.");
+        log_message_debug("Error: Could not select bdt record. The record identification is null.");
     }
-*/
-/*??
 }
 
 /**
@@ -786,294 +354,90 @@ void parse_bdt_select_record(void* p0, void* p1, void* p2, void* p3, void* p4) {
  * @param p3 the destination details (Hand over as reference!)
  * @param p4 the destination details count (Hand over as reference!)
  * @param p5 the destination details size (Hand over as reference!)
- * @param p6 the data package model
- * @param p7 the data package model count
- * @param p8 the data package details 1
- * @param p9 the data package details 1 count
- * @param p10 the data package details 2
- * @param p11 the data package details 2 count
+ * @param p6 the package content
+ * @param p7 the package content count
+ * @param p8 the package header
+ * @param p9 the package header count
+ * @param p10 the package footer
+ * @param p11 the package footer count
  */
 /*??
-void parse_bdt_process_package(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
-    void* p6, void* p7, void* p8, void* p9, void* p10, void* p11) {
+void parse_bdt_process_package(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
+
+    while (NUMBER_1_INTEGER) {
+
+        ...
+
+    }
+}
+
+/**
+ * Selects the bdt package.
+ *
+ * @param p0 the destination model (Hand over as reference!)
+ * @param p1 the destination model count (Hand over as reference!)
+ * @param p2 the destination model size (Hand over as reference!)
+ * @param p3 the destination details (Hand over as reference!)
+ * @param p4 the destination details count (Hand over as reference!)
+ * @param p5 the destination details size (Hand over as reference!)
+ * @param p6 the package content
+ * @param p7 the package content count
+ * @param p8 the package header
+ * @param p9 the package header count
+ * @param p10 the package footer
+ * @param p11 the package footer count
+ */
+/*??
+void parse_bdt_select_package(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
+
+    log_message_debug("Information: Select bdt package.");
 
     // The knowledge model name.
-    void* kmn = NULL_POINTER;
-    int* kmnc = NULL_POINTER;
-    int* kmns = NULL_POINTER;
+    void* n = NULL_POINTER;
+    int* nc = NULL_POINTER;
+    int* ns = NULL_POINTER;
     // The knowledge model abstraction.
-    void* kma = NULL_POINTER;
-    int* kmac = NULL_POINTER;
-    int* kmas = NULL_POINTER;
+    void* a = NULL_POINTER;
+    int* ac = NULL_POINTER;
+    int* as = NULL_POINTER;
     // The knowledge model model.
-    void* kmm = NULL_POINTER;
-    int* kmmc = NULL_POINTER;
-    int* kmms = NULL_POINTER;
+    void* m = NULL_POINTER;
+    int* mc = NULL_POINTER;
+    int* ms = NULL_POINTER;
     // The knowledge model details.
-    void* kmd = NULL_POINTER;
-    int* kmdc = NULL_POINTER;
-    int* kmds = NULL_POINTER;
+    void* d = NULL_POINTER;
+    int* dc = NULL_POINTER;
+    int* ds = NULL_POINTER;
 
-    // Allocate knowledge model name.
-    allocate((void*) &kmnc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    *kmnc = *NUMBER_0_INTEGER;
-    allocate((void*) &kmns, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    *kmns = *NUMBER_0_INTEGER;
-    allocate((void*) &kmn, (void*) kmns, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+    // Parse package content.
+    parse_bdt_parse_model(n, nc, ns, a, ac, as, m, mc, ms, d, dc, ds,
+        p6, p7,
+        (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
+        (void*) STANDARD_BDT_PACKAGE_NAME, (void*) STANDARD_BDT_PACKAGE_NAME_COUNT);
+    // Parse package header (meta data 1).
+    parse_bdt_parse_model(n, nc, ns, a, ac, as, m, mc, ms, d, dc, ds,
+        p8, p9,
+        (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
+        (void*) PACKAGE_HEADER_BDT_RECORD_NAME, (void*) PACKAGE_HEADER_BDT_RECORD_NAME_COUNT);
+    // Parse package footer (meta data 2).
+    parse_bdt_parse_model(n, nc, ns, a, ac, as, m, mc, ms, d, dc, ds,
+        p10, p11,
+        (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
+        (void*) PACKAGE_FOOTER_BDT_RECORD_NAME, (void*) PACKAGE_FOOTER_BDT_RECORD_NAME_COUNT);
 
-    // A knowledge model channel is not received (allocated),
-    // since that is only needed temporarily for model loading.
+    // Process bdt package content.
+    parse_bdt_process_package((void*) m, (void*) mc, (void*) ms, p6, p7);
+    // Parse bdt package header (meta data 1).
+    parse_bdt_process_record((void*) d, (void*) dc, (void*) ds, p8, p9);
+    // Parse bdt package footer (meta data 2).
+    parse_bdt_process_record((void*) d, (void*) dc, (void*) ds, p10, p11);
 
-    // Allocate knowledge model abstraction.
-    allocate((void*) &kmac, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    *kmac = *NUMBER_0_INTEGER;
-    allocate((void*) &kmas, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    *kmas = *NUMBER_0_INTEGER;
-    allocate((void*) &kma, (void*) kmas, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
-
-    // Allocate knowledge model model.
-    allocate((void*) &kmmc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    *kmmc = *NUMBER_0_INTEGER;
-    allocate((void*) &kmms, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    *kmms = *NUMBER_0_INTEGER;
-    allocate((void*) &kmm, (void*) kmms, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
-
-    // Allocate knowledge model details.
-    allocate((void*) &kmdc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    *kmdc = *NUMBER_0_INTEGER;
-    allocate((void*) &kmds, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    *kmds = *NUMBER_0_INTEGER;
-    allocate((void*) &kmd, (void*) kmds, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
-
-    // Process bdt package.
-    parse_bdt_select_record((void*) kmm, (void*) kmmc, (void*) kmms, p6, p7);
-
-    // Parse bdt package header details (meta data 1).
-    parse_bdt_process_record((void*) kmd, (void*) kmdc, (void*) kmds, p8, p9);
-
-    // Parse bdt package footer details (meta data 2).
-    parse_bdt_process_record((void*) kmd, (void*) kmdc, (void*) kmds, p10, p11);
-
-    // Add knowledge model to knowledge memory.
+    // Add package to knowledge memory.
     set_compound_element_by_name(p0, p1, p2, p3, p4, p5,
-        kmn, (void*) kmnc, (void*) kmns,
-        kma, (void*) kmac, (void*) kmas,
-        kmm, (void*) kmmc, (void*) kmms,
-        kmd, (void*) kmdc, (void*) kmds);
-}
-
-/**
- * Selects the bdt package header.
- *
- * @param p0 the data package details 1
- * @param p1 the parse mode
- * @param p2 the loop variable
- * @param p3 the data package section
- * @param p4 the field content
- * @param p5 the field content count
- */
-/*??
-void parse_bdt_select_package_header(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
-
-    if (p3 != NULL_POINTER) {
-
-        void** s = (void**) p3;
-
-        if (p2 != NULL_POINTER) {
-
-            int* j = (int*) p2;
-
-            if (p1 != NULL_POINTER) {
-
-                int* m = (int*) p1;
-
-                if (p0 != NULL_POINTER) {
-
-                    void** pd1 = (void**) p0;
-
-                    log_message_debug("Information: Select bdt package header.");
-
-                    // The record identification.
-                    int rid = *NUMBER_0_INTEGER;
-
-                    // Parse bdt field content containing a record identification.
-                    parse_integer((void*) &rid, NULL_POINTER, NULL_POINTER, p4, p5);
-
-                    if (rid == *DATA_PACKAGE_HEADER_BDT_RECORD) {
-
-                        // Set header parse mode.
-                        *m = *NUMBER_1_INTEGER;
-                        // Store data package header details (meta data 1) begin pointer.
-                        *pd1 = *s;
-                        // Reset loop variable.
-                        *j = *NUMBER_0_INTEGER;
-
-                    fprintf(stderr, "TEST set header mode rid: %i\n", rid);
-                    }
-
-                } else {
-
-                    log_message_debug("Error: Could not select bdt package header. The data package details 1 is null.");
-                }
-
-            } else {
-
-                log_message_debug("Error: Could not select bdt package header. The parse mode is null.");
-            }
-
-        } else {
-
-            log_message_debug("Error: Could not select bdt package header. The loop variable is null.");
-        }
-
-    } else {
-
-        log_message_debug("Error: Could not select bdt package header. The data package section is null.");
-    }
-}
-
-/**
- * Selects the bdt package header end.
- *
- * @param p0 the data package details 1 count
- * @param p1 the data package model
- * @param p2 the parse mode
- * @param p3 the loop variable
- * @param p4 the data package section
- * @param p5 the data package section count
- */
-/*??
-void parse_bdt_select_package_header_end(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
-
-    if (p5 != NULL_POINTER) {
-
-        int* sc = (int*) p5;
-
-        if (p4 != NULL_POINTER) {
-
-            void** s = (void**) p4;
-
-            if (p3 != NULL_POINTER) {
-
-                int* j = (int*) p3;
-
-                if (p2 != NULL_POINTER) {
-
-                    int* m = (int*) p2;
-
-                    if (p1 != NULL_POINTER) {
-
-                        void** pm = (void**) p1;
-
-                        if (p0 != NULL_POINTER) {
-
-                            int* pd1c = (int*) p0;
-
-                            log_message_debug("Information: Select bdt package header end.");
-
-                            // Set content parse mode.
-                            *m = *NUMBER_2_INTEGER;
-                            // Store data package header details (meta data 1) count.
-                            *pd1c = *sc;
-                            // Store data package model begin pointer.
-                            *pm = *s;
-                            // Reset loop variable.
-                            *j = *NUMBER_0_INTEGER;
-
-                    fprintf(stderr, "TEST set content mode pd1c: %i\n", *pd1c);
-
-                        } else {
-
-                            log_message_debug("Error: Could not select bdt package header end. The data package details 1 count is null.");
-                        }
-
-                    } else {
-
-                        log_message_debug("Error: Could not select bdt package header end. The data package model is null.");
-                    }
-
-                } else {
-
-                    log_message_debug("Error: Could not select bdt package header end. The parse mode is null.");
-                }
-
-            } else {
-
-                log_message_debug("Error: Could not select bdt package header end. The loop variable is null.");
-            }
-
-        } else {
-
-            log_message_debug("Error: Could not select bdt package header end. The data package section is null.");
-        }
-
-    } else {
-
-        log_message_debug("Error: Could not select bdt package header end. The data package section count is null.");
-    }
-}
-
-/**
- * Selects the bdt package content.
- *
- * @param p0 the data package details 1 count
- * @param p1 the data package model
- * @param p2 the parse mode
- * @param p3 the loop variable
- * @param p4 the data package section
- * @param p5 the data package section count
- */
-/*??
-void parse_bdt_select_package_content(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
-
-            // The record identification.
-            int rid = *NUMBER_0_INTEGER;
-
-            // Parse bdt field content containing a record identification.
-            parse_integer((void*) &rid, NULL_POINTER, NULL_POINTER, fc, (void*) &fcc);
-
-            if (rid == *DATA_PACKAGE_FOOTER_BDT_RECORD) {
-
-                // Set footer parse mode.
-                *m = *NUMBER_3_INTEGER;
-                // Store data package model count.
-                *pmc = *o;
-                // Store data package footer details (meta data 2) begin pointer.
-                *pd2 = *s;
-                // Reset loop variable.
-                *j = *NUMBER_0_INTEGER;
-
-    fprintf(stderr, "TEST footer mode pmc: %i\n", *pmc);
-            }
-}
-
-/**
- * Selects the bdt package footer.
- *
- * @param p0 the data package details 1 count
- * @param p1 the data package model
- * @param p2 the parse mode
- * @param p3 the loop variable
- * @param p4 the data package section
- * @param p5 the data package section count
- */
-/*??
-void parse_bdt_select_package_footer(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
-
-            // Set start parse mode, so that new data
-            // package headers may be found.
-            *m = *NUMBER_0_INTEGER;
-            // Store data package footer details (meta data 2) count.
-            *pd2c = *o;
-            // Reset loop variable.
-            *j = *NUMBER_0_INTEGER;
-
-    fprintf(stderr, "TEST start mode pd2c: %i\n", *pd2c);
-
-            // Process bdt package.
-            parse_bdt_process_package(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11);
-
-    fprintf(stderr, "TEST 2 s: %i\n", s);
+        n, (void*) nc, (void*) ns,
+        a, (void*) ac, (void*) as,
+        m, (void*) mc, (void*) ms,
+        d, (void*) dc, (void*) ds);
 }
 
 /**
@@ -1257,9 +621,9 @@ void parse_bdt_next_field(void* p0, void* p1, void* p2) {
                                 // the carriage return plus line feed characters.
                                 *nc = j + *PRIMITIVE_COUNT + *PRIMITIVE_COUNT;
 
-                                // The next field has been found, so that
-                                // the loop can be left.
-                                break;
+                                // Set loop variable to full array count ac, as the next
+                                // field has been found, so that the loop can be left.
+                                j = *ac;
                             }
                         }
                     }
@@ -1316,8 +680,6 @@ void parse_bdt_record(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
                     // The remaining bytes in the source byte array.
                     int rem = *sc;
-                    // The next field count.
-                    int nc = *NUMBER_0_INTEGER;
                     // The field size.
                     int fs = *NUMBER_0_INTEGER;
                     // The field identification.
@@ -1327,6 +689,8 @@ void parse_bdt_record(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
                     int fcc = *NUMBER_0_INTEGER;
                     // The verification flag.
                     int v = *NUMBER_0_INTEGER;
+                    // The next field count.
+                    int nc = *NUMBER_0_INTEGER;
 
                     while (*NUMBER_1_INTEGER) {
 
@@ -1755,14 +1119,11 @@ void parse_bdt(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
                             s = s + ps;
                             rem = rem - ps;
 
-/*??
-                            // Process bdt package header.
-                            parse_bdt_select_record(*dm, p1, p2, *dd, p4, p5,
-                                (void*) &pm, (void*) &pmc, (void*) &j, (void*) &s, (void*) &o);
+/*?? COMMENT IN AGAIN, AS SOON AS THE CALLED FUNCTION EXISTS!
 
-                            // Process bdt package footer.
-
-                            // Process bdt package content.
+                            // Process bdt package.
+                            parse_bdt_process_package(*dm, p1, p2, *dd, p4, p5,
+                                pc, (void*) &pcc, ph, (void*) &phc, pf, (void*) &pfc);
 */
 
                         } else {
