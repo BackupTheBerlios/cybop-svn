@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2007-03-17 12:38:12 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2007-03-18 01:30:44 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -100,27 +100,36 @@ void parse_xdt_field(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
                                 rem = rem - *XDT_FIELD_IDENTIFICATION_COUNT;
                             }
 
-                            // Calculate xdt field content count.
-                            //
-                            // CAUTION! The xdt field size comprises all characters:
-                            // - field size (3 bytes)
-                            // - field identification (4 bytes)
-                            // - field content (VARIABLE!)
-                            // - carriage return (1 byte)
-                            // - line feed (1 byte)
-                            //
-                            // It therefore has to be decremented here, so that
-                            // only the actual xdt field content count remains.
-                            *fcc = *fs - *XDT_FIELD_SIZE_COUNT - *XDT_FIELD_IDENTIFICATION_COUNT - *PRIMITIVE_COUNT - *PRIMITIVE_COUNT;
+                            if (*fs >= (*XDT_FIELD_SIZE_COUNT + *XDT_FIELD_IDENTIFICATION_COUNT + *PRIMITIVE_COUNT + *PRIMITIVE_COUNT)) {
 
-                            if (rem >= *fcc) {
+                                // Calculate xdt field content count.
+                                //
+                                // CAUTION! The xdt field size comprises all characters:
+                                // - field size (3 bytes)
+                                // - field identification (4 bytes)
+                                // - field content (VARIABLE!)
+                                // - carriage return (1 byte)
+                                // - line feed (1 byte)
+                                //
+                                // It therefore has to be decremented here, so that
+                                // only the actual xdt field content count remains.
+                                *fcc = *fs - *XDT_FIELD_SIZE_COUNT - *XDT_FIELD_IDENTIFICATION_COUNT - *PRIMITIVE_COUNT - *PRIMITIVE_COUNT;
+
+                                if (rem >= *fcc) {
+
+                                    // Store xdt field content, to be returned.
+                                    *fc = *s;
+
+                                    // Increment source xdt byte array index.
+                                    *s = *s + *fcc;
+                                    rem = rem - *fcc;
+                                }
+
+                            } else {
 
                                 // Store xdt field content, to be returned.
-                                *fc = *s;
-
-                                // Increment source xdt byte array index.
-                                *s = *s + *fcc;
-                                rem = rem - *fcc;
+                                *fc = NULL_POINTER;
+                                *fcc = *NUMBER_0_INTEGER;
                             }
 
                             if (rem >= (*PRIMITIVE_COUNT + *PRIMITIVE_COUNT)) {
@@ -285,6 +294,8 @@ void parse_xdt_record(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
                         log_message_debug("Information: Parse xdt record.");
 
+                        // Reset record size.
+                        *rs = *NUMBER_0_INTEGER;
                         // The remaining bytes in the source byte array.
                         // They are used to check that the array border is not crossed.
                         int rem = *sc;
@@ -315,8 +326,12 @@ void parse_xdt_record(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
                             // Parse xdt field (size, identification, content).
                             parse_xdt_field((void*) &fs, (void*) &fid, (void*) &fc, (void*) &fcc, (void*) &v, p4, (void*) &rem);
 
-        fprintf(stderr, "TEST field id: %i\n", fid);
-        fprintf(stderr, "TEST field content count: %i\n", fcc);
+/*??
+                            // Test values.
+                            fprintf(stderr, "TEST field size fs: %i\n", fs);
+                            fprintf(stderr, "TEST field identification id: %i\n", fid);
+                            fprintf(stderr, "TEST field content count fcc: %i\n", fcc);
+*/
 
                             if (v == *NUMBER_1_INTEGER) {
 
@@ -324,10 +339,7 @@ void parse_xdt_record(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
                                 // the xdt field was parsed correctly and the carriage
                                 // return plus line feed characters were reached.
 
-                                // Increment source xdt byte array index,
-                                // so that following fields may be found
-                                // in the next loop cycle.
-//??                                *s = *s + fs;
+                                // Decrement remaining bytes in the source byte array.
                                 rem = rem - fs;
 
                                 // Increment record size.
@@ -354,12 +366,23 @@ void parse_xdt_record(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
                                         // belongs to the next following record.
                                         // The previous record's end has thus been reached.
 
+                                        // Decrement source xdt byte array index,
+                                        // so that the record identification field
+                                        // that had been detected right before
+                                        // can be found once more as it represents
+                                        // the beginning of the next xdt record.
+                                        *s = *s - fs;
+
                                         // CAUTION! The record size and -content count
                                         // were reset when the record size field was
                                         // found and steadily increased since then.
                                         //
                                         // Both need to be decremented here, because
                                         // the current field size fs was added above!
+                                        //
+                                        // Since this record identification field
+                                        // already belongs to the next record,
+                                        // it MUST NOT be counted here!
 
                                         // Decrement record size.
                                         *rs = *rs - fs;
@@ -393,8 +416,8 @@ void parse_xdt_record(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
                                     // of the first field of the record's CONTENT.
                                     *rc = *s;
 
-                                    // Reset record content count, in order to count
-                                    // the xdt record content (size) now following.
+                                    // Reset record content count, in order to
+                                    // count the xdt record content now following.
                                     *rcc = *NUMBER_0_INTEGER;
                                 }
 
@@ -504,16 +527,16 @@ void parse_xdt_package(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
 
                                         log_message_debug("Information: Parse xdt package.");
 
+                                        // Reset package size.
+                                        *ps = *NUMBER_0_INTEGER;
                                         // The remaining bytes in the source byte array.
-                                        // They are used to check that the array border is not crossed.
+                                        // They are used to check that the array border
+                                        // is not crossed, and to leave the loop.
                                         int rem = *sc;
                                         // The record size.
                                         int rs = *NUMBER_0_INTEGER;
                                         // The record identification.
                                         int rid = *NUMBER_0_INTEGER;
-                                        // The record content.
-                                        void* rc = NULL_POINTER;
-                                        int rcc = *NUMBER_0_INTEGER;
 
                                         while (*NUMBER_1_INTEGER) {
 
@@ -523,17 +546,25 @@ void parse_xdt_package(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
                                             }
 
                                             // Parse xdt record (size, identification, content).
-                                            parse_xdt_record((void*) &rs, (void*) &rid, (void*) &rc, (void*) &rcc, p7, (void*) &rem);
+                                            //
+                                            // CAUTION! The package footer and -footer count are
+                                            // handed over as parameters to get the record content.
+                                            // A local variable defined in this function may NOT
+                                            // be used as its value is lost when returning from
+                                            // this function. But a valid value has to be
+                                            // returned to the calling function.
+                                            parse_xdt_record((void*) &rs, (void*) &rid, p3, p4, p7, (void*) &rem);
 
-    fprintf(stderr, "\nTEST record id: %i\n", rid);
-    fprintf(stderr, "TEST record content count: %i\n", rcc);
+/*??
+                                            // Test values.
+                                            fprintf(stderr, "TEST record size rs: %i\n", rs);
+                                            fprintf(stderr, "TEST record identification id: %i\n", rid);
+                                            fprintf(stderr, "TEST record content count pfc: %i\n\n", *pfc);
+*/
 
                                             if (rs > *NUMBER_0_INTEGER) {
 
-                                                // Increment source xdt byte array index,
-                                                // so that following records may be found
-                                                // in the next loop cycle.
-//??                                                *s = *s + rs;
+                                                // Decrement remaining bytes in the source byte array.
                                                 rem = rem - rs;
 
                                                 // Increment package size.
@@ -548,40 +579,55 @@ void parse_xdt_package(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
                                                     //
                                                     // CAUTION! This is only the record content
                                                     // WITHOUT the record size and -identification!
-                                                    *ph = rc;
-                                                    *phc = rcc;
+                                                    *ph = *pf;
+                                                    *phc = *pfc;
+
+/*??
+                                                    // Test values.
+                                                    fprintf(stderr, "TEST package header: %i\n", *ph);
+                                                    fprintf(stderr, "TEST package header count: %i\n\n", *phc);
+*/
 
                                                     // Store xdt package content.
                                                     //
-                                                    // CAUTION! Everything following this package header
-                                                    // record up to the package footer record belongs
-                                                    // to the package's content.
+                                                    // CAUTION! Everything following this package
+                                                    // header record up to the package footer
+                                                    // record belongs to the package's content.
                                                     *pc = *s;
 
-                                                    // Reset loop variable, in order to count the
-                                                    // xdt package content (size) now following.
+                                                    // Reset package content count.
                                                     *pcc = *NUMBER_0_INTEGER;
 
                                                 } else if (rid == *DATA_PACKAGE_FOOTER_XDT_RECORD) {
 
-                                                    // Store xdt package footer.
-                                                    //
-                                                    // CAUTION! This is only the record content
-                                                    // WITHOUT the record size and -identification!
-                                                    *pf = rc;
-                                                    *pfc = rcc;
+                                                    // CAUTION! The package footer does NOT
+                                                    // have to be stored here explicitly.
+                                                    // It was already handed over as parameter
+                                                    // to the "parse_xdt_record" function,
+                                                    // so that its value is already set.
 
-                                                    // CAUTION! The package size and -content count
-                                                    // were reset when the record size field was
-                                                    // found and steadily increased since then.
-                                                    //
-                                                    // Both need to be decremented here, because
-                                                    // the current field size fs was added above!
+/*??
+                                                    // Test values.
+                                                    fprintf(stderr, "TEST package footer: %i\n", *pf);
+                                                    fprintf(stderr, "TEST package footer count: %i\n\n", *pfc);
+*/
 
-                                                    // Decrement package size.
-                                                    *ps = *ps - rs;
                                                     // Decrement package content count.
+                                                    //
+                                                    // CAUTION! The package content count pcc was
+                                                    // reset when the data package header record
+                                                    // was found and steadily increased since then.
+                                                    //
+                                                    // It needs to be decremented here, because
+                                                    // the current record size rs was added above,
+                                                    // but this data package footer record does
+                                                    // NOT belong to the data package content
+                                                    // and hence should not be counted.
                                                     *pcc = *pcc - rs;
+
+                                                    // CAUTION! Do NOT decrement the package
+                                                    // size, as this package footer record
+                                                    // DOES belong to the package!
 
                                                     // Set remaining bytes to zero, as the package footer
                                                     // has been detected and the loop can be left now.
@@ -1273,6 +1319,11 @@ void parse_xdt(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
                     void* pf = NULL_POINTER;
                     int pfc = *NUMBER_0_INTEGER;
 
+/*??
+                    // Test values.
+                    fprintf(stderr, "TEST xdt file source count: %i\n\n", *sc);
+*/
+
                     while (*NUMBER_1_INTEGER) {
 
                         if (rem <= *NUMBER_0_INTEGER) {
@@ -1280,43 +1331,35 @@ void parse_xdt(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
                             break;
                         }
 
-                        //?? TODO: Is the following comment really true and necessary?
-
                         // CAUTION! The data package section pointer s
                         // has to be handed over as REFERENCE, because it
                         // gets manipulated in the called operations and
                         // these have to store their result in s.
                         // If temporary variables (function parameters) were used,
-                        // they would be lost when the called operation is left.
+                        // their values would be lost when the called operation is left.
                         parse_xdt_package((void*) &ps, (void*) &ph, (void*) &phc, (void*) &pf, (void*) &pfc, (void*) &pc, (void*) &pcc, (void*) &s, (void*) &rem);
 
-    fprintf(stderr, "TEST package size: %i\n", ps);
-    fprintf(stderr, "TEST package remaining bytes: %i\n", rem);
-    fprintf(stderr, "TEST package header count: %i\n", phc);
-    fprintf(stderr, "TEST package footer count: %i\n", pfc);
-    fprintf(stderr, "TEST package content: %i\n", pcc);
-
-                        //?? CAUTION! The xdt package size gets self-calculated
-                        //?? in the "parse_xdt_package" operation and might NOT
-                        //?? be quite correct, as invalid fields are possibly not counted.
-                        //??
-                        //?? A more proper solution would be to read out the
-                        //?? "package size" field in the "package footer record",
-                        //?? but this is a little more effort, since all field variables
-                        //?? have to be provided to store the results.
+/*??
+                        // Test values.
+                        fprintf(stderr, "TEST package size: %i\n", ps);
+                        fprintf(stderr, "TEST package header count: %i\n", phc);
+                        fprintf(stderr, "TEST package footer count: %i\n", pfc);
+                        fprintf(stderr, "TEST package content: %i\n", pcc);
+*/
 
                         if (ps > *NUMBER_0_INTEGER) {
 
-                            // Increment source xdt byte array index, so that
-                            // following fields may be found in the next loop cycle.
-                            s = s + ps;
+                            // Decrement remaining bytes in the source byte array.
                             rem = rem - ps;
 
 /*??
+                            // Test values.
+                            fprintf(stderr, "TEST package remaining bytes: %i\n\n", rem);
+*/
+
                             // Select xdt package.
                             parse_xdt_select_package(*dm, p1, p2, *dd, p4, p5,
                                 pc, (void*) &pcc, ph, (void*) &phc, pf, (void*) &pfc);
-*/
 
                         } else {
 
@@ -1327,6 +1370,18 @@ void parse_xdt(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
                             s = s + *NUMBER_1_INTEGER;
                             rem = rem - *NUMBER_1_INTEGER;
                         }
+
+                        // Reset xdt package size.
+                        ps = *NUMBER_0_INTEGER;
+                        // Reset xdt package content.
+                        pc = NULL_POINTER;
+                        pcc = *NUMBER_0_INTEGER;
+                        // Reset xdt package header.
+                        ph = NULL_POINTER;
+                        phc = *NUMBER_0_INTEGER;
+                        // Reset xdt package footer.
+                        pf = NULL_POINTER;
+                        pfc = *NUMBER_0_INTEGER;
                     }
 
                 } else {
