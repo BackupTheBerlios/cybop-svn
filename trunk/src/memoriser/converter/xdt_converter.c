@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2007-03-18 01:30:44 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2007-03-18 23:53:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -328,9 +328,9 @@ void parse_xdt_record(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
 /*??
                             // Test values.
-                            fprintf(stderr, "TEST field size fs: %i\n", fs);
-                            fprintf(stderr, "TEST field identification id: %i\n", fid);
-                            fprintf(stderr, "TEST field content count fcc: %i\n", fcc);
+                            fprintf(stderr, "Test: Parse xdt record. Field size fs: %i\n", fs);
+                            fprintf(stderr, "Test: Parse xdt record. Field identification id: %i\n", fid);
+                            fprintf(stderr, "Test: Parse xdt record. Field content count fcc: %i\n", fcc);
 */
 
                             if (v == *NUMBER_1_INTEGER) {
@@ -537,6 +537,8 @@ void parse_xdt_package(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
                                         int rs = *NUMBER_0_INTEGER;
                                         // The record identification.
                                         int rid = *NUMBER_0_INTEGER;
+                                        // The loop variable.
+                                        int j = *NUMBER_0_INTEGER;
 
                                         while (*NUMBER_1_INTEGER) {
 
@@ -557,9 +559,9 @@ void parse_xdt_package(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
 
 /*??
                                             // Test values.
-                                            fprintf(stderr, "TEST record size rs: %i\n", rs);
-                                            fprintf(stderr, "TEST record identification id: %i\n", rid);
-                                            fprintf(stderr, "TEST record content count pfc: %i\n\n", *pfc);
+                                            fprintf(stderr, "Test: Parse xdt package. Record size rs: %i\n", rs);
+                                            fprintf(stderr, "Test: Parse xdt package. Record identification id: %i\n", rid);
+                                            fprintf(stderr, "Test: Parse xdt package. Record content count pfc: %i\n\n", *pfc);
 */
 
                                             if (rs > *NUMBER_0_INTEGER) {
@@ -570,8 +572,8 @@ void parse_xdt_package(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
                                                 // Increment package size.
                                                 *ps = *ps + rs;
 
-                                                // Increment package content count.
-                                                *pcc = *pcc + rs;
+                                                // Increment loop variable.
+                                                j = j + rs;
 
                                                 if (rid == *DATA_PACKAGE_HEADER_XDT_RECORD) {
 
@@ -584,8 +586,8 @@ void parse_xdt_package(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
 
 /*??
                                                     // Test values.
-                                                    fprintf(stderr, "TEST package header: %i\n", *ph);
-                                                    fprintf(stderr, "TEST package header count: %i\n\n", *phc);
+                                                    fprintf(stderr, "Test: Parse xdt package. Package header: %i\n", *ph);
+                                                    fprintf(stderr, "Test: Parse xdt package. Package header count: %i\n\n", *phc);
 */
 
                                                     // Store xdt package content.
@@ -595,8 +597,8 @@ void parse_xdt_package(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
                                                     // record belongs to the package's content.
                                                     *pc = *s;
 
-                                                    // Reset package content count.
-                                                    *pcc = *NUMBER_0_INTEGER;
+                                                    // Reset loop variable.
+                                                    j = *NUMBER_0_INTEGER;
 
                                                 } else if (rid == *DATA_PACKAGE_FOOTER_XDT_RECORD) {
 
@@ -608,8 +610,8 @@ void parse_xdt_package(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
 
 /*??
                                                     // Test values.
-                                                    fprintf(stderr, "TEST package footer: %i\n", *pf);
-                                                    fprintf(stderr, "TEST package footer count: %i\n\n", *pfc);
+                                                    fprintf(stderr, "Test: Parse xdt package. Package footer: %i\n", *pf);
+                                                    fprintf(stderr, "Test: Parse xdt package. Package footer count: %i\n\n", *pfc);
 */
 
                                                     // Decrement package content count.
@@ -623,7 +625,7 @@ void parse_xdt_package(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
                                                     // but this data package footer record does
                                                     // NOT belong to the data package content
                                                     // and hence should not be counted.
-                                                    *pcc = *pcc - rs;
+                                                    *pcc = j - rs;
 
                                                     // CAUTION! Do NOT decrement the package
                                                     // size, as this package footer record
@@ -647,7 +649,7 @@ void parse_xdt_package(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
                                                 *ps = *ps + *NUMBER_1_INTEGER;
 
                                                 // Increment loop variable.
-                                                *pcc = *pcc + *NUMBER_1_INTEGER;
+                                                j = j + *NUMBER_1_INTEGER;
                                             }
                                         }
 
@@ -837,7 +839,7 @@ void parse_xdt_parse_model(void* p0, void* p1, void* p2, void* p3, void* p4, voi
 }
 
 /**
- * Selects a xdt field.
+ * Selects an xdt field.
  *
  * @param p0 the destination model
  * @param p1 the destination model count
@@ -853,6 +855,11 @@ void parse_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, vo
         int* id = (int*) p5;
 
         log_message_debug("Information: Select xdt field.");
+
+/*??
+        // Test values.
+        fprintf(stderr, "Test: Select xdt field. Field identification: %i\n", *id);
+*/
 
         // The knowledge model name.
         void* n = NULL_POINTER;
@@ -893,9 +900,14 @@ void parse_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, vo
         // and does not contain any further parts.
         // Its content is therefore parsed directly.
 
-        // Add xdt field to xdt record.
-        set_compound_element_by_name(p0, p1, p2, p3, p4, p5,
-            n, nc, ns, a, ac, as, m, mc, ms, d, dc, ds);
+        // CAUTION! This check for null pointers is necessary to avoid segmentation faults!
+        if ((n != NULL_POINTER) && (nc != NULL_POINTER) && (ns != NULL_POINTER)
+            && (a != NULL_POINTER) && (ac != NULL_POINTER) && (as != NULL_POINTER)) {
+
+            // Add xdt field to xdt record.
+            set_compound_element_by_name(p0, p1, p2, p3, p4, p5,
+                n, nc, ns, a, ac, as, m, mc, ms, d, dc, ds);
+        }
 
     } else {
 
@@ -946,7 +958,14 @@ void parse_xdt_process_record(void* p0, void* p1, void* p2, void* p3, void* p4) 
                 }
 
                 // Parse xdt field (size, identification, content).
-                parse_xdt_field((void*) &fs, (void*) &fid, (void*) &fc, (void*) &fcc, (void*) &v, s, (void*) &rem);
+                parse_xdt_field((void*) &fs, (void*) &fid, (void*) &fc, (void*) &fcc, (void*) &v, (void*) &s, (void*) &rem);
+
+/*??
+                // Test values.
+                fprintf(stderr, "Test: Process xdt record. Field size fs: %i\n", fs);
+                fprintf(stderr, "Test: Process xdt record. Field identification id: %i\n", fid);
+                fprintf(stderr, "Test: Process xdt record. Field content count fcc: %i\n", fcc);
+*/
 
                 if (v == *NUMBER_1_INTEGER) {
 
@@ -957,7 +976,7 @@ void parse_xdt_process_record(void* p0, void* p1, void* p2, void* p3, void* p4) 
                     // Increment source xdt byte array index,
                     // so that following fields may be found
                     // in the next loop cycle.
-                    s = s + fs;
+//??                    s = s + fs;
                     rem = rem - fs;
 
                     parse_xdt_select_field(p0, p1, p2, fc, (void*) &fcc, (void*) &fid);
@@ -1012,6 +1031,11 @@ void parse_xdt_select_record(void* p0, void* p1, void* p2, void* p3, void* p4, v
 
         log_message_debug("Information: Select xdt record.");
 
+/*??
+        // Test values.
+        fprintf(stderr, "Test: Select xdt record. Record identification: %i\n", *id);
+*/
+
         // The knowledge model name.
         void* n = NULL_POINTER;
         void* nc = NULL_POINTER;
@@ -1031,33 +1055,49 @@ void parse_xdt_select_record(void* p0, void* p1, void* p2, void* p3, void* p4, v
 
         if (*id == *MEDICAL_PRACTICE_DATA_XDT_RECORD) {
 
+            // CAUTION! Hand over a null pointer in place of the model and model count!
+            // This is necessary because an EMPTY compound model is to be created.
+            // The given model parameters do not represent the compound's xml file name
+            // but a byte stream which gets processed further below.
             parse_xdt_parse_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
-                p3, p4,
+                NULL_POINTER, NULL_POINTER,
                 (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
                 (void*) MEDICAL_PRACTICE_DATA_XDT_RECORD_NAME, (void*) MEDICAL_PRACTICE_DATA_XDT_RECORD_NAME_COUNT);
 
         } else if (*id == *MEDICAL_TREATMENT_XDT_RECORD) {
 
+            // CAUTION! Hand over a null pointer in place of the model and model count!
+            // This is necessary because an EMPTY compound model is to be created.
+            // The given model parameters do not represent the compound's xml file name
+            // but a byte stream which gets processed further below.
             parse_xdt_parse_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
-                p3, p4,
+                NULL_POINTER, NULL_POINTER,
                 (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
                 (void*) MEDICAL_TREATMENT_XDT_RECORD_NAME, (void*) MEDICAL_TREATMENT_XDT_RECORD_NAME_COUNT);
 
         } else if (*id == *PATIENT_MASTER_DATA_XDT_RECORD) {
 
+            // CAUTION! Hand over a null pointer in place of the model and model count!
+            // This is necessary because an EMPTY compound model is to be created.
+            // The given model parameters do not represent the compound's xml file name
+            // but a byte stream which gets processed further below.
             parse_xdt_parse_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
-                p3, p4,
+                NULL_POINTER, NULL_POINTER,
                 (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
                 (void*) PATIENT_MASTER_DATA_XDT_RECORD_NAME, (void*) PATIENT_MASTER_DATA_XDT_RECORD_NAME_COUNT);
 
         } else if (*id == *MEDICAL_TREATMENT_DATA_XDT_RECORD) {
 
+            // CAUTION! Hand over a null pointer in place of the model and model count!
+            // This is necessary because an EMPTY compound model is to be created.
+            // The given model parameters do not represent the compound's xml file name
+            // but a byte stream which gets processed further below.
             parse_xdt_parse_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
-                p3, p4,
+                NULL_POINTER, NULL_POINTER,
                 (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
                 (void*) MEDICAL_TREATMENT_DATA_XDT_RECORD_NAME, (void*) MEDICAL_TREATMENT_DATA_XDT_RECORD_NAME_COUNT);
         }
@@ -1065,9 +1105,14 @@ void parse_xdt_select_record(void* p0, void* p1, void* p2, void* p3, void* p4, v
         // Process xdt record content.
         parse_xdt_process_record(m, mc, ms, p3, p4);
 
-        // Add xdt record to xdt package.
-        set_compound_element_by_name(p0, p1, p2, p3, p4, p5,
-            n, nc, ns, a, ac, as, m, mc, ms, d, dc, ds);
+        // CAUTION! This check for null pointers is necessary to avoid segmentation faults!
+        if ((n != NULL_POINTER) && (nc != NULL_POINTER) && (ns != NULL_POINTER)
+            && (a != NULL_POINTER) && (ac != NULL_POINTER) && (as != NULL_POINTER)) {
+
+            // Add xdt record to xdt package.
+            set_compound_element_by_name(p0, p1, p2, p3, p4, p5,
+                n, nc, ns, a, ac, as, m, mc, ms, d, dc, ds);
+        }
 
     } else {
 
@@ -1114,14 +1159,21 @@ void parse_xdt_process_package(void* p0, void* p1, void* p2, void* p3, void* p4)
                 }
 
                 // Parse xdt record (size, identification, content).
-                parse_xdt_record((void*) &rs, (void*) &rid, (void*) &rc, (void*) &rcc, s, (void*) &rem);
+                parse_xdt_record((void*) &rs, (void*) &rid, (void*) &rc, (void*) &rcc, (void*) &s, (void*) &rem);
+
+/*??
+                // Test values.
+                fprintf(stderr, "\nTest: Process xdt package. Record size rs: %i\n", rs);
+                fprintf(stderr, "Test: Process xdt package. Record identification id: %i\n", rid);
+                fprintf(stderr, "Test: Process xdt package. Record content count pfc: %i\n", rcc);
+*/
 
                 if (rs > *NUMBER_0_INTEGER) {
 
                     // Increment source xdt byte array index,
                     // so that following records may be found
                     // in the next loop cycle.
-                    s = s + rs;
+//??                    s = s + rs;
                     rem = rem - rs;
 
                     parse_xdt_select_record(p0, p1, p2, rc, (void*) &rcc, (void*) &rid);
@@ -1186,21 +1238,33 @@ void parse_xdt_select_package(void* p0, void* p1, void* p2, void* p3, void* p4, 
     void* ds = NULL_POINTER;
 
     // Parse package content.
+    // CAUTION! Hand over a null pointer in place of the model and model count!
+    // This is necessary because an EMPTY compound model is to be created.
+    // The given model parameters do not represent the compound's xml file name
+    // but a byte stream which gets processed further below.
     parse_xdt_parse_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
         (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
-        p6, p7,
+        NULL_POINTER, NULL_POINTER,
         (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
         (void*) STANDARD_XDT_PACKAGE_NAME, (void*) STANDARD_XDT_PACKAGE_NAME_COUNT);
     // Parse package header (meta data 1).
+    // CAUTION! Hand over a null pointer in place of the model and model count!
+    // This is necessary because an EMPTY compound model is to be created.
+    // The given model parameters do not represent the compound's xml file name
+    // but a byte stream which gets processed further below.
     parse_xdt_parse_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
         (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
-        p8, p9,
+        NULL_POINTER, NULL_POINTER,
         (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
         (void*) PACKAGE_HEADER_XDT_RECORD_NAME, (void*) PACKAGE_HEADER_XDT_RECORD_NAME_COUNT);
     // Parse package footer (meta data 2).
+    // CAUTION! Hand over a null pointer in place of the model and model count!
+    // This is necessary because an EMPTY compound model is to be created.
+    // The given model parameters do not represent the compound's xml file name
+    // but a byte stream which gets processed further below.
     parse_xdt_parse_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
         (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
-        p10, p11,
+        NULL_POINTER, NULL_POINTER,
         (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
         (void*) PACKAGE_FOOTER_XDT_RECORD_NAME, (void*) PACKAGE_FOOTER_XDT_RECORD_NAME_COUNT);
 
@@ -1211,13 +1275,18 @@ void parse_xdt_select_package(void* p0, void* p1, void* p2, void* p3, void* p4, 
     // Parse xdt package footer (meta data 2).
     parse_xdt_process_record(d, dc, ds, p10, p11);
 
-    // Add xdt package to given destination compound model.
-    set_compound_element_by_name(p0, p1, p2, p3, p4, p5,
-        n, nc, ns, a, ac, as, m, mc, ms, d, dc, ds);
+    // CAUTION! This check for null pointers is necessary to avoid segmentation faults!
+    if ((n != NULL_POINTER) && (nc != NULL_POINTER) && (ns != NULL_POINTER)
+        && (a != NULL_POINTER) && (ac != NULL_POINTER) && (as != NULL_POINTER)) {
+
+        // Add xdt package to given destination compound model.
+        set_compound_element_by_name(p0, p1, p2, p3, p4, p5,
+            n, nc, ns, a, ac, as, m, mc, ms, d, dc, ds);
+    }
 }
 
 /**
- * Parses a xdt format byte array into a compound model.
+ * Parses an xdt format byte array into a compound model.
  *
  * The "x DatenTransfer" (xDT) is the German version of
  * "Electronic Data Interchange" (EDI) for medical practices.
@@ -1406,7 +1475,7 @@ void parse_xdt(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
 }
 
 /**
- * Serialises a compound model into a xdt format byte array.
+ * Serialises a compound model into an xdt format byte array.
  *
  * @param p0 the destination xdt byte array (Hand over as reference!)
  * @param p1 the destination count

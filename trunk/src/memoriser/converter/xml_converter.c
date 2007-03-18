@@ -24,7 +24,7 @@
  * - parse an xml stream into an xml model
  * - serialise an xml model into an xml stream
  *
- * @version $Revision: 1.14 $ $Date: 2007-01-14 22:06:49 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2007-03-18 23:53:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -253,6 +253,8 @@ void parse_xml(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 // messages of the xml parser.
                 if (*sc > 0) {
 
+                    log_message_debug("Information: Parse xml.");
+
                     // The temporary null-terminated file name.
                     void* tmp = NULL_POINTER;
                     int tmps = *sc + 1;
@@ -282,7 +284,7 @@ void parse_xml(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 } else {
 
-                    log_message_debug("Could not parse xml. The file name count is null.");
+                    log_message_debug("Error: Could not parse xml. The file name count is null.");
                 }
 
                 //?? END of temporary workaround for using the libxml2 parser.
@@ -391,17 +393,17 @@ void parse_xml(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             } else {
 
-//??                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not parse xml. The destination is null.");
+                log_message_debug("Error: Could not parse xml. The destination is null.");
             }
 
         } else {
 
-//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not parse xml. The file name is null.");
+            log_message_debug("Error: Could not parse xml. The source is null.");
         }
 
     } else {
 
-//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not parse xml. The file name count is null.");
+        log_message_debug("Error: Could not parse xml. The source count is null.");
     }
 }
 
