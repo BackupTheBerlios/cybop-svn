@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.26 $ $Date: 2007-03-11 20:09:30 $ $Author: christian $
+ * @version $Revision: 1.27 $ $Date: 2007-03-27 21:52:44 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -33,6 +33,7 @@
 #include "../../globals/constants/log_constants.c"
 #include "../../globals/constants/structure_constants.c"
 #include "../../globals/logger/logger.c"
+#include "../../memoriser/converter/integer_converter.c"
 #include "../../memoriser/allocator.c"
 #include "../../memoriser/array.c"
 
@@ -152,28 +153,28 @@ void get_compound_element_name_length(void* p0, void* p1, void* p2) {
             log_message_debug("Get compound element name length.");
 
             // The part separator index.
-            int p = -1;
+            int p = *NUMBER_MINUS_1_INTEGER;
             // The meta separator index.
-            int m = -1;
+            int m = *NUMBER_MINUS_1_INTEGER;
 
             get_array_elements_index(p0, p1, (void*) COMPOUND_PART_SEPARATOR, (void*) COMPOUND_PART_SEPARATOR_COUNT, (void*) &p, (void*) CHARACTER_ARRAY);
             get_array_elements_index(p0, p1, (void*) COMPOUND_META_SEPARATOR, (void*) COMPOUND_META_SEPARATOR_COUNT, (void*) &m, (void*) CHARACTER_ARRAY);
 
-            if ((p >= 0) && (m == -1)) {
+            if ((p >= *NUMBER_0_INTEGER) && (m == *NUMBER_MINUS_1_INTEGER)) {
 
                 // The name contains one or more part separator(s).
                 // The next separator is a part separator.
                 // Its index marks the end of an element name.
                 *l = p;
 
-            } else if ((p == -1) && (m >= 0)) {
+            } else if ((p == *NUMBER_MINUS_1_INTEGER) && (m >= *NUMBER_0_INTEGER)) {
 
                 // The name contains one or more meta separator(s).
                 // The next separator is a meta separator.
                 // Its index marks the end of an element name.
                 *l = m;
 
-            } else if ((p >= 0) && (m >= 0)) {
+            } else if ((p >= *NUMBER_0_INTEGER) && (m >= *NUMBER_0_INTEGER)) {
 
                 // The name contains part- as well as meta separator(s).
 
@@ -259,9 +260,9 @@ void get_compound_element_name_and_remaining_name(void* p0, void* p1, void* p2, 
                                 // #system_properties.colour
 
                                 // The part separator index.
-                                int p = -1;
+                                int p = *NUMBER_MINUS_1_INTEGER;
                                 // The meta separator index.
-                                int m = -1;
+                                int m = *NUMBER_MINUS_1_INTEGER;
 
                                 // Get position of part separator.
                                 get_array_elements_index(p0, p1, (void*) COMPOUND_PART_SEPARATOR, (void*) COMPOUND_PART_SEPARATOR_COUNT, (void*) &p, (void*) CHARACTER_ARRAY);
@@ -270,14 +271,14 @@ void get_compound_element_name_and_remaining_name(void* p0, void* p1, void* p2, 
 
                                 // The name without prefix.
                                 void* n = NULL_POINTER;
-                                int nc = 0;
+                                int nc = *NUMBER_0_INTEGER;
 
-                                if (p == 0) {
+                                if (p == *NUMBER_0_INTEGER) {
 
                                     // The full name starts with a part separator ".".
 
                                     // Set meta hierarchy flag to zero, because this is a part element.
-                                    *f = 0;
+                                    *f = *NUMBER_0_INTEGER;
 
                                     // Get compound element name without prefix.
                                     // Example:
@@ -289,12 +290,12 @@ void get_compound_element_name_and_remaining_name(void* p0, void* p1, void* p2, 
 
 //??    fprintf(stderr, "TEST part f %i\n", *f);
 
-                                } else if (m == 0) {
+                                } else if (m == *NUMBER_0_INTEGER) {
 
                                     // The full name starts with a meta separator "#".
 
                                     // Set meta hierarchy flag to one, because this is a meta element.
-                                    *f = 1;
+                                    *f = *NUMBER_1_INTEGER;
 
                                     // Get compound element name without prefix.
                                     // Example:
@@ -307,12 +308,12 @@ void get_compound_element_name_and_remaining_name(void* p0, void* p1, void* p2, 
 //??    fprintf(stderr, "TEST meta f %i\n", *f);
                                 }
 
-                                if ((*f == 0) || (*f == 1)) {
+                                if ((*f == *NUMBER_0_INTEGER) || (*f == *NUMBER_1_INTEGER)) {
 
                                     // A part separator "." or meta separator "#" has been found.
 
                                     // The compound element name length.
-                                    int l = 0;
+                                    int l = *NUMBER_0_INTEGER;
 
                                     get_compound_element_name_length(n, (void*) &nc, (void*) &l);
 
@@ -356,7 +357,7 @@ void get_compound_element_name_and_remaining_name(void* p0, void* p1, void* p2, 
                                     // A CYBOL property name is given without
                                     // prefix and is a part element of the
                                     // corresponding CYBOL details container.
-                                    *f = 0;
+                                    *f = *NUMBER_0_INTEGER;
 
                                     // Set element name to full name.
                                     *e = p0;
@@ -422,7 +423,7 @@ void get_compound_element_name_by_index(void* p0, void* p1,
 
             int* cc = (int*) p1;
 
-            if (*i >= 0) {
+            if (*i >= *NUMBER_0_INTEGER) {
 
                 log_message_debug("Get compound element name by index.");
 
@@ -619,14 +620,14 @@ void get_compound_element_index(void* p0, void* p1, void* p2, void* p3, void* p4
                 if (*nc != NULL_POINTER) {
 
                     // The loop variable.
-                    int j = 0;
+                    int j = *NUMBER_0_INTEGER;
                     // The name.
                     void** n1 = &NULL_POINTER;
                     void** nc1 = &NULL_POINTER;
                     // The comparison result.
-                    int r = 0;
+                    int r = *NUMBER_0_INTEGER;
 
-                    while (1) {
+                    while (*NUMBER_1_INTEGER) {
 
                         if (j >= *cc) {
 
@@ -643,7 +644,7 @@ void get_compound_element_index(void* p0, void* p1, void* p2, void* p3, void* p4
 
                                 compare_arrays(p2, p3, (void*) *n1, (void*) *nc1, (void*) &r, (void*) CHARACTER_ARRAY);
 
-                                if (r == 1) {
+                                if (r == *NUMBER_1_INTEGER) {
 
                                     *i = j;
 
@@ -730,7 +731,7 @@ void set_compound_element_by_index(void* p0, void* p1, void* p2, void* p3,
 
                 int* cc = (int*) p1;
 
-                if (*i >= 0) {
+                if (*i >= *NUMBER_0_INTEGER) {
 
                     log_message_debug("Set compound element by index.");
 
@@ -789,7 +790,7 @@ void set_compound_element_by_index(void* p0, void* p1, void* p2, void* p3,
                                                                     if (*i >= *cs) {
 
                                                                         // Increase size.
-                                                                        *cs = (*cs * *COMPOUND_REALLOCATE_FACTOR) + 1;
+                                                                        *cs = (*cs * *COMPOUND_REALLOCATE_FACTOR) + *NUMBER_1_INTEGER;
 
                                                                         // Reallocate names, abstractions, models, details.
                                                                         reallocate_array(n, p1, p2, (void*) POINTER_ARRAY);
@@ -961,19 +962,19 @@ void set_compound_element_by_name(void* p0, void* p1, void* p2, void* p3, void* 
 
     // The element name.
     void* e = NULL_POINTER;
-    int ec = 0;
-    int es = 0;
+    int ec = *NUMBER_0_INTEGER;
+    int es = *NUMBER_0_INTEGER;
     // The remaining name.
     void* r = NULL_POINTER;
-    int rc = 0;
-    int rs = 0;
+    int rc = *NUMBER_0_INTEGER;
+    int rs = *NUMBER_0_INTEGER;
     // The meta hierarchy flag with the following meanings:
     // -1: not a compound knowledge hierarchy
     // 0: part hierarchy
     // 1: meta hierarchy
-    int f = -1;
+    int f = *NUMBER_MINUS_1_INTEGER;
     // The element name index.
-    int i = -1;
+    int i = *NUMBER_MINUS_1_INTEGER;
     // The compound element model.
     void** m = &NULL_POINTER;
     void** mc = &NULL_POINTER;
@@ -991,19 +992,276 @@ void set_compound_element_by_name(void* p0, void* p1, void* p2, void* p3, void* 
 //??    fprintf(stderr, "TEST rc %i\n", rc);
 //??    fprintf(stderr, "TEST f %i\n", f);
 
-    if (f == 0) {
+    if (f == *NUMBER_0_INTEGER) {
 
         // Get compound element index.
+        //
+        // CAUTION! The name is given WITHOUT prefix here!
+        // Correct example: "patient"
+        // Incorrect examples: ".patient", "#patient"
         get_compound_element_index(p0, p1, e, (void*) &ec, (void*) &i);
 
 //??    fprintf(stderr, "TEST part index %i\n", i);
 
-        if (i >= 0) {
+        if (i >= *NUMBER_0_INTEGER) {
 
             log_message_debug("Could not set compound element by name. A compound element with that name does already exist.");
 
+        } else {
+
+            // Could not get compound element index. An element with that name does not exist.
+            // Therefore, add compound element by name.
+            log_message_debug("Add compound model element by name.");
+            log_message_debug((char*) e);
+
+            // CAUTION! Use compound count as index for adding new elements.
+            // CAUTION! Do NOT use e, ec and es as name parameters!
+            // These were created only locally in this procedure and
+            // will thus be destroyed when the procedure is left.
+            // DO USE the name, name count and name size that were
+            // handed over as parameters to this procedure!
+            // They were allocated by a translator while parsing CYBOL files.
+            set_compound_element_by_index(p0, p1, p2, p1,
+                p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17);
+        }
+
+    } else if (f == *NUMBER_1_INTEGER) {
+
+        // Get compound element index.
+        //
+        // CAUTION! The name is given WITHOUT prefix here!
+        // Correct example: "patient"
+        // Incorrect examples: ".patient", "#patient"
+        get_compound_element_index(p3, p4, e, (void*) &ec, (void*) &i);
+
+//??    fprintf(stderr, "TEST meta index %i\n", i);
+
+        if (i >= *NUMBER_0_INTEGER) {
+
+            log_message_debug("Could not set compound element by name. A compound element with that name does already exist.");
+
+        } else {
+
+            // Could not get compound element index. An element with that name does not exist.
+            // Therefore, add compound element by name.
+            log_message_debug("Add compound meta element by name.");
+            log_message_debug((char*) e);
+
+            // CAUTION! Use compound count as index for adding new elements.
+            // CAUTION! Do NOT use e, ec and es as name parameters!
+            // These were created only locally in this procedure and
+            // will thus be destroyed when the procedure is left.
+            // DO USE the name, name count and name size that were
+            // handed over as parameters to this procedure!
+            // They were allocated by a translator while parsing CYBOL files.
+            set_compound_element_by_index(p3, p4, p5, p4,
+                p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17);
+        }
+
+    } else {
+
+        log_message_debug("Could not set compound element by name. The name does not represent a compound knowledge element or -hierarchy.");
+    }
+}
+
+/**
+ * Adds the compound element by name.
+ *
+ * @param p0 the compound model
+ * @param p1 the compound model count
+ * @param p2 the compound model size
+ * @param p3 the name (Hand over as reference!)
+ * @param p4 the name count (Hand over as reference!)
+ * @param p5 the name size (Hand over as reference!)
+ * @param p6 the abstraction
+ * @param p7 the abstraction count
+ * @param p8 the abstraction size
+ * @param p9 the model
+ * @param p10 the model count
+ * @param p11 the model size
+ * @param p12 the details
+ * @param p13 the details count
+ * @param p14 the details size
+ */
+void add_compound_element_by_name(void* p0, void* p1, void* p2,
+    void* p3, void* p4, void* p5, void* p6, void* p7, void* p8,
+    void* p9, void* p10, void* p11, void* p12, void* p13, void* p14) {
+
+    if (p5 != NULL_POINTER) {
+
+        int* ns = (int*) p5;
+
+        if (p4 != NULL_POINTER) {
+
+            int* nc = (int*) p4;
+
+            if (p3 != NULL_POINTER) {
+
+                void** n = (void**) p3;
+
+                log_message_debug("Information: Add compound element by name:");
+                log_message_debug((char*) *n);
+
+                // The name suffix.
+                void* s = NULL_POINTER;
+                int sc = *NUMBER_0_INTEGER;
+                int ss = *NUMBER_0_INTEGER;
+
+                // Allocate name suffix.
+                allocate_array((void*) &s, (void*) &ss, (void*) CHARACTER_ARRAY);
+
+                // Use compound count as index to create the element name suffix,
+                // because the element is added at the end of the compound container.
+                serialise_integer((void*) &s, (void*) &sc, (void*) &ss, p1, (void*) PRIMITIVE_COUNT);
+
+        fprintf(stdout, "Test: Destination character array: %s\n", s);
+        fprintf(stdout, "Test: Destination character array count: %i\n", sc);
+        fprintf(stdout, "Test: Destination character array size: %i\n", ss);
+
+        fprintf(stdout, "Test: name count: %i\n", *nc);
+        fprintf(stdout, "Test: name size: %i\n", *ns);
+
+                // Resize name.
+                if ((*nc + *LIST_SEPARATOR_COUNT + sc) >= *ns) {
+
+                    // The new name character vector size.
+                    // CAUTION! Add constant in case *nc is zero!
+                    *ns = (*nc * *CHARACTER_VECTOR_REALLOCATE_FACTOR) + *LIST_SEPARATOR_COUNT + sc;
+
+        fprintf(stdout, "Test: new name size: %i\n", *ns);
+
+                    // Reallocate name character vector.
+                    reallocate_array(p3, p4, p5, (void*) CHARACTER_ARRAY);
+                }
+
+        fprintf(stdout, "Test: new name with base: %s\n", (char*) *n);
+
+                // The element name already contains the element base name.
+
+                // Add list element separator characters "_$" to element name.
+                // Use name count as index to add the new characters.
+                set_array_elements(*n, p4, (void*) LIST_SEPARATOR, (void*) LIST_SEPARATOR_COUNT, (void*) CHARACTER_ARRAY);
+                *nc = *nc + *LIST_SEPARATOR_COUNT;
+
+        fprintf(stdout, "Test: new name with separator: %s\n", (char*) *n);
+
+                // Set new element name by adding the index determined above.
+                // Use name count as index to add the new characters.
+                set_array_elements(*n, p4, s, (void*) &sc, (void*) CHARACTER_ARRAY);
+                *nc = *nc + sc;
+
+        fprintf(stdout, "Test: new name with index: %s\n", (char*) *n);
+
+                // Deallocate name suffix.
+                deallocate_array((void*) &s, (void*) &ss, (void*) CHARACTER_ARRAY);
+
+                log_message_debug("Debug: Add compound element by name with index: ");
+                log_message_debug((char*) *n);
+
+                // CAUTION! Use compound count as index for adding new elements.
+                // CAUTION! Do NOT use e, ec and es as name parameters!
+                // These were created only locally in this procedure and
+                // will thus be destroyed when the procedure is left.
+                // DO USE the name, name count and name size that were
+                // handed over as parameters to this procedure!
+                // They were allocated by a converter while parsing a byte stream.
+                set_compound_element_by_index(p0, p1, p2, p1,
+                    p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14);
+
+            } else {
+
+                log_message_debug("Error: Could not add compound element by name. The name is null.");
+            }
+
+        } else {
+
+            log_message_debug("Error: Could not add compound element by name. The name count is null.");
+        }
+
+    } else {
+
+        log_message_debug("Error: Could not add compound element by name. The name size is null.");
+    }
+}
+
+/**
+ * Replace the compound element by name.
+ *
+ * @param p0 the compound model
+ * @param p1 the compound model count
+ * @param p2 the compound model size
+ * @param p3 the compound details
+ * @param p4 the compound details count
+ * @param p5 the compound details size
+ * @param p6 the name
+ * @param p7 the name count
+ * @param p8 the name size
+ * @param p9 the abstraction
+ * @param p10 the abstraction count
+ * @param p11 the abstraction size
+ * @param p12 the model
+ * @param p13 the model count
+ * @param p14 the model size
+ * @param p15 the details
+ * @param p16 the details count
+ * @param p17 the details size
+ */
+void replace_compound_element_by_name(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
+    void* p6, void* p7, void* p8, void* p9, void* p10, void* p11,
+    void* p12, void* p13, void* p14, void* p15, void* p16, void* p17) {
+
+    log_message_debug("Replace compound element by name.");
+    log_message_debug((char*) p6);
+
+    // The element name.
+    void* e = NULL_POINTER;
+    int ec = *NUMBER_0_INTEGER;
+    int es = *NUMBER_0_INTEGER;
+    // The remaining name.
+    void* r = NULL_POINTER;
+    int rc = *NUMBER_0_INTEGER;
+    int rs = *NUMBER_0_INTEGER;
+    // The meta hierarchy flag with the following meanings:
+    // -1: not a compound knowledge hierarchy
+    // 0: part hierarchy
+    // 1: meta hierarchy
+    int f = *NUMBER_MINUS_1_INTEGER;
+    // The element name index.
+    int i = *NUMBER_MINUS_1_INTEGER;
+    // The compound element model.
+    void** m = &NULL_POINTER;
+    void** mc = &NULL_POINTER;
+    void** ms = &NULL_POINTER;
+    // The compound element details.
+    void** d = &NULL_POINTER;
+    void** dc = &NULL_POINTER;
+    void** ds = &NULL_POINTER;
+
+    // Get compound element name and remaining name,
+    // as well as the flag indicating a part- or meta element.
+    get_compound_element_name_and_remaining_name(p6, p7, (void*) &e, (void*) &ec, (void*) &r, (void*) &rc, (void*) &f);
+
+//??    fprintf(stderr, "TEST r %s\n", (char*) r);
+//??    fprintf(stderr, "TEST rc %i\n", rc);
+//??    fprintf(stderr, "TEST f %i\n", f);
+
+    if (f == *NUMBER_0_INTEGER) {
+
+        // Get compound element index.
+        //
+        // CAUTION! The name is given WITHOUT prefix here!
+        // Correct example: "patient"
+        // Incorrect examples: ".patient", "#patient"
+        get_compound_element_index(p0, p1, e, (void*) &ec, (void*) &i);
+
+//??    fprintf(stderr, "TEST part index %i\n", i);
+
+        if (i >= *NUMBER_0_INTEGER) {
+
+            log_message_debug("Could not replace compound element by name. A compound element with that name does already exist.");
+
 /*??
-            if (rc > 0) {
+            if (rc > *NUMBER_0_INTEGER) {
 
                 // A remaining name exists.
                 // The compound element hierarchy is processed further.
@@ -1040,7 +1298,7 @@ void set_compound_element_by_name(void* p0, void* p1, void* p2, void* p3, void* 
 
             // Could not get compound element index. An element with that name does not exist.
             // Therefore, add compound element by name.
-            log_message_debug("Add compound element element by name.");
+            log_message_debug("Add compound model element by name.");
             log_message_debug((char*) e);
 
             // CAUTION! Use compound count as index for adding new elements.
@@ -1054,19 +1312,23 @@ void set_compound_element_by_name(void* p0, void* p1, void* p2, void* p3, void* 
                 p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17);
         }
 
-    } else if (f == 1) {
+    } else if (f == *NUMBER_1_INTEGER) {
 
         // Get compound element index.
+        //
+        // CAUTION! The name is given WITHOUT prefix here!
+        // Correct example: "patient"
+        // Incorrect examples: ".patient", "#patient"
         get_compound_element_index(p3, p4, e, (void*) &ec, (void*) &i);
 
 //??    fprintf(stderr, "TEST meta index %i\n", i);
 
-        if (i >= 0) {
+        if (i >= *NUMBER_0_INTEGER) {
 
-            log_message_debug("Could not set compound element by name. A compound element with that name does already exist.");
+            log_message_debug("Could not replace compound element by name. A compound element with that name does already exist.");
 
 /*??
-            if (rc > 0) {
+            if (rc > *NUMBER_0_INTEGER) {
 
                 // A remaining name exists.
                 // The compound element hierarchy is processed further.
@@ -1119,7 +1381,7 @@ void set_compound_element_by_name(void* p0, void* p1, void* p2, void* p3, void* 
 
     } else {
 
-        log_message_debug("Could not set compound element by name. The name does not represent a compound knowledge element or -hierarchy.");
+        log_message_debug("Could not replace compound element by name. The name does not represent a compound knowledge element or -hierarchy.");
     }
 }
 
@@ -1149,7 +1411,7 @@ void remove_compound_element_by_index(void* p0, void* p1, void* p2, void* p3) {
 
                 int* cc = (int*) p1;
 
-                if (*i >= 0) {
+                if (*i >= *NUMBER_0_INTEGER) {
 
                     log_message_debug("Remove compound element by index.");
 
@@ -1329,9 +1591,9 @@ void reindex_compound_elements_forming_list(void* p0, void* p1, void* p2, int* p
         log_message_debug("Reindex compound elements representing a list.");
 
         // The compound counter.
-        int cc = 0;
+        int cc = *NUMBER_0_INTEGER;
         // The index counter.
-        int ic = 0;
+        int ic = *NUMBER_0_INTEGER;
 
         // The compund part name.
         void** n = &NULL_POINTER;
@@ -1351,15 +1613,15 @@ void reindex_compound_elements_forming_list(void* p0, void* p1, void* p2, int* p
 
         //create integer model for the index
         void* indexstr = NULL_POINTER;
-        int indexstr_count = 0;
-        int indexstr_size = 10;
+        int indexstr_count = *NUMBER_0_INTEGER;
+        int indexstr_size = *NUMBER_10_INTEGER;
 
         allocate_array((void*) &indexstr, (void*) &indexstr_size, (void*) CHARACTER_ARRAY);
 
         // The comparison result.
-        int r = 0;
+        int r = *NUMBER_0_INTEGER;
 
-        while (1) {
+        while (*NUMBER_1_INTEGER) {
 
             if (cc >= *((int*) p1)) {
 
@@ -1373,16 +1635,16 @@ void reindex_compound_elements_forming_list(void* p0, void* p1, void* p2, int* p
                 if (*((int*) *nc) > pc) {
 
                     // Reset comparison result.
-                    r = 0;
+                    r = *NUMBER_0_INTEGER;
 
                     compare_arrays(p, &pc, *n, &pc, &r, CHARACTER_ARRAY);
 
-                    if (r == 1) {
+                    if (r == *NUMBER_1_INTEGER) {
 
                         // The beginning of the two arrays are identical.
                         // The compound element belongs to the list.
 
-                        *((int*) *nc) = 0;
+                        *((int*) *nc) = *NUMBER_0_INTEGER;
 
                         //parse the basisname
                         parse(n, *nc, *ns, NULL_POINTER, NULL_POINTER, NULL_POINTER, p2, p3, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
@@ -1394,7 +1656,7 @@ void reindex_compound_elements_forming_list(void* p0, void* p1, void* p2, int* p
                         indexstr_count = snprintf(indexstr, indexstr_size, "%i", ic);
                         parse(n, *nc, *ns, NULL_POINTER, NULL_POINTER, NULL_POINTER, indexstr, &indexstr_count, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
-                        ic = ic + 1;
+                        ic = ic + *NUMBER_1_INTEGER;
                     }
                 }
             }
@@ -1428,17 +1690,17 @@ void remove_compound_element_by_name(void* p0, void* p1, void* p2, void* p3, voi
 
     // The element name.
     void* e = NULL_POINTER;
-    int ec = 0;
+    int ec = *NUMBER_0_INTEGER;
     // The remaining name.
     void* r = NULL_POINTER;
-    int rc = 0;
+    int rc = *NUMBER_0_INTEGER;
     // The meta hierarchy flag with the following meanings:
     // -1: not a compound knowledge hierarchy
     // 0: part hierarchy
     // 1: meta hierarchy
-    int f = -1;
+    int f = *NUMBER_MINUS_1_INTEGER;
     // The element name index.
-    int i = -1;
+    int i = *NUMBER_MINUS_1_INTEGER;
     // The compound element model.
     void** m = &NULL_POINTER;
     void** mc = &NULL_POINTER;
@@ -1456,16 +1718,20 @@ void remove_compound_element_by_name(void* p0, void* p1, void* p2, void* p3, voi
 //??    fprintf(stderr, "TEST rc %i\n", rc);
 //??    fprintf(stderr, "TEST f %i\n", f);
 
-    if (f == 0) {
+    if (f == *NUMBER_0_INTEGER) {
 
         // Get compound element index.
+        //
+        // CAUTION! The name is given WITHOUT prefix here!
+        // Correct example: "patient"
+        // Incorrect examples: ".patient", "#patient"
         get_compound_element_index(p0, p1, e, (void*) &ec, (void*) &i);
 
 //??    fprintf(stderr, "TEST part index %i\n", i);
 
-        if (i >= 0) {
+        if (i >= *NUMBER_0_INTEGER) {
 
-            if (rc > 0) {
+            if (rc > *NUMBER_0_INTEGER) {
 
                 // A remaining name exists.
                 // The compound element hierarchy is processed further.
@@ -1489,13 +1755,13 @@ void remove_compound_element_by_name(void* p0, void* p1, void* p2, void* p3, voi
                 // The given compound contains elements which are primitive models.
 
                 // The list element separator.
-                int s = -1;
+                int s = *NUMBER_MINUS_1_INTEGER;
 
                 get_index_in_array(p6, p7, LIST_SEPARATOR, LIST_SEPARATOR_COUNT, &s, CHARACTER_ARRAY);
 
                 remove_compound_element_by_index(p0, p1, p2, (void*) &i);
 
-                if (s > 0) {
+                if (s > *NUMBER_0_INTEGER) {
 
                     // If element is part of a list, reindex list after element removal.
                     reindex_compound_elements_forming_list(p0, p1, p6, &s);
@@ -1507,16 +1773,20 @@ void remove_compound_element_by_name(void* p0, void* p1, void* p2, void* p3, voi
             log_message_debug("Could not remove compound element by name. An element with that name does not exist.");
         }
 
-    } else if (f == 1) {
+    } else if (f == *NUMBER_1_INTEGER) {
 
         // Get compound element index.
+        //
+        // CAUTION! The name is given WITHOUT prefix here!
+        // Correct example: "patient"
+        // Incorrect examples: ".patient", "#patient"
         get_compound_element_index(p3, p4, e, (void*) &ec, (void*) &i);
 
 //??    fprintf(stderr, "TEST meta index %i\n", i);
 
-        if (i >= 0) {
+        if (i >= *NUMBER_0_INTEGER) {
 
-            if (rc > 0) {
+            if (rc > *NUMBER_0_INTEGER) {
 
                 // A remaining name exists.
                 // The compound element hierarchy is processed further.
@@ -1540,13 +1810,13 @@ void remove_compound_element_by_name(void* p0, void* p1, void* p2, void* p3, voi
                 // The given compound contains elements which are primitive models.
 
                 // The list element separator.
-                int s = -1;
+                int s = *NUMBER_MINUS_1_INTEGER;
 
                 get_index_in_array(p6, p7, LIST_SEPARATOR, LIST_SEPARATOR_COUNT, &s, CHARACTER_ARRAY);
 
                 remove_compound_element_by_index(p3, p4, p5, (void*) &i);
 
-                if (s > 0) {
+                if (s > *NUMBER_0_INTEGER) {
 
                     // If element is part of a list, reindex list after element removal.
                     reindex_compound_elements_forming_list(p3, p4, p6, &s);
@@ -1595,7 +1865,7 @@ void get_compound_element_by_index(void* p0, void* p1, void* p2,
 
             int* cc = (int*) p1;
 
-            if (*i >= 0) {
+            if (*i >= *NUMBER_0_INTEGER) {
 
                 log_message_debug("Get compound element by index.");
 
@@ -1746,17 +2016,17 @@ void get_compound_element_by_name(void* p0, void* p1, void* p2, void* p3,
 
     // The element name.
     void* e = NULL_POINTER;
-    int ec = 0;
+    int ec = *NUMBER_0_INTEGER;
     // The remaining name.
     void* r = NULL_POINTER;
-    int rc = 0;
+    int rc = *NUMBER_0_INTEGER;
     // The meta hierarchy flag with the following meanings:
     // -1: not a compound knowledge hierarchy
     // 0: part hierarchy
     // 1: meta hierarchy
-    int f = -1;
+    int f = *NUMBER_MINUS_1_INTEGER;
     // The element name index.
-    int i = -1;
+    int i = *NUMBER_MINUS_1_INTEGER;
     // The compound element model.
     void** m = &NULL_POINTER;
     void** mc = &NULL_POINTER;
@@ -1774,16 +2044,20 @@ void get_compound_element_by_name(void* p0, void* p1, void* p2, void* p3,
 //??    fprintf(stderr, "TEST rc %i\n", rc);
 //??    fprintf(stderr, "TEST f %i\n", f);
 
-    if (f == 0) {
+    if (f == *NUMBER_0_INTEGER) {
 
         // Get compound element index.
+        //
+        // CAUTION! The name is given WITHOUT prefix here!
+        // Correct example: "patient"
+        // Incorrect examples: ".patient", "#patient"
         get_compound_element_index(p0, p1, e, (void*) &ec, (void*) &i);
 
 //??    fprintf(stderr, "TEST part index %i\n", i);
 
-        if (i >= 0) {
+        if (i >= *NUMBER_0_INTEGER) {
 
-            if (rc > 0) {
+            if (rc > *NUMBER_0_INTEGER) {
 
                 // A remaining name exists.
                 // The compound element hierarchy is processed further.
@@ -1813,16 +2087,20 @@ void get_compound_element_by_name(void* p0, void* p1, void* p2, void* p3,
             log_message_debug("Could not get compound element by name. A part element with that name does not exist.");
         }
 
-    } else if (f == 1) {
+    } else if (f == *NUMBER_1_INTEGER) {
 
         // Get compound element index.
+        //
+        // CAUTION! The name is given WITHOUT prefix here!
+        // Correct example: "patient"
+        // Incorrect examples: ".patient", "#patient"
         get_compound_element_index(p2, p3, e, (void*) &ec, (void*) &i);
 
 //??    fprintf(stderr, "TEST meta index %i\n", i);
 
-        if (i >= 0) {
+        if (i >= *NUMBER_0_INTEGER) {
 
-            if (rc > 0) {
+            if (rc > *NUMBER_0_INTEGER) {
 
                 // A remaining name exists.
                 // The compound element hierarchy is processed further.
@@ -1922,7 +2200,7 @@ void get_universal_compound_element_by_name(void* p0, void* p1, void* p2, void* 
         (void*) &d, (void*) &dc, (void*) &ds);
 
     // The comparison result.
-    int r = 0;
+    int r = *NUMBER_0_INTEGER;
 
     //
     // The following comparisons do, in this order, get a part as:
@@ -1931,11 +2209,11 @@ void get_universal_compound_element_by_name(void* p0, void* p1, void* p2, void* 
     // - direct model
     //
 
-    if (r == 0) {
+    if (r == *NUMBER_0_INTEGER) {
 
         compare_arrays(*a, *ac, (void*) ENCAPSULATED_KNOWLEDGE_ABSTRACTION, (void*) ENCAPSULATED_KNOWLEDGE_ABSTRACTION_COUNT, &r, (void*) CHARACTER_ARRAY);
 
-        if (r != 0) {
+        if (r != *NUMBER_0_INTEGER) {
 
             log_message_debug("Get universal compound element as encapsulated knowledge.");
 
@@ -1965,11 +2243,11 @@ void get_universal_compound_element_by_name(void* p0, void* p1, void* p2, void* 
         }
     }
 
-    if (r == 0) {
+    if (r == *NUMBER_0_INTEGER) {
 
         compare_arrays(*a, *ac, (void*) KNOWLEDGE_ABSTRACTION, (void*) KNOWLEDGE_ABSTRACTION_COUNT, &r, (void*) CHARACTER_ARRAY);
 
-        if (r != 0) {
+        if (r != *NUMBER_0_INTEGER) {
 
             log_message_debug("Get universal compound element as knowledge.");
 
@@ -1991,7 +2269,7 @@ void get_universal_compound_element_by_name(void* p0, void* p1, void* p2, void* 
         }
     }
 
-    if (r == 0) {
+    if (r == *NUMBER_0_INTEGER) {
 
         log_message_debug("Get universal compound element as inline.");
 

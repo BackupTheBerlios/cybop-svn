@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2007-03-18 23:53:40 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2007-03-27 21:52:45 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -549,7 +549,7 @@ void parse_xdt_package(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
 
                                             // Parse xdt record (size, identification, content).
                                             //
-                                            // CAUTION! The package footer and -footer count are
+                                            // CAUTION! The package header and -footer count are
                                             // handed over as parameters to get the record content.
                                             // A local variable defined in this function may NOT
                                             // be used as its value is lost when returning from
@@ -905,8 +905,36 @@ void parse_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, vo
             && (a != NULL_POINTER) && (ac != NULL_POINTER) && (as != NULL_POINTER)) {
 
             // Add xdt field to xdt record.
-            set_compound_element_by_name(p0, p1, p2, p3, p4, p5,
-                n, nc, ns, a, ac, as, m, mc, ms, d, dc, ds);
+            add_compound_element_by_name(p0, p1, p2,
+                (void*) &n, nc, ns, a, ac, as, m, mc, ms, d, dc, ds);
+
+        } else {
+
+            // Destroy all arrays, since they were not added to the compound.
+            // CAUTION! If this was not done here, they would never be deallocated!
+            // CAUTION! Use DESCENDING order, as opposed to array allocation!
+
+            // Deallocate knowledge model details.
+            deallocate((void*) &d, ds, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
+            deallocate((void*) &dc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+            deallocate((void*) &ds, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+
+            // Deallocate knowledge model model.
+            deallocate((void*) &m, ms, a, ac);
+            deallocate((void*) &mc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+            deallocate((void*) &ms, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+
+            // Deallocate knowledge model abstraction.
+            deallocate((void*) &a, as, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+            deallocate((void*) &ac, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+            deallocate((void*) &as, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+
+            // A knowledge model channel was not allocated.
+
+            // Deallocate knowledge model name.
+            deallocate((void*) &n, ns, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+            deallocate((void*) &nc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+            deallocate((void*) &ns, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
         }
 
     } else {
@@ -1053,7 +1081,33 @@ void parse_xdt_select_record(void* p0, void* p1, void* p2, void* p3, void* p4, v
         void* dc = NULL_POINTER;
         void* ds = NULL_POINTER;
 
-        if (*id == *MEDICAL_PRACTICE_DATA_XDT_RECORD) {
+        if (*id == *DATA_PACKAGE_HEADER_XDT_RECORD) {
+
+            // Parse package header (meta data 1).
+            // CAUTION! Hand over a null pointer in place of the model and model count!
+            // This is necessary because an EMPTY compound model is to be created.
+            // The given model parameters do not represent the compound's xml file name
+            // but a byte stream which gets processed further below.
+            parse_xdt_parse_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
+                (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
+                NULL_POINTER, NULL_POINTER,
+                (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
+                (void*) PACKAGE_HEADER_XDT_RECORD_NAME, (void*) PACKAGE_HEADER_XDT_RECORD_NAME_COUNT);
+
+        } else if (*id == *DATA_PACKAGE_FOOTER_XDT_RECORD) {
+
+            // Parse package footer (meta data 2).
+            // CAUTION! Hand over a null pointer in place of the model and model count!
+            // This is necessary because an EMPTY compound model is to be created.
+            // The given model parameters do not represent the compound's xml file name
+            // but a byte stream which gets processed further below.
+            parse_xdt_parse_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
+                (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
+                NULL_POINTER, NULL_POINTER,
+                (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
+                (void*) PACKAGE_FOOTER_XDT_RECORD_NAME, (void*) PACKAGE_FOOTER_XDT_RECORD_NAME_COUNT);
+
+        } else if (*id == *MEDICAL_PRACTICE_DATA_XDT_RECORD) {
 
             // CAUTION! Hand over a null pointer in place of the model and model count!
             // This is necessary because an EMPTY compound model is to be created.
@@ -1110,8 +1164,36 @@ void parse_xdt_select_record(void* p0, void* p1, void* p2, void* p3, void* p4, v
             && (a != NULL_POINTER) && (ac != NULL_POINTER) && (as != NULL_POINTER)) {
 
             // Add xdt record to xdt package.
-            set_compound_element_by_name(p0, p1, p2, p3, p4, p5,
-                n, nc, ns, a, ac, as, m, mc, ms, d, dc, ds);
+            add_compound_element_by_name(p0, p1, p2,
+                (void*) &n, nc, ns, a, ac, as, m, mc, ms, d, dc, ds);
+
+        } else {
+
+            // Destroy all arrays, since they were not added to the compound.
+            // CAUTION! If this was not done here, they would never be deallocated!
+            // CAUTION! Use DESCENDING order, as opposed to array allocation!
+
+            // Deallocate knowledge model details.
+            deallocate((void*) &d, ds, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
+            deallocate((void*) &dc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+            deallocate((void*) &ds, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+
+            // Deallocate knowledge model model.
+            deallocate((void*) &m, ms, a, ac);
+            deallocate((void*) &mc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+            deallocate((void*) &ms, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+
+            // Deallocate knowledge model abstraction.
+            deallocate((void*) &a, as, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+            deallocate((void*) &ac, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+            deallocate((void*) &as, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+
+            // A knowledge model channel was not allocated.
+
+            // Deallocate knowledge model name.
+            deallocate((void*) &n, ns, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+            deallocate((void*) &nc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+            deallocate((void*) &ns, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
         }
 
     } else {
@@ -1247,41 +1329,49 @@ void parse_xdt_select_package(void* p0, void* p1, void* p2, void* p3, void* p4, 
         NULL_POINTER, NULL_POINTER,
         (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
         (void*) STANDARD_XDT_PACKAGE_NAME, (void*) STANDARD_XDT_PACKAGE_NAME_COUNT);
-    // Parse package header (meta data 1).
-    // CAUTION! Hand over a null pointer in place of the model and model count!
-    // This is necessary because an EMPTY compound model is to be created.
-    // The given model parameters do not represent the compound's xml file name
-    // but a byte stream which gets processed further below.
-    parse_xdt_parse_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
-        (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
-        NULL_POINTER, NULL_POINTER,
-        (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
-        (void*) PACKAGE_HEADER_XDT_RECORD_NAME, (void*) PACKAGE_HEADER_XDT_RECORD_NAME_COUNT);
-    // Parse package footer (meta data 2).
-    // CAUTION! Hand over a null pointer in place of the model and model count!
-    // This is necessary because an EMPTY compound model is to be created.
-    // The given model parameters do not represent the compound's xml file name
-    // but a byte stream which gets processed further below.
-    parse_xdt_parse_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
-        (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
-        NULL_POINTER, NULL_POINTER,
-        (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
-        (void*) PACKAGE_FOOTER_XDT_RECORD_NAME, (void*) PACKAGE_FOOTER_XDT_RECORD_NAME_COUNT);
 
     // Process xdt package content.
     parse_xdt_process_package(m, mc, ms, p6, p7);
     // Parse xdt package header (meta data 1).
-    parse_xdt_process_record(d, dc, ds, p8, p9);
+    parse_xdt_select_record(d, dc, ds, p8, p9, (void*) DATA_PACKAGE_HEADER_XDT_RECORD);
     // Parse xdt package footer (meta data 2).
-    parse_xdt_process_record(d, dc, ds, p10, p11);
+    parse_xdt_select_record(d, dc, ds, p10, p11, (void*) DATA_PACKAGE_FOOTER_XDT_RECORD);
 
     // CAUTION! This check for null pointers is necessary to avoid segmentation faults!
     if ((n != NULL_POINTER) && (nc != NULL_POINTER) && (ns != NULL_POINTER)
         && (a != NULL_POINTER) && (ac != NULL_POINTER) && (as != NULL_POINTER)) {
 
         // Add xdt package to given destination compound model.
-        set_compound_element_by_name(p0, p1, p2, p3, p4, p5,
-            n, nc, ns, a, ac, as, m, mc, ms, d, dc, ds);
+        add_compound_element_by_name(p0, p1, p2,
+            (void*) &n, nc, ns, a, ac, as, m, mc, ms, d, dc, ds);
+
+    } else {
+
+        // Destroy all arrays, since they were not added to the compound.
+        // CAUTION! If this was not done here, they would never be deallocated!
+        // CAUTION! Use DESCENDING order, as opposed to array allocation!
+
+        // Deallocate knowledge model details.
+        deallocate((void*) &d, ds, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
+        deallocate((void*) &dc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        deallocate((void*) &ds, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+
+        // Deallocate knowledge model model.
+        deallocate((void*) &m, ms, a, ac);
+        deallocate((void*) &mc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        deallocate((void*) &ms, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+
+        // Deallocate knowledge model abstraction.
+        deallocate((void*) &a, as, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+        deallocate((void*) &ac, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        deallocate((void*) &as, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+
+        // A knowledge model channel was not allocated.
+
+        // Deallocate knowledge model name.
+        deallocate((void*) &n, ns, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+        deallocate((void*) &nc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        deallocate((void*) &ns, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
     }
 }
 

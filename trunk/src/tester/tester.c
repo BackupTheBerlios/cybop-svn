@@ -24,7 +24,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.30 $ $Date: 2007-03-11 20:09:30 $ $Author: christian $
+ * @version $Revision: 1.31 $ $Date: 2007-03-27 21:52:45 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -53,6 +53,7 @@
 #include "../memoriser/allocator.c"
 #include "../memoriser/array.c"
 #include "../memoriser/converter.c"
+#include "../memoriser/converter/integer_converter.c"
 
 /**
  * Tests the inline assembler code.
@@ -544,9 +545,9 @@ void test_integer_to_wide_character_conversion() {
 
     // The test wide character array.
     void* t = NULL_POINTER;
-    int tc = 0;
+    int tc = *NUMBER_0_INTEGER;
     // One byte for the wide character and another for the trailing null.
-    size_t ts = 2;
+    size_t ts = *NUMBER_2_INTEGER;
 
     // Allocate test wide character array.
     allocate((void*) &t, (void*) &ts, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
@@ -558,10 +559,10 @@ void test_integer_to_wide_character_conversion() {
     // If not all output fits into the provided buffer,
     // a negative value is returned.
 #ifdef CYGWIN_ENVIRONMENT
-    tc = wsprintfW((wchar_t*) t, L"%i", 2);
+    tc = wsprintfW((wchar_t*) t, L"%i", *NUMBER_2_INTEGER);
 /* CYGWIN_ENVIRONMENT */
 #else
-    tc = swprintf((wchar_t*) t, ts, L"%i", 2);
+    tc = swprintf((wchar_t*) t, ts, L"%i", *NUMBER_2_INTEGER);
 /* CYGWIN_ENVIRONMENT */
 #endif
 
@@ -984,6 +985,36 @@ void test_integer_parser() {
 }
 
 /**
+ * Tests the "serialise_integer" function.
+ */
+void test_serialise_integer() {
+
+    fputs("Test serialise integer:\n", stdout);
+
+    // The destination character array.
+    char* d = NULL_POINTER;
+    int dc = *NUMBER_0_INTEGER;
+    int ds = *NUMBER_0_INTEGER;
+
+    // An arbitrary source integer value.
+    int s = *NUMBER_18_INTEGER;
+
+    // Allocate destination character array.
+    allocate_array((void*) &d, (void*) &ds, (void*) CHARACTER_ARRAY);
+
+    // Use compound count as index to create the element name suffix,
+    // because the element is added at the end of the compound container.
+    serialise_integer((void*) &d, (void*) &dc, (void*) &ds, (void*) &s, (void*) PRIMITIVE_COUNT);
+
+    fprintf(stdout, "Test: Destination character array: %s\n", d);
+    fprintf(stdout, "Test: Destination character array count: %i\n", dc);
+    fprintf(stdout, "Test: Destination character array size: %i\n", ds);
+
+    // Deallocate destination character array.
+    deallocate_array((void*) &d, (void*) &ds, (void*) CHARACTER_ARRAY);
+}
+
+/**
  * Tests the knowledge memory.
  *
  * The knowledge memory is the root of a compound (tree).
@@ -1181,7 +1212,7 @@ void test() {
 //??    test_stdout_stderr();
 //??    test_type_sizes();
 //??    test_pointer_addition();
-    test_integer_array();
+//??    test_integer_array();
 //??    test_character_array_with_termination();
 //??    test_array_resizing();
 //??    test_wide_character_output();
@@ -1196,6 +1227,7 @@ void test() {
 //??    test_file_write();
 //??    test_console();
 //??    test_integer_parser();
+    test_serialise_integer();
 //??    test_knowledge_memory(k, kc, 5);
 }
 
