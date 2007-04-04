@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.27 $ $Date: 2007-03-27 21:52:44 $ $Author: christian $
+ * @version $Revision: 1.28 $ $Date: 2007-04-04 22:06:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -934,133 +934,54 @@ void set_compound_element_by_index(void* p0, void* p1, void* p2, void* p3,
 /**
  * Sets the compound element by name.
  *
- * @param p0 the compound model
- * @param p1 the compound model count
- * @param p2 the compound model size
- * @param p3 the compound details
- * @param p4 the compound details count
- * @param p5 the compound details size
- * @param p6 the name
- * @param p7 the name count
- * @param p8 the name size
- * @param p9 the abstraction
- * @param p10 the abstraction count
- * @param p11 the abstraction size
- * @param p12 the model
- * @param p13 the model count
- * @param p14 the model size
- * @param p15 the details
- * @param p16 the details count
- * @param p17 the details size
+ * @param p0 the compound
+ * @param p1 the compound count
+ * @param p2 the compound size
+ * @param p3 the name
+ * @param p4 the name count
+ * @param p5 the name size
+ * @param p6 the abstraction
+ * @param p7 the abstraction count
+ * @param p8 the abstraction size
+ * @param p9 the model
+ * @param p10 the model count
+ * @param p11 the model size
+ * @param p12 the details
+ * @param p13 the details count
+ * @param p14 the details size
  */
-void set_compound_element_by_name(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
-    void* p6, void* p7, void* p8, void* p9, void* p10, void* p11,
-    void* p12, void* p13, void* p14, void* p15, void* p16, void* p17) {
+void set_compound_element_by_name(void* p0, void* p1, void* p2,
+    void* p3, void* p4, void* p5, void* p6, void* p7, void* p8,
+    void* p9, void* p10, void* p11, void* p12, void* p13, void* p14) {
 
     log_message_debug("Set compound element by name.");
-    log_message_debug((char*) p6);
+    log_message_debug((char*) p3);
 
-    // The element name.
-    void* e = NULL_POINTER;
-    int ec = *NUMBER_0_INTEGER;
-    int es = *NUMBER_0_INTEGER;
-    // The remaining name.
-    void* r = NULL_POINTER;
-    int rc = *NUMBER_0_INTEGER;
-    int rs = *NUMBER_0_INTEGER;
-    // The meta hierarchy flag with the following meanings:
-    // -1: not a compound knowledge hierarchy
-    // 0: part hierarchy
-    // 1: meta hierarchy
-    int f = *NUMBER_MINUS_1_INTEGER;
     // The element name index.
     int i = *NUMBER_MINUS_1_INTEGER;
-    // The compound element model.
-    void** m = &NULL_POINTER;
-    void** mc = &NULL_POINTER;
-    void** ms = &NULL_POINTER;
-    // The compound element details.
-    void** d = &NULL_POINTER;
-    void** dc = &NULL_POINTER;
-    void** ds = &NULL_POINTER;
 
-    // Get compound element name and remaining name,
-    // as well as the flag indicating a part- or meta element.
-    get_compound_element_name_and_remaining_name(p6, p7, (void*) &e, (void*) &ec, (void*) &r, (void*) &rc, (void*) &f);
+    // Get compound element index.
+    //
+    // CAUTION! The name is given WITHOUT prefix here!
+    // Correct example: "patient"
+    // Incorrect examples: ".patient", "#patient"
+    get_compound_element_index(p0, p1, p3, p4, (void*) &i);
 
-//??    fprintf(stderr, "TEST r %s\n", (char*) r);
-//??    fprintf(stderr, "TEST rc %i\n", rc);
-//??    fprintf(stderr, "TEST f %i\n", f);
+//??    fprintf(stderr, "TEST element index %i\n", i);
 
-    if (f == *NUMBER_0_INTEGER) {
+    if (i >= *NUMBER_0_INTEGER) {
 
-        // Get compound element index.
-        //
-        // CAUTION! The name is given WITHOUT prefix here!
-        // Correct example: "patient"
-        // Incorrect examples: ".patient", "#patient"
-        get_compound_element_index(p0, p1, e, (void*) &ec, (void*) &i);
-
-//??    fprintf(stderr, "TEST part index %i\n", i);
-
-        if (i >= *NUMBER_0_INTEGER) {
-
-            log_message_debug("Could not set compound element by name. A compound element with that name does already exist.");
-
-        } else {
-
-            // Could not get compound element index. An element with that name does not exist.
-            // Therefore, add compound element by name.
-            log_message_debug("Add compound model element by name.");
-            log_message_debug((char*) e);
-
-            // CAUTION! Use compound count as index for adding new elements.
-            // CAUTION! Do NOT use e, ec and es as name parameters!
-            // These were created only locally in this procedure and
-            // will thus be destroyed when the procedure is left.
-            // DO USE the name, name count and name size that were
-            // handed over as parameters to this procedure!
-            // They were allocated by a translator while parsing CYBOL files.
-            set_compound_element_by_index(p0, p1, p2, p1,
-                p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17);
-        }
-
-    } else if (f == *NUMBER_1_INTEGER) {
-
-        // Get compound element index.
-        //
-        // CAUTION! The name is given WITHOUT prefix here!
-        // Correct example: "patient"
-        // Incorrect examples: ".patient", "#patient"
-        get_compound_element_index(p3, p4, e, (void*) &ec, (void*) &i);
-
-//??    fprintf(stderr, "TEST meta index %i\n", i);
-
-        if (i >= *NUMBER_0_INTEGER) {
-
-            log_message_debug("Could not set compound element by name. A compound element with that name does already exist.");
-
-        } else {
-
-            // Could not get compound element index. An element with that name does not exist.
-            // Therefore, add compound element by name.
-            log_message_debug("Add compound meta element by name.");
-            log_message_debug((char*) e);
-
-            // CAUTION! Use compound count as index for adding new elements.
-            // CAUTION! Do NOT use e, ec and es as name parameters!
-            // These were created only locally in this procedure and
-            // will thus be destroyed when the procedure is left.
-            // DO USE the name, name count and name size that were
-            // handed over as parameters to this procedure!
-            // They were allocated by a translator while parsing CYBOL files.
-            set_compound_element_by_index(p3, p4, p5, p4,
-                p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17);
-        }
+        log_message_debug("Could not set compound element by name. A compound element with that name does already exist.");
 
     } else {
 
-        log_message_debug("Could not set compound element by name. The name does not represent a compound knowledge element or -hierarchy.");
+        // Could not get compound element index.
+        // An element with that name does not exist.
+        // Therefore, add compound element by name here.
+
+        // CAUTION! Use compound count as index for adding new elements.
+        set_compound_element_by_index(p0, p1, p2, p1,
+            p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14);
     }
 }
 
@@ -1114,13 +1035,6 @@ void add_compound_element_by_name(void* p0, void* p1, void* p2,
                 // because the element is added at the end of the compound container.
                 serialise_integer((void*) &s, (void*) &sc, (void*) &ss, p1, (void*) PRIMITIVE_COUNT);
 
-        fprintf(stdout, "Test: Destination character array: %s\n", s);
-        fprintf(stdout, "Test: Destination character array count: %i\n", sc);
-        fprintf(stdout, "Test: Destination character array size: %i\n", ss);
-
-        fprintf(stdout, "Test: name count: %i\n", *nc);
-        fprintf(stdout, "Test: name size: %i\n", *ns);
-
                 // Resize name.
                 if ((*nc + *LIST_SEPARATOR_COUNT + sc) >= *ns) {
 
@@ -1128,13 +1042,9 @@ void add_compound_element_by_name(void* p0, void* p1, void* p2,
                     // CAUTION! Add constant in case *nc is zero!
                     *ns = (*nc * *CHARACTER_VECTOR_REALLOCATE_FACTOR) + *LIST_SEPARATOR_COUNT + sc;
 
-        fprintf(stdout, "Test: new name size: %i\n", *ns);
-
                     // Reallocate name character vector.
                     reallocate_array(p3, p4, p5, (void*) CHARACTER_ARRAY);
                 }
-
-        fprintf(stdout, "Test: new name with base: %s\n", (char*) *n);
 
                 // The element name already contains the element base name.
 
@@ -1143,14 +1053,10 @@ void add_compound_element_by_name(void* p0, void* p1, void* p2,
                 set_array_elements(*n, p4, (void*) LIST_SEPARATOR, (void*) LIST_SEPARATOR_COUNT, (void*) CHARACTER_ARRAY);
                 *nc = *nc + *LIST_SEPARATOR_COUNT;
 
-        fprintf(stdout, "Test: new name with separator: %s\n", (char*) *n);
-
                 // Set new element name by adding the index determined above.
                 // Use name count as index to add the new characters.
                 set_array_elements(*n, p4, s, (void*) &sc, (void*) CHARACTER_ARRAY);
                 *nc = *nc + sc;
-
-        fprintf(stdout, "Test: new name with index: %s\n", (char*) *n);
 
                 // Deallocate name suffix.
                 deallocate_array((void*) &s, (void*) &ss, (void*) CHARACTER_ARRAY);
@@ -1185,204 +1091,66 @@ void add_compound_element_by_name(void* p0, void* p1, void* p2,
 }
 
 /**
- * Replace the compound element by name.
+ * Replaces the compound element by name.
  *
- * @param p0 the compound model
- * @param p1 the compound model count
- * @param p2 the compound model size
- * @param p3 the compound details
- * @param p4 the compound details count
- * @param p5 the compound details size
- * @param p6 the name
- * @param p7 the name count
- * @param p8 the name size
- * @param p9 the abstraction
- * @param p10 the abstraction count
- * @param p11 the abstraction size
- * @param p12 the model
- * @param p13 the model count
- * @param p14 the model size
- * @param p15 the details
- * @param p16 the details count
- * @param p17 the details size
+ * @param p0 the compound
+ * @param p1 the compound count
+ * @param p2 the compound size
+ * @param p3 the name
+ * @param p4 the name count
+ * @param p5 the name size
+ * @param p6 the abstraction
+ * @param p7 the abstraction count
+ * @param p8 the abstraction size
+ * @param p9 the model
+ * @param p10 the model count
+ * @param p11 the model size
+ * @param p12 the details
+ * @param p13 the details count
+ * @param p14 the details size
  */
-void replace_compound_element_by_name(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
-    void* p6, void* p7, void* p8, void* p9, void* p10, void* p11,
-    void* p12, void* p13, void* p14, void* p15, void* p16, void* p17) {
+void replace_compound_element_by_name(void* p0, void* p1, void* p2,
+    void* p3, void* p4, void* p5, void* p6, void* p7, void* p8,
+    void* p9, void* p10, void* p11, void* p12, void* p13, void* p14) {
 
     log_message_debug("Replace compound element by name.");
     log_message_debug((char*) p6);
 
-    // The element name.
-    void* e = NULL_POINTER;
-    int ec = *NUMBER_0_INTEGER;
-    int es = *NUMBER_0_INTEGER;
-    // The remaining name.
-    void* r = NULL_POINTER;
-    int rc = *NUMBER_0_INTEGER;
-    int rs = *NUMBER_0_INTEGER;
-    // The meta hierarchy flag with the following meanings:
-    // -1: not a compound knowledge hierarchy
-    // 0: part hierarchy
-    // 1: meta hierarchy
-    int f = *NUMBER_MINUS_1_INTEGER;
+/*??
     // The element name index.
     int i = *NUMBER_MINUS_1_INTEGER;
-    // The compound element model.
-    void** m = &NULL_POINTER;
-    void** mc = &NULL_POINTER;
-    void** ms = &NULL_POINTER;
-    // The compound element details.
-    void** d = &NULL_POINTER;
-    void** dc = &NULL_POINTER;
-    void** ds = &NULL_POINTER;
 
-    // Get compound element name and remaining name,
-    // as well as the flag indicating a part- or meta element.
-    get_compound_element_name_and_remaining_name(p6, p7, (void*) &e, (void*) &ec, (void*) &r, (void*) &rc, (void*) &f);
-
-//??    fprintf(stderr, "TEST r %s\n", (char*) r);
-//??    fprintf(stderr, "TEST rc %i\n", rc);
-//??    fprintf(stderr, "TEST f %i\n", f);
-
-    if (f == *NUMBER_0_INTEGER) {
-
-        // Get compound element index.
-        //
-        // CAUTION! The name is given WITHOUT prefix here!
-        // Correct example: "patient"
-        // Incorrect examples: ".patient", "#patient"
-        get_compound_element_index(p0, p1, e, (void*) &ec, (void*) &i);
+    // Get compound element index.
+    //
+    // CAUTION! The name is given WITHOUT prefix here!
+    // Correct example: "patient"
+    // Incorrect examples: ".patient", "#patient"
+    get_compound_element_index(p0, p1, e, (void*) &ec, (void*) &i);
 
 //??    fprintf(stderr, "TEST part index %i\n", i);
 
-        if (i >= *NUMBER_0_INTEGER) {
+    if (i >= *NUMBER_0_INTEGER) {
 
-            log_message_debug("Could not replace compound element by name. A compound element with that name does already exist.");
-
-/*??
-            if (rc > *NUMBER_0_INTEGER) {
-
-                // A remaining name exists.
-                // The compound element hierarchy is processed further.
-
-                // Get compound element model.
-                get_compound_element_model(p0, (void*) &i, (void*) &m, (void*) &mc, (void*) &ms);
-
-                // Get compound element details.
-                get_compound_element_details(p0, (void*) &i, (void*) &d, (void*) &dc, (void*) &ds);
-
-                // Recursively continue to process along the hierarchical name.
-                rs = rc;
-                set_compound_element_by_name(*m, *mc, *ms, *d, *dc, *ds, r, (void*) &rc, (void*) &rs, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17);
-
-            } else {
-
-                // No remaining name exists. A separator could NOT be found.
-                // The name is NOT hierarchical and represents an element name directly.
-                // The given compound contains elements which are primitive models.
-
-                // Nothing is done here.
-                // CAUTION! It is NOT allowed to replace existing elements!
-                // If it were, then the memory area allocated by the element
-                // that is overwritten would never be accessible and freeable
-                // anymore, since the pointer to the previous element would be lost.
-
-                // Primitive types are set by retrieving the corresponding
-                // knowledge node using the "get_compound_element_by_name"
-                // procedure and then copying the primitive value.
-            }
-*/
-
-        } else {
-
-            // Could not get compound element index. An element with that name does not exist.
-            // Therefore, add compound element by name.
-            log_message_debug("Add compound model element by name.");
-            log_message_debug((char*) e);
-
-            // CAUTION! Use compound count as index for adding new elements.
-            // CAUTION! Do NOT use e, ec and es as name parameters!
-            // These were created only locally in this procedure and
-            // will thus be destroyed when the procedure is left.
-            // DO USE the name, name count and name size that were
-            // handed over as parameters to this procedure!
-            // They were allocated by a translator while parsing CYBOL files.
-            set_compound_element_by_index(p0, p1, p2, p1,
-                p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17);
-        }
-
-    } else if (f == *NUMBER_1_INTEGER) {
-
-        // Get compound element index.
-        //
-        // CAUTION! The name is given WITHOUT prefix here!
-        // Correct example: "patient"
-        // Incorrect examples: ".patient", "#patient"
-        get_compound_element_index(p3, p4, e, (void*) &ec, (void*) &i);
-
-//??    fprintf(stderr, "TEST meta index %i\n", i);
-
-        if (i >= *NUMBER_0_INTEGER) {
-
-            log_message_debug("Could not replace compound element by name. A compound element with that name does already exist.");
-
-/*??
-            if (rc > *NUMBER_0_INTEGER) {
-
-                // A remaining name exists.
-                // The compound element hierarchy is processed further.
-
-                // Get compound element model.
-                get_compound_element_model(p3, (void*) &i, (void*) &m, (void*) &mc, (void*) &ms);
-
-                // Get compound element details.
-                get_compound_element_details(p3, (void*) &i, (void*) &d, (void*) &dc, (void*) &ds);
-
-                // Recursively continue to process along the hierarchical name.
-                rs = rc;
-                set_compound_element_by_name(*m, *mc, *ms, *d, *dc, *ds, r, (void*) &rc, (void*) &rs, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17);
-
-            } else {
-
-                // No remaining name exists. A separator could NOT be found.
-                // The name is NOT hierarchical and represents an element name directly.
-                // The given compound contains elements which are primitive models.
-
-                // Nothing is done here.
-                // CAUTION! It is NOT allowed to replace existing elements!
-                // If it were, then the memory area allocated by the element
-                // that is overwritten would never be accessible and freeable
-                // anymore, since the pointer to the previous element would be lost.
-
-                // Primitive types are set by retrieving the corresponding
-                // knowledge node using the "get_compound_element_by_name"
-                // procedure and then copying the primitive value.
-            }
-*/
-
-        } else {
-
-            // Could not get compound element index. An element with that name does not exist.
-            // Therefore, add compound element by name.
-            log_message_debug("Add compound meta element by name.");
-            log_message_debug((char*) e);
-
-            // CAUTION! Use compound count as index for adding new elements.
-            // CAUTION! Do NOT use e, ec and es as name parameters!
-            // These were created only locally in this procedure and
-            // will thus be destroyed when the procedure is left.
-            // DO USE the name, name count and name size that were
-            // handed over as parameters to this procedure!
-            // They were allocated by a translator while parsing CYBOL files.
-            set_compound_element_by_index(p3, p4, p5, p4,
-                p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17);
-        }
+        log_message_debug("Could not replace compound element by name. A compound element with that name does already exist.");
 
     } else {
 
-        log_message_debug("Could not replace compound element by name. The name does not represent a compound knowledge element or -hierarchy.");
+        // Could not get compound element index. An element with that name does not exist.
+        // Therefore, add compound element by name.
+        log_message_debug("Add compound model element by name.");
+        log_message_debug((char*) e);
+
+        // CAUTION! Use compound count as index for adding new elements.
+        // CAUTION! Do NOT use e, ec and es as name parameters!
+        // These were created only locally in this procedure and
+        // will thus be destroyed when the procedure is left.
+        // DO USE the name, name count and name size that were
+        // handed over as parameters to this procedure!
+        // They were allocated by a translator while parsing CYBOL files.
+        set_compound_element_by_index(p0, p1, p2, p1,
+            p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17);
     }
+*/
 }
 
 //

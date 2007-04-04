@@ -24,7 +24,7 @@
  * - receive a file stream into a byte array
  * - send a file stream from a byte array
  *
- * @version $Revision: 1.17 $ $Date: 2007-01-14 22:06:49 $ $Author: christian $
+ * @version $Revision: 1.18 $ $Date: 2007-04-04 22:06:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -35,6 +35,8 @@
 #include "../../globals/constants/ascii_character_constants.c"
 #include "../../globals/constants/cyboi_constants.c"
 #include "../../globals/constants/integer_constants.c"
+//?? ONLY TEMPORARY!
+#include "../../globals/constants/model_constants.c"
 #include "../../globals/constants/structure_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../globals/variables/variables.c"
@@ -91,7 +93,7 @@ void read_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
                         // Read first character.
                         char c = fgetc(f);
 
-                        while (1) {
+                        while (*NUMBER_1_INTEGER) {
 
                             if (c == EOF) {
 
@@ -101,7 +103,7 @@ void read_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
                             if (*dc == *ds) {
 
                                 // Increase size.
-                                *ds = (*ds * *FILE_REALLOCATE_FACTOR) + 1;
+                                *ds = (*ds * *FILE_REALLOCATE_FACTOR) + *NUMBER_1_INTEGER;
 
                                 // Reallocate array.
                                 reallocate_array(p0, p1, p2, (void*) CHARACTER_ARRAY);
@@ -161,38 +163,112 @@ void read_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
  * Write a file stream that was read from a byte array.
  *
  * @param p0 the destination file name (Hand over as reference!)
- * @param p1 the destination count
- * @param p2 the destination size
+ * @param p1 the destination file name count
+ * @param p2 the destination file name size
  * @param p3 the source byte array
- * @param p4 the source count
+ * @param p4 the source byte array count
  */
 void write_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-/*??
-    char r = NULL_CONTROL_ASCII_CHARACTER;
-    int j = 0;
-    char c = NULL_CONTROL_ASCII_CHARACTER;
+    if (p4 != NULL_POINTER) {
 
-    while (1) {
+        int* sc = (int*) p4;
 
-        if (j >= **ds) {
+        if (p1 != NULL_POINTER) {
+    
+            int* dc = (int*) p1;
 
-            break;
+            // The comparison result.
+            int r = *NUMBER_0_INTEGER;
+            // The terminated file name.
+            void* tn = NULL_POINTER;
+            int tns = *dc + *NUMBER_1_INTEGER;
+            // The file.
+            FILE* f = NULL_POINTER;
+
+            compare_arrays(p0, p1, (void*) STANDARD_OUTPUT_MODEL, (void*) STANDARD_OUTPUT_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+            if (r != *NUMBER_0_INTEGER) {
+            
+                // The given string is not a file name, but specifies the "standard_output".
+                f = stdout;
+            
+            } else {
+
+                // Allocate terminated file name.
+                allocate_array((void*) &tn, (void*) &tns, (void*) CHARACTER_ARRAY);
+        
+                // Set terminated file name by first copying the actual name
+                // and then adding the null termination character.
+                set_array_elements(tn, (void*) NUMBER_0_INTEGER, p0, p1, (void*) CHARACTER_ARRAY);
+                set_array_elements(tn, p1, (void*) NULL_CONTROL_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+        
+                // Open file.
+                // CAUTION! The file name cannot be handed over as is.
+                // CYBOI strings are NOT terminated with the null character '\0'.
+                // Since 'fopen' expects a null terminated string, the termination character
+                // must be added to the string before that is used to open the file.
+                f = fopen((char*) tn, "r");
+            }
+    
+            if (f != NULL_POINTER) {
+    
+                // The loop variable.
+                int j = *NUMBER_0_INTEGER;
+                // The character.
+                char* c = NULL_POINTER;
+                // The error value.
+                char e = EOF;
+
+                while (*NUMBER_1_INTEGER) {
+
+                    if (j >= *sc) {
+
+                        break;
+                    }
+
+                    log_message_debug("\nTEST loop\n");
+                    
+                    // Read character from source array.
+                    get_array_elements(p3, (void*) &j, (void*) &c, (void*) CHARACTER_ARRAY);
+
+                    // Write character to file.
+                    e = fputc(*c, f);
+
+                    if (e == EOF) {
+
+                        // Set loop variable to source count, so that the
+                        // loop can be left in the next cycle.
+                        j = *sc;
+                    }
+
+                    // Increment loop variable.
+                    j++;
+                }
+
+                if (r == *NUMBER_0_INTEGER) {
+    
+                    // Close file.
+                    fclose(f);
+    
+                    // Deallocate terminated file name.
+                    deallocate_array((void*) &tn, (void*) &tns, (void*) CHARACTER_ARRAY);
+                }
+    
+            } else {
+    
+                log_message_debug("Could not write file. The file is null.");
+            }
+    
+        } else {
+    
+            log_message_debug("Could not write file. The destination count is null.");
         }
 
-        if (r == EOF) {
+    } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not write file. A write error occured.");
-
-            break;
-        }
-
-        get_array_element(p0, (void*) &CHARACTER_ARRAY, (void*) &j, (void*) &c);
-
-        r = fputc(c, f);
-        j++;
+        log_message_debug("Could not write file. The source count is null.");
     }
-*/
 }
 
 /* FILE_COMMUNICATOR_SOURCE */

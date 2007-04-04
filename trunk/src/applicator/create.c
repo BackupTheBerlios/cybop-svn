@@ -22,7 +22,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.26 $ $Date: 2007-03-09 23:21:41 $ $Author: christian $
+ * @version $Revision: 1.27 $ $Date: 2007-04-04 22:06:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -430,7 +430,7 @@ void create(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 log_message_debug("Add part knowledge model to whole model.");
 
                 // Use the determined whole model, if it exists.
-                set_compound_element_by_name(*wm, *wmc, *wms, NULL_POINTER, NULL_POINTER, NULL_POINTER,
+                set_compound_element_by_name(*wm, *wmc, *wms,
                     kmn, (void*) kmnc, (void*) kmns,
                     kma, (void*) kmac, (void*) kmas,
                     kmm, (void*) kmmc, (void*) kmms,
@@ -441,7 +441,7 @@ void create(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 log_message_debug("Add part knowledge model to knowledge memory root.");
 
                 // Use the knowledge memory root if the determined whole model is null.
-                set_compound_element_by_name(p2, p3, p4, NULL_POINTER, NULL_POINTER, NULL_POINTER,
+                set_compound_element_by_name(p2, p3, p4,
                     kmn, (void*) kmnc, (void*) kmns,
                     kma, (void*) kmac, (void*) kmas,
                     kmm, (void*) kmmc, (void*) kmms,
@@ -461,7 +461,7 @@ void create(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 log_message_debug("Add meta knowledge model to whole details.");
 
                 // Use the determined whole model, if it exists.
-                set_compound_element_by_name(*wd, *wdc, *wds, NULL_POINTER, NULL_POINTER, NULL_POINTER,
+                set_compound_element_by_name(*wd, *wdc, *wds,
                     kmn, (void*) kmnc, (void*) kmns,
                     kma, (void*) kmac, (void*) kmas,
                     kmm, (void*) kmmc, (void*) kmms,

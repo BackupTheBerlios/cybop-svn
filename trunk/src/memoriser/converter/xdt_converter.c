@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2007-03-27 21:52:45 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2007-04-04 22:06:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -893,6 +893,22 @@ void parse_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, vo
                 p3, p4,
                 (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) ADT_RECORD_SPECIFICATION_VERSION_XDT_FIELD_NAME, (void*) ADT_RECORD_SPECIFICATION_VERSION_XDT_FIELD_NAME_COUNT);
+
+        } else if (*id == *PATIENT_IDENTIFICATION_XDT_FIELD) {
+
+            parse_xdt_parse_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
+                (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
+                p3, p4,
+                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) PATIENT_IDENTIFICATION_XDT_FIELD_NAME, (void*) PATIENT_IDENTIFICATION_XDT_FIELD_NAME_COUNT);
+
+        } else if (*id == *PATIENT_FIRST_NAME_XDT_FIELD) {
+
+            parse_xdt_parse_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
+                (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
+                p3, p4,
+                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) PATIENT_FIRST_NAME_XDT_FIELD_NAME, (void*) PATIENT_FIRST_NAME_XDT_FIELD_NAME_COUNT);
         }
 
         // No further processing of the xdt field content is necessary!
@@ -905,8 +921,7 @@ void parse_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, vo
             && (a != NULL_POINTER) && (ac != NULL_POINTER) && (as != NULL_POINTER)) {
 
             // Add xdt field to xdt record.
-            add_compound_element_by_name(p0, p1, p2,
-                (void*) &n, nc, ns, a, ac, as, m, mc, ms, d, dc, ds);
+            set_compound_element_by_name(p0, p1, p2, n, nc, ns, a, ac, as, m, mc, ms, d, dc, ds);
 
         } else {
 
@@ -1164,8 +1179,10 @@ void parse_xdt_select_record(void* p0, void* p1, void* p2, void* p3, void* p4, v
             && (a != NULL_POINTER) && (ac != NULL_POINTER) && (as != NULL_POINTER)) {
 
             // Add xdt record to xdt package.
-            add_compound_element_by_name(p0, p1, p2,
-                (void*) &n, nc, ns, a, ac, as, m, mc, ms, d, dc, ds);
+            //
+            // CAUTION! Hand over the name as reference, as it gets changed by adding
+            // an index as name suffix, to uniquely identify the record within the compound.
+            add_compound_element_by_name(p0, p1, p2, (void*) &n, nc, ns, a, ac, as, m, mc, ms, d, dc, ds);
 
         } else {
 
@@ -1342,8 +1359,10 @@ void parse_xdt_select_package(void* p0, void* p1, void* p2, void* p3, void* p4, 
         && (a != NULL_POINTER) && (ac != NULL_POINTER) && (as != NULL_POINTER)) {
 
         // Add xdt package to given destination compound model.
-        add_compound_element_by_name(p0, p1, p2,
-            (void*) &n, nc, ns, a, ac, as, m, mc, ms, d, dc, ds);
+        //
+        // CAUTION! Hand over the name as reference, as it gets changed by adding
+        // an index as name suffix, to uniquely identify the record within the compound.
+        add_compound_element_by_name(p0, p1, p2, (void*) &n, nc, ns, a, ac, as, m, mc, ms, d, dc, ds);
 
     } else {
 

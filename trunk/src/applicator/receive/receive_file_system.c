@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2007-03-11 20:09:30 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2007-04-04 22:06:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -410,7 +410,7 @@ void receive_file_system(void* p0, void* p1, void* p2,
                 log_message_debug("Add part knowledge model to whole model.");
 
                 // Use the determined whole model, if it exists.
-                set_compound_element_by_name(p3, p4, p5, NULL_POINTER, NULL_POINTER, NULL_POINTER,
+                set_compound_element_by_name(p3, p4, p5,
                     n, (void*) nc, (void*) ns,
                     a, (void*) ac, (void*) as,
                     m, (void*) mc, (void*) ms,
@@ -421,7 +421,7 @@ void receive_file_system(void* p0, void* p1, void* p2,
                 log_message_debug("Add part knowledge model to knowledge memory root.");
 
                 // Use the knowledge memory root if the determined whole model is null.
-                set_compound_element_by_name(p0, p1, p2, NULL_POINTER, NULL_POINTER, NULL_POINTER,
+                set_compound_element_by_name(p0, p1, p2,
                     n, (void*) nc, (void*) ns,
                     a, (void*) ac, (void*) as,
                     m, (void*) mc, (void*) ms,
@@ -441,7 +441,7 @@ void receive_file_system(void* p0, void* p1, void* p2,
                 log_message_debug("Add meta knowledge model to whole details.");
 
                 // Use the determined whole details model, if it exists.
-                set_compound_element_by_name(p6, p7, p8, NULL_POINTER, NULL_POINTER, NULL_POINTER,
+                set_compound_element_by_name(p6, p7, p8,
                     n, (void*) nc, (void*) ns,
                     a, (void*) ac, (void*) as,
                     m, (void*) mc, (void*) ms,

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.43 $ $Date: 2007-01-30 01:11:06 $ $Author: christian $
+ * @version $Revision: 1.44 $ $Date: 2007-04-04 22:06:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -31,6 +31,7 @@
 #include <signal.h>
 #include "../applicator/send/send_latex.c"
 #include "../applicator/send/send_linux_console.c"
+#include "../applicator/send/send_shell.c"
 #include "../applicator/send/send_socket.c"
 #include "../applicator/send/send_x_window_system.c"
 #include "../globals/constants/abstraction_constants.c"
@@ -293,6 +294,29 @@ void send_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
 
             // Unlock signal memory mutex.
             pthread_mutex_unlock(*mt);
+        }
+    }
+
+/*??
+    if (r == 0) {
+
+        compare_arrays((void*) *cm, (void*) *cmc, (void*) FILE_SYSTEM_MODEL, (void*) FILE_SYSTEM_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != 0) {
+
+            send_file_system(p3, p4, p5, *wm, *wmc, *wms, *wd, *wdc, *wds,
+                *nm, *nmc, *na, *nac, *am, *amc, *aa, *aac, *cm, *cmc, *mm, *mmc, *em, *emc);
+        }
+    }
+*/
+
+    if (r == 0) {
+
+        compare_arrays((void*) *cm, (void*) *cmc, (void*) SHELL_MODEL, (void*) SHELL_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != 0) {
+
+            send_shell(p2, *ma, *mac, *mm, *mmc, *md, *mdc, *am, *amc, *clm, *clmc, p3, p4);
         }
     }
 

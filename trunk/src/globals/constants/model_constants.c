@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.23 $ $Date: 2007-01-28 01:22:29 $ $Author: christian $
+ * @version $Revision: 1.24 $ $Date: 2007-04-04 22:06:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -335,6 +335,16 @@ static int* REFRESH_URL_MODEL_COUNT = NUMBER_11_INTEGER_ARRAY;
 static char SIGNAL_MODEL_ARRAY[] = {'s', 'i', 'g', 'n', 'a', 'l'};
 static char* SIGNAL_MODEL = SIGNAL_MODEL_ARRAY;
 static int* SIGNAL_MODEL_COUNT = NUMBER_6_INTEGER_ARRAY;
+
+/** The shell model. */
+static char SHELL_MODEL_ARRAY[] = {'s', 'h', 'e', 'l', 'l'};
+static char* SHELL_MODEL = SHELL_MODEL_ARRAY;
+static int* SHELL_MODEL_COUNT = NUMBER_5_INTEGER_ARRAY;
+
+/** The standard output model. */
+static char STANDARD_OUTPUT_MODEL_ARRAY[] = {'s', 't', 'a', 'n', 'd', 'a', 'r', 'd', '_', 'o', 'u', 't', 'p', 'u', 't'};
+static char* STANDARD_OUTPUT_MODEL = STANDARD_OUTPUT_MODEL_ARRAY;
+static int* STANDARD_OUTPUT_MODEL_COUNT = NUMBER_15_INTEGER_ARRAY;
 
 /** The linux console model. */
 static char LINUX_CONSOLE_MODEL_ARRAY[] = {'l', 'i', 'n', 'u', 'x', '_', 'c', 'o', 'n', 's', 'o', 'l', 'e'};

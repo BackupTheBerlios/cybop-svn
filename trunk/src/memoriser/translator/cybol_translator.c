@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.15 $ $Date: 2007-03-09 23:21:41 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2007-04-04 22:06:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -78,28 +78,25 @@ void receive_file_system_model(void* p0, void* p1, void* p2, void* p3, void* p4,
 /**
  * Sets the compound element by name.
  *
- * @param p0 the compound model
- * @param p1 the compound model count
- * @param p2 the compound model size
- * @param p3 the compound details
- * @param p4 the compound details count
- * @param p5 the compound details size
- * @param p6 the name
- * @param p7 the name count
- * @param p8 the name size
- * @param p9 the abstraction
- * @param p10 the abstraction count
- * @param p11 the abstraction size
- * @param p12 the model
- * @param p13 the model count
- * @param p14 the model size
- * @param p15 the details
- * @param p16 the details count
- * @param p17 the details size
+ * @param p0 the compound
+ * @param p1 the compound count
+ * @param p2 the compound size
+ * @param p3 the name
+ * @param p4 the name count
+ * @param p5 the name size
+ * @param p6 the abstraction
+ * @param p7 the abstraction count
+ * @param p8 the abstraction size
+ * @param p9 the model
+ * @param p10 the model count
+ * @param p11 the model size
+ * @param p12 the details
+ * @param p13 the details count
+ * @param p14 the details size
  */
-void set_compound_element_by_name(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
-    void* p6, void* p7, void* p8, void* p9, void* p10, void* p11,
-    void* p12, void* p13, void* p14, void* p15, void* p16, void* p17);
+void set_compound_element_by_name(void* p0, void* p1, void* p2,
+    void* p3, void* p4, void* p5, void* p6, void* p7, void* p8,
+    void* p9, void* p10, void* p11, void* p12, void* p13, void* p14);
 
 //
 // Cybol property.
@@ -455,7 +452,7 @@ void decode_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     }
 
                     // Add model to compound.
-                    set_compound_element_by_name(*d, p1, p2, NULL_POINTER, NULL_POINTER, NULL_POINTER,
+                    set_compound_element_by_name(*d, p1, p2,
                         dn, (void*) dnc, (void*) dns,
                         da, (void*) dac, (void*) das,
                         dm, (void*) dmc, (void*) dms,
