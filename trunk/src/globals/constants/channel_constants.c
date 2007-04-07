@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2007-01-14 22:06:48 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2007-04-07 12:15:28 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -38,6 +38,11 @@ static int* INLINE_CHANNEL_COUNT = NUMBER_6_INTEGER_ARRAY;
 static char FILE_CHANNEL_ARRAY[] = {'f', 'i', 'l', 'e'};
 static char* FILE_CHANNEL = FILE_CHANNEL_ARRAY;
 static int* FILE_CHANNEL_COUNT = NUMBER_4_INTEGER_ARRAY;
+
+/** The shell channel. */
+static char SHELL_CHANNEL_ARRAY[] = {'s', 'h', 'e', 'l', 'l'};
+static char* SHELL_CHANNEL = SHELL_CHANNEL_ARRAY;
+static int* SHELL_CHANNEL_COUNT = NUMBER_5_INTEGER_ARRAY;
 
 /** The http location. */
 static char HTTP_CHANNEL_ARRAY[] = {'h', 't', 't', 'p'};

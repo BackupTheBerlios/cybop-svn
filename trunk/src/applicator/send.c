@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.44 $ $Date: 2007-04-04 22:06:31 $ $Author: christian $
+ * @version $Revision: 1.45 $ $Date: 2007-04-07 12:15:28 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -28,7 +28,8 @@
 #ifndef SEND_SOURCE
 #define SEND_SOURCE
 
-#include <signal.h>
+#include "../applicator/send/send_cyboi_system.c"
+#include "../applicator/send/send_file_system.c"
 #include "../applicator/send/send_latex.c"
 #include "../applicator/send/send_linux_console.c"
 #include "../applicator/send/send_shell.c"
@@ -45,6 +46,111 @@
 #include "../memoriser/accessor/internal_memory_accessor.c"
 #include "../memoriser/allocator.c"
 #include "../memoriser/translator.c"
+
+/**
+ * Refreshes the url.
+ *
+ * @param p0 the parameters
+ * @param p1 the parameters count
+ * @param p2 the internal memory
+ * @param p3 the knowledge memory
+ * @param p4 the knowledge memory count
+ * @param p5 the knowledge memory size
+ * @param p6 the signal id
+ */
+void refresh_url(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
+
+    log_message_debug("Refresh url.");
+
+/*??
+    // The message abstraction.
+    void** urla = &NULL_POINTER;
+    void** urlac = &NULL_POINTER;
+    void** urlas = &NULL_POINTER;
+    // The message model.
+    void** urlm = &NULL_POINTER;
+    void** urlmc = &NULL_POINTER;
+    void** urlms = &NULL_POINTER;
+    // The message details.
+    void** urld = &NULL_POINTER;
+    void** urldc = &NULL_POINTER;
+    void** urlds = &NULL_POINTER;
+
+    // Get language.
+    get_universal_compound_element_by_name(p0, p1,
+        (void*) SEND_URL_NAME, (void*) SEND_URL_NAME_COUNT,
+        (void*) &urla, (void*) &urlac, (void*) &urlas,
+        (void*) &urlm, (void*) &urlmc, (void*) &urlms,
+        (void*) &urld, (void*) &urldc, (void*) &urlds,
+        p3, p4);
+
+    if ((*urla != NULL_POINTER)
+         && (*urlac != NULL_POINTER)
+         && (*urlas != NULL_POINTER)
+         && (*urlm != NULL_POINTER)
+         && (*urlmc != NULL_POINTER)
+         && (*urlms != NULL_POINTER)
+         && (*urld != NULL_POINTER)
+         && (*urldc != NULL_POINTER)
+         && (*urlds != NULL_POINTER)) {
+
+        // The socket number for the signal id.
+        // The index for the signal id in the array is the same index
+        // in the client socket number array.
+        int i = -1;
+
+        get_index_for_signal_id(p2, p6, (void*) &i);
+
+        if (i >= 0) {
+
+            // The client socket.
+            int* cs = NULL_POINTER;
+
+            get_client_socket_number_for_index(p2, (void*) &i, (void*) &cs);
+
+            if (*cs >= 0) {
+
+                char msg_refresh_part_1[] = "<head> <meta http-equiv='expires' content='0'>  <meta http-equiv='refresh' content='0; URL=";
+                char msg_refresh_part_3[] = "'></head><body></body>";
+                int msg_part_1_count = strlen( msg_refresh_part_1 );
+                int msg_part_3_count = strlen( msg_refresh_part_3 );
+
+                //create the destination for the send model
+                void* dest = NULL_POINTER;
+                int* dest_count = NULL_POINTER;
+                int* dest_size = NULL_POINTER;
+
+                allocate(&dest_count, PRIMITIVE_COUNT, INTEGER_VECTOR_ABSTRACTION, INTEGER_VECTOR_ABSTRACTION_COUNT);
+                allocate(&dest_size, PRIMITIVE_COUNT, INTEGER_VECTOR_ABSTRACTION, INTEGER_VECTOR_ABSTRACTION_COUNT);
+                *dest_count = 0;
+                *dest_size  = 0;
+                allocate(&dest, dest_size, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
+
+                parse(&dest, dest_count, dest_size, &msg_refresh_part_1[0], &msg_part_1_count, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
+                parse(&dest, dest_count, dest_size, *urlm, *urlmc, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
+                parse(&dest, dest_count, dest_size, &msg_refresh_part_3[0], &msg_part_3_count, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
+
+                // The temporary count, size.
+                int tc = 0;
+                int ts = 0;
+
+                send_tcp_socket((void*) &cs, (void*) &tc, (void*) &ts, (void*) dest, (void*) dest_count);
+
+                // Remove client socket number and main signal id from internal memory.
+                remove_relation_clientsocketnumber_mainsignalid(p2, (void*) &i);
+
+                // Close socket.
+                close(*cs);
+
+                // Destroy destination.
+                deallocate(&dest, dest_size, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
+                deallocate(&dest_count, PRIMITIVE_COUNT, INTEGER_VECTOR_ABSTRACTION, INTEGER_VECTOR_ABSTRACTION_COUNT);
+                deallocate(&dest_size, PRIMITIVE_COUNT, INTEGER_VECTOR_ABSTRACTION, INTEGER_VECTOR_ABSTRACTION_COUNT);
+            }
+        }
+    }
+*/
+}
 
 /**
  * Sends a message in a special language.
@@ -74,11 +180,6 @@ void send_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
     void* p6, void* p7, void* p8, void* p9) {
 
     log_message_debug("Send message.");
-
-    // The signal memory mutex.
-    pthread_mutex_t** mt = (pthread_mutex_t**) &NULL_POINTER;
-    // The interrupt request flag.
-    sig_atomic_t** irq = (sig_atomic_t**) &NULL_POINTER;
 
     // The channel abstraction.
     void** ca = &NULL_POINTER;
@@ -197,11 +298,6 @@ void send_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
     void** cldc = &NULL_POINTER;
     void** clds = &NULL_POINTER;
 
-    // Get signal memory mutex.
-    get(p2, (void*) SIGNAL_MEMORY_MUTEX_INTERNAL, (void*) &mt, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    // Get interrupt request internal.
-    get(p2, (void*) INTERRUPT_REQUEST_INTERNAL, (void*) &irq, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-
     // Get channel.
     get_universal_compound_element_by_name(p0, p1,
         (void*) SEND_CHANNEL_NAME, (void*) SEND_CHANNEL_NAME_COUNT,
@@ -283,32 +379,19 @@ void send_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
 
         if (r != 0) {
 
-            // Lock signal memory mutex.
-            pthread_mutex_lock(*mt);
-
-            set_signal(p6, p7, p8, (void*) *ma, (void*) *mac, (void*) *mm, (void*) *mmc, (void*) *md, (void*) *mdc, (void*) NORMAL_PRIORITY, p9);
-
-            // Set interrupt request flag, in order to notify the signal checker
-            // that a new signal has been placed in the signal memory.
-            **irq = *NUMBER_1_INTEGER;
-
-            // Unlock signal memory mutex.
-            pthread_mutex_unlock(*mt);
+            send_cyboi_system(p6, p7, p8, *ma, *mac, *mm, *mmc, *md, *mdc, (void*) NORMAL_PRIORITY, p9);
         }
     }
 
-/*??
     if (r == 0) {
 
         compare_arrays((void*) *cm, (void*) *cmc, (void*) FILE_SYSTEM_MODEL, (void*) FILE_SYSTEM_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-            send_file_system(p3, p4, p5, *wm, *wmc, *wms, *wd, *wdc, *wds,
-                *nm, *nmc, *na, *nac, *am, *amc, *aa, *aac, *cm, *cmc, *mm, *mmc, *em, *emc);
+            send_file_system(p2, *ma, *mac, *mm, *mmc, *md, *mdc, *am, *amc, *clm, *clmc, p3, p4);
         }
     }
-*/
 
     if (r == 0) {
 
@@ -369,111 +452,6 @@ void send_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
             send_latex(p2, *mm, *mmc, p3, p4);
         }
     }
-}
-
-/**
- * Refreshes the url.
- *
- * @param p0 the parameters
- * @param p1 the parameters count
- * @param p2 the internal memory
- * @param p3 the knowledge memory
- * @param p4 the knowledge memory count
- * @param p5 the knowledge memory size
- * @param p6 the signal id
- */
-void refresh_url(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
-
-    log_message_debug("Refresh url.");
-
-/*??
-    // The message abstraction.
-    void** urla = &NULL_POINTER;
-    void** urlac = &NULL_POINTER;
-    void** urlas = &NULL_POINTER;
-    // The message model.
-    void** urlm = &NULL_POINTER;
-    void** urlmc = &NULL_POINTER;
-    void** urlms = &NULL_POINTER;
-    // The message details.
-    void** urld = &NULL_POINTER;
-    void** urldc = &NULL_POINTER;
-    void** urlds = &NULL_POINTER;
-
-    // Get language.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) SEND_URL_NAME, (void*) SEND_URL_NAME_COUNT,
-        (void*) &urla, (void*) &urlac, (void*) &urlas,
-        (void*) &urlm, (void*) &urlmc, (void*) &urlms,
-        (void*) &urld, (void*) &urldc, (void*) &urlds,
-        p3, p4);
-
-    if ((*urla != NULL_POINTER)
-         && (*urlac != NULL_POINTER)
-         && (*urlas != NULL_POINTER)
-         && (*urlm != NULL_POINTER)
-         && (*urlmc != NULL_POINTER)
-         && (*urlms != NULL_POINTER)
-         && (*urld != NULL_POINTER)
-         && (*urldc != NULL_POINTER)
-         && (*urlds != NULL_POINTER)) {
-
-        // The socket number for the signal id.
-        // The index for the signal id in the array is the same index
-        // in the client socket number array.
-        int i = -1;
-
-        get_index_for_signal_id(p2, p6, (void*) &i);
-
-        if (i >= 0) {
-
-            // The client socket.
-            int* cs = NULL_POINTER;
-
-            get_client_socket_number_for_index(p2, (void*) &i, (void*) &cs);
-
-            if (*cs >= 0) {
-
-                char msg_refresh_part_1[] = "<head> <meta http-equiv='expires' content='0'>  <meta http-equiv='refresh' content='0; URL=";
-                char msg_refresh_part_3[] = "'></head><body></body>";
-                int msg_part_1_count = strlen( msg_refresh_part_1 );
-                int msg_part_3_count = strlen( msg_refresh_part_3 );
-
-                //create the destination for the send model
-                void* dest = NULL_POINTER;
-                int* dest_count = NULL_POINTER;
-                int* dest_size = NULL_POINTER;
-
-                allocate(&dest_count, PRIMITIVE_COUNT, INTEGER_VECTOR_ABSTRACTION, INTEGER_VECTOR_ABSTRACTION_COUNT);
-                allocate(&dest_size, PRIMITIVE_COUNT, INTEGER_VECTOR_ABSTRACTION, INTEGER_VECTOR_ABSTRACTION_COUNT);
-                *dest_count = 0;
-                *dest_size  = 0;
-                allocate(&dest, dest_size, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
-
-                parse(&dest, dest_count, dest_size, &msg_refresh_part_1[0], &msg_part_1_count, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
-                parse(&dest, dest_count, dest_size, *urlm, *urlmc, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
-                parse(&dest, dest_count, dest_size, &msg_refresh_part_3[0], &msg_part_3_count, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
-
-                // The temporary count, size.
-                int tc = 0;
-                int ts = 0;
-
-                send_tcp_socket((void*) &cs, (void*) &tc, (void*) &ts, (void*) dest, (void*) dest_count);
-
-                // Remove client socket number and main signal id from internal memory.
-                remove_relation_clientsocketnumber_mainsignalid(p2, (void*) &i);
-
-                // Close socket.
-                close(*cs);
-
-                // Destroy destination.
-                deallocate(&dest, dest_size, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
-                deallocate(&dest_count, PRIMITIVE_COUNT, INTEGER_VECTOR_ABSTRACTION, INTEGER_VECTOR_ABSTRACTION_COUNT);
-                deallocate(&dest_size, PRIMITIVE_COUNT, INTEGER_VECTOR_ABSTRACTION, INTEGER_VECTOR_ABSTRACTION_COUNT);
-            }
-        }
-    }
-*/
 }
 
 /* SEND_SOURCE */

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2007-01-14 22:06:49 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2007-04-07 12:15:28 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -35,6 +35,25 @@
 
 /** The invalid value. */
 static int* INVALID_VALUE = NUMBER_MINUS_1_INTEGER_ARRAY;
+
+//
+// Standard input, output, error output.
+//
+
+/** The standard input. */
+static char STANDARD_INPUT_FILE_NAME_ARRAY[] = {'s', 't', 'a', 'n', 'd', 'a', 'r', 'd', '_', 'i', 'n', 'p', 'u', 't'};
+static char* STANDARD_INPUT_FILE_NAME = STANDARD_INPUT_FILE_NAME_ARRAY;
+static int* STANDARD_INPUT_FILE_NAME_COUNT = NUMBER_14_INTEGER_ARRAY;
+
+/** The standard output. */
+static char STANDARD_OUTPUT_FILE_NAME_ARRAY[] = {'s', 't', 'a', 'n', 'd', 'a', 'r', 'd', '_', 'o', 'u', 't', 'p', 'u', 't'};
+static char* STANDARD_OUTPUT_FILE_NAME = STANDARD_OUTPUT_FILE_NAME_ARRAY;
+static int* STANDARD_OUTPUT_FILE_NAME_COUNT = NUMBER_15_INTEGER_ARRAY;
+
+/** The standard error output. */
+static char STANDARD_ERROR_OUTPUT_FILE_NAME_ARRAY[] = {'s', 't', 'a', 'n', 'd', 'a', 'r', 'd', '_', 'e', 'r', 'r', 'o', 'r', '_', 'o', 'u', 't', 'p', 'u', 't'};
+static char* STANDARD_ERROR_OUTPUT_FILE_NAME = STANDARD_ERROR_OUTPUT_FILE_NAME_ARRAY;
+static int* STANDARD_ERROR_OUTPUT_FILE_NAME_COUNT = NUMBER_21_INTEGER_ARRAY;
 
 //
 // Shell.
