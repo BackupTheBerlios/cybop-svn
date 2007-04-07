@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.22 $ $Date: 2007-03-16 22:05:24 $ $Author: christian $
+ * @version $Revision: 1.23 $ $Date: 2007-04-07 22:58:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -207,6 +207,11 @@ static int* BMP_ABSTRACTION_COUNT = NUMBER_3_INTEGER_ARRAY;
 //
 // Text abstractions.
 //
+
+/** The model diagram abstraction. */
+static char MODEL_DIAGRAM_ABSTRACTION_ARRAY[] = {'m', 'o', 'd', 'e', 'l', '_', 'd', 'i', 'a', 'g', 'r', 'a', 'm'};
+static char* MODEL_DIAGRAM_ABSTRACTION = MODEL_DIAGRAM_ABSTRACTION_ARRAY;
+static int* MODEL_DIAGRAM_ABSTRACTION_COUNT = NUMBER_13_INTEGER_ARRAY;
 
 /** The (german) behandlungsdaten-transfer abstraction. */
 static char XDT_ABSTRACTION_ARRAY[] = {'x', 'd', 't'};

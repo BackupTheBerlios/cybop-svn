@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2007-04-07 12:15:28 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2007-04-07 22:58:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -35,6 +35,7 @@
 #include "../../globals/logger/logger.c"
 #include "../../globals/variables/variables.c"
 #include "../../memoriser/accessor/signal_memory_accessor.c"
+#include "../../memoriser/accessor.c"
 
 /**
  * Sends a message to the cyboi system (this system itself).

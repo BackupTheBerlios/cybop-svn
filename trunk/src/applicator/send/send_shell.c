@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2007-04-07 12:15:28 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2007-04-07 22:58:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -34,38 +34,25 @@
 #include "../../globals/constants/model_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../globals/variables/variables.c"
-/*??
-#include <stdio.h>
-#include <unistd.h>
-#include "../../globals/constants/boolean_constants.c"
-#include "../../globals/constants/control_sequence_constants.c"
-#include "../../globals/constants/structure_constants.c"
-#include "../../memoriser/accessor.c"
-#include "../../memoriser/allocator.c"
-#include "../../memoriser/array.c"
-#include "../../memoriser/communicator.c"
-#include "../../memoriser/converter.c"
-*/
 
 /**
  * Sends a knowledge model to the operating system shell's standard output.
  *
  * @param p0 the internal memory
- * @param p1 the source root abstraction
- * @param p2 the source root abstraction count
- * @param p3 the source root model (root window compound model)
- * @param p4 the source root model count
- * @param p5 the source root details (meta properties of root window compound model)
- * @param p6 the source root details count
- * @param p7 the source part name (area to be repainted)
- * @param p8 the source part name count
- * @param p9 the source clean flag
- * @param p10 the source clean flag count
+ * @param p1 the source abstraction
+ * @param p2 the source abstraction count
+ * @param p3 the source model
+ * @param p4 the source model count
+ * @param p5 the source details
+ * @param p6 the source details count
+ * @param p7 the source clean flag
+ * @param p8 the source clean flag count
+ * @param p9 the language model
+ * @param p10 the language model count
  * @param p11 the knowledge memory
  * @param p12 the knowledge memory count
  */
-void send_shell(void* p0, void* p1, void* p2, void* p3, void* p4,
-    void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11, void* p12) {
+void send_shell(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11, void* p12) {
 
     log_message_debug("Information: Send shell message.");
 
@@ -77,19 +64,11 @@ void send_shell(void* p0, void* p1, void* p2, void* p3, void* p4,
     // Allocate array.
     allocate((void*) &a, (void*) &as, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
-    // Serialise knowledge model into hierarchical text.
-//??    serialise_hierarchical_text((void*) &a, (void*) &ac, (void*) &as, p1, p2, p3, p4, p5, p6, NULL_POINTER, NULL_POINTER, p7, p8, p11, p12);
-
-    // The shell standard output.
-    void** o = &NULL_POINTER;
-
-    // Get shell standard output.
-//??    get_array_elements(p0, (void*) STANDARD_OUTPUT_FILE_DESCRIPTOR_INTERNAL, (void*) &o, (void*) POINTER_ARRAY);
+    // Serialise knowledge model into model diagram (hierarchical text).
+    serialise((void*) &a, (void*) &ac, (void*) &as, p3, p4, p9, p10, p11, p12);
 
     // Write serialised array as message to shell standard output.
-//??    write_data(o, NULL_POINTER, NULL_POINTER, a, (void*) &ac, (void*) SHELL_MODEL, (void*) SHELL_MODEL_COUNT);
-//??    write_data((void*) &stdout, NULL_POINTER, NULL_POINTER, p3, p4, (void*) LINUX_CONSOLE_MODEL, (void*) LINUX_CONSOLE_MODEL_COUNT);
-    write_data((void*) STANDARD_OUTPUT_MODEL, (void*) STANDARD_OUTPUT_MODEL_COUNT, NULL_POINTER, p3, p4, (void*) FILE_CHANNEL, (void*) FILE_CHANNEL_COUNT);
+    write_data((void*) STANDARD_OUTPUT_MODEL, (void*) STANDARD_OUTPUT_MODEL_COUNT, NULL_POINTER, a, (void*) &ac, (void*) FILE_CHANNEL, (void*) FILE_CHANNEL_COUNT);
 
     // Deallocate array.
     deallocate((void*) &a, (void*) &as, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);

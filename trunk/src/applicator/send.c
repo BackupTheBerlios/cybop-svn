@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.45 $ $Date: 2007-04-07 12:15:28 $ $Author: christian $
+ * @version $Revision: 1.46 $ $Date: 2007-04-07 22:58:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -37,6 +37,7 @@
 #include "../applicator/send/send_x_window_system.c"
 #include "../globals/constants/abstraction_constants.c"
 #include "../globals/constants/channel_constants.c"
+#include "../globals/constants/integer_constants.c"
 #include "../globals/constants/model_constants.c"
 #include "../globals/constants/name_constants.c"
 #include "../globals/constants/service_port_constants.c"
@@ -101,14 +102,14 @@ void refresh_url(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, voi
 
         get_index_for_signal_id(p2, p6, (void*) &i);
 
-        if (i >= 0) {
+        if (i >= *NUMBER_0_INTEGER) {
 
             // The client socket.
             int* cs = NULL_POINTER;
 
             get_client_socket_number_for_index(p2, (void*) &i, (void*) &cs);
 
-            if (*cs >= 0) {
+            if (*cs >= *NUMBER_0_INTEGER) {
 
                 char msg_refresh_part_1[] = "<head> <meta http-equiv='expires' content='0'>  <meta http-equiv='refresh' content='0; URL=";
                 char msg_refresh_part_3[] = "'></head><body></body>";
@@ -122,17 +123,17 @@ void refresh_url(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, voi
 
                 allocate(&dest_count, PRIMITIVE_COUNT, INTEGER_VECTOR_ABSTRACTION, INTEGER_VECTOR_ABSTRACTION_COUNT);
                 allocate(&dest_size, PRIMITIVE_COUNT, INTEGER_VECTOR_ABSTRACTION, INTEGER_VECTOR_ABSTRACTION_COUNT);
-                *dest_count = 0;
-                *dest_size  = 0;
+                *dest_count = *NUMBER_0_INTEGER;
+                *dest_size  = *NUMBER_0_INTEGER;
                 allocate(&dest, dest_size, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
-                parse(&dest, dest_count, dest_size, &msg_refresh_part_1[0], &msg_part_1_count, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
+                parse(&dest, dest_count, dest_size, &msg_refresh_part_1[*NUMBER_0_INTEGER], &msg_part_1_count, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
                 parse(&dest, dest_count, dest_size, *urlm, *urlmc, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
-                parse(&dest, dest_count, dest_size, &msg_refresh_part_3[0], &msg_part_3_count, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
+                parse(&dest, dest_count, dest_size, &msg_refresh_part_3[*NUMBER_0_INTEGER], &msg_part_3_count, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
                 // The temporary count, size.
-                int tc = 0;
-                int ts = 0;
+                int tc = *NUMBER_0_INTEGER;
+                int ts = *NUMBER_0_INTEGER;
 
                 send_tcp_socket((void*) &cs, (void*) &tc, (void*) &ts, (void*) dest, (void*) dest_count);
 
@@ -193,6 +194,19 @@ void send_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
     void** cd = &NULL_POINTER;
     void** cdc = &NULL_POINTER;
     void** cds = &NULL_POINTER;
+
+    // The language abstraction.
+    void** la = &NULL_POINTER;
+    void** lac = &NULL_POINTER;
+    void** las = &NULL_POINTER;
+    // The language model.
+    void** lm = &NULL_POINTER;
+    void** lmc = &NULL_POINTER;
+    void** lms = &NULL_POINTER;
+    // The language details.
+    void** ld = &NULL_POINTER;
+    void** ldc = &NULL_POINTER;
+    void** lds = &NULL_POINTER;
 
     // The communication mode abstraction.
     void** moa = &NULL_POINTER;
@@ -306,6 +320,14 @@ void send_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
         (void*) &cd, (void*) &cdc, (void*) &cds,
         p3, p4);
 
+    // Get language.
+    get_universal_compound_element_by_name(p0, p1,
+        (void*) SEND_LANGUAGE_NAME, (void*) SEND_LANGUAGE_NAME_COUNT,
+        (void*) &la, (void*) &lac, (void*) &las,
+        (void*) &lm, (void*) &lmc, (void*) &lms,
+        (void*) &ld, (void*) &ldc, (void*) &lds,
+        p3, p4);
+
     // Get communication mode.
     get_universal_compound_element_by_name(p0, p1,
         (void*) SEND_COMMUNICATION_MODE_NAME, (void*) SEND_COMMUNICATION_MODE_NAME_COUNT,
@@ -371,83 +393,83 @@ void send_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
         p3, p4);
 
     // The comparison result.
-    int r = 0;
+    int r = *NUMBER_0_INTEGER;
 
-    if (r == 0) {
+    if (r == *NUMBER_0_INTEGER) {
 
         compare_arrays((void*) *cm, (void*) *cmc, (void*) SIGNAL_MODEL, (void*) SIGNAL_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r != 0) {
+        if (r != *NUMBER_0_INTEGER) {
 
             send_cyboi_system(p6, p7, p8, *ma, *mac, *mm, *mmc, *md, *mdc, (void*) NORMAL_PRIORITY, p9);
         }
     }
 
-    if (r == 0) {
+    if (r == *NUMBER_0_INTEGER) {
 
         compare_arrays((void*) *cm, (void*) *cmc, (void*) FILE_SYSTEM_MODEL, (void*) FILE_SYSTEM_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r != 0) {
+        if (r != *NUMBER_0_INTEGER) {
 
             send_file_system(p2, *ma, *mac, *mm, *mmc, *md, *mdc, *am, *amc, *clm, *clmc, p3, p4);
         }
     }
 
-    if (r == 0) {
+    if (r == *NUMBER_0_INTEGER) {
 
         compare_arrays((void*) *cm, (void*) *cmc, (void*) SHELL_MODEL, (void*) SHELL_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r != 0) {
+        if (r != *NUMBER_0_INTEGER) {
 
-            send_shell(p2, *ma, *mac, *mm, *mmc, *md, *mdc, *am, *amc, *clm, *clmc, p3, p4);
+            send_shell(p2, *ma, *mac, *mm, *mmc, *md, *mdc, *clm, *clmc, *lm, *lmc, p3, p4);
         }
     }
 
-    if (r == 0) {
+    if (r == *NUMBER_0_INTEGER) {
 
         compare_arrays((void*) *cm, (void*) *cmc, (void*) LINUX_CONSOLE_MODEL, (void*) LINUX_CONSOLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r != 0) {
+        if (r != *NUMBER_0_INTEGER) {
 
             send_linux_console(p2, *ma, *mac, *mm, *mmc, *md, *mdc, *am, *amc, *clm, *clmc, p3, p4);
         }
     }
 
-    if (r == 0) {
+    if (r == *NUMBER_0_INTEGER) {
 
         compare_arrays((void*) *cm, (void*) *cmc, (void*) X_WINDOW_SYSTEM_MODEL, (void*) X_WINDOW_SYSTEM_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r != 0) {
+        if (r != *NUMBER_0_INTEGER) {
 
             send_x_window_system(p2, *mm, *mmc, p3, p4);
         }
     }
 
-    if (r == 0) {
+    if (r == *NUMBER_0_INTEGER) {
 
         compare_arrays((void*) *cm, (void*) *cmc, (void*) WWW_SERVICE_MODEL, (void*) WWW_SERVICE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r != 0) {
+        if (r != *NUMBER_0_INTEGER) {
 
             send_socket(p2, (void*) WWW_BASE_INTERNAL, *rm, *rmc, (void*) WWW_PORT, *nm, *nmc, *stm, *stmc, *mom, *momc, *ma, *mac, *mm, *mmc, *md, *mdc, p3, p4);
         }
     }
 
-    if (r == 0) {
+    if (r == *NUMBER_0_INTEGER) {
 
         compare_arrays((void*) *cm, (void*) *cmc, (void*) CYBOI_SERVICE_MODEL, (void*) CYBOI_SERVICE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r != 0) {
+        if (r != *NUMBER_0_INTEGER) {
 
             send_socket(p2, (void*) CYBOI_BASE_INTERNAL, *rm, *rmc, (void*) CYBOI_PORT, *nm, *nmc, *stm, *stmc, *mom, *momc, *ma, *mac, *mm, *mmc, *md, *mdc, p3, p4);
         }
     }
 
-    if (r == 0) {
+    if (r == *NUMBER_0_INTEGER) {
 
         compare_arrays((void*) *cm, (void*) *cmc, (void*) LATEX_MODEL, (void*) LATEX_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r != 0) {
+        if (r != *NUMBER_0_INTEGER) {
 
             send_latex(p2, *mm, *mmc, p3, p4);
         }

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.29 $ $Date: 2007-02-01 00:12:40 $ $Author: christian $
+ * @version $Revision: 1.30 $ $Date: 2007-04-07 22:58:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -452,6 +452,11 @@ static int* SERVICE_ADDRESS_NAME_COUNT = NUMBER_7_INTEGER_ARRAY;
 static char SEND_CHANNEL_NAME_ARRAY[] = {'c', 'h', 'a', 'n', 'n', 'e', 'l'};
 static char* SEND_CHANNEL_NAME = SEND_CHANNEL_NAME_ARRAY;
 static int* SEND_CHANNEL_NAME_COUNT = NUMBER_7_INTEGER_ARRAY;
+
+/** The send language name. */
+static char SEND_LANGUAGE_NAME_ARRAY[] = {'l', 'a', 'n', 'g', 'u', 'a', 'g', 'e'};
+static char* SEND_LANGUAGE_NAME = SEND_LANGUAGE_NAME_ARRAY;
+static int* SEND_LANGUAGE_NAME_COUNT = NUMBER_8_INTEGER_ARRAY;
 
 /** The send communication mode name. */
 static char SEND_COMMUNICATION_MODE_NAME_ARRAY[] = {'m', 'o', 'd', 'e'};
