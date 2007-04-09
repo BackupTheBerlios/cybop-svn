@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.23 $ $Date: 2007-04-07 22:58:12 $ $Author: christian $
+ * @version $Revision: 1.24 $ $Date: 2007-04-09 08:48:44 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -248,49 +248,27 @@ void parse(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
             parse_latex(p0, p1, p2, p6, p7);
         }
     }
-
-/*??
-    //?? Later, distinguish file types according to abstraction,
-    //?? for example xml, html, sxi, txt, rtf,
-    //?? adl (from OpenEHR), KIF, ODL etc.!
-    //?? For now, only the cybol file format is considered.
-
-    if (r == *NUMBER_0_INTEGER) {
-
-        compare_arrays(p8, p9, (void*) SXW_ABSTRACTION, (void*) SXW_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != *NUMBER_0_INTEGER) {
-
-            //?? For other kinds of file (stream) formats,
-            //?? for example from special applications like Open Office,
-            //?? use a similar handling like for compound above!
-
-            //?? Images possibly also have to be handled that way.
-            //?? At first, the single image parameters have to be parsed
-            //?? and written into a special parameter model in memory;
-            //?? then that model has to be decoded into a knowledge model!
-            //?? May be this idea is rubbish and will not work!
-            //?? For the beginning, better handle images as primitve types.
-        }
-    }
-*/
 }
 
 /**
- * Serialises the document model according to the given document type
+ * Serialises the knowledge model according to the given knowledge type
  * and creates a byte stream from it.
  *
  * @param p0 the destination (Hand over as reference!)
  * @param p1 the destination count
  * @param p2 the destination size
- * @param p3 the source
- * @param p4 the source count
- * @param p5 the type
- * @param p6 the type count
- * @param p7 the knowledge memory
- * @param p8 the knowledge memory count
+ * @param p3 the source name
+ * @param p4 the source name count
+ * @param p5 the source abstraction
+ * @param p6 the source abstraction count
+ * @param p7 the source model
+ * @param p8 the source model count
+ * @param p9 the source details
+ * @param p10 the source details count
+ * @param p11 the knowledge memory
+ * @param p12 the knowledge memory count
  */
-void serialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8) {
+void serialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11, void* p12) {
 
     // The comparison result.
     int r = *NUMBER_0_INTEGER;
@@ -301,7 +279,7 @@ void serialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
 
         if (r != *NUMBER_0_INTEGER) {
 
-            serialise_xml(p0, p1, p2, p3, p4);
+            serialise_xml(p0, p1, p2, p7, p8);
         }
     }
 
@@ -311,7 +289,7 @@ void serialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
 
         if (r != *NUMBER_0_INTEGER) {
 
-            serialise_character_vector(p0, p1, p2, p3, p4);
+            serialise_character_vector(p0, p1, p2, p7, p8);
         }
     }
 
@@ -321,7 +299,7 @@ void serialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
 
         if (r != *NUMBER_0_INTEGER) {
 
-            serialise_character_vector(p0, p1, p2, p3, p4);
+            serialise_character_vector(p0, p1, p2, p7, p8);
         }
     }
 
@@ -331,7 +309,7 @@ void serialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
 
         if (r != *NUMBER_0_INTEGER) {
 
-            serialise_boolean(p0, p1, p2, p3, p4);
+            serialise_boolean(p0, p1, p2, p7, p8);
         }
     }
 
@@ -341,7 +319,7 @@ void serialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
 
         if (r != *NUMBER_0_INTEGER) {
 
-            serialise_integer_vector(p0, p1, p2, p3, p4);
+            serialise_integer_vector(p0, p1, p2, p7, p8);
         }
     }
 
@@ -351,7 +329,7 @@ void serialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
 
         if (r != *NUMBER_0_INTEGER) {
 
-            serialise_double_vector(p0, p1, p2, p3, p4);
+            serialise_double_vector(p0, p1, p2, p7, p8);
         }
     }
 
@@ -361,7 +339,7 @@ void serialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
 
         if (r != *NUMBER_0_INTEGER) {
 
-            serialise_fraction(p0, p1, p2, p3, p4);
+            serialise_fraction(p0, p1, p2, p7, p8);
         }
     }
 
@@ -371,7 +349,7 @@ void serialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
 
         if (r != *NUMBER_0_INTEGER) {
 
-            serialise_complex(p0, p1, p2, p3, p4);
+            serialise_complex(p0, p1, p2, p7, p8);
         }
     }
 
@@ -381,7 +359,7 @@ void serialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
 
         if (r != *NUMBER_0_INTEGER) {
 
-            serialise_date_time(p0, p1, p2, p3, p4);
+            serialise_date_time(p0, p1, p2, p7, p8);
         }
     }
 
@@ -391,7 +369,7 @@ void serialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
 
         if (r != *NUMBER_0_INTEGER) {
 
-            serialise_ddmmyyyy_date_time(p0, p1, p2, p3, p4);
+            serialise_ddmmyyyy_date_time(p0, p1, p2, p7, p8);
         }
     }
 
@@ -401,7 +379,7 @@ void serialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
 
         if (r != *NUMBER_0_INTEGER) {
 
-//??            serialise_linux_console(p0, p1, p2, p3, p4, NULL_POINTER, NULL_POINTER, p7, p8);
+//??            serialise_linux_console(p0, p1, p2, p7, p8, NULL_POINTER, NULL_POINTER, p11, p12);
         }
     }
 
@@ -411,7 +389,7 @@ void serialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
 
         if (r != *NUMBER_0_INTEGER) {
 
-            serialise_x_window_system(p0, p1, p2, p3, p4, NULL_POINTER, NULL_POINTER, p7, p8);
+            serialise_x_window_system(p0, p1, p2, p7, p8, NULL_POINTER, NULL_POINTER, p11, p12);
         }
     }
 
@@ -421,7 +399,7 @@ void serialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
 
         if (r != *NUMBER_0_INTEGER) {
 
-//??            serialise_xhtml(p0, p1, p2, p3, p4);
+//??            serialise_xhtml(p0, p1, p2, p7, p8);
         }
     }
 
@@ -431,7 +409,7 @@ void serialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
 
         if (r != *NUMBER_0_INTEGER) {
 
-            serialise_model_diagram(p0, p1, p2, p3, p4);
+            serialise_model_diagram(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12);
         }
     }
 
@@ -441,7 +419,7 @@ void serialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
 
         if (r != *NUMBER_0_INTEGER) {
 
-            serialise_xdt(p0, p1, p2, p3, p4);
+            serialise_xdt(p0, p1, p2, p7, p8);
         }
     }
 
@@ -451,12 +429,9 @@ void serialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
 
         if (r != *NUMBER_0_INTEGER) {
 
-            serialise_latex(p0, p1, p2, p3, p4);
+            serialise_latex(p0, p1, p2, p7, p8);
         }
     }
-
-    //?? Later, distinguish file types by abstraction, e.g.:
-    //?? xml, sxi, txt, rtf, adl (from OpenEHR), KIF, ODL etc.
 }
 
 /* CONVERTER_SOURCE */

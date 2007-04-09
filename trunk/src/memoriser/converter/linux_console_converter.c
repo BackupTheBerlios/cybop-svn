@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.18 $ $Date: 2007-01-14 22:06:49 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2007-04-09 08:48:44 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -42,6 +42,7 @@
 #include "../../globals/constants/model_constants.c"
 #include "../../globals/constants/name_constants.c"
 #include "../../globals/constants/structure_constants.c"
+#include "../../globals/constants/wide_character_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../globals/variables/variables.c"
 #include "../../memoriser/accessor/compound_accessor.c"
@@ -166,11 +167,11 @@ void serialise_linux_console_character(void* p0, void* p1, void* p2, void* p3, v
                                     *dc = *dc + *ESCAPE_CONTROL_SEQUENCE_COUNT;
                                     set_array_elements(*d, p1, y, (void*) &yc, (void*) WIDE_CHARACTER_ARRAY);
                                     *dc = *dc + yc;
-                                    set_array_elements(*d, p1, (void*) SEMICOLON_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+                                    set_array_elements(*d, p1, (void*) SEMICOLON_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
                                     *dc = *dc + *PRIMITIVE_COUNT;
                                     set_array_elements(*d, p1, x, (void*) &xc, (void*) WIDE_CHARACTER_ARRAY);
                                     *dc = *dc + xc;
-                                    set_array_elements(*d, p1, (void*) LATIN_CAPITAL_LETTER_H_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+                                    set_array_elements(*d, p1, (void*) LATIN_CAPITAL_LETTER_H_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
                                     *dc = *dc + *PRIMITIVE_COUNT;
 
                                     // Add attribute off control sequence.
@@ -431,12 +432,12 @@ void serialise_linux_console_rectangle_border(void* p0, void* p1,
 
                                 if (r != 0) {
 
-                                    *hc = *BOX_DRAWINGS_LIGHT_HORIZONTAL_CHARACTER;
-                                    *vc = *BOX_DRAWINGS_LIGHT_VERTICAL_CHARACTER;
-                                    *ltc = *BOX_DRAWINGS_LIGHT_DOWN_AND_RIGHT_CHARACTER;
-                                    *rtc = *BOX_DRAWINGS_LIGHT_DOWN_AND_LEFT_CHARACTER;
-                                    *lbc = *BOX_DRAWINGS_LIGHT_UP_AND_RIGHT_CHARACTER;
-                                    *rbc = *BOX_DRAWINGS_LIGHT_UP_AND_LEFT_CHARACTER;
+                                    *hc = *BOX_DRAWINGS_LIGHT_HORIZONTAL_WIDE_CHARACTER;
+                                    *vc = *BOX_DRAWINGS_LIGHT_VERTICAL_WIDE_CHARACTER;
+                                    *ltc = *BOX_DRAWINGS_LIGHT_DOWN_AND_RIGHT_WIDE_CHARACTER;
+                                    *rtc = *BOX_DRAWINGS_LIGHT_DOWN_AND_LEFT_WIDE_CHARACTER;
+                                    *lbc = *BOX_DRAWINGS_LIGHT_UP_AND_RIGHT_WIDE_CHARACTER;
+                                    *rbc = *BOX_DRAWINGS_LIGHT_UP_AND_LEFT_WIDE_CHARACTER;
                                 }
                             }
 
@@ -446,12 +447,12 @@ void serialise_linux_console_rectangle_border(void* p0, void* p1,
 
                                 if (r != 0) {
 
-                                    *hc = *BOX_DRAWINGS_LIGHT_HORIZONTAL_CHARACTER;
-                                    *vc = *BOX_DRAWINGS_LIGHT_VERTICAL_CHARACTER;
-                                    *ltc = *BOX_DRAWINGS_LIGHT_ARC_DOWN_AND_RIGHT_CHARACTER;
-                                    *rtc = *BOX_DRAWINGS_LIGHT_ARC_DOWN_AND_LEFT_CHARACTER;
-                                    *lbc = *BOX_DRAWINGS_LIGHT_ARC_UP_AND_RIGHT_CHARACTER;
-                                    *rbc = *BOX_DRAWINGS_LIGHT_ARC_UP_AND_LEFT_CHARACTER;
+                                    *hc = *BOX_DRAWINGS_LIGHT_HORIZONTAL_WIDE_CHARACTER;
+                                    *vc = *BOX_DRAWINGS_LIGHT_VERTICAL_WIDE_CHARACTER;
+                                    *ltc = *BOX_DRAWINGS_LIGHT_ARC_DOWN_AND_RIGHT_WIDE_CHARACTER;
+                                    *rtc = *BOX_DRAWINGS_LIGHT_ARC_DOWN_AND_LEFT_WIDE_CHARACTER;
+                                    *lbc = *BOX_DRAWINGS_LIGHT_ARC_UP_AND_RIGHT_WIDE_CHARACTER;
+                                    *rbc = *BOX_DRAWINGS_LIGHT_ARC_UP_AND_LEFT_WIDE_CHARACTER;
                                 }
                             }
 
@@ -461,12 +462,12 @@ void serialise_linux_console_rectangle_border(void* p0, void* p1,
 
                                 if (r != 0) {
 
-                                    *hc = *BOX_DRAWINGS_DOUBLE_HORIZONTAL_CHARACTER;
-                                    *vc = *BOX_DRAWINGS_DOUBLE_VERTICAL_CHARACTER;
-                                    *ltc = *BOX_DRAWINGS_DOUBLE_DOWN_AND_RIGHT_CHARACTER;
-                                    *rtc = *BOX_DRAWINGS_DOUBLE_DOWN_AND_LEFT_CHARACTER;
-                                    *lbc = *BOX_DRAWINGS_DOUBLE_UP_AND_RIGHT_CHARACTER;
-                                    *rbc = *BOX_DRAWINGS_DOUBLE_UP_AND_LEFT_CHARACTER;
+                                    *hc = *BOX_DRAWINGS_DOUBLE_HORIZONTAL_WIDE_CHARACTER;
+                                    *vc = *BOX_DRAWINGS_DOUBLE_VERTICAL_WIDE_CHARACTER;
+                                    *ltc = *BOX_DRAWINGS_DOUBLE_DOWN_AND_RIGHT_WIDE_CHARACTER;
+                                    *rtc = *BOX_DRAWINGS_DOUBLE_DOWN_AND_LEFT_WIDE_CHARACTER;
+                                    *lbc = *BOX_DRAWINGS_DOUBLE_UP_AND_RIGHT_WIDE_CHARACTER;
+                                    *rbc = *BOX_DRAWINGS_DOUBLE_UP_AND_LEFT_WIDE_CHARACTER;
                                 }
                             }
 
@@ -558,17 +559,17 @@ void serialise_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, v
                             int* cc = (int*) p4;
 
                             // The horizontal character.
-                            wchar_t hc = *SPACE_CHARACTER;
+                            wchar_t hc = *SPACE_WIDE_CHARACTER;
                             // The vertical character.
-                            wchar_t vc = *SPACE_CHARACTER;
+                            wchar_t vc = *SPACE_WIDE_CHARACTER;
                             // The left top character.
-                            wchar_t ltc = *SPACE_CHARACTER;
+                            wchar_t ltc = *SPACE_WIDE_CHARACTER;
                             // The right top character.
-                            wchar_t rtc = *SPACE_CHARACTER;
+                            wchar_t rtc = *SPACE_WIDE_CHARACTER;
                             // The left bottom character.
-                            wchar_t lbc = *SPACE_CHARACTER;
+                            wchar_t lbc = *SPACE_WIDE_CHARACTER;
                             // The right bottom character.
-                            wchar_t rbc = *SPACE_CHARACTER;
+                            wchar_t rbc = *SPACE_WIDE_CHARACTER;
 
                             // Determine border characters.
                             serialise_linux_console_rectangle_border((void*) &hc, (void*) &vc,
@@ -590,7 +591,7 @@ void serialise_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, v
                             // The character index.
                             int ci = 0;
                             // The character.
-                            wchar_t* c = SPACE_CHARACTER;
+                            wchar_t* c = SPACE_WIDE_CHARACTER;
 
                             while (1) {
 
@@ -727,7 +728,7 @@ void serialise_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, v
                                         // as it is always calculated before getting a character.
 
                                         // Reset character.
-                                        c = SPACE_CHARACTER;
+                                        c = SPACE_WIDE_CHARACTER;
 
                                         x++;
                                     }
@@ -1239,17 +1240,17 @@ void serialise_linux_console_shape(void* p0, void* p1, void* p2, void* p3, void*
 
             if (r != 0) {
 
-                // The temporary ascii character array.
+                // The temporary character array.
                 void* tmp = NULL_POINTER;
                 int tmps = *sc + 1;
 
-                // Allocate temporary ascii character array.
+                // Allocate temporary character array.
                 allocate((void*) &tmp, (void*) &tmps, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
-                // Set temporary ascii character array by first copying the
+                // Set temporary character array by first copying the
                 // given array and then adding the null termination character.
                 set_array_elements(tmp, (void*) NUMBER_0_INTEGER, p3, p4, (void*) CHARACTER_ARRAY);
-                set_array_elements(tmp, p4, (void*) NULL_CONTROL_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+                set_array_elements(tmp, p4, (void*) NULL_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
 
                 // Initialise temporary wide character string size.
                 // CAUTION! One extra place is added for the null termination character.
@@ -1268,7 +1269,7 @@ void serialise_linux_console_shape(void* p0, void* p1, void* p2, void* p3, void*
 /* CYGWIN_ENVIRONMENT */
 #endif
 
-                // Deallocate temporary ascii character array.
+                // Deallocate temporary character array.
                 deallocate((void*) &tmp, (void*) &tmps, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
             }
         }

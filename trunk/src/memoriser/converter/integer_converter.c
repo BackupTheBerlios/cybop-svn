@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2007-03-11 20:09:30 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2007-04-09 08:48:44 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -81,7 +81,7 @@ void parse_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
             set_array_elements((void*) tmp, (void*) NUMBER_0_INTEGER, p3, p4, (void*) CHARACTER_ARRAY);
             // Add string termination to temporary null-terminated string.
             // The source count is used as index for the termination character.
-            set_array_elements((void*) tmp, p4, (void*) NULL_CONTROL_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+            set_array_elements((void*) tmp, p4, (void*) NULL_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
 
             // The tail variable is useless here and only needed for the string
             // transformation function. If the whole string array consists of

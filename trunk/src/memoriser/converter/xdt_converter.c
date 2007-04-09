@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2007-04-04 22:06:31 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2007-04-09 08:48:44 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,6 +30,7 @@
 #include "../../globals/constants/xdt/xdt_field_constants.c"
 #include "../../globals/constants/xdt/xdt_record_constants.c"
 #include "../../globals/constants/xdt/xdt_field_name_constants.c"
+#include "../../globals/constants/character_constants.c"
 #include "../../globals/constants/log_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../memoriser/array.c"
@@ -136,12 +137,12 @@ void parse_xdt_field(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
 
                                 // Verify if field end is reached (carriage return and line feed).
 
-                                if (*((char*) *s) == *CARRIAGE_RETURN_CONTROL_ASCII_CHARACTER) {
+                                if (*((char*) *s) == *CARRIAGE_RETURN_CONTROL_CHARACTER) {
 
                                     // Increment source xdt byte array index.
                                     *s = *s + *PRIMITIVE_COUNT;
 
-                                    if (*((char*) *s) == *LINE_FEED_CONTROL_ASCII_CHARACTER) {
+                                    if (*((char*) *s) == *LINE_FEED_CONTROL_CHARACTER) {
 
                                         // Increment source xdt byte array index.
                                         *s = *s + *PRIMITIVE_COUNT;
@@ -225,9 +226,9 @@ void parse_xdt_next_field(void* p0, void* p1, void* p2) {
 
                     if ((j + *PRIMITIVE_COUNT + *PRIMITIVE_COUNT) <= *ac) {
 
-                        if (*(a + j) == *CARRIAGE_RETURN_CONTROL_ASCII_CHARACTER) {
+                        if (*(a + j) == *CARRIAGE_RETURN_CONTROL_CHARACTER) {
 
-                            if (*(a + j + *PRIMITIVE_COUNT) == *LINE_FEED_CONTROL_ASCII_CHARACTER) {
+                            if (*(a + j + *PRIMITIVE_COUNT) == *LINE_FEED_CONTROL_CHARACTER) {
 
                                 // Set next field count to the first character following
                                 // the carriage return plus line feed characters.

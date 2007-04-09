@@ -20,23 +20,40 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2007-04-07 22:58:12 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2007-04-09 08:48:44 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef MODEL_DIAGRAM_CONVERTER_SOURCE
 #define MODEL_DIAGRAM_CONVERTER_SOURCE
 
+#include "../../globals/constants/integer_constants.c"
 #include "../../globals/constants/log_constants.c"
 #include "../../globals/logger/logger.c"
-/*??
-#include "../../globals/constants/boolean_constants.c"
-#include "../../globals/constants/integer_constants.c"
-#include "../../globals/constants/model_constants.c"
-#include "../../globals/constants/structure_constants.c"
-#include "../../memoriser/allocator.c"
-#include "../../memoriser/array.c"
-*/
+
+//
+// Forward declarations.
+//
+
+/**
+ * Serialises the knowledge model according to the given knowledge type
+ * and creates a byte stream from it.
+ *
+ * @param p0 the destination (Hand over as reference!)
+ * @param p1 the destination count
+ * @param p2 the destination size
+ * @param p3 the source name
+ * @param p4 the source name count
+ * @param p5 the source abstraction
+ * @param p6 the source abstraction count
+ * @param p7 the source model
+ * @param p8 the source model count
+ * @param p9 the source details
+ * @param p10 the source details count
+ * @param p11 the knowledge memory
+ * @param p12 the knowledge memory count
+ */
+void serialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11, void* p12);
 
 /**
  * Parses the model diagram and creates a knowledge model from it.
@@ -52,19 +69,74 @@
  */
 void parse_model_diagram(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    log_message_debug("Parse model diagram.");
+    log_message_debug("Information: Parse model diagram.");
 }
 
 /**
- * Serialises the knowledge model part.
+ * Serialises the compound.
  *
- * @param p0 the destination model diagram (Hand over as reference!)
+ * @param p0 the destination model diagram byte stream (Hand over as reference!)
  * @param p1 the destination count
  * @param p2 the destination size
- * @param p3 the source knowledge model
- * @param p4 the source count
+ * @param p3 the source model
+ * @param p4 the source model count
+ * @param p5 the knowledge memory
+ * @param p6 the knowledge memory count
  */
-void serialise_model_diagram_part(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void serialise_model_diagram_compound(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
+
+    if (p4 != NULL_POINTER) {
+
+        int* smc = (int*) p4;
+
+        log_message_debug("Debug: Serialise model diagram compound.");
+
+/*??
+        // The loop variable.
+        int j = *NUMBER_0_INTEGER;
+
+        // The part name, abstraction, model, details.
+        void** n = &NULL_POINTER;
+        void** nc = &NULL_POINTER;
+        void** ns = &NULL_POINTER;
+        void** a = &NULL_POINTER;
+        void** ac = &NULL_POINTER;
+        void** as = &NULL_POINTER;
+        void** m = &NULL_POINTER;
+        void** mc = &NULL_POINTER;
+        void** ms = &NULL_POINTER;
+        void** d = &NULL_POINTER;
+        void** dc = &NULL_POINTER;
+        void** ds = &NULL_POINTER;
+
+        while (*NUMBER_1_INTEGER) {
+
+            if (j >= *smc) {
+
+                break;
+            }
+
+            // Get part name at current index.
+            get_compound_element_name_by_index(p7, p8, (void*) &j, (void*) &n, (void*) &nc, (void*) &ns);
+
+            // Get part abstraction, model, details at current index.
+            get_compound_element_by_index(p7, p8, (void*) &j,
+                (void*) &a, (void*) &ac, (void*) &as,
+                (void*) &m, (void*) &mc, (void*) &ms,
+                (void*) &d, (void*) &dc, (void*) &ds);
+
+            // Recursively call this procedure for compound part model.
+            serialise_model_diagram(p0, p1, p2, *n, *nc, *a, *ac, *m, *mc, *d, *dc, p11, p12);
+
+            // Increment loop variable.
+            j++;
+        }
+*/
+
+    } else {
+
+        log_message_debug("Error: Could not serialise model diagram compound. The source model count is null.");
+    }
 }
 
 /**
@@ -76,31 +148,104 @@ void serialise_model_diagram_part(void* p0, void* p1, void* p2, void* p3, void* 
  * @param p0 the destination model diagram (Hand over as reference!)
  * @param p1 the destination count
  * @param p2 the destination size
- * @param p3 the source knowledge model
- * @param p4 the source count
+ * @param p3 the source name
+ * @param p4 the source name count
+ * @param p5 the source abstraction
+ * @param p6 the source abstraction count
+ * @param p7 the source model
+ * @param p8 the source model count
+ * @param p9 the source details
+ * @param p10 the source details count
+ * @param p11 the knowledge memory
+ * @param p12 the knowledge memory count
  */
-void serialise_model_diagram(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void serialise_model_diagram(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11, void* p12) {
 
-    if (p3 != NULL_POINTER) {
+    if (p10 != NULL_POINTER) {
 
-        int* s = (int*) p3;
+        int* sdc = (int*) p10;
 
-        if (p1 != NULL_POINTER) {
+        if (p8 != NULL_POINTER) {
 
-            int* dc = (int*) p1;
+            int* smc = (int*) p8;
 
-            log_message_debug("Serialise model diagram.");
+            log_message_debug("Information: Serialise model diagram.");
 
-            serialise_model_diagram_part(p0, p1, p2, p3, p4);
+/*??
+            // The comparison result.
+            int r = *NUMBER_0_INTEGER;
+
+            // Add minus character to destination array.
+            serialise(p0, p1, p2, (void*) HYPHEN_MINUS_CHARACTER, (void*) HYPHEN_MINUS_CHARACTER_COUNT, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT, p11, p12);
+
+            // Add space character to destination array.
+            serialise(p0, p1, p2, (void*) SPACE_CHARACTER, (void*) SPACE_CHARACTER_COUNT, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT, p11, p12);
+
+            // Add part name to destination array.
+            serialise(p0, p1, p2, p3, p4, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT, p11, p12);
+
+            // Add space character to destination array.
+            serialise(p0, p1, p2, (void*) SPACE_CHARACTER, (void*) SPACE_CHARACTER_COUNT, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT, p11, p12);
+
+            // Add pipe character to destination array.
+            serialise(p0, p1, p2, (void*) LATIN_LETTER_DENTAL_CLICK_CHARACTER, (void*) LATIN_LETTER_DENTAL_CLICK_CHARACTER_COUNT, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT, p11, p12);
+
+            // Add space character to destination array.
+            serialise(p0, p1, p2, (void*) SPACE_CHARACTER, (void*) SPACE_CHARACTER_COUNT, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT, p11, p12);
+
+            // Add part abstraction to destination array.
+            serialise(p0, p1, p2, p5, p6, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT, p11, p12);
+
+            compare_arrays(p5, p6, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+            if (r != *NUMBER_0_INTEGER) {
+
+                if (*smc > *NUMBER_0_INTEGER) {
+
+                    // Only process the following code, if the model compound contains at least one part.
+
+                    // Add line feed character to destination array.
+                    serialise(p0, p1, p2, (void*) LINE_FEED_CONTROL_CHARACTER, (void*) LINE_FEED_CONTROL_CHARACTER_COUNT, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT, p11, p12);
+
+                    // Add part model to destination array.
+                    serialise_model_diagram_compound(p0, p1, p2, p7, p8, p11, p12);
+                }
+
+            } else {
+
+                // Add space character to destination array.
+                serialise(p0, p1, p2, p3, p4, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT, p11, p12);
+
+                // Add pipe character to destination array.
+                serialise(p0, p1, p2, p3, p4, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT, p11, p12);
+
+                // Add space character to destination array.
+                serialise(p0, p1, p2, p3, p4, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT, p11, p12);
+
+                // Add part model to destination array.
+                serialise(p0, p1, p2, p7, p8, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT, p11, p12);
+            }
+
+            if (*sdc > *NUMBER_0_INTEGER) {
+
+                // Only process the following code, if the details compound contains at least one part.
+
+                // Add line feed character to destination array.
+                serialise(p0, p1, p2, (void*) LINE_FEED_CONTROL_CHARACTER, (void*) LINE_FEED_CONTROL_CHARACTER_COUNT, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT, p11, p12);
+
+                // Add part details to destination array.
+                serialise_model_diagram_compound(p0, p1, p2, p9, p10, p11, p12);
+            }
+*/
 
         } else {
 
-            log_message_debug("Could not serialise model diagram. The ?? is null.");
+            log_message_debug("Error: Could not serialise model diagram. The source model count is null.");
         }
 
     } else {
 
-        log_message_debug("Could not serialise model diagram. The ?? is null.");
+        log_message_debug("Error: Could not serialise model diagram. The source details count is null.");
     }
 }
 

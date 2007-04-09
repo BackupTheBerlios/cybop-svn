@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.16 $ $Date: 2007-01-14 22:06:48 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2007-04-09 08:48:44 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -59,7 +59,7 @@ void send_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
     pthread_mutex_lock(*xmt);
 
     // Serialise compound model into x window system window.
-    serialise(p0, NULL_POINTER, NULL_POINTER, p1, p2, (void*) X_WINDOW_SYSTEM_MODEL, (void*) X_WINDOW_SYSTEM_MODEL_COUNT, p3, p4);
+    serialise(p0, NULL_POINTER, NULL_POINTER, NULL_POINTER, NULL_POINTER, (void*) X_WINDOW_SYSTEM_MODEL, (void*) X_WINDOW_SYSTEM_MODEL_COUNT, p1, p2, NULL_POINTER, NULL_POINTER, p3, p4);
 
     // The display, which is a subsumption of
     // xserver, screens, hardware (input devices etc.).

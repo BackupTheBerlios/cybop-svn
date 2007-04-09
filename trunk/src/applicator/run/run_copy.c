@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2007-01-14 22:06:48 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2007-04-09 08:48:44 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -31,7 +31,7 @@
 #include "../../applicator/run/run_execute.c"
 #include "../../globals/constants/shell_command/unix_shell_command_constants.c"
 #include "../../globals/constants/abstraction_constants.c"
-#include "../../globals/constants/ascii_character_constants.c"
+#include "../../globals/constants/character_constants.c"
 #include "../../globals/constants/integer_constants.c"
 #include "../../globals/constants/log_constants.c"
 #include "../../globals/constants/model_constants.c"
@@ -153,7 +153,7 @@ void run_copy(void* p0, void* p1, void* p2, void* p3) {
 
             // Assemble option by copying the actual argument.
             // A null termination character is added behind the last argument, see below!
-            set_array_elements(arg, (void*) &argc, (void*) SPACE_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+            set_array_elements(arg, (void*) &argc, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
             argc = argc + *PRIMITIVE_COUNT;
             set_array_elements(arg, (void*) &argc, (void*) COPY_UNIX_SHELL_COMMAND_RECURSIVE, (void*) COPY_UNIX_SHELL_COMMAND_RECURSIVE_COUNT, (void*) CHARACTER_ARRAY);
             argc = argc + *COPY_UNIX_SHELL_COMMAND_RECURSIVE_COUNT;
@@ -180,7 +180,7 @@ void run_copy(void* p0, void* p1, void* p2, void* p3) {
 
             // Assemble option by copying the actual argument.
             // A null termination character is added behind the last argument, see below!
-            set_array_elements(arg, (void*) &argc, (void*) SPACE_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+            set_array_elements(arg, (void*) &argc, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
             argc = argc + *PRIMITIVE_COUNT;
             set_array_elements(arg, (void*) &argc, (void*) COPY_UNIX_SHELL_COMMAND_SOURCE, (void*) COPY_UNIX_SHELL_COMMAND_SOURCE_COUNT, (void*) CHARACTER_ARRAY);
             argc = argc + *COPY_UNIX_SHELL_COMMAND_SOURCE_COUNT;
@@ -207,7 +207,7 @@ void run_copy(void* p0, void* p1, void* p2, void* p3) {
 
             // Assemble option by copying the actual argument.
             // A null termination character is added behind the last argument, see below!
-            set_array_elements(arg, (void*) &argc, (void*) SPACE_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+            set_array_elements(arg, (void*) &argc, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
             argc = argc + *PRIMITIVE_COUNT;
             set_array_elements(arg, (void*) &argc, (void*) COPY_UNIX_SHELL_COMMAND_DESTINATION, (void*) COPY_UNIX_SHELL_COMMAND_DESTINATION_COUNT, (void*) CHARACTER_ARRAY);
             argc = argc + *COPY_UNIX_SHELL_COMMAND_DESTINATION_COUNT;
@@ -229,7 +229,7 @@ void run_copy(void* p0, void* p1, void* p2, void* p3) {
     }
 
     // Assemble arguments by adding the null termination character.
-    set_array_elements(arg, (void*) &argc, (void*) NULL_CONTROL_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+    set_array_elements(arg, (void*) &argc, (void*) NULL_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
     argc = argc + *PRIMITIVE_COUNT;
 
     // Execute arguments as process.
@@ -280,7 +280,7 @@ void run_copy(void* p0, void* p1, void* p2, void* p3) {
     // and then adding the null termination character.
     set_array_elements(shell, (void*) &shellc, (void*) SYSTEM_SHELL, (void*) SYSTEM_SHELL_COUNT, (void*) CHARACTER_ARRAY);
     shellc = shellc + *SYSTEM_SHELL_COUNT;
-    set_array_elements(shell, (void*) &shellc, (void*) NULL_CONTROL_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+    set_array_elements(shell, (void*) &shellc, (void*) NULL_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
     shellc = shellc + *PRIMITIVE_COUNT;
 
     // Increase arguments vector size for shell argument.
@@ -300,7 +300,7 @@ void run_copy(void* p0, void* p1, void* p2, void* p3) {
     // and then adding the null termination character.
     set_array_elements(character, (void*) &characterc, (void*) SYSTEM_SHELL_CHARACTER_ARGUMENT, (void*) SYSTEM_SHELL_CHARACTER_ARGUMENT_COUNT, (void*) CHARACTER_ARRAY);
     characterc = characterc + *SYSTEM_SHELL_CHARACTER_ARGUMENT_COUNT;
-    set_array_elements(character, (void*) &characterc, (void*) NULL_CONTROL_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+    set_array_elements(character, (void*) &characterc, (void*) NULL_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
     characterc = characterc + *PRIMITIVE_COUNT;
 
     // Increase arguments vector size for shell character argument.
@@ -344,7 +344,7 @@ void run_copy(void* p0, void* p1, void* p2, void* p3) {
 
             // Assemble option by copying the actual argument.
             // A null termination character is added behind the last argument, see below!
-            set_array_elements(command, (void*) &commandc, (void*) SPACE_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+            set_array_elements(command, (void*) &commandc, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
             commandc = commandc + *PRIMITIVE_COUNT;
             set_array_elements(command, (void*) &commandc, (void*) COPY_UNIX_SHELL_COMMAND_RECURSIVE, (void*) COPY_UNIX_SHELL_COMMAND_RECURSIVE_COUNT, (void*) CHARACTER_ARRAY);
             commandc = commandc + *COPY_UNIX_SHELL_COMMAND_RECURSIVE_COUNT;
@@ -371,7 +371,7 @@ void run_copy(void* p0, void* p1, void* p2, void* p3) {
 
             // Assemble option by copying the actual argument.
             // A null termination character is added behind the last argument, see below!
-            set_array_elements(command, (void*) &commandc, (void*) SPACE_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+            set_array_elements(command, (void*) &commandc, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
             commandc = commandc + *PRIMITIVE_COUNT;
             set_array_elements(command, (void*) &commandc, (void*) COPY_UNIX_SHELL_COMMAND_SOURCE, (void*) COPY_UNIX_SHELL_COMMAND_SOURCE_COUNT, (void*) CHARACTER_ARRAY);
             commandc = commandc + *COPY_UNIX_SHELL_COMMAND_SOURCE_COUNT;
@@ -398,7 +398,7 @@ void run_copy(void* p0, void* p1, void* p2, void* p3) {
 
             // Assemble option by copying the actual argument.
             // A null termination character is added behind the last argument, see below!
-            set_array_elements(command, (void*) &commandc, (void*) SPACE_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+            set_array_elements(command, (void*) &commandc, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
             commandc = commandc + *PRIMITIVE_COUNT;
             set_array_elements(command, (void*) &commandc, (void*) COPY_UNIX_SHELL_COMMAND_DESTINATION, (void*) COPY_UNIX_SHELL_COMMAND_DESTINATION_COUNT, (void*) CHARACTER_ARRAY);
             commandc = commandc + *COPY_UNIX_SHELL_COMMAND_DESTINATION_COUNT;
@@ -420,7 +420,7 @@ void run_copy(void* p0, void* p1, void* p2, void* p3) {
     }
 
     // Assemble command by adding the null termination character.
-    set_array_elements(command, (void*) &commandc, (void*) NULL_CONTROL_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+    set_array_elements(command, (void*) &commandc, (void*) NULL_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
     commandc = commandc + *PRIMITIVE_COUNT;
 
     //

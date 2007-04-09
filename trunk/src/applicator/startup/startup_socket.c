@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.16 $ $Date: 2007-01-30 01:11:06 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2007-04-09 08:48:44 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -38,6 +38,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include "../../globals/constants/abstraction_constants.c"
+#include "../../globals/constants/character_constants.c"
 #include "../../globals/constants/integer_constants.c"
 #include "../../globals/constants/model_constants.c"
 #include "../../globals/constants/structure_constants.c"
@@ -254,7 +255,7 @@ void startup_socket_get_host_address(void* p0, void* p1, void* p2, void* p3) {
                     // Set terminated address model by first copying the actual address model
                     // and then adding the null termination character.
                     set_array_elements(s, (void*) NUMBER_0_INTEGER, p1, p2, (void*) CHARACTER_ARRAY);
-                    set_array_elements(s, p2, (void*) NULL_CONTROL_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+                    set_array_elements(s, p2, (void*) NULL_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
 
                     // Convert uint16_t integer hostshort from host byte order
                     // to network byte order.
@@ -356,7 +357,7 @@ void startup_socket_initialise_local_socket_address(void* p0, void* p1, void* p2
                     // Set terminated file name by first copying the actual name
                     // and then adding the null termination character.
                     set_array_elements(path, (void*) NUMBER_0_INTEGER, p1, p2, (void*) CHARACTER_ARRAY);
-                    set_array_elements(path, p2, (void*) NULL_CONTROL_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+                    set_array_elements(path, p2, (void*) NULL_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
 
                 } else {
 

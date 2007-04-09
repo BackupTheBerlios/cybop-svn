@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.20 $ $Date: 2007-01-14 22:06:48 $ $Author: christian $
+ * @version $Revision: 1.21 $ $Date: 2007-04-09 08:48:43 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -34,7 +34,6 @@
 #include <stdio.h>
 //?? #include <wchar.h>
 #include "../../globals/constants/abstraction_constants.c"
-#include "../../globals/constants/ascii_character_constants.c"
 #include "../../globals/constants/character_constants.c"
 #include "../../globals/constants/control_sequence_constants.c"
 #include "../../globals/constants/cyboi_constants.c"
@@ -42,6 +41,7 @@
 #include "../../globals/constants/name_constants.c"
 #include "../../globals/constants/structure_constants.c"
 #include "../../globals/constants/system_constants.c"
+#include "../../globals/constants/wide_character_constants.c"
 #include "../../globals/variables/variables.c"
 #include "../../memoriser/accessor/compound_accessor.c"
 #include "../../memoriser/accessor/signal_memory_accessor.c"
@@ -226,11 +226,11 @@ void receive_linux_console_character(void* p0, void* p1) {
 
         char* e = (char*) p1;
 
-        if (*e == *LINE_FEED_CONTROL_CHARACTER) {
+        if (*e == *LINE_FEED_CONTROL_WIDE_CHARACTER) {
 
             receive_linux_console_signal(p0, (void*) UI_ENTER_NAME, (void*) UI_ENTER_NAME_COUNT);
 
-        } else if (*e == *ESCAPE_CONTROL_CHARACTER) {
+        } else if (*e == *ESCAPE_CONTROL_WIDE_CHARACTER) {
 
             receive_linux_console_signal(p0, (void*) UI_ESCAPE_NAME, (void*) UI_ESCAPE_NAME_COUNT);
 
@@ -274,7 +274,7 @@ void receive_linux_console_thread(void* p0) {
     // NEVERTHELESS, a char is used here since EOF is not of importance below,
     // in the "get_universal_compound_element_by_name" procedure.
 //??    wint_t e = *NULL_CONTROL_CHARACTER;
-    char e = *NULL_CONTROL_ASCII_CHARACTER;
+    char e = *NULL_CONTROL_CHARACTER;
     // The escape character mode.
     int esc = *NUMBER_0_INTEGER;
     // The escape control sequence mode.
@@ -355,7 +355,7 @@ void receive_linux_console_thread(void* p0) {
             // or if a left square bracket character follows now,
             // in which case this is the start of an escape control sequence.
 
-            if (e == *LEFT_SQUARE_BRACKET_CHARACTER) {
+            if (e == *LEFT_SQUARE_BRACKET_WIDE_CHARACTER) {
 
                 // This is the start of an escape control sequence.
 
@@ -380,7 +380,7 @@ void receive_linux_console_thread(void* p0) {
                 }
             }
 
-        } else if (e == *ESCAPE_CONTROL_CHARACTER) {
+        } else if (e == *ESCAPE_CONTROL_WIDE_CHARACTER) {
 
             // Set escape character flag.
             esc = *NUMBER_1_INTEGER;

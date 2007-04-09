@@ -24,7 +24,7 @@
  * - receive a file stream into a byte array
  * - send a file stream from a byte array
  *
- * @version $Revision: 1.19 $ $Date: 2007-04-07 12:15:28 $ $Author: christian $
+ * @version $Revision: 1.20 $ $Date: 2007-04-09 08:48:44 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -32,7 +32,7 @@
 #define FILE_COMMUNICATOR_SOURCE
 
 #include <stdio.h>
-#include "../../globals/constants/ascii_character_constants.c"
+#include "../../globals/constants/character_constants.c"
 #include "../../globals/constants/cyboi_constants.c"
 #include "../../globals/constants/integer_constants.c"
 #include "../../globals/constants/structure_constants.c"
@@ -169,7 +169,7 @@ void read_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
             // Set terminated file name by first copying the actual name
             // and then adding the null termination character.
             set_array_elements(tn, (void*) NUMBER_0_INTEGER, p3, p4, (void*) CHARACTER_ARRAY);
-            set_array_elements(tn, p4, (void*) NULL_CONTROL_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+            set_array_elements(tn, p4, (void*) NULL_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
 
             // Open file.
             // CAUTION! The file name cannot be handed over as is.
@@ -309,7 +309,7 @@ void write_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
             // Set terminated file name by first copying the actual name
             // and then adding the null termination character.
             set_array_elements(tn, (void*) NUMBER_0_INTEGER, p0, p1, (void*) CHARACTER_ARRAY);
-            set_array_elements(tn, p1, (void*) NULL_CONTROL_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+            set_array_elements(tn, p1, (void*) NULL_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
 
             // Open file.
             // CAUTION! The file name cannot be handed over as is.

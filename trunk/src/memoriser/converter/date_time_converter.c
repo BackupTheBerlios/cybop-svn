@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2007-03-06 00:11:39 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2007-04-09 08:48:44 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -28,6 +28,7 @@
 #define DATE_TIME_CONVERTER_SOURCE
 
 #include "../../globals/constants/abstraction_constants.c"
+#include "../../globals/constants/character_constants.c"
 #include "../../globals/constants/log_constants.c"
 #include "../../globals/constants/structure_constants.c"
 #include "../../globals/logger/logger.c"
@@ -168,11 +169,11 @@ void parse_ddmmyyyy_date_time(void* p0, void* p1, void* p2, void* p3, void* p4) 
                         int yti = *NUMBER_4_INTEGER;
 
                         // Add string termination to temporary null-terminated day string.
-                        set_array_elements((void*) tmpd, (void*) &dti, (void*) NULL_CONTROL_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+                        set_array_elements((void*) tmpd, (void*) &dti, (void*) NULL_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
                         // Add string termination to temporary null-terminated month string.
-                        set_array_elements((void*) tmpm, (void*) &mti, (void*) NULL_CONTROL_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+                        set_array_elements((void*) tmpm, (void*) &mti, (void*) NULL_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
                         // Add string termination to temporary null-terminated year string.
-                        set_array_elements((void*) tmpy, (void*) &yti, (void*) NULL_CONTROL_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+                        set_array_elements((void*) tmpy, (void*) &yti, (void*) NULL_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
 
                         // The tail variable is useless here and only needed for the string
                         // transformation function. If the whole string array consists of

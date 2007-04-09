@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2007-02-07 00:13:35 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2007-04-09 08:48:44 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -29,7 +29,7 @@
 
 #include "../../globals/constants/abstraction_constants.c"
 #include "../../globals/constants/channel_constants.c"
-#include "../../globals/constants/ascii_character_constants.c"
+#include "../../globals/constants/character_constants.c"
 #include "../../globals/constants/log_constants.c"
 #include "../../globals/constants/model_constants.c"
 #include "../../globals/constants/name_constants.c"
@@ -76,16 +76,16 @@ void serialise_xhtml_indentation(void* p0, void* p1, void* p2, void* p3) {
             }
 
             // Serialise character tabulation character.
-//??            serialise_character_vector(p0, p1, p2, (void*) CHARACTER_TABULATION_CONTROL_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT);
+//??            serialise_character_vector(p0, p1, p2, (void*) CHARACTER_TABULATION_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT);
 
             // Serialise space character.
-            serialise_character_vector(p0, p1, p2, (void*) SPACE_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT);
+            serialise_character_vector(p0, p1, p2, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT);
             // Serialise space character.
-            serialise_character_vector(p0, p1, p2, (void*) SPACE_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT);
+            serialise_character_vector(p0, p1, p2, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT);
             // Serialise space character.
-            serialise_character_vector(p0, p1, p2, (void*) SPACE_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT);
+            serialise_character_vector(p0, p1, p2, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT);
             // Serialise space character.
-            serialise_character_vector(p0, p1, p2, (void*) SPACE_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT);
+            serialise_character_vector(p0, p1, p2, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT);
 
             // Increment loop count.
             j++;
@@ -161,17 +161,17 @@ void serialise_xhtml_attributes(void* p0, void* p1, void* p2, void* p3, void* p4
                     (void*) &d, (void*) &dc, (void*) &ds);
 
                 // Serialise space character.
-                serialise_character_vector(p0, p1, p2, (void*) SPACE_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT);
+                serialise_character_vector(p0, p1, p2, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT);
                 // Serialise attribute name.
                 serialise_character_vector(p0, p1, p2, *n, *nc);
                 // Serialise equals sign character.
-                serialise_character_vector(p0, p1, p2, (void*) EQUALS_SIGN_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT);
+                serialise_character_vector(p0, p1, p2, (void*) EQUALS_SIGN_CHARACTER, (void*) PRIMITIVE_COUNT);
                 // Serialise quotation mark character.
-                serialise_character_vector(p0, p1, p2, (void*) QUOTATION_MARK_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT);
+                serialise_character_vector(p0, p1, p2, (void*) QUOTATION_MARK_CHARACTER, (void*) PRIMITIVE_COUNT);
                 // Serialise space character.
                 serialise_character_vector(p0, p1, p2, *m, *mc);
                 // Serialise quotation mark character.
-                serialise_character_vector(p0, p1, p2, (void*) QUOTATION_MARK_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT);
+                serialise_character_vector(p0, p1, p2, (void*) QUOTATION_MARK_CHARACTER, (void*) PRIMITIVE_COUNT);
 
                 // Reset source part abstraction, model, details.
                 a = &NULL_POINTER;
@@ -224,15 +224,15 @@ void serialise_xhtml_begin_tag(void* p0, void* p1, void* p2,
     // Serialise indentation.
     serialise_xhtml_indentation(p0, p1, p2, p9);
     // Serialise less than character.
-    serialise_character_vector(p0, p1, p2, (void*) LESS_THAN_SIGN_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT);
+    serialise_character_vector(p0, p1, p2, (void*) LESS_THAN_SIGN_CHARACTER, (void*) PRIMITIVE_COUNT);
     // Serialise xhtml tag.
     serialise_character_vector(p0, p1, p2, p3, p4);
     // Serialise html tag properties.
     serialise_xhtml_attributes(p0, p1, p2, p5, p6, p7, p8);
     // Serialise greater than character.
-    serialise_character_vector(p0, p1, p2, (void*) GREATER_THAN_SIGN_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT);
+    serialise_character_vector(p0, p1, p2, (void*) GREATER_THAN_SIGN_CHARACTER, (void*) PRIMITIVE_COUNT);
     // Serialise line feed character, for better source reading.
-    serialise_character_vector(p0, p1, p2, (void*) LINE_FEED_CONTROL_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT);
+    serialise_character_vector(p0, p1, p2, (void*) LINE_FEED_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT);
 }
 
 /**
@@ -252,15 +252,15 @@ void serialise_xhtml_end_tag(void* p0, void* p1, void* p2, void* p3, void* p4, v
     // Serialise indentation.
     serialise_xhtml_indentation(p0, p1, p2, p5);
     // Serialise less than character.
-    serialise_character_vector(p0, p1, p2, (void*) LESS_THAN_SIGN_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT);
+    serialise_character_vector(p0, p1, p2, (void*) LESS_THAN_SIGN_CHARACTER, (void*) PRIMITIVE_COUNT);
     // Serialise solidus character.
-    serialise_character_vector(p0, p1, p2, (void*) SOLIDUS_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT);
+    serialise_character_vector(p0, p1, p2, (void*) SOLIDUS_CHARACTER, (void*) PRIMITIVE_COUNT);
     // Serialise xhtml tag.
     serialise_character_vector(p0, p1, p2, p3, p4);
     // Serialise greater than character.
-    serialise_character_vector(p0, p1, p2, (void*) GREATER_THAN_SIGN_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT);
+    serialise_character_vector(p0, p1, p2, (void*) GREATER_THAN_SIGN_CHARACTER, (void*) PRIMITIVE_COUNT);
     // Serialise line feed character, for better source reading.
-    serialise_character_vector(p0, p1, p2, (void*) LINE_FEED_CONTROL_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT);
+    serialise_character_vector(p0, p1, p2, (void*) LINE_FEED_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT);
 }
 
 /**
@@ -289,7 +289,7 @@ void serialise_xhtml_tag_content(void* p0, void* p1, void* p2, void* p3, void* p
             // Serialise source part model.
             serialise_character_vector(p0, p1, p2, p3, p4);
             // Serialise line feed character, for better source reading.
-            serialise_character_vector(p0, p1, p2, (void*) LINE_FEED_CONTROL_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT);
+            serialise_character_vector(p0, p1, p2, (void*) LINE_FEED_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT);
         }
 
     } else {

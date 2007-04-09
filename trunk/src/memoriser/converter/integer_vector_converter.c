@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.18 $ $Date: 2007-03-11 20:09:30 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2007-04-09 08:48:44 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -87,7 +87,7 @@ void parse_integer_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     int ec = *NUMBER_0_INTEGER;
 
                     // Find comma character index.
-                    get_array_elements_index(p3, p4, (void*) COMMA_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &i, (void*) CHARACTER_ARRAY);
+                    get_array_elements_index(p3, p4, (void*) COMMA_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &i, (void*) CHARACTER_ARRAY);
 
                     // CAUTION! Do NOT change this comparison to greater than >
                     // or something else, because -1 must be allowed! See below.
@@ -235,7 +235,7 @@ void serialise_integer_vector(void* p0, void* p1, void* p2, void* p3, void* p4) 
                         *dc = *dc + cc;
 
                         // Set comma character.
-                        set_array_elements(*d, p1, (void*) COMMA_ASCII_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+                        set_array_elements(*d, p1, (void*) COMMA_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
                         *dc = *dc + *PRIMITIVE_COUNT;
 
                         // Recursively call this procedure for further integer numbers.
