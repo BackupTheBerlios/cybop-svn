@@ -25,7 +25,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.20 $ $Date: 2007-04-16 15:57:55 $ $Author: christian $
+ * @version $Revision: 1.21 $ $Date: 2007-04-16 21:28:08 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -34,10 +34,9 @@
 
 #include <string.h>
 #include "../controller/manager/globals_manager.c"
-#include "../controller/manager.c"
-#include "../globals/constants/command_line/command_line_constants.c"
+#include "../controller/optionaliser.c"
+#include "../globals/constants/log_message/log_message_constants.c"
 #include "../globals/logger/logger.c"
-#include "../tester/tester.c"
 
 /**
  * The main entry function.
@@ -50,11 +49,9 @@
  * - destroy internal memory
  * - destroy global variables
  *
- * The test function is only provided for testing reasons and can be ignored.
- *
- * @param p0 the argument count (argc), the first argument being the command
- * @param p1 the argument vector (argv)
- * @return the return value
+ * @param p0 the argument count (argc)
+ * @param p1 the argument vector (argv), the first argument being the command
+ * @return the return value (0 for normal shutdown; 1 for error)
  */
 int main(int p0, char** p1) {
 
@@ -73,37 +70,32 @@ int main(int p0, char** p1) {
     // Otherwise, the logger may not be able to log possible error messages.
     startup_globals();
 
-    // Call testing procedures. Comment/ uncomment this as needed!
-    // CAUTION! This has to stand AFTER the initialization of the
-    // global variables because these are used by the testing code.
-//??    test(); r = *NUMBER_0_INTEGER; shutdown_globals(); return r;
-
     if (p1 != NULL_POINTER) {
 
-        if (p0 == *STARTUP_PARAMETERS_COUNT) {
+        if (p0 == *COMMAND_LINE_ARGUMENTS_COUNT) {
 
             log_message_debug("Info: Execute CYBOI.");
 
-            // The run source name.
-            void** s = &NULL_POINTER;
+            // The option command line argument.
+            void** o = &NULL_POINTER;
 
-            // Get run source name.
-            get_array_elements((void*) p1, (void*) RUN_FILE_PARAMETER_INDEX, (void*) &s, (void*) POINTER_ARRAY);
+            // Get option command line argument.
+            get_array_elements((void*) p1, (void*) OPTION_COMMAND_LINE_ARGUMENT_INDEX, (void*) &o, (void*) POINTER_ARRAY);
 
-            if (*s != NULL_POINTER) {
+            if (*o != NULL_POINTER) {
 
-                // CAUTION! This is a DIRTY workaround!
-                // The run source count (number of file path characters)
-                // is not known. There are two possibilities to determine it:
+                // Get option command line argument count (number of characters).
+                //
+                // There are two possibilities to determine it:
                 // 1 Force the user to give it as third command line parameter
-                // (this would be rather weird and not very user-friendly)
+                // (this would be proper, but not very user-friendly)
                 // 2 Rely on the null termination character to determine it
-                // (in this case, the strlen function can be used)
+                // (this is a rather dirty workaround, but the strlen function can be used)
                 // Possibility 2 is applied here.
-                int sc = strlen((char*) *s);
+                int oc = strlen((char*) *o);
 
-                // Manage system.
-                manage(*s, (void*) &sc);
+                // Optionalise option command line argument.
+                optionalise(*o, (void*) &oc);
 
                 log_message((void*) INFO_LOG_LEVEL, (void*) EXIT_CYBOI_NORMALLY_MESSAGE, (void*) EXIT_CYBOI_NORMALLY_MESSAGE_COUNT);
 
@@ -118,7 +110,7 @@ int main(int p0, char** p1) {
         } else {
 
             log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_EXECUTE_CYBOI_THE_COMMAND_LINE_ARGUMENT_NUMBER_IS_INCORRECT_MESSAGE, (void*) COULD_NOT_EXECUTE_CYBOI_THE_COMMAND_LINE_ARGUMENT_NUMBER_IS_INCORRECT_MESSAGE_COUNT);
-            log_message((void*) INFO_LOG_LEVEL, (void*) USAGE_MESSAGE, (void*) USAGE_MESSAGE_COUNT);
+            log_message((void*) INFO_LOG_LEVEL, (void*) CYBOI_HELP_LOG_MESSAGE, (void*) CYBOI_HELP_LOG_MESSAGE_COUNT);
         }
 
     } else {

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2007-04-16 16:45:37 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2007-04-16 21:28:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,17 +30,36 @@
 #include "../../../globals/constants/integer/integer_constants.c"
 
 //
-// Startup command line parameters/arguments.
+// Command line arguments.
 //
 
-/** The startup parameters count. */
-static int* STARTUP_PARAMETERS_COUNT = NUMBER_2_INTEGER_ARRAY;
+/** The command line arguments count. */
+static int* COMMAND_LINE_ARGUMENTS_COUNT = NUMBER_2_INTEGER_ARRAY;
 
-/** The command parameter index. */
-static int* COMMAND_PARAMETER_INDEX = NUMBER_0_INTEGER_ARRAY;
+/** The command command line argument index. */
+static int* COMMAND_COMMAND_LINE_ARGUMENT_INDEX = NUMBER_0_INTEGER_ARRAY;
 
-/** The run file parameter index. */
-static int* RUN_FILE_PARAMETER_INDEX = NUMBER_1_INTEGER_ARRAY;
+/** The option command line argument index. */
+static int* OPTION_COMMAND_LINE_ARGUMENT_INDEX = NUMBER_1_INTEGER_ARRAY;
+
+//
+// Command line options.
+//
+
+/** The "--version" command line option. */
+static char VERSION_COMMAND_LINE_OPTION_ARRAY[] = {'-', '-', 'v', 'e', 'r', 's', 'i', 'o', 'n'};
+static char* VERSION_COMMAND_LINE_OPTION = VERSION_COMMAND_LINE_OPTION_ARRAY;
+static int* VERSION_COMMAND_LINE_OPTION_COUNT = NUMBER_9_INTEGER_ARRAY;
+
+/** The "--help" command line option. */
+static char HELP_COMMAND_LINE_OPTION_ARRAY[] = {'-', '-', 'h', 'e', 'l', 'p'};
+static char* HELP_COMMAND_LINE_OPTION = HELP_COMMAND_LINE_OPTION_ARRAY;
+static int* HELP_COMMAND_LINE_OPTION_COUNT = NUMBER_6_INTEGER_ARRAY;
+
+/** The "--test" command line option. */
+static char TEST_COMMAND_LINE_OPTION_ARRAY[] = {'-', '-', 't', 'e', 's', 't'};
+static char* TEST_COMMAND_LINE_OPTION = TEST_COMMAND_LINE_OPTION_ARRAY;
+static int* TEST_COMMAND_LINE_OPTION_COUNT = NUMBER_6_INTEGER_ARRAY;
 
 /* COMMAND_LINE_CONSTANTS_SOURCE */
 #endif
