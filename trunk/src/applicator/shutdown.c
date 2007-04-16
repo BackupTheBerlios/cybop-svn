@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.16 $ $Date: 2007-01-14 22:06:47 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2007-04-16 15:56:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description This module shuts down a service.
  */
@@ -31,10 +31,10 @@
 #include "../applicator/shutdown/shutdown_linux_console.c"
 #include "../applicator/shutdown/shutdown_socket.c"
 #include "../applicator/shutdown/shutdown_x_window_system.c"
-#include "../globals/constants/abstraction_constants.c"
-#include "../globals/constants/log_constants.c"
-#include "../globals/constants/model_constants.c"
-#include "../globals/constants/name_constants.c"
+#include "../globals/constants/cybol/cybol_abstraction_constants.c"
+#include "../globals/constants/log_message/log_message_constants.c"
+#include "../globals/constants/cybol/cybol_model_constants.c"
+#include "../globals/constants/cybol/cybol_name_constants.c"
 #include "../globals/logger/logger.c"
 #include "../memoriser/accessor/compound_accessor.c"
 #include "../memoriser/array.c"

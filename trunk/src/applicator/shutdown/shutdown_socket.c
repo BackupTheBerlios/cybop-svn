@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2007-01-26 00:38:17 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2007-04-16 15:56:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -30,7 +30,7 @@
 
 #ifdef LINUX_OPERATING_SYSTEM
 
-#include "../../globals/constants/structure_constants.c"
+#include "../../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../globals/variables/variables.c"
 #include "../../memoriser/accessor.c"

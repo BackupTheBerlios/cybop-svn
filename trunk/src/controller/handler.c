@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.13 $ $Date: 2007-01-14 22:06:48 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2007-04-16 15:57:55 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -30,8 +30,8 @@
 
 #include "../controller/handler/compound_handler.c"
 #include "../controller/handler/operation_handler.c"
-#include "../globals/constants/abstraction_constants.c"
-#include "../globals/constants/log_constants.c"
+#include "../globals/constants/cybol/cybol_abstraction_constants.c"
+#include "../globals/constants/log_message/log_message_constants.c"
 #include "../globals/logger/logger.c"
 #include "../memoriser/array.c"
 

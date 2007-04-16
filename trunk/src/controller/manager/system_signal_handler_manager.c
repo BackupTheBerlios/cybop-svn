@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2007-01-14 22:06:48 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2007-04-16 15:57:55 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -29,8 +29,8 @@
 
 #include <pthread.h>
 #include <signal.h>
-#include "../../globals/constants/integer_constants.c"
-#include "../../globals/constants/log_constants.c"
+#include "../../globals/constants/integer/integer_constants.c"
+#include "../../globals/constants/log_message/log_message_constants.c"
 #include "../../globals/constants/system_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../globals/variables/variables.c"

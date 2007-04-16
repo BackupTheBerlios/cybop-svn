@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.46 $ $Date: 2007-04-07 22:58:12 $ $Author: christian $
+ * @version $Revision: 1.47 $ $Date: 2007-04-16 15:56:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -35,13 +35,13 @@
 #include "../applicator/send/send_shell.c"
 #include "../applicator/send/send_socket.c"
 #include "../applicator/send/send_x_window_system.c"
-#include "../globals/constants/abstraction_constants.c"
-#include "../globals/constants/channel_constants.c"
-#include "../globals/constants/integer_constants.c"
-#include "../globals/constants/model_constants.c"
-#include "../globals/constants/name_constants.c"
+#include "../globals/constants/cybol/cybol_abstraction_constants.c"
+#include "../globals/constants/cybol/cybol_channel_constants.c"
+#include "../globals/constants/integer/integer_constants.c"
+#include "../globals/constants/cybol/cybol_model_constants.c"
+#include "../globals/constants/cybol/cybol_name_constants.c"
 #include "../globals/constants/service_port_constants.c"
-#include "../globals/constants/structure_constants.c"
+#include "../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../globals/logger/logger.c"
 #include "../memoriser/accessor/compound_accessor.c"
 #include "../memoriser/accessor/internal_memory_accessor.c"

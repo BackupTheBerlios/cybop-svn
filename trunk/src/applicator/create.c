@@ -22,7 +22,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.27 $ $Date: 2007-04-04 22:06:31 $ $Author: christian $
+ * @version $Revision: 1.28 $ $Date: 2007-04-16 15:56:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,10 +30,10 @@
 #define CREATE_SOURCE
 
 #include <libxml/tree.h>
-#include "../globals/constants/abstraction_constants.c"
-#include "../globals/constants/channel_constants.c"
-#include "../globals/constants/log_constants.c"
-#include "../globals/constants/name_constants.c"
+#include "../globals/constants/cybol/cybol_abstraction_constants.c"
+#include "../globals/constants/cybol/cybol_channel_constants.c"
+#include "../globals/constants/log_message/log_message_constants.c"
+#include "../globals/constants/cybol/cybol_name_constants.c"
 #include "../globals/logger/logger.c"
 #include "../memoriser/accessor/compound_accessor.c"
 #include "../memoriser/array.c"

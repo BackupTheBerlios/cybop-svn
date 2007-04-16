@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2007-03-09 23:21:41 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2007-04-16 15:57:55 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -28,11 +28,11 @@
 #define INITIAL_SIGNAL_MANAGER_SOURCE
 
 #include "../../applicator/receive/receive_file_system.c"
-#include "../../globals/constants/abstraction_constants.c"
-#include "../../globals/constants/channel_constants.c"
+#include "../../globals/constants/cybol/cybol_abstraction_constants.c"
+#include "../../globals/constants/cybol/cybol_channel_constants.c"
 #include "../../globals/constants/cyboi_constants.c"
-#include "../../globals/constants/log_constants.c"
-#include "../../globals/constants/structure_constants.c"
+#include "../../globals/constants/log_message/log_message_constants.c"
+#include "../../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../globals/variables/variables.c"
 #include "../../memoriser/accessor/signal_memory_accessor.c"

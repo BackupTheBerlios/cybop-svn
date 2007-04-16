@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.19 $ $Date: 2007-02-07 00:13:35 $ $Author: christian $
+ * @version $Revision: 1.20 $ $Date: 2007-04-16 15:56:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -40,15 +40,15 @@
 #include <unistd.h>
 #include "../../applicator/receive/receive_file_system.c"
 #include "../../globals/constants/http/http_request_method_constants.c"
-#include "../../globals/constants/abstraction_constants.c"
-#include "../../globals/constants/channel_constants.c"
-#include "../../globals/constants/character_constants.c"
-#include "../../globals/constants/escape_code_constants.c"
-#include "../../globals/constants/integer_constants.c"
-#include "../../globals/constants/log_constants.c"
-#include "../../globals/constants/model_constants.c"
-#include "../../globals/constants/name_constants.c"
-#include "../../globals/constants/structure_constants.c"
+#include "../../globals/constants/cybol/cybol_abstraction_constants.c"
+#include "../../globals/constants/cybol/cybol_channel_constants.c"
+#include "../../globals/constants/character/character_constants.c"
+#include "../../globals/constants/console/console_escape_code_constants.c"
+#include "../../globals/constants/integer/integer_constants.c"
+#include "../../globals/constants/log_message/log_message_constants.c"
+#include "../../globals/constants/cybol/cybol_model_constants.c"
+#include "../../globals/constants/cybol/cybol_name_constants.c"
+#include "../../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../../globals/constants/system_constants.c"
 #include "../../globals/variables/variables.c"
 #include "../../memoriser/accessor/compound_accessor.c"

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.17 $ $Date: 2007-04-09 08:48:44 $ $Author: christian $
+ * @version $Revision: 1.18 $ $Date: 2007-04-16 15:56:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -30,8 +30,8 @@
 
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
-#include "../../globals/constants/model_constants.c"
-#include "../../globals/constants/structure_constants.c"
+#include "../../globals/constants/cybol/cybol_model_constants.c"
+#include "../../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../globals/variables/variables.c"
 #include "../../memoriser/accessor.c"

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.26 $ $Date: 2007-01-14 22:06:47 $ $Author: christian $
+ * @version $Revision: 1.27 $ $Date: 2007-04-16 15:56:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -32,11 +32,11 @@
 #include "../applicator/receive/receive_linux_console.c"
 #include "../applicator/receive/receive_socket.c"
 #include "../applicator/receive/receive_x_window_system.c"
-#include "../globals/constants/abstraction_constants.c"
-#include "../globals/constants/channel_constants.c"
-#include "../globals/constants/model_constants.c"
-#include "../globals/constants/name_constants.c"
-#include "../globals/constants/structure_constants.c"
+#include "../globals/constants/cybol/cybol_abstraction_constants.c"
+#include "../globals/constants/cybol/cybol_channel_constants.c"
+#include "../globals/constants/cybol/cybol_model_constants.c"
+#include "../globals/constants/cybol/cybol_name_constants.c"
+#include "../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../globals/logger/logger.c"
 #include "../memoriser/accessor/compound_accessor.c"
 

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2007-04-04 22:06:31 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2007-04-16 15:56:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -29,8 +29,8 @@
 
 #ifdef LINUX_OPERATING_SYSTEM
 
-#include "../../globals/constants/abstraction_constants.c"
-#include "../../globals/constants/log_constants.c"
+#include "../../globals/constants/cybol/cybol_abstraction_constants.c"
+#include "../../globals/constants/log_message/log_message_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../memoriser/accessor/compound_accessor.c"
 #include "../../memoriser/allocator.c"

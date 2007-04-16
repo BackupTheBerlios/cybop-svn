@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.24 $ $Date: 2007-01-18 19:29:01 $ $Author: christian $
+ * @version $Revision: 1.25 $ $Date: 2007-04-16 15:57:55 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -29,8 +29,8 @@
 #define CHECKER_SOURCE
 
 #include "../controller/handler.c"
-#include "../globals/constants/integer_constants.c"
-#include "../globals/constants/log_constants.c"
+#include "../globals/constants/integer/integer_constants.c"
+#include "../globals/constants/log_message/log_message_constants.c"
 #include "../globals/variables/variables.c"
 #include "../globals/logger/logger.c"
 #include "../memoriser/accessor/signal_memory_accessor.c"

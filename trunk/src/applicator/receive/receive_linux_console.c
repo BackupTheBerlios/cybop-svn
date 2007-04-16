@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.21 $ $Date: 2007-04-09 08:48:43 $ $Author: christian $
+ * @version $Revision: 1.22 $ $Date: 2007-04-16 15:56:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -33,15 +33,15 @@
 #include <signal.h>
 #include <stdio.h>
 //?? #include <wchar.h>
-#include "../../globals/constants/abstraction_constants.c"
-#include "../../globals/constants/character_constants.c"
-#include "../../globals/constants/control_sequence_constants.c"
+#include "../../globals/constants/cybol/cybol_abstraction_constants.c"
+#include "../../globals/constants/character/character_constants.c"
+#include "../../globals/constants/console/console_control_sequence_constants.c"
 #include "../../globals/constants/cyboi_constants.c"
-#include "../../globals/constants/integer_constants.c"
-#include "../../globals/constants/name_constants.c"
-#include "../../globals/constants/structure_constants.c"
+#include "../../globals/constants/integer/integer_constants.c"
+#include "../../globals/constants/cybol/cybol_name_constants.c"
+#include "../../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../../globals/constants/system_constants.c"
-#include "../../globals/constants/wide_character_constants.c"
+#include "../../globals/constants/character/wide_character_constants.c"
 #include "../../globals/variables/variables.c"
 #include "../../memoriser/accessor/compound_accessor.c"
 #include "../../memoriser/accessor/signal_memory_accessor.c"

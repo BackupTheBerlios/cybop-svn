@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2007-01-14 22:06:47 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2007-04-16 15:56:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -32,10 +32,10 @@
 #include "../applicator/compare/compare_greater_or_equal.c"
 #include "../applicator/compare/compare_smaller.c"
 #include "../applicator/compare/compare_smaller_or_equal.c"
-#include "../globals/constants/abstraction_constants.c"
-#include "../globals/constants/log_constants.c"
-#include "../globals/constants/model_constants.c"
-#include "../globals/constants/name_constants.c"
+#include "../globals/constants/cybol/cybol_abstraction_constants.c"
+#include "../globals/constants/log_message/log_message_constants.c"
+#include "../globals/constants/cybol/cybol_model_constants.c"
+#include "../globals/constants/cybol/cybol_name_constants.c"
 #include "../globals/logger/logger.c"
 #include "../memoriser/accessor/compound_accessor.c"
 #include "../memoriser/array.c"

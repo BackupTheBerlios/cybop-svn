@@ -20,16 +20,16 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2007-01-14 22:06:48 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2007-04-16 15:57:55 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef INTERNAL_MEMORY_MANAGER_SOURCE
 #define INTERNAL_MEMORY_MANAGER_SOURCE
 
-#include "../../globals/constants/abstraction_constants.c"
-#include "../../globals/constants/log_constants.c"
-#include "../../globals/constants/structure_constants.c"
+#include "../../globals/constants/cybol/cybol_abstraction_constants.c"
+#include "../../globals/constants/log_message/log_message_constants.c"
+#include "../../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../../globals/constants/system_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../globals/variables/variables.c"

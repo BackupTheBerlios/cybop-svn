@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2007-01-28 01:22:29 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2007-04-16 15:56:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -37,9 +37,9 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <unistd.h>
-#include "../../globals/constants/abstraction_constants.c"
-#include "../../globals/constants/integer_constants.c"
-#include "../../globals/constants/structure_constants.c"
+#include "../../globals/constants/cybol/cybol_abstraction_constants.c"
+#include "../../globals/constants/integer/integer_constants.c"
+#include "../../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../../globals/constants/system_constants.c"
 #include "../../globals/variables/variables.c"
 #include "../../memoriser/accessor.c"

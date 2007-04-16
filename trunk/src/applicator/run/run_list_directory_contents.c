@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2007-04-09 08:48:44 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2007-04-16 15:56:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -29,15 +29,15 @@
 
 #include <unistd.h>
 #include "../../applicator/run/run_execute.c"
-#include "../../globals/constants/abstraction_constants.c"
-#include "../../globals/constants/boolean_constants.c"
-#include "../../globals/constants/character_constants.c"
-#include "../../globals/constants/integer_constants.c"
-#include "../../globals/constants/log_constants.c"
-#include "../../globals/constants/model_constants.c"
-#include "../../globals/constants/name_constants.c"
+#include "../../globals/constants/cybol/cybol_abstraction_constants.c"
+#include "../../globals/constants/boolean/boolean_constants.c"
+#include "../../globals/constants/character/character_constants.c"
+#include "../../globals/constants/integer/integer_constants.c"
+#include "../../globals/constants/log_message/log_message_constants.c"
+#include "../../globals/constants/cybol/cybol_model_constants.c"
+#include "../../globals/constants/cybol/cybol_name_constants.c"
 #include "../../globals/constants/shell_command/unix_shell_command_constants.c"
-#include "../../globals/constants/structure_constants.c"
+#include "../../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../../globals/constants/system_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../globals/variables/variables.c"
