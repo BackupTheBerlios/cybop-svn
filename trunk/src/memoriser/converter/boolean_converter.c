@@ -20,18 +20,18 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.10 $ $Date: 2007-01-14 22:06:49 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2007-04-16 15:50:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef BOOLEAN_CONVERTER_SOURCE
 #define BOOLEAN_CONVERTER_SOURCE
 
-#include "../../globals/constants/boolean_constants.c"
-#include "../../globals/constants/integer_constants.c"
-#include "../../globals/constants/log_constants.c"
-#include "../../globals/constants/model_constants.c"
-#include "../../globals/constants/structure_constants.c"
+#include "../../globals/constants/boolean/boolean_constants.c"
+#include "../../globals/constants/integer/integer_constants.c"
+#include "../../globals/constants/log_message/log_message_constants.c"
+#include "../../globals/constants/cybol/cybol_model_constants.c"
+#include "../../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../memoriser/allocator.c"
 #include "../../memoriser/array.c"

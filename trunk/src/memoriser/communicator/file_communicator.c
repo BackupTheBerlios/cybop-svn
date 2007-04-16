@@ -24,7 +24,7 @@
  * - receive a file stream into a byte array
  * - send a file stream from a byte array
  *
- * @version $Revision: 1.20 $ $Date: 2007-04-09 08:48:44 $ $Author: christian $
+ * @version $Revision: 1.21 $ $Date: 2007-04-16 15:50:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -32,10 +32,10 @@
 #define FILE_COMMUNICATOR_SOURCE
 
 #include <stdio.h>
-#include "../../globals/constants/character_constants.c"
+#include "../../globals/constants/character/character_constants.c"
 #include "../../globals/constants/cyboi_constants.c"
-#include "../../globals/constants/integer_constants.c"
-#include "../../globals/constants/structure_constants.c"
+#include "../../globals/constants/integer/integer_constants.c"
+#include "../../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../../globals/constants/system_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../globals/variables/variables.c"

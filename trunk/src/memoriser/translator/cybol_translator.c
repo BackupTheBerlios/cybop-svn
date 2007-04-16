@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.16 $ $Date: 2007-04-04 22:06:31 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2007-04-16 15:50:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -29,11 +29,11 @@
 
 #include <string.h>
 #include <libxml/tree.h>
-#include "../../globals/constants/abstraction_constants.c"
-#include "../../globals/constants/channel_constants.c"
-#include "../../globals/constants/cybol_constants.c"
-#include "../../globals/constants/integer_constants.c"
-#include "../../globals/constants/name_constants.c"
+#include "../../globals/constants/cybol/cybol_abstraction_constants.c"
+#include "../../globals/constants/cybol/cybol_channel_constants.c"
+#include "../../globals/constants/cybol/cybol_constants.c"
+#include "../../globals/constants/integer/integer_constants.c"
+#include "../../globals/constants/cybol/cybol_name_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../memoriser/array.c"
 #include "../../memoriser/allocator.c"

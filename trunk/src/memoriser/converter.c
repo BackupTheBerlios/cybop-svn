@@ -20,16 +20,16 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.24 $ $Date: 2007-04-09 08:48:44 $ $Author: christian $
+ * @version $Revision: 1.25 $ $Date: 2007-04-16 15:50:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef CONVERTER_SOURCE
 #define CONVERTER_SOURCE
 
-#include "../globals/constants/abstraction_constants.c"
-#include "../globals/constants/integer_constants.c"
-#include "../globals/constants/model_constants.c"
+#include "../globals/constants/cybol/cybol_abstraction_constants.c"
+#include "../globals/constants/integer/integer_constants.c"
+#include "../globals/constants/cybol/cybol_model_constants.c"
 #include "../memoriser/array.c"
 #include "../memoriser/converter/boolean_converter.c"
 #include "../memoriser/converter/character_vector_converter.c"

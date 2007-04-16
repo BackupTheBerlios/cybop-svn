@@ -24,7 +24,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.32 $ $Date: 2007-04-09 08:48:44 $ $Author: christian $
+ * @version $Revision: 1.33 $ $Date: 2007-04-16 15:49:15 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -45,9 +45,10 @@
 #include <locale.h>
 #include <stdio.h>
 #include <wchar.h>
-#include "../globals/constants/abstraction_constants.c"
-#include "../globals/constants/structure_constants.c"
-#include "../globals/constants/wide_character_constants.c"
+#include "../globals/constants/float/double_constants.c"
+#include "../globals/constants/cybol/cybol_abstraction_constants.c"
+#include "../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../globals/constants/character/wide_character_constants.c"
 #include "../globals/variables/variables.c"
 #include "../memoriser/accessor/compound_accessor.c"
 #include "../memoriser/allocator.c"
@@ -1015,6 +1016,28 @@ void test_serialise_integer() {
 }
 
 /**
+ * Tests the float constants.
+ */
+void test_float_constants() {
+
+    fputs("Test float constants:\n", stdout);
+
+    fprintf(stdout, "Test base of natural logarithms: %f\n", *E_DOUBLE);
+    fprintf(stdout, "Test logarithm to base 2 of M_E: %f\n", *LOG_2_E_DOUBLE);
+    fprintf(stdout, "Test logarithm to base 10 of M_E: %f\n", *LOG_10_E_DOUBLE);
+    fprintf(stdout, "Test natural logarithm of 2: %f\n", *LN_2_DOUBLE);
+    fprintf(stdout, "Test natural logarithm of 10: %f\n", *LN_10_DOUBLE);
+    fprintf(stdout, "Test ratio of a circle's circumference to its diameter, called pi: %f\n", *PI_DOUBLE);
+    fprintf(stdout, "Test pi divided by 2: %f\n", *PI_DIVIDED_BY_2_DOUBLE);
+    fprintf(stdout, "Test pi divided by 4: %f\n", *PI_DIVIDED_BY_4_DOUBLE);
+    fprintf(stdout, "Test reciprocal of pi (1/pi): %f\n", *RECIPROCAL_OF_PI_DOUBLE);
+    fprintf(stdout, "Test two times the reciprocal of pi: %f\n", *TWO_TIMES_THE_RECIPROCAL_OF_PI_DOUBLE);
+    fprintf(stdout, "Test two times the reciprocal of the square root of pi: %f\n", *TWO_TIMES_THE_RECIPROCAL_OF_THE_SQUARE_ROOT_OF_PI_DOUBLE);
+    fprintf(stdout, "Test square root of 2: %f\n", *SQUARE_ROOT_OF_2_DOUBLE);
+    fprintf(stdout, "Test reciprocal of the square root of 2: %f\n", *RECIPROCAL_OF_THE_SQUARE_ROOT_OF_2_DOUBLE);
+}
+
+/**
  * Tests the knowledge memory.
  *
  * The knowledge memory is the root of a compound (tree).
@@ -1227,7 +1250,8 @@ void test() {
 //??    test_file_write();
 //??    test_console();
 //??    test_integer_parser();
-    test_serialise_integer();
+//??    test_serialise_integer();
+    test_float_constants();
 //??    test_knowledge_memory(k, kc, 5);
 }
 

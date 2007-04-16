@@ -24,7 +24,7 @@
  * - receive a file stream into a byte array
  * - send a file stream from a byte array
  *
- * @version $Revision: 1.7 $ $Date: 2007-01-14 22:06:49 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2007-04-16 15:50:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -32,8 +32,8 @@
 #define X_WINDOW_SYSTEM_COMMUNICATOR_SOURCE
 
 #include <X11/Xlib.h>
-#include "../../globals/constants/abstraction_constants.c"
-#include "../../globals/constants/log_constants.c"
+#include "../../globals/constants/cybol/cybol_abstraction_constants.c"
+#include "../../globals/constants/log_message/log_message_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../globals/variables/variables.c"
 #include "../../memoriser/accessor.c"

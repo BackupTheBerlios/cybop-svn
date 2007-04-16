@@ -20,18 +20,18 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.28 $ $Date: 2007-04-04 22:06:31 $ $Author: christian $
+ * @version $Revision: 1.29 $ $Date: 2007-04-16 15:50:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef COMPOUND_ACCESSOR_SOURCE
 #define COMPOUND_ACCESSOR_SOURCE
 
-#include "../../globals/constants/abstraction_constants.c"
-#include "../../globals/constants/cybol_constants.c"
-#include "../../globals/constants/integer_constants.c"
-#include "../../globals/constants/log_constants.c"
-#include "../../globals/constants/structure_constants.c"
+#include "../../globals/constants/cybol/cybol_abstraction_constants.c"
+#include "../../globals/constants/cybol/cybol_constants.c"
+#include "../../globals/constants/integer/integer_constants.c"
+#include "../../globals/constants/log_message/log_message_constants.c"
+#include "../../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../memoriser/converter/integer_converter.c"
 #include "../../memoriser/allocator.c"

@@ -20,18 +20,18 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2007-01-14 22:06:49 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2007-04-16 15:50:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef TERMINAL_BACKGROUND_MAPPER_SOURCE
 #define TERMINAL_BACKGROUND_MAPPER_SOURCE
 
-#include "../../globals/constants/abstraction_constants.c"
-#include "../../globals/constants/control_sequence_constants.c"
-#include "../../globals/constants/log_constants.c"
-#include "../../globals/constants/model_constants.c"
-#include "../../globals/constants/structure_constants.c"
+#include "../../globals/constants/cybol/cybol_abstraction_constants.c"
+#include "../../globals/constants/console/console_control_sequence_constants.c"
+#include "../../globals/constants/log_message/log_message_constants.c"
+#include "../../globals/constants/cybol/cybol_model_constants.c"
+#include "../../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../memoriser/accessor.c"
 #include "../../memoriser/array.c"

@@ -20,17 +20,17 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2007-04-09 08:48:44 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2007-04-16 15:50:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef DATE_TIME_CONVERTER_SOURCE
 #define DATE_TIME_CONVERTER_SOURCE
 
-#include "../../globals/constants/abstraction_constants.c"
-#include "../../globals/constants/character_constants.c"
-#include "../../globals/constants/log_constants.c"
-#include "../../globals/constants/structure_constants.c"
+#include "../../globals/constants/cybol/cybol_abstraction_constants.c"
+#include "../../globals/constants/character/character_constants.c"
+#include "../../globals/constants/log_message/log_message_constants.c"
+#include "../../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../memoriser/allocator.c"
 
@@ -39,7 +39,7 @@
  *
  * ISO time format:
  * YYYY-MM-DDThh:mm:ss
- * [YYYY]-[MM]-[DD]T[hh]:[mm]:[ss]±[hh]:[mm]
+ * [YYYY]-[MM]-[DD]T[hh]:[mm]:[ss][hh]:[mm]
  *
  * Examples:
  * 2008-12-29

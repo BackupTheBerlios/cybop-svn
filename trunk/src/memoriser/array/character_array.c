@@ -38,7 +38,7 @@
  *
  * Array elements are accessed over their index (array base pointer + index).
  *
- * @version $Revision: 1.10 $ $Date: 2007-01-14 22:06:49 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2007-04-16 15:50:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -47,7 +47,7 @@
 
 #include <stdlib.h>
 #include <string.h>
-#include "../../globals/constants/log_constants.c"
+#include "../../globals/constants/log_message/log_message_constants.c"
 #include "../../globals/variables/variables.c"
 #include "../../globals/logger/logger.c"
 

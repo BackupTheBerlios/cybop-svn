@@ -20,15 +20,15 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.16 $ $Date: 2007-03-16 22:05:24 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2007-04-16 15:50:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef TRANSLATOR_SOURCE
 #define TRANSLATOR_SOURCE
 
-#include "../globals/constants/abstraction_constants.c"
-#include "../globals/constants/model_constants.c"
+#include "../globals/constants/cybol/cybol_abstraction_constants.c"
+#include "../globals/constants/cybol/cybol_model_constants.c"
 #include "../globals/variables/variables.c"
 #include "../memoriser/array.c"
 #include "../memoriser/translator/xdt_translator.c"

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2007-01-14 22:06:49 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2007-04-16 15:50:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  *
@@ -37,7 +37,7 @@
 #ifndef X_WINDOW_SYSTEM_ALLOCATOR_SOURCE
 #define X_WINDOW_SYSTEM_ALLOCATOR_SOURCE
 
-#include "../../globals/constants/abstraction_constants.c"
+#include "../../globals/constants/cybol/cybol_abstraction_constants.c"
 
 /**
  * Allocates an x window system window.

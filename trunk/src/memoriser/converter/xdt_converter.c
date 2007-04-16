@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2007-04-09 08:48:44 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2007-04-16 15:50:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,8 +30,8 @@
 #include "../../globals/constants/xdt/xdt_field_constants.c"
 #include "../../globals/constants/xdt/xdt_record_constants.c"
 #include "../../globals/constants/xdt/xdt_field_name_constants.c"
-#include "../../globals/constants/character_constants.c"
-#include "../../globals/constants/log_constants.c"
+#include "../../globals/constants/character/character_constants.c"
+#include "../../globals/constants/log_message/log_message_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../memoriser/array.c"
 #include "../../memoriser/converter/character_vector_converter.c"

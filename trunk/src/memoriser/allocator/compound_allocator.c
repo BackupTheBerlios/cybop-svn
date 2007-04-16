@@ -23,17 +23,17 @@
  * This file contains the functionality to:
  * - create a compound model in memory
  *
- * @version $Revision: 1.9 $ $Date: 2007-01-14 22:06:49 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2007-04-16 15:50:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef COMPOUND_ALLOCATOR_SOURCE
 #define COMPOUND_ALLOCATOR_SOURCE
 
-#include "../../globals/constants/abstraction_constants.c"
-#include "../../globals/constants/integer_constants.c"
-#include "../../globals/constants/log_constants.c"
-#include "../../globals/constants/structure_constants.c"
+#include "../../globals/constants/cybol/cybol_abstraction_constants.c"
+#include "../../globals/constants/integer/integer_constants.c"
+#include "../../globals/constants/log_message/log_message_constants.c"
+#include "../../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../memoriser/array.c"
 

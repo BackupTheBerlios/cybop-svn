@@ -20,17 +20,17 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2007-01-14 22:06:49 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2007-04-16 15:50:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef CHARACTER_ESCAPE_CODE_MAPPER_SOURCE
 #define CHARACTER_ESCAPE_CODE_MAPPER_SOURCE
 
-#include "../../globals/constants/abstraction_constants.c"
-#include "../../globals/constants/ascii_character_constants.c"
-#include "../../globals/constants/escape_code_constants.c"
-#include "../../globals/constants/structure_constants.c"
+#include "../../globals/constants/character/character_constants.c"
+#include "../../globals/constants/console/console_escape_code_constants.c"
+#include "../../globals/constants/cybol/cybol_abstraction_constants.c"
+#include "../../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../../globals/variables/variables.c"
 
 /**
@@ -66,7 +66,7 @@ void get_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             if (r == 0) {
 
-                compare_arrays(p3, p4, SPACE_ASCII_CHARACTER, PRIMITIVE_COUNT, &r, (void*) CHARACTER_ARRAY);
+                compare_arrays(p3, p4, SPACE_CHARACTER, PRIMITIVE_COUNT, &r, (void*) CHARACTER_ARRAY);
 
                 if (r == 1) {
 
@@ -77,7 +77,7 @@ void get_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             if (r == 0) {
 
-                compare_arrays(p3, p4, SPACE_ASCII_CHARACTER, PRIMITIVE_COUNT, &r, (void*) CHARACTER_ARRAY);
+                compare_arrays(p3, p4, SPACE_CHARACTER, PRIMITIVE_COUNT, &r, (void*) CHARACTER_ARRAY);
 
                 if (r == 1) {
 

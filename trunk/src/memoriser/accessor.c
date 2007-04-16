@@ -20,14 +20,14 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2007-01-14 22:06:49 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2007-04-16 15:50:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef ACCESSOR_SOURCE
 #define ACCESSOR_SOURCE
 
-#include "../globals/constants/abstraction_constants.c"
+#include "../globals/constants/cybol/cybol_abstraction_constants.c"
 #include "../memoriser/accessor/character_vector_accessor.c"
 #include "../memoriser/accessor/compound_accessor.c"
 #include "../memoriser/accessor/double_vector_accessor.c"

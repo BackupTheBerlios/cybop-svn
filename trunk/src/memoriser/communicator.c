@@ -24,17 +24,17 @@
  * - read data from a device into a byte array
  * - write data from a byte array to a device
  *
- * @version $Revision: 1.13 $ $Date: 2007-04-07 12:15:28 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2007-04-16 15:50:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef COMMUNICATOR_SOURCE
 #define COMMUNICATOR_SOURCE
 
-#include "../globals/constants/abstraction_constants.c"
-#include "../globals/constants/channel_constants.c"
-#include "../globals/constants/integer_constants.c"
-#include "../globals/constants/model_constants.c"
+#include "../globals/constants/cybol/cybol_abstraction_constants.c"
+#include "../globals/constants/cybol/cybol_channel_constants.c"
+#include "../globals/constants/integer/integer_constants.c"
+#include "../globals/constants/cybol/cybol_model_constants.c"
 #include "../memoriser/array.c"
 #include "../memoriser/communicator/file_communicator.c"
 #include "../memoriser/communicator/ftp_communicator.c"

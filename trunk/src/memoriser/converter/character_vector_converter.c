@@ -20,15 +20,15 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2007-02-01 00:12:40 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2007-04-16 15:50:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef CHARACTER_VECTOR_CONVERTER_SOURCE
 #define CHARACTER_VECTOR_CONVERTER_SOURCE
 
-#include "../../globals/constants/abstraction_constants.c"
-#include "../../globals/constants/log_constants.c"
+#include "../../globals/constants/cybol/cybol_abstraction_constants.c"
+#include "../../globals/constants/log_message/log_message_constants.c"
 #include "../../globals/logger/logger.c"
 
 /**

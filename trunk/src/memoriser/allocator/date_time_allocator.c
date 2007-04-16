@@ -20,15 +20,15 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2007-03-06 00:11:38 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2007-04-16 15:50:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef DATE_TIME_ALLOCATOR_SOURCE
 #define DATE_TIME_ALLOCATOR_SOURCE
 
-#include "../../globals/constants/abstraction_constants.c"
-#include "../../globals/constants/log_constants.c"
+#include "../../globals/constants/cybol/cybol_abstraction_constants.c"
+#include "../../globals/constants/log_message/log_message_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../memoriser/array.c"
 

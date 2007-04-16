@@ -24,7 +24,7 @@
  * - receive an http stream into a byte array
  * - send an http stream from a byte array
  *
- * @version $Revision: 1.7 $ $Date: 2007-01-30 01:11:06 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2007-04-16 15:50:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -35,8 +35,8 @@
 #include <sys/socket.h>
 #include <errno.h>
 #include <stdio.h>
-#include "../../globals/constants/model_constants.c"
-#include "../../globals/constants/structure_constants.c"
+#include "../../globals/constants/cybol/cybol_model_constants.c"
+#include "../../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../../globals/constants/system_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../globals/variables/variables.c"

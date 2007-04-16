@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2007-04-09 08:48:44 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2007-04-16 15:50:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,10 +30,10 @@
 #include <string.h>
 //?? #include <stdio.h>
 //?? #include <stdlib.h>
-#include "../../globals/constants/character_constants.c"
-//?? #include "../../globals/constants/integer_constants.c"
-#include "../../globals/constants/log_constants.c"
-#include "../../globals/constants/structure_constants.c"
+#include "../../globals/constants/character/character_constants.c"
+//?? #include "../../globals/constants/integer/integer_constants.c"
+#include "../../globals/constants/log_message/log_message_constants.c"
+#include "../../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../../globals/logger/logger.c"
 //?? #include "../../memoriser/allocator.c"
 #include "../../memoriser/array.c"

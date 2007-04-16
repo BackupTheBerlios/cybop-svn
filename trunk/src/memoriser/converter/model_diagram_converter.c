@@ -20,15 +20,15 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2007-04-09 08:48:44 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2007-04-16 15:50:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef MODEL_DIAGRAM_CONVERTER_SOURCE
 #define MODEL_DIAGRAM_CONVERTER_SOURCE
 
-#include "../../globals/constants/integer_constants.c"
-#include "../../globals/constants/log_constants.c"
+#include "../../globals/constants/integer/integer_constants.c"
+#include "../../globals/constants/log_message/log_message_constants.c"
 #include "../../globals/logger/logger.c"
 
 //
