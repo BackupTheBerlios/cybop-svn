@@ -20,14 +20,14 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2007-01-18 22:51:04 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2007-04-16 15:34:54 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef HTTP_STATUS_CODE_CONSTANTS_SOURCE
 #define HTTP_STATUS_CODE_CONSTANTS_SOURCE
 
-#include "../../../globals/constants/integer_constants.c"
+#include "../../../globals/constants/integer/integer_constants.c"
 
 //
 // 1XX - information

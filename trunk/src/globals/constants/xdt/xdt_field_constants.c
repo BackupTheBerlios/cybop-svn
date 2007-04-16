@@ -20,14 +20,14 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2007-03-16 22:05:24 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2007-04-16 15:34:54 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef XDT_FIELD_CONSTANTS_SOURCE
 #define XDT_FIELD_CONSTANTS_SOURCE
 
-#include "../../../globals/constants/integer_constants.c"
+#include "../../../globals/constants/integer/integer_constants.c"
 
 /**
  * The xdt field size count.
