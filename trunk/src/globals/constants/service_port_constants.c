@@ -20,14 +20,14 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2007-01-14 22:06:49 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2007-04-16 16:23:41 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef SERVICE_PORT_CONSTANTS_SOURCE
 #define SERVICE_PORT_CONSTANTS_SOURCE
 
-#include "../../globals/constants/integer_constants.c"
+#include "../../globals/constants/integer/integer_constants.c"
 
 //
 // IANA assigned ports.

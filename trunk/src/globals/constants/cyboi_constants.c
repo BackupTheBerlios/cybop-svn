@@ -20,27 +20,14 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2007-01-14 22:06:49 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2007-04-16 16:23:41 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef CYBOI_CONSTANTS_SOURCE
 #define CYBOI_CONSTANTS_SOURCE
 
-#include "../../globals/constants/integer_constants.c"
-
-//
-// Startup command line parameters/arguments.
-//
-
-/** The startup parameters count. */
-static int* STARTUP_PARAMETERS_COUNT = NUMBER_2_INTEGER_ARRAY;
-
-/** The command parameter index. */
-static int* COMMAND_PARAMETER_INDEX = NUMBER_0_INTEGER_ARRAY;
-
-/** The run file parameter index. */
-static int* RUN_FILE_PARAMETER_INDEX = NUMBER_1_INTEGER_ARRAY;
+#include "../../globals/constants/integer/integer_constants.c"
 
 //
 // Cybol file.

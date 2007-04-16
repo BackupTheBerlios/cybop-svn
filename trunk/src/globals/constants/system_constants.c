@@ -20,14 +20,14 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2007-04-07 12:15:28 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2007-04-16 16:23:41 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef SYSTEM_CONSTANTS_SOURCE
 #define SYSTEM_CONSTANTS_SOURCE
 
-#include "../../globals/constants/integer_constants.c"
+#include "../../globals/constants/integer/integer_constants.c"
 
 //
 // Special values.
