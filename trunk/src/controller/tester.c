@@ -24,7 +24,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.1 $ $Date: 2007-04-16 21:28:08 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2007-04-23 23:15:07 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -47,6 +47,7 @@
 #include <wchar.h>
 #include "../globals/constants/float/double_constants.c"
 #include "../globals/constants/cybol/cybol_abstraction_constants.c"
+#include "../globals/constants/integer/integer_constants.c"
 #include "../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../globals/constants/character/wide_character_constants.c"
 #include "../globals/variables/variables.c"
@@ -1223,6 +1224,8 @@ void test_knowledge_memory(void* p0, void* p1, int p2) {
  */
 void test() {
 
+    log_message_debug("Information: Test cyboi.");
+
     // How to use printf to check parameter values.
     // The printf function uses stdout for output, but nothing appears on console.
     // Therefore, fprintf is used and stderr is given for output.
@@ -1244,14 +1247,14 @@ void test() {
 //??    test_pointer_cast();
 //??    test_character_array_single_element();
 //??    test_character_array_multiple_elements();
-//??    test_pointer_return();
-//??    test_pointer_array();
+    test_pointer_return();
+    test_pointer_array();
 //??    test_file_read();
 //??    test_file_write();
 //??    test_console();
 //??    test_integer_parser();
 //??    test_serialise_integer();
-    test_float_constants();
+//??    test_float_constants();
 //??    test_knowledge_memory(k, kc, 5);
 }
 

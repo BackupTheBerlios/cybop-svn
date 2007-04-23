@@ -22,7 +22,7 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.40 $ $Date: 2006-06-26 18:38:38 $ $Author: christian $
+# @version $Revision: 1.41 $ $Date: 2007-04-23 23:20:07 $ $Author: christian $
 # @author Michael Simon <michael.simon@gmx.net>
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
@@ -100,6 +100,10 @@ COMPILER = gcc
 # Cross-compiler to generate a windows executable.
 #COMPILER = /usr/bin/i586-mingw32msvc-gcc
 #-Wall -pedantic
+
+# The "-I" option forces the compiler to look for uninstalled headers in the
+# current source directory before searching the system directories for
+# installed headers of the same name.
 COMPILER_FLAGS = -g -l/usr/include -I/usr/include/libxml2 -I/usr/X11R6/include \
 	-D LINUX_OPERATING_SYSTEM
 #	-D WIN32_OPERATING_SYSTEM
@@ -151,8 +155,30 @@ CONTROLLER_MANAGER_OBJECTS = $(patsubst $(SRC)/controller/manager/%.c,$(OBJ)/con
 # Globals.
 GLOBALS_CONSTANTS_SOURCES = $(wildcard $(SRC)/globals/constants/*.c)
 GLOBALS_CONSTANTS_OBJECTS = $(patsubst $(SRC)/globals/constants/%.c,$(OBJ)/globals/constants/%.o,$(GLOBALS_CONSTANTS_SOURCES))
+GLOBALS_CONSTANTS_BOOLEAN_SOURCES = $(wildcard $(SRC)/globals/constants/boolean/*.c)
+GLOBALS_CONSTANTS_BOOLEAN_OBJECTS = $(patsubst $(SRC)/globals/constants/boolean/%.c,$(OBJ)/globals/constants/boolean/%.o,$(GLOBALS_CONSTANTS_BOOLEAN_SOURCES))
+GLOBALS_CONSTANTS_CHARACTER_SOURCES = $(wildcard $(SRC)/globals/constants/character/*.c)
+GLOBALS_CONSTANTS_CHARACTER_OBJECTS = $(patsubst $(SRC)/globals/constants/character/%.c,$(OBJ)/globals/constants/character/%.o,$(GLOBALS_CONSTANTS_CHARACTER_SOURCES))
+GLOBALS_CONSTANTS_COMMAND_LINE_SOURCES = $(wildcard $(SRC)/globals/constants/command_line/*.c)
+GLOBALS_CONSTANTS_COMMAND_LINE_OBJECTS = $(patsubst $(SRC)/globals/constants/command_line/%.c,$(OBJ)/globals/constants/command_line/%.o,$(GLOBALS_CONSTANTS_COMMAND_LINE_SOURCES))
+GLOBALS_CONSTANTS_CONSOLE_SOURCES = $(wildcard $(SRC)/globals/constants/console/*.c)
+GLOBALS_CONSTANTS_CONSOLE_OBJECTS = $(patsubst $(SRC)/globals/constants/console/%.c,$(OBJ)/globals/constants/console/%.o,$(GLOBALS_CONSTANTS_CONSOLE_SOURCES))
+GLOBALS_CONSTANTS_CYBOL_SOURCES = $(wildcard $(SRC)/globals/constants/cybol/*.c)
+GLOBALS_CONSTANTS_CYBOL_OBJECTS = $(patsubst $(SRC)/globals/constants/cybol/%.c,$(OBJ)/globals/constants/cybol/%.o,$(GLOBALS_CONSTANTS_CYBOL_SOURCES))
+GLOBALS_CONSTANTS_FLOAT_SOURCES = $(wildcard $(SRC)/globals/constants/float/*.c)
+GLOBALS_CONSTANTS_FLOAT_OBJECTS = $(patsubst $(SRC)/globals/constants/float/%.c,$(OBJ)/globals/constants/float/%.o,$(GLOBALS_CONSTANTS_FLOAT_SOURCES))
+GLOBALS_CONSTANTS_HTTP_SOURCES = $(wildcard $(SRC)/globals/constants/http/*.c)
+GLOBALS_CONSTANTS_HTTP_OBJECTS = $(patsubst $(SRC)/globals/constants/http/%.c,$(OBJ)/globals/constants/http/%.o,$(GLOBALS_CONSTANTS_HTTP_SOURCES))
+GLOBALS_CONSTANTS_INTEGER_SOURCES = $(wildcard $(SRC)/globals/constants/integer/*.c)
+GLOBALS_CONSTANTS_INTEGER_OBJECTS = $(patsubst $(SRC)/globals/constants/integer/%.c,$(OBJ)/globals/constants/integer/%.o,$(GLOBALS_CONSTANTS_INTEGER_SOURCES))
+GLOBALS_CONSTANTS_LOG_MESSAGE_SOURCES = $(wildcard $(SRC)/globals/constants/log_message/*.c)
+GLOBALS_CONSTANTS_LOG_MESSAGE_OBJECTS = $(patsubst $(SRC)/globals/constants/log_message/%.c,$(OBJ)/globals/constants/log_message/%.o,$(GLOBALS_CONSTANTS_LOG_MESSAGE_SOURCES))
+GLOBALS_CONSTANTS_MEMORY_STRUCTURE_SOURCES = $(wildcard $(SRC)/globals/constants/memory_structure/*.c)
+GLOBALS_CONSTANTS_MEMORY_STRUCTURE_OBJECTS = $(patsubst $(SRC)/globals/constants/memory_structure/%.c,$(OBJ)/globals/constants/memory_structure/%.o,$(GLOBALS_CONSTANTS_MEMORY_STRUCTURE_SOURCES))
 GLOBALS_CONSTANTS_SHELL_COMMAND_SOURCES = $(wildcard $(SRC)/globals/constants/shell_command/*.c)
 GLOBALS_CONSTANTS_SHELL_COMMAND_OBJECTS = $(patsubst $(SRC)/globals/constants/shell_command/%.c,$(OBJ)/globals/constants/shell_command/%.o,$(GLOBALS_CONSTANTS_SHELL_COMMAND_SOURCES))
+GLOBALS_CONSTANTS_XDT_SOURCES = $(wildcard $(SRC)/globals/constants/xdt/*.c)
+GLOBALS_CONSTANTS_XDT_OBJECTS = $(patsubst $(SRC)/globals/constants/xdt/%.c,$(OBJ)/globals/constants/xdt/%.o,$(GLOBALS_CONSTANTS_XDT_SOURCES))
 GLOBALS_LOGGER_SOURCES = $(wildcard $(SRC)/globals/logger/*.c)
 GLOBALS_LOGGER_OBJECTS = $(patsubst $(SRC)/globals/logger/%.c,$(OBJ)/globals/logger/%.o,$(GLOBALS_LOGGER_SOURCES))
 GLOBALS_VARIABLES_SOURCES = $(wildcard $(SRC)/globals/variables/*.c)
@@ -175,10 +201,6 @@ MEMORISER_MAPPER_SOURCES = $(wildcard $(SRC)/memoriser/mapper/*.c)
 MEMORISER_MAPPER_OBJECTS = $(patsubst $(SRC)/memoriser/mapper/%.c,$(OBJ)/memoriser/mapper/%.o,$(MEMORISER_MAPPER_SOURCES))
 MEMORISER_TRANSLATOR_SOURCES = $(wildcard $(SRC)/memoriser/translator/*.c)
 MEMORISER_TRANSLATOR_OBJECTS = $(patsubst $(SRC)/memoriser/translator/%.c,$(OBJ)/memoriser/translator/%.o,$(MEMORISER_TRANSLATOR_SOURCES))
-
-# Tester.
-TESTER_SOURCES = $(wildcard $(SRC)/tester/*.c)
-TESTER_OBJECTS = $(patsubst $(SRC)/tester/%.c,$(OBJ)/tester/%.o,$(TESTER_SOURCES))
 
 #
 # Compiles all cyboi source files.
@@ -206,7 +228,18 @@ all: export \
 	$(CONTROLLER_HANDLER_OBJECTS) \
 	$(CONTROLLER_MANAGER_OBJECTS) \
 	$(GLOBALS_CONSTANTS_OBJECTS) \
-	$(GLOBALS_CONSTANTS_SHELL_COMMANDS_OBJECTS) \
+	$(GLOBALS_CONSTANTS_BOOLEAN_OBJECTS) \
+	$(GLOBALS_CONSTANTS_CHARACTER_OBJECTS) \
+	$(GLOBALS_CONSTANTS_COMMAND_LINE_OBJECTS) \
+	$(GLOBALS_CONSTANTS_CONSOLE_OBJECTS) \
+	$(GLOBALS_CONSTANTS_CYBOL_OBJECTS) \
+	$(GLOBALS_CONSTANTS_FLOAT_OBJECTS) \
+	$(GLOBALS_CONSTANTS_HTTP_OBJECTS) \
+	$(GLOBALS_CONSTANTS_INTEGER_OBJECTS) \
+	$(GLOBALS_CONSTANTS_LOG_MESSAGE_OBJECTS) \
+	$(GLOBALS_CONSTANTS_MEMORY_STRUCTURE_OBJECTS) \
+	$(GLOBALS_CONSTANTS_SHELL_COMMAND_OBJECTS) \
+	$(GLOBALS_CONSTANTS_XDT_OBJECTS) \
 	$(GLOBALS_LOGGER_OBJECTS) \
 	$(GLOBALS_VARIABLES_OBJECTS) \
 	$(MEMORISER_OBJECTS) \
@@ -217,7 +250,6 @@ all: export \
 	$(MEMORISER_CONVERTER_OBJECTS) \
 	$(MEMORISER_MAPPER_OBJECTS) \
 	$(MEMORISER_TRANSLATOR_OBJECTS) \
-	$(TESTER_OBJECTS) \
 # Compile source files.
 # The -mwindows switch is needed to create Windows executables instead of console applications.
 # It assures the appropriate Windows libraries are linked in for you. To get a console screen
@@ -265,7 +297,18 @@ create:
 	-cd $(OBJ); mkdir controller/manager
 	-cd $(OBJ); mkdir globals
 	-cd $(OBJ); mkdir globals/constants
-	-cd $(OBJ); mkdir globals/constants/shell_commands
+	-cd $(OBJ); mkdir globals/constants/boolean
+	-cd $(OBJ); mkdir globals/constants/character
+	-cd $(OBJ); mkdir globals/constants/command_line
+	-cd $(OBJ); mkdir globals/constants/console
+	-cd $(OBJ); mkdir globals/constants/cybol
+	-cd $(OBJ); mkdir globals/constants/float
+	-cd $(OBJ); mkdir globals/constants/http
+	-cd $(OBJ); mkdir globals/constants/integer
+	-cd $(OBJ); mkdir globals/constants/log_message
+	-cd $(OBJ); mkdir globals/constants/memory_structure
+	-cd $(OBJ); mkdir globals/constants/shell_command
+	-cd $(OBJ); mkdir globals/constants/xdt
 	-cd $(OBJ); mkdir globals/logger
 	-cd $(OBJ); mkdir globals/variables
 	-cd $(OBJ); mkdir memoriser
@@ -276,7 +319,6 @@ create:
 	-cd $(OBJ); mkdir memoriser/converter
 	-cd $(OBJ); mkdir memoriser/mapper
 	-cd $(OBJ); mkdir memoriser/translator
-	-cd $(OBJ); mkdir tester
 
 #$(OBJ)/%.o: $(SRC)/%.c
 #       $(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
@@ -323,7 +365,40 @@ $(OBJ)/controller/manager/%.o: $(SRC)/controller/manager/%.c
 $(OBJ)/globals/constants/%.o: $(SRC)/globals/constants/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
-$(OBJ)/globals/constants/shell_commands/%.o: $(SRC)/globals/constants/shell_commands/%.c
+$(OBJ)/globals/constants/boolean/%.o: $(SRC)/globals/constants/boolean/%.c
+	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
+
+$(OBJ)/globals/constants/character/%.o: $(SRC)/globals/constants/character/%.c
+	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
+
+$(OBJ)/globals/constants/command_line/%.o: $(SRC)/globals/constants/command_line/%.c
+	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
+
+$(OBJ)/globals/constants/console/%.o: $(SRC)/globals/constants/console/%.c
+	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
+
+$(OBJ)/globals/constants/cybol/%.o: $(SRC)/globals/constants/cybol/%.c
+	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
+
+$(OBJ)/globals/constants/float/%.o: $(SRC)/globals/constants/float/%.c
+	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
+
+$(OBJ)/globals/constants/http/%.o: $(SRC)/globals/constants/http/%.c
+	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
+
+$(OBJ)/globals/constants/integer/%.o: $(SRC)/globals/constants/integer/%.c
+	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
+
+$(OBJ)/globals/constants/log_message/%.o: $(SRC)/globals/constants/log_message/%.c
+	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
+
+$(OBJ)/globals/constants/memory_structure/%.o: $(SRC)/globals/constants/memory_structure/%.c
+	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
+
+$(OBJ)/globals/constants/shell_command/%.o: $(SRC)/globals/constants/shell_command/%.c
+	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
+
+$(OBJ)/globals/constants/xdt/%.o: $(SRC)/globals/constants/xdt/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
 $(OBJ)/globals/logger/%.o: $(SRC)/globals/logger/%.c
@@ -354,9 +429,6 @@ $(OBJ)/memoriser/mapper/%.o: $(SRC)/memoriser/mapper/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
 $(OBJ)/memoriser/translator/%.o: $(SRC)/memoriser/translator/%.c
-	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
-
-$(OBJ)/tester/%.o: $(SRC)/tester/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
 #

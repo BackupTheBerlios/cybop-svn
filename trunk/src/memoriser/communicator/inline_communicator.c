@@ -24,7 +24,7 @@
  * - receive an inline stream into a byte array
  * - send an inline stream from a byte array
  *
- * @version $Revision: 1.9 $ $Date: 2007-01-14 22:06:49 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2007-04-23 23:15:07 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -32,6 +32,7 @@
 #define INLINE_COMMUNICATOR_SOURCE
 
 #include <stdio.h>
+#include "../../globals/constants/integer/integer_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../memoriser/array.c"
 
@@ -69,7 +70,7 @@ void read_inline(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     reallocate_array(p0, p1, p2, (void*) CHARACTER_ARRAY);
 
                     // The destination array index to start writing at.
-                    int i = 0;
+                    int i = *NUMBER_0_INTEGER;
 
                     set_array_elements(*d, (void*) &i, p3, p4, (void*) CHARACTER_ARRAY);
 

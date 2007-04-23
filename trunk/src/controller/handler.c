@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.14 $ $Date: 2007-04-16 15:57:55 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2007-04-23 23:15:07 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -31,6 +31,7 @@
 #include "../controller/handler/compound_handler.c"
 #include "../controller/handler/operation_handler.c"
 #include "../globals/constants/cybol/cybol_abstraction_constants.c"
+#include "../globals/constants/integer/integer_constants.c"
 #include "../globals/constants/log_message/log_message_constants.c"
 #include "../globals/logger/logger.c"
 #include "../memoriser/array.c"
@@ -65,6 +66,8 @@ void handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
     void* p7, void* p8, void* p9, void* p10, void* p11,
     void* p12, void* p13,  void* p14, void* p15, void* p16, void* p17, void* p18) {
 
+    log_message_debug("Information: Handle signal.");
+
     // The logic abstraction.
     void** a = &NULL_POINTER;
     void** ac = &NULL_POINTER;
@@ -92,9 +95,9 @@ void handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
     void** eds = &NULL_POINTER;
 
     // The comparison result.
-    int r = 0;
+    int r = *NUMBER_0_INTEGER;
 
-    if (r == 0) {
+    if (r == *NUMBER_0_INTEGER) {
 
         // CAUTION! Do NOT remove this section with "COMPOUND_ABSTRACTION"!
         // It is needed for at least initial startup logic residing in CYBOL
@@ -102,18 +105,18 @@ void handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
         // knowledge models in the knowledge memory.
         compare_arrays(p10, p11, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r != 0) {
+        if (r != *NUMBER_0_INTEGER) {
 
             // Handle compound logic.
             handle_compound(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p12, p13, p16, p17, p18);
         }
     }
 
-    if (r == 0) {
+    if (r == *NUMBER_0_INTEGER) {
 
         compare_arrays(p10, p11, (void*) ENCAPSULATED_KNOWLEDGE_ABSTRACTION, (void*) ENCAPSULATED_KNOWLEDGE_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r != 0) {
+        if (r != *NUMBER_0_INTEGER) {
 
             // Get compound logic element as double-encapsulated model.
             //
@@ -147,11 +150,11 @@ void handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
         }
     }
 
-    if (r == 0) {
+    if (r == *NUMBER_0_INTEGER) {
 
         compare_arrays(p10, p11, (void*) KNOWLEDGE_ABSTRACTION, (void*) KNOWLEDGE_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r != 0) {
+        if (r != *NUMBER_0_INTEGER) {
 
             // Get compound logic element as encapsulated model.
             //
@@ -177,18 +180,18 @@ void handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
         }
     }
 
-    if (r == 0) {
+    if (r == *NUMBER_0_INTEGER) {
 
         compare_arrays(p10, p11, (void*) OPERATION_ABSTRACTION, (void*) OPERATION_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r != 0) {
+        if (r != *NUMBER_0_INTEGER) {
 
             // Handle simple operation.
             handle_operation(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p12, p13, p14, p15, p16, p17);
         }
     }
 
-    if (r == 0) {
+    if (r == *NUMBER_0_INTEGER) {
 
         log_message((void*) WARNING_LOG_LEVEL, (void*) COULD_NOT_HANDLE_SIGNAL_THE_SIGNAL_ABSTRACTION_IS_UNKNOWN_MESSAGE, (void*) COULD_NOT_HANDLE_SIGNAL_THE_SIGNAL_ABSTRACTION_IS_UNKNOWN_MESSAGE_COUNT);
     }

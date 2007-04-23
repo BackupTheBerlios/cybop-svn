@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2007-04-16 16:45:37 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2007-04-23 23:15:07 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -102,6 +102,31 @@ static char* AMPERSAND_CHARACTER = AMPERSAND_CHARACTER_ARRAY;
 /** The comma character. U+002C */
 static char COMMA_CHARACTER_ARRAY[] = {','};
 static char* COMMA_CHARACTER = COMMA_CHARACTER_ARRAY;
+
+/**
+ * The hyphen minus character.
+ *
+ * Unicode category: Punctuation, Dash
+ * Unicode: U+002D
+ * UTF-8: 0x2D
+ * Octal escaped UTF-8: \055
+ * Decimal entity reference: &#45;
+ *
+ * Alias names:
+ * hyphen or minus sign
+ *
+ * Notes:
+ * used for either hyphen or minus sign
+ *
+ * See also:
+ * U+2010 HYPHEN
+ * U+2011 NON-BREAKING HYPHEN
+ * U+2012 FIGURE DASH
+ * U+2013 EN DASH
+ * U+2212 MINUS SIGN
+ */
+static char HYPHEN_MINUS_CHARACTER_ARRAY[] = {0x2D};
+static char* HYPHEN_MINUS_CHARACTER = HYPHEN_MINUS_CHARACTER_ARRAY;
 
 /** The full stop (period) character. U+002E */
 static char FULL_STOP_CHARACTER_ARRAY[] = {'.'};

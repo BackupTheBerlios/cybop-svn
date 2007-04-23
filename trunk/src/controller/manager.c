@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.33 $ $Date: 2007-04-16 15:57:55 $ $Author: christian $
+ * @version $Revision: 1.34 $ $Date: 2007-04-23 23:15:07 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -34,6 +34,7 @@
 #include "../controller/manager/system_signal_handler_manager.c"
 #include "../globals/constants/cybol/cybol_abstraction_constants.c"
 #include "../globals/constants/cybol/cybol_channel_constants.c"
+#include "../globals/constants/integer/integer_constants.c"
 #include "../globals/constants/log_message/log_message_constants.c"
 #include "../globals/logger/logger.c"
 #include "../globals/variables/variables.c"
@@ -248,10 +249,10 @@ void manage(void* p0, void* p1) {
     // It is not needed for the startup signal.
 
     // Initialise startup model abstraction, model, details.
-    *mac = 0;
-    *mas = 0;
-    *mmc = 0;
-    *mms = 0;
+    *mac = *NUMBER_0_INTEGER;
+    *mas = *NUMBER_0_INTEGER;
+    *mmc = *NUMBER_0_INTEGER;
+    *mms = *NUMBER_0_INTEGER;
     // CAUTION! Do not allocate startup model details!
     // It is not needed for the startup signal.
 
@@ -275,7 +276,7 @@ void manage(void* p0, void* p1) {
     // The signal id.
     int* id = NULL_POINTER;
     allocate((void*) &id, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    *id = 0;
+    *id = *NUMBER_0_INTEGER;
     get_new_signal_id(s, (void*) sc, (void*) id);
 
     // Add startup signal to signal memory.

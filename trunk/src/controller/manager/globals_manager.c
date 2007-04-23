@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.19 $ $Date: 2007-04-16 15:57:55 $ $Author: christian $
+ * @version $Revision: 1.20 $ $Date: 2007-04-23 23:15:07 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -52,15 +52,11 @@ void startup_globals() {
     // For testing, the line below may be used.
     // fputs("Info: Startup globals.\n", stdout);
 
-    //
-    // Null pointer.
-    //
-    // CAUTION! It must not be constant, because otherwise
-    // one could not alter the values it points to.
-    //
-
     // Initialise null pointer.
-    NULL_POINTER = (void*) 0;
+    //
+    // CAUTION! It must not be constant, but a variable instead,
+    // because otherwise, one could not alter the values it points to.
+    NULL_POINTER = (void*) *NUMBER_0_INTEGER;
 
     //
     // Primitive type sizes.
@@ -149,7 +145,7 @@ void startup_globals() {
     // The log file.
     int f = open(n, s);
 
-    if (f >= 0) {
+    if (f >= *NUMBER_0_INTEGER) {
 
         // The file owner.
         int o = *INVALID_VALUE;
@@ -202,7 +198,7 @@ void shutdown_globals() {
     // The log file.
     int f = LOG_OUTPUT;
 
-    if (f >= 0) {
+    if (f >= *NUMBER_0_INTEGER) {
 
         // Close log file.
         close(f);

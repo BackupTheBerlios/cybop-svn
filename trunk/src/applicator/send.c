@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.47 $ $Date: 2007-04-16 15:56:29 $ $Author: christian $
+ * @version $Revision: 1.48 $ $Date: 2007-04-23 23:15:07 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -401,7 +401,7 @@ void send_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
 
         if (r != *NUMBER_0_INTEGER) {
 
-            send_cyboi_system(p6, p7, p8, *ma, *mac, *mm, *mmc, *md, *mdc, (void*) NORMAL_PRIORITY, p9);
+            send_cyboi_system(p2, p6, p7, p8, *ma, *mac, *mm, *mmc, *md, *mdc, (void*) NORMAL_PRIORITY, p9);
         }
     }
 
@@ -411,7 +411,7 @@ void send_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
 
         if (r != *NUMBER_0_INTEGER) {
 
-            send_file_system(p2, *ma, *mac, *mm, *mmc, *md, *mdc, *am, *amc, *clm, *clmc, p3, p4);
+            send_file_system(p2, *ma, *mac, *mm, *mmc, *md, *mdc, p3, p4, *lm, *lmc, *clm, *clmc, *rm, *rmc);
         }
     }
 
@@ -421,7 +421,7 @@ void send_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
 
         if (r != *NUMBER_0_INTEGER) {
 
-            send_shell(p2, *ma, *mac, *mm, *mmc, *md, *mdc, *clm, *clmc, *lm, *lmc, p3, p4);
+            send_shell(p2, *ma, *mac, *mm, *mmc, *md, *mdc, p3, p4, *lm, *lmc, *clm, *clmc);
         }
     }
 

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2007-04-16 15:56:30 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2007-04-23 23:15:07 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -29,58 +29,53 @@
 
 #include <stdio.h>
 #include "../../globals/constants/cybol/cybol_abstraction_constants.c"
+#include "../../globals/constants/integer/integer_constants.c"
+#include "../../globals/logger/logger.c"
 #include "../../globals/variables/variables.c"
-/*??
-#include <unistd.h>
-#include "../../globals/constants/boolean/boolean_constants.c"
-#include "../../globals/constants/cybol/cybol_channel_constants.c"
-#include "../../globals/constants/console/console_control_sequence_constants.c"
-#include "../../globals/constants/memory_structure/memory_structure_constants.c"
-#include "../../memoriser/accessor.c"
 #include "../../memoriser/allocator.c"
-#include "../../memoriser/array.c"
-#include "../../memoriser/communicator.c"
 #include "../../memoriser/converter.c"
-*/
+#include "../../memoriser/communicator.c"
 
 /**
  * Sends a knowledge model as byte stream to the operating system's file system.
  *
  * @param p0 the internal memory
- * @param p1 the source root abstraction
- * @param p2 the source root abstraction count
- * @param p3 the source root model (root window compound model)
- * @param p4 the source root model count
- * @param p5 the source root details (meta properties of root window compound model)
- * @param p6 the source root details count
- * @param p7 the source part name (area to be repainted)
- * @param p8 the source part name count
- * @param p9 the source clean flag
- * @param p10 the source clean flag count
- * @param p11 the knowledge memory
- * @param p12 the knowledge memory count
+ * @param p1 the source abstraction
+ * @param p2 the source abstraction count
+ * @param p3 the source model
+ * @param p4 the source model count
+ * @param p5 the source details
+ * @param p6 the source details count
+ * @param p7 the knowledge memory
+ * @param p8 the knowledge memory count
+ * @param p9 the language model
+ * @param p10 the language model count
+ * @param p11 the source clean flag
+ * @param p12 the source clean flag count
+ * @param p13 the file name
+ * @param p14 the file name count
  */
-void send_file_system(void* p0, void* p1, void* p2, void* p3, void* p4,
-    void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11, void* p12) {
+void send_file_system(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
+    void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14) {
 
-    log_message_debug("Send file system message.");
+    log_message_debug("Information: Send file system message.");
 
-    // The serialised string array to be sent to the linux console (terminal).
+    // The serialised string array to be sent to the file.
     void* a = NULL_POINTER;
-    int ac = 0;
-    int as = 0;
+    int ac = *NUMBER_0_INTEGER;
+    int as = *NUMBER_0_INTEGER;
 
     // Allocate array.
-    allocate((void*) &a, (void*) &as, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
+    allocate((void*) &a, (void*) &as, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
-    // Serialise textual user interface (tui) into array.
-//??    serialise_linux_console((void*) &a, (void*) &ac, (void*) &as, p1, p2, p3, p4, p5, p6, NULL_POINTER, NULL_POINTER, p7, p8, p11, p12);
+    // Serialise knowledge model into model diagram (hierarchical text).
+    serialise((void*) &a, (void*) &ac, (void*) &as, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10);
 
-    // Write serialised array as message to linux console.
-//??    write_data(t, NULL_POINTER, NULL_POINTER, a, (void*) &ac, (void*) FILE_SYSTEM_MODEL, (void*) FILE_SYSTEM_MODEL_COUNT);
+    // Write serialised array as message to shell standard output.
+    write_data((void*) &p13, p14, NULL_POINTER, a, (void*) &ac, (void*) FILE_CHANNEL, (void*) FILE_CHANNEL_COUNT);
 
     // Deallocate array.
-    deallocate((void*) &a, (void*) &as, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
+    deallocate((void*) &a, (void*) &as, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
 }
 
 /* SEND_FILE_SYSTEM_SOURCE */

@@ -24,7 +24,7 @@
  * - receive a file stream into a byte array
  * - send a file stream from a byte array
  *
- * @version $Revision: 1.21 $ $Date: 2007-04-16 15:50:29 $ $Author: christian $
+ * @version $Revision: 1.22 $ $Date: 2007-04-23 23:15:07 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -64,6 +64,8 @@ void read_file_stream(void* p0, void* p1, void* p2, void* p3) {
                 if (p0 != NULL_POINTER) {
 
                     void** d = (void**) p0;
+
+                    log_message_debug("Information: Read file stream.");
 
                     // Read first character.
                     char c = fgetc(p3);
@@ -124,7 +126,7 @@ void read_file_stream(void* p0, void* p1, void* p2, void* p3) {
 }
 
 /**
- * Reads a file stream and writes it into a byte array.
+ * Reads a file and writes it into a byte array.
  *
  * @param p0 the destination byte array (Hand over as reference!)
  * @param p1 the destination count
@@ -137,6 +139,8 @@ void read_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
     if (p4 != NULL_POINTER) {
 
         int* sc = (int*) p4;
+
+        log_message_debug("Information: Read file.");
 
         // The comparison result.
         int r = *NUMBER_0_INTEGER;
@@ -178,10 +182,18 @@ void read_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
             // must be added to the string before that is used to open the file.
             f = fopen((char*) tn, "r");
 
-            read_file_stream(p0, p1, p2, (void*) f);
+            if (f != NULL_POINTER) {
 
-            // Close file.
-            fclose(f);
+                read_file_stream(p0, p1, p2, (void*) f);
+
+                // Close file.
+                // CAUTION! Check file for null pointer to avoid a segmentation fault!
+                fclose(f);
+
+            } else {
+
+                log_message_debug("Could not read file. The file is null.");
+            }
 
             // Deallocate terminated file name.
             deallocate_array((void*) &tn, (void*) &tns, (void*) CHARACTER_ARRAY);
@@ -207,6 +219,8 @@ void write_file_stream(void* p0, void* p1, void* p2) {
         int* sc = (int*) p2;
 
         if (p0 != NULL_POINTER) {
+
+            log_message_debug("Information: Write file stream.");
 
             // The loop variable.
             int j = *NUMBER_0_INTEGER;
@@ -251,7 +265,7 @@ void write_file_stream(void* p0, void* p1, void* p2) {
 }
 
 /**
- * Write a file stream that was read from a byte array.
+ * Writes a file that was read from a byte array.
  *
  * @param p0 the destination file name (Hand over as reference!)
  * @param p1 the destination file name count
@@ -265,66 +279,85 @@ void write_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         int* dc = (int*) p1;
 
-        // The comparison result.
-        int r = *NUMBER_0_INTEGER;
-        // The terminated file name.
-        void* tn = NULL_POINTER;
-        int tns = *dc + *NUMBER_1_INTEGER;
-        // The file.
-        FILE* f = NULL_POINTER;
+        if (p0 != NULL_POINTER) {
 
-        if (r == *NUMBER_0_INTEGER) {
+            void** d = (void**) p0;
 
-            compare_arrays(p0, p1, (void*) STANDARD_OUTPUT_FILE_NAME, (void*) STANDARD_OUTPUT_FILE_NAME_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+            log_message_debug("Information: Write file.");
 
-            if (r != *NUMBER_0_INTEGER) {
+            // The comparison result.
+            int r = *NUMBER_0_INTEGER;
+            // The terminated file name.
+            void* tn = NULL_POINTER;
+            int tns = *dc + *NUMBER_1_INTEGER;
+            // The file.
+            FILE* f = NULL_POINTER;
 
-                // The given string is not a file name, but specifies the "standard_output".
-                f = stdout;
+            if (r == *NUMBER_0_INTEGER) {
 
-                write_file_stream((void*) f, p3, p4);
+                compare_arrays(*d, p1, (void*) STANDARD_OUTPUT_FILE_NAME, (void*) STANDARD_OUTPUT_FILE_NAME_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+                if (r != *NUMBER_0_INTEGER) {
+
+                    // The given string is not a file name, but specifies the "standard_output".
+                    f = stdout;
+
+                    write_file_stream((void*) f, p3, p4);
+                }
             }
-        }
 
-        if (r == *NUMBER_0_INTEGER) {
+            if (r == *NUMBER_0_INTEGER) {
 
-            compare_arrays(p0, p1, (void*) STANDARD_ERROR_OUTPUT_FILE_NAME, (void*) STANDARD_ERROR_OUTPUT_FILE_NAME_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                compare_arrays(*d, p1, (void*) STANDARD_ERROR_OUTPUT_FILE_NAME, (void*) STANDARD_ERROR_OUTPUT_FILE_NAME_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-            if (r != *NUMBER_0_INTEGER) {
+                if (r != *NUMBER_0_INTEGER) {
 
-                // The given string is not a file name, but specifies the "standard_error_output".
-                f = stderr;
+                    // The given string is not a file name, but specifies the "standard_error_output".
+                    f = stderr;
 
-                write_file_stream((void*) f, p3, p4);
+                    write_file_stream((void*) f, p3, p4);
+                }
             }
-        }
 
-        if (r == *NUMBER_0_INTEGER) {
+            if (r == *NUMBER_0_INTEGER) {
 
-            // If the given name does not match the standard input, then interpret it as file name.
+                // If the given name does not match the standard input, then interpret it as file name.
 
-            // Allocate terminated file name.
-            allocate_array((void*) &tn, (void*) &tns, (void*) CHARACTER_ARRAY);
+                // Allocate terminated file name.
+                allocate_array((void*) &tn, (void*) &tns, (void*) CHARACTER_ARRAY);
 
-            // Set terminated file name by first copying the actual name
-            // and then adding the null termination character.
-            set_array_elements(tn, (void*) NUMBER_0_INTEGER, p0, p1, (void*) CHARACTER_ARRAY);
-            set_array_elements(tn, p1, (void*) NULL_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+                // Set terminated file name by first copying the actual name
+                // and then adding the null termination character.
+                set_array_elements(tn, (void*) NUMBER_0_INTEGER, *d, p1, (void*) CHARACTER_ARRAY);
+                set_array_elements(tn, p1, (void*) NULL_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
 
-            // Open file.
-            // CAUTION! The file name cannot be handed over as is.
-            // CYBOI strings are NOT terminated with the null character '\0'.
-            // Since 'fopen' expects a null terminated string, the termination character
-            // must be added to the string before that is used to open the file.
-            f = fopen((char*) tn, "r");
+                // Open file.
+                // CAUTION! The file name cannot be handed over as is.
+                // CYBOI strings are NOT terminated with the null character '\0'.
+                // Since 'fopen' expects a null terminated string, the termination character
+                // must be added to the string before that is used to open the file.
+                f = fopen((char*) tn, "w");
 
-            write_file_stream((void*) f, p3, p4);
+                if (f != NULL_POINTER) {
 
-            // Close file.
-            fclose(f);
+                    write_file_stream((void*) f, p3, p4);
 
-            // Deallocate terminated file name.
-            deallocate_array((void*) &tn, (void*) &tns, (void*) CHARACTER_ARRAY);
+                    // Close file.
+                    // CAUTION! Check file for null pointer to avoid a segmentation fault!
+                    fclose(f);
+
+                } else {
+
+                    log_message_debug("Could not write file. The file is null.");
+                }
+
+                // Deallocate terminated file name.
+                deallocate_array((void*) &tn, (void*) &tns, (void*) CHARACTER_ARRAY);
+            }
+
+        } else {
+
+            log_message_debug("Could not write file. The destination is null.");
         }
 
     } else {

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2007-04-16 15:57:55 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2007-04-23 23:15:07 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,9 +30,10 @@
 #include "../../applicator/receive/receive_file_system.c"
 #include "../../globals/constants/cybol/cybol_abstraction_constants.c"
 #include "../../globals/constants/cybol/cybol_channel_constants.c"
-#include "../../globals/constants/cyboi_constants.c"
+#include "../../globals/constants/integer/integer_constants.c"
 #include "../../globals/constants/log_message/log_message_constants.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../../globals/constants/cyboi_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../globals/variables/variables.c"
 #include "../../memoriser/accessor/signal_memory_accessor.c"
@@ -72,10 +73,10 @@ void startup_initial_signal(void* p0, void* p1, void* p2) {
     // It is not needed for the initial signal.
 
     // Initialise initial signal abstraction, model.
-    *ac = 0;
-    *as = 0;
-    *mc = 0;
-    *ms = 0;
+    *ac = *NUMBER_0_INTEGER;
+    *as = *NUMBER_0_INTEGER;
+    *mc = *NUMBER_0_INTEGER;
+    *ms = *NUMBER_0_INTEGER;
     // CAUTION! Do not initialise initial signal details!
     // It is not needed for the initial signal.
 
@@ -100,7 +101,7 @@ void startup_initial_signal(void* p0, void* p1, void* p2) {
     // The signal id.
     int* id = NULL_POINTER;
     allocate((void*) &id, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    *id = 0;
+    *id = *NUMBER_0_INTEGER;
     get_new_signal_id(p0, p1, (void*) id);
 
     // Add initial signal to signal memory.

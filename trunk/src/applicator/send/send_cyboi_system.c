@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2007-04-16 15:56:30 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2007-04-23 23:15:07 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -40,19 +40,20 @@
 /**
  * Sends a message to the cyboi system (this system itself).
  *
- * @param p0 the signal memory
- * @param p1 the signal memory count
- * @param p2 the signal memory size
- * @param p3 the message abstraction
- * @param p4 the message abstraction count
- * @param p5 the message model
- * @param p6 the message model count
- * @param p7 the message details
- * @param p8 the message details count
- * @param p9 the signal priority
- * @param p10 the signal identification
+ * @param p0 the internal memory
+ * @param p1 the signal memory
+ * @param p2 the signal memory count
+ * @param p3 the signal memory size
+ * @param p4 the message abstraction
+ * @param p5 the message abstraction count
+ * @param p6 the message model
+ * @param p7 the message model count
+ * @param p8 the message details
+ * @param p9 the message details count
+ * @param p10 the signal priority
+ * @param p11 the signal identification
  */
-void send_cyboi_system(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10) {
+void send_cyboi_system(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11) {
 
     log_message_debug("Information: Send message to cyboi system.");
 
@@ -62,14 +63,14 @@ void send_cyboi_system(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
     sig_atomic_t** irq = (sig_atomic_t**) &NULL_POINTER;
 
     // Get signal memory mutex.
-    get(p2, (void*) SIGNAL_MEMORY_MUTEX_INTERNAL, (void*) &mt, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p0, (void*) SIGNAL_MEMORY_MUTEX_INTERNAL, (void*) &mt, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     // Get interrupt request internal.
-    get(p2, (void*) INTERRUPT_REQUEST_INTERNAL, (void*) &irq, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p0, (void*) INTERRUPT_REQUEST_INTERNAL, (void*) &irq, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
     // Lock signal memory mutex.
     pthread_mutex_lock(*mt);
 
-    set_signal(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10);
+    set_signal(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11);
 
     // Set interrupt request flag, in order to notify the signal checker
     // that a new signal has been placed in the signal memory.

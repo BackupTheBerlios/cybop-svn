@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2007-04-16 15:57:55 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2007-04-23 23:15:07 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -28,6 +28,7 @@
 #define INTERNAL_MEMORY_MANAGER_SOURCE
 
 #include "../../globals/constants/cybol/cybol_abstraction_constants.c"
+#include "../../globals/constants/integer/integer_constants.c"
 #include "../../globals/constants/log_message/log_message_constants.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../../globals/constants/system_constants.c"
@@ -79,9 +80,9 @@ void startup_internal_memory(void* p0, void* p1, void* p2, void* p3, void* p4, v
     //
 
     // The loop variable.
-    int j = 0;
+    int j = *NUMBER_0_INTEGER;
 
-    while (1) {
+    while (*NUMBER_1_INTEGER) {
 
         if (j >= *INTERNAL_MEMORY_ELEMENTS_COUNT) {
 

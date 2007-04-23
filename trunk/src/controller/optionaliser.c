@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2007-04-16 21:28:08 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2007-04-23 23:15:07 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -53,6 +53,8 @@
  */
 void optionalise(void* p0, void* p1) {
 
+    log_message_debug("Information: Optionalise command line argument options.");
+
     // The comparison result.
     int r = *NUMBER_0_INTEGER;
 
@@ -61,6 +63,8 @@ void optionalise(void* p0, void* p1) {
         compare_arrays(p0, p1, (void*) VERSION_COMMAND_LINE_OPTION, (void*) VERSION_COMMAND_LINE_OPTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
+
+            log_message_debug("Information: Write cyboi version to standard output.");
 
             // Write cyboi version to standard output.
             write(fileno(stdout), (void*) CYBOI_VERSION_LOG_MESSAGE, *CYBOI_VERSION_LOG_MESSAGE_COUNT);
@@ -72,6 +76,8 @@ void optionalise(void* p0, void* p1) {
         compare_arrays(p0, p1, (void*) HELP_COMMAND_LINE_OPTION, (void*) HELP_COMMAND_LINE_OPTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
+
+            log_message_debug("Information: Write cyboi help message to standard output.");
 
             // Write help message to standard output.
             write(fileno(stdout), (void*) CYBOI_HELP_LOG_MESSAGE, *CYBOI_HELP_LOG_MESSAGE_COUNT);

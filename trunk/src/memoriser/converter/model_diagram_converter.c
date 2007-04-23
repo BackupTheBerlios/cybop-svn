@@ -20,15 +20,17 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2007-04-16 15:50:29 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2007-04-23 23:15:07 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef MODEL_DIAGRAM_CONVERTER_SOURCE
 #define MODEL_DIAGRAM_CONVERTER_SOURCE
 
+#include "../../globals/constants/cybol/cybol_abstraction_constants.c"
 #include "../../globals/constants/integer/integer_constants.c"
 #include "../../globals/constants/log_message/log_message_constants.c"
+#include "../../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../../globals/logger/logger.c"
 
 //
@@ -42,16 +44,16 @@
  * @param p0 the destination (Hand over as reference!)
  * @param p1 the destination count
  * @param p2 the destination size
- * @param p3 the source name
- * @param p4 the source name count
- * @param p5 the source abstraction
- * @param p6 the source abstraction count
- * @param p7 the source model
- * @param p8 the source model count
- * @param p9 the source details
- * @param p10 the source details count
- * @param p11 the knowledge memory
- * @param p12 the knowledge memory count
+ * @param p3 the source abstraction
+ * @param p4 the source abstraction count
+ * @param p5 the source model
+ * @param p6 the source model count
+ * @param p7 the source details
+ * @param p8 the source details count
+ * @param p9 the knowledge memory
+ * @param p10 the knowledge memory count
+ * @param p11 the language
+ * @param p12 the language count
  */
 void serialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11, void* p12);
 
@@ -148,18 +150,16 @@ void serialise_model_diagram_compound(void* p0, void* p1, void* p2, void* p3, vo
  * @param p0 the destination model diagram (Hand over as reference!)
  * @param p1 the destination count
  * @param p2 the destination size
- * @param p3 the source name
- * @param p4 the source name count
- * @param p5 the source abstraction
- * @param p6 the source abstraction count
- * @param p7 the source model
- * @param p8 the source model count
- * @param p9 the source details
- * @param p10 the source details count
- * @param p11 the knowledge memory
- * @param p12 the knowledge memory count
+ * @param p3 the source abstraction
+ * @param p4 the source abstraction count
+ * @param p5 the source model
+ * @param p6 the source model count
+ * @param p7 the source details
+ * @param p8 the source details count
+ * @param p9 the knowledge memory
+ * @param p10 the knowledge memory count
  */
-void serialise_model_diagram(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11, void* p12) {
+void serialise_model_diagram(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10) {
 
     if (p10 != NULL_POINTER) {
 
@@ -171,30 +171,30 @@ void serialise_model_diagram(void* p0, void* p1, void* p2, void* p3, void* p4, v
 
             log_message_debug("Information: Serialise model diagram.");
 
-/*??
             // The comparison result.
             int r = *NUMBER_0_INTEGER;
 
             // Add minus character to destination array.
-            serialise(p0, p1, p2, (void*) HYPHEN_MINUS_CHARACTER, (void*) HYPHEN_MINUS_CHARACTER_COUNT, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT, p11, p12);
+            serialise(p0, p1, p2, NULL_POINTER, NULL_POINTER, (void*) HYPHEN_MINUS_CHARACTER, (void*) PRIMITIVE_COUNT, NULL_POINTER, NULL_POINTER, p9, p10, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
             // Add space character to destination array.
-            serialise(p0, p1, p2, (void*) SPACE_CHARACTER, (void*) SPACE_CHARACTER_COUNT, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT, p11, p12);
+            serialise(p0, p1, p2, NULL_POINTER, NULL_POINTER, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT, NULL_POINTER, NULL_POINTER, p9, p10, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
+/*??
             // Add part name to destination array.
-            serialise(p0, p1, p2, p3, p4, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT, p11, p12);
+            serialise(p0, p1, p2, NULL_POINTER, NULL_POINTER, p5, p6, (void*) PRIMITIVE_COUNT, NULL_POINTER, NULL_POINTER, p9, p10, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
             // Add space character to destination array.
-            serialise(p0, p1, p2, (void*) SPACE_CHARACTER, (void*) SPACE_CHARACTER_COUNT, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT, p11, p12);
+            serialise(p0, p1, p2, NULL_POINTER, NULL_POINTER, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT, NULL_POINTER, NULL_POINTER, p9, p10, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
             // Add pipe character to destination array.
-            serialise(p0, p1, p2, (void*) LATIN_LETTER_DENTAL_CLICK_CHARACTER, (void*) LATIN_LETTER_DENTAL_CLICK_CHARACTER_COUNT, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT, p11, p12);
+            serialise(p0, p1, p2, NULL_POINTER, NULL_POINTER, (void*) LATIN_LETTER_DENTAL_CLICK_CHARACTER, (void*) PRIMITIVE_COUNT, NULL_POINTER, NULL_POINTER, p9, p10, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
             // Add space character to destination array.
-            serialise(p0, p1, p2, (void*) SPACE_CHARACTER, (void*) SPACE_CHARACTER_COUNT, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT, p11, p12);
+            serialise(p0, p1, p2, NULL_POINTER, NULL_POINTER, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT, NULL_POINTER, NULL_POINTER, p9, p10, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
             // Add part abstraction to destination array.
-            serialise(p0, p1, p2, p5, p6, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT, p11, p12);
+            serialise(p0, p1, p2, NULL_POINTER, NULL_POINTER, p5, p6, NULL_POINTER, NULL_POINTER, p9, p10, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
             compare_arrays(p5, p6, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
@@ -205,25 +205,25 @@ void serialise_model_diagram(void* p0, void* p1, void* p2, void* p3, void* p4, v
                     // Only process the following code, if the model compound contains at least one part.
 
                     // Add line feed character to destination array.
-                    serialise(p0, p1, p2, (void*) LINE_FEED_CONTROL_CHARACTER, (void*) LINE_FEED_CONTROL_CHARACTER_COUNT, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT, p11, p12);
+                    serialise(p0, p1, p2, (void*) LINE_FEED_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, NULL_POINTER, NULL_POINTER, p9, p10, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
                     // Add part model to destination array.
-                    serialise_model_diagram_compound(p0, p1, p2, p7, p8, p11, p12);
+                    serialise_model_diagram_compound(p0, p1, p2, p7, p8);
                 }
 
             } else {
 
                 // Add space character to destination array.
-                serialise(p0, p1, p2, p3, p4, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT, p11, p12);
+                serialise(p0, p1, p2, NULL_POINTER, NULL_POINTER, p3, (void*) PRIMITIVE_COUNT, NULL_POINTER, NULL_POINTER, p9, p10, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
                 // Add pipe character to destination array.
-                serialise(p0, p1, p2, p3, p4, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT, p11, p12);
+                serialise(p0, p1, p2, NULL_POINTER, NULL_POINTER, p3, (void*) PRIMITIVE_COUNT, NULL_POINTER, NULL_POINTER, p9, p10, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
                 // Add space character to destination array.
-                serialise(p0, p1, p2, p3, p4, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT, p11, p12);
+                serialise(p0, p1, p2, NULL_POINTER, NULL_POINTER, p3, (void*) PRIMITIVE_COUNT, NULL_POINTER, NULL_POINTER, p9, p10, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
                 // Add part model to destination array.
-                serialise(p0, p1, p2, p7, p8, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT, p11, p12);
+                serialise(p0, p1, p2, NULL_POINTER, NULL_POINTER, p7, (void*) PRIMITIVE_COUNT, NULL_POINTER, NULL_POINTER, p9, p10, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
             }
 
             if (*sdc > *NUMBER_0_INTEGER) {
@@ -231,10 +231,10 @@ void serialise_model_diagram(void* p0, void* p1, void* p2, void* p3, void* p4, v
                 // Only process the following code, if the details compound contains at least one part.
 
                 // Add line feed character to destination array.
-                serialise(p0, p1, p2, (void*) LINE_FEED_CONTROL_CHARACTER, (void*) LINE_FEED_CONTROL_CHARACTER_COUNT, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT, p11, p12);
+                serialise(p0, p1, p2, NULL_POINTER, NULL_POINTER, (void*) LINE_FEED_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, NULL_POINTER, NULL_POINTER, p9, p10, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
                 // Add part details to destination array.
-                serialise_model_diagram_compound(p0, p1, p2, p9, p10, p11, p12);
+                serialise_model_diagram_compound(p0, p1, p2, p9, p10);
             }
 */
 
