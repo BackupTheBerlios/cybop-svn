@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.26 $ $Date: 2007-04-23 23:15:07 $ $Author: christian $
+ * @version $Revision: 1.27 $ $Date: 2007-04-24 22:41:44 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -409,7 +409,7 @@ void serialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
 
         if (r != *NUMBER_0_INTEGER) {
 
-            serialise_model_diagram(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10);
+            serialise_model_diagram(p0, p1, p2, p3, p4, p5, p6, p7, p8);
         }
     }
 

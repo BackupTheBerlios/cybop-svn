@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.29 $ $Date: 2007-04-16 15:50:29 $ $Author: christian $
+ * @version $Revision: 1.30 $ $Date: 2007-04-24 22:41:44 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -763,6 +763,9 @@ void set_compound_element_by_index(void* p0, void* p1, void* p2, void* p3,
                     get_array_elements(p0, (void*) DETAILS_COUNTS_INDEX, (void*) &dc, (void*) POINTER_ARRAY);
                     get_array_elements(p0, (void*) DETAILS_SIZES_INDEX, (void*) &ds, (void*) POINTER_ARRAY);
 
+                    // CAUTION! If a compound model was properly allocated, then all arrays should exist!
+                    // Therefore, check all arrays for null pointers here.
+
                     if (*n != NULL_POINTER) {
 
                         if (*nc != NULL_POINTER) {
@@ -826,7 +829,6 @@ void set_compound_element_by_index(void* p0, void* p1, void* p2, void* p3,
                                                                     }
 
                                                                     if (*i < *cs) {
-
 
                                                                         // Set name, abstraction, model, details.
                                                                         set_array_elements(*n, p3, (void*) &p4, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
@@ -1065,14 +1067,8 @@ void add_compound_element_by_name(void* p0, void* p1, void* p2,
                 log_message_debug((char*) *n);
 
                 // CAUTION! Use compound count as index for adding new elements.
-                // CAUTION! Do NOT use e, ec and es as name parameters!
-                // These were created only locally in this procedure and
-                // will thus be destroyed when the procedure is left.
-                // DO USE the name, name count and name size that were
-                // handed over as parameters to this procedure!
-                // They were allocated by a converter while parsing a byte stream.
-                set_compound_element_by_index(p0, p1, p2, p1,
-                    p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14);
+                // CAUTION! Use DEREFERENCED name, as it was handed over as reference!
+                set_compound_element_by_index(p0, p1, p2, p1, *n, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14);
 
             } else {
 

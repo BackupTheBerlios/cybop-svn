@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2007-04-16 15:56:29 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2007-04-24 22:41:43 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -96,8 +96,17 @@ void receive_file_system_primitive_model(void* p0, void* p1, void* p2, void* p3,
     // Parse.
     //
 
+    //?? --- START of temporary workaround. ---
+    int test = 0;
+    compare_arrays(p8, p9, (void*) XDT_ABSTRACTION, (void*) XDT_ABSTRACTION_COUNT, (void*) &test, (void*) CHARACTER_ARRAY);
+    if (test != 0) {
+        allocate(p0, p2, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
+    } else {
+    //?? --- END of temporary workaround. ---
+
     // Allocate parse model of type given as abstraction.
     allocate(p0, p2, p8, p9);
+    }
     // Allocate parse details, which are always of type "compound".
     allocate(p3, p5, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
 
