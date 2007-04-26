@@ -22,7 +22,7 @@
  *
  * This file destroys a transient model to a persistent model.
  *
- * @version $Revision: 1.20 $ $Date: 2007-04-16 15:56:29 $ $Author: christian $
+ * @version $Revision: 1.21 $ $Date: 2007-04-26 23:17:09 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -149,14 +149,9 @@ void destroy_compound_model(void** model, void* model_count, void* model_size,
                 break;
             }
 
-            // Get element name.
-            get_compound_element_name_by_index(*model, model_count,
-                (void*) &compound_counter,
-                (void*) &en, (void*) &enc, (void*) &ens);
-
             // Get element.
-            get_compound_element_by_index(*model, model_count,
-                (void*) &compound_counter,
+            get_compound_element_by_index(*model, model_count, (void*) &compound_counter,
+                (void*) &en, (void*) &enc, (void*) &ens,
                 (void*) &ea, (void*) &eac, (void*) &eas,
                 (void*) &em, (void*) &emc, (void*) &ems,
                 (void*) &ed, (void*) &edc, (void*) &eds);

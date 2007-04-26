@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2007-04-16 15:50:29 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2007-04-26 23:17:10 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -116,7 +116,10 @@ void serialise_xhtml_attributes(void* p0, void* p1, void* p2, void* p3, void* p4
 
         log_message_debug("Serialise xhtml attributes.");
 
-        // The source part details abstraction, model, details.
+        // The source part details name, abstraction, model, details.
+        void** n = &NULL_POINTER;
+        void** nc = &NULL_POINTER;
+        void** ns = &NULL_POINTER;
         void** a = &NULL_POINTER;
         void** ac = &NULL_POINTER;
         void** as = &NULL_POINTER;
@@ -126,11 +129,6 @@ void serialise_xhtml_attributes(void* p0, void* p1, void* p2, void* p3, void* p4
         void** d = &NULL_POINTER;
         void** dc = &NULL_POINTER;
         void** ds = &NULL_POINTER;
-
-        // The name of the details part element.
-        void** n = &NULL_POINTER;
-        void** nc = &NULL_POINTER;
-        void** ns = &NULL_POINTER;
 
         // The loop variable.
         int j = *NUMBER_0_INTEGER;
@@ -145,20 +143,18 @@ void serialise_xhtml_attributes(void* p0, void* p1, void* p2, void* p3, void* p4
                 break;
             }
 
-            // Get details part name at current index.
-            get_compound_element_name_by_index(p3, p4, (void*) &j, (void*) &n, (void*) &nc, (void*) &ns);
+            // Get details part at index j.
+            get_compound_element_by_index(p3, p4, (void*) &j,
+                (void*) &n, (void*) &nc, (void*) &ns,
+                (void*) &a, (void*) &ac, (void*) &as,
+                (void*) &m, (void*) &mc, (void*) &ms,
+                (void*) &d, (void*) &dc, (void*) &ds);
 
             compare_arrays(*n, *nc, (void*) WUI_TAG_NAME, (void*) WUI_TAG_NAME_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
             if (r == *NUMBER_0_INTEGER) {
 
                 // Only add attribute, if the details part name is NOT "tag"!
-
-                // Get details part at index j.
-                get_compound_element_by_index(p3, p4, (void*) &j,
-                    (void*) &a, (void*) &ac, (void*) &as,
-                    (void*) &m, (void*) &mc, (void*) &ms,
-                    (void*) &d, (void*) &dc, (void*) &ds);
 
                 // Serialise space character.
                 serialise_character_vector(p0, p1, p2, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT);
@@ -172,23 +168,22 @@ void serialise_xhtml_attributes(void* p0, void* p1, void* p2, void* p3, void* p4
                 serialise_character_vector(p0, p1, p2, *m, *mc);
                 // Serialise quotation mark character.
                 serialise_character_vector(p0, p1, p2, (void*) QUOTATION_MARK_CHARACTER, (void*) PRIMITIVE_COUNT);
-
-                // Reset source part abstraction, model, details.
-                a = &NULL_POINTER;
-                ac = &NULL_POINTER;
-                as = &NULL_POINTER;
-                m = &NULL_POINTER;
-                mc = &NULL_POINTER;
-                ms = &NULL_POINTER;
-                d = &NULL_POINTER;
-                dc = &NULL_POINTER;
-                ds = &NULL_POINTER;
             }
 
-            // Reset name of the current compound part element.
+            // Reset source part name, abstraction, model, details.
             n = &NULL_POINTER;
             nc = &NULL_POINTER;
             ns = &NULL_POINTER;
+            a = &NULL_POINTER;
+            ac = &NULL_POINTER;
+            as = &NULL_POINTER;
+            m = &NULL_POINTER;
+            mc = &NULL_POINTER;
+            ms = &NULL_POINTER;
+            d = &NULL_POINTER;
+            dc = &NULL_POINTER;
+            ds = &NULL_POINTER;
+
             // Reset comparison result.
             r = *NUMBER_0_INTEGER;
 
@@ -327,7 +322,10 @@ void serialise_xhtml(void* p0, void* p1, void* p2, void* p3, void* p4,
 
             log_message_debug("Serialise compound model into xhtml format.");
 
-            // The source part abstraction, model, details.
+            // The source part name, abstraction, model, details.
+            void** n = &NULL_POINTER;
+            void** nc = &NULL_POINTER;
+            void** ns = &NULL_POINTER;
             void** a = &NULL_POINTER;
             void** ac = &NULL_POINTER;
             void** as = &NULL_POINTER;
@@ -386,6 +384,7 @@ void serialise_xhtml(void* p0, void* p1, void* p2, void* p3, void* p4,
 
                         // Get part at index j.
                         get_compound_element_by_index(p5, p6, (void*) &j,
+                            (void*) &n, (void*) &nc, (void*) &ns,
                             (void*) &a, (void*) &ac, (void*) &as,
                             (void*) &m, (void*) &mc, (void*) &ms,
                             (void*) &d, (void*) &dc, (void*) &ds);
@@ -393,7 +392,10 @@ void serialise_xhtml(void* p0, void* p1, void* p2, void* p3, void* p4,
                         // Recursively call this operation for the part model.
                         serialise_xhtml(p0, p1, p2, *a, *ac, *m, *mc, *d, *dc, p9, p10, (void*) &nl);
 
-                        // Reset source part abstraction, model, details.
+                        // Reset source part name, abstraction, model, details.
+                        n = &NULL_POINTER;
+                        nc = &NULL_POINTER;
+                        ns = &NULL_POINTER;
                         a = &NULL_POINTER;
                         ac = &NULL_POINTER;
                         as = &NULL_POINTER;

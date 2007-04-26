@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.30 $ $Date: 2007-04-24 22:41:44 $ $Author: christian $
+ * @version $Revision: 1.31 $ $Date: 2007-04-26 23:17:09 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -1608,18 +1608,22 @@ void remove_compound_element_by_name(void* p0, void* p1, void* p2, void* p3, voi
  * @param p0 the compound
  * @param p1 the compound count
  * @param p2 the index
- * @param p3 the abstraction (Hand over as reference!)
- * @param p4 the abstraction count (Hand over as reference!)
- * @param p5 the abstraction size (Hand over as reference!)
- * @param p6 the model (Hand over as reference!)
- * @param p7 the model count (Hand over as reference!)
- * @param p8 the model size (Hand over as reference!)
- * @param p9 the details (Hand over as reference!)
- * @param p10 the details count (Hand over as reference!)
- * @param p11 the details size (Hand over as reference!)
+ * @param p3 the name (Hand over as reference!)
+ * @param p4 the name count (Hand over as reference!)
+ * @param p5 the name size (Hand over as reference!)
+ * @param p6 the abstraction (Hand over as reference!)
+ * @param p7 the abstraction count (Hand over as reference!)
+ * @param p8 the abstraction size (Hand over as reference!)
+ * @param p9 the model (Hand over as reference!)
+ * @param p10 the model count (Hand over as reference!)
+ * @param p11 the model size (Hand over as reference!)
+ * @param p12 the details (Hand over as reference!)
+ * @param p13 the details count (Hand over as reference!)
+ * @param p14 the details size (Hand over as reference!)
  */
 void get_compound_element_by_index(void* p0, void* p1, void* p2,
-    void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11) {
+    void* p3, void* p4, void* p5, void* p6, void* p7, void* p8,
+    void* p9, void* p10, void* p11, void* p12, void* p13, void* p14) {
 
     if (p2 != NULL_POINTER) {
 
@@ -1633,7 +1637,10 @@ void get_compound_element_by_index(void* p0, void* p1, void* p2,
 
                 log_message_debug("Get compound element by index.");
 
-                // The abstractions, models, details.
+                // The names, abstractions, models, details.
+                void** n = &NULL_POINTER;
+                void** nc = &NULL_POINTER;
+                void** ns = &NULL_POINTER;
                 void** a = &NULL_POINTER;
                 void** ac = &NULL_POINTER;
                 void** as = &NULL_POINTER;
@@ -1644,7 +1651,10 @@ void get_compound_element_by_index(void* p0, void* p1, void* p2,
                 void** dc = &NULL_POINTER;
                 void** ds = &NULL_POINTER;
 
-                // Get abstractions, models, details.
+                // Get names, abstractions, models, details.
+                get_array_elements(p0, (void*) NAMES_INDEX, (void*) &n, (void*) POINTER_ARRAY);
+                get_array_elements(p0, (void*) NAMES_COUNTS_INDEX, (void*) &nc, (void*) POINTER_ARRAY);
+                get_array_elements(p0, (void*) NAMES_SIZES_INDEX, (void*) &ns, (void*) POINTER_ARRAY);
                 get_array_elements(p0, (void*) ABSTRACTIONS_INDEX, (void*) &a, (void*) POINTER_ARRAY);
                 get_array_elements(p0, (void*) ABSTRACTIONS_COUNTS_INDEX, (void*) &ac, (void*) POINTER_ARRAY);
                 get_array_elements(p0, (void*) ABSTRACTIONS_SIZES_INDEX, (void*) &as, (void*) POINTER_ARRAY);
@@ -1655,85 +1665,109 @@ void get_compound_element_by_index(void* p0, void* p1, void* p2,
                 get_array_elements(p0, (void*) DETAILS_COUNTS_INDEX, (void*) &dc, (void*) POINTER_ARRAY);
                 get_array_elements(p0, (void*) DETAILS_SIZES_INDEX, (void*) &ds, (void*) POINTER_ARRAY);
 
-                if (*a != NULL_POINTER) {
+                if (*n != NULL_POINTER) {
 
-                    if (*ac != NULL_POINTER) {
+                    if (*nc != NULL_POINTER) {
 
-                        if (*as != NULL_POINTER) {
+                        if (*ns != NULL_POINTER) {
 
-                            if (*m != NULL_POINTER) {
+                            if (*a != NULL_POINTER) {
 
-                                if (*mc != NULL_POINTER) {
+                                if (*ac != NULL_POINTER) {
 
-                                    if (*ms != NULL_POINTER) {
+                                    if (*as != NULL_POINTER) {
 
-                                        if (*d != NULL_POINTER) {
+                                        if (*m != NULL_POINTER) {
 
-                                            if (*dc != NULL_POINTER) {
+                                            if (*mc != NULL_POINTER) {
 
-                                                if (*ds != NULL_POINTER) {
+                                                if (*ms != NULL_POINTER) {
 
-                                                    if (*i < *cc) {
+                                                    if (*d != NULL_POINTER) {
 
-                                                        // Get abstraction, model, details.
-                                                        get_array_elements(*a, p2, p3, (void*) POINTER_ARRAY);
-                                                        get_array_elements(*ac, p2, p4, (void*) POINTER_ARRAY);
-                                                        get_array_elements(*as, p2, p5, (void*) POINTER_ARRAY);
-                                                        get_array_elements(*m, p2, p6, (void*) POINTER_ARRAY);
-                                                        get_array_elements(*mc, p2, p7, (void*) POINTER_ARRAY);
-                                                        get_array_elements(*ms, p2, p8, (void*) POINTER_ARRAY);
-                                                        get_array_elements(*d, p2, p9, (void*) POINTER_ARRAY);
-                                                        get_array_elements(*dc, p2, p10, (void*) POINTER_ARRAY);
-                                                        get_array_elements(*ds, p2, p11, (void*) POINTER_ARRAY);
+                                                        if (*dc != NULL_POINTER) {
+
+                                                            if (*ds != NULL_POINTER) {
+
+                                                                if (*i < *cc) {
+
+                                                                    // Get name, abstraction, model, details.
+                                                                    get_array_elements(*n, p2, p3, (void*) POINTER_ARRAY);
+                                                                    get_array_elements(*nc, p2, p4, (void*) POINTER_ARRAY);
+                                                                    get_array_elements(*ns, p2, p5, (void*) POINTER_ARRAY);
+                                                                    get_array_elements(*a, p2, p6, (void*) POINTER_ARRAY);
+                                                                    get_array_elements(*ac, p2, p7, (void*) POINTER_ARRAY);
+                                                                    get_array_elements(*as, p2, p8, (void*) POINTER_ARRAY);
+                                                                    get_array_elements(*m, p2, p9, (void*) POINTER_ARRAY);
+                                                                    get_array_elements(*mc, p2, p10, (void*) POINTER_ARRAY);
+                                                                    get_array_elements(*ms, p2, p11, (void*) POINTER_ARRAY);
+                                                                    get_array_elements(*d, p2, p12, (void*) POINTER_ARRAY);
+                                                                    get_array_elements(*dc, p2, p13, (void*) POINTER_ARRAY);
+                                                                    get_array_elements(*ds, p2, p14, (void*) POINTER_ARRAY);
+
+                                                                } else {
+
+                                                                    log_message_debug("Could not get compound element by index. The index exceeds the count.");
+                                                                }
+
+                                                            } else {
+
+                                                                log_message_debug("Could not get compound element by index. The details sizes is null.");
+                                                            }
+
+                                                        } else {
+
+                                                            log_message_debug("Could not get compound element by index. The details counts is null.");
+                                                        }
 
                                                     } else {
 
-                                                        log_message_debug("Could not get compound element by index. The index exceeds the count.");
+                                                        log_message_debug("Could not get compound element by index. The details is null.");
                                                     }
 
                                                 } else {
 
-                                                    log_message_debug("Could not get compound element by index. The details sizes is null.");
+                                                    log_message_debug("Could not get compound element by index. The models sizes is null.");
                                                 }
 
                                             } else {
 
-                                                log_message_debug("Could not get compound element by index. The details counts is null.");
+                                                log_message_debug("Could not get compound element by index. The models counts is null.");
                                             }
 
                                         } else {
 
-                                            log_message_debug("Could not get compound element by index. The details is null.");
+                                            log_message_debug("Could not get compound element by index. The models is null.");
                                         }
 
                                     } else {
 
-                                        log_message_debug("Could not get compound element by index. The models sizes is null.");
+                                        log_message_debug("Could not get compound element by index. The abstractions sizes is null.");
                                     }
 
                                 } else {
 
-                                    log_message_debug("Could not get compound element by index. The models counts is null.");
+                                    log_message_debug("Could not get compound element by index. The abstractions counts is null.");
                                 }
 
                             } else {
 
-                                log_message_debug("Could not get compound element by index. The models is null.");
+                                log_message_debug("Could not get compound element by index. The abstractions is null.");
                             }
 
                         } else {
 
-                            log_message_debug("Could not get compound element by index. The abstractions sizes is null.");
+                            log_message_debug("Could not get compound element by index. The names sizes is null.");
                         }
 
                     } else {
 
-                        log_message_debug("Could not get compound element by index. The abstractions counts is null.");
+                        log_message_debug("Could not get compound element by index. The names counts is null.");
                     }
 
                 } else {
 
-                    log_message_debug("Could not get compound element by index. The abstractions is null.");
+                    log_message_debug("Could not get compound element by index. The names is null.");
                 }
 
             } else {
@@ -1799,6 +1833,12 @@ void get_compound_element_by_name(void* p0, void* p1, void* p2, void* p3,
     void** d = &NULL_POINTER;
     void** dc = &NULL_POINTER;
     void** ds = &NULL_POINTER;
+    // The placeholder name without any meaning.
+    // It is only needed for handing over something to the
+    // "get_compound_element_by_index" function below.
+    void** p = &NULL_POINTER;
+    void** pc = &NULL_POINTER;
+    void** ps = &NULL_POINTER;
 
     // Get compound element name and remaining name,
     // as well as the flag indicating a part- or meta element.
@@ -1843,7 +1883,7 @@ void get_compound_element_by_name(void* p0, void* p1, void* p2, void* p3,
                 // No remaining name exists. A separator could NOT be found.
                 // The name is NOT hierarchical and represents an element name directly.
                 // The given compound contains elements which are primitive models.
-                get_compound_element_by_index(p0, p1, (void*) &i, p6, p7, p8, p9, p10, p11, p12, p13, p14);
+                get_compound_element_by_index(p0, p1, (void*) &i, (void*) &p, (void*) &pc, (void*) &ps, p6, p7, p8, p9, p10, p11, p12, p13, p14);
             }
 
         } else {
@@ -1886,7 +1926,7 @@ void get_compound_element_by_name(void* p0, void* p1, void* p2, void* p3,
                 // No remaining name exists. A separator could NOT be found.
                 // The name is NOT hierarchical and represents an element name directly.
                 // The given compound contains elements which are primitive models.
-                get_compound_element_by_index(p2, p3, (void*) &i, p6, p7, p8, p9, p10, p11, p12, p13, p14);
+                get_compound_element_by_index(p2, p3, (void*) &i, (void*) &p, (void*) &pc, (void*) &ps, p6, p7, p8, p9, p10, p11, p12, p13, p14);
             }
 
         } else {

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.10 $ $Date: 2007-04-16 15:50:29 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2007-04-26 23:17:10 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -29,10 +29,11 @@
 
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
-#include "../../globals/constants/cybol/cybol_abstraction_constants.c"
 #include "../../globals/constants/character/character_constants.c"
+#include "../../globals/constants/cybol/cybol_abstraction_constants.c"
 #include "../../globals/constants/cybol/cybol_model_constants.c"
 #include "../../globals/constants/cybol/cybol_name_constants.c"
+#include "../../globals/constants/integer/integer_constants.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../../globals/variables/variables.c"
 #include "../../memoriser/accessor.c"
@@ -157,7 +158,10 @@ void serialise_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
             fasz = oasz;
         }
 
-        // The source part abstraction, model, details.
+        // The source part name, abstraction, model, details.
+        void** n = &NULL_POINTER;
+        void** nc = &NULL_POINTER;
+        void** ns = &NULL_POINTER;
         void** a = &NULL_POINTER;
         void** ac = &NULL_POINTER;
         void** as = &NULL_POINTER;
@@ -240,10 +244,10 @@ void serialise_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
 
         // The terminated title.
         void* tt = NULL_POINTER;
-        int tts = -1;
+        int tts = *NUMBER_MINUS_1_INTEGER;
         // The terminated icon name.
         void* ti = NULL_POINTER;
-        int tis = -1;
+        int tis = *NUMBER_MINUS_1_INTEGER;
 
         // The source part position coordinates.
         int** pmx = (int**) &NULL_POINTER;
@@ -255,12 +259,12 @@ void serialise_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
         int** smz = (int**) &NULL_POINTER;
 
         // The loop count.
-        int j = 0;
+        int j = *NUMBER_0_INTEGER;
         // The comparison result.
-        int r = 0;
+        int r = *NUMBER_0_INTEGER;
 
         // Iterate through compound parts.
-        while (1) {
+        while (*NUMBER_1_INTEGER) {
 
             if (j >= *sc) {
 
@@ -269,6 +273,7 @@ void serialise_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
 
             // Get source part at index j.
             get_compound_element_by_index(p3, p4, (void*) &j,
+                (void*) &n, (void*) &nc, (void*) &ns,
                 (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms,
                 (void*) &d, (void*) &dc, (void*) &ds);
@@ -313,7 +318,7 @@ void serialise_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
 
             compare_arrays(*lm, *lmc, (void*) UI_ROOT_LAYOUT_MODEL, (void*) UI_ROOT_LAYOUT_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-            if (r == 0) {
+            if (r == *NUMBER_0_INTEGER) {
 
                 // The source part is no root window.
 
@@ -326,18 +331,18 @@ void serialise_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
 */
 
                 // Draw graphical element using given coordinates.
-                XDrawRectangle(*di, **w, *gc, **pmx, **pmy, **smx - 1, **smy - 1);
+                XDrawRectangle(*di, **w, *gc, **pmx, **pmy, **smx - *NUMBER_1_INTEGER, **smy - *NUMBER_1_INTEGER);
 
                 // Reset comparison result.
-                r = 0;
+                r = *NUMBER_0_INTEGER;
 
                 compare_arrays(*a, *ac, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-                if (r != 0) {
+                if (r != *NUMBER_0_INTEGER) {
 
                     // The terminated text.
                     char* text = NULL_POINTER;
-                    int texts = *((int*) *mc) + 1;
+                    int texts = *((int*) *mc) + *NUMBER_1_INTEGER;
 
                     // Create terminated text.
                     allocate_array((void*) &text, (void*) &texts, (void*) CHARACTER_ARRAY);
@@ -348,7 +353,7 @@ void serialise_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
                     set_array_elements(text, *mc, (void*) NULL_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
 
                     // Draw the text (character vector / string).
-                    XDrawString(*di, **w, *gc, **pmx, **pmy + 20, text, texts);
+                    XDrawString(*di, **w, *gc, **pmx, **pmy + *NUMBER_20_INTEGER, text, texts);
 
                     // Destroy terminated text.
                     deallocate_array((void*) &text, (void*) &texts, (void*) CHARACTER_ARRAY);
@@ -498,10 +503,10 @@ void serialise_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
 
                 // The terminated title.
                 tt = NULL_POINTER;
-                tts = *((int*) *tmc) + 1;
+                tts = *((int*) *tmc) + *NUMBER_1_INTEGER;
                 // The terminated icon name.
                 ti = NULL_POINTER;
-                tis = *((int*) *imc) + 1;
+                tis = *((int*) *imc) + *NUMBER_1_INTEGER;
 
                 // Create terminated title.
                 allocate_array((void*) &tt, (void*) &tts, (void*) CHARACTER_ARRAY);
@@ -529,11 +534,11 @@ void serialise_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
             }
 
             // Reset comparison result.
-            r = 0;
+            r = *NUMBER_0_INTEGER;
 
             compare_arrays(*a, *ac, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-            if (r != 0) {
+            if (r != *NUMBER_0_INTEGER) {
 
                 // The part model is a compound.
 
@@ -541,7 +546,10 @@ void serialise_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
                 serialise_x_window_system(p0, p1, p2, *m, (void*) *mc, *d, *dc, p7, p8);
             }
 
-            // Reset source part abstraction, model, details.
+            // Reset source part name, abstraction, model, details.
+            n = &NULL_POINTER;
+            nc = &NULL_POINTER;
+            ns = &NULL_POINTER;
             a = &NULL_POINTER;
             ac = &NULL_POINTER;
             as = &NULL_POINTER;
@@ -606,13 +614,13 @@ void serialise_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
 
             // Reset terminated title.
             tt = NULL_POINTER;
-            tts = -1;
+            tts = *NUMBER_MINUS_1_INTEGER;
             // Reset terminated icon name.
             ti = NULL_POINTER;
-            tis = -1;
+            tis = *NUMBER_MINUS_1_INTEGER;
 
             // Reset comparison result.
-            r = 0;
+            r = *NUMBER_0_INTEGER;
 
             // Increment loop count.
             j++;

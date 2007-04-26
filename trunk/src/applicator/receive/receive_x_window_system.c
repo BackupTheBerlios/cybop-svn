@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.22 $ $Date: 2007-04-16 15:56:30 $ $Author: christian $
+ * @version $Revision: 1.23 $ $Date: 2007-04-26 23:17:09 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -210,7 +210,10 @@ void receive_x_window_system_part(void* p0, void* p1, void* p2, void* p3, void* 
 
                     int* wmc = (int*) p10;
 
-                    // The graphical part abstraction, model, details.
+                    // The graphical part name, abstraction, model, details.
+                    void** n = &NULL_POINTER;
+                    void** nc = &NULL_POINTER;
+                    void** ns = &NULL_POINTER;
                     void** a = &NULL_POINTER;
                     void** ac = &NULL_POINTER;
                     void** as = &NULL_POINTER;
@@ -257,11 +260,11 @@ void receive_x_window_system_part(void* p0, void* p1, void* p2, void* p3, void* 
                     int nz = *NUMBER_0_INTEGER;
 
                     // The loop count.
-                    int j = 0;
+                    int j = *NUMBER_0_INTEGER;
                     // The comparison result.
-                    int r = 0;
+                    int r = *NUMBER_0_INTEGER;
 
-                    while (1) {
+                    while (*NUMBER_1_INTEGER) {
 
                         if (j >= *wmc) {
 
@@ -270,6 +273,7 @@ void receive_x_window_system_part(void* p0, void* p1, void* p2, void* p3, void* 
 
                         // Get graphical part at index j.
                         get_compound_element_by_index(p9, p10, (void*) &j,
+                            (void*) &n, (void*) &nc, (void*) &ns,
                             (void*) &a, (void*) &ac, (void*) &as,
                             (void*) &m, (void*) &mc, (void*) &ms,
                             (void*) &d, (void*) &dc, (void*) &ds);
@@ -308,7 +312,7 @@ void receive_x_window_system_part(void* p0, void* p1, void* p2, void* p3, void* 
 
                             compare_arrays(*a, *ac, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-                            if (r != 0) {
+                            if (r != *NUMBER_0_INTEGER) {
 
                                 // The graphical part model is a compound.
 
@@ -324,6 +328,9 @@ void receive_x_window_system_part(void* p0, void* p1, void* p2, void* p3, void* 
                         }
 
                         // Reset graphical part.
+                        n = &NULL_POINTER;
+                        nc = &NULL_POINTER;
+                        ns = &NULL_POINTER;
                         a = &NULL_POINTER;
                         ac = &NULL_POINTER;
                         as = &NULL_POINTER;
@@ -370,7 +377,7 @@ void receive_x_window_system_part(void* p0, void* p1, void* p2, void* p3, void* 
                         nz = *NUMBER_0_INTEGER;
 
                         // Reset comparison result.
-                        r = 0;
+                        r = *NUMBER_0_INTEGER;
 
                         // Increment loop count.
                         j++;
@@ -414,7 +421,7 @@ void receive_x_window_system_part(void* p0, void* p1, void* p2, void* p3, void* 
 int receive_x_window_system_check_events(struct _XDisplay* d, pthread_mutex_t* xmt) {
 
     // The number of events.
-    int n = 0;
+    int n = *NUMBER_0_INTEGER;
 
     pthread_mutex_lock(xmt);
 
@@ -499,7 +506,10 @@ void receive_x_window_system_thread(void* p0) {
     void** cdc = &NULL_POINTER;
     void** cds = &NULL_POINTER;
 
-    //?? TODO: The temporary graphical part abstraction, model, details.
+    //?? TODO: The temporary graphical part name, abstraction, model, details.
+    void** tmpn = &NULL_POINTER;
+    void** tmpnc = &NULL_POINTER;
+    void** tmpns = &NULL_POINTER;
     void** tmpa = &NULL_POINTER;
     void** tmpac = &NULL_POINTER;
     void** tmpas = &NULL_POINTER;
@@ -513,11 +523,11 @@ void receive_x_window_system_thread(void* p0) {
     // The event.
     XEvent e;
     // The event type.
-    int t = -1;
+    int t = *NUMBER_MINUS_1_INTEGER;
     // The signal id.
     int* id = NULL_POINTER;
 
-    while (1) {
+    while (*NUMBER_1_INTEGER) {
 
         // A break condition does not exist here because the loop
         // is blocking neverendingly while waiting for signals.
@@ -597,7 +607,7 @@ void receive_x_window_system_thread(void* p0) {
             // when being displayed after having been covered before.
 
             // Consider only the last in a row of multiple expose events.
-            if (e.xexpose.count == 0) {
+            if (e.xexpose.count == *NUMBER_0_INTEGER) {
 
                 // Get actual command belonging to the x window system expose event.
                 get_universal_compound_element_by_name(*c, *cc,
@@ -614,7 +624,7 @@ void receive_x_window_system_thread(void* p0) {
 
                 // Allocate signal id.
                 allocate((void*) &id, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-                *id = 0;
+                *id = *NUMBER_0_INTEGER;
                 get_new_signal_id(*s, *sc, (void*) id);
 
                 // Add signal to signal memory.
@@ -739,6 +749,7 @@ void receive_x_window_system_thread(void* p0) {
             //?? only part element is determined here and handed over to
             //?? further procedures.
             get_compound_element_by_index(*r, *rc, (void*) NUMBER_0_INTEGER,
+                (void*) &tmpn, (void*) &tmpnc, (void*) &tmpns,
                 (void*) &tmpa, (void*) &tmpac, (void*) &tmpas,
                 (void*) &tmpm, (void*) &tmpmc, (void*) &tmpms,
                 (void*) &tmpd, (void*) &tmpdc, (void*) &tmpds);
@@ -754,7 +765,7 @@ void receive_x_window_system_thread(void* p0) {
 
             // Allocate signal id.
             allocate((void*) &id, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-            *id = 0;
+            *id = *NUMBER_0_INTEGER;
             get_new_signal_id(*s, *sc, (void*) id);
 
             // Add signal to signal memory.
@@ -813,7 +824,10 @@ void receive_x_window_system_thread(void* p0) {
         cdc = &NULL_POINTER;
         cds = &NULL_POINTER;
 
-        //?? Reset temporary graphical part abstraction, model, details.
+        //?? Reset temporary graphical part name, abstraction, model, details.
+        tmpn = &NULL_POINTER;
+        tmpnc = &NULL_POINTER;
+        tmpns = &NULL_POINTER;
         tmpa = &NULL_POINTER;
         tmpac = &NULL_POINTER;
         tmpas = &NULL_POINTER;
@@ -825,7 +839,7 @@ void receive_x_window_system_thread(void* p0) {
         tmpds = &NULL_POINTER;
 
         // Reset event type.
-        t = -1;
+        t = *NUMBER_MINUS_1_INTEGER;
         // Reset signal id.
         id = NULL_POINTER;
     }

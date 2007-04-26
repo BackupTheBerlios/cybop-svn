@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2007-04-23 23:15:07 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2007-04-26 23:17:09 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -69,9 +69,9 @@ void send_file_system(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
     allocate((void*) &a, (void*) &as, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
     // Serialise knowledge model into model diagram (hierarchical text).
-    serialise((void*) &a, (void*) &ac, (void*) &as, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10);
+    serialise((void*) &a, (void*) &ac, (void*) &as, NULL_POINTER, NULL_POINTER, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10);
 
-    // Write serialised array as message to shell standard output.
+    // Write serialised array as message to file system.
     write_data((void*) &p13, p14, NULL_POINTER, a, (void*) &ac, (void*) FILE_CHANNEL, (void*) FILE_CHANNEL_COUNT);
 
     // Deallocate array.

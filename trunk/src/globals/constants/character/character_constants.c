@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2007-04-23 23:15:07 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2007-04-26 23:17:09 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -83,8 +83,8 @@ static char* EXCLAMATION_MARK_CHARACTER = EXCLAMATION_MARK_CHARACTER_ARRAY;
 static char QUOTATION_MARK_CHARACTER_ARRAY[] = {'"'};
 static char* QUOTATION_MARK_CHARACTER = QUOTATION_MARK_CHARACTER_ARRAY;
 
-/** The number sign character. U+0023 */
-static char NUMBER_SIGN_CHARACTER_ARRAY[] = {'#'};
+/** The number sign character #. U+0023 */
+static char NUMBER_SIGN_CHARACTER_ARRAY[] = {0x23};
 static char* NUMBER_SIGN_CHARACTER = NUMBER_SIGN_CHARACTER_ARRAY;
 
 /** The dollar sign character. U+0024 */
@@ -98,6 +98,10 @@ static char* PERCENT_SIGN_CHARACTER = PERCENT_SIGN_CHARACTER_ARRAY;
 /** The ampersand character. U+0026 */
 static char AMPERSAND_CHARACTER_ARRAY[] = {'&'};
 static char* AMPERSAND_CHARACTER = AMPERSAND_CHARACTER_ARRAY;
+
+/** The plus sign character. U+002B */
+static char PLUS_SIGN_CHARACTER_ARRAY[] = {0x2B};
+static char* PLUS_SIGN_CHARACTER = PLUS_SIGN_CHARACTER_ARRAY;
 
 /** The comma character. U+002C */
 static char COMMA_CHARACTER_ARRAY[] = {','};

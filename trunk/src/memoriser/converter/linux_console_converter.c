@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.20 $ $Date: 2007-04-16 15:50:29 $ $Author: christian $
+ * @version $Revision: 1.21 $ $Date: 2007-04-26 23:17:10 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -34,15 +34,16 @@
 
 #include <stdio.h>
 #include <wchar.h>
-#include "../../globals/constants/cybol/cybol_abstraction_constants.c"
 #include "../../globals/constants/boolean/boolean_constants.c"
 #include "../../globals/constants/character/character_constants.c"
+#include "../../globals/constants/character/wide_character_constants.c"
 #include "../../globals/constants/console/console_control_sequence_constants.c"
-#include "../../globals/constants/log_message/log_message_constants.c"
+#include "../../globals/constants/cybol/cybol_abstraction_constants.c"
 #include "../../globals/constants/cybol/cybol_model_constants.c"
 #include "../../globals/constants/cybol/cybol_name_constants.c"
+#include "../../globals/constants/integer/integer_constants.c"
+#include "../../globals/constants/log_message/log_message_constants.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
-#include "../../globals/constants/character/wide_character_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../globals/variables/variables.c"
 #include "../../memoriser/accessor/compound_accessor.c"
@@ -119,20 +120,20 @@ void serialise_linux_console_character(void* p0, void* p1, void* p2, void* p3, v
                                     int cx = *sx + *NUMBER_1_INTEGER;
                                     // The y coordinate.
                                     void* y = NULL_POINTER;
-                                    int yc = 0;
-                                    int ys = 0;
+                                    int yc = *NUMBER_0_INTEGER;
+                                    int ys = *NUMBER_0_INTEGER;
                                     // The x coordinate.
                                     void* x = NULL_POINTER;
-                                    int xc = 0;
-                                    int xs = 0;
+                                    int xc = *NUMBER_0_INTEGER;
+                                    int xs = *NUMBER_0_INTEGER;
                                     // The background colour.
 //??                                    void* b = NULL_POINTER;
-//??                                    int bc = 0;
-//??                                    int bs = 0;
+//??                                    int bc = *NUMBER_0_INTEGER;
+//??                                    int bs = *NUMBER_0_INTEGER;
                                     // The foreground colour.
 //??                                    void* f = NULL_POINTER;
-//??                                    int fc = 0;
-//??                                    int fs = 0;
+//??                                    int fc = *NUMBER_0_INTEGER;
+//??                                    int fs = *NUMBER_0_INTEGER;
 
                                     //
                                     // Position cursor.
@@ -265,12 +266,12 @@ void serialise_linux_console_character(void* p0, void* p1, void* p2, void* p3, v
                                     }
 
                                     // The comparison result.
-                                    int r = 0;
+                                    int r = *NUMBER_0_INTEGER;
 
                                     // Compare hidden property.
                                     compare_arrays(p10, (void*) PRIMITIVE_COUNT, (void*) TRUE_BOOLEAN, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) INTEGER_ARRAY);
 
-                                    if (r != 0) {
+                                    if (r != *NUMBER_0_INTEGER) {
 
                                         // Set hidden property.
                                         set_array_elements(*d, p1, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
@@ -280,12 +281,12 @@ void serialise_linux_console_character(void* p0, void* p1, void* p2, void* p3, v
                                     }
 
                                     // Reset comparison result.
-                                    r = 0;
+                                    r = *NUMBER_0_INTEGER;
 
                                     // Compare inverse property.
                                     compare_arrays(p11, (void*) PRIMITIVE_COUNT, (void*) TRUE_BOOLEAN, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) INTEGER_ARRAY);
 
-                                    if (r != 0) {
+                                    if (r != *NUMBER_0_INTEGER) {
 
                                         // Set inverse property.
                                         set_array_elements(*d, p1, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
@@ -295,12 +296,12 @@ void serialise_linux_console_character(void* p0, void* p1, void* p2, void* p3, v
                                     }
 
                                     // Reset comparison result.
-                                    r = 0;
+                                    r = *NUMBER_0_INTEGER;
 
                                     // Compare blink property.
                                     compare_arrays(p12, (void*) PRIMITIVE_COUNT, (void*) TRUE_BOOLEAN, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) INTEGER_ARRAY);
 
-                                    if (r != 0) {
+                                    if (r != *NUMBER_0_INTEGER) {
 
                                         // Set blink property.
                                         set_array_elements(*d, p1, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
@@ -310,12 +311,12 @@ void serialise_linux_console_character(void* p0, void* p1, void* p2, void* p3, v
                                     }
 
                                     // Reset comparison result.
-                                    r = 0;
+                                    r = *NUMBER_0_INTEGER;
 
                                     // Compare underline property.
                                     compare_arrays(p13, (void*) PRIMITIVE_COUNT, (void*) TRUE_BOOLEAN, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) INTEGER_ARRAY);
 
-                                    if (r != 0) {
+                                    if (r != *NUMBER_0_INTEGER) {
 
                                         // Set underline property.
                                         set_array_elements(*d, p1, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
@@ -325,12 +326,12 @@ void serialise_linux_console_character(void* p0, void* p1, void* p2, void* p3, v
                                     }
 
                                     // Reset comparison result.
-                                    r = 0;
+                                    r = *NUMBER_0_INTEGER;
 
                                     // Compare bold property.
                                     compare_arrays(p14, (void*) PRIMITIVE_COUNT, (void*) TRUE_BOOLEAN, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) INTEGER_ARRAY);
 
-                                    if (r != 0) {
+                                    if (r != *NUMBER_0_INTEGER) {
 
                                         // Set bold property.
                                         set_array_elements(*d, p1, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
@@ -424,13 +425,13 @@ void serialise_linux_console_rectangle_border(void* p0, void* p1,
                             wchar_t* hc = (wchar_t*) p0;
 
                             // The comparison result.
-                            int r = 0;
+                            int r = *NUMBER_0_INTEGER;
 
-                            if (r == 0) {
+                            if (r == *NUMBER_0_INTEGER) {
 
                                 compare_arrays(p6, p7, (void*) TUI_LINE_BORDER_MODEL, (void*) TUI_LINE_BORDER_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-                                if (r != 0) {
+                                if (r != *NUMBER_0_INTEGER) {
 
                                     *hc = *BOX_DRAWINGS_LIGHT_HORIZONTAL_WIDE_CHARACTER;
                                     *vc = *BOX_DRAWINGS_LIGHT_VERTICAL_WIDE_CHARACTER;
@@ -441,11 +442,11 @@ void serialise_linux_console_rectangle_border(void* p0, void* p1,
                                 }
                             }
 
-                            if (r == 0) {
+                            if (r == *NUMBER_0_INTEGER) {
 
                                 compare_arrays(p6, p7, (void*) TUI_ROUND_LINE_BORDER_MODEL, (void*) TUI_ROUND_LINE_BORDER_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-                                if (r != 0) {
+                                if (r != *NUMBER_0_INTEGER) {
 
                                     *hc = *BOX_DRAWINGS_LIGHT_HORIZONTAL_WIDE_CHARACTER;
                                     *vc = *BOX_DRAWINGS_LIGHT_VERTICAL_WIDE_CHARACTER;
@@ -456,11 +457,11 @@ void serialise_linux_console_rectangle_border(void* p0, void* p1,
                                 }
                             }
 
-                            if (r == 0) {
+                            if (r == *NUMBER_0_INTEGER) {
 
                                 compare_arrays(p6, p7, (void*) TUI_DOUBLE_LINE_BORDER_MODEL, (void*) TUI_DOUBLE_LINE_BORDER_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-                                if (r != 0) {
+                                if (r != *NUMBER_0_INTEGER) {
 
                                     *hc = *BOX_DRAWINGS_DOUBLE_HORIZONTAL_WIDE_CHARACTER;
                                     *vc = *BOX_DRAWINGS_DOUBLE_VERTICAL_WIDE_CHARACTER;
@@ -589,25 +590,25 @@ void serialise_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, v
                             int xl = *px + *sx;
 
                             // The character index.
-                            int ci = 0;
+                            int ci = *NUMBER_0_INTEGER;
                             // The character.
                             wchar_t* c = SPACE_WIDE_CHARACTER;
 
-                            while (1) {
+                            while (*NUMBER_1_INTEGER) {
 
                                 if (z >= zl) {
 
                                     break;
                                 }
 
-                                while (1) {
+                                while (*NUMBER_1_INTEGER) {
 
                                     if (y >= yl) {
 
                                         break;
                                     }
 
-                                    while (1) {
+                                    while (*NUMBER_1_INTEGER) {
 
                                         if (x >= xl) {
 
@@ -650,7 +651,7 @@ void serialise_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, v
                                                     serialise_linux_console_character(p0, p1, p2, &x, &y, &z,
                                                         p10, p11, p12, p13, p5, p6, p7, p8, p9, &ltc);
 
-                                                } else if (x == (xl - 1)) {
+                                                } else if (x == (xl - *NUMBER_1_INTEGER)) {
 
                                                     // Serialise right top border character using escape codes.
                                                     serialise_linux_console_character(p0, p1, p2, &x, &y, &z,
@@ -663,7 +664,7 @@ void serialise_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, v
                                                         p10, p11, p12, p13, p5, p6, p7, p8, p9, &hc);
                                                 }
 
-                                            } else if (y == (yl - 1)) {
+                                            } else if (y == (yl - *NUMBER_1_INTEGER)) {
 
                                                 if (x == *px) {
 
@@ -671,7 +672,7 @@ void serialise_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, v
                                                     serialise_linux_console_character(p0, p1, p2, &x, &y, &z,
                                                         p10, p11, p12, p13, p5, p6, p7, p8, p9, &lbc);
 
-                                                } else if (x == (xl - 1)) {
+                                                } else if (x == (xl - *NUMBER_1_INTEGER)) {
 
                                                     // Serialise right bottom border character using escape codes.
                                                     serialise_linux_console_character(p0, p1, p2, &x, &y, &z,
@@ -692,7 +693,7 @@ void serialise_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, v
                                                     serialise_linux_console_character(p0, p1, p2, &x, &y, &z,
                                                         p10, p11, p12, p13, p5, p6, p7, p8, p9, &vc);
 
-                                                } else if (x == (xl - 1)) {
+                                                } else if (x == (xl - *NUMBER_1_INTEGER)) {
 
                                                     // Serialise right bottom border character using escape codes.
                                                     serialise_linux_console_character(p0, p1, p2, &x, &y, &z,
@@ -704,7 +705,7 @@ void serialise_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, v
 
                                                         // Calculate character index.
                                                         // CAUTION! Subtract one because of the border.
-                                                        ci = x - *px - 1;
+                                                        ci = x - *px - *NUMBER_1_INTEGER;
 
                                                         if (ci < *cc) {
 
@@ -843,20 +844,20 @@ void serialise_linux_console_rectangle_compass_layout(void* p0, void* p1, void* 
     int* fasz = (int*) p11;
 
     // The comparison result.
-    int r = 0;
+    int r = *NUMBER_0_INTEGER;
 
-    if (r == 0) {
+    if (r == *NUMBER_0_INTEGER) {
 
         compare_arrays(p12, p13, (void*) UI_NORTH_CELL_MODEL, (void*) UI_NORTH_CELL_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r != 0) {
+        if (r != *NUMBER_0_INTEGER) {
 
             // Set cell coordinates.
             *cpx = *fapx;
             *cpy = *fapy;
             *cpz = *fapz;
             *csx = *fasx;
-//??            *csy = 20;
+//??            *csy = *NUMBER_20_INTEGER;
             *csz = *fasz;
             // Set free area coordinates.
             *fapy = *fapy + *csy;
@@ -864,35 +865,35 @@ void serialise_linux_console_rectangle_compass_layout(void* p0, void* p1, void* 
         }
     }
 
-    if (r == 0) {
+    if (r == *NUMBER_0_INTEGER) {
 
         compare_arrays(p12, p13, (void*) UI_SOUTH_CELL_MODEL, (void*) UI_SOUTH_CELL_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r != 0) {
+        if (r != *NUMBER_0_INTEGER) {
 
             // Set cell coordinates.
             *cpx = *fapx;
             *cpy = *fapy + (*fasy - *csy);
             *cpz = *fapz;
             *csx = *fasx;
-//??            *csy = 20;
+//??            *csy = *NUMBER_20_INTEGER;
             *csz = *fasz;
             // Set free area coordinates.
             *fasy = *fasy - *csy;
         }
     }
 
-    if (r == 0) {
+    if (r == *NUMBER_0_INTEGER) {
 
         compare_arrays(p12, p13, (void*) UI_WEST_CELL_MODEL, (void*) UI_WEST_CELL_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r != 0) {
+        if (r != *NUMBER_0_INTEGER) {
 
             // Set cell coordinates.
             *cpx = *fapx;
             *cpy = *fapy;
             *cpz = *fapz;
-//??            *csx = 20;
+//??            *csx = *NUMBER_20_INTEGER;
             *csy = *fasy;
             *csz = *fasz;
             // Set free area coordinates.
@@ -901,17 +902,17 @@ void serialise_linux_console_rectangle_compass_layout(void* p0, void* p1, void* 
         }
     }
 
-    if (r == 0) {
+    if (r == *NUMBER_0_INTEGER) {
 
         compare_arrays(p12, p13, (void*) UI_EAST_CELL_MODEL, (void*) UI_EAST_CELL_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r != 0) {
+        if (r != *NUMBER_0_INTEGER) {
 
             // Set cell coordinates.
             *cpx = *fapx + (*fasx - *csx);
             *cpy = *fapy;
             *cpz = *fapz;
-//??            *csx = 20;
+//??            *csx = *NUMBER_20_INTEGER;
             *csy = *fasy;
             *csz = *fasz;
             // Set free area coordinates.
@@ -919,11 +920,11 @@ void serialise_linux_console_rectangle_compass_layout(void* p0, void* p1, void* 
         }
     }
 
-    if (r == 0) {
+    if (r == *NUMBER_0_INTEGER) {
 
         compare_arrays(p12, p13, (void*) UI_CENTRE_CELL_MODEL, (void*) UI_CENTRE_CELL_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r != 0) {
+        if (r != *NUMBER_0_INTEGER) {
 
             // Set cell coordinates.
             *cpx = *fapx;
@@ -972,24 +973,24 @@ void serialise_linux_console_rectangle_layout(void* p0, void* p1, void* p2, void
     void* p18, void* p19, void* p20, void* p21) {
 
     // The comparison result.
-    int r = 0;
+    int r = *NUMBER_0_INTEGER;
 
-    if (r == 0) {
+    if (r == *NUMBER_0_INTEGER) {
 
         compare_arrays(p20, p21, (void*) UI_COORDINATES_LAYOUT_MODEL, (void*) UI_COORDINATES_LAYOUT_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r != 0) {
+        if (r != *NUMBER_0_INTEGER) {
 
             // Determine new position and size coordinates for part.
             serialise_linux_console_rectangle_coordinates_layout(p0, p1, p2, p3, p4, p5, p12, p13, p14, p15, p16, p17);
         }
     }
 
-    if (r == 0) {
+    if (r == *NUMBER_0_INTEGER) {
 
         compare_arrays(p20, p21, (void*) UI_COMPASS_LAYOUT_MODEL, (void*) UI_COMPASS_LAYOUT_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r != 0) {
+        if (r != *NUMBER_0_INTEGER) {
 
             // Determine new position and size coordinates for part.
             serialise_linux_console_rectangle_compass_layout(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p18, p19);
@@ -1188,24 +1189,24 @@ void serialise_linux_console_shape(void* p0, void* p1, void* p2, void* p3, void*
 
         // The character.
         void* c = NULL_POINTER;
-        int cc = 0;
-        size_t cs = 0;
+        int cc = *NUMBER_0_INTEGER;
+        size_t cs = *NUMBER_0_INTEGER;
         // The hidden property.
-        int h = 0;
+        int h = *NUMBER_0_INTEGER;
         // The inverse property.
-        int i = 0;
+        int i = *NUMBER_0_INTEGER;
         // The blink property.
-        int bl = 0;
+        int bl = *NUMBER_0_INTEGER;
         // The underline property.
-        int u = 0;
+        int u = *NUMBER_0_INTEGER;
         // The bold property.
-        int b = 0;
+        int b = *NUMBER_0_INTEGER;
         // The background colour.
         void* bg = NULL_POINTER;
-        int bgc = 0;
+        int bgc = *NUMBER_0_INTEGER;
         // The foreground colour.
         void* fg = NULL_POINTER;
-        int fgc = 0;
+        int fgc = *NUMBER_0_INTEGER;
 
         //?? TODO: These values should later be given as boolean "true" or "false".
         //?? Currently, they have to be given as "0" or "1" in CYBOL.
@@ -1220,13 +1221,13 @@ void serialise_linux_console_shape(void* p0, void* p1, void* p2, void* p3, void*
         mapto((void*) &fg, (void*) &fgc, NULL_POINTER, p19, p20, (void*) TERMINAL_FOREGROUND_ABSTRACTION, (void*) TERMINAL_FOREGROUND_ABSTRACTION_COUNT);
 
         // The comparison result.
-        int r = 0;
+        int r = *NUMBER_0_INTEGER;
 
-        if (r == 0) {
+        if (r == *NUMBER_0_INTEGER) {
 
             compare_arrays(p5, p6, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-            if (r != 0) {
+            if (r != *NUMBER_0_INTEGER) {
 
                 // Set character parameter to be handed over.
                 c = p3;
@@ -1234,15 +1235,15 @@ void serialise_linux_console_shape(void* p0, void* p1, void* p2, void* p3, void*
             }
         }
 
-        if (r == 0) {
+        if (r == *NUMBER_0_INTEGER) {
 
             compare_arrays(p5, p6, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-            if (r != 0) {
+            if (r != *NUMBER_0_INTEGER) {
 
                 // The temporary character array.
                 void* tmp = NULL_POINTER;
-                int tmps = *sc + 1;
+                int tmps = *sc + *NUMBER_1_INTEGER;
 
                 // Allocate temporary character array.
                 allocate((void*) &tmp, (void*) &tmps, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
@@ -1254,7 +1255,7 @@ void serialise_linux_console_shape(void* p0, void* p1, void* p2, void* p3, void*
 
                 // Initialise temporary wide character string size.
                 // CAUTION! One extra place is added for the null termination character.
-                cs = *sc + 100;
+                cs = *sc + *NUMBER_100_INTEGER;
 
                 // Allocate temporary wide character string.
                 allocate((void*) &c, (void*) &cs, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
@@ -1279,13 +1280,13 @@ void serialise_linux_console_shape(void* p0, void* p1, void* p2, void* p3, void*
         // handed over remains a null pointer.
 
         // Reset comparison result.
-        r = 0;
+        r = *NUMBER_0_INTEGER;
 
-        if (r == 0) {
+        if (r == *NUMBER_0_INTEGER) {
 
             compare_arrays(p35, p36, (void*) UI_RECTANGLE_SHAPE_MODEL, (void*) UI_RECTANGLE_SHAPE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-            if (r != 0) {
+            if (r != *NUMBER_0_INTEGER) {
 
                 serialise_linux_console_coordinates(p0, p1, p2, c, (void*) &cc,
                     &h, &i, &bl, &u, &b,
@@ -1294,11 +1295,11 @@ void serialise_linux_console_shape(void* p0, void* p1, void* p2, void* p3, void*
             }
         }
 
-        if (r == 0) {
+        if (r == *NUMBER_0_INTEGER) {
 
             compare_arrays(p35, p36, (void*) UI_CIRCLE_SHAPE_MODEL, (void*) UI_CIRCLE_SHAPE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-            if (r != 0) {
+            if (r != *NUMBER_0_INTEGER) {
 
     /*??
                 serialise_linux_console_coordinates(p0, p1, p2, c, cc, &h, &i, &bl, &u, &b,
@@ -1308,11 +1309,11 @@ void serialise_linux_console_shape(void* p0, void* p1, void* p2, void* p3, void*
             }
         }
 
-        if (r == 0) {
+        if (r == *NUMBER_0_INTEGER) {
 
             compare_arrays(p35, p36, (void*) UI_POLYGON_SHAPE_MODEL, (void*) UI_POLYGON_SHAPE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-            if (r != 0) {
+            if (r != *NUMBER_0_INTEGER) {
 
     /*??
                 serialise_linux_console_coordinates(p0, p1, p2, c, cc, &h, &i, &bl, &u, &b,
@@ -1323,13 +1324,13 @@ void serialise_linux_console_shape(void* p0, void* p1, void* p2, void* p3, void*
         }
 
         // Reset comparison result.
-        r = 0;
+        r = *NUMBER_0_INTEGER;
 
-        if (r == 0) {
+        if (r == *NUMBER_0_INTEGER) {
 
             compare_arrays(p5, p6, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-            if (r != 0) {
+            if (r != *NUMBER_0_INTEGER) {
 
                 // Deallocate temporary wide character string.
                 deallocate((void*) &c, (void*) &cs, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
@@ -1378,7 +1379,10 @@ void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, v
 
     log_message_debug("Serialise compound model into linux console control sequences.");
 
-    // The source part abstraction, model, details.
+    // The source part name, abstraction, model, details.
+    void** n = &NULL_POINTER;
+    void** nc = &NULL_POINTER;
+    void** ns = &NULL_POINTER;
     void** a = &NULL_POINTER;
     void** ac = &NULL_POINTER;
     void** as = &NULL_POINTER;
@@ -1551,31 +1555,27 @@ void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, v
 
     // The element name.
     void* en = NULL_POINTER;
-    int enc = 0;
+    int enc = *NUMBER_0_INTEGER;
     // The remaining name.
     void* rn = NULL_POINTER;
-    int rnc = 0;
+    int rnc = *NUMBER_0_INTEGER;
     // The meta hierarchy flag with the following meanings:
     // -1: not a compound knowledge hierarchy
     // 0: part hierarchy
     // 1: meta hierarchy
-    int f = -1;
+    int f = *NUMBER_MINUS_1_INTEGER;
     // The loop count.
-    int j = 0;
-    // The name of the current compound part element.
-    void** n = &NULL_POINTER;
-    void** nc = &NULL_POINTER;
-    void** ns = &NULL_POINTER;
+    int j = *NUMBER_0_INTEGER;
     // The name comparison result.
-    int nr = 0;
+    int nr = *NUMBER_0_INTEGER;
     // The abstraction comparison result.
-    int ar = 0;
+    int ar = *NUMBER_0_INTEGER;
 
     // Get compound element (area to be repainted) name and remaining name,
     // as well as the flag indicating a part- or meta element.
     get_compound_element_name_and_remaining_name(p11, p12, (void*) &en, (void*) &enc, (void*) &rn, (void*) &rnc, (void*) &f);
 
-    if ((p11 == NULL_POINTER) || (*((int*) p12) == 0) || (f == 0)) {
+    if ((p11 == NULL_POINTER) || (*((int*) p12) == *NUMBER_0_INTEGER) || (f == *NUMBER_0_INTEGER)) {
 
         // Either, no hierarchical element name (repaint area) was given
         // (p11 == NULL_POINTER), in which case not just a small area
@@ -1852,8 +1852,8 @@ void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, v
             (void*) &wsd, (void*) &wsdc, (void*) &wsds,
             p13, p14);
 
-        if ((p11 == NULL_POINTER) || (*((int*) p12) == 0) || (rn == NULL_POINTER)) {
-//??        if ((p11 == NULL_POINTER) || (*((int*) p12) == 0)) {
+        if ((p11 == NULL_POINTER) || (*((int*) p12) == *NUMBER_0_INTEGER) || (rn == NULL_POINTER)) {
+//??        if ((p11 == NULL_POINTER) || (*((int*) p12) == *NUMBER_0_INTEGER)) {
 
             // Either, no hierarchical element name (repaint area) was given
             // (p11 == NULL_POINTER), in which case not just a small area
@@ -1876,7 +1876,7 @@ void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, v
 
         compare_arrays(p3, p4, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT, (void*) &ar, (void*) CHARACTER_ARRAY);
 
-        if (ar != 0) {
+        if (ar != *NUMBER_0_INTEGER) {
 
             // The part model is a compound.
 
@@ -1885,20 +1885,24 @@ void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, v
                 int* sc = (int*) p6;
 
                 // Iterate through compound parts.
-                while (1) {
+                while (*NUMBER_1_INTEGER) {
 
                     if (j >= *sc) {
 
                         break;
                     }
 
-                    // Get part name at current index.
-                    get_compound_element_name_by_index(p5, p6, (void*) &j, (void*) &n, (void*) &nc, (void*) &ns);
+                    // Get part at index j.
+                    get_compound_element_by_index(p5, p6, (void*) &j,
+                        (void*) &n, (void*) &nc, (void*) &ns,
+                        (void*) &a, (void*) &ac, (void*) &as,
+                        (void*) &m, (void*) &mc, (void*) &ms,
+                        (void*) &d, (void*) &dc, (void*) &ds);
 
                     // Compare expected name with that of the current compound part element.
                     compare_arrays(*n, *nc, en, (void*) &enc, (void*) &nr, (void*) CHARACTER_ARRAY);
 
-                    if ((p11 == NULL_POINTER) || (*((int*) p12) == 0) || (nr != 0)) {
+                    if ((p11 == NULL_POINTER) || (*((int*) p12) == *NUMBER_0_INTEGER) || (nr != *NUMBER_0_INTEGER)) {
 
                         // Either, no hierarchical element name (repaint area) was given
                         // (p11 == NULL_POINTER), in which case not just a small area
@@ -1908,33 +1912,27 @@ void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, v
                         // the compound part name matches the next name in the
                         // given cascade of separated names, pointing to a knowledge model.
 
-                        // Get part at index j.
-                        get_compound_element_by_index(p5, p6, (void*) &j,
-                            (void*) &a, (void*) &ac, (void*) &as,
-                            (void*) &m, (void*) &mc, (void*) &ms,
-                            (void*) &d, (void*) &dc, (void*) &ds);
-
                         // Recursively call this procedure for compound part model.
                         serialise_linux_console(p0, p1, p2, *a, *ac, *m, *mc, *d, *dc, p7, p8, rn, (void*) &rnc, p13, p14);
-
-                        // Reset source part abstraction, model, details.
-                        a = &NULL_POINTER;
-                        ac = &NULL_POINTER;
-                        as = &NULL_POINTER;
-                        m = &NULL_POINTER;
-                        mc = &NULL_POINTER;
-                        ms = &NULL_POINTER;
-                        d = &NULL_POINTER;
-                        dc = &NULL_POINTER;
-                        ds = &NULL_POINTER;
                     }
 
-                    // Reset name of the current compound part element.
+                    // Reset source part name, abstraction, model, details
+                    // (parameters of the current compound part element).
                     n = &NULL_POINTER;
                     nc = &NULL_POINTER;
                     ns = &NULL_POINTER;
+                    a = &NULL_POINTER;
+                    ac = &NULL_POINTER;
+                    as = &NULL_POINTER;
+                    m = &NULL_POINTER;
+                    mc = &NULL_POINTER;
+                    ms = &NULL_POINTER;
+                    d = &NULL_POINTER;
+                    dc = &NULL_POINTER;
+                    ds = &NULL_POINTER;
+
                     // Reset name comparison result.
-                    nr = 0;
+                    nr = *NUMBER_0_INTEGER;
 
                     // Increment loop count.
                     j++;
