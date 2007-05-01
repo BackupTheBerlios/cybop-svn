@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2007-04-26 23:17:10 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2007-05-01 19:07:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -311,8 +311,6 @@ void serialise_model_diagram_node(void* p0, void* p1, void* p2, void* p3, void* 
                 compare_arrays(p5, p6, (void*) XDT_ABSTRACTION, (void*) XDT_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
                 if (r != *NUMBER_0_INTEGER) {
-
-            fprintf(stderr, "TEST found: %s\n", (char*) p5);
 
                     if (*mc > *NUMBER_0_INTEGER) {
 
