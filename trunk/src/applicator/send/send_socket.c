@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.14 $ $Date: 2007-04-16 15:56:30 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2007-05-08 22:02:38 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -35,8 +35,9 @@
 #include <sys/socket.h>
 #include "../../applicator/startup/startup_socket.c"
 #include "../../globals/constants/cybol/cybol_abstraction_constants.c"
-#include "../../globals/constants/log_message/log_message_constants.c"
 #include "../../globals/constants/cybol/cybol_model_constants.c"
+#include "../../globals/constants/integer/integer_constants.c"
+#include "../../globals/constants/log_message/log_message_constants.c"
 #include "../../globals/constants/system_constants.c"
 #include "../../globals/logger/logger.c"
 
@@ -519,11 +520,8 @@ void send_socket(void* p0, void* p1, void* p2, void* p3,
     send_socket_initialise_socket_address((void*) &sa, p2, p3, ha, p4, (void*) &an);
 */
 
-    // The indentation level.
-    int l = *NUMBER_0_INTEGER;
-
-    // Serialise compound model into html format buffer array.
-    serialise_xhtml((void*) &b, (void*) &bc, (void*) &bs, p11, p12, p13, p14, p15, p16, p17, p18, (void*) &l);
+    // Serialise compound model into xhtml format buffer array.
+    serialise((void*) &b, (void*) &bc, (void*) &bs, NULL_POINTER, NULL_POINTER, p11, p12, p13, p14, p15, p16, p17, p18, (void*) XHTML_ABSTRACTION, (void*) XHTML_ABSTRACTION_COUNT);
 
     fputs("SUCCESS! Generated xhtml file.\n", stdout);
 //??    fprintf(stderr, "TEST: send message: %s \n", (char*) b);

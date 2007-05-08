@@ -38,7 +38,7 @@
  *
  * Array elements are accessed over their index (array base pointer + index).
  *
- * @version $Revision: 1.4 $ $Date: 2007-04-16 15:50:29 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2007-05-08 22:02:38 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -68,6 +68,7 @@ void allocate_wide_character_array(void* p0, void* p1) {
 
             void** a = (void**) p0;
 
+            log_message_debug("Information: Allocate wide character array.");
 //??            log_message((void*) INFO_LOG_LEVEL, (void*) CREATE_CHARACTER_ARRAY_MESSAGE, (void*) CREATE_CHARACTER_ARRAY_MESSAGE_COUNT);
 
             // Determine the memory area to be allocated.
@@ -109,6 +110,7 @@ void deallocate_wide_character_array(void* p0, void* p1) {
 
             void** a = (void**) p0;
 
+            log_message_debug("Information: Deallocate wide character array.");
 //??            log_message((void*) INFO_LOG_LEVEL, (void*) DESTROY_CHARACTER_ARRAY_MESSAGE, (void*) DESTROY_CHARACTER_ARRAY_MESSAGE_COUNT);
 
             free(*a);
@@ -145,6 +147,7 @@ void reallocate_wide_character_array(void* p0, void* p1, void* p2) {
 
                 void** a = (void**) p0;
 
+                log_message_debug("Information: Reallocate wide character array.");
 //??                log_message((void*) INFO_LOG_LEVEL, (void*) RESIZE_CHARACTER_ARRAY_MESSAGE, (void*) RESIZE_CHARACTER_ARRAY_MESSAGE_COUNT);
 
                 // Determine the memory area to be allocated.

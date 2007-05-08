@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2007-04-26 23:17:10 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2007-05-08 22:02:38 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -294,7 +294,7 @@ void serialise_xhtml_tag_content(void* p0, void* p1, void* p2, void* p3, void* p
 }
 
 /**
- * Serialises a compound model into xhtml format.
+ * Serialises an xhtml node.
  *
  * @param p0 the destination html byte array (Hand over as reference!)
  * @param p1 the destination count
@@ -309,7 +309,7 @@ void serialise_xhtml_tag_content(void* p0, void* p1, void* p2, void* p3, void* p
  * @param p10 the knowledge memory count
  * @param p11 the indentation level (only for beautifying the resulting xhtml code)
  */
-void serialise_xhtml(void* p0, void* p1, void* p2, void* p3, void* p4,
+void serialise_xhtml_node(void* p0, void* p1, void* p2, void* p3, void* p4,
     void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11) {
 
     if (p11 != NULL_POINTER) {
@@ -320,7 +320,7 @@ void serialise_xhtml(void* p0, void* p1, void* p2, void* p3, void* p4,
 
             int* sc = (int*) p6;
 
-            log_message_debug("Serialise compound model into xhtml format.");
+            log_message_debug("Debug: Serialise xhtml node.");
 
             // The source part name, abstraction, model, details.
             void** n = &NULL_POINTER;
@@ -390,7 +390,7 @@ void serialise_xhtml(void* p0, void* p1, void* p2, void* p3, void* p4,
                             (void*) &d, (void*) &dc, (void*) &ds);
 
                         // Recursively call this operation for the part model.
-                        serialise_xhtml(p0, p1, p2, *a, *ac, *m, *mc, *d, *dc, p9, p10, (void*) &nl);
+                        serialise_xhtml_node(p0, p1, p2, *a, *ac, *m, *mc, *d, *dc, p9, p10, (void*) &nl);
 
                         // Reset source part name, abstraction, model, details.
                         n = &NULL_POINTER;
@@ -435,6 +435,33 @@ void serialise_xhtml(void* p0, void* p1, void* p2, void* p3, void* p4,
 
         log_message_debug("Error: Could not serialise compound model into xhtml format. The indentation level is null.");
     }
+}
+
+/**
+ * Serialises a compound model into xhtml format.
+ *
+ * @param p0 the destination html byte array (Hand over as reference!)
+ * @param p1 the destination count
+ * @param p2 the destination size
+ * @param p3 the source part abstraction
+ * @param p4 the source part abstraction count
+ * @param p5 the source part model
+ * @param p6 the source part model count
+ * @param p7 the source part details
+ * @param p8 the source part details count
+ * @param p9 the knowledge memory
+ * @param p10 the knowledge memory count
+ */
+void serialise_xhtml(void* p0, void* p1, void* p2, void* p3, void* p4,
+    void* p5, void* p6, void* p7, void* p8, void* p9, void* p10) {
+
+    log_message_debug("Information: Serialise xhtml.");
+
+    // The tree level.
+    int l = *NUMBER_0_INTEGER;
+
+    // Serialise xhtml root node.
+    serialise_xhtml_node(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, (void*) &l);
 }
 
 /* XHTML_CONVERTER_SOURCE */

@@ -24,7 +24,7 @@
  * - receive a file stream into a byte array
  * - send a file stream from a byte array
  *
- * @version $Revision: 1.22 $ $Date: 2007-04-23 23:15:07 $ $Author: christian $
+ * @version $Revision: 1.23 $ $Date: 2007-05-08 22:02:38 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -303,6 +303,17 @@ void write_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     f = stdout;
 
                     write_file_stream((void*) f, p3, p4);
+
+                    // Flush any buffered output on the stream to the file.
+                    //
+                    // If this was not done here, the buffered output on the
+                    // stream would only get flushed automatically when either:
+                    // - one tried to do output and the output buffer is full
+                    // - the stream was closed
+                    // - the program terminated by calling exit
+                    // - a newline was written with the stream being line buffered
+                    // - an input operation on any stream actually read data from its file
+                    fflush(f);
                 }
             }
 
@@ -316,6 +327,17 @@ void write_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     f = stderr;
 
                     write_file_stream((void*) f, p3, p4);
+
+                    // Flush any buffered output on the stream to the file.
+                    //
+                    // If this was not done here, the buffered output on the
+                    // stream would only get flushed automatically when either:
+                    // - one tried to do output and the output buffer is full
+                    // - the stream was closed
+                    // - the program terminated by calling exit
+                    // - a newline was written with the stream being line buffered
+                    // - an input operation on any stream actually read data from its file
+                    fflush(f);
                 }
             }
 
@@ -341,6 +363,17 @@ void write_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 if (f != NULL_POINTER) {
 
                     write_file_stream((void*) f, p3, p4);
+
+                    // Flush any buffered output on the stream to the file.
+                    //
+                    // If this was not done here, the buffered output on the
+                    // stream would only get flushed automatically when either:
+                    // - one tried to do output and the output buffer is full
+                    // - the stream was closed
+                    // - the program terminated by calling exit
+                    // - a newline was written with the stream being line buffered
+                    // - an input operation on any stream actually read data from its file
+                    fflush(f);
 
                     // Close file.
                     // CAUTION! Check file for null pointer to avoid a segmentation fault!

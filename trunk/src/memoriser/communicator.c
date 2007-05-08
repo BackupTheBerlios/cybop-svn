@@ -24,7 +24,7 @@
  * - read data from a device into a byte array
  * - write data from a byte array to a device
  *
- * @version $Revision: 1.14 $ $Date: 2007-04-16 15:50:29 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2007-05-08 22:02:38 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -62,6 +62,8 @@
  * @param p6 the type count
  */
 void read_data(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
+
+    log_message_debug("Information: Read data.");
 
     // The comparison result.
     int r = *NUMBER_0_INTEGER;
@@ -166,6 +168,8 @@ void read_data(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
  * @param p6 the type count
  */
 void write_data(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
+
+    log_message_debug("Information: Write data.");
 
     // The comparison result.
     int r = *NUMBER_0_INTEGER;
