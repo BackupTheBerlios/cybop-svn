@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2007-05-08 22:02:38 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2007-05-09 15:32:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -336,7 +336,10 @@ void serialise_xhtml_node(void* p0, void* p1, void* p2, void* p3, void* p4,
             void** dc = &NULL_POINTER;
             void** ds = &NULL_POINTER;
 
-            // The source part tag.
+            // The source part tag name, abstraction, model, details.
+            void** tn = &NULL_POINTER;
+            void** tnc = &NULL_POINTER;
+            void** tns = &NULL_POINTER;
             void** ta = &NULL_POINTER;
             void** tac = &NULL_POINTER;
             void** tas = &NULL_POINTER;
@@ -350,6 +353,7 @@ void serialise_xhtml_node(void* p0, void* p1, void* p2, void* p3, void* p4,
             // Get source part tag from details.
             get_universal_compound_element_by_name(p7, p8,
                 (void*) WUI_TAG_NAME, (void*) WUI_TAG_NAME_COUNT,
+                (void*) &tn, (void*) &tnc, (void*) &tns,
                 (void*) &ta, (void*) &tac, (void*) &tas,
                 (void*) &tm, (void*) &tmc, (void*) &tms,
                 (void*) &td, (void*) &tdc, (void*) &tds,

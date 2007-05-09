@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2007-04-16 15:56:30 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2007-05-09 15:32:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -56,41 +56,42 @@ void run_archive(void* p0, void* p1, void* p2, void* p3) {
 
     log_message_debug("Run archive command.");
 
-    // The create abstraction.
+    // The create name, abstraction, model, details.
+    void** createn = &NULL_POINTER;
+    void** createnc = &NULL_POINTER;
+    void** createns = &NULL_POINTER;
     void** createa = &NULL_POINTER;
     void** createac = &NULL_POINTER;
     void** createas = &NULL_POINTER;
-    // The create model.
     int** createm = (int**) &NULL_POINTER;
     void** createmc = &NULL_POINTER;
     void** createms = &NULL_POINTER;
-    // The create details.
     void** created = &NULL_POINTER;
     void** createdc = &NULL_POINTER;
     void** createds = &NULL_POINTER;
-
-    // The update abstraction.
+    // The update name, abstraction, model, details.
+    void** updaten = &NULL_POINTER;
+    void** updatenc = &NULL_POINTER;
+    void** updatens = &NULL_POINTER;
     void** updatea = &NULL_POINTER;
     void** updateac = &NULL_POINTER;
     void** updateas = &NULL_POINTER;
-    // The update model.
     int** updatem = (int**) &NULL_POINTER;
     void** updatemc = &NULL_POINTER;
     void** updatems = &NULL_POINTER;
-    // The update details.
     void** updated = &NULL_POINTER;
     void** updatedc = &NULL_POINTER;
     void** updateds = &NULL_POINTER;
-
-    // The bzip2 abstraction.
+    // The bzip2 name, abstraction, model, details.
+    void** bzip2n = &NULL_POINTER;
+    void** bzip2nc = &NULL_POINTER;
+    void** bzip2ns = &NULL_POINTER;
     void** bzip2a = &NULL_POINTER;
     void** bzip2ac = &NULL_POINTER;
     void** bzip2as = &NULL_POINTER;
-    // The bzip2 model.
     int** bzip2m = (int**) &NULL_POINTER;
     void** bzip2mc = &NULL_POINTER;
     void** bzip2ms = &NULL_POINTER;
-    // The bzip2 details.
     void** bzip2d = &NULL_POINTER;
     void** bzip2dc = &NULL_POINTER;
     void** bzip2ds = &NULL_POINTER;
@@ -98,6 +99,7 @@ void run_archive(void* p0, void* p1, void* p2, void* p3) {
     // Get create option.
     get_universal_compound_element_by_name(p0, p1,
         (void*) RUN_ARCHIVE_CREATE_NAME, (void*) RUN_ARCHIVE_CREATE_NAME_COUNT,
+        (void*) &createn, (void*) &createnc, (void*) &createns,
         (void*) &createa, (void*) &createac, (void*) &createas,
         (void*) &createm, (void*) &createmc, (void*) &createms,
         (void*) &created, (void*) &createdc, (void*) &createds,
@@ -106,6 +108,7 @@ void run_archive(void* p0, void* p1, void* p2, void* p3) {
     // Get update option.
     get_universal_compound_element_by_name(p0, p1,
         (void*) RUN_ARCHIVE_UPDATE_NAME, (void*) RUN_ARCHIVE_UPDATE_NAME_COUNT,
+        (void*) &updaten, (void*) &updatenc, (void*) &updatens,
         (void*) &updatea, (void*) &updateac, (void*) &updateas,
         (void*) &updatem, (void*) &updatemc, (void*) &updatems,
         (void*) &updated, (void*) &updatedc, (void*) &updateds,
@@ -114,6 +117,7 @@ void run_archive(void* p0, void* p1, void* p2, void* p3) {
     // Get bzip2 option.
     get_universal_compound_element_by_name(p0, p1,
         (void*) RUN_ARCHIVE_BZIP2_NAME, (void*) RUN_ARCHIVE_BZIP2_NAME_COUNT,
+        (void*) &bzip2n, (void*) &bzip2nc, (void*) &bzip2ns,
         (void*) &bzip2a, (void*) &bzip2ac, (void*) &bzip2as,
         (void*) &bzip2m, (void*) &bzip2mc, (void*) &bzip2ms,
         (void*) &bzip2d, (void*) &bzip2dc, (void*) &bzip2ds,

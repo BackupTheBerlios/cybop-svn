@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.18 $ $Date: 2007-04-16 15:56:29 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2007-05-09 15:32:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -51,41 +51,42 @@ void count_parts(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     log_message_debug("Count parts.");
 
-    // The basisname abstraction.
+    // The basisname name, abstraction, model, details.
+    void** bnn = &NULL_POINTER;
+    void** bnnc = &NULL_POINTER;
+    void** bnns = &NULL_POINTER;
     void** bna = &NULL_POINTER;
     void** bnac = &NULL_POINTER;
     void** bnas = &NULL_POINTER;
-    // The basisname model.
     void** bnm = &NULL_POINTER;
     void** bnmc = &NULL_POINTER;
     void** bnms = &NULL_POINTER;
-    // The basisname details.
     void** bnd = &NULL_POINTER;
     void** bndc = &NULL_POINTER;
     void** bnds = &NULL_POINTER;
-
-    // The index abstraction.
+    // The index name, abstraction, model, details.
+    void** mdln = &NULL_POINTER;
+    void** mdlnc = &NULL_POINTER;
+    void** mdlns = &NULL_POINTER;
     void** mdla = &NULL_POINTER;
     void** mdlac = &NULL_POINTER;
     void** mdlas = &NULL_POINTER;
-    // The index model.
     void** mdlm = &NULL_POINTER;
     void** mdlmc = &NULL_POINTER;
     void** mdlms = &NULL_POINTER;
-    // The index details.
     void** mdld = &NULL_POINTER;
     void** mdldc = &NULL_POINTER;
     void** mdlds = &NULL_POINTER;
-
-    // The result abstraction.
+    // The result name, abstraction, model, details.
+    void** resn = &NULL_POINTER;
+    void** resnc = &NULL_POINTER;
+    void** resns = &NULL_POINTER;
     void** resa = &NULL_POINTER;
     void** resac = &NULL_POINTER;
     void** resas = &NULL_POINTER;
-    // The result mxodel.
     void** resm = &NULL_POINTER;
     void** resmc = &NULL_POINTER;
     void** resms = &NULL_POINTER;
-    // The result details.
     void** resd = &NULL_POINTER;
     void** resdc = &NULL_POINTER;
     void** resds = &NULL_POINTER;
@@ -93,6 +94,7 @@ void count_parts(void* p0, void* p1, void* p2, void* p3, void* p4) {
     // get the basisname
     get_universal_compound_element_by_name(p0, p1,
         (void*) PART_NAME_NAME, (void*) PART_NAME_NAME_COUNT,
+        (void*) &bnn, (void*) &bnnc, (void*) &bnns,
         (void*) &bna, (void*) &bnac, (void*) &bnas,
         (void*) &bnm, (void*) &bnmc, (void*) &bnms,
         (void*) &bnd, (void*) &bndc, (void*) &bnds,
@@ -101,6 +103,7 @@ void count_parts(void* p0, void* p1, void* p2, void* p3, void* p4) {
     // get the model
     get_universal_compound_element_by_name(p0, p1,
         (void*) WHOLE_MODEL_NAME, (void*) WHOLE_MODEL_NAME_COUNT,
+        (void*) &mdln, (void*) &mdlnc, (void*) &mdlns,
         (void*) &mdla, (void*) &mdlac, (void*) &mdlas,
         (void*) &mdlm, (void*) &mdlmc, (void*) &mdlms,
         (void*) &mdld, (void*) &mdldc, (void*) &mdlds,
@@ -109,6 +112,7 @@ void count_parts(void* p0, void* p1, void* p2, void* p3, void* p4) {
     // get the result
     get_universal_compound_element_by_name(p0, p1,
         (void*) COUNTER_NAME, (void*) COUNTER_NAME_COUNT,
+        (void*) &resn, (void*) &resnc, (void*) &resns,
         (void*) &resa, (void*) &resac, (void*) &resas,
         (void*) &resm, (void*) &resmc, (void*) &resms,
         (void*) &resd, (void*) &resdc, (void*) &resds,

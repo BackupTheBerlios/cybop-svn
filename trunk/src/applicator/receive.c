@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.27 $ $Date: 2007-04-16 15:56:29 $ $Author: christian $
+ * @version $Revision: 1.28 $ $Date: 2007-05-09 15:32:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -84,132 +84,133 @@ void receive_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
 
     log_message_debug("Receive message.");
 
-    // The name abstraction.
+    // The name name, abstraction, model, details.
+    void** nn = &NULL_POINTER;
+    void** nnc = &NULL_POINTER;
+    void** nns = &NULL_POINTER;
     void** na = &NULL_POINTER;
     void** nac = &NULL_POINTER;
     void** nas = &NULL_POINTER;
-    // The name model.
     void** nm = &NULL_POINTER;
     void** nmc = &NULL_POINTER;
     void** nms = &NULL_POINTER;
-    // The name details.
     void** nd = &NULL_POINTER;
     void** ndc = &NULL_POINTER;
     void** nds = &NULL_POINTER;
-
-    // The channel abstraction.
+    // The channel name, abstraction, model, details.
+    void** cn = &NULL_POINTER;
+    void** cnc = &NULL_POINTER;
+    void** cns = &NULL_POINTER;
     void** ca = &NULL_POINTER;
     void** cac = &NULL_POINTER;
     void** cas = &NULL_POINTER;
-    // The channel model.
     void** cm = &NULL_POINTER;
     void** cmc = &NULL_POINTER;
     void** cms = &NULL_POINTER;
-    // The channel details.
     void** cd = &NULL_POINTER;
     void** cdc = &NULL_POINTER;
     void** cds = &NULL_POINTER;
-
-    // The abstraction abstraction.
+    // The abstraction name, abstraction, model, details.
+    void** an = &NULL_POINTER;
+    void** anc = &NULL_POINTER;
+    void** ans = &NULL_POINTER;
     void** aa = &NULL_POINTER;
     void** aac = &NULL_POINTER;
     void** aas = &NULL_POINTER;
-    // The abstraction model.
     void** am = &NULL_POINTER;
     void** amc = &NULL_POINTER;
     void** ams = &NULL_POINTER;
-    // The abstraction details.
     void** ad = &NULL_POINTER;
     void** adc = &NULL_POINTER;
     void** ads = &NULL_POINTER;
-
-    // The model abstraction.
+    // The model name, abstraction, model, details.
+    void** mn = &NULL_POINTER;
+    void** mnc = &NULL_POINTER;
+    void** mns = &NULL_POINTER;
     void** ma = &NULL_POINTER;
     void** mac = &NULL_POINTER;
     void** mas = &NULL_POINTER;
-    // The model model.
     void** mm = &NULL_POINTER;
     void** mmc = &NULL_POINTER;
     void** mms = &NULL_POINTER;
-    // The model details.
     void** md = &NULL_POINTER;
     void** mdc = &NULL_POINTER;
     void** mds = &NULL_POINTER;
-
-    // The element abstraction.
+    // The element name, abstraction, model, details.
+    void** en = &NULL_POINTER;
+    void** enc = &NULL_POINTER;
+    void** ens = &NULL_POINTER;
     void** ea = &NULL_POINTER;
     void** eac = &NULL_POINTER;
     void** eas = &NULL_POINTER;
-    // The element model.
     void** em = &NULL_POINTER;
     void** emc = &NULL_POINTER;
     void** ems = &NULL_POINTER;
-    // The element details.
     void** ed = &NULL_POINTER;
     void** edc = &NULL_POINTER;
     void** eds = &NULL_POINTER;
-
-    // The whole abstraction.
+    // The whole name, abstraction, model, details.
+    void** wn = &NULL_POINTER;
+    void** wnc = &NULL_POINTER;
+    void** wns = &NULL_POINTER;
     void** wa = &NULL_POINTER;
     void** wac = &NULL_POINTER;
     void** was = &NULL_POINTER;
-    // The whole model.
     void** wm = &NULL_POINTER;
     void** wmc = &NULL_POINTER;
     void** wms = &NULL_POINTER;
-    // The whole details.
     void** wd = &NULL_POINTER;
     void** wdc = &NULL_POINTER;
     void** wds = &NULL_POINTER;
-
-    // The root abstraction.
+    // The root name, abstraction, model, details.
+    void** rn = &NULL_POINTER;
+    void** rnc = &NULL_POINTER;
+    void** rns = &NULL_POINTER;
     void** ra = &NULL_POINTER;
     void** rac = &NULL_POINTER;
     void** ras = &NULL_POINTER;
-    // The root model.
     void** rm = &NULL_POINTER;
     void** rmc = &NULL_POINTER;
     void** rms = &NULL_POINTER;
-    // The root details.
     void** rd = &NULL_POINTER;
     void** rdc = &NULL_POINTER;
     void** rds = &NULL_POINTER;
-
-    // The socket communication style abstraction.
+    // The socket communication style name, abstraction, model, details.
+    void** stn = &NULL_POINTER;
+    void** stnc = &NULL_POINTER;
+    void** stns = &NULL_POINTER;
     void** sta = &NULL_POINTER;
     void** stac = &NULL_POINTER;
     void** stas = &NULL_POINTER;
-    // The socket communication style model.
     void** stm = &NULL_POINTER;
     void** stmc = &NULL_POINTER;
     void** stms = &NULL_POINTER;
-    // The socket communication style details.
     void** std = &NULL_POINTER;
     void** stdc = &NULL_POINTER;
     void** stds = &NULL_POINTER;
-
-    // The commands abstraction.
+    // The commands name, abstraction, model, details.
+    void** con = &NULL_POINTER;
+    void** conc = &NULL_POINTER;
+    void** cons = &NULL_POINTER;
     void** coa = &NULL_POINTER;
     void** coac = &NULL_POINTER;
     void** coas = &NULL_POINTER;
-    // The commands model.
     void** com = &NULL_POINTER;
     void** comc = &NULL_POINTER;
     void** coms = &NULL_POINTER;
-    // The commands details.
     void** cod = &NULL_POINTER;
     void** codc = &NULL_POINTER;
     void** cods = &NULL_POINTER;
-
-    // The blocking abstraction.
+    // The blocking name, abstraction, model, details.
+    void** bn = &NULL_POINTER;
+    void** bnc = &NULL_POINTER;
+    void** bns = &NULL_POINTER;
     void** ba = &NULL_POINTER;
     void** bac = &NULL_POINTER;
     void** bas = &NULL_POINTER;
-    // The blocking model.
     void** bm = &NULL_POINTER;
     void** bmc = &NULL_POINTER;
     void** bms = &NULL_POINTER;
-    // The blocking details.
     void** bd = &NULL_POINTER;
     void** bdc = &NULL_POINTER;
     void** bds = &NULL_POINTER;
@@ -217,6 +218,7 @@ void receive_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
     // Get name.
     get_universal_compound_element_by_name(p0, p1,
         (void*) CREATE_NAME_NAME, (void*) CREATE_NAME_NAME_COUNT,
+        (void*) &nn, (void*) &nnc, (void*) &nns,
         (void*) &na, (void*) &nac, (void*) &nas,
         (void*) &nm, (void*) &nmc, (void*) &nms,
         (void*) &nd, (void*) &ndc, (void*) &nds,
@@ -225,6 +227,7 @@ void receive_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
     // Get channel.
     get_universal_compound_element_by_name(p0, p1,
         (void*) CREATE_CHANNEL_NAME, (void*) CREATE_CHANNEL_NAME_COUNT,
+        (void*) &cn, (void*) &cnc, (void*) &cns,
         (void*) &ca, (void*) &cac, (void*) &cas,
         (void*) &cm, (void*) &cmc, (void*) &cms,
         (void*) &cd, (void*) &cdc, (void*) &cds,
@@ -233,6 +236,7 @@ void receive_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
     // Get abstraction.
     get_universal_compound_element_by_name(p0, p1,
         (void*) CREATE_ABSTRACTION_NAME, (void*) CREATE_ABSTRACTION_NAME_COUNT,
+        (void*) &an, (void*) &anc, (void*) &ans,
         (void*) &aa, (void*) &aac, (void*) &aas,
         (void*) &am, (void*) &amc, (void*) &ams,
         (void*) &ad, (void*) &adc, (void*) &ads,
@@ -241,6 +245,7 @@ void receive_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
     // Get model.
     get_universal_compound_element_by_name(p0, p1,
         (void*) CREATE_MODEL_NAME, (void*) CREATE_MODEL_NAME_COUNT,
+        (void*) &mn, (void*) &mnc, (void*) &mns,
         (void*) &ma, (void*) &mac, (void*) &mas,
         (void*) &mm, (void*) &mmc, (void*) &mms,
         (void*) &md, (void*) &mdc, (void*) &mds,
@@ -249,6 +254,7 @@ void receive_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
     // Get element.
     get_universal_compound_element_by_name(p0, p1,
         (void*) CREATE_ELEMENT_NAME, (void*) CREATE_ELEMENT_NAME_COUNT,
+        (void*) &en, (void*) &enc, (void*) &ens,
         (void*) &ea, (void*) &eac, (void*) &eas,
         (void*) &em, (void*) &emc, (void*) &ems,
         (void*) &ed, (void*) &edc, (void*) &eds,
@@ -257,6 +263,7 @@ void receive_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
     // Get whole.
     get_universal_compound_element_by_name(p0, p1,
         (void*) CREATE_WHOLE_NAME, (void*) CREATE_WHOLE_NAME_COUNT,
+        (void*) &wn, (void*) &wnc, (void*) &wns,
         (void*) &wa, (void*) &wac, (void*) &was,
         (void*) &wm, (void*) &wmc, (void*) &wms,
         (void*) &wd, (void*) &wdc, (void*) &wds,
@@ -265,6 +272,7 @@ void receive_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
     // Get root.
     get_universal_compound_element_by_name(p0, p1,
         (void*) RECEIVE_ROOT_NAME, (void*) RECEIVE_ROOT_NAME_COUNT,
+        (void*) &rn, (void*) &rnc, (void*) &rns,
         (void*) &ra, (void*) &rac, (void*) &ras,
         (void*) &rm, (void*) &rmc, (void*) &rms,
         (void*) &rd, (void*) &rdc, (void*) &rds,
@@ -273,6 +281,7 @@ void receive_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
     // Get socket communication style.
     get_universal_compound_element_by_name(p0, p1,
         (void*) RECEIVE_STYLE_NAME, (void*) RECEIVE_STYLE_NAME_COUNT,
+        (void*) &stn, (void*) &stnc, (void*) &stns,
         (void*) &sta, (void*) &stac, (void*) &stas,
         (void*) &stm, (void*) &stmc, (void*) &stms,
         (void*) &std, (void*) &stdc, (void*) &stds,
@@ -281,6 +290,7 @@ void receive_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
     // Get commands.
     get_universal_compound_element_by_name(p0, p1,
         (void*) RECEIVE_COMMANDS_NAME, (void*) RECEIVE_COMMANDS_NAME_COUNT,
+        (void*) &con, (void*) &conc, (void*) &cons,
         (void*) &coa, (void*) &coac, (void*) &coas,
         (void*) &com, (void*) &comc, (void*) &coms,
         (void*) &cod, (void*) &codc, (void*) &cods,
@@ -289,6 +299,7 @@ void receive_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
     // Get blocking.
     get_universal_compound_element_by_name(p0, p1,
         (void*) RECEIVE_BLOCKING_NAME, (void*) RECEIVE_BLOCKING_NAME_COUNT,
+        (void*) &bn, (void*) &bnc, (void*) &bns,
         (void*) &ba, (void*) &bac, (void*) &bas,
         (void*) &bm, (void*) &bmc, (void*) &bms,
         (void*) &bd, (void*) &bdc, (void*) &bds,

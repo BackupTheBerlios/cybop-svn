@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.31 $ $Date: 2007-04-26 23:17:09 $ $Author: christian $
+ * @version $Revision: 1.32 $ $Date: 2007-05-09 15:32:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -1793,21 +1793,24 @@ void get_compound_element_by_index(void* p0, void* p1, void* p2,
  * @param p1 the compound model count
  * @param p2 the compound details
  * @param p3 the compound details count
- * @param p4 the name
- * @param p5 the name count
- * @param p6 the abstraction (Hand over as reference!)
- * @param p7 the abstraction count (Hand over as reference!)
- * @param p8 the abstraction size (Hand over as reference!)
- * @param p9 the model (Hand over as reference!)
- * @param p10 the model count (Hand over as reference!)
- * @param p11 the model size (Hand over as reference!)
- * @param p12 the details (Hand over as reference!)
- * @param p13 the details count (Hand over as reference!)
- * @param p14 the details size (Hand over as reference!)
+ * @param p4 the identifier name
+ * @param p5 the identifier name count
+ * @param p6 the name (Hand over as reference!)
+ * @param p7 the name count (Hand over as reference!)
+ * @param p8 the name size (Hand over as reference!)
+ * @param p9 the abstraction (Hand over as reference!)
+ * @param p10 the abstraction count (Hand over as reference!)
+ * @param p11 the abstraction size (Hand over as reference!)
+ * @param p12 the model (Hand over as reference!)
+ * @param p13 the model count (Hand over as reference!)
+ * @param p14 the model size (Hand over as reference!)
+ * @param p15 the details (Hand over as reference!)
+ * @param p16 the details count (Hand over as reference!)
+ * @param p17 the details size (Hand over as reference!)
  */
-void get_compound_element_by_name(void* p0, void* p1, void* p2, void* p3,
-    void* p4, void* p5, void* p6, void* p7, void* p8,
-    void* p9, void* p10, void* p11, void* p12, void* p13, void* p14) {
+void get_compound_element_by_name(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
+    void* p6, void* p7, void* p8, void* p9, void* p10, void* p11,
+    void* p12, void* p13, void* p14, void* p15, void* p16, void* p17) {
 
     log_message_debug("Get compound element by name.");
     log_message_debug((char*) p4);
@@ -1833,20 +1836,16 @@ void get_compound_element_by_name(void* p0, void* p1, void* p2, void* p3,
     void** d = &NULL_POINTER;
     void** dc = &NULL_POINTER;
     void** ds = &NULL_POINTER;
-    // The placeholder name without any meaning.
-    // It is only needed for handing over something to the
-    // "get_compound_element_by_index" function below.
-    void** p = &NULL_POINTER;
-    void** pc = &NULL_POINTER;
-    void** ps = &NULL_POINTER;
 
     // Get compound element name and remaining name,
     // as well as the flag indicating a part- or meta element.
     get_compound_element_name_and_remaining_name(p4, p5, (void*) &e, (void*) &ec, (void*) &r, (void*) &rc, (void*) &f);
 
-//??    fprintf(stderr, "TEST r %s\n", (char*) r);
-//??    fprintf(stderr, "TEST rc %i\n", rc);
-//??    fprintf(stderr, "TEST f %i\n", f);
+/*??
+    fprintf(stderr, "TEST r %s\n", (char*) r);
+    fprintf(stderr, "TEST rc %i\n", rc);
+    fprintf(stderr, "TEST f %i\n", f);
+*/
 
     if (f == *NUMBER_0_INTEGER) {
 
@@ -1873,7 +1872,7 @@ void get_compound_element_by_name(void* p0, void* p1, void* p2, void* p3,
                 get_compound_element_details(p0, (void*) &i, (void*) &d, (void*) &dc, (void*) &ds);
 
                 // Recursively continue to process along the hierarchical name.
-                get_compound_element_by_name(*m, *mc, *d, *dc, r, (void*) &rc, p6, p7, p8, p9, p10, p11, p12, p13, p14);
+                get_compound_element_by_name(*m, *mc, *d, *dc, r, (void*) &rc, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17);
 
             } else {
 
@@ -1883,7 +1882,7 @@ void get_compound_element_by_name(void* p0, void* p1, void* p2, void* p3,
                 // No remaining name exists. A separator could NOT be found.
                 // The name is NOT hierarchical and represents an element name directly.
                 // The given compound contains elements which are primitive models.
-                get_compound_element_by_index(p0, p1, (void*) &i, (void*) &p, (void*) &pc, (void*) &ps, p6, p7, p8, p9, p10, p11, p12, p13, p14);
+                get_compound_element_by_index(p0, p1, (void*) &i, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17);
             }
 
         } else {
@@ -1916,7 +1915,7 @@ void get_compound_element_by_name(void* p0, void* p1, void* p2, void* p3,
                 get_compound_element_details(p2, (void*) &i, (void*) &d, (void*) &dc, (void*) &ds);
 
                 // Recursively continue to process along the hierarchical name.
-                get_compound_element_by_name(*m, *mc, *d, *dc, r, (void*) &rc, p6, p7, p8, p9, p10, p11, p12, p13, p14);
+                get_compound_element_by_name(*m, *mc, *d, *dc, r, (void*) &rc, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17);
 
             } else {
 
@@ -1926,7 +1925,7 @@ void get_compound_element_by_name(void* p0, void* p1, void* p2, void* p3,
                 // No remaining name exists. A separator could NOT be found.
                 // The name is NOT hierarchical and represents an element name directly.
                 // The given compound contains elements which are primitive models.
-                get_compound_element_by_index(p2, p3, (void*) &i, (void*) &p, (void*) &pc, (void*) &ps, p6, p7, p8, p9, p10, p11, p12, p13, p14);
+                get_compound_element_by_index(p2, p3, (void*) &i, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17);
             }
 
         } else {
@@ -1954,27 +1953,33 @@ void get_compound_element_by_name(void* p0, void* p1, void* p2, void* p3,
  *
  * @param p0 the compound model
  * @param p1 the compound model count
- * @param p2 the name
- * @param p3 the name count
- * @param p4 the abstraction (Hand over as reference!)
- * @param p5 the abstraction count (Hand over as reference!)
- * @param p6 the abstraction size (Hand over as reference!)
- * @param p7 the model (Hand over as reference!)
- * @param p8 the model count (Hand over as reference!)
- * @param p9 the model size (Hand over as reference!)
- * @param p10 the details (Hand over as reference!)
- * @param p11 the details count (Hand over as reference!)
- * @param p12 the details size (Hand over as reference!)
- * @param p13 the knowledge
- * @param p14 the knowledge count
+ * @param p2 the identifier name
+ * @param p3 the identifier name count
+ * @param p4 the name (Hand over as reference!)
+ * @param p5 the name count (Hand over as reference!)
+ * @param p6 the name size (Hand over as reference!)
+ * @param p7 the abstraction (Hand over as reference!)
+ * @param p8 the abstraction count (Hand over as reference!)
+ * @param p9 the abstraction size (Hand over as reference!)
+ * @param p10 the model (Hand over as reference!)
+ * @param p11 the model count (Hand over as reference!)
+ * @param p12 the model size (Hand over as reference!)
+ * @param p13 the details (Hand over as reference!)
+ * @param p14 the details count (Hand over as reference!)
+ * @param p15 the details size (Hand over as reference!)
+ * @param p16 the knowledge
+ * @param p17 the knowledge count
  */
 void get_universal_compound_element_by_name(void* p0, void* p1, void* p2, void* p3,
     void* p4, void* p5, void* p6, void* p7, void* p8, void* p9,
-    void* p10, void* p11, void* p12, void* p13, void* p14) {
+    void* p10, void* p11, void* p12, void* p13, void* p14, void* p15, void* p16, void* p17) {
 
     log_message_debug("Get universal compound element by name.");
 
-    // The part abstraction, model, details.
+    // The part name, abstraction, model, details.
+    void** n = &NULL_POINTER;
+    void** nc = &NULL_POINTER;
+    void** ns = &NULL_POINTER;
     void** a = &NULL_POINTER;
     void** ac = &NULL_POINTER;
     void** as = &NULL_POINTER;
@@ -1985,7 +1990,10 @@ void get_universal_compound_element_by_name(void* p0, void* p1, void* p2, void* 
     void** dc = &NULL_POINTER;
     void** ds = &NULL_POINTER;
 
-    // The encapsulated part abstraction, model, details.
+    // The encapsulated part name, abstraction, model, details.
+    void** en = &NULL_POINTER;
+    void** enc = &NULL_POINTER;
+    void** ens = &NULL_POINTER;
     void** ea = &NULL_POINTER;
     void** eac = &NULL_POINTER;
     void** eas = &NULL_POINTER;
@@ -1999,6 +2007,7 @@ void get_universal_compound_element_by_name(void* p0, void* p1, void* p2, void* 
     // Get compound element.
     get_compound_element_by_name(p0, p1, NULL_POINTER, NULL_POINTER,
         p2, p3,
+        (void*) &n, (void*) &nc, (void*) &ns,
         (void*) &a, (void*) &ac, (void*) &as,
         (void*) &m, (void*) &mc, (void*) &ms,
         (void*) &d, (void*) &dc, (void*) &ds);
@@ -2034,16 +2043,17 @@ void get_universal_compound_element_by_name(void* p0, void* p1, void* p2, void* 
             //
             // The knowledge root does not have a details container with meta
             // information, which is why a null pointer is handed over here twice.
-            get_compound_element_by_name(p13, p14, NULL_POINTER, NULL_POINTER,
+            get_compound_element_by_name(p16, p17, NULL_POINTER, NULL_POINTER,
                 *m, *mc,
+                (void*) &en, (void*) &enc, (void*) &ens,
                 (void*) &ea, (void*) &eac, (void*) &eas,
                 (void*) &em, (void*) &emc, (void*) &ems,
                 (void*) &ed, (void*) &edc, (void*) &eds);
 
             // The knowledge root does not have a details container with meta
             // information, which is why a null pointer is handed over here twice.
-            get_compound_element_by_name(p13, p14, NULL_POINTER, NULL_POINTER,
-                *em, *emc, p4, p5, p6, p7, p8, p9, p10, p11, p12);
+            get_compound_element_by_name(p16, p17, NULL_POINTER, NULL_POINTER,
+                *em, *emc, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15);
         }
     }
 
@@ -2068,8 +2078,8 @@ void get_universal_compound_element_by_name(void* p0, void* p1, void* p2, void* 
             //
             // The knowledge root does not have a details container with meta
             // information, which is why a null pointer is handed over here twice.
-            get_compound_element_by_name(p13, p14, NULL_POINTER, NULL_POINTER,
-                *m, *mc, p4, p5, p6, p7, p8, p9, p10, p11, p12);
+            get_compound_element_by_name(p16, p17, NULL_POINTER, NULL_POINTER,
+                *m, *mc, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15);
         }
     }
 
@@ -2088,7 +2098,7 @@ void get_universal_compound_element_by_name(void* p0, void* p1, void* p2, void* 
         // and the "get_compound_element_by_name" procedure
         // is called here a second time instead.
         get_compound_element_by_name(p0, p1, NULL_POINTER, NULL_POINTER,
-            p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12);
+            p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15);
     }
 }
 

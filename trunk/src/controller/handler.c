@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.15 $ $Date: 2007-04-23 23:15:07 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2007-05-09 15:32:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -68,28 +68,29 @@ void handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
     log_message_debug("Information: Handle signal.");
 
-    // The logic abstraction.
+    // The logic name, abstraction, model, details.
+    void** n = &NULL_POINTER;
+    void** nc = &NULL_POINTER;
+    void** ns = &NULL_POINTER;
     void** a = &NULL_POINTER;
     void** ac = &NULL_POINTER;
     void** as = &NULL_POINTER;
-    // The logic model.
     void** m = &NULL_POINTER;
     void** mc = &NULL_POINTER;
     void** ms = &NULL_POINTER;
-    // The logic details.
     void** d = &NULL_POINTER;
     void** dc = &NULL_POINTER;
     void** ds = &NULL_POINTER;
-
-    // The encapsulated logic abstraction.
+    // The encapsulated logic name, abstraction, model, details.
+    void** en = &NULL_POINTER;
+    void** enc = &NULL_POINTER;
+    void** ens = &NULL_POINTER;
     void** ea = &NULL_POINTER;
     void** eac = &NULL_POINTER;
     void** eas = &NULL_POINTER;
-    // The encapsulated logic model.
     void** em = &NULL_POINTER;
     void** emc = &NULL_POINTER;
     void** ems = &NULL_POINTER;
-    // The encapsulated logic details.
     void** ed = &NULL_POINTER;
     void** edc = &NULL_POINTER;
     void** eds = &NULL_POINTER;
@@ -136,6 +137,7 @@ void handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
             // in source file "memoriser/accessor/compound_accessor.c"!
             get_compound_element_by_name(p1, p2, NULL_POINTER, NULL_POINTER,
                 p12, p13,
+                (void*) &en, (void*) &enc, (void*) &ens,
                 (void*) &ea, (void*) &eac, (void*) &eas,
                 (void*) &em, (void*) &emc, (void*) &ems,
                 (void*) &ed, (void*) &edc, (void*) &eds);
@@ -143,7 +145,7 @@ void handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
             // The knowledge root does not have a details container with meta
             // information, which is why a null pointer is handed over here twice.
             get_compound_element_by_name(p1, p2, NULL_POINTER, NULL_POINTER,
-                *em, *emc, &a, &ac, &as, &m, &mc, &ms, &d, &dc, &ds);
+                *em, *emc, &n, &nc, &ns, &a, &ac, &as, &m, &mc, &ms, &d, &dc, &ds);
 
             // Handle compound logic.
             handle_compound(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, *m, *mc, p16, p17, p18);
@@ -173,7 +175,7 @@ void handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
             // Compare also with procedure "get_universal_compound_element_by_name"
             // in source file "memoriser/accessor/compound_accessor.c"!
             get_compound_element_by_name(p1, p2, NULL_POINTER, NULL_POINTER,
-                p12, p13, &a, &ac, &as, &m, &mc, &ms, &d, &dc, &ds);
+                p12, p13, &n, &nc, &ns, &a, &ac, &as, &m, &mc, &ms, &d, &dc, &ds);
 
             // Handle compound logic.
             handle_compound(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, *m, *mc, p16, p17, p18);

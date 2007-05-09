@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.23 $ $Date: 2007-04-26 23:17:09 $ $Author: christian $
+ * @version $Revision: 1.24 $ $Date: 2007-05-09 15:32:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -51,48 +51,52 @@
  * Afterwards, the event type is identified.
  * Finally, the corresponding mouse command is returned as result.
  *
- * @param p0 the command abstraction (Hand over as reference!)
- * @param p1 the command abstraction count (Hand over as reference!)
- * @param p2 the command abstraction size (Hand over as reference!)
- * @param p3 the command model (Hand over as reference!)
- * @param p4 the command model count (Hand over as reference!)
- * @param p5 the command model size (Hand over as reference!)
- * @param p6 the command details (Hand over as reference!)
- * @param p7 the command details count (Hand over as reference!)
- * @param p8 the command details size (Hand over as reference!)
- * @param p9 the whole details
- * @param p10 the whole details count
- * @param p11 the event type
- * @param p12 the mouse button
- * @param p13 the knowledge memory
- * @param p14 the knowledge memory count
+ * @param p0 the command name (Hand over as reference!)
+ * @param p1 the command name count (Hand over as reference!)
+ * @param p2 the command name size (Hand over as reference!)
+ * @param p3 the command abstraction (Hand over as reference!)
+ * @param p4 the command abstraction count (Hand over as reference!)
+ * @param p5 the command abstraction size (Hand over as reference!)
+ * @param p6 the command model (Hand over as reference!)
+ * @param p7 the command model count (Hand over as reference!)
+ * @param p8 the command model size (Hand over as reference!)
+ * @param p9 the command details (Hand over as reference!)
+ * @param p10 the command details count (Hand over as reference!)
+ * @param p11 the command details size (Hand over as reference!)
+ * @param p12 the whole details
+ * @param p13 the whole details count
+ * @param p14 the event type
+ * @param p15 the mouse button
+ * @param p16 the knowledge memory
+ * @param p17 the knowledge memory count
  */
-void receive_x_window_system_mouse_command(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8,
-    void* p9, void* p10, void* p11, void* p12, void* p13, void* p14) {
+void receive_x_window_system_mouse_command(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
+    void* p6, void* p7, void* p8, void* p9, void* p10, void* p11,
+    void* p12, void* p13, void* p14, void* p15, void* p16, void* p17) {
 
-    if (p12 != NULL_POINTER) {
+    if (p15 != NULL_POINTER) {
 
-        int* b = (int*) p12;
+        int* b = (int*) p15;
 
-        if (p11 != NULL_POINTER) {
+        if (p14 != NULL_POINTER) {
 
-            int* t = (int*) p11;
+            int* t = (int*) p14;
 
             if (*b == Button1) {
 
                 if (*t == ButtonPress) {
 
                     // Get actual command belonging to the button and event.
-                    get_universal_compound_element_by_name(p9, p10,
+                    get_universal_compound_element_by_name(p12, p13,
                         (void*) GUI_LEFT_PRESS_COMMAND_NAME, (void*) GUI_LEFT_PRESS_COMMAND_NAME_COUNT,
-                        p0, p1, p2, p3, p4, p5, p6, p7, p8, p13, p14);
+                        p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p16, p17);
 
                 } else if (*t == ButtonRelease) {
 
                     // Get actual command belonging to the button and event.
-                    get_universal_compound_element_by_name(p9, p10,
+                    get_universal_compound_element_by_name(p12, p13,
                         (void*) GUI_LEFT_RELEASE_COMMAND_NAME, (void*) GUI_LEFT_RELEASE_COMMAND_NAME_COUNT,
-                        p0, p1, p2, p3, p4, p5, p6, p7, p8, p13, p14);
+                        p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p16, p17);
                 }
 
             } else if (*b == Button2) {
@@ -118,32 +122,36 @@ void receive_x_window_system_mouse_command(void* p0, void* p1, void* p2, void* p
  * The event type gets identified, in order to call the corresponding procedure.
  * Mouse press or -release events have to be handled differently than drag'n'drop.
  *
- * @param p0 the command abstraction (Hand over as reference!)
- * @param p1 the command abstraction count (Hand over as reference!)
- * @param p2 the command abstraction size (Hand over as reference!)
- * @param p3 the command model (Hand over as reference!)
- * @param p4 the command model count (Hand over as reference!)
- * @param p5 the command model size (Hand over as reference!)
- * @param p6 the command details (Hand over as reference!)
- * @param p7 the command details count (Hand over as reference!)
- * @param p8 the command details size (Hand over as reference!)
- * @param p9 the whole details
- * @param p10 the whole details count
- * @param p11 the event type
- * @param p12 the mouse button
- * @param p13 the knowledge memory
- * @param p14 the knowledge memory count
+ * @param p0 the command name (Hand over as reference!)
+ * @param p1 the command name count (Hand over as reference!)
+ * @param p2 the command name size (Hand over as reference!)
+ * @param p3 the command abstraction (Hand over as reference!)
+ * @param p4 the command abstraction count (Hand over as reference!)
+ * @param p5 the command abstraction size (Hand over as reference!)
+ * @param p6 the command model (Hand over as reference!)
+ * @param p7 the command model count (Hand over as reference!)
+ * @param p8 the command model size (Hand over as reference!)
+ * @param p9 the command details (Hand over as reference!)
+ * @param p10 the command details count (Hand over as reference!)
+ * @param p11 the command details size (Hand over as reference!)
+ * @param p12 the whole details
+ * @param p13 the whole details count
+ * @param p14 the event type
+ * @param p15 the mouse button
+ * @param p16 the knowledge memory
+ * @param p17 the knowledge memory count
  */
-void receive_x_window_system_command(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8,
-    void* p9, void* p10, void* p11, void* p12, void* p13, void* p14) {
+void receive_x_window_system_command(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
+    void* p6, void* p7, void* p8, void* p9, void* p10, void* p11,
+    void* p12, void* p13, void* p14, void* p15, void* p16, void* p17) {
 
-    if (p11 != NULL_POINTER) {
+    if (p14 != NULL_POINTER) {
 
-        int* t = (int*) p11;
+        int* t = (int*) p14;
 
         if ((*t == ButtonPress) || (*t == ButtonRelease)) {
 
-            receive_x_window_system_mouse_command(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14);
+            receive_x_window_system_mouse_command(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17);
 
 /*??
         } else if (*t == MouseMove) {
@@ -172,43 +180,48 @@ void receive_x_window_system_command(void* p0, void* p1, void* p2, void* p3, voi
  * any previously stored commands of their wholes. Finally, the mouse command
  * is returned as result of this procedure.
  *
- * @param p0 the command abstraction (Hand over as reference!)
- * @param p1 the command abstraction count (Hand over as reference!)
- * @param p2 the command abstraction size (Hand over as reference!)
- * @param p3 the command model (Hand over as reference!)
- * @param p4 the command model count (Hand over as reference!)
- * @param p5 the command model size (Hand over as reference!)
- * @param p6 the command details (Hand over as reference!)
- * @param p7 the command details count (Hand over as reference!)
- * @param p8 the command details size (Hand over as reference!)
- * @param p9 the whole model
- * @param p10 the whole model count
- * @param p11 the mouse x coordinate within the graphical whole
- * @param p12 the mouse y coordinate within the graphical whole
- * @param p13 the mouse z coordinate within the graphical whole
- * @param p14 the event type
- * @param p15 the mouse button
- * @param p16 the knowledge memory
- * @param p17 the knowledge memory count
+ * @param p0 the command name (Hand over as reference!)
+ * @param p1 the command name count (Hand over as reference!)
+ * @param p2 the command name size (Hand over as reference!)
+ * @param p3 the command abstraction (Hand over as reference!)
+ * @param p4 the command abstraction count (Hand over as reference!)
+ * @param p5 the command abstraction size (Hand over as reference!)
+ * @param p6 the command model (Hand over as reference!)
+ * @param p7 the command model count (Hand over as reference!)
+ * @param p8 the command model size (Hand over as reference!)
+ * @param p9 the command details (Hand over as reference!)
+ * @param p10 the command details count (Hand over as reference!)
+ * @param p11 the command details size (Hand over as reference!)
+ * @param p12 the whole model
+ * @param p13 the whole model count
+ * @param p14 the mouse x coordinate within the graphical whole
+ * @param p15 the mouse y coordinate within the graphical whole
+ * @param p16 the mouse z coordinate within the graphical whole
+ * @param p17 the event type
+ * @param p18 the mouse button
+ * @param p19 the knowledge memory
+ * @param p20 the knowledge memory count
  */
-void receive_x_window_system_part(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8,
-    void* p9, void* p10, void* p11, void* p12, void* p13, void* p14, void* p15, void* p16, void* p17) {
+void receive_x_window_system_part(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
+    void* p6, void* p7, void* p8, void* p9, void* p10, void* p11,
+    void* p12, void* p13, void* p14, void* p15, void* p16,
+    void* p17, void* p18, void* p19, void* p20) {
 
-    if (p13 != NULL_POINTER) {
+    if (p16 != NULL_POINTER) {
 
-        int* mz = (int*) p13;
+        int* mz = (int*) p16;
 
-        if (p12 != NULL_POINTER) {
+        if (p15 != NULL_POINTER) {
 
-            int* my = (int*) p12;
+            int* my = (int*) p15;
 
-            if (p11 != NULL_POINTER) {
+            if (p14 != NULL_POINTER) {
 
-                int* mx = (int*) p11;
+                int* mx = (int*) p14;
 
-                if (p10 != NULL_POINTER) {
+                if (p13 != NULL_POINTER) {
 
-                    int* wmc = (int*) p10;
+                    int* wmc = (int*) p13;
 
                     // The graphical part name, abstraction, model, details.
                     void** n = &NULL_POINTER;
@@ -223,8 +236,10 @@ void receive_x_window_system_part(void* p0, void* p1, void* p2, void* p3, void* 
                     void** d = &NULL_POINTER;
                     void** dc = &NULL_POINTER;
                     void** ds = &NULL_POINTER;
-
-                    // The graphical part position.
+                    // The graphical part position name, abstraction, model, details.
+                    void** pn = &NULL_POINTER;
+                    void** pnc = &NULL_POINTER;
+                    void** pns = &NULL_POINTER;
                     void** pa = &NULL_POINTER;
                     void** pac = &NULL_POINTER;
                     void** pas = &NULL_POINTER;
@@ -234,7 +249,10 @@ void receive_x_window_system_part(void* p0, void* p1, void* p2, void* p3, void* 
                     void** pd = &NULL_POINTER;
                     void** pdc = &NULL_POINTER;
                     void** pds = &NULL_POINTER;
-                    // The graphical part size.
+                    // The graphical part size name, abstraction, model, details.
+                    void** sn = &NULL_POINTER;
+                    void** snc = &NULL_POINTER;
+                    void** sns = &NULL_POINTER;
                     void** sa = &NULL_POINTER;
                     void** sac = &NULL_POINTER;
                     void** sas = &NULL_POINTER;
@@ -272,7 +290,7 @@ void receive_x_window_system_part(void* p0, void* p1, void* p2, void* p3, void* 
                         }
 
                         // Get graphical part at index j.
-                        get_compound_element_by_index(p9, p10, (void*) &j,
+                        get_compound_element_by_index(p12, p13, (void*) &j,
                             (void*) &n, (void*) &nc, (void*) &ns,
                             (void*) &a, (void*) &ac, (void*) &as,
                             (void*) &m, (void*) &mc, (void*) &ms,
@@ -281,17 +299,19 @@ void receive_x_window_system_part(void* p0, void* p1, void* p2, void* p3, void* 
                         // Get graphical part position from details.
                         get_universal_compound_element_by_name(*d, *dc,
                             (void*) UI_POSITION_NAME, (void*) UI_POSITION_NAME_COUNT,
+                            (void*) &pn, (void*) &pnc, (void*) &pns,
                             (void*) &pa, (void*) &pac, (void*) &pas,
                             (void*) &pm, (void*) &pmc, (void*) &pms,
                             (void*) &pd, (void*) &pdc, (void*) &pds,
-                            p16, p17);
+                            p19, p20);
                         // Get graphical part size from details.
                         get_universal_compound_element_by_name(*d, *dc,
                             (void*) UI_SIZE_NAME, (void*) UI_SIZE_NAME_COUNT,
+                            (void*) &sn, (void*) &snc, (void*) &sns,
                             (void*) &sa, (void*) &sac, (void*) &sas,
                             (void*) &sm, (void*) &smc, (void*) &sms,
                             (void*) &sd, (void*) &sdc, (void*) &sds,
-                            p16, p17);
+                            p19, p20);
 
                         // Determine graphical part position coordinates.
                         get(*pm, (void*) NUMBER_0_INTEGER, (void*) &pmx, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
@@ -308,7 +328,7 @@ void receive_x_window_system_part(void* p0, void* p1, void* p2, void* p3, void* 
                             // The event happened within the graphical part's area.
 
                             // Receive the graphical part's command.
-                            receive_x_window_system_command(p0, p1, p2, p3, p4, p5, p6, p7, p8, *d, *dc, p14, p15, p16, p17);
+                            receive_x_window_system_command(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, *d, *dc, p17, p18, p19, p20);
 
                             compare_arrays(*a, *ac, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
@@ -322,12 +342,11 @@ void receive_x_window_system_part(void* p0, void* p1, void* p2, void* p3, void* 
                                 nz = *mz - **pmz;
 
                                 // Recursively call this procedure for compound part model.
-                                receive_x_window_system_part(p0, p1, p2, p3, p4, p5, p6, p7, p8,
-                                    *m, *mc, &nx, &ny, &nz, p14, p15, p16, p17);
+                                receive_x_window_system_part(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, *m, *mc, &nx, &ny, &nz, p17, p18, p19, p20);
                             }
                         }
 
-                        // Reset graphical part.
+                        // Reset graphical part name, abstraction, model, details.
                         n = &NULL_POINTER;
                         nc = &NULL_POINTER;
                         ns = &NULL_POINTER;
@@ -340,8 +359,10 @@ void receive_x_window_system_part(void* p0, void* p1, void* p2, void* p3, void* 
                         d = &NULL_POINTER;
                         dc = &NULL_POINTER;
                         ds = &NULL_POINTER;
-
-                        // Reset graphical part position.
+                        // Reset graphical part position name, abstraction, model, details.
+                        pn = &NULL_POINTER;
+                        pnc = &NULL_POINTER;
+                        pns = &NULL_POINTER;
                         pa = &NULL_POINTER;
                         pac = &NULL_POINTER;
                         pas = &NULL_POINTER;
@@ -351,7 +372,10 @@ void receive_x_window_system_part(void* p0, void* p1, void* p2, void* p3, void* 
                         pd = &NULL_POINTER;
                         pdc = &NULL_POINTER;
                         pds = &NULL_POINTER;
-                        // Reset graphical part size.
+                        // Reset graphical part size name, abstraction, model, details.
+                        sn = &NULL_POINTER;
+                        snc = &NULL_POINTER;
+                        sns = &NULL_POINTER;
                         sa = &NULL_POINTER;
                         sac = &NULL_POINTER;
                         sas = &NULL_POINTER;
@@ -493,15 +517,16 @@ void receive_x_window_system_thread(void* p0) {
     get(p0, (void*) X_WINDOW_SYSTEM_DISPLAY_INTERNAL, (void*) &d, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     get(p0, (void*) X_WINDOW_SYSTEM_WINDOW_INTERNAL, (void*) &w, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-    // The command abstraction.
+    // The command name, abstraction, model, details.
+    void** cn = &NULL_POINTER;
+    void** cnc = &NULL_POINTER;
+    void** cns = &NULL_POINTER;
     void** ca = &NULL_POINTER;
     void** cac = &NULL_POINTER;
     void** cas = &NULL_POINTER;
-    // The command model.
     void** cm = &NULL_POINTER;
     void** cmc = &NULL_POINTER;
     void** cms = &NULL_POINTER;
-    // The command details.
     void** cd = &NULL_POINTER;
     void** cdc = &NULL_POINTER;
     void** cds = &NULL_POINTER;
@@ -612,6 +637,7 @@ void receive_x_window_system_thread(void* p0) {
                 // Get actual command belonging to the x window system expose event.
                 get_universal_compound_element_by_name(*c, *cc,
                     (void*) GUI_EXPOSE_COMMAND_NAME, (void*) GUI_EXPOSE_COMMAND_NAME_COUNT,
+                    (void*) &cn, (void*) &cnc, (void*) &cns,
                     (void*) &ca, (void*) &cac, (void*) &cas,
                     (void*) &cm, (void*) &cmc, (void*) &cms,
                     (void*) &cd, (void*) &cdc, (void*) &cds,
@@ -756,7 +782,7 @@ void receive_x_window_system_thread(void* p0) {
 
             // Determine command, depending on mouse button and event type.
             // CAUTION! Hand over command abstraction, model, details as reference!
-            receive_x_window_system_part(&ca, &cac, &cas, &cm, &cmc, &cms, &cd, &cdc, &cds,
+            receive_x_window_system_part(&cn, &cnc, &cns, &ca, &cac, &cas, &cm, &cmc, &cms, &cd, &cdc, &cds,
                 *tmpm, *tmpmc, &(e.xbutton.x), &(e.xbutton.y), (void*) NUMBER_0_INTEGER,
                 &t, &(e.xbutton.button), *k, *kc);
 

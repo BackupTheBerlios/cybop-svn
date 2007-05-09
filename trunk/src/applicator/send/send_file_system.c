@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2007-04-26 23:17:09 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2007-05-09 15:32:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -40,23 +40,25 @@
  * Sends a knowledge model as byte stream to the operating system's file system.
  *
  * @param p0 the internal memory
- * @param p1 the source abstraction
- * @param p2 the source abstraction count
- * @param p3 the source model
- * @param p4 the source model count
- * @param p5 the source details
- * @param p6 the source details count
- * @param p7 the knowledge memory
- * @param p8 the knowledge memory count
- * @param p9 the language model
- * @param p10 the language model count
- * @param p11 the source clean flag
- * @param p12 the source clean flag count
- * @param p13 the file name
- * @param p14 the file name count
+ * @param p1 the source name
+ * @param p2 the source name count
+ * @param p3 the source abstraction
+ * @param p4 the source abstraction count
+ * @param p5 the source model
+ * @param p6 the source model count
+ * @param p7 the source details
+ * @param p8 the source details count
+ * @param p9 the knowledge memory
+ * @param p10 the knowledge memory count
+ * @param p11 the language model
+ * @param p12 the language model count
+ * @param p13 the source clean flag
+ * @param p14 the source clean flag count
+ * @param p15 the file name
+ * @param p16 the file name count
  */
-void send_file_system(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
-    void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14) {
+void send_file_system(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8,
+    void* p9, void* p10, void* p11, void* p12, void* p13, void* p14, void* p15, void* p16) {
 
     log_message_debug("Information: Send file system message.");
 
@@ -69,10 +71,10 @@ void send_file_system(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
     allocate((void*) &a, (void*) &as, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
     // Serialise knowledge model into model diagram (hierarchical text).
-    serialise((void*) &a, (void*) &ac, (void*) &as, NULL_POINTER, NULL_POINTER, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10);
+    serialise((void*) &a, (void*) &ac, (void*) &as, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12);
 
     // Write serialised array as message to file system.
-    write_data((void*) &p13, p14, NULL_POINTER, a, (void*) &ac, (void*) FILE_CHANNEL, (void*) FILE_CHANNEL_COUNT);
+    write_data((void*) &p15, p16, NULL_POINTER, a, (void*) &ac, (void*) FILE_CHANNEL, (void*) FILE_CHANNEL_COUNT);
 
     // Deallocate array.
     deallocate((void*) &a, (void*) &as, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);

@@ -22,7 +22,7 @@
  *
  * this handel a loop
  *
- * @version $Revision: 1.17 $ $Date: 2007-04-16 15:56:29 $ $Author: christian $
+ * @version $Revision: 1.18 $ $Date: 2007-05-09 15:32:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -74,28 +74,29 @@ void loop(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
     log_message_debug("\n\n");
     log_message_debug("Loop program flow.");
 
-    // The break flag abstraction.
+    // The break flag name, abstraction, model, details.
+    void** bfn = &NULL_POINTER;
+    void** bfnc = &NULL_POINTER;
+    void** bfns = &NULL_POINTER;
     void** bfa = &NULL_POINTER;
     void** bfac = &NULL_POINTER;
     void** bfas = &NULL_POINTER;
-    // The break flag model.
     void** bfm = &NULL_POINTER;
     void** bfmc = &NULL_POINTER;
     void** bfms = &NULL_POINTER;
-    // The break flag details.
     void** bfd = &NULL_POINTER;
     void** bfdc = &NULL_POINTER;
     void** bfds = &NULL_POINTER;
-
-    // The model abstraction.
+    // The model name, abstraction, model, details.
+    void** mn = &NULL_POINTER;
+    void** mnc = &NULL_POINTER;
+    void** mns = &NULL_POINTER;
     void** ma = &NULL_POINTER;
     void** mac = &NULL_POINTER;
     void** mas = &NULL_POINTER;
-    // The model model.
     void** mm = &NULL_POINTER;
     void** mmc = &NULL_POINTER;
     void** mms = &NULL_POINTER;
-    // The model details.
     void** md = &NULL_POINTER;
     void** mdc = &NULL_POINTER;
     void** mds = &NULL_POINTER;
@@ -103,6 +104,7 @@ void loop(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
     // Get break flag.
     get_universal_compound_element_by_name(p10, p11,
         (void*) BREAK_FLAG_NAME, (void*) BREAK_FLAG_NAME_COUNT,
+        (void*) &bfn, (void*) &bfnc, (void*) &bfns,
         (void*) &bfa, (void*) &bfac, (void*) &bfas,
         (void*) &bfm, (void*) &bfmc, (void*) &bfms,
         (void*) &bfd, (void*) &bfdc, (void*) &bfds,
@@ -111,6 +113,7 @@ void loop(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
     // Get model.
     get_universal_compound_element_by_name(p10, p11,
         (void*) LOOP_MODEL_NAME, (void*) LOOP_MODEL_NAME_COUNT,
+        (void*) &mn, (void*) &mnc, (void*) &mns,
         (void*) &ma, (void*) &mac, (void*) &mas,
         (void*) &mm, (void*) &mmc, (void*) &mms,
         (void*) &md, (void*) &mdc, (void*) &mds,

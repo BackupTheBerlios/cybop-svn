@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.22 $ $Date: 2007-04-16 15:56:29 $ $Author: christian $
+ * @version $Revision: 1.23 $ $Date: 2007-05-09 15:32:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -76,16 +76,16 @@ void receive_linux_console_signal(void* p0, void* p1, void* p2) {
     void** c = &NULL_POINTER;
     void** cc = &NULL_POINTER;
     void** cs = &NULL_POINTER;
-
-    // The command abstraction.
+    // The command name, abstraction, model, details.
+    void** cn = &NULL_POINTER;
+    void** cnc = &NULL_POINTER;
+    void** cns = &NULL_POINTER;
     void** ca = &NULL_POINTER;
     void** cac = &NULL_POINTER;
     void** cas = &NULL_POINTER;
-    // The command model.
     void** cm = &NULL_POINTER;
     void** cmc = &NULL_POINTER;
     void** cms = &NULL_POINTER;
-    // The command details.
     void** cd = &NULL_POINTER;
     void** cdc = &NULL_POINTER;
     void** cds = &NULL_POINTER;
@@ -130,6 +130,7 @@ void receive_linux_console_signal(void* p0, void* p1, void* p2) {
     // If the name is not known, the command parameter is left untouched.
     get_universal_compound_element_by_name(*c, *cc,
         p1, p2,
+        (void*) &cn, (void*) &cnc, (void*) &cns,
         (void*) &ca, (void*) &cac, (void*) &cas,
         (void*) &cm, (void*) &cmc, (void*) &cms,
         (void*) &cd, (void*) &cdc, (void*) &cds,

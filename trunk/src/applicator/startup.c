@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.25 $ $Date: 2007-04-16 15:56:29 $ $Author: christian $
+ * @version $Revision: 1.26 $ $Date: 2007-05-09 15:32:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description This module starts up a service.
  */
@@ -60,54 +60,55 @@ void startup_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5)
 
     log_message_debug("Startup service.");
 
-    // The service abstraction.
+    // The service name, abstraction, model, details.
+    void** sn = &NULL_POINTER;
+    void** snc = &NULL_POINTER;
+    void** sns = &NULL_POINTER;
     void** sa = &NULL_POINTER;
     void** sac = &NULL_POINTER;
     void** sas = &NULL_POINTER;
-    // The service model.
     void** sm = &NULL_POINTER;
     void** smc = &NULL_POINTER;
     void** sms = &NULL_POINTER;
-    // The service details.
     void** sd = &NULL_POINTER;
     void** sdc = &NULL_POINTER;
     void** sds = &NULL_POINTER;
-
-    // The socket namespace abstraction.
+    // The socket namespace name, abstraction, model, details.
+    void** nn = &NULL_POINTER;
+    void** nnc = &NULL_POINTER;
+    void** nns = &NULL_POINTER;
     void** na = &NULL_POINTER;
     void** nac = &NULL_POINTER;
     void** nas = &NULL_POINTER;
-    // The socket namespace model.
     void** nm = &NULL_POINTER;
     void** nmc = &NULL_POINTER;
     void** nms = &NULL_POINTER;
-    // The socket namespace details.
     void** nd = &NULL_POINTER;
     void** ndc = &NULL_POINTER;
     void** nds = &NULL_POINTER;
-
-    // The communication style abstraction.
+    // The communication style name, abstraction, model, details.
+    void** stn = &NULL_POINTER;
+    void** stnc = &NULL_POINTER;
+    void** stns = &NULL_POINTER;
     void** sta = &NULL_POINTER;
     void** stac = &NULL_POINTER;
     void** stas = &NULL_POINTER;
-    // The communication style model.
     void** stm = &NULL_POINTER;
     void** stmc = &NULL_POINTER;
     void** stms = &NULL_POINTER;
-    // The communication style details.
     void** std = &NULL_POINTER;
     void** stdc = &NULL_POINTER;
     void** stds = &NULL_POINTER;
-
-    // The host address abstraction.
+    // The host address name, abstraction, model, details.
+    void** an = &NULL_POINTER;
+    void** anc = &NULL_POINTER;
+    void** ans = &NULL_POINTER;
     void** aa = &NULL_POINTER;
     void** aac = &NULL_POINTER;
     void** aas = &NULL_POINTER;
-    // The host address model.
     void** am = &NULL_POINTER;
     void** amc = &NULL_POINTER;
     void** ams = &NULL_POINTER;
-    // The host address details.
     void** ad = &NULL_POINTER;
     void** adc = &NULL_POINTER;
     void** ads = &NULL_POINTER;
@@ -115,6 +116,7 @@ void startup_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5)
     // Get service.
     get_universal_compound_element_by_name(p0, p1,
         (void*) SERVICE_NAME, (void*) SERVICE_NAME_COUNT,
+        (void*) &sn, (void*) &snc, (void*) &sns,
         (void*) &sa, (void*) &sac, (void*) &sas,
         (void*) &sm, (void*) &smc, (void*) &sms,
         (void*) &sd, (void*) &sdc, (void*) &sds,
@@ -123,6 +125,7 @@ void startup_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5)
     // Get socket namespace.
     get_universal_compound_element_by_name(p0, p1,
         (void*) SERVICE_NAMESPACE_NAME, (void*) SERVICE_NAMESPACE_NAME_COUNT,
+        (void*) &nn, (void*) &nnc, (void*) &nns,
         (void*) &na, (void*) &nac, (void*) &nas,
         (void*) &nm, (void*) &nmc, (void*) &nms,
         (void*) &nd, (void*) &ndc, (void*) &nds,
@@ -131,6 +134,7 @@ void startup_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5)
     // Get communication style.
     get_universal_compound_element_by_name(p0, p1,
         (void*) SERVICE_STYLE_NAME, (void*) SERVICE_STYLE_NAME_COUNT,
+        (void*) &stn, (void*) &stnc, (void*) &stns,
         (void*) &sta, (void*) &stac, (void*) &stas,
         (void*) &stm, (void*) &stmc, (void*) &stms,
         (void*) &std, (void*) &stdc, (void*) &stds,
@@ -139,6 +143,7 @@ void startup_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5)
     // Get host address.
     get_universal_compound_element_by_name(p0, p1,
         (void*) SERVICE_ADDRESS_NAME, (void*) SERVICE_ADDRESS_NAME_COUNT,
+        (void*) &an, (void*) &anc, (void*) &ans,
         (void*) &aa, (void*) &aac, (void*) &aas,
         (void*) &am, (void*) &amc, (void*) &ams,
         (void*) &ad, (void*) &adc, (void*) &ads,

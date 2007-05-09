@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.17 $ $Date: 2007-04-16 15:56:29 $ $Author: christian $
+ * @version $Revision: 1.18 $ $Date: 2007-05-09 15:32:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description This module shuts down a service.
  */
@@ -56,15 +56,16 @@ void shutdown_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
     log_message_debug("Shutdown service.");
 
-    // The service abstraction.
+    // The service name, abstraction, model, details.
+    void** sn = &NULL_POINTER;
+    void** snc = &NULL_POINTER;
+    void** sns = &NULL_POINTER;
     void** sa = &NULL_POINTER;
     void** sac = &NULL_POINTER;
     void** sas = &NULL_POINTER;
-    // The service model.
     void** sm = &NULL_POINTER;
     void** smc = &NULL_POINTER;
     void** sms = &NULL_POINTER;
-    // The service details.
     void** sd = &NULL_POINTER;
     void** sdc = &NULL_POINTER;
     void** sds = &NULL_POINTER;
@@ -72,6 +73,7 @@ void shutdown_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
     // Get service.
     get_universal_compound_element_by_name(p0, p1,
         (void*) SERVICE_NAME, (void*) SERVICE_NAME_COUNT,
+        (void*) &sn, (void*) &snc, (void*) &sns,
         (void*) &sa, (void*) &sac, (void*) &sas,
         (void*) &sm, (void*) &smc, (void*) &sms,
         (void*) &sd, (void*) &sdc, (void*) &sds,

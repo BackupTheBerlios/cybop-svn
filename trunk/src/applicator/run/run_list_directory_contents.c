@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.10 $ $Date: 2007-04-16 15:56:30 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2007-05-09 15:32:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -55,28 +55,30 @@ void run_list_directory_contents(void* p0, void* p1, void* p2, void* p3) {
 
     log_message_debug("Run list directory contents command.");
 
-    // The all abstraction.
+    // The all name, abstraction, model, details.
+    void** alln = &NULL_POINTER;
+    void** allnc = &NULL_POINTER;
+    void** allns = &NULL_POINTER;
     void** alla = &NULL_POINTER;
     void** allac = &NULL_POINTER;
     void** allas = &NULL_POINTER;
-    // The all model.
     int** allm = (int**) &NULL_POINTER;
     void** allmc = &NULL_POINTER;
     void** allms = &NULL_POINTER;
-    // The all details.
     void** alld = &NULL_POINTER;
     void** alldc = &NULL_POINTER;
     void** allds = &NULL_POINTER;
 
-    // The long listing abstraction.
+    // The long listing name, abstraction, model, details.
+    void** longlistingn = &NULL_POINTER;
+    void** longlistingnc = &NULL_POINTER;
+    void** longlistingns = &NULL_POINTER;
     void** longlistinga = &NULL_POINTER;
     void** longlistingac = &NULL_POINTER;
     void** longlistingas = &NULL_POINTER;
-    // The long listing model.
     int** longlistingm = (int**) &NULL_POINTER;
     void** longlistingmc = &NULL_POINTER;
     void** longlistingms = &NULL_POINTER;
-    // The long listing details.
     void** longlistingd = &NULL_POINTER;
     void** longlistingdc = &NULL_POINTER;
     void** longlistingds = &NULL_POINTER;
@@ -84,6 +86,7 @@ void run_list_directory_contents(void* p0, void* p1, void* p2, void* p3) {
     // Get all option.
     get_universal_compound_element_by_name(p0, p1,
         (void*) RUN_LIST_DIRECTORY_CONTENTS_ALL_NAME, (void*) RUN_LIST_DIRECTORY_CONTENTS_ALL_NAME_COUNT,
+        (void*) &alln, (void*) &allnc, (void*) &allns,
         (void*) &alla, (void*) &allac, (void*) &allas,
         (void*) &allm, (void*) &allmc, (void*) &allms,
         (void*) &alld, (void*) &alldc, (void*) &allds,
@@ -92,6 +95,7 @@ void run_list_directory_contents(void* p0, void* p1, void* p2, void* p3) {
     // Get long listing option.
     get_universal_compound_element_by_name(p0, p1,
         (void*) RUN_LIST_DIRECTORY_CONTENTS_LONG_LISTING_NAME, (void*) RUN_LIST_DIRECTORY_CONTENTS_LONG_LISTING_NAME_COUNT,
+        (void*) &longlistingn, (void*) &longlistingnc, (void*) &longlistingns,
         (void*) &longlistinga, (void*) &longlistingac, (void*) &longlistingas,
         (void*) &longlistingm, (void*) &longlistingmc, (void*) &longlistingms,
         (void*) &longlistingd, (void*) &longlistingdc, (void*) &longlistingds,

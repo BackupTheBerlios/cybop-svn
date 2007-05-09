@@ -22,7 +22,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.28 $ $Date: 2007-04-16 15:56:29 $ $Author: christian $
+ * @version $Revision: 1.29 $ $Date: 2007-05-09 15:32:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -284,54 +284,55 @@ void create(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     log_message_debug("Create knowledge model.");
 
-    // The name abstraction.
+    // The name name, abstraction, model, details.
+    void** nn = &NULL_POINTER;
+    void** nnc = &NULL_POINTER;
+    void** nns = &NULL_POINTER;
     void** na = &NULL_POINTER;
     void** nac = &NULL_POINTER;
     void** nas = &NULL_POINTER;
-    // The name model.
     void** nm = &NULL_POINTER;
     void** nmc = &NULL_POINTER;
     void** nms = &NULL_POINTER;
-    // The name details.
     void** nd = &NULL_POINTER;
     void** ndc = &NULL_POINTER;
     void** nds = &NULL_POINTER;
-
-    // The abstraction abstraction.
+    // The abstraction name, abstraction, model, details.
+    void** an = &NULL_POINTER;
+    void** anc = &NULL_POINTER;
+    void** ans = &NULL_POINTER;
     void** aa = &NULL_POINTER;
     void** aac = &NULL_POINTER;
     void** aas = &NULL_POINTER;
-    // The abstraction model.
     void** am = &NULL_POINTER;
     void** amc = &NULL_POINTER;
     void** ams = &NULL_POINTER;
-    // The abstraction details.
     void** ad = &NULL_POINTER;
     void** adc = &NULL_POINTER;
     void** ads = &NULL_POINTER;
-
-    // The element abstraction.
+    // The element name, abstraction, model, details.
+    void** en = &NULL_POINTER;
+    void** enc = &NULL_POINTER;
+    void** ens = &NULL_POINTER;
     void** ea = &NULL_POINTER;
     void** eac = &NULL_POINTER;
     void** eas = &NULL_POINTER;
-    // The element model.
     void** em = &NULL_POINTER;
     void** emc = &NULL_POINTER;
     void** ems = &NULL_POINTER;
-    // The element details.
     void** ed = &NULL_POINTER;
     void** edc = &NULL_POINTER;
     void** eds = &NULL_POINTER;
-
-    // The whole abstraction.
+    // The whole name, abstraction, model, details.
+    void** wn = &NULL_POINTER;
+    void** wnc = &NULL_POINTER;
+    void** wns = &NULL_POINTER;
     void** wa = &NULL_POINTER;
     void** wac = &NULL_POINTER;
     void** was = &NULL_POINTER;
-    // The whole model.
     void** wm = &NULL_POINTER;
     void** wmc = &NULL_POINTER;
     void** wms = &NULL_POINTER;
-    // The whole details.
     void** wd = &NULL_POINTER;
     void** wdc = &NULL_POINTER;
     void** wds = &NULL_POINTER;
@@ -339,6 +340,7 @@ void create(void* p0, void* p1, void* p2, void* p3, void* p4) {
     // Get name.
     get_universal_compound_element_by_name(p0, p1,
         (void*) CREATE_NAME_NAME, (void*) CREATE_NAME_NAME_COUNT,
+        (void*) &nn, (void*) &nnc, (void*) &nns,
         (void*) &na, (void*) &nac, (void*) &nas,
         (void*) &nm, (void*) &nmc, (void*) &nms,
         (void*) &nd, (void*) &ndc, (void*) &nds,
@@ -347,6 +349,7 @@ void create(void* p0, void* p1, void* p2, void* p3, void* p4) {
     // Get abstraction.
     get_universal_compound_element_by_name(p0, p1,
         (void*) CREATE_ABSTRACTION_NAME, (void*) CREATE_ABSTRACTION_NAME_COUNT,
+        (void*) &an, (void*) &anc, (void*) &ans,
         (void*) &aa, (void*) &aac, (void*) &aas,
         (void*) &am, (void*) &amc, (void*) &ams,
         (void*) &ad, (void*) &adc, (void*) &ads,
@@ -355,6 +358,7 @@ void create(void* p0, void* p1, void* p2, void* p3, void* p4) {
     // Get element.
     get_universal_compound_element_by_name(p0, p1,
         (void*) CREATE_ELEMENT_NAME, (void*) CREATE_ELEMENT_NAME_COUNT,
+        (void*) &en, (void*) &enc, (void*) &ens,
         (void*) &ea, (void*) &eac, (void*) &eas,
         (void*) &em, (void*) &emc, (void*) &ems,
         (void*) &ed, (void*) &edc, (void*) &eds,
@@ -363,6 +367,7 @@ void create(void* p0, void* p1, void* p2, void* p3, void* p4) {
     // Get whole.
     get_universal_compound_element_by_name(p0, p1,
         (void*) CREATE_WHOLE_NAME, (void*) CREATE_WHOLE_NAME_COUNT,
+        (void*) &wn, (void*) &wnc, (void*) &wns,
         (void*) &wa, (void*) &wac, (void*) &was,
         (void*) &wm, (void*) &wmc, (void*) &wms,
         (void*) &wd, (void*) &wdc, (void*) &wds,

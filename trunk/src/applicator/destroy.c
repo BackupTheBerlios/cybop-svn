@@ -22,7 +22,7 @@
  *
  * This file destroys a transient model to a persistent model.
  *
- * @version $Revision: 1.21 $ $Date: 2007-04-26 23:17:09 $ $Author: christian $
+ * @version $Revision: 1.22 $ $Date: 2007-05-09 15:32:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -223,15 +223,16 @@ void destroy(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     log_message_debug("Destroy knowledge model.");
 
-    // The knowledge model name abstraction.
+    // The knowledge model name name, abstraction, model, details.
+    void** nn = &NULL_POINTER;
+    void** nnc = &NULL_POINTER;
+    void** nns = &NULL_POINTER;
     void** na = &NULL_POINTER;
     void** nac = &NULL_POINTER;
     void** nas = &NULL_POINTER;
-    // The knowledge model name model.
     void** nm = &NULL_POINTER;
     void** nmc = &NULL_POINTER;
     void** nms = &NULL_POINTER;
-    // The knowledge model name details.
     void** nd = &NULL_POINTER;
     void** ndc = &NULL_POINTER;
     void** nds = &NULL_POINTER;
@@ -239,20 +240,22 @@ void destroy(void* p0, void* p1, void* p2, void* p3, void* p4) {
     // Get knowledge model name.
     get_universal_compound_element_by_name(p0, p1,
         (void*) DESTROY_MODEL_NAME, (void*) DESTROY_MODEL_NAME_COUNT,
+        (void*) &nn, (void*) &nnc, (void*) &nns,
         (void*) &na, (void*) &nac, (void*) &nas,
         (void*) &nm, (void*) &nmc, (void*) &nms,
         (void*) &nd, (void*) &ndc, (void*) &nds,
         p2, p3);
 
-    // The knowledge model abstraction.
+    // The knowledge model name, abstraction, model, details.
+    void** en = &NULL_POINTER;
+    void** enc = &NULL_POINTER;
+    void** ens = &NULL_POINTER;
     void** ea = &NULL_POINTER;
     void** eac = &NULL_POINTER;
     void** eas = &NULL_POINTER;
-    // The knowledge model model.
     void** em = &NULL_POINTER;
     void** emc = &NULL_POINTER;
     void** ems = &NULL_POINTER;
-    // The knowledge model details.
     void** ed = &NULL_POINTER;
     void** edc = &NULL_POINTER;
     void** eds = &NULL_POINTER;
@@ -260,6 +263,7 @@ void destroy(void* p0, void* p1, void* p2, void* p3, void* p4) {
     // Get knowledge model.
     get_universal_compound_element_by_name(p2, p3,
         (void*) *nm, (void*) *nmc,
+        (void*) &en, (void*) &enc, (void*) &ens,
         (void*) &ea, (void*) &eac, (void*) &eas,
         (void*) &em, (void*) &emc, (void*) &ems,
         (void*) &ed, (void*) &edc, (void*) &eds,

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.18 $ $Date: 2007-04-16 15:56:29 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2007-05-09 15:32:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -51,41 +51,42 @@ void build_listname(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     log_message_debug("Build list name.");
 
-    // The basisname abstraction.
+    // The basisname name, abstraction, model, details.
+    void** bnn = &NULL_POINTER;
+    void** bnnc = &NULL_POINTER;
+    void** bnns = &NULL_POINTER;
     void** bna = &NULL_POINTER;
     void** bnac = &NULL_POINTER;
     void** bnas = &NULL_POINTER;
-    // The basisname model.
     void** bnm = &NULL_POINTER;
     void** bnmc = &NULL_POINTER;
     void** bnms = &NULL_POINTER;
-    // The basisname details.
     void** bnd = &NULL_POINTER;
     void** bndc = &NULL_POINTER;
     void** bnds = &NULL_POINTER;
-
-    // The index abstraction.
+    // The index name, abstraction, model, details.
+    void** idxn = &NULL_POINTER;
+    void** idxnc = &NULL_POINTER;
+    void** idxns = &NULL_POINTER;
     void** idxa = &NULL_POINTER;
     void** idxac = &NULL_POINTER;
     void** idxas = &NULL_POINTER;
-    // The index model.
     void** idxm = &NULL_POINTER;
     void** idxmc = &NULL_POINTER;
     void** idxms = &NULL_POINTER;
-    // The index details.
     void** idxd = &NULL_POINTER;
     void** idxdc = &NULL_POINTER;
     void** idxds = &NULL_POINTER;
-
-    // The result abstraction.
+    // The result name, abstraction, model, details.
+    void** resn = &NULL_POINTER;
+    void** resnc = &NULL_POINTER;
+    void** resns = &NULL_POINTER;
     void** resa = &NULL_POINTER;
     void** resac = &NULL_POINTER;
     void** resas = &NULL_POINTER;
-    // The result mxodel.
     void** resm = &NULL_POINTER;
     void** resmc = &NULL_POINTER;
     void** resms = &NULL_POINTER;
-    // The result details.
     void** resd = &NULL_POINTER;
     void** resdc = &NULL_POINTER;
     void** resds = &NULL_POINTER;
@@ -93,6 +94,7 @@ void build_listname(void* p0, void* p1, void* p2, void* p3, void* p4) {
     // get the basisname
     get_universal_compound_element_by_name(p0, p1,
         (void*) BASE_NAME_NAME, (void*) BASE_NAME_NAME_COUNT,
+        (void*) &bnn, (void*) &bnnc, (void*) &bnns,
         (void*) &bna, (void*) &bnac, (void*) &bnas,
         (void*) &bnm, (void*) &bnmc, (void*) &bnms,
         (void*) &bnd, (void*) &bndc, (void*) &bnds,
@@ -101,6 +103,7 @@ void build_listname(void* p0, void* p1, void* p2, void* p3, void* p4) {
     // get the index
     get_universal_compound_element_by_name(p0, p1,
         (void*) INDEX_NAME_NAME, (void*) INDEX_NAME_NAME_COUNT,
+        (void*) &idxn, (void*) &idxnc, (void*) &idxns,
         (void*) &idxa, (void*) &idxac, (void*) &idxas,
         (void*) &idxm, (void*) &idxmc, (void*) &idxms,
         (void*) &idxd, (void*) &idxdc, (void*) &idxds,
@@ -109,6 +112,7 @@ void build_listname(void* p0, void* p1, void* p2, void* p3, void* p4) {
     // get the result
     get_universal_compound_element_by_name(p0, p1,
         (void*) COMPOSED_NAME_NAME, (void*) COMPOSED_NAME_NAME_COUNT,
+        (void*) &resn, (void*) &resnc, (void*) &resns,
         (void*) &resa, (void*) &resac, (void*) &resas,
         (void*) &resm, (void*) &resmc, (void*) &resms,
         (void*) &resd, (void*) &resdc, (void*) &resds,

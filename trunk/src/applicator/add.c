@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.16 $ $Date: 2007-04-16 15:56:29 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2007-05-09 15:32:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -49,54 +49,55 @@ void add(void* p0, int* p1, void* p2, void* p3, void* p4) {
 
     log_message_debug("Add two primitive summands resulting in the sum.");
 
-    // The summand 1 abstraction.
+    // The summand 1 name, abstraction, model, details.
+    void** s1n = &NULL_POINTER;
+    void** s1nc = &NULL_POINTER;
+    void** s1ns = &NULL_POINTER;
     void** s1a = &NULL_POINTER;
     void** s1ac = &NULL_POINTER;
     void** s1as = &NULL_POINTER;
-    // The summand 1 model.
     void** s1m = &NULL_POINTER;
     void** s1mc = &NULL_POINTER;
     void** s1ms = &NULL_POINTER;
-    // The summand 1 details.
     void** s1d = &NULL_POINTER;
     void** s1dc = &NULL_POINTER;
     void** s1ds = &NULL_POINTER;
-
-    // The summand 2 abstraction.
+    // The summand 2 name, abstraction, model, details.
+    void** s2n = &NULL_POINTER;
+    void** s2nc = &NULL_POINTER;
+    void** s2ns = &NULL_POINTER;
     void** s2a = &NULL_POINTER;
     void** s2ac = &NULL_POINTER;
     void** s2as = &NULL_POINTER;
-    // The summand 2 model.
     void** s2m = &NULL_POINTER;
     void** s2mc = &NULL_POINTER;
     void** s2ms = &NULL_POINTER;
-    // The summand 2 details.
     void** s2d = &NULL_POINTER;
     void** s2dc = &NULL_POINTER;
     void** s2ds = &NULL_POINTER;
-
-    // The sum abstraction.
+    // The sum name, abstraction, model, details.
+    void** sn = &NULL_POINTER;
+    void** snc = &NULL_POINTER;
+    void** sns = &NULL_POINTER;
     void** sa = &NULL_POINTER;
     void** sac = &NULL_POINTER;
     void** sas = &NULL_POINTER;
-    // The sum index model.
     void** sm = &NULL_POINTER;
     void** smc = &NULL_POINTER;
     void** sms = &NULL_POINTER;
-    // The sum index details.
     void** sd = &NULL_POINTER;
     void** sdc = &NULL_POINTER;
     void** sds = &NULL_POINTER;
-
-    // The abstraction abstraction.
+    // The abstraction name, abstraction, model, details.
+    void** an = &NULL_POINTER;
+    void** anc = &NULL_POINTER;
+    void** ans = &NULL_POINTER;
     void** aa = &NULL_POINTER;
     void** aac = &NULL_POINTER;
     void** aas = &NULL_POINTER;
-    // The abstraction model.
     void** am = &NULL_POINTER;
     void** amc = &NULL_POINTER;
     void** ams = &NULL_POINTER;
-    // The abstraction details.
     void** ad = &NULL_POINTER;
     void** adc = &NULL_POINTER;
     void** ads = &NULL_POINTER;
@@ -104,6 +105,7 @@ void add(void* p0, int* p1, void* p2, void* p3, void* p4) {
     // Get summand 1.
     get_universal_compound_element_by_name(p0, p1,
         (void*) ADD_SUMMAND_1_NAME, (void*) ADD_SUMMAND_1_NAME_COUNT,
+        (void*) &s1n, (void*) &s1nc, (void*) &s1ns,
         (void*) &s1a, (void*) &s1ac, (void*) &s1as,
         (void*) &s1m, (void*) &s1mc, (void*) &s1ms,
         (void*) &s1d, (void*) &s1dc, (void*) &s1ds,
@@ -112,6 +114,7 @@ void add(void* p0, int* p1, void* p2, void* p3, void* p4) {
     // Get summand 2.
     get_universal_compound_element_by_name(p0, p1,
         (void*) ADD_SUMMAND_2_NAME, (void*) ADD_SUMMAND_2_NAME_COUNT,
+        (void*) &s2n, (void*) &s2nc, (void*) &s2ns,
         (void*) &s2a, (void*) &s2ac, (void*) &s2as,
         (void*) &s2m, (void*) &s2mc, (void*) &s2ms,
         (void*) &s2d, (void*) &s2dc, (void*) &s2ds,
@@ -120,6 +123,7 @@ void add(void* p0, int* p1, void* p2, void* p3, void* p4) {
     // Get sum.
     get_universal_compound_element_by_name(p0, p1,
         (void*) ADD_SUM_NAME, (void*) ADD_SUM_NAME_COUNT,
+        (void*) &sn, (void*) &snc, (void*) &sns,
         (void*) &sa, (void*) &sac, (void*) &sas,
         (void*) &sm, (void*) &smc, (void*) &sms,
         (void*) &sd, (void*) &sdc, (void*) &sds,
@@ -128,6 +132,7 @@ void add(void* p0, int* p1, void* p2, void* p3, void* p4) {
     // Get abstraction.
     get_universal_compound_element_by_name(p0, p1,
         (void*) COPY_ABSTRACTION_NAME, (void*) COPY_ABSTRACTION_NAME_COUNT,
+        (void*) &an, (void*) &anc, (void*) &ans,
         (void*) &aa, (void*) &aac, (void*) &aas,
         (void*) &am, (void*) &amc, (void*) &ams,
         (void*) &ad, (void*) &adc, (void*) &ads,

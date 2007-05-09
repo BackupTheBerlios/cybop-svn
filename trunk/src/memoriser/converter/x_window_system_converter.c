@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2007-04-26 23:17:10 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2007-05-09 15:32:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -91,6 +91,9 @@ void serialise_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
         XGetWindowAttributes(*di, **w, &wa);
 
         // The source whole size.
+        void** wsn = &NULL_POINTER;
+        void** wsnc = &NULL_POINTER;
+        void** wsns = &NULL_POINTER;
         void** wsa = &NULL_POINTER;
         void** wsac = &NULL_POINTER;
         void** wsas = &NULL_POINTER;
@@ -129,6 +132,7 @@ void serialise_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
             // Get source whole size from details.
             get_universal_compound_element_by_name(p5, p6,
                 (void*) UI_SIZE_NAME, (void*) UI_SIZE_NAME_COUNT,
+                (void*) &wsn, (void*) &wsnc, (void*) &wsns,
                 (void*) &wsa, (void*) &wsac, (void*) &wsas,
                 (void*) &wsm, (void*) &wsmc, (void*) &wsms,
                 (void*) &wsd, (void*) &wsdc, (void*) &wsds,
@@ -171,7 +175,10 @@ void serialise_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
         void** d = &NULL_POINTER;
         void** dc = &NULL_POINTER;
         void** ds = &NULL_POINTER;
-        // The source part layout.
+        // The source part layout name, abstraction, model, details.
+        void** ln = &NULL_POINTER;
+        void** lnc = &NULL_POINTER;
+        void** lns = &NULL_POINTER;
         void** la = &NULL_POINTER;
         void** lac = &NULL_POINTER;
         void** las = &NULL_POINTER;
@@ -181,7 +188,10 @@ void serialise_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
         void** ld = &NULL_POINTER;
         void** ldc = &NULL_POINTER;
         void** lds = &NULL_POINTER;
-        // The source part cell.
+        // The source part cell name, abstraction, model, details.
+        void** cn = &NULL_POINTER;
+        void** cnc = &NULL_POINTER;
+        void** cns = &NULL_POINTER;
         void** ca = &NULL_POINTER;
         void** cac = &NULL_POINTER;
         void** cas = &NULL_POINTER;
@@ -191,7 +201,10 @@ void serialise_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
         void** cd = &NULL_POINTER;
         void** cdc = &NULL_POINTER;
         void** cds = &NULL_POINTER;
-        // The source part position.
+        // The source part position name, abstraction, model, details.
+        void** pn = &NULL_POINTER;
+        void** pnc = &NULL_POINTER;
+        void** pns = &NULL_POINTER;
         void** pa = &NULL_POINTER;
         void** pac = &NULL_POINTER;
         void** pas = &NULL_POINTER;
@@ -201,7 +214,10 @@ void serialise_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
         void** pd = &NULL_POINTER;
         void** pdc = &NULL_POINTER;
         void** pds = &NULL_POINTER;
-        // The source part shape.
+        // The source part shape name, abstraction, model, details.
+        void** shn = &NULL_POINTER;
+        void** shnc = &NULL_POINTER;
+        void** shns = &NULL_POINTER;
         void** sha = &NULL_POINTER;
         void** shac = &NULL_POINTER;
         void** shas = &NULL_POINTER;
@@ -211,7 +227,10 @@ void serialise_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
         void** shd = &NULL_POINTER;
         void** shdc = &NULL_POINTER;
         void** shds = &NULL_POINTER;
-        // The source part size.
+        // The source part size name, abstraction, model, details.
+        void** sn = &NULL_POINTER;
+        void** snc = &NULL_POINTER;
+        void** sns = &NULL_POINTER;
         void** sa = &NULL_POINTER;
         void** sac = &NULL_POINTER;
         void** sas = &NULL_POINTER;
@@ -221,7 +240,10 @@ void serialise_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
         void** sd = &NULL_POINTER;
         void** sdc = &NULL_POINTER;
         void** sds = &NULL_POINTER;
-        // The source part title.
+        // The source part title name, abstraction, model, details.
+        void** tn = &NULL_POINTER;
+        void** tnc = &NULL_POINTER;
+        void** tns = &NULL_POINTER;
         void** ta = &NULL_POINTER;
         void** tac = &NULL_POINTER;
         void** tas = &NULL_POINTER;
@@ -231,7 +253,10 @@ void serialise_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
         void** td = &NULL_POINTER;
         void** tdc = &NULL_POINTER;
         void** tds = &NULL_POINTER;
-        // The source part icon.
+        // The source part icon name, abstraction, model, details.
+        void** in = &NULL_POINTER;
+        void** inc = &NULL_POINTER;
+        void** ins = &NULL_POINTER;
         void** ia = &NULL_POINTER;
         void** iac = &NULL_POINTER;
         void** ias = &NULL_POINTER;
@@ -281,6 +306,7 @@ void serialise_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
             // Get source part layout from details.
             get_universal_compound_element_by_name(*d, *dc,
                 (void*) UI_LAYOUT_NAME, (void*) UI_LAYOUT_NAME_COUNT,
+                (void*) &ln, (void*) &lnc, (void*) &lns,
                 (void*) &la, (void*) &lac, (void*) &las,
                 (void*) &lm, (void*) &lmc, (void*) &lms,
                 (void*) &ld, (void*) &ldc, (void*) &lds,
@@ -288,6 +314,7 @@ void serialise_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
             // Get source part cell from details.
             get_universal_compound_element_by_name(*d, *dc,
                 (void*) UI_CELL_NAME, (void*) UI_CELL_NAME_COUNT,
+                (void*) &cn, (void*) &cnc, (void*) &cns,
                 (void*) &ca, (void*) &cac, (void*) &cas,
                 (void*) &cm, (void*) &cmc, (void*) &cms,
                 (void*) &cd, (void*) &cdc, (void*) &cds,
@@ -295,6 +322,7 @@ void serialise_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
             // Get source part position from details.
             get_universal_compound_element_by_name(*d, *dc,
                 (void*) UI_POSITION_NAME, (void*) UI_POSITION_NAME_COUNT,
+                (void*) &pn, (void*) &pnc, (void*) &pns,
                 (void*) &pa, (void*) &pac, (void*) &pas,
                 (void*) &pm, (void*) &pmc, (void*) &pms,
                 (void*) &pd, (void*) &pdc, (void*) &pds,
@@ -302,6 +330,7 @@ void serialise_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
             // Get source part size from details.
             get_universal_compound_element_by_name(*d, *dc,
                 (void*) UI_SIZE_NAME, (void*) UI_SIZE_NAME_COUNT,
+                (void*) &sn, (void*) &snc, (void*) &sns,
                 (void*) &sa, (void*) &sac, (void*) &sas,
                 (void*) &sm, (void*) &smc, (void*) &sms,
                 (void*) &sd, (void*) &sdc, (void*) &sds,
@@ -489,6 +518,7 @@ void serialise_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
                 // Get source part title from details.
                 get_universal_compound_element_by_name(*d, *dc,
                     (void*) GUI_TITLE_NAME, (void*) GUI_TITLE_NAME_COUNT,
+                    (void*) &tn, (void*) &tnc, (void*) &tns,
                     (void*) &ta, (void*) &tac, (void*) &tas,
                     (void*) &tm, (void*) &tmc, (void*) &tms,
                     (void*) &td, (void*) &tdc, (void*) &tds,
@@ -496,6 +526,7 @@ void serialise_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
                 // Get source part icon from details.
                 get_universal_compound_element_by_name(*d, *dc,
                     (void*) GUI_ICON_NAME, (void*) GUI_ICON_NAME_COUNT,
+                    (void*) &in, (void*) &inc, (void*) &ins,
                     (void*) &ia, (void*) &iac, (void*) &ias,
                     (void*) &im, (void*) &imc, (void*) &ims,
                     (void*) &id, (void*) &idc, (void*) &ids,

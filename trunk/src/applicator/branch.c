@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.17 $ $Date: 2007-04-16 15:56:29 $ $Author: christian $
+ * @version $Revision: 1.18 $ $Date: 2007-05-09 15:32:40 $ $Author: christian $
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
@@ -74,41 +74,42 @@ void branch(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
     log_message_debug("\n\n");
     log_message_debug("Branch program flow.");
 
-    // The criterion abstraction.
+    // The criterion name, abstraction, model, details.
+    void** cn = &NULL_POINTER;
+    void** cnc = &NULL_POINTER;
+    void** cns = &NULL_POINTER;
     void** ca = &NULL_POINTER;
     void** cac = &NULL_POINTER;
     void** cas = &NULL_POINTER;
-    // The criterion model.
     void** cm = &NULL_POINTER;
     void** cmc = &NULL_POINTER;
     void** cms = &NULL_POINTER;
-    // The criterion details.
     void** cd = &NULL_POINTER;
     void** cdc = &NULL_POINTER;
     void** cds = &NULL_POINTER;
-
-    // The true model abstraction.
+    // The true model name, abstraction, model, details.
+    void** tn = &NULL_POINTER;
+    void** tnc = &NULL_POINTER;
+    void** tns = &NULL_POINTER;
     void** ta = &NULL_POINTER;
     void** tac = &NULL_POINTER;
     void** tas = &NULL_POINTER;
-    // The true model model.
     void** tm = &NULL_POINTER;
     void** tmc = &NULL_POINTER;
     void** tms = &NULL_POINTER;
-    // The true model details.
     void** td = &NULL_POINTER;
     void** tdc = &NULL_POINTER;
     void** tds = &NULL_POINTER;
-
-    // The false model abstraction.
+    // The false model name, abstraction, model, details.
+    void** fn = &NULL_POINTER;
+    void** fnc = &NULL_POINTER;
+    void** fns = &NULL_POINTER;
     void** fa = &NULL_POINTER;
     void** fac = &NULL_POINTER;
     void** fas = &NULL_POINTER;
-    // The false model model.
     void** fm = &NULL_POINTER;
     void** fmc = &NULL_POINTER;
     void** fms = &NULL_POINTER;
-    // The false model details.
     void** fd = &NULL_POINTER;
     void** fdc = &NULL_POINTER;
     void** fds = &NULL_POINTER;
@@ -116,6 +117,7 @@ void branch(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
     // Get criterion.
     get_universal_compound_element_by_name(p10, p11,
         (void*) CRITERION_NAME, (void*) CRITERION_NAME_COUNT,
+        (void*) &cn, (void*) &cnc, (void*) &cns,
         (void*) &ca, (void*) &cac, (void*) &cas,
         (void*) &cm, (void*) &cmc, (void*) &cms,
         (void*) &cd, (void*) &cdc, (void*) &cds,
@@ -124,6 +126,7 @@ void branch(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
     // Get true model.
     get_universal_compound_element_by_name(p10, p11,
         (void*) FALSE_MODEL_NAME, (void*) FALSE_MODEL_NAME_COUNT,
+        (void*) &tn, (void*) &tnc, (void*) &tns,
         (void*) &ta, (void*) &tac, (void*) &tas,
         (void*) &tm, (void*) &tmc, (void*) &tms,
         (void*) &td, (void*) &tdc, (void*) &tds,
@@ -132,6 +135,7 @@ void branch(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
     // Get false model.
     get_universal_compound_element_by_name(p10, p11,
         (void*) TRUE_MODEL_NAME, (void*) TRUE_MODEL_NAME_COUNT,
+        (void*) &fn, (void*) &fnc, (void*) &fns,
         (void*) &fa, (void*) &fac, (void*) &fas,
         (void*) &fm, (void*) &fmc, (void*) &fms,
         (void*) &fd, (void*) &fdc, (void*) &fds,

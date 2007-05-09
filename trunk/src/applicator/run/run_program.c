@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2007-04-16 15:56:30 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2007-05-09 15:32:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -54,15 +54,16 @@ void run_program(void* p0, void* p1, void* p2, void* p3) {
 
     log_message_debug("Run program command.");
 
-    // The program abstraction.
+    // The program name, abstraction, model, details.
+    void** programn = &NULL_POINTER;
+    void** programnc = &NULL_POINTER;
+    void** programns = &NULL_POINTER;
     void** programa = &NULL_POINTER;
     void** programac = &NULL_POINTER;
     void** programas = &NULL_POINTER;
-    // The program model.
     void** programm = &NULL_POINTER;
     void** programmc = &NULL_POINTER;
     void** programms = &NULL_POINTER;
-    // The program details.
     void** programd = &NULL_POINTER;
     void** programdc = &NULL_POINTER;
     void** programds = &NULL_POINTER;
@@ -70,6 +71,7 @@ void run_program(void* p0, void* p1, void* p2, void* p3) {
     // Get program option.
     get_universal_compound_element_by_name(p0, p1,
         (void*) RUN_PROGRAM_PROGRAM_NAME, (void*) RUN_PROGRAM_PROGRAM_NAME_COUNT,
+        (void*) &programn, (void*) &programnc, (void*) &programns,
         (void*) &programa, (void*) &programac, (void*) &programas,
         (void*) &programm, (void*) &programmc, (void*) &programms,
         (void*) &programd, (void*) &programdc, (void*) &programds,

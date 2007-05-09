@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.21 $ $Date: 2007-04-26 23:17:10 $ $Author: christian $
+ * @version $Revision: 1.22 $ $Date: 2007-05-09 15:32:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -1392,7 +1392,10 @@ void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, v
     void** d = &NULL_POINTER;
     void** dc = &NULL_POINTER;
     void** ds = &NULL_POINTER;
-    // The source part super properties.
+    // The source part super properties name, abstraction, model, details.
+    void** supern = &NULL_POINTER;
+    void** supernc = &NULL_POINTER;
+    void** superns = &NULL_POINTER;
     void** supera = &NULL_POINTER;
     void** superac = &NULL_POINTER;
     void** superas = &NULL_POINTER;
@@ -1402,7 +1405,10 @@ void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, v
     void** superd = &NULL_POINTER;
     void** superdc = &NULL_POINTER;
     void** superds = &NULL_POINTER;
-    // The source part shape.
+    // The source part shape name, abstraction, model, details.
+    void** shn = &NULL_POINTER;
+    void** shnc = &NULL_POINTER;
+    void** shns = &NULL_POINTER;
     void** sha = &NULL_POINTER;
     void** shac = &NULL_POINTER;
     void** shas = &NULL_POINTER;
@@ -1412,7 +1418,10 @@ void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, v
     void** shd = &NULL_POINTER;
     void** shdc = &NULL_POINTER;
     void** shds = &NULL_POINTER;
-    // The source part layout.
+    // The source part layout name, abstraction, model, details.
+    void** ln = &NULL_POINTER;
+    void** lnc = &NULL_POINTER;
+    void** lns = &NULL_POINTER;
     void** la = &NULL_POINTER;
     void** lac = &NULL_POINTER;
     void** las = &NULL_POINTER;
@@ -1422,7 +1431,10 @@ void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, v
     void** ld = &NULL_POINTER;
     void** ldc = &NULL_POINTER;
     void** lds = &NULL_POINTER;
-    // The source part cell.
+    // The source part cell name, abstraction, model, details.
+    void** cn = &NULL_POINTER;
+    void** cnc = &NULL_POINTER;
+    void** cns = &NULL_POINTER;
     void** ca = &NULL_POINTER;
     void** cac = &NULL_POINTER;
     void** cas = &NULL_POINTER;
@@ -1432,7 +1444,10 @@ void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, v
     void** cd = &NULL_POINTER;
     void** cdc = &NULL_POINTER;
     void** cds = &NULL_POINTER;
-    // The source part position.
+    // The source part position name, abstraction, model, details.
+    void** pn = &NULL_POINTER;
+    void** pnc = &NULL_POINTER;
+    void** pns = &NULL_POINTER;
     void** pa = &NULL_POINTER;
     void** pac = &NULL_POINTER;
     void** pas = &NULL_POINTER;
@@ -1442,7 +1457,10 @@ void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, v
     void** pd = &NULL_POINTER;
     void** pdc = &NULL_POINTER;
     void** pds = &NULL_POINTER;
-    // The source part size.
+    // The source part size name, abstraction, model, details.
+    void** sn = &NULL_POINTER;
+    void** snc = &NULL_POINTER;
+    void** sns = &NULL_POINTER;
     void** sa = &NULL_POINTER;
     void** sac = &NULL_POINTER;
     void** sas = &NULL_POINTER;
@@ -1452,7 +1470,10 @@ void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, v
     void** sd = &NULL_POINTER;
     void** sdc = &NULL_POINTER;
     void** sds = &NULL_POINTER;
-    // The source part background colour.
+    // The source part background colour name, abstraction, model, details.
+    void** bgn = &NULL_POINTER;
+    void** bgnc = &NULL_POINTER;
+    void** bgns = &NULL_POINTER;
     void** bga = &NULL_POINTER;
     void** bgac = &NULL_POINTER;
     void** bgas = &NULL_POINTER;
@@ -1462,7 +1483,10 @@ void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, v
     void** bgd = &NULL_POINTER;
     void** bgdc = &NULL_POINTER;
     void** bgds = &NULL_POINTER;
-    // The source part foreground colour.
+    // The source part foreground colour name, abstraction, model, details.
+    void** fgn = &NULL_POINTER;
+    void** fgnc = &NULL_POINTER;
+    void** fgns = &NULL_POINTER;
     void** fga = &NULL_POINTER;
     void** fgac = &NULL_POINTER;
     void** fgas = &NULL_POINTER;
@@ -1472,7 +1496,10 @@ void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, v
     void** fgd = &NULL_POINTER;
     void** fgdc = &NULL_POINTER;
     void** fgds = &NULL_POINTER;
-    // The source part border.
+    // The source part border name, abstraction, model, details.
+    void** bon = &NULL_POINTER;
+    void** bonc = &NULL_POINTER;
+    void** bons = &NULL_POINTER;
     void** boa = &NULL_POINTER;
     void** boac = &NULL_POINTER;
     void** boas = &NULL_POINTER;
@@ -1482,7 +1509,10 @@ void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, v
     void** bod = &NULL_POINTER;
     void** bodc = &NULL_POINTER;
     void** bods = &NULL_POINTER;
-    // The source part hidden property.
+    // The source part hidden property name, abstraction, model, details.
+    void** hn = &NULL_POINTER;
+    void** hnc = &NULL_POINTER;
+    void** hns = &NULL_POINTER;
     void** ha = &NULL_POINTER;
     void** hac = &NULL_POINTER;
     void** has = &NULL_POINTER;
@@ -1492,7 +1522,10 @@ void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, v
     void** hd = &NULL_POINTER;
     void** hdc = &NULL_POINTER;
     void** hds = &NULL_POINTER;
-    // The source part inverse property.
+    // The source part inverse property name, abstraction, model, details.
+    void** in = &NULL_POINTER;
+    void** inc = &NULL_POINTER;
+    void** ins = &NULL_POINTER;
     void** ia = &NULL_POINTER;
     void** iac = &NULL_POINTER;
     void** ias = &NULL_POINTER;
@@ -1502,7 +1535,10 @@ void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, v
     void** id = &NULL_POINTER;
     void** idc = &NULL_POINTER;
     void** ids = &NULL_POINTER;
-    // The source part blink property.
+    // The source part blink property name, abstraction, model, details.
+    void** bln = &NULL_POINTER;
+    void** blnc = &NULL_POINTER;
+    void** blns = &NULL_POINTER;
     void** bla = &NULL_POINTER;
     void** blac = &NULL_POINTER;
     void** blas = &NULL_POINTER;
@@ -1512,7 +1548,10 @@ void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, v
     void** bld = &NULL_POINTER;
     void** bldc = &NULL_POINTER;
     void** blds = &NULL_POINTER;
-    // The source part underline property.
+    // The source part underline property name, abstraction, model, details.
+    void** un = &NULL_POINTER;
+    void** unc = &NULL_POINTER;
+    void** uns = &NULL_POINTER;
     void** ua = &NULL_POINTER;
     void** uac = &NULL_POINTER;
     void** uas = &NULL_POINTER;
@@ -1522,7 +1561,10 @@ void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, v
     void** ud = &NULL_POINTER;
     void** udc = &NULL_POINTER;
     void** uds = &NULL_POINTER;
-    // The source part bold property.
+    // The source part bold property name, abstraction, model, details.
+    void** bn = &NULL_POINTER;
+    void** bnc = &NULL_POINTER;
+    void** bns = &NULL_POINTER;
     void** ba = &NULL_POINTER;
     void** bac = &NULL_POINTER;
     void** bas = &NULL_POINTER;
@@ -1532,7 +1574,10 @@ void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, v
     void** bd = &NULL_POINTER;
     void** bdc = &NULL_POINTER;
     void** bds = &NULL_POINTER;
-    // The source whole position.
+    // The source whole position name, abstraction, model, details.
+    void** wpn = &NULL_POINTER;
+    void** wpnc = &NULL_POINTER;
+    void** wpns = &NULL_POINTER;
     void** wpa = &NULL_POINTER;
     void** wpac = &NULL_POINTER;
     void** wpas = &NULL_POINTER;
@@ -1542,7 +1587,10 @@ void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, v
     void** wpd = &NULL_POINTER;
     void** wpdc = &NULL_POINTER;
     void** wpds = &NULL_POINTER;
-    // The source whole size.
+    // The source whole size name, abstraction, model, details.
+    void** wsn = &NULL_POINTER;
+    void** wsnc = &NULL_POINTER;
+    void** wsns = &NULL_POINTER;
     void** wsa = &NULL_POINTER;
     void** wsac = &NULL_POINTER;
     void** wsas = &NULL_POINTER;
@@ -1589,6 +1637,7 @@ void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, v
         // Get part super properties from details.
         get_universal_compound_element_by_name(p7, p8,
             (void*) SUPER_PROPERTIES_NAME, (void*) SUPER_PROPERTIES_NAME_COUNT,
+            (void*) &supern, (void*) &supernc, (void*) &superns,
             (void*) &supera, (void*) &superac, (void*) &superas,
             (void*) &superm, (void*) &supermc, (void*) &superms,
             (void*) &superd, (void*) &superdc, (void*) &superds,
@@ -1596,6 +1645,7 @@ void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, v
         // Get part shape from details.
         get_universal_compound_element_by_name(p7, p8,
             (void*) UI_SHAPE_NAME, (void*) UI_SHAPE_NAME_COUNT,
+            (void*) &shn, (void*) &shnc, (void*) &shns,
             (void*) &sha, (void*) &shac, (void*) &shas,
             (void*) &shm, (void*) &shmc, (void*) &shms,
             (void*) &shd, (void*) &shdc, (void*) &shds,
@@ -1603,6 +1653,7 @@ void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, v
         // Get source part layout from details.
         get_universal_compound_element_by_name(p7, p8,
             (void*) UI_LAYOUT_NAME, (void*) UI_LAYOUT_NAME_COUNT,
+            (void*) &ln, (void*) &lnc, (void*) &lns,
             (void*) &la, (void*) &lac, (void*) &las,
             (void*) &lm, (void*) &lmc, (void*) &lms,
             (void*) &ld, (void*) &ldc, (void*) &lds,
@@ -1610,6 +1661,7 @@ void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, v
         // Get source part cell from details.
         get_universal_compound_element_by_name(p7, p8,
             (void*) UI_CELL_NAME, (void*) UI_CELL_NAME_COUNT,
+            (void*) &cn, (void*) &cnc, (void*) &cns,
             (void*) &ca, (void*) &cac, (void*) &cas,
             (void*) &cm, (void*) &cmc, (void*) &cms,
             (void*) &cd, (void*) &cdc, (void*) &cds,
@@ -1617,6 +1669,7 @@ void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, v
         // Get part position from details.
         get_universal_compound_element_by_name(p7, p8,
             (void*) UI_POSITION_NAME, (void*) UI_POSITION_NAME_COUNT,
+            (void*) &pn, (void*) &pnc, (void*) &pns,
             (void*) &pa, (void*) &pac, (void*) &pas,
             (void*) &pm, (void*) &pmc, (void*) &pms,
             (void*) &pd, (void*) &pdc, (void*) &pds,
@@ -1624,6 +1677,7 @@ void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, v
         // Get part size from details.
         get_universal_compound_element_by_name(p7, p8,
             (void*) UI_SIZE_NAME, (void*) UI_SIZE_NAME_COUNT,
+            (void*) &sn, (void*) &snc, (void*) &sns,
             (void*) &sa, (void*) &sac, (void*) &sas,
             (void*) &sm, (void*) &smc, (void*) &sms,
             (void*) &sd, (void*) &sdc, (void*) &sds,
@@ -1631,6 +1685,7 @@ void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, v
         // Get part background colour from details.
         get_universal_compound_element_by_name(p7, p8,
             (void*) UI_BACKGROUND_NAME, (void*) UI_BACKGROUND_NAME_COUNT,
+            (void*) &bgn, (void*) &bgnc, (void*) &bgns,
             (void*) &bga, (void*) &bgac, (void*) &bgas,
             (void*) &bgm, (void*) &bgmc, (void*) &bgms,
             (void*) &bgd, (void*) &bgdc, (void*) &bgds,
@@ -1638,6 +1693,7 @@ void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, v
         // Get part foreground colour from details.
         get_universal_compound_element_by_name(p7, p8,
             (void*) UI_FOREGROUND_NAME, (void*) UI_FOREGROUND_NAME_COUNT,
+            (void*) &fgn, (void*) &fgnc, (void*) &fgns,
             (void*) &fga, (void*) &fgac, (void*) &fgas,
             (void*) &fgm, (void*) &fgmc, (void*) &fgms,
             (void*) &fgd, (void*) &fgdc, (void*) &fgds,
@@ -1645,6 +1701,7 @@ void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, v
         // Get part border from details.
         get_universal_compound_element_by_name(p7, p8,
             (void*) TUI_BORDER_NAME, (void*) TUI_BORDER_NAME_COUNT,
+            (void*) &bon, (void*) &bonc, (void*) &bons,
             (void*) &boa, (void*) &boac, (void*) &boas,
             (void*) &bom, (void*) &bomc, (void*) &boms,
             (void*) &bod, (void*) &bodc, (void*) &bods,
@@ -1652,6 +1709,7 @@ void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, v
         // Get part hidden property from details.
         get_universal_compound_element_by_name(p7, p8,
             (void*) TUI_HIDDEN_NAME, (void*) TUI_HIDDEN_NAME_COUNT,
+            (void*) &hn, (void*) &hnc, (void*) &hns,
             (void*) &ha, (void*) &hac, (void*) &has,
             (void*) &hm, (void*) &hmc, (void*) &hms,
             (void*) &hd, (void*) &hdc, (void*) &hds,
@@ -1659,6 +1717,7 @@ void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, v
         // Get part inverse property from details.
         get_universal_compound_element_by_name(p7, p8,
             (void*) TUI_INVERSE_NAME, (void*) TUI_INVERSE_NAME_COUNT,
+            (void*) &in, (void*) &inc, (void*) &ins,
             (void*) &ia, (void*) &iac, (void*) &ias,
             (void*) &im, (void*) &imc, (void*) &ims,
             (void*) &id, (void*) &idc, (void*) &ids,
@@ -1666,6 +1725,7 @@ void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, v
         // Get part blink property from details.
         get_universal_compound_element_by_name(p7, p8,
             (void*) TUI_BLINK_NAME, (void*) TUI_BLINK_NAME_COUNT,
+            (void*) &bln, (void*) &blnc, (void*) &blns,
             (void*) &bla, (void*) &blac, (void*) &blas,
             (void*) &blm, (void*) &blmc, (void*) &blms,
             (void*) &bld, (void*) &bldc, (void*) &blds,
@@ -1673,6 +1733,7 @@ void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, v
         // Get part underline property from details.
         get_universal_compound_element_by_name(p7, p8,
             (void*) TUI_UNDERLINE_NAME, (void*) TUI_UNDERLINE_NAME_COUNT,
+            (void*) &un, (void*) &unc, (void*) &uns,
             (void*) &ua, (void*) &uac, (void*) &uas,
             (void*) &um, (void*) &umc, (void*) &ums,
             (void*) &ud, (void*) &udc, (void*) &uds,
@@ -1680,6 +1741,7 @@ void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, v
         // Get part bold property from details.
         get_universal_compound_element_by_name(p7, p8,
             (void*) TUI_BOLD_NAME, (void*) TUI_BOLD_NAME_COUNT,
+            (void*) &bn, (void*) &bnc, (void*) &bns,
             (void*) &ba, (void*) &bac, (void*) &bas,
             (void*) &bm, (void*) &bmc, (void*) &bms,
             (void*) &bd, (void*) &bdc, (void*) &bds,
@@ -1699,6 +1761,7 @@ void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, v
             // Get part shape from super part.
             get_universal_compound_element_by_name(*superm, *supermc,
                 (void*) UI_SHAPE_NAME, (void*) UI_SHAPE_NAME_COUNT,
+                (void*) &shn, (void*) &shnc, (void*) &shns,
                 (void*) &sha, (void*) &shac, (void*) &shas,
                 (void*) &shm, (void*) &shmc, (void*) &shms,
                 (void*) &shd, (void*) &shdc, (void*) &shds,
@@ -1710,6 +1773,7 @@ void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, v
             // Get source part layout from details.
             get_universal_compound_element_by_name(*superm, *supermc,
                 (void*) UI_LAYOUT_NAME, (void*) UI_LAYOUT_NAME_COUNT,
+                (void*) &ln, (void*) &lnc, (void*) &lns,
                 (void*) &la, (void*) &lac, (void*) &las,
                 (void*) &lm, (void*) &lmc, (void*) &lms,
                 (void*) &ld, (void*) &ldc, (void*) &lds,
@@ -1721,6 +1785,7 @@ void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, v
             // Get source part cell from details.
             get_universal_compound_element_by_name(*superm, *supermc,
                 (void*) UI_CELL_NAME, (void*) UI_CELL_NAME_COUNT,
+                (void*) &cn, (void*) &cnc, (void*) &cns,
                 (void*) &ca, (void*) &cac, (void*) &cas,
                 (void*) &cm, (void*) &cmc, (void*) &cms,
                 (void*) &cd, (void*) &cdc, (void*) &cds,
@@ -1732,6 +1797,7 @@ void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, v
             // Get part position from super part.
             get_universal_compound_element_by_name(*superm, *supermc,
                 (void*) UI_POSITION_NAME, (void*) UI_POSITION_NAME_COUNT,
+                (void*) &pn, (void*) &pnc, (void*) &pns,
                 (void*) &pa, (void*) &pac, (void*) &pas,
                 (void*) &pm, (void*) &pmc, (void*) &pms,
                 (void*) &pd, (void*) &pdc, (void*) &pds,
@@ -1743,6 +1809,7 @@ void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, v
             // Get part size from super part.
             get_universal_compound_element_by_name(*superm, *supermc,
                 (void*) UI_SIZE_NAME, (void*) UI_SIZE_NAME_COUNT,
+                (void*) &sn, (void*) &snc, (void*) &sns,
                 (void*) &sa, (void*) &sac, (void*) &sas,
                 (void*) &sm, (void*) &smc, (void*) &sms,
                 (void*) &sd, (void*) &sdc, (void*) &sds,
@@ -1754,6 +1821,7 @@ void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, v
             // Get part background colour from super part.
             get_universal_compound_element_by_name(*superm, *supermc,
                 (void*) UI_BACKGROUND_NAME, (void*) UI_BACKGROUND_NAME_COUNT,
+                (void*) &bgn, (void*) &bgnc, (void*) &bgns,
                 (void*) &bga, (void*) &bgac, (void*) &bgas,
                 (void*) &bgm, (void*) &bgmc, (void*) &bgms,
                 (void*) &bgd, (void*) &bgdc, (void*) &bgds,
@@ -1765,6 +1833,7 @@ void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, v
             // Get part foreground colour from super part.
             get_universal_compound_element_by_name(*superm, *supermc,
                 (void*) UI_FOREGROUND_NAME, (void*) UI_FOREGROUND_NAME_COUNT,
+                (void*) &fgn, (void*) &fgnc, (void*) &fgns,
                 (void*) &fga, (void*) &fgac, (void*) &fgas,
                 (void*) &fgm, (void*) &fgmc, (void*) &fgms,
                 (void*) &fgd, (void*) &fgdc, (void*) &fgds,
@@ -1776,6 +1845,7 @@ void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, v
             // Get part border from super part.
             get_universal_compound_element_by_name(*superm, *supermc,
                 (void*) TUI_BORDER_NAME, (void*) TUI_BORDER_NAME_COUNT,
+                (void*) &bon, (void*) &bonc, (void*) &bons,
                 (void*) &boa, (void*) &boac, (void*) &boas,
                 (void*) &bom, (void*) &bomc, (void*) &boms,
                 (void*) &bod, (void*) &bodc, (void*) &bods,
@@ -1787,6 +1857,7 @@ void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, v
             // Get part hidden property from super part.
             get_universal_compound_element_by_name(*superm, *supermc,
                 (void*) TUI_HIDDEN_NAME, (void*) TUI_HIDDEN_NAME_COUNT,
+                (void*) &hn, (void*) &hnc, (void*) &hns,
                 (void*) &ha, (void*) &hac, (void*) &has,
                 (void*) &hm, (void*) &hmc, (void*) &hms,
                 (void*) &hd, (void*) &hdc, (void*) &hds,
@@ -1798,6 +1869,7 @@ void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, v
             // Get part inverse property from super part.
             get_universal_compound_element_by_name(*superm, *supermc,
                 (void*) TUI_INVERSE_NAME, (void*) TUI_INVERSE_NAME_COUNT,
+                (void*) &in, (void*) &inc, (void*) &ins,
                 (void*) &ia, (void*) &iac, (void*) &ias,
                 (void*) &im, (void*) &imc, (void*) &ims,
                 (void*) &id, (void*) &idc, (void*) &ids,
@@ -1809,6 +1881,7 @@ void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, v
             // Get part blink property from super part.
             get_universal_compound_element_by_name(*superm, *supermc,
                 (void*) TUI_BLINK_NAME, (void*) TUI_BLINK_NAME_COUNT,
+                (void*) &bln, (void*) &blnc, (void*) &blns,
                 (void*) &bla, (void*) &blac, (void*) &blas,
                 (void*) &blm, (void*) &blmc, (void*) &blms,
                 (void*) &bld, (void*) &bldc, (void*) &blds,
@@ -1820,6 +1893,7 @@ void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, v
             // Get part underline property from super part.
             get_universal_compound_element_by_name(*superm, *supermc,
                 (void*) TUI_UNDERLINE_NAME, (void*) TUI_UNDERLINE_NAME_COUNT,
+                (void*) &un, (void*) &unc, (void*) &uns,
                 (void*) &ua, (void*) &uac, (void*) &uas,
                 (void*) &um, (void*) &umc, (void*) &ums,
                 (void*) &ud, (void*) &udc, (void*) &uds,
@@ -1831,6 +1905,7 @@ void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, v
             // Get part bold property from super part.
             get_universal_compound_element_by_name(*superm, *supermc,
                 (void*) TUI_BOLD_NAME, (void*) TUI_BOLD_NAME_COUNT,
+                (void*) &bn, (void*) &bnc, (void*) &bns,
                 (void*) &ba, (void*) &bac, (void*) &bas,
                 (void*) &bm, (void*) &bmc, (void*) &bms,
                 (void*) &bd, (void*) &bdc, (void*) &bds,
@@ -1840,6 +1915,7 @@ void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, v
         // Get source whole position from details.
         get_universal_compound_element_by_name(p9, p10,
             (void*) UI_POSITION_NAME, (void*) UI_POSITION_NAME_COUNT,
+            (void*) &wpn, (void*) &wpnc, (void*) &wpns,
             (void*) &wpa, (void*) &wpac, (void*) &wpas,
             (void*) &wpm, (void*) &wpmc, (void*) &wpms,
             (void*) &wpd, (void*) &wpdc, (void*) &wpds,
@@ -1847,6 +1923,7 @@ void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, v
         // Get source whole size from details.
         get_universal_compound_element_by_name(p9, p10,
             (void*) UI_SIZE_NAME, (void*) UI_SIZE_NAME_COUNT,
+            (void*) &wsn, (void*) &wsnc, (void*) &wsns,
             (void*) &wsa, (void*) &wsac, (void*) &wsas,
             (void*) &wsm, (void*) &wsmc, (void*) &wsms,
             (void*) &wsd, (void*) &wsdc, (void*) &wsds,

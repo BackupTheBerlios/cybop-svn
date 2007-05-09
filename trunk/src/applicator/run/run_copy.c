@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2007-04-16 15:56:30 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2007-05-09 15:32:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -54,41 +54,42 @@ void run_copy(void* p0, void* p1, void* p2, void* p3) {
 
     log_message_debug("Run copy command.");
 
-    // The recursive abstraction.
+    // The recursive name, abstraction, model, details.
+    void** recursiven = &NULL_POINTER;
+    void** recursivenc = &NULL_POINTER;
+    void** recursivens = &NULL_POINTER;
     void** recursivea = &NULL_POINTER;
     void** recursiveac = &NULL_POINTER;
     void** recursiveas = &NULL_POINTER;
-    // The recursive model.
     int** recursivem = (int**) &NULL_POINTER;
     void** recursivemc = &NULL_POINTER;
     void** recursivems = &NULL_POINTER;
-    // The recursive details.
     void** recursived = &NULL_POINTER;
     void** recursivedc = &NULL_POINTER;
     void** recursiveds = &NULL_POINTER;
-
-    // The source abstraction.
+    // The source name, abstraction, model, details.
+    void** sourcen = &NULL_POINTER;
+    void** sourcenc = &NULL_POINTER;
+    void** sourcens = &NULL_POINTER;
     void** sourcea = &NULL_POINTER;
     void** sourceac = &NULL_POINTER;
     void** sourceas = &NULL_POINTER;
-    // The source model.
     int** sourcem = (int**) &NULL_POINTER;
     void** sourcemc = &NULL_POINTER;
     void** sourcems = &NULL_POINTER;
-    // The source details.
     void** sourced = &NULL_POINTER;
     void** sourcedc = &NULL_POINTER;
     void** sourceds = &NULL_POINTER;
-
-    // The destination abstraction.
+    // The destination name, abstraction, model, details.
+    void** destinationn = &NULL_POINTER;
+    void** destinationnc = &NULL_POINTER;
+    void** destinationns = &NULL_POINTER;
     void** destinationa = &NULL_POINTER;
     void** destinationac = &NULL_POINTER;
     void** destinationas = &NULL_POINTER;
-    // The destination model.
     int** destinationm = (int**) &NULL_POINTER;
     void** destinationmc = &NULL_POINTER;
     void** destinationms = &NULL_POINTER;
-    // The destination details.
     void** destinationd = &NULL_POINTER;
     void** destinationdc = &NULL_POINTER;
     void** destinationds = &NULL_POINTER;
@@ -96,6 +97,7 @@ void run_copy(void* p0, void* p1, void* p2, void* p3) {
     // Get recursive option.
     get_universal_compound_element_by_name(p0, p1,
         (void*) RUN_COPY_RECURSIVE_NAME, (void*) RUN_COPY_RECURSIVE_NAME_COUNT,
+        (void*) &recursiven, (void*) &recursivenc, (void*) &recursivens,
         (void*) &recursivea, (void*) &recursiveac, (void*) &recursiveas,
         (void*) &recursivem, (void*) &recursivemc, (void*) &recursivems,
         (void*) &recursived, (void*) &recursivedc, (void*) &recursiveds,
@@ -104,6 +106,7 @@ void run_copy(void* p0, void* p1, void* p2, void* p3) {
     // Get source option.
     get_universal_compound_element_by_name(p0, p1,
         (void*) RUN_COPY_SOURCE_NAME, (void*) RUN_COPY_SOURCE_NAME_COUNT,
+        (void*) &sourcen, (void*) &sourcenc, (void*) &sourcens,
         (void*) &sourcea, (void*) &sourceac, (void*) &sourceas,
         (void*) &sourcem, (void*) &sourcemc, (void*) &sourcems,
         (void*) &sourced, (void*) &sourcedc, (void*) &sourceds,
@@ -112,6 +115,7 @@ void run_copy(void* p0, void* p1, void* p2, void* p3) {
     // Get destination option.
     get_universal_compound_element_by_name(p0, p1,
         (void*) RUN_COPY_DESTINATION_NAME, (void*) RUN_COPY_DESTINATION_NAME_COUNT,
+        (void*) &destinationn, (void*) &destinationnc, (void*) &destinationns,
         (void*) &destinationa, (void*) &destinationac, (void*) &destinationas,
         (void*) &destinationm, (void*) &destinationmc, (void*) &destinationms,
         (void*) &destinationd, (void*) &destinationdc, (void*) &destinationds,

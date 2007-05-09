@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.12 $ $Date: 2007-04-16 15:56:29 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2007-05-09 15:32:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -59,54 +59,55 @@ void compare(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     log_message_debug("Compare two parameters.");
 
-    // The comparison abstraction.
+    // The comparison name, abstraction, model, details.
+    void** cn = &NULL_POINTER;
+    void** cnc = &NULL_POINTER;
+    void** cns = &NULL_POINTER;
     void** ca = &NULL_POINTER;
     void** cac = &NULL_POINTER;
     void** cas = &NULL_POINTER;
-    // The comparison model.
     void** cm = &NULL_POINTER;
     void** cmc = &NULL_POINTER;
     void** cms = &NULL_POINTER;
-    // The comparison details.
     void** cd = &NULL_POINTER;
     void** cdc = &NULL_POINTER;
     void** cds = &NULL_POINTER;
-
-    // The left side abstraction.
+    // The left side name, abstraction, model, details.
+    void** lsn = &NULL_POINTER;
+    void** lsnc = &NULL_POINTER;
+    void** lsns = &NULL_POINTER;
     void** lsa = &NULL_POINTER;
     void** lsac = &NULL_POINTER;
     void** lsas = &NULL_POINTER;
-    // The left side model.
     void** lsm = &NULL_POINTER;
     void** lsmc = &NULL_POINTER;
     void** lsms = &NULL_POINTER;
-    // The left side details.
     void** lsd = &NULL_POINTER;
     void** lsdc = &NULL_POINTER;
     void** lsds = &NULL_POINTER;
-
-    // The right side abstraction.
+    // The right side name, abstraction, model, details.
+    void** rsn = &NULL_POINTER;
+    void** rsnc = &NULL_POINTER;
+    void** rsns = &NULL_POINTER;
     void** rsa = &NULL_POINTER;
     void** rsac = &NULL_POINTER;
     void** rsas = &NULL_POINTER;
-    // The right side model.
     void** rsm = &NULL_POINTER;
     void** rsmc = &NULL_POINTER;
     void** rsms = &NULL_POINTER;
-    // The right side details.
     void** rsd = &NULL_POINTER;
     void** rsdc = &NULL_POINTER;
     void** rsds = &NULL_POINTER;
-
-    // The result abstraction.
+    // The result name, abstraction, model, details.
+    void** rn = &NULL_POINTER;
+    void** rnc = &NULL_POINTER;
+    void** rns = &NULL_POINTER;
     void** ra = &NULL_POINTER;
     void** rac = &NULL_POINTER;
     void** ras = &NULL_POINTER;
-    // The result model.
     void** rm = &NULL_POINTER;
     void** rmc = &NULL_POINTER;
     void** rms = &NULL_POINTER;
-    // The result details.
     void** rd = &NULL_POINTER;
     void** rdc = &NULL_POINTER;
     void** rds = &NULL_POINTER;
@@ -114,6 +115,7 @@ void compare(void* p0, void* p1, void* p2, void* p3, void* p4) {
     // Get comparison.
     get_universal_compound_element_by_name(p0, p1,
         (void*) COMPARISON_NAME, (void*) COMPARISON_NAME_COUNT,
+        (void*) &cn, (void*) &cnc, (void*) &cns,
         (void*) &ca, (void*) &cac, (void*) &cas,
         (void*) &cm, (void*) &cmc, (void*) &cms,
         (void*) &cd, (void*) &cdc, (void*) &cds,
@@ -122,6 +124,7 @@ void compare(void* p0, void* p1, void* p2, void* p3, void* p4) {
     // Get left side.
     get_universal_compound_element_by_name(p0, p1,
         (void*) LEFT_SIDE_NAME, (void*) LEFT_SIDE_NAME_COUNT,
+        (void*) &lsn, (void*) &lsnc, (void*) &lsns,
         (void*) &lsa, (void*) &lsac, (void*) &lsas,
         (void*) &lsm, (void*) &lsmc, (void*) &lsms,
         (void*) &lsd, (void*) &lsdc, (void*) &lsds,
@@ -130,6 +133,7 @@ void compare(void* p0, void* p1, void* p2, void* p3, void* p4) {
     // Get right side.
     get_universal_compound_element_by_name(p0, p1,
         (void*) RIGHT_SIDE_NAME, (void*) RIGHT_SIDE_NAME_COUNT,
+        (void*) &rsn, (void*) &rsnc, (void*) &rsns,
         (void*) &rsa, (void*) &rsac, (void*) &rsas,
         (void*) &rsm, (void*) &rsmc, (void*) &rsms,
         (void*) &rsd, (void*) &rsdc, (void*) &rsds,
@@ -138,6 +142,7 @@ void compare(void* p0, void* p1, void* p2, void* p3, void* p4) {
     // Get result.
     get_universal_compound_element_by_name(p0, p1,
         (void*) RESULT_NAME, (void*) RESULT_NAME_COUNT,
+        (void*) &rn, (void*) &rnc, (void*) &rns,
         (void*) &ra, (void*) &rac, (void*) &ras,
         (void*) &rm, (void*) &rmc, (void*) &rms,
         (void*) &rd, (void*) &rdc, (void*) &rds,
