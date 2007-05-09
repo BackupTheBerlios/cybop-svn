@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.20 $ $Date: 2007-04-16 15:50:29 $ $Author: christian $
+ * @version $Revision: 1.21 $ $Date: 2007-05-09 15:29:25 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -74,7 +74,7 @@ void parse_integer_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                     void** d = (void**) p0;
 
-                    log_message_debug("Parse integer vector.");
+                    log_message_debug("Information: Parse integer vector.");
 
                     // The comma index.
                     int i = *NUMBER_MINUS_1_INTEGER;
@@ -153,27 +153,148 @@ void parse_integer_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                     } else {
 
-                        log_message_debug("Could not parse integer vector. The source string starts with a comma character.");
+                        log_message_debug("Error: Could not parse integer vector. The source string starts with a comma character.");
                     }
 
                 } else {
 
-                    log_message_debug("Could not parse integer vector. The destination is null.");
+                    log_message_debug("Error: Could not parse integer vector. The destination is null.");
                 }
 
             } else {
 
-                log_message_debug("Could not parse integer vector. The destination count is null.");
+                log_message_debug("Error: Could not parse integer vector. The destination count is null.");
             }
 
         } else {
 
-            log_message_debug("Could not parse integer vector. The destination size is null.");
+            log_message_debug("Error: Could not parse integer vector. The destination size is null.");
         }
 
     } else {
 
-        log_message_debug("Could not parse integer vector. The source count is null.");
+        log_message_debug("Error: Could not parse integer vector. The source count is null.");
+    }
+}
+
+/**
+ * Serialises the integer vector elements and creates a byte stream from it.
+ *
+ * @param p0 the destination byte stream (Hand over as reference!)
+ * @param p1 the destination count
+ * @param p2 the destination size
+ * @param p3 the source vector model
+ * @param p4 the source count
+ * @param p5 the iteration count
+ */
+void serialise_integer_vector_elements(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
+
+    if (p5 != NULL_POINTER) {
+
+        int* it = (int*) p5;
+
+        if (p4 != NULL_POINTER) {
+
+            int* sc = (int*) p4;
+
+            if (p2 != NULL_POINTER) {
+
+                int* ds = (int*) p2;
+
+                if (p1 != NULL_POINTER) {
+
+                    int* dc = (int*) p1;
+
+                    if (p0 != NULL_POINTER) {
+
+                        void** d = (void**) p0;
+
+                        log_message_debug("Debug: Serialise integer vector elements.");
+
+                        // The integer.
+                        void* i = NULL_POINTER;
+                        // The integer character.
+                        void* c = NULL_POINTER;
+                        int cc = *NUMBER_0_INTEGER;
+                        int cs = *NUMBER_0_INTEGER;
+
+                        if (*sc > *NUMBER_0_INTEGER) {
+
+                            // Get first integer from vector.
+                            get(p3, (void*) NUMBER_0_INTEGER, &i, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+
+                            // Serialise first integer.
+                            serialise_integer((void*) &c, (void*) &cc, (void*) &cs, i, (void*) PRIMITIVE_COUNT);
+
+                            // CAUTION! Add one for the comma character added further below!
+                            if ((*dc + *NUMBER_1_INTEGER + cc) >= *ds) {
+
+                                // The new destination integer vector size.
+                                // CAUTION! Add one for the comma character added further below!
+                                // CAUTION! Add constant in case *dc is zero!
+                                *ds = (*dc * *INTEGER_VECTOR_REALLOCATE_FACTOR) + *NUMBER_1_INTEGER + cc;
+
+                                // Reallocate destination character array.
+                                reallocate_array(p0, p1, p2, (void*) CHARACTER_ARRAY);
+                            }
+
+                            if (*it > *NUMBER_0_INTEGER) {
+
+                                // If this is NOT the first iteration cycle through the source array,
+                                // then add a comma character before adding a new integer element,
+                                // in order to separate from already existing elements.
+
+                                // Set comma character.
+                                set_array_elements(*d, p1, (void*) COMMA_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+                                *dc = *dc + *PRIMITIVE_COUNT;
+                            }
+
+                            // Set integer characters.
+                            set_array_elements(*d, p1, c, (void*) &cc, (void*) CHARACTER_ARRAY);
+                            *dc = *dc + cc;
+
+                            // Determine remaining vector elements.
+                            //
+                            // CAUTION! The source count has to be greater than zero!
+                            // However, this does not have to be checked here,
+                            // as it is already checked further above.
+                            void* e = p3 + *NUMBER_1_INTEGER;
+                            int ec = *sc - *NUMBER_1_INTEGER;
+
+                            // Increment iteration count.
+                            (*it)++;
+
+                            // Recursively call this procedure for further integer numbers.
+                            serialise_integer_vector_elements(p0, p1, p2, e, (void*) &ec, p5);
+
+                        } else {
+
+                            log_message_debug("Error: Could not serialise integer vector elements. The source count is zero.");
+                        }
+
+                    } else {
+
+                        log_message_debug("Error: Could not serialise integer vector elements. The destination is null.");
+                    }
+
+                } else {
+
+                    log_message_debug("Error: Could not serialise integer vector elements. The destination count is null.");
+                }
+
+            } else {
+
+                log_message_debug("Error: Could not serialise integer vector elements. The destination size is null.");
+            }
+
+        } else {
+
+            log_message_debug("Error: Could not serialise integer vector elements. The source count is null.");
+        }
+
+    } else {
+
+        log_message_debug("Error: Could not serialise integer vector elements. The iteration count is null.");
     }
 }
 
@@ -188,83 +309,14 @@ void parse_integer_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
  */
 void serialise_integer_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p4 != NULL_POINTER) {
+    log_message_debug("Information: Serialise integer vector.");
 
-        int* sc = (int*) p4;
+    // The iteration count.
+    int i = *NUMBER_0_INTEGER;
 
-        if (p2 != NULL_POINTER) {
-
-            int* ds = (int*) p2;
-
-            if (p1 != NULL_POINTER) {
-
-                int* dc = (int*) p1;
-
-                if (p0 != NULL_POINTER) {
-
-                    void** d = (void**) p0;
-
-                    log_message_debug("Serialise integer vector.");
-
-                    // The integer.
-                    void** i = &NULL_POINTER;
-                    // The integer character.
-                    void* c = NULL_POINTER;
-                    int cc = *NUMBER_0_INTEGER;
-                    int cs = *NUMBER_0_INTEGER;
-                    // The remaining vector elements.
-                    void* e = p3 + *NUMBER_1_INTEGER;
-                    int ec = *sc - *NUMBER_1_INTEGER;
-
-                    if (*sc > *NUMBER_0_INTEGER) {
-
-                        // Get integer from vector.
-                        get(p3, (void*) NUMBER_0_INTEGER, &i, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-
-                        serialise_integer((void*) &c, (void*) &cc, (void*) &cs, *i, (void*) PRIMITIVE_COUNT);
-
-                        if ((*dc + cc + *NUMBER_1_INTEGER) >= *ds) {
-
-                            *ds = *ds + cc + *NUMBER_1_INTEGER;
-
-                            reallocate_array(p0, p1, p2, (void*) CHARACTER_ARRAY);
-                        }
-
-                        // Set integer characters.
-                        set_array_elements(*d, p1, c, (void*) &cc, (void*) CHARACTER_ARRAY);
-                        *dc = *dc + cc;
-
-                        // Set comma character.
-                        set_array_elements(*d, p1, (void*) COMMA_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
-                        *dc = *dc + *PRIMITIVE_COUNT;
-
-                        // Recursively call this procedure for further integer numbers.
-                        serialise_integer_vector(p0, p1, p2, e, (void*) &ec);
-
-                    } else {
-
-                        log_message_debug("Could not serialise integer vector. The source count is zero.");
-                    }
-
-                } else {
-
-                    log_message_debug("Could not serialise integer vector. The destination is null.");
-                }
-
-            } else {
-
-                log_message_debug("Could not serialise integer vector. The destination count is null.");
-            }
-
-        } else {
-
-            log_message_debug("Could not serialise integer vector. The destination size is null.");
-        }
-
-    } else {
-
-        log_message_debug("Could not serialise integer vector. The source count is null.");
-    }
+    // Serialise integer vector elements.
+    // Hand over zero iteration value, since this is the initial call.
+    serialise_integer_vector_elements(p0, p1, p2, p3, p4, (void*) &i);
 }
 
 /* INTEGER_VECTOR_CONVERTER_SOURCE */
