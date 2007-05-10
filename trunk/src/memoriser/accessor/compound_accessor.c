@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.32 $ $Date: 2007-05-09 15:32:40 $ $Author: christian $
+ * @version $Revision: 1.33 $ $Date: 2007-05-10 22:57:55 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -56,7 +56,7 @@
  * @param p8 the type
  * @param p9 the type count
  */
-void parse(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9);
+//?? void parse(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9);
 
 //
 // Hierarchical name handling.
@@ -1349,6 +1349,7 @@ void remove_compound_element_by_index(void* p0, void* p1, void* p2, void* p3) {
  */
 void reindex_compound_elements_forming_list(void* p0, void* p1, void* p2, int* p3) {
 
+/*??
     if ((p0 != NULL_POINTER) && (p1 != NULL_POINTER)
         && (p2 != NULL_POINTER) && (p3 != NULL_POINTER)) {
 
@@ -1433,6 +1434,7 @@ void reindex_compound_elements_forming_list(void* p0, void* p1, void* p2, int* p
         // Deallocate index string.
         deallocate_array((void*) &indexstr, (void*) &indexstr_count, (void*) CHARACTER_ARRAY);
     }
+*/
 }
 
 /**

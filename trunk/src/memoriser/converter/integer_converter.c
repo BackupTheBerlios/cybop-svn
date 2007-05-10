@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.13 $ $Date: 2007-04-16 15:50:29 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2007-05-10 22:57:55 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -125,66 +125,81 @@ void parse_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
  */
 void serialise_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p2 != NULL_POINTER) {
+    if (p4 != NULL_POINTER) {
 
-        int* ds = (int*) p2;
+        int* sc = (int*) p4;
 
-        if (p1 != NULL_POINTER) {
+        if (p2 != NULL_POINTER) {
 
-            int* dc = (int*) p1;
+            int* ds = (int*) p2;
 
-            if (p0 != NULL_POINTER) {
+            if (p1 != NULL_POINTER) {
 
-                char** d = (char**) p0;
+                int* dc = (int*) p1;
 
-                log_message_debug("Information: Serialise integer.");
+                if (p0 != NULL_POINTER) {
 
-                // The integer value.
-                int* v = NULL_POINTER;
+                    char** d = (char**) p0;
 
-                // Get integer value.
-                get_array_elements(p3, (void*) PRIMITIVE_VALUE_INDEX, (void*) &v, (void*) INTEGER_ARRAY);
+                    log_message_debug("Information: Serialise integer.");
 
-                //?? TODO: set_array_elements is missing!
-                //?? The get_array_elements procedure does NOT copy values;
-                //?? it returns just a reference to the corresponding value!
+                    if (*sc > *NUMBER_0_INTEGER) {
 
-                // Transform source integer to destination string.
-                *dc = snprintf(*d, *ds, "%i", *v);
+                        // CAUTION! Only serialise integer, if one exists!
+                        // Otherwise, the "snprintf" function call will cause a segmentation fault.
 
-                // Set destination string size one greater than the count
-                // to have space for the terminating null character.
-                *ds = *dc + *NUMBER_1_INTEGER;
+                        // The integer value.
+                        int* v = NULL_POINTER;
 
-                // Reallocate destination string.
-                reallocate_array(p0, p1, p2, (void*) CHARACTER_ARRAY);
+                        // Get integer value.
+                        get_array_elements(p3, (void*) PRIMITIVE_VALUE_INDEX, (void*) &v, (void*) INTEGER_ARRAY);
 
-                // Transform source integer to destination string.
-                *dc = snprintf(*d, *ds, "%i", *v);
+                        // Transform source integer to destination string.
+                        *dc = snprintf(*d, *ds, "%i", *v);
 
-                // CAUTION! Recalculate string count because only in versions
-                // of the GNU C library prior to 2.1, the snprintf function
-                // returns the number of characters stored, not including the
-                // terminating null; unless there was not enough space in the
-                // string to store the result in which case -1 is returned.
-                // This was CHANGED in order to comply with the ISO C99 standard.
-                // As usual, the string count does NOT contain the terminating
-                // null character.
-                *dc = strlen(*d);
+                        // Set destination string size one greater than the count
+                        // to have space for the terminating null character.
+                        *ds = *dc + *NUMBER_1_INTEGER;
+
+                        // Reallocate destination string.
+                        reallocate_array(p0, p1, p2, (void*) CHARACTER_ARRAY);
+
+                        // Transform source integer to destination string.
+                        *dc = snprintf(*d, *ds, "%i", *v);
+
+                        // CAUTION! Recalculate string count because only in versions
+                        // of the GNU C library prior to 2.1, the snprintf function
+                        // returns the number of characters stored, not including the
+                        // terminating null; unless there was not enough space in the
+                        // string to store the result in which case -1 is returned.
+                        // This was CHANGED in order to comply with the ISO C99 standard.
+                        // As usual, the string count does NOT contain the terminating
+                        // null character.
+                        *dc = strlen(*d);
+
+                    } else {
+
+                        log_message_debug("Could not serialise integer. The source count is zero.");
+                    }
+
+                } else {
+
+                    log_message_debug("Could not serialise integer. The destination is null.");
+                }
 
             } else {
 
-                log_message_debug("Could not serialise integer. The destination is null.");
+                log_message_debug("Could not serialise integer. The destination count is null.");
             }
 
         } else {
 
-            log_message_debug("Could not serialise integer. The destination count is null.");
+            log_message_debug("Could not serialise integer. The destination size is null.");
         }
 
     } else {
 
-        log_message_debug("Could not serialise integer. The destination size is null.");
+        log_message_debug("Could not serialise integer. The source count is null.");
     }
 }
 

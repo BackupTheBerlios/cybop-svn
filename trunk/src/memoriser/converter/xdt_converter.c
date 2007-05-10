@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2007-04-16 15:50:29 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2007-05-10 22:57:55 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -33,10 +33,31 @@
 #include "../../globals/constants/character/character_constants.c"
 #include "../../globals/constants/log_message/log_message_constants.c"
 #include "../../globals/logger/logger.c"
-#include "../../memoriser/array.c"
 #include "../../memoriser/converter/character_vector_converter.c"
 #include "../../memoriser/converter/date_time_converter.c"
 #include "../../memoriser/converter/integer_vector_converter.c"
+#include "../../memoriser/array.c"
+
+//
+// Forward declarations.
+//
+
+/**
+ * Parses the byte stream according to the given document type
+ * and creates a document model from it.
+ *
+ * @param p0 the destination model (Hand over as reference!)
+ * @param p1 the destination model count
+ * @param p2 the destination model size
+ * @param p3 the destination details (Hand over as reference!)
+ * @param p4 the destination details count
+ * @param p5 the destination details size
+ * @param p6 the source
+ * @param p7 the source count
+ * @param p8 the type
+ * @param p9 the type count
+ */
+void parse(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9);
 
 /**
  * Parses an xdt field.

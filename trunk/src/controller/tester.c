@@ -24,7 +24,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.3 $ $Date: 2007-04-26 23:17:09 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2007-05-10 22:57:55 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -942,52 +942,82 @@ void test_console() {
 }
 
 /**
- * Tests the integer parser.
+ * Tests the parse integer vector function.
  */
-void test_integer_parser() {
+void test_parse_integer_vector() {
 
-    fputs("Test integer parser:\n", stdout);
+    fputs("Test parse integer vector:\n", stdout);
 
-/*??
-    // The source string.
-    char ssa[] = {'1', '9', '7', '1'};
-    void* ss = ssa;
-    int ssc = 4;
+    // The source character array.
+    char sa[] = {'1', ',', '2', ',', '3', ',', '4', ',', '5'};
+    void* s = sa;
+    int sc = *NUMBER_5_INTEGER;
 
-    // The destination integer.
-    int di = -1;
-    int dic = -1;
-    int dis = -1;
+    // The destination integer vector.
+    void* d = NULL_POINTER;
+    int dc = *NUMBER_0_INTEGER;
+    int ds = *NUMBER_0_INTEGER;
 
-    parse((void*) &di, (void*) &dic, (void*) &dis, (void*) &ss, (void*) &ssc,
-        (void*) &INTEGER_VECTOR_ABSTRACTION, (void*) &INTEGER_VECTOR_ABSTRACTION_COUNT);
+    // Allocate integer vector.
+    allocate((void*) &d, (void*) &ds, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
-    fprintf(stderr, "Parsed source string results in destination integer: %i\n", di);
+    // Parse character array into integer vector.
+    parse_integer_vector((void*) &d, (void*) &dc, (void*) &ds, s, (void*) &sc);
 
-    // The source integer.
-    int si = 1980;
-    int sic = -1;
+    // The integer values.
+    int* i0 = NULL_POINTER;
+    int* i1 = NULL_POINTER;
+    int* i2 = NULL_POINTER;
 
-    // The destination string.
-    char* ds = NULL_POINTER;
-    int dsc = 0;
-    int dss = 0;
+    // Get integer at index 0 from integer vector.
+    get(d, (void*) NUMBER_0_INTEGER, (void*) &i0, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    // Get integer at index 1 from integer vector.
+    get(d, (void*) NUMBER_1_INTEGER, (void*) &i1, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    // Get integer at index 2 from integer vector.
+    get(d, (void*) NUMBER_2_INTEGER, (void*) &i2, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
-    // Create destination string.
-    allocate_array((void*) &ds, (void*) &CHARACTER_ARRAY, (void*) &dss);
+    fprintf(stderr, "Integer 0: %i\n", *i0);
+    fprintf(stderr, "Integer 1: %i\n", *i1);
+    fprintf(stderr, "Integer 2: %i\n", *i2);
 
-    serialise((void*) &ds, (void*) &dsc, (void*) &dss, (void*) &si, (void*) &sic,
-        (void*) &INTEGER_VECTOR_ABSTRACTION, (void*) &INTEGER_VECTOR_ABSTRACTION_COUNT);
-
-    fprintf(stderr, "Serialised source integer results in destination string: %s\n", ds);
-
-    // Destroy destination string.
-    deallocate_array((void*) &ds, (void*) &CHARACTER_ARRAY, (void*) &dss);
-*/
+    // Deallocate integer vector.
+    deallocate((void*) &d, (void*) &ds, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 }
 
 /**
- * Tests the "serialise_integer" function.
+ * Tests the serialise integer vector function.
+ */
+void test_serialise_integer_vector() {
+
+    fputs("Test serialise integer vector:\n", stdout);
+
+    // The source integer array.
+    int sa[] = {'1', '2', '3'};
+    void* s = sa;
+    int sc = *NUMBER_3_INTEGER;
+
+    // The destination character array.
+    char* d = NULL_POINTER;
+    int dc = *NUMBER_0_INTEGER;
+    int ds = *NUMBER_0_INTEGER;
+
+    // Allocate destination character vector.
+    allocate((void*) &d, (void*) &ds, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+
+    // Use compound count as index to create the element name suffix,
+    // because the element is added at the end of the compound container.
+    serialise_integer_vector((void*) &d, (void*) &dc, (void*) &ds, s, (void*) &sc);
+
+    fprintf(stdout, "Serialised character array: %s\n", d);
+    fprintf(stdout, "Serialised character array count: %i\n", dc);
+    fprintf(stdout, "Serialised character array size: %i\n", ds);
+
+    // Deallocate destination character vector.
+    deallocate((void*) &d, (void*) &ds, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+}
+
+/**
+ * Tests the serialise integer function.
  */
 void test_serialise_integer() {
 
@@ -1069,12 +1099,13 @@ void test() {
 //??    test_pointer_cast();
 //??    test_character_array_single_element();
 //??    test_character_array_multiple_elements();
-    test_pointer_return();
-    test_pointer_array();
+//??    test_pointer_return();
+//??    test_pointer_array();
 //??    test_file_read();
 //??    test_file_write();
 //??    test_console();
-//??    test_integer_parser();
+    test_parse_integer_vector();
+    test_serialise_integer_vector();
 //??    test_serialise_integer();
 //??    test_float_constants();
 }

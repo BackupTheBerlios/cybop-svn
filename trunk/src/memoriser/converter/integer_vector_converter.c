@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.21 $ $Date: 2007-05-09 15:29:25 $ $Author: christian $
+ * @version $Revision: 1.22 $ $Date: 2007-05-10 22:57:55 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -76,46 +76,41 @@ void parse_integer_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                     log_message_debug("Information: Parse integer vector.");
 
-                    // The comma index.
-                    int i = *NUMBER_MINUS_1_INTEGER;
-                    // The first element count.
-                    int fec = *NUMBER_0_INTEGER;
-                    // The integer value.
-                    int v = *NUMBER_0_INTEGER;
-                    // The remaining vector elements.
-                    void* e = NULL_POINTER;
-                    int ec = *NUMBER_0_INTEGER;
+                    // CAUTION! This check is necessary since otherwise,
+                    // the array border gets crossed and a comma might be found
+                    // that actually does not belong to the array.
+                    if (*sc > *NUMBER_0_INTEGER) {
 
-                    // Find comma character index.
-                    get_array_elements_index(p3, p4, (void*) COMMA_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &i, (void*) CHARACTER_ARRAY);
+                        // The comma index.
+                        int i = *NUMBER_MINUS_1_INTEGER;
+                        // The first element count.
+                        int fec = *NUMBER_0_INTEGER;
+                        // The integer value.
+                        int v = *NUMBER_0_INTEGER;
+                        // The remaining vector elements.
+                        void* e = NULL_POINTER;
+                        int ec = *NUMBER_0_INTEGER;
 
-                    // CAUTION! Do NOT change this comparison to greater than >
-                    // or something else, because -1 must be allowed! See below.
-                    if (i != *NUMBER_0_INTEGER) {
+                        // Find comma character index.
+                        get_array_elements_index(p3, p4, (void*) COMMA_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &i, (void*) CHARACTER_ARRAY);
 
-                        if (i != *NUMBER_MINUS_1_INTEGER) {
+                        if (i > *NUMBER_0_INTEGER) {
 
-                            // Set first element count to comma index, if comma was found.
+                            // Set first element count to comma index only if a comma
+                            // was found at a position greater than the zero index.
                             fec = i;
 
                         } else {
 
-                            // Set first element count to source count, if no comma was found.
+                            // Set first element count to source count, if no comma
+                            // was found, or if the string started with a comma.
                             fec = *sc;
                         }
 
-                        // Check vector size.
-                        if (*dc >= *ds) {
-
-                            // Calculate new vector size.
-                            //
-                            // CAUTION! Add number one as summand at the end to
-                            // avoid a zero result, since the initial size is zero!
-                            *ds = *ds * *INTEGER_VECTOR_REALLOCATE_FACTOR + *NUMBER_1_INTEGER;
-
-                            // Reallocate vector.
-                            reallocate(p0, p1, p2, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-                        }
+                        // The variable fec is in any case greater than zero.
+                        // Either, it is equal to the source count, which was checked
+                        // to be greater than zero above, or it is the comma index,
+                        // in which case it is also greater than zero.
 
                         // Parse integer.
                         //
@@ -127,6 +122,19 @@ void parse_integer_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
                         // (which is 3, as needed for the length)
                         parse_integer((void*) &v, NULL_POINTER, NULL_POINTER, p3, (void*) &fec);
 
+                        // Check vector size.
+                        if (*dc >= *ds) {
+
+                            // Calculate new vector size.
+                            //
+                            // CAUTION! Add number one as summand at the end to
+                            // avoid a zero result, since the initial size is zero!
+                            *ds = (*ds * *INTEGER_VECTOR_REALLOCATE_FACTOR) + *NUMBER_1_INTEGER;
+
+                            // Reallocate vector.
+                            reallocate(p0, p1, p2, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+                        }
+
                         // Set integer value.
                         set(*d, (void*) dc, (void*) &v, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
@@ -135,25 +143,26 @@ void parse_integer_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                         if (i > *NUMBER_0_INTEGER) {
 
+                            // If a comma was found, then process the remaining integer vector elements.
+
                             // The next vector element.
                             //
                             // Example:
-                            // Vector elements: "200,300,400"
+                            // Character vector elements: "200,300,400"
                             // The number 200 character array length is 3.
                             // Index of first comma: 3
                             // Next vector element starts at index: 4
                             // (which is the comma index plus 1)
-                            e = p3 + i + *NUMBER_1_INTEGER;
+                            e = p3 + (i + *NUMBER_1_INTEGER);
                             ec = *sc - (i + *NUMBER_1_INTEGER);
 
-                            // Recursively call this procedure for the remaining
-                            // integer vector elements, if comma was found.
+                            // Recursively call this function.
                             parse_integer_vector(p0, p1, p2, e, (void*) &ec);
                         }
 
                     } else {
 
-                        log_message_debug("Error: Could not parse integer vector. The source string starts with a comma character.");
+                        log_message_debug("Error: Could not parse integer vector. The source count is zero.");
                     }
 
                 } else {
@@ -183,8 +192,8 @@ void parse_integer_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
  * @param p0 the destination byte stream (Hand over as reference!)
  * @param p1 the destination count
  * @param p2 the destination size
- * @param p3 the source vector model
- * @param p4 the source count
+ * @param p3 the source integer vector model
+ * @param p4 the source integer vector model count
  * @param p5 the iteration count
  */
 void serialise_integer_vector_elements(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
@@ -258,7 +267,7 @@ void serialise_integer_vector_elements(void* p0, void* p1, void* p2, void* p3, v
                             // CAUTION! The source count has to be greater than zero!
                             // However, this does not have to be checked here,
                             // as it is already checked further above.
-                            void* e = p3 + *NUMBER_1_INTEGER;
+                            void* e = p3 + (*NUMBER_1_INTEGER * *INTEGER_PRIMITIVE_SIZE);
                             int ec = *sc - *NUMBER_1_INTEGER;
 
                             // Increment iteration count.
