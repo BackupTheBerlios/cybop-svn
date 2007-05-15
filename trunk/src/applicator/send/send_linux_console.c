@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.49 $ $Date: 2007-05-08 22:02:38 $ $Author: christian $
+ * @version $Revision: 1.50 $ $Date: 2007-05-15 14:52:05 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -99,31 +99,20 @@ void send_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4,
         }
     }
 
-log_message_debug("TEST 0");
-
     // Serialise textual user interface (tui) into array.
     serialise_linux_console((void*) &a, (void*) &ac, (void*) &as, p1, p2, p3, p4, p5, p6, NULL_POINTER, NULL_POINTER, p7, p8, p11, p12);
-
-log_message_debug("TEST 1");
 
     // The linux console (terminal).
     void** t = &NULL_POINTER;
 
-log_message_debug("TEST 2");
-
     // Get linux console.
     get_array_elements(p0, (void*) LINUX_CONSOLE_FILE_DESCRIPTOR_INTERNAL, (void*) &t, (void*) POINTER_ARRAY);
 
-log_message_debug("TEST 3");
-
     // Write serialised array as message to linux console.
-    write_data(t, NULL_POINTER, NULL_POINTER, a, (void*) &ac, (void*) LINUX_CONSOLE_MODEL, (void*) LINUX_CONSOLE_MODEL_COUNT);
-
-log_message_debug("TEST 4");
+    write_data((void*) t, NULL_POINTER, NULL_POINTER, a, (void*) &ac, (void*) LINUX_CONSOLE_MODEL, (void*) LINUX_CONSOLE_MODEL_COUNT);
 
     // Deallocate array.
     deallocate((void*) &a, (void*) &as, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
-log_message_debug("TEST 5");
 }
 
 /* SEND_LINUX_CONSOLE_SOURCE */

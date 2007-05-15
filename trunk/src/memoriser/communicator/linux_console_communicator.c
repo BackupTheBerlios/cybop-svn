@@ -24,7 +24,7 @@
  * - receive a file stream into a byte array
  * - send a file stream from a byte array
  *
- * @version $Revision: 1.6 $ $Date: 2007-05-08 22:02:38 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2007-05-15 14:52:05 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -36,6 +36,7 @@
 #include <wchar.h>
 #include "../../globals/constants/cybol/cybol_abstraction_constants.c"
 #include "../../globals/constants/character/character_constants.c"
+#include "../../globals/constants/character/wide_character_constants.c"
 #include "../../globals/constants/integer/integer_constants.c"
 #include "../../globals/constants/log_message/log_message_constants.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
@@ -112,7 +113,7 @@ void write_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
             char* loc = setlocale(LC_ALL, "");
 
             // The terminated control sequences string.
-            void* ts = NULL_POINTER;
+            wchar_t* ts = NULL_POINTER;
             // Increase control sequences count by one, for termination character.
             int tss = *sc + *NUMBER_1_INTEGER;
 
@@ -121,36 +122,43 @@ void write_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             // Set terminated control sequences string by first copying the actual
             // control sequences and then adding the null termination character.
-            set_array_elements(ts, (void*) NUMBER_0_INTEGER, p3, p4, (void*) WIDE_CHARACTER_ARRAY);
-//??            set_array_elements(ts, p4, (void*) NULL_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+            set_array_elements((void*) ts, (void*) NUMBER_0_INTEGER, p3, p4, (void*) WIDE_CHARACTER_ARRAY);
+            set_array_elements((void*) ts, p4, (void*) NULL_CONTROL_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
 
-            // Write to terminal.
-//??            fputs((char*) ts, *d);
-//??            fputws((wchar_t*) ts, *d);
-            fprintf(*d, "%ls", (wchar_t*) ts);
+            if (*d != NULL_POINTER) {
 
-            // Flush any buffered output on the stream to the file.
-            //
-            // If this was not done here, the buffered output on the
-            // stream would only get flushed automatically when either:
-            // - one tried to do output and the output buffer is full
-            // - the stream was closed
-            // - the program terminated by calling exit
-            // - a newline was written with the stream being line buffered
-            // - an input operation on any stream actually read data from its file
-            fflush(*d);
+                // Write to terminal.
+    //??            fputs((char*) ts, *d);
+    //??            fputws((wchar_t*) ts, *d);
+                fprintf(*d, "%ls", ts);
+
+                // Flush any buffered output on the stream to the file.
+                //
+                // If this was not done here, the buffered output on the
+                // stream would only get flushed automatically when either:
+                // - one tried to do output and the output buffer is full
+                // - the stream was closed
+                // - the program terminated by calling exit
+                // - a newline was written with the stream being line buffered
+                // - an input operation on any stream actually read data from its file
+                fflush(*d);
+
+            } else {
+
+                log_message_debug("Could not write to linux console. The destination terminal file is null.");
+            }
 
             // Destroy terminated control sequences.
             deallocate_array((void*) &ts, (void*) &tss, (void*) WIDE_CHARACTER_ARRAY);
 
         } else {
 
-            log_message_debug("Could not write to linux console. The destination terminal file is null.");
+            log_message_debug("Could not write to linux console. The destination terminal file parameter is null.");
         }
 
     } else {
 
-        log_message_debug("Could not write to linux console. The source terminal control sequences count is null.");
+        log_message_debug("Could not write to linux console. The source terminal control sequences count parameter is null.");
     }
 }
 

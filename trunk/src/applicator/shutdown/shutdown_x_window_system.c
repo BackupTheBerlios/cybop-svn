@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.17 $ $Date: 2007-04-16 15:56:30 $ $Author: christian $
+ * @version $Revision: 1.18 $ $Date: 2007-05-15 14:52:05 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  *
@@ -70,11 +70,21 @@ void shutdown_x_window_system(void* p0, void* p1, void* p2, void* p3) {
     // The display internal.
     struct _XDisplay** di = (struct _XDisplay**) &NULL_POINTER;
 
+    fprintf(stderr, "TEST di 1: %i \n", di);
+    fprintf(stderr, "TEST *di 1: %i \n", *di);
+
     // Get display internal.
     get(p0, (void*) X_WINDOW_SYSTEM_DISPLAY_INTERNAL, (void*) &di, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
+    fprintf(stderr, "TEST di 2: %i \n", di);
+    fprintf(stderr, "TEST *di 2: %i \n", *di);
+
+    fprintf(stderr, "TEST NULL_POINTER: %i \n", NULL_POINTER);
+
     // Only destroy display if existent.
     if (*di != NULL_POINTER) {
+
+    fprintf(stderr, "TEST *di 3: %i \n", *di);
 
         // Interrupt x window system service thread.
         interrupt_x_window_system();

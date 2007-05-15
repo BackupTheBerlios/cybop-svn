@@ -38,7 +38,7 @@
  *
  * Array elements are accessed over their index (array base pointer + index).
  *
- * @version $Revision: 1.11 $ $Date: 2007-04-16 15:50:29 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2007-05-15 14:52:05 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -47,15 +47,61 @@
 
 #include <stdlib.h>
 #include <string.h>
+#include "../../globals/constants/integer/integer_constants.c"
 #include "../../globals/constants/log_message/log_message_constants.c"
 #include "../../globals/variables/variables.c"
 #include "../../globals/logger/logger.c"
 
 /**
+ * TEST init the pointer array.
+ *
+ * @param p0 the array
+ * @param p1 the array count
+ * @param p2 the value to be set
+ */
+void test_init(void* p0, void* p1, void* p2) {
+
+    if (p2 != NULL_POINTER) {
+
+        void** v = (void**) p2;
+
+        if (p1 != NULL_POINTER) {
+
+            int* ac = (int*) p1;
+
+            int j = *NUMBER_0_INTEGER;
+            void** d = &NULL_POINTER;
+
+            while (*NUMBER_1_INTEGER) {
+
+                if (j >= *ac) {
+
+                    break;
+                }
+
+                d = (void**) (p0 + (j * *POINTER_PRIMITIVE_SIZE));
+
+                *d = *v;
+
+                j++;
+            }
+
+        } else {
+
+            log_message_debug("Error: Could not test init pointer array. The array size is null.");
+        }
+
+    } else {
+
+        log_message_debug("Error: Could not test init pointer array. The value is null.");
+    }
+}
+
+/**
  * Allocates the pointer array.
  *
  * @param p0 the array (Hand over as reference!)
- * @param p1 the size
+ * @param p1 the array size
  */
 void allocate_pointer_array(void* p0, void* p1) {
 
@@ -71,7 +117,7 @@ void allocate_pointer_array(void* p0, void* p1) {
 
             // Determine the memory area to be allocated.
             // It is the product of the given size and the type size.
-            int m = *s * *POINTER_PRIMITIVE_SIZE;
+            size_t m = *s * *POINTER_PRIMITIVE_SIZE;
 
             // A minimal space in memory is always allocated,
             // even if the requested size is zero.
@@ -79,7 +125,8 @@ void allocate_pointer_array(void* p0, void* p1) {
             *a = (void*) malloc(m);
 
             // Initialise array elements with null pointer.
-            memset(*a, 0, m);
+//??            memset(*a, NULL_POINTER, m);
+            test_init(*a, p1, (void*) &NULL_POINTER);
 
         } else {
 
@@ -148,7 +195,7 @@ void reallocate_pointer_array(void* p0, void* p1, void* p2) {
 
                 // Determine the memory area to be allocated.
                 // It is the product of the given size and the type size.
-                int m = *s * *POINTER_PRIMITIVE_SIZE;
+                size_t m = *s * *POINTER_PRIMITIVE_SIZE;
 
                 // Create a new array with extended size.
                 *a = (void*) realloc(*a, m);
@@ -160,10 +207,12 @@ void reallocate_pointer_array(void* p0, void* p1, void* p2) {
 
                 // The new array elements.
                 void* e = *a + (m - n);
+                int ec = *s - *c;
 
                 // Initialise ONLY NEW array elements with null pointer.
                 // Leave existing elements untouched.
-                memset(e, 0, n);
+//??                memset(e, 0, n);
+                test_init(e, (void*) &ec, (void*) &NULL_POINTER);
 
             } else {
 

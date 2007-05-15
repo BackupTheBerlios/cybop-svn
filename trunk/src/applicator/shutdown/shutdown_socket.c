@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2007-04-16 15:56:30 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2007-05-15 14:52:05 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -60,16 +60,26 @@ void shutdown_socket(void* p0, void* p1, void* p2, void* p3, void* p4) {
         // The socket internal of this system.
         int** si = (int**) &NULL_POINTER;
 
+    fprintf(stderr, "TEST si 1: %i \n", si);
+    fprintf(stderr, "TEST *si 1: %i \n", *si);
+
         // Get socket internal of this system.
         i = *base + *SOCKET_INTERNAL;
         get(p0, (void*) &i, (void*) &si, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
+    fprintf(stderr, "TEST si 2: %i \n", si);
+    fprintf(stderr, "TEST *si 2: %i \n", *si);
+
+    fprintf(stderr, "TEST NULL_POINTER: %i \n", NULL_POINTER);
+
         if (*si != NULL_POINTER) {
+
+    fprintf(stderr, "TEST *si 3: %i \n", *si);
 
             // Interrupt ALL socket service threads of this system.
             interrupt_socket();
 
-    fprintf(stderr, "TEST: after interrupt socket internal: %i \n", **si);
+//??    fprintf(stderr, "TEST: after interrupt socket internal: %i \n", **si);
 
 /*??
             // The signal ids.
@@ -126,14 +136,16 @@ void shutdown_socket(void* p0, void* p1, void* p2, void* p3, void* p4) {
             i = *base + *SOCKET_COMMUNICATION_PARTNER_ADDRESS_SIZE_INTERNAL;
             get(p0, (void*) &i, (void*) &pas, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-    fprintf(stderr, "TEST: after get socket: %i \n", **s);
+    fprintf(stderr, "TEST s: %i \n", s);
+    fprintf(stderr, "TEST *s: %i \n", *s);
+    fprintf(stderr, "TEST **s: %i \n", **s);
 
             // Close socket of this system.
             close(**s);
             // Close communication partner socket.
 //??            close(**ps);
 
-    fprintf(stderr, "TEST: after close socket: %i \n", **s);
+//??    fprintf(stderr, "TEST: after close socket: %i \n", **s);
 
 /*??
             // Destroy signal ids.
@@ -158,7 +170,7 @@ void shutdown_socket(void* p0, void* p1, void* p2, void* p3, void* p4) {
             // Deallocate communication partner socket address size.
             deallocate((void*) pas, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
-    fprintf(stderr, "TEST: after deallocate socket: %i \n", 10);
+//??    fprintf(stderr, "TEST: after deallocate socket: %i \n", 10);
 
         } else {
 

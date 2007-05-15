@@ -38,7 +38,7 @@
  *
  * Array elements are accessed over their index (array base pointer + index).
  *
- * @version $Revision: 1.5 $ $Date: 2007-05-08 22:02:38 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2007-05-15 14:52:05 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -48,6 +48,7 @@
 #include <stddef.h>
 #include <stdlib.h>
 #include <string.h>
+#include "../../globals/constants/integer/integer_constants.c"
 #include "../../globals/constants/log_message/log_message_constants.c"
 #include "../../globals/variables/variables.c"
 #include "../../globals/logger/logger.c"
@@ -73,7 +74,7 @@ void allocate_wide_character_array(void* p0, void* p1) {
 
             // Determine the memory area to be allocated.
             // It is the product of the given size and the type size.
-            int m = *s * *WIDE_CHARACTER_PRIMITIVE_SIZE;
+            size_t m = *s * *WIDE_CHARACTER_PRIMITIVE_SIZE;
 
             // A minimal space in memory is always allocated,
             // even if the requested size is zero.
@@ -81,7 +82,7 @@ void allocate_wide_character_array(void* p0, void* p1) {
             *a = (void*) malloc(m);
 
             // Initialise array elements with null pointer.
-            memset(*a, 0, m);
+            memset(*a, *NUMBER_0_INTEGER, m);
 
         } else {
 
@@ -152,7 +153,7 @@ void reallocate_wide_character_array(void* p0, void* p1, void* p2) {
 
                 // Determine the memory area to be allocated.
                 // It is the product of the given size and the type size.
-                int m = *s * *WIDE_CHARACTER_PRIMITIVE_SIZE;
+                size_t m = *s * *WIDE_CHARACTER_PRIMITIVE_SIZE;
 
                 // Create a new array with extended size.
                 *a = (void*) realloc(*a, m);

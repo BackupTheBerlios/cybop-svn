@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.17 $ $Date: 2007-04-16 15:56:30 $ $Author: christian $
+ * @version $Revision: 1.18 $ $Date: 2007-05-15 14:52:05 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -54,10 +54,20 @@ void shutdown_linux_console(void* p0, void* p1, void* p2, void* p3) {
     // The linux console (terminal device name) internal.
     FILE** ti = (FILE**) &NULL_POINTER;
 
+    fprintf(stderr, "TEST ti 1: %i \n", ti);
+    fprintf(stderr, "TEST *ti 1: %i \n", *ti);
+
     // Get linux console internal.
     get(p0, (void*) LINUX_CONSOLE_FILE_DESCRIPTOR_INTERNAL, (void*) &ti, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
+    fprintf(stderr, "TEST ti 2: %i \n", ti);
+    fprintf(stderr, "TEST *ti 2: %i \n", *ti);
+
+    fprintf(stderr, "TEST NULL_POINTER: %i \n", NULL_POINTER);
+
     if (*ti != NULL_POINTER) {
+
+    fprintf(stderr, "TEST *ti 3: %i \n", *ti);
 
         // Interrupt linux console service thread.
         interrupt_linux_console();

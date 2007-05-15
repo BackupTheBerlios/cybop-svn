@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2007-04-16 16:45:37 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2007-05-15 14:52:05 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -224,7 +224,7 @@ static int* SIGNALS_IDENTIFICATIONS_INDEX = NUMBER_7_INTEGER_ARRAY;
 //
 
 /** The internal memory elements count. */
-static int* INTERNAL_MEMORY_ELEMENTS_COUNT = NUMBER_10000_INTEGER_ARRAY;
+static int* INTERNAL_MEMORY_ELEMENTS_COUNT = NUMBER_1000_INTEGER_ARRAY;
 
 /** The knowledge memory. */
 static int* KNOWLEDGE_MEMORY_INTERNAL = NUMBER_0_INTEGER_ARRAY;
