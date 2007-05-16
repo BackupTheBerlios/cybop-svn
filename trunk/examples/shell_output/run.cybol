@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 
+<!--
+    This example prints the famous "Hello, World!" string on the shell (standard output device).
+    Finally, an "exit" operation shuts down the application.
+/-->
+
 <model>
-    <part name="string" channel="inline" abstraction="character" model="Hello, World!">
-        <property name="position" channel="inline" abstraction="integer" model="5,2,1"/>
-        <property name="size" channel="inline" abstraction="integer" model="60,3,1"/>
-        <property name="shape" channel="inline" abstraction="character" model="rectangle"/>
-        <property name="layout" channel="inline" abstraction="character" model="coordinates"/>
-        <property name="foreground" channel="inline" abstraction="character" model="green"/>
+    <part name="send_model_to_output" channel="inline" abstraction="operation" model="send">
+        <property name="channel" channel="inline" abstraction="character" model="shell"/>
+        <property name="language" channel="inline" abstraction="character" model="character"/>
+        <property name="message" channel="inline" abstraction="character" model="Hello, World!"/>
     </part>
+    <part name="exit_application" channel="inline" abstraction="operation" model="exit"/>
 </model>
 
 <!--
-    $RCSfile: greeting.cybol,v $
+    $RCSfile: run.cybol,v $
 
-    Copyright (c) 1999-2006. Christian Heller and the Res Medicinae developers.
+    Copyright (c) 1999-2006. Christian Heller and the CYBOP developers.
 
     This knowledge model is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License
@@ -29,9 +33,9 @@
     along with this knowledge model; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-    http://www.resmedicinae.org
-    - Information in Medicine -
+    http://www.cybop.net
+    - Cybernetics Oriented Programming -
 
-    @version $Revision: 1.2 $ $Date: 2007-05-16 19:36:27 $ $Author: christian $
+    @version $Revision: 1.1 $ $Date: 2007-05-16 19:36:27 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->
