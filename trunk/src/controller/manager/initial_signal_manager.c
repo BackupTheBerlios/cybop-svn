@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2007-04-23 23:15:07 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2007-05-16 19:29:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -33,6 +33,7 @@
 #include "../../globals/constants/integer/integer_constants.c"
 #include "../../globals/constants/log_message/log_message_constants.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/constants/cyboi_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../globals/variables/variables.c"
@@ -52,17 +53,17 @@ void startup_initial_signal(void* p0, void* p1, void* p2) {
     log_message_debug("Information: Startup initial signal.");
 
     // The initial signal abstraction.
-    void* a = NULL_POINTER;
-    int* ac = NULL_POINTER;
-    int* as = NULL_POINTER;
+    void* a = *NULL_POINTER;
+    int* ac = (int*) *NULL_POINTER;
+    int* as = (int*) *NULL_POINTER;
     // The initial signal model.
-    void* m = NULL_POINTER;
-    int* mc = NULL_POINTER;
-    int* ms = NULL_POINTER;
+    void* m = *NULL_POINTER;
+    int* mc = (int*) *NULL_POINTER;
+    int* ms = (int*) *NULL_POINTER;
     // The initial signal details.
-    void* d = NULL_POINTER;
-    int* dc = NULL_POINTER;
-    int* ds = NULL_POINTER;
+    void* d = *NULL_POINTER;
+    int* dc = (int*) *NULL_POINTER;
+    int* ds = (int*) *NULL_POINTER;
 
     // Allocate initial signal abstraction, model.
     allocate((void*) &ac, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
@@ -82,13 +83,13 @@ void startup_initial_signal(void* p0, void* p1, void* p2) {
 
     // Allocate and initialise initial signal abstraction.
     receive_file_system_model((void*) &a, (void*) ac, (void*) as,
-        NULL_POINTER, NULL_POINTER, NULL_POINTER,
+        *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
         (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
         (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
         (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
     // Allocate and initialise initial signal model.
     receive_file_system_model((void*) &m, (void*) mc, (void*) ms,
-        NULL_POINTER, NULL_POINTER, NULL_POINTER,
+        *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
         p0, p1,
         COMPOUND_ABSTRACTION, COMPOUND_ABSTRACTION_COUNT,
         FILE_CHANNEL, FILE_CHANNEL_COUNT);
@@ -99,7 +100,7 @@ void startup_initial_signal(void* p0, void* p1, void* p2) {
     log_message_debug("Info: Add initial signal to signal memory.");
 
     // The signal id.
-    int* id = NULL_POINTER;
+    int* id = (int*) *NULL_POINTER;
     allocate((void*) &id, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
     *id = *NUMBER_0_INTEGER;
     get_new_signal_id(p0, p1, (void*) id);

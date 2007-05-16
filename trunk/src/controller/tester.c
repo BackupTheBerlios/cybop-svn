@@ -24,7 +24,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.4 $ $Date: 2007-05-10 22:57:55 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2007-05-16 19:29:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -50,6 +50,7 @@
 #include "../globals/constants/integer/integer_constants.c"
 #include "../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../globals/constants/character/wide_character_constants.c"
+#include "../globals/constants/pointer/pointer_constants.c"
 #include "../globals/variables/variables.c"
 #include "../memoriser/accessor/compound_accessor.c"
 #include "../memoriser/allocator.c"
@@ -128,7 +129,7 @@ void test_type_sizes() {
 
     fputs("Test type sizes:\n", stdout);
 
-    fprintf(stderr, "null: %i\n", NULL_POINTER);
+    fprintf(stderr, "null: %i\n", *NULL_POINTER);
     fprintf(stderr, "int size: %i\n", *INTEGER_PRIMITIVE_SIZE);
     fprintf(stderr, "char size: %i\n", *CHARACTER_PRIMITIVE_SIZE);
     fprintf(stderr, "wchar_t size: %i\n", *WIDE_CHARACTER_PRIMITIVE_SIZE);
@@ -147,7 +148,7 @@ void test_type_sizes() {
  * The problem are the parentheses.
  *
  * The following addition adds 8 instead of just 2.
- * int* m = NULL_POINTER;
+ * int* m = (int*) *NULL_POINTER;
  * allocate((void*) &m, (void*) NUMBER_1_INTEGER, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
  * set(m, (void*) NUMBER_0_INTEGER, (void*) NUMBER_10_INTEGER, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
  * int* c = m + 2;
@@ -301,9 +302,9 @@ void test_integer_array() {
     int testc = *NUMBER_5_INTEGER;
 
     // The test knowledge model.
-    int* m = NULL_POINTER;
-    int* mc = NULL_POINTER;
-    int* ms = NULL_POINTER;
+    int* m = (int*) *NULL_POINTER;
+    int* mc = (int*) *NULL_POINTER;
+    int* ms = (int*) *NULL_POINTER;
 
     // Allocate test knowledge model.
     allocate((void*) &mc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
@@ -317,13 +318,13 @@ void test_integer_array() {
     fprintf(stderr, "pre m: %i\n", *m);
 
     // Parse test value and assign to test knowledge model.
-    parse((void*) &m, (void*) mc, (void*) ms, NULL_POINTER, NULL_POINTER, NULL_POINTER,
+    parse((void*) &m, (void*) mc, (void*) ms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
         (void*) test, (void*) &testc, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
     // The result values read out from the integer vector.
-    int* result0 = NULL_POINTER;
-    int* result1 = NULL_POINTER;
-    int* result2 = NULL_POINTER;
+    int* result0 = (int*) *NULL_POINTER;
+    int* result1 = (int*) *NULL_POINTER;
+    int* result2 = (int*) *NULL_POINTER;
 
     // Get result values.
     get(m, (void*) NUMBER_0_INTEGER, (void*) &result0, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
@@ -375,11 +376,11 @@ void test_array_resizing() {
     int* tc = NUMBER_6_INTEGER_ARRAY;
 
     // The original array.
-    void* o = NULL_POINTER;
+    void* o = *NULL_POINTER;
     int oc = 0;
     int os = *tc;
     // The copied array.
-    void* c = NULL_POINTER;
+    void* c = *NULL_POINTER;
     int cc = 0;
     int cs = 0;
 
@@ -422,11 +423,11 @@ void test_wide_character_output() {
     char* loc = setlocale(LC_ALL, "");
 
     // The terminal (device name).
-    FILE* t = NULL_POINTER;
+    FILE* t = (FILE*) *NULL_POINTER;
     // The original termios interface.
-    struct termios* to = NULL_POINTER;
+    struct termios* to = (struct termios*) *NULL_POINTER;
     // The working termios interface.
-    struct termios* tw = NULL_POINTER;
+    struct termios* tw = (struct termios*) *NULL_POINTER;
 
     // Create linux console internals.
 //??        allocate((void*) &t, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
@@ -450,7 +451,7 @@ void test_wide_character_output() {
     tcsetattr(d, TCSANOW, (void*) tw);
 
     // The terminated control sequences string.
-    void* ts = NULL_POINTER;
+    void* ts = *NULL_POINTER;
     int tsc = 0;
     int tss = 100;
 
@@ -546,7 +547,7 @@ void test_integer_to_wide_character_conversion() {
     fputs("Test integer-to-wide character conversion:\n", stdout);
 
     // The test wide character array.
-    void* t = NULL_POINTER;
+    void* t = *NULL_POINTER;
     int tc = *NUMBER_0_INTEGER;
     // One byte for the wide character and another for the trailing null.
     size_t ts = *NUMBER_2_INTEGER;
@@ -625,7 +626,7 @@ void test_character_array_single_element() {
     fputs("Test character array single element:\n", stdout);
 
     // The character array.
-    void* c = NULL_POINTER;
+    void* c = *NULL_POINTER;
     int cs = 5;
 
     // Create character array.
@@ -641,7 +642,7 @@ void test_character_array_single_element() {
     fputs((char*) c, stdout);
 
     int i = 0;
-    char* catest = NULL_POINTER;
+    char* catest = (char*) *NULL_POINTER;
 
     while (1) {
 
@@ -668,7 +669,7 @@ void test_character_array_multiple_elements() {
     fputs("Test character array multiple elements:\n", stdout);
 
     // The destination array.
-    void* d = NULL_POINTER;
+    void* d = *NULL_POINTER;
     int ds = 22;
 
     // Create destination array.
@@ -711,7 +712,7 @@ void test_character_array_multiple_elements() {
     fputs((char*) d, stdout);
 
     // The result array.
-    void* r = NULL_POINTER;
+    void* r = *NULL_POINTER;
 
     // Test getting a reference.
     get_character_array_elements(d, (void*) NUMBER_8_INTEGER, (void*) &r);
@@ -733,8 +734,8 @@ void test_pointer_return() {
     fputs("Test pointer return:\n", stdout);
 
     // The character array (including new line and null termination character).
-    void* c = NULL_POINTER;
-    int* cs = NULL_POINTER;
+    void* c = *NULL_POINTER;
+    int* cs = (int*) *NULL_POINTER;
 
     // Create character array.
     c = (void*) "Hello World!";
@@ -748,7 +749,7 @@ void test_pointer_return() {
     // and use just a null pointer to initialise the result variable.
 
     // The result array.
-    void* r = NULL_POINTER;
+    void* r = *NULL_POINTER;
 
     // Get character from character array.
     get_array_elements(c, (void*) NUMBER_6_INTEGER, (void*) &r, (void*) CHARACTER_ARRAY);
@@ -778,7 +779,7 @@ void test_pointer_array() {
     fprintf(stderr, "c: %s\n", (char*) c);
 
     // The pointer array.
-    void** p = &NULL_POINTER;
+    void** p = NULL_POINTER;
     int ps = 1;
 
     // Create pointer array.
@@ -787,7 +788,7 @@ void test_pointer_array() {
     fprintf(stderr, "p: %i\n", p);
 
     // The result array.
-    void** r = &NULL_POINTER;
+    void** r = NULL_POINTER;
 
     //
     // Testing.
@@ -819,6 +820,50 @@ void test_pointer_array() {
 }
 
 /**
+ * Tests the pointer array with null values.
+ */
+void test_pointer_array_with_null_values() {
+
+    fputs("Test pointer array with null values:\n", stdout);
+
+    // The pointer array.
+    void* a = *NULL_POINTER;
+    int as = *NUMBER_5_INTEGER;
+
+    allocate_pointer_array((void*) &a, (void*) &as);
+
+    set_pointer_array_elements(a, (void*) NUMBER_0_INTEGER, (void*) &COMMERCIAL_AT_CHARACTER, (void*) NUMBER_1_INTEGER);
+    set_pointer_array_elements(a, (void*) NUMBER_1_INTEGER, (void*) &NUMBER_333_INTEGER, (void*) NUMBER_1_INTEGER);
+    set_pointer_array_elements(a, (void*) NUMBER_2_INTEGER, (void*) NULL_POINTER, (void*) NUMBER_1_INTEGER);
+    set_pointer_array_elements(a, (void*) NUMBER_3_INTEGER, (void*) NULL_POINTER, (void*) NUMBER_1_INTEGER);
+    set_pointer_array_elements(a, (void*) NUMBER_4_INTEGER, (void*) &COMMERCIAL_AT_CHARACTER, (void*) NUMBER_1_INTEGER);
+
+    // The result values.
+    char** r0 = (char**) NULL_POINTER;
+    int** r1 = (int**) NULL_POINTER;
+    void** r2 = (void**) NULL_POINTER;
+    void* r3 = *NULL_POINTER;
+    char** r4 = (char**) NULL_POINTER;
+
+    get_pointer_array_elements(a, (void*) NUMBER_0_INTEGER, (void*) &r0);
+    get_pointer_array_elements(a, (void*) NUMBER_1_INTEGER, (void*) &r1);
+    get_pointer_array_elements(a, (void*) NUMBER_2_INTEGER, (void*) &r2);
+    get_pointer_array_elements(a, (void*) NUMBER_3_INTEGER, (void*) &r3);
+    get_pointer_array_elements(a, (void*) NUMBER_4_INTEGER, (void*) &r4);
+
+    fprintf(stdout, "Result pointer as string r0: %s\n", *r0);
+    fprintf(stdout, "Result pointer as integer r1: %i\n", **r1);
+    fprintf(stdout, "Result pointer as pointer r2: %i\n", *r2);
+    fprintf(stdout, "Result pointer as simple pointer r3: %i\n", r3);
+    fprintf(stdout, "Result pointer as characterr4: %c\n", **r4);
+
+    fprintf(stderr, "NULL_POINTER: %i \n", NULL_POINTER);
+    fprintf(stderr, "*NULL_POINTER: %i \n", *NULL_POINTER);
+
+    deallocate_pointer_array((void*) &a, (void*) &as);
+}
+
+/**
  * Tests the file read.
  */
 void test_file_read() {
@@ -830,7 +875,7 @@ void test_file_read() {
 
 /*??
     // The array.
-    void* a = NULL_POINTER;
+    void* a = *NULL_POINTER;
     // The array size.
     int as = 0;
     // The array count.
@@ -852,7 +897,7 @@ void test_file_read() {
     fprintf(stderr, "fnc: %i\n", fnc);
 
     int j = 0;
-    char* c = NULL_POINTER;
+    char* c = (char*) *NULL_POINTER;
     int* cc = 1;
 
     while (1) {
@@ -954,7 +999,7 @@ void test_parse_integer_vector() {
     int sc = *NUMBER_5_INTEGER;
 
     // The destination integer vector.
-    void* d = NULL_POINTER;
+    void* d = *NULL_POINTER;
     int dc = *NUMBER_0_INTEGER;
     int ds = *NUMBER_0_INTEGER;
 
@@ -965,9 +1010,9 @@ void test_parse_integer_vector() {
     parse_integer_vector((void*) &d, (void*) &dc, (void*) &ds, s, (void*) &sc);
 
     // The integer values.
-    int* i0 = NULL_POINTER;
-    int* i1 = NULL_POINTER;
-    int* i2 = NULL_POINTER;
+    int* i0 = (int*) *NULL_POINTER;
+    int* i1 = (int*) *NULL_POINTER;
+    int* i2 = (int*) *NULL_POINTER;
 
     // Get integer at index 0 from integer vector.
     get(d, (void*) NUMBER_0_INTEGER, (void*) &i0, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
@@ -997,7 +1042,7 @@ void test_serialise_integer_vector() {
     int sc = *NUMBER_3_INTEGER;
 
     // The destination character array.
-    char* d = NULL_POINTER;
+    char* d = (char*) *NULL_POINTER;
     int dc = *NUMBER_0_INTEGER;
     int ds = *NUMBER_0_INTEGER;
 
@@ -1024,7 +1069,7 @@ void test_serialise_integer() {
     fputs("Test serialise integer:\n", stdout);
 
     // The destination character array.
-    char* d = NULL_POINTER;
+    char* d = (char*) *NULL_POINTER;
     int dc = *NUMBER_0_INTEGER;
     int ds = *NUMBER_0_INTEGER;
 
@@ -1101,11 +1146,12 @@ void test() {
 //??    test_character_array_multiple_elements();
 //??    test_pointer_return();
 //??    test_pointer_array();
+    test_pointer_array_with_null_values();
 //??    test_file_read();
 //??    test_file_write();
 //??    test_console();
-    test_parse_integer_vector();
-    test_serialise_integer_vector();
+//??    test_parse_integer_vector();
+//??    test_serialise_integer_vector();
 //??    test_serialise_integer();
 //??    test_float_constants();
 }

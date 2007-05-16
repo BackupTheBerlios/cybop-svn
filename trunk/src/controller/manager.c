@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.34 $ $Date: 2007-04-23 23:15:07 $ $Author: christian $
+ * @version $Revision: 1.35 $ $Date: 2007-05-16 19:29:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -36,6 +36,7 @@
 #include "../globals/constants/cybol/cybol_channel_constants.c"
 #include "../globals/constants/integer/integer_constants.c"
 #include "../globals/constants/log_message/log_message_constants.c"
+#include "../globals/constants/pointer/pointer_constants.c"
 #include "../globals/logger/logger.c"
 #include "../globals/variables/variables.c"
 #include "../memoriser/allocator.c"
@@ -68,14 +69,14 @@ void manage(void* p0, void* p1) {
     log_message_debug("Info: Manage system.");
 
     // The internal memory.
-    void* i = NULL_POINTER;
+    void* i = *NULL_POINTER;
     int* ic = INTERNAL_MEMORY_ELEMENTS_COUNT;
     int* is = INTERNAL_MEMORY_ELEMENTS_COUNT;
 
     // The knowledge memory.
-    void* k = NULL_POINTER;
-    int* kc = NULL_POINTER;
-    int* ks = NULL_POINTER;
+    void* k = *NULL_POINTER;
+    int* kc = (int*) *NULL_POINTER;
+    int* ks = (int*) *NULL_POINTER;
 
     // A meta knowledge memory?
     // Theoretically, a meta knowledge memory could be created, too, and be
@@ -91,9 +92,9 @@ void manage(void* p0, void* p1) {
     // #something                               --> meta knowledge about knowledge root = nonsense
 
     // The signal memory.
-    void* s = NULL_POINTER;
-    int* sc = NULL_POINTER;
-    int* ss = NULL_POINTER;
+    void* s = *NULL_POINTER;
+    int* sc = (int*) *NULL_POINTER;
+    int* ss = (int*) *NULL_POINTER;
 
     //
     // The signal memory interrupt request flag.
@@ -120,18 +121,18 @@ void manage(void* p0, void* p1) {
     // Both of these assumptions are true on all of the machines that the GNU C
     // library supports and on all known POSIX systems.
     //
-    volatile sig_atomic_t* irq = NULL_POINTER;
+    volatile sig_atomic_t* irq = (volatile sig_atomic_t*) *NULL_POINTER;
 
     // The signal memory mutex.
-    pthread_mutex_t* signal_memory_mutex = NULL_POINTER;
+    pthread_mutex_t* signal_memory_mutex = (pthread_mutex_t*) *NULL_POINTER;
     // The linux console mutex.
-    pthread_mutex_t* linux_console_mutex = NULL_POINTER;
+    pthread_mutex_t* linux_console_mutex = (pthread_mutex_t*) *NULL_POINTER;
     // The x window system mutex.
-    pthread_mutex_t* x_window_system_mutex = NULL_POINTER;
+    pthread_mutex_t* x_window_system_mutex = (pthread_mutex_t*) *NULL_POINTER;
     // The www service mutex.
-    pthread_mutex_t* www_service_mutex = NULL_POINTER;
+    pthread_mutex_t* www_service_mutex = (pthread_mutex_t*) *NULL_POINTER;
     // The cyboi service mutex.
-    pthread_mutex_t* cyboi_service_mutex = NULL_POINTER;
+    pthread_mutex_t* cyboi_service_mutex = (pthread_mutex_t*) *NULL_POINTER;
 
     // Allocate knowledge memory count, size.
     allocate((void*) &kc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
@@ -164,27 +165,27 @@ void manage(void* p0, void* p1) {
     // The second parameter specifies attributes that are to be used to
     // initialise the mutex. If the parameter is null, the mutex is
     // initialised with default attributes.
-    pthread_mutex_init(signal_memory_mutex, NULL_POINTER);
+    pthread_mutex_init(signal_memory_mutex, *NULL_POINTER);
     // Initialise linux console mutex.
     // The second parameter specifies attributes that are to be used to
     // initialise the mutex. If the parameter is null, the mutex is
     // initialised with default attributes.
-    pthread_mutex_init(linux_console_mutex, NULL_POINTER);
+    pthread_mutex_init(linux_console_mutex, *NULL_POINTER);
     // Initialise x window system mutex.
     // The second parameter specifies attributes that are to be used to
     // initialise the mutex. If the parameter is null, the mutex is
     // initialised with default attributes.
-    pthread_mutex_init(x_window_system_mutex, NULL_POINTER);
+    pthread_mutex_init(x_window_system_mutex, *NULL_POINTER);
     // Initialise www service mutex.
     // The second parameter specifies attributes that are to be used to
     // initialise the mutex. If the parameter is null, the mutex is
     // initialised with default attributes.
-    pthread_mutex_init(www_service_mutex, NULL_POINTER);
+    pthread_mutex_init(www_service_mutex, *NULL_POINTER);
     // Initialise cyboi service mutex.
     // The second parameter specifies attributes that are to be used to
     // initialise the mutex. If the parameter is null, the mutex is
     // initialised with default attributes.
-    pthread_mutex_init(cyboi_service_mutex, NULL_POINTER);
+    pthread_mutex_init(cyboi_service_mutex, *NULL_POINTER);
 
     // Allocate internal memory.
     allocate((void*) &i, (void*) is, (void*) INTERNAL_MEMORY_ABSTRACTION, (void*) INTERNAL_MEMORY_ABSTRACTION_COUNT);
@@ -199,12 +200,12 @@ void manage(void* p0, void* p1) {
     // determined by constants. The items HAVE TO be assigned an
     // initial value, since all source code relies on them.
     //
-    // Most values are compared against the NULL_POINTER constant
+    // Most values are compared against the *NULL_POINTER constant
     // to find out whether they are set or not. If now initial values
     // would be arbitrary pointers, the program would follow a wrong path,
     // because it would guess that an instance was properly allocated,
     // while in reality the value was just an arbitrary initial one.
-    // Therefore, such values are initialised with the well-defined NULL_POINTER.
+    // Therefore, such values are initialised with the well-defined *NULL_POINTER.
     //
     // CAUTION! ONLY ONE parameter can be handed over to threads!
     // For example, the tcp socket is running in an own thread.
@@ -230,15 +231,15 @@ void manage(void* p0, void* p1) {
     log_message_debug("Info: Allocate startup model.");
 
     // The startup model abstraction, model, details.
-    void* ma = NULL_POINTER;
-    int* mac = NULL_POINTER;
-    int* mas = NULL_POINTER;
-    void* mm = NULL_POINTER;
-    int* mmc = NULL_POINTER;
-    int* mms = NULL_POINTER;
-    void* md = NULL_POINTER;
-    int* mdc = NULL_POINTER;
-    int* mds = NULL_POINTER;
+    void* ma = *NULL_POINTER;
+    int* mac = (int*) *NULL_POINTER;
+    int* mas = (int*) *NULL_POINTER;
+    void* mm = *NULL_POINTER;
+    int* mmc = (int*) *NULL_POINTER;
+    int* mms = (int*) *NULL_POINTER;
+    void* md = *NULL_POINTER;
+    int* mdc = (int*) *NULL_POINTER;
+    int* mds = (int*) *NULL_POINTER;
 
     // Allocate startup model abstraction, model, details.
     allocate((void*) &mac, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
@@ -258,12 +259,12 @@ void manage(void* p0, void* p1) {
 
     // Create startup model abstraction, model, details.
     receive_file_system_model((void*) &ma, (void*) mac, (void*) mas,
-        NULL_POINTER, NULL_POINTER, NULL_POINTER,
+        *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
         (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
         (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
         (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
     receive_file_system_model((void*) &mm, (void*) mmc, (void*) mms,
-        NULL_POINTER, NULL_POINTER, NULL_POINTER,
+        *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
         p0, p1,
         COMPOUND_ABSTRACTION, COMPOUND_ABSTRACTION_COUNT,
         FILE_CHANNEL, FILE_CHANNEL_COUNT);
@@ -274,7 +275,7 @@ void manage(void* p0, void* p1) {
     log_message_debug("Info: Add startup model as signal to signal memory.");
 
     // The signal id.
-    int* id = NULL_POINTER;
+    int* id = (int*) *NULL_POINTER;
     allocate((void*) &id, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
     *id = *NUMBER_0_INTEGER;
     get_new_signal_id(s, (void*) sc, (void*) id);

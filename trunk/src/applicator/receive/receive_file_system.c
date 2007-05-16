@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2007-04-24 22:41:43 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2007-05-16 19:29:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -31,6 +31,7 @@
 
 #include "../../globals/constants/cybol/cybol_abstraction_constants.c"
 #include "../../globals/constants/log_message/log_message_constants.c"
+#include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../memoriser/accessor/compound_accessor.c"
 #include "../../memoriser/allocator.c"
@@ -82,7 +83,7 @@ void receive_file_system_primitive_model(void* p0, void* p1, void* p2, void* p3,
     //
 
     // The receive model.
-    void* rm = NULL_POINTER;
+    void* rm = *NULL_POINTER;
     int rmc = *NUMBER_0_INTEGER;
     int rms = *NUMBER_0_INTEGER;
 
@@ -172,7 +173,7 @@ void receive_file_system_compound_model(void* p0, void* p1, void* p2, void* p3, 
     //
 
     // The receive model.
-    void* rm = NULL_POINTER;
+    void* rm = *NULL_POINTER;
     int rmc = *NUMBER_0_INTEGER;
     int rms = *NUMBER_0_INTEGER;
 
@@ -187,11 +188,11 @@ void receive_file_system_compound_model(void* p0, void* p1, void* p2, void* p3, 
     //
 
     // The parse model.
-    void* pm = NULL_POINTER;
+    void* pm = *NULL_POINTER;
     int pmc = *NUMBER_0_INTEGER;
     int pms = *NUMBER_0_INTEGER;
     // The parse details.
-    void* pd = NULL_POINTER;
+    void* pd = *NULL_POINTER;
     int pdc = *NUMBER_0_INTEGER;
     int pds = *NUMBER_0_INTEGER;
 
@@ -240,7 +241,7 @@ void receive_file_system_compound_model(void* p0, void* p1, void* p2, void* p3, 
 
     } else {
 
-        if (pm != NULL_POINTER) {
+        if (pm != *NULL_POINTER) {
 
             // Free xml dom document.
             xmlFreeDoc((xmlDoc*) *((void**) pm));
@@ -349,21 +350,21 @@ void receive_file_system(void* p0, void* p1, void* p2,
     log_message_debug("Receive file system message.");
 
     // The knowledge model name.
-    void* n = NULL_POINTER;
-    int* nc = NULL_POINTER;
-    int* ns = NULL_POINTER;
+    void* n = *NULL_POINTER;
+    int* nc = (int*) *NULL_POINTER;
+    int* ns = (int*) *NULL_POINTER;
     // The knowledge model abstraction.
-    void* a = NULL_POINTER;
-    int* ac = NULL_POINTER;
-    int* as = NULL_POINTER;
+    void* a = *NULL_POINTER;
+    int* ac = (int*) *NULL_POINTER;
+    int* as = (int*) *NULL_POINTER;
     // The knowledge model model.
-    void* m = NULL_POINTER;
-    int* mc = NULL_POINTER;
-    int* ms = NULL_POINTER;
+    void* m = *NULL_POINTER;
+    int* mc = (int*) *NULL_POINTER;
+    int* ms = (int*) *NULL_POINTER;
     // The knowledge model details.
-    void* d = NULL_POINTER;
-    int* dc = NULL_POINTER;
-    int* ds = NULL_POINTER;
+    void* d = *NULL_POINTER;
+    int* dc = (int*) *NULL_POINTER;
+    int* ds = (int*) *NULL_POINTER;
 
     // Create knowledge model name.
     allocate((void*) &nc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
@@ -397,9 +398,9 @@ void receive_file_system(void* p0, void* p1, void* p2,
     allocate((void*) &d, (void*) ds, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
 
     // Receive knowledge model name.
-    receive_file_system_model((void*) &n, (void*) nc, (void*) ns, NULL_POINTER, NULL_POINTER, NULL_POINTER, p9, p10, p11, p12, (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
+    receive_file_system_model((void*) &n, (void*) nc, (void*) ns, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, p9, p10, p11, p12, (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
     // Receive knowledge model abstraction.
-    receive_file_system_model((void*) &a, (void*) ac, (void*) as, NULL_POINTER, NULL_POINTER, NULL_POINTER, p13, p14, p15, p16, (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
+    receive_file_system_model((void*) &a, (void*) ac, (void*) as, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, p13, p14, p15, p16, (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
     // Receive knowledge model model and details.
     // CAUTION! The knowledge model model is received TOGETHER with the
     // knowledge model details, in just one operation.
@@ -414,7 +415,7 @@ void receive_file_system(void* p0, void* p1, void* p2,
 
         if (r != *NUMBER_0_INTEGER) {
 
-            if (p3 != NULL_POINTER) {
+            if (p3 != *NULL_POINTER) {
 
                 log_message_debug("Add part knowledge model to whole model.");
 
@@ -445,7 +446,7 @@ void receive_file_system(void* p0, void* p1, void* p2,
 
         if (r != *NUMBER_0_INTEGER) {
 
-            if (p6 != NULL_POINTER) {
+            if (p6 != *NULL_POINTER) {
 
                 log_message_debug("Add meta knowledge model to whole details.");
 

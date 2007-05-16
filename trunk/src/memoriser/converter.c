@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.29 $ $Date: 2007-05-08 22:02:38 $ $Author: christian $
+ * @version $Revision: 1.30 $ $Date: 2007-05-16 19:29:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,6 +30,7 @@
 #include "../globals/constants/cybol/cybol_abstraction_constants.c"
 #include "../globals/constants/integer/integer_constants.c"
 #include "../globals/constants/cybol/cybol_model_constants.c"
+#include "../globals/constants/pointer/pointer_constants.c"
 #include "../memoriser/array.c"
 #include "../memoriser/converter/boolean_converter.c"
 #include "../memoriser/converter/character_vector_converter.c"
@@ -384,7 +385,7 @@ void serialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
 
         if (r != *NUMBER_0_INTEGER) {
 
-//??            serialise_linux_console(p0, p1, p2, p7, p8, NULL_POINTER, NULL_POINTER, p13, p14);
+//??            serialise_linux_console(p0, p1, p2, p7, p8, *NULL_POINTER, *NULL_POINTER, p13, p14);
         }
     }
 
@@ -394,7 +395,7 @@ void serialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
 
         if (r != *NUMBER_0_INTEGER) {
 
-            serialise_x_window_system(p0, p1, p2, p7, p8, NULL_POINTER, NULL_POINTER, p11, p12);
+            serialise_x_window_system(p0, p1, p2, p7, p8, *NULL_POINTER, *NULL_POINTER, p11, p12);
         }
     }
 

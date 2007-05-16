@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.20 $ $Date: 2007-04-23 23:15:07 $ $Author: christian $
+ * @version $Revision: 1.21 $ $Date: 2007-05-16 19:29:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -51,12 +51,6 @@ void startup_globals() {
     // The logger will not work before these global variables are set.
     // For testing, the line below may be used.
     // fputs("Info: Startup globals.\n", stdout);
-
-    // Initialise null pointer.
-    //
-    // CAUTION! It must not be constant, but a variable instead,
-    // because otherwise, one could not alter the values it points to.
-    NULL_POINTER = (void*) *NUMBER_0_INTEGER;
 
     //
     // Primitive type sizes.

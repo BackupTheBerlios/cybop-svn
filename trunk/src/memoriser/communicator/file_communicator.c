@@ -24,7 +24,7 @@
  * - receive a file stream into a byte array
  * - send a file stream from a byte array
  *
- * @version $Revision: 1.23 $ $Date: 2007-05-08 22:02:38 $ $Author: christian $
+ * @version $Revision: 1.24 $ $Date: 2007-05-16 19:29:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -36,6 +36,7 @@
 #include "../../globals/constants/cyboi_constants.c"
 #include "../../globals/constants/integer/integer_constants.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/constants/system_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../globals/variables/variables.c"
@@ -51,17 +52,17 @@
  */
 void read_file_stream(void* p0, void* p1, void* p2, void* p3) {
 
-    if (p3 != NULL_POINTER) {
+    if (p3 != *NULL_POINTER) {
 
-        if (p2 != NULL_POINTER) {
+        if (p2 != *NULL_POINTER) {
 
             int* ds = (int*) p2;
 
-            if (p1 != NULL_POINTER) {
+            if (p1 != *NULL_POINTER) {
 
                 int* dc = (int*) p1;
 
-                if (p0 != NULL_POINTER) {
+                if (p0 != *NULL_POINTER) {
 
                     void** d = (void**) p0;
 
@@ -136,7 +137,7 @@ void read_file_stream(void* p0, void* p1, void* p2, void* p3) {
  */
 void read_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p4 != NULL_POINTER) {
+    if (p4 != *NULL_POINTER) {
 
         int* sc = (int*) p4;
 
@@ -145,10 +146,10 @@ void read_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
         // The comparison result.
         int r = *NUMBER_0_INTEGER;
         // The terminated file name.
-        void* tn = NULL_POINTER;
+        void* tn = *NULL_POINTER;
         int tns = *sc + *NUMBER_1_INTEGER;
         // The file.
-        FILE* f = NULL_POINTER;
+        FILE* f = (FILE*) *NULL_POINTER;
 
         if (r == *NUMBER_0_INTEGER) {
 
@@ -182,7 +183,7 @@ void read_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
             // must be added to the string before that is used to open the file.
             f = fopen((char*) tn, "r");
 
-            if (f != NULL_POINTER) {
+            if (f != *NULL_POINTER) {
 
                 read_file_stream(p0, p1, p2, (void*) f);
 
@@ -214,18 +215,18 @@ void read_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
  */
 void write_file_stream(void* p0, void* p1, void* p2) {
 
-    if (p2 != NULL_POINTER) {
+    if (p2 != *NULL_POINTER) {
 
         int* sc = (int*) p2;
 
-        if (p0 != NULL_POINTER) {
+        if (p0 != *NULL_POINTER) {
 
             log_message_debug("Information: Write file stream.");
 
             // The loop variable.
             int j = *NUMBER_0_INTEGER;
             // The character.
-            char* c = NULL_POINTER;
+            char* c = (char*) *NULL_POINTER;
             // The error value.
             char e = EOF;
 
@@ -275,11 +276,11 @@ void write_file_stream(void* p0, void* p1, void* p2) {
  */
 void write_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p1 != NULL_POINTER) {
+    if (p1 != *NULL_POINTER) {
 
         int* dc = (int*) p1;
 
-        if (p0 != NULL_POINTER) {
+        if (p0 != *NULL_POINTER) {
 
             void** d = (void**) p0;
 
@@ -288,10 +289,10 @@ void write_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
             // The comparison result.
             int r = *NUMBER_0_INTEGER;
             // The terminated file name.
-            void* tn = NULL_POINTER;
+            void* tn = *NULL_POINTER;
             int tns = *dc + *NUMBER_1_INTEGER;
             // The file.
-            FILE* f = NULL_POINTER;
+            FILE* f = (FILE*) *NULL_POINTER;
 
             if (r == *NUMBER_0_INTEGER) {
 
@@ -360,7 +361,7 @@ void write_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 // must be added to the string before that is used to open the file.
                 f = fopen((char*) tn, "w");
 
-                if (f != NULL_POINTER) {
+                if (f != *NULL_POINTER) {
 
                     write_file_stream((void*) f, p3, p4);
 

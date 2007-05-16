@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.19 $ $Date: 2007-04-16 15:56:30 $ $Author: christian $
+ * @version $Revision: 1.20 $ $Date: 2007-05-16 19:29:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  *
@@ -51,6 +51,7 @@
 #include "../../globals/constants/integer/integer_constants.c"
 #include "../../globals/constants/log_message/log_message_constants.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../globals/variables/variables.c"
 #include "../../memoriser/accessor.c"
@@ -69,13 +70,13 @@ void startup_x_window_system(void* p0, void* p1, void* p2, void* p3) {
     log_message_debug("Startup x window system.");
 
     // The display internal.
-    struct _XDisplay** di = (struct _XDisplay**) &NULL_POINTER;
+    struct _XDisplay** di = (struct _XDisplay**) NULL_POINTER;
 
     // Get display internal.
     get(p0, (void*) X_WINDOW_SYSTEM_DISPLAY_INTERNAL, (void*) &di, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
     // Only create display if not existent.
-    if (*di == NULL_POINTER) {
+    if (*di == *NULL_POINTER) {
 
         // The display name.
         // An example identifying the second screen of the first
@@ -83,29 +84,29 @@ void startup_x_window_system(void* p0, void* p1, void* p2, void* p3) {
         // char* dn = "earth.cybop.net:0.1"
         //?? TODO: This has to be built dynamically, later on!
         //?? For now, it is just an empty string.
-        char* dn = NULL_POINTER;
+        char* dn = (char*) *NULL_POINTER;
         // The display, which is a subsumption of
         // xserver, screens, hardware (input devices etc.).
-        struct _XDisplay* d = NULL_POINTER;
+        struct _XDisplay* d = (struct _XDisplay*) *NULL_POINTER;
         // The screen number.
-        int* sn = NULL_POINTER;
+        int* sn = (int*) *NULL_POINTER;
         // The screen.
-//??        Screen* s = NULL_POINTER;
+//??        Screen* s = (Screen*) *NULL_POINTER;
         // The default colourmap id for allocation on the specified screen.
         // Most routine allocations of colour should be made out of this colormap.
-        int* cm = NULL_POINTER;
+        int* cm = (int*) *NULL_POINTER;
         // The background pixel values.
-        unsigned long* bg = NULL_POINTER;
+        unsigned long* bg = (unsigned long*) *NULL_POINTER;
         // The foreground pixel values.
-        unsigned long* fg = NULL_POINTER;
+        unsigned long* fg = (unsigned long*) *NULL_POINTER;
         // The top-level root window for the given display and screen.
         // This is sometimes called the root window of the window manager.
         // Remember, CYBOI itself IS the window manager.
-        int* r = NULL_POINTER;
+        int* r = (int*) *NULL_POINTER;
         // The font name.
-        char* fn = NULL_POINTER;
+        char* fn = (char*) *NULL_POINTER;
         // The font.
-        XFontStruct* f = NULL_POINTER;
+        XFontStruct* f = (XFontStruct*) *NULL_POINTER;
         // The font id.
 //??        int fid = -1;
         // The size hint.
@@ -116,27 +117,27 @@ void startup_x_window_system(void* p0, void* p1, void* p2, void* p3) {
         XColor vlight_gray;
         XColor dark_gray;
         // The menu graphic context.
-        struct _XGC* gc_menu = NULL_POINTER;
+        struct _XGC* gc_menu = (struct _XGC*) *NULL_POINTER;
         // The menu border top graphic context.
-        struct _XGC* gc_menu_border_top = NULL_POINTER;
+        struct _XGC* gc_menu_border_top = (struct _XGC*) *NULL_POINTER;
         // The menu border bottom graphic context.
-        struct _XGC* gc_menu_border_bottom = NULL_POINTER;
+        struct _XGC* gc_menu_border_bottom = (struct _XGC*) *NULL_POINTER;
         // The menu font graphic context.
-        struct _XGC* gc_menu_font = NULL_POINTER;
+        struct _XGC* gc_menu_font = (struct _XGC*) *NULL_POINTER;
         // The window.
-        int* w = NULL_POINTER;
+        int* w = (int*) *NULL_POINTER;
         // The value mask for the graphics context.
         // It defines the attributes for the graphics context.
         // This argument is the bitwise inclusive OR of zero or more
         // of the valid graphic context component mask bits.
-        unsigned long* vm = NULL_POINTER;
+        unsigned long* vm = (unsigned long*) *NULL_POINTER;
         // The values for the attributes defined in the value mask.
-        XGCValues* v = NULL_POINTER;
+        XGCValues* v = (XGCValues*) *NULL_POINTER;
         // The graphic context. Each graphic element needs one.
         // It can be used with any destination drawable (window or pixmap)
         // having the same root and depth as the specified drawable.
         // Use with other drawables results in a BadMatch error.
-        struct _XGC* gc = NULL_POINTER;
+        struct _XGC* gc = (struct _XGC*) *NULL_POINTER;
 
         // Allocate x window system internals.
         allocate((void*) &sn, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
@@ -162,7 +163,7 @@ void startup_x_window_system(void* p0, void* p1, void* p2, void* p3) {
         fn = "*-helvetica-*-12-*";
         f = XLoadQueryFont(d, fn);
 
-        if (f != NULL_POINTER) {
+        if (f != *NULL_POINTER) {
 
             fid = f->fid;
         }
@@ -198,7 +199,7 @@ void startup_x_window_system(void* p0, void* p1, void* p2, void* p3) {
 */
 
         // Assign x window system internals.
-        XSetStandardProperties(d, *w, "Application", "Icon", None, NULL_POINTER, 0, (void*) &sh);
+        XSetStandardProperties(d, *w, "Application", "Icon", None, *NULL_POINTER, 0, (void*) &sh);
         XAllocColor(d, *cm, &gray);
         XAllocColor(d, *cm, &light_gray);
         XAllocColor(d, *cm, &vlight_gray);

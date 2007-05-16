@@ -24,7 +24,7 @@
  * - receive an inline stream into a byte array
  * - send an inline stream from a byte array
  *
- * @version $Revision: 1.10 $ $Date: 2007-04-23 23:15:07 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2007-05-16 19:29:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -33,6 +33,7 @@
 
 #include <stdio.h>
 #include "../../globals/constants/integer/integer_constants.c"
+#include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../memoriser/array.c"
 
@@ -47,19 +48,19 @@
  */
 void read_inline(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p4 != NULL_POINTER) {
+    if (p4 != *NULL_POINTER) {
 
         int* sc = (int*) p4;
 
-        if (p2 != NULL_POINTER) {
+        if (p2 != *NULL_POINTER) {
 
             int* ds = (int*) p2;
 
-            if (p1 != NULL_POINTER) {
+            if (p1 != *NULL_POINTER) {
 
                 int* dc = (int*) p1;
 
-                if (p0 != NULL_POINTER) {
+                if (p0 != *NULL_POINTER) {
 
                     void** d = (void**) p0;
 

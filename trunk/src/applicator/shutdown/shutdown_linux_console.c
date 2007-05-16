@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.18 $ $Date: 2007-05-15 14:52:05 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2007-05-16 19:29:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -34,6 +34,7 @@
 #include "../../globals/constants/integer/integer_constants.c"
 #include "../../globals/constants/log_message/log_message_constants.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/variables/variables.c"
 #include "../../globals/logger/logger.c"
 #include "../../memoriser/accessor.c"
@@ -51,40 +52,36 @@ void shutdown_linux_console(void* p0, void* p1, void* p2, void* p3) {
 
     log_message_debug("Shutdown linux console.");
 
-    // The linux console (terminal device name) internal.
-    FILE** ti = (FILE**) &NULL_POINTER;
+    // The linux console input- and output stream internal.
+    FILE** ipi = (FILE**) NULL_POINTER;
+    FILE** opi = (FILE**) NULL_POINTER;
 
-    fprintf(stderr, "TEST ti 1: %i \n", ti);
-    fprintf(stderr, "TEST *ti 1: %i \n", *ti);
+    // Get linux console internals.
+    get(p0, (void*) LINUX_CONSOLE_INPUT_FILE_DESCRIPTOR_INTERNAL, (void*) &ipi, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p0, (void*) LINUX_CONSOLE_OUTPUT_FILE_DESCRIPTOR_INTERNAL, (void*) &opi, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-    // Get linux console internal.
-    get(p0, (void*) LINUX_CONSOLE_FILE_DESCRIPTOR_INTERNAL, (void*) &ti, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-
-    fprintf(stderr, "TEST ti 2: %i \n", ti);
-    fprintf(stderr, "TEST *ti 2: %i \n", *ti);
-
-    fprintf(stderr, "TEST NULL_POINTER: %i \n", NULL_POINTER);
-
-    if (*ti != NULL_POINTER) {
-
-    fprintf(stderr, "TEST *ti 3: %i \n", *ti);
+    // Only deallocate linux console resources if at least one,
+    // the input- OR output stream internal is null.
+    if ((*ipi != *NULL_POINTER) || (opi == *NULL_POINTER)) {
 
         // Interrupt linux console service thread.
         interrupt_linux_console();
 
-        // The linux console (terminal device name).
-        FILE** t = (FILE**) &NULL_POINTER;
+        // The linux console input- and output stream.
+        FILE** ip = (FILE**) NULL_POINTER;
+        FILE** op = (FILE**) NULL_POINTER;
         // The original termios interface.
-        struct termios** to = (struct termios**) &NULL_POINTER;
+        struct termios** to = (struct termios**) NULL_POINTER;
         // The working termios interface.
-        struct termios** tw = (struct termios**) &NULL_POINTER;
+        struct termios** tw = (struct termios**) NULL_POINTER;
         // The character buffer that was used in the thread procedure.
-        void** b = &NULL_POINTER;
-        void** bc = &NULL_POINTER;
-        void** bs = &NULL_POINTER;
+        void** b = NULL_POINTER;
+        void** bc = NULL_POINTER;
+        void** bs = NULL_POINTER;
 
         // Get linux console internals.
-        get(p0, (void*) LINUX_CONSOLE_FILE_DESCRIPTOR_INTERNAL, (void*) &t, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        get(p0, (void*) LINUX_CONSOLE_INPUT_FILE_DESCRIPTOR_INTERNAL, (void*) &ip, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        get(p0, (void*) LINUX_CONSOLE_OUTPUT_FILE_DESCRIPTOR_INTERNAL, (void*) &op, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         get(p0, (void*) LINUX_CONSOLE_ORIGINAL_ATTRIBUTES_INTERNAL, (void*) &to, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         get(p0, (void*) LINUX_CONSOLE_WORKING_ATTRIBUTES_INTERNAL, (void*) &tw, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         // Get character buffer.
@@ -92,17 +89,18 @@ void shutdown_linux_console(void* p0, void* p1, void* p2, void* p3) {
         get(p0, (void*) LINUX_CONSOLE_THREAD_CHARACTER_BUFFER_COUNT_INTERNAL, (void*) &bc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         get(p0, (void*) LINUX_CONSOLE_THREAD_CHARACTER_BUFFER_SIZE_INTERNAL, (void*) &bs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-        // Get file descriptor for file stream.
-        int d = fileno(*t);
+        // Get file descriptor for output file stream.
+        int opd = fileno(*op);
         // Reset original linux console attributes.
-        tcsetattr(d, TCSANOW, *to);
+        tcsetattr(opd, TCSANOW, *to);
 
         // Destroy linux console internals.
+        //
         // CAUTION! Use descending order, as opposed to the creation!
         // CAUTION! Do NOT use references &, because variables are **
         // and *&variable equals the variable alone.
-//?? DO NOT deallocate t because it refers to stdout of the system for testing!
-//??        deallocate((void*) t, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        //?? DO NOT deallocate t because it refers to stdout of the system for testing!
+        //?? deallocate((void*) t, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
         free(*tw);
         free(*to);
 

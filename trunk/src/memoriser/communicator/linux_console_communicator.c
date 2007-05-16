@@ -24,7 +24,7 @@
  * - receive a file stream into a byte array
  * - send a file stream from a byte array
  *
- * @version $Revision: 1.7 $ $Date: 2007-05-15 14:52:05 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2007-05-16 19:29:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -40,6 +40,7 @@
 #include "../../globals/constants/integer/integer_constants.c"
 #include "../../globals/constants/log_message/log_message_constants.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../globals/variables/variables.c"
 #include "../../memoriser/array.c"
@@ -98,11 +99,11 @@ void read_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
  */
 void write_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p4 != NULL_POINTER) {
+    if (p4 != *NULL_POINTER) {
 
         int* sc = (int*) p4;
 
-        if (p0 != NULL_POINTER) {
+        if (p0 != *NULL_POINTER) {
 
             FILE** d = (FILE**) p0;
 
@@ -113,7 +114,7 @@ void write_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
             char* loc = setlocale(LC_ALL, "");
 
             // The terminated control sequences string.
-            wchar_t* ts = NULL_POINTER;
+            wchar_t* ts = (wchar_t*) *NULL_POINTER;
             // Increase control sequences count by one, for termination character.
             int tss = *sc + *NUMBER_1_INTEGER;
 
@@ -125,7 +126,7 @@ void write_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
             set_array_elements((void*) ts, (void*) NUMBER_0_INTEGER, p3, p4, (void*) WIDE_CHARACTER_ARRAY);
             set_array_elements((void*) ts, p4, (void*) NULL_CONTROL_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
 
-            if (*d != NULL_POINTER) {
+            if (*d != *NULL_POINTER) {
 
                 // Write to terminal.
     //??            fputs((char*) ts, *d);

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2007-04-16 15:56:30 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2007-05-16 19:29:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -36,6 +36,7 @@
 #include "../../globals/constants/cybol/cybol_abstraction_constants.c"
 #include "../../globals/constants/integer/integer_constants.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/variables/variables.c"
 
 /**
@@ -52,14 +53,14 @@ void activate_tcp_socket( void* internals, void* know, void* know_count, void* k
 
     log_message_debug("Startup tcp socket.");
 
-    if (internals != NULL_POINTER) {
+    if (internals != *NULL_POINTER) {
 
         // The tcp socket interrupt flag.
-        int** f = (int**) &NULL_POINTER;
+        int** f = (int**) NULL_POINTER;
 
 //??        get(internals, (void*) TCP_SOCKET_INTERRUPT_INTERNAL, (void*) &f, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-        if ((f != NULL_POINTER) && (*f != NULL_POINTER)) {
+        if ((f != *NULL_POINTER) && (*f != *NULL_POINTER)) {
 
             // Deactivate interrupt flag, since tcp socket is to be started.
             **f = 0;

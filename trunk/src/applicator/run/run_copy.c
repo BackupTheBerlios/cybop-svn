@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2007-05-09 15:32:40 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2007-05-16 19:29:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -37,6 +37,7 @@
 #include "../../globals/constants/cybol/cybol_model_constants.c"
 #include "../../globals/constants/cybol/cybol_name_constants.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/constants/system_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../globals/variables/variables.c"
@@ -55,44 +56,44 @@ void run_copy(void* p0, void* p1, void* p2, void* p3) {
     log_message_debug("Run copy command.");
 
     // The recursive name, abstraction, model, details.
-    void** recursiven = &NULL_POINTER;
-    void** recursivenc = &NULL_POINTER;
-    void** recursivens = &NULL_POINTER;
-    void** recursivea = &NULL_POINTER;
-    void** recursiveac = &NULL_POINTER;
-    void** recursiveas = &NULL_POINTER;
-    int** recursivem = (int**) &NULL_POINTER;
-    void** recursivemc = &NULL_POINTER;
-    void** recursivems = &NULL_POINTER;
-    void** recursived = &NULL_POINTER;
-    void** recursivedc = &NULL_POINTER;
-    void** recursiveds = &NULL_POINTER;
+    void** recursiven = NULL_POINTER;
+    void** recursivenc = NULL_POINTER;
+    void** recursivens = NULL_POINTER;
+    void** recursivea = NULL_POINTER;
+    void** recursiveac = NULL_POINTER;
+    void** recursiveas = NULL_POINTER;
+    int** recursivem = (int**) NULL_POINTER;
+    void** recursivemc = NULL_POINTER;
+    void** recursivems = NULL_POINTER;
+    void** recursived = NULL_POINTER;
+    void** recursivedc = NULL_POINTER;
+    void** recursiveds = NULL_POINTER;
     // The source name, abstraction, model, details.
-    void** sourcen = &NULL_POINTER;
-    void** sourcenc = &NULL_POINTER;
-    void** sourcens = &NULL_POINTER;
-    void** sourcea = &NULL_POINTER;
-    void** sourceac = &NULL_POINTER;
-    void** sourceas = &NULL_POINTER;
-    int** sourcem = (int**) &NULL_POINTER;
-    void** sourcemc = &NULL_POINTER;
-    void** sourcems = &NULL_POINTER;
-    void** sourced = &NULL_POINTER;
-    void** sourcedc = &NULL_POINTER;
-    void** sourceds = &NULL_POINTER;
+    void** sourcen = NULL_POINTER;
+    void** sourcenc = NULL_POINTER;
+    void** sourcens = NULL_POINTER;
+    void** sourcea = NULL_POINTER;
+    void** sourceac = NULL_POINTER;
+    void** sourceas = NULL_POINTER;
+    int** sourcem = (int**) NULL_POINTER;
+    void** sourcemc = NULL_POINTER;
+    void** sourcems = NULL_POINTER;
+    void** sourced = NULL_POINTER;
+    void** sourcedc = NULL_POINTER;
+    void** sourceds = NULL_POINTER;
     // The destination name, abstraction, model, details.
-    void** destinationn = &NULL_POINTER;
-    void** destinationnc = &NULL_POINTER;
-    void** destinationns = &NULL_POINTER;
-    void** destinationa = &NULL_POINTER;
-    void** destinationac = &NULL_POINTER;
-    void** destinationas = &NULL_POINTER;
-    int** destinationm = (int**) &NULL_POINTER;
-    void** destinationmc = &NULL_POINTER;
-    void** destinationms = &NULL_POINTER;
-    void** destinationd = &NULL_POINTER;
-    void** destinationdc = &NULL_POINTER;
-    void** destinationds = &NULL_POINTER;
+    void** destinationn = NULL_POINTER;
+    void** destinationnc = NULL_POINTER;
+    void** destinationns = NULL_POINTER;
+    void** destinationa = NULL_POINTER;
+    void** destinationac = NULL_POINTER;
+    void** destinationas = NULL_POINTER;
+    int** destinationm = (int**) NULL_POINTER;
+    void** destinationmc = NULL_POINTER;
+    void** destinationms = NULL_POINTER;
+    void** destinationd = NULL_POINTER;
+    void** destinationdc = NULL_POINTER;
+    void** destinationds = NULL_POINTER;
 
     // Get recursive option.
     get_universal_compound_element_by_name(p0, p1,
@@ -122,7 +123,7 @@ void run_copy(void* p0, void* p1, void* p2, void* p3) {
         p2, p3);
 
     // The arguments vector.
-    void* arg = NULL_POINTER;
+    void* arg = *NULL_POINTER;
     int argc = *NUMBER_0_INTEGER;
     int args = *NUMBER_0_INTEGER;
 
@@ -141,7 +142,7 @@ void run_copy(void* p0, void* p1, void* p2, void* p3) {
     // Recursive option.
     //
 
-    if (*recursivem != NULL_POINTER) {
+    if (*recursivem != *NULL_POINTER) {
 
         if (**recursivem == 1) {
 
@@ -168,7 +169,7 @@ void run_copy(void* p0, void* p1, void* p2, void* p3) {
     // Source option.
     //
 
-    if (*sourcem != NULL_POINTER) {
+    if (*sourcem != *NULL_POINTER) {
 
         if (**sourcem == 1) {
 
@@ -195,7 +196,7 @@ void run_copy(void* p0, void* p1, void* p2, void* p3) {
     // Destination option.
     //
 
-    if (*destinationm != NULL_POINTER) {
+    if (*destinationm != *NULL_POINTER) {
 
         if (**destinationm == 1) {
 
@@ -250,20 +251,20 @@ void run_copy(void* p0, void* p1, void* p2, void* p3) {
     //?? in "run_execute.c" or deleted later.
 
     // The arguments vector.
-    void* arg = NULL_POINTER;
+    void* arg = *NULL_POINTER;
     int argc = *NUMBER_0_INTEGER;
     int args = *NUMBER_0_INTEGER;
 
     // The system shell as null terminated string.
-    void* shell = NULL_POINTER;
+    void* shell = *NULL_POINTER;
     int shellc = *NUMBER_0_INTEGER;
     int shells = *NUMBER_0_INTEGER;
     // The character argument as null terminated string.
-    void* character = NULL_POINTER;
+    void* character = *NULL_POINTER;
     int characterc = *NUMBER_0_INTEGER;
     int characters = *NUMBER_0_INTEGER;
     // The command as null terminated string.
-    void* command = NULL_POINTER;
+    void* command = *NULL_POINTER;
     int commandc = *NUMBER_0_INTEGER;
     int commands = *NUMBER_0_INTEGER;
 
@@ -332,7 +333,7 @@ void run_copy(void* p0, void* p1, void* p2, void* p3) {
     // Recursive option.
     //
 
-    if (*recursivem != NULL_POINTER) {
+    if (*recursivem != *NULL_POINTER) {
 
         if (**recursivem == 1) {
 
@@ -359,7 +360,7 @@ void run_copy(void* p0, void* p1, void* p2, void* p3) {
     // Source option.
     //
 
-    if (*sourcem != NULL_POINTER) {
+    if (*sourcem != *NULL_POINTER) {
 
         if (**sourcem == 1) {
 
@@ -386,7 +387,7 @@ void run_copy(void* p0, void* p1, void* p2, void* p3) {
     // Destination option.
     //
 
-    if (*destinationm != NULL_POINTER) {
+    if (*destinationm != *NULL_POINTER) {
 
         if (**destinationm == 1) {
 
@@ -456,25 +457,25 @@ void run_copy(void* p0, void* p1, void* p2, void* p3) {
 
     // Set null pointer argument.
     // CAUTION! The null pointer always has to be the last argument.
-    set(arg, (void*) &argc, (void*) &NULL_POINTER, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    set(arg, (void*) &argc, NULL_POINTER, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     argc++;
 
     // Execute command as process.
     run_execute(arg);
 
-    if (shell != NULL_POINTER) {
+    if (shell != *NULL_POINTER) {
 
         // Deallocate shell argument.
         deallocate_array((void*) &shell, (void*) &shells, (void*) CHARACTER_ARRAY);
     }
 
-    if (character != NULL_POINTER) {
+    if (character != *NULL_POINTER) {
 
         // Deallocate character argument.
         deallocate_array((void*) &character, (void*) &characters, (void*) CHARACTER_ARRAY);
     }
 
-    if (command != NULL_POINTER) {
+    if (command != *NULL_POINTER) {
 
         // Deallocate command argument.
         deallocate_array((void*) &command, (void*) &commands, (void*) CHARACTER_ARRAY);

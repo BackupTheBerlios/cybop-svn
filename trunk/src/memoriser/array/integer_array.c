@@ -38,7 +38,7 @@
  *
  * Array elements are accessed over their index (array base pointer + index).
  *
- * @version $Revision: 1.13 $ $Date: 2007-05-15 14:52:05 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2007-05-16 19:29:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -49,6 +49,7 @@
 #include <string.h>
 #include "../../globals/constants/integer/integer_constants.c"
 #include "../../globals/constants/log_message/log_message_constants.c"
+#include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/variables/variables.c"
 #include "../../globals/logger/logger.c"
 
@@ -56,15 +57,15 @@
  * Allocates the integer array.
  *
  * @param p0 the array (Hand over as reference!)
- * @param p1 the size
+ * @param p1 the array size
  */
 void allocate_integer_array(void* p0, void* p1) {
 
-    if (p1 != NULL_POINTER) {
+    if (p1 != *NULL_POINTER) {
 
         int* s = (int*) p1;
 
-        if (p0 != NULL_POINTER) {
+        if (p0 != *NULL_POINTER) {
 
             void** a = (void**) p0;
 
@@ -97,15 +98,15 @@ void allocate_integer_array(void* p0, void* p1) {
  * Deallocates the integer array.
  *
  * @param p0 the array (Hand over as reference!)
- * @param p1 the size
+ * @param p1 the array size
  */
 void deallocate_integer_array(void* p0, void* p1) {
 
-    if (p1 != NULL_POINTER) {
+    if (p1 != *NULL_POINTER) {
 
         int* s = (int*) p1;
 
-        if (p0 != NULL_POINTER) {
+        if (p0 != *NULL_POINTER) {
 
             void** a = (void**) p0;
 
@@ -128,20 +129,20 @@ void deallocate_integer_array(void* p0, void* p1) {
  * Reallocates the integer array.
  *
  * @param p0 the array (Hand over as reference!)
- * @param p1 the count
- * @param p2 the size
+ * @param p1 the array count
+ * @param p2 the array size
  */
 void reallocate_integer_array(void* p0, void* p1, void* p2) {
 
-    if (p2 != NULL_POINTER) {
+    if (p2 != *NULL_POINTER) {
 
         int* s = (int*) p2;
 
-        if (p1 != NULL_POINTER) {
+        if (p1 != *NULL_POINTER) {
 
             int* c = (int*) p1;
 
-            if (p0 != NULL_POINTER) {
+            if (p0 != *NULL_POINTER) {
 
                 void** a = (void**) p0;
 
@@ -164,7 +165,7 @@ void reallocate_integer_array(void* p0, void* p1, void* p2) {
 
                 // Initialise ONLY NEW array elements with null pointer.
                 // Leave existing elements untouched.
-                memset(e, 0, n);
+                memset(e, *NUMBER_0_INTEGER, n);
 
             } else {
 
@@ -190,29 +191,29 @@ void reallocate_integer_array(void* p0, void* p1, void* p2) {
  *
  * @param p0 the first array
  * @param p1 the second array
- * @param p2 the count
+ * @param p2 the array count
  * @param p3 the result (Hand over as reference!)
  */
 void compare_integer_array_elements(void* p0, void* p1, void* p2, void* p3) {
 
-    if (p3 != NULL_POINTER) {
+    if (p3 != *NULL_POINTER) {
 
         int* r = (int*) p3;
 
-        if (p2 != NULL_POINTER) {
+        if (p2 != *NULL_POINTER) {
 
             int* c = (int*) p2;
 
-            if (p1 != NULL_POINTER) {
+            if (p1 != *NULL_POINTER) {
 
-                if (p0 != NULL_POINTER) {
+                if (p0 != *NULL_POINTER) {
 
                     // The loop variable.
                     int j = *NUMBER_0_INTEGER;
                     // The first element.
-                    int* e0 = NULL_POINTER;
+                    int* e0 = (int*) *NULL_POINTER;
                     // The second element.
-                    int* e1 = NULL_POINTER;
+                    int* e1 = (int*) *NULL_POINTER;
                     // The size.
                     int s = *NUMBER_0_INTEGER;
 
@@ -266,31 +267,31 @@ void compare_integer_array_elements(void* p0, void* p1, void* p2, void* p3) {
 /**
  * Sets the integer array elements.
  *
- * @param p0 the destination array
- * @param p1 the destination index
- * @param p2 the source elements
- * @param p3 the source count
+ * @param p0 the array
+ * @param p1 the index
+ * @param p2 the elements
+ * @param p3 the elements count
  */
 void set_integer_array_elements(void* p0, void* p1, void* p2, void* p3) {
 
-    if (p3 != NULL_POINTER) {
+    if (p3 != *NULL_POINTER) {
 
         int* sc = (int*) p3;
 
-        if (p2 != NULL_POINTER) {
+        if (p2 != *NULL_POINTER) {
 
-            if (p1 != NULL_POINTER) {
+            if (p1 != *NULL_POINTER) {
 
                 int* i = (int*) p1;
 
-                if (p0 != NULL_POINTER) {
+                if (p0 != *NULL_POINTER) {
 
                     // The destination base.
                     void* db = (void*) (p0 + (*i * *INTEGER_PRIMITIVE_SIZE));
                     // The source element.
-                    int* se = NULL_POINTER;
+                    int* se = (int*) *NULL_POINTER;
                     // The destination element.
-                    int* de = NULL_POINTER;
+                    int* de = (int*) *NULL_POINTER;
                     // The loop variable.
                     int j = *NUMBER_0_INTEGER;
                     // The offset.
@@ -340,35 +341,35 @@ void set_integer_array_elements(void* p0, void* p1, void* p2, void* p3) {
 /**
  * Removes the integer array elements.
  *
- * @param p0 the destination array
- * @param p1 the size
+ * @param p0 the array
+ * @param p1 the array size
  * @param p2 the index
- * @param p3 the count
+ * @param p3 the elements count
  */
 void remove_integer_array_elements(void* p0, void* p1, void* p2, void* p3) {
 
-    if (p3 != NULL_POINTER) {
+    if (p3 != *NULL_POINTER) {
 
         int* c = (int*) p3;
 
-        if (p2 != NULL_POINTER) {
+        if (p2 != *NULL_POINTER) {
 
             int* i = (int*) p2;
 
-            if (p1 != NULL_POINTER) {
+            if (p1 != *NULL_POINTER) {
 
                 int* m = (int*) p1;
 
-                if (p0 != NULL_POINTER) {
+                if (p0 != *NULL_POINTER) {
 
                     // The destination base.
                     void* db = (void*) (p0 + (*i * *INTEGER_PRIMITIVE_SIZE));
                     // The source base.
                     void* sb = (void*) (db + (*c * *INTEGER_PRIMITIVE_SIZE));
                     // The source element.
-                    int* se = NULL_POINTER;
+                    int* se = (int*) *NULL_POINTER;
                     // The destination element.
-                    int* de = NULL_POINTER;
+                    int* de = (int*) *NULL_POINTER;
                     // The remaining elements size.
                     int r = *m - (*i + *c);
                     // The loop variable.
@@ -433,21 +434,21 @@ void remove_integer_array_elements(void* p0, void* p1, void* p2, void* p3) {
 /**
  * Gets the integer array elements.
  *
- * @param p0 the source array
- * @param p1 the source index
- * @param p2 the destination elements (Hand over as array reference!)
+ * @param p0 the array
+ * @param p1 the index
+ * @param p2 the elements (Hand over as array reference!)
  */
 void get_integer_array_elements(void* p0, void* p1, void* p2) {
 
-    if (p2 != NULL_POINTER) {
+    if (p2 != *NULL_POINTER) {
 
         void** d = (void**) p2;
 
-        if (p1 != NULL_POINTER) {
+        if (p1 != *NULL_POINTER) {
 
             int* i = (int*) p1;
 
-            if (p0 != NULL_POINTER) {
+            if (p0 != *NULL_POINTER) {
 
                 // Determine element.
                 *d = (void*) (p0 + (*i * *INTEGER_PRIMITIVE_SIZE));
@@ -483,24 +484,24 @@ void get_integer_array_elements(void* p0, void* p1, void* p2) {
  */
 void get_integer_array_elements_index(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p4 != NULL_POINTER) {
+    if (p4 != *NULL_POINTER) {
 
         int* i = (int*) p4;
 
-        if (p3 != NULL_POINTER) {
+        if (p3 != *NULL_POINTER) {
 
             int* ec = (int*) p3;
 
-            if (p1 != NULL_POINTER) {
+            if (p1 != *NULL_POINTER) {
 
                 int* ac = (int*) p1;
 
-                if (p0 != NULL_POINTER) {
+                if (p0 != *NULL_POINTER) {
 
                     // The iteration limit.
                     int l = *ac - *ec + *NUMBER_1_INTEGER;
                     // The element.
-                    void* e = NULL_POINTER;
+                    void* e = *NULL_POINTER;
                     // The loop variable.
                     int j = *NUMBER_0_INTEGER;
                     // The comparison result.

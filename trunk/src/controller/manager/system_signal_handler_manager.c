@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2007-04-16 15:57:55 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2007-05-16 19:29:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -31,6 +31,7 @@
 #include <signal.h>
 #include "../../globals/constants/integer/integer_constants.c"
 #include "../../globals/constants/log_message/log_message_constants.c"
+#include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/constants/system_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../globals/variables/variables.c"
@@ -73,7 +74,7 @@ void interrupt_service_system_signal_handler(int p0) {
 
 //??    fprintf(stdout, "TEST signal handler linux console irq %i\n", p0);
 
-            pthread_exit(NULL_POINTER);
+            pthread_exit(*NULL_POINTER);
 
             // CAUTION! The thread CANNOT be reset here with:
             // *LINUX_CONSOLE_THREAD = *INVALID_VALUE;
@@ -92,7 +93,7 @@ void interrupt_service_system_signal_handler(int p0) {
 
 //??    fprintf(stdout, "TEST signal handler x window system irq %i\n", p0);
 
-            pthread_exit(NULL_POINTER);
+            pthread_exit(*NULL_POINTER);
 
             // CAUTION! The thread CANNOT be reset here with:
             // *X_WINDOW_SYSTEM_THREAD = *INVALID_VALUE;
@@ -111,7 +112,7 @@ void interrupt_service_system_signal_handler(int p0) {
 
 //??    fprintf(stdout, "TEST signal handler www service irq %i\n", p0);
 
-            pthread_exit(NULL_POINTER);
+            pthread_exit(*NULL_POINTER);
 
             // CAUTION! The thread CANNOT be reset here with:
             // *WWW_SERVICE_THREAD = *INVALID_VALUE;
@@ -130,7 +131,7 @@ void interrupt_service_system_signal_handler(int p0) {
 
 //??    fprintf(stdout, "TEST signal handler cyboi service irq %i\n", p0);
 
-            pthread_exit(NULL_POINTER);
+            pthread_exit(*NULL_POINTER);
 
             // CAUTION! The thread CANNOT be reset here with:
             // *CYBOI_SERVICE_THREAD = *INVALID_VALUE;
@@ -181,7 +182,7 @@ void startup_system_signal_handler() {
     oldact.sa_mask = oldmask;
 
     // Set up a new action for the SIGUSR1 signal.
-    sigaction(SIGUSR1, &act, NULL_POINTER);
+    sigaction(SIGUSR1, &act, *NULL_POINTER);
 
 /*??
     // Examine or change the calling process's signal mask.
@@ -218,7 +219,7 @@ void startup_system_signal_handler() {
     // sigsuspend -- in this case, the SIGIO and SIGUSR1 signals are
     // once again blocked. This call to sigprocmask is necessary to
     // explicitly unblock this signal.
-    sigprocmask(SIG_UNBLOCK, &mask, NULL_POINTER);
+    sigprocmask(SIG_UNBLOCK, &mask, *NULL_POINTER);
 */
 }
 

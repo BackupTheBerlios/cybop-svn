@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.18 $ $Date: 2007-05-15 14:52:05 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2007-05-16 19:29:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  *
@@ -49,6 +49,7 @@
 #include <X11/Xlib.h>
 #include "../../globals/constants/integer/integer_constants.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/variables/variables.c"
 #include "../../memoriser/accessor.c"
 #include "../../memoriser/allocator.c"
@@ -68,23 +69,13 @@ void shutdown_x_window_system(void* p0, void* p1, void* p2, void* p3) {
     log_message_debug("Shutdown x window system.");
 
     // The display internal.
-    struct _XDisplay** di = (struct _XDisplay**) &NULL_POINTER;
-
-    fprintf(stderr, "TEST di 1: %i \n", di);
-    fprintf(stderr, "TEST *di 1: %i \n", *di);
+    struct _XDisplay** di = (struct _XDisplay**) NULL_POINTER;
 
     // Get display internal.
     get(p0, (void*) X_WINDOW_SYSTEM_DISPLAY_INTERNAL, (void*) &di, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-    fprintf(stderr, "TEST di 2: %i \n", di);
-    fprintf(stderr, "TEST *di 2: %i \n", *di);
-
-    fprintf(stderr, "TEST NULL_POINTER: %i \n", NULL_POINTER);
-
     // Only destroy display if existent.
-    if (*di != NULL_POINTER) {
-
-    fprintf(stderr, "TEST *di 3: %i \n", *di);
+    if (*di != *NULL_POINTER) {
 
         // Interrupt x window system service thread.
         interrupt_x_window_system();
@@ -95,44 +86,44 @@ void shutdown_x_window_system(void* p0, void* p1, void* p2, void* p3) {
         // char* dn = "earth.cybop.net:0.1"
         //?? TODO: This has to be built dynamically, later on!
         //?? For now, it is just an empty string.
-        char** dn = (char**) &NULL_POINTER;
+        char** dn = (char**) NULL_POINTER;
         // The display, which is a subsumption of
         // xserver, screens, hardware (input devices etc.).
-        struct _XDisplay** d = (struct _XDisplay**) &NULL_POINTER;
+        struct _XDisplay** d = (struct _XDisplay**) NULL_POINTER;
         // The screen number.
-        int** sn = (int**) &NULL_POINTER;
+        int** sn = (int**) NULL_POINTER;
         // The screen.
-//??        Screen** s = (Screen**) &NULL_POINTER;
+//??        Screen** s = (Screen**) NULL_POINTER;
         // The default colourmap id for allocation on the specified screen.
         // Most routine allocations of colour should be made out of this colormap.
-        int** cm = (int**) &NULL_POINTER;
+        int** cm = (int**) NULL_POINTER;
         // The background pixel values.
-        unsigned long** bg = (unsigned long**) &NULL_POINTER;
+        unsigned long** bg = (unsigned long**) NULL_POINTER;
         // The foreground pixel values.
-        unsigned long** fg = (unsigned long**) &NULL_POINTER;
+        unsigned long** fg = (unsigned long**) NULL_POINTER;
         // The top-level root window for the given display and screen.
         // This is sometimes called the root window of the window manager.
         // Remember, CYBOI itself IS the window manager.
-        int** r = (int**) &NULL_POINTER;
+        int** r = (int**) NULL_POINTER;
         // The menu border bottom graphic context.
-        struct _XGC** gc_menu_border_bottom = NULL_POINTER;
+        struct _XGC** gc_menu_border_bottom = (struct _XGC**) NULL_POINTER;
         // The window.
-        int** w = NULL_POINTER;
+        int** w = (int**) NULL_POINTER;
         // The value mask for the graphic context.
         // It specifies which components in the graphic context are to be set
         // using the information in the specified values structure.
         // This argument is the bitwise inclusive OR of zero or more of the
         // valid graphic context component mask bits.
-        unsigned long** vm = (unsigned long**) &NULL_POINTER;
+        unsigned long** vm = (unsigned long**) NULL_POINTER;
         // The values as specified by the value mask.
-        XGCValues** v = (XGCValues**) &NULL_POINTER;
+        XGCValues** v = (XGCValues**) NULL_POINTER;
         // The graphic context. Each graphic element needs one.
         // It can be used with any destination drawable (window or pixmap)
         // having the same root and depth as the specified drawable.
         // Use with other drawables results in a BadMatch error.
-        struct _XGC** gc = (struct _XGC**) &NULL_POINTER;
+        struct _XGC** gc = (struct _XGC**) NULL_POINTER;
         // The interrupt flag.
-        int* ir = NULL_POINTER;
+        int* ir = (int*) *NULL_POINTER;
 
         // Get x window system internals.
         get(p0, (void*) X_WINDOW_SYSTEM_DISPLAY_NAME_INTERNAL, (void*) &dn, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);

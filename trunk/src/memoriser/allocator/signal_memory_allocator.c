@@ -23,7 +23,7 @@
  * This file contains the functionality to:
  * - create a signal memory in memory
  *
- * @version $Revision: 1.10 $ $Date: 2007-04-16 15:50:29 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2007-05-16 19:29:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -34,6 +34,7 @@
 #include "../../globals/constants/integer/integer_constants.c"
 #include "../../globals/constants/log_message/log_message_constants.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../memoriser/array.c"
 
@@ -45,7 +46,7 @@
  */
 void allocate_signal_memory(void* p0, void* p1) {
 
-    if (p0 != NULL_POINTER) {
+    if (p0 != *NULL_POINTER) {
 
         void** s = (void**) p0;
 
@@ -55,14 +56,14 @@ void allocate_signal_memory(void* p0, void* p1) {
         allocate_array(p0, (void*) SIGNAL_MEMORY_COUNT, (void*) POINTER_ARRAY);
 
         // The abstractions, models, details, priorities, identifications.
-        void* a = NULL_POINTER;
-        void* ac = NULL_POINTER;
-        void* m = NULL_POINTER;
-        void* mc = NULL_POINTER;
-        void* d = NULL_POINTER;
-        void* dc = NULL_POINTER;
-        void* p = NULL_POINTER;
-        void* id = NULL_POINTER;
+        void* a = *NULL_POINTER;
+        void* ac = *NULL_POINTER;
+        void* m = *NULL_POINTER;
+        void* mc = *NULL_POINTER;
+        void* d = *NULL_POINTER;
+        void* dc = *NULL_POINTER;
+        void* p = *NULL_POINTER;
+        void* id = *NULL_POINTER;
 
         // Allocate abstractions, models, details, priorities, identifications.
         allocate_array((void*) &a, p1, (void*) POINTER_ARRAY);
@@ -100,21 +101,21 @@ void allocate_signal_memory(void* p0, void* p1) {
  */
 void deallocate_signal_memory(void* p0, void* p1) {
 
-    if (p0 != NULL_POINTER) {
+    if (p0 != *NULL_POINTER) {
 
         void** s = (void**) p0;
 
         log_message((void*) INFO_LOG_LEVEL, (void*) DESTROY_SIGNAL_MEMORY_MESSAGE, (void*) DESTROY_SIGNAL_MEMORY_MESSAGE_COUNT);
 
         // The abstractions, models, details, priorities, identifications.
-        void** a = &NULL_POINTER;
-        void** ac = &NULL_POINTER;
-        void** m = &NULL_POINTER;
-        void** mc = &NULL_POINTER;
-        void** d = &NULL_POINTER;
-        void** dc = &NULL_POINTER;
-        void** p = &NULL_POINTER;
-        void** id = &NULL_POINTER;
+        void** a = NULL_POINTER;
+        void** ac = NULL_POINTER;
+        void** m = NULL_POINTER;
+        void** mc = NULL_POINTER;
+        void** d = NULL_POINTER;
+        void** dc = NULL_POINTER;
+        void** p = NULL_POINTER;
+        void** id = NULL_POINTER;
 
     /*??
         log_message((void*) &INFO_LOG_LEVEL, (void*) &"Destroy all signals left in signal memory.");
@@ -122,8 +123,8 @@ void deallocate_signal_memory(void* p0, void* p1) {
         int i = 0;
         get_array_count(m->signals, (void*) &i);
         i--;
-        void* s = NULL_POINTER;
-        void* a = NULL_POINTER;
+        void* s = *NULL_POINTER;
+        void* a = *NULL_POINTER;
 
         while (i >= 0) {
 

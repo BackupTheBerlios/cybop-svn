@@ -38,7 +38,7 @@
  *
  * Array elements are accessed over their index (array base pointer + index).
  *
- * @version $Revision: 1.6 $ $Date: 2007-05-15 14:52:05 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2007-05-16 19:29:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -50,6 +50,7 @@
 #include <string.h>
 #include "../../globals/constants/integer/integer_constants.c"
 #include "../../globals/constants/log_message/log_message_constants.c"
+#include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/variables/variables.c"
 #include "../../globals/logger/logger.c"
 
@@ -57,20 +58,19 @@
  * Allocates the wide character array.
  *
  * @param p0 the array (Hand over as reference!)
- * @param p1 the size
+ * @param p1 the array size
  */
 void allocate_wide_character_array(void* p0, void* p1) {
 
-    if (p1 != NULL_POINTER) {
+    if (p1 != *NULL_POINTER) {
 
         int* s = (int*) p1;
 
-        if (p0 != NULL_POINTER) {
+        if (p0 != *NULL_POINTER) {
 
             void** a = (void**) p0;
 
             log_message_debug("Information: Allocate wide character array.");
-//??            log_message((void*) INFO_LOG_LEVEL, (void*) CREATE_CHARACTER_ARRAY_MESSAGE, (void*) CREATE_CHARACTER_ARRAY_MESSAGE_COUNT);
 
             // Determine the memory area to be allocated.
             // It is the product of the given size and the type size.
@@ -86,12 +86,12 @@ void allocate_wide_character_array(void* p0, void* p1) {
 
         } else {
 
-//??            log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_CREATE_CHARACTER_ARRAY_THE_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_CREATE_CHARACTER_ARRAY_THE_ARRAY_IS_NULL_MESSAGE_COUNT);
+            log_message_debug("Error: Could not allocate wide character array. The array is null.");
         }
 
     } else {
 
-//??        log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_CREATE_CHARACTER_ARRAY_THE_COUNT_IS_NULL_MESSAGE, (void*) COULD_NOT_CREATE_CHARACTER_ARRAY_THE_COUNT_IS_NULL_MESSAGE_COUNT);
+        log_message_debug("Error: Could not allocate wide character array. The array size is null.");
     }
 }
 
@@ -99,31 +99,30 @@ void allocate_wide_character_array(void* p0, void* p1) {
  * Deallocates the wide character array.
  *
  * @param p0 the array (Hand over as reference!)
- * @param p1 the size
+ * @param p1 the array size
  */
 void deallocate_wide_character_array(void* p0, void* p1) {
 
-    if (p1 != NULL_POINTER) {
+    if (p1 != *NULL_POINTER) {
 
         int* s = (int*) p1;
 
-        if (p0 != NULL_POINTER) {
+        if (p0 != *NULL_POINTER) {
 
             void** a = (void**) p0;
 
             log_message_debug("Information: Deallocate wide character array.");
-//??            log_message((void*) INFO_LOG_LEVEL, (void*) DESTROY_CHARACTER_ARRAY_MESSAGE, (void*) DESTROY_CHARACTER_ARRAY_MESSAGE_COUNT);
 
             free(*a);
 
         } else {
 
-//??            log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_DESTROY_CHARACTER_ARRAY_THE_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_DESTROY_CHARACTER_ARRAY_THE_ARRAY_IS_NULL_MESSAGE_COUNT);
+            log_message_debug("Error: Could not deallocate wide character array. The array is null.");
         }
 
     } else {
 
-//??        log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_DESTROY_CHARACTER_ARRAY_THE_COUNT_IS_NULL_MESSAGE, (void*) COULD_NOT_DESTROY_CHARACTER_ARRAY_THE_COUNT_IS_NULL_MESSAGE_COUNT);
+        log_message_debug("Error: Could not deallocate wide character array. The array size is null.");
     }
 }
 
@@ -131,25 +130,24 @@ void deallocate_wide_character_array(void* p0, void* p1) {
  * Reallocates the wide character array.
  *
  * @param p0 the array (Hand over as reference!)
- * @param p1 the count
- * @param p2 the size
+ * @param p1 the array count
+ * @param p2 the array size
  */
 void reallocate_wide_character_array(void* p0, void* p1, void* p2) {
 
-    if (p2 != NULL_POINTER) {
+    if (p2 != *NULL_POINTER) {
 
         int* s = (int*) p2;
 
-        if (p1 != NULL_POINTER) {
+        if (p1 != *NULL_POINTER) {
 
             int* c = (int*) p1;
 
-            if (p0 != NULL_POINTER) {
+            if (p0 != *NULL_POINTER) {
 
                 void** a = (void**) p0;
 
                 log_message_debug("Information: Reallocate wide character array.");
-//??                log_message((void*) INFO_LOG_LEVEL, (void*) RESIZE_CHARACTER_ARRAY_MESSAGE, (void*) RESIZE_CHARACTER_ARRAY_MESSAGE_COUNT);
 
                 // Determine the memory area to be allocated.
                 // It is the product of the given size and the type size.
@@ -168,21 +166,21 @@ void reallocate_wide_character_array(void* p0, void* p1, void* p2) {
 
                 // Initialise ONLY NEW array elements with null pointer.
                 // Leave existing elements untouched.
-                memset(e, 0, n);
+                memset(e, *NUMBER_0_INTEGER, n);
 
             } else {
 
-//??                log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_RESIZE_CHARACTER_ARRAY_THE_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_RESIZE_CHARACTER_ARRAY_THE_ARRAY_IS_NULL_MESSAGE_COUNT);
+                log_message_debug("Error: Could not reallocate wide character array. The array is null.");
             }
 
         } else {
 
-            log_message_debug("Could not reallocate wide character array. The array count parameter is null.");
+            log_message_debug("Error: Could not reallocate wide character array. The array count is null.");
         }
 
     } else {
 
-//??        log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_RESIZE_CHARACTER_ARRAY_THE_COUNT_IS_NULL_MESSAGE, (void*) COULD_NOT_RESIZE_CHARACTER_ARRAY_THE_COUNT_IS_NULL_MESSAGE_COUNT);
+        log_message_debug("Error: Could not reallocate wide character array. The array size is null.");
     }
 }
 
@@ -194,38 +192,38 @@ void reallocate_wide_character_array(void* p0, void* p1, void* p2) {
  *
  * @param p0 the first array
  * @param p1 the second array
- * @param p2 the count
+ * @param p2 the array count
  * @param p3 the result (Hand over as reference!)
  */
 void compare_wide_character_array_elements(void* p0, void* p1, void* p2, void* p3) {
 
-    if (p3 != NULL_POINTER) {
+    if (p3 != *NULL_POINTER) {
 
         int* r = (int*) p3;
 
-        if (p2 != NULL_POINTER) {
+        if (p2 != *NULL_POINTER) {
 
             int* c = (int*) p2;
 
-            if (p1 != NULL_POINTER) {
+            if (p1 != *NULL_POINTER) {
 
-                if (p0 != NULL_POINTER) {
+                if (p0 != *NULL_POINTER) {
 
                     // The loop variable.
-                    int j = 0;
+                    int j = *NUMBER_0_INTEGER;
                     // The first element.
-                    wchar_t* e0 = NULL_POINTER;
+                    wchar_t* e0 = (wchar_t*) *NULL_POINTER;
                     // The second element.
-                    wchar_t* e1 = NULL_POINTER;
+                    wchar_t* e1 = (wchar_t*) *NULL_POINTER;
                     // The size.
-                    int s = 0;
+                    int s = *NUMBER_0_INTEGER;
 
-                    while (1) {
+                    while (*NUMBER_1_INTEGER) {
 
                         if (j >= *c) {
 
                             // All elements have been compared and are equal.
-                            *r = 1;
+                            *r = *NUMBER_1_INTEGER;
 
                             break;
                         }
@@ -273,34 +271,34 @@ void compare_wide_character_array_elements(void* p0, void* p1, void* p2, void* p
  * @param p0 the array
  * @param p1 the index
  * @param p2 the elements (Hand over as array!)
- * @param p3 the count
+ * @param p3 the elements count
  */
 void set_wide_character_array_elements(void* p0, void* p1, void* p2, void* p3) {
 
-    if (p3 != NULL_POINTER) {
+    if (p3 != *NULL_POINTER) {
 
         int* c = (int*) p3;
 
-        if (p2 != NULL_POINTER) {
+        if (p2 != *NULL_POINTER) {
 
-            if (p1 != NULL_POINTER) {
+            if (p1 != *NULL_POINTER) {
 
                 int* i = (int*) p1;
 
-                if (p0 != NULL_POINTER) {
+                if (p0 != *NULL_POINTER) {
 
                     // The destination base.
                     void* db = (void*) (p0 + (*i * *WIDE_CHARACTER_PRIMITIVE_SIZE));
                     // The source element.
-                    wchar_t* se = NULL_POINTER;
+                    wchar_t* se = (wchar_t*) *NULL_POINTER;
                     // The destination element.
-                    wchar_t* de = NULL_POINTER;
+                    wchar_t* de = (wchar_t*) *NULL_POINTER;
                     // The loop variable.
-                    int j = 0;
+                    int j = *NUMBER_0_INTEGER;
                     // The size.
-                    int s = 0;
+                    int s = *NUMBER_0_INTEGER;
 
-                    while (1) {
+                    while (*NUMBER_1_INTEGER) {
 
                         if (j >= *c) {
 
@@ -345,40 +343,40 @@ void set_wide_character_array_elements(void* p0, void* p1, void* p2, void* p3) {
  * Removes the wide character array elements.
  *
  * @param p0 the array
- * @param p1 the size
+ * @param p1 the array size
  * @param p2 the index
- * @param p3 the count
+ * @param p3 the elements count
  */
 void remove_wide_character_array_elements(void* p0, void* p1, void* p2, void* p3) {
 
-    if (p3 != NULL_POINTER) {
+    if (p3 != *NULL_POINTER) {
 
         int* c = (int*) p3;
 
-        if (p2 != NULL_POINTER) {
+        if (p2 != *NULL_POINTER) {
 
             int* i = (int*) p2;
 
-            if (p1 != NULL_POINTER) {
+            if (p1 != *NULL_POINTER) {
 
                 int* m = (int*) p1;
 
-                if (p0 != NULL_POINTER) {
+                if (p0 != *NULL_POINTER) {
 
                     // The destination base.
                     void* db = (void*) (p0 + (*i * *WIDE_CHARACTER_PRIMITIVE_SIZE));
                     // The source base.
                     void* sb = (void*) (db + (*c * *WIDE_CHARACTER_PRIMITIVE_SIZE));
                     // The source element.
-                    wchar_t* se = NULL_POINTER;
+                    wchar_t* se = (wchar_t*) *NULL_POINTER;
                     // The destination element.
-                    wchar_t* de = NULL_POINTER;
+                    wchar_t* de = (wchar_t*) *NULL_POINTER;
                     // The remaining elements size.
                     int r = *m - (*i + *c);
                     // The loop variable.
-                    int j = 0;
+                    int j = *NUMBER_0_INTEGER;
                     // The size.
-                    int s = 0;
+                    int s = *NUMBER_0_INTEGER;
 
                     // Starting from the given index, move all remaining elements
                     // one place towards the beginning of the elements.
@@ -387,7 +385,7 @@ void remove_wide_character_array_elements(void* p0, void* p1, void* p2, void* p3
                     // index = 4 (remove "..")
                     // count = 2
                     // rest = 11 - (4 + 2) = 11 - 6 = 5
-                    while (1) {
+                    while (*NUMBER_1_INTEGER) {
 
                         if (j >= r) {
 
@@ -443,15 +441,15 @@ void remove_wide_character_array_elements(void* p0, void* p1, void* p2, void* p3
  */
 void get_wide_character_array_elements(void* p0, void* p1, void* p2) {
 
-    if (p2 != NULL_POINTER) {
+    if (p2 != *NULL_POINTER) {
 
         void** e = (void**) p2;
 
-        if (p1 != NULL_POINTER) {
+        if (p1 != *NULL_POINTER) {
 
             int* i = (int*) p1;
 
-            if (p0 != NULL_POINTER) {
+            if (p0 != *NULL_POINTER) {
 
                 // Determine element.
                 *e = (void*) (p0 + (*i * *WIDE_CHARACTER_PRIMITIVE_SIZE));
@@ -487,30 +485,30 @@ void get_wide_character_array_elements(void* p0, void* p1, void* p2) {
  */
 void get_wide_character_array_elements_index(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p4 != NULL_POINTER) {
+    if (p4 != *NULL_POINTER) {
 
         int* i = (int*) p4;
 
-        if (p3 != NULL_POINTER) {
+        if (p3 != *NULL_POINTER) {
 
             int* ec = (int*) p3;
 
-            if (p1 != NULL_POINTER) {
+            if (p1 != *NULL_POINTER) {
 
                 int* ac = (int*) p1;
 
-                if (p0 != NULL_POINTER) {
+                if (p0 != *NULL_POINTER) {
 
                     // The iteration limit.
-                    int l = *ac - *ec + 1;
+                    int l = *ac - *ec + *NUMBER_1_INTEGER;
                     // The element.
-                    void* e = NULL_POINTER;
+                    void* e = *NULL_POINTER;
                     // The loop variable.
-                    int j = 0;
+                    int j = *NUMBER_0_INTEGER;
                     // The comparison result.
-                    int r = 0;
+                    int r = *NUMBER_0_INTEGER;
 
-                    while (1) {
+                    while (*NUMBER_1_INTEGER) {
 
                         if (j >= l) {
 
@@ -521,7 +519,7 @@ void get_wide_character_array_elements_index(void* p0, void* p1, void* p2, void*
                         get_wide_character_array_elements(p0, (void*) &j, (void*) &e);
                         compare_wide_character_array_elements(e, p2, p3, (void*) &r);
 
-                        if (r == 1) {
+                        if (r == *NUMBER_1_INTEGER) {
 
                             // The element has been found.
                             *i = j;

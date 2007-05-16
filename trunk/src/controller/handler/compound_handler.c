@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.14 $ $Date: 2007-04-16 15:57:55 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2007-05-16 19:29:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -30,6 +30,7 @@
 
 #include "../../globals/constants/log_message/log_message_constants.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/variables/variables.c"
 #include "../../globals/logger/logger.c"
 #include "../../memoriser/array.c"
@@ -64,14 +65,14 @@ void handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 void handle_compound(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
     void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14) {
 
-    if (p11 != NULL_POINTER) {
+    if (p11 != *NULL_POINTER) {
 
         int* sc = (int*) p11;
 
         // The direct execution flag.
-        int* x = NULL_POINTER;
+        int* x = (int*) *NULL_POINTER;
 
-        if (p14 != NULL_POINTER) {
+        if (p14 != *NULL_POINTER) {
 
             x = (int*) p14;
         };
@@ -80,12 +81,12 @@ void handle_compound(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
         log_message((void*) INFO_LOG_LEVEL, (void*) HANDLE_COMPOUND_MESSAGE, (void*) HANDLE_COMPOUND_MESSAGE_COUNT);
 
         // The abstractions, models, details.
-        void** pa = &NULL_POINTER;
-        void** pac = &NULL_POINTER;
-        void** pm = &NULL_POINTER;
-        void** pmc = &NULL_POINTER;
-        void** pd = &NULL_POINTER;
-        void** pdc = &NULL_POINTER;
+        void** pa = NULL_POINTER;
+        void** pac = NULL_POINTER;
+        void** pm = NULL_POINTER;
+        void** pmc = NULL_POINTER;
+        void** pd = NULL_POINTER;
+        void** pdc = NULL_POINTER;
 
         // Get abstractions, models, details.
         get_array_elements(p10, (void*) ABSTRACTIONS_INDEX, (void*) &pa, (void*) POINTER_ARRAY);
@@ -95,25 +96,25 @@ void handle_compound(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
         get_array_elements(p10, (void*) DETAILS_INDEX, (void*) &pd, (void*) POINTER_ARRAY);
         get_array_elements(p10, (void*) DETAILS_COUNTS_INDEX, (void*) &pdc, (void*) POINTER_ARRAY);
 
-        if (*pa != NULL_POINTER) {
+        if (*pa != *NULL_POINTER) {
 
-            if (*pac != NULL_POINTER) {
+            if (*pac != *NULL_POINTER) {
 
-                if (*pm != NULL_POINTER) {
+                if (*pm != *NULL_POINTER) {
 
-                    if (*pmc != NULL_POINTER) {
+                    if (*pmc != *NULL_POINTER) {
 
-                        if (*pd != NULL_POINTER) {
+                        if (*pd != *NULL_POINTER) {
 
-                            if (*pdc != NULL_POINTER) {
+                            if (*pdc != *NULL_POINTER) {
 
                                 // The abstraction, model, details.
-                                void** a = &NULL_POINTER;
-                                void** ac = &NULL_POINTER;
-                                void** m = &NULL_POINTER;
-                                void** mc = &NULL_POINTER;
-                                void** d = &NULL_POINTER;
-                                void** dc = &NULL_POINTER;
+                                void** a = NULL_POINTER;
+                                void** ac = NULL_POINTER;
+                                void** m = NULL_POINTER;
+                                void** mc = NULL_POINTER;
+                                void** d = NULL_POINTER;
+                                void** dc = NULL_POINTER;
 
                                 // The loop variable.
                                 int j = 0;
@@ -162,12 +163,12 @@ void handle_compound(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
 */
 
                                     // Reset abstraction, model, details.
-                                    a = &NULL_POINTER;
-                                    ac = &NULL_POINTER;
-                                    m = &NULL_POINTER;
-                                    mc = &NULL_POINTER;
-                                    d = &NULL_POINTER;
-                                    dc = &NULL_POINTER;
+                                    a = NULL_POINTER;
+                                    ac = NULL_POINTER;
+                                    m = NULL_POINTER;
+                                    mc = NULL_POINTER;
+                                    d = NULL_POINTER;
+                                    dc = NULL_POINTER;
 
                                     j++;
                                 }

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2007-04-16 15:56:29 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2007-05-16 19:29:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -35,6 +35,7 @@
 #include "../../globals/constants/integer/integer_constants.c"
 #include "../../globals/constants/log_message/log_message_constants.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/constants/system_constants.c"
 #include "../../globals/logger/logger.c"
 
@@ -62,7 +63,7 @@ void interrupt_x_window_system() {
         pthread_kill(*X_WINDOW_SYSTEM_THREAD, SIGUSR1);
 
         // Wait for thread to finish.
-        pthread_join(*X_WINDOW_SYSTEM_THREAD, NULL_POINTER);
+        pthread_join(*X_WINDOW_SYSTEM_THREAD, *NULL_POINTER);
 
         // Reset thread.
         *X_WINDOW_SYSTEM_THREAD = *INVALID_VALUE;

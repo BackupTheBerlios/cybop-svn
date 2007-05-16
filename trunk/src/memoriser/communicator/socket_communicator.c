@@ -24,7 +24,7 @@
  * - receive an http stream into a byte array
  * - send an http stream from a byte array
  *
- * @version $Revision: 1.8 $ $Date: 2007-04-16 15:50:29 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2007-05-16 19:29:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -37,6 +37,7 @@
 #include <stdio.h>
 #include "../../globals/constants/cybol/cybol_model_constants.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/constants/system_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../globals/variables/variables.c"
@@ -66,15 +67,15 @@ void read_socket(void* p0, void* p1, void* p2, void* p3, void* p4) {
  */
 void write_socket_stream_server_mode_single_transfer(void* p0, void* p1, void* p2, void* p3) {
 
-    if (p3 != NULL_POINTER) {
+    if (p3 != *NULL_POINTER) {
 
         int* n = (int*) p3;
 
-        if (p2 != NULL_POINTER) {
+        if (p2 != *NULL_POINTER) {
 
             int* sc = (int*) p2;
 
-            if (p0 != NULL_POINTER) {
+            if (p0 != *NULL_POINTER) {
 
                 int* d = (int*) p0;
 
@@ -169,7 +170,7 @@ void write_socket_stream_server_mode_single_transfer(void* p0, void* p1, void* p
  */
 void write_socket_stream_server_mode(void* p0, void* p1, void* p2) {
 
-    if (p2 != NULL_POINTER) {
+    if (p2 != *NULL_POINTER) {
 
         int* sc = (int*) p2;
 
@@ -230,15 +231,15 @@ void write_socket_stream_server_mode(void* p0, void* p1, void* p2) {
  */
 void write_socket_stream_client_mode(void* p0, void* p1, void* p2) {
 
-    if (p2 != NULL_POINTER) {
+    if (p2 != *NULL_POINTER) {
 
         socklen_t* as = (socklen_t*) p2;
 
-        if (p1 != NULL_POINTER) {
+        if (p1 != *NULL_POINTER) {
 
             struct sockaddr** a = (struct sockaddr**) p1;
 
-            if (p0 != NULL_POINTER) {
+            if (p0 != *NULL_POINTER) {
 
                 int* d = (int*) p0;
 
@@ -384,19 +385,19 @@ void write_socket_stream(void* p0, void* p1, void* p2, void* p3, void* p4, void*
  */
 void write_socket_dgram(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p4 != NULL_POINTER) {
+    if (p4 != *NULL_POINTER) {
 
         socklen_t* as = (socklen_t*) p4;
 
-        if (p3 != NULL_POINTER) {
+        if (p3 != *NULL_POINTER) {
 
             struct sockaddr** a = (struct sockaddr**) p3;
 
-            if (p2 != NULL_POINTER) {
+            if (p2 != *NULL_POINTER) {
 
                 int* sc = (int*) p2;
 
-                if (p0 != NULL_POINTER) {
+                if (p0 != *NULL_POINTER) {
 
                     int* d = (int*) p0;
 
@@ -500,7 +501,7 @@ void write_socket_raw() {
  */
 void write_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
 
-    if (p7 != NULL_POINTER) {
+    if (p7 != *NULL_POINTER) {
 
         int* st = (int*) p7;
 

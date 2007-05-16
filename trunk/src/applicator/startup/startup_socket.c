@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.18 $ $Date: 2007-04-16 15:56:30 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2007-05-16 19:29:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -42,6 +42,7 @@
 #include "../../globals/constants/integer/integer_constants.c"
 #include "../../globals/constants/cybol/cybol_model_constants.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/constants/system_constants.c"
 #include "../../globals/variables/variables.c"
 #include "../../memoriser/accessor.c"
@@ -58,11 +59,11 @@
  */
 void startup_socket_get_namespace(void* p0, void* p1, void* p2, void* p3) {
 
-    if (p1 != NULL_POINTER) {
+    if (p1 != *NULL_POINTER) {
 
         int* an = (int*) p1;
 
-        if (p0 != NULL_POINTER) {
+        if (p0 != *NULL_POINTER) {
 
             int* sn = (int*) p0;
 
@@ -124,7 +125,7 @@ void startup_socket_get_namespace(void* p0, void* p1, void* p2, void* p3) {
  */
 void startup_socket_get_style(void* p0, void* p1, void* p2) {
 
-    if (p0 != NULL_POINTER) {
+    if (p0 != *NULL_POINTER) {
 
         int* s = (int*) p0;
 
@@ -179,18 +180,18 @@ void startup_socket_get_style(void* p0, void* p1, void* p2) {
  */
 void startup_socket_get_host_address(void* p0, void* p1, void* p2, void* p3) {
 
-    if (p3 != NULL_POINTER) {
+    if (p3 != *NULL_POINTER) {
 
         int* an = (int*) p3;
 
-        if (p2 != NULL_POINTER) {
+        if (p2 != *NULL_POINTER) {
 
             int* amc = (int*) p2;
 
-            if (p0 != NULL_POINTER) {
+            if (p0 != *NULL_POINTER) {
 
-                struct in_addr* a4 = NULL_POINTER;
-                struct in6_addr* a6 = NULL_POINTER;
+                struct in_addr* a4 = (struct in_addr*) *NULL_POINTER;
+                struct in6_addr* a6 = (struct in6_addr*) *NULL_POINTER;
 
                 if (*an == AF_INET) {
 
@@ -246,7 +247,7 @@ void startup_socket_get_host_address(void* p0, void* p1, void* p2, void* p3) {
                     // address is supposed to be the host address directly.
 
                     // The terminated address model.
-                    char* s = NULL_POINTER;
+                    char* s = (char*) *NULL_POINTER;
                     int ss = *amc + *NUMBER_1_INTEGER;
 
                     // Allocate terminated address model.
@@ -290,15 +291,15 @@ void startup_socket_get_host_address(void* p0, void* p1, void* p2, void* p3) {
  */
 void startup_socket_initialise_local_socket_address(void* p0, void* p1, void* p2) {
 
-    if (p2 != NULL_POINTER) {
+    if (p2 != *NULL_POINTER) {
 
         int* fc = (int*) p2;
 
-        if (p1 != NULL_POINTER) {
+        if (p1 != *NULL_POINTER) {
 
             char* f = (char*) p1;
 
-            if (p0 != NULL_POINTER) {
+            if (p0 != *NULL_POINTER) {
 
                 // CAUTION! The compiler brings an error if the "struct sockaddr_un"
                 // type is used, because pointer calculation is done below!
@@ -389,15 +390,15 @@ void startup_socket_initialise_local_socket_address(void* p0, void* p1, void* p2
  */
 void startup_socket_initialise_ipv4_socket_address(void* p0, void* p1, void* p2) {
 
-    if (p2 != NULL_POINTER) {
+    if (p2 != *NULL_POINTER) {
 
         int* p = (int*) p2;
 
-        if (p1 != NULL_POINTER) {
+        if (p1 != *NULL_POINTER) {
 
             int* h = (int*) p1;
 
-            if (p0 != NULL_POINTER) {
+            if (p0 != *NULL_POINTER) {
 
                 struct sockaddr_in** a = (struct sockaddr_in**) p0;
 
@@ -451,15 +452,15 @@ void startup_socket_initialise_ipv4_socket_address(void* p0, void* p1, void* p2)
  */
 void startup_socket_initialise_ipv6_socket_address(void* p0, void* p1, void* p2) {
 
-    if (p2 != NULL_POINTER) {
+    if (p2 != *NULL_POINTER) {
 
         int* p = (int*) p2;
 
-        if (p1 != NULL_POINTER) {
+        if (p1 != *NULL_POINTER) {
 
             struct in6_addr* h = (struct in6_addr*) p1;
 
-            if (p0 != NULL_POINTER) {
+            if (p0 != *NULL_POINTER) {
 
                 struct sockaddr_in6** a = (struct sockaddr_in6**) p0;
 
@@ -529,7 +530,7 @@ void startup_socket_initialise_ipv6_socket_address(void* p0, void* p1, void* p2)
 void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
     void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11) {
 
-    if (p8 != NULL_POINTER) {
+    if (p8 != *NULL_POINTER) {
 
         int* base = (int*) p8;
 
@@ -549,36 +550,36 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
         // and not only the structure as type, so that the different
         // socket addresses can be processed uniformly below!
         // The local socket address of this system.
-        struct sockaddr_un* la = NULL_POINTER;
+        struct sockaddr_un* la = (struct sockaddr_un*) *NULL_POINTER;
         // The ipv4 internet socket address of this system.
-        struct sockaddr_in* ia4 = NULL_POINTER;
+        struct sockaddr_in* ia4 = (struct sockaddr_in*) *NULL_POINTER;
         // The ipv6 internet socket address of this system.
-        struct sockaddr_in6* ia6 = NULL_POINTER;
+        struct sockaddr_in6* ia6 = (struct sockaddr_in6*) *NULL_POINTER;
         // The communication partner local socket address.
-        struct sockaddr_un* pla = NULL_POINTER;
+        struct sockaddr_un* pla = (struct sockaddr_un*) *NULL_POINTER;
         // The communication partner ipv4 internet socket address.
-        struct sockaddr_in* pia4 = NULL_POINTER;
+        struct sockaddr_in* pia4 = (struct sockaddr_in*) *NULL_POINTER;
         // The communication partner ipv6 internet socket address.
-        struct sockaddr_in6* pia6 = NULL_POINTER;
+        struct sockaddr_in6* pia6 = (struct sockaddr_in6*) *NULL_POINTER;
         // The socket address size of this system.
-        int* as = NULL_POINTER;
+        int* as = (int*) *NULL_POINTER;
         // The communication partner socket address size.
-        int* pas = NULL_POINTER;
+        int* pas = (int*) *NULL_POINTER;
         // The socket of this system.
-        int* s = NULL_POINTER;
+        int* s = (int*) *NULL_POINTER;
         // The communication partner socket.
-        int* ps = NULL_POINTER;
+        int* ps = (int*) *NULL_POINTER;
 /*??
         // The signal ids.
-        void* id = NULL_POINTER;
-        int* idc = NULL_POINTER;
-        int* ids = NULL_POINTER;
+        void* id = *NULL_POINTER;
+        int* idc = (int*) *NULL_POINTER;
+        int* ids = (int*) *NULL_POINTER;
 */
         // The character buffer that will be used in the thread procedure
         // receiving messages via socket.
-        void* b = NULL_POINTER;
-        int* bc = NULL_POINTER;
-        int* bs = NULL_POINTER;
+        void* b = *NULL_POINTER;
+        int* bc = (int*) *NULL_POINTER;
+        int* bs = (int*) *NULL_POINTER;
         // The internal memory index.
         int i = *INVALID_VALUE;
         // The result.

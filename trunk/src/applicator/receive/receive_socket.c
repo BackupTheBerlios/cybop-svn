@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.21 $ $Date: 2007-05-09 15:32:40 $ $Author: christian $
+ * @version $Revision: 1.22 $ $Date: 2007-05-16 19:29:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -49,6 +49,7 @@
 #include "../../globals/constants/cybol/cybol_model_constants.c"
 #include "../../globals/constants/cybol/cybol_name_constants.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/constants/system_constants.c"
 #include "../../globals/variables/variables.c"
 #include "../../memoriser/accessor/compound_accessor.c"
@@ -95,7 +96,7 @@ void get_request_method(char* req, int* req_count, char** req_method, int* req_m
     *req_method_count = 0;
 
     // The element.
-    char* e = NULL_POINTER;
+    char* e = (char*) *NULL_POINTER;
 
     while (1) {
 
@@ -143,7 +144,7 @@ void receive_socket_url(char* req, int* req_count, char** urlbase, int* urlbase_
     int start_urlbase_flag = 0;
     int max_count = 0;
     // The element.
-    char* e = NULL_POINTER;
+    char* e = (char*) *NULL_POINTER;
 
     while (1) {
 
@@ -197,7 +198,7 @@ void receive_socket_url(char* req, int* req_count, char** urlbase, int* urlbase_
 /*??
 void* get_character_from_escape_code(void* source, int* source_count, char** dest) {
 
-    if ((source != NULL_POINTER) && (source_count != NULL_POINTER) && (dest != NULL_POINTER)) {
+    if ((source != *NULL_POINTER) && (source_count != *NULL_POINTER) && (dest != *NULL_POINTER)) {
 
         int r = 0;
 
@@ -484,19 +485,19 @@ void receive_socket_get_parameters_get_request(void* p0, void* p1, void* p2, voi
     void* p4, void* p5, void* p6, void* p7, void* p8, void* p9) {
 //?? (char* req, int* req_count, char** param, int* param_count) {
 
-    if (p9 != NULL_POINTER) {
+    if (p9 != *NULL_POINTER) {
 
         int* urlc = (int*) p9;
 
-        if (p8 != NULL_POINTER) {
+        if (p8 != *NULL_POINTER) {
 
             void** url = (void**) p8;
 
-            if (p1 != NULL_POINTER) {
+            if (p1 != *NULL_POINTER) {
 
                 int* nc = (int*) p1;
 
-                if (p0 != NULL_POINTER) {
+                if (p0 != *NULL_POINTER) {
 
                     void** n = (void**) p0;
 
@@ -531,7 +532,7 @@ void receive_socket_get_parameters_get_request(void* p0, void* p1, void* p2, voi
     int start_param_flag = 0;
     int max_count = 0;
     // The element.
-    char* e = NULL_POINTER;
+    char* e = (char*) *NULL_POINTER;
 
     while (1) {
 
@@ -601,7 +602,7 @@ void receive_socket_get_parameters_post_request(void* p0, void* p1, void* p2, vo
     int start_param_index = -1;
     int max_count = 0;
     // The element.
-    char* e = NULL_POINTER;
+    char* e = (char*) *NULL_POINTER;
 
     //get the index for beginning the paramaters
     while (1) {
@@ -717,11 +718,11 @@ void receive_socket_get_parameters_post_request(void* p0, void* p1, void* p2, vo
 void receive_socket_get_parameters(void* p0, void* p1, void* p2, void* p3,
     void* p4, void* p5, void* p6, void* p7, void* p8, void* p9) {
 
-    if (p9 != NULL_POINTER) {
+    if (p9 != *NULL_POINTER) {
 
         int* urlc = (int*) p9;
 
-        if (p8 != NULL_POINTER) {
+        if (p8 != *NULL_POINTER) {
 
             void** url = (void**) p8;
 
@@ -730,7 +731,7 @@ void receive_socket_get_parameters(void* p0, void* p1, void* p2, void* p3,
             // The comparison result.
             int r = 0;
             // The content pointer.
-            void* c = NULL_POINTER;
+            void* c = *NULL_POINTER;
             int cc = *NUMBER_0_INTEGER;
 
             if (r == 0) {
@@ -801,19 +802,19 @@ void receive_socket_get_parameters(void* p0, void* p1, void* p2, void* p3,
 void set_signals_for_all_parameters(void* p0, int* p1, void* p2) {
 
     //check of null pointer
-    if ((p0 != NULL_POINTER) && (p1 != NULL_POINTER) && (p2 != NULL_POINTER)) {
+    if ((p0 != *NULL_POINTER) && (p1 != *NULL_POINTER) && (p2 != *NULL_POINTER)) {
 
         int query_counter = 0;
 
         //paramater
-        char* param = NULL_POINTER;
-        int* param_count = NULL_POINTER;
-        int* param_size = NULL_POINTER;
+        char* param = (char*) *NULL_POINTER;
+        int* param_count = (int*) *NULL_POINTER;
+        int* param_size = (int*) *NULL_POINTER;
 
         //value for the parameter
-        char* value = NULL_POINTER;
-        int* value_count = NULL_POINTER;
-        int* value_size = NULL_POINTER;
+        char* value = (char*) *NULL_POINTER;
+        int* value_count = (int*) *NULL_POINTER;
+        int* value_size = (int*) *NULL_POINTER;
 
         allocate(&param_count, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
         *param_count = *p1;
@@ -831,9 +832,9 @@ void set_signals_for_all_parameters(void* p0, int* p1, void* p2) {
         int r = 0;
 
         //elements from the array
-        void* element = NULL_POINTER;
+        void* element = *NULL_POINTER;
         //elements from the array
-        void* decode_element = NULL_POINTER;
+        void* decode_element = *NULL_POINTER;
         int last_query_count = 0;
 
         //temp count  for comparision
@@ -935,7 +936,7 @@ void set_signals_for_all_parameters(void* p0, int* p1, void* p2) {
  */
 void receive_socket_signal(void* p0, void* p1, void* p2, void* p3) {
 
-    if (p3 != NULL_POINTER) {
+    if (p3 != *NULL_POINTER) {
 
         int* base = (int*) p3;
 
@@ -945,40 +946,40 @@ void receive_socket_signal(void* p0, void* p1, void* p2, void* p3) {
     fprintf(stderr, "TEST: receive socket command name count: %i \n", *((int*) p2));
 
         // The knowledge memory.
-        void** k = &NULL_POINTER;
-        void** kc = &NULL_POINTER;
-        void** ks = &NULL_POINTER;
+        void** k = NULL_POINTER;
+        void** kc = NULL_POINTER;
+        void** ks = NULL_POINTER;
         // The signal memory.
-        void** s = &NULL_POINTER;
-        void** sc = &NULL_POINTER;
-        void** ss = &NULL_POINTER;
+        void** s = NULL_POINTER;
+        void** sc = NULL_POINTER;
+        void** ss = NULL_POINTER;
         // The interrupt request flag.
-        sig_atomic_t** irq = (sig_atomic_t**) &NULL_POINTER;
+        sig_atomic_t** irq = (sig_atomic_t**) NULL_POINTER;
         // The signal memory mutex.
-        pthread_mutex_t** smt = (pthread_mutex_t**) &NULL_POINTER;
+        pthread_mutex_t** smt = (pthread_mutex_t**) NULL_POINTER;
         // The internal memory index.
         int i = *INVALID_VALUE;
         // The socket mutex.
-        pthread_mutex_t** somt = (pthread_mutex_t**) &NULL_POINTER;
+        pthread_mutex_t** somt = (pthread_mutex_t**) NULL_POINTER;
         // The commands.
-        void** c = &NULL_POINTER;
-        void** cc = &NULL_POINTER;
-        void** cs = &NULL_POINTER;
+        void** c = NULL_POINTER;
+        void** cc = NULL_POINTER;
+        void** cs = NULL_POINTER;
         // The command name, abstraction, model, details.
-        void** cn = &NULL_POINTER;
-        void** cnc = &NULL_POINTER;
-        void** cns = &NULL_POINTER;
-        void** ca = &NULL_POINTER;
-        void** cac = &NULL_POINTER;
-        void** cas = &NULL_POINTER;
-        void** cm = &NULL_POINTER;
-        void** cmc = &NULL_POINTER;
-        void** cms = &NULL_POINTER;
-        void** cd = &NULL_POINTER;
-        void** cdc = &NULL_POINTER;
-        void** cds = &NULL_POINTER;
+        void** cn = NULL_POINTER;
+        void** cnc = NULL_POINTER;
+        void** cns = NULL_POINTER;
+        void** ca = NULL_POINTER;
+        void** cac = NULL_POINTER;
+        void** cas = NULL_POINTER;
+        void** cm = NULL_POINTER;
+        void** cmc = NULL_POINTER;
+        void** cms = NULL_POINTER;
+        void** cd = NULL_POINTER;
+        void** cdc = NULL_POINTER;
+        void** cds = NULL_POINTER;
         // The signal id.
-        int* id = NULL_POINTER;
+        int* id = (int*) *NULL_POINTER;
 
         // Get knowledge memory internal.
         get(p0, (void*) KNOWLEDGE_MEMORY_INTERNAL, (void*) &k, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
@@ -1066,33 +1067,33 @@ void receive_socket_signal(void* p0, void* p1, void* p2, void* p3) {
  */
 void receive_socket_thread(void* p0, void* p1) {
 
-    if (p1 != NULL_POINTER) {
+    if (p1 != *NULL_POINTER) {
 
         int* base = (int*) p1;
 
         // The internal memory index.
         int i = *INVALID_VALUE;
         // The communication style.
-        void** st = &NULL_POINTER;
-        void** stc = &NULL_POINTER;
+        void** st = NULL_POINTER;
+        void** stc = NULL_POINTER;
         // The socket mutex.
-        pthread_mutex_t** mt = (pthread_mutex_t**) &NULL_POINTER;
+        pthread_mutex_t** mt = (pthread_mutex_t**) NULL_POINTER;
         // The socket of this system.
-        int** s = (int**) &NULL_POINTER;
+        int** s = (int**) NULL_POINTER;
         // The socket address of this system.
-        void** a = &NULL_POINTER;
-        void** as = &NULL_POINTER;
+        void** a = NULL_POINTER;
+        void** as = NULL_POINTER;
         // The partner-connected socket of this system.
-        int** ps = (int**) &NULL_POINTER;
+        int** ps = (int**) NULL_POINTER;
         // The communication partner socket address.
-        void** pa = &NULL_POINTER;
-        void** pas = &NULL_POINTER;
+        void** pa = NULL_POINTER;
+        void** pas = NULL_POINTER;
         // The character buffer.
-        void** b = &NULL_POINTER;
-        int** bc = (int**) &NULL_POINTER;
+        void** b = NULL_POINTER;
+        int** bc = (int**) NULL_POINTER;
         // The maximum buffer size.
         // CAUTION! A message MUST NOT be longer!
-        int** bs = (int**) &NULL_POINTER;
+        int** bs = (int**) NULL_POINTER;
         // The comparison result.
         int r = *NUMBER_0_INTEGER;
         // The error number.
@@ -1101,16 +1102,16 @@ void receive_socket_thread(void* p0, void* p1) {
         // across the various if-else sections.
         int e = *NUMBER_0_INTEGER;
         // The name.
-        void* name = NULL_POINTER;
+        void* name = *NULL_POINTER;
         int namec = *NUMBER_0_INTEGER;
         // The channel.
-        void* channel = NULL_POINTER;
+        void* channel = *NULL_POINTER;
         int channelc = *NUMBER_0_INTEGER;
         // The abstraction.
-        void* abstraction = NULL_POINTER;
+        void* abstraction = *NULL_POINTER;
         int abstractionc = *NUMBER_0_INTEGER;
         // The model.
-        void* model = NULL_POINTER;
+        void* model = *NULL_POINTER;
         int modelc = *NUMBER_0_INTEGER;
 
         // Get communication style.
@@ -1310,7 +1311,7 @@ void receive_socket_thread(void* p0, void* p1) {
 
 /*??
                 // The url basename.
-                char* url_basename = NULL_POINTER;
+                char* url_basename = (char*) *NULL_POINTER;
                 int url_basename_count = 0;
                 // Create url basename.
                 allocate_array((void*) &url_basename, (void*) &url_basename_count, (void*) CHARACTER_ARRAY);
@@ -1318,7 +1319,7 @@ void receive_socket_thread(void* p0, void* p1) {
                 receive_socket_url(msg, &msg_count, &url_basename, &url_basename_count);
 
                 // The parameter.
-                char* param = NULL_POINTER;
+                char* param = (char*) *NULL_POINTER;
                 int param_count = 0;
                 // Create paramater.
                 allocate_array((void*) &param, (void*) &param_count, (void*) CHARACTER_ARRAY);
@@ -1497,18 +1498,18 @@ void receive_socket_thread_cyboi(void* p0) {
  */
 void receive_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
 
-    if (p7 != NULL_POINTER) {
+    if (p7 != *NULL_POINTER) {
 
         int* t = (int*) p7;
 
-        if (p5 != NULL_POINTER) {
+        if (p5 != *NULL_POINTER) {
 
             int* b = (int*) p5;
 
             // The internal memory index.
             int i = *INVALID_VALUE;
             // The socket mutex.
-            pthread_mutex_t** mt = (pthread_mutex_t**) &NULL_POINTER;
+            pthread_mutex_t** mt = (pthread_mutex_t**) NULL_POINTER;
 
             // Get socket mutex.
             i = *b + *SOCKET_MUTEX_INTERNAL;
@@ -1571,7 +1572,7 @@ void receive_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, 
 
                 // Create thread.
                 // The third parameter is the procedure to be called.
-                pthread_create((pthread_t*) t, NULL_POINTER, p6, p0);
+                pthread_create((pthread_t*) t, *NULL_POINTER, p6, p0);
             }
 
         } else {

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2007-04-16 15:50:29 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2007-05-16 19:29:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -29,6 +29,7 @@
 
 #include "../../globals/constants/cybol/cybol_abstraction_constants.c"
 #include "../../globals/constants/log_message/log_message_constants.c"
+#include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/logger/logger.c"
 
 /**
@@ -68,7 +69,7 @@ void parse_compound(void* p0, void* p1, void* p2,
     if (*dc <= (*ds - *sc)) {
 
         // Add field to knowledge memory.
-        set_compound_element_by_name(*d, p1, p2, NULL_POINTER, NULL_POINTER, NULL_POINTER,
+        set_compound_element_by_name(*d, p1, p2, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
             n, (void*) nc, (void*) ns,
             a, (void*) ac, (void*) as,
             m, (void*) mc, (void*) ms,

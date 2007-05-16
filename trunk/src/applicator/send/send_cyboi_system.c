@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2007-04-23 23:15:07 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2007-05-16 19:29:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -32,6 +32,7 @@
 #include "../../globals/constants/integer/integer_constants.c"
 #include "../../globals/constants/log_message/log_message_constants.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../globals/variables/variables.c"
 #include "../../memoriser/accessor/signal_memory_accessor.c"
@@ -58,9 +59,9 @@ void send_cyboi_system(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
     log_message_debug("Information: Send message to cyboi system.");
 
     // The signal memory mutex.
-    pthread_mutex_t** mt = (pthread_mutex_t**) &NULL_POINTER;
+    pthread_mutex_t** mt = (pthread_mutex_t**) NULL_POINTER;
     // The interrupt request flag.
-    sig_atomic_t** irq = (sig_atomic_t**) &NULL_POINTER;
+    sig_atomic_t** irq = (sig_atomic_t**) NULL_POINTER;
 
     // Get signal memory mutex.
     get(p0, (void*) SIGNAL_MEMORY_MUTEX_INTERNAL, (void*) &mt, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2007-04-16 15:50:29 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2007-05-16 19:29:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -60,7 +60,7 @@ void allocate_internal_memory(void* p0, void* p1) {
  * Configuration parameter allocation/ deallocation is thus clearly in the
  * responsibility of the module developer and no effort is undertaken here
  * to automatically deallocate those configuration parameters which are still
- * existent in internal memory (unequal NULL_POINTER).
+ * existent in internal memory (unequal *NULL_POINTER).
  *
  * @param p0 the internal memory (Hand over as reference!)
  * @param p1 the internal memory size

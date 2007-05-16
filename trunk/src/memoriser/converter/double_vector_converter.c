@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2007-04-16 15:50:29 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2007-05-16 19:29:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -34,6 +34,7 @@
 //?? #include "../../globals/constants/integer/integer_constants.c"
 #include "../../globals/constants/log_message/log_message_constants.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/logger/logger.c"
 //?? #include "../../memoriser/allocator.c"
 #include "../../memoriser/array.c"
@@ -49,18 +50,18 @@
  */
 void parse_double(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p4 != NULL_POINTER) {
+    if (p4 != *NULL_POINTER) {
 
         int* sc = (int*) p4;
 
-        if (p0 != NULL_POINTER ) {
+        if (p0 != *NULL_POINTER ) {
 
             void** d = (void**) p0;
 
             log_message_debug("Parse double.");
 
             // The temporary null-terminated string.
-            char* tmp = NULL_POINTER;
+            char* tmp = (char*) *NULL_POINTER;
             int tmps = *sc + 1;
 
             // Create temporary null-terminated string.
@@ -83,7 +84,7 @@ void parse_double(void* p0, void* p1, void* p2, void* p3, void* p4) {
             // many sub strings, separated by space characters, then each sub
             // string gets interpreted as integer number.
             // The tail variable in this case points to the remaining sub string.
-            char* tail = NULL_POINTER;
+            char* tail = (char*) *NULL_POINTER;
 
             // Transform string to double value.
             // The strtod function recognizes four special input strings.
@@ -130,22 +131,22 @@ void parse_double(void* p0, void* p1, void* p2, void* p3, void* p4) {
  */
 void serialise_double(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p2 != NULL_POINTER) {
+    if (p2 != *NULL_POINTER) {
 
         int* ds = (int*) p2;
 
-        if (p1 != NULL_POINTER) {
+        if (p1 != *NULL_POINTER) {
 
             int* dc = (int*) p1;
 
-            if (p0 != NULL_POINTER) {
+            if (p0 != *NULL_POINTER) {
 
                 char** d = (char**) p0;
 
                 log_message_debug("Serialise double.");
 
                 // The double value.
-                double* v = NULL_POINTER;
+                double* v = (double*) *NULL_POINTER;
 
                 // Get double value.
                 get_array_elements(p3, (void*) PRIMITIVE_VALUE_INDEX, (void*) &v, (void*) DOUBLE_ARRAY);
@@ -204,15 +205,15 @@ void serialise_double(void* p0, void* p1, void* p2, void* p3, void* p4) {
  */
 void parse_double_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p4 != NULL_POINTER) {
+    if (p4 != *NULL_POINTER) {
 
         int* sc = (int*) p4;
 
-        if (p3 != NULL_POINTER) {
+        if (p3 != *NULL_POINTER) {
 
             void** s = (void**) p3;
 
-            if (p0 != NULL_POINTER) {
+            if (p0 != *NULL_POINTER) {
 
                 void** d = (void**) p0;
 
@@ -224,7 +225,7 @@ void parse_double_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 // The comma index.
                 int i = -1;
                 // The double vector element count.
-                void* c = NULL_POINTER;
+                void* c = *NULL_POINTER;
                 // The double number.
                 int n = 0;
 

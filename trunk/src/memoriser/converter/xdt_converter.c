@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2007-05-10 22:57:55 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2007-05-16 19:29:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -32,6 +32,7 @@
 #include "../../globals/constants/xdt/xdt_field_name_constants.c"
 #include "../../globals/constants/character/character_constants.c"
 #include "../../globals/constants/log_message/log_message_constants.c"
+#include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../memoriser/converter/character_vector_converter.c"
 #include "../../memoriser/converter/date_time_converter.c"
@@ -72,27 +73,27 @@ void parse(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
  */
 void parse_xdt_field(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
-    if (p6 != NULL_POINTER) {
+    if (p6 != *NULL_POINTER) {
 
         int* sc = (int*) p6;
 
-        if (p5 != NULL_POINTER) {
+        if (p5 != *NULL_POINTER) {
 
             void** s = (void**) p5;
 
-            if (p4 != NULL_POINTER) {
+            if (p4 != *NULL_POINTER) {
 
                 int* v = (int*) p4;
 
-                if (p3 != NULL_POINTER) {
+                if (p3 != *NULL_POINTER) {
 
                     int* fcc = (int*) p3;
 
-                    if (p2 != NULL_POINTER) {
+                    if (p2 != *NULL_POINTER) {
 
                         void** fc = (void**) p2;
 
-                        if (p0 != NULL_POINTER) {
+                        if (p0 != *NULL_POINTER) {
 
                             int* fs = (int*) p0;
 
@@ -105,7 +106,7 @@ void parse_xdt_field(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
                             if (rem >= *XDT_FIELD_SIZE_COUNT) {
 
                                 // Parse xdt field size.
-                                parse_integer(p0, NULL_POINTER, NULL_POINTER, *s, (void*) XDT_FIELD_SIZE_COUNT);
+                                parse_integer(p0, *NULL_POINTER, *NULL_POINTER, *s, (void*) XDT_FIELD_SIZE_COUNT);
 
                                 // Increment source xdt byte array index.
                                 *s = *s + *XDT_FIELD_SIZE_COUNT;
@@ -115,7 +116,7 @@ void parse_xdt_field(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
                             if (rem >= *XDT_FIELD_IDENTIFICATION_COUNT) {
 
                                 // Parse xdt field identification.
-                                parse_integer(p1, NULL_POINTER, NULL_POINTER, *s, (void*) XDT_FIELD_IDENTIFICATION_COUNT);
+                                parse_integer(p1, *NULL_POINTER, *NULL_POINTER, *s, (void*) XDT_FIELD_IDENTIFICATION_COUNT);
 
                                 // Increment source xdt byte array index.
                                 *s = *s + *XDT_FIELD_IDENTIFICATION_COUNT;
@@ -150,7 +151,7 @@ void parse_xdt_field(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
                             } else {
 
                                 // Store xdt field content, to be returned.
-                                *fc = NULL_POINTER;
+                                *fc = *NULL_POINTER;
                                 *fcc = *NUMBER_0_INTEGER;
                             }
 
@@ -215,15 +216,15 @@ void parse_xdt_field(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
  */
 void parse_xdt_next_field(void* p0, void* p1, void* p2) {
 
-    if (p2 != NULL_POINTER) {
+    if (p2 != *NULL_POINTER) {
 
         int* ac = (int*) p2;
 
-        if (p1 != NULL_POINTER) {
+        if (p1 != *NULL_POINTER) {
 
             char* a = (char*) p1;
 
-            if (p0 != NULL_POINTER) {
+            if (p0 != *NULL_POINTER) {
 
                 int* nc = (int*) p0;
 
@@ -294,23 +295,23 @@ void parse_xdt_next_field(void* p0, void* p1, void* p2) {
  */
 void parse_xdt_record(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
-    if (p5 != NULL_POINTER) {
+    if (p5 != *NULL_POINTER) {
 
         int* sc = (int*) p5;
 
-        if (p4 != NULL_POINTER) {
+        if (p4 != *NULL_POINTER) {
 
             void** s = (void**) p4;
 
-            if (p3 != NULL_POINTER) {
+            if (p3 != *NULL_POINTER) {
 
                 int* rcc = (int*) p3;
 
-                if (p2 != NULL_POINTER) {
+                if (p2 != *NULL_POINTER) {
 
                     void** rc = (void**) p2;
 
-                    if (p0 != NULL_POINTER) {
+                    if (p0 != *NULL_POINTER) {
 
                         int* rs = (int*) p0;
 
@@ -326,7 +327,7 @@ void parse_xdt_record(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
                         // The field identification.
                         int fid = *NUMBER_0_INTEGER;
                         // The field content.
-                        void* fc = NULL_POINTER;
+                        void* fc = *NULL_POINTER;
                         int fcc = *NUMBER_0_INTEGER;
                         // The verification flag.
                         int v = *NUMBER_0_INTEGER;
@@ -378,7 +379,7 @@ void parse_xdt_record(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
                                         m = *NUMBER_1_INTEGER;
 
                                         // Parse xdt record identification.
-                                        parse_integer(p1, NULL_POINTER, NULL_POINTER, fc, (void*) &fcc);
+                                        parse_integer(p1, *NULL_POINTER, *NULL_POINTER, fc, (void*) &fcc);
 
                                     } else {
 
@@ -421,7 +422,7 @@ void parse_xdt_record(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
                                     // Parse xdt record size.
                                     //
                                     // CAUTION! Do NOT use the following line:
-                                    // parse_integer(p0, NULL_POINTER, NULL_POINTER, fc, (void*) &fcc);
+                                    // parse_integer(p0, *NULL_POINTER, *NULL_POINTER, fc, (void*) &fcc);
                                     //
                                     // This is because the record content size is
                                     // counted using the loop variable j.
@@ -511,39 +512,39 @@ void parse_xdt_record(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
  */
 void parse_xdt_package(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8) {
 
-    if (p8 != NULL_POINTER) {
+    if (p8 != *NULL_POINTER) {
 
         int* sc = (int*) p8;
 
-        if (p7 != NULL_POINTER) {
+        if (p7 != *NULL_POINTER) {
 
             void** s = (void**) p7;
 
-            if (p6 != NULL_POINTER) {
+            if (p6 != *NULL_POINTER) {
 
                 int* pcc = (int*) p6;
 
-                if (p5 != NULL_POINTER) {
+                if (p5 != *NULL_POINTER) {
 
                     void** pc = (void**) p5;
 
-                    if (p4 != NULL_POINTER) {
+                    if (p4 != *NULL_POINTER) {
 
                         int* pfc = (int*) p4;
 
-                        if (p3 != NULL_POINTER) {
+                        if (p3 != *NULL_POINTER) {
 
                             void** pf = (void**) p3;
 
-                            if (p2 != NULL_POINTER) {
+                            if (p2 != *NULL_POINTER) {
 
                                 int* phc = (int*) p2;
 
-                                if (p1 != NULL_POINTER) {
+                                if (p1 != *NULL_POINTER) {
 
                                     void** ph = (void**) p1;
 
-                                    if (p0 != NULL_POINTER) {
+                                    if (p0 != *NULL_POINTER) {
 
                                         int* ps = (int*) p0;
 
@@ -747,35 +748,35 @@ void parse_xdt_parse_model(void* p0, void* p1, void* p2, void* p3, void* p4, voi
     void* p6, void* p7, void* p8, void* p9, void* p10, void* p11,
     void* p12, void* p13, void* p14, void* p15, void* p16, void* p17) {
 
-    if (p11 != NULL_POINTER) {
+    if (p11 != *NULL_POINTER) {
 
         int** ds = (int**) p11;
 
-        if (p10 != NULL_POINTER) {
+        if (p10 != *NULL_POINTER) {
 
             int** dc = (int**) p10;
 
-            if (p8 != NULL_POINTER) {
+            if (p8 != *NULL_POINTER) {
 
                 int** ms = (int**) p8;
 
-                if (p7 != NULL_POINTER) {
+                if (p7 != *NULL_POINTER) {
 
                     int** mc = (int**) p7;
 
-                    if (p5 != NULL_POINTER) {
+                    if (p5 != *NULL_POINTER) {
 
                         int** as = (int**) p5;
 
-                        if (p4 != NULL_POINTER) {
+                        if (p4 != *NULL_POINTER) {
 
                             int** ac = (int**) p4;
 
-                            if (p2 != NULL_POINTER) {
+                            if (p2 != *NULL_POINTER) {
 
                                 int** ns = (int**) p2;
 
-                                if (p1 != NULL_POINTER) {
+                                if (p1 != *NULL_POINTER) {
 
                                     int** nc = (int**) p1;
 
@@ -872,7 +873,7 @@ void parse_xdt_parse_model(void* p0, void* p1, void* p2, void* p3, void* p4, voi
  */
 void parse_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
-    if (p5 != NULL_POINTER) {
+    if (p5 != *NULL_POINTER) {
 
         int* id = (int*) p5;
 
@@ -884,21 +885,21 @@ void parse_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, vo
 */
 
         // The knowledge model name.
-        void* n = NULL_POINTER;
-        void* nc = NULL_POINTER;
-        void* ns = NULL_POINTER;
+        void* n = *NULL_POINTER;
+        void* nc = *NULL_POINTER;
+        void* ns = *NULL_POINTER;
         // The knowledge model abstraction.
-        void* a = NULL_POINTER;
-        void* ac = NULL_POINTER;
-        void* as = NULL_POINTER;
+        void* a = *NULL_POINTER;
+        void* ac = *NULL_POINTER;
+        void* as = *NULL_POINTER;
         // The knowledge model model.
-        void* m = NULL_POINTER;
-        void* mc = NULL_POINTER;
-        void* ms = NULL_POINTER;
+        void* m = *NULL_POINTER;
+        void* mc = *NULL_POINTER;
+        void* ms = *NULL_POINTER;
         // The knowledge model details.
-        void* d = NULL_POINTER;
-        void* dc = NULL_POINTER;
-        void* ds = NULL_POINTER;
+        void* d = *NULL_POINTER;
+        void* dc = *NULL_POINTER;
+        void* ds = *NULL_POINTER;
 
         if (*id == *RECORD_SIZE_XDT_FIELD) {
 
@@ -939,8 +940,8 @@ void parse_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, vo
         // Its content is therefore parsed directly.
 
         // CAUTION! This check for null pointers is necessary to avoid segmentation faults!
-        if ((n != NULL_POINTER) && (nc != NULL_POINTER) && (ns != NULL_POINTER)
-            && (a != NULL_POINTER) && (ac != NULL_POINTER) && (as != NULL_POINTER)) {
+        if ((n != *NULL_POINTER) && (nc != *NULL_POINTER) && (ns != *NULL_POINTER)
+            && (a != *NULL_POINTER) && (ac != *NULL_POINTER) && (as != *NULL_POINTER)) {
 
             // Add xdt field to xdt record.
             set_compound_element_by_name(p0, p1, p2, n, nc, ns, a, ac, as, m, mc, ms, d, dc, ds);
@@ -991,11 +992,11 @@ void parse_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, vo
  */
 void parse_xdt_process_record(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p4 != NULL_POINTER) {
+    if (p4 != *NULL_POINTER) {
 
         int* sc = (int*) p4;
 
-        if (p3 != NULL_POINTER) {
+        if (p3 != *NULL_POINTER) {
 
             void* s = (void*) p3;
 
@@ -1008,7 +1009,7 @@ void parse_xdt_process_record(void* p0, void* p1, void* p2, void* p3, void* p4) 
             // The field identification.
             int fid = *NUMBER_0_INTEGER;
             // The field content.
-            void* fc = NULL_POINTER;
+            void* fc = *NULL_POINTER;
             int fcc = *NUMBER_0_INTEGER;
             // The verification flag.
             int v = *NUMBER_0_INTEGER;
@@ -1090,7 +1091,7 @@ void parse_xdt_process_record(void* p0, void* p1, void* p2, void* p3, void* p4) 
  */
 void parse_xdt_select_record(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
-    if (p5 != NULL_POINTER) {
+    if (p5 != *NULL_POINTER) {
 
         int* id = (int*) p5;
 
@@ -1102,21 +1103,21 @@ void parse_xdt_select_record(void* p0, void* p1, void* p2, void* p3, void* p4, v
 */
 
         // The knowledge model name.
-        void* n = NULL_POINTER;
-        void* nc = NULL_POINTER;
-        void* ns = NULL_POINTER;
+        void* n = *NULL_POINTER;
+        void* nc = *NULL_POINTER;
+        void* ns = *NULL_POINTER;
         // The knowledge model abstraction.
-        void* a = NULL_POINTER;
-        void* ac = NULL_POINTER;
-        void* as = NULL_POINTER;
+        void* a = *NULL_POINTER;
+        void* ac = *NULL_POINTER;
+        void* as = *NULL_POINTER;
         // The knowledge model model.
-        void* m = NULL_POINTER;
-        void* mc = NULL_POINTER;
-        void* ms = NULL_POINTER;
+        void* m = *NULL_POINTER;
+        void* mc = *NULL_POINTER;
+        void* ms = *NULL_POINTER;
         // The knowledge model details.
-        void* d = NULL_POINTER;
-        void* dc = NULL_POINTER;
-        void* ds = NULL_POINTER;
+        void* d = *NULL_POINTER;
+        void* dc = *NULL_POINTER;
+        void* ds = *NULL_POINTER;
 
         if (*id == *DATA_PACKAGE_HEADER_XDT_RECORD) {
 
@@ -1127,7 +1128,7 @@ void parse_xdt_select_record(void* p0, void* p1, void* p2, void* p3, void* p4, v
             // but a byte stream which gets processed further below.
             parse_xdt_parse_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
-                NULL_POINTER, NULL_POINTER,
+                *NULL_POINTER, *NULL_POINTER,
                 (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
                 (void*) PACKAGE_HEADER_XDT_RECORD_NAME, (void*) PACKAGE_HEADER_XDT_RECORD_NAME_COUNT);
 
@@ -1140,7 +1141,7 @@ void parse_xdt_select_record(void* p0, void* p1, void* p2, void* p3, void* p4, v
             // but a byte stream which gets processed further below.
             parse_xdt_parse_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
-                NULL_POINTER, NULL_POINTER,
+                *NULL_POINTER, *NULL_POINTER,
                 (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
                 (void*) PACKAGE_FOOTER_XDT_RECORD_NAME, (void*) PACKAGE_FOOTER_XDT_RECORD_NAME_COUNT);
 
@@ -1152,7 +1153,7 @@ void parse_xdt_select_record(void* p0, void* p1, void* p2, void* p3, void* p4, v
             // but a byte stream which gets processed further below.
             parse_xdt_parse_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
-                NULL_POINTER, NULL_POINTER,
+                *NULL_POINTER, *NULL_POINTER,
                 (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
                 (void*) MEDICAL_PRACTICE_DATA_XDT_RECORD_NAME, (void*) MEDICAL_PRACTICE_DATA_XDT_RECORD_NAME_COUNT);
 
@@ -1164,7 +1165,7 @@ void parse_xdt_select_record(void* p0, void* p1, void* p2, void* p3, void* p4, v
             // but a byte stream which gets processed further below.
             parse_xdt_parse_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
-                NULL_POINTER, NULL_POINTER,
+                *NULL_POINTER, *NULL_POINTER,
                 (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
                 (void*) MEDICAL_TREATMENT_XDT_RECORD_NAME, (void*) MEDICAL_TREATMENT_XDT_RECORD_NAME_COUNT);
 
@@ -1176,7 +1177,7 @@ void parse_xdt_select_record(void* p0, void* p1, void* p2, void* p3, void* p4, v
             // but a byte stream which gets processed further below.
             parse_xdt_parse_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
-                NULL_POINTER, NULL_POINTER,
+                *NULL_POINTER, *NULL_POINTER,
                 (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
                 (void*) PATIENT_MASTER_DATA_XDT_RECORD_NAME, (void*) PATIENT_MASTER_DATA_XDT_RECORD_NAME_COUNT);
 
@@ -1188,7 +1189,7 @@ void parse_xdt_select_record(void* p0, void* p1, void* p2, void* p3, void* p4, v
             // but a byte stream which gets processed further below.
             parse_xdt_parse_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
-                NULL_POINTER, NULL_POINTER,
+                *NULL_POINTER, *NULL_POINTER,
                 (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
                 (void*) MEDICAL_TREATMENT_DATA_XDT_RECORD_NAME, (void*) MEDICAL_TREATMENT_DATA_XDT_RECORD_NAME_COUNT);
         }
@@ -1197,8 +1198,8 @@ void parse_xdt_select_record(void* p0, void* p1, void* p2, void* p3, void* p4, v
         parse_xdt_process_record(m, mc, ms, p3, p4);
 
         // CAUTION! This check for null pointers is necessary to avoid segmentation faults!
-        if ((n != NULL_POINTER) && (nc != NULL_POINTER) && (ns != NULL_POINTER)
-            && (a != NULL_POINTER) && (ac != NULL_POINTER) && (as != NULL_POINTER)) {
+        if ((n != *NULL_POINTER) && (nc != *NULL_POINTER) && (ns != *NULL_POINTER)
+            && (a != *NULL_POINTER) && (ac != *NULL_POINTER) && (as != *NULL_POINTER)) {
 
             // Add xdt record to xdt package.
             //
@@ -1252,11 +1253,11 @@ void parse_xdt_select_record(void* p0, void* p1, void* p2, void* p3, void* p4, v
  */
 void parse_xdt_process_package(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p4 != NULL_POINTER) {
+    if (p4 != *NULL_POINTER) {
 
         int* sc = (int*) p4;
 
-        if (p3 != NULL_POINTER) {
+        if (p3 != *NULL_POINTER) {
 
             void* s = (void*) p3;
 
@@ -1269,7 +1270,7 @@ void parse_xdt_process_package(void* p0, void* p1, void* p2, void* p3, void* p4)
             // The record identification.
             int rid = *NUMBER_0_INTEGER;
             // The record content.
-            void* rc = NULL_POINTER;
+            void* rc = *NULL_POINTER;
             int rcc = *NUMBER_0_INTEGER;
 
             while (*NUMBER_1_INTEGER) {
@@ -1342,21 +1343,21 @@ void parse_xdt_select_package(void* p0, void* p1, void* p2, void* p3, void* p4, 
     log_message_debug("Information: Select xdt package.");
 
     // The knowledge model name.
-    void* n = NULL_POINTER;
-    void* nc = NULL_POINTER;
-    void* ns = NULL_POINTER;
+    void* n = *NULL_POINTER;
+    void* nc = *NULL_POINTER;
+    void* ns = *NULL_POINTER;
     // The knowledge model abstraction.
-    void* a = NULL_POINTER;
-    void* ac = NULL_POINTER;
-    void* as = NULL_POINTER;
+    void* a = *NULL_POINTER;
+    void* ac = *NULL_POINTER;
+    void* as = *NULL_POINTER;
     // The knowledge model model.
-    void* m = NULL_POINTER;
-    void* mc = NULL_POINTER;
-    void* ms = NULL_POINTER;
+    void* m = *NULL_POINTER;
+    void* mc = *NULL_POINTER;
+    void* ms = *NULL_POINTER;
     // The knowledge model details.
-    void* d = NULL_POINTER;
-    void* dc = NULL_POINTER;
-    void* ds = NULL_POINTER;
+    void* d = *NULL_POINTER;
+    void* dc = *NULL_POINTER;
+    void* ds = *NULL_POINTER;
 
     // Parse package content.
     // CAUTION! Hand over a null pointer in place of the model and model count!
@@ -1365,7 +1366,7 @@ void parse_xdt_select_package(void* p0, void* p1, void* p2, void* p3, void* p4, 
     // but a byte stream which gets processed further below.
     parse_xdt_parse_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
         (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
-        NULL_POINTER, NULL_POINTER,
+        *NULL_POINTER, *NULL_POINTER,
         (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
         (void*) STANDARD_XDT_PACKAGE_NAME, (void*) STANDARD_XDT_PACKAGE_NAME_COUNT);
 
@@ -1377,8 +1378,8 @@ void parse_xdt_select_package(void* p0, void* p1, void* p2, void* p3, void* p4, 
     parse_xdt_select_record(d, dc, ds, p10, p11, (void*) DATA_PACKAGE_FOOTER_XDT_RECORD);
 
     // CAUTION! This check for null pointers is necessary to avoid segmentation faults!
-    if ((n != NULL_POINTER) && (nc != NULL_POINTER) && (ns != NULL_POINTER)
-        && (a != NULL_POINTER) && (ac != NULL_POINTER) && (as != NULL_POINTER)) {
+    if ((n != *NULL_POINTER) && (nc != *NULL_POINTER) && (ns != *NULL_POINTER)
+        && (a != *NULL_POINTER) && (ac != *NULL_POINTER) && (as != *NULL_POINTER)) {
 
         // Add xdt package to given destination compound model.
         //
@@ -1487,19 +1488,19 @@ void parse_xdt_select_package(void* p0, void* p1, void* p2, void* p3, void* p4, 
  */
 void parse_xdt(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
 
-    if (p7 != NULL_POINTER) {
+    if (p7 != *NULL_POINTER) {
 
         int* sc = (int*) p7;
 
-        if (p6 != NULL_POINTER) {
+        if (p6 != *NULL_POINTER) {
 
             void* s = (void*) p6;
 
-            if (p3 != NULL_POINTER) {
+            if (p3 != *NULL_POINTER) {
 
                 void** dd = (void**) p3;
 
-                if (p0 != NULL_POINTER) {
+                if (p0 != *NULL_POINTER) {
 
                     void** dm = (void**) p0;
 
@@ -1510,13 +1511,13 @@ void parse_xdt(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
                     // The xdt package size.
                     int ps = *NUMBER_0_INTEGER;
                     // The xdt package content.
-                    void* pc = NULL_POINTER;
+                    void* pc = *NULL_POINTER;
                     int pcc = *NUMBER_0_INTEGER;
                     // The xdt package header.
-                    void* ph = NULL_POINTER;
+                    void* ph = *NULL_POINTER;
                     int phc = *NUMBER_0_INTEGER;
                     // The xdt package footer.
-                    void* pf = NULL_POINTER;
+                    void* pf = *NULL_POINTER;
                     int pfc = *NUMBER_0_INTEGER;
 
 /*??
@@ -1574,13 +1575,13 @@ void parse_xdt(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
                         // Reset xdt package size.
                         ps = *NUMBER_0_INTEGER;
                         // Reset xdt package content.
-                        pc = NULL_POINTER;
+                        pc = *NULL_POINTER;
                         pcc = *NUMBER_0_INTEGER;
                         // Reset xdt package header.
-                        ph = NULL_POINTER;
+                        ph = *NULL_POINTER;
                         phc = *NUMBER_0_INTEGER;
                         // Reset xdt package footer.
-                        pf = NULL_POINTER;
+                        pf = *NULL_POINTER;
                         pfc = *NUMBER_0_INTEGER;
                     }
 

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.22 $ $Date: 2007-05-09 15:32:40 $ $Author: christian $
+ * @version $Revision: 1.23 $ $Date: 2007-05-16 19:29:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -32,6 +32,7 @@
 #include "../globals/constants/cybol/cybol_abstraction_constants.c"
 #include "../globals/constants/log_message/log_message_constants.c"
 #include "../globals/constants/cybol/cybol_name_constants.c"
+#include "../globals/constants/pointer/pointer_constants.c"
 #include "../globals/logger/logger.c"
 #include "../memoriser/accessor/compound_accessor.c"
 #include "../memoriser/array.c"
@@ -50,44 +51,44 @@ void copy(void* p0, int* p1, void* p2, void* p3, void* p4) {
     log_message_debug("Copy primitive model.");
 
     // The source name, abstraction, model, details.
-    void** sn = &NULL_POINTER;
-    void** snc = &NULL_POINTER;
-    void** sns = &NULL_POINTER;
-    void** sa = &NULL_POINTER;
-    void** sac = &NULL_POINTER;
-    void** sas = &NULL_POINTER;
-    void** sm = &NULL_POINTER;
-    void** smc = &NULL_POINTER;
-    void** sms = &NULL_POINTER;
-    void** sd = &NULL_POINTER;
-    void** sdc = &NULL_POINTER;
-    void** sds = &NULL_POINTER;
+    void** sn = NULL_POINTER;
+    void** snc = NULL_POINTER;
+    void** sns = NULL_POINTER;
+    void** sa = NULL_POINTER;
+    void** sac = NULL_POINTER;
+    void** sas = NULL_POINTER;
+    void** sm = NULL_POINTER;
+    void** smc = NULL_POINTER;
+    void** sms = NULL_POINTER;
+    void** sd = NULL_POINTER;
+    void** sdc = NULL_POINTER;
+    void** sds = NULL_POINTER;
     // The destination name, abstraction, model, details.
-    void** dn = &NULL_POINTER;
-    void** dnc = &NULL_POINTER;
-    void** dns = &NULL_POINTER;
-    void** da = &NULL_POINTER;
-    void** dac = &NULL_POINTER;
-    void** das = &NULL_POINTER;
-    void** dm = &NULL_POINTER;
-    void** dmc = &NULL_POINTER;
-    void** dms = &NULL_POINTER;
-    void** dd = &NULL_POINTER;
-    void** ddc = &NULL_POINTER;
-    void** dds = &NULL_POINTER;
+    void** dn = NULL_POINTER;
+    void** dnc = NULL_POINTER;
+    void** dns = NULL_POINTER;
+    void** da = NULL_POINTER;
+    void** dac = NULL_POINTER;
+    void** das = NULL_POINTER;
+    void** dm = NULL_POINTER;
+    void** dmc = NULL_POINTER;
+    void** dms = NULL_POINTER;
+    void** dd = NULL_POINTER;
+    void** ddc = NULL_POINTER;
+    void** dds = NULL_POINTER;
     // The abstraction name, abstraction, model, details.
-    void** an = &NULL_POINTER;
-    void** anc = &NULL_POINTER;
-    void** ans = &NULL_POINTER;
-    void** aa = &NULL_POINTER;
-    void** aac = &NULL_POINTER;
-    void** aas = &NULL_POINTER;
-    void** am = &NULL_POINTER;
-    void** amc = &NULL_POINTER;
-    void** ams = &NULL_POINTER;
-    void** ad = &NULL_POINTER;
-    void** adc = &NULL_POINTER;
-    void** ads = &NULL_POINTER;
+    void** an = NULL_POINTER;
+    void** anc = NULL_POINTER;
+    void** ans = NULL_POINTER;
+    void** aa = NULL_POINTER;
+    void** aac = NULL_POINTER;
+    void** aas = NULL_POINTER;
+    void** am = NULL_POINTER;
+    void** amc = NULL_POINTER;
+    void** ams = NULL_POINTER;
+    void** ad = NULL_POINTER;
+    void** adc = NULL_POINTER;
+    void** ads = NULL_POINTER;
 
     // Get source.
     get_universal_compound_element_by_name(p0, p1,

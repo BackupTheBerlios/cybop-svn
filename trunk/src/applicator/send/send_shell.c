@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2007-04-26 23:17:09 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2007-05-16 19:29:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -32,6 +32,7 @@
 #include "../../globals/constants/integer/integer_constants.c"
 #include "../../globals/constants/log_message/log_message_constants.c"
 #include "../../globals/constants/cybol/cybol_model_constants.c"
+#include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../globals/variables/variables.c"
 #include "../../memoriser/allocator.c"
@@ -60,7 +61,7 @@ void send_shell(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
     log_message_debug("Information: Send shell message.");
 
     // The serialised string array to be sent to the standard output.
-    void* a = NULL_POINTER;
+    void* a = *NULL_POINTER;
     int ac = *NUMBER_0_INTEGER;
     int as = *NUMBER_0_INTEGER;
 
@@ -68,10 +69,10 @@ void send_shell(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
     allocate((void*) &a, (void*) &as, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
     // Serialise knowledge model into model diagram (hierarchical text).
-    serialise((void*) &a, (void*) &ac, (void*) &as, NULL_POINTER, NULL_POINTER, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10);
+    serialise((void*) &a, (void*) &ac, (void*) &as, *NULL_POINTER, *NULL_POINTER, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10);
 
     // Write serialised array as message to shell standard output.
-    write_data((void*) &STANDARD_OUTPUT_MODEL, (void*) STANDARD_OUTPUT_MODEL_COUNT, NULL_POINTER, a, (void*) &ac, (void*) FILE_CHANNEL, (void*) FILE_CHANNEL_COUNT);
+    write_data((void*) &STANDARD_OUTPUT_MODEL, (void*) STANDARD_OUTPUT_MODEL_COUNT, *NULL_POINTER, a, (void*) &ac, (void*) FILE_CHANNEL, (void*) FILE_CHANNEL_COUNT);
 
     // Deallocate array.
     deallocate((void*) &a, (void*) &as, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);

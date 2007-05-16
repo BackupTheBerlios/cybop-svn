@@ -22,7 +22,7 @@
  *
  * this handel a loop
  *
- * @version $Revision: 1.18 $ $Date: 2007-05-09 15:32:40 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2007-05-16 19:29:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -34,6 +34,7 @@
 #include "../globals/constants/log_message/log_message_constants.c"
 #include "../globals/constants/cybol/cybol_name_constants.c"
 #include "../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../globals/constants/pointer/pointer_constants.c"
 #include "../globals/logger/logger.c"
 #include "../memoriser/accessor/compound_accessor.c"
 #include "../memoriser/array.c"
@@ -75,31 +76,31 @@ void loop(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
     log_message_debug("Loop program flow.");
 
     // The break flag name, abstraction, model, details.
-    void** bfn = &NULL_POINTER;
-    void** bfnc = &NULL_POINTER;
-    void** bfns = &NULL_POINTER;
-    void** bfa = &NULL_POINTER;
-    void** bfac = &NULL_POINTER;
-    void** bfas = &NULL_POINTER;
-    void** bfm = &NULL_POINTER;
-    void** bfmc = &NULL_POINTER;
-    void** bfms = &NULL_POINTER;
-    void** bfd = &NULL_POINTER;
-    void** bfdc = &NULL_POINTER;
-    void** bfds = &NULL_POINTER;
+    void** bfn = NULL_POINTER;
+    void** bfnc = NULL_POINTER;
+    void** bfns = NULL_POINTER;
+    void** bfa = NULL_POINTER;
+    void** bfac = NULL_POINTER;
+    void** bfas = NULL_POINTER;
+    void** bfm = NULL_POINTER;
+    void** bfmc = NULL_POINTER;
+    void** bfms = NULL_POINTER;
+    void** bfd = NULL_POINTER;
+    void** bfdc = NULL_POINTER;
+    void** bfds = NULL_POINTER;
     // The model name, abstraction, model, details.
-    void** mn = &NULL_POINTER;
-    void** mnc = &NULL_POINTER;
-    void** mns = &NULL_POINTER;
-    void** ma = &NULL_POINTER;
-    void** mac = &NULL_POINTER;
-    void** mas = &NULL_POINTER;
-    void** mm = &NULL_POINTER;
-    void** mmc = &NULL_POINTER;
-    void** mms = &NULL_POINTER;
-    void** md = &NULL_POINTER;
-    void** mdc = &NULL_POINTER;
-    void** mds = &NULL_POINTER;
+    void** mn = NULL_POINTER;
+    void** mnc = NULL_POINTER;
+    void** mns = NULL_POINTER;
+    void** ma = NULL_POINTER;
+    void** mac = NULL_POINTER;
+    void** mas = NULL_POINTER;
+    void** mm = NULL_POINTER;
+    void** mmc = NULL_POINTER;
+    void** mms = NULL_POINTER;
+    void** md = NULL_POINTER;
+    void** mdc = NULL_POINTER;
+    void** mds = NULL_POINTER;
 
     // Get break flag.
     get_universal_compound_element_by_name(p10, p11,
@@ -120,25 +121,25 @@ void loop(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
         p1, p2);
 
     // Check break flag.
-    if ((*bfa != NULL_POINTER)
-        && (*bfac != NULL_POINTER)
-        && (*bfas != NULL_POINTER)
-        && (*bfm != NULL_POINTER)
-        && (*bfmc != NULL_POINTER)
-        && (*bfms != NULL_POINTER)
-        && (*bfd != NULL_POINTER)
-        && (*bfdc != NULL_POINTER)
-        && (*bfds != NULL_POINTER)
+    if ((*bfa != *NULL_POINTER)
+        && (*bfac != *NULL_POINTER)
+        && (*bfas != *NULL_POINTER)
+        && (*bfm != *NULL_POINTER)
+        && (*bfmc != *NULL_POINTER)
+        && (*bfms != *NULL_POINTER)
+        && (*bfd != *NULL_POINTER)
+        && (*bfdc != *NULL_POINTER)
+        && (*bfds != *NULL_POINTER)
         // Check model.
-        && (*ma != NULL_POINTER)
-        && (*mac != NULL_POINTER)
-        && (*mas != NULL_POINTER)
-        && (*mm != NULL_POINTER)
-        && (*mmc != NULL_POINTER)
-        && (*mms != NULL_POINTER)
-        && (*md != NULL_POINTER)
-        && (*mdc != NULL_POINTER)
-        && (*mds != NULL_POINTER)) {
+        && (*ma != *NULL_POINTER)
+        && (*mac != *NULL_POINTER)
+        && (*mas != *NULL_POINTER)
+        && (*mm != *NULL_POINTER)
+        && (*mmc != *NULL_POINTER)
+        && (*mms != *NULL_POINTER)
+        && (*md != *NULL_POINTER)
+        && (*mdc != *NULL_POINTER)
+        && (*mds != *NULL_POINTER)) {
 
         // The comparison result.
         int r = 0;
@@ -150,7 +151,7 @@ void loop(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
             while (1) {
 
                 // The break flag.
-                void* b = NULL_POINTER;
+                void* b = *NULL_POINTER;
 
                 // Get break flag.
                 get_array_elements(*bfm, (void*) PRIMITIVE_VALUE_INDEX, (void*) &b, (void*) INTEGER_ARRAY);

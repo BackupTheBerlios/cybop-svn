@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.18 $ $Date: 2007-05-09 15:32:40 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2007-05-16 19:29:01 $ $Author: christian $
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
@@ -33,6 +33,7 @@
 #include "../globals/constants/log_message/log_message_constants.c"
 #include "../globals/constants/cybol/cybol_name_constants.c"
 #include "../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../globals/constants/pointer/pointer_constants.c"
 #include "../globals/logger/logger.c"
 #include "../memoriser/accessor/compound_accessor.c"
 #include "../memoriser/array.c"
@@ -75,44 +76,44 @@ void branch(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
     log_message_debug("Branch program flow.");
 
     // The criterion name, abstraction, model, details.
-    void** cn = &NULL_POINTER;
-    void** cnc = &NULL_POINTER;
-    void** cns = &NULL_POINTER;
-    void** ca = &NULL_POINTER;
-    void** cac = &NULL_POINTER;
-    void** cas = &NULL_POINTER;
-    void** cm = &NULL_POINTER;
-    void** cmc = &NULL_POINTER;
-    void** cms = &NULL_POINTER;
-    void** cd = &NULL_POINTER;
-    void** cdc = &NULL_POINTER;
-    void** cds = &NULL_POINTER;
+    void** cn = NULL_POINTER;
+    void** cnc = NULL_POINTER;
+    void** cns = NULL_POINTER;
+    void** ca = NULL_POINTER;
+    void** cac = NULL_POINTER;
+    void** cas = NULL_POINTER;
+    void** cm = NULL_POINTER;
+    void** cmc = NULL_POINTER;
+    void** cms = NULL_POINTER;
+    void** cd = NULL_POINTER;
+    void** cdc = NULL_POINTER;
+    void** cds = NULL_POINTER;
     // The true model name, abstraction, model, details.
-    void** tn = &NULL_POINTER;
-    void** tnc = &NULL_POINTER;
-    void** tns = &NULL_POINTER;
-    void** ta = &NULL_POINTER;
-    void** tac = &NULL_POINTER;
-    void** tas = &NULL_POINTER;
-    void** tm = &NULL_POINTER;
-    void** tmc = &NULL_POINTER;
-    void** tms = &NULL_POINTER;
-    void** td = &NULL_POINTER;
-    void** tdc = &NULL_POINTER;
-    void** tds = &NULL_POINTER;
+    void** tn = NULL_POINTER;
+    void** tnc = NULL_POINTER;
+    void** tns = NULL_POINTER;
+    void** ta = NULL_POINTER;
+    void** tac = NULL_POINTER;
+    void** tas = NULL_POINTER;
+    void** tm = NULL_POINTER;
+    void** tmc = NULL_POINTER;
+    void** tms = NULL_POINTER;
+    void** td = NULL_POINTER;
+    void** tdc = NULL_POINTER;
+    void** tds = NULL_POINTER;
     // The false model name, abstraction, model, details.
-    void** fn = &NULL_POINTER;
-    void** fnc = &NULL_POINTER;
-    void** fns = &NULL_POINTER;
-    void** fa = &NULL_POINTER;
-    void** fac = &NULL_POINTER;
-    void** fas = &NULL_POINTER;
-    void** fm = &NULL_POINTER;
-    void** fmc = &NULL_POINTER;
-    void** fms = &NULL_POINTER;
-    void** fd = &NULL_POINTER;
-    void** fdc = &NULL_POINTER;
-    void** fds = &NULL_POINTER;
+    void** fn = NULL_POINTER;
+    void** fnc = NULL_POINTER;
+    void** fns = NULL_POINTER;
+    void** fa = NULL_POINTER;
+    void** fac = NULL_POINTER;
+    void** fas = NULL_POINTER;
+    void** fm = NULL_POINTER;
+    void** fmc = NULL_POINTER;
+    void** fms = NULL_POINTER;
+    void** fd = NULL_POINTER;
+    void** fdc = NULL_POINTER;
+    void** fds = NULL_POINTER;
 
     // Get criterion.
     get_universal_compound_element_by_name(p10, p11,
@@ -141,35 +142,35 @@ void branch(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
         (void*) &fd, (void*) &fdc, (void*) &fds,
         p1, p2);
 
-    if ((*ca != NULL_POINTER)
-        && (*cac != NULL_POINTER)
-        && (*cas != NULL_POINTER)
-        && (*cm != NULL_POINTER)
-        && (*cmc != NULL_POINTER)
-        && (*cms != NULL_POINTER)
-        && (*cd != NULL_POINTER)
-        && (*cdc != NULL_POINTER)
-        && (*cds != NULL_POINTER)
+    if ((*ca != *NULL_POINTER)
+        && (*cac != *NULL_POINTER)
+        && (*cas != *NULL_POINTER)
+        && (*cm != *NULL_POINTER)
+        && (*cmc != *NULL_POINTER)
+        && (*cms != *NULL_POINTER)
+        && (*cd != *NULL_POINTER)
+        && (*cdc != *NULL_POINTER)
+        && (*cds != *NULL_POINTER)
         // Check true model.
-        && (*ta != NULL_POINTER)
-        && (*tac != NULL_POINTER)
-        && (*tas != NULL_POINTER)
-        && (*tm != NULL_POINTER)
-        && (*tmc != NULL_POINTER)
-        && (*tms != NULL_POINTER)
-        && (*td != NULL_POINTER)
-        && (*tdc != NULL_POINTER)
-        && (*tds != NULL_POINTER)
+        && (*ta != *NULL_POINTER)
+        && (*tac != *NULL_POINTER)
+        && (*tas != *NULL_POINTER)
+        && (*tm != *NULL_POINTER)
+        && (*tmc != *NULL_POINTER)
+        && (*tms != *NULL_POINTER)
+        && (*td != *NULL_POINTER)
+        && (*tdc != *NULL_POINTER)
+        && (*tds != *NULL_POINTER)
         // check false model
-        && (*fa != NULL_POINTER)
-        && (*fac != NULL_POINTER)
-        && (*fas != NULL_POINTER)
-        && (*fm != NULL_POINTER)
-        && (*fmc != NULL_POINTER)
-        && (*fms != NULL_POINTER)
-        && (*fd != NULL_POINTER)
-        && (*fdc != NULL_POINTER)
-        && (*fds != NULL_POINTER)) {
+        && (*fa != *NULL_POINTER)
+        && (*fac != *NULL_POINTER)
+        && (*fas != *NULL_POINTER)
+        && (*fm != *NULL_POINTER)
+        && (*fmc != *NULL_POINTER)
+        && (*fms != *NULL_POINTER)
+        && (*fd != *NULL_POINTER)
+        && (*fdc != *NULL_POINTER)
+        && (*fds != *NULL_POINTER)) {
 
         // The comparison result.
         int r = 0;
@@ -180,7 +181,7 @@ void branch(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
         if (r == 1) {
 
             // The criterion.
-            void* c = NULL_POINTER;
+            void* c = *NULL_POINTER;
 
             // Get criterion.
             get_array_elements(*cm, (void*) PRIMITIVE_VALUE_INDEX, (void*) &c, (void*) INTEGER_ARRAY);

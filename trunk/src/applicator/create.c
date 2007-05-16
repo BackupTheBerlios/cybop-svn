@@ -22,7 +22,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.29 $ $Date: 2007-05-09 15:32:40 $ $Author: christian $
+ * @version $Revision: 1.30 $ $Date: 2007-05-16 19:29:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -34,6 +34,7 @@
 #include "../globals/constants/cybol/cybol_channel_constants.c"
 #include "../globals/constants/log_message/log_message_constants.c"
 #include "../globals/constants/cybol/cybol_name_constants.c"
+#include "../globals/constants/pointer/pointer_constants.c"
 #include "../globals/logger/logger.c"
 #include "../memoriser/accessor/compound_accessor.c"
 #include "../memoriser/array.c"
@@ -82,7 +83,7 @@ void create_primitive_model(void* p0, void* p1, void* p2, void* p3, void* p4,
     //
 
     // The receive model.
-    void* rm = NULL_POINTER;
+    void* rm = *NULL_POINTER;
     int rmc = 0;
     int rms = 0;
 
@@ -100,7 +101,7 @@ void create_primitive_model(void* p0, void* p1, void* p2, void* p3, void* p4,
     allocate(p0, p2, p5, p6);
 
     // Parse byte stream according to given document type.
-    parse(p0, p1, p2, NULL_POINTER, NULL_POINTER, NULL_POINTER, rm, (void*) &rmc, p5, p6);
+    parse(p0, p1, p2, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, rm, (void*) &rmc, p5, p6);
 
     // Destroy receive model.
     deallocate((void*) &rm, (void*) &rms, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
@@ -154,7 +155,7 @@ void create_compound_model(void* p0, void* p1, void* p2, void* p3, void* p4,
     //
 
     // The receive model.
-    void* rm = NULL_POINTER;
+    void* rm = *NULL_POINTER;
     int rmc = 0;
     int rms = 0;
 
@@ -169,7 +170,7 @@ void create_compound_model(void* p0, void* p1, void* p2, void* p3, void* p4,
     //
 
     // The parse model.
-    void* pm = NULL_POINTER;
+    void* pm = *NULL_POINTER;
     int pmc = 0;
     int pms = 0;
 
@@ -179,11 +180,11 @@ void create_compound_model(void* p0, void* p1, void* p2, void* p3, void* p4,
         allocate((void*) &pm, (void*) &pms, p5, p6);
 
         // Parse byte stream according to given document type.
-        parse((void*) &pm, (void*) &pmc, (void*) &pms, NULL_POINTER, NULL_POINTER, NULL_POINTER, rm, (void*) &rmc, p5, p6);
+        parse((void*) &pm, (void*) &pmc, (void*) &pms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, rm, (void*) &rmc, p5, p6);
 
     } else {
 
-        parse((void*) &pm, (void*) &pmc, (void*) &pms, NULL_POINTER, NULL_POINTER, NULL_POINTER, p3, p4, p5, p6);
+        parse((void*) &pm, (void*) &pmc, (void*) &pms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, p3, p4, p5, p6);
     }
 
     // Destroy receive model.
@@ -206,7 +207,7 @@ void create_compound_model(void* p0, void* p1, void* p2, void* p3, void* p4,
 
     } else {
 
-        if (pm != NULL_POINTER) {
+        if (pm != *NULL_POINTER) {
 
             // Free xml dom document.
             xmlFreeDoc((xmlDoc*) *((void**) pm));
@@ -285,57 +286,57 @@ void create(void* p0, void* p1, void* p2, void* p3, void* p4) {
     log_message_debug("Create knowledge model.");
 
     // The name name, abstraction, model, details.
-    void** nn = &NULL_POINTER;
-    void** nnc = &NULL_POINTER;
-    void** nns = &NULL_POINTER;
-    void** na = &NULL_POINTER;
-    void** nac = &NULL_POINTER;
-    void** nas = &NULL_POINTER;
-    void** nm = &NULL_POINTER;
-    void** nmc = &NULL_POINTER;
-    void** nms = &NULL_POINTER;
-    void** nd = &NULL_POINTER;
-    void** ndc = &NULL_POINTER;
-    void** nds = &NULL_POINTER;
+    void** nn = NULL_POINTER;
+    void** nnc = NULL_POINTER;
+    void** nns = NULL_POINTER;
+    void** na = NULL_POINTER;
+    void** nac = NULL_POINTER;
+    void** nas = NULL_POINTER;
+    void** nm = NULL_POINTER;
+    void** nmc = NULL_POINTER;
+    void** nms = NULL_POINTER;
+    void** nd = NULL_POINTER;
+    void** ndc = NULL_POINTER;
+    void** nds = NULL_POINTER;
     // The abstraction name, abstraction, model, details.
-    void** an = &NULL_POINTER;
-    void** anc = &NULL_POINTER;
-    void** ans = &NULL_POINTER;
-    void** aa = &NULL_POINTER;
-    void** aac = &NULL_POINTER;
-    void** aas = &NULL_POINTER;
-    void** am = &NULL_POINTER;
-    void** amc = &NULL_POINTER;
-    void** ams = &NULL_POINTER;
-    void** ad = &NULL_POINTER;
-    void** adc = &NULL_POINTER;
-    void** ads = &NULL_POINTER;
+    void** an = NULL_POINTER;
+    void** anc = NULL_POINTER;
+    void** ans = NULL_POINTER;
+    void** aa = NULL_POINTER;
+    void** aac = NULL_POINTER;
+    void** aas = NULL_POINTER;
+    void** am = NULL_POINTER;
+    void** amc = NULL_POINTER;
+    void** ams = NULL_POINTER;
+    void** ad = NULL_POINTER;
+    void** adc = NULL_POINTER;
+    void** ads = NULL_POINTER;
     // The element name, abstraction, model, details.
-    void** en = &NULL_POINTER;
-    void** enc = &NULL_POINTER;
-    void** ens = &NULL_POINTER;
-    void** ea = &NULL_POINTER;
-    void** eac = &NULL_POINTER;
-    void** eas = &NULL_POINTER;
-    void** em = &NULL_POINTER;
-    void** emc = &NULL_POINTER;
-    void** ems = &NULL_POINTER;
-    void** ed = &NULL_POINTER;
-    void** edc = &NULL_POINTER;
-    void** eds = &NULL_POINTER;
+    void** en = NULL_POINTER;
+    void** enc = NULL_POINTER;
+    void** ens = NULL_POINTER;
+    void** ea = NULL_POINTER;
+    void** eac = NULL_POINTER;
+    void** eas = NULL_POINTER;
+    void** em = NULL_POINTER;
+    void** emc = NULL_POINTER;
+    void** ems = NULL_POINTER;
+    void** ed = NULL_POINTER;
+    void** edc = NULL_POINTER;
+    void** eds = NULL_POINTER;
     // The whole name, abstraction, model, details.
-    void** wn = &NULL_POINTER;
-    void** wnc = &NULL_POINTER;
-    void** wns = &NULL_POINTER;
-    void** wa = &NULL_POINTER;
-    void** wac = &NULL_POINTER;
-    void** was = &NULL_POINTER;
-    void** wm = &NULL_POINTER;
-    void** wmc = &NULL_POINTER;
-    void** wms = &NULL_POINTER;
-    void** wd = &NULL_POINTER;
-    void** wdc = &NULL_POINTER;
-    void** wds = &NULL_POINTER;
+    void** wn = NULL_POINTER;
+    void** wnc = NULL_POINTER;
+    void** wns = NULL_POINTER;
+    void** wa = NULL_POINTER;
+    void** wac = NULL_POINTER;
+    void** was = NULL_POINTER;
+    void** wm = NULL_POINTER;
+    void** wmc = NULL_POINTER;
+    void** wms = NULL_POINTER;
+    void** wd = NULL_POINTER;
+    void** wdc = NULL_POINTER;
+    void** wds = NULL_POINTER;
 
     // Get name.
     get_universal_compound_element_by_name(p0, p1,
@@ -374,21 +375,21 @@ void create(void* p0, void* p1, void* p2, void* p3, void* p4) {
         p2, p3);
 
     // The knowledge model name.
-    void* kmn = NULL_POINTER;
-    int* kmnc = NULL_POINTER;
-    int* kmns = NULL_POINTER;
+    void* kmn = *NULL_POINTER;
+    int* kmnc = (int*) *NULL_POINTER;
+    int* kmns = (int*) *NULL_POINTER;
     // The knowledge model abstraction.
-    void* kma = NULL_POINTER;
-    int* kmac = NULL_POINTER;
-    int* kmas = NULL_POINTER;
+    void* kma = *NULL_POINTER;
+    int* kmac = (int*) *NULL_POINTER;
+    int* kmas = (int*) *NULL_POINTER;
     // The knowledge model model.
-    void* kmm = NULL_POINTER;
-    int* kmmc = NULL_POINTER;
-    int* kmms = NULL_POINTER;
+    void* kmm = *NULL_POINTER;
+    int* kmmc = (int*) *NULL_POINTER;
+    int* kmms = (int*) *NULL_POINTER;
     // The knowledge model details.
-    void* kmd = NULL_POINTER;
-    int* kmdc = NULL_POINTER;
-    int* kmds = NULL_POINTER;
+    void* kmd = *NULL_POINTER;
+    int* kmdc = (int*) *NULL_POINTER;
+    int* kmds = (int*) *NULL_POINTER;
 
     // Create knowledge model name.
     allocate((void*) &kmnc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
@@ -430,7 +431,7 @@ void create(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         if (r != *NUMBER_0_INTEGER) {
 
-            if (*wm != NULL_POINTER) {
+            if (*wm != *NULL_POINTER) {
 
                 log_message_debug("Add part knowledge model to whole model.");
 
@@ -461,7 +462,7 @@ void create(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         if (r != *NUMBER_0_INTEGER) {
 
-            if (*wd != NULL_POINTER) {
+            if (*wd != *NULL_POINTER) {
 
                 log_message_debug("Add meta knowledge model to whole details.");
 

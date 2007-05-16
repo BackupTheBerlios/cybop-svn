@@ -23,7 +23,7 @@
  * This file contains the functionality to:
  * - create a compound model in memory
  *
- * @version $Revision: 1.10 $ $Date: 2007-04-16 15:50:29 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2007-05-16 19:29:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -34,6 +34,7 @@
 #include "../../globals/constants/integer/integer_constants.c"
 #include "../../globals/constants/log_message/log_message_constants.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../memoriser/array.c"
 
@@ -45,7 +46,7 @@
  */
 void allocate_compound(void* p0, void* p1) {
 
-    if (p0 != NULL_POINTER) {
+    if (p0 != *NULL_POINTER) {
 
         void** c = (void**) p0;
 
@@ -55,18 +56,18 @@ void allocate_compound(void* p0, void* p1) {
         allocate_array(p0, (void*) COMPOUND_COUNT, (void*) POINTER_ARRAY);
 
         // The names, abstractions, models, details.
-        void* n = NULL_POINTER;
-        void* nc = NULL_POINTER;
-        void* ns = NULL_POINTER;
-        void* a = NULL_POINTER;
-        void* ac = NULL_POINTER;
-        void* as = NULL_POINTER;
-        void* m = NULL_POINTER;
-        void* mc = NULL_POINTER;
-        void* ms = NULL_POINTER;
-        void* d = NULL_POINTER;
-        void* dc = NULL_POINTER;
-        void* ds = NULL_POINTER;
+        void* n = *NULL_POINTER;
+        void* nc = *NULL_POINTER;
+        void* ns = *NULL_POINTER;
+        void* a = *NULL_POINTER;
+        void* ac = *NULL_POINTER;
+        void* as = *NULL_POINTER;
+        void* m = *NULL_POINTER;
+        void* mc = *NULL_POINTER;
+        void* ms = *NULL_POINTER;
+        void* d = *NULL_POINTER;
+        void* dc = *NULL_POINTER;
+        void* ds = *NULL_POINTER;
 
         // Allocate names, abstractions, models, details.
         allocate_array((void*) &n, p1, (void*) POINTER_ARRAY);
@@ -112,25 +113,25 @@ void allocate_compound(void* p0, void* p1) {
  */
 void deallocate_compound(void* p0, void* p1) {
 
-    if (p0 != NULL_POINTER) {
+    if (p0 != *NULL_POINTER) {
 
         void** c = (void**) p0;
 
         log_message_debug("Deallocate compound.");
 
         // The names, abstractions, models, details.
-        void** n = &NULL_POINTER;
-        void** nc = &NULL_POINTER;
-        void** ns = &NULL_POINTER;
-        void** a = &NULL_POINTER;
-        void** ac = &NULL_POINTER;
-        void** as = &NULL_POINTER;
-        void** m = &NULL_POINTER;
-        void** mc = &NULL_POINTER;
-        void** ms = &NULL_POINTER;
-        void** d = &NULL_POINTER;
-        void** dc = &NULL_POINTER;
-        void** ds = &NULL_POINTER;
+        void** n = NULL_POINTER;
+        void** nc = NULL_POINTER;
+        void** ns = NULL_POINTER;
+        void** a = NULL_POINTER;
+        void** ac = NULL_POINTER;
+        void** as = NULL_POINTER;
+        void** m = NULL_POINTER;
+        void** mc = NULL_POINTER;
+        void** ms = NULL_POINTER;
+        void** d = NULL_POINTER;
+        void** dc = NULL_POINTER;
+        void** ds = NULL_POINTER;
 
         // Get names, abstractions, models, details.
         // The p0 parameter (c) needs to be dereferenced since it is handed

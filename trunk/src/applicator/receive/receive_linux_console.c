@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.23 $ $Date: 2007-05-09 15:32:40 $ $Author: christian $
+ * @version $Revision: 1.24 $ $Date: 2007-05-16 19:29:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -35,13 +35,14 @@
 //?? #include <wchar.h>
 #include "../../globals/constants/cybol/cybol_abstraction_constants.c"
 #include "../../globals/constants/character/character_constants.c"
+#include "../../globals/constants/character/wide_character_constants.c"
 #include "../../globals/constants/console/console_control_sequence_constants.c"
 #include "../../globals/constants/cyboi_constants.c"
-#include "../../globals/constants/integer/integer_constants.c"
 #include "../../globals/constants/cybol/cybol_name_constants.c"
+#include "../../globals/constants/integer/integer_constants.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/constants/system_constants.c"
-#include "../../globals/constants/character/wide_character_constants.c"
 #include "../../globals/variables/variables.c"
 #include "../../memoriser/accessor/compound_accessor.c"
 #include "../../memoriser/accessor/signal_memory_accessor.c"
@@ -59,39 +60,39 @@
 void receive_linux_console_signal(void* p0, void* p1, void* p2) {
 
     // The knowledge memory.
-    void** k = &NULL_POINTER;
-    void** kc = &NULL_POINTER;
-    void** ks = &NULL_POINTER;
+    void** k = NULL_POINTER;
+    void** kc = NULL_POINTER;
+    void** ks = NULL_POINTER;
     // The signal memory.
-    void** s = &NULL_POINTER;
-    void** sc = &NULL_POINTER;
-    void** ss = &NULL_POINTER;
+    void** s = NULL_POINTER;
+    void** sc = NULL_POINTER;
+    void** ss = NULL_POINTER;
     // The signal memory mutex.
-    pthread_mutex_t** smt = (pthread_mutex_t**) &NULL_POINTER;
+    pthread_mutex_t** smt = (pthread_mutex_t**) NULL_POINTER;
     // The linux console mutex.
-    pthread_mutex_t** lmt = (pthread_mutex_t**) &NULL_POINTER;
+    pthread_mutex_t** lmt = (pthread_mutex_t**) NULL_POINTER;
     // The interrupt request flag.
-    sig_atomic_t** irq = (sig_atomic_t**) &NULL_POINTER;
+    sig_atomic_t** irq = (sig_atomic_t**) NULL_POINTER;
     // The user interface commands.
-    void** c = &NULL_POINTER;
-    void** cc = &NULL_POINTER;
-    void** cs = &NULL_POINTER;
+    void** c = NULL_POINTER;
+    void** cc = NULL_POINTER;
+    void** cs = NULL_POINTER;
     // The command name, abstraction, model, details.
-    void** cn = &NULL_POINTER;
-    void** cnc = &NULL_POINTER;
-    void** cns = &NULL_POINTER;
-    void** ca = &NULL_POINTER;
-    void** cac = &NULL_POINTER;
-    void** cas = &NULL_POINTER;
-    void** cm = &NULL_POINTER;
-    void** cmc = &NULL_POINTER;
-    void** cms = &NULL_POINTER;
-    void** cd = &NULL_POINTER;
-    void** cdc = &NULL_POINTER;
-    void** cds = &NULL_POINTER;
+    void** cn = NULL_POINTER;
+    void** cnc = NULL_POINTER;
+    void** cns = NULL_POINTER;
+    void** ca = NULL_POINTER;
+    void** cac = NULL_POINTER;
+    void** cas = NULL_POINTER;
+    void** cm = NULL_POINTER;
+    void** cmc = NULL_POINTER;
+    void** cms = NULL_POINTER;
+    void** cd = NULL_POINTER;
+    void** cdc = NULL_POINTER;
+    void** cds = NULL_POINTER;
 
     // The signal id.
-    int* id = NULL_POINTER;
+    int* id = (int*) *NULL_POINTER;
 
     // Get knowledge memory internal.
     get(p0, (void*) KNOWLEDGE_MEMORY_INTERNAL, (void*) &k, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
@@ -223,7 +224,7 @@ void receive_linux_console_escape_control_sequence(void* p0, void* p1, void* p2)
  */
 void receive_linux_console_character(void* p0, void* p1) {
 
-    if (p1 != NULL_POINTER) {
+    if (p1 != *NULL_POINTER) {
 
         char* e = (char*) p1;
 
@@ -253,148 +254,152 @@ void receive_linux_console_character(void* p0, void* p1) {
  */
 void receive_linux_console_thread(void* p0) {
 
-    // The linux console (terminal device name).
-    void** t = &NULL_POINTER;
+    // The linux console input stream.
+    void** ip = NULL_POINTER;
 
-    // Get linux console.
-//??    get_array_elements(p0, (void*) LINUX_CONSOLE_FILE_DESCRIPTOR_INTERNAL, (void*) &t, (void*) POINTER_ARRAY);
+    // Get linux console input stream.
+    get_array_elements(p0, (void*) LINUX_CONSOLE_INPUT_FILE_DESCRIPTOR_INTERNAL, (void*) &ip, (void*) POINTER_ARRAY);
 
-    //?? For now, the standard stream is used for input. Possibly changed later.
-    *t = stdin;
+    if (*ip != *NULL_POINTER) {
 
-    // The event character.
-    // CAUTION! For the narrow stream functions it is important to store the
-    // result of these functions in a variable of type int instead of char,
-    // even if one plans to use it only as a character. Storing EOF in a char
-    // variable truncates its value to the size of a character, so that it
-    // is no longer distinguishable from the valid character (char) -1.
-    // So, one should always use an int for the result of getc and friends,
-    // and check for EOF after the call; once it is verified that the result
-    // is NOT EOF, one can be sure that it will fit in a char variable
-    // without loss of information.
-    // NEVERTHELESS, a char is used here since EOF is not of importance below,
-    // in the "get_universal_compound_element_by_name" procedure.
-//??    wint_t e = *NULL_CONTROL_CHARACTER;
-    char e = *NULL_CONTROL_CHARACTER;
-    // The escape character mode.
-    int esc = *NUMBER_0_INTEGER;
-    // The escape control sequence mode.
-    int csi = *NUMBER_0_INTEGER;
-    // The character buffer.
-    void** b = &NULL_POINTER;
-    int** bc = (int**) &NULL_POINTER;
-    int** bs = (int**) &NULL_POINTER;
-    // The interrupt flag.
-    int** f = (int**) &NULL_POINTER;
-    // The loop count.
-    int j = 0;
+        // The event character.
+        // CAUTION! For the narrow stream functions it is important to store the
+        // result of these functions in a variable of type int instead of char,
+        // even if one plans to use it only as a character. Storing EOF in a char
+        // variable truncates its value to the size of a character, so that it
+        // is no longer distinguishable from the valid character (char) -1.
+        // So, one should always use an int for the result of getc and friends,
+        // and check for EOF after the call; once it is verified that the result
+        // is NOT EOF, one can be sure that it will fit in a char variable
+        // without loss of information.
+        // NEVERTHELESS, a char is used here since EOF is not of importance below,
+        // in the "get_universal_compound_element_by_name" procedure.
+    //??    wint_t e = *NULL_CONTROL_CHARACTER;
+        char e = *NULL_CONTROL_CHARACTER;
+        // The escape character mode.
+        int esc = *NUMBER_0_INTEGER;
+        // The escape control sequence mode.
+        int csi = *NUMBER_0_INTEGER;
+        // The character buffer.
+        void** b = NULL_POINTER;
+        int** bc = (int**) NULL_POINTER;
+        int** bs = (int**) NULL_POINTER;
+        // The interrupt flag.
+        int** f = (int**) NULL_POINTER;
+        // The loop count.
+        int j = *NUMBER_0_INTEGER;
 
-    // Get character buffer.
-    get(p0, (void*) LINUX_CONSOLE_THREAD_CHARACTER_BUFFER_INTERNAL, (void*) &b, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    get(p0, (void*) LINUX_CONSOLE_THREAD_CHARACTER_BUFFER_COUNT_INTERNAL, (void*) &bc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    get(p0, (void*) LINUX_CONSOLE_THREAD_CHARACTER_BUFFER_SIZE_INTERNAL, (void*) &bs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        // Get character buffer.
+        get(p0, (void*) LINUX_CONSOLE_THREAD_CHARACTER_BUFFER_INTERNAL, (void*) &b, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        get(p0, (void*) LINUX_CONSOLE_THREAD_CHARACTER_BUFFER_COUNT_INTERNAL, (void*) &bc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        get(p0, (void*) LINUX_CONSOLE_THREAD_CHARACTER_BUFFER_SIZE_INTERNAL, (void*) &bs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-    while (1) {
+        while (*NUMBER_1_INTEGER) {
 
-        // A break condition does not exist here because the loop
-        // is blocking neverendingly while waiting for signals.
-        // The loop and this thread can only be exited by an external signal
-        // which is sent in the corresponding interrupt service procedure
-        // (situated in the applicator/interrupt/ directory)
-        // and processed in the system signal handler procedure
-        // (situated in the controller/checker.c module).
+            // A break condition does not exist here because the loop
+            // is blocking neverendingly while waiting for signals.
+            // The loop and this thread can only be exited by an external signal
+            // which is sent in the corresponding interrupt service procedure
+            // (situated in the applicator/interrupt/ directory)
+            // and processed in the system signal handler procedure
+            // (situated in the controller/checker.c module).
 
-        // Get character from linux console.
-        // CAUTION! Use 'wint_t' instead of 'int' as return type for
-        // 'getwchar()', since that returns 'WEOF' instead of 'EOF'.
-//??        e = fgetwc(*t);
-        e = fgetc(*t);
+            // Get character from linux console.
+            // CAUTION! Use 'wint_t' instead of 'int' as return type for
+            // 'getwchar()', since that returns 'WEOF' instead of 'EOF'.
+    //??        e = fgetwc(*ip);
+            e = fgetc(*ip);
 
-//??    fprintf(stdout, "TEST character %i\n", e);
+    //??    fprintf(stdout, "TEST character %i\n", e);
 
-        if (csi == *NUMBER_1_INTEGER) {
+            if (csi == *NUMBER_1_INTEGER) {
 
-            // Reset escape control sequence mode.
-            csi = *NUMBER_0_INTEGER;
+                // Reset escape control sequence mode.
+                csi = *NUMBER_0_INTEGER;
 
-            // An escape character followed by a left square bracket character
-            // were read before. So this is an escape control sequence.
-
-            // Add character to buffer.
-            set(*b, (void*) *bc, (void*) &e, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
-            (**bc)++;
-
-            receive_linux_console_escape_control_sequence(p0, *b, (void*) *bc);
-
-            // Initialise loop count.
-            j = **bc - 1;
-
-            // Empty the buffer for future results.
-            while (1) {
-
-                if (j < 0) {
-
-                    break;
-                }
-
-                // Remove all characters from buffer.
-                remove_element(*b, (void*) *bs, (void*) &j, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
-
-                // Decrease loop count.
-                j--;
-                // Decrease character buffer count.
-                (**bc)--;
-            }
-
-        } else if (esc == *NUMBER_1_INTEGER) {
-
-            // Reset escape character mode.
-            esc = *NUMBER_0_INTEGER;
-
-            // An escape character was read before.
-            // Find out if it was just that escape character,
-            // or if a left square bracket character follows now,
-            // in which case this is the start of an escape control sequence.
-
-            if (e == *LEFT_SQUARE_BRACKET_WIDE_CHARACTER) {
-
-                // This is the start of an escape control sequence.
-
-                // Set escape control sequence flag.
-                csi = *NUMBER_1_INTEGER;
+                // An escape character followed by a left square bracket character
+                // were read before. So this is an escape control sequence.
 
                 // Add character to buffer.
                 set(*b, (void*) *bc, (void*) &e, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
                 (**bc)++;
 
-            } else {
+                receive_linux_console_escape_control_sequence(p0, *b, (void*) *bc);
 
-                // This is NOT going to be an escape control sequence.
-                // Send both, the formerly read escape character and the
-                // current character as two independent signals.
-                receive_linux_console_signal(p0, (void*) UI_ESCAPE_NAME, (void*) UI_ESCAPE_NAME_COUNT);
+                // Initialise loop count.
+                j = **bc - *NUMBER_1_INTEGER;
 
-                if (e != EOF) {
+                // Empty the buffer for future results.
+                while (*NUMBER_1_INTEGER) {
 
-                    // Forward character if it is not the end of the console stream.
-                    receive_linux_console_character(p0, (void*) &e);
+                    if (j < *NUMBER_0_INTEGER) {
+
+                        break;
+                    }
+
+                    // Remove all characters from buffer.
+                    remove_element(*b, (void*) *bs, (void*) &j, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+
+                    // Decrease loop count.
+                    j--;
+                    // Decrease character buffer count.
+                    (**bc)--;
                 }
+
+            } else if (esc == *NUMBER_1_INTEGER) {
+
+                // Reset escape character mode.
+                esc = *NUMBER_0_INTEGER;
+
+                // An escape character was read before.
+                // Find out if it was just that escape character,
+                // or if a left square bracket character follows now,
+                // in which case this is the start of an escape control sequence.
+
+                if (e == *LEFT_SQUARE_BRACKET_WIDE_CHARACTER) {
+
+                    // This is the start of an escape control sequence.
+
+                    // Set escape control sequence flag.
+                    csi = *NUMBER_1_INTEGER;
+
+                    // Add character to buffer.
+                    set(*b, (void*) *bc, (void*) &e, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+                    (**bc)++;
+
+                } else {
+
+                    // This is NOT going to be an escape control sequence.
+                    // Send both, the formerly read escape character and the
+                    // current character as two independent signals.
+                    receive_linux_console_signal(p0, (void*) UI_ESCAPE_NAME, (void*) UI_ESCAPE_NAME_COUNT);
+
+                    if (e != EOF) {
+
+                        // Forward character if it is not the end of the console stream.
+                        receive_linux_console_character(p0, (void*) &e);
+                    }
+                }
+
+            } else if (e == *ESCAPE_CONTROL_WIDE_CHARACTER) {
+
+                // Set escape character flag.
+                esc = *NUMBER_1_INTEGER;
+
+                // Add character to buffer.
+                set(*b, (void*) *bc, (void*) &e, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+                (**bc)++;
+
+            } else if (e != EOF) {
+
+                // Forward character if it is not the end of the console stream.
+                receive_linux_console_character(p0, (void*) &e);
             }
-
-        } else if (e == *ESCAPE_CONTROL_WIDE_CHARACTER) {
-
-            // Set escape character flag.
-            esc = *NUMBER_1_INTEGER;
-
-            // Add character to buffer.
-            set(*b, (void*) *bc, (void*) &e, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
-            (**bc)++;
-
-        } else if (e != EOF) {
-
-            // Forward character if it is not the end of the console stream.
-            receive_linux_console_character(p0, (void*) &e);
         }
+
+    } else {
+
+        log_message_debug("Could not receive linux console thread. The input stream is null.");
     }
 
     // An implicit call to pthread_exit() is made when this thread
@@ -424,7 +429,7 @@ void receive_linux_console(void* p0, void* p1, void* p2, void* p3) {
     log_message_debug("Receive linux console message.");
 
     // The linux console mutex.
-    pthread_mutex_t** mt = (pthread_mutex_t**) &NULL_POINTER;
+    pthread_mutex_t** mt = (pthread_mutex_t**) NULL_POINTER;
 
     // Get linux console mutex.
     get(p0, (void*) LINUX_CONSOLE_MUTEX_INTERNAL, (void*) &mt, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
@@ -473,7 +478,7 @@ void receive_linux_console(void* p0, void* p1, void* p2, void* p3) {
         // - added to the internal memory
         // - handed over to the thread procedure HERE
         // - deallocated at service shutdown
-        pthread_create(LINUX_CONSOLE_THREAD, NULL_POINTER, (void*) &receive_linux_console_thread, p0);
+        pthread_create(LINUX_CONSOLE_THREAD, *NULL_POINTER, (void*) &receive_linux_console_thread, p0);
     }
 }
 

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.20 $ $Date: 2007-04-26 23:17:09 $ $Author: christian $
+ * @version $Revision: 1.21 $ $Date: 2007-05-16 19:29:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -32,6 +32,7 @@
 #include <X11/Xutil.h>
 #include "../../globals/constants/cybol/cybol_model_constants.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../globals/variables/variables.c"
 #include "../../memoriser/accessor.c"
@@ -51,7 +52,7 @@ void send_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
     log_message_debug("Send x window system message.");
 
     // The x window system mutex.
-    pthread_mutex_t** xmt = (pthread_mutex_t**) &NULL_POINTER;
+    pthread_mutex_t** xmt = (pthread_mutex_t**) NULL_POINTER;
 
     // Get x window system mutex.
     get(p0, (void*) X_WINDOW_SYSTEM_MUTEX_INTERNAL, (void*) &xmt, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
@@ -59,18 +60,18 @@ void send_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
     pthread_mutex_lock(*xmt);
 
     // Serialise compound model into x window system window.
-    serialise(p0, NULL_POINTER, NULL_POINTER, NULL_POINTER, NULL_POINTER, NULL_POINTER, NULL_POINTER,
-        p1, p2, NULL_POINTER, NULL_POINTER, p3, p4, (void*) X_WINDOW_SYSTEM_MODEL, (void*) X_WINDOW_SYSTEM_MODEL_COUNT);
+    serialise(p0, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
+        p1, p2, *NULL_POINTER, *NULL_POINTER, p3, p4, (void*) X_WINDOW_SYSTEM_MODEL, (void*) X_WINDOW_SYSTEM_MODEL_COUNT);
 
     // The display, which is a subsumption of
     // xserver, screens, hardware (input devices etc.).
-    void** d = &NULL_POINTER;
+    void** d = NULL_POINTER;
 
     // Get display.
     get_array_elements(p0, (void*) X_WINDOW_SYSTEM_DISPLAY_INTERNAL, (void*) &d, (void*) POINTER_ARRAY);
 
     // Show window on display.
-    write_data(d, NULL_POINTER, NULL_POINTER, p0, NULL_POINTER, (void*) X_WINDOW_SYSTEM_MODEL, (void*) X_WINDOW_SYSTEM_MODEL_COUNT);
+    write_data(d, *NULL_POINTER, *NULL_POINTER, p0, *NULL_POINTER, (void*) X_WINDOW_SYSTEM_MODEL, (void*) X_WINDOW_SYSTEM_MODEL_COUNT);
 
     pthread_mutex_unlock(*xmt);
 

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.26 $ $Date: 2007-05-09 15:32:40 $ $Author: christian $
+ * @version $Revision: 1.27 $ $Date: 2007-05-16 19:29:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description This module starts up a service.
  */
@@ -38,6 +38,7 @@
 #include "../globals/constants/cybol/cybol_name_constants.c"
 #include "../globals/constants/service_port_constants.c"
 #include "../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../globals/constants/pointer/pointer_constants.c"
 #include "../globals/logger/logger.c"
 #include "../memoriser/accessor/compound_accessor.c"
 #include "../memoriser/array.c"
@@ -61,57 +62,57 @@ void startup_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5)
     log_message_debug("Startup service.");
 
     // The service name, abstraction, model, details.
-    void** sn = &NULL_POINTER;
-    void** snc = &NULL_POINTER;
-    void** sns = &NULL_POINTER;
-    void** sa = &NULL_POINTER;
-    void** sac = &NULL_POINTER;
-    void** sas = &NULL_POINTER;
-    void** sm = &NULL_POINTER;
-    void** smc = &NULL_POINTER;
-    void** sms = &NULL_POINTER;
-    void** sd = &NULL_POINTER;
-    void** sdc = &NULL_POINTER;
-    void** sds = &NULL_POINTER;
+    void** sn = NULL_POINTER;
+    void** snc = NULL_POINTER;
+    void** sns = NULL_POINTER;
+    void** sa = NULL_POINTER;
+    void** sac = NULL_POINTER;
+    void** sas = NULL_POINTER;
+    void** sm = NULL_POINTER;
+    void** smc = NULL_POINTER;
+    void** sms = NULL_POINTER;
+    void** sd = NULL_POINTER;
+    void** sdc = NULL_POINTER;
+    void** sds = NULL_POINTER;
     // The socket namespace name, abstraction, model, details.
-    void** nn = &NULL_POINTER;
-    void** nnc = &NULL_POINTER;
-    void** nns = &NULL_POINTER;
-    void** na = &NULL_POINTER;
-    void** nac = &NULL_POINTER;
-    void** nas = &NULL_POINTER;
-    void** nm = &NULL_POINTER;
-    void** nmc = &NULL_POINTER;
-    void** nms = &NULL_POINTER;
-    void** nd = &NULL_POINTER;
-    void** ndc = &NULL_POINTER;
-    void** nds = &NULL_POINTER;
+    void** nn = NULL_POINTER;
+    void** nnc = NULL_POINTER;
+    void** nns = NULL_POINTER;
+    void** na = NULL_POINTER;
+    void** nac = NULL_POINTER;
+    void** nas = NULL_POINTER;
+    void** nm = NULL_POINTER;
+    void** nmc = NULL_POINTER;
+    void** nms = NULL_POINTER;
+    void** nd = NULL_POINTER;
+    void** ndc = NULL_POINTER;
+    void** nds = NULL_POINTER;
     // The communication style name, abstraction, model, details.
-    void** stn = &NULL_POINTER;
-    void** stnc = &NULL_POINTER;
-    void** stns = &NULL_POINTER;
-    void** sta = &NULL_POINTER;
-    void** stac = &NULL_POINTER;
-    void** stas = &NULL_POINTER;
-    void** stm = &NULL_POINTER;
-    void** stmc = &NULL_POINTER;
-    void** stms = &NULL_POINTER;
-    void** std = &NULL_POINTER;
-    void** stdc = &NULL_POINTER;
-    void** stds = &NULL_POINTER;
+    void** stn = NULL_POINTER;
+    void** stnc = NULL_POINTER;
+    void** stns = NULL_POINTER;
+    void** sta = NULL_POINTER;
+    void** stac = NULL_POINTER;
+    void** stas = NULL_POINTER;
+    void** stm = NULL_POINTER;
+    void** stmc = NULL_POINTER;
+    void** stms = NULL_POINTER;
+    void** std = NULL_POINTER;
+    void** stdc = NULL_POINTER;
+    void** stds = NULL_POINTER;
     // The host address name, abstraction, model, details.
-    void** an = &NULL_POINTER;
-    void** anc = &NULL_POINTER;
-    void** ans = &NULL_POINTER;
-    void** aa = &NULL_POINTER;
-    void** aac = &NULL_POINTER;
-    void** aas = &NULL_POINTER;
-    void** am = &NULL_POINTER;
-    void** amc = &NULL_POINTER;
-    void** ams = &NULL_POINTER;
-    void** ad = &NULL_POINTER;
-    void** adc = &NULL_POINTER;
-    void** ads = &NULL_POINTER;
+    void** an = NULL_POINTER;
+    void** anc = NULL_POINTER;
+    void** ans = NULL_POINTER;
+    void** aa = NULL_POINTER;
+    void** aac = NULL_POINTER;
+    void** aas = NULL_POINTER;
+    void** am = NULL_POINTER;
+    void** amc = NULL_POINTER;
+    void** ams = NULL_POINTER;
+    void** ad = NULL_POINTER;
+    void** adc = NULL_POINTER;
+    void** ads = NULL_POINTER;
 
     // Get service.
     get_universal_compound_element_by_name(p0, p1,
@@ -154,7 +155,7 @@ void startup_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5)
     // The internal memory index.
     int i = *INVALID_VALUE;
     // The server socket internal.
-    int** s = (int**) &NULL_POINTER;
+    int** s = (int**) NULL_POINTER;
 
     if (r == 0) {
 
@@ -186,7 +187,7 @@ void startup_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5)
             i = *WWW_BASE_INTERNAL + *SOCKET_INTERNAL;
             get(p5, (void*) &i, (void*) &s, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-            if (*s == NULL_POINTER) {
+            if (*s == *NULL_POINTER) {
 
                 // Startup server socket if it does not already exist.
                 startup_socket(p5, *nm, *nmc, *stm, *stmc, *am, *amc, (void*) WWW_PORT, (void*) WWW_BASE_INTERNAL, p2, p3, p4);
@@ -208,7 +209,7 @@ void startup_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5)
             i = *CYBOI_BASE_INTERNAL + *SOCKET_INTERNAL;
             get(p5, (void*) &i, (void*) &s, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-            if (*s == NULL_POINTER) {
+            if (*s == *NULL_POINTER) {
 
                 // Startup server socket if it does not already exist.
                 startup_socket(p5, *nm, *nmc, *stm, *stmc, *am, *amc, (void*) CYBOI_PORT, (void*) CYBOI_BASE_INTERNAL, p2, p3, p4);

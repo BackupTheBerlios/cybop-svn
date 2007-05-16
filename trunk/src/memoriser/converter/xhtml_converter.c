@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2007-05-09 15:32:40 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2007-05-16 19:29:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -34,6 +34,7 @@
 #include "../../globals/constants/cybol/cybol_model_constants.c"
 #include "../../globals/constants/cybol/cybol_name_constants.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../memoriser/accessor.c"
 #include "../../memoriser/accessor/compound_accessor.c"
@@ -61,7 +62,7 @@ void parse_xhtml(void* p0, void* p1, void* p2, void* p3, void* p4) {
  */
 void serialise_xhtml_indentation(void* p0, void* p1, void* p2, void* p3) {
 
-    if (p3 != NULL_POINTER) {
+    if (p3 != *NULL_POINTER) {
 
         int* l = (int*) p3;
 
@@ -110,25 +111,25 @@ void serialise_xhtml_indentation(void* p0, void* p1, void* p2, void* p3) {
  */
 void serialise_xhtml_attributes(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
-    if (p4 != NULL_POINTER) {
+    if (p4 != *NULL_POINTER) {
 
         int* sc = (int*) p4;
 
         log_message_debug("Serialise xhtml attributes.");
 
         // The source part details name, abstraction, model, details.
-        void** n = &NULL_POINTER;
-        void** nc = &NULL_POINTER;
-        void** ns = &NULL_POINTER;
-        void** a = &NULL_POINTER;
-        void** ac = &NULL_POINTER;
-        void** as = &NULL_POINTER;
-        void** m = &NULL_POINTER;
-        void** mc = &NULL_POINTER;
-        void** ms = &NULL_POINTER;
-        void** d = &NULL_POINTER;
-        void** dc = &NULL_POINTER;
-        void** ds = &NULL_POINTER;
+        void** n = NULL_POINTER;
+        void** nc = NULL_POINTER;
+        void** ns = NULL_POINTER;
+        void** a = NULL_POINTER;
+        void** ac = NULL_POINTER;
+        void** as = NULL_POINTER;
+        void** m = NULL_POINTER;
+        void** mc = NULL_POINTER;
+        void** ms = NULL_POINTER;
+        void** d = NULL_POINTER;
+        void** dc = NULL_POINTER;
+        void** ds = NULL_POINTER;
 
         // The loop variable.
         int j = *NUMBER_0_INTEGER;
@@ -171,18 +172,18 @@ void serialise_xhtml_attributes(void* p0, void* p1, void* p2, void* p3, void* p4
             }
 
             // Reset source part name, abstraction, model, details.
-            n = &NULL_POINTER;
-            nc = &NULL_POINTER;
-            ns = &NULL_POINTER;
-            a = &NULL_POINTER;
-            ac = &NULL_POINTER;
-            as = &NULL_POINTER;
-            m = &NULL_POINTER;
-            mc = &NULL_POINTER;
-            ms = &NULL_POINTER;
-            d = &NULL_POINTER;
-            dc = &NULL_POINTER;
-            ds = &NULL_POINTER;
+            n = NULL_POINTER;
+            nc = NULL_POINTER;
+            ns = NULL_POINTER;
+            a = NULL_POINTER;
+            ac = NULL_POINTER;
+            as = NULL_POINTER;
+            m = NULL_POINTER;
+            mc = NULL_POINTER;
+            ms = NULL_POINTER;
+            d = NULL_POINTER;
+            dc = NULL_POINTER;
+            ds = NULL_POINTER;
 
             // Reset comparison result.
             r = *NUMBER_0_INTEGER;
@@ -270,7 +271,7 @@ void serialise_xhtml_end_tag(void* p0, void* p1, void* p2, void* p3, void* p4, v
  */
 void serialise_xhtml_tag_content(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
-    if (p4 != NULL_POINTER) {
+    if (p4 != *NULL_POINTER) {
 
         int* mc = (int*) p4;
 
@@ -312,43 +313,43 @@ void serialise_xhtml_tag_content(void* p0, void* p1, void* p2, void* p3, void* p
 void serialise_xhtml_node(void* p0, void* p1, void* p2, void* p3, void* p4,
     void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11) {
 
-    if (p11 != NULL_POINTER) {
+    if (p11 != *NULL_POINTER) {
 
         int* l = (int*) p11;
 
-        if (p6 != NULL_POINTER) {
+        if (p6 != *NULL_POINTER) {
 
             int* sc = (int*) p6;
 
             log_message_debug("Debug: Serialise xhtml node.");
 
             // The source part name, abstraction, model, details.
-            void** n = &NULL_POINTER;
-            void** nc = &NULL_POINTER;
-            void** ns = &NULL_POINTER;
-            void** a = &NULL_POINTER;
-            void** ac = &NULL_POINTER;
-            void** as = &NULL_POINTER;
-            void** m = &NULL_POINTER;
-            void** mc = &NULL_POINTER;
-            void** ms = &NULL_POINTER;
-            void** d = &NULL_POINTER;
-            void** dc = &NULL_POINTER;
-            void** ds = &NULL_POINTER;
+            void** n = NULL_POINTER;
+            void** nc = NULL_POINTER;
+            void** ns = NULL_POINTER;
+            void** a = NULL_POINTER;
+            void** ac = NULL_POINTER;
+            void** as = NULL_POINTER;
+            void** m = NULL_POINTER;
+            void** mc = NULL_POINTER;
+            void** ms = NULL_POINTER;
+            void** d = NULL_POINTER;
+            void** dc = NULL_POINTER;
+            void** ds = NULL_POINTER;
 
             // The source part tag name, abstraction, model, details.
-            void** tn = &NULL_POINTER;
-            void** tnc = &NULL_POINTER;
-            void** tns = &NULL_POINTER;
-            void** ta = &NULL_POINTER;
-            void** tac = &NULL_POINTER;
-            void** tas = &NULL_POINTER;
-            void** tm = &NULL_POINTER;
-            void** tmc = &NULL_POINTER;
-            void** tms = &NULL_POINTER;
-            void** td = &NULL_POINTER;
-            void** tdc = &NULL_POINTER;
-            void** tds = &NULL_POINTER;
+            void** tn = NULL_POINTER;
+            void** tnc = NULL_POINTER;
+            void** tns = NULL_POINTER;
+            void** ta = NULL_POINTER;
+            void** tac = NULL_POINTER;
+            void** tas = NULL_POINTER;
+            void** tm = NULL_POINTER;
+            void** tmc = NULL_POINTER;
+            void** tms = NULL_POINTER;
+            void** td = NULL_POINTER;
+            void** tdc = NULL_POINTER;
+            void** tds = NULL_POINTER;
 
             // Get source part tag from details.
             get_universal_compound_element_by_name(p7, p8,
@@ -397,18 +398,18 @@ void serialise_xhtml_node(void* p0, void* p1, void* p2, void* p3, void* p4,
                         serialise_xhtml_node(p0, p1, p2, *a, *ac, *m, *mc, *d, *dc, p9, p10, (void*) &nl);
 
                         // Reset source part name, abstraction, model, details.
-                        n = &NULL_POINTER;
-                        nc = &NULL_POINTER;
-                        ns = &NULL_POINTER;
-                        a = &NULL_POINTER;
-                        ac = &NULL_POINTER;
-                        as = &NULL_POINTER;
-                        m = &NULL_POINTER;
-                        mc = &NULL_POINTER;
-                        ms = &NULL_POINTER;
-                        d = &NULL_POINTER;
-                        dc = &NULL_POINTER;
-                        ds = &NULL_POINTER;
+                        n = NULL_POINTER;
+                        nc = NULL_POINTER;
+                        ns = NULL_POINTER;
+                        a = NULL_POINTER;
+                        ac = NULL_POINTER;
+                        as = NULL_POINTER;
+                        m = NULL_POINTER;
+                        mc = NULL_POINTER;
+                        ms = NULL_POINTER;
+                        d = NULL_POINTER;
+                        dc = NULL_POINTER;
+                        ds = NULL_POINTER;
 
                         // Increment loop variable.
                         j++;

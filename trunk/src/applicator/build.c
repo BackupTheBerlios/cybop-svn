@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.19 $ $Date: 2007-05-09 15:32:40 $ $Author: christian $
+ * @version $Revision: 1.20 $ $Date: 2007-05-16 19:29:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,6 +30,7 @@
 #include "../globals/constants/cybol/cybol_abstraction_constants.c"
 #include "../globals/constants/log_message/log_message_constants.c"
 #include "../globals/constants/cybol/cybol_name_constants.c"
+#include "../globals/constants/pointer/pointer_constants.c"
 #include "../globals/logger/logger.c"
 #include "../memoriser/accessor/compound_accessor.c"
 #include "../memoriser/array.c"
@@ -52,44 +53,44 @@ void build_listname(void* p0, void* p1, void* p2, void* p3, void* p4) {
     log_message_debug("Build list name.");
 
     // The basisname name, abstraction, model, details.
-    void** bnn = &NULL_POINTER;
-    void** bnnc = &NULL_POINTER;
-    void** bnns = &NULL_POINTER;
-    void** bna = &NULL_POINTER;
-    void** bnac = &NULL_POINTER;
-    void** bnas = &NULL_POINTER;
-    void** bnm = &NULL_POINTER;
-    void** bnmc = &NULL_POINTER;
-    void** bnms = &NULL_POINTER;
-    void** bnd = &NULL_POINTER;
-    void** bndc = &NULL_POINTER;
-    void** bnds = &NULL_POINTER;
+    void** bnn = NULL_POINTER;
+    void** bnnc = NULL_POINTER;
+    void** bnns = NULL_POINTER;
+    void** bna = NULL_POINTER;
+    void** bnac = NULL_POINTER;
+    void** bnas = NULL_POINTER;
+    void** bnm = NULL_POINTER;
+    void** bnmc = NULL_POINTER;
+    void** bnms = NULL_POINTER;
+    void** bnd = NULL_POINTER;
+    void** bndc = NULL_POINTER;
+    void** bnds = NULL_POINTER;
     // The index name, abstraction, model, details.
-    void** idxn = &NULL_POINTER;
-    void** idxnc = &NULL_POINTER;
-    void** idxns = &NULL_POINTER;
-    void** idxa = &NULL_POINTER;
-    void** idxac = &NULL_POINTER;
-    void** idxas = &NULL_POINTER;
-    void** idxm = &NULL_POINTER;
-    void** idxmc = &NULL_POINTER;
-    void** idxms = &NULL_POINTER;
-    void** idxd = &NULL_POINTER;
-    void** idxdc = &NULL_POINTER;
-    void** idxds = &NULL_POINTER;
+    void** idxn = NULL_POINTER;
+    void** idxnc = NULL_POINTER;
+    void** idxns = NULL_POINTER;
+    void** idxa = NULL_POINTER;
+    void** idxac = NULL_POINTER;
+    void** idxas = NULL_POINTER;
+    void** idxm = NULL_POINTER;
+    void** idxmc = NULL_POINTER;
+    void** idxms = NULL_POINTER;
+    void** idxd = NULL_POINTER;
+    void** idxdc = NULL_POINTER;
+    void** idxds = NULL_POINTER;
     // The result name, abstraction, model, details.
-    void** resn = &NULL_POINTER;
-    void** resnc = &NULL_POINTER;
-    void** resns = &NULL_POINTER;
-    void** resa = &NULL_POINTER;
-    void** resac = &NULL_POINTER;
-    void** resas = &NULL_POINTER;
-    void** resm = &NULL_POINTER;
-    void** resmc = &NULL_POINTER;
-    void** resms = &NULL_POINTER;
-    void** resd = &NULL_POINTER;
-    void** resdc = &NULL_POINTER;
-    void** resds = &NULL_POINTER;
+    void** resn = NULL_POINTER;
+    void** resnc = NULL_POINTER;
+    void** resns = NULL_POINTER;
+    void** resa = NULL_POINTER;
+    void** resac = NULL_POINTER;
+    void** resas = NULL_POINTER;
+    void** resm = NULL_POINTER;
+    void** resmc = NULL_POINTER;
+    void** resms = NULL_POINTER;
+    void** resd = NULL_POINTER;
+    void** resdc = NULL_POINTER;
+    void** resds = NULL_POINTER;
 
     // get the basisname
     get_universal_compound_element_by_name(p0, p1,
@@ -119,35 +120,35 @@ void build_listname(void* p0, void* p1, void* p2, void* p3, void* p4) {
         p2, p3);
 
     // Check basisname.
-    if ((*bna != NULL_POINTER)
-        && (*bnac != NULL_POINTER)
-        && (*bnas != NULL_POINTER)
-        && (*bnm != NULL_POINTER)
-        && (*bnmc != NULL_POINTER)
-        && (*bnms != NULL_POINTER)
-        && (*bnd != NULL_POINTER)
-        && (*bndc != NULL_POINTER)
-        && (*bnds != NULL_POINTER)
+    if ((*bna != *NULL_POINTER)
+        && (*bnac != *NULL_POINTER)
+        && (*bnas != *NULL_POINTER)
+        && (*bnm != *NULL_POINTER)
+        && (*bnmc != *NULL_POINTER)
+        && (*bnms != *NULL_POINTER)
+        && (*bnd != *NULL_POINTER)
+        && (*bndc != *NULL_POINTER)
+        && (*bnds != *NULL_POINTER)
         // Check index.
-        && (*idxa != NULL_POINTER)
-        && (*idxac != NULL_POINTER)
-        && (*idxas != NULL_POINTER)
-        && (*idxm != NULL_POINTER)
-        && (*idxmc != NULL_POINTER)
-        && (*idxms != NULL_POINTER)
-        && (*idxd != NULL_POINTER)
-        && (*idxdc != NULL_POINTER)
-        && (*idxds != NULL_POINTER)
+        && (*idxa != *NULL_POINTER)
+        && (*idxac != *NULL_POINTER)
+        && (*idxas != *NULL_POINTER)
+        && (*idxm != *NULL_POINTER)
+        && (*idxmc != *NULL_POINTER)
+        && (*idxms != *NULL_POINTER)
+        && (*idxd != *NULL_POINTER)
+        && (*idxdc != *NULL_POINTER)
+        && (*idxds != *NULL_POINTER)
         // Check result.
-        && (*resa != NULL_POINTER)
-        && (*resac != NULL_POINTER)
-        && (*resas != NULL_POINTER)
-        && (*resm != NULL_POINTER)
-        && (*resmc != NULL_POINTER)
-        && (*resms != NULL_POINTER)
-        && (*resd != NULL_POINTER)
-        && (*resdc != NULL_POINTER)
-        && (*resds != NULL_POINTER)) {
+        && (*resa != *NULL_POINTER)
+        && (*resac != *NULL_POINTER)
+        && (*resas != *NULL_POINTER)
+        && (*resm != *NULL_POINTER)
+        && (*resmc != *NULL_POINTER)
+        && (*resms != *NULL_POINTER)
+        && (*resd != *NULL_POINTER)
+        && (*resdc != *NULL_POINTER)
+        && (*resds != *NULL_POINTER)) {
 
         //check the abstraction for the operation element
         int comp_res1 = 0;
@@ -163,7 +164,7 @@ void build_listname(void* p0, void* p1, void* p2, void* p3, void* p4) {
             // changing the for the index
 
             // Create compare string.
-            char* int_string = NULL_POINTER;
+            char* int_string = *NULL_POINTER;
             // todo Konstante noch definieren
             int int_string_count = 0;
             int int_string_size = 10;

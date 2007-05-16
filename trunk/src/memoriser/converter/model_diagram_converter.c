@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2007-05-01 19:07:11 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2007-05-16 19:29:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -31,6 +31,7 @@
 #include "../../globals/constants/integer/integer_constants.c"
 #include "../../globals/constants/log_message/log_message_constants.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/logger/logger.c"
 
 //
@@ -84,11 +85,11 @@ void parse_model_diagram(void* p0, void* p1, void* p2, void* p3, void* p4) {
  */
 void serialise_model_diagram_indentation(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p4 != NULL_POINTER) {
+    if (p4 != *NULL_POINTER) {
 
         int* d = (int*) p4;
 
-        if (p3 != NULL_POINTER) {
+        if (p3 != *NULL_POINTER) {
 
             int* l = (int*) p3;
 
@@ -170,11 +171,11 @@ void serialise_model_diagram_indentation(void* p0, void* p1, void* p2, void* p3,
  */
 void serialise_model_diagram_compound(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
-    if (p5 != NULL_POINTER) {
+    if (p5 != *NULL_POINTER) {
 
         int* l = (int*) p5;
 
-        if (p4 != NULL_POINTER) {
+        if (p4 != *NULL_POINTER) {
 
             int* sc = (int*) p4;
 
@@ -184,18 +185,18 @@ void serialise_model_diagram_compound(void* p0, void* p1, void* p2, void* p3, vo
             int j = *NUMBER_0_INTEGER;
 
             // The part name, abstraction, model, details.
-            void** n = &NULL_POINTER;
-            void** nc = &NULL_POINTER;
-            void** ns = &NULL_POINTER;
-            void** a = &NULL_POINTER;
-            void** ac = &NULL_POINTER;
-            void** as = &NULL_POINTER;
-            void** m = &NULL_POINTER;
-            void** mc = &NULL_POINTER;
-            void** ms = &NULL_POINTER;
-            void** d = &NULL_POINTER;
-            void** dc = &NULL_POINTER;
-            void** ds = &NULL_POINTER;
+            void** n = NULL_POINTER;
+            void** nc = NULL_POINTER;
+            void** ns = NULL_POINTER;
+            void** a = NULL_POINTER;
+            void** ac = NULL_POINTER;
+            void** as = NULL_POINTER;
+            void** m = NULL_POINTER;
+            void** mc = NULL_POINTER;
+            void** ms = NULL_POINTER;
+            void** d = NULL_POINTER;
+            void** dc = NULL_POINTER;
+            void** ds = NULL_POINTER;
 
             // The new tree level.
             //
@@ -259,11 +260,11 @@ void serialise_model_diagram_compound(void* p0, void* p1, void* p2, void* p3, vo
  */
 void serialise_model_diagram_node(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11, void* p12) {
 
-    if (p10 != NULL_POINTER) {
+    if (p10 != *NULL_POINTER) {
 
         int* dc = (int*) p10;
 
-        if (p8 != NULL_POINTER) {
+        if (p8 != *NULL_POINTER) {
 
             int* mc = (int*) p8;
 

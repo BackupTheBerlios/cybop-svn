@@ -49,7 +49,7 @@
  * the array size needs to be given extra here because sizeof will not work.
  * See: http://pegasus.rutgers.edu/~elflord/cpp/gotchas/index.shtml
  *
- * @version $Revision: 1.11 $ $Date: 2007-04-16 15:50:29 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2007-05-16 19:29:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -58,6 +58,7 @@
 
 #include "../globals/constants/cybol/cybol_abstraction_constants.c"
 #include "../globals/constants/log_message/log_message_constants.c"
+#include "../globals/constants/pointer/pointer_constants.c"
 #include "../globals/logger/logger.c"
 #include "../memoriser/array/character_array.c"
 #include "../memoriser/array/double_array.c"
@@ -75,7 +76,7 @@
  */
 void allocate_array(void* p0, void* p1, void* p2) {
 
-    if (p2 != NULL_POINTER) {
+    if (p2 != *NULL_POINTER) {
 
         int* t = (int*) p2;
 
@@ -119,7 +120,7 @@ void allocate_array(void* p0, void* p1, void* p2) {
  */
 void deallocate_array(void* p0, void* p1, void* p2) {
 
-    if (p2 != NULL_POINTER) {
+    if (p2 != *NULL_POINTER) {
 
         int* t = (int*) p2;
 
@@ -164,7 +165,7 @@ void deallocate_array(void* p0, void* p1, void* p2) {
  */
 void reallocate_array(void* p0, void* p1, void* p2, void* p3) {
 
-    if (p3 != NULL_POINTER) {
+    if (p3 != *NULL_POINTER) {
 
         int* t = (int*) p3;
 
@@ -213,7 +214,7 @@ void reallocate_array(void* p0, void* p1, void* p2, void* p3) {
  */
 void compare_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p4 != NULL_POINTER) {
+    if (p4 != *NULL_POINTER) {
 
         int* t = (int*) p4;
 
@@ -263,11 +264,11 @@ void compare_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4) {
  */
 void compare_arrays(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
-    if (p3 != NULL_POINTER) {
+    if (p3 != *NULL_POINTER) {
 
         int* sc = (int*) p3;
 
-        if (p1 != NULL_POINTER) {
+        if (p1 != *NULL_POINTER) {
 
             int* fc = (int*) p1;
 
@@ -297,7 +298,7 @@ void compare_arrays(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) 
  */
 void get_array_elements(void* p0, void* p1, void* p2, void* p3) {
 
-    if (p3 != NULL_POINTER) {
+    if (p3 != *NULL_POINTER) {
 
         int* t = (int*) p3;
 
@@ -347,22 +348,22 @@ void get_array_elements(void* p0, void* p1, void* p2, void* p3) {
  */
 void get_index_in_array(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
-    if (p4 != NULL_POINTER) {
+    if (p4 != *NULL_POINTER) {
 
         int* position = (int*) p4;
         *position = -1;
 
-        if (p3 != NULL_POINTER) {
+        if (p3 != *NULL_POINTER) {
 
             int* sc = (int*) p3;
 
-            if (p1 != NULL_POINTER) {
+            if (p1 != *NULL_POINTER) {
 
                 int* ac = (int*) p1;
 
                 int array_counter = 0;
                 int comp_res = 0;
-                void* start_comp = NULL_POINTER;
+                void* start_comp = *NULL_POINTER;
 
                 while (1) {
 
@@ -411,7 +412,7 @@ void get_index_in_array(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
  */
 void set_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p4 != NULL_POINTER) {
+    if (p4 != *NULL_POINTER) {
 
         int* t = (int*) p4;
 
@@ -457,7 +458,7 @@ void set_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4) {
  */
 void remove_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p4 != NULL_POINTER) {
+    if (p4 != *NULL_POINTER) {
 
         int* t = (int*) p4;
 
@@ -509,7 +510,7 @@ void remove_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4) {
  */
 void get_array_elements_index(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
-    if (p5 != NULL_POINTER) {
+    if (p5 != *NULL_POINTER) {
 
         int* t = (int*) p5;
 

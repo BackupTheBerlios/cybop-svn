@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2007-04-16 15:50:29 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2007-05-16 19:29:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -31,6 +31,7 @@
 #include "../../globals/constants/character/character_constants.c"
 #include "../../globals/constants/log_message/log_message_constants.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../memoriser/allocator.c"
 
@@ -55,15 +56,15 @@
  */
 void parse_date_time(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p4 != NULL_POINTER) {
+    if (p4 != *NULL_POINTER) {
 
         int* sc = (int*) p4;
 
-        if (p3 != NULL_POINTER) {
+        if (p3 != *NULL_POINTER) {
 
             void* s = (void*) p3;
 
-            if (p0 != NULL_POINTER) {
+            if (p0 != *NULL_POINTER) {
 
                 void** d = (void**) p0;
 
@@ -108,19 +109,19 @@ void serialise_date_time(void* p0, void* p1, void* p2, void* p3, void* p4) {
  */
 void parse_ddmmyyyy_date_time(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p4 != NULL_POINTER) {
+    if (p4 != *NULL_POINTER) {
 
         int* sc = (int*) p4;
 
-        if (p2 != NULL_POINTER) {
+        if (p2 != *NULL_POINTER) {
 
             int* ds = (int*) p2;
 
-            if (p1 != NULL_POINTER) {
+            if (p1 != *NULL_POINTER) {
 
                 int* dc = (int*) p1;
 
-                if (p0 != NULL_POINTER) {
+                if (p0 != *NULL_POINTER) {
 
                     void** d = (void**) p0;
 
@@ -129,13 +130,13 @@ void parse_ddmmyyyy_date_time(void* p0, void* p1, void* p2, void* p3, void* p4) 
                         log_message_debug("Information: Parse ddmmyyyy date time.");
 
                         // The temporary null-terminated day string.
-                        char* tmpd = NULL_POINTER;
+                        char* tmpd = (char*) *NULL_POINTER;
                         int tmpds = *NUMBER_2_INTEGER + *NUMBER_1_INTEGER;
                         // The temporary null-terminated month string.
-                        char* tmpm = NULL_POINTER;
+                        char* tmpm = (char*) *NULL_POINTER;
                         int tmpms = *NUMBER_2_INTEGER + *NUMBER_1_INTEGER;
                         // The temporary null-terminated year string.
-                        char* tmpy = NULL_POINTER;
+                        char* tmpy = (char*) *NULL_POINTER;
                         int tmpys = *NUMBER_4_INTEGER + *NUMBER_1_INTEGER;
 
                         // Create temporary null-terminated day string.
@@ -180,7 +181,7 @@ void parse_ddmmyyyy_date_time(void* p0, void* p1, void* p2, void* p3, void* p4) 
                         // many sub strings, separated by space characters, then each sub
                         // string gets interpreted as integer number.
                         // The tail variable in this case points to the remaining sub string.
-                        char* tail = NULL_POINTER;
+                        char* tail = (char*) *NULL_POINTER;
 
                         // Transform string to day integer value.
                         // The third parameter is the number base:
@@ -218,9 +219,9 @@ void parse_ddmmyyyy_date_time(void* p0, void* p1, void* p2, void* p3, void* p4) 
                         set_array_elements(*d, (void*) DATE_TIME_YEAR_INDEX, (void*) &yv, (void*) PRIMITIVE_COUNT, (void*) INTEGER_ARRAY);
                         set_array_elements(*d, (void*) DATE_TIME_MONTH_INDEX, (void*) &mv, (void*) PRIMITIVE_COUNT, (void*) INTEGER_ARRAY);
                         set_array_elements(*d, (void*) DATE_TIME_DAY_INDEX, (void*) &dv, (void*) PRIMITIVE_COUNT, (void*) INTEGER_ARRAY);
-                        set_array_elements(*d, (void*) DATE_TIME_HOUR_INDEX, NULL_POINTER, (void*) NUMBER_0_INTEGER, (void*) INTEGER_ARRAY);
-                        set_array_elements(*d, (void*) DATE_TIME_MINUTE_INDEX, NULL_POINTER, (void*) NUMBER_0_INTEGER, (void*) INTEGER_ARRAY);
-                        set_array_elements(*d, (void*) DATE_TIME_SECOND_INDEX, NULL_POINTER, (void*) NUMBER_0_INTEGER, (void*) INTEGER_ARRAY);
+                        set_array_elements(*d, (void*) DATE_TIME_HOUR_INDEX, *NULL_POINTER, (void*) NUMBER_0_INTEGER, (void*) INTEGER_ARRAY);
+                        set_array_elements(*d, (void*) DATE_TIME_MINUTE_INDEX, *NULL_POINTER, (void*) NUMBER_0_INTEGER, (void*) INTEGER_ARRAY);
+                        set_array_elements(*d, (void*) DATE_TIME_SECOND_INDEX, *NULL_POINTER, (void*) NUMBER_0_INTEGER, (void*) INTEGER_ARRAY);
 
                         // Increase date time count by one, because of new element.
                         (*dc)++;

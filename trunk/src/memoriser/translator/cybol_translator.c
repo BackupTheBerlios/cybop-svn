@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.18 $ $Date: 2007-05-01 19:07:11 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2007-05-16 19:29:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -34,6 +34,7 @@
 #include "../../globals/constants/cybol/cybol_constants.c"
 #include "../../globals/constants/integer/integer_constants.c"
 #include "../../globals/constants/cybol/cybol_name_constants.c"
+#include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../memoriser/array.c"
 #include "../../memoriser/allocator.c"
@@ -118,59 +119,59 @@ void set_compound_element_by_name(void* p0, void* p1, void* p2,
 void decode_cybol_property(void* p0, void* p1, void* p2, void* p3,
     void* p4, void* p5, void* p6, void* p7, void* p8) {
 
-    if (p8 != NULL_POINTER) {
+    if (p8 != *NULL_POINTER) {
 
         xmlNode* cn = (xmlNode*) p8;
 
-        if (p7 != NULL_POINTER) {
+        if (p7 != *NULL_POINTER) {
 
             int* mc = (int*) p7;
 
-            if (p6 != NULL_POINTER) {
+            if (p6 != *NULL_POINTER) {
 
                 void** m = (void**) p6;
 
-                if (p5 != NULL_POINTER) {
+                if (p5 != *NULL_POINTER) {
 
                     int* ac = (int*) p5;
 
-                    if (p4 != NULL_POINTER) {
+                    if (p4 != *NULL_POINTER) {
 
                         void** a = (void**) p4;
 
-                        if (p3 != NULL_POINTER) {
+                        if (p3 != *NULL_POINTER) {
 
                             int* cc = (int*) p3;
 
-                            if (p2 != NULL_POINTER) {
+                            if (p2 != *NULL_POINTER) {
 
                                 void** c = (void**) p2;
 
-                                if (p1 != NULL_POINTER) {
+                                if (p1 != *NULL_POINTER) {
 
                                     int* nc = (int*) p1;
 
-                                    if (p0 != NULL_POINTER) {
+                                    if (p0 != *NULL_POINTER) {
 
                                         void** n = (void**) p0;
 
                                         log_message_debug("Decode cybol property.");
 
-                                        if (cn != NULL_POINTER) {
+                                        if (cn != *NULL_POINTER) {
 
                                             // Determine first child node property.
                                             xmlAttr* p = cn->properties;
                                             // The property name.
-                                            void* pn = NULL_POINTER;
+                                            void* pn = *NULL_POINTER;
                                             int pnc = *NUMBER_0_INTEGER;
                                             // The property value.
-                                            xmlNode* pv = NULL_POINTER;
+                                            xmlNode* pv = (xmlNode*) *NULL_POINTER;
                                             // The comparison result.
                                             int r = *NUMBER_0_INTEGER;
 
                                             while (*NUMBER_1_INTEGER) {
 
-                                                if (p == NULL_POINTER) {
+                                                if (p == *NULL_POINTER) {
 
                                                     break;
                                                 }
@@ -178,7 +179,7 @@ void decode_cybol_property(void* p0, void* p1, void* p2, void* p3,
                                                 // Get property value.
                                                 pv = p->children;
 
-                                                if (pv != NULL_POINTER) {
+                                                if (pv != *NULL_POINTER) {
 
                                                     // Get property name.
                                                     pn = (void*) p->name;
@@ -233,10 +234,10 @@ void decode_cybol_property(void* p0, void* p1, void* p2, void* p3,
                                                     }
 
                                                     // Reset property name.
-                                                    pn = NULL_POINTER;
+                                                    pn = *NULL_POINTER;
                                                     pnc = *NUMBER_0_INTEGER;
                                                     // Reset property value.
-                                                    pv = NULL_POINTER;
+                                                    pv = (xmlNode*) *NULL_POINTER;
                                                     // Reset comparison result.
                                                     r = *NUMBER_0_INTEGER;
 
@@ -326,11 +327,11 @@ void encode_cybol_property(void* p0, void* p1, void* p2, void* p3, void* p4) {
  */
 void decode_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p3 != NULL_POINTER) {
+    if (p3 != *NULL_POINTER) {
 
         xmlNode* s = (xmlNode*) p3;
 
-        if (p0 != NULL_POINTER) {
+        if (p0 != *NULL_POINTER) {
 
             void** d = (void**) p0;
 
@@ -341,37 +342,37 @@ void decode_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4) {
             // The child count.
             int cc = *NUMBER_0_INTEGER;
             // The source name.
-            void* sn = NULL_POINTER;
+            void* sn = *NULL_POINTER;
             int snc = *NUMBER_0_INTEGER;
             // The source channel.
-            void* sc = NULL_POINTER;
+            void* sc = *NULL_POINTER;
             int scc = *NUMBER_0_INTEGER;
             // The source abstraction.
-            void* sa = NULL_POINTER;
+            void* sa = *NULL_POINTER;
             int sac = *NUMBER_0_INTEGER;
             // The source model.
-            void* sm = NULL_POINTER;
+            void* sm = *NULL_POINTER;
             int smc = *NUMBER_0_INTEGER;
             // The destination name.
-            void* dn = NULL_POINTER;
-            int* dnc = NULL_POINTER;
-            int* dns = NULL_POINTER;
+            void* dn = *NULL_POINTER;
+            int* dnc = (int*) *NULL_POINTER;
+            int* dns = (int*) *NULL_POINTER;
             // The destination abstraction.
-            void* da = NULL_POINTER;
-            int* dac = NULL_POINTER;
-            int* das = NULL_POINTER;
+            void* da = *NULL_POINTER;
+            int* dac = (int*) *NULL_POINTER;
+            int* das = (int*) *NULL_POINTER;
             // The destination model.
-            void* dm = NULL_POINTER;
-            int* dmc = NULL_POINTER;
-            int* dms = NULL_POINTER;
+            void* dm = *NULL_POINTER;
+            int* dmc = (int*) *NULL_POINTER;
+            int* dms = (int*) *NULL_POINTER;
             // The destination details.
-            void* dd = NULL_POINTER;
-            int* ddc = NULL_POINTER;
-            int* dds = NULL_POINTER;
+            void* dd = *NULL_POINTER;
+            int* ddc = (int*) *NULL_POINTER;
+            int* dds = (int*) *NULL_POINTER;
 
             while (*NUMBER_1_INTEGER) {
 
-                if (c == NULL_POINTER) {
+                if (c == *NULL_POINTER) {
 
                     break;
                 }
@@ -399,7 +400,7 @@ void decode_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     allocate((void*) &dns, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
                     *dns = *NUMBER_0_INTEGER;
                     receive_file_system_model((void*) &dn, (void*) dnc, (void*) dns,
-                        NULL_POINTER, NULL_POINTER, NULL_POINTER,
+                        *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
                         sn, (void*) &snc,
                         (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
                         (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
@@ -413,7 +414,7 @@ void decode_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     allocate((void*) &das, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
                     *das = *NUMBER_0_INTEGER;
                     receive_file_system_model((void*) &da, (void*) dac, (void*) das,
-                        NULL_POINTER, NULL_POINTER, NULL_POINTER,
+                        *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
                         sa, (void*) &sac,
                         (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
                         (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
@@ -424,7 +425,7 @@ void decode_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     allocate((void*) &dms, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
                     *dms = *NUMBER_0_INTEGER;
                     receive_file_system_model((void*) &dm, (void*) dmc, (void*) dms,
-                        NULL_POINTER, NULL_POINTER, NULL_POINTER,
+                        *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
                         sm, (void*) &smc,
                         sa, (void*) &sac,
                         sc, (void*) &scc);
@@ -441,7 +442,7 @@ void decode_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     allocate((void*) &dd, (void*) dds, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
 
                     // If child node has children, then create details model for it.
-                    if (c->children != NULL_POINTER) {
+                    if (c->children != *NULL_POINTER) {
 
                         // Decode child node children.
                         decode_cybol_node((void*) &dd, (void*) ddc, (void*) dds, (void*) c, (void*) &cc);
@@ -462,33 +463,33 @@ void decode_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     //?? no whole keeps a reference to it anymore?
 
                     // Reset source name.
-                    sn = NULL_POINTER;
+                    sn = *NULL_POINTER;
                     snc = *NUMBER_0_INTEGER;
                     // Reset source channel.
-                    sc = NULL_POINTER;
+                    sc = *NULL_POINTER;
                     scc = *NUMBER_0_INTEGER;
                     // Reset source abstraction.
-                    sa = NULL_POINTER;
+                    sa = *NULL_POINTER;
                     sac = *NUMBER_0_INTEGER;
                     // Reset source model.
-                    sm = NULL_POINTER;
+                    sm = *NULL_POINTER;
                     smc = *NUMBER_0_INTEGER;
                     // Reset destination name.
-                    dn = NULL_POINTER;
-                    dnc = NULL_POINTER;
-                    dns = NULL_POINTER;
+                    dn = *NULL_POINTER;
+                    dnc = (int*) *NULL_POINTER;
+                    dns = (int*) *NULL_POINTER;
                     // Reset destination abstraction.
-                    da = NULL_POINTER;
-                    dac = NULL_POINTER;
-                    das = NULL_POINTER;
+                    da = *NULL_POINTER;
+                    dac = (int*) *NULL_POINTER;
+                    das = (int*) *NULL_POINTER;
                     // Reset destination model.
-                    dm = NULL_POINTER;
-                    dmc = NULL_POINTER;
-                    dms = NULL_POINTER;
+                    dm = *NULL_POINTER;
+                    dmc = (int*) *NULL_POINTER;
+                    dms = (int*) *NULL_POINTER;
                     // Reset destination details.
-                    dd = NULL_POINTER;
-                    ddc = NULL_POINTER;
-                    dds = NULL_POINTER;
+                    dd = *NULL_POINTER;
+                    ddc = (int*) *NULL_POINTER;
+                    dds = (int*) *NULL_POINTER;
                 }
 
                 c = c->next;
@@ -537,13 +538,13 @@ void decode_cybol(void* p0, void* p1, void* p2, void* p3, void* p4) {
     //?? which must be deleted for the cyboi model,
     //?? or neglected in the "count" number!
 
-    if (p4 != NULL_POINTER) {
+    if (p4 != *NULL_POINTER) {
 
         int* sc = (int*) p4;
 
-        if (p3 != NULL_POINTER) {
+        if (p3 != *NULL_POINTER) {
 
-            if (p0 != NULL_POINTER) {
+            if (p0 != *NULL_POINTER) {
 
                 void** d = (void**) p0;
 

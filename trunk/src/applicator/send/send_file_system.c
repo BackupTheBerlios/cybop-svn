@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2007-05-09 15:32:40 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2007-05-16 19:29:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,6 +30,7 @@
 #include <stdio.h>
 #include "../../globals/constants/cybol/cybol_abstraction_constants.c"
 #include "../../globals/constants/integer/integer_constants.c"
+#include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../globals/variables/variables.c"
 #include "../../memoriser/allocator.c"
@@ -63,7 +64,7 @@ void send_file_system(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
     log_message_debug("Information: Send file system message.");
 
     // The serialised string array to be sent to the file.
-    void* a = NULL_POINTER;
+    void* a = *NULL_POINTER;
     int ac = *NUMBER_0_INTEGER;
     int as = *NUMBER_0_INTEGER;
 
@@ -74,7 +75,7 @@ void send_file_system(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
     serialise((void*) &a, (void*) &ac, (void*) &as, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12);
 
     // Write serialised array as message to file system.
-    write_data((void*) &p15, p16, NULL_POINTER, a, (void*) &ac, (void*) FILE_CHANNEL, (void*) FILE_CHANNEL_COUNT);
+    write_data((void*) &p15, p16, *NULL_POINTER, a, (void*) &ac, (void*) FILE_CHANNEL, (void*) FILE_CHANNEL_COUNT);
 
     // Deallocate array.
     deallocate((void*) &a, (void*) &as, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);

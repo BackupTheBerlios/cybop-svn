@@ -25,7 +25,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.22 $ $Date: 2007-04-23 23:15:07 $ $Author: christian $
+ * @version $Revision: 1.23 $ $Date: 2007-05-16 19:29:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -37,6 +37,7 @@
 #include "../controller/optionaliser.c"
 #include "../globals/constants/integer/integer_constants.c"
 #include "../globals/constants/log_message/log_message_constants.c"
+#include "../globals/constants/pointer/pointer_constants.c"
 #include "../globals/logger/logger.c"
 
 /**
@@ -71,19 +72,19 @@ int main(int p0, char** p1) {
     // Otherwise, the logger may not be able to log possible error messages.
     startup_globals();
 
-    if (p1 != NULL_POINTER) {
+    if (p1 != *NULL_POINTER) {
 
         if (p0 == *COMMAND_LINE_ARGUMENTS_COUNT) {
 
             log_message_debug("Information: Execute CYBOI.");
 
             // The option command line argument.
-            void** o = &NULL_POINTER;
+            void** o = NULL_POINTER;
 
             // Get option command line argument.
             get_array_elements((void*) p1, (void*) OPTION_COMMAND_LINE_ARGUMENT_INDEX, (void*) &o, (void*) POINTER_ARRAY);
 
-            if (*o != NULL_POINTER) {
+            if (*o != *NULL_POINTER) {
 
                 // Get option command line argument count (number of characters).
                 //

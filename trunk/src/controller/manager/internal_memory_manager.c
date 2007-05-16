@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.10 $ $Date: 2007-04-23 23:15:07 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2007-05-16 19:29:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -31,6 +31,7 @@
 #include "../../globals/constants/integer/integer_constants.c"
 #include "../../globals/constants/log_message/log_message_constants.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/constants/system_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../globals/variables/variables.c"
@@ -43,12 +44,12 @@
  * determined by constants. The items HAVE TO be assigned an
  * initial value, since all source code relies on them.
  *
- * Most values are compared against the NULL_POINTER constant
+ * Most values are compared against the *NULL_POINTER constant
  * to find out whether they are set or not. If now initial values
  * would be arbitrary pointers, the program would follow a wrong path,
  * because it would guess that an instance was properly allocated,
  * while in reality the value was just an arbitrary initial one.
- * Therefore, such values are initialised with the well-defined NULL_POINTER.
+ * Therefore, such values are initialised with the well-defined *NULL_POINTER.
  *
  * CAUTION! ONLY ONE parameter can be handed over to threads!
  * For example, the tcp socket is running in an own thread.
@@ -95,7 +96,7 @@ void startup_internal_memory(void* p0, void* p1, void* p2, void* p3, void* p4, v
         // However, to speed up the program, the "set_pointer_array_elements"
         // procedure was used directly, as it does not do so many comparisons
         // (like for example with "POINTER_VECTOR_ABSTRACTION", to find the right procedure).
-        set_pointer_array_elements(p0, (void*) &j, (void*) &NULL_POINTER, (void*) NUMBER_1_INTEGER);
+        set_pointer_array_elements(p0, (void*) &j, (void*) NULL_POINTER, (void*) NUMBER_1_INTEGER);
 
         j++;
     }

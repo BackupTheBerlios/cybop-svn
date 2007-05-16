@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2007-04-16 15:50:29 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2007-05-16 19:29:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -32,6 +32,7 @@
 #include "../../globals/constants/log_message/log_message_constants.c"
 #include "../../globals/constants/cybol/cybol_model_constants.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../memoriser/accessor.c"
 #include "../../memoriser/array.c"
@@ -47,11 +48,11 @@
  */
 void mapto_terminal_foreground(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p1 != NULL_POINTER) {
+    if (p1 != *NULL_POINTER) {
 
         int* dc = (int*) p1;
 
-        if (p0 != NULL_POINTER) {
+        if (p0 != *NULL_POINTER) {
 
             void** d = (void**) p0;
 

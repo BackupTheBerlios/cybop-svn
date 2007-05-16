@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.18 $ $Date: 2007-05-09 15:32:40 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2007-05-16 19:29:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description This module shuts down a service.
  */
@@ -35,6 +35,7 @@
 #include "../globals/constants/log_message/log_message_constants.c"
 #include "../globals/constants/cybol/cybol_model_constants.c"
 #include "../globals/constants/cybol/cybol_name_constants.c"
+#include "../globals/constants/pointer/pointer_constants.c"
 #include "../globals/logger/logger.c"
 #include "../memoriser/accessor/compound_accessor.c"
 #include "../memoriser/array.c"
@@ -57,18 +58,18 @@ void shutdown_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
     log_message_debug("Shutdown service.");
 
     // The service name, abstraction, model, details.
-    void** sn = &NULL_POINTER;
-    void** snc = &NULL_POINTER;
-    void** sns = &NULL_POINTER;
-    void** sa = &NULL_POINTER;
-    void** sac = &NULL_POINTER;
-    void** sas = &NULL_POINTER;
-    void** sm = &NULL_POINTER;
-    void** smc = &NULL_POINTER;
-    void** sms = &NULL_POINTER;
-    void** sd = &NULL_POINTER;
-    void** sdc = &NULL_POINTER;
-    void** sds = &NULL_POINTER;
+    void** sn = NULL_POINTER;
+    void** snc = NULL_POINTER;
+    void** sns = NULL_POINTER;
+    void** sa = NULL_POINTER;
+    void** sac = NULL_POINTER;
+    void** sas = NULL_POINTER;
+    void** sm = NULL_POINTER;
+    void** smc = NULL_POINTER;
+    void** sms = NULL_POINTER;
+    void** sd = NULL_POINTER;
+    void** sdc = NULL_POINTER;
+    void** sds = NULL_POINTER;
 
     // Get service.
     get_universal_compound_element_by_name(p0, p1,

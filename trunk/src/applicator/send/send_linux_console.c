@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.50 $ $Date: 2007-05-15 14:52:05 $ $Author: christian $
+ * @version $Revision: 1.51 $ $Date: 2007-05-16 19:29:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -35,6 +35,7 @@
 #include "../../globals/constants/console/console_control_sequence_constants.c"
 #include "../../globals/constants/integer/integer_constants.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/variables/variables.c"
 #include "../../memoriser/accessor.c"
 #include "../../memoriser/allocator.c"
@@ -65,14 +66,14 @@ void send_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4,
     log_message_debug("Send linux console message.");
 
     // The serialised string array to be sent to the linux console (terminal).
-    void* a = NULL_POINTER;
+    void* a = *NULL_POINTER;
     int ac = *NUMBER_0_INTEGER;
     int as = *NUMBER_0_INTEGER;
 
     // Allocate array.
     allocate((void*) &a, (void*) &as, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
-    if (p9 != NULL_POINTER) {
+    if (p9 != *NULL_POINTER) {
 
         int* f = (int*) p9;
 
@@ -100,16 +101,16 @@ void send_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4,
     }
 
     // Serialise textual user interface (tui) into array.
-    serialise_linux_console((void*) &a, (void*) &ac, (void*) &as, p1, p2, p3, p4, p5, p6, NULL_POINTER, NULL_POINTER, p7, p8, p11, p12);
+    serialise_linux_console((void*) &a, (void*) &ac, (void*) &as, p1, p2, p3, p4, p5, p6, *NULL_POINTER, *NULL_POINTER, p7, p8, p11, p12);
 
-    // The linux console (terminal).
-    void** t = &NULL_POINTER;
+    // The linux console output stream.
+    void** op = NULL_POINTER;
 
-    // Get linux console.
-    get_array_elements(p0, (void*) LINUX_CONSOLE_FILE_DESCRIPTOR_INTERNAL, (void*) &t, (void*) POINTER_ARRAY);
+    // Get linux console output stream.
+    get_array_elements(p0, (void*) LINUX_CONSOLE_OUTPUT_FILE_DESCRIPTOR_INTERNAL, (void*) &op, (void*) POINTER_ARRAY);
 
     // Write serialised array as message to linux console.
-    write_data((void*) t, NULL_POINTER, NULL_POINTER, a, (void*) &ac, (void*) LINUX_CONSOLE_MODEL, (void*) LINUX_CONSOLE_MODEL_COUNT);
+    write_data((void*) op, *NULL_POINTER, *NULL_POINTER, a, (void*) &ac, (void*) LINUX_CONSOLE_MODEL, (void*) LINUX_CONSOLE_MODEL_COUNT);
 
     // Deallocate array.
     deallocate((void*) &a, (void*) &as, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);

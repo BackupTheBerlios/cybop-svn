@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2007-04-16 15:56:29 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2007-05-16 19:29:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -40,6 +40,7 @@
 #include "../../globals/constants/cybol/cybol_abstraction_constants.c"
 #include "../../globals/constants/integer/integer_constants.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/constants/system_constants.c"
 #include "../../globals/variables/variables.c"
 #include "../../memoriser/accessor.c"
@@ -72,7 +73,7 @@ void interrupt_socket() {
         pthread_kill(*WWW_SERVICE_THREAD, SIGUSR1);
 
         // Wait for thread to finish.
-        pthread_join(*WWW_SERVICE_THREAD, NULL_POINTER);
+        pthread_join(*WWW_SERVICE_THREAD, *NULL_POINTER);
 
         // Reset thread.
         *WWW_SERVICE_THREAD = *INVALID_VALUE;
@@ -111,7 +112,7 @@ void interrupt_socket() {
     fprintf(stderr, "TEST: interrupt socket 2 thread irq flag: %i \n", *CYBOI_SERVICE_THREAD_INTERRUPT);
 
         // Wait for thread to finish.
-        pthread_join(*CYBOI_SERVICE_THREAD, NULL_POINTER);
+        pthread_join(*CYBOI_SERVICE_THREAD, *NULL_POINTER);
 
     fprintf(stderr, "TEST: interrupt socket 3 thread irq flag: %i \n", *CYBOI_SERVICE_THREAD_INTERRUPT);
 

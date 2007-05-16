@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.13 $ $Date: 2007-05-09 15:32:40 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2007-05-16 19:29:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -36,6 +36,7 @@
 #include "../globals/constants/log_message/log_message_constants.c"
 #include "../globals/constants/cybol/cybol_model_constants.c"
 #include "../globals/constants/cybol/cybol_name_constants.c"
+#include "../globals/constants/pointer/pointer_constants.c"
 #include "../globals/logger/logger.c"
 #include "../memoriser/accessor/compound_accessor.c"
 #include "../memoriser/array.c"
@@ -60,57 +61,57 @@ void compare(void* p0, void* p1, void* p2, void* p3, void* p4) {
     log_message_debug("Compare two parameters.");
 
     // The comparison name, abstraction, model, details.
-    void** cn = &NULL_POINTER;
-    void** cnc = &NULL_POINTER;
-    void** cns = &NULL_POINTER;
-    void** ca = &NULL_POINTER;
-    void** cac = &NULL_POINTER;
-    void** cas = &NULL_POINTER;
-    void** cm = &NULL_POINTER;
-    void** cmc = &NULL_POINTER;
-    void** cms = &NULL_POINTER;
-    void** cd = &NULL_POINTER;
-    void** cdc = &NULL_POINTER;
-    void** cds = &NULL_POINTER;
+    void** cn = NULL_POINTER;
+    void** cnc = NULL_POINTER;
+    void** cns = NULL_POINTER;
+    void** ca = NULL_POINTER;
+    void** cac = NULL_POINTER;
+    void** cas = NULL_POINTER;
+    void** cm = NULL_POINTER;
+    void** cmc = NULL_POINTER;
+    void** cms = NULL_POINTER;
+    void** cd = NULL_POINTER;
+    void** cdc = NULL_POINTER;
+    void** cds = NULL_POINTER;
     // The left side name, abstraction, model, details.
-    void** lsn = &NULL_POINTER;
-    void** lsnc = &NULL_POINTER;
-    void** lsns = &NULL_POINTER;
-    void** lsa = &NULL_POINTER;
-    void** lsac = &NULL_POINTER;
-    void** lsas = &NULL_POINTER;
-    void** lsm = &NULL_POINTER;
-    void** lsmc = &NULL_POINTER;
-    void** lsms = &NULL_POINTER;
-    void** lsd = &NULL_POINTER;
-    void** lsdc = &NULL_POINTER;
-    void** lsds = &NULL_POINTER;
+    void** lsn = NULL_POINTER;
+    void** lsnc = NULL_POINTER;
+    void** lsns = NULL_POINTER;
+    void** lsa = NULL_POINTER;
+    void** lsac = NULL_POINTER;
+    void** lsas = NULL_POINTER;
+    void** lsm = NULL_POINTER;
+    void** lsmc = NULL_POINTER;
+    void** lsms = NULL_POINTER;
+    void** lsd = NULL_POINTER;
+    void** lsdc = NULL_POINTER;
+    void** lsds = NULL_POINTER;
     // The right side name, abstraction, model, details.
-    void** rsn = &NULL_POINTER;
-    void** rsnc = &NULL_POINTER;
-    void** rsns = &NULL_POINTER;
-    void** rsa = &NULL_POINTER;
-    void** rsac = &NULL_POINTER;
-    void** rsas = &NULL_POINTER;
-    void** rsm = &NULL_POINTER;
-    void** rsmc = &NULL_POINTER;
-    void** rsms = &NULL_POINTER;
-    void** rsd = &NULL_POINTER;
-    void** rsdc = &NULL_POINTER;
-    void** rsds = &NULL_POINTER;
+    void** rsn = NULL_POINTER;
+    void** rsnc = NULL_POINTER;
+    void** rsns = NULL_POINTER;
+    void** rsa = NULL_POINTER;
+    void** rsac = NULL_POINTER;
+    void** rsas = NULL_POINTER;
+    void** rsm = NULL_POINTER;
+    void** rsmc = NULL_POINTER;
+    void** rsms = NULL_POINTER;
+    void** rsd = NULL_POINTER;
+    void** rsdc = NULL_POINTER;
+    void** rsds = NULL_POINTER;
     // The result name, abstraction, model, details.
-    void** rn = &NULL_POINTER;
-    void** rnc = &NULL_POINTER;
-    void** rns = &NULL_POINTER;
-    void** ra = &NULL_POINTER;
-    void** rac = &NULL_POINTER;
-    void** ras = &NULL_POINTER;
-    void** rm = &NULL_POINTER;
-    void** rmc = &NULL_POINTER;
-    void** rms = &NULL_POINTER;
-    void** rd = &NULL_POINTER;
-    void** rdc = &NULL_POINTER;
-    void** rds = &NULL_POINTER;
+    void** rn = NULL_POINTER;
+    void** rnc = NULL_POINTER;
+    void** rns = NULL_POINTER;
+    void** ra = NULL_POINTER;
+    void** rac = NULL_POINTER;
+    void** ras = NULL_POINTER;
+    void** rm = NULL_POINTER;
+    void** rmc = NULL_POINTER;
+    void** rms = NULL_POINTER;
+    void** rd = NULL_POINTER;
+    void** rdc = NULL_POINTER;
+    void** rds = NULL_POINTER;
 
     // Get comparison.
     get_universal_compound_element_by_name(p0, p1,

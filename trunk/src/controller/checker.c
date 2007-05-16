@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.25 $ $Date: 2007-04-16 15:57:55 $ $Author: christian $
+ * @version $Revision: 1.26 $ $Date: 2007-05-16 19:29:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -31,6 +31,7 @@
 #include "../controller/handler.c"
 #include "../globals/constants/integer/integer_constants.c"
 #include "../globals/constants/log_message/log_message_constants.c"
+#include "../globals/constants/pointer/pointer_constants.c"
 #include "../globals/variables/variables.c"
 #include "../globals/logger/logger.c"
 #include "../memoriser/accessor/signal_memory_accessor.c"
@@ -50,7 +51,7 @@
  */
 void check(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8) {
 
-    if (p7 != NULL_POINTER) {
+    if (p7 != *NULL_POINTER) {
 
         int* irq = (int*) p7;
 
@@ -60,18 +61,18 @@ void check(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
         // The shutdown flag.
         int f = *NUMBER_0_INTEGER;
         // The abstraction.
-        void** a = &NULL_POINTER;
-        void** ac = &NULL_POINTER;
+        void** a = NULL_POINTER;
+        void** ac = NULL_POINTER;
         // The model (signal operation).
-        void** m = &NULL_POINTER;
-        void** mc = &NULL_POINTER;
+        void** m = NULL_POINTER;
+        void** mc = NULL_POINTER;
         // The details (parameters).
-        void** d = &NULL_POINTER;
-        void** dc = &NULL_POINTER;
+        void** d = NULL_POINTER;
+        void** dc = NULL_POINTER;
         // The priority.
-        void** p = &NULL_POINTER;
+        void** p = NULL_POINTER;
         // The signal id.
-        void** id = &NULL_POINTER;
+        void** id = NULL_POINTER;
         // The direct execution flag.
         int x = *NUMBER_0_INTEGER;
         // The highest priority index.
@@ -155,18 +156,18 @@ void check(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
 */
 
                 // Reset abstraction.
-                a = &NULL_POINTER;
-                ac = &NULL_POINTER;
+                a = NULL_POINTER;
+                ac = NULL_POINTER;
                 // Reset model (signal operation).
-                m = &NULL_POINTER;
-                mc = &NULL_POINTER;
+                m = NULL_POINTER;
+                mc = NULL_POINTER;
                 // Reset details (parameters).
-                d = &NULL_POINTER;
-                dc = &NULL_POINTER;
+                d = NULL_POINTER;
+                dc = NULL_POINTER;
                 // Reset priority.
-                p = &NULL_POINTER;
+                p = NULL_POINTER;
                 // Reset main signal id.
-                id = &NULL_POINTER;
+                id = NULL_POINTER;
                 // Reset direct execution flag.
                 x = *NUMBER_0_INTEGER;
                 // Reset highest priority index.

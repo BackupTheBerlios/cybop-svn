@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.24 $ $Date: 2007-05-09 15:32:40 $ $Author: christian $
+ * @version $Revision: 1.25 $ $Date: 2007-05-16 19:29:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -39,6 +39,7 @@
 #include "../../globals/constants/integer/integer_constants.c"
 #include "../../globals/constants/cybol/cybol_name_constants.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/constants/system_constants.c"
 #include "../../globals/variables/variables.c"
 #include "../../memoriser/accessor.c"
@@ -74,11 +75,11 @@ void receive_x_window_system_mouse_command(void* p0, void* p1, void* p2, void* p
     void* p6, void* p7, void* p8, void* p9, void* p10, void* p11,
     void* p12, void* p13, void* p14, void* p15, void* p16, void* p17) {
 
-    if (p15 != NULL_POINTER) {
+    if (p15 != *NULL_POINTER) {
 
         int* b = (int*) p15;
 
-        if (p14 != NULL_POINTER) {
+        if (p14 != *NULL_POINTER) {
 
             int* t = (int*) p14;
 
@@ -145,7 +146,7 @@ void receive_x_window_system_command(void* p0, void* p1, void* p2, void* p3, voi
     void* p6, void* p7, void* p8, void* p9, void* p10, void* p11,
     void* p12, void* p13, void* p14, void* p15, void* p16, void* p17) {
 
-    if (p14 != NULL_POINTER) {
+    if (p14 != *NULL_POINTER) {
 
         int* t = (int*) p14;
 
@@ -207,70 +208,70 @@ void receive_x_window_system_part(void* p0, void* p1, void* p2, void* p3, void* 
     void* p12, void* p13, void* p14, void* p15, void* p16,
     void* p17, void* p18, void* p19, void* p20) {
 
-    if (p16 != NULL_POINTER) {
+    if (p16 != *NULL_POINTER) {
 
         int* mz = (int*) p16;
 
-        if (p15 != NULL_POINTER) {
+        if (p15 != *NULL_POINTER) {
 
             int* my = (int*) p15;
 
-            if (p14 != NULL_POINTER) {
+            if (p14 != *NULL_POINTER) {
 
                 int* mx = (int*) p14;
 
-                if (p13 != NULL_POINTER) {
+                if (p13 != *NULL_POINTER) {
 
                     int* wmc = (int*) p13;
 
                     // The graphical part name, abstraction, model, details.
-                    void** n = &NULL_POINTER;
-                    void** nc = &NULL_POINTER;
-                    void** ns = &NULL_POINTER;
-                    void** a = &NULL_POINTER;
-                    void** ac = &NULL_POINTER;
-                    void** as = &NULL_POINTER;
-                    void** m = &NULL_POINTER;
-                    void** mc = &NULL_POINTER;
-                    void** ms = &NULL_POINTER;
-                    void** d = &NULL_POINTER;
-                    void** dc = &NULL_POINTER;
-                    void** ds = &NULL_POINTER;
+                    void** n = NULL_POINTER;
+                    void** nc = NULL_POINTER;
+                    void** ns = NULL_POINTER;
+                    void** a = NULL_POINTER;
+                    void** ac = NULL_POINTER;
+                    void** as = NULL_POINTER;
+                    void** m = NULL_POINTER;
+                    void** mc = NULL_POINTER;
+                    void** ms = NULL_POINTER;
+                    void** d = NULL_POINTER;
+                    void** dc = NULL_POINTER;
+                    void** ds = NULL_POINTER;
                     // The graphical part position name, abstraction, model, details.
-                    void** pn = &NULL_POINTER;
-                    void** pnc = &NULL_POINTER;
-                    void** pns = &NULL_POINTER;
-                    void** pa = &NULL_POINTER;
-                    void** pac = &NULL_POINTER;
-                    void** pas = &NULL_POINTER;
-                    void** pm = &NULL_POINTER;
-                    void** pmc = &NULL_POINTER;
-                    void** pms = &NULL_POINTER;
-                    void** pd = &NULL_POINTER;
-                    void** pdc = &NULL_POINTER;
-                    void** pds = &NULL_POINTER;
+                    void** pn = NULL_POINTER;
+                    void** pnc = NULL_POINTER;
+                    void** pns = NULL_POINTER;
+                    void** pa = NULL_POINTER;
+                    void** pac = NULL_POINTER;
+                    void** pas = NULL_POINTER;
+                    void** pm = NULL_POINTER;
+                    void** pmc = NULL_POINTER;
+                    void** pms = NULL_POINTER;
+                    void** pd = NULL_POINTER;
+                    void** pdc = NULL_POINTER;
+                    void** pds = NULL_POINTER;
                     // The graphical part size name, abstraction, model, details.
-                    void** sn = &NULL_POINTER;
-                    void** snc = &NULL_POINTER;
-                    void** sns = &NULL_POINTER;
-                    void** sa = &NULL_POINTER;
-                    void** sac = &NULL_POINTER;
-                    void** sas = &NULL_POINTER;
-                    void** sm = &NULL_POINTER;
-                    void** smc = &NULL_POINTER;
-                    void** sms = &NULL_POINTER;
-                    void** sd = &NULL_POINTER;
-                    void** sdc = &NULL_POINTER;
-                    void** sds = &NULL_POINTER;
+                    void** sn = NULL_POINTER;
+                    void** snc = NULL_POINTER;
+                    void** sns = NULL_POINTER;
+                    void** sa = NULL_POINTER;
+                    void** sac = NULL_POINTER;
+                    void** sas = NULL_POINTER;
+                    void** sm = NULL_POINTER;
+                    void** smc = NULL_POINTER;
+                    void** sms = NULL_POINTER;
+                    void** sd = NULL_POINTER;
+                    void** sdc = NULL_POINTER;
+                    void** sds = NULL_POINTER;
 
                     // The graphical part position coordinates.
-                    int** pmx = (int**) &NULL_POINTER;
-                    int** pmy = (int**) &NULL_POINTER;
-                    int** pmz = (int**) &NULL_POINTER;
+                    int** pmx = (int**) NULL_POINTER;
+                    int** pmy = (int**) NULL_POINTER;
+                    int** pmz = (int**) NULL_POINTER;
                     // The graphical part size coordinates.
-                    int** smx = (int**) &NULL_POINTER;
-                    int** smy = (int**) &NULL_POINTER;
-                    int** smz = (int**) &NULL_POINTER;
+                    int** smx = (int**) NULL_POINTER;
+                    int** smy = (int**) NULL_POINTER;
+                    int** smz = (int**) NULL_POINTER;
 
                     // The new mouse coordinates.
                     int nx = *NUMBER_0_INTEGER;
@@ -347,53 +348,53 @@ void receive_x_window_system_part(void* p0, void* p1, void* p2, void* p3, void* 
                         }
 
                         // Reset graphical part name, abstraction, model, details.
-                        n = &NULL_POINTER;
-                        nc = &NULL_POINTER;
-                        ns = &NULL_POINTER;
-                        a = &NULL_POINTER;
-                        ac = &NULL_POINTER;
-                        as = &NULL_POINTER;
-                        m = &NULL_POINTER;
-                        mc = &NULL_POINTER;
-                        ms = &NULL_POINTER;
-                        d = &NULL_POINTER;
-                        dc = &NULL_POINTER;
-                        ds = &NULL_POINTER;
+                        n = NULL_POINTER;
+                        nc = NULL_POINTER;
+                        ns = NULL_POINTER;
+                        a = NULL_POINTER;
+                        ac = NULL_POINTER;
+                        as = NULL_POINTER;
+                        m = NULL_POINTER;
+                        mc = NULL_POINTER;
+                        ms = NULL_POINTER;
+                        d = NULL_POINTER;
+                        dc = NULL_POINTER;
+                        ds = NULL_POINTER;
                         // Reset graphical part position name, abstraction, model, details.
-                        pn = &NULL_POINTER;
-                        pnc = &NULL_POINTER;
-                        pns = &NULL_POINTER;
-                        pa = &NULL_POINTER;
-                        pac = &NULL_POINTER;
-                        pas = &NULL_POINTER;
-                        pm = &NULL_POINTER;
-                        pmc = &NULL_POINTER;
-                        pms = &NULL_POINTER;
-                        pd = &NULL_POINTER;
-                        pdc = &NULL_POINTER;
-                        pds = &NULL_POINTER;
+                        pn = NULL_POINTER;
+                        pnc = NULL_POINTER;
+                        pns = NULL_POINTER;
+                        pa = NULL_POINTER;
+                        pac = NULL_POINTER;
+                        pas = NULL_POINTER;
+                        pm = NULL_POINTER;
+                        pmc = NULL_POINTER;
+                        pms = NULL_POINTER;
+                        pd = NULL_POINTER;
+                        pdc = NULL_POINTER;
+                        pds = NULL_POINTER;
                         // Reset graphical part size name, abstraction, model, details.
-                        sn = &NULL_POINTER;
-                        snc = &NULL_POINTER;
-                        sns = &NULL_POINTER;
-                        sa = &NULL_POINTER;
-                        sac = &NULL_POINTER;
-                        sas = &NULL_POINTER;
-                        sm = &NULL_POINTER;
-                        smc = &NULL_POINTER;
-                        sms = &NULL_POINTER;
-                        sd = &NULL_POINTER;
-                        sdc = &NULL_POINTER;
-                        sds = &NULL_POINTER;
+                        sn = NULL_POINTER;
+                        snc = NULL_POINTER;
+                        sns = NULL_POINTER;
+                        sa = NULL_POINTER;
+                        sac = NULL_POINTER;
+                        sas = NULL_POINTER;
+                        sm = NULL_POINTER;
+                        smc = NULL_POINTER;
+                        sms = NULL_POINTER;
+                        sd = NULL_POINTER;
+                        sdc = NULL_POINTER;
+                        sds = NULL_POINTER;
 
                         // Reset graphical part position coordinates.
-                        pmx = (int**) &NULL_POINTER;
-                        pmy = (int**) &NULL_POINTER;
-                        pmz = (int**) &NULL_POINTER;
+                        pmx = (int**) NULL_POINTER;
+                        pmy = (int**) NULL_POINTER;
+                        pmz = (int**) NULL_POINTER;
                         // Reset graphical part size coordinates.
-                        smx = (int**) &NULL_POINTER;
-                        smy = (int**) &NULL_POINTER;
-                        smz = (int**) &NULL_POINTER;
+                        smx = (int**) NULL_POINTER;
+                        smy = (int**) NULL_POINTER;
+                        smz = (int**) NULL_POINTER;
 
                         // Reset new mouse coordinates.
                         nx = *NUMBER_0_INTEGER;
@@ -464,32 +465,32 @@ int receive_x_window_system_check_events(struct _XDisplay* d, pthread_mutex_t* x
 void receive_x_window_system_thread(void* p0) {
 
     // The knowledge memory.
-    void** k = &NULL_POINTER;
-    void** kc = &NULL_POINTER;
-    void** ks = &NULL_POINTER;
+    void** k = NULL_POINTER;
+    void** kc = NULL_POINTER;
+    void** ks = NULL_POINTER;
     // The signal memory.
-    void** s = &NULL_POINTER;
-    void** sc = &NULL_POINTER;
-    void** ss = &NULL_POINTER;
+    void** s = NULL_POINTER;
+    void** sc = NULL_POINTER;
+    void** ss = NULL_POINTER;
     // The signal memory mutex.
-    pthread_mutex_t** smt = (pthread_mutex_t**) &NULL_POINTER;
+    pthread_mutex_t** smt = (pthread_mutex_t**) NULL_POINTER;
     // The x window system mutex.
-    pthread_mutex_t** xmt = (pthread_mutex_t**) &NULL_POINTER;
+    pthread_mutex_t** xmt = (pthread_mutex_t**) NULL_POINTER;
     // The signal memory interrupt request flag.
-    sig_atomic_t** sirq = (sig_atomic_t**) &NULL_POINTER;
+    sig_atomic_t** sirq = (sig_atomic_t**) NULL_POINTER;
     // The user interface root.
-    void** r = &NULL_POINTER;
-    void** rc = &NULL_POINTER;
-    void** rs = &NULL_POINTER;
+    void** r = NULL_POINTER;
+    void** rc = NULL_POINTER;
+    void** rs = NULL_POINTER;
     // The user interface commands.
-    void** c = &NULL_POINTER;
-    void** cc = &NULL_POINTER;
-    void** cs = &NULL_POINTER;
+    void** c = NULL_POINTER;
+    void** cc = NULL_POINTER;
+    void** cs = NULL_POINTER;
     // The display, which is a subsumption of
     // xserver, screens, hardware (input devices etc.).
-    struct _XDisplay** d = (struct _XDisplay**) &NULL_POINTER;
+    struct _XDisplay** d = (struct _XDisplay**) NULL_POINTER;
     // The window.
-    int** w = (int**) &NULL_POINTER;
+    int** w = (int**) NULL_POINTER;
 
     // Get knowledge memory internal.
     get(p0, (void*) KNOWLEDGE_MEMORY_INTERNAL, (void*) &k, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
@@ -518,39 +519,39 @@ void receive_x_window_system_thread(void* p0) {
     get(p0, (void*) X_WINDOW_SYSTEM_WINDOW_INTERNAL, (void*) &w, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
     // The command name, abstraction, model, details.
-    void** cn = &NULL_POINTER;
-    void** cnc = &NULL_POINTER;
-    void** cns = &NULL_POINTER;
-    void** ca = &NULL_POINTER;
-    void** cac = &NULL_POINTER;
-    void** cas = &NULL_POINTER;
-    void** cm = &NULL_POINTER;
-    void** cmc = &NULL_POINTER;
-    void** cms = &NULL_POINTER;
-    void** cd = &NULL_POINTER;
-    void** cdc = &NULL_POINTER;
-    void** cds = &NULL_POINTER;
+    void** cn = NULL_POINTER;
+    void** cnc = NULL_POINTER;
+    void** cns = NULL_POINTER;
+    void** ca = NULL_POINTER;
+    void** cac = NULL_POINTER;
+    void** cas = NULL_POINTER;
+    void** cm = NULL_POINTER;
+    void** cmc = NULL_POINTER;
+    void** cms = NULL_POINTER;
+    void** cd = NULL_POINTER;
+    void** cdc = NULL_POINTER;
+    void** cds = NULL_POINTER;
 
     //?? TODO: The temporary graphical part name, abstraction, model, details.
-    void** tmpn = &NULL_POINTER;
-    void** tmpnc = &NULL_POINTER;
-    void** tmpns = &NULL_POINTER;
-    void** tmpa = &NULL_POINTER;
-    void** tmpac = &NULL_POINTER;
-    void** tmpas = &NULL_POINTER;
-    void** tmpm = &NULL_POINTER;
-    void** tmpmc = &NULL_POINTER;
-    void** tmpms = &NULL_POINTER;
-    void** tmpd = &NULL_POINTER;
-    void** tmpdc = &NULL_POINTER;
-    void** tmpds = &NULL_POINTER;
+    void** tmpn = NULL_POINTER;
+    void** tmpnc = NULL_POINTER;
+    void** tmpns = NULL_POINTER;
+    void** tmpa = NULL_POINTER;
+    void** tmpac = NULL_POINTER;
+    void** tmpas = NULL_POINTER;
+    void** tmpm = NULL_POINTER;
+    void** tmpmc = NULL_POINTER;
+    void** tmpms = NULL_POINTER;
+    void** tmpd = NULL_POINTER;
+    void** tmpdc = NULL_POINTER;
+    void** tmpds = NULL_POINTER;
 
     // The event.
     XEvent e;
     // The event type.
     int t = *NUMBER_MINUS_1_INTEGER;
     // The signal id.
-    int* id = NULL_POINTER;
+    int* id = (int*) *NULL_POINTER;
 
     while (*NUMBER_1_INTEGER) {
 
@@ -838,36 +839,36 @@ void receive_x_window_system_thread(void* p0) {
         }
 
         // Reset command abstraction.
-        ca = &NULL_POINTER;
-        cac = &NULL_POINTER;
-        cas = &NULL_POINTER;
+        ca = NULL_POINTER;
+        cac = NULL_POINTER;
+        cas = NULL_POINTER;
         // Reset command model.
-        cm = &NULL_POINTER;
-        cmc = &NULL_POINTER;
-        cms = &NULL_POINTER;
+        cm = NULL_POINTER;
+        cmc = NULL_POINTER;
+        cms = NULL_POINTER;
         // Reset command details.
-        cd = &NULL_POINTER;
-        cdc = &NULL_POINTER;
-        cds = &NULL_POINTER;
+        cd = NULL_POINTER;
+        cdc = NULL_POINTER;
+        cds = NULL_POINTER;
 
         //?? Reset temporary graphical part name, abstraction, model, details.
-        tmpn = &NULL_POINTER;
-        tmpnc = &NULL_POINTER;
-        tmpns = &NULL_POINTER;
-        tmpa = &NULL_POINTER;
-        tmpac = &NULL_POINTER;
-        tmpas = &NULL_POINTER;
-        tmpm = &NULL_POINTER;
-        tmpmc = &NULL_POINTER;
-        tmpms = &NULL_POINTER;
-        tmpd = &NULL_POINTER;
-        tmpdc = &NULL_POINTER;
-        tmpds = &NULL_POINTER;
+        tmpn = NULL_POINTER;
+        tmpnc = NULL_POINTER;
+        tmpns = NULL_POINTER;
+        tmpa = NULL_POINTER;
+        tmpac = NULL_POINTER;
+        tmpas = NULL_POINTER;
+        tmpm = NULL_POINTER;
+        tmpmc = NULL_POINTER;
+        tmpms = NULL_POINTER;
+        tmpd = NULL_POINTER;
+        tmpdc = NULL_POINTER;
+        tmpds = NULL_POINTER;
 
         // Reset event type.
         t = *NUMBER_MINUS_1_INTEGER;
         // Reset signal id.
-        id = NULL_POINTER;
+        id = (int*) *NULL_POINTER;
     }
 
     // An implicit call to pthread_exit() is made when this thread
@@ -930,7 +931,7 @@ void receive_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, v
         // - added to the internal memory
         // - handed over to the thread procedure HERE
         // - deallocated at service shutdown
-        pthread_create(X_WINDOW_SYSTEM_THREAD, NULL_POINTER, (void*) &receive_x_window_system_thread, p0);
+        pthread_create(X_WINDOW_SYSTEM_THREAD, *NULL_POINTER, (void*) &receive_x_window_system_thread, p0);
     }
 }
 

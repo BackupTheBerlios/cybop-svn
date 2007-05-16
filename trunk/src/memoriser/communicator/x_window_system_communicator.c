@@ -24,7 +24,7 @@
  * - receive a file stream into a byte array
  * - send a file stream from a byte array
  *
- * @version $Revision: 1.8 $ $Date: 2007-04-16 15:50:29 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2007-05-16 19:29:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -34,6 +34,7 @@
 #include <X11/Xlib.h>
 #include "../../globals/constants/cybol/cybol_abstraction_constants.c"
 #include "../../globals/constants/log_message/log_message_constants.c"
+#include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../globals/variables/variables.c"
 #include "../../memoriser/accessor.c"
@@ -61,14 +62,14 @@ void read_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
  */
 void write_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p0 != NULL_POINTER) {
+    if (p0 != *NULL_POINTER) {
 
         struct _XDisplay** d = (struct _XDisplay**) p0;
 
         log_message_debug("Write to x window system display.");
 
         // The window.
-        int** w = (int**) &NULL_POINTER;
+        int** w = (int**) NULL_POINTER;
 
         // Get x window system internals.
         get(p3, (void*) X_WINDOW_SYSTEM_WINDOW_INTERNAL, (void*) &w, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.12 $ $Date: 2007-05-09 15:32:40 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2007-05-16 19:29:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -35,6 +35,7 @@
 #include "../../globals/constants/cybol/cybol_name_constants.c"
 #include "../../globals/constants/integer/integer_constants.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/variables/variables.c"
 #include "../../memoriser/accessor.c"
 
@@ -66,7 +67,7 @@ void parse_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
 void serialise_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
     void* p5, void* p6, void* p7, void* p8) {
 
-    if (p4 != NULL_POINTER) {
+    if (p4 != *NULL_POINTER) {
 
         int* sc = (int*) p4;
 
@@ -74,11 +75,11 @@ void serialise_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
 
         // The display, which is a subsumption of
         // xserver, screens, hardware (input devices etc.).
-        struct _XDisplay** di = (struct _XDisplay**) &NULL_POINTER;
+        struct _XDisplay** di = (struct _XDisplay**) NULL_POINTER;
         // The window.
-        int** w = NULL_POINTER;
+        int** w = (int**) NULL_POINTER;
         // The graphic context.
-        struct _XGC** gc = (struct _XGC**) &NULL_POINTER;
+        struct _XGC** gc = (struct _XGC**) NULL_POINTER;
         // The window attributes.
         XWindowAttributes wa;
 
@@ -91,23 +92,23 @@ void serialise_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
         XGetWindowAttributes(*di, **w, &wa);
 
         // The source whole size.
-        void** wsn = &NULL_POINTER;
-        void** wsnc = &NULL_POINTER;
-        void** wsns = &NULL_POINTER;
-        void** wsa = &NULL_POINTER;
-        void** wsac = &NULL_POINTER;
-        void** wsas = &NULL_POINTER;
-        void** wsm = &NULL_POINTER;
-        void** wsmc = &NULL_POINTER;
-        void** wsms = &NULL_POINTER;
-        void** wsd = &NULL_POINTER;
-        void** wsdc = &NULL_POINTER;
-        void** wsds = &NULL_POINTER;
+        void** wsn = NULL_POINTER;
+        void** wsnc = NULL_POINTER;
+        void** wsns = NULL_POINTER;
+        void** wsa = NULL_POINTER;
+        void** wsac = NULL_POINTER;
+        void** wsas = NULL_POINTER;
+        void** wsm = NULL_POINTER;
+        void** wsmc = NULL_POINTER;
+        void** wsms = NULL_POINTER;
+        void** wsd = NULL_POINTER;
+        void** wsdc = NULL_POINTER;
+        void** wsds = NULL_POINTER;
 
         // The source whole size coordinates.
-        int** wsmx = (int**) &NULL_POINTER;
-        int** wsmy = (int**) &NULL_POINTER;
-        int** wsmz = (int**) &NULL_POINTER;
+        int** wsmx = (int**) NULL_POINTER;
+        int** wsmy = (int**) NULL_POINTER;
+        int** wsmz = (int**) NULL_POINTER;
 
         // The original area position coordinates, set to the zero origo.
         int oapx = *NUMBER_0_INTEGER;
@@ -127,7 +128,7 @@ void serialise_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
         int fasy = oasy;
         int fasz = oasz;
 
-        if (p5 != NULL_POINTER) {
+        if (p5 != *NULL_POINTER) {
 
             // Get source whole size from details.
             get_universal_compound_element_by_name(p5, p6,
@@ -163,125 +164,125 @@ void serialise_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
         }
 
         // The source part name, abstraction, model, details.
-        void** n = &NULL_POINTER;
-        void** nc = &NULL_POINTER;
-        void** ns = &NULL_POINTER;
-        void** a = &NULL_POINTER;
-        void** ac = &NULL_POINTER;
-        void** as = &NULL_POINTER;
-        void** m = &NULL_POINTER;
-        void** mc = &NULL_POINTER;
-        void** ms = &NULL_POINTER;
-        void** d = &NULL_POINTER;
-        void** dc = &NULL_POINTER;
-        void** ds = &NULL_POINTER;
+        void** n = NULL_POINTER;
+        void** nc = NULL_POINTER;
+        void** ns = NULL_POINTER;
+        void** a = NULL_POINTER;
+        void** ac = NULL_POINTER;
+        void** as = NULL_POINTER;
+        void** m = NULL_POINTER;
+        void** mc = NULL_POINTER;
+        void** ms = NULL_POINTER;
+        void** d = NULL_POINTER;
+        void** dc = NULL_POINTER;
+        void** ds = NULL_POINTER;
         // The source part layout name, abstraction, model, details.
-        void** ln = &NULL_POINTER;
-        void** lnc = &NULL_POINTER;
-        void** lns = &NULL_POINTER;
-        void** la = &NULL_POINTER;
-        void** lac = &NULL_POINTER;
-        void** las = &NULL_POINTER;
-        void** lm = &NULL_POINTER;
-        void** lmc = &NULL_POINTER;
-        void** lms = &NULL_POINTER;
-        void** ld = &NULL_POINTER;
-        void** ldc = &NULL_POINTER;
-        void** lds = &NULL_POINTER;
+        void** ln = NULL_POINTER;
+        void** lnc = NULL_POINTER;
+        void** lns = NULL_POINTER;
+        void** la = NULL_POINTER;
+        void** lac = NULL_POINTER;
+        void** las = NULL_POINTER;
+        void** lm = NULL_POINTER;
+        void** lmc = NULL_POINTER;
+        void** lms = NULL_POINTER;
+        void** ld = NULL_POINTER;
+        void** ldc = NULL_POINTER;
+        void** lds = NULL_POINTER;
         // The source part cell name, abstraction, model, details.
-        void** cn = &NULL_POINTER;
-        void** cnc = &NULL_POINTER;
-        void** cns = &NULL_POINTER;
-        void** ca = &NULL_POINTER;
-        void** cac = &NULL_POINTER;
-        void** cas = &NULL_POINTER;
-        void** cm = &NULL_POINTER;
-        void** cmc = &NULL_POINTER;
-        void** cms = &NULL_POINTER;
-        void** cd = &NULL_POINTER;
-        void** cdc = &NULL_POINTER;
-        void** cds = &NULL_POINTER;
+        void** cn = NULL_POINTER;
+        void** cnc = NULL_POINTER;
+        void** cns = NULL_POINTER;
+        void** ca = NULL_POINTER;
+        void** cac = NULL_POINTER;
+        void** cas = NULL_POINTER;
+        void** cm = NULL_POINTER;
+        void** cmc = NULL_POINTER;
+        void** cms = NULL_POINTER;
+        void** cd = NULL_POINTER;
+        void** cdc = NULL_POINTER;
+        void** cds = NULL_POINTER;
         // The source part position name, abstraction, model, details.
-        void** pn = &NULL_POINTER;
-        void** pnc = &NULL_POINTER;
-        void** pns = &NULL_POINTER;
-        void** pa = &NULL_POINTER;
-        void** pac = &NULL_POINTER;
-        void** pas = &NULL_POINTER;
-        void** pm = &NULL_POINTER;
-        void** pmc = &NULL_POINTER;
-        void** pms = &NULL_POINTER;
-        void** pd = &NULL_POINTER;
-        void** pdc = &NULL_POINTER;
-        void** pds = &NULL_POINTER;
+        void** pn = NULL_POINTER;
+        void** pnc = NULL_POINTER;
+        void** pns = NULL_POINTER;
+        void** pa = NULL_POINTER;
+        void** pac = NULL_POINTER;
+        void** pas = NULL_POINTER;
+        void** pm = NULL_POINTER;
+        void** pmc = NULL_POINTER;
+        void** pms = NULL_POINTER;
+        void** pd = NULL_POINTER;
+        void** pdc = NULL_POINTER;
+        void** pds = NULL_POINTER;
         // The source part shape name, abstraction, model, details.
-        void** shn = &NULL_POINTER;
-        void** shnc = &NULL_POINTER;
-        void** shns = &NULL_POINTER;
-        void** sha = &NULL_POINTER;
-        void** shac = &NULL_POINTER;
-        void** shas = &NULL_POINTER;
-        void** shm = &NULL_POINTER;
-        void** shmc = &NULL_POINTER;
-        void** shms = &NULL_POINTER;
-        void** shd = &NULL_POINTER;
-        void** shdc = &NULL_POINTER;
-        void** shds = &NULL_POINTER;
+        void** shn = NULL_POINTER;
+        void** shnc = NULL_POINTER;
+        void** shns = NULL_POINTER;
+        void** sha = NULL_POINTER;
+        void** shac = NULL_POINTER;
+        void** shas = NULL_POINTER;
+        void** shm = NULL_POINTER;
+        void** shmc = NULL_POINTER;
+        void** shms = NULL_POINTER;
+        void** shd = NULL_POINTER;
+        void** shdc = NULL_POINTER;
+        void** shds = NULL_POINTER;
         // The source part size name, abstraction, model, details.
-        void** sn = &NULL_POINTER;
-        void** snc = &NULL_POINTER;
-        void** sns = &NULL_POINTER;
-        void** sa = &NULL_POINTER;
-        void** sac = &NULL_POINTER;
-        void** sas = &NULL_POINTER;
-        void** sm = &NULL_POINTER;
-        void** smc = &NULL_POINTER;
-        void** sms = &NULL_POINTER;
-        void** sd = &NULL_POINTER;
-        void** sdc = &NULL_POINTER;
-        void** sds = &NULL_POINTER;
+        void** sn = NULL_POINTER;
+        void** snc = NULL_POINTER;
+        void** sns = NULL_POINTER;
+        void** sa = NULL_POINTER;
+        void** sac = NULL_POINTER;
+        void** sas = NULL_POINTER;
+        void** sm = NULL_POINTER;
+        void** smc = NULL_POINTER;
+        void** sms = NULL_POINTER;
+        void** sd = NULL_POINTER;
+        void** sdc = NULL_POINTER;
+        void** sds = NULL_POINTER;
         // The source part title name, abstraction, model, details.
-        void** tn = &NULL_POINTER;
-        void** tnc = &NULL_POINTER;
-        void** tns = &NULL_POINTER;
-        void** ta = &NULL_POINTER;
-        void** tac = &NULL_POINTER;
-        void** tas = &NULL_POINTER;
-        void** tm = &NULL_POINTER;
-        void** tmc = &NULL_POINTER;
-        void** tms = &NULL_POINTER;
-        void** td = &NULL_POINTER;
-        void** tdc = &NULL_POINTER;
-        void** tds = &NULL_POINTER;
+        void** tn = NULL_POINTER;
+        void** tnc = NULL_POINTER;
+        void** tns = NULL_POINTER;
+        void** ta = NULL_POINTER;
+        void** tac = NULL_POINTER;
+        void** tas = NULL_POINTER;
+        void** tm = NULL_POINTER;
+        void** tmc = NULL_POINTER;
+        void** tms = NULL_POINTER;
+        void** td = NULL_POINTER;
+        void** tdc = NULL_POINTER;
+        void** tds = NULL_POINTER;
         // The source part icon name, abstraction, model, details.
-        void** in = &NULL_POINTER;
-        void** inc = &NULL_POINTER;
-        void** ins = &NULL_POINTER;
-        void** ia = &NULL_POINTER;
-        void** iac = &NULL_POINTER;
-        void** ias = &NULL_POINTER;
-        void** im = &NULL_POINTER;
-        void** imc = &NULL_POINTER;
-        void** ims = &NULL_POINTER;
-        void** id = &NULL_POINTER;
-        void** idc = &NULL_POINTER;
-        void** ids = &NULL_POINTER;
+        void** in = NULL_POINTER;
+        void** inc = NULL_POINTER;
+        void** ins = NULL_POINTER;
+        void** ia = NULL_POINTER;
+        void** iac = NULL_POINTER;
+        void** ias = NULL_POINTER;
+        void** im = NULL_POINTER;
+        void** imc = NULL_POINTER;
+        void** ims = NULL_POINTER;
+        void** id = NULL_POINTER;
+        void** idc = NULL_POINTER;
+        void** ids = NULL_POINTER;
 
         // The terminated title.
-        void* tt = NULL_POINTER;
+        void* tt = *NULL_POINTER;
         int tts = *NUMBER_MINUS_1_INTEGER;
         // The terminated icon name.
-        void* ti = NULL_POINTER;
+        void* ti = *NULL_POINTER;
         int tis = *NUMBER_MINUS_1_INTEGER;
 
         // The source part position coordinates.
-        int** pmx = (int**) &NULL_POINTER;
-        int** pmy = (int**) &NULL_POINTER;
-        int** pmz = (int**) &NULL_POINTER;
+        int** pmx = (int**) NULL_POINTER;
+        int** pmy = (int**) NULL_POINTER;
+        int** pmz = (int**) NULL_POINTER;
         // The source part size coordinates.
-        int** smx = (int**) &NULL_POINTER;
-        int** smy = (int**) &NULL_POINTER;
-        int** smz = (int**) &NULL_POINTER;
+        int** smx = (int**) NULL_POINTER;
+        int** smy = (int**) NULL_POINTER;
+        int** smz = (int**) NULL_POINTER;
 
         // The loop count.
         int j = *NUMBER_0_INTEGER;
@@ -370,7 +371,7 @@ void serialise_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
                 if (r != *NUMBER_0_INTEGER) {
 
                     // The terminated text.
-                    char* text = NULL_POINTER;
+                    char* text = (char*) *NULL_POINTER;
                     int texts = *((int*) *mc) + *NUMBER_1_INTEGER;
 
                     // Create terminated text.
@@ -533,10 +534,10 @@ void serialise_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
                     p7, p8);
 
                 // The terminated title.
-                tt = NULL_POINTER;
+                tt = *NULL_POINTER;
                 tts = *((int*) *tmc) + *NUMBER_1_INTEGER;
                 // The terminated icon name.
-                ti = NULL_POINTER;
+                ti = *NULL_POINTER;
                 tis = *((int*) *imc) + *NUMBER_1_INTEGER;
 
                 // Create terminated title.
@@ -578,76 +579,76 @@ void serialise_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
             }
 
             // Reset source part name, abstraction, model, details.
-            n = &NULL_POINTER;
-            nc = &NULL_POINTER;
-            ns = &NULL_POINTER;
-            a = &NULL_POINTER;
-            ac = &NULL_POINTER;
-            as = &NULL_POINTER;
-            m = &NULL_POINTER;
-            mc = &NULL_POINTER;
-            ms = &NULL_POINTER;
-            d = &NULL_POINTER;
-            dc = &NULL_POINTER;
-            ds = &NULL_POINTER;
+            n = NULL_POINTER;
+            nc = NULL_POINTER;
+            ns = NULL_POINTER;
+            a = NULL_POINTER;
+            ac = NULL_POINTER;
+            as = NULL_POINTER;
+            m = NULL_POINTER;
+            mc = NULL_POINTER;
+            ms = NULL_POINTER;
+            d = NULL_POINTER;
+            dc = NULL_POINTER;
+            ds = NULL_POINTER;
             // Reset source part layout.
-            la = &NULL_POINTER;
-            lac = &NULL_POINTER;
-            las = &NULL_POINTER;
-            lm = &NULL_POINTER;
-            lmc = &NULL_POINTER;
-            lms = &NULL_POINTER;
-            ld = &NULL_POINTER;
-            ldc = &NULL_POINTER;
-            lds = &NULL_POINTER;
+            la = NULL_POINTER;
+            lac = NULL_POINTER;
+            las = NULL_POINTER;
+            lm = NULL_POINTER;
+            lmc = NULL_POINTER;
+            lms = NULL_POINTER;
+            ld = NULL_POINTER;
+            ldc = NULL_POINTER;
+            lds = NULL_POINTER;
             // Reset source part cell.
-            ca = &NULL_POINTER;
-            cac = &NULL_POINTER;
-            cas = &NULL_POINTER;
-            cm = &NULL_POINTER;
-            cmc = &NULL_POINTER;
-            cms = &NULL_POINTER;
-            cd = &NULL_POINTER;
-            cdc = &NULL_POINTER;
-            cds = &NULL_POINTER;
+            ca = NULL_POINTER;
+            cac = NULL_POINTER;
+            cas = NULL_POINTER;
+            cm = NULL_POINTER;
+            cmc = NULL_POINTER;
+            cms = NULL_POINTER;
+            cd = NULL_POINTER;
+            cdc = NULL_POINTER;
+            cds = NULL_POINTER;
             // Reset source part position.
-            pa = &NULL_POINTER;
-            pac = &NULL_POINTER;
-            pas = &NULL_POINTER;
-            pm = &NULL_POINTER;
-            pmc = &NULL_POINTER;
-            pms = &NULL_POINTER;
-            pd = &NULL_POINTER;
-            pdc = &NULL_POINTER;
-            pds = &NULL_POINTER;
+            pa = NULL_POINTER;
+            pac = NULL_POINTER;
+            pas = NULL_POINTER;
+            pm = NULL_POINTER;
+            pmc = NULL_POINTER;
+            pms = NULL_POINTER;
+            pd = NULL_POINTER;
+            pdc = NULL_POINTER;
+            pds = NULL_POINTER;
             // Reset source part size.
-            sa = &NULL_POINTER;
-            sac = &NULL_POINTER;
-            sas = &NULL_POINTER;
-            sm = &NULL_POINTER;
-            smc = &NULL_POINTER;
-            sms = &NULL_POINTER;
-            sd = &NULL_POINTER;
-            sdc = &NULL_POINTER;
-            sds = &NULL_POINTER;
+            sa = NULL_POINTER;
+            sac = NULL_POINTER;
+            sas = NULL_POINTER;
+            sm = NULL_POINTER;
+            smc = NULL_POINTER;
+            sms = NULL_POINTER;
+            sd = NULL_POINTER;
+            sdc = NULL_POINTER;
+            sds = NULL_POINTER;
             // The source part title and icon are not reset,
             // since only one window may be the root of all graphical parts
             // and further windows must not occur as part.
 
             // Reset source part position coordinates.
-            pmx = (int**) &NULL_POINTER;
-            pmy = (int**) &NULL_POINTER;
-            pmz = (int**) &NULL_POINTER;
+            pmx = (int**) NULL_POINTER;
+            pmy = (int**) NULL_POINTER;
+            pmz = (int**) NULL_POINTER;
             // Reset source part size coordinates.
-            smx = (int**) &NULL_POINTER;
-            smy = (int**) &NULL_POINTER;
-            smz = (int**) &NULL_POINTER;
+            smx = (int**) NULL_POINTER;
+            smy = (int**) NULL_POINTER;
+            smz = (int**) NULL_POINTER;
 
             // Reset terminated title.
-            tt = NULL_POINTER;
+            tt = *NULL_POINTER;
             tts = *NUMBER_MINUS_1_INTEGER;
             // Reset terminated icon name.
-            ti = NULL_POINTER;
+            ti = *NULL_POINTER;
             tis = *NUMBER_MINUS_1_INTEGER;
 
             // Reset comparison result.

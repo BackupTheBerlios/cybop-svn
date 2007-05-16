@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.22 $ $Date: 2007-05-10 22:57:55 $ $Author: christian $
+ * @version $Revision: 1.23 $ $Date: 2007-05-16 19:29:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -39,6 +39,7 @@
 #include "../../globals/constants/character/character_constants.c"
 #include "../../globals/constants/log_message/log_message_constants.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../memoriser/accessor.c"
 #include "../../memoriser/allocator.c"
@@ -58,19 +59,19 @@
  */
 void parse_integer_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p4 != NULL_POINTER) {
+    if (p4 != *NULL_POINTER) {
 
         int* sc = (int*) p4;
 
-        if (p2 != NULL_POINTER) {
+        if (p2 != *NULL_POINTER) {
 
             int* ds = (int*) p2;
 
-            if (p1 != NULL_POINTER) {
+            if (p1 != *NULL_POINTER) {
 
                 int* dc = (int*) p1;
 
-                if (p0 != NULL_POINTER) {
+                if (p0 != *NULL_POINTER) {
 
                     void** d = (void**) p0;
 
@@ -88,7 +89,7 @@ void parse_integer_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
                         // The integer value.
                         int v = *NUMBER_0_INTEGER;
                         // The remaining vector elements.
-                        void* e = NULL_POINTER;
+                        void* e = *NULL_POINTER;
                         int ec = *NUMBER_0_INTEGER;
 
                         // Find comma character index.
@@ -120,7 +121,7 @@ void parse_integer_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
                         // Index of first comma: 3
                         // Handed over as first element source count fec: index i
                         // (which is 3, as needed for the length)
-                        parse_integer((void*) &v, NULL_POINTER, NULL_POINTER, p3, (void*) &fec);
+                        parse_integer((void*) &v, *NULL_POINTER, *NULL_POINTER, p3, (void*) &fec);
 
                         // Check vector size.
                         if (*dc >= *ds) {
@@ -198,32 +199,32 @@ void parse_integer_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
  */
 void serialise_integer_vector_elements(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
-    if (p5 != NULL_POINTER) {
+    if (p5 != *NULL_POINTER) {
 
         int* it = (int*) p5;
 
-        if (p4 != NULL_POINTER) {
+        if (p4 != *NULL_POINTER) {
 
             int* sc = (int*) p4;
 
-            if (p2 != NULL_POINTER) {
+            if (p2 != *NULL_POINTER) {
 
                 int* ds = (int*) p2;
 
-                if (p1 != NULL_POINTER) {
+                if (p1 != *NULL_POINTER) {
 
                     int* dc = (int*) p1;
 
-                    if (p0 != NULL_POINTER) {
+                    if (p0 != *NULL_POINTER) {
 
                         void** d = (void**) p0;
 
                         log_message_debug("Debug: Serialise integer vector elements.");
 
                         // The integer.
-                        void* i = NULL_POINTER;
+                        void* i = *NULL_POINTER;
                         // The integer character.
-                        void* c = NULL_POINTER;
+                        void* c = *NULL_POINTER;
                         int cc = *NUMBER_0_INTEGER;
                         int cs = *NUMBER_0_INTEGER;
 

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2007-05-15 14:52:05 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2007-05-16 19:29:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -31,6 +31,7 @@
 #ifdef LINUX_OPERATING_SYSTEM
 
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../globals/variables/variables.c"
 #include "../../memoriser/accessor.c"
@@ -49,7 +50,7 @@
  */
 void shutdown_socket(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p1 != NULL_POINTER) {
+    if (p1 != *NULL_POINTER) {
 
         int* base = (int*) p1;
 
@@ -58,23 +59,13 @@ void shutdown_socket(void* p0, void* p1, void* p2, void* p3, void* p4) {
         // The internal memory index.
         int i = *INVALID_VALUE;
         // The socket internal of this system.
-        int** si = (int**) &NULL_POINTER;
-
-    fprintf(stderr, "TEST si 1: %i \n", si);
-    fprintf(stderr, "TEST *si 1: %i \n", *si);
+        int** si = (int**) NULL_POINTER;
 
         // Get socket internal of this system.
         i = *base + *SOCKET_INTERNAL;
         get(p0, (void*) &i, (void*) &si, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-    fprintf(stderr, "TEST si 2: %i \n", si);
-    fprintf(stderr, "TEST *si 2: %i \n", *si);
-
-    fprintf(stderr, "TEST NULL_POINTER: %i \n", NULL_POINTER);
-
-        if (*si != NULL_POINTER) {
-
-    fprintf(stderr, "TEST *si 3: %i \n", *si);
+        if (*si != *NULL_POINTER) {
 
             // Interrupt ALL socket service threads of this system.
             interrupt_socket();
@@ -88,21 +79,21 @@ void shutdown_socket(void* p0, void* p1, void* p2, void* p3, void* p4) {
             void** ids = NULL_POINTER;
 */
             // The character buffer used in the thread procedure.
-            void** b = &NULL_POINTER;
-            void** bc = &NULL_POINTER;
-            void** bs = &NULL_POINTER;
+            void** b = NULL_POINTER;
+            void** bc = NULL_POINTER;
+            void** bs = NULL_POINTER;
             // The socket of this system.
-            int** s = (int**) &NULL_POINTER;
+            int** s = (int**) NULL_POINTER;
             // The communication partner socket.
-            int** ps = (int**) &NULL_POINTER;
+            int** ps = (int**) NULL_POINTER;
             // The socket address of this system.
-            void** a = &NULL_POINTER;
+            void** a = NULL_POINTER;
             // The communication partner socket address.
-            void** pa = &NULL_POINTER;
+            void** pa = NULL_POINTER;
             // The socket address size of this system.
-            void** as = &NULL_POINTER;
+            void** as = NULL_POINTER;
             // The communication partner socket address size.
-            void** pas = &NULL_POINTER;
+            void** pas = NULL_POINTER;
 
 /*??
             // Get signal ids.
@@ -135,10 +126,6 @@ void shutdown_socket(void* p0, void* p1, void* p2, void* p3, void* p4) {
             // Get communication partner socket address size.
             i = *base + *SOCKET_COMMUNICATION_PARTNER_ADDRESS_SIZE_INTERNAL;
             get(p0, (void*) &i, (void*) &pas, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-
-    fprintf(stderr, "TEST s: %i \n", s);
-    fprintf(stderr, "TEST *s: %i \n", *s);
-    fprintf(stderr, "TEST **s: %i \n", **s);
 
             // Close socket of this system.
             close(**s);

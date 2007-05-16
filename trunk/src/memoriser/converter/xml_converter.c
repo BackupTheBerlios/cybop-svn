@@ -24,7 +24,7 @@
  * - parse an xml stream into an xml model
  * - serialise an xml model into an xml stream
  *
- * @version $Revision: 1.17 $ $Date: 2007-04-16 15:50:29 $ $Author: christian $
+ * @version $Revision: 1.18 $ $Date: 2007-05-16 19:29:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -36,6 +36,7 @@
 #include "../../globals/constants/cybol/cybol_constants.c"
 #include "../../globals/constants/integer/integer_constants.c"
 #include "../../globals/constants/log_message/log_message_constants.c"
+#include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../memoriser/allocator.c"
 #include "../../memoriser/allocator/xml_node_allocator.c"
@@ -56,7 +57,7 @@
  */
 void parse_xml_comment_tag(void* p0, void* p1) {
 
-    if (p1 != NULL_POINTER) {
+    if (p1 != *NULL_POINTER) {
 
         int* sc = (int*) p1;
 
@@ -150,7 +151,7 @@ void parse_xml_comment_tag(void* p0, void* p1) {
  */
 void parse_xml_tag(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p4 != NULL_POINTER) {
+    if (p4 != *NULL_POINTER) {
 
         int* sc = (int*) p4;
 
@@ -233,15 +234,15 @@ void parse_xml_tag(void* p0, void* p1, void* p2, void* p3, void* p4) {
  */
 void parse_xml(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p4 != NULL_POINTER) {
+    if (p4 != *NULL_POINTER) {
 
         int* sc = (int*) p4;
 
-        if (p3 != NULL_POINTER) {
+        if (p3 != *NULL_POINTER) {
 
             void* s = (void*) p3;
 
-            if (p0 != NULL_POINTER) {
+            if (p0 != *NULL_POINTER) {
 
                 void** d = (void**) p0;
 
@@ -256,7 +257,7 @@ void parse_xml(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     log_message_debug("Information: Parse xml.");
 
                     // The temporary null-terminated file name.
-                    void* tmp = NULL_POINTER;
+                    void* tmp = *NULL_POINTER;
                     int tmps = *sc + 1;
 
                     // Create temporary null-terminated file name.
@@ -291,7 +292,7 @@ void parse_xml(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
 /*??
             // The comparison result.
-            int* r = NULL_POINTER;
+            int* r = (int*) *NULL_POINTER;
             allocate((void*) &r, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
             *r = 0;
             // The current byte within the stream.
@@ -348,7 +349,7 @@ void parse_xml(void* p0, void* p1, void* p2, void* p3, void* p4) {
                             bc = bc - BEGIN_TAG_BEGIN_COUNT;
 
                             // Initialise xml tag.
-                            void* t = NULL_POINTER;
+                            void* t = *NULL_POINTER;
                             int tc = 0;
                             int ts = 0;
 

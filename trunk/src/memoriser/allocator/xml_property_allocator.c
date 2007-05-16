@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2007-04-16 15:50:29 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2007-05-16 19:29:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -29,6 +29,7 @@
 
 #include "../../globals/constants/cybol/cybol_abstraction_constants.c"
 #include "../../globals/constants/log_message/log_message_constants.c"
+#include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../memoriser/array.c"
 
@@ -46,8 +47,8 @@ void allocate_xml_property(void* p0, void* p1) {
     allocate_array(p0, p1, (void*) POINTER_ARRAY);
 
     // Initialise xml attribute name, value.
-    void* nv = NULL_POINTER;
-    void* c = NULL_POINTER;
+    void* nv = *NULL_POINTER;
+    void* c = *NULL_POINTER;
 
     // Create xml attribute name, value.
     allocate_array((void*) &nv, p1, (void*) POINTER_ARRAY);
@@ -73,8 +74,8 @@ void deallocate_xml_property(void* p0, void* p1) {
     log_message_debug("Deallocate xml property.");
 
     // Initialise xml attribute name, value.
-    void* nv = NULL_POINTER;
-    void* c = NULL_POINTER;
+    void* nv = *NULL_POINTER;
+    void* c = *NULL_POINTER;
 
     // Get xml attribute name, value.
 //??    get_array_elements(p0, (void*) POINTER_ARRAY, (void*) &XML_ATTRIBUTE_NAME_VALUE_INDEX, (void*) &nv);

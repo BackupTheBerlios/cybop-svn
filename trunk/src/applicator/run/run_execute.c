@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2007-04-16 15:56:30 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2007-05-16 19:29:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -32,6 +32,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include "../../globals/constants/log_message/log_message_constants.c"
+#include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/constants/system_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../globals/variables/variables.c"
@@ -157,7 +158,7 @@ void run_execute(void* p0) {
         fprintf(stdout, "TEST args 1: %s\n", *(args + 1));
         fprintf(stdout, "TEST args 2: %s\n", *(args + 2));
         fprintf(stdout, "TEST args 3: %s\n", *(args + 3));
-        if (*(args + 3) == NULL_POINTER) {
+        if (*(args + 3) == *NULL_POINTER) {
             fprintf(stdout, "TEST args 3 IS null pointer: %i\n", *(args + 3));
         } else {
             fprintf(stdout, "TEST args 3 is NOT null pointer: %i\n", *(args + 3));
@@ -194,8 +195,8 @@ void run_execute(void* p0) {
         // A null pointer must be passed as the last such argument, to indicate the end!
         //
         // Example:
-        // execl(SYSTEM_SHELL, SYSTEM_SHELL, "-c", ARCHIVE_UNIX_SHELL_COMMAND, NULL_POINTER);
-        // execl(SYSTEM_SHELL, SYSTEM_SHELL, "-c", "xdosemu", NULL_POINTER);
+        // execl(SYSTEM_SHELL, SYSTEM_SHELL, "-c", ARCHIVE_UNIX_SHELL_COMMAND, *NULL_POINTER);
+        // execl(SYSTEM_SHELL, SYSTEM_SHELL, "-c", "xdosemu", *NULL_POINTER);
         int e = execv(SYSTEM_SHELL, (char**) p0);
 
     fprintf(stdout, "TEST post-exec e: %i\n", e);
@@ -348,7 +349,7 @@ void run_execute(void* p0) {
 
         // Request status information from child process.
         // In the GNU C library, pid_t corresponds to the int type.
-        waitpid(pid, (int*) NULL_POINTER, 0);
+        waitpid(pid, (int*) *NULL_POINTER, 0);
 
         log_message_debug("Information: The child process exited. Continue executing parent process.");
 

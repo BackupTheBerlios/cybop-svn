@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2007-04-16 15:56:29 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2007-05-16 19:29:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -31,6 +31,7 @@
 #include "../../globals/constants/boolean/boolean_constants.c"
 #include "../../globals/constants/log_message/log_message_constants.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../memoriser/array.c"
 
@@ -82,13 +83,13 @@ void compare_greater_or_equal(void* p0, void* p1, void* p2,
     void* p21, void* p22, void* p23,
     void* p24, void* p25, void* p26) {
 
-    if (p21 != NULL_POINTER) {
+    if (p21 != *NULL_POINTER) {
 
         int* rm = (int*) p21;
 
-        if (p12 != NULL_POINTER) {
+        if (p12 != *NULL_POINTER) {
 
-            if (p3 != NULL_POINTER) {
+            if (p3 != *NULL_POINTER) {
 
                 log_message_debug("Compare if one parameter is greater than or equal to the other.");
 

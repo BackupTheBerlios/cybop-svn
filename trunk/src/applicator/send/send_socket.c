@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.15 $ $Date: 2007-05-08 22:02:38 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2007-05-16 19:29:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -38,6 +38,7 @@
 #include "../../globals/constants/cybol/cybol_model_constants.c"
 #include "../../globals/constants/integer/integer_constants.c"
 #include "../../globals/constants/log_message/log_message_constants.c"
+#include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/constants/system_constants.c"
 #include "../../globals/logger/logger.c"
 
@@ -53,7 +54,7 @@
  */
 void send_socket_get_socket_server_mode(void* p0, void* p1, void* p2) {
 
-    if (p2 != NULL_POINTER) {
+    if (p2 != *NULL_POINTER) {
 
         int* base = (int*) p2;
 
@@ -62,7 +63,7 @@ void send_socket_get_socket_server_mode(void* p0, void* p1, void* p2) {
         // The internal memory index.
         int i = *INVALID_VALUE;
         // The socket mutex.
-        pthread_mutex_t** mt = (pthread_mutex_t**) &NULL_POINTER;
+        pthread_mutex_t** mt = (pthread_mutex_t**) NULL_POINTER;
 
 /*??
         ONLY necessary when writing or deleting a socket from internal memory.
@@ -94,15 +95,15 @@ void send_socket_get_socket_server_mode(void* p0, void* p1, void* p2) {
  */
 void send_socket_get_socket_client_mode(void* p0, void* p1, void* p2) {
 
-    if (p2 != NULL_POINTER) {
+    if (p2 != *NULL_POINTER) {
 
         int* st = (int*) p2;
 
-        if (p1 != NULL_POINTER) {
+        if (p1 != *NULL_POINTER) {
 
             int* sn = (int*) p1;
 
-            if (p0 != NULL_POINTER) {
+            if (p0 != *NULL_POINTER) {
 
                 int*** s = (int***) p0;
 
@@ -220,7 +221,7 @@ void send_socket_get_socket(void* p0, void* p1, void* p2, void* p3, void* p4, vo
  */
 void send_socket_set_nonblocking_mode(void* p0) {
 
-    if (p0 != NULL_POINTER) {
+    if (p0 != *NULL_POINTER) {
 
         int* s = (int*) p0;
 
@@ -271,11 +272,11 @@ void send_socket_set_nonblocking_mode(void* p0) {
  */
 void send_socket_allocate_host_address(void* p0, void* p1) {
 
-    if (p1 != NULL_POINTER) {
+    if (p1 != *NULL_POINTER) {
 
         int* n = (int*) p1;
 
-        if (p0 != NULL_POINTER) {
+        if (p0 != *NULL_POINTER) {
 
             void** a = (void**) p0;
 
@@ -313,15 +314,15 @@ void send_socket_allocate_host_address(void* p0, void* p1) {
  */
 void send_socket_allocate_socket_address(void* p0, void* p1, void* p2) {
 
-    if (p2 != NULL_POINTER) {
+    if (p2 != *NULL_POINTER) {
 
         int* n = (int*) p2;
 
-        if (p1 != NULL_POINTER) {
+        if (p1 != *NULL_POINTER) {
 
             int* as = (int*) p1;
 
-            if (p0 != NULL_POINTER) {
+            if (p0 != *NULL_POINTER) {
 
                 void** a = (void**) p0;
 
@@ -397,7 +398,7 @@ void send_socket_allocate_socket_address(void* p0, void* p1, void* p2) {
  */
 void send_socket_initialise_socket_address(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
-    if (p5 != NULL_POINTER) {
+    if (p5 != *NULL_POINTER) {
 
         int* n = (int*) p5;
 
@@ -478,15 +479,15 @@ void send_socket(void* p0, void* p1, void* p2, void* p3,
     // The address namespace.
     int an = *INVALID_VALUE;
     // The socket of this system.
-    int** s = (int**) &NULL_POINTER;
+    int** s = (int**) NULL_POINTER;
     // The host address of the communication partner.
-    void* ha = NULL_POINTER;
+    void* ha = *NULL_POINTER;
     // The socket address of the communication partner.
-    void* sa = NULL_POINTER;
+    void* sa = *NULL_POINTER;
     // The socket address size of the communication partner.
     int sas = *NUMBER_0_INTEGER;
     // The serialised string buffer array to be sent to the socket.
-    void* b = NULL_POINTER;
+    void* b = *NULL_POINTER;
     int bc = *NUMBER_0_INTEGER;
     int bs = *NUMBER_0_INTEGER;
 
@@ -521,7 +522,7 @@ void send_socket(void* p0, void* p1, void* p2, void* p3,
 */
 
     // Serialise compound model into xhtml format buffer array.
-    serialise((void*) &b, (void*) &bc, (void*) &bs, NULL_POINTER, NULL_POINTER, p11, p12, p13, p14, p15, p16, p17, p18, (void*) XHTML_ABSTRACTION, (void*) XHTML_ABSTRACTION_COUNT);
+    serialise((void*) &b, (void*) &bc, (void*) &bs, *NULL_POINTER, *NULL_POINTER, p11, p12, p13, p14, p15, p16, p17, p18, (void*) XHTML_ABSTRACTION, (void*) XHTML_ABSTRACTION_COUNT);
 
     fputs("SUCCESS! Generated xhtml file.\n", stdout);
 //??    fprintf(stderr, "TEST: send message: %s \n", (char*) b);
@@ -593,7 +594,7 @@ void send_socket(void* p0, void* p1, void* p2, void* p3,
         if (i >= 0) {
 
             // The client socket.
-            int* cs = NULL_POINTER;
+            int* cs = (int*) *NULL_POINTER;
 
             get_client_socket_number_for_index(p2, (void*) &i, (void*) &cs);
 

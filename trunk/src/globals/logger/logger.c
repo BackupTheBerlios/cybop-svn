@@ -27,7 +27,7 @@
  * Otherwise, an ENDLESS LOOP will be created, because cyboi's
  * array procedures call the logger in turn.
  *
- * @version $Revision: 1.15 $ $Date: 2007-04-16 15:59:42 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2007-05-16 19:29:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -42,6 +42,7 @@
 #include "../../globals/constants/character/character_constants.c"
 #include "../../globals/constants/log_message/log_message_constants.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/variables/variables.c"
 
 /**
@@ -58,26 +59,26 @@ void add_log_details(void* p0, void* p1, void* p2, void* p3) {
     // The arrays use the logger which would cause circular references.
     // Instead, use malloc and similar functions directly!
 
-    if (p3 != NULL_POINTER) {
+    if (p3 != *NULL_POINTER) {
 
         int* dc = (int*) p3;
 
-        if (p2 != NULL_POINTER) {
+        if (p2 != *NULL_POINTER) {
 
-            if (p1 != NULL_POINTER) {
+            if (p1 != *NULL_POINTER) {
 
                 int* ei = (int*) p1;
 
-                if (p0 != NULL_POINTER) {
+                if (p0 != *NULL_POINTER) {
 
                     void** e = (void**) p0;
 
                     // The loop index.
                     int j = 0;
                     // The destination character.
-                    char* dest = NULL_POINTER;
+                    char* dest = (char*) *NULL_POINTER;
                     // The source character.
-                    char* src = NULL_POINTER;
+                    char* src = (char*) *NULL_POINTER;
 
                     while (1) {
 
@@ -140,19 +141,19 @@ void add_log_level_name(void* p0, void* p1, void* p2, void* p3) {
     // The arrays use the logger which would cause circular references.
     // Instead, use malloc and similar functions directly!
 
-    if (p3 != NULL_POINTER) {
+    if (p3 != *NULL_POINTER) {
 
         int* ei = (int*) p3;
 
-        if (p2 != NULL_POINTER) {
+        if (p2 != *NULL_POINTER) {
 
             int* ec = (int*) p2;
 
-            if (p1 != NULL_POINTER) {
+            if (p1 != *NULL_POINTER) {
 
                 void** e = (void**) p1;
 
-                if (p0 != NULL_POINTER) {
+                if (p0 != *NULL_POINTER) {
 
                     int* l = (int*) p0;
 
@@ -227,11 +228,11 @@ void log_message(void* p0, void* p1, void* p2) {
     // The arrays use the logger which would cause circular references.
     // Instead, use malloc and similar functions directly!
 
-    if (p2 != NULL_POINTER) {
+    if (p2 != *NULL_POINTER) {
 
         int* mc = (int*) p2;
 
-        if (p0 != NULL_POINTER) {
+        if (p0 != *NULL_POINTER) {
 
             int* l = (int*) p0;
 
@@ -239,7 +240,7 @@ void log_message(void* p0, void* p1, void* p2) {
             if (*l <= *LOG_LEVEL) {
 
                 // The log entry.
-                void* e = NULL_POINTER;
+                void* e = *NULL_POINTER;
                 // The log entry count.
                 int ec = 0;
                 // The log entry index for adding characters.

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.10 $ $Date: 2007-01-14 22:06:49 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2007-05-16 19:29:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -28,16 +28,6 @@
 #define VARIABLES_SOURCE
 
 #include <pthread.h>
-
-//
-// Null pointer.
-//
-// CAUTION! It must not be constant, because otherwise
-// one could not alter the values it points to.
-//
-
-// The null pointer.
-static void* NULL_POINTER;
 
 //
 // Primitive type sizes.

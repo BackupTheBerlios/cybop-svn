@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.22 $ $Date: 2007-04-16 15:56:30 $ $Author: christian $
+ * @version $Revision: 1.23 $ $Date: 2007-05-16 19:29:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -35,6 +35,7 @@
 #include "../../globals/constants/integer/integer_constants.c"
 #include "../../globals/constants/log_message/log_message_constants.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/variables/variables.c"
 #include "../../globals/logger/logger.c"
 #include "../../memoriser/accessor.c"
@@ -52,27 +53,33 @@ void startup_linux_console(void* p0, void* p1, void* p2, void* p3) {
 
     log_message_debug("Startup linux console.");
 
-    // The linux console (terminal device name) internal.
-    FILE** ti = (FILE**) &NULL_POINTER;
+    // The linux console input- and output stream internal.
+    FILE** ipi = (FILE**) NULL_POINTER;
+    FILE** opi = (FILE**) NULL_POINTER;
 
-    // Get linux console internal.
-    get(p0, (void*) LINUX_CONSOLE_FILE_DESCRIPTOR_INTERNAL, (void*) &ti, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    // Get linux console internals.
+    get(p0, (void*) LINUX_CONSOLE_INPUT_FILE_DESCRIPTOR_INTERNAL, (void*) &ipi, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p0, (void*) LINUX_CONSOLE_OUTPUT_FILE_DESCRIPTOR_INTERNAL, (void*) &opi, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-    if (*ti == NULL_POINTER) {
+    // Only create new linux console resources if both,
+    // input- AND output stream internal are null.
+    if ((*ipi == *NULL_POINTER) && (*opi == *NULL_POINTER)) {
 
-        // The linux console (terminal device name).
-        FILE* t = NULL_POINTER;
+        // The linux console input- and output stream.
+        FILE* ip = (FILE*) *NULL_POINTER;
+        FILE* op = (FILE*) *NULL_POINTER;
         // The original termios interface.
-        struct termios* to = NULL_POINTER;
+        struct termios* to = (struct termios*) *NULL_POINTER;
         // The working termios interface.
-        struct termios* tw = NULL_POINTER;
-        // The character buffer that will be used in the thread procedure.
-        void* b = NULL_POINTER;
-        int* bc = NULL_POINTER;
-        int* bs = NULL_POINTER;
+        struct termios* tw = (struct termios*) *NULL_POINTER;
+        // The character buffer used for input in the thread procedure.
+        void* b = *NULL_POINTER;
+        int* bc = (int*) *NULL_POINTER;
+        int* bs = (int*) *NULL_POINTER;
 
         // Create linux console internals.
-//??        allocate((void*) &t, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+//??        allocate((void*) &ip, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+//??        allocate((void*) &op, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
         to = (struct termios*) malloc(sizeof(struct termios));
         tw = (struct termios*) malloc(sizeof(struct termios));
 
@@ -81,24 +88,29 @@ void startup_linux_console(void* p0, void* p1, void* p2, void* p3) {
         allocate((void*) &bs, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
         // Initialise linux console internals.
-        // Set file stream.
-        // CAUTION! Possibly, stdin must be used instead of stdout here!
-        t = stdout;
+        //
+        // CAUTION! The standard input- and output streams are used for now.
+        ip = stdin;
+        op = stdout;
 
-        // Get file descriptor for file stream.
-        int d = fileno(t);
+        // Get file descriptor for output file stream.
+        int opd = fileno(op);
+
         // Copy termios attributes from file descriptor.
-        tcgetattr(d, to);
-        tcgetattr(d, tw);
+        tcgetattr(opd, to);
+        tcgetattr(opd, tw);
+
         // Manipulate termios attributes.
         tw->c_lflag &= ~ICANON;
         tw->c_lflag &= ~ECHO;
 
         // Assign termios attributes.
-        tcsetattr(d, TCSANOW, tw);
+        tcsetattr(opd, TCSANOW, tw);
 
         // Initialise character buffer count, size.
-        // Its size is initialised with three, because longer escape sequences are not known.
+        //
+        // CAUTION! Its size is initialised with three,
+        // because longer escape sequences are not known.
         // Example: An up arrow delivers 'ESC' + '[' + 'A'
         *bc = *NUMBER_0_INTEGER;
         *bs = *NUMBER_3_INTEGER;
@@ -106,22 +118,21 @@ void startup_linux_console(void* p0, void* p1, void* p2, void* p3) {
         // Allocate character buffer.
         allocate((void*) &b, (void*) bs, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
-/*??
         // Check for linux console.
         int l = strcmp("linux", getenv("TERM"));
 
-        if (l == 0) {
+        if (l == *NUMBER_0_INTEGER) {
 
-            log_message_debug("TEST: This is a linux console.");
+            log_message_debug("Debug: This is a linux console.");
 
         } else {
 
-            log_message_debug("TEST: This is a standard serial terminal.");
+            log_message_debug("Debug: This is a standard serial terminal.");
         }
-*/
 
         // Set linux console internals.
-        set(p0, (void*) LINUX_CONSOLE_FILE_DESCRIPTOR_INTERNAL, (void*) &t, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        set(p0, (void*) LINUX_CONSOLE_INPUT_FILE_DESCRIPTOR_INTERNAL, (void*) &ip, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        set(p0, (void*) LINUX_CONSOLE_OUTPUT_FILE_DESCRIPTOR_INTERNAL, (void*) &op, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         set(p0, (void*) LINUX_CONSOLE_ORIGINAL_ATTRIBUTES_INTERNAL, (void*) &to, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         set(p0, (void*) LINUX_CONSOLE_WORKING_ATTRIBUTES_INTERNAL, (void*) &tw, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         set(p0, (void*) LINUX_CONSOLE_THREAD_CHARACTER_BUFFER_INTERNAL, (void*) &b, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
@@ -130,7 +141,7 @@ void startup_linux_console(void* p0, void* p1, void* p2, void* p3) {
 
     } else {
 
-        log_message_debug("WARNING: Could not startup linux console. The linux console is already running.");
+        log_message_debug("WARNING: Could not startup linux console. The linux console input or output or both are already running.");
     }
 }
 

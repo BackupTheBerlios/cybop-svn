@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.10 $ $Date: 2007-05-09 15:32:40 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2007-05-16 19:29:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -37,6 +37,7 @@
 #include "../../globals/constants/cybol/cybol_model_constants.c"
 #include "../../globals/constants/cybol/cybol_name_constants.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/constants/system_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../globals/variables/variables.c"
@@ -57,44 +58,44 @@ void run_archive(void* p0, void* p1, void* p2, void* p3) {
     log_message_debug("Run archive command.");
 
     // The create name, abstraction, model, details.
-    void** createn = &NULL_POINTER;
-    void** createnc = &NULL_POINTER;
-    void** createns = &NULL_POINTER;
-    void** createa = &NULL_POINTER;
-    void** createac = &NULL_POINTER;
-    void** createas = &NULL_POINTER;
-    int** createm = (int**) &NULL_POINTER;
-    void** createmc = &NULL_POINTER;
-    void** createms = &NULL_POINTER;
-    void** created = &NULL_POINTER;
-    void** createdc = &NULL_POINTER;
-    void** createds = &NULL_POINTER;
+    void** createn = NULL_POINTER;
+    void** createnc = NULL_POINTER;
+    void** createns = NULL_POINTER;
+    void** createa = NULL_POINTER;
+    void** createac = NULL_POINTER;
+    void** createas = NULL_POINTER;
+    int** createm = (int**) NULL_POINTER;
+    void** createmc = NULL_POINTER;
+    void** createms = NULL_POINTER;
+    void** created = NULL_POINTER;
+    void** createdc = NULL_POINTER;
+    void** createds = NULL_POINTER;
     // The update name, abstraction, model, details.
-    void** updaten = &NULL_POINTER;
-    void** updatenc = &NULL_POINTER;
-    void** updatens = &NULL_POINTER;
-    void** updatea = &NULL_POINTER;
-    void** updateac = &NULL_POINTER;
-    void** updateas = &NULL_POINTER;
-    int** updatem = (int**) &NULL_POINTER;
-    void** updatemc = &NULL_POINTER;
-    void** updatems = &NULL_POINTER;
-    void** updated = &NULL_POINTER;
-    void** updatedc = &NULL_POINTER;
-    void** updateds = &NULL_POINTER;
+    void** updaten = NULL_POINTER;
+    void** updatenc = NULL_POINTER;
+    void** updatens = NULL_POINTER;
+    void** updatea = NULL_POINTER;
+    void** updateac = NULL_POINTER;
+    void** updateas = NULL_POINTER;
+    int** updatem = (int**) NULL_POINTER;
+    void** updatemc = NULL_POINTER;
+    void** updatems = NULL_POINTER;
+    void** updated = NULL_POINTER;
+    void** updatedc = NULL_POINTER;
+    void** updateds = NULL_POINTER;
     // The bzip2 name, abstraction, model, details.
-    void** bzip2n = &NULL_POINTER;
-    void** bzip2nc = &NULL_POINTER;
-    void** bzip2ns = &NULL_POINTER;
-    void** bzip2a = &NULL_POINTER;
-    void** bzip2ac = &NULL_POINTER;
-    void** bzip2as = &NULL_POINTER;
-    int** bzip2m = (int**) &NULL_POINTER;
-    void** bzip2mc = &NULL_POINTER;
-    void** bzip2ms = &NULL_POINTER;
-    void** bzip2d = &NULL_POINTER;
-    void** bzip2dc = &NULL_POINTER;
-    void** bzip2ds = &NULL_POINTER;
+    void** bzip2n = NULL_POINTER;
+    void** bzip2nc = NULL_POINTER;
+    void** bzip2ns = NULL_POINTER;
+    void** bzip2a = NULL_POINTER;
+    void** bzip2ac = NULL_POINTER;
+    void** bzip2as = NULL_POINTER;
+    int** bzip2m = (int**) NULL_POINTER;
+    void** bzip2mc = NULL_POINTER;
+    void** bzip2ms = NULL_POINTER;
+    void** bzip2d = NULL_POINTER;
+    void** bzip2dc = NULL_POINTER;
+    void** bzip2ds = NULL_POINTER;
 
     // Get create option.
     get_universal_compound_element_by_name(p0, p1,
@@ -124,7 +125,7 @@ void run_archive(void* p0, void* p1, void* p2, void* p3) {
         p2, p3);
 
     // The arguments vector.
-    void* arg = NULL_POINTER;
+    void* arg = *NULL_POINTER;
     int argc = *NUMBER_0_INTEGER;
     int args = *NUMBER_0_INTEGER;
 
@@ -143,7 +144,7 @@ void run_archive(void* p0, void* p1, void* p2, void* p3) {
     // Create option.
     //
 
-    if (*createm != NULL_POINTER) {
+    if (*createm != *NULL_POINTER) {
 
         if (**createm == 1) {
 
@@ -170,7 +171,7 @@ void run_archive(void* p0, void* p1, void* p2, void* p3) {
     // Update option.
     //
 
-    if (*updatem != NULL_POINTER) {
+    if (*updatem != *NULL_POINTER) {
 
         if (**updatem == 1) {
 
@@ -197,7 +198,7 @@ void run_archive(void* p0, void* p1, void* p2, void* p3) {
     // Bzip2 option.
     //
 
-    if (*bzip2m != NULL_POINTER) {
+    if (*bzip2m != *NULL_POINTER) {
 
         if (**bzip2m == 1) {
 
@@ -252,19 +253,19 @@ void run_archive(void* p0, void* p1, void* p2, void* p3) {
     //?? in "run_execute.c" or deleted later.
 
     // The arguments vector.
-    void* arg = NULL_POINTER;
+    void* arg = *NULL_POINTER;
     int argc = *NUMBER_0_INTEGER;
     int args = *NUMBER_0_INTEGER;
     // The system shell as null terminated string.
-    void* shell = NULL_POINTER;
+    void* shell = *NULL_POINTER;
     int shellc = *NUMBER_0_INTEGER;
     int shells = *NUMBER_0_INTEGER;
     // The character argument as null terminated string.
-    void* character = NULL_POINTER;
+    void* character = *NULL_POINTER;
     int characterc = *NUMBER_0_INTEGER;
     int characters = *NUMBER_0_INTEGER;
     // The command as null terminated string.
-    void* command = NULL_POINTER;
+    void* command = *NULL_POINTER;
     int commandc = *NUMBER_0_INTEGER;
     int commands = *NUMBER_0_INTEGER;
 
@@ -333,7 +334,7 @@ void run_archive(void* p0, void* p1, void* p2, void* p3) {
     // Create option.
     //
 
-    if (*createm != NULL_POINTER) {
+    if (*createm != *NULL_POINTER) {
 
         if (**createm == 1) {
 
@@ -360,7 +361,7 @@ void run_archive(void* p0, void* p1, void* p2, void* p3) {
     // Update option.
     //
 
-    if (*updatem != NULL_POINTER) {
+    if (*updatem != *NULL_POINTER) {
 
         if (**updatem == 1) {
 
@@ -387,7 +388,7 @@ void run_archive(void* p0, void* p1, void* p2, void* p3) {
     // Bzip2 option.
     //
 
-    if (*bzip2m != NULL_POINTER) {
+    if (*bzip2m != *NULL_POINTER) {
 
         if (**bzip2m == 1) {
 
@@ -457,25 +458,25 @@ void run_archive(void* p0, void* p1, void* p2, void* p3) {
 
     // Set null pointer argument.
     // CAUTION! The null pointer always has to be the last argument.
-    set(arg, (void*) &argc, (void*) &NULL_POINTER, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    set(arg, (void*) &argc, NULL_POINTER, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     argc++;
 
     // Execute command as process.
     run_execute(arg);
 
-    if (shell != NULL_POINTER) {
+    if (shell != *NULL_POINTER) {
 
         // Deallocate shell argument.
         deallocate_array((void*) &shell, (void*) &shells, (void*) CHARACTER_ARRAY);
     }
 
-    if (character != NULL_POINTER) {
+    if (character != *NULL_POINTER) {
 
         // Deallocate character argument.
         deallocate_array((void*) &character, (void*) &characters, (void*) CHARACTER_ARRAY);
     }
 
-    if (command != NULL_POINTER) {
+    if (command != *NULL_POINTER) {
 
         // Deallocate command argument.
         deallocate_array((void*) &command, (void*) &commands, (void*) CHARACTER_ARRAY);

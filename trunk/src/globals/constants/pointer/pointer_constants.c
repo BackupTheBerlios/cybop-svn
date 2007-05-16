@@ -1,5 +1,5 @@
 /*
- * $RCSfile: receive_latex.c,v $
+ * $RCSfile: pointer_constants.c,v $
  *
  * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
  *
@@ -20,29 +20,20 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2007-05-16 19:29:01 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2007-05-16 19:29:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef RECEIVE_LATEX_SOURCE
-#define RECEIVE_LATEX_SOURCE
+#ifndef POINTER_CONSTANTS_SOURCE
+#define POINTER_CONSTANTS_SOURCE
 
-#include "../../globals/constants/log_message/log_message_constants.c"
-#include "../../globals/constants/pointer/pointer_constants.c"
-#include "../../globals/logger/logger.c"
-#include "../../globals/variables/variables.c"
+//
+// Pointer values.
+//
 
-/**
- * Receives a knowledge model in latex format.
- *
- * @param p0 the internal memory
- * @param p1 the source latex format
- * @param p2 the source count
- */
-void receive_latex(void* p0, void* p1, void* p2) {
+/** The null pointer. */
+static void* NULL_POINTER_ARRAY[] = {(void*) 0};
+static void** NULL_POINTER = NULL_POINTER_ARRAY;
 
-    log_message_debug("Receive latex message.");
-}
-
-/* RECEIVE_LATEX_SOURCE */
+/* POINTER_CONSTANTS_SOURCE */
 #endif
