@@ -49,7 +49,7 @@
  * the array size needs to be given extra here because sizeof will not work.
  * See: http://pegasus.rutgers.edu/~elflord/cpp/gotchas/index.shtml
  *
- * @version $Revision: 1.12 $ $Date: 2007-05-16 19:29:02 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2007-05-24 22:52:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -79,6 +79,8 @@ void allocate_array(void* p0, void* p1, void* p2) {
     if (p2 != *NULL_POINTER) {
 
         int* t = (int*) p2;
+
+        log_message_debug("Allocate array.");
 
         if (*t == *POINTER_ARRAY) {
 
@@ -124,6 +126,8 @@ void deallocate_array(void* p0, void* p1, void* p2) {
 
         int* t = (int*) p2;
 
+        log_message_debug("Deallocate array.");
+
         if (*t == *POINTER_ARRAY) {
 
             deallocate_pointer_array(p0, p1);
@@ -168,6 +172,8 @@ void reallocate_array(void* p0, void* p1, void* p2, void* p3) {
     if (p3 != *NULL_POINTER) {
 
         int* t = (int*) p3;
+
+        log_message_debug("Reallocate array.");
 
         if (*t == *POINTER_ARRAY) {
 
@@ -217,6 +223,8 @@ void compare_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4) {
     if (p4 != *NULL_POINTER) {
 
         int* t = (int*) p4;
+
+        log_message_debug("Compare array elements.");
 
         if (*t == *POINTER_ARRAY) {
 
@@ -272,6 +280,8 @@ void compare_arrays(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) 
 
             int* fc = (int*) p1;
 
+            log_message_debug("Compare arrays.");
+
             if (*fc == *sc) {
 
                 compare_array_elements(p0, p2, p3, p4, p5);
@@ -301,6 +311,8 @@ void get_array_elements(void* p0, void* p1, void* p2, void* p3) {
     if (p3 != *NULL_POINTER) {
 
         int* t = (int*) p3;
+
+        log_message_debug("Get array elements.");
 
         if (*t == *POINTER_ARRAY) {
 
@@ -361,6 +373,8 @@ void get_index_in_array(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
 
                 int* ac = (int*) p1;
 
+                log_message_debug("Get index in array.");
+
                 int array_counter = 0;
                 int comp_res = 0;
                 void* start_comp = *NULL_POINTER;
@@ -416,6 +430,8 @@ void set_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         int* t = (int*) p4;
 
+        log_message_debug("Set array elements.");
+
         if (*t == *POINTER_ARRAY) {
 
             set_pointer_array_elements(p0, p1, p2, p3);
@@ -461,6 +477,8 @@ void remove_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4) {
     if (p4 != *NULL_POINTER) {
 
         int* t = (int*) p4;
+
+        log_message_debug("Remove array elements.");
 
         if (*t == *POINTER_ARRAY) {
 
@@ -513,6 +531,8 @@ void get_array_elements_index(void* p0, void* p1, void* p2, void* p3, void* p4, 
     if (p5 != *NULL_POINTER) {
 
         int* t = (int*) p5;
+
+        log_message_debug("Get array elements index.");
 
         if (*t == *POINTER_ARRAY) {
 

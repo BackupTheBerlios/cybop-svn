@@ -24,7 +24,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.5 $ $Date: 2007-05-16 19:29:01 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2007-05-24 22:52:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -42,6 +42,13 @@
 /* CYGWIN_ENVIRONMENT */
 #endif
 
+// The opengl library OpenGL32.
+#include <GL/gl.h>
+// The opengl utility library GLu32.
+#include <GL/glu.h>
+// The opengl tools library.
+#include <GL/glut.h>
+#include <GL/freeglut.h>
 #include <locale.h>
 #include <stdio.h>
 #include <wchar.h>
@@ -987,6 +994,57 @@ void test_console() {
 }
 
 /**
+ * Tests the mesa opengl library functionality.
+ */
+/*??
+void test_mesa_opengl() {
+
+    fputs("Test mesa opengl:\n", stdout);
+
+    // This example will draw a green square on the screen.
+    // OpenGL has several ways to accomplish this task, but this is the easiest to understand.
+
+    // This statement clears the color buffer, so that the screen will start blank.
+    glClear(GL_COLOR_BUFFER_BIT);
+
+    // These statements initialize the projection matrix,
+    // setting a 3d frustum matrix that represents the viewable area.
+    // This matrix transforms objects from camera-relative space to OpenGL's projection space.
+    glMatrixMode( GL_PROJECTION );      /* Subsequent matrix commands will affect the projection matrix */
+/*??
+    glLoadIdentity();                   /* Initialise the projection matrix to identity */
+/*??
+    glFrustum( -1, 1, -1, 1, 1, 1000 ); /* Apply a perspective-projection matrix */
+
+    // These statements initialize the modelview matrix.
+    // This matrix defines a transform from model-relative coordinates to camera space.
+    // The combination of the modelview matrix and the projection matrix
+    // transforms objects from model-relative space to projection screen space.
+/*??
+    glMatrixMode( GL_MODELVIEW );       /* Subsequent matrix commands will affect the modelview matrix */
+/*??
+    glLoadIdentity();                   /* Initialise the modelview to identity */
+/*??
+    glTranslatef( 0, 0, -3 );           /* Translate the modelview 3 units along the Z axis */
+
+    // These commands draw a green square in the XY plane.
+/*??
+    glBegin( GL_POLYGON );              /* Begin issuing a polygon */
+/*??
+    glColor3f( 0, 1, 0 );               /* Set the current color to green */
+/*??
+    glVertex3f( -1, -1, 0 );            /* Issue a vertex */
+/*??
+    glVertex3f( -1, 1, 0 );             /* Issue a vertex */
+/*??
+    glVertex3f( 1, 1, 0 );              /* Issue a vertex */
+/*??
+    glVertex3f( 1, -1, 0 );             /* Issue a vertex */
+/*??
+    glEnd();                            /* Finish issuing the polygon */
+//?? }
+
+/**
  * Tests the parse integer vector function.
  */
 void test_parse_integer_vector() {
@@ -1113,6 +1171,62 @@ void test_float_constants() {
     fprintf(stdout, "Test reciprocal of the square root of 2: %f\n", *RECIPROCAL_OF_THE_SQUARE_ROOT_OF_2_DOUBLE);
 }
 
+//?? ========================================================================================
+
+void display(void) {
+
+/* clear all pixels  */
+   glClear (GL_COLOR_BUFFER_BIT);
+
+/* draw white polygon (rectangle) with corners at
+ * (0.25, 0.25, 0.0) and (0.75, 0.75, 0.0)
+ */
+   glColor3f (1.0, 1.0, 1.0);
+   glBegin(GL_POLYGON);
+      glVertex3f (0.25, 0.25, 0.0);
+      glVertex3f (0.75, 0.25, 0.0);
+      glVertex3f (0.75, 0.75, 0.0);
+      glVertex3f (0.25, 0.75, 0.0);
+   glEnd();
+
+/* don't wait!
+ * start processing buffered OpenGL routines
+ */
+   glFlush ();
+}
+
+void init(void) {
+
+/* select clearing color        */
+   glClearColor(0.0, 0.0, 0.0, 0.0);
+
+/* initialize viewing values  */
+   glMatrixMode(GL_PROJECTION);
+   glLoadIdentity();
+   glOrtho(0.0, 1.0, 0.0, 1.0, -1.0, 1.0);
+}
+
+/*
+ * Declare initial window size, position, and display mode
+ * (single buffer and RGBA).  Open window with "hello"
+ * in its title bar.  Call initialization routines.
+ * Register callback function to display graphics.
+ * Enter main loop and process events.
+ */
+int test_mesa_opengl(int argc, char **argv) {
+
+   glutInit(&argc, argv);
+   glutInitDisplayMode (GLUT_SINGLE | GLUT_RGB);
+   glutInitWindowSize (250, 250);
+   glutInitWindowPosition (100, 100);
+   glutCreateWindow ("hello");
+   init();
+   glutDisplayFunc(display);
+   glutMainLoop();
+}
+
+//?? ========================================================================================
+
 /**
  * The main test procedure.
  *
@@ -1146,10 +1260,11 @@ void test() {
 //??    test_character_array_multiple_elements();
 //??    test_pointer_return();
 //??    test_pointer_array();
-    test_pointer_array_with_null_values();
+//??    test_pointer_array_with_null_values();
 //??    test_file_read();
 //??    test_file_write();
 //??    test_console();
+    test_mesa_opengl(*NUMBER_0_INTEGER, (char**) NULL_POINTER);
 //??    test_parse_integer_vector();
 //??    test_serialise_integer_vector();
 //??    test_serialise_integer();

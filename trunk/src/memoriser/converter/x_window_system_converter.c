@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.13 $ $Date: 2007-05-16 19:29:02 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2007-05-24 22:52:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -71,7 +71,7 @@ void serialise_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
 
         int* sc = (int*) p4;
 
-        log_message_debug("Encode compound into x window system model.");
+        log_message_debug("Serialise x window system.");
 
         // The display, which is a subsumption of
         // xserver, screens, hardware (input devices etc.).
@@ -106,9 +106,9 @@ void serialise_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
         void** wsds = NULL_POINTER;
 
         // The source whole size coordinates.
-        int** wsmx = (int**) NULL_POINTER;
-        int** wsmy = (int**) NULL_POINTER;
-        int** wsmz = (int**) NULL_POINTER;
+        int* wsmx = (int*) *NULL_POINTER;
+        int* wsmy = (int*) *NULL_POINTER;
+        int* wsmz = (int*) *NULL_POINTER;
 
         // The original area position coordinates, set to the zero origo.
         int oapx = *NUMBER_0_INTEGER;
@@ -140,18 +140,18 @@ void serialise_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
                 p7, p8);
 
             // Determine source whole size coordinates.
-            get(*wsm, (void*) NUMBER_0_INTEGER, (void*) &wsmx, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-            get(*wsm, (void*) NUMBER_1_INTEGER, (void*) &wsmy, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-            get(*wsm, (void*) NUMBER_2_INTEGER, (void*) &wsmz, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            get(*wsm, (void*) NUMBER_0_INTEGER, (void*) &wsmx, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+            get(*wsm, (void*) NUMBER_1_INTEGER, (void*) &wsmy, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+            get(*wsm, (void*) NUMBER_2_INTEGER, (void*) &wsmz, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
             // Set original area position coordinates, set to the zero origo.
             oapx = *NUMBER_0_INTEGER;
             oapy = *NUMBER_0_INTEGER;
             oapz = *NUMBER_0_INTEGER;
             // Set original area size coordinates, initialised with whole coordinates.
-            oasx = **wsmx;
-            oasy = **wsmy;
-            oasz = **wsmz;
+            oasx = *wsmx;
+            oasy = *wsmy;
+            oasz = *wsmz;
 
             // Set free area position coordinates, initialised with original area position coordinates.
             fapx = oapx;
@@ -276,13 +276,13 @@ void serialise_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
         int tis = *NUMBER_MINUS_1_INTEGER;
 
         // The source part position coordinates.
-        int** pmx = (int**) NULL_POINTER;
-        int** pmy = (int**) NULL_POINTER;
-        int** pmz = (int**) NULL_POINTER;
+        int* pmx = (int*) *NULL_POINTER;
+        int* pmy = (int*) *NULL_POINTER;
+        int* pmz = (int*) *NULL_POINTER;
         // The source part size coordinates.
-        int** smx = (int**) NULL_POINTER;
-        int** smy = (int**) NULL_POINTER;
-        int** smz = (int**) NULL_POINTER;
+        int* smx = (int*) *NULL_POINTER;
+        int* smy = (int*) *NULL_POINTER;
+        int* smz = (int*) *NULL_POINTER;
 
         // The loop count.
         int j = *NUMBER_0_INTEGER;
@@ -338,13 +338,13 @@ void serialise_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
                 p7, p8);
 
             // Get source part position coordinates.
-            get(*pm, (void*) NUMBER_0_INTEGER, (void*) &pmx, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-            get(*pm, (void*) NUMBER_1_INTEGER, (void*) &pmy, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-            get(*pm, (void*) NUMBER_2_INTEGER, (void*) &pmz, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            get(*pm, (void*) NUMBER_0_INTEGER, (void*) &pmx, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+            get(*pm, (void*) NUMBER_1_INTEGER, (void*) &pmy, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+            get(*pm, (void*) NUMBER_2_INTEGER, (void*) &pmz, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
             // Get source part size coordinates.
-            get(*sm, (void*) NUMBER_0_INTEGER, (void*) &smx, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-            get(*sm, (void*) NUMBER_1_INTEGER, (void*) &smy, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-            get(*sm, (void*) NUMBER_2_INTEGER, (void*) &smz, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            get(*sm, (void*) NUMBER_0_INTEGER, (void*) &smx, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+            get(*sm, (void*) NUMBER_1_INTEGER, (void*) &smy, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+            get(*sm, (void*) NUMBER_2_INTEGER, (void*) &smz, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
             compare_arrays(*lm, *lmc, (void*) UI_ROOT_LAYOUT_MODEL, (void*) UI_ROOT_LAYOUT_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
@@ -361,7 +361,7 @@ void serialise_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
 */
 
                 // Draw graphical element using given coordinates.
-                XDrawRectangle(*di, **w, *gc, **pmx, **pmy, **smx - *NUMBER_1_INTEGER, **smy - *NUMBER_1_INTEGER);
+                XDrawRectangle(*di, **w, *gc, *pmx, *pmy, *smx - *NUMBER_1_INTEGER, *smy - *NUMBER_1_INTEGER);
 
                 // Reset comparison result.
                 r = *NUMBER_0_INTEGER;
@@ -383,7 +383,7 @@ void serialise_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
                     set_array_elements(text, *mc, (void*) NULL_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
 
                     // Draw the text (character vector / string).
-                    XDrawString(*di, **w, *gc, **pmx, **pmy + *NUMBER_20_INTEGER, text, texts);
+                    XDrawString(*di, **w, *gc, *pmx, *pmy + *NUMBER_20_INTEGER, text, texts);
 
                     // Destroy terminated text.
                     deallocate_array((void*) &text, (void*) &texts, (void*) CHARACTER_ARRAY);
@@ -512,9 +512,9 @@ void serialise_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
                 // The source part is a root window.
 
                 // Move window to new position coordinates for part.
-                XMoveWindow(*di, **w, **pmx, **pmy);
+                XMoveWindow(*di, **w, *pmx, *pmy);
                 // Resize window to new size coordinates for part.
-                XResizeWindow(*di, **w, **smx, **smy);
+                XResizeWindow(*di, **w, *smx, *smy);
 
                 // Get source part title from details.
                 get_universal_compound_element_by_name(*d, *dc,
@@ -575,7 +575,7 @@ void serialise_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
                 // The part model is a compound.
 
                 // Recursively call this procedure for compound part model.
-                serialise_x_window_system(p0, p1, p2, *m, (void*) *mc, *d, *dc, p7, p8);
+                serialise_x_window_system(p0, p1, p2, *m, *mc, *d, *dc, p7, p8);
             }
 
             // Reset source part name, abstraction, model, details.
@@ -636,13 +636,13 @@ void serialise_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
             // and further windows must not occur as part.
 
             // Reset source part position coordinates.
-            pmx = (int**) NULL_POINTER;
-            pmy = (int**) NULL_POINTER;
-            pmz = (int**) NULL_POINTER;
+            pmx = (int*) *NULL_POINTER;
+            pmy = (int*) *NULL_POINTER;
+            pmz = (int*) *NULL_POINTER;
             // Reset source part size coordinates.
-            smx = (int**) NULL_POINTER;
-            smy = (int**) NULL_POINTER;
-            smz = (int**) NULL_POINTER;
+            smx = (int*) *NULL_POINTER;
+            smy = (int*) *NULL_POINTER;
+            smz = (int*) *NULL_POINTER;
 
             // Reset terminated title.
             tt = *NULL_POINTER;
