@@ -22,7 +22,7 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.41 $ $Date: 2007-04-23 23:20:07 $ $Author: christian $
+# @version $Revision: 1.42 $ $Date: 2007-05-24 23:00:04 $ $Author: christian $
 # @author Michael Simon <michael.simon@gmx.net>
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
@@ -33,6 +33,7 @@
 # - libc6-dev
 # - libxml2
 # - xlibs-dev
+# - libgl1-mesa-dev
 #
 # CAUTION! TABS must NOT be replaced with SPACES!
 # Otherwise, the makefile will not work.
@@ -104,7 +105,7 @@ COMPILER = gcc
 # The "-I" option forces the compiler to look for uninstalled headers in the
 # current source directory before searching the system directories for
 # installed headers of the same name.
-COMPILER_FLAGS = -g -l/usr/include -I/usr/include/libxml2 -I/usr/X11R6/include \
+COMPILER_FLAGS = -g -l/usr/include -I/usr/include/libxml2 -I/usr/X11R6/include -l/usr/include/GL \
 	-D LINUX_OPERATING_SYSTEM
 #	-D WIN32_OPERATING_SYSTEM
 # INTEL_300_PROCESSOR // 80386
@@ -258,7 +259,7 @@ all: export \
 		-o $(OBJ)/controller/cyboi.o
 # Link object files.
 	$(COMPILER) -L/lib -L/usr/lib -L/usr/X11R6/lib \
-		-o $(BIN)/$(BINARY) $(OBJ)/controller/cyboi.o -lpthread -lxml2 -lX11
+		-o $(BIN)/$(BINARY) $(OBJ)/controller/cyboi.o -lpthread -lxml2 -lX11 -lGL -lGLU -lglut
 # Print ready message.
 	@echo Compiled cyboi files.
 
