@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2007-05-26 14:35:16 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2007-05-26 14:35:16 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -28,49 +28,6 @@
 #define LOG_MESSAGE_CONSTANTS_SOURCE
 
 #include "../../../globals/constants/integer/integer_constants.c"
-
-//
-// Log levels.
-//
-
-/** The off log level. */
-static int* OFF_LOG_LEVEL = NUMBER_0_INTEGER_ARRAY;
-
-/** The error log level. */
-static int* ERROR_LOG_LEVEL = NUMBER_1_INTEGER_ARRAY;
-
-/** The warning log level. */
-static int* WARNING_LOG_LEVEL = NUMBER_2_INTEGER_ARRAY;
-
-/** The info log level. */
-static int* INFO_LOG_LEVEL = NUMBER_3_INTEGER_ARRAY;
-
-/** The debug log level. */
-static int* DEBUG_LOG_LEVEL = NUMBER_4_INTEGER_ARRAY;
-
-//
-// Log level names.
-//
-
-/** The error log level. */
-static char ERROR_LOG_LEVEL_NAME_ARRAY[] = {'E', 'r', 'r', 'o', 'r'};
-static char* ERROR_LOG_LEVEL_NAME = ERROR_LOG_LEVEL_NAME_ARRAY;
-static int* ERROR_LOG_LEVEL_NAME_COUNT = NUMBER_5_INTEGER_ARRAY;
-
-/** The warning log level. */
-static char WARNING_LOG_LEVEL_NAME_ARRAY[] = {'W', 'a', 'r', 'n', 'i', 'n', 'g'};
-static char* WARNING_LOG_LEVEL_NAME = WARNING_LOG_LEVEL_NAME_ARRAY;
-static int* WARNING_LOG_LEVEL_NAME_COUNT = NUMBER_7_INTEGER_ARRAY;
-
-/** The info log level. */
-static char INFO_LOG_LEVEL_NAME_ARRAY[] = {'I', 'n', 'f', 'o'};
-static char* INFO_LOG_LEVEL_NAME = INFO_LOG_LEVEL_NAME_ARRAY;
-static int* INFO_LOG_LEVEL_NAME_COUNT = NUMBER_4_INTEGER_ARRAY;
-
-/** The debug log level. */
-static char DEBUG_LOG_LEVEL_NAME_ARRAY[] = {'D', 'e', 'b', 'u', 'g'};
-static char* DEBUG_LOG_LEVEL_NAME = DEBUG_LOG_LEVEL_NAME_ARRAY;
-static int* DEBUG_LOG_LEVEL_NAME_COUNT = NUMBER_5_INTEGER_ARRAY;
 
 //
 // Pointer array log messages.
