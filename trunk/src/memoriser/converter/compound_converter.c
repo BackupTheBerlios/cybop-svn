@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2007-05-16 19:29:02 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2007-05-26 21:19:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -28,7 +28,7 @@
 #define COMPOUND_CONVERTER_SOURCE
 
 #include "../../globals/constants/cybol/cybol_abstraction_constants.c"
-#include "../../globals/constants/log_message/log_message_constants.c"
+#include "../../globals/constants/log/log_message_constants.c"
 #include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/logger/logger.c"
 

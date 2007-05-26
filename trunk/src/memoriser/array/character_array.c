@@ -38,7 +38,7 @@
  *
  * Array elements are accessed over their index (array base pointer + index).
  *
- * @version $Revision: 1.13 $ $Date: 2007-05-16 19:29:02 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2007-05-26 21:19:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -48,7 +48,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "../../globals/constants/integer/integer_constants.c"
-#include "../../globals/constants/log_message/log_message_constants.c"
+#include "../../globals/constants/log/log_message_constants.c"
 #include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/variables/variables.c"
 #include "../../globals/logger/logger.c"
@@ -69,7 +69,7 @@ void allocate_character_array(void* p0, void* p1) {
 
             void** a = (void**) p0;
 
-            log_message((void*) INFO_LOG_LEVEL, (void*) CREATE_CHARACTER_ARRAY_MESSAGE, (void*) CREATE_CHARACTER_ARRAY_MESSAGE_COUNT);
+            log_message((void*) INFORMATION_LOG_LEVEL, (void*) CREATE_CHARACTER_ARRAY_MESSAGE, (void*) CREATE_CHARACTER_ARRAY_MESSAGE_COUNT);
 
             // Determine the memory area to be allocated.
             // It is the product of the given size and the type size.
@@ -110,7 +110,7 @@ void deallocate_character_array(void* p0, void* p1) {
 
             void** a = (void**) p0;
 
-            log_message((void*) INFO_LOG_LEVEL, (void*) DESTROY_CHARACTER_ARRAY_MESSAGE, (void*) DESTROY_CHARACTER_ARRAY_MESSAGE_COUNT);
+            log_message((void*) INFORMATION_LOG_LEVEL, (void*) DESTROY_CHARACTER_ARRAY_MESSAGE, (void*) DESTROY_CHARACTER_ARRAY_MESSAGE_COUNT);
 
             free(*a);
 
@@ -146,7 +146,7 @@ void reallocate_character_array(void* p0, void* p1, void* p2) {
 
                 void** a = (void**) p0;
 
-                log_message((void*) INFO_LOG_LEVEL, (void*) RESIZE_CHARACTER_ARRAY_MESSAGE, (void*) RESIZE_CHARACTER_ARRAY_MESSAGE_COUNT);
+                log_message((void*) INFORMATION_LOG_LEVEL, (void*) RESIZE_CHARACTER_ARRAY_MESSAGE, (void*) RESIZE_CHARACTER_ARRAY_MESSAGE_COUNT);
 
                 // Determine the memory area to be allocated.
                 // It is the product of the given size and the type size.

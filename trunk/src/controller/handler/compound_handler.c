@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.15 $ $Date: 2007-05-16 19:29:01 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2007-05-26 21:19:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -28,7 +28,7 @@
 #ifndef COMPOUND_HANDLER_SOURCE
 #define COMPOUND_HANDLER_SOURCE
 
-#include "../../globals/constants/log_message/log_message_constants.c"
+#include "../../globals/constants/log/log_message_constants.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/variables/variables.c"
@@ -78,7 +78,7 @@ void handle_compound(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
         };
 
         log_message_debug("\n\n");
-        log_message((void*) INFO_LOG_LEVEL, (void*) HANDLE_COMPOUND_MESSAGE, (void*) HANDLE_COMPOUND_MESSAGE_COUNT);
+        log_message((void*) INFORMATION_LOG_LEVEL, (void*) HANDLE_COMPOUND_MESSAGE, (void*) HANDLE_COMPOUND_MESSAGE_COUNT);
 
         // The abstractions, models, details.
         void** pa = NULL_POINTER;

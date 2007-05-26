@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2007-05-26 14:37:15 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2007-05-26 21:19:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -28,7 +28,7 @@
 #define STARTUP_OPENGL_SOURCE
 
 #include "../../globals/constants/integer/integer_constants.c"
-#include "../../globals/constants/log_message/log_message_constants.c"
+#include "../../globals/constants/log/log_message_constants.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/logger/logger.c"

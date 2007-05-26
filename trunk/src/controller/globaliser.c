@@ -1,5 +1,5 @@
 /*
- * $RCSfile: globals_manager.c,v $
+ * $RCSfile: globaliser.c,v $
  *
  * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
  *
@@ -20,37 +20,32 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.21 $ $Date: 2007-05-16 19:29:01 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2007-05-26 21:19:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef GLOBALS_MANAGER_SOURCE
-#define GLOBALS_MANAGER_SOURCE
+#ifndef GLOBALISER_SOURCE
+#define GLOBALISER_SOURCE
 
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <pthread.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include <unistd.h>
-#include "../../globals/constants/integer/integer_constants.c"
-#include "../../globals/constants/log_message/log_message_constants.c"
-#include "../../globals/constants/system_constants.c"
-#include "../../globals/logger/logger.c"
-#include "../../globals/variables/variables.c"
+#include "../globals/constants/integer/integer_constants.c"
+#include "../globals/constants/system_constants.c"
+#include "../globals/variables/variables.c"
 
 /**
- * Starts up the global variables.
- *
- * They are created, where necessary, and initialised.
+ * Allocates and initialises global variables.
  *
  * CAUTION! These global variables MUST NOT be initialised in the file
  * /globals/variables/variables.c because then constant values are expected!
  */
-void startup_globals() {
+void globalise() {
 
-    // CAUTION! DO NOT use logging functionality here!
-    // The logger will not work before these global variables are set.
-    // For testing, the line below may be used.
-    // fputs("Info: Startup globals.\n", stdout);
+    // fputs("Information: Globalise.\n", stdout);
 
     //
     // Primitive type sizes.
@@ -118,94 +113,16 @@ void startup_globals() {
     // Allocate and initialise cyboi service thread interrupt flag.
     CYBOI_SERVICE_THREAD_INTERRUPT = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
     *CYBOI_SERVICE_THREAD_INTERRUPT = *NUMBER_0_INTEGER;
-
-    //
-    // Logging.
-    //
-    // CAUTION! DO NOT use array functionality here!
-    // The arrays use the logger which would cause circular references.
-    // Instead, use malloc and similar functions directly!
-    //
-
-    // Allocate log level.
-    LOG_LEVEL = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
-    *LOG_LEVEL = *DEBUG_LOG_LEVEL;
-//??    *LOG_LEVEL = *OFF_LOG_LEVEL;
-
-    // The log file name.
-    char* n = "cyboi.log";
-    // The log file status flags.
-    int s = O_TRUNC | O_CREAT | O_WRONLY;
-    // The log file.
-    int f = open(n, s);
-
-    if (f >= *NUMBER_0_INTEGER) {
-
-        // The file owner.
-        int o = *INVALID_VALUE;
-
-        // The file group.
-        int g = *INVALID_VALUE;
-
-        // Set file owner.
-        chown(n, o, g);
-
-        // The file access rights.
-        //?? TODO: When trying to cross-compile cyboi for windows,
-        //?? the two S_IRGRP and S_IWGRP were not recognised by mingw.
-        int r = S_IRUSR | S_IWUSR; //?? | S_IRGRP | S_IWGRP;
-
-        // Set file access rights.
-        chmod(n, r);
-
-        // The log output.
-        // Example: LOG_OUTPUT = stderr;
-        LOG_OUTPUT = f;
-
-    } else {
-
-        // CAUTION! DO NOT use logging functionality here!
-        // The logger will not work before these global variables are set.
-        fputs("Error: Could not open log file. A file error occured.\n", stdout);
-    }
 }
 
 /**
- * Shuts down the global variables.
+ * Deallocates global variables.
  *
- * Deallocates allocated memory in descending order,
- * as compared to the startup_globals procedure.
+ * CAUTION! Use descending order, as compared to allocation.
  */
-void shutdown_globals() {
+void unglobalise() {
 
-    // For testing, the line below may be used.
-    // fputs("Info: Shutdown globals.\n", stdout);
-
-    //
-    // Logging.
-    //
-    // CAUTION! DO NOT use array functionality here!
-    // The arrays use the logger which would cause circular references.
-    // Instead, use malloc and similar functions directly!
-    //
-
-    // The log file.
-    int f = LOG_OUTPUT;
-
-    if (f >= *NUMBER_0_INTEGER) {
-
-        // Close log file.
-        close(f);
-
-    } else {
-
-        // CAUTION! DO NOT use logging functionality here!
-        // The logger will not work before these global variables are set.
-        fputs("Error: Could not close log file. A file error occured.\n", stdout);
-    }
-
-    // Free log level.
-    free(LOG_LEVEL);
+    // fputs("Information: Unglobalise.\n", stdout);
 
     //
     // Thread identifications and service interrupt flags.
@@ -256,5 +173,5 @@ void shutdown_globals() {
     free(INTEGER_PRIMITIVE_SIZE);
 }
 
-/* GLOBALS_MANAGER_SOURCE */
+/* GLOBALISER_SOURCE */
 #endif

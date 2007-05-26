@@ -20,14 +20,14 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2007-04-16 15:50:29 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2007-05-26 21:19:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef LATEX_CONVERTER_SOURCE
 #define LATEX_CONVERTER_SOURCE
 
-#include "../../globals/constants/log_message/log_message_constants.c"
+#include "../../globals/constants/log/log_message_constants.c"
 #include "../../globals/logger/logger.c"
 
 /**

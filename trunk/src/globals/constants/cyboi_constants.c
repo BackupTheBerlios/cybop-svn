@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2007-04-16 16:23:41 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2007-05-26 21:19:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -28,6 +28,22 @@
 #define CYBOI_CONSTANTS_SOURCE
 
 #include "../../globals/constants/integer/integer_constants.c"
+
+//
+// Operation mode.
+//
+
+/** The version operation mode. */
+static int* VERSION_OPERATION_MODE = NUMBER_0_INTEGER_ARRAY;
+
+/** The help operation mode. */
+static int* HELP_OPERATION_MODE = NUMBER_1_INTEGER_ARRAY;
+
+/** The test operation mode. */
+static int* TEST_OPERATION_MODE = NUMBER_2_INTEGER_ARRAY;
+
+/** The knowledge operation mode. */
+static int* KNOWLEDGE_OPERATION_MODE = NUMBER_3_INTEGER_ARRAY;
 
 //
 // Cybol file.

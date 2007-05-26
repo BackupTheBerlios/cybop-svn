@@ -20,18 +20,403 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2007-04-23 23:15:07 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2007-05-26 21:19:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef OPTIONALISER_SOURCE
 #define OPTIONALISER_SOURCE
 
+#include <sys/stat.h>
+#include <fcntl.h>
 #include <stdio.h>
-#include "../controller/manager.c"
-#include "../controller/tester.c"
+#include <string.h>
+#include "../globals/constants/character/character_constants.c"
 #include "../globals/constants/command_line/command_line_constants.c"
+#include "../globals/constants/cybol/cybol_abstraction_constants.c"
 #include "../globals/constants/integer/integer_constants.c"
+#include "../globals/constants/log/log_level_constants.c"
+#include "../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../globals/constants/pointer/pointer_constants.c"
+#include "../globals/constants/cyboi_constants.c"
+#include "../globals/constants/system_constants.c"
+
+/**
+ * Optionalises the knowledge option.
+ *
+ * @param p0 the cybol knowledge file name
+ * @param p1 the cybol knowledge file name count
+ * @param p2 the file name value
+ * @param p3 the file name value count
+ */
+void optionalise_knowledge(void* p0, void* p1, void* p2, void* p3) {
+
+    if (p3 != *NULL_POINTER) {
+
+        int* fc = (int*) p3;
+
+        if (p2 != *NULL_POINTER) {
+
+            void** f = (void**) p2;
+
+            if (p1 != *NULL_POINTER) {
+
+                int* kc = (int*) p1;
+
+                if (p0 != *NULL_POINTER) {
+
+                    void** k = (void**) p0;
+
+                    // CAUTION! DO NOT use logging functionality here!
+                    // The logger will not work before its options are set.
+                    // fputs("Debug: Optionalise knowledge.\n", stdout);
+
+                    // Set cybol knowledge file name.
+                    *k = *f;
+                    *kc = *fc;
+
+                } else {
+
+                    // CAUTION! DO NOT use logging functionality here!
+                    // The logger will not work before its options are set.
+                    fputs("Error: Could not optionalise knowledge. The knowledge is null.\n", stdout);
+                }
+
+            } else {
+
+                // CAUTION! DO NOT use logging functionality here!
+                // The logger will not work before its options are set.
+                fputs("Error: Could not optionalise knowledge. The knowledge count is null.\n", stdout);
+            }
+
+        } else {
+
+            // CAUTION! DO NOT use logging functionality here!
+            // The logger will not work before its options are set.
+            fputs("Error: Could not optionalise knowledge. The cybol file name is null.\n", stdout);
+        }
+
+    } else {
+
+        // CAUTION! DO NOT use logging functionality here!
+        // The logger will not work before its options are set.
+        fputs("Error: Could not optionalise knowledge. The cybol file name count is null.\n", stdout);
+    }
+}
+
+/**
+ * Optionalises the log level option.
+ *
+ * @param p0 the log level
+ * @param p1 the log level name
+ * @param p2 the log level name count
+ */
+void optionalise_log_level(void* p0, void* p1, void* p2) {
+
+    if (p0 != *NULL_POINTER) {
+
+        int* l = (int*) p0;
+
+        // CAUTION! DO NOT use logging functionality here!
+        // The logger will not work before its options are set.
+        // fputs("Debug: Optionalise log level.\n", stdout);
+
+        // The comparison result.
+        int r = *NUMBER_0_INTEGER;
+
+        if (r == *NUMBER_0_INTEGER) {
+
+            compare_arrays(p1, p2, (void*) OFF_LOG_LEVEL_COMMAND_LINE_VALUE, (void*) OFF_LOG_LEVEL_COMMAND_LINE_VALUE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+            if (r != *NUMBER_0_INTEGER) {
+
+                // Set log level.
+                *l = *OFF_LOG_LEVEL;
+            }
+        }
+
+        if (r == *NUMBER_0_INTEGER) {
+
+            compare_arrays(p1, p2, (void*) ERROR_LOG_LEVEL_COMMAND_LINE_VALUE, (void*) ERROR_LOG_LEVEL_COMMAND_LINE_VALUE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+            if (r != *NUMBER_0_INTEGER) {
+
+                // Set log level.
+                *l = *ERROR_LOG_LEVEL;
+            }
+        }
+
+        if (r == *NUMBER_0_INTEGER) {
+
+            compare_arrays(p1, p2, (void*) WARNING_LOG_LEVEL_COMMAND_LINE_VALUE, (void*) WARNING_LOG_LEVEL_COMMAND_LINE_VALUE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+            if (r != *NUMBER_0_INTEGER) {
+
+                // Set log level.
+                *l = *WARNING_LOG_LEVEL;
+            }
+        }
+
+        if (r == *NUMBER_0_INTEGER) {
+
+            compare_arrays(p1, p2, (void*) INFORMATION_LOG_LEVEL_COMMAND_LINE_VALUE, (void*) INFORMATION_LOG_LEVEL_COMMAND_LINE_VALUE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+            if (r != *NUMBER_0_INTEGER) {
+
+                // Set log level.
+                *l = *INFORMATION_LOG_LEVEL;
+            }
+        }
+
+        if (r == *NUMBER_0_INTEGER) {
+
+            compare_arrays(p1, p2, (void*) DEBUG_LOG_LEVEL_COMMAND_LINE_VALUE, (void*) DEBUG_LOG_LEVEL_COMMAND_LINE_VALUE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+            if (r != *NUMBER_0_INTEGER) {
+
+                // Set log level.
+                *l = *DEBUG_LOG_LEVEL;
+            }
+        }
+
+    } else {
+
+        // CAUTION! DO NOT use logging functionality here!
+        // The logger will not work before its options are set.
+        fputs("Error: Could not optionalise log level. The log level is null.\n", stdout);
+    }
+}
+
+/**
+ * Optionalises the log file option.
+ *
+ * @param p0 the log file descriptor
+ * @param p1 the log file name
+ * @param p2 the log file name count
+ */
+void optionalise_log_file(void* p0, void* p1, void* p2) {
+
+    if (p2 != *NULL_POINTER) {
+
+        int* nc = (int*) p2;
+
+        if (p0 != *NULL_POINTER) {
+
+            int* f = (int*) p0;
+
+            // CAUTION! DO NOT use logging functionality here!
+            // The logger will not work before its options are set.
+            // fputs("Debug: Optionalise log file.\n", stdout);
+
+            // The terminated file name.
+            void* t = *NULL_POINTER;
+            int ts = *nc + *NUMBER_1_INTEGER;
+
+            // Allocate terminated file name.
+            allocate_array((void*) &t, (void*) &ts, (void*) CHARACTER_ARRAY);
+
+            // Set terminated file name by first copying the actual name
+            // and then adding the null termination character.
+            set_array_elements(t, (void*) NUMBER_0_INTEGER, p1, p2, (void*) CHARACTER_ARRAY);
+            set_array_elements(t, p2, (void*) NULL_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+
+            // The log file status flags.
+            int s = O_TRUNC | O_CREAT | O_WRONLY;
+            // The log file.
+            *f = open((char*) t, s);
+
+            if (*f >= *NUMBER_0_INTEGER) {
+
+                // The file owner.
+                int o = *INVALID_VALUE;
+
+                // The file group.
+                int g = *INVALID_VALUE;
+
+                // Set file owner.
+                chown((char*) t, o, g);
+
+                // The file access rights.
+                //?? TODO: When trying to cross-compile cyboi for windows,
+                //?? the two S_IRGRP and S_IWGRP were not recognised by mingw.
+                int r = S_IRUSR | S_IWUSR; //?? | S_IRGRP | S_IWGRP;
+
+                // Set file access rights.
+                chmod((char*) t, r);
+
+            } else {
+
+                // CAUTION! DO NOT use logging functionality here!
+                // The logger will not work before its options are set.
+                fputs("Error: Could not optionalise log file. An error occured when trying to open the file.\n", stdout);
+            }
+
+            // Deallocate terminated file name.
+            deallocate_array((void*) &t, (void*) &ts, (void*) CHARACTER_ARRAY);
+
+        } else {
+
+            // CAUTION! DO NOT use logging functionality here!
+            // The logger will not work before its options are set.
+            fputs("Error: Could not optionalise log file. The file descriptor is null.\n", stdout);
+        }
+
+    } else {
+
+        // CAUTION! DO NOT use logging functionality here!
+        // The logger will not work before its options are set.
+        fputs("Error: Could not optionalise log file. The file name count is null.\n", stdout);
+    }
+}
+
+/**
+ * Deoptionalises the log file option.
+ *
+ * @param p0 the log file descriptor
+ */
+void deoptionalise_log_file(void* p0) {
+
+    if (p0 != *NULL_POINTER) {
+
+        int* f = (int*) p0;
+
+        // CAUTION! DO NOT use logging functionality here!
+        // The logger will not work before its options are set.
+        // fputs("Debug: Deoptionalise log file.\n", stdout);
+
+        if (*f >= *NUMBER_0_INTEGER) {
+
+            // Close log file.
+            close(*f);
+
+        } else {
+
+            // CAUTION! DO NOT use logging functionality here!
+            // The logger will not work before its options are set.
+            // fputs("Error: Could not deoptionalise log file. The file descriptor is invalid (smaller than zero).\n", stdout);
+        }
+
+    } else {
+
+        // CAUTION! DO NOT use logging functionality here!
+        // The logger will not work before its options are set.
+        fputs("Error: Could not deoptionalise log file. The file descriptor is null.\n", stdout);
+    }
+}
+
+/**
+ * Optionalises the given command line argument option.
+ *
+ * @param p0 the operation mode
+ * @param p1 the cybol knowledge file path
+ * @param p2 the cybol knowledge file path count
+ * @param p3 the log level
+ * @param p4 the log file
+ * @param p5 the value
+ * @param p6 the value count
+ * @param p7 the option
+ * @param p8 the option count
+ */
+void optionalise_option(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8) {
+
+    if (p5 != *NULL_POINTER) {
+
+        void** v = (void**) p5;
+
+        if (p0 != *NULL_POINTER) {
+
+            int* m = (int*) p0;
+
+            // CAUTION! DO NOT use logging functionality here!
+            // The logger will not work before its options are set.
+            // fputs("Debug: Optionalise option.\n", stdout);
+
+            // The comparison result.
+            int r = *NUMBER_0_INTEGER;
+
+            if (r == *NUMBER_0_INTEGER) {
+
+                compare_arrays(p7, p8, (void*) VERSION_COMMAND_LINE_OPTION, (void*) VERSION_COMMAND_LINE_OPTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+                if (r != *NUMBER_0_INTEGER) {
+
+                    // Set version operation mode.
+                    *m = *VERSION_OPERATION_MODE;
+                }
+            }
+
+            if (r == *NUMBER_0_INTEGER) {
+
+                compare_arrays(p7, p8, (void*) HELP_COMMAND_LINE_OPTION, (void*) HELP_COMMAND_LINE_OPTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+                if (r != *NUMBER_0_INTEGER) {
+
+                    // Set help operation mode.
+                    *m = *HELP_OPERATION_MODE;
+                }
+            }
+
+            if (r == *NUMBER_0_INTEGER) {
+
+                compare_arrays(p7, p8, (void*) TEST_COMMAND_LINE_OPTION, (void*) TEST_COMMAND_LINE_OPTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+                if (r != *NUMBER_0_INTEGER) {
+
+                    // Set test operation mode.
+                    *m = *TEST_OPERATION_MODE;
+                }
+            }
+
+            if (r == *NUMBER_0_INTEGER) {
+
+                compare_arrays(p7, p8, (void*) KNOWLEDGE_COMMAND_LINE_OPTION, (void*) KNOWLEDGE_COMMAND_LINE_OPTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+                if (r != *NUMBER_0_INTEGER) {
+
+                    // Set cybol knowledge file path.
+                    optionalise_knowledge(p1, p2, p5, p6);
+
+                    // Set knowledge operation mode.
+                    *m = *KNOWLEDGE_OPERATION_MODE;
+                }
+            }
+
+            if (r == *NUMBER_0_INTEGER) {
+
+                compare_arrays(p7, p8, (void*) LOG_LEVEL_COMMAND_LINE_OPTION, (void*) LOG_LEVEL_COMMAND_LINE_OPTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+                if (r != *NUMBER_0_INTEGER) {
+
+                    // Set log level, which is a global variable.
+                    optionalise_log_level(p3, *v, p6);
+                }
+            }
+
+            if (r == *NUMBER_0_INTEGER) {
+
+                compare_arrays(p7, p8, (void*) LOG_FILE_COMMAND_LINE_OPTION, (void*) LOG_FILE_COMMAND_LINE_OPTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+                if (r != *NUMBER_0_INTEGER) {
+
+                    // Set log file to store log messages in.
+                    optionalise_log_file(p4, *v, p6);
+                }
+            }
+
+        } else {
+
+            // CAUTION! DO NOT use logging functionality here!
+            // The logger will not work before its options are set.
+            fputs("Error: Could not optionalise option. The operation mode is null.\n", stdout);
+        }
+
+    } else {
+
+        // CAUTION! DO NOT use logging functionality here!
+        // The logger will not work before its options are set.
+        fputs("Error: Could not optionalise option. The value is null.\n", stdout);
+    }
+}
 
 /**
  * Optionalises the given command line argument options.
@@ -45,63 +430,151 @@
  * A further option that was added is '--test'. It is just to ease cyboi
  * development because that way, programmers can easily call test functions.
  *
- * If none of these options can be found, cyboi interprets the option command
- * line argument as cybol knowledge model file and starts up the system.
+ * The standard option used to run cybol applications is '--knowledge'.
+ * Behind it, the cybol file name needs to be given as argument.
+ * The cyboi interpreter then starts up the system.
  *
- * @param p0 the option
- * @param p1 the option count
+ * If none of these options can be found, cyboi displays the help message.
+ *
+ * @param p0 the operation mode
+ * @param p1 the cybol knowledge file path
+ * @param p2 the cybol knowledge file path count
+ * @param p3 the log level
+ * @param p4 the log file
+ * @param p5 the options
+ * @param p6 the options count
  */
-void optionalise(void* p0, void* p1) {
+void optionalise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
-    log_message_debug("Information: Optionalise command line argument options.");
+    if (p6 != *NULL_POINTER) {
 
-    // The comparison result.
-    int r = *NUMBER_0_INTEGER;
+        int* c = (int*) p6;
 
-    if (r == *NUMBER_0_INTEGER) {
+        // CAUTION! DO NOT use logging functionality here!
+        // The logger will not work before its options are set.
+        // fputs("Information: Optionalise command line argument options.\n", stdout);
 
-        compare_arrays(p0, p1, (void*) VERSION_COMMAND_LINE_OPTION, (void*) VERSION_COMMAND_LINE_OPTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        // The loop variable.
+        //
+        // CAUTION! Do NOT initialise it with 0, as the first command line
+        // argument is the command itself, and not an option!
+        int j = *NUMBER_1_INTEGER;
+        // The value index, which is equal to the loop variable increased by one.
+        // It is initialised with the options count by default, so that it does
+        // NOT get processed, unless set to a valid value lying within the array.
+        int i = *c;
+        // The command line argument option.
+        void** o = NULL_POINTER;
+        // The command line argument option count (number of characters).
+        int oc = *NUMBER_0_INTEGER;
+        // The command line argument value.
+        void** v = NULL_POINTER;
+        // The command line argument value count (number of characters).
+        int vc = *NUMBER_0_INTEGER;
 
-        if (r != *NUMBER_0_INTEGER) {
+        while (*NUMBER_1_INTEGER) {
 
-            log_message_debug("Information: Write cyboi version to standard output.");
+            if (j >= *c) {
 
-            // Write cyboi version to standard output.
-            write(fileno(stdout), (void*) CYBOI_VERSION_LOG_MESSAGE, *CYBOI_VERSION_LOG_MESSAGE_COUNT);
+                break;
+            }
+
+            // Get command line argument option.
+            // Example: "--loglevel"
+            get_array_elements(p5, (void*) &j, (void*) &o, (void*) POINTER_ARRAY);
+
+            if (*o != *NULL_POINTER) {
+
+                // Get command line argument option count (number of characters).
+                //
+                // There are two possibilities to determine it:
+                // 1 Force the user to give it as extra command line parameter
+                //   (this would be proper, but not very user-friendly)
+                // 2 Rely on the null termination character to determine it
+                //   (this is a rather dirty workaround, but the strlen function can be used)
+                //
+                // Possibility 2 is applied here.
+                oc = strlen((char*) *o);
+
+            } else {
+
+                // CAUTION! DO NOT use logging functionality here!
+                // The logger will not work before its options are set.
+                fputs("Error: Could not optionalise command line argument options. The command line argument option is null.\n", stdout);
+            }
+
+            // Calculate value index.
+            i = j + *NUMBER_1_INTEGER;
+
+            if (i < *c) {
+
+                // CAUTION! Only try to access the value following an option,
+                // if the array is large enough, to avoid access violation errors!
+
+                // Get command line argument value, standing after the option.
+                // Example: "debug"
+                get_array_elements(p5, (void*) &i, (void*) &v, (void*) POINTER_ARRAY);
+
+                if (*v != *NULL_POINTER) {
+
+                    // Get command line argument value count (number of characters).
+                    //
+                    // There are two possibilities to determine it:
+                    // 1 Force the user to give it as extra command line parameter
+                    //   (this would be proper, but not very user-friendly)
+                    // 2 Rely on the null termination character to determine it
+                    //   (this is a rather dirty workaround, but the strlen function can be used)
+                    //
+                    // Possibility 2 is applied here.
+                    vc = strlen((char*) *v);
+
+                } else {
+
+                    // CAUTION! DO NOT use logging functionality here!
+                    // The logger will not work before its options are set.
+                    fputs("Error: Could not optionalise command line argument options. The command line argument value is null.\n", stdout);
+                }
+            }
+
+            // Optionalise the option and its value.
+            // CAUTION! The value gets handed over as reference, as it gets
+            // copied for the cybol knowledge file name.
+            optionalise_option(p0, p1, p2, p3, p4, v, (void*) &vc, *o, (void*) &oc);
+
+            // Reset command line argument option.
+            o = NULL_POINTER;
+            // Reset command line argument option count (number of characters).
+            oc = *NUMBER_0_INTEGER;
+            // Reset command line argument value.
+            v = NULL_POINTER;
+            // Reset command line argument value count (number of characters).
+            vc = *NUMBER_0_INTEGER;
+
+            // Increment loop variable.
+            j++;
         }
+
+    } else {
+
+        // CAUTION! DO NOT use logging functionality here!
+        // The logger will not work before its options are set.
+        fputs("Error: Could not optionalise command line argument options. The options count is null.\n", stdout);
     }
+}
 
-    if (r == *NUMBER_0_INTEGER) {
+/**
+ * Deoptionalises the given command line argument options.
+ *
+ * @param p0 the log file descriptor
+ */
+void deoptionalise(void* p0) {
 
-        compare_arrays(p0, p1, (void*) HELP_COMMAND_LINE_OPTION, (void*) HELP_COMMAND_LINE_OPTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+    // CAUTION! DO NOT use logging functionality here!
+    // The logger will not work before its options are set.
+    // fputs("Information: Deoptionalise command line argument options.\n", stdout);
 
-        if (r != *NUMBER_0_INTEGER) {
-
-            log_message_debug("Information: Write cyboi help message to standard output.");
-
-            // Write help message to standard output.
-            write(fileno(stdout), (void*) CYBOI_HELP_LOG_MESSAGE, *CYBOI_HELP_LOG_MESSAGE_COUNT);
-        }
-    }
-
-    if (r == *NUMBER_0_INTEGER) {
-
-        compare_arrays(p0, p1, (void*) TEST_COMMAND_LINE_OPTION, (void*) TEST_COMMAND_LINE_OPTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != *NUMBER_0_INTEGER) {
-
-            // Call test function.
-            // CAUTION! This has to stand AFTER the initialisation of
-            // global variables, because these are used by the testing code!
-            test();
-        }
-    }
-
-    if (r == *NUMBER_0_INTEGER) {
-
-        // Manage system startup and shutdown using the given cybol file.
-        manage(p0, p1);
-    }
+    // Deoptionalise log file.
+    deoptionalise_log_file(p0);
 }
 
 /* OPTIONALISER_SOURCE */

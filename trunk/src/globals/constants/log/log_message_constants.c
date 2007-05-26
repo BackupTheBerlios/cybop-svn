@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2007-05-26 14:35:16 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2007-05-26 21:19:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -926,7 +926,7 @@ static char* COULD_NOT_EXECUTE_CYBOI_THE_COMMAND_LINE_ARGUMENT_VECTOR_IS_NULL_ME
 static int* COULD_NOT_EXECUTE_CYBOI_THE_COMMAND_LINE_ARGUMENT_VECTOR_IS_NULL_MESSAGE_COUNT = NUMBER_66_INTEGER_ARRAY;
 
 /** The cyboi version log message. */
-static char CYBOI_VERSION_LOG_MESSAGE_ARRAY[] = {'C', 'Y', 'B', 'O', 'I', ' ', '0', '.', '8', '.', '0', '\n',
+static char CYBOI_VERSION_LOG_MESSAGE_ARRAY[] = {'C', 'y', 'b', 'e', 'r', 'n', 'e', 't', 'i', 'c', 's', ' ', 'O', 'r', 'i', 'e', 'n', 't', 'e', 'd', ' ', 'I', 'n', 't', 'e', 'r', 'p', 'r', 'e', 't', 'e', 'r', ' ', '(', 'C', 'Y', 'B', 'O', 'I', ')', ' ', '0', '.', '8', '.', '0', '\n',
     'C', 'o', 'p', 'y', 'r', 'i', 'g', 'h', 't', ' ', '(', 'C', ')', ' ', '1', '9', '9', '9', '-', '2', '0', '0', '7', '.', ' ', 'C', 'h', 'r', 'i', 's', 't', 'i', 'a', 'n', ' ', 'H', 'e', 'l', 'l', 'e', 'r', ' ', 'a', 'n', 'd', ' ', 't', 'h', 'e', ' ', 'C', 'Y', 'B', 'O', 'P', ' ', 'd', 'e', 'v', 'e', 'l', 'o', 'p', 'e', 'r', 's', '.', '\n',
     'C', 'Y', 'B', 'O', 'I', ' ', 'c', 'o', 'm', 'e', 's', ' ', 'w', 'i', 't', 'h', ' ', 'N', 'O', ' ', 'W', 'A', 'R', 'R', 'A', 'N', 'T', 'Y', ',', '\n',
     't', 'o', ' ', 't', 'h', 'e', ' ', 'e', 'x', 't', 'e', 'n', 't', ' ', 'p', 'e', 'r', 'm', 'i', 't', 't', 'e', 'd', ' ', 'b', 'y', ' ', 'l', 'a', 'w', '.', '\n',
@@ -935,18 +935,24 @@ static char CYBOI_VERSION_LOG_MESSAGE_ARRAY[] = {'C', 'Y', 'B', 'O', 'I', ' ', '
     'F', 'o', 'r', ' ', 'm', 'o', 'r', 'e', ' ', 'i', 'n', 'f', 'o', 'r', 'm', 'a', 't', 'i', 'o', 'n', ' ', 'a', 'b', 'o', 'u', 't', ' ', 't', 'h', 'e', 's', 'e', ' ', 'm', 'a', 't', 't', 'e', 'r', 's', ',', '\n',
     's', 'e', 'e', ' ', 't', 'h', 'e', ' ', 'f', 'i', 'l', 'e', 's', ' ', 'n', 'a', 'm', 'e', 'd', ' ', 'C', 'O', 'P', 'Y', 'I', 'N', 'G', '.', '\n'};
 static char* CYBOI_VERSION_LOG_MESSAGE = CYBOI_VERSION_LOG_MESSAGE_ARRAY;
-static int* CYBOI_VERSION_LOG_MESSAGE_COUNT = NUMBER_301_INTEGER_ARRAY;
+static int* CYBOI_VERSION_LOG_MESSAGE_COUNT = NUMBER_336_INTEGER_ARRAY;
 
 /** The cyboi help log message. */
 static char CYBOI_HELP_LOG_MESSAGE_ARRAY[] = {
     'P', 'a', 'r', 'a', 'm', 'e', 't', 'e', 'r', 's', ' ', 'h', 'a', 'v', 'e', ' ', 't', 'o', ' ', 'b', 'e', ' ', 'g', 'i', 'v', 'e', 'n', '!', '\n',
-    'U', 's', 'a', 'g', 'e', ':', ' ', 'c', 'y', 'b', 'o', 'i', ' ', 'c', 'o', 'n', 'f', 'i', 'g', 'u', 'r', 'a', 't', 'i', 'o', 'n', 'f', 'i', 'l', 'e', '\n',
-    'E', 'x', 'a', 'm', 'p', 'l', 'e', ':', ' ', 'c', 'y', 'b', 'o', 'i', ' ', 'r', 'e', 's', 'm', 'e', 'd', 'i', 'c', 'i', 'n', 'a', 'e', '/', 'r', 'u', 'n', '.', 'c', 'y', 'b', 'o', 'l', '\n',
+    'U', 's', 'a', 'g', 'e', ':', ' ', 'c', 'y', 'b', 'o', 'i', ' ', '[', '-', '-', 'v', 'e', 'r', 's', 'i', 'o', 'n', ']', ' ', '[', '-', '-', 'h', 'e', 'l', 'p', ']', ' ', '[', '-', '-', 't', 'e', 's', 't', ']', ' ', '[', '-', '-', 'k', 'n', 'o', 'w', 'l', 'e', 'd', 'g', 'e', ' ', 'A', 'R', 'G', ']', ' ', '[', '-', '-', 'l', 'o', 'g', 'l', 'e', 'v', 'e', 'l', ' ', 'A', 'R', 'G', ']', ' ', '[', '-', '-', 'l', 'o', 'g', 'f', 'i', 'l', 'e', ' ', 'A', 'R', 'G', ']', '\n',
+    ' ', ' ', ' ', ' ', '-', '-', 'v', 'e', 'r', 's', 'i', 'o', 'n', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'D', 'i', 's', 'p', 'l', 'a', 'y', 's', ' ', 't', 'h', 'e', ' ', 'c', 'u', 'r', 'r', 'e', 'n', 't', ' ', 'v', 'e', 'r', 's', 'i', 'o', 'n', '.', '\n',
+    ' ', ' ', ' ', ' ', '-', '-', 'h', 'e', 'l', 'p', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'D', 'i', 's', 'p', 'l', 'a', 'y', 's', ' ', 't', 'h', 'i', 's', ' ', 'h', 'e', 'l', 'p', ' ', 'm', 'e', 's', 's', 'a', 'g', 'e', '.', '\n',
+    ' ', ' ', ' ', ' ', '-', '-', 't', 'e', 's', 't', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'S', 't', 'a', 'r', 't', 's', ' ', 'c', 'y', 'b', 'o', 'i', ' ', 'i', 'n', ' ', 't', 'e', 's', 't', ' ', 'm', 'o', 'd', 'e', '.', '\n',
+    ' ', ' ', ' ', ' ', '-', '-', 'k', 'n', 'o', 'w', 'l', 'e', 'd', 'g', 'e', ' ', 'A', 'R', 'G', ' ', 'S', 't', 'a', 'r', 't', 's', ' ', 'c', 'y', 'b', 'o', 'i', ' ', 'i', 'n', ' ', 'k', 'n', 'o', 'w', 'l', 'e', 'd', 'g', 'e', ' ', 'm', 'o', 'd', 'e', '.', ' ', 'T', 'a', 'k', 'e', 's', ' ', 'A', 'R', 'G', ' ', 'a', 's', ' ', 'c', 'y', 'b', 'o', 'l', ' ', 'k', 'n', 'o', 'w', 'l', 'e', 'd', 'g', 'e', ' ', 'f', 'i', 'l', 'e', '.', ' ', 'T', 'h', 'i', 's', ' ', 'i', 's', ' ', 't', 'h', 'e', ' ', 's', 't', 'a', 'n', 'd', 'a', 'r', 'd', ' ', 'w', 'a', 'y', ' ', 't', 'o', ' ', 'u', 's', 'e', ' ', 'c', 'y', 'b', 'o', 'i', '.', '\n',
+    ' ', ' ', ' ', ' ', '-', '-', 'l', 'o', 'g', 'l', 'e', 'v', 'e', 'l', ' ', 'A', 'R', 'G', ' ', ' ', 'S', 'e', 't', 's', ' ', 't', 'h', 'e', ' ', 'l', 'o', 'g', ' ', 'l', 'e', 'v', 'e', 'l', '.', ' ', 'T', 'h', 'e', ' ', 'A', 'R', 'G', ' ', 'm', 'a', 'y', ' ', 'b', 'e', ' ', 'o', 'n', 'e', ' ', 'o', 'f', ':', ' ', 'o', 'f', 'f', ',', ' ', 'e', 'r', 'r', 'o', 'r', ',', ' ', 'w', 'a', 'r', 'n', 'i', 'n', 'g', ',', ' ', 'i', 'n', 'f', 'o', 'r', 'm', 'a', 't', 'i', 'o', 'n', ',', ' ', 'd', 'e', 'b', 'u', 'g', '.', ' ', 'T', 'h', 'e', ' ', 'd', 'e', 'f', 'a', 'u', 'l', 't', ' ', 'i', 's', ' ', 'o', 'f', 'f', '.', '\n',
+    ' ', ' ', ' ', ' ', '-', '-', 'l', 'o', 'g', 'f', 'i', 'l', 'e', ' ', 'A', 'R', 'G', ' ', ' ', ' ', 'L', 'o', 'g', 's', ' ', 'm', 'e', 's', 's', 'a', 'g', 'e', 's', ' ', 't', 'o', ' ', 't', 'h', 'e', ' ', 'f', 'i', 'l', 'e', ' ', 's', 'p', 'e', 'c', 'i', 'f', 'i', 'e', 'd', ' ', 'b', 'y', ' ', 'A', 'R', 'G', '.', '\n',
+    'E', 'x', 'a', 'm', 'p', 'l', 'e', ':', ' ', 'c', 'y', 'b', 'o', 'i', ' ', '-', '-', 'k', 'n', 'o', 'w', 'l', 'e', 'd', 'g', 'e', ' ', 'r', 'e', 's', 'm', 'e', 'd', 'i', 'c', 'i', 'n', 'a', 'e', '/', 'r', 'u', 'n', '.', 'c', 'y', 'b', 'o', 'l', '\n',
     'R', 'e', 'p', 'o', 'r', 't', ' ', 'b', 'u', 'g', 's', ' ', 't', 'o', ' ',
     '<', 'c', 'y', 'b', 'o', 'p', '-', 'd', 'e', 'v', 'e', 'l', 'o', 'p', 'e', 'r', 's', '@', 'l', 'i', 's', 't', 's', '.', 'b', 'e', 'r', 'l', 'i', 'o', 's', '.', 'd', 'e', '>', ' ',
     'o', 'r', ' ', '<', 'c', 'h', 'r', 'i', 's', 't', 'i', 'a', 'n', '.', 'h', 'e', 'l', 'l', 'e', 'r', '@', 't', 'u', 'x', 't', 'a', 'x', '.', 'd', 'e', '>', '.', '\n'};
 static char* CYBOI_HELP_LOG_MESSAGE = CYBOI_HELP_LOG_MESSAGE_ARRAY;
-static int* CYBOI_HELP_LOG_MESSAGE_COUNT = NUMBER_182_INTEGER_ARRAY;
+static int* CYBOI_HELP_LOG_MESSAGE_COUNT = NUMBER_716_INTEGER_ARRAY;
 
 /* LOG_MESSAGE_CONSTANTS_SOURCE */
 #endif

@@ -20,14 +20,14 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2007-05-16 19:29:02 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2007-05-26 21:19:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef COMPLEX_CONVERTER_SOURCE
 #define COMPLEX_CONVERTER_SOURCE
 
-#include "../../globals/constants/log_message/log_message_constants.c"
+#include "../../globals/constants/log/log_message_constants.c"
 #include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/logger/logger.c"
 
@@ -59,7 +59,7 @@ void parse_complex(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 void* d = (void*) p0;
 
 /*??
-            //??    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Initialise complex.");
+            //??    log_message((void*) &INFORMATION_LOG_LEVEL, (void*) &"Initialise complex.");
 
             //??    fscanf(p1, %d, (void*) &(t->real));
             //??    fscanf(p1, %d, (void*) &(t->imaginary));
@@ -100,7 +100,7 @@ void parse_complex(void* p0, void* p1, void* p2, void* p3, void* p4) {
 void serialise_complex(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
 /*??
-            //??    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Finalise complex.");
+            //??    log_message((void*) &INFORMATION_LOG_LEVEL, (void*) &"Finalise complex.");
 
                 // Initialise elements.
                 int i = 0;

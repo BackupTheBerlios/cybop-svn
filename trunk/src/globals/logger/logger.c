@@ -27,7 +27,7 @@
  * Otherwise, an ENDLESS LOOP will be created, because cyboi's
  * array procedures call the logger in turn.
  *
- * @version $Revision: 1.16 $ $Date: 2007-05-16 19:29:02 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2007-05-26 21:19:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -40,7 +40,10 @@
 #include <string.h>
 #include <unistd.h>
 #include "../../globals/constants/character/character_constants.c"
-#include "../../globals/constants/log_message/log_message_constants.c"
+#include "../../globals/constants/integer/integer_constants.c"
+#include "../../globals/constants/log/log_level_constants.c"
+#include "../../globals/constants/log/log_level_name_constants.c"
+#include "../../globals/constants/log/log_message_constants.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/variables/variables.c"
@@ -74,13 +77,13 @@ void add_log_details(void* p0, void* p1, void* p2, void* p3) {
                     void** e = (void**) p0;
 
                     // The loop index.
-                    int j = 0;
+                    int j = *NUMBER_0_INTEGER;
                     // The destination character.
                     char* dest = (char*) *NULL_POINTER;
                     // The source character.
                     char* src = (char*) *NULL_POINTER;
 
-                    while (1) {
+                    while (*NUMBER_1_INTEGER) {
 
                         if (j >= *dc) {
 
@@ -164,12 +167,12 @@ void add_log_level_name(void* p0, void* p1, void* p2, void* p3) {
                         add_log_details(p1, p3, (void*) DEBUG_LOG_LEVEL_NAME, (void*) DEBUG_LOG_LEVEL_NAME_COUNT);
                         *ei = *ei + *DEBUG_LOG_LEVEL_NAME_COUNT;
 
-                    } else if (*l == *INFO_LOG_LEVEL) {
+                    } else if (*l == *INFORMATION_LOG_LEVEL) {
 
-                        *ec = *ec + *INFO_LOG_LEVEL_NAME_COUNT;
+                        *ec = *ec + *INFORMATION_LOG_LEVEL_NAME_COUNT;
                         *e = (void*) realloc(*e, *ec);
-                        add_log_details(p1, p3, (void*) INFO_LOG_LEVEL_NAME, (void*) INFO_LOG_LEVEL_NAME_COUNT);
-                        *ei = *ei + *INFO_LOG_LEVEL_NAME_COUNT;
+                        add_log_details(p1, p3, (void*) INFORMATION_LOG_LEVEL_NAME, (void*) INFORMATION_LOG_LEVEL_NAME_COUNT);
+                        *ei = *ei + *INFORMATION_LOG_LEVEL_NAME_COUNT;
 
                     } else if (*l == *WARNING_LOG_LEVEL) {
 
@@ -237,14 +240,14 @@ void log_message(void* p0, void* p1, void* p2) {
             int* l = (int*) p0;
 
             // Only log message if log level matches.
-            if (*l <= *LOG_LEVEL) {
+            if (*l <= LOG_LEVEL) {
 
                 // The log entry.
                 void* e = *NULL_POINTER;
                 // The log entry count.
-                int ec = 0;
+                int ec = *NUMBER_0_INTEGER;
                 // The log entry index for adding characters.
-                int ei = 0;
+                int ei = *NUMBER_0_INTEGER;
 
                 // Create log entry.
                 e = (void*) malloc(ec);
@@ -254,16 +257,16 @@ void log_message(void* p0, void* p1, void* p2) {
 
                 // Reallocate log entry at once, for all following entries
                 // (colon + space + message + line feed).
-                ec = ec + 1 + 1 + *mc + 1;
+                ec = ec + *NUMBER_1_INTEGER + *NUMBER_1_INTEGER + *mc + *NUMBER_1_INTEGER;
                 e = (void*) realloc(e, ec);
 
                 // Add colon to log entry.
                 add_log_details((void*) &e, (void*) &ei, (void*) COLON_CHARACTER, (void*) PRIMITIVE_COUNT);
-                ei = ei + 1;
+                ei = ei + *NUMBER_1_INTEGER;
 
                 // Add space to log entry.
                 add_log_details((void*) &e, (void*) &ei, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT);
-                ei = ei + 1;
+                ei = ei + *NUMBER_1_INTEGER;
 
                 // Add message to log entry.
                 add_log_details((void*) &e, (void*) &ei, p1, p2);
@@ -271,10 +274,23 @@ void log_message(void* p0, void* p1, void* p2) {
 
                 // Add new line to log entry.
                 add_log_details((void*) &e, (void*) &ei, (void*) LINE_FEED_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT);
-                ei = ei + 1;
+                ei = ei + *NUMBER_1_INTEGER;
 
-                // Log entry to output.
-                write(LOG_OUTPUT, e, ec);
+                if (LOG_OUTPUT >= *NUMBER_0_INTEGER) {
+
+                    // Send log entry to output.
+                    write(LOG_OUTPUT, e, ec);
+
+                } else {
+
+                    // The log output value is smaller than zero.
+                    // Probably, it still has its default value of -1
+                    // as set in the file "globals/variables/variables.c".
+
+                    // CAUTION! DO NOT use logging functionality here!
+                    // The logger cannot log itself.
+                    fputs("Error: Could not log message. The log output is undefined.\n", stdout);
+                }
 
                 // Destroy log entry.
                 free(e);

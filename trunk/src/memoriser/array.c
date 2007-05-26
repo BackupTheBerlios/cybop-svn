@@ -49,7 +49,7 @@
  * the array size needs to be given extra here because sizeof will not work.
  * See: http://pegasus.rutgers.edu/~elflord/cpp/gotchas/index.shtml
  *
- * @version $Revision: 1.13 $ $Date: 2007-05-24 22:52:32 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2007-05-26 21:19:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -57,7 +57,7 @@
 #define ARRAY_SOURCE
 
 #include "../globals/constants/cybol/cybol_abstraction_constants.c"
-#include "../globals/constants/log_message/log_message_constants.c"
+#include "../globals/constants/log/log_message_constants.c"
 #include "../globals/constants/pointer/pointer_constants.c"
 #include "../globals/logger/logger.c"
 #include "../memoriser/array/character_array.c"

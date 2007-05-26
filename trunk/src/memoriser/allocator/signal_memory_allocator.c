@@ -23,7 +23,7 @@
  * This file contains the functionality to:
  * - create a signal memory in memory
  *
- * @version $Revision: 1.11 $ $Date: 2007-05-16 19:29:02 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2007-05-26 21:19:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -32,7 +32,7 @@
 
 #include "../../globals/constants/cybol/cybol_abstraction_constants.c"
 #include "../../globals/constants/integer/integer_constants.c"
-#include "../../globals/constants/log_message/log_message_constants.c"
+#include "../../globals/constants/log/log_message_constants.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/logger/logger.c"
@@ -50,7 +50,7 @@ void allocate_signal_memory(void* p0, void* p1) {
 
         void** s = (void**) p0;
 
-        log_message((void*) INFO_LOG_LEVEL, (void*) CREATE_SIGNAL_MEMORY_MESSAGE, (void*) CREATE_SIGNAL_MEMORY_MESSAGE_COUNT);
+        log_message((void*) INFORMATION_LOG_LEVEL, (void*) CREATE_SIGNAL_MEMORY_MESSAGE, (void*) CREATE_SIGNAL_MEMORY_MESSAGE_COUNT);
 
         // Allocate signal memory.
         allocate_array(p0, (void*) SIGNAL_MEMORY_COUNT, (void*) POINTER_ARRAY);
@@ -105,7 +105,7 @@ void deallocate_signal_memory(void* p0, void* p1) {
 
         void** s = (void**) p0;
 
-        log_message((void*) INFO_LOG_LEVEL, (void*) DESTROY_SIGNAL_MEMORY_MESSAGE, (void*) DESTROY_SIGNAL_MEMORY_MESSAGE_COUNT);
+        log_message((void*) INFORMATION_LOG_LEVEL, (void*) DESTROY_SIGNAL_MEMORY_MESSAGE, (void*) DESTROY_SIGNAL_MEMORY_MESSAGE_COUNT);
 
         // The abstractions, models, details, priorities, identifications.
         void** a = NULL_POINTER;
@@ -118,7 +118,7 @@ void deallocate_signal_memory(void* p0, void* p1) {
         void** id = NULL_POINTER;
 
     /*??
-        log_message((void*) &INFO_LOG_LEVEL, (void*) &"Destroy all signals left in signal memory.");
+        log_message((void*) &INFORMATION_LOG_LEVEL, (void*) &"Destroy all signals left in signal memory.");
 
         int i = 0;
         get_array_count(m->signals, (void*) &i);

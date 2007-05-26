@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2007-05-26 14:35:16 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2007-05-26 21:19:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -44,9 +44,9 @@ static char* WARNING_LOG_LEVEL_NAME = WARNING_LOG_LEVEL_NAME_ARRAY;
 static int* WARNING_LOG_LEVEL_NAME_COUNT = NUMBER_7_INTEGER_ARRAY;
 
 /** The information log level name. */
-static char INFO_LOG_LEVEL_NAME_ARRAY[] = {'I', 'n', 'f', 'o', 'r', 'm', 'a', 't', 'i', 'o', 'n'};
-static char* INFO_LOG_LEVEL_NAME = INFO_LOG_LEVEL_NAME_ARRAY;
-static int* INFO_LOG_LEVEL_NAME_COUNT = NUMBER_11_INTEGER_ARRAY;
+static char INFORMATION_LOG_LEVEL_NAME_ARRAY[] = {'I', 'n', 'f', 'o', 'r', 'm', 'a', 't', 'i', 'o', 'n'};
+static char* INFORMATION_LOG_LEVEL_NAME = INFORMATION_LOG_LEVEL_NAME_ARRAY;
+static int* INFORMATION_LOG_LEVEL_NAME_COUNT = NUMBER_11_INTEGER_ARRAY;
 
 /** The debug log level name. */
 static char DEBUG_LOG_LEVEL_NAME_ARRAY[] = {'D', 'e', 'b', 'u', 'g'};

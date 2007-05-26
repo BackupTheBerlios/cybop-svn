@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2007-05-16 19:29:02 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2007-05-26 21:19:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -28,60 +28,70 @@
 #define VARIABLES_SOURCE
 
 #include <pthread.h>
+#include "../../globals/constants/integer/integer_constants.c"
+#include "../../globals/constants/pointer/pointer_constants.c"
 
 //
 // Primitive type sizes.
 //
 
 // The character primitive size.
-static int* CHARACTER_PRIMITIVE_SIZE;
+static int* CHARACTER_PRIMITIVE_SIZE = (int*) NULL_POINTER_ARRAY;
 
 // The wide character primitive size.
-static int* WIDE_CHARACTER_PRIMITIVE_SIZE;
+static int* WIDE_CHARACTER_PRIMITIVE_SIZE = (int*) NULL_POINTER_ARRAY;
 
 // The pointer primitive size.
-static int* POINTER_PRIMITIVE_SIZE;
+static int* POINTER_PRIMITIVE_SIZE = (int*) NULL_POINTER_ARRAY;
 
 // The integer primitive size.
-static int* INTEGER_PRIMITIVE_SIZE;
+static int* INTEGER_PRIMITIVE_SIZE = (int*) NULL_POINTER_ARRAY;
 
 // The unsigned long primitive size.
-static int* UNSIGNED_LONG_PRIMITIVE_SIZE;
+static int* UNSIGNED_LONG_PRIMITIVE_SIZE = (int*) NULL_POINTER_ARRAY;
 
 // The double primitive size.
-static int* DOUBLE_PRIMITIVE_SIZE;
+static int* DOUBLE_PRIMITIVE_SIZE = (int*) NULL_POINTER_ARRAY;
 
 //
 // Thread identifications and service interrupt flags.
 //
 
 // The linux console thread.
-static pthread_t* LINUX_CONSOLE_THREAD;
+static pthread_t* LINUX_CONSOLE_THREAD = (pthread_t*) NULL_POINTER_ARRAY;
 // The x window system thread.
-static pthread_t* X_WINDOW_SYSTEM_THREAD;
+static pthread_t* X_WINDOW_SYSTEM_THREAD = (pthread_t*) NULL_POINTER_ARRAY;
 // The www service thread.
-static pthread_t* WWW_SERVICE_THREAD;
+static pthread_t* WWW_SERVICE_THREAD = (pthread_t*) NULL_POINTER_ARRAY;
 // The cyboi service thread.
-static pthread_t* CYBOI_SERVICE_THREAD;
+static pthread_t* CYBOI_SERVICE_THREAD = (pthread_t*) NULL_POINTER_ARRAY;
 
 // The linux console interrupt flag.
-static int* LINUX_CONSOLE_THREAD_INTERRUPT;
+static int* LINUX_CONSOLE_THREAD_INTERRUPT = (int*) NULL_POINTER_ARRAY;
 // The x window system interrupt flag.
-static int* X_WINDOW_SYSTEM_THREAD_INTERRUPT;
+static int* X_WINDOW_SYSTEM_THREAD_INTERRUPT = (int*) NULL_POINTER_ARRAY;
 // The www service interrupt flag.
-static int* WWW_SERVICE_THREAD_INTERRUPT;
+static int* WWW_SERVICE_THREAD_INTERRUPT = (int*) NULL_POINTER_ARRAY;
 // The cyboi service interrupt flag.
-static int* CYBOI_SERVICE_THREAD_INTERRUPT;
+static int* CYBOI_SERVICE_THREAD_INTERRUPT = (int*) NULL_POINTER_ARRAY;
 
 //
 // Logging.
 //
 
 // The log level.
-static int* LOG_LEVEL;
+//
+// CAUTION! Do NOT try to use *OFF_LOG_LEVEL or *NUMBER_0_INTEGER here instead of the value 0!
+// Otherwise, the system would show the following error, as it expects a constant value:
+// "error: initializer element is not constant"
+static int LOG_LEVEL = 0;
 
 // The log output.
-static int LOG_OUTPUT;
+//
+// CAUTION! Do NOT try to use *NUMBER_MINUS_1_INTEGER here instead of the value -1!
+// Otherwise, the system would show the following error, as it expects a constant value:
+// "error: initializer element is not constant"
+static int LOG_OUTPUT = -1;
 
 /* VARIABLES_SOURCE */
 #endif

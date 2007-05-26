@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2007-04-16 15:50:29 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2007-05-26 21:19:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -28,7 +28,7 @@
 #define POINTER_VECTOR_ALLOCATOR_SOURCE
 
 #include "../../globals/constants/cybol/cybol_abstraction_constants.c"
-#include "../../globals/constants/log_message/log_message_constants.c"
+#include "../../globals/constants/log/log_message_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../memoriser/array.c"
 

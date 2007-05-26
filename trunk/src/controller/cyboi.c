@@ -25,7 +25,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.23 $ $Date: 2007-05-16 19:29:01 $ $Author: christian $
+ * @version $Revision: 1.24 $ $Date: 2007-05-26 21:19:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -33,12 +33,15 @@
 #define CYBOI_SOURCE
 
 #include <string.h>
-#include "../controller/manager/globals_manager.c"
+#include "../controller/globaliser.c"
+#include "../controller/manager.c"
 #include "../controller/optionaliser.c"
+#include "../controller/tester.c"
 #include "../globals/constants/integer/integer_constants.c"
-#include "../globals/constants/log_message/log_message_constants.c"
+#include "../globals/constants/log/log_message_constants.c"
 #include "../globals/constants/pointer/pointer_constants.c"
-#include "../globals/logger/logger.c"
+#include "../globals/constants/cyboi_constants.c"
+#include "../globals/variables/variables.c"
 
 /**
  * The main entry function.
@@ -63,67 +66,79 @@ int main(int p0, char** p1) {
     // Of course, all dynamically allocated memory should also be freed properly.
     // However, if some memory to be freed is forgotten, it will not harm
     // the operating system, as it will be freed automatically on process shutdown.
+    //
+    // YET TO ANSWER: How is that with forgotten threads?
+    // Are they killed automatically when a process is shut down?
 
     // Return 1 to indicate an error, by default.
     int r = *NUMBER_1_INTEGER;
 
-    // Startup global variables.
-    // CAUTION! They have to be created BEFORE the command line parameter check below!
-    // Otherwise, the logger may not be able to log possible error messages.
-    startup_globals();
-
     if (p1 != *NULL_POINTER) {
 
-        if (p0 == *COMMAND_LINE_ARGUMENTS_COUNT) {
+        // fputs("Information: Execute cyboi.\n", stdout);
 
-            log_message_debug("Information: Execute CYBOI.");
+        // Startup global variables.
+        globalise();
 
-            // The option command line argument.
-            void** o = NULL_POINTER;
+        // The operation mode.
+        // CAUTION! It is initialised with the help operation mode,
+        // to display the help message if no command line argument
+        // is given by the user.
+        int m = *HELP_OPERATION_MODE;
 
-            // Get option command line argument.
-            get_array_elements((void*) p1, (void*) OPTION_COMMAND_LINE_ARGUMENT_INDEX, (void*) &o, (void*) POINTER_ARRAY);
+        // The cybol knowledge file path.
+        void* k = *NULL_POINTER;
+        int kc = *NUMBER_0_INTEGER;
 
-            if (*o != *NULL_POINTER) {
+        // Optionalise command line argument options.
+        optionalise((void*) &m, (void*) &k, (void*) &kc, (void*) &LOG_LEVEL, (void*) &LOG_OUTPUT, (void*) p1, (void*) &p0);
 
-                // Get option command line argument count (number of characters).
-                //
-                // There are two possibilities to determine it:
-                // 1 Force the user to give it as third command line parameter
-                // (this would be proper, but not very user-friendly)
-                // 2 Rely on the null termination character to determine it
-                // (this is a rather dirty workaround, but the strlen function can be used)
-                // Possibility 2 is applied here.
-                int oc = strlen((char*) *o);
+        if (m == *VERSION_OPERATION_MODE) {
 
-                // Optionalise option command line argument.
-                optionalise(*o, (void*) &oc);
+            // Write cyboi version to standard output.
+            write(fileno(stdout), (void*) CYBOI_VERSION_LOG_MESSAGE, *CYBOI_VERSION_LOG_MESSAGE_COUNT);
 
-                log_message((void*) INFO_LOG_LEVEL, (void*) EXIT_CYBOI_NORMALLY_MESSAGE, (void*) EXIT_CYBOI_NORMALLY_MESSAGE_COUNT);
+        } else if (m == *HELP_OPERATION_MODE) {
 
-                // Set return value to 0, to indicate proper shutdown.
-                r = *NUMBER_0_INTEGER;
+            // Write cyboi help message to standard output.
+            write(fileno(stdout), (void*) CYBOI_HELP_LOG_MESSAGE, *CYBOI_HELP_LOG_MESSAGE_COUNT);
+
+        } else if (m == *TEST_OPERATION_MODE) {
+
+            // Call test function.
+            test();
+
+        } else if (m == *KNOWLEDGE_OPERATION_MODE) {
+
+            if ((k != *NULL_POINTER) && (kc >= *NUMBER_0_INTEGER)) {
+
+                // Manage system startup and shutdown using the given cybol knowledge file.
+                manage(k, (void*) &kc);
 
             } else {
 
-                log_message_debug("Error: Could not execute CYBOI. The run source name is null.");
+                fputs("Error: Could not execute cyboi in knowledge operation mode. A cybol file name needs to be given behind the '--knowledge' command line argument.\n", stdout);
+
+                // Write cyboi help message to standard output.
+                write(fileno(stdout), (void*) CYBOI_HELP_LOG_MESSAGE, *CYBOI_HELP_LOG_MESSAGE_COUNT);
             }
-
-        } else {
-
-            log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_EXECUTE_CYBOI_THE_COMMAND_LINE_ARGUMENT_NUMBER_IS_INCORRECT_MESSAGE, (void*) COULD_NOT_EXECUTE_CYBOI_THE_COMMAND_LINE_ARGUMENT_NUMBER_IS_INCORRECT_MESSAGE_COUNT);
-            log_message((void*) INFO_LOG_LEVEL, (void*) CYBOI_HELP_LOG_MESSAGE, (void*) CYBOI_HELP_LOG_MESSAGE_COUNT);
         }
+
+        // Deoptionalise command line argument options.
+        deoptionalise((void*) &LOG_OUTPUT);
+
+        // Shutdown global variables.
+        unglobalise();
+
+        // fputs("Information: Exit cyboi normally.\n", stdout);
+
+        // Set return value to 0, to indicate proper shutdown.
+        r = *NUMBER_0_INTEGER;
 
     } else {
 
-        log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_EXECUTE_CYBOI_THE_COMMAND_LINE_ARGUMENT_VECTOR_IS_NULL_MESSAGE, (void*) COULD_NOT_EXECUTE_CYBOI_THE_COMMAND_LINE_ARGUMENT_VECTOR_IS_NULL_MESSAGE_COUNT);
+        fputs("Error: Could not execute cyboi. The command line argument vector is null.\n", stdout);
     }
-
-    // Shutdown global variables.
-    // CAUTION! They have to be destroyed AFTER the log messages above!
-    // Otherwise, the logger may not be able to log possible error messages.
-    shutdown_globals();
 
     return r;
 }

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.26 $ $Date: 2007-05-16 19:29:01 $ $Author: christian $
+ * @version $Revision: 1.27 $ $Date: 2007-05-26 21:19:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -30,7 +30,7 @@
 
 #include "../controller/handler.c"
 #include "../globals/constants/integer/integer_constants.c"
-#include "../globals/constants/log_message/log_message_constants.c"
+#include "../globals/constants/log/log_message_constants.c"
 #include "../globals/constants/pointer/pointer_constants.c"
 #include "../globals/variables/variables.c"
 #include "../globals/logger/logger.c"
@@ -56,7 +56,7 @@ void check(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
         int* irq = (int*) p7;
 
         log_message_debug("\n\n");
-        log_message((void*) INFO_LOG_LEVEL, (void*) CHECK_FOR_SIGNALS_MESSAGE, (void*) CHECK_FOR_SIGNALS_MESSAGE_COUNT);
+        log_message((void*) INFORMATION_LOG_LEVEL, (void*) CHECK_FOR_SIGNALS_MESSAGE, (void*) CHECK_FOR_SIGNALS_MESSAGE_COUNT);
 
         // The shutdown flag.
         int f = *NUMBER_0_INTEGER;
@@ -257,8 +257,8 @@ void check(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
                 // Sleep for some time.
                 while (*irq == *NUMBER_0_INTEGER) {
 
-//??                    sleep(0.1);
-                    sleep(1.0);
+                    sleep(0.1);
+//??                    sleep(1.0);
                 }
 
                 // Lock signal memory mutex.
