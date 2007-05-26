@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2007-05-16 19:29:02 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2007-05-26 14:35:16 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -31,7 +31,13 @@
 // Pointer values.
 //
 
-/** The null pointer. */
+/**
+ * The null pointer.
+ *
+ * CAUTION! Do NOT try to use *NUMBER_0_INTEGER here instead of the value 0!
+ * Otherwise, the system would show the following error, as it expects a constant value:
+ * "error: initializer element is not constant"
+ */
 static void* NULL_POINTER_ARRAY[] = {(void*) 0};
 static void** NULL_POINTER = NULL_POINTER_ARRAY;
 
