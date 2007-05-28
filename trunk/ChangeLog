@@ -14,7 +14,7 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.4 $ $Date: 2007-05-28 17:12:38 $ $Author: christian $
+# @version $Revision: 1.5 $ $Date: 2007-05-28 17:57:49 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
@@ -46,14 +46,27 @@
         * Fix error in linux_console_converter serialisation that caused the tui to crash (integer vector elements were read as pointers, not integers)
         * Start searching error that null pointers do not keep their value in pointer arrays; included debug log messages
 
+2007-05-10  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Fix bug with integer parsing and -serialisation
+
 2007-05-09  Christian Heller  <christian.heller@tuxtax.de>
 
         * Add name, name count, name size to functions "get_compound_element_by_name" and "get_universal_compound_element_by_name"
         * Adjust all source code by adding name parameters to these function calls
 
+        * Fix bug that pointer vector instead of integer vector was used
+        * Adjust comma characters to be added only if one element already exists in the destination array
+
 2007-05-08  Christian Heller  <christian.heller@tuxtax.de>
 
         * Add "fflush" wherever a stream is output to a file, in order to not delay the output to an arbitrary system event
+
+2007-05-01  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Correct bug that details model was not always created when reading a part from a CYBOL file that did not have details;
+            but a details compound ALWAYS has to be allocated, because at runtime, properties might be added as details to a part model;
+            this was changed in the cybol_translator.c file
 
 2007-04-26  Christian Heller  <christian.heller@tuxtax.de>
 
@@ -75,6 +88,11 @@
 
 2007-04-16  Christian Heller  <christian.heller@tuxtax.de>
 
+        * Move "tester.c" into controller/ directory
+        * Add "optionaliser.c" source file
+        * Move command line option evaluating into new optionaliser
+        * Recognise command line options: version, help, test
+
         * Restructure globals/constants/ directory
 
 2007-04-09  Christian Heller  <christian.heller@tuxtax.de>
@@ -92,6 +110,27 @@
 2007-04-04  Christian Heller  <christian.heller@tuxtax.de>
 
         * Implement rudimentary shell output
+
+2007-03-27  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Add "add_compound_element_by_name" and "replace_compound_element_by_name" functions to "compound_accessor.c"
+        * Make compound element names in "add_compound_element_by_name" function receive an enumerated index suffix
+        * Adapt "xdt_converter.c" accordingly, using the "add_compound_element_by_name" function
+
+2007-03-18  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Complete xdt_converter
+        * Fix xdt parsing problem
+
+2007-03-17  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Correct some bugs in xdt parser (for example, temporary pointers local to function
+            were returned and of course null as soon as the function was left)
+
+2007-03-16  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Rename "bdt" into "xdt"
+        * Complete first (buggy) version of xdt_converter
 
 2007-03-11  Christian Heller  <christian.heller@tuxtax.de>
 
