@@ -1,3 +1,41 @@
-# A record of user-visible changes to a package. The format is not strict, but the changes to the most recent version should appear at the top of the file.
+#
+# $RCSfile: NEWS,v $
+#
+# This file represents a record of user-visible changes to cybop.
+#
+# The format is not strict, but the changes to the most recent version
+# should appear at the top of the file.
+#
+# http://www.cybop.net
+# - Cybernetics Oriented Programming -
+#
+# @version $Revision: 1.2 $ $Date: 2007-05-28 17:12:38 $ $Author: christian $
+# @author Christian Heller <christian.heller@tuxtax.de>
+#
 
-This is the "Cybernetics Oriented Interpreter" (CYBOI).
+CYBOP 0.8.0, 2007-05-28, Christian Heller  <christian.heller@tuxtax.de>
+
+* Internal improvements and bugfixes
+* A first version of web user interfaces (wui) using tcp socket (not usable yet)
+* A parser converting the German X Datentraeger (xDT) medical exchange format into cybop knowledge models
+    (structure complete, but more keywords need to be added)
+* A serialiser converting cybop knowledge models into xhtml
+* A serialiser converting cybop knowledge models into structured text output
+    (good for debugging cybop knowledge models)
+* Shell output
+* File output
+
+CYBOP 0.7.0, 2006-09-09, Christian Heller  <christian.heller@tuxtax.de>
+
+* X window system gui event handling
+* Wide character handling in textual user interface (tui)
+* Windowing technique for textual user interface (tui)
+* Selective repaint in textual user interface (tui)
+* Better handling of cpu idle times
+* Threads using mutexes (atomic flags) for reception of signals via
+    x window system and linux console (terminal)
+* Access to meta hierarchy elements via the "#" separator character
+    (and to the whole-part hierarchy via the "." character, as before)
+* Unified "get_universal_compound_element_by_name" function for compound element retrieval
+* Use of the "system" function to run external commands/ programs in an own child process
+* Unix shell command processing to be able to use CYBOL for scripting

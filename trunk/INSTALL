@@ -1,1 +1,56 @@
-This is the "Cybernetics Oriented Interpreter" (CYBOI).
+#
+# $RCSfile: INSTALL,v $
+#
+# This file gives installation instructions on how to get started with cybop.
+#
+# http://www.cybop.net
+# - Cybernetics Oriented Programming -
+#
+# @version $Revision: 1.4 $ $Date: 2007-05-28 17:12:38 $ $Author: christian $
+# @author Christian Heller <christian.heller@tuxtax.de>
+#
+
+
+CYBOP Installation
+__________________
+
+- Extract the cybop.tar.gz file into some directory, e.g. /home/cybop
+
+
+CYBOI Compilation
+_________________
+
+- Change into cybop's "admin" directory, e.g.:
+
+    cd /home/cybop/admin
+
+- Clean the object files of any previous compilation (this is optional):
+
+    make clean
+
+- Execute the make file with:
+
+    make
+
+
+CYBOL Application Execution
+___________________________
+
+- Change into the base directoy of your cybol applications, e.g.:
+
+    cd /home/cybop/examples
+
+- Execute cyboi and give the "run.cybol" file of an application as argument, e.g.:
+
+    /home/cybop/bin/cyboi --knowledge exit/run.cybol
+    /home/cybop/bin/cyboi --knowledge exit_text_file/run.cybol
+    /home/cybop/bin/cyboi --knowledge exit_cybol_file/run.cybol
+    /home/cybop/bin/cyboi --knowledge shell_output/run.cybol
+    /home/cybop/bin/cyboi --knowledge shell_command_execution/run.cybol
+    /home/cybop/bin/cyboi --knowledge program_execution/run.cybol
+    /home/cybop/bin/cyboi --knowledge helloworld/run.cybol
+
+
+You may also want to have a look at the Res Medicinae project, where more CYBOL
+application modules for the healthcare domain will be provided over the coming years:
+http://www.resmedicinae.org

@@ -1,23 +1,499 @@
-# The ChangeLog is an important file--it records the changes that are made to a package.
-# The format of this file is quite strict (see section 5.5 Documentation and ChangeLogs).
 #
-# Here are some tips for ChangeLog writing:
+# $RCSfile: ChangeLog,v $
+#
+# This file records the changes that are made to cybop.
+#
+# The format of this file is quite strict. Here are some tips for ChangeLog writing:
 # - make one entry per person
 # - group logical changes together
 # - separate logically distinct changes (change sets) by a single blank line
 # - entries should be brief
 # - an entry should not explain why a change was made, but rather what the change was
 #   (the explanation of why belongs in the source code itself)
+#
+# http://www.cybop.net
+# - Cybernetics Oriented Programming -
+#
+# @version $Revision: 1.4 $ $Date: 2007-05-28 17:12:38 $ $Author: christian $
+# @author Christian Heller <christian.heller@tuxtax.de>
+#
 
-# This is the "Cybernetics Oriented Interpreter" (CYBOI).
+2007-05-28  Christian Heller  <christian.heller@tuxtax.de>
 
-1999-11-21  Tom Tromey  <tromey@cygnus.com>
+        * Release cybop 0.8.0, including: CYBOP theory documentation, CYBOL specification and examples, CYBOI interpreter program
 
-        * automake.in (finish_languages): Only generate suffix rule
-        when not doing dependency tracking.
+2007-05-26  Christian Heller  <christian.heller@tuxtax.de>
 
-        * m4/init.m4 (AM_INIT_AUTOMAKE): Use AM_MISSING_INSTALL_SH.
-        * m4/missing.m4 (AM_MISSING_INSTALL_SH): New macro.
+        * Restructure cyboi command line argument handling to allow for dynamic log file, log level etc.
+        * Move log_message_constants.c to new directory and split away log_level_constants.c and log_level_name_constants.c; adapt all source code files
+        * Add opengl startup and shutdown
 
-        * depend2.am: Use @SOURCE@, @OBJ@, @LTOBJ@, @OBJOBJ@,
-        and @BASE@.  Always use -o.
+2007-05-24  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Add opengl/ mesa libraries to makefile
+
+2007-05-16  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Update cybol example applications
+
+        * Move away NULL_POINTER from "variables.c" into an own file "pointer_constants.c"
+        * Change NULL_POINTER so that it is now a void**, pointing to an array containing just a null void pointer;
+            Change NULL_POINTER values in all source code into *NULL_POINTER
+            Change &NULL_POINTER values in all source code into NULL_POINTER
+
+2007-05-15  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Fix error in linux_console_converter serialisation that caused the tui to crash (integer vector elements were read as pointers, not integers)
+        * Start searching error that null pointers do not keep their value in pointer arrays; included debug log messages
+
+2007-05-09  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Add name, name count, name size to functions "get_compound_element_by_name" and "get_universal_compound_element_by_name"
+        * Adjust all source code by adding name parameters to these function calls
+
+2007-05-08  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Add "fflush" wherever a stream is output to a file, in order to not delay the output to an arbitrary system event
+
+2007-04-26  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Complete "model_diagram_converter.c"
+        * Add "name" parameters to "get_compound_element_by_index" function and adapt all code
+        * Replace some integer values with constants of the kind NUMBER_X_INTEGER
+
+2007-04-24  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Fix bug that no compound was created for "xdt" abstraction in "receive_file_system"
+        * Continued model_diagram_converter.c
+
+2007-04-23  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Continue shell output of text
+        * Prepare file output of text
+
+        * Add configure.ac and Makefile.am files to root- and source directory
+
+2007-04-16  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Restructure globals/constants/ directory
+
+2007-04-09  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Rename all ASCII character constants to just "CHARACTER"
+        * Rename wide character constants to "_WIDE_CHARACTER"
+
+2007-04-07  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Prepare printing of application knowledge tree as structured model diagram into file or onto shell
+        * Add shell input, output, error output
+        * Continue shell output
+        * Prepare file output
+
+2007-04-04  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Implement rudimentary shell output
+
+2007-03-11  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Add "integer_converter.c"
+        * Correct integer and integer_vector conversion
+        * Add three new test procedures in tester.c
+        * Continue bdt_converter (parser)
+
+2007-03-09  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Continue bdt parser
+        * Make receive_file_system ... hand over part details to the "parse" operation of the converter
+        * Extend the "parse" operation's number of parameters
+
+2007-03-04  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Change minor things for bdt parsing
+
+2007-02-07  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Prepare xdt (bdt) import
+
+2007-02-01  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Correct bug in "character_converter.c", that caused arrays not to be extended
+        * Generate formatted xhtml code, with tags and attributes, from CYBOL
+
+2007-01-30  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Correct socket handling in send_socket operation
+        * Start xhtml_converter
+
+2007-01-28  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Continue socket functionality
+
+2007-01-26  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Add "communication_partner" socket, address, address_size to internal memory
+        * Add some temporary debugging messages for finding a bug at socket shutdown/ interrupt
+
+2007-01-21  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Add information about cybop book to website
+
+2007-01-18  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Make "close" command work in http server when sent from a web browser
+        * Add http constants
+
+2007-01-14  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Make ipv4 socket send/ receive connections work not only among two processes, e.g. from shell to shell,
+            but also from a web browser sending a request to a cyboi service;
+            the problem was that port numbers had not been converted from host- into network byte order;
+            host addresses were already converted properly
+
+        * Change year in copyright statement of all source code files
+
+2007-01-11  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Continue socket send procedure
+        * Test functionality
+        * Fix bugs
+
+2007-01-07  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Continue send socket functionality
+
+2006-12-30  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Start implementing send_socket
+        * Add errno handling
+        * Make socket non-blocking
+        * Add sleep call to receive_socket procedure
+
+2006-12-29  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Debug "receive_socket" operation
+        * Continue receive socket procedure
+        * Implement more clever handling of different socket services
+
+2006-12-28  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Complete startup_socket.c
+        * Finish socket address handling
+        * Continue implementing unified socket handling
+        * Remove unix socket everywhere
+        * Rename tcp socket into www service
+        * Unify unix- and tcp socket files into just "socket" source files
+
+2006-12-27  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Extend and rename socket handling
+
+2006-09-09  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Release cyboi 0.7.0
+        * Add <i>libpthread</i> library to Makefile, for linking
+        * Add minor things to Makefile, for Linux-Windows platform compilations,
+            so that conditional preprocessor directives like:
+            <i>#ifdef LINUX_OPERATING_SYSTEM</i> can be used in the source code
+        * Implement x window system gui event handling
+        * Update and add more things for wide character handling
+        * Investigate CPU idle mechanisms including: <i>pause</i>, <i>sleep</i> and system signals
+            --> the decision fell on a simple <i>sleep</i> loop for reasons explained in the code;<br>
+            change signal <i>wait</i> loop to become blocking, that is to react only to interrupts;
+            this avoids wasting system resources (CPU activity) as it happened up to now
+        * Implement threads using mutexes (atomic flags) for reception of signals via x window system and linux console (terminal)
+        * Exit threads using the USR1 operating system signal
+        * Prepare access to meta elements of a compound double hierarchy and completely restructure
+            <i>memoriser/accessor/compound_accessor.c</i><br>
+            two knowledge tree separators are now possible: the part separator <i>.</i> and the meta separator <i>#</i>
+        * Restructure "memoriser/accessor/compound_accessor.c" once more; the three procedures:<br>
+            1 set_compound_element_by_name<br>
+            2 remove_compound_element_by_name<br>
+            3 get_compound_element_by_name<br>
+            do now not only get handed over the <i>compound model</i>,
+            but also the corresponding <i>compound details</i> (meta information)
+            -- that way, meta properties can be determined properly
+            (which was done wrong before, as the properties were searched
+            in the <i>compound model</i> instead of in the <i>compound details</i>
+        * Merge two procedures "get_compound_element_by_encapsulated_name" and "get_real_compound_element_by_name"<br>
+            - rename this new, merged procedure to "get_universal_compound_element_by_name"<br>
+            - adapt all source code to new procedure<br>
+            - change all places where logic parameters were retrieved with "get_compound_element_by_name" to the new "get_universal_compound_element_by_name"<br>
+            - this means that from now on, CYBOL knowledge templates can be written much more flexibly, since models can be given as<br>
+            1 hard-coded inline value<br>
+            2 hierarchical name to a model (= encapsulated model)<br>
+            3 hierarchical name pointing to another hierarchical name containing a model (= double-encapsulated model)
+        * Add unix shell command processing from within CYBOL
+        * Factor out <i>copy</i> procedures for single types into an own <i>applicator/copy/</i> directory
+        * Fix hard-to-find bug that colour values were not always copied correctly for the textual user interface (tui);
+            the reson is that, when copying a colour value, the destination array ALWAYS has to be resized,
+            no matter whether it is greater or smaller than the source array;
+            otherwise, some suffixes may be left at the end of a newly copied colour and make that colour unknown/ unusable
+        * Rework textual user interface (tui) handling; introduce windowing technique
+        * Correct bug that tui is walking right and down when sending it several times:<br>
+            the reason was that the original value coming from cybol was manipulated,
+            when calculating the coordinates according to the given layout;
+            copies are used instead now, so that the original tui parameters are stable
+        * Implement selective repaint; small areas instead of the whole textual user interface (tui) can be repainted now
+        * Implement <i>clear</i> as property to the <i>send</i> operation, so that the tui is not cleared every time, only if wanted
+        * Add <i>enter</i> (carriage return, line feed) and <i>escape</i> character handling for tui
+        * Decrease sleep time from 1 to 0.1 --> much better performance, but processor is more busy now :-|
+        * Comment out my own implementation of fork/ execv/ wait, which did not work reliably for running external processes;<br>
+            probably, there are some conflicts with the threads/ mutexes/ signal checker loop used in CYBOI;<br>
+            for now, the <i>system</i> function is used to run external commands/ programs in an own child process;<br>
+            this even has the advantage of better portability between platforms :-)
+        * Rename <i>create</i> function to "<i>receive_file_system</i> function;<br>
+            prepare <i>receive_file_system</i> procedure for receiving various file formats:<br>
+            this is to foresee coming file format conversions when receiving (loading) or sending (saving) files;<br>
+            this may be done on the local file system or over a remote connection
+        * Eliminate bug that <i>compound</i> logic models were not processed;
+            --> the reason was that <i>cybol</i> was given as abstraction in CYBOL
+            so that the abstraction at runtime still was <i>cybol</i> instead of <i>compound</i>;
+            therefore, rename/ merge all <i>cybol</i> abstractions into <i>compound</i>
+        * Eliminate bug at shutdown: when shutting down the x window system service,
+            CYBOI tried to remove some entries from the internal memory,
+            which moved all other entries one place forward in that memory,
+            so that none of the pointers pointed to the correct place anymore
+        * Extend signal handler by enabling processing of signals with abstractions <i>encapsulated_knowledge</i>
+            and <i>knowledge</i>, in addition to the already existing abstractions <i>compound</i> and <i>operation</i>
+        * Check and correct interrupting (exiting) of <i>receive</i> service threads
+        * Interrupt (exit) and free resources of all <i>receive</i> service threads automatically at
+            system shutdown, which is necessary in case a CYBOL application developer forgot to do that
+        * Factor out some manager code into the new procedures <i>startup_internal_memory</i> and <i>startup_system_signal_handler</i>
+        * Check for an existing thread first, before creating a new one;<br>
+            when a <i>receive</i> procedure is called more than once,
+            for example to hand over a new command set to wait for and receive,
+            a new thread MUST NOT be created every time
+        * Add a number of new model constants (boolean operations, bit manipulation operations etc.)
+        * Remove CYBOL_ABSTRACTION everywhere and replace with COMPOUND_ABSTRACTION, which existed in parallel
+
+        * Release cybol 1.1.0
+        * Add EBNF and XSD schema files
+        * Add new CYBOL example applications
+
+        * Release cybop 1.1.0
+        * Add "Linux World" 2005 poster
+            Authors: Christian Heller <christian.heller@tuxtax.de>
+        * Add "Reflexions on Knowledge Modelling" 2006 paper
+            Authors: Christian Heller <christian.heller@tuxtax.de>
+
+2005-08-30  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Release cyboi 0.6.0
+        * Update debian package files using multi-binary packages
+        * Prepare terminal handling of Textual User Interfaces (TUI); (see Zemljanka and TurboVision)
+        * Debug many errors caused by NULL_POINTER checks which tested the variables instead of their dereferenced values
+            wrong: if (a != NULL_POINTER)
+            right: if (*a != NULL_POINTER)
+            this caused knowledge models not to be created/ added to the knowledge root/ whole model
+        * Replace NULL_POINTER with &NULL_POINTER, where a local void** variable is initialised
+        * Remove all const keywords before static variables and before parameters in headers of procedures, for less code, improved readability and because the const keyword is considered useless now:
+            pointers that were handed over do mostly not get manipulated directly anyway, only pointers within the array pointed to
+            arrays defined with = {} are constant anyway
+        * Delete all character counts and replace them with just one count constant
+        * Change and unify all comparisons, so that their if expressions now compare for equality with 0 instead of 1
+        * Replace constant count variables with the already existing integer counts, to save redundant code and also some memory, e.g.:
+            static const int COMMA_CHARACTER_COUNT_ARRAY[] = {1};
+            static const int* COMMA_CHARACTER_COUNT = COMMA_CHARACTER_COUNT_ARRAY;
+            replaced with:
+            static const int* COMMA_CHARACTER_COUNT = NUMBER_1_INTEGER_ARRAY;
+        * Delete superfluous source files for primitives; only vectors are used now everywhere
+        * Rename string to character vector
+        * Simplify source code by replacing POINTER_NULL_POINTER, INTEGER_NULL_POINTER, FILE_NULL_POINTER etc. in all source files with just NULL_POINTER
+        * Replace allocate_integer and others with more general procedure allocate
+        * Prepare send_terminal procedure for tui output
+        * Rename low-level receive/ send into read/ write, to better distinguish them from the high-level receive/ send CYBOL operations
+        * Rename low-level create/ destroy into allocate/ deallocate, to better distinguish them from the high-level create/ destroy CYBOL operations
+        * Rename file set.c to copy.c
+        * Add knowledge memory and signal memory to internal memory; this HAS TO BE DONE, because when using threads, ONLY ONE parameter (the internal memory) can be handed over to these
+        * Hand over internal memory, knowledge memory and signal memory as parameters, instead of reading them every time from internal_memory
+        * Rename internals_memory to internal_memory
+        * Adapt some include paths and procedure names after restructuring
+        * Delete memory managers and put code into general manager.c
+        * Write log messages to a file instead of to console
+        * Replace all American English (e.g. lize suffixes) with British (Commonwealth) English (e.g. lise) which is now consistently used throughout all source code
+        * Move directories communicator, converter and translator from parent directory controller to parent directory memoriser
+        * Rename directory computer to applicator
+        * Restructure source code directories in relation to von Neumann computer architecture, i.e. consisting of the parts:
+            memoriser (Memory, containing states)
+            controller (Control Unit, coordinating flow)
+            applicator (Algorithmic Logic Unit = ALU, containing logic)
+            globals (additional, global constants and variables)
+            tester (additional, for testing)
+
+        * Release cybol 1.0.0
+        * Change package structure to better comply with debian maintainer guidelines
+
+2005-06-27  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Release cyboi 0.5.0.0
+        * Add Makefile and exclude file for compilation
+        * Move some paragraphs and change a few formulations in documentation
+        * Complete implementation of the loop operation
+        * Correct bug in get_new_signal_id of signal_memory_accessor.c
+        * Implement Web User Interface (WUI) handling by generating (translating) HTML from CYBOL (comparable to XUL/ UIML)
+        * Extend sources for handing over string parameters in URL, using escape code sequences
+        * Add url_refresh operation
+        * Implement post operation for web communication
+        * Add new abstraction knowledge for runtime access to knowledge model
+        * Enable dynamically created logic models
+        * Generalise handling of services using startup/ shutdown operations
+        * Run tcp service in an own thread
+        * Synchronise signal memory using Mutex
+        * Use send operation for placing runtime signals read from a CYBOL source into the signal memory
+        * Restructure source directories, following von Neumann architecture (controller, memory, computer, globals)
+        * Remove /web directory (tcp procedures are now in receive_tcp_socket.c; client socket and signal numbers are in internals_memory_accessor.c)
+        * Remove input_output_activator.c (now done by startup/ shutdown and receive/ interrupt/ send service calls in CYBOL)
+        * Remove input_output_handler.c (activation/ blocking flags etc. are now created/ destroyed in corresponding startup/ shutdown procedure)
+
+        * Release cybop 1.0.0
+        * Add "Untersuchung der Realisierungsmoeglichkeiten von CYBOL-Webfrontends,
+            unter Verwendung von Konzepten des Cybernetics Oriented Programming (CYBOP)"
+            paper and presentation
+            Authors: Rolf Holzmueller <rolf.holzmueller@gmx.de>
+
+        * Release cybop 0.1.0.0
+        * Create CYBOP meta package
+        * Add "Res Medicinae / CYBOP (ResMedLib) Architecture" presentation
+            Authors: Christian Heller <christian.heller@tuxtax.de>
+        * Add "Cybernetics Oriented Programming (CYBOP) in Res Medicinae" presentation
+            Authors: Christian Heller <christian.heller@tuxtax.de>
+        * Add "Medizinische Informatik: Open Source erreicht die Medizin" paper
+            Authors: Christian Heller <christian.heller@tuxtax.de>
+        * Add "Res Medicinae Design Paper (Outdated!!)" paper
+            Authors: Christian Heller <christian.heller@tuxtax.de>
+        * Add "An Extended Component Lifecycle" paper
+            Authors: Christian Heller <christian.heller@tuxtax.de>
+        * Add "Moeglichkeiten der Gestaltung flexibler Softwarearchitekturen fuer Praesentationsschichten, dargestellt anhand episodenbasierter medizinischer Dokumentation unter Einbeziehung topologischer Befundung" paper
+            Authors: Jens Bohl <info@jens-bohl.de>
+        * Add "Untersuchung zur Realisierbarkeit einer technologieneutralen Mapping-Schicht für den Datenaustausch am Beispiel einer Anwendung zum medizinischen Formulardruck als integrativer Bestandteil eines Electronic Health Record (EHR)" paper
+            Authors: Torsten Kunze <info@torstenkunze.de>
+        * Add "Erstellen eines Backup Moduls unter Verwendung gaengiger Design Patterns aus dem ResMedLib Framework" paper
+            Authors: Dirk Behrendt <behrendt.dirk@web.de>
+        * Add "Erstellung intuitiver Web Frontends zur Terminplanung und Verwaltung administrativer Daten, basierend auf einem Webserver mit JSP Technologie sowie Anbindung an ein Medizinisches Informationssystem" paper
+            Authors: Rolf Holzmueller <rolf.holzmueller@gmx.de>
+        * Add "Erstellung und Anbindung intuitiver Frontends an eine Anwendung zur Verwaltung administrativer Personendaten unter Beachtung von Aspekten der Internationalisierung" paper
+            Authors: Kumanan Kanagasabapathy <kumanan@uni.de>
+        * Add "A flexible Software Architecture for Presentation Layers demonstrated on Medical Documentation with Episodes and Inclusion of Topological Report" paper
+            Authors: Christian Heller <christian.heller@tuxtax.de>,
+            Jens Bohl <info@jens-bohl.de>,
+            Torsten Kunze <info@torstenkunze.de>,
+            Ilka Philippow <ilka.philippow@tu-ilmenau.de>
+        * Add "Ein Beitrag zur Evaluierung von Komponententechnologien im Umfeld von Software zur medizinischen Bildbearbeitung" paper
+            Authors: Jens Kleinschmidt <jens.kleinschmidt@gmx.de>
+        * Add "A new Concept for System Communication" paper
+            Authors: Christian Heller <christian.heller@tuxtax.de>,
+            Torsten Kunze <info@torstenkunze.de>,
+            Jens Bohl <info@jens-bohl.de>,
+            Ilka Philippow <ilka.philippow@tu-ilmenau.de>
+        * Add "Cybernetics Oriented Language (CYBOL)" paper
+            Authors: Christian Heller <christian.heller@tuxtax.de>
+        * Add "A new Pattern Systematics" paper
+            Authors: Christian Heller <christian.heller@tuxtax.de>,
+            Detlef Streitferdt <detlef.streitferdt@tu-ilmenau.de>,
+            Ilka Philippow <ilka.philippow@tu-ilmenau.de>
+
+2005-02-28  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Release cyboi 0.4.0.0
+        * Add first minimal CYBOI documentation manual (simple text file)
+        * Move global variables and constants into special files
+        * Use encapsulated primitives so that pointers
+            can be handed through the system, instead of
+            copies of char, int, double etc.;
+            encapsulation is also necessary to preserve a
+            primitive's value in memory -- otherwise, their value
+            gets lost as soon as a parser procedure is left
+        * Complete system lifecycle and waiting loop
+        * Simplify configuration file which now consists
+            of solely key-value pairs, on just one level,
+            NOT hierarchically
+        * Store configuration values internally in a simple
+            pointer array instead of an extra data structure;
+            it is not necessary to store additional type information
+            in a second column of the internals memory, because
+            internals are ALWAYS simple pointers to some date
+            structure that was created outside the internals memory
+        * Adapt whole system to new configuration handling
+        * Factor out code from cyboi main function into separate
+            files and procedures, for better overview
+        * Change all get procedures in arrays, so that only references,
+            but NOT copies are delivered back; change system accordingly
+        * Change complete CYBOI system from unnecessary triple-referenced
+            pointers to simple ones
+        * Only hand over those variables as double reference which:
+            * will carry a result to be delivered back
+            * have to be treated as array
+        * Remove signal from signal_memory only AFTER
+            the signal has been handled
+        * Correct A LOT OF bugs causing segmentation faults at runtime
+        * Get Hello, World! application running
+
+        * Release cybol 1.0.0.0
+        * Add example application "helloworld_dynamic_logic"
+        * Add "addition" application
+        * Prepare empty Debian packages "core" and "healthcare"
+        * Add example applications "exit", "exit_text_file", "exit_cybol_file", "helloworld"
+        * Add Document Type Definition (DTD)
+        * Add XML Schema Definition (XSD)
+
+2004-12-06  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Release cyboi 0.3.1.1
+        * marked /etc/cyboi/config.cybol as conffile
+        * added manpage cyboi.1.gz
+
+2004-11-23  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Release cyboi 0.3.1.0
+        * changed handling of Internals
+        * prepared TCP/IP Sockets
+
+2004-09-13  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Release cyboi 0.3.0.0
+        * Communication over Sockets
+        * Reimplement compound model, according to new CYBOL structure
+        * Continue XML parser, using libxml2 as temporary solution
+
+2004-06-23  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Release cyboi 0.2.2.0
+        * Fix several bugs in model handling
+        * Create transient copies of all persistent sources, instead of pointing to persistent sources which get freed after some time which resulted in null pointers
+        * Extend number of command line parameters, providing more options for running CYBOI
+        * Enable reading of sources from inline and file location
+
+2004-06-11  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Release cyboi 0.2.1.0
+        * Correct determination of highest priority index in signal memory
+        * Restructure project directories: /constants --> /constant; /model --> /array; /model --> /state; /statics --> /state; /dynamics --> /logic
+        * Move operation (being state knowledge) to /state
+        * Bundle all constants in just one place
+        * Use more constants, instead of hard-coded values
+        * Introduce constants for log messages
+        * Improve logger; removed all dependencies from other project parts (like array)
+        * Hand over size and count as parameters; do not keep them in one array with pointers
+        * Prepare processing of compound signals
+        * Factor out two procedures handle_create_model_signal and handle_send_signal from handle_operation_signal
+        * Adapt create_model procedure to read cybol sources from several locations like inline|file|ftp
+        * Add test procedures in an own testing module
+        * Prepare processing of compound signals
+
+2004-04-29  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Release cyboi 0.2.0.0
+        * Rewrite CYBOI in C programming language
+        * Start writing or using an existing XML parser (like libxml)
+        * Insert first graphics drawing routines (xlibs)
+
+2003-09-11  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Release cyboi 0.1.0.0
+        * CYBOI is an interpreter that can read CYBOL files and create systems
+        * Write CYBOI in Java
+        * Catch events from Java AWT event queue
+        * Use the Apache Xerces XML parser
+        * Create static structures of instances in memory
+        * Run dynamic loop catching signals from internal signal memory (queue)
+        * Create GUI using Java Swing (as temporary workaround)
