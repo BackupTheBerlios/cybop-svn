@@ -6,7 +6,7 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.4 $ $Date: 2007-05-28 17:12:38 $ $Author: christian $
+# @version $Revision: 1.5 $ $Date: 2007-05-31 18:13:30 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
@@ -49,6 +49,7 @@ ___________________________
     /home/cybop/bin/cyboi --knowledge shell_command_execution/run.cybol
     /home/cybop/bin/cyboi --knowledge program_execution/run.cybol
     /home/cybop/bin/cyboi --knowledge helloworld/run.cybol
+    /home/cybop/bin/cyboi --knowledge ui_control/run.cybol
 
 
 You may also want to have a look at the Res Medicinae project, where more CYBOL
