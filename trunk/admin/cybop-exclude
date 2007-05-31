@@ -1,10 +1,17 @@
 CVS
 CVSROOT
 backup
+communication
 dist
+doc/books
+doc/papers/2007_an_investigation
+doc/presentations/cybop
+doc/presentations/photos
 download
 mailinglists
 obj
+src/Makefile.am
+src/todo.txt
 tmp
 *.aux
 *.bbl
@@ -20,6 +27,4 @@ tmp
 *.log
 *.lot
 *.toc
-doc/papers/2007_an_investigation
-doc/presentations/cybop
-doc/presentations/photos
+Makefile.am

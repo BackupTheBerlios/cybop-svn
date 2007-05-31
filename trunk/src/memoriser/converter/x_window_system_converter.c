@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.14 $ $Date: 2007-05-24 22:52:32 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2007-05-31 22:11:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -346,11 +346,15 @@ void serialise_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
             get(*sm, (void*) NUMBER_1_INTEGER, (void*) &smy, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
             get(*sm, (void*) NUMBER_2_INTEGER, (void*) &smz, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
+    fprintf(stderr, "layout: %s\n", *lm);
+    fprintf(stderr, "layout count: %i\n", *((int*) *lmc));
+
             compare_arrays(*lm, *lmc, (void*) UI_ROOT_LAYOUT_MODEL, (void*) UI_ROOT_LAYOUT_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
             if (r == *NUMBER_0_INTEGER) {
 
                 // The source part is no root window.
+                log_message_debug("Debug: This is not a root window.");
 
                 // Calculate coordinates according to given layout.
 /*??
@@ -510,6 +514,7 @@ void serialise_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
             } else {
 
                 // The source part is a root window.
+                log_message_debug("Debug: This is a root window.");
 
                 // Move window to new position coordinates for part.
                 XMoveWindow(*di, **w, *pmx, *pmy);
@@ -573,6 +578,7 @@ void serialise_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
             if (r != *NUMBER_0_INTEGER) {
 
                 // The part model is a compound.
+                log_message_debug("Debug: The part model is a compound.");
 
                 // Recursively call this procedure for compound part model.
                 serialise_x_window_system(p0, p1, p2, *m, *mc, *d, *dc, p7, p8);

@@ -2,7 +2,7 @@
 # $RCSfile: Makefile,v $
 #
 # Copyright (c) 2003. Michael Simon. All rights reserved.
-# Copyright (c) 2004-2006. Christian Heller. All rights reserved.
+# Copyright (c) 2004-2007. Christian Heller. All rights reserved.
 #
 # This software is published under the GPL GNU General Public License.
 # This program is free software; you can redistribute it and/or
@@ -22,7 +22,7 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.42 $ $Date: 2007-05-24 23:00:04 $ $Author: christian $
+# @version $Revision: 1.43 $ $Date: 2007-05-31 22:11:22 $ $Author: christian $
 # @author Michael Simon <michael.simon@gmx.net>
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
