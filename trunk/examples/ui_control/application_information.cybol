@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<model>
+    <part name="name" channel="inline" abstraction="character" model="Res Medicinae"/>
+    <part name="version" channel="inline" abstraction="character" model="0.2.0.0"/>
+    <part name="date" channel="inline" abstraction="character" model="2006-09-09"/>
+    <part name="slogan" channel="inline" abstraction="character" model="-- Cybernetics Oriented Programming --"/>
+    <part name="logo" channel="inline" abstraction="png" model=""/>
+    <part name="copyright" channel="inline" abstraction="character" model="Copyright (c) 1999-2006. Christian Heller. All rights reserved."/>
+    <part name="contact" channel="inline" abstraction="character" model="http://www.cybop.net"/>
+    <part name="description" channel="inline" abstraction="character" model="Medical Information System"/>
+    <part name="authors" channel="inline" abstraction="character" model="Christian Heller (christian.heller@tuxtax.de)"/>
+    <part name="helpers" channel="inline" abstraction="character" model=""/>
+    <part name="licence" channel="inline" abstraction="character" model="This software is published under the GPL GNU General Public License."/>
+<!--
+    <part name="licence" channel="inline" abstraction="character" model="
+        This software is published under the GPL GNU General Public License.\n
+        This program is free software; you can redistribute it and/or\n
+        modify it under the terms of the GNU General Public License\n
+        as published by the Free Software Foundation; either version 2\n
+        of the License, or (at your option) any later version.\n\n
+        This program is distributed in the hope that it will be useful,\n
+        but WITHOUT ANY WARRANTY; without even the implied warranty of\n
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the\n
+        GNU General Public License for more details.\n\n
+        You should have received a copy of the GNU General Public License\n
+        along with this program; if not, write to the Free Software\n
+        Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.\n\n
+        Find the GPL license and more information at: http://www.gnu.org"
+    />
+-->
+</model>
+
+<!--
+    $RCSfile: application_information.cybol,v $
+
+    Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
+
+    This knowledge model is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public License
+    as published by the Free Software Foundation; either version 2
+    of the License, or (at your option) any later version.
+
+    This knowledge model is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this knowledge model; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+    http://www.cybop.net
+    - Cybernetics Oriented Programming -
+
+    @version $Revision: 1.1 $ $Date: 2007-05-31 22:05:24 $ $Author: christian $
+    @author Christian Heller <christian.heller@tuxtax.de>
+/-->

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<model>
+    <part name="copy_name" channel="inline" abstraction="operation" model="copy">
+        <property name="source" channel="inline" abstraction="knowledge" model=".ui_control.application_information.name"/>
+        <property name="destination" channel="inline" abstraction="knowledge" model=".ui_control.tui.about_dialogue.name"/>
+        <property name="abstraction" channel="inline" abstraction="character" model="character"/>
+    </part>
+    <part name="copy_version" channel="inline" abstraction="operation" model="copy">
+        <property name="source" channel="inline" abstraction="knowledge" model=".ui_control.application_information.version"/>
+        <property name="destination" channel="inline" abstraction="knowledge" model=".ui_control.tui.about_dialogue.version"/>
+        <property name="abstraction" channel="inline" abstraction="character" model="character"/>
+    </part>
+    <part name="copy_date" channel="inline" abstraction="operation" model="copy">
+        <property name="source" channel="inline" abstraction="knowledge" model=".ui_control.application_information.date"/>
+        <property name="destination" channel="inline" abstraction="knowledge" model=".ui_control.tui.about_dialogue.date"/>
+        <property name="abstraction" channel="inline" abstraction="character" model="character"/>
+    </part>
+    <part name="copy_slogan" channel="inline" abstraction="operation" model="copy">
+        <property name="source" channel="inline" abstraction="knowledge" model=".ui_control.application_information.slogan"/>
+        <property name="destination" channel="inline" abstraction="knowledge" model=".ui_control.tui.about_dialogue.slogan"/>
+        <property name="abstraction" channel="inline" abstraction="character" model="character"/>
+    </part>
+<!--
+    <part name="copy_logo" channel="inline" abstraction="operation" model="copy">
+        <property name="source" channel="inline" abstraction="knowledge" model=".ui_control.application_information.logo"/>
+        <property name="destination" channel="inline" abstraction="knowledge" model=".ui_control.tui.about_dialogue.logo"/>
+        <property name="abstraction" channel="inline" abstraction="character" model="character"/>
+    </part>
+-->
+    <part name="copy_copyright" channel="inline" abstraction="operation" model="copy">
+        <property name="source" channel="inline" abstraction="knowledge" model=".ui_control.application_information.copyright"/>
+        <property name="destination" channel="inline" abstraction="knowledge" model=".ui_control.tui.about_dialogue.copyright"/>
+        <property name="abstraction" channel="inline" abstraction="character" model="character"/>
+    </part>
+    <part name="copy_contact" channel="inline" abstraction="operation" model="copy">
+        <property name="source" channel="inline" abstraction="knowledge" model=".ui_control.application_information.contact"/>
+        <property name="destination" channel="inline" abstraction="knowledge" model=".ui_control.tui.about_dialogue.contact"/>
+        <property name="abstraction" channel="inline" abstraction="character" model="character"/>
+    </part>
+    <part name="copy_description" channel="inline" abstraction="operation" model="copy">
+        <property name="source" channel="inline" abstraction="knowledge" model=".ui_control.application_information.description"/>
+        <property name="destination" channel="inline" abstraction="knowledge" model=".ui_control.tui.about_dialogue.description"/>
+        <property name="abstraction" channel="inline" abstraction="character" model="character"/>
+    </part>
+    <part name="copy_authors" channel="inline" abstraction="operation" model="copy">
+        <property name="source" channel="inline" abstraction="knowledge" model=".ui_control.application_information.authors"/>
+        <property name="destination" channel="inline" abstraction="knowledge" model=".ui_control.tui.about_dialogue.authors"/>
+        <property name="abstraction" channel="inline" abstraction="character" model="character"/>
+    </part>
+    <part name="copy_helpers" channel="inline" abstraction="operation" model="copy">
+        <property name="source" channel="inline" abstraction="knowledge" model=".ui_control.application_information.helpers"/>
+        <property name="destination" channel="inline" abstraction="knowledge" model=".ui_control.tui.about_dialogue.helpers"/>
+        <property name="abstraction" channel="inline" abstraction="character" model="character"/>
+    </part>
+    <part name="copy_licence" channel="inline" abstraction="operation" model="copy">
+        <property name="source" channel="inline" abstraction="knowledge" model=".ui_control.application_information.licence"/>
+        <property name="destination" channel="inline" abstraction="knowledge" model=".ui_control.tui.about_dialogue.licence"/>
+        <property name="abstraction" channel="inline" abstraction="character" model="character"/>
+    </part>
+</model>
+
+<!--
+    $RCSfile: translate_application_information_to_about_dialogue.cybol,v $
+
+    Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
+
+    This knowledge model is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public License
+    as published by the Free Software Foundation; either version 2
+    of the License, or (at your option) any later version.
+
+    This knowledge model is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this knowledge model; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+    http://www.cybop.net
+    - Cybernetics Oriented Programming -
+
+    @version $Revision: 1.1 $ $Date: 2007-05-31 22:05:24 $ $Author: christian $
+    @author Christian Heller <christian.heller@tuxtax.de>
+/-->

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<model>
+    <part name="assemble_current_element_background" channel="inline" abstraction="operation" model="add">
+        <property name="summand_1" channel="inline" abstraction="knowledge" model=".ui_control.tui.main_window.menu#focus"/>
+        <property name="summand_2" channel="inline" abstraction="character" model="#background"/>
+        <property name="sum" channel="inline" abstraction="knowledge" model=".ui_control.temporary.character"/>
+        <property name="abstraction" channel="inline" abstraction="character" model="character"/>
+    </part>
+    <part name="unfocus_background" channel="inline" abstraction="operation" model="copy">
+        <property name="source" channel="inline" abstraction="knowledge" model=".ui_control.settings.tui.menu_item.background"/>
+        <property name="destination" channel="inline" abstraction="encapsulated" model=".ui_control.temporary.character"/>
+        <property name="abstraction" channel="inline" abstraction="character" model="character"/>
+    </part>
+    <part name="assemble_current_element_foreground" channel="inline" abstraction="operation" model="add">
+        <property name="summand_1" channel="inline" abstraction="knowledge" model=".ui_control.tui.main_window.menu#focus"/>
+        <property name="summand_2" channel="inline" abstraction="character" model="#foreground"/>
+        <property name="sum" channel="inline" abstraction="knowledge" model=".ui_control.temporary.character"/>
+        <property name="abstraction" channel="inline" abstraction="character" model="character"/>
+    </part>
+    <part name="unfocus_foreground" channel="inline" abstraction="operation" model="copy">
+        <property name="source" channel="inline" abstraction="knowledge" model=".ui_control.settings.tui.menu_item.foreground"/>
+        <property name="destination" channel="inline" abstraction="encapsulated" model=".ui_control.temporary.character"/>
+        <property name="abstraction" channel="inline" abstraction="character" model="character"/>
+    </part>
+    <part name="assemble_next_element_name" channel="inline" abstraction="operation" model="add">
+        <property name="summand_1" channel="inline" abstraction="knowledge" model=".ui_control.tui.main_window.menu#focus"/>
+        <property name="summand_2" channel="inline" abstraction="character" model="#next"/>
+        <property name="sum" channel="inline" abstraction="knowledge" model=".ui_control.tui.main_window.menu#focus"/>
+        <property name="abstraction" channel="inline" abstraction="character" model="character"/>
+    </part>
+    <!-- The element name assembled before is now used to get the real element that the name points to. -->
+    <part name="determine_real_element_name" channel="inline" abstraction="operation" model="copy">
+        <property name="source" channel="inline" abstraction="encapsulated" model=".ui_control.tui.main_window.menu#focus"/>
+        <property name="destination" channel="inline" abstraction="knowledge" model=".ui_control.tui.main_window.menu#focus"/>
+        <property name="abstraction" channel="inline" abstraction="character" model="character"/>
+    </part>
+    <part name="assemble_next_element_background" channel="inline" abstraction="operation" model="add">
+        <property name="summand_1" channel="inline" abstraction="knowledge" model=".ui_control.tui.main_window.menu#focus"/>
+        <property name="summand_2" channel="inline" abstraction="character" model="#background"/>
+        <property name="sum" channel="inline" abstraction="knowledge" model=".ui_control.temporary.character"/>
+        <property name="abstraction" channel="inline" abstraction="character" model="character"/>
+    </part>
+    <part name="focus_background" channel="inline" abstraction="operation" model="copy">
+        <property name="source" channel="inline" abstraction="knowledge" model=".ui_control.settings.tui.selection.background"/>
+        <property name="destination" channel="inline" abstraction="encapsulated" model=".ui_control.temporary.character"/>
+        <property name="abstraction" channel="inline" abstraction="character" model="character"/>
+    </part>
+    <part name="assemble_next_element_foreground" channel="inline" abstraction="operation" model="add">
+        <property name="summand_1" channel="inline" abstraction="knowledge" model=".ui_control.tui.main_window.menu#focus"/>
+        <property name="summand_2" channel="inline" abstraction="character" model="#foreground"/>
+        <property name="sum" channel="inline" abstraction="knowledge" model=".ui_control.temporary.character"/>
+        <property name="abstraction" channel="inline" abstraction="character" model="character"/>
+    </part>
+    <part name="focus_foreground" channel="inline" abstraction="operation" model="copy">
+        <property name="source" channel="inline" abstraction="knowledge" model=".ui_control.settings.tui.selection.foreground"/>
+        <property name="destination" channel="inline" abstraction="encapsulated" model=".ui_control.temporary.character"/>
+        <property name="abstraction" channel="inline" abstraction="character" model="character"/>
+    </part>
+    <part name="send_tui" channel="inline" abstraction="operation" model="send">
+        <property name="channel" channel="inline" abstraction="character" model="linux_console"/>
+        <property name="receiver" channel="inline" abstraction="character" model="user"/>
+        <property name="message" channel="inline" abstraction="knowledge" model=".ui_control.tui"/>
+        <property name="area" channel="inline" abstraction="character" model=".main_window.menu"/>
+    </part>
+</model>
+
+<!--
+    $RCSfile: select_next_part.cybol,v $
+
+    Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
+
+    This knowledge model is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public License
+    as published by the Free Software Foundation; either version 2
+    of the License, or (at your option) any later version.
+
+    This knowledge model is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this knowledge model; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+    http://www.cybop.net
+    - Cybernetics Oriented Programming -
+
+    @version $Revision: 1.1 $ $Date: 2007-05-31 22:05:24 $ $Author: christian $
+    @author Christian Heller <christian.heller@tuxtax.de>
+/-->

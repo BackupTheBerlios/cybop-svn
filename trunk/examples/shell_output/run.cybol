@@ -17,7 +17,7 @@
 <!--
     $RCSfile: run.cybol,v $
 
-    Copyright (c) 1999-2006. Christian Heller and the CYBOP developers.
+    Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
 
     This knowledge model is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License
@@ -36,6 +36,6 @@
     http://www.cybop.net
     - Cybernetics Oriented Programming -
 
-    @version $Revision: 1.1 $ $Date: 2007-05-16 19:36:27 $ $Author: christian $
+    @version $Revision: 1.2 $ $Date: 2007-05-31 22:05:24 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->

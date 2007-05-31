@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<model>
+    <part name="menu_bar" channel="file" abstraction="compound" model="ui_control/gui/main_window/menu_bar.cybol">
+        <property name="layout" channel="inline" abstraction="character" model="compass"/>
+        <property name="cell" channel="inline" abstraction="character" model="north"/>
+        <property name="position" channel="inline" abstraction="integer" model="0,0,0"/>
+        <property name="size" channel="inline" abstraction="integer" model="780,20,1"/>
+        <property name="left_release" channel="inline" abstraction="knowledge" model=".ui_control.logic.exit_program"/>
+    </part>
+<!--
+    <part name="tool_bar" channel="file" abstraction="compound" model="ui_control/gui/main_window/tool_bar.cybol">
+        <property name="layout" channel="inline" abstraction="character" model="compass"/>
+        <property name="cell" channel="inline" abstraction="character" model="north"/>
+        <property name="position" channel="inline" abstraction="integer" model="0,0,0"/>
+        <property name="size" channel="inline" abstraction="integer" model="780,20,1"/>
+    </part>
+    <part name="contents_panel" channel="file" abstraction="compound" model="ui_control/gui/main_window/contents_panel.cybol">
+        <property name="layout" channel="inline" abstraction="character" model="compass"/>
+        <property name="cell" channel="inline" abstraction="character" model="centre"/>
+        <property name="position" channel="inline" abstraction="integer" model="0,0,0"/>
+        <property name="size" channel="inline" abstraction="integer" model="780,500,1"/>
+    </part>
+-->
+    <part name="status_bar" channel="file" abstraction="compound" model="ui_control/gui/main_window/status_bar.cybol">
+        <property name="layout" channel="inline" abstraction="character" model="compass"/>
+        <property name="cell" channel="inline" abstraction="character" model="south"/>
+        <property name="position" channel="inline" abstraction="integer" model="0,20,0"/>
+        <property name="size" channel="inline" abstraction="integer" model="780,20,1"/>
+    </part>
+<!--
+    <part name="resizable_flag" channel="inline" abstraction="boolean" model="false"/>
+/-->
+</model>
+
+<!--
+    $RCSfile: window.cybol,v $
+
+    Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
+
+    This knowledge model is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public License
+    as published by the Free Software Foundation; either version 2
+    of the License, or (at your option) any later version.
+
+    This knowledge model is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this knowledge model; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+    http://www.cybop.net
+    - Cybernetics Oriented Programming -
+
+    @version $Revision: 1.1 $ $Date: 2007-05-31 22:05:24 $ $Author: christian $
+    @author Christian Heller <christian.heller@tuxtax.de>
+/-->

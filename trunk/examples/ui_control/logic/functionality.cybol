@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<model>
+    <part name="start_apw" channel="inline" abstraction="operation" model="run">
+        <property name="command" channel="inline" abstraction="character" model="program"/>
+        <property name="program" channel="inline" abstraction="character" model="dosemu.bin -E 'call c:\a\apwxms.exe magda\' -X"/>
+    </part>
+    <part name="show_x_window" channel="inline" abstraction="operation" model="send">
+        <property name="channel" channel="inline" abstraction="character" model="x_window_system"/>
+        <property name="receiver" channel="inline" abstraction="character" model="user"/>
+        <property name="message" channel="inline" abstraction="knowledge" model=".ui_control.gui"/>
+    </part>
+<!--
+    <part name="backup" channel="file" abstraction="compound" model="ui_control/logic/functionality/backup.cybol"/>
+    <part name="decrypt_laboratory_data" channel="inline" abstraction="operation" model="run">
+        <property name="command" channel="inline" abstraction="character" model="program"/>
+        <property name="program" channel="inline" abstraction="character" model="dosemu.bin -E 'call c:\a\krl.bat -X'"/>
+    </part>
+    <part name="account" channel="file" abstraction="compound" model="ui_control/logic/functionality/account.cybol"/>
+-->
+<!--
+    <part name="create_backup_archive" channel="inline" abstraction="operation" model="run">
+        <property name="command" channel="inline" abstraction="character" model="archive"/>
+        <property name="create" channel="inline" abstraction="boolean" model="true"/>
+        <property name="update" channel="inline" abstraction="boolean" model="true"/>
+        <property name="bzip2" channel="inline" abstraction="boolean" model="true"/>
+    </part>
+    <part name="append_to_backup_archive" channel="inline" abstraction="operation" model="run">
+        <property name="command" channel="inline" abstraction="character" model="archive"/>
+        <property name="create" channel="inline" abstraction="boolean" model="false"/>
+        <property name="update" channel="inline" abstraction="boolean" model="true"/>
+        <property name="bzip2" channel="inline" abstraction="boolean" model="true"/>
+    </part>
+-->
+<!--
+    <part name="copy_billing_data" channel="inline" abstraction="operation" model="run">
+        <property name="command" channel="inline" abstraction="character" model="copy_file"/>
+        <property name="recursive" channel="inline" abstraction="boolean" model="true"/>
+        <property name="source" channel="inline" abstraction="character" model="/home/praxis/c/a/kvc/*.coc"/>
+        <property name="destination" channel="inline" abstraction="character" model="/floppy"/>
+    </part>
+-->
+</model>
+
+<!--
+    $RCSfile: functionality.cybol,v $
+
+    Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
+
+    This knowledge model is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public License
+    as published by the Free Software Foundation; either version 2
+    of the License, or (at your option) any later version.
+
+    This knowledge model is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this knowledge model; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+    http://www.cybop.net
+    - Cybernetics Oriented Programming -
+
+    @version $Revision: 1.1 $ $Date: 2007-05-31 22:05:24 $ $Author: christian $
+    @author Christian Heller <christian.heller@tuxtax.de>
+/-->

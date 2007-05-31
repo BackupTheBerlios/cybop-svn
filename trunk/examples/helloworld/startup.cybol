@@ -30,10 +30,10 @@
         <property name="message" channel="inline" abstraction="knowledge" model=".domain.greeting"/>
         <property name="clean" channel="inline" abstraction="boolean" model="true"/>
     </part>
+<!--
     <part name="shutdown_linux_console" channel="inline" abstraction="operation" model="shutdown">
         <property name="service" channel="inline" abstraction="character" model="linux_console"/>
     </part>
-<!--
     <part name="destroy_domain" channel="inline" abstraction="operation" model="destroy">
         <property name="name" channel="inline" abstraction="knowledge" model=".domain"/>
     </part>
@@ -44,7 +44,7 @@
 <!--
     $RCSfile: startup.cybol,v $
 
-    Copyright (c) 1999-2006. Christian Heller and the CYBOP developers.
+    Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
 
     This knowledge model is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License
@@ -63,6 +63,6 @@
     http://www.cybop.net
     - Cybernetics Oriented Programming -
 
-    @version $Revision: 1.10 $ $Date: 2007-05-16 19:36:27 $ $Author: christian $
+    @version $Revision: 1.11 $ $Date: 2007-05-31 22:05:24 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->

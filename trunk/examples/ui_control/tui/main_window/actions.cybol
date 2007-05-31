@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<model>
+    <part name="arrow_down" channel="inline" abstraction="knowledge" model=".ui_control.logic.user_interface.select_next_part"/>
+    <part name="arrow_up" channel="inline" abstraction="knowledge" model=".ui_control.logic.user_interface.select_previous_part"/>
+    <part name="arrow_right" channel="inline" abstraction="knowledge" model=".ui_control.logic.user_interface.select_next_part"/>
+    <part name="arrow_left" channel="inline" abstraction="knowledge" model=".ui_control.logic.user_interface.select_previous_part"/>
+    <part name="enter" channel="inline" abstraction="knowledge" model=".ui_control.logic.user_interface.enter"/>
+    <part name="escape" channel="inline" abstraction="knowledge" model=".ui_control.logic.lifecycle.exit_program"/>
+    <part name="a" channel="inline" abstraction="knowledge" model=".ui_control.logic.functionality.start_apw"/>
+    <part name="x" channel="inline" abstraction="knowledge" model=".ui_control.logic.functionality.show_x_window"/>
+<!--
+    <part name="s" channel="inline" abstraction="knowledge" model=".ui_control.logic.functionality.backup"/>
+    <part name="e" channel="inline" abstraction="knowledge" model=".ui_control.logic.functionality.decrypt_laboratory_data"/>
+    <part name="r" channel="inline" abstraction="knowledge" model=".ui_control.logic.functionality.account"/>
+-->
+    <part name="i" channel="inline" abstraction="knowledge" model=".ui_control.logic.user_interface.show_about_information"/>
+    <part name="b" channel="inline" abstraction="knowledge" model=".ui_control.logic.lifecycle.exit_program"/>
+</model>
+
+<!--
+    $RCSfile: actions.cybol,v $
+
+    Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
+
+    This knowledge model is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public License
+    as published by the Free Software Foundation; either version 2
+    of the License, or (at your option) any later version.
+
+    This knowledge model is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this knowledge model; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+    http://www.cybop.net
+    - Cybernetics Oriented Programming -
+
+    @version $Revision: 1.1 $ $Date: 2007-05-31 22:05:24 $ $Author: christian $
+    @author Christian Heller <christian.heller@tuxtax.de>
+/-->
