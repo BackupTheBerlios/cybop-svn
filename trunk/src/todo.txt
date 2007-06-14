@@ -1,0 +1,49 @@
+#
+# $RCSfile: todo.txt,v $
+#
+# This file lists so-called "TODO" items, in other words open tasks
+# to be worked at in the future.
+#
+# http://www.cybop.net
+# - Cybernetics Oriented Programming -
+#
+# @version $Revision: 1.1 $ $Date: 2007-06-14 06:27:39 $ $Author: christian $
+# @author Christian Heller <christian.heller@tuxtax.de>
+#
+
+
+- implement configure/ make setup (standard configure and make options),
+for example using automake/autoconf
+http://gnu.org/software/automake
+there are various tutorials and examples around, such as GNU Hello:
+http://gnu.org/software/hello
+http://www.gnu.org/prep/standards/html_node/Configuration.html
+http://www.gnu.org/prep/standards/html_node/Makefile-Conventions.html
+
+- the "Linux" symbol names still need to be changed to "GNU/Linux";
+GNU packages should use "GNU/Linux" for the name of the overall system,
+not just "Linux".  As in -DLINUX_OPERATING_SYSTEM
+http://www.gnu.org/gnu/linux-and-gnu.html
+
+- the tarball should unpack into a single directory, like cybop-0.8.0/
+
+- write an actual manual that is updated as necessary to reflect the current
+state of cybop; just looking at the papers, it is hard to know what is
+current and what is not; in the meantime, one thing that would help is some
+kind of brief overview of the papers -- especially which ones should be read
+first if someone was trying to use the system; also cautioning about ones
+that are partly outdated, etc.; the list of purported "tutorials" doesn't
+really make sense to beginners either
+
+- the README file should explain where to report bugs, relevant mailing lists etc.
+
+- include the sources of all documents into the tarball
+
+- if parts exist, then a new part with the same name (stemming from the same
+model or its super category) must NOT be created!
+--> Prevent this in CYBOI, using conditions
+
+- only one (super) category makes sense, because templates/ models
+belong to a certain dimension like: TUI, GUI, WUI, domain model;
+so the upper-most category for a tui model may be one that
+provides ALL essential properties like "shape", "border", "background" etc.
