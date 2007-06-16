@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.13 $ $Date: 2007-05-26 21:19:58 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2007-06-16 21:55:00 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -37,14 +37,6 @@
 #include "../../memoriser/allocator.c"
 #include "../../memoriser/array.c"
 
-//
-// A boolean can have just one of the two values: TRUE or FALSE
-// Synonyms are:
-// - one and zero
-// - 1 and 0
-// - on and off
-//
-
 /**
  * Parses the byte stream and creates a boolean model from it.
  *
@@ -60,46 +52,72 @@ void parse_boolean(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         int* sc = (int*) p4;
 
-        if (p0 != *NULL_POINTER) {
+        if (p1 != *NULL_POINTER) {
 
-            int** d = (int**) p0;
+            int* dc = (int*) p1;
 
-            log_message_debug("Parse boolean.");
+            if (p0 != *NULL_POINTER) {
 
-            // The comparison result.
-            int r = 0;
+                int** d = (int**) p0;
 
-            if (*sc == *TRUE_MODEL_COUNT) {
+                log_message_debug("Information: Parse boolean.");
 
-                compare_array_elements(p3, (void*) TRUE_MODEL, (void*) TRUE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                // The comparison result.
+                int r = *NUMBER_0_INTEGER;
 
-                if (r == 1) {
+                if (r == *NUMBER_0_INTEGER) {
 
-                    // Set boolean value to 'true'.
-                    set_array_elements(*d, (void*) PRIMITIVE_VALUE_INDEX, (void*) TRUE_BOOLEAN, (void*) NUMBER_1_INTEGER, (void*) INTEGER_ARRAY);
+                    compare_array_elements(p3, (void*) TRUE_MODEL, (void*) TRUE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+                    if (r != *NUMBER_0_INTEGER) {
+
+                        // Set boolean value to "true", in other words the integer value to "one".
+                        set_array_elements(*d, (void*) PRIMITIVE_VALUE_INDEX, (void*) TRUE_BOOLEAN, (void*) NUMBER_1_INTEGER, (void*) INTEGER_ARRAY);
+
+                        // Increment destination count.
+                        *dc = *dc + *NUMBER_1_INTEGER;
+                    }
                 }
-            }
 
-            if (*sc == *FALSE_MODEL_COUNT) {
+                if (r == *NUMBER_0_INTEGER) {
 
-                compare_array_elements(p3, (void*) FALSE_MODEL, (void*) FALSE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_array_elements(p3, (void*) FALSE_MODEL, (void*) FALSE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-                if (r == 1) {
+                    if (r != *NUMBER_0_INTEGER) {
 
-                    // Set boolean value to 'true'.
+                        // Set boolean value to "false", in other words the integer value to "zero".
+                        set_array_elements(*d, (void*) PRIMITIVE_VALUE_INDEX, (void*) FALSE_BOOLEAN, (void*) NUMBER_1_INTEGER, (void*) INTEGER_ARRAY);
+
+                        // Increment destination count.
+                        *dc = *dc + *NUMBER_1_INTEGER;
+                    }
+                }
+
+                if (r == *NUMBER_0_INTEGER) {
+
+                    // If neither "true" nor "false" value were found, then set
+                    // the boolean (integer) value to "false" here, by default.
+
+                    // Set boolean value to "false", in other words the integer value to "zero".
                     set_array_elements(*d, (void*) PRIMITIVE_VALUE_INDEX, (void*) FALSE_BOOLEAN, (void*) NUMBER_1_INTEGER, (void*) INTEGER_ARRAY);
-                }
-            }
 
+                    // Increment destination count.
+                    *dc = *dc + *NUMBER_1_INTEGER;
+                }
+
+            } else {
+
+                log_message_debug("Error: Could not parse boolean. The destination is null.");
+            }
 
         } else {
 
-//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_PARSE_INTEGER_THE_DESTINATION_IS_NULL_MESSAGE, (void*) &COULD_NOT_PARSE_INTEGER_THE_DESTINATION_IS_NULL_MESSAGE_COUNT);
+            log_message_debug("Error: Could not parse boolean. The destination count is null.");
         }
 
     } else {
 
-//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_PARSE_INTEGER_THE_SOURCE_COUNT_IS_NULL_MESSAGE, (void*) &COULD_NOT_PARSE_INTEGER_THE_SOURCE_COUNT_IS_NULL_MESSAGE_COUNT);
+        log_message_debug("Error: Could not parse boolean. The source count is null.");
     }
 }
 
@@ -114,41 +132,87 @@ void parse_boolean(void* p0, void* p1, void* p2, void* p3, void* p4) {
  */
 void serialise_boolean(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p3 != *NULL_POINTER) {
+    if (p4 != *NULL_POINTER) {
 
-        int* s = (int*) p3;
+        int* sc = (int*) p4;
 
-        if (p1 != *NULL_POINTER) {
+        if (p3 != *NULL_POINTER) {
 
-            int* dc = (int*) p1;
+            int* s = (int*) p3;
 
-            log_message_debug("Serialise boolean.");
+            if (p2 != *NULL_POINTER) {
 
-            if (*s == 1) {
+                int* ds = (int*) p2;
 
-/*??
-                set_array_elements(TRUE_MODEL ...);
-                set_size
-                set_count
-*/
+                if (p1 != *NULL_POINTER) {
+
+                    int* dc = (int*) p1;
+
+                    if (p0 != *NULL_POINTER) {
+
+                        void** d = (void**) p0;
+
+                        log_message_debug("Information: Serialise boolean.");
+
+                        if (*sc > *NUMBER_0_INTEGER) {
+
+                            if (*s == *NUMBER_1_INTEGER) {
+
+                                // Set destination character vector.
+                                *ds = *dc + *TRUE_MODEL_COUNT;
+
+                                // Reallocate destination character vector.
+                                reallocate_array(p0, p1, p2, (void*) CHARACTER_ARRAY);
+
+                                // Set source into destination character vector.
+                                set_array_elements(*d, p1, TRUE_MODEL, TRUE_MODEL_COUNT, (void*) CHARACTER_ARRAY);
+
+                                // Increment destination count.
+                                *dc = *dc + *TRUE_MODEL_COUNT;
+
+                            } else {
+
+                                // Set destination character vector.
+                                *ds = *dc + *FALSE_MODEL_COUNT;
+
+                                // Reallocate destination character vector.
+                                reallocate_array(p0, p1, p2, (void*) CHARACTER_ARRAY);
+
+                                // Set source into destination character vector.
+                                set_array_elements(*d, p1, FALSE_MODEL, FALSE_MODEL_COUNT, (void*) CHARACTER_ARRAY);
+
+                                // Increment destination count.
+                                *dc = *dc + *FALSE_MODEL_COUNT;
+                            }
+
+                        } else {
+
+                            log_message_debug("Error: Could not serialise boolean. The source count is zero.");
+                        }
+
+                    } else {
+
+                        log_message_debug("Error: Could not serialise boolean. The destination is null.");
+                    }
+
+                } else {
+
+                    log_message_debug("Error: Could not serialise boolean. The destination count is null.");
+                }
 
             } else {
 
-/*??
-                set_array_elements(FALSE_MODEL ...);
-                set_size
-                set_count
-*/
+                log_message_debug("Error: Could not serialise boolean. The destination size is null.");
             }
 
         } else {
 
-//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_PARSE_INTEGER_THE_DESTINATION_IS_NULL_MESSAGE, (void*) &COULD_NOT_PARSE_INTEGER_THE_DESTINATION_IS_NULL_MESSAGE_COUNT);
+            log_message_debug("Error: Could not serialise boolean. The source is null.");
         }
 
     } else {
 
-//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_PARSE_INTEGER_THE_SOURCE_COUNT_IS_NULL_MESSAGE, (void*) &COULD_NOT_PARSE_INTEGER_THE_SOURCE_COUNT_IS_NULL_MESSAGE_COUNT);
+        log_message_debug("Error: Could not serialise boolean. The source count is null.");
     }
 }
 

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.16 $ $Date: 2007-05-26 21:19:58 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2007-06-16 21:55:00 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -119,10 +119,10 @@ void parse_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
  * Serialises the integer model and creates a byte stream from it.
  *
  * @param p0 the destination character array (Hand over as reference!)
- * @param p1 the destination count
- * @param p2 the destination size
- * @param p3 the source integer number
- * @param p4 the source count
+ * @param p1 the destination character array count
+ * @param p2 the destination character array size
+ * @param p3 the source integer
+ * @param p4 the source integer count
  */
 void serialise_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
 

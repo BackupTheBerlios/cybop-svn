@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2007-04-16 16:45:37 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2007-06-16 21:55:00 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -124,15 +124,34 @@ static char LOOP_MODEL_ARRAY[] = {'l', 'o', 'o', 'p'};
 static char* LOOP_MODEL = LOOP_MODEL_ARRAY;
 static int* LOOP_MODEL_COUNT = NUMBER_4_INTEGER_ARRAY;
 
-/** The count parts model. */
-static char COUNT_PARTS_MODEL_ARRAY[] = {'c', 'o', 'u', 'n', 't', '_', 'p', 'a', 'r', 't', 's'};
-static char* COUNT_PARTS_MODEL = COUNT_PARTS_MODEL_ARRAY;
-static int* COUNT_PARTS_MODEL_COUNT = NUMBER_11_INTEGER_ARRAY;
+/** The count model. */
+static char COUNT_MODEL_ARRAY[] = {'c', 'o', 'u', 'n', 't'};
+static char* COUNT_MODEL = COUNT_MODEL_ARRAY;
+static int* COUNT_MODEL_COUNT = NUMBER_5_INTEGER_ARRAY;
 
 /** The build listname model. */
 static char BUILD_LISTNAME_MODEL_ARRAY[] = {'b', 'u', 'i', 'l', 'd', '_', 'l', 'i', 's', 't', 'n', 'a', 'm', 'e'};
 static char* BUILD_LISTNAME_MODEL = BUILD_LISTNAME_MODEL_ARRAY;
 static int* BUILD_LISTNAME_MODEL_COUNT = NUMBER_14_INTEGER_ARRAY;
+
+//
+// Count selection models.
+//
+
+/** The count all selection model. */
+static char COUNT_ALL_SELECTION_MODEL_ARRAY[] = {'a', 'l', 'l'};
+static char* COUNT_ALL_SELECTION_MODEL = COUNT_ALL_SELECTION_MODEL_ARRAY;
+static int* COUNT_ALL_SELECTION_MODEL_COUNT = NUMBER_3_INTEGER_ARRAY;
+
+/** The count prefix selection model. */
+static char COUNT_PREFIX_SELECTION_MODEL_ARRAY[] = {'p', 'r', 'e', 'f', 'i', 'x'};
+static char* COUNT_PREFIX_SELECTION_MODEL = COUNT_PREFIX_SELECTION_MODEL_ARRAY;
+static int* COUNT_PREFIX_SELECTION_MODEL_COUNT = NUMBER_6_INTEGER_ARRAY;
+
+/** The count suffix selection model. */
+static char COUNT_SUFFIX_SELECTION_MODEL_ARRAY[] = {'s', 'u', 'f', 'f', 'i', 'x'};
+static char* COUNT_SUFFIX_SELECTION_MODEL = COUNT_SUFFIX_SELECTION_MODEL_ARRAY;
+static int* COUNT_SUFFIX_SELECTION_MODEL_COUNT = NUMBER_6_INTEGER_ARRAY;
 
 //
 // Boolean logic models.

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2007-04-16 16:45:37 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2007-06-16 21:55:00 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -359,23 +359,28 @@ static char* COMPOSED_NAME_NAME = COMPOSED_NAME_NAME_ARRAY;
 static int* COMPOSED_NAME_NAME_COUNT = NUMBER_8_INTEGER_ARRAY;
 
 //
-// Count parts names.
+// Count names.
 //
 
-/** The whole model name. */
-static char WHOLE_MODEL_NAME_ARRAY[] = {'w', 'h', 'o', 'l', 'e'};
-static char* WHOLE_MODEL_NAME = WHOLE_MODEL_NAME_ARRAY;
-static int* WHOLE_MODEL_NAME_COUNT = NUMBER_5_INTEGER_ARRAY;
+/** The count compound name. */
+static char COUNT_COMPOUND_NAME_ARRAY[] = {'c', 'o', 'm', 'p', 'o', 'u', 'n', 'd'};
+static char* COUNT_COMPOUND_NAME = COUNT_COMPOUND_NAME_ARRAY;
+static int* COUNT_COMPOUND_NAME_COUNT = NUMBER_8_INTEGER_ARRAY;
 
-/** The part name name. */
-static char PART_NAME_NAME_ARRAY[] = {'n', 'a', 'm', 'e'};
-static char* PART_NAME_NAME = PART_NAME_NAME_ARRAY;
-static int* PART_NAME_NAME_COUNT = NUMBER_4_INTEGER_ARRAY;
+/** The count selection name. */
+static char COUNT_SELECTION_NAME_ARRAY[] = {'s', 'e', 'l', 'e', 'c', 't', 'i', 'o', 'n'};
+static char* COUNT_SELECTION_NAME = COUNT_SELECTION_NAME_ARRAY;
+static int* COUNT_SELECTION_NAME_COUNT = NUMBER_9_INTEGER_ARRAY;
 
-/** The counter name. */
-static char COUNTER_NAME_ARRAY[] = {'c', 'o', 'u', 'n', 't', 'e', 'r'};
-static char* COUNTER_NAME = COUNTER_NAME_ARRAY;
-static int* COUNTER_NAME_COUNT = NUMBER_7_INTEGER_ARRAY;
+/** The count filter name. */
+static char COUNT_FILTER_NAME_ARRAY[] = {'f', 'i', 'l', 't', 'e', 'r'};
+static char* COUNT_FILTER_NAME = COUNT_FILTER_NAME_ARRAY;
+static int* COUNT_FILTER_NAME_COUNT = NUMBER_6_INTEGER_ARRAY;
+
+/** The count result name. */
+static char COUNT_RESULT_NAME_ARRAY[] = {'r', 'e', 's', 'u', 'l', 't'};
+static char* COUNT_RESULT_NAME = COUNT_RESULT_NAME_ARRAY;
+static int* COUNT_RESULT_NAME_COUNT = NUMBER_6_INTEGER_ARRAY;
 
 //
 // Create names.
@@ -497,6 +502,11 @@ static int* SEND_AREA_NAME_COUNT = NUMBER_4_INTEGER_ARRAY;
 static char SEND_CLEAN_NAME_ARRAY[] = {'c', 'l', 'e', 'a', 'n'};
 static char* SEND_CLEAN_NAME = SEND_CLEAN_NAME_ARRAY;
 static int* SEND_CLEAN_NAME_COUNT = NUMBER_5_INTEGER_ARRAY;
+
+/** The send new line name. */
+static char SEND_NEW_LINE_NAME_ARRAY[] = {'n', 'e', 'w', '_', 'l', 'i', 'n', 'e'};
+static char* SEND_NEW_LINE_NAME = SEND_NEW_LINE_NAME_ARRAY;
+static int* SEND_NEW_LINE_NAME_COUNT = NUMBER_8_INTEGER_ARRAY;
 
 /** The send url name. */
 /*??
