@@ -14,9 +14,15 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.5 $ $Date: 2007-05-28 17:57:49 $ $Author: christian $
+# @version $Revision: 1.6 $ $Date: 2007-06-16 21:58:43 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2007-06-16  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Add new or extend functions like copy, count, compare etc.
+        * Extend send_shell function with line_feed option
+        * Update loop function
 
 2007-05-28  Christian Heller  <christian.heller@tuxtax.de>
 
