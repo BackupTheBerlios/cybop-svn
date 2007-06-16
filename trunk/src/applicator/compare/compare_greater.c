@@ -20,15 +20,16 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.10 $ $Date: 2007-05-26 21:19:57 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2007-06-16 21:53:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef COMPARE_GREATER_SOURCE
 #define COMPARE_GREATER_SOURCE
 
-#include "../../globals/constants/cybol/cybol_abstraction_constants.c"
 #include "../../globals/constants/boolean/boolean_constants.c"
+#include "../../globals/constants/cybol/cybol_abstraction_constants.c"
+#include "../../globals/constants/integer/integer_constants.c"
 #include "../../globals/constants/log/log_message_constants.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../../globals/constants/pointer/pointer_constants.c"
@@ -94,12 +95,12 @@ void compare_greater(void* p0, void* p1, void* p2,
                 log_message_debug("Compare if one parameter is greater than the other.");
 
                 // The result parameter comparison result.
-                int r = 0;
+                int r = *NUMBER_0_INTEGER;
 
                 // Compare result parameter abstraction. It must be a boolean.
                 compare_arrays(p18, p19, (void*) BOOLEAN_ABSTRACTION, (void*) BOOLEAN_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-                if (r == 1) {
+                if (r != *NUMBER_0_INTEGER) {
 
                     // The left side parameter comparison result.
                     int lr;
@@ -111,14 +112,14 @@ void compare_greater(void* p0, void* p1, void* p2,
                     //
 
                     // Reset parameter comparison results.
-                    lr = 0;
-                    rr = 0;
+                    lr = *NUMBER_0_INTEGER;
+                    rr = *NUMBER_0_INTEGER;
 
                     // Compare parameter abstractions.
                     compare_arrays(p0, p1, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &lr, (void*) CHARACTER_ARRAY);
                     compare_arrays(p9, p10, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &rr, (void*) CHARACTER_ARRAY);
 
-                    if ((lr == 1) && (rr == 1)) {
+                    if ((lr != *NUMBER_0_INTEGER) && (rr != *NUMBER_0_INTEGER)) {
 
                         log_message_debug("Use character parameters.");
 
@@ -137,14 +138,14 @@ void compare_greater(void* p0, void* p1, void* p2,
                     //
 
                     // Reset parameter comparison results.
-                    lr = 0;
-                    rr = 0;
+                    lr = *NUMBER_0_INTEGER;
+                    rr = *NUMBER_0_INTEGER;
 
                     // Compare parameter abstractions.
                     compare_arrays(p0, p1, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT, (void*) &lr, (void*) CHARACTER_ARRAY);
                     compare_arrays(p9, p10, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT, (void*) &rr, (void*) CHARACTER_ARRAY);
 
-                    if ((lr == 1) && (rr == 1)) {
+                    if ((lr != *NUMBER_0_INTEGER) && (rr != *NUMBER_0_INTEGER)) {
 
                         log_message_debug("Use integer parameters.");
 
@@ -163,14 +164,14 @@ void compare_greater(void* p0, void* p1, void* p2,
                     //
 
                     // Reset parameter comparison results.
-                    lr = 0;
-                    rr = 0;
+                    lr = *NUMBER_0_INTEGER;
+                    rr = *NUMBER_0_INTEGER;
 
                     // Compare parameter abstractions.
                     compare_arrays(p0, p1, (void*) DOUBLE_VECTOR_ABSTRACTION, (void*) DOUBLE_VECTOR_ABSTRACTION_COUNT, (void*) &lr, (void*) CHARACTER_ARRAY);
                     compare_arrays(p9, p10, (void*) DOUBLE_VECTOR_ABSTRACTION, (void*) DOUBLE_VECTOR_ABSTRACTION_COUNT, (void*) &rr, (void*) CHARACTER_ARRAY);
 
-                    if ((lr == 1) && (rr == 1)) {
+                    if ((lr != *NUMBER_0_INTEGER) && (rr != *NUMBER_0_INTEGER)) {
 
                         log_message_debug("Use double parameters.");
 

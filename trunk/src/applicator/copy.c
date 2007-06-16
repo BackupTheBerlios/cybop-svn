@@ -20,18 +20,20 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.24 $ $Date: 2007-05-26 21:19:57 $ $Author: christian $
+ * @version $Revision: 1.25 $ $Date: 2007-06-16 21:53:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef COPY_SOURCE
 #define COPY_SOURCE
 
+#include "../applicator/copy/copy_boolean.c"
 #include "../applicator/copy/copy_character_vector.c"
 #include "../applicator/copy/copy_integer_vector.c"
 #include "../globals/constants/cybol/cybol_abstraction_constants.c"
-#include "../globals/constants/log/log_message_constants.c"
 #include "../globals/constants/cybol/cybol_name_constants.c"
+#include "../globals/constants/integer/integer_constants.c"
+#include "../globals/constants/log/log_message_constants.c"
 #include "../globals/constants/pointer/pointer_constants.c"
 #include "../globals/logger/logger.c"
 #include "../memoriser/accessor/compound_accessor.c"
@@ -118,25 +120,35 @@ void copy(void* p0, int* p1, void* p2, void* p3, void* p4) {
         p2, p3);
 
     // The comparison result.
-    int r = 0;
+    int r = *NUMBER_0_INTEGER;
 
-    if (r == 0) {
+    if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(*am, *amc, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(*am, *amc, (void*) BOOLEAN_ABSTRACTION, (void*) BOOLEAN_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r != 0) {
+        if (r != *NUMBER_0_INTEGER) {
 
-            copy_integer_vector(dm, *dmc, *dms, *sm, *smc);
+            copy_boolean(dm, *dmc, *dms, *sm, *smc);
         }
     }
 
-    if (r == 0) {
+    if (r == *NUMBER_0_INTEGER) {
 
         compare_arrays(*am, *amc, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r != 0) {
+        if (r != *NUMBER_0_INTEGER) {
 
             copy_character_vector(dm, *dmc, *dms, *sm, *smc);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER) {
+
+        compare_arrays(*am, *amc, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != *NUMBER_0_INTEGER) {
+
+            copy_integer_vector(dm, *dmc, *dms, *sm, *smc);
         }
     }
 }

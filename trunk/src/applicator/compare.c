@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.15 $ $Date: 2007-05-26 21:19:57 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2007-06-16 21:53:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -33,9 +33,10 @@
 #include "../applicator/compare/compare_smaller.c"
 #include "../applicator/compare/compare_smaller_or_equal.c"
 #include "../globals/constants/cybol/cybol_abstraction_constants.c"
-#include "../globals/constants/log/log_message_constants.c"
 #include "../globals/constants/cybol/cybol_model_constants.c"
 #include "../globals/constants/cybol/cybol_name_constants.c"
+#include "../globals/constants/integer/integer_constants.c"
+#include "../globals/constants/log/log_message_constants.c"
 #include "../globals/constants/pointer/pointer_constants.c"
 #include "../globals/logger/logger.c"
 #include "../memoriser/accessor/compound_accessor.c"
@@ -121,7 +122,6 @@ void compare(void* p0, void* p1, void* p2, void* p3, void* p4) {
         (void*) &cm, (void*) &cmc, (void*) &cms,
         (void*) &cd, (void*) &cdc, (void*) &cds,
         p2, p3);
-
     // Get left side.
     get_universal_compound_element_by_name(p0, p1,
         (void*) LEFT_SIDE_NAME, (void*) LEFT_SIDE_NAME_COUNT,
@@ -130,7 +130,6 @@ void compare(void* p0, void* p1, void* p2, void* p3, void* p4) {
         (void*) &lsm, (void*) &lsmc, (void*) &lsms,
         (void*) &lsd, (void*) &lsdc, (void*) &lsds,
         p2, p3);
-
     // Get right side.
     get_universal_compound_element_by_name(p0, p1,
         (void*) RIGHT_SIDE_NAME, (void*) RIGHT_SIDE_NAME_COUNT,
@@ -139,7 +138,6 @@ void compare(void* p0, void* p1, void* p2, void* p3, void* p4) {
         (void*) &rsm, (void*) &rsmc, (void*) &rsms,
         (void*) &rsd, (void*) &rsdc, (void*) &rsds,
         p2, p3);
-
     // Get result.
     get_universal_compound_element_by_name(p0, p1,
         (void*) RESULT_NAME, (void*) RESULT_NAME_COUNT,
@@ -150,13 +148,13 @@ void compare(void* p0, void* p1, void* p2, void* p3, void* p4) {
         p2, p3);
 
     // The comparison result.
-    int r = 0;
+    int r = *NUMBER_0_INTEGER;
 
-    if (r == 0) {
+    if (r == *NUMBER_0_INTEGER) {
 
         compare_arrays((void*) *cm, (void*) *cmc, (void*) EQUAL_MODEL, (void*) EQUAL_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r != 0) {
+        if (r != *NUMBER_0_INTEGER) {
 
             compare_equal(*lsa, *lsac, *lsas, *lsm, *lsmc, *lsms, *lsd, *lsdc, *lsds,
                 *rsa, *rsac, *rsas, *rsm, *rsmc, *rsms, *rsd, *rsdc, *rsds,
@@ -164,11 +162,11 @@ void compare(void* p0, void* p1, void* p2, void* p3, void* p4) {
         }
     }
 
-    if (r == 0) {
+    if (r == *NUMBER_0_INTEGER) {
 
         compare_arrays((void*) *cm, (void*) *cmc, (void*) SMALLER_MODEL, (void*) SMALLER_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r != 0) {
+        if (r != *NUMBER_0_INTEGER) {
 
             compare_smaller(*lsa, *lsac, *lsas, *lsm, *lsmc, *lsms, *lsd, *lsdc, *lsds,
                 *rsa, *rsac, *rsas, *rsm, *rsmc, *rsms, *rsd, *rsdc, *rsds,
@@ -176,11 +174,11 @@ void compare(void* p0, void* p1, void* p2, void* p3, void* p4) {
         }
     }
 
-    if (r == 0) {
+    if (r == *NUMBER_0_INTEGER) {
 
         compare_arrays((void*) *cm, (void*) *cmc, (void*) GREATER_MODEL, (void*) GREATER_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r != 0) {
+        if (r != *NUMBER_0_INTEGER) {
 
             compare_greater(*lsa, *lsac, *lsas, *lsm, *lsmc, *lsms, *lsd, *lsdc, *lsds,
                 *rsa, *rsac, *rsas, *rsm, *rsmc, *rsms, *rsd, *rsdc, *rsds,
@@ -188,11 +186,11 @@ void compare(void* p0, void* p1, void* p2, void* p3, void* p4) {
         }
     }
 
-    if (r == 0) {
+    if (r == *NUMBER_0_INTEGER) {
 
         compare_arrays((void*) *cm, (void*) *cmc, (void*) SMALLER_OR_EQUAL_MODEL, (void*) SMALLER_OR_EQUAL_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r != 0) {
+        if (r != *NUMBER_0_INTEGER) {
 
             compare_smaller_or_equal(*lsa, *lsac, *lsas, *lsm, *lsmc, *lsms, *lsd, *lsdc, *lsds,
                 *rsa, *rsac, *rsas, *rsm, *rsmc, *rsms, *rsd, *rsdc, *rsds,
@@ -200,11 +198,11 @@ void compare(void* p0, void* p1, void* p2, void* p3, void* p4) {
         }
     }
 
-    if (r == 0) {
+    if (r == *NUMBER_0_INTEGER) {
 
         compare_arrays((void*) *cm, (void*) *cmc, (void*) GREATER_OR_EQUAL_MODEL, (void*) GREATER_OR_EQUAL_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r != 0) {
+        if (r != *NUMBER_0_INTEGER) {
 
             compare_greater_or_equal(*lsa, *lsac, *lsas, *lsm, *lsmc, *lsms, *lsd, *lsdc, *lsds,
                 *rsa, *rsac, *rsas, *rsm, *rsmc, *rsms, *rsd, *rsdc, *rsds,

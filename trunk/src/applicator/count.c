@@ -20,13 +20,16 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.21 $ $Date: 2007-05-26 21:19:57 $ $Author: christian $
+ * @version $Revision: 1.22 $ $Date: 2007-06-16 21:53:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef COUNT_SOURCE
 #define COUNT_SOURCE
 
+#include "../applicator/count/count_all.c"
+#include "../applicator/count/count_prefix.c"
+#include "../applicator/count/count_suffix.c"
 #include "../globals/constants/cybol/cybol_abstraction_constants.c"
 #include "../globals/constants/log/log_message_constants.c"
 #include "../globals/constants/cybol/cybol_name_constants.c"
@@ -40,7 +43,7 @@
 #include "../memoriser/translator.c"
 
 /**
- * Counts the parts.
+ * Counts compound parts.
  *
  * @param p0 the parameters
  * @param p1 the parameters count
@@ -48,191 +51,126 @@
  * @param p3 the knowledge memory count
  * @param p4 the knowledge memory size
  */
-void count_parts(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void count(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    log_message_debug("Count parts.");
+    log_message_debug("Count compound parts.");
 
-    // The basisname name, abstraction, model, details.
-    void** bnn = NULL_POINTER;
-    void** bnnc = NULL_POINTER;
-    void** bnns = NULL_POINTER;
-    void** bna = NULL_POINTER;
-    void** bnac = NULL_POINTER;
-    void** bnas = NULL_POINTER;
-    void** bnm = NULL_POINTER;
-    void** bnmc = NULL_POINTER;
-    void** bnms = NULL_POINTER;
-    void** bnd = NULL_POINTER;
-    void** bndc = NULL_POINTER;
-    void** bnds = NULL_POINTER;
-    // The index name, abstraction, model, details.
-    void** mdln = NULL_POINTER;
-    void** mdlnc = NULL_POINTER;
-    void** mdlns = NULL_POINTER;
-    void** mdla = NULL_POINTER;
-    void** mdlac = NULL_POINTER;
-    void** mdlas = NULL_POINTER;
-    void** mdlm = NULL_POINTER;
-    void** mdlmc = NULL_POINTER;
-    void** mdlms = NULL_POINTER;
-    void** mdld = NULL_POINTER;
-    void** mdldc = NULL_POINTER;
-    void** mdlds = NULL_POINTER;
+    // The compound name, abstraction, model, details.
+    void** cn = NULL_POINTER;
+    void** cnc = NULL_POINTER;
+    void** cns = NULL_POINTER;
+    void** ca = NULL_POINTER;
+    void** cac = NULL_POINTER;
+    void** cas = NULL_POINTER;
+    void** cm = NULL_POINTER;
+    void** cmc = NULL_POINTER;
+    void** cms = NULL_POINTER;
+    void** cd = NULL_POINTER;
+    void** cdc = NULL_POINTER;
+    void** cds = NULL_POINTER;
+    // The selection name, abstraction, model, details.
+    void** sn = NULL_POINTER;
+    void** snc = NULL_POINTER;
+    void** sns = NULL_POINTER;
+    void** sa = NULL_POINTER;
+    void** sac = NULL_POINTER;
+    void** sas = NULL_POINTER;
+    void** sm = NULL_POINTER;
+    void** smc = NULL_POINTER;
+    void** sms = NULL_POINTER;
+    void** sd = NULL_POINTER;
+    void** sdc = NULL_POINTER;
+    void** sds = NULL_POINTER;
+    // The filter name, abstraction, model, details.
+    void** fn = NULL_POINTER;
+    void** fnc = NULL_POINTER;
+    void** fns = NULL_POINTER;
+    void** fa = NULL_POINTER;
+    void** fac = NULL_POINTER;
+    void** fas = NULL_POINTER;
+    void** fm = NULL_POINTER;
+    void** fmc = NULL_POINTER;
+    void** fms = NULL_POINTER;
+    void** fd = NULL_POINTER;
+    void** fdc = NULL_POINTER;
+    void** fds = NULL_POINTER;
     // The result name, abstraction, model, details.
-    void** resn = NULL_POINTER;
-    void** resnc = NULL_POINTER;
-    void** resns = NULL_POINTER;
-    void** resa = NULL_POINTER;
-    void** resac = NULL_POINTER;
-    void** resas = NULL_POINTER;
-    void** resm = NULL_POINTER;
-    void** resmc = NULL_POINTER;
-    void** resms = NULL_POINTER;
-    void** resd = NULL_POINTER;
-    void** resdc = NULL_POINTER;
-    void** resds = NULL_POINTER;
+    void** rn = NULL_POINTER;
+    void** rnc = NULL_POINTER;
+    void** rns = NULL_POINTER;
+    void** ra = NULL_POINTER;
+    void** rac = NULL_POINTER;
+    void** ras = NULL_POINTER;
+    void** rm = NULL_POINTER;
+    void** rmc = NULL_POINTER;
+    void** rms = NULL_POINTER;
+    void** rd = NULL_POINTER;
+    void** rdc = NULL_POINTER;
+    void** rds = NULL_POINTER;
 
-    // get the basisname
+    // Get compound.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) PART_NAME_NAME, (void*) PART_NAME_NAME_COUNT,
-        (void*) &bnn, (void*) &bnnc, (void*) &bnns,
-        (void*) &bna, (void*) &bnac, (void*) &bnas,
-        (void*) &bnm, (void*) &bnmc, (void*) &bnms,
-        (void*) &bnd, (void*) &bndc, (void*) &bnds,
+        (void*) COUNT_COMPOUND_NAME, (void*) COUNT_COMPOUND_NAME_COUNT,
+        (void*) &cn, (void*) &cnc, (void*) &cns,
+        (void*) &ca, (void*) &cac, (void*) &cas,
+        (void*) &cm, (void*) &cmc, (void*) &cms,
+        (void*) &cd, (void*) &cdc, (void*) &cds,
+        p2, p3);
+    // Get selection.
+    get_universal_compound_element_by_name(p0, p1,
+        (void*) COUNT_SELECTION_NAME, (void*) COUNT_SELECTION_NAME_COUNT,
+        (void*) &sn, (void*) &snc, (void*) &sns,
+        (void*) &sa, (void*) &sac, (void*) &sas,
+        (void*) &sm, (void*) &smc, (void*) &sms,
+        (void*) &sd, (void*) &sdc, (void*) &sds,
+        p2, p3);
+    // Get filter.
+    get_universal_compound_element_by_name(p0, p1,
+        (void*) COUNT_FILTER_NAME, (void*) COUNT_FILTER_NAME_COUNT,
+        (void*) &fn, (void*) &fnc, (void*) &fns,
+        (void*) &fa, (void*) &fac, (void*) &fas,
+        (void*) &fm, (void*) &fmc, (void*) &fms,
+        (void*) &fd, (void*) &fdc, (void*) &fds,
+        p2, p3);
+    // Get result.
+    get_universal_compound_element_by_name(p0, p1,
+        (void*) COUNT_RESULT_NAME, (void*) COUNT_RESULT_NAME_COUNT,
+        (void*) &rn, (void*) &rnc, (void*) &rns,
+        (void*) &ra, (void*) &rac, (void*) &ras,
+        (void*) &rm, (void*) &rmc, (void*) &rms,
+        (void*) &rd, (void*) &rdc, (void*) &rds,
         p2, p3);
 
-    // get the model
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) WHOLE_MODEL_NAME, (void*) WHOLE_MODEL_NAME_COUNT,
-        (void*) &mdln, (void*) &mdlnc, (void*) &mdlns,
-        (void*) &mdla, (void*) &mdlac, (void*) &mdlas,
-        (void*) &mdlm, (void*) &mdlmc, (void*) &mdlms,
-        (void*) &mdld, (void*) &mdldc, (void*) &mdlds,
-        p2, p3);
+    // The comparison result.
+    int r = *NUMBER_0_INTEGER;
 
-    // get the result
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) COUNTER_NAME, (void*) COUNTER_NAME_COUNT,
-        (void*) &resn, (void*) &resnc, (void*) &resns,
-        (void*) &resa, (void*) &resac, (void*) &resas,
-        (void*) &resm, (void*) &resmc, (void*) &resms,
-        (void*) &resd, (void*) &resdc, (void*) &resds,
-        p2, p3);
+    if (r == *NUMBER_0_INTEGER) {
 
-    // Check basisname.
-    if ((*bna != *NULL_POINTER)
-        && (*bnac != *NULL_POINTER)
-        && (*bnas != *NULL_POINTER)
-        && (*bnm != *NULL_POINTER)
-        && (*bnmc != *NULL_POINTER)
-        && (*bnms != *NULL_POINTER)
-        && (*bnd != *NULL_POINTER)
-        && (*bndc != *NULL_POINTER)
-        && (*bnds != *NULL_POINTER)
-        // Check index.
-        && (*mdla != *NULL_POINTER)
-        && (*mdlac != *NULL_POINTER)
-        && (*mdlas != *NULL_POINTER)
-        && (*mdlm != *NULL_POINTER)
-        && (*mdlmc != *NULL_POINTER)
-        && (*mdlms != *NULL_POINTER)
-        && (*mdld != *NULL_POINTER)
-        && (*mdldc != *NULL_POINTER)
-        && (*mdlds != *NULL_POINTER)
-        // Check result.
-        && (*resa != *NULL_POINTER)
-        && (*resac != *NULL_POINTER)
-        && (*resas != *NULL_POINTER)
-        && (*resm != *NULL_POINTER)
-        && (*resmc != *NULL_POINTER)
-        && (*resms != *NULL_POINTER)
-        && (*resd != *NULL_POINTER)
-        && (*resdc != *NULL_POINTER)
-        && (*resds != *NULL_POINTER)) {
+        compare_arrays((void*) *sm, (void*) *smc, (void*) COUNT_ALL_SELECTION_MODEL, (void*) COUNT_ALL_SELECTION_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        //check the abstraction for the operation element
-        int comp_res1 = 0;
-        int comp_res2 = 0;
-        int comp_res3 = 0;
+        if (r != *NUMBER_0_INTEGER) {
 
-        compare_arrays(*bna, *bnac, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &comp_res1, (void*) CHARACTER_ARRAY);
-        compare_arrays(*mdla, *mdlac, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT, (void*) &comp_res2, (void*) CHARACTER_ARRAY);
-        compare_arrays(*resa, *resac, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT, (void*) &comp_res3, (void*) CHARACTER_ARRAY);
+            count_all(rm, *rmc, *rms, *cm, *cmc);
+        }
+    }
 
-        if ((comp_res1 == 1) && (comp_res2 == 1) && (comp_res3 == 1)) {
+    if (r == *NUMBER_0_INTEGER) {
 
-            //Vorgehen,
-            //-alle Elemente des Compound durchgehen
-            //-Namen testen basisname_#
-            //-Z?lvariable hochz?hlen
-            //am Ende die Z?hlvariable ins result schreiben
+        compare_arrays((void*) *sm, (void*) *smc, (void*) COUNT_PREFIX_SELECTION_MODEL, (void*) COUNT_PREFIX_SELECTION_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-            //compound element
-            // The compund element name.
-            void** cen = NULL_POINTER;
-            void** cenc = NULL_POINTER;
-            void** cens = NULL_POINTER;
+        if (r != *NUMBER_0_INTEGER) {
 
-            //init the counter
-            int* list_counter = (int*) *resm;
-            *list_counter = 0;
+            count_prefix(rm, *rmc, *rms, *cm, *cmc, *fm, *fmc);
+        }
+    }
 
-            // Create compare string.
-            char* compstring = *NULL_POINTER;
-            int compstring_count = *((int*) *bnmc) + *LIST_SEPARATOR_COUNT;
+    if (r == *NUMBER_0_INTEGER) {
 
-            allocate_array((void*) &compstring, (void*) &compstring_count, (void*) CHARACTER_ARRAY);
+        compare_arrays((void*) *sm, (void*) *smc, (void*) COUNT_SUFFIX_SELECTION_MODEL, (void*) COUNT_SUFFIX_SELECTION_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-            // Set the compare string
-            // this is the basisname and the list separat
-            set_array_elements(compstring, (void*) NUMBER_0_INTEGER, *bnm, *bnmc,  (void*) CHARACTER_ARRAY);
-            set_array_elements(compstring, *bnmc, LIST_SEPARATOR, LIST_SEPARATOR_COUNT, (void*) CHARACTER_ARRAY);
+        if (r != *NUMBER_0_INTEGER) {
 
-            // The loop count.
-            int j = 0;
-            // The comparison result.
-            int r = 0;
-
-            while (1) {
-
-                if (j >= *((int*) *mdlmc)) {
-
-                    break;
-                }
-
-                get_compound_element_name_by_index(*mdlm, *mdlmc, &j, &cen, &cenc, &cens);
-
-//??                if ((cen != NULL_POINTER) && (cenc != NULL_POINTER) && (cens != NULL_POINTER)) {
-
-                    if ((*cen != *NULL_POINTER) && (*cenc != *NULL_POINTER) && (*cens != *NULL_POINTER)) {
-
-                        //check the count for the compare arrays
-                        // the compound element must greater als the compare string
-                        if (*((int*) *cenc) > compstring_count) {
-
-                            r = 0;
-
-                            compare_arrays(compstring, &compstring_count, *cen, &compstring_count, &r, CHARACTER_ARRAY);
-
-                            //if teh begiining of the two arrays ident, then
-                            //the compound element is a part of the list
-                            if (r == 1) {
-
-                                *list_counter = *list_counter + 1;
-                            }
-                        }
-                    }
-//??                }
-
-                j++;
-            }
-
-            // destroy compare string.
-            deallocate_array((void*) &compstring, (void*) &compstring_count, (void*) CHARACTER_ARRAY);
-
-        } else {
-
-            log_message_debug("Could not count part. The abstraction for the operands is not correct.");
+            count_suffix(rm, *rmc, *rms, *cm, *cmc, *fm, *fmc);
         }
     }
 }

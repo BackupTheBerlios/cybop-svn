@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.19 $ $Date: 2007-05-26 21:19:57 $ $Author: christian $
+ * @version $Revision: 1.20 $ $Date: 2007-06-16 21:53:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,8 +30,9 @@
 #include "../applicator/add/add_character_vector.c"
 #include "../applicator/add/add_integer_vector.c"
 #include "../globals/constants/cybol/cybol_abstraction_constants.c"
-#include "../globals/constants/log/log_message_constants.c"
 #include "../globals/constants/cybol/cybol_name_constants.c"
+#include "../globals/constants/integer/integer_constants.c"
+#include "../globals/constants/log/log_message_constants.c"
 #include "../globals/constants/pointer/pointer_constants.c"
 #include "../globals/logger/logger.c"
 #include "../memoriser/accessor/compound_accessor.c"
@@ -50,6 +51,19 @@ void add(void* p0, int* p1, void* p2, void* p3, void* p4) {
 
     log_message_debug("Add two primitive summands resulting in the sum.");
 
+    // The abstraction name, abstraction, model, details.
+    void** an = NULL_POINTER;
+    void** anc = NULL_POINTER;
+    void** ans = NULL_POINTER;
+    void** aa = NULL_POINTER;
+    void** aac = NULL_POINTER;
+    void** aas = NULL_POINTER;
+    void** am = NULL_POINTER;
+    void** amc = NULL_POINTER;
+    void** ams = NULL_POINTER;
+    void** ad = NULL_POINTER;
+    void** adc = NULL_POINTER;
+    void** ads = NULL_POINTER;
     // The summand 1 name, abstraction, model, details.
     void** s1n = NULL_POINTER;
     void** s1nc = NULL_POINTER;
@@ -89,46 +103,6 @@ void add(void* p0, int* p1, void* p2, void* p3, void* p4) {
     void** sd = NULL_POINTER;
     void** sdc = NULL_POINTER;
     void** sds = NULL_POINTER;
-    // The abstraction name, abstraction, model, details.
-    void** an = NULL_POINTER;
-    void** anc = NULL_POINTER;
-    void** ans = NULL_POINTER;
-    void** aa = NULL_POINTER;
-    void** aac = NULL_POINTER;
-    void** aas = NULL_POINTER;
-    void** am = NULL_POINTER;
-    void** amc = NULL_POINTER;
-    void** ams = NULL_POINTER;
-    void** ad = NULL_POINTER;
-    void** adc = NULL_POINTER;
-    void** ads = NULL_POINTER;
-
-    // Get summand 1.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) ADD_SUMMAND_1_NAME, (void*) ADD_SUMMAND_1_NAME_COUNT,
-        (void*) &s1n, (void*) &s1nc, (void*) &s1ns,
-        (void*) &s1a, (void*) &s1ac, (void*) &s1as,
-        (void*) &s1m, (void*) &s1mc, (void*) &s1ms,
-        (void*) &s1d, (void*) &s1dc, (void*) &s1ds,
-        p2, p3);
-
-    // Get summand 2.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) ADD_SUMMAND_2_NAME, (void*) ADD_SUMMAND_2_NAME_COUNT,
-        (void*) &s2n, (void*) &s2nc, (void*) &s2ns,
-        (void*) &s2a, (void*) &s2ac, (void*) &s2as,
-        (void*) &s2m, (void*) &s2mc, (void*) &s2ms,
-        (void*) &s2d, (void*) &s2dc, (void*) &s2ds,
-        p2, p3);
-
-    // Get sum.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) ADD_SUM_NAME, (void*) ADD_SUM_NAME_COUNT,
-        (void*) &sn, (void*) &snc, (void*) &sns,
-        (void*) &sa, (void*) &sac, (void*) &sas,
-        (void*) &sm, (void*) &smc, (void*) &sms,
-        (void*) &sd, (void*) &sdc, (void*) &sds,
-        p2, p3);
 
     // Get abstraction.
     get_universal_compound_element_by_name(p0, p1,
@@ -138,27 +112,51 @@ void add(void* p0, int* p1, void* p2, void* p3, void* p4) {
         (void*) &am, (void*) &amc, (void*) &ams,
         (void*) &ad, (void*) &adc, (void*) &ads,
         p2, p3);
+    // Get summand 1.
+    get_universal_compound_element_by_name(p0, p1,
+        (void*) ADD_SUMMAND_1_NAME, (void*) ADD_SUMMAND_1_NAME_COUNT,
+        (void*) &s1n, (void*) &s1nc, (void*) &s1ns,
+        (void*) &s1a, (void*) &s1ac, (void*) &s1as,
+        (void*) &s1m, (void*) &s1mc, (void*) &s1ms,
+        (void*) &s1d, (void*) &s1dc, (void*) &s1ds,
+        p2, p3);
+    // Get summand 2.
+    get_universal_compound_element_by_name(p0, p1,
+        (void*) ADD_SUMMAND_2_NAME, (void*) ADD_SUMMAND_2_NAME_COUNT,
+        (void*) &s2n, (void*) &s2nc, (void*) &s2ns,
+        (void*) &s2a, (void*) &s2ac, (void*) &s2as,
+        (void*) &s2m, (void*) &s2mc, (void*) &s2ms,
+        (void*) &s2d, (void*) &s2dc, (void*) &s2ds,
+        p2, p3);
+    // Get sum.
+    get_universal_compound_element_by_name(p0, p1,
+        (void*) ADD_SUM_NAME, (void*) ADD_SUM_NAME_COUNT,
+        (void*) &sn, (void*) &snc, (void*) &sns,
+        (void*) &sa, (void*) &sac, (void*) &sas,
+        (void*) &sm, (void*) &smc, (void*) &sms,
+        (void*) &sd, (void*) &sdc, (void*) &sds,
+        p2, p3);
 
     // The comparison result.
-    int r = 0;
+    int r = *NUMBER_0_INTEGER;
 
-    if (r == 0) {
-
-        compare_arrays(*am, *amc, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != 0) {
-
-            add_integer_vector(sm, *smc, *sms, *s1m, *s1mc, *s2m, *s2mc);
-        }
-    }
-
-    if (r == 0) {
+    if (r == *NUMBER_0_INTEGER) {
 
         compare_arrays(*am, *amc, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r != 0) {
+        if (r != *NUMBER_0_INTEGER) {
 
             add_character_vector(sm, *smc, *sms, *s1m, *s1mc, *s2m, *s2mc);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER) {
+
+        compare_arrays(*am, *amc, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != *NUMBER_0_INTEGER) {
+
+            add_integer_vector(sm, *smc, *sms, *s1m, *s1mc, *s2m, *s2mc);
         }
     }
 }

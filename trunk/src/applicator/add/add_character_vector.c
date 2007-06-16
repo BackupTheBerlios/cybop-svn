@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2007-05-26 21:19:57 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2007-06-16 21:53:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -86,7 +86,7 @@ void add_character_vector(void* p0, void* p1, void* p2, void* p3, void* p4, void
                         void* summand2 = *NULL_POINTER;
                         int summand2c = *s2c;
 
-                        // Allocate temporary operand arrays.
+                        // Allocate temporary input operand arrays.
                         allocate_array((void*) &summand1, (void*) &summand1c, (void*) CHARACTER_ARRAY);
                         allocate_array((void*) &summand2, (void*) &summand2c, (void*) CHARACTER_ARRAY);
 
@@ -103,10 +103,10 @@ void add_character_vector(void* p0, void* p1, void* p2, void* p3, void* p4, void
                         *ss = summand1c + summand2c;
                         *sc = *NUMBER_0_INTEGER;
 
-                        // Reallocate output operand arrays.
+                        // Reallocate output operand array.
                         reallocate_array(p0, p1, p2, (void*) CHARACTER_ARRAY);
 
-                        // Set output operand arrays.
+                        // Set output operand array.
                         set_array_elements(*s, (void*) sc, summand1, (void*) &summand1c, (void*) CHARACTER_ARRAY);
                         *sc = *sc + summand1c;
                         set_array_elements(*s, (void*) sc, summand2, (void*) &summand2c, (void*) CHARACTER_ARRAY);

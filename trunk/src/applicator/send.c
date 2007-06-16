@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.50 $ $Date: 2007-05-16 19:29:01 $ $Author: christian $
+ * @version $Revision: 1.51 $ $Date: 2007-06-16 21:53:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -313,6 +313,19 @@ void send_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
     void** cld = NULL_POINTER;
     void** cldc = NULL_POINTER;
     void** clds = NULL_POINTER;
+    // The new line name, abstraction, model, details.
+    void** nln = NULL_POINTER;
+    void** nlnc = NULL_POINTER;
+    void** nlns = NULL_POINTER;
+    void** nla = NULL_POINTER;
+    void** nlac = NULL_POINTER;
+    void** nlas = NULL_POINTER;
+    void** nlm = NULL_POINTER;
+    void** nlmc = NULL_POINTER;
+    void** nlms = NULL_POINTER;
+    void** nld = NULL_POINTER;
+    void** nldc = NULL_POINTER;
+    void** nlds = NULL_POINTER;
 
     // Get channel.
     get_universal_compound_element_by_name(p0, p1,
@@ -404,6 +417,15 @@ void send_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
         (void*) &cld, (void*) &cldc, (void*) &clds,
         p3, p4);
 
+    // Get new line flag.
+    get_universal_compound_element_by_name(p0, p1,
+        (void*) SEND_NEW_LINE_NAME, (void*) SEND_NEW_LINE_NAME_COUNT,
+        (void*) &nln, (void*) &nlnc, (void*) &nlns,
+        (void*) &nla, (void*) &nlac, (void*) &nlas,
+        (void*) &nlm, (void*) &nlmc, (void*) &nlms,
+        (void*) &nld, (void*) &nldc, (void*) &nlds,
+        p3, p4);
+
     // The comparison result.
     int r = *NUMBER_0_INTEGER;
 
@@ -433,7 +455,7 @@ void send_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
 
         if (r != *NUMBER_0_INTEGER) {
 
-            send_shell(p2, *ma, *mac, *mm, *mmc, *md, *mdc, p3, p4, *lm, *lmc, *clm, *clmc);
+            send_shell(p2, *ma, *mac, *mm, *mmc, *md, *mdc, p3, p4, *lm, *lmc, *clm, *clmc, *nlm, *nlmc);
         }
     }
 
