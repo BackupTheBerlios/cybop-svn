@@ -24,7 +24,7 @@
  * - read data from a device into a byte array
  * - write data from a byte array to a device
  *
- * @version $Revision: 1.15 $ $Date: 2007-05-08 22:02:38 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2007-06-22 07:07:14 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -38,9 +38,9 @@
 #include "../memoriser/array.c"
 #include "../memoriser/communicator/file_communicator.c"
 #include "../memoriser/communicator/ftp_communicator.c"
+#include "../memoriser/communicator/gnu_linux_console_communicator.c"
 #include "../memoriser/communicator/http_communicator.c"
 #include "../memoriser/communicator/inline_communicator.c"
-#include "../memoriser/communicator/linux_console_communicator.c"
 #include "../memoriser/communicator/socket_communicator.c"
 #include "../memoriser/communicator/x_window_system_communicator.c"
 
@@ -121,11 +121,11 @@ void read_data(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p5, p6, (void*) LINUX_CONSOLE_MODEL, (void*) LINUX_CONSOLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p5, p6, (void*) GNU_LINUX_CONSOLE_MODEL, (void*) GNU_LINUX_CONSOLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
-            read_linux_console(p0, p1, p2, p3, p4);
+            read_gnu_linux_console(p0, p1, p2, p3, p4);
         }
     }
 
@@ -227,11 +227,11 @@ void write_data(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p5, p6, (void*) LINUX_CONSOLE_MODEL, (void*) LINUX_CONSOLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p5, p6, (void*) GNU_LINUX_CONSOLE_MODEL, (void*) GNU_LINUX_CONSOLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
-            write_linux_console(p0, p1, p2, p3, p4);
+            write_gnu_linux_console(p0, p1, p2, p3, p4);
         }
     }
 

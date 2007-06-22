@@ -22,7 +22,7 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.44 $ $Date: 2007-06-16 21:57:34 $ $Author: christian $
+# @version $Revision: 1.45 $ $Date: 2007-06-22 07:07:13 $ $Author: christian $
 # @author Michael Simon <michael.simon@gmx.net>
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
@@ -96,7 +96,7 @@ SRC = $(ROOT)/src
 #
 
 BINARY = cyboi
-# Normal compiler to generate a linux executable.
+# Normal compiler to generate a gnu/linux executable.
 COMPILER = gcc
 # Cross-compiler to generate a windows executable.
 #COMPILER = /usr/bin/i586-mingw32msvc-gcc
@@ -106,7 +106,7 @@ COMPILER = gcc
 # current source directory before searching the system directories for
 # installed headers of the same name.
 COMPILER_FLAGS = -g -l/usr/include -I/usr/include/libxml2 -I/usr/X11R6/include -l/usr/include/GL \
-	-D LINUX_OPERATING_SYSTEM
+	-D GNU_LINUX_OPERATING_SYSTEM
 #	-D WIN32_OPERATING_SYSTEM
 # INTEL_300_PROCESSOR // 80386
 # INTEL_400_PROCESSOR // 80486
@@ -267,7 +267,7 @@ all: export \
 	@echo Compiled cyboi files.
 
 #
-# Exports variables for cross-compilation under linux.
+# Exports variables for cross-compilation under gnu/linux.
 #
 # If working with configure, then use the following flags:
 # ./configure --host=i586-mingw32 --build=$(./config.guess) \

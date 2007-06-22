@@ -20,14 +20,14 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2007-05-26 21:19:57 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2007-06-22 07:07:14 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef RECEIVE_FILE_SYSTEM_SOURCE
 #define RECEIVE_FILE_SYSTEM_SOURCE
 
-#ifdef LINUX_OPERATING_SYSTEM
+#ifdef GNU_LINUX_OPERATING_SYSTEM
 
 #include "../../globals/constants/cybol/cybol_abstraction_constants.c"
 #include "../../globals/constants/log/log_message_constants.c"
@@ -465,7 +465,7 @@ void receive_file_system(void* p0, void* p1, void* p2,
     }
 }
 
-/* LINUX_OPERATING_SYSTEM */
+/* GNU_LINUX_OPERATING_SYSTEM */
 #endif
 
 /* RECEIVE_FILE_SYSTEM_SOURCE */

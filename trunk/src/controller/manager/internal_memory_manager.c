@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.12 $ $Date: 2007-05-26 21:19:58 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2007-06-22 07:07:14 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -65,7 +65,7 @@
  * @param p6 the signal memory size (Hand over as reference!)
  * @param p7 the signal memory interrupt request flag (Hand over as reference!)
  * @param p8 the signal memory mutex (Hand over as reference!)
- * @param p9 the linux console mutex (Hand over as reference!)
+ * @param p9 the gnu/linux console mutex (Hand over as reference!)
  * @param p10 the x window system mutex (Hand over as reference!)
  * @param p11 the www service mutex (Hand over as reference!)
  * @param p12 the cyboi service mutex (Hand over as reference!)
@@ -122,8 +122,8 @@ void startup_internal_memory(void* p0, void* p1, void* p2, void* p3, void* p4, v
     set(p0, (void*) INTERRUPT_REQUEST_INTERNAL, p7, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     // Set signal memory mutex.
     set(p0, (void*) SIGNAL_MEMORY_MUTEX_INTERNAL, p8, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    // Set linux console mutex.
-    set(p0, (void*) LINUX_CONSOLE_MUTEX_INTERNAL, p9, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    // Set gnu/linux console mutex.
+    set(p0, (void*) GNU_LINUX_CONSOLE_MUTEX_INTERNAL, p9, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     // Set x window system mutex.
     set(p0, (void*) X_WINDOW_SYSTEM_MUTEX_INTERNAL, p10, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     // Set www service mutex.

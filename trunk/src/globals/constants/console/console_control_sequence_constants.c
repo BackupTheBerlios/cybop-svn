@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2007-04-16 16:45:37 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2007-06-22 07:07:14 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -207,7 +207,7 @@ static int* WHITE_BACKGROUND_CONTROL_SEQUENCE_COUNT = NUMBER_2_INTEGER_ARRAY;
 //
 
 //?? TODO: These constants should be of type wchar_t in future!
-//?? But that means that then also the linux console input needs to be changed.
+//?? But that means that then also the gnu/linux console input needs to be changed.
 
 /** The arrow up control sequence. */
 //?? static wchar_t ARROW_UP_CONTROL_SEQUENCE_ARRAY[] = {0x001B, 0x005B, 0x0041};

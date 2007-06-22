@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 
 <model>
-    <part name="user_interface" channel="inline" abstraction="character" model="linux_console"/>
+    <part name="user_interface" channel="inline" abstraction="character" model="gnu_linux_console"/>
     <part name="tui" channel="file" abstraction="compound" model="ui_control/settings/tui.cybol"/>
 <!--
     <part name="user_interface" channel="inline" abstraction="character" model="x_window_system"/>
@@ -31,6 +31,6 @@
     http://www.cybop.net
     - Cybernetics Oriented Programming -
 
-    @version $Revision: 1.1 $ $Date: 2007-05-31 22:05:24 $ $Author: christian $
+    @version $Revision: 1.2 $ $Date: 2007-06-22 07:07:13 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->

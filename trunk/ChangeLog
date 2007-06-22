@@ -14,9 +14,14 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.6 $ $Date: 2007-06-16 21:58:43 $ $Author: christian $
+# @version $Revision: 1.7 $ $Date: 2007-06-22 07:07:13 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2007-06-22  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Replace "Linux" symbol names in all project and source files with "GNU/Linux"; see:
+            http://www.gnu.org/gnu/linux-and-gnu.html
 
 2007-06-16  Christian Heller  <christian.heller@tuxtax.de>
 
@@ -49,7 +54,7 @@
 
 2007-05-15  Christian Heller  <christian.heller@tuxtax.de>
 
-        * Fix error in linux_console_converter serialisation that caused the tui to crash (integer vector elements were read as pointers, not integers)
+        * Fix error in gnu_linux_console_converter serialisation that caused the tui to crash (integer vector elements were read as pointers, not integers)
         * Start searching error that null pointers do not keep their value in pointer arrays; included debug log messages
 
 2007-05-10  Christian Heller  <christian.heller@tuxtax.de>
@@ -236,7 +241,7 @@
 
         * Release cyboi 0.7.0
         * Add <i>libpthread</i> library to Makefile, for linking
-        * Add minor things to Makefile, for Linux-Windows platform compilations,
+        * Add minor things to Makefile, for GNU/Linux-Windows platform compilations,
             so that conditional preprocessor directives like:
             <i>#ifdef LINUX_OPERATING_SYSTEM</i> can be used in the source code
         * Implement x window system gui event handling
@@ -245,7 +250,7 @@
             --> the decision fell on a simple <i>sleep</i> loop for reasons explained in the code;<br>
             change signal <i>wait</i> loop to become blocking, that is to react only to interrupts;
             this avoids wasting system resources (CPU activity) as it happened up to now
-        * Implement threads using mutexes (atomic flags) for reception of signals via x window system and linux console (terminal)
+        * Implement threads using mutexes (atomic flags) for reception of signals via x window system and gnu linux console (terminal)
         * Exit threads using the USR1 operating system signal
         * Prepare access to meta elements of a compound double hierarchy and completely restructure
             <i>memoriser/accessor/compound_accessor.c</i><br>

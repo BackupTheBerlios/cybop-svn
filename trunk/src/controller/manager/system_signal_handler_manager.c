@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2007-05-26 21:19:58 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2007-06-22 07:07:14 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -40,7 +40,7 @@
  * Reacts to an interrupt service system signal.
  *
  * Services run in a separate thread each, for example:
- * - linux console
+ * - gnu/linux console
  * - unix socket
  * - tcp socket
  * - x window system
@@ -66,18 +66,18 @@ void interrupt_service_system_signal_handler(int p0) {
 
 //??    fprintf(stdout, "TEST signal handler thread t: %l\n", t);
 
-    if (t == *LINUX_CONSOLE_THREAD) {
+    if (t == *GNU_LINUX_CONSOLE_THREAD) {
 
-//??    fprintf(stdout, "TEST signal handler linux console %i\n", p0);
+//??    fprintf(stdout, "TEST signal handler gnu/linux console %i\n", p0);
 
-        if (*LINUX_CONSOLE_THREAD_INTERRUPT != *NUMBER_0_INTEGER) {
+        if (*GNU_LINUX_CONSOLE_THREAD_INTERRUPT != *NUMBER_0_INTEGER) {
 
-//??    fprintf(stdout, "TEST signal handler linux console irq %i\n", p0);
+//??    fprintf(stdout, "TEST signal handler gnu/linux console irq %i\n", p0);
 
             pthread_exit(*NULL_POINTER);
 
             // CAUTION! The thread CANNOT be reset here with:
-            // *LINUX_CONSOLE_THREAD = *INVALID_VALUE;
+            // *GNU_LINUX_CONSOLE_THREAD = *INVALID_VALUE;
             // because this line would NOT be reached anymore,
             // after "pthread_exit" has been called above!
             // Therefore, do the reset in the corresponding

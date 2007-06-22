@@ -20,14 +20,14 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2007-05-26 21:19:57 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2007-06-22 07:07:14 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef INTERRUPT_X_WINDOW_SYSTEM_SOURCE
 #define INTERRUPT_X_WINDOW_SYSTEM_SOURCE
 
-#ifdef LINUX_OPERATING_SYSTEM
+#ifdef GNU_LINUX_OPERATING_SYSTEM
 
 #include <sys/signal.h>
 #include <pthread.h>
@@ -77,7 +77,7 @@ void interrupt_x_window_system() {
     }
 }
 
-/* LINUX_OPERATING_SYSTEM */
+/* GNU_LINUX_OPERATING_SYSTEM */
 #endif
 
 /* INTERRUPT_X_WINDOW_SYSTEM_SOURCE */

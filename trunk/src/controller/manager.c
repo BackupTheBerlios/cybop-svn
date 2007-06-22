@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.36 $ $Date: 2007-05-26 21:19:58 $ $Author: christian $
+ * @version $Revision: 1.37 $ $Date: 2007-06-22 07:07:14 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -125,8 +125,8 @@ void manage(void* p0, void* p1) {
 
     // The signal memory mutex.
     pthread_mutex_t* signal_memory_mutex = (pthread_mutex_t*) *NULL_POINTER;
-    // The linux console mutex.
-    pthread_mutex_t* linux_console_mutex = (pthread_mutex_t*) *NULL_POINTER;
+    // The gnu/linux console mutex.
+    pthread_mutex_t* gnu_linux_console_mutex = (pthread_mutex_t*) *NULL_POINTER;
     // The x window system mutex.
     pthread_mutex_t* x_window_system_mutex = (pthread_mutex_t*) *NULL_POINTER;
     // The www service mutex.
@@ -144,8 +144,8 @@ void manage(void* p0, void* p1) {
     irq = (volatile sig_atomic_t*) malloc(sizeof(volatile sig_atomic_t));
     // Allocate signal memory mutex.
     signal_memory_mutex = (pthread_mutex_t*) malloc(sizeof(pthread_mutex_t));
-    // Allocate linux console mutex.
-    linux_console_mutex = (pthread_mutex_t*) malloc(sizeof(pthread_mutex_t));
+    // Allocate gnu/linux console mutex.
+    gnu_linux_console_mutex = (pthread_mutex_t*) malloc(sizeof(pthread_mutex_t));
     // Allocate x window system mutex.
     x_window_system_mutex = (pthread_mutex_t*) malloc(sizeof(pthread_mutex_t));
     // Allocate www service mutex.
@@ -166,11 +166,11 @@ void manage(void* p0, void* p1) {
     // initialise the mutex. If the parameter is null, the mutex is
     // initialised with default attributes.
     pthread_mutex_init(signal_memory_mutex, *NULL_POINTER);
-    // Initialise linux console mutex.
+    // Initialise gnu/linux console mutex.
     // The second parameter specifies attributes that are to be used to
     // initialise the mutex. If the parameter is null, the mutex is
     // initialised with default attributes.
-    pthread_mutex_init(linux_console_mutex, *NULL_POINTER);
+    pthread_mutex_init(gnu_linux_console_mutex, *NULL_POINTER);
     // Initialise x window system mutex.
     // The second parameter specifies attributes that are to be used to
     // initialise the mutex. If the parameter is null, the mutex is
@@ -216,7 +216,7 @@ void manage(void* p0, void* p1) {
         (void*) &s, (void*) &sc, (void*) &ss,
         (void*) &irq,
         (void*) &signal_memory_mutex,
-        (void*) &linux_console_mutex,
+        (void*) &gnu_linux_console_mutex,
         (void*) &x_window_system_mutex,
         (void*) &www_service_mutex,
         (void*) &cyboi_service_mutex);
@@ -295,8 +295,8 @@ void manage(void* p0, void* p1) {
     // corresponding service shutdown operation in cybol logic templates.
     // The "interrupt" procedures are called within the "shutdown" procedures.
 
-    // Shutdown linux console.
-    shutdown_linux_console(i, k, (void*) kc, (void*) ks);
+    // Shutdown gnu/linux console.
+    shutdown_gnu_linux_console(i, k, (void*) kc, (void*) ks);
     // Shutdown x window system.
     shutdown_x_window_system(i, k, (void*) kc, (void*) ks);
     // Shutdown www service.
@@ -312,8 +312,8 @@ void manage(void* p0, void* p1) {
 
     // Destroy signal memory mutex.
     pthread_mutex_destroy(signal_memory_mutex);
-    // Destroy linux console mutex.
-    pthread_mutex_destroy(linux_console_mutex);
+    // Destroy gnu/linux console mutex.
+    pthread_mutex_destroy(gnu_linux_console_mutex);
     // Destroy x window system mutex.
     pthread_mutex_destroy(x_window_system_mutex);
     // Destroy www service mutex.
@@ -325,8 +325,8 @@ void manage(void* p0, void* p1) {
     free((void*) irq);
     // Deallocate signal memory mutex.
     free((void*) signal_memory_mutex);
-    // Deallocate linux console mutex.
-    free((void*) linux_console_mutex);
+    // Deallocate gnu/linux console mutex.
+    free((void*) gnu_linux_console_mutex);
     // Deallocate x window system mutex.
     free((void*) x_window_system_mutex);
     // Deallocate www service mutex.

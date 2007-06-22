@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2007-04-16 16:45:37 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2007-06-22 07:07:14 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,8 +30,8 @@
 #include "../../../globals/constants/integer/integer_constants.c"
 
 //?? Check out http://www.comptechdoc.org/os/linux/howlinuxworks/linux_hlkeycodes.html
-//?? or google: linux keyboard terminal keycodes mapping table
-//?? Linux kernel source: http://www.topology.org/linux/charpath.html
+//?? or google: gnu linux keyboard terminal keycodes mapping table
+//?? GNU/Linux kernel source: http://www.topology.org/linux/charpath.html
 
 /** The escape key code. */
 static int ESCAPE_KEY_CODE_ARRAY[] = {1};

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.30 $ $Date: 2007-05-16 19:29:02 $ $Author: christian $
+ * @version $Revision: 1.31 $ $Date: 2007-06-22 07:07:14 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -41,7 +41,7 @@
 #include "../memoriser/converter/integer_converter.c"
 #include "../memoriser/converter/integer_vector_converter.c"
 #include "../memoriser/converter/latex_converter.c"
-#include "../memoriser/converter/linux_console_converter.c"
+#include "../memoriser/converter/gnu_linux_console_converter.c"
 #include "../memoriser/converter/model_diagram_converter.c"
 #include "../memoriser/converter/x_window_system_converter.c"
 #include "../memoriser/converter/xdt_converter.c"
@@ -192,11 +192,11 @@ void parse(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p8, p9, (void*) LINUX_CONSOLE_MODEL, (void*) LINUX_CONSOLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p8, p9, (void*) GNU_LINUX_CONSOLE_MODEL, (void*) GNU_LINUX_CONSOLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
-            parse_linux_console(p0, p1, p2, p6, p7);
+            parse_gnu_linux_console(p0, p1, p2, p6, p7);
         }
     }
 
@@ -381,11 +381,11 @@ void serialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p13, p14, (void*) LINUX_CONSOLE_MODEL, (void*) LINUX_CONSOLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p13, p14, (void*) GNU_LINUX_CONSOLE_MODEL, (void*) GNU_LINUX_CONSOLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
-//??            serialise_linux_console(p0, p1, p2, p7, p8, *NULL_POINTER, *NULL_POINTER, p13, p14);
+//??            serialise_gnu_linux_console(p0, p1, p2, p7, p8, *NULL_POINTER, *NULL_POINTER, p13, p14);
         }
     }
 

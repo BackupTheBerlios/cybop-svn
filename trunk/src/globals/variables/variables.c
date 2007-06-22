@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.12 $ $Date: 2007-05-26 21:19:58 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2007-06-22 07:07:14 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -57,8 +57,8 @@ static int* DOUBLE_PRIMITIVE_SIZE = (int*) NULL_POINTER_ARRAY;
 // Thread identifications and service interrupt flags.
 //
 
-// The linux console thread.
-static pthread_t* LINUX_CONSOLE_THREAD = (pthread_t*) NULL_POINTER_ARRAY;
+// The gnu linux console thread.
+static pthread_t* GNU_LINUX_CONSOLE_THREAD = (pthread_t*) NULL_POINTER_ARRAY;
 // The x window system thread.
 static pthread_t* X_WINDOW_SYSTEM_THREAD = (pthread_t*) NULL_POINTER_ARRAY;
 // The www service thread.
@@ -66,8 +66,8 @@ static pthread_t* WWW_SERVICE_THREAD = (pthread_t*) NULL_POINTER_ARRAY;
 // The cyboi service thread.
 static pthread_t* CYBOI_SERVICE_THREAD = (pthread_t*) NULL_POINTER_ARRAY;
 
-// The linux console interrupt flag.
-static int* LINUX_CONSOLE_THREAD_INTERRUPT = (int*) NULL_POINTER_ARRAY;
+// The gnu linux console interrupt flag.
+static int* GNU_LINUX_CONSOLE_THREAD_INTERRUPT = (int*) NULL_POINTER_ARRAY;
 // The x window system interrupt flag.
 static int* X_WINDOW_SYSTEM_THREAD_INTERRUPT = (int*) NULL_POINTER_ARRAY;
 // The www service interrupt flag.

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2007-05-16 19:29:01 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2007-06-22 07:07:14 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -28,7 +28,7 @@
 #ifndef INTERRUPT_SOCKET_SOURCE
 #define INTERRUPT_SOCKET_SOURCE
 
-#ifdef LINUX_OPERATING_SYSTEM
+#ifdef GNU_LINUX_OPERATING_SYSTEM
 
 #include <sys/signal.h>
 #include <sys/socket.h>
@@ -130,7 +130,7 @@ void interrupt_socket() {
     }
 }
 
-/* LINUX_OPERATING_SYSTEM */
+/* GNU_LINUX_OPERATING_SYSTEM */
 #endif
 
 /* INTERRUPT_SOCKET_SOURCE */

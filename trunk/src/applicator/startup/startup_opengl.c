@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2007-05-26 21:19:58 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2007-06-22 07:07:14 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -48,13 +48,13 @@ void startup_opengl(void* p0, void* p1, void* p2, void* p3) {
 
     log_message_debug("Startup opengl.");
 
-#ifdef LINUX_OPERATING_SYSTEM
+#ifdef GNU_LINUX_OPERATING_SYSTEM
 
     // Startup x window system AT FIRST.
     // The opengl environment needs its windows to have something to paint on.
     startup_x_window_system(p0, p1, p2, p3);
 
-/* LINUX_OPERATING_SYSTEM */
+/* GNU_LINUX_OPERATING_SYSTEM */
 #endif
 }
 

@@ -1,5 +1,5 @@
 /*
- * $RCSfile: send_linux_console.c,v $
+ * $RCSfile: send_gnu_linux_console.c,v $
  *
  * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
  *
@@ -20,12 +20,12 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.51 $ $Date: 2007-05-16 19:29:01 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2007-06-22 07:07:14 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef SEND_LINUX_CONSOLE_SOURCE
-#define SEND_LINUX_CONSOLE_SOURCE
+#ifndef SEND_GNU_LINUX_CONSOLE_SOURCE
+#define SEND_GNU_LINUX_CONSOLE_SOURCE
 
 #include <stdio.h>
 #include <unistd.h>
@@ -44,7 +44,7 @@
 #include "../../memoriser/converter.c"
 
 /**
- * Sends a textual user interface (tui) via linux console.
+ * Sends a textual user interface (tui) via gnu/linux console.
  *
  * @param p0 the internal memory
  * @param p1 the source root abstraction
@@ -60,12 +60,12 @@
  * @param p11 the knowledge memory
  * @param p12 the knowledge memory count
  */
-void send_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4,
+void send_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4,
     void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11, void* p12) {
 
-    log_message_debug("Send linux console message.");
+    log_message_debug("Send gnu/linux console message.");
 
-    // The serialised string array to be sent to the linux console (terminal).
+    // The serialised string array to be sent to the gnu/linux console (terminal).
     void* a = *NULL_POINTER;
     int ac = *NUMBER_0_INTEGER;
     int as = *NUMBER_0_INTEGER;
@@ -101,20 +101,20 @@ void send_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4,
     }
 
     // Serialise textual user interface (tui) into array.
-    serialise_linux_console((void*) &a, (void*) &ac, (void*) &as, p1, p2, p3, p4, p5, p6, *NULL_POINTER, *NULL_POINTER, p7, p8, p11, p12);
+    serialise_gnu_linux_console((void*) &a, (void*) &ac, (void*) &as, p1, p2, p3, p4, p5, p6, *NULL_POINTER, *NULL_POINTER, p7, p8, p11, p12);
 
-    // The linux console output stream.
+    // The gnu/linux console output stream.
     void** op = NULL_POINTER;
 
-    // Get linux console output stream.
-    get_array_elements(p0, (void*) LINUX_CONSOLE_OUTPUT_FILE_DESCRIPTOR_INTERNAL, (void*) &op, (void*) POINTER_ARRAY);
+    // Get gnu/linux console output stream.
+    get_array_elements(p0, (void*) GNU_LINUX_CONSOLE_OUTPUT_FILE_DESCRIPTOR_INTERNAL, (void*) &op, (void*) POINTER_ARRAY);
 
-    // Write serialised array as message to linux console.
-    write_data((void*) op, *NULL_POINTER, *NULL_POINTER, a, (void*) &ac, (void*) LINUX_CONSOLE_MODEL, (void*) LINUX_CONSOLE_MODEL_COUNT);
+    // Write serialised array as message to gnu/linux console.
+    write_data((void*) op, *NULL_POINTER, *NULL_POINTER, a, (void*) &ac, (void*) GNU_LINUX_CONSOLE_MODEL, (void*) GNU_LINUX_CONSOLE_MODEL_COUNT);
 
     // Deallocate array.
     deallocate((void*) &a, (void*) &as, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
 }
 
-/* SEND_LINUX_CONSOLE_SOURCE */
+/* SEND_GNU_LINUX_CONSOLE_SOURCE */
 #endif

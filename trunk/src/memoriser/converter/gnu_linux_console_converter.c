@@ -1,5 +1,5 @@
 /*
- * $RCSfile: linux_console_converter.c,v $
+ * $RCSfile: gnu_linux_console_converter.c,v $
  *
  * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
  *
@@ -20,12 +20,12 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.25 $ $Date: 2007-05-26 21:19:58 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2007-06-22 07:07:14 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef LINUX_CONSOLE_CONVERTER_SOURCE
-#define LINUX_CONSOLE_CONVERTER_SOURCE
+#ifndef GNU_LINUX_CONSOLE_CONVERTER_SOURCE
+#define GNU_LINUX_CONSOLE_CONVERTER_SOURCE
 
 #ifdef CYGWIN_ENVIRONMENT
 #include <windows.h>
@@ -52,7 +52,7 @@
 #include "../../memoriser/mapper.c"
 
 /**
- * Serialises a linux console character.
+ * Serialises a gnu/linux console character.
  *
  * @param p0 the destination terminal control sequences (Hand over as reference!)
  * @param p1 the destination count
@@ -71,7 +71,7 @@
  * @param p14 the bold property
  * @param p15 the character property
  */
-void serialise_linux_console_character(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
+void serialise_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
     void* p6, void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14, void* p15) {
 
     if (p9 != *NULL_POINTER) {
@@ -102,7 +102,7 @@ void serialise_linux_console_character(void* p0, void* p1, void* p2, void* p3, v
 
                                 void** d = (void**) p0;
 
-                                log_message_debug("Debug: Serialise linux console character.");
+                                log_message_debug("Debug: Serialise gnu/linux console character.");
 
                                 if (p15 != *NULL_POINTER) {
 
@@ -349,47 +349,47 @@ void serialise_linux_console_character(void* p0, void* p1, void* p2, void* p3, v
 
                                 } else {
 
-                                    log_message_debug("WARNING: Could not serialise linux console properties. The character is null.");
+                                    log_message_debug("WARNING: Could not serialise gnu/linux console properties. The character is null.");
                                 }
 
                             } else {
 
-                                log_message_debug("Could not serialise linux console properties. The destination is null.");
+                                log_message_debug("Could not serialise gnu/linux console properties. The destination is null.");
                             }
 
                         } else {
 
-                            log_message_debug("Could not serialise linux console properties. The destination count is null.");
+                            log_message_debug("Could not serialise gnu/linux console properties. The destination count is null.");
                         }
 
                     } else {
 
-                        log_message_debug("Could not serialise linux console properties. The destination size is null.");
+                        log_message_debug("Could not serialise gnu/linux console properties. The destination size is null.");
                     }
 
                 } else {
 
-                    log_message_debug("Could not serialise linux console properties. The source y is null.");
+                    log_message_debug("Could not serialise gnu/linux console properties. The source y is null.");
                 }
 
             } else {
 
-                log_message_debug("Could not serialise linux console properties. The source x is null.");
+                log_message_debug("Could not serialise gnu/linux console properties. The source x is null.");
             }
 
         } else {
 
-            log_message_debug("Could not serialise linux console properties. The background count is null.");
+            log_message_debug("Could not serialise gnu/linux console properties. The background count is null.");
         }
 
     } else {
 
-        log_message_debug("Could not serialise linux console properties. The foreground count is null.");
+        log_message_debug("Could not serialise gnu/linux console properties. The foreground count is null.");
     }
 }
 
 /**
- * Serialises a linux console rectangle border.
+ * Serialises a gnu/linux console rectangle border.
  *
  * @param p0 the horizontal character
  * @param p1 the vertical character
@@ -400,7 +400,7 @@ void serialise_linux_console_character(void* p0, void* p1, void* p2, void* p3, v
  * @param p6 the border
  * @param p7 the border count
  */
-void serialise_linux_console_rectangle_border(void* p0, void* p1,
+void serialise_gnu_linux_console_rectangle_border(void* p0, void* p1,
     void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
 
     if (p5 != *NULL_POINTER) {
@@ -427,7 +427,7 @@ void serialise_linux_console_rectangle_border(void* p0, void* p1,
 
                             wchar_t* hc = (wchar_t*) p0;
 
-                            log_message_debug("Debug: Serialise linux console rectangle border.");
+                            log_message_debug("Debug: Serialise gnu/linux console rectangle border.");
 
                             // The comparison result.
                             int r = *NUMBER_0_INTEGER;
@@ -479,37 +479,37 @@ void serialise_linux_console_rectangle_border(void* p0, void* p1,
 
                         } else {
 
-                            log_message_debug("Could not serialise linux console rectangle border. The horizontal character is null.");
+                            log_message_debug("Could not serialise gnu/linux console rectangle border. The horizontal character is null.");
                         }
 
                     } else {
 
-                        log_message_debug("Could not serialise linux console rectangle border. The vertical character is null.");
+                        log_message_debug("Could not serialise gnu/linux console rectangle border. The vertical character is null.");
                     }
 
                 } else {
 
-                    log_message_debug("Could not serialise linux console rectangle border. The left top character is null.");
+                    log_message_debug("Could not serialise gnu/linux console rectangle border. The left top character is null.");
                 }
 
             } else {
 
-                log_message_debug("Could not serialise linux console rectangle border. The right top character is null.");
+                log_message_debug("Could not serialise gnu/linux console rectangle border. The right top character is null.");
             }
 
         } else {
 
-            log_message_debug("Could not serialise linux console rectangle border. The left bottom character is null.");
+            log_message_debug("Could not serialise gnu/linux console rectangle border. The left bottom character is null.");
         }
 
     } else {
 
-        log_message_debug("Could not serialise linux console rectangle border. The right bottom character is null.");
+        log_message_debug("Could not serialise gnu/linux console rectangle border. The right bottom character is null.");
     }
 }
 
 /**
- * Serialises a linux console rectangle.
+ * Serialises a gnu/linux console rectangle.
  *
  * @param p0 the destination terminal control sequences (Hand over as reference!)
  * @param p1 the destination count
@@ -534,7 +534,7 @@ void serialise_linux_console_rectangle_border(void* p0, void* p1,
  * @param p20 the border
  * @param p21 the border count
  */
-void serialise_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, void* p4,
+void serialise_gnu_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, void* p4,
     void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13,
     void* p14, void* p15, void* p16, void* p17, void* p18, void* p19, void* p20, void* p21) {
 
@@ -564,7 +564,7 @@ void serialise_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, v
 
                             int* cc = (int*) p4;
 
-                            log_message_debug("Debug: Serialise linux console rectangle.");
+                            log_message_debug("Debug: Serialise gnu/linux console rectangle.");
 
                             // The horizontal character.
                             wchar_t hc = *SPACE_WIDE_CHARACTER;
@@ -580,7 +580,7 @@ void serialise_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, v
                             wchar_t rbc = *SPACE_WIDE_CHARACTER;
 
                             // Determine border characters.
-                            serialise_linux_console_rectangle_border((void*) &hc, (void*) &vc,
+                            serialise_gnu_linux_console_rectangle_border((void*) &hc, (void*) &vc,
                                 (void*) &ltc, (void*) &rtc, (void*) &lbc, (void*) &rbc, p20, p21);
 
                             // The z loop count.
@@ -638,12 +638,12 @@ void serialise_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, v
                                                 }
 
                                                 // Serialise character using escape codes.
-                                                serialise_linux_console_character(p0, p1, p2, &x, &y, &z,
+                                                serialise_gnu_linux_console_character(p0, p1, p2, &x, &y, &z,
                                                     p10, p11, p12, p13, p5, p6, p7, p8, p9, c);
 
                                             } else {
 
-                                                log_message_debug("Could not serialise linux console rectangle. The character count is null.");
+                                                log_message_debug("Could not serialise gnu/linux console rectangle. The character count is null.");
                                             }
 
                                         } else {
@@ -655,19 +655,19 @@ void serialise_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, v
                                                 if (x == *px) {
 
                                                     // Serialise left top border character using escape codes.
-                                                    serialise_linux_console_character(p0, p1, p2, &x, &y, &z,
+                                                    serialise_gnu_linux_console_character(p0, p1, p2, &x, &y, &z,
                                                         p10, p11, p12, p13, p5, p6, p7, p8, p9, &ltc);
 
                                                 } else if (x == (xl - *NUMBER_1_INTEGER)) {
 
                                                     // Serialise right top border character using escape codes.
-                                                    serialise_linux_console_character(p0, p1, p2, &x, &y, &z,
+                                                    serialise_gnu_linux_console_character(p0, p1, p2, &x, &y, &z,
                                                         p10, p11, p12, p13, p5, p6, p7, p8, p9, &rtc);
 
                                                 } else {
 
                                                     // Serialise horizontal border character using escape codes.
-                                                    serialise_linux_console_character(p0, p1, p2, &x, &y, &z,
+                                                    serialise_gnu_linux_console_character(p0, p1, p2, &x, &y, &z,
                                                         p10, p11, p12, p13, p5, p6, p7, p8, p9, &hc);
                                                 }
 
@@ -676,19 +676,19 @@ void serialise_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, v
                                                 if (x == *px) {
 
                                                     // Serialise left bottom border character using escape codes.
-                                                    serialise_linux_console_character(p0, p1, p2, &x, &y, &z,
+                                                    serialise_gnu_linux_console_character(p0, p1, p2, &x, &y, &z,
                                                         p10, p11, p12, p13, p5, p6, p7, p8, p9, &lbc);
 
                                                 } else if (x == (xl - *NUMBER_1_INTEGER)) {
 
                                                     // Serialise right bottom border character using escape codes.
-                                                    serialise_linux_console_character(p0, p1, p2, &x, &y, &z,
+                                                    serialise_gnu_linux_console_character(p0, p1, p2, &x, &y, &z,
                                                         p10, p11, p12, p13, p5, p6, p7, p8, p9, &rbc);
 
                                                 } else {
 
                                                     // Serialise horizontal border character using escape codes.
-                                                    serialise_linux_console_character(p0, p1, p2, &x, &y, &z,
+                                                    serialise_gnu_linux_console_character(p0, p1, p2, &x, &y, &z,
                                                         p10, p11, p12, p13, p5, p6, p7, p8, p9, &hc);
                                                 }
 
@@ -697,13 +697,13 @@ void serialise_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, v
                                                 if (x == *px) {
 
                                                     // Serialise left bottom border character using escape codes.
-                                                    serialise_linux_console_character(p0, p1, p2, &x, &y, &z,
+                                                    serialise_gnu_linux_console_character(p0, p1, p2, &x, &y, &z,
                                                         p10, p11, p12, p13, p5, p6, p7, p8, p9, &vc);
 
                                                 } else if (x == (xl - *NUMBER_1_INTEGER)) {
 
                                                     // Serialise right bottom border character using escape codes.
-                                                    serialise_linux_console_character(p0, p1, p2, &x, &y, &z,
+                                                    serialise_gnu_linux_console_character(p0, p1, p2, &x, &y, &z,
                                                         p10, p11, p12, p13, p5, p6, p7, p8, p9, &vc);
 
                                                 } else {
@@ -722,11 +722,11 @@ void serialise_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, v
 
                                                     } else {
 
-                                                        log_message_debug("Could not serialise linux console rectangle. The character count is null.");
+                                                        log_message_debug("Could not serialise gnu/linux console rectangle. The character count is null.");
                                                     }
 
                                                     // Serialise character using escape codes.
-                                                    serialise_linux_console_character(p0, p1, p2, &x, &y, &z,
+                                                    serialise_gnu_linux_console_character(p0, p1, p2, &x, &y, &z,
                                                         p10, p11, p12, p13, p5, p6, p7, p8, p9, c);
                                                 }
                                             }
@@ -785,7 +785,7 @@ void serialise_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, v
 }
 
 /**
- * Serialises a linux console rectangle coordinates layout.
+ * Serialises a gnu/linux console rectangle coordinates layout.
  *
  * @param p0 the cell position x (of the part)
  * @param p1 the cell position y
@@ -800,10 +800,10 @@ void serialise_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, v
  * @param p10 the original area size y
  * @param p11 the original area size z
  */
-void serialise_linux_console_rectangle_coordinates_layout(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
+void serialise_gnu_linux_console_rectangle_coordinates_layout(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
     void* p6, void* p7, void* p8, void* p9, void* p10, void* p11) {
 
-    log_message_debug("Debug: Serialise linux console rectangle coordinates layout.");
+    log_message_debug("Debug: Serialise gnu/linux console rectangle coordinates layout.");
 
     int* cpx = (int*) p0;
     int* cpy = (int*) p1;
@@ -819,7 +819,7 @@ void serialise_linux_console_rectangle_coordinates_layout(void* p0, void* p1, vo
 }
 
 /**
- * Serialises a linux console rectangle compass layout.
+ * Serialises a gnu/linux console rectangle compass layout.
  *
  * @param p0 the cell position x (of the part)
  * @param p1 the cell position y
@@ -836,10 +836,10 @@ void serialise_linux_console_rectangle_coordinates_layout(void* p0, void* p1, vo
  * @param p12 the layout cell
  * @param p13 the layout cell count
  */
-void serialise_linux_console_rectangle_compass_layout(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
+void serialise_gnu_linux_console_rectangle_compass_layout(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
     void* p6, void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13) {
 
-    log_message_debug("Debug: Serialise linux console rectangle compass layout.");
+    log_message_debug("Debug: Serialise gnu/linux console rectangle compass layout.");
 
     int* cpx = (int*) p0;
     int* cpy = (int*) p1;
@@ -953,7 +953,7 @@ void serialise_linux_console_rectangle_compass_layout(void* p0, void* p1, void* 
 }
 
 /**
- * Serialises a linux console rectangle layout.
+ * Serialises a gnu/linux console rectangle layout.
  *
  * @param p0 the cell position x (of the part)
  * @param p1 the cell position y
@@ -978,12 +978,12 @@ void serialise_linux_console_rectangle_compass_layout(void* p0, void* p1, void* 
  * @param p20 the layout
  * @param p21 the layout count
  */
-void serialise_linux_console_rectangle_layout(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
+void serialise_gnu_linux_console_rectangle_layout(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
     void* p6, void* p7, void* p8, void* p9, void* p10, void* p11,
     void* p12, void* p13, void* p14, void* p15, void* p16, void* p17,
     void* p18, void* p19, void* p20, void* p21) {
 
-    log_message_debug("Debug: Serialise linux console rectangle layout.");
+    log_message_debug("Debug: Serialise gnu/linux console rectangle layout.");
 
     // The comparison result.
     int r = *NUMBER_0_INTEGER;
@@ -995,7 +995,7 @@ void serialise_linux_console_rectangle_layout(void* p0, void* p1, void* p2, void
         if (r != *NUMBER_0_INTEGER) {
 
             // Determine new position and size coordinates for part.
-            serialise_linux_console_rectangle_coordinates_layout(p0, p1, p2, p3, p4, p5, p12, p13, p14, p15, p16, p17);
+            serialise_gnu_linux_console_rectangle_coordinates_layout(p0, p1, p2, p3, p4, p5, p12, p13, p14, p15, p16, p17);
         }
     }
 
@@ -1006,7 +1006,7 @@ void serialise_linux_console_rectangle_layout(void* p0, void* p1, void* p2, void
         if (r != *NUMBER_0_INTEGER) {
 
             // Determine new position and size coordinates for part.
-            serialise_linux_console_rectangle_compass_layout(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p18, p19);
+            serialise_gnu_linux_console_rectangle_compass_layout(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p18, p19);
         }
     }
 
@@ -1015,7 +1015,7 @@ void serialise_linux_console_rectangle_layout(void* p0, void* p1, void* p2, void
 }
 
 /**
- * Serialises the linux console coordinates.
+ * Serialises the gnu/linux console coordinates.
  *
  * @param p0 the destination terminal control sequences (Hand over as reference!)
  * @param p1 the destination count
@@ -1046,12 +1046,12 @@ void serialise_linux_console_rectangle_layout(void* p0, void* p1, void* p2, void
  * @param p26 the layout
  * @param p27 the layout count
  */
-void serialise_linux_console_coordinates(void* p0, void* p1, void* p2, void* p3, void* p4,
+void serialise_gnu_linux_console_coordinates(void* p0, void* p1, void* p2, void* p3, void* p4,
     void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13,
     void* p14, void* p15, void* p16, void* p17, void* p18, void* p19, void* p20, void* p21,
     void* p22, void* p23, void* p24, void* p25, void* p26, void* p27) {
 
-    log_message_debug("Debug: Serialise linux console coordinates.");
+    log_message_debug("Debug: Serialise gnu/linux console coordinates.");
 
     // The source part position x, y, z.
     int* px = (int*) *NULL_POINTER;
@@ -1143,17 +1143,17 @@ void serialise_linux_console_coordinates(void* p0, void* p1, void* p2, void* p3,
     }
 
     // Calculate coordinates according to given layout.
-    serialise_linux_console_rectangle_layout((void*) &cpx, (void*) &cpy, (void*) &cpz, (void*) &csx, (void*) &csy, (void*) &csz,
+    serialise_gnu_linux_console_rectangle_layout((void*) &cpx, (void*) &cpy, (void*) &cpz, (void*) &csx, (void*) &csy, (void*) &csz,
         (void*) &fapx, (void*) &fapy, (void*) &fapz, (void*) &fasx, (void*) &fasy, (void*) &fasz,
         (void*) &oapx, (void*) &oapy, (void*) &oapz, (void*) &oasx, (void*) &oasy, (void*) &oasz,
         p24, p25, p26, p27);
 
-    serialise_linux_console_rectangle(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13,
+    serialise_gnu_linux_console_rectangle(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13,
         (void*) &cpx, (void*) &cpy, (void*) &cpz, (void*) &csx, (void*) &csy, (void*) &csz, p22, p23);
 }
 
 /**
- * Serialises a linux console shape.
+ * Serialises a gnu/linux console shape.
  *
  * @param p0 the destination terminal control sequences (Hand over as reference!)
  * @param p1 the destination count
@@ -1193,7 +1193,7 @@ void serialise_linux_console_coordinates(void* p0, void* p1, void* p2, void* p3,
  * @param p35 the shape
  * @param p36 the shape count
  */
-void serialise_linux_console_shape(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
+void serialise_gnu_linux_console_shape(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
     void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14, void* p15, void* p16,
     void* p17, void* p18, void* p19, void* p20, void* p21, void* p22, void* p23, void* p24, void* p25, void* p26,
     void* p27, void* p28, void* p29, void* p30, void* p31, void* p32, void* p33, void* p34, void* p35, void* p36) {
@@ -1202,7 +1202,7 @@ void serialise_linux_console_shape(void* p0, void* p1, void* p2, void* p3, void*
 
         int* sc = (int*) p4;
 
-        log_message_debug("Debug: Serialise linux console shape.");
+        log_message_debug("Debug: Serialise gnu/linux console shape.");
 
         // The character.
         void* c = *NULL_POINTER;
@@ -1305,7 +1305,7 @@ void serialise_linux_console_shape(void* p0, void* p1, void* p2, void* p3, void*
 
             if (r != *NUMBER_0_INTEGER) {
 
-                serialise_linux_console_coordinates(p0, p1, p2, c, (void*) &cc,
+                serialise_gnu_linux_console_coordinates(p0, p1, p2, c, (void*) &cc,
                     &h, &i, &bl, &u, &b,
                     bg, (void*) &bgc, fg, (void*) &fgc, p21, p22, p23, p24,
                     p25, p26, p27, p28, p29, p30, p31, p32, p33, p34);
@@ -1319,7 +1319,7 @@ void serialise_linux_console_shape(void* p0, void* p1, void* p2, void* p3, void*
             if (r != *NUMBER_0_INTEGER) {
 
     /*??
-                serialise_linux_console_coordinates(p0, p1, p2, c, cc, &h, &i, &bl, &u, &b,
+                serialise_gnu_linux_console_coordinates(p0, p1, p2, c, cc, &h, &i, &bl, &u, &b,
                     bg, (void*) &bgc, fg, (void*) &fgc, p21, p22, p23, p24,
                     p25, p26, p27, p28, p29, p30, p31, p32, p33, p34);
     */
@@ -1333,7 +1333,7 @@ void serialise_linux_console_shape(void* p0, void* p1, void* p2, void* p3, void*
             if (r != *NUMBER_0_INTEGER) {
 
     /*??
-                serialise_linux_console_coordinates(p0, p1, p2, c, cc, &h, &i, &bl, &u, &b,
+                serialise_gnu_linux_console_coordinates(p0, p1, p2, c, cc, &h, &i, &bl, &u, &b,
                     bg, (void*) &bgc, fg, (void*) &fgc, p21, p22, p23, p24,
                     p25, p26, p27, p28, p29, p30, p31, p32, p33, p34);
     */
@@ -1356,24 +1356,24 @@ void serialise_linux_console_shape(void* p0, void* p1, void* p2, void* p3, void*
 
     } else {
 
-        log_message_debug("Could not serialise linux console shape. The character count is null.");
+        log_message_debug("Could not serialise gnu/linux console shape. The character count is null.");
     }
 }
 
 /**
- * Parses a linux console into a compound model.
+ * Parses a gnu/linux console into a compound model.
  *
- * @param p0 the destination linux console model (Hand over as reference!)
+ * @param p0 the destination gnu/linux console model (Hand over as reference!)
  * @param p1 the destination count
  * @param p2 the destination size
  * @param p3 the source control sequences
  * @param p4 the source count
  */
-void parse_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void parse_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
 }
 
 /**
- * Serialises a compound model into linux console control sequences.
+ * Serialises a compound model into gnu/linux console control sequences.
  *
  * @param p0 the destination control sequences (Hand over as reference!)
  * @param p1 the destination count
@@ -1391,10 +1391,10 @@ void parse_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
  * @param p13 the knowledge memory
  * @param p14 the knowledge memory count
  */
-void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
+void serialise_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
     void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14) {
 
-    log_message_debug("Information: Serialise linux console.");
+    log_message_debug("Information: Serialise gnu/linux console.");
 
     // The source part name, abstraction, model, details.
     void** n = NULL_POINTER;
@@ -1962,7 +1962,7 @@ void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, v
             // in the hierarchy are not painted that way, to be more efficient.
 
             // Serialise shape.
-            serialise_linux_console_shape(p0, p1, p2, p5, p6, p3, p4,
+            serialise_gnu_linux_console_shape(p0, p1, p2, p5, p6, p3, p4,
                 *hm, *hmc, *im, *imc, *blm, *blmc, *um, *umc, *bm, *bmc,
                 *bgm, *bgmc, *fgm, *fgmc, *pm, *pmc, *sm, *smc,
                 *wpm, *wpmc, *wsm, *wsmc, *bom, *bomc,
@@ -2008,7 +2008,7 @@ void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, v
                         // given cascade of separated names, pointing to a knowledge model.
 
                         // Recursively call this procedure for compound part model.
-                        serialise_linux_console(p0, p1, p2, *a, *ac, *m, *mc, *d, *dc, p7, p8, rn, (void*) &rnc, p13, p14);
+                        serialise_gnu_linux_console(p0, p1, p2, *a, *ac, *m, *mc, *d, *dc, p7, p8, rn, (void*) &rnc, p13, p14);
                     }
 
                     // Reset source part name, abstraction, model, details
@@ -2035,15 +2035,15 @@ void serialise_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, v
 
             } else {
 
-                log_message_debug("Could not serialise compound model into linux console control sequences. The source count parameter is null.");
+                log_message_debug("Could not serialise compound model into gnu/linux console control sequences. The source count parameter is null.");
             }
         }
 
     } else {
 
-        log_message_debug("Could not serialise compound model into linux console control sequences. The hierarchical compound element name contains a meta element, while only part elements are permitted.");
+        log_message_debug("Could not serialise compound model into gnu/linux console control sequences. The hierarchical compound element name contains a meta element, while only part elements are permitted.");
     }
 }
 
-/* LINUX_CONSOLE_CONVERTER_SOURCE */
+/* GNU_LINUX_CONSOLE_CONVERTER_SOURCE */
 #endif

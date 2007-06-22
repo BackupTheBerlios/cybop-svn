@@ -24,7 +24,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.6 $ $Date: 2007-05-24 22:52:32 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2007-06-22 07:07:14 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -32,9 +32,9 @@
 #ifndef TEST_SOURCE
 #define TEST_SOURCE
 
-#ifdef LINUX_OPERATING_SYSTEM
+#ifdef GNU_LINUX_OPERATING_SYSTEM
 #include <termios.h>
-/* LINUX_OPERATING_SYSTEM */
+/* GNU_LINUX_OPERATING_SYSTEM */
 #endif
 
 #ifdef CYGWIN_ENVIRONMENT
@@ -108,13 +108,13 @@ void test_preprocessor_directives() {
 
     fputs("Test preprocessor directives:\n", stdout);
 
-#ifdef LINUX_OPERATING_SYSTEM
-    fputs("LINUX\n", stdout);
+#ifdef GNU_LINUX_OPERATING_SYSTEM
+    fputs("GNU_LINUX\n", stdout);
 #elif WINDOWS_OPERATING_SYSTEM
     fputs("WINDOWS\n", stdout);
 #else
     fputs("OTHER\n", stdout);
-/* LINUX_OPERATING_SYSTEM */
+/* GNU_LINUX_OPERATING_SYSTEM */
 #endif
 }
 
@@ -324,9 +324,21 @@ void test_integer_array() {
     fprintf(stderr, "pre ms: %i\n", *ms);
     fprintf(stderr, "pre m: %i\n", *m);
 
+    //
+    // Use either the "parse" function or the three "set" functions below.
+    // Both possibilities should have the same functionality and results.
+    //
+
+/*??
     // Parse test value and assign to test knowledge model.
     parse((void*) &m, (void*) mc, (void*) ms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
         (void*) test, (void*) &testc, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+*/
+
+    // Set test values.
+    set(m, (void*) NUMBER_0_INTEGER, (void*) NUMBER_2_INTEGER, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    set(m, (void*) NUMBER_1_INTEGER, (void*) NUMBER_3_INTEGER, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    set(m, (void*) NUMBER_2_INTEGER, (void*) NUMBER_4_INTEGER, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
     // The result values read out from the integer vector.
     int* result0 = (int*) *NULL_POINTER;
@@ -417,14 +429,14 @@ void test_array_resizing() {
 }
 
 /**
- * Tests the wide character output on linux console,
+ * Tests the wide character output on gnu/linux console,
  * in between escape control sequences.
  */
 void test_wide_character_output() {
 
     fputs("Test wide character array with termination:\n", stdout);
 
-#ifdef LINUX_OPERATING_SYSTEM
+#ifdef GNU_LINUX_OPERATING_SYSTEM
     // Possible locales are: LANG, LC_CTYPE, LC_ALL.
     // CAUTION! This setting is necessary for UTF-8 Unicode characters to work.
     char* loc = setlocale(LC_ALL, "");
@@ -436,12 +448,12 @@ void test_wide_character_output() {
     // The working termios interface.
     struct termios* tw = (struct termios*) *NULL_POINTER;
 
-    // Create linux console internals.
+    // Create gnu/linux console internals.
 //??        allocate((void*) &t, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
     to = (struct termios*) malloc(sizeof(struct termios));
     tw = (struct termios*) malloc(sizeof(struct termios));
 
-    // Initialise linux console internals.
+    // Initialise gnu/linux console internals.
     // Set file stream.
     // CAUTION! Possibly, stdin must be used instead of stdout here!
     t = stdout;
@@ -958,8 +970,8 @@ void test_console() {
 
     if (strcmp("linux", getenv("TERM")) == 0) {
 
-//        // This is a linux console.
-//        fputs("This is a linux console.\n", stdout);
+//        // This is a gnu/linux console.
+//        fputs("This is a gnu/linux console.\n", stdout);
 //
 //        // Determine device name of controlling terminal.
 //        int n = ttyname();
@@ -1249,7 +1261,7 @@ void test() {
 //??    test_stdout_stderr();
 //??    test_type_sizes();
 //??    test_pointer_addition();
-//??    test_integer_array();
+    test_integer_array();
 //??    test_character_array_with_termination();
 //??    test_array_resizing();
 //??    test_wide_character_output();
@@ -1264,7 +1276,7 @@ void test() {
 //??    test_file_read();
 //??    test_file_write();
 //??    test_console();
-    test_mesa_opengl(*NUMBER_0_INTEGER, (char**) NULL_POINTER);
+//??    test_mesa_opengl(*NUMBER_0_INTEGER, (char**) NULL_POINTER);
 //??    test_parse_integer_vector();
 //??    test_serialise_integer_vector();
 //??    test_serialise_integer();

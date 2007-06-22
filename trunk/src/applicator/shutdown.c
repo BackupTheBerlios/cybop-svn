@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.20 $ $Date: 2007-05-26 21:19:57 $ $Author: christian $
+ * @version $Revision: 1.21 $ $Date: 2007-06-22 07:07:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description This module shuts down a service.
  */
@@ -28,7 +28,7 @@
 #ifndef SHUTDOWN_SOURCE
 #define SHUTDOWN_SOURCE
 
-#include "../applicator/shutdown/shutdown_linux_console.c"
+#include "../applicator/shutdown/shutdown_gnu_linux_console.c"
 #include "../applicator/shutdown/shutdown_socket.c"
 #include "../applicator/shutdown/shutdown_x_window_system.c"
 #include "../globals/constants/cybol/cybol_abstraction_constants.c"
@@ -44,7 +44,7 @@
  * Shuts down a service.
  *
  * Expected parameters:
- * - service: linux_console, tcp_socket, unix_socket, x_window_system
+ * - service: gnu_linux_console, tcp_socket, unix_socket, x_window_system
  *
  * @param p0 the parameters
  * @param p1 the parameters count
@@ -85,11 +85,11 @@ void shutdown_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
     if (r == 0) {
 
-        compare_arrays((void*) *sm, (void*) *smc, (void*) LINUX_CONSOLE_MODEL, (void*) LINUX_CONSOLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays((void*) *sm, (void*) *smc, (void*) GNU_LINUX_CONSOLE_MODEL, (void*) GNU_LINUX_CONSOLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-            shutdown_linux_console(p5, p2, p3, p4);
+            shutdown_gnu_linux_console(p5, p2, p3, p4);
         }
     }
 

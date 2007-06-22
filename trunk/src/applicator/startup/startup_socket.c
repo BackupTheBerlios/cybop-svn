@@ -20,14 +20,14 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.19 $ $Date: 2007-05-16 19:29:01 $ $Author: christian $
+ * @version $Revision: 1.20 $ $Date: 2007-06-22 07:07:14 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef STARTUP_SOCKET_SOURCE
 #define STARTUP_SOCKET_SOURCE
 
-#ifdef LINUX_OPERATING_SYSTEM
+#ifdef GNU_LINUX_OPERATING_SYSTEM
 
 #include <arpa/inet.h>
 #include <netinet/in.h>
@@ -946,7 +946,7 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
     }
 }
 
-/* LINUX_OPERATING_SYSTEM */
+/* GNU_LINUX_OPERATING_SYSTEM */
 #endif
 
 /* STARTUP_SOCKET_SOURCE */

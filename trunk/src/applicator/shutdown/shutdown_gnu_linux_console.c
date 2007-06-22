@@ -1,5 +1,5 @@
 /*
- * $RCSfile: shutdown_linux_console.c,v $
+ * $RCSfile: shutdown_gnu_linux_console.c,v $
  *
  * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
  *
@@ -20,15 +20,15 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.20 $ $Date: 2007-05-26 21:19:58 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2007-06-22 07:07:14 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
 
-#ifndef SHUTDOWN_LINUX_CONSOLE_SOURCE
-#define SHUTDOWN_LINUX_CONSOLE_SOURCE
+#ifndef SHUTDOWN_GNU_LINUX_CONSOLE_SOURCE
+#define SHUTDOWN_GNU_LINUX_CONSOLE_SOURCE
 
-#ifdef LINUX_OPERATING_SYSTEM
+#ifdef GNU_LINUX_OPERATING_SYSTEM
 
 #include <termios.h>
 #include "../../globals/constants/integer/integer_constants.c"
@@ -41,33 +41,33 @@
 #include "../../memoriser/allocator.c"
 
 /**
- * Shuts down the linux console.
+ * Shuts down the gnu/linux console.
  *
  * @param p0 the internals memory
  * @param p1 the knowledge memory
  * @param p2 the knowledge memory count
  * @param p3 the knowledge memory size
  */
-void shutdown_linux_console(void* p0, void* p1, void* p2, void* p3) {
+void shutdown_gnu_linux_console(void* p0, void* p1, void* p2, void* p3) {
 
-    log_message_debug("Shutdown linux console.");
+    log_message_debug("Shutdown gnu/linux console.");
 
-    // The linux console input- and output stream internal.
+    // The gnu/linux console input- and output stream internal.
     FILE** ipi = (FILE**) NULL_POINTER;
     FILE** opi = (FILE**) NULL_POINTER;
 
-    // Get linux console internals.
-    get(p0, (void*) LINUX_CONSOLE_INPUT_FILE_DESCRIPTOR_INTERNAL, (void*) &ipi, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    get(p0, (void*) LINUX_CONSOLE_OUTPUT_FILE_DESCRIPTOR_INTERNAL, (void*) &opi, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    // Get gnu/linux console internals.
+    get(p0, (void*) GNU_LINUX_CONSOLE_INPUT_FILE_DESCRIPTOR_INTERNAL, (void*) &ipi, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p0, (void*) GNU_LINUX_CONSOLE_OUTPUT_FILE_DESCRIPTOR_INTERNAL, (void*) &opi, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-    // Only deallocate linux console resources if at least one,
+    // Only deallocate gnu/linux console resources if at least one,
     // the input- OR output stream internal is null.
     if ((*ipi != *NULL_POINTER) || (opi == *NULL_POINTER)) {
 
-        // Interrupt linux console service thread.
-        interrupt_linux_console();
+        // Interrupt gnu/linux console service thread.
+        interrupt_gnu_linux_console();
 
-        // The linux console input- and output stream.
+        // The gnu/linux console input- and output stream.
         FILE** ip = (FILE**) NULL_POINTER;
         FILE** op = (FILE**) NULL_POINTER;
         // The original termios interface.
@@ -79,22 +79,22 @@ void shutdown_linux_console(void* p0, void* p1, void* p2, void* p3) {
         void** bc = NULL_POINTER;
         void** bs = NULL_POINTER;
 
-        // Get linux console internals.
-        get(p0, (void*) LINUX_CONSOLE_INPUT_FILE_DESCRIPTOR_INTERNAL, (void*) &ip, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        get(p0, (void*) LINUX_CONSOLE_OUTPUT_FILE_DESCRIPTOR_INTERNAL, (void*) &op, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        get(p0, (void*) LINUX_CONSOLE_ORIGINAL_ATTRIBUTES_INTERNAL, (void*) &to, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        get(p0, (void*) LINUX_CONSOLE_WORKING_ATTRIBUTES_INTERNAL, (void*) &tw, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        // Get gnu/linux console internals.
+        get(p0, (void*) GNU_LINUX_CONSOLE_INPUT_FILE_DESCRIPTOR_INTERNAL, (void*) &ip, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        get(p0, (void*) GNU_LINUX_CONSOLE_OUTPUT_FILE_DESCRIPTOR_INTERNAL, (void*) &op, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        get(p0, (void*) GNU_LINUX_CONSOLE_ORIGINAL_ATTRIBUTES_INTERNAL, (void*) &to, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        get(p0, (void*) GNU_LINUX_CONSOLE_WORKING_ATTRIBUTES_INTERNAL, (void*) &tw, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         // Get character buffer.
-        get(p0, (void*) LINUX_CONSOLE_THREAD_CHARACTER_BUFFER_INTERNAL, (void*) &b, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        get(p0, (void*) LINUX_CONSOLE_THREAD_CHARACTER_BUFFER_COUNT_INTERNAL, (void*) &bc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        get(p0, (void*) LINUX_CONSOLE_THREAD_CHARACTER_BUFFER_SIZE_INTERNAL, (void*) &bs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        get(p0, (void*) GNU_LINUX_CONSOLE_THREAD_CHARACTER_BUFFER_INTERNAL, (void*) &b, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        get(p0, (void*) GNU_LINUX_CONSOLE_THREAD_CHARACTER_BUFFER_COUNT_INTERNAL, (void*) &bc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        get(p0, (void*) GNU_LINUX_CONSOLE_THREAD_CHARACTER_BUFFER_SIZE_INTERNAL, (void*) &bs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
         // Get file descriptor for output file stream.
         int opd = fileno(*op);
-        // Reset original linux console attributes.
+        // Reset original gnu/linux console attributes.
         tcsetattr(opd, TCSANOW, *to);
 
-        // Destroy linux console internals.
+        // Destroy gnu/linux console internals.
         //
         // CAUTION! Use descending order, as opposed to the creation!
         // CAUTION! Do NOT use references &, because variables are **
@@ -112,12 +112,12 @@ void shutdown_linux_console(void* p0, void* p1, void* p2, void* p3) {
 
     } else {
 
-        log_message_debug("WARNING: Could not shutdown linux console. There is no linux console running.");
+        log_message_debug("WARNING: Could not shutdown gnu/linux console. There is no gnu/linux console running.");
     }
 }
 
-/* LINUX_OPERATING_SYSTEM */
+/* GNU_LINUX_OPERATING_SYSTEM */
 #endif
 
-/* SHUTDOWN_LINUX_CONSOLE_SOURCE */
+/* SHUTDOWN_GNU_LINUX_CONSOLE_SOURCE */
 #endif

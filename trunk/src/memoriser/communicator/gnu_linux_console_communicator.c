@@ -1,5 +1,5 @@
 /*
- * $RCSfile: linux_console_communicator.c,v $
+ * $RCSfile: gnu_linux_console_communicator.c,v $
  *
  * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
  *
@@ -24,12 +24,12 @@
  * - receive a file stream into a byte array
  * - send a file stream from a byte array
  *
- * @version $Revision: 1.9 $ $Date: 2007-05-26 21:19:58 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2007-06-22 07:07:14 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef LINUX_CONSOLE_COMMUNICATOR_SOURCE
-#define LINUX_CONSOLE_COMMUNICATOR_SOURCE
+#ifndef GNU_LINUX_CONSOLE_COMMUNICATOR_SOURCE
+#define GNU_LINUX_CONSOLE_COMMUNICATOR_SOURCE
 
 #include <locale.h>
 #include <stdio.h>
@@ -46,7 +46,7 @@
 #include "../../memoriser/array.c"
 
 /**
- * Reads the linux console into terminal control sequences.
+ * Reads the gnu/linux console into terminal control sequences.
  *
  * @param p0 the destination terminal control sequences (Hand over as reference!)
  * @param p1 the destination count
@@ -54,9 +54,9 @@
  * @param p3 the source terminal
  * @param p4 the source count
  */
-void read_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void read_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    log_message_debug("Information: Read from linux console.");
+    log_message_debug("Information: Read from gnu/linux console.");
 
 /*??
     char r = NULL_CONTROL_CHARACTER;
@@ -89,15 +89,15 @@ void read_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
 }
 
 /**
- * Writes the terminal control sequences into a linux console.
+ * Writes the terminal control sequences into a gnu/linux console.
  *
- * @param p0 the destination linux console (Hand over as reference!)
+ * @param p0 the destination gnu/linux console (Hand over as reference!)
  * @param p1 the destination count
  * @param p2 the destination size
  * @param p3 the source terminal control sequences
  * @param p4 the source count
  */
-void write_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void write_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (p4 != *NULL_POINTER) {
 
@@ -107,7 +107,7 @@ void write_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             FILE** d = (FILE**) p0;
 
-            log_message_debug("Information: Write to linux console.");
+            log_message_debug("Information: Write to gnu/linux console.");
 
             // Possible locales are: LANG, LC_CTYPE, LC_ALL.
             // CAUTION! This setting is necessary for UTF-8 Unicode characters to work.
@@ -146,7 +146,7 @@ void write_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             } else {
 
-                log_message_debug("Could not write to linux console. The destination terminal file is null.");
+                log_message_debug("Could not write to gnu/linux console. The destination terminal file is null.");
             }
 
             // Destroy terminated control sequences.
@@ -154,14 +154,14 @@ void write_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         } else {
 
-            log_message_debug("Could not write to linux console. The destination terminal file parameter is null.");
+            log_message_debug("Could not write to gnu/linux console. The destination terminal file parameter is null.");
         }
 
     } else {
 
-        log_message_debug("Could not write to linux console. The source terminal control sequences count parameter is null.");
+        log_message_debug("Could not write to gnu/linux console. The source terminal control sequences count parameter is null.");
     }
 }
 
-/* LINUX_CONSOLE_COMMUNICATOR_SOURCE */
+/* GNU_LINUX_CONSOLE_COMMUNICATOR_SOURCE */
 #endif

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2007-06-16 21:55:00 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2007-06-22 07:07:14 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -365,10 +365,10 @@ static char STANDARD_OUTPUT_MODEL_ARRAY[] = {'s', 't', 'a', 'n', 'd', 'a', 'r', 
 static char* STANDARD_OUTPUT_MODEL = STANDARD_OUTPUT_MODEL_ARRAY;
 static int* STANDARD_OUTPUT_MODEL_COUNT = NUMBER_15_INTEGER_ARRAY;
 
-/** The linux console model. */
-static char LINUX_CONSOLE_MODEL_ARRAY[] = {'l', 'i', 'n', 'u', 'x', '_', 'c', 'o', 'n', 's', 'o', 'l', 'e'};
-static char* LINUX_CONSOLE_MODEL = LINUX_CONSOLE_MODEL_ARRAY;
-static int* LINUX_CONSOLE_MODEL_COUNT = NUMBER_13_INTEGER_ARRAY;
+/** The gnu linux console model. */
+static char GNU_LINUX_CONSOLE_MODEL_ARRAY[] = {'g', 'n', 'u', '_', 'l', 'i', 'n', 'u', 'x', '_', 'c', 'o', 'n', 's', 'o', 'l', 'e'};
+static char* GNU_LINUX_CONSOLE_MODEL = GNU_LINUX_CONSOLE_MODEL_ARRAY;
+static int* GNU_LINUX_CONSOLE_MODEL_COUNT = NUMBER_17_INTEGER_ARRAY;
 
 /** The x window system model. */
 static char X_WINDOW_SYSTEM_MODEL_ARRAY[] = {'x', '_', 'w', 'i', 'n', 'd', 'o', 'w', '_', 's', 'y', 's', 't', 'e', 'm'};

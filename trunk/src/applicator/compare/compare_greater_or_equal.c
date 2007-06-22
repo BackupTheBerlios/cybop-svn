@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2007-06-16 21:53:30 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2007-06-22 07:07:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -84,8 +84,6 @@ void compare_greater_or_equal(void* p0, void* p1, void* p2,
     void* p21, void* p22, void* p23,
     void* p24, void* p25, void* p26) {
 
-    fprintf(stderr, "TEST enter compare >=: %i\n", p0);
-
     if (p21 != *NULL_POINTER) {
 
         int* rm = (int*) p21;
@@ -101,8 +99,6 @@ void compare_greater_or_equal(void* p0, void* p1, void* p2,
 
                 // Compare result parameter abstraction. It must be a boolean.
                 compare_arrays(p18, p19, (void*) BOOLEAN_ABSTRACTION, (void*) BOOLEAN_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-    fprintf(stderr, "TEST r: %i\n", r);
 
                 if (r != *NUMBER_0_INTEGER) {
 
@@ -122,9 +118,6 @@ void compare_greater_or_equal(void* p0, void* p1, void* p2,
                     // Compare parameter abstractions.
                     compare_arrays(p0, p1, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &lr, (void*) CHARACTER_ARRAY);
                     compare_arrays(p9, p10, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &rr, (void*) CHARACTER_ARRAY);
-
-    fprintf(stderr, "TEST character lr: %i\n", lr);
-    fprintf(stderr, "TEST character rr: %i\n", rr);
 
                     if ((lr != *NUMBER_0_INTEGER) && (rr != *NUMBER_0_INTEGER)) {
 
@@ -152,9 +145,6 @@ void compare_greater_or_equal(void* p0, void* p1, void* p2,
                     compare_arrays(p0, p1, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT, (void*) &lr, (void*) CHARACTER_ARRAY);
                     compare_arrays(p9, p10, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT, (void*) &rr, (void*) CHARACTER_ARRAY);
 
-    fprintf(stderr, "TEST integer lr: %i\n", lr);
-    fprintf(stderr, "TEST integer rr: %i\n", rr);
-
                     if ((lr != *NUMBER_0_INTEGER) && (rr != *NUMBER_0_INTEGER)) {
 
                         log_message_debug("Use integer parameters.");
@@ -169,6 +159,8 @@ void compare_greater_or_equal(void* p0, void* p1, void* p2,
                         }
                     }
 
+    fprintf(stderr, "TEST rm: %i\n", *rm);
+
                     //
                     // Double parameters.
                     //
@@ -180,9 +172,6 @@ void compare_greater_or_equal(void* p0, void* p1, void* p2,
                     // Compare parameter abstractions.
                     compare_arrays(p0, p1, (void*) DOUBLE_VECTOR_ABSTRACTION, (void*) DOUBLE_VECTOR_ABSTRACTION_COUNT, (void*) &lr, (void*) CHARACTER_ARRAY);
                     compare_arrays(p9, p10, (void*) DOUBLE_VECTOR_ABSTRACTION, (void*) DOUBLE_VECTOR_ABSTRACTION_COUNT, (void*) &rr, (void*) CHARACTER_ARRAY);
-
-    fprintf(stderr, "TEST double lr: %i\n", lr);
-    fprintf(stderr, "TEST double rr: %i\n", rr);
 
                     if ((lr != *NUMBER_0_INTEGER) && (rr != *NUMBER_0_INTEGER)) {
 
@@ -212,6 +201,8 @@ void compare_greater_or_equal(void* p0, void* p1, void* p2,
 
             log_message_debug("Could not compare if one parameter is greater than or equal to the other. The right side parameter is null.");
         }
+
+    fprintf(stderr, "TEST rm end: %i\n", *rm);
 
     } else {
 

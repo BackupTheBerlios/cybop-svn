@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.28 $ $Date: 2007-05-26 21:19:57 $ $Author: christian $
+ * @version $Revision: 1.29 $ $Date: 2007-06-22 07:07:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description This module starts up a service.
  */
@@ -28,7 +28,7 @@
 #ifndef STARTUP_SOURCE
 #define STARTUP_SOURCE
 
-#include "../applicator/startup/startup_linux_console.c"
+#include "../applicator/startup/startup_gnu_linux_console.c"
 #include "../applicator/startup/startup_socket.c"
 #include "../applicator/startup/startup_x_window_system.c"
 #include "../globals/constants/cybol/cybol_abstraction_constants.c"
@@ -48,7 +48,7 @@
  * Starts up a service.
  *
  * Expected parameters:
- * - service: linux_console, tcp_socket, unix_socket, x_window_system
+ * - service: gnu_linux_console, tcp_socket, unix_socket, x_window_system
  *
  * @param p0 the parameters
  * @param p1 the parameters count
@@ -159,11 +159,11 @@ void startup_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5)
 
     if (r == 0) {
 
-        compare_arrays((void*) *sm, (void*) *smc, (void*) LINUX_CONSOLE_MODEL, (void*) LINUX_CONSOLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays((void*) *sm, (void*) *smc, (void*) GNU_LINUX_CONSOLE_MODEL, (void*) GNU_LINUX_CONSOLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != 0) {
 
-            startup_linux_console(p5, p2, p3, p4);
+            startup_gnu_linux_console(p5, p2, p3, p4);
         }
     }
 

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2007-05-26 21:19:58 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2007-06-22 07:07:14 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -88,9 +88,9 @@ void globalise() {
     // Thread identifications and service interrupt flags.
     //
 
-    // Allocate and initialise linux console thread.
-    LINUX_CONSOLE_THREAD = (pthread_t*) malloc(sizeof(pthread_t));
-    *LINUX_CONSOLE_THREAD = *INVALID_VALUE;
+    // Allocate and initialise gnu/linux console thread.
+    GNU_LINUX_CONSOLE_THREAD = (pthread_t*) malloc(sizeof(pthread_t));
+    *GNU_LINUX_CONSOLE_THREAD = *INVALID_VALUE;
     // Allocate x window system thread.
     X_WINDOW_SYSTEM_THREAD = (pthread_t*) malloc(sizeof(pthread_t));
     *X_WINDOW_SYSTEM_THREAD = *INVALID_VALUE;
@@ -101,9 +101,9 @@ void globalise() {
     CYBOI_SERVICE_THREAD = (pthread_t*) malloc(sizeof(pthread_t));
     *CYBOI_SERVICE_THREAD = *INVALID_VALUE;
 
-    // Allocate and initialise linux console thread interrupt flag.
-    LINUX_CONSOLE_THREAD_INTERRUPT = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
-    *LINUX_CONSOLE_THREAD_INTERRUPT = *NUMBER_0_INTEGER;
+    // Allocate and initialise gnu/linux console thread interrupt flag.
+    GNU_LINUX_CONSOLE_THREAD_INTERRUPT = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
+    *GNU_LINUX_CONSOLE_THREAD_INTERRUPT = *NUMBER_0_INTEGER;
     // Allocate and initialise x window system thread interrupt flag.
     X_WINDOW_SYSTEM_THREAD_INTERRUPT = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
     *X_WINDOW_SYSTEM_THREAD_INTERRUPT = *NUMBER_0_INTEGER;
@@ -128,8 +128,8 @@ void unglobalise() {
     // Thread identifications and service interrupt flags.
     //
 
-    // Free linux console thread interrupt flag.
-    free(LINUX_CONSOLE_THREAD_INTERRUPT);
+    // Free gnu/linux console thread interrupt flag.
+    free(GNU_LINUX_CONSOLE_THREAD_INTERRUPT);
     // Free x window system thread interrupt flag.
     free(X_WINDOW_SYSTEM_THREAD_INTERRUPT);
     // Free www service thread interrupt flag.
@@ -137,8 +137,8 @@ void unglobalise() {
     // Free cyboi service thread interrupt flag.
     free(CYBOI_SERVICE_THREAD_INTERRUPT);
 
-    // Free linux console thread.
-    free(LINUX_CONSOLE_THREAD);
+    // Free gnu/linux console thread.
+    free(GNU_LINUX_CONSOLE_THREAD);
     // Free x window system thread.
     free(X_WINDOW_SYSTEM_THREAD);
     // Free www service thread.

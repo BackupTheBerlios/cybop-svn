@@ -1,5 +1,5 @@
 /*
- * $RCSfile: receive_linux_console.c,v $
+ * $RCSfile: receive_gnu_linux_console.c,v $
  *
  * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
  *
@@ -20,14 +20,14 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.24 $ $Date: 2007-05-16 19:29:01 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2007-06-22 07:07:14 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef RECEIVE_LINUX_CONSOLE_SOURCE
-#define RECEIVE_LINUX_CONSOLE_SOURCE
+#ifndef RECEIVE_GNU_LINUX_CONSOLE_SOURCE
+#define RECEIVE_GNU_LINUX_CONSOLE_SOURCE
 
-#ifdef LINUX_OPERATING_SYSTEM
+#ifdef GNU_LINUX_OPERATING_SYSTEM
 
 #include <pthread.h>
 #include <signal.h>
@@ -51,13 +51,13 @@
 #include "../../memoriser/array.c"
 
 /**
- * Receives linux console signal.
+ * Receives gnu/linux console signal.
  *
  * @param p0 the internal memory
  * @param p1 the command name string
  * @param p2 the command name string count
  */
-void receive_linux_console_signal(void* p0, void* p1, void* p2) {
+void receive_gnu_linux_console_signal(void* p0, void* p1, void* p2) {
 
     // The knowledge memory.
     void** k = NULL_POINTER;
@@ -69,7 +69,7 @@ void receive_linux_console_signal(void* p0, void* p1, void* p2) {
     void** ss = NULL_POINTER;
     // The signal memory mutex.
     pthread_mutex_t** smt = (pthread_mutex_t**) NULL_POINTER;
-    // The linux console mutex.
+    // The gnu/linux console mutex.
     pthread_mutex_t** lmt = (pthread_mutex_t**) NULL_POINTER;
     // The interrupt request flag.
     sig_atomic_t** irq = (sig_atomic_t**) NULL_POINTER;
@@ -104,12 +104,12 @@ void receive_linux_console_signal(void* p0, void* p1, void* p2) {
     get(p0, (void*) SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &ss, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     // Get signal memory mutex.
     get(p0, (void*) SIGNAL_MEMORY_MUTEX_INTERNAL, (void*) &smt, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    // Get linux console mutex.
-    get(p0, (void*) LINUX_CONSOLE_MUTEX_INTERNAL, (void*) &lmt, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    // Get gnu/linux console mutex.
+    get(p0, (void*) GNU_LINUX_CONSOLE_MUTEX_INTERNAL, (void*) &lmt, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     // Get interrupt request internal.
     get(p0, (void*) INTERRUPT_REQUEST_INTERNAL, (void*) &irq, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-    // Lock linux console mutex.
+    // Lock gnu/linux console mutex.
     //
     // CAUTION! A mutex is needed here to ensure that the commands internal
     // and its associated count and size are retrieved at once and belong together.
@@ -120,11 +120,11 @@ void receive_linux_console_signal(void* p0, void* p1, void* p2) {
     pthread_mutex_lock(*lmt);
 
     // Get user interface commands internal.
-    get(p0, (void*) LINUX_CONSOLE_THREAD_COMMANDS_INTERNAL, (void*) &c, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    get(p0, (void*) LINUX_CONSOLE_THREAD_COMMANDS_COUNT_INTERNAL, (void*) &cc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    get(p0, (void*) LINUX_CONSOLE_THREAD_COMMANDS_SIZE_INTERNAL, (void*) &cs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p0, (void*) GNU_LINUX_CONSOLE_THREAD_COMMANDS_INTERNAL, (void*) &c, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p0, (void*) GNU_LINUX_CONSOLE_THREAD_COMMANDS_COUNT_INTERNAL, (void*) &cc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p0, (void*) GNU_LINUX_CONSOLE_THREAD_COMMANDS_SIZE_INTERNAL, (void*) &cs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-    // Unlock linux console mutex.
+    // Unlock gnu/linux console mutex.
     pthread_mutex_unlock(*lmt);
 
     // Get actual command belonging to the command name.
@@ -157,14 +157,14 @@ void receive_linux_console_signal(void* p0, void* p1, void* p2) {
 }
 
 /**
- * Receives a linux console escape control sequence and
+ * Receives a gnu/linux console escape control sequence and
  * forwards the corresponding command, to be sent as signal.
  *
  * @param p0 the internal memory
  * @param p1 the character buffer
  * @param p2 the character buffer count
  */
-void receive_linux_console_escape_control_sequence(void* p0, void* p1, void* p2) {
+void receive_gnu_linux_console_escape_control_sequence(void* p0, void* p1, void* p2) {
 
     // The comparison result.
     int r = 0;
@@ -176,7 +176,7 @@ void receive_linux_console_escape_control_sequence(void* p0, void* p1, void* p2)
 
         if (r != 0) {
 
-            receive_linux_console_signal(p0, (void*) UI_ARROW_UP_NAME, (void*) UI_ARROW_UP_NAME_COUNT);
+            receive_gnu_linux_console_signal(p0, (void*) UI_ARROW_UP_NAME, (void*) UI_ARROW_UP_NAME_COUNT);
         }
     }
 
@@ -186,7 +186,7 @@ void receive_linux_console_escape_control_sequence(void* p0, void* p1, void* p2)
 
         if (r != 0) {
 
-            receive_linux_console_signal(p0, (void*) UI_ARROW_DOWN_NAME, (void*) UI_ARROW_DOWN_NAME_COUNT);
+            receive_gnu_linux_console_signal(p0, (void*) UI_ARROW_DOWN_NAME, (void*) UI_ARROW_DOWN_NAME_COUNT);
         }
     }
 
@@ -196,7 +196,7 @@ void receive_linux_console_escape_control_sequence(void* p0, void* p1, void* p2)
 
         if (r != 0) {
 
-            receive_linux_console_signal(p0, (void*) UI_ARROW_LEFT_NAME, (void*) UI_ARROW_LEFT_NAME_COUNT);
+            receive_gnu_linux_console_signal(p0, (void*) UI_ARROW_LEFT_NAME, (void*) UI_ARROW_LEFT_NAME_COUNT);
         }
     }
 
@@ -206,13 +206,13 @@ void receive_linux_console_escape_control_sequence(void* p0, void* p1, void* p2)
 
         if (r != 0) {
 
-            receive_linux_console_signal(p0, (void*) UI_ARROW_RIGHT_NAME, (void*) UI_ARROW_RIGHT_NAME_COUNT);
+            receive_gnu_linux_console_signal(p0, (void*) UI_ARROW_RIGHT_NAME, (void*) UI_ARROW_RIGHT_NAME_COUNT);
         }
     }
 }
 
 /**
- * Receives a linux console character and
+ * Receives a gnu/linux console character and
  * forwards the corresponding command, to be sent as signal.
  *
  * This procedure changes some key codes into real names as defined by CYBOL.
@@ -222,7 +222,7 @@ void receive_linux_console_escape_control_sequence(void* p0, void* p1, void* p2)
  * @param p0 the internal memory
  * @param p1 the character
  */
-void receive_linux_console_character(void* p0, void* p1) {
+void receive_gnu_linux_console_character(void* p0, void* p1) {
 
     if (p1 != *NULL_POINTER) {
 
@@ -230,35 +230,35 @@ void receive_linux_console_character(void* p0, void* p1) {
 
         if (*e == *LINE_FEED_CONTROL_WIDE_CHARACTER) {
 
-            receive_linux_console_signal(p0, (void*) UI_ENTER_NAME, (void*) UI_ENTER_NAME_COUNT);
+            receive_gnu_linux_console_signal(p0, (void*) UI_ENTER_NAME, (void*) UI_ENTER_NAME_COUNT);
 
         } else if (*e == *ESCAPE_CONTROL_WIDE_CHARACTER) {
 
-            receive_linux_console_signal(p0, (void*) UI_ESCAPE_NAME, (void*) UI_ESCAPE_NAME_COUNT);
+            receive_gnu_linux_console_signal(p0, (void*) UI_ESCAPE_NAME, (void*) UI_ESCAPE_NAME_COUNT);
 
         } else {
 
-            receive_linux_console_signal(p0, p1, (void*) NUMBER_1_INTEGER);
+            receive_gnu_linux_console_signal(p0, p1, (void*) NUMBER_1_INTEGER);
         }
 
     } else {
 
-        log_message_debug("Could not receive linux console character. The character is null.");
+        log_message_debug("Could not receive gnu/linux console character. The character is null.");
     }
 }
 
 /**
- * Receives linux console messages (events) in an own thread.
+ * Receives gnu/linux console messages (events) in an own thread.
  *
  * @param p0 the internal memory
  */
-void receive_linux_console_thread(void* p0) {
+void receive_gnu_linux_console_thread(void* p0) {
 
-    // The linux console input stream.
+    // The gnu/linux console input stream.
     void** ip = NULL_POINTER;
 
-    // Get linux console input stream.
-    get_array_elements(p0, (void*) LINUX_CONSOLE_INPUT_FILE_DESCRIPTOR_INTERNAL, (void*) &ip, (void*) POINTER_ARRAY);
+    // Get gnu/linux console input stream.
+    get_array_elements(p0, (void*) GNU_LINUX_CONSOLE_INPUT_FILE_DESCRIPTOR_INTERNAL, (void*) &ip, (void*) POINTER_ARRAY);
 
     if (*ip != *NULL_POINTER) {
 
@@ -290,9 +290,9 @@ void receive_linux_console_thread(void* p0) {
         int j = *NUMBER_0_INTEGER;
 
         // Get character buffer.
-        get(p0, (void*) LINUX_CONSOLE_THREAD_CHARACTER_BUFFER_INTERNAL, (void*) &b, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        get(p0, (void*) LINUX_CONSOLE_THREAD_CHARACTER_BUFFER_COUNT_INTERNAL, (void*) &bc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        get(p0, (void*) LINUX_CONSOLE_THREAD_CHARACTER_BUFFER_SIZE_INTERNAL, (void*) &bs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        get(p0, (void*) GNU_LINUX_CONSOLE_THREAD_CHARACTER_BUFFER_INTERNAL, (void*) &b, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        get(p0, (void*) GNU_LINUX_CONSOLE_THREAD_CHARACTER_BUFFER_COUNT_INTERNAL, (void*) &bc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        get(p0, (void*) GNU_LINUX_CONSOLE_THREAD_CHARACTER_BUFFER_SIZE_INTERNAL, (void*) &bs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
         while (*NUMBER_1_INTEGER) {
 
@@ -304,7 +304,7 @@ void receive_linux_console_thread(void* p0) {
             // and processed in the system signal handler procedure
             // (situated in the controller/checker.c module).
 
-            // Get character from linux console.
+            // Get character from gnu/linux console.
             // CAUTION! Use 'wint_t' instead of 'int' as return type for
             // 'getwchar()', since that returns 'WEOF' instead of 'EOF'.
     //??        e = fgetwc(*ip);
@@ -324,7 +324,7 @@ void receive_linux_console_thread(void* p0) {
                 set(*b, (void*) *bc, (void*) &e, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
                 (**bc)++;
 
-                receive_linux_console_escape_control_sequence(p0, *b, (void*) *bc);
+                receive_gnu_linux_console_escape_control_sequence(p0, *b, (void*) *bc);
 
                 // Initialise loop count.
                 j = **bc - *NUMBER_1_INTEGER;
@@ -372,12 +372,12 @@ void receive_linux_console_thread(void* p0) {
                     // This is NOT going to be an escape control sequence.
                     // Send both, the formerly read escape character and the
                     // current character as two independent signals.
-                    receive_linux_console_signal(p0, (void*) UI_ESCAPE_NAME, (void*) UI_ESCAPE_NAME_COUNT);
+                    receive_gnu_linux_console_signal(p0, (void*) UI_ESCAPE_NAME, (void*) UI_ESCAPE_NAME_COUNT);
 
                     if (e != EOF) {
 
                         // Forward character if it is not the end of the console stream.
-                        receive_linux_console_character(p0, (void*) &e);
+                        receive_gnu_linux_console_character(p0, (void*) &e);
                     }
                 }
 
@@ -393,13 +393,13 @@ void receive_linux_console_thread(void* p0) {
             } else if (e != EOF) {
 
                 // Forward character if it is not the end of the console stream.
-                receive_linux_console_character(p0, (void*) &e);
+                receive_gnu_linux_console_character(p0, (void*) &e);
             }
         }
 
     } else {
 
-        log_message_debug("Could not receive linux console thread. The input stream is null.");
+        log_message_debug("Could not receive gnu/linux console thread. The input stream is null.");
     }
 
     // An implicit call to pthread_exit() is made when this thread
@@ -417,24 +417,24 @@ void receive_linux_console_thread(void* p0) {
 }
 
 /**
- * Receives textual user interface (tui) messages via linux console.
+ * Receives textual user interface (tui) messages via gnu/linux console.
  *
  * @param p0 the internal memory
  * @param p1 the temporary user interface commands internal
  * @param p2 the temporary user interface commands count internal
  * @param p3 the temporary user interface commands size internal
  */
-void receive_linux_console(void* p0, void* p1, void* p2, void* p3) {
+void receive_gnu_linux_console(void* p0, void* p1, void* p2, void* p3) {
 
-    log_message_debug("Receive linux console message.");
+    log_message_debug("Receive gnu/linux console message.");
 
-    // The linux console mutex.
+    // The gnu/linux console mutex.
     pthread_mutex_t** mt = (pthread_mutex_t**) NULL_POINTER;
 
-    // Get linux console mutex.
-    get(p0, (void*) LINUX_CONSOLE_MUTEX_INTERNAL, (void*) &mt, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    // Get gnu/linux console mutex.
+    get(p0, (void*) GNU_LINUX_CONSOLE_MUTEX_INTERNAL, (void*) &mt, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-    // Lock linux console mutex.
+    // Lock gnu/linux console mutex.
     pthread_mutex_lock(*mt);
 
     // Adding the following parameters to the internal memory is necessary,
@@ -451,17 +451,17 @@ void receive_linux_console(void* p0, void* p1, void* p2, void* p3) {
     // Otherwise, the thread procedures might read a new commands internal
     // with the count or size of the old commands internal,
     // which would lead to a segmentation fault and possibly system crash.
-    set(p0, (void*) LINUX_CONSOLE_THREAD_COMMANDS_INTERNAL, (void*) &p1, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    set(p0, (void*) LINUX_CONSOLE_THREAD_COMMANDS_COUNT_INTERNAL, (void*) &p2, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    set(p0, (void*) LINUX_CONSOLE_THREAD_COMMANDS_SIZE_INTERNAL, (void*) &p3, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    set(p0, (void*) GNU_LINUX_CONSOLE_THREAD_COMMANDS_INTERNAL, (void*) &p1, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    set(p0, (void*) GNU_LINUX_CONSOLE_THREAD_COMMANDS_COUNT_INTERNAL, (void*) &p2, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    set(p0, (void*) GNU_LINUX_CONSOLE_THREAD_COMMANDS_SIZE_INTERNAL, (void*) &p3, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-    // Unlock linux console mutex.
+    // Unlock gnu/linux console mutex.
     pthread_mutex_unlock(*mt);
 
     // Only create thread, if not existent.
-    if (*LINUX_CONSOLE_THREAD == *INVALID_VALUE) {
+    if (*GNU_LINUX_CONSOLE_THREAD == *INVALID_VALUE) {
 
-        log_message_debug("Create new linux console receive service thread.");
+        log_message_debug("Create new gnu/linux console receive service thread.");
 
         // Create thread.
         //
@@ -478,12 +478,12 @@ void receive_linux_console(void* p0, void* p1, void* p2, void* p3) {
         // - added to the internal memory
         // - handed over to the thread procedure HERE
         // - deallocated at service shutdown
-        pthread_create(LINUX_CONSOLE_THREAD, *NULL_POINTER, (void*) &receive_linux_console_thread, p0);
+        pthread_create(GNU_LINUX_CONSOLE_THREAD, *NULL_POINTER, (void*) &receive_gnu_linux_console_thread, p0);
     }
 }
 
-/* LINUX_OPERATING_SYSTEM */
+/* GNU_LINUX_OPERATING_SYSTEM */
 #endif
 
-/* RECEIVE_LINUX_CONSOLE_SOURCE */
+/* RECEIVE_GNU_LINUX_CONSOLE_SOURCE */
 #endif

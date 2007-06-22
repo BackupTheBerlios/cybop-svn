@@ -22,7 +22,7 @@
  *
  * this handel a loop
  *
- * @version $Revision: 1.21 $ $Date: 2007-06-16 21:53:30 $ $Author: christian $
+ * @version $Revision: 1.22 $ $Date: 2007-06-22 07:07:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -95,7 +95,8 @@ void loop(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
     void** ba = NULL_POINTER;
     void** bac = NULL_POINTER;
     void** bas = NULL_POINTER;
-    void** bm = NULL_POINTER;
+    // This value is used as integer below.
+    int** bm = (int**) NULL_POINTER;
     void** bmc = NULL_POINTER;
     void** bms = NULL_POINTER;
     void** bd = NULL_POINTER;
@@ -119,37 +120,33 @@ void loop(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
         (void*) &bd, (void*) &bdc, (void*) &bds,
         p1, p2);
 
-    // The comparison result.
-    int r = *NUMBER_0_INTEGER;
-    // The break flag.
-    void* b = *NULL_POINTER;
     // The direct execution flag.
     // CAUTION! The flag has to be set to true, because otherwise,
     // each loop cycle places a new signal in signal memory so that
     // these would only be processed with a delay.
     // But this is not desirable, since follow-up signals of this
     // loop may rely on its full execution, including all cycles.
-    int x = *NUMBER_1_INTEGER;
+    int x = *TRUE_BOOLEAN;
 
     while (*NUMBER_1_INTEGER) {
 
+    fprintf(stderr, "TEST bm 0: %i\n", **bm);
+
         // Check if break flag is set to true.
-        compare_arrays(*bm, PRIMITIVE_COUNT, (void*) TRUE_BOOLEAN, (void*) PRIMITIVE_COUNT, &r, (void*) INTEGER_ARRAY);
+        if (**bm != *FALSE_BOOLEAN) {
 
-        if (r != *NUMBER_0_INTEGER) {
-
+    fprintf(stderr, "TEST bm 3: %i\n", **bm);
             // Leave the loop if the break flag is true.
             break;
 
         } else {
 
+    fprintf(stderr, "TEST bm 1: %i\n", **bm);
             // Send the loop model as new signal,
             // as long as the break flag is false (not set).
             handle(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, *ma, *mac, *mm, *mmc, *md, *mdc, p12, p13, (void*) &x);
+    fprintf(stderr, "TEST bm 2: %i\n", **bm);
         }
-
-        // Reset comparison result.
-        r = *NUMBER_0_INTEGER;
     }
 }
 

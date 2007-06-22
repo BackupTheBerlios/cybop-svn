@@ -1,5 +1,5 @@
 /*
- * $RCSfile: startup_linux_console.c,v $
+ * $RCSfile: startup_gnu_linux_console.c,v $
  *
  * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
  *
@@ -20,15 +20,15 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.24 $ $Date: 2007-05-26 21:19:58 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2007-06-22 07:07:14 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
 
-#ifndef STARTUP_LINUX_CONSOLE_SOURCE
-#define STARTUP_LINUX_CONSOLE_SOURCE
+#ifndef STARTUP_GNU_LINUX_CONSOLE_SOURCE
+#define STARTUP_GNU_LINUX_CONSOLE_SOURCE
 
-#ifdef LINUX_OPERATING_SYSTEM
+#ifdef GNU_LINUX_OPERATING_SYSTEM
 
 #include <stdio.h>
 #include <termios.h>
@@ -42,30 +42,30 @@
 #include "../../memoriser/allocator.c"
 
 /**
- * Starts up the linux console.
+ * Starts up the gnu/linux console.
  *
  * @param p0 the internals memory
  * @param p1 the knowledge memory
  * @param p2 the knowledge memory count
  * @param p3 the knowledge memory size
  */
-void startup_linux_console(void* p0, void* p1, void* p2, void* p3) {
+void startup_gnu_linux_console(void* p0, void* p1, void* p2, void* p3) {
 
-    log_message_debug("Startup linux console.");
+    log_message_debug("Startup gnu/linux console.");
 
-    // The linux console input- and output stream internal.
+    // The gnu/linux console input- and output stream internal.
     FILE** ipi = (FILE**) NULL_POINTER;
     FILE** opi = (FILE**) NULL_POINTER;
 
-    // Get linux console internals.
-    get(p0, (void*) LINUX_CONSOLE_INPUT_FILE_DESCRIPTOR_INTERNAL, (void*) &ipi, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    get(p0, (void*) LINUX_CONSOLE_OUTPUT_FILE_DESCRIPTOR_INTERNAL, (void*) &opi, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    // Get gnu/linux console internals.
+    get(p0, (void*) GNU_LINUX_CONSOLE_INPUT_FILE_DESCRIPTOR_INTERNAL, (void*) &ipi, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get(p0, (void*) GNU_LINUX_CONSOLE_OUTPUT_FILE_DESCRIPTOR_INTERNAL, (void*) &opi, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-    // Only create new linux console resources if both,
+    // Only create new gnu/linux console resources if both,
     // input- AND output stream internal are null.
     if ((*ipi == *NULL_POINTER) && (*opi == *NULL_POINTER)) {
 
-        // The linux console input- and output stream.
+        // The gnu/linux console input- and output stream.
         FILE* ip = (FILE*) *NULL_POINTER;
         FILE* op = (FILE*) *NULL_POINTER;
         // The original termios interface.
@@ -77,7 +77,7 @@ void startup_linux_console(void* p0, void* p1, void* p2, void* p3) {
         int* bc = (int*) *NULL_POINTER;
         int* bs = (int*) *NULL_POINTER;
 
-        // Create linux console internals.
+        // Create gnu/linux console internals.
 //??        allocate((void*) &ip, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 //??        allocate((void*) &op, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
         to = (struct termios*) malloc(sizeof(struct termios));
@@ -87,7 +87,7 @@ void startup_linux_console(void* p0, void* p1, void* p2, void* p3) {
         allocate((void*) &bc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
         allocate((void*) &bs, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
-        // Initialise linux console internals.
+        // Initialise gnu/linux console internals.
         //
         // CAUTION! The standard input- and output streams are used for now.
         ip = stdin;
@@ -118,35 +118,35 @@ void startup_linux_console(void* p0, void* p1, void* p2, void* p3) {
         // Allocate character buffer.
         allocate((void*) &b, (void*) bs, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
-        // Check for linux console.
+        // Check for gnu/linux console.
         int l = strcmp("linux", getenv("TERM"));
 
         if (l == *NUMBER_0_INTEGER) {
 
-            log_message_debug("Debug: This is a linux console.");
+            log_message_debug("Debug: This is a gnu/linux console.");
 
         } else {
 
             log_message_debug("Debug: This is a standard serial terminal.");
         }
 
-        // Set linux console internals.
-        set(p0, (void*) LINUX_CONSOLE_INPUT_FILE_DESCRIPTOR_INTERNAL, (void*) &ip, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        set(p0, (void*) LINUX_CONSOLE_OUTPUT_FILE_DESCRIPTOR_INTERNAL, (void*) &op, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        set(p0, (void*) LINUX_CONSOLE_ORIGINAL_ATTRIBUTES_INTERNAL, (void*) &to, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        set(p0, (void*) LINUX_CONSOLE_WORKING_ATTRIBUTES_INTERNAL, (void*) &tw, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        set(p0, (void*) LINUX_CONSOLE_THREAD_CHARACTER_BUFFER_INTERNAL, (void*) &b, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        set(p0, (void*) LINUX_CONSOLE_THREAD_CHARACTER_BUFFER_COUNT_INTERNAL, (void*) &bc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        set(p0, (void*) LINUX_CONSOLE_THREAD_CHARACTER_BUFFER_SIZE_INTERNAL, (void*) &bs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        // Set gnu/linux console internals.
+        set(p0, (void*) GNU_LINUX_CONSOLE_INPUT_FILE_DESCRIPTOR_INTERNAL, (void*) &ip, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        set(p0, (void*) GNU_LINUX_CONSOLE_OUTPUT_FILE_DESCRIPTOR_INTERNAL, (void*) &op, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        set(p0, (void*) GNU_LINUX_CONSOLE_ORIGINAL_ATTRIBUTES_INTERNAL, (void*) &to, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        set(p0, (void*) GNU_LINUX_CONSOLE_WORKING_ATTRIBUTES_INTERNAL, (void*) &tw, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        set(p0, (void*) GNU_LINUX_CONSOLE_THREAD_CHARACTER_BUFFER_INTERNAL, (void*) &b, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        set(p0, (void*) GNU_LINUX_CONSOLE_THREAD_CHARACTER_BUFFER_COUNT_INTERNAL, (void*) &bc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        set(p0, (void*) GNU_LINUX_CONSOLE_THREAD_CHARACTER_BUFFER_SIZE_INTERNAL, (void*) &bs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
     } else {
 
-        log_message_debug("WARNING: Could not startup linux console. The linux console input or output or both are already running.");
+        log_message_debug("WARNING: Could not startup gnu/linux console. The gnu/linux console input or output or both are already running.");
     }
 }
 
-/* LINUX_OPERATING_SYSTEM */
+/* GNU_LINUX_OPERATING_SYSTEM */
 #endif
 
-/* STARTUP_LINUX_CONSOLE_SOURCE */
+/* STARTUP_GNU_LINUX_CONSOLE_SOURCE */
 #endif

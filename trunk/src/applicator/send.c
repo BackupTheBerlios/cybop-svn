@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.51 $ $Date: 2007-06-16 21:53:30 $ $Author: christian $
+ * @version $Revision: 1.52 $ $Date: 2007-06-22 07:07:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -31,7 +31,7 @@
 #include "../applicator/send/send_cyboi_system.c"
 #include "../applicator/send/send_file_system.c"
 #include "../applicator/send/send_latex.c"
-#include "../applicator/send/send_linux_console.c"
+#include "../applicator/send/send_gnu_linux_console.c"
 #include "../applicator/send/send_shell.c"
 #include "../applicator/send/send_socket.c"
 #include "../applicator/send/send_x_window_system.c"
@@ -161,7 +161,7 @@ void refresh_url(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, voi
  * as that name is already used by socket functionality.
  *
  * Expected parameters (names in parentheses after Lasswell):
- * - channel (channel): linux_console, tcp_socket, unix_socket, x_window_system
+ * - channel (channel): gnu_linux_console, tcp_socket, unix_socket, x_window_system
  * - sender (who): ip address, socket port
  * - receiver (whom): ip address, socket port
  * - message (what): dot-separated name of knowledge model to be sent
@@ -461,11 +461,11 @@ void send_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays((void*) *cm, (void*) *cmc, (void*) LINUX_CONSOLE_MODEL, (void*) LINUX_CONSOLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays((void*) *cm, (void*) *cmc, (void*) GNU_LINUX_CONSOLE_MODEL, (void*) GNU_LINUX_CONSOLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
-            send_linux_console(p2, *ma, *mac, *mm, *mmc, *md, *mdc, *am, *amc, *clm, *clmc, p3, p4);
+            send_gnu_linux_console(p2, *ma, *mac, *mm, *mmc, *md, *mdc, *am, *amc, *clm, *clmc, p3, p4);
         }
     }
 

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.25 $ $Date: 2007-05-16 19:29:01 $ $Author: christian $
+ * @version $Revision: 1.26 $ $Date: 2007-06-22 07:07:14 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -28,7 +28,7 @@
 #ifndef RECEIVE_X_WINDOW_SYSTEM_SOURCE
 #define RECEIVE_X_WINDOW_SYSTEM_SOURCE
 
-#ifdef LINUX_OPERATING_SYSTEM
+#ifdef GNU_LINUX_OPERATING_SYSTEM
 
 #include <X11/Xlib.h>
 //?? #include <X11/Xutil.h>
@@ -914,7 +914,7 @@ void receive_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, v
     set(p0, (void*) X_WINDOW_SYSTEM_THREAD_COMMANDS_SIZE_INTERNAL, (void*) &p6, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
     // Only create thread, if not existent.
-    if (*LINUX_CONSOLE_THREAD == *INVALID_VALUE) {
+    if (*GNU_LINUX_CONSOLE_THREAD == *INVALID_VALUE) {
 
         // Create thread.
         //
@@ -935,7 +935,7 @@ void receive_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, v
     }
 }
 
-/* LINUX_OPERATING_SYSTEM */
+/* GNU_LINUX_OPERATING_SYSTEM */
 #endif
 
 /* RECEIVE_X_WINDOW_SYSTEM_SOURCE */

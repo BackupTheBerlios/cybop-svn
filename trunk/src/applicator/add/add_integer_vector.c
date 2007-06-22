@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2007-06-16 21:53:30 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2007-06-22 07:07:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -114,23 +114,12 @@ void add_integer_vector(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
                         // Reallocate output operand array.
                         reallocate_array(p0, p1, p2, (void*) INTEGER_ARRAY);
 
-    fprintf(stderr, "TEST summand1: %i\n", *((int*) summand1));
-    fprintf(stderr, "TEST summand1c: %i\n", summand1c);
-    fprintf(stderr, "TEST summand2: %i\n", *((int*) summand2));
-    fprintf(stderr, "TEST summand2c: %i\n", summand2c);
-    fprintf(stderr, "TEST s: %i\n", **((int**) s));
-    fprintf(stderr, "TEST sc: %i\n", *sc);
-    fprintf(stderr, "TEST ss: %i\n", *ss);
-
                         // The temporary summand 1 vector element.
-                        int* tmps1 = NUMBER_0_INTEGER;
+                        int* tmps1 = (int*) *NULL_POINTER;
                         // The temporary summand 2 vector element.
-                        int* tmps2 = NUMBER_0_INTEGER;
+                        int* tmps2 = (int*) *NULL_POINTER;
                         // The temporary sum vector element.
-                        int* tmps = NUMBER_0_INTEGER;
-
-                        //?? TEST only!
-                        int* test_sum = NUMBER_0_INTEGER;
+                        int tmps = *NUMBER_0_INTEGER;
 
                         while (*NUMBER_1_INTEGER) {
 
@@ -139,26 +128,17 @@ void add_integer_vector(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
                                 break;
                             }
 
-    fprintf(stderr, "TEST loop sc: %i\n", *sc);
-
                             // The parameter p1 is the sum count, which serves as
                             // index that gets incremented in every loop cycle.
                             get_array_elements(summand1, p1, (void*) &tmps1, (void*) INTEGER_ARRAY);
                             get_array_elements(summand2, p1, (void*) &tmps2, (void*) INTEGER_ARRAY);
 
                             // Calculate temporary sum.
-                            *tmps = *tmps1 + *tmps2;
-
-    fprintf(stderr, "TEST loop tmps1: %i\n", *tmps1);
-    fprintf(stderr, "TEST loop tmps2: %i\n", *tmps2);
-    fprintf(stderr, "TEST loop tmps: %i\n", *tmps);
+                            tmps = *tmps1 + *tmps2;
 
                             // Set output operand array.
-                            set_array_elements(*s, p1, (void*) tmps, (void*) PRIMITIVE_COUNT, (void*) INTEGER_ARRAY);
+                            set_array_elements(*s, p1, (void*) &tmps, (void*) PRIMITIVE_COUNT, (void*) INTEGER_ARRAY);
 
-                            //?? TEST ONLY!
-                            get_array_elements(*s, p1, (void*) &test_sum, (void*) INTEGER_ARRAY);
-                            fprintf(stderr, "TEST loop test_sum: %i\n", *test_sum);
                             (*sc)++;
                         }
 
