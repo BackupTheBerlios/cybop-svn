@@ -14,9 +14,15 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.7 $ $Date: 2007-06-22 07:07:13 $ $Author: christian $
+# @version $Revision: 1.8 $ $Date: 2007-06-24 15:02:21 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2007-06-24  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Add new operation 'get'
+        * Rename equally named function in accessor.c and all code to 'get_element'
+        * Rename 'set' function to 'set_element' in all code, in order to be uniform
 
 2007-06-22  Christian Heller  <christian.heller@tuxtax.de>
 
@@ -25,7 +31,7 @@
 
 2007-06-16  Christian Heller  <christian.heller@tuxtax.de>
 
-        * Add new or extend functions like copy, count, compare etc.
+        * Add new or extend operations like copy, count, compare etc.
         * Extend send_shell function with line_feed option
         * Update loop function
 

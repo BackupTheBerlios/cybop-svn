@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2007-06-22 07:07:14 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2007-06-24 15:02:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -134,6 +134,11 @@ static char BUILD_LISTNAME_MODEL_ARRAY[] = {'b', 'u', 'i', 'l', 'd', '_', 'l', '
 static char* BUILD_LISTNAME_MODEL = BUILD_LISTNAME_MODEL_ARRAY;
 static int* BUILD_LISTNAME_MODEL_COUNT = NUMBER_14_INTEGER_ARRAY;
 
+/** The get model. */
+static char GET_MODEL_ARRAY[] = {'g', 'e', 't'};
+static char* GET_MODEL = GET_MODEL_ARRAY;
+static int* GET_MODEL_COUNT = NUMBER_3_INTEGER_ARRAY;
+
 //
 // Count selection models.
 //
@@ -152,6 +157,20 @@ static int* COUNT_PREFIX_SELECTION_MODEL_COUNT = NUMBER_6_INTEGER_ARRAY;
 static char COUNT_SUFFIX_SELECTION_MODEL_ARRAY[] = {'s', 'u', 'f', 'f', 'i', 'x'};
 static char* COUNT_SUFFIX_SELECTION_MODEL = COUNT_SUFFIX_SELECTION_MODEL_ARRAY;
 static int* COUNT_SUFFIX_SELECTION_MODEL_COUNT = NUMBER_6_INTEGER_ARRAY;
+
+//
+// Get description models.
+//
+
+/** The get name description model. */
+static char GET_NAME_DESCRIPTION_MODEL_ARRAY[] = {'n', 'a', 'm', 'e'};
+static char* GET_NAME_DESCRIPTION_MODEL = GET_NAME_DESCRIPTION_MODEL_ARRAY;
+static int* GET_NAME_DESCRIPTION_MODEL_COUNT = NUMBER_4_INTEGER_ARRAY;
+
+/** The get abstraction description model. */
+static char GET_ABSTRACTION_DESCRIPTION_MODEL_ARRAY[] = {'a', 'b', 's', 't', 'r', 'a', 'c', 't', 'i', 'o', 'n'};
+static char* GET_ABSTRACTION_DESCRIPTION_MODEL = GET_ABSTRACTION_DESCRIPTION_MODEL_ARRAY;
+static int* GET_ABSTRACTION_DESCRIPTION_MODEL_COUNT = NUMBER_11_INTEGER_ARRAY;
 
 //
 // Boolean logic models.

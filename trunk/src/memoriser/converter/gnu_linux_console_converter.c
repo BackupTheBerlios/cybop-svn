@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2007-06-22 07:07:14 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2007-06-24 15:02:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -634,7 +634,7 @@ void serialise_gnu_linux_console_rectangle(void* p0, void* p1, void* p2, void* p
                                                 if (ci < *cc) {
 
                                                     // Get character value at position x.
-                                                    get(p3, (void*) &ci, (void*) &c, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
+                                                    get_element(p3, (void*) &ci, (void*) &c, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
                                                 }
 
                                                 // Serialise character using escape codes.
@@ -717,7 +717,7 @@ void serialise_gnu_linux_console_rectangle(void* p0, void* p1, void* p2, void* p
                                                         if (ci < *cc) {
 
                                                             // Get character value at position x.
-                                                            get(p3, (void*) &ci, (void*) &c, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
+                                                            get_element(p3, (void*) &ci, (void*) &c, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
                                                         }
 
                                                     } else {
@@ -1095,13 +1095,13 @@ void serialise_gnu_linux_console_coordinates(void* p0, void* p1, void* p2, void*
     int fasz = oasz;
 
     // Get part position x, y, z.
-    get(p14, (void*) UI_POSITION_X_INDEX, (void*) &px, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    get(p14, (void*) UI_POSITION_Y_INDEX, (void*) &py, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    get(p14, (void*) UI_POSITION_Z_INDEX, (void*) &pz, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    get_element(p14, (void*) UI_POSITION_X_INDEX, (void*) &px, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    get_element(p14, (void*) UI_POSITION_Y_INDEX, (void*) &py, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    get_element(p14, (void*) UI_POSITION_Z_INDEX, (void*) &pz, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
     // Get part size x, y, z.
-    get(p16, (void*) UI_SIZE_X_INDEX, (void*) &sx, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    get(p16, (void*) UI_SIZE_Y_INDEX, (void*) &sy, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    get(p16, (void*) UI_SIZE_Z_INDEX, (void*) &sz, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    get_element(p16, (void*) UI_SIZE_X_INDEX, (void*) &sx, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    get_element(p16, (void*) UI_SIZE_Y_INDEX, (void*) &sy, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    get_element(p16, (void*) UI_SIZE_Z_INDEX, (void*) &sz, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
     // Set current position coordinates, initialised with part position.
     cpx = *px;
@@ -1115,13 +1115,13 @@ void serialise_gnu_linux_console_coordinates(void* p0, void* p1, void* p2, void*
     if (p20 != *NULL_POINTER) {
 
         // Determine source whole position coordinates.
-        get(p18, (void*) UI_POSITION_X_INDEX, (void*) &wpmx, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-        get(p18, (void*) UI_POSITION_Y_INDEX, (void*) &wpmy, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-        get(p18, (void*) UI_POSITION_Z_INDEX, (void*) &wpmz, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        get_element(p18, (void*) UI_POSITION_X_INDEX, (void*) &wpmx, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        get_element(p18, (void*) UI_POSITION_Y_INDEX, (void*) &wpmy, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        get_element(p18, (void*) UI_POSITION_Z_INDEX, (void*) &wpmz, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
         // Determine source whole size coordinates.
-        get(p20, (void*) UI_SIZE_X_INDEX, (void*) &wsmx, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-        get(p20, (void*) UI_SIZE_Y_INDEX, (void*) &wsmy, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-        get(p20, (void*) UI_SIZE_Z_INDEX, (void*) &wsmz, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        get_element(p20, (void*) UI_SIZE_X_INDEX, (void*) &wsmx, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        get_element(p20, (void*) UI_SIZE_Y_INDEX, (void*) &wsmy, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        get_element(p20, (void*) UI_SIZE_Z_INDEX, (void*) &wsmz, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
         // Set original area position coordinates, initialised with whole position.
         oapx = *wpmx;
@@ -1228,11 +1228,11 @@ void serialise_gnu_linux_console_shape(void* p0, void* p1, void* p2, void* p3, v
         //?? TODO: These values should later be given as boolean "true" or "false".
         //?? Currently, they have to be given as "0" or "1" in CYBOL.
         //?? Change this later by transforming boolean into integer values!
-        set(&h, (void*) PRIMITIVE_VALUE_INDEX, p7, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-        set(&i, (void*) PRIMITIVE_VALUE_INDEX, p9, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-        set(&bl, (void*) PRIMITIVE_VALUE_INDEX, p11, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-        set(&u, (void*) PRIMITIVE_VALUE_INDEX, p13, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-        set(&b, (void*) PRIMITIVE_VALUE_INDEX, p15, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        set_element(&h, (void*) PRIMITIVE_VALUE_INDEX, p7, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        set_element(&i, (void*) PRIMITIVE_VALUE_INDEX, p9, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        set_element(&bl, (void*) PRIMITIVE_VALUE_INDEX, p11, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        set_element(&u, (void*) PRIMITIVE_VALUE_INDEX, p13, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        set_element(&b, (void*) PRIMITIVE_VALUE_INDEX, p15, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
         // Map colour names to control sequences.
         mapto((void*) &bg, (void*) &bgc, *NULL_POINTER, p17, p18, (void*) TERMINAL_BACKGROUND_ABSTRACTION, (void*) TERMINAL_BACKGROUND_ABSTRACTION_COUNT);
         mapto((void*) &fg, (void*) &fgc, *NULL_POINTER, p19, p20, (void*) TERMINAL_FOREGROUND_ABSTRACTION, (void*) TERMINAL_FOREGROUND_ABSTRACTION_COUNT);

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.13 $ $Date: 2007-06-22 07:07:14 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2007-06-24 15:02:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -109,29 +109,29 @@ void startup_internal_memory(void* p0, void* p1, void* p2, void* p3, void* p4, v
     int i = *INVALID_VALUE;
 
     // Set knowledge memory internals.
-    set(p0, (void*) KNOWLEDGE_MEMORY_INTERNAL, p1, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    set(p0, (void*) KNOWLEDGE_MEMORY_COUNT_INTERNAL, p2, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    set(p0, (void*) KNOWLEDGE_MEMORY_SIZE_INTERNAL, p3, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    set_element(p0, (void*) KNOWLEDGE_MEMORY_INTERNAL, p1, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    set_element(p0, (void*) KNOWLEDGE_MEMORY_COUNT_INTERNAL, p2, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    set_element(p0, (void*) KNOWLEDGE_MEMORY_SIZE_INTERNAL, p3, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
     // Set signal memory internals.
-    set(p0, (void*) SIGNAL_MEMORY_INTERNAL, p4, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    set(p0, (void*) SIGNAL_MEMORY_COUNT_INTERNAL, p5, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    set(p0, (void*) SIGNAL_MEMORY_SIZE_INTERNAL, p6, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    set_element(p0, (void*) SIGNAL_MEMORY_INTERNAL, p4, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    set_element(p0, (void*) SIGNAL_MEMORY_COUNT_INTERNAL, p5, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    set_element(p0, (void*) SIGNAL_MEMORY_SIZE_INTERNAL, p6, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
     // Set signal memory interrupt request flag.
-    set(p0, (void*) INTERRUPT_REQUEST_INTERNAL, p7, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    set_element(p0, (void*) INTERRUPT_REQUEST_INTERNAL, p7, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     // Set signal memory mutex.
-    set(p0, (void*) SIGNAL_MEMORY_MUTEX_INTERNAL, p8, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    set_element(p0, (void*) SIGNAL_MEMORY_MUTEX_INTERNAL, p8, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     // Set gnu/linux console mutex.
-    set(p0, (void*) GNU_LINUX_CONSOLE_MUTEX_INTERNAL, p9, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    set_element(p0, (void*) GNU_LINUX_CONSOLE_MUTEX_INTERNAL, p9, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     // Set x window system mutex.
-    set(p0, (void*) X_WINDOW_SYSTEM_MUTEX_INTERNAL, p10, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    set_element(p0, (void*) X_WINDOW_SYSTEM_MUTEX_INTERNAL, p10, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     // Set www service mutex.
     i = *WWW_BASE_INTERNAL + *SOCKET_MUTEX_INTERNAL;
-    set(p0, (void*) &i, p11, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    set_element(p0, (void*) &i, p11, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     // Set cyboi service mutex.
     i = *CYBOI_BASE_INTERNAL + *SOCKET_MUTEX_INTERNAL;
-    set(p0, (void*) &i, p12, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    set_element(p0, (void*) &i, p12, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 }
 
 /* INTERNAL_MEMORY_MANAGER_SOURCE */

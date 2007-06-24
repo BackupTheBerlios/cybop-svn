@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.15 $ $Date: 2007-05-31 22:11:22 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2007-06-24 15:02:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -84,9 +84,9 @@ void serialise_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
         XWindowAttributes wa;
 
         // Get x window system internals.
-        get(p0, (void*) X_WINDOW_SYSTEM_DISPLAY_INTERNAL, (void*) &di, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        get(p0, (void*) X_WINDOW_SYSTEM_WINDOW_INTERNAL, (void*) &w, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        get(p0, (void*) X_WINDOW_SYSTEM_GRAPHIC_CONTEXT_INTERNAL, (void*) &gc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        get_element(p0, (void*) X_WINDOW_SYSTEM_DISPLAY_INTERNAL, (void*) &di, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        get_element(p0, (void*) X_WINDOW_SYSTEM_WINDOW_INTERNAL, (void*) &w, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        get_element(p0, (void*) X_WINDOW_SYSTEM_GRAPHIC_CONTEXT_INTERNAL, (void*) &gc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
         // Get window attributes.
         XGetWindowAttributes(*di, **w, &wa);
@@ -140,9 +140,9 @@ void serialise_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
                 p7, p8);
 
             // Determine source whole size coordinates.
-            get(*wsm, (void*) NUMBER_0_INTEGER, (void*) &wsmx, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-            get(*wsm, (void*) NUMBER_1_INTEGER, (void*) &wsmy, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-            get(*wsm, (void*) NUMBER_2_INTEGER, (void*) &wsmz, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+            get_element(*wsm, (void*) NUMBER_0_INTEGER, (void*) &wsmx, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+            get_element(*wsm, (void*) NUMBER_1_INTEGER, (void*) &wsmy, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+            get_element(*wsm, (void*) NUMBER_2_INTEGER, (void*) &wsmz, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
             // Set original area position coordinates, set to the zero origo.
             oapx = *NUMBER_0_INTEGER;
@@ -338,13 +338,13 @@ void serialise_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
                 p7, p8);
 
             // Get source part position coordinates.
-            get(*pm, (void*) NUMBER_0_INTEGER, (void*) &pmx, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-            get(*pm, (void*) NUMBER_1_INTEGER, (void*) &pmy, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-            get(*pm, (void*) NUMBER_2_INTEGER, (void*) &pmz, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+            get_element(*pm, (void*) NUMBER_0_INTEGER, (void*) &pmx, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+            get_element(*pm, (void*) NUMBER_1_INTEGER, (void*) &pmy, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+            get_element(*pm, (void*) NUMBER_2_INTEGER, (void*) &pmz, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
             // Get source part size coordinates.
-            get(*sm, (void*) NUMBER_0_INTEGER, (void*) &smx, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-            get(*sm, (void*) NUMBER_1_INTEGER, (void*) &smy, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-            get(*sm, (void*) NUMBER_2_INTEGER, (void*) &smz, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+            get_element(*sm, (void*) NUMBER_0_INTEGER, (void*) &smx, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+            get_element(*sm, (void*) NUMBER_1_INTEGER, (void*) &smy, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+            get_element(*sm, (void*) NUMBER_2_INTEGER, (void*) &smz, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
     fprintf(stderr, "layout: %s\n", *lm);
     fprintf(stderr, "layout count: %i\n", *((int*) *lmc));

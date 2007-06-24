@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.21 $ $Date: 2007-05-16 19:29:01 $ $Author: christian $
+ * @version $Revision: 1.22 $ $Date: 2007-06-24 15:02:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -55,7 +55,7 @@ void send_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
     pthread_mutex_t** xmt = (pthread_mutex_t**) NULL_POINTER;
 
     // Get x window system mutex.
-    get(p0, (void*) X_WINDOW_SYSTEM_MUTEX_INTERNAL, (void*) &xmt, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get_element(p0, (void*) X_WINDOW_SYSTEM_MUTEX_INTERNAL, (void*) &xmt, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
     pthread_mutex_lock(*xmt);
 

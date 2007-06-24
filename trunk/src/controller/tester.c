@@ -24,7 +24,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.7 $ $Date: 2007-06-22 07:07:14 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2007-06-24 15:02:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -157,7 +157,7 @@ void test_type_sizes() {
  * The following addition adds 8 instead of just 2.
  * int* m = (int*) *NULL_POINTER;
  * allocate((void*) &m, (void*) NUMBER_1_INTEGER, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
- * set(m, (void*) NUMBER_0_INTEGER, (void*) NUMBER_10_INTEGER, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+ * set_element(m, (void*) NUMBER_0_INTEGER, (void*) NUMBER_10_INTEGER, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
  * int* c = m + 2;
  * should be: = 10 + 2 = 12
  * but it is: = 10 + (2 * sizeof(int)) = 10 + 8 = 18
@@ -336,9 +336,9 @@ void test_integer_array() {
 */
 
     // Set test values.
-    set(m, (void*) NUMBER_0_INTEGER, (void*) NUMBER_2_INTEGER, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    set(m, (void*) NUMBER_1_INTEGER, (void*) NUMBER_3_INTEGER, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    set(m, (void*) NUMBER_2_INTEGER, (void*) NUMBER_4_INTEGER, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    set_element(m, (void*) NUMBER_0_INTEGER, (void*) NUMBER_2_INTEGER, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    set_element(m, (void*) NUMBER_1_INTEGER, (void*) NUMBER_3_INTEGER, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    set_element(m, (void*) NUMBER_2_INTEGER, (void*) NUMBER_4_INTEGER, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
     // The result values read out from the integer vector.
     int* result0 = (int*) *NULL_POINTER;
@@ -346,9 +346,9 @@ void test_integer_array() {
     int* result2 = (int*) *NULL_POINTER;
 
     // Get result values.
-    get(m, (void*) NUMBER_0_INTEGER, (void*) &result0, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    get(m, (void*) NUMBER_1_INTEGER, (void*) &result1, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    get(m, (void*) NUMBER_2_INTEGER, (void*) &result2, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    get_element(m, (void*) NUMBER_0_INTEGER, (void*) &result0, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    get_element(m, (void*) NUMBER_1_INTEGER, (void*) &result1, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    get_element(m, (void*) NUMBER_2_INTEGER, (void*) &result2, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
     fprintf(stderr, "post mc: %i\n", *mc);
     fprintf(stderr, "post ms: %i\n", *ms);
@@ -1085,11 +1085,11 @@ void test_parse_integer_vector() {
     int* i2 = (int*) *NULL_POINTER;
 
     // Get integer at index 0 from integer vector.
-    get(d, (void*) NUMBER_0_INTEGER, (void*) &i0, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    get_element(d, (void*) NUMBER_0_INTEGER, (void*) &i0, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
     // Get integer at index 1 from integer vector.
-    get(d, (void*) NUMBER_1_INTEGER, (void*) &i1, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    get_element(d, (void*) NUMBER_1_INTEGER, (void*) &i1, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
     // Get integer at index 2 from integer vector.
-    get(d, (void*) NUMBER_2_INTEGER, (void*) &i2, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    get_element(d, (void*) NUMBER_2_INTEGER, (void*) &i2, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
     fprintf(stderr, "Integer 0: %i\n", *i0);
     fprintf(stderr, "Integer 1: %i\n", *i1);

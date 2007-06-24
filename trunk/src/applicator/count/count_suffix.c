@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2007-06-16 21:53:30 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2007-06-24 15:02:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -66,7 +66,7 @@ void count_suffix(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
             // Set result to compound count value.
             // A loop is not needed here, since the compound count already contains
             // the number of parts within that compound.
-            set(*r, NUMBER_0_INTEGER, (void*) &p4, INTEGER_ABSTRACTION, INTEGER_ABSTRACTION_COUNT);
+            set_element(*r, NUMBER_0_INTEGER, (void*) &p4, INTEGER_ABSTRACTION, INTEGER_ABSTRACTION_COUNT);
 
     fprintf(stderr, "TEST r: %i\n", **r);
     fprintf(stderr, "TEST rc: %i\n", *((int*) rc));

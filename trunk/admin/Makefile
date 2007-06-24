@@ -22,7 +22,7 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.45 $ $Date: 2007-06-22 07:07:13 $ $Author: christian $
+# @version $Revision: 1.46 $ $Date: 2007-06-24 15:02:21 $ $Author: christian $
 # @author Michael Simon <michael.simon@gmx.net>
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
@@ -132,6 +132,8 @@ APPLICATOR_COPY_SOURCES = $(wildcard $(SRC)/applicator/copy/*.c)
 APPLICATOR_COPY_OBJECTS = $(patsubst $(SRC)/applicator/copy/%.c,$(OBJ)/applicator/copy/%.o,$(APPLICATOR_COPY_SOURCES))
 APPLICATOR_COUNT_SOURCES = $(wildcard $(SRC)/applicator/count/*.c)
 APPLICATOR_COUNT_OBJECTS = $(patsubst $(SRC)/applicator/count/%.c,$(OBJ)/applicator/count/%.o,$(APPLICATOR_COUNT_SOURCES))
+APPLICATOR_GET_SOURCES = $(wildcard $(SRC)/applicator/get/*.c)
+APPLICATOR_GET_OBJECTS = $(patsubst $(SRC)/applicator/get/%.c,$(OBJ)/applicator/get/%.o,$(APPLICATOR_GET_SOURCES))
 APPLICATOR_INTERRUPT_SOURCES = $(wildcard $(SRC)/applicator/interrupt/*.c)
 APPLICATOR_INTERRUPT_OBJECTS = $(patsubst $(SRC)/applicator/interrupt/%.c,$(OBJ)/applicator/interrupt/%.o,$(APPLICATOR_INTERRUPT_SOURCES))
 APPLICATOR_RECEIVE_SOURCES = $(wildcard $(SRC)/applicator/receive/*.c)
@@ -221,6 +223,7 @@ all: export \
 	$(APPLICATOR_COMPARE_OBJECTS) \
 	$(APPLICATOR_COPY_OBJECTS) \
 	$(APPLICATOR_COUNT_OBJECTS) \
+	$(APPLICATOR_GET_OBJECTS) \
 	$(APPLICATOR_INTERRUPT_OBJECTS) \
 	$(APPLICATOR_RECEIVE_OBJECTS) \
 	$(APPLICATOR_RUN_OBJECTS) \
@@ -290,6 +293,7 @@ create:
 	-cd $(OBJ); mkdir applicator/compare
 	-cd $(OBJ); mkdir applicator/copy
 	-cd $(OBJ); mkdir applicator/count
+	-cd $(OBJ); mkdir applicator/get
 	-cd $(OBJ); mkdir applicator/interrupt
 	-cd $(OBJ); mkdir applicator/receive
 	-cd $(OBJ); mkdir applicator/run
@@ -338,6 +342,9 @@ $(OBJ)/applicator/copy/%.o: $(SRC)/applicator/copy/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
 $(OBJ)/applicator/count/%.o: $(SRC)/applicator/count/%.c
+	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
+
+$(OBJ)/applicator/get/%.o: $(SRC)/applicator/get/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
 $(OBJ)/applicator/interrupt/%.o: $(SRC)/applicator/interrupt/%.c

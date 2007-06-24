@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.12 $ $Date: 2007-06-22 07:07:13 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2007-06-24 15:02:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -159,8 +159,6 @@ void compare_greater_or_equal(void* p0, void* p1, void* p2,
                         }
                     }
 
-    fprintf(stderr, "TEST rm: %i\n", *rm);
-
                     //
                     // Double parameters.
                     //
@@ -201,8 +199,6 @@ void compare_greater_or_equal(void* p0, void* p1, void* p2,
 
             log_message_debug("Could not compare if one parameter is greater than or equal to the other. The right side parameter is null.");
         }
-
-    fprintf(stderr, "TEST rm end: %i\n", *rm);
 
     } else {
 

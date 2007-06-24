@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.30 $ $Date: 2007-06-16 21:55:00 $ $Author: christian $
+ * @version $Revision: 1.31 $ $Date: 2007-06-24 15:02:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -36,6 +36,7 @@
 #include "../../applicator/count.c"
 #include "../../applicator/create.c"
 #include "../../applicator/destroy.c"
+#include "../../applicator/get.c"
 #include "../../applicator/interrupt.c"
 #include "../../applicator/loop.c"
 #include "../../applicator/receive.c"
@@ -63,10 +64,10 @@
  * @param p7 the interrupt request flag
  * @param p8 the signal memory mutex
  * @param p9 the shutdown flag
- * @param p10 the signal (operation)
- * @param p11 the signal count
- * @param p12 the parameters (details)
- * @param p13 the parameters count
+ * @param p10 the model (signal/ operation)
+ * @param p11 the model count
+ * @param p12 the details (parameters)
+ * @param p13 the details count
  * @param p14 the signal priority
  * @param p15 the signal id
  */
@@ -75,6 +76,8 @@ void handle_operation(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
     log_message_debug("\n\n");
     log_message((void*) INFORMATION_LOG_LEVEL, (void*) HANDLE_OPERATION_MESSAGE, (void*) HANDLE_OPERATION_MESSAGE_COUNT);
+
+//??    fprintf(stderr, "TEST operation model: %s\n", (char*) p10);
 
     // The comparison result.
     int r = *NUMBER_0_INTEGER;
@@ -130,6 +133,16 @@ void handle_operation(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
         if (r != *NUMBER_0_INTEGER) {
 
             build_listname(p12, p13, p1, p2, p3);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER) {
+
+        compare_arrays(p10, p11, (void*) GET_MODEL, (void*) GET_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != *NUMBER_0_INTEGER) {
+
+            get(p12, p13, p1, p2, p3);
         }
     }
 

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2007-06-16 21:55:00 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2007-06-24 15:02:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -381,6 +381,30 @@ static int* COUNT_FILTER_NAME_COUNT = NUMBER_6_INTEGER_ARRAY;
 static char COUNT_RESULT_NAME_ARRAY[] = {'r', 'e', 's', 'u', 'l', 't'};
 static char* COUNT_RESULT_NAME = COUNT_RESULT_NAME_ARRAY;
 static int* COUNT_RESULT_NAME_COUNT = NUMBER_6_INTEGER_ARRAY;
+
+//
+// Get names.
+//
+
+/** The get compound name. */
+static char GET_COMPOUND_NAME_ARRAY[] = {'c', 'o', 'm', 'p', 'o', 'u', 'n', 'd'};
+static char* GET_COMPOUND_NAME = GET_COMPOUND_NAME_ARRAY;
+static int* GET_COMPOUND_NAME_COUNT = NUMBER_8_INTEGER_ARRAY;
+
+/** The get index name. */
+static char GET_INDEX_NAME_ARRAY[] = {'i', 'n', 'd', 'e', 'x'};
+static char* GET_INDEX_NAME = GET_INDEX_NAME_ARRAY;
+static int* GET_INDEX_NAME_COUNT = NUMBER_5_INTEGER_ARRAY;
+
+/** The get description name. */
+static char GET_DESCRIPTION_NAME_ARRAY[] = {'d', 'e', 's', 'c', 'r', 'i', 'p', 't', 'i', 'o', 'n'};
+static char* GET_DESCRIPTION_NAME = GET_DESCRIPTION_NAME_ARRAY;
+static int* GET_DESCRIPTION_NAME_COUNT = NUMBER_11_INTEGER_ARRAY;
+
+/** The get result name. */
+static char GET_RESULT_NAME_ARRAY[] = {'r', 'e', 's', 'u', 'l', 't'};
+static char* GET_RESULT_NAME = GET_RESULT_NAME_ARRAY;
+static int* GET_RESULT_NAME_COUNT = NUMBER_6_INTEGER_ARRAY;
 
 //
 // Create names.

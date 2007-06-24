@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.12 $ $Date: 2007-05-16 19:29:01 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2007-06-24 15:02:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -58,7 +58,7 @@ void activate_tcp_socket( void* internals, void* know, void* know_count, void* k
         // The tcp socket interrupt flag.
         int** f = (int**) NULL_POINTER;
 
-//??        get(internals, (void*) TCP_SOCKET_INTERRUPT_INTERNAL, (void*) &f, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+//??        get_element(internals, (void*) TCP_SOCKET_INTERRUPT_INTERNAL, (void*) &f, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
         if ((f != *NULL_POINTER) && (*f != *NULL_POINTER)) {
 

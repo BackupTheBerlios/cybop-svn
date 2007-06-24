@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.24 $ $Date: 2007-05-26 21:19:58 $ $Author: christian $
+ * @version $Revision: 1.25 $ $Date: 2007-06-24 15:02:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -137,7 +137,7 @@ void parse_integer_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
                         }
 
                         // Set integer value.
-                        set(*d, (void*) dc, (void*) &v, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+                        set_element(*d, (void*) dc, (void*) &v, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
                         // Increment integer vector count, because of new element.
                         (*dc)++;
@@ -231,7 +231,7 @@ void serialise_integer_vector_elements(void* p0, void* p1, void* p2, void* p3, v
                         if (*sc > *NUMBER_0_INTEGER) {
 
                             // Get first integer from vector.
-                            get(p3, (void*) NUMBER_0_INTEGER, &i, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+                            get_element(p3, (void*) NUMBER_0_INTEGER, &i, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
                             // Serialise first integer.
                             serialise_integer((void*) &c, (void*) &cc, (void*) &cs, i, (void*) PRIMITIVE_COUNT);

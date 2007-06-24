@@ -22,7 +22,7 @@
  *
  * this handel a loop
  *
- * @version $Revision: 1.22 $ $Date: 2007-06-22 07:07:13 $ $Author: christian $
+ * @version $Revision: 1.23 $ $Date: 2007-06-24 15:02:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -130,22 +130,17 @@ void loop(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
 
     while (*NUMBER_1_INTEGER) {
 
-    fprintf(stderr, "TEST bm 0: %i\n", **bm);
-
         // Check if break flag is set to true.
         if (**bm != *FALSE_BOOLEAN) {
 
-    fprintf(stderr, "TEST bm 3: %i\n", **bm);
             // Leave the loop if the break flag is true.
             break;
 
         } else {
 
-    fprintf(stderr, "TEST bm 1: %i\n", **bm);
             // Send the loop model as new signal,
             // as long as the break flag is false (not set).
             handle(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, *ma, *mac, *mm, *mmc, *md, *mdc, p12, p13, (void*) &x);
-    fprintf(stderr, "TEST bm 2: %i\n", **bm);
         }
     }
 }

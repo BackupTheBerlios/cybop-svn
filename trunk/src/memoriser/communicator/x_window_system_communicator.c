@@ -24,7 +24,7 @@
  * - receive a file stream into a byte array
  * - send a file stream from a byte array
  *
- * @version $Revision: 1.10 $ $Date: 2007-05-26 21:19:58 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2007-06-24 15:02:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -72,7 +72,7 @@ void write_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
         int** w = (int**) NULL_POINTER;
 
         // Get x window system internals.
-        get(p3, (void*) X_WINDOW_SYSTEM_WINDOW_INTERNAL, (void*) &w, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        get_element(p3, (void*) X_WINDOW_SYSTEM_WINDOW_INTERNAL, (void*) &w, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
         // Request input events (signals) to be put into event queue.
         XSelectInput(*d, **w, ExposureMask

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.35 $ $Date: 2007-05-26 21:19:58 $ $Author: christian $
+ * @version $Revision: 1.36 $ $Date: 2007-06-24 15:02:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -413,8 +413,7 @@ void get_compound_element_name_and_remaining_name(void* p0, void* p1, void* p2, 
  * @param p4 the name count (Hand over as reference!)
  * @param p5 the name size (Hand over as reference!)
  */
-void get_compound_element_name_by_index(void* p0, void* p1,
-    void* p2, void* p3, void* p4, void* p5) {
+void get_compound_element_name_by_index(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
     if (p2 != *NULL_POINTER) {
 
@@ -484,6 +483,89 @@ void get_compound_element_name_by_index(void* p0, void* p1,
     } else {
 
         log_message_debug("Could not get compound element name by index. The index is null.");
+    }
+}
+
+/**
+ * Gets the compound element abstraction by index.
+ *
+ * @param p0 the compound
+ * @param p1 the compound count
+ * @param p2 the index
+ * @param p3 the abstraction (Hand over as reference!)
+ * @param p4 the abstraction count
+ * @param p5 the abstraction size
+ */
+void get_compound_element_abstraction_by_index(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
+
+    if (p2 != *NULL_POINTER) {
+
+        int* i = (int*) p2;
+
+        if (p1 != *NULL_POINTER) {
+
+            int* cc = (int*) p1;
+
+            if (*i >= *NUMBER_0_INTEGER) {
+
+                log_message_debug("Get compound element abstraction by index.");
+
+                // The abstractions.
+                void** a = NULL_POINTER;
+                void** ac = NULL_POINTER;
+                void** as = NULL_POINTER;
+
+                // Get abstractions.
+                get_array_elements(p0, (void*) ABSTRACTIONS_INDEX, (void*) &a, (void*) POINTER_ARRAY);
+                get_array_elements(p0, (void*) ABSTRACTIONS_COUNTS_INDEX, (void*) &ac, (void*) POINTER_ARRAY);
+                get_array_elements(p0, (void*) ABSTRACTIONS_SIZES_INDEX, (void*) &as, (void*) POINTER_ARRAY);
+
+                if (*a != *NULL_POINTER) {
+
+                    if (*ac != *NULL_POINTER) {
+
+                        if (*as != *NULL_POINTER) {
+
+                            if (*i < *cc) {
+
+                                // Get part abstraction.
+                                get_array_elements(*a, p2, p3, (void*) POINTER_ARRAY);
+                                get_array_elements(*ac, p2, p4, (void*) POINTER_ARRAY);
+                                get_array_elements(*as, p2, p5, (void*) POINTER_ARRAY);
+
+                            } else {
+
+                                log_message_debug("Could not get compound element abstraction by index. The index exceeds the count.");
+                            }
+
+                        } else {
+
+                            log_message_debug("Could not get compound element abstraction by index. The abstractions sizes is null.");
+                        }
+
+                    } else {
+
+                        log_message_debug("Could not get compound element abstraction by index. The abstractions counts is null.");
+                    }
+
+                } else {
+
+                    log_message_debug("Could not get compound element abstraction by index. The abstractions is null.");
+                }
+
+            } else {
+
+                log_message_debug("Could not get compound element abstraction by index. The index is negativ.");
+            }
+
+        } else {
+
+            log_message_debug("Could not get compound element abstraction by index. The compound count is null.");
+        }
+
+    } else {
+
+        log_message_debug("Could not get compound element abstraction by index. The index is null.");
     }
 }
 
