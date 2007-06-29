@@ -22,7 +22,7 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.46 $ $Date: 2007-06-24 15:02:21 $ $Author: christian $
+# @version $Revision: 1.47 $ $Date: 2007-06-29 22:55:30 $ $Author: christian $
 # @author Michael Simon <michael.simon@gmx.net>
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
@@ -128,6 +128,8 @@ APPLICATOR_SOURCES = $(wildcard $(SRC)/applicator/*.c)
 APPLICATOR_OBJECTS = $(patsubst $(SRC)/applicator/%.c,$(OBJ)/applicator/%.o,$(APPLICATOR_SOURCES))
 APPLICATOR_COMPARE_SOURCES = $(wildcard $(SRC)/applicator/compare/*.c)
 APPLICATOR_COMPARE_OBJECTS = $(patsubst $(SRC)/applicator/compare/%.c,$(OBJ)/applicator/compare/%.o,$(APPLICATOR_COMPARE_SOURCES))
+APPLICATOR_COMPARE_EQUAL_SOURCES = $(wildcard $(SRC)/applicator/compare/equal/*.c)
+APPLICATOR_COMPARE_EQUAL_OBJECTS = $(patsubst $(SRC)/applicator/compare/equal/%.c,$(OBJ)/applicator/compare/equal/%.o,$(APPLICATOR_COMPARE_EQUAL_SOURCES))
 APPLICATOR_COPY_SOURCES = $(wildcard $(SRC)/applicator/copy/*.c)
 APPLICATOR_COPY_OBJECTS = $(patsubst $(SRC)/applicator/copy/%.c,$(OBJ)/applicator/copy/%.o,$(APPLICATOR_COPY_SOURCES))
 APPLICATOR_COUNT_SOURCES = $(wildcard $(SRC)/applicator/count/*.c)
@@ -221,6 +223,7 @@ all: export \
 	create \
 	$(APPLICATOR_OBJECTS) \
 	$(APPLICATOR_COMPARE_OBJECTS) \
+	$(APPLICATOR_COMPARE_EQUAL_OBJECTS) \
 	$(APPLICATOR_COPY_OBJECTS) \
 	$(APPLICATOR_COUNT_OBJECTS) \
 	$(APPLICATOR_GET_OBJECTS) \
@@ -291,6 +294,7 @@ create:
 	-cd ..; mkdir obj; mkdir bin
 	-cd $(OBJ); mkdir applicator
 	-cd $(OBJ); mkdir applicator/compare
+	-cd $(OBJ); mkdir applicator/compare/equal
 	-cd $(OBJ); mkdir applicator/copy
 	-cd $(OBJ); mkdir applicator/count
 	-cd $(OBJ); mkdir applicator/get
@@ -336,6 +340,9 @@ $(OBJ)/applicator/%.o: $(SRC)/applicator/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
 $(OBJ)/applicator/compare/%.o: $(SRC)/applicator/compare/%.c
+	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
+
+$(OBJ)/applicator/compare/equal/%.o: $(SRC)/applicator/compare/equal/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
 $(OBJ)/applicator/copy/%.o: $(SRC)/applicator/copy/%.c

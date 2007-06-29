@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2007-06-24 15:02:22 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2007-06-29 22:55:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -199,6 +199,15 @@ static char WUI_ALIGN_ATTRIBUTE_NAME_ARRAY[] = {'a', 'l', 'i', 'g', 'n'};
 static char* WUI_ALIGN_ATTRIBUTE_NAME = WUI_ALIGN_ATTRIBUTE_NAME_ARRAY;
 static int* WUI_ALIGN_ATTRIBUTE_NAME_COUNT = NUMBER_5_INTEGER_ARRAY;
 */
+
+//
+// Operation names.
+//
+
+/** The operation enable name. */
+static char OPERATION_ENABLE_NAME_ARRAY[] = {'e', 'n', 'a', 'b', 'l', 'e'};
+static char* OPERATION_ENABLE_NAME = OPERATION_ENABLE_NAME_ARRAY;
+static int* OPERATION_ENABLE_NAME_COUNT = NUMBER_6_INTEGER_ARRAY;
 
 //
 // Boolean names.

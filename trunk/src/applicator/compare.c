@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.16 $ $Date: 2007-06-16 21:53:30 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2007-06-29 22:55:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -113,6 +113,19 @@ void compare(void* p0, void* p1, void* p2, void* p3, void* p4) {
     void** rd = NULL_POINTER;
     void** rdc = NULL_POINTER;
     void** rds = NULL_POINTER;
+    // The selection name, abstraction, model, details.
+    void** sn = NULL_POINTER;
+    void** snc = NULL_POINTER;
+    void** sns = NULL_POINTER;
+    void** sa = NULL_POINTER;
+    void** sac = NULL_POINTER;
+    void** sas = NULL_POINTER;
+    void** sm = NULL_POINTER;
+    void** smc = NULL_POINTER;
+    void** sms = NULL_POINTER;
+    void** sd = NULL_POINTER;
+    void** sdc = NULL_POINTER;
+    void** sds = NULL_POINTER;
 
     // Get comparison.
     get_universal_compound_element_by_name(p0, p1,
@@ -146,6 +159,14 @@ void compare(void* p0, void* p1, void* p2, void* p3, void* p4) {
         (void*) &rm, (void*) &rmc, (void*) &rms,
         (void*) &rd, (void*) &rdc, (void*) &rds,
         p2, p3);
+    // Get selection.
+    get_universal_compound_element_by_name(p0, p1,
+        (void*) COUNT_SELECTION_NAME, (void*) COUNT_SELECTION_NAME_COUNT,
+        (void*) &sn, (void*) &snc, (void*) &sns,
+        (void*) &sa, (void*) &sac, (void*) &sas,
+        (void*) &sm, (void*) &smc, (void*) &sms,
+        (void*) &sd, (void*) &sdc, (void*) &sds,
+        p2, p3);
 
     // The comparison result.
     int r = *NUMBER_0_INTEGER;
@@ -158,7 +179,8 @@ void compare(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             compare_equal(*lsa, *lsac, *lsas, *lsm, *lsmc, *lsms, *lsd, *lsdc, *lsds,
                 *rsa, *rsac, *rsas, *rsm, *rsmc, *rsms, *rsd, *rsdc, *rsds,
-                *ra, *rac, *ras, *rm, *rmc, *rms, *rd, *rdc, *rds);
+                *ra, *rac, *ras, *rm, *rmc, *rms, *rd, *rdc, *rds,
+                *sm, *smc);
         }
     }
 

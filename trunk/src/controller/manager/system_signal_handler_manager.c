@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.10 $ $Date: 2007-06-22 07:07:14 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2007-06-29 22:55:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -146,13 +146,15 @@ void interrupt_service_system_signal_handler(int p0) {
 /**
  * Starts up the system signal handler.
  *
- * CAUTION! System signals are NOT TO BE MIXED UP with cyboi signals.
+ * CAUTION! Operating system signals are NOT TO BE MIXED UP with cyboi signals!
  * The system signals are used in cyboi to notify and exit threads
  * that served for input/ output and user communication.
  * These threads are not able to exit themselves because they block
  * while waiting for cyboi signals.
  */
 void startup_system_signal_handler() {
+
+    log_message_debug("Information: Startup system signal handler.");
 
     // The signal set (mask).
     sigset_t mask;

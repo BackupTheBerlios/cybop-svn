@@ -2,11 +2,13 @@
 
 <model>
     <part name="create_domain" channel="inline" abstraction="operation" model="create">
+        <property name="enable" channel="inline" abstraction="boolean" model="true"/>
         <property name="name" channel="inline" abstraction="character" model="domain"/>
         <property name="abstraction" channel="inline" abstraction="character" model="compound"/>
         <property name="element" channel="inline" abstraction="character" model="part"/>
     </part>
     <part name="create_greeting" channel="inline" abstraction="operation" model="receive">
+        <property name="enable" channel="inline" abstraction="boolean" model="true"/>
         <property name="name" channel="inline" abstraction="character" model="greeting"/>
         <property name="channel" channel="inline" abstraction="character" model="file"/>
         <property name="abstraction" channel="inline" abstraction="character" model="compound"/>
@@ -15,16 +17,19 @@
         <property name="whole" channel="inline" abstraction="knowledge" model=".domain"/>
     </part>
     <part name="startup_gnu_linux_console" channel="inline" abstraction="operation" model="startup">
+        <property name="enable" channel="inline" abstraction="boolean" model="true"/>
         <property name="service" channel="inline" abstraction="character" model="gnu_linux_console"/>
     </part>
     <!-- Write knowledge tree into file. -->
     <part name="test_knowledge_tree" channel="inline" abstraction="operation" model="send">
+        <property name="enable" channel="inline" abstraction="boolean" model="true"/>
         <property name="channel" channel="inline" abstraction="character" model="file"/>
         <property name="receiver" channel="inline" abstraction="character" model="TEST.txt"/>
         <property name="language" channel="inline" abstraction="character" model="model_diagram"/>
         <property name="message" channel="inline" abstraction="knowledge" model=".domain"/>
     </part>
     <part name="send_model_to_output" channel="inline" abstraction="operation" model="send">
+        <property name="enable" channel="inline" abstraction="boolean" model="true"/>
         <property name="channel" channel="inline" abstraction="character" model="gnu_linux_console"/>
         <property name="receiver" channel="inline" abstraction="character" model="user"/>
         <property name="message" channel="inline" abstraction="knowledge" model=".domain.greeting"/>
@@ -32,13 +37,17 @@
     </part>
 <!--
     <part name="shutdown_gnu_linux_console" channel="inline" abstraction="operation" model="shutdown">
+        <property name="enable" channel="inline" abstraction="boolean" model="true"/>
         <property name="service" channel="inline" abstraction="character" model="gnu_linux_console"/>
     </part>
     <part name="destroy_domain" channel="inline" abstraction="operation" model="destroy">
+        <property name="enable" channel="inline" abstraction="boolean" model="true"/>
         <property name="name" channel="inline" abstraction="knowledge" model=".domain"/>
     </part>
 -->
-    <part name="exit_application" channel="inline" abstraction="operation" model="exit"/>
+    <part name="exit_application" channel="inline" abstraction="operation" model="exit">
+        <property name="enable" channel="inline" abstraction="boolean" model="true"/>
+    </part>
 </model>
 
 <!--
@@ -63,6 +72,6 @@
     http://www.cybop.net
     - Cybernetics Oriented Programming -
 
-    @version $Revision: 1.12 $ $Date: 2007-06-22 07:07:13 $ $Author: christian $
+    @version $Revision: 1.13 $ $Date: 2007-06-29 22:55:30 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->

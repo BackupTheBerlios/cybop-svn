@@ -14,9 +14,23 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.8 $ $Date: 2007-06-24 15:02:21 $ $Author: christian $
+# @version $Revision: 1.9 $ $Date: 2007-06-29 22:55:30 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2007-06-29  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Rename controller/manager/initial_signal_manager.c into controller/initialiser.c
+            and move source code for initial signal there
+        * Read "enable" property for all operations in handler.c;
+            CAUTION! ALL logic models (operations) have to have an "enable" property
+            now and are only executed, if that property is set to "true";
+            this is necessary for using conditional execution, depending on a flag
+
+2007-06-28  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Add new cybol operations for comparing strings: all, prefix, suffix, part
+        * Implement enable flag for all signals (operations), in order to handle conditional execution
 
 2007-06-24  Christian Heller  <christian.heller@tuxtax.de>
 

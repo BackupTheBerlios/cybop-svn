@@ -20,15 +20,20 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2007-06-16 21:53:30 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2007-06-29 22:55:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef COMPARE_EQUAL_SOURCE
 #define COMPARE_EQUAL_SOURCE
 
+#include "../../applicator/compare/equal/compare_equal_all.c"
+#include "../../applicator/compare/equal/compare_equal_part.c"
+#include "../../applicator/compare/equal/compare_equal_prefix.c"
+#include "../../applicator/compare/equal/compare_equal_suffix.c"
 #include "../../globals/constants/boolean/boolean_constants.c"
 #include "../../globals/constants/cybol/cybol_abstraction_constants.c"
+#include "../../globals/constants/cybol/cybol_model_constants.c"
 #include "../../globals/constants/integer/integer_constants.c"
 #include "../../globals/constants/log/log_message_constants.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
@@ -73,6 +78,8 @@
  * @param p24 the result parameter details
  * @param p25 the result parameter details count
  * @param p26 the result parameter details size
+ * @param p27 the selection parameter model
+ * @param p28 the selection parameter model count
  */
 void compare_equal(void* p0, void* p1, void* p2,
     void* p3, void* p4, void* p5,
@@ -82,127 +89,58 @@ void compare_equal(void* p0, void* p1, void* p2,
     void* p15, void* p16, void* p17,
     void* p18, void* p19, void* p20,
     void* p21, void* p22, void* p23,
-    void* p24, void* p25, void* p26) {
+    void* p24, void* p25, void* p26,
+    void* p27, void* p28) {
 
-    if (p21 != *NULL_POINTER) {
+    // The comparison result.
+    int r = *NUMBER_0_INTEGER;
 
-        int* rm = (int*) p21;
+    if (r == *NUMBER_0_INTEGER) {
 
-        if (p12 != *NULL_POINTER) {
+        compare_arrays(p27, p28, (void*) COMPARE_ALL_SELECTION_MODEL, (void*) COMPARE_ALL_SELECTION_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-            if (p3 != *NULL_POINTER) {
+        if (r != *NUMBER_0_INTEGER) {
 
-                log_message_debug("Compare if parameters are equal.");
-
-                // The result parameter comparison result.
-                int r = *NUMBER_0_INTEGER;
-
-                // Compare result parameter abstraction. It must be a boolean.
-                compare_arrays(p18, p19, (void*) BOOLEAN_ABSTRACTION, (void*) BOOLEAN_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-                if (r != *NUMBER_0_INTEGER) {
-
-                    // The left side parameter comparison result.
-                    int lr;
-                    // The right side parameter comparison result.
-                    int rr;
-
-                    //
-                    // Character parameters.
-                    //
-
-                    // Reset parameter comparison results.
-                    lr = *NUMBER_0_INTEGER;
-                    rr = *NUMBER_0_INTEGER;
-
-                    // Compare parameter abstractions.
-                    compare_arrays(p0, p1, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &lr, (void*) CHARACTER_ARRAY);
-                    compare_arrays(p9, p10, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &rr, (void*) CHARACTER_ARRAY);
-
-                    if ((lr != *NUMBER_0_INTEGER) && (rr != *NUMBER_0_INTEGER)) {
-
-                        log_message_debug("Use character parameters.");
-
-                        if (*((char*) p3) == *((char*) p12)) {
-
-                            *rm = *TRUE_BOOLEAN;
-
-                        } else {
-
-                            *rm = *FALSE_BOOLEAN;
-                        }
-                    }
-
-                    //
-                    // Integer parameters.
-                    //
-
-                    // Reset parameter comparison results.
-                    lr = *NUMBER_0_INTEGER;
-                    rr = *NUMBER_0_INTEGER;
-
-                    // Compare parameter abstractions.
-                    compare_arrays(p0, p1, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT, (void*) &lr, (void*) CHARACTER_ARRAY);
-                    compare_arrays(p9, p10, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT, (void*) &rr, (void*) CHARACTER_ARRAY);
-
-                    if ((lr != *NUMBER_0_INTEGER) && (rr != *NUMBER_0_INTEGER)) {
-
-                        log_message_debug("Use integer parameters.");
-
-                        if (*((int*) p3) == *((int*) p12)) {
-
-                            *rm = *TRUE_BOOLEAN;
-
-                        } else {
-
-                            *rm = *FALSE_BOOLEAN;
-                        }
-                    }
-
-                    //
-                    // Double parameters.
-                    //
-
-                    // Reset parameter comparison results.
-                    lr = *NUMBER_0_INTEGER;
-                    rr = *NUMBER_0_INTEGER;
-
-                    // Compare parameter abstractions.
-                    compare_arrays(p0, p1, (void*) DOUBLE_VECTOR_ABSTRACTION, (void*) DOUBLE_VECTOR_ABSTRACTION_COUNT, (void*) &lr, (void*) CHARACTER_ARRAY);
-                    compare_arrays(p9, p10, (void*) DOUBLE_VECTOR_ABSTRACTION, (void*) DOUBLE_VECTOR_ABSTRACTION_COUNT, (void*) &rr, (void*) CHARACTER_ARRAY);
-
-                    if ((lr != *NUMBER_0_INTEGER) && (rr != *NUMBER_0_INTEGER)) {
-
-                        log_message_debug("Use double parameters.");
-
-                        if (*((double*) p3) == *((double*) p12)) {
-
-                            *rm = *TRUE_BOOLEAN;
-
-                        } else {
-
-                            *rm = *FALSE_BOOLEAN;
-                        }
-                    }
-
-                } else {
-
-                    log_message_debug("Could not compare if parameters are equal. The result parameter is not a boolean.");
-                }
-
-            } else {
-
-                log_message_debug("Could not compare if parameters are equal. The left side parameter is null.");
-            }
-
-        } else {
-
-            log_message_debug("Could not compare if parameters are equal. The right side parameter is null.");
+            compare_equal_all(p0, p1, p2, p3, p4, p5, p6, p7, p8,
+                p9, p10, p11, p12, p13, p14, p15, p16, p17,
+                p18, p19, p20, p21, p22, p23, p24, p25, p26);
         }
+    }
 
-    } else {
+    if (r == *NUMBER_0_INTEGER) {
 
-        log_message_debug("Could not compare if parameters are equal. The result parameter is null.");
+        compare_arrays(p27, p28, (void*) COMPARE_PREFIX_SELECTION_MODEL, (void*) COMPARE_PREFIX_SELECTION_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != *NUMBER_0_INTEGER) {
+
+            compare_equal_prefix(p0, p1, p2, p3, p4, p5, p6, p7, p8,
+                p9, p10, p11, p12, p13, p14, p15, p16, p17,
+                p18, p19, p20, p21, p22, p23, p24, p25, p26);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER) {
+
+        compare_arrays(p27, p28, (void*) COMPARE_SUFFIX_SELECTION_MODEL, (void*) COMPARE_SUFFIX_SELECTION_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != *NUMBER_0_INTEGER) {
+
+            compare_equal_suffix(p0, p1, p2, p3, p4, p5, p6, p7, p8,
+                p9, p10, p11, p12, p13, p14, p15, p16, p17,
+                p18, p19, p20, p21, p22, p23, p24, p25, p26);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER) {
+
+        compare_arrays(p27, p28, (void*) COMPARE_PART_SELECTION_MODEL, (void*) COMPARE_PART_SELECTION_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != *NUMBER_0_INTEGER) {
+
+            compare_equal_part(p0, p1, p2, p3, p4, p5, p6, p7, p8,
+                p9, p10, p11, p12, p13, p14, p15, p16, p17,
+                p18, p19, p20, p21, p22, p23, p24, p25, p26);
+        }
     }
 }
 

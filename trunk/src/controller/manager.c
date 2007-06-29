@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.37 $ $Date: 2007-06-22 07:07:14 $ $Author: christian $
+ * @version $Revision: 1.38 $ $Date: 2007-06-29 22:55:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -29,7 +29,7 @@
 
 #include <pthread.h>
 #include "../controller/checker.c"
-#include "../controller/manager/initial_signal_manager.c"
+#include "../controller/initialiser.c"
 #include "../controller/manager/internal_memory_manager.c"
 #include "../controller/manager/system_signal_handler_manager.c"
 #include "../globals/constants/cybol/cybol_abstraction_constants.c"
@@ -223,72 +223,9 @@ void manage(void* p0, void* p1) {
 
     // Start up system signal handler.
     startup_system_signal_handler();
-    // Start up initial signal.
-//??    startup_initial_signal(s, (void*) sc, (void*) ss);
 
-//?? --
-    log_message_debug("\n\n");
-    log_message_debug("Info: Allocate startup model.");
-
-    // The startup model abstraction, model, details.
-    void* ma = *NULL_POINTER;
-    int* mac = (int*) *NULL_POINTER;
-    int* mas = (int*) *NULL_POINTER;
-    void* mm = *NULL_POINTER;
-    int* mmc = (int*) *NULL_POINTER;
-    int* mms = (int*) *NULL_POINTER;
-    void* md = *NULL_POINTER;
-    int* mdc = (int*) *NULL_POINTER;
-    int* mds = (int*) *NULL_POINTER;
-
-    // Allocate startup model abstraction, model, details.
-    allocate((void*) &mac, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    allocate((void*) &mas, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    allocate((void*) &mmc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    allocate((void*) &mms, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    // CAUTION! Do not allocate startup model details!
-    // It is not needed for the startup signal.
-
-    // Initialise startup model abstraction, model, details.
-    *mac = *NUMBER_0_INTEGER;
-    *mas = *NUMBER_0_INTEGER;
-    *mmc = *NUMBER_0_INTEGER;
-    *mms = *NUMBER_0_INTEGER;
-    // CAUTION! Do not allocate startup model details!
-    // It is not needed for the startup signal.
-
-    // Create startup model abstraction, model, details.
-    receive_file_system_model((void*) &ma, (void*) mac, (void*) mas,
-        *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
-        (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
-        (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
-        (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
-    receive_file_system_model((void*) &mm, (void*) mmc, (void*) mms,
-        *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
-        p0, p1,
-        COMPOUND_ABSTRACTION, COMPOUND_ABSTRACTION_COUNT,
-        FILE_CHANNEL, FILE_CHANNEL_COUNT);
-    // CAUTION! Do not create startup model details!
-    // It is not needed for the startup signal.
-
-    log_message_debug("\n\n");
-    log_message_debug("Info: Add startup model as signal to signal memory.");
-
-    // The signal id.
-    int* id = (int*) *NULL_POINTER;
-    allocate((void*) &id, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    *id = *NUMBER_0_INTEGER;
-    get_new_signal_id(s, (void*) sc, (void*) id);
-
-    // Add startup signal to signal memory.
-    set_signal(s, (void*) sc, (void*) ss, ma, (void*) mac, mm, (void*) mmc, md, (void*) mdc, (void*) NORMAL_PRIORITY, (void*) id);
-//?? --
-
-    // The system is now started up and complete so that a loop
-    // can be entered, checking for signals (events/ interrupts)
-    // which are stored/ found in the signal memory.
-    // The loop is left as soon as its shutdown flag is set.
-    check(i, k, (void*) kc, (void*) ks, s, (void*) sc, (void*) ss, (void*) irq, (void*) signal_memory_mutex);
+    // Initialise system with an initial signal.
+    initialise(i, k, (void*) kc, (void*) ks, s, (void*) sc, (void*) ss, (void*) irq, (void*) signal_memory_mutex, p0, p1);
 
     // The following calls of "shutdown" procedures are just to be sure,
     // in case a cybol application developer has forgotten to call the

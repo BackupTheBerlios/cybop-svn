@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2007-06-24 15:02:21 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2007-06-29 22:55:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -273,6 +273,30 @@ static int* SMALLER_OR_EQUAL_MODEL_COUNT = NUMBER_16_INTEGER_ARRAY;
 static char GREATER_OR_EQUAL_MODEL_ARRAY[] = {'g', 'r', 'e', 'a', 't', 'e', 'r', '_', 'o', 'r', '_', 'e', 'q', 'u', 'a', 'l'};
 static char* GREATER_OR_EQUAL_MODEL = GREATER_OR_EQUAL_MODEL_ARRAY;
 static int* GREATER_OR_EQUAL_MODEL_COUNT = NUMBER_16_INTEGER_ARRAY;
+
+//
+// Comparison selection models.
+//
+
+/** The compare all selection model. */
+static char COMPARE_ALL_SELECTION_MODEL_ARRAY[] = {'a', 'l', 'l'};
+static char* COMPARE_ALL_SELECTION_MODEL = COMPARE_ALL_SELECTION_MODEL_ARRAY;
+static int* COMPARE_ALL_SELECTION_MODEL_COUNT = NUMBER_3_INTEGER_ARRAY;
+
+/** The compare prefix selection model. */
+static char COMPARE_PREFIX_SELECTION_MODEL_ARRAY[] = {'p', 'r', 'e', 'f', 'i', 'x'};
+static char* COMPARE_PREFIX_SELECTION_MODEL = COMPARE_PREFIX_SELECTION_MODEL_ARRAY;
+static int* COMPARE_PREFIX_SELECTION_MODEL_COUNT = NUMBER_6_INTEGER_ARRAY;
+
+/** The compare suffix selection model. */
+static char COMPARE_SUFFIX_SELECTION_MODEL_ARRAY[] = {'s', 'u', 'f', 'f', 'i', 'x'};
+static char* COMPARE_SUFFIX_SELECTION_MODEL = COMPARE_SUFFIX_SELECTION_MODEL_ARRAY;
+static int* COMPARE_SUFFIX_SELECTION_MODEL_COUNT = NUMBER_6_INTEGER_ARRAY;
+
+/** The compare part selection model. */
+static char COMPARE_PART_SELECTION_MODEL_ARRAY[] = {'p', 'a', 'r', 't'};
+static char* COMPARE_PART_SELECTION_MODEL = COMPARE_PART_SELECTION_MODEL_ARRAY;
+static int* COMPARE_PART_SELECTION_MODEL_COUNT = NUMBER_4_INTEGER_ARRAY;
 
 //
 // Arithmetic models.
