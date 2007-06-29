@@ -2,10 +2,13 @@
 
 <model>
     <part name="test" channel="inline" abstraction="operation" model="run">
+        <property name="enable" channel="inline" abstraction="boolean" model="true"/>
         <property name="command" channel="inline" abstraction="character" model="program"/>
         <property name="program" channel="inline" abstraction="character" model="xdosemu"/>
     </part>
-    <part name="exit" channel="inline" abstraction="operation" model="exit"/>
+    <part name="exit" channel="inline" abstraction="operation" model="exit">
+        <property name="enable" channel="inline" abstraction="boolean" model="true"/>
+    </part>
 </model>
 
 <!--
@@ -30,6 +33,6 @@
     http://www.cybop.net
     - Cybernetics Oriented Programming -
 
-    @version $Revision: 1.2 $ $Date: 2007-05-31 22:05:24 $ $Author: christian $
+    @version $Revision: 1.3 $ $Date: 2007-06-29 23:36:02 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->

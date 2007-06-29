@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 
 <model>
-    <part name="exit_program" channel="file" abstraction="compound" model="ui_control/logic/lifecycle/shutdown.cybol"/>
+    <part name="exit_program" channel="file" abstraction="compound" model="ui_control/logic/lifecycle/shutdown.cybol">
+        <property name="enable" channel="inline" abstraction="boolean" model="true"/>
+    </part>
 </model>
 
 <!--
@@ -26,6 +28,6 @@
     http://www.cybop.net
     - Cybernetics Oriented Programming -
 
-    @version $Revision: 1.1 $ $Date: 2007-05-31 22:05:24 $ $Author: christian $
+    @version $Revision: 1.2 $ $Date: 2007-06-29 23:36:02 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->

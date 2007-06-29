@@ -7,11 +7,14 @@
 
 <model>
     <part name="send_model_to_output" channel="inline" abstraction="operation" model="send">
+        <property name="enable" channel="inline" abstraction="boolean" model="true"/>
         <property name="channel" channel="inline" abstraction="character" model="shell"/>
         <property name="language" channel="inline" abstraction="character" model="character"/>
         <property name="message" channel="inline" abstraction="character" model="Hello, World!"/>
     </part>
-    <part name="exit_application" channel="inline" abstraction="operation" model="exit"/>
+    <part name="exit_application" channel="inline" abstraction="operation" model="exit">
+        <property name="enable" channel="inline" abstraction="boolean" model="true"/>
+    </part>
 </model>
 
 <!--
@@ -36,6 +39,6 @@
     http://www.cybop.net
     - Cybernetics Oriented Programming -
 
-    @version $Revision: 1.2 $ $Date: 2007-05-31 22:05:24 $ $Author: christian $
+    @version $Revision: 1.3 $ $Date: 2007-06-29 23:36:02 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->

@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 
 <model>
-    <part name="translate" channel="inline" abstraction="knowledge" model=".ui_control.logic.translation.translate_application_information_to_about_dialogue"/>
+    <part name="translate" channel="inline" abstraction="knowledge" model=".ui_control.logic.translation.translate_application_information_to_about_dialogue">
+        <property name="enable" channel="inline" abstraction="boolean" model="true"/>
+    </part>
     <part name="send" channel="inline" abstraction="operation" model="send">
+        <property name="enable" channel="inline" abstraction="boolean" model="true"/>
         <property name="channel" channel="inline" abstraction="character" model="gnu_linux_console"/>
         <property name="receiver" channel="inline" abstraction="character" model="user"/>
         <property name="message" channel="inline" abstraction="knowledge" model=".ui_control.tui.about_dialogue"/>
     </part>
     <part name="receive" channel="inline" abstraction="operation" model="receive">
+        <property name="enable" channel="inline" abstraction="boolean" model="true"/>
         <property name="channel" channel="inline" abstraction="knowledge" model=".ui_control.settings.user_interface"/>
         <property name="commands" channel="inline" abstraction="knowledge" model=".ui_control.logic.user_interface.about_dialogue_actions"/>
         <property name="blocking" channel="inline" abstraction="character" model="false"/>
@@ -36,6 +40,6 @@
     http://www.cybop.net
     - Cybernetics Oriented Programming -
 
-    @version $Revision: 1.2 $ $Date: 2007-06-22 07:07:13 $ $Author: christian $
+    @version $Revision: 1.3 $ $Date: 2007-06-29 23:36:02 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->

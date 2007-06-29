@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.19 $ $Date: 2007-06-29 22:55:31 $ $Author: christian $
+ * @version $Revision: 1.20 $ $Date: 2007-06-29 23:36:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -95,13 +95,6 @@ void handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
     // The comparison result.
     int r = *NUMBER_0_INTEGER;
-
-    fprintf(stderr, "TEST a: %s\n", (char*) p10);
-    fprintf(stderr, "TEST ac: %i\n", *((int*) p11));
-    fprintf(stderr, "TEST m: %s\n", (char*) p12);
-    fprintf(stderr, "TEST mc: %i\n", *((int*) p13));
-    fprintf(stderr, "TEST ea: %s\n", (char*) *ea);
-    fprintf(stderr, "TEST eac: %i\n", **((int**) eac));
 
     compare_arrays(*ea, *eac, (void*) BOOLEAN_ABSTRACTION, (void*) BOOLEAN_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
