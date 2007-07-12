@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.36 $ $Date: 2007-06-24 15:02:22 $ $Author: christian $
+ * @version $Revision: 1.37 $ $Date: 2007-07-12 22:02:14 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -1901,8 +1901,7 @@ void get_compound_element_by_name(void* p0, void* p1, void* p2, void* p3, void* 
     void* p6, void* p7, void* p8, void* p9, void* p10, void* p11,
     void* p12, void* p13, void* p14, void* p15, void* p16, void* p17) {
 
-    log_message_debug("Get compound element by name.");
-    log_message_debug((char*) p4);
+    log_message_debug("Debug: Get compound element by name.");
 
     // The element name.
     void* e = *NULL_POINTER;

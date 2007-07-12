@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2007-06-29 22:55:31 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2007-07-12 22:02:14 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -325,14 +325,14 @@ static char* CRITERION_NAME = CRITERION_NAME_ARRAY;
 static int* CRITERION_NAME_COUNT = NUMBER_9_INTEGER_ARRAY;
 
 /** The true model name. */
-static char TRUE_MODEL_NAME_ARRAY[] = {'t', 'r', 'u', 'e', '_', 'm', 'o', 'd', 'e', 'l'};
+static char TRUE_MODEL_NAME_ARRAY[] = {'t', 'r', 'u', 'e'};
 static char* TRUE_MODEL_NAME = TRUE_MODEL_NAME_ARRAY;
-static int* TRUE_MODEL_NAME_COUNT = NUMBER_10_INTEGER_ARRAY;
+static int* TRUE_MODEL_NAME_COUNT = NUMBER_4_INTEGER_ARRAY;
 
 /** The false model name. */
-static char FALSE_MODEL_NAME_ARRAY[] = {'f', 'a', 'l', 's', 'e', '_', 'm', 'o', 'd', 'e', 'l'};
+static char FALSE_MODEL_NAME_ARRAY[] = {'f', 'a', 'l', 's', 'e'};
 static char* FALSE_MODEL_NAME = FALSE_MODEL_NAME_ARRAY;
-static int* FALSE_MODEL_NAME_COUNT = NUMBER_11_INTEGER_ARRAY;
+static int* FALSE_MODEL_NAME_COUNT = NUMBER_5_INTEGER_ARRAY;
 
 //
 // Loop names.
@@ -438,6 +438,11 @@ static int* CREATE_ABSTRACTION_NAME_COUNT = NUMBER_11_INTEGER_ARRAY;
 static char CREATE_MODEL_NAME_ARRAY[] = {'m', 'o', 'd', 'e', 'l'};
 static char* CREATE_MODEL_NAME = CREATE_MODEL_NAME_ARRAY;
 static int* CREATE_MODEL_NAME_COUNT = NUMBER_5_INTEGER_ARRAY;
+
+/** The create details name. */
+static char CREATE_DETAILS_NAME_ARRAY[] = {'d', 'e', 't', 'a', 'i', 'l', 's'};
+static char* CREATE_DETAILS_NAME = CREATE_DETAILS_NAME_ARRAY;
+static int* CREATE_DETAILS_NAME_COUNT = NUMBER_7_INTEGER_ARRAY;
 
 /** The create element name. */
 static char CREATE_ELEMENT_NAME_ARRAY[] = {'e', 'l', 'e', 'm', 'e', 'n', 't'};

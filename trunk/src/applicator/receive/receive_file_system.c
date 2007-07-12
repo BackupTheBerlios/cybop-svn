@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.12 $ $Date: 2007-06-22 07:07:14 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2007-07-12 22:02:14 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -338,14 +338,17 @@ void receive_file_system_model(void* p0, void* p1, void* p2, void* p3, void* p4,
  * @param p18 the channel model count
  * @param p19 the model model
  * @param p20 the model model count
- * @param p21 the element model
- * @param p22 the element model count
+ * @param p21 the details model
+ * @param p22 the details model count
+ * @param p23 the element model
+ * @param p24 the element model count
  */
 void receive_file_system(void* p0, void* p1, void* p2,
     void* p3, void* p4, void* p5, void* p6, void* p7, void* p8,
     void* p9, void* p10, void* p11, void* p12,
     void* p13, void* p14, void* p15, void* p16,
-    void* p17, void* p18, void* p19, void* p20, void* p21, void* p22) {
+    void* p17, void* p18, void* p19, void* p20,
+    void* p21, void* p22, void* p23, void* p24) {
 
     log_message_debug("Receive file system message.");
 
@@ -402,16 +405,21 @@ void receive_file_system(void* p0, void* p1, void* p2,
     // Receive knowledge model abstraction.
     receive_file_system_model((void*) &a, (void*) ac, (void*) as, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, p13, p14, p15, p16, (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
     // Receive knowledge model model and details.
-    // CAUTION! The knowledge model model is received TOGETHER with the
-    // knowledge model details, in just one operation.
+    // CAUTION! Some file formats (like the German xDT format for medical data exchange)
+    // contain both, the knowledge model model AND the knowledge model details, in one file.
+    // To cover these cases, the model and details are received TOGETHER, in just one operation.
     receive_file_system_model((void*) &m, (void*) mc, (void*) ms, (void*) &d, (void*) dc, (void*) ds, p19, p20, p13, p14, p17, p18);
+    // Receive knowledge model details.
+    // This is for other cases, in which special knowledge model details are given as parameter.
+    // For details, the abstraction is ALWAYS "compound" and the channel is ALWAYS "file".
+    receive_file_system_model((void*) &d, (void*) dc, (void*) ds, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, p21, p22, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT, (void*) FILE_CHANNEL, (void*) FILE_CHANNEL_COUNT);
 
     // The comparison result.
     int r = *NUMBER_0_INTEGER;
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p21, p22, (void*) CREATE_PART_ELEMENT_MODEL, (void*) CREATE_PART_ELEMENT_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p23, p24, (void*) CREATE_PART_ELEMENT_MODEL, (void*) CREATE_PART_ELEMENT_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
@@ -442,7 +450,7 @@ void receive_file_system(void* p0, void* p1, void* p2,
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p21, p22, (void*) CREATE_META_ELEMENT_MODEL, (void*) CREATE_META_ELEMENT_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p23, p24, (void*) CREATE_META_ELEMENT_MODEL, (void*) CREATE_META_ELEMENT_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 

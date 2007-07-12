@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.20 $ $Date: 2007-05-26 21:19:57 $ $Author: christian $
+ * @version $Revision: 1.21 $ $Date: 2007-07-12 22:02:14 $ $Author: christian $
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
@@ -28,10 +28,10 @@
 #ifndef BRANCH_SOURCE
 #define BRANCH_SOURCE
 
-#include "../globals/constants/cybol/cybol_abstraction_constants.c"
 #include "../globals/constants/boolean/boolean_constants.c"
-#include "../globals/constants/log/log_message_constants.c"
+#include "../globals/constants/cybol/cybol_abstraction_constants.c"
 #include "../globals/constants/cybol/cybol_name_constants.c"
+#include "../globals/constants/log/log_message_constants.c"
 #include "../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../globals/constants/pointer/pointer_constants.c"
 #include "../globals/logger/logger.c"
@@ -50,7 +50,7 @@ void handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
  * Branches the program flow, depending on a flag.
  *
  * Expected parameters:
- * - criterion: the separation flag
+ * - criterion: the branch flag
  * - true: the model to be executed if the criterion is true
  * - false: the model to be executed if the criterion is false
  *
@@ -126,7 +126,7 @@ void branch(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
     // Get true model.
     get_universal_compound_element_by_name(p10, p11,
-        (void*) FALSE_MODEL_NAME, (void*) FALSE_MODEL_NAME_COUNT,
+        (void*) TRUE_MODEL_NAME, (void*) TRUE_MODEL_NAME_COUNT,
         (void*) &tn, (void*) &tnc, (void*) &tns,
         (void*) &ta, (void*) &tac, (void*) &tas,
         (void*) &tm, (void*) &tmc, (void*) &tms,
@@ -135,78 +135,30 @@ void branch(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
     // Get false model.
     get_universal_compound_element_by_name(p10, p11,
-        (void*) TRUE_MODEL_NAME, (void*) TRUE_MODEL_NAME_COUNT,
+        (void*) FALSE_MODEL_NAME, (void*) FALSE_MODEL_NAME_COUNT,
         (void*) &fn, (void*) &fnc, (void*) &fns,
         (void*) &fa, (void*) &fac, (void*) &fas,
         (void*) &fm, (void*) &fmc, (void*) &fms,
         (void*) &fd, (void*) &fdc, (void*) &fds,
         p1, p2);
 
-    if ((*ca != *NULL_POINTER)
-        && (*cac != *NULL_POINTER)
-        && (*cas != *NULL_POINTER)
-        && (*cm != *NULL_POINTER)
-        && (*cmc != *NULL_POINTER)
-        && (*cms != *NULL_POINTER)
-        && (*cd != *NULL_POINTER)
-        && (*cdc != *NULL_POINTER)
-        && (*cds != *NULL_POINTER)
-        // Check true model.
-        && (*ta != *NULL_POINTER)
-        && (*tac != *NULL_POINTER)
-        && (*tas != *NULL_POINTER)
-        && (*tm != *NULL_POINTER)
-        && (*tmc != *NULL_POINTER)
-        && (*tms != *NULL_POINTER)
-        && (*td != *NULL_POINTER)
-        && (*tdc != *NULL_POINTER)
-        && (*tds != *NULL_POINTER)
-        // check false model
-        && (*fa != *NULL_POINTER)
-        && (*fac != *NULL_POINTER)
-        && (*fas != *NULL_POINTER)
-        && (*fm != *NULL_POINTER)
-        && (*fmc != *NULL_POINTER)
-        && (*fms != *NULL_POINTER)
-        && (*fd != *NULL_POINTER)
-        && (*fdc != *NULL_POINTER)
-        && (*fds != *NULL_POINTER)) {
+    // The comparison result.
+    int r = *NUMBER_0_INTEGER;
 
-        // The comparison result.
-        int r = 0;
+    compare_arrays(*cm, (void*) PRIMITIVE_COUNT, (void*) TRUE_BOOLEAN, (void*) PRIMITIVE_COUNT, &r, (void*) INTEGER_ARRAY);
 
-        // Check if criterion has boolean abstraction.
-        compare_arrays(*ca, *cac, (void*) BOOLEAN_ABSTRACTION, (void*) BOOLEAN_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+    // The direct execution flag.
+    int x = *NUMBER_0_INTEGER;
 
-        if (r == 1) {
+    if (r != *NUMBER_0_INTEGER) {
 
-            // The criterion.
-            void* c = *NULL_POINTER;
+        // The criterion is true.
+        handle(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, *ta, *tac, *tm, *tmc, *td, *tdc, p12, p13, (void*) &x);
 
-            // Get criterion.
-            get_array_elements(*cm, (void*) PRIMITIVE_VALUE_INDEX, (void*) &c, (void*) INTEGER_ARRAY);
+    } else {
 
-            // Reset comparison result.
-            r = 0;
-
-            compare_arrays(c, (void*) PRIMITIVE_COUNT, (void*) TRUE_BOOLEAN, (void*) NUMBER_1_INTEGER, &r, (void*) INTEGER_ARRAY);
-
-            // The direct execution flag.
-            int x = 0;
-
-            if (r == 1) {
-
-                // The criterion is true.
-                handle(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9,
-                    *ta, *tac, *tm, *tmc, *td, *tdc, p12, p13, (void*) &x);
-
-            } else {
-
-                // The criterion is false.
-                handle(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9,
-                    *fa, *fac, *fm, *fmc, *fd, *fdc, p12, p13, (void*) &x);
-            }
-        }
+        // The criterion is false.
+        handle(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, *fa, *fac, *fm, *fmc, *fd, *fdc, p12, p13, (void*) &x);
     }
 }
 

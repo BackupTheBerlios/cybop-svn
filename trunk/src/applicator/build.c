@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.21 $ $Date: 2007-05-26 21:19:57 $ $Author: christian $
+ * @version $Revision: 1.22 $ $Date: 2007-07-12 22:02:14 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -119,83 +119,38 @@ void build_listname(void* p0, void* p1, void* p2, void* p3, void* p4) {
         (void*) &resd, (void*) &resdc, (void*) &resds,
         p2, p3);
 
-    // Check basisname.
-    if ((*bna != *NULL_POINTER)
-        && (*bnac != *NULL_POINTER)
-        && (*bnas != *NULL_POINTER)
-        && (*bnm != *NULL_POINTER)
-        && (*bnmc != *NULL_POINTER)
-        && (*bnms != *NULL_POINTER)
-        && (*bnd != *NULL_POINTER)
-        && (*bndc != *NULL_POINTER)
-        && (*bnds != *NULL_POINTER)
-        // Check index.
-        && (*idxa != *NULL_POINTER)
-        && (*idxac != *NULL_POINTER)
-        && (*idxas != *NULL_POINTER)
-        && (*idxm != *NULL_POINTER)
-        && (*idxmc != *NULL_POINTER)
-        && (*idxms != *NULL_POINTER)
-        && (*idxd != *NULL_POINTER)
-        && (*idxdc != *NULL_POINTER)
-        && (*idxds != *NULL_POINTER)
-        // Check result.
-        && (*resa != *NULL_POINTER)
-        && (*resac != *NULL_POINTER)
-        && (*resas != *NULL_POINTER)
-        && (*resm != *NULL_POINTER)
-        && (*resmc != *NULL_POINTER)
-        && (*resms != *NULL_POINTER)
-        && (*resd != *NULL_POINTER)
-        && (*resdc != *NULL_POINTER)
-        && (*resds != *NULL_POINTER)) {
+    //check the abstraction for the operation element
+    int comp_res1 = 0;
+    int comp_res2 = 0;
+    int comp_res3 = 0;
 
-        //check the abstraction for the operation element
-        int comp_res1 = 0;
-        int comp_res2 = 0;
-        int comp_res3 = 0;
+    // Create compare string.
+    char* int_string = *NULL_POINTER;
+    // todo Konstante noch definieren
+    int int_string_count = 0;
+    int int_string_size = 10;
 
-        compare_arrays(*bna, *bnac, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &comp_res1, (void*) CHARACTER_ARRAY);
-        compare_arrays(*idxa, *idxac, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT, (void*) &comp_res2, (void*) CHARACTER_ARRAY);
-        compare_arrays(*resa, *resac, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &comp_res3, (void*) CHARACTER_ARRAY);
+    allocate_array((void*) &int_string, (void*) &int_string_size, (void*) CHARACTER_ARRAY);
 
-        if ((comp_res1 == 1) && (comp_res2 == 1) && (comp_res3 == 1)) {
+    int_string_count = snprintf(int_string, int_string_size, "%i", *((int*) *idxm));
 
-            // changing the for the index
+    // destination size
+    *(int*)*resms = *((int*) *bnmc) + *LIST_SEPARATOR_COUNT + int_string_count;
+    *(int*)*resmc = *((int*) *bnmc) + *LIST_SEPARATOR_COUNT + int_string_count;
 
-            // Create compare string.
-            char* int_string = *NULL_POINTER;
-            // todo Konstante noch definieren
-            int int_string_count = 0;
-            int int_string_size = 10;
+    // Reallocate result array.
+    reallocate_array(resm, *resms, *resms, CHARACTER_ARRAY);
 
-            allocate_array((void*) &int_string, (void*) &int_string_size, (void*) CHARACTER_ARRAY);
+    // set the result array
+    set_array_elements(*resm, (void*) NUMBER_0_INTEGER, *bnm, *bnmc, (void*) CHARACTER_ARRAY);
+    set_array_elements(*resm, *bnmc, LIST_SEPARATOR, LIST_SEPARATOR_COUNT, (void*) CHARACTER_ARRAY);
 
-            int_string_count = snprintf(int_string, int_string_size, "%i", *((int*) *idxm));
+    int temp_index = *((int*) *bnmc) + *LIST_SEPARATOR_COUNT;
 
-            // destination size
-            *(int*)*resms = *((int*) *bnmc) + *LIST_SEPARATOR_COUNT + int_string_count;
-            *(int*)*resmc = *((int*) *bnmc) + *LIST_SEPARATOR_COUNT + int_string_count;
+    set_array_elements(*resm, &temp_index, int_string, &int_string_count, (void*) CHARACTER_ARRAY);
 
-            // Reallocate result array.
-            reallocate_array(resm, *resms, *resms, CHARACTER_ARRAY);
-
-            // set the result array
-            set_array_elements(*resm, (void*) NUMBER_0_INTEGER, *bnm, *bnmc, (void*) CHARACTER_ARRAY);
-            set_array_elements(*resm, *bnmc, LIST_SEPARATOR, LIST_SEPARATOR_COUNT, (void*) CHARACTER_ARRAY);
-
-            int temp_index = *((int*) *bnmc) + *LIST_SEPARATOR_COUNT;
-
-            set_array_elements(*resm, &temp_index, int_string, &int_string_count, (void*) CHARACTER_ARRAY);
-
-            // Destroy int_string array.
-            deallocate_array((void*) &int_string, (void*) &int_string_size, (void*) CHARACTER_ARRAY);
-
-        } else {
-
-            log_message_debug("Could not build list name. The abstraction for the operands is not correct.");
-        }
-    }
+    // Destroy int_string array.
+    deallocate_array((void*) &int_string, (void*) &int_string_size, (void*) CHARACTER_ARRAY);
 }
 
 /* BUILD_SOURCE */

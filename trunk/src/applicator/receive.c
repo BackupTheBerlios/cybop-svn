@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.30 $ $Date: 2007-06-22 07:07:13 $ $Author: christian $
+ * @version $Revision: 1.31 $ $Date: 2007-07-12 22:02:14 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -36,6 +36,7 @@
 #include "../globals/constants/cybol/cybol_channel_constants.c"
 #include "../globals/constants/cybol/cybol_model_constants.c"
 #include "../globals/constants/cybol/cybol_name_constants.c"
+#include "../globals/constants/integer/integer_constants.c"
 #include "../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../globals/constants/pointer/pointer_constants.c"
 #include "../globals/logger/logger.c"
@@ -137,6 +138,19 @@ void receive_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
     void** md = NULL_POINTER;
     void** mdc = NULL_POINTER;
     void** mds = NULL_POINTER;
+    // The details name, abstraction, model, details.
+    void** dn = NULL_POINTER;
+    void** dnc = NULL_POINTER;
+    void** dns = NULL_POINTER;
+    void** da = NULL_POINTER;
+    void** dac = NULL_POINTER;
+    void** das = NULL_POINTER;
+    void** dm = NULL_POINTER;
+    void** dmc = NULL_POINTER;
+    void** dms = NULL_POINTER;
+    void** dd = NULL_POINTER;
+    void** ddc = NULL_POINTER;
+    void** dds = NULL_POINTER;
     // The element name, abstraction, model, details.
     void** en = NULL_POINTER;
     void** enc = NULL_POINTER;
@@ -252,6 +266,15 @@ void receive_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
         (void*) &md, (void*) &mdc, (void*) &mds,
         p3, p4);
 
+    // Get details.
+    get_universal_compound_element_by_name(p0, p1,
+        (void*) CREATE_DETAILS_NAME, (void*) CREATE_DETAILS_NAME_COUNT,
+        (void*) &dn, (void*) &dnc, (void*) &dns,
+        (void*) &da, (void*) &dac, (void*) &das,
+        (void*) &dm, (void*) &dmc, (void*) &dms,
+        (void*) &dd, (void*) &ddc, (void*) &dds,
+        p3, p4);
+
     // Get element.
     get_universal_compound_element_by_name(p0, p1,
         (void*) CREATE_ELEMENT_NAME, (void*) CREATE_ELEMENT_NAME_COUNT,
@@ -307,64 +330,64 @@ void receive_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
         p3, p4);
 
     // The comparison result.
-    int r = 0;
+    int r = *NUMBER_0_INTEGER;
 
-    if (r == 0) {
+    if (r == *NUMBER_0_INTEGER) {
 
         compare_arrays((void*) *cm, (void*) *cmc, (void*) FILE_SYSTEM_MODEL, (void*) FILE_SYSTEM_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r != 0) {
+        if (r != *NUMBER_0_INTEGER) {
 
             receive_file_system(p3, p4, p5, *wm, *wmc, *wms, *wd, *wdc, *wds,
-                *nm, *nmc, *na, *nac, *am, *amc, *aa, *aac, *cm, *cmc, *mm, *mmc, *em, *emc);
+                *nm, *nmc, *na, *nac, *am, *amc, *aa, *aac, *cm, *cmc, *mm, *mmc, *dm, *dmc, *em, *emc);
         }
     }
 
-    if (r == 0) {
+    if (r == *NUMBER_0_INTEGER) {
 
         compare_arrays((void*) *cm, (void*) *cmc, (void*) GNU_LINUX_CONSOLE_MODEL, (void*) GNU_LINUX_CONSOLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r != 0) {
+        if (r != *NUMBER_0_INTEGER) {
 
             receive_gnu_linux_console(p2, *com, *comc, *coms);
         }
     }
 
-    if (r == 0) {
+    if (r == *NUMBER_0_INTEGER) {
 
         compare_arrays((void*) *cm, (void*) *cmc, (void*) X_WINDOW_SYSTEM_MODEL, (void*) X_WINDOW_SYSTEM_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r != 0) {
+        if (r != *NUMBER_0_INTEGER) {
 
             receive_x_window_system(p2, *rm, *rmc, *rms, *com, *comc, *coms);
         }
     }
 
-    if (r == 0) {
+    if (r == *NUMBER_0_INTEGER) {
 
         compare_arrays((void*) *cm, (void*) *cmc, (void*) WWW_SERVICE_MODEL, (void*) WWW_SERVICE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r != 0) {
+        if (r != *NUMBER_0_INTEGER) {
 
             receive_socket(p2, *com, *comc, *stm, *stmc, (void*) WWW_BASE_INTERNAL, (void*) &receive_socket_thread_www, (void*) WWW_SERVICE_THREAD);
         }
     }
 
-    if (r == 0) {
+    if (r == *NUMBER_0_INTEGER) {
 
         compare_arrays((void*) *cm, (void*) *cmc, (void*) CYBOI_SERVICE_MODEL, (void*) CYBOI_SERVICE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r != 0) {
+        if (r != *NUMBER_0_INTEGER) {
 
             receive_socket(p2, *com, *comc, *stm, *stmc, (void*) CYBOI_BASE_INTERNAL, (void*) &receive_socket_thread_cyboi, (void*) CYBOI_SERVICE_THREAD);
         }
     }
 
-    if (r == 0) {
+    if (r == *NUMBER_0_INTEGER) {
 
         compare_arrays((void*) *cm, (void*) *cmc, (void*) LATEX_MODEL, (void*) LATEX_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r != 0) {
+        if (r != *NUMBER_0_INTEGER) {
 
 //??            receive_latex(p2, *mm, *mmc);
         }

@@ -14,9 +14,15 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.9 $ $Date: 2007-06-29 22:55:30 $ $Author: christian $
+# @version $Revision: 1.10 $ $Date: 2007-07-12 22:02:14 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2007-07-12  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Extend applicator/receive/receive_file_system.c so that details may be given as parameter
+            (for example, this is necessary when creating an HTML table row of a web user interface,
+            because the HTML tag has to be given as property = meta data in this case)
 
 2007-06-29  Christian Heller  <christian.heller@tuxtax.de>
 
