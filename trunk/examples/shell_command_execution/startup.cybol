@@ -2,14 +2,11 @@
 
 <model>
     <part name="test" channel="inline" abstraction="operation" model="run">
-        <property name="enable" channel="inline" abstraction="boolean" model="true"/>
         <property name="command" channel="inline" abstraction="character" model="list_directory_contents"/>
         <property name="all" channel="inline" abstraction="boolean" model="true"/>
         <property name="long_listing" channel="inline" abstraction="boolean" model="true"/>
     </part>
-    <part name="exit" channel="inline" abstraction="operation" model="exit">
-        <property name="enable" channel="inline" abstraction="boolean" model="true"/>
-    </part>
+    <part name="exit" channel="inline" abstraction="operation" model="exit"/>
 </model>
 
 <!--
@@ -34,6 +31,6 @@
     http://www.cybop.net
     - Cybernetics Oriented Programming -
 
-    @version $Revision: 1.8 $ $Date: 2007-06-29 23:36:02 $ $Author: christian $
+    @version $Revision: 1.9 $ $Date: 2007-07-15 18:44:21 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->

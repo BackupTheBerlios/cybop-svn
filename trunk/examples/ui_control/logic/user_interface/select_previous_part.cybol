@@ -2,33 +2,28 @@
 
 <model>
     <part name="assemble_current_element_background" channel="inline" abstraction="operation" model="add">
-        <property name="enable" channel="inline" abstraction="boolean" model="true"/>
         <property name="summand_1" channel="inline" abstraction="knowledge" model=".ui_control.tui.main_window.menu#focus"/>
         <property name="summand_2" channel="inline" abstraction="character" model="#background"/>
         <property name="sum" channel="inline" abstraction="knowledge" model=".ui_control.temporary.character"/>
         <property name="abstraction" channel="inline" abstraction="character" model="character"/>
     </part>
     <part name="unfocus_background" channel="inline" abstraction="operation" model="copy">
-        <property name="enable" channel="inline" abstraction="boolean" model="true"/>
         <property name="source" channel="inline" abstraction="knowledge" model=".ui_control.settings.tui.menu_item.background"/>
         <property name="destination" channel="inline" abstraction="encapsulated" model=".ui_control.temporary.character"/>
         <property name="abstraction" channel="inline" abstraction="character" model="character"/>
     </part>
     <part name="assemble_current_element_foreground" channel="inline" abstraction="operation" model="add">
-        <property name="enable" channel="inline" abstraction="boolean" model="true"/>
         <property name="summand_1" channel="inline" abstraction="knowledge" model=".ui_control.tui.main_window.menu#focus"/>
         <property name="summand_2" channel="inline" abstraction="character" model="#foreground"/>
         <property name="sum" channel="inline" abstraction="knowledge" model=".ui_control.temporary.character"/>
         <property name="abstraction" channel="inline" abstraction="character" model="character"/>
     </part>
     <part name="unfocus_foreground" channel="inline" abstraction="operation" model="copy">
-        <property name="enable" channel="inline" abstraction="boolean" model="true"/>
         <property name="source" channel="inline" abstraction="knowledge" model=".ui_control.settings.tui.menu_item.foreground"/>
         <property name="destination" channel="inline" abstraction="encapsulated" model=".ui_control.temporary.character"/>
         <property name="abstraction" channel="inline" abstraction="character" model="character"/>
     </part>
     <part name="assemble_previous_element_name" channel="inline" abstraction="operation" model="add">
-        <property name="enable" channel="inline" abstraction="boolean" model="true"/>
         <property name="summand_1" channel="inline" abstraction="knowledge" model=".ui_control.tui.main_window.menu#focus"/>
         <property name="summand_2" channel="inline" abstraction="character" model="#previous"/>
         <property name="sum" channel="inline" abstraction="knowledge" model=".ui_control.tui.main_window.menu#focus"/>
@@ -36,39 +31,33 @@
     </part>
     <!-- The element name assembled before is now used to get the real element that the name points to. -->
     <part name="determine_real_element_name" channel="inline" abstraction="operation" model="copy">
-        <property name="enable" channel="inline" abstraction="boolean" model="true"/>
         <property name="source" channel="inline" abstraction="encapsulated" model=".ui_control.tui.main_window.menu#focus"/>
         <property name="destination" channel="inline" abstraction="knowledge" model=".ui_control.tui.main_window.menu#focus"/>
         <property name="abstraction" channel="inline" abstraction="character" model="character"/>
     </part>
     <part name="assemble_previous_element_background" channel="inline" abstraction="operation" model="add">
-        <property name="enable" channel="inline" abstraction="boolean" model="true"/>
         <property name="summand_1" channel="inline" abstraction="knowledge" model=".ui_control.tui.main_window.menu#focus"/>
         <property name="summand_2" channel="inline" abstraction="character" model="#background"/>
         <property name="sum" channel="inline" abstraction="knowledge" model=".ui_control.temporary.character"/>
         <property name="abstraction" channel="inline" abstraction="character" model="character"/>
     </part>
     <part name="focus_background" channel="inline" abstraction="operation" model="copy">
-        <property name="enable" channel="inline" abstraction="boolean" model="true"/>
         <property name="source" channel="inline" abstraction="knowledge" model=".ui_control.settings.tui.selection.background"/>
         <property name="destination" channel="inline" abstraction="encapsulated" model=".ui_control.temporary.character"/>
         <property name="abstraction" channel="inline" abstraction="character" model="character"/>
     </part>
     <part name="assemble_previous_element_foreground" channel="inline" abstraction="operation" model="add">
-        <property name="enable" channel="inline" abstraction="boolean" model="true"/>
         <property name="summand_1" channel="inline" abstraction="knowledge" model=".ui_control.tui.main_window.menu#focus"/>
         <property name="summand_2" channel="inline" abstraction="character" model="#foreground"/>
         <property name="sum" channel="inline" abstraction="knowledge" model=".ui_control.temporary.character"/>
         <property name="abstraction" channel="inline" abstraction="character" model="character"/>
     </part>
     <part name="focus_foreground" channel="inline" abstraction="operation" model="copy">
-        <property name="enable" channel="inline" abstraction="boolean" model="true"/>
         <property name="source" channel="inline" abstraction="knowledge" model=".ui_control.settings.tui.selection.foreground"/>
         <property name="destination" channel="inline" abstraction="encapsulated" model=".ui_control.temporary.character"/>
         <property name="abstraction" channel="inline" abstraction="character" model="character"/>
     </part>
     <part name="send_tui" channel="inline" abstraction="operation" model="send">
-        <property name="enable" channel="inline" abstraction="boolean" model="true"/>
         <property name="channel" channel="inline" abstraction="character" model="gnu_linux_console"/>
         <property name="receiver" channel="inline" abstraction="character" model="user"/>
         <property name="message" channel="inline" abstraction="knowledge" model=".ui_control.tui"/>
@@ -98,6 +87,6 @@
     http://www.cybop.net
     - Cybernetics Oriented Programming -
 
-    @version $Revision: 1.3 $ $Date: 2007-06-29 23:36:02 $ $Author: christian $
+    @version $Revision: 1.4 $ $Date: 2007-07-15 18:44:21 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->

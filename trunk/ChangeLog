@@ -14,9 +14,17 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.10 $ $Date: 2007-07-12 22:02:14 $ $Author: christian $
+# @version $Revision: 1.11 $ $Date: 2007-07-15 18:44:21 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2007-07-15  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Remove reading of "enable" property in handler.c again;
+            the CYBOL "branch" operation may now be used to branch the program flow (conditional execution);
+            it is NOT necessary anymore to have an "enable" property for logic models (operations)
+            in order to be executed only if that property is set to "true"
+        * Adapt example CYBOL applications accordingly
 
 2007-07-12  Christian Heller  <christian.heller@tuxtax.de>
 

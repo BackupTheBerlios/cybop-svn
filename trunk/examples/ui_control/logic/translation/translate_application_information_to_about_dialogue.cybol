@@ -2,69 +2,58 @@
 
 <model>
     <part name="copy_name" channel="inline" abstraction="operation" model="copy">
-        <property name="enable" channel="inline" abstraction="boolean" model="true"/>
         <property name="source" channel="inline" abstraction="knowledge" model=".ui_control.application_information.name"/>
         <property name="destination" channel="inline" abstraction="knowledge" model=".ui_control.tui.about_dialogue.name"/>
         <property name="abstraction" channel="inline" abstraction="character" model="character"/>
     </part>
     <part name="copy_version" channel="inline" abstraction="operation" model="copy">
-        <property name="enable" channel="inline" abstraction="boolean" model="true"/>
         <property name="source" channel="inline" abstraction="knowledge" model=".ui_control.application_information.version"/>
         <property name="destination" channel="inline" abstraction="knowledge" model=".ui_control.tui.about_dialogue.version"/>
         <property name="abstraction" channel="inline" abstraction="character" model="character"/>
     </part>
     <part name="copy_date" channel="inline" abstraction="operation" model="copy">
-        <property name="enable" channel="inline" abstraction="boolean" model="true"/>
         <property name="source" channel="inline" abstraction="knowledge" model=".ui_control.application_information.date"/>
         <property name="destination" channel="inline" abstraction="knowledge" model=".ui_control.tui.about_dialogue.date"/>
         <property name="abstraction" channel="inline" abstraction="character" model="character"/>
     </part>
     <part name="copy_slogan" channel="inline" abstraction="operation" model="copy">
-        <property name="enable" channel="inline" abstraction="boolean" model="true"/>
         <property name="source" channel="inline" abstraction="knowledge" model=".ui_control.application_information.slogan"/>
         <property name="destination" channel="inline" abstraction="knowledge" model=".ui_control.tui.about_dialogue.slogan"/>
         <property name="abstraction" channel="inline" abstraction="character" model="character"/>
     </part>
 <!--
     <part name="copy_logo" channel="inline" abstraction="operation" model="copy">
-        <property name="enable" channel="inline" abstraction="boolean" model="true"/>
         <property name="source" channel="inline" abstraction="knowledge" model=".ui_control.application_information.logo"/>
         <property name="destination" channel="inline" abstraction="knowledge" model=".ui_control.tui.about_dialogue.logo"/>
         <property name="abstraction" channel="inline" abstraction="character" model="character"/>
     </part>
 -->
     <part name="copy_copyright" channel="inline" abstraction="operation" model="copy">
-        <property name="enable" channel="inline" abstraction="boolean" model="true"/>
         <property name="source" channel="inline" abstraction="knowledge" model=".ui_control.application_information.copyright"/>
         <property name="destination" channel="inline" abstraction="knowledge" model=".ui_control.tui.about_dialogue.copyright"/>
         <property name="abstraction" channel="inline" abstraction="character" model="character"/>
     </part>
     <part name="copy_contact" channel="inline" abstraction="operation" model="copy">
-        <property name="enable" channel="inline" abstraction="boolean" model="true"/>
         <property name="source" channel="inline" abstraction="knowledge" model=".ui_control.application_information.contact"/>
         <property name="destination" channel="inline" abstraction="knowledge" model=".ui_control.tui.about_dialogue.contact"/>
         <property name="abstraction" channel="inline" abstraction="character" model="character"/>
     </part>
     <part name="copy_description" channel="inline" abstraction="operation" model="copy">
-        <property name="enable" channel="inline" abstraction="boolean" model="true"/>
         <property name="source" channel="inline" abstraction="knowledge" model=".ui_control.application_information.description"/>
         <property name="destination" channel="inline" abstraction="knowledge" model=".ui_control.tui.about_dialogue.description"/>
         <property name="abstraction" channel="inline" abstraction="character" model="character"/>
     </part>
     <part name="copy_authors" channel="inline" abstraction="operation" model="copy">
-        <property name="enable" channel="inline" abstraction="boolean" model="true"/>
         <property name="source" channel="inline" abstraction="knowledge" model=".ui_control.application_information.authors"/>
         <property name="destination" channel="inline" abstraction="knowledge" model=".ui_control.tui.about_dialogue.authors"/>
         <property name="abstraction" channel="inline" abstraction="character" model="character"/>
     </part>
     <part name="copy_helpers" channel="inline" abstraction="operation" model="copy">
-        <property name="enable" channel="inline" abstraction="boolean" model="true"/>
         <property name="source" channel="inline" abstraction="knowledge" model=".ui_control.application_information.helpers"/>
         <property name="destination" channel="inline" abstraction="knowledge" model=".ui_control.tui.about_dialogue.helpers"/>
         <property name="abstraction" channel="inline" abstraction="character" model="character"/>
     </part>
     <part name="copy_licence" channel="inline" abstraction="operation" model="copy">
-        <property name="enable" channel="inline" abstraction="boolean" model="true"/>
         <property name="source" channel="inline" abstraction="knowledge" model=".ui_control.application_information.licence"/>
         <property name="destination" channel="inline" abstraction="knowledge" model=".ui_control.tui.about_dialogue.licence"/>
         <property name="abstraction" channel="inline" abstraction="character" model="character"/>
@@ -93,6 +82,6 @@
     http://www.cybop.net
     - Cybernetics Oriented Programming -
 
-    @version $Revision: 1.2 $ $Date: 2007-06-29 23:36:02 $ $Author: christian $
+    @version $Revision: 1.3 $ $Date: 2007-07-15 18:44:21 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->

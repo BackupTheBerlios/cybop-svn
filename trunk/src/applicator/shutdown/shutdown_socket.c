@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.12 $ $Date: 2007-06-24 15:02:21 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2007-07-15 18:44:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -54,7 +54,7 @@ void shutdown_socket(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         int* base = (int*) p1;
 
-        log_message_debug("Shutdown socket.");
+        log_message_debug("Information: Shutdown socket.");
 
         // The internal memory index.
         int i = *INVALID_VALUE;

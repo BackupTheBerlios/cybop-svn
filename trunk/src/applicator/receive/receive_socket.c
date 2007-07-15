@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.25 $ $Date: 2007-06-24 15:02:21 $ $Author: christian $
+ * @version $Revision: 1.26 $ $Date: 2007-07-15 18:44:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -729,16 +729,16 @@ void receive_socket_get_parameters(void* p0, void* p1, void* p2, void* p3,
             log_message_debug("Information: Receive socket get parameters.");
 
             // The comparison result.
-            int r = 0;
+            int r = *NUMBER_0_INTEGER;
             // The content pointer.
             void* c = *NULL_POINTER;
             int cc = *NUMBER_0_INTEGER;
 
-            if (r == 0) {
+            if (r == *NUMBER_0_INTEGER) {
 
                 compare_arrays(*url, (void*) HTTP_GET_REQUEST_METHOD_COUNT, (void*) HTTP_GET_REQUEST_METHOD, (void*) HTTP_GET_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-                if (r != 0) {
+                if (r != *NUMBER_0_INTEGER) {
 
                     // Set content pointer.
                     // To the original pointer are added the length of the "get"
@@ -757,11 +757,11 @@ void receive_socket_get_parameters(void* p0, void* p1, void* p2, void* p3,
                 }
             }
 
-            if (r == 0) {
+            if (r == *NUMBER_0_INTEGER) {
 
                 compare_arrays(*url, (void*) HTTP_POST_REQUEST_METHOD_COUNT, (void*) HTTP_POST_REQUEST_METHOD, (void*) HTTP_POST_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-                if (r != 0) {
+                if (r != *NUMBER_0_INTEGER) {
 
                     // Set content pointer.
                     // To the original pointer are added the length of the "post"
@@ -940,7 +940,7 @@ void receive_socket_signal(void* p0, void* p1, void* p2, void* p3) {
 
         int* base = (int*) p3;
 
-        log_message_debug("Information: Receive socket signal.");
+        log_message_debug("Debug: Receive socket signal.");
 
     fprintf(stderr, "TEST: receive socket command name: %s \n", (char*) p1);
     fprintf(stderr, "TEST: receive socket command name count: %i \n", *((int*) p2));
@@ -1031,7 +1031,7 @@ void receive_socket_signal(void* p0, void* p1, void* p2, void* p3) {
 
         // Allocate signal id.
         allocate((void*) &id, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-        *id = 0;
+        *id = *NUMBER_0_INTEGER;
         get_new_signal_id(*s, *sc, (void*) id);
 
         // Add signal to signal memory.
@@ -1148,7 +1148,7 @@ void receive_socket_thread(void* p0, void* p1) {
 
     fprintf(stderr, "TEST: receive socket thread server socket: %i \n", **s);
 
-        while (1) {
+        while (*NUMBER_1_INTEGER) {
 
             // A break condition does not exist here because the loop
             // is blocking neverendingly while waiting for signals.
@@ -1158,11 +1158,11 @@ void receive_socket_thread(void* p0, void* p1) {
             // and processed in the system signal handler procedure
             // (situated in the controller/checker.c module).
 
-            if (r == 0) {
+            if (r == *NUMBER_0_INTEGER) {
 
                 compare_arrays(*st, *stc, (void*) STREAM_COMMUNICATION_STYLE_MODEL, (void*) STREAM_COMMUNICATION_STYLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-                if (r != 0) {
+                if (r != *NUMBER_0_INTEGER) {
 
                     // Initialise error number.
                     // It is a global variable/ function and other operations
@@ -1256,11 +1256,11 @@ void receive_socket_thread(void* p0, void* p1) {
                 }
             }
 
-            if (r == 0) {
+            if (r == *NUMBER_0_INTEGER) {
 
                 compare_arrays(*st, *stc, (void*) DATAGRAM_COMMUNICATION_STYLE_MODEL, (void*) STREAM_COMMUNICATION_STYLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-                if (r != 0) {
+                if (r != *NUMBER_0_INTEGER) {
 
                     // Initialise error number.
                     // It is a global variable/ function and other operations
@@ -1290,11 +1290,11 @@ void receive_socket_thread(void* p0, void* p1) {
                 }
             }
 
-            if (r == 0) {
+            if (r == *NUMBER_0_INTEGER) {
 
                 compare_arrays(*st, *stc, (void*) RAW_COMMUNICATION_STYLE_MODEL, (void*) STREAM_COMMUNICATION_STYLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-                if (r != 0) {
+                if (r != *NUMBER_0_INTEGER) {
 
                     // Not implemented.
                 }
@@ -1312,7 +1312,7 @@ void receive_socket_thread(void* p0, void* p1) {
 /*??
                 // The url basename.
                 char* url_basename = (char*) *NULL_POINTER;
-                int url_basename_count = 0;
+                int url_basename_count = *NUMBER_0_INTEGER;
                 // Create url basename.
                 allocate_array((void*) &url_basename, (void*) &url_basename_count, (void*) CHARACTER_ARRAY);
                 // Get url base name.
@@ -1320,7 +1320,7 @@ void receive_socket_thread(void* p0, void* p1) {
 
                 // The parameter.
                 char* param = (char*) *NULL_POINTER;
-                int param_count = 0;
+                int param_count = *NUMBER_0_INTEGER;
                 // Create paramater.
                 allocate_array((void*) &param, (void*) &param_count, (void*) CHARACTER_ARRAY);
                 // Get parameters.
@@ -1329,14 +1329,14 @@ void receive_socket_thread(void* p0, void* p1) {
                 // The firefox web browser makes a second request
                 // to determine the favicon.
                 char firefox_request[] = "favicon.ico";
-                char* p_firefox_request = &firefox_request[0];
+                char* p_firefox_request = &firefox_request[*NUMBER_0_INTEGER];
                 int firefox_request_count = 11;
 
                 // The comparison result.
-                int r = 0;
+                int r = *NUMBER_0_INTEGER;
                 compare_arrays((void*) url_basename, (void*) &url_basename_count, (void*) p_firefox_request, (void*) &firefox_request_count, (void*) &r, (void*) CHARACTER_ARRAY);
 
-                if (r != 1) {
+                if (r != *NUMBER_1_INTEGER) {
 
                     // query string handling
                     set_signals_for_all_parameters((void*) param, (void*) &param_count, p0);
@@ -1354,7 +1354,6 @@ void receive_socket_thread(void* p0, void* p1) {
                 // Receive socket signal.
                 receive_socket_signal(p0, name, (void*) &namec, p1);
 
-    fprintf(stderr, "TEST: receive socket after signal: %i \n", i);
     //?? CAUTION! This sleep procedure is temporarily necessary for testing!
     //?? Otherwise, the loop runs into the next cycle and the socket mutex
     //?? gets locked, so that the "send_socket" procedure in the main thread
