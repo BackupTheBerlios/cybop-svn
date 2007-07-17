@@ -1,0 +1,137 @@
+%
+% $RCSfile: cybol.tex,v $
+%
+% Copyright (c) 2002-2007. Christian Heller. All rights reserved.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% Version: $Revision: 1.1 $ $Date: 2007-07-17 20:02:36 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+%
+% Determine document class specifying the type of document.
+%
+% Hand over font size and side format.
+%
+%\documentclass[9pt,twoside]{tuxtax}
+\documentclass[10pt,twoside]{tuxtax}
+
+%
+% Input hyphenation list.
+%
+%\input{hyphenation}
+
+%
+% Define text macros.
+%
+\def\placemacro{Ilmenau}
+\def\datemacro{2007-07-06}
+\def\authormacro{Christian Heller}
+
+%
+% Enable special indexing commands.
+% Generate contents, glossary and memo entries.
+%
+% Required package: makeidx
+%
+\makeindex
+
+%
+% This document describes the Cybernetics Oriented Language (CYBOL).
+%
+% Author: Christian Heller <christian.heller@tuxtax.de>
+%
+\begin{document}
+    % Set sans serif font.
+    \sffamily
+    % Set page numbering to roman numbers.
+    \pagenumbering{roman}
+    \input{cover}
+    \maketitle
+    % Avoid header, footer and page number.
+    \thispagestyle{empty}
+    \input{title}
+    \newpage{\pagestyle{empty}\clearpage}
+    \thispagestyle{empty}
+    \input{copyright}
+    \newpage{\pagestyle{empty}\cleardoublepage}
+    % Avoid header, footer and page number.
+    \thispagestyle{empty}
+    \input{dedication}
+    \newpage{\pagestyle{empty}\cleardoublepage}
+    \tableofcontents
+    \newpage{\pagestyle{empty}\cleardoublepage}
+    % Set roman font.
+    \rmfamily
+    \input{preface}
+    \newpage{\pagestyle{empty}\cleardoublepage}
+    % Set page numbering to arabic numbers.
+    \pagenumbering{arabic}
+    \input{introduction}
+    \newpage{\pagestyle{empty}\cleardoublepage}
+    \input{definition}
+    \newpage{\pagestyle{empty}\cleardoublepage}
+    \input{names}
+    \newpage{\pagestyle{empty}\cleardoublepage}
+    \input{channels}
+    \newpage{\pagestyle{empty}\cleardoublepage}
+    \input{abstractions}
+    \newpage{\pagestyle{empty}\cleardoublepage}
+    \input{state_models}
+    \newpage{\pagestyle{empty}\cleardoublepage}
+    \input{logic_models}
+    \newpage{\pagestyle{empty}\cleardoublepage}
+    \input{examples}
+    \newpage{\pagestyle{empty}\cleardoublepage}
+    \input{diagrams}
+    \newpage{\pagestyle{empty}\cleardoublepage}
+    \input{appendices}
+\end{document}
+
+\begin{center}
+    \textbf{Take the Kind of Association as Criterion\\
+    to sort patterns in a completely new way.}
+\end{center}
+
+\begin{table}[ht]
+    \begin{center}
+        \begin{tabular}{| p{20mm} | p{25mm} | p{20mm} | p{30mm} |}
+            \hline
+            \textbf{Property} & \textbf{Abstraction} & \textbf{Model} & \textbf{Description}\\
+            \hline
+            abstraction & character & integer, character & Abstraction (type) of summand\_1, summand\_2 and sum\\
+            \hline
+            summand\_1 & integer, character & & \\
+            \hline
+            summand\_2 & integer, character & & \\
+            \hline
+            sum & integer, character & & \\
+            \hline
+        \end{tabular}
+        \caption{Add}
+        \label{add_table}
+    \end{center}
+\end{table}
+
+\begin{itemize}
+    \item[-] \emph{Abstraction:} integer, character
+    \item[-] \emph{Model:}
+    \item[-] \emph{Description:}
+\end{itemize}
+
+\begin{figure}[ht]
+    \begin{center}
+        \includegraphics[scale=0.3,angle=-90]{graphics/gaps.pdf}
+        \caption{Standard Software Engineering Process}
+        \label{software_engineering_process_figure}
+    \end{center}
+\end{figure}

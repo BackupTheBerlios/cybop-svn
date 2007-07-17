@@ -1,0 +1,65 @@
+%
+% $RCSfile: shift.tex,v $
+%
+% Copyright (c) 2002-2007. Christian Heller. All rights reserved.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% Version: $Revision: 1.1 $ $Date: 2007-07-17 20:02:36 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Shift}
+\label{shift_heading}
+\index{Shift}
+
+This operation shifts the bits within the number by the given positions.
+
+\subsubsection{Number Property}
+
+\emph{required}
+
+name=\texttt{'number'}\\
+abstraction=\texttt{'integer' \vline\ 'knowledge' \vline\ 'encapsulated'}\\
+model=\texttt{the actual number (or knowledge model)}
+
+This property specifies the number whose bits are to be shifted.
+
+\subsubsection{Direction Property}
+
+\emph{required}
+
+name=\texttt{'direction'}\\
+abstraction=\texttt{'character'}\\
+model=\texttt{'left' \vline\ 'right'}
+
+The direction in which to shift.
+
+\subsubsection{Position Property}
+
+\emph{required}
+
+name=\texttt{'position'}\\
+abstraction=\texttt{'integer' \vline\ 'knowledge' \vline\ 'encapsulated'}\\
+model=\texttt{number of positions to shift by}
+
+The number of positions by which the bits of the given number are to be shifted.
+
+\subsubsection{Result Property}
+
+\emph{required}
+
+name=\texttt{'result'}\\
+abstraction=\texttt{'knowledge' \vline\ 'encapsulated'}\\
+model=\texttt{result knowledge model}
+
+This is the result knowledge model in which to store the number whose bits were
+shifted.

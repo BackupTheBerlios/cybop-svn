@@ -1,0 +1,85 @@
+%
+% $RCSfile: create.tex,v $
+%
+% Copyright (c) 2002-2007. Christian Heller. All rights reserved.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% Version: $Revision: 1.1 $ $Date: 2007-07-17 20:02:36 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Create}
+\label{create_heading}
+\index{Create}
+
+This operation creates a new knowledge model.
+
+\subsubsection{Name Property}
+
+\emph{required}
+
+name=\texttt{'name'}\\
+abstraction=\texttt{'character'}\\
+model=\texttt{knowledge model name}
+
+This is the name of the knowledge model to be created.
+
+\subsubsection{Channel Property}
+
+\emph{required}
+
+name=\texttt{'channel'}\\
+abstraction=\texttt{'character'}\\
+model=\texttt{'inline' \vline\ 'file'}
+
+This is the channel via which to load the knowledge template for creating a
+knowledge model.
+
+\subsubsection{Abstraction Property}
+
+\emph{required}
+
+name=\texttt{'abstraction'}\\
+abstraction=\texttt{'character'}\\
+model=\texttt{'boolean' \vline\ 'integer' \vline\ 'float' \vline\ 'character' \vline\ 'compound'}
+
+This is the abstraction of the knowledge model to be created.
+
+\subsubsection{Model Property}
+
+\emph{required}
+
+name=\texttt{'model'}\\
+abstraction=\texttt{'character'}\\
+model=\texttt{knowledge template path}
+
+This is the knowledge template from which to create a knowledge model.
+
+\subsubsection{Element Property}
+
+\emph{required}
+
+name=\texttt{'element'}\\
+abstraction=\texttt{'character'}\\
+model=\texttt{'part' \vline\ 'meta'}
+
+This property specifies the kind of element (knowledge model) to be created.
+
+\subsubsection{Whole Property}
+
+\emph{required}
+
+name=\texttt{'whole'}\\
+abstraction=\texttt{'knowledge' \vline\ 'encapsulated'}\\
+model=\texttt{whole knowledge model}
+
+This property determines the compound to which to add the new knowledge model.

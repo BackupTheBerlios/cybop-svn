@@ -1,0 +1,58 @@
+%
+% $RCSfile: archive_file.tex,v $
+%
+% Copyright (c) 2002-2007. Christian Heller. All rights reserved.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% Version: $Revision: 1.1 $ $Date: 2007-07-17 20:02:36 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Archive File}
+\label{archive_file_heading}
+\index{Archive File}
+
+This operation archives the given files or directories. Internally, it just
+uses the corresponding shell command functionality.
+
+\subsubsection{Create Property}
+
+\emph{required}
+
+name=\texttt{'create'}\\
+abstraction=\texttt{'boolean'}\\
+model=\texttt{'true' \vline\ 'false'}
+
+This is the flag specifying whether or not to create the archive file, if it
+does not exist yet.
+
+\subsubsection{Update Property}
+
+\emph{required}
+
+name=\texttt{'update'}\\
+abstraction=\texttt{'boolean'}\\
+model=\texttt{'true' \vline\ 'false'}
+
+This property specifies whether or not to update the archive file, if it
+already exists.
+
+\subsubsection{Bzip2 Property}
+
+\emph{required}
+
+name=\texttt{'bzip2'}\\
+abstraction=\texttt{'boolean'}\\
+model=\texttt{'true' \vline\ 'false'}
+
+This property specifies whether or not to use bzip2 (bz2) compression instead
+of the standard gzip (gz) compression.

@@ -1,0 +1,139 @@
+%
+% $RCSfile: send.tex,v $
+%
+% Copyright (c) 2002-2007. Christian Heller. All rights reserved.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% Version: $Revision: 1.1 $ $Date: 2007-07-17 20:02:36 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Send}
+\label{send_heading}
+\index{Send}
+
+This operation is able to send a message via textual, graphical or web user
+interface, or to the file system or also as shell output directly.
+
+\subsubsection{Channel Property}
+
+\emph{required}
+
+name=\texttt{'channel'}\\
+abstraction=\texttt{'character'}\\
+model=\texttt{'inline' \vline\ 'file'}
+
+The channel via which to send the message.
+
+\subsubsection{Language Property}
+
+\emph{required}
+
+name=\texttt{'language'}\\
+abstraction=\texttt{'character'}\\
+model=\texttt{'tui' \vline\ 'gui' \vline\ 'wui' \vline\ 'file' \vline\ 'shell' \vline\ etc.}
+
+The language into which to encode the message before sending it.
+
+\subsubsection{Mode Property}
+
+\emph{required}
+
+name=\texttt{'mode'}\\
+abstraction=\texttt{'character'}\\
+model=\texttt{'client' \vline\ 'server'}
+
+The mode of communication.
+
+\subsubsection{Namespace Property}
+
+\emph{required}
+
+name=\texttt{'namespace'}\\
+abstraction=\texttt{'character'}\\
+model=\texttt{'local' \vline\ 'inet' \vline\ 'inet6' \vline\ 'ns' \vline\ 'iso' \vline\ 'ccitt' \vline\ 'implink' \vline\ 'route'}
+
+The namespace of the socket.
+
+\subsubsection{Style Property}
+
+\emph{required}
+
+name=\texttt{'style'}\\
+abstraction=\texttt{'character'}\\
+model=\texttt{'stream' \vline\ 'datagram' \vline\ 'raw'}
+
+The style of communication.
+
+\subsubsection{Sender Property}
+
+\emph{required}
+
+name=\texttt{'sender'}\\
+abstraction=\texttt{'character'}\\
+model=\texttt{name of sending system}
+
+The name of the system sending the message.
+
+\subsubsection{Receiver Property}
+
+\emph{required}
+
+name=\texttt{'receiver'}\\
+abstraction=\texttt{'character'}\\
+model=\texttt{name of receiving system}
+
+The name of the system receiving the message.
+
+\subsubsection{Message Property}
+
+\emph{required}
+
+name=\texttt{'message'}\\
+abstraction=\texttt{'knowledge' \vline\ 'encapsulated'}\\
+model=\texttt{message knowledge model path}
+
+The actual message to be sent to another system.
+
+\subsubsection{Area Property}
+
+\emph{optional}
+
+name=\texttt{'area'}\\
+abstraction=\texttt{'knowledge' \vline\ 'encapsulated'}\\
+model=\texttt{knowledge path to part model to be repainted}
+
+The user interface area to be repainted. It is normally just a part of the
+whole user interface model. This property helps to speed up repainting while
+avoiding user interface flickering.
+
+\subsubsection{Clean Property}
+
+\emph{optional}
+
+name=\texttt{'clean'}\\
+abstraction=\texttt{'boolean'}\\
+model=\texttt{'true' \vline\ 'false'}
+
+This property indicates whether or not to clear the screen before painting a
+user interface.
+
+\subsubsection{New Line Property}
+
+\emph{optional}
+
+name=\texttt{'new\_line'}\\
+abstraction=\texttt{'boolean'}\\
+model=\texttt{'true' \vline\ 'false'}
+
+This property indicates whether or not to add a new line after having printed
+the message on screen.

@@ -1,0 +1,243 @@
+%
+% $RCSfile: textual_user_interface.tex,v $
+%
+% Copyright (c) 2002-2007. Christian Heller. All rights reserved.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% Version: $Revision: 1.1 $ $Date: 2007-07-17 20:02:36 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Textual User Interface}
+\label{textual_user_interface_heading}
+\index{Textual User Interface}
+
+\emph{Textual User Interface} (TUI) is a synonym for character-based UI.
+Historically, the TUI (besides the simple command line) was the first kind of
+UI for computers. It mostly offers a menu with a list of possible choices that
+can be activated via the pressing of a special button on the keyboard. Figure
+\ref{textual_user_interface_figure} illustrates a typical, menu-based TUI.
+
+\begin{figure}[ht]
+    \begin{center}
+%        \includegraphics[scale=0.3,angle=-90]{graphics/textual_user_interface.pdf}
+        \caption{Textual User Interface}
+        \label{textual_user_interface_figure}
+    \end{center}
+\end{figure}
+
+\subsubsection{Position Property}
+
+\emph{required}
+
+name=\texttt{'position'}\\
+abstraction=\texttt{'integer'}\\
+model=\texttt{x, y, z coordinates}
+
+This property specifies the TUI element's origin.
+
+\subsubsection{Size Property}
+
+\emph{required}
+
+name=\texttt{'size'}\\
+abstraction=\texttt{'integer'}\\
+model=\texttt{x, y, z extensions}
+
+This property specifies the TUI element's extension.
+
+\subsubsection{Background Property}
+
+\emph{required}
+
+name=\texttt{'background'}\\
+abstraction=\texttt{'character'}\\
+model=\texttt{'black' \vline\ 'red' \vline\ 'green' \vline\ 'yellow' \vline\ 'blue' \vline\ 'magenta' \vline\ 'cobalt' \vline\ 'white'}
+
+This property specifies the background colour of the TUI.
+
+\subsubsection{Foreground Property}
+
+\emph{required}
+
+name=\texttt{'foreground'}\\
+abstraction=\texttt{'character'}\\
+model=\texttt{'black' \vline\ 'red' \vline\ 'green' \vline\ 'yellow' \vline\ 'blue' \vline\ 'magenta' \vline\ 'cobalt' \vline\ 'white'}
+
+This property specifies the foreground colour of the TUI.
+
+\subsubsection{Border Property}
+
+\emph{optional}
+
+name=\texttt{'border'}\\
+abstraction=\texttt{'character'}\\
+model=\texttt{'line' \vline\ 'round\_line' \vline\ 'double\_line'}
+
+This property specifies the kind of border of the TUI.
+
+\subsubsection{Hidden Property}
+
+\emph{optional}
+
+name=\texttt{'hidden'}\\
+abstraction=\texttt{'boolean'}\\
+model=\texttt{'true' \vline\ 'false'}
+
+This property specifies whether or not to hide the TUI element.
+
+\subsubsection{Inverse Property}
+
+\emph{optional}
+
+name=\texttt{'inverse'}\\
+abstraction=\texttt{'boolean'}\\
+model=\texttt{'true' \vline\ 'false'}
+
+This property specifies whether or not to display the TUI element in inverse
+colours.
+
+\subsubsection{Blink Property}
+
+\emph{optional}
+
+name=\texttt{'blink'}\\
+abstraction=\texttt{'boolean'}\\
+model=\texttt{'true' \vline\ 'false'}
+
+This property specifies whether or not the TUI element should blink.
+
+\subsubsection{Underline Property}
+
+\emph{optional}
+
+name=\texttt{'underline'}\\
+abstraction=\texttt{'boolean'}\\
+model=\texttt{'true' \vline\ 'false'}
+
+This property specifies whether or not to underline the TUI element's text.
+
+\subsubsection{Bold Property}
+
+\emph{optional}
+
+name=\texttt{'bold'}\\
+abstraction=\texttt{'boolean'}\\
+model=\texttt{'true' \vline\ 'false'}
+
+This property specifies whether or not to display the TUI element's text in
+bold font.
+
+\subsubsection{Focus Property}
+
+\emph{optional}, only if TUI element should be able to react to button press events
+
+name=\texttt{'focus'}\\
+abstraction=\texttt{'knowledge' \vline\ 'encapsulated'}\\
+model=\texttt{logic knowledge model}
+
+This property points to the TUI element (knowledge model) having focus. It is
+important to find out which TUI element a key press event relates to. The focus
+of a number of part elements should always be held by their corresponding
+whole (compound) element.
+
+\subsubsection{Previous Property}
+
+\emph{optional}, only if TUI element should have a predecessor that may own the focus
+
+name=\texttt{'previous'}\\
+abstraction=\texttt{'knowledge' \vline\ 'encapsulated'}\\
+model=\texttt{logic knowledge model}
+
+This property points to the previous TUI element (knowledge model) owning focus.
+
+\subsubsection{Next Property}
+
+\emph{optional}, only if TUI element should have a successor that may own the focus
+
+name=\texttt{'next'}\\
+abstraction=\texttt{'knowledge' \vline\ 'encapsulated'}\\
+model=\texttt{logic knowledge model}
+
+This property points to the next TUI element (knowledge model) receiving focus.
+
+\subsubsection{Enter Property}
+
+\emph{optional}, only if TUI element should react to button press event;
+a prerequisition is that the TUI element's \emph{focus} property value is \emph{true}
+
+name=\texttt{'enter'}\\
+abstraction=\texttt{'knowledge' \vline\ 'encapsulated'}\\
+model=\texttt{logic knowledge model}
+
+This property specifies the logic knowledge model to be executed if the
+\emph{Enter} button is pressed while the TUI element has focus.
+
+\subsubsection{Escape Property}
+
+\emph{optional}, only if TUI element should react to button press event;
+a prerequisition is that the TUI element's \emph{focus} property value is \emph{true}
+
+name=\texttt{'escape'}\\
+abstraction=\texttt{'knowledge' \vline\ 'encapsulated'}\\
+model=\texttt{logic knowledge model}
+
+This property specifies the logic knowledge model to be executed if the
+\emph{Esc} button is pressed while the TUI element has focus.
+
+\subsubsection{Arrow Up Property}
+
+\emph{optional}, only if TUI element should react to button press event;
+a prerequisition is that the TUI element's \emph{focus} property value is \emph{true}
+
+name=\texttt{'arrow\_up'}\\
+abstraction=\texttt{'knowledge' \vline\ 'encapsulated'}\\
+model=\texttt{logic knowledge model}
+
+This property specifies the logic knowledge model to be executed if the
+\emph{arrow-up} button is pressed while the TUI element has focus.
+
+\subsubsection{Arrow Down Property}
+
+\emph{optional}, only if TUI element should react to button press event;
+a prerequisition is that the TUI element's \emph{focus} property value is \emph{true}
+
+name=\texttt{'arrow\_down'}\\
+abstraction=\texttt{'knowledge' \vline\ 'encapsulated'}\\
+model=\texttt{logic knowledge model}
+
+This property specifies the logic knowledge model to be executed if the
+\emph{arrow-down} button is pressed while the TUI element has focus.
+
+\subsubsection{Arrow Left Property}
+
+\emph{optional}, only if TUI element should react to button press event;
+a prerequisition is that the TUI element's \emph{focus} property value is \emph{true}
+
+name=\texttt{'arrow\_left'}\\
+abstraction=\texttt{'knowledge' \vline\ 'encapsulated'}\\
+model=\texttt{logic knowledge model}
+
+This property specifies the logic knowledge model to be executed if the
+\emph{arrow-left} button is pressed while the TUI element has focus.
+
+\subsubsection{Arrow Right Property}
+
+\emph{optional}, only if TUI element should react to button press event;
+a prerequisition is that the TUI element's \emph{focus} property value is \emph{true}
+
+name=\texttt{'arrow\_right'}\\
+abstraction=\texttt{'knowledge' \vline\ 'encapsulated'}\\
+model=\texttt{logic knowledge model}
+
+This property specifies the logic knowledge model to be executed if the
+\emph{arrow-right} button is pressed while the TUI element has focus.

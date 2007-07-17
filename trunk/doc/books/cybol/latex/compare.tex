@@ -1,0 +1,74 @@
+%
+% $RCSfile: compare.tex,v $
+%
+% Copyright (c) 2002-2007. Christian Heller. All rights reserved.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% Version: $Revision: 1.1 $ $Date: 2007-07-17 20:02:36 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Compare}
+\label{compare_heading}
+\index{Compare}
+
+This operation compares two given operands.
+
+\subsubsection{Comparison Property}
+
+\emph{required}
+
+name=\texttt{'comparison'}\\
+abstraction=\texttt{'character'}\\
+model=\texttt{'equal' \vline\ 'smaller' \vline\ 'greater' \vline\ 'smaller\_or\_equal' \vline\ 'greater\_or\_equal'}
+
+This is the kind of comparison to be applied.
+
+\subsubsection{Left Side Property}
+
+\emph{required}
+
+name=\texttt{'left\_side'}\\
+abstraction=\texttt{'boolean' \vline\ 'integer' \vline\ 'float' \vline\ 'character' \vline\ 'knowledge' \vline\ 'encapsulated'}\\
+model=\texttt{value or knowledge model}
+
+This is the left side value of the comparison.
+
+\subsubsection{Right Side Property}
+
+\emph{required}
+
+name=\texttt{'right\_side'}\\
+abstraction=\texttt{'boolean' \vline\ 'integer' \vline\ 'float' \vline\ 'character' \vline\ 'knowledge' \vline\ 'encapsulated'}\\
+model=\texttt{value or knowledge model}
+
+This is the right side value of the comparison.
+
+\subsubsection{Result Property}
+
+\emph{required}
+
+name=\texttt{'result'}\\
+abstraction=\texttt{'boolean' \vline\ 'knowledge' \vline\ 'encapsulated'}\\
+model=\texttt{result knowledge model}
+
+This is the knowledge model in which the comparison result is stored.
+
+\subsubsection{Selection Property}
+
+\emph{optional}, only if comparing values of abstraction "character"
+
+name=\texttt{'selection'}\\
+abstraction=\texttt{'character'}\\
+model=\texttt{'full' \vline\ 'prefix' \vline\ 'suffix' \vline\ 'part'}
+
+This property selects which part of two string values shall be compared.

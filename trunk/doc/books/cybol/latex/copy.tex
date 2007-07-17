@@ -1,0 +1,56 @@
+%
+% $RCSfile: copy.tex,v $
+%
+% Copyright (c) 2002-2007. Christian Heller. All rights reserved.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% Version: $Revision: 1.1 $ $Date: 2007-07-17 20:02:36 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Copy}
+\label{copy_heading}
+\index{Copy}
+
+This operation copies a value with the given abstraction from the source- to
+the destination model.
+
+\subsubsection{Source Property}
+
+\emph{required}
+
+name=\texttt{'source'}\\
+abstraction=\texttt{'boolean' \vline\ 'integer' \vline\ 'character' \vline\ 'knowledge' \vline\ 'encapsulated'}\\
+model=\texttt{value or knowledge model}
+
+This is the source value.
+
+\subsubsection{Destination Property}
+
+\emph{required}
+
+name=\texttt{'destination'}\\
+abstraction=\texttt{'boolean' \vline\ 'integer' \vline\ 'character' \vline\ 'knowledge' \vline\ 'encapsulated'}\\
+model=\texttt{value or knowledge model}
+
+This is the destination value.
+
+\subsubsection{Abstraction Property}
+
+\emph{required}
+
+name=\texttt{'abstraction'}\\
+abstraction=\texttt{'character'}\\
+model=\texttt{'boolean' \vline\ 'integer' \vline\ 'character'}
+
+This is the abstraction of the values. CAUTION! It has to be identical for
+both, source- and destination value!

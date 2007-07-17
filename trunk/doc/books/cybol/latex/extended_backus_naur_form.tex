@@ -1,0 +1,84 @@
+%
+% $RCSfile: extended_backus_naur_form.tex,v $
+%
+% Copyright (c) 2002-2007. Christian Heller. All rights reserved.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% Version: $Revision: 1.1 $ $Date: 2007-07-17 20:02:36 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\section{Extended Backus Naur Form}
+\label{extended_backus_naur_form_heading}
+\index{Extended Backus Naur Form}
+\index{EBNF}
+\index{Backus Naur Form}
+\index{BNF}
+\index{CYBOL EBNF}
+
+The EBNF adds regular expression syntax to the \emph{Backus Naur Form} (BNF)
+notatation \cite{naur}, in order to allow very compact specifications
+\cite{kuhn}. Figure \ref{ebnf_figure} shows the EBNF of the CYBOL language.
+
+\begin{figure}[ht]
+    \bigskip
+    \bigskip
+    \begin{scriptsize}
+        \begin{verbatim}
+CYBOL       = '<model>'
+                    {part}
+                '</model>';
+
+part        = '<part ' attributes '\>' |
+                '<part ' attributes '>'
+                    {property}
+                '</part>';
+
+property    = '<property ' attributes '\>' |
+                '<property ' attributes '>'
+                    {constraint}
+                '</property>';
+
+constraint  = '<constraint ' attributes '\>';
+
+attributes  = name_attribute channel_attribute abstraction_attribute model_attribute
+
+name_attribute          = 'name="' name '"';
+channel_attribute       = 'channel="' channel '"';
+abstraction_attribute   = 'abstraction="' abstraction '"';
+model_attribute         = 'model="' model '"';
+
+name        = description_sign;
+channel     = description_sign;
+abstraction = description_sign;
+model       = value_sign;
+
+description_sign    = { ( letter | number ) };
+value_sign          = { ( letter | number | other_sign ) };
+
+letter          = small_letter | big_letter;
+small_letter    = 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' |
+                    'h' | 'i' | 'j' | 'k' | 'l' | 'm' | 'n' |
+                    'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u' |
+                    'v' | 'w' | 'x' | 'y' | 'z';
+big_letter      = 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' |
+                    'H' | 'I' | 'J' | 'K' | 'L' | 'M' | 'N' |
+                    'O' | 'P' | 'Q' | 'R' | 'S' | 'T' | 'U' |
+                    'V' | 'W' | 'X' | 'Y' | 'Z';
+other_sign      = ',' | '.' | '/', '+', '-', '*';
+number          = '0' | '1' | '2' | '3' | '4' |
+                    '5' | '6' | '7' | '8' | '9';
+        \end{verbatim}
+    \end{scriptsize}
+    \caption{CYBOL in EBNF}
+    \label{ebnf_figure}
+\end{figure}

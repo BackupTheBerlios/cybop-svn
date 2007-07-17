@@ -1,0 +1,143 @@
+%
+% $RCSfile: receive.tex,v $
+%
+% Copyright (c) 2002-2007. Christian Heller. All rights reserved.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% Version: $Revision: 1.1 $ $Date: 2007-07-17 20:02:36 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Receive}
+\label{receive_heading}
+\index{Receive}
+
+This operation receives data from the given data source.
+
+\subsubsection{Name Property}
+
+\emph{required}
+
+name=\texttt{'name'}\\
+abstraction=\texttt{'character'}\\
+model=\texttt{string of characters}
+
+This is the name of the knowledge model to be created.
+
+\subsubsection{Channel Property}
+
+\emph{required}
+
+name=\texttt{'channel'}\\
+abstraction=\texttt{'character'}\\
+model=\texttt{'inline' \vline\ 'file'}
+
+This is the channel via which the knowledge model is received.
+
+\subsubsection{Abstraction Property}
+
+\emph{required}
+
+name=\texttt{'abstraction'}\\
+abstraction=\texttt{'character'}\\
+model=\texttt{'boolean' \vline\ 'integer' \vline\ 'float' \vline\ 'character' \vline\ etc.}
+
+This is the abstraction of the knowledge model to be created.
+
+\subsubsection{Model Property}
+
+\emph{required}
+
+name=\texttt{'model'}\\
+abstraction=\texttt{'character'}\\
+model=\texttt{path to a file}
+
+This is the data source (knowledge template) from where the actual knowledge
+model is created.
+
+\subsubsection{Details Property}
+
+\emph{required}
+
+name=\texttt{'details'}\\
+abstraction=\texttt{'character'}\\
+model=\texttt{path to a file}
+
+This is the model details' data source (knowledge template) from where the
+knowledge model's details are created.
+
+\subsubsection{Element Property}
+
+\emph{required}
+
+name=\texttt{'element'}\\
+abstraction=\texttt{'character'}\\
+model=\texttt{'part' \vline\ 'meta'}
+
+This property decides about the kind of model being created. A part model will
+be added to the whole's model (part) hierarchy; a meta model will be added to the
+whole's details (meta) hierarchy.
+
+\subsubsection{Whole Property}
+
+\emph{required}
+
+name=\texttt{'whole'}\\
+abstraction=\texttt{'knowledge' \vline\ 'encapsulated'}
+model=\texttt{whole model knowledge path}
+
+This property specifies the knowledge model that the new part/ meta model will
+be added to.
+
+\subsubsection{Root Property}
+
+\emph{required}
+
+name=\texttt{'root'}\\
+abstraction=\texttt{'knowledge' \vline\ 'encapsulated'}
+model=\texttt{root model knowledge path}
+
+This property specifies the knowledge model that will serve as the root.
+
+\subsubsection{Style Property}
+
+\emph{required}
+
+name=\texttt{'style'}\\
+abstraction=\texttt{'knowledge' \vline\ 'encapsulated'}
+model=\texttt{'stream' \vline\ 'datagram' \vline\ 'raw'}
+
+This is the style of socket communication.
+
+\subsubsection{Commands Property}
+
+\emph{required}
+
+name=\texttt{'commands'}\\
+abstraction=\texttt{'knowledge' \vline\ 'encapsulated'}
+model=\texttt{commands model knowledge path}
+
+This property specifies the knowledge model containing the commands that the
+user interface should react to.
+
+\subsubsection{Blocking Property}
+
+\emph{required}
+
+name=\texttt{'blocking'}\\
+abstraction=\texttt{'boolean'}
+model=\texttt{'true' \vline\ 'false'}
+
+This property specifies whether the receive process should be blocking. If it
+is, then application signals will not be processed while the receive operation
+is waiting for some message to arrive. Only if a message is actually received,
+the application will process it in form of a signal and then continue to wait.
