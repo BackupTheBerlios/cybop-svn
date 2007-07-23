@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2007-06-24 15:02:21 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2007-07-23 23:47:57 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -37,7 +37,6 @@
 #include "../../memoriser/array.c"
 #include "../../memoriser/communicator.c"
 #include "../../memoriser/converter.c"
-#include "../../memoriser/translator.c"
 
 /**
  * Counts those compound parts whose name ends with the given suffix.

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.52 $ $Date: 2007-06-22 07:07:13 $ $Author: christian $
+ * @version $Revision: 1.53 $ $Date: 2007-07-23 23:47:57 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -47,7 +47,6 @@
 #include "../memoriser/accessor/compound_accessor.c"
 #include "../memoriser/accessor/internal_memory_accessor.c"
 #include "../memoriser/allocator.c"
-#include "../memoriser/translator.c"
 
 /**
  * Refreshes the url.

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.26 $ $Date: 2007-07-15 18:44:21 $ $Author: christian $
+ * @version $Revision: 1.27 $ $Date: 2007-07-23 23:47:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -38,18 +38,18 @@
 #include <signal.h>
 #include <stdio.h>
 #include <unistd.h>
-#include "../../applicator/receive/receive_file_system.c"
-#include "../../globals/constants/http/http_request_method_constants.c"
-#include "../../globals/constants/cybol/cybol_abstraction_constants.c"
-#include "../../globals/constants/cybol/cybol_channel_constants.c"
 #include "../../globals/constants/character/character_constants.c"
 #include "../../globals/constants/console/console_escape_code_constants.c"
-#include "../../globals/constants/integer/integer_constants.c"
-#include "../../globals/constants/log/log_message_constants.c"
+#include "../../globals/constants/cybol/cybol_abstraction_constants.c"
+#include "../../globals/constants/cybol/cybol_channel_constants.c"
 #include "../../globals/constants/cybol/cybol_model_constants.c"
 #include "../../globals/constants/cybol/cybol_name_constants.c"
+#include "../../globals/constants/http/http_request_method_constants.c"
+#include "../../globals/constants/integer/integer_constants.c"
+#include "../../globals/constants/log/log_message_constants.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../../globals/constants/pointer/pointer_constants.c"
+#include "../../globals/constants/cyboi_constants.c"
 #include "../../globals/constants/system_constants.c"
 #include "../../globals/variables/variables.c"
 #include "../../memoriser/accessor/compound_accessor.c"
@@ -61,23 +61,6 @@
 //
 // Forward declarations.
 //
-
-/**
- * Receives a file system model.
- *
- * @param p0 the destination
- * @param p1 the destination count
- * @param p2 the destination size
- * @param p3 the source model
- * @param p4 the source model count
- * @param p5 the source abstraction
- * @param p6 the source abstraction count
- * @param p7 the source channel
- * @param p8 the source channel count
- */
-/*??
-void receive_file_system_model(void* p0, void* p1, void* p2, void* p3, void* p4,
-    void* p5, void* p6, void* p7, void* p8);
 
 /**
  * Get the request method from the complet request msg
@@ -457,7 +440,7 @@ void* get_character_from_escape_code(void* source, int* source_count, char** des
 }
 
 /**
- * Extract parameters from url without "get" request method prefix.
+ * Extract parameters from "get" request method url.
  *
  * Example request :
  * GET /lib/ausgabe.cybol?param1=value1&param2=value2 HTTP/1.1 ...
@@ -473,17 +456,11 @@ void* get_character_from_escape_code(void* source, int* source_count, char** des
  * @param p5 the abstraction count (Hand over as reference!)
  * @param p6 the model (Hand over as reference!)
  * @param p7 the model count (Hand over as reference!)
- * @param p8 the url (source) (Hand over as reference!)
- * @param p9 the url count (Hand over as reference!)
---
- * @param req the request
- * @param req_count the request count
- * @param param the parameter
- * @param param_count the paramater count
+ * @param p8 the url without "get" request method prefix
+ * @param p9 the url count
  */
-void receive_socket_get_parameters_get_request(void* p0, void* p1, void* p2, void* p3,
+void receive_socket_get_request(void* p0, void* p1, void* p2, void* p3,
     void* p4, void* p5, void* p6, void* p7, void* p8, void* p9) {
-//?? (char* req, int* req_count, char** param, int* param_count) {
 
     if (p9 != *NULL_POINTER) {
 
@@ -573,7 +550,7 @@ void receive_socket_get_parameters_get_request(void* p0, void* p1, void* p2, voi
 }
 
 /**
- * Extract parameters from url without "post" request method prefix.
+ * Extract parameters from "post" request method url.
  *
  * @param p0 the name (Hand over as reference!)
  * @param p1 the name count (Hand over as reference!)
@@ -583,17 +560,11 @@ void receive_socket_get_parameters_get_request(void* p0, void* p1, void* p2, voi
  * @param p5 the abstraction count (Hand over as reference!)
  * @param p6 the model (Hand over as reference!)
  * @param p7 the model count (Hand over as reference!)
- * @param p8 the url (source) (Hand over as reference!)
- * @param p9 the url count (Hand over as reference!)
---
- * @param req the request
- * @param req_count the request count
- * @param param the parameter
- * @param param_count the paramater count
+ * @param p8 the url without "post" request method prefix
+ * @param p9 the url count
  */
-void receive_socket_get_parameters_post_request(void* p0, void* p1, void* p2, void* p3,
+void receive_socket_post_request(void* p0, void* p1, void* p2, void* p3,
     void* p4, void* p5, void* p6, void* p7, void* p8, void* p9) {
-//?? (char* req, int* req_count, char** param, int* param_count) {
 
 /*??
     *param_count = 0;
@@ -650,8 +621,71 @@ void receive_socket_get_parameters_post_request(void* p0, void* p1, void* p2, vo
 }
 
 /**
- * Translate uniform resource locator (url).
+ * Translate uniform resource identifier (uri).
  *
+ * URIs have been known by many names (synonyms):
+ * - WWW addresses
+ * - Universal Document Identifiers
+ * - Universal Resource Identifiers
+ * - Uniform Resource Locators (URL)
+ * - Uniform Resource Names (URN)
+ *
+ * As far as HTTP is concerned, Uniform Resource Identifiers are simply
+ * formatted strings which identify -- via name, location, or any other
+ * characteristic -- a resource.
+ *
+ * The "http" scheme is used to locate network resources via the HTTP protocol.
+ *
+ * http_URL = "http:" "//" host [ ":" port ] [ abs_path [ "?" query ]]
+ *
+ * If the port is empty or not given, port 80 is assumed.
+ * The semantics are that the identified resource is located at the server
+ * listening for TCP connections on that port of that host, and the Request-URI
+ * for the resource is abs_path.
+ * The use of IP addresses in URLs SHOULD be avoided whenever possible!
+ * If the abs_path is not present in the URL, it MUST be given as "/" when
+ * used as a Request-URI for a resource.
+ * If a proxy receives a host name which is not a fully qualified domain name,
+ * it MAY add its domain to the host name it received. If a proxy receives a
+ * fully qualified domain name, the proxy MUST NOT change the host name.
+ *
+ * URI Comparison
+ *
+ * When comparing two URIs to decide if they match or not, a client SHOULD use a
+ * case-sensitive octet-by-octet comparison of the entire URIs, with these exceptions:
+ * - A port that is empty or not given is equivalent to the default port for that URI-reference;
+ * - Comparisons of host names MUST be case-insensitive;
+ * - Comparisons of scheme names MUST be case-insensitive;
+ * - An empty abs_path is equivalent to an abs_path of "/".
+ *
+ * Characters other than those in the "reserved" and "unsafe" sets are equivalent
+ * to their ""%" HEX HEX" encoding. For example, the following three URIs are equivalent:
+ * http://abc.com:80/~smith/home.html
+ * http://ABC.com/%7Esmith/home.html
+ * http://ABC.com:/%7esmith/home.html
+ *
+ * HTTP Message
+ *
+ * Request and Response messages use a generic message format for transferring
+ * entities (the payload of the message). Both types of message consist of a:
+ * - start-line
+ * - zero or more header fields (also known as "headers")
+ * - an empty line (i.e., a line with nothing preceding the CRLF)
+ *   indicating the end of the header fields
+ * - possibly a message-body
+ *
+ * generic-message = start-line
+ *                   *(message-header CRLF)
+ *                   CRLF
+ *                   [ message-body ]
+ * start-line      = Request-Line | Status-Line
+ *
+ * In the interest of robustness, servers SHOULD ignore any empty line(s)
+ * received where a Request-Line is expected. In other words, if the server
+ * is reading the protocol stream at the beginning of a message and receives
+ * a CRLF first, it should ignore the CRLF.
+ *
+ * --
  * A uniform resource locator (url) consists of the following components:
  * - schema
  * - host
@@ -712,75 +746,66 @@ void receive_socket_get_parameters_post_request(void* p0, void* p1, void* p2, vo
  * @param p5 the abstraction count (Hand over as reference!)
  * @param p6 the model (Hand over as reference!)
  * @param p7 the model count (Hand over as reference!)
- * @param p8 the url (source) (Hand over as reference!)
- * @param p9 the url count (Hand over as reference!)
+ * @param p8 the url
+ * @param p9 the url count
  */
-void receive_socket_get_parameters(void* p0, void* p1, void* p2, void* p3,
+void receive_socket_request_method(void* p0, void* p1, void* p2, void* p3,
     void* p4, void* p5, void* p6, void* p7, void* p8, void* p9) {
 
     if (p9 != *NULL_POINTER) {
 
         int* urlc = (int*) p9;
 
-        if (p8 != *NULL_POINTER) {
+        log_message_debug("Information: Receive socket request method.");
 
-            void** url = (void**) p8;
+        // The remaining url.
+        void* u = *NULL_POINTER;
+        int uc = *NUMBER_0_INTEGER;
 
-            log_message_debug("Information: Receive socket get parameters.");
+        // The comparison result.
+        int r = *NUMBER_0_INTEGER;
 
-            // The comparison result.
-            int r = *NUMBER_0_INTEGER;
-            // The content pointer.
-            void* c = *NULL_POINTER;
-            int cc = *NUMBER_0_INTEGER;
+        if (r == *NUMBER_0_INTEGER) {
 
-            if (r == *NUMBER_0_INTEGER) {
+            compare_arrays(p8, (void*) HTTP_GET_REQUEST_METHOD_COUNT, (void*) HTTP_GET_REQUEST_METHOD, (void*) HTTP_GET_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-                compare_arrays(*url, (void*) HTTP_GET_REQUEST_METHOD_COUNT, (void*) HTTP_GET_REQUEST_METHOD, (void*) HTTP_GET_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+            if (r != *NUMBER_0_INTEGER) {
 
-                if (r != *NUMBER_0_INTEGER) {
+                // Set remaining url.
+                //
+                // To the original pointer are added the length of the "get"
+                // string and one place for the "space" character after "get".
+                u = p8 + *HTTP_GET_REQUEST_METHOD_COUNT + *PRIMITIVE_COUNT;
+                uc = *urlc - *HTTP_GET_REQUEST_METHOD_COUNT - *PRIMITIVE_COUNT;
 
-                    // Set content pointer.
-                    // To the original pointer are added the length of the "get"
-                    // string and one place for the "space" character after "get".
-//??                    c = *url + *HTTP_GET_REQUEST_METHOD_COUNT + *PRIMITIVE_COUNT;
-//??                    cc = *urlc - *HTTP_GET_REQUEST_METHOD_COUNT - *PRIMITIVE_COUNT;
+//??    fprintf(stderr, "TEST get request remaining url: %s\n", (char*) u);
 
-                    //?? TEST with placeholders for / and ?
-                    c = *url + *HTTP_GET_REQUEST_METHOD_COUNT + *PRIMITIVE_COUNT + 1 + 1;
-                    //?? The "close" signal is of length 5.
-                    cc = 5;
-
-        fprintf(stderr, "TEST: %s\n", (char*) c);
-
-                    receive_socket_get_parameters_get_request(p0, p1, p2, p3, p4, p5, p6, p7, (void*) &c, (void*) &cc);
-                }
+                receive_socket_get_request(p0, p1, p2, p3, p4, p5, p6, p7, u, (void*) &uc);
             }
+        }
 
-            if (r == *NUMBER_0_INTEGER) {
+        if (r == *NUMBER_0_INTEGER) {
 
-                compare_arrays(*url, (void*) HTTP_POST_REQUEST_METHOD_COUNT, (void*) HTTP_POST_REQUEST_METHOD, (void*) HTTP_POST_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+            compare_arrays(p8, (void*) HTTP_POST_REQUEST_METHOD_COUNT, (void*) HTTP_POST_REQUEST_METHOD, (void*) HTTP_POST_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-                if (r != *NUMBER_0_INTEGER) {
+            if (r != *NUMBER_0_INTEGER) {
 
-                    // Set content pointer.
-                    // To the original pointer are added the length of the "post"
-                    // string and one place for the "space" character after "post".
-                    c = *url + *HTTP_POST_REQUEST_METHOD_COUNT + *PRIMITIVE_COUNT;
-                    cc = *urlc - *HTTP_POST_REQUEST_METHOD_COUNT - *PRIMITIVE_COUNT;
+                // Set remaining url.
+                //
+                // To the original pointer are added the length of the "post"
+                // string and one place for the "space" character after "post".
+                u = p8 + *HTTP_POST_REQUEST_METHOD_COUNT + *PRIMITIVE_COUNT;
+                uc = *urlc - *HTTP_POST_REQUEST_METHOD_COUNT - *PRIMITIVE_COUNT;
 
-                    receive_socket_get_parameters_post_request(p0, p1, p2, p3, p4, p5, p6, p7, (void*) &c, (void*) &cc);
-                }
+//??    fprintf(stderr, "TEST post request remaining url: %s\n", (char*) u);
+
+                receive_socket_post_request(p0, p1, p2, p3, p4, p5, p6, p7, u, (void*) &uc);
             }
-
-        } else {
-
-            log_message_debug("Error: Could not receive socket get parameters. The url is null.");
         }
 
     } else {
 
-        log_message_debug("Error: Could not receive socket get parameters. The url count is null.");
+        log_message_debug("Error: Could not receive socket request method. The url count is null.");
     }
 }
 
@@ -1206,7 +1231,7 @@ void receive_socket_thread(void* p0, void* p1) {
                         // If the flags argument (fourth one) is zero, then one can
                         // just as well use the "read" instead of the "recv" procedure.
                         // Normally, "recv" blocks until there is input available to be read.
-                        // Not so here, as the socket was set to "non-blocking" mode at startup.
+                        // ?? Not so here, as the socket was set to "non-blocking" mode at startup. ??
                         //
                         // CAUTION! A message MUST NOT be longer than the given buffer size!
                         **bc = recv(**ps, *b, **bs, *NUMBER_0_INTEGER);
@@ -1215,6 +1240,10 @@ void receive_socket_thread(void* p0, void* p1) {
                         e = errno;
 
     fprintf(stderr, "TEST: receive socket thread client socket: %i \n", **ps);
+
+    fprintf(stderr, "TEST b: %s \n", (char*) *b);
+    fprintf(stderr, "TEST bc: %i \n", **bc);
+    fprintf(stderr, "TEST bs: %i \n", **bs);
 
                         // CAUTION! Do NOT close client socket here!
                         // It is stored in the internal memory and only closed in
@@ -1277,7 +1306,7 @@ void receive_socket_thread(void* p0, void* p1) {
                     // If the flags argument (fourth one) is zero, then one can
                     // just as well use the "read" instead of the "recv" procedure.
                     // Normally, "recv" blocks until there is input available to be read.
-                    // Not so here, as the socket was set to "non-blocking" mode at startup.
+                    // ?? Not so here, as the socket was set to "non-blocking" mode at startup. ??
                     //
                     // CAUTION! A message MUST NOT be longer than the given buffer size!
                     **bc = recvfrom(**s, *b, **bs, *NUMBER_0_INTEGER, (struct sockaddr*) *a, (socklen_t*) *as);
@@ -1303,11 +1332,11 @@ void receive_socket_thread(void* p0, void* p1) {
             if (**bc > *NUMBER_0_INTEGER) {
 
                 // Translate uniform resource locator (url).
-                receive_socket_get_parameters((void*) &name, (void*) &namec,
+                receive_socket_request_method((void*) &name, (void*) &namec,
                     (void*) &channel, (void*) &channelc,
                     (void*) &abstraction, (void*) &abstractionc,
                     (void*) &model, (void*) &modelc,
-                    (void*) b, (void*) *bc);
+                    *b, (void*) *bc);
 
 /*??
                 // The url basename.

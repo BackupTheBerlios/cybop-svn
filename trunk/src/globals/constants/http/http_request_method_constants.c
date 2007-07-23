@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2007-04-16 15:34:54 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2007-07-23 23:47:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -29,42 +29,42 @@
 
 #include "../../../globals/constants/integer/integer_constants.c"
 
-/** The get request method. */
+/** The get request method. Transfers content from server as arguments in uri. */
 static char HTTP_GET_REQUEST_METHOD_ARRAY[] = {'G', 'E', 'T'};
 static char* HTTP_GET_REQUEST_METHOD = HTTP_GET_REQUEST_METHOD_ARRAY;
 static int* HTTP_GET_REQUEST_METHOD_COUNT = NUMBER_3_INTEGER_ARRAY;
 
-/** The post request method. */
+/** The post request method. Transfers content from server in an additional data block consisting of name-value pairs. */
 static char HTTP_POST_REQUEST_METHOD_ARRAY[] = {'P', 'O', 'S', 'T'};
 static char* HTTP_POST_REQUEST_METHOD = HTTP_POST_REQUEST_METHOD_ARRAY;
 static int* HTTP_POST_REQUEST_METHOD_COUNT = NUMBER_4_INTEGER_ARRAY;
 
-/** The head request method. */
+/** The head request method. Sends GET or POST request header, but not content. */
 static char HTTP_HEAD_REQUEST_METHOD_ARRAY[] = {'H', 'E', 'A', 'D'};
 static char* HTTP_POSHTTP_HEAD_REQUEST_METHOD = HTTP_HEAD_REQUEST_METHOD_ARRAY;
 static int* HTTP_HEAD_REQUEST_METHOD_COUNT = NUMBER_4_INTEGER_ARRAY;
 
-/** The put request method. */
+/** The put request method. Uploads data to webserver via given uri. */
 static char HTTP_PUT_REQUEST_METHOD_ARRAY[] = {'P', 'U', 'T'};
 static char* HTTP_PUT_REQUEST_METHOD = HTTP_PUT_REQUEST_METHOD_ARRAY;
 static int* HTTP_PUT_REQUEST_METHOD_COUNT = NUMBER_3_INTEGER_ARRAY;
 
-/** The delete request method. */
+/** The delete request method. Deletes the specified file on the webserver. */
 static char HTTP_DELETE_REQUEST_METHOD_ARRAY[] = {'D', 'E', 'L', 'E', 'T', 'E'};
 static char* HTTP_DELETE_REQUEST_METHOD = HTTP_DELETE_REQUEST_METHOD_ARRAY;
 static int* HTTP_DELETE_REQUEST_METHOD_COUNT = NUMBER_6_INTEGER_ARRAY;
 
-/** The trace request method. */
+/** The trace request method. Returns the request as the webserver received it. */
 static char HTTP_TRACE_REQUEST_METHOD_ARRAY[] = {'T', 'R', 'A', 'C', 'E'};
 static char* HTTP_TRACE_REQUEST_METHOD = HTTP_TRACE_REQUEST_METHOD_ARRAY;
 static int* HTTP_TRACE_REQUEST_METHOD_COUNT = NUMBER_5_INTEGER_ARRAY;
 
-/** The options request method. */
+/** The options request method. Returns a list of methods and features supported by the webserver. */
 static char HTTP_OPTIONS_REQUEST_METHOD_ARRAY[] = {'O', 'P', 'T', 'I', 'O', 'N', 'S'};
 static char* HTTP_OPTIONS_REQUEST_METHOD = HTTP_OPTIONS_REQUEST_METHOD_ARRAY;
 static int* HTTP_OPTIONS_REQUEST_METHOD_COUNT = NUMBER_7_INTEGER_ARRAY;
 
-/** The connect request method. */
+/** The connect request method. Connects via ssl tunnel on proxy server. */
 static char HTTP_CONNECT_REQUEST_METHOD_ARRAY[] = {'C', 'O', 'N', 'N', 'E', 'C', 'T'};
 static char* HTTP_CONNECT_REQUEST_METHOD = HTTP_CONNECT_REQUEST_METHOD_ARRAY;
 static int* HTTP_CONNECT_REQUEST_METHOD_COUNT = NUMBER_7_INTEGER_ARRAY;

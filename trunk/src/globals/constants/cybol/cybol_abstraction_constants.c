@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2007-04-16 16:45:37 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2007-07-23 23:47:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -28,59 +28,6 @@
 #define CYBOL_ABSTRACTION_CONSTANTS_SOURCE
 
 #include "../../../globals/constants/integer/integer_constants.c"
-
-//
-// Array abstractions.
-//
-
-/** The character array constant. */
-static int* CHARACTER_ARRAY = NUMBER_0_INTEGER_ARRAY;
-
-/** The wide character array constant. */
-static int* WIDE_CHARACTER_ARRAY = NUMBER_1_INTEGER_ARRAY;
-
-/** The integer array constant. */
-static int* INTEGER_ARRAY = NUMBER_2_INTEGER_ARRAY;
-
-/** The pointer array constant. */
-static int* POINTER_ARRAY = NUMBER_3_INTEGER_ARRAY;
-
-/** The double array constant. */
-static int* DOUBLE_ARRAY = NUMBER_4_INTEGER_ARRAY;
-
-/** The unsigned long array constant. */
-static int* UNSIGNED_LONG_ARRAY = NUMBER_5_INTEGER_ARRAY;
-
-//
-// Internal memory abstraction.
-//
-
-/** The internal memory abstraction. */
-static char INTERNAL_MEMORY_ABSTRACTION_ARRAY[] = {'i', 'n', 't', 'e', 'r', 'n', 'a', 'l', '_', 'm', 'e', 'm', 'o', 'r', 'y'};
-static char* INTERNAL_MEMORY_ABSTRACTION = INTERNAL_MEMORY_ABSTRACTION_ARRAY;
-static int* INTERNAL_MEMORY_ABSTRACTION_COUNT = NUMBER_16_INTEGER_ARRAY;
-
-//
-// Compound abstraction.
-//
-// Compound models consist of other compound or primitive models.
-//
-// CAUTION! This is also used as knowledge memory abstraction!
-//
-
-/** The compound abstraction. */
-static char COMPOUND_ABSTRACTION_ARRAY[] = {'c', 'o', 'm', 'p', 'o', 'u', 'n', 'd'};
-static char* COMPOUND_ABSTRACTION = COMPOUND_ABSTRACTION_ARRAY;
-static int* COMPOUND_ABSTRACTION_COUNT = NUMBER_8_INTEGER_ARRAY;
-
-//
-// Signal memory abstraction.
-//
-
-/** The signal memory abstraction. */
-static char SIGNAL_MEMORY_ABSTRACTION_ARRAY[] = {'s', 'i', 'g', 'n', 'a', 'l', '_', 'm', 'e', 'm', 'o', 'r', 'y'};
-static char* SIGNAL_MEMORY_ABSTRACTION = SIGNAL_MEMORY_ABSTRACTION_ARRAY;
-static int* SIGNAL_MEMORY_ABSTRACTION_COUNT = NUMBER_13_INTEGER_ARRAY;
 
 //
 // Knowledge abstraction.
@@ -207,6 +154,13 @@ static int* BMP_ABSTRACTION_COUNT = NUMBER_3_INTEGER_ARRAY;
 //
 // Text abstractions.
 //
+
+/** The cybol abstraction. */
+/*??
+static char CYBOL_ABSTRACTION_ARRAY[] = {'c', 'y', 'b', 'o', 'l'};
+static char* CYBOL_ABSTRACTION = CYBOL_ABSTRACTION_ARRAY;
+static int* CYBOL_ABSTRACTION_COUNT = NUMBER_13_INTEGER_ARRAY;
+*/
 
 /** The model diagram abstraction. */
 static char MODEL_DIAGRAM_ABSTRACTION_ARRAY[] = {'m', 'o', 'd', 'e', 'l', '_', 'd', 'i', 'a', 'g', 'r', 'a', 'm'};

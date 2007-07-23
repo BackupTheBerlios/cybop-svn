@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2007-06-29 22:55:31 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2007-07-23 23:47:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -105,12 +105,14 @@ void initialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
         COMPOUND_ABSTRACTION, COMPOUND_ABSTRACTION_COUNT,
         FILE_CHANNEL, FILE_CHANNEL_COUNT);
 
+/*??
     // Add enable parameter model to startup model details.
     set_compound_element_by_name(md, (void*) mdc, (void*) mds,
         (void*) OPERATION_ENABLE_NAME, (void*) OPERATION_ENABLE_NAME_COUNT, (void*) OPERATION_ENABLE_NAME_COUNT,
         (void*) BOOLEAN_ABSTRACTION, (void*) BOOLEAN_ABSTRACTION_COUNT, (void*) BOOLEAN_ABSTRACTION_COUNT,
         (void*) TRUE_BOOLEAN, (void*) PRIMITIVE_COUNT, (void*) PRIMITIVE_COUNT,
         *NULL_POINTER, *NULL_POINTER, *NULL_POINTER);
+*/
 
     log_message_debug("\n\n");
     log_message_debug("Debug: Add initial signal to signal memory.");

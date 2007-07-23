@@ -24,7 +24,7 @@
  * - create a model in memory
  * - destroy a model in memory
  *
- * @version $Revision: 1.19 $ $Date: 2007-04-16 15:50:29 $ $Author: christian $
+ * @version $Revision: 1.20 $ $Date: 2007-07-23 23:47:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -32,6 +32,8 @@
 #define ALLOCATOR_SOURCE
 
 #include "../globals/constants/cybol/cybol_abstraction_constants.c"
+#include "../globals/constants/memory_structure/array_constants.c"
+#include "../globals/constants/memory_structure/memory_abstraction_constants.c"
 #include "../memoriser/array.c"
 #include "../memoriser/allocator/character_vector_allocator.c"
 #include "../memoriser/allocator/complex_allocator.c"

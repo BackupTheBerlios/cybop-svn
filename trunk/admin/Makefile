@@ -22,7 +22,7 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.47 $ $Date: 2007-06-29 22:55:30 $ $Author: christian $
+# @version $Revision: 1.48 $ $Date: 2007-07-23 23:47:57 $ $Author: christian $
 # @author Michael Simon <michael.simon@gmx.net>
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
@@ -206,8 +206,6 @@ MEMORISER_CONVERTER_SOURCES = $(wildcard $(SRC)/memoriser/converter/*.c)
 MEMORISER_CONVERTER_OBJECTS = $(patsubst $(SRC)/memoriser/converter/%.c,$(OBJ)/memoriser/converter/%.o,$(MEMORISER_CONVERTER_SOURCES))
 MEMORISER_MAPPER_SOURCES = $(wildcard $(SRC)/memoriser/mapper/*.c)
 MEMORISER_MAPPER_OBJECTS = $(patsubst $(SRC)/memoriser/mapper/%.c,$(OBJ)/memoriser/mapper/%.o,$(MEMORISER_MAPPER_SOURCES))
-MEMORISER_TRANSLATOR_SOURCES = $(wildcard $(SRC)/memoriser/translator/*.c)
-MEMORISER_TRANSLATOR_OBJECTS = $(patsubst $(SRC)/memoriser/translator/%.c,$(OBJ)/memoriser/translator/%.o,$(MEMORISER_TRANSLATOR_SOURCES))
 
 #
 # Compiles all cyboi source files.
@@ -259,7 +257,6 @@ all: export \
 	$(MEMORISER_COMMUNICATOR_OBJECTS) \
 	$(MEMORISER_CONVERTER_OBJECTS) \
 	$(MEMORISER_MAPPER_OBJECTS) \
-	$(MEMORISER_TRANSLATOR_OBJECTS) \
 # Compile source files.
 # The -mwindows switch is needed to create Windows executables instead of console applications.
 # It assures the appropriate Windows libraries are linked in for you. To get a console screen
@@ -331,7 +328,6 @@ create:
 	-cd $(OBJ); mkdir memoriser/communicator
 	-cd $(OBJ); mkdir memoriser/converter
 	-cd $(OBJ); mkdir memoriser/mapper
-	-cd $(OBJ); mkdir memoriser/translator
 
 #$(OBJ)/%.o: $(SRC)/%.c
 #       $(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
@@ -448,9 +444,6 @@ $(OBJ)/memoriser/converter/%.o: $(SRC)/memoriser/converter/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
 $(OBJ)/memoriser/mapper/%.o: $(SRC)/memoriser/mapper/%.c
-	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
-
-$(OBJ)/memoriser/translator/%.o: $(SRC)/memoriser/translator/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
 #

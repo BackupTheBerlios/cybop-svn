@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.22 $ $Date: 2007-07-12 22:02:14 $ $Author: christian $
+ * @version $Revision: 1.23 $ $Date: 2007-07-23 23:47:57 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -37,7 +37,6 @@
 #include "../memoriser/communicator.c"
 #include "../memoriser/converter.c"
 #include "../memoriser/allocator.c"
-#include "../memoriser/translator.c"
 
 /**
  * Builds a list name.

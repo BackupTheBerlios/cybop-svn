@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2007-07-12 22:02:14 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2007-07-23 23:47:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -199,15 +199,6 @@ static char WUI_ALIGN_ATTRIBUTE_NAME_ARRAY[] = {'a', 'l', 'i', 'g', 'n'};
 static char* WUI_ALIGN_ATTRIBUTE_NAME = WUI_ALIGN_ATTRIBUTE_NAME_ARRAY;
 static int* WUI_ALIGN_ATTRIBUTE_NAME_COUNT = NUMBER_5_INTEGER_ARRAY;
 */
-
-//
-// Operation names.
-//
-
-/** The operation enable name. */
-static char OPERATION_ENABLE_NAME_ARRAY[] = {'e', 'n', 'a', 'b', 'l', 'e'};
-static char* OPERATION_ENABLE_NAME = OPERATION_ENABLE_NAME_ARRAY;
-static int* OPERATION_ENABLE_NAME_COUNT = NUMBER_6_INTEGER_ARRAY;
 
 //
 // Boolean names.
@@ -424,25 +415,10 @@ static char CREATE_NAME_NAME_ARRAY[] = {'n', 'a', 'm', 'e'};
 static char* CREATE_NAME_NAME = CREATE_NAME_NAME_ARRAY;
 static int* CREATE_NAME_NAME_COUNT = NUMBER_4_INTEGER_ARRAY;
 
-/** The create channel name. */
-static char CREATE_CHANNEL_NAME_ARRAY[] = {'c', 'h', 'a', 'n', 'n', 'e', 'l'};
-static char* CREATE_CHANNEL_NAME = CREATE_CHANNEL_NAME_ARRAY;
-static int* CREATE_CHANNEL_NAME_COUNT = NUMBER_7_INTEGER_ARRAY;
-
 /** The create abstraction name. */
 static char CREATE_ABSTRACTION_NAME_ARRAY[] = {'a', 'b', 's', 't', 'r', 'a', 'c', 't', 'i', 'o', 'n'};
 static char* CREATE_ABSTRACTION_NAME = CREATE_ABSTRACTION_NAME_ARRAY;
 static int* CREATE_ABSTRACTION_NAME_COUNT = NUMBER_11_INTEGER_ARRAY;
-
-/** The create model name. */
-static char CREATE_MODEL_NAME_ARRAY[] = {'m', 'o', 'd', 'e', 'l'};
-static char* CREATE_MODEL_NAME = CREATE_MODEL_NAME_ARRAY;
-static int* CREATE_MODEL_NAME_COUNT = NUMBER_5_INTEGER_ARRAY;
-
-/** The create details name. */
-static char CREATE_DETAILS_NAME_ARRAY[] = {'d', 'e', 't', 'a', 'i', 'l', 's'};
-static char* CREATE_DETAILS_NAME = CREATE_DETAILS_NAME_ARRAY;
-static int* CREATE_DETAILS_NAME_COUNT = NUMBER_7_INTEGER_ARRAY;
 
 /** The create element name. */
 static char CREATE_ELEMENT_NAME_ARRAY[] = {'e', 'l', 'e', 'm', 'e', 'n', 't'};
@@ -558,6 +534,7 @@ static int* SEND_URL_NAME_COUNT = NUMBER_3_INTEGER_ARRAY;
 //
 
 /** The receive name name. */
+/*??
 static char RECEIVE_NAME_NAME_ARRAY[] = {'n', 'a', 'm', 'e'};
 static char* RECEIVE_NAME_NAME = RECEIVE_NAME_NAME_ARRAY;
 static int* RECEIVE_NAME_NAME_COUNT = NUMBER_4_INTEGER_ARRAY;
@@ -567,22 +544,35 @@ static char RECEIVE_CHANNEL_NAME_ARRAY[] = {'c', 'h', 'a', 'n', 'n', 'e', 'l'};
 static char* RECEIVE_CHANNEL_NAME = RECEIVE_CHANNEL_NAME_ARRAY;
 static int* RECEIVE_CHANNEL_NAME_COUNT = NUMBER_7_INTEGER_ARRAY;
 
-/** The receive abstraction name. */
-static char RECEIVE_ABSTRACTION_NAME_ARRAY[] = {'a', 'b', 's', 't', 'r', 'a', 'c', 't', 'i', 'o', 'n'};
-static char* RECEIVE_ABSTRACTION_NAME = RECEIVE_ABSTRACTION_NAME_ARRAY;
-static int* RECEIVE_ABSTRACTION_NAME_COUNT = NUMBER_11_INTEGER_ARRAY;
+/** The receive language name. */
+static char RECEIVE_LANGUAGE_NAME_ARRAY[] = {'l', 'a', 'n', 'g', 'u', 'a', 'g', 'e'};
+static char* RECEIVE_LANGUAGE_NAME = RECEIVE_LANGUAGE_NAME_ARRAY;
+static int* RECEIVE_LANGUAGE_NAME_COUNT = NUMBER_8_INTEGER_ARRAY;
+
+/** The receive message name. */
+static char RECEIVE_MESSAGE_NAME_ARRAY[] = {'m', 'e', 's', 's', 'a', 'g', 'e'};
+static char* RECEIVE_MESSAGE_NAME = RECEIVE_MESSAGE_NAME_ARRAY;
+static int* RECEIVE_MESSAGE_NAME_COUNT = NUMBER_7_INTEGER_ARRAY;
 
 /** The receive model name. */
 static char RECEIVE_MODEL_NAME_ARRAY[] = {'m', 'o', 'd', 'e', 'l'};
 static char* RECEIVE_MODEL_NAME = RECEIVE_MODEL_NAME_ARRAY;
 static int* RECEIVE_MODEL_NAME_COUNT = NUMBER_5_INTEGER_ARRAY;
 
+/** The receive details name. */
+/*??
+static char RECEIVE_DETAILS_NAME_ARRAY[] = {'d', 'e', 't', 'a', 'i', 'l', 's'};
+static char* RECEIVE_DETAILS_NAME = RECEIVE_DETAILS_NAME_ARRAY;
+static int* RECEIVE_DETAILS_NAME_COUNT = NUMBER_7_INTEGER_ARRAY;
+
 /** The receive element name. */
+/*??
 static char RECEIVE_ELEMENT_NAME_ARRAY[] = {'e', 'l', 'e', 'm', 'e', 'n', 't'};
 static char* RECEIVE_ELEMENT_NAME = RECEIVE_ELEMENT_NAME_ARRAY;
 static int* RECEIVE_ELEMENT_NAME_COUNT = NUMBER_7_INTEGER_ARRAY;
 
 /** The receive whole name. */
+/*??
 static char RECEIVE_WHOLE_NAME_ARRAY[] = {'w', 'h', 'o', 'l', 'e'};
 static char* RECEIVE_WHOLE_NAME = RECEIVE_WHOLE_NAME_ARRAY;
 static int* RECEIVE_WHOLE_NAME_COUNT = NUMBER_5_INTEGER_ARRAY;

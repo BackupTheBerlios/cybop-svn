@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.13 $ $Date: 2007-07-12 22:02:14 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2007-07-23 23:47:57 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -37,8 +37,8 @@
 #include "../../memoriser/allocator.c"
 #include "../../memoriser/array.c"
 #include "../../memoriser/communicator.c"
+#include "../../memoriser/converter/compound_converter.c"
 #include "../../memoriser/converter.c"
-#include "../../memoriser/translator.c"
 
 /**
  * Receives a primitive model from the file system.
@@ -73,6 +73,7 @@
  * @param p10 the source channel
  * @param p11 the source channel count
  */
+/*??
 void receive_file_system_primitive_model(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
     void* p6, void* p7, void* p8, void* p9, void* p10, void* p11) {
 
@@ -154,6 +155,7 @@ void receive_file_system_primitive_model(void* p0, void* p1, void* p2, void* p3,
  * @param p10 the source channel
  * @param p11 the source channel count
  */
+/*??
 void receive_file_system_compound_model(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
     void* p6, void* p7, void* p8, void* p9, void* p10, void* p11) {
 
@@ -229,7 +231,7 @@ void receive_file_system_compound_model(void* p0, void* p1, void* p2, void* p3, 
     allocate(p0, p2, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
 
     // Decode document model according to given document type.
-    decode(p0, p1, p2, pm, (void*) &pmc, p8, p9);
+    parse_compound_decode_cybol(p0, p1, p2, pm, (void*) &pmc);
 
     if (w == *NUMBER_0_INTEGER) {
 
@@ -283,6 +285,7 @@ void receive_file_system_compound_model(void* p0, void* p1, void* p2, void* p3, 
  * @param p10 the source channel
  * @param p11 the source channel count
  */
+/*??
 void receive_file_system_model(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
     void* p6, void* p7, void* p8, void* p9, void* p10, void* p11) {
 
@@ -306,172 +309,31 @@ void receive_file_system_model(void* p0, void* p1, void* p2, void* p3, void* p4,
 /**
  * Receives a message from the file system.
  *
- * This procedure reads the given file, creates a knowledge model and adds it to the given whole element,
- * or to the knowledge memory root directly, if no whole element is given.
- *
- * Expected parameters:
- * - name
- * - channel
- * - abstraction
- * - model
- * - element (may be "part" or "meta")
- * - whole
- *
  * @param p0 the knowledge memory
  * @param p1 the knowledge memory count
  * @param p2 the knowledge memory size
- * @param p3 the whole model
- * @param p4 the whole model count
- * @param p5 the whole model size
- * @param p6 the whole details
- * @param p7 the whole details count
- * @param p8 the whole details size
- * @param p9 the name model
- * @param p10 the name model count
- * @param p11 the name abstraction
- * @param p12 the name abstraction count
- * @param p13 the abstraction model
- * @param p14 the abstraction model count
- * @param p15 the abstraction abstraction
- * @param p16 the abstraction abstraction count
- * @param p17 the channel model
- * @param p18 the channel model count
  * @param p19 the model model
  * @param p20 the model model count
- * @param p21 the details model
- * @param p22 the details model count
- * @param p23 the element model
- * @param p24 the element model count
  */
+/*??
 void receive_file_system(void* p0, void* p1, void* p2,
     void* p3, void* p4, void* p5, void* p6, void* p7, void* p8,
-    void* p9, void* p10, void* p11, void* p12,
-    void* p13, void* p14, void* p15, void* p16,
-    void* p17, void* p18, void* p19, void* p20,
     void* p21, void* p22, void* p23, void* p24) {
 
     log_message_debug("Receive file system message.");
 
-    // The knowledge model name.
-    void* n = *NULL_POINTER;
-    int* nc = (int*) *NULL_POINTER;
-    int* ns = (int*) *NULL_POINTER;
-    // The knowledge model abstraction.
-    void* a = *NULL_POINTER;
-    int* ac = (int*) *NULL_POINTER;
-    int* as = (int*) *NULL_POINTER;
     // The knowledge model model.
     void* m = *NULL_POINTER;
     int* mc = (int*) *NULL_POINTER;
     int* ms = (int*) *NULL_POINTER;
-    // The knowledge model details.
-    void* d = *NULL_POINTER;
-    int* dc = (int*) *NULL_POINTER;
-    int* ds = (int*) *NULL_POINTER;
 
-    // Create knowledge model name.
-    allocate((void*) &nc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    *nc = *NUMBER_0_INTEGER;
-    allocate((void*) &ns, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    *ns = *NUMBER_0_INTEGER;
-    allocate((void*) &n, (void*) ns, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
-
-    // A knowledge model channel is not allocated,
-    // since that is only needed temporarily for model loading.
-
-    // Create knowledge model abstraction.
-    allocate((void*) &ac, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    *ac = *NUMBER_0_INTEGER;
-    allocate((void*) &as, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    *as = *NUMBER_0_INTEGER;
-    allocate((void*) &a, (void*) as, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
-
-    // Create knowledge model model.
-    allocate((void*) &mc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    *mc = *NUMBER_0_INTEGER;
-    allocate((void*) &ms, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    *ms = *NUMBER_0_INTEGER;
-    allocate((void*) &m, (void*) ms, p13, p14);
-
-    // Create knowledge model details.
-    allocate((void*) &dc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    *dc = *NUMBER_0_INTEGER;
-    allocate((void*) &ds, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    *ds = *NUMBER_0_INTEGER;
-    allocate((void*) &d, (void*) ds, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
-
-    // Receive knowledge model name.
-    receive_file_system_model((void*) &n, (void*) nc, (void*) ns, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, p9, p10, p11, p12, (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
-    // Receive knowledge model abstraction.
-    receive_file_system_model((void*) &a, (void*) ac, (void*) as, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, p13, p14, p15, p16, (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
     // Receive knowledge model model and details.
     // CAUTION! Some file formats (like the German xDT format for medical data exchange)
     // contain both, the knowledge model model AND the knowledge model details, in one file.
     // To cover these cases, the model and details are received TOGETHER, in just one operation.
     receive_file_system_model((void*) &m, (void*) mc, (void*) ms, (void*) &d, (void*) dc, (void*) ds, p19, p20, p13, p14, p17, p18);
-    // Receive knowledge model details.
-    // This is for other cases, in which special knowledge model details are given as parameter.
-    // For details, the abstraction is ALWAYS "compound" and the channel is ALWAYS "file".
-    receive_file_system_model((void*) &d, (void*) dc, (void*) ds, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, p21, p22, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT, (void*) FILE_CHANNEL, (void*) FILE_CHANNEL_COUNT);
-
-    // The comparison result.
-    int r = *NUMBER_0_INTEGER;
-
-    if (r == *NUMBER_0_INTEGER) {
-
-        compare_arrays(p23, p24, (void*) CREATE_PART_ELEMENT_MODEL, (void*) CREATE_PART_ELEMENT_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != *NUMBER_0_INTEGER) {
-
-            if (p3 != *NULL_POINTER) {
-
-                log_message_debug("Add part knowledge model to whole model.");
-
-                // Use the determined whole model, if it exists.
-                set_compound_element_by_name(p3, p4, p5,
-                    n, (void*) nc, (void*) ns,
-                    a, (void*) ac, (void*) as,
-                    m, (void*) mc, (void*) ms,
-                    d, (void*) dc, (void*) ds);
-
-            } else {
-
-                log_message_debug("Add part knowledge model to knowledge memory root.");
-
-                // Use the knowledge memory root if the determined whole model is null.
-                set_compound_element_by_name(p0, p1, p2,
-                    n, (void*) nc, (void*) ns,
-                    a, (void*) ac, (void*) as,
-                    m, (void*) mc, (void*) ms,
-                    d, (void*) dc, (void*) ds);
-            }
-        }
-    }
-
-    if (r == *NUMBER_0_INTEGER) {
-
-        compare_arrays(p23, p24, (void*) CREATE_META_ELEMENT_MODEL, (void*) CREATE_META_ELEMENT_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != *NUMBER_0_INTEGER) {
-
-            if (p6 != *NULL_POINTER) {
-
-                log_message_debug("Add meta knowledge model to whole details.");
-
-                // Use the determined whole details model, if it exists.
-                set_compound_element_by_name(p6, p7, p8,
-                    n, (void*) nc, (void*) ns,
-                    a, (void*) ac, (void*) as,
-                    m, (void*) mc, (void*) ms,
-                    d, (void*) dc, (void*) ds);
-
-            } else {
-
-                log_message_debug("Could not add meta knowledge model to whole details. The whole details is null.");
-            }
-        }
-    }
 }
+*/
 
 /* GNU_LINUX_OPERATING_SYSTEM */
 #endif

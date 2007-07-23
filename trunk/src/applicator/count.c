@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.22 $ $Date: 2007-06-16 21:53:30 $ $Author: christian $
+ * @version $Revision: 1.23 $ $Date: 2007-07-23 23:47:57 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -40,7 +40,6 @@
 #include "../memoriser/array.c"
 #include "../memoriser/communicator.c"
 #include "../memoriser/converter.c"
-#include "../memoriser/translator.c"
 
 /**
  * Counts compound parts.

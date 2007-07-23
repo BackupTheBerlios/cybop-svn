@@ -14,9 +14,29 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.11 $ $Date: 2007-07-15 18:44:21 $ $Author: christian $
+# @version $Revision: 1.12 $ $Date: 2007-07-23 23:47:57 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2007-07-23  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Adapt applicator/create.c function
+        * Move some constants from globals/constants/cybol/cybol_abstraction_constants.c
+            to globals/constants/memory_structure/array_constants.c and globals/constants/memory_structure/memory_abstraction_constants.c
+        * Add "memoriser/mapper/abstraction_mapper.c"
+        * Change "receive_file_system_model" into "parse" function, in compound_converter.c
+        * Delete xml_converter.c, translator.c, cybol_translator.c, xdt_translator.c
+        * Merge cybol_translator.c into compound_converter.c
+        * Merge xml_converter.c into compound_converter.c
+        * Adapt properties of "receive" operation: rename "abstraction" into "language", add "message" and delete superfluous ones;
+            mind the change in meaning of the "model" property, which now labels an existing,
+            empty model that was created before and is to be filled in the "receive" operation
+
+2007-07-19  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Rename "abstraction" property of "create" operation into "language" and delete superfluous property constants
+        * Implement checks in "compound_accessor.c" to avoid segmentation fault when trying to retrieve
+            a compound element with empty name and abstraction "knowledge" or "encapsulated"
 
 2007-07-15  Christian Heller  <christian.heller@tuxtax.de>
 

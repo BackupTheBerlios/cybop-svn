@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.31 $ $Date: 2007-07-12 22:02:14 $ $Author: christian $
+ * @version $Revision: 1.32 $ $Date: 2007-07-23 23:47:57 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -86,6 +86,7 @@ void receive_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
 
     log_message_debug("Receive message.");
 
+/*??
     // The name name, abstraction, model, details.
     void** nn = NULL_POINTER;
     void** nnc = NULL_POINTER;
@@ -99,6 +100,7 @@ void receive_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
     void** nd = NULL_POINTER;
     void** ndc = NULL_POINTER;
     void** nds = NULL_POINTER;
+*/
     // The channel name, abstraction, model, details.
     void** cn = NULL_POINTER;
     void** cnc = NULL_POINTER;
@@ -112,20 +114,20 @@ void receive_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
     void** cd = NULL_POINTER;
     void** cdc = NULL_POINTER;
     void** cds = NULL_POINTER;
-    // The abstraction name, abstraction, model, details.
-    void** an = NULL_POINTER;
-    void** anc = NULL_POINTER;
-    void** ans = NULL_POINTER;
-    void** aa = NULL_POINTER;
-    void** aac = NULL_POINTER;
-    void** aas = NULL_POINTER;
-    void** am = NULL_POINTER;
-    void** amc = NULL_POINTER;
-    void** ams = NULL_POINTER;
-    void** ad = NULL_POINTER;
-    void** adc = NULL_POINTER;
-    void** ads = NULL_POINTER;
-    // The model name, abstraction, model, details.
+    // The language name, abstraction, model, details.
+    void** ln = NULL_POINTER;
+    void** lnc = NULL_POINTER;
+    void** lns = NULL_POINTER;
+    void** la = NULL_POINTER;
+    void** lac = NULL_POINTER;
+    void** las = NULL_POINTER;
+    void** lm = NULL_POINTER;
+    void** lmc = NULL_POINTER;
+    void** lms = NULL_POINTER;
+    void** ld = NULL_POINTER;
+    void** ldc = NULL_POINTER;
+    void** lds = NULL_POINTER;
+    // The message name, abstraction, model, details.
     void** mn = NULL_POINTER;
     void** mnc = NULL_POINTER;
     void** mns = NULL_POINTER;
@@ -138,6 +140,20 @@ void receive_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
     void** md = NULL_POINTER;
     void** mdc = NULL_POINTER;
     void** mds = NULL_POINTER;
+    // The model name, abstraction, model, details.
+    void** mon = NULL_POINTER;
+    void** monc = NULL_POINTER;
+    void** mons = NULL_POINTER;
+    void** moa = NULL_POINTER;
+    void** moac = NULL_POINTER;
+    void** moas = NULL_POINTER;
+    void** mom = NULL_POINTER;
+    void** momc = NULL_POINTER;
+    void** moms = NULL_POINTER;
+    void** mod = NULL_POINTER;
+    void** modc = NULL_POINTER;
+    void** mods = NULL_POINTER;
+/*??
     // The details name, abstraction, model, details.
     void** dn = NULL_POINTER;
     void** dnc = NULL_POINTER;
@@ -177,6 +193,7 @@ void receive_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
     void** wd = NULL_POINTER;
     void** wdc = NULL_POINTER;
     void** wds = NULL_POINTER;
+*/
     // The root name, abstraction, model, details.
     void** rn = NULL_POINTER;
     void** rnc = NULL_POINTER;
@@ -230,45 +247,57 @@ void receive_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
     void** bdc = NULL_POINTER;
     void** bds = NULL_POINTER;
 
+/*??
     // Get name.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) CREATE_NAME_NAME, (void*) CREATE_NAME_NAME_COUNT,
+        (void*) RECEIVE_NAME_NAME, (void*) RECEIVE_NAME_NAME_COUNT,
         (void*) &nn, (void*) &nnc, (void*) &nns,
         (void*) &na, (void*) &nac, (void*) &nas,
         (void*) &nm, (void*) &nmc, (void*) &nms,
         (void*) &nd, (void*) &ndc, (void*) &nds,
         p3, p4);
+*/
 
     // Get channel.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) CREATE_CHANNEL_NAME, (void*) CREATE_CHANNEL_NAME_COUNT,
+        (void*) RECEIVE_CHANNEL_NAME, (void*) RECEIVE_CHANNEL_NAME_COUNT,
         (void*) &cn, (void*) &cnc, (void*) &cns,
         (void*) &ca, (void*) &cac, (void*) &cas,
         (void*) &cm, (void*) &cmc, (void*) &cms,
         (void*) &cd, (void*) &cdc, (void*) &cds,
         p3, p4);
 
-    // Get abstraction.
+    // Get language.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) CREATE_ABSTRACTION_NAME, (void*) CREATE_ABSTRACTION_NAME_COUNT,
-        (void*) &an, (void*) &anc, (void*) &ans,
-        (void*) &aa, (void*) &aac, (void*) &aas,
-        (void*) &am, (void*) &amc, (void*) &ams,
-        (void*) &ad, (void*) &adc, (void*) &ads,
+        (void*) RECEIVE_LANGUAGE_NAME, (void*) RECEIVE_LANGUAGE_NAME_COUNT,
+        (void*) &ln, (void*) &lnc, (void*) &lns,
+        (void*) &la, (void*) &lac, (void*) &las,
+        (void*) &lm, (void*) &lmc, (void*) &lms,
+        (void*) &ld, (void*) &ldc, (void*) &lds,
         p3, p4);
 
-    // Get model.
+    // Get message.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) CREATE_MODEL_NAME, (void*) CREATE_MODEL_NAME_COUNT,
+        (void*) RECEIVE_MESSAGE_NAME, (void*) RECEIVE_MESSAGE_NAME_COUNT,
         (void*) &mn, (void*) &mnc, (void*) &mns,
         (void*) &ma, (void*) &mac, (void*) &mas,
         (void*) &mm, (void*) &mmc, (void*) &mms,
         (void*) &md, (void*) &mdc, (void*) &mds,
         p3, p4);
 
+    // Get model.
+    get_universal_compound_element_by_name(p0, p1,
+        (void*) RECEIVE_MODEL_NAME, (void*) RECEIVE_MODEL_NAME_COUNT,
+        (void*) &mon, (void*) &monc, (void*) &mons,
+        (void*) &moa, (void*) &moac, (void*) &moas,
+        (void*) &mom, (void*) &momc, (void*) &moms,
+        (void*) &mod, (void*) &modc, (void*) &mods,
+        p3, p4);
+
+/*??
     // Get details.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) CREATE_DETAILS_NAME, (void*) CREATE_DETAILS_NAME_COUNT,
+        (void*) RECEIVE_DETAILS_NAME, (void*) RECEIVE_DETAILS_NAME_COUNT,
         (void*) &dn, (void*) &dnc, (void*) &dns,
         (void*) &da, (void*) &dac, (void*) &das,
         (void*) &dm, (void*) &dmc, (void*) &dms,
@@ -277,7 +306,7 @@ void receive_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
 
     // Get element.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) CREATE_ELEMENT_NAME, (void*) CREATE_ELEMENT_NAME_COUNT,
+        (void*) RECEIVE_ELEMENT_NAME, (void*) RECEIVE_ELEMENT_NAME_COUNT,
         (void*) &en, (void*) &enc, (void*) &ens,
         (void*) &ea, (void*) &eac, (void*) &eas,
         (void*) &em, (void*) &emc, (void*) &ems,
@@ -286,12 +315,13 @@ void receive_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
 
     // Get whole.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) CREATE_WHOLE_NAME, (void*) CREATE_WHOLE_NAME_COUNT,
+        (void*) RECEIVE_WHOLE_NAME, (void*) RECEIVE_WHOLE_NAME_COUNT,
         (void*) &wn, (void*) &wnc, (void*) &wns,
         (void*) &wa, (void*) &wac, (void*) &was,
         (void*) &wm, (void*) &wmc, (void*) &wms,
         (void*) &wd, (void*) &wdc, (void*) &wds,
         p3, p4);
+*/
 
     // Get root.
     get_universal_compound_element_by_name(p0, p1,
@@ -338,8 +368,7 @@ void receive_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
 
         if (r != *NUMBER_0_INTEGER) {
 
-            receive_file_system(p3, p4, p5, *wm, *wmc, *wms, *wd, *wdc, *wds,
-                *nm, *nmc, *na, *nac, *am, *amc, *aa, *aac, *cm, *cmc, *mm, *mmc, *dm, *dmc, *em, *emc);
+//??            receive_file_system(mn, mnc, mns, mon, monc, mons);
         }
     }
 

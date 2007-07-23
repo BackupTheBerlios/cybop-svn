@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.38 $ $Date: 2007-07-15 18:44:21 $ $Author: christian $
+ * @version $Revision: 1.39 $ $Date: 2007-07-23 23:47:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -31,6 +31,7 @@
 #include "../../globals/constants/cybol/cybol_constants.c"
 #include "../../globals/constants/integer/integer_constants.c"
 #include "../../globals/constants/log/log_message_constants.c"
+#include "../../globals/constants/memory_structure/array_constants.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/logger/logger.c"
@@ -250,6 +251,9 @@ void get_compound_element_name_and_remaining_name(void* p0, void* p1, void* p2, 
 
                             int* fc = (int*) p1;
 
+                            // CAUTION! Do NOT remove this check for null pointer!
+                            // Otherwise, the "get_array_elements_index" function below
+                            // might crash with a segmentation fault!
                             if (p0 != *NULL_POINTER) {
 
                                 log_message_debug("Debug: Get compound element name and remaining name.");

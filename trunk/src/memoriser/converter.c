@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.31 $ $Date: 2007-06-22 07:07:14 $ $Author: christian $
+ * @version $Revision: 1.32 $ $Date: 2007-07-23 23:47:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -28,13 +28,15 @@
 #define CONVERTER_SOURCE
 
 #include "../globals/constants/cybol/cybol_abstraction_constants.c"
-#include "../globals/constants/integer/integer_constants.c"
 #include "../globals/constants/cybol/cybol_model_constants.c"
+#include "../globals/constants/integer/integer_constants.c"
+#include "../globals/constants/memory_structure/memory_abstraction_constants.c"
 #include "../globals/constants/pointer/pointer_constants.c"
 #include "../memoriser/array.c"
 #include "../memoriser/converter/boolean_converter.c"
 #include "../memoriser/converter/character_vector_converter.c"
 #include "../memoriser/converter/complex_converter.c"
+#include "../memoriser/converter/compound_converter.c"
 #include "../memoriser/converter/date_time_converter.c"
 #include "../memoriser/converter/double_vector_converter.c"
 #include "../memoriser/converter/fraction_converter.c"
@@ -46,7 +48,6 @@
 #include "../memoriser/converter/x_window_system_converter.c"
 #include "../memoriser/converter/xdt_converter.c"
 #include "../memoriser/converter/xhtml_converter.c"
-#include "../memoriser/converter/xml_converter.c"
 
 /**
  * Parses the byte stream according to the given document type
@@ -76,7 +77,7 @@ void parse(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
 
         if (r != *NUMBER_0_INTEGER) {
 
-            parse_xml(p0, p1, p2, p6, p7);
+            parse_compound(p0, p1, p2, p6, p7);
         }
     }
 
@@ -226,7 +227,7 @@ void parse(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
 
         if (r != *NUMBER_0_INTEGER) {
 
-            parse_model_diagram(p0, p1, p2, p3, p4);
+            parse_model_diagram(p0, p1, p2, p6, p7);
         }
     }
 
@@ -285,7 +286,7 @@ void serialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
 
         if (r != *NUMBER_0_INTEGER) {
 
-            serialise_xml(p0, p1, p2, p7, p8);
+            serialise_compound(p0, p1, p2, p7, p8);
         }
     }
 
