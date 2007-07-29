@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.16 $ $Date: 2007-05-26 21:19:58 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2007-07-29 01:53:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -42,6 +42,140 @@
 void handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
     void* p7, void* p8, void* p9, void* p10, void* p11,
     void* p12, void* p13,  void* p14, void* p15, void* p16, void* p17, void* p18);
+
+/**
+ * Handles a compound signal's part.
+ *
+ * @param p0 the internal memory
+ * @param p1 the knowledge memory
+ * @param p2 the knowledge memory count
+ * @param p3 the knowledge memory size
+ * @param p4 the signal memory
+ * @param p5 the signal memory count
+ * @param p6 the signal memory size
+ * @param p7 the interrupt request flag
+ * @param p8 the signal memory mutex
+ * @param p9 the shutdown flag
+ * @param p10 the signal
+ * @param p11 the signal count
+ * @param p12 the signal priority
+ * @param p13 the signal id
+ * @param p14 the direct execution flag
+ * @param p15 the part index
+ */
+void handle_compound_part(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
+    void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14, void* p15) {
+
+    // The direct execution flag.
+    int* x = (int*) *NULL_POINTER;
+
+    if (p14 != *NULL_POINTER) {
+
+        x = (int*) p14;
+    };
+
+    // The abstractions, models, details.
+    void** pa = NULL_POINTER;
+    void** pac = NULL_POINTER;
+    void** pm = NULL_POINTER;
+    void** pmc = NULL_POINTER;
+    void** pd = NULL_POINTER;
+    void** pdc = NULL_POINTER;
+
+    // Get abstractions, models, details.
+    get_array_elements(p10, (void*) ABSTRACTIONS_INDEX, (void*) &pa, (void*) POINTER_ARRAY);
+    get_array_elements(p10, (void*) ABSTRACTIONS_COUNTS_INDEX, (void*) &pac, (void*) POINTER_ARRAY);
+    get_array_elements(p10, (void*) MODELS_INDEX, (void*) &pm, (void*) POINTER_ARRAY);
+    get_array_elements(p10, (void*) MODELS_COUNTS_INDEX, (void*) &pmc, (void*) POINTER_ARRAY);
+    get_array_elements(p10, (void*) DETAILS_INDEX, (void*) &pd, (void*) POINTER_ARRAY);
+    get_array_elements(p10, (void*) DETAILS_COUNTS_INDEX, (void*) &pdc, (void*) POINTER_ARRAY);
+
+    if (*pa != *NULL_POINTER) {
+
+        if (*pac != *NULL_POINTER) {
+
+            if (*pm != *NULL_POINTER) {
+
+                if (*pmc != *NULL_POINTER) {
+
+                    if (*pd != *NULL_POINTER) {
+
+                        if (*pdc != *NULL_POINTER) {
+
+                            log_message_debug("Handle compound part.");
+
+                            // The abstraction, model, details.
+                            void** a = NULL_POINTER;
+                            void** ac = NULL_POINTER;
+                            void** m = NULL_POINTER;
+                            void** mc = NULL_POINTER;
+                            void** d = NULL_POINTER;
+                            void** dc = NULL_POINTER;
+
+                            // Get abstraction, model, details.
+                            get_array_elements(*pa, p15, (void*) &a, (void*) POINTER_ARRAY);
+                            get_array_elements(*pac, p15, (void*) &ac, (void*) INTEGER_ARRAY);
+                            get_array_elements(*pm, p15, (void*) &m, (void*) POINTER_ARRAY);
+                            get_array_elements(*pmc, p15, (void*) &mc, (void*) INTEGER_ARRAY);
+                            get_array_elements(*pd, p15, (void*) &d, (void*) POINTER_ARRAY);
+                            get_array_elements(*pdc, p15, (void*) &dc, (void*) INTEGER_ARRAY);
+
+                            // Add part model (signal) to memory, using the whole signal's priority.
+                            // (Each signal has a priority. A signal may consist of part
+                            // signals. The part signals cannot have higher / lower priority
+                            // than their original whole signal.)
+/*??
+                            if (*x != *NUMBER_0_INTEGER) {
+*/
+                                handle(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, *a, *ac, *m, *mc, *d, *dc, p12, p13, p14);
+
+/*??
+                            } else {
+
+                                // Lock signal memory mutex.
+                                pthread_mutex_lock(*mt);
+
+                                set_signal(p4, p5, p6, *a, *ac, *m, *mc, *d, *dc, p12, p13);
+
+                                // Set interrupt request flag, in order to notify the signal checker
+                                // that a new signal has been placed in the signal memory.
+                                **irq = *NUMBER_1_INTEGER;
+
+                                // Unlock signal memory mutex.
+                                pthread_mutex_unlock(*mt);
+                            }
+*/
+
+                        } else {
+
+                            log_message_debug("Could not handle compound part. The part details counts is null.");
+                        }
+
+                    } else {
+
+                        log_message_debug("Could not handle compound part. The part details is null.");
+                    }
+
+                } else {
+
+                    log_message_debug("Could not handle compound part. The part models counts is null.");
+                }
+
+            } else {
+
+                log_message_debug("Could not handle compound part. The part models is null.");
+            }
+
+        } else {
+
+            log_message_debug("Could not handle compound part. The part abstractions counts is null.");
+        }
+
+    } else {
+
+        log_message_debug("Could not handle compound part. The part abstractions is null.");
+    }
+}
 
 /**
  * Handles the compound signal.
@@ -69,138 +203,23 @@ void handle_compound(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
 
         int* sc = (int*) p11;
 
-        // The direct execution flag.
-        int* x = (int*) *NULL_POINTER;
-
-        if (p14 != *NULL_POINTER) {
-
-            x = (int*) p14;
-        };
-
         log_message_debug("\n\n");
         log_message((void*) INFORMATION_LOG_LEVEL, (void*) HANDLE_COMPOUND_MESSAGE, (void*) HANDLE_COMPOUND_MESSAGE_COUNT);
 
-        // The abstractions, models, details.
-        void** pa = NULL_POINTER;
-        void** pac = NULL_POINTER;
-        void** pm = NULL_POINTER;
-        void** pmc = NULL_POINTER;
-        void** pd = NULL_POINTER;
-        void** pdc = NULL_POINTER;
+        // The loop variable.
+        int j = *NUMBER_0_INTEGER;
 
-        // Get abstractions, models, details.
-        get_array_elements(p10, (void*) ABSTRACTIONS_INDEX, (void*) &pa, (void*) POINTER_ARRAY);
-        get_array_elements(p10, (void*) ABSTRACTIONS_COUNTS_INDEX, (void*) &pac, (void*) POINTER_ARRAY);
-        get_array_elements(p10, (void*) MODELS_INDEX, (void*) &pm, (void*) POINTER_ARRAY);
-        get_array_elements(p10, (void*) MODELS_COUNTS_INDEX, (void*) &pmc, (void*) POINTER_ARRAY);
-        get_array_elements(p10, (void*) DETAILS_INDEX, (void*) &pd, (void*) POINTER_ARRAY);
-        get_array_elements(p10, (void*) DETAILS_COUNTS_INDEX, (void*) &pdc, (void*) POINTER_ARRAY);
+        while (*NUMBER_1_INTEGER) {
 
-        if (*pa != *NULL_POINTER) {
+            if (j >= *sc) {
 
-            if (*pac != *NULL_POINTER) {
-
-                if (*pm != *NULL_POINTER) {
-
-                    if (*pmc != *NULL_POINTER) {
-
-                        if (*pd != *NULL_POINTER) {
-
-                            if (*pdc != *NULL_POINTER) {
-
-                                // The abstraction, model, details.
-                                void** a = NULL_POINTER;
-                                void** ac = NULL_POINTER;
-                                void** m = NULL_POINTER;
-                                void** mc = NULL_POINTER;
-                                void** d = NULL_POINTER;
-                                void** dc = NULL_POINTER;
-
-                                // The loop variable.
-                                int j = 0;
-
-                                while (1) {
-
-                                    if (j >= *sc) {
-
-                                        break;
-                                    }
-
-                                    // Get abstraction, model, details.
-                                    get_array_elements(*pa, (void*) &j, (void*) &a, (void*) POINTER_ARRAY);
-                                    get_array_elements(*pac, (void*) &j, (void*) &ac, (void*) INTEGER_ARRAY);
-                                    get_array_elements(*pm, (void*) &j, (void*) &m, (void*) POINTER_ARRAY);
-                                    get_array_elements(*pmc, (void*) &j, (void*) &mc, (void*) INTEGER_ARRAY);
-                                    get_array_elements(*pd, (void*) &j, (void*) &d, (void*) POINTER_ARRAY);
-                                    get_array_elements(*pdc, (void*) &j, (void*) &dc, (void*) INTEGER_ARRAY);
-
-                                    // Add part model (signal) to memory, using the whole signal's priority.
-                                    // (Each signal has a priority. A signal may consist of part
-                                    // signals. The part signals cannot have higher / lower priority
-                                    // than their original whole signal.)
-/*??
-                                    if (*x == 0) {
-
-                                        // Lock signal memory mutex.
-                                        pthread_mutex_lock(*mt);
-
-                                        set_signal(p4, p5, p6, *a, *ac, *m, *mc, *d, *dc, p12, p13);
-
-                                        // Set interrupt request flag, in order to notify the signal checker
-                                        // that a new signal has been placed in the signal memory.
-                                        **irq = *NUMBER_1_INTEGER;
-
-                                        // Unlock signal memory mutex.
-                                        pthread_mutex_unlock(*mt);
-
-                                    } else {
-*/
-
-                                        handle(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9,
-                                            *a, *ac, *m, *mc, *d, *dc, p12, p13, p14);
-/*??
-                                    }
-*/
-
-                                    // Reset abstraction, model, details.
-                                    a = NULL_POINTER;
-                                    ac = NULL_POINTER;
-                                    m = NULL_POINTER;
-                                    mc = NULL_POINTER;
-                                    d = NULL_POINTER;
-                                    dc = NULL_POINTER;
-
-                                    j++;
-                                }
-
-                            } else {
-
-                                log_message_debug("Could not handle compound. The part details counts is null.");
-                            }
-
-                        } else {
-
-                            log_message_debug("Could not handle compound. The part details is null.");
-                        }
-
-                    } else {
-
-                        log_message_debug("Could not handle compound. The part models counts is null.");
-                    }
-
-                } else {
-
-                    log_message_debug("Could not handle compound. The part models is null.");
-                }
-
-            } else {
-
-                log_message_debug("Could not handle compound. The part abstractions counts is null.");
+                break;
             }
 
-        } else {
+            handle_compound_part(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, (void*) &j);
 
-            log_message_debug("Could not handle compound. The part abstractions is null.");
+            // Increment loop variable.
+            j++;
         }
 
     } else {

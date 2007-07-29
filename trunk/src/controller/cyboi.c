@@ -25,7 +25,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.25 $ $Date: 2007-07-23 23:47:58 $ $Author: christian $
+ * @version $Revision: 1.26 $ $Date: 2007-07-29 01:53:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -92,6 +92,10 @@ int main(int p0, char** p1) {
 
         // Optionalise command line argument options.
         optionalise((void*) &m, (void*) &k, (void*) &kc, (void*) &LOG_LEVEL, (void*) &LOG_OUTPUT, (void*) p1, (void*) &p0);
+
+        log_message_debug("Information: Run cyboi.");
+        log_message_debug("Information: Globalised global variables already.");
+        log_message_debug("Information: Optionalised log file already.");
 
         if (m == *VERSION_OPERATION_MODE) {
 

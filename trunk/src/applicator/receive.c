@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.32 $ $Date: 2007-07-23 23:47:57 $ $Author: christian $
+ * @version $Revision: 1.33 $ $Date: 2007-07-29 01:53:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -43,15 +43,31 @@
 #include "../memoriser/accessor/compound_accessor.c"
 
 /**
- * Receives a message in a special language.
+ * Receives a message via the given channel.
  *
  * CAUTION! Do NOT rename this procedure to "receive",
- * as that name is already used by socket functionality.
+ * as that name is already used by low-level socket functionality.
  *
- * The signal waiting loop only catches cyboi internal signals.
- * In order to also catch signals of various devices,
- * special mechanisms for signal reception have to be started.
- * To the mechanisms belong:
+ * The persistent message gets converted into a transient model, residing in memory.
+ *
+ * persistent:
+ * - stored permanently
+ * - outside CYBOI
+ * - longer than CYBOI lives
+ *
+ * transient:
+ * - stored in computer memory (RAM)
+ * - only accessible from within CYBOI
+ * - created and destroyed by CYBOI
+ * - not available anymore after CYBOI has been destroyed
+ *
+ * CAUTION! Some file formats (like the German xDT format for medical data exchange)
+ * contain both, the model AND the details, in one file. To cover these cases,
+ * the model and details are received TOGETHER, in just one operation.
+ *
+ * Some receive functions do not just read a persistent message, but first wait for
+ * an external signal. In order to catch signals of various devices, special mechanisms
+ * for signal reception have to be started. To the mechanisms belong:
  * - gnu/linux console
  * - x window system
  * - socket
@@ -59,11 +75,8 @@
  * These have their own internal signal/ action/ event/ interrupt waiting loops
  * which get activated here, running as parallel services in separate threads.
  * Whenever an event occurs in one of these threads, it gets transformed into a
- * cyboi signal and is finally placed in cyboi's signal memory.
- *
- * TODO: Since many internal waiting loops run in parallel,
- * the adding of signals to the signal memory must be synchronized!
- * How to do this properly in C?
+ * cyboi-internal signal and is finally placed in cyboi's signal memory.
+ * The cyboi signal waiting loop only catches cyboi-internal signals.
  *
  * Expected parameters:
  * - channel: gnu_linux_console, tcp_socket, unix_socket, x_window_system
@@ -81,8 +94,7 @@
  * @param p7 the signal memory count
  * @param p8 the signal memory size
  */
-void receive_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
-    void* p6, void* p7, void* p8) {
+void receive_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8) {
 
     log_message_debug("Receive message.");
 
@@ -368,7 +380,7 @@ void receive_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
 
         if (r != *NUMBER_0_INTEGER) {
 
-//??            receive_file_system(mn, mnc, mns, mon, monc, mons);
+            receive_file_system(mom, momc, moms, mod, modc, mods, mm, mmc, lm, lmc);
         }
     }
 

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2007-07-23 23:52:59 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2007-07-29 01:53:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -55,6 +55,17 @@ void map_to_memory_abstraction(void* p0, void* p1, void* p2, void* p3, void* p4)
 
             // The comparison result.
             int r = *NUMBER_0_INTEGER;
+
+            if (r == *NUMBER_0_INTEGER) {
+
+                compare_arrays(p3, p4, COMPOUND_ABSTRACTION, COMPOUND_ABSTRACTION_COUNT, &r, (void*) CHARACTER_ARRAY);
+
+                if (r != *NUMBER_0_INTEGER) {
+
+                    *d = COMPOUND_ABSTRACTION_ARRAY;
+                    *dc = *COMPOUND_ABSTRACTION_COUNT;
+                }
+            }
 
             if (r == *NUMBER_0_INTEGER) {
 

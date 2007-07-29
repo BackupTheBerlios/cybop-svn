@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.32 $ $Date: 2007-07-23 23:47:58 $ $Author: christian $
+ * @version $Revision: 1.33 $ $Date: 2007-07-29 01:53:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -61,8 +61,8 @@
  * @param p5 the destination details size
  * @param p6 the source
  * @param p7 the source count
- * @param p8 the type
- * @param p9 the type count
+ * @param p8 the language
+ * @param p9 the language count
  */
 void parse(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9) {
 

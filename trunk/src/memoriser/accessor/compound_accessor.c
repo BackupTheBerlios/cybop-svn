@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.39 $ $Date: 2007-07-23 23:47:58 $ $Author: christian $
+ * @version $Revision: 1.40 $ $Date: 2007-07-29 01:53:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -35,7 +35,6 @@
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/logger/logger.c"
-#include "../../memoriser/converter/integer_converter.c"
 #include "../../memoriser/allocator.c"
 #include "../../memoriser/array.c"
 
@@ -55,10 +54,33 @@
  * @param p5 the destination details size
  * @param p6 the source
  * @param p7 the source count
- * @param p8 the type
- * @param p9 the type count
+ * @param p8 the language
+ * @param p9 the language count
  */
-//?? void parse(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9);
+//??void parse(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9);
+
+/**
+ * Serialises the knowledge model according to the given knowledge type
+ * and creates a byte stream from it.
+ *
+ * @param p0 the destination (Hand over as reference!)
+ * @param p1 the destination count
+ * @param p2 the destination size
+ * @param p3 the source name
+ * @param p4 the source name count
+ * @param p5 the source abstraction
+ * @param p6 the source abstraction count
+ * @param p7 the source model
+ * @param p8 the source model count
+ * @param p9 the source details
+ * @param p10 the source details count
+ * @param p11 the knowledge memory
+ * @param p12 the knowledge memory count
+ * @param p13 the language
+ * @param p14 the language count
+ */
+void serialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
+    void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14);
 
 //
 // Hierarchical name handling.
@@ -1120,7 +1142,8 @@ void add_compound_element_by_name(void* p0, void* p1, void* p2,
 
                 // Use compound count as index to create the element name suffix,
                 // because the element is added at the end of the compound container.
-                serialise_integer((void*) &s, (void*) &sc, (void*) &ss, p1, (void*) PRIMITIVE_COUNT);
+                serialise((void*) &s, (void*) &sc, (void*) &ss, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, p1, (void*) PRIMITIVE_COUNT,
+                    *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
                 // Resize name.
                 if ((*nc + *LIST_SEPARATOR_COUNT + sc) >= *ns) {

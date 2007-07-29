@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2007-05-16 19:29:02 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2007-07-29 01:53:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,6 +30,7 @@
 #include "../../globals/constants/character/character_constants.c"
 #include "../../globals/constants/console/console_escape_code_constants.c"
 #include "../../globals/constants/cybol/cybol_abstraction_constants.c"
+#include "../../globals/constants/memory_structure/array_constants.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/variables/variables.c"

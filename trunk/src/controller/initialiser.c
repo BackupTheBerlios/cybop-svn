@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2007-07-23 23:47:58 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2007-07-29 01:53:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -59,9 +59,12 @@
 void initialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10) {
 
     log_message_debug("\n\n");
-    log_message_debug("Information: Initialises the system with an initial signal.");
+    log_message_debug("Information: Initialise system with an initial signal.");
 
     // The startup model abstraction, model, details.
+    //
+    // CAUTION! A (transient) knowledge model channel is not created,
+    // since that is only needed temporarily for model loading.
     void* ma = *NULL_POINTER;
     int* mac = (int*) *NULL_POINTER;
     int* mas = (int*) *NULL_POINTER;
@@ -80,7 +83,7 @@ void initialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
     allocate((void*) &mdc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
     allocate((void*) &mds, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
-    // Initialise startup model abstraction, model, details.
+    // Initialise startup model abstraction, model, details count and size.
     *mac = *NUMBER_0_INTEGER;
     *mas = *NUMBER_0_INTEGER;
     *mmc = *NUMBER_0_INTEGER;
@@ -89,30 +92,19 @@ void initialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
     *mds = *NUMBER_0_INTEGER;
 
     // Allocate startup model abstraction, model, details.
-    receive_file_system_model((void*) &ma, (void*) mac, (void*) mas,
-        *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
-        (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
-        (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
-        (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
-    receive_file_system_model((void*) &mm, (void*) mmc, (void*) mms,
-        *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
-        p9, p10,
-        COMPOUND_ABSTRACTION, COMPOUND_ABSTRACTION_COUNT,
-        FILE_CHANNEL, FILE_CHANNEL_COUNT);
-    receive_file_system_model((void*) &md, (void*) mdc, (void*) mds,
-        *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
-        *NULL_POINTER, *NULL_POINTER,
-        COMPOUND_ABSTRACTION, COMPOUND_ABSTRACTION_COUNT,
-        FILE_CHANNEL, FILE_CHANNEL_COUNT);
+    // CAUTION! The abstraction's abstraction always HAS TO BE "character".
+    allocate((void*) &ma, (void*) mas, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+    allocate((void*) &mm, (void*) mms, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
+    // CAUTION! The details' abstraction always HAS TO BE "compound".
+    allocate((void*) &md, (void*) mds, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
 
-/*??
-    // Add enable parameter model to startup model details.
-    set_compound_element_by_name(md, (void*) mdc, (void*) mds,
-        (void*) OPERATION_ENABLE_NAME, (void*) OPERATION_ENABLE_NAME_COUNT, (void*) OPERATION_ENABLE_NAME_COUNT,
-        (void*) BOOLEAN_ABSTRACTION, (void*) BOOLEAN_ABSTRACTION_COUNT, (void*) BOOLEAN_ABSTRACTION_COUNT,
-        (void*) TRUE_BOOLEAN, (void*) PRIMITIVE_COUNT, (void*) PRIMITIVE_COUNT,
-        *NULL_POINTER, *NULL_POINTER, *NULL_POINTER);
-*/
+    // Parse startup model name, abstraction.
+    parse((void*) &ma, (void*) mac, (void*) mas, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
+        (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
+        (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+    // Receive startup model model and details (read from file and parse).
+    receive_file_system((void*) &mm, (void*) mmc, (void*) mms, (void*) &md, (void*) mdc, (void*) mds,
+        p9, p10, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
 
     log_message_debug("\n\n");
     log_message_debug("Debug: Add initial signal to signal memory.");
