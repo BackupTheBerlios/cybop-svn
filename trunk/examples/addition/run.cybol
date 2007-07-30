@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 
 <!--
+    This example application creates a domain model consisting of three numbers.
+
+    Summand 1 and summand 2 are added and the result of that addition is
+    written into the sum, which is finally printed on screen.
+/-->
+
+<model>
+    <part name="startup" channel="inline" abstraction="operation" model="send">
+        <property name="channel" channel="inline" abstraction="character" model="signal"/>
+        <property name="message" channel="file" abstraction="compound" model="addition/startup.cybol"/>
+    </part>
+</model>
+
+<!--
     $RCSfile: run.cybol,v $
 
     Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
@@ -22,20 +36,6 @@
     http://www.cybop.net
     - Cybernetics Oriented Programming -
 
-    @version $Revision: 1.6 $ $Date: 2007-05-31 22:05:24 $ $Author: christian $
+    @version $Revision: 1.7 $ $Date: 2007-07-30 23:07:09 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->
-
-<!--
-    This example application creates a domain model consisting of three numbers.
-
-    Summand 1 and summand 2 are added and the result of that addition is
-    written into the sum, which is finally printed on screen.
-/-->
-
-<model>
-    <part name="startup" channel="inline" abstraction="operation" model="send">
-        <property name="channel" channel="inline" abstraction="character" model="signal"/>
-        <property name="message" channel="file" abstraction="cybol" model="addition/startup.cybol"/>
-    </part>
-</model>

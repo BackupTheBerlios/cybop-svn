@@ -14,9 +14,17 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.13 $ $Date: 2007-07-29 01:53:30 $ $Author: christian $
+# @version $Revision: 1.14 $ $Date: 2007-07-30 23:08:49 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2007-07-30  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Adapt all example applications to property name changes
+        * Fix forgotten casts of parameters handed over to "receive_file_system", in function "receive_message"
+        * Fix forgotten model allocation in workaround section of function "parse_compound_cybol_node"
+        * Split function "parse_compound_cybol_properties" by extracting loop body
+        * Split function "parse_compound_cybol_nodes" by extracting loop body
 
 2007-07-27  Christian Heller  <christian.heller@tuxtax.de>
 

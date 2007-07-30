@@ -1,22 +1,14 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 
-<!--
-    This example prints the famous "Hello, World!" string on the shell (standard output device).
-    Finally, an "exit" operation shuts down the application.
-/-->
-
 <model>
-    <part name="send_model_to_output" channel="inline" abstraction="operation" model="send">
-        <property name="channel" channel="inline" abstraction="character" model="shell"/>
-        <property name="language" channel="inline" abstraction="character" model="character"/>
-        <property name="message" channel="inline" abstraction="character" model="Hello, World!"/>
-        <property name="new_line" channel="inline" abstraction="boolean" model="true"/>
-    </part>
-    <part name="exit_application" channel="inline" abstraction="operation" model="exit"/>
+    <!-- The three values are initially empty. -->
+    <part name="summand_1" channel="inline" abstraction="integer" model="3"/>
+    <part name="summand_2" channel="inline" abstraction="integer" model="2"/>
+    <part name="sum" channel="inline" abstraction="integer" model="0"/>
 </model>
 
 <!--
-    $RCSfile: run.cybol,v $
+    $RCSfile: domain.cybol,v $
 
     Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
 
@@ -37,6 +29,6 @@
     http://www.cybop.net
     - Cybernetics Oriented Programming -
 
-    @version $Revision: 1.5 $ $Date: 2007-07-30 23:07:09 $ $Author: christian $
+    @version $Revision: 1.1 $ $Date: 2007-07-30 23:07:09 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->

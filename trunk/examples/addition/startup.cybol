@@ -1,5 +1,32 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 
+<model>
+    <part name="create_domain" channel="inline" abstraction="operation" model="create">
+        <property name="name" channel="inline" abstraction="character" model="domain"/>
+        <property name="abstraction" channel="inline" abstraction="character" model="compound"/>
+        <property name="element" channel="inline" abstraction="character" model="part"/>
+    </part>
+    <part name="receive_domain" channel="inline" abstraction="operation" model="receive">
+        <property name="channel" channel="inline" abstraction="character" model="file"/>
+        <property name="language" channel="inline" abstraction="character" model="compound"/>
+        <property name="message" channel="inline" abstraction="character" model="addition/domain.cybol"/>
+        <property name="model" channel="inline" abstraction="knowledge" model=".domain"/>
+    </part>
+    <part name="add_two_numbers" channel="inline" abstraction="operation" model="add">
+        <property name="abstraction" channel="inline" abstraction="character" model="integer"/>
+        <property name="summand_1" channel="inline" abstraction="knowledge" model=".domain.summand_1"/>
+        <property name="summand_2" channel="inline" abstraction="knowledge" model=".domain.summand_2"/>
+        <property name="sum" channel="inline" abstraction="knowledge" model=".domain.sum"/>
+    </part>
+    <part name="send_result_as_output" channel="inline" abstraction="operation" model="send">
+        <property name="channel" channel="inline" abstraction="character" model="shell"/>
+        <property name="language" channel="inline" abstraction="character" model="integer"/>
+        <property name="message" channel="inline" abstraction="knowledge" model=".domain.sum"/>
+        <property name="new_line" channel="inline" abstraction="boolean" model="true"/>
+    </part>
+    <part name="exit" channel="inline" abstraction="operation" model="exit"/>
+</model>
+
 <!--
     $RCSfile: startup.cybol,v $
 
@@ -22,50 +49,6 @@
     http://www.cybop.net
     - Cybernetics Oriented Programming -
 
-    @version $Revision: 1.8 $ $Date: 2007-05-31 22:05:24 $ $Author: christian $
+    @version $Revision: 1.9 $ $Date: 2007-07-30 23:07:09 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->
-
-<model>
-    <part name="create_domain" channel="inline" abstraction="operation" model="create_part">
-        <property name="name" channel="inline" abstraction="character" model="domain"/>
-        <property name="channel" channel="inline" abstraction="character" model="inline"/>
-        <property name="abstraction" channel="inline" abstraction="character" model="compound"/>
-        <property name="model" channel="inline" abstraction="character" model=""/>
-    </part>
-    <part name="create_summand_1" channel="inline" abstraction="operation" model="create_part">
-        <property name="whole" channel="inline" abstraction="knowledge" model="domain"/>
-        <property name="name" channel="inline" abstraction="character" model="summand_1"/>
-        <property name="channel" channel="inline" abstraction="character" model="inline"/>
-        <property name="abstraction" channel="inline" abstraction="character" model="integer"/>
-        <property name="model" channel="inline" abstraction="character" model="6"/>
-    </part>
-    <part name="create_summand_2" channel="inline" abstraction="operation" model="create_part">
-        <property name="whole" channel="inline" abstraction="knowledge" model="domain"/>
-        <property name="name" channel="inline" abstraction="character" model="summand_2"/>
-        <property name="channel" channel="inline" abstraction="character" model="inline"/>
-        <property name="abstraction" channel="inline" abstraction="character" model="integer"/>
-        <property name="model" channel="inline" abstraction="character" model="4"/>
-    </part>
-    <part name="create_sum" channel="inline" abstraction="operation" model="create_part">
-        <property name="whole" channel="inline" abstraction="knowledge" model="domain"/>
-        <property name="name" channel="inline" abstraction="character" model="sum"/>
-        <property name="channel" channel="inline" abstraction="character" model="inline"/>
-        <property name="abstraction" channel="inline" abstraction="character" model="integer"/>
-        <property name="model" channel="inline" abstraction="character" model=""/>
-    </part>
-    <part name="add" channel="inline" abstraction="operation" model="add">
-        <property name="summand_1" channel="inline" abstraction="knowledge" model="domain.summand_1"/>
-        <property name="summand_2" channel="inline" abstraction="knowledge" model="domain.summand_2"/>
-        <property name="sum" channel="inline" abstraction="knowledge" model="domain.sum"/>
-    </part>
-    <part name="send_result" channel="inline" abstraction="operation" model="send">
-        <property name="language" channel="inline" abstraction="character" model="tui"/>
-        <property name="receiver" channel="inline" abstraction="character" model="user"/>
-        <property name="message" channel="inline" abstraction="knowledge" model="domain.sum"/>
-    </part>
-    <part name="destroy_domain" channel="inline" abstraction="operation" model="destroy_part">
-        <property name="model" channel="inline" abstraction="knowledge" model="domain"/>
-    </part>
-    <part name="exit" channel="inline" abstraction="operation" model="exit"/>
-</model>

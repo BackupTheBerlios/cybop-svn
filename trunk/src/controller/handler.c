@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.21 $ $Date: 2007-07-15 18:44:21 $ $Author: christian $
+ * @version $Revision: 1.22 $ $Date: 2007-07-30 23:07:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -53,7 +53,7 @@
  * @param p7 the interrupt request flag
  * @param p8 the signal memory mutex
  * @param p9 the shutdown flag
- * @param p10 the abctraction
+ * @param p10 the abstraction
  * @param p11 the abstraction count
  * @param p12 the model (signal)
  * @param p13 the model (signal) count

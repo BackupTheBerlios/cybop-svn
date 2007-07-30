@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2007-07-29 01:53:30 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2007-07-30 23:07:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -276,7 +276,7 @@ void parse_compound_tag(void* p0, void* p1, void* p2, void* p3, void* p4) {
 */
 
 /**
- * Parses the cybol properties.
+ * Parses a cybol property.
  *
  * @param p0 the name
  * @param p1 the name count
@@ -286,13 +286,15 @@ void parse_compound_tag(void* p0, void* p1, void* p2, void* p3, void* p4) {
  * @param p5 the abstraction count
  * @param p6 the model
  * @param p7 the model count
- * @param p8 the child node
+ * @param p8 the property value
+ * @param p9 the name
+ * @param p10 the name count
  */
-void parse_compound_cybol_property(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8) {
+void parse_compound_cybol_property(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10) {
 
     if (p8 != *NULL_POINTER) {
 
-        xmlNode* cn = (xmlNode*) p8;
+        xmlNode* pv = (xmlNode*) p8;
 
         if (p7 != *NULL_POINTER) {
 
@@ -328,103 +330,63 @@ void parse_compound_cybol_property(void* p0, void* p1, void* p2, void* p3, void*
 
                                         log_message_debug("Information: Parse compound cybol property.");
 
-                                        if (cn != *NULL_POINTER) {
+                                        // The comparison result.
+                                        int r = *NUMBER_0_INTEGER;
 
-                                            // Determine first child node property.
-                                            xmlAttr* p = cn->properties;
-                                            // The property name.
-                                            void* pn = *NULL_POINTER;
-                                            int pnc = *NUMBER_0_INTEGER;
-                                            // The property value.
-                                            xmlNode* pv = (xmlNode*) *NULL_POINTER;
-                                            // The comparison result.
-                                            int r = *NUMBER_0_INTEGER;
+                                        if (pv != *NULL_POINTER) {
 
-                                            while (*NUMBER_1_INTEGER) {
+                                            if (r == *NUMBER_0_INTEGER) {
 
-                                                if (p == *NULL_POINTER) {
+                                                compare_arrays(p9, p10, (void*) NAME_ATTRIBUTE, (void*) NAME_ATTRIBUTE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-                                                    break;
+                                                if (r != *NUMBER_0_INTEGER) {
+
+                                                    // Get source name.
+                                                    *n = pv->content;
+                                                    *nc = strlen((char*) *n);
                                                 }
+                                            }
 
-                                                // Get property value.
-                                                pv = p->children;
+                                            if (r == *NUMBER_0_INTEGER) {
 
-                                                if (pv != *NULL_POINTER) {
+                                                compare_arrays(p9, p10, (void*) CHANNEL_ATTRIBUTE, (void*) CHANNEL_ATTRIBUTE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-                                                    // Get property name.
-                                                    pn = (void*) p->name;
-                                                    pnc = strlen(pn);
+                                                if (r != *NUMBER_0_INTEGER) {
 
-                                                    if (r != 1) {
-
-                                                        compare_arrays(pn, (void*) &pnc, (void*) NAME_ATTRIBUTE, (void*) NAME_ATTRIBUTE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-                                                        if (r == *NUMBER_1_INTEGER) {
-
-                                                            // Get source name.
-                                                            *n = pv->content;
-                                                            *nc = strlen((char*) *n);
-                                                        }
-                                                    }
-
-                                                    if (r != *NUMBER_1_INTEGER) {
-
-                                                        compare_arrays(pn, (void*) &pnc, (void*) CHANNEL_ATTRIBUTE, (void*) CHANNEL_ATTRIBUTE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-                                                        if (r == *NUMBER_1_INTEGER) {
-
-                                                            // Get source channel.
-                                                            *c = pv->content;
-                                                            *cc = strlen((char*) *c);
-                                                        }
-                                                    }
-
-                                                    if (r != *NUMBER_1_INTEGER) {
-
-                                                        compare_arrays(pn, (void*) &pnc, (void*) ABSTRACTION_ATTRIBUTE, (void*) ABSTRACTION_ATTRIBUTE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-                                                        if (r == *NUMBER_1_INTEGER) {
-
-                                                            // Get source abstraction.
-                                                            *a = pv->content;
-                                                            *ac = strlen((char*) *a);
-                                                        }
-                                                    }
-
-                                                    if (r != *NUMBER_1_INTEGER) {
-
-                                                        compare_arrays(pn, (void*) &pnc, (void*) MODEL_ATTRIBUTE, (void*) MODEL_ATTRIBUTE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-                                                        if (r == *NUMBER_1_INTEGER) {
-
-                                                            // Get source model.
-                                                            *m = pv->content;
-                                                            *mc = strlen((char*) *m);
-                                                        }
-                                                    }
-
-                                                    // Reset property name.
-                                                    pn = *NULL_POINTER;
-                                                    pnc = *NUMBER_0_INTEGER;
-                                                    // Reset property value.
-                                                    pv = (xmlNode*) *NULL_POINTER;
-                                                    // Reset comparison result.
-                                                    r = *NUMBER_0_INTEGER;
-
-                                                } else {
-
-                                            //??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not translate xml node. The source property value is null.");
+                                                    // Get source channel.
+                                                    *c = pv->content;
+                                                    *cc = strlen((char*) *c);
                                                 }
+                                            }
 
-                                                p = p->next;
+                                            if (r == *NUMBER_0_INTEGER) {
+
+                                                compare_arrays(p9, p10, (void*) ABSTRACTION_ATTRIBUTE, (void*) ABSTRACTION_ATTRIBUTE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+                                                if (r != *NUMBER_0_INTEGER) {
+
+                                                    // Get source abstraction.
+                                                    *a = pv->content;
+                                                    *ac = strlen((char*) *a);
+                                                }
+                                            }
+
+                                            if (r == *NUMBER_0_INTEGER) {
+
+                                                compare_arrays(p9, p10, (void*) MODEL_ATTRIBUTE, (void*) MODEL_ATTRIBUTE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+                                                if (r != *NUMBER_0_INTEGER) {
+
+                                                    // Get source model.
+                                                    *m = pv->content;
+                                                    *mc = strlen((char*) *m);
+                                                }
                                             }
 
                                         } else {
 
-//??                                            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not translate xml node. The source parameter count is null.");
+                                    //??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not translate xml node. The source property value is null.");
                                         }
-
                                     } else {
 
 //??                                        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not translate xml node. The source parameter count is null.");
@@ -463,6 +425,64 @@ void parse_compound_cybol_property(void* p0, void* p1, void* p2, void* p3, void*
         } else {
 
 //??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not translate xml node. The source parameter count is null.");
+        }
+
+    } else {
+
+//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not translate xml node. The source parameter count is null.");
+    }
+}
+
+/**
+ * Parses the cybol properties.
+ *
+ * @param p0 the name
+ * @param p1 the name count
+ * @param p2 the channel
+ * @param p3 the channel count
+ * @param p4 the abstraction
+ * @param p5 the abstraction count
+ * @param p6 the model
+ * @param p7 the model count
+ * @param p8 the child node
+ */
+void parse_compound_cybol_properties(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8) {
+
+    if (p8 != *NULL_POINTER) {
+
+        xmlNode* cn = (xmlNode*) p8;
+
+        log_message_debug("Information: Parse compound cybol properties.");
+
+        if (cn != *NULL_POINTER) {
+
+            // Determine first child node property.
+            xmlAttr* p = cn->properties;
+            // The property name.
+            void* pn = *NULL_POINTER;
+            int pnc = *NUMBER_0_INTEGER;
+
+            while (*NUMBER_1_INTEGER) {
+
+                if (p == *NULL_POINTER) {
+
+                    break;
+                }
+
+                // Get property name.
+                pn = (void*) p->name;
+                pnc = strlen(pn);
+
+                // Parse property.
+                parse_compound_cybol_property(p0, p1, p2, p3, p4, p5, p6, p7, p->children, pn, (void*) &pnc);
+
+                // Get next child node property.
+                p = p->next;
+            }
+
+        } else {
+
+    //??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not translate xml node. The source parameter count is null.");
         }
 
     } else {
@@ -516,8 +536,9 @@ void parse_compound_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4)
             int* dds = (int*) *NULL_POINTER;
 
             // Parse child node properties.
-            parse_compound_cybol_property((void*) &sn, (void*) &snc, (void*) &sc, (void*) &scc, (void*) &sa, (void*) &sac, (void*) &sm, (void*) &smc, p3);
+            parse_compound_cybol_properties((void*) &sn, (void*) &snc, (void*) &sc, (void*) &scc, (void*) &sa, (void*) &sac, (void*) &sm, (void*) &smc, p3);
 
+/*??
             fprintf(stderr, "sn: %s\n", (char*) sn);
             fprintf(stderr, "snc: %i\n", snc);
             fprintf(stderr, "sc: %s\n", (char*) sc);
@@ -526,12 +547,12 @@ void parse_compound_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4)
             fprintf(stderr, "sac: %i\n", sac);
             fprintf(stderr, "sm: %s\n", (char*) sm);
             fprintf(stderr, "smc: %i\n", smc);
+*/
 
             //
             // Name.
             //
 
-            fprintf(stderr, "TEST name: %i\n", p0);
             // Allocate destination name.
             allocate((void*) &dnc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
             *dnc = *NUMBER_0_INTEGER;
@@ -554,7 +575,6 @@ void parse_compound_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4)
             // Abstraction.
             //
 
-            fprintf(stderr, "TEST abstraction: %i\n", p0);
             // Allocate destination abstraction.
             allocate((void*) &dac, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
             *dac = *NUMBER_0_INTEGER;
@@ -583,6 +603,13 @@ void parse_compound_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4)
 
             if ((w1 != *NUMBER_0_INTEGER) && (w2 != *NUMBER_0_INTEGER)) {
 
+                // Allocate destination model.
+                allocate((void*) &dmc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+                *dmc = *NUMBER_0_INTEGER;
+                allocate((void*) &dms, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+                *dms = *NUMBER_0_INTEGER;
+                allocate((void*) &dm, (void*) dms, sa, (void*) &sac);
+
                 // CAUTION! If a cybol file is to be read, then the libxml2 parser is used.
                 // This is just a workaround, until cyboi posesses its own cybol parsing functions.
                 // This source code block can then be deleted completely.
@@ -594,12 +621,10 @@ void parse_compound_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4)
                 void* ra = *NULL_POINTER;
                 int rac = *NUMBER_0_INTEGER;
 
-                fprintf(stderr, "TEST map sa: %s\n", (char*) sa);
                 // Map source abstraction to runtime abstraction, since a serialised
                 // message does not always have the same runtime abstraction.
                 // For example, an "xdt" file is converted into a compound.
                 map_to_memory_abstraction((void*) &ra, (void*) &rac, *NULL_POINTER, sa, (void*) &sac);
-                fprintf(stderr, "TEST map ra: %s\n", (char*) ra);
 
                 // The read model.
                 void* rm = *NULL_POINTER;
@@ -612,7 +637,6 @@ void parse_compound_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4)
                 // Read read model as persistent byte stream over channel.
                 read_data((void*) &rm, (void*) &rmc, (void*) &rms, sm, (void*) &smc, sc, (void*) &scc);
 
-                fprintf(stderr, "TEST model: %i\n", p0);
                 // Allocate destination model.
                 allocate((void*) &dmc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
                 *dmc = *NUMBER_0_INTEGER;
@@ -634,7 +658,6 @@ void parse_compound_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4)
             // Details.
             //
 
-            fprintf(stderr, "TEST details: %i\n", p0);
             // Allocate and parse destination details.
             //
             // CAUTION! Do ALWAYS allocate the details, even if it has no entries!
@@ -646,14 +669,12 @@ void parse_compound_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4)
             *dds = *NUMBER_0_INTEGER;
             allocate((void*) &dd, (void*) dds, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
 
-            fprintf(stderr, "TEST pre properties: %i\n", p0);
             // If child node has children, then parse it for destination details.
             if (s->children != *NULL_POINTER) {
 
                 // Parse destination details child node children.
                 parse_compound_cybol_nodes((void*) &dd, (void*) ddc, (void*) dds, p3, p4);
             }
-            fprintf(stderr, "TEST post properties: %i\n", p0);
 
             // Add model to compound.
             set_compound_element_by_name(*d, p1, p2,
@@ -661,7 +682,6 @@ void parse_compound_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4)
                 da, (void*) dac, (void*) das,
                 dm, (void*) dmc, (void*) dms,
                 dd, (void*) ddc, (void*) dds);
-            fprintf(stderr, "TEST post set: %i\n", p0);
 
             //?? CAUTION! TODO:
             //?? If "add", then first check if name exists in whole;
@@ -778,8 +798,6 @@ void parse_compound_libxml2_parser_workaround(void* p0, void* p1, void* p2, void
                     // Check potential ABI mismatches between the version
                     // it was compiled for and the actual shared library used.
                     LIBXML_TEST_VERSION
-
-    fprintf(stderr, "TEST file name tmp: %s\n", tmp);
 
                     // Parse file and get xml document.
                     // This function returns a pointer to type: xmlDoc*
