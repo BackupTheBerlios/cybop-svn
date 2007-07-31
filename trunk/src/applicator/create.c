@@ -22,7 +22,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.33 $ $Date: 2007-07-29 01:53:30 $ $Author: christian $
+ * @version $Revision: 1.34 $ $Date: 2007-07-31 15:16:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -180,19 +180,6 @@ void create(void* p0, void* p1, void* p2, void* p3, void* p4) {
     void** ad = NULL_POINTER;
     void** adc = NULL_POINTER;
     void** ads = NULL_POINTER;
-    // The whole name, abstraction, model, details.
-    void** wn = NULL_POINTER;
-    void** wnc = NULL_POINTER;
-    void** wns = NULL_POINTER;
-    void** wa = NULL_POINTER;
-    void** wac = NULL_POINTER;
-    void** was = NULL_POINTER;
-    void** wm = NULL_POINTER;
-    void** wmc = NULL_POINTER;
-    void** wms = NULL_POINTER;
-    void** wd = NULL_POINTER;
-    void** wdc = NULL_POINTER;
-    void** wds = NULL_POINTER;
     // The element name, abstraction, model, details.
     void** en = NULL_POINTER;
     void** enc = NULL_POINTER;
@@ -206,6 +193,19 @@ void create(void* p0, void* p1, void* p2, void* p3, void* p4) {
     void** ed = NULL_POINTER;
     void** edc = NULL_POINTER;
     void** eds = NULL_POINTER;
+    // The whole name, abstraction, model, details.
+    void** wn = NULL_POINTER;
+    void** wnc = NULL_POINTER;
+    void** wns = NULL_POINTER;
+    void** wa = NULL_POINTER;
+    void** wac = NULL_POINTER;
+    void** was = NULL_POINTER;
+    void** wm = NULL_POINTER;
+    void** wmc = NULL_POINTER;
+    void** wms = NULL_POINTER;
+    void** wd = NULL_POINTER;
+    void** wdc = NULL_POINTER;
+    void** wds = NULL_POINTER;
 
     // Get name.
     get_universal_compound_element_by_name(p0, p1,
@@ -223,14 +223,6 @@ void create(void* p0, void* p1, void* p2, void* p3, void* p4) {
         (void*) &am, (void*) &amc, (void*) &ams,
         (void*) &ad, (void*) &adc, (void*) &ads,
         p2, p3);
-    // Get whole.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) CREATE_WHOLE_NAME, (void*) CREATE_WHOLE_NAME_COUNT,
-        (void*) &wn, (void*) &wnc, (void*) &wns,
-        (void*) &wa, (void*) &wac, (void*) &was,
-        (void*) &wm, (void*) &wmc, (void*) &wms,
-        (void*) &wd, (void*) &wdc, (void*) &wds,
-        p2, p3);
     // Get element.
     get_universal_compound_element_by_name(p0, p1,
         (void*) CREATE_ELEMENT_NAME, (void*) CREATE_ELEMENT_NAME_COUNT,
@@ -238,6 +230,14 @@ void create(void* p0, void* p1, void* p2, void* p3, void* p4) {
         (void*) &ea, (void*) &eac, (void*) &eas,
         (void*) &em, (void*) &emc, (void*) &ems,
         (void*) &ed, (void*) &edc, (void*) &eds,
+        p2, p3);
+    // Get whole.
+    get_universal_compound_element_by_name(p0, p1,
+        (void*) CREATE_WHOLE_NAME, (void*) CREATE_WHOLE_NAME_COUNT,
+        (void*) &wn, (void*) &wnc, (void*) &wns,
+        (void*) &wa, (void*) &wac, (void*) &was,
+        (void*) &wm, (void*) &wmc, (void*) &wms,
+        (void*) &wd, (void*) &wdc, (void*) &wds,
         p2, p3);
 
     // The comparison result.

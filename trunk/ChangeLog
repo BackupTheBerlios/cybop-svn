@@ -14,9 +14,13 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.14 $ $Date: 2007-07-30 23:08:49 $ $Author: christian $
+# @version $Revision: 1.15 $ $Date: 2007-07-31 15:16:58 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2007-07-31  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Add "meta" property (a CYBOL model containing details) to "receive" operation, which is needed for creating HTML tags from CYBOL
 
 2007-07-30  Christian Heller  <christian.heller@tuxtax.de>
 

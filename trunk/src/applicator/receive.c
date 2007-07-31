@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.34 $ $Date: 2007-07-30 23:07:50 $ $Author: christian $
+ * @version $Revision: 1.35 $ $Date: 2007-07-31 15:16:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -137,6 +137,19 @@ void receive_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
     void** md = NULL_POINTER;
     void** mdc = NULL_POINTER;
     void** mds = NULL_POINTER;
+    // The meta message name, abstraction, model, details.
+    void** men = NULL_POINTER;
+    void** menc = NULL_POINTER;
+    void** mens = NULL_POINTER;
+    void** mea = NULL_POINTER;
+    void** meac = NULL_POINTER;
+    void** meas = NULL_POINTER;
+    void** mem = NULL_POINTER;
+    void** memc = NULL_POINTER;
+    void** mems = NULL_POINTER;
+    void** med = NULL_POINTER;
+    void** medc = NULL_POINTER;
+    void** meds = NULL_POINTER;
     // The model name, abstraction, model, details.
     void** mon = NULL_POINTER;
     void** monc = NULL_POINTER;
@@ -230,6 +243,15 @@ void receive_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
         (void*) &md, (void*) &mdc, (void*) &mds,
         p3, p4);
 
+    // Get meta message.
+    get_universal_compound_element_by_name(p0, p1,
+        (void*) RECEIVE_META_NAME, (void*) RECEIVE_META_NAME_COUNT,
+        (void*) &men, (void*) &menc, (void*) &mens,
+        (void*) &mea, (void*) &meac, (void*) &meas,
+        (void*) &mem, (void*) &memc, (void*) &mems,
+        (void*) &med, (void*) &medc, (void*) &meds,
+        p3, p4);
+
     // Get model.
     get_universal_compound_element_by_name(p0, p1,
         (void*) RECEIVE_MODEL_NAME, (void*) RECEIVE_MODEL_NAME_COUNT,
@@ -285,6 +307,7 @@ void receive_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
         if (r != *NUMBER_0_INTEGER) {
 
             receive_file_system((void*) mom, *momc, *moms, (void*) mod, *modc, *mods, *mm, *mmc, *lm, *lmc);
+            receive_file_system((void*) mod, *modc, *mods, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *mem, *memc, *lm, *lmc);
         }
     }
 
