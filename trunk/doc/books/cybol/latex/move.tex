@@ -13,7 +13,7 @@
 % http://www.cybop.net
 % - Cybernetics Oriented Programming -
 %
-% Version: $Revision: 1.1 $ $Date: 2007-07-17 20:02:36 $ $Author: christian $
+% Version: $Revision: 1.2 $ $Date: 2007-08-01 13:59:00 $ $Author: christian $
 % Authors: Christian Heller <christian.heller@tuxtax.de>
 %
 
@@ -24,7 +24,20 @@
 This operation moves the part knowledge model to a new whole (compound)
 knowledge model.
 
+\subsubsection{Example}
+
+\begin{scriptsize}
+    \begin{verbatim}
+<part name="move_addresses" channel="inline" abstraction="operation" model="move">
+    <property name="part" channel="inline" abstraction="knowledge" model=".app.addresses"/>
+    <property name="whole" channel="inline" abstraction="knowledge" model=".app.domain"/>
+</part>
+    \end{verbatim}
+\end{scriptsize}
+
 \subsubsection{Part Property}
+
+This is the part knowledge model that is to be moved.
 
 \emph{required}
 
@@ -32,14 +45,12 @@ name=\texttt{'part'}\\
 abstraction=\texttt{'knowledge' \vline\ 'encapsulated'}\\
 model=\texttt{part knowledge model}
 
-This is the part knowledge model that is to be moved.
-
 \subsubsection{Whole Property}
+
+This is the whole knowledge model to which to add to the part knowledge model.
 
 \emph{required}
 
 name=\texttt{'whole'}\\
 abstraction=\texttt{'knowledge' \vline\ 'encapsulated'}\\
 model=\texttt{whole knowledge model}
-
-This is the whole knowledge model to which to add the part knowledge model to.

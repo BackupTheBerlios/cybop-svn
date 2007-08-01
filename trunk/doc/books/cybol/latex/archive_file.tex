@@ -13,7 +13,7 @@
 % http://www.cybop.net
 % - Cybernetics Oriented Programming -
 %
-% Version: $Revision: 1.1 $ $Date: 2007-07-17 20:02:36 $ $Author: christian $
+% Version: $Revision: 1.2 $ $Date: 2007-08-01 13:59:00 $ $Author: christian $
 % Authors: Christian Heller <christian.heller@tuxtax.de>
 %
 
@@ -24,7 +24,34 @@
 This operation archives the given files or directories. Internally, it just
 uses the corresponding shell command functionality.
 
+\subsubsection{Example}
+
+\begin{scriptsize}
+    \begin{verbatim}
+<part name="archive" channel="inline" abstraction="operation" model="archive_file">
+    <property name="source" channel="inline" abstraction="character" model="*.dbf"/>
+    <property name="create" channel="inline" abstraction="boolean" model="true"/>
+    <property name="update" channel="inline" abstraction="boolean" model="true"/>
+    <property name="bzip2" channel="inline" abstraction="boolean" model="false"/>
+</part>
+    \end{verbatim}
+\end{scriptsize}
+
+\subsubsection{Source Property}
+
+The path or shell expression pattern determining the directories and files to
+be compressed and/ or archived.
+
+\emph{required}
+
+name=\texttt{'source'}\\
+abstraction=\texttt{'character'}\\
+model=\texttt{directories and files to be compressed}
+
 \subsubsection{Create Property}
+
+This is the flag specifying whether or not to create the archive file, if it
+does not exist yet.
 
 \emph{required}
 
@@ -32,10 +59,10 @@ name=\texttt{'create'}\\
 abstraction=\texttt{'boolean'}\\
 model=\texttt{'true' \vline\ 'false'}
 
-This is the flag specifying whether or not to create the archive file, if it
-does not exist yet.
-
 \subsubsection{Update Property}
+
+This property specifies whether or not to update the archive file, if it
+already exists.
 
 \emph{required}
 
@@ -43,16 +70,13 @@ name=\texttt{'update'}\\
 abstraction=\texttt{'boolean'}\\
 model=\texttt{'true' \vline\ 'false'}
 
-This property specifies whether or not to update the archive file, if it
-already exists.
-
 \subsubsection{Bzip2 Property}
+
+This property specifies whether or not to use bzip2 (bz2) compression instead
+of the standard gzip (gz) compression.
 
 \emph{required}
 
 name=\texttt{'bzip2'}\\
 abstraction=\texttt{'boolean'}\\
 model=\texttt{'true' \vline\ 'false'}
-
-This property specifies whether or not to use bzip2 (bz2) compression instead
-of the standard gzip (gz) compression.

@@ -13,7 +13,7 @@
 % http://www.cybop.net
 % - Cybernetics Oriented Programming -
 %
-% Version: $Revision: 1.1 $ $Date: 2007-07-17 20:02:36 $ $Author: christian $
+% Version: $Revision: 1.2 $ $Date: 2007-08-01 13:59:00 $ $Author: christian $
 % Authors: Christian Heller <christian.heller@tuxtax.de>
 %
 
@@ -23,7 +23,22 @@
 
 This operation compares two given operands.
 
+\subsubsection{Example}
+
+\begin{scriptsize}
+    \begin{verbatim}
+<part name="compare_loop_index" channel="inline" abstraction="operation" model="compare">
+    <property name="comparison" channel="inline" abstraction="character" model="greater_or_equal"/>
+    <property name="left_side" channel="inline" abstraction="knowledge" model=".app.tmp.loop_index"/>
+    <property name="right_side" channel="inline" abstraction="integer" model="5"/>
+    <property name="result" channel="inline" abstraction="knowledge" model=".app.tmp.break_flag"/>
+</part>
+    \end{verbatim}
+\end{scriptsize}
+
 \subsubsection{Comparison Property}
+
+This is the kind of comparison to be applied.
 
 \emph{required}
 
@@ -31,9 +46,9 @@ name=\texttt{'comparison'}\\
 abstraction=\texttt{'character'}\\
 model=\texttt{'equal' \vline\ 'smaller' \vline\ 'greater' \vline\ 'smaller\_or\_equal' \vline\ 'greater\_or\_equal'}
 
-This is the kind of comparison to be applied.
-
 \subsubsection{Left Side Property}
+
+This is the left side value of the comparison.
 
 \emph{required}
 
@@ -41,9 +56,9 @@ name=\texttt{'left\_side'}\\
 abstraction=\texttt{'boolean' \vline\ 'integer' \vline\ 'float' \vline\ 'character' \vline\ 'knowledge' \vline\ 'encapsulated'}\\
 model=\texttt{value or knowledge model}
 
-This is the left side value of the comparison.
-
 \subsubsection{Right Side Property}
+
+This is the right side value of the comparison.
 
 \emph{required}
 
@@ -51,9 +66,9 @@ name=\texttt{'right\_side'}\\
 abstraction=\texttt{'boolean' \vline\ 'integer' \vline\ 'float' \vline\ 'character' \vline\ 'knowledge' \vline\ 'encapsulated'}\\
 model=\texttt{value or knowledge model}
 
-This is the right side value of the comparison.
-
 \subsubsection{Result Property}
+
+This is the knowledge model in which the comparison result is stored.
 
 \emph{required}
 
@@ -61,14 +76,12 @@ name=\texttt{'result'}\\
 abstraction=\texttt{'boolean' \vline\ 'knowledge' \vline\ 'encapsulated'}\\
 model=\texttt{result knowledge model}
 
-This is the knowledge model in which the comparison result is stored.
-
 \subsubsection{Selection Property}
+
+This property selects which part of two string values shall be compared.
 
 \emph{optional}, only if comparing values of abstraction "character"
 
 name=\texttt{'selection'}\\
 abstraction=\texttt{'character'}\\
 model=\texttt{'full' \vline\ 'prefix' \vline\ 'suffix' \vline\ 'part'}
-
-This property selects which part of two string values shall be compared.

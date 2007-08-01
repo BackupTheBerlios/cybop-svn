@@ -13,7 +13,7 @@
 % http://www.cybop.net
 % - Cybernetics Oriented Programming -
 %
-% Version: $Revision: 1.1 $ $Date: 2007-07-17 20:02:36 $ $Author: christian $
+% Version: $Revision: 1.2 $ $Date: 2007-08-01 13:59:00 $ $Author: christian $
 % Authors: Christian Heller <christian.heller@tuxtax.de>
 %
 
@@ -21,7 +21,25 @@
 \label{add_heading}
 \index{Add}
 
+This operation is a simple addition of two numbers or strings.
+
+\subsubsection{Example}
+
+\begin{scriptsize}
+    \begin{verbatim}
+<part name="add_numbers" channel="inline" abstraction="operation" model="add">
+    <property name="summand_1" channel="inline" abstraction="knowledge" model=".app.summand_1"/>
+    <property name="summand_2" channel="inline" abstraction="knowledge" model=".app.summand_2"/>
+    <property name="sum" channel="inline" abstraction="knowledge" model=".app.sum"/>
+</part>
+    \end{verbatim}
+\end{scriptsize}
+
 \subsubsection{Abstraction Property}
+
+This property specifies the abstraction of the properties summand\_1,
+summand\_2 and sum. In other words, the models of these properties have to have
+the same abstraction.
 
 \emph{required}
 
@@ -29,27 +47,32 @@ name=\texttt{'abstraction'}\\
 abstraction=\texttt{'character'}\\
 model=\texttt{'integer' \vline\ 'character'}
 
-This property specifies the abstraction of the properties summand\_1,
-summand\_2 and sum. In other words, the models of these properties have to have
-the same abstraction.
-
 \subsubsection{Summand 1 Property}
+
+The first summand for the addition.
 
 \emph{required}
 
 name=\texttt{'summand\_1'}\\
-abstraction=\texttt{'integer' \vline\ 'character'}\\
+abstraction=\texttt{'integer' \vline\ 'character' \vline\ 'knowledge' \vline\ 'encapsulated'}\\
+model=\texttt{number or knowledge model path}
 
 \subsubsection{Summand 2 Property}
+
+The second summand for the addition.
 
 \emph{required}
 
 name=\texttt{'summand\_2'}\\
-abstraction=\texttt{'integer' \vline\ 'character'}\\
+abstraction=\texttt{'integer' \vline\ 'character' \vline\ 'knowledge' \vline\ 'encapsulated'}\\
+model=\texttt{number or knowledge model path}
 
 \subsubsection{Sum Property}
+
+The sum resulting from the addition.
 
 \emph{required}
 
 name=\texttt{'sum'}\\
-abstraction=\texttt{'integer' \vline\ 'character'}\\
+abstraction=\texttt{'integer' \vline\ 'character' \vline\ 'knowledge' \vline\ 'encapsulated'}\\
+model=\texttt{knowledge model path}

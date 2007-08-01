@@ -13,7 +13,7 @@
 % http://www.cybop.net
 % - Cybernetics Oriented Programming -
 %
-% Version: $Revision: 1.1 $ $Date: 2007-07-17 20:02:36 $ $Author: christian $
+% Version: $Revision: 1.2 $ $Date: 2007-08-01 13:59:00 $ $Author: christian $
 % Authors: Christian Heller <christian.heller@tuxtax.de>
 %
 
@@ -24,10 +24,23 @@
 This operation interrupts a running service. If the given service is not
 running, the operation will do nothing.
 
+\subsubsection{Example}
+
+\begin{scriptsize}
+    \begin{verbatim}
+<part name="interrupt_console" channel="inline" abstraction="operation" model="interrupt">
+    <property name="service" channel="inline" abstraction="character" model="gnu_linux_console"/>
+</part>
+    \end{verbatim}
+\end{scriptsize}
+
 \subsubsection{Service Property}
+
+The service to be interrupted.
 
 \emph{required}
 
 name=\texttt{'service'}\\
 abstraction=\texttt{'character'}\\
-model=\texttt{'tui' \vline\ 'gui' \vline\ 'wui'}
+model=\texttt{'signal' \vline\ 'shell' \vline\ 'standard\_output'
+    \vline\ 'gnu\_linux\_console' \vline\ 'x\_window\_system' \vline\ 'www' \vline\ 'cyboi'}

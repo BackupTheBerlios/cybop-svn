@@ -1,4 +1,6 @@
 
+\input{separators}
+
 Q: Why should a tui knowledge template NOT be implemented with properties of abstraction "knowledge" or "encapsulated", as follows:
 
     <part name="apw_entry" channel="inline" abstraction="character" model="a - Starte Arztpraxis Wiegand (APW) im DOS Emulator (DOSemu)">

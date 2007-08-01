@@ -13,7 +13,7 @@
 % http://www.cybop.net
 % - Cybernetics Oriented Programming -
 %
-% Version: $Revision: 1.1 $ $Date: 2007-07-17 20:02:36 $ $Author: christian $
+% Version: $Revision: 1.2 $ $Date: 2007-08-01 13:59:00 $ $Author: christian $
 % Authors: Christian Heller <christian.heller@tuxtax.de>
 %
 
@@ -21,34 +21,36 @@
 \label{neg_heading}
 \index{NEG}
 
-This operation applies the logic NEG operator to the given boolean operands.
+This operation applies the logic NEG operator to the given boolean operand.
 
-\subsubsection{Operand 1 Property}
+\subsubsection{Example}
+
+\begin{scriptsize}
+    \begin{verbatim}
+<part name="apply_neg" channel="inline" abstraction="operation" model="neg">
+    <property name="operand" channel="inline" abstraction="knowledge" model=".app.value"/>
+    <property name="result" channel="inline" abstraction="knowledge" model=".app.result"/>
+</part>
+    \end{verbatim}
+\end{scriptsize}
+
+\subsubsection{Operand Property}
+
+This is the operand of the boolean operation.
 
 \emph{required}
 
-name=\texttt{'operand\_1'}\\
+name=\texttt{'operand'}\\
 abstraction=\texttt{'boolean' \vline\ 'knowledge' \vline\ 'encapsulated'}\\
 model=\texttt{boolean value or knowledge model}
-
-This is the first operand of the boolean operation.
-
-\subsubsection{Operand 2 Property}
-
-\emph{required}
-
-name=\texttt{'operand\_2'}\\
-abstraction=\texttt{'boolean' \vline\ 'knowledge' \vline\ 'encapsulated'}\\
-model=\texttt{boolean value or knowledge model}
-
-This is the second operand of the boolean operation.
 
 \subsubsection{Result Property}
+
+This is the result of the boolean operation. It may be either \emph{true} or
+\emph{false}.
 
 \emph{required}
 
 name=\texttt{'result'}\\
-abstraction=\texttt{'boolean' \vline\ 'knowledge' \vline\ 'encapsulated'}\\
-model=\texttt{boolean value or knowledge model}
-
-This is the result of the boolean operation.
+abstraction=\texttt{'knowledge' \vline\ 'encapsulated'}\\
+model=\texttt{knowledge model}

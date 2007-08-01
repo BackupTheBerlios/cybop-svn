@@ -1,0 +1,38 @@
+%
+% $RCSfile: hidden_patterns.tex,v $
+%
+% Copyright (c) 2002-2007. Christian Heller. All rights reserved.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% Version: $Revision: 1.1 $ $Date: 2007-08-01 13:59:00 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\section{Hidden Patterns}
+\label{hidden_patterns_heading}
+\index{Patterns in CYBOL}
+\index{Hidden Patterns in CYBOL}
+
+There are a number of software patterns that may not be obvious (hidden) at
+first sight, but have been considered in the design of the CYBOL language.
+
+Most obviously, CYBOL knowledge templates follow the \emph{Composite} pattern,
+in a simplified form. All templates represent a compound consisting of part
+templates, which leads to a tree-like structure. But this also means that related
+patterns like \emph{Whole-Part} and \emph{Wrapper} are representable by CYBOL
+knowledge templates. A template as whole wraps its parts.
+
+Knowledge templates with similar granularity can be collected in one directory,
+in other words one common ontological level. Templates with smaller granularity,
+that is those that the more coarse-grained templates consist of, can be placed
+in another common layer and so forth. What comes out of it is a system of levels
+-- one variant of the \emph{Layers} pattern.

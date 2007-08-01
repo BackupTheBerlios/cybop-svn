@@ -13,7 +13,7 @@
 % http://www.cybop.net
 % - Cybernetics Oriented Programming -
 %
-% Version: $Revision: 1.1 $ $Date: 2007-07-17 20:02:36 $ $Author: christian $
+% Version: $Revision: 1.2 $ $Date: 2007-08-01 13:59:00 $ $Author: christian $
 % Authors: Christian Heller <christian.heller@tuxtax.de>
 %
 
@@ -23,7 +23,22 @@
 
 This operation starts up the given service.
 
+\subsubsection{Example}
+
+\begin{scriptsize}
+    \begin{verbatim}
+<part name="startup_wui" channel="inline" abstraction="operation" model="startup">
+    <property name="service" channel="inline" abstraction="character" model="www"/>
+    <property name="namespace" channel="inline" abstraction="character" model="inet6"/>
+    <property name="style" channel="inline" abstraction="character" model="stream"/>
+    <property name="address" channel="inline" abstraction="character" model="any"/>
+</part>
+    \end{verbatim}
+\end{scriptsize}
+
 \subsubsection{Service Property}
+
+This is the service to be started up.
 
 \emph{required}
 
@@ -32,34 +47,32 @@ abstraction=\texttt{'character'}\\
 model=\texttt{'signal' \vline\ 'shell' \vline\ 'standard\_output'
     \vline\ 'gnu\_linux\_console' \vline\ 'x\_window\_system' \vline\ 'www' \vline\ 'cyboi'}
 
-This is the service to be started up.
-
 \subsubsection{Namespace Property}
 
-\emph{required}
+The namespace of the socket.
+
+\emph{optional}, only if service is \emph{www} or \emph{cyboi}
 
 name=\texttt{'namespace'}\\
 abstraction=\texttt{'character'}\\
 model=\texttt{'local' \vline\ 'inet' \vline\ 'inet6' \vline\ 'ns' \vline\ 'iso' \vline\ 'ccitt' \vline\ 'implink' \vline\ 'route'}
 
-The namespace of the socket.
-
 \subsubsection{Style Property}
 
-\emph{required}
+The style of socket communication.
+
+\emph{optional}, only if service is \emph{www} or \emph{cyboi}
 
 name=\texttt{'style'}\\
 abstraction=\texttt{'character'}\\
 model=\texttt{'stream' \vline\ 'datagram' \vline\ 'raw'}
 
-The style of communication.
-
 \subsubsection{Address Property}
 
-\emph{required}
+This is the address of hosts communicating with this system via socket.
+
+\emph{optional}, only if service is \emph{www} or \emph{cyboi}
 
 name=\texttt{'address'}\\
 abstraction=\texttt{'character'}\\
 model=\texttt{'loopback' \vline\ 'any'}
-
-This is the host's address.

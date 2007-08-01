@@ -1,0 +1,48 @@
+%
+% $RCSfile: operation_call.tex,v $
+%
+% Copyright (c) 2002-2007. Christian Heller. All rights reserved.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% Version: $Revision: 1.1 $ $Date: 2007-08-01 13:59:00 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Operation Call}
+\label{operation_call_heading}
+\index{Operation Call Example}
+
+As stated previously, logic models may access and manipulate state models. The
+simplest form of a logic model is an operation with associated input/ output
+(i/o) state models. The following CYBOL knowledge template calls an \emph{add}
+operation, handing over i/o parameters as \emph{properties} of the
+corresponding \emph{part}:
+
+\begin{scriptsize}
+    \begin{verbatim}
+<model>
+    <part name="addition" channel="inline" abstraction="operation" model="add">
+        <property name="abstraction" channel="inline" abstraction="character" model="integer"/>
+        <property name="summand_1" channel="inline" abstraction="integer" model="1"/>
+        <property name="summand_2" channel="inline" abstraction="knowledge" model=".app.summand"/>
+        <property name="sum" channel="inline" abstraction="knowledge" model=".app.result"/>
+    </part>
+</model>
+    \end{verbatim}
+\end{scriptsize}
+
+The example nicely shows how state models can be given in various formats. The
+\emph{summand\_1} is given as constant value, defined directly in the knowledge
+template. Its type of abstraction is \emph{integer}. The \emph{summand\_2-} and
+\emph{sum} parameters, on the other hand, are given as dot-separated references
+to the runtime tree of knowledge models. Their type of abstraction is therefore
+\emph{knowledge}.

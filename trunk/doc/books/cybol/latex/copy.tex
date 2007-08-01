@@ -13,7 +13,7 @@
 % http://www.cybop.net
 % - Cybernetics Oriented Programming -
 %
-% Version: $Revision: 1.1 $ $Date: 2007-07-17 20:02:36 $ $Author: christian $
+% Version: $Revision: 1.2 $ $Date: 2007-08-01 13:59:00 $ $Author: christian $
 % Authors: Christian Heller <christian.heller@tuxtax.de>
 %
 
@@ -24,27 +24,22 @@
 This operation copies a value with the given abstraction from the source- to
 the destination model.
 
-\subsubsection{Source Property}
+\subsubsection{Example}
 
-\emph{required}
-
-name=\texttt{'source'}\\
-abstraction=\texttt{'boolean' \vline\ 'integer' \vline\ 'character' \vline\ 'knowledge' \vline\ 'encapsulated'}\\
-model=\texttt{value or knowledge model}
-
-This is the source value.
-
-\subsubsection{Destination Property}
-
-\emph{required}
-
-name=\texttt{'destination'}\\
-abstraction=\texttt{'boolean' \vline\ 'integer' \vline\ 'character' \vline\ 'knowledge' \vline\ 'encapsulated'}\\
-model=\texttt{value or knowledge model}
-
-This is the destination value.
+\begin{scriptsize}
+    \begin{verbatim}
+<part name="copy_title" channel="inline" abstraction="operation" model="copy">
+    <property name="abstraction" channel="inline" abstraction="character" model="character"/>
+    <property name="source" channel="inline" abstraction="character" model="My Book"/>
+    <property name="destination" channel="inline" abstraction="knowledge" model=".app.title"/>
+</part>
+    \end{verbatim}
+\end{scriptsize}
 
 \subsubsection{Abstraction Property}
+
+This is the abstraction of the values. CAUTION! It has to be identical for
+both, source- and destination value!
 
 \emph{required}
 
@@ -52,5 +47,22 @@ name=\texttt{'abstraction'}\\
 abstraction=\texttt{'character'}\\
 model=\texttt{'boolean' \vline\ 'integer' \vline\ 'character'}
 
-This is the abstraction of the values. CAUTION! It has to be identical for
-both, source- and destination value!
+\subsubsection{Source Property}
+
+This is the source value.
+
+\emph{required}
+
+name=\texttt{'source'}\\
+abstraction=\texttt{'boolean' \vline\ 'integer' \vline\ 'character' \vline\ 'knowledge' \vline\ 'encapsulated'}\\
+model=\texttt{value or knowledge model}
+
+\subsubsection{Destination Property}
+
+This is the destination value.
+
+\emph{required}
+
+name=\texttt{'destination'}\\
+abstraction=\texttt{'boolean' \vline\ 'integer' \vline\ 'character' \vline\ 'knowledge' \vline\ 'encapsulated'}\\
+model=\texttt{value or knowledge model}

@@ -13,7 +13,7 @@
 % http://www.cybop.net
 % - Cybernetics Oriented Programming -
 %
-% Version: $Revision: 1.1 $ $Date: 2007-07-17 20:02:36 $ $Author: christian $
+% Version: $Revision: 1.2 $ $Date: 2007-08-01 13:59:00 $ $Author: christian $
 % Authors: Christian Heller <christian.heller@tuxtax.de>
 %
 
@@ -21,9 +21,24 @@
 \label{create_heading}
 \index{Create}
 
-This operation creates a new knowledge model.
+This operation creates a new knowledge model in memory.
+
+\subsubsection{Example}
+
+\begin{scriptsize}
+    \begin{verbatim}
+<part name="create_addresses" channel="inline" abstraction="operation" model="create">
+    <property name="name" channel="inline" abstraction="character" model="addresses"/>
+    <property name="abstraction" channel="inline" abstraction="character" model="compound"/>
+    <property name="element" channel="inline" abstraction="character" model="part"/>
+    <property name="compound" channel="inline" abstraction="knowledge" model=".app"/>
+</part>
+    \end{verbatim}
+\end{scriptsize}
 
 \subsubsection{Name Property}
+
+This is the name of the knowledge model to be created.
 
 \emph{required}
 
@@ -31,20 +46,9 @@ name=\texttt{'name'}\\
 abstraction=\texttt{'character'}\\
 model=\texttt{knowledge model name}
 
-This is the name of the knowledge model to be created.
-
-\subsubsection{Channel Property}
-
-\emph{required}
-
-name=\texttt{'channel'}\\
-abstraction=\texttt{'character'}\\
-model=\texttt{'inline' \vline\ 'file'}
-
-This is the channel via which to load the knowledge template for creating a
-knowledge model.
-
 \subsubsection{Abstraction Property}
+
+This is the abstraction (type) of the knowledge model to be created.
 
 \emph{required}
 
@@ -52,19 +56,11 @@ name=\texttt{'abstraction'}\\
 abstraction=\texttt{'character'}\\
 model=\texttt{'boolean' \vline\ 'integer' \vline\ 'float' \vline\ 'character' \vline\ 'compound'}
 
-This is the abstraction of the knowledge model to be created.
-
-\subsubsection{Model Property}
-
-\emph{required}
-
-name=\texttt{'model'}\\
-abstraction=\texttt{'character'}\\
-model=\texttt{knowledge template path}
-
-This is the knowledge template from which to create a knowledge model.
-
 \subsubsection{Element Property}
+
+This property decides about the kind of element (knowledge model) to be created.
+A part element will be added to the model's part hierarchy;
+a meta element will be added to the model's details hierarchy.
 
 \emph{required}
 
@@ -72,14 +68,13 @@ name=\texttt{'element'}\\
 abstraction=\texttt{'character'}\\
 model=\texttt{'part' \vline\ 'meta'}
 
-This property specifies the kind of element (knowledge model) to be created.
+\subsubsection{Compound Property}
 
-\subsubsection{Whole Property}
+This property specifies the compound knowledge model to which to add to the new
+part/ meta knowledge model.
 
 \emph{required}
 
-name=\texttt{'whole'}\\
+name=\texttt{'compound'}\\
 abstraction=\texttt{'knowledge' \vline\ 'encapsulated'}\\
-model=\texttt{whole knowledge model}
-
-This property determines the compound to which to add the new knowledge model.
+model=\texttt{whole knowledge model path}

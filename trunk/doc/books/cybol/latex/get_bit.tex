@@ -13,7 +13,7 @@
 % http://www.cybop.net
 % - Cybernetics Oriented Programming -
 %
-% Version: $Revision: 1.1 $ $Date: 2007-07-17 20:02:36 $ $Author: christian $
+% Version: $Revision: 1.2 $ $Date: 2007-08-01 13:59:00 $ $Author: christian $
 % Authors: Christian Heller <christian.heller@tuxtax.de>
 %
 
@@ -23,7 +23,21 @@
 
 This operation retrieves the bit at the given position, within the given number.
 
+\subsubsection{Example}
+
+\begin{scriptsize}
+    \begin{verbatim}
+<part name="get_some_bit" channel="inline" abstraction="operation" model="get_bit">
+    <property name="number" channel="inline" abstraction="integer" model="127"/>
+    <property name="position" channel="inline" abstraction="integer" model="3"/>
+    <property name="result" channel="inline" abstraction="knowledge" model=".app.result"/>
+</part>
+    \end{verbatim}
+\end{scriptsize}
+
 \subsubsection{Number Property}
+
+This property specifies the number of which one bit is to be retrieved.
 
 \emph{required}
 
@@ -31,9 +45,9 @@ name=\texttt{'number'}\\
 abstraction=\texttt{'integer' \vline\ 'knowledge' \vline\ 'encapsulated'}\\
 model=\texttt{the actual number (or knowledge model)}
 
-This property specifies the number of which one bit is to be retrieved.
-
 \subsubsection{Position Property}
+
+The position of the bit whose value is to be retrieved.
 
 \emph{required}
 
@@ -41,15 +55,13 @@ name=\texttt{'position'}\\
 abstraction=\texttt{'integer' \vline\ 'knowledge' \vline\ 'encapsulated'}\\
 model=\texttt{position of the bit}
 
-The position of the bit whose value is to be retrieved.
-
 \subsubsection{Result Property}
+
+This is the result knowledge model in which to store the value of the bit that
+was retrieved from the given number. It may be either \emph{true} or \emph{false}.
 
 \emph{required}
 
 name=\texttt{'result'}\\
 abstraction=\texttt{'knowledge' \vline\ 'encapsulated'}\\
 model=\texttt{result knowledge model}
-
-This is the result knowledge model in which to store the value of the bit that
-was retrieved from the given number.

@@ -13,7 +13,7 @@
 % http://www.cybop.net
 % - Cybernetics Oriented Programming -
 %
-% Version: $Revision: 1.1 $ $Date: 2007-07-17 20:02:36 $ $Author: christian $
+% Version: $Revision: 1.2 $ $Date: 2007-08-01 13:59:00 $ $Author: christian $
 % Authors: Christian Heller <christian.heller@tuxtax.de>
 %
 
@@ -21,7 +21,22 @@
 \label{get_heading}
 \index{Get}
 
+\subsubsection{Example}
+
+\begin{scriptsize}
+    \begin{verbatim}
+<part name="get_fifth_address" channel="inline" abstraction="operation" model="get">
+    <property name="compound" channel="inline" abstraction="knowledge" model=".app.adr"/>
+    <property name="index" channel="inline" abstraction="integer" model="4"/>
+    <property name="description" channel="inline" abstraction="character" model="name"/>
+    <property name="result" channel="inline" abstraction="knowledge" model=".app.result"/>
+</part>
+    \end{verbatim}
+\end{scriptsize}
+
 \subsubsection{Compound Property}
+
+This is the compound whose element is to be retrieved.
 
 \emph{required}
 
@@ -29,9 +44,9 @@ name=\texttt{'compound'}\\
 abstraction=\texttt{'knowledge' \vline\ 'encapsulated'}\\
 model=\texttt{'integer' \vline\ 'character'}
 
-This is the compound whose element is to be retrieved.
-
 \subsubsection{Index Property}
+
+This is the index of the element to be retrieved, within the compound.
 
 \emph{required}
 
@@ -39,9 +54,9 @@ name=\texttt{'index'}\\
 abstraction=\texttt{'integer'}\\
 model=\texttt{position of element}
 
-This is the index of the element to be retrieved, within the compound.
-
 \subsubsection{Description Property}
+
+This property determines which data of the compound's part to retrieve.
 
 \emph{required}
 
@@ -49,14 +64,12 @@ name=\texttt{'description'}\\
 abstraction=\texttt{'character'}\\
 model=\texttt{'name' \vline\ 'abstraction'}
 
-This property determines which data of the compound's part to retrieve.
-
 \subsubsection{Result Property}
+
+This is the result knowledge model in which to store the retrieved element.
 
 \emph{required}
 
 name=\texttt{'result'}\\
 abstraction=\texttt{'knowledge' \vline\ 'encapsulated'}\\
 model=\texttt{result knowledge model}
-
-This is the result knowledge model in which to store the retrieved element.

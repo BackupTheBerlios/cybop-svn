@@ -13,7 +13,7 @@
 % http://www.cybop.net
 % - Cybernetics Oriented Programming -
 %
-% Version: $Revision: 1.1 $ $Date: 2007-07-17 20:02:36 $ $Author: christian $
+% Version: $Revision: 1.2 $ $Date: 2007-08-01 13:59:00 $ $Author: christian $
 % Authors: Christian Heller <christian.heller@tuxtax.de>
 %
 
@@ -24,17 +24,33 @@
 This operation counts those parts of the given whole (compound), that match the
 given filter criteria.
 
+\subsubsection{Example}
+
+\begin{scriptsize}
+    \begin{verbatim}
+<part name="count_addresses" channel="inline" abstraction="operation" model="count">
+    <property name="compound" channel="inline" abstraction="encapsulated" model=".app.name"/>
+    <property name="selection" channel="inline" abstraction="character" model="prefix"/>
+    <property name="filter" channel="inline" abstraction="character" model="address"/>
+    <property name="result" channel="inline" abstraction="knowledge" model=".app.result"/>
+</part>
+    \end{verbatim}
+\end{scriptsize}
+
 \subsubsection{Compound Property}
+
+The compound whose parts are to be counted.
 
 \emph{required}
 
 name=\texttt{'compound'}\\
-abstraction=\texttt{'knowledge'}\\
+abstraction=\texttt{'knowledge' \vline\ 'encapsulated'}\\
 model=\texttt{compound knowledge model}
 
-The compound whose parts are to be counted.
-
 \subsubsection{Selection Property}
+
+This property selects the kind of filter to be applied for counting the
+compound's parts.
 
 \emph{required}
 
@@ -42,26 +58,23 @@ name=\texttt{'selection'}\\
 abstraction=\texttt{'character'}\\
 model=\texttt{'full' \vline\ 'prefix' \vline\ 'suffix' \vline\ 'part'}
 
-This property selects the kind of filter to be applied for counting the
-compound's parts.
-
 \subsubsection{Filter Property}
+
+The filter to compare the compound parts' names with. Only those parts will be
+counted whose name (full, prefix, suffix, part) matches the filter string.
 
 \emph{required}
 
 name=\texttt{'filter'}\\
 abstraction=\texttt{'character'}\\
-model=\texttt{compound knowledge model}
-
-The filter to compare the compound parts' names with. Only those parts will be
-counted whose name (full, prefix, suffix, part) matches the filter string.
+model=\texttt{filter string}
 
 \subsubsection{Result Property}
+
+The knowledge model in which to store the result.
 
 \emph{required}
 
 name=\texttt{'result'}\\
-abstraction=\texttt{'knowledge'}\\
-model=\texttt{result knowledge model}
-
-The knowledge model in which to store the result.
+abstraction=\texttt{'knowledge' \vline\ 'encapsulated'}\\
+model=\texttt{knowledge model}

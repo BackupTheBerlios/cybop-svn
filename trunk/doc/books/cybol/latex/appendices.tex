@@ -13,7 +13,7 @@
 % http://www.cybop.net
 % - Cybernetics Oriented Programming -
 %
-% Version: $Revision: 1.1 $ $Date: 2007-07-17 20:02:36 $ $Author: christian $
+% Version: $Revision: 1.2 $ $Date: 2007-08-01 13:59:00 $ $Author: christian $
 % Authors: Christian Heller <christian.heller@tuxtax.de>
 %
 
@@ -33,19 +33,21 @@
 % Unset uppercase for figures and tables headers.
 % By default, TeX uses uppercase letters for these.
 \lhead[\fancyplain{}{\footnotesize{\textsf{\textsl{\thepage}}}}]{\fancyplain{}{\footnotesize{\textsf{\textsl{\nouppercase{\rightmark}}}}}}
-\rhead[\fancyplain{}{\footnotesize{\textsf{\textsl{14\hspace{3mm}Appendices}}}}]{\fancyplain{}{\footnotesize{\textsf{\textsl{\thepage}}}}}
-\setlofname{14.3\hspace{2mm}Figures}
+\rhead[\fancyplain{}{\footnotesize{\textsf{\textsl{7\hspace{3mm}Appendices}}}}]{\fancyplain{}{\footnotesize{\textsf{\textsl{\thepage}}}}}
+\setlofname{7.3\hspace{3mm}Figures}
 % Set sans serif font.
 \sffamily
 \label{list_of_figures_heading}
 \listoffigures
 \newpage{\pagestyle{empty}\cleardoublepage}
-\setlotname{14.4\hspace{2mm}Tables}
+\setlotname{7.4\hspace{3mm}Tables}
 \label{list_of_tables_heading}
 \listoftables
 % Set roman font.
 \rmfamily
 \setcounter{section}{4}
+\newpage{\pagestyle{empty}\cleardoublepage}
+\input{history}
 \newpage{\pagestyle{empty}\cleardoublepage}
 \input{licences}
 \newpage{\pagestyle{empty}\cleardoublepage}

@@ -1,0 +1,46 @@
+%
+% $RCSfile: semantics.tex,v $
+%
+% Copyright (c) 2002-2007. Christian Heller. All rights reserved.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% Version: $Revision: 1.1 $ $Date: 2007-08-01 13:59:00 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\section{Semantics}
+\label{semantics_heading}
+\index{Semantics}
+\index{State Knowledge Modelling}
+\index{Logic Knowledge Modelling}
+\index{Extensible Markup Language}
+\index{XML}
+\index{XML Tag}
+\index{XML Attribute}
+
+The meaning expressed by terms and sentences is their \emph{Semantics}
+\cite{duden}.
+
+CYBOL files can be used to model \emph{State Knowledge} (like a graphical
+window or a person's address) and \emph{Logic Knowledge} (like an operation or
+algorithm or workflow) \cite{cybopbook}. In both cases, the \emph{same} syntax
+(document structure) with \emph{identical} vocabulary (XML tags and -attributes)
+is applied. It is the attribute \emph{Values} that make a difference in meaning.
+
+The double hierarchy mentioned before is realised in CYBOL knowledge templates
+by using XML \emph{Attributes} for representing the whole-part hierarchy, and
+XML \emph{Tags} for representing the additional meta data that a whole model
+keeps about its part models.
+
+\input{attributes}
+\input{tags}
+\input{tag_attribute_swapping}

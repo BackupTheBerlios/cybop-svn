@@ -13,7 +13,7 @@
 % http://www.cybop.net
 % - Cybernetics Oriented Programming -
 %
-% Version: $Revision: 1.1 $ $Date: 2007-07-17 20:02:36 $ $Author: christian $
+% Version: $Revision: 1.2 $ $Date: 2007-08-01 13:59:00 $ $Author: christian $
 % Authors: Christian Heller <christian.heller@tuxtax.de>
 %
 
@@ -21,12 +21,46 @@
 \label{multiply_heading}
 \index{Multiply}
 
-\subsubsection{TODO Property}
+This operation multiplies two numbers which results in the product.
+
+\subsubsection{Example}
+
+\begin{scriptsize}
+    \begin{verbatim}
+<part name="multiply_numbers" channel="inline" abstraction="operation" model="multiply">
+    <property name="factor_1" channel="inline" abstraction="integer" model="2"/>
+    <property name="factor_2" channel="inline" abstraction="knowledge" model=".app.factor"/>
+    <property name="product" channel="inline" abstraction="knowledge" model=".app.product"/>
+</part>
+    \end{verbatim}
+\end{scriptsize}
+
+\subsubsection{Factor 1 Property}
+
+This is the first factor of the multiplication.
 
 \emph{required}
 
-name=\texttt{'NAME'}\\
-abstraction=\texttt{'character'}\\
-model=\texttt{'integer' \vline\ 'character'}
+name=\texttt{'factor\_1'}\\
+abstraction=\texttt{'integer'}\\
+model=\texttt{number or knowledge model}
 
-This is a DESCRIPTION.
+\subsubsection{Factor 2 Property}
+
+This is the second factor of the multiplication.
+
+\emph{required}
+
+name=\texttt{'factor\_2'}\\
+abstraction=\texttt{'integer'}\\
+model=\texttt{number or knowledge model}
+
+\subsubsection{Product Property}
+
+This is the product as result of the multiplication.
+
+\emph{required}
+
+name=\texttt{'product'}\\
+abstraction=\texttt{'integer'}\\
+model=\texttt{number or knowledge model}

@@ -1,0 +1,78 @@
+%
+% $RCSfile: hello_world.tex,v $
+%
+% Copyright (c) 2002-2007. Christian Heller. All rights reserved.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% Version: $Revision: 1.1 $ $Date: 2007-08-01 13:59:00 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Hello World}
+\label{hello_world_heading}
+\index{Hello, World! Example}
+
+Two possible CYBOL versions of the famous minimal \emph{Hello, World!} program
+are given following. The first consists of only two operations: \emph{send} and
+\emph{exit}. The string message to be displayed on screen is handed over as
+\emph{property} to the \emph{send} operation, before the \emph{exit} operation
+shuts down the system:
+
+\begin{scriptsize}
+    \begin{verbatim}
+<model>
+    <part name="send_model_to_output" channel="inline" abstraction="operation" model="send">
+        <property name="language" channel="inline" abstraction="character" model="shell"/>
+        <property name="message" channel="inline" abstraction="character" model="Hello, World!"/>
+    </part>
+    <part name="exit_application" channel="inline" abstraction="operation" model="exit"/>
+</model>
+    \end{verbatim}
+\end{scriptsize}
+
+The second example template is slightly more complex. It starts with creating a
+domain model that consists of just one \emph{greeting} string. That string is
+then sent as message to the human user via a \emph{Textual User Interface}
+(TUI), just as in the first example. The difference is that now, the greeting
+is not handed over as hard-coded \emph{string} value, but is read from the
+runtime knowledge model, which is indicated by its \emph{abstraction} value:
+
+\begin{scriptsize}
+    \begin{verbatim}
+<model>
+    <part name="create_greeting" channel="inline" abstraction="operation" model="create">
+        <property name="name" channel="inline" abstraction="character" model="greeting"/>
+        <property name="abstraction" channel="inline" abstraction="character" model="character"/>
+        <property name="element" channel="inline" abstraction="character" model="part"/>
+        <property name="whole" channel="inline" abstraction="knowledge" model=".app"/>
+    </part>
+    <part name="receive_greeting" channel="inline" abstraction="operation" model="receive">
+        <property name="channel" channel="inline" abstraction="character" model="inline"/>
+        <property name="language" channel="inline" abstraction="character" model="character"/>
+        <property name="message" channel="inline" abstraction="character" model="Hello, World!"/>
+        <property name="model" channel="inline" abstraction="knowledge" model=".app.greeting"/>
+    </part>
+    <part name="send_model_to_output" channel="inline" abstraction="operation" model="send">
+        <property name="language" channel="inline" abstraction="character" model="shell"/>
+        <property name="message" channel="inline" abstraction="knowledge" model="greeting"/>
+    </part>
+    <part name="destroy_greeting" channel="inline" abstraction="operation" model="destroy_part">
+        <property name="name" channel="inline" abstraction="knowledge" model="greeting"/>
+    </part>
+    <part name="exit_application" channel="inline" abstraction="operation" model="exit"/>
+</model>
+    \end{verbatim}
+\end{scriptsize}
+
+The appearance of a \emph{create}/ \emph{destroy} pair in the second example
+already suggests how an application lifecycle with \emph{startup-},
+\emph{runtime-} and \emph{shutdown} phase could look like in CYBOL.

@@ -1,0 +1,63 @@
+%
+% $RCSfile: tags.tex,v $
+%
+% Copyright (c) 2002-2007. Christian Heller. All rights reserved.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% Version: $Revision: 1.1 $ $Date: 2007-08-01 13:59:00 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Tags}
+\label{tags_heading}
+\index{Tags}
+\index{model Tag}
+\index{part Tag}
+\index{property Tag}
+\index{constraint Tag}
+
+There are many kinds of meta data besides the above-mentioned attributes, that
+may be known about a model. These are given as special XML tags called
+\emph{property} and \emph{constraint}. As defined in section
+\ref{vocabulary_heading}, a CYBOL knowledge template may use four kinds of XML
+tags:
+
+\begin{itemize}
+    \item[-] model
+    \item[-] part
+    \item[-] property
+    \item[-] constraint
+\end{itemize}
+
+The \emph{model} tag appears just once. It is the root node which makes a CYBOL
+knowledge template a valid XML document.
+
+Of actual interest are the \emph{part} tags. They identify the models that the
+\emph{whole} model described by the CYBOL knowledge template consists of.
+
+A \emph{whole} model may know a lot more about its \emph{part} models, than is
+given by a part model's XML attributes. A spatial state model may know about
+the \emph{position} and \emph{size} of its parts, in space. A temporal model
+(such as a workflow) may have to know about the \emph{position} of its parts in
+time, in order to be able to execute them in the correct order. Further, the
+temporal model needs to know about the \emph{input/output} (i/o) state models
+which are to be manipulated by the corresponding logic operation (part model).
+The number of parts within a whole (compound) model may be limited. And so on.
+These additional information are provided by \emph{property} tags whose number
+is conceptually unlimited.
+
+Not only parts need additional meta data; properties may need such data, too.
+The position or size as properties of a part may have to be constrained to
+certain values, such as a \emph{minimum} or \emph{maximum}. The values of the
+\emph{colour} property of a part model may have to be chosen out of a
+pre-defined set called \emph{choice}. Data of that kind are stated in
+\emph{constraint} tags.

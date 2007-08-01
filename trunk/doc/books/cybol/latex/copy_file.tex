@@ -13,7 +13,7 @@
 % http://www.cybop.net
 % - Cybernetics Oriented Programming -
 %
-% Version: $Revision: 1.1 $ $Date: 2007-07-17 20:02:36 $ $Author: christian $
+% Version: $Revision: 1.2 $ $Date: 2007-08-01 13:59:00 $ $Author: christian $
 % Authors: Christian Heller <christian.heller@tuxtax.de>
 %
 
@@ -24,7 +24,21 @@
 This operation copies the given files or directories. Internally, it just uses
 the corresponding shell command functionality.
 
+\subsubsection{Example}
+
+\begin{scriptsize}
+    \begin{verbatim}
+<part name="copy_directory" channel="inline" abstraction="operation" model="copy">
+    <property name="recursive" channel="inline" abstraction="boolean" model="true"/>
+    <property name="source" channel="inline" abstraction="character" model="/home/cybop/src"/>
+    <property name="destination" channel="inline" abstraction="character" model="/home/backup"/>
+</part>
+    \end{verbatim}
+\end{scriptsize}
+
 \subsubsection{Recursive Property}
+
+This is the flag specifying whether or not to copy recursively.
 
 \emph{required}
 
@@ -32,9 +46,9 @@ name=\texttt{'recursive'}\\
 abstraction=\texttt{'boolean'}\\
 model=\texttt{'true' \vline\ 'false'}
 
-This is the flag specifying whether or not to copy recursively.
-
 \subsubsection{Source Property}
+
+This property specifies the source file or -directory.
 
 \emph{required}
 
@@ -42,14 +56,12 @@ name=\texttt{'source'}\\
 abstraction=\texttt{'character'}\\
 model=\texttt{source file or directory}
 
-This property specifies the source file or -directory.
-
 \subsubsection{Destination Property}
+
+This property specifies the destination file or -directory.
 
 \emph{required}
 
 name=\texttt{'destination'}\\
 abstraction=\texttt{'character'}\\
 model=\texttt{destination file or directory}
-
-This property specifies the destination file or -directory.

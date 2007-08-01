@@ -13,7 +13,7 @@
 % http://www.cybop.net
 % - Cybernetics Oriented Programming -
 %
-% Version: $Revision: 1.1 $ $Date: 2007-07-17 20:02:36 $ $Author: christian $
+% Version: $Revision: 1.2 $ $Date: 2007-08-01 13:59:00 $ $Author: christian $
 % Authors: Christian Heller <christian.heller@tuxtax.de>
 %
 
@@ -25,7 +25,21 @@ This operation branches the program flow, depending on the given criterion
 flag. If the flag is true, another logic knowledge model may be executed than
 if the flag is false.
 
+\subsubsection{Example}
+
+\begin{scriptsize}
+    \begin{verbatim}
+<part name="branch" channel="inline" abstraction="operation" model="branch">
+    <property name="criterion" channel="inline" abstraction="knowledge" model=".app.crit"/>
+    <property name="true" channel="inline" abstraction="knowledge" model=".app.add_address"/>
+    <property name="false" channel="inline" abstraction="knowledge" model=".app.del_address"/>
+</part>
+    \end{verbatim}
+\end{scriptsize}
+
 \subsubsection{Criterion Property}
+
+This is the flag specifying which of the two models to execute.
 
 \emph{required}
 
@@ -33,9 +47,9 @@ name=\texttt{'criterion'}\\
 abstraction=\texttt{'boolean' \vline\ 'knowledge' \vline\ 'encapsulated'}\\
 model=\texttt{'true' \vline\ 'false' \vline\ knowledge model pointing to flag}
 
-This is the flag specifying which of the two models to execute.
-
 \subsubsection{True Property}
+
+This is the logic knowledge model to be executed if the condition is true.
 
 \emph{required}
 
@@ -43,14 +57,12 @@ name=\texttt{'true'}\\
 abstraction=\texttt{'knowledge' \vline\ 'encapsulated'}\\
 model=\texttt{knowledge model path if true}
 
-This is the logic knowledge model to be executed if the condition is true.
-
 \subsubsection{False Property}
+
+This is the logic knowledge model to be executed if the condition is false.
 
 \emph{required}
 
 name=\texttt{'false'}\\
 abstraction=\texttt{'knowledge' \vline\ 'encapsulated'}\\
 model=\texttt{knowledge model path if false}
-
-This is the logic knowledge model to be executed if the condition is false.

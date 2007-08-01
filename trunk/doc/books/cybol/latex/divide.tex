@@ -13,7 +13,7 @@
 % http://www.cybop.net
 % - Cybernetics Oriented Programming -
 %
-% Version: $Revision: 1.1 $ $Date: 2007-07-17 20:02:36 $ $Author: christian $
+% Version: $Revision: 1.2 $ $Date: 2007-08-01 13:59:00 $ $Author: christian $
 % Authors: Christian Heller <christian.heller@tuxtax.de>
 %
 
@@ -21,12 +21,59 @@
 \label{divide_heading}
 \index{Divide}
 
-\subsubsection{TODO Property}
+This operation divides one number by another, which results in the quotient. If
+the dividend is not a multiple of the divisor, then the operation will return
+the remainder as additional property.
+
+\subsubsection{Example}
+
+\begin{scriptsize}
+    \begin{verbatim}
+<part name="divide_numbers" channel="inline" abstraction="operation" model="divide">
+    <property name="dividend" channel="inline" abstraction="integer" model="table"/>
+    <property name="divisor" channel="inline" abstraction="integer" model="divisor"/>
+    <property name="quotient" channel="inline" abstraction="integer" model="quotient"/>
+    <property name="remainder" channel="inline" abstraction="integer" model="remainder"/>
+</part>
+    \end{verbatim}
+\end{scriptsize}
+
+\subsubsection{Dividend Property}
+
+This is the dividend, i.e. the number to be divided.
 
 \emph{required}
 
-name=\texttt{'NAME'}\\
-abstraction=\texttt{'character'}\\
-model=\texttt{'integer' \vline\ 'character'}
+name=\texttt{'dividend'}\\
+abstraction=\texttt{'integer' \vline\ 'knowledge' \vline\ 'encapsulated'}
+model=\texttt{number or knowledge model}
 
-This is a DESCRIPTION.
+\subsubsection{Divisor Property}
+
+This is the divisor, i.e. the number to be divided by.
+
+\emph{required}
+
+name=\texttt{'divisor'}\\
+abstraction=\texttt{'integer' \vline\ 'knowledge' \vline\ 'encapsulated'}
+model=\texttt{number or knowledge model}
+
+\subsubsection{Quotient Property}
+
+This is the quotient, i.e. the number resulting from the division.
+
+\emph{required}
+
+name=\texttt{'quotient'}\\
+abstraction=\texttt{'integer' \vline\ 'knowledge' \vline\ 'encapsulated'}
+model=\texttt{number or knowledge model}
+
+\subsubsection{Remainder Property}
+
+This is the remainder, i.e. the difference between dividend and quotient.
+
+\emph{required}
+
+name=\texttt{'remainder'}\\
+abstraction=\texttt{'integer' \vline\ 'knowledge' \vline\ 'encapsulated'}
+model=\texttt{number or knowledge model}

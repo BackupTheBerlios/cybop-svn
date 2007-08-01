@@ -13,7 +13,7 @@
 % http://www.cybop.net
 % - Cybernetics Oriented Programming -
 %
-% Version: $Revision: 1.1 $ $Date: 2007-07-17 20:02:36 $ $Author: christian $
+% Version: $Revision: 1.2 $ $Date: 2007-08-01 13:59:00 $ $Author: christian $
 % Authors: Christian Heller <christian.heller@tuxtax.de>
 %
 
@@ -21,12 +21,46 @@
 \label{subtract_heading}
 \index{Subtract}
 
-\subsubsection{TODO Property}
+This operation subtracts one number from another which results in their difference.
+
+\subsubsection{Example}
+
+\begin{scriptsize}
+    \begin{verbatim}
+<part name="subtract_numbers" channel="inline" abstraction="operation" model="subtract">
+    <property name="minuend" channel="inline" abstraction="integer" model="10"/>
+    <property name="subtrahend" channel="inline" abstraction="integer" model="7"/>
+    <property name="difference" channel="inline" abstraction="knowledge" model=".app.difference"/>
+</part>
+    \end{verbatim}
+\end{scriptsize}
+
+\subsubsection{Minuend Property}
+
+This is the minuend, i.e. the number to be subtracted from.
 
 \emph{required}
 
-name=\texttt{'NAME'}\\
-abstraction=\texttt{'character'}\\
-model=\texttt{'integer' \vline\ 'character'}
+name=\texttt{'minuend'}\\
+abstraction=\texttt{'integer' \vline\ 'knowledge' \vline\ 'encapsulated'}\\
+model=\texttt{number or knowledge model path}
 
-This is a DESCRIPTION.
+\subsubsection{Subtrahend Property}
+
+This is the subtrahend, i.e. the number to be subtracted.
+
+\emph{required}
+
+name=\texttt{'subtrahend'}\\
+abstraction=\texttt{'integer' \vline\ 'knowledge' \vline\ 'encapsulated'}\\
+model=\texttt{number or knowledge model path}
+
+\subsubsection{Difference Property}
+
+This is the difference between minuend and subtrahend.
+
+\emph{required}
+
+name=\texttt{'difference'}\\
+abstraction=\texttt{'integer' \vline\ 'knowledge' \vline\ 'encapsulated'}\\
+model=\texttt{knowledge model path}

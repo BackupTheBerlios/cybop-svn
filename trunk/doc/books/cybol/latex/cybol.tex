@@ -13,7 +13,7 @@
 % http://www.cybop.net
 % - Cybernetics Oriented Programming -
 %
-% Version: $Revision: 1.1 $ $Date: 2007-07-17 20:02:36 $ $Author: christian $
+% Version: $Revision: 1.2 $ $Date: 2007-08-01 13:59:00 $ $Author: christian $
 % Authors: Christian Heller <christian.heller@tuxtax.de>
 %
 
@@ -22,8 +22,7 @@
 %
 % Hand over font size and side format.
 %
-%\documentclass[9pt,twoside]{tuxtax}
-\documentclass[10pt,twoside]{tuxtax}
+\documentclass[9pt,twoside]{tuxtax}
 
 %
 % Input hyphenation list.
@@ -34,8 +33,11 @@
 % Define text macros.
 %
 \def\placemacro{Ilmenau}
-\def\datemacro{2007-07-06}
+\def\datemacro{2007-07-31}
 \def\authormacro{Christian Heller}
+\def\titlemacro{Cybernetics Oriented Language (CYBOL)}
+\def\subtitlemacro{An interpretable Knowledge Modelling- and Programming Language}
+\def\versionmacro{Version 2.0, Draft \datemacro}
 
 %
 % Enable special indexing commands.
@@ -80,12 +82,6 @@
     \newpage{\pagestyle{empty}\cleardoublepage}
     \input{definition}
     \newpage{\pagestyle{empty}\cleardoublepage}
-    \input{names}
-    \newpage{\pagestyle{empty}\cleardoublepage}
-    \input{channels}
-    \newpage{\pagestyle{empty}\cleardoublepage}
-    \input{abstractions}
-    \newpage{\pagestyle{empty}\cleardoublepage}
     \input{state_models}
     \newpage{\pagestyle{empty}\cleardoublepage}
     \input{logic_models}
@@ -96,42 +92,3 @@
     \newpage{\pagestyle{empty}\cleardoublepage}
     \input{appendices}
 \end{document}
-
-\begin{center}
-    \textbf{Take the Kind of Association as Criterion\\
-    to sort patterns in a completely new way.}
-\end{center}
-
-\begin{table}[ht]
-    \begin{center}
-        \begin{tabular}{| p{20mm} | p{25mm} | p{20mm} | p{30mm} |}
-            \hline
-            \textbf{Property} & \textbf{Abstraction} & \textbf{Model} & \textbf{Description}\\
-            \hline
-            abstraction & character & integer, character & Abstraction (type) of summand\_1, summand\_2 and sum\\
-            \hline
-            summand\_1 & integer, character & & \\
-            \hline
-            summand\_2 & integer, character & & \\
-            \hline
-            sum & integer, character & & \\
-            \hline
-        \end{tabular}
-        \caption{Add}
-        \label{add_table}
-    \end{center}
-\end{table}
-
-\begin{itemize}
-    \item[-] \emph{Abstraction:} integer, character
-    \item[-] \emph{Model:}
-    \item[-] \emph{Description:}
-\end{itemize}
-
-\begin{figure}[ht]
-    \begin{center}
-        \includegraphics[scale=0.3,angle=-90]{graphics/gaps.pdf}
-        \caption{Standard Software Engineering Process}
-        \label{software_engineering_process_figure}
-    \end{center}
-\end{figure}

@@ -13,7 +13,7 @@
 % http://www.cybop.net
 % - Cybernetics Oriented Programming -
 %
-% Version: $Revision: 1.1 $ $Date: 2007-07-17 20:02:36 $ $Author: christian $
+% Version: $Revision: 1.2 $ $Date: 2007-08-01 13:59:00 $ $Author: christian $
 % Authors: Christian Heller <christian.heller@tuxtax.de>
 %
 
@@ -23,7 +23,22 @@
 
 This operation rotates the bits within the number by the given positions.
 
+\subsubsection{Example}
+
+\begin{scriptsize}
+    \begin{verbatim}
+<part name="rotate_bits" channel="inline" abstraction="operation" model="rotate">
+    <property name="number" channel="inline" abstraction="knowledge" model=".app.number"/>
+    <property name="direction" channel="inline" abstraction="character" model="left"/>
+    <property name="position" channel="inline" abstraction="integer" model="1"/>
+    <property name="result" channel="inline" abstraction="knowledge" model=".app.result"/>
+</part>
+    \end{verbatim}
+\end{scriptsize}
+
 \subsubsection{Number Property}
+
+This property specifies the number whose bits are to be rotated.
 
 \emph{required}
 
@@ -31,9 +46,9 @@ name=\texttt{'number'}\\
 abstraction=\texttt{'integer' \vline\ 'knowledge' \vline\ 'encapsulated'}\\
 model=\texttt{the actual number (or knowledge model)}
 
-This property specifies the number whose bits are to be rotated.
-
 \subsubsection{Direction Property}
+
+The direction in which to rotate.
 
 \emph{required}
 
@@ -41,9 +56,9 @@ name=\texttt{'direction'}\\
 abstraction=\texttt{'character'}\\
 model=\texttt{'left' \vline\ 'right'}
 
-The direction in which to rotate.
-
 \subsubsection{Position Property}
+
+The number of positions by which the bits of the given number are to be rotated.
 
 \emph{required}
 
@@ -51,15 +66,13 @@ name=\texttt{'position'}\\
 abstraction=\texttt{'integer' \vline\ 'knowledge' \vline\ 'encapsulated'}\\
 model=\texttt{number of positions to rotate by}
 
-The number of positions by which the bits of the given number are to be rotated.
-
 \subsubsection{Result Property}
+
+This is the result knowledge model in which to store the number whose bits were
+rotated.
 
 \emph{required}
 
 name=\texttt{'result'}\\
 abstraction=\texttt{'knowledge' \vline\ 'encapsulated'}\\
 model=\texttt{result knowledge model}
-
-This is the result knowledge model in which to store the number whose bits were
-rotated.

@@ -13,7 +13,7 @@
 % http://www.cybop.net
 % - Cybernetics Oriented Programming -
 %
-% Version: $Revision: 1.1 $ $Date: 2007-07-17 20:02:36 $ $Author: christian $
+% Version: $Revision: 1.2 $ $Date: 2007-08-01 13:59:00 $ $Author: christian $
 % Authors: Christian Heller <christian.heller@tuxtax.de>
 %
 
@@ -24,22 +24,34 @@
 This operation starts an endless loop that runs until the given break flag is
 set.
 
+\subsubsection{Example}
+
+\begin{scriptsize}
+    \begin{verbatim}
+<part name="loop_addresses" channel="inline" abstraction="operation" model="loop">
+    <property name="model" channel="inline" abstraction="knowledge" model=".app.process"/>
+    <property name="break" channel="inline" abstraction="knowledge" model=".app.break_flag"/>
+</part>
+    \end{verbatim}
+\end{scriptsize}
+
 \subsubsection{Model Property}
+
+This is the knowledge model to be executed repeatedly by the loop.
 
 \emph{required}
 
 name=\texttt{'model'}\\
 abstraction=\texttt{'knowledge' \vline\ 'encapsulated'}\\
-model=\texttt{knowledge model to be executed}
-
-This is the model to be executed repeatedly by the loop.
+model=\texttt{knowledge model}
 
 \subsubsection{Break Property}
+
+This is the break flag. Once set, the loop will be left (exited). It may be
+either \emph{true} or \emph{false}.
 
 \emph{required}
 
 name=\texttt{'break'}\\
-abstraction=\texttt{'boolean'}\\
-model=\texttt{'true' \vline\ 'false'}
-
-This is the break flag.
+abstraction=\texttt{'knowledge' \vline\ 'encapsulated'}\\
+model=\texttt{knowledge model}

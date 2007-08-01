@@ -13,7 +13,7 @@
 % http://www.cybop.net
 % - Cybernetics Oriented Programming -
 %
-% Version: $Revision: 1.1 $ $Date: 2007-07-17 20:02:36 $ $Author: christian $
+% Version: $Revision: 1.2 $ $Date: 2007-08-01 13:59:00 $ $Author: christian $
 % Authors: Christian Heller <christian.heller@tuxtax.de>
 %
 
@@ -23,7 +23,22 @@
 
 This operation shifts the bits within the number by the given positions.
 
+\subsubsection{Example}
+
+\begin{scriptsize}
+    \begin{verbatim}
+<part name="shift_bits" channel="inline" abstraction="operation" model="shift">
+    <property name="number" channel="inline" abstraction="integer" model="8"/>
+    <property name="direction" channel="inline" abstraction="character" model="right"/>
+    <property name="position" channel="inline" abstraction="integer" model="2"/>
+    <property name="result" channel="inline" abstraction="knowledge" model=".app.result"/>
+</part>
+    \end{verbatim}
+\end{scriptsize}
+
 \subsubsection{Number Property}
+
+This property specifies the number whose bits are to be shifted.
 
 \emph{required}
 
@@ -31,9 +46,9 @@ name=\texttt{'number'}\\
 abstraction=\texttt{'integer' \vline\ 'knowledge' \vline\ 'encapsulated'}\\
 model=\texttt{the actual number (or knowledge model)}
 
-This property specifies the number whose bits are to be shifted.
-
 \subsubsection{Direction Property}
+
+The direction in which to shift.
 
 \emph{required}
 
@@ -41,9 +56,9 @@ name=\texttt{'direction'}\\
 abstraction=\texttt{'character'}\\
 model=\texttt{'left' \vline\ 'right'}
 
-The direction in which to shift.
-
 \subsubsection{Position Property}
+
+The number of positions by which the bits of the given number are to be shifted.
 
 \emph{required}
 
@@ -51,15 +66,13 @@ name=\texttt{'position'}\\
 abstraction=\texttt{'integer' \vline\ 'knowledge' \vline\ 'encapsulated'}\\
 model=\texttt{number of positions to shift by}
 
-The number of positions by which the bits of the given number are to be shifted.
-
 \subsubsection{Result Property}
+
+This is the result knowledge model in which to store the number whose bits were
+shifted.
 
 \emph{required}
 
 name=\texttt{'result'}\\
 abstraction=\texttt{'knowledge' \vline\ 'encapsulated'}\\
 model=\texttt{result knowledge model}
-
-This is the result knowledge model in which to store the number whose bits were
-shifted.
