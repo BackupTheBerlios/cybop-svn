@@ -7,7 +7,7 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.4 $ $Date: 2007-05-28 17:12:38 $ $Author: christian $
+# @version $Revision: 1.5 $ $Date: 2007-08-03 16:51:41 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
@@ -20,5 +20,8 @@ The CYBOP project comprises three elements:
 Instructions on how to install cybop, compile cyboi and run cybol applications
 are given in the file called INSTALL.
 
-You may find further information on the website:
+Report bugs to <cybop-developers@lists.berlios.de> or enter them at:
+http://developer.berlios.de/bugs/?group_id=669
+
+You may find further information, relevant mailing lists etc. on the website:
 http://www.cybop.net
