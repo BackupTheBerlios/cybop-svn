@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.27 $ $Date: 2007-07-23 23:47:58 $ $Author: christian $
+ * @version $Revision: 1.28 $ $Date: 2007-08-03 16:57:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -1081,7 +1081,343 @@ void receive_socket_signal(void* p0, void* p1, void* p2, void* p3) {
 }
 
 /**
- * Receives stream socket messages in an own thread.
+ * Receives a stream socket message.
+ *
+ * @param p0 the internal memory
+ * @param p1 the base internal
+ */
+void receive_socket_stream() {
+
+                log_message_debug("Receive stream socket message.");
+
+/*??
+                // Initialise error number.
+                // It is a global variable/ function and other operations
+                // may have set some value that is not wanted here.
+                //
+                // CAUTION! Initialise the error number BEFORE calling the procedure
+                // that might cause an error.
+                errno = *NUMBER_0_INTEGER;
+
+                // Lock socket mutex.
+                pthread_mutex_lock(*mt);
+
+                // Accept client socket request and store client socket.
+                //
+                // Accepting a connection does NOT make the original socket
+                // part of the connection. Instead, it creates a new socket
+                // which becomes connected. The normal return value of
+                // "accept" is the file descriptor for the new socket.
+                //
+                // After "accept", the original socket remains open and
+                // unconnected, and continues listening until it gets closed.
+                // One can accept further connections with the original
+                // socket by calling "accept" again -- best done in a loop!
+                //
+                // The address "pa" returns information about the name of the
+                // communication partner socket that initiated the connection.
+                **ps = accept(**s, (struct sockaddr*) *pa, (socklen_t*) *pas);
+
+                if (**ps >= *NUMBER_0_INTEGER) {
+
+                    // Initialise error number.
+                    // It is a global variable/ function and other operations
+                    // may have set some value that is not wanted here.
+                    //
+                    // CAUTION! Initialise the error number BEFORE calling the procedure
+                    // that might cause an error.
+                    errno = *NUMBER_0_INTEGER;
+
+                    // Receive message from client.
+                    //
+                    // If the flags argument (fourth one) is zero, then one can
+                    // just as well use the "read" instead of the "recv" procedure.
+                    // Normally, "recv" blocks until there is input available to be read.
+                    // ?? Not so here, as the socket was set to "non-blocking" mode at startup. ??
+                    //
+                    // CAUTION! A message MUST NOT be longer than the given buffer size!
+                    **bc = recv(**ps, *b, **bs, *NUMBER_0_INTEGER);
+
+                    // Remember error number.
+                    e = errno;
+
+fprintf(stderr, "TEST: receive socket thread client socket: %i \n", **ps);
+
+fprintf(stderr, "TEST b: %s \n", (char*) *b);
+fprintf(stderr, "TEST bc: %i \n", **bc);
+fprintf(stderr, "TEST bs: %i \n", **bs);
+
+                    // CAUTION! Do NOT close client socket here!
+                    // It is stored in the internal memory and only closed in
+                    // the "send_socket" operation, when replying to the client.
+                    // close(**ps);
+
+                } else {
+
+                    if (errno == EBADF) {
+
+                        log_message_debug("Error: Could not receive socket thread. The socket argument is not a valid file descriptor.");
+
+                    } else if (errno == ENOTSOCK) {
+
+                        log_message_debug("Error: Could not receive socket thread. The descriptor socket argument is not a socket.");
+
+                    } else if (errno == EOPNOTSUPP) {
+
+                        log_message_debug("Error: Could not receive socket thread. The descriptor socket does not support this operation.");
+
+                    } else if (errno == EWOULDBLOCK) {
+
+                        // CAUTION! Do NOT log the following error:
+                        // log_message_debug("Error: Could not receive socket thread. The socket has nonblocking mode set, and there are no pending connections immediately available.");
+                        //
+                        // The reason is that the socket is non-blocking,
+                        // so that the "accept" procedure returns always,
+                        // even if no connection was established,
+                        // which would unnecessarily fill up the log file.
+
+                    } else {
+
+                        log_message_debug("Error: Could not receive socket thread. An unknown error occured while accepting a socket connection.");
+                    }
+                }
+
+                // Unlock socket mutex.
+                pthread_mutex_unlock(*mt);
+*/
+}
+
+/**
+ * Receives a datagram socket message.
+ *
+ * @param p0 the internal memory
+ * @param p1 the base internal
+ */
+void receive_socket_datagram() {
+
+                log_message_debug("Receive datagram socket message.");
+
+/*??
+                // Initialise error number.
+                // It is a global variable/ function and other operations
+                // may have set some value that is not wanted here.
+                //
+                // CAUTION! Initialise the error number BEFORE calling the procedure
+                // that might cause an error.
+                errno = *NUMBER_0_INTEGER;
+
+                // Lock socket mutex.
+                pthread_mutex_lock(*mt);
+
+                // Receive message from client.
+                // If the flags argument (fourth one) is zero, then one can
+                // just as well use the "read" instead of the "recv" procedure.
+                // Normally, "recv" blocks until there is input available to be read.
+                // ?? Not so here, as the socket was set to "non-blocking" mode at startup. ??
+                //
+                // CAUTION! A message MUST NOT be longer than the given buffer size!
+                **bc = recvfrom(**s, *b, **bs, *NUMBER_0_INTEGER, (struct sockaddr*) *a, (socklen_t*) *as);
+
+                // Unlock socket mutex.
+                pthread_mutex_unlock(*mt);
+
+                // Remember error number.
+                e = errno;
+*/
+}
+
+/**
+ * Receives a raw socket message.
+ *
+ * @param p0 the internal memory
+ * @param p1 the base internal
+ */
+void receive_socket_raw(void* p0, void* p1) {
+
+    log_message_debug("Receive raw socket message.");
+    log_message_debug("CAUTION! Raw socket functionality is not implemented in cyboi yet.");
+}
+
+/**
+ * Receives a socket message depending on the given communication style.
+ *
+ * @param p0 the internal memory
+ * @param p1 the base internal
+ */
+void receive_socket_style() {
+
+        log_message_debug("Receive socket message depending on communication style.");
+
+/*??
+        // The comparison result.
+        int r = *NUMBER_0_INTEGER;
+        // The error number.
+        // CAUTION! This extra error number (besides "errno") is necessary
+        // to remember "errno" values of the "recv" and "recvfrom" procedures,
+        // across the various if-else sections.
+        int e = *NUMBER_0_INTEGER;
+        // The name.
+        void* name = *NULL_POINTER;
+        int namec = *NUMBER_0_INTEGER;
+        // The channel.
+        void* channel = *NULL_POINTER;
+        int channelc = *NUMBER_0_INTEGER;
+        // The abstraction.
+        void* abstraction = *NULL_POINTER;
+        int abstractionc = *NUMBER_0_INTEGER;
+        // The model.
+        void* model = *NULL_POINTER;
+        int modelc = *NUMBER_0_INTEGER;
+
+    fprintf(stderr, "TEST: receive socket thread server socket: %i \n", **s);
+
+        if (r == *NUMBER_0_INTEGER) {
+
+            compare_arrays(*st, *stc, (void*) STREAM_COMMUNICATION_STYLE_MODEL, (void*) STREAM_COMMUNICATION_STYLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+            if (r != *NUMBER_0_INTEGER) {
+
+                receive_socket_stream();
+            }
+        }
+
+        if (r == *NUMBER_0_INTEGER) {
+
+            compare_arrays(*st, *stc, (void*) DATAGRAM_COMMUNICATION_STYLE_MODEL, (void*) STREAM_COMMUNICATION_STYLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+            if (r != *NUMBER_0_INTEGER) {
+
+                receive_socket_datagram();
+            }
+        }
+
+        if (r == *NUMBER_0_INTEGER) {
+
+            compare_arrays(*st, *stc, (void*) RAW_COMMUNICATION_STYLE_MODEL, (void*) STREAM_COMMUNICATION_STYLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+            if (r != *NUMBER_0_INTEGER) {
+
+                receive_socket_raw();
+            }
+        }
+
+        if (**bc > *NUMBER_0_INTEGER) {
+
+            // Translate uniform resource locator (url).
+            receive_socket_request_method((void*) &name, (void*) &namec,
+                (void*) &channel, (void*) &channelc,
+                (void*) &abstraction, (void*) &abstractionc,
+                (void*) &model, (void*) &modelc,
+                *b, (void*) *bc);
+
+/*??
+            // The url basename.
+            char* url_basename = (char*) *NULL_POINTER;
+            int url_basename_count = *NUMBER_0_INTEGER;
+            // Create url basename.
+            allocate_array((void*) &url_basename, (void*) &url_basename_count, (void*) CHARACTER_ARRAY);
+            // Get url base name.
+            receive_socket_url(msg, &msg_count, &url_basename, &url_basename_count);
+
+            // The parameter.
+            char* param = (char*) *NULL_POINTER;
+            int param_count = *NUMBER_0_INTEGER;
+            // Create paramater.
+            allocate_array((void*) &param, (void*) &param_count, (void*) CHARACTER_ARRAY);
+            // Get parameters.
+            receive_socket_parameter(msg, &msg_count, &param, &param_count);
+
+            // The firefox web browser makes a second request
+            // to determine the favicon.
+            char firefox_request[] = "favicon.ico";
+            char* p_firefox_request = &firefox_request[*NUMBER_0_INTEGER];
+            int firefox_request_count = 11;
+
+            // The comparison result.
+            int r = *NUMBER_0_INTEGER;
+            compare_arrays((void*) url_basename, (void*) &url_basename_count, (void*) p_firefox_request, (void*) &firefox_request_count, (void*) &r, (void*) CHARACTER_ARRAY);
+
+            if (r != *NUMBER_1_INTEGER) {
+
+                // query string handling
+                set_signals_for_all_parameters((void*) param, (void*) &param_count, p0);
+
+                //?? The OLD solution created a signal here from a cybol knowledge template.
+                //?? This is NOW easier, since the commands already exist in the knowledge tree
+                //?? and only have to be referenced from here.
+
+            } else {
+
+                close(**ps);
+            }
+*/
+
+/*??
+            // Receive socket signal.
+            receive_socket_signal(p0, name, (void*) &namec, p1);
+
+//?? CAUTION! This sleep procedure is temporarily necessary for testing!
+//?? Otherwise, the loop runs into the next cycle and the socket mutex
+//?? gets locked, so that the "send_socket" procedure in the main thread
+//?? cannot send its message.
+//??    sleep(30);
+
+        } else if (**bc = *NUMBER_0_INTEGER) {
+
+            log_message_debug("Error: Could not receive socket thread. No data could be received.");
+
+        } else {
+
+            if (e == EBADF) {
+
+                log_message_debug("Error: Could not receive socket thread. The socket argument is not a valid file descriptor.");
+
+            } else if (e == ENOTSOCK) {
+
+                log_message_debug("Error: Could not receive socket thread. The descriptor socket is not a socket.");
+
+            } else if (e == EWOULDBLOCK) {
+
+                log_message_debug("Error: Could not receive socket thread. The read operation would block even though nonblocking mode has been set on the socket.");
+
+            } else if (e == EINTR) {
+
+                log_message_debug("Error: Could not receive socket thread. The operation was interrupted by a signal before any data was read.");
+
+            } else if (e == ENOTCONN) {
+
+                log_message_debug("Error: Could not receive socket thread. The socket was never connected.");
+
+            } else {
+
+                // CAUTION! Do NOT log the following error:
+                // log_message_debug("Error: Could not receive socket thread. An unknown error occured while receiving data.");
+                //
+                // The reason is that the socket is non-blocking,
+                // so that the "accept" procedure returns always,
+                // even if no connection was established.
+                // But if no connection and client socket are there,
+                // then the "recv" or "recvfrom" procedure returns an error,
+                // which would unnecessarily fill up the log file.
+            }
+        }
+
+        // Reset character buffer.
+        //
+        // CAUTION! Do NOT deallocate the character buffer!
+        // It was allocated at socket startup and must remain unchanged.
+        // Therefore, its elements are just set to null pointers here.
+        //
+        // CAUTION! Do NOT reset the maximum buffer size!
+        // It was allocated and initialised at socket startup
+        // and must remain unchanged.
+        memset(*b, *NUMBER_0_INTEGER, **bs);
+        **bc = *NUMBER_0_INTEGER;
+*/
+}
+
+/**
+ * Receives socket messages in an own thread.
  *
  * For web frontend testing, use for example:
  * http://localhost:3456/residenz.logic.send_name
@@ -1095,6 +1431,8 @@ void receive_socket_thread(void* p0, void* p1) {
     if (p1 != *NULL_POINTER) {
 
         int* base = (int*) p1;
+
+        log_message_debug("Receive socket messages in an own thread.");
 
         // The internal memory index.
         int i = *INVALID_VALUE;
@@ -1119,25 +1457,6 @@ void receive_socket_thread(void* p0, void* p1) {
         // The maximum buffer size.
         // CAUTION! A message MUST NOT be longer!
         int** bs = (int**) NULL_POINTER;
-        // The comparison result.
-        int r = *NUMBER_0_INTEGER;
-        // The error number.
-        // CAUTION! This extra error number (besides "errno") is necessary
-        // to remember "errno" values of the "recv" and "recvfrom" procedures,
-        // across the various if-else sections.
-        int e = *NUMBER_0_INTEGER;
-        // The name.
-        void* name = *NULL_POINTER;
-        int namec = *NUMBER_0_INTEGER;
-        // The channel.
-        void* channel = *NULL_POINTER;
-        int channelc = *NUMBER_0_INTEGER;
-        // The abstraction.
-        void* abstraction = *NULL_POINTER;
-        int abstractionc = *NUMBER_0_INTEGER;
-        // The model.
-        void* model = *NULL_POINTER;
-        int modelc = *NUMBER_0_INTEGER;
 
         // Get communication style.
         i = *base + *SOCKET_STYLE_INTERNAL;
@@ -1171,8 +1490,6 @@ void receive_socket_thread(void* p0, void* p1) {
         i = *base + *SOCKET_CHARACTER_BUFFER_SIZE_INTERNAL;
         get_element(p0, (void*) &i, (void*) &bs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-    fprintf(stderr, "TEST: receive socket thread server socket: %i \n", **s);
-
         while (*NUMBER_1_INTEGER) {
 
             // A break condition does not exist here because the loop
@@ -1183,251 +1500,8 @@ void receive_socket_thread(void* p0, void* p1) {
             // and processed in the system signal handler procedure
             // (situated in the controller/checker.c module).
 
-            if (r == *NUMBER_0_INTEGER) {
-
-                compare_arrays(*st, *stc, (void*) STREAM_COMMUNICATION_STYLE_MODEL, (void*) STREAM_COMMUNICATION_STYLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-                if (r != *NUMBER_0_INTEGER) {
-
-                    // Initialise error number.
-                    // It is a global variable/ function and other operations
-                    // may have set some value that is not wanted here.
-                    //
-                    // CAUTION! Initialise the error number BEFORE calling the procedure
-                    // that might cause an error.
-                    errno = *NUMBER_0_INTEGER;
-
-                    // Lock socket mutex.
-                    pthread_mutex_lock(*mt);
-
-                    // Accept client socket request and store client socket.
-                    //
-                    // Accepting a connection does NOT make the original socket
-                    // part of the connection. Instead, it creates a new socket
-                    // which becomes connected. The normal return value of
-                    // "accept" is the file descriptor for the new socket.
-                    //
-                    // After "accept", the original socket remains open and
-                    // unconnected, and continues listening until it gets closed.
-                    // One can accept further connections with the original
-                    // socket by calling "accept" again -- therefore this loop!
-                    //
-                    // The address "pa" returns information about the name of the
-                    // communication partner socket that initiated the connection.
-                    **ps = accept(**s, (struct sockaddr*) *pa, (socklen_t*) *pas);
-
-                    if (**ps >= *NUMBER_0_INTEGER) {
-
-                        // Initialise error number.
-                        // It is a global variable/ function and other operations
-                        // may have set some value that is not wanted here.
-                        //
-                        // CAUTION! Initialise the error number BEFORE calling the procedure
-                        // that might cause an error.
-                        errno = *NUMBER_0_INTEGER;
-
-                        // Receive message from client.
-                        //
-                        // If the flags argument (fourth one) is zero, then one can
-                        // just as well use the "read" instead of the "recv" procedure.
-                        // Normally, "recv" blocks until there is input available to be read.
-                        // ?? Not so here, as the socket was set to "non-blocking" mode at startup. ??
-                        //
-                        // CAUTION! A message MUST NOT be longer than the given buffer size!
-                        **bc = recv(**ps, *b, **bs, *NUMBER_0_INTEGER);
-
-                        // Remember error number.
-                        e = errno;
-
-    fprintf(stderr, "TEST: receive socket thread client socket: %i \n", **ps);
-
-    fprintf(stderr, "TEST b: %s \n", (char*) *b);
-    fprintf(stderr, "TEST bc: %i \n", **bc);
-    fprintf(stderr, "TEST bs: %i \n", **bs);
-
-                        // CAUTION! Do NOT close client socket here!
-                        // It is stored in the internal memory and only closed in
-                        // the "send_socket" operation, when replying to the client.
-                        // close(**ps);
-
-                    } else {
-
-                        if (errno == EBADF) {
-
-                            log_message_debug("Error: Could not receive socket thread. The socket argument is not a valid file descriptor.");
-
-                        } else if (errno == ENOTSOCK) {
-
-                            log_message_debug("Error: Could not receive socket thread. The descriptor socket argument is not a socket.");
-
-                        } else if (errno == EOPNOTSUPP) {
-
-                            log_message_debug("Error: Could not receive socket thread. The descriptor socket does not support this operation.");
-
-                        } else if (errno == EWOULDBLOCK) {
-
-                            // CAUTION! Do NOT log the following error:
-                            // log_message_debug("Error: Could not receive socket thread. The socket has nonblocking mode set, and there are no pending connections immediately available.");
-                            //
-                            // The reason is that the socket is non-blocking,
-                            // so that the "accept" procedure returns always,
-                            // even if no connection was established,
-                            // which would unnecessarily fill up the log file.
-
-                        } else {
-
-                            log_message_debug("Error: Could not receive socket thread. An unknown error occured while accepting a socket connection.");
-                        }
-                    }
-
-                    // Unlock socket mutex.
-                    pthread_mutex_unlock(*mt);
-                }
-            }
-
-            if (r == *NUMBER_0_INTEGER) {
-
-                compare_arrays(*st, *stc, (void*) DATAGRAM_COMMUNICATION_STYLE_MODEL, (void*) STREAM_COMMUNICATION_STYLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-                if (r != *NUMBER_0_INTEGER) {
-
-                    // Initialise error number.
-                    // It is a global variable/ function and other operations
-                    // may have set some value that is not wanted here.
-                    //
-                    // CAUTION! Initialise the error number BEFORE calling the procedure
-                    // that might cause an error.
-                    errno = *NUMBER_0_INTEGER;
-
-                    // Lock socket mutex.
-                    pthread_mutex_lock(*mt);
-
-                    // Receive message from client.
-                    // If the flags argument (fourth one) is zero, then one can
-                    // just as well use the "read" instead of the "recv" procedure.
-                    // Normally, "recv" blocks until there is input available to be read.
-                    // ?? Not so here, as the socket was set to "non-blocking" mode at startup. ??
-                    //
-                    // CAUTION! A message MUST NOT be longer than the given buffer size!
-                    **bc = recvfrom(**s, *b, **bs, *NUMBER_0_INTEGER, (struct sockaddr*) *a, (socklen_t*) *as);
-
-                    // Unlock socket mutex.
-                    pthread_mutex_unlock(*mt);
-
-                    // Remember error number.
-                    e = errno;
-                }
-            }
-
-            if (r == *NUMBER_0_INTEGER) {
-
-                compare_arrays(*st, *stc, (void*) RAW_COMMUNICATION_STYLE_MODEL, (void*) STREAM_COMMUNICATION_STYLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-                if (r != *NUMBER_0_INTEGER) {
-
-                    // Not implemented.
-                }
-            }
-
-            if (**bc > *NUMBER_0_INTEGER) {
-
-                // Translate uniform resource locator (url).
-                receive_socket_request_method((void*) &name, (void*) &namec,
-                    (void*) &channel, (void*) &channelc,
-                    (void*) &abstraction, (void*) &abstractionc,
-                    (void*) &model, (void*) &modelc,
-                    *b, (void*) *bc);
-
-/*??
-                // The url basename.
-                char* url_basename = (char*) *NULL_POINTER;
-                int url_basename_count = *NUMBER_0_INTEGER;
-                // Create url basename.
-                allocate_array((void*) &url_basename, (void*) &url_basename_count, (void*) CHARACTER_ARRAY);
-                // Get url base name.
-                receive_socket_url(msg, &msg_count, &url_basename, &url_basename_count);
-
-                // The parameter.
-                char* param = (char*) *NULL_POINTER;
-                int param_count = *NUMBER_0_INTEGER;
-                // Create paramater.
-                allocate_array((void*) &param, (void*) &param_count, (void*) CHARACTER_ARRAY);
-                // Get parameters.
-                receive_socket_parameter(msg, &msg_count, &param, &param_count);
-
-                // The firefox web browser makes a second request
-                // to determine the favicon.
-                char firefox_request[] = "favicon.ico";
-                char* p_firefox_request = &firefox_request[*NUMBER_0_INTEGER];
-                int firefox_request_count = 11;
-
-                // The comparison result.
-                int r = *NUMBER_0_INTEGER;
-                compare_arrays((void*) url_basename, (void*) &url_basename_count, (void*) p_firefox_request, (void*) &firefox_request_count, (void*) &r, (void*) CHARACTER_ARRAY);
-
-                if (r != *NUMBER_1_INTEGER) {
-
-                    // query string handling
-                    set_signals_for_all_parameters((void*) param, (void*) &param_count, p0);
-
-                    //?? The OLD solution created a signal here from a cybol knowledge template.
-                    //?? This is NOW easier, since the commands already exist in the knowledge tree
-                    //?? and only have to be referenced from here.
-
-                } else {
-
-                    close(**ps);
-                }
-*/
-
-                // Receive socket signal.
-                receive_socket_signal(p0, name, (void*) &namec, p1);
-
-    //?? CAUTION! This sleep procedure is temporarily necessary for testing!
-    //?? Otherwise, the loop runs into the next cycle and the socket mutex
-    //?? gets locked, so that the "send_socket" procedure in the main thread
-    //?? cannot send its message.
-//??    sleep(30);
-
-            } else if (**bc = *NUMBER_0_INTEGER) {
-
-                log_message_debug("Error: Could not receive socket thread. No data could be received.");
-
-            } else {
-
-                if (e == EBADF) {
-
-                    log_message_debug("Error: Could not receive socket thread. The socket argument is not a valid file descriptor.");
-
-                } else if (e == ENOTSOCK) {
-
-                    log_message_debug("Error: Could not receive socket thread. The descriptor socket is not a socket.");
-
-                } else if (e == EWOULDBLOCK) {
-
-                    log_message_debug("Error: Could not receive socket thread. The read operation would block even though nonblocking mode has been set on the socket.");
-
-                } else if (e == EINTR) {
-
-                    log_message_debug("Error: Could not receive socket thread. The operation was interrupted by a signal before any data was read.");
-
-                } else if (e == ENOTCONN) {
-
-                    log_message_debug("Error: Could not receive socket thread. The socket was never connected.");
-
-                } else {
-
-                    // CAUTION! Do NOT log the following error:
-                    // log_message_debug("Error: Could not receive socket thread. An unknown error occured while receiving data.");
-                    //
-                    // The reason is that the socket is non-blocking,
-                    // so that the "accept" procedure returns always,
-                    // even if no connection was established.
-                    // But if no connection and client socket are there,
-                    // then the "recv" or "recvfrom" procedure returns an error,
-                    // which would unnecessarily fill up the log file.
-                }
-            }
+            // Receive socket message depending on communication style.
+            receive_socket_style();
 
             // Sleep for some time to give the central processing unit (cpu)
             // time to breathe, that is to be idle or to process other signals.
@@ -1442,29 +1516,7 @@ void receive_socket_thread(void* p0, void* p1) {
             // CAUTION! This is ONLY necessary if using a non-blocking socket!
             // sleep(1.0);
 
-            // Reset communication partner socket.
-            //
-            // CAUTION! This is NOT necessary, since in each new loop cycle,
-            // the "accept" function returns a new value.
-            // **ps = *INVALID_VALUE;
-
-            // Reset character buffer.
-            //
-            // CAUTION! Do NOT deallocate the character buffer!
-            // It was allocated at socket startup and must remain unchanged.
-            // Therefore, its elements are just set to null pointers here.
-            //
-            // CAUTION! Do NOT reset the maximum buffer size!
-            // It was allocated and initialised at socket startup
-            // and must remain unchanged.
-            memset(*b, 0, **bs);
-            **bc = *NUMBER_0_INTEGER;
-            // Reset comparison result.
-            r = *NUMBER_0_INTEGER;
-            // Reset error number.
-            e = *NUMBER_0_INTEGER;
-
-    log_message_debug("TEST: Break loop now ...");
+        log_message_debug("TEST: Break loop now ...");
             //?? TESTING only; delete later!
             break;
         }
@@ -1493,7 +1545,7 @@ void receive_socket_thread(void* p0, void* p1) {
  *
  * @param p0 the internal memory
  */
-void receive_socket_thread_www(void* p0) {
+void receive_socket_www(void* p0) {
 
     log_message_debug("Receive www messages via socket.");
 
@@ -1505,7 +1557,7 @@ void receive_socket_thread_www(void* p0) {
  *
  * @param p0 the internal memory
  */
-void receive_socket_thread_cyboi(void* p0) {
+void receive_socket_cyboi(void* p0) {
 
     log_message_debug("Receive cyboi messages via socket.");
 
@@ -1533,6 +1585,8 @@ void receive_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, 
         if (p5 != *NULL_POINTER) {
 
             int* b = (int*) p5;
+
+            log_message_debug("Receive socket.");
 
             // The internal memory index.
             int i = *INVALID_VALUE;

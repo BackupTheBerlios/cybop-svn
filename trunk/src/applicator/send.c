@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.53 $ $Date: 2007-07-23 23:47:57 $ $Author: christian $
+ * @version $Revision: 1.54 $ $Date: 2007-08-03 16:57:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -85,69 +85,58 @@ void refresh_url(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, voi
         (void*) &urld, (void*) &urldc, (void*) &urlds,
         p3, p4);
 
-    if ((*urla != NULL_POINTER)
-         && (*urlac != NULL_POINTER)
-         && (*urlas != NULL_POINTER)
-         && (*urlm != NULL_POINTER)
-         && (*urlmc != NULL_POINTER)
-         && (*urlms != NULL_POINTER)
-         && (*urld != NULL_POINTER)
-         && (*urldc != NULL_POINTER)
-         && (*urlds != NULL_POINTER)) {
+    // The socket number for the signal id.
+    // The index for the signal id in the array is the same index
+    // in the client socket number array.
+    int i = -1;
 
-        // The socket number for the signal id.
-        // The index for the signal id in the array is the same index
-        // in the client socket number array.
-        int i = -1;
+    get_index_for_signal_id(p2, p6, (void*) &i);
 
-        get_index_for_signal_id(p2, p6, (void*) &i);
+    if (i >= *NUMBER_0_INTEGER) {
 
-        if (i >= *NUMBER_0_INTEGER) {
+        // The client socket.
+        int* cs = NULL_POINTER;
 
-            // The client socket.
-            int* cs = NULL_POINTER;
+        get_client_socket_number_for_index(p2, (void*) &i, (void*) &cs);
 
-            get_client_socket_number_for_index(p2, (void*) &i, (void*) &cs);
+        if (*cs >= *NUMBER_0_INTEGER) {
 
-            if (*cs >= *NUMBER_0_INTEGER) {
+            char msg_refresh_part_1[] = "<head> <meta http-equiv='expires' content='0'>  <meta http-equiv='refresh' content='0; URL=";
+            char msg_refresh_part_3[] = "'></head><body></body>";
+            int msg_part_1_count = strlen( msg_refresh_part_1 );
+            int msg_part_3_count = strlen( msg_refresh_part_3 );
 
-                char msg_refresh_part_1[] = "<head> <meta http-equiv='expires' content='0'>  <meta http-equiv='refresh' content='0; URL=";
-                char msg_refresh_part_3[] = "'></head><body></body>";
-                int msg_part_1_count = strlen( msg_refresh_part_1 );
-                int msg_part_3_count = strlen( msg_refresh_part_3 );
+            //create the destination for the send model
+            void* dest = NULL_POINTER;
+            int* dest_count = NULL_POINTER;
+            int* dest_size = NULL_POINTER;
 
-                //create the destination for the send model
-                void* dest = NULL_POINTER;
-                int* dest_count = NULL_POINTER;
-                int* dest_size = NULL_POINTER;
+            allocate(&dest_count, PRIMITIVE_COUNT, INTEGER_VECTOR_ABSTRACTION, INTEGER_VECTOR_ABSTRACTION_COUNT);
+            allocate(&dest_size, PRIMITIVE_COUNT, INTEGER_VECTOR_ABSTRACTION, INTEGER_VECTOR_ABSTRACTION_COUNT);
+            *dest_count = *NUMBER_0_INTEGER;
+            *dest_size  = *NUMBER_0_INTEGER;
+            allocate(&dest, dest_size, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
-                allocate(&dest_count, PRIMITIVE_COUNT, INTEGER_VECTOR_ABSTRACTION, INTEGER_VECTOR_ABSTRACTION_COUNT);
-                allocate(&dest_size, PRIMITIVE_COUNT, INTEGER_VECTOR_ABSTRACTION, INTEGER_VECTOR_ABSTRACTION_COUNT);
-                *dest_count = *NUMBER_0_INTEGER;
-                *dest_size  = *NUMBER_0_INTEGER;
-                allocate(&dest, dest_size, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
+            parse(&dest, dest_count, dest_size, &msg_refresh_part_1[*NUMBER_0_INTEGER], &msg_part_1_count, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
+            parse(&dest, dest_count, dest_size, *urlm, *urlmc, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
+            parse(&dest, dest_count, dest_size, &msg_refresh_part_3[*NUMBER_0_INTEGER], &msg_part_3_count, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
-                parse(&dest, dest_count, dest_size, &msg_refresh_part_1[*NUMBER_0_INTEGER], &msg_part_1_count, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
-                parse(&dest, dest_count, dest_size, *urlm, *urlmc, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
-                parse(&dest, dest_count, dest_size, &msg_refresh_part_3[*NUMBER_0_INTEGER], &msg_part_3_count, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
+            // The temporary count, size.
+            int tc = *NUMBER_0_INTEGER;
+            int ts = *NUMBER_0_INTEGER;
 
-                // The temporary count, size.
-                int tc = *NUMBER_0_INTEGER;
-                int ts = *NUMBER_0_INTEGER;
+            send_tcp_socket((void*) &cs, (void*) &tc, (void*) &ts, (void*) dest, (void*) dest_count);
 
-                send_tcp_socket((void*) &cs, (void*) &tc, (void*) &ts, (void*) dest, (void*) dest_count);
+            // Remove client socket number and main signal id from internal memory.
+            remove_relation_clientsocketnumber_mainsignalid(p2, (void*) &i);
 
-                // Remove client socket number and main signal id from internal memory.
-                remove_relation_clientsocketnumber_mainsignalid(p2, (void*) &i);
+            // Close socket.
+            close(*cs);
 
-                // Close socket.
-                close(*cs);
-
-                // Destroy destination.
-                deallocate(&dest, dest_size, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
-                deallocate(&dest_count, PRIMITIVE_COUNT, INTEGER_VECTOR_ABSTRACTION, INTEGER_VECTOR_ABSTRACTION_COUNT);
-                deallocate(&dest_size, PRIMITIVE_COUNT, INTEGER_VECTOR_ABSTRACTION, INTEGER_VECTOR_ABSTRACTION_COUNT);
-            }
+            // Destroy destination.
+            deallocate(&dest, dest_size, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
+            deallocate(&dest_count, PRIMITIVE_COUNT, INTEGER_VECTOR_ABSTRACTION, INTEGER_VECTOR_ABSTRACTION_COUNT);
+            deallocate(&dest_size, PRIMITIVE_COUNT, INTEGER_VECTOR_ABSTRACTION, INTEGER_VECTOR_ABSTRACTION_COUNT);
         }
     }
 */
@@ -484,7 +473,7 @@ void send_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
 
         if (r != *NUMBER_0_INTEGER) {
 
-            send_socket(p2, (void*) WWW_BASE_INTERNAL, *rm, *rmc, (void*) WWW_PORT, *nm, *nmc, *stm, *stmc, *mom, *momc, *ma, *mac, *mm, *mmc, *md, *mdc, p3, p4);
+            send_socket(p2, (void*) WWW_BASE_INTERNAL, *rm, *rmc, (void*) WWW_PORT, *nm, *nmc, *stm, *stmc, *mom, *momc, *ma, *mac, *mm, *mmc, *md, *mdc, p3, p4, *lm, *lmc);
         }
     }
 
@@ -494,7 +483,7 @@ void send_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
 
         if (r != *NUMBER_0_INTEGER) {
 
-            send_socket(p2, (void*) CYBOI_BASE_INTERNAL, *rm, *rmc, (void*) CYBOI_PORT, *nm, *nmc, *stm, *stmc, *mom, *momc, *ma, *mac, *mm, *mmc, *md, *mdc, p3, p4);
+            send_socket(p2, (void*) CYBOI_BASE_INTERNAL, *rm, *rmc, (void*) CYBOI_PORT, *nm, *nmc, *stm, *stmc, *mom, *momc, *ma, *mac, *mm, *mmc, *md, *mdc, p3, p4, *lm, *lmc);
         }
     }
 
