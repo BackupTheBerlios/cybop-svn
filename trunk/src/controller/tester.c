@@ -24,7 +24,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.8 $ $Date: 2007-06-24 15:02:21 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2007-08-04 23:24:47 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -48,7 +48,9 @@
 #include <GL/glu.h>
 // The opengl tools library.
 #include <GL/glut.h>
-#include <GL/freeglut.h>
+//?? Didier Link <didier@famille-link.fr> said that glut.h would suffice
+//?? and freeglut.h would not be needed.
+//?? #include <GL/freeglut.h>
 #include <locale.h>
 #include <stdio.h>
 #include <wchar.h>
