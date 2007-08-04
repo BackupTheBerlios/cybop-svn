@@ -14,9 +14,16 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.16 $ $Date: 2007-08-03 16:57:22 $ $Author: christian $
+# @version $Revision: 1.17 $ $Date: 2007-08-04 23:26:01 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2007-08-04  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Continue to work through and update file "applicator/receive/receive_socket.c"
+        * Comment out "#include <GL/freeglut.h>" in file "controller/tester.c",
+            as including "glut.h" of the official xorg glut package suffices
+            (hint from  Didier Link <didier@famille-link.fr>)
 
 2007-08-03  Christian Heller  <christian.heller@tuxtax.de>
 
