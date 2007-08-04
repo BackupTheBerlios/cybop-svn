@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.28 $ $Date: 2007-08-03 16:57:22 $ $Author: christian $
+ * @version $Revision: 1.29 $ $Date: 2007-08-04 23:26:52 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -449,13 +449,13 @@ void* get_character_from_escape_code(void* source, int* source_count, char** des
  * param1=value1&param2=value2
  *
  * @param p0 the name (Hand over as reference!)
- * @param p1 the name count (Hand over as reference!)
+ * @param p1 the name count
  * @param p2 the channel (Hand over as reference!)
- * @param p3 the channel count (Hand over as reference!)
+ * @param p3 the channel count
  * @param p4 the abstraction (Hand over as reference!)
- * @param p5 the abstraction count (Hand over as reference!)
+ * @param p5 the abstraction count
  * @param p6 the model (Hand over as reference!)
- * @param p7 the model count (Hand over as reference!)
+ * @param p7 the model count
  * @param p8 the url without "get" request method prefix
  * @param p9 the url count
  */
@@ -553,13 +553,13 @@ void receive_socket_get_request(void* p0, void* p1, void* p2, void* p3,
  * Extract parameters from "post" request method url.
  *
  * @param p0 the name (Hand over as reference!)
- * @param p1 the name count (Hand over as reference!)
+ * @param p1 the name count
  * @param p2 the channel (Hand over as reference!)
- * @param p3 the channel count (Hand over as reference!)
+ * @param p3 the channel count
  * @param p4 the abstraction (Hand over as reference!)
- * @param p5 the abstraction count (Hand over as reference!)
+ * @param p5 the abstraction count
  * @param p6 the model (Hand over as reference!)
- * @param p7 the model count (Hand over as reference!)
+ * @param p7 the model count
  * @param p8 the url without "post" request method prefix
  * @param p9 the url count
  */
@@ -739,13 +739,13 @@ void receive_socket_post_request(void* p0, void* p1, void* p2, void* p3,
  * will describe the content of the file and contain the file itself.
  *
  * @param p0 the name (Hand over as reference!)
- * @param p1 the name count (Hand over as reference!)
+ * @param p1 the name count
  * @param p2 the channel (Hand over as reference!)
- * @param p3 the channel count (Hand over as reference!)
+ * @param p3 the channel count
  * @param p4 the abstraction (Hand over as reference!)
- * @param p5 the abstraction count (Hand over as reference!)
+ * @param p5 the abstraction count
  * @param p6 the model (Hand over as reference!)
- * @param p7 the model count (Hand over as reference!)
+ * @param p7 the model count
  * @param p8 the url
  * @param p9 the url count
  */
@@ -951,45 +951,29 @@ void set_signals_for_all_parameters(void* p0, int* p1, void* p2) {
 /**
  * Receives socket signal.
  *
- * The http request must be parsed for parameters!
- * A cyboi-internal signal is created and added to the signal memory, for each parameter.
- *
- * @param p0 the internal memory
- * @param p1 the command name
- * @param p2 the command name count
- * @param p3 the base internal
+ * @param p0 the signal memory
+ * @param p1 the signal memory count
+ * @param p2 the signal memory size
+ * @param p3 the signal memory mutex
+ * @param p4 the interrupt request flag
+ * @param p5 the commands
+ * @param p6 the commands count
+ * @param p7 the command name
+ * @param p8 the command name count
+ * @param p9 the knowledge memory
+ * @param p10 the knowledge memory count
  */
-void receive_socket_signal(void* p0, void* p1, void* p2, void* p3) {
+void receive_socket_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10) {
 
-    if (p3 != *NULL_POINTER) {
+    if (p4 != *NULL_POINTER) {
 
-        int* base = (int*) p3;
+        int* irq = (int*) p4;
 
         log_message_debug("Debug: Receive socket signal.");
 
-    fprintf(stderr, "TEST: receive socket command name: %s \n", (char*) p1);
-    fprintf(stderr, "TEST: receive socket command name count: %i \n", *((int*) p2));
+        fprintf(stderr, "TEST: receive socket command name: %s \n", (char*) p7);
+        fprintf(stderr, "TEST: receive socket command name count: %i \n", *((int*) p8));
 
-        // The knowledge memory.
-        void** k = NULL_POINTER;
-        void** kc = NULL_POINTER;
-        void** ks = NULL_POINTER;
-        // The signal memory.
-        void** s = NULL_POINTER;
-        void** sc = NULL_POINTER;
-        void** ss = NULL_POINTER;
-        // The interrupt request flag.
-        sig_atomic_t** irq = (sig_atomic_t**) NULL_POINTER;
-        // The signal memory mutex.
-        pthread_mutex_t** smt = (pthread_mutex_t**) NULL_POINTER;
-        // The internal memory index.
-        int i = *INVALID_VALUE;
-        // The socket mutex.
-        pthread_mutex_t** somt = (pthread_mutex_t**) NULL_POINTER;
-        // The commands.
-        void** c = NULL_POINTER;
-        void** cc = NULL_POINTER;
-        void** cs = NULL_POINTER;
         // The command name, abstraction, model, details.
         void** cn = NULL_POINTER;
         void** cnc = NULL_POINTER;
@@ -1003,122 +987,76 @@ void receive_socket_signal(void* p0, void* p1, void* p2, void* p3) {
         void** cd = NULL_POINTER;
         void** cdc = NULL_POINTER;
         void** cds = NULL_POINTER;
-        // The signal id.
-        int* id = (int*) *NULL_POINTER;
-
-        // Get knowledge memory internal.
-        get_element(p0, (void*) KNOWLEDGE_MEMORY_INTERNAL, (void*) &k, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        get_element(p0, (void*) KNOWLEDGE_MEMORY_COUNT_INTERNAL, (void*) &kc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        get_element(p0, (void*) KNOWLEDGE_MEMORY_SIZE_INTERNAL, (void*) &ks, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        // Get signal memory internal.
-        get_element(p0, (void*) SIGNAL_MEMORY_INTERNAL, (void*) &s, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        get_element(p0, (void*) SIGNAL_MEMORY_COUNT_INTERNAL, (void*) &sc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        get_element(p0, (void*) SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &ss, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        // Get interrupt request internal.
-        get_element(p0, (void*) INTERRUPT_REQUEST_INTERNAL, (void*) &irq, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        // Get signal memory mutex.
-        get_element(p0, (void*) SIGNAL_MEMORY_MUTEX_INTERNAL, (void*) &smt, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        // Get socket mutex.
-        i = *base + *SOCKET_MUTEX_INTERNAL;
-        get_element(p0, (void*) &i, (void*) &somt, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-
-        // Lock socket mutex.
-        //
-        // CAUTION! A mutex is needed here to ensure that the commands internal
-        // and its associated count and size are retrieved at once and belong together.
-        // Otherwise, a commands internal might be got in this "receive" thread,
-        // then the "main" thread of cyboi might set a new commands internal, count
-        // and size, and finally this "receive" thread would get a wrong count or size
-        // (of the new commands internal), not belonging to the commands internal got before.
-        pthread_mutex_lock(*somt);
-
-        // Get commands internal.
-        i = *base + *SOCKET_COMMANDS_INTERNAL;
-        get_element(p0, (void*) &i, (void*) &c, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        i = *base + *SOCKET_COMMANDS_COUNT_INTERNAL;
-        get_element(p0, (void*) &i, (void*) &cc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-
-        // Unlock socket mutex.
-        pthread_mutex_unlock(*somt);
 
         // Get actual command belonging to the command name.
         // If the name is not known, the command parameter is left untouched.
-        get_universal_compound_element_by_name(*c, *cc,
-            p1, p2,
+        get_universal_compound_element_by_name(p5, p6,
+            p7, p8,
             (void*) &cn, (void*) &cnc, (void*) &cns,
             (void*) &ca, (void*) &cac, (void*) &cas,
             (void*) &cm, (void*) &cmc, (void*) &cms,
             (void*) &cd, (void*) &cdc, (void*) &cds,
-            *k, *kc);
+            p9, p10);
 
         // Lock signal memory mutex.
-        pthread_mutex_lock(*smt);
+        pthread_mutex_lock(p3);
+
+        // The signal id.
+        int* id = (int*) *NULL_POINTER;
 
         // Allocate signal id.
         allocate((void*) &id, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
         *id = *NUMBER_0_INTEGER;
-        get_new_signal_id(*s, *sc, (void*) id);
+        get_new_signal_id(p0, p1, (void*) id);
 
         // Add signal to signal memory.
-        set_signal(*s, *sc, *ss, *ca, *cac, *cm, *cmc, *cd, *cdc, (void*) NORMAL_PRIORITY, (void*) id);
+        set_signal(p0, p1, p2, *ca, *cac, *cm, *cmc, *cd, *cdc, (void*) NORMAL_PRIORITY, (void*) id);
 
-/*??
+    /*??
         add_signal_id(p0, (void*) id);
         add_client_socket_number(p0, (void*) cs);
-*/
+    */
 
         // Set interrupt request flag, in order to notify the signal checker
         // that a new signal has been placed in the signal memory.
-        **irq = *NUMBER_1_INTEGER;
+        *irq = *NUMBER_1_INTEGER;
 
         // Unlock signal memory mutex.
-        pthread_mutex_unlock(*smt);
+        pthread_mutex_unlock(p3);
 
     } else {
 
-        log_message_debug("Error: Could not receive socket signal. The base internal is null.");
+        log_message_debug("Error: Could not receive socket signal. The interrupt request flag is null.");
     }
 }
 
 /**
  * Receives a stream socket message.
  *
- * @param p0 the internal memory
- * @param p1 the base internal
+ * @param p0 the buffer (Hand over as reference!)
+ * @param p1 the buffer count
+ * @param p2 the buffer size
+ * @param p3 the communication partner-connected socket of this system
  */
-void receive_socket_stream() {
+void receive_socket_stream_message(void* p0, void* p1, void* p2, void* p3) {
 
-                log_message_debug("Receive stream socket message.");
+    if (p3 != *NULL_POINTER) {
 
-/*??
-                // Initialise error number.
-                // It is a global variable/ function and other operations
-                // may have set some value that is not wanted here.
-                //
-                // CAUTION! Initialise the error number BEFORE calling the procedure
-                // that might cause an error.
-                errno = *NUMBER_0_INTEGER;
+        int* ps = (int*) p3;
 
-                // Lock socket mutex.
-                pthread_mutex_lock(*mt);
+        if (p2 != *NULL_POINTER) {
 
-                // Accept client socket request and store client socket.
-                //
-                // Accepting a connection does NOT make the original socket
-                // part of the connection. Instead, it creates a new socket
-                // which becomes connected. The normal return value of
-                // "accept" is the file descriptor for the new socket.
-                //
-                // After "accept", the original socket remains open and
-                // unconnected, and continues listening until it gets closed.
-                // One can accept further connections with the original
-                // socket by calling "accept" again -- best done in a loop!
-                //
-                // The address "pa" returns information about the name of the
-                // communication partner socket that initiated the connection.
-                **ps = accept(**s, (struct sockaddr*) *pa, (socklen_t*) *pas);
+            int* bs = (int*) p2;
 
-                if (**ps >= *NUMBER_0_INTEGER) {
+            if (p1 != *NULL_POINTER) {
+
+                int* bc = (int*) p1;
+
+                if (p0 != *NULL_POINTER) {
+
+                    void** b = (void**) p0;
+
+                    log_message_debug("Receive stream socket message.");
 
                     // Initialise error number.
                     // It is a global variable/ function and other operations
@@ -1128,6 +1066,8 @@ void receive_socket_stream() {
                     // that might cause an error.
                     errno = *NUMBER_0_INTEGER;
 
+                fprintf(stderr, "TEST: receive socket thread client socket: %i \n", *ps);
+
                     // Receive message from client.
                     //
                     // If the flags argument (fourth one) is zero, then one can
@@ -1136,292 +1076,526 @@ void receive_socket_stream() {
                     // ?? Not so here, as the socket was set to "non-blocking" mode at startup. ??
                     //
                     // CAUTION! A message MUST NOT be longer than the given buffer size!
-                    **bc = recv(**ps, *b, **bs, *NUMBER_0_INTEGER);
+                    *bc = recv(*ps, *b, *bs, *NUMBER_0_INTEGER);
 
-                    // Remember error number.
-                    e = errno;
+                    if (*bc > *NUMBER_0_INTEGER) {
 
-fprintf(stderr, "TEST: receive socket thread client socket: %i \n", **ps);
+                        log_message_debug("Information: Successfully received stream socket message.");
 
-fprintf(stderr, "TEST b: %s \n", (char*) *b);
-fprintf(stderr, "TEST bc: %i \n", **bc);
-fprintf(stderr, "TEST bs: %i \n", **bs);
+    fprintf(stderr, "TEST b: %s \n", (char*) *b);
+    fprintf(stderr, "TEST bc: %i \n", *bc);
+    fprintf(stderr, "TEST bs: %i \n", *bs);
 
-                    // CAUTION! Do NOT close client socket here!
-                    // It is stored in the internal memory and only closed in
-                    // the "send_socket" operation, when replying to the client.
-                    // close(**ps);
+                    } else if (*bc = *NUMBER_0_INTEGER) {
 
-                } else {
-
-                    if (errno == EBADF) {
-
-                        log_message_debug("Error: Could not receive socket thread. The socket argument is not a valid file descriptor.");
-
-                    } else if (errno == ENOTSOCK) {
-
-                        log_message_debug("Error: Could not receive socket thread. The descriptor socket argument is not a socket.");
-
-                    } else if (errno == EOPNOTSUPP) {
-
-                        log_message_debug("Error: Could not receive socket thread. The descriptor socket does not support this operation.");
-
-                    } else if (errno == EWOULDBLOCK) {
-
-                        // CAUTION! Do NOT log the following error:
-                        // log_message_debug("Error: Could not receive socket thread. The socket has nonblocking mode set, and there are no pending connections immediately available.");
-                        //
-                        // The reason is that the socket is non-blocking,
-                        // so that the "accept" procedure returns always,
-                        // even if no connection was established,
-                        // which would unnecessarily fill up the log file.
+                        log_message_debug("Warning: Could not receive stream socket message. No data could be received.");
 
                     } else {
 
-                        log_message_debug("Error: Could not receive socket thread. An unknown error occured while accepting a socket connection.");
+                        if (errno == EBADF) {
+
+                            log_message_debug("Error: Could not receive stream socket message. The socket argument is not a valid file descriptor.");
+
+                        } else if (errno == ENOTSOCK) {
+
+                            log_message_debug("Error: Could not receive stream socket message. The descriptor socket is not a socket.");
+
+                        } else if (errno == EWOULDBLOCK) {
+
+                            log_message_debug("Error: Could not receive stream socket message. The read operation would block even though nonblocking mode has been set on the socket.");
+
+                        } else if (errno == EINTR) {
+
+                            log_message_debug("Error: Could not receive stream socket message. The operation was interrupted by a signal before any data was read.");
+
+                        } else if (errno == ENOTCONN) {
+
+                            log_message_debug("Error: Could not receive stream socket message. The socket was never connected.");
+
+                        } else {
+
+                            // CAUTION! Do NOT log the following error:
+                            // log_message_debug("Error: Could not receive stream socket message. An unknown error occured while receiving data.");
+                            //
+                            // The reason is that the socket is non-blocking,
+                            // so that the "accept" procedure returns always,
+                            // even if no connection was established.
+                            // But if no connection and client socket are there,
+                            // then the "recv" or "recvfrom" procedure returns an error,
+                            // which would unnecessarily fill up the log file.
+                        }
                     }
+
+                } else {
+
+                    log_message_debug("Error: Could not receive stream socket message. The buffer is null.");
                 }
 
-                // Unlock socket mutex.
-                pthread_mutex_unlock(*mt);
-*/
+            } else {
+
+                log_message_debug("Error: Could not receive stream socket message. The buffer count is null.");
+            }
+
+        } else {
+
+            log_message_debug("Error: Could not receive stream socket message. The buffer size is null.");
+        }
+
+    } else {
+
+        log_message_debug("Error: Could not receive stream socket message. The partner-connected socket of this system is null.");
+    }
 }
 
 /**
- * Receives a datagram socket message.
+ * Receives via stream socket.
  *
- * @param p0 the internal memory
- * @param p1 the base internal
+ * @param p0 the buffer (Hand over as reference!)
+ * @param p1 the buffer count
+ * @param p2 the buffer size
+ * @param p3 the communication partner-connected socket of this system
+ * @param p4 the communication partner-connected socket address
+ * @param p5 the communication partner-connected socket address size
+ * @param p6 the original socket of this system
+ * @param p7 the socket mutex
  */
-void receive_socket_datagram() {
+void receive_socket_stream(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
 
-                log_message_debug("Receive datagram socket message.");
+    if (p6 != *NULL_POINTER) {
 
-/*??
-                // Initialise error number.
-                // It is a global variable/ function and other operations
-                // may have set some value that is not wanted here.
-                //
-                // CAUTION! Initialise the error number BEFORE calling the procedure
-                // that might cause an error.
-                errno = *NUMBER_0_INTEGER;
+        int* os = (int*) p6;
 
-                // Lock socket mutex.
-                pthread_mutex_lock(*mt);
+        if (p3 != *NULL_POINTER) {
 
-                // Receive message from client.
-                // If the flags argument (fourth one) is zero, then one can
-                // just as well use the "read" instead of the "recv" procedure.
-                // Normally, "recv" blocks until there is input available to be read.
-                // ?? Not so here, as the socket was set to "non-blocking" mode at startup. ??
-                //
-                // CAUTION! A message MUST NOT be longer than the given buffer size!
-                **bc = recvfrom(**s, *b, **bs, *NUMBER_0_INTEGER, (struct sockaddr*) *a, (socklen_t*) *as);
+            int* ps = (int*) p3;
 
-                // Unlock socket mutex.
-                pthread_mutex_unlock(*mt);
+            log_message_debug("Receive via stream socket.");
 
-                // Remember error number.
-                e = errno;
-*/
+            // Initialise error number.
+            // It is a global variable/ function and other operations
+            // may have set some value that is not wanted here.
+            //
+            // CAUTION! Initialise the error number BEFORE calling the procedure
+            // that might cause an error.
+            errno = *NUMBER_0_INTEGER;
+
+    fprintf(stderr, "TEST: receive socket thread server socket: %i \n", *os);
+
+            // Lock socket mutex.
+            pthread_mutex_lock((pthread_mutex_t*) p7);
+
+            // Accept client socket request and store client socket.
+            //
+            // Accepting a connection does NOT make the original socket
+            // part of the connection. Instead, it creates a new socket
+            // which becomes connected. The normal return value of
+            // "accept" is the file descriptor for the new socket.
+            //
+            // After "accept", the original socket remains open and
+            // unconnected, and continues listening until it gets closed.
+            // One can accept further connections with the original
+            // socket by calling "accept" again -- best done in a loop!
+            //
+            // The address "pa" returns information about the name of the
+            // communication partner socket that initiated the connection.
+            *ps = accept(*os, (struct sockaddr*) p4, (socklen_t*) p5);
+
+            if (*ps >= *NUMBER_0_INTEGER) {
+
+                receive_socket_stream_message(p0, p1, p2, p3);
+
+                // CAUTION! Do NOT close client socket here!
+                // It is stored in the internal memory and only closed in
+                // the "send_socket" operation, when replying to the client.
+                // close(*ps);
+
+            } else {
+
+                if (errno == EBADF) {
+
+                    log_message_debug("Error: Could not receive via stream socket. The socket argument is not a valid file descriptor.");
+
+                } else if (errno == ENOTSOCK) {
+
+                    log_message_debug("Error: Could not receive via stream socket. The descriptor socket argument is not a socket.");
+
+                } else if (errno == EOPNOTSUPP) {
+
+                    log_message_debug("Error: Could not receive via stream socket. The descriptor socket does not support this operation.");
+
+                } else if (errno == EWOULDBLOCK) {
+
+                    // CAUTION! Do NOT log the following error:
+                    // log_message_debug("Error: Could not receive via stream socket. The socket has nonblocking mode set, and there are no pending connections immediately available.");
+                    //
+                    // The reason is that the socket is non-blocking,
+                    // so that the "accept" procedure returns always,
+                    // even if no connection was established,
+                    // which would unnecessarily fill up the log file.
+
+                } else {
+
+                    log_message_debug("Error: Could not receive via stream socket. An unknown error occured while accepting a socket connection.");
+                }
+            }
+
+            // Unlock socket mutex.
+            pthread_mutex_unlock((pthread_mutex_t*) p7);
+
+        } else {
+
+            log_message_debug("Error: Could not receive via stream socket. The communication partner-connected socket of this system is null.");
+        }
+
+    } else {
+
+        log_message_debug("Error: Could not receive via stream socket. The original socket of this system is null.");
+    }
 }
 
 /**
- * Receives a raw socket message.
+ * Receives via datagram socket.
  *
- * @param p0 the internal memory
- * @param p1 the base internal
+ * @param p0 the buffer (Hand over as reference!)
+ * @param p1 the buffer count
+ * @param p2 the buffer size
+ * @param p3 the original socket of this system
+ * @param p4 the original socket address of this system
+ * @param p5 the original socket address of this system size
+ * @param p6 the socket mutex
  */
-void receive_socket_raw(void* p0, void* p1) {
+void receive_socket_datagram(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
-    log_message_debug("Receive raw socket message.");
+    if (p3 != *NULL_POINTER) {
+
+        int* os = (int*) p3;
+
+        if (p2 != *NULL_POINTER) {
+
+            int* bs = (int*) p2;
+
+            if (p1 != *NULL_POINTER) {
+
+                int* bc = (int*) p1;
+
+                if (p0 != *NULL_POINTER) {
+
+                    void** b = (void**) p0;
+
+                    log_message_debug("Receive via datagram socket.");
+
+                    // Initialise error number.
+                    // It is a global variable/ function and other operations
+                    // may have set some value that is not wanted here.
+                    //
+                    // CAUTION! Initialise the error number BEFORE calling the procedure
+                    // that might cause an error.
+                    errno = *NUMBER_0_INTEGER;
+
+                    // Lock socket mutex.
+                    pthread_mutex_lock((pthread_mutex_t*) p6);
+
+                    // Receive message from client.
+                    // If the flags argument (fourth one) is zero, then one can
+                    // just as well use the "read" instead of the "recv" procedure.
+                    // Normally, "recv" blocks until there is input available to be read.
+                    // ?? Not so here, as the socket was set to "non-blocking" mode at startup. ??
+                    //
+                    // CAUTION! A message MUST NOT be longer than the given buffer size!
+                    *bc = recvfrom(*os, *b, *bs, *NUMBER_0_INTEGER, (struct sockaddr*) p4, (socklen_t*) p5);
+
+                    if (*bc > *NUMBER_0_INTEGER) {
+
+                        log_message_debug("Information: Successfully received via datagram socket.");
+
+                        fprintf(stderr, "TEST b: %s \n", (char*) *b);
+                        fprintf(stderr, "TEST bc: %i \n", *bc);
+                        fprintf(stderr, "TEST bs: %i \n", *bs);
+
+                    } else if (*bc = *NUMBER_0_INTEGER) {
+
+                        log_message_debug("Warning: Could not receive via datagram socket. No data could be received.");
+
+                    } else {
+
+                        if (errno == EBADF) {
+
+                            log_message_debug("Error: Could not receive via datagram socket. The socket argument is not a valid file descriptor.");
+
+                        } else if (errno == ENOTSOCK) {
+
+                            log_message_debug("Error: Could not receive via datagram socket. The descriptor socket is not a socket.");
+
+                        } else if (errno == EWOULDBLOCK) {
+
+                            log_message_debug("Error: Could not receive via datagram socket. The read operation would block even though nonblocking mode has been set on the socket.");
+
+                        } else if (errno == EINTR) {
+
+                            log_message_debug("Error: Could not receive via datagram socket. The operation was interrupted by a signal before any data was read.");
+
+                        } else if (errno == ENOTCONN) {
+
+                            log_message_debug("Error: Could not receive via datagram socket. The socket was never connected.");
+
+                        } else {
+
+                            // CAUTION! Do NOT log the following error:
+                            // log_message_debug("Error: Could not receive stream socket message. An unknown error occured while receiving data.");
+                            //
+                            // The reason is that the socket is non-blocking,
+                            // so that the "accept" procedure returns always,
+                            // even if no connection was established.
+                            // But if no connection and client socket are there,
+                            // then the "recv" or "recvfrom" procedure returns an error,
+                            // which would unnecessarily fill up the log file.
+                        }
+                    }
+
+                    // Unlock socket mutex.
+                    pthread_mutex_unlock((pthread_mutex_t*) p6);
+
+                } else {
+
+                    log_message_debug("Error: Could not receive via datagram socket. The buffer is null.");
+                }
+
+            } else {
+
+                log_message_debug("Error: Could not receive via datagram socket. The buffer count is null.");
+            }
+
+        } else {
+
+            log_message_debug("Error: Could not receive via datagram socket. The buffer size is null.");
+        }
+
+    } else {
+
+        log_message_debug("Error: Could not receive via datagram socket. The original socket of this system is null.");
+    }
+}
+
+/**
+ * Receives via raw socket.
+ *
+ * @param p0 the buffer (Hand over as reference!)
+ * @param p1 the buffer count
+ * @param p2 the buffer size
+ */
+void receive_socket_raw(void* p0, void* p1, void* p2) {
+
+    log_message_debug("Receive via raw socket.");
     log_message_debug("CAUTION! Raw socket functionality is not implemented in cyboi yet.");
 }
 
 /**
  * Receives a socket message depending on the given communication style.
  *
- * @param p0 the internal memory
- * @param p1 the base internal
+ * @param p0 the buffer (Hand over as reference!)
+ * @param p1 the buffer count
+ * @param p2 the buffer size
+ * @param p3 the communication partner-connected socket of this system
+ * @param p4 the communication partner-connected socket address
+ * @param p5 the communication partner-connected socket address size
+ * @param p6 the original socket of this system
+ * @param p7 the original socket address of this system
+ * @param p8 the original socket address of this system size
+ * @param p9 the socket mutex
+ * @param p10 the communication style
+ * @param p11 the communication style count
  */
-void receive_socket_style() {
+void receive_socket_style(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11) {
 
-        log_message_debug("Receive socket message depending on communication style.");
+    log_message_debug("Receive socket message depending on communication style.");
 
-/*??
-        // The comparison result.
-        int r = *NUMBER_0_INTEGER;
-        // The error number.
-        // CAUTION! This extra error number (besides "errno") is necessary
-        // to remember "errno" values of the "recv" and "recvfrom" procedures,
-        // across the various if-else sections.
-        int e = *NUMBER_0_INTEGER;
-        // The name.
-        void* name = *NULL_POINTER;
-        int namec = *NUMBER_0_INTEGER;
-        // The channel.
-        void* channel = *NULL_POINTER;
-        int channelc = *NUMBER_0_INTEGER;
-        // The abstraction.
-        void* abstraction = *NULL_POINTER;
-        int abstractionc = *NUMBER_0_INTEGER;
-        // The model.
-        void* model = *NULL_POINTER;
-        int modelc = *NUMBER_0_INTEGER;
+    // The comparison result.
+    int r = *NUMBER_0_INTEGER;
 
-    fprintf(stderr, "TEST: receive socket thread server socket: %i \n", **s);
+    if (r == *NUMBER_0_INTEGER) {
 
-        if (r == *NUMBER_0_INTEGER) {
+        compare_arrays(p10, p11, (void*) STREAM_COMMUNICATION_STYLE_MODEL, (void*) STREAM_COMMUNICATION_STYLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-            compare_arrays(*st, *stc, (void*) STREAM_COMMUNICATION_STYLE_MODEL, (void*) STREAM_COMMUNICATION_STYLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        if (r != *NUMBER_0_INTEGER) {
 
-            if (r != *NUMBER_0_INTEGER) {
-
-                receive_socket_stream();
-            }
+            receive_socket_stream(p0, p1, p2, p3, p4, p5, p6, p9);
         }
+    }
 
-        if (r == *NUMBER_0_INTEGER) {
+    if (r == *NUMBER_0_INTEGER) {
 
-            compare_arrays(*st, *stc, (void*) DATAGRAM_COMMUNICATION_STYLE_MODEL, (void*) STREAM_COMMUNICATION_STYLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p10, p11, (void*) DATAGRAM_COMMUNICATION_STYLE_MODEL, (void*) DATAGRAM_COMMUNICATION_STYLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-            if (r != *NUMBER_0_INTEGER) {
+        if (r != *NUMBER_0_INTEGER) {
 
-                receive_socket_datagram();
-            }
+            receive_socket_datagram(p0, p1, p2, p6, p7, p8, p9);
         }
+    }
 
-        if (r == *NUMBER_0_INTEGER) {
+    if (r == *NUMBER_0_INTEGER) {
 
-            compare_arrays(*st, *stc, (void*) RAW_COMMUNICATION_STYLE_MODEL, (void*) STREAM_COMMUNICATION_STYLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p10, p11, (void*) RAW_COMMUNICATION_STYLE_MODEL, (void*) RAW_COMMUNICATION_STYLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-            if (r != *NUMBER_0_INTEGER) {
+        if (r != *NUMBER_0_INTEGER) {
 
-                receive_socket_raw();
-            }
+            receive_socket_raw(p0, p1, p2);
         }
+    }
+}
 
-        if (**bc > *NUMBER_0_INTEGER) {
+/**
+ * Receives a socket message.
+ *
+ * @param p0 the knowledge memory
+ * @param p1 the knowledge memory count
+ * @param p2 the knowledge memory size
+ * @param p3 the signal memory
+ * @param p4 the signal memory count
+ * @param p5 the signal memory size
+ * @param p6 the signal memory mutex
+ * @param p7 the interrupt request internal
+ * @param p8 the communication style
+ * @param p9 the communication style count
+ * @param p10 the original socket of this system
+ * @param p11 the original socket address of this system
+ * @param p12 the original socket address of this system size
+ * @param p13 the communication partner-connected socket of this system
+ * @param p14 the communication partner-connected socket address
+ * @param p15 the communication partner-connected socket address size
+ * @param p16 the socket mutex
+ * @param p17 the buffer (Hand over as reference!)
+ * @param p18 the buffer count
+ * @param p19 the buffer size
+ * @param p20 the commands
+ * @param p21 the commands count
+ */
+void receive_socket_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7,
+    void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14, void* p15, void* p16,
+    void* p17, void* p18, void* p19, void* p20, void* p21) {
 
-            // Translate uniform resource locator (url).
-            receive_socket_request_method((void*) &name, (void*) &namec,
-                (void*) &channel, (void*) &channelc,
-                (void*) &abstraction, (void*) &abstractionc,
-                (void*) &model, (void*) &modelc,
-                *b, (void*) *bc);
+    if (p19 != *NULL_POINTER) {
 
-/*??
-            // The url basename.
-            char* url_basename = (char*) *NULL_POINTER;
-            int url_basename_count = *NUMBER_0_INTEGER;
-            // Create url basename.
-            allocate_array((void*) &url_basename, (void*) &url_basename_count, (void*) CHARACTER_ARRAY);
-            // Get url base name.
-            receive_socket_url(msg, &msg_count, &url_basename, &url_basename_count);
+        int* bs = (int*) p19;
 
-            // The parameter.
-            char* param = (char*) *NULL_POINTER;
-            int param_count = *NUMBER_0_INTEGER;
-            // Create paramater.
-            allocate_array((void*) &param, (void*) &param_count, (void*) CHARACTER_ARRAY);
-            // Get parameters.
-            receive_socket_parameter(msg, &msg_count, &param, &param_count);
+        if (p18 != *NULL_POINTER) {
 
-            // The firefox web browser makes a second request
-            // to determine the favicon.
-            char firefox_request[] = "favicon.ico";
-            char* p_firefox_request = &firefox_request[*NUMBER_0_INTEGER];
-            int firefox_request_count = 11;
+            int* bc = (int*) p18;
 
-            // The comparison result.
-            int r = *NUMBER_0_INTEGER;
-            compare_arrays((void*) url_basename, (void*) &url_basename_count, (void*) p_firefox_request, (void*) &firefox_request_count, (void*) &r, (void*) CHARACTER_ARRAY);
+            if (p17 != *NULL_POINTER) {
 
-            if (r != *NUMBER_1_INTEGER) {
+                void** b = (void**) p17;
 
-                // query string handling
-                set_signals_for_all_parameters((void*) param, (void*) &param_count, p0);
+                log_message_debug("Receive socket message.");
 
-                //?? The OLD solution created a signal here from a cybol knowledge template.
-                //?? This is NOW easier, since the commands already exist in the knowledge tree
-                //?? and only have to be referenced from here.
+                // Receive socket message depending on communication style.
+                receive_socket_style(p17, p18, p19, p13, p14, p15, p10, p11, p12, p16, p8, p9);
+
+                // The name.
+                void* name = *NULL_POINTER;
+                int namec = *NUMBER_0_INTEGER;
+                // The channel.
+                void* channel = *NULL_POINTER;
+                int channelc = *NUMBER_0_INTEGER;
+                // The abstraction.
+                void* abstraction = *NULL_POINTER;
+                int abstractionc = *NUMBER_0_INTEGER;
+                // The model.
+                void* model = *NULL_POINTER;
+                int modelc = *NUMBER_0_INTEGER;
+
+                // Translate uniform resource locator (url).
+                receive_socket_request_method((void*) &name, (void*) &namec,
+                    (void*) &channel, (void*) &channelc,
+                    (void*) &abstraction, (void*) &abstractionc,
+                    (void*) &model, (void*) &modelc,
+                    *b, p18);
+
+        /*??
+                // The url basename.
+                char* url_basename = (char*) *NULL_POINTER;
+                int url_basename_count = *NUMBER_0_INTEGER;
+                // Create url basename.
+                allocate_array((void*) &url_basename, (void*) &url_basename_count, (void*) CHARACTER_ARRAY);
+                // Get url base name.
+                receive_socket_url(msg, &msg_count, &url_basename, &url_basename_count);
+
+                // The parameter.
+                char* param = (char*) *NULL_POINTER;
+                int param_count = *NUMBER_0_INTEGER;
+                // Create paramater.
+                allocate_array((void*) &param, (void*) &param_count, (void*) CHARACTER_ARRAY);
+                // Get parameters.
+                receive_socket_parameter(msg, &msg_count, &param, &param_count);
+
+                // The firefox web browser makes a second request
+                // to determine the favicon.
+                char firefox_request[] = "favicon.ico";
+                char* p_firefox_request = &firefox_request[*NUMBER_0_INTEGER];
+                int firefox_request_count = 11;
+
+                // The comparison result.
+                int r = *NUMBER_0_INTEGER;
+                compare_arrays((void*) url_basename, (void*) &url_basename_count, (void*) p_firefox_request, (void*) &firefox_request_count, (void*) &r, (void*) CHARACTER_ARRAY);
+
+                if (r != *NUMBER_1_INTEGER) {
+
+                    // query string handling
+                    set_signals_for_all_parameters((void*) param, (void*) &param_count, p0);
+
+                    //?? The OLD solution created a signal here from a cybol knowledge template.
+                    //?? This is NOW easier, since the commands already exist in the knowledge tree
+                    //?? and only have to be referenced from here.
+
+                } else {
+
+                    close(*ps);
+                }
+        */
+
+                // Receive socket signal.
+                receive_socket_signal(p3, p4, p5, p6, p7, p20, p21, name, (void*) &namec, p0, p1);
+
+        //?? CAUTION! This sleep procedure is temporarily necessary for testing!
+        //?? Otherwise, the loop runs into the next cycle and the socket mutex
+        //?? gets locked, so that the "send_socket" procedure in the main thread
+        //?? cannot send its message.
+        //??    sleep(30);
+
+                // Reset character buffer.
+                //
+                // CAUTION! The buffer and its count do ALWAYS have to be reset,
+                // NOT ONLY if the message data reception (above) was successful!
+                // The reason is that on failure, the buffer count is set to some
+                // negative value and therefore needs to be reset in any case.
+                //
+                // CAUTION! Do NOT deallocate the character buffer!
+                // It was allocated at socket startup and must remain unchanged.
+                // Therefore, its elements are just set to null pointers here.
+                //
+                // CAUTION! Do NOT reset the maximum buffer size!
+                // It was allocated and initialised at socket startup
+                // and must remain unchanged.
+                memset(*b, *NUMBER_0_INTEGER, *bs);
+                *bc = *NUMBER_0_INTEGER;
 
             } else {
 
-                close(**ps);
+                log_message_debug("Error: Could not receive socket message. The buffer is null.");
             }
-*/
-
-/*??
-            // Receive socket signal.
-            receive_socket_signal(p0, name, (void*) &namec, p1);
-
-//?? CAUTION! This sleep procedure is temporarily necessary for testing!
-//?? Otherwise, the loop runs into the next cycle and the socket mutex
-//?? gets locked, so that the "send_socket" procedure in the main thread
-//?? cannot send its message.
-//??    sleep(30);
-
-        } else if (**bc = *NUMBER_0_INTEGER) {
-
-            log_message_debug("Error: Could not receive socket thread. No data could be received.");
 
         } else {
 
-            if (e == EBADF) {
-
-                log_message_debug("Error: Could not receive socket thread. The socket argument is not a valid file descriptor.");
-
-            } else if (e == ENOTSOCK) {
-
-                log_message_debug("Error: Could not receive socket thread. The descriptor socket is not a socket.");
-
-            } else if (e == EWOULDBLOCK) {
-
-                log_message_debug("Error: Could not receive socket thread. The read operation would block even though nonblocking mode has been set on the socket.");
-
-            } else if (e == EINTR) {
-
-                log_message_debug("Error: Could not receive socket thread. The operation was interrupted by a signal before any data was read.");
-
-            } else if (e == ENOTCONN) {
-
-                log_message_debug("Error: Could not receive socket thread. The socket was never connected.");
-
-            } else {
-
-                // CAUTION! Do NOT log the following error:
-                // log_message_debug("Error: Could not receive socket thread. An unknown error occured while receiving data.");
-                //
-                // The reason is that the socket is non-blocking,
-                // so that the "accept" procedure returns always,
-                // even if no connection was established.
-                // But if no connection and client socket are there,
-                // then the "recv" or "recvfrom" procedure returns an error,
-                // which would unnecessarily fill up the log file.
-            }
+            log_message_debug("Error: Could not receive socket message. The buffer count is null.");
         }
 
-        // Reset character buffer.
-        //
-        // CAUTION! Do NOT deallocate the character buffer!
-        // It was allocated at socket startup and must remain unchanged.
-        // Therefore, its elements are just set to null pointers here.
-        //
-        // CAUTION! Do NOT reset the maximum buffer size!
-        // It was allocated and initialised at socket startup
-        // and must remain unchanged.
-        memset(*b, *NUMBER_0_INTEGER, **bs);
-        **bc = *NUMBER_0_INTEGER;
-*/
+    } else {
+
+        log_message_debug("Error: Could not receive socket message. The buffer size is null.");
+    }
 }
 
 /**
  * Receives socket messages in an own thread.
- *
- * For web frontend testing, use for example:
- * http://localhost:3456/residenz.logic.send_name
- * http://127.0.0.1:1971/residenz.logic.send_name
  *
  * @param p0 the internal memory
  * @param p1 the base internal
@@ -1436,44 +1610,83 @@ void receive_socket_thread(void* p0, void* p1) {
 
         // The internal memory index.
         int i = *INVALID_VALUE;
+        // The knowledge memory.
+        void** k = NULL_POINTER;
+        void** kc = NULL_POINTER;
+        void** ks = NULL_POINTER;
+        // The signal memory.
+        void** s = NULL_POINTER;
+        void** sc = NULL_POINTER;
+        void** ss = NULL_POINTER;
+        // The signal memory mutex.
+        pthread_mutex_t** smt = (pthread_mutex_t**) NULL_POINTER;
+        // The interrupt request flag.
+        sig_atomic_t** irq = (sig_atomic_t**) NULL_POINTER;
+        // The socket mutex.
+        pthread_mutex_t** mt = (pthread_mutex_t**) NULL_POINTER;
         // The communication style.
         void** st = NULL_POINTER;
         void** stc = NULL_POINTER;
-        // The socket mutex.
-        pthread_mutex_t** mt = (pthread_mutex_t**) NULL_POINTER;
-        // The socket of this system.
-        int** s = (int**) NULL_POINTER;
-        // The socket address of this system.
-        void** a = NULL_POINTER;
-        void** as = NULL_POINTER;
-        // The partner-connected socket of this system.
-        int** ps = (int**) NULL_POINTER;
-        // The communication partner socket address.
+        // The original socket of this system.
+        void** os = (void**) NULL_POINTER;
+        // The original socket address of this system.
+        void** oa = NULL_POINTER;
+        void** oas = NULL_POINTER;
+        // The communication partner-connected socket of this system.
+        void** ps = (void**) NULL_POINTER;
+        // The communication partner-connected socket address of this system.
         void** pa = NULL_POINTER;
         void** pas = NULL_POINTER;
         // The character buffer.
         void** b = NULL_POINTER;
-        int** bc = (int**) NULL_POINTER;
+        void** bc = (void**) NULL_POINTER;
         // The maximum buffer size.
         // CAUTION! A message MUST NOT be longer!
-        int** bs = (int**) NULL_POINTER;
+        void** bs = (void**) NULL_POINTER;
+        // The commands.
+        void** c = NULL_POINTER;
+        void** cc = NULL_POINTER;
+
+        // Get knowledge memory internal.
+        get_element(p0, (void*) KNOWLEDGE_MEMORY_INTERNAL, (void*) &k, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        get_element(p0, (void*) KNOWLEDGE_MEMORY_COUNT_INTERNAL, (void*) &kc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        get_element(p0, (void*) KNOWLEDGE_MEMORY_SIZE_INTERNAL, (void*) &ks, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        // Get signal memory internal.
+        get_element(p0, (void*) SIGNAL_MEMORY_INTERNAL, (void*) &s, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        get_element(p0, (void*) SIGNAL_MEMORY_COUNT_INTERNAL, (void*) &sc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        get_element(p0, (void*) SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &ss, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        // Get signal memory mutex.
+        get_element(p0, (void*) SIGNAL_MEMORY_MUTEX_INTERNAL, (void*) &smt, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        // Get interrupt request internal.
+        get_element(p0, (void*) INTERRUPT_REQUEST_INTERNAL, (void*) &irq, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
+        // Get socket mutex.
+        i = *base + *SOCKET_MUTEX_INTERNAL;
+        get_element(p0, (void*) &i, (void*) &mt, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
+        // Lock socket mutex.
+        //
+        // CAUTION! A mutex is needed here to ensure that the commands- and other internals
+        // and their associated count and size are retrieved at once and belong together.
+        // Otherwise, e.g. a commands internal might be gotten in this "receive" thread,
+        // then the "main" thread of cyboi might set a new commands internal, count
+        // and size, and finally this "receive" thread would get a wrong count or size
+        // (of the new commands internal), not belonging to the commands internal got before.
+        pthread_mutex_lock(*mt);
 
         // Get communication style.
         i = *base + *SOCKET_STYLE_INTERNAL;
         get_element(p0, (void*) &i, (void*) &st, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         i = *base + *SOCKET_STYLE_COUNT_INTERNAL;
         get_element(p0, (void*) &i, (void*) &stc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        // Get socket mutex.
-        i = *base + *SOCKET_MUTEX_INTERNAL;
-        get_element(p0, (void*) &i, (void*) &mt, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        // Get socket of this system.
+        // Get original socket of this system.
         i = *base + *SOCKET_INTERNAL;
-        get_element(p0, (void*) &i, (void*) &s, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        // Get socket address of this system.
+        get_element(p0, (void*) &i, (void*) &os, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        // Get original socket address of this system.
         i = *base + *SOCKET_ADDRESS_INTERNAL;
-        get_element(p0, (void*) &i, (void*) &a, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        get_element(p0, (void*) &i, (void*) &oa, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         i = *base + *SOCKET_ADDRESS_SIZE_INTERNAL;
-        get_element(p0, (void*) &i, (void*) &as, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        get_element(p0, (void*) &i, (void*) &oas, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         // Get communication partner socket.
         i = *base + *SOCKET_COMMUNICATION_PARTNER_INTERNAL;
         get_element(p0, (void*) &i, (void*) &ps, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
@@ -1489,6 +1702,14 @@ void receive_socket_thread(void* p0, void* p1) {
         get_element(p0, (void*) &i, (void*) &bc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         i = *base + *SOCKET_CHARACTER_BUFFER_SIZE_INTERNAL;
         get_element(p0, (void*) &i, (void*) &bs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        // Get commands internal.
+        i = *base + *SOCKET_COMMANDS_INTERNAL;
+        get_element(p0, (void*) &i, (void*) &c, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        i = *base + *SOCKET_COMMANDS_COUNT_INTERNAL;
+        get_element(p0, (void*) &i, (void*) &cc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
+        // Unlock socket mutex.
+        pthread_mutex_unlock(*mt);
 
         while (*NUMBER_1_INTEGER) {
 
@@ -1500,8 +1721,8 @@ void receive_socket_thread(void* p0, void* p1) {
             // and processed in the system signal handler procedure
             // (situated in the controller/checker.c module).
 
-            // Receive socket message depending on communication style.
-            receive_socket_style();
+            receive_socket_message(*k, *kc, *ks, *s, *sc, *ss, *smt, *irq,
+                *st, *stc, *os, *oa, *oas, *ps, *pa, *pas, *mt, b, *bc, *bs, *c, *cc);
 
             // Sleep for some time to give the central processing unit (cpu)
             // time to breathe, that is to be idle or to process other signals.
