@@ -14,9 +14,16 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.17 $ $Date: 2007-08-04 23:26:01 $ $Author: christian $
+# @version $Revision: 1.18 $ $Date: 2007-08-12 23:31:47 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2007-08-12  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Add "url_escape_code_constants.c", "url_escape_code_mapper.c", "url_escape_code_converter.c"
+        * Add "http_request_converter.c", "http_response_converter.c"
+        * Add "html_character_constants.c", "html_character_mapper.c"
+        * Add "lcid_language_constants.c" (just for the future)
 
 2007-08-04  Christian Heller  <christian.heller@tuxtax.de>
 

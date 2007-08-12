@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.33 $ $Date: 2007-07-29 01:53:30 $ $Author: christian $
+ * @version $Revision: 1.34 $ $Date: 2007-08-12 23:31:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -40,6 +40,8 @@
 #include "../memoriser/converter/date_time_converter.c"
 #include "../memoriser/converter/double_vector_converter.c"
 #include "../memoriser/converter/fraction_converter.c"
+#include "../memoriser/converter/http_request_converter.c"
+#include "../memoriser/converter/http_response_converter.c"
 #include "../memoriser/converter/integer_converter.c"
 #include "../memoriser/converter/integer_vector_converter.c"
 #include "../memoriser/converter/latex_converter.c"
@@ -218,6 +220,26 @@ void parse(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
         if (r != *NUMBER_0_INTEGER) {
 
             parse_xhtml(p0, p1, p2, p6, p7);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER) {
+
+        compare_arrays(p8, p9, (void*) HTTP_REQUEST_ABSTRACTION, (void*) HTTP_REQUEST_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != *NUMBER_0_INTEGER) {
+
+            parse_http_request(p0, p1, p2, p6, p7);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER) {
+
+        compare_arrays(p8, p9, (void*) HTTP_RESPONSE_ABSTRACTION, (void*) HTTP_RESPONSE_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != *NUMBER_0_INTEGER) {
+
+            parse_http_response(p0, p1, p2, p6, p7);
         }
     }
 
@@ -407,6 +429,26 @@ void serialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
         if (r != *NUMBER_0_INTEGER) {
 
             serialise_xhtml(p0, p1, p2, p5, p6, p7, p8, p9, p10, p11, p12);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER) {
+
+        compare_arrays(p13, p14, (void*) HTTP_REQUEST_ABSTRACTION, (void*) HTTP_REQUEST_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != *NUMBER_0_INTEGER) {
+
+            serialise_http_request(p0, p1, p2, p5, p6, p7, p8, p9, p10, p11, p12);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER) {
+
+        compare_arrays(p13, p14, (void*) HTTP_RESPONSE_ABSTRACTION, (void*) HTTP_RESPONSE_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != *NUMBER_0_INTEGER) {
+
+            serialise_http_response(p0, p1, p2, p5, p6, p7, p8, p9, p10, p11, p12);
         }
     }
 

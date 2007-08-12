@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2007-07-23 23:47:58 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2007-08-12 23:31:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -201,6 +201,16 @@ static int* TEX_ABSTRACTION_COUNT = NUMBER_3_INTEGER_ARRAY;
 static char XHTML_ABSTRACTION_ARRAY[] = {'x', 'h', 't', 'm', 'l'};
 static char* XHTML_ABSTRACTION = XHTML_ABSTRACTION_ARRAY;
 static int* XHTML_ABSTRACTION_COUNT = NUMBER_5_INTEGER_ARRAY;
+
+/** The http request abstraction. */
+static char HTTP_REQUEST_ABSTRACTION_ARRAY[] = {'h', 't', 't', 'p', ' ', 'r', 'e', 'q', 'u', 'e', 's', 't'};
+static char* HTTP_REQUEST_ABSTRACTION = HTTP_REQUEST_ABSTRACTION_ARRAY;
+static int* HTTP_REQUEST_ABSTRACTION_COUNT = NUMBER_12_INTEGER_ARRAY;
+
+/** The http response abstraction. */
+static char HTTP_RESPONSE_ABSTRACTION_ARRAY[] = {'h', 't', 't', 'p', ' ', 'r', 'e', 's', 'p', 'o', 'n', 's', 'e'};
+static char* HTTP_RESPONSE_ABSTRACTION = HTTP_RESPONSE_ABSTRACTION_ARRAY;
+static int* HTTP_RESPONSE_ABSTRACTION_COUNT = NUMBER_13_INTEGER_ARRAY;
 
 /** The xml abstraction. */
 static char XML_ABSTRACTION_ARRAY[] = {'x', 'm', 'l'};

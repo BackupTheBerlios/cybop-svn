@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.19 $ $Date: 2007-08-03 16:57:22 $ $Author: christian $
+ * @version $Revision: 1.20 $ $Date: 2007-08-12 23:31:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -581,6 +581,9 @@ void send_socket(void* p0, void* p1, void* p2, void* p3,
     // Therefore, the model is stored in a temporary variable here, before adding that to the buffer further below.
     serialise((void*) &b, (void*) &bc, (void*) &bs, *NULL_POINTER, *NULL_POINTER, p11, p12, p13, p14, p15, p16, p17, p18, p19, p20);
 
+    // CAUTION! Use Carriage Return (CR) AND Line Feed (LF) characters to break lines!
+    // This is defined so by the Hypertext Transfer Protocol (HTTP).
+
     // Serialise http protocol version.
     serialise((void*) &m, (void*) &mc, (void*) &ms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
         (void*) HTTP_1_1_PROTOCOL_VERSION, (void*) HTTP_1_1_PROTOCOL_VERSION_COUNT, *NULL_POINTER, *NULL_POINTER,
@@ -592,6 +595,10 @@ void send_socket(void* p0, void* p1, void* p2, void* p3,
     // Serialise http status code.
     serialise((void*) &m, (void*) &mc, (void*) &ms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
         (void*) HTTP_200_OK_STATUS_CODE, (void*) HTTP_200_OK_STATUS_CODE_COUNT, *NULL_POINTER, *NULL_POINTER,
+        *NULL_POINTER, *NULL_POINTER, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+    // Serialise carriage return character.
+    serialise((void*) &m, (void*) &mc, (void*) &ms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
+        (void*) CARRIAGE_RETURN_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, *NULL_POINTER, *NULL_POINTER,
         *NULL_POINTER, *NULL_POINTER, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
     // Serialise line feed character.
     serialise((void*) &m, (void*) &mc, (void*) &ms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
@@ -633,6 +640,10 @@ void send_socket(void* p0, void* p1, void* p2, void* p3,
     serialise((void*) &m, (void*) &mc, (void*) &ms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
         (void*) ISO_8859_1_CHARACTER_SET, (void*) ISO_8859_1_CHARACTER_SET_COUNT, *NULL_POINTER, *NULL_POINTER,
         *NULL_POINTER, *NULL_POINTER, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+    // Serialise carriage return character.
+    serialise((void*) &m, (void*) &mc, (void*) &ms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
+        (void*) CARRIAGE_RETURN_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, *NULL_POINTER, *NULL_POINTER,
+        *NULL_POINTER, *NULL_POINTER, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
     // Serialise line feed character.
     serialise((void*) &m, (void*) &mc, (void*) &ms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
         (void*) LINE_FEED_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, *NULL_POINTER, *NULL_POINTER,
@@ -654,9 +665,17 @@ void send_socket(void* p0, void* p1, void* p2, void* p3,
     serialise((void*) &m, (void*) &mc, (void*) &ms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
         (void*) &bc, (void*) PRIMITIVE_COUNT, *NULL_POINTER, *NULL_POINTER,
         *NULL_POINTER, *NULL_POINTER, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    // Serialise carriage return character.
+    serialise((void*) &m, (void*) &mc, (void*) &ms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
+        (void*) CARRIAGE_RETURN_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, *NULL_POINTER, *NULL_POINTER,
+        *NULL_POINTER, *NULL_POINTER, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
     // Serialise line feed character.
     serialise((void*) &m, (void*) &mc, (void*) &ms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
         (void*) LINE_FEED_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, *NULL_POINTER, *NULL_POINTER,
+        *NULL_POINTER, *NULL_POINTER, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+    // Serialise carriage return character.
+    serialise((void*) &m, (void*) &mc, (void*) &ms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
+        (void*) CARRIAGE_RETURN_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, *NULL_POINTER, *NULL_POINTER,
         *NULL_POINTER, *NULL_POINTER, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
     // Serialise line feed character.
     serialise((void*) &m, (void*) &mc, (void*) &ms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,

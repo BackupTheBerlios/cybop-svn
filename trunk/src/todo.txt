@@ -7,11 +7,17 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.5 $ $Date: 2007-08-03 16:53:21 $ $Author: christian $
+# @version $Revision: 1.6 $ $Date: 2007-08-12 23:31:48 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-- receive/ parse HTML message header and message-body and add the entries to the knowledge model that was handed over
+- complete "url_escape_code_mapper.c" and "html_character_mapper.c"
+- split receive_socket and put HTTP conversion into http_converter.c file,
+    since it is independent from TCP/IP
+- parse HTML message header and message-body and add the entries to the knowledge model that was handed over
+
+- replace parse/ serialise with more neutral decode/ encode (?)
+- think about names for "map" functions
 
 - replace "0" with *NUMBER_0_INTEGER and "1" with *NUMBER_1_INTEGER, in all source code files
 - add correct LOG_LEVEL constant to all log messages of all source code files,

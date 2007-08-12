@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2007-08-03 17:10:16 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2007-08-12 23:31:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -38,6 +38,11 @@ static int* ISO_8859_1_CHARACTER_SET_COUNT = NUMBER_10_INTEGER_ARRAY;
 static char UTF_8_CHARACTER_SET_ARRAY[] = {'u', 't', 'f', '-', '8'};
 static char* UTF_8_CHARACTER_SET = UTF_8_CHARACTER_SET_ARRAY;
 static int* UTF_8_CHARACTER_SET_COUNT = NUMBER_5_INTEGER_ARRAY;
+
+/** The html coded character set. */
+static char HTML_CODED_CHARACTER_SET_ARRAY[] = {'h', 't', 'm', 'l', ' ', 'c', 'o', 'd', 'e', 'd'};
+static char* HTML_CODED_CHARACTER_SET = HTML_CODED_CHARACTER_SET_ARRAY;
+static int* HTML_CODED_CHARACTER_SET_COUNT = NUMBER_10_INTEGER_ARRAY;
 
 /* CHARACTER_SET_CONSTANTS_SOURCE */
 #endif
