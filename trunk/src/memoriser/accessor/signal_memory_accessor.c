@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.18 $ $Date: 2007-07-23 23:47:58 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2007-08-13 16:37:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -29,9 +29,9 @@
 
 #include "../../globals/constants/integer/integer_constants.c"
 #include "../../globals/constants/log/log_message_constants.c"
+#include "../../globals/constants/memory_structure/array_constants.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../../globals/constants/pointer/pointer_constants.c"
-#include "../../globals/constants/memory_structure/array_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../memoriser/allocator.c"
 #include "../../memoriser/array.c"
@@ -103,12 +103,12 @@ void set_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
                                             // The index.
                                             int i = *c;
 
-                                            if (i >= 0) {
+                                            if (i >= *NUMBER_0_INTEGER) {
 
                                                 if (i == *s) {
 
                                                     // Increase size.
-                                                    *s = (*s * *SIGNAL_MEMORY_REALLOCATE_FACTOR) + 1;
+                                                    *s = (*s * *SIGNAL_MEMORY_REALLOCATE_FACTOR) + *NUMBER_1_INTEGER;
 
                                                     // Reallocate abstractions, models, details, priorities, identifications.
                                                     reallocate_array(a, p1, p2, (void*) POINTER_ARRAY);
@@ -271,7 +271,7 @@ void remove_signal(void* p0, void* p1, void* p2, void* p3) {
 
                                             if (*id != *NULL_POINTER) {
 
-                                                if (*i >= 0) {
+                                                if (*i >= *NUMBER_0_INTEGER) {
 
                                                     if (*i < *c) {
 
@@ -418,7 +418,7 @@ void get_signal(void* p0, void* p1, void* p2, void* p3, void* p4,
 
                                         if (*id != *NULL_POINTER) {
 
-                                            if (*i >= 0) {
+                                            if (*i >= *NUMBER_0_INTEGER) {
 
                                                 if (*i < *c) {
 
@@ -519,16 +519,16 @@ void get_highest_priority_index(void* p0, void* p1, void* p2) {
             if (*sp != *NULL_POINTER) {
 
                 // The loop variable.
-                int j = 0;
+                int j = *NUMBER_0_INTEGER;
                 // The priority.
                 int** prio = (int**) NULL_POINTER;
                 // The highest priority.
                 // CAUTION! Do not initialise it with zero, because then the
                 // priority will not be set, due to the comparison: if (prio > h).
                 // The smallest possible priority is zero and greater than minus one.
-                int h = -1;
+                int h = *INVALID_VALUE;
 
-                while (1) {
+                while (*NUMBER_1_INTEGER) {
 
                     if (j >= *c) {
 
@@ -597,16 +597,16 @@ void get_new_signal_id(void* p0, void* p1, void* p2) {
             if (*ids != *NULL_POINTER) {
 
                 // The loop variable.
-                int j = 0;
+                int j = *NUMBER_0_INTEGER;
                 // The maximum signal identification.
                 // CAUTION! Do not initialise it with zero, because then the
                 // maximum will not be set, due to the comparison: if (id > max).
                 // The smallest possible priority is zero and greater than minus one.
-                int max = -1;
+                int max = *INVALID_VALUE;
                 // The identification.
                 int** id = (int**) NULL_POINTER;
 
-                while (1) {
+                while (*NUMBER_1_INTEGER) {
 
                     if (j >= *mc) {
 
@@ -627,7 +627,7 @@ void get_new_signal_id(void* p0, void* p1, void* p2) {
                     j++;
                 }
 
-                *i = max + 1;
+                *i = max + *NUMBER_1_INTEGER;
 
             } else {
 

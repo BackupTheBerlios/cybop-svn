@@ -14,9 +14,14 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.18 $ $Date: 2007-08-12 23:31:47 $ $Author: christian $
+# @version $Revision: 1.19 $ $Date: 2007-08-13 16:37:10 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2007-08-13  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Replace all integer numbers like 0, 1 etc. with the corresponding constant *NUMBER_0_INTEGER, *NUMBER_1_INTEGER etc.
+        * Clean up source code a bit, deleting outdated comments etc.
 
 2007-08-12  Christian Heller  <christian.heller@tuxtax.de>
 

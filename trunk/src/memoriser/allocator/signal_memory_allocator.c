@@ -23,7 +23,7 @@
  * This file contains the functionality to:
  * - create a signal memory in memory
  *
- * @version $Revision: 1.13 $ $Date: 2007-07-23 23:47:58 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2007-08-13 16:37:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -121,13 +121,13 @@ void deallocate_signal_memory(void* p0, void* p1) {
     /*??
         log_message((void*) &INFORMATION_LOG_LEVEL, (void*) &"Destroy all signals left in signal memory.");
 
-        int i = 0;
+        int i = *NUMBER_0_INTEGER;
         get_array_count(m->signals, (void*) &i);
         i--;
         void* s = *NULL_POINTER;
         void* a = *NULL_POINTER;
 
-        while (i >= 0) {
+        while (i >= *NUMBER_0_INTEGER) {
 
             s = (void*) get_signal(p0, (void*) &i);
             a = (void*) get_abstraction(p0, (void*) &i);

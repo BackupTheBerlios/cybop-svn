@@ -20,17 +20,18 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.10 $ $Date: 2007-05-26 21:19:58 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2007-08-13 16:37:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef TERMINAL_BACKGROUND_MAPPER_SOURCE
 #define TERMINAL_BACKGROUND_MAPPER_SOURCE
 
-#include "../../globals/constants/cybol/cybol_abstraction_constants.c"
 #include "../../globals/constants/console/console_control_sequence_constants.c"
-#include "../../globals/constants/log/log_message_constants.c"
+#include "../../globals/constants/cybol/cybol_abstraction_constants.c"
 #include "../../globals/constants/cybol/cybol_model_constants.c"
+#include "../../globals/constants/integer/integer_constants.c"
+#include "../../globals/constants/log/log_message_constants.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/logger/logger.c"
@@ -57,90 +58,90 @@ void mapto_terminal_background(void* p0, void* p1, void* p2, void* p3, void* p4)
             void** d = (void**) p0;
 
             // The comparison result.
-            int r = 0;
+            int r = *NUMBER_0_INTEGER;
 
-            if (r == 0) {
+            if (r == *NUMBER_0_INTEGER) {
 
                 compare_arrays(p3, p4, TERMINAL_COLOUR_BLACK_MODEL, TERMINAL_COLOUR_BLACK_MODEL_COUNT, &r, (void*) CHARACTER_ARRAY);
 
-                if (r != 0) {
+                if (r != *NUMBER_0_INTEGER) {
 
                     *d = BLACK_BACKGROUND_CONTROL_SEQUENCE;
                     *dc = *BLACK_BACKGROUND_CONTROL_SEQUENCE_COUNT;
                 }
             }
 
-            if (r == 0) {
+            if (r == *NUMBER_0_INTEGER) {
 
                 compare_arrays(p3, p4, TERMINAL_COLOUR_RED_MODEL, TERMINAL_COLOUR_RED_MODEL_COUNT, &r, (void*) CHARACTER_ARRAY);
 
-                if (r != 0) {
+                if (r != *NUMBER_0_INTEGER) {
 
                     *d = RED_BACKGROUND_CONTROL_SEQUENCE;
                     *dc = *RED_BACKGROUND_CONTROL_SEQUENCE_COUNT;
                 }
             }
 
-            if (r == 0) {
+            if (r == *NUMBER_0_INTEGER) {
 
                 compare_arrays(p3, p4, TERMINAL_COLOUR_GREEN_MODEL, TERMINAL_COLOUR_GREEN_MODEL_COUNT, &r, (void*) CHARACTER_ARRAY);
 
-                if (r != 0) {
+                if (r != *NUMBER_0_INTEGER) {
 
                     *d = GREEN_BACKGROUND_CONTROL_SEQUENCE;
                     *dc = *GREEN_BACKGROUND_CONTROL_SEQUENCE_COUNT;
                 }
             }
 
-            if (r == 0) {
+            if (r == *NUMBER_0_INTEGER) {
 
                 compare_arrays(p3, p4, TERMINAL_COLOUR_YELLOW_MODEL, TERMINAL_COLOUR_YELLOW_MODEL_COUNT, &r, (void*) CHARACTER_ARRAY);
 
-                if (r != 0) {
+                if (r != *NUMBER_0_INTEGER) {
 
                     *d = YELLOW_BACKGROUND_CONTROL_SEQUENCE;
                     *dc = *YELLOW_BACKGROUND_CONTROL_SEQUENCE_COUNT;
                 }
             }
 
-            if (r == 0) {
+            if (r == *NUMBER_0_INTEGER) {
 
                 compare_arrays(p3, p4, TERMINAL_COLOUR_BLUE_MODEL, TERMINAL_COLOUR_BLUE_MODEL_COUNT, &r, (void*) CHARACTER_ARRAY);
 
-                if (r != 0) {
+                if (r != *NUMBER_0_INTEGER) {
 
                     *d = BLUE_BACKGROUND_CONTROL_SEQUENCE;
                     *dc = *BLUE_BACKGROUND_CONTROL_SEQUENCE_COUNT;
                 }
             }
 
-            if (r == 0) {
+            if (r == *NUMBER_0_INTEGER) {
 
                 compare_arrays(p3, p4, TERMINAL_COLOUR_MAGENTA_MODEL, TERMINAL_COLOUR_MAGENTA_MODEL_COUNT, &r, (void*) CHARACTER_ARRAY);
 
-                if (r != 0) {
+                if (r != *NUMBER_0_INTEGER) {
 
                     *d = MAGENTA_BACKGROUND_CONTROL_SEQUENCE;
                     *dc = *MAGENTA_BACKGROUND_CONTROL_SEQUENCE_COUNT;
                 }
             }
 
-            if (r == 0) {
+            if (r == *NUMBER_0_INTEGER) {
 
                 compare_arrays(p3, p4, TERMINAL_COLOUR_COBALT_MODEL, TERMINAL_COLOUR_COBALT_MODEL_COUNT, &r, (void*) CHARACTER_ARRAY);
 
-                if (r != 0) {
+                if (r != *NUMBER_0_INTEGER) {
 
                     *d = COBALT_BACKGROUND_CONTROL_SEQUENCE;
                     *dc = *COBALT_BACKGROUND_CONTROL_SEQUENCE_COUNT;
                 }
             }
 
-            if (r == 0) {
+            if (r == *NUMBER_0_INTEGER) {
 
                 compare_arrays(p3, p4, TERMINAL_COLOUR_WHITE_MODEL, TERMINAL_COLOUR_WHITE_MODEL_COUNT, &r, (void*) CHARACTER_ARRAY);
 
-                if (r != 0) {
+                if (r != *NUMBER_0_INTEGER) {
 
                     *d = WHITE_BACKGROUND_CONTROL_SEQUENCE;
                     *dc = *WHITE_BACKGROUND_CONTROL_SEQUENCE_COUNT;

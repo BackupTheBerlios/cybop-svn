@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.23 $ $Date: 2007-07-23 23:47:57 $ $Author: christian $
+ * @version $Revision: 1.24 $ $Date: 2007-08-13 16:37:10 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -28,8 +28,9 @@
 #define BUILD_SOURCE
 
 #include "../globals/constants/cybol/cybol_abstraction_constants.c"
-#include "../globals/constants/log/log_message_constants.c"
 #include "../globals/constants/cybol/cybol_name_constants.c"
+#include "../globals/constants/integer/integer_constants.c"
+#include "../globals/constants/log/log_message_constants.c"
 #include "../globals/constants/pointer/pointer_constants.c"
 #include "../globals/logger/logger.c"
 #include "../memoriser/accessor/compound_accessor.c"
@@ -119,15 +120,15 @@ void build_listname(void* p0, void* p1, void* p2, void* p3, void* p4) {
         p2, p3);
 
     //check the abstraction for the operation element
-    int comp_res1 = 0;
-    int comp_res2 = 0;
-    int comp_res3 = 0;
+    int comp_res1 = *NUMBER_0_INTEGER;
+    int comp_res2 = *NUMBER_0_INTEGER;
+    int comp_res3 = *NUMBER_0_INTEGER;
 
     // Create compare string.
     char* int_string = *NULL_POINTER;
     // todo Konstante noch definieren
-    int int_string_count = 0;
-    int int_string_size = 10;
+    int int_string_count = *NUMBER_0_INTEGER;
+    int int_string_size = *NUMBER_10_INTEGER;
 
     allocate_array((void*) &int_string, (void*) &int_string_size, (void*) CHARACTER_ARRAY);
 

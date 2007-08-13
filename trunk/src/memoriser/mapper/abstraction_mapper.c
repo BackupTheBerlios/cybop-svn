@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2007-07-29 01:53:30 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2007-08-13 16:37:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -28,6 +28,7 @@
 #define ABSTRACTION_MAPPER_SOURCE
 
 #include "../../globals/constants/cybol/cybol_abstraction_constants.c"
+#include "../../globals/constants/integer/integer_constants.c"
 #include "../../globals/constants/log/log_message_constants.c"
 #include "../../globals/constants/memory_structure/memory_abstraction_constants.c"
 #include "../../globals/constants/pointer/pointer_constants.c"

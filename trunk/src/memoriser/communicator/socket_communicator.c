@@ -24,7 +24,7 @@
  * - receive an http stream into a byte array
  * - send an http stream from a byte array
  *
- * @version $Revision: 1.10 $ $Date: 2007-07-23 23:47:58 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2007-08-13 16:37:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -36,6 +36,7 @@
 #include <errno.h>
 #include <stdio.h>
 #include "../../globals/constants/cybol/cybol_model_constants.c"
+#include "../../globals/constants/integer/integer_constants.c"
 #include "../../globals/constants/memory_structure/array_constants.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../../globals/constants/pointer/pointer_constants.c"
@@ -200,7 +201,7 @@ void write_socket_stream_server_mode(void* p0, void* p1, void* p2) {
         // The "sent" operation therefore has to be
         // CALLED AGAIN AND AGAIN, in a loop, until
         // the complete message has been transmitted!
-        while (1) {
+        while (*NUMBER_1_INTEGER) {
 
             if (*sc <= *NUMBER_0_INTEGER) {
 
@@ -342,24 +343,24 @@ void write_socket_stream(void* p0, void* p1, void* p2, void* p3, void* p4, void*
     log_message_debug("Information: Write to stream socket.");
 
     // The comparison result.
-    int r = 0;
+    int r = *NUMBER_0_INTEGER;
 
-    if (r == 0) {
+    if (r == *NUMBER_0_INTEGER) {
 
         compare_arrays(p5, p6, (void*) SERVER_COMMUNICATION_MODE_MODEL, (void*) SERVER_COMMUNICATION_MODE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r != 0) {
+        if (r != *NUMBER_0_INTEGER) {
 
             // Send message to destination socket.
             write_socket_stream_server_mode(p0, p1, p2);
         }
     }
 
-    if (r == 0) {
+    if (r == *NUMBER_0_INTEGER) {
 
         compare_arrays(p5, p6, (void*) CLIENT_COMMUNICATION_MODE_MODEL, (void*) CLIENT_COMMUNICATION_MODE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r != 0) {
+        if (r != *NUMBER_0_INTEGER) {
 
             // Connect this system whose socket is given to
             // another system whose address is given.
@@ -369,7 +370,7 @@ void write_socket_stream(void* p0, void* p1, void* p2, void* p3, void* p4, void*
         }
     }
 
-    if (r == 0) {
+    if (r == *NUMBER_0_INTEGER) {
 
         log_message_debug("Error: Could not write to stream socket. The communication mode is unknown.");
     }

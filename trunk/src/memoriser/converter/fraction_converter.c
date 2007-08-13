@@ -20,13 +20,14 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2007-05-26 21:19:58 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2007-08-13 16:37:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef FRACTION_CONVERTER_SOURCE
 #define FRACTION_CONVERTER_SOURCE
 
+#include "../../globals/constants/integer/integer_constants.c"
 #include "../../globals/constants/log/log_message_constants.c"
 #include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/logger/logger.c"
@@ -67,8 +68,8 @@ void parse_fraction(void* p0, void* p1, void* p2, void* p3, void* p4) {
             //??    sscanf(p1, %l, (void*) &(m->value));
 
                 // Initialise elements.
-                int d = 0;
-                int n = 0;
+                int d = *NUMBER_0_INTEGER;
+                int n = *NUMBER_0_INTEGER;
 
                 // Set elements.
                 set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &NUMERATOR_INDEX, (void*) &n);
@@ -103,21 +104,21 @@ void parse_fraction(void* p0, void* p1, void* p2, void* p3, void* p4) {
 void serialise_fraction(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
 /*??
-            //??    log_message((void*) &INFORMATION_LOG_LEVEL, (void*) &"Finalise fraction.");
+    //?? log_message((void*) &INFORMATION_LOG_LEVEL, (void*) &"Finalise fraction.");
 
-                // Initialise elements.
-                int d = 0;
-                int n = 0;
+    // Initialise elements.
+    int d = *NUMBER_0_INTEGER;
+    int n = *NUMBER_0_INTEGER;
 
-                // Get elements.
-                get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &DENOMINATOR_INDEX, (void*) &d);
-                get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &NUMERATOR_INDEX, (void*) &n);
+    // Get elements.
+    get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &DENOMINATOR_INDEX, (void*) &d);
+    get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &NUMERATOR_INDEX, (void*) &n);
 
-                // Remove elements.
-                remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &FRACTION_COUNT, (void*) &DENOMINATOR_INDEX);
-                remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &FRACTION_COUNT, (void*) &NUMERATOR_INDEX);
+    // Remove elements.
+    remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &FRACTION_COUNT, (void*) &DENOMINATOR_INDEX);
+    remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &FRACTION_COUNT, (void*) &NUMERATOR_INDEX);
 
-            //??    sprintf(p1, %l, (void*) &(m->value));
+//??    sprintf(p1, %l, (void*) &(m->value));
 */
 }
 

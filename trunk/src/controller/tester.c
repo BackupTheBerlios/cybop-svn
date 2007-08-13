@@ -24,7 +24,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.9 $ $Date: 2007-08-04 23:24:47 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2007-08-13 16:37:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -54,11 +54,11 @@
 #include <locale.h>
 #include <stdio.h>
 #include <wchar.h>
-#include "../globals/constants/float/double_constants.c"
+#include "../globals/constants/character/wide_character_constants.c"
 #include "../globals/constants/cybol/cybol_abstraction_constants.c"
+#include "../globals/constants/float/double_constants.c"
 #include "../globals/constants/integer/integer_constants.c"
 #include "../globals/constants/memory_structure/memory_structure_constants.c"
-#include "../globals/constants/character/wide_character_constants.c"
 #include "../globals/constants/pointer/pointer_constants.c"
 #include "../globals/variables/variables.c"
 #include "../memoriser/accessor/compound_accessor.c"
@@ -398,12 +398,12 @@ void test_array_resizing() {
 
     // The original array.
     void* o = *NULL_POINTER;
-    int oc = 0;
+    int oc = *NUMBER_0_INTEGER;
     int os = *tc;
     // The copied array.
     void* c = *NULL_POINTER;
-    int cc = 0;
-    int cs = 0;
+    int cc = *NUMBER_0_INTEGER;
+    int cs = *NUMBER_0_INTEGER;
 
     // Allocate original array.
     allocate_array((void*) &o, (void*) &os, (void*) CHARACTER_ARRAY);
@@ -418,7 +418,7 @@ void test_array_resizing() {
     fputs(t, stdout);
 
     // Reallocate copied array.
-    os = os + 10;
+    os = os + *NUMBER_10_INTEGER;
     reallocate_array((void*) &o, (void*) &oc, (void*) &os, (void*) CHARACTER_ARRAY);
 
     // Print original array content.
@@ -473,8 +473,8 @@ void test_wide_character_output() {
 
     // The terminated control sequences string.
     void* ts = *NULL_POINTER;
-    int tsc = 0;
-    int tss = 100;
+    int tsc = *NUMBER_0_INTEGER;
+    int tss = *NUMBER_100_INTEGER;
 
     // Create terminated control sequences string.
     allocate_array((void*) &ts, (void*) &tss, (void*) WIDE_CHARACTER_ARRAY);
@@ -648,7 +648,7 @@ void test_character_array_single_element() {
 
     // The character array.
     void* c = *NULL_POINTER;
-    int cs = 5;
+    int cs = *NUMBER_5_INTEGER;
 
     // Create character array.
     allocate_array((void*) &c, (void*) &cs, (void*) CHARACTER_ARRAY);
@@ -662,10 +662,10 @@ void test_character_array_single_element() {
     // Print out array contents.
     fputs((char*) c, stdout);
 
-    int i = 0;
+    int i = *NUMBER_0_INTEGER;
     char* catest = (char*) *NULL_POINTER;
 
-    while (1) {
+    while (*NUMBER_1_INTEGER) {
 
         if (i >= cs) {
 
@@ -691,7 +691,7 @@ void test_character_array_multiple_elements() {
 
     // The destination array.
     void* d = *NULL_POINTER;
-    int ds = 22;
+    int ds = *NUMBER_22_INTEGER;
 
     // Create destination array.
     allocate_array((void*) &d, (void*) &ds, (void*) CHARACTER_ARRAY);
@@ -718,7 +718,7 @@ void test_character_array_multiple_elements() {
     fputs((char*) d, stdout);
 
     // The remove index.
-    int ri = 12;
+    int ri = *NUMBER_12_INTEGER;
 
     remove_character_array_elements(d, (void*) &ds, (void*) &ri, (void*) NUMBER_7_INTEGER);
 
@@ -726,7 +726,7 @@ void test_character_array_multiple_elements() {
 
     // The new array size to cut off remaining elements,
     // including two places for new line '\n' and c string termination '\0'.
-    int ns = 15;
+    int ns = *NUMBER_15_INTEGER;
 
     reallocate_array((void*) &d, (void*) &ns, (void*) &ns, (void*) CHARACTER_ARRAY);
 
@@ -761,7 +761,7 @@ void test_pointer_return() {
     // Create character array.
     c = (void*) "Hello World!";
     allocate((void*) &cs, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    *cs = 13;
+    *cs = *NUMBER_13_INTEGER;
 
     // THIS is the important part of the test.
     // A simple null pointer can be declared and passed to a procedure (as reference &).
@@ -795,13 +795,13 @@ void test_pointer_array() {
 
     // The character array (including new line and null termination character).
     void* c = (void*) "Hello World!";
-    int cs = 13;
+    int cs = *NUMBER_13_INTEGER;
 
     fprintf(stderr, "c: %s\n", (char*) c);
 
     // The pointer array.
     void** p = NULL_POINTER;
-    int ps = 1;
+    int ps = *NUMBER_1_INTEGER;
 
     // Create pointer array.
     allocate_array((void*) &p, (void*) &ps, (void*) POINTER_ARRAY);
@@ -898,15 +898,15 @@ void test_file_read() {
     // The array.
     void* a = *NULL_POINTER;
     // The array size.
-    int as = 0;
+    int as = *NUMBER_0_INTEGER;
     // The array count.
-    int ac = 0;
+    int ac = *NUMBER_0_INTEGER;
     // The file name array.
     char fna[] = {'/', 'h', 'o', 'm', 'e', '/', 'c', 'y', 'b', 'o', 'p', '/', 't', 'm', 'p', '/', 't', 'e', 's', 't', '.', 'c', 'y', 'b', 'o', 'l'};
     // The file name.
     char* fn = fna;
     // The file name count.
-    int fnc = 26;
+    int fnc = *NUMBER_26_INTEGER;
 
     allocate_array((void*) &a, (void*) &CHARACTER_ARRAY, (void*) &as);
 //??    read_file((void*) &a, (void*) &as, (void*) &ac, (void*) &fn, (void*) &fnc);
@@ -917,11 +917,11 @@ void test_file_read() {
     fprintf(stderr, "fn: %i\n", fn);
     fprintf(stderr, "fnc: %i\n", fnc);
 
-    int j = 0;
+    int j = *NUMBER_0_INTEGER;
     char* c = (char*) *NULL_POINTER;
-    int* cc = 1;
+    int* cc = *NUMBER_1_INTEGER;
 
-    while (1) {
+    while (*NUMBER_1_INTEGER) {
 
         if (j >= ac) {
 
@@ -950,15 +950,15 @@ void test_file_write() {
     // The array.
     void* a = aa;
     // The array size.
-    int as = 14;
+    int as = *NUMBER_14_INTEGER;
     // The array count.
-    int ac = 14;
+    int ac = *NUMBER_14_INTEGER;
     // The file name array.
     char fna[] = {'/', 'h', 'o', 'm', 'e', '/', 'c', 'y', 'b', 'o', 'p', '/', 't', 'm', 'p', '/', 't', 'e', 's', 't', '.', 'c', 'y', 'b', 'o', 'l'};
     // The file name.
     char* fn = fna;
     // The file name count.
-    int fnc = 26;
+    int fnc = *NUMBER_26_INTEGER;
 
 //??    write_file((void*) &a, (void*) &as, (void*) &ac, (void*) &fn, (void*) &fnc);
 }
@@ -970,7 +970,7 @@ void test_console() {
 
     fputs("Test console:\n", stdout);
 
-    if (strcmp("linux", getenv("TERM")) == 0) {
+    if (strcmp("linux", getenv("TERM")) == *NUMBER_0_INTEGER) {
 
 //        // This is a gnu/linux console.
 //        fputs("This is a gnu/linux console.\n", stdout);
@@ -1024,36 +1024,36 @@ void test_mesa_opengl() {
     // These statements initialize the projection matrix,
     // setting a 3d frustum matrix that represents the viewable area.
     // This matrix transforms objects from camera-relative space to OpenGL's projection space.
-    glMatrixMode( GL_PROJECTION );      /* Subsequent matrix commands will affect the projection matrix */
+    glMatrixMode(GL_PROJECTION);      /* Subsequent matrix commands will affect the projection matrix */
 /*??
     glLoadIdentity();                   /* Initialise the projection matrix to identity */
 /*??
-    glFrustum( -1, 1, -1, 1, 1, 1000 ); /* Apply a perspective-projection matrix */
+    glFrustum(-1, 1, -1, 1, 1, 1000); /* Apply a perspective-projection matrix */
 
     // These statements initialize the modelview matrix.
     // This matrix defines a transform from model-relative coordinates to camera space.
     // The combination of the modelview matrix and the projection matrix
     // transforms objects from model-relative space to projection screen space.
 /*??
-    glMatrixMode( GL_MODELVIEW );       /* Subsequent matrix commands will affect the modelview matrix */
+    glMatrixMode(GL_MODELVIEW);       /* Subsequent matrix commands will affect the modelview matrix */
 /*??
     glLoadIdentity();                   /* Initialise the modelview to identity */
 /*??
-    glTranslatef( 0, 0, -3 );           /* Translate the modelview 3 units along the Z axis */
+    glTranslatef(0, 0, -3);           /* Translate the modelview 3 units along the Z axis */
 
     // These commands draw a green square in the XY plane.
 /*??
-    glBegin( GL_POLYGON );              /* Begin issuing a polygon */
+    glBegin(GL_POLYGON);              /* Begin issuing a polygon */
 /*??
-    glColor3f( 0, 1, 0 );               /* Set the current color to green */
+    glColor3f(0, 1, 0);               /* Set the current color to green */
 /*??
-    glVertex3f( -1, -1, 0 );            /* Issue a vertex */
+    glVertex3f(-1, -1, 0);            /* Issue a vertex */
 /*??
-    glVertex3f( -1, 1, 0 );             /* Issue a vertex */
+    glVertex3f(-1, 1, 0);             /* Issue a vertex */
 /*??
-    glVertex3f( 1, 1, 0 );              /* Issue a vertex */
+    glVertex3f(1, 1, 0);              /* Issue a vertex */
 /*??
-    glVertex3f( 1, -1, 0 );             /* Issue a vertex */
+    glVertex3f(1, -1, 0);             /* Issue a vertex */
 /*??
     glEnd();                            /* Finish issuing the polygon */
 //?? }
@@ -1229,14 +1229,14 @@ void init(void) {
  */
 int test_mesa_opengl(int argc, char **argv) {
 
-   glutInit(&argc, argv);
-   glutInitDisplayMode (GLUT_SINGLE | GLUT_RGB);
-   glutInitWindowSize (250, 250);
-   glutInitWindowPosition (100, 100);
-   glutCreateWindow ("hello");
-   init();
-   glutDisplayFunc(display);
-   glutMainLoop();
+    glutInit(&argc, argv);
+    glutInitDisplayMode (GLUT_SINGLE | GLUT_RGB);
+    glutInitWindowSize (*NUMBER_250_INTEGER, *NUMBER_250_INTEGER);
+    glutInitWindowPosition (*NUMBER_100_INTEGER, *NUMBER_100_INTEGER);
+    glutCreateWindow ("hello");
+    init();
+    glutDisplayFunc(display);
+    glutMainLoop();
 }
 
 //?? ========================================================================================
@@ -1255,7 +1255,7 @@ void test() {
     // The printf function uses stdout for output, but nothing appears on console.
     // Therefore, fprintf is used and stderr is given for output.
     // Example:
-    // int x = 2;
+    // int x = *NUMBER_2_INTEGER;
     // fprintf(stderr, "The value of x is: %d\n", x);
 
 //??    test_inline_assembler_code();

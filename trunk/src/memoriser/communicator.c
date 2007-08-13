@@ -24,7 +24,7 @@
  * - read data from a device into a byte array
  * - write data from a byte array to a device
  *
- * @version $Revision: 1.17 $ $Date: 2007-07-23 23:47:58 $ $Author: christian $
+ * @version $Revision: 1.18 $ $Date: 2007-08-13 16:37:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -36,7 +36,6 @@
 #include "../globals/constants/cybol/cybol_model_constants.c"
 #include "../globals/constants/integer/integer_constants.c"
 #include "../globals/constants/memory_structure/array_constants.c"
-#include "../memoriser/array.c"
 #include "../memoriser/communicator/file_communicator.c"
 #include "../memoriser/communicator/ftp_communicator.c"
 #include "../memoriser/communicator/gnu_linux_console_communicator.c"
@@ -44,6 +43,7 @@
 #include "../memoriser/communicator/inline_communicator.c"
 #include "../memoriser/communicator/socket_communicator.c"
 #include "../memoriser/communicator/x_window_system_communicator.c"
+#include "../memoriser/array.c"
 
 /**
  * Reads a stream according to the given communication channel type

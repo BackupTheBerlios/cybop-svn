@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2007-05-26 21:19:58 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2007-08-13 16:37:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -52,9 +52,6 @@ void parse_latex(void* p0, void* p1, void* p2, void* p3, void* p4) {
  * @param p4 the source count
  */
 void serialise_latex(void* p0, void* p1, void* p2, void* p3, void* p4) {
-
-    //?? TODO: Christian Groszmann! Put your code here ...
-    //?? For now, I did not use a translator yet. May be the converter suffices.
 }
 
 /* LATEX_CONVERTER_SOURCE */

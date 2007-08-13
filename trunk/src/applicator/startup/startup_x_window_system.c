@@ -20,25 +20,8 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.23 $ $Date: 2007-06-24 15:02:21 $ $Author: christian $
+ * @version $Revision: 1.24 $ $Date: 2007-08-13 16:37:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
- * @description
- *
- * A session (display) manager shows a graphical user login,
- * in which it offers a list of window managers to chose from.
- *
- * A window manager cares about all windows displayed on a screen.
- * This includes the resizing, moving, stacking or tiling of windows.
- *
- * CYBOI aims to become both at the same time,
- * a session- (display-) as well as a window manager.
- *
- * CAUTION! The x window system uses a number of synonymous types:
- * Display* == struct _XDisplay*
- * GC == struct _XGC*
- * Window == int
- * Colormap == int
- * Font (ID) == int
  */
 
 #ifndef STARTUP_X_WINDOW_SYSTEM_SOURCE
@@ -56,6 +39,15 @@
 #include "../../globals/variables/variables.c"
 #include "../../memoriser/accessor.c"
 #include "../../memoriser/allocator.c"
+
+//
+// CAUTION! The x window system uses a number of synonymous types:
+// Display* == struct _XDisplay*
+// GC == struct _XGC*
+// Window == int
+// Colormap == int
+// Font (ID) == int
+//
 
 /**
  * Starts up the x window system.
@@ -169,13 +161,13 @@ void startup_x_window_system(void* p0, void* p1, void* p2, void* p3) {
         }
 */
 
-        sh.x = 0;
-        sh.y = 0;
-        sh.width = 800;
-        sh.height = 600;
+        sh.x = *NUMBER_0_INTEGER;
+        sh.y = *NUMBER_0_INTEGER;
+        sh.width = *NUMBER_800_INTEGER;
+        sh.height = *NUMBER_600_INTEGER;
         sh.flags = PPosition | PSize;
-        *w = XCreateSimpleWindow(d, *r, sh.x, sh.y, sh.width, sh.height, 5, *fg, *bg);
-        *vm = 0;
+        *w = XCreateSimpleWindow(d, *r, sh.x, sh.y, sh.width, sh.height, *NUMBER_5_INTEGER, *fg, *bg);
+        *vm = *NUMBER_0_INTEGER;
 //??        *vm = GCCapStyle | GCJoinStyle;
 //??        *v = CapButt | JoinBevel;
         gc = XCreateGC(d, *w, *vm, v);
@@ -192,14 +184,14 @@ void startup_x_window_system(void* p0, void* p1, void* p2, void* p3) {
         dark_gray.green = 32768;
         dark_gray.blue = 32768;
 /*??
-        gc_menu = XCreateGC(d, *w, 0, 0);
-        gc_menu_border_top = XCreateGC(d, *w, 0, 0);
-        gc_menu_border_bottom = XCreateGC(d, *w, 0, 0);
-        gc_menu_font = XCreateGC(d, *w, 0, 0);
+        gc_menu = XCreateGC(d, *w, *NUMBER_0_INTEGER, *NUMBER_0_INTEGER);
+        gc_menu_border_top = XCreateGC(d, *w, *NUMBER_0_INTEGER, *NUMBER_0_INTEGER);
+        gc_menu_border_bottom = XCreateGC(d, *w, *NUMBER_0_INTEGER, *NUMBER_0_INTEGER);
+        gc_menu_font = XCreateGC(d, *w, *NUMBER_0_INTEGER, *NUMBER_0_INTEGER);
 */
 
         // Assign x window system internals.
-        XSetStandardProperties(d, *w, "Application", "Icon", None, *NULL_POINTER, 0, (void*) &sh);
+        XSetStandardProperties(d, *w, "Application", "Icon", None, *NULL_POINTER, *NUMBER_0_INTEGER, (void*) &sh);
         XAllocColor(d, *cm, &gray);
         XAllocColor(d, *cm, &light_gray);
         XAllocColor(d, *cm, &vlight_gray);

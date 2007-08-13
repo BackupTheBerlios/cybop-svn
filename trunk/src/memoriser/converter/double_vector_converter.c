@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2007-05-26 21:19:58 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2007-08-13 16:37:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -28,15 +28,12 @@
 #define DOUBLE_VECTOR_CONVERTER_SOURCE
 
 #include <string.h>
-//?? #include <stdio.h>
-//?? #include <stdlib.h>
 #include "../../globals/constants/character/character_constants.c"
-//?? #include "../../globals/constants/integer/integer_constants.c"
+#include "../../globals/constants/integer/integer_constants.c"
 #include "../../globals/constants/log/log_message_constants.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/logger/logger.c"
-//?? #include "../../memoriser/allocator.c"
 #include "../../memoriser/array.c"
 
 /**
@@ -62,13 +59,13 @@ void parse_double(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             // The temporary null-terminated string.
             char* tmp = (char*) *NULL_POINTER;
-            int tmps = *sc + 1;
+            int tmps = *sc + *NUMBER_1_INTEGER;
 
             // Create temporary null-terminated string.
             allocate_array((void*) &tmp, (void*) &tmps, (void*) CHARACTER_ARRAY);
 
             // The index.
-            int i = 0;
+            int i = *NUMBER_0_INTEGER;
 
             // Copy original string to temporary null-terminated string.
             set_array_elements((void*) tmp, (void*) &i, p3, p4, (void*) CHARACTER_ARRAY);
@@ -160,7 +157,7 @@ void serialise_double(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 // Set destination string size one greater than the count
                 // to have space for the terminating null character.
-                *ds = *dc + 1;
+                *ds = *dc + *NUMBER_1_INTEGER;
 
                 // Reallocate destination string.
                 reallocate_array(p0, p1, p2, (void*) CHARACTER_ARRAY);
@@ -221,15 +218,15 @@ void parse_double_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
 /*??
                 // The loop count.
-                int j = 0;
+                int j = *NUMBER_0_INTEGER;
                 // The comma index.
-                int i = -1;
+                int i = *INVALID_VALUE;
                 // The double vector element count.
                 void* c = *NULL_POINTER;
                 // The double number.
-                int n = 0;
+                int n = *NUMBER_0_INTEGER;
 
-                while (1) {
+                while (*NUMBER_1_INTEGER) {
 
                     if (j >= *sc) {
 
@@ -238,7 +235,7 @@ void parse_double_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                     get_character_array_elements_index(p3, p4, (void*) COMMA_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &i);
 
-                    if (i > 0) {
+                    if (i > *NUMBER_0_INTEGER) {
 
                         // Determine double vector element count.
                         c = *s + i;
@@ -268,9 +265,9 @@ void parse_double_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 //??    fscanf(p1, %d, &(m->z));
 
                 // Initialise elements.
-                int z = 0;
-                int y = 0;
-                int x = 0;
+                int z = *NUMBER_0_INTEGER;
+                int y = *NUMBER_0_INTEGER;
+                int x = *NUMBER_0_INTEGER;
 
                 // Set elements.
                 set_array_elements(p0, (void*) INTEGER_ARRAY, (void*) &X_INDEX, (void*) &x);
@@ -281,16 +278,16 @@ void parse_double_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 /*??
                 int i1 = s.indexOf(",");
 
-                if (i1 != -1) {
+                if (i1 != *INVALID_VALUE) {
 
-                    char[] x = s.substring(0, i1);
-                    char[] yz = s.substring(i1 + 1);
+                    char[] x = s.substring(*NUMBER_0_INTEGER, i1);
+                    char[] yz = s.substring(i1 + *NUMBER_1_INTEGER);
                     int i2 = yz.indexOf(",");
 
-                    if (i2 != -1) {
+                    if (i2 != *INVALID_VALUE) {
 
-                        char[] y = yz.substring(0, i2);
-                        char[] z = yz.substring(i2 + 1);
+                        char[] y = yz.substring(*NUMBER_0_INTEGER, i2);
+                        char[] z = yz.substring(i2 + *NUMBER_1_INTEGER);
 
                         p.x = java.lang.Integer.parseInt(x);
                         p.y = java.lang.Integer.parseInt(y);
@@ -340,9 +337,9 @@ void serialise_double_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
     // Write output stream and transform from double vector.
 
     // Initialise elements.
-    int z = 0;
-    int y = 0;
-    int x = 0;
+    int z = *NUMBER_0_INTEGER;
+    int y = *NUMBER_0_INTEGER;
+    int x = *NUMBER_0_INTEGER;
 
     // Get elements.
     get_array_elements(p0, (void*) INTEGER_ARRAY, (void*) &Z_INDEX, (void*) &z);

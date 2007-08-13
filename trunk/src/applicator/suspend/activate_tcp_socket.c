@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.13 $ $Date: 2007-06-24 15:02:21 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2007-08-13 16:37:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -63,7 +63,7 @@ void activate_tcp_socket( void* internals, void* know, void* know_count, void* k
         if ((f != *NULL_POINTER) && (*f != *NULL_POINTER)) {
 
             // Deactivate interrupt flag, since tcp socket is to be started.
-            **f = 0;
+            **f = *NUMBER_0_INTEGER;
         }
 
     } else {

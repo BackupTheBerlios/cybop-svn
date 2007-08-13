@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2007-07-23 23:47:57 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2007-08-13 16:37:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -29,6 +29,7 @@
 
 #include "../../globals/constants/cybol/cybol_abstraction_constants.c"
 #include "../../globals/constants/cybol/cybol_name_constants.c"
+#include "../../globals/constants/integer/integer_constants.c"
 #include "../../globals/constants/log/log_message_constants.c"
 #include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/logger/logger.c"
@@ -90,7 +91,7 @@ void count_prefix(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
 
             //init the counter
             int* list_counter = (int*) *resm;
-            *list_counter = 0;
+            *list_counter = *NUMBER_0_INTEGER;
 
             // Create compare string.
             char* compstring = *NULL_POINTER;
@@ -104,11 +105,11 @@ void count_prefix(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
             set_array_elements(compstring, *bnmc, LIST_SEPARATOR, LIST_SEPARATOR_COUNT, (void*) CHARACTER_ARRAY);
 
             // The loop count.
-            int j = 0;
+            int j = *NUMBER_0_INTEGER;
             // The comparison result.
-            int r = 0;
+            int r = *NUMBER_0_INTEGER;
 
-            while (1) {
+            while (*NUMBER_1_INTEGER) {
 
                 if (j >= *((int*) *mdlmc)) {
 
@@ -125,15 +126,15 @@ void count_prefix(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
                         // the compound element must greater als the compare string
                         if (*((int*) *cenc) > compstring_count) {
 
-                            r = 0;
+                            r = *NUMBER_0_INTEGER;
 
                             compare_arrays(compstring, &compstring_count, *cen, &compstring_count, &r, CHARACTER_ARRAY);
 
                             //if teh begiining of the two arrays ident, then
                             //the compound element is a part of the list
-                            if (r == 1) {
+                            if (r != *NUMBER_0_INTEGER) {
 
-                                *list_counter = *list_counter + 1;
+                                *list_counter = *list_counter + *NUMBER_1_INTEGER;
                             }
                         }
                     }

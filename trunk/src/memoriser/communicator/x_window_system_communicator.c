@@ -20,11 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * This file contains the functionality to:
- * - receive a file stream into a byte array
- * - send a file stream from a byte array
- *
- * @version $Revision: 1.11 $ $Date: 2007-06-24 15:02:22 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2007-08-13 16:37:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

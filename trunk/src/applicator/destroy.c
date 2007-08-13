@@ -22,7 +22,7 @@
  *
  * This file destroys a transient model to a persistent model.
  *
- * @version $Revision: 1.24 $ $Date: 2007-05-26 21:19:57 $ $Author: christian $
+ * @version $Revision: 1.25 $ $Date: 2007-08-13 16:37:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,8 +30,9 @@
 #define DESTROY_SOURCE
 
 #include "../globals/constants/cybol/cybol_abstraction_constants.c"
-#include "../globals/constants/log/log_message_constants.c"
 #include "../globals/constants/cybol/cybol_name_constants.c"
+#include "../globals/constants/integer/integer_constants.c"
+#include "../globals/constants/log/log_message_constants.c"
 #include "../globals/constants/pointer/pointer_constants.c"
 #include "../globals/logger/logger.c"
 #include "../memoriser/accessor/compound_accessor.c"
@@ -79,7 +80,7 @@ void check_compound_model(void* p0, void* p1, void* p2) {
 
         int* p = (int*) p0;
 
-        if (*p != 1) {
+        if (*p != *NUMBER_1_INTEGER) {
 
             compare_arrays(p1, p2, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT, p0, (void*) CHARACTER_ARRAY);
         }
@@ -116,51 +117,44 @@ void destroy_primitive_model(void** model, void* model_count, void* model_size,
 void destroy_compound_model(void** model, void* model_count, void* model_size,
     void* model_abstr, void* model_abstr_count) {
 
-    //das gesamte Compound durchgehen und f?r jedes Element im Compound wieder
-    //destroy model aufrufen
-    if ((model != *NULL_POINTER)
-        && (model_count != *NULL_POINTER)
-        && (model_size != *NULL_POINTER)
-        && (model_abstr != *NULL_POINTER)
-        && (model_abstr_count != *NULL_POINTER)) {
+    // das gesamte Compound durchgehen und f?r jedes Element im Compound wieder destroy model aufrufen
 
-        int compound_counter = 0;
+    int compound_counter = *NUMBER_0_INTEGER;
 
-        // The element name.
-        void** en = NULL_POINTER;
-        void** enc = NULL_POINTER;
-        void** ens = NULL_POINTER;
-        // The element abstraction.
-        void** ea = NULL_POINTER;
-        void** eac = NULL_POINTER;
-        void** eas = NULL_POINTER;
-        // The element model.
-        void** em = NULL_POINTER;
-        void** emc = NULL_POINTER;
-        void** ems = NULL_POINTER;
-        // The element details.
-        void** ed = NULL_POINTER;
-        void** edc = NULL_POINTER;
-        void** eds = NULL_POINTER;
+    // The element name.
+    void** en = NULL_POINTER;
+    void** enc = NULL_POINTER;
+    void** ens = NULL_POINTER;
+    // The element abstraction.
+    void** ea = NULL_POINTER;
+    void** eac = NULL_POINTER;
+    void** eas = NULL_POINTER;
+    // The element model.
+    void** em = NULL_POINTER;
+    void** emc = NULL_POINTER;
+    void** ems = NULL_POINTER;
+    // The element details.
+    void** ed = NULL_POINTER;
+    void** edc = NULL_POINTER;
+    void** eds = NULL_POINTER;
 
-        while (1) {
+    while (*NUMBER_1_INTEGER) {
 
-            if (compound_counter >= *((int*) model_count)) {
+        if (compound_counter >= *((int*) model_count)) {
 
-                break;
-            }
-
-            // Get element.
-            get_compound_element_by_index(*model, model_count, (void*) &compound_counter,
-                (void*) &en, (void*) &enc, (void*) &ens,
-                (void*) &ea, (void*) &eac, (void*) &eas,
-                (void*) &em, (void*) &emc, (void*) &ems,
-                (void*) &ed, (void*) &edc, (void*) &eds);
-
-            destroy_model(em, *emc, *ems, *ea, *eac);
-
-            compound_counter = compound_counter + 1;
+            break;
         }
+
+        // Get element.
+        get_compound_element_by_index(*model, model_count, (void*) &compound_counter,
+            (void*) &en, (void*) &enc, (void*) &ens,
+            (void*) &ea, (void*) &eac, (void*) &eas,
+            (void*) &em, (void*) &emc, (void*) &ems,
+            (void*) &ed, (void*) &edc, (void*) &eds);
+
+        destroy_model(em, *emc, *ems, *ea, *eac);
+
+        compound_counter = compound_counter + *NUMBER_1_INTEGER;
     }
 }
 
@@ -190,12 +184,12 @@ void destroy_model(void** model, void* model_count, void* model_size,
     void* model_abstr, void* model_abstr_count) {
 
     // The comparison result.
-    int r = 0;
+    int r = *NUMBER_0_INTEGER;
 
     // Check for compound (later better for primitive!!) model.
     check_compound_model((void*) &r, model_abstr, model_abstr_count);
 
-    if (r == 0) {
+    if (r == *NUMBER_0_INTEGER) {
 
         destroy_primitive_model(model, model_count, model_size, model_abstr, model_abstr_count);
 

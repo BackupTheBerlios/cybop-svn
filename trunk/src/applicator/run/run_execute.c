@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.10 $ $Date: 2007-06-22 07:07:14 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2007-08-13 16:37:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -31,6 +31,7 @@
 #include <errno.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include "../../globals/constants/integer/integer_constants.c"
 #include "../../globals/constants/log/log_message_constants.c"
 #include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/constants/system_constants.c"
@@ -49,7 +50,7 @@ void run_execute(void* p0) {
     // Initialise error number.
     // It is a global variable/ function and other operations
     // may have set some value that is not wanted here.
-    errno = 0;
+    errno = *NUMBER_0_INTEGER;
 
     // Run a command/ program as shell command in an own process.
     // The "system" function provides a simple, portable mechanism for running
@@ -63,7 +64,7 @@ void run_execute(void* p0) {
     // and otherwise is the status of the shell process.
     int r = system(p0);
 
-    if (r == -1) {
+    if (r == *INVALID_VALUE) {
 
         log_message_debug("Warning: Could not execute command/ program as process. A negative value was returned.");
 
@@ -105,7 +106,7 @@ void run_execute(void* p0) {
 
     fprintf(stdout, "TEST post-fork pid: %i\n", pid);
 
-    if (pid == 0) {
+    if (pid == *NUMBER_0_INTEGER) {
 
     fprintf(stdout, "TEST pid == 0 pid: %i\n", pid);
 
@@ -169,7 +170,7 @@ void run_execute(void* p0) {
         // Initialise error number.
         // It is a global variable/ function and other operations
         // may have set some value that is not wanted here.
-        errno = 0;
+        errno = *NUMBER_0_INTEGER;
 
         // Execute file (given as first parameter) as new process image.
         //
@@ -202,7 +203,7 @@ void run_execute(void* p0) {
     fprintf(stdout, "TEST post-exec e: %i\n", e);
 
         // A value of -1 is returned in the event of a failure.
-        if (e == -1) {
+        if (e == *INVALID_VALUE) {
 
     fprintf(stdout, "TEST e == -1 errno: %i\n", errno);
 
@@ -321,12 +322,12 @@ void run_execute(void* p0) {
             // buffers and perform aditional clean-up before calling _exit() internally.
             //
             // Set return value to 1, indicating that an error occured in the child process.
-            _exit(1);
+            _exit(*NUMBER_1_INTEGER);
         }
 
     fprintf(stdout, "TEST post-exit errno: %i\n", errno);
 
-    } else if (pid < 0) {
+    } else if (pid < *NUMBER_0_INTEGER) {
 
     fprintf(stdout, "TEST pid < 0 pid: %i\n", pid);
 
@@ -349,7 +350,7 @@ void run_execute(void* p0) {
 
         // Request status information from child process.
         // In the GNU C library, pid_t corresponds to the int type.
-        waitpid(pid, (int*) *NULL_POINTER, 0);
+        waitpid(pid, (int*) *NULL_POINTER, *NUMBER_0_INTEGER);
 
         log_message_debug("Information: The child process exited. Continue executing parent process.");
 

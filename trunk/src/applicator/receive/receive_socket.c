@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.30 $ $Date: 2007-08-12 23:31:48 $ $Author: christian $
+ * @version $Revision: 1.31 $ $Date: 2007-08-13 16:37:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -77,7 +77,7 @@ void set_signals_for_all_parameters(void* p0, int* p1, void* p2) {
     //check of null pointer
     if ((p0 != *NULL_POINTER) && (p1 != *NULL_POINTER) && (p2 != *NULL_POINTER)) {
 
-        int query_counter = 0;
+        int query_counter = *NUMBER_0_INTEGER;
 
         //paramater
         char* param = (char*) *NULL_POINTER;
@@ -102,18 +102,18 @@ void set_signals_for_all_parameters(void* p0, int* p1, void* p2) {
         allocate_character_vector(&value, value_size);
 
         // The comparison result.
-        int r = 0;
+        int r = *NUMBER_0_INTEGER;
 
         //elements from the array
         void* element = *NULL_POINTER;
         //elements from the array
         void* decode_element = *NULL_POINTER;
-        int last_query_count = 0;
+        int last_query_count = *NUMBER_0_INTEGER;
 
         //temp count  for comparision
-        int temp_count = 1;
+        int temp_count = *NUMBER_1_INTEGER;
 
-        while (1) {
+        while (*NUMBER_1_INTEGER) {
 
             if (query_counter >= *p1) {
 
@@ -121,18 +121,18 @@ void set_signals_for_all_parameters(void* p0, int* p1, void* p2) {
             }
 
             // param
-            *param_count = 0;
-            r = 0;
+            *param_count = *NUMBER_0_INTEGER;
+            r = *NUMBER_0_INTEGER;
 
-            while (1) {
+            while (*NUMBER_1_INTEGER) {
 
                 get_array_elements((void*) p0, (void*) &query_counter, (void*) &element, CHARACTER_ARRAY);
 
                 compare_arrays(element, &temp_count, EQUALS_SIGN_ASCII_CHARACTER, PRIMITIVE_COUNT, &r, CHARACTER_ARRAY);
 
-                if ((query_counter >= *p1) || (r == 1)) {
+                if ((query_counter >= *p1) || (r == *NUMBER_1_INTEGER)) {
 
-                    query_counter = query_counter + 1;
+                    query_counter = query_counter + *NUMBER_1_INTEGER;
                     break;
                 }
 
@@ -144,29 +144,29 @@ void set_signals_for_all_parameters(void* p0, int* p1, void* p2) {
 
                 if (element == decode_element) {
 
-                    query_counter = query_counter + 1;
+                    query_counter = query_counter + *NUMBER_1_INTEGER;
 
                 } else {
 
                     query_counter = query_counter + *ESCAPE_CODE_CHARACTER_COUNT;
                 }
 
-                *param_count = *param_count + 1;
+                *param_count = *param_count + *NUMBER_1_INTEGER;
             }
 
             //value
-            *value_count = 0;
-            r = 0;
+            *value_count = *NUMBER_0_INTEGER;
+            r = *NUMBER_0_INTEGER;
 
-            while (1) {
+            while (*NUMBER_1_INTEGER) {
 
                 get_array_elements((void*) p0, (void*) &query_counter, (void*) &element, CHARACTER_ARRAY);
 
                 compare_arrays(element, &temp_count, AMPERSAND_ASCII_CHARACTER, PRIMITIVE_COUNT, &r, CHARACTER_ARRAY);
 
-                if ((query_counter >= *p1) || (r == 1)) {
+                if ((query_counter >= *p1) || (r == *NUMBER_1_INTEGER)) {
 
-                    query_counter = query_counter + 1;
+                    query_counter = query_counter + *NUMBER_1_INTEGER;
                     break;
                 }
 
@@ -177,18 +177,18 @@ void set_signals_for_all_parameters(void* p0, int* p1, void* p2) {
 
                 if (element == decode_element) {
 
-                    query_counter = query_counter + 1;
+                    query_counter = query_counter + *NUMBER_1_INTEGER;
 
                 } else {
 
                     query_counter = query_counter + *ESCAPE_CODE_CHARACTER_COUNT;
                 }
 
-                *value_count = *value_count + 1;
+                *value_count = *value_count + *NUMBER_1_INTEGER;
             }
 
             //set the signal for the paramater and the value
-            if (*param_count > 0) {
+            if (*param_count > *NUMBER_0_INTEGER) {
 
                 set_signal_for_parameter(value, value_count, param, param_count, p2);
             }
@@ -770,7 +770,7 @@ void receive_socket_message(void* p0, void* p1, void* p2, void* p3, void* p4, vo
                 // to determine the favicon.
                 char firefox_request[] = "favicon.ico";
                 char* p_firefox_request = &firefox_request[*NUMBER_0_INTEGER];
-                int firefox_request_count = 11;
+                int firefox_request_count = *NUMBER_11_INTEGER;
 
                 // The comparison result.
                 int r = *NUMBER_0_INTEGER;

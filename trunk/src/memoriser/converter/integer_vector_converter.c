@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.26 $ $Date: 2007-07-23 23:47:58 $ $Author: christian $
+ * @version $Revision: 1.27 $ $Date: 2007-08-13 16:37:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -35,16 +35,17 @@
 #include <stdio.h>
 #include <string.h>
 #include <wchar.h>
-#include "../../globals/constants/cybol/cybol_abstraction_constants.c"
 #include "../../globals/constants/character/character_constants.c"
+#include "../../globals/constants/cybol/cybol_abstraction_constants.c"
+#include "../../globals/constants/integer/integer_constants.c"
 #include "../../globals/constants/log/log_message_constants.c"
 #include "../../globals/constants/memory_structure/array_constants.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/logger/logger.c"
+#include "../../memoriser/converter/integer_converter.c"
 #include "../../memoriser/accessor.c"
 #include "../../memoriser/allocator.c"
-#include "../../memoriser/converter/integer_converter.c"
 
 /**
  * Parses the byte stream and creates an integer vector model from it.

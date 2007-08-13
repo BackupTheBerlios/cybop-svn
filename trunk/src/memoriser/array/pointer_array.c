@@ -20,25 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * This file handles a pointer array.
- *
- * An array is a reserved (allocated) area in the computer memory.
- * A programming language like C provides primitive data types whose size
- * is defined, for example: pointer, integer, double, character.
- * It is therefore possible to create and destroy arrays based on primitive types.
- *
- * The syntax of an array mostly looks like: type[size]
- * Example: void*[10]
- *
- * When working with an array, it is referenced by a pointer like: type* variable
- * Example: void** array
- *
- * The array can be dereferenced accordingly: *variable
- * Example: *array
- *
- * Array elements are accessed over their index (array base pointer + index).
- *
- * @version $Revision: 1.14 $ $Date: 2007-05-26 21:19:58 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2007-08-13 16:37:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -499,7 +481,7 @@ void get_pointer_array_elements_index(void* p0, void* p1, void* p2, void* p3, vo
                 if (p0 != *NULL_POINTER) {
 
                     // The iteration limit.
-                    int l = *ac - *ec + 1;
+                    int l = *ac - *ec + *NUMBER_1_INTEGER;
                     // The element.
                     void* e = *NULL_POINTER;
                     // The loop variable.

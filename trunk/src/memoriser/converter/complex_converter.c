@@ -20,13 +20,14 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2007-05-26 21:19:58 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2007-08-13 16:37:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef COMPLEX_CONVERTER_SOURCE
 #define COMPLEX_CONVERTER_SOURCE
 
+#include "../../globals/constants/integer/integer_constants.c"
 #include "../../globals/constants/log/log_message_constants.c"
 #include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/logger/logger.c"
@@ -65,8 +66,8 @@ void parse_complex(void* p0, void* p1, void* p2, void* p3, void* p4) {
             //??    fscanf(p1, %d, (void*) &(t->imaginary));
 
                 // Initialise elements.
-                int i = 0;
-                int r = 0;
+                int i = *NUMBER_0_INTEGER;
+                int r = *NUMBER_0_INTEGER;
 
                 // Set elements.
                 set_array_element(p0, (void*) &DOUBLE_ARRAY, (void*) &REAL_INDEX, (void*) &r);
@@ -100,22 +101,22 @@ void parse_complex(void* p0, void* p1, void* p2, void* p3, void* p4) {
 void serialise_complex(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
 /*??
-            //??    log_message((void*) &INFORMATION_LOG_LEVEL, (void*) &"Finalise complex.");
+    //??    log_message((void*) &INFORMATION_LOG_LEVEL, (void*) &"Finalise complex.");
 
-                // Initialise elements.
-                int i = 0;
-                int r = 0;
+    // Initialise elements.
+    int i = *NUMBER_0_INTEGER;
+    int r = *NUMBER_0_INTEGER;
 
-                // Get elements.
-                get_array_element(p0, (void*) &DOUBLE_ARRAY, (void*) &IMAGINARY_INDEX, (void*) &i);
-                get_array_element(p0, (void*) &DOUBLE_ARRAY, (void*) &REAL_INDEX, (void*) &r);
+    // Get elements.
+    get_array_element(p0, (void*) &DOUBLE_ARRAY, (void*) &IMAGINARY_INDEX, (void*) &i);
+    get_array_element(p0, (void*) &DOUBLE_ARRAY, (void*) &REAL_INDEX, (void*) &r);
 
-                // Remove elements.
-                remove_array_element(p0, (void*) &DOUBLE_ARRAY, (void*) &COMPLEX_COUNT, (void*) &IMAGINARY_INDEX);
-                remove_array_element(p0, (void*) &DOUBLE_ARRAY, (void*) &COMPLEX_COUNT, (void*) &REAL_INDEX);
+    // Remove elements.
+    remove_array_element(p0, (void*) &DOUBLE_ARRAY, (void*) &COMPLEX_COUNT, (void*) &IMAGINARY_INDEX);
+    remove_array_element(p0, (void*) &DOUBLE_ARRAY, (void*) &COMPLEX_COUNT, (void*) &REAL_INDEX);
 
-            //??    fprintf(p1, %d, (void*) &(t->real));
-            //??    fprintf(p1, %d, (void*) &(t->imaginary));
+    //??    fprintf(p1, %d, (void*) &(t->real));
+    //??    fprintf(p1, %d, (void*) &(t->imaginary));
 */
 }
 

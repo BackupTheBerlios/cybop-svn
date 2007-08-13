@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2007-04-16 15:50:29 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2007-08-13 16:37:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -28,9 +28,10 @@
 #define MAPPER_SOURCE
 
 #include "../globals/constants/cybol/cybol_abstraction_constants.c"
-#include "../memoriser/array.c"
+#include "../globals/constants/integer/integer_constants.c"
 #include "../memoriser/mapper/terminal_background_mapper.c"
 #include "../memoriser/mapper/terminal_foreground_mapper.c"
+#include "../memoriser/array.c"
 
 /**
  * Maps the name to its code.
@@ -46,23 +47,23 @@
 void mapto(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
     // The comparison result.
-    int r = 0;
+    int r = *NUMBER_0_INTEGER;
 
-    if (r == 0) {
+    if (r == *NUMBER_0_INTEGER) {
 
         compare_arrays(p5, p6, (void*) TERMINAL_BACKGROUND_ABSTRACTION, (void*) TERMINAL_BACKGROUND_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r != 0) {
+        if (r != *NUMBER_0_INTEGER) {
 
             mapto_terminal_background(p0, p1, p2, p3, p4);
         }
     }
 
-    if (r == 0) {
+    if (r == *NUMBER_0_INTEGER) {
 
         compare_arrays(p5, p6, (void*) TERMINAL_FOREGROUND_ABSTRACTION, (void*) TERMINAL_FOREGROUND_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r != 0) {
+        if (r != *NUMBER_0_INTEGER) {
 
             mapto_terminal_foreground(p0, p1, p2, p3, p4);
         }
@@ -83,23 +84,23 @@ void mapto(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6)
 void mapfrom(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
     // The comparison result.
-    int r = 0;
+    int r = *NUMBER_0_INTEGER;
 
-    if (r == 0) {
+    if (r == *NUMBER_0_INTEGER) {
 
         compare_arrays(p5, p6, (void*) TERMINAL_BACKGROUND_ABSTRACTION, (void*) TERMINAL_BACKGROUND_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r != 0) {
+        if (r != *NUMBER_0_INTEGER) {
 
             mapfrom_terminal_background(p0, p1, p2, p3, p4);
         }
     }
 
-    if (r == 0) {
+    if (r == *NUMBER_0_INTEGER) {
 
         compare_arrays(p5, p6, (void*) TERMINAL_FOREGROUND_ABSTRACTION, (void*) TERMINAL_FOREGROUND_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r != 0) {
+        if (r != *NUMBER_0_INTEGER) {
 
             mapfrom_terminal_foreground(p0, p1, p2, p3, p4);
         }

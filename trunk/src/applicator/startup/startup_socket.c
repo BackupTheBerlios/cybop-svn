@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.21 $ $Date: 2007-06-24 15:02:21 $ $Author: christian $
+ * @version $Revision: 1.22 $ $Date: 2007-08-13 16:37:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -37,10 +37,10 @@
 #include <fcntl.h>
 #include <stdio.h>
 #include <unistd.h>
-#include "../../globals/constants/cybol/cybol_abstraction_constants.c"
 #include "../../globals/constants/character/character_constants.c"
-#include "../../globals/constants/integer/integer_constants.c"
+#include "../../globals/constants/cybol/cybol_abstraction_constants.c"
 #include "../../globals/constants/cybol/cybol_model_constants.c"
+#include "../../globals/constants/integer/integer_constants.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/constants/system_constants.c"
@@ -70,35 +70,35 @@ void startup_socket_get_namespace(void* p0, void* p1, void* p2, void* p3) {
             log_message_debug("Startup socket get namespace.");
 
             // The comparison result.
-            int r = 0;
+            int r = *NUMBER_0_INTEGER;
 
-            if (r == 0) {
+            if (r == *NUMBER_0_INTEGER) {
 
                 compare_arrays(p2, p3, (void*) LOCAL_NAMESPACE_MODEL, (void*) LOCAL_NAMESPACE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-                if (r != 0) {
+                if (r != *NUMBER_0_INTEGER) {
 
                     *sn = PF_LOCAL;
                     *an = AF_LOCAL;
                 }
             }
 
-            if (r == 0) {
+            if (r == *NUMBER_0_INTEGER) {
 
                 compare_arrays(p2, p3, (void*) INET_NAMESPACE_MODEL, (void*) INET_NAMESPACE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-                if (r != 0) {
+                if (r != *NUMBER_0_INTEGER) {
 
                     *sn = PF_INET;
                     *an = AF_INET;
                 }
             }
 
-            if (r == 0) {
+            if (r == *NUMBER_0_INTEGER) {
 
                 compare_arrays(p2, p3, (void*) INET6_NAMESPACE_MODEL, (void*) INET6_NAMESPACE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-                if (r != 0) {
+                if (r != *NUMBER_0_INTEGER) {
 
                     *sn = PF_INET6;
                     *an = AF_INET6;
@@ -132,33 +132,33 @@ void startup_socket_get_style(void* p0, void* p1, void* p2) {
         log_message_debug("Startup socket get style.");
 
         // The comparison result.
-        int r = 0;
+        int r = *NUMBER_0_INTEGER;
 
-        if (r == 0) {
+        if (r == *NUMBER_0_INTEGER) {
 
             compare_arrays(p1, p2, (void*) STREAM_COMMUNICATION_STYLE_MODEL, (void*) STREAM_COMMUNICATION_STYLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-            if (r != 0) {
+            if (r != *NUMBER_0_INTEGER) {
 
                 *s = SOCK_STREAM;
             }
         }
 
-        if (r == 0) {
+        if (r == *NUMBER_0_INTEGER) {
 
             compare_arrays(p1, p2, (void*) DATAGRAM_COMMUNICATION_STYLE_MODEL, (void*) DATAGRAM_COMMUNICATION_STYLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-            if (r != 0) {
+            if (r != *NUMBER_0_INTEGER) {
 
                 *s = SOCK_DGRAM;
             }
         }
 
-        if (r == 0) {
+        if (r == *NUMBER_0_INTEGER) {
 
             compare_arrays(p1, p2, (void*) RAW_COMMUNICATION_STYLE_MODEL, (void*) RAW_COMMUNICATION_STYLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-            if (r != 0) {
+            if (r != *NUMBER_0_INTEGER) {
 
                 *s = SOCK_RAW;
             }
@@ -205,13 +205,13 @@ void startup_socket_get_host_address(void* p0, void* p1, void* p2, void* p3) {
                 log_message_debug("Startup socket get host address.");
 
                 // The comparison result.
-                int r = 0;
+                int r = *NUMBER_0_INTEGER;
 
-                if (r == 0) {
+                if (r == *NUMBER_0_INTEGER) {
 
                     compare_arrays(p1, p2, (void*) LOOPBACK_ADDRESS_MODEL, (void*) LOOPBACK_ADDRESS_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-                    if (r != 0) {
+                    if (r != *NUMBER_0_INTEGER) {
 
                         if (*an == AF_INET) {
 
@@ -224,11 +224,11 @@ void startup_socket_get_host_address(void* p0, void* p1, void* p2, void* p3) {
                     }
                 }
 
-                if (r == 0) {
+                if (r == *NUMBER_0_INTEGER) {
 
                     compare_arrays(p1, p2, (void*) ANY_ADDRESS_MODEL, (void*) ANY_ADDRESS_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-                    if (r != 0) {
+                    if (r != *NUMBER_0_INTEGER) {
 
                         if (*an == AF_INET) {
 
@@ -241,7 +241,7 @@ void startup_socket_get_host_address(void* p0, void* p1, void* p2, void* p3) {
                     }
                 }
 
-                if (r == 0) {
+                if (r == *NUMBER_0_INTEGER) {
 
                     // If none of the above address models was found, then the given
                     // address is supposed to be the host address directly.
@@ -329,7 +329,7 @@ void startup_socket_initialise_local_socket_address(void* p0, void* p1, void* p2
                 // is limited to 108 ascii characters in the gnu c library!
                 // The documentation called it a "magic number" and does not
                 // know why this limit exists.
-                if (*fc < 108) {
+                if (*fc < *NUMBER_108_INTEGER) {
 
                     // CAUTION! Do NOT reallocate the file name array with:
                     // int nc = *fc + *NUMBER_1_INTEGER;
@@ -635,8 +635,8 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
             // With the known type "short int" of the "sun_family" field and
             // a fixed size "108" of the "sun_path" field, the overall size of
             // the "sockaddr_un" structure can be calculated as sum.
-            *as = sizeof(short int) + 108;
-            *pas = sizeof(short int) + 108;
+            *as = sizeof(short int) + *NUMBER_108_INTEGER;
+            *pas = sizeof(short int) + *NUMBER_108_INTEGER;
 
         } else if (an == AF_INET) {
 

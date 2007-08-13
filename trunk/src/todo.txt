@@ -7,7 +7,7 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.6 $ $Date: 2007-08-12 23:31:48 $ $Author: christian $
+# @version $Revision: 1.7 $ $Date: 2007-08-13 16:37:10 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
@@ -19,7 +19,6 @@
 - replace parse/ serialise with more neutral decode/ encode (?)
 - think about names for "map" functions
 
-- replace "0" with *NUMBER_0_INTEGER and "1" with *NUMBER_1_INTEGER, in all source code files
 - add correct LOG_LEVEL constant to all log messages of all source code files,
     so that the correct prefix (information, warning, error, debug) appears;
     delete "Information: " etc. which are written directly into log message

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.54 $ $Date: 2007-08-03 16:57:22 $ $Author: christian $
+ * @version $Revision: 1.55 $ $Date: 2007-08-13 16:37:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -37,12 +37,12 @@
 #include "../applicator/send/send_x_window_system.c"
 #include "../globals/constants/cybol/cybol_abstraction_constants.c"
 #include "../globals/constants/cybol/cybol_channel_constants.c"
-#include "../globals/constants/integer/integer_constants.c"
 #include "../globals/constants/cybol/cybol_model_constants.c"
 #include "../globals/constants/cybol/cybol_name_constants.c"
-#include "../globals/constants/service_port_constants.c"
+#include "../globals/constants/integer/integer_constants.c"
 #include "../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../globals/constants/pointer/pointer_constants.c"
+#include "../globals/constants/service_port_constants.c"
 #include "../globals/logger/logger.c"
 #include "../memoriser/accessor/compound_accessor.c"
 #include "../memoriser/accessor/internal_memory_accessor.c"
@@ -88,7 +88,7 @@ void refresh_url(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, voi
     // The socket number for the signal id.
     // The index for the signal id in the array is the same index
     // in the client socket number array.
-    int i = -1;
+    int i = *INVALID_VALUE_INTEGER;
 
     get_index_for_signal_id(p2, p6, (void*) &i);
 

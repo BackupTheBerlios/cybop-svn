@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.33 $ $Date: 2007-07-30 23:07:50 $ $Author: christian $
+ * @version $Revision: 1.34 $ $Date: 2007-08-13 16:37:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -237,7 +237,7 @@ void handle_operation(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
             log_message((void*) INFORMATION_LOG_LEVEL, (void*) SET_SHUTDOWN_FLAG_MESSAGE, (void*) SET_SHUTDOWN_FLAG_MESSAGE_COUNT);
 
             int* f = (int*) p9;
-            *f = 1;
+            *f = *NUMBER_1_INTEGER;
         }
     }
 

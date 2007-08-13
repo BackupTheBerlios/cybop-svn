@@ -20,25 +20,8 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.21 $ $Date: 2007-06-24 15:02:21 $ $Author: christian $
+ * @version $Revision: 1.22 $ $Date: 2007-08-13 16:37:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
- * @description
- *
- * A session (display) manager shows a graphical user login,
- * in which it offers a list of window managers to chose from.
- *
- * A window manager cares about all windows displayed on a screen.
- * This includes the resizing, moving, stacking or tiling of windows.
- *
- * CYBOI aims to become both at the same time,
- * a session- (display-) as well as a window manager.
- *
- * CAUTION! The x window system uses a number of synonymous types:
- * Display* == struct _XDisplay*
- * GC == struct _XGC*
- * Window == int
- * Colormap == int
- * Font (ID) == int
  */
 
 #ifndef SHUTDOWN_X_WINDOW_SYSTEM_SOURCE
@@ -47,12 +30,20 @@
 #ifdef GNU_LINUX_OPERATING_SYSTEM
 
 #include <X11/Xlib.h>
-#include "../../globals/constants/integer/integer_constants.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/variables/variables.c"
 #include "../../memoriser/accessor.c"
 #include "../../memoriser/allocator.c"
+
+//
+// CAUTION! The x window system uses a number of synonymous types:
+// Display* == struct _XDisplay*
+// GC == struct _XGC*
+// Window == int
+// Colormap == int
+// Font (ID) == int
+//
 
 /**
  * Shuts down the x window system.

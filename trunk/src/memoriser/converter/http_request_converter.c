@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2007-08-12 23:31:48 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2007-08-13 16:37:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -28,6 +28,7 @@
 #define HTTP_REQUEST_CONVERTER_SOURCE
 
 #include "../../globals/constants/http/http_request_method_constants.c"
+#include "../../globals/constants/integer/integer_constants.c"
 #include "../../globals/constants/log/log_message_constants.c"
 #include "../../globals/constants/memory_structure/array_constants.c"
 #include "../../globals/logger/logger.c"
@@ -46,12 +47,12 @@
 /*??
 void parse_http_request_get_method(char* req, int* req_count, char** req_method, int* req_method_count) {
 
-    *req_method_count = 0;
+    *req_method_count = *NUMBER_0_INTEGER;
 
     // The element.
     char* e = (char*) *NULL_POINTER;
 
-    while (1) {
+    while (*NUMBER_1_INTEGER) {
 
         if (*req_method_count >= *req_count) {
 
@@ -66,12 +67,12 @@ void parse_http_request_get_method(char* req, int* req_count, char** req_method,
             break;
         }
 
-        int max_count = *req_method_count + 1;
+        int max_count = *req_method_count + *NUMBER_1_INTEGER;
 
         reallocate_array((void*) req_method, (void*) &max_count, (void*) &max_count, (void*) CHARACTER_ARRAY);
         set_array_elements(*req_method, req_method_count, (void*) e, (void*) NUMBER_1_INTEGER, (void*) CHARACTER_ARRAY);
 
-        *req_method_count = *req_method_count + 1;
+        *req_method_count = *req_method_count + *NUMBER_1_INTEGER;
     }
 }
 
@@ -92,14 +93,14 @@ void parse_http_request_get_method(char* req, int* req_count, char** req_method,
 /*??
 void parse_http_request_url(char* req, int* req_count, char** urlbase, int* urlbase_count) {
 
-    *urlbase_count = 0;
-    int req_index = 0;
-    int start_urlbase_flag = 0;
-    int max_count = 0;
+    *urlbase_count = *NUMBER_0_INTEGER;
+    int req_index = *NUMBER_0_INTEGER;
+    int start_urlbase_flag = *NUMBER_0_INTEGER;
+    int max_count = *NUMBER_0_INTEGER;
     // The element.
     char* e = (char*) *NULL_POINTER;
 
-    while (1) {
+    while (*NUMBER_1_INTEGER) {
 
         if (req_index >= *req_count) {
 
@@ -109,27 +110,27 @@ void parse_http_request_url(char* req, int* req_count, char** urlbase, int* urlb
         get_array_elements(req, (void*) &req_index, (void*) &e, (void*) CHARACTER_ARRAY);
 
         // Check of ending the paramaters.
-        if ((start_urlbase_flag == 1) && ((*e == *SPACE_ASCII_CHARACTER) || (*e == *QUESTION_MARK_ASCII_CHARACTER))) {
+        if ((start_urlbase_flag == *NUMBER_1_INTEGER) && ((*e == *SPACE_ASCII_CHARACTER) || (*e == *QUESTION_MARK_ASCII_CHARACTER))) {
 
             break;
         }
 
         // Complete the parameters.
-        if (start_urlbase_flag == 1) {
+        if (start_urlbase_flag == *NUMBER_1_INTEGER) {
 
-            max_count = *urlbase_count + 1;
+            max_count = *urlbase_count + *NUMBER_1_INTEGER;
 
             reallocate_array((void*) urlbase, (void*) &max_count, (void*) &max_count, (void*) CHARACTER_ARRAY);
             set_array_elements(*urlbase, urlbase_count, (void*) e, (void*) NUMBER_1_INTEGER, (void*) CHARACTER_ARRAY);
 
-            *urlbase_count = *urlbase_count + 1;
+            *urlbase_count = *urlbase_count + *NUMBER_1_INTEGER;
         }
 
         // Check of beginning the paramaters.
         if (*e == *SOLIDUS_ASCII_CHARACTER) {
 
             // Begin from the parameters.
-            start_urlbase_flag = 1;
+            start_urlbase_flag = *NUMBER_1_INTEGER;
         }
 
         req_index++;
@@ -201,14 +202,14 @@ void parse_http_request_get(void* p0, void* p1, void* p2, void* p3,
     }
 
 /*??
-    *param_count = 0;
-    int req_index = 0;
-    int start_param_flag = 0;
-    int max_count = 0;
+    *param_count = *NUMBER_0_INTEGER;
+    int req_index = *NUMBER_0_INTEGER;
+    int start_param_flag = *NUMBER_0_INTEGER;
+    int max_count = *NUMBER_0_INTEGER;
     // The element.
     char* e = (char*) *NULL_POINTER;
 
-    while (1) {
+    while (*NUMBER_1_INTEGER) {
 
         if (req_index >= *req_count) {
 
@@ -218,27 +219,27 @@ void parse_http_request_get(void* p0, void* p1, void* p2, void* p3,
         get_array_elements(req, (void*) &req_index, (void*) &e, (void*) CHARACTER_ARRAY);
 
         // Check of ending the paramaters.
-        if ((start_param_flag == 1) && (*e == *SPACE_ASCII_CHARACTER)) {
+        if ((start_param_flag == *NUMBER_1_INTEGER) && (*e == *SPACE_ASCII_CHARACTER)) {
 
             break;
         }
 
         // Complete the parameters.
-        if (start_param_flag == 1) {
+        if (start_param_flag == *NUMBER_1_INTEGER) {
 
-            max_count = *param_count + 1;
+            max_count = *param_count + *NUMBER_1_INTEGER;
 
             reallocate_array((void*) param, (void*) &max_count, (void*) &max_count, (void*) CHARACTER_ARRAY);
             set_array_elements(*param, param_count, (void*) e, (void*) NUMBER_1_INTEGER, (void*) CHARACTER_ARRAY);
 
-            *param_count = *param_count + 1;
+            *param_count = *param_count + *NUMBER_1_INTEGER;
         }
 
         // Check of beginning the paramaters.
         if (*e == *QUESTION_MARK_ASCII_CHARACTER) {
 
             // Begin from the parameters.
-            start_param_flag = 1;
+            start_param_flag = *NUMBER_1_INTEGER;
         }
 
         req_index++;
@@ -260,22 +261,21 @@ void parse_http_request_get(void* p0, void* p1, void* p2, void* p3,
  * @param p8 the url without "post" request method prefix
  * @param p9 the url count
  */
-void parse_http_request_post(void* p0, void* p1, void* p2, void* p3,
-    void* p4, void* p5, void* p6, void* p7, void* p8, void* p9) {
+void parse_http_request_post(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9) {
 
 /*??
-    *param_count = 0;
-    int req_index = *req_count-1;
-    int req_last_count = 0;
-    int start_param_index = -1;
-    int max_count = 0;
+    *param_count = *NUMBER_0_INTEGER;
+    int req_index = *req_count - *NUMBER_1_INTEGER;
+    int req_last_count = *NUMBER_0_INTEGER;
+    int start_param_index = *NUMBER_MINUS_1_INTEGER;
+    int max_count = *NUMBER_0_INTEGER;
     // The element.
     char* e = (char*) *NULL_POINTER;
 
     //get the index for beginning the paramaters
-    while (1) {
+    while (*NUMBER_1_INTEGER) {
 
-        if (req_index < 0 ) {
+        if (req_index < *NUMBER_0_INTEGER) {
 
             break;
         }
@@ -285,33 +285,33 @@ void parse_http_request_post(void* p0, void* p1, void* p2, void* p3,
         // Check of beginning  the paramaters.
         if ((*e == *LINE_FEED_CONTROL_ASCII_CHARACTER)) {
 
-            start_param_index = req_index + 1;
+            start_param_index = req_index + *NUMBER_1_INTEGER;
             break;
         }
 
-        req_index = req_index - 1;
+        req_index = req_index - *NUMBER_1_INTEGER;
     }
 
     // set the parameters from the request
-    if (start_param_index > 0) {
+    if (start_param_index > *NUMBER_0_INTEGER) {
 
         req_index = start_param_index;
 
-        while (1) {
+        while (*NUMBER_1_INTEGER) {
 
             if (req_index >= *req_count ) {
 
                 break;
             }
 
-            max_count = *param_count + 1;
+            max_count = *param_count + *NUMBER_1_INTEGER;
 
             reallocate_array((void*) param, (void*) &max_count, (void*) &max_count, (void*) CHARACTER_ARRAY);
             get_array_elements(req, (void*) &req_index, (void*) &e, (void*) CHARACTER_ARRAY);
             set_array_elements(*param, param_count, (void*) e, (void*) NUMBER_1_INTEGER, (void*) CHARACTER_ARRAY);
 
-            *param_count = *param_count + 1;
-            req_index = req_index + 1;
+            *param_count = *param_count + *NUMBER_1_INTEGER;
+            req_index = req_index + *NUMBER_1_INTEGER;
         }
     }
 */

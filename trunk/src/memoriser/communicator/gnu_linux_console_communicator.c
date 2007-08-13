@@ -20,11 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * This file contains the functionality to:
- * - receive a file stream into a byte array
- * - send a file stream from a byte array
- *
- * @version $Revision: 1.2 $ $Date: 2007-07-23 23:47:58 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2007-08-13 16:37:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -34,9 +30,9 @@
 #include <locale.h>
 #include <stdio.h>
 #include <wchar.h>
-#include "../../globals/constants/cybol/cybol_abstraction_constants.c"
 #include "../../globals/constants/character/character_constants.c"
 #include "../../globals/constants/character/wide_character_constants.c"
+#include "../../globals/constants/cybol/cybol_abstraction_constants.c"
 #include "../../globals/constants/integer/integer_constants.c"
 #include "../../globals/constants/log/log_message_constants.c"
 #include "../../globals/constants/memory_structure/array_constants.c"

@@ -20,11 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * This file contains the functionality to:
- * - receive an inline stream into a byte array
- * - send an inline stream from a byte array
- *
- * @version $Revision: 1.12 $ $Date: 2007-07-23 23:47:58 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2007-08-13 16:37:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

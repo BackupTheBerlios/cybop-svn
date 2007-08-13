@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2007-05-26 21:19:58 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2007-08-13 16:37:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -28,6 +28,7 @@
 #define CHARACTER_VECTOR_CONVERTER_SOURCE
 
 #include "../../globals/constants/cybol/cybol_abstraction_constants.c"
+#include "../../globals/constants/integer/integer_constants.c"
 #include "../../globals/constants/log/log_message_constants.c"
 #include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/logger/logger.c"
@@ -60,7 +61,7 @@ void parse_character_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                     void** d = (void**) p0;
 
-                    if (*dc >= 0) {
+                    if (*dc >= *NUMBER_0_INTEGER) {
 
                         log_message_debug("Parse character vector.");
 

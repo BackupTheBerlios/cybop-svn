@@ -20,36 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * This file handles an array.
- *
- * An array represents an allocated area in the computer's memory,
- * that can contain a number of abstract elements.
- * An abstraction simplifies and represents a real world item.
- * In the case of computer science, everything gets abstracted to 0 and 1.
- * But that also means that every abstraction has a bytecode representation.
- *
- * The C programming language provides a number of primitive data types whose
- * size is defined so that an array can be created of them. The types are:
- * - pointer
- * - integer
- * - character
- * - double
- *
- * To work with an array, the procedures need additional information, in concrete:
- * - the array type
- *   (type of the contained elements)
- * - the array maximum count
- *   (maximum possible number of elements that match into the array)
- * - the size
- *   (actual allocated memory; calculated from the maximum count by
- *   multiplying it with the size of the primitive data type)
- *
- * The sizeof operation can only be used for real arrays, expressed with [].
- * Since CYBOI allocates arrays dynamically and stores them as *,
- * the array size needs to be given extra here because sizeof will not work.
- * See: http://pegasus.rutgers.edu/~elflord/cpp/gotchas/index.shtml
- *
- * @version $Revision: 1.15 $ $Date: 2007-07-23 23:47:58 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2007-08-13 16:37:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -70,6 +41,11 @@
 
 /**
  * Allocates the array.
+ *
+ * The sizeof operation can only be used for real arrays, expressed with [].
+ * Since CYBOI allocates arrays dynamically and stores them as *,
+ * the array size needs to be given extra here because sizeof will not work.
+ * See: http://pegasus.rutgers.edu/~elflord/cpp/gotchas/index.shtml
  *
  * @param p0 the array (Hand over as reference!)
  * @param p1 the size
@@ -117,6 +93,11 @@ void allocate_array(void* p0, void* p1, void* p2) {
 /**
  * Deallocates the array.
  *
+ * The sizeof operation can only be used for real arrays, expressed with [].
+ * Since CYBOI allocates arrays dynamically and stores them as *,
+ * the array size needs to be given extra here because sizeof will not work.
+ * See: http://pegasus.rutgers.edu/~elflord/cpp/gotchas/index.shtml
+ *
  * @param p0 the array (Hand over as reference!)
  * @param p1 the size
  * @param p2 the type
@@ -162,6 +143,11 @@ void deallocate_array(void* p0, void* p1, void* p2) {
 
 /**
  * Reallocates the array.
+ *
+ * The sizeof operation can only be used for real arrays, expressed with [].
+ * Since CYBOI allocates arrays dynamically and stores them as *,
+ * the array size needs to be given extra here because sizeof will not work.
+ * See: http://pegasus.rutgers.edu/~elflord/cpp/gotchas/index.shtml
  *
  * @param p0 the array (Hand over as reference!)
  * @param p1 the count
@@ -343,76 +329,6 @@ void get_array_elements(void* p0, void* p1, void* p2, void* p3) {
     } else {
 
         log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_GET_ARRAY_ELEMENTS_THE_TYPE_IS_NULL_MESSAGE, (void*) COULD_NOT_GET_ARRAY_ELEMENTS_THE_TYPE_IS_NULL_MESSAGE_COUNT);
-    }
-}
-
-/**
- * get the firts position of the serach array in the array.
- *
- * if found the search array then the position ist the position in the array
- * else ist the position -1
- *
- * @param p0 the array
- * @param p1 the array count
- * @param p2 the search array
- * @param p3 the search array count
- * @param p4 the position (Hand over as reference!)
- * @param p5 the type
- */
-void get_index_in_array(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
-
-    if (p4 != *NULL_POINTER) {
-
-        int* position = (int*) p4;
-        *position = -1;
-
-        if (p3 != *NULL_POINTER) {
-
-            int* sc = (int*) p3;
-
-            if (p1 != *NULL_POINTER) {
-
-                int* ac = (int*) p1;
-
-                log_message_debug("Get index in array.");
-
-                int array_counter = 0;
-                int comp_res = 0;
-                void* start_comp = *NULL_POINTER;
-
-                while (1) {
-
-                    if (array_counter >= *ac - *sc + 1) {
-
-                        break;
-                    }
-
-                    get_array_elements( p0, &array_counter, &start_comp, p5 );
-                    comp_res = 0;
-                    compare_array_elements( start_comp, p2, p3, &comp_res, p5);
-
-                    if ( comp_res == 1 ) {
-
-                        //the search array is founded in array
-                        *position = array_counter;
-
-                        break;
-                    }
-
-                    array_counter = array_counter + 1;
-                }
-
-            } else {
-
-    //??            log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_KNOWLEDGE_SIZE_IS_NULL_MESSAGE, (void*) COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_KNOWLEDGE_SIZE_IS_NULL_MESSAGE_COUNT);
-            }
-
-        } else {
-
-    //??        log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_KNOWLEDGE_SIZE_IS_NULL_MESSAGE, (void*) COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_KNOWLEDGE_SIZE_IS_NULL_MESSAGE_COUNT);
-        }
-    } else {
-
     }
 }
 

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.13 $ $Date: 2007-06-24 15:02:21 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2007-08-13 16:37:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -29,15 +29,15 @@
 
 #include <unistd.h>
 #include "../../applicator/run/run_execute.c"
-#include "../../globals/constants/shell_command/unix_shell_command_constants.c"
-#include "../../globals/constants/cybol/cybol_abstraction_constants.c"
 #include "../../globals/constants/character/character_constants.c"
-#include "../../globals/constants/integer/integer_constants.c"
-#include "../../globals/constants/log/log_message_constants.c"
+#include "../../globals/constants/cybol/cybol_abstraction_constants.c"
 #include "../../globals/constants/cybol/cybol_model_constants.c"
 #include "../../globals/constants/cybol/cybol_name_constants.c"
+#include "../../globals/constants/integer/integer_constants.c"
+#include "../../globals/constants/log/log_message_constants.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../../globals/constants/pointer/pointer_constants.c"
+#include "../../globals/constants/shell_command/unix_shell_command_constants.c"
 #include "../../globals/constants/system_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../globals/variables/variables.c"
@@ -146,7 +146,7 @@ void run_archive(void* p0, void* p1, void* p2, void* p3) {
 
     if (*createm != *NULL_POINTER) {
 
-        if (**createm == 1) {
+        if (**createm == *NUMBER_1_INTEGER) {
 
             // Resize arguments, if necessary.
             // One extra place for space character.
@@ -173,7 +173,7 @@ void run_archive(void* p0, void* p1, void* p2, void* p3) {
 
     if (*updatem != *NULL_POINTER) {
 
-        if (**updatem == 1) {
+        if (**updatem == *NUMBER_1_INTEGER) {
 
             // Resize arguments, if necessary.
             // One extra place for space character.
@@ -200,7 +200,7 @@ void run_archive(void* p0, void* p1, void* p2, void* p3) {
 
     if (*bzip2m != *NULL_POINTER) {
 
-        if (**bzip2m == 1) {
+        if (**bzip2m == *NUMBER_1_INTEGER) {
 
             // Resize arguments, if necessary.
             // One extra place for space character.
@@ -336,7 +336,7 @@ void run_archive(void* p0, void* p1, void* p2, void* p3) {
 
     if (*createm != *NULL_POINTER) {
 
-        if (**createm == 1) {
+        if (**createm == *NUMBER_1_INTEGER) {
 
             // Resize command, if necessary.
             // One extra place for space character.
@@ -363,7 +363,7 @@ void run_archive(void* p0, void* p1, void* p2, void* p3) {
 
     if (*updatem != *NULL_POINTER) {
 
-        if (**updatem == 1) {
+        if (**updatem == *NUMBER_1_INTEGER) {
 
             // Resize command, if necessary.
             // One extra place for space character.
@@ -390,7 +390,7 @@ void run_archive(void* p0, void* p1, void* p2, void* p3) {
 
     if (*bzip2m != *NULL_POINTER) {
 
-        if (**bzip2m == 1) {
+        if (**bzip2m == *NUMBER_1_INTEGER) {
 
             // Resize command, if necessary.
             // One extra place for space character.

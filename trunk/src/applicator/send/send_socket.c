@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.20 $ $Date: 2007-08-12 23:31:48 $ $Author: christian $
+ * @version $Revision: 1.21 $ $Date: 2007-08-13 16:37:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -197,23 +197,23 @@ void send_socket_get_socket(void* p0, void* p1, void* p2, void* p3, void* p4, vo
     log_message_debug("Information: Get socket.");
 
     // The comparison result.
-    int r = 0;
+    int r = *NUMBER_0_INTEGER;
 
-    if (r == 0) {
+    if (r == *NUMBER_0_INTEGER) {
 
         compare_arrays(p5, p6, (void*) SERVER_COMMUNICATION_MODE_MODEL, (void*) SERVER_COMMUNICATION_MODE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r != 0) {
+        if (r != *NUMBER_0_INTEGER) {
 
             send_socket_get_socket_server_mode(p0, p1, p2);
         }
     }
 
-    if (r == 0) {
+    if (r == *NUMBER_0_INTEGER) {
 
         compare_arrays(p5, p6, (void*) CLIENT_COMMUNICATION_MODE_MODEL, (void*) CLIENT_COMMUNICATION_MODE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r != 0) {
+        if (r != *NUMBER_0_INTEGER) {
 
             send_socket_get_socket_client_mode(p0, p3, p4);
         }
@@ -354,7 +354,7 @@ void send_socket_allocate_socket_address(void* p0, void* p1, void* p2) {
                     // With the known type "short int" of the "sun_family" field and
                     // a fixed size "108" of the "sun_path" field, the overall size of
                     // the "sockaddr_un" structure can be calculated as sum.
-                    *as = sizeof(short int) + 108;
+                    *as = sizeof(short int) + *NUMBER_108_INTEGER;
 
                     // Allocate socket address.
                     *a = malloc(*as);
@@ -696,7 +696,7 @@ void send_socket(void* p0, void* p1, void* p2, void* p3,
     // The log file.
     int f = open(n, status);
 
-    if (f >= 0) {
+    if (f >= *NUMBER_0_INTEGER) {
 
         // The file owner.
         int o = *INVALID_VALUE;
@@ -748,18 +748,18 @@ void send_socket(void* p0, void* p1, void* p2, void* p3,
         // The socket number for the signal id.
         // The index for the signal id in the array is the same index
         // in the client socket number array.
-        int i = -1;
+        int i = *INVALID_VALUE;
 
         get_index_for_signal_id(p2, p9, (void*) &i);
 
-        if (i >= 0) {
+        if (i >= *NUMBER_0_INTEGER) {
 
             // The client socket.
             int* cs = (int*) *NULL_POINTER;
 
             get_client_socket_number_for_index(p2, (void*) &i, (void*) &cs);
 
-            if (*cs >= 0) {
+            if (*cs >= *NUMBER_0_INTEGER) {
     --
                 // Remove client socket number and main signal id from internal memory.
                 remove_relation_clientsocketnumber_mainsignalid(p2, (void*) &i);

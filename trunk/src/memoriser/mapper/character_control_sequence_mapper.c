@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.10 $ $Date: 2007-07-29 01:53:30 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2007-08-13 16:37:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,6 +30,7 @@
 #include "../../globals/constants/character/character_constants.c"
 #include "../../globals/constants/console/console_escape_code_constants.c"
 #include "../../globals/constants/cybol/cybol_abstraction_constants.c"
+#include "../../globals/constants/integer/integer_constants.c"
 #include "../../globals/constants/memory_structure/array_constants.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../../globals/constants/pointer/pointer_constants.c"
@@ -64,24 +65,24 @@ void get_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
             void** d = (void**) p0;
 
             // The comparison result.
-            int r = 0;
+            int r = *NUMBER_0_INTEGER;
 
-            if (r == 0) {
+            if (r == *NUMBER_0_INTEGER) {
 
                 compare_arrays(p3, p4, SPACE_CHARACTER, PRIMITIVE_COUNT, &r, (void*) CHARACTER_ARRAY);
 
-                if (r == 1) {
+                if (r != *NUMBER_0_INTEGER) {
 
                     *d = SPACE_CHARACTER_ESCAPE_CODE;
 //??                    *dc = SPACE_CHARACTER_ESCAPE_CODE_COUNT;
                 }
             }
 
-            if (r == 0) {
+            if (r == *NUMBER_0_INTEGER) {
 
                 compare_arrays(p3, p4, SPACE_CHARACTER, PRIMITIVE_COUNT, &r, (void*) CHARACTER_ARRAY);
 
-                if (r == 1) {
+                if (r != *NUMBER_0_INTEGER) {
 
                     *d = SPACE_CHARACTER_ESCAPE_CODE;
 //??                    *dc = SPACE_CHARACTER_ESCAPE_CODE_COUNT;

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.38 $ $Date: 2007-06-29 22:55:31 $ $Author: christian $
+ * @version $Revision: 1.39 $ $Date: 2007-08-13 16:37:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -28,10 +28,10 @@
 #define MANAGER_SOURCE
 
 #include <pthread.h>
-#include "../controller/checker.c"
-#include "../controller/initialiser.c"
 #include "../controller/manager/internal_memory_manager.c"
 #include "../controller/manager/system_signal_handler_manager.c"
+#include "../controller/checker.c"
+#include "../controller/initialiser.c"
 #include "../globals/constants/cybol/cybol_abstraction_constants.c"
 #include "../globals/constants/cybol/cybol_channel_constants.c"
 #include "../globals/constants/integer/integer_constants.c"

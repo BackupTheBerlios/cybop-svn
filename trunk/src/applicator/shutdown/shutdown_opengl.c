@@ -20,14 +20,13 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2007-06-22 07:07:14 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2007-08-13 16:37:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef SHUTDOWN_OPENGL_SOURCE
 #define SHUTDOWN_OPENGL_SOURCE
 
-#include "../../globals/constants/integer/integer_constants.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/variables/variables.c"

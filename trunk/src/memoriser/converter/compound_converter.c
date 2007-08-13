@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2007-07-30 23:07:50 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2007-08-13 16:37:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -40,12 +40,12 @@
 #include "../../globals/constants/log/log_message_constants.c"
 #include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/logger/logger.c"
-#include "../../memoriser/array.c"
-#include "../../memoriser/allocator.c"
 #include "../../memoriser/allocator/xml_node_allocator.c"
 #include "../../memoriser/allocator/xml_property_allocator.c"
-#include "../../memoriser/communicator.c"
 #include "../../memoriser/mapper/abstraction_mapper.c"
+#include "../../memoriser/array.c"
+#include "../../memoriser/allocator.c"
+#include "../../memoriser/communicator.c"
 
 //
 // Forward declarations.
@@ -134,13 +134,13 @@ void parse_compound_comment_tag(void* p0, void* p1) {
                 break;
             }
 
-            if (r != *NUMBER_1_INTEGER) {
+            if (r == *NUMBER_0_INTEGER) {
 
                 if (bc >= *END_COMMENT_TAG_COUNT) {
 
                     compare_array_elements((void*) b, (void*) END_COMMENT_TAG, (void*) END_COMMENT_TAG_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-                    if (r == *NUMBER_1_INTEGER) {
+                    if (r != *NUMBER_0_INTEGER) {
 
                         // Move current byte pointer
                         // and remaining bytes count.
@@ -153,13 +153,13 @@ void parse_compound_comment_tag(void* p0, void* p1) {
                 }
             }
 
-            if (r != *NUMBER_1_INTEGER) {
+            if (r == *NUMBER_0_INTEGER) {
 
                 if (bc >= *SHORT_END_COMMENT_TAG_COUNT) {
 
                     compare_array_elements((void*) b, (void*) SHORT_END_COMMENT_TAG, (void*) SHORT_END_COMMENT_TAG_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-                    if (r == *NUMBER_1_INTEGER) {
+                    if (r != *NUMBER_0_INTEGER) {
 
                         // Move current byte pointer
                         // and remaining bytes count.
@@ -226,13 +226,13 @@ void parse_compound_tag(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 break;
             }
 
-            if (r != *NUMBER_1_INTEGER) {
+            if (r == *NUMBER_0_INTEGER) {
 
                 if (bc >= *EMPTY_TAG_END_COUNT) {
 
                     compare_array_elements((void*) b, (void*) EMPTY_TAG_END, (void*) EMPTY_TAG_END_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-                    if (r == *NUMBER_1_INTEGER) {
+                    if (r != *NUMBER_0_INTEGER) {
 
                         // Move current byte pointer
                         // and remaining bytes count.
@@ -245,13 +245,13 @@ void parse_compound_tag(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 }
             }
 
-            if (r != *NUMBER_1_INTEGER) {
+            if (r == *NUMBER_0_INTEGER) {
 
                 if (bc >= *TAG_END_COUNT) {
 
                     compare_array_elements((void*) b, (void*) TAG_END, (void*) TAG_END_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-                    if (r == *NUMBER_1_INTEGER) {
+                    if (r != *NUMBER_0_INTEGER) {
 
                         // Move current byte pointer
                         // and remaining bytes count.
@@ -897,7 +897,7 @@ void parse_compound(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 compare_array_elements((void*) &b, (void*) &BEGIN_COMMENT_TAG, (void*) &CHARACTER_ARRAY, (void*) &BEGIN_COMMENT_TAG_COUNT, (void*) &r);
 
-                if (r == *NUMBER_1_INTEGER) {
+                if (r != *NUMBER_0_INTEGER) {
 
                     // Move current byte pointer
                     // and remaining bytes count.
@@ -916,7 +916,7 @@ void parse_compound(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 compare_array_elements((void*) &b, (void*) &BEGIN_TAG_BEGIN, (void*) &CHARACTER_ARRAY, (void*) &BEGIN_TAG_BEGIN_COUNT, (void*) &r);
 
-                if (r == *NUMBER_1_INTEGER) {
+                if (r != *NUMBER_0_INTEGER) {
 
                     // Move current byte pointer
                     // and remaining bytes count.

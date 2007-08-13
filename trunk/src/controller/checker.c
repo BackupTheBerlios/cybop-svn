@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.27 $ $Date: 2007-05-26 21:19:58 $ $Author: christian $
+ * @version $Revision: 1.28 $ $Date: 2007-08-13 16:37:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -76,7 +76,7 @@ void check(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
         // The direct execution flag.
         int x = *NUMBER_0_INTEGER;
         // The highest priority index.
-        int i = -1;
+        int i = *NUMBER_MINUS_1_INTEGER;
         // The comparison result.
         int r = *NUMBER_0_INTEGER;
 
@@ -171,7 +171,7 @@ void check(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
                 // Reset direct execution flag.
                 x = *NUMBER_0_INTEGER;
                 // Reset highest priority index.
-                i = -1;
+                i = *NUMBER_MINUS_1_INTEGER;
                 // Reset comparison result.
                 r = *NUMBER_0_INTEGER;
 

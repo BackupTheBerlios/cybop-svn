@@ -20,13 +20,14 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2007-05-26 21:19:57 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2007-08-13 16:37:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef SEND_LATEX_SOURCE
 #define SEND_LATEX_SOURCE
 
+#include "../../globals/constants/integer/integer_constants.c"
 #include "../../globals/constants/log/log_message_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../globals/variables/variables.c"
