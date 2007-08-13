@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.40 $ $Date: 2007-07-29 01:53:30 $ $Author: christian $
+ * @version $Revision: 1.41 $ $Date: 2007-08-13 17:17:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -1624,7 +1624,7 @@ void remove_compound_element_by_name(void* p0, void* p1, void* p2, void* p3, voi
                 // The list element separator.
                 int s = *NUMBER_MINUS_1_INTEGER;
 
-                get_index_in_array(p6, p7, LIST_SEPARATOR, LIST_SEPARATOR_COUNT, &s, CHARACTER_ARRAY);
+                get_array_elements_index(p6, p7, LIST_SEPARATOR, LIST_SEPARATOR_COUNT, &s, CHARACTER_ARRAY);
 
                 remove_compound_element_by_index(p0, p1, p2, (void*) &i);
 
@@ -1676,7 +1676,7 @@ void remove_compound_element_by_name(void* p0, void* p1, void* p2, void* p3, voi
                 // The list element separator.
                 int s = *NUMBER_MINUS_1_INTEGER;
 
-                get_index_in_array(p6, p7, LIST_SEPARATOR, LIST_SEPARATOR_COUNT, &s, CHARACTER_ARRAY);
+                get_array_elements_index(p6, p7, LIST_SEPARATOR, LIST_SEPARATOR_COUNT, &s, CHARACTER_ARRAY);
 
                 remove_compound_element_by_index(p3, p4, p5, (void*) &i);
 

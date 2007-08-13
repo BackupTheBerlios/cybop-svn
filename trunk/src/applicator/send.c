@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.55 $ $Date: 2007-08-13 16:37:11 $ $Author: christian $
+ * @version $Revision: 1.56 $ $Date: 2007-08-13 17:17:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -88,7 +88,7 @@ void refresh_url(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, voi
     // The socket number for the signal id.
     // The index for the signal id in the array is the same index
     // in the client socket number array.
-    int i = *INVALID_VALUE_INTEGER;
+    int i = *INVALID_VALUE;
 
     get_index_for_signal_id(p2, p6, (void*) &i);
 

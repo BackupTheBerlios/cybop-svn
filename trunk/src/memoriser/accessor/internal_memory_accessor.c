@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.21 $ $Date: 2007-07-23 23:47:58 $ $Author: christian $
+ * @version $Revision: 1.22 $ $Date: 2007-08-13 17:17:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -187,7 +187,7 @@ void get_index_for_signal_id(void* p0, void* p1, void* p2) {
     get_element(p0, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_SIZE_INTERNAL, (void*) &ids, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
     // Get index.
-    get_array_elements_index(*id, (void*) *ids, p1, (void*) NUMBER_1_INTEGER, p2, (void*) INTEGER_ARRAY);
+    get_array_elements_index(*id, *ids, p1, (void*) PRIMITIVE_COUNT, p2, (void*) INTEGER_ARRAY);
 }
 
 /**
