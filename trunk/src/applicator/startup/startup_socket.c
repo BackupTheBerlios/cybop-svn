@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.22 $ $Date: 2007-08-13 16:37:11 $ $Author: christian $
+ * @version $Revision: 1.23 $ $Date: 2007-08-17 03:15:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -43,7 +43,6 @@
 #include "../../globals/constants/integer/integer_constants.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../../globals/constants/pointer/pointer_constants.c"
-#include "../../globals/constants/system_constants.c"
 #include "../../globals/variables/variables.c"
 #include "../../memoriser/accessor.c"
 #include "../../memoriser/array.c"
@@ -537,11 +536,11 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
         log_message_debug("Startup socket.");
 
         // The socket namespace.
-        int sn = *INVALID_VALUE;
+        int sn = *NUMBER_MINUS_1_INTEGER;
         // The address namespace.
-        int an = *INVALID_VALUE;
+        int an = *NUMBER_MINUS_1_INTEGER;
         // The communication style.
-        int st = *INVALID_VALUE;
+        int st = *NUMBER_MINUS_1_INTEGER;
         // The ipv4 host address of this system.
         struct in_addr ha4;
         // The ipv6 host address of this system.
@@ -581,9 +580,9 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
         int* bc = (int*) *NULL_POINTER;
         int* bs = (int*) *NULL_POINTER;
         // The internal memory index.
-        int i = *INVALID_VALUE;
+        int i = *NUMBER_MINUS_1_INTEGER;
         // The result.
-        int r = *INVALID_VALUE;
+        int r = *NUMBER_MINUS_1_INTEGER;
 
         // Get socket- and address namespace.
         startup_socket_get_namespace((void*) &sn, (void*) &an, p1, p2);
@@ -793,7 +792,7 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
             // Get file status flags.
             int fl = fcntl(*s, F_GETFL, NUMBER_0_INTEGER);
 
-            if (fl != *INVALID_VALUE) {
+            if (fl != *NUMBER_MINUS_1_INTEGER) {
 
                 // Set non-blocking flag (bit).
                 fl |= O_NONBLOCK;
@@ -837,7 +836,7 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
                 if (st == SOCK_STREAM) {
 
                     // Reset result.
-                    r = *INVALID_VALUE;
+                    r = *NUMBER_MINUS_1_INTEGER;
 
                     // Initialise error number.
                     // It is a global variable/ function and other operations

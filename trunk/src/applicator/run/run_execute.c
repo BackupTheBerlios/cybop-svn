@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2007-08-13 16:37:11 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2007-08-17 03:15:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -34,7 +34,7 @@
 #include "../../globals/constants/integer/integer_constants.c"
 #include "../../globals/constants/log/log_message_constants.c"
 #include "../../globals/constants/pointer/pointer_constants.c"
-#include "../../globals/constants/system_constants.c"
+#include "../../globals/constants/system/system_executable_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../globals/variables/variables.c"
 
@@ -64,7 +64,7 @@ void run_execute(void* p0) {
     // and otherwise is the status of the shell process.
     int r = system(p0);
 
-    if (r == *INVALID_VALUE) {
+    if (r == *NUMBER_MINUS_1_INTEGER) {
 
         log_message_debug("Warning: Could not execute command/ program as process. A negative value was returned.");
 
@@ -191,19 +191,19 @@ void run_execute(void* p0) {
         // is executed instead, and the program (as its command) within the shell.
         // Arguments are specified individually and handed over as strings.
         // The first argument represents the name of the program being executed.
-        // That is why the SYSTEM_SHELL constant is supplied once to name the
-        // program to execute and a second time to supply a value for argv[0].
+        // That is why the SHELL_SYSTEM_EXECUTABLE constant is supplied once to name
+        // the program to execute and a second time to supply a value for argv[0].
         // A null pointer must be passed as the last such argument, to indicate the end!
         //
         // Example:
-        // execl(SYSTEM_SHELL, SYSTEM_SHELL, "-c", ARCHIVE_UNIX_SHELL_COMMAND, *NULL_POINTER);
-        // execl(SYSTEM_SHELL, SYSTEM_SHELL, "-c", "xdosemu", *NULL_POINTER);
-        int e = execv(SYSTEM_SHELL, (char**) p0);
+        // execl(SHELL_SYSTEM_EXECUTABLE, SHELL_SYSTEM_EXECUTABLE, "-c", ARCHIVE_UNIX_SHELL_COMMAND, *NULL_POINTER);
+        // execl(SHELL_SYSTEM_EXECUTABLE, SHELL_SYSTEM_EXECUTABLE, "-c", "xdosemu", *NULL_POINTER);
+        int e = execv(SHELL_SYSTEM_EXECUTABLE, (char**) p0);
 
     fprintf(stdout, "TEST post-exec e: %i\n", e);
 
         // A value of -1 is returned in the event of a failure.
-        if (e == *INVALID_VALUE) {
+        if (e == *NUMBER_MINUS_1_INTEGER) {
 
     fprintf(stdout, "TEST e == -1 errno: %i\n", errno);
 

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.12 $ $Date: 2007-08-13 16:37:12 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2007-08-17 03:15:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -37,7 +37,7 @@
 #include "../../memoriser/array.c"
 
 /**
- * Parses the byte stream and creates a double model from it.
+ * Decodes the byte stream and creates a double model from it.
  *
  * @param p0 the destination (Hand over as reference!)
  * @param p1 the destination count
@@ -45,7 +45,7 @@
  * @param p3 the source
  * @param p4 the source count
  */
-void parse_double(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void decode_double(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (p4 != *NULL_POINTER) {
 
@@ -55,7 +55,7 @@ void parse_double(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             void** d = (void**) p0;
 
-            log_message_debug("Parse double.");
+            log_message_debug("Decode double.");
 
             // The temporary null-terminated string.
             char* tmp = (char*) *NULL_POINTER;
@@ -108,17 +108,17 @@ void parse_double(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         } else {
 
-            log_message_debug("Could not parse double. The destination is null.");
+            log_message_debug("Could not decode double. The destination is null.");
         }
 
     } else {
 
-        log_message_debug("Could not parse double. The source count is null.");
+        log_message_debug("Could not decode double. The source count is null.");
     }
 }
 
 /**
- * Serialises the double model and creates a byte stream from it.
+ * Encodes the double model and creates a byte stream from it.
  *
  * @param p0 the destination (Hand over as reference!)
  * @param p1 the destination count
@@ -126,7 +126,7 @@ void parse_double(void* p0, void* p1, void* p2, void* p3, void* p4) {
  * @param p3 the source
  * @param p4 the source count
  */
-void serialise_double(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void encode_double(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (p2 != *NULL_POINTER) {
 
@@ -140,7 +140,7 @@ void serialise_double(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 char** d = (char**) p0;
 
-                log_message_debug("Serialise double.");
+                log_message_debug("Encode double.");
 
                 // The double value.
                 double* v = (double*) *NULL_POINTER;
@@ -192,7 +192,7 @@ void serialise_double(void* p0, void* p1, void* p2, void* p3, void* p4) {
 }
 
 /**
- * Parses the byte stream and creates a double vector model from it.
+ * Decodes the byte stream and creates a double vector model from it.
  *
  * @param p0 the destination vector model (Hand over as reference!)
  * @param p1 the destination count
@@ -200,7 +200,7 @@ void serialise_double(void* p0, void* p1, void* p2, void* p3, void* p4) {
  * @param p3 the source byte stream
  * @param p4 the source count
  */
-void parse_double_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void decode_double_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (p4 != *NULL_POINTER) {
 
@@ -214,13 +214,13 @@ void parse_double_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 void** d = (void**) p0;
 
-                log_message_debug("Parse double vector.");
+                log_message_debug("Decode double vector.");
 
 /*??
                 // The loop count.
                 int j = *NUMBER_0_INTEGER;
                 // The comma index.
-                int i = *INVALID_VALUE;
+                int i = *NUMBER_MINUS_1_INTEGER;
                 // The double vector element count.
                 void* c = *NULL_POINTER;
                 // The double number.
@@ -246,14 +246,14 @@ void parse_double_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
                         // Index of first comma: 3
                         // Handed over as vector element (source) count: index i
                         // (which is 3, as needed for the length)
-                        parse_double(d, dc, ds, p3, &i);
+                        decode_double(d, dc, ds, p3, &i);
 
                         // Recursively call this procedure for the remaining double vector elements.
-                        parse_double_vector(d, dc, ds, new_start_vector, sc);
+                        decode_double_vector(d, dc, ds, new_start_vector, sc);
 
                     } else {
 
-                        log_message_debug("ERROR: Could not parse double vector. The source string starts with a comma character.");
+                        log_message_debug("ERROR: Could not decode double vector. The source string starts with a comma character.");
                     }
 
                     j++;
@@ -278,13 +278,13 @@ void parse_double_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 /*??
                 int i1 = s.indexOf(",");
 
-                if (i1 != *INVALID_VALUE) {
+                if (i1 != *NUMBER_MINUS_1_INTEGER) {
 
                     char[] x = s.substring(*NUMBER_0_INTEGER, i1);
                     char[] yz = s.substring(i1 + *NUMBER_1_INTEGER);
                     int i2 = yz.indexOf(",");
 
-                    if (i2 != *INVALID_VALUE) {
+                    if (i2 != *NUMBER_MINUS_1_INTEGER) {
 
                         char[] y = yz.substring(*NUMBER_0_INTEGER, i2);
                         char[] z = yz.substring(i2 + *NUMBER_1_INTEGER);
@@ -321,7 +321,7 @@ void parse_double_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 }
 
 /**
- * Serialises the double vector model and creates a byte stream from it.
+ * Encodes the double vector model and creates a byte stream from it.
  *
  * @param p0 the destination byte stream (Hand over as reference!)
  * @param p1 the destination count
@@ -329,7 +329,7 @@ void parse_double_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
  * @param p3 the source vector model
  * @param p4 the source count
  */
-void serialise_double_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void encode_double_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
 /*??
 //??    log_message((void*) &INFORMATION_LOG_LEVEL, (void*) &"Finalise double vector.");

@@ -25,7 +25,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.26 $ $Date: 2007-07-29 01:53:30 $ $Author: christian $
+ * @version $Revision: 1.27 $ $Date: 2007-08-17 03:15:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -37,11 +37,11 @@
 #include "../controller/manager.c"
 #include "../controller/optionaliser.c"
 #include "../controller/tester.c"
+#include "../globals/constants/cyboi/cyboi_operation_mode_constants.c"
 #include "../globals/constants/integer/integer_constants.c"
 #include "../globals/constants/log/log_message_constants.c"
 #include "../globals/constants/pointer/pointer_constants.c"
-#include "../globals/constants/cyboi_constants.c"
-#include "../globals/variables/variables.c"
+#include "../globals/variables/log_variables.c"
 
 /**
  * The main entry function.
@@ -84,7 +84,7 @@ int main(int p0, char** p1) {
         // CAUTION! It is initialised with the help operation mode,
         // to display the help message if no command line argument
         // is given by the user.
-        int m = *HELP_OPERATION_MODE;
+        int m = *HELP_CYBOI_OPERATION_MODE;
 
         // The cybol knowledge file path.
         void* k = *NULL_POINTER;
@@ -97,22 +97,22 @@ int main(int p0, char** p1) {
         log_message_debug("Information: Globalised global variables already.");
         log_message_debug("Information: Optionalised log file already.");
 
-        if (m == *VERSION_OPERATION_MODE) {
+        if (m == *VERSION_CYBOI_OPERATION_MODE) {
 
             // Write cyboi version to standard output.
             write(fileno(stdout), (void*) CYBOI_VERSION_LOG_MESSAGE, *CYBOI_VERSION_LOG_MESSAGE_COUNT);
 
-        } else if (m == *HELP_OPERATION_MODE) {
+        } else if (m == *HELP_CYBOI_OPERATION_MODE) {
 
             // Write cyboi help message to standard output.
             write(fileno(stdout), (void*) CYBOI_HELP_LOG_MESSAGE, *CYBOI_HELP_LOG_MESSAGE_COUNT);
 
-        } else if (m == *TEST_OPERATION_MODE) {
+        } else if (m == *TEST_CYBOI_OPERATION_MODE) {
 
             // Call test function.
             test();
 
-        } else if (m == *KNOWLEDGE_OPERATION_MODE) {
+        } else if (m == *KNOWLEDGE_CYBOI_OPERATION_MODE) {
 
             if ((k != *NULL_POINTER) && (kc >= *NUMBER_0_INTEGER)) {
 

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.31 $ $Date: 2007-08-13 16:37:11 $ $Author: christian $
+ * @version $Revision: 1.32 $ $Date: 2007-08-17 03:15:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -40,6 +40,7 @@
 #include <unistd.h>
 #include "../../globals/constants/character/character_constants.c"
 #include "../../globals/constants/console/console_escape_code_constants.c"
+#include "../../globals/constants/cyboi/cyboi_signal_priority_constants.c"
 #include "../../globals/constants/cybol/cybol_abstraction_constants.c"
 #include "../../globals/constants/cybol/cybol_channel_constants.c"
 #include "../../globals/constants/cybol/cybol_model_constants.c"
@@ -48,8 +49,6 @@
 #include "../../globals/constants/log/log_message_constants.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../../globals/constants/pointer/pointer_constants.c"
-#include "../../globals/constants/cyboi_constants.c"
-#include "../../globals/constants/system_constants.c"
 #include "../../globals/variables/variables.c"
 #include "../../memoriser/accessor/compound_accessor.c"
 #include "../../memoriser/accessor/internal_memory_accessor.c"
@@ -258,7 +257,7 @@ void receive_socket_signal(void* p0, void* p1, void* p2, void* p3, void* p4, voi
         get_new_signal_id(p0, p1, (void*) id);
 
         // Add signal to signal memory.
-        set_signal(p0, p1, p2, *ca, *cac, *cm, *cmc, *cd, *cdc, (void*) NORMAL_PRIORITY, (void*) id);
+        set_signal(p0, p1, p2, *ca, *cac, *cm, *cmc, *cd, *cdc, (void*) NORMAL_CYBOI_SIGNAL_PRIORITY, (void*) id);
 
     /*??
         add_signal_id(p0, (void*) id);
@@ -746,8 +745,8 @@ void receive_socket_message(void* p0, void* p1, void* p2, void* p3, void* p4, vo
                 //?? int hcc = *NUMBER_0_INTEGER;
                 //?? int hcs = *NUMBER_0_INTEGER;
 
-                // Parse http request and write any parameters into the compound being handed over as parameter.
-//??                parse((void*) &hc, (void*) &hcc, (void*) &hcs, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *b, p18, (void*) HTTP_REQUEST_ABSTRACTION, (void*) HTTP_REQUEST_ABSTRACTION_COUNT);
+                // Decode http request and write any parameters into the compound being handed over as parameter.
+//??                decode((void*) &hc, (void*) &hcc, (void*) &hcs, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *b, p18, (void*) HTTP_REQUEST_ABSTRACTION, (void*) HTTP_REQUEST_ABSTRACTION_COUNT);
 
 /*??
                 // The url basename.
@@ -848,7 +847,7 @@ void receive_socket_thread(void* p0, void* p1) {
         log_message_debug("Receive socket messages in an own thread.");
 
         // The internal memory index.
-        int i = *INVALID_VALUE;
+        int i = *NUMBER_MINUS_1_INTEGER;
         // The knowledge memory.
         void** k = NULL_POINTER;
         void** kc = NULL_POINTER;
@@ -1049,7 +1048,7 @@ void receive_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, 
             log_message_debug("Receive socket.");
 
             // The internal memory index.
-            int i = *INVALID_VALUE;
+            int i = *NUMBER_MINUS_1_INTEGER;
             // The socket mutex.
             pthread_mutex_t** mt = (pthread_mutex_t**) NULL_POINTER;
 
@@ -1092,7 +1091,7 @@ void receive_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, 
 
             // Only create thread, if not existent.
             // The "pthread_t" type is an integer, so both can be compared.
-            if (*t == *INVALID_VALUE) {
+            if (*t == *NUMBER_MINUS_1_INTEGER) {
 
                 // Create thread.
                 //

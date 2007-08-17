@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.15 $ $Date: 2007-08-13 16:37:12 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2007-08-17 03:15:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -38,7 +38,7 @@
 #include "../../memoriser/array.c"
 
 /**
- * Parses the byte stream and creates a boolean model from it.
+ * Decodes the byte stream and creates a boolean model from it.
  *
  * @param p0 the destination (Hand over as reference!)
  * @param p1 the destination count
@@ -46,7 +46,7 @@
  * @param p3 the source
  * @param p4 the source count
  */
-void parse_boolean(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void decode_boolean(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (p4 != *NULL_POINTER) {
 
@@ -60,7 +60,7 @@ void parse_boolean(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 int** d = (int**) p0;
 
-                log_message_debug("Information: Parse boolean.");
+                log_message_debug("Information: Decode boolean.");
 
                 // The comparison result.
                 int r = *NUMBER_0_INTEGER;
@@ -107,22 +107,22 @@ void parse_boolean(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             } else {
 
-                log_message_debug("Error: Could not parse boolean. The destination is null.");
+                log_message_debug("Error: Could not decode boolean. The destination is null.");
             }
 
         } else {
 
-            log_message_debug("Error: Could not parse boolean. The destination count is null.");
+            log_message_debug("Error: Could not decode boolean. The destination count is null.");
         }
 
     } else {
 
-        log_message_debug("Error: Could not parse boolean. The source count is null.");
+        log_message_debug("Error: Could not decode boolean. The source count is null.");
     }
 }
 
 /**
- * Serialises the boolean model and creates a byte stream from it.
+ * Encodes the boolean model and creates a byte stream from it.
  *
  * @param p0 the destination (Hand over as reference!)
  * @param p1 the destination count
@@ -130,7 +130,7 @@ void parse_boolean(void* p0, void* p1, void* p2, void* p3, void* p4) {
  * @param p3 the source
  * @param p4 the source count
  */
-void serialise_boolean(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void encode_boolean(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (p4 != *NULL_POINTER) {
 
@@ -152,7 +152,7 @@ void serialise_boolean(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                         void** d = (void**) p0;
 
-                        log_message_debug("Information: Serialise boolean.");
+                        log_message_debug("Information: Encode boolean.");
 
                         if (*sc > *NUMBER_0_INTEGER) {
 
@@ -187,32 +187,32 @@ void serialise_boolean(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                         } else {
 
-                            log_message_debug("Error: Could not serialise boolean. The source count is zero.");
+                            log_message_debug("Error: Could not encode boolean. The source count is zero.");
                         }
 
                     } else {
 
-                        log_message_debug("Error: Could not serialise boolean. The destination is null.");
+                        log_message_debug("Error: Could not encode boolean. The destination is null.");
                     }
 
                 } else {
 
-                    log_message_debug("Error: Could not serialise boolean. The destination count is null.");
+                    log_message_debug("Error: Could not encode boolean. The destination count is null.");
                 }
 
             } else {
 
-                log_message_debug("Error: Could not serialise boolean. The destination size is null.");
+                log_message_debug("Error: Could not encode boolean. The destination size is null.");
             }
 
         } else {
 
-            log_message_debug("Error: Could not serialise boolean. The source is null.");
+            log_message_debug("Error: Could not encode boolean. The source is null.");
         }
 
     } else {
 
-        log_message_debug("Error: Could not serialise boolean. The source count is null.");
+        log_message_debug("Error: Could not encode boolean. The source count is null.");
     }
 }
 

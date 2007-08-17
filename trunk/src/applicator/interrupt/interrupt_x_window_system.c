@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.12 $ $Date: 2007-06-22 07:07:14 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2007-08-17 03:15:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -36,8 +36,9 @@
 #include "../../globals/constants/log/log_message_constants.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../../globals/constants/pointer/pointer_constants.c"
-#include "../../globals/constants/system_constants.c"
 #include "../../globals/logger/logger.c"
+#include "../../globals/variables/service_interrupt_variables.c"
+#include "../../globals/variables/thread_identification_variables.c"
 
 /**
  * Interrupts the x window system service.
@@ -46,7 +47,7 @@ void interrupt_x_window_system() {
 
     log_message_debug("Interrupt x window system service.");
 
-    if (*X_WINDOW_SYSTEM_THREAD != *INVALID_VALUE) {
+    if (*X_WINDOW_SYSTEM_THREAD != *NUMBER_MINUS_1_INTEGER) {
 
         // Set thread interrupt flag for signal handler.
         *X_WINDOW_SYSTEM_THREAD_INTERRUPT = *NUMBER_1_INTEGER;
@@ -66,7 +67,7 @@ void interrupt_x_window_system() {
         pthread_join(*X_WINDOW_SYSTEM_THREAD, *NULL_POINTER);
 
         // Reset thread.
-        *X_WINDOW_SYSTEM_THREAD = *INVALID_VALUE;
+        *X_WINDOW_SYSTEM_THREAD = *NUMBER_MINUS_1_INTEGER;
 
         // Reset thread interrupt flag for signal handler.
         *X_WINDOW_SYSTEM_THREAD_INTERRUPT = *NUMBER_0_INTEGER;

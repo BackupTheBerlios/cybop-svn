@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2007-06-29 22:55:31 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2007-08-17 03:15:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -32,9 +32,9 @@
 #include "../../globals/constants/integer/integer_constants.c"
 #include "../../globals/constants/log/log_message_constants.c"
 #include "../../globals/constants/pointer/pointer_constants.c"
-#include "../../globals/constants/system_constants.c"
 #include "../../globals/logger/logger.c"
-#include "../../globals/variables/variables.c"
+#include "../../globals/variables/service_interrupt_variables.c"
+#include "../../globals/variables/thread_identification_variables.c"
 
 /**
  * Reacts to an interrupt service system signal.
@@ -77,7 +77,7 @@ void interrupt_service_system_signal_handler(int p0) {
             pthread_exit(*NULL_POINTER);
 
             // CAUTION! The thread CANNOT be reset here with:
-            // *GNU_LINUX_CONSOLE_THREAD = *INVALID_VALUE;
+            // *GNU_LINUX_CONSOLE_THREAD = *NUMBER_MINUS_1_INTEGER;
             // because this line would NOT be reached anymore,
             // after "pthread_exit" has been called above!
             // Therefore, do the reset in the corresponding
@@ -96,7 +96,7 @@ void interrupt_service_system_signal_handler(int p0) {
             pthread_exit(*NULL_POINTER);
 
             // CAUTION! The thread CANNOT be reset here with:
-            // *X_WINDOW_SYSTEM_THREAD = *INVALID_VALUE;
+            // *X_WINDOW_SYSTEM_THREAD = *NUMBER_MINUS_1_INTEGER;
             // because this line would NOT be reached anymore,
             // after "pthread_exit" has been called above!
             // Therefore, do the reset in the corresponding
@@ -115,7 +115,7 @@ void interrupt_service_system_signal_handler(int p0) {
             pthread_exit(*NULL_POINTER);
 
             // CAUTION! The thread CANNOT be reset here with:
-            // *WWW_SERVICE_THREAD = *INVALID_VALUE;
+            // *WWW_SERVICE_THREAD = *NUMBER_MINUS_1_INTEGER;
             // because this line would NOT be reached anymore,
             // after "pthread_exit" has been called above!
             // Therefore, do the reset in the corresponding
@@ -134,7 +134,7 @@ void interrupt_service_system_signal_handler(int p0) {
             pthread_exit(*NULL_POINTER);
 
             // CAUTION! The thread CANNOT be reset here with:
-            // *CYBOI_SERVICE_THREAD = *INVALID_VALUE;
+            // *CYBOI_SERVICE_THREAD = *NUMBER_MINUS_1_INTEGER;
             // because this line would NOT be reached anymore,
             // after "pthread_exit" has been called above!
             // Therefore, do the reset in the corresponding

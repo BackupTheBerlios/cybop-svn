@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.28 $ $Date: 2007-08-13 16:37:11 $ $Author: christian $
+ * @version $Revision: 1.29 $ $Date: 2007-08-17 03:15:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -32,8 +32,8 @@
 #include "../globals/constants/integer/integer_constants.c"
 #include "../globals/constants/log/log_message_constants.c"
 #include "../globals/constants/pointer/pointer_constants.c"
-#include "../globals/variables/variables.c"
 #include "../globals/logger/logger.c"
+#include "../globals/variables/sleep_time_variables.c"
 #include "../memoriser/accessor/signal_memory_accessor.c"
 
 /**
@@ -257,8 +257,7 @@ void check(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
                 // Sleep for some time.
                 while (*irq == *NUMBER_0_INTEGER) {
 
-                    sleep(0.1);
-//??                    sleep(1.0);
+                    sleep(CHECKER_SLEEP_TIME);
                 }
 
                 // Lock signal memory mutex.

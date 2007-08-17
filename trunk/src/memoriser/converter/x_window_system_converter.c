@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.17 $ $Date: 2007-07-23 23:47:58 $ $Author: christian $
+ * @version $Revision: 1.18 $ $Date: 2007-08-17 03:15:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -41,7 +41,7 @@
 #include "../../memoriser/accessor.c"
 
 /**
- * Parses the x window system model into a compound model.
+ * Decodes the x window system model into a compound model.
  *
  * @param p0 the destination compound model (Hand over as reference!)
  * @param p1 the destination count
@@ -49,11 +49,11 @@
  * @param p3 the internal memory containing all x window system windows
  * @param p4 the source count
  */
-void parse_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void decode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
 }
 
 /**
- * Serialises the source compound model into an x window system model.
+ * Encodes the source compound model into an x window system model.
  *
  * @param p0 the internal memory containing all x window system internals
  * @param p1 the destination count
@@ -65,14 +65,14 @@ void parse_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
  * @param p7 the knowledge memory
  * @param p8 the knowledge memory count
  */
-void serialise_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
+void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
     void* p5, void* p6, void* p7, void* p8) {
 
     if (p4 != *NULL_POINTER) {
 
         int* sc = (int*) p4;
 
-        log_message_debug("Serialise x window system.");
+        log_message_debug("Encode x window system.");
 
         // The display, which is a subsumption of
         // xserver, screens, hardware (input devices etc.).
@@ -359,7 +359,7 @@ void serialise_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
 
                 // Calculate coordinates according to given layout.
 /*??
-                serialise_x_window_system_layout(*pmx, *pmy, *pmz, *smx, *smy, *smz,
+                encode_x_window_system_layout(*pmx, *pmy, *pmz, *smx, *smy, *smz,
                     &fapx, &fapy, &fapz, &fasx, &fasy, &fasz,
                     &oapx, &oapy, &oapz, &oasx, &oasy, &oasz,
                     *cm, *cmc, *lm, *lmc);
@@ -582,7 +582,7 @@ void serialise_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
                 log_message_debug("Debug: The part model is a compound.");
 
                 // Recursively call this procedure for compound part model.
-                serialise_x_window_system(p0, p1, p2, *m, *mc, *d, *dc, p7, p8);
+                encode_x_window_system(p0, p1, p2, *m, *mc, *d, *dc, p7, p8);
             }
 
             // Reset source part name, abstraction, model, details.

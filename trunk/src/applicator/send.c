@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.56 $ $Date: 2007-08-13 17:17:01 $ $Author: christian $
+ * @version $Revision: 1.57 $ $Date: 2007-08-17 03:15:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -35,6 +35,7 @@
 #include "../applicator/send/send_shell.c"
 #include "../applicator/send/send_socket.c"
 #include "../applicator/send/send_x_window_system.c"
+#include "../globals/constants/cyboi/cyboi_signal_priority_constants.c"
 #include "../globals/constants/cybol/cybol_abstraction_constants.c"
 #include "../globals/constants/cybol/cybol_channel_constants.c"
 #include "../globals/constants/cybol/cybol_model_constants.c"
@@ -88,7 +89,7 @@ void refresh_url(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, voi
     // The socket number for the signal id.
     // The index for the signal id in the array is the same index
     // in the client socket number array.
-    int i = *INVALID_VALUE;
+    int i = *NUMBER_MINUS_1_INTEGER;
 
     get_index_for_signal_id(p2, p6, (void*) &i);
 
@@ -117,9 +118,9 @@ void refresh_url(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, voi
             *dest_size  = *NUMBER_0_INTEGER;
             allocate(&dest, dest_size, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
-            parse(&dest, dest_count, dest_size, &msg_refresh_part_1[*NUMBER_0_INTEGER], &msg_part_1_count, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
-            parse(&dest, dest_count, dest_size, *urlm, *urlmc, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
-            parse(&dest, dest_count, dest_size, &msg_refresh_part_3[*NUMBER_0_INTEGER], &msg_part_3_count, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
+            decode(&dest, dest_count, dest_size, &msg_refresh_part_1[*NUMBER_0_INTEGER], &msg_part_1_count, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
+            decode(&dest, dest_count, dest_size, *urlm, *urlmc, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
+            decode(&dest, dest_count, dest_size, &msg_refresh_part_3[*NUMBER_0_INTEGER], &msg_part_3_count, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
             // The temporary count, size.
             int tc = *NUMBER_0_INTEGER;
@@ -423,7 +424,7 @@ void send_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
 
         if (r != *NUMBER_0_INTEGER) {
 
-            send_cyboi_system(p2, p6, p7, p8, *ma, *mac, *mm, *mmc, *md, *mdc, (void*) NORMAL_PRIORITY, p9);
+            send_cyboi_system(p2, p6, p7, p8, *ma, *mac, *mm, *mmc, *md, *mdc, (void*) NORMAL_CYBOI_SIGNAL_PRIORITY, p9);
         }
     }
 

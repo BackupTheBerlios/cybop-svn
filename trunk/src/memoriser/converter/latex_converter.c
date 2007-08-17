@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2007-08-13 16:37:12 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2007-08-17 03:15:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -31,7 +31,7 @@
 #include "../../globals/logger/logger.c"
 
 /**
- * Parses the byte stream and creates a latex model from it.
+ * Decodes the byte stream and creates a latex model from it.
  *
  * @param p0 the destination latex model (Hand over as reference!)
  * @param p1 the destination count
@@ -39,11 +39,11 @@
  * @param p3 the source byte stream
  * @param p4 the source count
  */
-void parse_latex(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void decode_latex(void* p0, void* p1, void* p2, void* p3, void* p4) {
 }
 
 /**
- * Serialises the latex model and creates a byte stream from it.
+ * Encodes the latex model and creates a byte stream from it.
  *
  * @param p0 the destination byte stream (Hand over as reference!)
  * @param p1 the destination count
@@ -51,7 +51,7 @@ void parse_latex(void* p0, void* p1, void* p2, void* p3, void* p4) {
  * @param p3 the source latex model
  * @param p4 the source count
  */
-void serialise_latex(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void encode_latex(void* p0, void* p1, void* p2, void* p3, void* p4) {
 }
 
 /* LATEX_CONVERTER_SOURCE */

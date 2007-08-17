@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2007-08-13 16:37:12 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2007-08-17 03:15:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -40,7 +40,7 @@
 //
 
 /**
- * Parses the byte stream and creates a fraction model from it.
+ * Decodes the byte stream and creates a fraction model from it.
  *
  * @param p0 the destination (Hand over as reference!)
  * @param p1 the destination count
@@ -48,7 +48,7 @@
  * @param p3 the source
  * @param p4 the source count
  */
-void parse_fraction(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void decode_fraction(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (p4 != *NULL_POINTER) {
 
@@ -93,7 +93,7 @@ void parse_fraction(void* p0, void* p1, void* p2, void* p3, void* p4) {
 }
 
 /**
- * Serialises the fraction model and creates a byte stream from it.
+ * Encodes the fraction model and creates a byte stream from it.
  *
  * @param p0 the destination (Hand over as reference!)
  * @param p1 the destination count
@@ -101,7 +101,7 @@ void parse_fraction(void* p0, void* p1, void* p2, void* p3, void* p4) {
  * @param p3 the source
  * @param p4 the source count
  */
-void serialise_fraction(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void encode_fraction(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
 /*??
     //?? log_message((void*) &INFORMATION_LOG_LEVEL, (void*) &"Finalise fraction.");

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.20 $ $Date: 2007-08-13 17:17:01 $ $Author: christian $
+ * @version $Revision: 1.21 $ $Date: 2007-08-17 03:15:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -32,8 +32,8 @@
 #include "../../globals/constants/memory_structure/array_constants.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../../globals/constants/pointer/pointer_constants.c"
-#include "../../globals/constants/system_constants.c"
 #include "../../globals/logger/logger.c"
+#include "../../globals/variables/reallocation_factor_variables.c"
 #include "../../memoriser/allocator.c"
 #include "../../memoriser/array.c"
 
@@ -109,7 +109,7 @@ void set_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
                                                 if (i == *s) {
 
                                                     // Increase size.
-                                                    *s = (*s * *SIGNAL_MEMORY_REALLOCATE_FACTOR) + *NUMBER_1_INTEGER;
+                                                    *s = (*s * *SIGNAL_MEMORY_REALLOCATION_FACTOR) + *NUMBER_1_INTEGER;
 
                                                     // Reallocate abstractions, models, details, priorities, identifications.
                                                     reallocate_array(a, p1, p2, (void*) POINTER_ARRAY);
@@ -527,7 +527,7 @@ void get_highest_priority_index(void* p0, void* p1, void* p2) {
                 // CAUTION! Do not initialise it with zero, because then the
                 // priority will not be set, due to the comparison: if (prio > h).
                 // The smallest possible priority is zero and greater than minus one.
-                int h = *INVALID_VALUE;
+                int h = *NUMBER_MINUS_1_INTEGER;
 
                 while (*NUMBER_1_INTEGER) {
 
@@ -603,7 +603,7 @@ void get_new_signal_id(void* p0, void* p1, void* p2) {
                 // CAUTION! Do not initialise it with zero, because then the
                 // maximum will not be set, due to the comparison: if (id > max).
                 // The smallest possible priority is zero and greater than minus one.
-                int max = *INVALID_VALUE;
+                int max = *NUMBER_MINUS_1_INTEGER;
                 // The identification.
                 int** id = (int**) NULL_POINTER;
 

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.20 $ $Date: 2007-08-13 16:37:12 $ $Author: christian $
+ * @version $Revision: 1.21 $ $Date: 2007-08-17 03:15:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -43,10 +43,11 @@
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/logger/logger.c"
+#include "../../globals/variables/reallocation_factor_variables.c"
 #include "../../memoriser/allocator.c"
 
 /**
- * Parses the byte stream and creates an integer from it.
+ * Decodes the byte stream and creates an integer from it.
  *
  * CAUTION! Do not mix up "integer" and "integer_vector"!
  * The latter is an array storing one or many integer numbers at different indexes.
@@ -60,7 +61,7 @@
  * @param p3 the source character array
  * @param p4 the source count
  */
-void parse_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void decode_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (p4 != *NULL_POINTER) {
 
@@ -70,7 +71,7 @@ void parse_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             int* d = (int*) p0;
 
-            log_message_debug("Information: Parse integer.");
+            log_message_debug("Information: Decode integer.");
 
             // The temporary null-terminated string.
             char* tmp = (char*) *NULL_POINTER;
@@ -107,17 +108,17 @@ void parse_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         } else {
 
-            log_message_debug("Could not parse integer. The destination is null.");
+            log_message_debug("Could not decode integer. The destination is null.");
         }
 
     } else {
 
-        log_message_debug("Could not parse integer. The source count is null.");
+        log_message_debug("Could not decode integer. The source count is null.");
     }
 }
 
 /**
- * Serialises the integer model and creates a byte stream from it.
+ * Encodes the integer model and creates a byte stream from it.
  *
  * @param p0 the destination character array (Hand over as reference!)
  * @param p1 the destination character array count
@@ -125,7 +126,7 @@ void parse_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
  * @param p3 the source integer
  * @param p4 the source integer count
  */
-void serialise_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void encode_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (p4 != *NULL_POINTER) {
 
@@ -143,11 +144,11 @@ void serialise_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                     char** d = (char**) p0;
 
-                    log_message_debug("Information: Serialise integer.");
+                    log_message_debug("Information: Encode integer.");
 
                     if (*sc > *NUMBER_0_INTEGER) {
 
-                        // CAUTION! Only serialise integer, if one exists!
+                        // CAUTION! Only encode integer, if one exists!
                         // Otherwise, the "snprintf" function call will cause a segmentation fault.
 
                         // The integer value.
@@ -181,32 +182,32 @@ void serialise_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                     } else {
 
-                        log_message_debug("Could not serialise integer. The source count is zero.");
+                        log_message_debug("Could not encode integer. The source count is zero.");
                     }
 
                 } else {
 
-                    log_message_debug("Could not serialise integer. The destination is null.");
+                    log_message_debug("Could not encode integer. The destination is null.");
                 }
 
             } else {
 
-                log_message_debug("Could not serialise integer. The destination count is null.");
+                log_message_debug("Could not encode integer. The destination count is null.");
             }
 
         } else {
 
-            log_message_debug("Could not serialise integer. The destination size is null.");
+            log_message_debug("Could not encode integer. The destination size is null.");
         }
 
     } else {
 
-        log_message_debug("Could not serialise integer. The source count is null.");
+        log_message_debug("Could not encode integer. The source count is null.");
     }
 }
 
 /**
- * Serialises the integer model and creates a wide character byte stream from it.
+ * Encodes the integer model and creates a wide character byte stream from it.
  *
  * @param p0 the destination wide character array (Hand over as reference!)
  * @param p1 the destination count
@@ -214,7 +215,7 @@ void serialise_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
  * @param p3 the source integer number
  * @param p4 the source count
  */
-void serialise_integer_wide(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void encode_integer_wide(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (p2 != *NULL_POINTER) {
 
@@ -228,7 +229,7 @@ void serialise_integer_wide(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 wchar_t** d = (wchar_t**) p0;
 
-                log_message_debug("Serialise integer into wide character.");
+                log_message_debug("Encode integer into wide character.");
 
                 // The integer value.
                 int* v = (int*) *NULL_POINTER;
@@ -255,7 +256,7 @@ void serialise_integer_wide(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     // Set destination string size one greater than the count
                     // to have space for the terminating null character and
                     // to avoid a zero value in case destination string size is zero.
-                    *ds = *ds * *WIDE_CHARACTER_VECTOR_REALLOCATE_FACTOR + *NUMBER_1_INTEGER;
+                    *ds = *ds * *WIDE_CHARACTER_VECTOR_REALLOCATION_FACTOR + *NUMBER_1_INTEGER;
 
                     // Reallocate destination string.
                     reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_ARRAY);
@@ -277,17 +278,17 @@ void serialise_integer_wide(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             } else {
 
-                log_message_debug("Could not serialise integer into wide character. The destination is null.");
+                log_message_debug("Could not encode integer into wide character. The destination is null.");
             }
 
         } else {
 
-            log_message_debug("Could not serialise integer into wide character. The destination count is null.");
+            log_message_debug("Could not encode integer into wide character. The destination count is null.");
         }
 
     } else {
 
-        log_message_debug("Could not serialise integer into wide character. The destination size is null.");
+        log_message_debug("Could not encode integer into wide character. The destination size is null.");
     }
 }
 

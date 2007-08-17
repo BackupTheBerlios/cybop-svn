@@ -24,7 +24,7 @@
  * - read data from a device into a byte array
  * - write data from a byte array to a device
  *
- * @version $Revision: 1.18 $ $Date: 2007-08-13 16:37:11 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2007-08-17 03:15:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -36,6 +36,7 @@
 #include "../globals/constants/cybol/cybol_model_constants.c"
 #include "../globals/constants/integer/integer_constants.c"
 #include "../globals/constants/memory_structure/array_constants.c"
+#include "../globals/constants/system/system_file_name_constants.c"
 #include "../memoriser/communicator/file_communicator.c"
 #include "../memoriser/communicator/ftp_communicator.c"
 #include "../memoriser/communicator/gnu_linux_console_communicator.c"
@@ -96,7 +97,7 @@ void read_data(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
         if (r != *NUMBER_0_INTEGER) {
 
             // CAUTION! Instead of a file name, the "stdint" standard intput file stream is handed over here!
-            read_file(p0, p1, p2, (void*) STANDARD_INPUT_FILE_NAME, (void*) STANDARD_INPUT_FILE_NAME_COUNT);
+            read_file(p0, p1, p2, (void*) INPUT_SYSTEM_FILE_NAME, (void*) INPUT_SYSTEM_FILE_NAME_COUNT);
         }
     }
 
@@ -202,7 +203,7 @@ void write_data(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
         if (r != *NUMBER_0_INTEGER) {
 
             // CAUTION! Instead of a file name, the "stdout" standard output file stream is handed over here!
-            write_file((void*) STANDARD_OUTPUT_FILE_NAME, (void*) STANDARD_OUTPUT_FILE_NAME_COUNT, p2, p3, p4);
+            write_file((void*) OUTPUT_SYSTEM_FILE_NAME, (void*) OUTPUT_SYSTEM_FILE_NAME_COUNT, p2, p3, p4);
         }
     }
 

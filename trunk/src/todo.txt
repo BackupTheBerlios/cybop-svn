@@ -7,146 +7,249 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.7 $ $Date: 2007-08-13 16:37:10 $ $Author: christian $
+# @version $Revision: 1.8 $ $Date: 2007-08-17 03:15:31 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-- complete "url_escape_code_mapper.c" and "html_character_mapper.c"
-- split receive_socket and put HTTP conversion into http_converter.c file,
-    since it is independent from TCP/IP
-- parse HTML message header and message-body and add the entries to the knowledge model that was handed over
+        * CHECK: Replace "(int*) NULL_POINTER_ARRAY" initialisation in "variables.c" with "(int*) *NULL_POINTER";
+            the old initialisation was actually a void** casted to an int* and therefore not correct, even if it was working
 
-- replace parse/ serialise with more neutral decode/ encode (?)
-- think about names for "map" functions
+        * Complete "html_character_mapper.c"
 
-- add correct LOG_LEVEL constant to all log messages of all source code files,
-    so that the correct prefix (information, warning, error, debug) appears;
-    delete "Information: " etc. which are written directly into log message
-- mention parameters in comment block of all CYBOL operations
+        * Add an extra character code set for &quot; and &amp; etc. and use an OR || when parsing HTML!
+            The following list contains only those characters, for which a name like "&euro" exists; others have been deleted:
+            Symbol Code Entity Name
+            €     &euro;
+            "  &#34;  &quot;
+            &  &#38;  &amp;
+            <  &#60;  &lt;
+            >  &#62;  &gt;
+            Non-breaking space  &#160;  &nbsp;
+            ¡  &#161;  &iexcl;
+            ¢  &#162;  &cent;
+            £  &#163;  &pound;
+            ¤  &#164;  &curren;
+            ¥  &#165;  &yen;
+            ¦  &#166;  &brvbar;
+            §  &#167;  &sect;
+            ¨  &#168;  &uml;
+            ©  &#169;  &copy;
+            ª  &#170;  &ordf;
+            «  &#171;
+            ¬  &#172;  &not;
+            ­  &#173;  &shy;
+            ®  &#174;  &reg;
+            ¯  &#175;  &macr;
+            °  &#176;  &deg;
+            ±  &#177;  &plusmn;
+            ²  &#178;  &sup2;
+            ³  &#179;  &sup3;
+            ´  &#180;  &acute;
+            µ  &#181;  &micro;
+            &#182;  &para;
+            ·  &#183;  &middot;
+            ¸  &#184;  &cedil;
+            ¹  &#185;  &sup1;
+            º  &#186;  &ordm;
+            »  &#187;  &raquo;
+            ¼  &#188;  &frac14;
+            ½  &#189;  &frac12;
+            ¾  &#190;  &frac34;
+            ¿  &#191;  &iquest;
+            À  &#192;  &Agrave;
+            Á  &#193;  &Aacute;
+            Â  &#194;  Â
+            Ã  &#195;  &Atilde;
+            Ä  &#196;  &Auml;
+            Å  &#197  &Aring;
+            Æ  &#198;  &AElig;
+            Ç  &#199;  &Ccedil;
+            È  &#200;  &Egrave;
+            É  &#201;  &Eacute;
+            Ê  &#202;  &Ecirc;
+            Ë  &#203;  Ë
+            Ì  &#204;  &Igrave;
+            &#205;  &Iacute;
+            Î  &#206;  &Icirc;
+            &#207;  &Iuml;
+            Ð  &#208;  &ETH;
+            &#209;  &Ntilde;
+            &#210;  &Ograve;
+            Ó  &#211;  &Oacute;
+            Ô  &#212;  &Ocirc;
+            Õ  &#213;  &Otilde;
+            Ö  &#214;  &Ouml;
+            ×  &#215;  &times;
+            Ø  &#216;  &Oslash;
+            Ù  &#217;  &Ugrave;
+            Ú  &#218;  &Uacute;
+            Û  &#219;  &Ucirc;
+            Ü  &#220;  &Uuml;
+            Ý  &#221;  &Yacute;
+            Þ  &#222;  &THORN;
+            ß  &#223;  &szlig;
+            à  &#224;  &agrave;
+            á  &#225;  &aacute;
+            â  &#226;  &acirc;
+            ã  &#227;  &atilde;
+            ä  &#228;  &auml;
+            å  &#229;  &aring;
+            &#230;  &aelig;
+            ç  &#231;  &ccedil;
+            &#232;  &egrave;
+            &#233;  &eacute;
+            ê  &#234;  &ecirc;
+            ë  &#235;  &euml;
+            ì  &#236;  &igrave;
+            í  &#237  &iacute;
+            î  &#238;  &icirc;
+            ï  &#239;  &iuml;
+            ð  &#240;  &eth;
+            ñ  &#241;  &ntilde;
+            ò  &#242;  &ograve;
+            ó  &#243;  &oacute;
+            &#244;  &ocirc;
+            õ  &#245;  &otilde;
+            ö  &#246;  &ouml;
+            ÷  &#247;  &divide;
+            ø  &#248;  &oslash;
+            ù  &#249;  &ugrave;
+            ú  &#250;  &uacute;
+            û  &#251;  &ucirc;
+            ü  &#252;  &uuml;
+            ý  &#253;  &yacute;
+            þ  &#254;  &thorn;
+            ÿ  &#255;
 
-- implement configure/ make setup (standard configure and make options),
-for example using automake/autoconf
-http://gnu.org/software/automake
-there are various tutorials and examples around, such as GNU Hello:
-http://gnu.org/software/hello
-http://www.gnu.org/prep/standards/html_node/Configuration.html
-http://www.gnu.org/prep/standards/html_node/Makefile-Conventions.html
+        * Split receive_socket and put HTTP conversion into http_converter.c file,
+            since it is independent from TCP/IP
+        * Parse HTML message header and message-body and add the entries to the knowledge model that was handed over
+        * Add correct LOG_LEVEL constant to all log messages of all source code files,
+            so that the correct prefix (information, warning, error, debug) appears;
+            delete "Information: " etc. which are written directly into log message
+        * Mention parameters in comment block of all CYBOL operations
 
-- the tarball should unpack into a single directory, like cybop-0.8.0/
+        * Implement configure/ make setup (standard configure and make options),
+        for example using automake/autoconf
+        http://gnu.org/software/automake
+        there are various tutorials and examples around, such as GNU Hello:
+        http://gnu.org/software/hello
+        http://www.gnu.org/prep/standards/html_node/Configuration.html
+        http://www.gnu.org/prep/standards/html_node/Makefile-Conventions.html
 
-- include the sources of all documents into the tarball
+        * Ensure distributable tarball unpacks into a single directory, like cybop-0.8.0/
+        * Include the sources of all documents into the tarball
 
-- write an actual manual that is updated as necessary to reflect the current
-state of cybop; just looking at the papers, it is hard to know what is
-current and what is not; in the meantime, one thing that would help is some
-kind of brief overview of the papers -- especially which ones should be read
-first if someone was trying to use the system; also cautioning about ones
-that are partly outdated, etc.; the list of purported "tutorials" doesn't
-really make sense to beginners either
+        * Write an actual manual that is updated as necessary to reflect the current
+        state of cybop; just looking at the papers, it is hard to know what is
+        current and what is not; in the meantime, one thing that would help is some
+        kind of brief overview of the papers -- especially which ones should be read
+        first if someone was trying to use the system; also cautioning about ones
+        that are partly outdated, etc.; the list of purported "tutorials" doesn't
+        really make sense to beginners either
 
-- if parts exist, then a new part with the same name (stemming from the same
-    model or its super category) must NOT be created!
---> Prevent this in CYBOI, using conditions
+        * Rename several things in CYBOL files and CYBOI:
+        --> the XML tag descriptions (part, property, constraint) in a CYBOL file are special cases with the
+            exception that "create" and "receive" information are mixed, in order to serialise models easily;
+        --> rename "abstraction" attribute to "language" for all CYBOL tags!
+        --> rename "model" attribute to "message" for all CYBOL tags!
+        --> a "model" attribute (with new meaning as knowledge model to store received data) is not needed,
+            as it gets created internally
+        --> an "element" attribute is not needed, as the CYBOL structure determines parts and properties
+        --> a "whole" attribute is not needed, as due to the CYBOL structure it is clear that
+                parts belong to the compound in whose file they stand
+        --> a "receiver" attribute is not needed as it is clear that this cyboi system itself is the receiver
 
-The XML tag descriptions (part, property, constraint) in a CYBOL file are special cases with the
-    exception that "create" and "receive" information are mixed, in order to serialise models easily;
---> rename "abstraction" attribute to "language" for all CYBOL tags!
---> rename "model" attribute to "message" for all CYBOL tags!
---> a "model" attribute (with new meaning as knowledge model to store received data) is not needed,
-    as it gets created internally
---> an "element" attribute is not needed, as the CYBOL structure determines parts and properties
---> a "whole" attribute is not needed, as due to the CYBOL structure it is clear that
-        parts belong to the compound in whose file they stand
---> a "receiver" attribute is not needed as it is clear that this cyboi system itself is the receiver
+        * Check out handling of "super" property:
 
+        --> if parts exist, then a new part with the same name (stemming from the same
+            model or its super category) must NOT be created!
+        --> prevent this in CYBOI, using conditions
 
-How to implement "super" models?
-________________________________
+        --> only one (super) category makes sense, because templates/ models
+        belong to a certain dimension like: TUI, GUI, WUI, domain model;
+        so the upper-most category for a tui model may be one that
+        provides ALL essential properties like "shape", "border", "background" etc.
 
-- only one (super) category makes sense, because templates/ models
-belong to a certain dimension like: TUI, GUI, WUI, domain model;
-so the upper-most category for a tui model may be one that
-provides ALL essential properties like "shape", "border", "background" etc.
+        Q: Why should a tui knowledge template NOT be implemented with properties of abstraction "knowledge" or "encapsulated", as follows:
 
-Q: Why should a tui knowledge template NOT be implemented with properties of abstraction "knowledge" or "encapsulated", as follows:
+            <part name="apw_entry" channel="inline" abstraction="character" model="a - Starte Arztpraxis Wiegand (APW) im DOS Emulator (DOSemu)">
+                <property name="position" channel="inline" abstraction="integer" model="1,3,0"/>
+                <property name="size" channel="inline" abstraction="integer" model="68,1,1"/>
+                <property name="shape" channel="inline" abstraction="knowledge" model=".revue.settings.tui.shape"/>
+                <property name="layout" channel="inline" abstraction="knowledge" model=".revue.settings.tui.layout"/>
+                <property name="background" channel="inline" abstraction="knowledge" model=".revue.settings.tui.menu_item_background"/>
+                <property name="foreground" channel="inline" abstraction="knowledge" model=".revue.settings.tui.menu_item_foreground"/>
+                <property name="bold" channel="inline" abstraction="knowledge" model=".revue.settings.tui.bold"/>
+                <property name="previous" channel="inline" abstraction="character" model=".revue.tui.main_window.menu.exit_entry"/>
+                <property name="next" channel="inline" abstraction="character" model=".revue.tui.main_window.menu.backup_entry"/>
+                <property name="button_press_action" channel="inline" abstraction="character" model=".revue.logic.functionality.start_apw"/>
+            </part>
 
-    <part name="apw_entry" channel="inline" abstraction="character" model="a - Starte Arztpraxis Wiegand (APW) im DOS Emulator (DOSemu)">
-        <property name="position" channel="inline" abstraction="integer" model="1,3,0"/>
-        <property name="size" channel="inline" abstraction="integer" model="68,1,1"/>
-        <property name="shape" channel="inline" abstraction="knowledge" model=".revue.settings.tui.shape"/>
-        <property name="layout" channel="inline" abstraction="knowledge" model=".revue.settings.tui.layout"/>
-        <property name="background" channel="inline" abstraction="knowledge" model=".revue.settings.tui.menu_item_background"/>
-        <property name="foreground" channel="inline" abstraction="knowledge" model=".revue.settings.tui.menu_item_foreground"/>
-        <property name="bold" channel="inline" abstraction="knowledge" model=".revue.settings.tui.bold"/>
-        <property name="previous" channel="inline" abstraction="character" model=".revue.tui.main_window.menu.exit_entry"/>
-        <property name="next" channel="inline" abstraction="character" model=".revue.tui.main_window.menu.backup_entry"/>
-        <property name="button_press_action" channel="inline" abstraction="character" model=".revue.logic.functionality.start_apw"/>
-    </part>
+        A1: Because the user interface logic "select_next_part.cybol" and "select_previous_part.cybol",
+        and potentially other logic templates do access the properties, in order to set their value, for example:
 
-A1: Because the user interface logic "select_next_part.cybol" and "select_previous_part.cybol",
-and potentially other logic templates do access the properties, in order to set their value, for example:
+            <part name="assemble_current_element_background" channel="inline" abstraction="operation" model="add">
+                <property name="summand_1" channel="inline" abstraction="knowledge" model=".revue.tui.main_window.menu#focus"/>
+                <property name="summand_2" channel="inline" abstraction="character" model="#background"/>
+                <property name="sum" channel="inline" abstraction="knowledge" model=".revue.temporary.character"/>
+                <property name="abstraction" channel="inline" abstraction="character" model="character"/>
+            </part>
+            <part name="unfocus_background" channel="inline" abstraction="operation" model="copy">
+                <property name="source" channel="inline" abstraction="knowledge" model=".revue.settings.tui.menu_item_background"/>
+                <property name="destination" channel="inline" abstraction="encapsulated" model=".revue.temporary.character"/>
+                <property name="abstraction" channel="inline" abstraction="character" model="character"/>
+            </part>
 
-    <part name="assemble_current_element_background" channel="inline" abstraction="operation" model="add">
-        <property name="summand_1" channel="inline" abstraction="knowledge" model=".revue.tui.main_window.menu#focus"/>
-        <property name="summand_2" channel="inline" abstraction="character" model="#background"/>
-        <property name="sum" channel="inline" abstraction="knowledge" model=".revue.temporary.character"/>
-        <property name="abstraction" channel="inline" abstraction="character" model="character"/>
-    </part>
-    <part name="unfocus_background" channel="inline" abstraction="operation" model="copy">
-        <property name="source" channel="inline" abstraction="knowledge" model=".revue.settings.tui.menu_item_background"/>
-        <property name="destination" channel="inline" abstraction="encapsulated" model=".revue.temporary.character"/>
-        <property name="abstraction" channel="inline" abstraction="character" model="character"/>
-    </part>
+        This copies a new background colour value from ".revue.settings.tui.menu_item_background" to the
+        destination element's property "#background", which is stored in ".revue.temporary.character".
+        But by copying the colour value to the "#background" property, that property does not contain
+        a knowledge path of the kind ".revue.settings.tui.menu_item_background" anymore, but rather
+        a simple colour value like "blue". At that time, the abstraction "knowledge" would NOT be
+        correct anymore, because the simple colour value is of abstraction "character" instead.
 
-This copies a new background colour value from ".revue.settings.tui.menu_item_background" to the
-destination element's property "#background", which is stored in ".revue.temporary.character".
-But by copying the colour value to the "#background" property, that property does not contain
-a knowledge path of the kind ".revue.settings.tui.menu_item_background" anymore, but rather
-a simple colour value like "blue". At that time, the abstraction "knowledge" would NOT be
-correct anymore, because the simple colour value is of abstraction "character" instead.
+        A2: Even if CYBOI-internal procedures implemented a mechanism that tried to retrieve the
+        real model that a knowledge model path pointed to, this would NOT solve the problem!
+        The reason is that then not the actual value of the property would be set, but rather
+        the value of the standard setting (!) that the knowledge path pointed to.
 
-A2: Even if CYBOI-internal procedures implemented a mechanism that tried to retrieve the
-real model that a knowledge model path pointed to, this would NOT solve the problem!
-The reason is that then not the actual value of the property would be set, but rather
-the value of the standard setting (!) that the knowledge path pointed to.
+        --> RULE to avoid the problems described in A1 and A2:
+        Single properties of a textual user interface (tui) should not be stored as knowledge path
+        of abstraction "knowledge" or "encapsulated", but always as primitive values.
+        To ease application development, however, there is the possibility to use the "super" property,
+        which permits the inheritance of properties like colours etc. Following an example:
 
---> RULE to avoid the problems described in A1 and A2:
-Single properties of a textual user interface (tui) should not be stored as knowledge path
-of abstraction "knowledge" or "encapsulated", but always as primitive values.
-To ease application development, however, there is the possibility to use the "super" property,
-which permits the inheritance of properties like colours etc. Following an example:
+            <part name="main_window" channel="file" abstraction="compound" model="revue/tui/main_window/window.cybol">
+                <property name="super" channel="inline" abstraction="knowledge" model=".revue.settings.tui.window"/>
+                <property name="position" channel="inline" abstraction="integer" model="0,0,0"/>
+                <property name="size" channel="inline" abstraction="integer" model="80,24,1"/>
+            </part>
 
-    <part name="main_window" channel="file" abstraction="compound" model="revue/tui/main_window/window.cybol">
-        <property name="super" channel="inline" abstraction="knowledge" model=".revue.settings.tui.window"/>
-        <property name="position" channel="inline" abstraction="integer" model="0,0,0"/>
-        <property name="size" channel="inline" abstraction="integer" model="80,24,1"/>
-    </part>
+        A corresponding settings file may look like this:
 
-A corresponding settings file may look like this:
+        <model>
+            <part name="shape" channel="inline" abstraction="character" model="rectangle"/>
+            <part name="layout" channel="inline" abstraction="character" model="coordinates"/>
+            <part name="background" channel="inline" abstraction="character" model="blue"/>
+            <part name="foreground" channel="inline" abstraction="character" model="white"/>
+            <part name="bold" channel="inline" abstraction="boolean" model="true"/>
+        </model>
 
-<model>
-    <part name="shape" channel="inline" abstraction="character" model="rectangle"/>
-    <part name="layout" channel="inline" abstraction="character" model="coordinates"/>
-    <part name="background" channel="inline" abstraction="character" model="blue"/>
-    <part name="foreground" channel="inline" abstraction="character" model="white"/>
-    <part name="bold" channel="inline" abstraction="boolean" model="true"/>
-</model>
+        CAUTION! The solution proposed above does not (yet) work satisfyingly.
+        Only real properties of a knowledge template are created, but NOT those of a super model.
+        In other words, a created runtime knowledge model that links to a super model does not
+        own the properties of the super model itself. This causes a problem because logic templates
+        like "select_next_part.cybol" try to access the properties of a model DIRECTLY, for example
+        for setting a colour. But if the property does not exist in the model and only in its
+        super model, then it cannot be set.
 
-CAUTION! The solution proposed above does not (yet) work satisfyingly.
-Only real properties of a knowledge template are created, but NOT those of a super model.
-In other words, a created runtime knowledge model that links to a super model does not
-own the properties of the super model itself. This causes a problem because logic templates
-like "select_next_part.cybol" try to access the properties of a model DIRECTLY, for example
-for setting a colour. But if the property does not exist in the model and only in its
-super model, then it cannot be set.
-
---> TODO: For later versions of CYBOI, the super templates/ models must be handled better, either:
-1 at creation time in form of a super template whose properties would get instantiated for the model containing the super property
-    it is important that the super template should only deliver the properties for the current template,
-    but not be created (instantiated) itself (handle this in CYBOL parser or XML translator)
-2 at runtime, as it is done now in the tui, which gets the properties of a super model at runtime
-    the problem here is that the model does not really itself contain the properties of its super model,
-    as described above
-==> solution 1 seems desirable, but would need some thinking on how to implement this in CYBOI
-==> for now, as temporary solution, the properties are stored redundantly (twice) in the template
-    that needs them (for example "menu_item" entries in the resmedicinae-revue menu) and in its super template
+        --> TODO: For later versions of CYBOI, the super templates/ models must be handled better, either:
+        1 at creation time in form of a super template whose properties would get instantiated for the model containing the super property
+            it is important that the super template should only deliver the properties for the current template,
+            but not be created (instantiated) itself (handle this in CYBOL parser or XML translator)
+        2 at runtime, as it is done now in the tui, which gets the properties of a super model at runtime
+            the problem here is that the model does not really itself contain the properties of its super model,
+            as described above
+        ==> solution 1 seems desirable, but would need some thinking on how to implement this in CYBOI
+        ==> for now, as temporary solution, the properties are stored redundantly (twice) in the template
+            that needs them (for example "menu_item" entries in the resmedicinae-revue menu) and in its super template

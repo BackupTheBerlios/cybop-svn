@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.41 $ $Date: 2007-08-13 17:17:01 $ $Author: christian $
+ * @version $Revision: 1.42 $ $Date: 2007-08-17 03:15:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -35,6 +35,7 @@
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/logger/logger.c"
+#include "../../globals/variables/reallocation_factor_variables.c"
 #include "../../memoriser/allocator.c"
 #include "../../memoriser/array.c"
 
@@ -43,24 +44,7 @@
 //
 
 /**
- * Parses the byte stream according to the given document type
- * and creates a document model from it.
- *
- * @param p0 the destination model (Hand over as reference!)
- * @param p1 the destination model count
- * @param p2 the destination model size
- * @param p3 the destination details (Hand over as reference!)
- * @param p4 the destination details count
- * @param p5 the destination details size
- * @param p6 the source
- * @param p7 the source count
- * @param p8 the language
- * @param p9 the language count
- */
-//??void parse(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9);
-
-/**
- * Serialises the knowledge model according to the given knowledge type
+ * Encodes the knowledge model according to the given knowledge type
  * and creates a byte stream from it.
  *
  * @param p0 the destination (Hand over as reference!)
@@ -79,7 +63,7 @@
  * @param p13 the language
  * @param p14 the language count
  */
-void serialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
+void encode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
     void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14);
 
 //
@@ -902,7 +886,7 @@ void set_compound_element_by_index(void* p0, void* p1, void* p2, void* p3,
                                                                     if (*i >= *cs) {
 
                                                                         // Increase size.
-                                                                        *cs = (*cs * *COMPOUND_REALLOCATE_FACTOR) + *NUMBER_1_INTEGER;
+                                                                        *cs = (*cs * *COMPOUND_REALLOCATION_FACTOR) + *NUMBER_1_INTEGER;
 
                                                                         // Reallocate names, abstractions, models, details.
                                                                         reallocate_array(n, p1, p2, (void*) POINTER_ARRAY);
@@ -1142,7 +1126,7 @@ void add_compound_element_by_name(void* p0, void* p1, void* p2,
 
                 // Use compound count as index to create the element name suffix,
                 // because the element is added at the end of the compound container.
-                serialise((void*) &s, (void*) &sc, (void*) &ss, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, p1, (void*) PRIMITIVE_COUNT,
+                encode((void*) &s, (void*) &sc, (void*) &ss, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, p1, (void*) PRIMITIVE_COUNT,
                     *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
                 // Resize name.
@@ -1150,7 +1134,7 @@ void add_compound_element_by_name(void* p0, void* p1, void* p2,
 
                     // The new name character vector size.
                     // CAUTION! Add constant in case *nc is zero!
-                    *ns = (*nc * *CHARACTER_VECTOR_REALLOCATE_FACTOR) + *LIST_SEPARATOR_COUNT + sc;
+                    *ns = (*nc * *CHARACTER_VECTOR_REALLOCATION_FACTOR) + *LIST_SEPARATOR_COUNT + sc;
 
                     // Reallocate name character vector.
                     reallocate_array(p3, p4, p5, (void*) CHARACTER_ARRAY);
@@ -1516,15 +1500,15 @@ void reindex_compound_elements_forming_list(void* p0, void* p1, void* p2, int* p
 
                         *((int*) *nc) = *NUMBER_0_INTEGER;
 
-                        //parse the basisname
-                        parse(n, *nc, *ns, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, p2, p3, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
+                        // Decode the basisname
+                        decode(n, *nc, *ns, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, p2, p3, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
-                        //parse the list separator
-                        parse(n, *nc, *ns, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, LIST_SEPARATOR, LIST_SEPARATOR_COUNT, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
+                        // Decode the list separator
+                        decode(n, *nc, *ns, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, LIST_SEPARATOR, LIST_SEPARATOR_COUNT, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
-                        //parse the index
+                        // Decode the index
                         indexstr_count = snprintf(indexstr, indexstr_size, "%i", ic);
-                        parse(n, *nc, *ns, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, indexstr, &indexstr_count, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
+                        decode(n, *nc, *ns, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, indexstr, &indexstr_count, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
                         ic = ic + *NUMBER_1_INTEGER;
                     }

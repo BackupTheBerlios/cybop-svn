@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2007-08-13 16:37:12 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2007-08-17 03:15:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -45,7 +45,7 @@
  * @param reg_row_count return the count of the request row
  */
 /*??
-void parse_http_request_get_method(char* req, int* req_count, char** req_method, int* req_method_count) {
+void decode_http_request_get_method(char* req, int* req_count, char** req_method, int* req_method_count) {
 
     *req_method_count = *NUMBER_0_INTEGER;
 
@@ -91,7 +91,7 @@ void parse_http_request_get_method(char* req, int* req_count, char** req_method,
  * @param param_count the count from the parameter
  */
 /*??
-void parse_http_request_url(char* req, int* req_count, char** urlbase, int* urlbase_count) {
+void decode_http_request_url(char* req, int* req_count, char** urlbase, int* urlbase_count) {
 
     *urlbase_count = *NUMBER_0_INTEGER;
     int req_index = *NUMBER_0_INTEGER;
@@ -157,7 +157,7 @@ void parse_http_request_url(char* req, int* req_count, char** urlbase, int* urlb
  * @param p8 the url without "get" request method prefix
  * @param p9 the url count
  */
-void parse_http_request_get(void* p0, void* p1, void* p2, void* p3,
+void decode_http_request_get(void* p0, void* p1, void* p2, void* p3,
     void* p4, void* p5, void* p6, void* p7, void* p8, void* p9) {
 
     if (p9 != *NULL_POINTER) {
@@ -261,7 +261,7 @@ void parse_http_request_get(void* p0, void* p1, void* p2, void* p3,
  * @param p8 the url without "post" request method prefix
  * @param p9 the url count
  */
-void parse_http_request_post(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9) {
+void decode_http_request_post(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9) {
 
 /*??
     *param_count = *NUMBER_0_INTEGER;
@@ -446,7 +446,7 @@ void parse_http_request_post(void* p0, void* p1, void* p2, void* p3, void* p4, v
  * @param p8 the url
  * @param p9 the url count
  */
-void parse_http_request_method(void* p0, void* p1, void* p2, void* p3,
+void decode_http_request_method(void* p0, void* p1, void* p2, void* p3,
     void* p4, void* p5, void* p6, void* p7, void* p8, void* p9) {
 
     if (p9 != *NULL_POINTER) {
@@ -477,7 +477,7 @@ void parse_http_request_method(void* p0, void* p1, void* p2, void* p3,
 
 //??    fprintf(stderr, "TEST get request remaining url: %s\n", (char*) u);
 
-                parse_http_request_get(p0, p1, p2, p3, p4, p5, p6, p7, u, (void*) &uc);
+                decode_http_request_get(p0, p1, p2, p3, p4, p5, p6, p7, u, (void*) &uc);
             }
         }
 
@@ -496,7 +496,7 @@ void parse_http_request_method(void* p0, void* p1, void* p2, void* p3,
 
 //??    fprintf(stderr, "TEST post request remaining url: %s\n", (char*) u);
 
-                parse_http_request_post(p0, p1, p2, p3, p4, p5, p6, p7, u, (void*) &uc);
+                decode_http_request_post(p0, p1, p2, p3, p4, p5, p6, p7, u, (void*) &uc);
             }
         }
 
@@ -507,7 +507,7 @@ void parse_http_request_method(void* p0, void* p1, void* p2, void* p3,
 }
 
 /**
- * Parses an http request into a compound.
+ * Decodes an http request into a compound.
  *
  * @param p0 the destination compound (Hand over as reference!)
  * @param p1 the destination compound count
@@ -515,13 +515,13 @@ void parse_http_request_method(void* p0, void* p1, void* p2, void* p3,
  * @param p3 the source http request
  * @param p4 the source http request count
  */
-void parse_http_request(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void decode_http_request(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    log_message_debug("Information: Parse http request.");
+    log_message_debug("Information: Decode http request.");
 }
 
 /**
- * Serialises a compound into an http request.
+ * Encodes a compound into an http request.
  *
  * @param p0 the destination http request (Hand over as reference!)
  * @param p1 the destination http request count
@@ -535,10 +535,10 @@ void parse_http_request(void* p0, void* p1, void* p2, void* p3, void* p4) {
  * @param p9 the knowledge memory
  * @param p10 the knowledge memory count
  */
-void serialise_http_request(void* p0, void* p1, void* p2, void* p3, void* p4,
+void encode_http_request(void* p0, void* p1, void* p2, void* p3, void* p4,
     void* p5, void* p6, void* p7, void* p8, void* p9, void* p10) {
 
-    log_message_debug("Information: Serialise http request.");
+    log_message_debug("Information: Encode http request.");
 }
 
 /* HTTP_REQUEST_CONVERTER_SOURCE */

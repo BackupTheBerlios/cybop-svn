@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2007-06-22 07:07:14 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2007-08-17 03:15:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -41,8 +41,8 @@
 #include "../../globals/constants/integer/integer_constants.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../../globals/constants/pointer/pointer_constants.c"
-#include "../../globals/constants/system_constants.c"
-#include "../../globals/variables/variables.c"
+#include "../../globals/variables/service_interrupt_variables.c"
+#include "../../globals/variables/thread_identification_variables.c"
 #include "../../memoriser/accessor.c"
 #include "../../memoriser/array.c"
 
@@ -54,7 +54,7 @@ void interrupt_socket() {
     log_message_debug("Interrupt socket service.");
 
 /*??
-    if (*WWW_SERVICE_THREAD != *INVALID_VALUE) {
+    if (*WWW_SERVICE_THREAD != *NUMBER_MINUS_1_INTEGER) {
 
         // Set thread interrupt flag for signal handler.
         *WWW_SERVICE_THREAD_INTERRUPT = *NUMBER_1_INTEGER;
@@ -76,7 +76,7 @@ void interrupt_socket() {
         pthread_join(*WWW_SERVICE_THREAD, *NULL_POINTER);
 
         // Reset thread.
-        *WWW_SERVICE_THREAD = *INVALID_VALUE;
+        *WWW_SERVICE_THREAD = *NUMBER_MINUS_1_INTEGER;
 
         // Reset thread interrupt flag for signal handler.
         *WWW_SERVICE_THREAD_INTERRUPT = *NUMBER_0_INTEGER;
@@ -87,7 +87,7 @@ void interrupt_socket() {
     }
 */
 
-    if (*CYBOI_SERVICE_THREAD != *INVALID_VALUE) {
+    if (*CYBOI_SERVICE_THREAD != *NUMBER_MINUS_1_INTEGER) {
 
     fprintf(stderr, "TEST: interrupt socket 0 thread: %i \n", *CYBOI_SERVICE_THREAD);
 
@@ -117,7 +117,7 @@ void interrupt_socket() {
     fprintf(stderr, "TEST: interrupt socket 3 thread irq flag: %i \n", *CYBOI_SERVICE_THREAD_INTERRUPT);
 
         // Reset thread.
-        *CYBOI_SERVICE_THREAD = *INVALID_VALUE;
+        *CYBOI_SERVICE_THREAD = *NUMBER_MINUS_1_INTEGER;
 
     fprintf(stderr, "TEST: interrupt socket 4 thread irq flag: %i \n", *CYBOI_SERVICE_THREAD_INTERRUPT);
 

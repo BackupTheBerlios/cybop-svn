@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.14 $ $Date: 2007-06-24 15:02:21 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2007-08-17 03:15:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -32,7 +32,6 @@
 #include "../../globals/constants/log/log_message_constants.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../../globals/constants/pointer/pointer_constants.c"
-#include "../../globals/constants/system_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../globals/variables/variables.c"
 #include "../../memoriser/accessor.c"
@@ -106,7 +105,7 @@ void startup_internal_memory(void* p0, void* p1, void* p2, void* p3, void* p4, v
     //
 
     // The internal memory index.
-    int i = *INVALID_VALUE;
+    int i = *NUMBER_MINUS_1_INTEGER;
 
     // Set knowledge memory internals.
     set_element(p0, (void*) KNOWLEDGE_MEMORY_INTERNAL, p1, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);

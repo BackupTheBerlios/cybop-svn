@@ -24,7 +24,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.10 $ $Date: 2007-08-13 16:37:11 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2007-08-17 03:15:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -60,7 +60,7 @@
 #include "../globals/constants/integer/integer_constants.c"
 #include "../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../globals/constants/pointer/pointer_constants.c"
-#include "../globals/variables/variables.c"
+#include "../globals/variables/primitive_type_size_variables.c"
 #include "../memoriser/accessor/compound_accessor.c"
 #include "../memoriser/allocator.c"
 #include "../memoriser/array.c"
@@ -327,13 +327,13 @@ void test_integer_array() {
     fprintf(stderr, "pre m: %i\n", *m);
 
     //
-    // Use either the "parse" function or the three "set" functions below.
+    // Use either the "decode" function or the three "set" functions below.
     // Both possibilities should have the same functionality and results.
     //
 
 /*??
-    // Parse test value and assign to test knowledge model.
-    parse((void*) &m, (void*) mc, (void*) ms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
+    // Decode (parse) test value and assign to test knowledge model.
+    decode((void*) &m, (void*) mc, (void*) ms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
         (void*) test, (void*) &testc, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 */
 
@@ -1059,11 +1059,11 @@ void test_mesa_opengl() {
 //?? }
 
 /**
- * Tests the parse integer vector function.
+ * Tests the decode integer vector function.
  */
-void test_parse_integer_vector() {
+void test_decode_integer_vector() {
 
-    fputs("Test parse integer vector:\n", stdout);
+    fputs("Test decode integer vector:\n", stdout);
 
     // The source character array.
     char sa[] = {'1', ',', '2', ',', '3', ',', '4', ',', '5'};
@@ -1078,8 +1078,8 @@ void test_parse_integer_vector() {
     // Allocate integer vector.
     allocate((void*) &d, (void*) &ds, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
-    // Parse character array into integer vector.
-    parse_integer_vector((void*) &d, (void*) &dc, (void*) &ds, s, (void*) &sc);
+    // Decode character array into integer vector.
+    decode_integer_vector((void*) &d, (void*) &dc, (void*) &ds, s, (void*) &sc);
 
     // The integer values.
     int* i0 = (int*) *NULL_POINTER;
@@ -1102,11 +1102,11 @@ void test_parse_integer_vector() {
 }
 
 /**
- * Tests the serialise integer vector function.
+ * Tests the encode integer vector function.
  */
-void test_serialise_integer_vector() {
+void test_encode_integer_vector() {
 
-    fputs("Test serialise integer vector:\n", stdout);
+    fputs("Test encode integer vector:\n", stdout);
 
     // The source integer array.
     int sa[] = {'1', '2', '3'};
@@ -1123,22 +1123,22 @@ void test_serialise_integer_vector() {
 
     // Use compound count as index to create the element name suffix,
     // because the element is added at the end of the compound container.
-    serialise_integer_vector((void*) &d, (void*) &dc, (void*) &ds, s, (void*) &sc);
+    encode_integer_vector((void*) &d, (void*) &dc, (void*) &ds, s, (void*) &sc);
 
-    fprintf(stdout, "Serialised character array: %s\n", d);
-    fprintf(stdout, "Serialised character array count: %i\n", dc);
-    fprintf(stdout, "Serialised character array size: %i\n", ds);
+    fprintf(stdout, "Encoded character array: %s\n", d);
+    fprintf(stdout, "Encoded character array count: %i\n", dc);
+    fprintf(stdout, "Encoded character array size: %i\n", ds);
 
     // Deallocate destination character vector.
     deallocate((void*) &d, (void*) &ds, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
 }
 
 /**
- * Tests the serialise integer function.
+ * Tests the encode integer function.
  */
-void test_serialise_integer() {
+void test_encode_integer() {
 
-    fputs("Test serialise integer:\n", stdout);
+    fputs("Test encode integer:\n", stdout);
 
     // The destination character array.
     char* d = (char*) *NULL_POINTER;
@@ -1153,7 +1153,7 @@ void test_serialise_integer() {
 
     // Use compound count as index to create the element name suffix,
     // because the element is added at the end of the compound container.
-    serialise_integer((void*) &d, (void*) &dc, (void*) &ds, (void*) &s, (void*) PRIMITIVE_COUNT);
+    encode_integer((void*) &d, (void*) &dc, (void*) &ds, (void*) &s, (void*) PRIMITIVE_COUNT);
 
     fprintf(stdout, "Test: Destination character array: %s\n", d);
     fprintf(stdout, "Test: Destination character array count: %i\n", dc);
@@ -1279,9 +1279,9 @@ void test() {
 //??    test_file_write();
 //??    test_console();
 //??    test_mesa_opengl(*NUMBER_0_INTEGER, (char**) NULL_POINTER);
-//??    test_parse_integer_vector();
-//??    test_serialise_integer_vector();
-//??    test_serialise_integer();
+//??    test_decode_integer_vector();
+//??    test_encode_integer_vector();
+//??    test_encode_integer();
 //??    test_float_constants();
 }
 

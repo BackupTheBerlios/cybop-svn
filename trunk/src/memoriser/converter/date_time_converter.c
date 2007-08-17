@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2007-08-13 16:37:12 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2007-08-17 03:15:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -34,10 +34,11 @@
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/logger/logger.c"
+#include "../../globals/variables/reallocation_factor_variables.c"
 #include "../../memoriser/allocator.c"
 
 /**
- * Parses the byte stream and creates a date time model from it.
+ * Decodes the byte stream and creates a date time model from it.
  *
  * ISO time format:
  * YYYY-MM-DDThh:mm:ss
@@ -55,7 +56,7 @@
  * @param p3 the source
  * @param p4 the source count
  */
-void parse_date_time(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void decode_date_time(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (p4 != *NULL_POINTER) {
 
@@ -69,26 +70,26 @@ void parse_date_time(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 void** d = (void**) p0;
 
-                log_message_debug("Information: Parse date time.");
+                log_message_debug("Information: Decode date time.");
 
             } else {
 
-                log_message_debug("Error: Could not parse date time. The destination is null.");
+                log_message_debug("Error: Could not decode date time. The destination is null.");
             }
 
         } else {
 
-            log_message_debug("Error: Could not parse date time. The source is null.");
+            log_message_debug("Error: Could not decode date time. The source is null.");
         }
 
     } else {
 
-        log_message_debug("Error: Could not parse date time. The source count is null.");
+        log_message_debug("Error: Could not decode date time. The source count is null.");
     }
 }
 
 /**
- * Serialises the date time model and creates a byte stream from it.
+ * Encodes the date time model and creates a byte stream from it.
  *
  * @param p0 the destination (Hand over as reference!)
  * @param p1 the destination count
@@ -96,11 +97,11 @@ void parse_date_time(void* p0, void* p1, void* p2, void* p3, void* p4) {
  * @param p3 the source
  * @param p4 the source count
  */
-void serialise_date_time(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void encode_date_time(void* p0, void* p1, void* p2, void* p3, void* p4) {
 }
 
 /**
- * Parses the ddmmyyyy byte stream and creates a date time model from it.
+ * Decodes the ddmmyyyy byte stream and creates a date time model from it.
  *
  * @param p0 the destination (Hand over as reference!)
  * @param p1 the destination count
@@ -108,7 +109,7 @@ void serialise_date_time(void* p0, void* p1, void* p2, void* p3, void* p4) {
  * @param p3 the source
  * @param p4 the source count
  */
-void parse_ddmmyyyy_date_time(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void decode_ddmmyyyy_date_time(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (p4 != *NULL_POINTER) {
 
@@ -128,7 +129,7 @@ void parse_ddmmyyyy_date_time(void* p0, void* p1, void* p2, void* p3, void* p4) 
 
                     if (*sc == *NUMBER_8_INTEGER) {
 
-                        log_message_debug("Information: Parse ddmmyyyy date time.");
+                        log_message_debug("Information: Decode ddmmyyyy date time.");
 
                         // The temporary null-terminated day string.
                         char* tmpd = (char*) *NULL_POINTER;
@@ -210,7 +211,7 @@ void parse_ddmmyyyy_date_time(void* p0, void* p1, void* p2, void* p3, void* p4) 
                         if (*dc >= *ds) {
 
                             // Calculate new date time size.
-                            *ds = *ds * *INTEGER_VECTOR_REALLOCATE_FACTOR + *NUMBER_1_INTEGER;
+                            *ds = *ds * *INTEGER_VECTOR_REALLOCATION_FACTOR + *NUMBER_1_INTEGER;
 
                             // Reallocate date time.
                             reallocate(p0, p1, p2, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
@@ -236,32 +237,32 @@ void parse_ddmmyyyy_date_time(void* p0, void* p1, void* p2, void* p3, void* p4) 
 
                     } else {
 
-                        log_message_debug("Error: Could not parse ddmmyyyy date time. The source count is unequal eight characters.");
+                        log_message_debug("Error: Could not decode ddmmyyyy date time. The source count is unequal eight characters.");
                     }
 
                 } else {
 
-                    log_message_debug("Error: Could not parse ddmmyyyy date time. The destination is null.");
+                    log_message_debug("Error: Could not decode ddmmyyyy date time. The destination is null.");
                 }
 
             } else {
 
-                log_message_debug("Error: Could not parse ddmmyyyy date time. The destination count is null.");
+                log_message_debug("Error: Could not decode ddmmyyyy date time. The destination count is null.");
             }
 
         } else {
 
-            log_message_debug("Error: Could not parse ddmmyyyy date time. The destination size is null.");
+            log_message_debug("Error: Could not decode ddmmyyyy date time. The destination size is null.");
         }
 
     } else {
 
-        log_message_debug("Error: Could not parse ddmmyyyy date time. The source count is null.");
+        log_message_debug("Error: Could not decode ddmmyyyy date time. The source count is null.");
     }
 }
 
 /**
- * Serialises the date time model and creates a ddmmyyyy byte stream from it.
+ * Encodes the date time model and creates a ddmmyyyy byte stream from it.
  *
  * @param p0 the destination (Hand over as reference!)
  * @param p1 the destination count
@@ -269,7 +270,7 @@ void parse_ddmmyyyy_date_time(void* p0, void* p1, void* p2, void* p3, void* p4) 
  * @param p3 the source
  * @param p4 the source count
  */
-void serialise_ddmmyyyy_date_time(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void encode_ddmmyyyy_date_time(void* p0, void* p1, void* p2, void* p3, void* p4) {
 }
 
 /* DATE_TIME_CONVERTER_SOURCE */

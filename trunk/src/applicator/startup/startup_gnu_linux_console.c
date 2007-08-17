@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2007-06-24 15:02:21 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2007-08-17 03:15:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -36,8 +36,8 @@
 #include "../../globals/constants/log/log_message_constants.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../../globals/constants/pointer/pointer_constants.c"
-#include "../../globals/variables/variables.c"
 #include "../../globals/logger/logger.c"
+#include "../../globals/variables/thread_identification_variables.c"
 #include "../../memoriser/accessor.c"
 #include "../../memoriser/allocator.c"
 

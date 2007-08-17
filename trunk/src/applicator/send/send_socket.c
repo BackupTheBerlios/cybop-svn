@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.21 $ $Date: 2007-08-13 16:37:11 $ $Author: christian $
+ * @version $Revision: 1.22 $ $Date: 2007-08-17 03:15:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -45,7 +45,6 @@
 #include "../../globals/constants/log/log_message_constants.c"
 #include "../../globals/constants/mime_type/text_mime_type_constants.c"
 #include "../../globals/constants/pointer/pointer_constants.c"
-#include "../../globals/constants/system_constants.c"
 #include "../../globals/logger/logger.c"
 
 /**
@@ -67,7 +66,7 @@ void send_socket_get_socket_server_mode(void* p0, void* p1, void* p2) {
         log_message_debug("Information: Get socket for server mode.");
 
         // The internal memory index.
-        int i = *INVALID_VALUE;
+        int i = *NUMBER_MINUS_1_INTEGER;
         // The socket mutex.
         pthread_mutex_t** mt = (pthread_mutex_t**) NULL_POINTER;
 
@@ -251,7 +250,7 @@ void send_socket_set_nonblocking_mode(void* p0) {
         // Get file status flags.
         int fl = fcntl(*s, F_GETFL, NUMBER_0_INTEGER);
 
-        if (fl != *INVALID_VALUE) {
+        if (fl != *NUMBER_MINUS_1_INTEGER) {
 
             // Set non-blocking flag (bit).
             fl |= O_NONBLOCK;
@@ -481,11 +480,11 @@ void send_socket(void* p0, void* p1, void* p2, void* p3,
     log_message_debug("Information: Send message via socket.");
 
     // The communication style.
-    int st = *INVALID_VALUE;
+    int st = *NUMBER_MINUS_1_INTEGER;
     // The socket namespace.
-    int sn = *INVALID_VALUE;
+    int sn = *NUMBER_MINUS_1_INTEGER;
     // The address namespace.
-    int an = *INVALID_VALUE;
+    int an = *NUMBER_MINUS_1_INTEGER;
     // The socket of this system.
     int** s = (int**) NULL_POINTER;
     // The host address of the communication partner.
@@ -494,7 +493,7 @@ void send_socket(void* p0, void* p1, void* p2, void* p3,
     void* sa = *NULL_POINTER;
     // The socket address size of the communication partner.
     int sas = *NUMBER_0_INTEGER;
-    // The http body character vector as serialised model.
+    // The http body character vector as encoded (serialised) model.
     void* b = *NULL_POINTER;
     int bc = *NUMBER_0_INTEGER;
     int bs = *NUMBER_0_INTEGER;
@@ -536,13 +535,13 @@ void send_socket(void* p0, void* p1, void* p2, void* p3,
 */
 
     //
-    // Serialise http message.
+    // Encode http message.
     //
     // An http server response delivers message data in text format (like MIME 1.0),
     // and consists of the following three parts:
     // 1 protocol version and status code
     // 2 headers containing meta data, of which some have the form of variables
-    // 3 body containing the actual user data (such as a serialised xhtml page)
+    // 3 body containing the actual user data (such as an encoded/serialised xhtml page)
     // The end of the header data is demarcated by an empty line.
     //
     // Header variables are NOT case-sensitive and have the following syntax:
@@ -572,117 +571,117 @@ void send_socket(void* p0, void* p1, void* p2, void* p3,
     // ...
     //
 
-    // Serialise http body.
+    // Encode http body.
     //
-    // The compound model is serialised depending on the given language, e.g. into xhtml format.
+    // The compound model is encoded depending on the given language, e.g. into xhtml format.
     //
     // CAUTION! This has to be done AT FIRST, yet before adding the model to the buffer array,
-    // because the serialised model's count is added as content length to the http header below.
+    // because the encoded model's count is added as content length to the http header below.
     // Therefore, the model is stored in a temporary variable here, before adding that to the buffer further below.
-    serialise((void*) &b, (void*) &bc, (void*) &bs, *NULL_POINTER, *NULL_POINTER, p11, p12, p13, p14, p15, p16, p17, p18, p19, p20);
+    encode((void*) &b, (void*) &bc, (void*) &bs, *NULL_POINTER, *NULL_POINTER, p11, p12, p13, p14, p15, p16, p17, p18, p19, p20);
 
     // CAUTION! Use Carriage Return (CR) AND Line Feed (LF) characters to break lines!
     // This is defined so by the Hypertext Transfer Protocol (HTTP).
 
-    // Serialise http protocol version.
-    serialise((void*) &m, (void*) &mc, (void*) &ms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
+    // Encode http protocol version.
+    encode((void*) &m, (void*) &mc, (void*) &ms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
         (void*) HTTP_1_1_PROTOCOL_VERSION, (void*) HTTP_1_1_PROTOCOL_VERSION_COUNT, *NULL_POINTER, *NULL_POINTER,
         *NULL_POINTER, *NULL_POINTER, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
-    // Serialise space character.
-    serialise((void*) &m, (void*) &mc, (void*) &ms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
+    // Encode space character.
+    encode((void*) &m, (void*) &mc, (void*) &ms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
         (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT, *NULL_POINTER, *NULL_POINTER,
         *NULL_POINTER, *NULL_POINTER, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
-    // Serialise http status code.
-    serialise((void*) &m, (void*) &mc, (void*) &ms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
+    // Encode http status code.
+    encode((void*) &m, (void*) &mc, (void*) &ms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
         (void*) HTTP_200_OK_STATUS_CODE, (void*) HTTP_200_OK_STATUS_CODE_COUNT, *NULL_POINTER, *NULL_POINTER,
         *NULL_POINTER, *NULL_POINTER, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
-    // Serialise carriage return character.
-    serialise((void*) &m, (void*) &mc, (void*) &ms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
+    // Encode carriage return character.
+    encode((void*) &m, (void*) &mc, (void*) &ms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
         (void*) CARRIAGE_RETURN_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, *NULL_POINTER, *NULL_POINTER,
         *NULL_POINTER, *NULL_POINTER, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
-    // Serialise line feed character.
-    serialise((void*) &m, (void*) &mc, (void*) &ms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
+    // Encode line feed character.
+    encode((void*) &m, (void*) &mc, (void*) &ms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
         (void*) LINE_FEED_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, *NULL_POINTER, *NULL_POINTER,
         *NULL_POINTER, *NULL_POINTER, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
-    // Serialise content type http header.
-    serialise((void*) &m, (void*) &mc, (void*) &ms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
+    // Encode content type http header.
+    encode((void*) &m, (void*) &mc, (void*) &ms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
         (void*) CONTENT_TYPE_HTTP_HEADER, (void*) CONTENT_TYPE_HTTP_HEADER_COUNT, *NULL_POINTER, *NULL_POINTER,
         *NULL_POINTER, *NULL_POINTER, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
-    // Serialise colon character.
-    serialise((void*) &m, (void*) &mc, (void*) &ms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
+    // Encode colon character.
+    encode((void*) &m, (void*) &mc, (void*) &ms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
         (void*) COLON_CHARACTER, (void*) PRIMITIVE_COUNT, *NULL_POINTER, *NULL_POINTER,
         *NULL_POINTER, *NULL_POINTER, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
-    // Serialise space character.
-    serialise((void*) &m, (void*) &mc, (void*) &ms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
+    // Encode space character.
+    encode((void*) &m, (void*) &mc, (void*) &ms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
         (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT, *NULL_POINTER, *NULL_POINTER,
         *NULL_POINTER, *NULL_POINTER, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
-    // Serialise content type as mime type.
-    serialise((void*) &m, (void*) &mc, (void*) &ms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
+    // Encode content type as mime type.
+    encode((void*) &m, (void*) &mc, (void*) &ms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
         (void*) HTML_TEXT_MIME_TYPE, (void*) HTML_TEXT_MIME_TYPE_COUNT, *NULL_POINTER, *NULL_POINTER,
         *NULL_POINTER, *NULL_POINTER, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
-    // Serialise semicolon character.
-    serialise((void*) &m, (void*) &mc, (void*) &ms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
+    // Encode semicolon character.
+    encode((void*) &m, (void*) &mc, (void*) &ms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
         (void*) SEMICOLON_CHARACTER, (void*) PRIMITIVE_COUNT, *NULL_POINTER, *NULL_POINTER,
         *NULL_POINTER, *NULL_POINTER, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
-    // Serialise space character.
-    serialise((void*) &m, (void*) &mc, (void*) &ms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
+    // Encode space character.
+    encode((void*) &m, (void*) &mc, (void*) &ms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
         (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT, *NULL_POINTER, *NULL_POINTER,
         *NULL_POINTER, *NULL_POINTER, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
-    // Serialise charset http header variable.
-    serialise((void*) &m, (void*) &mc, (void*) &ms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
+    // Encode charset http header variable.
+    encode((void*) &m, (void*) &mc, (void*) &ms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
         (void*) CHARSET_HTTP_HEADER_VARIABLE, (void*) CHARSET_HTTP_HEADER_VARIABLE_COUNT, *NULL_POINTER, *NULL_POINTER,
         *NULL_POINTER, *NULL_POINTER, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
-    // Serialise equals sign character.
-    serialise((void*) &m, (void*) &mc, (void*) &ms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
+    // Encode equals sign character.
+    encode((void*) &m, (void*) &mc, (void*) &ms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
         (void*) EQUALS_SIGN_CHARACTER, (void*) PRIMITIVE_COUNT, *NULL_POINTER, *NULL_POINTER,
         *NULL_POINTER, *NULL_POINTER, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
-    // Serialise http charset value.
-    serialise((void*) &m, (void*) &mc, (void*) &ms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
+    // Encode http charset value.
+    encode((void*) &m, (void*) &mc, (void*) &ms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
         (void*) ISO_8859_1_CHARACTER_SET, (void*) ISO_8859_1_CHARACTER_SET_COUNT, *NULL_POINTER, *NULL_POINTER,
         *NULL_POINTER, *NULL_POINTER, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
-    // Serialise carriage return character.
-    serialise((void*) &m, (void*) &mc, (void*) &ms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
+    // Encode carriage return character.
+    encode((void*) &m, (void*) &mc, (void*) &ms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
         (void*) CARRIAGE_RETURN_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, *NULL_POINTER, *NULL_POINTER,
         *NULL_POINTER, *NULL_POINTER, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
-    // Serialise line feed character.
-    serialise((void*) &m, (void*) &mc, (void*) &ms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
+    // Encode line feed character.
+    encode((void*) &m, (void*) &mc, (void*) &ms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
         (void*) LINE_FEED_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, *NULL_POINTER, *NULL_POINTER,
         *NULL_POINTER, *NULL_POINTER, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
-    // Serialise content length http header.
-    serialise((void*) &m, (void*) &mc, (void*) &ms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
+    // Encode content length http header.
+    encode((void*) &m, (void*) &mc, (void*) &ms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
         (void*) CONTENT_LENGTH_HTTP_HEADER, (void*) CONTENT_LENGTH_HTTP_HEADER_COUNT, *NULL_POINTER, *NULL_POINTER,
         *NULL_POINTER, *NULL_POINTER, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
-    // Serialise colon character.
-    serialise((void*) &m, (void*) &mc, (void*) &ms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
+    // Encode colon character.
+    encode((void*) &m, (void*) &mc, (void*) &ms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
         (void*) COLON_CHARACTER, (void*) PRIMITIVE_COUNT, *NULL_POINTER, *NULL_POINTER,
         *NULL_POINTER, *NULL_POINTER, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
-    // Serialise space character.
-    serialise((void*) &m, (void*) &mc, (void*) &ms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
+    // Encode space character.
+    encode((void*) &m, (void*) &mc, (void*) &ms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
         (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT, *NULL_POINTER, *NULL_POINTER,
         *NULL_POINTER, *NULL_POINTER, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
-    // Serialise content length as http body's length.
+    // Encode content length as http body's length.
     // CAUTION! The source is an integer value!.
-    serialise((void*) &m, (void*) &mc, (void*) &ms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
+    encode((void*) &m, (void*) &mc, (void*) &ms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
         (void*) &bc, (void*) PRIMITIVE_COUNT, *NULL_POINTER, *NULL_POINTER,
         *NULL_POINTER, *NULL_POINTER, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    // Serialise carriage return character.
-    serialise((void*) &m, (void*) &mc, (void*) &ms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
+    // Encode carriage return character.
+    encode((void*) &m, (void*) &mc, (void*) &ms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
         (void*) CARRIAGE_RETURN_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, *NULL_POINTER, *NULL_POINTER,
         *NULL_POINTER, *NULL_POINTER, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
-    // Serialise line feed character.
-    serialise((void*) &m, (void*) &mc, (void*) &ms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
+    // Encode line feed character.
+    encode((void*) &m, (void*) &mc, (void*) &ms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
         (void*) LINE_FEED_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, *NULL_POINTER, *NULL_POINTER,
         *NULL_POINTER, *NULL_POINTER, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
-    // Serialise carriage return character.
-    serialise((void*) &m, (void*) &mc, (void*) &ms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
+    // Encode carriage return character.
+    encode((void*) &m, (void*) &mc, (void*) &ms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
         (void*) CARRIAGE_RETURN_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, *NULL_POINTER, *NULL_POINTER,
         *NULL_POINTER, *NULL_POINTER, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
-    // Serialise line feed character.
-    serialise((void*) &m, (void*) &mc, (void*) &ms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
+    // Encode line feed character.
+    encode((void*) &m, (void*) &mc, (void*) &ms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
         (void*) LINE_FEED_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, *NULL_POINTER, *NULL_POINTER,
         *NULL_POINTER, *NULL_POINTER, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
-    // Serialise http body which was already serialised from a cyboi model further above.
-    serialise((void*) &m, (void*) &mc, (void*) &ms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
+    // Encode http body which was already encoded from a cyboi model further above.
+    encode((void*) &m, (void*) &mc, (void*) &ms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
         b, (void*) &bc, *NULL_POINTER, *NULL_POINTER,
         *NULL_POINTER, *NULL_POINTER, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
@@ -699,10 +698,10 @@ void send_socket(void* p0, void* p1, void* p2, void* p3,
     if (f >= *NUMBER_0_INTEGER) {
 
         // The file owner.
-        int o = *INVALID_VALUE;
+        int o = *NUMBER_MINUS_1_INTEGER;
 
         // The file group.
-        int g = *INVALID_VALUE;
+        int g = *NUMBER_MINUS_1_INTEGER;
 
         // Set file owner.
         chown(n, o, g);
@@ -748,7 +747,7 @@ void send_socket(void* p0, void* p1, void* p2, void* p3,
         // The socket number for the signal id.
         // The index for the signal id in the array is the same index
         // in the client socket number array.
-        int i = *INVALID_VALUE;
+        int i = *NUMBER_MINUS_1_INTEGER;
 
         get_index_for_signal_id(p2, p9, (void*) &i);
 

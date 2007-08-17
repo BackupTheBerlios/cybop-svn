@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2007-06-22 07:07:14 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2007-08-17 03:15:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -34,8 +34,12 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include "../globals/constants/integer/integer_constants.c"
-#include "../globals/constants/system_constants.c"
-#include "../globals/variables/variables.c"
+#include "../globals/variables/log_variables.c"
+#include "../globals/variables/primitive_type_size_variables.c"
+#include "../globals/variables/reallocation_factor_variables.c"
+#include "../globals/variables/service_interrupt_variables.c"
+#include "../globals/variables/sleep_time_variables.c"
+#include "../globals/variables/thread_identification_variables.c"
 
 /**
  * Allocates and initialises global variables.
@@ -48,7 +52,7 @@ void globalise() {
     // fputs("Information: Globalise.\n", stdout);
 
     //
-    // Primitive type sizes.
+    // Primitive type size variables.
     //
     // CAUTION! DO NOT use array functionality here!
     // The arrays use the logger which would cause circular references.
@@ -85,21 +89,25 @@ void globalise() {
     *DOUBLE_PRIMITIVE_SIZE = sizeof(double);
 
     //
-    // Thread identifications and service interrupt flags.
+    // Thread identification variables.
     //
 
     // Allocate and initialise gnu/linux console thread.
     GNU_LINUX_CONSOLE_THREAD = (pthread_t*) malloc(sizeof(pthread_t));
-    *GNU_LINUX_CONSOLE_THREAD = *INVALID_VALUE;
+    *GNU_LINUX_CONSOLE_THREAD = *NUMBER_MINUS_1_INTEGER;
     // Allocate x window system thread.
     X_WINDOW_SYSTEM_THREAD = (pthread_t*) malloc(sizeof(pthread_t));
-    *X_WINDOW_SYSTEM_THREAD = *INVALID_VALUE;
+    *X_WINDOW_SYSTEM_THREAD = *NUMBER_MINUS_1_INTEGER;
     // Allocate www service thread.
     WWW_SERVICE_THREAD = (pthread_t*) malloc(sizeof(pthread_t));
-    *WWW_SERVICE_THREAD = *INVALID_VALUE;
+    *WWW_SERVICE_THREAD = *NUMBER_MINUS_1_INTEGER;
     // Allocate cyboi service thread.
     CYBOI_SERVICE_THREAD = (pthread_t*) malloc(sizeof(pthread_t));
-    *CYBOI_SERVICE_THREAD = *INVALID_VALUE;
+    *CYBOI_SERVICE_THREAD = *NUMBER_MINUS_1_INTEGER;
+
+    //
+    // Service interrupt variables.
+    //
 
     // Allocate and initialise gnu/linux console thread interrupt flag.
     GNU_LINUX_CONSOLE_THREAD_INTERRUPT = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
@@ -113,6 +121,76 @@ void globalise() {
     // Allocate and initialise cyboi service thread interrupt flag.
     CYBOI_SERVICE_THREAD_INTERRUPT = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
     *CYBOI_SERVICE_THREAD_INTERRUPT = *NUMBER_0_INTEGER;
+
+    //
+    // Reallocation factor variables.
+    //
+    // If a source model is to be copied to a destination model, the size of
+    // the destination has to be large enough to take on the source's elements.
+    // If the destination is too small, its size has to be extended.
+    // The reallocation factors determine how fast the destination is to grow.
+    //
+    // The reallocation factors have the following meaning:
+    // 0 - neglect number of destination elements and count only source elements
+    //     CAUTION! This may delete existing content of the destination, since
+    //     its size may shrink, depending on the number of source elements.
+    //     The usage of this zero reallocation factor is NOT recommended!
+    // 1 - extend destination by adding the exact number of source elements
+    //     This is the most memory-efficient solution. The memory structures
+    //     using this reallocation factor are only as big as necessary, that is
+    //     their size and count (number of elements) are IDENTICAL.
+    //     If elements get removed from the memory structure, its size is
+    //     shrinked by the exact number of removed elements.
+    //     However, this variant is not very effective.
+    // 2 - extend destination by twice its count and add number of source elements
+    //     This is a more effective solution to what concerns runtime speed.
+    //     Whenever the destination gets reallocated, its element count gets
+    //     doubled. Therefore, it does not have to get reallocated so often.
+    //     However, this variant uses more memory.
+    // 3 - extend destination by thrice its count and add number of source elements
+    //     This solution is similar to a reallocation factor of two, only that
+    //     it is yet more effective, but also uses yet more memory.
+    // x - and so on
+    //
+
+    // Allocate and initialise cybol file reallocation factor.
+    CYBOL_FILE_REALLOCATION_FACTOR = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
+    *CYBOL_FILE_REALLOCATION_FACTOR = *NUMBER_2_INTEGER;
+    // Allocate and initialise character vector reallocation factor.
+    CHARACTER_VECTOR_REALLOCATION_FACTOR = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
+    *CHARACTER_VECTOR_REALLOCATION_FACTOR = *NUMBER_2_INTEGER;
+    // Allocate and initialise wide character vector reallocation factor.
+    WIDE_CHARACTER_VECTOR_REALLOCATION_FACTOR = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
+    *WIDE_CHARACTER_VECTOR_REALLOCATION_FACTOR = *NUMBER_2_INTEGER;
+    // Allocate and initialise integer vector reallocation factor.
+    INTEGER_VECTOR_REALLOCATION_FACTOR = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
+    *INTEGER_VECTOR_REALLOCATION_FACTOR = *NUMBER_2_INTEGER;
+    // Allocate and initialise unsigned long vector reallocation factor.
+    UNSIGNED_LONG_VECTOR_REALLOCATION_FACTOR = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
+    *UNSIGNED_LONG_VECTOR_REALLOCATION_FACTOR = *NUMBER_2_INTEGER;
+    // Allocate and initialise double vector reallocation factor.
+    DOUBLE_VECTOR_REALLOCATION_FACTOR = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
+    *DOUBLE_VECTOR_REALLOCATION_FACTOR = *NUMBER_2_INTEGER;
+    // Allocate and initialise pointer vector reallocation factor.
+    POINTER_VECTOR_REALLOCATION_FACTOR = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
+    *POINTER_VECTOR_REALLOCATION_FACTOR = *NUMBER_2_INTEGER;
+    // Allocate and initialise compound reallocation factor.
+    COMPOUND_REALLOCATION_FACTOR = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
+    *COMPOUND_REALLOCATION_FACTOR = *NUMBER_2_INTEGER;
+    // Allocate and initialise signal memory reallocation factor.
+    SIGNAL_MEMORY_REALLOCATION_FACTOR = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
+    *SIGNAL_MEMORY_REALLOCATION_FACTOR = *NUMBER_2_INTEGER;
+
+    //
+    // Sleep time variables.
+    //
+
+    // Allocate and initialise checker sleep time.
+    CHECKER_SLEEP_TIME = (double*) malloc(*DOUBLE_PRIMITIVE_SIZE);
+    *CHECKER_SLEEP_TIME = *NUMBER_0_1_DOUBLE;
+    // Allocate and initialise x window system sleep time.
+    X_WINDOW_SYSTEM_SLEEP_TIME = (double*) malloc(*DOUBLE_PRIMITIVE_SIZE);
+    *X_WINDOW_SYSTEM_SLEEP_TIME = *NUMBER_0_1_DOUBLE;
 }
 
 /**
@@ -125,7 +203,39 @@ void unglobalise() {
     // fputs("Information: Unglobalise.\n", stdout);
 
     //
-    // Thread identifications and service interrupt flags.
+    // Sleep time variables.
+    //
+
+    // Free checker sleep time.
+    free(CHECKER_SLEEP_TIME);
+    // Free x window system sleep time.
+    free(X_WINDOW_SYSTEM_SLEEP_TIME);
+
+    //
+    // Reallocation factor variables.
+    //
+
+    // Free cybol file reallocation factor.
+    free(CYBOL_FILE_REALLOCATION_FACTOR);
+    // Free character vector reallocation factor.
+    free(CHARACTER_VECTOR_REALLOCATION_FACTOR);
+    // Free wide character vector reallocation factor.
+    free(WIDE_CHARACTER_VECTOR_REALLOCATION_FACTOR);
+    // Free integer vector reallocation factor.
+    free(INTEGER_VECTOR_REALLOCATION_FACTOR);
+    // Free unsigned long vector reallocation factor.
+    free(UNSIGNED_LONG_VECTOR_REALLOCATION_FACTOR);
+    // Free double vector reallocation factor.
+    free(DOUBLE_VECTOR_REALLOCATION_FACTOR);
+    // Free pointer vector reallocation factor.
+    free(POINTER_VECTOR_REALLOCATION_FACTOR);
+    // Free compound reallocation factor.
+    free(COMPOUND_REALLOCATION_FACTOR);
+    // Free signal memory reallocation factor.
+    free(SIGNAL_MEMORY_REALLOCATION_FACTOR);
+
+    //
+    // Service interrupt variables.
     //
 
     // Free gnu/linux console thread interrupt flag.
@@ -137,6 +247,10 @@ void unglobalise() {
     // Free cyboi service thread interrupt flag.
     free(CYBOI_SERVICE_THREAD_INTERRUPT);
 
+    //
+    // Thread identification variables.
+    //
+
     // Free gnu/linux console thread.
     free(GNU_LINUX_CONSOLE_THREAD);
     // Free x window system thread.
@@ -147,7 +261,7 @@ void unglobalise() {
     free(CYBOI_SERVICE_THREAD);
 
     //
-    // Primitive type sizes.
+    // Primitive type size variables.
     //
     // CAUTION! DO NOT use array functionality here!
     // The arrays use the logger which would cause circular references.
@@ -156,19 +270,14 @@ void unglobalise() {
 
     // Free double primitive size.
     free(DOUBLE_PRIMITIVE_SIZE);
-
     // Free pointer primitive size.
     free(POINTER_PRIMITIVE_SIZE);
-
     // Free unsigned long primitive size.
     free(UNSIGNED_LONG_PRIMITIVE_SIZE);
-
     // Free wide character primitive size.
     free(WIDE_CHARACTER_PRIMITIVE_SIZE);
-
     // Free character primitive size.
     free(CHARACTER_PRIMITIVE_SIZE);
-
     // Free integer primitive size.
     free(INTEGER_PRIMITIVE_SIZE);
 }

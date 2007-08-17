@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2007-08-13 16:37:12 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2007-08-17 03:15:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -31,7 +31,7 @@
 #include "../../globals/logger/logger.c"
 
 /**
- * Parses an http response into a compound.
+ * Decodes an http response into a compound.
  *
  * @param p0 the destination compound (Hand over as reference!)
  * @param p1 the destination compound count
@@ -39,13 +39,13 @@
  * @param p3 the source http response
  * @param p4 the source http response count
  */
-void parse_http_response(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void decode_http_response(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    log_message_debug("Information: Parse http response.");
+    log_message_debug("Information: Decode http response.");
 }
 
 /**
- * Serialises a compound into an http response.
+ * Encodes a compound into an http response.
  *
  * @param p0 the destination http response (Hand over as reference!)
  * @param p1 the destination http response count
@@ -59,10 +59,10 @@ void parse_http_response(void* p0, void* p1, void* p2, void* p3, void* p4) {
  * @param p9 the knowledge memory
  * @param p10 the knowledge memory count
  */
-void serialise_http_response(void* p0, void* p1, void* p2, void* p3, void* p4,
+void encode_http_response(void* p0, void* p1, void* p2, void* p3, void* p4,
     void* p5, void* p6, void* p7, void* p8, void* p9, void* p10) {
 
-    log_message_debug("Information: Serialise http response.");
+    log_message_debug("Information: Encode http response.");
 }
 
 /* HTTP_RESPONSE_CONVERTER_SOURCE */

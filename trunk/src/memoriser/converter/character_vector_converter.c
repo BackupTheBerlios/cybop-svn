@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.10 $ $Date: 2007-08-13 16:37:12 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2007-08-17 03:15:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -32,10 +32,11 @@
 #include "../../globals/constants/log/log_message_constants.c"
 #include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/logger/logger.c"
+#include "../../globals/variables/reallocation_factor_variables.c"
 #include "../../memoriser/array.c"
 
 /**
- * Parses the byte stream and creates a character vector model from it.
+ * Decodes the byte stream and creates a character vector model from it.
  *
  * @param p0 the destination (Hand over as reference!)
  * @param p1 the destination count
@@ -43,7 +44,7 @@
  * @param p3 the source
  * @param p4 the source count
  */
-void parse_character_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void decode_character_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (p4 != *NULL_POINTER) {
 
@@ -63,7 +64,7 @@ void parse_character_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                     if (*dc >= *NUMBER_0_INTEGER) {
 
-                        log_message_debug("Parse character vector.");
+                        log_message_debug("Decode character vector.");
 
                         // The new destination character vector size.
                         // (Not exactly the size, but the destination character vector index
@@ -90,37 +91,37 @@ void parse_character_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                         } else {
 
-                            log_message_debug("Could not parse character vector. The destination count exceeds the size.");
+                            log_message_debug("Could not decode character vector. The destination count exceeds the size.");
                         }
 
                     } else {
 
-                        log_message_debug("Could not parse character vector. The destination count is negative.");
+                        log_message_debug("Could not decode character vector. The destination count is negative.");
                     }
 
                 } else {
 
-                    log_message_debug("Could not parse character vector. The destination is null.");
+                    log_message_debug("Could not decode character vector. The destination is null.");
                 }
 
             } else {
 
-                log_message_debug("Could not parse character vector. The destination count is null.");
+                log_message_debug("Could not decode character vector. The destination count is null.");
             }
 
         } else {
 
-            log_message_debug("Could not parse character vector. The destination size is null.");
+            log_message_debug("Could not decode character vector. The destination size is null.");
         }
 
     } else {
 
-        log_message_debug("Could not parse character vector. The source count is null.");
+        log_message_debug("Could not decode character vector. The source count is null.");
     }
 }
 
 /**
- * Serialises the character vector model and creates a byte stream from it.
+ * Encodes the character vector model and creates a byte stream from it.
  *
  * @param p0 the destination (Hand over as reference!)
  * @param p1 the destination count
@@ -128,7 +129,7 @@ void parse_character_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
  * @param p3 the source
  * @param p4 the source count
  */
-void serialise_character_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void encode_character_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (p4 != *NULL_POINTER) {
 
@@ -146,13 +147,13 @@ void serialise_character_vector(void* p0, void* p1, void* p2, void* p3, void* p4
 
                     void** d = (void**) p0;
 
-                    log_message_debug("Serialise character vector.");
+                    log_message_debug("Encode character vector.");
 
                     if ((*dc + *sc) >= *ds) {
 
                         // The new destination character vector size.
                         // CAUTION! Add constant in case *dc is zero!
-                        *ds = (*dc * *CHARACTER_VECTOR_REALLOCATE_FACTOR) + *sc;
+                        *ds = (*dc * *CHARACTER_VECTOR_REALLOCATION_FACTOR) + *sc;
 
                         // Reallocate destination character vector.
                         reallocate_array(p0, p1, p2, (void*) CHARACTER_ARRAY);
@@ -166,22 +167,22 @@ void serialise_character_vector(void* p0, void* p1, void* p2, void* p3, void* p4
 
                 } else {
 
-                    log_message_debug("Could not serialise character vector. The destination is null.");
+                    log_message_debug("Could not encode character vector. The destination is null.");
                 }
 
             } else {
 
-                log_message_debug("Could not serialise character vector. The destination count is null.");
+                log_message_debug("Could not encode character vector. The destination count is null.");
             }
 
         } else {
 
-            log_message_debug("Could not serialise character vector. The destination size is null.");
+            log_message_debug("Could not encode character vector. The destination size is null.");
         }
 
     } else {
 
-        log_message_debug("Could not serialise character vector. The source count is null.");
+        log_message_debug("Could not encode character vector. The source count is null.");
     }
 }
 

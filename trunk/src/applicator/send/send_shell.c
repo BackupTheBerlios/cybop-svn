@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.10 $ $Date: 2007-08-13 16:37:11 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2007-08-17 03:15:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -34,7 +34,7 @@
 #include "../../globals/constants/log/log_message_constants.c"
 #include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/logger/logger.c"
-#include "../../globals/variables/variables.c"
+#include "../../globals/variables/reallocation_factor_variables.c"
 #include "../../memoriser/allocator.c"
 #include "../../memoriser/converter.c"
 #include "../../memoriser/communicator.c"
@@ -62,7 +62,7 @@ void send_shell(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
 
     log_message_debug("Information: Send shell message.");
 
-    // The serialised string array to be sent to the standard output.
+    // The encoded string array to be sent to the standard output.
     void* a = *NULL_POINTER;
     int ac = *NUMBER_0_INTEGER;
     int as = *NUMBER_0_INTEGER;
@@ -70,8 +70,8 @@ void send_shell(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
     // Allocate array.
     allocate((void*) &a, (void*) &as, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
-    // Serialise knowledge model into model diagram (hierarchical text).
-    serialise((void*) &a, (void*) &ac, (void*) &as, *NULL_POINTER, *NULL_POINTER, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10);
+    // Encode knowledge model into model diagram (hierarchical text).
+    encode((void*) &a, (void*) &ac, (void*) &as, *NULL_POINTER, *NULL_POINTER, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10);
 
     if (p13 != *NULL_POINTER) {
 
@@ -84,7 +84,7 @@ void send_shell(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
 
                 // Set destination character array size.
                 // CAUTION! Add constant in case ac is zero!
-                as = ac * *CHARACTER_VECTOR_REALLOCATE_FACTOR + *PRIMITIVE_COUNT;
+                as = ac * *CHARACTER_VECTOR_REALLOCATION_FACTOR + *PRIMITIVE_COUNT;
 
                 // Reallocate destination character array.
                 reallocate_array((void*) &a, (void*) &ac, (void*) &as, (void*) CHARACTER_ARRAY);
@@ -96,7 +96,7 @@ void send_shell(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
         }
     }
 
-    // Write serialised array as message to shell standard output.
+    // Write encoded array as message to shell standard output.
     write_data((void*) &STANDARD_OUTPUT_MODEL, (void*) STANDARD_OUTPUT_MODEL_COUNT, *NULL_POINTER, a, (void*) &ac, (void*) FILE_CHANNEL, (void*) FILE_CHANNEL_COUNT);
 
     // Deallocate array.

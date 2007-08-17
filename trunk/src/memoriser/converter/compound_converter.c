@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2007-08-13 16:37:12 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2007-08-17 03:15:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -42,7 +42,7 @@
 #include "../../globals/logger/logger.c"
 #include "../../memoriser/allocator/xml_node_allocator.c"
 #include "../../memoriser/allocator/xml_property_allocator.c"
-#include "../../memoriser/mapper/abstraction_mapper.c"
+#include "../../memoriser/converter/abstraction_converter.c"
 #include "../../memoriser/array.c"
 #include "../../memoriser/allocator.c"
 #include "../../memoriser/communicator.c"
@@ -52,8 +52,7 @@
 //
 
 /**
- * Parses the byte stream according to the given document type
- * and creates a document model from it.
+ * Decodes the source into the destination, according to the given language.
  *
  * @param p0 the destination model (Hand over as reference!)
  * @param p1 the destination model count
@@ -63,10 +62,10 @@
  * @param p5 the destination details size
  * @param p6 the source
  * @param p7 the source count
- * @param p8 the type
- * @param p9 the type count
+ * @param p8 the language
+ * @param p9 the language count
  */
-void parse(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9);
+void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9);
 
 /**
  * Sets the compound element by name.
@@ -92,7 +91,7 @@ void set_compound_element_by_name(void* p0, void* p1, void* p2,
     void* p9, void* p10, void* p11, void* p12, void* p13, void* p14);
 
 /**
- * Parses the compound cybol node.
+ * Decodes the compound cybol node.
  *
  * @param p0 the destination (a compound model void**)
  * @param p1 the destination count (the count for coumpound model void*)
@@ -100,10 +99,10 @@ void set_compound_element_by_name(void* p0, void* p1, void* p2,
  * @param p3 the source (xmlNode*)
  * @param p4 the source count (for this function not relevant void*)
  */
-void parse_compound_cybol_nodes(void* p0, void* p1, void* p2, void* p3, void* p4);
+void decode_compound_cybol_nodes(void* p0, void* p1, void* p2, void* p3, void* p4);
 
 /**
- * Parses the xml stream until an xml comment end tag is reached.
+ * Decodes the xml stream until an xml comment end tag is reached.
  *
  * This procedure only counts up the stream pointer and
  * changes nothing in the xml model.
@@ -112,7 +111,7 @@ void parse_compound_cybol_nodes(void* p0, void* p1, void* p2, void* p3, void* p4
  * @param p1 the xml stream count
  */
 /*??
-void parse_compound_comment_tag(void* p0, void* p1) {
+void decode_compound_comment_tag(void* p0, void* p1) {
 
     if (p1 != *NULL_POINTER) {
 
@@ -195,7 +194,7 @@ void parse_compound_comment_tag(void* p0, void* p1) {
 */
 
 /**
- * Parses the xml stream into an xml tag.
+ * Decodes the xml stream into an xml tag.
  *
  * @param p0 the xml model
  * @param p1 the xml model count
@@ -204,7 +203,7 @@ void parse_compound_comment_tag(void* p0, void* p1) {
  * @param p4 the xml stream count
  */
 /*??
-void parse_compound_tag(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void decode_compound_tag(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (p4 != *NULL_POINTER) {
 
@@ -258,8 +257,8 @@ void parse_compound_tag(void* p0, void* p1, void* p2, void* p3, void* p4) {
                         b = b + *TAG_END_COUNT;
                         bc = bc - *TAG_END_COUNT;
 
-                        // Parse xml value.
-//??                        parse_xml_value((void*) &b, (void*) &bc);
+                        // Decode xml value.
+//??                        decode_xml_value((void*) &b, (void*) &bc);
                     }
                 }
             }
@@ -276,7 +275,7 @@ void parse_compound_tag(void* p0, void* p1, void* p2, void* p3, void* p4) {
 */
 
 /**
- * Parses a cybol property.
+ * Decodes a cybol property.
  *
  * @param p0 the name
  * @param p1 the name count
@@ -290,7 +289,7 @@ void parse_compound_tag(void* p0, void* p1, void* p2, void* p3, void* p4) {
  * @param p9 the name
  * @param p10 the name count
  */
-void parse_compound_cybol_property(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10) {
+void decode_compound_cybol_property(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10) {
 
     if (p8 != *NULL_POINTER) {
 
@@ -328,7 +327,7 @@ void parse_compound_cybol_property(void* p0, void* p1, void* p2, void* p3, void*
 
                                         void** n = (void**) p0;
 
-                                        log_message_debug("Information: Parse compound cybol property.");
+                                        log_message_debug("Information: Decode compound cybol property.");
 
                                         // The comparison result.
                                         int r = *NUMBER_0_INTEGER;
@@ -434,7 +433,7 @@ void parse_compound_cybol_property(void* p0, void* p1, void* p2, void* p3, void*
 }
 
 /**
- * Parses the cybol properties.
+ * Decodes the cybol properties.
  *
  * @param p0 the name
  * @param p1 the name count
@@ -446,13 +445,13 @@ void parse_compound_cybol_property(void* p0, void* p1, void* p2, void* p3, void*
  * @param p7 the model count
  * @param p8 the child node
  */
-void parse_compound_cybol_properties(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8) {
+void decode_compound_cybol_properties(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8) {
 
     if (p8 != *NULL_POINTER) {
 
         xmlNode* cn = (xmlNode*) p8;
 
-        log_message_debug("Information: Parse compound cybol properties.");
+        log_message_debug("Information: Decode compound cybol properties.");
 
         if (cn != *NULL_POINTER) {
 
@@ -473,8 +472,8 @@ void parse_compound_cybol_properties(void* p0, void* p1, void* p2, void* p3, voi
                 pn = (void*) p->name;
                 pnc = strlen(pn);
 
-                // Parse property.
-                parse_compound_cybol_property(p0, p1, p2, p3, p4, p5, p6, p7, p->children, pn, (void*) &pnc);
+                // Decode property.
+                decode_compound_cybol_property(p0, p1, p2, p3, p4, p5, p6, p7, p->children, pn, (void*) &pnc);
 
                 // Get next child node property.
                 p = p->next;
@@ -492,7 +491,7 @@ void parse_compound_cybol_properties(void* p0, void* p1, void* p2, void* p3, voi
 }
 
 /**
- * Parses the compound cybol node.
+ * Decodes the compound cybol node.
  *
  * @param p0 the destination (a compound model void**)
  * @param p1 the destination count (the count for coumpound model void*)
@@ -500,7 +499,7 @@ void parse_compound_cybol_properties(void* p0, void* p1, void* p2, void* p3, voi
  * @param p3 the source (xmlNode*)
  * @param p4 the source count (for this function not relevant void*)
  */
-void parse_compound_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void decode_compound_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (p3 != *NULL_POINTER) {
 
@@ -510,7 +509,7 @@ void parse_compound_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4)
 
             void** d = (void**) p0;
 
-            log_message_debug("Information: Parse compound cybol node.");
+            log_message_debug("Information: Decode compound cybol node.");
 
             // The source name, channel, abstraction, model.
             void* sn = *NULL_POINTER;
@@ -535,8 +534,8 @@ void parse_compound_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4)
             int* ddc = (int*) *NULL_POINTER;
             int* dds = (int*) *NULL_POINTER;
 
-            // Parse child node properties.
-            parse_compound_cybol_properties((void*) &sn, (void*) &snc, (void*) &sc, (void*) &scc, (void*) &sa, (void*) &sac, (void*) &sm, (void*) &smc, p3);
+            // Decode child node properties.
+            decode_compound_cybol_properties((void*) &sn, (void*) &snc, (void*) &sc, (void*) &scc, (void*) &sa, (void*) &sac, (void*) &sm, (void*) &smc, p3);
 
 /*??
             fprintf(stderr, "sn: %s\n", (char*) sn);
@@ -560,8 +559,8 @@ void parse_compound_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4)
             *dns = *NUMBER_0_INTEGER;
             allocate((void*) &dn, (void*) dns, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
-            // Parse destination name.
-            parse((void*) &dn, (void*) dnc, (void*) dns, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
+            // Decode destination name.
+            decode((void*) &dn, (void*) dnc, (void*) dns, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
                 sn, (void*) &snc, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
             //
@@ -582,8 +581,8 @@ void parse_compound_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4)
             *das = *NUMBER_0_INTEGER;
             allocate((void*) &da, (void*) das, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
-            // Parse destination abstraction.
-            parse((void*) &da, (void*) dac, (void*) das, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
+            // Decode destination abstraction.
+            decode((void*) &da, (void*) dac, (void*) das, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
                 sa, (void*) &sac, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
             //
@@ -613,7 +612,7 @@ void parse_compound_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4)
                 // CAUTION! If a cybol file is to be read, then the libxml2 parser is used.
                 // This is just a workaround, until cyboi posesses its own cybol parsing functions.
                 // This source code block can then be deleted completely.
-                parse((void*) &dm, (void*) dmc, (void*) dms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, sm, (void*) &smc, sa, (void*) &sac);
+                decode((void*) &dm, (void*) dmc, (void*) dms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, sm, (void*) &smc, sa, (void*) &sac);
 
             } else {
 
@@ -621,10 +620,10 @@ void parse_compound_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4)
                 void* ra = *NULL_POINTER;
                 int rac = *NUMBER_0_INTEGER;
 
-                // Map source abstraction to runtime abstraction, since a serialised
+                // Decode source abstraction into runtime abstraction, since a decoded
                 // message does not always have the same runtime abstraction.
                 // For example, an "xdt" file is converted into a compound.
-                map_to_memory_abstraction((void*) &ra, (void*) &rac, *NULL_POINTER, sa, (void*) &sac);
+                decode_abstraction((void*) &ra, (void*) &rac, *NULL_POINTER, sa, (void*) &sac);
 
                 // The read model.
                 void* rm = *NULL_POINTER;
@@ -644,11 +643,11 @@ void parse_compound_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4)
                 *dms = *NUMBER_0_INTEGER;
                 allocate((void*) &dm, (void*) dms, ra, (void*) &rac);
 
-                // Parse destination model.
+                // Decode destination model.
                 //
                 // CAUTION! Use the original source abstraction and NOT the mapped runtime memory abstraction here!
                 // This is necessary so that the correct parsing function is called.
-                parse((void*) &dm, (void*) dmc, (void*) dms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, rm, (void*) &rmc, sa, (void*) &sac);
+                decode((void*) &dm, (void*) dmc, (void*) dms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, rm, (void*) &rmc, sa, (void*) &sac);
 
                 // Deallocate read model.
                 deallocate((void*) &rm, (void*) &rms, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
@@ -658,7 +657,7 @@ void parse_compound_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4)
             // Details.
             //
 
-            // Allocate and parse destination details.
+            // Allocate and decode destination details.
             //
             // CAUTION! Do ALWAYS allocate the details, even if it has no entries!
             // This is because at runtime, properties may be assigned to the details.
@@ -669,11 +668,11 @@ void parse_compound_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4)
             *dds = *NUMBER_0_INTEGER;
             allocate((void*) &dd, (void*) dds, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
 
-            // If child node has children, then parse it for destination details.
+            // If child node has children, then decode it for destination details.
             if (s->children != *NULL_POINTER) {
 
-                // Parse destination details child node children.
-                parse_compound_cybol_nodes((void*) &dd, (void*) ddc, (void*) dds, p3, p4);
+                // Decode destination details child node children.
+                decode_compound_cybol_nodes((void*) &dd, (void*) ddc, (void*) dds, p3, p4);
             }
 
             // Add model to compound.
@@ -693,17 +692,17 @@ void parse_compound_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4)
 
         } else {
 
-            log_message_debug("Error: Could not parse compound cybol node. The destination compound is null.");
+            log_message_debug("Error: Could not decode compound cybol node. The destination compound is null.");
         }
 
     } else {
 
-        log_message_debug("Error: Could not parse compound cybol node. The source xml node is null.");
+        log_message_debug("Error: Could not decode compound cybol node. The source xml node is null.");
     }
 }
 
 /**
- * Parses the compound cybol node.
+ * Decodes the compound cybol node.
  *
  * @param p0 the destination (a compound model void**)
  * @param p1 the destination count (the count for coumpound model void*)
@@ -711,13 +710,13 @@ void parse_compound_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4)
  * @param p3 the source (xmlNode*)
  * @param p4 the source count (for this function not relevant void*)
  */
-void parse_compound_cybol_nodes(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void decode_compound_cybol_nodes(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (p3 != *NULL_POINTER) {
 
         xmlNode* s = (xmlNode*) p3;
 
-        log_message_debug("Information: Parse compound cybol nodes.");
+        log_message_debug("Information: Decode compound cybol nodes.");
 
         // Determine first child node.
         xmlNode* c = s->children;
@@ -733,7 +732,7 @@ void parse_compound_cybol_nodes(void* p0, void* p1, void* p2, void* p3, void* p4
 
             if (c->type == XML_ELEMENT_NODE) {
 
-                parse_compound_cybol_node(p0, p1, p2, (void*) c, (void*) &cc);
+                decode_compound_cybol_node(p0, p1, p2, (void*) c, (void*) &cc);
             }
 
             c = c->next;
@@ -741,12 +740,12 @@ void parse_compound_cybol_nodes(void* p0, void* p1, void* p2, void* p3, void* p4
 
     } else {
 
-        log_message_debug("Error: Could not parse compound cybol nodes. The source xml node is null.");
+        log_message_debug("Error: Could not decode compound cybol nodes. The source xml node is null.");
     }
 }
 
 /**
- * Parses the byte stream and creates an xml model from it.
+ * Decodes the byte stream and creates an xml model from it.
  *
  * CAUTION! This function is a temporary WORKAROUND, to be used until CYBOL-specific
  * parsing functions are written! CYBOL is completely XML-conform, with one exception:
@@ -761,7 +760,7 @@ void parse_compound_cybol_nodes(void* p0, void* p1, void* p2, void* p3, void* p4
  * @param p3 the source xml file name
  * @param p4 the source count
  */
-void parse_compound_libxml2_parser_workaround(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void decode_compound_libxml2_parser_workaround(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (p4 != *NULL_POINTER) {
 
@@ -780,7 +779,7 @@ void parse_compound_libxml2_parser_workaround(void* p0, void* p1, void* p2, void
                 // messages of the xml parser.
                 if (*sc > *NUMBER_0_INTEGER) {
 
-                    log_message_debug("Information: Parse compound libxml2 parser workaround.");
+                    log_message_debug("Information: Decode compound libxml2 parser workaround.");
 
                     // The temporary null-terminated file name.
                     void* tmp = *NULL_POINTER;
@@ -799,7 +798,7 @@ void parse_compound_libxml2_parser_workaround(void* p0, void* p1, void* p2, void
                     // it was compiled for and the actual shared library used.
                     LIBXML_TEST_VERSION
 
-                    // Parse file and get xml document.
+                    // Decode file and get xml document.
                     // This function returns a pointer to type: xmlDoc*
                     xmlDoc* doc = (void*) xmlParseFile((char*) tmp);
 
@@ -812,8 +811,8 @@ void parse_compound_libxml2_parser_workaround(void* p0, void* p1, void* p2, void
                     // Get root element node.
                     xmlNode* r = xmlDocGetRootElement(doc);
 
-                    // Parse cybol.
-                    parse_compound_cybol_nodes(p0, p1, p2, (void*) r, *NULL_POINTER);
+                    // Decode cybol.
+                    decode_compound_cybol_nodes(p0, p1, p2, (void*) r, *NULL_POINTER);
 
                     if (doc != *NULL_POINTER) {
 
@@ -831,27 +830,27 @@ void parse_compound_libxml2_parser_workaround(void* p0, void* p1, void* p2, void
 
                 } else {
 
-                    log_message_debug("Error: Could not parse xml. The file name count is null.");
+                    log_message_debug("Error: Could not decode xml. The file name count is null.");
                 }
 
             } else {
 
-                log_message_debug("Error: Could not parse xml. The destination is null.");
+                log_message_debug("Error: Could not decode xml. The destination is null.");
             }
 
         } else {
 
-            log_message_debug("Error: Could not parse xml. The source is null.");
+            log_message_debug("Error: Could not decode xml. The source is null.");
         }
 
     } else {
 
-        log_message_debug("Error: Could not parse xml. The source count is null.");
+        log_message_debug("Error: Could not decode xml. The source count is null.");
     }
 }
 
 /**
- * Parses the byte stream message and creates a compound from it.
+ * Decodes the byte stream message and creates a compound from it.
  *
  * @param p0 the destination compound (Hand over as reference!)
  * @param p1 the destination compound count
@@ -859,11 +858,11 @@ void parse_compound_libxml2_parser_workaround(void* p0, void* p1, void* p2, void
  * @param p3 the source message
  * @param p4 the source message count
  */
-void parse_compound(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void decode_compound(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    log_message_debug("Information: Parse compound.");
+    log_message_debug("Information: Decode compound.");
 
-    parse_compound_libxml2_parser_workaround(p0, p1, p2, p3, p4);
+    decode_compound_libxml2_parser_workaround(p0, p1, p2, p3, p4);
 
 /*??
     // The comparison result.
@@ -883,7 +882,7 @@ void parse_compound(void* p0, void* p1, void* p2, void* p3, void* p4) {
         }
 
         //
-        // Zero parse mode.
+        // Zero decode/parse mode.
         //
         // CAUTION!
         // The order of comparisons is important.
@@ -904,8 +903,8 @@ void parse_compound(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     b = b + BEGIN_COMMENT_TAG_COUNT;
                     bc = bc - BEGIN_COMMENT_TAG_COUNT;
 
-                    // Parse xml comment tag.
-                    parse_xml_comment_tag((void*) &b, (void*) &bc);
+                    // Decode xml comment tag.
+                    decode_xml_comment_tag((void*) &b, (void*) &bc);
                 }
             }
         }
@@ -939,8 +938,8 @@ void parse_compound(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     // Create xml tag.
 //??                    allocate_xml_tag((void*) &t, (void*) &ts);
 
-                    // Parse xml tag.
-                    parse_xml_tag((void*) &t, (void*) &tc, (void*) &ts,
+                    // Decode xml tag.
+                    decode_xml_tag((void*) &t, (void*) &tc, (void*) &ts,
                         (void*) &b, (void*) &bc);
 
                     //?? Exit sub procedure above when end tag is reached!
@@ -969,7 +968,7 @@ void parse_compound(void* p0, void* p1, void* p2, void* p3, void* p4) {
 }
 
 /**
- * Serialises the compound into a byte stream message.
+ * Encodes the compound into a byte stream message.
  *
  * @param p0 the destination message (Hand over as reference!)
  * @param p1 the destination message count
@@ -977,9 +976,9 @@ void parse_compound(void* p0, void* p1, void* p2, void* p3, void* p4) {
  * @param p3 the source compound
  * @param p4 the source compound count
  */
-void serialise_compound(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void encode_compound(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    log_message_debug("Information: Serialise compound.");
+    log_message_debug("Information: Encode compound.");
 }
 
 /* COMPOUND_CONVERTER_SOURCE */

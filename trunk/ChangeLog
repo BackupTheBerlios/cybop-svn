@@ -14,9 +14,33 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.20 $ $Date: 2007-08-13 17:17:01 $ $Author: christian $
+# @version $Revision: 1.21 $ $Date: 2007-08-17 03:15:31 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2007-08-16  Christian Heller  <christian.heller@tuxtax.de>
+        * Delete "memoriser/mapper" directory and move/rename all files into "memoriser/converter"
+        * Replace converter's "parse" and "serialise" function names with more neutral "decode" and "encode"
+        * Introduce new global variables for setting the "sleep" loop times in "checker.c" and "receive_x_window_system.c"
+        * Delete "variables.c" and move its content into new files:
+            "primitive_type_size_variables.c", "thread_identification_variables.c",
+            "service_interrupt_variables.c", "reallocation_factor_variables.c",
+            "log_variables.c", "sleep_time_variables.c"
+
+2007-08-15  Christian Heller  <christian.heller@tuxtax.de>
+        * Delete "cyboi_constants.c" and move its content into new files:
+            "cyboi_operation_mode_constants.c", "cyboi_signal_priority_constants.c"
+        * Delete "system_constants.c" and move its content into new files:
+            "system_file_name_constants.c" and "system_executable_constants.c"
+        * Replace "INVALID_VALUE" constant in all source code with "NUMBER_MINUS_1_INTEGER",
+            since that value is always context-related anyway
+        * Make variables of array- and file reallocation factors, that were formerly
+            defined as constants in "memory_structure_constants";
+            move new variables into "variables.c";
+            adapt file "globaliser.c" with variable initialisations accordingly
+
+2007-08-14  Christian Heller  <christian.heller@tuxtax.de>
+        * Complete "url_escape_code_mapper.c" and "html_character_mapper.c"
 
 2007-08-13  Christian Heller  <christian.heller@tuxtax.de>
 

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.35 $ $Date: 2007-08-13 16:37:11 $ $Author: christian $
+ * @version $Revision: 1.36 $ $Date: 2007-08-17 03:15:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -46,14 +46,15 @@
 #include "../memoriser/converter/latex_converter.c"
 #include "../memoriser/converter/gnu_linux_console_converter.c"
 #include "../memoriser/converter/model_diagram_converter.c"
+#include "../memoriser/converter/terminal_background_converter.c"
+#include "../memoriser/converter/terminal_foreground_converter.c"
 #include "../memoriser/converter/x_window_system_converter.c"
 #include "../memoriser/converter/xdt_converter.c"
 #include "../memoriser/converter/xhtml_converter.c"
 #include "../memoriser/array.c"
 
 /**
- * Parses the byte stream according to the given document type
- * and creates a document model from it.
+ * Decodes the source into the destination, according to the given language.
  *
  * @param p0 the destination model (Hand over as reference!)
  * @param p1 the destination model count
@@ -66,9 +67,9 @@
  * @param p8 the language
  * @param p9 the language count
  */
-void parse(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9) {
+void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9) {
 
-    log_message_debug("Information: Parse.");
+    log_message_debug("Information: Decode.");
 
     // The comparison result.
     int r = *NUMBER_0_INTEGER;
@@ -79,7 +80,7 @@ void parse(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
 
         if (r != *NUMBER_0_INTEGER) {
 
-            parse_compound(p0, p1, p2, p6, p7);
+            decode_compound(p0, p1, p2, p6, p7);
         }
     }
 
@@ -89,7 +90,7 @@ void parse(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
 
         if (r != *NUMBER_0_INTEGER) {
 
-            parse_character_vector(p0, p1, p2, p6, p7);
+            decode_character_vector(p0, p1, p2, p6, p7);
         }
     }
 
@@ -99,7 +100,7 @@ void parse(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
 
         if (r != *NUMBER_0_INTEGER) {
 
-            parse_character_vector(p0, p1, p2, p6, p7);
+            decode_character_vector(p0, p1, p2, p6, p7);
         }
     }
 
@@ -109,7 +110,7 @@ void parse(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
 
         if (r != *NUMBER_0_INTEGER) {
 
-            parse_character_vector(p0, p1, p2, p6, p7);
+            decode_character_vector(p0, p1, p2, p6, p7);
         }
     }
 
@@ -119,7 +120,7 @@ void parse(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
 
         if (r != *NUMBER_0_INTEGER) {
 
-            parse_character_vector(p0, p1, p2, p6, p7);
+            decode_character_vector(p0, p1, p2, p6, p7);
         }
     }
 
@@ -129,7 +130,7 @@ void parse(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
 
         if (r != *NUMBER_0_INTEGER) {
 
-            parse_boolean(p0, p1, p2, p6, p7);
+            decode_boolean(p0, p1, p2, p6, p7);
         }
     }
 
@@ -139,7 +140,7 @@ void parse(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
 
         if (r != *NUMBER_0_INTEGER) {
 
-            parse_integer_vector(p0, p1, p2, p6, p7);
+            decode_integer_vector(p0, p1, p2, p6, p7);
         }
     }
 
@@ -149,7 +150,7 @@ void parse(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
 
         if (r != *NUMBER_0_INTEGER) {
 
-            parse_double_vector(p0, p1, p2, p6, p7);
+            decode_double_vector(p0, p1, p2, p6, p7);
         }
     }
 
@@ -159,7 +160,7 @@ void parse(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
 
         if (r != *NUMBER_0_INTEGER) {
 
-            parse_fraction(p0, p1, p2, p6, p7);
+            decode_fraction(p0, p1, p2, p6, p7);
         }
     }
 
@@ -169,7 +170,7 @@ void parse(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
 
         if (r != *NUMBER_0_INTEGER) {
 
-            parse_complex(p0, p1, p2, p6, p7);
+            decode_complex(p0, p1, p2, p6, p7);
         }
     }
 
@@ -179,7 +180,7 @@ void parse(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
 
         if (r != *NUMBER_0_INTEGER) {
 
-            parse_date_time(p0, p1, p2, p6, p7);
+            decode_date_time(p0, p1, p2, p6, p7);
         }
     }
 
@@ -189,7 +190,7 @@ void parse(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
 
         if (r != *NUMBER_0_INTEGER) {
 
-            parse_ddmmyyyy_date_time(p0, p1, p2, p6, p7);
+            decode_ddmmyyyy_date_time(p0, p1, p2, p6, p7);
         }
     }
 
@@ -199,7 +200,7 @@ void parse(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
 
         if (r != *NUMBER_0_INTEGER) {
 
-            parse_gnu_linux_console(p0, p1, p2, p6, p7);
+            decode_gnu_linux_console(p0, p1, p2, p6, p7);
         }
     }
 
@@ -209,7 +210,7 @@ void parse(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
 
         if (r != *NUMBER_0_INTEGER) {
 
-            parse_x_window_system(p0, p1, p2, p6, p7);
+            decode_x_window_system(p0, p1, p2, p6, p7);
         }
     }
 
@@ -219,7 +220,7 @@ void parse(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
 
         if (r != *NUMBER_0_INTEGER) {
 
-            parse_xhtml(p0, p1, p2, p6, p7);
+            decode_xhtml(p0, p1, p2, p6, p7);
         }
     }
 
@@ -229,7 +230,7 @@ void parse(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
 
         if (r != *NUMBER_0_INTEGER) {
 
-            parse_http_request(p0, p1, p2, p6, p7);
+            decode_http_request(p0, p1, p2, p6, p7);
         }
     }
 
@@ -239,7 +240,7 @@ void parse(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
 
         if (r != *NUMBER_0_INTEGER) {
 
-            parse_http_response(p0, p1, p2, p6, p7);
+            decode_http_response(p0, p1, p2, p6, p7);
         }
     }
 
@@ -249,7 +250,7 @@ void parse(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
 
         if (r != *NUMBER_0_INTEGER) {
 
-            parse_model_diagram(p0, p1, p2, p6, p7);
+            decode_model_diagram(p0, p1, p2, p6, p7);
         }
     }
 
@@ -259,7 +260,7 @@ void parse(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
 
         if (r != *NUMBER_0_INTEGER) {
 
-            parse_xdt(p0, p1, p2, p3, p4, p5, p6, p7);
+            decode_xdt(p0, p1, p2, p3, p4, p5, p6, p7);
         }
     }
 
@@ -269,14 +270,33 @@ void parse(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
 
         if (r != *NUMBER_0_INTEGER) {
 
-            parse_latex(p0, p1, p2, p6, p7);
+            decode_latex(p0, p1, p2, p6, p7);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER) {
+
+        compare_arrays(p8, p9, (void*) TERMINAL_BACKGROUND_ABSTRACTION, (void*) TERMINAL_BACKGROUND_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != *NUMBER_0_INTEGER) {
+
+            decode_terminal_background(p0, p1, p2, p6, p7);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER) {
+
+        compare_arrays(p8, p9, (void*) TERMINAL_FOREGROUND_ABSTRACTION, (void*) TERMINAL_FOREGROUND_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != *NUMBER_0_INTEGER) {
+
+            decode_terminal_foreground(p0, p1, p2, p6, p7);
         }
     }
 }
 
 /**
- * Serialises the knowledge model according to the given knowledge type
- * and creates a byte stream from it.
+ * Encodes the source into the destination, according to the given language.
  *
  * @param p0 the destination (Hand over as reference!)
  * @param p1 the destination count
@@ -294,10 +314,10 @@ void parse(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
  * @param p13 the language
  * @param p14 the language count
  */
-void serialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
+void encode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
     void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14) {
 
-    log_message_debug("Information: Serialise.");
+    log_message_debug("Information: Encode.");
 
     // The comparison result.
     int r = *NUMBER_0_INTEGER;
@@ -308,7 +328,7 @@ void serialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
 
         if (r != *NUMBER_0_INTEGER) {
 
-            serialise_compound(p0, p1, p2, p7, p8);
+            encode_compound(p0, p1, p2, p7, p8);
         }
     }
 
@@ -318,7 +338,7 @@ void serialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
 
         if (r != *NUMBER_0_INTEGER) {
 
-            serialise_character_vector(p0, p1, p2, p7, p8);
+            encode_character_vector(p0, p1, p2, p7, p8);
         }
     }
 
@@ -328,7 +348,7 @@ void serialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
 
         if (r != *NUMBER_0_INTEGER) {
 
-            serialise_character_vector(p0, p1, p2, p7, p8);
+            encode_character_vector(p0, p1, p2, p7, p8);
         }
     }
 
@@ -338,7 +358,7 @@ void serialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
 
         if (r != *NUMBER_0_INTEGER) {
 
-            serialise_boolean(p0, p1, p2, p7, p8);
+            encode_boolean(p0, p1, p2, p7, p8);
         }
     }
 
@@ -348,7 +368,7 @@ void serialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
 
         if (r != *NUMBER_0_INTEGER) {
 
-            serialise_integer_vector(p0, p1, p2, p7, p8);
+            encode_integer_vector(p0, p1, p2, p7, p8);
         }
     }
 
@@ -358,7 +378,7 @@ void serialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
 
         if (r != *NUMBER_0_INTEGER) {
 
-            serialise_double_vector(p0, p1, p2, p7, p8);
+            encode_double_vector(p0, p1, p2, p7, p8);
         }
     }
 
@@ -368,7 +388,7 @@ void serialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
 
         if (r != *NUMBER_0_INTEGER) {
 
-            serialise_fraction(p0, p1, p2, p7, p8);
+            encode_fraction(p0, p1, p2, p7, p8);
         }
     }
 
@@ -378,7 +398,7 @@ void serialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
 
         if (r != *NUMBER_0_INTEGER) {
 
-            serialise_complex(p0, p1, p2, p7, p8);
+            encode_complex(p0, p1, p2, p7, p8);
         }
     }
 
@@ -388,7 +408,7 @@ void serialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
 
         if (r != *NUMBER_0_INTEGER) {
 
-            serialise_date_time(p0, p1, p2, p7, p8);
+            encode_date_time(p0, p1, p2, p7, p8);
         }
     }
 
@@ -398,7 +418,7 @@ void serialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
 
         if (r != *NUMBER_0_INTEGER) {
 
-            serialise_ddmmyyyy_date_time(p0, p1, p2, p7, p8);
+            encode_ddmmyyyy_date_time(p0, p1, p2, p7, p8);
         }
     }
 
@@ -408,7 +428,7 @@ void serialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
 
         if (r != *NUMBER_0_INTEGER) {
 
-//??            serialise_gnu_linux_console(p0, p1, p2, p7, p8, *NULL_POINTER, *NULL_POINTER, p13, p14);
+//??            encode_gnu_linux_console(p0, p1, p2, p7, p8, *NULL_POINTER, *NULL_POINTER, p13, p14);
         }
     }
 
@@ -418,7 +438,7 @@ void serialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
 
         if (r != *NUMBER_0_INTEGER) {
 
-            serialise_x_window_system(p0, p1, p2, p7, p8, *NULL_POINTER, *NULL_POINTER, p11, p12);
+            encode_x_window_system(p0, p1, p2, p7, p8, *NULL_POINTER, *NULL_POINTER, p11, p12);
         }
     }
 
@@ -428,7 +448,7 @@ void serialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
 
         if (r != *NUMBER_0_INTEGER) {
 
-            serialise_xhtml(p0, p1, p2, p5, p6, p7, p8, p9, p10, p11, p12);
+            encode_xhtml(p0, p1, p2, p5, p6, p7, p8, p9, p10, p11, p12);
         }
     }
 
@@ -438,7 +458,7 @@ void serialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
 
         if (r != *NUMBER_0_INTEGER) {
 
-            serialise_http_request(p0, p1, p2, p5, p6, p7, p8, p9, p10, p11, p12);
+            encode_http_request(p0, p1, p2, p5, p6, p7, p8, p9, p10, p11, p12);
         }
     }
 
@@ -448,7 +468,7 @@ void serialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
 
         if (r != *NUMBER_0_INTEGER) {
 
-            serialise_http_response(p0, p1, p2, p5, p6, p7, p8, p9, p10, p11, p12);
+            encode_http_response(p0, p1, p2, p5, p6, p7, p8, p9, p10, p11, p12);
         }
     }
 
@@ -458,7 +478,7 @@ void serialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
 
         if (r != *NUMBER_0_INTEGER) {
 
-            serialise_model_diagram(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10);
+            encode_model_diagram(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10);
         }
     }
 
@@ -468,7 +488,7 @@ void serialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
 
         if (r != *NUMBER_0_INTEGER) {
 
-            serialise_xdt(p0, p1, p2, p7, p8);
+            encode_xdt(p0, p1, p2, p7, p8);
         }
     }
 
@@ -478,7 +498,27 @@ void serialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
 
         if (r != *NUMBER_0_INTEGER) {
 
-            serialise_latex(p0, p1, p2, p7, p8);
+            encode_latex(p0, p1, p2, p7, p8);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER) {
+
+        compare_arrays(p13, p14, (void*) TERMINAL_BACKGROUND_ABSTRACTION, (void*) TERMINAL_BACKGROUND_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != *NUMBER_0_INTEGER) {
+
+            encode_terminal_background(p0, p1, p2, p7, p8);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER) {
+
+        compare_arrays(p13, p14, (void*) TERMINAL_FOREGROUND_ABSTRACTION, (void*) TERMINAL_FOREGROUND_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != *NUMBER_0_INTEGER) {
+
+            encode_terminal_foreground(p0, p1, p2, p7, p8);
         }
     }
 }

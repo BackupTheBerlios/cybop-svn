@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2007-08-13 16:37:11 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2007-08-17 03:15:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -36,7 +36,7 @@
 #include "../../globals/constants/integer/integer_constants.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../../globals/constants/pointer/pointer_constants.c"
-#include "../../globals/variables/variables.c"
+#include "../../globals/variables/reallocation_factor_variables.c"
 #include "../../memoriser/accessor.c"
 #include "../../memoriser/allocator.c"
 #include "../../memoriser/array.c"
@@ -65,7 +65,7 @@ void send_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4,
 
     log_message_debug("Send gnu/linux console message.");
 
-    // The serialised string array to be sent to the gnu/linux console (terminal).
+    // The encoded string array to be sent to the gnu/linux console (terminal).
     void* a = *NULL_POINTER;
     int ac = *NUMBER_0_INTEGER;
     int as = *NUMBER_0_INTEGER;
@@ -84,7 +84,7 @@ void send_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4,
 
                 // Set destination character array size.
                 // CAUTION! Add constant in case ac is zero!
-                as = ac * *WIDE_CHARACTER_VECTOR_REALLOCATE_FACTOR
+                as = ac * *WIDE_CHARACTER_VECTOR_REALLOCATION_FACTOR
                     + *ESCAPE_CONTROL_SEQUENCE_COUNT
                     + *ERASE_DISPLAY_CONTROL_SEQUENCE_COUNT;
 
@@ -100,8 +100,8 @@ void send_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4,
         }
     }
 
-    // Serialise textual user interface (tui) into array.
-    serialise_gnu_linux_console((void*) &a, (void*) &ac, (void*) &as, p1, p2, p3, p4, p5, p6, *NULL_POINTER, *NULL_POINTER, p7, p8, p11, p12);
+    // Encode textual user interface (tui) into array.
+    encode_gnu_linux_console((void*) &a, (void*) &ac, (void*) &as, p1, p2, p3, p4, p5, p6, *NULL_POINTER, *NULL_POINTER, p7, p8, p11, p12);
 
     // The gnu/linux console output stream.
     void** op = NULL_POINTER;
@@ -109,7 +109,7 @@ void send_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4,
     // Get gnu/linux console output stream.
     get_array_elements(p0, (void*) GNU_LINUX_CONSOLE_OUTPUT_FILE_DESCRIPTOR_INTERNAL, (void*) &op, (void*) POINTER_ARRAY);
 
-    // Write serialised array as message to gnu/linux console.
+    // Write encoded array as message to gnu/linux console.
     write_data((void*) op, *NULL_POINTER, *NULL_POINTER, a, (void*) &ac, (void*) GNU_LINUX_CONSOLE_MODEL, (void*) GNU_LINUX_CONSOLE_MODEL_COUNT);
 
     // Deallocate array.

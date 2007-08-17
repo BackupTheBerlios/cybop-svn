@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2007-08-13 16:37:12 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2007-08-17 03:15:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -35,7 +35,7 @@
 #include "../../globals/logger/logger.c"
 
 /**
- * Parses the byte stream and creates a wide character vector model from it.
+ * Decodes the byte stream and creates a wide character vector model from it.
  *
  * @param p0 the destination (Hand over as reference!)
  * @param p1 the destination count
@@ -43,7 +43,7 @@
  * @param p3 the source
  * @param p4 the source count
  */
-void parse_wide_character_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void decode_wide_character_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (p4 != *NULL_POINTER) {
 
@@ -63,7 +63,7 @@ void parse_wide_character_vector(void* p0, void* p1, void* p2, void* p3, void* p
 
                     if (*dc >= *NUMBER_0_INTEGER) {
 
-                        log_message_debug("Parse wide character vector.");
+                        log_message_debug("Decode wide character vector.");
 
                         // The new destination wide character vector size.
                         // (Not exactly the size, but the destination character vector index
@@ -94,37 +94,37 @@ void parse_wide_character_vector(void* p0, void* p1, void* p2, void* p3, void* p
 
                         } else {
 
-                            log_message_debug("Could not parse wide character vector. The destination count exceeds the size.");
+                            log_message_debug("Could not decode wide character vector. The destination count exceeds the size.");
                         }
 
                     } else {
 
-                        log_message_debug("Could not parse wide character vector. The destination count is negative.");
+                        log_message_debug("Could not decode wide character vector. The destination count is negative.");
                     }
 
                 } else {
 
-                    log_message_debug("Could not parse wide character vector. The destination is null.");
+                    log_message_debug("Could not decode wide character vector. The destination is null.");
                 }
 
             } else {
 
-                log_message_debug("Could not parse wide character vector. The destination count is null.");
+                log_message_debug("Could not decode wide character vector. The destination count is null.");
             }
 
         } else {
 
-            log_message_debug("Could not parse wide character vector. The destination size is null.");
+            log_message_debug("Could not decode wide character vector. The destination size is null.");
         }
 
     } else {
 
-        log_message_debug("Could not parse wide character vector. The source count is null.");
+        log_message_debug("Could not decode wide character vector. The source count is null.");
     }
 }
 
 /**
- * Serialises the wide character vector model and creates a byte stream from it.
+ * Encodes the wide character vector model and creates a byte stream from it.
  *
  * @param p0 the destination (Hand over as reference!)
  * @param p1 the destination count
@@ -132,7 +132,7 @@ void parse_wide_character_vector(void* p0, void* p1, void* p2, void* p3, void* p
  * @param p3 the source
  * @param p4 the source count
  */
-void serialise_wide_character_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void encode_wide_character_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 }
 
 /* WIDE_CHARACTER_VECTOR_CONVERTER_SOURCE */

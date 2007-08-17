@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2007-08-13 16:37:11 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2007-08-17 03:15:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -33,17 +33,16 @@
 #include <signal.h>
 #include <stdio.h>
 //?? #include <wchar.h>
+#include "../../globals/constants/cyboi/cyboi_signal_priority_constants.c"
 #include "../../globals/constants/cybol/cybol_abstraction_constants.c"
 #include "../../globals/constants/character/character_constants.c"
 #include "../../globals/constants/character/wide_character_constants.c"
 #include "../../globals/constants/console/console_control_sequence_constants.c"
-#include "../../globals/constants/cyboi_constants.c"
 #include "../../globals/constants/cybol/cybol_name_constants.c"
 #include "../../globals/constants/integer/integer_constants.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../../globals/constants/pointer/pointer_constants.c"
-#include "../../globals/constants/system_constants.c"
-#include "../../globals/variables/variables.c"
+#include "../../globals/variables/thread_identification_variables.c"
 #include "../../memoriser/accessor/compound_accessor.c"
 #include "../../memoriser/accessor/signal_memory_accessor.c"
 #include "../../memoriser/accessor.c"
@@ -146,7 +145,7 @@ void receive_gnu_linux_console_signal(void* p0, void* p1, void* p2) {
     get_new_signal_id(*s, *sc, (void*) id);
 
     // Add signal to signal memory.
-    set_signal(*s, *sc, *ss, *ca, *cac, *cm, *cmc, *cd, *cdc, (void*) NORMAL_PRIORITY, (void*) id);
+    set_signal(*s, *sc, *ss, *ca, *cac, *cm, *cmc, *cd, *cdc, (void*) NORMAL_CYBOI_SIGNAL_PRIORITY, (void*) id);
 
     // Set interrupt request flag, in order to notify the signal checker
     // that a new signal has been placed in the signal memory.
@@ -459,7 +458,7 @@ void receive_gnu_linux_console(void* p0, void* p1, void* p2, void* p3) {
     pthread_mutex_unlock(*mt);
 
     // Only create thread, if not existent.
-    if (*GNU_LINUX_CONSOLE_THREAD == *INVALID_VALUE) {
+    if (*GNU_LINUX_CONSOLE_THREAD == *NUMBER_MINUS_1_INTEGER) {
 
         log_message_debug("Create new gnu/linux console receive service thread.");
 

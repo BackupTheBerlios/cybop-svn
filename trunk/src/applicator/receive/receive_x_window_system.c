@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.28 $ $Date: 2007-08-13 16:37:11 $ $Author: christian $
+ * @version $Revision: 1.29 $ $Date: 2007-08-17 03:15:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -34,14 +34,14 @@
 //?? #include <X11/Xutil.h>
 #include <pthread.h>
 #include <signal.h>
+#include "../../globals/constants/cyboi/cyboi_signal_priority_constants.c"
 #include "../../globals/constants/cybol/cybol_abstraction_constants.c"
 #include "../../globals/constants/cybol/cybol_name_constants.c"
 #include "../../globals/constants/integer/integer_constants.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../../globals/constants/pointer/pointer_constants.c"
-#include "../../globals/constants/cyboi_constants.c"
-#include "../../globals/constants/system_constants.c"
-#include "../../globals/variables/variables.c"
+#include "../../globals/variables/sleep_time_variables.c"
+#include "../../globals/variables/thread_identification_variables.c"
 #include "../../memoriser/accessor.c"
 #include "../../memoriser/allocator.c"
 
@@ -608,9 +608,14 @@ void receive_x_window_system_thread(void* p0) {
         // (which is necessary to avoid "Xlib: unexpected async reply" errors).
         // Note that send_x_window_system runs in CYBOI's main thread,
         // while receive_x_window_system runs in its own thread!
+        //
+        // CAUTION! A global variable MAY be used to set the sleep time,
+        // because it is only read but not written, and thus thread-safe.
+        // The global variable can only be manipulated in cyboi's main thread.
+        // cyboi's main thread while being
         while (!receive_x_window_system_check_events(*d, *xmt)) {
 
-            sleep(0.1);
+            sleep(*X_WINDOW_SYSTEM_SLEEP_TIME);
         }
 
         pthread_mutex_lock(*xmt);
@@ -655,7 +660,7 @@ void receive_x_window_system_thread(void* p0) {
                 get_new_signal_id(*s, *sc, (void*) id);
 
                 // Add signal to signal memory.
-                set_signal(*s, *sc, *ss, *ca, *cac, *cm, *cmc, *cd, *cdc, (void*) NORMAL_PRIORITY, (void*) id);
+                set_signal(*s, *sc, *ss, *ca, *cac, *cm, *cmc, *cd, *cdc, (void*) NORMAL_CYBOI_SIGNAL_PRIORITY, (void*) id);
 
                 // Set interrupt request flag, in order to notify the signal checker
                 // that a new signal has been placed in the signal memory.
@@ -796,7 +801,7 @@ void receive_x_window_system_thread(void* p0) {
             get_new_signal_id(*s, *sc, (void*) id);
 
             // Add signal to signal memory.
-            set_signal(*s, *sc, *ss, *ca, *cac, *cm, *cmc, *cd, *cdc, (void*) NORMAL_PRIORITY, (void*) id);
+            set_signal(*s, *sc, *ss, *ca, *cac, *cm, *cmc, *cd, *cdc, (void*) NORMAL_CYBOI_SIGNAL_PRIORITY, (void*) id);
 
             // Set interrupt request flag, in order to notify the signal checker
             // that a new signal has been placed in the signal memory.
@@ -914,7 +919,7 @@ void receive_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, v
     set_element(p0, (void*) X_WINDOW_SYSTEM_THREAD_COMMANDS_SIZE_INTERNAL, (void*) &p6, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
     // Only create thread, if not existent.
-    if (*GNU_LINUX_CONSOLE_THREAD == *INVALID_VALUE) {
+    if (*GNU_LINUX_CONSOLE_THREAD == *NUMBER_MINUS_1_INTEGER) {
 
         // Create thread.
         //

@@ -1,5 +1,5 @@
 /*
- * $RCSfile: abstraction_mapper.c,v $
+ * $RCSfile: abstraction_converter.c,v $
  *
  * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
  *
@@ -20,12 +20,12 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2007-08-13 16:37:12 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2007-08-17 03:15:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef ABSTRACTION_MAPPER_SOURCE
-#define ABSTRACTION_MAPPER_SOURCE
+#ifndef ABSTRACTION_CONVERTER_SOURCE
+#define ABSTRACTION_CONVERTER_SOURCE
 
 #include "../../globals/constants/cybol/cybol_abstraction_constants.c"
 #include "../../globals/constants/integer/integer_constants.c"
@@ -36,15 +36,15 @@
 #include "../../memoriser/array.c"
 
 /**
- * Maps the serialised cybol abstraction into a runtime cyboi abstraction.
+ * Decodes the cybol abstraction into a runtime cyboi abstraction.
  *
  * @param p0 the destination runtime cyboi abstraction
  * @param p1 the destination count
  * @param p2 the destination size
- * @param p3 the source serialised cybol abstraction
+ * @param p3 the source cybol abstraction
  * @param p4 the source count
  */
-void map_to_memory_abstraction(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void decode_abstraction(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (p1 != *NULL_POINTER) {
 
@@ -235,14 +235,14 @@ void map_to_memory_abstraction(void* p0, void* p1, void* p2, void* p3, void* p4)
 
         } else {
 
-            log_message_debug("Could not map serialised cybol abstraction to runtime cyboi abstraction. The destination is null.");
+            log_message_debug("Could not decode abstraction. The destination is null.");
         }
 
     } else {
 
-        log_message_debug("Could not map serialised cybol abstraction to runtime cyboi abstraction. The destination count is null.");
+        log_message_debug("Could not decode abstraction. The destination count is null.");
     }
 }
 
-/* ABSTRACTION_MAPPER_SOURCE */
+/* ABSTRACTION_CONVERTER_SOURCE */
 #endif

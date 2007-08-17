@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2007-07-29 01:53:30 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2007-08-17 03:15:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -33,14 +33,13 @@
 #include <string.h>
 #include "../globals/constants/character/character_constants.c"
 #include "../globals/constants/command_line/command_line_constants.c"
+#include "../globals/constants/cyboi/cyboi_operation_mode_constants.c"
 #include "../globals/constants/cybol/cybol_abstraction_constants.c"
 #include "../globals/constants/integer/integer_constants.c"
 #include "../globals/constants/log/log_level_constants.c"
 #include "../globals/constants/memory_structure/array_constants.c"
 #include "../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../globals/constants/pointer/pointer_constants.c"
-#include "../globals/constants/cyboi_constants.c"
-#include "../globals/constants/system_constants.c"
 
 /**
  * Optionalises the knowledge option.
@@ -229,10 +228,10 @@ void optionalise_log_file(void* p0, void* p1, void* p2) {
             if (*f >= *NUMBER_0_INTEGER) {
 
                 // The file owner.
-                int o = *INVALID_VALUE;
+                int o = *NUMBER_MINUS_1_INTEGER;
 
                 // The file group.
-                int g = *INVALID_VALUE;
+                int g = *NUMBER_MINUS_1_INTEGER;
 
                 // Set file owner.
                 chown((char*) t, o, g);
@@ -342,7 +341,7 @@ void optionalise_option(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
                 if (r != *NUMBER_0_INTEGER) {
 
                     // Set version operation mode.
-                    *m = *VERSION_OPERATION_MODE;
+                    *m = *VERSION_CYBOI_OPERATION_MODE;
                 }
             }
 
@@ -353,7 +352,7 @@ void optionalise_option(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
                 if (r != *NUMBER_0_INTEGER) {
 
                     // Set help operation mode.
-                    *m = *HELP_OPERATION_MODE;
+                    *m = *HELP_CYBOI_OPERATION_MODE;
                 }
             }
 
@@ -364,7 +363,7 @@ void optionalise_option(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
                 if (r != *NUMBER_0_INTEGER) {
 
                     // Set test operation mode.
-                    *m = *TEST_OPERATION_MODE;
+                    *m = *TEST_CYBOI_OPERATION_MODE;
                 }
             }
 
@@ -378,7 +377,7 @@ void optionalise_option(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
                     optionalise_knowledge(p1, p2, p5, p6);
 
                     // Set knowledge operation mode.
-                    *m = *KNOWLEDGE_OPERATION_MODE;
+                    *m = *KNOWLEDGE_CYBOI_OPERATION_MODE;
                 }
             }
 

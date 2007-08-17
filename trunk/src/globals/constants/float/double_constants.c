@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2007-04-09 16:34:25 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2007-08-17 03:15:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -28,6 +28,58 @@
 #define DOUBLE_CONSTANTS_SOURCE
 
 #include <math.h>
+
+//
+// Numbers 0.0 - 0.9.
+//
+
+/** The number 0.0 double. */
+static double NUMBER_0_0_DOUBLE_ARRAY[] = {0.0};
+static double* NUMBER_0_0_DOUBLE = NUMBER_0_0_DOUBLE_ARRAY;
+
+/** The number 0.1 double. */
+static double NUMBER_0_1_DOUBLE_ARRAY[] = {0.1};
+static double* NUMBER_0_1_DOUBLE = NUMBER_0_1_DOUBLE_ARRAY;
+
+/** The number 0.2 double. */
+static double NUMBER_0_2_DOUBLE_ARRAY[] = {0.2};
+static double* NUMBER_0_2_DOUBLE = NUMBER_0_2_DOUBLE_ARRAY;
+
+/** The number 0.3 double. */
+static double NUMBER_0_3_DOUBLE_ARRAY[] = {0.3};
+static double* NUMBER_0_3_DOUBLE = NUMBER_0_3_DOUBLE_ARRAY;
+
+/** The number 0.4 double. */
+static double NUMBER_0_4_DOUBLE_ARRAY[] = {0.4};
+static double* NUMBER_0_4_DOUBLE = NUMBER_0_4_DOUBLE_ARRAY;
+
+/** The number 0.5 double. */
+static double NUMBER_0_5_DOUBLE_ARRAY[] = {0.5};
+static double* NUMBER_0_5_DOUBLE = NUMBER_0_5_DOUBLE_ARRAY;
+
+/** The number 0.6 double. */
+static double NUMBER_0_6_DOUBLE_ARRAY[] = {0.6};
+static double* NUMBER_0_6_DOUBLE = NUMBER_0_6_DOUBLE_ARRAY;
+
+/** The number 0.7 double. */
+static double NUMBER_0_7_DOUBLE_ARRAY[] = {0.7};
+static double* NUMBER_0_7_DOUBLE = NUMBER_0_7_DOUBLE_ARRAY;
+
+/** The number 0.8 double. */
+static double NUMBER_0_8_DOUBLE_ARRAY[] = {0.8};
+static double* NUMBER_0_8_DOUBLE = NUMBER_0_8_DOUBLE_ARRAY;
+
+/** The number 0.9 double. */
+static double NUMBER_0_9_DOUBLE_ARRAY[] = {0.9};
+static double* NUMBER_0_9_DOUBLE = NUMBER_0_9_DOUBLE_ARRAY;
+
+//
+// Numbers 1.0 - 1.9.
+//
+
+/** The number 1.0 double. */
+static double NUMBER_1_0_DOUBLE_ARRAY[] = {1.0};
+static double* NUMBER_1_0_DOUBLE = NUMBER_1_0_DOUBLE_ARRAY;
 
 //
 // Mathematical.

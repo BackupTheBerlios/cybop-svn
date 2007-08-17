@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2007-06-22 07:07:14 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2007-08-17 03:15:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -35,9 +35,9 @@
 #include "../../globals/constants/log/log_message_constants.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../../globals/constants/pointer/pointer_constants.c"
-#include "../../globals/constants/system_constants.c"
 #include "../../globals/logger/logger.c"
-#include "../../globals/variables/variables.c"
+#include "../../globals/variables/service_interrupt_variables.c"
+#include "../../globals/variables/thread_identification_variables.c"
 #include "../../memoriser/accessor.c"
 
 /**
@@ -47,7 +47,7 @@ void interrupt_gnu_linux_console() {
 
     log_message_debug("Interrupt gnu/linux console service.");
 
-    if (*GNU_LINUX_CONSOLE_THREAD != *INVALID_VALUE) {
+    if (*GNU_LINUX_CONSOLE_THREAD != *NUMBER_MINUS_1_INTEGER) {
 
         // Set thread interrupt flag for signal handler.
         *GNU_LINUX_CONSOLE_THREAD_INTERRUPT = *NUMBER_1_INTEGER;
@@ -69,7 +69,7 @@ void interrupt_gnu_linux_console() {
         pthread_join(*GNU_LINUX_CONSOLE_THREAD, *NULL_POINTER);
 
         // Reset thread.
-        *GNU_LINUX_CONSOLE_THREAD = *INVALID_VALUE;
+        *GNU_LINUX_CONSOLE_THREAD = *NUMBER_MINUS_1_INTEGER;
 
         // Reset thread interrupt flag for signal handler.
         *GNU_LINUX_CONSOLE_THREAD_INTERRUPT = *NUMBER_0_INTEGER;

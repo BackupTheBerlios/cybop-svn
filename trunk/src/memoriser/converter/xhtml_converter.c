@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.12 $ $Date: 2007-08-13 16:37:12 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2007-08-17 03:15:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -43,7 +43,7 @@
 #include "../../memoriser/array.c"
 
 /**
- * Parses an xhtml format into a compound model.
+ * Decodes an xhtml format into a compound model.
  *
  * @param p0 the destination part (Hand over as reference!)
  * @param p1 the destination count
@@ -51,18 +51,18 @@
  * @param p3 the source xhtml byte array
  * @param p4 the source count
  */
-void parse_xhtml(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void decode_xhtml(void* p0, void* p1, void* p2, void* p3, void* p4) {
 }
 
 /**
- * Serialises the xhtml indentation.
+ * Encodes the xhtml indentation.
  *
  * @param p0 the destination html byte array (Hand over as reference!)
  * @param p1 the destination count
  * @param p2 the destination size
  * @param p3 the indentation level (only for beautifying the resulting xhtml code)
  */
-void serialise_xhtml_indentation(void* p0, void* p1, void* p2, void* p3) {
+void encode_xhtml_indentation(void* p0, void* p1, void* p2, void* p3) {
 
     if (p3 != *NULL_POINTER) {
 
@@ -78,17 +78,17 @@ void serialise_xhtml_indentation(void* p0, void* p1, void* p2, void* p3) {
                 break;
             }
 
-            // Serialise character tabulation character.
-//??            serialise_character_vector(p0, p1, p2, (void*) CHARACTER_TABULATION_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT);
+            // Encode character tabulation character.
+//??            encode_character_vector(p0, p1, p2, (void*) CHARACTER_TABULATION_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT);
 
-            // Serialise space character.
-            serialise_character_vector(p0, p1, p2, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT);
-            // Serialise space character.
-            serialise_character_vector(p0, p1, p2, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT);
-            // Serialise space character.
-            serialise_character_vector(p0, p1, p2, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT);
-            // Serialise space character.
-            serialise_character_vector(p0, p1, p2, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT);
+            // Encode space character.
+            encode_character_vector(p0, p1, p2, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT);
+            // Encode space character.
+            encode_character_vector(p0, p1, p2, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT);
+            // Encode space character.
+            encode_character_vector(p0, p1, p2, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT);
+            // Encode space character.
+            encode_character_vector(p0, p1, p2, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT);
 
             // Increment loop count.
             j++;
@@ -96,12 +96,12 @@ void serialise_xhtml_indentation(void* p0, void* p1, void* p2, void* p3) {
 
     } else {
 
-        log_message_debug("Error: Could not serialise xhtml indentation. The indentation level is null.");
+        log_message_debug("Error: Could not encode xhtml indentation. The indentation level is null.");
     }
 }
 
 /**
- * Serialises the xhtml attributes.
+ * Encodes the xhtml attributes.
  *
  * @param p0 the destination xhtml byte array (Hand over as reference!)
  * @param p1 the destination count
@@ -111,13 +111,13 @@ void serialise_xhtml_indentation(void* p0, void* p1, void* p2, void* p3) {
  * @param p5 the knowledge memory
  * @param p6 the knowledge memory count
  */
-void serialise_xhtml_attributes(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
+void encode_xhtml_attributes(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
     if (p4 != *NULL_POINTER) {
 
         int* sc = (int*) p4;
 
-        log_message_debug("Serialise xhtml attributes.");
+        log_message_debug("Encode xhtml attributes.");
 
         // The source part details name, abstraction, model, details.
         void** n = NULL_POINTER;
@@ -159,18 +159,18 @@ void serialise_xhtml_attributes(void* p0, void* p1, void* p2, void* p3, void* p4
 
                 // Only add attribute, if the details part name is NOT "tag"!
 
-                // Serialise space character.
-                serialise_character_vector(p0, p1, p2, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT);
-                // Serialise attribute name.
-                serialise_character_vector(p0, p1, p2, *n, *nc);
-                // Serialise equals sign character.
-                serialise_character_vector(p0, p1, p2, (void*) EQUALS_SIGN_CHARACTER, (void*) PRIMITIVE_COUNT);
-                // Serialise quotation mark character.
-                serialise_character_vector(p0, p1, p2, (void*) QUOTATION_MARK_CHARACTER, (void*) PRIMITIVE_COUNT);
-                // Serialise space character.
-                serialise_character_vector(p0, p1, p2, *m, *mc);
-                // Serialise quotation mark character.
-                serialise_character_vector(p0, p1, p2, (void*) QUOTATION_MARK_CHARACTER, (void*) PRIMITIVE_COUNT);
+                // Encode space character.
+                encode_character_vector(p0, p1, p2, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT);
+                // Encode attribute name.
+                encode_character_vector(p0, p1, p2, *n, *nc);
+                // Encode equals sign character.
+                encode_character_vector(p0, p1, p2, (void*) EQUALS_SIGN_CHARACTER, (void*) PRIMITIVE_COUNT);
+                // Encode quotation mark character.
+                encode_character_vector(p0, p1, p2, (void*) QUOTATION_MARK_CHARACTER, (void*) PRIMITIVE_COUNT);
+                // Encode space character.
+                encode_character_vector(p0, p1, p2, *m, *mc);
+                // Encode quotation mark character.
+                encode_character_vector(p0, p1, p2, (void*) QUOTATION_MARK_CHARACTER, (void*) PRIMITIVE_COUNT);
             }
 
             // Reset source part name, abstraction, model, details.
@@ -196,12 +196,12 @@ void serialise_xhtml_attributes(void* p0, void* p1, void* p2, void* p3, void* p4
 
     } else {
 
-        log_message_debug("Error: Could not serialise xhtml attributes. The source part details count is null.");
+        log_message_debug("Error: Could not encode xhtml attributes. The source part details count is null.");
     }
 }
 
 /**
- * Serialises the xhtml begin tag.
+ * Encodes the xhtml begin tag.
  *
  * @param p0 the destination html byte array (Hand over as reference!)
  * @param p1 the destination count
@@ -214,27 +214,27 @@ void serialise_xhtml_attributes(void* p0, void* p1, void* p2, void* p3, void* p4
  * @param p8 the knowledge memory count
  * @param p9 the indentation level (only for beautifying the resulting xhtml code)
  */
-void serialise_xhtml_begin_tag(void* p0, void* p1, void* p2,
+void encode_xhtml_begin_tag(void* p0, void* p1, void* p2,
     void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9) {
 
-    log_message_debug("Serialise xhtml begin tag.");
+    log_message_debug("Encode xhtml begin tag.");
 
-    // Serialise indentation.
-    serialise_xhtml_indentation(p0, p1, p2, p9);
-    // Serialise less than character.
-    serialise_character_vector(p0, p1, p2, (void*) LESS_THAN_SIGN_CHARACTER, (void*) PRIMITIVE_COUNT);
-    // Serialise xhtml tag.
-    serialise_character_vector(p0, p1, p2, p3, p4);
-    // Serialise html tag properties.
-    serialise_xhtml_attributes(p0, p1, p2, p5, p6, p7, p8);
-    // Serialise greater than character.
-    serialise_character_vector(p0, p1, p2, (void*) GREATER_THAN_SIGN_CHARACTER, (void*) PRIMITIVE_COUNT);
-    // Serialise line feed character, for better source reading.
-    serialise_character_vector(p0, p1, p2, (void*) LINE_FEED_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT);
+    // Encode indentation.
+    encode_xhtml_indentation(p0, p1, p2, p9);
+    // Encode less than character.
+    encode_character_vector(p0, p1, p2, (void*) LESS_THAN_SIGN_CHARACTER, (void*) PRIMITIVE_COUNT);
+    // Encode xhtml tag.
+    encode_character_vector(p0, p1, p2, p3, p4);
+    // Encode html tag properties.
+    encode_xhtml_attributes(p0, p1, p2, p5, p6, p7, p8);
+    // Encode greater than character.
+    encode_character_vector(p0, p1, p2, (void*) GREATER_THAN_SIGN_CHARACTER, (void*) PRIMITIVE_COUNT);
+    // Encode line feed character, for better source reading.
+    encode_character_vector(p0, p1, p2, (void*) LINE_FEED_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT);
 }
 
 /**
- * Serialises the xhtml end tag.
+ * Encodes the xhtml end tag.
  *
  * @param p0 the destination html byte array (Hand over as reference!)
  * @param p1 the destination count
@@ -243,26 +243,26 @@ void serialise_xhtml_begin_tag(void* p0, void* p1, void* p2,
  * @param p4 the source part model count
  * @param p5 the indentation level (only for beautifying the resulting xhtml code)
  */
-void serialise_xhtml_end_tag(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
+void encode_xhtml_end_tag(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
-    log_message_debug("Serialise xhtml end tag.");
+    log_message_debug("Encode xhtml end tag.");
 
-    // Serialise indentation.
-    serialise_xhtml_indentation(p0, p1, p2, p5);
-    // Serialise less than character.
-    serialise_character_vector(p0, p1, p2, (void*) LESS_THAN_SIGN_CHARACTER, (void*) PRIMITIVE_COUNT);
-    // Serialise solidus character.
-    serialise_character_vector(p0, p1, p2, (void*) SOLIDUS_CHARACTER, (void*) PRIMITIVE_COUNT);
-    // Serialise xhtml tag.
-    serialise_character_vector(p0, p1, p2, p3, p4);
-    // Serialise greater than character.
-    serialise_character_vector(p0, p1, p2, (void*) GREATER_THAN_SIGN_CHARACTER, (void*) PRIMITIVE_COUNT);
-    // Serialise line feed character, for better source reading.
-    serialise_character_vector(p0, p1, p2, (void*) LINE_FEED_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT);
+    // Encode indentation.
+    encode_xhtml_indentation(p0, p1, p2, p5);
+    // Encode less than character.
+    encode_character_vector(p0, p1, p2, (void*) LESS_THAN_SIGN_CHARACTER, (void*) PRIMITIVE_COUNT);
+    // Encode solidus character.
+    encode_character_vector(p0, p1, p2, (void*) SOLIDUS_CHARACTER, (void*) PRIMITIVE_COUNT);
+    // Encode xhtml tag.
+    encode_character_vector(p0, p1, p2, p3, p4);
+    // Encode greater than character.
+    encode_character_vector(p0, p1, p2, (void*) GREATER_THAN_SIGN_CHARACTER, (void*) PRIMITIVE_COUNT);
+    // Encode line feed character, for better source reading.
+    encode_character_vector(p0, p1, p2, (void*) LINE_FEED_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT);
 }
 
 /**
- * Serialises the xhtml tag content.
+ * Encodes the xhtml tag content.
  *
  * @param p0 the destination html byte array (Hand over as reference!)
  * @param p1 the destination count
@@ -271,7 +271,7 @@ void serialise_xhtml_end_tag(void* p0, void* p1, void* p2, void* p3, void* p4, v
  * @param p4 the source part model count
  * @param p5 the indentation level (only for beautifying the resulting xhtml code)
  */
-void serialise_xhtml_tag_content(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
+void encode_xhtml_tag_content(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
     if (p4 != *NULL_POINTER) {
 
@@ -282,22 +282,22 @@ void serialise_xhtml_tag_content(void* p0, void* p1, void* p2, void* p3, void* p
             // Only add tabulation, model and line feed,
             // if the source part model is NOT empty.
 
-            // Serialise indentation.
-            serialise_xhtml_indentation(p0, p1, p2, p5);
-            // Serialise source part model.
-            serialise_character_vector(p0, p1, p2, p3, p4);
-            // Serialise line feed character, for better source reading.
-            serialise_character_vector(p0, p1, p2, (void*) LINE_FEED_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT);
+            // Encode indentation.
+            encode_xhtml_indentation(p0, p1, p2, p5);
+            // Encode source part model.
+            encode_character_vector(p0, p1, p2, p3, p4);
+            // Encode line feed character, for better source reading.
+            encode_character_vector(p0, p1, p2, (void*) LINE_FEED_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT);
         }
 
     } else {
 
-        log_message_debug("Error: Could not serialise xhtml tag content. The model count is null.");
+        log_message_debug("Error: Could not encode xhtml tag content. The model count is null.");
     }
 }
 
 /**
- * Serialises an xhtml node.
+ * Encodes an xhtml node.
  *
  * @param p0 the destination html byte array (Hand over as reference!)
  * @param p1 the destination count
@@ -312,7 +312,7 @@ void serialise_xhtml_tag_content(void* p0, void* p1, void* p2, void* p3, void* p
  * @param p10 the knowledge memory count
  * @param p11 the indentation level (only for beautifying the resulting xhtml code)
  */
-void serialise_xhtml_node(void* p0, void* p1, void* p2, void* p3, void* p4,
+void encode_xhtml_node(void* p0, void* p1, void* p2, void* p3, void* p4,
     void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11) {
 
     if (p11 != *NULL_POINTER) {
@@ -323,7 +323,7 @@ void serialise_xhtml_node(void* p0, void* p1, void* p2, void* p3, void* p4,
 
             int* sc = (int*) p6;
 
-            log_message_debug("Debug: Serialise xhtml node.");
+            log_message_debug("Debug: Encode xhtml node.");
 
             // The source part name, abstraction, model, details.
             void** n = NULL_POINTER;
@@ -362,8 +362,8 @@ void serialise_xhtml_node(void* p0, void* p1, void* p2, void* p3, void* p4,
                 (void*) &td, (void*) &tdc, (void*) &tds,
                 p9, p10);
 
-            // Serialise xhtml begin tag.
-            serialise_xhtml_begin_tag(p0, p1, p2, *tm, *tmc, p7, p8, p9, p10, p11);
+            // Encode xhtml begin tag.
+            encode_xhtml_begin_tag(p0, p1, p2, *tm, *tmc, p7, p8, p9, p10, p11);
 
             // The new indentation level, which is the old incremented by one.
             int nl = *l + *NUMBER_1_INTEGER;
@@ -397,7 +397,7 @@ void serialise_xhtml_node(void* p0, void* p1, void* p2, void* p3, void* p4,
                             (void*) &d, (void*) &dc, (void*) &ds);
 
                         // Recursively call this operation for the part model.
-                        serialise_xhtml_node(p0, p1, p2, *a, *ac, *m, *mc, *d, *dc, p9, p10, (void*) &nl);
+                        encode_xhtml_node(p0, p1, p2, *a, *ac, *m, *mc, *d, *dc, p9, p10, (void*) &nl);
 
                         // Reset source part name, abstraction, model, details.
                         n = NULL_POINTER;
@@ -425,27 +425,27 @@ void serialise_xhtml_node(void* p0, void* p1, void* p2, void* p3, void* p4,
 
                 if (r != *NUMBER_0_INTEGER) {
 
-                    // Serialise xhtml tag content.
-                    serialise_xhtml_tag_content(p0, p1, p2, p5, p6, (void*) &nl);
+                    // Encode xhtml tag content.
+                    encode_xhtml_tag_content(p0, p1, p2, p5, p6, (void*) &nl);
                 }
             }
 
-            // Serialise xhtml end tag.
-            serialise_xhtml_end_tag(p0, p1, p2, *tm, *tmc, p11);
+            // Encode xhtml end tag.
+            encode_xhtml_end_tag(p0, p1, p2, *tm, *tmc, p11);
 
         } else {
 
-            log_message_debug("Error: Could not serialise compound model into xhtml format. The source count parameter is null.");
+            log_message_debug("Error: Could not encode compound model into xhtml format. The source count parameter is null.");
         }
 
     } else {
 
-        log_message_debug("Error: Could not serialise compound model into xhtml format. The indentation level is null.");
+        log_message_debug("Error: Could not encode compound model into xhtml format. The indentation level is null.");
     }
 }
 
 /**
- * Serialises a compound model into xhtml format.
+ * Encodes a compound model into xhtml format.
  *
  * @param p0 the destination html byte array (Hand over as reference!)
  * @param p1 the destination count
@@ -459,16 +459,16 @@ void serialise_xhtml_node(void* p0, void* p1, void* p2, void* p3, void* p4,
  * @param p9 the knowledge memory
  * @param p10 the knowledge memory count
  */
-void serialise_xhtml(void* p0, void* p1, void* p2, void* p3, void* p4,
+void encode_xhtml(void* p0, void* p1, void* p2, void* p3, void* p4,
     void* p5, void* p6, void* p7, void* p8, void* p9, void* p10) {
 
-    log_message_debug("Information: Serialise xhtml.");
+    log_message_debug("Information: Encode xhtml.");
 
     // The tree level.
     int l = *NUMBER_0_INTEGER;
 
-    // Serialise xhtml root node.
-    serialise_xhtml_node(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, (void*) &l);
+    // Encode xhtml root node.
+    encode_xhtml_node(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, (void*) &l);
 }
 
 /* XHTML_CONVERTER_SOURCE */

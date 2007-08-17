@@ -1,5 +1,5 @@
 /*
- * $RCSfile: terminal_background_mapper.c,v $
+ * $RCSfile: terminal_background_converter.c,v $
  *
  * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
  *
@@ -20,12 +20,12 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2007-08-13 16:37:12 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2007-08-17 03:15:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef TERMINAL_BACKGROUND_MAPPER_SOURCE
-#define TERMINAL_BACKGROUND_MAPPER_SOURCE
+#ifndef TERMINAL_BACKGROUND_CONVERTER_SOURCE
+#define TERMINAL_BACKGROUND_CONVERTER_SOURCE
 
 #include "../../globals/constants/console/console_control_sequence_constants.c"
 #include "../../globals/constants/cybol/cybol_abstraction_constants.c"
@@ -39,15 +39,27 @@
 #include "../../memoriser/array.c"
 
 /**
- * Maps the terminal background colour name to its control sequence code.
+ * Decodes the control sequence code into a terminal background colour name.
  *
- * @param p0 the destination control sequence code
+ * @param p0 the destination colour name
  * @param p1 the destination count
  * @param p2 the destination size
- * @param p3 the source colour name
+ * @param p3 the source control sequence code
  * @param p4 the source count
  */
-void mapto_terminal_background(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void decode_terminal_background(void* p0, void* p1, void* p2, void* p3, void* p4) {
+}
+
+/**
+ * Encodes the terminal background colour name into a control sequence code.
+ *
+ * @param p0 the destination control sequence code
+ * @param p1 the destination control sequence code count
+ * @param p2 the destination control sequence code size
+ * @param p3 the source colour name
+ * @param p4 the source colour name count
+ */
+void encode_terminal_background(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (p1 != *NULL_POINTER) {
 
@@ -150,26 +162,14 @@ void mapto_terminal_background(void* p0, void* p1, void* p2, void* p3, void* p4)
 
         } else {
 
-            log_message_debug("Could not map terminal background colour name to its control sequence code. The destination is null.");
+            log_message_debug("Could not encode terminal background. The destination is null.");
         }
 
     } else {
 
-        log_message_debug("Could not map terminal background colour name to its control sequence code. The destination count is null.");
+        log_message_debug("Could not encode terminal background. The destination count is null.");
     }
 }
 
-/**
- * Maps the terminal background colour name from its control sequence code.
- *
- * @param p0 the destination colour name
- * @param p1 the destination count
- * @param p2 the destination size
- * @param p3 the source control sequence code
- * @param p4 the source count
- */
-void mapfrom_terminal_background(void* p0, void* p1, void* p2, void* p3, void* p4) {
-}
-
-/* TERMINAL_BACKGROUND_MAPPER_SOURCE */
+/* TERMINAL_BACKGROUND_CONVERTER_SOURCE */
 #endif

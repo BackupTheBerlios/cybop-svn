@@ -22,7 +22,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.34 $ $Date: 2007-07-31 15:16:58 $ $Author: christian $
+ * @version $Revision: 1.35 $ $Date: 2007-08-17 03:15:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -109,16 +109,16 @@ void create_set(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
     // CAUTION! The details' abstraction always HAS TO BE "compound".
     allocate((void*) &kmd, (void*) kmds, COMPOUND_ABSTRACTION, COMPOUND_ABSTRACTION_COUNT);
 
-    // Parse knowledge model name, abstraction.
-    parse((void*) &kmn, (void*) kmnc, (void*) kmns, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, p5, p6, p3, p4);
-    parse((void*) &kma, (void*) kmac, (void*) kmas, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, p9, p10, p7, p8);
+    // Decode knowledge model name, abstraction.
+    decode((void*) &kmn, (void*) kmnc, (void*) kmns, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, p5, p6, p3, p4);
+    decode((void*) &kma, (void*) kmac, (void*) kmas, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, p9, p10, p7, p8);
     //
-    // CAUTION! Do NOT parse knowledge model model here!
+    // CAUTION! Do NOT decode knowledge model model here!
     // This function's purpose is only to allocate an empty knowledge model.
-    // The knowledge model may get filled with data in the "parse" operation,
+    // The knowledge model may get filled with data in the "decode" operation,
     // which is called when a "receive" logic operation is found in cybol.
     //
-    // CAUTION! Do NOT parse knowledge model details here!
+    // CAUTION! Do NOT decode knowledge model details here!
     // This function's purpose is only to allocate an empty knowledge model.
     // The knowledge details are left empty.
 

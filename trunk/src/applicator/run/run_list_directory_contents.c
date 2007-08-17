@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.15 $ $Date: 2007-08-13 16:37:11 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2007-08-17 03:15:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -39,9 +39,9 @@
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/constants/shell_command/unix_shell_command_constants.c"
-#include "../../globals/constants/system_constants.c"
+#include "../../globals/constants/system/system_executable_constants.c"
 #include "../../globals/logger/logger.c"
-#include "../../globals/variables/variables.c"
+#include "../../globals/variables/reallocation_factor_variables.c"
 #include "../../memoriser/allocator/character_vector_allocator.c"
 
 /**
@@ -131,7 +131,7 @@ void run_list_directory_contents(void* p0, void* p1, void* p2, void* p3) {
             if ((argc + *PRIMITIVE_COUNT + *LIST_DIRECTORY_CONTENTS_UNIX_SHELL_COMMAND_ALL_COUNT) >= args) {
 
                 // Determine arguments size.
-                args = argc * *POINTER_VECTOR_REALLOCATE_FACTOR + *PRIMITIVE_COUNT + *LIST_DIRECTORY_CONTENTS_UNIX_SHELL_COMMAND_ALL_COUNT;
+                args = argc * *POINTER_VECTOR_REALLOCATION_FACTOR + *PRIMITIVE_COUNT + *LIST_DIRECTORY_CONTENTS_UNIX_SHELL_COMMAND_ALL_COUNT;
 
                 reallocate_pointer_vector((void*) &arg, (void*) &argc, (void*) &args);
             }
@@ -158,7 +158,7 @@ void run_list_directory_contents(void* p0, void* p1, void* p2, void* p3) {
             if ((argc + *PRIMITIVE_COUNT + *LIST_DIRECTORY_CONTENTS_UNIX_SHELL_COMMAND_LONG_LISTING_COUNT) >= args) {
 
                 // Determine arguments size.
-                args = argc * *POINTER_VECTOR_REALLOCATE_FACTOR + *PRIMITIVE_COUNT + *LIST_DIRECTORY_CONTENTS_UNIX_SHELL_COMMAND_LONG_LISTING_COUNT;
+                args = argc * *POINTER_VECTOR_REALLOCATION_FACTOR + *PRIMITIVE_COUNT + *LIST_DIRECTORY_CONTENTS_UNIX_SHELL_COMMAND_LONG_LISTING_COUNT;
 
                 reallocate_pointer_vector((void*) &arg, (void*) &argc, (void*) &args);
             }
@@ -181,7 +181,7 @@ void run_list_directory_contents(void* p0, void* p1, void* p2, void* p3) {
     if ((argc + *PRIMITIVE_COUNT) >= args) {
 
         // Determine arguments size.
-        args = argc * *POINTER_VECTOR_REALLOCATE_FACTOR + *PRIMITIVE_COUNT;
+        args = argc * *POINTER_VECTOR_REALLOCATION_FACTOR + *PRIMITIVE_COUNT;
 
         reallocate_pointer_vector((void*) &arg, (void*) &argc, (void*) &args);
     }
@@ -229,15 +229,15 @@ void run_list_directory_contents(void* p0, void* p1, void* p2, void* p3) {
     //
 
     // Determine shell size.
-    shells = *SYSTEM_SHELL_COUNT + *PRIMITIVE_COUNT;
+    shells = *SHELL_SYSTEM_EXECUTABLE_COUNT + *PRIMITIVE_COUNT;
 
     // Allocate shell.
     allocate_array((void*) &shell, (void*) &shells, (void*) CHARACTER_ARRAY);
 
     // Assemble shell by first copying the actual shell command
     // and then adding the null termination character.
-    set_array_elements(shell, (void*) &shellc, (void*) SYSTEM_SHELL, (void*) SYSTEM_SHELL_COUNT, (void*) CHARACTER_ARRAY);
-    shellc = shellc + *SYSTEM_SHELL_COUNT;
+    set_array_elements(shell, (void*) &shellc, (void*) SHELL_SYSTEM_EXECUTABLE, (void*) SHELL_SYSTEM_EXECUTABLE_COUNT, (void*) CHARACTER_ARRAY);
+    shellc = shellc + *SHELL_SYSTEM_EXECUTABLE_COUNT;
     set_array_elements(shell, (void*) &shellc, (void*) NULL_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
     shellc = shellc + *PRIMITIVE_COUNT;
 
@@ -249,15 +249,15 @@ void run_list_directory_contents(void* p0, void* p1, void* p2, void* p3) {
     //
 
     // Determine character argument size.
-    characters = *SYSTEM_SHELL_CHARACTER_ARGUMENT_COUNT + *PRIMITIVE_COUNT;
+    characters = *SHELL_SYSTEM_EXECUTABLE_CHARACTER_ARGUMENT_COUNT + *PRIMITIVE_COUNT;
 
     // Allocate character argument.
     allocate_array((void*) &character, (void*) &characters, (void*) CHARACTER_ARRAY);
 
     // Assemble character argument by first copying the actual argument
     // and then adding the null termination character.
-    set_array_elements(character, (void*) &characterc, (void*) SYSTEM_SHELL_CHARACTER_ARGUMENT, (void*) SYSTEM_SHELL_CHARACTER_ARGUMENT_COUNT, (void*) CHARACTER_ARRAY);
-    characterc = characterc + *SYSTEM_SHELL_CHARACTER_ARGUMENT_COUNT;
+    set_array_elements(character, (void*) &characterc, (void*) SHELL_SYSTEM_EXECUTABLE_CHARACTER_ARGUMENT, (void*) SHELL_SYSTEM_EXECUTABLE_CHARACTER_ARGUMENT_COUNT, (void*) CHARACTER_ARRAY);
+    characterc = characterc + *SHELL_SYSTEM_EXECUTABLE_CHARACTER_ARGUMENT_COUNT;
     set_array_elements(character, (void*) &characterc, (void*) NULL_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
     characterc = characterc + *PRIMITIVE_COUNT;
 
@@ -295,7 +295,7 @@ void run_list_directory_contents(void* p0, void* p1, void* p2, void* p3) {
             if ((commandc + *PRIMITIVE_COUNT + *LIST_DIRECTORY_CONTENTS_UNIX_SHELL_COMMAND_ALL_COUNT) >= commands) {
 
                 // Determine command size.
-                commands = commandc * *POINTER_VECTOR_REALLOCATE_FACTOR + *PRIMITIVE_COUNT + *LIST_DIRECTORY_CONTENTS_UNIX_SHELL_COMMAND_ALL_COUNT;
+                commands = commandc * *POINTER_VECTOR_REALLOCATION_FACTOR + *PRIMITIVE_COUNT + *LIST_DIRECTORY_CONTENTS_UNIX_SHELL_COMMAND_ALL_COUNT;
 
                 reallocate_pointer_vector((void*) &command, (void*) &commandc, (void*) &commands);
             }
@@ -322,7 +322,7 @@ void run_list_directory_contents(void* p0, void* p1, void* p2, void* p3) {
             if ((commandc + *PRIMITIVE_COUNT + *LIST_DIRECTORY_CONTENTS_UNIX_SHELL_COMMAND_LONG_LISTING_COUNT) >= commands) {
 
                 // Determine command size.
-                commands = commandc * *POINTER_VECTOR_REALLOCATE_FACTOR + *PRIMITIVE_COUNT + *LIST_DIRECTORY_CONTENTS_UNIX_SHELL_COMMAND_LONG_LISTING_COUNT;
+                commands = commandc * *POINTER_VECTOR_REALLOCATION_FACTOR + *PRIMITIVE_COUNT + *LIST_DIRECTORY_CONTENTS_UNIX_SHELL_COMMAND_LONG_LISTING_COUNT;
 
                 reallocate_pointer_vector((void*) &command, (void*) &commandc, (void*) &commands);
             }
@@ -345,7 +345,7 @@ void run_list_directory_contents(void* p0, void* p1, void* p2, void* p3) {
     if ((commandc + *PRIMITIVE_COUNT) >= commands) {
 
         // Determine command size.
-        commands = commandc * *POINTER_VECTOR_REALLOCATE_FACTOR + *PRIMITIVE_COUNT;
+        commands = commandc * *POINTER_VECTOR_REALLOCATION_FACTOR + *PRIMITIVE_COUNT;
 
         reallocate_pointer_vector((void*) &command, (void*) &commandc, (void*) &commands);
     }

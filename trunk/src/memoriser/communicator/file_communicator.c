@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.26 $ $Date: 2007-08-13 16:37:11 $ $Author: christian $
+ * @version $Revision: 1.27 $ $Date: 2007-08-17 03:15:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -29,14 +29,13 @@
 
 #include <stdio.h>
 #include "../../globals/constants/character/character_constants.c"
-#include "../../globals/constants/cyboi_constants.c"
 #include "../../globals/constants/integer/integer_constants.c"
 #include "../../globals/constants/memory_structure/array_constants.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../../globals/constants/pointer/pointer_constants.c"
-#include "../../globals/constants/system_constants.c"
+#include "../../globals/constants/system/system_file_name_constants.c"
 #include "../../globals/logger/logger.c"
-#include "../../globals/variables/variables.c"
+#include "../../globals/variables/reallocation_factor_variables.c"
 #include "../../memoriser/array.c"
 
 /**
@@ -78,7 +77,7 @@ void read_file_stream(void* p0, void* p1, void* p2, void* p3) {
                         if (*dc == *ds) {
 
                             // Increase size.
-                            *ds = (*ds * *FILE_REALLOCATE_FACTOR) + *NUMBER_1_INTEGER;
+                            *ds = (*ds * *FILE_REALLOCATION_FACTOR) + *NUMBER_1_INTEGER;
 
                             // Reallocate array.
                             reallocate_array(p0, p1, p2, (void*) CHARACTER_ARRAY);
@@ -150,7 +149,7 @@ void read_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         if (r == *NUMBER_0_INTEGER) {
 
-            compare_arrays(p3, p4, (void*) STANDARD_INPUT_FILE_NAME, (void*) STANDARD_INPUT_FILE_NAME_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+            compare_arrays(p3, p4, (void*) INPUT_SYSTEM_FILE_NAME, (void*) INPUT_SYSTEM_FILE_NAME_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
             if (r != *NUMBER_0_INTEGER) {
 
@@ -293,7 +292,7 @@ void write_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             if (r == *NUMBER_0_INTEGER) {
 
-                compare_arrays(*d, p1, (void*) STANDARD_OUTPUT_FILE_NAME, (void*) STANDARD_OUTPUT_FILE_NAME_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                compare_arrays(*d, p1, (void*) OUTPUT_SYSTEM_FILE_NAME, (void*) OUTPUT_SYSTEM_FILE_NAME_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
                 if (r != *NUMBER_0_INTEGER) {
 
@@ -317,7 +316,7 @@ void write_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             if (r == *NUMBER_0_INTEGER) {
 
-                compare_arrays(*d, p1, (void*) STANDARD_ERROR_OUTPUT_FILE_NAME, (void*) STANDARD_ERROR_OUTPUT_FILE_NAME_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                compare_arrays(*d, p1, (void*) ERROR_OUTPUT_SYSTEM_FILE_NAME, (void*) ERROR_OUTPUT_SYSTEM_FILE_NAME_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
                 if (r != *NUMBER_0_INTEGER) {
 

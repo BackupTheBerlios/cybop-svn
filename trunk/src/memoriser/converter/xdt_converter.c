@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.13 $ $Date: 2007-08-13 16:37:12 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2007-08-17 03:15:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -46,8 +46,7 @@
 //
 
 /**
- * Parses the byte stream according to the given document type
- * and creates a document model from it.
+ * Decodes the source into the destination, according to the given language.
  *
  * @param p0 the destination model (Hand over as reference!)
  * @param p1 the destination model count
@@ -57,13 +56,13 @@
  * @param p5 the destination details size
  * @param p6 the source
  * @param p7 the source count
- * @param p8 the type
- * @param p9 the type count
+ * @param p8 the language
+ * @param p9 the language count
  */
-void parse(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9);
+void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9);
 
 /**
- * Parses an xdt field.
+ * Decodes an xdt field.
  *
  * @param p0 the destination field size (Hand over as reference!)
  * @param p1 the destination field identification (Hand over as reference!)
@@ -73,7 +72,7 @@ void parse(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
  * @param p5 the source byte array (Hand over as reference!)
  * @param p6 the source byte array count
  */
-void parse_xdt_field(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
+void decode_xdt_field(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
     if (p6 != *NULL_POINTER) {
 
@@ -99,7 +98,7 @@ void parse_xdt_field(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
 
                             int* fs = (int*) p0;
 
-                            log_message_debug("Information: Parse xdt field.");
+                            log_message_debug("Information: Decode xdt field.");
 
                             // The remaining bytes in the source byte array.
                             // They are used to check that the array border is not crossed.
@@ -107,8 +106,8 @@ void parse_xdt_field(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
 
                             if (rem >= *XDT_FIELD_SIZE_COUNT) {
 
-                                // Parse xdt field size.
-                                parse_integer(p0, *NULL_POINTER, *NULL_POINTER, *s, (void*) XDT_FIELD_SIZE_COUNT);
+                                // Decode xdt field size.
+                                decode_integer(p0, *NULL_POINTER, *NULL_POINTER, *s, (void*) XDT_FIELD_SIZE_COUNT);
 
                                 // Increment source xdt byte array index.
                                 *s = *s + *XDT_FIELD_SIZE_COUNT;
@@ -117,8 +116,8 @@ void parse_xdt_field(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
 
                             if (rem >= *XDT_FIELD_IDENTIFICATION_COUNT) {
 
-                                // Parse xdt field identification.
-                                parse_integer(p1, *NULL_POINTER, *NULL_POINTER, *s, (void*) XDT_FIELD_IDENTIFICATION_COUNT);
+                                // Decode xdt field identification.
+                                decode_integer(p1, *NULL_POINTER, *NULL_POINTER, *s, (void*) XDT_FIELD_IDENTIFICATION_COUNT);
 
                                 // Increment source xdt byte array index.
                                 *s = *s + *XDT_FIELD_IDENTIFICATION_COUNT;
@@ -172,7 +171,7 @@ void parse_xdt_field(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
                                         *s = *s + *PRIMITIVE_COUNT;
 
                                         // Set verification flag indicating that
-                                        // the xdt field was parsed correctly.
+                                        // the xdt field was decoded correctly.
                                         *v = *NUMBER_1_INTEGER;
                                     }
                                 }
@@ -180,43 +179,43 @@ void parse_xdt_field(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
 
                         } else {
 
-                            log_message_debug("Error: Could not parse xdt field. The field size is null.");
+                            log_message_debug("Error: Could not decode xdt field. The field size is null.");
                         }
 
                     } else {
 
-                        log_message_debug("Error: Could not parse xdt field. The field content is null.");
+                        log_message_debug("Error: Could not decode xdt field. The field content is null.");
                     }
 
                 } else {
 
-                    log_message_debug("Error: Could not parse xdt field. The field content count is null.");
+                    log_message_debug("Error: Could not decode xdt field. The field content count is null.");
                 }
 
             } else {
 
-                log_message_debug("Error: Could not parse xdt field. The verification flag is null.");
+                log_message_debug("Error: Could not decode xdt field. The verification flag is null.");
             }
 
         } else {
 
-            log_message_debug("Error: Could not parse xdt field. The source byte array is null.");
+            log_message_debug("Error: Could not decode xdt field. The source byte array is null.");
         }
 
     } else {
 
-        log_message_debug("Error: Could not parse xdt field. The source count is null.");
+        log_message_debug("Error: Could not decode xdt field. The source count is null.");
     }
 }
 
 /**
- * Parses for the next xdt field.
+ * Decodes the next xdt field.
  *
  * @param p0 the next field count = number of bytes to the next field (Hand over as reference!)
  * @param p1 the byte array
  * @param p2 the byte array count
  */
-void parse_xdt_next_field(void* p0, void* p1, void* p2) {
+void decode_xdt_next_field(void* p0, void* p1, void* p2) {
 
     if (p2 != *NULL_POINTER) {
 
@@ -230,7 +229,7 @@ void parse_xdt_next_field(void* p0, void* p1, void* p2) {
 
                 int* nc = (int*) p0;
 
-                log_message_debug("Information: Parse for next xdt field.");
+                log_message_debug("Information: Decode next xdt field.");
 
                 // The loop variable.
                 int j = *NUMBER_0_INTEGER;
@@ -271,22 +270,22 @@ void parse_xdt_next_field(void* p0, void* p1, void* p2) {
 
             } else {
 
-                log_message_debug("Error: Could not parse for next xdt field. The next field count is null.");
+                log_message_debug("Error: Could not decode for next xdt field. The next field count is null.");
             }
 
         } else {
 
-            log_message_debug("Error: Could not parse for next xdt field. The byte array is null.");
+            log_message_debug("Error: Could not decode for next xdt field. The byte array is null.");
         }
 
     } else {
 
-        log_message_debug("Error: Could not parse for next xdt field. The byte array count is null.");
+        log_message_debug("Error: Could not decode for next xdt field. The byte array count is null.");
     }
 }
 
 /**
- * Parses an xdt record.
+ * Decodes an xdt record.
  *
  * @param p0 the record size (Hand over as reference!)
  * @param p1 the record identification (Hand over as reference!)
@@ -295,7 +294,7 @@ void parse_xdt_next_field(void* p0, void* p1, void* p2) {
  * @param p4 the source byte array (Hand over as reference!)
  * @param p5 the source byte array count
  */
-void parse_xdt_record(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
+void decode_xdt_record(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
     if (p5 != *NULL_POINTER) {
 
@@ -317,7 +316,7 @@ void parse_xdt_record(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
                         int* rs = (int*) p0;
 
-                        log_message_debug("Information: Parse xdt record.");
+                        log_message_debug("Information: Decode xdt record.");
 
                         // Reset record size.
                         *rs = *NUMBER_0_INTEGER;
@@ -335,7 +334,7 @@ void parse_xdt_record(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
                         int v = *NUMBER_0_INTEGER;
                         // The next field count.
                         int nc = *NUMBER_0_INTEGER;
-                        // The parse mode:
+                        // The decode/parse mode:
                         // 0 - looking for the begin of a record
                         // 1 - within a record, looking for the begin of the next
                         //     record, which demarcates the end of this record
@@ -348,20 +347,20 @@ void parse_xdt_record(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
                                 break;
                             }
 
-                            // Parse xdt field (size, identification, content).
-                            parse_xdt_field((void*) &fs, (void*) &fid, (void*) &fc, (void*) &fcc, (void*) &v, p4, (void*) &rem);
+                            // Decode xdt field (size, identification, content).
+                            decode_xdt_field((void*) &fs, (void*) &fid, (void*) &fc, (void*) &fcc, (void*) &v, p4, (void*) &rem);
 
 /*??
                             // Test values.
-                            fprintf(stderr, "Test: Parse xdt record. Field size fs: %i\n", fs);
-                            fprintf(stderr, "Test: Parse xdt record. Field identification id: %i\n", fid);
-                            fprintf(stderr, "Test: Parse xdt record. Field content count fcc: %i\n", fcc);
+                            fprintf(stderr, "Test: Decode xdt record. Field size fs: %i\n", fs);
+                            fprintf(stderr, "Test: Decode xdt record. Field identification id: %i\n", fid);
+                            fprintf(stderr, "Test: Decode xdt record. Field content count fcc: %i\n", fcc);
 */
 
                             if (v == *NUMBER_1_INTEGER) {
 
                                 // The verification flag is set, which means that
-                                // the xdt field was parsed correctly and the carriage
+                                // the xdt field was decoded correctly and the carriage
                                 // return plus line feed characters were reached.
 
                                 // Decrement remaining bytes in the source byte array.
@@ -376,16 +375,16 @@ void parse_xdt_record(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
                                     if (m == *NUMBER_0_INTEGER) {
 
-                                        // Set parse mode to "1".
+                                        // Set decode/parse mode to "1".
                                         // This is the begin of a record.
                                         m = *NUMBER_1_INTEGER;
 
-                                        // Parse xdt record identification.
-                                        parse_integer(p1, *NULL_POINTER, *NULL_POINTER, fc, (void*) &fcc);
+                                        // Decode xdt record identification.
+                                        decode_integer(p1, *NULL_POINTER, *NULL_POINTER, fc, (void*) &fcc);
 
                                     } else {
 
-                                        // The current parse mode is "1", which means that
+                                        // The current decode mode is "1", which means that
                                         // the begin of a record had been detected before.
                                         // So, this record identification field already
                                         // belongs to the next following record.
@@ -421,10 +420,10 @@ void parse_xdt_record(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
                                 } else if (fid == *RECORD_SIZE_XDT_FIELD) {
 
-                                    // Parse xdt record size.
+                                    // Decode xdt record size.
                                     //
                                     // CAUTION! Do NOT use the following line:
-                                    // parse_integer(p0, *NULL_POINTER, *NULL_POINTER, fc, (void*) &fcc);
+                                    // decode_integer(p0, *NULL_POINTER, *NULL_POINTER, fc, (void*) &fcc);
                                     //
                                     // This is because the record content size is
                                     // counted using the loop variable j.
@@ -449,16 +448,16 @@ void parse_xdt_record(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
                             } else {
 
                                 // The verification flag is NOT set, which means
-                                // that the xdt field was NOT parsed correctly.
+                                // that the xdt field was NOT decoded correctly.
 
-                                log_message_debug("Error: Could not parse xdt record. An invalid field was detected. The parsing will now continue with the next valid field.");
+                                log_message_debug("Error: Could not decode xdt record. An invalid field was detected. The parsing will now continue with the next valid field.");
 
                                 // Reset next field count.
                                 nc = *NUMBER_0_INTEGER;
 
                                 // Count the number of bytes to the next carriage return-
                                 // plus line feed character.
-                                parse_xdt_next_field((void*) &nc, *s, (void*) &rem);
+                                decode_xdt_next_field((void*) &nc, *s, (void*) &rem);
 
                                 // Increment source xdt byte array index, so that following
                                 // fields may be found in the next loop cycle.
@@ -475,32 +474,32 @@ void parse_xdt_record(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
                     } else {
 
-                        log_message_debug("Error: Could not parse xdt record. The record size is null.");
+                        log_message_debug("Error: Could not decode xdt record. The record size is null.");
                     }
 
                 } else {
 
-                    log_message_debug("Error: Could not parse xdt record. The record content is null.");
+                    log_message_debug("Error: Could not decode xdt record. The record content is null.");
                 }
 
             } else {
 
-                log_message_debug("Error: Could not parse xdt record. The record content count is null.");
+                log_message_debug("Error: Could not decode xdt record. The record content count is null.");
             }
 
         } else {
 
-            log_message_debug("Error: Could not parse xdt record. The source byte array is null.");
+            log_message_debug("Error: Could not decode xdt record. The source byte array is null.");
         }
 
     } else {
 
-        log_message_debug("Error: Could not parse xdt record. The source byte array count is null.");
+        log_message_debug("Error: Could not decode xdt record. The source byte array count is null.");
     }
 }
 
 /**
- * Parses an xdt package.
+ * Decodes an xdt package.
  *
  * @param p0 the package size (Hand over as reference!)
  * @param p1 the package header (Hand over as reference!)
@@ -512,7 +511,7 @@ void parse_xdt_record(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
  * @param p7 the source byte array (Hand over as reference!)
  * @param p8 the source byte array count
  */
-void parse_xdt_package(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8) {
+void decode_xdt_package(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8) {
 
     if (p8 != *NULL_POINTER) {
 
@@ -550,7 +549,7 @@ void parse_xdt_package(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
 
                                         int* ps = (int*) p0;
 
-                                        log_message_debug("Information: Parse xdt package.");
+                                        log_message_debug("Information: Decode xdt package.");
 
                                         // Reset package size.
                                         *ps = *NUMBER_0_INTEGER;
@@ -572,7 +571,7 @@ void parse_xdt_package(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
                                                 break;
                                             }
 
-                                            // Parse xdt record (size, identification, content).
+                                            // Decode xdt record (size, identification, content).
                                             //
                                             // CAUTION! The package header and -footer count are
                                             // handed over as parameters to get the record content.
@@ -580,13 +579,13 @@ void parse_xdt_package(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
                                             // be used as its value is lost when returning from
                                             // this function. But a valid value has to be
                                             // returned to the calling function.
-                                            parse_xdt_record((void*) &rs, (void*) &rid, p3, p4, p7, (void*) &rem);
+                                            decode_xdt_record((void*) &rs, (void*) &rid, p3, p4, p7, (void*) &rem);
 
 /*??
                                             // Test values.
-                                            fprintf(stderr, "Test: Parse xdt package. Record size rs: %i\n", rs);
-                                            fprintf(stderr, "Test: Parse xdt package. Record identification id: %i\n", rid);
-                                            fprintf(stderr, "Test: Parse xdt package. Record content count pfc: %i\n\n", *pfc);
+                                            fprintf(stderr, "Test: Decode xdt package. Record size rs: %i\n", rs);
+                                            fprintf(stderr, "Test: Decode xdt package. Record identification id: %i\n", rid);
+                                            fprintf(stderr, "Test: Decode xdt package. Record content count pfc: %i\n\n", *pfc);
 */
 
                                             if (rs > *NUMBER_0_INTEGER) {
@@ -611,8 +610,8 @@ void parse_xdt_package(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
 
 /*??
                                                     // Test values.
-                                                    fprintf(stderr, "Test: Parse xdt package. Package header: %i\n", *ph);
-                                                    fprintf(stderr, "Test: Parse xdt package. Package header count: %i\n\n", *phc);
+                                                    fprintf(stderr, "Test: Decode xdt package. Package header: %i\n", *ph);
+                                                    fprintf(stderr, "Test: Decode xdt package. Package header count: %i\n\n", *phc);
 */
 
                                                     // Store xdt package content.
@@ -630,13 +629,13 @@ void parse_xdt_package(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
                                                     // CAUTION! The package footer does NOT
                                                     // have to be stored here explicitly.
                                                     // It was already handed over as parameter
-                                                    // to the "parse_xdt_record" function,
+                                                    // to the "decode_xdt_record" function,
                                                     // so that its value is already set.
 
 /*??
                                                     // Test values.
-                                                    fprintf(stderr, "Test: Parse xdt package. Package footer: %i\n", *pf);
-                                                    fprintf(stderr, "Test: Parse xdt package. Package footer count: %i\n\n", *pfc);
+                                                    fprintf(stderr, "Test: Decode xdt package. Package footer: %i\n", *pf);
+                                                    fprintf(stderr, "Test: Decode xdt package. Package footer count: %i\n\n", *pfc);
 */
 
                                                     // Decrement package content count.
@@ -680,52 +679,52 @@ void parse_xdt_package(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
 
                                     } else {
 
-                                        log_message_debug("Error: Could not parse xdt package. The package size is null.");
+                                        log_message_debug("Error: Could not decode xdt package. The package size is null.");
                                     }
 
                                 } else {
 
-                                    log_message_debug("Error: Could not parse xdt package. The package header is null.");
+                                    log_message_debug("Error: Could not decode xdt package. The package header is null.");
                                 }
 
                             } else {
 
-                                log_message_debug("Error: Could not parse xdt package. The package header count is null.");
+                                log_message_debug("Error: Could not decode xdt package. The package header count is null.");
                             }
 
                         } else {
 
-                            log_message_debug("Error: Could not parse xdt package. The package footer is null.");
+                            log_message_debug("Error: Could not decode xdt package. The package footer is null.");
                         }
 
                     } else {
 
-                        log_message_debug("Error: Could not parse xdt package. The package footer count is null.");
+                        log_message_debug("Error: Could not decode xdt package. The package footer count is null.");
                     }
 
                 } else {
 
-                    log_message_debug("Error: Could not parse xdt package. The package content is null.");
+                    log_message_debug("Error: Could not decode xdt package. The package content is null.");
                 }
 
             } else {
 
-                log_message_debug("Error: Could not parse xdt package. The package content count is null.");
+                log_message_debug("Error: Could not decode xdt package. The package content count is null.");
             }
 
         } else {
 
-            log_message_debug("Error: Could not parse xdt package. The source byte array is null.");
+            log_message_debug("Error: Could not decode xdt package. The source byte array is null.");
         }
 
     } else {
 
-        log_message_debug("Error: Could not parse xdt package. The source byte array count is null.");
+        log_message_debug("Error: Could not decode xdt package. The source byte array count is null.");
     }
 }
 
 /**
- * Parses the model.
+ * Decodes the model.
  *
  * @param p0 the destination name (Hand over as reference!)
  * @param p1 the destination name count (Hand over as reference!)
@@ -746,7 +745,7 @@ void parse_xdt_package(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
  * @param p16 the source name
  * @param p17 the source name count
  */
-void parse_xdt_parse_model(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
+void decode_xdt_decode_model(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
     void* p6, void* p7, void* p8, void* p9, void* p10, void* p11,
     void* p12, void* p13, void* p14, void* p15, void* p16, void* p17) {
 
@@ -782,7 +781,7 @@ void parse_xdt_parse_model(void* p0, void* p1, void* p2, void* p3, void* p4, voi
 
                                     int** nc = (int**) p1;
 
-                                    log_message_debug("Information: Parse model.");
+                                    log_message_debug("Information: Decode model.");
 
                                     // Allocate knowledge model name.
                                     allocate(p1, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
@@ -815,51 +814,51 @@ void parse_xdt_parse_model(void* p0, void* p1, void* p2, void* p3, void* p4, voi
                                     **ds = *NUMBER_0_INTEGER;
                                     allocate(p9, (void*) *ds, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
 
-                                    // Parse name.
-                                    parse_character_vector(p0, (void*) *nc, (void*) *ns, p16, p17);
-                                    // Parse abstraction.
-                                    parse_character_vector(p3, (void*) *ac, (void*) *as, p14, p15);
-                                    // Parse model.
-                                    parse(p6, (void*) *mc, (void*) *ms, p9, (void*) *dc, (void*) *ds, p12, p13, p14, p15);
+                                    // Decode name.
+                                    decode_character_vector(p0, (void*) *nc, (void*) *ns, p16, p17);
+                                    // Decode abstraction.
+                                    decode_character_vector(p3, (void*) *ac, (void*) *as, p14, p15);
+                                    // Decode model.
+                                    decode(p6, (void*) *mc, (void*) *ms, p9, (void*) *dc, (void*) *ds, p12, p13, p14, p15);
 
                                 } else {
 
-                                    log_message_debug("Error: Could not parse model. The name count is null.");
+                                    log_message_debug("Error: Could not decode model. The name count is null.");
                                 }
 
                             } else {
 
-                                log_message_debug("Error: Could not parse model. The name size is null.");
+                                log_message_debug("Error: Could not decode model. The name size is null.");
                             }
 
                         } else {
 
-                            log_message_debug("Error: Could not parse model. The abstraction count is null.");
+                            log_message_debug("Error: Could not decode model. The abstraction count is null.");
                         }
 
                     } else {
 
-                        log_message_debug("Error: Could not parse model. The abstraction size is null.");
+                        log_message_debug("Error: Could not decode model. The abstraction size is null.");
                     }
 
                 } else {
 
-                    log_message_debug("Error: Could not parse model. The model count is null.");
+                    log_message_debug("Error: Could not decode model. The model count is null.");
                 }
 
             } else {
 
-                log_message_debug("Error: Could not parse model. The model size is null.");
+                log_message_debug("Error: Could not decode model. The model size is null.");
             }
 
         } else {
 
-            log_message_debug("Error: Could not parse model. The details count is null.");
+            log_message_debug("Error: Could not decode model. The details count is null.");
         }
 
     } else {
 
-        log_message_debug("Error: Could not parse model. The details size is null.");
+        log_message_debug("Error: Could not decode model. The details size is null.");
     }
 }
 
@@ -873,7 +872,7 @@ void parse_xdt_parse_model(void* p0, void* p1, void* p2, void* p3, void* p4, voi
  * @param p4 the source field content count
  * @param p5 the source field identification
  */
-void parse_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
+void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
     if (p5 != *NULL_POINTER) {
 
@@ -905,7 +904,7 @@ void parse_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, vo
 
         if (*id == *RECORD_SIZE_XDT_FIELD) {
 
-            parse_xdt_parse_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
+            decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
                 (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT,
@@ -913,7 +912,7 @@ void parse_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, vo
 
         } else if (*id == *ADT_RECORD_SPECIFICATION_VERSION_XDT_FIELD) {
 
-            parse_xdt_parse_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
+            decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
                 (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
@@ -921,7 +920,7 @@ void parse_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, vo
 
         } else if (*id == *PATIENT_IDENTIFICATION_XDT_FIELD) {
 
-            parse_xdt_parse_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
+            decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
                 (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
@@ -929,7 +928,7 @@ void parse_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, vo
 
         } else if (*id == *PATIENT_FIRST_NAME_XDT_FIELD) {
 
-            parse_xdt_parse_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
+            decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
                 (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
@@ -939,7 +938,7 @@ void parse_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, vo
         // No further processing of the xdt field content is necessary!
         // The field represents the final logical model in the xdt format
         // and does not contain any further parts.
-        // Its content is therefore parsed directly.
+        // Its content is therefore decoded directly.
 
         // CAUTION! This check for null pointers is necessary to avoid segmentation faults!
         if ((n != *NULL_POINTER) && (nc != *NULL_POINTER) && (ns != *NULL_POINTER)
@@ -992,7 +991,7 @@ void parse_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, vo
  * @param p3 the source record
  * @param p4 the source record count
  */
-void parse_xdt_process_record(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void decode_xdt_process_record(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (p4 != *NULL_POINTER) {
 
@@ -1025,8 +1024,8 @@ void parse_xdt_process_record(void* p0, void* p1, void* p2, void* p3, void* p4) 
                     break;
                 }
 
-                // Parse xdt field (size, identification, content).
-                parse_xdt_field((void*) &fs, (void*) &fid, (void*) &fc, (void*) &fcc, (void*) &v, (void*) &s, (void*) &rem);
+                // Decode xdt field (size, identification, content).
+                decode_xdt_field((void*) &fs, (void*) &fid, (void*) &fc, (void*) &fcc, (void*) &v, (void*) &s, (void*) &rem);
 
 /*??
                 // Test values.
@@ -1038,7 +1037,7 @@ void parse_xdt_process_record(void* p0, void* p1, void* p2, void* p3, void* p4) 
                 if (v == *NUMBER_1_INTEGER) {
 
                     // The verification flag is set, which means that
-                    // the xdt field was parsed correctly and the carriage
+                    // the xdt field was decoded correctly and the carriage
                     // return plus line feed characters were reached.
 
                     // Increment source xdt byte array index,
@@ -1047,12 +1046,12 @@ void parse_xdt_process_record(void* p0, void* p1, void* p2, void* p3, void* p4) 
 //??                    s = s + fs;
                     rem = rem - fs;
 
-                    parse_xdt_select_field(p0, p1, p2, fc, (void*) &fcc, (void*) &fid);
+                    decode_xdt_select_field(p0, p1, p2, fc, (void*) &fcc, (void*) &fid);
 
                 } else {
 
                     // The verification flag is NOT set, which means
-                    // that the xdt field was NOT parsed correctly.
+                    // that the xdt field was NOT decoded correctly.
 
                     log_message_debug("Error: Could not process xdt record. An invalid field was detected. The parsing will now continue with the next valid field.");
 
@@ -1061,7 +1060,7 @@ void parse_xdt_process_record(void* p0, void* p1, void* p2, void* p3, void* p4) 
 
                     // Count the number of bytes to the next carriage return-
                     // plus line feed character.
-                    parse_xdt_next_field((void*) &nc, s, (void*) &rem);
+                    decode_xdt_next_field((void*) &nc, s, (void*) &rem);
 
                     // Increment source xdt byte array index, so that following
                     // fields may be found in the next loop cycle.
@@ -1091,7 +1090,7 @@ void parse_xdt_process_record(void* p0, void* p1, void* p2, void* p3, void* p4) 
  * @param p4 the source record content count
  * @param p5 the source record identification
  */
-void parse_xdt_select_record(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
+void decode_xdt_select_record(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
     if (p5 != *NULL_POINTER) {
 
@@ -1123,12 +1122,12 @@ void parse_xdt_select_record(void* p0, void* p1, void* p2, void* p3, void* p4, v
 
         if (*id == *DATA_PACKAGE_HEADER_XDT_RECORD) {
 
-            // Parse package header (meta data 1).
+            // Decode package header (meta data 1).
             // CAUTION! Hand over a null pointer in place of the model and model count!
             // This is necessary because an EMPTY compound model is to be created.
             // The given model parameters do not represent the compound's xml file name
             // but a byte stream which gets processed further below.
-            parse_xdt_parse_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
+            decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 *NULL_POINTER, *NULL_POINTER,
                 (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
@@ -1136,12 +1135,12 @@ void parse_xdt_select_record(void* p0, void* p1, void* p2, void* p3, void* p4, v
 
         } else if (*id == *DATA_PACKAGE_FOOTER_XDT_RECORD) {
 
-            // Parse package footer (meta data 2).
+            // Decode package footer (meta data 2).
             // CAUTION! Hand over a null pointer in place of the model and model count!
             // This is necessary because an EMPTY compound model is to be created.
             // The given model parameters do not represent the compound's xml file name
             // but a byte stream which gets processed further below.
-            parse_xdt_parse_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
+            decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 *NULL_POINTER, *NULL_POINTER,
                 (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
@@ -1153,7 +1152,7 @@ void parse_xdt_select_record(void* p0, void* p1, void* p2, void* p3, void* p4, v
             // This is necessary because an EMPTY compound model is to be created.
             // The given model parameters do not represent the compound's xml file name
             // but a byte stream which gets processed further below.
-            parse_xdt_parse_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
+            decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 *NULL_POINTER, *NULL_POINTER,
                 (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
@@ -1165,7 +1164,7 @@ void parse_xdt_select_record(void* p0, void* p1, void* p2, void* p3, void* p4, v
             // This is necessary because an EMPTY compound model is to be created.
             // The given model parameters do not represent the compound's xml file name
             // but a byte stream which gets processed further below.
-            parse_xdt_parse_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
+            decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 *NULL_POINTER, *NULL_POINTER,
                 (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
@@ -1177,7 +1176,7 @@ void parse_xdt_select_record(void* p0, void* p1, void* p2, void* p3, void* p4, v
             // This is necessary because an EMPTY compound model is to be created.
             // The given model parameters do not represent the compound's xml file name
             // but a byte stream which gets processed further below.
-            parse_xdt_parse_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
+            decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 *NULL_POINTER, *NULL_POINTER,
                 (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
@@ -1189,7 +1188,7 @@ void parse_xdt_select_record(void* p0, void* p1, void* p2, void* p3, void* p4, v
             // This is necessary because an EMPTY compound model is to be created.
             // The given model parameters do not represent the compound's xml file name
             // but a byte stream which gets processed further below.
-            parse_xdt_parse_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
+            decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 *NULL_POINTER, *NULL_POINTER,
                 (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
@@ -1197,7 +1196,7 @@ void parse_xdt_select_record(void* p0, void* p1, void* p2, void* p3, void* p4, v
         }
 
         // Process xdt record content.
-        parse_xdt_process_record(m, mc, ms, p3, p4);
+        decode_xdt_process_record(m, mc, ms, p3, p4);
 
         // CAUTION! This check for null pointers is necessary to avoid segmentation faults!
         if ((n != *NULL_POINTER) && (nc != *NULL_POINTER) && (ns != *NULL_POINTER)
@@ -1253,7 +1252,7 @@ void parse_xdt_select_record(void* p0, void* p1, void* p2, void* p3, void* p4, v
  * @param p3 the source package
  * @param p4 the source package count
  */
-void parse_xdt_process_package(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void decode_xdt_process_package(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (p4 != *NULL_POINTER) {
 
@@ -1282,8 +1281,8 @@ void parse_xdt_process_package(void* p0, void* p1, void* p2, void* p3, void* p4)
                     break;
                 }
 
-                // Parse xdt record (size, identification, content).
-                parse_xdt_record((void*) &rs, (void*) &rid, (void*) &rc, (void*) &rcc, (void*) &s, (void*) &rem);
+                // Decode xdt record (size, identification, content).
+                decode_xdt_record((void*) &rs, (void*) &rid, (void*) &rc, (void*) &rcc, (void*) &s, (void*) &rem);
 
 /*??
                 // Test values.
@@ -1300,7 +1299,7 @@ void parse_xdt_process_package(void* p0, void* p1, void* p2, void* p3, void* p4)
 //??                    s = s + rs;
                     rem = rem - rs;
 
-                    parse_xdt_select_record(p0, p1, p2, rc, (void*) &rcc, (void*) &rid);
+                    decode_xdt_select_record(p0, p1, p2, rc, (void*) &rcc, (void*) &rid);
 
                 } else {
 
@@ -1339,7 +1338,7 @@ void parse_xdt_process_package(void* p0, void* p1, void* p2, void* p3, void* p4)
  * @param p10 the package footer
  * @param p11 the package footer count
  */
-void parse_xdt_select_package(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
+void decode_xdt_select_package(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
     void* p6, void* p7, void* p8, void* p9, void* p10, void* p11) {
 
     log_message_debug("Information: Select xdt package.");
@@ -1361,23 +1360,23 @@ void parse_xdt_select_package(void* p0, void* p1, void* p2, void* p3, void* p4, 
     void* dc = *NULL_POINTER;
     void* ds = *NULL_POINTER;
 
-    // Parse package content.
+    // Decode package content.
     // CAUTION! Hand over a null pointer in place of the model and model count!
     // This is necessary because an EMPTY compound model is to be created.
     // The given model parameters do not represent the compound's xml file name
     // but a byte stream which gets processed further below.
-    parse_xdt_parse_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
+    decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
         (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
         *NULL_POINTER, *NULL_POINTER,
         (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
         (void*) STANDARD_XDT_PACKAGE_NAME, (void*) STANDARD_XDT_PACKAGE_NAME_COUNT);
 
     // Process xdt package content.
-    parse_xdt_process_package(m, mc, ms, p6, p7);
-    // Parse xdt package header (meta data 1).
-    parse_xdt_select_record(d, dc, ds, p8, p9, (void*) DATA_PACKAGE_HEADER_XDT_RECORD);
-    // Parse xdt package footer (meta data 2).
-    parse_xdt_select_record(d, dc, ds, p10, p11, (void*) DATA_PACKAGE_FOOTER_XDT_RECORD);
+    decode_xdt_process_package(m, mc, ms, p6, p7);
+    // Decode xdt package header (meta data 1).
+    decode_xdt_select_record(d, dc, ds, p8, p9, (void*) DATA_PACKAGE_HEADER_XDT_RECORD);
+    // Decode xdt package footer (meta data 2).
+    decode_xdt_select_record(d, dc, ds, p10, p11, (void*) DATA_PACKAGE_FOOTER_XDT_RECORD);
 
     // CAUTION! This check for null pointers is necessary to avoid segmentation faults!
     if ((n != *NULL_POINTER) && (nc != *NULL_POINTER) && (ns != *NULL_POINTER)
@@ -1420,7 +1419,7 @@ void parse_xdt_select_package(void* p0, void* p1, void* p2, void* p3, void* p4, 
 }
 
 /**
- * Parses an xdt format byte array into a compound model.
+ * Decodes an xdt format byte array into a compound model.
  *
  * The "x DatenTransfer" (xDT) is the German version of
  * "Electronic Data Interchange" (EDI) for medical practices.
@@ -1488,7 +1487,7 @@ void parse_xdt_select_package(void* p0, void* p1, void* p2, void* p3, void* p4, 
  * @param p6 the source xdt byte array
  * @param p7 the source xdt byte array count
  */
-void parse_xdt(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
+void decode_xdt(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
 
     if (p7 != *NULL_POINTER) {
 
@@ -1506,7 +1505,7 @@ void parse_xdt(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
 
                     void** dm = (void**) p0;
 
-                    log_message_debug("Information: Parse xdt format into compound model.");
+                    log_message_debug("Information: Decode xdt format into compound model.");
 
                     // The remaining bytes in the source byte array.
                     int rem = *sc;
@@ -1540,7 +1539,7 @@ void parse_xdt(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
                         // these have to store their result in s.
                         // If temporary variables (function parameters) were used,
                         // their values would be lost when the called operation is left.
-                        parse_xdt_package((void*) &ps, (void*) &ph, (void*) &phc, (void*) &pf, (void*) &pfc, (void*) &pc, (void*) &pcc, (void*) &s, (void*) &rem);
+                        decode_xdt_package((void*) &ps, (void*) &ph, (void*) &phc, (void*) &pf, (void*) &pfc, (void*) &pc, (void*) &pcc, (void*) &s, (void*) &rem);
 
 /*??
                         // Test values.
@@ -1561,7 +1560,7 @@ void parse_xdt(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
 */
 
                             // Select xdt package.
-                            parse_xdt_select_package(*dm, p1, p2, *dd, p4, p5,
+                            decode_xdt_select_package(*dm, p1, p2, *dd, p4, p5,
                                 pc, (void*) &pcc, ph, (void*) &phc, pf, (void*) &pfc);
 
                         } else {
@@ -1589,27 +1588,27 @@ void parse_xdt(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
 
                 } else {
 
-                    log_message_debug("Error: Could not parse xdt. The destination compound model is null.");
+                    log_message_debug("Error: Could not decode xdt. The destination compound model is null.");
                 }
 
             } else {
 
-                log_message_debug("Error: Could not parse xdt. The destination compound details is null.");
+                log_message_debug("Error: Could not decode xdt. The destination compound details is null.");
             }
 
         } else {
 
-            log_message_debug("Error: Could not parse xdt. The source byte array is null.");
+            log_message_debug("Error: Could not decode xdt. The source byte array is null.");
         }
 
     } else {
 
-        log_message_debug("Error: Could not parse xdt. The source byte array count is null.");
+        log_message_debug("Error: Could not decode xdt. The source byte array count is null.");
     }
 }
 
 /**
- * Serialises a compound model into an xdt format byte array.
+ * Encodes a compound model into an xdt format byte array.
  *
  * @param p0 the destination xdt byte array (Hand over as reference!)
  * @param p1 the destination count
@@ -1617,9 +1616,9 @@ void parse_xdt(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
  * @param p3 the source compound model
  * @param p4 the source count
  */
-void serialise_xdt(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void encode_xdt(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    log_message_debug("Information: Serialise compound model into xdt format.");
+    log_message_debug("Information: Encode compound model into xdt format.");
 }
 
 /* XDT_CONVERTER_SOURCE */

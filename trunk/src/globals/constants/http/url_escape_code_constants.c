@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2007-08-12 23:31:48 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2007-08-17 03:15:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -69,20 +69,20 @@ static char SEMICOLON_URL_ESCAPE_CODE_ARRAY[] = {'%', '3', 'B'};
 static char* SEMICOLON_URL_ESCAPE_CODE = SEMICOLON_URL_ESCAPE_CODE_ARRAY;
 static int* SEMICOLON_URL_ESCAPE_CODE_COUNT = NUMBER_3_INTEGER_ARRAY;
 
-/** The less than < url escape code. */
-static char LESS_THAN_URL_ESCAPE_CODE_ARRAY[] = {'%', '3', 'C'};
-static char* LESS_THAN_URL_ESCAPE_CODE = LESS_THAN_URL_ESCAPE_CODE_ARRAY;
-static int* LESS_THAN_URL_ESCAPE_CODE_COUNT = NUMBER_3_INTEGER_ARRAY;
+/** The less than sign < url escape code. */
+static char LESS_THAN_SIGN_URL_ESCAPE_CODE_ARRAY[] = {'%', '3', 'C'};
+static char* LESS_THAN_SIGN_URL_ESCAPE_CODE = LESS_THAN_SIGN_URL_ESCAPE_CODE_ARRAY;
+static int* LESS_THAN_SIGN_URL_ESCAPE_CODE_COUNT = NUMBER_3_INTEGER_ARRAY;
 
 /** The equals sign = url escape code. */
 static char EQUALS_SIGN_URL_ESCAPE_CODE_ARRAY[] = {'%', '3', 'D'};
 static char* EQUALS_SIGN_URL_ESCAPE_CODE = EQUALS_SIGN_URL_ESCAPE_CODE_ARRAY;
 static int* EQUALS_SIGN_URL_ESCAPE_CODE_COUNT = NUMBER_3_INTEGER_ARRAY;
 
-/** The greater than > url escape code. */
-static char GREATER_THAN_URL_ESCAPE_CODE_ARRAY[] = {'%', '3', 'E'};
-static char* GREATER_THAN_URL_ESCAPE_CODE = GREATER_THAN_URL_ESCAPE_CODE_ARRAY;
-static int* GREATER_THAN_URL_ESCAPE_CODE_COUNT = NUMBER_3_INTEGER_ARRAY;
+/** The greater than sign > url escape code. */
+static char GREATER_THAN_SIGN_URL_ESCAPE_CODE_ARRAY[] = {'%', '3', 'E'};
+static char* GREATER_THAN_SIGN_URL_ESCAPE_CODE = GREATER_THAN_SIGN_URL_ESCAPE_CODE_ARRAY;
+static int* GREATER_THAN_SIGN_URL_ESCAPE_CODE_COUNT = NUMBER_3_INTEGER_ARRAY;
 
 /** The question mark ? url escape code. */
 static char QUESTION_MARK_URL_ESCAPE_CODE_ARRAY[] = {'%', '3', 'F'};

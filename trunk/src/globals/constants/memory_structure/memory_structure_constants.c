@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2007-06-22 07:07:14 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2007-08-17 03:15:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -39,28 +39,6 @@ static int* PRIMITIVE_COUNT = NUMBER_1_INTEGER_ARRAY;
 
 /** The primitive value index. */
 static int* PRIMITIVE_VALUE_INDEX = NUMBER_0_INTEGER_ARRAY;
-
-//
-// Vectors.
-//
-
-/** The character vector reallocate factor. */
-static int* CHARACTER_VECTOR_REALLOCATE_FACTOR = NUMBER_2_INTEGER_ARRAY;
-
-/** The wide character vector reallocate factor. */
-static int* WIDE_CHARACTER_VECTOR_REALLOCATE_FACTOR = NUMBER_2_INTEGER_ARRAY;
-
-/** The integer vector reallocate factor. */
-static int* INTEGER_VECTOR_REALLOCATE_FACTOR = NUMBER_2_INTEGER_ARRAY;
-
-/** The unsigned long vector reallocate factor. */
-static int* UNSIGNED_LONG_VECTOR_REALLOCATE_FACTOR = NUMBER_2_INTEGER_ARRAY;
-
-/** The double vector reallocate factor. */
-static int* DOUBLE_VECTOR_REALLOCATE_FACTOR = NUMBER_2_INTEGER_ARRAY;
-
-/** The pointer vector reallocate factor. */
-static int* POINTER_VECTOR_REALLOCATE_FACTOR = NUMBER_2_INTEGER_ARRAY;
 
 //
 // Fraction.
@@ -143,9 +121,6 @@ static int* UI_SIZE_Z_INDEX = NUMBER_2_INTEGER_ARRAY;
 // Compound.
 //
 
-/** The compound reallocate factor. */
-static int* COMPOUND_REALLOCATE_FACTOR = NUMBER_2_INTEGER_ARRAY;
-
 /** The compound count. */
 static int* COMPOUND_COUNT = NUMBER_12_INTEGER_ARRAY;
 
@@ -188,9 +163,6 @@ static int* DETAILS_SIZES_INDEX = NUMBER_11_INTEGER_ARRAY;
 //
 // Signal memory.
 //
-
-/** The signal memory reallocate factor. */
-static int* SIGNAL_MEMORY_REALLOCATE_FACTOR = NUMBER_2_INTEGER_ARRAY;
 
 /** The signal memory count. */
 static int* SIGNAL_MEMORY_COUNT = NUMBER_8_INTEGER_ARRAY;

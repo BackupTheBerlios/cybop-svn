@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2007-07-29 01:53:30 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2007-08-17 03:15:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -29,13 +29,13 @@
 
 #include "../applicator/receive/receive_file_system.c"
 #include "../controller/checker.c"
+#include "../globals/constants/cyboi/cyboi_signal_priority_constants.c"
 #include "../globals/constants/cybol/cybol_abstraction_constants.c"
 #include "../globals/constants/cybol/cybol_channel_constants.c"
 #include "../globals/constants/integer/integer_constants.c"
 #include "../globals/constants/log/log_message_constants.c"
 #include "../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../globals/constants/pointer/pointer_constants.c"
-#include "../globals/constants/cyboi_constants.c"
 #include "../globals/logger/logger.c"
 #include "../globals/variables/variables.c"
 #include "../memoriser/accessor/signal_memory_accessor.c"
@@ -98,11 +98,11 @@ void initialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
     // CAUTION! The details' abstraction always HAS TO BE "compound".
     allocate((void*) &md, (void*) mds, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
 
-    // Parse startup model name, abstraction.
-    parse((void*) &ma, (void*) mac, (void*) mas, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
+    // Decode startup model name, abstraction.
+    decode((void*) &ma, (void*) mac, (void*) mas, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
         (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
         (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
-    // Receive startup model model and details (read from file and parse).
+    // Receive startup model model and details (read from file and decode).
     receive_file_system((void*) &mm, (void*) mmc, (void*) mms, (void*) &md, (void*) mdc, (void*) mds,
         p9, p10, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
 
@@ -116,7 +116,7 @@ void initialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
     get_new_signal_id(p4, p5, (void*) id);
 
     // Add startup signal to signal memory.
-    set_signal(p4, p5, p6, ma, (void*) mac, mm, (void*) mmc, md, (void*) mdc, (void*) NORMAL_PRIORITY, (void*) id);
+    set_signal(p4, p5, p6, ma, (void*) mac, mm, (void*) mmc, md, (void*) mdc, (void*) NORMAL_CYBOI_SIGNAL_PRIORITY, (void*) id);
 
     // The system is now started up and complete so that a loop
     // can be entered, checking for signals (events/ interrupts)

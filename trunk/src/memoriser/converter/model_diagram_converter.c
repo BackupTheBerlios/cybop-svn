@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.10 $ $Date: 2007-07-23 23:47:58 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2007-08-17 03:15:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -41,7 +41,7 @@
 //
 
 /**
- * Serialises the model diagram node.
+ * Encodes the model diagram node.
  *
  * @param p0 the destination model diagram (Hand over as reference!)
  * @param p1 the destination count
@@ -57,10 +57,10 @@
  * @param p11 the tree level
  * @param p12 the details flag
  */
-void serialise_model_diagram_node(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11, void* p12);
+void encode_model_diagram_node(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11, void* p12);
 
 /**
- * Parses the model diagram and creates a knowledge model from it.
+ * Decodes the model diagram and creates a knowledge model from it.
  *
  * A model diagram in this case is a textual representation of a knowledge model,
  * in form of many line feed-separated lines representing a model part each.
@@ -71,13 +71,13 @@ void serialise_model_diagram_node(void* p0, void* p1, void* p2, void* p3, void* 
  * @param p3 the source model diagram
  * @param p4 the source count
  */
-void parse_model_diagram(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void decode_model_diagram(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    log_message_debug("Information: Parse model diagram.");
+    log_message_debug("Information: Decode model diagram.");
 }
 
 /**
- * Serialises the model diagram indentation.
+ * Encodes the model diagram indentation.
  *
  * @param p0 the destination model diagram (Hand over as reference!)
  * @param p1 the destination count
@@ -85,7 +85,7 @@ void parse_model_diagram(void* p0, void* p1, void* p2, void* p3, void* p4) {
  * @param p3 the tree level
  * @param p4 the details flag
  */
-void serialise_model_diagram_indentation(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void encode_model_diagram_indentation(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (p4 != *NULL_POINTER) {
 
@@ -95,7 +95,7 @@ void serialise_model_diagram_indentation(void* p0, void* p1, void* p2, void* p3,
 
             int* l = (int*) p3;
 
-            log_message_debug("Information: Serialise model diagram indentation.");
+            log_message_debug("Information: Encode model diagram indentation.");
 
             // The loop variable.
             int j = *NUMBER_0_INTEGER;
@@ -114,10 +114,10 @@ void serialise_model_diagram_indentation(void* p0, void* p1, void* p2, void* p3,
                     // Therefore, use a pipe- and space character.
 
                     // Add pipe character to destination array.
-                    serialise_character_vector(p0, p1, p2, (void*) VERTICAL_LINE_CHARACTER, (void*) PRIMITIVE_COUNT);
+                    encode_character_vector(p0, p1, p2, (void*) VERTICAL_LINE_CHARACTER, (void*) PRIMITIVE_COUNT);
 
                     // Add space character to destination array.
-                    serialise_character_vector(p0, p1, p2, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT);
+                    encode_character_vector(p0, p1, p2, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT);
 
                 } else {
 
@@ -128,20 +128,20 @@ void serialise_model_diagram_indentation(void* p0, void* p1, void* p2, void* p3,
                         // This is the part model, so that a plus- and minus character are used.
 
                         // Add plus character to destination array.
-                        serialise_character_vector(p0, p1, p2, (void*) PLUS_SIGN_CHARACTER, (void*) PRIMITIVE_COUNT);
+                        encode_character_vector(p0, p1, p2, (void*) PLUS_SIGN_CHARACTER, (void*) PRIMITIVE_COUNT);
 
                         // Add minus character to destination array.
-                        serialise_character_vector(p0, p1, p2, (void*) HYPHEN_MINUS_CHARACTER, (void*) PRIMITIVE_COUNT);
+                        encode_character_vector(p0, p1, p2, (void*) HYPHEN_MINUS_CHARACTER, (void*) PRIMITIVE_COUNT);
 
                     } else {
 
                         // This is the part details, so that a number sign- and minus character are used.
 
                         // Add plus character to destination array.
-                        serialise_character_vector(p0, p1, p2, (void*) NUMBER_SIGN_CHARACTER, (void*) PRIMITIVE_COUNT);
+                        encode_character_vector(p0, p1, p2, (void*) NUMBER_SIGN_CHARACTER, (void*) PRIMITIVE_COUNT);
 
                         // Add minus character to destination array.
-                        serialise_character_vector(p0, p1, p2, (void*) HYPHEN_MINUS_CHARACTER, (void*) PRIMITIVE_COUNT);
+                        encode_character_vector(p0, p1, p2, (void*) HYPHEN_MINUS_CHARACTER, (void*) PRIMITIVE_COUNT);
                     }
                 }
 
@@ -151,17 +151,17 @@ void serialise_model_diagram_indentation(void* p0, void* p1, void* p2, void* p3,
 
         } else {
 
-            log_message_debug("Error: Could not serialise model diagram indentation. The tree level is null.");
+            log_message_debug("Error: Could not encode model diagram indentation. The tree level is null.");
         }
 
     } else {
 
-        log_message_debug("Error: Could not serialise model diagram indentation. The details flag is null.");
+        log_message_debug("Error: Could not encode model diagram indentation. The details flag is null.");
     }
 }
 
 /**
- * Serialises the model diagram compound.
+ * Encodes the model diagram compound.
  *
  * @param p0 the destination model diagram (Hand over as reference!)
  * @param p1 the destination model diagram count
@@ -171,7 +171,7 @@ void serialise_model_diagram_indentation(void* p0, void* p1, void* p2, void* p3,
  * @param p5 the tree level
  * @param p6 the details flag
  */
-void serialise_model_diagram_compound(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
+void encode_model_diagram_compound(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
     if (p5 != *NULL_POINTER) {
 
@@ -181,7 +181,7 @@ void serialise_model_diagram_compound(void* p0, void* p1, void* p2, void* p3, vo
 
             int* sc = (int*) p4;
 
-            log_message_debug("Information: Serialise model diagram compound.");
+            log_message_debug("Information: Encode model diagram compound.");
 
             // The loop variable.
             int j = *NUMBER_0_INTEGER;
@@ -223,10 +223,10 @@ void serialise_model_diagram_compound(void* p0, void* p1, void* p2, void* p3, vo
                     (void*) &d, (void*) &dc, (void*) &ds);
 
                 // Add line feed character to destination array.
-                serialise_character_vector(p0, p1, p2, (void*) LINE_FEED_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT);
+                encode_character_vector(p0, p1, p2, (void*) LINE_FEED_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT);
 
-                // Serialise part.
-                serialise_model_diagram_node(p0, p1, p2, *n, *nc, *a, *ac, *m, *mc, *d, *dc, (void*) &nl, p6);
+                // Encode part.
+                encode_model_diagram_node(p0, p1, p2, *n, *nc, *a, *ac, *m, *mc, *d, *dc, (void*) &nl, p6);
 
                 // Increment loop variable.
                 j++;
@@ -234,17 +234,17 @@ void serialise_model_diagram_compound(void* p0, void* p1, void* p2, void* p3, vo
 
         } else {
 
-            log_message_debug("Error: Could not serialise model diagram compound. The source count is null.");
+            log_message_debug("Error: Could not encode model diagram compound. The source count is null.");
         }
 
     } else {
 
-        log_message_debug("Error: Could not serialise model diagram compound. The tree level is null.");
+        log_message_debug("Error: Could not encode model diagram compound. The tree level is null.");
     }
 }
 
 /**
- * Serialises the model diagram node.
+ * Encodes the model diagram node.
  *
  * @param p0 the destination model diagram (Hand over as reference!)
  * @param p1 the destination count
@@ -260,7 +260,7 @@ void serialise_model_diagram_compound(void* p0, void* p1, void* p2, void* p3, vo
  * @param p11 the tree level
  * @param p12 the details flag
  */
-void serialise_model_diagram_node(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11, void* p12) {
+void encode_model_diagram_node(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11, void* p12) {
 
     if (p10 != *NULL_POINTER) {
 
@@ -270,25 +270,25 @@ void serialise_model_diagram_node(void* p0, void* p1, void* p2, void* p3, void* 
 
             int* mc = (int*) p8;
 
-            log_message_debug("Debug: Serialise model diagram node.");
+            log_message_debug("Debug: Encode model diagram node.");
 
             // Add indentation.
-            serialise_model_diagram_indentation(p0, p1, p2, p11, p12);
+            encode_model_diagram_indentation(p0, p1, p2, p11, p12);
 
             // Add part name to destination array.
-            serialise_character_vector(p0, p1, p2, p3, p4);
+            encode_character_vector(p0, p1, p2, p3, p4);
 
             // Add space character to destination array.
-            serialise_character_vector(p0, p1, p2, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT);
+            encode_character_vector(p0, p1, p2, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT);
 
             // Add pipe character to destination array.
-            serialise_character_vector(p0, p1, p2, (void*) VERTICAL_LINE_CHARACTER, (void*) PRIMITIVE_COUNT);
+            encode_character_vector(p0, p1, p2, (void*) VERTICAL_LINE_CHARACTER, (void*) PRIMITIVE_COUNT);
 
             // Add space character to destination array.
-            serialise_character_vector(p0, p1, p2, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT);
+            encode_character_vector(p0, p1, p2, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT);
 
             // Add part abstraction to destination array.
-            serialise_character_vector(p0, p1, p2, p5, p6);
+            encode_character_vector(p0, p1, p2, p5, p6);
 
             // The comparison result.
             int r = *NUMBER_0_INTEGER;
@@ -304,7 +304,7 @@ void serialise_model_diagram_node(void* p0, void* p1, void* p2, void* p3, void* 
                         // Only process the following code, if the model compound contains at least one part.
 
                         // Add part model to destination array.
-                        serialise_model_diagram_compound(p0, p1, p2, p7, p8, p11, (void*) NUMBER_0_INTEGER);
+                        encode_model_diagram_compound(p0, p1, p2, p7, p8, p11, (void*) NUMBER_0_INTEGER);
                     }
                 }
             }
@@ -320,7 +320,7 @@ void serialise_model_diagram_node(void* p0, void* p1, void* p2, void* p3, void* 
                         // Only process the following code, if the model compound contains at least one part.
 
                         // Add part model to destination array.
-                        serialise_model_diagram_compound(p0, p1, p2, p7, p8, p11, (void*) NUMBER_0_INTEGER);
+                        encode_model_diagram_compound(p0, p1, p2, p7, p8, p11, (void*) NUMBER_0_INTEGER);
                     }
                 }
             }
@@ -332,16 +332,16 @@ void serialise_model_diagram_node(void* p0, void* p1, void* p2, void* p3, void* 
                 if (r != *NUMBER_0_INTEGER) {
 
                     // Add space character to destination array.
-                    serialise_character_vector(p0, p1, p2, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT);
+                    encode_character_vector(p0, p1, p2, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT);
 
                     // Add pipe character to destination array.
-                    serialise_character_vector(p0, p1, p2, (void*) VERTICAL_LINE_CHARACTER, (void*) PRIMITIVE_COUNT);
+                    encode_character_vector(p0, p1, p2, (void*) VERTICAL_LINE_CHARACTER, (void*) PRIMITIVE_COUNT);
 
                     // Add space character to destination array.
-                    serialise_character_vector(p0, p1, p2, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT);
+                    encode_character_vector(p0, p1, p2, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT);
 
                     // Add part model to destination array.
-                    serialise_character_vector(p0, p1, p2, p7, p8);
+                    encode_character_vector(p0, p1, p2, p7, p8);
                 }
             }
 
@@ -352,16 +352,16 @@ void serialise_model_diagram_node(void* p0, void* p1, void* p2, void* p3, void* 
                 if (r != *NUMBER_0_INTEGER) {
 
                     // Add space character to destination array.
-                    serialise_character_vector(p0, p1, p2, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT);
+                    encode_character_vector(p0, p1, p2, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT);
 
                     // Add pipe character to destination array.
-                    serialise_character_vector(p0, p1, p2, (void*) VERTICAL_LINE_CHARACTER, (void*) PRIMITIVE_COUNT);
+                    encode_character_vector(p0, p1, p2, (void*) VERTICAL_LINE_CHARACTER, (void*) PRIMITIVE_COUNT);
 
                     // Add space character to destination array.
-                    serialise_character_vector(p0, p1, p2, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT);
+                    encode_character_vector(p0, p1, p2, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT);
 
                     // Add part model to destination array.
-                    serialise_integer_vector(p0, p1, p2, p7, p8);
+                    encode_integer_vector(p0, p1, p2, p7, p8);
                 }
             }
 
@@ -372,16 +372,16 @@ void serialise_model_diagram_node(void* p0, void* p1, void* p2, void* p3, void* 
                 if (r != *NUMBER_0_INTEGER) {
 
                     // Add space character to destination array.
-                    serialise_character_vector(p0, p1, p2, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT);
+                    encode_character_vector(p0, p1, p2, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT);
 
                     // Add pipe character to destination array.
-                    serialise_character_vector(p0, p1, p2, (void*) VERTICAL_LINE_CHARACTER, (void*) PRIMITIVE_COUNT);
+                    encode_character_vector(p0, p1, p2, (void*) VERTICAL_LINE_CHARACTER, (void*) PRIMITIVE_COUNT);
 
                     // Add space character to destination array.
-                    serialise_character_vector(p0, p1, p2, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT);
+                    encode_character_vector(p0, p1, p2, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT);
 
                     // Add part model to destination array.
-                    serialise_boolean(p0, p1, p2, p7, p8);
+                    encode_boolean(p0, p1, p2, p7, p8);
                 }
             }
 
@@ -392,16 +392,16 @@ void serialise_model_diagram_node(void* p0, void* p1, void* p2, void* p3, void* 
                 if (r != *NUMBER_0_INTEGER) {
 
                     // Add space character to destination array.
-                    serialise_character_vector(p0, p1, p2, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT);
+                    encode_character_vector(p0, p1, p2, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT);
 
                     // Add pipe character to destination array.
-                    serialise_character_vector(p0, p1, p2, (void*) VERTICAL_LINE_CHARACTER, (void*) PRIMITIVE_COUNT);
+                    encode_character_vector(p0, p1, p2, (void*) VERTICAL_LINE_CHARACTER, (void*) PRIMITIVE_COUNT);
 
                     // Add space character to destination array.
-                    serialise_character_vector(p0, p1, p2, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT);
+                    encode_character_vector(p0, p1, p2, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT);
 
                     // Add part model to destination array.
-                    serialise_double_vector(p0, p1, p2, p7, p8);
+                    encode_double_vector(p0, p1, p2, p7, p8);
                 }
             }
 
@@ -410,22 +410,22 @@ void serialise_model_diagram_node(void* p0, void* p1, void* p2, void* p3, void* 
                 // Only process the following code, if the details compound contains at least one part.
 
                 // Add part details to destination array.
-                serialise_model_diagram_compound(p0, p1, p2, p9, p10, p11, (void*) NUMBER_1_INTEGER);
+                encode_model_diagram_compound(p0, p1, p2, p9, p10, p11, (void*) NUMBER_1_INTEGER);
             }
 
         } else {
 
-            log_message_debug("Error: Could not serialise model diagram node. The model count is null.");
+            log_message_debug("Error: Could not encode model diagram node. The model count is null.");
         }
 
     } else {
 
-        log_message_debug("Error: Could not serialise model diagram node. The details count is null.");
+        log_message_debug("Error: Could not encode model diagram node. The details count is null.");
     }
 }
 
 /**
- * Serialises the knowledge model and creates a model diagram from it.
+ * Encodes the knowledge model and creates a model diagram from it.
  *
  * A model diagram in this case is a textual representation of a knowledge model,
  * in form of many line feed-separated lines representing a model part each.
@@ -442,15 +442,15 @@ void serialise_model_diagram_node(void* p0, void* p1, void* p2, void* p3, void* 
  * @param p9 the source details
  * @param p10 the source details count
  */
-void serialise_model_diagram(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10) {
+void encode_model_diagram(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10) {
 
-    log_message_debug("Information: Serialise model diagram.");
+    log_message_debug("Information: Encode model diagram.");
 
     // The tree level.
     int l = *NUMBER_0_INTEGER;
 
-    // Serialise model diagram root node.
-    serialise_model_diagram_node(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, (void*) &l, (void*) NUMBER_0_INTEGER);
+    // Encode model diagram root node.
+    encode_model_diagram_node(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, (void*) &l, (void*) NUMBER_0_INTEGER);
 }
 
 /* MODEL_DIAGRAM_CONVERTER_SOURCE */
