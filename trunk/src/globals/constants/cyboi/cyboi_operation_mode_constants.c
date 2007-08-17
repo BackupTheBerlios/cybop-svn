@@ -20,14 +20,14 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2007-08-17 03:15:32 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2007-08-17 04:06:51 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef CYBOI_OPERATION_MODE_CONSTANTS_SOURCE
 #define CYBOI_OPERATION_MODE_CONSTANTS_SOURCE
 
-#include "../../globals/constants/integer/integer_constants.c"
+#include "../../../globals/constants/integer/integer_constants.c"
 
 /** The version cyboi operation mode. */
 static int* VERSION_CYBOI_OPERATION_MODE = NUMBER_0_INTEGER_ARRAY;

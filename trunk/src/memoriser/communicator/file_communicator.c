@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.27 $ $Date: 2007-08-17 03:15:32 $ $Author: christian $
+ * @version $Revision: 1.28 $ $Date: 2007-08-17 04:06:51 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -77,7 +77,7 @@ void read_file_stream(void* p0, void* p1, void* p2, void* p3) {
                         if (*dc == *ds) {
 
                             // Increase size.
-                            *ds = (*ds * *FILE_REALLOCATION_FACTOR) + *NUMBER_1_INTEGER;
+                            *ds = (*ds * *CYBOL_FILE_REALLOCATION_FACTOR) + *NUMBER_1_INTEGER;
 
                             // Reallocate array.
                             reallocate_array(p0, p1, p2, (void*) CHARACTER_ARRAY);

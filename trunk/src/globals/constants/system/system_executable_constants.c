@@ -20,14 +20,14 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2007-08-17 03:15:32 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2007-08-17 04:06:51 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef SYSTEM_EXECUTABLE_CONSTANTS_SOURCE
 #define SYSTEM_EXECUTABLE_CONSTANTS_SOURCE
 
-#include "../../globals/constants/integer/integer_constants.c"
+#include "../../../globals/constants/integer/integer_constants.c"
 
 /** The shell system executable. */
 static char SHELL_SYSTEM_EXECUTABLE_ARRAY[] = {'/', 'b', 'i', 'n', '/', 's', 'h'};

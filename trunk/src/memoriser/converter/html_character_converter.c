@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2007-08-17 03:15:32 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2007-08-17 04:06:51 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -29,7 +29,10 @@
 
 #include "../../globals/constants/character/character_constants.c"
 #include "../../globals/constants/character/html_character_constants.c"
+#include "../../globals/constants/cybol/cybol_abstraction_constants.c"
 #include "../../globals/constants/integer/integer_constants.c"
+#include "../../globals/constants/memory_structure/array_constants.c"
+#include "../../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/variables/reallocation_factor_variables.c"
 
@@ -67,6 +70,7 @@ void decode_html_character(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 // The references &#00; to &#08; are unused.
                 //
 
+/*??
                 if (r == *NUMBER_0_INTEGER) {
 
                     compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_HTML_CHARACTER, (void*) HORIZONTAL_TAB_HTML_CHARACTER_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
@@ -2599,6 +2603,7 @@ void decode_html_character(void* p0, void* p1, void* p2, void* p3, void* p4) {
                         ts = tc;
                     }
                 }
+*/
 
                 //
                 // Set actual destination, using the temporary value.
@@ -2668,6 +2673,7 @@ void encode_html_character(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 // The comparison result.
                 int r = *NUMBER_0_INTEGER;
 
+/*??
                 if (r == *NUMBER_0_INTEGER) {
 
                     compare_arrays(p3, p4, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
@@ -2679,6 +2685,7 @@ void encode_html_character(void* p0, void* p1, void* p2, void* p3, void* p4) {
                         ts = tc;
                     }
                 }
+*/
 
                 //
                 // Set actual destination, using the temporary value.

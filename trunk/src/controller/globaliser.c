@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2007-08-17 03:15:31 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2007-08-17 04:06:51 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -33,6 +33,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include "../globals/constants/float/double_constants.c"
 #include "../globals/constants/integer/integer_constants.c"
 #include "../globals/variables/log_variables.c"
 #include "../globals/variables/primitive_type_size_variables.c"
@@ -44,8 +45,8 @@
 /**
  * Allocates and initialises global variables.
  *
- * CAUTION! These global variables MUST NOT be initialised in the file
- * /globals/variables/variables.c because then constant values are expected!
+ * CAUTION! These global variables MUST NOT be initialised in the files
+ * /globals/variables/*_variables.c because then constant values are expected!
  */
 void globalise() {
 

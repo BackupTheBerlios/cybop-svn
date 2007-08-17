@@ -20,14 +20,14 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2007-08-17 03:15:32 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2007-08-17 04:06:51 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef SYSTEM_FILE_NAME_CONSTANTS_SOURCE
 #define SYSTEM_FILE_NAME_CONSTANTS_SOURCE
 
-#include "../../globals/constants/integer/integer_constants.c"
+#include "../../../globals/constants/integer/integer_constants.c"
 
 /** The input system file name. */
 static char INPUT_SYSTEM_FILE_NAME_ARRAY[] = {'s', 't', 'a', 'n', 'd', 'a', 'r', 'd', '_', 'i', 'n', 'p', 'u', 't'};

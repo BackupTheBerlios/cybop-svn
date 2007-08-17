@@ -7,14 +7,18 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.8 $ $Date: 2007-08-17 03:15:31 $ $Author: christian $
+# @version $Revision: 1.9 $ $Date: 2007-08-17 04:06:51 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
         * CHECK: Replace "(int*) NULL_POINTER_ARRAY" initialisation in "variables.c" with "(int*) *NULL_POINTER";
             the old initialisation was actually a void** casted to an int* and therefore not correct, even if it was working
 
+        * Correct encode for background- and foreground colour in "encode_gnu_linux_console_shape" function of
+            "gnu_linux_console_converter.c": allocate destination variables before handing them over as parameters
         * Complete "html_character_mapper.c"
+        * Adapt all places in source code where reallocation is used to new
+            reallocation factor handling and also shrink memory structures appropriately
 
         * Add an extra character code set for &quot; and &amp; etc. and use an OR || when parsing HTML!
             The following list contains only those characters, for which a name like "&euro" exists; others have been deleted:

@@ -27,7 +27,7 @@
  * Otherwise, an ENDLESS LOOP will be created, because cyboi's
  * array procedures call the logger in turn.
  *
- * @version $Revision: 1.18 $ $Date: 2007-08-17 03:15:32 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2007-08-17 04:06:51 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -285,7 +285,7 @@ void log_message(void* p0, void* p1, void* p2) {
 
                     // The log output value is smaller than zero.
                     // Probably, it still has its default value of -1
-                    // as set in the file "globals/variables/variables.c".
+                    // as set in the file "globals/variables/log_variables.c".
 
                     // CAUTION! DO NOT use logging functionality here!
                     // The logger cannot log itself.

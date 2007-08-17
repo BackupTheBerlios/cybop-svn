@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2007-08-17 03:15:32 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2007-08-17 04:06:51 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -50,7 +50,32 @@
 #include "../../globals/variables/reallocation_factor_variables.c"
 #include "../../memoriser/accessor/compound_accessor.c"
 #include "../../memoriser/accessor.c"
-#include "../../memoriser/converter.c"
+
+//
+// Forward declarations.
+//
+
+/**
+ * Encodes the source into the destination, according to the given language.
+ *
+ * @param p0 the destination (Hand over as reference!)
+ * @param p1 the destination count
+ * @param p2 the destination size
+ * @param p3 the source name
+ * @param p4 the source name count
+ * @param p5 the source abstraction
+ * @param p6 the source abstraction count
+ * @param p7 the source model
+ * @param p8 the source model count
+ * @param p9 the source details
+ * @param p10 the source details count
+ * @param p11 the knowledge memory
+ * @param p12 the knowledge memory count
+ * @param p13 the language
+ * @param p14 the language count
+ */
+void encode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
+    void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14);
 
 /**
  * Encodes a gnu/linux console character.
@@ -1222,9 +1247,11 @@ void encode_gnu_linux_console_shape(void* p0, void* p1, void* p2, void* p3, void
         // The background colour.
         void* bg = *NULL_POINTER;
         int bgc = *NUMBER_0_INTEGER;
+        int bgs = *NUMBER_0_INTEGER;
         // The foreground colour.
         void* fg = *NULL_POINTER;
         int fgc = *NUMBER_0_INTEGER;
+        int fgs = *NUMBER_0_INTEGER;
 
         //?? TODO: These values should later be given as boolean "true" or "false".
         //?? Currently, they have to be given as "0" or "1" in CYBOL.
@@ -1235,8 +1262,10 @@ void encode_gnu_linux_console_shape(void* p0, void* p1, void* p2, void* p3, void
         set_element(&u, (void*) PRIMITIVE_VALUE_INDEX, p13, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
         set_element(&b, (void*) PRIMITIVE_VALUE_INDEX, p15, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
         // Map colour names to control sequences.
-        mapto((void*) &bg, (void*) &bgc, *NULL_POINTER, p17, p18, (void*) TERMINAL_BACKGROUND_ABSTRACTION, (void*) TERMINAL_BACKGROUND_ABSTRACTION_COUNT);
-        mapto((void*) &fg, (void*) &fgc, *NULL_POINTER, p19, p20, (void*) TERMINAL_FOREGROUND_ABSTRACTION, (void*) TERMINAL_FOREGROUND_ABSTRACTION_COUNT);
+        encode((void*) &bg, (void*) &bgc, (void*) &bgs, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, p17, p18,
+            *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, (void*) TERMINAL_BACKGROUND_ABSTRACTION, (void*) TERMINAL_BACKGROUND_ABSTRACTION_COUNT);
+        encode((void*) &fg, (void*) &fgc, (void*) &fgs, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, p19, p20,
+            *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, (void*) TERMINAL_FOREGROUND_ABSTRACTION, (void*) TERMINAL_FOREGROUND_ABSTRACTION_COUNT);
 
         // The comparison result.
         int r = *NUMBER_0_INTEGER;

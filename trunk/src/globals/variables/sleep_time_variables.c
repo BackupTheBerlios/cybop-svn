@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2007-08-17 03:15:32 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2007-08-17 04:06:51 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,9 +30,9 @@
 #include "../../globals/constants/pointer/pointer_constants.c"
 
 // The checker sleep time.
-static int* CHECKER_SLEEP_TIME = (int*) NULL_POINTER_ARRAY;
+static double* CHECKER_SLEEP_TIME = (double*) NULL_POINTER_ARRAY;
 // The x window system sleep time.
-static int* X_WINDOW_SYSTEM_SLEEP_TIME = (int*) NULL_POINTER_ARRAY;
+static double* X_WINDOW_SYSTEM_SLEEP_TIME = (double*) NULL_POINTER_ARRAY;
 
 /* SLEEP_TIME_VARIABLES_SOURCE */
 #endif
