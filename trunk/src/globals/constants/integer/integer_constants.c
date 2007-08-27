@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2007-04-16 16:45:37 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2007-08-27 07:07:37 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -4436,16 +4436,32 @@ static int NUMBER_999_INTEGER_ARRAY[] = {999};
 static int* NUMBER_999_INTEGER = NUMBER_999_INTEGER_ARRAY;
 
 //
-// Numbers 1,000 - 9,999.
+// Numbers 1,000 - 1,999.
 //
 
 /** The number 1000 integer. */
 static int NUMBER_1000_INTEGER_ARRAY[] = {1000};
 static int* NUMBER_1000_INTEGER = NUMBER_1000_INTEGER_ARRAY;
 
+/** The number 1024 integer. */
+static int NUMBER_1024_INTEGER_ARRAY[] = {1024};
+static int* NUMBER_1024_INTEGER = NUMBER_1024_INTEGER_ARRAY;
+
 /** The number 1971 integer. */
 static int NUMBER_1971_INTEGER_ARRAY[] = {1971};
 static int* NUMBER_1971_INTEGER = NUMBER_1971_INTEGER_ARRAY;
+
+//
+// Numbers 2,000 - 2,999.
+//
+
+/** The number 2048 integer. */
+static int NUMBER_2048_INTEGER_ARRAY[] = {2048};
+static int* NUMBER_2048_INTEGER = NUMBER_2048_INTEGER_ARRAY;
+
+//
+// Numbers 3,000 - 3,999.
+//
 
 /** The number 3000 integer. */
 static int NUMBER_3000_INTEGER_ARRAY[] = {3000};
@@ -4491,6 +4507,18 @@ static int* NUMBER_3108_INTEGER = NUMBER_3108_INTEGER_ARRAY;
 static int NUMBER_3110_INTEGER_ARRAY[] = {3110};
 static int* NUMBER_3110_INTEGER = NUMBER_3110_INTEGER_ARRAY;
 
+//
+// Numbers 4,000 - 4,999.
+//
+
+//
+// Numbers 5,000 - 5,999.
+//
+
+//
+// Numbers 6,000 - 6,999.
+//
+
 /** The number 6100 integer. */
 static int NUMBER_6100_INTEGER_ARRAY[] = {6100};
 static int* NUMBER_6100_INTEGER = NUMBER_6100_INTEGER_ARRAY;
@@ -4499,6 +4527,14 @@ static int* NUMBER_6100_INTEGER = NUMBER_6100_INTEGER_ARRAY;
 static int NUMBER_6200_INTEGER_ARRAY[] = {6200};
 static int* NUMBER_6200_INTEGER = NUMBER_6100_INTEGER_ARRAY;
 
+//
+// Numbers 7,000 - 7,999.
+//
+
+//
+// Numbers 8,000 - 8,999.
+//
+
 /** The number 8000 integer. */
 static int NUMBER_8000_INTEGER_ARRAY[] = {8000};
 static int* NUMBER_8000_INTEGER = NUMBER_8000_INTEGER_ARRAY;
@@ -4506,6 +4542,14 @@ static int* NUMBER_8000_INTEGER = NUMBER_8000_INTEGER_ARRAY;
 /** The number 8100 integer. */
 static int NUMBER_8100_INTEGER_ARRAY[] = {8100};
 static int* NUMBER_8100_INTEGER = NUMBER_8100_INTEGER_ARRAY;
+
+/** The number 8192 integer. */
+static int NUMBER_8192_INTEGER_ARRAY[] = {8192};
+static int* NUMBER_8192_INTEGER = NUMBER_8192_INTEGER_ARRAY;
+
+//
+// Numbers 9,000 - 9,999.
+//
 
 /** The number 9100 integer. */
 static int NUMBER_9100_INTEGER_ARRAY[] = {9100};

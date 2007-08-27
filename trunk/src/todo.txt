@@ -7,127 +7,25 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.9 $ $Date: 2007-08-17 04:06:51 $ $Author: christian $
+# @version $Revision: 1.10 $ $Date: 2007-08-27 07:07:36 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+ChangeLog:
+2007-08-24  Christian Heller  <christian.heller@tuxtax.de>
+
+TODO:
+        * Complete function "receive_socket_signal"
+        * Split receive_socket and put HTTP conversion into http_converter.c file, since it is independent from TCP/IP
+        * Parse HTML message header and message-body and add the entries to the knowledge model that was handed over
+        * Use an OR || and compare for numeric character reference and character entity reference, when parsing http requests
+
         * CHECK: Replace "(int*) NULL_POINTER_ARRAY" initialisation in "variables.c" with "(int*) *NULL_POINTER";
             the old initialisation was actually a void** casted to an int* and therefore not correct, even if it was working
-
         * Correct encode for background- and foreground colour in "encode_gnu_linux_console_shape" function of
             "gnu_linux_console_converter.c": allocate destination variables before handing them over as parameters
-        * Complete "html_character_mapper.c"
         * Adapt all places in source code where reallocation is used to new
             reallocation factor handling and also shrink memory structures appropriately
-
-        * Add an extra character code set for &quot; and &amp; etc. and use an OR || when parsing HTML!
-            The following list contains only those characters, for which a name like "&euro" exists; others have been deleted:
-            Symbol Code Entity Name
-            €     &euro;
-            "  &#34;  &quot;
-            &  &#38;  &amp;
-            <  &#60;  &lt;
-            >  &#62;  &gt;
-            Non-breaking space  &#160;  &nbsp;
-            ¡  &#161;  &iexcl;
-            ¢  &#162;  &cent;
-            £  &#163;  &pound;
-            ¤  &#164;  &curren;
-            ¥  &#165;  &yen;
-            ¦  &#166;  &brvbar;
-            §  &#167;  &sect;
-            ¨  &#168;  &uml;
-            ©  &#169;  &copy;
-            ª  &#170;  &ordf;
-            «  &#171;
-            ¬  &#172;  &not;
-            ­  &#173;  &shy;
-            ®  &#174;  &reg;
-            ¯  &#175;  &macr;
-            °  &#176;  &deg;
-            ±  &#177;  &plusmn;
-            ²  &#178;  &sup2;
-            ³  &#179;  &sup3;
-            ´  &#180;  &acute;
-            µ  &#181;  &micro;
-            &#182;  &para;
-            ·  &#183;  &middot;
-            ¸  &#184;  &cedil;
-            ¹  &#185;  &sup1;
-            º  &#186;  &ordm;
-            »  &#187;  &raquo;
-            ¼  &#188;  &frac14;
-            ½  &#189;  &frac12;
-            ¾  &#190;  &frac34;
-            ¿  &#191;  &iquest;
-            À  &#192;  &Agrave;
-            Á  &#193;  &Aacute;
-            Â  &#194;  Â
-            Ã  &#195;  &Atilde;
-            Ä  &#196;  &Auml;
-            Å  &#197  &Aring;
-            Æ  &#198;  &AElig;
-            Ç  &#199;  &Ccedil;
-            È  &#200;  &Egrave;
-            É  &#201;  &Eacute;
-            Ê  &#202;  &Ecirc;
-            Ë  &#203;  Ë
-            Ì  &#204;  &Igrave;
-            &#205;  &Iacute;
-            Î  &#206;  &Icirc;
-            &#207;  &Iuml;
-            Ð  &#208;  &ETH;
-            &#209;  &Ntilde;
-            &#210;  &Ograve;
-            Ó  &#211;  &Oacute;
-            Ô  &#212;  &Ocirc;
-            Õ  &#213;  &Otilde;
-            Ö  &#214;  &Ouml;
-            ×  &#215;  &times;
-            Ø  &#216;  &Oslash;
-            Ù  &#217;  &Ugrave;
-            Ú  &#218;  &Uacute;
-            Û  &#219;  &Ucirc;
-            Ü  &#220;  &Uuml;
-            Ý  &#221;  &Yacute;
-            Þ  &#222;  &THORN;
-            ß  &#223;  &szlig;
-            à  &#224;  &agrave;
-            á  &#225;  &aacute;
-            â  &#226;  &acirc;
-            ã  &#227;  &atilde;
-            ä  &#228;  &auml;
-            å  &#229;  &aring;
-            &#230;  &aelig;
-            ç  &#231;  &ccedil;
-            &#232;  &egrave;
-            &#233;  &eacute;
-            ê  &#234;  &ecirc;
-            ë  &#235;  &euml;
-            ì  &#236;  &igrave;
-            í  &#237  &iacute;
-            î  &#238;  &icirc;
-            ï  &#239;  &iuml;
-            ð  &#240;  &eth;
-            ñ  &#241;  &ntilde;
-            ò  &#242;  &ograve;
-            ó  &#243;  &oacute;
-            &#244;  &ocirc;
-            õ  &#245;  &otilde;
-            ö  &#246;  &ouml;
-            ÷  &#247;  &divide;
-            ø  &#248;  &oslash;
-            ù  &#249;  &ugrave;
-            ú  &#250;  &uacute;
-            û  &#251;  &ucirc;
-            ü  &#252;  &uuml;
-            ý  &#253;  &yacute;
-            þ  &#254;  &thorn;
-            ÿ  &#255;
-
-        * Split receive_socket and put HTTP conversion into http_converter.c file,
-            since it is independent from TCP/IP
-        * Parse HTML message header and message-body and add the entries to the knowledge model that was handed over
         * Add correct LOG_LEVEL constant to all log messages of all source code files,
             so that the correct prefix (information, warning, error, debug) appears;
             delete "Information: " etc. which are written directly into log message

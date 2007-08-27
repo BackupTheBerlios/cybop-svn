@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.24 $ $Date: 2007-08-17 04:06:51 $ $Author: christian $
+ * @version $Revision: 1.25 $ $Date: 2007-08-27 07:07:37 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -694,10 +694,10 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
         allocate((void*) &b, (void*) bs, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
         // Initialise character buffer count, size.
-        // Its size is initialised with 2048,
-        // which should suffice for transferring standard data over tcp/ip.
+        // A possible initial size is 2048, which should suffice for
+        // transferring standard data over tcp/ip.
         *bc = *NUMBER_0_INTEGER;
-        *bs = 8192;
+        *bs = *NUMBER_8192_INTEGER;
 
         // Set socket address of this system.
         // Set communication partner socket address.

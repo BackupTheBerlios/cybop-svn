@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2007-04-26 23:17:09 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2007-08-27 07:07:37 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -35,7 +35,7 @@
  * The null control character. U+0000
  * It is used as string termination in the C programming language.
  */
-static char NULL_CONTROL_CHARACTER_ARRAY[] = {'\0'};
+static char NULL_CONTROL_CHARACTER_ARRAY[] = {0x00};
 static char* NULL_CONTROL_CHARACTER = NULL_CONTROL_CHARACTER_ARRAY;
 
 /**
@@ -72,15 +72,15 @@ static char CARRIAGE_RETURN_CONTROL_CHARACTER_ARRAY[] = {0x0D};
 static char* CARRIAGE_RETURN_CONTROL_CHARACTER = CARRIAGE_RETURN_CONTROL_CHARACTER_ARRAY;
 
 /** The space character. U+0020 */
-static char SPACE_CHARACTER_ARRAY[] = {' '};
+static char SPACE_CHARACTER_ARRAY[] = {0x20};
 static char* SPACE_CHARACTER = SPACE_CHARACTER_ARRAY;
 
 /** The exclamation mark character. U+0021 */
-static char EXCLAMATION_MARK_CHARACTER_ARRAY[] = {'!'};
+static char EXCLAMATION_MARK_CHARACTER_ARRAY[] = {0x20};
 static char* EXCLAMATION_MARK_CHARACTER = EXCLAMATION_MARK_CHARACTER_ARRAY;
 
 /** The quotation mark character. U+0022 */
-static char QUOTATION_MARK_CHARACTER_ARRAY[] = {'"'};
+static char QUOTATION_MARK_CHARACTER_ARRAY[] = {0x22};
 static char* QUOTATION_MARK_CHARACTER = QUOTATION_MARK_CHARACTER_ARRAY;
 
 /** The number sign character #. U+0023 */
@@ -88,15 +88,15 @@ static char NUMBER_SIGN_CHARACTER_ARRAY[] = {0x23};
 static char* NUMBER_SIGN_CHARACTER = NUMBER_SIGN_CHARACTER_ARRAY;
 
 /** The dollar sign character. U+0024 */
-static char DOLLAR_SIGN_CHARACTER_ARRAY[] = {'$'};
+static char DOLLAR_SIGN_CHARACTER_ARRAY[] = {0x24};
 static char* DOLLAR_SIGN_CHARACTER = DOLLAR_SIGN_CHARACTER_ARRAY;
 
 /** The percent sign character. U+0025 */
-static char PERCENT_SIGN_CHARACTER_ARRAY[] = {'%'};
+static char PERCENT_SIGN_CHARACTER_ARRAY[] = {0x25};
 static char* PERCENT_SIGN_CHARACTER = PERCENT_SIGN_CHARACTER_ARRAY;
 
 /** The ampersand character. U+0026 */
-static char AMPERSAND_CHARACTER_ARRAY[] = {'&'};
+static char AMPERSAND_CHARACTER_ARRAY[] = {0x26};
 static char* AMPERSAND_CHARACTER = AMPERSAND_CHARACTER_ARRAY;
 
 /** The plus sign character. U+002B */
@@ -104,7 +104,7 @@ static char PLUS_SIGN_CHARACTER_ARRAY[] = {0x2B};
 static char* PLUS_SIGN_CHARACTER = PLUS_SIGN_CHARACTER_ARRAY;
 
 /** The comma character. U+002C */
-static char COMMA_CHARACTER_ARRAY[] = {','};
+static char COMMA_CHARACTER_ARRAY[] = {0x2C};
 static char* COMMA_CHARACTER = COMMA_CHARACTER_ARRAY;
 
 /**
@@ -133,23 +133,23 @@ static char HYPHEN_MINUS_CHARACTER_ARRAY[] = {0x2D};
 static char* HYPHEN_MINUS_CHARACTER = HYPHEN_MINUS_CHARACTER_ARRAY;
 
 /** The full stop (period) character. U+002E */
-static char FULL_STOP_CHARACTER_ARRAY[] = {'.'};
+static char FULL_STOP_CHARACTER_ARRAY[] = {0x2E};
 static char* FULL_STOP_CHARACTER = FULL_STOP_CHARACTER_ARRAY;
 
 /** The solidus (slash) character. U+002F */
-static char SOLIDUS_CHARACTER_ARRAY[] = {'/'};
+static char SOLIDUS_CHARACTER_ARRAY[] = {0x2F};
 static char* SOLIDUS_CHARACTER = SOLIDUS_CHARACTER_ARRAY;
 
 /** The colon character. U+003A */
-static char COLON_CHARACTER_ARRAY[] = {':'};
+static char COLON_CHARACTER_ARRAY[] = {0x3A};
 static char* COLON_CHARACTER = COLON_CHARACTER_ARRAY;
 
 /** The semicolon character. U+003B */
-static char SEMICOLON_CHARACTER_ARRAY[] = {';'};
+static char SEMICOLON_CHARACTER_ARRAY[] = {0x3B};
 static char* SEMICOLON_CHARACTER = SEMICOLON_CHARACTER_ARRAY;
 
 /** The less than sign character. U+003C */
-static char LESS_THAN_SIGN_CHARACTER_ARRAY[] = {'<'};
+static char LESS_THAN_SIGN_CHARACTER_ARRAY[] = {0x3C};
 static char* LESS_THAN_SIGN_CHARACTER = LESS_THAN_SIGN_CHARACTER_ARRAY;
 
 /**
@@ -168,47 +168,47 @@ static char* LESS_THAN_SIGN_CHARACTER = LESS_THAN_SIGN_CHARACTER_ARRAY;
  * U+2260 NOT EQUAL TO
  * U+2261 IDENTICAL TO
  */
-static char EQUALS_SIGN_CHARACTER_ARRAY[] = {'='};
+static char EQUALS_SIGN_CHARACTER_ARRAY[] = {0x3D};
 static char* EQUALS_SIGN_CHARACTER = EQUALS_SIGN_CHARACTER_ARRAY;
 
 /** The greater than sign character. U+003E */
-static char GREATER_THAN_SIGN_CHARACTER_ARRAY[] = {'>'};
+static char GREATER_THAN_SIGN_CHARACTER_ARRAY[] = {0x3E};
 static char* GREATER_THAN_SIGN_CHARACTER = GREATER_THAN_SIGN_CHARACTER_ARRAY;
 
 /** The question mark character. U+003F */
-static char QUESTION_MARK_CHARACTER_ARRAY[] = {'?'};
+static char QUESTION_MARK_CHARACTER_ARRAY[] = {0x3F};
 static char* QUESTION_MARK_CHARACTER = QUESTION_MARK_CHARACTER_ARRAY;
 
 /** The commercial at character. U+0040 */
-static char COMMERCIAL_AT_CHARACTER_ARRAY[] = {'@'};
+static char COMMERCIAL_AT_CHARACTER_ARRAY[] = {0x40};
 static char* COMMERCIAL_AT_CHARACTER = COMMERCIAL_AT_CHARACTER_ARRAY;
 
 /** The left square bracket character. U+005B */
-static char LEFT_SQUARE_BRACKET_CHARACTER_ARRAY[] = {'['};
+static char LEFT_SQUARE_BRACKET_CHARACTER_ARRAY[] = {0x5B};
 static char* LEFT_SQUARE_BRACKET_CHARACTER = LEFT_SQUARE_BRACKET_CHARACTER_ARRAY;
 
 /** The reverse solidus character. U+005C */
-static char REVERSE_SOLIDUS_CHARACTER_ARRAY[] = {'*'};
+static char REVERSE_SOLIDUS_CHARACTER_ARRAY[] = {0x5C};
 static char* REVERSE_SOLIDUS_CHARACTER = REVERSE_SOLIDUS_CHARACTER_ARRAY;
 
 /** The right square bracket character. U+005D */
-static char RIGHT_SQUARE_BRACKET_CHARACTER_ARRAY[] = {']'};
+static char RIGHT_SQUARE_BRACKET_CHARACTER_ARRAY[] = {0x5D};
 static char* RIGHT_SQUARE_BRACKET_CHARACTER = RIGHT_SQUARE_BRACKET_CHARACTER_ARRAY;
 
 /** The circumflex accent character. U+005E */
-static char CIRCUMFLEX_ACCENT_CHARACTER_ARRAY[] = {'^'};
+static char CIRCUMFLEX_ACCENT_CHARACTER_ARRAY[] = {0x5E};
 static char* CIRCUMFLEX_ACCENT_CHARACTER = CIRCUMFLEX_ACCENT_CHARACTER_ARRAY;
 
 /** The low line character. U+005F */
-static char LOW_LINE_CHARACTER_ARRAY[] = {'_'};
+static char LOW_LINE_CHARACTER_ARRAY[] = {0x5F};
 static char* LOW_LINE_CHARACTER = LOW_LINE_CHARACTER_ARRAY;
 
 /** The grave accent character. U+0060 */
-static char GRAVE_ACCENT_CHARACTER_ARRAY[] = {'`'};
+static char GRAVE_ACCENT_CHARACTER_ARRAY[] = {0x60};
 static char* GRAVE_ACCENT_CHARACTER = GRAVE_ACCENT_CHARACTER_ARRAY;
 
 /** The left curly bracket character. U+007B */
-static char LEFT_CURLY_BRACKET_CHARACTER_ARRAY[] = {'{'};
+static char LEFT_CURLY_BRACKET_CHARACTER_ARRAY[] = {0x7B};
 static char* LEFT_CURLY_BRACKET_CHARACTER = LEFT_CURLY_BRACKET_CHARACTER_ARRAY;
 
 /**
@@ -232,15 +232,15 @@ static char* LEFT_CURLY_BRACKET_CHARACTER = LEFT_CURLY_BRACKET_CHARACTER_ARRAY;
  * U+2223 DIVIDES
  * U+2758 LIGHT VERTICAL BAR
  */
-static char VERTICAL_LINE_CHARACTER_ARRAY[] = {'|'};
+static char VERTICAL_LINE_CHARACTER_ARRAY[] = {0x7C};
 static char* VERTICAL_LINE_CHARACTER = VERTICAL_LINE_CHARACTER_ARRAY;
 
 /** The right curly bracket character. U+007D */
-static char RIGHT_CURLY_BRACKET_CHARACTER_ARRAY[] = {'}'};
+static char RIGHT_CURLY_BRACKET_CHARACTER_ARRAY[] = {0x7D};
 static char* RIGHT_CURLY_BRACKET_CHARACTER = RIGHT_CURLY_BRACKET_CHARACTER_ARRAY;
 
 /** The tilde character. U+007E */
-static char TILDE_CHARACTER_ARRAY[] = {'~'};
+static char TILDE_CHARACTER_ARRAY[] = {0x7E};
 static char* TILDE_CHARACTER = TILDE_CHARACTER_ARRAY;
 
 /* CHARACTER_CONSTANTS_SOURCE */

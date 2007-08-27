@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.14 $ $Date: 2007-08-17 03:15:33 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2007-08-27 07:07:37 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -40,6 +40,65 @@
 #include "../../memoriser/converter/date_time_converter.c"
 #include "../../memoriser/converter/integer_vector_converter.c"
 #include "../../memoriser/array.c"
+
+//
+// The "x DatenTransfer" (xDT) is the German version of
+// "Electronic Data Interchange" (EDI) for medical practices.
+// Here is an extract from xDT documentation, issued by the
+// "Kassenaerztliche Bundesvereinigung" (KBV) at:
+// http://www.kbv.de/ita/4274.html
+//
+// Aufbau und Struktur des "AbrechnungsDatenTransfer" (ADT)
+//
+// Der ADT ist eine Datenschnittstelle, die aufgrund ihrer fruehen Entstehung,
+// Mitte der achtziger Jahre, wenig Anknuepfungspunkte zu den erst spaeter im
+// Zusammenhang mit der zunehmenden EDI-Etablierung bekannten Standards besitzt.
+// Natuerlich gibt es Parallelen, beispielsweise zu
+// "EDI for Administration, Commerce and Transport" (EDIFACT),
+// die in der artverwandten Zielsetzung begruendet liegen.
+// Die ADT-Syntax ist der von "Abstract Syntax Notation" (ASN) ASN.1 aehnlich.
+//
+// Eine wesentliche Besonderheit des ADT besteht darin, dass jedes Feld im
+// Grunde einen eigenen Satz darstellt. Das heisst, es enthaelt in sich wieder
+// die Elemente Laenge, Feldkennung, Feldinhalt und Feldende.
+//
+// Die einzelnen Felder haben alle einen eindeutigen Namen in Form einer
+// numerischen Feldkennung. Es gibt wenige Felder mit in der Groesse
+// feststehenden Feldinhalten, die meisten sind variabel, was sich mit einer
+// vorlaufenden Feldlaenge leicht bewerkstelligen laesst. Darueber hinaus
+// werden als Endemarkierung eines Feldes die ASCII-Werte 13 und 10,
+// gleichbedeutend mit Carriage return und Linefeed, verlangt.
+//
+// Jedes Feld hat die gleiche Struktur. Alle Informationen sind als
+// ASCII-Zeichen dargestellt. Gemaess der Feldkennung wird der zugehoerige
+// Eintrag der Feldtabelle herangezogen.
+//
+// Fuer die Laengenberechnung eines Feldes gilt die Regel: Feldinhalt + 9
+//
+// Struktur eines Datenfeldes
+//
+// -----------------------------------------------------------------------------
+// Feldteil         Laenge [Byte]       Bedeutung
+// -----------------------------------------------------------------------------
+// Laenge           3                   Feldlaenge in Bytes
+// Kennung          4                   Feldkennung
+// Inhalt           variabel            Abrechnungsinformationen
+// Ende             2                   ASCII-Wert 13 = CR (Wagenruecklauf)
+//                                      ASCII-Wert 10 = LF (Zeilenvorschub)
+// -----------------------------------------------------------------------------
+//
+// Here is an extract from the German "Arztpraxis Wiegand" (APW) documentation,
+// available at:
+// http://www.apw-wiegand.de/
+//
+// Patientennummerkonvertierung:
+// Beim BDT ... werden die Patientennummern nach folgender Formel konvertiert:
+// Stelle 1: immer 1
+// Stelle 2-3: Parallelabrechnungsnummer (meist 01)
+// Stelle 4-5: 1. Stelle der APW-PatNr umgewandelt in Alphabet-Rangfolge (z.B. a->01, z->26)
+// Stelle 6-7: 2. Stelle der APW-PatNr umgewandelt in Alphabet-Rangfolge
+// ab Stelle 8: ab Stelle 3 der APW-PatNr
+//
 
 //
 // Forward declarations.
@@ -1420,63 +1479,6 @@ void decode_xdt_select_package(void* p0, void* p1, void* p2, void* p3, void* p4,
 
 /**
  * Decodes an xdt format byte array into a compound model.
- *
- * The "x DatenTransfer" (xDT) is the German version of
- * "Electronic Data Interchange" (EDI) for medical practices.
- * Here is an extract from xDT documentation, issued by the
- * "Kassenaerztliche Bundesvereinigung" (KBV) at:
- * http://www.kbv.de/ita/4274.html
- *
- * Aufbau und Struktur des "AbrechnungsDatenTransfer" (ADT)
- *
- * Der ADT ist eine Datenschnittstelle, die aufgrund ihrer fruehen Entstehung,
- * Mitte der achtziger Jahre, wenig Anknuepfungspunkte zu den erst spaeter im
- * Zusammenhang mit der zunehmenden EDI-Etablierung bekannten Standards besitzt.
- * Natuerlich gibt es Parallelen, beispielsweise zu
- * "EDI for Administration, Commerce and Transport" (EDIFACT),
- * die in der artverwandten Zielsetzung begruendet liegen.
- * Die ADT-Syntax ist der von "Abstract Syntax Notation" (ASN) ASN.1 aehnlich.
- *
- * Eine wesentliche Besonderheit des ADT besteht darin, dass jedes Feld im
- * Grunde einen eigenen Satz darstellt. Das heisst, es enthaelt in sich wieder
- * die Elemente Laenge, Feldkennung, Feldinhalt und Feldende.
- *
- * Die einzelnen Felder haben alle einen eindeutigen Namen in Form einer
- * numerischen Feldkennung. Es gibt wenige Felder mit in der Groesse
- * feststehenden Feldinhalten, die meisten sind variabel, was sich mit einer
- * vorlaufenden Feldlaenge leicht bewerkstelligen laesst. Darueber hinaus
- * werden als Endemarkierung eines Feldes die ASCII-Werte 13 und 10,
- * gleichbedeutend mit Carriage return und Linefeed, verlangt.
- *
- * Jedes Feld hat die gleiche Struktur. Alle Informationen sind als
- * ASCII-Zeichen dargestellt. Gemaess der Feldkennung wird der zugehoerige
- * Eintrag der Feldtabelle herangezogen.
- *
- * Fuer die Laengenberechnung eines Feldes gilt die Regel: Feldinhalt + 9
- *
- * Struktur eines Datenfeldes
- *
- * -----------------------------------------------------------------------------
- * Feldteil         Laenge [Byte]       Bedeutung
- * -----------------------------------------------------------------------------
- * Laenge           3                   Feldlaenge in Bytes
- * Kennung          4                   Feldkennung
- * Inhalt           variabel            Abrechnungsinformationen
- * Ende             2                   ASCII-Wert 13 = CR (Wagenruecklauf)
- *                                      ASCII-Wert 10 = LF (Zeilenvorschub)
- * -----------------------------------------------------------------------------
- *
- * Here is an extract from the German "Arztpraxis Wiegand" (APW) documentation,
- * available at:
- * http://www.apw-wiegand.de/
- *
- * Patientennummerkonvertierung:
- * Beim BDT ... werden die Patientennummern nach folgender Formel konvertiert:
- * Stelle 1: immer 1
- * Stelle 2-3: Parallelabrechnungsnummer (meist 01)
- * Stelle 4-5: 1. Stelle der APW-PatNr umgewandelt in Alphabet-Rangfolge (z.B. a->01, z->26)
- * Stelle 6-7: 2. Stelle der APW-PatNr umgewandelt in Alphabet-Rangfolge
- * ab Stelle 8: ab Stelle 3 der APW-PatNr
  *
  * @param p0 the destination compound model (Hand over as reference!)
  * @param p1 the destination compound model count

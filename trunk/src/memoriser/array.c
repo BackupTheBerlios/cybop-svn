@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.16 $ $Date: 2007-08-13 16:37:11 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2007-08-27 07:07:37 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -427,7 +427,6 @@ void remove_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4) {
         log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_REMOVE_ARRAY_ELEMENTS_THE_TYPE_IS_NULL_MESSAGE, (void*) COULD_NOT_REMOVE_ARRAY_ELEMENTS_THE_TYPE_IS_NULL_MESSAGE_COUNT);
     }
 }
-
 
 /**
  * Gets the array elements index.

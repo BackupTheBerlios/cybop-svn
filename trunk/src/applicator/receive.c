@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.37 $ $Date: 2007-08-17 03:15:31 $ $Author: christian $
+ * @version $Revision: 1.38 $ $Date: 2007-08-27 07:07:36 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -307,7 +307,26 @@ void receive_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
 
         if (r != *NUMBER_0_INTEGER) {
 
+            // Receive model by reading message data.
+            //
+            // CAUTION! The details are handed over as well, since sometimes,
+            // they are read from the message together with the model, for
+            // example when converting from a file in xdt format.
             receive_file_system((void*) mom, *momc, *moms, (void*) mod, *modc, *mods, *mm, *mmc, *lm, *lmc);
+
+            // Receive details by reading meta message data.
+            //
+            // CAUTION! Sometimes, the details are read from a different source than the
+            // model, for example the html attributes of an html table when creating a wui.
+            //
+            // Example:
+            // <part name="receive_table_row" channel="inline" abstraction="operation" model="receive">
+            //     <property name="channel" channel="inline" abstraction="character" model="file"/>
+            //     <property name="language" channel="inline" abstraction="character" model="compound"/>
+            //     <property name="message" channel="inline" abstraction="character" model="residenz/wui/address_table_row.cybol"/>
+            //     <property name="meta" channel="inline" abstraction="character" model="residenz/wui/address_table_row_properties.cybol"/>
+            //     <property name="model" channel="inline" abstraction="encapsulated" model=".residenz.temporary.translation.translate_record_to_wui.wui_patient_row"/>
+            // </part>
             receive_file_system((void*) mod, *modc, *mods, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *mem, *memc, *lm, *lmc);
         }
     }
@@ -338,7 +357,11 @@ void receive_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
 
         if (r != *NUMBER_0_INTEGER) {
 
-            receive_socket(p2, *com, *comc, *stm, *stmc, (void*) WWW_BASE_INTERNAL, (void*) &receive_socket_www, (void*) WWW_SERVICE_THREAD);
+            // Receive model by reading http request or response.
+            //
+            // CAUTION! The details are handed over as well,
+            // since they will store http headers as meta data.
+            receive_socket(p2, (void*) WWW_BASE_INTERNAL, (void*) WWW_SERVICE_THREAD, (void*) &receive_socket_www, (void*) mom, *momc, *moms, (void*) mod, *modc, *mods, *com, *comc, *lm, *lmc, *stm, *stmc);
         }
     }
 
@@ -348,7 +371,11 @@ void receive_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
 
         if (r != *NUMBER_0_INTEGER) {
 
-            receive_socket(p2, *com, *comc, *stm, *stmc, (void*) CYBOI_BASE_INTERNAL, (void*) &receive_socket_cyboi, (void*) CYBOI_SERVICE_THREAD);
+            // Receive model by reading http request or response.
+            //
+            // CAUTION! The details are handed over as well,
+            // since they will store http headers as meta data.
+            receive_socket(p2, (void*) CYBOI_BASE_INTERNAL, (void*) CYBOI_SERVICE_THREAD, (void*) &receive_socket_cyboi, (void*) mom, *momc, *moms, (void*) mod, *modc, *mods, *com, *comc, *lm, *lmc, *stm, *stmc);
         }
     }
 

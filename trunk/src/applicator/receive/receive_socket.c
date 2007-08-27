@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.33 $ $Date: 2007-08-17 04:06:51 $ $Author: christian $
+ * @version $Revision: 1.34 $ $Date: 2007-08-27 07:07:36 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -195,19 +195,26 @@ void set_signals_for_all_parameters(void* p0, int* p1, void* p2) {
 }
 
 /**
- * Receives socket signal.
+ * Receives a socket signal.
  *
- * @param p0 the signal memory
- * @param p1 the signal memory count
- * @param p2 the signal memory size
- * @param p3 the signal memory mutex
- * @param p4 the interrupt request flag
+ * @param p0 the knowledge memory
+ * @param p1 the knowledge memory count
+ * @param p2 the knowledge memory size
+ * @param p3 the signal memory
+ * @param p4 the signal memory count
+ * @param p5 the signal memory size
+ * @param p6 the signal memory mutex
+ * @param p7 the interrupt request internal
+ * @param p8 the model
+ * @param p9 the model count
+ * @param p10 the model size
+ * @param p11 the details
+ * @param p12 the details count
+ * @param p13 the details size
  * @param p5 the commands
  * @param p6 the commands count
  * @param p7 the command name
  * @param p8 the command name count
- * @param p9 the knowledge memory
- * @param p10 the knowledge memory count
  */
 void receive_socket_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10) {
 
@@ -700,52 +707,62 @@ void receive_socket_style(void* p0, void* p1, void* p2, void* p3, void* p4, void
  * @param p5 the signal memory size
  * @param p6 the signal memory mutex
  * @param p7 the interrupt request internal
- * @param p8 the communication style
- * @param p9 the communication style count
- * @param p10 the original socket of this system
- * @param p11 the original socket address of this system
- * @param p12 the original socket address of this system size
- * @param p13 the communication partner-connected socket of this system
- * @param p14 the communication partner-connected socket address
- * @param p15 the communication partner-connected socket address size
- * @param p16 the socket mutex
- * @param p17 the buffer (Hand over as reference!)
- * @param p18 the buffer count
- * @param p19 the buffer size
- * @param p20 the commands
- * @param p21 the commands count
+ * @param p8 the model (Hand over as reference!)
+ * @param p9 the model count
+ * @param p10 the model size
+ * @param p11 the details (Hand over as reference!)
+ * @param p12 the details count
+ * @param p13 the details size
+ * @param p14 the commands
+ * @param p15 the commands count
+ * @param p16 the language
+ * @param p17 the language count
+ * @param p18 the communication style
+ * @param p19 the communication style count
+ * @param p20 the original socket of this system
+ * @param p21 the original socket address of this system
+ * @param p22 the original socket address of this system size
+ * @param p23 the communication partner-connected socket of this system
+ * @param p24 the communication partner-connected socket address
+ * @param p25 the communication partner-connected socket address size
+ * @param p26 the socket mutex
+ * @param p27 the buffer (Hand over as reference!)
+ * @param p28 the buffer count
+ * @param p29 the buffer size
  */
 void receive_socket_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7,
-    void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14, void* p15, void* p16,
-    void* p17, void* p18, void* p19, void* p20, void* p21) {
+    void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14, void* p15, void* p16, void* p17, void* p18, void* p19,
+    void* p20, void* p21, void* p22, void* p23, void* p24, void* p25, void* p26, void* p27, void* p28, void* p29) {
 
-    if (p19 != *NULL_POINTER) {
+    if (p29 != *NULL_POINTER) {
 
-        int* bs = (int*) p19;
+        int* bs = (int*) p29;
 
-        if (p18 != *NULL_POINTER) {
+        if (p28 != *NULL_POINTER) {
 
-            int* bc = (int*) p18;
+            int* bc = (int*) p28;
 
-            if (p17 != *NULL_POINTER) {
+            if (p27 != *NULL_POINTER) {
 
-                void** b = (void**) p17;
+                void** b = (void**) p27;
 
                 log_message_debug("Receive socket message.");
 
                 // Receive socket message depending on communication style.
-                receive_socket_style(p17, p18, p19, p13, p14, p15, p10, p11, p12, p16, p8, p9);
+                receive_socket_style(p27, p28, p29, p23, p24, p25, p20, p21, p22, p26, p18, p19);
 
-                //?? CAUTION! Do NOT allocate the http parameters compound here,
-                //?? since this is forbidden in the thread!
-                //?? Get it as parameter handed over instead!
-                //?? DELETE this comment later!
-                //?? void* hc = *NULL_POINTER;
-                //?? int hcc = *NUMBER_0_INTEGER;
-                //?? int hcs = *NUMBER_0_INTEGER;
+                // Decode http request and write any parameters into the
+                // compound model and details being handed over as parameters.
+                decode(p8, p9, p10, p11, p12, p13, *b, p28, (void*) HTTP_REQUEST_ABSTRACTION, (void*) HTTP_REQUEST_ABSTRACTION_COUNT);
 
-                // Decode http request and write any parameters into the compound being handed over as parameter.
-//??                decode((void*) &hc, (void*) &hcc, (void*) &hcs, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *b, p18, (void*) HTTP_REQUEST_ABSTRACTION, (void*) HTTP_REQUEST_ABSTRACTION_COUNT);
+                // Receive socket signal.
+//??                receive_socket_signal(p0, p1, p2, p3, p4, p5, p6, p7, p20, p21, name, (void*) &namec, *((void**) p8), p9, p10, *((void**) p11), p12, p13);
+
+                //?? CAUTION! This sleep procedure is temporarily necessary for testing!
+                //?? Otherwise, the loop runs into the next cycle and the socket mutex
+                //?? gets locked, so that the "send_socket" procedure in the main thread
+                //?? cannot send its message.
+                //??    sleep(30);
 
 /*??
                 // The url basename.
@@ -772,9 +789,15 @@ void receive_socket_message(void* p0, void* p1, void* p2, void* p3, void* p4, vo
 
                 // The comparison result.
                 int r = *NUMBER_0_INTEGER;
+
                 compare_arrays((void*) url_basename, (void*) &url_basename_count, (void*) p_firefox_request, (void*) &firefox_request_count, (void*) &r, (void*) CHARACTER_ARRAY);
 
-                if (r != *NUMBER_1_INTEGER) {
+                if (r != *NUMBER_0_INTEGER) {
+
+                    // Close partner socket, since the request was just intended to retrieve the icon.
+                    close(*ps);
+
+                } else {
 
                     // query string handling
                     set_signals_for_all_parameters((void*) param, (void*) &param_count, p0);
@@ -782,21 +805,8 @@ void receive_socket_message(void* p0, void* p1, void* p2, void* p3, void* p4, vo
                     //?? The OLD solution created a signal here from a cybol knowledge template.
                     //?? This is NOW easier, since the commands already exist in the knowledge tree
                     //?? and only have to be referenced from here.
-
-                } else {
-
-                    close(*ps);
                 }
 */
-
-                // Receive socket signal.
-//??                receive_socket_signal(p3, p4, p5, p6, p7, p20, p21, name, (void*) &namec, p0, p1);
-
-        //?? CAUTION! This sleep procedure is temporarily necessary for testing!
-        //?? Otherwise, the loop runs into the next cycle and the socket mutex
-        //?? gets locked, so that the "send_socket" procedure in the main thread
-        //?? cannot send its message.
-        //??    sleep(30);
 
                 // Reset character buffer.
                 //
@@ -806,7 +816,8 @@ void receive_socket_message(void* p0, void* p1, void* p2, void* p3, void* p4, vo
                 // negative value and therefore needs to be reset in any case.
                 //
                 // CAUTION! Do NOT deallocate the character buffer!
-                // It was allocated at socket startup and must remain unchanged.
+                // It was allocated at socket startup and must remain unchanged,
+                // since threads are not allowed to allocate any memory area.
                 // Therefore, its elements are just set to null pointers here.
                 //
                 // CAUTION! Do NOT reset the maximum buffer size!
@@ -861,6 +872,20 @@ void receive_socket_thread(void* p0, void* p1) {
         sig_atomic_t** irq = (sig_atomic_t**) NULL_POINTER;
         // The socket mutex.
         pthread_mutex_t** mt = (pthread_mutex_t**) NULL_POINTER;
+        // The model.
+        void** m = NULL_POINTER;
+        void** mc = NULL_POINTER;
+        void** ms = NULL_POINTER;
+        // The details.
+        void** d = NULL_POINTER;
+        void** dc = NULL_POINTER;
+        void** ds = NULL_POINTER;
+        // The commands.
+        void** c = NULL_POINTER;
+        void** cc = NULL_POINTER;
+        // The language.
+        void** l = NULL_POINTER;
+        void** lc = NULL_POINTER;
         // The communication style.
         void** st = NULL_POINTER;
         void** stc = NULL_POINTER;
@@ -880,9 +905,6 @@ void receive_socket_thread(void* p0, void* p1) {
         // The maximum buffer size.
         // CAUTION! A message MUST NOT be longer!
         void** bs = (void**) NULL_POINTER;
-        // The commands.
-        void** c = NULL_POINTER;
-        void** cc = NULL_POINTER;
 
         // Get knowledge memory internal.
         get_element(p0, (void*) KNOWLEDGE_MEMORY_INTERNAL, (void*) &k, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
@@ -911,6 +933,30 @@ void receive_socket_thread(void* p0, void* p1) {
         // (of the new commands internal), not belonging to the commands internal got before.
         pthread_mutex_lock(*mt);
 
+        // Get model.
+        i = *base + *SOCKET_MODEL_INTERNAL;
+        get_element(p0, (void*) &i, (void*) &m, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        i = *base + *SOCKET_MODEL_COUNT_INTERNAL;
+        get_element(p0, (void*) &i, (void*) &mc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        i = *base + *SOCKET_MODEL_SIZE_INTERNAL;
+        get_element(p0, (void*) &i, (void*) &ms, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        // Get details.
+        i = *base + *SOCKET_DETAILS_INTERNAL;
+        get_element(p0, (void*) &i, (void*) &d, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        i = *base + *SOCKET_DETAILS_COUNT_INTERNAL;
+        get_element(p0, (void*) &i, (void*) &dc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        i = *base + *SOCKET_DETAILS_SIZE_INTERNAL;
+        get_element(p0, (void*) &i, (void*) &ds, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        // Get commands.
+        i = *base + *SOCKET_COMMANDS_INTERNAL;
+        get_element(p0, (void*) &i, (void*) &c, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        i = *base + *SOCKET_COMMANDS_COUNT_INTERNAL;
+        get_element(p0, (void*) &i, (void*) &cc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        // Get language.
+        i = *base + *SOCKET_LANGUAGE_INTERNAL;
+        get_element(p0, (void*) &i, (void*) &l, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        i = *base + *SOCKET_LANGUAGE_COUNT_INTERNAL;
+        get_element(p0, (void*) &i, (void*) &lc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         // Get communication style.
         i = *base + *SOCKET_STYLE_INTERNAL;
         get_element(p0, (void*) &i, (void*) &st, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
@@ -932,18 +978,13 @@ void receive_socket_thread(void* p0, void* p1) {
         get_element(p0, (void*) &i, (void*) &pa, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         i = *base + *SOCKET_COMMUNICATION_PARTNER_ADDRESS_SIZE_INTERNAL;
         get_element(p0, (void*) &i, (void*) &pas, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        // Get character buffer.
+        // Get character buffer, which was set at socket startup.
         i = *base + *SOCKET_CHARACTER_BUFFER_INTERNAL;
         get_element(p0, (void*) &i, (void*) &b, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         i = *base + *SOCKET_CHARACTER_BUFFER_COUNT_INTERNAL;
         get_element(p0, (void*) &i, (void*) &bc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         i = *base + *SOCKET_CHARACTER_BUFFER_SIZE_INTERNAL;
         get_element(p0, (void*) &i, (void*) &bs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        // Get commands internal.
-        i = *base + *SOCKET_COMMANDS_INTERNAL;
-        get_element(p0, (void*) &i, (void*) &c, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        i = *base + *SOCKET_COMMANDS_COUNT_INTERNAL;
-        get_element(p0, (void*) &i, (void*) &cc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
         // Unlock socket mutex.
         pthread_mutex_unlock(*mt);
@@ -958,8 +999,10 @@ void receive_socket_thread(void* p0, void* p1) {
             // and processed in the system signal handler procedure
             // (situated in the controller/checker.c module).
 
+            // CAUTION! Hand over model, details and buffer as reference!
             receive_socket_message(*k, *kc, *ks, *s, *sc, *ss, *smt, *irq,
-                *st, *stc, *os, *oa, *oas, *ps, *pa, *pas, *mt, b, *bc, *bs, *c, *cc);
+                m, *mc, *ms, d, *dc, *ds, *c, *cc, *l, *lc, *st, *stc,
+                *os, *oa, *oas, *ps, *pa, *pas, *mt, b, *bc, *bs);
 
             // Sleep for some time to give the central processing unit (cpu)
             // time to breathe, that is to be idle or to process other signals.
@@ -1026,23 +1069,32 @@ void receive_socket_cyboi(void* p0) {
  * Receives messages via socket.
  *
  * @param p0 the internal memory
- * @param p1 the commands model
- * @param p2 the commands model count
- * @param p3 the communication style model
- * @param p4 the communication style model count
- * @param p5 the base internal
- * @param p6 the receive socket thread procedure
- * @param p7 the service thread
+ * @param p1 the base internal
+ * @param p2 the service thread
+ * @param p3 the receive socket thread procedure
+ * @param p4 the model
+ * @param p5 the model count
+ * @param p6 the model size
+ * @param p7 the details
+ * @param p8 the details count
+ * @param p9 the details size
+ * @param p10 the commands model
+ * @param p11 the commands model count
+ * @param p12 the language model
+ * @param p13 the language model count
+ * @param p14 the communication style model
+ * @param p15 the communication style model count
  */
-void receive_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
+void receive_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7,
+    void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14, void* p15) {
 
-    if (p7 != *NULL_POINTER) {
+    if (p2 != *NULL_POINTER) {
 
-        int* t = (int*) p7;
+        int* t = (int*) p2;
 
-        if (p5 != *NULL_POINTER) {
+        if (p1 != *NULL_POINTER) {
 
-            int* b = (int*) p5;
+            int* b = (int*) p1;
 
             log_message_debug("Receive socket.");
 
@@ -1073,17 +1125,39 @@ void receive_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, 
             // with the count or size of an old internal value, which would
             // lead to a segmentation fault and possibly system crash.
 
+            // Set model internal.
+            i = *b + *SOCKET_MODEL_INTERNAL;
+            set_element(p0, (void*) &i, (void*) &p4, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            i = *b + *SOCKET_MODEL_COUNT_INTERNAL;
+            set_element(p0, (void*) &i, (void*) &p5, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            i = *b + *SOCKET_MODEL_SIZE_INTERNAL;
+            set_element(p0, (void*) &i, (void*) &p6, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
+            // Set details internal.
+            i = *b + *SOCKET_DETAILS_INTERNAL;
+            set_element(p0, (void*) &i, (void*) &p7, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            i = *b + *SOCKET_DETAILS_COUNT_INTERNAL;
+            set_element(p0, (void*) &i, (void*) &p8, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            i = *b + *SOCKET_DETAILS_SIZE_INTERNAL;
+            set_element(p0, (void*) &i, (void*) &p9, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
             // Set commands internal.
             i = *b + *SOCKET_COMMANDS_INTERNAL;
-            set_element(p0, (void*) &i, (void*) &p1, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            set_element(p0, (void*) &i, (void*) &p10, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
             i = *b + *SOCKET_COMMANDS_COUNT_INTERNAL;
-            set_element(p0, (void*) &i, (void*) &p2, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            set_element(p0, (void*) &i, (void*) &p11, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
+            // Set language internal.
+            i = *b + *SOCKET_LANGUAGE_INTERNAL;
+            set_element(p0, (void*) &i, (void*) &p12, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            i = *b + *SOCKET_LANGUAGE_COUNT_INTERNAL;
+            set_element(p0, (void*) &i, (void*) &p13, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
             // Set communication style internal.
             i = *b + *SOCKET_STYLE_INTERNAL;
-            set_element(p0, (void*) &i, (void*) &p3, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            set_element(p0, (void*) &i, (void*) &p14, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
             i = *b + *SOCKET_STYLE_COUNT_INTERNAL;
-            set_element(p0, (void*) &i, (void*) &p4, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            set_element(p0, (void*) &i, (void*) &p15, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
             // Unlock socket mutex.
             pthread_mutex_unlock(*mt);
@@ -1112,7 +1186,7 @@ void receive_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, 
 
                 // Create thread.
                 // The third parameter is the procedure to be called.
-                pthread_create((pthread_t*) t, *NULL_POINTER, p6, p0);
+                pthread_create((pthread_t*) t, *NULL_POINTER, p3, p0);
             }
 
         } else {

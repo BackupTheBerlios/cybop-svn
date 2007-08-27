@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2007-08-17 03:15:32 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2007-08-27 07:07:37 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -28,10 +28,127 @@
 #define HTTP_REQUEST_CONVERTER_SOURCE
 
 #include "../../globals/constants/http/http_request_method_constants.c"
+#include "../../globals/constants/http/http_separator_constants.c"
 #include "../../globals/constants/integer/integer_constants.c"
 #include "../../globals/constants/log/log_message_constants.c"
 #include "../../globals/constants/memory_structure/array_constants.c"
 #include "../../globals/logger/logger.c"
+
+//
+// An http server request delivers message data in text format (like MIME 1.0),
+// and consists of the following three parts:
+// 1 request line containing request method, file path and protocol version
+// 2 headers containing meta data, of which some have the form of variables
+// 3 body containing optional user data (such as an encoded/serialised xhtml page)
+//
+// CAUTION! Use Carriage Return (CR) AND Line Feed (LF) characters to break lines!
+// This is defined so by the Hypertext Transfer Protocol (HTTP).
+// The end of the headers is demarcated by an empty line (CRLF without any space).
+//
+// Example:
+//
+// GET /infotext.html HTTP/1.1
+// host: www.example.net
+//
+// Uniform resource identifier (URI) have been known by many names (synonyms):
+// - WWW addresses
+// - Universal Document Identifiers
+// - Universal Resource Identifiers
+// - Uniform Resource Locators (URL)
+// - Uniform Resource Names (URN)
+//
+// As far as HTTP is concerned, Uniform Resource Identifiers are simply
+// formatted strings which identify -- via name, location, or any other
+// characteristic -- a resource.
+//
+// The "http" scheme is used to locate network resources via the HTTP protocol.
+//
+// http_URL = "http:" "//" host [ ":" port ] [ abs_path [ "?" query ]]
+//
+// If the port is empty or not given, port 80 is assumed.
+// The semantics are that the identified resource is located at the server
+// listening for TCP connections on that port of that host, and the Request-URI
+// for the resource is abs_path.
+// The use of IP addresses in URLs SHOULD be avoided whenever possible!
+// If the abs_path is not present in the URL, it MUST be given as "/" when
+// used as a Request-URI for a resource.
+// If a proxy receives a host name which is not a fully qualified domain name,
+// it MAY add its domain to the host name it received. If a proxy receives a
+// fully qualified domain name, the proxy MUST NOT change the host name.
+//
+// URI Comparison
+//
+// When comparing two URIs to decide if they match or not, a client SHOULD use a
+// case-sensitive octet-by-octet comparison of the entire URIs, with these exceptions:
+// - A port that is empty or not given is equivalent to the default port for that URI-reference;
+// - Comparisons of host names MUST be case-insensitive;
+// - Comparisons of scheme names MUST be case-insensitive;
+// - An empty abs_path is equivalent to an abs_path of "/".
+//
+// Characters other than those in the "reserved" and "unsafe" sets are equivalent
+// to their ""%" HEX HEX" encoding. For example, the following three URIs are equivalent:
+// http://abc.com:80/~smith/home.html
+// http://ABC.com/%7Esmith/home.html
+// http://ABC.com:/%7esmith/home.html
+//
+// HTTP Message
+//
+// Request and Response messages use a generic message format for transferring
+// entities (the payload of the message). Both types of message consist of a:
+// - start-line
+// - zero or more header fields (also known as "headers")
+// - an empty line (i.e., a line with nothing preceding the CRLF)
+//   indicating the end of the header fields
+// - possibly a message-body
+//
+// In the interest of robustness, servers SHOULD ignore any empty line(s)
+// received where a Request-Line is expected. In other words, if the server
+// is reading the protocol stream at the beginning of a message and receives
+// a CRLF first, it should ignore the CRLF.
+//
+// --
+// A uniform resource locator (url) consists of the following components:
+// - schema
+// - host
+// - port
+// - path
+// - parameters
+// - query
+// - fragment (an anchor pointing to a special section within the document specified by "path")
+//
+// Its structure is defined as follows:
+// schema://host:port/path;parameter_one;parameter_two;parameter_n?query#fragment
+// The ";" is often replaced with "&".
+//
+// Example:
+// http://127.0.0.1:1971?name=close&channel=inline&abstraction=knowledge&model=.residenz.logic.exit_program
+// http://de.wikipedia.org/w/index.php?title=Uniform_Resource_Locator&action=edit
+//
+// Quoting:
+// There are a number of reserved characters, to which belong:
+// ! # $ % & ' ( ) * + , / : ; = ? @ [ ]
+// The following url contains the reserved # character:
+// http://www.example.net/index.html?session=A54C6FE2#info
+// which should be encoded as %23 like:
+// http://www.example.net/index.html?session=A54C6FE2%23info
+//
+// The url path specified by the client is relative to the
+// server's root directory. Consider the following url as it
+// would be requested by a client:
+// http://www.example.com/path/file.html
+// The client's web browser will translate it into a connection
+// to www.example.com with the following http 1.1 request:
+// GET /path/file.html HTTP/1.1
+// host: www.example.com
+// The Web server on www.example.com will append the given path
+// to the path of its root directory. On Unix machines, this is
+// commonly /var/www/htdocs.
+// The result is the local file system resource:
+// /var/www/htdocs/path/file.html
+// The Web server will then read the file, if it exists, and
+// send a response to the client's web browser. The response
+// will describe the content of the file and contain the file itself.
+//
 
 /**
  * Get the request method from the complet request msg
@@ -138,28 +255,46 @@ void decode_http_request_url(char* req, int* req_count, char** urlbase, int* url
 }
 
 /**
- * Extract parameters from "get" request method url.
+ * Decode http "get" request.
  *
- * Example request :
- * GET /lib/ausgabe.cybol?param1=value1&param2=value2 HTTP/1.1 ...
+ * Example 1:
  *
- * The result of the function is:
- * param1=value1&param2=value2
+ * GET /wiki/Spezial:Search?search=Katzen&go=Artikel HTTP/1.1
+ * host: de.wikipedia.org
+ * ...
  *
- * @param p0 the name (Hand over as reference!)
- * @param p1 the name count
- * @param p2 the channel (Hand over as reference!)
- * @param p3 the channel count
- * @param p4 the abstraction (Hand over as reference!)
- * @param p5 the abstraction count
- * @param p6 the model (Hand over as reference!)
- * @param p7 the model count
- * @param p8 the url without "get" request method prefix
- * @param p9 the url count
+ * The value pairs (parameters) of the example are:
+ *
+ * -------------------------------------
+ * Argument         Value
+ * -------------------------------------
+ * search           Katzen
+ * go               Artikel
+ * -------------------------------------
+ *
+ * Example 2:
+ *
+ * GET /residenz/test.html HTTP/1.1
+ * user-agent: Mozilla/5.0 (compatible; Konqueror/3.5; Linux) KHTML/3.5.5 (like Gecko) (Debian)
+ * accept: text/html, image/jpeg, image/png, text/*, image/*, * /*
+ * accept-Encoding: x-gzip, x-deflate, gzip, deflate
+ * accept-Charset: utf-8, utf-8;q=0.5, *;q=0.5
+ * accept-Language: en, de, pl
+ * host: 127.0.0.1:1971
+ * connection: Keep-Alive
+ *
+ * @param p0 the destination model (Hand over as reference!)
+ * @param p1 the destination model count
+ * @param p2 the destination model size
+ * @param p3 the destination details (Hand over as reference!)
+ * @param p4 the destination details count
+ * @param p5 the destination details size
+ * @param p6 the source http request (starting behind the request method)
+ * @param p7 the source http request (starting behind the request method) count
  */
-void decode_http_request_get(void* p0, void* p1, void* p2, void* p3,
-    void* p4, void* p5, void* p6, void* p7, void* p8, void* p9) {
+void decode_http_request_get(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
 
+/*??
     if (p9 != *NULL_POINTER) {
 
         int* urlc = (int*) p9;
@@ -200,6 +335,7 @@ void decode_http_request_get(void* p0, void* p1, void* p2, void* p3,
 
         log_message_debug("Error: Could not receive socket get parameters get request. The url count is null.");
     }
+*/
 
 /*??
     *param_count = *NUMBER_0_INTEGER;
@@ -248,20 +384,30 @@ void decode_http_request_get(void* p0, void* p1, void* p2, void* p3,
 }
 
 /**
- * Extract parameters from "post" request method url.
+ * Decode http "post" request.
  *
- * @param p0 the name (Hand over as reference!)
- * @param p1 the name count
- * @param p2 the channel (Hand over as reference!)
- * @param p3 the channel count
- * @param p4 the abstraction (Hand over as reference!)
- * @param p5 the abstraction count
- * @param p6 the model (Hand over as reference!)
- * @param p7 the model count
- * @param p8 the url without "post" request method prefix
- * @param p9 the url count
+ * Example:
+ *
+ * POST /wiki/Spezial:Search HTTP/1.1
+ * host: de.wikipedia.org
+ * content-type: application/x-www-form-urlencoded
+ * content-length: 24
+ *
+ * search=Katzen&go=Artikel
+ *
+ * @param p0 the destination model (Hand over as reference!)
+ * @param p1 the destination model count
+ * @param p2 the destination model size
+ * @param p3 the destination details (Hand over as reference!)
+ * @param p4 the destination details count
+ * @param p5 the destination details size
+ * @param p6 the source http request (starting behind the request method)
+ * @param p7 the source http request (starting behind the request method) count
  */
-void decode_http_request_post(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9) {
+void decode_http_request_post(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
+
+    // CAUTION! Use Carriage Return (CR) AND Line Feed (LF) characters to break lines!
+    // This is defined so by the Hypertext Transfer Protocol (HTTP).
 
 /*??
     *param_count = *NUMBER_0_INTEGER;
@@ -318,206 +464,544 @@ void decode_http_request_post(void* p0, void* p1, void* p2, void* p3, void* p4, 
 }
 
 /**
- * Translate uniform resource identifier (uri).
- *
- * URIs have been known by many names (synonyms):
- * - WWW addresses
- * - Universal Document Identifiers
- * - Universal Resource Identifiers
- * - Uniform Resource Locators (URL)
- * - Uniform Resource Names (URN)
- *
- * As far as HTTP is concerned, Uniform Resource Identifiers are simply
- * formatted strings which identify -- via name, location, or any other
- * characteristic -- a resource.
- *
- * The "http" scheme is used to locate network resources via the HTTP protocol.
- *
- * http_URL = "http:" "//" host [ ":" port ] [ abs_path [ "?" query ]]
- *
- * If the port is empty or not given, port 80 is assumed.
- * The semantics are that the identified resource is located at the server
- * listening for TCP connections on that port of that host, and the Request-URI
- * for the resource is abs_path.
- * The use of IP addresses in URLs SHOULD be avoided whenever possible!
- * If the abs_path is not present in the URL, it MUST be given as "/" when
- * used as a Request-URI for a resource.
- * If a proxy receives a host name which is not a fully qualified domain name,
- * it MAY add its domain to the host name it received. If a proxy receives a
- * fully qualified domain name, the proxy MUST NOT change the host name.
- *
- * URI Comparison
- *
- * When comparing two URIs to decide if they match or not, a client SHOULD use a
- * case-sensitive octet-by-octet comparison of the entire URIs, with these exceptions:
- * - A port that is empty or not given is equivalent to the default port for that URI-reference;
- * - Comparisons of host names MUST be case-insensitive;
- * - Comparisons of scheme names MUST be case-insensitive;
- * - An empty abs_path is equivalent to an abs_path of "/".
- *
- * Characters other than those in the "reserved" and "unsafe" sets are equivalent
- * to their ""%" HEX HEX" encoding. For example, the following three URIs are equivalent:
- * http://abc.com:80/~smith/home.html
- * http://ABC.com/%7Esmith/home.html
- * http://ABC.com:/%7esmith/home.html
- *
- * HTTP Message
- *
- * Request and Response messages use a generic message format for transferring
- * entities (the payload of the message). Both types of message consist of a:
- * - start-line
- * - zero or more header fields (also known as "headers")
- * - an empty line (i.e., a line with nothing preceding the CRLF)
- *   indicating the end of the header fields
- * - possibly a message-body
- *
- * generic-message = start-line
- *                   *(message-header CRLF)
- *                   CRLF
- *                   [ message-body ]
- * start-line      = Request-Line | Status-Line
- *
- * In the interest of robustness, servers SHOULD ignore any empty line(s)
- * received where a Request-Line is expected. In other words, if the server
- * is reading the protocol stream at the beginning of a message and receives
- * a CRLF first, it should ignore the CRLF.
- *
- * --
- * A uniform resource locator (url) consists of the following components:
- * - schema
- * - host
- * - port
- * - path
- * - parameters
- * - query
- * - fragment (an anchor pointing to a special section within the document specified by "path")
- *
- * Its structure is defined as follows:
- * schema://host:port/path;parameter_one;parameter_two;parameter_n?query#fragment
- * The ";" is often replaced with "&".
+ * Decode http request method.
  *
  * Example:
- * http://127.0.0.1:1971?name=close&channel=inline&abstraction=knowledge&model=.residenz.logic.exit_program
- * http://de.wikipedia.org/w/index.php?title=Uniform_Resource_Locator&action=edit
  *
- * Quoting:
- * There are a number of reserved characters, to which belong:
- * ! # $ % & ' ( ) * + , / : ; = ? @ [ ]
- * The following url contains the reserved # character:
- * http://www.example.net/index.html?session=A54C6FE2#info
- * which should be encoded as %23 like:
- * http://www.example.net/index.html?session=A54C6FE2%23info
+ * POST /wiki/Spezial:Search HTTP/1.1
+ * ...
  *
- * Example:
- * GET /residenz/test.html HTTP/1.1
- * User-Agent: Mozilla/5.0 (compatible; Konqueror/3.5; Linux) KHTML/3.5.5 (like Gecko) (Debian)
- * Accept: text/html, image/jpeg, image/png, text/*, image/*, * /*
- * Accept-Encoding: x-gzip, x-deflate, gzip, deflate
- * Accept-Charset: utf-8, utf-8;q=0.5, *;q=0.5
- * Accept-Language: en, de, pl
- * Host: 127.0.0.1:1971
- * Connection: Keep-Alive
- *
- * The url path specified by the client is relative to the
- * server's root directory. Consider the following url as it
- * would be requested by a client:
- * http://www.example.com/path/file.html
- * The client's web browser will translate it into a connection
- * to www.example.com with the following http 1.1 request:
- * GET /path/file.html HTTP/1.1
- * Host: www.example.com
- * The Web server on www.example.com will append the given path
- * to the path of its root directory. On Unix machines, this is
- * commonly /var/www/htdocs.
- * The result is the local file system resource:
- * /var/www/htdocs/path/file.html
- * The Web server will then read the file, if it exists, and
- * send a response to the client's web browser. The response
- * will describe the content of the file and contain the file itself.
- *
- * @param p0 the name (Hand over as reference!)
- * @param p1 the name count
- * @param p2 the channel (Hand over as reference!)
- * @param p3 the channel count
- * @param p4 the abstraction (Hand over as reference!)
- * @param p5 the abstraction count
- * @param p6 the model (Hand over as reference!)
- * @param p7 the model count
- * @param p8 the url
- * @param p9 the url count
+ * @param p0 the destination model (Hand over as reference!)
+ * @param p1 the destination model count
+ * @param p2 the destination model size
+ * @param p3 the destination details (Hand over as reference!)
+ * @param p4 the destination details count
+ * @param p5 the destination details size
+ * @param p6 the source http request
+ * @param p7 the source http request count
  */
-void decode_http_request_method(void* p0, void* p1, void* p2, void* p3,
-    void* p4, void* p5, void* p6, void* p7, void* p8, void* p9) {
+void decode_http_request_request_method(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
 
-    if (p9 != *NULL_POINTER) {
+    if (p7 != *NULL_POINTER) {
 
-        int* urlc = (int*) p9;
+        int* sc = (int*) p7;
 
-        log_message_debug("Information: Receive socket request method.");
+        log_message_debug("Information: Decode http request method.");
 
-        // The remaining url.
-        void* u = *NULL_POINTER;
-        int uc = *NUMBER_0_INTEGER;
+        // The remaining source.
+        void* rs = *NULL_POINTER;
+        int rsc = *NUMBER_0_INTEGER;
 
         // The comparison result.
         int r = *NUMBER_0_INTEGER;
 
         if (r == *NUMBER_0_INTEGER) {
 
-            compare_arrays(p8, (void*) HTTP_GET_REQUEST_METHOD_COUNT, (void*) HTTP_GET_REQUEST_METHOD, (void*) HTTP_GET_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+            // Check source count.
+            // CAUTION! This is necessary to avoid a segmentation fault if one
+            // array is too small, when comparing the request method arrays below!
+            if (*sc >= *HTTP_GET_REQUEST_METHOD_COUNT) {
 
-            if (r != *NUMBER_0_INTEGER) {
+                compare_arrays(p6, (void*) HTTP_GET_REQUEST_METHOD_COUNT, (void*) HTTP_GET_REQUEST_METHOD, (void*) HTTP_GET_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-                // Set remaining url.
-                //
-                // To the original pointer are added the length of the "get"
-                // string and one place for the "space" character after "get".
-                u = p8 + *HTTP_GET_REQUEST_METHOD_COUNT + *PRIMITIVE_COUNT;
-                uc = *urlc - *HTTP_GET_REQUEST_METHOD_COUNT - *PRIMITIVE_COUNT;
+                if (r != *NUMBER_0_INTEGER) {
 
-//??    fprintf(stderr, "TEST get request remaining url: %s\n", (char*) u);
+                    // Set remaining source.
+                    //
+                    // To the original pointer are added the length of the "GET "
+                    // string, including one place for the "space" character.
+                    rs = p6 + *HTTP_GET_REQUEST_METHOD_COUNT + *PRIMITIVE_COUNT;
+                    rsc = *sc - *HTTP_GET_REQUEST_METHOD_COUNT - *PRIMITIVE_COUNT;
 
-                decode_http_request_get(p0, p1, p2, p3, p4, p5, p6, p7, u, (void*) &uc);
+    //??    fprintf(stderr, "TEST get request remaining source (url): %s\n", (char*) rs);
+
+                    decode_http_request_get(p0, p1, p2, p3, p4, p5, rs, (void*) &rsc);
+                }
+
+            } else {
+
+                log_message_debug("Warning: Could not decode http request method. The source http request count is less than the get request method count.");
             }
         }
 
         if (r == *NUMBER_0_INTEGER) {
 
-            compare_arrays(p8, (void*) HTTP_POST_REQUEST_METHOD_COUNT, (void*) HTTP_POST_REQUEST_METHOD, (void*) HTTP_POST_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+            // Check source count.
+            // CAUTION! This is necessary to avoid a segmentation fault if one
+            // array is too small, when comparing the request method arrays below!
+            if (*sc >= *HTTP_POST_REQUEST_METHOD_COUNT) {
 
-            if (r != *NUMBER_0_INTEGER) {
+                compare_arrays(p6, (void*) HTTP_POST_REQUEST_METHOD_COUNT, (void*) HTTP_POST_REQUEST_METHOD, (void*) HTTP_POST_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-                // Set remaining url.
-                //
-                // To the original pointer are added the length of the "post"
-                // string and one place for the "space" character after "post".
-                u = p8 + *HTTP_POST_REQUEST_METHOD_COUNT + *PRIMITIVE_COUNT;
-                uc = *urlc - *HTTP_POST_REQUEST_METHOD_COUNT - *PRIMITIVE_COUNT;
+                if (r != *NUMBER_0_INTEGER) {
 
-//??    fprintf(stderr, "TEST post request remaining url: %s\n", (char*) u);
+                    // Set remaining source.
+                    //
+                    // To the original pointer are added the length of the "POST "
+                    // string, including one place for the "space" character.
+                    rs = p6 + *HTTP_POST_REQUEST_METHOD_COUNT + *PRIMITIVE_COUNT;
+                    rsc = *sc - *HTTP_POST_REQUEST_METHOD_COUNT - *PRIMITIVE_COUNT;
 
-                decode_http_request_post(p0, p1, p2, p3, p4, p5, p6, p7, u, (void*) &uc);
+    //??    fprintf(stderr, "TEST post request remaining source (url): %s\n", (char*) rs);
+
+                    decode_http_request_post(p0, p1, p2, p3, p4, p5, rs, (void*) &rsc);
+                }
+
+            } else {
+
+                log_message_debug("Warning: Could not decode http request method. The source http request count is less than the post request method count.");
+            }
+        }
+
+        if (r == *NUMBER_0_INTEGER) {
+
+            log_message_debug("Warning: Could not decode http request method. The source http request method is unknown.");
+        }
+
+    } else {
+
+        log_message_debug("Error: Could not decode http request method. The source http request count is null.");
+    }
+}
+
+/**
+ * Decodes an http request request line into the details compound.
+ *
+ * Example:
+ *
+ * POST /wiki/Spezial:Search HTTP/1.1
+ * ...
+ *
+ * @param p0 the destination details (Hand over as reference!)
+ * @param p1 the destination details count
+ * @param p2 the destination details size
+ * @param p3 the source http request
+ * @param p4 the source http request count
+ */
+void decode_http_request_request_line(void* p0, void* p1, void* p2, void* p3, void* p4) {
+
+    if (p4 != *NULL_POINTER) {
+
+        int* sc = (int*) p4;
+
+        log_message_debug("Debug: Decode http request request line.");
+
+        // The source http request index.
+        // CAUTION! A local variable is used instead of the parameter
+        // that was handed over, because it will get manipulated below!
+        void* i = p3;
+        int ic = *sc;
+        // The http request separator index.
+        int sep = *NUMBER_MINUS_1_INTEGER;
+
+        //
+        // Request method.
+        //
+
+        // The request method, initialised with current http request index.
+        void* rm = i;
+        int rmc = ic;
+        // Reset http request separator index.
+        sep = *NUMBER_MINUS_1_INTEGER;
+
+        // Get request method separator index.
+        get_array_elements_index(i, (void*) &ic, (void*) HTTP_REQUEST_METHOD_SEPARATOR, (void*) HTTP_REQUEST_METHOD_SEPARATOR_COUNT, (void*) &sep, (void*) CHARACTER_ARRAY);
+
+        if (sep >= *NUMBER_0_INTEGER) {
+
+            // Set request line count.
+            rmc = sep;
+            // Set new http request index.
+            i = i + sep + *HTTP_REQUEST_LINE_SEPARATOR_COUNT;
+            ic = ic - sep - *HTTP_REQUEST_LINE_SEPARATOR_COUNT;
+
+        } else {
+
+            // Set http request index to null, if separator could not be found.
+            i = *NULL_POINTER;
+            ic = *NUMBER_0_INTEGER;
+        }
+
+        //
+        // File path.
+        //
+
+        // The file path, initialised with current http request index.
+        void* fp = i;
+        int fpc = ic;
+        // Reset http request separator index.
+        sep = *NUMBER_MINUS_1_INTEGER;
+
+        // Get file path separator index.
+        get_array_elements_index(i, (void*) &ic, (void*) HTTP_FILE_PATH_SEPARATOR, (void*) HTTP_FILE_PATH_SEPARATOR_COUNT, (void*) &sep, (void*) CHARACTER_ARRAY);
+
+        if (sep >= *NUMBER_0_INTEGER) {
+
+            // Set request line count.
+            fpc = sep;
+            // Set new http request index.
+            i = i + sep + *HTTP_REQUEST_LINE_SEPARATOR_COUNT;
+            ic = ic - sep - *HTTP_REQUEST_LINE_SEPARATOR_COUNT;
+
+        } else {
+
+            // Set http request index to null, if separator could not be found.
+            i = *NULL_POINTER;
+            ic = *NUMBER_0_INTEGER;
+        }
+
+        //
+        // Protocol version.
+        //
+
+        // The protocol version, initialised with current http request index.
+        void* pv = i;
+        int pvc = ic;
+        // No separators have to be found within the protocol version, as it comprises
+        // the complete remaining http request, starting after the file path.
+
+/*??
+        decode_http_request_request_method(p0, p1, p2, rm, (void*) &rmc);
+        decode_http_request_request_method(p0, p1, p2, fp, (void*) &fpc);
+        decode_http_request_request_method(p0, p1, p2, pv, (void*) &pvc);
+*/
+
+    } else {
+
+        log_message_debug("Error: Could not decode http request request line. The source http request count is null.");
+    }
+}
+
+/**
+ * Decodes an http request header into the details compound.
+ *
+ * Example:
+ *
+ * ...
+ * content-type: text/html; charset=iso-8859-1
+ * ...
+ *
+ * @param p0 the destination details (Hand over as reference!)
+ * @param p1 the destination details count
+ * @param p2 the destination details size
+ * @param p3 the source http request
+ * @param p4 the source http request count
+ */
+void decode_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p4) {
+
+    if (p4 != *NULL_POINTER) {
+
+        int* sc = (int*) p4;
+
+        log_message_debug("Debug: Decode http request header.");
+
+        // The source http request index.
+        // CAUTION! A local variable is used instead of the parameter
+        // that was handed over, because it will get manipulated below!
+        void* i = p3;
+        int ic = *sc;
+        // The http request separator index.
+        int sep = *NUMBER_MINUS_1_INTEGER;
+
+        //
+        // Argument.
+        //
+
+        // The argument, initialised with current http request index.
+        void* a = i;
+        int ac = ic;
+        // Reset http request separator index.
+        sep = *NUMBER_MINUS_1_INTEGER;
+
+        // Get argument separator index.
+        get_array_elements_index(i, (void*) &ic, (void*) HTTP_HEADER_ARGUMENT_SEPARATOR, (void*) HTTP_HEADER_ARGUMENT_SEPARATOR_COUNT, (void*) &sep, (void*) CHARACTER_ARRAY);
+
+        if (sep >= *NUMBER_0_INTEGER) {
+
+            // Set argument count.
+            ac = sep;
+
+            // Set new http request index.
+            i = i + sep + *HTTP_HEADER_ARGUMENT_SEPARATOR_COUNT;
+            ic = ic - sep - *HTTP_HEADER_ARGUMENT_SEPARATOR_COUNT;
+
+        } else {
+
+            // Set http request index to null, if separator could not be found.
+            i = *NULL_POINTER;
+            ic = *NUMBER_0_INTEGER;
+        }
+
+        //
+        // Value.
+        //
+
+        // The value, initialised with current http request index.
+        void* v = i;
+        int vc = ic;
+        // Reset http request separator index.
+        sep = *NUMBER_MINUS_1_INTEGER;
+
+        // Get value separator index.
+        get_array_elements_index(i, (void*) &ic, (void*) HTTP_HEADER_VALUE_SEPARATOR, (void*) HTTP_HEADER_VALUE_SEPARATOR_COUNT, (void*) &sep, (void*) CHARACTER_ARRAY);
+
+        if (sep >= *NUMBER_0_INTEGER) {
+
+            // Set value count.
+            vc = sep;
+
+            // Set new http request index.
+            i = i + sep + *HTTP_HEADER_VALUE_SEPARATOR_COUNT;
+            ic = ic - sep - *HTTP_HEADER_VALUE_SEPARATOR_COUNT;
+
+        } else {
+
+            // Set http request index to null, if separator could not be found.
+            i = *NULL_POINTER;
+            ic = *NUMBER_0_INTEGER;
+        }
+
+    } else {
+
+        log_message_debug("Error: Could not decode http request header. The source http request count is null.");
+    }
+}
+
+/**
+ * Decodes http request headers into the details compound.
+ *
+ * Example:
+ *
+ * ...
+ * host: de.wikipedia.org
+ * content-type: application/x-www-form-urlencoded
+ * content-length: 24
+ * ...
+ *
+ * @param p0 the destination details (Hand over as reference!)
+ * @param p1 the destination details count
+ * @param p2 the destination details size
+ * @param p3 the source http request
+ * @param p4 the source http request count
+ */
+void decode_http_request_headers(void* p0, void* p1, void* p2, void* p3, void* p4) {
+
+    if (p4 != *NULL_POINTER) {
+
+        int* sc = (int*) p4;
+
+        log_message_debug("Debug: Decode http request headers.");
+
+        // The source http request index.
+        // CAUTION! A local variable is used instead of the parameter
+        // that was handed over, because it will get manipulated below!
+        void* i = p3;
+        int ic = *sc;
+        // The http request separator index.
+        int sep = *NUMBER_MINUS_1_INTEGER;
+        // The header, initialised with current http request index.
+        void* h = i;
+        int hc = ic;
+
+        while (*NUMBER_1_INTEGER) {
+
+            // Set header.
+            h = i;
+
+            // Reset http request separator index.
+            sep = *NUMBER_MINUS_1_INTEGER;
+
+            // Get header separator index.
+            get_array_elements_index(i, (void*) &ic, (void*) HTTP_HEADER_SEPARATOR, (void*) HTTP_HEADER_SEPARATOR_COUNT, (void*) &sep, (void*) CHARACTER_ARRAY);
+
+            if (sep >= *NUMBER_0_INTEGER) {
+
+                // A header separator was found. More headers exist.
+
+                // Set header count.
+                hc = sep;
+
+                // Decode the identified header.
+                decode_http_request_header(p0, p1, p2, h, (void*) &hc);
+
+                // Set new http request index.
+                i = i + sep + *HTTP_HEADER_SEPARATOR_COUNT;
+                ic = ic - sep - *HTTP_HEADER_SEPARATOR_COUNT;
+
+            } else {
+
+                // No header separator was found. This is the last header.
+
+                // Set header count.
+                hc = ic;
+
+                // Decode the identified header.
+                decode_http_request_header(p0, p1, p2, h, (void*) &hc);
+
+                // Break loop since no further headers are to be expected.
+                break;
             }
         }
 
     } else {
 
-        log_message_debug("Error: Could not receive socket request method. The url count is null.");
+        log_message_debug("Error: Could not decode http request headers. The source http request count is null.");
+    }
+}
+
+/**
+ * Decodes an http request body into the model compound.
+ *
+ * Example:
+ *
+ * search=Katzen&go=Artikel
+ *
+ * @param p0 the destination model (Hand over as reference!)
+ * @param p1 the destination model count
+ * @param p2 the destination model size
+ * @param p3 the source http request
+ * @param p4 the source http request count
+ */
+void decode_http_request_body(void* p0, void* p1, void* p2, void* p3, void* p4) {
+
+    if (p4 != *NULL_POINTER) {
+
+        int* sc = (int*) p4;
+
+        if (p3 != *NULL_POINTER) {
+
+            void** s = (void**) p3;
+
+            log_message_debug("Debug: Decode http request body.");
+
+            // Read parameters out of body, create models and assign them
+            // as parts to the given destination model.
+
+        } else {
+
+            log_message_debug("Error: Could not decode http request body. The source http request is null.");
+        }
+
+    } else {
+
+        log_message_debug("Error: Could not decode http request body. The source http request count is null.");
     }
 }
 
 /**
  * Decodes an http request into a compound.
  *
- * @param p0 the destination compound (Hand over as reference!)
- * @param p1 the destination compound count
- * @param p2 the destination compound size
- * @param p3 the source http request
- * @param p4 the source http request count
+ * Example:
+ *
+ * POST /wiki/Spezial:Search HTTP/1.1
+ * host: de.wikipedia.org
+ * content-type: application/x-www-form-urlencoded
+ * content-length: 24
+ *
+ * search=Katzen&go=Artikel
+ *
+ * @param p0 the destination model (Hand over as reference!)
+ * @param p1 the destination model count
+ * @param p2 the destination model size
+ * @param p3 the destination details (Hand over as reference!)
+ * @param p4 the destination details count
+ * @param p5 the destination details size
+ * @param p6 the source http request
+ * @param p7 the source http request count
  */
-void decode_http_request(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void decode_http_request(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
 
-    log_message_debug("Information: Decode http request.");
+    if (p7 != *NULL_POINTER) {
+
+        int* sc = (int*) p7;
+
+        log_message_debug("Information: Decode http request.");
+
+        // The source http request index.
+        // CAUTION! A local variable is used instead of the parameter
+        // that was handed over, because it will get manipulated below!
+        void* i = p6;
+        int ic = *sc;
+        // The http request separator index.
+        int sep = *NUMBER_MINUS_1_INTEGER;
+
+        //
+        // Request line.
+        //
+
+        // The request line, initialised with current http request index.
+        void* rl = i;
+        int rlc = ic;
+        // Reset http request separator index.
+        sep = *NUMBER_MINUS_1_INTEGER;
+
+        // Get request line separator index.
+        get_array_elements_index(i, (void*) &ic, (void*) HTTP_REQUEST_LINE_SEPARATOR, (void*) HTTP_REQUEST_LINE_SEPARATOR_COUNT, (void*) &sep, (void*) CHARACTER_ARRAY);
+
+        if (sep >= *NUMBER_0_INTEGER) {
+
+            // Set request line count.
+            rlc = sep;
+            // Set new http request index.
+            i = i + sep + *HTTP_REQUEST_LINE_SEPARATOR_COUNT;
+            ic = ic - sep - *HTTP_REQUEST_LINE_SEPARATOR_COUNT;
+
+        } else {
+
+            // Set http request index to null, if separator could not be found.
+            i = *NULL_POINTER;
+            ic = *NUMBER_0_INTEGER;
+        }
+
+        //
+        // Headers.
+        //
+
+        // The headers, initialised with current http request index.
+        void* h = i;
+        int hc = ic;
+        // Reset http request separator index.
+        sep = *NUMBER_MINUS_1_INTEGER;
+
+        // Get headers separator index.
+        get_array_elements_index(i, (void*) &ic, (void*) HTTP_HEADERS_SEPARATOR, (void*) HTTP_HEADERS_SEPARATOR_COUNT, (void*) &sep, (void*) CHARACTER_ARRAY);
+
+        if (sep >= *NUMBER_0_INTEGER) {
+
+            // Set request line count.
+            hc = sep;
+            // Set new http request index.
+            i = i + sep + *HTTP_REQUEST_LINE_SEPARATOR_COUNT;
+            ic = ic - sep - *HTTP_REQUEST_LINE_SEPARATOR_COUNT;
+
+        } else {
+
+            // Set http request index to null, if separator could not be found.
+            i = *NULL_POINTER;
+            ic = *NUMBER_0_INTEGER;
+        }
+
+        //
+        // Body.
+        //
+
+        // The body, initialised with current http request index.
+        void* b = i;
+        int bc = ic;
+        // No separators have to be found within the body, as it comprises
+        // the complete remaining http request, starting after the headers.
+
+        // Decode request line containing request method and protocol version.
+        decode_http_request_request_line(p3, p4, p5, rl, (void*) &rlc);
+        // Decode headers containing meta data, of which some have the form of variables.
+        decode_http_request_headers(p3, p4, p5, h, (void*) &hc);
+        // Decode body containing optional user data (such as an encoded/serialised xhtml page).
+        decode_http_request_body(p0, p1, p2, b, (void*) &bc);
+
+    } else {
+
+        log_message_debug("Error: Could not decode http request method. The source http request count is null.");
+    }
 }
 
 /**

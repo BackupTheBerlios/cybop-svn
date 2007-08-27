@@ -14,9 +14,33 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.21 $ $Date: 2007-08-17 03:15:31 $ $Author: christian $
+# @version $Revision: 1.22 $ $Date: 2007-08-27 07:07:36 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2007-08-24  Christian Heller  <christian.heller@tuxtax.de>
+        * Complete "html_character_entity_constants.c"
+        * Replace hard-coded characters with their hexadecimal code in "character_constants.c"
+        * Continue "http_request_converter.c"
+
+2007-08-23  Christian Heller  <christian.heller@tuxtax.de>
+        * Use new http separator constants instead of hard-coded characters in "http_response_converter.c"
+
+2007-08-22  Christian Heller  <christian.heller@tuxtax.de>
+        * Add "http_separator_constants.c"
+        * Continue "http_response_converter.c" and "http_request_converter.c" and adapt "send_socket.c" to changes
+
+2007-08-21  Christian Heller  <christian.heller@tuxtax.de>
+        * Adapt "receive.c" and "receive_socket.c" by handing over new parameters: model, details, language
+
+2007-08-20  Christian Heller  <christian.heller@tuxtax.de>
+        * Create:
+            "html_character_entity_reference_constants.c"
+            "xml_character_entity_reference_constants.c"
+            "character_entity_reference_converter.c"
+        * Rename:
+            "html_character_constants.c" to "numeric_character_reference_constants.c"
+            "html_character_converter.c" to "numeric_character_reference_converter.c"
 
 2007-08-16  Christian Heller  <christian.heller@tuxtax.de>
         * Delete "memoriser/mapper" directory and move/rename all files into "memoriser/converter"

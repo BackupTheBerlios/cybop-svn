@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.36 $ $Date: 2007-08-17 03:15:32 $ $Author: christian $
+ * @version $Revision: 1.37 $ $Date: 2007-08-27 07:07:37 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -230,7 +230,7 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
         if (r != *NUMBER_0_INTEGER) {
 
-            decode_http_request(p0, p1, p2, p6, p7);
+            decode_http_request(p0, p1, p2, p3, p4, p5, p6, p7);
         }
     }
 
@@ -240,7 +240,7 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
         if (r != *NUMBER_0_INTEGER) {
 
-            decode_http_response(p0, p1, p2, p6, p7);
+            decode_http_response(p0, p1, p2, p3, p4, p5, p6, p7);
         }
     }
 
@@ -468,7 +468,7 @@ void encode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
         if (r != *NUMBER_0_INTEGER) {
 
-            encode_http_response(p0, p1, p2, p5, p6, p7, p8, p9, p10, p11, p12);
+            encode_http_response(p0, p1, p2, p7, p8, p9, p10);
         }
     }
 
