@@ -24,7 +24,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.11 $ $Date: 2007-08-17 03:15:32 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2007-08-29 23:11:23 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -333,8 +333,8 @@ void test_integer_array() {
 
 /*??
     // Decode (parse) test value and assign to test knowledge model.
-    decode((void*) &m, (void*) mc, (void*) ms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
-        (void*) test, (void*) &testc, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    decode((void*) &m, (void*) mc, (void*) ms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, (void*) test, (void*) &testc,
+        *NULL_POINTER, *NULL_POINTER, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 */
 
     // Set test values.

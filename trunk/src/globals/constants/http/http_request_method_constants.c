@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2007-07-23 23:47:58 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2007-08-29 23:11:23 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -41,7 +41,7 @@ static int* HTTP_POST_REQUEST_METHOD_COUNT = NUMBER_4_INTEGER_ARRAY;
 
 /** The head request method. Sends GET or POST request header, but not content. */
 static char HTTP_HEAD_REQUEST_METHOD_ARRAY[] = {'H', 'E', 'A', 'D'};
-static char* HTTP_POSHTTP_HEAD_REQUEST_METHOD = HTTP_HEAD_REQUEST_METHOD_ARRAY;
+static char* HTTP_HEAD_REQUEST_METHOD = HTTP_HEAD_REQUEST_METHOD_ARRAY;
 static int* HTTP_HEAD_REQUEST_METHOD_COUNT = NUMBER_4_INTEGER_ARRAY;
 
 /** The put request method. Uploads data to webserver via given uri. */

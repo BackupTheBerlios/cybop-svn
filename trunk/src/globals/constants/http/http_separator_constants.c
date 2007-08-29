@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2007-08-27 07:07:37 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2007-08-29 23:11:23 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -29,6 +29,9 @@
 
 #include "../../../globals/constants/character/character_constants.c"
 #include "../../../globals/constants/integer/integer_constants.c"
+
+// CAUTION! Use Carriage Return (CR) AND Line Feed (LF) characters to break lines!
+// This is defined so by the Hypertext Transfer Protocol (HTTP).
 
 //
 // Main parts.
@@ -57,9 +60,9 @@ static int* HTTP_HEADERS_SEPARATOR_COUNT = NUMBER_4_INTEGER_ARRAY;
 static char* HTTP_REQUEST_METHOD_SEPARATOR = SPACE_CHARACTER_ARRAY;
 static int* HTTP_REQUEST_METHOD_SEPARATOR_COUNT = NUMBER_1_INTEGER_ARRAY;
 
-/** The http file path separator. */
-static char* HTTP_FILE_PATH_SEPARATOR = SPACE_CHARACTER_ARRAY;
-static int* HTTP_FILE_PATH_SEPARATOR_COUNT = NUMBER_1_INTEGER_ARRAY;
+/** The http uniform resource identifier separator. */
+static char* HTTP_UNIFORM_RESOURCE_IDENTIFIER_SEPARATOR = SPACE_CHARACTER_ARRAY;
+static int* HTTP_UNIFORM_RESOURCE_IDENTIFIER_SEPARATOR_COUNT = NUMBER_1_INTEGER_ARRAY;
 
 //
 // Response line parts.

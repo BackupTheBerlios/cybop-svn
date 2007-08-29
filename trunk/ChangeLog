@@ -14,14 +14,14 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.23 $ $Date: 2007-08-29 23:11:22 $ $Author: christian $
+# @version $Revision: 1.24 $ $Date: 2007-08-29 23:11:51 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
 2007-08-29  Christian Heller  <christian.heller@tuxtax.de>
         * Add "uri_separator_constants.c"
-        * Complete first working version of "http_request_converter.c"
-        * Continue "http_request_converter.c":
+        * Continue "receive_socket.c"
+        * Complete first working version of "http_request_converter.c":
             Decode http request line, headers and body, and add the entries to the given model
 
 2007-08-24  Christian Heller  <christian.heller@tuxtax.de>

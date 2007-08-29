@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2007-08-17 04:06:51 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2007-08-29 23:11:23 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -98,9 +98,8 @@ void initialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
     allocate((void*) &md, (void*) mds, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
 
     // Decode startup model name, abstraction.
-    decode((void*) &ma, (void*) mac, (void*) mas, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
-        (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
-        (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+    decode((void*) &ma, (void*) mac, (void*) mas, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
+        *NULL_POINTER, *NULL_POINTER, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
     // Receive startup model model and details (read from file and decode).
     receive_file_system((void*) &mm, (void*) mmc, (void*) mms, (void*) &md, (void*) mdc, (void*) mds,
         p9, p10, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);

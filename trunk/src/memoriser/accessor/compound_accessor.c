@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.42 $ $Date: 2007-08-17 03:15:32 $ $Author: christian $
+ * @version $Revision: 1.43 $ $Date: 2007-08-29 23:11:23 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -1501,14 +1501,14 @@ void reindex_compound_elements_forming_list(void* p0, void* p1, void* p2, int* p
                         *((int*) *nc) = *NUMBER_0_INTEGER;
 
                         // Decode the basisname
-                        decode(n, *nc, *ns, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, p2, p3, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
+                        decode(n, *nc, *ns, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, p2, p3, *NULL_POINTER, *NULL_POINTER, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
                         // Decode the list separator
-                        decode(n, *nc, *ns, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, LIST_SEPARATOR, LIST_SEPARATOR_COUNT, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
+                        decode(n, *nc, *ns, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, LIST_SEPARATOR, LIST_SEPARATOR_COUNT, *NULL_POINTER, *NULL_POINTER, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
                         // Decode the index
                         indexstr_count = snprintf(indexstr, indexstr_size, "%i", ic);
-                        decode(n, *nc, *ns, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, indexstr, &indexstr_count, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
+                        decode(n, *nc, *ns, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, indexstr, &indexstr_count, *NULL_POINTER, *NULL_POINTER, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
                         ic = ic + *NUMBER_1_INTEGER;
                     }

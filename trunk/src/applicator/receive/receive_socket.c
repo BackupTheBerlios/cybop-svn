@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.34 $ $Date: 2007-08-27 07:07:36 $ $Author: christian $
+ * @version $Revision: 1.35 $ $Date: 2007-08-29 23:11:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -211,21 +211,27 @@ void set_signals_for_all_parameters(void* p0, int* p1, void* p2) {
  * @param p11 the details
  * @param p12 the details count
  * @param p13 the details size
- * @param p5 the commands
- * @param p6 the commands count
- * @param p7 the command name
- * @param p8 the command name count
+ * @param p14 the commands
+ * @param p15 the commands count
+ * @param p16 the command name
+ * @param p17 the command name count
  */
-void receive_socket_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10) {
+void receive_socket_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7,
+    void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14, void* p15, void* p16, void* p17) {
 
-    if (p4 != *NULL_POINTER) {
+    if (p7 != *NULL_POINTER) {
 
-        int* irq = (int*) p4;
+        int* irq = (int*) p7;
 
         log_message_debug("Debug: Receive socket signal.");
 
-        fprintf(stderr, "TEST: receive socket signal command name: %s \n", (char*) p7);
-        fprintf(stderr, "TEST: receive socket signal command name count: %i \n", *((int*) p8));
+        fprintf(stderr, "TEST: receive socket signal command name: %s \n", (char*) p16);
+        fprintf(stderr, "TEST: receive socket signal command name count: %i \n", *((int*) p17));
+
+    /** The index parameter. */
+    static char INDEX_PARAMETER_ARRAY[] = {'i', 'n', 'd', 'e', 'x'};
+    static char* INDEX_PARAMETER = INDEX_PARAMETER_ARRAY;
+    static int* INDEX_PARAMETER_COUNT = NUMBER_5_INTEGER_ARRAY;
 
         // The command name, abstraction, model, details.
         void** cn = NULL_POINTER;
@@ -241,18 +247,32 @@ void receive_socket_signal(void* p0, void* p1, void* p2, void* p3, void* p4, voi
         void** cdc = NULL_POINTER;
         void** cds = NULL_POINTER;
 
-        // Get actual command belonging to the command name.
-        // If the name is not known, the command parameter is left untouched.
-        get_universal_compound_element_by_name(p5, p6,
-            p7, p8,
-            (void*) &cn, (void*) &cnc, (void*) &cns,
-            (void*) &ca, (void*) &cac, (void*) &cas,
-            (void*) &cm, (void*) &cmc, (void*) &cms,
-            (void*) &cd, (void*) &cdc, (void*) &cds,
-            p9, p10);
+        if (p16 != *NULL_POINTER) {
+
+            // Get actual command belonging to the command name.
+            // If the name is not known, the command parameter is left untouched.
+            get_universal_compound_element_by_name(p14, p15,
+                p16, p17,
+                (void*) &cn, (void*) &cnc, (void*) &cns,
+                (void*) &ca, (void*) &cac, (void*) &cas,
+                (void*) &cm, (void*) &cmc, (void*) &cms,
+                (void*) &cd, (void*) &cdc, (void*) &cds,
+                p0, p1);
+
+        } else {
+
+            // Get default index command, since the given command is null.
+            get_universal_compound_element_by_name(p14, p15,
+                INDEX_PARAMETER, INDEX_PARAMETER_COUNT,
+                (void*) &cn, (void*) &cnc, (void*) &cns,
+                (void*) &ca, (void*) &cac, (void*) &cas,
+                (void*) &cm, (void*) &cmc, (void*) &cms,
+                (void*) &cd, (void*) &cdc, (void*) &cds,
+                p0, p1);
+        }
 
         // Lock signal memory mutex.
-        pthread_mutex_lock(p3);
+        pthread_mutex_lock(p6);
 
         // The signal id.
         int* id = (int*) *NULL_POINTER;
@@ -260,10 +280,10 @@ void receive_socket_signal(void* p0, void* p1, void* p2, void* p3, void* p4, voi
         // Allocate signal id.
         allocate((void*) &id, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
         *id = *NUMBER_0_INTEGER;
-        get_new_signal_id(p0, p1, (void*) id);
+        get_new_signal_id(p3, p4, (void*) id);
 
         // Add signal to signal memory.
-        set_signal(p0, p1, p2, *ca, *cac, *cm, *cmc, *cd, *cdc, (void*) NORMAL_CYBOI_SIGNAL_PRIORITY, (void*) id);
+        set_signal(p3, p4, p5, *ca, *cac, *cm, *cmc, *cd, *cdc, (void*) NORMAL_CYBOI_SIGNAL_PRIORITY, (void*) id);
 
     /*??
         add_signal_id(p0, (void*) id);
@@ -275,7 +295,7 @@ void receive_socket_signal(void* p0, void* p1, void* p2, void* p3, void* p4, voi
         *irq = *NUMBER_1_INTEGER;
 
         // Unlock signal memory mutex.
-        pthread_mutex_unlock(p3);
+        pthread_mutex_unlock(p6);
 
     } else {
 
@@ -753,10 +773,38 @@ void receive_socket_message(void* p0, void* p1, void* p2, void* p3, void* p4, vo
 
                 // Decode http request and write any parameters into the
                 // compound model and details being handed over as parameters.
-                decode(p8, p9, p10, p11, p12, p13, *b, p28, (void*) HTTP_REQUEST_ABSTRACTION, (void*) HTTP_REQUEST_ABSTRACTION_COUNT);
+                decode(p8, p9, p10, p11, p12, p13, *b, p28, *NULL_POINTER, *NULL_POINTER, (void*) HTTP_REQUEST_ABSTRACTION, (void*) HTTP_REQUEST_ABSTRACTION_COUNT);
+
+    /** The action parameter. */
+    static char ACTION_PARAMETER_ARRAY[] = {'a', 'c', 't', 'i', 'o', 'n'};
+    static char* ACTION_PARAMETER = ACTION_PARAMETER_ARRAY;
+    static int* ACTION_PARAMETER_COUNT = NUMBER_6_INTEGER_ARRAY;
+
+                // The action name, abstraction, model, details.
+                void** an = NULL_POINTER;
+                void** anc = NULL_POINTER;
+                void** ans = NULL_POINTER;
+                void** aa = NULL_POINTER;
+                void** aac = NULL_POINTER;
+                void** aas = NULL_POINTER;
+                void** am = NULL_POINTER;
+                void** amc = NULL_POINTER;
+                void** ams = NULL_POINTER;
+                void** ad = NULL_POINTER;
+                void** adc = NULL_POINTER;
+                void** ads = NULL_POINTER;
+
+                // Get action.
+                get_universal_compound_element_by_name(p8, p9,
+                    (void*) ACTION_PARAMETER, (void*) ACTION_PARAMETER_COUNT,
+                    (void*) &an, (void*) &anc, (void*) &ans,
+                    (void*) &aa, (void*) &aac, (void*) &aas,
+                    (void*) &am, (void*) &amc, (void*) &ams,
+                    (void*) &ad, (void*) &adc, (void*) &ads,
+                    p0, p1);
 
                 // Receive socket signal.
-//??                receive_socket_signal(p0, p1, p2, p3, p4, p5, p6, p7, p20, p21, name, (void*) &namec, *((void**) p8), p9, p10, *((void**) p11), p12, p13);
+                receive_socket_signal(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, *am, *amc);
 
                 //?? CAUTION! This sleep procedure is temporarily necessary for testing!
                 //?? Otherwise, the loop runs into the next cycle and the socket mutex

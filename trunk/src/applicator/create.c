@@ -22,7 +22,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.35 $ $Date: 2007-08-17 03:15:31 $ $Author: christian $
+ * @version $Revision: 1.36 $ $Date: 2007-08-29 23:11:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -110,8 +110,8 @@ void create_set(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
     allocate((void*) &kmd, (void*) kmds, COMPOUND_ABSTRACTION, COMPOUND_ABSTRACTION_COUNT);
 
     // Decode knowledge model name, abstraction.
-    decode((void*) &kmn, (void*) kmnc, (void*) kmns, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, p5, p6, p3, p4);
-    decode((void*) &kma, (void*) kmac, (void*) kmas, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, p9, p10, p7, p8);
+    decode((void*) &kmn, (void*) kmnc, (void*) kmns, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, p5, p6, *NULL_POINTER, *NULL_POINTER, p3, p4);
+    decode((void*) &kma, (void*) kmac, (void*) kmas, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, p9, p10, *NULL_POINTER, *NULL_POINTER, p7, p8);
     //
     // CAUTION! Do NOT decode knowledge model model here!
     // This function's purpose is only to allocate an empty knowledge model.

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.15 $ $Date: 2007-08-27 07:07:37 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2007-08-29 23:11:24 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -115,10 +115,12 @@
  * @param p5 the destination details size
  * @param p6 the source
  * @param p7 the source count
- * @param p8 the language
- * @param p9 the language count
+ * @param p8 the knowledge memory
+ * @param p9 the knowledge memory count
+ * @param p10 the language
+ * @param p11 the language count
  */
-void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9);
+void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11);
 
 /**
  * Decodes an xdt field.
@@ -878,7 +880,7 @@ void decode_xdt_decode_model(void* p0, void* p1, void* p2, void* p3, void* p4, v
                                     // Decode abstraction.
                                     decode_character_vector(p3, (void*) *ac, (void*) *as, p14, p15);
                                     // Decode model.
-                                    decode(p6, (void*) *mc, (void*) *ms, p9, (void*) *dc, (void*) *ds, p12, p13, p14, p15);
+                                    decode(p6, (void*) *mc, (void*) *ms, p9, (void*) *dc, (void*) *ds, p12, p13, *NULL_POINTER, *NULL_POINTER, p14, p15);
 
                                 } else {
 

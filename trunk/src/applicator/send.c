@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.57 $ $Date: 2007-08-17 03:15:31 $ $Author: christian $
+ * @version $Revision: 1.58 $ $Date: 2007-08-29 23:11:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -118,9 +118,9 @@ void refresh_url(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, voi
             *dest_size  = *NUMBER_0_INTEGER;
             allocate(&dest, dest_size, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
-            decode(&dest, dest_count, dest_size, &msg_refresh_part_1[*NUMBER_0_INTEGER], &msg_part_1_count, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
-            decode(&dest, dest_count, dest_size, *urlm, *urlmc, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
-            decode(&dest, dest_count, dest_size, &msg_refresh_part_3[*NUMBER_0_INTEGER], &msg_part_3_count, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
+            decode(&dest, dest_count, dest_size, &msg_refresh_part_1[*NUMBER_0_INTEGER], &msg_part_1_count, *NULL_POINTER, *NULL_POINTER, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
+            decode(&dest, dest_count, dest_size, *urlm, *urlmc, *NULL_POINTER, *NULL_POINTER, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
+            decode(&dest, dest_count, dest_size, &msg_refresh_part_3[*NUMBER_0_INTEGER], &msg_part_3_count, *NULL_POINTER, *NULL_POINTER, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
             // The temporary count, size.
             int tc = *NUMBER_0_INTEGER;
