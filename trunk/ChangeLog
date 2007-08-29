@@ -14,9 +14,15 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.22 $ $Date: 2007-08-27 07:07:36 $ $Author: christian $
+# @version $Revision: 1.23 $ $Date: 2007-08-29 23:11:22 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2007-08-29  Christian Heller  <christian.heller@tuxtax.de>
+        * Add "uri_separator_constants.c"
+        * Complete first working version of "http_request_converter.c"
+        * Continue "http_request_converter.c":
+            Decode http request line, headers and body, and add the entries to the given model
 
 2007-08-24  Christian Heller  <christian.heller@tuxtax.de>
         * Complete "html_character_entity_constants.c"
@@ -696,3 +702,4 @@
         * Create static structures of instances in memory
         * Run dynamic loop catching signals from internal signal memory (queue)
         * Create GUI using Java Swing (as temporary workaround)
+        * Create CYBOI by renaming and altering the ResMedLib base library of the Res Medicinae project
