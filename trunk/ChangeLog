@@ -14,9 +14,12 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.24 $ $Date: 2007-08-29 23:11:51 $ $Author: christian $
+# @version $Revision: 1.25 $ $Date: 2007-09-02 22:35:16 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2007-08-31  Christian Heller  <christian.heller@tuxtax.de>
+        * Add yet missing constants to "xdt_field_constants.c", taken from specification "BDT-Satzbeschreibung"
 
 2007-08-29  Christian Heller  <christian.heller@tuxtax.de>
         * Add "uri_separator_constants.c"

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2007-04-16 15:34:54 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2007-09-02 22:35:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -53,6 +53,24 @@ static int* DATA_PACKAGE_FOOTER_XDT_RECORD = NUMBER_23_INTEGER_ARRAY;
 
 /** The medical treatment record. */
 static int* MEDICAL_TREATMENT_XDT_RECORD = NUMBER_101_INTEGER_ARRAY;
+
+/** The referral case record. */
+static int* REFERRAL_CASE_XDT_RECORD = NUMBER_102_INTEGER_ARRAY;
+
+/** The medical treatment with cottage hospital affiliation record. */
+static int* MEDICAL_TREATMENT_WITH_COTTAGE_HOSPITAL_AFFILIATION_XDT_RECORD = NUMBER_103_INTEGER_ARRAY;
+
+/** The medical emergency service record. */
+static int* MEDICAL_EMERGENCY_SERVICE_XDT_RECORD = NUMBER_104_INTEGER_ARRAY;
+
+/** The private billing record. */
+static int* PRIVATE_BILLING_XDT_RECORD = NUMBER_190_INTEGER_ARRAY;
+
+/** The employers' liability insurance association billing record. */
+static int* EMPLOYERS_LIABILITY_INSURANCE_ASSOCIATION_BILLING_XDT_RECORD = NUMBER_191_INTEGER_ARRAY;
+
+/** The unstructured cases record. */
+static int* UNSTRUCTURED_CASES_XDT_RECORD = NUMBER_199_INTEGER_ARRAY;
 
 /** The patient master data record. */
 static int* PATIENT_MASTER_DATA_XDT_RECORD = NUMBER_6100_INTEGER_ARRAY;

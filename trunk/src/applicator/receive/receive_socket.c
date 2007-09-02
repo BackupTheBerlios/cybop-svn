@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.35 $ $Date: 2007-08-29 23:11:22 $ $Author: christian $
+ * @version $Revision: 1.36 $ $Date: 2007-09-02 22:35:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -319,7 +319,7 @@ void receive_socket_stream_message(void* p0, void* p1, void* p2, void* p3) {
 
         if (p2 != *NULL_POINTER) {
 
-            int* bs = (int*) p2;
+            size_t* bs = (size_t*) p2;
 
             if (p1 != *NULL_POINTER) {
 
@@ -341,6 +341,10 @@ void receive_socket_stream_message(void* p0, void* p1, void* p2, void* p3) {
 
                 fprintf(stderr, "TEST: receive socket thread client socket: %i \n", *ps);
 
+    fprintf(stderr, "TEST pre b: %s \n", (char*) *b);
+    fprintf(stderr, "TEST pre bc: %i \n", *bc);
+    fprintf(stderr, "TEST pre bs: %i \n", *bs);
+
                     // Receive message from client.
                     //
                     // If the flags argument (fourth one) is zero, then one can
@@ -351,13 +355,13 @@ void receive_socket_stream_message(void* p0, void* p1, void* p2, void* p3) {
                     // CAUTION! A message MUST NOT be longer than the given buffer size!
                     *bc = recv(*ps, *b, *bs, *NUMBER_0_INTEGER);
 
+    fprintf(stderr, "TEST post b: %s \n", (char*) *b);
+    fprintf(stderr, "TEST post bc: %i \n", *bc);
+    fprintf(stderr, "TEST post bs: %i \n", *bs);
+
                     if (*bc > *NUMBER_0_INTEGER) {
 
                         log_message_debug("Information: Successfully received stream socket message.");
-
-    fprintf(stderr, "TEST b: %s \n", (char*) *b);
-    fprintf(stderr, "TEST bc: %i \n", *bc);
-    fprintf(stderr, "TEST bs: %i \n", *bs);
 
                     } else if (*bc = *NUMBER_0_INTEGER) {
 
@@ -768,12 +772,22 @@ void receive_socket_message(void* p0, void* p1, void* p2, void* p3, void* p4, vo
 
                 log_message_debug("Receive socket message.");
 
+        fprintf(stderr, "TEST 0 language: %s \n", (char*) p16);
+        fprintf(stderr, "TEST 0 bc: %i \n", *((int*) p28));
+        fprintf(stderr, "TEST 0 bs: %i \n", *((int*) p29));
+
                 // Receive socket message depending on communication style.
                 receive_socket_style(p27, p28, p29, p23, p24, p25, p20, p21, p22, p26, p18, p19);
+
+        fprintf(stderr, "TEST 1 bc: %i \n", *((int*) p28));
+        fprintf(stderr, "TEST 1 bs: %i \n", *((int*) p29));
 
                 // Decode http request and write any parameters into the
                 // compound model and details being handed over as parameters.
                 decode(p8, p9, p10, p11, p12, p13, *b, p28, *NULL_POINTER, *NULL_POINTER, (void*) HTTP_REQUEST_ABSTRACTION, (void*) HTTP_REQUEST_ABSTRACTION_COUNT);
+
+        fprintf(stderr, "TEST 2 bc: %i \n", *((int*) p28));
+        fprintf(stderr, "TEST 2 bs: %i \n", *((int*) p29));
 
     /** The action parameter. */
     static char ACTION_PARAMETER_ARRAY[] = {'a', 'c', 't', 'i', 'o', 'n'};
@@ -803,8 +817,14 @@ void receive_socket_message(void* p0, void* p1, void* p2, void* p3, void* p4, vo
                     (void*) &ad, (void*) &adc, (void*) &ads,
                     p0, p1);
 
+        fprintf(stderr, "TEST 3 bc: %i \n", *((int*) p28));
+        fprintf(stderr, "TEST 3 bs: %i \n", *((int*) p29));
+
                 // Receive socket signal.
                 receive_socket_signal(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, *am, *amc);
+
+        fprintf(stderr, "TEST 4 bc: %i \n", *((int*) p28));
+        fprintf(stderr, "TEST 4 bs: %i \n", *((int*) p29));
 
                 //?? CAUTION! This sleep procedure is temporarily necessary for testing!
                 //?? Otherwise, the loop runs into the next cycle and the socket mutex
@@ -873,6 +893,9 @@ void receive_socket_message(void* p0, void* p1, void* p2, void* p3, void* p4, vo
                 // and must remain unchanged.
                 memset(*b, *NUMBER_0_INTEGER, *bs);
                 *bc = *NUMBER_0_INTEGER;
+
+        fprintf(stderr, "TEST 5 bc: %i \n", *((int*) p28));
+        fprintf(stderr, "TEST 5 bs: %i \n", *((int*) p29));
 
             } else {
 
