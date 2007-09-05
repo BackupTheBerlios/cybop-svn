@@ -7,15 +7,11 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.12 $ $Date: 2007-09-02 22:35:16 $ $Author: christian $
+# @version $Revision: 1.13 $ $Date: 2007-09-05 21:19:59 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-ChangeLog:
-2007-09-04  Christian Heller  <christian.heller@tuxtax.de>
-
-TODO:
-        * Complete xDT constants and converter
+        * Mention parameters in comment block of all CYBOL operations
         * Use an OR || and compare for numeric character reference and character entity reference, when parsing http requests
         * CHECK: Replace "(int*) NULL_POINTER_ARRAY" initialisation in "variables.c" with "(int*) *NULL_POINTER";
             the old initialisation was actually a void** casted to an int* and therefore not correct, even if it was working
@@ -26,7 +22,6 @@ TODO:
         * Add correct LOG_LEVEL constant to all log messages of all source code files,
             so that the correct prefix (information, warning, error, debug) appears;
             delete "Information: " etc. which are written directly into log message
-        * Mention parameters in comment block of all CYBOL operations
 
         * Implement configure/ make setup (standard configure and make options),
         for example using automake/autoconf

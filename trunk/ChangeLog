@@ -14,9 +14,14 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.25 $ $Date: 2007-09-02 22:35:16 $ $Author: christian $
+# @version $Revision: 1.26 $ $Date: 2007-09-05 21:19:59 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2007-09-05  Christian Heller  <christian.heller@tuxtax.de>
+        * Split file "xdt_field_name_constants.c" and create new files "xdt_record_name_constants.c" and "xdt_package_name_constants.c"
+        * Add yet missing constants to file "xdt_field_name_constants.c"
+        * Add yet missing conditions with new constants in "xdt_converter.c"
 
 2007-08-31  Christian Heller  <christian.heller@tuxtax.de>
         * Add yet missing constants to "xdt_field_constants.c", taken from specification "BDT-Satzbeschreibung"
