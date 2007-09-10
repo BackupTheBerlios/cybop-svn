@@ -14,9 +14,19 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.26 $ $Date: 2007-09-05 21:19:59 $ $Author: christian $
+# @version $Revision: 1.27 $ $Date: 2007-09-10 18:37:37 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2007-09-10  Christian Heller  <christian.heller@tuxtax.de>
+        * Synchronise xdt fields in "xdt_field_constants.c" and "xdt_converter.c"
+            (function "decode_xdt_select_field" at "decode_xdt_decode_model" function calls)
+        * Set correct abstractions in "xdt_converter.c"
+            (function "decode_xdt_select_field" at "decode_xdt_decode_model" function calls)
+
+2007-09-06  Christian Heller  <christian.heller@tuxtax.de>
+        * Add xDT/GDT constants to files "xdt_record_constants.c", "xdt_record_name_constants.c",
+            "xdt_field_constants.c", "xdt_field_name_constants.c", "xdt_converter.c"
 
 2007-09-05  Christian Heller  <christian.heller@tuxtax.de>
         * Split file "xdt_field_name_constants.c" and create new files "xdt_record_name_constants.c" and "xdt_package_name_constants.c"

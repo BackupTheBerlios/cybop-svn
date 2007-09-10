@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2007-09-02 22:35:17 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2007-09-10 18:37:38 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -77,6 +77,21 @@ static int* PATIENT_MASTER_DATA_XDT_RECORD = NUMBER_6100_INTEGER_ARRAY;
 
 /** The medical treatment data record. */
 static int* MEDICAL_TREATMENT_DATA_XDT_RECORD = NUMBER_6200_INTEGER_ARRAY;
+
+/** The patient master data request record. */
+static int* PATIENT_MASTER_DATA_REQUEST_XDT_RECORD = NUMBER_6300_INTEGER_ARRAY;
+
+/** The patient master data transfer record. */
+static int* PATIENT_MASTER_DATA_TRANSFER_XDT_RECORD = NUMBER_6301_INTEGER_ARRAY;
+
+/** The examination request record. */
+static int* EXAMINATION_REQUEST_XDT_RECORD = NUMBER_6302_INTEGER_ARRAY;
+
+/** The examination data transfer record. */
+static int* EXAMINATION_DATA_TRANSFER_XDT_RECORD = NUMBER_6310_INTEGER_ARRAY;
+
+/** The examination data display record. */
+static int* EXAMINATION_DATA_DISPLAY_XDT_RECORD = NUMBER_6311_INTEGER_ARRAY;
 
 /* XDT_RECORD_CONSTANTS_SOURCE */
 #endif

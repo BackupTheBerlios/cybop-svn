@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2007-09-05 21:19:59 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2007-09-10 18:37:37 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -58,7 +58,7 @@ static int* KBV_TEST_NUMBER_XDT_FIELD = NUMBER_101_INTEGER_ARRAY;
  * The responsible entity field.
  *
  * German: Softwareverantwortlicher
- * Size: <= 70
+ * Size: <= 60 (taken from GDT; is <= 70 in BDT; therefore the smaller is used)
  * Type: character array
  * Rule: -
  * Example: Medical-Soft
@@ -69,7 +69,7 @@ static int* RESPONSIBLE_ENTITY_XDT_FIELD = NUMBER_102_INTEGER_ARRAY;
  * The software field.
  *
  * German: Software
- * Size: <= 70
+ * Size: <= 60 (taken from GDT; is <= 70 in BDT; therefore the smaller is used)
  * Type: character array
  * Rule: -
  * Example: DOCSFUN
@@ -86,6 +86,17 @@ static int* SOFTWARE_XDT_FIELD = NUMBER_103_INTEGER_ARRAY;
  * Example: IBM PC/AT
  */
 static int* HARDWARE_XDT_FIELD = NUMBER_104_INTEGER_ARRAY;
+
+/**
+ * The software release field.
+ *
+ * German: Release-Stand der Software
+ * Size: <= 60 (taken from GDT; is <= 70 in BDT; therefore the smaller is used)
+ * Type: character array
+ * Rule: -
+ * Example: Version 4.30b
+ */
+static int* SOFTWARE_RELEASE_XDT_FIELD = NUMBER_132_INTEGER_ARRAY;
 
 /**
  * The physician identification field.
@@ -151,7 +162,7 @@ static int* PHYSICIAN_STREET_XDT_FIELD = NUMBER_205_INTEGER_ARRAY;
  * Rule: -
  * Example: 50859 Köln
  */
-static int* PHYSICIAN_POSTCODE_XDT_FIELD = NUMBER_206_INTEGER_ARRAY;
+static int* PHYSICIAN_POSTCODE_AND_PLACE_XDT_FIELD = NUMBER_206_INTEGER_ARRAY;
 
 /**
  * The physician with service indicator field.
@@ -763,7 +774,7 @@ static int* FREE_RECORD_0010_CATEGORY_25_VALUE_XDT_FIELD = NUMBER_299_INTEGER_AR
  *
  * German: Patientennummer/Patientenkennung
  * Size: <= 10
- * Type: integer
+ * Type: character array (taken from new GDT version; was "integer" in old BDT)
  * Rule: -
  * Example: 12345678
  */
@@ -828,10 +839,10 @@ static int* PATIENT_TITLE_XDT_FIELD = NUMBER_3104_INTEGER_ARRAY;
  * The patient health insurance number field.
  *
  * German: Versichertennummer des Patienten
- * Size: <= 70
+ * Size: <= 12 (taken from new GDT version; was <= 70 in old BDT)
  * Type: character array
- * Rule: 335
- * Example: 1234567890
+ * Rule: - (taken from new GDT version; was 335 in old BDT)
+ * Example: 123456M789
  */
 static int* PATIENT_HEALTH_INSURANCE_NUMBER_XDT_FIELD = NUMBER_3105_INTEGER_ARRAY;
 
@@ -1052,7 +1063,7 @@ static int* PATIENT_PROFESSION_XDT_FIELD = NUMBER_3620_INTEGER_ARRAY;
 /**
  * The patient body height field.
  *
- * German: Größe des Patienten
+ * German: Größe des Patienten in cm
  * Size: variable
  * Type: float
  * Rule: -
@@ -1063,7 +1074,7 @@ static int* PATIENT_BODY_HEIGHT_XDT_FIELD = NUMBER_3622_INTEGER_ARRAY;
 /**
  * The patient body weight field.
  *
- * German: Gewicht des Patienten
+ * German: Gewicht des Patienten in kg
  * Size: variable
  * Type: float
  * Rule: -
@@ -1108,7 +1119,7 @@ static int* PATIENT_NATIONALITY_XDT_FIELD = NUMBER_3627_INTEGER_ARRAY;
  * The patient mother tongue field.
  *
  * German: Muttersprache
- * Size: <= 70
+ * Size: <= 60 (taken from new GDT version; was <= 70 in old BDT)
  * Type: character array
  * Rule: -
  * Example: türkisch
@@ -2044,7 +2055,7 @@ static int* ACCIDENT_FIRST_TIME_TREATMENT_DATE_XDT_FIELD = NUMBER_4513_INTEGER_A
  *
  * German: Behandlung durch
  * Size: 8
- * Type: date
+ * Type: character array
  * Rule: 008
  * Example: Dr. Sinn
  */
@@ -2737,19 +2748,31 @@ static int* BILLING_ICD_KEY_XDT_FIELD = NUMBER_6001_INTEGER_ARRAY;
 /**
  * The treatment data storage date field.
  *
- * German: Tag der Speicherung von Behandlungsdaten
+ * German: Tag der Erhebung von Behandlungsdaten (taken from new GDT version;
+ *         was "Tag der Speicherung von Behandlungsdaten" in old BDT)
  * Size: 8
  * Type: date
  * Rule: 008
  * Example: 12031993
  */
-static int* TREATMENT_DATA_STORAGE_DATE_XDT_FIELD = NUMBER_6200_INTEGER_ARRAY;
+static int* TREATMENT_DATA_COLLECTION_DATE_XDT_FIELD = NUMBER_6200_INTEGER_ARRAY;
+
+/**
+ * The treatment data storage time field.
+ *
+ * German: Uhrzeit der Erhebung von Behandlungsdaten
+ * Size: 6
+ * Type: time
+ * Rule: 090 HHMMSS
+ * Example: 132201
+ */
+static int* TREATMENT_DATA_COLLECTION_TIME_XDT_FIELD = NUMBER_6201_INTEGER_ARRAY;
 
 /**
  * The treatment current diagnosis field.
  *
  * German: Aktuelle Diagnose
- * Size: <= 70
+ * Size: <= 60 (taken from new GDT version; was <= 70 in old BDT)
  * Type: character array
  * Rule: -
  * Example: Diabetes
@@ -2793,7 +2816,7 @@ static int* TREATMENT_PHYSICIAN_SAMPLE_XDT_FIELD = NUMBER_6215_INTEGER_ARRAY;
  * The treatment findings field.
  *
  * German: Befund
- * Size: <= 70
+ * Size: <= 60 (taken from new GDT version; was <= 70 in old BDT)
  * Type: character array
  * Rule: -
  * Example: erhöhter Blutdruck
@@ -2804,10 +2827,10 @@ static int* TREATMENT_FINDINGS_XDT_FIELD = NUMBER_6220_INTEGER_ARRAY;
  * The treatment external findings field.
  *
  * German: Fremdbefund
- * Size: <= 70
+ * Size: <= 60 (taken from new GDT version; was <= 70 in old BDT)
  * Type: character array
  * Rule: -
- * Example: Bartolin.-cyste, re
+ * Example: Verdacht auf Obstruktion (taken from new GDT version; was "Bartolin.-cyste, re" in old BDT)
  */
 static int* TREATMENT_EXTERNAL_FINDINGS_XDT_FIELD = NUMBER_6221_INTEGER_ARRAY;
 
@@ -2832,6 +2855,39 @@ static int* TREATMENT_LABORATORY_FINDINGS_XDT_FIELD = NUMBER_6222_INTEGER_ARRAY;
  * Example: Schatten auf Lunge
  */
 static int* TREATMENT_X_RAY_FINDINGS_XDT_FIELD = NUMBER_6225_INTEGER_ARRAY;
+
+/**
+ * The treatment subsequent line count field.
+ *
+ * German: Anzahl Folgezeilen
+ * Size: <= 4
+ * Type: integer
+ * Rule: -
+ * Example: 2
+ */
+static int* TREATMENT_SUBSEQUENT_LINE_COUNT_XDT_FIELD = NUMBER_6226_INTEGER_ARRAY;
+
+/**
+ * The treatment comment field.
+ *
+ * German: Kommentar
+ * Size: <= 60
+ * Type: character array
+ * Rule: -
+ * Example: Belastung abgebrochen
+ */
+static int* TREATMENT_COMMENT_XDT_FIELD = NUMBER_6227_INTEGER_ARRAY;
+
+/**
+ * The treatment formatted result table text field.
+ *
+ * German: Ergebnistabellentext, formatiert
+ * Size: <= 60
+ * Type: character array
+ * Rule: -
+ * Example: s. Beispiele im Anhang
+ */
+static int* TREATMENT_FORMATTED_RESULT_TABLE_TEXT_XDT_FIELD = NUMBER_6228_INTEGER_ARRAY;
 
 /**
  * The treatment blood pressure field.
@@ -2953,6 +3009,50 @@ static int* LETTER_CERTIFICATE_KIND_XDT_FIELD = NUMBER_6300_INTEGER_ARRAY;
  * Example: Tetanusschutzimpfung
  */
 static int* LETTER_CERTIFICATE_CONTENT_XDT_FIELD = NUMBER_6301_INTEGER_ARRAY;
+
+/**
+ * The letter file archive number field.
+ *
+ * German: Datei-Archivierungsnummer
+ * Size: <= 60
+ * Type: character array
+ * Rule: -
+ * Example: 000001
+ */
+static int* LETTER_FILE_ARCHIVE_NUMBER_XDT_FIELD = NUMBER_6302_INTEGER_ARRAY;
+
+/**
+ * The letter file format field.
+ *
+ * German: Dateiformat
+ * Size: <= 60
+ * Type: character array
+ * Rule: -
+ * Example: PDF
+ */
+static int* LETTER_FILE_FORMAT_XDT_FIELD = NUMBER_6303_INTEGER_ARRAY;
+
+/**
+ * The letter file content field.
+ *
+ * German: Dateiinhalt
+ * Size: <= 60
+ * Type: character array
+ * Rule: -
+ * Example: Datenanalyse
+ */
+static int* LETTER_FILE_CONTENT_XDT_FIELD = NUMBER_6304_INTEGER_ARRAY;
+
+/**
+ * The letter file url field.
+ *
+ * German: Verweis auf Datei (URL)
+ * Size: <= 60
+ * Type: character array
+ * Rule: -
+ * Example: \\FS1\DATA\00712.PDF
+ */
+static int* LETTER_FILE_URL_XDT_FIELD = NUMBER_6305_INTEGER_ARRAY;
 
 /**
  * The letter attestation kind field.
@@ -3912,6 +4012,28 @@ static int* RECORD_IDENTIFICATION_XDT_FIELD = NUMBER_8000_INTEGER_ARRAY;
 static int* RECORD_SIZE_XDT_FIELD = NUMBER_8100_INTEGER_ARRAY;
 
 /**
+ * The device receiver gdt id field.
+ *
+ * German: GDT - ID des Empfängers
+ * Size: 8
+ * Type: character array
+ * Rule: -
+ * Example: ROP200U1
+ */
+static int* DEVICE_RECEIVER_GDT_ID_XDT_FIELD = NUMBER_8315_INTEGER_ARRAY;
+
+/**
+ * The device sender gdt id field.
+ *
+ * German: GDT - ID des Senders
+ * Size: 8
+ * Type: character array
+ * Rule: -
+ * Example: PRAX_EDV
+ */
+static int* DEVICE_SENDER_GDT_ID_XDT_FIELD = NUMBER_8316_INTEGER_ARRAY;
+
+/**
  * The findings kind field.
  *
  * German: Befundart
@@ -3926,10 +4048,10 @@ static int* FINDINGS_KIND_XDT_FIELD = NUMBER_8401_INTEGER_ARRAY;
  * The findings device specifics field.
  *
  * German: Geräte und verfahrensspezifisches Kennfeld
- * Size: 2
+ * Size: <= 6 (taken from new GDT version; was 2 in old BDT)
  * Type: character array
  * Rule: -
- * Example: 10
+ * Example: EKG01 (taken from new GDT version; was 10 in old BDT), see GDT appendix B
  */
 static int* FINDINGS_DEVICE_SPECIFICS_XDT_FIELD = NUMBER_8402_INTEGER_ARRAY;
 
@@ -3937,10 +4059,10 @@ static int* FINDINGS_DEVICE_SPECIFICS_XDT_FIELD = NUMBER_8402_INTEGER_ARRAY;
  * The findings test identification field.
  *
  * German: Test-Ident
- * Size: 6
+ * Size: <= 20 (taken from new GDT version; was 6 in old BDT)
  * Type: character array
  * Rule: -
- * Example: Ka
+ * Example: FEV1 (taken from new GDT version; was "Ka" in old BDT)
  */
 static int* FINDINGS_TEST_IDENTIFICATION_XDT_FIELD = NUMBER_8410_INTEGER_ARRAY;
 
@@ -3948,10 +4070,10 @@ static int* FINDINGS_TEST_IDENTIFICATION_XDT_FIELD = NUMBER_8410_INTEGER_ARRAY;
  * The findings test name field.
  *
  * German: Testbezeichnung
- * Size: <= 70
+ * Size: <= 60 (taken from new GDT version; was <= 70 in old BDT)
  * Type: character array
  * Rule: -
- * Example: Kalium
+ * Example: Obj. refr. cyl. rechts (taken from new GDT version; was "Kalium" in old BDT)
  */
 static int* FINDINGS_TEST_NAME_XDT_FIELD = NUMBER_8411_INTEGER_ARRAY;
 
@@ -3970,10 +4092,10 @@ static int* FINDINGS_TEST_STATUS_XDT_FIELD = NUMBER_8418_INTEGER_ARRAY;
  * The findings test result value field.
  *
  * German: Ergebnis-Wert
- * Size: <= 70
- * Type: character array
+ * Size: variable (taken from new GDT version; was <= 70 in old BDT)
+ * Type: float (taken from new GDT version; was "character array" in old BDT)
  * Rule: -
- * Example: 4,7
+ * Example: -3.7 (taken from new GDT version; was 4,7 in old BDT)
  */
 static int* FINDINGS_TEST_RESULT_VALUE_XDT_FIELD = NUMBER_8420_INTEGER_ARRAY;
 
@@ -3981,10 +4103,10 @@ static int* FINDINGS_TEST_RESULT_VALUE_XDT_FIELD = NUMBER_8420_INTEGER_ARRAY;
  * The findings test result unit field.
  *
  * German: Einheit
- * Size: <= 70
+ * Size: <= 60 (taken from new GDT version; was <= 70 in old BDT)
  * Type: character array
  * Rule: -
- * Example: mMol/l
+ * Example: dpt (taken from new GDT version; was "mMol/l" in old BDT)
  */
 static int* FINDINGS_TEST_RESULT_UNIT_XDT_FIELD = NUMBER_8421_INTEGER_ARRAY;
 
@@ -4000,35 +4122,46 @@ static int* FINDINGS_TEST_RESULT_UNIT_XDT_FIELD = NUMBER_8421_INTEGER_ARRAY;
 static int* FINDINGS_LIMIT_INDICATOR_XDT_FIELD = NUMBER_8422_INTEGER_ARRAY;
 
 /**
- * The findings sample material number field.
+ * The findings sample material identification field.
  *
- * German: Probenmaterial-Nummer
- * Size: <= 70
+ * German: Probenmaterial-Ident
+ * Size: <= 8
  * Type: character array
  * Rule: -
- * Example: 4763
+ * Example: -
  */
-static int* FINDINGS_SAMPLE_MATERIAL_NUMBER_XDT_FIELD = NUMBER_8429_INTEGER_ARRAY;
+static int* FINDINGS_SAMPLE_MATERIAL_IDENTIFICATION_XDT_FIELD = NUMBER_8428_INTEGER_ARRAY;
+
+/**
+ * The findings sample material index field.
+ *
+ * German: Probenmaterial-Index (taken from new GDT version; was "Probenmaterial-Nummer" in old BDT)
+ * Size: 2 (taken from new GDT version; was <= 70 in old BDT)
+ * Type: integer (taken from new GDT version; was "character array" in old BDT)
+ * Rule: -
+ * Example: -
+ */
+static int* FINDINGS_SAMPLE_MATERIAL_INDEX_XDT_FIELD = NUMBER_8429_INTEGER_ARRAY;
 
 /**
  * The findings sample material name field.
  *
  * German: Probenmaterialbezeichnung
- * Size: <= 70
+ * Size: <= 60 (taken from new GDT version; was <= 70 in old BDT)
  * Type: character array
  * Rule: -
- * Example: Serum
+ * Example: - (taken from new GDT version; was "Serum" in old BDT)
  */
 static int* FINDINGS_SAMPLE_MATERIAL_NAME_XDT_FIELD = NUMBER_8430_INTEGER_ARRAY;
 
 /**
  * The findings sample material specification field.
  *
- * German: Material-Spezifikation
- * Size: <= 70
+ * German: Probenmaterial-Spezifikation
+ * Size: <= 60 (taken from new GDT version; was <= 70 in old BDT)
  * Type: character array
  * Rule: -
- * Example: 24HV:130 GR
+ * Example: - (taken from new GDT version; was "24HV:130 GR" in old BDT)
  */
 static int* FINDINGS_SAMPLE_MATERIAL_SPECIFICATION_XDT_FIELD = NUMBER_8431_INTEGER_ARRAY;
 
@@ -4044,15 +4177,50 @@ static int* FINDINGS_SAMPLE_MATERIAL_SPECIFICATION_XDT_FIELD = NUMBER_8431_INTEG
 static int* FINDINGS_SAMPLE_COLLECTION_DATE_XDT_FIELD = NUMBER_8432_INTEGER_ARRAY;
 
 /**
- * The findings sample collection time field.
+ * The findings sample collection time (old format) field.
  *
- * German: Abnahme-Zeit
+ * Obsolete? Defined by old BDT specification. See new collection time field number 8439!
+ *
+ * German: Abnahme-Zeit (altes Format, definiert in BDT Version von 1994)
  * Size: 4
  * Type: integer
  * Rule: 005
  * Example: 1045
  */
-static int* FINDINGS_SAMPLE_COLLECTION_TIME_XDT_FIELD = NUMBER_8433_INTEGER_ARRAY;
+static int* FINDINGS_SAMPLE_COLLECTION_TIME_OLD_FORMAT_XDT_FIELD = NUMBER_8433_INTEGER_ARRAY;
+
+/**
+ * The findings data stream units field.
+ *
+ * German: Einheit(en) für Datenstrom
+ * Size: <= 60
+ * Type: character array
+ * Rule: -
+ * Example: min, mmHg, mmHg
+ */
+static int* FINDINGS_DATA_STREAM_UNITS_XDT_FIELD = NUMBER_8437_INTEGER_ARRAY;
+
+/**
+ * The findings data stream field.
+ *
+ * German: Datenstrom
+ * Size: <= 60
+ * Type: character array
+ * Rule: -
+ * Example: 5,120,80... or: (5,120,80),(10,128,92)... and can also contain float values!
+ */
+static int* FINDINGS_DATA_STREAM_XDT_FIELD = NUMBER_8438_INTEGER_ARRAY;
+
+/**
+ * The findings sample collection time field.
+ *
+ * German: Abnahme-Zeit
+ * Size: 6
+ * Type: time
+ * Rule: 090
+ * Example: HHMMSS 125600
+ */
+static int* FINDINGS_SAMPLE_COLLECTION_TIME_XDT_FIELD = NUMBER_8439_INTEGER_ARRAY;
 
 /**
  * The findings germ identification field.
@@ -4146,7 +4314,7 @@ static int* FINDINGS_RESISTANCE_INTERPRETATION_XDT_FIELD = NUMBER_8447_INTEGER_A
  * The findings normal value text field.
  *
  * German: Normalwert-Text
- * Size: <= 70
+ * Size: <= 60 (taken from new GDT version; was <= 70 in old BDT)
  * Type: character array
  * Rule: -
  * Example: -
@@ -4154,10 +4322,32 @@ static int* FINDINGS_RESISTANCE_INTERPRETATION_XDT_FIELD = NUMBER_8447_INTEGER_A
 static int* FINDINGS_NORMAL_VALUE_TEXT_XDT_FIELD = NUMBER_8460_INTEGER_ARRAY;
 
 /**
+ * The findings normal value lower limit field.
+ *
+ * German: Normalwert untere Grenze
+ * Size: variable
+ * Type: float
+ * Rule: -
+ * Example: -15
+ */
+static int* FINDINGS_NORMAL_VALUE_LOWER_LIMIT_XDT_FIELD = NUMBER_8461_INTEGER_ARRAY;
+
+/**
+ * The findings normal value upper limit field.
+ *
+ * German: Normalwert obere Grenze
+ * Size: variable
+ * Type: float
+ * Rule: -
+ * Example: 12
+ */
+static int* FINDINGS_NORMAL_VALUE_UPPER_LIMIT_XDT_FIELD = NUMBER_8462_INTEGER_ARRAY;
+
+/**
  * The findings remark field.
  *
- * German: Anmerkung
- * Size: <= 70
+ * German: Testbezogene Hinweise (taken from new GDT version; was "Anmerkung" in old BDT)
+ * Size: <= 60 (taken from new GDT version; was <= 70 in old BDT)
  * Type: character array
  * Rule: -
  * Example: -
@@ -4168,7 +4358,7 @@ static int* FINDINGS_REMARK_XDT_FIELD = NUMBER_8470_INTEGER_ARRAY;
  * The findings result text field.
  *
  * German: Ergebnis-Text
- * Size: <= 70
+ * Size: <= 60 (taken from new GDT version; was <= 70 in old BDT)
  * Type: character array
  * Rule: -
  * Example: -
@@ -4190,10 +4380,10 @@ static int* FINDINGS_COMPLIMENTARY_CLOSE_XDT_FIELD = NUMBER_8490_INTEGER_ARRAY;
  * The findings signature field.
  *
  * German: Signatur
- * Size: <= 70
+ * Size: <= 60 (taken from new GDT version; was <= 70 in old BDT)
  * Type: character array
  * Rule: -
- * Example: -
+ * Example: Dr. Huber (taken from new GDT version; was empty in old BDT)
  */
 static int* FINDINGS_SIGNATURE_XDT_FIELD = NUMBER_8990_INTEGER_ARRAY;
 
@@ -4264,6 +4454,17 @@ static int* DATA_PACKAGE_SIZE_XDT_FIELD = NUMBER_9202_INTEGER_ARRAY;
 static int* DATA_PACKAGE_MEDIUMS_COUNT_XDT_FIELD = NUMBER_9203_INTEGER_ARRAY;
 
 /**
+ * The data package character set field.
+ *
+ * German: verwendeter Zeichensatz
+ * Size: 1
+ * Type: integer
+ * Rule: -
+ * Example: 2
+ */
+static int* DATA_PACKAGE_CHARACTER_SET_XDT_FIELD = NUMBER_9206_INTEGER_ARRAY;
+
+/**
  * The data package adt version field.
  *
  * German: Abrechnungs-Datentransfer (ADT) Satzbeschreibung Version
@@ -4284,6 +4485,17 @@ static int* DATA_PACKAGE_ADT_VERSION_XDT_FIELD = NUMBER_9210_INTEGER_ARRAY;
  * Example: 02/94
  */
 static int* DATA_PACKAGE_BDT_VERSION_XDT_FIELD = NUMBER_9213_INTEGER_ARRAY;
+
+/**
+ * The data package gdt version field.
+ *
+ * German: Geräte-Datentransfer (GDT) Version
+ * Size: 5
+ * Type: character array
+ * Rule: -
+ * Example: 01.00, 02.00 or 02.10
+ */
+static int* DATA_PACKAGE_GDT_VERSION_XDT_FIELD = NUMBER_9218_INTEGER_ARRAY;
 
 /**
  * The data package archiving type field.

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2007-09-05 21:19:59 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2007-09-10 18:37:38 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -49,6 +49,11 @@ static char HARDWARE_XDT_FIELD_NAME_ARRAY[] = {'h', 'a', 'r', 'd', 'w', 'a', 'r'
 static char* HARDWARE_XDT_FIELD_NAME = HARDWARE_XDT_FIELD_NAME_ARRAY;
 static int* HARDWARE_XDT_FIELD_NAME_COUNT = NUMBER_8_INTEGER_ARRAY;
 
+/** The software release field name. */
+static char SOFTWARE_RELEASE_XDT_FIELD_NAME_ARRAY[] = {'s', 'o', 'f', 't', 'w', 'a', 'r', 'e', '_', 'r', 'e', 'l', 'e', 'a', 's', 'e'};
+static char* SOFTWARE_RELEASE_XDT_FIELD_NAME = SOFTWARE_RELEASE_XDT_FIELD_NAME_ARRAY;
+static int* SOFTWARE_RELEASE_XDT_FIELD_NAME_COUNT = NUMBER_16_INTEGER_ARRAY;
+
 /** The physician identification field name. */
 static char PHYSICIAN_IDENTIFICATION_XDT_FIELD_NAME_ARRAY[] = {'p', 'h', 'y', 's', 'i', 'c', 'i', 'a', 'n', '_', 'i', 'd', 'e', 'n', 't', 'i', 'f', 'i', 'c', 'a', 't', 'i', 'o', 'n'};
 static char* PHYSICIAN_IDENTIFICATION_XDT_FIELD_NAME = PHYSICIAN_IDENTIFICATION_XDT_FIELD_NAME_ARRAY;
@@ -75,9 +80,9 @@ static char* PHYSICIAN_STREET_XDT_FIELD_NAME = PHYSICIAN_STREET_XDT_FIELD_NAME_A
 static int* PHYSICIAN_STREET_XDT_FIELD_NAME_COUNT = NUMBER_16_INTEGER_ARRAY;
 
 /** The physician postcode and place field name. */
-static char PHYSICIAN_POSTCODE_XDT_FIELD_NAME_ARRAY[] = {'p', 'h', 'y', 's', 'i', 'c', 'i', 'a', 'n', '_', 'p', 'o', 's', 't', 'c', 'o', 'd', 'e', '_', 'a', 'n', 'd', '_', 'p', 'l', 'a', 'c', 'e'};
-static char* PHYSICIAN_POSTCODE_XDT_FIELD_NAME = PHYSICIAN_POSTCODE_XDT_FIELD_NAME_ARRAY;
-static int* PHYSICIAN_POSTCODE_XDT_FIELD_NAME_COUNT = NUMBER_28_INTEGER_ARRAY;
+static char PHYSICIAN_POSTCODE_AND_PLACE_XDT_FIELD_NAME_ARRAY[] = {'p', 'h', 'y', 's', 'i', 'c', 'i', 'a', 'n', '_', 'p', 'o', 's', 't', 'c', 'o', 'd', 'e', '_', 'a', 'n', 'd', '_', 'p', 'l', 'a', 'c', 'e'};
+static char* PHYSICIAN_POSTCODE_AND_PLACE_XDT_FIELD_NAME = PHYSICIAN_POSTCODE_AND_PLACE_XDT_FIELD_NAME_ARRAY;
+static int* PHYSICIAN_POSTCODE_AND_PLACE_XDT_FIELD_NAME_COUNT = NUMBER_28_INTEGER_ARRAY;
 
 /** The physician with service indicator field name. */
 static char PHYSICIAN_WITH_SERVICE_INDICATOR_XDT_FIELD_NAME_ARRAY[] = {'p', 'h', 'y', 's', 'i', 'c', 'i', 'a', 'n', '_', 'w', 'i', 't', 'h', '_', 's', 'e', 'r', 'v', 'i', 'c', 'e', '_', 'i', 'n', 'd', 'i', 'c', 'a', 't', 'o', 'r'};
@@ -705,724 +710,764 @@ static char* FREE_RECORD_6100_CATEGORY_10_VALUE_XDT_FIELD_NAME = FREE_RECORD_610
 static int* FREE_RECORD_6100_CATEGORY_10_VALUE_XDT_FIELD_NAME_COUNT = NUMBER_34_INTEGER_ARRAY;
 
 /** The invoice quarter field name. */
-static char INVOICE_QUARTER_XDT_FIELD_NAME_ARRAY[] = {'invoice_quarter'};
+static char INVOICE_QUARTER_XDT_FIELD_NAME_ARRAY[] = {'i', 'n', 'v', 'o', 'i', 'c', 'e', '_', 'q', 'u', 'a', 'r', 't', 'e', 'r'};
 static char* INVOICE_QUARTER_XDT_FIELD_NAME = INVOICE_QUARTER_XDT_FIELD_NAME_ARRAY;
-static int* INVOICE_QUARTER_XDT_FIELD_NAME_COUNT = NUMBER_4101_INTEGER_ARRAY;
+static int* INVOICE_QUARTER_XDT_FIELD_NAME_COUNT = NUMBER_15_INTEGER_ARRAY;
 
 /** The invoice issuance date field name. */
-static char INVOICE_ISSUANCE_DATE_XDT_FIELD_NAME_ARRAY[] = {'invoice_issuance_date'};
+static char INVOICE_ISSUANCE_DATE_XDT_FIELD_NAME_ARRAY[] = {'i', 'n', 'v', 'o', 'i', 'c', 'e', '_', 'i', 's', 's', 'u', 'a', 'n', 'c', 'e', '_', 'd', 'a', 't', 'e'};
 static char* INVOICE_ISSUANCE_DATE_XDT_FIELD_NAME = INVOICE_ISSUANCE_DATE_XDT_FIELD_NAME_ARRAY;
-static int* INVOICE_ISSUANCE_DATE_XDT_FIELD_NAME_COUNT = NUMBER_4102_INTEGER_ARRAY;
+static int* INVOICE_ISSUANCE_DATE_XDT_FIELD_NAME_COUNT = NUMBER_21_INTEGER_ARRAY;
 
 /** The invoice validity date field name. */
-static char INVOICE_VALIDITY_DATE_XDT_FIELD_NAME_ARRAY[] = {'invoice_validity_date'};
+static char INVOICE_VALIDITY_DATE_XDT_FIELD_NAME_ARRAY[] = {'i', 'n', 'v', 'o', 'i', 'c', 'e', '_', 'v', 'a', 'l', 'i', 'd', 'i', 't', 'y', '_', 'd', 'a', 't', 'e'};
 static char* INVOICE_VALIDITY_DATE_XDT_FIELD_NAME = INVOICE_VALIDITY_DATE_XDT_FIELD_NAME_ARRAY;
-static int* INVOICE_VALIDITY_DATE_XDT_FIELD_NAME_COUNT = NUMBER_4103_INTEGER_ARRAY;
+static int* INVOICE_VALIDITY_DATE_XDT_FIELD_NAME_COUNT = NUMBER_21_INTEGER_ARRAY;
 
 /** The invoice insurance number field name. */
-static char INVOICE_INSURANCE_NUMBER_XDT_FIELD_NAME_ARRAY[] = {'invoice_insurance_number'};
+static char INVOICE_INSURANCE_NUMBER_XDT_FIELD_NAME_ARRAY[] = {'i', 'n', 'v', 'o', 'i', 'c', 'e', '_', 'i', 'n', 's', 'u', 'r', 'a', 'n', 'c', 'e', '_', 'n', 'u', 'm', 'b', 'e', 'r'};
 static char* INVOICE_INSURANCE_NUMBER_XDT_FIELD_NAME = INVOICE_INSURANCE_NUMBER_XDT_FIELD_NAME_ARRAY;
-static int* INVOICE_INSURANCE_NUMBER_XDT_FIELD_NAME_COUNT = NUMBER_4104_INTEGER_ARRAY;
+static int* INVOICE_INSURANCE_NUMBER_XDT_FIELD_NAME_COUNT = NUMBER_24_INTEGER_ARRAY;
 
 /** The invoice insurance office field name. */
-static char INVOICE_INSURANCE_OFFICE_XDT_FIELD_NAME_ARRAY[] = {'invoice_insurance_office'};
+static char INVOICE_INSURANCE_OFFICE_XDT_FIELD_NAME_ARRAY[] = {'i', 'n', 'v', 'o', 'i', 'c', 'e', '_', 'i', 'n', 's', 'u', 'r', 'a', 'n', 'c', 'e', '_', 'o', 'f', 'f', 'i', 'c', 'e'};
 static char* INVOICE_INSURANCE_OFFICE_XDT_FIELD_NAME = INVOICE_INSURANCE_OFFICE_XDT_FIELD_NAME_ARRAY;
-static int* INVOICE_INSURANCE_OFFICE_XDT_FIELD_NAME_COUNT = NUMBER_4105_INTEGER_ARRAY;
+static int* INVOICE_INSURANCE_OFFICE_XDT_FIELD_NAME_COUNT = NUMBER_24_INTEGER_ARRAY;
 
 /** The invoice insurance sub category field name. */
-static char INVOICE_INSURANCE_SUB_CATEGORY_XDT_FIELD_NAME_ARRAY[] = {'invoice_insurance_sub_category'};
+static char INVOICE_INSURANCE_SUB_CATEGORY_XDT_FIELD_NAME_ARRAY[] = {'i', 'n', 'v', 'o', 'i', 'c', 'e', '_', 'i', 'n', 's', 'u', 'r', 'a', 'n', 'c', 'e', '_', 's', 'u', 'b', '_', 'c', 'a', 't', 'e', 'g', 'o', 'r', 'y'};
 static char* INVOICE_INSURANCE_SUB_CATEGORY_XDT_FIELD_NAME = INVOICE_INSURANCE_SUB_CATEGORY_XDT_FIELD_NAME_ARRAY;
-static int* INVOICE_INSURANCE_SUB_CATEGORY_XDT_FIELD_NAME_COUNT = NUMBER_4106_INTEGER_ARRAY;
+static int* INVOICE_INSURANCE_SUB_CATEGORY_XDT_FIELD_NAME_COUNT = NUMBER_30_INTEGER_ARRAY;
 
 /** The invoice billing category field name. */
-static char INVOICE_BILLING_CATEGORY_XDT_FIELD_NAME_ARRAY[] = {'invoice_billing_category'};
+static char INVOICE_BILLING_CATEGORY_XDT_FIELD_NAME_ARRAY[] = {'i', 'n', 'v', 'o', 'i', 'c', 'e', '_', 'b', 'i', 'l', 'l', 'i', 'n', 'g', '_', 'c', 'a', 't', 'e', 'g', 'o', 'r', 'y'};
 static char* INVOICE_BILLING_CATEGORY_XDT_FIELD_NAME = INVOICE_BILLING_CATEGORY_XDT_FIELD_NAME_ARRAY;
-static int* INVOICE_BILLING_CATEGORY_XDT_FIELD_NAME_COUNT = NUMBER_4107_INTEGER_ARRAY;
+static int* INVOICE_BILLING_CATEGORY_XDT_FIELD_NAME_COUNT = NUMBER_24_INTEGER_ARRAY;
 
 /** The invoice insurance card last read access field name. */
-static char INVOICE_INSURANCE_CARD_LAST_READ_ACCESS_XDT_FIELD_NAME_ARRAY[] = {'invoice_insurance_card_last_read_access'};
+static char INVOICE_INSURANCE_CARD_LAST_READ_ACCESS_XDT_FIELD_NAME_ARRAY[] = {'i', 'n', 'v', 'o', 'i', 'c', 'e', '_', 'i', 'n', 's', 'u', 'r', 'a', 'n', 'c', 'e', '_', 'c', 'a', 'r', 'd', '_', 'l', 'a', 's', 't', '_', 'r', 'e', 'a', 'd', '_', 'a', 'c', 'c', 'e', 's', 's'};
 static char* INVOICE_INSURANCE_CARD_LAST_READ_ACCESS_XDT_FIELD_NAME = INVOICE_INSURANCE_CARD_LAST_READ_ACCESS_XDT_FIELD_NAME_ARRAY;
-static int* INVOICE_INSURANCE_CARD_LAST_READ_ACCESS_XDT_FIELD_NAME_COUNT = NUMBER_4109_INTEGER_ARRAY;
+static int* INVOICE_INSURANCE_CARD_LAST_READ_ACCESS_XDT_FIELD_NAME_COUNT = NUMBER_39_INTEGER_ARRAY;
 
 /** The invoice insurance card validity date field name. */
-static char INVOICE_INSURANCE_CARD_VALIDITY_DATE_XDT_FIELD_NAME_ARRAY[] = {'invoice_insurance_card_validity_date'};
+static char INVOICE_INSURANCE_CARD_VALIDITY_DATE_XDT_FIELD_NAME_ARRAY[] = {'i', 'n', 'v', 'o', 'i', 'c', 'e', '_', 'i', 'n', 's', 'u', 'r', 'a', 'n', 'c', 'e', '_', 'c', 'a', 'r', 'd', '_', 'v', 'a', 'l', 'i', 'd', 'i', 't', 'y', '_', 'd', 'a', 't', 'e'};
 static char* INVOICE_INSURANCE_CARD_VALIDITY_DATE_XDT_FIELD_NAME = INVOICE_INSURANCE_CARD_VALIDITY_DATE_XDT_FIELD_NAME_ARRAY;
-static int* INVOICE_INSURANCE_CARD_VALIDITY_DATE_XDT_FIELD_NAME_COUNT = NUMBER_4110_INTEGER_ARRAY;
+static int* INVOICE_INSURANCE_CARD_VALIDITY_DATE_XDT_FIELD_NAME_COUNT = NUMBER_36_INTEGER_ARRAY;
 
 /** The invoice ik insurance number field name. */
-static char INVOICE_IK_INSURANCE_NUMBER_XDT_FIELD_NAME_ARRAY[] = {'invoice_ik_insurance_number'};
+static char INVOICE_IK_INSURANCE_NUMBER_XDT_FIELD_NAME_ARRAY[] = {'i', 'n', 'v', 'o', 'i', 'c', 'e', '_', 'i', 'k', '_', 'i', 'n', 's', 'u', 'r', 'a', 'n', 'c', 'e', '_', 'n', 'u', 'm', 'b', 'e', 'r'};
 static char* INVOICE_IK_INSURANCE_NUMBER_XDT_FIELD_NAME = INVOICE_IK_INSURANCE_NUMBER_XDT_FIELD_NAME_ARRAY;
-static int* INVOICE_IK_INSURANCE_NUMBER_XDT_FIELD_NAME_COUNT = NUMBER_4111_INTEGER_ARRAY;
+static int* INVOICE_IK_INSURANCE_NUMBER_XDT_FIELD_NAME_COUNT = NUMBER_27_INTEGER_ARRAY;
 
 /** The invoice vk insurance status field name. */
-static char INVOICE_VK_INSURANCE_STATUS_XDT_FIELD_NAME_ARRAY[] = {'invoice_vk_insurance_status'};
+static char INVOICE_VK_INSURANCE_STATUS_XDT_FIELD_NAME_ARRAY[] = {'i', 'n', 'v', 'o', 'i', 'c', 'e', '_', 'v', 'k', '_', 'i', 'n', 's', 'u', 'r', 'a', 'n', 'c', 'e', '_', 's', 't', 'a', 't', 'u', 's'};
 static char* INVOICE_VK_INSURANCE_STATUS_XDT_FIELD_NAME = INVOICE_VK_INSURANCE_STATUS_XDT_FIELD_NAME_ARRAY;
-static int* INVOICE_VK_INSURANCE_STATUS_XDT_FIELD_NAME_COUNT = NUMBER_4112_INTEGER_ARRAY;
+static int* INVOICE_VK_INSURANCE_STATUS_XDT_FIELD_NAME_COUNT = NUMBER_27_INTEGER_ARRAY;
 
 /** The invoice vk east-west status field name. */
-static char INVOICE_VK_EAST_WEST_STATUS_XDT_FIELD_NAME_ARRAY[] = {'invoice_vk_east-west_status'};
+static char INVOICE_VK_EAST_WEST_STATUS_XDT_FIELD_NAME_ARRAY[] = {'i', 'n', 'v', 'o', 'i', 'c', 'e', '_', 'v', 'k', '_', 'e', 'a', 's', 't', '-', 'w', 'e', 's', 't', '_', 's', 't', 'a', 't', 'u', 's'};
 static char* INVOICE_VK_EAST_WEST_STATUS_XDT_FIELD_NAME = INVOICE_VK_EAST_WEST_STATUS_XDT_FIELD_NAME_ARRAY;
-static int* INVOICE_VK_EAST_WEST_STATUS_XDT_FIELD_NAME_COUNT = NUMBER_4113_INTEGER_ARRAY;
+static int* INVOICE_VK_EAST_WEST_STATUS_XDT_FIELD_NAME_COUNT = NUMBER_27_INTEGER_ARRAY;
 
 /** The invoice billing scale field name. */
-static char INVOICE_BILLING_SCALE_XDT_FIELD_NAME_ARRAY[] = {'invoice_billing_scale'};
+static char INVOICE_BILLING_SCALE_XDT_FIELD_NAME_ARRAY[] = {'i', 'n', 'v', 'o', 'i', 'c', 'e', '_', 'b', 'i', 'l', 'l', 'i', 'n', 'g', '_', 's', 'c', 'a', 'l', 'e'};
 static char* INVOICE_BILLING_SCALE_XDT_FIELD_NAME = INVOICE_BILLING_SCALE_XDT_FIELD_NAME_ARRAY;
-static int* INVOICE_BILLING_SCALE_XDT_FIELD_NAME_COUNT = NUMBER_4121_INTEGER_ARRAY;
+static int* INVOICE_BILLING_SCALE_XDT_FIELD_NAME_COUNT = NUMBER_21_INTEGER_ARRAY;
 
 /** The invoice billing area field name. */
-static char INVOICE_BILLING_AREA_XDT_FIELD_NAME_ARRAY[] = {'invoice_billing_area'};
+static char INVOICE_BILLING_AREA_XDT_FIELD_NAME_ARRAY[] = {'i', 'n', 'v', 'o', 'i', 'c', 'e', '_', 'b', 'i', 'l', 'l', 'i', 'n', 'g', '_', 'a', 'r', 'e', 'a'};
 static char* INVOICE_BILLING_AREA_XDT_FIELD_NAME = INVOICE_BILLING_AREA_XDT_FIELD_NAME_ARRAY;
-static int* INVOICE_BILLING_AREA_XDT_FIELD_NAME_COUNT = NUMBER_4122_INTEGER_ARRAY;
+static int* INVOICE_BILLING_AREA_XDT_FIELD_NAME_COUNT = NUMBER_20_INTEGER_ARRAY;
 
 /** The referral cause of pain field name. */
-static char REFERRAL_CAUSE_OF_PAIN_XDT_FIELD_NAME_ARRAY[] = {'referral_cause_of_pain'};
+static char REFERRAL_CAUSE_OF_PAIN_XDT_FIELD_NAME_ARRAY[] = {'r', 'e', 'f', 'e', 'r', 'r', 'a', 'l', '_', 'c', 'a', 'u', 's', 'e', '_', 'o', 'f', '_', 'p', 'a', 'i', 'n'};
 static char* REFERRAL_CAUSE_OF_PAIN_XDT_FIELD_NAME = REFERRAL_CAUSE_OF_PAIN_XDT_FIELD_NAME_ARRAY;
-static int* REFERRAL_CAUSE_OF_PAIN_XDT_FIELD_NAME_COUNT = NUMBER_4201_INTEGER_ARRAY;
+static int* REFERRAL_CAUSE_OF_PAIN_XDT_FIELD_NAME_COUNT = NUMBER_22_INTEGER_ARRAY;
 
 /** The referral supposed accouchement date field name. */
-static char REFERRAL_SUPPOSED_ACCOUCHEMENT_DATE_XDT_FIELD_NAME_ARRAY[] = {'referral_supposed_accouchement_date'};
+static char REFERRAL_SUPPOSED_ACCOUCHEMENT_DATE_XDT_FIELD_NAME_ARRAY[] = {'r', 'e', 'f', 'e', 'r', 'r', 'a', 'l', '_', 's', 'u', 'p', 'p', 'o', 's', 'e', 'd', '_', 'a', 'c', 'c', 'o', 'u', 'c', 'h', 'e', 'm', 'e', 'n', 't', '_', 'd', 'a', 't', 'e'};
 static char* REFERRAL_SUPPOSED_ACCOUCHEMENT_DATE_XDT_FIELD_NAME = REFERRAL_SUPPOSED_ACCOUCHEMENT_DATE_XDT_FIELD_NAME_ARRAY;
-static int* REFERRAL_SUPPOSED_ACCOUCHEMENT_DATE_XDT_FIELD_NAME_COUNT = NUMBER_4206_INTEGER_ARRAY;
+static int* REFERRAL_SUPPOSED_ACCOUCHEMENT_DATE_XDT_FIELD_NAME_COUNT = NUMBER_35_INTEGER_ARRAY;
 
 /** The referral diagnosis field name. */
-static char REFERRAL_DIAGNOSIS_XDT_FIELD_NAME_ARRAY[] = {'referral_diagnosis'};
+static char REFERRAL_DIAGNOSIS_XDT_FIELD_NAME_ARRAY[] = {'r', 'e', 'f', 'e', 'r', 'r', 'a', 'l', '_', 'd', 'i', 'a', 'g', 'n', 'o', 's', 'i', 's'};
 static char* REFERRAL_DIAGNOSIS_XDT_FIELD_NAME = REFERRAL_DIAGNOSIS_XDT_FIELD_NAME_ARRAY;
-static int* REFERRAL_DIAGNOSIS_XDT_FIELD_NAME_COUNT = NUMBER_4207_INTEGER_ARRAY;
+static int* REFERRAL_DIAGNOSIS_XDT_FIELD_NAME_COUNT = NUMBER_18_INTEGER_ARRAY;
 
 /** The referral explanation field name. */
-static char REFERRAL_EXPLANATION_XDT_FIELD_NAME_ARRAY[] = {'referral_explanation'};
+static char REFERRAL_EXPLANATION_XDT_FIELD_NAME_ARRAY[] = {'r', 'e', 'f', 'e', 'r', 'r', 'a', 'l', '_', 'e', 'x', 'p', 'l', 'a', 'n', 'a', 't', 'i', 'o', 'n'};
 static char* REFERRAL_EXPLANATION_XDT_FIELD_NAME = REFERRAL_EXPLANATION_XDT_FIELD_NAME_ARRAY;
-static int* REFERRAL_EXPLANATION_XDT_FIELD_NAME_COUNT = NUMBER_4209_INTEGER_ARRAY;
+static int* REFERRAL_EXPLANATION_XDT_FIELD_NAME_COUNT = NUMBER_20_INTEGER_ARRAY;
 
 /** The referral check box muvo lsr field name. */
-static char REFERRAL_CHECK_BOX_MUVO_LSR_XDT_FIELD_NAME_ARRAY[] = {'referral_check_box_muvo_lsr'};
+static char REFERRAL_CHECK_BOX_MUVO_LSR_XDT_FIELD_NAME_ARRAY[] = {'r', 'e', 'f', 'e', 'r', 'r', 'a', 'l', '_', 'c', 'h', 'e', 'c', 'k', '_', 'b', 'o', 'x', '_', 'm', 'u', 'v', 'o', '_', 'l', 's', 'r'};
 static char* REFERRAL_CHECK_BOX_MUVO_LSR_XDT_FIELD_NAME = REFERRAL_CHECK_BOX_MUVO_LSR_XDT_FIELD_NAME_ARRAY;
-static int* REFERRAL_CHECK_BOX_MUVO_LSR_XDT_FIELD_NAME_COUNT = NUMBER_4210_INTEGER_ARRAY;
+static int* REFERRAL_CHECK_BOX_MUVO_LSR_XDT_FIELD_NAME_COUNT = NUMBER_27_INTEGER_ARRAY;
 
 /** The referral check box muvo hah field name. */
-static char REFERRAL_CHECK_BOX_MUVO_HAH_XDT_FIELD_NAME_ARRAY[] = {'referral_check_box_muvo_hah'};
+static char REFERRAL_CHECK_BOX_MUVO_HAH_XDT_FIELD_NAME_ARRAY[] = {'r', 'e', 'f', 'e', 'r', 'r', 'a', 'l', '_', 'c', 'h', 'e', 'c', 'k', '_', 'b', 'o', 'x', '_', 'm', 'u', 'v', 'o', '_', 'h', 'a', 'h'};
 static char* REFERRAL_CHECK_BOX_MUVO_HAH_XDT_FIELD_NAME = REFERRAL_CHECK_BOX_MUVO_HAH_XDT_FIELD_NAME_ARRAY;
-static int* REFERRAL_CHECK_BOX_MUVO_HAH_XDT_FIELD_NAME_COUNT = NUMBER_4211_INTEGER_ARRAY;
+static int* REFERRAL_CHECK_BOX_MUVO_HAH_XDT_FIELD_NAME_COUNT = NUMBER_27_INTEGER_ARRAY;
 
 /** The referral check box ab0 rh field name. */
-static char REFERRAL_CHECK_BOX_AB0_RH_XDT_FIELD_NAME_ARRAY[] = {'referral_check_box_ab0_rh'};
+static char REFERRAL_CHECK_BOX_AB0_RH_XDT_FIELD_NAME_ARRAY[] = {'r', 'e', 'f', 'e', 'r', 'r', 'a', 'l', '_', 'c', 'h', 'e', 'c', 'k', '_', 'b', 'o', 'x', '_', 'a', 'b', '0', '_', 'r', 'h'};
 static char* REFERRAL_CHECK_BOX_AB0_RH_XDT_FIELD_NAME = REFERRAL_CHECK_BOX_AB0_RH_XDT_FIELD_NAME_ARRAY;
-static int* REFERRAL_CHECK_BOX_AB0_RH_XDT_FIELD_NAME_COUNT = NUMBER_4212_INTEGER_ARRAY;
+static int* REFERRAL_CHECK_BOX_AB0_RH_XDT_FIELD_NAME_COUNT = NUMBER_25_INTEGER_ARRAY;
 
 /** The referral check box ak field name. */
-static char REFERRAL_CHECK_BOX_AK_XDT_FIELD_NAME_ARRAY[] = {'referral_check_box_ak'};
+static char REFERRAL_CHECK_BOX_AK_XDT_FIELD_NAME_ARRAY[] = {'r', 'e', 'f', 'e', 'r', 'r', 'a', 'l', '_', 'c', 'h', 'e', 'c', 'k', '_', 'b', 'o', 'x', '_', 'a', 'k'};
 static char* REFERRAL_CHECK_BOX_AK_XDT_FIELD_NAME = REFERRAL_CHECK_BOX_AK_XDT_FIELD_NAME_ARRAY;
-static int* REFERRAL_CHECK_BOX_AK_XDT_FIELD_NAME_COUNT = NUMBER_4213_INTEGER_ARRAY;
+static int* REFERRAL_CHECK_BOX_AK_XDT_FIELD_NAME_COUNT = NUMBER_21_INTEGER_ARRAY;
 
 /** The referral from physician number field name. */
-static char REFERRAL_FROM_PHYSICIAN_NUMBER_XDT_FIELD_NAME_ARRAY[] = {'referral_from_physician_number'};
+static char REFERRAL_FROM_PHYSICIAN_NUMBER_XDT_FIELD_NAME_ARRAY[] = {'r', 'e', 'f', 'e', 'r', 'r', 'a', 'l', '_', 'f', 'r', 'o', 'm', '_', 'p', 'h', 'y', 's', 'i', 'c', 'i', 'a', 'n', '_', 'n', 'u', 'm', 'b', 'e', 'r'};
 static char* REFERRAL_FROM_PHYSICIAN_NUMBER_XDT_FIELD_NAME = REFERRAL_FROM_PHYSICIAN_NUMBER_XDT_FIELD_NAME_ARRAY;
-static int* REFERRAL_FROM_PHYSICIAN_NUMBER_XDT_FIELD_NAME_COUNT = NUMBER_4218_INTEGER_ARRAY;
+static int* REFERRAL_FROM_PHYSICIAN_NUMBER_XDT_FIELD_NAME_COUNT = NUMBER_30_INTEGER_ARRAY;
 
 /** The referral to physician name field name. */
-static char REFERRAL_TO_PHYSICIAN_NAME_XDT_FIELD_NAME_ARRAY[] = {'referral_to_physician_name'};
+static char REFERRAL_TO_PHYSICIAN_NAME_XDT_FIELD_NAME_ARRAY[] = {'r', 'e', 'f', 'e', 'r', 'r', 'a', 'l', '_', 't', 'o', '_', 'p', 'h', 'y', 's', 'i', 'c', 'i', 'a', 'n', '_', 'n', 'a', 'm', 'e'};
 static char* REFERRAL_TO_PHYSICIAN_NAME_XDT_FIELD_NAME = REFERRAL_TO_PHYSICIAN_NAME_XDT_FIELD_NAME_ARRAY;
-static int* REFERRAL_TO_PHYSICIAN_NAME_XDT_FIELD_NAME_COUNT = NUMBER_4220_INTEGER_ARRAY;
+static int* REFERRAL_TO_PHYSICIAN_NAME_XDT_FIELD_NAME_COUNT = NUMBER_26_INTEGER_ARRAY;
 
 /** The inpatient treatment referral by law field name. */
-static char INPATIENT_TREATMENT_REFERRAL_BY_LAW_XDT_FIELD_NAME_ARRAY[] = {'inpatient_treatment_referral_by_law'};
+static char INPATIENT_TREATMENT_REFERRAL_BY_LAW_XDT_FIELD_NAME_ARRAY[] = {'i', 'n', 'p', 'a', 't', 'i', 'e', 'n', 't', '_', 't', 'r', 'e', 'a', 't', 'm', 'e', 'n', 't', '_', 'r', 'e', 'f', 'e', 'r', 'r', 'a', 'l', '_', 'b', 'y', '_', 'l', 'a', 'w'};
 static char* INPATIENT_TREATMENT_REFERRAL_BY_LAW_XDT_FIELD_NAME = INPATIENT_TREATMENT_REFERRAL_BY_LAW_XDT_FIELD_NAME_ARRAY;
-static int* INPATIENT_TREATMENT_REFERRAL_BY_LAW_XDT_FIELD_NAME_COUNT = NUMBER_4230_INTEGER_ARRAY;
+static int* INPATIENT_TREATMENT_REFERRAL_BY_LAW_XDT_FIELD_NAME_COUNT = NUMBER_35_INTEGER_ARRAY;
 
 /** The inpatient treatment from to field name. */
-static char INPATIENT_TREATMENT_FROM_TO_XDT_FIELD_NAME_ARRAY[] = {'inpatient_treatment_from_to'};
+static char INPATIENT_TREATMENT_FROM_TO_XDT_FIELD_NAME_ARRAY[] = {'i', 'n', 'p', 'a', 't', 'i', 'e', 'n', 't', '_', 't', 'r', 'e', 'a', 't', 'm', 'e', 'n', 't', '_', 'f', 'r', 'o', 'm', '_', 't', 'o'};
 static char* INPATIENT_TREATMENT_FROM_TO_XDT_FIELD_NAME = INPATIENT_TREATMENT_FROM_TO_XDT_FIELD_NAME_ARRAY;
-static int* INPATIENT_TREATMENT_FROM_TO_XDT_FIELD_NAME_COUNT = NUMBER_4233_INTEGER_ARRAY;
+static int* INPATIENT_TREATMENT_FROM_TO_XDT_FIELD_NAME_COUNT = NUMBER_27_INTEGER_ARRAY;
 
 /** The inpatient treatment class field name. */
-static char INPATIENT_TREATMENT_CLASS_XDT_FIELD_NAME_ARRAY[] = {'inpatient_treatment_class'};
+static char INPATIENT_TREATMENT_CLASS_XDT_FIELD_NAME_ARRAY[] = {'i', 'n', 'p', 'a', 't', 'i', 'e', 'n', 't', '_', 't', 'r', 'e', 'a', 't', 'm', 'e', 'n', 't', '_', 'c', 'l', 'a', 's', 's'};
 static char* INPATIENT_TREATMENT_CLASS_XDT_FIELD_NAME = INPATIENT_TREATMENT_CLASS_XDT_FIELD_NAME_ARRAY;
-static int* INPATIENT_TREATMENT_CLASS_XDT_FIELD_NAME_COUNT = NUMBER_4236_INTEGER_ARRAY;
+static int* INPATIENT_TREATMENT_CLASS_XDT_FIELD_NAME_COUNT = NUMBER_25_INTEGER_ARRAY;
 
 /** The inpatient hospital name field name. */
-static char INPATIENT_HOSPITAL_NAME_XDT_FIELD_NAME_ARRAY[] = {'inpatient_hospital_name'};
+static char INPATIENT_HOSPITAL_NAME_XDT_FIELD_NAME_ARRAY[] = {'i', 'n', 'p', 'a', 't', 'i', 'e', 'n', 't', '_', 'h', 'o', 's', 'p', 'i', 't', 'a', 'l', '_', 'n', 'a', 'm', 'e'};
 static char* INPATIENT_HOSPITAL_NAME_XDT_FIELD_NAME = INPATIENT_HOSPITAL_NAME_XDT_FIELD_NAME_ARRAY;
-static int* INPATIENT_HOSPITAL_NAME_XDT_FIELD_NAME_COUNT = NUMBER_4237_INTEGER_ARRAY;
+static int* INPATIENT_HOSPITAL_NAME_XDT_FIELD_NAME_COUNT = NUMBER_23_INTEGER_ARRAY;
 
 /** The inpatient hospital stay field name. */
-static char INPATIENT_HOSPITAL_STAY_XDT_FIELD_NAME_ARRAY[] = {'inpatient_hospital_stay'};
+static char INPATIENT_HOSPITAL_STAY_XDT_FIELD_NAME_ARRAY[] = {'i', 'n', 'p', 'a', 't', 'i', 'e', 'n', 't', '_', 'h', 'o', 's', 'p', 'i', 't', 'a', 'l', '_', 's', 't', 'a', 'y'};
 static char* INPATIENT_HOSPITAL_STAY_XDT_FIELD_NAME = INPATIENT_HOSPITAL_STAY_XDT_FIELD_NAME_ARRAY;
-static int* INPATIENT_HOSPITAL_STAY_XDT_FIELD_NAME_COUNT = NUMBER_4238_INTEGER_ARRAY;
+static int* INPATIENT_HOSPITAL_STAY_XDT_FIELD_NAME_COUNT = NUMBER_23_INTEGER_ARRAY;
 
 /** The invoice sub category field name. */
-static char INVOICE_SUB_CATEGORY_XDT_FIELD_NAME_ARRAY[] = {'invoice_sub_category'};
+static char INVOICE_SUB_CATEGORY_XDT_FIELD_NAME_ARRAY[] = {'i', 'n', 'v', 'o', 'i', 'c', 'e', '_', 's', 'u', 'b', '_', 'c', 'a', 't', 'e', 'g', 'o', 'r', 'y'};
 static char* INVOICE_SUB_CATEGORY_XDT_FIELD_NAME = INVOICE_SUB_CATEGORY_XDT_FIELD_NAME_ARRAY;
-static int* INVOICE_SUB_CATEGORY_XDT_FIELD_NAME_COUNT = NUMBER_4239_INTEGER_ARRAY;
+static int* INVOICE_SUB_CATEGORY_XDT_FIELD_NAME_COUNT = NUMBER_20_INTEGER_ARRAY;
 
 /** The emergency subsequent treatment physician name field name. */
-static char EMERGENCY_SUBSEQUENT_TREATMENT_PHYSICIAN_NAME_XDT_FIELD_NAME_ARRAY[] = {'emergency_subsequent_treatment_physician_name'};
+static char EMERGENCY_SUBSEQUENT_TREATMENT_PHYSICIAN_NAME_XDT_FIELD_NAME_ARRAY[] = {'e', 'm', 'e', 'r', 'g', 'e', 'n', 'c', 'y', '_', 's', 'u', 'b', 's', 'e', 'q', 'u', 'e', 'n', 't', '_', 't', 'r', 'e', 'a', 't', 'm', 'e', 'n', 't', '_', 'p', 'h', 'y', 's', 'i', 'c', 'i', 'a', 'n', '_', 'n', 'a', 'm', 'e'};
 static char* EMERGENCY_SUBSEQUENT_TREATMENT_PHYSICIAN_NAME_XDT_FIELD_NAME = EMERGENCY_SUBSEQUENT_TREATMENT_PHYSICIAN_NAME_XDT_FIELD_NAME_ARRAY;
-static int* EMERGENCY_SUBSEQUENT_TREATMENT_PHYSICIAN_NAME_XDT_FIELD_NAME_COUNT = NUMBER_4243_INTEGER_ARRAY;
+static int* EMERGENCY_SUBSEQUENT_TREATMENT_PHYSICIAN_NAME_XDT_FIELD_NAME_COUNT = NUMBER_45_INTEGER_ARRAY;
 
 /** The emergency findings field name. */
-static char EMERGENCY_FINDINGS_XDT_FIELD_NAME_ARRAY[] = {'emergency_findings'};
+static char EMERGENCY_FINDINGS_XDT_FIELD_NAME_ARRAY[] = {'e', 'm', 'e', 'r', 'g', 'e', 'n', 'c', 'y', '_', 'f', 'i', 'n', 'd', 'i', 'n', 'g', 's'};
 static char* EMERGENCY_FINDINGS_XDT_FIELD_NAME = EMERGENCY_FINDINGS_XDT_FIELD_NAME_ARRAY;
-static int* EMERGENCY_FINDINGS_XDT_FIELD_NAME_COUNT = NUMBER_4267_INTEGER_ARRAY;
+static int* EMERGENCY_FINDINGS_XDT_FIELD_NAME_COUNT = NUMBER_18_INTEGER_ARRAY;
 
 /** The emergency symptoms field name. */
-static char EMERGENCY_SYMPTOMS_XDT_FIELD_NAME_ARRAY[] = {'emergency_symptoms'};
+static char EMERGENCY_SYMPTOMS_XDT_FIELD_NAME_ARRAY[] = {'e', 'm', 'e', 'r', 'g', 'e', 'n', 'c', 'y', '_', 's', 'y', 'm', 'p', 't', 'o', 'm', 's'};
 static char* EMERGENCY_SYMPTOMS_XDT_FIELD_NAME = EMERGENCY_SYMPTOMS_XDT_FIELD_NAME_ARRAY;
-static int* EMERGENCY_SYMPTOMS_XDT_FIELD_NAME_COUNT = NUMBER_4268_INTEGER_ARRAY;
+static int* EMERGENCY_SYMPTOMS_XDT_FIELD_NAME_COUNT = NUMBER_18_INTEGER_ARRAY;
 
 /** The accident date field name. */
-static char ACCIDENT_DATE_XDT_FIELD_NAME_ARRAY[] = {'accident_date'};
+static char ACCIDENT_DATE_XDT_FIELD_NAME_ARRAY[] = {'a', 'c', 'c', 'i', 'd', 'e', 'n', 't', '_', 'd', 'a', 't', 'e'};
 static char* ACCIDENT_DATE_XDT_FIELD_NAME = ACCIDENT_DATE_XDT_FIELD_NAME_ARRAY;
-static int* ACCIDENT_DATE_XDT_FIELD_NAME_COUNT = NUMBER_4500_INTEGER_ARRAY;
+static int* ACCIDENT_DATE_XDT_FIELD_NAME_COUNT = NUMBER_13_INTEGER_ARRAY;
 
 /** The accident time field name. */
-static char ACCIDENT_TIME_XDT_FIELD_NAME_ARRAY[] = {'accident_time'};
+static char ACCIDENT_TIME_XDT_FIELD_NAME_ARRAY[] = {'a', 'c', 'c', 'i', 'd', 'e', 'n', 't', '_', 't', 'i', 'm', 'e'};
 static char* ACCIDENT_TIME_XDT_FIELD_NAME = ACCIDENT_TIME_XDT_FIELD_NAME_ARRAY;
-static int* ACCIDENT_TIME_XDT_FIELD_NAME_COUNT = NUMBER_4501_INTEGER_ARRAY;
+static int* ACCIDENT_TIME_XDT_FIELD_NAME_COUNT = NUMBER_13_INTEGER_ARRAY;
 
 /** The accident patient admission in practice date field name. */
-static char ACCIDENT_PATIENT_ADMISSION_IN_PRACTICE_DATE_XDT_FIELD_NAME_ARRAY[] = {'accident_patient_admission_in_practice_date'};
+static char ACCIDENT_PATIENT_ADMISSION_IN_PRACTICE_DATE_XDT_FIELD_NAME_ARRAY[] = {'a', 'c', 'c', 'i', 'd', 'e', 'n', 't', '_', 'p', 'a', 't', 'i', 'e', 'n', 't', '_', 'a', 'd', 'm', 'i', 's', 's', 'i', 'o', 'n', '_', 'i', 'n', '_', 'p', 'r', 'a', 'c', 't', 'i', 'c', 'e', '_', 'd', 'a', 't', 'e'};
 static char* ACCIDENT_PATIENT_ADMISSION_IN_PRACTICE_DATE_XDT_FIELD_NAME = ACCIDENT_PATIENT_ADMISSION_IN_PRACTICE_DATE_XDT_FIELD_NAME_ARRAY;
-static int* ACCIDENT_PATIENT_ADMISSION_IN_PRACTICE_DATE_XDT_FIELD_NAME_COUNT = NUMBER_4502_INTEGER_ARRAY;
+static int* ACCIDENT_PATIENT_ADMISSION_IN_PRACTICE_DATE_XDT_FIELD_NAME_COUNT = NUMBER_43_INTEGER_ARRAY;
 
 /** The accident patient admission in practice time field name. */
-static char ACCIDENT_PATIENT_ADMISSION_IN_PRACTICE_TIME_XDT_FIELD_NAME_ARRAY[] = {'accident_patient_admission_in_practice_time'};
+static char ACCIDENT_PATIENT_ADMISSION_IN_PRACTICE_TIME_XDT_FIELD_NAME_ARRAY[] = {'a', 'c', 'c', 'i', 'd', 'e', 'n', 't', '_', 'p', 'a', 't', 'i', 'e', 'n', 't', '_', 'a', 'd', 'm', 'i', 's', 's', 'i', 'o', 'n', '_', 'i', 'n', '_', 'p', 'r', 'a', 'c', 't', 'i', 'c', 'e', '_', 't', 'i', 'm', 'e'};
 static char* ACCIDENT_PATIENT_ADMISSION_IN_PRACTICE_TIME_XDT_FIELD_NAME = ACCIDENT_PATIENT_ADMISSION_IN_PRACTICE_TIME_XDT_FIELD_NAME_ARRAY;
-static int* ACCIDENT_PATIENT_ADMISSION_IN_PRACTICE_TIME_XDT_FIELD_NAME_COUNT = NUMBER_4503_INTEGER_ARRAY;
+static int* ACCIDENT_PATIENT_ADMISSION_IN_PRACTICE_TIME_XDT_FIELD_NAME_COUNT = NUMBER_43_INTEGER_ARRAY;
 
 /** The accident patient labour time begin field name. */
-static char ACCIDENT_PATIENT_LABOUR_TIME_BEGIN_XDT_FIELD_NAME_ARRAY[] = {'accident_patient_labour_time_begin'};
+static char ACCIDENT_PATIENT_LABOUR_TIME_BEGIN_XDT_FIELD_NAME_ARRAY[] = {'a', 'c', 'c', 'i', 'd', 'e', 'n', 't', '_', 'p', 'a', 't', 'i', 'e', 'n', 't', '_', 'l', 'a', 'b', 'o', 'u', 'r', '_', 't', 'i', 'm', 'e', '_', 'b', 'e', 'g', 'i', 'n'};
 static char* ACCIDENT_PATIENT_LABOUR_TIME_BEGIN_XDT_FIELD_NAME = ACCIDENT_PATIENT_LABOUR_TIME_BEGIN_XDT_FIELD_NAME_ARRAY;
-static int* ACCIDENT_PATIENT_LABOUR_TIME_BEGIN_XDT_FIELD_NAME_COUNT = NUMBER_4504_INTEGER_ARRAY;
+static int* ACCIDENT_PATIENT_LABOUR_TIME_BEGIN_XDT_FIELD_NAME_COUNT = NUMBER_34_INTEGER_ARRAY;
 
 /** The accident location field name. */
-static char ACCIDENT_LOCATION_XDT_FIELD_NAME_ARRAY[] = {'accident_location'};
+static char ACCIDENT_LOCATION_XDT_FIELD_NAME_ARRAY[] = {'a', 'c', 'c', 'i', 'd', 'e', 'n', 't', '_', 'l', 'o', 'c', 'a', 't', 'i', 'o', 'n'};
 static char* ACCIDENT_LOCATION_XDT_FIELD_NAME = ACCIDENT_LOCATION_XDT_FIELD_NAME_ARRAY;
-static int* ACCIDENT_LOCATION_XDT_FIELD_NAME_COUNT = NUMBER_4505_INTEGER_ARRAY;
+static int* ACCIDENT_LOCATION_XDT_FIELD_NAME_COUNT = NUMBER_17_INTEGER_ARRAY;
 
 /** The accident patient employment as field name. */
-static char ACCIDENT_PATIENT_EMPLOYMENT_AS_XDT_FIELD_NAME_ARRAY[] = {'accident_patient_employment_as'};
+static char ACCIDENT_PATIENT_EMPLOYMENT_AS_XDT_FIELD_NAME_ARRAY[] = {'a', 'c', 'c', 'i', 'd', 'e', 'n', 't', '_', 'p', 'a', 't', 'i', 'e', 'n', 't', '_', 'e', 'm', 'p', 'l', 'o', 'y', 'm', 'e', 'n', 't', '_', 'a', 's'};
 static char* ACCIDENT_PATIENT_EMPLOYMENT_AS_XDT_FIELD_NAME = ACCIDENT_PATIENT_EMPLOYMENT_AS_XDT_FIELD_NAME_ARRAY;
-static int* ACCIDENT_PATIENT_EMPLOYMENT_AS_XDT_FIELD_NAME_COUNT = NUMBER_4506_INTEGER_ARRAY;
+static int* ACCIDENT_PATIENT_EMPLOYMENT_AS_XDT_FIELD_NAME_COUNT = NUMBER_30_INTEGER_ARRAY;
 
 /** The accident patient employment since field name. */
-static char ACCIDENT_PATIENT_EMPLOYMENT_SINCE_XDT_FIELD_NAME_ARRAY[] = {'accident_patient_employment_since'};
+static char ACCIDENT_PATIENT_EMPLOYMENT_SINCE_XDT_FIELD_NAME_ARRAY[] = {'a', 'c', 'c', 'i', 'd', 'e', 'n', 't', '_', 'p', 'a', 't', 'i', 'e', 'n', 't', '_', 'e', 'm', 'p', 'l', 'o', 'y', 'm', 'e', 'n', 't', '_', 's', 'i', 'n', 'c', 'e'};
 static char* ACCIDENT_PATIENT_EMPLOYMENT_SINCE_XDT_FIELD_NAME = ACCIDENT_PATIENT_EMPLOYMENT_SINCE_XDT_FIELD_NAME_ARRAY;
-static int* ACCIDENT_PATIENT_EMPLOYMENT_SINCE_XDT_FIELD_NAME_COUNT = NUMBER_4507_INTEGER_ARRAY;
+static int* ACCIDENT_PATIENT_EMPLOYMENT_SINCE_XDT_FIELD_NAME_COUNT = NUMBER_33_INTEGER_ARRAY;
 
 /** The accident patient nationality field name. */
-static char ACCIDENT_PATIENT_NATIONALITY_XDT_FIELD_NAME_ARRAY[] = {'accident_patient_nationality'};
+static char ACCIDENT_PATIENT_NATIONALITY_XDT_FIELD_NAME_ARRAY[] = {'a', 'c', 'c', 'i', 'd', 'e', 'n', 't', '_', 'p', 'a', 't', 'i', 'e', 'n', 't', '_', 'n', 'a', 't', 'i', 'o', 'n', 'a', 'l', 'i', 't', 'y'};
 static char* ACCIDENT_PATIENT_NATIONALITY_XDT_FIELD_NAME = ACCIDENT_PATIENT_NATIONALITY_XDT_FIELD_NAME_ARRAY;
-static int* ACCIDENT_PATIENT_NATIONALITY_XDT_FIELD_NAME_COUNT = NUMBER_4508_INTEGER_ARRAY;
+static int* ACCIDENT_PATIENT_NATIONALITY_XDT_FIELD_NAME_COUNT = NUMBER_28_INTEGER_ARRAY;
 
 /** The accident company field name. */
-static char ACCIDENT_COMPANY_XDT_FIELD_NAME_ARRAY[] = {'accident_company'};
+static char ACCIDENT_COMPANY_XDT_FIELD_NAME_ARRAY[] = {'a', 'c', 'c', 'i', 'd', 'e', 'n', 't', '_', 'c', 'o', 'm', 'p', 'a', 'n', 'y'};
 static char* ACCIDENT_COMPANY_XDT_FIELD_NAME = ACCIDENT_COMPANY_XDT_FIELD_NAME_ARRAY;
-static int* ACCIDENT_COMPANY_XDT_FIELD_NAME_COUNT = NUMBER_4509_INTEGER_ARRAY;
+static int* ACCIDENT_COMPANY_XDT_FIELD_NAME_COUNT = NUMBER_16_INTEGER_ARRAY;
 
 /** The accident course of events field name. */
-static char ACCIDENT_COURSE_OF_EVENTS_XDT_FIELD_NAME_ARRAY[] = {'accident_course_of_events'};
+static char ACCIDENT_COURSE_OF_EVENTS_XDT_FIELD_NAME_ARRAY[] = {'a', 'c', 'c', 'i', 'd', 'e', 'n', 't', '_', 'c', 'o', 'u', 'r', 's', 'e', '_', 'o', 'f', '_', 'e', 'v', 'e', 'n', 't', 's'};
 static char* ACCIDENT_COURSE_OF_EVENTS_XDT_FIELD_NAME = ACCIDENT_COURSE_OF_EVENTS_XDT_FIELD_NAME_ARRAY;
-static int* ACCIDENT_COURSE_OF_EVENTS_XDT_FIELD_NAME_COUNT = NUMBER_4510_INTEGER_ARRAY;
+static int* ACCIDENT_COURSE_OF_EVENTS_XDT_FIELD_NAME_COUNT = NUMBER_25_INTEGER_ARRAY;
 
 /** The accident patient behaviour afterwards field name. */
-static char ACCIDENT_PATIENT_BEHAVIOUR_AFTERWARDS_XDT_FIELD_NAME_ARRAY[] = {'accident_patient_behaviour_afterwards'};
+static char ACCIDENT_PATIENT_BEHAVIOUR_AFTERWARDS_XDT_FIELD_NAME_ARRAY[] = {'a', 'c', 'c', 'i', 'd', 'e', 'n', 't', '_', 'p', 'a', 't', 'i', 'e', 'n', 't', '_', 'b', 'e', 'h', 'a', 'v', 'i', 'o', 'u', 'r', '_', 'a', 'f', 't', 'e', 'r', 'w', 'a', 'r', 'd', 's'};
 static char* ACCIDENT_PATIENT_BEHAVIOUR_AFTERWARDS_XDT_FIELD_NAME = ACCIDENT_PATIENT_BEHAVIOUR_AFTERWARDS_XDT_FIELD_NAME_ARRAY;
-static int* ACCIDENT_PATIENT_BEHAVIOUR_AFTERWARDS_XDT_FIELD_NAME_COUNT = NUMBER_4512_INTEGER_ARRAY;
+static int* ACCIDENT_PATIENT_BEHAVIOUR_AFTERWARDS_XDT_FIELD_NAME_COUNT = NUMBER_37_INTEGER_ARRAY;
 
 /** The accident first time treatment date field name. */
-static char ACCIDENT_FIRST_TIME_TREATMENT_DATE_XDT_FIELD_NAME_ARRAY[] = {'accident_first_time_treatment_date'};
+static char ACCIDENT_FIRST_TIME_TREATMENT_DATE_XDT_FIELD_NAME_ARRAY[] = {'a', 'c', 'c', 'i', 'd', 'e', 'n', 't', '_', 'f', 'i', 'r', 's', 't', '_', 't', 'i', 'm', 'e', '_', 't', 'r', 'e', 'a', 't', 'm', 'e', 'n', 't', '_', 'd', 'a', 't', 'e'};
 static char* ACCIDENT_FIRST_TIME_TREATMENT_DATE_XDT_FIELD_NAME = ACCIDENT_FIRST_TIME_TREATMENT_DATE_XDT_FIELD_NAME_ARRAY;
-static int* ACCIDENT_FIRST_TIME_TREATMENT_DATE_XDT_FIELD_NAME_COUNT = NUMBER_4513_INTEGER_ARRAY;
+static int* ACCIDENT_FIRST_TIME_TREATMENT_DATE_XDT_FIELD_NAME_COUNT = NUMBER_34_INTEGER_ARRAY;
 
 /** The accident treatment by physician name field name. */
-static char ACCIDENT_TREATMENT_BY_PHYSICIAN_NAME_XDT_FIELD_NAME_ARRAY[] = {'accident_treatment_by_physician_name'};
+static char ACCIDENT_TREATMENT_BY_PHYSICIAN_NAME_XDT_FIELD_NAME_ARRAY[] = {'a', 'c', 'c', 'i', 'd', 'e', 'n', 't', '_', 't', 'r', 'e', 'a', 't', 'm', 'e', 'n', 't', '_', 'b', 'y', '_', 'p', 'h', 'y', 's', 'i', 'c', 'i', 'a', 'n', '_', 'n', 'a', 'm', 'e'};
 static char* ACCIDENT_TREATMENT_BY_PHYSICIAN_NAME_XDT_FIELD_NAME = ACCIDENT_TREATMENT_BY_PHYSICIAN_NAME_XDT_FIELD_NAME_ARRAY;
-static int* ACCIDENT_TREATMENT_BY_PHYSICIAN_NAME_XDT_FIELD_NAME_COUNT = NUMBER_4514_INTEGER_ARRAY;
+static int* ACCIDENT_TREATMENT_BY_PHYSICIAN_NAME_XDT_FIELD_NAME_COUNT = NUMBER_36_INTEGER_ARRAY;
 
 /** The accident kind of first treatment field name. */
-static char ACCIDENT_KIND_OF_FIRST_TREATMENT_XDT_FIELD_NAME_ARRAY[] = {'accident_kind_of_first_treatment'};
+static char ACCIDENT_KIND_OF_FIRST_TREATMENT_XDT_FIELD_NAME_ARRAY[] = {'a', 'c', 'c', 'i', 'd', 'e', 'n', 't', '_', 'k', 'i', 'n', 'd', '_', 'o', 'f', '_', 'f', 'i', 'r', 's', 't', '_', 't', 'r', 'e', 'a', 't', 'm', 'e', 'n', 't'};
 static char* ACCIDENT_KIND_OF_FIRST_TREATMENT_XDT_FIELD_NAME = ACCIDENT_KIND_OF_FIRST_TREATMENT_XDT_FIELD_NAME_ARRAY;
-static int* ACCIDENT_KIND_OF_FIRST_TREATMENT_XDT_FIELD_NAME_COUNT = NUMBER_4515_INTEGER_ARRAY;
+static int* ACCIDENT_KIND_OF_FIRST_TREATMENT_XDT_FIELD_NAME_COUNT = NUMBER_32_INTEGER_ARRAY;
 
 /** The accident alcohol influence field name. */
-static char ACCIDENT_ALCOHOL_INFLUENCE_XDT_FIELD_NAME_ARRAY[] = {'accident_alcohol_influence'};
+static char ACCIDENT_ALCOHOL_INFLUENCE_XDT_FIELD_NAME_ARRAY[] = {'a', 'c', 'c', 'i', 'd', 'e', 'n', 't', '_', 'a', 'l', 'c', 'o', 'h', 'o', 'l', '_', 'i', 'n', 'f', 'l', 'u', 'e', 'n', 'c', 'e'};
 static char* ACCIDENT_ALCOHOL_INFLUENCE_XDT_FIELD_NAME = ACCIDENT_ALCOHOL_INFLUENCE_XDT_FIELD_NAME_ARRAY;
-static int* ACCIDENT_ALCOHOL_INFLUENCE_XDT_FIELD_NAME_COUNT = NUMBER_4520_INTEGER_ARRAY;
+static int* ACCIDENT_ALCOHOL_INFLUENCE_XDT_FIELD_NAME_COUNT = NUMBER_26_INTEGER_ARRAY;
 
 /** The accident signs for alcohol influence field name. */
-static char ACCIDENT_SIGNS_FOR_ALCOHOL_INFLUENCE_XDT_FIELD_NAME_ARRAY[] = {'accident_signs_for_alcohol_influence'};
+static char ACCIDENT_SIGNS_FOR_ALCOHOL_INFLUENCE_XDT_FIELD_NAME_ARRAY[] = {'a', 'c', 'c', 'i', 'd', 'e', 'n', 't', '_', 's', 'i', 'g', 'n', 's', '_', 'f', 'o', 'r', '_', 'a', 'l', 'c', 'o', 'h', 'o', 'l', '_', 'i', 'n', 'f', 'l', 'u', 'e', 'n', 'c', 'e'};
 static char* ACCIDENT_SIGNS_FOR_ALCOHOL_INFLUENCE_XDT_FIELD_NAME = ACCIDENT_SIGNS_FOR_ALCOHOL_INFLUENCE_XDT_FIELD_NAME_ARRAY;
-static int* ACCIDENT_SIGNS_FOR_ALCOHOL_INFLUENCE_XDT_FIELD_NAME_COUNT = NUMBER_4521_INTEGER_ARRAY;
+static int* ACCIDENT_SIGNS_FOR_ALCOHOL_INFLUENCE_XDT_FIELD_NAME_COUNT = NUMBER_36_INTEGER_ARRAY;
 
 /** The accident blood withdrawal field name. */
-static char ACCIDENT_BLOOD_WITHDRAWAL_XDT_FIELD_NAME_ARRAY[] = {'accident_blood_withdrawal'};
+static char ACCIDENT_BLOOD_WITHDRAWAL_XDT_FIELD_NAME_ARRAY[] = {'a', 'c', 'c', 'i', 'd', 'e', 'n', 't', '_', 'b', 'l', 'o', 'o', 'd', '_', 'w', 'i', 't', 'h', 'd', 'r', 'a', 'w', 'a', 'l'};
 static char* ACCIDENT_BLOOD_WITHDRAWAL_XDT_FIELD_NAME = ACCIDENT_BLOOD_WITHDRAWAL_XDT_FIELD_NAME_ARRAY;
-static int* ACCIDENT_BLOOD_WITHDRAWAL_XDT_FIELD_NAME_COUNT = NUMBER_4522_INTEGER_ARRAY;
+static int* ACCIDENT_BLOOD_WITHDRAWAL_XDT_FIELD_NAME_COUNT = NUMBER_25_INTEGER_ARRAY;
 
 /** The accident findings field name. */
-static char ACCIDENT_FINDINGS_XDT_FIELD_NAME_ARRAY[] = {'accident_findings'};
+static char ACCIDENT_FINDINGS_XDT_FIELD_NAME_ARRAY[] = {'a', 'c', 'c', 'i', 'd', 'e', 'n', 't', '_', 'f', 'i', 'n', 'd', 'i', 'n', 'g', 's'};
 static char* ACCIDENT_FINDINGS_XDT_FIELD_NAME = ACCIDENT_FINDINGS_XDT_FIELD_NAME_ARRAY;
-static int* ACCIDENT_FINDINGS_XDT_FIELD_NAME_COUNT = NUMBER_4530_INTEGER_ARRAY;
+static int* ACCIDENT_FINDINGS_XDT_FIELD_NAME_COUNT = NUMBER_17_INTEGER_ARRAY;
 
 /** The accident x-ray result field name. */
-static char ACCIDENT_X_RAY_RESULT_XDT_FIELD_NAME_ARRAY[] = {'accident_x-ray_result'};
+static char ACCIDENT_X_RAY_RESULT_XDT_FIELD_NAME_ARRAY[] = {'a', 'c', 'c', 'i', 'd', 'e', 'n', 't', '_', 'x', '-', 'r', 'a', 'y', '_', 'r', 'e', 's', 'u', 'l', 't'};
 static char* ACCIDENT_X_RAY_RESULT_XDT_FIELD_NAME = ACCIDENT_X_RAY_RESULT_XDT_FIELD_NAME_ARRAY;
-static int* ACCIDENT_X_RAY_RESULT_XDT_FIELD_NAME_COUNT = NUMBER_4540_INTEGER_ARRAY;
+static int* ACCIDENT_X_RAY_RESULT_XDT_FIELD_NAME_COUNT = NUMBER_21_INTEGER_ARRAY;
 
 /** The accident kind of first treatment field name. */
-static char ACCIDENT_KIND_OF_FIRST_TREATMENT_XDT_FIELD_NAME_ARRAY[] = {'accident_kind_of_first_treatment'};
+static char ACCIDENT_KIND_OF_FIRST_TREATMENT_XDT_FIELD_NAME_ARRAY[] = {'a', 'c', 'c', 'i', 'd', 'e', 'n', 't', '_', 'k', 'i', 'n', 'd', '_', 'o', 'f', '_', 'f', 'i', 'r', 's', 't', '_', 't', 'r', 'e', 'a', 't', 'm', 'e', 'n', 't'};
 static char* ACCIDENT_KIND_OF_FIRST_TREATMENT_XDT_FIELD_NAME = ACCIDENT_KIND_OF_FIRST_TREATMENT_XDT_FIELD_NAME_ARRAY;
-static int* ACCIDENT_KIND_OF_FIRST_TREATMENT_XDT_FIELD_NAME_COUNT = NUMBER_4550_INTEGER_ARRAY;
+static int* ACCIDENT_KIND_OF_FIRST_TREATMENT_XDT_FIELD_NAME_COUNT = NUMBER_32_INTEGER_ARRAY;
 
 /** The accident abnormal changes independent from accident field name. */
-static char ACCIDENT_ABNORMAL_CHANGES_INDEPENDENT_FROM_ACCIDENT_XDT_FIELD_NAME_ARRAY[] = {'accident_abnormal_changes_independent_from_accident'};
+static char ACCIDENT_ABNORMAL_CHANGES_INDEPENDENT_FROM_ACCIDENT_XDT_FIELD_NAME_ARRAY[] = {'a', 'c', 'c', 'i', 'd', 'e', 'n', 't', '_', 'a', 'b', 'n', 'o', 'r', 'm', 'a', 'l', '_', 'c', 'h', 'a', 'n', 'g', 'e', 's', '_', 'i', 'n', 'd', 'e', 'p', 'e', 'n', 'd', 'e', 'n', 't', '_', 'f', 'r', 'o', 'm', '_', 'a', 'c', 'c', 'i', 'd', 'e', 'n', 't'};
 static char* ACCIDENT_ABNORMAL_CHANGES_INDEPENDENT_FROM_ACCIDENT_XDT_FIELD_NAME = ACCIDENT_ABNORMAL_CHANGES_INDEPENDENT_FROM_ACCIDENT_XDT_FIELD_NAME_ARRAY;
-static int* ACCIDENT_ABNORMAL_CHANGES_INDEPENDENT_FROM_ACCIDENT_XDT_FIELD_NAME_COUNT = NUMBER_4551_INTEGER_ARRAY;
+static int* ACCIDENT_ABNORMAL_CHANGES_INDEPENDENT_FROM_ACCIDENT_XDT_FIELD_NAME_COUNT = NUMBER_51_INTEGER_ARRAY;
 
 /** The accident concerns against statements field name. */
-static char ACCIDENT_CONCERNS_AGAINST_STATEMENTS_XDT_FIELD_NAME_ARRAY[] = {'accident_concerns_against_statements'};
+static char ACCIDENT_CONCERNS_AGAINST_STATEMENTS_XDT_FIELD_NAME_ARRAY[] = {'a', 'c', 'c', 'i', 'd', 'e', 'n', 't', '_', 'c', 'o', 'n', 'c', 'e', 'r', 'n', 's', '_', 'a', 'g', 'a', 'i', 'n', 's', 't', '_', 's', 't', 'a', 't', 'e', 'm', 'e', 'n', 't', 's'};
 static char* ACCIDENT_CONCERNS_AGAINST_STATEMENTS_XDT_FIELD_NAME = ACCIDENT_CONCERNS_AGAINST_STATEMENTS_XDT_FIELD_NAME_ARRAY;
-static int* ACCIDENT_CONCERNS_AGAINST_STATEMENTS_XDT_FIELD_NAME_COUNT = NUMBER_4552_INTEGER_ARRAY;
+static int* ACCIDENT_CONCERNS_AGAINST_STATEMENTS_XDT_FIELD_NAME_COUNT = NUMBER_36_INTEGER_ARRAY;
 
 /** The accident kind of concerns against statements field name. */
-static char ACCIDENT_KIND_OF_CONCERNS_AGAINST_STATEMENTS_XDT_FIELD_NAME_ARRAY[] = {'accident_kind_of_concerns_against_statements'};
+static char ACCIDENT_KIND_OF_CONCERNS_AGAINST_STATEMENTS_XDT_FIELD_NAME_ARRAY[] = {'a', 'c', 'c', 'i', 'd', 'e', 'n', 't', '_', 'k', 'i', 'n', 'd', '_', 'o', 'f', '_', 'c', 'o', 'n', 'c', 'e', 'r', 'n', 's', '_', 'a', 'g', 'a', 'i', 'n', 's', 't', '_', 's', 't', 'a', 't', 'e', 'm', 'e', 'n', 't', 's'};
 static char* ACCIDENT_KIND_OF_CONCERNS_AGAINST_STATEMENTS_XDT_FIELD_NAME = ACCIDENT_KIND_OF_CONCERNS_AGAINST_STATEMENTS_XDT_FIELD_NAME_ARRAY;
-static int* ACCIDENT_KIND_OF_CONCERNS_AGAINST_STATEMENTS_XDT_FIELD_NAME_COUNT = NUMBER_4553_INTEGER_ARRAY;
+static int* ACCIDENT_KIND_OF_CONCERNS_AGAINST_STATEMENTS_XDT_FIELD_NAME_COUNT = NUMBER_44_INTEGER_ARRAY;
 
 /** The accident concerns against classification as accident at work field name. */
-static char ACCIDENT_CONCERNS_AGAINST_CLASSIFICATION_AS_ACCIDENT_AT_WORK_XDT_FIELD_NAME_ARRAY[] = {'accident_concerns_against_classification_as_accident_at_work'};
+static char ACCIDENT_CONCERNS_AGAINST_CLASSIFICATION_AS_ACCIDENT_AT_WORK_XDT_FIELD_NAME_ARRAY[] = {'a', 'c', 'c', 'i', 'd', 'e', 'n', 't', '_', 'c', 'o', 'n', 'c', 'e', 'r', 'n', 's', '_', 'a', 'g', 'a', 'i', 'n', 's', 't', '_', 'c', 'l', 'a', 's', 's', 'i', 'f', 'i', 'c', 'a', 't', 'i', 'o', 'n', '_', 'a', 's', '_', 'a', 'c', 'c', 'i', 'd', 'e', 'n', 't', '_', 'a', 't', '_', 'w', 'o', 'r', 'k'};
 static char* ACCIDENT_CONCERNS_AGAINST_CLASSIFICATION_AS_ACCIDENT_AT_WORK_XDT_FIELD_NAME = ACCIDENT_CONCERNS_AGAINST_CLASSIFICATION_AS_ACCIDENT_AT_WORK_XDT_FIELD_NAME_ARRAY;
-static int* ACCIDENT_CONCERNS_AGAINST_CLASSIFICATION_AS_ACCIDENT_AT_WORK_XDT_FIELD_NAME_COUNT = NUMBER_4554_INTEGER_ARRAY;
+static int* ACCIDENT_CONCERNS_AGAINST_CLASSIFICATION_AS_ACCIDENT_AT_WORK_XDT_FIELD_NAME_COUNT = NUMBER_60_INTEGER_ARRAY;
 
 /** The accident kind of concerns against classification as accident at work field name. */
-static char ACCIDENT_KIND_OF_CONCERNS_AGAINST_CLASSIFICATION_AS_ACCIDENT_AT_WORK_XDT_FIELD_NAME_ARRAY[] = {'accident_kind_of_concerns_against_classification_as_accident_at_work'};
+static char ACCIDENT_KIND_OF_CONCERNS_AGAINST_CLASSIFICATION_AS_ACCIDENT_AT_WORK_XDT_FIELD_NAME_ARRAY[] = {'a', 'c', 'c', 'i', 'd', 'e', 'n', 't', '_', 'k', 'i', 'n', 'd', '_', 'o', 'f', '_', 'c', 'o', 'n', 'c', 'e', 'r', 'n', 's', '_', 'a', 'g', 'a', 'i', 'n', 's', 't', '_', 'c', 'l', 'a', 's', 's', 'i', 'f', 'i', 'c', 'a', 't', 'i', 'o', 'n', '_', 'a', 's', '_', 'a', 'c', 'c', 'i', 'd', 'e', 'n', 't', '_', 'a', 't', '_', 'w', 'o', 'r', 'k'};
 static char* ACCIDENT_KIND_OF_CONCERNS_AGAINST_CLASSIFICATION_AS_ACCIDENT_AT_WORK_XDT_FIELD_NAME = ACCIDENT_KIND_OF_CONCERNS_AGAINST_CLASSIFICATION_AS_ACCIDENT_AT_WORK_XDT_FIELD_NAME_ARRAY;
-static int* ACCIDENT_KIND_OF_CONCERNS_AGAINST_CLASSIFICATION_AS_ACCIDENT_AT_WORK_XDT_FIELD_NAME_COUNT = NUMBER_4555_INTEGER_ARRAY;
+static int* ACCIDENT_KIND_OF_CONCERNS_AGAINST_CLASSIFICATION_AS_ACCIDENT_AT_WORK_XDT_FIELD_NAME_COUNT = NUMBER_68_INTEGER_ARRAY;
 
 /** The accident able to work field name. */
-static char ACCIDENT_ABLE_TO_WORK_XDT_FIELD_NAME_ARRAY[] = {'accident_able_to_work'};
+static char ACCIDENT_ABLE_TO_WORK_XDT_FIELD_NAME_ARRAY[] = {'a', 'c', 'c', 'i', 'd', 'e', 'n', 't', '_', 'a', 'b', 'l', 'e', '_', 't', 'o', '_', 'w', 'o', 'r', 'k'};
 static char* ACCIDENT_ABLE_TO_WORK_XDT_FIELD_NAME = ACCIDENT_ABLE_TO_WORK_XDT_FIELD_NAME_ARRAY;
-static int* ACCIDENT_ABLE_TO_WORK_XDT_FIELD_NAME_COUNT = NUMBER_4560_INTEGER_ARRAY;
+static int* ACCIDENT_ABLE_TO_WORK_XDT_FIELD_NAME_COUNT = NUMBER_21_INTEGER_ARRAY;
 
 /** The accident able to work from field name. */
-static char ACCIDENT_ABLE_TO_WORK_FROM_XDT_FIELD_NAME_ARRAY[] = {'accident_able_to_work_from'};
+static char ACCIDENT_ABLE_TO_WORK_FROM_XDT_FIELD_NAME_ARRAY[] = {'a', 'c', 'c', 'i', 'd', 'e', 'n', 't', '_', 'a', 'b', 'l', 'e', '_', 't', 'o', '_', 'w', 'o', 'r', 'k', '_', 'f', 'r', 'o', 'm'};
 static char* ACCIDENT_ABLE_TO_WORK_FROM_XDT_FIELD_NAME = ACCIDENT_ABLE_TO_WORK_FROM_XDT_FIELD_NAME_ARRAY;
-static int* ACCIDENT_ABLE_TO_WORK_FROM_XDT_FIELD_NAME_COUNT = NUMBER_4561_INTEGER_ARRAY;
+static int* ACCIDENT_ABLE_TO_WORK_FROM_XDT_FIELD_NAME_COUNT = NUMBER_26_INTEGER_ARRAY;
 
 /** The accident unable to work certificate issuance date field name. */
-static char ACCIDENT_UNABLE_TO_WORK_CERTIFICATE_ISSUANCE_DATE_XDT_FIELD_NAME_ARRAY[] = {'accident_unable_to_work_certificate_issuance_date'};
+static char ACCIDENT_UNABLE_TO_WORK_CERTIFICATE_ISSUANCE_DATE_XDT_FIELD_NAME_ARRAY[] = {'a', 'c', 'c', 'i', 'd', 'e', 'n', 't', '_', 'u', 'n', 'a', 'b', 'l', 'e', '_', 't', 'o', '_', 'w', 'o', 'r', 'k', '_', 'c', 'e', 'r', 't', 'i', 'f', 'i', 'c', 'a', 't', 'e', '_', 'i', 's', 's', 'u', 'a', 'n', 'c', 'e', '_', 'd', 'a', 't', 'e'};
 static char* ACCIDENT_UNABLE_TO_WORK_CERTIFICATE_ISSUANCE_DATE_XDT_FIELD_NAME = ACCIDENT_UNABLE_TO_WORK_CERTIFICATE_ISSUANCE_DATE_XDT_FIELD_NAME_ARRAY;
-static int* ACCIDENT_UNABLE_TO_WORK_CERTIFICATE_ISSUANCE_DATE_XDT_FIELD_NAME_COUNT = NUMBER_4562_INTEGER_ARRAY;
+static int* ACCIDENT_UNABLE_TO_WORK_CERTIFICATE_ISSUANCE_DATE_XDT_FIELD_NAME_COUNT = NUMBER_49_INTEGER_ARRAY;
 
 /** The accident special curative treatment necessary field name. */
-static char ACCIDENT_SPECIAL_CURATIVE_TREATMENT_NECESSARY_XDT_FIELD_NAME_ARRAY[] = {'accident_special_curative_treatment_necessary'};
+static char ACCIDENT_SPECIAL_CURATIVE_TREATMENT_NECESSARY_XDT_FIELD_NAME_ARRAY[] = {'a', 'c', 'c', 'i', 'd', 'e', 'n', 't', '_', 's', 'p', 'e', 'c', 'i', 'a', 'l', '_', 'c', 'u', 'r', 'a', 't', 'i', 'v', 'e', '_', 't', 'r', 'e', 'a', 't', 'm', 'e', 'n', 't', '_', 'n', 'e', 'c', 'e', 's', 's', 'a', 'r', 'y'};
 static char* ACCIDENT_SPECIAL_CURATIVE_TREATMENT_NECESSARY_XDT_FIELD_NAME = ACCIDENT_SPECIAL_CURATIVE_TREATMENT_NECESSARY_XDT_FIELD_NAME_ARRAY;
-static int* ACCIDENT_SPECIAL_CURATIVE_TREATMENT_NECESSARY_XDT_FIELD_NAME_COUNT = NUMBER_4570_INTEGER_ARRAY;
+static int* ACCIDENT_SPECIAL_CURATIVE_TREATMENT_NECESSARY_XDT_FIELD_NAME_COUNT = NUMBER_45_INTEGER_ARRAY;
 
 /** The accident special curative treatment by field name. */
-static char ACCIDENT_SPECIAL_CURATIVE_TREATMENT_BY_XDT_FIELD_NAME_ARRAY[] = {'accident_special_curative_treatment_by'};
+static char ACCIDENT_SPECIAL_CURATIVE_TREATMENT_BY_XDT_FIELD_NAME_ARRAY[] = {'a', 'c', 'c', 'i', 'd', 'e', 'n', 't', '_', 's', 'p', 'e', 'c', 'i', 'a', 'l', '_', 'c', 'u', 'r', 'a', 't', 'i', 'v', 'e', '_', 't', 'r', 'e', 'a', 't', 'm', 'e', 'n', 't', '_', 'b', 'y'};
 static char* ACCIDENT_SPECIAL_CURATIVE_TREATMENT_BY_XDT_FIELD_NAME = ACCIDENT_SPECIAL_CURATIVE_TREATMENT_BY_XDT_FIELD_NAME_ARRAY;
-static int* ACCIDENT_SPECIAL_CURATIVE_TREATMENT_BY_XDT_FIELD_NAME_COUNT = NUMBER_4571_INTEGER_ARRAY;
+static int* ACCIDENT_SPECIAL_CURATIVE_TREATMENT_BY_XDT_FIELD_NAME_COUNT = NUMBER_38_INTEGER_ARRAY;
 
 /** The accident address of treating physician field name. */
-static char ACCIDENT_ADDRESS_OF_TREATING_PHYSICIAN_XDT_FIELD_NAME_ARRAY[] = {'accident_address_of_treating_physician'};
+static char ACCIDENT_ADDRESS_OF_TREATING_PHYSICIAN_XDT_FIELD_NAME_ARRAY[] = {'a', 'c', 'c', 'i', 'd', 'e', 'n', 't', '_', 'a', 'd', 'd', 'r', 'e', 's', 's', '_', 'o', 'f', '_', 't', 'r', 'e', 'a', 't', 'i', 'n', 'g', '_', 'p', 'h', 'y', 's', 'i', 'c', 'i', 'a', 'n'};
 static char* ACCIDENT_ADDRESS_OF_TREATING_PHYSICIAN_XDT_FIELD_NAME = ACCIDENT_ADDRESS_OF_TREATING_PHYSICIAN_XDT_FIELD_NAME_ARRAY;
-static int* ACCIDENT_ADDRESS_OF_TREATING_PHYSICIAN_XDT_FIELD_NAME_COUNT = NUMBER_4572_INTEGER_ARRAY;
+static int* ACCIDENT_ADDRESS_OF_TREATING_PHYSICIAN_XDT_FIELD_NAME_COUNT = NUMBER_38_INTEGER_ARRAY;
 
 /** The accident unable to work from field name. */
-static char ACCIDENT_UNABLE_TO_WORK_FROM_XDT_FIELD_NAME_ARRAY[] = {'accident_unable_to_work_from'};
+static char ACCIDENT_UNABLE_TO_WORK_FROM_XDT_FIELD_NAME_ARRAY[] = {'a', 'c', 'c', 'i', 'd', 'e', 'n', 't', '_', 'u', 'n', 'a', 'b', 'l', 'e', '_', 't', 'o', '_', 'w', 'o', 'r', 'k', '_', 'f', 'r', 'o', 'm'};
 static char* ACCIDENT_UNABLE_TO_WORK_FROM_XDT_FIELD_NAME = ACCIDENT_UNABLE_TO_WORK_FROM_XDT_FIELD_NAME_ARRAY;
-static int* ACCIDENT_UNABLE_TO_WORK_FROM_XDT_FIELD_NAME_COUNT = NUMBER_4573_INTEGER_ARRAY;
+static int* ACCIDENT_UNABLE_TO_WORK_FROM_XDT_FIELD_NAME_COUNT = NUMBER_28_INTEGER_ARRAY;
 
 /** The accident expected duration of inability to work field name. */
-static char ACCIDENT_EXPECTED_DURATION_OF_INABILITY_TO_WORK_XDT_FIELD_NAME_ARRAY[] = {'accident_expected_duration_of_inability_to_work'};
+static char ACCIDENT_EXPECTED_DURATION_OF_INABILITY_TO_WORK_XDT_FIELD_NAME_ARRAY[] = {'a', 'c', 'c', 'i', 'd', 'e', 'n', 't', '_', 'e', 'x', 'p', 'e', 'c', 't', 'e', 'd', '_', 'd', 'u', 'r', 'a', 't', 'i', 'o', 'n', '_', 'o', 'f', '_', 'i', 'n', 'a', 'b', 'i', 'l', 'i', 't', 'y', '_', 't', 'o', '_', 'w', 'o', 'r', 'k'};
 static char* ACCIDENT_EXPECTED_DURATION_OF_INABILITY_TO_WORK_XDT_FIELD_NAME = ACCIDENT_EXPECTED_DURATION_OF_INABILITY_TO_WORK_XDT_FIELD_NAME_ARRAY;
-static int* ACCIDENT_EXPECTED_DURATION_OF_INABILITY_TO_WORK_XDT_FIELD_NAME_COUNT = NUMBER_4574_INTEGER_ARRAY;
+static int* ACCIDENT_EXPECTED_DURATION_OF_INABILITY_TO_WORK_XDT_FIELD_NAME_COUNT = NUMBER_47_INTEGER_ARRAY;
 
 /** The accident kind of bill field name. */
-static char ACCIDENT_KIND_OF_BILL_XDT_FIELD_NAME_ARRAY[] = {'accident_kind_of_bill'};
+static char ACCIDENT_KIND_OF_BILL_XDT_FIELD_NAME_ARRAY[] = {'a', 'c', 'c', 'i', 'd', 'e', 'n', 't', '_', 'k', 'i', 'n', 'd', '_', 'o', 'f', '_', 'b', 'i', 'l', 'l'};
 static char* ACCIDENT_KIND_OF_BILL_XDT_FIELD_NAME = ACCIDENT_KIND_OF_BILL_XDT_FIELD_NAME_ARRAY;
-static int* ACCIDENT_KIND_OF_BILL_XDT_FIELD_NAME_COUNT = NUMBER_4580_INTEGER_ARRAY;
+static int* ACCIDENT_KIND_OF_BILL_XDT_FIELD_NAME_COUNT = NUMBER_21_INTEGER_ARRAY;
 
 /** The accident general curative treatment by field name. */
-static char ACCIDENT_GENERAL_CURATIVE_TREATMENT_BY_XDT_FIELD_NAME_ARRAY[] = {'accident_general_curative_treatment_by'};
+static char ACCIDENT_GENERAL_CURATIVE_TREATMENT_BY_XDT_FIELD_NAME_ARRAY[] = {'a', 'c', 'c', 'i', 'd', 'e', 'n', 't', '_', 'g', 'e', 'n', 'e', 'r', 'a', 'l', '_', 'c', 'u', 'r', 'a', 't', 'i', 'v', 'e', '_', 't', 'r', 'e', 'a', 't', 'm', 'e', 'n', 't', '_', 'b', 'y'};
 static char* ACCIDENT_GENERAL_CURATIVE_TREATMENT_BY_XDT_FIELD_NAME = ACCIDENT_GENERAL_CURATIVE_TREATMENT_BY_XDT_FIELD_NAME_ARRAY;
-static int* ACCIDENT_GENERAL_CURATIVE_TREATMENT_BY_XDT_FIELD_NAME_COUNT = NUMBER_4581_INTEGER_ARRAY;
+static int* ACCIDENT_GENERAL_CURATIVE_TREATMENT_BY_XDT_FIELD_NAME_COUNT = NUMBER_38_INTEGER_ARRAY;
 
 /** The accident unable to work for longer than three days field name. */
-static char ACCIDENT_UNABLE_TO_WORK_FOR_LONGER_THAN_THREE_DAYS_XDT_FIELD_NAME_ARRAY[] = {'accident_unable_to_work_for_longer_than_three_days'};
+static char ACCIDENT_UNABLE_TO_WORK_FOR_LONGER_THAN_THREE_DAYS_XDT_FIELD_NAME_ARRAY[] = {'a', 'c', 'c', 'i', 'd', 'e', 'n', 't', '_', 'u', 'n', 'a', 'b', 'l', 'e', '_', 't', 'o', '_', 'w', 'o', 'r', 'k', '_', 'f', 'o', 'r', '_', 'l', 'o', 'n', 'g', 'e', 'r', '_', 't', 'h', 'a', 'n', '_', 't', 'h', 'r', 'e', 'e', '_', 'd', 'a', 'y', 's'};
 static char* ACCIDENT_UNABLE_TO_WORK_FOR_LONGER_THAN_THREE_DAYS_XDT_FIELD_NAME = ACCIDENT_UNABLE_TO_WORK_FOR_LONGER_THAN_THREE_DAYS_XDT_FIELD_NAME_ARRAY;
-static int* ACCIDENT_UNABLE_TO_WORK_FOR_LONGER_THAN_THREE_DAYS_XDT_FIELD_NAME_COUNT = NUMBER_4582_INTEGER_ARRAY;
+static int* ACCIDENT_UNABLE_TO_WORK_FOR_LONGER_THAN_THREE_DAYS_XDT_FIELD_NAME_COUNT = NUMBER_50_INTEGER_ARRAY;
 
 /** The accident unability to work certified until field name. */
-static char ACCIDENT_UNABILITY_TO_WORK_CERTIFIED_UNTIL_XDT_FIELD_NAME_ARRAY[] = {'accident_unability_to_work_certified_until'};
+static char ACCIDENT_UNABILITY_TO_WORK_CERTIFIED_UNTIL_XDT_FIELD_NAME_ARRAY[] = {'a', 'c', 'c', 'i', 'd', 'e', 'n', 't', '_', 'u', 'n', 'a', 'b', 'i', 'l', 'i', 't', 'y', '_', 't', 'o', '_', 'w', 'o', 'r', 'k', '_', 'c', 'e', 'r', 't', 'i', 'f', 'i', 'e', 'd', '_', 'u', 'n', 't', 'i', 'l'};
 static char* ACCIDENT_UNABILITY_TO_WORK_CERTIFIED_UNTIL_XDT_FIELD_NAME = ACCIDENT_UNABILITY_TO_WORK_CERTIFIED_UNTIL_XDT_FIELD_NAME_ARRAY;
-static int* ACCIDENT_UNABILITY_TO_WORK_CERTIFIED_UNTIL_XDT_FIELD_NAME_COUNT = NUMBER_4583_INTEGER_ARRAY;
+static int* ACCIDENT_UNABILITY_TO_WORK_CERTIFIED_UNTIL_XDT_FIELD_NAME_COUNT = NUMBER_42_INTEGER_ARRAY;
 
 /** The accident inspection required on field name. */
-static char ACCIDENT_INSPECTION_REQUIRED_ON_XDT_FIELD_NAME_ARRAY[] = {'accident_inspection_required_on'};
+static char ACCIDENT_INSPECTION_REQUIRED_ON_XDT_FIELD_NAME_ARRAY[] = {'a', 'c', 'c', 'i', 'd', 'e', 'n', 't', '_', 'i', 'n', 's', 'p', 'e', 'c', 't', 'i', 'o', 'n', '_', 'r', 'e', 'q', 'u', 'i', 'r', 'e', 'd', '_', 'o', 'n'};
 static char* ACCIDENT_INSPECTION_REQUIRED_ON_XDT_FIELD_NAME = ACCIDENT_INSPECTION_REQUIRED_ON_XDT_FIELD_NAME_ARRAY;
-static int* ACCIDENT_INSPECTION_REQUIRED_ON_XDT_FIELD_NAME_COUNT = NUMBER_4584_INTEGER_ARRAY;
+static int* ACCIDENT_INSPECTION_REQUIRED_ON_XDT_FIELD_NAME_COUNT = NUMBER_31_INTEGER_ARRAY;
 
 /** The billing number field name. */
-static char BILLING_NUMBER_XDT_FIELD_NAME_ARRAY[] = {'billing_number'};
+static char BILLING_NUMBER_XDT_FIELD_NAME_ARRAY[] = {'b', 'i', 'l', 'l', 'i', 'n', 'g', '_', 'n', 'u', 'm', 'b', 'e', 'r'};
 static char* BILLING_NUMBER_XDT_FIELD_NAME = BILLING_NUMBER_XDT_FIELD_NAME_ARRAY;
-static int* BILLING_NUMBER_XDT_FIELD_NAME_COUNT = NUMBER_4601_INTEGER_ARRAY;
+static int* BILLING_NUMBER_XDT_FIELD_NAME_COUNT = NUMBER_14_INTEGER_ARRAY;
 
 /** The billing address field name. */
-static char BILLING_ADDRESS_XDT_FIELD_NAME_ARRAY[] = {'billing_address'};
+static char BILLING_ADDRESS_XDT_FIELD_NAME_ARRAY[] = {'b', 'i', 'l', 'l', 'i', 'n', 'g', '_', 'a', 'd', 'd', 'r', 'e', 's', 's'};
 static char* BILLING_ADDRESS_XDT_FIELD_NAME = BILLING_ADDRESS_XDT_FIELD_NAME_ARRAY;
-static int* BILLING_ADDRESS_XDT_FIELD_NAME_COUNT = NUMBER_4602_INTEGER_ARRAY;
+static int* BILLING_ADDRESS_XDT_FIELD_NAME_COUNT = NUMBER_15_INTEGER_ARRAY;
 
 /** The billing referring physician name field name. */
-static char BILLING_REFERRING_PHYSICIAN_NAME_XDT_FIELD_NAME_ARRAY[] = {'billing_referring_physician_name'};
+static char BILLING_REFERRING_PHYSICIAN_NAME_XDT_FIELD_NAME_ARRAY[] = {'b', 'i', 'l', 'l', 'i', 'n', 'g', '_', 'r', 'e', 'f', 'e', 'r', 'r', 'i', 'n', 'g', '_', 'p', 'h', 'y', 's', 'i', 'c', 'i', 'a', 'n', '_', 'n', 'a', 'm', 'e'};
 static char* BILLING_REFERRING_PHYSICIAN_NAME_XDT_FIELD_NAME = BILLING_REFERRING_PHYSICIAN_NAME_XDT_FIELD_NAME_ARRAY;
-static int* BILLING_REFERRING_PHYSICIAN_NAME_XDT_FIELD_NAME_COUNT = NUMBER_4603_INTEGER_ARRAY;
+static int* BILLING_REFERRING_PHYSICIAN_NAME_XDT_FIELD_NAME_COUNT = NUMBER_32_INTEGER_ARRAY;
 
 /** The billing date field name. */
-static char BILLING_DATE_XDT_FIELD_NAME_ARRAY[] = {'billing_date'};
+static char BILLING_DATE_XDT_FIELD_NAME_ARRAY[] = {'b', 'i', 'l', 'l', 'i', 'n', 'g', '_', 'd', 'a', 't', 'e'};
 static char* BILLING_DATE_XDT_FIELD_NAME = BILLING_DATE_XDT_FIELD_NAME_ARRAY;
-static int* BILLING_DATE_XDT_FIELD_NAME_COUNT = NUMBER_4604_INTEGER_ARRAY;
+static int* BILLING_DATE_XDT_FIELD_NAME_COUNT = NUMBER_12_INTEGER_ARRAY;
 
 /** The billing total sum field name. */
-static char BILLING_TOTAL_SUM_XDT_FIELD_NAME_ARRAY[] = {'billing_total_sum'};
+static char BILLING_TOTAL_SUM_XDT_FIELD_NAME_ARRAY[] = {'b', 'i', 'l', 'l', 'i', 'n', 'g', '_', 't', 'o', 't', 'a', 'l', '_', 's', 'u', 'm'};
 static char* BILLING_TOTAL_SUM_XDT_FIELD_NAME = BILLING_TOTAL_SUM_XDT_FIELD_NAME_ARRAY;
-static int* BILLING_TOTAL_SUM_XDT_FIELD_NAME_COUNT = NUMBER_4605_INTEGER_ARRAY;
+static int* BILLING_TOTAL_SUM_XDT_FIELD_NAME_COUNT = NUMBER_17_INTEGER_ARRAY;
 
 /** The billing assignment declaration field name. */
-static char BILLING_ASSIGNMENT_DECLARATION_XDT_FIELD_NAME_ARRAY[] = {'billing_assignment_declaration'};
+static char BILLING_ASSIGNMENT_DECLARATION_XDT_FIELD_NAME_ARRAY[] = {'b', 'i', 'l', 'l', 'i', 'n', 'g', '_', 'a', 's', 's', 'i', 'g', 'n', 'm', 'e', 'n', 't', '_', 'd', 'e', 'c', 'l', 'a', 'r', 'a', 't', 'i', 'o', 'n'};
 static char* BILLING_ASSIGNMENT_DECLARATION_XDT_FIELD_NAME = BILLING_ASSIGNMENT_DECLARATION_XDT_FIELD_NAME_ARRAY;
-static int* BILLING_ASSIGNMENT_DECLARATION_XDT_FIELD_NAME_COUNT = NUMBER_4608_INTEGER_ARRAY;
+static int* BILLING_ASSIGNMENT_DECLARATION_XDT_FIELD_NAME_COUNT = NUMBER_30_INTEGER_ARRAY;
 
 /** The billing physician sub account field name. */
-static char BILLING_PHYSICIAN_SUB_ACCOUNT_XDT_FIELD_NAME_ARRAY[] = {'billing_physician_sub_account'};
+static char BILLING_PHYSICIAN_SUB_ACCOUNT_XDT_FIELD_NAME_ARRAY[] = {'b', 'i', 'l', 'l', 'i', 'n', 'g', '_', 'p', 'h', 'y', 's', 'i', 'c', 'i', 'a', 'n', '_', 's', 'u', 'b', '_', 'a', 'c', 'c', 'o', 'u', 'n', 't'};
 static char* BILLING_PHYSICIAN_SUB_ACCOUNT_XDT_FIELD_NAME = BILLING_PHYSICIAN_SUB_ACCOUNT_XDT_FIELD_NAME_ARRAY;
-static int* BILLING_PHYSICIAN_SUB_ACCOUNT_XDT_FIELD_NAME_COUNT = NUMBER_4611_INTEGER_ARRAY;
+static int* BILLING_PHYSICIAN_SUB_ACCOUNT_XDT_FIELD_NAME_COUNT = NUMBER_29_INTEGER_ARRAY;
 
 /** The billing attachment field name. */
-static char BILLING_ATTACHMENT_XDT_FIELD_NAME_ARRAY[] = {'billing_attachment'};
+static char BILLING_ATTACHMENT_XDT_FIELD_NAME_ARRAY[] = {'b', 'i', 'l', 'l', 'i', 'n', 'g', '_', 'a', 't', 't', 'a', 'c', 'h', 'm', 'e', 'n', 't'};
 static char* BILLING_ATTACHMENT_XDT_FIELD_NAME = BILLING_ATTACHMENT_XDT_FIELD_NAME_ARRAY;
-static int* BILLING_ATTACHMENT_XDT_FIELD_NAME_COUNT = NUMBER_4613_INTEGER_ARRAY;
+static int* BILLING_ATTACHMENT_XDT_FIELD_NAME_COUNT = NUMBER_18_INTEGER_ARRAY;
 
 /** The billing header field name. */
-static char BILLING_HEADER_XDT_FIELD_NAME_ARRAY[] = {'billing_header'};
+static char BILLING_HEADER_XDT_FIELD_NAME_ARRAY[] = {'b', 'i', 'l', 'l', 'i', 'n', 'g', '_', 'h', 'e', 'a', 'd', 'e', 'r'};
 static char* BILLING_HEADER_XDT_FIELD_NAME = BILLING_HEADER_XDT_FIELD_NAME_ARRAY;
-static int* BILLING_HEADER_XDT_FIELD_NAME_COUNT = NUMBER_4615_INTEGER_ARRAY;
+static int* BILLING_HEADER_XDT_FIELD_NAME_COUNT = NUMBER_14_INTEGER_ARRAY;
 
 /** The billing footer field name. */
-static char BILLING_FOOTER_XDT_FIELD_NAME_ARRAY[] = {'billing_footer'};
+static char BILLING_FOOTER_XDT_FIELD_NAME_ARRAY[] = {'b', 'i', 'l', 'l', 'i', 'n', 'g', '_', 'f', 'o', 'o', 't', 'e', 'r'};
 static char* BILLING_FOOTER_XDT_FIELD_NAME = BILLING_FOOTER_XDT_FIELD_NAME_ARRAY;
-static int* BILLING_FOOTER_XDT_FIELD_NAME_COUNT = NUMBER_4617_INTEGER_ARRAY;
+static int* BILLING_FOOTER_XDT_FIELD_NAME_COUNT = NUMBER_14_INTEGER_ARRAY;
 
 /** The service treatment date field name. */
-static char SERVICE_TREATMENT_DATE_XDT_FIELD_NAME_ARRAY[] = {'service_treatment_date'};
+static char SERVICE_TREATMENT_DATE_XDT_FIELD_NAME_ARRAY[] = {'s', 'e', 'r', 'v', 'i', 'c', 'e', '_', 't', 'r', 'e', 'a', 't', 'm', 'e', 'n', 't', '_', 'd', 'a', 't', 'e'};
 static char* SERVICE_TREATMENT_DATE_XDT_FIELD_NAME = SERVICE_TREATMENT_DATE_XDT_FIELD_NAME_ARRAY;
-static int* SERVICE_TREATMENT_DATE_XDT_FIELD_NAME_COUNT = NUMBER_5000_INTEGER_ARRAY;
+static int* SERVICE_TREATMENT_DATE_XDT_FIELD_NAME_COUNT = NUMBER_22_INTEGER_ARRAY;
 
 /** The service gnr identification field name. */
-static char SERVICE_GNR_IDENTIFICATION_XDT_FIELD_NAME_ARRAY[] = {'service_gnr_identification'};
+static char SERVICE_GNR_IDENTIFICATION_XDT_FIELD_NAME_ARRAY[] = {'s', 'e', 'r', 'v', 'i', 'c', 'e', '_', 'g', 'n', 'r', '_', 'i', 'd', 'e', 'n', 't', 'i', 'f', 'i', 'c', 'a', 't', 'i', 'o', 'n'};
 static char* SERVICE_GNR_IDENTIFICATION_XDT_FIELD_NAME = SERVICE_GNR_IDENTIFICATION_XDT_FIELD_NAME_ARRAY;
-static int* SERVICE_GNR_IDENTIFICATION_XDT_FIELD_NAME_COUNT = NUMBER_5001_INTEGER_ARRAY;
+static int* SERVICE_GNR_IDENTIFICATION_XDT_FIELD_NAME_COUNT = NUMBER_26_INTEGER_ARRAY;
 
 /** The service kind of examination field name. */
-static char SERVICE_KIND_OF_EXAMINATION_XDT_FIELD_NAME_ARRAY[] = {'service_kind_of_examination'};
+static char SERVICE_KIND_OF_EXAMINATION_XDT_FIELD_NAME_ARRAY[] = {'s', 'e', 'r', 'v', 'i', 'c', 'e', '_', 'k', 'i', 'n', 'd', '_', 'o', 'f', '_', 'e', 'x', 'a', 'm', 'i', 'n', 'a', 't', 'i', 'o', 'n'};
 static char* SERVICE_KIND_OF_EXAMINATION_XDT_FIELD_NAME = SERVICE_KIND_OF_EXAMINATION_XDT_FIELD_NAME_ARRAY;
-static int* SERVICE_KIND_OF_EXAMINATION_XDT_FIELD_NAME_COUNT = NUMBER_5002_INTEGER_ARRAY;
+static int* SERVICE_KIND_OF_EXAMINATION_XDT_FIELD_NAME_COUNT = NUMBER_27_INTEGER_ARRAY;
 
 /** The service addressee field name. */
-static char SERVICE_ADDRESSEE_XDT_FIELD_NAME_ARRAY[] = {'service_addressee'};
+static char SERVICE_ADDRESSEE_XDT_FIELD_NAME_ARRAY[] = {'s', 'e', 'r', 'v', 'i', 'c', 'e', '_', 'a', 'd', 'd', 'r', 'e', 's', 's', 'e', 'e'};
 static char* SERVICE_ADDRESSEE_XDT_FIELD_NAME = SERVICE_ADDRESSEE_XDT_FIELD_NAME_ARRAY;
-static int* SERVICE_ADDRESSEE_XDT_FIELD_NAME_COUNT = NUMBER_5003_INTEGER_ARRAY;
+static int* SERVICE_ADDRESSEE_XDT_FIELD_NAME_COUNT = NUMBER_17_INTEGER_ARRAY;
 
 /** The service distance in kilometres field name. */
-static char SERVICE_DISTANCE_IN_KILOMETRES_XDT_FIELD_NAME_ARRAY[] = {'service_distance_in_kilometres'};
+static char SERVICE_DISTANCE_IN_KILOMETRES_XDT_FIELD_NAME_ARRAY[] = {'s', 'e', 'r', 'v', 'i', 'c', 'e', '_', 'd', 'i', 's', 't', 'a', 'n', 'c', 'e', '_', 'i', 'n', '_', 'k', 'i', 'l', 'o', 'm', 'e', 't', 'r', 'e', 's'};
 static char* SERVICE_DISTANCE_IN_KILOMETRES_XDT_FIELD_NAME = SERVICE_DISTANCE_IN_KILOMETRES_XDT_FIELD_NAME_ARRAY;
-static int* SERVICE_DISTANCE_IN_KILOMETRES_XDT_FIELD_NAME_COUNT = NUMBER_5004_INTEGER_ARRAY;
+static int* SERVICE_DISTANCE_IN_KILOMETRES_XDT_FIELD_NAME_COUNT = NUMBER_30_INTEGER_ARRAY;
 
 /** The service multiplier field name. */
-static char SERVICE_MULTIPLIER_XDT_FIELD_NAME_ARRAY[] = {'service_multiplier'};
+static char SERVICE_MULTIPLIER_XDT_FIELD_NAME_ARRAY[] = {'s', 'e', 'r', 'v', 'i', 'c', 'e', '_', 'm', 'u', 'l', 't', 'i', 'p', 'l', 'i', 'e', 'r'};
 static char* SERVICE_MULTIPLIER_XDT_FIELD_NAME = SERVICE_MULTIPLIER_XDT_FIELD_NAME_ARRAY;
-static int* SERVICE_MULTIPLIER_XDT_FIELD_NAME_COUNT = NUMBER_5005_INTEGER_ARRAY;
+static int* SERVICE_MULTIPLIER_XDT_FIELD_NAME_COUNT = NUMBER_18_INTEGER_ARRAY;
 
 /** The service time field name. */
-static char SERVICE_TIME_XDT_FIELD_NAME_ARRAY[] = {'service_time'};
+static char SERVICE_TIME_XDT_FIELD_NAME_ARRAY[] = {'s', 'e', 'r', 'v', 'i', 'c', 'e', '_', 't', 'i', 'm', 'e'};
 static char* SERVICE_TIME_XDT_FIELD_NAME = SERVICE_TIME_XDT_FIELD_NAME_ARRAY;
-static int* SERVICE_TIME_XDT_FIELD_NAME_COUNT = NUMBER_5006_INTEGER_ARRAY;
+static int* SERVICE_TIME_XDT_FIELD_NAME_COUNT = NUMBER_12_INTEGER_ARRAY;
 
 /** The service order-execution time field name. */
-static char SERVICE_ORDER_EXECUTION_XDT_FIELD_NAME_ARRAY[] = {'service_order-execution_time'};
+static char SERVICE_ORDER_EXECUTION_XDT_FIELD_NAME_ARRAY[] = {'s', 'e', 'r', 'v', 'i', 'c', 'e', '_', 'o', 'r', 'd', 'e', 'r', '-', 'e', 'x', 'e', 'c', 'u', 't', 'i', 'o', 'n', '_', 't', 'i', 'm', 'e'};
 static char* SERVICE_ORDER_EXECUTION_XDT_FIELD_NAME = SERVICE_ORDER_EXECUTION_XDT_FIELD_NAME_ARRAY;
-static int* SERVICE_ORDER_EXECUTION_XDT_FIELD_NAME_COUNT = NUMBER_5007_INTEGER_ARRAY;
+static int* SERVICE_ORDER_EXECUTION_XDT_FIELD_NAME_COUNT = NUMBER_28_INTEGER_ARRAY;
 
 /** The service dkm field name. */
-static char SERVICE_DKM_XDT_FIELD_NAME_ARRAY[] = {'service_dkm'};
+static char SERVICE_DKM_XDT_FIELD_NAME_ARRAY[] = {'s', 'e', 'r', 'v', 'i', 'c', 'e', '_', 'd', 'k', 'm'};
 static char* SERVICE_DKM_XDT_FIELD_NAME = SERVICE_DKM_XDT_FIELD_NAME_ARRAY;
-static int* SERVICE_DKM_XDT_FIELD_NAME_COUNT = NUMBER_5008_INTEGER_ARRAY;
+static int* SERVICE_DKM_XDT_FIELD_NAME_COUNT = NUMBER_11_INTEGER_ARRAY;
 
 /** The service free explanatory statement field name. */
-static char SERVICE_FREE_EXPLANATORY_STATEMENT_XDT_FIELD_NAME_ARRAY[] = {'service_free_explanatory_statement'};
+static char SERVICE_FREE_EXPLANATORY_STATEMENT_XDT_FIELD_NAME_ARRAY[] = {'s', 'e', 'r', 'v', 'i', 'c', 'e', '_', 'f', 'r', 'e', 'e', '_', 'e', 'x', 'p', 'l', 'a', 'n', 'a', 't', 'o', 'r', 'y', '_', 's', 't', 'a', 't', 'e', 'm', 'e', 'n', 't'};
 static char* SERVICE_FREE_EXPLANATORY_STATEMENT_XDT_FIELD_NAME = SERVICE_FREE_EXPLANATORY_STATEMENT_XDT_FIELD_NAME_ARRAY;
-static int* SERVICE_FREE_EXPLANATORY_STATEMENT_XDT_FIELD_NAME_COUNT = NUMBER_5009_INTEGER_ARRAY;
+static int* SERVICE_FREE_EXPLANATORY_STATEMENT_XDT_FIELD_NAME_COUNT = NUMBER_34_INTEGER_ARRAY;
 
 /** The service explanatory drug field name. */
-static char SERVICE_EXPLANATORY_DRUG_XDT_FIELD_NAME_ARRAY[] = {'service_explanatory_drug'};
+static char SERVICE_EXPLANATORY_DRUG_XDT_FIELD_NAME_ARRAY[] = {'s', 'e', 'r', 'v', 'i', 'c', 'e', '_', 'e', 'x', 'p', 'l', 'a', 'n', 'a', 't', 'o', 'r', 'y', '_', 'd', 'r', 'u', 'g'};
 static char* SERVICE_EXPLANATORY_DRUG_XDT_FIELD_NAME = SERVICE_EXPLANATORY_DRUG_XDT_FIELD_NAME_ARRAY;
-static int* SERVICE_EXPLANATORY_DRUG_XDT_FIELD_NAME_COUNT = NUMBER_5010_INTEGER_ARRAY;
+static int* SERVICE_EXPLANATORY_DRUG_XDT_FIELD_NAME_COUNT = NUMBER_24_INTEGER_ARRAY;
 
 /** The service material costs description field name. */
-static char SERVICE_MATERIAL_COSTS_DESCRIPTION_XDT_FIELD_NAME_ARRAY[] = {'service_material_costs_description'};
+static char SERVICE_MATERIAL_COSTS_DESCRIPTION_XDT_FIELD_NAME_ARRAY[] = {'s', 'e', 'r', 'v', 'i', 'c', 'e', '_', 'm', 'a', 't', 'e', 'r', 'i', 'a', 'l', '_', 'c', 'o', 's', 't', 's', '_', 'd', 'e', 's', 'c', 'r', 'i', 'p', 't', 'i', 'o', 'n'};
 static char* SERVICE_MATERIAL_COSTS_DESCRIPTION_XDT_FIELD_NAME = SERVICE_MATERIAL_COSTS_DESCRIPTION_XDT_FIELD_NAME_ARRAY;
-static int* SERVICE_MATERIAL_COSTS_DESCRIPTION_XDT_FIELD_NAME_COUNT = NUMBER_5011_INTEGER_ARRAY;
+static int* SERVICE_MATERIAL_COSTS_DESCRIPTION_XDT_FIELD_NAME_COUNT = NUMBER_34_INTEGER_ARRAY;
 
 /** The service material costs dpf field name. */
-static char SERVICE_MATERIAL_COSTS_DPF_XDT_FIELD_NAME_ARRAY[] = {'service_material_costs_dpf'};
+static char SERVICE_MATERIAL_COSTS_DPF_XDT_FIELD_NAME_ARRAY[] = {'s', 'e', 'r', 'v', 'i', 'c', 'e', '_', 'm', 'a', 't', 'e', 'r', 'i', 'a', 'l', '_', 'c', 'o', 's', 't', 's', '_', 'd', 'p', 'f'};
 static char* SERVICE_MATERIAL_COSTS_DPF_XDT_FIELD_NAME = SERVICE_MATERIAL_COSTS_DPF_XDT_FIELD_NAME_ARRAY;
-static int* SERVICE_MATERIAL_COSTS_DPF_XDT_FIELD_NAME_COUNT = NUMBER_5012_INTEGER_ARRAY;
+static int* SERVICE_MATERIAL_COSTS_DPF_XDT_FIELD_NAME_COUNT = NUMBER_26_INTEGER_ARRAY;
 
 /** The service percent of treatment field name. */
-static char SERVICE_PERCENT_OF_TREATMENT_XDT_FIELD_NAME_ARRAY[] = {'service_percent_of_treatment'};
+static char SERVICE_PERCENT_OF_TREATMENT_XDT_FIELD_NAME_ARRAY[] = {'s', 'e', 'r', 'v', 'i', 'c', 'e', '_', 'p', 'e', 'r', 'c', 'e', 'n', 't', '_', 'o', 'f', '_', 't', 'r', 'e', 'a', 't', 'm', 'e', 'n', 't'};
 static char* SERVICE_PERCENT_OF_TREATMENT_XDT_FIELD_NAME = SERVICE_PERCENT_OF_TREATMENT_XDT_FIELD_NAME_ARRAY;
-static int* SERVICE_PERCENT_OF_TREATMENT_XDT_FIELD_NAME_COUNT = NUMBER_5013_INTEGER_ARRAY;
+static int* SERVICE_PERCENT_OF_TREATMENT_XDT_FIELD_NAME_COUNT = NUMBER_28_INTEGER_ARRAY;
 
 /** The service organ field name. */
-static char SERVICE_ORGAN_XDT_FIELD_NAME_ARRAY[] = {'service_organ'};
+static char SERVICE_ORGAN_XDT_FIELD_NAME_ARRAY[] = {'s', 'e', 'r', 'v', 'i', 'c', 'e', '_', 'o', 'r', 'g', 'a', 'n'};
 static char* SERVICE_ORGAN_XDT_FIELD_NAME = SERVICE_ORGAN_XDT_FIELD_NAME_ARRAY;
-static int* SERVICE_ORGAN_XDT_FIELD_NAME_COUNT = NUMBER_5015_INTEGER_ARRAY;
+static int* SERVICE_ORGAN_XDT_FIELD_NAME_COUNT = NUMBER_13_INTEGER_ARRAY;
 
 /** The service location field name. */
-static char SERVICE_LOCATION_XDT_FIELD_NAME_ARRAY[] = {'service_location'};
+static char SERVICE_LOCATION_XDT_FIELD_NAME_ARRAY[] = {'s', 'e', 'r', 'v', 'i', 'c', 'e', '_', 'l', 'o', 'c', 'a', 't', 'i', 'o', 'n'};
 static char* SERVICE_LOCATION_XDT_FIELD_NAME = SERVICE_LOCATION_XDT_FIELD_NAME_ARRAY;
-static int* SERVICE_LOCATION_XDT_FIELD_NAME_COUNT = NUMBER_5017_INTEGER_ARRAY;
+static int* SERVICE_LOCATION_XDT_FIELD_NAME_COUNT = NUMBER_16_INTEGER_ARRAY;
 
 /** The service zone field name. */
-static char SERVICE_ZONE_XDT_FIELD_NAME_ARRAY[] = {'service_zone'};
+static char SERVICE_ZONE_XDT_FIELD_NAME_ARRAY[] = {'s', 'e', 'r', 'v', 'i', 'c', 'e', '_', 'z', 'o', 'n', 'e'};
 static char* SERVICE_ZONE_XDT_FIELD_NAME = SERVICE_ZONE_XDT_FIELD_NAME_ARRAY;
-static int* SERVICE_ZONE_XDT_FIELD_NAME_COUNT = NUMBER_5018_INTEGER_ARRAY;
+static int* SERVICE_ZONE_XDT_FIELD_NAME_COUNT = NUMBER_12_INTEGER_ARRAY;
 
 /** The service gnr description field name. */
-static char SERVICE_GNR_DESCRIPTION_XDT_FIELD_NAME_ARRAY[] = {'service_gnr_description'};
+static char SERVICE_GNR_DESCRIPTION_XDT_FIELD_NAME_ARRAY[] = {'s', 'e', 'r', 'v', 'i', 'c', 'e', '_', 'g', 'n', 'r', '_', 'd', 'e', 's', 'c', 'r', 'i', 'p', 't', 'i', 'o', 'n'};
 static char* SERVICE_GNR_DESCRIPTION_XDT_FIELD_NAME = SERVICE_GNR_DESCRIPTION_XDT_FIELD_NAME_ARRAY;
-static int* SERVICE_GNR_DESCRIPTION_XDT_FIELD_NAME_COUNT = NUMBER_5060_INTEGER_ARRAY;
+static int* SERVICE_GNR_DESCRIPTION_XDT_FIELD_NAME_COUNT = NUMBER_23_INTEGER_ARRAY;
 
 /** The service fee field name. */
-static char SERVICE_FEE_XDT_FIELD_NAME_ARRAY[] = {'service_fee'};
+static char SERVICE_FEE_XDT_FIELD_NAME_ARRAY[] = {'s', 'e', 'r', 'v', 'i', 'c', 'e', '_', 'f', 'e', 'e'};
 static char* SERVICE_FEE_XDT_FIELD_NAME = SERVICE_FEE_XDT_FIELD_NAME_ARRAY;
-static int* SERVICE_FEE_XDT_FIELD_NAME_COUNT = NUMBER_5061_INTEGER_ARRAY;
+static int* SERVICE_FEE_XDT_FIELD_NAME_COUNT = NUMBER_11_INTEGER_ARRAY;
 
 /** The service factor field name. */
-static char SERVICE_FACTOR_XDT_FIELD_NAME_ARRAY[] = {'service_factor'};
+static char SERVICE_FACTOR_XDT_FIELD_NAME_ARRAY[] = {'s', 'e', 'r', 'v', 'i', 'c', 'e', '_', 'f', 'a', 'c', 't', 'o', 'r'};
 static char* SERVICE_FACTOR_XDT_FIELD_NAME = SERVICE_FACTOR_XDT_FIELD_NAME_ARRAY;
-static int* SERVICE_FACTOR_XDT_FIELD_NAME_COUNT = NUMBER_5062_INTEGER_ARRAY;
+static int* SERVICE_FACTOR_XDT_FIELD_NAME_COUNT = NUMBER_14_INTEGER_ARRAY;
 
 /** The service sum field name. */
-static char SERVICE_SUM_XDT_FIELD_NAME_ARRAY[] = {'service_sum'};
+static char SERVICE_SUM_XDT_FIELD_NAME_ARRAY[] = {'s', 'e', 'r', 'v', 'i', 'c', 'e', '_', 's', 'u', 'm'};
 static char* SERVICE_SUM_XDT_FIELD_NAME = SERVICE_SUM_XDT_FIELD_NAME_ARRAY;
-static int* SERVICE_SUM_XDT_FIELD_NAME_COUNT = NUMBER_5063_INTEGER_ARRAY;
+static int* SERVICE_SUM_XDT_FIELD_NAME_COUNT = NUMBER_11_INTEGER_ARRAY;
 
 /** The service total sum field name. */
-static char SERVICE_TOTAL_SUM_XDT_FIELD_NAME_ARRAY[] = {'service_total_sum'};
+static char SERVICE_TOTAL_SUM_XDT_FIELD_NAME_ARRAY[] = {'s', 'e', 'r', 'v', 'i', 'c', 'e', '_', 't', 'o', 't', 'a', 'l', '_', 's', 'u', 'm'};
 static char* SERVICE_TOTAL_SUM_XDT_FIELD_NAME = SERVICE_TOTAL_SUM_XDT_FIELD_NAME_ARRAY;
-static int* SERVICE_TOTAL_SUM_XDT_FIELD_NAME_COUNT = NUMBER_5064_INTEGER_ARRAY;
+static int* SERVICE_TOTAL_SUM_XDT_FIELD_NAME_COUNT = NUMBER_17_INTEGER_ARRAY;
 
 /** The service point value field name. */
-static char SERVICE_POINT_VALUE_XDT_FIELD_NAME_ARRAY[] = {'service_point_value'};
+static char SERVICE_POINT_VALUE_XDT_FIELD_NAME_ARRAY[] = {'s', 'e', 'r', 'v', 'i', 'c', 'e', '_', 'p', 'o', 'i', 'n', 't', '_', 'v', 'a', 'l', 'u', 'e'};
 static char* SERVICE_POINT_VALUE_XDT_FIELD_NAME = SERVICE_POINT_VALUE_XDT_FIELD_NAME_ARRAY;
-static int* SERVICE_POINT_VALUE_XDT_FIELD_NAME_COUNT = NUMBER_5065_INTEGER_ARRAY;
+static int* SERVICE_POINT_VALUE_XDT_FIELD_NAME_COUNT = NUMBER_19_INTEGER_ARRAY;
 
 /** The service name of fee field name. */
-static char SERVICE_NAME_OF_FEE_XDT_FIELD_NAME_ARRAY[] = {'service_name_of_fee'};
+static char SERVICE_NAME_OF_FEE_XDT_FIELD_NAME_ARRAY[] = {'s', 'e', 'r', 'v', 'i', 'c', 'e', '_', 'n', 'a', 'm', 'e', '_', 'o', 'f', '_', 'f', 'e', 'e'};
 static char* SERVICE_NAME_OF_FEE_XDT_FIELD_NAME = SERVICE_NAME_OF_FEE_XDT_FIELD_NAME_ARRAY;
-static int* SERVICE_NAME_OF_FEE_XDT_FIELD_NAME_COUNT = NUMBER_5090_INTEGER_ARRAY;
+static int* SERVICE_NAME_OF_FEE_XDT_FIELD_NAME_COUNT = NUMBER_19_INTEGER_ARRAY;
 
 /** The service name of certificate field name. */
-static char SERVICE_NAME_OF_CERTIFICATE_XDT_FIELD_NAME_ARRAY[] = {'service_name_of_certificate'};
+static char SERVICE_NAME_OF_CERTIFICATE_XDT_FIELD_NAME_ARRAY[] = {'s', 'e', 'r', 'v', 'i', 'c', 'e', '_', 'n', 'a', 'm', 'e', '_', 'o', 'f', '_', 'c', 'e', 'r', 't', 'i', 'f', 'i', 'c', 'a', 't', 'e'};
 static char* SERVICE_NAME_OF_CERTIFICATE_XDT_FIELD_NAME = SERVICE_NAME_OF_CERTIFICATE_XDT_FIELD_NAME_ARRAY;
-static int* SERVICE_NAME_OF_CERTIFICATE_XDT_FIELD_NAME_COUNT = NUMBER_5091_INTEGER_ARRAY;
+static int* SERVICE_NAME_OF_CERTIFICATE_XDT_FIELD_NAME_COUNT = NUMBER_27_INTEGER_ARRAY;
 
 /** The billing diagnosis field name. */
-static char BILLING_DIAGNOSIS_XDT_FIELD_NAME_ARRAY[] = {'billing_diagnosis'};
+static char BILLING_DIAGNOSIS_XDT_FIELD_NAME_ARRAY[] = {'b', 'i', 'l', 'l', 'i', 'n', 'g', '_', 'd', 'i', 'a', 'g', 'n', 'o', 's', 'i', 's'};
 static char* BILLING_DIAGNOSIS_XDT_FIELD_NAME = BILLING_DIAGNOSIS_XDT_FIELD_NAME_ARRAY;
-static int* BILLING_DIAGNOSIS_XDT_FIELD_NAME_COUNT = NUMBER_6000_INTEGER_ARRAY;
+static int* BILLING_DIAGNOSIS_XDT_FIELD_NAME_COUNT = NUMBER_17_INTEGER_ARRAY;
 
 /** The billing icd key field name. */
-static char BILLING_ICD_KEY_XDT_FIELD_NAME_ARRAY[] = {'billing_icd_key'};
+static char BILLING_ICD_KEY_XDT_FIELD_NAME_ARRAY[] = {'b', 'i', 'l', 'l', 'i', 'n', 'g', '_', 'i', 'c', 'd', '_', 'k', 'e', 'y'};
 static char* BILLING_ICD_KEY_XDT_FIELD_NAME = BILLING_ICD_KEY_XDT_FIELD_NAME_ARRAY;
-static int* BILLING_ICD_KEY_XDT_FIELD_NAME_COUNT = NUMBER_6001_INTEGER_ARRAY;
+static int* BILLING_ICD_KEY_XDT_FIELD_NAME_COUNT = NUMBER_15_INTEGER_ARRAY;
 
-/** The treatment data storage date field name. */
-static char TREATMENT_DATA_STORAGE_DATE_XDT_FIELD_NAME_ARRAY[] = {'treatment_data_storage_date'};
-static char* TREATMENT_DATA_STORAGE_DATE_XDT_FIELD_NAME = TREATMENT_DATA_STORAGE_DATE_XDT_FIELD_NAME_ARRAY;
-static int* TREATMENT_DATA_STORAGE_DATE_XDT_FIELD_NAME_COUNT = NUMBER_6200_INTEGER_ARRAY;
+/** The treatment data collection date field name. */
+static char TREATMENT_DATA_COLLECTION_DATE_XDT_FIELD_NAME_ARRAY[] = {'t', 'r', 'e', 'a', 't', 'm', 'e', 'n', 't', '_', 'd', 'a', 't', 'a', '_', 'c', 'o', 'l', 'l', 'e', 'c', 't', 'i', 'o', 'n', '_', 'd', 'a', 't', 'e'};
+static char* TREATMENT_DATA_COLLECTION_DATE_XDT_FIELD_NAME = TREATMENT_DATA_COLLECTION_DATE_XDT_FIELD_NAME_ARRAY;
+static int* TREATMENT_DATA_COLLECTION_DATE_XDT_FIELD_NAME_COUNT = NUMBER_30_INTEGER_ARRAY;
+
+/** The treatment data collection time field name. */
+static char TREATMENT_DATA_COLLECTION_TIME_XDT_FIELD_NAME_ARRAY[] = {'t', 'r', 'e', 'a', 't', 'm', 'e', 'n', 't', '_', 'd', 'a', 't', 'a', '_', 'c', 'o', 'l', 'l', 'e', 'c', 't', 'i', 'o', 'n', '_', 't', 'i', 'm', 'e'};
+static char* TREATMENT_DATA_COLLECTION_TIME_XDT_FIELD_NAME = TREATMENT_DATA_COLLECTION_TIME_XDT_FIELD_NAME_ARRAY;
+static int* TREATMENT_DATA_COLLECTION_TIME_XDT_FIELD_NAME_COUNT = NUMBER_30_INTEGER_ARRAY;
 
 /** The treatment current diagnosis field name. */
-static char TREATMENT_CURRENT_DIAGNOSIS_XDT_FIELD_NAME_ARRAY[] = {'treatment_current_diagnosis'};
+static char TREATMENT_CURRENT_DIAGNOSIS_XDT_FIELD_NAME_ARRAY[] = {'t', 'r', 'e', 'a', 't', 'm', 'e', 'n', 't', '_', 'c', 'u', 'r', 'r', 'e', 'n', 't', '_', 'd', 'i', 'a', 'g', 'n', 'o', 's', 'i', 's'};
 static char* TREATMENT_CURRENT_DIAGNOSIS_XDT_FIELD_NAME = TREATMENT_CURRENT_DIAGNOSIS_XDT_FIELD_NAME_ARRAY;
-static int* TREATMENT_CURRENT_DIAGNOSIS_XDT_FIELD_NAME_COUNT = NUMBER_6205_INTEGER_ARRAY;
+static int* TREATMENT_CURRENT_DIAGNOSIS_XDT_FIELD_NAME_COUNT = NUMBER_27_INTEGER_ARRAY;
 
 /** The treatment drug prescribed with prescription field name. */
-static char TREATMENT_DRUG_PRESCRIBED_WITH_PRESCRIPTION_XDT_FIELD_NAME_ARRAY[] = {'treatment_drug_prescribed_with_prescription'};
+static char TREATMENT_DRUG_PRESCRIBED_WITH_PRESCRIPTION_XDT_FIELD_NAME_ARRAY[] = {'t', 'r', 'e', 'a', 't', 'm', 'e', 'n', 't', '_', 'd', 'r', 'u', 'g', '_', 'p', 'r', 'e', 's', 'c', 'r', 'i', 'b', 'e', 'd', '_', 'w', 'i', 't', 'h', '_', 'p', 'r', 'e', 's', 'c', 'r', 'i', 'p', 't', 'i', 'o', 'n'};
 static char* TREATMENT_DRUG_PRESCRIBED_WITH_PRESCRIPTION_XDT_FIELD_NAME = TREATMENT_DRUG_PRESCRIBED_WITH_PRESCRIPTION_XDT_FIELD_NAME_ARRAY;
-static int* TREATMENT_DRUG_PRESCRIBED_WITH_PRESCRIPTION_XDT_FIELD_NAME_COUNT = NUMBER_6210_INTEGER_ARRAY;
+static int* TREATMENT_DRUG_PRESCRIBED_WITH_PRESCRIPTION_XDT_FIELD_NAME_COUNT = NUMBER_43_INTEGER_ARRAY;
 
 /** The treatment drug prescribed without prescription field name. */
-static char TREATMENT_DRUG_PRESCRIBED_WITHOUT_PRESCRIPTION_XDT_FIELD_NAME_ARRAY[] = {'treatment_drug_prescribed_without_prescription'};
+static char TREATMENT_DRUG_PRESCRIBED_WITHOUT_PRESCRIPTION_XDT_FIELD_NAME_ARRAY[] = {'t', 'r', 'e', 'a', 't', 'm', 'e', 'n', 't', '_', 'd', 'r', 'u', 'g', '_', 'p', 'r', 'e', 's', 'c', 'r', 'i', 'b', 'e', 'd', '_', 'w', 'i', 't', 'h', 'o', 'u', 't', '_', 'p', 'r', 'e', 's', 'c', 'r', 'i', 'p', 't', 'i', 'o', 'n'};
 static char* TREATMENT_DRUG_PRESCRIBED_WITHOUT_PRESCRIPTION_XDT_FIELD_NAME = TREATMENT_DRUG_PRESCRIBED_WITHOUT_PRESCRIPTION_XDT_FIELD_NAME_ARRAY;
-static int* TREATMENT_DRUG_PRESCRIBED_WITHOUT_PRESCRIPTION_XDT_FIELD_NAME_COUNT = NUMBER_6211_INTEGER_ARRAY;
+static int* TREATMENT_DRUG_PRESCRIBED_WITHOUT_PRESCRIPTION_XDT_FIELD_NAME_COUNT = NUMBER_46_INTEGER_ARRAY;
 
 /** The treatment physician sample field name. */
-static char TREATMENT_PHYSICIAN_SAMPLE_XDT_FIELD_NAME_ARRAY[] = {'treatment_physician_sample'};
+static char TREATMENT_PHYSICIAN_SAMPLE_XDT_FIELD_NAME_ARRAY[] = {'t', 'r', 'e', 'a', 't', 'm', 'e', 'n', 't', '_', 'p', 'h', 'y', 's', 'i', 'c', 'i', 'a', 'n', '_', 's', 'a', 'm', 'p', 'l', 'e'};
 static char* TREATMENT_PHYSICIAN_SAMPLE_XDT_FIELD_NAME = TREATMENT_PHYSICIAN_SAMPLE_XDT_FIELD_NAME_ARRAY;
-static int* TREATMENT_PHYSICIAN_SAMPLE_XDT_FIELD_NAME_COUNT = NUMBER_6215_INTEGER_ARRAY;
+static int* TREATMENT_PHYSICIAN_SAMPLE_XDT_FIELD_NAME_COUNT = NUMBER_26_INTEGER_ARRAY;
 
 /** The treatment findings field name. */
-static char TREATMENT_FINDINGS_XDT_FIELD_NAME_ARRAY[] = {'treatment_findings'};
+static char TREATMENT_FINDINGS_XDT_FIELD_NAME_ARRAY[] = {'t', 'r', 'e', 'a', 't', 'm', 'e', 'n', 't', '_', 'f', 'i', 'n', 'd', 'i', 'n', 'g', 's'};
 static char* TREATMENT_FINDINGS_XDT_FIELD_NAME = TREATMENT_FINDINGS_XDT_FIELD_NAME_ARRAY;
-static int* TREATMENT_FINDINGS_XDT_FIELD_NAME_COUNT = NUMBER_6220_INTEGER_ARRAY;
+static int* TREATMENT_FINDINGS_XDT_FIELD_NAME_COUNT = NUMBER_18_INTEGER_ARRAY;
 
 /** The treatment external findings field name. */
-static char TREATMENT_EXTERNAL_FINDINGS_XDT_FIELD_NAME_ARRAY[] = {'treatment_external_findings'};
+static char TREATMENT_EXTERNAL_FINDINGS_XDT_FIELD_NAME_ARRAY[] = {'t', 'r', 'e', 'a', 't', 'm', 'e', 'n', 't', '_', 'e', 'x', 't', 'e', 'r', 'n', 'a', 'l', '_', 'f', 'i', 'n', 'd', 'i', 'n', 'g', 's'};
 static char* TREATMENT_EXTERNAL_FINDINGS_XDT_FIELD_NAME = TREATMENT_EXTERNAL_FINDINGS_XDT_FIELD_NAME_ARRAY;
-static int* TREATMENT_EXTERNAL_FINDINGS_XDT_FIELD_NAME_COUNT = NUMBER_6221_INTEGER_ARRAY;
+static int* TREATMENT_EXTERNAL_FINDINGS_XDT_FIELD_NAME_COUNT = NUMBER_27_INTEGER_ARRAY;
 
 /** The treatment laboratory findings field name. */
-static char TREATMENT_LABORATORY_FINDINGS_XDT_FIELD_NAME_ARRAY[] = {'treatment_laboratory_findings'};
+static char TREATMENT_LABORATORY_FINDINGS_XDT_FIELD_NAME_ARRAY[] = {'t', 'r', 'e', 'a', 't', 'm', 'e', 'n', 't', '_', 'l', 'a', 'b', 'o', 'r', 'a', 't', 'o', 'r', 'y', '_', 'f', 'i', 'n', 'd', 'i', 'n', 'g', 's'};
 static char* TREATMENT_LABORATORY_FINDINGS_XDT_FIELD_NAME = TREATMENT_LABORATORY_FINDINGS_XDT_FIELD_NAME_ARRAY;
-static int* TREATMENT_LABORATORY_FINDINGS_XDT_FIELD_NAME_COUNT = NUMBER_6222_INTEGER_ARRAY;
+static int* TREATMENT_LABORATORY_FINDINGS_XDT_FIELD_NAME_COUNT = NUMBER_29_INTEGER_ARRAY;
 
 /** The treatment x-ray findings field name. */
-static char TREATMENT_X_RAY_FINDINGS_XDT_FIELD_NAME_ARRAY[] = {'treatment_x-ray_findings'};
+static char TREATMENT_X_RAY_FINDINGS_XDT_FIELD_NAME_ARRAY[] = {'t', 'r', 'e', 'a', 't', 'm', 'e', 'n', 't', '_', 'x', '-', 'r', 'a', 'y', '_', 'f', 'i', 'n', 'd', 'i', 'n', 'g', 's'};
 static char* TREATMENT_X_RAY_FINDINGS_XDT_FIELD_NAME = TREATMENT_X_RAY_FINDINGS_XDT_FIELD_NAME_ARRAY;
-static int* TREATMENT_X_RAY_FINDINGS_XDT_FIELD_NAME_COUNT = NUMBER_6225_INTEGER_ARRAY;
+static int* TREATMENT_X_RAY_FINDINGS_XDT_FIELD_NAME_COUNT = NUMBER_24_INTEGER_ARRAY;
+
+/** The treatment subsequent line count field name. */
+static char TREATMENT_SUBSEQUENT_LINE_COUNT_XDT_FIELD_NAME_ARRAY[] = {'t', 'r', 'e', 'a', 't', 'm', 'e', 'n', 't', '_', 's', 'u', 'b', 's', 'e', 'q', 'u', 'e', 'n', 't', '_', 'l', 'i', 'n', 'e', '_', 'c', 'o', 'u', 'n', 't'};
+static char* TREATMENT_SUBSEQUENT_LINE_COUNT_XDT_FIELD_NAME = TREATMENT_SUBSEQUENT_LINE_COUNT_XDT_FIELD_NAME_ARRAY;
+static int* TREATMENT_SUBSEQUENT_LINE_COUNT_XDT_FIELD_NAME_COUNT = NUMBER_31_INTEGER_ARRAY;
+
+/** The treatment comment field name. */
+static char TREATMENT_COMMENT_XDT_FIELD_NAME_ARRAY[] = {'t', 'r', 'e', 'a', 't', 'm', 'e', 'n', 't', '_', 'c', 'o', 'm', 'm', 'e', 'n', 't'};
+static char* TREATMENT_COMMENT_XDT_FIELD_NAME = TREATMENT_COMMENT_XDT_FIELD_NAME_ARRAY;
+static int* TREATMENT_COMMENT_XDT_FIELD_NAME_COUNT = NUMBER_17_INTEGER_ARRAY;
+
+/** The treatment formatted result table text field name. */
+static char TREATMENT_FORMATTED_RESULT_TABLE_TEXT_XDT_FIELD_NAME_ARRAY[] = {'t', 'r', 'e', 'a', 't', 'm', 'e', 'n', 't', '_', 'f', 'o', 'r', 'm', 'a', 't', 't', 'e', 'd', '_', 'r', 'e', 's', 'u', 'l', 't', '_', 't', 'a', 'b', 'l', 'e', '_', 't', 'e', 'x', 't'};
+static char* TREATMENT_FORMATTED_RESULT_TABLE_TEXT_XDT_FIELD_NAME = TREATMENT_FORMATTED_RESULT_TABLE_TEXT_XDT_FIELD_NAME_ARRAY;
+static int* TREATMENT_FORMATTED_RESULT_TABLE_TEXT_XDT_FIELD_NAME_COUNT = NUMBER_37_INTEGER_ARRAY;
 
 /** The treatment blood pressure field name. */
-static char TREATMENT_BLOOD_PRESSURE_XDT_FIELD_NAME_ARRAY[] = {'treatment_blood_pressure'};
+static char TREATMENT_BLOOD_PRESSURE_XDT_FIELD_NAME_ARRAY[] = {'t', 'r', 'e', 'a', 't', 'm', 'e', 'n', 't', '_', 'b', 'l', 'o', 'o', 'd', '_', 'p', 'r', 'e', 's', 's', 'u', 'r', 'e'};
 static char* TREATMENT_BLOOD_PRESSURE_XDT_FIELD_NAME = TREATMENT_BLOOD_PRESSURE_XDT_FIELD_NAME_ARRAY;
-static int* TREATMENT_BLOOD_PRESSURE_XDT_FIELD_NAME_COUNT = NUMBER_6230_INTEGER_ARRAY;
+static int* TREATMENT_BLOOD_PRESSURE_XDT_FIELD_NAME_COUNT = NUMBER_24_INTEGER_ARRAY;
 
 /** The treatment symptoms field name. */
-static char TREATMENT_SYMPTOMS_XDT_FIELD_NAME_ARRAY[] = {'treatment_symptoms'};
+static char TREATMENT_SYMPTOMS_XDT_FIELD_NAME_ARRAY[] = {'t', 'r', 'e', 'a', 't', 'm', 'e', 'n', 't', '_', 's', 'y', 'm', 'p', 't', 'o', 'm', 's'};
 static char* TREATMENT_SYMPTOMS_XDT_FIELD_NAME = TREATMENT_SYMPTOMS_XDT_FIELD_NAME_ARRAY;
-static int* TREATMENT_SYMPTOMS_XDT_FIELD_NAME_COUNT = NUMBER_6240_INTEGER_ARRAY;
+static int* TREATMENT_SYMPTOMS_XDT_FIELD_NAME_COUNT = NUMBER_18_INTEGER_ARRAY;
 
 /** The treatment therapy field name. */
-static char TREATMENT_THERAPY_XDT_FIELD_NAME_ARRAY[] = {'treatment_therapy'};
+static char TREATMENT_THERAPY_XDT_FIELD_NAME_ARRAY[] = {'t', 'r', 'e', 'a', 't', 'm', 'e', 'n', 't', '_', 't', 'h', 'e', 'r', 'a', 'p', 'y'};
 static char* TREATMENT_THERAPY_XDT_FIELD_NAME = TREATMENT_THERAPY_XDT_FIELD_NAME_ARRAY;
-static int* TREATMENT_THERAPY_XDT_FIELD_NAME_COUNT = NUMBER_6260_INTEGER_ARRAY;
+static int* TREATMENT_THERAPY_XDT_FIELD_NAME_COUNT = NUMBER_17_INTEGER_ARRAY;
 
 /** The treatment physical therapy field name. */
-static char TREATMENT_PHYSICAL_THERAPY_XDT_FIELD_NAME_ARRAY[] = {'treatment_physical_therapy'};
+static char TREATMENT_PHYSICAL_THERAPY_XDT_FIELD_NAME_ARRAY[] = {'t', 'r', 'e', 'a', 't', 'm', 'e', 'n', 't', '_', 'p', 'h', 'y', 's', 'i', 'c', 'a', 'l', '_', 't', 'h', 'e', 'r', 'a', 'p', 'y'};
 static char* TREATMENT_PHYSICAL_THERAPY_XDT_FIELD_NAME = TREATMENT_PHYSICAL_THERAPY_XDT_FIELD_NAME_ARRAY;
-static int* TREATMENT_PHYSICAL_THERAPY_XDT_FIELD_NAME_COUNT = NUMBER_6265_INTEGER_ARRAY;
+static int* TREATMENT_PHYSICAL_THERAPY_XDT_FIELD_NAME_COUNT = NUMBER_26_INTEGER_ARRAY;
 
 /** The treatment referral content field name. */
-static char TREATMENT_REFERRAL_CONTENT_XDT_FIELD_NAME_ARRAY[] = {'treatment_referral_content'};
+static char TREATMENT_REFERRAL_CONTENT_XDT_FIELD_NAME_ARRAY[] = {'t', 'r', 'e', 'a', 't', 'm', 'e', 'n', 't', '_', 'r', 'e', 'f', 'e', 'r', 'r', 'a', 'l', '_', 'c', 'o', 'n', 't', 'e', 'n', 't'};
 static char* TREATMENT_REFERRAL_CONTENT_XDT_FIELD_NAME = TREATMENT_REFERRAL_CONTENT_XDT_FIELD_NAME_ARRAY;
-static int* TREATMENT_REFERRAL_CONTENT_XDT_FIELD_NAME_COUNT = NUMBER_6280_INTEGER_ARRAY;
+static int* TREATMENT_REFERRAL_CONTENT_XDT_FIELD_NAME_COUNT = NUMBER_26_INTEGER_ARRAY;
 
 /** The treatment work disability duration field name. */
-static char TREATMENT_WORK_DISABILITY_DURATION_XDT_FIELD_NAME_ARRAY[] = {'treatment_work_disability_duration'};
+static char TREATMENT_WORK_DISABILITY_DURATION_XDT_FIELD_NAME_ARRAY[] = {'t', 'r', 'e', 'a', 't', 'm', 'e', 'n', 't', '_', 'w', 'o', 'r', 'k', '_', 'd', 'i', 's', 'a', 'b', 'i', 'l', 'i', 't', 'y', '_', 'd', 'u', 'r', 'a', 't', 'i', 'o', 'n'};
 static char* TREATMENT_WORK_DISABILITY_DURATION_XDT_FIELD_NAME = TREATMENT_WORK_DISABILITY_DURATION_XDT_FIELD_NAME_ARRAY;
-static int* TREATMENT_WORK_DISABILITY_DURATION_XDT_FIELD_NAME_COUNT = NUMBER_6285_INTEGER_ARRAY;
+static int* TREATMENT_WORK_DISABILITY_DURATION_XDT_FIELD_NAME_COUNT = NUMBER_34_INTEGER_ARRAY;
 
 /** The treatment work disability cause field name. */
-static char TREATMENT_WORK_DISABILITY_CAUSE_XDT_FIELD_NAME_ARRAY[] = {'treatment_work_disability_cause'};
+static char TREATMENT_WORK_DISABILITY_CAUSE_XDT_FIELD_NAME_ARRAY[] = {'t', 'r', 'e', 'a', 't', 'm', 'e', 'n', 't', '_', 'w', 'o', 'r', 'k', '_', 'd', 'i', 's', 'a', 'b', 'i', 'l', 'i', 't', 'y', '_', 'c', 'a', 'u', 's', 'e'};
 static char* TREATMENT_WORK_DISABILITY_CAUSE_XDT_FIELD_NAME = TREATMENT_WORK_DISABILITY_CAUSE_XDT_FIELD_NAME_ARRAY;
-static int* TREATMENT_WORK_DISABILITY_CAUSE_XDT_FIELD_NAME_COUNT = NUMBER_6286_INTEGER_ARRAY;
+static int* TREATMENT_WORK_DISABILITY_CAUSE_XDT_FIELD_NAME_COUNT = NUMBER_31_INTEGER_ARRAY;
 
 /** The treatment hospitalisation field name. */
-static char TREATMENT_HOSPITALISATION_XDT_FIELD_NAME_ARRAY[] = {'treatment_hospitalisation'};
+static char TREATMENT_HOSPITALISATION_XDT_FIELD_NAME_ARRAY[] = {'t', 'r', 'e', 'a', 't', 'm', 'e', 'n', 't', '_', 'h', 'o', 's', 'p', 'i', 't', 'a', 'l', 'i', 's', 'a', 't', 'i', 'o', 'n'};
 static char* TREATMENT_HOSPITALISATION_XDT_FIELD_NAME = TREATMENT_HOSPITALISATION_XDT_FIELD_NAME_ARRAY;
-static int* TREATMENT_HOSPITALISATION_XDT_FIELD_NAME_COUNT = NUMBER_6290_INTEGER_ARRAY;
+static int* TREATMENT_HOSPITALISATION_XDT_FIELD_NAME_COUNT = NUMBER_25_INTEGER_ARRAY;
 
 /** The treatment hospitalisation cause field name. */
-static char TREATMENT_HOSPITALISATION_CAUSE_XDT_FIELD_NAME_ARRAY[] = {'treatment_hospitalisation_cause'};
+static char TREATMENT_HOSPITALISATION_CAUSE_XDT_FIELD_NAME_ARRAY[] = {'t', 'r', 'e', 'a', 't', 'm', 'e', 'n', 't', '_', 'h', 'o', 's', 'p', 'i', 't', 'a', 'l', 'i', 's', 'a', 't', 'i', 'o', 'n', '_', 'c', 'a', 'u', 's', 'e'};
 static char* TREATMENT_HOSPITALISATION_CAUSE_XDT_FIELD_NAME = TREATMENT_HOSPITALISATION_CAUSE_XDT_FIELD_NAME_ARRAY;
-static int* TREATMENT_HOSPITALISATION_CAUSE_XDT_FIELD_NAME_COUNT = NUMBER_6291_INTEGER_ARRAY;
+static int* TREATMENT_HOSPITALISATION_CAUSE_XDT_FIELD_NAME_COUNT = NUMBER_31_INTEGER_ARRAY;
 
 /** The letter certificate kind field name. */
-static char LETTER_CERTIFICATE_KIND_XDT_FIELD_NAME_ARRAY[] = {'letter_certificate_kind'};
+static char LETTER_CERTIFICATE_KIND_XDT_FIELD_NAME_ARRAY[] = {'l', 'e', 't', 't', 'e', 'r', '_', 'c', 'e', 'r', 't', 'i', 'f', 'i', 'c', 'a', 't', 'e', '_', 'k', 'i', 'n', 'd'};
 static char* LETTER_CERTIFICATE_KIND_XDT_FIELD_NAME = LETTER_CERTIFICATE_KIND_XDT_FIELD_NAME_ARRAY;
-static int* LETTER_CERTIFICATE_KIND_XDT_FIELD_NAME_COUNT = NUMBER_6300_INTEGER_ARRAY;
+static int* LETTER_CERTIFICATE_KIND_XDT_FIELD_NAME_COUNT = NUMBER_23_INTEGER_ARRAY;
 
 /** The letter certificate content field name. */
-static char LETTER_CERTIFICATE_CONTENT_XDT_FIELD_NAME_ARRAY[] = {'letter_certificate_content'};
+static char LETTER_CERTIFICATE_CONTENT_XDT_FIELD_NAME_ARRAY[] = {'l', 'e', 't', 't', 'e', 'r', '_', 'c', 'e', 'r', 't', 'i', 'f', 'i', 'c', 'a', 't', 'e', '_', 'c', 'o', 'n', 't', 'e', 'n', 't'};
 static char* LETTER_CERTIFICATE_CONTENT_XDT_FIELD_NAME = LETTER_CERTIFICATE_CONTENT_XDT_FIELD_NAME_ARRAY;
-static int* LETTER_CERTIFICATE_CONTENT_XDT_FIELD_NAME_COUNT = NUMBER_6301_INTEGER_ARRAY;
+static int* LETTER_CERTIFICATE_CONTENT_XDT_FIELD_NAME_COUNT = NUMBER_26_INTEGER_ARRAY;
+
+/** The letter file archive number field name. */
+static char LETTER_FILE_ARCHIVE_NUMBER_XDT_FIELD_NAME_ARRAY[] = {'l', 'e', 't', 't', 'e', 'r', '_', 'f', 'i', 'l', 'e', '_', 'a', 'r', 'c', 'h', 'i', 'v', 'e', '_', 'n', 'u', 'm', 'b', 'e', 'r'};
+static char* LETTER_FILE_ARCHIVE_NUMBER_XDT_FIELD_NAME = LETTER_FILE_ARCHIVE_NUMBER_XDT_FIELD_NAME_ARRAY;
+static int* LETTER_FILE_ARCHIVE_NUMBER_XDT_FIELD_NAME_COUNT = NUMBER_26_INTEGER_ARRAY;
+
+/** The letter file format field name. */
+static char LETTER_FILE_FORMAT_XDT_FIELD_NAME_ARRAY[] = {'l', 'e', 't', 't', 'e', 'r', '_', 'f', 'i', 'l', 'e', '_', 'f', 'o', 'r', 'm', 'a', 't'};
+static char* LETTER_FILE_FORMAT_XDT_FIELD_NAME = LETTER_FILE_FORMAT_XDT_FIELD_NAME_ARRAY;
+static int* LETTER_FILE_FORMAT_XDT_FIELD_NAME_COUNT = NUMBER_18_INTEGER_ARRAY;
+
+/** The letter file content field name. */
+static char LETTER_FILE_CONTENT_XDT_FIELD_NAME_ARRAY[] = {'l', 'e', 't', 't', 'e', 'r', '_', 'f', 'i', 'l', 'e', '_', 'c', 'o', 'n', 't', 'e', 'n', 't'};
+static char* LETTER_FILE_CONTENT_XDT_FIELD_NAME = LETTER_FILE_CONTENT_XDT_FIELD_NAME_ARRAY;
+static int* LETTER_FILE_CONTENT_XDT_FIELD_NAME_COUNT = NUMBER_19_INTEGER_ARRAY;
+
+/** The letter file url field name. */
+static char LETTER_FILE_URL_XDT_FIELD_NAME_ARRAY[] = {'l', 'e', 't', 't', 'e', 'r', '_', 'f', 'i', 'l', 'e', '_', 'u', 'r', 'l'};
+static char* LETTER_FILE_URL_XDT_FIELD_NAME = LETTER_FILE_URL_XDT_FIELD_NAME_ARRAY;
+static int* LETTER_FILE_URL_XDT_FIELD_NAME_COUNT = NUMBER_15_INTEGER_ARRAY;
 
 /** The letter attestation kind field name. */
-static char LETTER_ATTESTATION_KIND_XDT_FIELD_NAME_ARRAY[] = {'letter_attestation_kind'};
+static char LETTER_ATTESTATION_KIND_XDT_FIELD_NAME_ARRAY[] = {'l', 'e', 't', 't', 'e', 'r', '_', 'a', 't', 't', 'e', 's', 't', 'a', 't', 'i', 'o', 'n', '_', 'k', 'i', 'n', 'd'};
 static char* LETTER_ATTESTATION_KIND_XDT_FIELD_NAME = LETTER_ATTESTATION_KIND_XDT_FIELD_NAME_ARRAY;
-static int* LETTER_ATTESTATION_KIND_XDT_FIELD_NAME_COUNT = NUMBER_6306_INTEGER_ARRAY;
+static int* LETTER_ATTESTATION_KIND_XDT_FIELD_NAME_COUNT = NUMBER_23_INTEGER_ARRAY;
 
 /** The letter attestation content field name. */
-static char LETTER_ATTESTATION_CONTENT_XDT_FIELD_NAME_ARRAY[] = {'letter_attestation_content'};
+static char LETTER_ATTESTATION_CONTENT_XDT_FIELD_NAME_ARRAY[] = {'l', 'e', 't', 't', 'e', 'r', '_', 'a', 't', 't', 'e', 's', 't', 'a', 't', 'i', 'o', 'n', '_', 'c', 'o', 'n', 't', 'e', 'n', 't'};
 static char* LETTER_ATTESTATION_CONTENT_XDT_FIELD_NAME = LETTER_ATTESTATION_CONTENT_XDT_FIELD_NAME_ARRAY;
-static int* LETTER_ATTESTATION_CONTENT_XDT_FIELD_NAME_COUNT = NUMBER_6307_INTEGER_ARRAY;
+static int* LETTER_ATTESTATION_CONTENT_XDT_FIELD_NAME_COUNT = NUMBER_26_INTEGER_ARRAY;
 
 /** The letter addressee field name. */
-static char LETTER_ADDRESSEE_XDT_FIELD_NAME_ARRAY[] = {'letter_addressee'};
+static char LETTER_ADDRESSEE_XDT_FIELD_NAME_ARRAY[] = {'l', 'e', 't', 't', 'e', 'r', '_', 'a', 'd', 'd', 'r', 'e', 's', 's', 'e', 'e'};
 static char* LETTER_ADDRESSEE_XDT_FIELD_NAME = LETTER_ADDRESSEE_XDT_FIELD_NAME_ARRAY;
-static int* LETTER_ADDRESSEE_XDT_FIELD_NAME_COUNT = NUMBER_6310_INTEGER_ARRAY;
+static int* LETTER_ADDRESSEE_XDT_FIELD_NAME_COUNT = NUMBER_16_INTEGER_ARRAY;
 
 /** The letter salutation field name. */
-static char LETTER_SALUTATION_XDT_FIELD_NAME_ARRAY[] = {'letter_salutation'};
+static char LETTER_SALUTATION_XDT_FIELD_NAME_ARRAY[] = {'l', 'e', 't', 't', 'e', 'r', '_', 's', 'a', 'l', 'u', 't', 'a', 't', 'i', 'o', 'n'};
 static char* LETTER_SALUTATION_XDT_FIELD_NAME = LETTER_SALUTATION_XDT_FIELD_NAME_ARRAY;
-static int* LETTER_SALUTATION_XDT_FIELD_NAME_COUNT = NUMBER_6311_INTEGER_ARRAY;
+static int* LETTER_SALUTATION_XDT_FIELD_NAME_COUNT = NUMBER_17_INTEGER_ARRAY;
 
 /** The letter street field name. */
-static char LETTER_STREET_XDT_FIELD_NAME_ARRAY[] = {'letter_street'};
+static char LETTER_STREET_XDT_FIELD_NAME_ARRAY[] = {'l', 'e', 't', 't', 'e', 'r', '_', 's', 't', 'r', 'e', 'e', 't'};
 static char* LETTER_STREET_XDT_FIELD_NAME = LETTER_STREET_XDT_FIELD_NAME_ARRAY;
-static int* LETTER_STREET_XDT_FIELD_NAME_COUNT = NUMBER_6312_INTEGER_ARRAY;
+static int* LETTER_STREET_XDT_FIELD_NAME_COUNT = NUMBER_13_INTEGER_ARRAY;
 
 /** The letter postcode field name. */
-static char LETTER_POSTCODE_XDT_FIELD_NAME_ARRAY[] = {'letter_postcode'};
+static char LETTER_POSTCODE_XDT_FIELD_NAME_ARRAY[] = {'l', 'e', 't', 't', 'e', 'r', '_', 'p', 'o', 's', 't', 'c', 'o', 'd', 'e'};
 static char* LETTER_POSTCODE_XDT_FIELD_NAME = LETTER_POSTCODE_XDT_FIELD_NAME_ARRAY;
-static int* LETTER_POSTCODE_XDT_FIELD_NAME_COUNT = NUMBER_6313_INTEGER_ARRAY;
+static int* LETTER_POSTCODE_XDT_FIELD_NAME_COUNT = NUMBER_15_INTEGER_ARRAY;
 
 /** The letter residence field name. */
-static char LETTER_RESIDENCE_XDT_FIELD_NAME_ARRAY[] = {'letter_residence'};
+static char LETTER_RESIDENCE_XDT_FIELD_NAME_ARRAY[] = {'l', 'e', 't', 't', 'e', 'r', '_', 'r', 'e', 's', 'i', 'd', 'e', 'n', 'c', 'e'};
 static char* LETTER_RESIDENCE_XDT_FIELD_NAME = LETTER_RESIDENCE_XDT_FIELD_NAME_ARRAY;
-static int* LETTER_RESIDENCE_XDT_FIELD_NAME_COUNT = NUMBER_6314_INTEGER_ARRAY;
+static int* LETTER_RESIDENCE_XDT_FIELD_NAME_COUNT = NUMBER_16_INTEGER_ARRAY;
 
 /** The letter complimentary close field name. */
-static char LETTER_COMPLIMENTARY_CLOSE_XDT_FIELD_NAME_ARRAY[] = {'letter_complimentary_close'};
+static char LETTER_COMPLIMENTARY_CLOSE_XDT_FIELD_NAME_ARRAY[] = {'l', 'e', 't', 't', 'e', 'r', '_', 'c', 'o', 'm', 'p', 'l', 'i', 'm', 'e', 'n', 't', 'a', 'r', 'y', '_', 'c', 'l', 'o', 's', 'e'};
 static char* LETTER_COMPLIMENTARY_CLOSE_XDT_FIELD_NAME = LETTER_COMPLIMENTARY_CLOSE_XDT_FIELD_NAME_ARRAY;
-static int* LETTER_COMPLIMENTARY_CLOSE_XDT_FIELD_NAME_COUNT = NUMBER_6315_INTEGER_ARRAY;
+static int* LETTER_COMPLIMENTARY_CLOSE_XDT_FIELD_NAME_COUNT = NUMBER_26_INTEGER_ARRAY;
 
 /** The letter phone field name. */
-static char LETTER_PHONE_XDT_FIELD_NAME_ARRAY[] = {'letter_phone'};
+static char LETTER_PHONE_XDT_FIELD_NAME_ARRAY[] = {'l', 'e', 't', 't', 'e', 'r', '_', 'p', 'h', 'o', 'n', 'e'};
 static char* LETTER_PHONE_XDT_FIELD_NAME = LETTER_PHONE_XDT_FIELD_NAME_ARRAY;
-static int* LETTER_PHONE_XDT_FIELD_NAME_COUNT = NUMBER_6316_INTEGER_ARRAY;
+static int* LETTER_PHONE_XDT_FIELD_NAME_COUNT = NUMBER_12_INTEGER_ARRAY;
 
 /** The letter fax field name. */
-static char LETTER_FAX_XDT_FIELD_NAME_ARRAY[] = {'letter_fax'};
+static char LETTER_FAX_XDT_FIELD_NAME_ARRAY[] = {'l', 'e', 't', 't', 'e', 'r', '_', 'f', 'a', 'x'};
 static char* LETTER_FAX_XDT_FIELD_NAME = LETTER_FAX_XDT_FIELD_NAME_ARRAY;
-static int* LETTER_FAX_XDT_FIELD_NAME_COUNT = NUMBER_6317_INTEGER_ARRAY;
+static int* LETTER_FAX_XDT_FIELD_NAME_COUNT = NUMBER_10_INTEGER_ARRAY;
 
 /** The letter physician number field name. */
-static char LETTER_PHYSICIAN_NUMBER_XDT_FIELD_NAME_ARRAY[] = {'letter_physician_number'};
+static char LETTER_PHYSICIAN_NUMBER_XDT_FIELD_NAME_ARRAY[] = {'l', 'e', 't', 't', 'e', 'r', '_', 'p', 'h', 'y', 's', 'i', 'c', 'i', 'a', 'n', '_', 'n', 'u', 'm', 'b', 'e', 'r'};
 static char* LETTER_PHYSICIAN_NUMBER_XDT_FIELD_NAME = LETTER_PHYSICIAN_NUMBER_XDT_FIELD_NAME_ARRAY;
-static int* LETTER_PHYSICIAN_NUMBER_XDT_FIELD_NAME_COUNT = NUMBER_6319_INTEGER_ARRAY;
+static int* LETTER_PHYSICIAN_NUMBER_XDT_FIELD_NAME_COUNT = NUMBER_23_INTEGER_ARRAY;
 
 /** The letter content field name. */
-static char LETTER_CONTENT_XDT_FIELD_NAME_ARRAY[] = {'letter_content'};
+static char LETTER_CONTENT_XDT_FIELD_NAME_ARRAY[] = {'l', 'e', 't', 't', 'e', 'r', '_', 'c', 'o', 'n', 't', 'e', 'n', 't'};
 static char* LETTER_CONTENT_XDT_FIELD_NAME = LETTER_CONTENT_XDT_FIELD_NAME_ARRAY;
-static int* LETTER_CONTENT_XDT_FIELD_NAME_COUNT = NUMBER_6320_INTEGER_ARRAY;
+static int* LETTER_CONTENT_XDT_FIELD_NAME_COUNT = NUMBER_14_INTEGER_ARRAY;
 
 /** The letter image archive number field name. */
-static char LETTER_IMAGE_ARCHIVE_NUMBER_XDT_FIELD_NAME_ARRAY[] = {'letter_image_archive_number'};
+static char LETTER_IMAGE_ARCHIVE_NUMBER_XDT_FIELD_NAME_ARRAY[] = {'l', 'e', 't', 't', 'e', 'r', '_', 'i', 'm', 'a', 'g', 'e', '_', 'a', 'r', 'c', 'h', 'i', 'v', 'e', '_', 'n', 'u', 'm', 'b', 'e', 'r'};
 static char* LETTER_IMAGE_ARCHIVE_NUMBER_XDT_FIELD_NAME = LETTER_IMAGE_ARCHIVE_NUMBER_XDT_FIELD_NAME_ARRAY;
-static int* LETTER_IMAGE_ARCHIVE_NUMBER_XDT_FIELD_NAME_COUNT = NUMBER_6325_INTEGER_ARRAY;
+static int* LETTER_IMAGE_ARCHIVE_NUMBER_XDT_FIELD_NAME_COUNT = NUMBER_27_INTEGER_ARRAY;
 
 /** The letter graphic format field name. */
-static char LETTER_GRAPHIC_FORMAT_XDT_FIELD_NAME_ARRAY[] = {'letter_graphic_format'};
+static char LETTER_GRAPHIC_FORMAT_XDT_FIELD_NAME_ARRAY[] = {'l', 'e', 't', 't', 'e', 'r', '_', 'g', 'r', 'a', 'p', 'h', 'i', 'c', '_', 'f', 'o', 'r', 'm', 'a', 't'};
 static char* LETTER_GRAPHIC_FORMAT_XDT_FIELD_NAME = LETTER_GRAPHIC_FORMAT_XDT_FIELD_NAME_ARRAY;
-static int* LETTER_GRAPHIC_FORMAT_XDT_FIELD_NAME_COUNT = NUMBER_6326_INTEGER_ARRAY;
+static int* LETTER_GRAPHIC_FORMAT_XDT_FIELD_NAME_COUNT = NUMBER_21_INTEGER_ARRAY;
 
 /** The letter image content field name. */
-static char LETTER_IMAGE_CONTENT_XDT_FIELD_NAME_ARRAY[] = {'letter_image_content'};
+static char LETTER_IMAGE_CONTENT_XDT_FIELD_NAME_ARRAY[] = {'l', 'e', 't', 't', 'e', 'r', '_', 'i', 'm', 'a', 'g', 'e', '_', 'c', 'o', 'n', 't', 'e', 'n', 't'};
 static char* LETTER_IMAGE_CONTENT_XDT_FIELD_NAME = LETTER_IMAGE_CONTENT_XDT_FIELD_NAME_ARRAY;
-static int* LETTER_IMAGE_CONTENT_XDT_FIELD_NAME_COUNT = NUMBER_6327_INTEGER_ARRAY;
+static int* LETTER_IMAGE_CONTENT_XDT_FIELD_NAME_COUNT = NUMBER_20_INTEGER_ARRAY;
 
 /** The free record 6200 category 1 name field name. */
 static char FREE_RECORD_6200_CATEGORY_1_NAME_XDT_FIELD_NAME_ARRAY[] = {'f', 'r', 'e', 'e', '_', 'r', 'e', 'c', 'o', 'r', 'd', '_', '6', '2', '0', '0', '_', 'c', 'a', 't', 'e', 'g', 'o', 'r', 'y', '_', '1', '_', 'n', 'a', 'm', 'e'};
@@ -1784,6 +1829,16 @@ static char RECORD_SIZE_XDT_FIELD_NAME_ARRAY[] = {'r', 'e', 'c', 'o', 'r', 'd', 
 static char* RECORD_SIZE_XDT_FIELD_NAME = RECORD_SIZE_XDT_FIELD_NAME_ARRAY;
 static int* RECORD_SIZE_XDT_FIELD_NAME_COUNT = NUMBER_11_INTEGER_ARRAY;
 
+/** The device receiver gdt id field name. */
+static char DEVICE_RECEIVER_GDT_ID_XDT_FIELD_NAME_ARRAY[] = {'d', 'e', 'v', 'i', 'c', 'e', '_', 'r', 'e', 'c', 'e', 'i', 'v', 'e', 'r', '_', 'g', 'd', 't', '_', 'i', 'd'};
+static char* DEVICE_RECEIVER_GDT_ID_XDT_FIELD_NAME = DEVICE_RECEIVER_GDT_ID_XDT_FIELD_NAME_ARRAY;
+static int* DEVICE_RECEIVER_GDT_ID_XDT_FIELD_NAME_COUNT = NUMBER_22_INTEGER_ARRAY;
+
+/** The device sender gdt id field name. */
+static char DEVICE_SENDER_GDT_ID_XDT_FIELD_NAME_ARRAY[] = {'d', 'e', 'v', 'i', 'c', 'e', '_', 's', 'e', 'n', 'd', 'e', 'r', '_', 'g', 'd', 't', '_', 'i', 'd'};
+static char* DEVICE_SENDER_GDT_ID_XDT_FIELD_NAME = DEVICE_SENDER_GDT_ID_XDT_FIELD_NAME_ARRAY;
+static int* DEVICE_SENDER_GDT_ID_XDT_FIELD_NAME_COUNT = NUMBER_20_INTEGER_ARRAY;
+
 /** The findings kind field name. */
 static char FINDINGS_KIND_XDT_FIELD_NAME_ARRAY[] = {'f', 'i', 'n', 'd', 'i', 'n', 'g', 's', '_', 'k', 'i', 'n', 'd'};
 static char* FINDINGS_KIND_XDT_FIELD_NAME = FINDINGS_KIND_XDT_FIELD_NAME_ARRAY;
@@ -1824,10 +1879,15 @@ static char FINDINGS_LIMIT_INDICATOR_XDT_FIELD_NAME_ARRAY[] = {'f', 'i', 'n', 'd
 static char* FINDINGS_LIMIT_INDICATOR_XDT_FIELD_NAME = FINDINGS_LIMIT_INDICATOR_XDT_FIELD_NAME_ARRAY;
 static int* FINDINGS_LIMIT_INDICATOR_XDT_FIELD_NAME_COUNT = NUMBER_24_INTEGER_ARRAY;
 
-/** The findings sample material number field name. */
-static char FINDINGS_SAMPLE_MATERIAL_NUMBER_XDT_FIELD_NAME_ARRAY[] = {'f', 'i', 'n', 'd', 'i', 'n', 'g', 's', '_', 's', 'a', 'm', 'p', 'l', 'e', '_', 'm', 'a', 't', 'e', 'r', 'i', 'a', 'l', '_', 'n', 'u', 'm', 'b', 'e', 'r'};
-static char* FINDINGS_SAMPLE_MATERIAL_NUMBER_XDT_FIELD_NAME = FINDINGS_SAMPLE_MATERIAL_NUMBER_XDT_FIELD_NAME_ARRAY;
-static int* FINDINGS_SAMPLE_MATERIAL_NUMBER_XDT_FIELD_NAME_COUNT = NUMBER_31_INTEGER_ARRAY;
+/** The findings sample material identification field name. */
+static char FINDINGS_SAMPLE_MATERIAL_IDENTIFICATION_XDT_FIELD_NAME_ARRAY[] = {'f', 'i', 'n', 'd', 'i', 'n', 'g', 's', '_', 's', 'a', 'm', 'p', 'l', 'e', '_', 'm', 'a', 't', 'e', 'r', 'i', 'a', 'l', '_', 'i', 'd', 'e', 'n', 't', 'i', 'f', 'i', 'c', 'a', 't', 'i', 'o', 'n'};
+static char* FINDINGS_SAMPLE_MATERIAL_IDENTIFICATION_XDT_FIELD_NAME = FINDINGS_SAMPLE_MATERIAL_IDENTIFICATION_XDT_FIELD_NAME_ARRAY;
+static int* FINDINGS_SAMPLE_MATERIAL_IDENTIFICATION_XDT_FIELD_NAME_COUNT = NUMBER_39_INTEGER_ARRAY;
+
+/** The findings sample material index field name. */
+static char FINDINGS_SAMPLE_MATERIAL_INDEX_XDT_FIELD_NAME_ARRAY[] = {'f', 'i', 'n', 'd', 'i', 'n', 'g', 's', '_', 's', 'a', 'm', 'p', 'l', 'e', '_', 'm', 'a', 't', 'e', 'r', 'i', 'a', 'l', '_', 'i', 'n', 'd', 'e', 'x'};
+static char* FINDINGS_SAMPLE_MATERIAL_INDEX_XDT_FIELD_NAME = FINDINGS_SAMPLE_MATERIAL_INDEX_XDT_FIELD_NAME_ARRAY;
+static int* FINDINGS_SAMPLE_MATERIAL_INDEX_XDT_FIELD_NAME_COUNT = NUMBER_30_INTEGER_ARRAY;
 
 /** The findings sample material name field name. */
 static char FINDINGS_SAMPLE_MATERIAL_NAME_XDT_FIELD_NAME_ARRAY[] = {'f', 'i', 'n', 'd', 'i', 'n', 'g', 's', '_', 's', 'a', 'm', 'p', 'l', 'e', '_', 'm', 'a', 't', 'e', 'r', 'i', 'a', 'l', '_', 'n', 'a', 'm', 'e'};
@@ -1843,6 +1903,21 @@ static int* FINDINGS_SAMPLE_MATERIAL_SPECIFICATION_XDT_FIELD_NAME_COUNT = NUMBER
 static char FINDINGS_SAMPLE_COLLECTION_DATE_XDT_FIELD_NAME_ARRAY[] = {'f', 'i', 'n', 'd', 'i', 'n', 'g', 's', '_', 's', 'a', 'm', 'p', 'l', 'e', '_', 'c', 'o', 'l', 'l', 'e', 'c', 't', 'i', 'o', 'n', '_', 'd', 'a', 't', 'e'};
 static char* FINDINGS_SAMPLE_COLLECTION_DATE_XDT_FIELD_NAME = FINDINGS_SAMPLE_COLLECTION_DATE_XDT_FIELD_NAME_ARRAY;
 static int* FINDINGS_SAMPLE_COLLECTION_DATE_XDT_FIELD_NAME_COUNT = NUMBER_31_INTEGER_ARRAY;
+
+/** The findings sample collection time (old format) field name. */
+static char FINDINGS_SAMPLE_COLLECTION_TIME_OLD_FORMAT_XDT_FIELD_NAME_ARRAY[] = {'f', 'i', 'n', 'd', 'i', 'n', 'g', 's', '_', 's', 'a', 'm', 'p', 'l', 'e', '_', 'c', 'o', 'l', 'l', 'e', 'c', 't', 'i', 'o', 'n', '_', 't', 'i', 'm', 'e', '_', 'o', 'l', 'd', '_', 'f', 'o', 'r', 'm', 'a', 't'};
+static char* FINDINGS_SAMPLE_COLLECTION_TIME_OLD_FORMAT_XDT_FIELD_NAME = FINDINGS_SAMPLE_COLLECTION_TIME_OLD_FORMAT_XDT_FIELD_NAME_ARRAY;
+static int* FINDINGS_SAMPLE_COLLECTION_TIME_OLD_FORMAT_XDT_FIELD_NAME_COUNT = NUMBER_42_INTEGER_ARRAY;
+
+/** The findings data stream units field name. */
+static char FINDINGS_DATA_STREAM_UNITS_XDT_FIELD_NAME_ARRAY[] = {'f', 'i', 'n', 'd', 'i', 'n', 'g', 's', '_', 'd', 'a', 't', 'a', '_', 's', 't', 'r', 'e', 'a', 'm', '_', 'u', 'n', 'i', 't', 's'};
+static char* FINDINGS_DATA_STREAM_UNITS_XDT_FIELD_NAME = FINDINGS_DATA_STREAM_UNITS_XDT_FIELD_NAME_ARRAY;
+static int* FINDINGS_DATA_STREAM_UNITS_XDT_FIELD_NAME_COUNT = NUMBER_26_INTEGER_ARRAY;
+
+/** The findings data stream field name. */
+static char FINDINGS_DATA_STREAM_XDT_FIELD_NAME_ARRAY[] = {'f', 'i', 'n', 'd', 'i', 'n', 'g', 's', '_', 'd', 'a', 't', 'a', '_', 's', 't', 'r', 'e', 'a', 'm'};
+static char* FINDINGS_DATA_STREAM_XDT_FIELD_NAME = FINDINGS_DATA_STREAM_XDT_FIELD_NAME_ARRAY;
+static int* FINDINGS_DATA_STREAM_XDT_FIELD_NAME_COUNT = NUMBER_20_INTEGER_ARRAY;
 
 /** The findings sample collection time field name. */
 static char FINDINGS_SAMPLE_COLLECTION_TIME_XDT_FIELD_NAME_ARRAY[] = {'f', 'i', 'n', 'd', 'i', 'n', 'g', 's', '_', 's', 'a', 'm', 'p', 'l', 'e', '_', 'c', 'o', 'l', 'l', 'e', 'c', 't', 'i', 'o', 'n', '_', 't', 'i', 'm', 'e'};
@@ -1894,6 +1969,16 @@ static char FINDINGS_NORMAL_VALUE_TEXT_XDT_FIELD_NAME_ARRAY[] = {'f', 'i', 'n', 
 static char* FINDINGS_NORMAL_VALUE_TEXT_XDT_FIELD_NAME = FINDINGS_NORMAL_VALUE_TEXT_XDT_FIELD_NAME_ARRAY;
 static int* FINDINGS_NORMAL_VALUE_TEXT_XDT_FIELD_NAME_COUNT = NUMBER_26_INTEGER_ARRAY;
 
+/** The findings normal value lower limit field name. */
+static char FINDINGS_NORMAL_VALUE_LOWER_LIMIT_XDT_FIELD_NAME_ARRAY[] = {'f', 'i', 'n', 'd', 'i', 'n', 'g', 's', '_', 'n', 'o', 'r', 'm', 'a', 'l', '_', 'v', 'a', 'l', 'u', 'e', '_', 'l', 'o', 'w', 'e', 'r', '_', 'l', 'i', 'm', 'i', 't'};
+static char* FINDINGS_NORMAL_VALUE_LOWER_LIMIT_XDT_FIELD_NAME = FINDINGS_NORMAL_VALUE_LOWER_LIMIT_XDT_FIELD_NAME_ARRAY;
+static int* FINDINGS_NORMAL_VALUE_LOWER_LIMIT_XDT_FIELD_NAME_COUNT = NUMBER_33_INTEGER_ARRAY;
+
+/** The findings normal value upper limit field name. */
+static char FINDINGS_NORMAL_VALUE_UPPER_LIMIT_XDT_FIELD_NAME_ARRAY[] = {'f', 'i', 'n', 'd', 'i', 'n', 'g', 's', '_', 'n', 'o', 'r', 'm', 'a', 'l', '_', 'v', 'a', 'l', 'u', 'e', '_', 'u', 'p', 'p', 'e', 'r', '_', 'l', 'i', 'm', 'i', 't'};
+static char* FINDINGS_NORMAL_VALUE_UPPER_LIMIT_XDT_FIELD_NAME = FINDINGS_NORMAL_VALUE_UPPER_LIMIT_XDT_FIELD_NAME_ARRAY;
+static int* FINDINGS_NORMAL_VALUE_UPPER_LIMIT_XDT_FIELD_NAME_COUNT = NUMBER_33_INTEGER_ARRAY;
+
 /** The findings remark field name. */
 static char FINDINGS_REMARK_XDT_FIELD_NAME_ARRAY[] = {'f', 'i', 'n', 'd', 'i', 'n', 'g', 's', '_', 'r', 'e', 'm', 'a', 'r', 'k'};
 static char* FINDINGS_REMARK_XDT_FIELD_NAME = FINDINGS_REMARK_XDT_FIELD_NAME_ARRAY;
@@ -1944,6 +2029,11 @@ static char DATA_PACKAGE_MEDIUMS_COUNT_XDT_FIELD_NAME_ARRAY[] = {'d', 'a', 't', 
 static char* DATA_PACKAGE_MEDIUMS_COUNT_XDT_FIELD_NAME = DATA_PACKAGE_MEDIUMS_COUNT_XDT_FIELD_NAME_ARRAY;
 static int* DATA_PACKAGE_MEDIUMS_COUNT_XDT_FIELD_NAME_COUNT = NUMBER_26_INTEGER_ARRAY;
 
+/** The data package character set field name. */
+static char DATA_PACKAGE_CHARACTER_SET_XDT_FIELD_NAME_ARRAY[] = {'d', 'a', 't', 'a', '_', 'p', 'a', 'c', 'k', 'a', 'g', 'e', '_', 'c', 'h', 'a', 'r', 'a', 'c', 't', 'e', 'r', '_', 's', 'e', 't'};
+static char* DATA_PACKAGE_CHARACTER_SET_XDT_FIELD_NAME = DATA_PACKAGE_CHARACTER_SET_XDT_FIELD_NAME_ARRAY;
+static int* DATA_PACKAGE_CHARACTER_SET_XDT_FIELD_NAME_COUNT = NUMBER_26_INTEGER_ARRAY;
+
 /** The data package adt version field name. */
 static char DATA_PACKAGE_ADT_VERSION_XDT_FIELD_NAME_ARRAY[] = {'d', 'a', 't', 'a', '_', 'p', 'a', 'c', 'k', 'a', 'g', 'e', '_', 'a', 'd', 't', '_', 'v', 'e', 'r', 's', 'i', 'o', 'n'};
 static char* DATA_PACKAGE_ADT_VERSION_XDT_FIELD_NAME = DATA_PACKAGE_ADT_VERSION_XDT_FIELD_NAME_ARRAY;
@@ -1953,6 +2043,11 @@ static int* DATA_PACKAGE_ADT_VERSION_XDT_FIELD_NAME_COUNT = NUMBER_24_INTEGER_AR
 static char DATA_PACKAGE_BDT_VERSION_XDT_FIELD_NAME_ARRAY[] = {'d', 'a', 't', 'a', '_', 'p', 'a', 'c', 'k', 'a', 'g', 'e', '_', 'b', 'd', 't', '_', 'v', 'e', 'r', 's', 'i', 'o', 'n'};
 static char* DATA_PACKAGE_BDT_VERSION_XDT_FIELD_NAME = DATA_PACKAGE_BDT_VERSION_XDT_FIELD_NAME_ARRAY;
 static int* DATA_PACKAGE_BDT_VERSION_XDT_FIELD_NAME_COUNT = NUMBER_24_INTEGER_ARRAY;
+
+/** The data package gdt version field name. */
+static char DATA_PACKAGE_GDT_VERSION_XDT_FIELD_NAME_ARRAY[] = {'d', 'a', 't', 'a', '_', 'p', 'a', 'c', 'k', 'a', 'g', 'e', '_', 'g', 'd', 't', '_', 'v', 'e', 'r', 's', 'i', 'o', 'n'};
+static char* DATA_PACKAGE_GDT_VERSION_XDT_FIELD_NAME = DATA_PACKAGE_GDT_VERSION_XDT_FIELD_NAME_ARRAY;
+static int* DATA_PACKAGE_GDT_VERSION_XDT_FIELD_NAME_COUNT = NUMBER_24_INTEGER_ARRAY;
 
 /** The data package archiving type field name. */
 static char DATA_PACKAGE_ARCHIVING_TYPE_XDT_FIELD_NAME_ARRAY[] = {'d', 'a', 't', 'a', '_', 'p', 'a', 'c', 'k', 'a', 'g', 'e', '_', 'a', 'r', 'c', 'h', 'i', 'v', 'i', 'n', 'g', '_', 't', 'y', 'p', 'e'};

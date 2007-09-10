@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2007-09-05 21:19:59 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2007-09-10 18:37:38 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -102,6 +102,31 @@ static int* PATIENT_MASTER_DATA_XDT_RECORD_NAME_COUNT = NUMBER_19_INTEGER_ARRAY;
 static char MEDICAL_TREATMENT_DATA_XDT_RECORD_NAME_ARRAY[] = {'m', 'e', 'd', 'i', 'c', 'a', 'l', '_', 't', 'r', 'e', 'a', 't', 'm', 'e', 'n', 't', '_', 'd', 'a', 't', 'a'};
 static char* MEDICAL_TREATMENT_DATA_XDT_RECORD_NAME = MEDICAL_TREATMENT_DATA_XDT_RECORD_NAME_ARRAY;
 static int* MEDICAL_TREATMENT_DATA_XDT_RECORD_NAME_COUNT = NUMBER_22_INTEGER_ARRAY;
+
+/** The patient master data request record name. */
+static char PATIENT_MASTER_DATA_REQUEST_XDT_RECORD_NAME_ARRAY[] = {'p', 'a', 't', 'i', 'e', 'n', 't', '_', 'm', 'a', 's', 't', 'e', 'r', '_', 'd', 'a', 't', 'a', '_', 'r', 'e', 'q', 'u', 'e', 's', 't'};
+static char* PATIENT_MASTER_DATA_REQUEST_XDT_RECORD_NAME = PATIENT_MASTER_DATA_REQUEST_XDT_RECORD_NAME_ARRAY;
+static int* PATIENT_MASTER_DATA_REQUEST_XDT_RECORD_NAME_COUNT = NUMBER_27_INTEGER_ARRAY;
+
+/** The patient master data transfer record name. */
+static char PATIENT_MASTER_DATA_TRANSFER_XDT_RECORD_NAME_ARRAY[] = {'p', 'a', 't', 'i', 'e', 'n', 't', '_', 'm', 'a', 's', 't', 'e', 'r', '_', 'd', 'a', 't', 'a', '_', 't', 'r', 'a', 'n', 's', 'f', 'e', 'r'};
+static char* PATIENT_MASTER_DATA_TRANSFER_XDT_RECORD_NAME = PATIENT_MASTER_DATA_TRANSFER_XDT_RECORD_NAME_ARRAY;
+static int* PATIENT_MASTER_DATA_TRANSFER_XDT_RECORD_NAME_COUNT = NUMBER_28_INTEGER_ARRAY;
+
+/** The examination request record name. */
+static char EXAMINATION_REQUEST_XDT_RECORD_NAME_ARRAY[] = {'e', 'x', 'a', 'm', 'i', 'n', 'a', 't', 'i', 'o', 'n', '_', 'r', 'e', 'q', 'u', 'e', 's', 't'};
+static char* EXAMINATION_REQUEST_XDT_RECORD_NAME = EXAMINATION_REQUEST_XDT_RECORD_NAME_ARRAY;
+static int* EXAMINATION_REQUEST_XDT_RECORD_NAME_COUNT = NUMBER_19_INTEGER_ARRAY;
+
+/** The examination data transfer record name. */
+static char EXAMINATION_DATA_TRANSFER_XDT_RECORD_NAME_ARRAY[] = {'e', 'x', 'a', 'm', 'i', 'n', 'a', 't', 'i', 'o', 'n', '_', 'd', 'a', 't', 'a', '_', 't', 'r', 'a', 'n', 's', 'f', 'e', 'r'};
+static char* EXAMINATION_DATA_TRANSFER_XDT_RECORD_NAME = EXAMINATION_DATA_TRANSFER_XDT_RECORD_NAME_ARRAY;
+static int* EXAMINATION_DATA_TRANSFER_XDT_RECORD_NAME_COUNT = NUMBER_25_INTEGER_ARRAY;
+
+/** The examination data display record name. */
+static char EXAMINATION_DATA_DISPLAY_XDT_RECORD_NAME_ARRAY[] = {'e', 'x', 'a', 'm', 'i', 'n', 'a', 't', 'i', 'o', 'n', '_', 'd', 'a', 't', 'a', '_', 'd', 'i', 's', 'p', 'l', 'a', 'y'};
+static char* EXAMINATION_DATA_DISPLAY_XDT_RECORD_NAME = EXAMINATION_DATA_DISPLAY_XDT_RECORD_NAME_ARRAY;
+static int* EXAMINATION_DATA_DISPLAY_XDT_RECORD_NAME_COUNT = NUMBER_24_INTEGER_ARRAY;
 
 /* XDT_RECORD_NAME_CONSTANTS_SOURCE */
 #endif
