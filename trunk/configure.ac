@@ -1,40 +1,92 @@
-dnl Process this file with autoconf to produce a configure script.
+#                                               -*- Autoconf -*-
+# Process this file with autoconf to produce a configure script.
 
-AC_PREREQ(2.59)
+AC_PREREQ(2.61)
+AC_INIT([cybop], [0.0.8], [christian.heller@tuxtax.de])
+AC_CONFIG_SRCDIR([src/applicator/add.c])
+AC_CONFIG_AUX_DIR([build-aux])
+AM_INIT_AUTOMAKE([gnu dist-bzip2 tar-ustar])
+#AC_CONFIG_HEADER([config.h])
 
-# Initialise autoconf with project name, version, email contact.
-AC_INIT([cyboi], [0.8.0], [cybop-developers@lists.berlios.de])
+AC_CANONICAL_HOST
 
-# Force automake and autoconf to search auxiliary scripts in the given directory first.
-# Specify the "config" directory to store many of the GNU Autotools
-# intermediate files, such as install-sh.
-# It may also be used to store all project specific Autoconf M4 macros.
-#
-# The historical default was to search auxiliary scripts in the immediate parent
-# and grand-parent directories. If a sub package's `AC_CONFIG_AUX_DIR([.])' line was
-# removed from subdir/configure.ac, that sub package would share the auxiliary script of the parent package.
-# This may looks like a gain in size (a few kilobytes), but it is actually a loss of modularity as the
-# sub package is no longer self-contained (`make dist' in the subdirectory will not work anymore).
-AC_CONFIG_AUX_DIR([.])
+AC_MSG_CHECKING([Host cpu])
+AC_MSG_RESULT([$host_cpu])
 
-# Initialise automake.
-AM_INIT_AUTOMAKE([-Wall -Werror foreign])
+AC_MSG_CHECKING([For target cpu])
 
-# Specify c compiler.
+case $host in
+    x86_64*linux*)
+	test -n "$CC" || CC="gcc -m32"
+	test -n "$LD" || LD="ld -m elf_i386"
+	test -n "$AS" || AS="as --32"
+	host_32bits_emulation="yes"
+	host_cpu="i386"
+    ;;
+esac
+
+AC_MSG_RESULT([$host_cpu])
+
+AC_MSG_CHECKING([For operating system])
+case $host_os in
+    linux*)
+	cybop_os_linux=yes
+	AC_MSG_RESULT([Linux])
+    ;;
+    mingw*)
+	cybop_os_win32=yes
+	AC_MSG_RESULT([Win32])
+    ;;
+esac
+
+AM_CONDITIONAL(LINUX_OPERATING_SYSTEM, [test "$cybop_os_linux" = "yes"])
+AM_CONDITIONAL(WIN32_OPERATING_SYSTEM, [test "$cybop_os_win32" = "yes"])
+AM_CONDITIONAL(LINUX_EMULATION, [test "$host_32bits_emulation" = "yes"])
+
+# Checks for programs.
 AC_PROG_CC
+AC_PROG_CPP
+AC_PROG_INSTALL
+AC_PROG_LN_S
+AC_PROG_MAKE_SET
 
-# Add header files.
-AC_CONFIG_HEADERS([config.h])
+AC_PROG_LIBTOOL
 
-# Specify sub directories' makefiles.
-AC_CONFIG_FILES([
-Makefile
-#src/Makefile
-#src/controller/Makefile
-])
+#AC_PKG_PROG_PKG_CONFIG
 
-# Call sub directories' ./configure scripts recursively.
-AC_CONFIG_SUBDIRS([src])
+# Checks for libraries.
+AC_CHECK_LIB([GL], [glClear])
+AC_CHECK_LIB([GLU], [main])
+AC_CHECK_LIB([X11], [XOpenDisplay])
+AC_CHECK_LIB([glut], [glutInit])
+AC_CHECK_LIB([pthread], [pthread_exit])
+#AC_CHECK_LIB([xml2], [xmlParseFile])
 
-# Write the configure file.
+PKG_CHECK_MODULES(LIBXML2,libxml-2.0 >= 2.4.30)
+AC_SUBST(LIBXML2_CFLAGS)
+AC_SUBST(LIBXML2_LIBS)
+
+# Checks for header files.
+AC_PATH_X
+AC_HEADER_STDC
+AC_HEADER_SYS_WAIT
+AC_CHECK_HEADERS([arpa/inet.h fcntl.h locale.h netinet/in.h stddef.h stdlib.h string.h sys/socket.h termios.h unistd.h wchar.h])
+
+# Checks for typedefs, structures, and compiler characteristics.
+AC_HEADER_STDBOOL
+AC_TYPE_SIZE_T
+AC_STRUCT_TM
+AC_TYPE_UINT16_T
+AC_C_VOLATILE
+
+# Checks for library functions.
+AC_FUNC_CHOWN
+AC_FUNC_MALLOC
+AC_FUNC_REALLOC
+AC_FUNC_STRTOD
+AC_CHECK_FUNCS([memset setlocale socket strtol])
+
+AC_CONFIG_FILES([Makefile
+		 src/Makefile
+		 src/controller/Makefile])
 AC_OUTPUT

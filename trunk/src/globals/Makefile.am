@@ -1,3 +1,0 @@
-SUBDIRS = constants \
-    logger \
-    variables
