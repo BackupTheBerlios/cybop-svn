@@ -14,7 +14,7 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.27 $ $Date: 2007-09-10 18:37:37 $ $Author: christian $
+# @version $Revision: 1.28 $ $Date: 2007-09-11 07:47:24 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
@@ -23,6 +23,7 @@
             (function "decode_xdt_select_field" at "decode_xdt_decode_model" function calls)
         * Set correct abstractions in "xdt_converter.c"
             (function "decode_xdt_select_field" at "decode_xdt_decode_model" function calls)
+        * Add new autoconf/ automake files prepared by Didier Link <didier@famille-link.fr>
 
 2007-09-06  Christian Heller  <christian.heller@tuxtax.de>
         * Add xDT/GDT constants to files "xdt_record_constants.c", "xdt_record_name_constants.c",

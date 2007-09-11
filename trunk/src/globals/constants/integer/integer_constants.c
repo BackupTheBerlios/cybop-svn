@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2007-09-02 22:35:17 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2007-09-11 07:47:24 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -5197,7 +5197,11 @@ static int* NUMBER_6100_INTEGER = NUMBER_6100_INTEGER_ARRAY;
 
 /** The number 6200 integer. */
 static int NUMBER_6200_INTEGER_ARRAY[] = {6200};
-static int* NUMBER_6200_INTEGER = NUMBER_6100_INTEGER_ARRAY;
+static int* NUMBER_6200_INTEGER = NUMBER_6200_INTEGER_ARRAY;
+
+/** The number 6201 integer. */
+static int NUMBER_6201_INTEGER_ARRAY[] = {6201};
+static int* NUMBER_6201_INTEGER = NUMBER_6201_INTEGER_ARRAY;
 
 /** The number 6205 integer. */
 static int NUMBER_6205_INTEGER_ARRAY[] = {6205};
@@ -5230,6 +5234,18 @@ static int* NUMBER_6222_INTEGER = NUMBER_6222_INTEGER_ARRAY;
 /** The number 6225 integer. */
 static int NUMBER_6225_INTEGER_ARRAY[] = {6225};
 static int* NUMBER_6225_INTEGER = NUMBER_6225_INTEGER_ARRAY;
+
+/** The number 6226 integer. */
+static int NUMBER_6226_INTEGER_ARRAY[] = {6226};
+static int* NUMBER_6226_INTEGER = NUMBER_6226_INTEGER_ARRAY;
+
+/** The number 6227 integer. */
+static int NUMBER_6227_INTEGER_ARRAY[] = {6227};
+static int* NUMBER_6227_INTEGER = NUMBER_6227_INTEGER_ARRAY;
+
+/** The number 6228 integer. */
+static int NUMBER_6228_INTEGER_ARRAY[] = {6228};
+static int* NUMBER_6228_INTEGER = NUMBER_6228_INTEGER_ARRAY;
 
 /** The number 6230 integer. */
 static int NUMBER_6230_INTEGER_ARRAY[] = {6230};
@@ -5274,6 +5290,22 @@ static int* NUMBER_6300_INTEGER = NUMBER_6300_INTEGER_ARRAY;
 /** The number 6301 integer. */
 static int NUMBER_6301_INTEGER_ARRAY[] = {6301};
 static int* NUMBER_6301_INTEGER = NUMBER_6301_INTEGER_ARRAY;
+
+/** The number 6302 integer. */
+static int NUMBER_6302_INTEGER_ARRAY[] = {6302};
+static int* NUMBER_6302_INTEGER = NUMBER_6302_INTEGER_ARRAY;
+
+/** The number 6303 integer. */
+static int NUMBER_6303_INTEGER_ARRAY[] = {6303};
+static int* NUMBER_6303_INTEGER = NUMBER_6303_INTEGER_ARRAY;
+
+/** The number 6304 integer. */
+static int NUMBER_6304_INTEGER_ARRAY[] = {6304};
+static int* NUMBER_6304_INTEGER = NUMBER_6304_INTEGER_ARRAY;
+
+/** The number 6305 integer. */
+static int NUMBER_6305_INTEGER_ARRAY[] = {6305};
+static int* NUMBER_6305_INTEGER = NUMBER_6305_INTEGER_ARRAY;
 
 /** The number 6306 integer. */
 static int NUMBER_6306_INTEGER_ARRAY[] = {6306};
@@ -5635,6 +5667,14 @@ static int* NUMBER_8100_INTEGER = NUMBER_8100_INTEGER_ARRAY;
 static int NUMBER_8192_INTEGER_ARRAY[] = {8192};
 static int* NUMBER_8192_INTEGER = NUMBER_8192_INTEGER_ARRAY;
 
+/** The number 8315 integer. */
+static int NUMBER_8315_INTEGER_ARRAY[] = {8315};
+static int* NUMBER_8315_INTEGER = NUMBER_8315_INTEGER_ARRAY;
+
+/** The number 8316 integer. */
+static int NUMBER_8316_INTEGER_ARRAY[] = {8316};
+static int* NUMBER_8316_INTEGER = NUMBER_8316_INTEGER_ARRAY;
+
 /** The number 8401 integer. */
 static int NUMBER_8401_INTEGER_ARRAY[] = {8401};
 static int* NUMBER_8401_INTEGER = NUMBER_8401_INTEGER_ARRAY;
@@ -5667,6 +5707,10 @@ static int* NUMBER_8421_INTEGER = NUMBER_8421_INTEGER_ARRAY;
 static int NUMBER_8422_INTEGER_ARRAY[] = {8422};
 static int* NUMBER_8422_INTEGER = NUMBER_8422_INTEGER_ARRAY;
 
+/** The number 8428 integer. */
+static int NUMBER_8428_INTEGER_ARRAY[] = {8428};
+static int* NUMBER_8428_INTEGER = NUMBER_8428_INTEGER_ARRAY;
+
 /** The number 8429 integer. */
 static int NUMBER_8429_INTEGER_ARRAY[] = {8429};
 static int* NUMBER_8429_INTEGER = NUMBER_8429_INTEGER_ARRAY;
@@ -5686,6 +5730,18 @@ static int* NUMBER_8432_INTEGER = NUMBER_8432_INTEGER_ARRAY;
 /** The number 8433 integer. */
 static int NUMBER_8433_INTEGER_ARRAY[] = {8433};
 static int* NUMBER_8433_INTEGER = NUMBER_8433_INTEGER_ARRAY;
+
+/** The number 8437 integer. */
+static int NUMBER_8437_INTEGER_ARRAY[] = {8437};
+static int* NUMBER_8437_INTEGER = NUMBER_8437_INTEGER_ARRAY;
+
+/** The number 8438 integer. */
+static int NUMBER_8438_INTEGER_ARRAY[] = {8438};
+static int* NUMBER_8438_INTEGER = NUMBER_8438_INTEGER_ARRAY;
+
+/** The number 8439 integer. */
+static int NUMBER_8439_INTEGER_ARRAY[] = {8439};
+static int* NUMBER_8439_INTEGER = NUMBER_8439_INTEGER_ARRAY;
 
 /** The number 8440 integer. */
 static int NUMBER_8440_INTEGER_ARRAY[] = {8440};
@@ -5722,6 +5778,14 @@ static int* NUMBER_8447_INTEGER = NUMBER_8447_INTEGER_ARRAY;
 /** The number 8460 integer. */
 static int NUMBER_8460_INTEGER_ARRAY[] = {8460};
 static int* NUMBER_8460_INTEGER = NUMBER_8460_INTEGER_ARRAY;
+
+/** The number 8461 integer. */
+static int NUMBER_8461_INTEGER_ARRAY[] = {8461};
+static int* NUMBER_8461_INTEGER = NUMBER_8461_INTEGER_ARRAY;
+
+/** The number 8462 integer. */
+static int NUMBER_8462_INTEGER_ARRAY[] = {8462};
+static int* NUMBER_8462_INTEGER = NUMBER_8462_INTEGER_ARRAY;
 
 /** The number 8470 integer. */
 static int NUMBER_8470_INTEGER_ARRAY[] = {8470};
@@ -5763,6 +5827,10 @@ static int* NUMBER_9106_INTEGER = NUMBER_9106_INTEGER_ARRAY;
 static int NUMBER_9202_INTEGER_ARRAY[] = {9202};
 static int* NUMBER_9202_INTEGER = NUMBER_9202_INTEGER_ARRAY;
 
+/** The number 9206 integer. */
+static int NUMBER_9206_INTEGER_ARRAY[] = {9206};
+static int* NUMBER_9206_INTEGER = NUMBER_9206_INTEGER_ARRAY;
+
 /** The number 9203 integer. */
 static int NUMBER_9203_INTEGER_ARRAY[] = {9203};
 static int* NUMBER_9203_INTEGER = NUMBER_9203_INTEGER_ARRAY;
@@ -5774,6 +5842,10 @@ static int* NUMBER_9210_INTEGER = NUMBER_9210_INTEGER_ARRAY;
 /** The number 9213 integer. */
 static int NUMBER_9213_INTEGER_ARRAY[] = {9213};
 static int* NUMBER_9213_INTEGER = NUMBER_9213_INTEGER_ARRAY;
+
+/** The number 9218 integer. */
+static int NUMBER_9218_INTEGER_ARRAY[] = {9218};
+static int* NUMBER_9218_INTEGER = NUMBER_9218_INTEGER_ARRAY;
 
 /** The number 9600 integer. */
 static int NUMBER_9600_INTEGER_ARRAY[] = {9600};

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2007-09-10 18:37:38 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2007-09-11 07:47:24 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -37,7 +37,7 @@ static int* KBV_TEST_NUMBER_XDT_FIELD_NAME_COUNT = NUMBER_15_INTEGER_ARRAY;
 /** The responsible entity field name. */
 static char RESPONSIBLE_ENTITY_XDT_FIELD_NAME_ARRAY[] = {'r', 'e', 's', 'p', 'o', 'n', 's', 'i', 'b', 'l', 'e', '_', 'e', 'n', 't', 'i', 't', 'y'};
 static char* RESPONSIBLE_ENTITY_XDT_FIELD_NAME = RESPONSIBLE_ENTITY_XDT_FIELD_NAME_ARRAY;
-static int* RESPONSIBLE_ENTITY_XDT_FIELD_NAME = NUMBER_18_INTEGER_ARRAY;
+static int* RESPONSIBLE_ENTITY_XDT_FIELD_NAME_COUNT = NUMBER_18_INTEGER_ARRAY;
 
 /** The software field name. */
 static char SOFTWARE_XDT_FIELD_NAME_ARRAY[] = {'s', 'o', 'f', 't', 'w', 'a', 'r', 'e'};
@@ -499,10 +499,10 @@ static char PATIENT_BODY_WEIGHT_XDT_FIELD_NAME_ARRAY[] = {'p', 'a', 't', 'i', 'e
 static char* PATIENT_BODY_WEIGHT_XDT_FIELD_NAME = PATIENT_BODY_WEIGHT_XDT_FIELD_NAME_ARRAY;
 static int* PATIENT_BODY_WEIGHT_XDT_FIELD_NAME_COUNT = NUMBER_19_INTEGER_ARRAY;
 
-/** The patient employer field name. */
-static char PATIENT_EMPLOYER_XDT_FIELD_NAME_ARRAY[] = {'p', 'a', 't', 'i', 'e', 'n', 't', '_', 'e', 'm', 'p', 'l', 'o', 'y', 'e', 'r'};
-static char* PATIENT_EMPLOYER_XDT_FIELD_NAME = PATIENT_EMPLOYER_XDT_FIELD_NAME_ARRAY;
-static int* PATIENT_EMPLOYER_XDT_FIELD_NAME_COUNT = NUMBER_16_INTEGER_ARRAY;
+/** The patient employer (redundant) field name. */
+static char PATIENT_EMPLOYER_REDUNDANT_XDT_FIELD_NAME_ARRAY[] = {'p', 'a', 't', 'i', 'e', 'n', 't', '_', 'e', 'm', 'p', 'l', 'o', 'y', 'e', 'r', '_', 'r', 'e', 'd', 'u', 'n', 'd', 'a', 'n', 't'};
+static char* PATIENT_EMPLOYER_REDUNDANT_XDT_FIELD_NAME = PATIENT_EMPLOYER_REDUNDANT_XDT_FIELD_NAME_ARRAY;
+static int* PATIENT_EMPLOYER_REDUNDANT_XDT_FIELD_NAME_COUNT = NUMBER_26_INTEGER_ARRAY;
 
 /** The patient phone field name. */
 static char PATIENT_PHONE_XDT_FIELD_NAME_ARRAY[] = {'p', 'a', 't', 'i', 'e', 'n', 't', '_', 'p', 'h', 'o', 'n', 'e'};
@@ -944,10 +944,10 @@ static char ACCIDENT_TREATMENT_BY_PHYSICIAN_NAME_XDT_FIELD_NAME_ARRAY[] = {'a', 
 static char* ACCIDENT_TREATMENT_BY_PHYSICIAN_NAME_XDT_FIELD_NAME = ACCIDENT_TREATMENT_BY_PHYSICIAN_NAME_XDT_FIELD_NAME_ARRAY;
 static int* ACCIDENT_TREATMENT_BY_PHYSICIAN_NAME_XDT_FIELD_NAME_COUNT = NUMBER_36_INTEGER_ARRAY;
 
-/** The accident kind of first treatment field name. */
-static char ACCIDENT_KIND_OF_FIRST_TREATMENT_XDT_FIELD_NAME_ARRAY[] = {'a', 'c', 'c', 'i', 'd', 'e', 'n', 't', '_', 'k', 'i', 'n', 'd', '_', 'o', 'f', '_', 'f', 'i', 'r', 's', 't', '_', 't', 'r', 'e', 'a', 't', 'm', 'e', 'n', 't'};
-static char* ACCIDENT_KIND_OF_FIRST_TREATMENT_XDT_FIELD_NAME = ACCIDENT_KIND_OF_FIRST_TREATMENT_XDT_FIELD_NAME_ARRAY;
-static int* ACCIDENT_KIND_OF_FIRST_TREATMENT_XDT_FIELD_NAME_COUNT = NUMBER_32_INTEGER_ARRAY;
+/** The accident kind of treatment field name. */
+static char ACCIDENT_KIND_OF_TREATMENT_XDT_FIELD_NAME_ARRAY[] = {'a', 'c', 'c', 'i', 'd', 'e', 'n', 't', '_', 'k', 'i', 'n', 'd', '_', 'o', 'f', '_', 'f', 'i', 'r', 's', 't', '_', 't', 'r', 'e', 'a', 't', 'm', 'e', 'n', 't'};
+static char* ACCIDENT_KIND_OF_TREATMENT_XDT_FIELD_NAME = ACCIDENT_KIND_OF_TREATMENT_XDT_FIELD_NAME_ARRAY;
+static int* ACCIDENT_KIND_OF_TREATMENT_XDT_FIELD_NAME_COUNT = NUMBER_32_INTEGER_ARRAY;
 
 /** The accident alcohol influence field name. */
 static char ACCIDENT_ALCOHOL_INFLUENCE_XDT_FIELD_NAME_ARRAY[] = {'a', 'c', 'c', 'i', 'd', 'e', 'n', 't', '_', 'a', 'l', 'c', 'o', 'h', 'o', 'l', '_', 'i', 'n', 'f', 'l', 'u', 'e', 'n', 'c', 'e'};

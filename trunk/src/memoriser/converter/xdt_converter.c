@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.18 $ $Date: 2007-09-10 18:37:38 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2007-09-11 07:47:24 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -1726,13 +1726,13 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
                 (void*) DOUBLE_VECTOR_ABSTRACTION, (void*) DOUBLE_VECTOR_ABSTRACTION_COUNT,
                 (void*) PATIENT_BODY_WEIGHT_XDT_FIELD_NAME, (void*) PATIENT_BODY_WEIGHT_XDT_FIELD_NAME_COUNT);
 
-        } else if (*id == *PATIENT_EMPLOYER_XDT_FIELD) {
+        } else if (*id == *PATIENT_EMPLOYER_REDUNDANT_XDT_FIELD) {
 
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
                 (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
-                (void*) PATIENT_EMPLOYER_XDT_FIELD_NAME, (void*) PATIENT_EMPLOYER_XDT_FIELD_NAME_COUNT);
+                (void*) PATIENT_EMPLOYER_REDUNDANT_XDT_FIELD_NAME, (void*) PATIENT_EMPLOYER_REDUNDANT_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *PATIENT_PHONE_XDT_FIELD) {
 
@@ -2438,13 +2438,13 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
                 (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) ACCIDENT_TREATMENT_BY_PHYSICIAN_NAME_XDT_FIELD_NAME, (void*) ACCIDENT_TREATMENT_BY_PHYSICIAN_NAME_XDT_FIELD_NAME_COUNT);
 
-        } else if (*id == *ACCIDENT_KIND_OF_FIRST_TREATMENT_XDT_FIELD) {
+        } else if (*id == *ACCIDENT_KIND_OF_TREATMENT_XDT_FIELD) {
 
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
                 (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
-                (void*) ACCIDENT_KIND_OF_FIRST_TREATMENT_XDT_FIELD_NAME, (void*) ACCIDENT_KIND_OF_FIRST_TREATMENT_XDT_FIELD_NAME_COUNT);
+                (void*) ACCIDENT_KIND_OF_TREATMENT_XDT_FIELD_NAME, (void*) ACCIDENT_KIND_OF_TREATMENT_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *ACCIDENT_ALCOHOL_INFLUENCE_XDT_FIELD) {
 

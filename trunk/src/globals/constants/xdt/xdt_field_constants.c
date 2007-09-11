@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2007-09-10 18:37:37 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2007-09-11 07:47:24 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -1091,7 +1091,7 @@ static int* PATIENT_BODY_WEIGHT_XDT_FIELD = NUMBER_3623_INTEGER_ARRAY;
  * Rule: -
  * Example: Müller AG
  */
-static int* PATIENT_EMPLOYER_XDT_FIELD = NUMBER_3625_INTEGER_ARRAY;
+static int* PATIENT_EMPLOYER_REDUNDANT_XDT_FIELD = NUMBER_3625_INTEGER_ARRAY;
 
 /**
  * The patient phone field.
@@ -2062,7 +2062,7 @@ static int* ACCIDENT_FIRST_TIME_TREATMENT_DATE_XDT_FIELD = NUMBER_4513_INTEGER_A
 static int* ACCIDENT_TREATMENT_BY_PHYSICIAN_NAME_XDT_FIELD = NUMBER_4514_INTEGER_ARRAY;
 
 /**
- * The accident kind of first treatment field.
+ * The accident kind of treatment field.
  *
  * German: Art dieser ersten ärztlichen Behandlung
  * Size: <= 70
@@ -2070,7 +2070,7 @@ static int* ACCIDENT_TREATMENT_BY_PHYSICIAN_NAME_XDT_FIELD = NUMBER_4514_INTEGER
  * Rule: --
  * Example: Erstversorgung Fraktur
  */
-static int* ACCIDENT_KIND_OF_FIRST_TREATMENT_XDT_FIELD = NUMBER_4515_INTEGER_ARRAY;
+static int* ACCIDENT_KIND_OF_TREATMENT_XDT_FIELD = NUMBER_4515_INTEGER_ARRAY;
 
 /**
  * The accident alcohol influence field.
