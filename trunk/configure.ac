@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.61)
-AC_INIT([cybop], [0.0.8], [christian.heller@tuxtax.de])
+AC_INIT([cybop], [0.9.0], [christian.heller@tuxtax.de])
 AC_CONFIG_SRCDIR([src/applicator/add.c])
 AC_CONFIG_AUX_DIR([build-aux])
 AM_INIT_AUTOMAKE([gnu dist-bzip2 tar-ustar])

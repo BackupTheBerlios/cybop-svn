@@ -1,5 +1,5 @@
 
-EXTRA_DIST = handler manager checker.c globaliser.c handler.c manager.c optionaliser.c tester.c
+EXTRA_DIST = handler manager checker.c globaliser.c handler.c initialiser.c manager.c optionaliser.c tester.c
 
 bin_PROGRAMS = cyboi
 
@@ -17,7 +17,7 @@ if LINUX_EMULATION
     EMUL = -L/usr/lib32
 endif
 
-AM_CFLAGS = -I/usr/include $(LIBXML2_CFLAGS) $(OS) 
+AM_CFLAGS = -I/usr/include $(LIBXML2_CFLAGS) $(OS)
 
-LDADD = $(EMUL) @LIBXML2_LIBS@ 
+LDADD = $(EMUL) @LIBXML2_LIBS@
 

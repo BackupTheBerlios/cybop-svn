@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2007-09-11 07:47:24 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2007-09-12 08:18:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -1014,10 +1014,10 @@ static char ACCIDENT_ABLE_TO_WORK_FROM_XDT_FIELD_NAME_ARRAY[] = {'a', 'c', 'c', 
 static char* ACCIDENT_ABLE_TO_WORK_FROM_XDT_FIELD_NAME = ACCIDENT_ABLE_TO_WORK_FROM_XDT_FIELD_NAME_ARRAY;
 static int* ACCIDENT_ABLE_TO_WORK_FROM_XDT_FIELD_NAME_COUNT = NUMBER_26_INTEGER_ARRAY;
 
-/** The accident unable to work certificate issuance date field name. */
-static char ACCIDENT_UNABLE_TO_WORK_CERTIFICATE_ISSUANCE_DATE_XDT_FIELD_NAME_ARRAY[] = {'a', 'c', 'c', 'i', 'd', 'e', 'n', 't', '_', 'u', 'n', 'a', 'b', 'l', 'e', '_', 't', 'o', '_', 'w', 'o', 'r', 'k', '_', 'c', 'e', 'r', 't', 'i', 'f', 'i', 'c', 'a', 't', 'e', '_', 'i', 's', 's', 'u', 'a', 'n', 'c', 'e', '_', 'd', 'a', 't', 'e'};
-static char* ACCIDENT_UNABLE_TO_WORK_CERTIFICATE_ISSUANCE_DATE_XDT_FIELD_NAME = ACCIDENT_UNABLE_TO_WORK_CERTIFICATE_ISSUANCE_DATE_XDT_FIELD_NAME_ARRAY;
-static int* ACCIDENT_UNABLE_TO_WORK_CERTIFICATE_ISSUANCE_DATE_XDT_FIELD_NAME_COUNT = NUMBER_49_INTEGER_ARRAY;
+/** The accident unable to work certificate issuance field name. */
+static char ACCIDENT_UNABLE_TO_WORK_CERTIFICATE_ISSUANCE_XDT_FIELD_NAME_ARRAY[] = {'a', 'c', 'c', 'i', 'd', 'e', 'n', 't', '_', 'u', 'n', 'a', 'b', 'l', 'e', '_', 't', 'o', '_', 'w', 'o', 'r', 'k', '_', 'c', 'e', 'r', 't', 'i', 'f', 'i', 'c', 'a', 't', 'e', '_', 'i', 's', 's', 'u', 'a', 'n', 'c', 'e'};
+static char* ACCIDENT_UNABLE_TO_WORK_CERTIFICATE_ISSUANCE_XDT_FIELD_NAME = ACCIDENT_UNABLE_TO_WORK_CERTIFICATE_ISSUANCE_XDT_FIELD_NAME_ARRAY;
+static int* ACCIDENT_UNABLE_TO_WORK_CERTIFICATE_ISSUANCE_XDT_FIELD_NAME_COUNT = NUMBER_44_INTEGER_ARRAY;
 
 /** The accident special curative treatment necessary field name. */
 static char ACCIDENT_SPECIAL_CURATIVE_TREATMENT_NECESSARY_XDT_FIELD_NAME_ARRAY[] = {'a', 'c', 'c', 'i', 'd', 'e', 'n', 't', '_', 's', 'p', 'e', 'c', 'i', 'a', 'l', '_', 'c', 'u', 'r', 'a', 't', 'i', 'v', 'e', '_', 't', 'r', 'e', 'a', 't', 'm', 'e', 'n', 't', '_', 'n', 'e', 'c', 'e', 's', 's', 'a', 'r', 'y'};

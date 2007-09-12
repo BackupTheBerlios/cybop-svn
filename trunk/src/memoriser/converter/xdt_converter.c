@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.19 $ $Date: 2007-09-11 07:47:24 $ $Author: christian $
+ * @version $Revision: 1.20 $ $Date: 2007-09-12 08:18:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -965,15 +965,6 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
         void* dc = *NULL_POINTER;
         void* ds = *NULL_POINTER;
 
-        //??
-        //?? TODO:
-        //?? Replace the abstractions below with the correct abstraction,
-        //?? as specified in the BDT document!
-        //?? The "RECORD_SIZE" for example is not "CHARACTER_VECTOR_ABSTRACTION",
-        //?? but rather "INTEGER_VECTOR_ABSTRACTION"!
-        //?? Other abstractions used are: float (= double) and date.
-        //??
-
         if (*id == *KBV_TEST_NUMBER_XDT_FIELD) {
 
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
@@ -1539,7 +1530,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) DATE_VECTOR_ABSTRACTION, (void*) DATE_VECTOR_ABSTRACTION_COUNT,
+                (void*) XDT_DDMMYYYY_DATE_ABSTRACTION, (void*) XDT_DDMMYYYY_DATE_ABSTRACTION_COUNT,
                 (void*) PATIENT_BIRTH_DATE_XDT_FIELD_NAME, (void*) PATIENT_BIRTH_DATE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *PATIENT_TITLE_XDT_FIELD) {
@@ -1627,7 +1618,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) DATE_VECTOR_ABSTRACTION, (void*) DATE_VECTOR_ABSTRACTION_COUNT,
+                (void*) XDT_DDMMYYYY_DATE_ABSTRACTION, (void*) XDT_DDMMYYYY_DATE_ABSTRACTION_COUNT,
                 (void*) INSURANT_BIRTH_DATE_XDT_FIELD_NAME, (void*) INSURANT_BIRTH_DATE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *INSURANT_RESIDENCE_XDT_FIELD) {
@@ -1691,7 +1682,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) DATE_VECTOR_ABSTRACTION, (void*) DATE_VECTOR_ABSTRACTION_COUNT,
+                (void*) XDT_DDMMYYYY_DATE_ABSTRACTION, (void*) XDT_DDMMYYYY_DATE_ABSTRACTION_COUNT,
                 (void*) PATIENT_SINCE_DATE_XDT_FIELD_NAME, (void*) PATIENT_SINCE_DATE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *PATIENT_CHANGE_OF_INSURANCE_INCEPTION_DATE_XDT_FIELD) {
@@ -1699,7 +1690,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) DATE_VECTOR_ABSTRACTION, (void*) DATE_VECTOR_ABSTRACTION_COUNT,
+                (void*) XDT_DDMMYYYY_DATE_ABSTRACTION, (void*) XDT_DDMMYYYY_DATE_ABSTRACTION_COUNT,
                 (void*) PATIENT_CHANGE_OF_INSURANCE_INCEPTION_DATE_XDT_FIELD_NAME, (void*) PATIENT_CHANGE_OF_INSURANCE_INCEPTION_DATE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *PATIENT_PROFESSION_XDT_FIELD) {
@@ -1795,7 +1786,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) DATE_VECTOR_ABSTRACTION, (void*) DATE_VECTOR_ABSTRACTION_COUNT,
+                (void*) XDT_DDMMYYYY_DATE_ABSTRACTION, (void*) XDT_DDMMYYYY_DATE_ABSTRACTION_COUNT,
                 (void*) PATIENT_PERMANENT_DIAGNOSES_BEGIN_DATE_XDT_FIELD_NAME, (void*) PATIENT_PERMANENT_DIAGNOSES_BEGIN_DATE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *PATIENT_PERMANENT_DIAGNOSES_XDT_FIELD) {
@@ -1811,7 +1802,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) DATE_VECTOR_ABSTRACTION, (void*) DATE_VECTOR_ABSTRACTION_COUNT,
+                (void*) XDT_DDMMYYYY_DATE_ABSTRACTION, (void*) XDT_DDMMYYYY_DATE_ABSTRACTION_COUNT,
                 (void*) PATIENT_PERMANENT_DRUGS_BEGIN_DATE_XDT_FIELD_NAME, (void*) PATIENT_PERMANENT_DRUGS_BEGIN_DATE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *PATIENT_PERMANENT_DRUGS_XDT_FIELD) {
@@ -1899,7 +1890,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) DATE_VECTOR_ABSTRACTION, (void*) DATE_VECTOR_ABSTRACTION_COUNT,
+                (void*) XDT_DDMMYYYY_DATE_ABSTRACTION, (void*) XDT_DDMMYYYY_DATE_ABSTRACTION_COUNT,
                 (void*) PATIENT_RECALL_APPOINTMENT_DATE_XDT_FIELD_NAME, (void*) PATIENT_RECALL_APPOINTMENT_DATE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6100_CATEGORY_1_NAME_XDT_FIELD) {
@@ -2075,7 +2066,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) DATE_VECTOR_ABSTRACTION, (void*) DATE_VECTOR_ABSTRACTION_COUNT,
+                (void*) XDT_DDMMYYYY_DATE_ABSTRACTION, (void*) XDT_DDMMYYYY_DATE_ABSTRACTION_COUNT,
                 (void*) INVOICE_ISSUANCE_DATE_XDT_FIELD_NAME, (void*) INVOICE_ISSUANCE_DATE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *INVOICE_VALIDITY_DATE_XDT_FIELD) {
@@ -2083,7 +2074,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) DATE_VECTOR_ABSTRACTION, (void*) DATE_VECTOR_ABSTRACTION_COUNT,
+                (void*) XDT_DDMMYYYY_DATE_ABSTRACTION, (void*) XDT_DDMMYYYY_DATE_ABSTRACTION_COUNT,
                 (void*) INVOICE_VALIDITY_DATE_XDT_FIELD_NAME, (void*) INVOICE_VALIDITY_DATE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *INVOICE_INSURANCE_NUMBER_XDT_FIELD) {
@@ -2123,7 +2114,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) DATE_VECTOR_ABSTRACTION, (void*) DATE_VECTOR_ABSTRACTION_COUNT,
+                (void*) XDT_DDMMYYYY_DATE_ABSTRACTION, (void*) XDT_DDMMYYYY_DATE_ABSTRACTION_COUNT,
                 (void*) INVOICE_INSURANCE_CARD_LAST_READ_ACCESS_XDT_FIELD_NAME, (void*) INVOICE_INSURANCE_CARD_LAST_READ_ACCESS_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *INVOICE_INSURANCE_CARD_VALIDITY_DATE_XDT_FIELD) {
@@ -2131,7 +2122,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT,
+                (void*) XDT_MMYY_DATE_ABSTRACTION, (void*) XDT_MMYY_DATE_ABSTRACTION_COUNT,
                 (void*) INVOICE_INSURANCE_CARD_VALIDITY_DATE_XDT_FIELD_NAME, (void*) INVOICE_INSURANCE_CARD_VALIDITY_DATE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *INVOICE_IK_INSURANCE_NUMBER_XDT_FIELD) {
@@ -2187,7 +2178,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) DATE_VECTOR_ABSTRACTION, (void*) DATE_VECTOR_ABSTRACTION_COUNT,
+                (void*) XDT_DDMMYYYY_DATE_ABSTRACTION, (void*) XDT_DDMMYYYY_DATE_ABSTRACTION_COUNT,
                 (void*) REFERRAL_SUPPOSED_ACCOUCHEMENT_DATE_XDT_FIELD_NAME, (void*) REFERRAL_SUPPOSED_ACCOUCHEMENT_DATE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *REFERRAL_DIAGNOSIS_XDT_FIELD) {
@@ -2331,7 +2322,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) DATE_VECTOR_ABSTRACTION, (void*) DATE_VECTOR_ABSTRACTION_COUNT,
+                (void*) XDT_DDMMYYYY_DATE_ABSTRACTION, (void*) XDT_DDMMYYYY_DATE_ABSTRACTION_COUNT,
                 (void*) ACCIDENT_DATE_XDT_FIELD_NAME, (void*) ACCIDENT_DATE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *ACCIDENT_TIME_XDT_FIELD) {
@@ -2339,7 +2330,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT,
+                (void*) XDT_HHMM_TIME_ABSTRACTION, (void*) XDT_HHMM_TIME_ABSTRACTION_COUNT,
                 (void*) ACCIDENT_TIME_XDT_FIELD_NAME, (void*) ACCIDENT_TIME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *ACCIDENT_PATIENT_ADMISSION_IN_PRACTICE_DATE_XDT_FIELD) {
@@ -2347,7 +2338,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) DATE_VECTOR_ABSTRACTION, (void*) DATE_VECTOR_ABSTRACTION_COUNT,
+                (void*) XDT_DDMMYYYY_DATE_ABSTRACTION, (void*) XDT_DDMMYYYY_DATE_ABSTRACTION_COUNT,
                 (void*) ACCIDENT_PATIENT_ADMISSION_IN_PRACTICE_DATE_XDT_FIELD_NAME, (void*) ACCIDENT_PATIENT_ADMISSION_IN_PRACTICE_DATE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *ACCIDENT_PATIENT_ADMISSION_IN_PRACTICE_TIME_XDT_FIELD) {
@@ -2355,7 +2346,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT,
+                (void*) XDT_HHMM_TIME_ABSTRACTION, (void*) XDT_HHMM_TIME_ABSTRACTION_COUNT,
                 (void*) ACCIDENT_PATIENT_ADMISSION_IN_PRACTICE_TIME_XDT_FIELD_NAME, (void*) ACCIDENT_PATIENT_ADMISSION_IN_PRACTICE_TIME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *ACCIDENT_PATIENT_LABOUR_TIME_BEGIN_XDT_FIELD) {
@@ -2363,7 +2354,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT,
+                (void*) XDT_HHMM_TIME_ABSTRACTION, (void*) XDT_HHMM_TIME_ABSTRACTION_COUNT,
                 (void*) ACCIDENT_PATIENT_LABOUR_TIME_BEGIN_XDT_FIELD_NAME, (void*) ACCIDENT_PATIENT_LABOUR_TIME_BEGIN_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *ACCIDENT_LOCATION_XDT_FIELD) {
@@ -2387,7 +2378,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) DATE_VECTOR_ABSTRACTION, (void*) DATE_VECTOR_ABSTRACTION_COUNT,
+                (void*) XDT_DDMMYYYY_DATE_ABSTRACTION, (void*) XDT_DDMMYYYY_DATE_ABSTRACTION_COUNT,
                 (void*) ACCIDENT_PATIENT_EMPLOYMENT_SINCE_XDT_FIELD_NAME, (void*) ACCIDENT_PATIENT_EMPLOYMENT_SINCE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *ACCIDENT_PATIENT_NATIONALITY_XDT_FIELD) {
@@ -2427,7 +2418,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) DATE_VECTOR_ABSTRACTION, (void*) DATE_VECTOR_ABSTRACTION_COUNT,
+                (void*) XDT_DDMMYYYY_DATE_ABSTRACTION, (void*) XDT_DDMMYYYY_DATE_ABSTRACTION_COUNT,
                 (void*) ACCIDENT_FIRST_TIME_TREATMENT_DATE_XDT_FIELD_NAME, (void*) ACCIDENT_FIRST_TIME_TREATMENT_DATE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *ACCIDENT_TREATMENT_BY_PHYSICIAN_NAME_XDT_FIELD) {
@@ -2547,16 +2538,16 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) DATE_VECTOR_ABSTRACTION, (void*) DATE_VECTOR_ABSTRACTION_COUNT,
+                (void*) XDT_DDMMYYYY_DATE_ABSTRACTION, (void*) XDT_DDMMYYYY_DATE_ABSTRACTION_COUNT,
                 (void*) ACCIDENT_ABLE_TO_WORK_FROM_XDT_FIELD_NAME, (void*) ACCIDENT_ABLE_TO_WORK_FROM_XDT_FIELD_NAME_COUNT);
 
-        } else if (*id == *ACCIDENT_UNABLE_TO_WORK_CERTIFICATE_ISSUANCE_DATE_XDT_FIELD) {
+        } else if (*id == *ACCIDENT_UNABLE_TO_WORK_CERTIFICATE_ISSUANCE_XDT_FIELD) {
 
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
                 (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT,
-                (void*) ACCIDENT_UNABLE_TO_WORK_CERTIFICATE_ISSUANCE_DATE_XDT_FIELD_NAME, (void*) ACCIDENT_UNABLE_TO_WORK_CERTIFICATE_ISSUANCE_DATE_XDT_FIELD_NAME_COUNT);
+                (void*) ACCIDENT_UNABLE_TO_WORK_CERTIFICATE_ISSUANCE_XDT_FIELD_NAME, (void*) ACCIDENT_UNABLE_TO_WORK_CERTIFICATE_ISSUANCE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *ACCIDENT_SPECIAL_CURATIVE_TREATMENT_NECESSARY_XDT_FIELD) {
 
@@ -2587,7 +2578,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) DATE_VECTOR_ABSTRACTION, (void*) DATE_VECTOR_ABSTRACTION_COUNT,
+                (void*) XDT_DDMMYYYY_DATE_ABSTRACTION, (void*) XDT_DDMMYYYY_DATE_ABSTRACTION_COUNT,
                 (void*) ACCIDENT_UNABLE_TO_WORK_FROM_XDT_FIELD_NAME, (void*) ACCIDENT_UNABLE_TO_WORK_FROM_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *ACCIDENT_EXPECTED_DURATION_OF_INABILITY_TO_WORK_XDT_FIELD) {
@@ -2627,7 +2618,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) DATE_VECTOR_ABSTRACTION, (void*) DATE_VECTOR_ABSTRACTION_COUNT,
+                (void*) XDT_DDMMYYYY_DATE_ABSTRACTION, (void*) XDT_DDMMYYYY_DATE_ABSTRACTION_COUNT,
                 (void*) ACCIDENT_UNABILITY_TO_WORK_CERTIFIED_UNTIL_XDT_FIELD_NAME, (void*) ACCIDENT_UNABILITY_TO_WORK_CERTIFIED_UNTIL_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *ACCIDENT_INSPECTION_REQUIRED_ON_XDT_FIELD) {
@@ -2635,7 +2626,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) DATE_VECTOR_ABSTRACTION, (void*) DATE_VECTOR_ABSTRACTION_COUNT,
+                (void*) XDT_DDMMYYYY_DATE_ABSTRACTION, (void*) XDT_DDMMYYYY_DATE_ABSTRACTION_COUNT,
                 (void*) ACCIDENT_INSPECTION_REQUIRED_ON_XDT_FIELD_NAME, (void*) ACCIDENT_INSPECTION_REQUIRED_ON_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *BILLING_NUMBER_XDT_FIELD) {
@@ -2667,7 +2658,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) DATE_VECTOR_ABSTRACTION, (void*) DATE_VECTOR_ABSTRACTION_COUNT,
+                (void*) XDT_DDMMYYYY_DATE_ABSTRACTION, (void*) XDT_DDMMYYYY_DATE_ABSTRACTION_COUNT,
                 (void*) BILLING_DATE_XDT_FIELD_NAME, (void*) BILLING_DATE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *BILLING_TOTAL_SUM_XDT_FIELD) {
@@ -2723,7 +2714,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) DATE_VECTOR_ABSTRACTION, (void*) DATE_VECTOR_ABSTRACTION_COUNT,
+                (void*) XDT_DDMMYYYY_DATE_ABSTRACTION, (void*) XDT_DDMMYYYY_DATE_ABSTRACTION_COUNT,
                 (void*) SERVICE_TREATMENT_DATE_XDT_FIELD_NAME, (void*) SERVICE_TREATMENT_DATE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *SERVICE_GNR_IDENTIFICATION_XDT_FIELD) {
@@ -2771,7 +2762,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT,
+                (void*) XDT_HHMM_TIME_ABSTRACTION, (void*) XDT_HHMM_TIME_ABSTRACTION_COUNT,
                 (void*) SERVICE_TIME_XDT_FIELD_NAME, (void*) SERVICE_TIME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *SERVICE_ORDER_EXECUTION_XDT_FIELD) {
@@ -2939,7 +2930,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) DATE_VECTOR_ABSTRACTION, (void*) DATE_VECTOR_ABSTRACTION_COUNT,
+                (void*) XDT_DDMMYYYY_DATE_ABSTRACTION, (void*) XDT_DDMMYYYY_DATE_ABSTRACTION_COUNT,
                 (void*) TREATMENT_DATA_COLLECTION_DATE_XDT_FIELD_NAME, (void*) TREATMENT_DATA_COLLECTION_DATE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *TREATMENT_DATA_COLLECTION_TIME_XDT_FIELD) {
@@ -2947,7 +2938,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) TIME_VECTOR_ABSTRACTION, (void*) TIME_VECTOR_ABSTRACTION_COUNT,
+                (void*) XDT_HHMMSS_TIME_ABSTRACTION, (void*) XDT_HHMMSS_TIME_ABSTRACTION_COUNT,
                 (void*) TREATMENT_DATA_COLLECTION_TIME_XDT_FIELD_NAME, (void*) TREATMENT_DATA_COLLECTION_TIME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *TREATMENT_CURRENT_DIAGNOSIS_XDT_FIELD) {
@@ -3971,7 +3962,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) DATE_VECTOR_ABSTRACTION, (void*) DATE_VECTOR_ABSTRACTION_COUNT,
+                (void*) XDT_DDMMYYYY_DATE_ABSTRACTION, (void*) XDT_DDMMYYYY_DATE_ABSTRACTION_COUNT,
                 (void*) FINDINGS_SAMPLE_COLLECTION_DATE_XDT_FIELD_NAME, (void*) FINDINGS_SAMPLE_COLLECTION_DATE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FINDINGS_SAMPLE_COLLECTION_TIME_OLD_FORMAT_XDT_FIELD) {
@@ -3979,7 +3970,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT,
+                (void*) XDT_HHMM_TIME_ABSTRACTION, (void*) XDT_HHMM_TIME_ABSTRACTION_COUNT,
                 (void*) FINDINGS_SAMPLE_COLLECTION_TIME_OLD_FORMAT_XDT_FIELD_NAME, (void*) FINDINGS_SAMPLE_COLLECTION_TIME_OLD_FORMAT_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FINDINGS_DATA_STREAM_UNITS_XDT_FIELD) {
@@ -4003,7 +3994,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) TIME_VECTOR_ABSTRACTION, (void*) TIME_VECTOR_ABSTRACTION_COUNT,
+                (void*) XDT_HHMMSS_TIME_ABSTRACTION, (void*) XDT_HHMMSS_TIME_ABSTRACTION_COUNT,
                 (void*) FINDINGS_SAMPLE_COLLECTION_TIME_XDT_FIELD_NAME, (void*) FINDINGS_SAMPLE_COLLECTION_TIME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FINDINGS_GERM_IDENTIFICATION_XDT_FIELD) {
@@ -4139,7 +4130,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) DATE_VECTOR_ABSTRACTION, (void*) DATE_VECTOR_ABSTRACTION_COUNT,
+                (void*) XDT_DDMMYYYY_DATE_ABSTRACTION, (void*) XDT_DDMMYYYY_DATE_ABSTRACTION_COUNT,
                 (void*) DATA_MEDIUM_CREATION_DATE_XDT_FIELD_NAME, (void*) DATA_MEDIUM_CREATION_DATE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *DATA_MEDIUM_RUNNING_NUMBER_XDT_FIELD) {

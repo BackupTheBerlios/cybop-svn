@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2007-08-12 23:31:48 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2007-09-12 08:18:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -103,6 +103,11 @@ static char TERMINAL_FOREGROUND_ABSTRACTION_ARRAY[] = {'t', 'e', 'r', 'm', 'i', 
 static char* TERMINAL_FOREGROUND_ABSTRACTION = TERMINAL_FOREGROUND_ABSTRACTION_ARRAY;
 static int* TERMINAL_FOREGROUND_ABSTRACTION_COUNT = NUMBER_19_INTEGER_ARRAY;
 
+/** The iso 8601 date abstraction. */
+static char ISO_8601_DATE_ABSTRACTION_ARRAY[] = {'i', 's', 'o', '_', '8', '6', '0', '1', '_', 'd', 'a', 't', 'e'};
+static char* ISO_8601_DATE_ABSTRACTION = ISO_8601_DATE_ABSTRACTION_ARRAY;
+static int* ISO_8601_DATE_ABSTRACTION_COUNT = NUMBER_13_INTEGER_ARRAY;
+
 /** The date time abstraction. */
 static char DATE_TIME_ABSTRACTION_ARRAY[] = {'d', 'a', 't', 'e', '_', 't', 'i', 'm', 'e'};
 static char* DATE_TIME_ABSTRACTION = DATE_TIME_ABSTRACTION_ARRAY;
@@ -112,6 +117,46 @@ static int* DATE_TIME_ABSTRACTION_COUNT = NUMBER_9_INTEGER_ARRAY;
 static char DDMMYYYY_DATE_TIME_ABSTRACTION_ARRAY[] = {'d', 'd', 'm', 'm', 'y', 'y', 'y', 'y', '_', 'd', 'a', 't', 'e', '_', 't', 'i', 'm', 'e'};
 static char* DDMMYYYY_DATE_TIME_ABSTRACTION = DDMMYYYY_DATE_TIME_ABSTRACTION_ARRAY;
 static int* DDMMYYYY_DATE_TIME_ABSTRACTION_COUNT = NUMBER_18_INTEGER_ARRAY;
+
+/** The xdt hhmm date abstraction. */
+static char XDT_HHMM_DATE_ABSTRACTION_ARRAY[] = {'x', 'd', 't', '_', 'h', 'h', 'm', 'm', '_', 'd', 'a', 't', 'e'};
+static char* XDT_HHMM_DATE_ABSTRACTION = XDT_HHMM_DATE_ABSTRACTION_ARRAY;
+static int* XDT_HHMM_DATE_ABSTRACTION_COUNT = NUMBER_13_INTEGER_ARRAY;
+
+/** The xdt hhmmhhmm date abstraction. */
+static char XDT_HHMMHHMM_DATE_ABSTRACTION_ARRAY[] = {'x', 'd', 't', '_', 'h', 'h', 'm', 'm', 'h', 'h', 'm', 'm', '_', 'd', 'a', 't', 'e'};
+static char* XDT_HHMMHHMM_DATE_ABSTRACTION = XDT_HHMMHHMM_DATE_ABSTRACTION_ARRAY;
+static int* XDT_HHMMHHMM_DATE_ABSTRACTION_COUNT = NUMBER_17_INTEGER_ARRAY;
+
+/** The xdt yymmnnn date abstraction. */
+static char XDT_YYMMNNN_DATE_ABSTRACTION_ARRAY[] = {'x', 'd', 't', '_', 'y', 'y', 'm', 'm', 'n', 'n', 'n', '_', 'd', 'a', 't', 'e'};
+static char* XDT_YYMMNNN_DATE_ABSTRACTION = XDT_YYMMNNN_DATE_ABSTRACTION_ARRAY;
+static int* XDT_YYMMNNN_DATE_ABSTRACTION_COUNT = NUMBER_16_INTEGER_ARRAY;
+
+/** The xdt ddmmyyyy date abstraction. */
+static char XDT_DDMMYYYY_DATE_ABSTRACTION_ARRAY[] = {'x', 'd', 't', '_', 'd', 'd', 'm', 'm', 'y', 'y', 'y', 'y', '_', 'd', 'a', 't', 'e'};
+static char* XDT_DDMMYYYY_DATE_ABSTRACTION = XDT_DDMMYYYY_DATE_ABSTRACTION_ARRAY;
+static int* XDT_DDMMYYYY_DATE_ABSTRACTION_COUNT = NUMBER_17_INTEGER_ARRAY;
+
+/** The xdt mmyy date abstraction. */
+static char XDT_MMYY_DATE_ABSTRACTION_ARRAY[] = {'x', 'd', 't', '_', 'm', 'm', 'y', 'y', '_', 'd', 'a', 't', 'e'};
+static char* XDT_MMYY_DATE_ABSTRACTION = XDT_MMYY_DATE_ABSTRACTION_ARRAY;
+static int* XDT_MMYY_DATE_ABSTRACTION_COUNT = NUMBER_13_INTEGER_ARRAY;
+
+/** The xdt ddmmyyyyddmmyyyy date abstraction. */
+static char XDT_DDMMYYYYDDMMYYYY_DATE_ABSTRACTION_ARRAY[] = {'x', 'd', 't', '_', 'd', 'd', 'm', 'm', 'y', 'y', 'y', 'y', 'd', 'd', 'm', 'm', 'y', 'y', 'y', 'y', '_', 'd', 'a', 't', 'e'};
+static char* XDT_DDMMYYYYDDMMYYYY_DATE_ABSTRACTION = XDT_DDMMYYYYDDMMYYYY_DATE_ABSTRACTION_ARRAY;
+static int* XDT_DDMMYYYYDDMMYYYY_DATE_ABSTRACTION_COUNT = NUMBER_25_INTEGER_ARRAY;
+
+/** The xdt hhmmss time abstraction. */
+static char XDT_HHMMSS_TIME_ABSTRACTION_ARRAY[] = {'x', 'd', 't', '_', 'h', 'h', 'm', 'm', 's', 's', '_', 't', 'i', 'm', 'e'};
+static char* XDT_HHMMSS_TIME_ABSTRACTION = XDT_HHMMSS_TIME_ABSTRACTION_ARRAY;
+static int* XDT_HHMMSS_TIME_ABSTRACTION_COUNT = NUMBER_15_INTEGER_ARRAY;
+
+/** The xdt hhmm time abstraction. */
+static char XDT_HHMM_TIME_ABSTRACTION_ARRAY[] = {'x', 'd', 't', '_', 'h', 'h', 'm', 'm', '_', 't', 'i', 'm', 'e'};
+static char* XDT_HHMM_TIME_ABSTRACTION = XDT_HHMM_TIME_ABSTRACTION_ARRAY;
+static int* XDT_HHMM_TIME_ABSTRACTION_COUNT = NUMBER_13_INTEGER_ARRAY;
 
 /** The unsigned long vector abstraction. */
 static char UNSIGNED_LONG_VECTOR_ABSTRACTION_ARRAY[] = {'u', 'n', 's', 'i', 'g', 'n', 'e', 'd', '_', 'l', 'o', 'n', 'g'};
@@ -203,12 +248,12 @@ static char* XHTML_ABSTRACTION = XHTML_ABSTRACTION_ARRAY;
 static int* XHTML_ABSTRACTION_COUNT = NUMBER_5_INTEGER_ARRAY;
 
 /** The http request abstraction. */
-static char HTTP_REQUEST_ABSTRACTION_ARRAY[] = {'h', 't', 't', 'p', ' ', 'r', 'e', 'q', 'u', 'e', 's', 't'};
+static char HTTP_REQUEST_ABSTRACTION_ARRAY[] = {'h', 't', 't', 'p', '_', 'r', 'e', 'q', 'u', 'e', 's', 't'};
 static char* HTTP_REQUEST_ABSTRACTION = HTTP_REQUEST_ABSTRACTION_ARRAY;
 static int* HTTP_REQUEST_ABSTRACTION_COUNT = NUMBER_12_INTEGER_ARRAY;
 
 /** The http response abstraction. */
-static char HTTP_RESPONSE_ABSTRACTION_ARRAY[] = {'h', 't', 't', 'p', ' ', 'r', 'e', 's', 'p', 'o', 'n', 's', 'e'};
+static char HTTP_RESPONSE_ABSTRACTION_ARRAY[] = {'h', 't', 't', 'p', '_', 'r', 'e', 's', 'p', 'o', 'n', 's', 'e'};
 static char* HTTP_RESPONSE_ABSTRACTION = HTTP_RESPONSE_ABSTRACTION_ARRAY;
 static int* HTTP_RESPONSE_ABSTRACTION_COUNT = NUMBER_13_INTEGER_ARRAY;
 

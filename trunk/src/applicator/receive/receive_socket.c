@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.36 $ $Date: 2007-09-02 22:35:17 $ $Author: christian $
+ * @version $Revision: 1.37 $ $Date: 2007-09-12 08:18:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -193,6 +193,7 @@ void set_signals_for_all_parameters(void* p0, int* p1, void* p2) {
         }
     }
 }
+*/
 
 /**
  * Receives a socket signal.
@@ -773,6 +774,8 @@ void receive_socket_message(void* p0, void* p1, void* p2, void* p3, void* p4, vo
                 log_message_debug("Receive socket message.");
 
         fprintf(stderr, "TEST 0 language: %s \n", (char*) p16);
+        fprintf(stderr, "TEST 0 language count: %i \n", *((int*) p17));
+
         fprintf(stderr, "TEST 0 bc: %i \n", *((int*) p28));
         fprintf(stderr, "TEST 0 bs: %i \n", *((int*) p29));
 
@@ -784,7 +787,7 @@ void receive_socket_message(void* p0, void* p1, void* p2, void* p3, void* p4, vo
 
                 // Decode http request and write any parameters into the
                 // compound model and details being handed over as parameters.
-                decode(p8, p9, p10, p11, p12, p13, *b, p28, *NULL_POINTER, *NULL_POINTER, (void*) HTTP_REQUEST_ABSTRACTION, (void*) HTTP_REQUEST_ABSTRACTION_COUNT);
+                decode(p8, p9, p10, p11, p12, p13, *b, p28, p0, p1, p16, p17);
 
         fprintf(stderr, "TEST 2 bc: %i \n", *((int*) p28));
         fprintf(stderr, "TEST 2 bs: %i \n", *((int*) p29));
@@ -793,6 +796,9 @@ void receive_socket_message(void* p0, void* p1, void* p2, void* p3, void* p4, vo
     static char ACTION_PARAMETER_ARRAY[] = {'a', 'c', 't', 'i', 'o', 'n'};
     static char* ACTION_PARAMETER = ACTION_PARAMETER_ARRAY;
     static int* ACTION_PARAMETER_COUNT = NUMBER_6_INTEGER_ARRAY;
+
+        fprintf(stderr, "TEST special a: %s \n", ACTION_PARAMETER);
+        fprintf(stderr, "TEST special ac: %i \n", *ACTION_PARAMETER_COUNT);
 
                 // The action name, abstraction, model, details.
                 void** an = NULL_POINTER;
@@ -809,6 +815,9 @@ void receive_socket_message(void* p0, void* p1, void* p2, void* p3, void* p4, vo
                 void** ads = NULL_POINTER;
 
                 // Get action.
+                // It is just one of many possibly parameters that were received as
+                // http request and added to the compound model above.
+                // If no action parameter is found, an empty signal will be created below.
                 get_universal_compound_element_by_name(p8, p9,
                     (void*) ACTION_PARAMETER, (void*) ACTION_PARAMETER_COUNT,
                     (void*) &an, (void*) &anc, (void*) &ans,
@@ -819,6 +828,9 @@ void receive_socket_message(void* p0, void* p1, void* p2, void* p3, void* p4, vo
 
         fprintf(stderr, "TEST 3 bc: %i \n", *((int*) p28));
         fprintf(stderr, "TEST 3 bs: %i \n", *((int*) p29));
+
+        fprintf(stderr, "TEST special am: %s \n", (char*) *am);
+        fprintf(stderr, "TEST special amc: %i \n", **((int**) amc));
 
                 // Receive socket signal.
                 receive_socket_signal(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, *am, *amc);

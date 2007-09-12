@@ -7,7 +7,7 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.14 $ $Date: 2007-09-10 18:37:37 $ $Author: christian $
+# @version $Revision: 1.15 $ $Date: 2007-09-12 08:18:18 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
@@ -16,6 +16,8 @@ ChangeLog:
 
 TODO:
         * Mention parameters in comment block of all CYBOL operations
+        * Distinguish cybol- from memory abstractions
+        * Add more abstractions for date and time (see Wikipedia and ISO/EN/DIN standards)
         * Use an OR || and compare for numeric character reference and character entity reference, when parsing http requests
         * CHECK: Replace "(int*) NULL_POINTER_ARRAY" initialisation in "variables.c" with "(int*) *NULL_POINTER";
             the old initialisation was actually a void** casted to an int* and therefore not correct, even if it was working
@@ -26,17 +28,7 @@ TODO:
         * Add correct LOG_LEVEL constant to all log messages of all source code files,
             so that the correct prefix (information, warning, error, debug) appears;
             delete "Information: " etc. which are written directly into log message
-
-        * Implement configure/ make setup (standard configure and make options),
-        for example using automake/autoconf
-        http://gnu.org/software/automake
-        there are various tutorials and examples around, such as GNU Hello:
-        http://gnu.org/software/hello
-        http://www.gnu.org/prep/standards/html_node/Configuration.html
-        http://www.gnu.org/prep/standards/html_node/Makefile-Conventions.html
-
-        * Ensure distributable tarball unpacks into a single directory, like cybop-0.8.0/
-        * Include the sources of all documents into the tarball
+        * Include the sources of all documents into the distributable tarball cybop-0.8.0/
 
         * Write an actual manual that is updated as necessary to reflect the current
         state of cybop; just looking at the papers, it is hard to know what is

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2007-09-11 07:47:24 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2007-09-12 08:18:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -2216,7 +2216,7 @@ static int* ACCIDENT_ABLE_TO_WORK_XDT_FIELD = NUMBER_4560_INTEGER_ARRAY;
 static int* ACCIDENT_ABLE_TO_WORK_FROM_XDT_FIELD = NUMBER_4561_INTEGER_ARRAY;
 
 /**
- * The accident unable to work certificate issuance date field.
+ * The accident unable to work certificate issuance field.
  *
  * German: AU-Bescheinigung ausgestellt
  * Size: 1
@@ -2224,7 +2224,7 @@ static int* ACCIDENT_ABLE_TO_WORK_FROM_XDT_FIELD = NUMBER_4561_INTEGER_ARRAY;
  * Rule: 101
  * Example: 1
  */
-static int* ACCIDENT_UNABLE_TO_WORK_CERTIFICATE_ISSUANCE_DATE_XDT_FIELD = NUMBER_4562_INTEGER_ARRAY;
+static int* ACCIDENT_UNABLE_TO_WORK_CERTIFICATE_ISSUANCE_XDT_FIELD = NUMBER_4562_INTEGER_ARRAY;
 
 /**
  * The accident special curative treatment necessary field.

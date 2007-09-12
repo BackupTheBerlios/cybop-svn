@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2007-08-29 23:11:24 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2007-09-12 08:18:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -1176,6 +1176,13 @@ void decode_http_request(void* p0, void* p1, void* p2, void* p3, void* p4, void*
         int* sc = (int*) p7;
 
         log_message_debug("Information: Decode http request.");
+
+    fprintf(stderr, "TEST http request mc p1: %i \n", *((int*) p1));
+    fprintf(stderr, "TEST http request dc p4: %i \n", *((int*) p4));
+    fprintf(stderr, "TEST http request sc p7: %i \n", *((int*) p7));
+    fprintf(stderr, "TEST http request kmc p9: %i \n", *((int*) p9));
+
+    fprintf(stderr, "TEST http request s p6: %s \n", (char*) p6);
 
         // The source index.
         // CAUTION! A local variable is used instead of the parameter
