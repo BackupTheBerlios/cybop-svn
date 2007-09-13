@@ -7,14 +7,14 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.5 $ $Date: 2007-08-03 16:51:41 $ $Author: christian $
+# @version $Revision: 1.6 $ $Date: 2007-09-13 22:48:15 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
 The CYBOP project comprises three elements:
 
 1 Cybernetics Oriented Programming (CYBOP): a software development theory
-2 Cybernetics Oriented Language (CYBOL): an application/ domain knowledge modelling language based on XML
+2 Cybernetics Oriented Language (CYBOL): an application/ domain knowledge modelling/ programming language based on XML
 3 Cybernetics Oriented Interpreter (CYBOI): an interpreter program written in ANSI C
 
 Instructions on how to install cybop, compile cyboi and run cybol applications
