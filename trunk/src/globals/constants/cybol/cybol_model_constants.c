@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2007-06-29 22:55:31 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2007-09-15 16:19:07 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -717,6 +717,85 @@ static int* RUN_LIST_DIRECTORY_CONTENTS_MODEL_COUNT = NUMBER_23_INTEGER_ARRAY;
 static char RUN_PROGRAM_MODEL_ARRAY[] = {'p', 'r', 'o', 'g', 'r', 'a', 'm'};
 static char* RUN_PROGRAM_MODEL = RUN_PROGRAM_MODEL_ARRAY;
 static int* RUN_PROGRAM_MODEL_COUNT = NUMBER_7_INTEGER_ARRAY;
+
+//
+// Http request method models.
+//
+
+/** The http get request method model. */
+static char HTTP_GET_REQUEST_METHOD_MODEL_ARRAY[] = {'g', 'e', 't'};
+static char* HTTP_GET_REQUEST_METHOD_MODEL = HTTP_GET_REQUEST_METHOD_MODEL_ARRAY;
+static int* HTTP_GET_REQUEST_METHOD_MODEL_COUNT = NUMBER_3_INTEGER_ARRAY;
+
+/** The http post request method model. */
+static char HTTP_POST_REQUEST_METHOD_MODEL_ARRAY[] = {'p', 'o', 's', 't'};
+static char* HTTP_POST_REQUEST_METHOD_MODEL = HTTP_POST_REQUEST_METHOD_MODEL_ARRAY;
+static int* HTTP_POST_REQUEST_METHOD_MODEL_COUNT = NUMBER_4_INTEGER_ARRAY;
+
+/** The http head request method model. */
+static char HTTP_HEAD_REQUEST_METHOD_MODEL_ARRAY[] = {'h', 'e', 'a', 'd'};
+static char* HTTP_HEAD_REQUEST_METHOD_MODEL = HTTP_HEAD_REQUEST_METHOD_MODEL_ARRAY;
+static int* HTTP_HEAD_REQUEST_METHOD_MODEL_COUNT = NUMBER_4_INTEGER_ARRAY;
+
+/** The http put request method model. */
+static char HTTP_PUT_REQUEST_METHOD_MODEL_ARRAY[] = {'p', 'u', 't'};
+static char* HTTP_PUT_REQUEST_METHOD_MODEL = HTTP_PUT_REQUEST_METHOD_MODEL_ARRAY;
+static int* HTTP_PUT_REQUEST_METHOD_MODEL_COUNT = NUMBER_3_INTEGER_ARRAY;
+
+/** The http delete request method model. */
+static char HTTP_DELETE_REQUEST_METHOD_MODEL_ARRAY[] = {'d', 'e', 'l', 'e', 't', 'e'};
+static char* HTTP_DELETE_REQUEST_METHOD_MODEL = HTTP_DELETE_REQUEST_METHOD_MODEL_ARRAY;
+static int* HTTP_DELETE_REQUEST_METHOD_MODEL_COUNT = NUMBER_6_INTEGER_ARRAY;
+
+/** The http trace request method model. */
+static char HTTP_TRACE_REQUEST_METHOD_MODEL_ARRAY[] = {'t', 'r', 'a', 'c', 'e'};
+static char* HTTP_TRACE_REQUEST_METHOD_MODEL = HTTP_TRACE_REQUEST_METHOD_MODEL_ARRAY;
+static int* HTTP_TRACE_REQUEST_METHOD_MODEL_COUNT = NUMBER_5_INTEGER_ARRAY;
+
+/** The http options request method model. */
+static char HTTP_OPTIONS_REQUEST_METHOD_MODEL_ARRAY[] = {'o', 'p', 't', 'i', 'o', 'n', 's'};
+static char* HTTP_OPTIONS_REQUEST_METHOD_MODEL = HTTP_OPTIONS_REQUEST_METHOD_MODEL_ARRAY;
+static int* HTTP_OPTIONS_REQUEST_METHOD_MODEL_COUNT = NUMBER_7_INTEGER_ARRAY;
+
+/** The http connect request method model. */
+static char HTTP_CONNECT_REQUEST_METHOD_MODEL_ARRAY[] = {'c', 'o', 'n', 'n', 'e', 'c', 't'};
+static char* HTTP_CONNECT_REQUEST_METHOD_MODEL = HTTP_CONNECT_REQUEST_METHOD_MODEL_ARRAY;
+static int* HTTP_CONNECT_REQUEST_METHOD_MODEL_COUNT = NUMBER_7_INTEGER_ARRAY;
+
+/** The webdav propfind request method model. */
+static char WEBDAV_PROPFIND_REQUEST_METHOD_MODEL_ARRAY[] = {'p', 'r', 'o', 'p', 'f', 'i', 'n', 'd'};
+static char* WEBDAV_PROPFIND_REQUEST_METHOD_MODEL = WEBDAV_PROPFIND_REQUEST_METHOD_MODEL_ARRAY;
+static int* WEBDAV_PROPFIND_REQUEST_METHOD_MODEL_COUNT = NUMBER_8_INTEGER_ARRAY;
+
+/** The webdav proppatch request method model. */
+static char WEBDAV_PROPPATCH_REQUEST_METHOD_MODEL_ARRAY[] = {'p', 'r', 'o', 'p', 'p', 'a', 't', 'c', 'h'};
+static char* WEBDAV_PROPPATCH_REQUEST_METHOD_MODEL = WEBDAV_PROPPATCH_REQUEST_METHOD_MODEL_ARRAY;
+static int* WEBDAV_PROPPATCH_REQUEST_METHOD_MODEL_COUNT = NUMBER_9_INTEGER_ARRAY;
+
+/** The webdav mkcol request method model. */
+static char WEBDAV_MKCOL_REQUEST_METHOD_MODEL_ARRAY[] = {'m', 'k', 'c', 'o', 'l'};
+static char* WEBDAV_MKCOL_REQUEST_METHOD_MODEL = WEBDAV_MKCOL_REQUEST_METHOD_MODEL_ARRAY;
+static int* WEBDAV_MKCOL_REQUEST_METHOD_MODEL_COUNT = NUMBER_5_INTEGER_ARRAY;
+
+/** The webdav copy request method model. */
+static char WEBDAV_COPY_REQUEST_METHOD_MODEL_ARRAY[] = {'c', 'o', 'p', 'y'};
+static char* WEBDAV_COPY_REQUEST_METHOD_MODEL = WEBDAV_COPY_REQUEST_METHOD_MODEL_ARRAY;
+static int* WEBDAV_COPY_REQUEST_METHOD_MODEL_COUNT = NUMBER_4_INTEGER_ARRAY;
+
+/** The webdav move request method model. */
+static char WEBDAV_MOVE_REQUEST_METHOD_MODEL_ARRAY[] = {'m', 'o', 'v', 'e'};
+static char* WEBDAV_MOVE_REQUEST_METHOD_MODEL = WEBDAV_MOVE_REQUEST_METHOD_MODEL_ARRAY;
+static int* WEBDAV_MOVE_REQUEST_METHOD_MODEL_COUNT = NUMBER_4_INTEGER_ARRAY;
+
+/** The webdav lock request method model. */
+static char WEBDAV_LOCK_REQUEST_METHOD_MODEL_ARRAY[] = {'l', 'o', 'c', 'k'};
+static char* WEBDAV_LOCK_REQUEST_METHOD_MODEL = WEBDAV_LOCK_REQUEST_METHOD_MODEL_ARRAY;
+static int* WEBDAV_LOCK_REQUEST_METHOD_MODEL_COUNT = NUMBER_4_INTEGER_ARRAY;
+
+/** The webdav unlock request method model. */
+static char WEBDAV_UNLOCK_REQUEST_METHOD_MODEL_ARRAY[] = {'u', 'n', 'l', 'o', 'c', 'k'};
+static char* WEBDAV_UNLOCK_REQUEST_METHOD_MODEL = WEBDAV_UNLOCK_REQUEST_METHOD_MODEL_ARRAY;
+static int* WEBDAV_UNLOCK_REQUEST_METHOD_MODEL_COUNT = NUMBER_6_INTEGER_ARRAY;
 
 /* CYBOL_MODEL_CONSTANTS_SOURCE */
 #endif

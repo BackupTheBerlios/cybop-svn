@@ -14,9 +14,15 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.29 $ $Date: 2007-09-15 00:17:01 $ $Author: christian $
+# @version $Revision: 1.30 $ $Date: 2007-09-15 16:19:07 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2007-09-15  Christian Heller  <christian.heller@tuxtax.de>
+        * Debug "http_request_converter.c"
+        * Add new cybol name- and cybol model constants for http request
+        * Add a "prefixed key" parameter that is necessary to add a prefix "." or "#" to the parameter name;
+            it is created at socket startup and forwarded to the "receive_socket.c" thread
 
 2007-09-14  Christian Heller  <christian.heller@tuxtax.de>
         * Mention parameters (as defined in CYBOL specification) in comment block of all operations in "applicator" directory

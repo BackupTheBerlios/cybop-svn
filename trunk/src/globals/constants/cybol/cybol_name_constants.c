@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2007-07-31 15:16:58 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2007-09-15 16:19:07 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -631,6 +631,35 @@ static int* RUN_LIST_DIRECTORY_CONTENTS_LONG_LISTING_NAME_COUNT = NUMBER_12_INTE
 static char RUN_PROGRAM_PROGRAM_NAME_ARRAY[] = {'p', 'r', 'o', 'g', 'r', 'a', 'm'};
 static char* RUN_PROGRAM_PROGRAM_NAME = RUN_PROGRAM_PROGRAM_NAME_ARRAY;
 static int* RUN_PROGRAM_PROGRAM_NAME_COUNT = NUMBER_7_INTEGER_ARRAY;
+
+//
+// Receive model names.
+//
+
+/** The receive model action name. */
+static char RECEIVE_MODEL_ACTION_NAME_ARRAY[] = {'a', 'c', 't', 'i', 'o', 'n'};
+static char* RECEIVE_MODEL_ACTION_NAME = RECEIVE_MODEL_ACTION_NAME_ARRAY;
+static int* RECEIVE_MODEL_ACTION_NAME_COUNT = NUMBER_6_INTEGER_ARRAY;
+
+/** The receive model scheme name. */
+static char RECEIVE_MODEL_SCHEME_NAME_ARRAY[] = {'s', 'c', 'h', 'e', 'm', 'e'};
+static char* RECEIVE_MODEL_SCHEME_NAME = RECEIVE_MODEL_SCHEME_NAME_ARRAY;
+static int* RECEIVE_MODEL_SCHEME_NAME_COUNT = NUMBER_6_INTEGER_ARRAY;
+
+/** The receive model authority name. */
+static char RECEIVE_MODEL_AUTHORITY_NAME_ARRAY[] = {'a', 'u', 't', 'h', 'o', 'r', 'i', 't', 'y'};
+static char* RECEIVE_MODEL_AUTHORITY_NAME = RECEIVE_MODEL_AUTHORITY_NAME_ARRAY;
+static int* RECEIVE_MODEL_AUTHORITY_NAME_COUNT = NUMBER_9_INTEGER_ARRAY;
+
+/** The receive model path name. */
+static char RECEIVE_MODEL_PATH_NAME_ARRAY[] = {'p', 'a', 't', 'h'};
+static char* RECEIVE_MODEL_PATH_NAME = RECEIVE_MODEL_PATH_NAME_ARRAY;
+static int* RECEIVE_MODEL_PATH_NAME_COUNT = NUMBER_4_INTEGER_ARRAY;
+
+/** The receive model fragment name. */
+static char RECEIVE_MODEL_FRAGMENT_NAME_ARRAY[] = {'f', 'r', 'a', 'g', 'm', 'e', 'n', 't'};
+static char* RECEIVE_MODEL_FRAGMENT_NAME = RECEIVE_MODEL_FRAGMENT_NAME_ARRAY;
+static int* RECEIVE_MODEL_FRAGMENT_NAME_COUNT = NUMBER_8_INTEGER_ARRAY;
 
 /* CYBOL_NAME_CONSTANTS_SOURCE */
 #endif

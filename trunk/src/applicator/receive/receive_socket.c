@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.38 $ $Date: 2007-09-15 00:17:02 $ $Author: christian $
+ * @version $Revision: 1.39 $ $Date: 2007-09-15 16:19:07 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -795,14 +795,6 @@ void receive_socket_message(void* p0, void* p1, void* p2, void* p3, void* p4, vo
         fprintf(stderr, "TEST 2 bc: %i \n", *((int*) p28));
         fprintf(stderr, "TEST 2 bs: %i \n", *((int*) p29));
 
-    /** The action parameter. */
-    static char ACTION_PARAMETER_ARRAY[] = {'a', 'c', 't', 'i', 'o', 'n'};
-    static char* ACTION_PARAMETER = ACTION_PARAMETER_ARRAY;
-    static int* ACTION_PARAMETER_COUNT = NUMBER_6_INTEGER_ARRAY;
-
-        fprintf(stderr, "TEST special a: %s \n", ACTION_PARAMETER);
-        fprintf(stderr, "TEST special ac: %i \n", *ACTION_PARAMETER_COUNT);
-
                 // The action name, abstraction, model, details.
                 void** an = NULL_POINTER;
                 void** anc = NULL_POINTER;
@@ -821,8 +813,8 @@ void receive_socket_message(void* p0, void* p1, void* p2, void* p3, void* p4, vo
                 // It is just one of many possibly parameters that were received as
                 // http request and added to the compound model above.
                 // If no action parameter is found, an empty signal will be created below.
-                get_universal_compound_element_by_name(p8, p9,
-                    (void*) ACTION_PARAMETER, (void*) ACTION_PARAMETER_COUNT,
+                get_universal_compound_element_by_name(*((void**) p8), p9,
+                    (void*) RECEIVE_MODEL_ACTION_NAME, (void*) RECEIVE_MODEL_ACTION_NAME_COUNT,
                     (void*) &an, (void*) &anc, (void*) &ans,
                     (void*) &aa, (void*) &aac, (void*) &aas,
                     (void*) &am, (void*) &amc, (void*) &ams,
@@ -1047,6 +1039,8 @@ void receive_socket_thread(void* p0, void* p1) {
         get_element(p0, (void*) &i, (void*) &l, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         i = *base + *SOCKET_LANGUAGE_COUNT_INTERNAL;
         get_element(p0, (void*) &i, (void*) &lc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    fprintf(stderr, "TEST receive socket thread language: %s \n", *((char**) l));
+    fprintf(stderr, "TEST receive socket thread language count: %i \n", **((int**) lc));
         // Get communication style.
         i = *base + *SOCKET_STYLE_INTERNAL;
         get_element(p0, (void*) &i, (void*) &st, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
@@ -1114,8 +1108,8 @@ void receive_socket_thread(void* p0, void* p1) {
             // CAUTION! This is ONLY necessary if using a non-blocking socket!
             // sleep(1.0);
 
-        log_message_debug("TEST: Break loop now ...");
             //?? TESTING only; delete later!
+            log_message_debug("TEST: Break loop now ...");
             break;
         }
 
@@ -1169,18 +1163,18 @@ void receive_socket_cyboi(void* p0) {
  * @param p1 the base internal
  * @param p2 the service thread
  * @param p3 the receive socket thread procedure
- * @param p4 the model
- * @param p5 the model count
- * @param p6 the model size
- * @param p7 the details
- * @param p8 the details count
- * @param p9 the details size
- * @param p10 the commands model
- * @param p11 the commands model count
- * @param p12 the language model
- * @param p13 the language model count
- * @param p14 the communication style model
- * @param p15 the communication style model count
+ * @param p4 the model (Hand over as reference!)
+ * @param p5 the model count (Hand over as reference!)
+ * @param p6 the model size (Hand over as reference!)
+ * @param p7 the details (Hand over as reference!)
+ * @param p8 the details count (Hand over as reference!)
+ * @param p9 the details size (Hand over as reference!)
+ * @param p10 the commands model (Hand over as reference!)
+ * @param p11 the commands model count (Hand over as reference!)
+ * @param p12 the language model (Hand over as reference!)
+ * @param p13 the language model count (Hand over as reference!)
+ * @param p14 the communication style model (Hand over as reference!)
+ * @param p15 the communication style model count (Hand over as reference!)
  */
 void receive_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7,
     void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14, void* p15) {
@@ -1224,37 +1218,37 @@ void receive_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, 
 
             // Set model internal.
             i = *b + *SOCKET_MODEL_INTERNAL;
-            set_element(p0, (void*) &i, (void*) &p4, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            set_element(p0, (void*) &i, p4, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
             i = *b + *SOCKET_MODEL_COUNT_INTERNAL;
-            set_element(p0, (void*) &i, (void*) &p5, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            set_element(p0, (void*) &i, p5, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
             i = *b + *SOCKET_MODEL_SIZE_INTERNAL;
-            set_element(p0, (void*) &i, (void*) &p6, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            set_element(p0, (void*) &i, p6, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
             // Set details internal.
             i = *b + *SOCKET_DETAILS_INTERNAL;
-            set_element(p0, (void*) &i, (void*) &p7, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            set_element(p0, (void*) &i, p7, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
             i = *b + *SOCKET_DETAILS_COUNT_INTERNAL;
-            set_element(p0, (void*) &i, (void*) &p8, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            set_element(p0, (void*) &i, p8, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
             i = *b + *SOCKET_DETAILS_SIZE_INTERNAL;
-            set_element(p0, (void*) &i, (void*) &p9, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            set_element(p0, (void*) &i, p9, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
             // Set commands internal.
             i = *b + *SOCKET_COMMANDS_INTERNAL;
-            set_element(p0, (void*) &i, (void*) &p10, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            set_element(p0, (void*) &i, p10, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
             i = *b + *SOCKET_COMMANDS_COUNT_INTERNAL;
-            set_element(p0, (void*) &i, (void*) &p11, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            set_element(p0, (void*) &i, p11, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
             // Set language internal.
             i = *b + *SOCKET_LANGUAGE_INTERNAL;
-            set_element(p0, (void*) &i, (void*) &p12, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            set_element(p0, (void*) &i, p12, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
             i = *b + *SOCKET_LANGUAGE_COUNT_INTERNAL;
-            set_element(p0, (void*) &i, (void*) &p13, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            set_element(p0, (void*) &i, p13, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
             // Set communication style internal.
             i = *b + *SOCKET_STYLE_INTERNAL;
-            set_element(p0, (void*) &i, (void*) &p14, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            set_element(p0, (void*) &i, p14, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
             i = *b + *SOCKET_STYLE_COUNT_INTERNAL;
-            set_element(p0, (void*) &i, (void*) &p15, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            set_element(p0, (void*) &i, p15, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
             // Unlock socket mutex.
             pthread_mutex_unlock(*mt);

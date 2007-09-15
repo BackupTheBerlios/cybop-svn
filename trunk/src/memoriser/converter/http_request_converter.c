@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2007-09-15 00:17:06 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2007-09-15 16:19:07 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -221,193 +221,132 @@ void decode_http_request_headers(void* p0, void* p1, void* p2, void* p3, void* p
 }
 
 /**
- * Decodes http request method.
- *
- * Examples:
- *
- * GET /wiki/Spezial:Search?search=Katzen&go=Artikel HTTP/1.1
- * POST /wiki/Spezial:Search HTTP/1.1
- *
- * The methods GET and HEAD MUST be supported by all general-purpose servers.
- * All other methods are OPTIONAL.
+ * Sets the value of the parameter with the given key, within the compound.
  *
  * @param p0 the destination model (Hand over as reference!)
  * @param p1 the destination model count
  * @param p2 the destination model size
- * @param p3 the source body
- * @param p4 the source body count
- * @param p5 the source uniform resource identifier
- * @param p6 the source uniform resource identifier count
- * @param p7 the source request method
- * @param p8 the source request method count
+ * @param p3 the source parameter key
+ * @param p4 the source parameter key count
+ * @param p5 the source parameter value
+ * @param p6 the source parameter value count
+ * @param p7 the knowledge memory
+ * @param p8 the knowledge memory count
+ * @param p9 the prefixed key (Hand over as reference!)
+ * @param p10 the prefixed key count
+ * @param p11 the prefixed key size
  */
+void decode_http_request_set_parameter(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11) {
+
+    if (p11 != *NULL_POINTER) {
+
+        int* pks = (int*) p11;
+
+        if (p10 != *NULL_POINTER) {
+
+            int* pkc = (int*) p10;
+
+            if (p9 != *NULL_POINTER) {
+
+                void** pk = (void**) p9;
+
+                if (p4 != *NULL_POINTER) {
+
+                    int* skc = (int*) p4;
+
+                    if (p0 != *NULL_POINTER) {
+
+                        // CAUTION! Do NOT use "d" as name, as it is used for "details" below.
+                        void** dest = (void**) p0;
+
+                        log_message_debug("Debug: Decode http request set parameter.");
+
+                        //
+                        // Setting of parameter.
+                        //
+
+                        // The prefixed key.
+                        *pkc = *skc + *NUMBER_1_INTEGER;
+                        *pks = *pkc;
+
+                        // Reallocate prefixed key.
+                        reallocate_array(p9, (void*) pkc, (void*) pks, (void*) CHARACTER_ARRAY);
+
+                        // Set prefixed key by first copying the prefix
+                        // and then adding the actual key name.
+                        set_array_elements(*pk, (void*) NUMBER_0_INTEGER, (void*) FULL_STOP_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+                        set_array_elements(*pk, (void*) PRIMITIVE_COUNT, p3, p4, (void*) CHARACTER_ARRAY);
+
+    fprintf(stderr, "TEST http request parameter dest: %i \n", *dest);
+    fprintf(stderr, "TEST http request parameter destc: %i \n", *((int*) p1));
+
+                        // The parameter name, abstraction, model, details.
+                        void** n = NULL_POINTER;
+                        void** nc = NULL_POINTER;
+                        void** ns = NULL_POINTER;
+                        void** a = NULL_POINTER;
+                        void** ac = NULL_POINTER;
+                        void** as = NULL_POINTER;
+                        void** m = NULL_POINTER;
+                        void** mc = NULL_POINTER;
+                        void** ms = NULL_POINTER;
+                        void** d = NULL_POINTER;
+                        void** dc = NULL_POINTER;
+                        void** ds = NULL_POINTER;
+
+    fprintf(stderr, "TEST http request parameter pk: %s \n", (char*) *pk);
+    fprintf(stderr, "TEST http request parameter pkc: %i \n", *pkc);
+    fprintf(stderr, "TEST http request parameter pks: %i \n", *pks);
+
+                        // Get parameter from model, using its key as name.
+                        get_universal_compound_element_by_name(*dest, p1,
+                            *pk, p10,
+                            (void*) &n, (void*) &nc, (void*) &ns,
+                            (void*) &a, (void*) &ac, (void*) &as,
+                            (void*) &m, (void*) &mc, (void*) &ms,
+                            (void*) &d, (void*) &dc, (void*) &ds,
+                            p7, p8);
+
 /*??
-void decode_http_request_method(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8) {
-
-    log_message_debug("Debug: Decode http request method.");
-
-    // The comparison result.
-    int r = *NUMBER_0_INTEGER;
-
-    if (r == *NUMBER_0_INTEGER) {
-
-        compare_arrays(p7, p8, (void*) HTTP_GET_REQUEST_METHOD, (void*) HTTP_GET_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != *NUMBER_0_INTEGER) {
-
-            decode_http_request_get(p0, p1, p2, p5, p6);
-        }
-    }
-
-    if (r == *NUMBER_0_INTEGER) {
-
-        compare_arrays(p7, p8, (void*) HTTP_POST_REQUEST_METHOD, (void*) HTTP_POST_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != *NUMBER_0_INTEGER) {
-
-            decode_http_request_post(p0, p1, p2, p3, p4);
-        }
-    }
-
-    if (r == *NUMBER_0_INTEGER) {
-
-        compare_arrays(p7, p8, (void*) HTTP_HEAD_REQUEST_METHOD, (void*) HTTP_HEAD_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != *NUMBER_0_INTEGER) {
-
-//??            decode_http_request_head(p0, p1, p2, p3, p4);
-        }
-    }
-
-    if (r == *NUMBER_0_INTEGER) {
-
-        compare_arrays(p7, p8, (void*) HTTP_PUT_REQUEST_METHOD, (void*) HTTP_PUT_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != *NUMBER_0_INTEGER) {
-
-//??            decode_http_request_put(p0, p1, p2, p3, p4);
-        }
-    }
-
-    if (r == *NUMBER_0_INTEGER) {
-
-        compare_arrays(p7, p8, (void*) HTTP_DELETE_REQUEST_METHOD, (void*) HTTP_DELETE_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != *NUMBER_0_INTEGER) {
-
-//??            decode_http_request_delete(p0, p1, p2, p3, p4);
-        }
-    }
-
-    if (r == *NUMBER_0_INTEGER) {
-
-        compare_arrays(p7, p8, (void*) HTTP_TRACE_REQUEST_METHOD, (void*) HTTP_TRACE_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != *NUMBER_0_INTEGER) {
-
-//??            decode_http_request_trace(p0, p1, p2, p3, p4);
-        }
-    }
-
-    if (r == *NUMBER_0_INTEGER) {
-
-        compare_arrays(p7, p8, (void*) HTTP_OPTIONS_REQUEST_METHOD, (void*) HTTP_OPTIONS_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != *NUMBER_0_INTEGER) {
-
-//??            decode_http_request_options(p0, p1, p2, p3, p4);
-        }
-    }
-
-    if (r == *NUMBER_0_INTEGER) {
-
-        compare_arrays(p7, p8, (void*) HTTP_CONNECT_REQUEST_METHOD, (void*) HTTP_CONNECT_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != *NUMBER_0_INTEGER) {
-
-//??            decode_http_request_connect(p0, p1, p2, p3, p4);
-        }
-    }
-
-    if (r == *NUMBER_0_INTEGER) {
-
-        compare_arrays(p7, p8, (void*) WEBDAV_PROPFIND_REQUEST_METHOD, (void*) WEBDAV_PROPFIND_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != *NUMBER_0_INTEGER) {
-
-//??            decode_http_request_propfind(p0, p1, p2, p3, p4);
-        }
-    }
-
-    if (r == *NUMBER_0_INTEGER) {
-
-        compare_arrays(p7, p8, (void*) WEBDAV_PROPPATCH_REQUEST_METHOD, (void*) WEBDAV_PROPPATCH_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != *NUMBER_0_INTEGER) {
-
-//??            decode_http_request_proppatch(p0, p1, p2, p3, p4);
-        }
-    }
-
-    if (r == *NUMBER_0_INTEGER) {
-
-        compare_arrays(p7, p8, (void*) WEBDAV_MKCOL_REQUEST_METHOD, (void*) WEBDAV_MKCOL_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != *NUMBER_0_INTEGER) {
-
-//??            decode_http_request_mkcol(p0, p1, p2, p3, p4);
-        }
-    }
-
-    if (r == *NUMBER_0_INTEGER) {
-
-        compare_arrays(p7, p8, (void*) WEBDAV_COPY_REQUEST_METHOD, (void*) WEBDAV_COPY_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != *NUMBER_0_INTEGER) {
-
-//??            decode_http_request_copy(p0, p1, p2, p3, p4);
-        }
-    }
-
-    if (r == *NUMBER_0_INTEGER) {
-
-        compare_arrays(p7, p8, (void*) WEBDAV_MOVE_REQUEST_METHOD, (void*) WEBDAV_MOVE_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != *NUMBER_0_INTEGER) {
-
-//??            decode_http_request_move(p0, p1, p2, p3, p4);
-        }
-    }
-
-    if (r == *NUMBER_0_INTEGER) {
-
-        compare_arrays(p7, p8, (void*) WEBDAV_LOCK_REQUEST_METHOD, (void*) WEBDAV_LOCK_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != *NUMBER_0_INTEGER) {
-
-//??            decode_http_request_lock(p0, p1, p2, p3, p4);
-        }
-    }
-
-    if (r == *NUMBER_0_INTEGER) {
-
-        compare_arrays(p7, p8, (void*) WEBDAV_UNLOCK_REQUEST_METHOD, (void*) WEBDAV_UNLOCK_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != *NUMBER_0_INTEGER) {
-
-//??            decode_http_request_unlock(p0, p1, p2, p3, p4);
-        }
-    }
-
-    if (r == *NUMBER_0_INTEGER) {
-
-        log_message_debug("Warning: Could not decode http request method. The source http request method is unknown.");
-    }
-}
+    fprintf(stderr, "TEST http request parameter nc: %i \n", **((int**) nc));
+    fprintf(stderr, "TEST http request parameter n: %s \n", (char*) *n);
+    fprintf(stderr, "TEST http request parameter ac: %i \n", **((int**) ac));
+    fprintf(stderr, "TEST http request parameter a: %s \n", (char*) *a);
+    fprintf(stderr, "TEST http request parameter mc: %i \n", **((int**) mc));
+    fprintf(stderr, "TEST http request parameter m: %s \n", (char*) *m);
 */
 
+                        // Decode and set parameter value according to given abstraction.
+                        decode((void*) m, *mc, *ms, (void*) d, *dc, *ds, p5, p6, p7, p8, p9, p10, p11, *a, *ac);
+
+                    } else {
+
+                        log_message_debug("Error: Could not decode http request set parameter. The destination model is null.");
+                    }
+
+                } else {
+
+                    log_message_debug("Error: Could not decode http request set parameter. The soure parameter key count is null.");
+                }
+
+            } else {
+
+                log_message_debug("Error: Could not decode http request set parameter. The prefixed key is null.");
+            }
+
+        } else {
+
+            log_message_debug("Error: Could not decode http request set parameter. The prefixed key count is null.");
+        }
+
+    } else {
+
+        log_message_debug("Error: Could not decode http request set parameter. The prefixed key size is null.");
+    }
+}
+
 /**
- * Decodes an http request uri query parameter into the model compound.
+ * Decodes an http request parameter (from uri query or http request body).
  *
  * Examples:
  *
@@ -428,172 +367,73 @@ void decode_http_request_method(void* p0, void* p1, void* p2, void* p3, void* p4
  */
 void decode_http_request_parameter(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9) {
 
-    if (p9 != *NULL_POINTER) {
+    if (p4 != *NULL_POINTER) {
 
-        int* pks = (int*) p9;
+        int* sc = (int*) p4;
 
-        if (p8 != *NULL_POINTER) {
+        log_message_debug("Debug: Decode http request parameter.");
 
-            int* pkc = (int*) p8;
+        // The source index.
+        // CAUTION! A local variable is used instead of the parameter
+        // that was handed over, because it will get manipulated below!
+        void* i = p3;
+        int ic = *sc;
+        // The separator index.
+        int sep = *NUMBER_MINUS_1_INTEGER;
 
-            if (p7 != *NULL_POINTER) {
+        //
+        // Key.
+        //
 
-                void** pk = (void**) p7;
+        // The key, initialised with current source index.
+        void* k = i;
+        int kc = ic;
+        // Reset separator index.
+        sep = *NUMBER_MINUS_1_INTEGER;
 
-                if (p4 != *NULL_POINTER) {
+        // Get separator index.
+        get_array_elements_index(i, (void*) &ic, (void*) URI_VALUE_SEPARATOR, (void*) URI_VALUE_SEPARATOR_COUNT, (void*) &sep, (void*) CHARACTER_ARRAY);
 
-                    int* sc = (int*) p4;
+        if (sep >= *NUMBER_0_INTEGER) {
 
-                    if (p0 != *NULL_POINTER) {
+            // Set new count.
+            kc = sep;
 
-                        // CAUTION! Do NOT use "d" as name, as it is used for "details" below.
-                        void** dest = (void**) p0;
-
-                        log_message_debug("Debug: Decode http request parameter.");
-
-                        // The source index.
-                        // CAUTION! A local variable is used instead of the parameter
-                        // that was handed over, because it will get manipulated below!
-                        void* i = p3;
-                        int ic = *sc;
-                        // The separator index.
-                        int sep = *NUMBER_MINUS_1_INTEGER;
-
-                        //
-                        // Key.
-                        //
-
-                        // The key, initialised with current source index.
-                        void* k = i;
-                        int kc = ic;
-                        // Reset separator index.
-                        sep = *NUMBER_MINUS_1_INTEGER;
-
-                        // Get separator index.
-                        get_array_elements_index(i, (void*) &ic, (void*) URI_VALUE_SEPARATOR, (void*) URI_VALUE_SEPARATOR_COUNT, (void*) &sep, (void*) CHARACTER_ARRAY);
-
-                        if (sep >= *NUMBER_0_INTEGER) {
-
-                            // Set new count.
-                            kc = sep;
-
-                            // Set new source index.
-                            i = i + sep + *URI_VALUE_SEPARATOR_COUNT;
-                            ic = ic - sep - *URI_VALUE_SEPARATOR_COUNT;
-
-                        } else {
-
-                            // No separator was found.
-                            // The remaining source is assumed to contain no further parts.
-
-                            // Set source index to null.
-                            i = *NULL_POINTER;
-                            ic = *NUMBER_0_INTEGER;
-                        }
-
-                fprintf(stderr, "TEST http request parameter k: %s \n", (char*) k);
-                fprintf(stderr, "TEST http request parameter kc: %i \n", kc);
-
-                        //
-                        // Value.
-                        //
-
-                        // The value, initialised with current source index.
-                        void* v = i;
-                        int vc = ic;
-                        // No further separators have to be found.
-
-                fprintf(stderr, "TEST http request parameter v: %s \n", (char*) v);
-                fprintf(stderr, "TEST http request parameter vc: %i \n", vc);
-
-                        //
-                        // Setting of parameter.
-                        //
-
-                        // The prefixed key.
-                        *pkc = kc + *NUMBER_1_INTEGER;
-                        *pks = *pkc;
-
-                        // Reallocate prefixed key.
-                        reallocate_array(p7, (void*) pkc, (void*) pks, (void*) CHARACTER_ARRAY);
-
-                        // Set prefixed key by first copying the prefix
-                        // and then adding the actual key name.
-                        set_array_elements(*pk, (void*) NUMBER_0_INTEGER, (void*) FULL_STOP_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
-                        set_array_elements(*pk, (void*) PRIMITIVE_COUNT, k, (void*) &kc, (void*) CHARACTER_ARRAY);
-
-                fprintf(stderr, "TEST http request parameter dest: %i \n", *dest);
-                fprintf(stderr, "TEST http request parameter destc: %i \n", *((int*) p1));
-
-                        // The parameter name, abstraction, model, details.
-                        void** n = NULL_POINTER;
-                        void** nc = NULL_POINTER;
-                        void** ns = NULL_POINTER;
-                        void** a = NULL_POINTER;
-                        void** ac = NULL_POINTER;
-                        void** as = NULL_POINTER;
-                        void** m = NULL_POINTER;
-                        void** mc = NULL_POINTER;
-                        void** ms = NULL_POINTER;
-                        void** d = NULL_POINTER;
-                        void** dc = NULL_POINTER;
-                        void** ds = NULL_POINTER;
-
-                fprintf(stderr, "TEST http request parameter pk: %s \n", (char*) *pk);
-                fprintf(stderr, "TEST http request parameter pkc: %i \n", *pkc);
-                fprintf(stderr, "TEST http request parameter pks: %i \n", *pks);
-
-/*??
-                        get_compound_element_by_index(*dest, p1,
-                            (void*) NUMBER_0_INTEGER,
-                            (void*) &n, (void*) &nc, (void*) &ns,
-                            (void*) &a, (void*) &ac, (void*) &as,
-                            (void*) &m, (void*) &mc, (void*) &ms,
-                            (void*) &d, (void*) &dc, (void*) &ds);
-*/
-
-                        // Get parameter from model, using its key as name.
-                        get_universal_compound_element_by_name(*dest, p1,
-                            *pk, p8,
-                            (void*) &n, (void*) &nc, (void*) &ns,
-                            (void*) &a, (void*) &ac, (void*) &as,
-                            (void*) &m, (void*) &mc, (void*) &ms,
-                            (void*) &d, (void*) &dc, (void*) &ds,
-                            p5, p6);
-
-                fprintf(stderr, "TEST http request parameter nc: %i \n", **((int**) nc));
-                fprintf(stderr, "TEST http request parameter n: %s \n", (char*) *n);
-                fprintf(stderr, "TEST http request parameter ac: %i \n", **((int**) ac));
-                fprintf(stderr, "TEST http request parameter a: %s \n", (char*) *a);
-                fprintf(stderr, "TEST http request parameter mc: %i \n", **((int**) mc));
-                fprintf(stderr, "TEST http request parameter m: %s \n", (char*) *m);
-
-                        // Decode and set parameter value according to given abstraction.
-                        decode((void*) m, *mc, *ms, (void*) d, *dc, *ds, v, (void*) &vc, p5, p6, p7, p8, p9, *a, *ac);
-
-                    } else {
-
-                        log_message_debug("Error: Could not decode http request parameter. The destination model is null.");
-                    }
-
-                } else {
-
-                    log_message_debug("Error: Could not decode http request parameter. The source parameter count is null.");
-                }
-
-            } else {
-
-                log_message_debug("Error: Could not decode http request parameter. The prefixed key is null.");
-            }
+            // Set new source index.
+            i = i + sep + *URI_VALUE_SEPARATOR_COUNT;
+            ic = ic - sep - *URI_VALUE_SEPARATOR_COUNT;
 
         } else {
 
-            log_message_debug("Error: Could not decode http request parameter. The prefixed key count is null.");
+            // No separator was found.
+            // The remaining source is assumed to contain no further parts.
+
+            // Set source index to null.
+            i = *NULL_POINTER;
+            ic = *NUMBER_0_INTEGER;
         }
+
+    fprintf(stderr, "TEST http request parameter k: %s \n", (char*) k);
+    fprintf(stderr, "TEST http request parameter kc: %i \n", kc);
+
+        //
+        // Value.
+        //
+
+        // The value, initialised with current source index.
+        void* v = i;
+        int vc = ic;
+        // No further separators have to be found.
+
+    fprintf(stderr, "TEST http request parameter v: %s \n", (char*) v);
+    fprintf(stderr, "TEST http request parameter vc: %i \n", vc);
+
+        // Sets the value of the parameter with the given key, within the compound.
+        decode_http_request_set_parameter(p0, p1, p2, k, (void*) &kc, v, (void*) &vc, p5, p6, p7, p8, p9);
 
     } else {
 
-        log_message_debug("Error: Could not decode http request parameter. The prefixed key size is null.");
+        log_message_debug("Error: Could not decode http request parameter. The source parameter count is null.");
     }
 }
 
@@ -1098,12 +938,251 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
     fprintf(stderr, "TEST http request uri f: %s \n", (char*) f);
     fprintf(stderr, "TEST http request uri fc: %i \n", fc);
 
-        // Decode parameters.
+        // Set the scheme value within the compound.
+        decode_http_request_set_parameter(p0, p1, p2, (void*) RECEIVE_MODEL_SCHEME_NAME, (void*) RECEIVE_MODEL_SCHEME_NAME_COUNT,
+            sch, (void*) &schc, p5, p6, p7, p8, p9);
+        // Set the authority value within the compound.
+        decode_http_request_set_parameter(p0, p1, p2, (void*) RECEIVE_MODEL_AUTHORITY_NAME, (void*) RECEIVE_MODEL_AUTHORITY_NAME_COUNT,
+            a, (void*) &ac, p5, p6, p7, p8, p9);
+        // Set the path value within the compound.
+        decode_http_request_set_parameter(p0, p1, p2, (void*) RECEIVE_MODEL_PATH_NAME, (void*) RECEIVE_MODEL_PATH_NAME_COUNT,
+            p, (void*) &pc, p5, p6, p7, p8, p9);
+
+        // Decode and set query parameters.
+        //
+        // CAUTION! The query as such does not represent a parameter, it may only contain some.
         decode_http_request_parameters(p0, p1, p2, q, (void*) &qc, p5, p6, p7, p8, p9);
+
+        // Set the fragment value within the compound.
+        decode_http_request_set_parameter(p0, p1, p2, (void*) RECEIVE_MODEL_FRAGMENT_NAME, (void*) RECEIVE_MODEL_FRAGMENT_NAME_COUNT,
+            f, (void*) &fc, p5, p6, p7, p8, p9);
 
     } else {
 
         log_message_debug("Error: Could not decode uniform resource identifier. The source uniform resource identifier count is null.");
+    }
+}
+
+/**
+ * Decodes http request method.
+ *
+ * Examples:
+ *
+ * GET /wiki/Spezial:Search?search=Katzen&go=Artikel HTTP/1.1
+ * POST /wiki/Spezial:Search HTTP/1.1
+ *
+ * CAUTION! The methods GET and HEAD MUST be supported by all general-purpose servers!
+ * All other methods are OPTIONAL.
+ *
+ * @param p0 the destination model (Hand over as reference!)
+ * @param p1 the destination model count
+ * @param p2 the destination model size
+ * @param p3 the source body
+ * @param p4 the source body count
+ * @param p5 the knowledge memory
+ * @param p6 the knowledge memory count
+ * @param p7 the prefixed key (Hand over as reference!)
+ * @param p8 the prefixed key count
+ * @param p9 the prefixed key size
+ * @param p10 the source request method
+ * @param p11 the source request method count
+ */
+void decode_http_request_method(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11) {
+
+    log_message_debug("Debug: Decode http request method.");
+
+    // The comparison result.
+    int r = *NUMBER_0_INTEGER;
+
+    if (r == *NUMBER_0_INTEGER) {
+
+        compare_arrays(p10, p11, (void*) HTTP_GET_REQUEST_METHOD, (void*) HTTP_GET_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != *NUMBER_0_INTEGER) {
+
+            // Set request method as action parameter within the compound model.
+            decode_http_request_set_parameter(p0, p1, p2, (void*) RECEIVE_MODEL_ACTION_NAME, (void*) RECEIVE_MODEL_ACTION_NAME_COUNT,
+                (void*) HTTP_GET_REQUEST_METHOD_MODEL, (void*) HTTP_GET_REQUEST_METHOD_MODEL_COUNT, p5, p6, p7, p8, p9);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER) {
+
+        compare_arrays(p10, p11, (void*) HTTP_POST_REQUEST_METHOD, (void*) HTTP_POST_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != *NUMBER_0_INTEGER) {
+
+            // Set request method as action parameter within the compound model.
+            decode_http_request_set_parameter(p0, p1, p2, (void*) RECEIVE_MODEL_ACTION_NAME, (void*) RECEIVE_MODEL_ACTION_NAME_COUNT,
+                (void*) HTTP_POST_REQUEST_METHOD_MODEL, (void*) HTTP_POST_REQUEST_METHOD_MODEL_COUNT, p5, p6, p7, p8, p9);
+
+            // Decode body parameters containing model data.
+            //
+            // CAUTION! Only the POST request method does deliver a body with parameters
+            // which are listed in the same key-value pair format as those in the uri.
+            decode_http_request_parameters(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER) {
+
+        compare_arrays(p10, p11, (void*) HTTP_HEAD_REQUEST_METHOD, (void*) HTTP_HEAD_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != *NUMBER_0_INTEGER) {
+
+            // Set request method as action parameter within the compound model.
+            decode_http_request_set_parameter(p0, p1, p2, (void*) RECEIVE_MODEL_ACTION_NAME, (void*) RECEIVE_MODEL_ACTION_NAME_COUNT,
+                (void*) HTTP_HEAD_REQUEST_METHOD_MODEL, (void*) HTTP_HEAD_REQUEST_METHOD_MODEL_COUNT, p5, p6, p7, p8, p9);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER) {
+
+        compare_arrays(p10, p11, (void*) HTTP_PUT_REQUEST_METHOD, (void*) HTTP_PUT_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != *NUMBER_0_INTEGER) {
+
+            // Set request method as action parameter within the compound model.
+            decode_http_request_set_parameter(p0, p1, p2, (void*) RECEIVE_MODEL_ACTION_NAME, (void*) RECEIVE_MODEL_ACTION_NAME_COUNT,
+                (void*) HTTP_PUT_REQUEST_METHOD_MODEL, (void*) HTTP_PUT_REQUEST_METHOD_MODEL_COUNT, p5, p6, p7, p8, p9);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER) {
+
+        compare_arrays(p10, p11, (void*) HTTP_DELETE_REQUEST_METHOD, (void*) HTTP_DELETE_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != *NUMBER_0_INTEGER) {
+
+            // Set request method as action parameter within the compound model.
+            decode_http_request_set_parameter(p0, p1, p2, (void*) RECEIVE_MODEL_ACTION_NAME, (void*) RECEIVE_MODEL_ACTION_NAME_COUNT,
+                (void*) HTTP_DELETE_REQUEST_METHOD_MODEL, (void*) HTTP_DELETE_REQUEST_METHOD_MODEL_COUNT, p5, p6, p7, p8, p9);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER) {
+
+        compare_arrays(p10, p11, (void*) HTTP_TRACE_REQUEST_METHOD, (void*) HTTP_TRACE_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != *NUMBER_0_INTEGER) {
+
+            // Set request method as action parameter within the compound model.
+            decode_http_request_set_parameter(p0, p1, p2, (void*) RECEIVE_MODEL_ACTION_NAME, (void*) RECEIVE_MODEL_ACTION_NAME_COUNT,
+                (void*) HTTP_TRACE_REQUEST_METHOD_MODEL, (void*) HTTP_TRACE_REQUEST_METHOD_MODEL_COUNT, p5, p6, p7, p8, p9);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER) {
+
+        compare_arrays(p10, p11, (void*) HTTP_OPTIONS_REQUEST_METHOD, (void*) HTTP_OPTIONS_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != *NUMBER_0_INTEGER) {
+
+            // Set request method as action parameter within the compound model.
+            decode_http_request_set_parameter(p0, p1, p2, (void*) RECEIVE_MODEL_ACTION_NAME, (void*) RECEIVE_MODEL_ACTION_NAME_COUNT,
+                (void*) HTTP_OPTIONS_REQUEST_METHOD_MODEL, (void*) HTTP_OPTIONS_REQUEST_METHOD_MODEL_COUNT, p5, p6, p7, p8, p9);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER) {
+
+        compare_arrays(p10, p11, (void*) HTTP_CONNECT_REQUEST_METHOD, (void*) HTTP_CONNECT_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != *NUMBER_0_INTEGER) {
+
+            // Set request method as action parameter within the compound model.
+            decode_http_request_set_parameter(p0, p1, p2, (void*) RECEIVE_MODEL_ACTION_NAME, (void*) RECEIVE_MODEL_ACTION_NAME_COUNT,
+                (void*) HTTP_CONNECT_REQUEST_METHOD_MODEL, (void*) HTTP_CONNECT_REQUEST_METHOD_MODEL_COUNT, p5, p6, p7, p8, p9);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER) {
+
+        compare_arrays(p10, p11, (void*) WEBDAV_PROPFIND_REQUEST_METHOD, (void*) WEBDAV_PROPFIND_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != *NUMBER_0_INTEGER) {
+
+            // Set request method as action parameter within the compound model.
+            decode_http_request_set_parameter(p0, p1, p2, (void*) RECEIVE_MODEL_ACTION_NAME, (void*) RECEIVE_MODEL_ACTION_NAME_COUNT,
+                (void*) WEBDAV_PROPFIND_REQUEST_METHOD_MODEL, (void*) WEBDAV_PROPFIND_REQUEST_METHOD_MODEL_COUNT, p5, p6, p7, p8, p9);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER) {
+
+        compare_arrays(p10, p11, (void*) WEBDAV_PROPPATCH_REQUEST_METHOD, (void*) WEBDAV_PROPPATCH_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != *NUMBER_0_INTEGER) {
+
+            // Set request method as action parameter within the compound model.
+            decode_http_request_set_parameter(p0, p1, p2, (void*) RECEIVE_MODEL_ACTION_NAME, (void*) RECEIVE_MODEL_ACTION_NAME_COUNT,
+                (void*) WEBDAV_PROPPATCH_REQUEST_METHOD_MODEL, (void*) WEBDAV_PROPPATCH_REQUEST_METHOD_MODEL_COUNT, p5, p6, p7, p8, p9);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER) {
+
+        compare_arrays(p10, p11, (void*) WEBDAV_MKCOL_REQUEST_METHOD, (void*) WEBDAV_MKCOL_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != *NUMBER_0_INTEGER) {
+
+            // Set request method as action parameter within the compound model.
+            decode_http_request_set_parameter(p0, p1, p2, (void*) RECEIVE_MODEL_ACTION_NAME, (void*) RECEIVE_MODEL_ACTION_NAME_COUNT,
+                (void*) WEBDAV_MKCOL_REQUEST_METHOD_MODEL, (void*) WEBDAV_MKCOL_REQUEST_METHOD_MODEL_COUNT, p5, p6, p7, p8, p9);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER) {
+
+        compare_arrays(p10, p11, (void*) WEBDAV_COPY_REQUEST_METHOD, (void*) WEBDAV_COPY_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != *NUMBER_0_INTEGER) {
+
+            // Set request method as action parameter within the compound model.
+            decode_http_request_set_parameter(p0, p1, p2, (void*) RECEIVE_MODEL_ACTION_NAME, (void*) RECEIVE_MODEL_ACTION_NAME_COUNT,
+                (void*) WEBDAV_COPY_REQUEST_METHOD_MODEL, (void*) WEBDAV_COPY_REQUEST_METHOD_MODEL_COUNT, p5, p6, p7, p8, p9);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER) {
+
+        compare_arrays(p10, p11, (void*) WEBDAV_MOVE_REQUEST_METHOD, (void*) WEBDAV_MOVE_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != *NUMBER_0_INTEGER) {
+
+            // Set request method as action parameter within the compound model.
+            decode_http_request_set_parameter(p0, p1, p2, (void*) RECEIVE_MODEL_ACTION_NAME, (void*) RECEIVE_MODEL_ACTION_NAME_COUNT,
+                (void*) WEBDAV_MOVE_REQUEST_METHOD_MODEL, (void*) WEBDAV_MOVE_REQUEST_METHOD_MODEL_COUNT, p5, p6, p7, p8, p9);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER) {
+
+        compare_arrays(p10, p11, (void*) WEBDAV_LOCK_REQUEST_METHOD, (void*) WEBDAV_LOCK_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != *NUMBER_0_INTEGER) {
+
+            // Set request method as action parameter within the compound model.
+            decode_http_request_set_parameter(p0, p1, p2, (void*) RECEIVE_MODEL_ACTION_NAME, (void*) RECEIVE_MODEL_ACTION_NAME_COUNT,
+                (void*) WEBDAV_LOCK_REQUEST_METHOD_MODEL, (void*) WEBDAV_LOCK_REQUEST_METHOD_MODEL_COUNT, p5, p6, p7, p8, p9);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER) {
+
+        compare_arrays(p10, p11, (void*) WEBDAV_UNLOCK_REQUEST_METHOD, (void*) WEBDAV_UNLOCK_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != *NUMBER_0_INTEGER) {
+
+            // Set request method as action parameter within the compound model.
+            decode_http_request_set_parameter(p0, p1, p2, (void*) RECEIVE_MODEL_ACTION_NAME, (void*) RECEIVE_MODEL_ACTION_NAME_COUNT,
+                (void*) WEBDAV_UNLOCK_REQUEST_METHOD_MODEL, (void*) WEBDAV_UNLOCK_REQUEST_METHOD_MODEL_COUNT, p5, p6, p7, p8, p9);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER) {
+
+        log_message_debug("Warning: Could not decode http request method. The source request method is unknown.");
     }
 }
 
@@ -1236,14 +1315,24 @@ void decode_http_request_line(void* p0, void* p1, void* p2, void* p3, void* p4, 
         // it is available and may be used for example in the "decode_http_request_headers"
         // function to decode differing http headers, depending on the protocol version.
 
+        // Decode request method.
+        //
+        // Each request method causes a special action and gives special
+        // parameters as meta information accompanying that action.
+        //
+        // CAUTION! This function has to be called BEFORE "decode_http_request_uri"!
+        // The reason is that the standard action of the request method
+        // may have to be overwritten with a parameter given in the uri.
+        // GET and POST, for example, do mostly not represent the desired action
+        // themselves, but are accompanied by an "action" parameter in the uri.
+        decode_http_request_method(p0, p1, p2, p6, p7, p12, p13, p14, p15, p16, rm, (void*) &rmc);
+
         // Decode headers containing meta data.
         decode_http_request_headers(p3, p4, p5, p8, p9);
 
-        // Decode uniform resource identifier containing model data (mostly for http get method).
+        // Decode uniform resource identifier containing model data.
+        // The uri's parts are set as parameters in the destination compound model.
         decode_http_request_uri(p0, p1, p2, uri, (void*) &uric, p12, p13, p14, p15, p16);
-
-        // Decode parameters containing model data (mostly for http post method).
-        decode_http_request_parameters(p0, p1, p2, p6, p7, p12, p13, p14, p15, p16);
 
     fprintf(stderr, "TEST http request line END i: %s \n", (char*) uri);
     fprintf(stderr, "TEST http request line END ic: %i \n", uric);

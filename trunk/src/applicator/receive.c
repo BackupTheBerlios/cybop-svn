@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.39 $ $Date: 2007-09-15 00:17:01 $ $Author: christian $
+ * @version $Revision: 1.40 $ $Date: 2007-09-15 16:19:07 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -367,7 +367,7 @@ void receive_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
             //
             // CAUTION! The details are handed over as well,
             // since they will store http headers as meta data.
-            receive_socket(p2, (void*) WWW_BASE_INTERNAL, (void*) WWW_SERVICE_THREAD, (void*) &receive_socket_www, (void*) mom, *momc, *moms, (void*) mod, *modc, *mods, *com, *comc, *lm, *lmc, *stm, *stmc);
+            receive_socket(p2, (void*) WWW_BASE_INTERNAL, (void*) WWW_SERVICE_THREAD, (void*) &receive_socket_www, (void*) mom, (void*) momc, (void*) moms, (void*) mod, (void*) modc, (void*) mods, (void*) com, (void*) comc, (void*) lm, (void*) lmc, (void*) stm, (void*) stmc);
         }
     }
 
@@ -381,7 +381,7 @@ void receive_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
             //
             // CAUTION! The details are handed over as well,
             // since they will store http headers as meta data.
-            receive_socket(p2, (void*) CYBOI_BASE_INTERNAL, (void*) CYBOI_SERVICE_THREAD, (void*) &receive_socket_cyboi, (void*) mom, *momc, *moms, (void*) mod, *modc, *mods, *com, *comc, *lm, *lmc, *stm, *stmc);
+            receive_socket(p2, (void*) CYBOI_BASE_INTERNAL, (void*) CYBOI_SERVICE_THREAD, (void*) &receive_socket_cyboi, (void*) mom, (void*) momc, (void*) moms, (void*) mod, (void*) modc, (void*) mods, (void*) com, (void*) comc, (void*) lm, (void*) lmc, (void*) stm, (void*) stmc);
         }
     }
 

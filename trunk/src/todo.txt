@@ -7,7 +7,7 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.16 $ $Date: 2007-09-15 00:17:01 $ $Author: christian $
+# @version $Revision: 1.17 $ $Date: 2007-09-15 16:19:07 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
@@ -15,6 +15,9 @@ ChangeLog:
 2007-09-14  Christian Heller  <christian.heller@tuxtax.de>
 
 TODO:
+        * Figure out how to use "action" parameter in conjunction with "receive_socket.c" and "http_request_converter.c"
+            (currently, two actions are merged, e.g.: "getshutdown" instead of either "get" or "shutdown";
+            set only one of the two? or use standard http request method like GET or POST as action and do handle conditions in CYBOL?)
         * CHECK: Replace "(int*) NULL_POINTER_ARRAY" initialisation in "variables.c" with "(int*) *NULL_POINTER";
             the old initialisation was actually a void** casted to an int* and therefore not correct, even if it was working
         * Add correct LOG_LEVEL constant to all log messages of all source code files,
