@@ -22,7 +22,7 @@
  *
  * This file destroys a transient model to a persistent model.
  *
- * @version $Revision: 1.25 $ $Date: 2007-08-13 16:37:11 $ $Author: christian $
+ * @version $Revision: 1.26 $ $Date: 2007-09-15 00:17:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -43,20 +43,7 @@
 //
 
 /**
- * Deallocates a transient destination model.
- *
- * Primitive models need a different creation than compound models.
- *
- * persistent:
- * - stored permanently
- * - outside CYBOI
- * - longer than CYBOI lives
- *
- * transient:
- * - stored in computer memory (RAM)
- * - only accessible from within CYBOI
- * - created and destroyed by CYBOI
- * - not available anymore after CYBOI has been destroyed
+ * Destroys a transient destination model.
  *
  * @param p0 the model
  * @param p1 the model count
@@ -64,8 +51,7 @@
  * @param p3 the model abstraction
  * @param p4 the model abstraction count
  */
-void destroy_model(void** model, void* model_count, void* model_size,
-    void* model_abstr, void* model_abstr_count);
+void destroy_model(void** model, void* model_count, void* model_size, void* model_abstr, void* model_abstr_count);
 
 /**
  * Checks for a compound model.
@@ -88,7 +74,7 @@ void check_compound_model(void* p0, void* p1, void* p2) {
 }
 
 /**
- * Destroys a primitive model
+ * Destroys a primitive model.
  *
  * @param p0 the model
  * @param p1 the model count
@@ -106,7 +92,7 @@ void destroy_primitive_model(void** model, void* model_count, void* model_size,
 }
 
 /**
- * Destroy a primitive model
+ * Destroys a compound model.
  *
  * @param p0 the model
  * @param p1 the model count
@@ -159,20 +145,7 @@ void destroy_compound_model(void** model, void* model_count, void* model_size,
 }
 
 /**
- * Deallocates a transient destination model.
- *
- * Primitive models need a different creation than compound models.
- *
- * persistent:
- * - stored permanently
- * - outside CYBOI
- * - longer than CYBOI lives
- *
- * transient:
- * - stored in computer memory (RAM)
- * - only accessible from within CYBOI
- * - created and destroyed by CYBOI
- * - not available anymore after CYBOI has been destroyed
+ * Destroys a transient destination model.
  *
  * @param p0 the model
  * @param p1 the model count
@@ -180,8 +153,7 @@ void destroy_compound_model(void** model, void* model_count, void* model_size,
  * @param p3 the model abstraction
  * @param p4 the model abstraction count
  */
-void destroy_model(void** model, void* model_count, void* model_size,
-    void* model_abstr, void* model_abstr_count) {
+void destroy_model(void** model, void* model_count, void* model_size, void* model_abstr, void* model_abstr_count) {
 
     // The comparison result.
     int r = *NUMBER_0_INTEGER;
@@ -200,13 +172,23 @@ void destroy_model(void** model, void* model_count, void* model_size,
 }
 
 /**
- * Deallocates a part and removes it from the knowledge model.
+ * Destroys a part and removes it from the knowledge model.
+ *
+ * Primitive models need a different creation than compound models.
+ *
+ * persistent:
+ * - stored permanently
+ * - outside CYBOI
+ * - longer than CYBOI lives
+ *
+ * transient:
+ * - stored in computer memory (RAM)
+ * - only accessible from within CYBOI
+ * - created and destroyed by CYBOI
+ * - not available anymore after CYBOI has been destroyed
  *
  * Expected parameters:
- * - name
- * - channel
- * - abstraction
- * - model
+ * - model (required): the knowledge model to be destroyed
  *
  * @param p0 the parameters
  * @param p1 the parameters count

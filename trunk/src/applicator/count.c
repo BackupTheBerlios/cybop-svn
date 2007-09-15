@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.24 $ $Date: 2007-08-13 16:37:10 $ $Author: christian $
+ * @version $Revision: 1.25 $ $Date: 2007-09-15 00:17:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -44,6 +44,13 @@
 
 /**
  * Counts compound parts.
+ *
+ * Expected parameters:
+ * - compound (required): the compound whose parts are to be counted
+ * - selection (required): the kind of filter to be applied for counting the compound's parts
+ * - filter (required): the filter to compare the compound parts' names with;
+ *   only those parts will be counted whose name (full, prefix, suffix, part) matches the filter string
+ * - result (required): the knowledge model in which to store the result
  *
  * @param p0 the parameters
  * @param p1 the parameters count

@@ -22,7 +22,7 @@
  *
  * this handel a loop
  *
- * @version $Revision: 1.23 $ $Date: 2007-06-24 15:02:21 $ $Author: christian $
+ * @version $Revision: 1.24 $ $Date: 2007-09-15 00:17:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -52,8 +52,8 @@ void handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
  * Loops endlessly, until the break flag is set.
  *
  * Expected parameters:
- * - model: the model to be executed repeatedly
- * - break: the break flag
+ * - model (required): the knowledge model to be executed repeatedly by the loop
+ * - break (required): the break flag; once set, the loop will be left (exited)
  *
  * @param p0 the internal memory
  * @param p1 the knowledge memory

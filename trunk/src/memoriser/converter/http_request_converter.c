@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2007-09-12 08:18:18 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2007-09-15 00:17:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -117,6 +117,9 @@ void decode_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p4
             ic = *NUMBER_0_INTEGER;
         }
 
+    fprintf(stderr, "TEST http request header a: %s \n", (char*) a);
+    fprintf(stderr, "TEST http request header ac: %i \n", ac);
+
         //
         // Value.
         //
@@ -125,6 +128,9 @@ void decode_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p4
         void* v = i;
         int vc = ic;
         // No further separators have to be found.
+
+    fprintf(stderr, "TEST http request header v: %s \n", (char*) v);
+    fprintf(stderr, "TEST http request header vc: %i \n", vc);
 
     } else {
 
@@ -202,6 +208,10 @@ void decode_http_request_headers(void* p0, void* p1, void* p2, void* p3, void* p
                 // Break loop since no further headers are to be expected.
                 break;
             }
+
+    fprintf(stderr, "TEST http request headers h: %s \n", (char*) h);
+    fprintf(stderr, "TEST http request headers hc: %i \n", hc);
+
         }
 
     } else {
@@ -412,107 +422,178 @@ void decode_http_request_method(void* p0, void* p1, void* p2, void* p3, void* p4
  * @param p4 the source parameter count
  * @param p5 the knowledge memory
  * @param p6 the knowledge memory count
+ * @param p7 the prefixed key (Hand over as reference!)
+ * @param p8 the prefixed key count
+ * @param p9 the prefixed key size
  */
-void decode_http_request_parameter(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
+void decode_http_request_parameter(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9) {
 
-    if (p4 != *NULL_POINTER) {
+    if (p9 != *NULL_POINTER) {
 
-        int* sc = (int*) p4;
+        int* pks = (int*) p9;
 
-        if (p0 != *NULL_POINTER) {
+        if (p8 != *NULL_POINTER) {
 
-            // CAUTION! Do NOT use "d" as name, as it is used for "details" below.
-            void** det = (void**) p0;
+            int* pkc = (int*) p8;
 
-            log_message_debug("Debug: Decode http request parameter.");
+            if (p7 != *NULL_POINTER) {
 
-            // The source index.
-            // CAUTION! A local variable is used instead of the parameter
-            // that was handed over, because it will get manipulated below!
-            void* i = p3;
-            int ic = *sc;
-            // The separator index.
-            int sep = *NUMBER_MINUS_1_INTEGER;
+                void** pk = (void**) p7;
 
-            //
-            // Key.
-            //
+                if (p4 != *NULL_POINTER) {
 
-            // The key, initialised with current source index.
-            void* k = i;
-            int kc = ic;
-            // Reset separator index.
-            sep = *NUMBER_MINUS_1_INTEGER;
+                    int* sc = (int*) p4;
 
-            // Get separator index.
-            get_array_elements_index(i, (void*) &ic, (void*) URI_VALUE_SEPARATOR, (void*) URI_VALUE_SEPARATOR_COUNT, (void*) &sep, (void*) CHARACTER_ARRAY);
+                    if (p0 != *NULL_POINTER) {
 
-            if (sep >= *NUMBER_0_INTEGER) {
+                        // CAUTION! Do NOT use "d" as name, as it is used for "details" below.
+                        void** dest = (void**) p0;
 
-                // Set new count.
-                kc = sep;
+                        log_message_debug("Debug: Decode http request parameter.");
 
-                // Set new source index.
-                i = i + sep + *URI_VALUE_SEPARATOR_COUNT;
-                ic = ic - sep - *URI_VALUE_SEPARATOR_COUNT;
+                        // The source index.
+                        // CAUTION! A local variable is used instead of the parameter
+                        // that was handed over, because it will get manipulated below!
+                        void* i = p3;
+                        int ic = *sc;
+                        // The separator index.
+                        int sep = *NUMBER_MINUS_1_INTEGER;
+
+                        //
+                        // Key.
+                        //
+
+                        // The key, initialised with current source index.
+                        void* k = i;
+                        int kc = ic;
+                        // Reset separator index.
+                        sep = *NUMBER_MINUS_1_INTEGER;
+
+                        // Get separator index.
+                        get_array_elements_index(i, (void*) &ic, (void*) URI_VALUE_SEPARATOR, (void*) URI_VALUE_SEPARATOR_COUNT, (void*) &sep, (void*) CHARACTER_ARRAY);
+
+                        if (sep >= *NUMBER_0_INTEGER) {
+
+                            // Set new count.
+                            kc = sep;
+
+                            // Set new source index.
+                            i = i + sep + *URI_VALUE_SEPARATOR_COUNT;
+                            ic = ic - sep - *URI_VALUE_SEPARATOR_COUNT;
+
+                        } else {
+
+                            // No separator was found.
+                            // The remaining source is assumed to contain no further parts.
+
+                            // Set source index to null.
+                            i = *NULL_POINTER;
+                            ic = *NUMBER_0_INTEGER;
+                        }
+
+                fprintf(stderr, "TEST http request parameter k: %s \n", (char*) k);
+                fprintf(stderr, "TEST http request parameter kc: %i \n", kc);
+
+                        //
+                        // Value.
+                        //
+
+                        // The value, initialised with current source index.
+                        void* v = i;
+                        int vc = ic;
+                        // No further separators have to be found.
+
+                fprintf(stderr, "TEST http request parameter v: %s \n", (char*) v);
+                fprintf(stderr, "TEST http request parameter vc: %i \n", vc);
+
+                        //
+                        // Setting of parameter.
+                        //
+
+                        // The prefixed key.
+                        *pkc = kc + *NUMBER_1_INTEGER;
+                        *pks = *pkc;
+
+                        // Reallocate prefixed key.
+                        reallocate_array(p7, (void*) pkc, (void*) pks, (void*) CHARACTER_ARRAY);
+
+                        // Set prefixed key by first copying the prefix
+                        // and then adding the actual key name.
+                        set_array_elements(*pk, (void*) NUMBER_0_INTEGER, (void*) FULL_STOP_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+                        set_array_elements(*pk, (void*) PRIMITIVE_COUNT, k, (void*) &kc, (void*) CHARACTER_ARRAY);
+
+                fprintf(stderr, "TEST http request parameter dest: %i \n", *dest);
+                fprintf(stderr, "TEST http request parameter destc: %i \n", *((int*) p1));
+
+                        // The parameter name, abstraction, model, details.
+                        void** n = NULL_POINTER;
+                        void** nc = NULL_POINTER;
+                        void** ns = NULL_POINTER;
+                        void** a = NULL_POINTER;
+                        void** ac = NULL_POINTER;
+                        void** as = NULL_POINTER;
+                        void** m = NULL_POINTER;
+                        void** mc = NULL_POINTER;
+                        void** ms = NULL_POINTER;
+                        void** d = NULL_POINTER;
+                        void** dc = NULL_POINTER;
+                        void** ds = NULL_POINTER;
+
+                fprintf(stderr, "TEST http request parameter pk: %s \n", (char*) *pk);
+                fprintf(stderr, "TEST http request parameter pkc: %i \n", *pkc);
+                fprintf(stderr, "TEST http request parameter pks: %i \n", *pks);
+
+/*??
+                        get_compound_element_by_index(*dest, p1,
+                            (void*) NUMBER_0_INTEGER,
+                            (void*) &n, (void*) &nc, (void*) &ns,
+                            (void*) &a, (void*) &ac, (void*) &as,
+                            (void*) &m, (void*) &mc, (void*) &ms,
+                            (void*) &d, (void*) &dc, (void*) &ds);
+*/
+
+                        // Get parameter from model, using its key as name.
+                        get_universal_compound_element_by_name(*dest, p1,
+                            *pk, p8,
+                            (void*) &n, (void*) &nc, (void*) &ns,
+                            (void*) &a, (void*) &ac, (void*) &as,
+                            (void*) &m, (void*) &mc, (void*) &ms,
+                            (void*) &d, (void*) &dc, (void*) &ds,
+                            p5, p6);
+
+                fprintf(stderr, "TEST http request parameter nc: %i \n", **((int**) nc));
+                fprintf(stderr, "TEST http request parameter n: %s \n", (char*) *n);
+                fprintf(stderr, "TEST http request parameter ac: %i \n", **((int**) ac));
+                fprintf(stderr, "TEST http request parameter a: %s \n", (char*) *a);
+                fprintf(stderr, "TEST http request parameter mc: %i \n", **((int**) mc));
+                fprintf(stderr, "TEST http request parameter m: %s \n", (char*) *m);
+
+                        // Decode and set parameter value according to given abstraction.
+                        decode((void*) m, *mc, *ms, (void*) d, *dc, *ds, v, (void*) &vc, p5, p6, p7, p8, p9, *a, *ac);
+
+                    } else {
+
+                        log_message_debug("Error: Could not decode http request parameter. The destination model is null.");
+                    }
+
+                } else {
+
+                    log_message_debug("Error: Could not decode http request parameter. The source parameter count is null.");
+                }
 
             } else {
 
-                // No separator was found.
-                // The remaining source is assumed to contain no further parts.
-
-                // Set source index to null.
-                i = *NULL_POINTER;
-                ic = *NUMBER_0_INTEGER;
+                log_message_debug("Error: Could not decode http request parameter. The prefixed key is null.");
             }
-
-            //
-            // Value.
-            //
-
-            // The value, initialised with current source index.
-            void* v = i;
-            int vc = ic;
-            // No further separators have to be found.
-
-            //
-            // Setting of parameter.
-            //
-
-            // The parameter name, abstraction, model, details.
-            void** n = NULL_POINTER;
-            void** nc = NULL_POINTER;
-            void** ns = NULL_POINTER;
-            void** a = NULL_POINTER;
-            void** ac = NULL_POINTER;
-            void** as = NULL_POINTER;
-            void** m = NULL_POINTER;
-            void** mc = NULL_POINTER;
-            void** ms = NULL_POINTER;
-            void** d = NULL_POINTER;
-            void** dc = NULL_POINTER;
-            void** ds = NULL_POINTER;
-
-            // Get parameter from model, using its key as name.
-            get_universal_compound_element_by_name(*det, p1,
-                (void*) k, (void*) &kc,
-                (void*) &n, (void*) &nc, (void*) &ns,
-                (void*) &a, (void*) &ac, (void*) &as,
-                (void*) &m, (void*) &mc, (void*) &ms,
-                (void*) &d, (void*) &dc, (void*) &ds,
-                p5, p6);
-
-            // Decode and set parameter value according to given abstraction.
-            decode((void*) m, *mc, *ms, (void*) d, *dc, *ds, v, (void*) &vc, p5, p6, *a, *ac);
 
         } else {
 
-            log_message_debug("Error: Could not decode http request parameter. The destination model is null.");
+            log_message_debug("Error: Could not decode http request parameter. The prefixed key count is null.");
         }
 
     } else {
 
-        log_message_debug("Error: Could not decode http request parameter. The source parameter count is null.");
+        log_message_debug("Error: Could not decode http request parameter. The prefixed key size is null.");
     }
 }
 
@@ -531,8 +612,11 @@ void decode_http_request_parameter(void* p0, void* p1, void* p2, void* p3, void*
  * @param p4 the source parameters count
  * @param p5 the knowledge memory
  * @param p6 the knowledge memory count
+ * @param p7 the prefixed key (Hand over as reference!)
+ * @param p8 the prefixed key count
+ * @param p9 the prefixed key size
  */
-void decode_http_request_parameters(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
+void decode_http_request_parameters(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9) {
 
     if (p4 != *NULL_POINTER) {
 
@@ -571,7 +655,7 @@ void decode_http_request_parameters(void* p0, void* p1, void* p2, void* p3, void
                 pc = sep;
 
                 // Decode the identified header.
-                decode_http_request_parameter(p0, p1, p2, p, (void*) &pc, p5, p6);
+                decode_http_request_parameter(p0, p1, p2, p, (void*) &pc, p5, p6, p7, p8, p9);
 
                 // Set new source index.
                 i = i + sep + *URI_PARAMETER_SEPARATOR_COUNT;
@@ -582,11 +666,15 @@ void decode_http_request_parameters(void* p0, void* p1, void* p2, void* p3, void
                 // No parameter separator was found. This is the last parameter.
 
                 // Decode the identified header.
-                decode_http_request_parameter(p0, p1, p2, p, (void*) &pc, p5, p6);
+                decode_http_request_parameter(p0, p1, p2, p, (void*) &pc, p5, p6, p7, p8, p9);
 
                 // Break loop since no further parameters are to be expected.
                 break;
             }
+
+    fprintf(stderr, "TEST http request parameters p: %s \n", (char*) p);
+    fprintf(stderr, "TEST http request parameters pc: %i \n", pc);
+
         }
 
     } else {
@@ -671,8 +759,11 @@ void decode_http_request_parameters(void* p0, void* p1, void* p2, void* p3, void
  * @param p4 the source uniform resource identifier count
  * @param p5 the knowledge memory
  * @param p6 the knowledge memory count
+ * @param p7 the prefixed key (Hand over as reference!)
+ * @param p8 the prefixed key count
+ * @param p9 the prefixed key size
  */
-void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
+void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9) {
 
     if (p4 != *NULL_POINTER) {
 
@@ -716,12 +807,16 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
         } else {
 
             // No separator was found.
-            // The remaining source is assumed to contain no further parts.
+            // The scheme is assumed not to have been given.
+            // The remaining source thus represents the other parts only.
 
-            // Set source index to null.
-            i = *NULL_POINTER;
-            ic = *NUMBER_0_INTEGER;
+            // Set scheme to null.
+            sch = *NULL_POINTER;
+            schc = *NUMBER_0_INTEGER;
         }
+
+    fprintf(stderr, "TEST http request uri sch: %s \n", (char*) sch);
+    fprintf(stderr, "TEST http request uri schc: %i \n", schc);
 
         //
         // Authority.
@@ -823,6 +918,9 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
             }
         }
 
+    fprintf(stderr, "TEST http request uri a: %s \n", (char*) a);
+    fprintf(stderr, "TEST http request uri ac: %i \n", ac);
+
         //
         // Path.
         //
@@ -901,6 +999,9 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
             }
         }
 
+    fprintf(stderr, "TEST http request uri p: %s \n", (char*) p);
+    fprintf(stderr, "TEST http request uri pc: %i \n", pc);
+
         //
         // Query.
         //
@@ -910,6 +1011,8 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
         int qc = *NUMBER_0_INTEGER;
         // Reset separator index.
         sep = *NUMBER_MINUS_1_INTEGER;
+
+    fprintf(stderr, "TEST http request uri qc 0: %i \n", qc);
 
         // Get separator index.
         get_array_elements_index(i, (void*) &ic, (void*) URI_QUERY_SEPARATOR, (void*) URI_QUERY_SEPARATOR_COUNT, (void*) &sep, (void*) CHARACTER_ARRAY);
@@ -923,9 +1026,14 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
             q = i + sep + *URI_QUERY_SEPARATOR_COUNT;
             qc = ic - sep - *URI_QUERY_SEPARATOR_COUNT;
 
+    fprintf(stderr, "TEST http request uri qc 1: %i \n", qc);
+
             // Set new source index.
             i = i + sep + *URI_QUERY_SEPARATOR_COUNT;
             ic = ic - sep - *URI_QUERY_SEPARATOR_COUNT;
+
+            // Reset separator index.
+            sep = *NUMBER_MINUS_1_INTEGER;
 
             // Get separator index.
             get_array_elements_index(i, (void*) &ic, (void*) URI_FRAGMENT_SEPARATOR, (void*) URI_FRAGMENT_SEPARATOR_COUNT, (void*) &sep, (void*) CHARACTER_ARRAY);
@@ -937,6 +1045,8 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
 
                 // Set new count.
                 qc = sep;
+
+    fprintf(stderr, "TEST http request uri qc 2: %i \n", qc);
 
                 // Set new source index.
                 //
@@ -951,11 +1061,16 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
                 // No separator was found.
                 // The remaining source is assumed to contain no further parts.
 
+    fprintf(stderr, "TEST http request uri qc 3: %i \n", qc);
+
                 // Set source index to null.
                 i = *NULL_POINTER;
                 ic = *NUMBER_0_INTEGER;
             }
         }
+
+    fprintf(stderr, "TEST http request uri q: %s \n", (char*) q);
+    fprintf(stderr, "TEST http request uri qc: %i \n", qc);
 
         //
         // Fragment.
@@ -976,12 +1091,15 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
             // It demarcates the beginning of the uri part.
 
             // Set fragment.
-            p = i + sep + *URI_FRAGMENT_SEPARATOR_COUNT;
-            pc = ic - sep - *URI_FRAGMENT_SEPARATOR_COUNT;
+            f = i + sep + *URI_FRAGMENT_SEPARATOR_COUNT;
+            fc = ic - sep - *URI_FRAGMENT_SEPARATOR_COUNT;
         }
 
+    fprintf(stderr, "TEST http request uri f: %s \n", (char*) f);
+    fprintf(stderr, "TEST http request uri fc: %i \n", fc);
+
         // Decode parameters.
-        decode_http_request_parameters(p0, p1, p2, q, (void*) &qc, p5, p6);
+        decode_http_request_parameters(p0, p1, p2, q, (void*) &qc, p5, p6, p7, p8, p9);
 
     } else {
 
@@ -1010,9 +1128,12 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
  * @param p11 the source request line count
  * @param p12 the knowledge memory
  * @param p13 the knowledge memory count
+ * @param p14 the prefixed key (Hand over as reference!)
+ * @param p15 the prefixed key count
+ * @param p16 the prefixed key size
  */
 void decode_http_request_line(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
-    void* p6, void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13) {
+    void* p6, void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14, void* p15, void* p16) {
 
     if (p11 != *NULL_POINTER) {
 
@@ -1060,6 +1181,9 @@ void decode_http_request_line(void* p0, void* p1, void* p2, void* p3, void* p4, 
             ic = *NUMBER_0_INTEGER;
         }
 
+    fprintf(stderr, "TEST http request line rm: %s \n", (char*) rm);
+    fprintf(stderr, "TEST http request line rmc: %i \n", rmc);
+
         //
         // Uniform resource identifier.
         //
@@ -1092,6 +1216,9 @@ void decode_http_request_line(void* p0, void* p1, void* p2, void* p3, void* p4, 
             ic = *NUMBER_0_INTEGER;
         }
 
+    fprintf(stderr, "TEST http request line uri: %s \n", (char*) uri);
+    fprintf(stderr, "TEST http request line uric: %i \n", uric);
+
         //
         // Protocol version.
         //
@@ -1100,6 +1227,9 @@ void decode_http_request_line(void* p0, void* p1, void* p2, void* p3, void* p4, 
         void* pv = i;
         int pvc = ic;
         // No further separators have to be found.
+
+    fprintf(stderr, "TEST http request line pv: %s \n", (char*) pv);
+    fprintf(stderr, "TEST http request line pvc: %i \n", pvc);
 
         // CAUTION! Do NOT move the function calls below to any other function!
         // The reason is that the http protocol version was decoded here so that
@@ -1110,10 +1240,13 @@ void decode_http_request_line(void* p0, void* p1, void* p2, void* p3, void* p4, 
         decode_http_request_headers(p3, p4, p5, p8, p9);
 
         // Decode uniform resource identifier containing model data (mostly for http get method).
-        decode_http_request_uri(p0, p1, p2, uri, (void*) &uric, p12, p13);
+        decode_http_request_uri(p0, p1, p2, uri, (void*) &uric, p12, p13, p14, p15, p16);
 
         // Decode parameters containing model data (mostly for http post method).
-        decode_http_request_parameters(p0, p1, p2, p6, p7, p12, p13);
+        decode_http_request_parameters(p0, p1, p2, p6, p7, p12, p13, p14, p15, p16);
+
+    fprintf(stderr, "TEST http request line END i: %s \n", (char*) uri);
+    fprintf(stderr, "TEST http request line END ic: %i \n", uric);
 
     } else {
 
@@ -1168,8 +1301,11 @@ void decode_http_request_line(void* p0, void* p1, void* p2, void* p3, void* p4, 
  * @param p7 the source http request count
  * @param p8 the knowledge memory
  * @param p9 the knowledge memory count
+ * @param p10 the prefixed key (Hand over as reference!)
+ * @param p11 the prefixed key count
+ * @param p12 the prefixed key size
  */
-void decode_http_request(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9) {
+void decode_http_request(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11, void* p12) {
 
     if (p7 != *NULL_POINTER) {
 
@@ -1224,6 +1360,9 @@ void decode_http_request(void* p0, void* p1, void* p2, void* p3, void* p4, void*
             ic = *NUMBER_0_INTEGER;
         }
 
+    fprintf(stderr, "TEST http request rl: %s \n", (char*) rl);
+    fprintf(stderr, "TEST http request rlc: %i \n", rlc);
+
         //
         // Headers.
         //
@@ -1256,6 +1395,9 @@ void decode_http_request(void* p0, void* p1, void* p2, void* p3, void* p4, void*
             ic = *NUMBER_0_INTEGER;
         }
 
+    fprintf(stderr, "TEST http request h: %s \n", (char*) h);
+    fprintf(stderr, "TEST http request hc: %i \n", hc);
+
         //
         // Body.
         //
@@ -1263,10 +1405,31 @@ void decode_http_request(void* p0, void* p1, void* p2, void* p3, void* p4, void*
         // The body, initialised with current source index.
         void* b = i;
         int bc = ic;
-        // No further separators have to be found.
+        // Reset separator index.
+        sep = *NUMBER_MINUS_1_INTEGER;
+
+        // Get separator index.
+        get_array_elements_index(i, (void*) &ic, (void*) HTTP_BODY_SEPARATOR, (void*) HTTP_BODY_SEPARATOR_COUNT, (void*) &sep, (void*) CHARACTER_ARRAY);
+
+        if (sep >= *NUMBER_0_INTEGER) {
+
+            // Set new count.
+            bc = sep;
+
+        } else {
+
+            // No separator was found.
+            // The remaining source is assumed to contain no further parts.
+        }
+
+    fprintf(stderr, "TEST http request b: %s \n", (char*) b);
+    fprintf(stderr, "TEST http request bc: %i \n", bc);
 
         // Decode request line containing request method, uniform resource identifier and protocol version.
-        decode_http_request_line(p0, p1, p2, p3, p4, p5, b, (void*) &bc, h, (void*) &hc, rl, (void*) &rlc, p8, p9);
+        decode_http_request_line(p0, p1, p2, p3, p4, p5, b, (void*) &bc, h, (void*) &hc, rl, (void*) &rlc, p8, p9, p10, p11, p12);
+
+    fprintf(stderr, "TEST http request END i: %s \n", (char*) i);
+    fprintf(stderr, "TEST http request END ic: %i \n", ic);
 
     } else {
 

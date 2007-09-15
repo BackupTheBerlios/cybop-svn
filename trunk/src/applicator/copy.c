@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.25 $ $Date: 2007-06-16 21:53:30 $ $Author: christian $
+ * @version $Revision: 1.26 $ $Date: 2007-09-15 00:17:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -41,6 +41,10 @@
 
 /**
  * Copies a primitive model.
+ *
+ * Expected parameters:
+ * - abstraction (required): the source value
+ * - destination (required): the destination value
  *
  * @param p0 the parameters
  * @param p1 the parameters count

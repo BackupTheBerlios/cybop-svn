@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.58 $ $Date: 2007-08-29 23:11:22 $ $Author: christian $
+ * @version $Revision: 1.59 $ $Date: 2007-09-15 00:17:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -149,12 +149,17 @@ void refresh_url(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, voi
  * CAUTION! Do NOT rename this procedure to "send",
  * as that name is already used by socket functionality.
  *
- * Expected parameters (names in parentheses after Lasswell):
- * - channel (channel): gnu_linux_console, tcp_socket, unix_socket, x_window_system
- * - sender (who): ip address, socket port
- * - receiver (whom): ip address, socket port
- * - message (what): dot-separated name of knowledge model to be sent
- * - waiting (blocking): whether the system shall wait until message is sent
+ * Expected parameters:
+ * - channel (required): the channel via which to send the message (e.g. http)
+ * - language (required): the language into which to encode the message before sending it (e.g. html)
+ * - mode (optional, only if channel is http): the mode of communication
+ * - namespace (optional, only if channel is http): the namespace of the socket
+ * - style (optional, only if channel is http): the style of communication
+ * - receiver (required): the name of the system receiving the message
+ * - message (required): the actual message to be sent to another system
+ * - area (optional, only if language is tui or gui): the user interface area to be repainted
+ * - clean (optional, only if language is tui): the flag indicating whether or not to clear the screen before painting a user interface
+ * - new_line (optional, only if channel is standard_output/ shell): the flag indicating whether or not to add a new line after having printed the message on screen
  *
  * @param p0 the parameters
  * @param p1 the parameters count

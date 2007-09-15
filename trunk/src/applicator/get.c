@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2007-06-24 15:02:21 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2007-09-15 00:17:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -40,6 +40,12 @@
 
 /**
  * Gets a description (meta information) of the part at the given index.
+ *
+ * Expected parameters:
+ * - compound (required): the compound whose element is to be retrieved
+ * - index (required): the index of the element to be retrieved, within the compound
+ * - description (required): the kind of data (name, abstraction) to retrieve from the compound's part
+ * - result (required): the result knowledge model in which to store the retrieved element
  *
  * @param p0 the parameters
  * @param p1 the parameters count

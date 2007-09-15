@@ -7,28 +7,29 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.15 $ $Date: 2007-09-12 08:18:18 $ $Author: christian $
+# @version $Revision: 1.16 $ $Date: 2007-09-15 00:17:01 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
 ChangeLog:
-2007-09-10  Christian Heller  <christian.heller@tuxtax.de>
+2007-09-14  Christian Heller  <christian.heller@tuxtax.de>
 
 TODO:
-        * Mention parameters in comment block of all CYBOL operations
-        * Distinguish cybol- from memory abstractions
-        * Add more abstractions for date and time (see Wikipedia and ISO/EN/DIN standards)
-        * Use an OR || and compare for numeric character reference and character entity reference, when parsing http requests
         * CHECK: Replace "(int*) NULL_POINTER_ARRAY" initialisation in "variables.c" with "(int*) *NULL_POINTER";
             the old initialisation was actually a void** casted to an int* and therefore not correct, even if it was working
+        * Add correct LOG_LEVEL constant to all log messages of all source code files,
+            so that the correct prefix (information, warning, error, debug) appears;
+            delete "Information: " etc. which are written directly into log message
+        * Use an OR || and compare for numeric character reference and character entity reference, when parsing http requests
+        * Distinguish cybol- from memory abstractions
+        * Add more abstractions for date and time (see Wikipedia and ISO/EN/DIN standards)
         * Correct encode for background- and foreground colour in "encode_gnu_linux_console_shape" function of
             "gnu_linux_console_converter.c": allocate destination variables before handing them over as parameters
         * Adapt all places in source code where reallocation is used to new
             reallocation factor handling and also shrink memory structures appropriately
-        * Add correct LOG_LEVEL constant to all log messages of all source code files,
-            so that the correct prefix (information, warning, error, debug) appears;
-            delete "Information: " etc. which are written directly into log message
-        * Include the sources of all documents into the distributable tarball cybop-0.8.0/
+        * Include the sources of all documents into the distributable tarball cybop-0.9.0/
+            --> really? This will grow it up to 500 MB in size!
+        * Adapt all source code to wide characters / Unicode
 
         * Write an actual manual that is updated as necessary to reflect the current
         state of cybop; just looking at the papers, it is hard to know what is

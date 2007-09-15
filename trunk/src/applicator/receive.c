@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.38 $ $Date: 2007-08-27 07:07:36 $ $Author: christian $
+ * @version $Revision: 1.39 $ $Date: 2007-09-15 00:17:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -80,10 +80,16 @@
  * The cyboi signal waiting loop only catches cyboi-internal signals.
  *
  * Expected parameters:
- * - channel: gnu_linux_console, tcp_socket, unix_socket, x_window_system
- * - root: dot-separated name to the root window knowledge model of the graphical user interface (gui)
- * - commands: dot-separated name of commands knowledge model
- * - blocking: true, false
+ * - channel (required): the channel via which to receive the message (gnu_linux_console, www, x_window_system etc.)
+ * - language (required): the language (abstraction, type, structure) of the data received (http_request, xdt, boolean, character etc.)
+ * - message (required): the source (knowledge template) from where to receive data
+ * - model (required): the compound model to be filled with the data received
+ * - details (required): the compound details to be filled with the data received
+ * - root (required): the knowledge model that will serve as the root
+ * - style (optional, only if channel is www, cyboi or similar): the style of socket communication
+ * - commands (optional, only if a user interface thread is to react to certain commands):
+ *   the knowledge model containing the commands that the user interface should react to
+ * - blocking (optional, only if channel is www, cyboi or similar): the flag indicating whether the receive process should be blocking
  *
  * @param p0 the parameters
  * @param p1 the parameters count

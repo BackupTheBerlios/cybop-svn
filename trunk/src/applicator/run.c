@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.12 $ $Date: 2007-08-17 04:06:51 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2007-09-15 00:17:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -43,7 +43,7 @@
  * Runs a command as a shell command.
  *
  * Expected parameters:
- * - command: list_directory_contents, ...
+ * - command (required): the name of the command to be executed (archive, list_directory_contents etc.)
  *
  * @param p0 the parameters
  * @param p1 the parameters count

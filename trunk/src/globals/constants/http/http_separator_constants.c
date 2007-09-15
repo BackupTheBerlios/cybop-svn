@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2007-08-29 23:11:23 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2007-09-15 00:17:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -51,6 +51,11 @@ static int* HTTP_RESPONSE_LINE_SEPARATOR_COUNT = NUMBER_2_INTEGER_ARRAY;
 static char HTTP_HEADERS_SEPARATOR_ARRAY[] = {0x0D, 0x0A, 0x0D, 0x0A};
 static char* HTTP_HEADERS_SEPARATOR = HTTP_HEADERS_SEPARATOR_ARRAY;
 static int* HTTP_HEADERS_SEPARATOR_COUNT = NUMBER_4_INTEGER_ARRAY;
+
+/** The http body separator ("carriage return" and "line feed"). */
+static char HTTP_BODY_SEPARATOR_ARRAY[] = {0x0D, 0x0A};
+static char* HTTP_BODY_SEPARATOR = HTTP_BODY_SEPARATOR_ARRAY;
+static int* HTTP_BODY_SEPARATOR_COUNT = NUMBER_2_INTEGER_ARRAY;
 
 //
 // Request line parts.

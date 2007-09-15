@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.20 $ $Date: 2007-06-16 21:53:30 $ $Author: christian $
+ * @version $Revision: 1.21 $ $Date: 2007-09-15 00:17:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -40,6 +40,12 @@
 
 /**
  * Adds two primitive summands resulting in the sum.
+ *
+ * Expected parameters:
+ * - abstraction (required): the abstraction of the summand 1, summand 2 and sum parameters
+ * - summand_1 (required): the first summand for the addition
+ * - summand_2 (required): the second summand for the addition
+ * - sum (required): the sum resulting from the addition
  *
  * @param p0 the parameters
  * @param p1 the parameters count

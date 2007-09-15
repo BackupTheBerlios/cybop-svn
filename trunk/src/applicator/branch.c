@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.22 $ $Date: 2007-08-13 16:37:10 $ $Author: christian $
+ * @version $Revision: 1.23 $ $Date: 2007-09-15 00:17:01 $ $Author: christian $
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
@@ -51,9 +51,9 @@ void handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
  * Branches the program flow, depending on a flag.
  *
  * Expected parameters:
- * - criterion: the branch flag
- * - true: the model to be executed if the criterion is true
- * - false: the model to be executed if the criterion is false
+ * - criterion (required): the flag specifying which of the two models to execute
+ * - true (required): the logic knowledge model to be executed if the condition is true
+ * - false (required): the logic knowledge model to be executed if the condition is false
  *
  * @param p0 the internal memory
  * @param p1 the knowledge memory

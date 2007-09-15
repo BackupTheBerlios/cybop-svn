@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.17 $ $Date: 2007-06-29 22:55:31 $ $Author: christian $
+ * @version $Revision: 1.18 $ $Date: 2007-09-15 00:17:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -46,10 +46,11 @@
  * Compares two parameters.
  *
  * Expected parameters:
- * - comparison: equal, smaller, greater, smaller_or_equal, greater_or_equal
- * - left: the left parameter
- * - right: the right parameter
- * - result: the comparison result
+ * - comparison (required): the kind of comparison to be applied (equal, smaller_or_equal, ...)
+ * - left_side (required): the left side value of the comparison
+ * - right_side (required): the right side value of the comparison
+ * - result (required): the knowledge model in which the comparison result is stored
+ * - selection (optional, only for values of abstraction "character"): the part of two string values to be compared (full, prefix, suffix, part)
  *
  * @param p0 the parameters
  * @param p1 the parameters count

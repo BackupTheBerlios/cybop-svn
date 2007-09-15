@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.18 $ $Date: 2007-08-29 23:11:22 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2007-09-15 00:17:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -70,7 +70,7 @@ void receive_file_system(void* p0, void* p1, void* p2, void* p3, void* p4, void*
 
     if (w != *NUMBER_0_INTEGER) {
 
-        decode(p0, p1, p2, p3, p4, p5, p6, p7, *NULL_POINTER, *NULL_POINTER, p8, p9);
+        decode(p0, p1, p2, p3, p4, p5, p6, p7, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, p8, p9);
 
     } else {
 
@@ -94,7 +94,7 @@ void receive_file_system(void* p0, void* p1, void* p2, void* p3, void* p4, void*
         //
 
         // Decode byte stream according to given document type.
-        decode(p0, p1, p2, p3, p4, p5, rm, (void*) &rmc, *NULL_POINTER, *NULL_POINTER, p8, p9);
+        decode(p0, p1, p2, p3, p4, p5, rm, (void*) &rmc, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, p8, p9);
 
         // Deallocate read model.
         deallocate((void*) &rm, (void*) &rms, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);

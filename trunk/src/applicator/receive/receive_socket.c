@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.37 $ $Date: 2007-09-12 08:18:18 $ $Author: christian $
+ * @version $Revision: 1.38 $ $Date: 2007-09-15 00:17:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -754,10 +754,13 @@ void receive_socket_style(void* p0, void* p1, void* p2, void* p3, void* p4, void
  * @param p27 the buffer (Hand over as reference!)
  * @param p28 the buffer count
  * @param p29 the buffer size
+ * @param p30 the prefixed key (Hand over as reference!)
+ * @param p31 the prefixed key count
+ * @param p32 the prefixed key size
  */
 void receive_socket_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7,
     void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14, void* p15, void* p16, void* p17, void* p18, void* p19,
-    void* p20, void* p21, void* p22, void* p23, void* p24, void* p25, void* p26, void* p27, void* p28, void* p29) {
+    void* p20, void* p21, void* p22, void* p23, void* p24, void* p25, void* p26, void* p27, void* p28, void* p29, void* p30, void* p31, void* p32) {
 
     if (p29 != *NULL_POINTER) {
 
@@ -787,7 +790,7 @@ void receive_socket_message(void* p0, void* p1, void* p2, void* p3, void* p4, vo
 
                 // Decode http request and write any parameters into the
                 // compound model and details being handed over as parameters.
-                decode(p8, p9, p10, p11, p12, p13, *b, p28, p0, p1, p16, p17);
+                decode(p8, p9, p10, p11, p12, p13, *b, p28, p0, p1, p30, p31, p32, p16, p17);
 
         fprintf(stderr, "TEST 2 bc: %i \n", *((int*) p28));
         fprintf(stderr, "TEST 2 bs: %i \n", *((int*) p29));
@@ -973,21 +976,25 @@ void receive_socket_thread(void* p0, void* p1) {
         void** st = NULL_POINTER;
         void** stc = NULL_POINTER;
         // The original socket of this system.
-        void** os = (void**) NULL_POINTER;
+        void** os = NULL_POINTER;
         // The original socket address of this system.
         void** oa = NULL_POINTER;
         void** oas = NULL_POINTER;
         // The communication partner-connected socket of this system.
-        void** ps = (void**) NULL_POINTER;
+        void** ps = NULL_POINTER;
         // The communication partner-connected socket address of this system.
         void** pa = NULL_POINTER;
         void** pas = NULL_POINTER;
         // The character buffer.
         void** b = NULL_POINTER;
-        void** bc = (void**) NULL_POINTER;
+        void** bc = NULL_POINTER;
         // The maximum buffer size.
         // CAUTION! A message MUST NOT be longer!
-        void** bs = (void**) NULL_POINTER;
+        void** bs = NULL_POINTER;
+        // The prefixed parameter key.
+        void** pk = NULL_POINTER;
+        void** pkc = NULL_POINTER;
+        void** pks = NULL_POINTER;
 
         // Get knowledge memory internal.
         get_element(p0, (void*) KNOWLEDGE_MEMORY_INTERNAL, (void*) &k, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
@@ -1068,6 +1075,13 @@ void receive_socket_thread(void* p0, void* p1) {
         get_element(p0, (void*) &i, (void*) &bc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         i = *base + *SOCKET_CHARACTER_BUFFER_SIZE_INTERNAL;
         get_element(p0, (void*) &i, (void*) &bs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        // Get prefixed parameter key, which was set at socket startup.
+        i = *base + *SOCKET_PREFIXED_PARAMETER_KEY_INTERNAL;
+        get_element(p0, (void*) &i, (void*) &pk, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        i = *base + *SOCKET_PREFIXED_PARAMETER_KEY_COUNT_INTERNAL;
+        get_element(p0, (void*) &i, (void*) &pkc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+        i = *base + *SOCKET_PREFIXED_PARAMETER_KEY_SIZE_INTERNAL;
+        get_element(p0, (void*) &i, (void*) &pks, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
         // Unlock socket mutex.
         pthread_mutex_unlock(*mt);
@@ -1085,7 +1099,7 @@ void receive_socket_thread(void* p0, void* p1) {
             // CAUTION! Hand over model, details and buffer as reference!
             receive_socket_message(*k, *kc, *ks, *s, *sc, *ss, *smt, *irq,
                 m, *mc, *ms, d, *dc, *ds, *c, *cc, *l, *lc, *st, *stc,
-                *os, *oa, *oas, *ps, *pa, *pas, *mt, b, *bc, *bs);
+                *os, *oa, *oas, *ps, *pa, *pas, *mt, b, *bc, *bs, pk, *pkc, *pks);
 
             // Sleep for some time to give the central processing unit (cpu)
             // time to breathe, that is to be idle or to process other signals.

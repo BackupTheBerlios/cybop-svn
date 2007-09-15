@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.31 $ $Date: 2007-08-17 03:15:31 $ $Author: christian $
+ * @version $Revision: 1.32 $ $Date: 2007-09-15 00:17:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description This module starts up a service.
  */
@@ -49,7 +49,10 @@
  * Starts up a service.
  *
  * Expected parameters:
- * - service: gnu_linux_console, tcp_socket, unix_socket, x_window_system
+ * - service (required): the service to be started up (gnu_linux_console, tcp_socket, unix_socket, x_window_system, ...)
+ * - namespace (optional, only if service is www, cyboi or similar): the namespace of the socket
+ * - style (optional, only if service is www, cyboi or similar): the namespace of the socket
+ * - style (optional, only if service is www, cyboi or similar): the address of hosts communicating with this system via socket
  *
  * @param p0 the parameters
  * @param p1 the parameters count

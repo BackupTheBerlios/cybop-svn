@@ -14,9 +14,13 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.28 $ $Date: 2007-09-11 07:47:24 $ $Author: christian $
+# @version $Revision: 1.29 $ $Date: 2007-09-15 00:17:01 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2007-09-14  Christian Heller  <christian.heller@tuxtax.de>
+        * Mention parameters (as defined in CYBOL specification) in comment block of all operations in "applicator" directory
+        * Debug "http_request_converter.c"
 
 2007-09-10  Christian Heller  <christian.heller@tuxtax.de>
         * Synchronise xdt fields in "xdt_field_constants.c" and "xdt_converter.c"

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.10 $ $Date: 2007-08-29 23:11:23 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2007-09-15 00:17:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -64,10 +64,13 @@
  * @param p7 the source count
  * @param p8 the knowledge memory
  * @param p9 the knowledge memory count
- * @param p10 the language
- * @param p11 the language count
+ * @param p10 the prefixed key (Hand over as reference!)
+ * @param p11 the prefixed key count
+ * @param p12 the prefixed key size
+ * @param p13 the language
+ * @param p14 the language count
  */
-void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11);
+void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14);
 
 /**
  * Sets the compound element by name.
@@ -562,7 +565,7 @@ void decode_compound_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4
             allocate((void*) &dn, (void*) dns, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
             // Decode destination name.
-            decode((void*) &dn, (void*) dnc, (void*) dns, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, sn, (void*) &snc, *NULL_POINTER, *NULL_POINTER, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+            decode((void*) &dn, (void*) dnc, (void*) dns, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, sn, (void*) &snc, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
             //
             // Channel.
@@ -583,7 +586,7 @@ void decode_compound_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4
             allocate((void*) &da, (void*) das, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
             // Decode destination abstraction.
-            decode((void*) &da, (void*) dac, (void*) das, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, sa, (void*) &sac, *NULL_POINTER, *NULL_POINTER, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+            decode((void*) &da, (void*) dac, (void*) das, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, sa, (void*) &sac, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
             //
             // Model.
@@ -612,7 +615,7 @@ void decode_compound_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4
                 // CAUTION! If a cybol file is to be read, then the libxml2 parser is used.
                 // This is just a workaround, until cyboi posesses its own cybol parsing functions.
                 // This source code block can then be deleted completely.
-                decode((void*) &dm, (void*) dmc, (void*) dms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, sm, (void*) &smc, *NULL_POINTER, *NULL_POINTER, sa, (void*) &sac);
+                decode((void*) &dm, (void*) dmc, (void*) dms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, sm, (void*) &smc, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, sa, (void*) &sac);
 
             } else {
 
@@ -647,7 +650,7 @@ void decode_compound_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4
                 //
                 // CAUTION! Use the original source abstraction and NOT the mapped runtime memory abstraction here!
                 // This is necessary so that the correct parsing function is called.
-                decode((void*) &dm, (void*) dmc, (void*) dms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, rm, (void*) &rmc, *NULL_POINTER, *NULL_POINTER, sa, (void*) &sac);
+                decode((void*) &dm, (void*) dmc, (void*) dms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, rm, (void*) &rmc, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, sa, (void*) &sac);
 
                 // Deallocate read model.
                 deallocate((void*) &rm, (void*) &rms, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);

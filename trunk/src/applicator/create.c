@@ -22,7 +22,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.36 $ $Date: 2007-08-29 23:11:22 $ $Author: christian $
+ * @version $Revision: 1.37 $ $Date: 2007-09-15 00:17:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -110,8 +110,9 @@ void create_set(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
     allocate((void*) &kmd, (void*) kmds, COMPOUND_ABSTRACTION, COMPOUND_ABSTRACTION_COUNT);
 
     // Decode knowledge model name, abstraction.
-    decode((void*) &kmn, (void*) kmnc, (void*) kmns, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, p5, p6, *NULL_POINTER, *NULL_POINTER, p3, p4);
-    decode((void*) &kma, (void*) kmac, (void*) kmas, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, p9, p10, *NULL_POINTER, *NULL_POINTER, p7, p8);
+    decode((void*) &kmn, (void*) kmnc, (void*) kmns, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, p5, p6, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, p3, p4);
+    decode((void*) &kma, (void*) kmac, (void*) kmas, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, p9, p10, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, p7, p8);
+
     //
     // CAUTION! Do NOT decode knowledge model model here!
     // This function's purpose is only to allocate an empty knowledge model.
@@ -121,6 +122,7 @@ void create_set(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
     // CAUTION! Do NOT decode knowledge model details here!
     // This function's purpose is only to allocate an empty knowledge model.
     // The knowledge details are left empty.
+    //
 
     // Use the determined whole model, if it exists.
     set_compound_element_by_name(p0, p1, p2,
@@ -138,11 +140,13 @@ void create_set(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
  * - knowledge memory's root directly, if no whole element is given
  * - whole element's meta models
  *
- * Parameters:
- * - name (required)
- * - abstraction (required)
- * - whole (optional; if null, the model will be added to the knowledge root)
- * - element (required, may be "part" or "meta")
+ * Expected parameters:
+ * - name (required): the name of the knowledge model to be created
+ * - abstraction (required): the abstraction (type) of the knowledge model to be created
+ * - element (required): the kind of element (knowledge model) to be created (part, meta);
+ *   a part element will be added to the model's part hierarchy; a meta element to the model's details hierarchy
+ * - compound / whole (optional; if null, the new element will be added to the knowledge memory root):
+ *   the compound to which to add to the new part/ meta element
  *
  * @param p0 the parameters
  * @param p1 the parameters count
