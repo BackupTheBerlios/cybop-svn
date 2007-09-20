@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2007-08-17 03:15:32 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2007-09-20 08:00:19 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,13 +30,13 @@
 #include "../../globals/constants/pointer/pointer_constants.c"
 
 // The gnu linux console interrupt flag.
-static int* GNU_LINUX_CONSOLE_THREAD_INTERRUPT = (int*) NULL_POINTER_ARRAY;
+static int* GNU_LINUX_CONSOLE_THREAD_INTERRUPT = NUMBER_0_INTEGER_ARRAY;
 // The x window system interrupt flag.
-static int* X_WINDOW_SYSTEM_THREAD_INTERRUPT = (int*) NULL_POINTER_ARRAY;
+static int* X_WINDOW_SYSTEM_THREAD_INTERRUPT = NUMBER_0_INTEGER_ARRAY;
 // The www service interrupt flag.
-static int* WWW_SERVICE_THREAD_INTERRUPT = (int*) NULL_POINTER_ARRAY;
+static int* WWW_SERVICE_THREAD_INTERRUPT = NUMBER_0_INTEGER_ARRAY;
 // The cyboi service interrupt flag.
-static int* CYBOI_SERVICE_THREAD_INTERRUPT = (int*) NULL_POINTER_ARRAY;
+static int* CYBOI_SERVICE_THREAD_INTERRUPT = NUMBER_0_INTEGER_ARRAY;
 
 /* SERVICE_INTERRUPT_VARIABLES_SOURCE */
 #endif

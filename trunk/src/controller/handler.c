@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.22 $ $Date: 2007-07-30 23:07:50 $ $Author: christian $
+ * @version $Revision: 1.23 $ $Date: 2007-09-20 08:00:19 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -55,12 +55,12 @@
  * @param p9 the shutdown flag
  * @param p10 the abstraction
  * @param p11 the abstraction count
- * @param p12 the model (signal)
- * @param p13 the model (signal) count
- * @param p14 the details (parameters)
- * @param p15 the details (parameters) count
- * @param p16 the priority
- * @param p17 the signal id
+ * @param p12 the model / signal
+ * @param p13 the model / signal count
+ * @param p14 the details / parameters
+ * @param p15 the details / parameters count
+ * @param p16 the priority (Hand over as reference!)
+ * @param p17 the signal identification (Hand over as reference!)
  * @param p18 the direct execution flag
  */
 void handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
@@ -146,7 +146,11 @@ void handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
             // The knowledge root does not have a details container with meta
             // information, which is why a null pointer is handed over here twice.
             get_compound_element_by_name(p1, p2, *NULL_POINTER, *NULL_POINTER,
-                *elm, *elmc, &ln, &lnc, &lns, &la, &lac, &las, &lm, &lmc, &lms, &ld, &ldc, &lds);
+                *elm, *elmc,
+                (void*) &ln, (void*) &lnc, (void*) &lns,
+                (void*) &la, (void*) &lac, (void*) &las,
+                (void*) &lm, (void*) &lmc, (void*) &lms,
+                (void*) &ld, (void*) &ldc, (void*) &lds);
 
             // Handle compound logic.
             handle_compound(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, *lm, *lmc, p16, p17, p18);
@@ -176,7 +180,11 @@ void handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
             // Compare also with procedure "get_universal_compound_element_by_name"
             // in source file "memoriser/accessor/compound_accessor.c"!
             get_compound_element_by_name(p1, p2, *NULL_POINTER, *NULL_POINTER,
-                p12, p13, &ln, &lnc, &lns, &la, &lac, &las, &lm, &lmc, &lms, &ld, &ldc, &lds);
+                p12, p13,
+                (void*) &ln, (void*) &lnc, (void*) &lns,
+                (void*) &la, (void*) &lac, (void*) &las,
+                (void*) &lm, (void*) &lmc, (void*) &lms,
+                (void*) &ld, (void*) &ldc, (void*) &lds);
 
             // Handle compound logic.
             handle_compound(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, *lm, *lmc, p16, p17, p18);

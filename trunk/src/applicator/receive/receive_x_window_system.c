@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.29 $ $Date: 2007-08-17 03:15:31 $ $Author: christian $
+ * @version $Revision: 1.30 $ $Date: 2007-09-20 08:00:19 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -550,8 +550,8 @@ void receive_x_window_system_thread(void* p0) {
     XEvent e;
     // The event type.
     int t = *NUMBER_MINUS_1_INTEGER;
-    // The signal id.
-    int* id = (int*) *NULL_POINTER;
+    // The signal identification.
+    void** id = NULL_POINTER;
 
     while (*NUMBER_1_INTEGER) {
 
@@ -654,13 +654,11 @@ void receive_x_window_system_thread(void* p0) {
                 // Lock signal memory mutex.
                 pthread_mutex_lock(*smt);
 
-                // Allocate signal id.
-                allocate((void*) &id, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-                *id = *NUMBER_0_INTEGER;
-                get_new_signal_id(*s, *sc, (void*) id);
+                // Get new signal identification by incrementing the current maximum signal's one.
+                get_new_signal_identification(*s, *sc, (void*) &id);
 
                 // Add signal to signal memory.
-                set_signal(*s, *sc, *ss, *ca, *cac, *cm, *cmc, *cd, *cdc, (void*) NORMAL_CYBOI_SIGNAL_PRIORITY, (void*) id);
+                set_signal(*s, *sc, *ss, ca, cac, cm, cmc, cd, cdc, (void*) &NORMAL_CYBOI_SIGNAL_PRIORITY, (void*) id);
 
                 // Set interrupt request flag, in order to notify the signal checker
                 // that a new signal has been placed in the signal memory.
@@ -795,13 +793,11 @@ void receive_x_window_system_thread(void* p0) {
             // Lock signal memory mutex.
             pthread_mutex_lock(*smt);
 
-            // Allocate signal id.
-            allocate((void*) &id, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-            *id = *NUMBER_0_INTEGER;
-            get_new_signal_id(*s, *sc, (void*) id);
+            // Get new signal identification by incrementing the current maximum signal's one.
+            get_new_signal_identification(*s, *sc, (void*) &id);
 
             // Add signal to signal memory.
-            set_signal(*s, *sc, *ss, *ca, *cac, *cm, *cmc, *cd, *cdc, (void*) NORMAL_CYBOI_SIGNAL_PRIORITY, (void*) id);
+            set_signal(*s, *sc, *ss, ca, cac, cm, cmc, cd, cdc, (void*) &NORMAL_CYBOI_SIGNAL_PRIORITY, (void*) id);
 
             // Set interrupt request flag, in order to notify the signal checker
             // that a new signal has been placed in the signal memory.
@@ -872,8 +868,8 @@ void receive_x_window_system_thread(void* p0) {
 
         // Reset event type.
         t = *NUMBER_MINUS_1_INTEGER;
-        // Reset signal id.
-        id = (int*) *NULL_POINTER;
+        // Reset signal identification.
+        id = NULL_POINTER;
     }
 
     // An implicit call to pthread_exit() is made when this thread

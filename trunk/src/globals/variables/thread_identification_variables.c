@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2007-08-17 03:15:32 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2007-09-20 08:00:19 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -31,13 +31,13 @@
 #include "../../globals/constants/pointer/pointer_constants.c"
 
 // The gnu linux console thread.
-static pthread_t* GNU_LINUX_CONSOLE_THREAD = (pthread_t*) NULL_POINTER_ARRAY;
+static pthread_t* GNU_LINUX_CONSOLE_THREAD = (pthread_t*) NUMBER_0_INTEGER_ARRAY;
 // The x window system thread.
-static pthread_t* X_WINDOW_SYSTEM_THREAD = (pthread_t*) NULL_POINTER_ARRAY;
+static pthread_t* X_WINDOW_SYSTEM_THREAD = (pthread_t*) NUMBER_0_INTEGER_ARRAY;
 // The www service thread.
-static pthread_t* WWW_SERVICE_THREAD = (pthread_t*) NULL_POINTER_ARRAY;
+static pthread_t* WWW_SERVICE_THREAD = (pthread_t*) NUMBER_0_INTEGER_ARRAY;
 // The cyboi service thread.
-static pthread_t* CYBOI_SERVICE_THREAD = (pthread_t*) NULL_POINTER_ARRAY;
+static pthread_t* CYBOI_SERVICE_THREAD = (pthread_t*) NUMBER_0_INTEGER_ARRAY;
 
 /* THREAD_IDENTIFICATION_VARIABLES_SOURCE */
 #endif

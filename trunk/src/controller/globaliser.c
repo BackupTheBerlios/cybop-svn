@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2007-08-17 04:06:51 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2007-09-20 08:00:19 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -46,11 +46,9 @@
  * Allocates and initialises global variables.
  *
  * CAUTION! These global variables MUST NOT be initialised in the files
- * /globals/variables/*_variables.c because then constant values are expected!
+ * /globals/variables/*_variables.c because then, constant values are expected!
  */
 void globalise() {
-
-    // fputs("Information: Globalise.\n", stdout);
 
     //
     // Primitive type size variables.
@@ -200,8 +198,6 @@ void globalise() {
  * CAUTION! Use descending order, as compared to allocation.
  */
 void unglobalise() {
-
-    // fputs("Information: Unglobalise.\n", stdout);
 
     //
     // Sleep time variables.

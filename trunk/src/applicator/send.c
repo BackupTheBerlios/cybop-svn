@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.59 $ $Date: 2007-09-15 00:17:01 $ $Author: christian $
+ * @version $Revision: 1.60 $ $Date: 2007-09-20 08:00:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -58,7 +58,7 @@
  * @param p3 the knowledge memory
  * @param p4 the knowledge memory count
  * @param p5 the knowledge memory size
- * @param p6 the signal id
+ * @param p6 the signal identification
  */
 void refresh_url(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
@@ -86,8 +86,8 @@ void refresh_url(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, voi
         (void*) &urld, (void*) &urldc, (void*) &urlds,
         p3, p4);
 
-    // The socket number for the signal id.
-    // The index for the signal id in the array is the same index
+    // The socket number for the signal identification.
+    // The index for the signal identification in the array is the same index
     // in the client socket number array.
     int i = *NUMBER_MINUS_1_INTEGER;
 
@@ -128,7 +128,7 @@ void refresh_url(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, voi
 
             send_tcp_socket((void*) &cs, (void*) &tc, (void*) &ts, (void*) dest, (void*) dest_count);
 
-            // Remove client socket number and main signal id from internal memory.
+            // Remove client socket number and main signal identification from internal memory.
             remove_relation_clientsocketnumber_mainsignalid(p2, (void*) &i);
 
             // Close socket.
@@ -170,10 +170,9 @@ void refresh_url(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, voi
  * @param p6 the signal memory
  * @param p7 the signal memory count
  * @param p8 the signal memory size
- * @param p9 the signal id
+ * @param p9 the signal identification (Hand over as reference!)
  */
-void send_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
-    void* p6, void* p7, void* p8, void* p9) {
+void send_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9) {
 
     log_message_debug("Send message.");
 
@@ -429,7 +428,7 @@ void send_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
 
         if (r != *NUMBER_0_INTEGER) {
 
-            send_cyboi_system(p2, p6, p7, p8, *ma, *mac, *mm, *mmc, *md, *mdc, (void*) NORMAL_CYBOI_SIGNAL_PRIORITY, p9);
+            send_cyboi_system(p2, p6, p7, p8, ma, mac, mm, mmc, md, mdc, (void*) &NORMAL_CYBOI_SIGNAL_PRIORITY, p9);
         }
     }
 

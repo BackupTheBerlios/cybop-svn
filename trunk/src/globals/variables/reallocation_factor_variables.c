@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2007-08-17 03:15:32 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2007-09-20 08:00:19 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,23 +30,23 @@
 #include "../../globals/constants/pointer/pointer_constants.c"
 
 // The cybol file reallocation factor.
-static int* CYBOL_FILE_REALLOCATION_FACTOR = (int*) NULL_POINTER_ARRAY;
+static int* CYBOL_FILE_REALLOCATION_FACTOR = NUMBER_0_INTEGER_ARRAY;
 /** The character vector reallocation factor. */
-static int* CHARACTER_VECTOR_REALLOCATION_FACTOR = (int*) NULL_POINTER_ARRAY;
+static int* CHARACTER_VECTOR_REALLOCATION_FACTOR = NUMBER_0_INTEGER_ARRAY;
 /** The wide character vector reallocation factor. */
-static int* WIDE_CHARACTER_VECTOR_REALLOCATION_FACTOR = (int*) NULL_POINTER_ARRAY;
+static int* WIDE_CHARACTER_VECTOR_REALLOCATION_FACTOR = NUMBER_0_INTEGER_ARRAY;
 /** The integer vector reallocation factor. */
-static int* INTEGER_VECTOR_REALLOCATION_FACTOR = (int*) NULL_POINTER_ARRAY;
+static int* INTEGER_VECTOR_REALLOCATION_FACTOR = NUMBER_0_INTEGER_ARRAY;
 /** The unsigned long vector reallocation factor. */
-static int* UNSIGNED_LONG_VECTOR_REALLOCATION_FACTOR = (int*) NULL_POINTER_ARRAY;
+static int* UNSIGNED_LONG_VECTOR_REALLOCATION_FACTOR = NUMBER_0_INTEGER_ARRAY;
 /** The double vector reallocation factor. */
-static int* DOUBLE_VECTOR_REALLOCATION_FACTOR = (int*) NULL_POINTER_ARRAY;
+static int* DOUBLE_VECTOR_REALLOCATION_FACTOR = NUMBER_0_INTEGER_ARRAY;
 /** The pointer vector reallocation factor. */
-static int* POINTER_VECTOR_REALLOCATION_FACTOR = (int*) NULL_POINTER_ARRAY;
+static int* POINTER_VECTOR_REALLOCATION_FACTOR = NUMBER_0_INTEGER_ARRAY;
 /** The compound reallocation factor. */
-static int* COMPOUND_REALLOCATION_FACTOR = (int*) NULL_POINTER_ARRAY;
+static int* COMPOUND_REALLOCATION_FACTOR = NUMBER_0_INTEGER_ARRAY;
 /** The signal memory reallocation factor. */
-static int* SIGNAL_MEMORY_REALLOCATION_FACTOR = (int*) NULL_POINTER_ARRAY;
+static int* SIGNAL_MEMORY_REALLOCATION_FACTOR = NUMBER_0_INTEGER_ARRAY;
 
 /* REALLOCATION_FACTOR_VARIABLES_SOURCE */
 #endif

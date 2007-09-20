@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2007-09-15 00:17:06 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2007-09-20 08:00:19 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -62,6 +62,13 @@ void initialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
 
     // The startup model abstraction, model, details.
     //
+    // CAUTION! Do NOT use "normal" int as type for counts and sizes here!
+    // The reason is that the "set_signal" function below expects int** parameters.
+    // If, for example, the variable mac was an int, then &mac would deliver only int*
+    // (but not int**) as parameter to be handed over to the "set_signal" function.
+    // All other models (and their counts and sizes) coming from knowledge memory
+    // are allocated in the same way when being read from cybol sources.
+    //
     // CAUTION! A (transient) knowledge model channel is not created,
     // since that is only needed temporarily for model loading.
     void* ma = *NULL_POINTER;
@@ -99,7 +106,7 @@ void initialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
 
     // Decode startup model name, abstraction.
     decode((void*) &ma, (void*) mac, (void*) mas, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
-        *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+        *NULL_POINTER, *NULL_POINTER, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
     // Receive startup model model and details (read from file and decode).
     receive_file_system((void*) &mm, (void*) mmc, (void*) mms, (void*) &md, (void*) mdc, (void*) mds,
         p9, p10, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
@@ -107,14 +114,14 @@ void initialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
     log_message_debug("\n\n");
     log_message_debug("Debug: Add initial signal to signal memory.");
 
-    // The signal id.
-    int* id = (int*) *NULL_POINTER;
-    allocate((void*) &id, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    *id = *NUMBER_0_INTEGER;
-    get_new_signal_id(p4, p5, (void*) id);
+    // The signal identification.
+    void** id = NULL_POINTER;
+
+    // Get new signal identification by incrementing the current maximum signal's one.
+    get_new_signal_identification(p4, p5, (void*) &id);
 
     // Add startup signal to signal memory.
-    set_signal(p4, p5, p6, ma, (void*) mac, mm, (void*) mmc, md, (void*) mdc, (void*) NORMAL_CYBOI_SIGNAL_PRIORITY, (void*) id);
+    set_signal(p4, p5, p6, (void*) &ma, (void*) &mac, (void*) &mm, (void*) &mmc, (void*) &md, (void*) &mdc, (void*) &NORMAL_CYBOI_SIGNAL_PRIORITY, (void*) id);
 
     // The system is now started up and complete so that a loop
     // can be entered, checking for signals (events/ interrupts)

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.30 $ $Date: 2007-08-17 04:06:51 $ $Author: christian $
+ * @version $Revision: 1.31 $ $Date: 2007-09-20 08:00:19 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -71,7 +71,7 @@ void check(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
         void** dc = NULL_POINTER;
         // The priority.
         void** p = NULL_POINTER;
-        // The signal id.
+        // The signal identification.
         void** id = NULL_POINTER;
         // The direct execution flag.
         int x = *NUMBER_0_INTEGER;
@@ -90,30 +90,24 @@ void check(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
             }
 
             // Get index of the top priority signal.
-            get_highest_priority_index(p4, p5, (void*) &i);
+            get_highest_priority_signal_index(p4, p5, (void*) &i);
 
             if (i >= *NUMBER_0_INTEGER) {
 
                 // Get signal.
-                get_signal(p4, p5, (void*) &i,
-                    (void*) &a, (void*) &ac, (void*) &m, (void*) &mc,
-                    (void*) &d, (void*) &dc, (void*) &p, (void*) &id);
+                get_signal(p4, p5, (void*) &i, (void*) &a, (void*) &ac, (void*) &m, (void*) &mc, (void*) &d, (void*) &dc, (void*) &p, (void*) &id);
 
 /*??
-    //?? For testing only. TODO: Delete these lines later!
-    fprintf(stderr, "check i: %i\n", i);
-    fprintf(stderr, "check a: %s\n", (char*) *a);
-    fprintf(stderr, "check ac: %i\n", *((int*) *ac));
-    fprintf(stderr, "check m: %s\n", (char*) *m);
-    fprintf(stderr, "check mc: %i\n", *((int*) *mc));
-    //?? d and dc are NULL. DO NOT try to print their values here!
-    fprintf(stderr, "check p: %i\n", *((int*) *p));
-    fprintf(stderr, "check id: %i\n", *((int*) *id));
+    //?? For testing only. Delete these lines later!
+    fprintf(stderr, "TEST i: %i\n", i);
+    fprintf(stderr, "TEST a: %s\n", (char*) *a);
+    fprintf(stderr, "TEST ac: %i\n", *((int*) *ac));
+    fprintf(stderr, "TEST m: %s\n", (char*) *m);
+    fprintf(stderr, "TEST mc: %i\n", *((int*) *mc));
+    // CAUTION! d and dc are NULL. DO NOT try to print their values here!
+    fprintf(stderr, "TEST p: %i\n", *((int*) *p));
+    fprintf(stderr, "TEST id: %i\n", *((int*) *id));
 */
-
-    //?? TEST
-//??    fprintf(stderr, "TEST checker k: %i\n", p1);
-//??    test_knowledge_memory(p1, p2, 5);
 
                 // Lock signal memory mutex.
                 pthread_mutex_lock((pthread_mutex_t*) p8);
@@ -131,29 +125,23 @@ void check(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
                 //?? which rely on the parent signal still being in the signal memory.
 
                 // Handle signal.
-                handle(p0, p1, p2, p3, p4, p5, p6, p7, p8,
-                    (void*) &f, *a, *ac, *m, *mc, *d, *dc, *p, *id, &x);
+                handle(p0, p1, p2, p3, p4, p5, p6, p7, p8, (void*) &f, *a, *ac, *m, *mc, *d, *dc, p, id, &x);
 
-                // CAUTION! Do NOT destroy the signal's abstraction or model here!
+                //
+                // CAUTION! Do NOT destroy here either of the signal's:
+                // - abstraction
+                // - model
+                // - priority
+                // - identification
+                //
                 // A signal only encapsulates an abstraction and a logic model,
                 // which are stored in the knowledge tree.
                 // That knowledge tree and all its models get created at
-                // system startup or later and destroyed at system shutdown.
-
-                // CAUTION! Do NOT destroy the signal priority!
-                // It is a FIXED system constant.
-
-                // Deallocate signal id.
-                // CAUTION! Do NOT hand over as reference!
-                // The id was read from signal memory and is of type void**.
-                // The expression (&*id) is the same like (id).
-/*??
-                //?? TODO: For some reason, signals are not  processed properly
-                //?? (wrong signal abstraction), if deallocating the signal id.
-                fprintf(stderr, "TEST check pre integer destroy id: %i\n", **((int**) id));
-                deallocate((void*) id, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-                fprintf(stderr, "TEST check post integer destroy id: %i\n", *((int*) *id));
-*/
+                // system startup or later and destroyed when processing a
+                // corresponding CYBOL operation, or at system shutdown.
+                //
+                // The signal priority and identification are FIXED integer constants.
+                //
 
                 // Reset abstraction.
                 a = NULL_POINTER;
@@ -166,7 +154,7 @@ void check(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
                 dc = NULL_POINTER;
                 // Reset priority.
                 p = NULL_POINTER;
-                // Reset main signal id.
+                // Reset main signal identification.
                 id = NULL_POINTER;
                 // Reset direct execution flag.
                 x = *NUMBER_0_INTEGER;

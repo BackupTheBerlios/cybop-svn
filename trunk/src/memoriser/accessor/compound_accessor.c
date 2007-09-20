@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.43 $ $Date: 2007-08-29 23:11:23 $ $Author: christian $
+ * @version $Revision: 1.44 $ $Date: 2007-09-20 08:00:19 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -220,6 +220,12 @@ void get_compound_element_name_length(void* p0, void* p1, void* p2) {
 /**
  * Gets the compound element name and remaining name.
  *
+ * A name with missing prefix does not necessarily have to be
+ * an error, since property (meta) names are given without prefix.
+ * If the hierarchical name does not start with a prefix
+ * (part separator '.' or meta separator '#'), then it is
+ * used as is, in full length.
+ *
  * @param p0 the full name
  * @param p1 the full name count
  * @param p2 the element name (Hand over as reference!)
@@ -361,9 +367,10 @@ void get_compound_element_name_and_remaining_name(void* p0, void* p1, void* p2, 
                                     // since property (meta) names are given without prefix.
                                     // Therefore, the element name is set to the full name below.
 
-                                    // Set meta hierarchy flag to zero, because
-                                    // the element name did not have a prefix
-                                    // and is thus taken to be a part element.
+                                    // Set meta hierarchy flag to zero, because the
+                                    // element name did not have a prefix and is thus
+                                    // assumed to be a part element, by default.
+                                    //
                                     // Example:
                                     // A CYBOL property name is given without
                                     // prefix and is a part element of the
@@ -1529,6 +1536,12 @@ void reindex_compound_elements_forming_list(void* p0, void* p1, void* p2, int* p
 /**
  * Removes the compound element by name.
  *
+ * A name with missing prefix does not necessarily have to be
+ * an error, since property (meta) names are given without prefix.
+ * If the hierarchical name does not start with a prefix
+ * (part separator '.' or meta separator '#'), then it is
+ * used as is, in full length.
+ *
  * @param p0 the compound model
  * @param p1 the compound model count
  * @param p2 the compound model size
@@ -1873,6 +1886,12 @@ void get_compound_element_by_index(void* p0, void* p1, void* p2,
 /**
  * Gets the compound element by name.
  *
+ * A name with missing prefix does not necessarily have to be
+ * an error, since property (meta) names are given without prefix.
+ * If the hierarchical name does not start with a prefix
+ * (part separator '.' or meta separator '#'), then it is
+ * used as is, in full length.
+ *
  * @param p0 the compound model
  * @param p1 the compound model count
  * @param p2 the compound details
@@ -2018,6 +2037,12 @@ void get_compound_element_by_name(void* p0, void* p1, void* p2, void* p3, void* 
 
 /**
  * Gets the compound element identified by the given name.
+ *
+ * A name with missing prefix does not necessarily have to be
+ * an error, since property (meta) names are given without prefix.
+ * If the hierarchical name does not start with a prefix
+ * (part separator '.' or meta separator '#'), then it is
+ * used as is, in full length.
  *
  * The model may specify:
  * - the element directly (e.g.: an integer or character value)

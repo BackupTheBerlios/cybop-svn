@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2007-09-12 08:18:18 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2007-09-20 08:00:19 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -167,6 +167,20 @@ static int* UNSIGNED_LONG_VECTOR_ABSTRACTION_COUNT = NUMBER_13_INTEGER_ARRAY;
 static char WIDE_CHARACTER_VECTOR_ABSTRACTION_ARRAY[] = {'w', 'i', 'd', 'e', '_', 'c', 'h', 'a', 'r', 'a', 'c', 't', 'e', 'r'};
 static char* WIDE_CHARACTER_VECTOR_ABSTRACTION = WIDE_CHARACTER_VECTOR_ABSTRACTION_ARRAY;
 static int* WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT = NUMBER_14_INTEGER_ARRAY;
+
+//
+// Unicode character encoding abstractions.
+//
+
+/** The utf-8 character encoding abstraction. */
+static char UTF_8_UNICODE_CHARACTER_ENCODING_ABSTRACTION_ARRAY[] = {'u', 't', 'f', '-', '8'};
+static char* UTF_8_UNICODE_CHARACTER_ENCODING_ABSTRACTION = UTF_8_UNICODE_CHARACTER_ENCODING_ABSTRACTION_ARRAY;
+static int* UTF_8_UNICODE_CHARACTER_ENCODING_ABSTRACTION_COUNT = NUMBER_5_INTEGER_ARRAY;
+
+/** The utf-16 character encoding abstraction. */
+static char UTF_16_UNICODE_CHARACTER_ENCODING_ABSTRACTION_ARRAY[] = {'u', 't', 'f', '-', '1', '6'};
+static char* UTF_16_UNICODE_CHARACTER_ENCODING_ABSTRACTION = UTF_16_UNICODE_CHARACTER_ENCODING_ABSTRACTION_ARRAY;
+static int* UTF_16_UNICODE_CHARACTER_ENCODING_ABSTRACTION_COUNT = NUMBER_6_INTEGER_ARRAY;
 
 //
 // Audio abstractions.

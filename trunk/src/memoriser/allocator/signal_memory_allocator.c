@@ -23,7 +23,7 @@
  * This file contains the functionality to:
  * - create a signal memory in memory
  *
- * @version $Revision: 1.14 $ $Date: 2007-08-13 16:37:11 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2007-09-20 08:00:19 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -77,8 +77,9 @@ void allocate_signal_memory(void* p0, void* p1) {
         allocate_array((void*) &id, p1, (void*) POINTER_ARRAY);
 
         // Set abstractions, models, details, priorities, identifications.
-        // The p0 parameter needs to be dereferenced since it is handed over
-        // as reference, but this procedure expects a normal array.
+        //
+        // CAUTION! The p0 parameter needs to be dereferenced since it is
+        // handed over as reference, but this procedure expects a normal array.
         set_array_elements(*s, (void*) SIGNALS_ABSTRACTIONS_INDEX, (void*) &a, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
         set_array_elements(*s, (void*) SIGNALS_ABSTRACTIONS_COUNTS_INDEX, (void*) &ac, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
         set_array_elements(*s, (void*) SIGNALS_MODELS_INDEX, (void*) &m, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
@@ -146,8 +147,9 @@ void deallocate_signal_memory(void* p0, void* p1) {
     */
 
         // Get abstractions, models, details, priorities, identifications.
-        // The p0 parameter (s) needs to be dereferenced since it is handed
-        // over as reference, but this procedure expects a normal array.
+        //
+        // CAUTION! The p0 parameter (s) needs to be dereferenced since it is
+        // handed over as reference, but this procedure expects a normal array.
         get_array_elements(*s, (void*) SIGNALS_ABSTRACTIONS_INDEX, (void*) &a, (void*) POINTER_ARRAY);
         get_array_elements(*s, (void*) SIGNALS_ABSTRACTIONS_COUNTS_INDEX, (void*) &ac, (void*) POINTER_ARRAY);
         get_array_elements(*s, (void*) SIGNALS_MODELS_INDEX, (void*) &m, (void*) POINTER_ARRAY);
@@ -157,15 +159,18 @@ void deallocate_signal_memory(void* p0, void* p1) {
         get_array_elements(*s, (void*) SIGNALS_PRIORITIES_INDEX, (void*) &p, (void*) POINTER_ARRAY);
         get_array_elements(*s, (void*) SIGNALS_IDENTIFICATIONS_INDEX, (void*) &id, (void*) POINTER_ARRAY);
 
-        // CAUTION! Do NOT try to REMOVE the abstractions, models, details,
-        // priorities, identifications!
-        // Each of them has a fixed position within the signal memory and
-        // CANNOT be removed.
+        //
+        // CAUTION! Do NOT try to REMOVE the abstractions, models, details, priorities, identifications!
+        // Each of them has a fixed position within the signal memory and CANNOT be removed.
+        //
         // Trying to do so, would result in a runtime error:
         // *** glibc detected *** double free or corruption (fasttop)
+        //
         // because the signal memory is already freed below.
+        //
 
         // Deallocate abstractions, models, details, priorities, identifications.
+        //
         // CAUTION! Do NOT hand over as reference!
         // The variables are of type void**.
         // The expression (&*variable) is the same like (variable).

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2007-09-15 16:19:07 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2007-09-20 08:00:19 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -636,10 +636,10 @@ static int* RUN_PROGRAM_PROGRAM_NAME_COUNT = NUMBER_7_INTEGER_ARRAY;
 // Receive model names.
 //
 
-/** The receive model action name. */
-static char RECEIVE_MODEL_ACTION_NAME_ARRAY[] = {'a', 'c', 't', 'i', 'o', 'n'};
-static char* RECEIVE_MODEL_ACTION_NAME = RECEIVE_MODEL_ACTION_NAME_ARRAY;
-static int* RECEIVE_MODEL_ACTION_NAME_COUNT = NUMBER_6_INTEGER_ARRAY;
+/** The receive model method name. */
+static char RECEIVE_MODEL_METHOD_NAME_ARRAY[] = {'m', 'e', 't', 'h', 'o', 'd'};
+static char* RECEIVE_MODEL_METHOD_NAME = RECEIVE_MODEL_METHOD_NAME_ARRAY;
+static int* RECEIVE_MODEL_METHOD_NAME_COUNT = NUMBER_6_INTEGER_ARRAY;
 
 /** The receive model scheme name. */
 static char RECEIVE_MODEL_SCHEME_NAME_ARRAY[] = {'s', 'c', 'h', 'e', 'm', 'e'};
@@ -660,6 +660,11 @@ static int* RECEIVE_MODEL_PATH_NAME_COUNT = NUMBER_4_INTEGER_ARRAY;
 static char RECEIVE_MODEL_FRAGMENT_NAME_ARRAY[] = {'f', 'r', 'a', 'g', 'm', 'e', 'n', 't'};
 static char* RECEIVE_MODEL_FRAGMENT_NAME = RECEIVE_MODEL_FRAGMENT_NAME_ARRAY;
 static int* RECEIVE_MODEL_FRAGMENT_NAME_COUNT = NUMBER_8_INTEGER_ARRAY;
+
+/** The receive model action name. */
+static char RECEIVE_MODEL_ACTION_NAME_ARRAY[] = {'a', 'c', 't', 'i', 'o', 'n'};
+static char* RECEIVE_MODEL_ACTION_NAME = RECEIVE_MODEL_ACTION_NAME_ARRAY;
+static int* RECEIVE_MODEL_ACTION_NAME_COUNT = NUMBER_6_INTEGER_ARRAY;
 
 /* CYBOL_NAME_CONSTANTS_SOURCE */
 #endif

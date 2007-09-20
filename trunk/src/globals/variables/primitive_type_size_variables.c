@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2007-08-17 03:15:32 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2007-09-20 08:00:19 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,17 +30,17 @@
 #include "../../globals/constants/pointer/pointer_constants.c"
 
 // The character primitive size.
-static int* CHARACTER_PRIMITIVE_SIZE = (int*) NULL_POINTER_ARRAY;
+static int* CHARACTER_PRIMITIVE_SIZE = NUMBER_0_INTEGER_ARRAY;
 // The wide character primitive size.
-static int* WIDE_CHARACTER_PRIMITIVE_SIZE = (int*) NULL_POINTER_ARRAY;
+static int* WIDE_CHARACTER_PRIMITIVE_SIZE = NUMBER_0_INTEGER_ARRAY;
 // The pointer primitive size.
-static int* POINTER_PRIMITIVE_SIZE = (int*) NULL_POINTER_ARRAY;
+static int* POINTER_PRIMITIVE_SIZE = NUMBER_0_INTEGER_ARRAY;
 // The integer primitive size.
-static int* INTEGER_PRIMITIVE_SIZE = (int*) NULL_POINTER_ARRAY;
+static int* INTEGER_PRIMITIVE_SIZE = NUMBER_0_INTEGER_ARRAY;
 // The unsigned long primitive size.
-static int* UNSIGNED_LONG_PRIMITIVE_SIZE = (int*) NULL_POINTER_ARRAY;
+static int* UNSIGNED_LONG_PRIMITIVE_SIZE = NUMBER_0_INTEGER_ARRAY;
 // The double primitive size.
-static int* DOUBLE_PRIMITIVE_SIZE = (int*) NULL_POINTER_ARRAY;
+static int* DOUBLE_PRIMITIVE_SIZE = NUMBER_0_INTEGER_ARRAY;
 
 /* PRIMITIVE_TYPE_SIZE_VARIABLES_SOURCE */
 #endif

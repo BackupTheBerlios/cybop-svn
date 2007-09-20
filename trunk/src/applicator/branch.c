@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.23 $ $Date: 2007-09-15 00:17:01 $ $Author: christian $
+ * @version $Revision: 1.24 $ $Date: 2007-09-20 08:00:18 $ $Author: christian $
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
@@ -67,8 +67,8 @@ void handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
  * @param p9 the shutdown flag
  * @param p10 the parameters
  * @param p11 the parameters count
- * @param p12 the priority
- * @param p13 the signal id
+ * @param p12 the priority (Hand over as reference!)
+ * @param p13 the signal identification (Hand over as reference!)
  */
 void branch(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
     void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13) {

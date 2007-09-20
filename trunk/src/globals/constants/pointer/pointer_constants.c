@@ -20,16 +20,12 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2007-05-26 14:35:16 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2007-09-20 08:00:19 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef POINTER_CONSTANTS_SOURCE
 #define POINTER_CONSTANTS_SOURCE
-
-//
-// Pointer values.
-//
 
 /**
  * The null pointer.

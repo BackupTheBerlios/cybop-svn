@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.21 $ $Date: 2007-08-17 03:15:32 $ $Author: christian $
+ * @version $Revision: 1.22 $ $Date: 2007-09-20 08:00:19 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -43,25 +43,24 @@
  * @param p0 the signal memory
  * @param p1 the signal memory count
  * @param p2 the signal memory size
- * @param p3 the signal abstraction
- * @param p4 the signal abstraction count
- * @param p5 the signal model
- * @param p6 the signal model count
- * @param p7 the signal details
- * @param p8 the signal details count
- * @param p9 the signal priority
- * @param p10 the signal id
+ * @param p3 the signal abstraction (Hand over as reference!)
+ * @param p4 the signal abstraction count (Hand over as reference!)
+ * @param p5 the signal model (Hand over as reference!)
+ * @param p6 the signal model count (Hand over as reference!)
+ * @param p7 the signal details (Hand over as reference!)
+ * @param p8 the signal details count (Hand over as reference!)
+ * @param p9 the signal priority (Hand over as reference!)
+ * @param p10 the signal identification (Hand over as reference!)
  */
-void set_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
-    void* p6, void* p7, void* p8, void* p9, void* p10) {
+void set_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10) {
 
     if (p2 != *NULL_POINTER) {
 
-        int* s = (int*) p2;
+        int* sms = (int*) p2;
 
         if (p1 != *NULL_POINTER) {
 
-            int* c = (int*) p1;
+            int* smc = (int*) p1;
 
             log_message_debug("Set signal.");
 
@@ -102,14 +101,14 @@ void set_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
                                         if (*id != *NULL_POINTER) {
 
                                             // The index.
-                                            int i = *c;
+                                            int i = *smc;
 
                                             if (i >= *NUMBER_0_INTEGER) {
 
-                                                if (i == *s) {
+                                                if (i == *sms) {
 
                                                     // Increase size.
-                                                    *s = (*s * *SIGNAL_MEMORY_REALLOCATION_FACTOR) + *NUMBER_1_INTEGER;
+                                                    *sms = (*sms * *SIGNAL_MEMORY_REALLOCATION_FACTOR) + *NUMBER_1_INTEGER;
 
                                                     // Reallocate abstractions, models, details, priorities, identifications.
                                                     reallocate_array(a, p1, p2, (void*) POINTER_ARRAY);
@@ -136,20 +135,20 @@ void set_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
                                                     set_array_elements(p0, (void*) SIGNALS_IDENTIFICATIONS_INDEX, (void*) id, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
                                                 }
 
-                                                if (i < *s) {
+                                                if (i < *sms) {
 
                                                     // Set abstraction, model, details, priority, identification.
-                                                    set_array_elements(*a, (void*) &i, (void*) &p3, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
-                                                    set_array_elements(*ac, (void*) &i, (void*) &p4, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
-                                                    set_array_elements(*m, (void*) &i, (void*) &p5, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
-                                                    set_array_elements(*mc, (void*) &i, (void*) &p6, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
-                                                    set_array_elements(*d, (void*) &i, (void*) &p7, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
-                                                    set_array_elements(*dc, (void*) &i, (void*) &p8, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
-                                                    set_array_elements(*p, (void*) &i, (void*) &p9, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
-                                                    set_array_elements(*id, (void*) &i, (void*) &p10, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
+                                                    set_array_elements(*a, (void*) &i, (void*) p3, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
+                                                    set_array_elements(*ac, (void*) &i, (void*) p4, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
+                                                    set_array_elements(*m, (void*) &i, (void*) p5, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
+                                                    set_array_elements(*mc, (void*) &i, (void*) p6, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
+                                                    set_array_elements(*d, (void*) &i, (void*) p7, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
+                                                    set_array_elements(*dc, (void*) &i, (void*) p8, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
+                                                    set_array_elements(*p, (void*) &i, (void*) p9, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
+                                                    set_array_elements(*id, (void*) &i, (void*) p10, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
 
                                                     // Increment count.
-                                                    (*c)++;
+                                                    (*smc)++;
 
                                                 } else {
 
@@ -228,11 +227,11 @@ void remove_signal(void* p0, void* p1, void* p2, void* p3) {
 
         if (p2 != *NULL_POINTER) {
 
-            int* s = (int*) p2;
+            int* sms = (int*) p2;
 
             if (p1 != *NULL_POINTER) {
 
-                int* c = (int*) p1;
+                int* smc = (int*) p1;
 
                 log_message_debug("Remove signal.");
 
@@ -274,7 +273,7 @@ void remove_signal(void* p0, void* p1, void* p2, void* p3) {
 
                                                 if (*i >= *NUMBER_0_INTEGER) {
 
-                                                    if (*i < *c) {
+                                                    if (*i < *smc) {
 
                                                         // Remove abstraction, model, details, priority, identification.
                                                         remove_array_elements(*a, p1, p3, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
@@ -287,7 +286,7 @@ void remove_signal(void* p0, void* p1, void* p2, void* p3) {
                                                         remove_array_elements(*id, p1, p3, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
 
                                                         // Decrement count.
-                                                        (*c)--;
+                                                        (*smc)--;
 
                                                     } else {
 
@@ -368,7 +367,7 @@ void remove_signal(void* p0, void* p1, void* p2, void* p3) {
  * @param p7 the signal details (Hand over as reference!)
  * @param p8 the signal details count (Hand over as reference!)
  * @param p9 the signal priority (Hand over as reference!)
- * @param p10 the main signal id (Hand over as reference!)
+ * @param p10 the main signal identification (Hand over as reference!)
  */
 void get_signal(void* p0, void* p1, void* p2, void* p3, void* p4,
     void* p5, void* p6, void* p7, void* p8, void* p9, int* p10) {
@@ -379,7 +378,7 @@ void get_signal(void* p0, void* p1, void* p2, void* p3, void* p4,
 
         if (p1 != *NULL_POINTER) {
 
-            int* c = (int*) p1;
+            int* smc = (int*) p1;
 
             log_message_debug("Get signal.");
 
@@ -421,7 +420,7 @@ void get_signal(void* p0, void* p1, void* p2, void* p3, void* p4,
 
                                             if (*i >= *NUMBER_0_INTEGER) {
 
-                                                if (*i < *c) {
+                                                if (*i < *smc) {
 
                                                     // Get abstraction, model, details, priority, identification.
                                                     get_array_elements(*a, p2, p3, (void*) POINTER_ARRAY);
@@ -499,9 +498,9 @@ void get_signal(void* p0, void* p1, void* p2, void* p3, void* p4,
  *
  * @param p0 the signal memory
  * @param p1 the signal memory count
- * @param p2 the index (Hand over as reference!)
+ * @param p2 the index
  */
-void get_highest_priority_index(void* p0, void* p1, void* p2) {
+void get_highest_priority_signal_index(void* p0, void* p1, void* p2) {
 
     if (p2 != *NULL_POINTER) {
 
@@ -509,7 +508,9 @@ void get_highest_priority_index(void* p0, void* p1, void* p2) {
 
         if (p1 != *NULL_POINTER) {
 
-            int* c = (int*) p1;
+            int* smc = (int*) p1;
+
+            log_message_debug("Get highest priority signal index.");
 
             // The signal priorities.
             void** sp = NULL_POINTER;
@@ -531,7 +532,7 @@ void get_highest_priority_index(void* p0, void* p1, void* p2) {
 
                 while (*NUMBER_1_INTEGER) {
 
-                    if (j >= *c) {
+                    if (j >= *smc) {
 
                         break;
                     }
@@ -556,93 +557,199 @@ void get_highest_priority_index(void* p0, void* p1, void* p2) {
 
             } else {
 
-                log_message_debug("Could not get highest priority index. The priorities is null.");
+                log_message_debug("Could not get highest priority signal index. The signal priorities is null.");
             }
 
         } else {
 
-            log_message_debug("Could not get highest priority index. The signal memory count is null.");
+            log_message_debug("Could not get highest priority signal index. The signal memory count is null.");
         }
 
     } else {
 
-        log_message_debug("Could not get highest priority index. The index is null.");
+        log_message_debug("Could not get highest priority signal index. The index is null.");
     }
 }
 
 /**
- * Gets the new signal id.
+ * Sets the new signal identification.
  *
- * The new id is: maximum signal id + 1
+ * @param p0 the signal identification (Hand over as reference!)
+ * @param p1 the signal identification value
+ */
+void set_new_signal_identification(void* p0, void* p1) {
+
+    if (p1 != *NULL_POINTER) {
+
+        int* v = (int*) p1;
+
+        if (p0 != *NULL_POINTER) {
+
+            void** id = (void**) p0;
+
+            log_message_debug("Set new signal identification.");
+
+            //
+            // CAUTION! These comparisons can be extended to infinity!
+            // Unfortunately, no other solution has been found.
+            //
+            // The reason why these comparisons are necessary is that allocations
+            // are not allowed here and integer constants have to be used.
+            // This is because "receive" threads (linux console, x window system,
+            // tcp sockets with http requests etc.) will access this function
+            // when placing signals into the signal memory (queue).
+            // If this function (and thereby the threads) allocated a "signal identification"
+            // value, this would result in an error of the following kind:
+            //
+            // *** glibc detected *** malloc(): memory corruption (fast): 0x080e0470 ***
+            // Aborted
+            //
+            // CAUTION! The following advice on pointer assignment is IMPORTANT.
+            // If not followed, the whole CYBOI system might get mixed up,
+            // with NULL_POINTER having the same address as some NUMBER_X_INTEGER
+            // constants etc., resulting in unpredictable, strange errors!
+            // Here are the advices:
+            // - Do NOT assign the pointers directly, for example:
+            //   *id = NUMBER_0_INTEGER;
+            // - Assigning the value is effectively the same and also NOT correct:
+            //   *id = NUMBER_0_INTEGER_ARRAY;
+            // - Instead, DO assign a pointer's reference, for example:
+            //   *id = &NUMBER_0_INTEGER;
+            //
+
+            if (*v == *NUMBER_0_INTEGER) {
+
+                *id = &NUMBER_0_INTEGER;
+
+            } else if (*v == *NUMBER_1_INTEGER) {
+
+                *id = &NUMBER_1_INTEGER;
+
+            } else if (*v == *NUMBER_2_INTEGER) {
+
+                *id = &NUMBER_2_INTEGER;
+
+            } else if (*v == *NUMBER_3_INTEGER) {
+
+                *id = &NUMBER_3_INTEGER;
+
+            } else if (*v == *NUMBER_4_INTEGER) {
+
+                *id = &NUMBER_4_INTEGER;
+
+            } else if (*v == *NUMBER_5_INTEGER) {
+
+                *id = &NUMBER_5_INTEGER;
+
+            } else if (*v == *NUMBER_6_INTEGER) {
+
+                *id = &NUMBER_6_INTEGER;
+
+            } else if (*v == *NUMBER_7_INTEGER) {
+
+                *id = &NUMBER_7_INTEGER;
+
+            } else if (*v == *NUMBER_8_INTEGER) {
+
+                *id = &NUMBER_8_INTEGER;
+
+            } else if (*v == *NUMBER_9_INTEGER) {
+
+                *id = &NUMBER_9_INTEGER;
+
+            } else if (*v == *NUMBER_10_INTEGER) {
+
+                *id = &NUMBER_10_INTEGER;
+            }
+
+        } else {
+
+            log_message_debug("Could not set new signal identification. The signal identification is null.");
+        }
+
+    } else {
+
+        log_message_debug("Could not set new signal identification. The signal identification value is null.");
+    }
+}
+
+/**
+ * Gets a new signal identification.
+ *
+ * The new identification is calculated as:
+ * maximum signal identification + 1
  *
  * @param p0 the signal memory
  * @param p1 the signal memory count
  * @param p2 the signal identification (Hand over as reference!)
  */
-void get_new_signal_id(void* p0, void* p1, void* p2) {
+void get_new_signal_identification(void* p0, void* p1, void* p2) {
 
-    if (p2 != *NULL_POINTER) {
+    if (p1 != *NULL_POINTER) {
 
-        int* i = (int*) p2;
+        int* smc = (int*) p1;
 
-        if (p1 != *NULL_POINTER) {
+        log_message_debug("Get new signal identification.");
 
-            int* mc = (int*) p1;
+        // The signal identifications.
+        void** ids = NULL_POINTER;
 
-            // The signal identifications.
-            void** ids = NULL_POINTER;
+        // Get signal identifications.
+        get_array_elements(p0, (void*) SIGNALS_IDENTIFICATIONS_INDEX, (void*) &ids, (void*) POINTER_ARRAY);
 
-            // Get signal identifications.
-            get_array_elements(p0, (void*) SIGNALS_IDENTIFICATIONS_INDEX, (void*) &ids, (void*) POINTER_ARRAY);
+        if (*ids != *NULL_POINTER) {
 
-            if (*ids != *NULL_POINTER) {
+            // The loop variable.
+            int j = *NUMBER_0_INTEGER;
+            // The maximum signal identification value.
+            //
+            // CAUTION! Do not initialise it with zero, because then the
+            // maximum will not be set, due to the comparison: if (id > max).
+            // The smallest possible priority is zero and greater than minus one.
+            int max = *NUMBER_MINUS_1_INTEGER;
+            // The identification.
+            int** id = (int**) NULL_POINTER;
 
-                // The loop variable.
-                int j = *NUMBER_0_INTEGER;
-                // The maximum signal identification.
-                // CAUTION! Do not initialise it with zero, because then the
-                // maximum will not be set, due to the comparison: if (id > max).
-                // The smallest possible priority is zero and greater than minus one.
-                int max = *NUMBER_MINUS_1_INTEGER;
-                // The identification.
-                int** id = (int**) NULL_POINTER;
+            while (*NUMBER_1_INTEGER) {
 
-                while (*NUMBER_1_INTEGER) {
+                if (j >= *smc) {
 
-                    if (j >= *mc) {
-
-                        break;
-                    }
-
-                    // Get signal identification.
-                    get_array_elements(*ids, (void*) &j, (void*) &id, (void*) POINTER_ARRAY);
-
-                    if (**id > max) {
-
-                        max = **id;
-                    }
-
-                    // Reset identification.
-                    id = (int**) NULL_POINTER;
-
-                    j++;
+                    break;
                 }
 
-                *i = max + *NUMBER_1_INTEGER;
+                // Get signal identification.
+                get_array_elements(*ids, (void*) &j, (void*) &id, (void*) POINTER_ARRAY);
 
-            } else {
+                if (**id > max) {
 
-                log_message_debug("Could not get new signal identification. The identifications is null.");
+                    max = **id;
+                }
+
+                // Reset identification.
+                id = (int**) NULL_POINTER;
+
+                // Increment loop variable.
+                j++;
             }
+
+            // Increment maximum signal identification value, so that the
+            // next signal will receive a differing identification value.
+            //
+            // If no signal was found, then minus one will be incremented,
+            // so that the first signal always receives the identification zero.
+            max++;
+
+            // Set new signal identification using the maximum value.
+            set_new_signal_identification(p2, (void*) &max);
 
         } else {
 
-            log_message_debug("Could not get new signal identification. The signal memory count is null.");
+            log_message_debug("Could not get new signal identification. The signal identifications is null.");
         }
 
     } else {
 
-        log_message_debug("Could not get new signal identification. The new signal id is null.");
+        log_message_debug("Could not get new signal identification. The signal memory count is null.");
     }
 }
 

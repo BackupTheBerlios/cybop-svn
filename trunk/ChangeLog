@@ -14,9 +14,38 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.30 $ $Date: 2007-09-15 16:19:07 $ $Author: christian $
+# @version $Revision: 1.31 $ $Date: 2007-09-20 08:00:18 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2007-09-19  Christian Heller  <christian.heller@tuxtax.de>
+        * Add new files: "unicode_character_encoding_constants.c", "utf_8_unicode_character_converter.c",
+            "utf_16_unicode_character_converter.c" and adapt "converter.c" accordingly
+
+2007-09-18  Christian Heller  <christian.heller@tuxtax.de>
+        * Replace value "(int*) NULL_POINTER_ARRAY" in initialisation of global variables with "NUMBER_0_INTEGER_ARRAY";
+            the old initialisation was actually a void** casted to an int* and therefore not correct, even if it was working
+
+2007-09-17  Christian Heller  <christian.heller@tuxtax.de>
+        * Rename "get_new_signal_id" to "get_new_signal_identification"
+        * Clean up "get_new_signal_identification" and add "set_new_signal_identification" function in "signal_memory_accessor.c"
+        * Correct wrong references to local variables like &p3, that get destroyed when a function is left, in function "set_signal"
+        * Forward signal priority and -identification as references in functions:
+            handle, handle_compound, handle_operation, loop, branch etc.
+        * Eliminate signal identification creation wherever a new signal is generated,
+            and use integer constants instead; the reason is that allocations are not
+            allowed in threads (linux console, x window system, tcp sockets with http requests etc.);
+            if the threads allocated a "signal identification" value, this would result in an error like:
+                *** glibc detected *** malloc(): memory corruption (fast): 0x080e0470 ***
+                Aborted
+        * Remove special "prefix key" that had been introduced accidentially some days ago;
+            the "get_universal_compound_element_by_name" function uses the full name given,
+            if it does not contain the prefixes "." or "#"; therefore, a special prefix
+            variable does not have to be created at socket startup, nor be handed over to the thread
+
+2007-09-16  Christian Heller  <christian.heller@tuxtax.de>
+        * Use an extra http receive model part (defined as cybol name constant) for
+            (1) http request "method" and (2) "action" parameter in "http_request_converter.c"
 
 2007-09-15  Christian Heller  <christian.heller@tuxtax.de>
         * Debug "http_request_converter.c"

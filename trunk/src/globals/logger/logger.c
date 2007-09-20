@@ -27,7 +27,7 @@
  * Otherwise, an ENDLESS LOOP will be created, because cyboi's
  * array procedures call the logger in turn.
  *
- * @version $Revision: 1.19 $ $Date: 2007-08-17 04:06:51 $ $Author: christian $
+ * @version $Revision: 1.20 $ $Date: 2007-09-20 08:00:19 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -312,7 +312,7 @@ void log_message(void* p0, void* p1, void* p2) {
 }
 
 /**
- * Logs the message for debugging.
+ * Logs the null character-terminated message.
  *
  * @param p0 the log message as null terminated string
  */

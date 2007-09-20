@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2007-08-17 03:15:31 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2007-09-20 08:00:19 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -89,9 +89,8 @@ void receive_gnu_linux_console_signal(void* p0, void* p1, void* p2) {
     void** cd = NULL_POINTER;
     void** cdc = NULL_POINTER;
     void** cds = NULL_POINTER;
-
-    // The signal id.
-    int* id = (int*) *NULL_POINTER;
+    // The signal identification.
+    void** id = NULL_POINTER;
 
     // Get knowledge memory internal.
     get_element(p0, (void*) KNOWLEDGE_MEMORY_INTERNAL, (void*) &k, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
@@ -139,13 +138,11 @@ void receive_gnu_linux_console_signal(void* p0, void* p1, void* p2) {
     // Lock signal memory mutex.
     pthread_mutex_lock(*smt);
 
-    // Allocate signal id.
-    allocate((void*) &id, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    *id = *NUMBER_0_INTEGER;
-    get_new_signal_id(*s, *sc, (void*) id);
+    // Get new signal identification by incrementing the current maximum signal's one.
+    get_new_signal_identification(*s, *sc, (void*) &id);
 
     // Add signal to signal memory.
-    set_signal(*s, *sc, *ss, *ca, *cac, *cm, *cmc, *cd, *cdc, (void*) NORMAL_CYBOI_SIGNAL_PRIORITY, (void*) id);
+    set_signal(*s, *sc, *ss, ca, cac, cm, cmc, cd, cdc, (void*) &NORMAL_CYBOI_SIGNAL_PRIORITY, (void*) id);
 
     // Set interrupt request flag, in order to notify the signal checker
     // that a new signal has been placed in the signal memory.

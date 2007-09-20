@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.39 $ $Date: 2007-09-15 16:19:07 $ $Author: christian $
+ * @version $Revision: 1.40 $ $Date: 2007-09-20 08:00:19 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -272,24 +272,25 @@ void receive_socket_signal(void* p0, void* p1, void* p2, void* p3, void* p4, voi
                 p0, p1);
         }
 
+    fprintf(stderr, "TEST: receive socket signal actual command name: %s \n", (char*) *cm);
+    fprintf(stderr, "TEST: receive socket signal actual command name count: %i \n", **((int**) cmc));
+
         // Lock signal memory mutex.
         pthread_mutex_lock(p6);
 
-        // The signal id.
-        int* id = (int*) *NULL_POINTER;
+        // The signal identification.
+        void** id = NULL_POINTER;
 
-        // Allocate signal id.
-        allocate((void*) &id, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-        *id = *NUMBER_0_INTEGER;
-        get_new_signal_id(p3, p4, (void*) id);
+        // Get new signal identification by incrementing the current maximum signal's one.
+        get_new_signal_identification(p3, p4, (void*) &id);
 
         // Add signal to signal memory.
-        set_signal(p3, p4, p5, *ca, *cac, *cm, *cmc, *cd, *cdc, (void*) NORMAL_CYBOI_SIGNAL_PRIORITY, (void*) id);
+        set_signal(p3, p4, p5, ca, cac, cm, cmc, cd, cdc, (void*) &NORMAL_CYBOI_SIGNAL_PRIORITY, (void*) id);
 
-    /*??
+/*??
         add_signal_id(p0, (void*) id);
         add_client_socket_number(p0, (void*) cs);
-    */
+*/
 
         // Set interrupt request flag, in order to notify the signal checker
         // that a new signal has been placed in the signal memory.
@@ -754,13 +755,10 @@ void receive_socket_style(void* p0, void* p1, void* p2, void* p3, void* p4, void
  * @param p27 the buffer (Hand over as reference!)
  * @param p28 the buffer count
  * @param p29 the buffer size
- * @param p30 the prefixed key (Hand over as reference!)
- * @param p31 the prefixed key count
- * @param p32 the prefixed key size
  */
 void receive_socket_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7,
     void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14, void* p15, void* p16, void* p17, void* p18, void* p19,
-    void* p20, void* p21, void* p22, void* p23, void* p24, void* p25, void* p26, void* p27, void* p28, void* p29, void* p30, void* p31, void* p32) {
+    void* p20, void* p21, void* p22, void* p23, void* p24, void* p25, void* p26, void* p27, void* p28, void* p29) {
 
     if (p29 != *NULL_POINTER) {
 
@@ -790,7 +788,7 @@ void receive_socket_message(void* p0, void* p1, void* p2, void* p3, void* p4, vo
 
                 // Decode http request and write any parameters into the
                 // compound model and details being handed over as parameters.
-                decode(p8, p9, p10, p11, p12, p13, *b, p28, p0, p1, p30, p31, p32, p16, p17);
+                decode(p8, p9, p10, p11, p12, p13, *b, p28, p0, p1, p16, p17);
 
         fprintf(stderr, "TEST 2 bc: %i \n", *((int*) p28));
         fprintf(stderr, "TEST 2 bs: %i \n", *((int*) p29));
@@ -812,7 +810,6 @@ void receive_socket_message(void* p0, void* p1, void* p2, void* p3, void* p4, vo
                 // Get action.
                 // It is just one of many possibly parameters that were received as
                 // http request and added to the compound model above.
-                // If no action parameter is found, an empty signal will be created below.
                 get_universal_compound_element_by_name(*((void**) p8), p9,
                     (void*) RECEIVE_MODEL_ACTION_NAME, (void*) RECEIVE_MODEL_ACTION_NAME_COUNT,
                     (void*) &an, (void*) &anc, (void*) &ans,
@@ -821,14 +818,54 @@ void receive_socket_message(void* p0, void* p1, void* p2, void* p3, void* p4, vo
                     (void*) &ad, (void*) &adc, (void*) &ads,
                     p0, p1);
 
+                // The request method name, abstraction, model, details.
+                void** mn = NULL_POINTER;
+                void** mnc = NULL_POINTER;
+                void** mns = NULL_POINTER;
+                void** ma = NULL_POINTER;
+                void** mac = NULL_POINTER;
+                void** mas = NULL_POINTER;
+                void** mm = NULL_POINTER;
+                void** mmc = NULL_POINTER;
+                void** mms = NULL_POINTER;
+                void** md = NULL_POINTER;
+                void** mdc = NULL_POINTER;
+                void** mds = NULL_POINTER;
+
+                // Get request method.
+                get_universal_compound_element_by_name(*((void**) p8), p9,
+                    (void*) RECEIVE_MODEL_METHOD_NAME, (void*) RECEIVE_MODEL_METHOD_NAME_COUNT,
+                    (void*) &mn, (void*) &mnc, (void*) &mns,
+                    (void*) &ma, (void*) &mac, (void*) &mas,
+                    (void*) &mm, (void*) &mmc, (void*) &mms,
+                    (void*) &md, (void*) &mdc, (void*) &mds,
+                    p0, p1);
+
         fprintf(stderr, "TEST 3 bc: %i \n", *((int*) p28));
         fprintf(stderr, "TEST 3 bs: %i \n", *((int*) p29));
+
+                if (*am != *NULL_POINTER) {
+
+                    // The action parameter is NOT null, so it
+                    // will be used for generating a signal.
 
         fprintf(stderr, "TEST special am: %s \n", (char*) *am);
         fprintf(stderr, "TEST special amc: %i \n", **((int**) amc));
 
-                // Receive socket signal.
-                receive_socket_signal(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, *am, *amc);
+                    // Receive socket signal.
+                    receive_socket_signal(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, *am, *amc);
+
+                } else {
+
+                    // The action parameter IS null, so the request method
+                    // will be used as command instead, for generating a signal.
+
+        fprintf(stderr, "TEST special mm: %s \n", (char*) *mm);
+        fprintf(stderr, "TEST special mmc: %i \n", **((int**) mmc));
+
+                    // Receive socket signal.
+                    receive_socket_signal(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, *mm, *mmc);
+                }
 
         fprintf(stderr, "TEST 4 bc: %i \n", *((int*) p28));
         fprintf(stderr, "TEST 4 bs: %i \n", *((int*) p29));
@@ -983,10 +1020,6 @@ void receive_socket_thread(void* p0, void* p1) {
         // The maximum buffer size.
         // CAUTION! A message MUST NOT be longer!
         void** bs = NULL_POINTER;
-        // The prefixed parameter key.
-        void** pk = NULL_POINTER;
-        void** pkc = NULL_POINTER;
-        void** pks = NULL_POINTER;
 
         // Get knowledge memory internal.
         get_element(p0, (void*) KNOWLEDGE_MEMORY_INTERNAL, (void*) &k, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
@@ -1039,8 +1072,6 @@ void receive_socket_thread(void* p0, void* p1) {
         get_element(p0, (void*) &i, (void*) &l, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         i = *base + *SOCKET_LANGUAGE_COUNT_INTERNAL;
         get_element(p0, (void*) &i, (void*) &lc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    fprintf(stderr, "TEST receive socket thread language: %s \n", *((char**) l));
-    fprintf(stderr, "TEST receive socket thread language count: %i \n", **((int**) lc));
         // Get communication style.
         i = *base + *SOCKET_STYLE_INTERNAL;
         get_element(p0, (void*) &i, (void*) &st, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
@@ -1069,13 +1100,6 @@ void receive_socket_thread(void* p0, void* p1) {
         get_element(p0, (void*) &i, (void*) &bc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         i = *base + *SOCKET_CHARACTER_BUFFER_SIZE_INTERNAL;
         get_element(p0, (void*) &i, (void*) &bs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        // Get prefixed parameter key, which was set at socket startup.
-        i = *base + *SOCKET_PREFIXED_PARAMETER_KEY_INTERNAL;
-        get_element(p0, (void*) &i, (void*) &pk, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        i = *base + *SOCKET_PREFIXED_PARAMETER_KEY_COUNT_INTERNAL;
-        get_element(p0, (void*) &i, (void*) &pkc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        i = *base + *SOCKET_PREFIXED_PARAMETER_KEY_SIZE_INTERNAL;
-        get_element(p0, (void*) &i, (void*) &pks, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
         // Unlock socket mutex.
         pthread_mutex_unlock(*mt);
@@ -1093,7 +1117,7 @@ void receive_socket_thread(void* p0, void* p1) {
             // CAUTION! Hand over model, details and buffer as reference!
             receive_socket_message(*k, *kc, *ks, *s, *sc, *ss, *smt, *irq,
                 m, *mc, *ms, d, *dc, *ds, *c, *cc, *l, *lc, *st, *stc,
-                *os, *oa, *oas, *ps, *pa, *pas, *mt, b, *bc, *bs, pk, *pkc, *pks);
+                *os, *oa, *oas, *ps, *pa, *pas, *mt, b, *bc, *bs);
 
             // Sleep for some time to give the central processing unit (cpu)
             // time to breathe, that is to be idle or to process other signals.

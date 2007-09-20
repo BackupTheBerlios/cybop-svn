@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.34 $ $Date: 2007-08-13 16:37:11 $ $Author: christian $
+ * @version $Revision: 1.35 $ $Date: 2007-09-20 08:00:19 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -64,12 +64,12 @@
  * @param p7 the interrupt request flag
  * @param p8 the signal memory mutex
  * @param p9 the shutdown flag
- * @param p10 the model (signal/ operation)
- * @param p11 the model count
- * @param p12 the details (parameters)
- * @param p13 the details count
- * @param p14 the signal priority
- * @param p15 the signal id
+ * @param p10 the model / signal / operation
+ * @param p11 the model / signal / operation count
+ * @param p12 the details / parameters
+ * @param p13 the details / parameters count
+ * @param p14 the signal priority (Hand over as reference!)
+ * @param p15 the signal identification (Hand over as reference!)
  */
 void handle_operation(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
     void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14, void* p15) {

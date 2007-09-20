@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.19 $ $Date: 2007-08-17 04:06:51 $ $Author: christian $
+ * @version $Revision: 1.20 $ $Date: 2007-09-20 08:00:19 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -58,8 +58,8 @@ void handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
  * @param p9 the shutdown flag
  * @param p10 the signal
  * @param p11 the signal count
- * @param p12 the signal priority
- * @param p13 the signal id
+ * @param p12 the signal priority (Hand over as reference!)
+ * @param p13 the signal identification (Hand over as reference!)
  * @param p14 the direct execution flag
  * @param p15 the part index
  */
@@ -135,7 +135,7 @@ void handle_compound_part(void* p0, void* p1, void* p2, void* p3, void* p4, void
                                 // Lock signal memory mutex.
                                 pthread_mutex_lock(*mt);
 
-                                set_signal(p4, p5, p6, *a, *ac, *m, *mc, *d, *dc, p12, p13);
+                                set_signal(p4, p5, p6, a, ac, m, mc, d, dc, p12, p13);
 
                                 // Set interrupt request flag, in order to notify the signal checker
                                 // that a new signal has been placed in the signal memory.
@@ -192,8 +192,8 @@ void handle_compound_part(void* p0, void* p1, void* p2, void* p3, void* p4, void
  * @param p9 the shutdown flag
  * @param p10 the signal
  * @param p11 the signal count
- * @param p12 the signal priority
- * @param p13 the signal id
+ * @param p12 the signal priority (Hand over as reference!)
+ * @param p13 the signal identification (Hand over as reference!)
  * @param p14 the direct execution flag
  */
 void handle_compound(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,

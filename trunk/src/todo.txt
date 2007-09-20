@@ -7,19 +7,15 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.17 $ $Date: 2007-09-15 16:19:07 $ $Author: christian $
+# @version $Revision: 1.18 $ $Date: 2007-09-20 08:00:18 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
 ChangeLog:
-2007-09-14  Christian Heller  <christian.heller@tuxtax.de>
+2007-09-20  Christian Heller  <christian.heller@tuxtax.de>
 
 TODO:
-        * Figure out how to use "action" parameter in conjunction with "receive_socket.c" and "http_request_converter.c"
-            (currently, two actions are merged, e.g.: "getshutdown" instead of either "get" or "shutdown";
-            set only one of the two? or use standard http request method like GET or POST as action and do handle conditions in CYBOL?)
-        * CHECK: Replace "(int*) NULL_POINTER_ARRAY" initialisation in "variables.c" with "(int*) *NULL_POINTER";
-            the old initialisation was actually a void** casted to an int* and therefore not correct, even if it was working
+        * Extract loop body in "checker.c" into an own function
         * Add correct LOG_LEVEL constant to all log messages of all source code files,
             so that the correct prefix (information, warning, error, debug) appears;
             delete "Information: " etc. which are written directly into log message
@@ -28,11 +24,14 @@ TODO:
         * Add more abstractions for date and time (see Wikipedia and ISO/EN/DIN standards)
         * Correct encode for background- and foreground colour in "encode_gnu_linux_console_shape" function of
             "gnu_linux_console_converter.c": allocate destination variables before handing them over as parameters
+        * Check all places where "rellocate" is used, if the new array is SET / ASSIGNED new right afterwards
         * Adapt all places in source code where reallocation is used to new
             reallocation factor handling and also shrink memory structures appropriately
         * Include the sources of all documents into the distributable tarball cybop-0.9.0/
-            --> really? This will grow it up to 500 MB in size!
-        * Adapt all source code to wide characters / Unicode
+            --> really? This will grow it up to 500 MB in size due to the images
+        * Adapt all source code to wide characters (UTF-32 Unicode character encoding)
+        * Convert CYBOL files to UTF-8 Unicode character encoding
+        * Decode CYBOL files after having parsed them --> is the libxml2 parser capable of handling UTF-8?
 
         * Write an actual manual that is updated as necessary to reflect the current
         state of cybop; just looking at the papers, it is hard to know what is

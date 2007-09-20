@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.17 $ $Date: 2007-09-15 00:17:06 $ $Author: christian $
+ * @version $Revision: 1.18 $ $Date: 2007-09-20 08:00:19 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -79,10 +79,6 @@ void shutdown_socket(void* p0, void* p1, void* p2, void* p3, void* p4) {
             void** b = NULL_POINTER;
             void** bc = NULL_POINTER;
             void** bs = NULL_POINTER;
-            // The prefixed parameter key.
-            void** pk = NULL_POINTER;
-            void** pkc = NULL_POINTER;
-            void** pks = NULL_POINTER;
             // The socket of this system.
             int** s = (int**) NULL_POINTER;
             // The communication partner socket.
@@ -109,13 +105,6 @@ void shutdown_socket(void* p0, void* p1, void* p2, void* p3, void* p4) {
             get_element(p0, (void*) &i, (void*) &bc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
             i = *base + *SOCKET_CHARACTER_BUFFER_SIZE_INTERNAL;
             get_element(p0, (void*) &i, (void*) &bs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-            // Get prefixed parameter key.
-            i = *base + *SOCKET_PREFIXED_PARAMETER_KEY_INTERNAL;
-            get_element(p0, (void*) &i, (void*) &pk, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-            i = *base + *SOCKET_PREFIXED_PARAMETER_KEY_COUNT_INTERNAL;
-            get_element(p0, (void*) &i, (void*) &pkc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-            i = *base + *SOCKET_PREFIXED_PARAMETER_KEY_SIZE_INTERNAL;
-            get_element(p0, (void*) &i, (void*) &pks, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
             // Get socket of this system.
             i = *base + *SOCKET_INTERNAL;
             get_element(p0, (void*) &i, (void*) &s, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
@@ -148,9 +137,6 @@ void shutdown_socket(void* p0, void* p1, void* p2, void* p3, void* p4) {
             deallocate(idc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
             deallocate(ids, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 */
-            // Deallocate prefixed parameter key.
-            deallocate((void*) pk, *pks, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
-            deallocate((void*) pks, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
             // Deallocate character buffer.
             deallocate((void*) b, *bs, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
             deallocate((void*) bc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);

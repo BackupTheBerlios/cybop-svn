@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.27 $ $Date: 2007-09-15 00:17:06 $ $Author: christian $
+ * @version $Revision: 1.28 $ $Date: 2007-09-20 08:00:19 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -578,13 +578,6 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
         void* b = *NULL_POINTER;
         int* bc = (int*) *NULL_POINTER;
         int* bs = (int*) *NULL_POINTER;
-        // The prefixed parameter key.
-        // Parameter keys are given as pure names in an http request, but
-        // have to get extended by a prefix (. or #) in order to be usable
-        // for determining a model in the compound or knowledge tree root.
-        void* pk = *NULL_POINTER;
-        int* pkc = (int*) *NULL_POINTER;
-        int* pks = (int*) *NULL_POINTER;
         // The internal memory index.
         int i = *NUMBER_MINUS_1_INTEGER;
         // The result.
@@ -699,20 +692,11 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
         allocate((void*) &bs, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
         allocate((void*) &b, (void*) bs, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
-        // Allocate prefixed parameter key.
-        allocate((void*) &pkc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-        allocate((void*) &pks, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-        allocate((void*) &pk, (void*) pks, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
-
         // Initialise character buffer count, size.
         // A possible initial size is 2048, which should suffice for transferring standard data over tcp/ip.
         // Another possible size could be 8192.
         *bc = *NUMBER_0_INTEGER;
         *bs = *NUMBER_8192_INTEGER;
-
-        // Initialise prefixed parameter key.
-        *pkc = *NUMBER_0_INTEGER;
-        *pks = *NUMBER_0_INTEGER;
 
         // Set socket address of this system.
         // Set communication partner socket address.
@@ -759,14 +743,6 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
         set_element(p0, (void*) &i, (void*) &bc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         i = *base + *SOCKET_CHARACTER_BUFFER_SIZE_INTERNAL;
         set_element(p0, (void*) &i, (void*) &bs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-
-        // Set prefixed parameter key.
-        i = *base + *SOCKET_PREFIXED_PARAMETER_KEY_INTERNAL;
-        set_element(p0, (void*) &i, (void*) &pk, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        i = *base + *SOCKET_PREFIXED_PARAMETER_KEY_COUNT_INTERNAL;
-        set_element(p0, (void*) &i, (void*) &pkc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-        i = *base + *SOCKET_PREFIXED_PARAMETER_KEY_SIZE_INTERNAL;
-        set_element(p0, (void*) &i, (void*) &pks, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
 /*??
         // Set signal ids.
