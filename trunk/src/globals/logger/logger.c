@@ -27,7 +27,7 @@
  * Otherwise, an ENDLESS LOOP will be created, because cyboi's
  * array procedures call the logger in turn.
  *
- * @version $Revision: 1.20 $ $Date: 2007-09-20 08:00:19 $ $Author: christian $
+ * @version $Revision: 1.21 $ $Date: 2007-10-02 21:16:36 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -312,10 +312,24 @@ void log_message(void* p0, void* p1, void* p2) {
 }
 
 /**
- * Logs the null character-terminated message.
+ * Logs a null character-terminated message.
  *
- * @param p0 the log message as null terminated string
+ * @param p0 the log level
+ * @param p1 the log message as null terminated string
  */
+void log_terminated_message(void* p0, void* p1) {
+
+    // CAUTION! DO NOT use array functionality here!
+    // The arrays use the logger which would cause circular references.
+    // Instead, use malloc and similar functions directly!
+
+    // The message count.
+    int c = strlen(p1);
+
+    log_message(p0, p1, (void*) &c);
+}
+
+//?? DELETE THIS FUNCTION LATER!
 void log_message_debug(void* p0) {
 
     // CAUTION! DO NOT use array functionality here!

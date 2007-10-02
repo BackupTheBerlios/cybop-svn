@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.40 $ $Date: 2007-08-17 04:06:51 $ $Author: christian $
+ * @version $Revision: 1.41 $ $Date: 2007-10-02 21:16:36 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -237,8 +237,10 @@ void manage(void* p0, void* p1) {
     shutdown_x_window_system(i, k, (void*) kc, (void*) ks);
     // Shutdown www service.
     shutdown_socket(i, (void*) WWW_BASE_INTERNAL, k, (void*) kc, (void*) ks);
+    fprintf(stderr, "TEST mgr 0: %i \n", i);
     // Shutdown cyboi service.
     shutdown_socket(i, (void*) CYBOI_BASE_INTERNAL, k, (void*) kc, (void*) ks);
+    fprintf(stderr, "TEST mgr 1: %i \n", i);
 
     // CAUTION! Do NOT remove any internal memory internals!
     // The internals have a fixed position within the internal memory.
@@ -246,38 +248,54 @@ void manage(void* p0, void* p1) {
     // thus make all entries invalid, since they could not be found
     // at their original index anymore.
 
+    fprintf(stderr, "TEST mgr 2: %i \n", i);
     // Destroy signal memory mutex.
     pthread_mutex_destroy(signal_memory_mutex);
+    fprintf(stderr, "TEST mgr 3: %i \n", i);
     // Destroy gnu/linux console mutex.
     pthread_mutex_destroy(gnu_linux_console_mutex);
+    fprintf(stderr, "TEST 4: %i \n", i);
     // Destroy x window system mutex.
     pthread_mutex_destroy(x_window_system_mutex);
+    fprintf(stderr, "TEST 5: %i \n", i);
     // Destroy www service mutex.
     pthread_mutex_destroy(www_service_mutex);
+    fprintf(stderr, "TEST 6: %i \n", i);
     // Destroy cyboi service mutex.
     pthread_mutex_destroy(cyboi_service_mutex);
+    fprintf(stderr, "TEST 7: %i \n", i);
 
     // Deallocate signal memory interrupt request flag.
     free((void*) irq);
+    fprintf(stderr, "TEST mgr 8: %i \n", i);
     // Deallocate signal memory mutex.
     free((void*) signal_memory_mutex);
+    fprintf(stderr, "TEST 9: %i \n", i);
     // Deallocate gnu/linux console mutex.
     free((void*) gnu_linux_console_mutex);
+    fprintf(stderr, "TEST 10: %i \n", i);
     // Deallocate x window system mutex.
     free((void*) x_window_system_mutex);
+    fprintf(stderr, "TEST 11: %i \n", i);
     // Deallocate www service mutex.
     free((void*) www_service_mutex);
+    fprintf(stderr, "TEST 12: %i \n", i);
     // Deallocate cyboi service mutex.
     free((void*) cyboi_service_mutex);
+    fprintf(stderr, "TEST 13: %i \n", i);
 
     // Deallocate signal memory.
     deallocate((void*) &s, (void*) ss, (void*) SIGNAL_MEMORY_ABSTRACTION, (void*) SIGNAL_MEMORY_ABSTRACTION_COUNT);
+    fprintf(stderr, "TEST 14: %i \n", i);
     deallocate((void*) &sc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
     deallocate((void*) &ss, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    fprintf(stderr, "TEST 15: %i \n", i);
     // Deallocate knowledge memory.
     deallocate((void*) &k, (void*) ks, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
+    fprintf(stderr, "TEST 16: %i \n", i);
     deallocate((void*) &kc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
     deallocate((void*) &ks, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    fprintf(stderr, "TEST 17: %i \n", i);
     // Deallocate internal memory.
     deallocate((void*) &i, (void*) is, (void*) INTERNAL_MEMORY_ABSTRACTION, (void*) INTERNAL_MEMORY_ABSTRACTION_COUNT);
 }

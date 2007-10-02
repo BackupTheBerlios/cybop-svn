@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.40 $ $Date: 2007-09-20 08:00:19 $ $Author: christian $
+ * @version $Revision: 1.41 $ $Date: 2007-10-02 21:16:36 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -664,8 +664,8 @@ void receive_socket_datagram(void* p0, void* p1, void* p2, void* p3, void* p4, v
  */
 void receive_socket_raw(void* p0, void* p1, void* p2) {
 
-    log_message_debug("Receive via raw socket.");
-    log_message_debug("CAUTION! Raw socket functionality is not implemented in cyboi yet.");
+    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Receive via raw socket.");
+    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "CAUTION! Raw socket functionality is not implemented in cyboi yet.");
 }
 
 /**

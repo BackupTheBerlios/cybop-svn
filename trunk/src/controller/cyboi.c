@@ -25,7 +25,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.27 $ $Date: 2007-08-17 03:15:31 $ $Author: christian $
+ * @version $Revision: 1.28 $ $Date: 2007-10-02 21:16:36 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -37,6 +37,7 @@
 #include "../controller/manager.c"
 #include "../controller/optionaliser.c"
 #include "../controller/tester.c"
+#include "../globals/constants/cyboi/cyboi_identification_constants.c"
 #include "../globals/constants/cyboi/cyboi_operation_mode_constants.c"
 #include "../globals/constants/integer/integer_constants.c"
 #include "../globals/constants/log/log_message_constants.c"
@@ -81,9 +82,10 @@ int main(int p0, char** p1) {
         globalise();
 
         // The operation mode.
+        //
         // CAUTION! It is initialised with the help operation mode,
-        // to display the help message if no command line argument
-        // is given by the user.
+        // in order to display the help message by default,
+        // if no command line argument is given by the user.
         int m = *HELP_CYBOI_OPERATION_MODE;
 
         // The cybol knowledge file path.
@@ -99,13 +101,21 @@ int main(int p0, char** p1) {
 
         if (m == *VERSION_CYBOI_OPERATION_MODE) {
 
-            // Write cyboi version to standard output.
-            write(fileno(stdout), (void*) CYBOI_VERSION_LOG_MESSAGE, *CYBOI_VERSION_LOG_MESSAGE_COUNT);
+            // Write cyboi name, version, copyright and licence to standard output.
+            write(fileno(stdout), (void*) CYBOI_NAME, *CYBOI_NAME_COUNT);
+            write(fileno(stdout), (void*) SPACE_CHARACTER, *PRIMITIVE_COUNT);
+            write(fileno(stdout), (void*) CYBOI_VERSION, *CYBOI_VERSION_COUNT);
+            write(fileno(stdout), (void*) LINE_FEED_CONTROL_CHARACTER, *PRIMITIVE_COUNT);
+            write(fileno(stdout), (void*) CYBOI_COPYRIGHT, *CYBOI_COPYRIGHT_COUNT);
+            write(fileno(stdout), (void*) LINE_FEED_CONTROL_CHARACTER, *PRIMITIVE_COUNT);
+            write(fileno(stdout), (void*) CYBOI_LICENCE, *CYBOI_LICENCE_COUNT);
+            write(fileno(stdout), (void*) LINE_FEED_CONTROL_CHARACTER, *PRIMITIVE_COUNT);
 
         } else if (m == *HELP_CYBOI_OPERATION_MODE) {
 
             // Write cyboi help message to standard output.
-            write(fileno(stdout), (void*) CYBOI_HELP_LOG_MESSAGE, *CYBOI_HELP_LOG_MESSAGE_COUNT);
+            write(fileno(stdout), (void*) CYBOI_HELP, *CYBOI_HELP_COUNT);
+            write(fileno(stdout), (void*) LINE_FEED_CONTROL_CHARACTER, *PRIMITIVE_COUNT);
 
         } else if (m == *TEST_CYBOI_OPERATION_MODE) {
 
@@ -124,7 +134,8 @@ int main(int p0, char** p1) {
                 fputs("Error: Could not execute cyboi in knowledge operation mode. A cybol file name needs to be given behind the '--knowledge' command line argument.\n", stdout);
 
                 // Write cyboi help message to standard output.
-                write(fileno(stdout), (void*) CYBOI_HELP_LOG_MESSAGE, *CYBOI_HELP_LOG_MESSAGE_COUNT);
+                write(fileno(stdout), (void*) CYBOI_HELP, *CYBOI_HELP_COUNT);
+                write(fileno(stdout), (void*) LINE_FEED_CONTROL_CHARACTER, *PRIMITIVE_COUNT);
             }
         }
 

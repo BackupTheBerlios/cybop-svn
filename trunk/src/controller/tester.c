@@ -24,7 +24,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.12 $ $Date: 2007-08-29 23:11:23 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2007-10-02 21:16:36 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -66,6 +66,25 @@
 #include "../memoriser/array.c"
 #include "../memoriser/converter.c"
 #include "../memoriser/converter/integer_converter.c"
+
+/**
+ * Tests the logger.
+ */
+void test_logger() {
+
+    fputs("Test logger:\n", stdout);
+    fputs("CAUTION! A log level other than 'OFF' needs to be set for testing!\n", stdout);
+    fputs("For the logging test result, see the corresponding log file that was given as command line argument!\n", stdout);
+
+    /** The log message as constant. */
+    static char TEST_LOG_MESSAGE_ARRAY[] = {'T', 'E', 'S', 'T', ' ', 'l', 'o', 'g', ' ', 'm', 'e', 's', 's', 'a', 'g', 'e', '.'};
+    static char* TEST_LOG_MESSAGE = TEST_LOG_MESSAGE_ARRAY;
+    static int* TEST_LOG_MESSAGE_COUNT = NUMBER_17_INTEGER_ARRAY;
+
+    log_message((void*) INFORMATION_LOG_LEVEL, (void*) TEST_LOG_MESSAGE, (void*) TEST_LOG_MESSAGE_COUNT);
+
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "TEST terminated log message.");
+}
 
 /**
  * Tests the inline assembler code.
@@ -1258,12 +1277,13 @@ void test() {
     // int x = *NUMBER_2_INTEGER;
     // fprintf(stderr, "The value of x is: %d\n", x);
 
+    test_logger();
 //??    test_inline_assembler_code();
 //??    test_preprocessor_directives();
 //??    test_stdout_stderr();
 //??    test_type_sizes();
 //??    test_pointer_addition();
-    test_integer_array();
+//??    test_integer_array();
 //??    test_character_array_with_termination();
 //??    test_array_resizing();
 //??    test_wide_character_output();

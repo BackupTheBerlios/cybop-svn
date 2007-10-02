@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.28 $ $Date: 2007-09-20 08:00:19 $ $Author: christian $
+ * @version $Revision: 1.29 $ $Date: 2007-10-02 21:16:36 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -573,8 +573,7 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
         int* idc = (int*) *NULL_POINTER;
         int* ids = (int*) *NULL_POINTER;
 */
-        // The character buffer that will be used in the thread procedure
-        // receiving messages via socket.
+        // The character buffer being used in the thread procedure receiving messages via socket.
         void* b = *NULL_POINTER;
         int* bc = (int*) *NULL_POINTER;
         int* bs = (int*) *NULL_POINTER;

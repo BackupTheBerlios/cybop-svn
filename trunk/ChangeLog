@@ -14,9 +14,16 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.31 $ $Date: 2007-09-20 08:00:18 $ $Author: christian $
+# @version $Revision: 1.32 $ $Date: 2007-10-02 21:16:36 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2007-10-02  Christian Heller  <christian.heller@tuxtax.de>
+        * Extract loop body of "check" function in module "checker.c" and split it into the four functions:
+            "check", "check_signal", "check_handle", "check_wait", in order to gain more clearity
+
+2007-09-20  Christian Heller  <christian.heller@tuxtax.de>
+        * Add file "cyboi_identification_constants.c" and insert some renamed constants, taken from "log_message_constants.c"
 
 2007-09-19  Christian Heller  <christian.heller@tuxtax.de>
         * Add new files: "unicode_character_encoding_constants.c", "utf_8_unicode_character_converter.c",

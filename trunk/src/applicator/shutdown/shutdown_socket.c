@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.18 $ $Date: 2007-09-20 08:00:19 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2007-10-02 21:16:36 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -67,50 +67,29 @@ void shutdown_socket(void* p0, void* p1, void* p2, void* p3, void* p4) {
             // Interrupt ALL socket service threads of this system.
             interrupt_socket();
 
-//??    fprintf(stderr, "TEST: after interrupt socket internal: %i \n", **si);
-
+            // The socket address (local, ipv4, ipv6) of this system.
+            void** a = NULL_POINTER;
+            // The communication partner socket address (local, ipv4, ipv6).
+            void** pa = NULL_POINTER;
+            // The socket address size of this system.
+            void** as = NULL_POINTER;
+            // The communication partner socket address size.
+            void** pas = NULL_POINTER;
+            // The socket of this system.
+            int** s = (int**) NULL_POINTER;
+            // The communication partner socket.
+            int** ps = (int**) NULL_POINTER;
 /*??
             // The signal ids.
             void** id = NULL_POINTER;
             void** idc = NULL_POINTER;
             void** ids = NULL_POINTER;
 */
-            // The character buffer used in the thread procedure.
+            // The character buffer being used in the thread procedure receiving messages via socket.
             void** b = NULL_POINTER;
             void** bc = NULL_POINTER;
             void** bs = NULL_POINTER;
-            // The socket of this system.
-            int** s = (int**) NULL_POINTER;
-            // The communication partner socket.
-            int** ps = (int**) NULL_POINTER;
-            // The socket address of this system.
-            void** a = NULL_POINTER;
-            // The communication partner socket address.
-            void** pa = NULL_POINTER;
-            // The socket address size of this system.
-            void** as = NULL_POINTER;
-            // The communication partner socket address size.
-            void** pas = NULL_POINTER;
 
-/*??
-            // Get signal ids.
-            get_element(p0, (void*) SERVER_CLIENT_SOCKET_SIGNAL_IDS_INTERNAL, (void*) &id, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-            get_element(p0, (void*) SERVER_CLIENT_SOCKET_SIGNAL_IDS_COUNT_INTERNAL, (void*) &idc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-            get_element(p0, (void*) SERVER_CLIENT_SOCKET_SIGNAL_IDS_SIZE_INTERNAL, (void*) &ids, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-*/
-            // Get character buffer.
-            i = *base + *SOCKET_CHARACTER_BUFFER_INTERNAL;
-            get_element(p0, (void*) &i, (void*) &b, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-            i = *base + *SOCKET_CHARACTER_BUFFER_COUNT_INTERNAL;
-            get_element(p0, (void*) &i, (void*) &bc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-            i = *base + *SOCKET_CHARACTER_BUFFER_SIZE_INTERNAL;
-            get_element(p0, (void*) &i, (void*) &bs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-            // Get socket of this system.
-            i = *base + *SOCKET_INTERNAL;
-            get_element(p0, (void*) &i, (void*) &s, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-            // Get communication partner socket.
-            i = *base + *SOCKET_COMMUNICATION_PARTNER_INTERNAL;
-            get_element(p0, (void*) &i, (void*) &ps, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
             // Get socket address of this system.
             i = *base + *SOCKET_ADDRESS_INTERNAL;
             get_element(p0, (void*) &i, (void*) &a, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
@@ -123,13 +102,30 @@ void shutdown_socket(void* p0, void* p1, void* p2, void* p3, void* p4) {
             // Get communication partner socket address size.
             i = *base + *SOCKET_COMMUNICATION_PARTNER_ADDRESS_SIZE_INTERNAL;
             get_element(p0, (void*) &i, (void*) &pas, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            // Get socket of this system.
+            i = *base + *SOCKET_INTERNAL;
+            get_element(p0, (void*) &i, (void*) &s, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            // Get communication partner socket.
+            i = *base + *SOCKET_COMMUNICATION_PARTNER_INTERNAL;
+            get_element(p0, (void*) &i, (void*) &ps, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            // Get character buffer.
+            i = *base + *SOCKET_CHARACTER_BUFFER_INTERNAL;
+            get_element(p0, (void*) &i, (void*) &b, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            i = *base + *SOCKET_CHARACTER_BUFFER_COUNT_INTERNAL;
+            get_element(p0, (void*) &i, (void*) &bc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            i = *base + *SOCKET_CHARACTER_BUFFER_SIZE_INTERNAL;
+            get_element(p0, (void*) &i, (void*) &bs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+/*??
+            // Get signal ids.
+            get_element(p0, (void*) SERVER_CLIENT_SOCKET_SIGNAL_IDS_INTERNAL, (void*) &id, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            get_element(p0, (void*) SERVER_CLIENT_SOCKET_SIGNAL_IDS_COUNT_INTERNAL, (void*) &idc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            get_element(p0, (void*) SERVER_CLIENT_SOCKET_SIGNAL_IDS_SIZE_INTERNAL, (void*) &ids, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+*/
 
             // Close socket of this system.
             close(**s);
             // Close communication partner socket.
 //??            close(**ps);
-
-//??    fprintf(stderr, "TEST: after close socket: %i \n", **s);
 
 /*??
             // Destroy signal ids.
@@ -138,23 +134,31 @@ void shutdown_socket(void* p0, void* p1, void* p2, void* p3, void* p4) {
             deallocate(ids, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 */
             // Deallocate character buffer.
+    fprintf(stderr, "TEST 0 b: %i \n", *b);
+    fprintf(stderr, "TEST 0 bc: %i \n", **((int**) bc));
+    fprintf(stderr, "TEST 0 bs: %i \n", **((int**) bs));
             deallocate((void*) b, *bs, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
             deallocate((void*) bc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
             deallocate((void*) bs, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    fprintf(stderr, "TEST 1: %i \n", **s);
             // Deallocate socket of this system.
             deallocate((void*) s, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    fprintf(stderr, "TEST 2: %i \n", **s);
             // Deallocate communication partner socket.
             deallocate((void*) ps, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    fprintf(stderr, "TEST 3: %i \n", **s);
             // Deallocate socket address of this system.
             free(*a);
+    fprintf(stderr, "TEST 4: %i \n", **s);
             // Deallocate communication partner socket address.
             free(*pa);
+    fprintf(stderr, "TEST 5: %i \n", **s);
             // Deallocate socket address size of this system.
             deallocate((void*) as, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    fprintf(stderr, "TEST 6: %i \n", **s);
             // Deallocate communication partner socket address size.
             deallocate((void*) pas, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-
-//??    fprintf(stderr, "TEST: after deallocate socket: %i \n", 10);
+    fprintf(stderr, "TEST 7: %i \n", **s);
 
         } else {
 
