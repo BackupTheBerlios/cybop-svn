@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2007-07-23 23:47:58 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -41,7 +41,7 @@
  */
 void allocate_integer_vector(void* p0, void* p1) {
 
-    log_message_debug("Allocate integer vector.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Allocate integer vector.");
 
     allocate_array(p0, p1, (void*) INTEGER_ARRAY);
 }
@@ -54,7 +54,7 @@ void allocate_integer_vector(void* p0, void* p1) {
  */
 void deallocate_integer_vector(void* p0, void* p1) {
 
-    log_message_debug("Deallocate integer vector.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Deallocate integer vector.");
 
     deallocate_array(p0, p1, (void*) INTEGER_ARRAY);
 }

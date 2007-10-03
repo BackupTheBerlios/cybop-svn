@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2007-09-20 08:00:20 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -85,7 +85,7 @@
  */
 void decode_utf_16_unicode_character_stream(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    log_message_debug("Information: Decode UTF-16 Unicode character stream.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Decode UTF-16 Unicode character stream.");
 }
 
 /**
@@ -99,7 +99,7 @@ void decode_utf_16_unicode_character_stream(void* p0, void* p1, void* p2, void* 
  */
 void encode_utf_16_unicode_character_stream(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    log_message_debug("Information: Encode UTF-16 Unicode character stream.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Encode UTF-16 Unicode character stream.");
 }
 
 /* UTF_16_UNICODE_CHARACTER_CONVERTER_SOURCE */

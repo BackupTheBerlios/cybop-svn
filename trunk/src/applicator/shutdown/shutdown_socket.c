@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.19 $ $Date: 2007-10-02 21:16:36 $ $Author: christian $
+ * @version $Revision: 1.20 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -51,7 +51,7 @@ void shutdown_socket(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         int* base = (int*) p1;
 
-        log_message_debug("Information: Shutdown socket.");
+        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Shutdown socket.");
 
         // The internal memory index.
         int i = *NUMBER_MINUS_1_INTEGER;
@@ -162,12 +162,12 @@ void shutdown_socket(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         } else {
 
-            log_message_debug("WARNING: Could not shutdown socket. There is no socket of this system running.");
+            log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) "Could not shutdown socket. There is no socket of this system running.");
         }
 
     } else {
 
-        log_message_debug("WARNING: Could not shutdown socket. The base internal is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not shutdown socket. The base internal is null.");
     }
 }
 

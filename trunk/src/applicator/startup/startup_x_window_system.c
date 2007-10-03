@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.25 $ $Date: 2007-08-17 04:06:51 $ $Author: christian $
+ * @version $Revision: 1.26 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -58,7 +58,7 @@
  */
 void startup_x_window_system(void* p0, void* p1, void* p2, void* p3) {
 
-    log_message_debug("Startup x window system.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Startup x window system.");
 
     // The display internal.
     struct _XDisplay** di = (struct _XDisplay**) NULL_POINTER;
@@ -226,7 +226,7 @@ void startup_x_window_system(void* p0, void* p1, void* p2, void* p3) {
 
     } else {
 
-        log_message_debug("WARNING: Could not startup x window system. The x window system is already running.");
+        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) "Could not startup x window system. The x window system is already running.");
     }
 }
 

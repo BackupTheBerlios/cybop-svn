@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.32 $ $Date: 2007-09-15 00:17:01 $ $Author: christian $
+ * @version $Revision: 1.33 $ $Date: 2007-10-03 23:40:05 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description This module starts up a service.
  */
@@ -63,7 +63,7 @@
  */
 void startup_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
-    log_message_debug("Startup service.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Startup service.");
 
     // The service name, abstraction, model, details.
     void** sn = NULL_POINTER;
@@ -198,7 +198,7 @@ void startup_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5)
 
             } else {
 
-                log_message_debug("Warning: Could not start up service. The www service is already running.");
+                log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) "Could not start up service. The www service is already running.");
             }
         }
     }
@@ -220,7 +220,7 @@ void startup_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5)
 
             } else {
 
-                log_message_debug("Warning: Could not start up service. The cyboi service is already running.");
+                log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) "Could not start up service. The cyboi service is already running.");
             }
         }
     }

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2007-08-17 03:15:31 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2007-10-03 23:40:05 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -45,7 +45,7 @@
  */
 void interrupt_gnu_linux_console() {
 
-    log_message_debug("Interrupt gnu/linux console service.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Interrupt gnu/linux console service.");
 
     if (*GNU_LINUX_CONSOLE_THREAD != *NUMBER_MINUS_1_INTEGER) {
 
@@ -76,7 +76,7 @@ void interrupt_gnu_linux_console() {
 
     } else {
 
-        log_message_debug("Warning: Could not interrupt gnu/linux console. The gnu/linux console thread is invalid.");
+        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) "Could not interrupt gnu/linux console. The gnu/linux console thread is invalid.");
     }
 }
 

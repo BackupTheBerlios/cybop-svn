@@ -24,7 +24,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.13 $ $Date: 2007-10-02 21:16:36 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -1268,7 +1268,7 @@ int test_mesa_opengl(int argc, char **argv) {
  */
 void test() {
 
-    log_message_debug("Information: Test cyboi.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Test cyboi.");
 
     // How to use printf to check parameter values.
     // The printf function uses stdout for output, but nothing appears on console.

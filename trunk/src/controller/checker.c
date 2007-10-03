@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.32 $ $Date: 2007-10-02 21:16:36 $ $Author: christian $
+ * @version $Revision: 1.33 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -57,7 +57,7 @@ void check_handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
 
         pthread_mutex_t* mt = (pthread_mutex_t*) p8;
 
-        log_message_debug("Get and handle a signal.");
+        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Get and handle a signal.");
 
         // The abstraction.
         void** a = NULL_POINTER;
@@ -126,7 +126,7 @@ void check_handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
 
     } else {
 
-        log_message_debug("Could not get and handle a signal. The signal memory mutex is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get and handle a signal. The signal memory mutex is null.");
     }
 }
 
@@ -146,7 +146,7 @@ void check_wait(void* p0, void* p1) {
 
             int* irq = (int*) p0;
 
-            log_message_debug("Wait for an interrupt request.");
+            log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Wait for an interrupt request.");
 
             //
             // Several possibilities have been considered to achieve this:
@@ -250,12 +250,12 @@ void check_wait(void* p0, void* p1) {
 
         } else {
 
-            log_message_debug("Could not wait for an interrupt request. The interrupt request flag is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not wait for an interrupt request. The interrupt request flag is null.");
         }
 
     } else {
 
-        log_message_debug("Could not wait for an interrupt request. The signal memory mutex is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not wait for an interrupt request. The signal memory mutex is null.");
     }
 }
 
@@ -275,7 +275,7 @@ void check_wait(void* p0, void* p1) {
  */
 void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9) {
 
-    log_message_debug("Check for signal with highest priority.");
+    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Check for signal with highest priority.");
 
     // The highest priority index.
     int i = *NUMBER_MINUS_1_INTEGER;
@@ -314,7 +314,7 @@ void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
  */
 void check(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8) {
 
-    log_message_debug("\n\n");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "\n\n");
     log_message((void*) INFORMATION_LOG_LEVEL, (void*) CHECK_FOR_SIGNALS_MESSAGE, (void*) CHECK_FOR_SIGNALS_MESSAGE_COUNT);
 
     // The shutdown flag.

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.13 $ $Date: 2007-08-17 03:15:32 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -55,7 +55,7 @@ void decode_double(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             void** d = (void**) p0;
 
-            log_message_debug("Decode double.");
+            log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Decode double.");
 
             // The temporary null-terminated string.
             char* tmp = (char*) *NULL_POINTER;
@@ -108,12 +108,12 @@ void decode_double(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         } else {
 
-            log_message_debug("Could not decode double. The destination is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode double. The destination is null.");
         }
 
     } else {
 
-        log_message_debug("Could not decode double. The source count is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode double. The source count is null.");
     }
 }
 
@@ -140,7 +140,7 @@ void encode_double(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 char** d = (char**) p0;
 
-                log_message_debug("Encode double.");
+                log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Encode double.");
 
                 // The double value.
                 double* v = (double*) *NULL_POINTER;
@@ -214,7 +214,7 @@ void decode_double_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 void** d = (void**) p0;
 
-                log_message_debug("Decode double vector.");
+                log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Decode double vector.");
 
 /*??
                 // The loop count.
@@ -253,7 +253,7 @@ void decode_double_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                     } else {
 
-                        log_message_debug("ERROR: Could not decode double vector. The source string starts with a comma character.");
+                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode double vector. The source string starts with a comma character.");
                     }
 
                     j++;

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.60 $ $Date: 2007-09-20 08:00:18 $ $Author: christian $
+ * @version $Revision: 1.61 $ $Date: 2007-10-03 23:40:05 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -62,7 +62,7 @@
  */
 void refresh_url(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
-    log_message_debug("Refresh url.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Refresh url.");
 
 /*??
     // The message abstraction.
@@ -174,7 +174,7 @@ void refresh_url(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, voi
  */
 void send_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9) {
 
-    log_message_debug("Send message.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Send message.");
 
     // The channel name, abstraction, model, details.
     void** cn = NULL_POINTER;

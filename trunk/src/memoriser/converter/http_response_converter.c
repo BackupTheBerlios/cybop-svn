@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2007-08-27 07:07:37 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -90,7 +90,7 @@
  */
 void decode_http_response(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
 
-    log_message_debug("Information: Decode http response.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Decode http response.");
 }
 
 /**
@@ -104,7 +104,7 @@ void decode_http_response(void* p0, void* p1, void* p2, void* p3, void* p4, void
  */
 void encode_http_response_status_line(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    log_message_debug("Debug: Encode http response status line.");
+    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Encode http response status line.");
 
     // Encode http protocol version.
     encode(p0, p1, p2, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
@@ -131,7 +131,7 @@ void encode_http_response_status_line(void* p0, void* p1, void* p2, void* p3, vo
  */
 void encode_http_response_headers(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    log_message_debug("Debug: Encode http response headers.");
+    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Encode http response headers.");
 
     // Encode content type http header.
     encode(p0, p1, p2, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
@@ -191,7 +191,7 @@ void encode_http_response_headers(void* p0, void* p1, void* p2, void* p3, void* 
  */
 void encode_http_response_body(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    log_message_debug("Debug: Encode http response body.");
+    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Encode http response body.");
 
     // Encode http body which was already encoded from a cyboi model into a
     // character byte stream and handed over as such.
@@ -213,7 +213,7 @@ void encode_http_response_body(void* p0, void* p1, void* p2, void* p3, void* p4)
  */
 void encode_http_response(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
-    log_message_debug("Information: Encode http response.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Encode http response.");
 
     // Encode status line containing protocol version and status code.
     encode_http_response_status_line(p0, p1, p2, p5, p6);

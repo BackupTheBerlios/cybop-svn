@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.15 $ $Date: 2007-08-13 16:37:11 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -42,7 +42,7 @@
  */
 void allocate_internal_memory(void* p0, void* p1) {
 
-    log_message_debug("Allocate internal memory.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Allocate internal memory.");
 
     // Allocate internal memory.
     allocate_array(p0, p1, (void*) POINTER_ARRAY);
@@ -67,7 +67,7 @@ void allocate_internal_memory(void* p0, void* p1) {
  */
 void deallocate_internal_memory(void* p0, void* p1) {
 
-    log_message_debug("Deallocate internal memory.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Deallocate internal memory.");
 
     // CAUTION! Do NOT try to REMOVE the parameters!
     // Each configuration parameter has a fixed position within

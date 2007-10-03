@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.22 $ $Date: 2007-09-20 08:00:19 $ $Author: christian $
+ * @version $Revision: 1.23 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -62,7 +62,7 @@ void set_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
 
             int* smc = (int*) p1;
 
-            log_message_debug("Set signal.");
+            log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Set signal.");
 
             // The abstractions, models, details, priorities, identifications.
             void** a = NULL_POINTER;
@@ -152,62 +152,62 @@ void set_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
 
                                                 } else {
 
-                                                    log_message_debug("Could not set signal. The index exceeds the size.");
+                                                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not set signal. The index exceeds the size.");
                                                 }
 
                                             } else {
 
-                                                log_message_debug("Could not set signal. The index is negativ.");
+                                                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not set signal. The index is negativ.");
                                             }
 
                                         } else {
 
-                                            log_message_debug("Could not set signal. The identifications is null.");
+                                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not set signal. The identifications is null.");
                                         }
 
                                     } else {
 
-                                        log_message_debug("Could not set signal. The priorities is null.");
+                                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not set signal. The priorities is null.");
                                     }
 
                                 } else {
 
-                                    log_message_debug("Could not set signal. The details counts is null.");
+                                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not set signal. The details counts is null.");
                                 }
 
                             } else {
 
-                                log_message_debug("Could not set signal. The details is null.");
+                                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not set signal. The details is null.");
                             }
 
                         } else {
 
-                            log_message_debug("Could not set signal. The models counts is null.");
+                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not set signal. The models counts is null.");
                         }
 
                     } else {
 
-                        log_message_debug("Could not set signal. The models is null.");
+                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not set signal. The models is null.");
                     }
 
                 } else {
 
-                    log_message_debug("Could not set signal. The abstractions counts is null.");
+                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not set signal. The abstractions counts is null.");
                 }
 
             } else {
 
-                log_message_debug("Could not set signal. The abstractions is null.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not set signal. The abstractions is null.");
             }
 
         } else {
 
-            log_message_debug("Could not set signal. The signal memory count is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not set signal. The signal memory count is null.");
         }
 
     } else {
 
-        log_message_debug("Could not set signal. The signal memory size is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not set signal. The signal memory size is null.");
     }
 }
 
@@ -233,7 +233,7 @@ void remove_signal(void* p0, void* p1, void* p2, void* p3) {
 
                 int* smc = (int*) p1;
 
-                log_message_debug("Remove signal.");
+                log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Remove signal.");
 
                 // The abstractions, models, details, priorities, identifications.
                 void** a = NULL_POINTER;
@@ -290,67 +290,67 @@ void remove_signal(void* p0, void* p1, void* p2, void* p3) {
 
                                                     } else {
 
-                                                        log_message_debug("Could not remove signal. The index exceeds the count.");
+                                                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not remove signal. The index exceeds the count.");
                                                     }
 
                                                 } else {
 
-                                                    log_message_debug("Could not remove signal. The index is negativ.");
+                                                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not remove signal. The index is negativ.");
                                                 }
 
                                             } else {
 
-                                                log_message_debug("Could not remove signal. The identifications is null.");
+                                                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not remove signal. The identifications is null.");
                                             }
 
                                         } else {
 
-                                            log_message_debug("Could not remove signal. The priorities is null.");
+                                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not remove signal. The priorities is null.");
                                         }
 
                                     } else {
 
-                                        log_message_debug("Could not remove signal. The details counts is null.");
+                                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not remove signal. The details counts is null.");
                                     }
 
                                 } else {
 
-                                    log_message_debug("Could not remove signal. The details is null.");
+                                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not remove signal. The details is null.");
                                 }
 
                             } else {
 
-                                log_message_debug("Could not remove signal. The models counts is null.");
+                                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not remove signal. The models counts is null.");
                             }
 
                         } else {
 
-                            log_message_debug("Could not remove signal. The models is null.");
+                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not remove signal. The models is null.");
                         }
 
                     } else {
 
-                        log_message_debug("Could not remove signal. The abstractions counts is null.");
+                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not remove signal. The abstractions counts is null.");
                     }
 
                 } else {
 
-                    log_message_debug("Could not remove signal. The abstractions is null.");
+                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not remove signal. The abstractions is null.");
                 }
 
             } else {
 
-                log_message_debug("Could not remove signal. The signal memory count is null.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not remove signal. The signal memory count is null.");
             }
 
         } else {
 
-            log_message_debug("Could not remove signal. The signal memory size is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not remove signal. The signal memory size is null.");
         }
 
     } else {
 
-        log_message_debug("Could not remove signal. The index is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not remove signal. The index is null.");
     }
 }
 
@@ -380,7 +380,7 @@ void get_signal(void* p0, void* p1, void* p2, void* p3, void* p4,
 
             int* smc = (int*) p1;
 
-            log_message_debug("Get signal.");
+            log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Get signal.");
 
             // The abstractions, models, details, priorities, identifications.
             void** a = NULL_POINTER;
@@ -434,62 +434,62 @@ void get_signal(void* p0, void* p1, void* p2, void* p3, void* p4,
 
                                                 } else {
 
-                                                    log_message_debug("Could not get signal. The index exceeds the count.");
+                                                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get signal. The index exceeds the count.");
                                                 }
 
                                             } else {
 
-                                                log_message_debug("Could not get signal. The index is negativ.");
+                                                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get signal. The index is negativ.");
                                             }
 
                                         } else {
 
-                                            log_message_debug("Could not get signal. The identifications is null.");
+                                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get signal. The identifications is null.");
                                         }
 
                                     } else {
 
-                                        log_message_debug("Could not get signal. The priorities is null.");
+                                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get signal. The priorities is null.");
                                     }
 
                                 } else {
 
-                                    log_message_debug("Could not get signal. The details counts is null.");
+                                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get signal. The details counts is null.");
                                 }
 
                             } else {
 
-                                log_message_debug("Could not get signal. The details is null.");
+                                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get signal. The details is null.");
                             }
 
                         } else {
 
-                            log_message_debug("Could not get signal. The models counts is null.");
+                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get signal. The models counts is null.");
                         }
 
                     } else {
 
-                        log_message_debug("Could not get signal. The models is null.");
+                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get signal. The models is null.");
                     }
 
                 } else {
 
-                    log_message_debug("Could not get signal. The abstractions counts is null.");
+                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get signal. The abstractions counts is null.");
                 }
 
             } else {
 
-                log_message_debug("Could not get signal. The abstractions is null.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get signal. The abstractions is null.");
             }
 
         } else {
 
-            log_message_debug("Could not get signal. The signal memory count is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get signal. The signal memory count is null.");
         }
 
     } else {
 
-        log_message_debug("Could not get signal. The index is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get signal. The index is null.");
     }
 }
 
@@ -510,7 +510,7 @@ void get_highest_priority_signal_index(void* p0, void* p1, void* p2) {
 
             int* smc = (int*) p1;
 
-            log_message_debug("Get highest priority signal index.");
+            log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Get highest priority signal index.");
 
             // The signal priorities.
             void** sp = NULL_POINTER;
@@ -557,17 +557,17 @@ void get_highest_priority_signal_index(void* p0, void* p1, void* p2) {
 
             } else {
 
-                log_message_debug("Could not get highest priority signal index. The signal priorities is null.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get highest priority signal index. The signal priorities is null.");
             }
 
         } else {
 
-            log_message_debug("Could not get highest priority signal index. The signal memory count is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get highest priority signal index. The signal memory count is null.");
         }
 
     } else {
 
-        log_message_debug("Could not get highest priority signal index. The index is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get highest priority signal index. The index is null.");
     }
 }
 
@@ -587,7 +587,7 @@ void set_new_signal_identification(void* p0, void* p1) {
 
             void** id = (void**) p0;
 
-            log_message_debug("Set new signal identification.");
+            log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Set new signal identification.");
 
             //
             // CAUTION! These comparisons can be extended to infinity!
@@ -664,12 +664,12 @@ void set_new_signal_identification(void* p0, void* p1) {
 
         } else {
 
-            log_message_debug("Could not set new signal identification. The signal identification is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not set new signal identification. The signal identification is null.");
         }
 
     } else {
 
-        log_message_debug("Could not set new signal identification. The signal identification value is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not set new signal identification. The signal identification value is null.");
     }
 }
 
@@ -689,7 +689,7 @@ void get_new_signal_identification(void* p0, void* p1, void* p2) {
 
         int* smc = (int*) p1;
 
-        log_message_debug("Get new signal identification.");
+        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Get new signal identification.");
 
         // The signal identifications.
         void** ids = NULL_POINTER;
@@ -744,12 +744,12 @@ void get_new_signal_identification(void* p0, void* p1, void* p2) {
 
         } else {
 
-            log_message_debug("Could not get new signal identification. The signal identifications is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get new signal identification. The signal identifications is null.");
         }
 
     } else {
 
-        log_message_debug("Could not get new signal identification. The signal memory count is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get new signal identification. The signal memory count is null.");
     }
 }
 

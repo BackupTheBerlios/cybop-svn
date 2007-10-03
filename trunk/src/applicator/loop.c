@@ -22,7 +22,7 @@
  *
  * this handel a loop
  *
- * @version $Revision: 1.25 $ $Date: 2007-09-20 08:00:18 $ $Author: christian $
+ * @version $Revision: 1.26 $ $Date: 2007-10-03 23:40:05 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -73,7 +73,7 @@ void handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 void loop(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
     void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13) {
 
-    log_message_debug("Loop program flow.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Loop program flow.");
 
     // The model name, abstraction, model, details.
     void** mn = NULL_POINTER;

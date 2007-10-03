@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.16 $ $Date: 2007-08-17 03:15:32 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -156,7 +156,7 @@ void reallocate_pointer_array(void* p0, void* p1, void* p2) {
 
         } else {
 
-            log_message_debug("Could not reallocate pointer array. The array count parameter is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not reallocate pointer array. The array count parameter is null.");
         }
 
     } else {

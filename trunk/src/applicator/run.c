@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.13 $ $Date: 2007-09-15 00:17:01 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2007-10-03 23:40:05 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -52,7 +52,7 @@
  */
 void run(void* p0, void* p1, void* p2, void* p3) {
 
-    log_message_debug("Run a command.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Run a command.");
 
     // The command name, abstraction, model, details.
     void** cn = NULL_POINTER;

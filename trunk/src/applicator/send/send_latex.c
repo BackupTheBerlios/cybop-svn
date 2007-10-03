@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2007-08-17 04:06:51 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -42,7 +42,7 @@
  */
 void send_latex(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    log_message_debug("Send latex message.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Send latex message.");
 }
 
 /* SEND_LATEX_SOURCE */

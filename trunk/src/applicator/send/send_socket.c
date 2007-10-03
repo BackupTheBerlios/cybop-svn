@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.23 $ $Date: 2007-08-27 07:07:37 $ $Author: christian $
+ * @version $Revision: 1.24 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -63,7 +63,7 @@ void send_socket_get_socket_server_mode(void* p0, void* p1, void* p2) {
 
         int* base = (int*) p2;
 
-        log_message_debug("Information: Get socket for server mode.");
+        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Get socket for server mode.");
 
         // The internal memory index.
         int i = *NUMBER_MINUS_1_INTEGER;
@@ -84,7 +84,7 @@ void send_socket_get_socket_server_mode(void* p0, void* p1, void* p2) {
 
     } else {
 
-        log_message_debug("Error: Could not send message via socket get socket for server mode. The base internal is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not send message via socket get socket for server mode. The base internal is null.");
     }
 }
 
@@ -112,7 +112,7 @@ void send_socket_get_socket_client_mode(void* p0, void* p1, void* p2) {
 
                 int*** s = (int***) p0;
 
-                log_message_debug("Information: Get socket for client mode.");
+                log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Get socket for client mode.");
 
                 // Initialise error number.
                 // It is a global variable/ function and other operations
@@ -137,43 +137,43 @@ void send_socket_get_socket_client_mode(void* p0, void* p1, void* p2) {
 
                     if (errno == EPROTONOSUPPORT) {
 
-                        log_message_debug("Error: Could not send socket get socket client mode. The protocol or style is not supported by the namespace specified.");
+                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not send socket get socket client mode. The protocol or style is not supported by the namespace specified.");
 
                     } else if (errno == EMFILE) {
 
-                        log_message_debug("Error: Could not send socket get socket client mode. The process already has too many file descriptors open.");
+                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not send socket get socket client mode. The process already has too many file descriptors open.");
 
                     } else if (errno == ENFILE) {
 
-                        log_message_debug("Error: Could not send socket get socket client mode. The system already has too many file descriptors open.");
+                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not send socket get socket client mode. The system already has too many file descriptors open.");
 
                     } else if (errno == EACCES) {
 
-                        log_message_debug("Error: Could not send socket get socket client mode. The process does not have the privilege to create a socket of the specified style or protocol.");
+                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not send socket get socket client mode. The process does not have the privilege to create a socket of the specified style or protocol.");
 
                     } else if (errno == ENOBUFS) {
 
-                        log_message_debug("Error: Could not send socket get socket client mode. The system ran out of internal buffer space.");
+                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not send socket get socket client mode. The system ran out of internal buffer space.");
 
                     } else {
 
-                        log_message_debug("Error: Could not send socket get socket client mode. An unknown error occured while initialising the socket.");
+                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not send socket get socket client mode. An unknown error occured while initialising the socket.");
                     }
                 }
 
             } else {
 
-                log_message_debug("Error: Could not send message via socket get socket for server mode. The base internal is null.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not send message via socket get socket for server mode. The base internal is null.");
             }
 
         } else {
 
-            log_message_debug("Error: Could not send message via socket get socket for server mode. The base internal is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not send message via socket get socket for server mode. The base internal is null.");
         }
 
     } else {
 
-        log_message_debug("Error: Could not send message via socket get socket for server mode. The base internal is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not send message via socket get socket for server mode. The base internal is null.");
     }
 }
 
@@ -193,7 +193,7 @@ void send_socket_get_socket_client_mode(void* p0, void* p1, void* p2) {
  */
 void send_socket_get_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
-    log_message_debug("Information: Get socket.");
+    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Get socket.");
 
     // The comparison result.
     int r = *NUMBER_0_INTEGER;
@@ -230,7 +230,7 @@ void send_socket_set_nonblocking_mode(void* p0) {
 
         int* s = (int*) p0;
 
-        log_message_debug("Information: Send socket set non-blocking mode.");
+        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Send socket set non-blocking mode.");
 
         // Set non-blocking mode for the socket file descriptor.
         //
@@ -260,12 +260,12 @@ void send_socket_set_nonblocking_mode(void* p0) {
 
         } else {
 
-            log_message_debug("Error: Could not send socket / set non-blocking mode. The socket file descriptor flags could not be read.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not send socket / set non-blocking mode. The socket file descriptor flags could not be read.");
         }
 
     } else {
 
-        log_message_debug("Error: Could not send message via socket. The base internal is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not send message via socket. The base internal is null.");
     }
 }
 
@@ -285,7 +285,7 @@ void send_socket_allocate_host_address(void* p0, void* p1) {
 
             void** a = (void**) p0;
 
-            log_message_debug("Information: Send socket allocate host address.");
+            log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Send socket allocate host address.");
 
             // Get host address constant.
             if (*n == AF_INET) {
@@ -301,12 +301,12 @@ void send_socket_allocate_host_address(void* p0, void* p1) {
 
         } else {
 
-            log_message_debug("Error: Could not send message via socket allocate host address. The host address is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not send message via socket allocate host address. The host address is null.");
         }
 
     } else {
 
-        log_message_debug("Error: Could not send message via socket allocate host address. The address namespace is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not send message via socket allocate host address. The address namespace is null.");
     }
 }
 
@@ -331,7 +331,7 @@ void send_socket_allocate_socket_address(void* p0, void* p1, void* p2) {
 
                 void** a = (void**) p0;
 
-                log_message_debug("Information: Send socket allocate socket address.");
+                log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Send socket allocate socket address.");
 
                 if (*n == AF_LOCAL) {
 
@@ -377,17 +377,17 @@ void send_socket_allocate_socket_address(void* p0, void* p1, void* p2) {
 
             } else {
 
-                log_message_debug("Error: Could not send message via socket allocate socket address. The socket address is null.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not send message via socket allocate socket address. The socket address is null.");
             }
 
         } else {
 
-            log_message_debug("Error: Could not send message via socket allocate socket address. The socket address size is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not send message via socket allocate socket address. The socket address size is null.");
         }
 
     } else {
 
-        log_message_debug("Error: Could not send message via socket allocate socket address. The address namespace is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not send message via socket allocate socket address. The address namespace is null.");
     }
 }
 
@@ -407,7 +407,7 @@ void send_socket_initialise_socket_address(void* p0, void* p1, void* p2, void* p
 
         int* n = (int*) p5;
 
-        log_message_debug("Information: Send socket initialise socket address.");
+        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Send socket initialise socket address.");
 
         if (*n == AF_LOCAL) {
 
@@ -444,7 +444,7 @@ void send_socket_initialise_socket_address(void* p0, void* p1, void* p2, void* p
 
     } else {
 
-        log_message_debug("Error: Could not send message via socket initialise socket address. The address namespace is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not send message via socket initialise socket address. The address namespace is null.");
     }
 }
 
@@ -477,7 +477,7 @@ void send_socket(void* p0, void* p1, void* p2, void* p3,
     void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10,
     void* p11, void* p12, void* p13, void* p14, void* p15, void* p16, void* p17, void* p18, void* p19, void* p20) {
 
-    log_message_debug("Information: Send message via socket.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Send message via socket.");
 
     // The communication style.
     int st = *NUMBER_MINUS_1_INTEGER;
@@ -627,12 +627,12 @@ void send_socket(void* p0, void* p1, void* p2, void* p3,
 
             } else {
 
-                log_message_debug("Could not send message via socket. The client socket number was not found.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not send message via socket. The client socket number was not found.");
             }
 
         } else {
 
-            log_message_debug("Could not send message via socket. The signal id index is invalid.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not send message via socket. The signal id index is invalid.");
         }
     */
 

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.21 $ $Date: 2007-08-17 03:15:32 $ $Author: christian $
+ * @version $Revision: 1.22 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -71,7 +71,7 @@ void decode_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             int* d = (int*) p0;
 
-            log_message_debug("Information: Decode integer.");
+            log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Decode integer.");
 
             // The temporary null-terminated string.
             char* tmp = (char*) *NULL_POINTER;
@@ -108,12 +108,12 @@ void decode_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         } else {
 
-            log_message_debug("Could not decode integer. The destination is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode integer. The destination is null.");
         }
 
     } else {
 
-        log_message_debug("Could not decode integer. The source count is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode integer. The source count is null.");
     }
 }
 
@@ -144,7 +144,7 @@ void encode_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                     char** d = (char**) p0;
 
-                    log_message_debug("Information: Encode integer.");
+                    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Encode integer.");
 
                     if (*sc > *NUMBER_0_INTEGER) {
 
@@ -182,27 +182,27 @@ void encode_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                     } else {
 
-                        log_message_debug("Could not encode integer. The source count is zero.");
+                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode integer. The source count is zero.");
                     }
 
                 } else {
 
-                    log_message_debug("Could not encode integer. The destination is null.");
+                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode integer. The destination is null.");
                 }
 
             } else {
 
-                log_message_debug("Could not encode integer. The destination count is null.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode integer. The destination count is null.");
             }
 
         } else {
 
-            log_message_debug("Could not encode integer. The destination size is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode integer. The destination size is null.");
         }
 
     } else {
 
-        log_message_debug("Could not encode integer. The source count is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode integer. The source count is null.");
     }
 }
 
@@ -229,7 +229,7 @@ void encode_integer_wide(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 wchar_t** d = (wchar_t**) p0;
 
-                log_message_debug("Encode integer into wide character.");
+                log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Encode integer into wide character.");
 
                 // The integer value.
                 int* v = (int*) *NULL_POINTER;
@@ -278,17 +278,17 @@ void encode_integer_wide(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             } else {
 
-                log_message_debug("Could not encode integer into wide character. The destination is null.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode integer into wide character. The destination is null.");
             }
 
         } else {
 
-            log_message_debug("Could not encode integer into wide character. The destination count is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode integer into wide character. The destination count is null.");
         }
 
     } else {
 
-        log_message_debug("Could not encode integer into wide character. The destination size is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode integer into wide character. The destination size is null.");
     }
 }
 

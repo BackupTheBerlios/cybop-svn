@@ -25,7 +25,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.28 $ $Date: 2007-10-02 21:16:36 $ $Author: christian $
+ * @version $Revision: 1.29 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -95,9 +95,9 @@ int main(int p0, char** p1) {
         // Optionalise command line argument options.
         optionalise((void*) &m, (void*) &k, (void*) &kc, (void*) &LOG_LEVEL, (void*) &LOG_OUTPUT, (void*) p1, (void*) &p0);
 
-        log_message_debug("Information: Run cyboi.");
-        log_message_debug("Information: Globalised global variables already.");
-        log_message_debug("Information: Optionalised log file already.");
+        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Run cyboi.");
+        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Globalised global variables already.");
+        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Optionalised log file already.");
 
         if (m == *VERSION_CYBOI_OPERATION_MODE) {
 
@@ -139,9 +139,9 @@ int main(int p0, char** p1) {
             }
         }
 
-        log_message_debug("Information: Deoptionalise log file yet.");
-        log_message_debug("Information: Unglobalise global variables yet.");
-        log_message_debug("Information: Exit cyboi normally afterwards.");
+        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Deoptionalise log file yet.");
+        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Unglobalise global variables yet.");
+        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Exit cyboi normally afterwards.");
 
         // Deoptionalise command line argument options.
         deoptionalise((void*) &LOG_OUTPUT);

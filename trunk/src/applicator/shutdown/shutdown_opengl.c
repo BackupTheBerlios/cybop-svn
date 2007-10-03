@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2007-08-17 04:06:51 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -44,7 +44,7 @@
  */
 void shutdown_opengl(void* p0, void* p1, void* p2, void* p3) {
 
-    log_message_debug("Shutdown opengl.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Shutdown opengl.");
 
 #ifdef GNU_LINUX_OPERATING_SYSTEM
 

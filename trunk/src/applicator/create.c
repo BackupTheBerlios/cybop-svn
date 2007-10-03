@@ -22,7 +22,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.38 $ $Date: 2007-09-20 08:00:18 $ $Author: christian $
+ * @version $Revision: 1.39 $ $Date: 2007-10-03 23:40:05 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -61,7 +61,7 @@
  */
 void create_set(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10) {
 
-    log_message_debug("Information: Create and set knowledge model.");
+    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Create and set knowledge model.");
 
     // The knowledge model name, abstraction, model, details.
     //
@@ -156,7 +156,7 @@ void create_set(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
  */
 void create(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    log_message_debug("Information: Create knowledge model.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Create knowledge model.");
 
     // The name name, abstraction, model, details.
     void** nn = NULL_POINTER;
@@ -255,14 +255,14 @@ void create(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             if (*wm != *NULL_POINTER) {
 
-                log_message_debug("Debug: Add part knowledge model to whole model.");
+                log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Add part knowledge model to whole model.");
 
                 // Use the determined whole model, if it exists.
                 create_set(*wm, *wmc, *wms, *na, *nac, *nm, *nmc, *aa, *aac, *am, *amc);
 
             } else {
 
-                log_message_debug("Debug: Add part knowledge model to knowledge memory root.");
+                log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Add part knowledge model to knowledge memory root.");
 
                 // Use the knowledge memory root if the determined whole model is null.
                 //
@@ -287,7 +287,7 @@ void create(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         if (r != *NUMBER_0_INTEGER) {
 
-            log_message_debug("Debug: Add meta knowledge model to whole details.");
+            log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Add meta knowledge model to whole details.");
 
             create_set(*wd, *wdc, *wds, *na, *nac, *nm, *nmc, *aa, *aac, *am, *amc);
         }

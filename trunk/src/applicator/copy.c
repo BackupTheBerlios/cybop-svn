@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.26 $ $Date: 2007-09-15 00:17:01 $ $Author: christian $
+ * @version $Revision: 1.27 $ $Date: 2007-10-03 23:40:05 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -54,7 +54,7 @@
  */
 void copy(void* p0, int* p1, void* p2, void* p3, void* p4) {
 
-    log_message_debug("Copy primitive model.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Copy primitive model.");
 
     // The source name, abstraction, model, details.
     void** sn = NULL_POINTER;

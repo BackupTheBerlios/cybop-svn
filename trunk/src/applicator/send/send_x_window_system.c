@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.24 $ $Date: 2007-08-17 04:06:51 $ $Author: christian $
+ * @version $Revision: 1.25 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -48,7 +48,7 @@
  */
 void send_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    log_message_debug("Send x window system message.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Send x window system message.");
 
     // The x window system mutex.
     pthread_mutex_t** xmt = (pthread_mutex_t**) NULL_POINTER;

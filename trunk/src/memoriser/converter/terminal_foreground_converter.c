@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2007-08-17 03:15:33 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -162,12 +162,12 @@ void encode_terminal_foreground(void* p0, void* p1, void* p2, void* p3, void* p4
 
         } else {
 
-            log_message_debug("Could not encode terminal foreground. The destination is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode terminal foreground. The destination is null.");
         }
 
     } else {
 
-        log_message_debug("Could not encode terminal foreground. The destination count is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode terminal foreground. The destination count is null.");
     }
 }
 

@@ -23,7 +23,7 @@
  * This file contains the functionality to:
  * - create a compound model in memory
  *
- * @version $Revision: 1.13 $ $Date: 2007-07-23 23:47:58 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -51,7 +51,7 @@ void allocate_compound(void* p0, void* p1) {
 
         void** c = (void**) p0;
 
-        log_message_debug("Allocate compound.");
+        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Allocate compound.");
 
         // Allocate compound.
         allocate_array(p0, (void*) COMPOUND_COUNT, (void*) POINTER_ARRAY);
@@ -102,7 +102,7 @@ void allocate_compound(void* p0, void* p1) {
 
     } else {
 
-        log_message_debug("Could not allocate compound. The compound is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not allocate compound. The compound is null.");
     }
 }
 
@@ -118,7 +118,7 @@ void deallocate_compound(void* p0, void* p1) {
 
         void** c = (void**) p0;
 
-        log_message_debug("Deallocate compound.");
+        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Deallocate compound.");
 
         // The names, abstractions, models, details.
         void** n = NULL_POINTER;
@@ -179,7 +179,7 @@ void deallocate_compound(void* p0, void* p1) {
 
     } else {
 
-        log_message_debug("Could not deallocate compound. The compound is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not deallocate compound. The compound is null.");
     }
 }
 

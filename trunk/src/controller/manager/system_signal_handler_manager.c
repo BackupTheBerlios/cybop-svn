@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.12 $ $Date: 2007-08-17 03:15:32 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -154,7 +154,7 @@ void interrupt_service_system_signal_handler(int p0) {
  */
 void startup_system_signal_handler() {
 
-    log_message_debug("Information: Startup system signal handler.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Startup system signal handler.");
 
     // The signal set (mask).
     sigset_t mask;

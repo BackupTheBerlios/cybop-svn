@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2007-07-23 23:47:58 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -41,7 +41,7 @@
  */
 void allocate_pointer_vector(void* p0, void* p1) {
 
-    log_message_debug("Allocate pointer vector.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Allocate pointer vector.");
 
     allocate_array(p0, p1, (void*) POINTER_ARRAY);
 }
@@ -54,7 +54,7 @@ void allocate_pointer_vector(void* p0, void* p1) {
  */
 void deallocate_pointer_vector(void* p0, void* p1) {
 
-    log_message_debug("Deallocate pointer vector.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Deallocate pointer vector.");
 
     deallocate_array(p0, p1, (void*) POINTER_ARRAY);
 }
@@ -68,7 +68,7 @@ void deallocate_pointer_vector(void* p0, void* p1) {
  */
 void reallocate_pointer_vector(void* p0, void* p1, void* p2) {
 
-    log_message_debug("Reallocate pointer vector.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Reallocate pointer vector.");
 
     reallocate_array(p0, p1, p2, (void*) POINTER_ARRAY);
 }

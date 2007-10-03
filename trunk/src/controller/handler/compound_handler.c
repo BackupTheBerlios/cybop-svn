@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.20 $ $Date: 2007-09-20 08:00:19 $ $Author: christian $
+ * @version $Revision: 1.21 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -102,7 +102,7 @@ void handle_compound_part(void* p0, void* p1, void* p2, void* p3, void* p4, void
 
                         if (*pdc != *NULL_POINTER) {
 
-                            log_message_debug("Handle compound part.");
+                            log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Handle compound part.");
 
                             // The abstraction, model, details.
                             void** a = NULL_POINTER;
@@ -148,32 +148,32 @@ void handle_compound_part(void* p0, void* p1, void* p2, void* p3, void* p4, void
 
                         } else {
 
-                            log_message_debug("Could not handle compound part. The part details counts is null.");
+                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not handle compound part. The part details counts is null.");
                         }
 
                     } else {
 
-                        log_message_debug("Could not handle compound part. The part details is null.");
+                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not handle compound part. The part details is null.");
                     }
 
                 } else {
 
-                    log_message_debug("Could not handle compound part. The part models counts is null.");
+                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not handle compound part. The part models counts is null.");
                 }
 
             } else {
 
-                log_message_debug("Could not handle compound part. The part models is null.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not handle compound part. The part models is null.");
             }
 
         } else {
 
-            log_message_debug("Could not handle compound part. The part abstractions counts is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not handle compound part. The part abstractions counts is null.");
         }
 
     } else {
 
-        log_message_debug("Could not handle compound part. The part abstractions is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not handle compound part. The part abstractions is null.");
     }
 }
 
@@ -203,7 +203,7 @@ void handle_compound(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
 
         int* sc = (int*) p11;
 
-        log_message_debug("\n\n");
+        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "\n\n");
         log_message((void*) INFORMATION_LOG_LEVEL, (void*) HANDLE_COMPOUND_MESSAGE, (void*) HANDLE_COMPOUND_MESSAGE_COUNT);
 
         // The loop variable.
@@ -224,7 +224,7 @@ void handle_compound(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
 
     } else {
 
-        log_message_debug("Could not handle compound. The signal count is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not handle compound. The signal count is null.");
     }
 }
 

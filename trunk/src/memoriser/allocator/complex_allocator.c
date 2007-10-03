@@ -23,7 +23,7 @@
  * This file contains the functionality to:
  * - create a complex model in memory
  *
- * @version $Revision: 1.10 $ $Date: 2007-07-23 23:47:58 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -44,7 +44,7 @@
  */
 void allocate_complex(void* p0, void* p1) {
 
-    log_message_debug("Allocate complex.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Allocate complex.");
 
     // Create complex.
     allocate_array(p0, p1, (void*) DOUBLE_ARRAY);
@@ -58,7 +58,7 @@ void allocate_complex(void* p0, void* p1) {
  */
 void deallocate_complex(void* p0, void* p1) {
 
-    log_message_debug("Deallocate complex.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Deallocate complex.");
 
     // Destroy complex.
     deallocate_array(p0, p1, (void*) DOUBLE_ARRAY);

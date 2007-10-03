@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.15 $ $Date: 2007-08-17 04:06:51 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -50,7 +50,7 @@ void activate_tcp_socket( void* internals, void* know, void* know_count, void* k
     void* socket_port_abstr, void* socket_port_abstr_count,
     void* socket_port_model, void* socket_port_model_count) {
 
-    log_message_debug("Startup tcp socket.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Startup tcp socket.");
 
     if (internals != *NULL_POINTER) {
 
@@ -67,7 +67,7 @@ void activate_tcp_socket( void* internals, void* know, void* know_count, void* k
 
     } else {
 
-        log_message_debug("Could not activate tcp server socket. The internal is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not activate tcp server socket. The internal is null.");
     }
 }
 

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.12 $ $Date: 2007-06-29 22:55:31 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2007-10-03 23:40:05 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -91,6 +91,8 @@ void compare_equal(void* p0, void* p1, void* p2,
     void* p21, void* p22, void* p23,
     void* p24, void* p25, void* p26,
     void* p27, void* p28) {
+
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Compare if left parameter is equal to right parameter.");
 
     // The comparison result.
     int r = *NUMBER_0_INTEGER;

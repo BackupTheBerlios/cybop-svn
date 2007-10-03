@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2007-09-20 08:00:19 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2007-10-03 23:40:05 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -239,7 +239,7 @@ void receive_gnu_linux_console_character(void* p0, void* p1) {
 
     } else {
 
-        log_message_debug("Could not receive gnu/linux console character. The character is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not receive gnu/linux console character. The character is null.");
     }
 }
 
@@ -395,7 +395,7 @@ void receive_gnu_linux_console_thread(void* p0) {
 
     } else {
 
-        log_message_debug("Could not receive gnu/linux console thread. The input stream is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not receive gnu/linux console thread. The input stream is null.");
     }
 
     // An implicit call to pthread_exit() is made when this thread
@@ -422,7 +422,7 @@ void receive_gnu_linux_console_thread(void* p0) {
  */
 void receive_gnu_linux_console(void* p0, void* p1, void* p2, void* p3) {
 
-    log_message_debug("Receive gnu/linux console message.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Receive gnu/linux console message.");
 
     // The gnu/linux console mutex.
     pthread_mutex_t** mt = (pthread_mutex_t**) NULL_POINTER;
@@ -457,7 +457,7 @@ void receive_gnu_linux_console(void* p0, void* p1, void* p2, void* p3) {
     // Only create thread, if not existent.
     if (*GNU_LINUX_CONSOLE_THREAD == *NUMBER_MINUS_1_INTEGER) {
 
-        log_message_debug("Create new gnu/linux console receive service thread.");
+        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Create new gnu/linux console receive service thread.");
 
         // Create thread.
         //

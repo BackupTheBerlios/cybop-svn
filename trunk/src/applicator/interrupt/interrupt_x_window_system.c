@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.13 $ $Date: 2007-08-17 03:15:31 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2007-10-03 23:40:05 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -45,7 +45,7 @@
  */
 void interrupt_x_window_system() {
 
-    log_message_debug("Interrupt x window system service.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Interrupt x window system service.");
 
     if (*X_WINDOW_SYSTEM_THREAD != *NUMBER_MINUS_1_INTEGER) {
 
@@ -74,7 +74,7 @@ void interrupt_x_window_system() {
 
     } else {
 
-        log_message_debug("Warning: Could not interrupt x window system. The x window system thread is invalid.");
+        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) "Could not interrupt x window system. The x window system thread is invalid.");
     }
 }
 

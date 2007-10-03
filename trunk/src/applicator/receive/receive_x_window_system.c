@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.30 $ $Date: 2007-09-20 08:00:19 $ $Author: christian $
+ * @version $Revision: 1.31 $ $Date: 2007-10-03 23:40:05 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -108,12 +108,12 @@ void receive_x_window_system_mouse_command(void* p0, void* p1, void* p2, void* p
 
         } else {
 
-            log_message_debug("Could not receive x window system mouse command. The event type is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not receive x window system mouse command. The event type is null.");
         }
 
     } else {
 
-        log_message_debug("Could not receive x window system mouse command. The mouse button is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not receive x window system mouse command. The mouse button is null.");
     }
 }
 
@@ -163,7 +163,7 @@ void receive_x_window_system_command(void* p0, void* p1, void* p2, void* p3, voi
 
     } else {
 
-        log_message_debug("Could not receive x window system command. The event type is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not receive x window system command. The event type is null.");
     }
 }
 
@@ -410,22 +410,22 @@ void receive_x_window_system_part(void* p0, void* p1, void* p2, void* p3, void* 
 
                 } else {
 
-                    log_message_debug("Could not receive x window system part. The whole model count is null.");
+                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not receive x window system part. The whole model count is null.");
                 }
 
             } else {
 
-                log_message_debug("Could not receive x window system part. The mouse x coordinate is null.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not receive x window system part. The mouse x coordinate is null.");
             }
 
         } else {
 
-            log_message_debug("Could not receive x window system part. The mouse y coordinate is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not receive x window system part. The mouse y coordinate is null.");
         }
 
     } else {
 
-        log_message_debug("Could not receive x window system part. The mouse z coordinate is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not receive x window system part. The mouse z coordinate is null.");
     }
 }
 
@@ -899,7 +899,7 @@ void receive_x_window_system_thread(void* p0) {
  */
 void receive_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
-    log_message_debug("Receive x window system message.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Receive x window system message.");
 
     // Adding the following parameters to the internal memory is necessary,
     // because only one parameter (the internal memory p0) can be forwarded

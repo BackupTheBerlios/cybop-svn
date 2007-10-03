@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.41 $ $Date: 2007-10-02 21:16:36 $ $Author: christian $
+ * @version $Revision: 1.42 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -64,8 +64,8 @@
  */
 void manage(void* p0, void* p1) {
 
-    log_message_debug("\n\n");
-    log_message_debug("Info: Manage system.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "\n\n");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Manage system.");
 
     // The internal memory.
     void* i = *NULL_POINTER;

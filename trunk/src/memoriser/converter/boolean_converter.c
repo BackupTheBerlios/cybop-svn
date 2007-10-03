@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.16 $ $Date: 2007-08-17 03:15:32 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -60,7 +60,7 @@ void decode_boolean(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 int** d = (int**) p0;
 
-                log_message_debug("Information: Decode boolean.");
+                log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Decode boolean.");
 
                 // The comparison result.
                 int r = *NUMBER_0_INTEGER;
@@ -107,17 +107,17 @@ void decode_boolean(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             } else {
 
-                log_message_debug("Error: Could not decode boolean. The destination is null.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode boolean. The destination is null.");
             }
 
         } else {
 
-            log_message_debug("Error: Could not decode boolean. The destination count is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode boolean. The destination count is null.");
         }
 
     } else {
 
-        log_message_debug("Error: Could not decode boolean. The source count is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode boolean. The source count is null.");
     }
 }
 
@@ -152,7 +152,7 @@ void encode_boolean(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                         void** d = (void**) p0;
 
-                        log_message_debug("Information: Encode boolean.");
+                        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Encode boolean.");
 
                         if (*sc > *NUMBER_0_INTEGER) {
 
@@ -187,32 +187,32 @@ void encode_boolean(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                         } else {
 
-                            log_message_debug("Error: Could not encode boolean. The source count is zero.");
+                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode boolean. The source count is zero.");
                         }
 
                     } else {
 
-                        log_message_debug("Error: Could not encode boolean. The destination is null.");
+                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode boolean. The destination is null.");
                     }
 
                 } else {
 
-                    log_message_debug("Error: Could not encode boolean. The destination count is null.");
+                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode boolean. The destination count is null.");
                 }
 
             } else {
 
-                log_message_debug("Error: Could not encode boolean. The destination size is null.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode boolean. The destination size is null.");
             }
 
         } else {
 
-            log_message_debug("Error: Could not encode boolean. The source is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode boolean. The source is null.");
         }
 
     } else {
 
-        log_message_debug("Error: Could not encode boolean. The source count is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode boolean. The source count is null.");
     }
 }
 

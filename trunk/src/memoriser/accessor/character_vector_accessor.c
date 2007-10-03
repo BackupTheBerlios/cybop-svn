@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2007-07-23 23:47:58 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -43,7 +43,7 @@
  */
 void set_character_vector_element(void* p0, void* p1, void* p2) {
 
-    log_message_debug("Set character vector element.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Set character vector element.");
 
     set_array_elements(p0, p1, p2, (void*) NUMBER_1_INTEGER, (void*) CHARACTER_ARRAY);
 }
@@ -57,7 +57,7 @@ void set_character_vector_element(void* p0, void* p1, void* p2) {
  */
 void remove_character_vector_element(void* p0, void* p1, void* p2) {
 
-    log_message_debug("Remove character vector element.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Remove character vector element.");
 
     remove_array_elements(p0, p1, p2, (void*) NUMBER_1_INTEGER, (void*) CHARACTER_ARRAY);
 }
@@ -71,7 +71,7 @@ void remove_character_vector_element(void* p0, void* p1, void* p2) {
  */
 void get_character_vector_element(void* p0, void* p1, void* p2) {
 
-    log_message_debug("Get character vector element.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Get character vector element.");
 
     get_array_elements(p0, p1, p2, (void*) CHARACTER_ARRAY);
 }

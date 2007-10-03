@@ -14,9 +14,20 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.32 $ $Date: 2007-10-02 21:16:36 $ $Author: christian $
+# @version $Revision: 1.33 $ $Date: 2007-10-03 23:40:05 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2007-10-03  Christian Heller  <christian.heller@tuxtax.de>
+        * Add correct LOG_LEVEL constant to all log messages of all source code files,
+            so that the correct prefix (information, warning, error, debug) appears
+        * Delete "Information: " etc. which were sometimes written directly into the log message
+        * Rename "log_message_debug" function to "log_terminated_message" and require
+            the log level as additional parameter
+        * Eliminate "malloc" function from "logger.c", since the logger is also called from threads
+            and memory allocation would result in an error like:
+                *** glibc detected *** malloc(): memory corruption (fast): 0x080e0470 ***
+                Aborted
 
 2007-10-02  Christian Heller  <christian.heller@tuxtax.de>
         * Extract loop body of "check" function in module "checker.c" and split it into the four functions:

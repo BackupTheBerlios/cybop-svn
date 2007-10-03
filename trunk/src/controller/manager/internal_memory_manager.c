@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.16 $ $Date: 2007-08-17 04:06:51 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -71,8 +71,8 @@
 void startup_internal_memory(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
     void* p7, void* p8, void* p9, void* p10, void* p11, void* p12) {
 
-    log_message_debug("\n\n");
-    log_message_debug("Information: Startup internal memory.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "\n\n");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Startup internal memory.");
 
     //
     // Initialise all values with null.

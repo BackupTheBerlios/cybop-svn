@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2007-09-15 00:17:01 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2007-10-03 23:40:05 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -55,7 +55,7 @@
  */
 void get(void* p0, int* p1, void* p2, void* p3, void* p4) {
 
-    log_message_debug("Get standard meta information.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Get standard meta information.");
 
     // The compound name, abstraction, model, details.
     void** cn = NULL_POINTER;

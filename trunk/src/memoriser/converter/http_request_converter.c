@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2007-09-20 08:00:20 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -98,7 +98,7 @@ void decode_http_request_set_parameter(void* p0, void* p1, void* p2, void* p3, v
         // CAUTION! Do NOT use "d" as name, as it is used for "details" below.
         void** dest = (void**) p0;
 
-        log_message_debug("Debug: Decode http request set parameter.");
+        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Decode http request set parameter.");
 
         //
         // Setting of parameter.
@@ -147,7 +147,7 @@ void decode_http_request_set_parameter(void* p0, void* p1, void* p2, void* p3, v
 
     } else {
 
-        log_message_debug("Error: Could not decode http request set parameter. The destination model is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode http request set parameter. The destination model is null.");
     }
 }
 
@@ -174,7 +174,7 @@ void decode_http_request_parameter(void* p0, void* p1, void* p2, void* p3, void*
 
         int* sc = (int*) p4;
 
-        log_message_debug("Debug: Decode http request parameter.");
+        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Decode http request parameter.");
 
         // The source index.
         // CAUTION! A local variable is used instead of the parameter
@@ -236,7 +236,7 @@ void decode_http_request_parameter(void* p0, void* p1, void* p2, void* p3, void*
 
     } else {
 
-        log_message_debug("Error: Could not decode http request parameter. The source parameter count is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode http request parameter. The source parameter count is null.");
     }
 }
 
@@ -262,7 +262,7 @@ void decode_http_request_parameters(void* p0, void* p1, void* p2, void* p3, void
 
         int* sc = (int*) p4;
 
-        log_message_debug("Debug: Decode http request parameters.");
+        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Decode http request parameters.");
 
         // The source index.
         // CAUTION! A local variable is used instead of the parameter
@@ -318,7 +318,7 @@ void decode_http_request_parameters(void* p0, void* p1, void* p2, void* p3, void
 
     } else {
 
-        log_message_debug("Error: Could not decode http request parameters. The source parameters count is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode http request parameters. The source parameters count is null.");
     }
 }
 
@@ -345,7 +345,7 @@ void decode_http_request_parameters(void* p0, void* p1, void* p2, void* p3, void
  */
 void decode_http_request_method(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8) {
 
-    log_message_debug("Debug: Decode http request method.");
+    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Decode http request method.");
 
     // The comparison result.
     int r = *NUMBER_0_INTEGER;
@@ -538,7 +538,7 @@ void decode_http_request_method(void* p0, void* p1, void* p2, void* p3, void* p4
 
     if (r == *NUMBER_0_INTEGER) {
 
-        log_message_debug("Warning: Could not decode http request method. The source request method is unknown.");
+        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) "Could not decode http request method. The source request method is unknown.");
     }
 }
 
@@ -561,7 +561,7 @@ void decode_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p4
 
         int* sc = (int*) p4;
 
-        log_message_debug("Debug: Decode http request header.");
+        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Decode http request header.");
 
         // The source index.
         // CAUTION! A local variable is used instead of the parameter
@@ -620,7 +620,7 @@ void decode_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p4
 
     } else {
 
-        log_message_debug("Error: Could not decode http request header. The source http request count is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode http request header. The source http request count is null.");
     }
 }
 
@@ -645,7 +645,7 @@ void decode_http_request_headers(void* p0, void* p1, void* p2, void* p3, void* p
 
         int* sc = (int*) p4;
 
-        log_message_debug("Debug: Decode http request headers.");
+        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Decode http request headers.");
 
         // The source index.
         // CAUTION! A local variable is used instead of the parameter
@@ -702,7 +702,7 @@ void decode_http_request_headers(void* p0, void* p1, void* p2, void* p3, void* p
 
     } else {
 
-        log_message_debug("Error: Could not decode http request headers. The source http request count is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode http request headers. The source http request count is null.");
     }
 }
 
@@ -789,7 +789,7 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
 
         int* sc = (int*) p4;
 
-        log_message_debug("Debug: Decode uniform resource identifier.");
+        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Decode uniform resource identifier.");
 
         // The source index.
         // CAUTION! A local variable is used instead of the parameter
@@ -1135,7 +1135,7 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
 
     } else {
 
-        log_message_debug("Error: Could not decode uniform resource identifier. The source uniform resource identifier count is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode uniform resource identifier. The source uniform resource identifier count is null.");
     }
 }
 
@@ -1168,7 +1168,7 @@ void decode_http_request_line(void* p0, void* p1, void* p2, void* p3, void* p4, 
 
         int* sc = (int*) p11;
 
-        log_message_debug("Debug: Decode http request request line.");
+        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Decode http request request line.");
 
         // The source index.
         // CAUTION! A local variable is used instead of the parameter
@@ -1289,7 +1289,7 @@ void decode_http_request_line(void* p0, void* p1, void* p2, void* p3, void* p4, 
 
     } else {
 
-        log_message_debug("Error: Could not decode http request request line. The source http request count is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode http request request line. The source http request count is null.");
     }
 }
 
@@ -1347,7 +1347,7 @@ void decode_http_request(void* p0, void* p1, void* p2, void* p3, void* p4, void*
 
         int* sc = (int*) p7;
 
-        log_message_debug("Information: Decode http request.");
+        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Decode http request.");
 
     fprintf(stderr, "TEST http request mc p1: %i \n", *((int*) p1));
     fprintf(stderr, "TEST http request dc p4: %i \n", *((int*) p4));
@@ -1469,7 +1469,7 @@ void decode_http_request(void* p0, void* p1, void* p2, void* p3, void* p4, void*
 
     } else {
 
-        log_message_debug("Error: Could not decode http request method. The source http request count is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode http request method. The source http request count is null.");
     }
 }
 
@@ -1491,7 +1491,7 @@ void decode_http_request(void* p0, void* p1, void* p2, void* p3, void* p4, void*
 void encode_http_request(void* p0, void* p1, void* p2, void* p3, void* p4,
     void* p5, void* p6, void* p7, void* p8, void* p9, void* p10) {
 
-    log_message_debug("Information: Encode http request.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Encode http request.");
 }
 
 /* HTTP_REQUEST_CONVERTER_SOURCE */

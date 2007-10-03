@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.13 $ $Date: 2007-08-13 16:37:11 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -77,22 +77,22 @@ void read_inline(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 } else {
 
-                    log_message_debug("Could not read inline. The array count is null.");
+                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not read inline. The array count is null.");
                 }
 
             } else {
 
-                log_message_debug("Could not read inline. The array count is null.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not read inline. The array count is null.");
             }
 
         } else {
 
-            log_message_debug("Could not read inline. The array size is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not read inline. The array size is null.");
         }
 
     } else {
 
-        log_message_debug("Could not read inline. The inline byte stream count is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not read inline. The inline byte stream count is null.");
     }
 }
 

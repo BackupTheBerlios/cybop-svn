@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2007-07-23 23:47:58 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -42,7 +42,7 @@
  */
 void allocate_xml_property(void* p0, void* p1) {
 
-    log_message_debug("Allocate xml property.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Allocate xml property.");
 
     // Create xml attribute.
     allocate_array(p0, p1, (void*) POINTER_ARRAY);
@@ -72,7 +72,7 @@ void allocate_xml_property(void* p0, void* p1) {
  */
 void deallocate_xml_property(void* p0, void* p1) {
 
-    log_message_debug("Deallocate xml property.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Deallocate xml property.");
 
     // Initialise xml attribute name, value.
     void* nv = *NULL_POINTER;

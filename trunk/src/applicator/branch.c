@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.24 $ $Date: 2007-09-20 08:00:18 $ $Author: christian $
+ * @version $Revision: 1.25 $ $Date: 2007-10-03 23:40:05 $ $Author: christian $
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
@@ -73,8 +73,8 @@ void handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 void branch(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
     void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13) {
 
-    log_message_debug("\n\n");
-    log_message_debug("Branch program flow.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "\n\n");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Branch program flow.");
 
     // The criterion name, abstraction, model, details.
     void** cn = NULL_POINTER;

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2007-09-20 08:00:19 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -55,7 +55,7 @@
  */
 void send_cyboi_system(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11) {
 
-    log_message_debug("Information: Send message to cyboi system.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Send message to cyboi system.");
 
     // The signal memory mutex.
     pthread_mutex_t** mt = (pthread_mutex_t**) NULL_POINTER;

@@ -24,7 +24,7 @@
  * - read data from a device into a byte array
  * - write data from a byte array to a device
  *
- * @version $Revision: 1.19 $ $Date: 2007-08-17 03:15:32 $ $Author: christian $
+ * @version $Revision: 1.20 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -50,10 +50,11 @@
  * Reads a stream according to the given communication channel type
  * and creates a byte array from it.
  *
- * CAUTION! This procedure cannot be called "read"
- * as that name is already used by the input/ output mechanism.
- * CAUTION! This procedure cannot be called "receive"
- * as that name is already used by the socket mechanism.
+ * CAUTION! This procedure cannot be called "read" as that name
+ * is already used by the glibc library's input/ output mechanism.
+ *
+ * CAUTION! This procedure cannot be called "receive" as that name
+ * is already used by the glibc library's socket mechanism.
  *
  * @param p0 the destination byte array (Hand over as reference!)
  * @param p1 the destination count
@@ -65,7 +66,7 @@
  */
 void read_data(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
-    log_message_debug("Information: Read data.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Read data.");
 
     // The comparison result.
     int r = *NUMBER_0_INTEGER;
@@ -156,10 +157,11 @@ void read_data(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
  * Writes a stream according to the given communication channel type
  * and reads its data from a byte array.
  *
- * CAUTION! This procedure cannot be called "write"
- * as that name is already used by the input/ output mechanism.
- * CAUTION! This procedure cannot be called "send"
- * as that name is already used by the socket mechanism.
+ * CAUTION! This procedure cannot be called "write" as that name
+ * is already used by the glibc library's input/ output mechanism.
+ *
+ * CAUTION! This procedure cannot be called "send" as that name
+ * is already used by the glibc library's socket mechanism.
  *
  * @param p0 the destination (Hand over as reference!)
  * @param p1 the destination count
@@ -171,7 +173,7 @@ void read_data(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
  */
 void write_data(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
-    log_message_debug("Information: Write data.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Write data.");
 
     // The comparison result.
     int r = *NUMBER_0_INTEGER;

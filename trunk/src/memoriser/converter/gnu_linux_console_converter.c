@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2007-08-17 04:06:51 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -128,7 +128,7 @@ void encode_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, 
 
                                 void** d = (void**) p0;
 
-                                log_message_debug("Debug: Encode gnu/linux console character.");
+                                log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Encode gnu/linux console character.");
 
                                 if (p15 != *NULL_POINTER) {
 
@@ -375,42 +375,42 @@ void encode_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, 
 
                                 } else {
 
-                                    log_message_debug("WARNING: Could not encode gnu/linux console properties. The character is null.");
+                                    log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) "Could not encode gnu/linux console properties. The character is null.");
                                 }
 
                             } else {
 
-                                log_message_debug("Could not encode gnu/linux console properties. The destination is null.");
+                                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode gnu/linux console properties. The destination is null.");
                             }
 
                         } else {
 
-                            log_message_debug("Could not encode gnu/linux console properties. The destination count is null.");
+                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode gnu/linux console properties. The destination count is null.");
                         }
 
                     } else {
 
-                        log_message_debug("Could not encode gnu/linux console properties. The destination size is null.");
+                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode gnu/linux console properties. The destination size is null.");
                     }
 
                 } else {
 
-                    log_message_debug("Could not encode gnu/linux console properties. The source y is null.");
+                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode gnu/linux console properties. The source y is null.");
                 }
 
             } else {
 
-                log_message_debug("Could not encode gnu/linux console properties. The source x is null.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode gnu/linux console properties. The source x is null.");
             }
 
         } else {
 
-            log_message_debug("Could not encode gnu/linux console properties. The background count is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode gnu/linux console properties. The background count is null.");
         }
 
     } else {
 
-        log_message_debug("Could not encode gnu/linux console properties. The foreground count is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode gnu/linux console properties. The foreground count is null.");
     }
 }
 
@@ -453,7 +453,7 @@ void encode_gnu_linux_console_rectangle_border(void* p0, void* p1,
 
                             wchar_t* hc = (wchar_t*) p0;
 
-                            log_message_debug("Debug: Encode gnu/linux console rectangle border.");
+                            log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Encode gnu/linux console rectangle border.");
 
                             // The comparison result.
                             int r = *NUMBER_0_INTEGER;
@@ -505,32 +505,32 @@ void encode_gnu_linux_console_rectangle_border(void* p0, void* p1,
 
                         } else {
 
-                            log_message_debug("Could not encode gnu/linux console rectangle border. The horizontal character is null.");
+                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode gnu/linux console rectangle border. The horizontal character is null.");
                         }
 
                     } else {
 
-                        log_message_debug("Could not encode gnu/linux console rectangle border. The vertical character is null.");
+                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode gnu/linux console rectangle border. The vertical character is null.");
                     }
 
                 } else {
 
-                    log_message_debug("Could not encode gnu/linux console rectangle border. The left top character is null.");
+                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode gnu/linux console rectangle border. The left top character is null.");
                 }
 
             } else {
 
-                log_message_debug("Could not encode gnu/linux console rectangle border. The right top character is null.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode gnu/linux console rectangle border. The right top character is null.");
             }
 
         } else {
 
-            log_message_debug("Could not encode gnu/linux console rectangle border. The left bottom character is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode gnu/linux console rectangle border. The left bottom character is null.");
         }
 
     } else {
 
-        log_message_debug("Could not encode gnu/linux console rectangle border. The right bottom character is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode gnu/linux console rectangle border. The right bottom character is null.");
     }
 }
 
@@ -590,7 +590,7 @@ void encode_gnu_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, 
 
                             int* cc = (int*) p4;
 
-                            log_message_debug("Debug: Encode gnu/linux console rectangle.");
+                            log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Encode gnu/linux console rectangle.");
 
                             // The horizontal character.
                             wchar_t hc = *SPACE_WIDE_CHARACTER;
@@ -669,7 +669,7 @@ void encode_gnu_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, 
 
                                             } else {
 
-                                                log_message_debug("Could not encode gnu/linux console rectangle. The character count is null.");
+                                                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode gnu/linux console rectangle. The character count is null.");
                                             }
 
                                         } else {
@@ -748,7 +748,7 @@ void encode_gnu_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, 
 
                                                     } else {
 
-                                                        log_message_debug("Could not encode gnu/linux console rectangle. The character count is null.");
+                                                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode gnu/linux console rectangle. The character count is null.");
                                                     }
 
                                                     // Encode character using escape codes.
@@ -781,32 +781,32 @@ void encode_gnu_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, 
 
                         } else {
 
-                            log_message_debug("Could not encode user interface rectangle. The character count is null.");
+                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode user interface rectangle. The character count is null.");
                         }
 
                     } else {
 
-                        log_message_debug("Could not encode user interface rectangle. The character count is null.");
+                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode user interface rectangle. The character count is null.");
                     }
 
                 } else {
 
-                    log_message_debug("Could not encode user interface rectangle. The character count is null.");
+                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode user interface rectangle. The character count is null.");
                 }
 
             } else {
 
-                log_message_debug("Could not encode user interface rectangle. The character count is null.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode user interface rectangle. The character count is null.");
             }
 
         } else {
 
-            log_message_debug("Could not encode user interface rectangle. The character count is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode user interface rectangle. The character count is null.");
         }
 
     } else {
 
-        log_message_debug("Could not encode user interface rectangle. The character count is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode user interface rectangle. The character count is null.");
     }
 }
 
@@ -829,7 +829,7 @@ void encode_gnu_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, 
 void encode_gnu_linux_console_rectangle_coordinates_layout(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
     void* p6, void* p7, void* p8, void* p9, void* p10, void* p11) {
 
-    log_message_debug("Debug: Encode gnu/linux console rectangle coordinates layout.");
+    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Encode gnu/linux console rectangle coordinates layout.");
 
     int* cpx = (int*) p0;
     int* cpy = (int*) p1;
@@ -865,7 +865,7 @@ void encode_gnu_linux_console_rectangle_coordinates_layout(void* p0, void* p1, v
 void encode_gnu_linux_console_rectangle_compass_layout(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
     void* p6, void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13) {
 
-    log_message_debug("Debug: Encode gnu/linux console rectangle compass layout.");
+    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Encode gnu/linux console rectangle compass layout.");
 
     int* cpx = (int*) p0;
     int* cpy = (int*) p1;
@@ -1009,7 +1009,7 @@ void encode_gnu_linux_console_rectangle_layout(void* p0, void* p1, void* p2, voi
     void* p12, void* p13, void* p14, void* p15, void* p16, void* p17,
     void* p18, void* p19, void* p20, void* p21) {
 
-    log_message_debug("Debug: Encode gnu/linux console rectangle layout.");
+    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Encode gnu/linux console rectangle layout.");
 
     // The comparison result.
     int r = *NUMBER_0_INTEGER;
@@ -1077,7 +1077,7 @@ void encode_gnu_linux_console_coordinates(void* p0, void* p1, void* p2, void* p3
     void* p14, void* p15, void* p16, void* p17, void* p18, void* p19, void* p20, void* p21,
     void* p22, void* p23, void* p24, void* p25, void* p26, void* p27) {
 
-    log_message_debug("Debug: Encode gnu/linux console coordinates.");
+    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Encode gnu/linux console coordinates.");
 
     // The source part position x, y, z.
     int* px = (int*) *NULL_POINTER;
@@ -1228,7 +1228,7 @@ void encode_gnu_linux_console_shape(void* p0, void* p1, void* p2, void* p3, void
 
         int* sc = (int*) p4;
 
-        log_message_debug("Debug: Encode gnu/linux console shape.");
+        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Encode gnu/linux console shape.");
 
         // The character.
         void* c = *NULL_POINTER;
@@ -1386,7 +1386,7 @@ void encode_gnu_linux_console_shape(void* p0, void* p1, void* p2, void* p3, void
 
     } else {
 
-        log_message_debug("Could not encode gnu/linux console shape. The character count is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode gnu/linux console shape. The character count is null.");
     }
 }
 
@@ -1424,7 +1424,7 @@ void decode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) 
 void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
     void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14) {
 
-    log_message_debug("Information: Encode gnu/linux console.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Encode gnu/linux console.");
 
     // The source part name, abstraction, model, details.
     void** n = NULL_POINTER;
@@ -2065,13 +2065,13 @@ void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, 
 
             } else {
 
-                log_message_debug("Could not encode compound model into gnu/linux console control sequences. The source count parameter is null.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode compound model into gnu/linux console control sequences. The source count parameter is null.");
             }
         }
 
     } else {
 
-        log_message_debug("Could not encode compound model into gnu/linux console control sequences. The hierarchical compound element name contains a meta element, while only part elements are permitted.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode compound model into gnu/linux console control sequences. The hierarchical compound element name contains a meta element, while only part elements are permitted.");
     }
 }
 

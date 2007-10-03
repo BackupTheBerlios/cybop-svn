@@ -7,23 +7,10 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.19 $ $Date: 2007-10-02 21:16:36 $ $Author: christian $
+# @version $Revision: 1.20 $ $Date: 2007-10-03 23:40:05 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-ChangeLog:
-2007-09-20  Christian Heller  <christian.heller@tuxtax.de>
-
-TODO:
-        * Rename "log_message_debug" function to "log_terminated_message" and require
-            the log level as additional parameter
-        * Add correct LOG_LEVEL constant to all log messages of all source code files,
-            so that the correct prefix (information, warning, error, debug) appears;
-            delete "Information: " etc. which were sometimes written directly into the log message
-        * Eliminate "malloc" function from "logger.c", since the logger is also called from threads
-            and memory allocation would result in an error like:
-                *** glibc detected *** malloc(): memory corruption (fast): 0x080e0470 ***
-                Aborted
         * Use an OR || and compare for numeric character reference and character entity reference, when parsing http requests
         * Distinguish cybol- from memory abstractions
         * Add more abstractions for date and time (see Wikipedia and ISO/EN/DIN standards)

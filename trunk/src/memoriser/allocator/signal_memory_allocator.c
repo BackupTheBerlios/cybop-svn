@@ -23,7 +23,7 @@
  * This file contains the functionality to:
  * - create a signal memory in memory
  *
- * @version $Revision: 1.15 $ $Date: 2007-09-20 08:00:19 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -91,7 +91,7 @@ void allocate_signal_memory(void* p0, void* p1) {
 
     } else {
 
-        log_message_debug("Could not allocate signal memory. The signal memory parameter is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not allocate signal memory. The signal memory parameter is null.");
     }
 }
 
@@ -188,7 +188,7 @@ void deallocate_signal_memory(void* p0, void* p1) {
 
     } else {
 
-        log_message_debug("Could not deallocate signal memory. The signal memory parameter is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not deallocate signal memory. The signal memory parameter is null.");
     }
 }
 

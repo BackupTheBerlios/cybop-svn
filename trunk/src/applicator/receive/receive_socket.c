@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.41 $ $Date: 2007-10-02 21:16:36 $ $Author: christian $
+ * @version $Revision: 1.42 $ $Date: 2007-10-03 23:40:05 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -224,7 +224,7 @@ void receive_socket_signal(void* p0, void* p1, void* p2, void* p3, void* p4, voi
 
         int* irq = (int*) p7;
 
-        log_message_debug("Debug: Receive socket signal.");
+        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Receive socket signal.");
 
         fprintf(stderr, "TEST: receive socket signal command name: %s \n", (char*) p16);
         fprintf(stderr, "TEST: receive socket signal command name count: %i \n", *((int*) p17));
@@ -301,7 +301,7 @@ void receive_socket_signal(void* p0, void* p1, void* p2, void* p3, void* p4, voi
 
     } else {
 
-        log_message_debug("Error: Could not receive socket signal. The interrupt request flag is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not receive socket signal. The interrupt request flag is null.");
     }
 }
 
@@ -331,7 +331,7 @@ void receive_socket_stream_message(void* p0, void* p1, void* p2, void* p3) {
 
                     void** b = (void**) p0;
 
-                    log_message_debug("Receive stream socket message.");
+                    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Receive stream socket message.");
 
                     // Initialise error number.
                     // It is a global variable/ function and other operations
@@ -363,38 +363,38 @@ void receive_socket_stream_message(void* p0, void* p1, void* p2, void* p3) {
 
                     if (*bc > *NUMBER_0_INTEGER) {
 
-                        log_message_debug("Information: Successfully received stream socket message.");
+                        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Successfully received stream socket message.");
 
                     } else if (*bc = *NUMBER_0_INTEGER) {
 
-                        log_message_debug("Warning: Could not receive stream socket message. No data could be received.");
+                        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) "Could not receive stream socket message. No data could be received.");
 
                     } else {
 
                         if (errno == EBADF) {
 
-                            log_message_debug("Error: Could not receive stream socket message. The socket argument is not a valid file descriptor.");
+                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not receive stream socket message. The socket argument is not a valid file descriptor.");
 
                         } else if (errno == ENOTSOCK) {
 
-                            log_message_debug("Error: Could not receive stream socket message. The descriptor socket is not a socket.");
+                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not receive stream socket message. The descriptor socket is not a socket.");
 
                         } else if (errno == EWOULDBLOCK) {
 
-                            log_message_debug("Error: Could not receive stream socket message. The read operation would block even though nonblocking mode has been set on the socket.");
+                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not receive stream socket message. The read operation would block even though nonblocking mode has been set on the socket.");
 
                         } else if (errno == EINTR) {
 
-                            log_message_debug("Error: Could not receive stream socket message. The operation was interrupted by a signal before any data was read.");
+                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not receive stream socket message. The operation was interrupted by a signal before any data was read.");
 
                         } else if (errno == ENOTCONN) {
 
-                            log_message_debug("Error: Could not receive stream socket message. The socket was never connected.");
+                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not receive stream socket message. The socket was never connected.");
 
                         } else {
 
                             // CAUTION! Do NOT log the following error:
-                            // log_message_debug("Error: Could not receive stream socket message. An unknown error occured while receiving data.");
+                            // log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not receive stream socket message. An unknown error occured while receiving data.");
                             //
                             // The reason is that the socket is non-blocking,
                             // so that the "accept" procedure returns always,
@@ -407,22 +407,22 @@ void receive_socket_stream_message(void* p0, void* p1, void* p2, void* p3) {
 
                 } else {
 
-                    log_message_debug("Error: Could not receive stream socket message. The buffer is null.");
+                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not receive stream socket message. The buffer is null.");
                 }
 
             } else {
 
-                log_message_debug("Error: Could not receive stream socket message. The buffer count is null.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not receive stream socket message. The buffer count is null.");
             }
 
         } else {
 
-            log_message_debug("Error: Could not receive stream socket message. The buffer size is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not receive stream socket message. The buffer size is null.");
         }
 
     } else {
 
-        log_message_debug("Error: Could not receive stream socket message. The partner-connected socket of this system is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not receive stream socket message. The partner-connected socket of this system is null.");
     }
 }
 
@@ -448,7 +448,7 @@ void receive_socket_stream(void* p0, void* p1, void* p2, void* p3, void* p4, voi
 
             int* ps = (int*) p3;
 
-            log_message_debug("Receive via stream socket.");
+            log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Receive via stream socket.");
 
             // Initialise error number.
             // It is a global variable/ function and other operations
@@ -492,20 +492,20 @@ void receive_socket_stream(void* p0, void* p1, void* p2, void* p3, void* p4, voi
 
                 if (errno == EBADF) {
 
-                    log_message_debug("Error: Could not receive via stream socket. The socket argument is not a valid file descriptor.");
+                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not receive via stream socket. The socket argument is not a valid file descriptor.");
 
                 } else if (errno == ENOTSOCK) {
 
-                    log_message_debug("Error: Could not receive via stream socket. The descriptor socket argument is not a socket.");
+                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not receive via stream socket. The descriptor socket argument is not a socket.");
 
                 } else if (errno == EOPNOTSUPP) {
 
-                    log_message_debug("Error: Could not receive via stream socket. The descriptor socket does not support this operation.");
+                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not receive via stream socket. The descriptor socket does not support this operation.");
 
                 } else if (errno == EWOULDBLOCK) {
 
                     // CAUTION! Do NOT log the following error:
-                    // log_message_debug("Error: Could not receive via stream socket. The socket has nonblocking mode set, and there are no pending connections immediately available.");
+                    // log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not receive via stream socket. The socket has nonblocking mode set, and there are no pending connections immediately available.");
                     //
                     // The reason is that the socket is non-blocking,
                     // so that the "accept" procedure returns always,
@@ -514,7 +514,7 @@ void receive_socket_stream(void* p0, void* p1, void* p2, void* p3, void* p4, voi
 
                 } else {
 
-                    log_message_debug("Error: Could not receive via stream socket. An unknown error occured while accepting a socket connection.");
+                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not receive via stream socket. An unknown error occured while accepting a socket connection.");
                 }
             }
 
@@ -523,12 +523,12 @@ void receive_socket_stream(void* p0, void* p1, void* p2, void* p3, void* p4, voi
 
         } else {
 
-            log_message_debug("Error: Could not receive via stream socket. The communication partner-connected socket of this system is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not receive via stream socket. The communication partner-connected socket of this system is null.");
         }
 
     } else {
 
-        log_message_debug("Error: Could not receive via stream socket. The original socket of this system is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not receive via stream socket. The original socket of this system is null.");
     }
 }
 
@@ -561,7 +561,7 @@ void receive_socket_datagram(void* p0, void* p1, void* p2, void* p3, void* p4, v
 
                     void** b = (void**) p0;
 
-                    log_message_debug("Receive via datagram socket.");
+                    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Receive via datagram socket.");
 
                     // Initialise error number.
                     // It is a global variable/ function and other operations
@@ -585,7 +585,7 @@ void receive_socket_datagram(void* p0, void* p1, void* p2, void* p3, void* p4, v
 
                     if (*bc > *NUMBER_0_INTEGER) {
 
-                        log_message_debug("Information: Successfully received via datagram socket.");
+                        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Successfully received via datagram socket.");
 
                         fprintf(stderr, "TEST b: %s \n", (char*) *b);
                         fprintf(stderr, "TEST bc: %i \n", *bc);
@@ -593,34 +593,34 @@ void receive_socket_datagram(void* p0, void* p1, void* p2, void* p3, void* p4, v
 
                     } else if (*bc = *NUMBER_0_INTEGER) {
 
-                        log_message_debug("Warning: Could not receive via datagram socket. No data could be received.");
+                        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) "Could not receive via datagram socket. No data could be received.");
 
                     } else {
 
                         if (errno == EBADF) {
 
-                            log_message_debug("Error: Could not receive via datagram socket. The socket argument is not a valid file descriptor.");
+                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not receive via datagram socket. The socket argument is not a valid file descriptor.");
 
                         } else if (errno == ENOTSOCK) {
 
-                            log_message_debug("Error: Could not receive via datagram socket. The descriptor socket is not a socket.");
+                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not receive via datagram socket. The descriptor socket is not a socket.");
 
                         } else if (errno == EWOULDBLOCK) {
 
-                            log_message_debug("Error: Could not receive via datagram socket. The read operation would block even though nonblocking mode has been set on the socket.");
+                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not receive via datagram socket. The read operation would block even though nonblocking mode has been set on the socket.");
 
                         } else if (errno == EINTR) {
 
-                            log_message_debug("Error: Could not receive via datagram socket. The operation was interrupted by a signal before any data was read.");
+                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not receive via datagram socket. The operation was interrupted by a signal before any data was read.");
 
                         } else if (errno == ENOTCONN) {
 
-                            log_message_debug("Error: Could not receive via datagram socket. The socket was never connected.");
+                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not receive via datagram socket. The socket was never connected.");
 
                         } else {
 
                             // CAUTION! Do NOT log the following error:
-                            // log_message_debug("Error: Could not receive stream socket message. An unknown error occured while receiving data.");
+                            // log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not receive stream socket message. An unknown error occured while receiving data.");
                             //
                             // The reason is that the socket is non-blocking,
                             // so that the "accept" procedure returns always,
@@ -636,22 +636,22 @@ void receive_socket_datagram(void* p0, void* p1, void* p2, void* p3, void* p4, v
 
                 } else {
 
-                    log_message_debug("Error: Could not receive via datagram socket. The buffer is null.");
+                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not receive via datagram socket. The buffer is null.");
                 }
 
             } else {
 
-                log_message_debug("Error: Could not receive via datagram socket. The buffer count is null.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not receive via datagram socket. The buffer count is null.");
             }
 
         } else {
 
-            log_message_debug("Error: Could not receive via datagram socket. The buffer size is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not receive via datagram socket. The buffer size is null.");
         }
 
     } else {
 
-        log_message_debug("Error: Could not receive via datagram socket. The original socket of this system is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not receive via datagram socket. The original socket of this system is null.");
     }
 }
 
@@ -686,7 +686,7 @@ void receive_socket_raw(void* p0, void* p1, void* p2) {
  */
 void receive_socket_style(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11) {
 
-    log_message_debug("Receive socket message depending on communication style.");
+    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Receive socket message depending on communication style.");
 
     // The comparison result.
     int r = *NUMBER_0_INTEGER;
@@ -772,7 +772,7 @@ void receive_socket_message(void* p0, void* p1, void* p2, void* p3, void* p4, vo
 
                 void** b = (void**) p27;
 
-                log_message_debug("Receive socket message.");
+                log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Receive socket message.");
 
         fprintf(stderr, "TEST 0 language: %s \n", (char*) p16);
         fprintf(stderr, "TEST 0 language count: %i \n", *((int*) p17));
@@ -943,17 +943,17 @@ void receive_socket_message(void* p0, void* p1, void* p2, void* p3, void* p4, vo
 
             } else {
 
-                log_message_debug("Error: Could not receive socket message. The buffer is null.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not receive socket message. The buffer is null.");
             }
 
         } else {
 
-            log_message_debug("Error: Could not receive socket message. The buffer count is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not receive socket message. The buffer count is null.");
         }
 
     } else {
 
-        log_message_debug("Error: Could not receive socket message. The buffer size is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not receive socket message. The buffer size is null.");
     }
 }
 
@@ -969,7 +969,7 @@ void receive_socket_thread(void* p0, void* p1) {
 
         int* base = (int*) p1;
 
-        log_message_debug("Receive socket messages in an own thread.");
+        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Receive socket messages in an own thread.");
 
         // The internal memory index.
         int i = *NUMBER_MINUS_1_INTEGER;
@@ -1132,14 +1132,14 @@ void receive_socket_thread(void* p0, void* p1) {
             // CAUTION! This is ONLY necessary if using a non-blocking socket!
             // sleep(1.0);
 
-            //?? TESTING only; delete later!
-            log_message_debug("TEST: Break loop now ...");
+            //?? TESTING only; delete BREAK command and this log message later!
+            log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "TEST: Break loop now ...");
             break;
         }
 
     } else {
 
-        log_message_debug("Error: Could not receive socket thread. The base internal is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not receive socket thread. The base internal is null.");
     }
 
     // An implicit call to pthread_exit() is made when this thread
@@ -1163,7 +1163,7 @@ void receive_socket_thread(void* p0, void* p1) {
  */
 void receive_socket_www(void* p0) {
 
-    log_message_debug("Receive www messages via socket.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Receive www messages via socket.");
 
     receive_socket_thread(p0, (void*) WWW_BASE_INTERNAL);
 }
@@ -1175,7 +1175,7 @@ void receive_socket_www(void* p0) {
  */
 void receive_socket_cyboi(void* p0) {
 
-    log_message_debug("Receive cyboi messages via socket.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Receive cyboi messages via socket.");
 
     receive_socket_thread(p0, (void*) CYBOI_BASE_INTERNAL);
 }
@@ -1211,7 +1211,7 @@ void receive_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, 
 
             int* b = (int*) p1;
 
-            log_message_debug("Receive socket.");
+            log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Receive socket.");
 
             // The internal memory index.
             int i = *NUMBER_MINUS_1_INTEGER;
@@ -1297,7 +1297,7 @@ void receive_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, 
                 // - handed over to the thread procedure HERE
                 // - deallocated at service shutdown
 
-                log_message_debug("Create socket receive thread.");
+                log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Create socket receive thread.");
 
                 // Create thread.
                 // The third parameter is the procedure to be called.
@@ -1306,12 +1306,12 @@ void receive_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, 
 
         } else {
 
-            log_message_debug("Could not receive socket. The base internal is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not receive socket. The base internal is null.");
         }
 
     } else {
 
-        log_message_debug("Could not receive socket. The service thread is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not receive socket. The service thread is null.");
     }
 }
 

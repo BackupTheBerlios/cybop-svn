@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.19 $ $Date: 2007-08-17 04:06:51 $ $Author: christian $
+ * @version $Revision: 1.20 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -71,7 +71,7 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
 
         int* sc = (int*) p4;
 
-        log_message_debug("Encode x window system.");
+        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Encode x window system.");
 
         // The display, which is a subsumption of
         // xserver, screens, hardware (input devices etc.).
@@ -354,7 +354,7 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
             if (r == *NUMBER_0_INTEGER) {
 
                 // The source part is no root window.
-                log_message_debug("Debug: This is not a root window.");
+                log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "This is not a root window.");
 
                 // Calculate coordinates according to given layout.
 /*??
@@ -514,7 +514,7 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
             } else {
 
                 // The source part is a root window.
-                log_message_debug("Debug: This is a root window.");
+                log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "This is a root window.");
 
                 // Move window to new position coordinates for part.
                 XMoveWindow(*di, **w, *pmx, *pmy);
@@ -578,7 +578,7 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
             if (r != *NUMBER_0_INTEGER) {
 
                 // The part model is a compound.
-                log_message_debug("Debug: The part model is a compound.");
+                log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "The part model is a compound.");
 
                 // Recursively call this procedure for compound part model.
                 encode_x_window_system(p0, p1, p2, *m, *mc, *d, *dc, p7, p8);
@@ -666,7 +666,7 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
 
     } else {
 
-        log_message_debug("Could not encode x window system. The source count is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode x window system. The source count is null.");
     }
 }
 

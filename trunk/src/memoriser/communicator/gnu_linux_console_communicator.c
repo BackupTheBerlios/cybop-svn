@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2007-08-17 04:06:51 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -52,7 +52,7 @@
  */
 void read_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    log_message_debug("Information: Read from gnu/linux console.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Read from gnu/linux console.");
 
 /*??
     char r = NULL_CONTROL_CHARACTER;
@@ -103,7 +103,7 @@ void write_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             FILE** d = (FILE**) p0;
 
-            log_message_debug("Information: Write to gnu/linux console.");
+            log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Write to gnu/linux console.");
 
             // Possible locales are: LANG, LC_CTYPE, LC_ALL.
             // CAUTION! This setting is necessary for UTF-8 Unicode characters to work.
@@ -142,7 +142,7 @@ void write_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             } else {
 
-                log_message_debug("Could not write to gnu/linux console. The destination terminal file is null.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not write to gnu/linux console. The destination terminal file is null.");
             }
 
             // Destroy terminated control sequences.
@@ -150,12 +150,12 @@ void write_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         } else {
 
-            log_message_debug("Could not write to gnu/linux console. The destination terminal file parameter is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not write to gnu/linux console. The destination terminal file parameter is null.");
         }
 
     } else {
 
-        log_message_debug("Could not write to gnu/linux console. The source terminal control sequences count parameter is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not write to gnu/linux console. The source terminal control sequences count parameter is null.");
     }
 }
 

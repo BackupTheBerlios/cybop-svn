@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.28 $ $Date: 2007-08-17 04:06:51 $ $Author: christian $
+ * @version $Revision: 1.29 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -62,7 +62,7 @@ void read_file_stream(void* p0, void* p1, void* p2, void* p3) {
 
                     void** d = (void**) p0;
 
-                    log_message_debug("Information: Read file stream.");
+                    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Read file stream.");
 
                     // Read first character.
                     char c = fgetc(p3);
@@ -94,7 +94,7 @@ void read_file_stream(void* p0, void* p1, void* p2, void* p3) {
 
                         } else {
 
-                            log_message_debug("Could not read file stream. The index exceeds the array size.");
+                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not read file stream. The index exceeds the array size.");
                         }
 
                         // Read next character.
@@ -103,22 +103,22 @@ void read_file_stream(void* p0, void* p1, void* p2, void* p3) {
 
                 } else {
 
-                    log_message_debug("Could not read file stream. The destination is null.");
+                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not read file stream. The destination is null.");
                 }
 
             } else {
 
-                log_message_debug("Could not read file stream. The destination count is null.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not read file stream. The destination count is null.");
             }
 
         } else {
 
-            log_message_debug("Could not read file stream. The destination size is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not read file stream. The destination size is null.");
         }
 
     } else {
 
-        log_message_debug("Could not read file stream. The file is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not read file stream. The file is null.");
     }
 }
 
@@ -137,7 +137,7 @@ void read_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         int* sc = (int*) p4;
 
-        log_message_debug("Information: Read file.");
+        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Read file.");
 
         // The comparison result.
         int r = *NUMBER_0_INTEGER;
@@ -189,7 +189,7 @@ void read_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             } else {
 
-                log_message_debug("Could not read file. The file is null.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not read file. The file is null.");
             }
 
             // Deallocate terminated file name.
@@ -198,7 +198,7 @@ void read_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     } else {
 
-        log_message_debug("Could not read file. The source count is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not read file. The source count is null.");
     }
 }
 
@@ -217,7 +217,7 @@ void write_file_stream(void* p0, void* p1, void* p2) {
 
         if (p0 != *NULL_POINTER) {
 
-            log_message_debug("Information: Write file stream.");
+            log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Write file stream.");
 
             // The loop variable.
             int j = *NUMBER_0_INTEGER;
@@ -252,12 +252,12 @@ void write_file_stream(void* p0, void* p1, void* p2) {
 
         } else {
 
-            log_message_debug("Could not write file stream. The file is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not write file stream. The file is null.");
         }
 
     } else {
 
-        log_message_debug("Could not write file stream. The source count is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not write file stream. The source count is null.");
     }
 }
 
@@ -280,7 +280,7 @@ void write_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             void** d = (void**) p0;
 
-            log_message_debug("Information: Write file.");
+            log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Write file.");
 
             // The comparison result.
             int r = *NUMBER_0_INTEGER;
@@ -378,7 +378,7 @@ void write_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 } else {
 
-                    log_message_debug("Could not write file. The file is null.");
+                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not write file. The file is null.");
                 }
 
                 // Deallocate terminated file name.
@@ -387,12 +387,12 @@ void write_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         } else {
 
-            log_message_debug("Could not write file. The destination is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not write file. The destination is null.");
         }
 
     } else {
 
-        log_message_debug("Could not write file. The destination count is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not write file. The destination count is null.");
     }
 }
 

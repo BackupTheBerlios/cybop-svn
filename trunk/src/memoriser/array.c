@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.17 $ $Date: 2007-08-27 07:07:37 $ $Author: christian $
+ * @version $Revision: 1.18 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -57,7 +57,7 @@ void allocate_array(void* p0, void* p1, void* p2) {
 
         int* t = (int*) p2;
 
-        log_message_debug("Allocate array.");
+        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Allocate array.");
 
         if (*t == *POINTER_ARRAY) {
 
@@ -108,7 +108,7 @@ void deallocate_array(void* p0, void* p1, void* p2) {
 
         int* t = (int*) p2;
 
-        log_message_debug("Deallocate array.");
+        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Deallocate array.");
 
         if (*t == *POINTER_ARRAY) {
 
@@ -160,7 +160,7 @@ void reallocate_array(void* p0, void* p1, void* p2, void* p3) {
 
         int* t = (int*) p3;
 
-        log_message_debug("Reallocate array.");
+        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Reallocate array.");
 
         if (*t == *POINTER_ARRAY) {
 
@@ -211,7 +211,7 @@ void compare_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         int* t = (int*) p4;
 
-        log_message_debug("Compare array elements.");
+        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Compare array elements.");
 
         if (*t == *POINTER_ARRAY) {
 
@@ -267,7 +267,7 @@ void compare_arrays(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) 
 
             int* fc = (int*) p1;
 
-            log_message_debug("Compare arrays.");
+            log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Compare arrays.");
 
             if (*fc == *sc) {
 
@@ -299,7 +299,7 @@ void get_array_elements(void* p0, void* p1, void* p2, void* p3) {
 
         int* t = (int*) p3;
 
-        log_message_debug("Get array elements.");
+        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Get array elements.");
 
         if (*t == *POINTER_ARRAY) {
 
@@ -347,7 +347,7 @@ void set_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         int* t = (int*) p4;
 
-        log_message_debug("Set array elements.");
+        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Set array elements.");
 
         if (*t == *POINTER_ARRAY) {
 
@@ -395,7 +395,7 @@ void remove_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         int* t = (int*) p4;
 
-        log_message_debug("Remove array elements.");
+        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Remove array elements.");
 
         if (*t == *POINTER_ARRAY) {
 
@@ -448,7 +448,7 @@ void get_array_elements_index(void* p0, void* p1, void* p2, void* p3, void* p4, 
 
         int* t = (int*) p5;
 
-        log_message_debug("Get array elements index.");
+        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Get array elements index.");
 
         if (*t == *POINTER_ARRAY) {
 

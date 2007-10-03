@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.10 $ $Date: 2007-08-17 03:15:31 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2007-10-03 23:40:05 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -51,7 +51,7 @@
  */
 void interrupt_socket() {
 
-    log_message_debug("Interrupt socket service.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Interrupt socket service.");
 
 /*??
     if (*WWW_SERVICE_THREAD != *NUMBER_MINUS_1_INTEGER) {
@@ -83,7 +83,7 @@ void interrupt_socket() {
 
     } else {
 
-        log_message_debug("Warning: Could not interrupt socket. The www service thread is invalid.");
+        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) "Could not interrupt socket. The www service thread is invalid.");
     }
 */
 
@@ -126,7 +126,7 @@ void interrupt_socket() {
 
     } else {
 
-        log_message_debug("Warning: Could not interrupt socket. The cyboi service thread is invalid.");
+        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) "Could not interrupt socket. The cyboi service thread is invalid.");
     }
 }
 

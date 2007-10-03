@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2007-06-22 07:07:13 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2007-10-03 23:40:05 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -67,7 +67,7 @@ void add_integer_vector(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
 
                         void** s = (void**) p0;
 
-                        log_message_debug("Add integer vectors.");
+                        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Add integer vectors.");
 
                         // CAUTION! STORE ALL INPUT operands in temporary variables!
                         // In the possible case that an input operand pointer
@@ -148,27 +148,27 @@ void add_integer_vector(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
 
                     } else {
 
-                        log_message_debug("Could not add integer vectors. The sum is null.");
+                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not add integer vectors. The sum is null.");
                     }
 
                 } else {
 
-                    log_message_debug("Could not add integer vectors. The sum count is null.");
+                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not add integer vectors. The sum count is null.");
                 }
 
             } else {
 
-                log_message_debug("Could not add integer vectors. The sum size is null.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not add integer vectors. The sum size is null.");
             }
 
         } else {
 
-            log_message_debug("Could not add integer vectors. The summand 1 count is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not add integer vectors. The summand 1 count is null.");
         }
 
     } else {
 
-        log_message_debug("Could not add integer vectors. The summand 2 count is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not add integer vectors. The summand 2 count is null.");
     }
 }
 

@@ -22,7 +22,7 @@
  *
  * This file destroys a transient model to a persistent model.
  *
- * @version $Revision: 1.26 $ $Date: 2007-09-15 00:17:01 $ $Author: christian $
+ * @version $Revision: 1.27 $ $Date: 2007-10-03 23:40:05 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -85,7 +85,7 @@ void check_compound_model(void* p0, void* p1, void* p2) {
 void destroy_primitive_model(void** model, void* model_count, void* model_size,
     void* model_abstr, void* model_abstr_count) {
 
-    log_message_debug("Destroy primitive model.");
+    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Destroy primitive model.");
 
     // Destroy model of type given as abstraction.
     deallocate(model, model_size, model_abstr, model_abstr_count);
@@ -198,7 +198,7 @@ void destroy_model(void** model, void* model_count, void* model_size, void* mode
  */
 void destroy(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    log_message_debug("Destroy knowledge model.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Destroy knowledge model.");
 
     // The knowledge model name name, abstraction, model, details.
     void** nn = NULL_POINTER;

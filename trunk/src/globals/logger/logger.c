@@ -27,7 +27,7 @@
  * Otherwise, an ENDLESS LOOP will be created, because cyboi's
  * array procedures call the logger in turn.
  *
- * @version $Revision: 1.21 $ $Date: 2007-10-02 21:16:36 $ $Author: christian $
+ * @version $Revision: 1.22 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -49,187 +49,83 @@
 #include "../../globals/variables/log_variables.c"
 
 /**
- * Adds the log details.
+ * Gets the log level name.
  *
- * @param p0 the log entry
- * @param p1 the log entry index
- * @param p2 the log details
- * @param p3 the log details count
+ * @param p0 the log level name
+ * @param p1 the log level name count
+ * @param p2 the log level
  */
-void add_log_details(void* p0, void* p1, void* p2, void* p3) {
+void log_get_level_name(void* p0, void* p1, void* p2) {
 
-    // CAUTION! DO NOT use array functionality here!
-    // The arrays use the logger which would cause circular references.
-    // Instead, use malloc and similar functions directly!
+    if (p2 != *NULL_POINTER) {
 
-    if (p3 != *NULL_POINTER) {
+        int* l = (int*) p2;
 
-        int* dc = (int*) p3;
+        if (p1 != *NULL_POINTER) {
 
-        if (p2 != *NULL_POINTER) {
+            int* lnc = (int*) p1;
 
-            if (p1 != *NULL_POINTER) {
+            if (p0 != *NULL_POINTER) {
 
-                int* ei = (int*) p1;
+                void** ln = (void**) p0;
 
-                if (p0 != *NULL_POINTER) {
+                if (*l == *DEBUG_LOG_LEVEL) {
 
-                    void** e = (void**) p0;
+                    *ln = DEBUG_LOG_LEVEL_NAME;
+                    *lnc = *DEBUG_LOG_LEVEL_NAME_COUNT;
 
-                    // The loop index.
-                    int j = *NUMBER_0_INTEGER;
-                    // The destination character.
-                    char* dest = (char*) *NULL_POINTER;
-                    // The source character.
-                    char* src = (char*) *NULL_POINTER;
+                } else if (*l == *INFORMATION_LOG_LEVEL) {
 
-                    while (*NUMBER_1_INTEGER) {
+                    *ln = INFORMATION_LOG_LEVEL_NAME;
+                    *lnc = *INFORMATION_LOG_LEVEL_NAME_COUNT;
 
-                        if (j >= *dc) {
+                } else if (*l == *WARNING_LOG_LEVEL) {
 
-                            break;
-                        }
+                    *ln = WARNING_LOG_LEVEL_NAME;
+                    *lnc = *WARNING_LOG_LEVEL_NAME_COUNT;
 
-                        // Determine log entry pointer as destination.
-                        dest = (char*) (*e + *ei + j);
-                        // Determine log details pointer as source.
-                        src = (char*) (p2 + j);
+                } else if (*l == *ERROR_LOG_LEVEL) {
 
-                        // Copy log details elements to log entry.
-                        *dest = *src;
-
-                        j++;
-                    }
-
-                } else {
-
-                    // CAUTION! DO NOT use logging functionality here!
-                    // The logger cannot log itself.
-                    fputs("Error: Could not add log details. The log entry is null.\n", stdout);
+                    *ln = ERROR_LOG_LEVEL_NAME;
+                    *lnc = *ERROR_LOG_LEVEL_NAME_COUNT;
                 }
 
             } else {
 
                 // CAUTION! DO NOT use logging functionality here!
                 // The logger cannot log itself.
-                fputs("Error: Could not add log details. The log entry index is null.\n", stdout);
+                fputs("Error: Could not get log level name. The log level name is null.\n", stdout);
             }
 
         } else {
 
             // CAUTION! DO NOT use logging functionality here!
             // The logger cannot log itself.
-            fputs("Error: Could not add log details. The log details is null.\n", stdout);
+            fputs("Error: Could not get log level name. The log level name count is null.\n", stdout);
         }
 
     } else {
 
         // CAUTION! DO NOT use logging functionality here!
         // The logger cannot log itself.
-        fputs("Error: Could not add log details. The log details count is null.\n", stdout);
+        fputs("Error: Could not get log level name. The log level is null.\n", stdout);
     }
 }
 
 /**
- * Adds the log level name.
+ * Logs the given message.
  *
- * @param p0 the log level
- * @param p1 the log entry
- * @param p2 the log entry count
- * @param p3 the log entry index
- */
-void add_log_level_name(void* p0, void* p1, void* p2, void* p3) {
-
-    // CAUTION! DO NOT use array functionality here!
-    // The arrays use the logger which would cause circular references.
-    // Instead, use malloc and similar functions directly!
-
-    if (p3 != *NULL_POINTER) {
-
-        int* ei = (int*) p3;
-
-        if (p2 != *NULL_POINTER) {
-
-            int* ec = (int*) p2;
-
-            if (p1 != *NULL_POINTER) {
-
-                void** e = (void**) p1;
-
-                if (p0 != *NULL_POINTER) {
-
-                    int* l = (int*) p0;
-
-                    if (*l == *DEBUG_LOG_LEVEL) {
-
-                        *ec = *ec + *DEBUG_LOG_LEVEL_NAME_COUNT;
-                        *e = (void*) realloc(*e, *ec);
-                        add_log_details(p1, p3, (void*) DEBUG_LOG_LEVEL_NAME, (void*) DEBUG_LOG_LEVEL_NAME_COUNT);
-                        *ei = *ei + *DEBUG_LOG_LEVEL_NAME_COUNT;
-
-                    } else if (*l == *INFORMATION_LOG_LEVEL) {
-
-                        *ec = *ec + *INFORMATION_LOG_LEVEL_NAME_COUNT;
-                        *e = (void*) realloc(*e, *ec);
-                        add_log_details(p1, p3, (void*) INFORMATION_LOG_LEVEL_NAME, (void*) INFORMATION_LOG_LEVEL_NAME_COUNT);
-                        *ei = *ei + *INFORMATION_LOG_LEVEL_NAME_COUNT;
-
-                    } else if (*l == *WARNING_LOG_LEVEL) {
-
-                        *ec = *ec + *WARNING_LOG_LEVEL_NAME_COUNT;
-                        *e = (void*) realloc(*e, *ec);
-                        add_log_details(p1, p3, (void*) WARNING_LOG_LEVEL_NAME, (void*) WARNING_LOG_LEVEL_NAME_COUNT);
-                        *ei = *ei + *WARNING_LOG_LEVEL_NAME_COUNT;
-
-                    } else if (*l == *ERROR_LOG_LEVEL) {
-
-                        *ec = *ec + *ERROR_LOG_LEVEL_NAME_COUNT;
-                        *e = (void*) realloc(*e, *ec);
-                        add_log_details(p1, p3, (void*) ERROR_LOG_LEVEL_NAME, (void*) ERROR_LOG_LEVEL_NAME_COUNT);
-                        *ei = *ei + *ERROR_LOG_LEVEL_NAME_COUNT;
-                    }
-
-                } else {
-
-                    // CAUTION! DO NOT use logging functionality here!
-                    // The logger cannot log itself.
-                    fputs("Error: Could not add log level name. The log level is null.\n", stdout);
-                }
-
-            } else {
-
-                // CAUTION! DO NOT use logging functionality here!
-                // The logger cannot log itself.
-                fputs("Error: Could not add log level name. The log entry is null.\n", stdout);
-            }
-
-        } else {
-
-            // CAUTION! DO NOT use logging functionality here!
-            // The logger cannot log itself.
-            fputs("Error: Could not add log level name. The log entry count is null.\n", stdout);
-        }
-
-    } else {
-
-        // CAUTION! DO NOT use logging functionality here!
-        // The logger cannot log itself.
-        fputs("Error: Could not add log level name. The log entry index is null.\n", stdout);
-    }
-}
-
-/**
- * Logs the message.
+ * CAUTION! This function cannot be called "log" as that name
+ * is already used somewhere, probably by the glibc library.
+ * If using it, the gcc compiler prints an error like the following:
+ *
+ * ../controller/../controller/manager/../../globals/logger/logger.c:122: error: conflicting types for 'log'
  *
  * @param p0 the log level
  * @param p1 the log message
  * @param p2 the log message count
  */
 void log_message(void* p0, void* p1, void* p2) {
-
-    // CAUTION! DO NOT use array functionality here!
-    // The arrays use the logger which would cause circular references.
-    // Instead, use malloc and similar functions directly!
 
     if (p2 != *NULL_POINTER) {
 
@@ -239,52 +135,45 @@ void log_message(void* p0, void* p1, void* p2) {
 
             int* l = (int*) p0;
 
+            //
+            // CAUTION! DO NOT use array functionality here!
+            // The arrays use the logger which would cause circular references.
+            //
+            // CAUTION! Do NOT use malloc to allocate memory either!
+            // The log functions are not only used by the main process,
+            // but also in threads. Threads, however, are not allowed to
+            // allocate any memory, as this would result in an error like:
+            //
+            // *** glibc detected *** malloc(): memory corruption (fast): 0x080e0470 ***
+            // Aborted
+            //
+            // Therefore, the "write" function is called multiple times below,
+            // to display the log level, separators, message and line feed.
+            //
+
             // Only log message if log level matches.
             if (*l <= LOG_LEVEL) {
 
-                // The log entry.
-                void* e = *NULL_POINTER;
-                // The log entry count.
-                int ec = *NUMBER_0_INTEGER;
-                // The log entry index for adding characters.
-                int ei = *NUMBER_0_INTEGER;
-
-                // Create log entry.
-                e = (void*) malloc(ec);
+                // The log level name.
+                void* ln = *NULL_POINTER;
+                int lnc = *NUMBER_0_INTEGER;
 
                 // Add name of the given log level to log entry.
-                add_log_level_name(p0, (void*) &e, (void*) &ec, (void*) &ei);
-
-                // Reallocate log entry at once, for all following entries
-                // (colon + space + message + line feed).
-                ec = ec + *NUMBER_1_INTEGER + *NUMBER_1_INTEGER + *mc + *NUMBER_1_INTEGER;
-                e = (void*) realloc(e, ec);
-
-                // Add colon to log entry.
-                add_log_details((void*) &e, (void*) &ei, (void*) COLON_CHARACTER, (void*) PRIMITIVE_COUNT);
-                ei = ei + *NUMBER_1_INTEGER;
-
-                // Add space to log entry.
-                add_log_details((void*) &e, (void*) &ei, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT);
-                ei = ei + *NUMBER_1_INTEGER;
-
-                // Add message to log entry.
-                add_log_details((void*) &e, (void*) &ei, p1, p2);
-                ei = ei + *mc;
-
-                // Add new line to log entry.
-                add_log_details((void*) &e, (void*) &ei, (void*) LINE_FEED_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT);
-                ei = ei + *NUMBER_1_INTEGER;
+                log_get_level_name((void*) &ln, (void*) &lnc, p0);
 
                 if (LOG_OUTPUT >= *NUMBER_0_INTEGER) {
 
-                    // Send log entry to output.
-                    write(LOG_OUTPUT, e, ec);
+                    // Send log level, separators, message and line feed to output.
+                    write(LOG_OUTPUT, ln, lnc);
+                    write(LOG_OUTPUT, (void*) COLON_CHARACTER, *PRIMITIVE_COUNT);
+                    write(LOG_OUTPUT, (void*) SPACE_CHARACTER, *PRIMITIVE_COUNT);
+                    write(LOG_OUTPUT, p1, *mc);
+                    write(LOG_OUTPUT, (void*) LINE_FEED_CONTROL_CHARACTER, *PRIMITIVE_COUNT);
 
                 } else {
 
                     // The log output value is smaller than zero.
-                    // Probably, it still has its default value of -1
+                    // Probably, it still has its default value of -1,
                     // as set in the file "globals/variables/log_variables.c".
 
                     // CAUTION! DO NOT use logging functionality here!
@@ -292,8 +181,12 @@ void log_message(void* p0, void* p1, void* p2) {
                     fputs("Error: Could not log message. The log output is undefined.\n", stdout);
                 }
 
-                // Destroy log entry.
-                free(e);
+            } else {
+
+                // CAUTION! Do NOT write an error message here!
+                // It is a wanted effect not to write a log message, nor an error,
+                // if the given log level is not within the log level tolerance
+                // that was set as global variable at cyboi system startup.
             }
 
         } else {
@@ -319,27 +212,10 @@ void log_message(void* p0, void* p1, void* p2) {
  */
 void log_terminated_message(void* p0, void* p1) {
 
-    // CAUTION! DO NOT use array functionality here!
-    // The arrays use the logger which would cause circular references.
-    // Instead, use malloc and similar functions directly!
-
     // The message count.
     int c = strlen(p1);
 
     log_message(p0, p1, (void*) &c);
-}
-
-//?? DELETE THIS FUNCTION LATER!
-void log_message_debug(void* p0) {
-
-    // CAUTION! DO NOT use array functionality here!
-    // The arrays use the logger which would cause circular references.
-    // Instead, use malloc and similar functions directly!
-
-    // The message count.
-    int c = strlen(p0);
-
-    log_message((void*) DEBUG_LOG_LEVEL, p0, (void*) &c);
 }
 
 /* LOGGER_SOURCE */

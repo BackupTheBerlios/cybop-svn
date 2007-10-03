@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2007-07-23 23:47:58 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -43,7 +43,7 @@
  */
 void set_double_vector_element(void* p0, void* p1, void* p2) {
 
-    log_message_debug("Set double vector element.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Set double vector element.");
 
     set_array_elements(p0, p1, p2, (void*) NUMBER_1_INTEGER, (void*) DOUBLE_ARRAY);
 }
@@ -57,7 +57,7 @@ void set_double_vector_element(void* p0, void* p1, void* p2) {
  */
 void remove_double_vector_element(void* p0, void* p1, void* p2) {
 
-    log_message_debug("Remove double vector element.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Remove double vector element.");
 
     remove_array_elements(p0, p1, p2, (void*) NUMBER_1_INTEGER, (void*) DOUBLE_ARRAY);
 }
@@ -71,7 +71,7 @@ void remove_double_vector_element(void* p0, void* p1, void* p2) {
  */
 void get_double_vector_element(void* p0, void* p1, void* p2) {
 
-    log_message_debug("Get double vector element.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Get double vector element.");
 
     get_array_elements(p0, p1, p2, (void*) DOUBLE_ARRAY);
 }

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2007-10-02 21:16:36 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -57,8 +57,8 @@
  */
 void initialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10) {
 
-    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "\n\n");
-    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Information: Initialise system with an initial signal.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "\n\n");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Initialise system with an initial signal.");
 
     // The startup model abstraction, model, details.
     //
@@ -112,7 +112,7 @@ void initialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
         p9, p10, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
 
     log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "\n\n");
-    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Debug: Add initial signal to signal memory.");
+    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Add initial signal to signal memory.");
 
     // The signal identification.
     void** id = NULL_POINTER;

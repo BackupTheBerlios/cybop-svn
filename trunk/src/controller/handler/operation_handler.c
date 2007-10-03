@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.35 $ $Date: 2007-09-20 08:00:19 $ $Author: christian $
+ * @version $Revision: 1.36 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -74,12 +74,12 @@
 void handle_operation(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
     void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14, void* p15) {
 
-    log_message_debug("\n\n");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "\n\n");
     log_message((void*) INFORMATION_LOG_LEVEL, (void*) HANDLE_OPERATION_MESSAGE, (void*) HANDLE_OPERATION_MESSAGE_COUNT);
 
 //??    fprintf(stderr, "TEST handle operation: %s\n", (char*) p10);
-    log_message_debug((char*) p10);
-    log_message_debug("\n");
+    log_terminated_message((void*) DEBUG_LOG_LEVEL, p10);
+    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "\n");
 
     // The comparison result.
     int r = *NUMBER_0_INTEGER;

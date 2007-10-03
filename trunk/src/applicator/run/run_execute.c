@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.13 $ $Date: 2007-08-17 04:06:51 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2007-10-03 23:40:05 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -44,7 +44,7 @@
  */
 void run_execute(void* p0) {
 
-    log_message_debug("Execute command/ program as process.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Execute command/ program as process.");
 
     // Initialise error number.
     // It is a global variable/ function and other operations
@@ -65,24 +65,24 @@ void run_execute(void* p0) {
 
     if (r == *NUMBER_MINUS_1_INTEGER) {
 
-        log_message_debug("Warning: Could not execute command/ program as process. A negative value was returned.");
+        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) "Could not execute command/ program as process. A negative value was returned.");
 
         if (errno == EINTR) {
 
-            log_message_debug("Error: Could not execute command/ program as process. The function was interrupted by delivery of a signal to the calling process.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not execute command/ program as process. The function was interrupted by delivery of a signal to the calling process.");
 
         } else if (errno == ECHILD) {
 
-            log_message_debug("Error: Could not execute command/ program as process. There are no child processes to wait for, or the specified pid is not a child of the calling process.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not execute command/ program as process. There are no child processes to wait for, or the specified pid is not a child of the calling process.");
 
         } else if (errno == EINVAL) {
 
-            log_message_debug("Error: Could not execute command/ program as process. An invalid value was provided for the options argument.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not execute command/ program as process. An invalid value was provided for the options argument.");
         }
 
     } else {
 
-        log_message_debug("Information: Successfully executed command/ program as process. The child process was left; the parent process continues.");
+        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Successfully executed command/ program as process. The child process was left; the parent process continues.");
     }
 
 /*??
@@ -334,7 +334,7 @@ void run_execute(void* p0) {
         // This is still the parent process.
         // A child process could not be created.
 
-        log_message_debug("Error: Could not execute command as process. The process fork failed.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not execute command as process. The process fork failed.");
 
     } else {
 
@@ -343,7 +343,7 @@ void run_execute(void* p0) {
         // The following code is only executed by the parent process.
         // A pid > 0 represents the child process's id.
 
-        log_message_debug("Information: Executed command as process. The process fork succeeded. Now waiting for the child process to exit.");
+        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Executed command as process. The process fork succeeded. Now waiting for the child process to exit.");
 
     fprintf(stdout, "TEST pid > 0 pid: %i\n", pid);
 
@@ -351,7 +351,7 @@ void run_execute(void* p0) {
         // In the GNU C library, pid_t corresponds to the int type.
         waitpid(pid, (int*) *NULL_POINTER, *NUMBER_0_INTEGER);
 
-        log_message_debug("Information: The child process exited. Continue executing parent process.");
+        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "The child process exited. Continue executing parent process.");
 
     fprintf(stdout, "TEST post-waitpid pid: %i\n", pid);
     }

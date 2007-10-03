@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2007-08-27 07:07:37 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -90,17 +90,17 @@ void decode_character_entity_reference(void* p0, void* p1, void* p2, void* p3, v
 
             } else {
 
-                log_message_debug("Could not decode character entity reference. The destination is null.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode character entity reference. The destination is null.");
             }
 
         } else {
 
-            log_message_debug("Could not decode character entity reference. The destination count is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode character entity reference. The destination count is null.");
         }
 
     } else {
 
-        log_message_debug("Could not decode character entity reference. The destination size is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode character entity reference. The destination size is null.");
     }
 }
 
@@ -172,17 +172,17 @@ void encode_character_entity_reference(void* p0, void* p1, void* p2, void* p3, v
 
             } else {
 
-                log_message_debug("Could not encode character entity reference. The destination is null.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode character entity reference. The destination is null.");
             }
 
         } else {
 
-            log_message_debug("Could not encode character entity reference. The destination count is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode character entity reference. The destination count is null.");
         }
 
     } else {
 
-        log_message_debug("Could not encode character entity reference. The destination size is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode character entity reference. The destination size is null.");
     }
 }
 

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.23 $ $Date: 2007-09-15 00:17:01 $ $Author: christian $
+ * @version $Revision: 1.24 $ $Date: 2007-10-03 23:40:05 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description This module shuts down a service.
  */
@@ -56,7 +56,7 @@
  */
 void shutdown_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
-    log_message_debug("Shutdown service.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Shutdown service.");
 
     // The service name, abstraction, model, details.
     void** sn = NULL_POINTER;

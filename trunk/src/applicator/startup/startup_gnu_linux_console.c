@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2007-08-17 03:15:31 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -51,7 +51,7 @@
  */
 void startup_gnu_linux_console(void* p0, void* p1, void* p2, void* p3) {
 
-    log_message_debug("Startup gnu/linux console.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Startup gnu/linux console.");
 
     // The gnu/linux console input- and output stream internal.
     FILE** ipi = (FILE**) NULL_POINTER;
@@ -123,11 +123,11 @@ void startup_gnu_linux_console(void* p0, void* p1, void* p2, void* p3) {
 
         if (l == *NUMBER_0_INTEGER) {
 
-            log_message_debug("Debug: This is a gnu/linux console.");
+            log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "This is a gnu/linux console.");
 
         } else {
 
-            log_message_debug("Debug: This is a standard serial terminal.");
+            log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "This is a standard serial terminal.");
         }
 
         // Set gnu/linux console internals.
@@ -141,7 +141,7 @@ void startup_gnu_linux_console(void* p0, void* p1, void* p2, void* p3) {
 
     } else {
 
-        log_message_debug("WARNING: Could not startup gnu/linux console. The gnu/linux console input or output or both are already running.");
+        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) "Could not startup gnu/linux console. The gnu/linux console input or output or both are already running.");
     }
 }
 

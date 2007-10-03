@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.10 $ $Date: 2007-05-26 21:19:58 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -42,7 +42,7 @@
  */
 void allocate_xml_node(void* p0, void* p1) {
 
-    log_message_debug("Allocate xml node.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Allocate xml node.");
 
     // Create xml node.
     allocate_array(p0, p1, (void*) POINTER_ARRAY);
@@ -72,7 +72,7 @@ void allocate_xml_node(void* p0, void* p1) {
  */
 void deallocate_xml_node(void* p0, void* p1) {
 
-    log_message_debug("Deallocate xml node.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Deallocate xml node.");
 
     // Initialise xml tag name, attributes, value.
     void* nav = *NULL_POINTER;

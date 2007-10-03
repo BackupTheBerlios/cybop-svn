@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2007-07-23 23:47:58 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -49,7 +49,7 @@
  */
 void allocate_date_time(void* p0, void* p1) {
 
-    log_message_debug("Allocate date time.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Allocate date time.");
 
     allocate_array(p0, p1, (void*) INTEGER_ARRAY);
 }
@@ -62,7 +62,7 @@ void allocate_date_time(void* p0, void* p1) {
  */
 void deallocate_date_time(void* p0, void* p1) {
 
-    log_message_debug("Deallocate date time.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Deallocate date time.");
 
     deallocate_array(p0, p1, (void*) INTEGER_ARRAY);
 }
