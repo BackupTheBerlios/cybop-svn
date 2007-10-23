@@ -2,7 +2,7 @@
 # $RCSfile: Makefile,v $
 #
 # Copyright (c) 2003. Michael Simon. All rights reserved.
-# Copyright (c) 2004-2007. Christian Heller. All rights reserved.
+# Copyright (c) 2004-2006. Christian Heller. All rights reserved.
 #
 # This software is published under the GPL GNU General Public License.
 # This program is free software; you can redistribute it and/or
@@ -22,7 +22,7 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.49 $ $Date: 2007-08-17 03:26:30 $ $Author: christian $
+# @version $Revision: 1.50 $ $Date: 2007-10-23 17:14:46 $ $Author: christian $
 # @author Michael Simon <michael.simon@gmx.net>
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
@@ -33,7 +33,6 @@
 # - libc6-dev
 # - libxml2
 # - xlibs-dev
-# - libgl1-mesa-dev
 #
 # CAUTION! TABS must NOT be replaced with SPACES!
 # Otherwise, the makefile will not work.
@@ -96,16 +95,12 @@ SRC = $(ROOT)/src
 #
 
 BINARY = cyboi
-# Normal compiler to generate a gnu/linux executable.
+# Normal compiler to generate a linux executable.
 COMPILER = gcc
 # Cross-compiler to generate a windows executable.
 #COMPILER = /usr/bin/i586-mingw32msvc-gcc
 #-Wall -pedantic
-
-# The "-I" option forces the compiler to look for uninstalled headers in the
-# current source directory before searching the system directories for
-# installed headers of the same name.
-COMPILER_FLAGS = -g -l/usr/include -I/usr/include/libxml2 -I/usr/X11R6/include -l/usr/include/GL \
+COMPILER_FLAGS = -g -l/usr/include -I/usr/include/libxml2 -I/usr/X11R6/include \
 	-D GNU_LINUX_OPERATING_SYSTEM
 #	-D WIN32_OPERATING_SYSTEM
 # INTEL_300_PROCESSOR // 80386
@@ -126,10 +121,12 @@ MAIN_SOURCE = $(SRC)/controller/cyboi.c
 # Applicator.
 APPLICATOR_SOURCES = $(wildcard $(SRC)/applicator/*.c)
 APPLICATOR_OBJECTS = $(patsubst $(SRC)/applicator/%.c,$(OBJ)/applicator/%.o,$(APPLICATOR_SOURCES))
+APPLICATOR_ADD_SOURCES = $(wildcard $(SRC)/applicator/add/*.c)
+APPLICATOR_ADD_OBJECTS = $(patsubst $(SRC)/applicator/add/%.c,$(OBJ)/applicator/add/%.o,$(APPLICATOR_ADD_SOURCES))
 APPLICATOR_COMPARE_SOURCES = $(wildcard $(SRC)/applicator/compare/*.c)
 APPLICATOR_COMPARE_OBJECTS = $(patsubst $(SRC)/applicator/compare/%.c,$(OBJ)/applicator/compare/%.o,$(APPLICATOR_COMPARE_SOURCES))
-APPLICATOR_COMPARE_EQUAL_SOURCES = $(wildcard $(SRC)/applicator/compare/equal/*.c)
-APPLICATOR_COMPARE_EQUAL_OBJECTS = $(patsubst $(SRC)/applicator/compare/equal/%.c,$(OBJ)/applicator/compare/equal/%.o,$(APPLICATOR_COMPARE_EQUAL_SOURCES))
+APPLICATOR_COMPARE_EQUAL_SOURCES = $(wildcard $(SRC)/applicator/compare_equal/*.c)
+APPLICATOR_COMPARE_EQUAL_OBJECTS = $(patsubst $(SRC)/applicator/compare_equal/%.c,$(OBJ)/applicator/compare_equal/%.o,$(APPLICATOR_COMPARE_EQUAL_SOURCES))
 APPLICATOR_COPY_SOURCES = $(wildcard $(SRC)/applicator/copy/*.c)
 APPLICATOR_COPY_OBJECTS = $(patsubst $(SRC)/applicator/copy/%.c,$(OBJ)/applicator/copy/%.o,$(APPLICATOR_COPY_SOURCES))
 APPLICATOR_COUNT_SOURCES = $(wildcard $(SRC)/applicator/count/*.c)
@@ -174,16 +171,22 @@ GLOBALS_CONSTANTS_CYBOI_SOURCES = $(wildcard $(SRC)/globals/constants/cyboi/*.c)
 GLOBALS_CONSTANTS_CYBOI_OBJECTS = $(patsubst $(SRC)/globals/constants/cyboi/%.c,$(OBJ)/globals/constants/cyboi/%.o,$(GLOBALS_CONSTANTS_CYBOI_SOURCES))
 GLOBALS_CONSTANTS_CYBOL_SOURCES = $(wildcard $(SRC)/globals/constants/cybol/*.c)
 GLOBALS_CONSTANTS_CYBOL_OBJECTS = $(patsubst $(SRC)/globals/constants/cybol/%.c,$(OBJ)/globals/constants/cybol/%.o,$(GLOBALS_CONSTANTS_CYBOL_SOURCES))
+GLOBALS_CONSTANTS_FILE_EXTENSION_SOURCES = $(wildcard $(SRC)/globals/constants/file_extension/*.c)
+GLOBALS_CONSTANTS_FILE_EXTENSION_OBJECTS = $(patsubst $(SRC)/globals/constants/file_extension/%.c,$(OBJ)/globals/constants/file_extension/%.o,$(GLOBALS_CONSTANTS_FILE_EXTENSION_SOURCES))
 GLOBALS_CONSTANTS_FLOAT_SOURCES = $(wildcard $(SRC)/globals/constants/float/*.c)
 GLOBALS_CONSTANTS_FLOAT_OBJECTS = $(patsubst $(SRC)/globals/constants/float/%.c,$(OBJ)/globals/constants/float/%.o,$(GLOBALS_CONSTANTS_FLOAT_SOURCES))
 GLOBALS_CONSTANTS_HTTP_SOURCES = $(wildcard $(SRC)/globals/constants/http/*.c)
 GLOBALS_CONSTANTS_HTTP_OBJECTS = $(patsubst $(SRC)/globals/constants/http/%.c,$(OBJ)/globals/constants/http/%.o,$(GLOBALS_CONSTANTS_HTTP_SOURCES))
 GLOBALS_CONSTANTS_INTEGER_SOURCES = $(wildcard $(SRC)/globals/constants/integer/*.c)
 GLOBALS_CONSTANTS_INTEGER_OBJECTS = $(patsubst $(SRC)/globals/constants/integer/%.c,$(OBJ)/globals/constants/integer/%.o,$(GLOBALS_CONSTANTS_INTEGER_SOURCES))
-GLOBALS_CONSTANTS_LOG_MESSAGE_SOURCES = $(wildcard $(SRC)/globals/constants/log_message/*.c)
-GLOBALS_CONSTANTS_LOG_MESSAGE_OBJECTS = $(patsubst $(SRC)/globals/constants/log_message/%.c,$(OBJ)/globals/constants/log_message/%.o,$(GLOBALS_CONSTANTS_LOG_MESSAGE_SOURCES))
+GLOBALS_CONSTANTS_LOG_SOURCES = $(wildcard $(SRC)/globals/constants/log/*.c)
+GLOBALS_CONSTANTS_LOG_OBJECTS = $(patsubst $(SRC)/globals/constants/log/%.c,$(OBJ)/globals/constants/log/%.o,$(GLOBALS_CONSTANTS_LOG_SOURCES))
 GLOBALS_CONSTANTS_MEMORY_STRUCTURE_SOURCES = $(wildcard $(SRC)/globals/constants/memory_structure/*.c)
 GLOBALS_CONSTANTS_MEMORY_STRUCTURE_OBJECTS = $(patsubst $(SRC)/globals/constants/memory_structure/%.c,$(OBJ)/globals/constants/memory_structure/%.o,$(GLOBALS_CONSTANTS_MEMORY_STRUCTURE_SOURCES))
+GLOBALS_CONSTANTS_MIME_TYPE_SOURCES = $(wildcard $(SRC)/globals/constants/mime_type/*.c)
+GLOBALS_CONSTANTS_MIME_TYPE_OBJECTS = $(patsubst $(SRC)/globals/constants/mime_type/%.c,$(OBJ)/globals/constants/mime_type/%.o,$(GLOBALS_CONSTANTS_MIME_TYPE_SOURCES))
+GLOBALS_CONSTANTS_POINTER_SOURCES = $(wildcard $(SRC)/globals/constants/pointer/*.c)
+GLOBALS_CONSTANTS_POINTER_OBJECTS = $(patsubst $(SRC)/globals/constants/pointer/%.c,$(OBJ)/globals/constants/pointer/%.o,$(GLOBALS_CONSTANTS_POINTER_SOURCES))
 GLOBALS_CONSTANTS_SHELL_COMMAND_SOURCES = $(wildcard $(SRC)/globals/constants/shell_command/*.c)
 GLOBALS_CONSTANTS_SHELL_COMMAND_OBJECTS = $(patsubst $(SRC)/globals/constants/shell_command/%.c,$(OBJ)/globals/constants/shell_command/%.o,$(GLOBALS_CONSTANTS_SHELL_COMMAND_SOURCES))
 GLOBALS_CONSTANTS_SYSTEM_SOURCES = $(wildcard $(SRC)/globals/constants/system/*.c)
@@ -222,6 +225,7 @@ MEMORISER_CONVERTER_OBJECTS = $(patsubst $(SRC)/memoriser/converter/%.c,$(OBJ)/m
 all: export \
 	create \
 	$(APPLICATOR_OBJECTS) \
+	$(APPLICATOR_ADD_OBJECTS) \
 	$(APPLICATOR_COMPARE_OBJECTS) \
 	$(APPLICATOR_COMPARE_EQUAL_OBJECTS) \
 	$(APPLICATOR_COPY_OBJECTS) \
@@ -244,11 +248,14 @@ all: export \
 	$(GLOBALS_CONSTANTS_CONSOLE_OBJECTS) \
 	$(GLOBALS_CONSTANTS_CYBOI_OBJECTS) \
 	$(GLOBALS_CONSTANTS_CYBOL_OBJECTS) \
+	$(GLOBALS_CONSTANTS_FILE_EXTENSION_OBJECTS) \
 	$(GLOBALS_CONSTANTS_FLOAT_OBJECTS) \
 	$(GLOBALS_CONSTANTS_HTTP_OBJECTS) \
 	$(GLOBALS_CONSTANTS_INTEGER_OBJECTS) \
-	$(GLOBALS_CONSTANTS_LOG_MESSAGE_OBJECTS) \
+	$(GLOBALS_CONSTANTS_LOG_OBJECTS) \
 	$(GLOBALS_CONSTANTS_MEMORY_STRUCTURE_OBJECTS) \
+	$(GLOBALS_CONSTANTS_MIME_TYPE_OBJECTS) \
+	$(GLOBALS_CONSTANTS_POINTER_OBJECTS) \
 	$(GLOBALS_CONSTANTS_SHELL_COMMAND_OBJECTS) \
 	$(GLOBALS_CONSTANTS_SYSTEM_OBJECTS) \
 	$(GLOBALS_CONSTANTS_XDT_OBJECTS) \
@@ -268,12 +275,12 @@ all: export \
 		-o $(OBJ)/controller/cyboi.o
 # Link object files.
 	$(COMPILER) -L/lib -L/usr/lib -L/usr/X11R6/lib \
-		-o $(BIN)/$(BINARY) $(OBJ)/controller/cyboi.o -lpthread -lxml2 -lX11 -lGL -lGLU -lglut
+		-o $(BIN)/$(BINARY) $(OBJ)/controller/cyboi.o -lpthread -lxml2 -lX11
 # Print ready message.
 	@echo Compiled cyboi files.
 
 #
-# Exports variables for cross-compilation under gnu/linux.
+# Exports variables for cross-compilation under linux.
 #
 # If working with configure, then use the following flags:
 # ./configure --host=i586-mingw32 --build=$(./config.guess) \
@@ -293,8 +300,9 @@ export:
 create:
 	-cd ..; mkdir obj; mkdir bin
 	-cd $(OBJ); mkdir applicator
+	-cd $(OBJ); mkdir applicator/add
 	-cd $(OBJ); mkdir applicator/compare
-	-cd $(OBJ); mkdir applicator/compare/equal
+	-cd $(OBJ); mkdir applicator/compare_equal
 	-cd $(OBJ); mkdir applicator/copy
 	-cd $(OBJ); mkdir applicator/count
 	-cd $(OBJ); mkdir applicator/get
@@ -316,11 +324,14 @@ create:
 	-cd $(OBJ); mkdir globals/constants/console
 	-cd $(OBJ); mkdir globals/constants/cyboi
 	-cd $(OBJ); mkdir globals/constants/cybol
+	-cd $(OBJ); mkdir globals/constants/file_extension
 	-cd $(OBJ); mkdir globals/constants/float
 	-cd $(OBJ); mkdir globals/constants/http
 	-cd $(OBJ); mkdir globals/constants/integer
-	-cd $(OBJ); mkdir globals/constants/log_message
+	-cd $(OBJ); mkdir globals/constants/log
 	-cd $(OBJ); mkdir globals/constants/memory_structure
+	-cd $(OBJ); mkdir globals/constants/mime_type
+	-cd $(OBJ); mkdir globals/constants/pointer
 	-cd $(OBJ); mkdir globals/constants/shell_command
 	-cd $(OBJ); mkdir globals/constants/system
 	-cd $(OBJ); mkdir globals/constants/xdt
@@ -333,16 +344,16 @@ create:
 	-cd $(OBJ); mkdir memoriser/communicator
 	-cd $(OBJ); mkdir memoriser/converter
 
-#$(OBJ)/%.o: $(SRC)/%.c
-#       $(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
-
 $(OBJ)/applicator/%.o: $(SRC)/applicator/%.c
+	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
+
+$(OBJ)/applicator/add/%.o: $(SRC)/applicator/add/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
 $(OBJ)/applicator/compare/%.o: $(SRC)/applicator/compare/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
-$(OBJ)/applicator/compare/equal/%.o: $(SRC)/applicator/compare/equal/%.c
+$(OBJ)/applicator/compare_equal/%.o: $(SRC)/applicator/compare_equal/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
 $(OBJ)/applicator/copy/%.o: $(SRC)/applicator/copy/%.c
@@ -405,6 +416,9 @@ $(OBJ)/globals/constants/cyboi/%.o: $(SRC)/globals/constants/cyboi/%.c
 $(OBJ)/globals/constants/cybol/%.o: $(SRC)/globals/constants/cybol/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
+$(OBJ)/globals/constants/file_extension/%.o: $(SRC)/globals/constants/file_extension/%.c
+	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
+
 $(OBJ)/globals/constants/float/%.o: $(SRC)/globals/constants/float/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
@@ -414,10 +428,16 @@ $(OBJ)/globals/constants/http/%.o: $(SRC)/globals/constants/http/%.c
 $(OBJ)/globals/constants/integer/%.o: $(SRC)/globals/constants/integer/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
-$(OBJ)/globals/constants/log_message/%.o: $(SRC)/globals/constants/log_message/%.c
+$(OBJ)/globals/constants/log/%.o: $(SRC)/globals/constants/log/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
 $(OBJ)/globals/constants/memory_structure/%.o: $(SRC)/globals/constants/memory_structure/%.c
+	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
+
+$(OBJ)/globals/constants/mime_type/%.o: $(SRC)/globals/constants/mime_type/%.c
+	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
+
+$(OBJ)/globals/constants/pointer/%.o: $(SRC)/globals/constants/pointer/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
 $(OBJ)/globals/constants/shell_command/%.o: $(SRC)/globals/constants/shell_command/%.c
