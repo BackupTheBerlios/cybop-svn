@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.42 $ $Date: 2007-10-03 23:40:05 $ $Author: christian $
+ * @version $Revision: 1.43 $ $Date: 2007-10-23 17:37:45 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -272,8 +272,14 @@ void receive_socket_signal(void* p0, void* p1, void* p2, void* p3, void* p4, voi
                 p0, p1);
         }
 
-    fprintf(stderr, "TEST: receive socket signal actual command name: %s \n", (char*) *cm);
-    fprintf(stderr, "TEST: receive socket signal actual command name count: %i \n", **((int**) cmc));
+    fprintf(stderr, "TEST: receive socket signal actual command n: %s \n", (char*) *cn);
+    fprintf(stderr, "TEST: receive socket signal actual command nc: %i \n", **((int**) cnc));
+    fprintf(stderr, "TEST: receive socket signal actual command a: %s \n", (char*) *ca);
+    fprintf(stderr, "TEST: receive socket signal actual command ac: %i \n", **((int**) cac));
+    fprintf(stderr, "TEST: receive socket signal actual command m: %s \n", (char*) *cm);
+    fprintf(stderr, "TEST: receive socket signal actual command mc: %i \n", **((int**) cmc));
+    fprintf(stderr, "TEST: receive socket signal actual command d: %i \n", *cd);
+    fprintf(stderr, "TEST: receive socket signal actual command dc: %i \n", **((int**) cdc));
 
         // Lock signal memory mutex.
         pthread_mutex_lock(p6);

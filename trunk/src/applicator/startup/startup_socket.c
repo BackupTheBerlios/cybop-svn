@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.30 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
+ * @version $Revision: 1.31 $ $Date: 2007-10-23 17:37:45 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -686,16 +686,22 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
         *ids = *NUMBER_0_INTEGER;
 */
 
-        // Allocate character buffer.
+        // Allocate character buffer count and size.
         allocate((void*) &bc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
         allocate((void*) &bs, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-        allocate((void*) &b, (void*) bs, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
         // Initialise character buffer count, size.
-        // A possible initial size is 2048, which should suffice for transferring standard data over tcp/ip.
+        // A possible initial size is 2048, which should
+        // suffice for transferring standard data over tcp/ip.
         // Another possible size could be 8192.
         *bc = *NUMBER_0_INTEGER;
         *bs = *NUMBER_8192_INTEGER;
+
+        // Allocate character buffer.
+        //
+        // CAUTION! Allocate character buffer only AFTER
+        // the buffer size has been initialised above!
+        allocate((void*) &b, (void*) bs, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
         // Set socket address of this system.
         // Set communication partner socket address.
@@ -727,14 +733,12 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
         // Set communication partner socket address size.
         i = *base + *SOCKET_COMMUNICATION_PARTNER_ADDRESS_SIZE_INTERNAL;
         set_element(p0, (void*) &i, (void*) &pas, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-
         // Set socket of this system.
         i = *base + *SOCKET_INTERNAL;
         set_element(p0, (void*) &i, (void*) &s, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
         // Set communication partner socket.
         i = *base + *SOCKET_COMMUNICATION_PARTNER_INTERNAL;
         set_element(p0, (void*) &i, (void*) &ps, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-
         // Set character buffer.
         i = *base + *SOCKET_CHARACTER_BUFFER_INTERNAL;
         set_element(p0, (void*) &i, (void*) &b, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);

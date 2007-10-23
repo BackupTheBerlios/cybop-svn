@@ -20,14 +20,14 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.24 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
+ * @version $Revision: 1.25 $ $Date: 2007-10-23 17:37:45 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef SEND_SOCKET_SOURCE
 #define SEND_SOCKET_SOURCE
 
-//?? TEST for test file
+//?? TEST for test file; DELETE later!
 #include <fcntl.h>
 #include <sys/stat.h>
 

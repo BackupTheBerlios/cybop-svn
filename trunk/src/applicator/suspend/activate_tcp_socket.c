@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.16 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2007-10-23 17:37:45 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -35,8 +35,10 @@
 #include <unistd.h>
 #include "../../globals/constants/cybol/cybol_abstraction_constants.c"
 #include "../../globals/constants/integer/integer_constants.c"
+#include "../../globals/constants/log/log_message_constants.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../../globals/constants/pointer/pointer_constants.c"
+#include "../../globals/logger/logger.c"
 
 /**
  * Starts up the tcp socket service.

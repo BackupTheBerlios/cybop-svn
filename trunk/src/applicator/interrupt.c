@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.19 $ $Date: 2007-10-03 23:40:05 $ $Author: christian $
+ * @version $Revision: 1.20 $ $Date: 2007-10-23 17:37:45 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -38,6 +38,8 @@
 #include "../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../globals/constants/pointer/pointer_constants.c"
 #include "../globals/logger/logger.c"
+#include "../globals/variables/service_interrupt_variables.c"
+#include "../globals/variables/thread_identification_variables.c"
 #include "../memoriser/accessor/compound_accessor.c"
 
 /**
@@ -51,9 +53,8 @@
  * @param p2 the knowledge memory
  * @param p3 the knowledge memory count
  * @param p4 the knowledge memory size
- * @param p5 the internal memory
  */
-void interrupt_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
+void interrupt_service(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Interrupt service.");
 
@@ -89,7 +90,7 @@ void interrupt_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
 
         if (r != *NUMBER_0_INTEGER) {
 
-            interrupt_gnu_linux_console(p5, p2, p3, p4);
+            interrupt_gnu_linux_console((void*) GNU_LINUX_CONSOLE_THREAD, (void*) GNU_LINUX_CONSOLE_THREAD_INTERRUPT);
         }
     }
 
@@ -99,7 +100,7 @@ void interrupt_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
 
         if (r != *NUMBER_0_INTEGER) {
 
-            interrupt_x_window_system(p5, p2, p3, p4);
+            interrupt_x_window_system((void*) X_WINDOW_SYSTEM_THREAD, (void*) X_WINDOW_SYSTEM_THREAD_INTERRUPT);
         }
     }
 
@@ -109,7 +110,7 @@ void interrupt_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
 
         if (r != *NUMBER_0_INTEGER) {
 
-            interrupt_socket(p5, (void*) WWW_BASE_INTERNAL, p2, p3, p4);
+            interrupt_socket((void*) WWW_SERVICE_THREAD, (void*) WWW_SERVICE_THREAD_INTERRUPT);
         }
     }
 
@@ -119,7 +120,7 @@ void interrupt_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
 
         if (r != *NUMBER_0_INTEGER) {
 
-            interrupt_socket(p5, (void*) CYBOI_BASE_INTERNAL, p2, p3, p4);
+            interrupt_socket((void*) CYBOI_SERVICE_THREAD, (void*) CYBOI_SERVICE_THREAD_INTERRUPT);
         }
     }
 }

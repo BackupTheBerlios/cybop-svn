@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.36 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
+ * @version $Revision: 1.37 $ $Date: 2007-10-23 17:37:45 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -271,7 +271,7 @@ void handle_operation(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
         if (r != *NUMBER_0_INTEGER) {
 
-            interrupt_service(p12, p13, p1, p2, p3, p0);
+            interrupt_service(p12, p13, p1, p2, p3);
         }
     }
 

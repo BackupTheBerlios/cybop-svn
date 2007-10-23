@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2007-10-23 17:37:45 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -42,12 +42,13 @@
 /**
  * Shuts down the gnu/linux console.
  *
+ * This is done in the reverse order the service was started up.
+ *
  * @param p0 the internals memory
- * @param p1 the knowledge memory
- * @param p2 the knowledge memory count
- * @param p3 the knowledge memory size
+ * @param p1 the socket service thread
+ * @param p2 the socket service thread interrupt
  */
-void shutdown_gnu_linux_console(void* p0, void* p1, void* p2, void* p3) {
+void shutdown_gnu_linux_console(void* p0, void* p1, void* p2) {
 
     log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Shutdown gnu/linux console.");
 
@@ -64,7 +65,7 @@ void shutdown_gnu_linux_console(void* p0, void* p1, void* p2, void* p3) {
     if ((*ipi != *NULL_POINTER) || (opi == *NULL_POINTER)) {
 
         // Interrupt gnu/linux console service thread.
-        interrupt_gnu_linux_console();
+        interrupt_gnu_linux_console(p1, p2);
 
         // The gnu/linux console input- and output stream.
         FILE** ip = (FILE**) NULL_POINTER;

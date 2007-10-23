@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2007-09-20 08:00:19 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2007-10-23 17:37:45 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -138,9 +138,9 @@ static int* UTF_32_UNICODE_CHARACTER_ENCODING_COUNT = NUMBER_6_INTEGER_ARRAY;
  *
  * UTF-EBCDIC is not part of The Unicode Standard.
  */
-static char UTF-EBCDIC_UNICODE_CHARACTER_ENCODING_ARRAY[] = {'U', 'T', 'F', '-', 'E', 'B', 'C', 'D', 'I', 'C'};
-static char* UTF-EBCDIC_UNICODE_CHARACTER_ENCODING = UTF-EBCDIC_UNICODE_CHARACTER_ENCODING_ARRAY;
-static int* UTF-EBCDIC_UNICODE_CHARACTER_ENCODING_COUNT = NUMBER_10_INTEGER_ARRAY;
+static char UTF_EBCDIC_UNICODE_CHARACTER_ENCODING_ARRAY[] = {'U', 'T', 'F', '-', 'E', 'B', 'C', 'D', 'I', 'C'};
+static char* UTF_EBCDIC_UNICODE_CHARACTER_ENCODING = UTF_EBCDIC_UNICODE_CHARACTER_ENCODING_ARRAY;
+static int* UTF_EBCDIC_UNICODE_CHARACTER_ENCODING_COUNT = NUMBER_10_INTEGER_ARRAY;
 
 /**
  * The utf-scsu unicode character encoding.

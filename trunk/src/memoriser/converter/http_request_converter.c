@@ -20,13 +20,15 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.10 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2007-10-23 17:37:45 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef HTTP_REQUEST_CONVERTER_SOURCE
 #define HTTP_REQUEST_CONVERTER_SOURCE
 
+#include "../../globals/constants/cybol/cybol_model_constants.c"
+#include "../../globals/constants/cybol/cybol_name_constants.c"
 #include "../../globals/constants/http/http_request_method_constants.c"
 #include "../../globals/constants/http/http_separator_constants.c"
 #include "../../globals/constants/http/uri_separator_constants.c"
@@ -748,6 +750,7 @@ void decode_http_request_headers(void* p0, void* p1, void* p2, void* p3, void* p
  *
  * Examples:
  *
+ * http://localhost:1971/?exit
  * http://127.0.0.1:1971?name=close&channel=inline&abstraction=knowledge&model=.residenz.logic.exit_program
  * http://de.wikipedia.org/w/index.php?title=Uniform_Resource_Locator&action=edit
  *

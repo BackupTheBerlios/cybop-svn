@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.14 $ $Date: 2007-10-03 23:40:05 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2007-10-23 17:37:45 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -37,44 +37,63 @@
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/logger/logger.c"
-#include "../../globals/variables/service_interrupt_variables.c"
-#include "../../globals/variables/thread_identification_variables.c"
 
 /**
  * Interrupts the x window system service.
+ *
+ * @param p0 the x window system service thread
+ * @param p1 the x window system service thread interrupt
  */
-void interrupt_x_window_system() {
+void interrupt_x_window_system(void* p0, void* p1) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Interrupt x window system service.");
+    if (p1 != *NULL_POINTER) {
 
-    if (*X_WINDOW_SYSTEM_THREAD != *NUMBER_MINUS_1_INTEGER) {
+        int* i = (int*) p1;
 
-        // Set thread interrupt flag for signal handler.
-        *X_WINDOW_SYSTEM_THREAD_INTERRUPT = *NUMBER_1_INTEGER;
+        if (p0 != *NULL_POINTER) {
 
-        // Send signal to thread.
-        // CAUTION! Sending a SIGKILL signal to a thread using pthread_kill()
-        // ends the ENTIRE PROCESS, not simply the target thread.
-        // SIGKILL is defined to end the entire process, regardless
-        // of the thread it is delivered to, or how it is sent.
-        // The user signal SIGUSR1 is used here instead.
-        // It is processed in the interrupt_service_system_signal_handler
-        // procedure, situated in the following module:
-        // controller/manager/system_signal_handler_manager.c
-        pthread_kill(*X_WINDOW_SYSTEM_THREAD, SIGUSR1);
+            pthread_t* t = (pthread_t*) p0;
 
-        // Wait for thread to finish.
-        pthread_join(*X_WINDOW_SYSTEM_THREAD, *NULL_POINTER);
+            log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Interrupt x window system service.");
 
-        // Reset thread.
-        *X_WINDOW_SYSTEM_THREAD = *NUMBER_MINUS_1_INTEGER;
+            if (*t != *NUMBER_MINUS_1_INTEGER) {
 
-        // Reset thread interrupt flag for signal handler.
-        *X_WINDOW_SYSTEM_THREAD_INTERRUPT = *NUMBER_0_INTEGER;
+                // Set thread interrupt flag for signal handler.
+                *i = *NUMBER_1_INTEGER;
+
+                // Send signal to thread.
+                // CAUTION! Sending a SIGKILL signal to a thread using pthread_kill()
+                // ends the ENTIRE PROCESS, not simply the target thread.
+                // SIGKILL is defined to end the entire process, regardless
+                // of the thread it is delivered to, or how it is sent.
+                // The user signal SIGUSR1 is used here instead.
+                // It is processed in the interrupt_service_system_signal_handler
+                // procedure, situated in the following module:
+                // controller/manager/system_signal_handler_manager.c
+                pthread_kill(*t, SIGUSR1);
+
+                // Wait for thread to finish.
+                pthread_join(*t, *NULL_POINTER);
+
+                // Reset thread.
+                *t = *NUMBER_MINUS_1_INTEGER;
+
+                // Reset thread interrupt flag for signal handler.
+                *i = *NUMBER_0_INTEGER;
+
+            } else {
+
+                log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) "Could not interrupt x window system service. The x window system service thread is invalid.");
+            }
+
+        } else {
+
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not interrupt x window system service. The x window system service thread is null.");
+        }
 
     } else {
 
-        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) "Could not interrupt x window system. The x window system thread is invalid.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not interrupt x window system service. The x window system service thread interrupt is null.");
     }
 }
 

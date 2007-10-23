@@ -24,7 +24,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.14 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2007-10-23 17:37:45 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -43,11 +43,11 @@
 #endif
 
 // The opengl library OpenGL32.
-#include <GL/gl.h>
+//?? #include <GL/gl.h>
 // The opengl utility library GLu32.
-#include <GL/glu.h>
+//?? #include <GL/glu.h>
 // The opengl tools library.
-#include <GL/glut.h>
+//?? #include <GL/glut.h>
 //?? Didier Link <didier@famille-link.fr> said that glut.h would suffice
 //?? and freeglut.h would not be needed.
 //?? #include <GL/freeglut.h>
@@ -1206,38 +1206,38 @@ void test_float_constants() {
 
 //?? ========================================================================================
 
+/*??
 void display(void) {
 
-/* clear all pixels  */
-   glClear (GL_COLOR_BUFFER_BIT);
+    // clear all pixels
+    glClear(GL_COLOR_BUFFER_BIT);
 
-/* draw white polygon (rectangle) with corners at
- * (0.25, 0.25, 0.0) and (0.75, 0.75, 0.0)
- */
-   glColor3f (1.0, 1.0, 1.0);
-   glBegin(GL_POLYGON);
-      glVertex3f (0.25, 0.25, 0.0);
-      glVertex3f (0.75, 0.25, 0.0);
-      glVertex3f (0.75, 0.75, 0.0);
-      glVertex3f (0.25, 0.75, 0.0);
-   glEnd();
+    // draw white polygon (rectangle) with corners at
+    // (0.25, 0.25, 0.0) and (0.75, 0.75, 0.0)
+    glColor3f(1.0, 1.0, 1.0);
+    glBegin(GL_POLYGON);
+        glVertex3f(0.25, 0.25, 0.0);
+        glVertex3f(0.75, 0.25, 0.0);
+        glVertex3f(0.75, 0.75, 0.0);
+        glVertex3f(0.25, 0.75, 0.0);
+    glEnd();
 
-/* don't wait!
- * start processing buffered OpenGL routines
- */
-   glFlush ();
+    // don't wait!
+    // start processing buffered OpenGL routines
+   glFlush();
 }
 
 void init(void) {
 
-/* select clearing color        */
-   glClearColor(0.0, 0.0, 0.0, 0.0);
+    // select clearing color
+    glClearColor(0.0, 0.0, 0.0, 0.0);
 
-/* initialize viewing values  */
-   glMatrixMode(GL_PROJECTION);
-   glLoadIdentity();
-   glOrtho(0.0, 1.0, 0.0, 1.0, -1.0, 1.0);
+    // initialize viewing values
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    glOrtho(0.0, 1.0, 0.0, 1.0, -1.0, 1.0);
 }
+*/
 
 /*
  * Declare initial window size, position, and display mode
@@ -1246,6 +1246,7 @@ void init(void) {
  * Register callback function to display graphics.
  * Enter main loop and process events.
  */
+/*??
 int test_mesa_opengl(int argc, char **argv) {
 
     glutInit(&argc, argv);
@@ -1257,6 +1258,7 @@ int test_mesa_opengl(int argc, char **argv) {
     glutDisplayFunc(display);
     glutMainLoop();
 }
+*/
 
 //?? ========================================================================================
 

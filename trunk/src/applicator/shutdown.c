@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.24 $ $Date: 2007-10-03 23:40:05 $ $Author: christian $
+ * @version $Revision: 1.25 $ $Date: 2007-10-23 17:37:45 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description This module shuts down a service.
  */
@@ -38,6 +38,8 @@
 #include "../globals/constants/log/log_message_constants.c"
 #include "../globals/constants/pointer/pointer_constants.c"
 #include "../globals/logger/logger.c"
+#include "../globals/variables/service_interrupt_variables.c"
+#include "../globals/variables/thread_identification_variables.c"
 #include "../memoriser/accessor/compound_accessor.c"
 #include "../memoriser/array.c"
 
@@ -90,7 +92,7 @@ void shutdown_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
         if (r != *NUMBER_0_INTEGER) {
 
-            shutdown_gnu_linux_console(p5, p2, p3, p4);
+            shutdown_gnu_linux_console(p5, (void*) GNU_LINUX_CONSOLE_THREAD, (void*) GNU_LINUX_CONSOLE_THREAD_INTERRUPT);
         }
     }
 
@@ -100,7 +102,7 @@ void shutdown_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
         if (r != *NUMBER_0_INTEGER) {
 
-            shutdown_x_window_system(p5, p2, p3, p4);
+            shutdown_x_window_system(p5, (void*) X_WINDOW_SYSTEM_THREAD, (void*) X_WINDOW_SYSTEM_THREAD_INTERRUPT);
         }
     }
 
@@ -110,7 +112,7 @@ void shutdown_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
         if (r != *NUMBER_0_INTEGER) {
 
-            shutdown_socket(p5, (void*) WWW_BASE_INTERNAL, p2, p3, p4);
+            shutdown_socket(p5, (void*) WWW_BASE_INTERNAL, (void*) WWW_SERVICE_THREAD, (void*) WWW_SERVICE_THREAD_INTERRUPT);
         }
     }
 
@@ -120,7 +122,7 @@ void shutdown_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
         if (r != *NUMBER_0_INTEGER) {
 
-            shutdown_socket(p5, (void*) CYBOI_BASE_INTERNAL, p2, p3, p4);
+            shutdown_socket(p5, (void*) CYBOI_BASE_INTERNAL, (void*) CYBOI_SERVICE_THREAD, (void*) CYBOI_SERVICE_THREAD_INTERRUPT);
         }
     }
 }

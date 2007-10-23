@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2007-10-03 23:40:05 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2007-10-23 17:37:45 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -41,92 +41,72 @@
 #include "../../globals/constants/integer/integer_constants.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../../globals/constants/pointer/pointer_constants.c"
-#include "../../globals/variables/service_interrupt_variables.c"
-#include "../../globals/variables/thread_identification_variables.c"
 #include "../../memoriser/accessor.c"
 #include "../../memoriser/array.c"
 
 /**
  * Interrupts the socket service.
+ *
+ * The service may be for example:
+ * - www
+ * - cyboi
+ * - etc.
+ *
+ * @param p0 the socket service thread
+ * @param p1 the socket service thread interrupt
  */
-void interrupt_socket() {
+void interrupt_socket(void* p0, void* p1) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Interrupt socket service.");
+    if (p1 != *NULL_POINTER) {
 
-/*??
-    if (*WWW_SERVICE_THREAD != *NUMBER_MINUS_1_INTEGER) {
+        int* i = (int*) p1;
 
-        // Set thread interrupt flag for signal handler.
-        *WWW_SERVICE_THREAD_INTERRUPT = *NUMBER_1_INTEGER;
+        if (p0 != *NULL_POINTER) {
 
-        // Send signal to thread.
-        //
-        // CAUTION! Sending a SIGKILL signal to a thread using pthread_kill()
-        // ends the ENTIRE PROCESS, not simply the target thread.
-        // SIGKILL is defined to end the entire process, regardless
-        // of the thread it is delivered to, or how it is sent.
-        //
-        // Therefore, the user signal SIGUSR1 is used here instead.
-        // It is processed in the interrupt_service_system_signal_handler
-        // procedure, situated in the following module:
-        // controller/manager/system_signal_handler_manager.c
-        pthread_kill(*WWW_SERVICE_THREAD, SIGUSR1);
+            pthread_t* t = (pthread_t*) p0;
 
-        // Wait for thread to finish.
-        pthread_join(*WWW_SERVICE_THREAD, *NULL_POINTER);
+            log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Interrupt socket service.");
 
-        // Reset thread.
-        *WWW_SERVICE_THREAD = *NUMBER_MINUS_1_INTEGER;
+            if (*t != *NUMBER_MINUS_1_INTEGER) {
 
-        // Reset thread interrupt flag for signal handler.
-        *WWW_SERVICE_THREAD_INTERRUPT = *NUMBER_0_INTEGER;
+                // Set thread interrupt flag for signal handler.
+                *i = *NUMBER_1_INTEGER;
 
-    } else {
+                // Send signal to thread.
+                //
+                // CAUTION! Sending a SIGKILL signal to a thread using pthread_kill()
+                // ends the ENTIRE PROCESS, not simply the target thread.
+                // SIGKILL is defined to end the entire process, regardless
+                // of the thread it is delivered to, or how it is sent.
+                //
+                // Therefore, the user signal SIGUSR1 is used here instead.
+                // It is processed in the interrupt_service_system_signal_handler
+                // procedure, situated in the following module:
+                // controller/manager/system_signal_handler_manager.c
+                pthread_kill(*t, SIGUSR1);
 
-        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) "Could not interrupt socket. The www service thread is invalid.");
-    }
-*/
+                // Wait for thread to finish.
+                pthread_join(*t, *NULL_POINTER);
 
-    if (*CYBOI_SERVICE_THREAD != *NUMBER_MINUS_1_INTEGER) {
+                // Reset thread.
+                *t = *NUMBER_MINUS_1_INTEGER;
 
-    fprintf(stderr, "TEST: interrupt socket 0 thread: %i \n", *CYBOI_SERVICE_THREAD);
+                // Reset thread interrupt flag for signal handler.
+                *i = *NUMBER_0_INTEGER;
 
-        // Set thread interrupt flag for signal handler.
-        *CYBOI_SERVICE_THREAD_INTERRUPT = *NUMBER_1_INTEGER;
+            } else {
 
-    fprintf(stderr, "TEST: interrupt socket 1 thread irq flag: %i \n", *CYBOI_SERVICE_THREAD_INTERRUPT);
+                log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) "Could not interrupt socket service. The socket service thread is invalid.");
+            }
 
-        // Send signal to thread.
-        //
-        // CAUTION! Sending a SIGKILL signal to a thread using pthread_kill()
-        // ends the ENTIRE PROCESS, not simply the target thread.
-        // SIGKILL is defined to end the entire process, regardless
-        // of the thread it is delivered to, or how it is sent.
-        //
-        // Therefore, the user signal SIGUSR1 is used here instead.
-        // It is processed in the interrupt_service_system_signal_handler
-        // procedure, situated in the following module:
-        // controller/manager/system_signal_handler_manager.c
-        pthread_kill(*CYBOI_SERVICE_THREAD, SIGUSR1);
+        } else {
 
-    fprintf(stderr, "TEST: interrupt socket 2 thread irq flag: %i \n", *CYBOI_SERVICE_THREAD_INTERRUPT);
-
-        // Wait for thread to finish.
-        pthread_join(*CYBOI_SERVICE_THREAD, *NULL_POINTER);
-
-    fprintf(stderr, "TEST: interrupt socket 3 thread irq flag: %i \n", *CYBOI_SERVICE_THREAD_INTERRUPT);
-
-        // Reset thread.
-        *CYBOI_SERVICE_THREAD = *NUMBER_MINUS_1_INTEGER;
-
-    fprintf(stderr, "TEST: interrupt socket 4 thread irq flag: %i \n", *CYBOI_SERVICE_THREAD_INTERRUPT);
-
-        // Reset thread interrupt flag for signal handler.
-        *CYBOI_SERVICE_THREAD_INTERRUPT = *NUMBER_0_INTEGER;
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not interrupt socket service. The socket service thread is null.");
+        }
 
     } else {
 
-        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) "Could not interrupt socket. The cyboi service thread is invalid.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not interrupt socket service. The socket service thread interrupt is null.");
     }
 }
 

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.24 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
+ * @version $Revision: 1.25 $ $Date: 2007-10-23 17:37:45 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -47,14 +47,13 @@
 /**
  * Shuts down the x window system.
  *
- * This is done in the reverse order that the x window system was started up.
+ * This is done in the reverse order the service was started up.
  *
  * @param p0 the internals memory
- * @param p1 the knowledge
- * @param p2 the knowledge count
- * @param p3 the knowledge size
+ * @param p1 the socket service thread
+ * @param p2 the socket service thread interrupt
  */
-void shutdown_x_window_system(void* p0, void* p1, void* p2, void* p3) {
+void shutdown_x_window_system(void* p0, void* p1, void* p2) {
 
     log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Shutdown x window system.");
 
@@ -68,7 +67,7 @@ void shutdown_x_window_system(void* p0, void* p1, void* p2, void* p3) {
     if (*di != *NULL_POINTER) {
 
         // Interrupt x window system service thread.
-        interrupt_x_window_system();
+        interrupt_x_window_system(p1, p2);
 
         // The display name.
         // An example identifying the second screen of the first

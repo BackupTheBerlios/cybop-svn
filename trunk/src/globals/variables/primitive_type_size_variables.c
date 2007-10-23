@@ -20,14 +20,14 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2007-09-20 08:00:19 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2007-10-23 17:37:45 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef PRIMITIVE_TYPE_SIZE_VARIABLES_SOURCE
 #define PRIMITIVE_TYPE_SIZE_VARIABLES_SOURCE
 
-#include "../../globals/constants/pointer/pointer_constants.c"
+#include "../../globals/constants/integer/integer_constants.c"
 
 // The character primitive size.
 static int* CHARACTER_PRIMITIVE_SIZE = NUMBER_0_INTEGER_ARRAY;

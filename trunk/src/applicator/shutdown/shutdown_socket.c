@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.20 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
+ * @version $Revision: 1.21 $ $Date: 2007-10-23 17:37:45 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -39,13 +39,14 @@
 /**
  * Shuts down the socket service.
  *
+ * This is done in the reverse order the service was started up.
+ *
  * @param p0 the internals memory
  * @param p1 the base internal
- * @param p2 the knowledge
- * @param p3 the knowledge count
- * @param p4 the knowledge size
+ * @param p2 the socket service thread
+ * @param p3 the socket service thread interrupt
  */
-void shutdown_socket(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void shutdown_socket(void* p0, void* p1, void* p2, void* p3) {
 
     if (p1 != *NULL_POINTER) {
 
@@ -65,7 +66,7 @@ void shutdown_socket(void* p0, void* p1, void* p2, void* p3, void* p4) {
         if (*si != *NULL_POINTER) {
 
             // Interrupt ALL socket service threads of this system.
-            interrupt_socket();
+            interrupt_socket(p2, p3);
 
             // The socket address (local, ipv4, ipv6) of this system.
             void** a = NULL_POINTER;
@@ -134,31 +135,21 @@ void shutdown_socket(void* p0, void* p1, void* p2, void* p3, void* p4) {
             deallocate(ids, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 */
             // Deallocate character buffer.
-    fprintf(stderr, "TEST 0 b: %i \n", *b);
-    fprintf(stderr, "TEST 0 bc: %i \n", **((int**) bc));
-    fprintf(stderr, "TEST 0 bs: %i \n", **((int**) bs));
             deallocate((void*) b, *bs, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
             deallocate((void*) bc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
             deallocate((void*) bs, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    fprintf(stderr, "TEST 1: %i \n", **s);
             // Deallocate socket of this system.
             deallocate((void*) s, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    fprintf(stderr, "TEST 2: %i \n", **s);
             // Deallocate communication partner socket.
             deallocate((void*) ps, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    fprintf(stderr, "TEST 3: %i \n", **s);
             // Deallocate socket address of this system.
             free(*a);
-    fprintf(stderr, "TEST 4: %i \n", **s);
             // Deallocate communication partner socket address.
             free(*pa);
-    fprintf(stderr, "TEST 5: %i \n", **s);
             // Deallocate socket address size of this system.
             deallocate((void*) as, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    fprintf(stderr, "TEST 6: %i \n", **s);
             // Deallocate communication partner socket address size.
             deallocate((void*) pas, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    fprintf(stderr, "TEST 7: %i \n", **s);
 
         } else {
 

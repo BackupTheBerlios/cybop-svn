@@ -20,14 +20,14 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2007-09-20 08:00:19 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2007-10-23 17:37:45 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef SLEEP_TIME_VARIABLES_SOURCE
 #define SLEEP_TIME_VARIABLES_SOURCE
 
-#include "../../globals/constants/pointer/pointer_constants.c"
+#include "../../globals/constants/float/double_constants.c"
 
 // The checker sleep time.
 static double* CHECKER_SLEEP_TIME = NUMBER_0_0_DOUBLE_ARRAY;
