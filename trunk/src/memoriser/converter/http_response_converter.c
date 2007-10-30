@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2007-10-30 13:08:27 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -128,8 +128,9 @@ void encode_http_response_status_line(void* p0, void* p1, void* p2, void* p3, vo
  * @param p2 the destination http response size
  * @param p3 the source details (always of abstraction "compound")
  * @param p4 the source details count
+ * @param p5 the body count
  */
-void encode_http_response_headers(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void encode_http_response_headers(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
     log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Encode http response headers.");
 
@@ -176,7 +177,7 @@ void encode_http_response_headers(void* p0, void* p1, void* p2, void* p3, void* 
     // Encode content length as http body's length.
     // CAUTION! The source is an integer value!
     encode(p0, p1, p2, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
-        p4, (void*) PRIMITIVE_COUNT, *NULL_POINTER, *NULL_POINTER,
+        p5, (void*) PRIMITIVE_COUNT, *NULL_POINTER, *NULL_POINTER,
         *NULL_POINTER, *NULL_POINTER, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 }
 
@@ -213,22 +214,80 @@ void encode_http_response_body(void* p0, void* p1, void* p2, void* p3, void* p4)
  */
 void encode_http_response(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Encode http response.");
+    if (p2 != *NULL_POINTER) {
 
-    // Encode status line containing protocol version and status code.
-    encode_http_response_status_line(p0, p1, p2, p5, p6);
-    // Encode http response line separator.
-    encode(p0, p1, p2, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
-        (void*) HTTP_RESPONSE_LINE_SEPARATOR, (void*) HTTP_RESPONSE_LINE_SEPARATOR_COUNT, *NULL_POINTER, *NULL_POINTER,
-        *NULL_POINTER, *NULL_POINTER, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
-    // Encode headers containing meta data, of which some have the form of variables.
-    encode_http_response_headers(p0, p1, p2, p5, p6);
-    // Encode http headers separator.
-    encode(p0, p1, p2, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
-        (void*) HTTP_HEADERS_SEPARATOR, (void*) HTTP_HEADERS_SEPARATOR_COUNT, *NULL_POINTER, *NULL_POINTER,
-        *NULL_POINTER, *NULL_POINTER, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
-    // Encode body containing optional user data (such as an encoded/serialised xhtml page).
-    encode_http_response_body(p0, p1, p2, p3, p4);
+        int* ds = (int*) p2;
+
+        if (p1 != *NULL_POINTER) {
+
+            int* dc = (int*) p1;
+
+            if (p0 != *NULL_POINTER) {
+
+                void** d = (void**) p0;
+
+                log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Encode http response.");
+
+                // The temporary body.
+                void* b = *NULL_POINTER;
+                int bc = *NUMBER_0_INTEGER;
+                int bs = bc;
+
+                // Allocate temporary body.
+                allocate_array((void*) &b, (void*) &bs, (void*) CHARACTER_ARRAY);
+
+                // Encode body containing optional user data (such as an encoded/serialised xhtml page).
+                //
+                // CAUTION! This has to be done at FIRST, because the body size
+                // is to be written into the headers below!
+                encode_http_response_body((void*) &b, (void*) &bc, (void*) &bs, p3, p4);
+                // Encode status line containing protocol version and status code.
+                encode_http_response_status_line(p0, p1, p2, p5, p6);
+                // Encode http response line separator.
+                encode(p0, p1, p2, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
+                    (void*) HTTP_RESPONSE_LINE_SEPARATOR, (void*) HTTP_RESPONSE_LINE_SEPARATOR_COUNT, *NULL_POINTER, *NULL_POINTER,
+                    *NULL_POINTER, *NULL_POINTER, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+                // Encode headers containing meta data, of which some have the form of variables.
+                //
+                // CAUTION! The body count is handed over as additional parameter.
+                encode_http_response_headers(p0, p1, p2, p5, p6, (void*) &bc);
+                // Encode http headers separator.
+                encode(p0, p1, p2, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
+                    (void*) HTTP_HEADERS_SEPARATOR, (void*) HTTP_HEADERS_SEPARATOR_COUNT, *NULL_POINTER, *NULL_POINTER,
+                    *NULL_POINTER, *NULL_POINTER, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+
+                if ((*dc + bc) > *ds) {
+
+                    // Increase destination http response size by the body count.
+                    *ds = *dc + bc;
+
+                    // Reallocate destination http response using the new size.
+                    reallocate_array(p0, p1, p2, (void*) CHARACTER_ARRAY);
+                }
+
+                // Copy temporary body to the end of the actual destination http response.
+                set_array_elements(*d, p1, b, (void*) &bc, (void*) CHARACTER_ARRAY);
+
+                // Increase destination http response count by the body count.
+                *dc = *dc + bc;
+
+                // Deallocate temporary body.
+                deallocate_array((void*) &b, (void*) &bs, (void*) CHARACTER_ARRAY);
+
+            } else {
+
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode http response. The destination http response is null.");
+            }
+
+        } else {
+
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode http response. The destination http response count is null.");
+        }
+
+    } else {
+
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode http response. The destination http response size is null.");
+    }
 }
 
 /* HTTP_RESPONSE_CONVERTER_SOURCE */

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.61 $ $Date: 2007-10-03 23:40:05 $ $Author: christian $
+ * @version $Revision: 1.62 $ $Date: 2007-10-30 13:08:27 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -48,100 +48,6 @@
 #include "../memoriser/accessor/compound_accessor.c"
 #include "../memoriser/accessor/internal_memory_accessor.c"
 #include "../memoriser/allocator.c"
-
-/**
- * Refreshes the url.
- *
- * @param p0 the parameters
- * @param p1 the parameters count
- * @param p2 the internal memory
- * @param p3 the knowledge memory
- * @param p4 the knowledge memory count
- * @param p5 the knowledge memory size
- * @param p6 the signal identification
- */
-void refresh_url(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
-
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Refresh url.");
-
-/*??
-    // The message abstraction.
-    void** urla = &NULL_POINTER;
-    void** urlac = &NULL_POINTER;
-    void** urlas = &NULL_POINTER;
-    // The message model.
-    void** urlm = &NULL_POINTER;
-    void** urlmc = &NULL_POINTER;
-    void** urlms = &NULL_POINTER;
-    // The message details.
-    void** urld = &NULL_POINTER;
-    void** urldc = &NULL_POINTER;
-    void** urlds = &NULL_POINTER;
-
-    // Get language.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) SEND_URL_NAME, (void*) SEND_URL_NAME_COUNT,
-        (void*) &urla, (void*) &urlac, (void*) &urlas,
-        (void*) &urlm, (void*) &urlmc, (void*) &urlms,
-        (void*) &urld, (void*) &urldc, (void*) &urlds,
-        p3, p4);
-
-    // The socket number for the signal identification.
-    // The index for the signal identification in the array is the same index
-    // in the client socket number array.
-    int i = *NUMBER_MINUS_1_INTEGER;
-
-    get_index_for_signal_id(p2, p6, (void*) &i);
-
-    if (i >= *NUMBER_0_INTEGER) {
-
-        // The client socket.
-        int* cs = NULL_POINTER;
-
-        get_client_socket_number_for_index(p2, (void*) &i, (void*) &cs);
-
-        if (*cs >= *NUMBER_0_INTEGER) {
-
-            char msg_refresh_part_1[] = "<head> <meta http-equiv='expires' content='0'>  <meta http-equiv='refresh' content='0; URL=";
-            char msg_refresh_part_3[] = "'></head><body></body>";
-            int msg_part_1_count = strlen( msg_refresh_part_1 );
-            int msg_part_3_count = strlen( msg_refresh_part_3 );
-
-            //create the destination for the send model
-            void* dest = NULL_POINTER;
-            int* dest_count = NULL_POINTER;
-            int* dest_size = NULL_POINTER;
-
-            allocate(&dest_count, PRIMITIVE_COUNT, INTEGER_VECTOR_ABSTRACTION, INTEGER_VECTOR_ABSTRACTION_COUNT);
-            allocate(&dest_size, PRIMITIVE_COUNT, INTEGER_VECTOR_ABSTRACTION, INTEGER_VECTOR_ABSTRACTION_COUNT);
-            *dest_count = *NUMBER_0_INTEGER;
-            *dest_size  = *NUMBER_0_INTEGER;
-            allocate(&dest, dest_size, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
-
-            decode(&dest, dest_count, dest_size, &msg_refresh_part_1[*NUMBER_0_INTEGER], &msg_part_1_count, *NULL_POINTER, *NULL_POINTER, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
-            decode(&dest, dest_count, dest_size, *urlm, *urlmc, *NULL_POINTER, *NULL_POINTER, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
-            decode(&dest, dest_count, dest_size, &msg_refresh_part_3[*NUMBER_0_INTEGER], &msg_part_3_count, *NULL_POINTER, *NULL_POINTER, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
-
-            // The temporary count, size.
-            int tc = *NUMBER_0_INTEGER;
-            int ts = *NUMBER_0_INTEGER;
-
-            send_tcp_socket((void*) &cs, (void*) &tc, (void*) &ts, (void*) dest, (void*) dest_count);
-
-            // Remove client socket number and main signal identification from internal memory.
-            remove_relation_clientsocketnumber_mainsignalid(p2, (void*) &i);
-
-            // Close socket.
-            close(*cs);
-
-            // Destroy destination.
-            deallocate(&dest, dest_size, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
-            deallocate(&dest_count, PRIMITIVE_COUNT, INTEGER_VECTOR_ABSTRACTION, INTEGER_VECTOR_ABSTRACTION_COUNT);
-            deallocate(&dest_size, PRIMITIVE_COUNT, INTEGER_VECTOR_ABSTRACTION, INTEGER_VECTOR_ABSTRACTION_COUNT);
-        }
-    }
-*/
-}
 
 /**
  * Sends a message in a special language.
@@ -488,7 +394,11 @@ void send_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
 
         if (r != *NUMBER_0_INTEGER) {
 
-            send_socket(p2, (void*) CYBOI_BASE_INTERNAL, *rm, *rmc, (void*) CYBOI_PORT, *nm, *nmc, *stm, *stmc, *mom, *momc, *ma, *mac, *mm, *mmc, *md, *mdc, p3, p4, *lm, *lmc);
+//??            send_socket(p2, (void*) CYBOI_BASE_INTERNAL, *rm, *rmc, (void*) CYBOI_PORT, *nm, *nmc, *stm, *stmc, *mom, *momc, *ma, *mac, *mm, *mmc, *md, *mdc, p3, p4, *lm, *lmc);
+
+            //?? TEST: For testing reasons, the p2 was replaced with p9 here!
+            //?? The signal id serves as client socket to which this cyboi system has to reply.
+            send_socket(p9, (void*) CYBOI_BASE_INTERNAL, *rm, *rmc, (void*) CYBOI_PORT, *nm, *nmc, *stm, *stmc, *mom, *momc, *ma, *mac, *mm, *mmc, *md, *mdc, p3, p4, *lm, *lmc);
         }
     }
 

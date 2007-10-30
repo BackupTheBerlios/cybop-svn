@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.43 $ $Date: 2007-10-23 17:37:45 $ $Author: christian $
+ * @version $Revision: 1.44 $ $Date: 2007-10-30 13:08:27 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -56,146 +56,6 @@
 #include "../../memoriser/allocator.c"
 
 /**
- * Separates the query string into single parameters.
- *
- * A signal is created for each single parameter.
- *
- * Example:
- * query string: domain.teststring1=Hallo&domain.teststring2=Rolf
- * parameter one: domain.teststring1=Hallo and
- * parameter two: domain.teststring2=Rolf
- *
- * @param p0 the query
- * @param p1 the query count
- * @param p2 the internal memory
- */
-/*??
-void set_signals_for_all_parameters(void* p0, int* p1, void* p2) {
-
-    //check of null pointer
-    if ((p0 != *NULL_POINTER) && (p1 != *NULL_POINTER) && (p2 != *NULL_POINTER)) {
-
-        int query_counter = *NUMBER_0_INTEGER;
-
-        //paramater
-        char* param = (char*) *NULL_POINTER;
-        int* param_count = (int*) *NULL_POINTER;
-        int* param_size = (int*) *NULL_POINTER;
-
-        //value for the parameter
-        char* value = (char*) *NULL_POINTER;
-        int* value_count = (int*) *NULL_POINTER;
-        int* value_size = (int*) *NULL_POINTER;
-
-        allocate(&param_count, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-        *param_count = *p1;
-        allocate(&param_size, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-        *param_size = *p1;
-        allocate_character_vector(&param, param_size);
-
-        allocate(&value_count, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-        *value_count = *p1;
-        allocate(&value_size, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-        *value_size = *p1;
-        allocate_character_vector(&value, value_size);
-
-        // The comparison result.
-        int r = *NUMBER_0_INTEGER;
-
-        //elements from the array
-        void* element = *NULL_POINTER;
-        //elements from the array
-        void* decode_element = *NULL_POINTER;
-        int last_query_count = *NUMBER_0_INTEGER;
-
-        //temp count  for comparision
-        int temp_count = *NUMBER_1_INTEGER;
-
-        while (*NUMBER_1_INTEGER) {
-
-            if (query_counter >= *p1) {
-
-                break;
-            }
-
-            // param
-            *param_count = *NUMBER_0_INTEGER;
-            r = *NUMBER_0_INTEGER;
-
-            while (*NUMBER_1_INTEGER) {
-
-                get_array_elements((void*) p0, (void*) &query_counter, (void*) &element, CHARACTER_ARRAY);
-
-                compare_arrays(element, &temp_count, EQUALS_SIGN_ASCII_CHARACTER, PRIMITIVE_COUNT, &r, CHARACTER_ARRAY);
-
-                if ((query_counter >= *p1) || (r == *NUMBER_1_INTEGER)) {
-
-                    query_counter = query_counter + *NUMBER_1_INTEGER;
-                    break;
-                }
-
-                //the element must insert into the param
-                last_query_count = *p1 - query_counter;
-
-                get_character_from_escape_code(element, &last_query_count, (char**) &decode_element);
-                set_array_elements(param, param_count, decode_element, &temp_count, CHARACTER_ARRAY);
-
-                if (element == decode_element) {
-
-                    query_counter = query_counter + *NUMBER_1_INTEGER;
-
-                } else {
-
-                    query_counter = query_counter + *ESCAPE_CODE_CHARACTER_COUNT;
-                }
-
-                *param_count = *param_count + *NUMBER_1_INTEGER;
-            }
-
-            //value
-            *value_count = *NUMBER_0_INTEGER;
-            r = *NUMBER_0_INTEGER;
-
-            while (*NUMBER_1_INTEGER) {
-
-                get_array_elements((void*) p0, (void*) &query_counter, (void*) &element, CHARACTER_ARRAY);
-
-                compare_arrays(element, &temp_count, AMPERSAND_ASCII_CHARACTER, PRIMITIVE_COUNT, &r, CHARACTER_ARRAY);
-
-                if ((query_counter >= *p1) || (r == *NUMBER_1_INTEGER)) {
-
-                    query_counter = query_counter + *NUMBER_1_INTEGER;
-                    break;
-                }
-
-                //the element must insert into the value
-                last_query_count = *p1 - query_counter;
-                get_character_from_escape_code(element, &last_query_count, (char**) &decode_element);
-                set_array_elements(value, value_count, decode_element, &temp_count, CHARACTER_ARRAY);
-
-                if (element == decode_element) {
-
-                    query_counter = query_counter + *NUMBER_1_INTEGER;
-
-                } else {
-
-                    query_counter = query_counter + *ESCAPE_CODE_CHARACTER_COUNT;
-                }
-
-                *value_count = *value_count + *NUMBER_1_INTEGER;
-            }
-
-            //set the signal for the paramater and the value
-            if (*param_count > *NUMBER_0_INTEGER) {
-
-                set_signal_for_parameter(value, value_count, param, param_count, p2);
-            }
-        }
-    }
-}
-*/
-
-/**
  * Receives a socket signal.
  *
  * @param p0 the knowledge memory
@@ -216,9 +76,10 @@ void set_signals_for_all_parameters(void* p0, int* p1, void* p2) {
  * @param p15 the commands count
  * @param p16 the command name
  * @param p17 the command name count
+ * @param p18 the client socket to reply to
  */
 void receive_socket_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7,
-    void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14, void* p15, void* p16, void* p17) {
+    void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14, void* p15, void* p16, void* p17, void* p18) {
 
     if (p7 != *NULL_POINTER) {
 
@@ -235,18 +96,18 @@ void receive_socket_signal(void* p0, void* p1, void* p2, void* p3, void* p4, voi
     static int* INDEX_PARAMETER_COUNT = NUMBER_5_INTEGER_ARRAY;
 
         // The command name, abstraction, model, details.
-        void** cn = NULL_POINTER;
-        void** cnc = NULL_POINTER;
-        void** cns = NULL_POINTER;
-        void** ca = NULL_POINTER;
-        void** cac = NULL_POINTER;
-        void** cas = NULL_POINTER;
-        void** cm = NULL_POINTER;
-        void** cmc = NULL_POINTER;
-        void** cms = NULL_POINTER;
-        void** cd = NULL_POINTER;
-        void** cdc = NULL_POINTER;
-        void** cds = NULL_POINTER;
+        void** n = NULL_POINTER;
+        void** nc = NULL_POINTER;
+        void** ns = NULL_POINTER;
+        void** a = NULL_POINTER;
+        void** ac = NULL_POINTER;
+        void** as = NULL_POINTER;
+        void** m = NULL_POINTER;
+        void** mc = NULL_POINTER;
+        void** ms = NULL_POINTER;
+        void** d = NULL_POINTER;
+        void** dc = NULL_POINTER;
+        void** ds = NULL_POINTER;
 
         if (p16 != *NULL_POINTER) {
 
@@ -254,10 +115,10 @@ void receive_socket_signal(void* p0, void* p1, void* p2, void* p3, void* p4, voi
             // If the name is not known, the command parameter is left untouched.
             get_universal_compound_element_by_name(p14, p15,
                 p16, p17,
-                (void*) &cn, (void*) &cnc, (void*) &cns,
-                (void*) &ca, (void*) &cac, (void*) &cas,
-                (void*) &cm, (void*) &cmc, (void*) &cms,
-                (void*) &cd, (void*) &cdc, (void*) &cds,
+                (void*) &n, (void*) &nc, (void*) &ns,
+                (void*) &a, (void*) &ac, (void*) &as,
+                (void*) &m, (void*) &mc, (void*) &ms,
+                (void*) &d, (void*) &dc, (void*) &ds,
                 p0, p1);
 
         } else {
@@ -265,21 +126,21 @@ void receive_socket_signal(void* p0, void* p1, void* p2, void* p3, void* p4, voi
             // Get default index command, since the given command is null.
             get_universal_compound_element_by_name(p14, p15,
                 INDEX_PARAMETER, INDEX_PARAMETER_COUNT,
-                (void*) &cn, (void*) &cnc, (void*) &cns,
-                (void*) &ca, (void*) &cac, (void*) &cas,
-                (void*) &cm, (void*) &cmc, (void*) &cms,
-                (void*) &cd, (void*) &cdc, (void*) &cds,
+                (void*) &n, (void*) &nc, (void*) &ns,
+                (void*) &a, (void*) &ac, (void*) &as,
+                (void*) &m, (void*) &mc, (void*) &ms,
+                (void*) &d, (void*) &dc, (void*) &ds,
                 p0, p1);
         }
 
-    fprintf(stderr, "TEST: receive socket signal actual command n: %s \n", (char*) *cn);
-    fprintf(stderr, "TEST: receive socket signal actual command nc: %i \n", **((int**) cnc));
-    fprintf(stderr, "TEST: receive socket signal actual command a: %s \n", (char*) *ca);
-    fprintf(stderr, "TEST: receive socket signal actual command ac: %i \n", **((int**) cac));
-    fprintf(stderr, "TEST: receive socket signal actual command m: %s \n", (char*) *cm);
-    fprintf(stderr, "TEST: receive socket signal actual command mc: %i \n", **((int**) cmc));
-    fprintf(stderr, "TEST: receive socket signal actual command d: %i \n", *cd);
-    fprintf(stderr, "TEST: receive socket signal actual command dc: %i \n", **((int**) cdc));
+    fprintf(stderr, "TEST: receive socket signal actual command n: %s \n", (char*) *n);
+    fprintf(stderr, "TEST: receive socket signal actual command nc: %i \n", **((int**) nc));
+    fprintf(stderr, "TEST: receive socket signal actual command a: %s \n", (char*) *a);
+    fprintf(stderr, "TEST: receive socket signal actual command ac: %i \n", **((int**) ac));
+    fprintf(stderr, "TEST: receive socket signal actual command m: %s \n", (char*) *m);
+    fprintf(stderr, "TEST: receive socket signal actual command mc: %i \n", **((int**) mc));
+    fprintf(stderr, "TEST: receive socket signal actual command d: %i \n", *d);
+    fprintf(stderr, "TEST: receive socket signal actual command dc: %i \n", **((int**) dc));
 
         // Lock signal memory mutex.
         pthread_mutex_lock(p6);
@@ -291,12 +152,15 @@ void receive_socket_signal(void* p0, void* p1, void* p2, void* p3, void* p4, voi
         get_new_signal_identification(p3, p4, (void*) &id);
 
         // Add signal to signal memory.
-        set_signal(p3, p4, p5, ca, cac, cm, cmc, cd, cdc, (void*) &NORMAL_CYBOI_SIGNAL_PRIORITY, (void*) id);
+//??        set_signal(p3, p4, p5, a, ac, m, mc, d, dc, (void*) &NORMAL_CYBOI_SIGNAL_PRIORITY, (void*) id);
 
-/*??
-        add_signal_id(p0, (void*) id);
-        add_client_socket_number(p0, (void*) cs);
-*/
+        //?? TEST: For testing reasons, the id was replaced with p18 (client socket) here!
+        //?? The signal id serves as client socket to which this cyboi system has to reply.
+        void** sock = NULL_POINTER;
+        set_new_signal_identification((void*) &sock, p18);
+    fprintf(stderr, "TEST: receive socket signal p18: %i \n", *((int*) p18));
+    fprintf(stderr, "TEST: receive socket signal sock: %i \n", **((int**) sock));
+        set_signal(p3, p4, p5, a, ac, m, mc, d, dc, (void*) &NORMAL_CYBOI_SIGNAL_PRIORITY, (void*) sock);
 
         // Set interrupt request flag, in order to notify the signal checker
         // that a new signal has been placed in the signal memory.
@@ -443,8 +307,9 @@ void receive_socket_stream_message(void* p0, void* p1, void* p2, void* p3) {
  * @param p5 the communication partner-connected socket address size
  * @param p6 the original socket of this system
  * @param p7 the socket mutex
+ * @param p8 TEST temporary client socket
  */
-void receive_socket_stream(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
+void receive_socket_stream(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8) {
 
     if (p6 != *NULL_POINTER) {
 
@@ -484,6 +349,13 @@ void receive_socket_stream(void* p0, void* p1, void* p2, void* p3, void* p4, voi
             // The address "pa" returns information about the name of the
             // communication partner socket that initiated the connection.
             *ps = accept(*os, (struct sockaddr*) p4, (socklen_t*) p5);
+
+    fprintf(stderr, "TEST: receive socket stream client partner socket ps: %i \n", *ps);
+
+            //?? TEST: copy temporary client socket, in order to be forwarded as parameter attached to signal
+            *((int*) p8) = *ps;
+
+    fprintf(stderr, "TEST: receive socket stream copied client socket p8: %i \n", *((int*) p8));
 
             if (*ps >= *NUMBER_0_INTEGER) {
 
@@ -689,8 +561,9 @@ void receive_socket_raw(void* p0, void* p1, void* p2) {
  * @param p9 the socket mutex
  * @param p10 the communication style
  * @param p11 the communication style count
+ * @param p12 TEST temporary client socket
  */
-void receive_socket_style(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11) {
+void receive_socket_style(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11, void* p12) {
 
     log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Receive socket message depending on communication style.");
 
@@ -703,7 +576,7 @@ void receive_socket_style(void* p0, void* p1, void* p2, void* p3, void* p4, void
 
         if (r != *NUMBER_0_INTEGER) {
 
-            receive_socket_stream(p0, p1, p2, p3, p4, p5, p6, p9);
+            receive_socket_stream(p0, p1, p2, p3, p4, p5, p6, p9, p12);
         }
     }
 
@@ -778,7 +651,11 @@ void receive_socket_message(void* p0, void* p1, void* p2, void* p3, void* p4, vo
 
                 void** b = (void**) p27;
 
-                log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Receive socket message.");
+                if (p8 != *NULL_POINTER) {
+
+                    void** m = (void**) p8;
+
+                    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Receive socket message.");
 
         fprintf(stderr, "TEST 0 language: %s \n", (char*) p16);
         fprintf(stderr, "TEST 0 language count: %i \n", *((int*) p17));
@@ -786,166 +663,188 @@ void receive_socket_message(void* p0, void* p1, void* p2, void* p3, void* p4, vo
         fprintf(stderr, "TEST 0 bc: %i \n", *((int*) p28));
         fprintf(stderr, "TEST 0 bs: %i \n", *((int*) p29));
 
-                // Receive socket message depending on communication style.
-                receive_socket_style(p27, p28, p29, p23, p24, p25, p20, p21, p22, p26, p18, p19);
+                    //?? TEST: Temporary socket for handing over as parameter.
+                    int sock = *NUMBER_0_INTEGER;
+
+                    // Receive socket message depending on communication style.
+                    receive_socket_style(p27, p28, p29, p23, p24, p25, p20, p21, p22, p26, p18, p19, (void*) &sock);
+
+    fprintf(stderr, "TEST: receive socket message client socket sock: %i \n", sock);
 
         fprintf(stderr, "TEST 1 bc: %i \n", *((int*) p28));
         fprintf(stderr, "TEST 1 bs: %i \n", *((int*) p29));
 
-                // Decode http request and write any parameters into the
-                // compound model and details being handed over as parameters.
-                decode(p8, p9, p10, p11, p12, p13, *b, p28, p0, p1, p16, p17);
+                    //?? TODO: The model content p8, p9, p10 needs to be RESET every time since
+                    //?? otherwise, new commands are just added to the "action" part entry, for example.
+                    //?? Instead, all values should be replaced!
+
+                    // Decode http request and write any parameters into the
+                    // compound model and details being handed over as parameters.
+                    decode(p8, p9, p10, p11, p12, p13, *b, p28, p0, p1, p16, p17);
 
         fprintf(stderr, "TEST 2 bc: %i \n", *((int*) p28));
         fprintf(stderr, "TEST 2 bs: %i \n", *((int*) p29));
 
-                // The action name, abstraction, model, details.
-                void** an = NULL_POINTER;
-                void** anc = NULL_POINTER;
-                void** ans = NULL_POINTER;
-                void** aa = NULL_POINTER;
-                void** aac = NULL_POINTER;
-                void** aas = NULL_POINTER;
-                void** am = NULL_POINTER;
-                void** amc = NULL_POINTER;
-                void** ams = NULL_POINTER;
-                void** ad = NULL_POINTER;
-                void** adc = NULL_POINTER;
-                void** ads = NULL_POINTER;
+                    // The action name, abstraction, model, details.
+                    void** an = NULL_POINTER;
+                    void** anc = NULL_POINTER;
+                    void** ans = NULL_POINTER;
+                    void** aa = NULL_POINTER;
+                    void** aac = NULL_POINTER;
+                    void** aas = NULL_POINTER;
+                    void** am = NULL_POINTER;
+                    void** amc = NULL_POINTER;
+                    void** ams = NULL_POINTER;
+                    void** ad = NULL_POINTER;
+                    void** adc = NULL_POINTER;
+                    void** ads = NULL_POINTER;
 
-                // Get action.
-                // It is just one of many possibly parameters that were received as
-                // http request and added to the compound model above.
-                get_universal_compound_element_by_name(*((void**) p8), p9,
-                    (void*) RECEIVE_MODEL_ACTION_NAME, (void*) RECEIVE_MODEL_ACTION_NAME_COUNT,
-                    (void*) &an, (void*) &anc, (void*) &ans,
-                    (void*) &aa, (void*) &aac, (void*) &aas,
-                    (void*) &am, (void*) &amc, (void*) &ams,
-                    (void*) &ad, (void*) &adc, (void*) &ads,
-                    p0, p1);
-
-                // The request method name, abstraction, model, details.
-                void** mn = NULL_POINTER;
-                void** mnc = NULL_POINTER;
-                void** mns = NULL_POINTER;
-                void** ma = NULL_POINTER;
-                void** mac = NULL_POINTER;
-                void** mas = NULL_POINTER;
-                void** mm = NULL_POINTER;
-                void** mmc = NULL_POINTER;
-                void** mms = NULL_POINTER;
-                void** md = NULL_POINTER;
-                void** mdc = NULL_POINTER;
-                void** mds = NULL_POINTER;
-
-                // Get request method.
-                get_universal_compound_element_by_name(*((void**) p8), p9,
-                    (void*) RECEIVE_MODEL_METHOD_NAME, (void*) RECEIVE_MODEL_METHOD_NAME_COUNT,
-                    (void*) &mn, (void*) &mnc, (void*) &mns,
-                    (void*) &ma, (void*) &mac, (void*) &mas,
-                    (void*) &mm, (void*) &mmc, (void*) &mms,
-                    (void*) &md, (void*) &mdc, (void*) &mds,
-                    p0, p1);
-
-        fprintf(stderr, "TEST 3 bc: %i \n", *((int*) p28));
-        fprintf(stderr, "TEST 3 bs: %i \n", *((int*) p29));
-
-                if (*am != *NULL_POINTER) {
-
-                    // The action parameter is NOT null, so it
-                    // will be used for generating a signal.
-
-        fprintf(stderr, "TEST special am: %s \n", (char*) *am);
-        fprintf(stderr, "TEST special amc: %i \n", **((int**) amc));
-
-                    // Receive socket signal.
-                    receive_socket_signal(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, *am, *amc);
-
-                } else {
-
-                    // The action parameter IS null, so the request method
-                    // will be used as command instead, for generating a signal.
-
-        fprintf(stderr, "TEST special mm: %s \n", (char*) *mm);
-        fprintf(stderr, "TEST special mmc: %i \n", **((int**) mmc));
-
-                    // Receive socket signal.
-                    receive_socket_signal(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, *mm, *mmc);
-                }
-
-        fprintf(stderr, "TEST 4 bc: %i \n", *((int*) p28));
-        fprintf(stderr, "TEST 4 bs: %i \n", *((int*) p29));
-
-                //?? CAUTION! This sleep procedure is temporarily necessary for testing!
-                //?? Otherwise, the loop runs into the next cycle and the socket mutex
-                //?? gets locked, so that the "send_socket" procedure in the main thread
-                //?? cannot send its message.
-                //??    sleep(30);
+                    // Get action.
+                    // It is just one of many possibly parameters that were received as
+                    // http request and added to the compound model above.
+                    get_universal_compound_element_by_name(*m, p9,
+                        (void*) RECEIVE_MODEL_ACTION_NAME, (void*) RECEIVE_MODEL_ACTION_NAME_COUNT,
+                        (void*) &an, (void*) &anc, (void*) &ans,
+                        (void*) &aa, (void*) &aac, (void*) &aas,
+                        (void*) &am, (void*) &amc, (void*) &ams,
+                        (void*) &ad, (void*) &adc, (void*) &ads,
+                        p0, p1);
 
 /*??
-                // The url basename.
-                char* url_basename = (char*) *NULL_POINTER;
-                int url_basename_count = *NUMBER_0_INTEGER;
-                // Create url basename.
-                allocate_array((void*) &url_basename, (void*) &url_basename_count, (void*) CHARACTER_ARRAY);
-                // Get url base name.
-                receive_socket_url(msg, &msg_count, &url_basename, &url_basename_count);
+                    // The request method name, abstraction, model, details.
+                    void** mn = NULL_POINTER;
+                    void** mnc = NULL_POINTER;
+                    void** mns = NULL_POINTER;
+                    void** ma = NULL_POINTER;
+                    void** mac = NULL_POINTER;
+                    void** mas = NULL_POINTER;
+                    void** mm = NULL_POINTER;
+                    void** mmc = NULL_POINTER;
+                    void** mms = NULL_POINTER;
+                    void** md = NULL_POINTER;
+                    void** mdc = NULL_POINTER;
+                    void** mds = NULL_POINTER;
 
-                // The parameter.
-                char* param = (char*) *NULL_POINTER;
-                int param_count = *NUMBER_0_INTEGER;
-                // Create paramater.
-                allocate_array((void*) &param, (void*) &param_count, (void*) CHARACTER_ARRAY);
-                // Get parameters.
-                receive_socket_parameter(msg, &msg_count, &param, &param_count);
+                    // Get request method.
+                    get_universal_compound_element_by_name(*m, p9,
+                        (void*) RECEIVE_MODEL_METHOD_NAME, (void*) RECEIVE_MODEL_METHOD_NAME_COUNT,
+                        (void*) &mn, (void*) &mnc, (void*) &mns,
+                        (void*) &ma, (void*) &mac, (void*) &mas,
+                        (void*) &mm, (void*) &mmc, (void*) &mms,
+                        (void*) &md, (void*) &mdc, (void*) &mds,
+                        p0, p1);
+*/
 
-                // The firefox web browser makes a second request
-                // to determine the favicon.
-                char firefox_request[] = "favicon.ico";
-                char* p_firefox_request = &firefox_request[*NUMBER_0_INTEGER];
-                int firefox_request_count = *NUMBER_11_INTEGER;
+            fprintf(stderr, "TEST 3 bc: %i \n", *((int*) p28));
+            fprintf(stderr, "TEST 3 bs: %i \n", *((int*) p29));
 
-                // The comparison result.
-                int r = *NUMBER_0_INTEGER;
+                    if (*am != *NULL_POINTER) {
 
-                compare_arrays((void*) url_basename, (void*) &url_basename_count, (void*) p_firefox_request, (void*) &firefox_request_count, (void*) &r, (void*) CHARACTER_ARRAY);
+                        // The action parameter is NOT null, so it
+                        // will be used for generating a signal.
 
-                if (r != *NUMBER_0_INTEGER) {
+            fprintf(stderr, "TEST special am: %s \n", (char*) *am);
+            fprintf(stderr, "TEST special amc: %i \n", **((int**) amc));
 
-                    // Close partner socket, since the request was just intended to retrieve the icon.
-                    close(*ps);
+                        // Receive socket signal.
+                        receive_socket_signal(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, *am, *amc, (void*) &sock);
+
+/*??
+                    } else {
+
+                        // The action parameter IS null, so the request method
+                        // will be used as command instead, for generating a signal.
+
+            fprintf(stderr, "TEST special mm: %s \n", (char*) *mm);
+            fprintf(stderr, "TEST special mmc: %i \n", **((int**) mmc));
+
+                        // Receive socket signal.
+                        receive_socket_signal(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, *mm, *mmc);
+*/
+
+                    } else {
+
+                        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) "Could not receive socket message. The action parameter is null.");
+                    }
+
+            fprintf(stderr, "TEST 4 bc: %i \n", *((int*) p28));
+            fprintf(stderr, "TEST 4 bs: %i \n", *((int*) p29));
+
+                    //?? CAUTION! This sleep procedure is temporarily necessary for testing!
+                    //?? Otherwise, the loop runs into the next cycle and the socket mutex
+                    //?? gets locked, so that the "send_socket" procedure in the main thread
+                    //?? cannot send its message.
+                    //??    sleep(30);
+
+/*??
+                    // The url basename.
+                    char* url_basename = (char*) *NULL_POINTER;
+                    int url_basename_count = *NUMBER_0_INTEGER;
+                    // Create url basename.
+                    allocate_array((void*) &url_basename, (void*) &url_basename_count, (void*) CHARACTER_ARRAY);
+                    // Get url base name.
+                    receive_socket_url(msg, &msg_count, &url_basename, &url_basename_count);
+
+                    // The parameter.
+                    char* param = (char*) *NULL_POINTER;
+                    int param_count = *NUMBER_0_INTEGER;
+                    // Create paramater.
+                    allocate_array((void*) &param, (void*) &param_count, (void*) CHARACTER_ARRAY);
+                    // Get parameters.
+                    receive_socket_parameter(msg, &msg_count, &param, &param_count);
+
+                    // The firefox web browser makes a second request
+                    // to determine the favicon.
+                    char firefox_request[] = "favicon.ico";
+                    char* p_firefox_request = &firefox_request[*NUMBER_0_INTEGER];
+                    int firefox_request_count = *NUMBER_11_INTEGER;
+
+                    // The comparison result.
+                    int r = *NUMBER_0_INTEGER;
+
+                    compare_arrays((void*) url_basename, (void*) &url_basename_count, (void*) p_firefox_request, (void*) &firefox_request_count, (void*) &r, (void*) CHARACTER_ARRAY);
+
+                    if (r != *NUMBER_0_INTEGER) {
+
+                        // Close partner socket, since the request was just intended to retrieve the icon.
+                        close(*ps);
+
+                    } else {
+
+                        // query string handling
+                        set_signals_for_all_parameters((void*) param, (void*) &param_count, p0);
+
+                        //?? The OLD solution created a signal here from a cybol knowledge template.
+                        //?? This is NOW easier, since the commands already exist in the knowledge tree
+                        //?? and only have to be referenced from here.
+                    }
+*/
+
+                    // Reset character buffer.
+                    //
+                    // CAUTION! The buffer and its count do ALWAYS have to be reset,
+                    // NOT ONLY if the message data reception (above) was successful!
+                    // The reason is that on failure, the buffer count is set to some
+                    // negative value and therefore needs to be reset in any case.
+                    //
+                    // CAUTION! Do NOT deallocate the character buffer!
+                    // It was allocated at socket startup and must remain unchanged,
+                    // since threads are not allowed to allocate any memory area.
+                    // Therefore, its elements are just set to null pointers here.
+                    //
+                    // CAUTION! Do NOT reset the maximum buffer size!
+                    // It was allocated and initialised at socket startup
+                    // and must remain unchanged.
+                    memset(*b, *NUMBER_0_INTEGER, *bs);
+                    *bc = *NUMBER_0_INTEGER;
+
+            fprintf(stderr, "TEST 5 bc: %i \n", *((int*) p28));
+            fprintf(stderr, "TEST 5 bs: %i \n", *((int*) p29));
 
                 } else {
 
-                    // query string handling
-                    set_signals_for_all_parameters((void*) param, (void*) &param_count, p0);
-
-                    //?? The OLD solution created a signal here from a cybol knowledge template.
-                    //?? This is NOW easier, since the commands already exist in the knowledge tree
-                    //?? and only have to be referenced from here.
+                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not receive socket message. The model is null.");
                 }
-*/
-
-                // Reset character buffer.
-                //
-                // CAUTION! The buffer and its count do ALWAYS have to be reset,
-                // NOT ONLY if the message data reception (above) was successful!
-                // The reason is that on failure, the buffer count is set to some
-                // negative value and therefore needs to be reset in any case.
-                //
-                // CAUTION! Do NOT deallocate the character buffer!
-                // It was allocated at socket startup and must remain unchanged,
-                // since threads are not allowed to allocate any memory area.
-                // Therefore, its elements are just set to null pointers here.
-                //
-                // CAUTION! Do NOT reset the maximum buffer size!
-                // It was allocated and initialised at socket startup
-                // and must remain unchanged.
-                memset(*b, *NUMBER_0_INTEGER, *bs);
-                *bc = *NUMBER_0_INTEGER;
-
-        fprintf(stderr, "TEST 5 bc: %i \n", *((int*) p28));
-        fprintf(stderr, "TEST 5 bs: %i \n", *((int*) p29));
 
             } else {
 
@@ -1138,9 +1037,11 @@ void receive_socket_thread(void* p0, void* p1) {
             // CAUTION! This is ONLY necessary if using a non-blocking socket!
             // sleep(1.0);
 
+/*??
             //?? TESTING only; delete BREAK command and this log message later!
             log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "TEST: Break loop now ...");
             break;
+*/
         }
 
     } else {

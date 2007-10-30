@@ -24,7 +24,7 @@
  * - receive an http stream into a byte array
  * - send an http stream from a byte array
  *
- * @version $Revision: 1.14 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2007-10-30 13:08:27 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -62,7 +62,7 @@ void read_socket(void* p0, void* p1, void* p2, void* p3, void* p4) {
  *
  * @param p0 the destination socket of this system
  * @param p1 the source byte array
- * @param p2 the source count
+ * @param p2 the source byte array count
  * @param p3 the number of bytes transferred
  */
 void write_socket_stream_server_mode_single_transfer(void* p0, void* p1, void* p2, void* p3) {
@@ -166,7 +166,7 @@ void write_socket_stream_server_mode_single_transfer(void* p0, void* p1, void* p
  *
  * @param p0 the destination socket of this system
  * @param p1 the source byte array
- * @param p2 the source count
+ * @param p2 the source byte array count
  */
 void write_socket_stream_server_mode(void* p0, void* p1, void* p2) {
 
@@ -492,9 +492,9 @@ void write_socket_raw() {
  *
  * @param p0 the destination socket of this system
  * @param p1 the source byte array
- * @param p2 the source count
+ * @param p2 the source byte array count
  * @param p3 the socket address of the communication partner (Hand over as reference!)
- * @param p4 the socket address size
+ * @param p4 the socket address of the communication partner size
  * @param p5 the communication mode
  * @param p6 the communication mode count
  * @param p7 the communication style

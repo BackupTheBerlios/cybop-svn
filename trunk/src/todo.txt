@@ -7,12 +7,73 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.21 $ $Date: 2007-10-23 17:37:45 $ $Author: christian $
+# @version $Revision: 1.22 $ $Date: 2007-10-30 13:08:27 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Store socket of a client, in order to be able to reply to it;
-            possibly hand over a cybol property, to store the socket in the knowledge tree
+        //?? TODO: The model content p8, p9, p10 needs to be RESET every time since
+        //?? otherwise, new commands are just added to the "action" part entry, for example.
+        //?? Instead, all values should be replaced!
+        * Does it make sense to hand over a cybol model containing entries for:
+            method, scheme, authority, path, fragment, action at all?
+            See "residenz/wui/index_input.cybol"!
+            Actually, a cybol application should have nothing to do with low-level socket functionality.
+
+        * Create three different sockets (locak, inet, inet6)? distinguish at socket startup?
+            and store as different entries in internal memory?
+        * move and rename "set_new_signal_identification" to e.g. /globals/references/integer_references.c
+            and name function e.g. "get_integer_reference"
+        * when sending via socket in client mode, cyboi has to wait for an answer from the server;
+            the receive functions may be used for that;
+            BUT: move basic receive functions into "socket_communicator.c" and rename into "read_socket_...",
+            so that the "applicator" may access the "memoriser" using a proper unidirectional dependency
+        * Implement session on application level (Res Medicinae)
+        * Add the following comment to a matching source code file:
+
+            Since http is a stateless protocol, it does not provide a possibility to
+            find out whether or not several consequent http requests belong together.
+
+            Therefore, the application on the next higher level of abstraction has to
+            care about that, by opening a "session" for each request from an unknown user.
+            Every such session gets a unique identifier called "session id".
+
+            Whenever the client now sends an http request to the server,
+            it also sends the session id, so that data already stored on the
+            server can be assigned to the correct user.
+
+            There are several ways to transfer a session id:
+            1 as cookie
+            2 within the uri
+                2.1 GET
+                    2.1.1 in the query, e.g.:
+                        http://domain.tld/index.php?sid=3Dedb0e8665db4e9042fe0176a89aade16
+                    2.1.2 in the path
+                        http://domain.tld/edb0e8665db4e9042fe0176a89aade16/index.php
+                2.2 POST (within html forms, using input elements of type ?hidden")
+
+            Problems:
+            1 Many users have cookies deactivated in their browsers.
+            However, an application may request to activate cookies.
+            2 Each uri of a (generated) webpage has to be modified to contain the session id.
+            2.2 All navigation has to occur via html forms (buttons etc.); simple links do not suffice
+
+            In order to avoid users manipulating and using the session id of another user,
+            a session id has to be generated from a range of values that is large enough to
+            minimise the probability of guessing another user's session id.
+
+        * Store socket of a client, in order to be able to reply to it:
+            1 hand over a cybol property, to store the socket in the knowledge tree
+                --> no, since low-level sockets should not be known to cybol applications
+            2 store many sockets in a special socket container or in internal memory, respectively
+                --> not necessary to handle many sockets, since each connection is treated like a new request
+            3 hand over socket as additional parameter of a signal, in order to be able to send a reply to the client
+                --> replace the "signal id" parameter with the socket
+                --> possibly also hand over the communication partner address, if necessary
+                --> remove communication partner socket + address from internal memory in turn
+                --> close socket after having sent a reply to the requesting client
+        * It was decided that "send" operations do NOT run in an own thread (for now and the near future, at least),
+            also if querying a server via http, since this would mix up the signal handling mechanism
+
         * Use an OR || and compare for numeric character reference and character entity reference, when parsing http requests
         * Distinguish cybol- from memory abstractions
         * Enable multiple abstractions like "character|UTF-32|gzip", separated by

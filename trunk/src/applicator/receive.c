@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.41 $ $Date: 2007-10-03 23:40:05 $ $Author: christian $
+ * @version $Revision: 1.42 $ $Date: 2007-10-30 13:08:27 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -83,6 +83,7 @@
  * - channel (required): the channel via which to receive the message (gnu_linux_console, www, x_window_system etc.)
  * - language (required): the language (abstraction, type, structure) of the data received (http_request, xdt, boolean, character etc.)
  * - message (required): the source (knowledge template) from where to receive data
+ * - meta message (optional): the source (knowledge template) from where to receive meta data (details)
  * - model (required): the compound model to be filled with the data received
  * - details (required): the compound details to be filled with the data received
  * - root (required): the knowledge model that will serve as the root

@@ -14,9 +14,15 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.34 $ $Date: 2007-10-23 17:37:45 $ $Author: christian $
+# @version $Revision: 1.35 $ $Date: 2007-10-30 13:08:27 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2007-10-30  Christian Heller  <christian.heller@tuxtax.de>
+        * Determine body count at first, before adding it to http header in "http_response_converter.c"
+        * Delete a number of outdated functions
+        * Add temporary "dirty" changes to make http request and response back to the same client socket run for the first time
+            (e.g. misuse the signal id to forward the client socket as parameter attached to the signal)
 
 2007-10-15  Christian Heller  <christian.heller@tuxtax.de>
         * Debug "startup_socket.c" so that buffer size is initialised first,

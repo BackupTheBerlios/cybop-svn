@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.25 $ $Date: 2007-10-23 17:37:45 $ $Author: christian $
+ * @version $Revision: 1.26 $ $Date: 2007-10-30 13:08:27 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -78,9 +78,11 @@ void send_socket_get_socket_server_mode(void* p0, void* p1, void* p2) {
         i = *base + *SOCKET_MUTEX_INTERNAL;
         get_element(p1, (void*) &i, (void*) &mt, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 */
+/*??
         // Get communication partner socket.
         i = *base + *SOCKET_COMMUNICATION_PARTNER_INTERNAL;
         get_element(p1, (void*) &i, p0, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+*/
 
     } else {
 
@@ -94,7 +96,7 @@ void send_socket_get_socket_server_mode(void* p0, void* p1, void* p2) {
  * Client mode means that this system acts as client asking a server system,
  * which is its (local or remote) communication partner.
  *
- * @param p0 the socket of this system (Hand over as reference!)
+ * @param p0 the socket of this system (Hand over as reference OF reference!!)
  * @param p1 the socket namespace
  * @param p2 the communication style
  */
@@ -491,7 +493,6 @@ void send_socket(void* p0, void* p1, void* p2, void* p3,
     void* ha = *NULL_POINTER;
     // The socket address of the communication partner.
     void* sa = *NULL_POINTER;
-    // The socket address size of the communication partner.
     int sas = *NUMBER_0_INTEGER;
     // The http body character vector as encoded (serialised) model.
     void* b = *NULL_POINTER;
@@ -505,8 +506,10 @@ void send_socket(void* p0, void* p1, void* p2, void* p3,
 /*??
     // Get socket- and address namespace.
     startup_socket_get_namespace((void*) &sn, (void*) &an, p5, p6);
+*/
     // Get socket communication style.
     startup_socket_get_style((void*) &st, p7, p8);
+/*??
     // Get socket.
     send_socket_get_socket((void*) &s, p0, p1, (void*) &sn, (void*) &st, p9, p10);
 
@@ -599,42 +602,12 @@ void send_socket(void* p0, void* p1, void* p2, void* p3,
     // identical. As a consequence, socket locking using a mutex is
     // not necessary here!
 
-    // Send message via socket.
+    // Send message via socket in server mode.
+    //?? TEST: For testing reasons, the internal memory parameter p0 is misused as client socket here!
+    write_socket(p0, m, (void*) &mc, *NULL_POINTER, *NULL_POINTER, p9, p10, (void*) &st);
+
+    // Send message via socket in client mode.
 //??    write_socket((void*) *s, m, (void*) &mc, (void*) &sa, (void*) &sas, p9, p10, (void*) &st);
-
-    /*??
-        // The socket number for the signal id.
-        // The index for the signal id in the array is the same index
-        // in the client socket number array.
-        int i = *NUMBER_MINUS_1_INTEGER;
-
-        get_index_for_signal_id(p2, p9, (void*) &i);
-
-        if (i >= *NUMBER_0_INTEGER) {
-
-            // The client socket.
-            int* cs = (int*) *NULL_POINTER;
-
-            get_client_socket_number_for_index(p2, (void*) &i, (void*) &cs);
-
-            if (*cs >= *NUMBER_0_INTEGER) {
-    --
-                // Remove client socket number and main signal id from internal memory.
-                remove_relation_clientsocketnumber_mainsignalid(p2, (void*) &i);
-
-                // Close client socket.
-                close(*cs);
-
-            } else {
-
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not send message via socket. The client socket number was not found.");
-            }
-
-        } else {
-
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not send message via socket. The signal id index is invalid.");
-        }
-    */
 
     // Close socket.
     //
@@ -642,11 +615,14 @@ void send_socket(void* p0, void* p1, void* p2, void* p3,
     // - this "send_socket" operation (client mode)
     // - the "receive_socket" operation (server mode) and retrieved from internal memory here
 //??    close(**s);
+    //?? TEST: temporary as long as p0 is used as client socket parameter!
+    close(*((int*) p0));
 
     // Deallocate http body character vector.
     deallocate((void*) &b, (void*) &bs, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
     // Deallocate http message character vector.
     deallocate((void*) &m, (void*) &ms, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+
 /*??
     // Deallocate socket address.
     free(sa);
