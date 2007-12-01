@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.13 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2007-12-01 23:57:42 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -687,7 +687,8 @@ void decode_compound_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4
             //?? if yes, add "_0" or "_1" or "_2" etc.
             //?? to name, taking first non-existing suffix!
             //?? If "set", then just replace the model
-            //?? with equal name; but where to destroy it if
+            //?? with equal name.
+            //?? PROBLEM: Where to destroy the model if
             //?? no whole keeps a reference to it anymore?
 
         } else {

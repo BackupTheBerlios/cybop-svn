@@ -1,5 +1,5 @@
 /*
- * $RCSfile: receive.c,v $
+ * $RCSfile: sense.c,v $
  *
  * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
  *
@@ -20,64 +20,41 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.43 $ $Date: 2007-12-01 23:57:41 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2007-12-01 23:57:41 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef RECEIVE_SOURCE
-#define RECEIVE_SOURCE
+#ifndef SENSE_SOURCE
+#define SENSE_SOURCE
 
-#include "../applicator/receive/receive_file_system.c"
-#include "../applicator/receive/receive_latex.c"
-#include "../applicator/receive/receive_gnu_linux_console.c"
-#include "../applicator/receive/receive_socket.c"
-#include "../applicator/receive/receive_x_window_system.c"
+#include "../applicator/sense/sense_gnu_linux_console.c"
+#include "../applicator/sense/sense_socket.c"
+#include "../applicator/sense/sense_x_window_system.c"
 #include "../globals/constants/cybol/cybol_abstraction_constants.c"
-#include "../globals/constants/cybol/cybol_channel_constants.c"
 #include "../globals/constants/cybol/cybol_model_constants.c"
 #include "../globals/constants/cybol/cybol_name_constants.c"
 #include "../globals/constants/integer/integer_constants.c"
-#include "../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../globals/constants/log/log_level_constants.c"
 #include "../globals/constants/pointer/pointer_constants.c"
 #include "../globals/logger/logger.c"
 #include "../globals/variables/thread_identification_variables.c"
 #include "../memoriser/accessor/compound_accessor.c"
 
 /**
- * Receives a message via the given channel.
+ * Senses an interrupt request happening on the given device channel.
  *
- * CAUTION! Do NOT rename this procedure to "receive",
- * as that name is already used by low-level socket functionality.
- *
- * The persistent message gets converted into a transient model, residing in memory.
- *
- * persistent:
- * - stored permanently
- * - outside CYBOI
- * - longer than CYBOI lives
- *
- * transient:
- * - stored in computer memory (RAM)
- * - only accessible from within CYBOI
- * - created and destroyed by CYBOI
- * - not available anymore after CYBOI has been destroyed
- *
- * CAUTION! Some file formats (like the German xDT format for medical data exchange)
- * contain both, the model AND the details, in one file. To cover these cases,
- * the model and details are received TOGETHER, in just one operation.
- *
- * Some receive functions do not just read a persistent message, but first wait for
- * an external signal. In order to catch signals of various devices, special mechanisms
- * for signal reception have to be started. To the mechanisms belong:
+ * In order to sense interrupt requests of various devices, special mechanisms
+ * for interrupt detection have to be started. To these mechanisms belong:
  * - gnu/linux console
  * - x window system
  * - socket
  *
- * These have their own internal signal/ action/ event/ interrupt waiting loops
+ * All of them have their own internal signal/ action/ event/ interrupt waiting loops
  * which get activated here, running as parallel services in separate threads.
  * Whenever an event occurs in one of these threads, it gets transformed into a
- * cyboi-internal signal and is finally placed in cyboi's signal memory.
- * The cyboi signal waiting loop only catches cyboi-internal signals.
+ * cyboi-internal interrupt request by setting the corresponding flag.
+ * The cyboi signal checker loop then senses the interrupt and receives the
+ * corresponding message via the channel the interrupt belongs to.
  *
  * Expected parameters:
  * - channel (required): the channel via which to receive the message (gnu_linux_console, www, x_window_system etc.)
@@ -102,9 +79,9 @@
  * @param p7 the signal memory count
  * @param p8 the signal memory size
  */
-void receive_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8) {
+void sense(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Receive message.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Sense interrupt request.");
 
     // The channel name, abstraction, model, details.
     void** cn = NULL_POINTER;
@@ -310,41 +287,11 @@ void receive_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays((void*) *cm, (void*) *cmc, (void*) FILE_SYSTEM_MODEL, (void*) FILE_SYSTEM_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != *NUMBER_0_INTEGER) {
-
-            // Receive model by reading message data.
-            //
-            // CAUTION! The details are handed over as well, since sometimes,
-            // they are read from the message together with the model, for
-            // example when converting from a file in xdt format.
-            receive_file_system((void*) mom, *momc, *moms, (void*) mod, *modc, *mods, *mm, *mmc, *lm, *lmc);
-
-            // Receive details by reading meta message data.
-            //
-            // CAUTION! Sometimes, the details are read from a different source than the
-            // model, for example the html attributes of an html table when creating a wui.
-            //
-            // Example:
-            // <part name="receive_table_row" channel="inline" abstraction="operation" model="receive">
-            //     <property name="channel" channel="inline" abstraction="character" model="file"/>
-            //     <property name="language" channel="inline" abstraction="character" model="compound"/>
-            //     <property name="message" channel="inline" abstraction="character" model="residenz/wui/address_table_row.cybol"/>
-            //     <property name="meta" channel="inline" abstraction="character" model="residenz/wui/address_table_row_properties.cybol"/>
-            //     <property name="model" channel="inline" abstraction="encapsulated" model=".residenz.temporary.translation.translate_record_to_wui.wui_patient_row"/>
-            // </part>
-            receive_file_system((void*) mod, *modc, *mods, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *mem, *memc, *lm, *lmc);
-        }
-    }
-
-    if (r == *NUMBER_0_INTEGER) {
-
         compare_arrays((void*) *cm, (void*) *cmc, (void*) GNU_LINUX_CONSOLE_MODEL, (void*) GNU_LINUX_CONSOLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
-//??            receive_gnu_linux_console(p2, *com, *comc, *coms);
+            sense_gnu_linux_console(p2, *com, *comc, *coms);
         }
     }
 
@@ -354,7 +301,7 @@ void receive_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
 
         if (r != *NUMBER_0_INTEGER) {
 
-//??            receive_x_window_system(p2, *rm, *rmc, *rms, *com, *comc, *coms);
+            sense_x_window_system(p2, *rm, *rmc, *rms, *com, *comc, *coms);
         }
     }
 
@@ -364,11 +311,11 @@ void receive_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
 
         if (r != *NUMBER_0_INTEGER) {
 
-            // Receive model by reading http request or response.
+            // Sense model by reading http request or response.
             //
             // CAUTION! The details are handed over as well,
             // since they will store http headers as meta data.
-//??            receive_socket(p2, (void*) WWW_BASE_INTERNAL, (void*) WWW_SERVICE_THREAD, (void*) &receive_socket_www, (void*) mom, (void*) momc, (void*) moms, (void*) mod, (void*) modc, (void*) mods, (void*) com, (void*) comc, (void*) lm, (void*) lmc, (void*) stm, (void*) stmc);
+            sense_socket(p2, (void*) WWW_BASE_INTERNAL, (void*) WWW_SERVICE_THREAD, (void*) &sense_socket_www, (void*) mom, (void*) momc, (void*) moms, (void*) mod, (void*) modc, (void*) mods, (void*) com, (void*) comc, (void*) lm, (void*) lmc, (void*) stm, (void*) stmc);
         }
     }
 
@@ -378,29 +325,19 @@ void receive_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
 
         if (r != *NUMBER_0_INTEGER) {
 
-            // Receive model by reading http request or response.
+            // Sense model by reading http request or response.
             //
             // CAUTION! The details are handed over as well,
             // since they will store http headers as meta data.
-//??            receive_socket(p2, (void*) CYBOI_BASE_INTERNAL, (void*) CYBOI_SERVICE_THREAD, (void*) &receive_socket_cyboi, (void*) mom, (void*) momc, (void*) moms, (void*) mod, (void*) modc, (void*) mods, (void*) com, (void*) comc, (void*) lm, (void*) lmc, (void*) stm, (void*) stmc);
+            sense_socket(p2, (void*) CYBOI_BASE_INTERNAL, (void*) CYBOI_SERVICE_THREAD, (void*) &sense_socket_cyboi, (void*) mom, (void*) momc, (void*) moms, (void*) mod, (void*) modc, (void*) mods, (void*) com, (void*) comc, (void*) lm, (void*) lmc, (void*) stm, (void*) stmc);
         }
     }
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays((void*) *cm, (void*) *cmc, (void*) LATEX_MODEL, (void*) LATEX_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != *NUMBER_0_INTEGER) {
-
-//??            receive_latex(p2, *mm, *mmc);
-        }
-    }
-
-    if (r == *NUMBER_0_INTEGER) {
-
-        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) "Could not receive message. The channel model is unknown.");
+        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) "Could not sense interrupt request. The channel is unknown.");
     }
 }
 
-/* RECEIVE_SOURCE */
+/* SENSE_SOURCE */
 #endif

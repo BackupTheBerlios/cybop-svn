@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.10 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2007-12-01 23:57:41 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -44,18 +44,13 @@
  * Initialises the system with an initial signal.
  *
  * @param p0 the internal memory
- * @param p1 the knowledge memory
- * @param p2 the knowledge memory count
- * @param p3 the knowledge memory size
- * @param p4 the signal memory
- * @param p5 the signal memory count
- * @param p6 the signal memory size
- * @param p7 the interrupt request flag
- * @param p8 the signal memory mutex
- * @param p9 the run source
- * @param p10 the run source count
+ * @param p1 the signal memory
+ * @param p2 the signal memory count
+ * @param p3 the signal memory size
+ * @param p4 the run source
+ * @param p5 the run source count
  */
-void initialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10) {
+void initialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
     log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "\n\n");
     log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Initialise system with an initial signal.");
@@ -109,7 +104,7 @@ void initialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
         *NULL_POINTER, *NULL_POINTER, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
     // Receive startup model model and details (read from file and decode).
     receive_file_system((void*) &mm, (void*) mmc, (void*) mms, (void*) &md, (void*) mdc, (void*) mds,
-        p9, p10, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
+        p4, p5, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
 
     log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "\n\n");
     log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Add initial signal to signal memory.");
@@ -118,16 +113,16 @@ void initialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
     void** id = NULL_POINTER;
 
     // Get new signal identification by incrementing the current maximum signal's one.
-    get_new_signal_identification(p4, p5, (void*) &id);
+    get_new_signal_identification(p1, p2, (void*) &id);
 
     // Add startup signal to signal memory.
-    set_signal(p4, p5, p6, (void*) &ma, (void*) &mac, (void*) &mm, (void*) &mmc, (void*) &md, (void*) &mdc, (void*) &NORMAL_CYBOI_SIGNAL_PRIORITY, (void*) id);
+    set_signal(p1, p2, p3, (void*) &ma, (void*) &mac, (void*) &mm, (void*) &mmc, (void*) &md, (void*) &mdc, (void*) &NORMAL_CYBOI_SIGNAL_PRIORITY, (void*) id);
 
     // The system is now started up and complete so that a loop
     // can be entered, checking for signals (events/ interrupts)
     // which are stored/ found in the signal memory.
     // The loop is left as soon as its shutdown flag is set.
-    check(p0, p1, p2, p3, p4, p5, p6, p7, p8);
+    check(p0);
 
     // Deallocate startup model abstraction, model, details.
     deallocate((void*) &ma, (void*) mas, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.21 $ $Date: 2007-10-23 17:37:45 $ $Author: christian $
+ * @version $Revision: 1.22 $ $Date: 2007-12-01 23:57:41 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -66,7 +66,7 @@ void shutdown_socket(void* p0, void* p1, void* p2, void* p3) {
         if (*si != *NULL_POINTER) {
 
             // Interrupt ALL socket service threads of this system.
-            interrupt_socket(p2, p3);
+            interrupt_thread(p2, p3);
 
             // The socket address (local, ipv4, ipv6) of this system.
             void** a = NULL_POINTER;

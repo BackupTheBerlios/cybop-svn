@@ -20,9 +20,8 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.22 $ $Date: 2007-08-13 17:17:01 $ $Author: christian $
+ * @version $Revision: 1.23 $ $Date: 2007-12-01 23:57:42 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
- * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
 
 #ifndef INTERNAL_MEMORY_ACCESSOR_SOURCE
@@ -68,6 +67,7 @@ void get_element(void* p0, void* p1, void* p2, void* p3, void* p4);
  * @param p0 the internal memory
  * @param p1 the client socket
  */
+/*??
 void add_client_socket_number(void* p0, void* p1) {
 
     // The client sockets.
@@ -95,6 +95,7 @@ void add_client_socket_number(void* p0, void* p1) {
 
     (**csc)++;
 }
+*/
 
 /**
  * Add the signal id.
@@ -102,6 +103,7 @@ void add_client_socket_number(void* p0, void* p1) {
  * @param p0 the internal memory
  * @param p1 the signal identification
  */
+/*??
 void add_signal_id(void* p0, void* p1) {
 
     // Get main signal id from internal memory.
@@ -128,6 +130,7 @@ void add_signal_id(void* p0, void* p1) {
 
     (**idc)++;
 }
+*/
 
 /**
  * Removes the client socket and the signal id.
@@ -135,6 +138,7 @@ void add_signal_id(void* p0, void* p1) {
  * @param p0 the internal memory
  * @param p1 the index
  */
+/*??
 void remove_relation_clientsocketnumber_mainsignalid(void* p0, void* p1) {
 
     // The signal id.
@@ -166,6 +170,7 @@ void remove_relation_clientsocketnumber_mainsignalid(void* p0, void* p1) {
 
     (**csc)--;
 }
+*/
 
 /**
  * Get the index from the signal id array.
@@ -174,6 +179,7 @@ void remove_relation_clientsocketnumber_mainsignalid(void* p0, void* p1) {
  * @param p1 the signal identification
  * @param p2 the index (hand over as reference)
  */
+/*??
 void get_index_for_signal_id(void* p0, void* p1, void* p2) {
 
     // The signal id.
@@ -189,6 +195,7 @@ void get_index_for_signal_id(void* p0, void* p1, void* p2) {
     // Get index.
     get_array_elements_index(*id, *ids, p1, (void*) PRIMITIVE_COUNT, p2, (void*) INTEGER_ARRAY);
 }
+*/
 
 /**
  * Get the client socket.
@@ -197,6 +204,7 @@ void get_index_for_signal_id(void* p0, void* p1, void* p2) {
  * @param p1 the index
  * @param p2 the client socket
  */
+/*??
 void get_client_socket_number_for_index(void* p0, void* p1, void* p2) {
 
     // The client sockets.
@@ -212,6 +220,7 @@ void get_client_socket_number_for_index(void* p0, void* p1, void* p2) {
     // Get client socket.
     get_array_elements(*cs, p1, p2, (void*) INTEGER_ARRAY);
 }
+*/
 
 /* INTERNAL_MEMORY_ACCESSOR_SOURCE */
 #endif

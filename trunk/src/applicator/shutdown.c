@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.25 $ $Date: 2007-10-23 17:37:45 $ $Author: christian $
+ * @version $Revision: 1.26 $ $Date: 2007-12-01 23:57:41 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description This module shuts down a service.
  */
@@ -92,7 +92,7 @@ void shutdown_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
         if (r != *NUMBER_0_INTEGER) {
 
-            shutdown_gnu_linux_console(p5, (void*) GNU_LINUX_CONSOLE_THREAD, (void*) GNU_LINUX_CONSOLE_THREAD_INTERRUPT);
+            shutdown_gnu_linux_console(p5, (void*) GNU_LINUX_CONSOLE_THREAD, (void*) GNU_LINUX_CONSOLE_EXIT);
         }
     }
 
@@ -102,7 +102,7 @@ void shutdown_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
         if (r != *NUMBER_0_INTEGER) {
 
-            shutdown_x_window_system(p5, (void*) X_WINDOW_SYSTEM_THREAD, (void*) X_WINDOW_SYSTEM_THREAD_INTERRUPT);
+            shutdown_x_window_system(p5, (void*) X_WINDOW_SYSTEM_THREAD, (void*) X_WINDOW_SYSTEM_EXIT);
         }
     }
 
@@ -112,7 +112,7 @@ void shutdown_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
         if (r != *NUMBER_0_INTEGER) {
 
-            shutdown_socket(p5, (void*) WWW_BASE_INTERNAL, (void*) WWW_SERVICE_THREAD, (void*) WWW_SERVICE_THREAD_INTERRUPT);
+            shutdown_socket(p5, (void*) WWW_BASE_INTERNAL, (void*) WWW_SERVICE_THREAD, (void*) WWW_SERVICE_EXIT);
         }
     }
 
@@ -122,8 +122,13 @@ void shutdown_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
         if (r != *NUMBER_0_INTEGER) {
 
-            shutdown_socket(p5, (void*) CYBOI_BASE_INTERNAL, (void*) CYBOI_SERVICE_THREAD, (void*) CYBOI_SERVICE_THREAD_INTERRUPT);
+            shutdown_socket(p5, (void*) CYBOI_BASE_INTERNAL, (void*) CYBOI_SERVICE_THREAD, (void*) CYBOI_SERVICE_EXIT);
         }
+    }
+
+    if (r == *NUMBER_0_INTEGER) {
+
+        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) "Could not shutdown service. The service model is unknown.");
     }
 }
 

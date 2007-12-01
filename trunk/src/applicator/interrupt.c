@@ -20,27 +20,98 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.20 $ $Date: 2007-10-23 17:37:45 $ $Author: christian $
+ * @version $Revision: 1.21 $ $Date: 2007-12-01 23:57:41 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef INTERRUPT_SOURCE
 #define INTERRUPT_SOURCE
 
-#include "../applicator/interrupt/interrupt_gnu_linux_console.c"
-#include "../applicator/interrupt/interrupt_socket.c"
-#include "../applicator/interrupt/interrupt_x_window_system.c"
+/*??
+#include <sys/signal.h>
+#include <pthread.h>
+*/
+/*??
+#include <sys/socket.h>
+#include <sys/types.h>
+#include <stdio.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <unistd.h>
+*/
 #include "../globals/constants/cybol/cybol_abstraction_constants.c"
 #include "../globals/constants/cybol/cybol_channel_constants.c"
 #include "../globals/constants/cybol/cybol_model_constants.c"
 #include "../globals/constants/cybol/cybol_name_constants.c"
 #include "../globals/constants/integer/integer_constants.c"
+#include "../globals/constants/log/log_message_constants.c"
 #include "../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../globals/constants/pointer/pointer_constants.c"
 #include "../globals/logger/logger.c"
 #include "../globals/variables/service_interrupt_variables.c"
 #include "../globals/variables/thread_identification_variables.c"
 #include "../memoriser/accessor/compound_accessor.c"
+
+/**
+ * Interrupts the thread.
+ *
+ * @param p0 the service thread
+ * @param p1 the service thread interrupt
+ */
+void interrupt_thread(void* p0, void* p1) {
+
+    if (p1 != *NULL_POINTER) {
+
+        int* i = (int*) p1;
+
+        if (p0 != *NULL_POINTER) {
+
+            pthread_t* t = (pthread_t*) p0;
+
+            log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Interrupt thread.");
+
+            if (*t != *NUMBER_MINUS_1_INTEGER) {
+
+                // Set thread interrupt flag for signal handler.
+                *i = *NUMBER_1_INTEGER;
+
+                // Send signal to thread.
+                //
+                // CAUTION! Sending a SIGKILL signal to a thread using pthread_kill()
+                // ends the ENTIRE PROCESS, not simply the target thread.
+                // SIGKILL is defined to end the entire process, regardless
+                // of the thread it is delivered to, or how it is sent.
+                //
+                // The user signal SIGUSR1 is used here instead.
+                // It is processed in the interrupt_service_system_signal_handler
+                // procedure, situated in the following module:
+                // controller/manager/system_signal_handler_manager.c
+                pthread_kill(*t, SIGUSR1);
+
+                // Wait for thread to finish.
+                pthread_join(*t, *NULL_POINTER);
+
+                // Reset thread.
+                *t = *NUMBER_MINUS_1_INTEGER;
+
+                // Reset thread interrupt flag for signal handler.
+                *i = *NUMBER_0_INTEGER;
+
+            } else {
+
+                log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) "Could not interrupt thread. The service thread is invalid.");
+            }
+
+        } else {
+
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not interrupt thread. The service thread is null.");
+        }
+
+    } else {
+
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not interrupt thread. The service thread interrupt is null.");
+    }
+}
 
 /**
  * Interrupts a service.
@@ -90,7 +161,7 @@ void interrupt_service(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         if (r != *NUMBER_0_INTEGER) {
 
-            interrupt_gnu_linux_console((void*) GNU_LINUX_CONSOLE_THREAD, (void*) GNU_LINUX_CONSOLE_THREAD_INTERRUPT);
+            interrupt_thread((void*) GNU_LINUX_CONSOLE_THREAD, (void*) GNU_LINUX_CONSOLE_EXIT);
         }
     }
 
@@ -100,7 +171,7 @@ void interrupt_service(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         if (r != *NUMBER_0_INTEGER) {
 
-            interrupt_x_window_system((void*) X_WINDOW_SYSTEM_THREAD, (void*) X_WINDOW_SYSTEM_THREAD_INTERRUPT);
+            interrupt_thread((void*) X_WINDOW_SYSTEM_THREAD, (void*) X_WINDOW_SYSTEM_EXIT);
         }
     }
 
@@ -110,7 +181,7 @@ void interrupt_service(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         if (r != *NUMBER_0_INTEGER) {
 
-            interrupt_socket((void*) WWW_SERVICE_THREAD, (void*) WWW_SERVICE_THREAD_INTERRUPT);
+            interrupt_thread((void*) WWW_SERVICE_THREAD, (void*) WWW_SERVICE_EXIT);
         }
     }
 
@@ -120,8 +191,13 @@ void interrupt_service(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         if (r != *NUMBER_0_INTEGER) {
 
-            interrupt_socket((void*) CYBOI_SERVICE_THREAD, (void*) CYBOI_SERVICE_THREAD_INTERRUPT);
+            interrupt_thread((void*) CYBOI_SERVICE_THREAD, (void*) CYBOI_SERVICE_EXIT);
         }
+    }
+
+    if (r == *NUMBER_0_INTEGER) {
+
+        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) "Could not interrupt service. The service model is unknown.");
     }
 }
 

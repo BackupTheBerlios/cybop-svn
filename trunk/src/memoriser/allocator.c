@@ -24,7 +24,7 @@
  * - create a model in memory
  * - destroy a model in memory
  *
- * @version $Revision: 1.21 $ $Date: 2007-08-13 16:37:11 $ $Author: christian $
+ * @version $Revision: 1.22 $ $Date: 2007-12-01 23:57:42 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -60,6 +60,8 @@
  * @param p3 the abstraction count
  */
 void allocate(void* p0, void* p1, void* p2, void* p3) {
+
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Allocate model.");
 
     // The comparison result.
     int r = *NUMBER_0_INTEGER;
@@ -233,6 +235,11 @@ void allocate(void* p0, void* p1, void* p2, void* p3) {
             allocate_internal_memory(p0, p1);
         }
     }
+
+    if (r == *NUMBER_0_INTEGER) {
+
+        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) "Could not allocate model. The abstraction is unknown.");
+    }
 }
 
 /**
@@ -245,6 +252,8 @@ void allocate(void* p0, void* p1, void* p2, void* p3) {
  * @param p4 the abstraction count
  */
 void reallocate(void* p0, void* p1, void* p2, void* p3, void* p4) {
+
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Reallocate model.");
 
     // The comparison result.
     int r = *NUMBER_0_INTEGER;
@@ -398,6 +407,11 @@ void reallocate(void* p0, void* p1, void* p2, void* p3, void* p4) {
 //??            reallocate_internal_memory(p0, p1, p2);
         }
     }
+
+    if (r == *NUMBER_0_INTEGER) {
+
+        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) "Could not reallocate model. The abstraction is unknown.");
+    }
 }
 
 /**
@@ -409,6 +423,8 @@ void reallocate(void* p0, void* p1, void* p2, void* p3, void* p4) {
  * @param p3 the abstraction count
  */
 void deallocate(void* p0, void* p1, void* p2, void* p3) {
+
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Deallocate model.");
 
     // The comparison result.
     int r = *NUMBER_0_INTEGER;
@@ -561,6 +577,11 @@ void deallocate(void* p0, void* p1, void* p2, void* p3) {
 
             deallocate_internal_memory(p0, p1);
         }
+    }
+
+    if (r == *NUMBER_0_INTEGER) {
+
+        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) "Could not deallocate model. The abstraction is unknown.");
     }
 }
 

@@ -20,9 +20,8 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2007-07-23 23:52:59 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2007-12-01 23:57:42 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
- * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
 
 #ifndef MEMORY_ABSTRACTION_CONSTANTS_SOURCE

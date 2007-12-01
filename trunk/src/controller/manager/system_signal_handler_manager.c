@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.13 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2007-12-01 23:57:42 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -70,7 +70,7 @@ void interrupt_service_system_signal_handler(int p0) {
 
 //??    fprintf(stdout, "TEST signal handler gnu/linux console %i\n", p0);
 
-        if (*GNU_LINUX_CONSOLE_THREAD_INTERRUPT != *NUMBER_0_INTEGER) {
+        if (*GNU_LINUX_CONSOLE_EXIT != *NUMBER_0_INTEGER) {
 
 //??    fprintf(stdout, "TEST signal handler gnu/linux console irq %i\n", p0);
 
@@ -89,7 +89,7 @@ void interrupt_service_system_signal_handler(int p0) {
 
 //??    fprintf(stdout, "TEST signal handler x window system %i\n", p0);
 
-        if (*X_WINDOW_SYSTEM_THREAD_INTERRUPT != *NUMBER_0_INTEGER) {
+        if (*X_WINDOW_SYSTEM_EXIT != *NUMBER_0_INTEGER) {
 
 //??    fprintf(stdout, "TEST signal handler x window system irq %i\n", p0);
 
@@ -108,7 +108,7 @@ void interrupt_service_system_signal_handler(int p0) {
 
 //??    fprintf(stdout, "TEST signal handler www service %i\n", p0);
 
-        if (*WWW_SERVICE_THREAD_INTERRUPT != *NUMBER_0_INTEGER) {
+        if (*WWW_SERVICE_EXIT != *NUMBER_0_INTEGER) {
 
 //??    fprintf(stdout, "TEST signal handler www service irq %i\n", p0);
 
@@ -127,7 +127,7 @@ void interrupt_service_system_signal_handler(int p0) {
 
 //??    fprintf(stdout, "TEST signal handler cyboi service %i\n", p0);
 
-        if (*CYBOI_SERVICE_THREAD_INTERRUPT != *NUMBER_0_INTEGER) {
+        if (*CYBOI_SERVICE_EXIT != *NUMBER_0_INTEGER) {
 
 //??    fprintf(stdout, "TEST signal handler cyboi service irq %i\n", p0);
 

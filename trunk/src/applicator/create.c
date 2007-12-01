@@ -22,7 +22,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.39 $ $Date: 2007-10-03 23:40:05 $ $Author: christian $
+ * @version $Revision: 1.40 $ $Date: 2007-12-01 23:57:41 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -291,6 +291,11 @@ void create(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             create_set(*wd, *wdc, *wds, *na, *nac, *nm, *nmc, *aa, *aac, *am, *amc);
         }
+    }
+
+    if (r == *NUMBER_0_INTEGER) {
+
+        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) "Could not create knowledge model. The element model is unknown.");
     }
 }
 

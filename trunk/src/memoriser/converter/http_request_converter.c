@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2007-10-23 17:37:45 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2007-12-01 23:57:42 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -201,7 +201,7 @@ void decode_http_request_parameter(void* p0, void* p1, void* p2, void* p3, void*
 
         if (sep >= *NUMBER_0_INTEGER) {
 
-            // Set new count.
+            // Set key count.
             kc = sep;
 
             // Set new source index.
@@ -225,9 +225,10 @@ void decode_http_request_parameter(void* p0, void* p1, void* p2, void* p3, void*
         // Value.
         //
 
-        // The value, initialised with current source index.
+        // The value.
         void* v = i;
         int vc = ic;
+
         // No further separators have to be found.
 
     fprintf(stderr, "TEST http request parameter v: %s \n", (char*) v);
@@ -248,7 +249,7 @@ void decode_http_request_parameter(void* p0, void* p1, void* p2, void* p3, void*
  * Example:
  *
  * search=Katzen&go=Artikel
- * name=close&channel=inline&abstraction=knowledge&model=.residenz.logic.exit_program
+ * action=close
  *
  * @param p0 the destination model (Hand over as reference!)
  * @param p1 the destination model count
@@ -347,200 +348,209 @@ void decode_http_request_parameters(void* p0, void* p1, void* p2, void* p3, void
  */
 void decode_http_request_method(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8) {
 
-    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Decode http request method.");
+    if (p0 != *NULL_POINTER) {
 
-    // The comparison result.
-    int r = *NUMBER_0_INTEGER;
+        void** d = (void**) p0;
 
-    if (r == *NUMBER_0_INTEGER) {
+        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Decode http request method.");
 
-        compare_arrays(p7, p8, (void*) HTTP_GET_REQUEST_METHOD, (void*) HTTP_GET_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        // The comparison result.
+        int r = *NUMBER_0_INTEGER;
 
-        if (r != *NUMBER_0_INTEGER) {
+        if (r == *NUMBER_0_INTEGER) {
 
-            // Set request method as action parameter within the compound model.
-            decode_http_request_set_parameter(p0, p1, p2, (void*) RECEIVE_MODEL_METHOD_NAME, (void*) RECEIVE_MODEL_METHOD_NAME_COUNT,
-                (void*) HTTP_GET_REQUEST_METHOD_MODEL, (void*) HTTP_GET_REQUEST_METHOD_MODEL_COUNT, p5, p6);
+            compare_arrays(p7, p8, (void*) HTTP_GET_REQUEST_METHOD, (void*) HTTP_GET_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+            if (r != *NUMBER_0_INTEGER) {
+
+                // Set request method as action parameter within the compound model.
+                decode_http_request_set_parameter(p0, p1, p2, (void*) SENSE_MODEL_METHOD_NAME, (void*) SENSE_MODEL_METHOD_NAME_COUNT,
+                    (void*) HTTP_GET_REQUEST_METHOD_MODEL, (void*) HTTP_GET_REQUEST_METHOD_MODEL_COUNT, p5, p6);
+            }
         }
-    }
 
-    if (r == *NUMBER_0_INTEGER) {
+        if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p7, p8, (void*) HTTP_POST_REQUEST_METHOD, (void*) HTTP_POST_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+            compare_arrays(p7, p8, (void*) HTTP_POST_REQUEST_METHOD, (void*) HTTP_POST_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r != *NUMBER_0_INTEGER) {
+            if (r != *NUMBER_0_INTEGER) {
 
-            // Set request method as action parameter within the compound model.
-            decode_http_request_set_parameter(p0, p1, p2, (void*) RECEIVE_MODEL_METHOD_NAME, (void*) RECEIVE_MODEL_METHOD_NAME_COUNT,
-                (void*) HTTP_POST_REQUEST_METHOD_MODEL, (void*) HTTP_POST_REQUEST_METHOD_MODEL_COUNT, p5, p6);
+                // Set request method as action parameter within the compound model.
+                decode_http_request_set_parameter(p0, p1, p2, (void*) SENSE_MODEL_METHOD_NAME, (void*) SENSE_MODEL_METHOD_NAME_COUNT,
+                    (void*) HTTP_POST_REQUEST_METHOD_MODEL, (void*) HTTP_POST_REQUEST_METHOD_MODEL_COUNT, p5, p6);
 
-            // Decode body parameters containing model data.
-            //
-            // CAUTION! The POST method http request may contain a body with parameters,
-            // which are listed in the same key-value pair format as those in the uri.
-            decode_http_request_parameters(p0, p1, p2, p3, p4, p5, p6);
+                // Decode body parameters containing model data.
+                //
+                // CAUTION! The POST method http request may contain a body with parameters,
+                // which are listed in the same key-value pair format as those in the uri.
+                decode_http_request_parameters(p0, p1, p2, p3, p4, p5, p6);
+            }
         }
-    }
 
-    if (r == *NUMBER_0_INTEGER) {
+        if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p7, p8, (void*) HTTP_HEAD_REQUEST_METHOD, (void*) HTTP_HEAD_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+            compare_arrays(p7, p8, (void*) HTTP_HEAD_REQUEST_METHOD, (void*) HTTP_HEAD_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r != *NUMBER_0_INTEGER) {
+            if (r != *NUMBER_0_INTEGER) {
 
-            // Set request method as action parameter within the compound model.
-            decode_http_request_set_parameter(p0, p1, p2, (void*) RECEIVE_MODEL_METHOD_NAME, (void*) RECEIVE_MODEL_METHOD_NAME_COUNT,
-                (void*) HTTP_HEAD_REQUEST_METHOD_MODEL, (void*) HTTP_HEAD_REQUEST_METHOD_MODEL_COUNT, p5, p6);
+                // Set request method as action parameter within the compound model.
+                decode_http_request_set_parameter(p0, p1, p2, (void*) SENSE_MODEL_METHOD_NAME, (void*) SENSE_MODEL_METHOD_NAME_COUNT,
+                    (void*) HTTP_HEAD_REQUEST_METHOD_MODEL, (void*) HTTP_HEAD_REQUEST_METHOD_MODEL_COUNT, p5, p6);
+            }
         }
-    }
 
-    if (r == *NUMBER_0_INTEGER) {
+        if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p7, p8, (void*) HTTP_PUT_REQUEST_METHOD, (void*) HTTP_PUT_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+            compare_arrays(p7, p8, (void*) HTTP_PUT_REQUEST_METHOD, (void*) HTTP_PUT_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r != *NUMBER_0_INTEGER) {
+            if (r != *NUMBER_0_INTEGER) {
 
-            // Set request method as action parameter within the compound model.
-            decode_http_request_set_parameter(p0, p1, p2, (void*) RECEIVE_MODEL_METHOD_NAME, (void*) RECEIVE_MODEL_METHOD_NAME_COUNT,
-                (void*) HTTP_PUT_REQUEST_METHOD_MODEL, (void*) HTTP_PUT_REQUEST_METHOD_MODEL_COUNT, p5, p6);
+                // Set request method as action parameter within the compound model.
+                decode_http_request_set_parameter(p0, p1, p2, (void*) SENSE_MODEL_METHOD_NAME, (void*) SENSE_MODEL_METHOD_NAME_COUNT,
+                    (void*) HTTP_PUT_REQUEST_METHOD_MODEL, (void*) HTTP_PUT_REQUEST_METHOD_MODEL_COUNT, p5, p6);
+            }
         }
-    }
 
-    if (r == *NUMBER_0_INTEGER) {
+        if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p7, p8, (void*) HTTP_DELETE_REQUEST_METHOD, (void*) HTTP_DELETE_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+            compare_arrays(p7, p8, (void*) HTTP_DELETE_REQUEST_METHOD, (void*) HTTP_DELETE_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r != *NUMBER_0_INTEGER) {
+            if (r != *NUMBER_0_INTEGER) {
 
-            // Set request method as action parameter within the compound model.
-            decode_http_request_set_parameter(p0, p1, p2, (void*) RECEIVE_MODEL_METHOD_NAME, (void*) RECEIVE_MODEL_METHOD_NAME_COUNT,
-                (void*) HTTP_DELETE_REQUEST_METHOD_MODEL, (void*) HTTP_DELETE_REQUEST_METHOD_MODEL_COUNT, p5, p6);
+                // Set request method as action parameter within the compound model.
+                decode_http_request_set_parameter(p0, p1, p2, (void*) SENSE_MODEL_METHOD_NAME, (void*) SENSE_MODEL_METHOD_NAME_COUNT,
+                    (void*) HTTP_DELETE_REQUEST_METHOD_MODEL, (void*) HTTP_DELETE_REQUEST_METHOD_MODEL_COUNT, p5, p6);
+            }
         }
-    }
 
-    if (r == *NUMBER_0_INTEGER) {
+        if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p7, p8, (void*) HTTP_TRACE_REQUEST_METHOD, (void*) HTTP_TRACE_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+            compare_arrays(p7, p8, (void*) HTTP_TRACE_REQUEST_METHOD, (void*) HTTP_TRACE_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r != *NUMBER_0_INTEGER) {
+            if (r != *NUMBER_0_INTEGER) {
 
-            // Set request method as action parameter within the compound model.
-            decode_http_request_set_parameter(p0, p1, p2, (void*) RECEIVE_MODEL_METHOD_NAME, (void*) RECEIVE_MODEL_METHOD_NAME_COUNT,
-                (void*) HTTP_TRACE_REQUEST_METHOD_MODEL, (void*) HTTP_TRACE_REQUEST_METHOD_MODEL_COUNT, p5, p6);
+                // Set request method as action parameter within the compound model.
+                decode_http_request_set_parameter(p0, p1, p2, (void*) SENSE_MODEL_METHOD_NAME, (void*) SENSE_MODEL_METHOD_NAME_COUNT,
+                    (void*) HTTP_TRACE_REQUEST_METHOD_MODEL, (void*) HTTP_TRACE_REQUEST_METHOD_MODEL_COUNT, p5, p6);
+            }
         }
-    }
 
-    if (r == *NUMBER_0_INTEGER) {
+        if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p7, p8, (void*) HTTP_OPTIONS_REQUEST_METHOD, (void*) HTTP_OPTIONS_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+            compare_arrays(p7, p8, (void*) HTTP_OPTIONS_REQUEST_METHOD, (void*) HTTP_OPTIONS_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r != *NUMBER_0_INTEGER) {
+            if (r != *NUMBER_0_INTEGER) {
 
-            // Set request method as action parameter within the compound model.
-            decode_http_request_set_parameter(p0, p1, p2, (void*) RECEIVE_MODEL_METHOD_NAME, (void*) RECEIVE_MODEL_METHOD_NAME_COUNT,
-                (void*) HTTP_OPTIONS_REQUEST_METHOD_MODEL, (void*) HTTP_OPTIONS_REQUEST_METHOD_MODEL_COUNT, p5, p6);
+                // Set request method as action parameter within the compound model.
+                decode_http_request_set_parameter(p0, p1, p2, (void*) SENSE_MODEL_METHOD_NAME, (void*) SENSE_MODEL_METHOD_NAME_COUNT,
+                    (void*) HTTP_OPTIONS_REQUEST_METHOD_MODEL, (void*) HTTP_OPTIONS_REQUEST_METHOD_MODEL_COUNT, p5, p6);
+            }
         }
-    }
 
-    if (r == *NUMBER_0_INTEGER) {
+        if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p7, p8, (void*) HTTP_CONNECT_REQUEST_METHOD, (void*) HTTP_CONNECT_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+            compare_arrays(p7, p8, (void*) HTTP_CONNECT_REQUEST_METHOD, (void*) HTTP_CONNECT_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r != *NUMBER_0_INTEGER) {
+            if (r != *NUMBER_0_INTEGER) {
 
-            // Set request method as action parameter within the compound model.
-            decode_http_request_set_parameter(p0, p1, p2, (void*) RECEIVE_MODEL_METHOD_NAME, (void*) RECEIVE_MODEL_METHOD_NAME_COUNT,
-                (void*) HTTP_CONNECT_REQUEST_METHOD_MODEL, (void*) HTTP_CONNECT_REQUEST_METHOD_MODEL_COUNT, p5, p6);
+                // Set request method as action parameter within the compound model.
+                decode_http_request_set_parameter(p0, p1, p2, (void*) SENSE_MODEL_METHOD_NAME, (void*) SENSE_MODEL_METHOD_NAME_COUNT,
+                    (void*) HTTP_CONNECT_REQUEST_METHOD_MODEL, (void*) HTTP_CONNECT_REQUEST_METHOD_MODEL_COUNT, p5, p6);
+            }
         }
-    }
 
-    if (r == *NUMBER_0_INTEGER) {
+        if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p7, p8, (void*) WEBDAV_PROPFIND_REQUEST_METHOD, (void*) WEBDAV_PROPFIND_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+            compare_arrays(p7, p8, (void*) WEBDAV_PROPFIND_REQUEST_METHOD, (void*) WEBDAV_PROPFIND_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r != *NUMBER_0_INTEGER) {
+            if (r != *NUMBER_0_INTEGER) {
 
-            // Set request method as action parameter within the compound model.
-            decode_http_request_set_parameter(p0, p1, p2, (void*) RECEIVE_MODEL_METHOD_NAME, (void*) RECEIVE_MODEL_METHOD_NAME_COUNT,
-                (void*) WEBDAV_PROPFIND_REQUEST_METHOD_MODEL, (void*) WEBDAV_PROPFIND_REQUEST_METHOD_MODEL_COUNT, p5, p6);
+                // Set request method as action parameter within the compound model.
+                decode_http_request_set_parameter(p0, p1, p2, (void*) SENSE_MODEL_METHOD_NAME, (void*) SENSE_MODEL_METHOD_NAME_COUNT,
+                    (void*) WEBDAV_PROPFIND_REQUEST_METHOD_MODEL, (void*) WEBDAV_PROPFIND_REQUEST_METHOD_MODEL_COUNT, p5, p6);
+            }
         }
-    }
 
-    if (r == *NUMBER_0_INTEGER) {
+        if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p7, p8, (void*) WEBDAV_PROPPATCH_REQUEST_METHOD, (void*) WEBDAV_PROPPATCH_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+            compare_arrays(p7, p8, (void*) WEBDAV_PROPPATCH_REQUEST_METHOD, (void*) WEBDAV_PROPPATCH_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r != *NUMBER_0_INTEGER) {
+            if (r != *NUMBER_0_INTEGER) {
 
-            // Set request method as action parameter within the compound model.
-            decode_http_request_set_parameter(p0, p1, p2, (void*) RECEIVE_MODEL_METHOD_NAME, (void*) RECEIVE_MODEL_METHOD_NAME_COUNT,
-                (void*) WEBDAV_PROPPATCH_REQUEST_METHOD_MODEL, (void*) WEBDAV_PROPPATCH_REQUEST_METHOD_MODEL_COUNT, p5, p6);
+                // Set request method as action parameter within the compound model.
+                decode_http_request_set_parameter(p0, p1, p2, (void*) SENSE_MODEL_METHOD_NAME, (void*) SENSE_MODEL_METHOD_NAME_COUNT,
+                    (void*) WEBDAV_PROPPATCH_REQUEST_METHOD_MODEL, (void*) WEBDAV_PROPPATCH_REQUEST_METHOD_MODEL_COUNT, p5, p6);
+            }
         }
-    }
 
-    if (r == *NUMBER_0_INTEGER) {
+        if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p7, p8, (void*) WEBDAV_MKCOL_REQUEST_METHOD, (void*) WEBDAV_MKCOL_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+            compare_arrays(p7, p8, (void*) WEBDAV_MKCOL_REQUEST_METHOD, (void*) WEBDAV_MKCOL_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r != *NUMBER_0_INTEGER) {
+            if (r != *NUMBER_0_INTEGER) {
 
-            // Set request method as action parameter within the compound model.
-            decode_http_request_set_parameter(p0, p1, p2, (void*) RECEIVE_MODEL_METHOD_NAME, (void*) RECEIVE_MODEL_METHOD_NAME_COUNT,
-                (void*) WEBDAV_MKCOL_REQUEST_METHOD_MODEL, (void*) WEBDAV_MKCOL_REQUEST_METHOD_MODEL_COUNT, p5, p6);
+                // Set request method as action parameter within the compound model.
+                decode_http_request_set_parameter(p0, p1, p2, (void*) SENSE_MODEL_METHOD_NAME, (void*) SENSE_MODEL_METHOD_NAME_COUNT,
+                    (void*) WEBDAV_MKCOL_REQUEST_METHOD_MODEL, (void*) WEBDAV_MKCOL_REQUEST_METHOD_MODEL_COUNT, p5, p6);
+            }
         }
-    }
 
-    if (r == *NUMBER_0_INTEGER) {
+        if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p7, p8, (void*) WEBDAV_COPY_REQUEST_METHOD, (void*) WEBDAV_COPY_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+            compare_arrays(p7, p8, (void*) WEBDAV_COPY_REQUEST_METHOD, (void*) WEBDAV_COPY_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r != *NUMBER_0_INTEGER) {
+            if (r != *NUMBER_0_INTEGER) {
 
-            // Set request method as action parameter within the compound model.
-            decode_http_request_set_parameter(p0, p1, p2, (void*) RECEIVE_MODEL_METHOD_NAME, (void*) RECEIVE_MODEL_METHOD_NAME_COUNT,
-                (void*) WEBDAV_COPY_REQUEST_METHOD_MODEL, (void*) WEBDAV_COPY_REQUEST_METHOD_MODEL_COUNT, p5, p6);
+                // Set request method as action parameter within the compound model.
+                decode_http_request_set_parameter(p0, p1, p2, (void*) SENSE_MODEL_METHOD_NAME, (void*) SENSE_MODEL_METHOD_NAME_COUNT,
+                    (void*) WEBDAV_COPY_REQUEST_METHOD_MODEL, (void*) WEBDAV_COPY_REQUEST_METHOD_MODEL_COUNT, p5, p6);
+            }
         }
-    }
 
-    if (r == *NUMBER_0_INTEGER) {
+        if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p7, p8, (void*) WEBDAV_MOVE_REQUEST_METHOD, (void*) WEBDAV_MOVE_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+            compare_arrays(p7, p8, (void*) WEBDAV_MOVE_REQUEST_METHOD, (void*) WEBDAV_MOVE_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r != *NUMBER_0_INTEGER) {
+            if (r != *NUMBER_0_INTEGER) {
 
-            // Set request method as action parameter within the compound model.
-            decode_http_request_set_parameter(p0, p1, p2, (void*) RECEIVE_MODEL_METHOD_NAME, (void*) RECEIVE_MODEL_METHOD_NAME_COUNT,
-                (void*) WEBDAV_MOVE_REQUEST_METHOD_MODEL, (void*) WEBDAV_MOVE_REQUEST_METHOD_MODEL_COUNT, p5, p6);
+                // Set request method as action parameter within the compound model.
+                decode_http_request_set_parameter(p0, p1, p2, (void*) SENSE_MODEL_METHOD_NAME, (void*) SENSE_MODEL_METHOD_NAME_COUNT,
+                    (void*) WEBDAV_MOVE_REQUEST_METHOD_MODEL, (void*) WEBDAV_MOVE_REQUEST_METHOD_MODEL_COUNT, p5, p6);
+            }
         }
-    }
 
-    if (r == *NUMBER_0_INTEGER) {
+        if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p7, p8, (void*) WEBDAV_LOCK_REQUEST_METHOD, (void*) WEBDAV_LOCK_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+            compare_arrays(p7, p8, (void*) WEBDAV_LOCK_REQUEST_METHOD, (void*) WEBDAV_LOCK_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r != *NUMBER_0_INTEGER) {
+            if (r != *NUMBER_0_INTEGER) {
 
-            // Set request method as action parameter within the compound model.
-            decode_http_request_set_parameter(p0, p1, p2, (void*) RECEIVE_MODEL_METHOD_NAME, (void*) RECEIVE_MODEL_METHOD_NAME_COUNT,
-                (void*) WEBDAV_LOCK_REQUEST_METHOD_MODEL, (void*) WEBDAV_LOCK_REQUEST_METHOD_MODEL_COUNT, p5, p6);
+                // Set request method as action parameter within the compound model.
+                decode_http_request_set_parameter(p0, p1, p2, (void*) SENSE_MODEL_METHOD_NAME, (void*) SENSE_MODEL_METHOD_NAME_COUNT,
+                    (void*) WEBDAV_LOCK_REQUEST_METHOD_MODEL, (void*) WEBDAV_LOCK_REQUEST_METHOD_MODEL_COUNT, p5, p6);
+            }
         }
-    }
 
-    if (r == *NUMBER_0_INTEGER) {
+        if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p7, p8, (void*) WEBDAV_UNLOCK_REQUEST_METHOD, (void*) WEBDAV_UNLOCK_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+            compare_arrays(p7, p8, (void*) WEBDAV_UNLOCK_REQUEST_METHOD, (void*) WEBDAV_UNLOCK_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r != *NUMBER_0_INTEGER) {
+            if (r != *NUMBER_0_INTEGER) {
 
-            // Set request method as action parameter within the compound model.
-            decode_http_request_set_parameter(p0, p1, p2, (void*) RECEIVE_MODEL_METHOD_NAME, (void*) RECEIVE_MODEL_METHOD_NAME_COUNT,
-                (void*) WEBDAV_UNLOCK_REQUEST_METHOD_MODEL, (void*) WEBDAV_UNLOCK_REQUEST_METHOD_MODEL_COUNT, p5, p6);
+                // Set request method as action parameter within the compound model.
+                decode_http_request_set_parameter(p0, p1, p2, (void*) SENSE_MODEL_METHOD_NAME, (void*) SENSE_MODEL_METHOD_NAME_COUNT,
+                    (void*) WEBDAV_UNLOCK_REQUEST_METHOD_MODEL, (void*) WEBDAV_UNLOCK_REQUEST_METHOD_MODEL_COUNT, p5, p6);
+            }
         }
-    }
 
-    if (r == *NUMBER_0_INTEGER) {
+        if (r == *NUMBER_0_INTEGER) {
 
-        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) "Could not decode http request method. The source request method is unknown.");
+            log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) "Could not decode http request method. The source request method is unknown.");
+        }
+
+    } else {
+
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode http request method. The destination model is null.");
     }
 }
 
@@ -1122,11 +1132,11 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
     fprintf(stderr, "TEST http request uri fc: %i \n", fc);
 
         // Set the scheme value within the compound.
-        decode_http_request_set_parameter(p0, p1, p2, (void*) RECEIVE_MODEL_SCHEME_NAME, (void*) RECEIVE_MODEL_SCHEME_NAME_COUNT, sch, (void*) &schc, p5, p6);
+        decode_http_request_set_parameter(p0, p1, p2, (void*) SENSE_MODEL_SCHEME_NAME, (void*) SENSE_MODEL_SCHEME_NAME_COUNT, sch, (void*) &schc, p5, p6);
         // Set the authority value within the compound.
-        decode_http_request_set_parameter(p0, p1, p2, (void*) RECEIVE_MODEL_AUTHORITY_NAME, (void*) RECEIVE_MODEL_AUTHORITY_NAME_COUNT, a, (void*) &ac, p5, p6);
+        decode_http_request_set_parameter(p0, p1, p2, (void*) SENSE_MODEL_AUTHORITY_NAME, (void*) SENSE_MODEL_AUTHORITY_NAME_COUNT, a, (void*) &ac, p5, p6);
         // Set the path value within the compound.
-        decode_http_request_set_parameter(p0, p1, p2, (void*) RECEIVE_MODEL_PATH_NAME, (void*) RECEIVE_MODEL_PATH_NAME_COUNT, p, (void*) &pc, p5, p6);
+        decode_http_request_set_parameter(p0, p1, p2, (void*) SENSE_MODEL_PATH_NAME, (void*) SENSE_MODEL_PATH_NAME_COUNT, p, (void*) &pc, p5, p6);
 
         // Decode and set query parameters.
         //
@@ -1134,7 +1144,7 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
         decode_http_request_parameters(p0, p1, p2, q, (void*) &qc, p5, p6);
 
         // Set the fragment value within the compound.
-        decode_http_request_set_parameter(p0, p1, p2, (void*) RECEIVE_MODEL_FRAGMENT_NAME, (void*) RECEIVE_MODEL_FRAGMENT_NAME_COUNT, f, (void*) &fc, p5, p6);
+        decode_http_request_set_parameter(p0, p1, p2, (void*) SENSE_MODEL_FRAGMENT_NAME, (void*) SENSE_MODEL_FRAGMENT_NAME_COUNT, f, (void*) &fc, p5, p6);
 
     } else {
 
@@ -1472,7 +1482,7 @@ void decode_http_request(void* p0, void* p1, void* p2, void* p3, void* p4, void*
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode http request method. The source http request count is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode http request. The source http request count is null.");
     }
 }
 

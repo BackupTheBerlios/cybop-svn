@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.15 $ $Date: 2007-10-23 17:37:45 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2007-12-01 23:57:41 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -62,10 +62,12 @@ void interrupt_x_window_system(void* p0, void* p1) {
                 *i = *NUMBER_1_INTEGER;
 
                 // Send signal to thread.
+                //
                 // CAUTION! Sending a SIGKILL signal to a thread using pthread_kill()
                 // ends the ENTIRE PROCESS, not simply the target thread.
                 // SIGKILL is defined to end the entire process, regardless
                 // of the thread it is delivered to, or how it is sent.
+                //
                 // The user signal SIGUSR1 is used here instead.
                 // It is processed in the interrupt_service_system_signal_handler
                 // procedure, situated in the following module:

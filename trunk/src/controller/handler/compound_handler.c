@@ -20,9 +20,8 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.21 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
+ * @version $Revision: 1.22 $ $Date: 2007-12-01 23:57:41 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
- * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
 
 #ifndef COMPOUND_HANDLER_SOURCE
@@ -53,9 +52,9 @@ void handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
  * @param p4 the signal memory
  * @param p5 the signal memory count
  * @param p6 the signal memory size
- * @param p7 the interrupt request flag
- * @param p8 the signal memory mutex
- * @param p9 the shutdown flag
+ * @param p7 the shutdown flag
+ * @param p8 the signal memory interrupt request flag
+ * @param p9 the signal memory mutex
  * @param p10 the signal
  * @param p11 the signal count
  * @param p12 the signal priority (Hand over as reference!)
@@ -187,9 +186,9 @@ void handle_compound_part(void* p0, void* p1, void* p2, void* p3, void* p4, void
  * @param p4 the signal memory
  * @param p5 the signal memory count
  * @param p6 the signal memory size
- * @param p7 the interrupt request flag
- * @param p8 the signal memory mutex
- * @param p9 the shutdown flag
+ * @param p7 the shutdown flag
+ * @param p8 the signal memory interrupt request flag
+ * @param p9 the signal memory mutex
  * @param p10 the signal
  * @param p11 the signal count
  * @param p12 the signal priority (Hand over as reference!)

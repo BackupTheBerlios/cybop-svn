@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.41 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
+ * @version $Revision: 1.42 $ $Date: 2007-12-01 23:57:42 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -317,6 +317,11 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
             decode_utf_16_unicode_character_stream(p0, p1, p2, p6, p7);
         }
     }
+
+    if (r == *NUMBER_0_INTEGER) {
+
+        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) "Could not decode. The language is unknown.");
+    }
 }
 
 /**
@@ -564,6 +569,11 @@ void encode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
             encode_utf_16_unicode_character_stream(p0, p1, p2, p7, p8);
         }
+    }
+
+    if (r == *NUMBER_0_INTEGER) {
+
+        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) "Could not encode. The language is unknown.");
     }
 }
 

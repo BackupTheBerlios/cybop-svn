@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.13 $ $Date: 2007-10-03 23:40:05 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2007-12-01 23:57:41 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -143,6 +143,11 @@ void compare_equal(void* p0, void* p1, void* p2,
                 p9, p10, p11, p12, p13, p14, p15, p16, p17,
                 p18, p19, p20, p21, p22, p23, p24, p25, p26);
         }
+    }
+
+    if (r == *NUMBER_0_INTEGER) {
+
+        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) "Could not compare if left parameter is equal to right parameter. The selection parameter model is unknown.");
     }
 }
 

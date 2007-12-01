@@ -1,5 +1,5 @@
 /*
- * $RCSfile: socket_communicator.c,v $
+ * $RCSfile: stream_socket_communicator.c,v $
  *
  * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
  *
@@ -20,17 +20,12 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * This file contains the functionality to:
- * - receive an http stream into a byte array
- * - send an http stream from a byte array
- *
- * @version $Revision: 1.15 $ $Date: 2007-10-30 13:08:27 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2007-12-01 23:57:42 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
- * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
 
-#ifndef SOCKET_COMMUNICATOR_SOURCE
-#define SOCKET_COMMUNICATOR_SOURCE
+#ifndef STREAM_SOCKET_COMMUNICATOR_SOURCE
+#define STREAM_SOCKET_COMMUNICATOR_SOURCE
 
 #include <sys/socket.h>
 #include <errno.h>
@@ -44,18 +39,127 @@
 #include "../../memoriser/array.c"
 
 /**
- * Reads a byte array stream from the socket.
+ * Reads a byte array stream from the stream socket.
  *
  * @param p0 the destination byte array (Hand over as reference!)
  * @param p1 the destination count
  * @param p2 the destination size
- * @param p3 the source socket
- * @param p4 the source count
+ * @param p3 the source communication partner-connected socket of this system
+ *           (the client socket to accept, receive data from and attach as parameter to the
+ *           cyboi signal generated later, so that this server may reply to the correct client)
  */
-/*??
-void read_socket(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void read_stream_socket(void* p0, void* p1, void* p2, void* p3) {
+
+    if (p3 != *NULL_POINTER) {
+
+        int* ps = (int*) p3;
+
+        if (p2 != *NULL_POINTER) {
+
+            size_t* bs = (size_t*) p2;
+
+            if (p1 != *NULL_POINTER) {
+
+                int* bc = (int*) p1;
+
+                if (p0 != *NULL_POINTER) {
+
+                    void** b = (void**) p0;
+
+                    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Read from stream socket.");
+
+                    // Initialise error number.
+                    // It is a global variable/ function and other operations
+                    // may have set some value that is not wanted here.
+                    //
+                    // CAUTION! Initialise the error number BEFORE calling the procedure
+                    // that might cause an error.
+                    errno = *NUMBER_0_INTEGER;
+
+                fprintf(stderr, "TEST: sense socket thread client socket: %i \n", *ps);
+
+    fprintf(stderr, "TEST pre b: %s \n", (char*) *b);
+    fprintf(stderr, "TEST pre bc: %i \n", *bc);
+    fprintf(stderr, "TEST pre bs: %i \n", *bs);
+
+                    // Receive message from client.
+                    //
+                    // If the flags argument (fourth one) is zero, then one can
+                    // just as well use the "read" instead of the "recv" procedure.
+                    // Normally, "recv" blocks until there is input available to be read.
+                    // ?? Not so here, as the socket was set to "non-blocking" mode at startup. ??
+                    //
+                    // CAUTION! A message MUST NOT be longer than the given buffer size!
+                    *bc = recv(*ps, *b, *bs, *NUMBER_0_INTEGER);
+
+    fprintf(stderr, "TEST post b: %s \n", (char*) *b);
+    fprintf(stderr, "TEST post bc: %i \n", *bc);
+    fprintf(stderr, "TEST post bs: %i \n", *bs);
+
+                    if (*bc > *NUMBER_0_INTEGER) {
+
+                        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Successfully sensed stream socket message.");
+
+                    } else if (*bc = *NUMBER_0_INTEGER) {
+
+                        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) "Could not read from stream socket. No data could be sensed.");
+
+                    } else {
+
+                        if (errno == EBADF) {
+
+                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not read from stream socket. The socket argument is not a valid file descriptor.");
+
+                        } else if (errno == ENOTSOCK) {
+
+                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not read from stream socket. The descriptor socket is not a socket.");
+
+                        } else if (errno == EWOULDBLOCK) {
+
+                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not read from stream socket. The read operation would block even though nonblocking mode has been set on the socket.");
+
+                        } else if (errno == EINTR) {
+
+                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not read from stream socket. The operation was interrupted by a signal before any data was read.");
+
+                        } else if (errno == ENOTCONN) {
+
+                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not read from stream socket. The socket was never connected.");
+
+                        } else {
+
+                            // CAUTION! Do NOT log the following error:
+                            // log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not read from stream socket. An unknown error occured while receiving data.");
+                            //
+                            // The reason is that the socket is non-blocking,
+                            // so that the "accept" procedure returns always,
+                            // even if no connection was established.
+                            // But if no connection and client socket are there,
+                            // then the "recv" or "recvfrom" procedure returns an error,
+                            // which would unnecessarily fill up the log file.
+                        }
+                    }
+
+                } else {
+
+                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not read from stream socket. The buffer is null.");
+                }
+
+            } else {
+
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not read from stream socket. The buffer count is null.");
+            }
+
+        } else {
+
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not read from stream socket. The buffer size is null.");
+        }
+
+    } else {
+
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not read from stream socket. The partner-connected socket of this system is null.");
+    }
 }
-*/
 
 /**
  * Writes a byte array stream to the stream socket in server mode by doing one single transfer.
@@ -65,7 +169,7 @@ void read_socket(void* p0, void* p1, void* p2, void* p3, void* p4) {
  * @param p2 the source byte array count
  * @param p3 the number of bytes transferred
  */
-void write_socket_stream_server_mode_single_transfer(void* p0, void* p1, void* p2, void* p3) {
+void write_stream_socket_server_mode_single_transfer(void* p0, void* p1, void* p2, void* p3) {
 
     if (p3 != *NULL_POINTER) {
 
@@ -168,7 +272,7 @@ void write_socket_stream_server_mode_single_transfer(void* p0, void* p1, void* p
  * @param p1 the source byte array
  * @param p2 the source byte array count
  */
-void write_socket_stream_server_mode(void* p0, void* p1, void* p2) {
+void write_stream_socket_server_mode(void* p0, void* p1, void* p2) {
 
     if (p2 != *NULL_POINTER) {
 
@@ -206,7 +310,7 @@ void write_socket_stream_server_mode(void* p0, void* p1, void* p2) {
                 break;
             }
 
-            write_socket_stream_server_mode_single_transfer(p0, i, p2, (void*) &n);
+            write_stream_socket_server_mode_single_transfer(p0, i, p2, (void*) &n);
 
             // Increment byte array index.
             i = i + n;
@@ -229,7 +333,7 @@ void write_socket_stream_server_mode(void* p0, void* p1, void* p2) {
  * @param p1 the receiver socket address (Hand over as reference!)
  * @param p2 the receiver socket address size
  */
-void write_socket_stream_client_mode(void* p0, void* p1, void* p2) {
+void write_stream_socket_client_mode(void* p0, void* p1, void* p2) {
 
     if (p2 != *NULL_POINTER) {
 
@@ -336,9 +440,9 @@ void write_socket_stream_client_mode(void* p0, void* p1, void* p2) {
  * @param p5 the communication mode
  * @param p6 the communication mode count
  */
-void write_socket_stream(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
+void write_stream_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
-    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Write to stream socket.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Write to stream socket.");
 
     // The comparison result.
     int r = *NUMBER_0_INTEGER;
@@ -350,7 +454,7 @@ void write_socket_stream(void* p0, void* p1, void* p2, void* p3, void* p4, void*
         if (r != *NUMBER_0_INTEGER) {
 
             // Send message to destination socket.
-            write_socket_stream_server_mode(p0, p1, p2);
+            write_stream_socket_server_mode(p0, p1, p2);
         }
     }
 
@@ -362,9 +466,9 @@ void write_socket_stream(void* p0, void* p1, void* p2, void* p3, void* p4, void*
 
             // Connect this system whose socket is given to
             // another system whose address is given.
-            write_socket_stream_client_mode(p0, p3, p4);
+            write_stream_socket_client_mode(p0, p3, p4);
             // Send message to destination socket.
-            write_socket_stream_server_mode(p0, p1, p2);
+            write_stream_socket_server_mode(p0, p1, p2);
         }
     }
 
@@ -374,161 +478,5 @@ void write_socket_stream(void* p0, void* p1, void* p2, void* p3, void* p4, void*
     }
 }
 
-/**
- * Writes a byte array stream to the datagram socket.
- *
- * @param p0 the destination socket of this system
- * @param p1 the source byte array
- * @param p2 the source count
- * @param p3 the receiver socket address (Hand over as reference!)
- * @param p4 the receiver socket address size
- */
-void write_socket_dgram(void* p0, void* p1, void* p2, void* p3, void* p4) {
-
-    if (p4 != *NULL_POINTER) {
-
-        socklen_t* as = (socklen_t*) p4;
-
-        if (p3 != *NULL_POINTER) {
-
-            struct sockaddr** a = (struct sockaddr**) p3;
-
-            if (p2 != *NULL_POINTER) {
-
-                int* sc = (int*) p2;
-
-                if (p0 != *NULL_POINTER) {
-
-                    int* d = (int*) p0;
-
-                    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Write to datagram socket.");
-
-                    // Send to socket and return result.
-                    int r = sendto(*d, p1, *sc, *NUMBER_0_INTEGER, *a, *as);
-
-                    if (r < *NUMBER_0_INTEGER) {
-
-                        if (errno == EBADF) {
-
-                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not write to datagram socket. The socket argument is not a valid file descriptor.");
-
-                        } else if (errno == EINTR) {
-
-                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not write to datagram socket. The operation was interrupted by a signal before any data was sent.");
-
-                        } else if (errno == ENOTSOCK) {
-
-                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not write to datagram socket. The descriptor socket is not a socket.");
-
-                        } else if (errno == EMSGSIZE) {
-
-                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not write to datagram socket. The socket type requires that the message be sent atomically, but the message is too large for this to be possible.");
-
-                        } else if (errno == EWOULDBLOCK) {
-
-                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not write to datagram socket. Nonblocking mode has been set on the socket, and the write operation would block.");
-
-                            //?? TODO: DELETE the following comment block OR the log message above!
-
-                            // CAUTION! Do NOT log the following error:
-                            // log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not write to datagram socket. Nonblocking mode has been set on the socket, and the write operation would block.");
-                            //
-                            // The reason is that the socket is non-blocking,
-                            // so that the "accept" procedure returns always,
-                            // even if no connection was established,
-                            // which would unnecessarily fill up the log file.
-
-                        } else if (errno == ENOBUFS) {
-
-                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not write to datagram socket. There is not enough internal buffer space available.");
-
-                        } else if (errno == ENOTCONN) {
-
-                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not write to datagram socket. You never connected this socket.");
-
-                        } else if (errno == EPIPE) {
-
-                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not write to datagram socket. This socket was connected but the connection is now broken. In this case, send generates a SIGPIPE signal first; if that signal is ignored or blocked, or if its handler returns, then send fails with EPIPE.");
-
-                        } else {
-
-                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not write to datagram socket. An unknown error occured.");
-                        }
-                    }
-
-                } else {
-
-                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not write to datagram socket. The socket of this system is null.");
-                }
-
-            } else {
-
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not write to datagram socket. The source count is null.");
-            }
-
-        } else {
-
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not write to datagram socket. The receiver socket address is null.");
-        }
-
-    } else {
-
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not write to datagram socket. The receiver socket address size is null.");
-    }
-}
-
-/**
- * Writes a byte array stream to the raw socket.
- */
-void write_socket_raw() {
-
-    // Not implemented.
-    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Write to raw socket.");
-    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "The raw socket functionality is NOT implemented!");
-}
-
-/**
- * Writes a byte array stream to the socket.
- *
- * @param p0 the destination socket of this system
- * @param p1 the source byte array
- * @param p2 the source byte array count
- * @param p3 the socket address of the communication partner (Hand over as reference!)
- * @param p4 the socket address of the communication partner size
- * @param p5 the communication mode
- * @param p6 the communication mode count
- * @param p7 the communication style
- */
-void write_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
-
-    if (p7 != *NULL_POINTER) {
-
-        int* st = (int*) p7;
-
-        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Write to socket.");
-
-        if (*st == SOCK_STREAM) {
-
-            write_socket_stream(p0, p1, p2, p3, p4, p5, p6);
-
-        } else if (*st == SOCK_DGRAM) {
-
-            write_socket_dgram(p0, p1, p2, p3, p4);
-
-        } else if (*st == SOCK_RAW) {
-
-            write_socket_raw();
-
-        } else {
-
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not write to socket. The communication style is unknown.");
-        }
-
-    } else {
-
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not write to socket. The communication style is null.");
-    }
-}
-
-/* SOCKET_COMMUNICATOR_SOURCE */
+/* STREAM_SOCKET_COMMUNICATOR_SOURCE */
 #endif

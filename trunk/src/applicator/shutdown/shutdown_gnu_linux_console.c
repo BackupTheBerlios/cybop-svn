@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2007-10-23 17:37:45 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2007-12-01 23:57:41 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -65,7 +65,7 @@ void shutdown_gnu_linux_console(void* p0, void* p1, void* p2) {
     if ((*ipi != *NULL_POINTER) || (opi == *NULL_POINTER)) {
 
         // Interrupt gnu/linux console service thread.
-        interrupt_gnu_linux_console(p1, p2);
+        interrupt_thread(p1, p2);
 
         // The gnu/linux console input- and output stream.
         FILE** ip = (FILE**) NULL_POINTER;

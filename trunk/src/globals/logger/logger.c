@@ -27,9 +27,8 @@
  * Otherwise, an ENDLESS LOOP will be created, because cyboi's
  * array procedures call the logger in turn.
  *
- * @version $Revision: 1.22 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
+ * @version $Revision: 1.23 $ $Date: 2007-12-01 23:57:42 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
- * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
 
 #ifndef LOGGER_SOURCE

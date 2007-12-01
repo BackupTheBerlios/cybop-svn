@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.22 $ $Date: 2007-10-03 23:40:05 $ $Author: christian $
+ * @version $Revision: 1.23 $ $Date: 2007-12-01 23:57:41 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -164,6 +164,11 @@ void add(void* p0, int* p1, void* p2, void* p3, void* p4) {
 
             add_integer_vector(sm, *smc, *sms, *s1m, *s1mc, *s2m, *s2mc);
         }
+    }
+
+    if (r == *NUMBER_0_INTEGER) {
+
+        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) "Could not add two primitive summands. The abstraction is unknown.");
     }
 }
 

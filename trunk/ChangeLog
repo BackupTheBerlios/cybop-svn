@@ -14,15 +14,38 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.35 $ $Date: 2007-10-30 13:08:27 $ $Author: christian $
+# @version $Revision: 1.36 $ $Date: 2007-12-01 23:57:40 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2007-12-01  Christian Heller  <christian.heller@tuxtax.de>
+        * Move suitable functions away from "sense_socket.c" into special communicator files, e.g.:
+            "memoriser/communicator/datagram_socket_communicator.c"
+        * Add warning log message to all top-level files containing only conditions, if no comparison matched:
+            "accessor.c", "allocator.c", "communicator.c" etc.
+
+2007-11-24  Christian Heller  <christian.heller@tuxtax.de>
+        * Prepare merging of files in directory "controller/checker/" and remove directory again
+        * Create files in new directory "applicator/sense/", by copying thread-specific content from "applicator/receive/"
+
+2007-11-18  Christian Heller  <christian.heller@tuxtax.de>
+        * Add new sub directory "controller/checker/" containing the new files
+            "gnu_linux_console_interrupt_checker.c", "x_window_system_interrupt_checker.c",
+            "www_service_interrupt_checker.c", "cyboi_service_interrupt_checker.c"
+
+2007-11-17  Christian Heller  <christian.heller@tuxtax.de>
+        * Add new interrupt variables for gnu/linux console, x window system, www service and cyboi service
+            and store these in internal memory
+        * Adapt files "manager.c", "initialiser.c", "checker.c"
 
 2007-10-30  Christian Heller  <christian.heller@tuxtax.de>
         * Determine body count at first, before adding it to http header in "http_response_converter.c"
         * Delete a number of outdated functions
         * Add temporary "dirty" changes to make http request and response back to the same client socket run for the first time
             (e.g. misuse the signal id to forward the client socket as parameter attached to the signal)
+        * Merge all "applicator/interrupt/interrupt_*.c" files into "applicator/interrupt.c"
+        * Adapt "applicator/shutdown/shutdown_*.c" files accordingly
+        * Delete directory "applicator/interrupt/" recursively
 
 2007-10-15  Christian Heller  <christian.heller@tuxtax.de>
         * Debug "startup_socket.c" so that buffer size is initialised first,

@@ -24,7 +24,7 @@
  * - read data from a device into a byte array
  * - write data from a byte array to a device
  *
- * @version $Revision: 1.20 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
+ * @version $Revision: 1.21 $ $Date: 2007-12-01 23:57:42 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -59,12 +59,16 @@
  * @param p0 the destination byte array (Hand over as reference!)
  * @param p1 the destination count
  * @param p2 the destination size
- * @param p3 the source
- * @param p4 the source count
- * @param p5 the type
- * @param p6 the type count
+ * @param p3 the source or communication partner-connected socket address (the latter for socket communication)
+ * @param p4 the source count or communication partner-connected socket address size (the latter for socket communication)
+ * @param p5 the communication partner-connected socket of this system (for socket communication)
+ * @param p6 the original socket address of this system (for socket communication)
+ * @param p7 the original socket address of this system size (for socket communication)
+ * @param p8 the original socket of this system (for socket communication)
+ * @param p9 the type or style (the latter for socket communication)
+ * @param p10 the type count or style count (the latter for socket communication)
  */
-void read_data(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
+void read_data(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10) {
 
     log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Read data.");
 
@@ -73,7 +77,7 @@ void read_data(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p5, p6, (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p9, p10, (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
@@ -83,7 +87,7 @@ void read_data(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p5, p6, (void*) FILE_CHANNEL, (void*) FILE_CHANNEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p9, p10, (void*) FILE_CHANNEL, (void*) FILE_CHANNEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
@@ -93,7 +97,7 @@ void read_data(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p5, p6, (void*) SHELL_CHANNEL, (void*) SHELL_CHANNEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p9, p10, (void*) SHELL_CHANNEL, (void*) SHELL_CHANNEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
@@ -104,7 +108,7 @@ void read_data(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p5, p6, (void*) FTP_CHANNEL, (void*) FTP_CHANNEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p9, p10, (void*) FTP_CHANNEL, (void*) FTP_CHANNEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
@@ -114,7 +118,7 @@ void read_data(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p5, p6, (void*) HTTP_CHANNEL, (void*) HTTP_CHANNEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p9, p10, (void*) HTTP_CHANNEL, (void*) HTTP_CHANNEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
@@ -124,7 +128,7 @@ void read_data(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p5, p6, (void*) GNU_LINUX_CONSOLE_MODEL, (void*) GNU_LINUX_CONSOLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p9, p10, (void*) GNU_LINUX_CONSOLE_MODEL, (void*) GNU_LINUX_CONSOLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
@@ -134,7 +138,7 @@ void read_data(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p5, p6, (void*) X_WINDOW_SYSTEM_MODEL, (void*) X_WINDOW_SYSTEM_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p9, p10, (void*) X_WINDOW_SYSTEM_MODEL, (void*) X_WINDOW_SYSTEM_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
@@ -144,12 +148,37 @@ void read_data(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p5, p6, (void*) WWW_SERVICE_MODEL, (void*) WWW_SERVICE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p9, p10, (void*) STREAM_COMMUNICATION_STYLE_MODEL, (void*) STREAM_COMMUNICATION_STYLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
-//??            read_socket(p0, p1, p2, p3, p4);
+            sense_socket_stream(p0, p1, p2, p3, p4, p5, p6, p9);
         }
+    }
+
+    if (r == *NUMBER_0_INTEGER) {
+
+        compare_arrays(p9, p10, (void*) DATAGRAM_COMMUNICATION_STYLE_MODEL, (void*) DATAGRAM_COMMUNICATION_STYLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != *NUMBER_0_INTEGER) {
+
+            sense_socket_datagram(p0, p1, p2, p6, p7, p8, p9);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER) {
+
+        compare_arrays(p9, p10, (void*) RAW_COMMUNICATION_STYLE_MODEL, (void*) RAW_COMMUNICATION_STYLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != *NUMBER_0_INTEGER) {
+
+            sense_socket_raw(p0, p1, p2);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER) {
+
+        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) "Could not read data. The communication type is unknown.");
     }
 }
 
@@ -251,12 +280,37 @@ void write_data(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p5, p6, (void*) WWW_SERVICE_MODEL, (void*) WWW_SERVICE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p9, p10, (void*) STREAM_COMMUNICATION_STYLE_MODEL, (void*) STREAM_COMMUNICATION_STYLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
-//??            write_socket(p0, p1, p2, p3, p4);
+            write_stream_socket(p0, p1, p2, p3, p4, p5, p6);
         }
+    }
+
+    if (r == *NUMBER_0_INTEGER) {
+
+        compare_arrays(p9, p10, (void*) DATAGRAM_COMMUNICATION_STYLE_MODEL, (void*) DATAGRAM_COMMUNICATION_STYLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != *NUMBER_0_INTEGER) {
+
+            sense_socket_datagram(p0, p1, p2, p6, p7, p8, p9);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER) {
+
+        compare_arrays(p9, p10, (void*) RAW_COMMUNICATION_STYLE_MODEL, (void*) RAW_COMMUNICATION_STYLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != *NUMBER_0_INTEGER) {
+
+            sense_socket_raw(p0, p1, p2);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER) {
+
+        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) "Could not write data. The communication type is unknown.");
     }
 }
 

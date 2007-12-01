@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.12 $ $Date: 2007-07-23 23:47:58 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2007-12-01 23:57:42 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -51,6 +51,8 @@
  * @param p4 the abstraction count
  */
 void set_element(void* p0, void* p1, void* p2, void* p3, void* p4) {
+
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Set model element.");
 
     // The comparison result.
     int r = *NUMBER_0_INTEGER;
@@ -134,6 +136,11 @@ void set_element(void* p0, void* p1, void* p2, void* p3, void* p4) {
 //??            set_signal_memory_element(p0, p1, p2);
         }
     }
+
+    if (r == *NUMBER_0_INTEGER) {
+
+        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) "Could not set model element. The abstraction is unknown.");
+    }
 }
 
 /**
@@ -149,6 +156,8 @@ void set_element(void* p0, void* p1, void* p2, void* p3, void* p4) {
  * @param p4 the abstraction count
  */
 void remove_element(void* p0, void* p1, void* p2, void* p3, void* p4) {
+
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Remove model element.");
 
     // The comparison result.
     int r = *NUMBER_0_INTEGER;
@@ -232,6 +241,11 @@ void remove_element(void* p0, void* p1, void* p2, void* p3, void* p4) {
 //??            remove_signal_memory_element(p0, p1, p2);
         }
     }
+
+    if (r == *NUMBER_0_INTEGER) {
+
+        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) "Could not remove model element. The abstraction is unknown.");
+    }
 }
 
 /**
@@ -247,6 +261,8 @@ void remove_element(void* p0, void* p1, void* p2, void* p3, void* p4) {
  * @param p4 the abstraction count
  */
 void get_element(void* p0, void* p1, void* p2, void* p3, void* p4) {
+
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Get model element.");
 
     // The comparison result.
     int r = *NUMBER_0_INTEGER;
@@ -329,6 +345,11 @@ void get_element(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
 //??            get_signal_memory_element(p0, p1, p2);
         }
+    }
+
+    if (r == *NUMBER_0_INTEGER) {
+
+        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) "Could not get model element. The abstraction is unknown.");
     }
 }
 

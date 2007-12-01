@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2007-10-23 17:37:45 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2007-12-01 23:57:42 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -29,14 +29,14 @@
 
 #include "../../globals/constants/integer/integer_constants.c"
 
-// The gnu linux console interrupt flag.
-static int* GNU_LINUX_CONSOLE_THREAD_INTERRUPT = NUMBER_0_INTEGER_ARRAY;
-// The x window system interrupt flag.
-static int* X_WINDOW_SYSTEM_THREAD_INTERRUPT = NUMBER_0_INTEGER_ARRAY;
-// The www service interrupt flag.
-static int* WWW_SERVICE_THREAD_INTERRUPT = NUMBER_0_INTEGER_ARRAY;
-// The cyboi service interrupt flag.
-static int* CYBOI_SERVICE_THREAD_INTERRUPT = NUMBER_0_INTEGER_ARRAY;
+// The gnu linux console exit flag.
+static int* GNU_LINUX_CONSOLE_EXIT = NUMBER_0_INTEGER_ARRAY;
+// The x window system exit flag.
+static int* X_WINDOW_SYSTEM_EXIT = NUMBER_0_INTEGER_ARRAY;
+// The www service exit flag.
+static int* WWW_SERVICE_EXIT = NUMBER_0_INTEGER_ARRAY;
+// The cyboi service exit flag.
+static int* CYBOI_SERVICE_EXIT = NUMBER_0_INTEGER_ARRAY;
 
 /* SERVICE_INTERRUPT_VARIABLES_SOURCE */
 #endif

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.25 $ $Date: 2007-10-23 17:37:45 $ $Author: christian $
+ * @version $Revision: 1.26 $ $Date: 2007-12-01 23:57:41 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -67,7 +67,7 @@ void shutdown_x_window_system(void* p0, void* p1, void* p2) {
     if (*di != *NULL_POINTER) {
 
         // Interrupt x window system service thread.
-        interrupt_x_window_system(p1, p2);
+        interrupt_thread(p1, p2);
 
         // The display name.
         // An example identifying the second screen of the first

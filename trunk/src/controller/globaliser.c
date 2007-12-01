@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2007-09-20 08:00:19 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2007-12-01 23:57:41 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -105,21 +105,28 @@ void globalise() {
     *CYBOI_SERVICE_THREAD = *NUMBER_MINUS_1_INTEGER;
 
     //
-    // Service interrupt variables.
+    // Service exit variables.
+    //
+    // These are accessed in the system signal handler.
+    // Since the "interrupt_service_system_signal_handler" function
+    // receives no parameters besides a simple signal numeric code,
+    // neither the exit variables nor the internal memory can be
+    // handed over as argument.
+    // Therefore, they HAVE TO be defined as GLOBAL variables here.
     //
 
-    // Allocate and initialise gnu/linux console thread interrupt flag.
-    GNU_LINUX_CONSOLE_THREAD_INTERRUPT = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
-    *GNU_LINUX_CONSOLE_THREAD_INTERRUPT = *NUMBER_0_INTEGER;
-    // Allocate and initialise x window system thread interrupt flag.
-    X_WINDOW_SYSTEM_THREAD_INTERRUPT = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
-    *X_WINDOW_SYSTEM_THREAD_INTERRUPT = *NUMBER_0_INTEGER;
-    // Allocate and initialise www service thread interrupt flag.
-    WWW_SERVICE_THREAD_INTERRUPT = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
-    *WWW_SERVICE_THREAD_INTERRUPT = *NUMBER_0_INTEGER;
-    // Allocate and initialise cyboi service thread interrupt flag.
-    CYBOI_SERVICE_THREAD_INTERRUPT = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
-    *CYBOI_SERVICE_THREAD_INTERRUPT = *NUMBER_0_INTEGER;
+    // Allocate and initialise gnu/linux console thread exit flag.
+    GNU_LINUX_CONSOLE_EXIT = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
+    *GNU_LINUX_CONSOLE_EXIT = *NUMBER_0_INTEGER;
+    // Allocate and initialise x window system thread exit flag.
+    X_WINDOW_SYSTEM_EXIT = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
+    *X_WINDOW_SYSTEM_EXIT = *NUMBER_0_INTEGER;
+    // Allocate and initialise www service thread exit flag.
+    WWW_SERVICE_EXIT = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
+    *WWW_SERVICE_EXIT = *NUMBER_0_INTEGER;
+    // Allocate and initialise cyboi service thread exit flag.
+    CYBOI_SERVICE_EXIT = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
+    *CYBOI_SERVICE_EXIT = *NUMBER_0_INTEGER;
 
     //
     // Reallocation factor variables.
@@ -232,17 +239,17 @@ void unglobalise() {
     free(SIGNAL_MEMORY_REALLOCATION_FACTOR);
 
     //
-    // Service interrupt variables.
+    // Service exit variables.
     //
 
-    // Free gnu/linux console thread interrupt flag.
-    free(GNU_LINUX_CONSOLE_THREAD_INTERRUPT);
-    // Free x window system thread interrupt flag.
-    free(X_WINDOW_SYSTEM_THREAD_INTERRUPT);
-    // Free www service thread interrupt flag.
-    free(WWW_SERVICE_THREAD_INTERRUPT);
-    // Free cyboi service thread interrupt flag.
-    free(CYBOI_SERVICE_THREAD_INTERRUPT);
+    // Free gnu/linux console thread exit flag.
+    free(GNU_LINUX_CONSOLE_EXIT);
+    // Free x window system thread exit flag.
+    free(X_WINDOW_SYSTEM_EXIT);
+    // Free www service thread exit flag.
+    free(WWW_SERVICE_EXIT);
+    // Free cyboi service thread exit flag.
+    free(CYBOI_SERVICE_EXIT);
 
     //
     // Thread identification variables.

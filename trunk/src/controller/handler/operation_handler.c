@@ -20,9 +20,8 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.38 $ $Date: 2007-10-30 13:08:27 $ $Author: christian $
+ * @version $Revision: 1.39 $ $Date: 2007-12-01 23:57:41 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
- * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
 
 #ifndef OPERATION_HANDLER_SOURCE
@@ -42,6 +41,7 @@
 #include "../../applicator/receive.c"
 #include "../../applicator/run.c"
 #include "../../applicator/send.c"
+#include "../../applicator/sense.c"
 #include "../../applicator/shutdown.c"
 #include "../../applicator/startup.c"
 #include "../../globals/constants/cybol/cybol_abstraction_constants.c"
@@ -61,9 +61,9 @@
  * @param p4 the signal memory
  * @param p5 the signal memory count
  * @param p6 the signal memory size
- * @param p7 the interrupt request flag
- * @param p8 the signal memory mutex
- * @param p9 the shutdown flag
+ * @param p7 the shutdown flag
+ * @param p8 the signal memory interrupt request flag
+ * @param p9 the signal memory mutex
  * @param p10 the model / signal / operation
  * @param p11 the model / signal / operation count
  * @param p12 the details / parameters
@@ -77,7 +77,7 @@ void handle_operation(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
     log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "\n\n");
     log_message((void*) INFORMATION_LOG_LEVEL, (void*) HANDLE_OPERATION_MESSAGE, (void*) HANDLE_OPERATION_MESSAGE_COUNT);
 
-//??    fprintf(stderr, "TEST handle operation: %s\n", (char*) p10);
+    fprintf(stderr, "TEST handle operation: %s\n", (char*) p10);
     log_terminated_message((void*) DEBUG_LOG_LEVEL, p10);
     log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "\n");
 
@@ -236,7 +236,7 @@ void handle_operation(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
             log_message((void*) INFORMATION_LOG_LEVEL, (void*) SET_SHUTDOWN_FLAG_MESSAGE, (void*) SET_SHUTDOWN_FLAG_MESSAGE_COUNT);
 
-            int* f = (int*) p9;
+            int* f = (int*) p7;
             *f = *NUMBER_1_INTEGER;
         }
     }
@@ -247,25 +247,11 @@ void handle_operation(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p10, p11, (void*) SEND_MODEL, (void*) SEND_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p10, p11, (void*) SENSE_MODEL, (void*) SENSE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
-//??            send_message(p12, p13, p0, p1, p2, p3, p4, p5, p6, p15);
-
-            //?? TEST: For testing reasons, the p15 was replaced with *((int**) p15) here!
-            //?? The signal id serves as client socket to which this cyboi system has to reply.
-            send_message(p12, p13, p0, p1, p2, p3, p4, p5, p6, *((int**) p15));
-        }
-    }
-
-    if (r == *NUMBER_0_INTEGER) {
-
-        compare_arrays(p10, p11, (void*) RECEIVE_MODEL, (void*) RECEIVE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != *NUMBER_0_INTEGER) {
-
-            receive_message(p12, p13, p0, p1, p2, p3, p4, p5, p6);
+            sense(p12, p13, p0, p1, p2, p3, p4, p5, p6);
         }
     }
 
@@ -281,11 +267,25 @@ void handle_operation(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p10, p11, (void*) REFRESH_URL_MODEL, (void*) REFRESH_URL_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p10, p11, (void*) RECEIVE_MODEL, (void*) RECEIVE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
-//??            refresh_url(p12, p13, p0, p1, p2, p3, p15);
+            receive_message(p12, p13, p0, p1, p2, p3, p4, p5, p6);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER) {
+
+        compare_arrays(p10, p11, (void*) SEND_MODEL, (void*) SEND_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != *NUMBER_0_INTEGER) {
+
+//??            send_message(p12, p13, p0, p1, p2, p3, p4, p5, p6, p15);
+
+            //?? TEST: For testing reasons, the p15 was replaced with *((int**) p15) here!
+            //?? The signal id serves as client socket to which this cyboi system has to reply.
+            send_message(p12, p13, p0, p1, p2, p3, p4, p5, p6, *((int**) p15));
         }
     }
 

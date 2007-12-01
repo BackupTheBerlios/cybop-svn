@@ -22,7 +22,7 @@
  *
  * this handel a loop
  *
- * @version $Revision: 1.26 $ $Date: 2007-10-03 23:40:05 $ $Author: christian $
+ * @version $Revision: 1.27 $ $Date: 2007-12-01 23:57:41 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -62,9 +62,9 @@ void handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
  * @param p4 the signal memory
  * @param p5 the signal memory count
  * @param p6 the signal memory size
- * @param p7 the interrupt request flag
- * @param p8 the signal memory mutex
- * @param p9 the shutdown flag
+ * @param p7 the shutdown flag
+ * @param p8 the signal memory interrupt request flag
+ * @param p9 the signal memory mutex
  * @param p10 the parameters
  * @param p11 the parameters count
  * @param p12 the priority (Hand over as reference!)

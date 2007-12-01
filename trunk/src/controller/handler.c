@@ -20,9 +20,8 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.24 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
+ * @version $Revision: 1.25 $ $Date: 2007-12-01 23:57:41 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
- * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
 
 #ifndef HANDLER_SOURCE
@@ -50,9 +49,9 @@
  * @param p4 the signal memory
  * @param p5 the signal memory count
  * @param p6 the signal memory size
- * @param p7 the interrupt request flag
- * @param p8 the signal memory mutex
- * @param p9 the shutdown flag
+ * @param p7 the shutdown flag
+ * @param p8 the signal memory interrupt request flag
+ * @param p9 the signal memory mutex
  * @param p10 the abstraction
  * @param p11 the abstraction count
  * @param p12 the model / signal

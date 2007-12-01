@@ -20,9 +20,8 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2007-09-20 08:00:19 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2007-12-01 23:57:42 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
- * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
 
 #ifndef CYBOL_NAME_CONSTANTS_SOURCE
@@ -633,38 +632,38 @@ static char* RUN_PROGRAM_PROGRAM_NAME = RUN_PROGRAM_PROGRAM_NAME_ARRAY;
 static int* RUN_PROGRAM_PROGRAM_NAME_COUNT = NUMBER_7_INTEGER_ARRAY;
 
 //
-// Receive model names.
+// Sense model names.
 //
 
-/** The receive model method name. */
-static char RECEIVE_MODEL_METHOD_NAME_ARRAY[] = {'m', 'e', 't', 'h', 'o', 'd'};
-static char* RECEIVE_MODEL_METHOD_NAME = RECEIVE_MODEL_METHOD_NAME_ARRAY;
-static int* RECEIVE_MODEL_METHOD_NAME_COUNT = NUMBER_6_INTEGER_ARRAY;
+/** The sense model method name. */
+static char SENSE_MODEL_METHOD_NAME_ARRAY[] = {'m', 'e', 't', 'h', 'o', 'd'};
+static char* SENSE_MODEL_METHOD_NAME = SENSE_MODEL_METHOD_NAME_ARRAY;
+static int* SENSE_MODEL_METHOD_NAME_COUNT = NUMBER_6_INTEGER_ARRAY;
 
-/** The receive model scheme name. */
-static char RECEIVE_MODEL_SCHEME_NAME_ARRAY[] = {'s', 'c', 'h', 'e', 'm', 'e'};
-static char* RECEIVE_MODEL_SCHEME_NAME = RECEIVE_MODEL_SCHEME_NAME_ARRAY;
-static int* RECEIVE_MODEL_SCHEME_NAME_COUNT = NUMBER_6_INTEGER_ARRAY;
+/** The sense model scheme name. */
+static char SENSE_MODEL_SCHEME_NAME_ARRAY[] = {'s', 'c', 'h', 'e', 'm', 'e'};
+static char* SENSE_MODEL_SCHEME_NAME = SENSE_MODEL_SCHEME_NAME_ARRAY;
+static int* SENSE_MODEL_SCHEME_NAME_COUNT = NUMBER_6_INTEGER_ARRAY;
 
-/** The receive model authority name. */
-static char RECEIVE_MODEL_AUTHORITY_NAME_ARRAY[] = {'a', 'u', 't', 'h', 'o', 'r', 'i', 't', 'y'};
-static char* RECEIVE_MODEL_AUTHORITY_NAME = RECEIVE_MODEL_AUTHORITY_NAME_ARRAY;
-static int* RECEIVE_MODEL_AUTHORITY_NAME_COUNT = NUMBER_9_INTEGER_ARRAY;
+/** The sense model authority name. */
+static char SENSE_MODEL_AUTHORITY_NAME_ARRAY[] = {'a', 'u', 't', 'h', 'o', 'r', 'i', 't', 'y'};
+static char* SENSE_MODEL_AUTHORITY_NAME = SENSE_MODEL_AUTHORITY_NAME_ARRAY;
+static int* SENSE_MODEL_AUTHORITY_NAME_COUNT = NUMBER_9_INTEGER_ARRAY;
 
-/** The receive model path name. */
-static char RECEIVE_MODEL_PATH_NAME_ARRAY[] = {'p', 'a', 't', 'h'};
-static char* RECEIVE_MODEL_PATH_NAME = RECEIVE_MODEL_PATH_NAME_ARRAY;
-static int* RECEIVE_MODEL_PATH_NAME_COUNT = NUMBER_4_INTEGER_ARRAY;
+/** The sense model path name. */
+static char SENSE_MODEL_PATH_NAME_ARRAY[] = {'p', 'a', 't', 'h'};
+static char* SENSE_MODEL_PATH_NAME = SENSE_MODEL_PATH_NAME_ARRAY;
+static int* SENSE_MODEL_PATH_NAME_COUNT = NUMBER_4_INTEGER_ARRAY;
 
-/** The receive model fragment name. */
-static char RECEIVE_MODEL_FRAGMENT_NAME_ARRAY[] = {'f', 'r', 'a', 'g', 'm', 'e', 'n', 't'};
-static char* RECEIVE_MODEL_FRAGMENT_NAME = RECEIVE_MODEL_FRAGMENT_NAME_ARRAY;
-static int* RECEIVE_MODEL_FRAGMENT_NAME_COUNT = NUMBER_8_INTEGER_ARRAY;
+/** The sense model fragment name. */
+static char SENSE_MODEL_FRAGMENT_NAME_ARRAY[] = {'f', 'r', 'a', 'g', 'm', 'e', 'n', 't'};
+static char* SENSE_MODEL_FRAGMENT_NAME = SENSE_MODEL_FRAGMENT_NAME_ARRAY;
+static int* SENSE_MODEL_FRAGMENT_NAME_COUNT = NUMBER_8_INTEGER_ARRAY;
 
-/** The receive model action name. */
-static char RECEIVE_MODEL_ACTION_NAME_ARRAY[] = {'a', 'c', 't', 'i', 'o', 'n'};
-static char* RECEIVE_MODEL_ACTION_NAME = RECEIVE_MODEL_ACTION_NAME_ARRAY;
-static int* RECEIVE_MODEL_ACTION_NAME_COUNT = NUMBER_6_INTEGER_ARRAY;
+/** The sense model action name. */
+static char SENSE_MODEL_ACTION_NAME_ARRAY[] = {'a', 'c', 't', 'i', 'o', 'n'};
+static char* SENSE_MODEL_ACTION_NAME = SENSE_MODEL_ACTION_NAME_ARRAY;
+static int* SENSE_MODEL_ACTION_NAME_COUNT = NUMBER_6_INTEGER_ARRAY;
 
 /* CYBOL_NAME_CONSTANTS_SOURCE */
 #endif

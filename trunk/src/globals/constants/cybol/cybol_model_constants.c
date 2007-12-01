@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2007-09-15 16:19:07 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2007-12-01 23:57:42 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -369,25 +369,25 @@ static int* EXIT_MODEL_COUNT = NUMBER_4_INTEGER_ARRAY;
 // Communication models.
 //
 
-/** The send model. */
-static char SEND_MODEL_ARRAY[] = {'s', 'e', 'n', 'd'};
-static char* SEND_MODEL = SEND_MODEL_ARRAY;
-static int* SEND_MODEL_COUNT = NUMBER_4_INTEGER_ARRAY;
-
-/** The receive model. */
-static char RECEIVE_MODEL_ARRAY[] = {'r', 'e', 'c', 'e', 'i', 'v', 'e'};
-static char* RECEIVE_MODEL = RECEIVE_MODEL_ARRAY;
-static int* RECEIVE_MODEL_COUNT = NUMBER_7_INTEGER_ARRAY;
+/** The sense model. */
+static char SENSE_MODEL_ARRAY[] = {'s', 'e', 'n', 's', 'e'};
+static char* SENSE_MODEL = SENSE_MODEL_ARRAY;
+static int* SENSE_MODEL_COUNT = NUMBER_5_INTEGER_ARRAY;
 
 /** The interrupt model. */
 static char INTERRUPT_MODEL_ARRAY[] = {'i', 'n', 't', 'e', 'r', 'r', 'u', 'p', 't'};
 static char* INTERRUPT_MODEL = INTERRUPT_MODEL_ARRAY;
 static int* INTERRUPT_MODEL_COUNT = NUMBER_9_INTEGER_ARRAY;
 
-/** The refresh url model. */
-static char REFRESH_URL_MODEL_ARRAY[] = {'r', 'e', 'f', 'r', 'e', 's', 'h', '_', 'u', 'r', 'l'};
-static char* REFRESH_URL_MODEL = REFRESH_URL_MODEL_ARRAY;
-static int* REFRESH_URL_MODEL_COUNT = NUMBER_11_INTEGER_ARRAY;
+/** The receive model. */
+static char RECEIVE_MODEL_ARRAY[] = {'r', 'e', 'c', 'e', 'i', 'v', 'e'};
+static char* RECEIVE_MODEL = RECEIVE_MODEL_ARRAY;
+static int* RECEIVE_MODEL_COUNT = NUMBER_7_INTEGER_ARRAY;
+
+/** The send model. */
+static char SEND_MODEL_ARRAY[] = {'s', 'e', 'n', 'd'};
+static char* SEND_MODEL = SEND_MODEL_ARRAY;
+static int* SEND_MODEL_COUNT = NUMBER_4_INTEGER_ARRAY;
 
 //
 // Service models.

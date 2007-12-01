@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.43 $ $Date: 2007-10-23 17:37:45 $ $Author: christian $
+ * @version $Revision: 1.44 $ $Date: 2007-12-01 23:57:41 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -120,7 +120,15 @@ void manage(void* p0, void* p1) {
     // Both of these assumptions are true on all of the machines that the GNU C
     // library supports and on all known POSIX systems.
     //
-    volatile sig_atomic_t* irq = (volatile sig_atomic_t*) *NULL_POINTER;
+    volatile sig_atomic_t* signal_memory_irq = (volatile sig_atomic_t*) *NULL_POINTER;
+    // The gnu/linux console interrupt request flag.
+    volatile sig_atomic_t* gnu_linux_console_irq = (volatile sig_atomic_t*) *NULL_POINTER;
+    // The x window system interrupt request flag.
+    volatile sig_atomic_t* x_window_system_irq = (volatile sig_atomic_t*) *NULL_POINTER;
+    // The www service interrupt request flag.
+    volatile sig_atomic_t* www_service_irq = (volatile sig_atomic_t*) *NULL_POINTER;
+    // The cyboi service interrupt request flag.
+    volatile sig_atomic_t* cyboi_service_irq = (volatile sig_atomic_t*) *NULL_POINTER;
 
     // The signal memory mutex.
     pthread_mutex_t* signal_memory_mutex = (pthread_mutex_t*) *NULL_POINTER;
@@ -139,8 +147,18 @@ void manage(void* p0, void* p1) {
     // Allocate signal memory count, size.
     allocate((void*) &sc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
     allocate((void*) &ss, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+
     // Allocate signal memory interrupt request flag.
-    irq = (volatile sig_atomic_t*) malloc(sizeof(volatile sig_atomic_t));
+    signal_memory_irq = (volatile sig_atomic_t*) malloc(sizeof(volatile sig_atomic_t));
+    // Allocate gnu/linux console interrupt request flag.
+    gnu_linux_console_irq = (volatile sig_atomic_t*) malloc(sizeof(volatile sig_atomic_t));
+    // Allocate x window system interrupt request flag.
+    x_window_system_irq = (volatile sig_atomic_t*) malloc(sizeof(volatile sig_atomic_t));
+    // Allocate www service interrupt request flag.
+    www_service_irq = (volatile sig_atomic_t*) malloc(sizeof(volatile sig_atomic_t));
+    // Allocate cyboi service interrupt request flag.
+    cyboi_service_irq = (volatile sig_atomic_t*) malloc(sizeof(volatile sig_atomic_t));
+
     // Allocate signal memory mutex.
     signal_memory_mutex = (pthread_mutex_t*) malloc(sizeof(pthread_mutex_t));
     // Allocate gnu/linux console mutex.
@@ -158,8 +176,18 @@ void manage(void* p0, void* p1) {
     // Initialise signal memory count, size.
     *sc = *NUMBER_0_INTEGER;
     *ss = *NUMBER_0_INTEGER;
+
     // Initialise signal memory interrupt request flag.
-    *irq = *NUMBER_0_INTEGER;
+    *signal_memory_irq = *NUMBER_0_INTEGER;
+    // Initialise gnu/linux console interrupt request flag.
+    *gnu_linux_console_irq = *NUMBER_0_INTEGER;
+    // Initialise x window system interrupt request flag.
+    *x_window_system_irq = *NUMBER_0_INTEGER;
+    // Initialise www service interrupt request flag.
+    *www_service_irq = *NUMBER_0_INTEGER;
+    // Initialise cyboi service interrupt request flag.
+    *cyboi_service_irq = *NUMBER_0_INTEGER;
+
     // Initialise signal memory mutex.
     // The second parameter specifies attributes that are to be used to
     // initialise the mutex. If the parameter is null, the mutex is
@@ -213,18 +241,17 @@ void manage(void* p0, void* p1) {
     startup_internal_memory(i,
         (void*) &k, (void*) &kc, (void*) &ks,
         (void*) &s, (void*) &sc, (void*) &ss,
-        (void*) &irq,
-        (void*) &signal_memory_mutex,
-        (void*) &gnu_linux_console_mutex,
-        (void*) &x_window_system_mutex,
-        (void*) &www_service_mutex,
-        (void*) &cyboi_service_mutex);
+        (void*) &signal_memory_irq, (void*) &signal_memory_mutex,
+        (void*) &gnu_linux_console_irq, (void*) &gnu_linux_console_mutex,
+        (void*) &x_window_system_irq, (void*) &x_window_system_mutex,
+        (void*) &www_service_irq, (void*) &www_service_mutex,
+        (void*) &cyboi_service_irq, (void*) &cyboi_service_mutex);
 
     // Start up system signal handler.
     startup_system_signal_handler();
 
     // Initialise system with an initial signal.
-    initialise(i, k, (void*) kc, (void*) ks, s, (void*) sc, (void*) ss, (void*) irq, (void*) signal_memory_mutex, p0, p1);
+    initialise(i, s, (void*) sc, (void*) ss, p0, p1);
 
     // The following calls of "shutdown" procedures are just to be sure,
     // in case a cybol application developer has forgotten to call the
@@ -232,13 +259,13 @@ void manage(void* p0, void* p1) {
     // The "interrupt" procedures are called within the "shutdown" procedures.
 
     // Shutdown gnu/linux console.
-    shutdown_gnu_linux_console(i, (void*) GNU_LINUX_CONSOLE_THREAD, (void*) GNU_LINUX_CONSOLE_THREAD_INTERRUPT);
+    shutdown_gnu_linux_console(i, (void*) GNU_LINUX_CONSOLE_THREAD, (void*) GNU_LINUX_CONSOLE_EXIT);
     // Shutdown x window system.
-    shutdown_x_window_system(i, (void*) X_WINDOW_SYSTEM_THREAD, (void*) X_WINDOW_SYSTEM_THREAD_INTERRUPT);
+    shutdown_x_window_system(i, (void*) X_WINDOW_SYSTEM_THREAD, (void*) X_WINDOW_SYSTEM_EXIT);
     // Shutdown www service.
-    shutdown_socket(i, (void*) WWW_BASE_INTERNAL,(void*) WWW_SERVICE_THREAD, (void*) WWW_SERVICE_THREAD_INTERRUPT);
+    shutdown_socket(i, (void*) WWW_BASE_INTERNAL,(void*) WWW_SERVICE_THREAD, (void*) WWW_SERVICE_EXIT);
     // Shutdown cyboi service.
-    shutdown_socket(i, (void*) CYBOI_BASE_INTERNAL, (void*) CYBOI_SERVICE_THREAD, (void*) CYBOI_SERVICE_THREAD_INTERRUPT);
+    shutdown_socket(i, (void*) CYBOI_BASE_INTERNAL, (void*) CYBOI_SERVICE_THREAD, (void*) CYBOI_SERVICE_EXIT);
 
     // CAUTION! Do NOT remove any internal memory internals!
     // The internals have a fixed position within the internal memory.
@@ -258,7 +285,16 @@ void manage(void* p0, void* p1) {
     pthread_mutex_destroy(cyboi_service_mutex);
 
     // Deallocate signal memory interrupt request flag.
-    free((void*) irq);
+    free((void*) signal_memory_irq);
+    // Deallocate gnu/linux console interrupt request flag.
+    free((void*) gnu_linux_console_irq);
+    // Deallocate x window system interrupt request flag.
+    free((void*) x_window_system_irq);
+    // Deallocate www service interrupt request flag.
+    free((void*) www_service_irq);
+    // Deallocate cyboi service interrupt request flag.
+    free((void*) cyboi_service_irq);
+
     // Deallocate signal memory mutex.
     free((void*) signal_memory_mutex);
     // Deallocate gnu/linux console mutex.

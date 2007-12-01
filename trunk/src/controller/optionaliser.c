@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2007-08-17 03:15:32 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2007-12-01 23:57:41 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -177,6 +177,14 @@ void optionalise_log_level(void* p0, void* p1, void* p2) {
                 // Set log level.
                 *l = *DEBUG_LOG_LEVEL;
             }
+        }
+
+
+        if (r == *NUMBER_0_INTEGER) {
+
+            // CAUTION! DO NOT use logging functionality here!
+            // The logger will not work before its options are set.
+            fputs("Warning: Could not optionalise log level. The log level name is unknown.\n", stdout);
         }
 
     } else {
@@ -401,6 +409,11 @@ void optionalise_option(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
                     // Set log file to store log messages in.
                     optionalise_log_file(p4, *v, p6);
                 }
+            }
+
+            if (r == *NUMBER_0_INTEGER) {
+
+                fputs("Warning: Could not optionalise option. The command line option is unknown.");
             }
 
         } else {

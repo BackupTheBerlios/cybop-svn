@@ -24,9 +24,8 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.15 $ $Date: 2007-10-23 17:37:45 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2007-12-01 23:57:41 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
- * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
 
 #ifndef TEST_SOURCE

@@ -7,18 +7,57 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.22 $ $Date: 2007-10-30 13:08:27 $ $Author: christian $
+# @version $Revision: 1.23 $ $Date: 2007-12-01 23:57:40 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        //?? TODO: The model content p8, p9, p10 needs to be RESET every time since
-        //?? otherwise, new commands are just added to the "action" part entry, for example.
-        //?? Instead, all values should be replaced!
-        * Does it make sense to hand over a cybol model containing entries for:
-            method, scheme, authority, path, fragment, action at all?
-            See "residenz/wui/index_input.cybol"!
-            Actually, a cybol application should have nothing to do with low-level socket functionality.
+Res Medicinae
+_____________
 
+        * Delete file "residenz/wui/index_input.cybol" (also in CVS)
+
+CYBOP
+_____
+
+        * Change threads:
+            - only leave essential stuff to get notified by key press/ mouse click/ socket request;
+                rename those functions to "sense_tui", "sense_gui", "sense_socket";
+                move the rest to new "receive_*" files
+            - call "handle" function handing over necessary parameters
+            - introduce three new interrupts, one for tui gui, socket (and possibly add to internal memory; see signal checking loop interrupt);
+                these irqs are set when some signal arrives via tui, gui, socket
+                AND an endless loop while(irq) has to get activated in the "sense" function,
+                so that the thread only continues to sense new device signals when the irq has
+                been processed and RESET (probably, in the signal checker loop)
+            - also add one special buffer variable (with its count and size) to internal memory,
+                one buffer for tui, one mouse x,y,z vector for gui and one buffer for socket
+            - only the request is sensed in a thread;
+                afterwards, the corresponding interrupt flag is set;
+                in each cycle, the signal checker loop tests for the three new irqs;
+                if an irq is set, then the checker receives the command by parsing the buffer
+                and either executes the operation directly or sets it as new signal (but then
+                the buffer may get overwritten by a new irq request)
+
+        * Delete directory "applicator/interrupt/" recursively (also in CVS)
+
+        * Allocate key and value in "decode_http_request_parameter" (The knowledge model is deallocated anyway between each receive operation; see RESET below!)
+            --> BUT: Actually, allocation is FORBIDDEN in threads! Check out alternative solution!?
+        * CONTINUE in: function "decode_http_request_method", by adding everywhere at "decode_http_request_set_parameter" the new function call like:
+            // Add fragment to given compound model.
+            set_compound_element_by_name(*d, p1, p2,
+                k, (void*) &kc, (void*) &kc,
+                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                v, (void*) &vc, (void*) &vc,
+                *NULL_POINTER, *NULL_POINTER, *NULL_POINTER);
+
+        //?? TODO: The model and details content p8, p9, p10, p11, p12, p13 need to be RESET (emptied) every time since
+        //?? otherwise, new commands are just added to the "action" part entry, in "receive_socket.c"
+        * Hand over an empty cybol model (just like for xdt/bdt) containing no entries for: method, scheme, authority, path, fragment, action
+        * Introduce new functions to delete the content of an allocated entity (for compound, integer_vector, xdt etc.),
+            so that for each new http request, the model is initially empty, in function "receive_socket_message"
+        * Adapt function "decode_http_request" accordingly
+
+--
         * Create three different sockets (locak, inet, inet6)? distinguish at socket startup?
             and store as different entries in internal memory?
         * move and rename "set_new_signal_identification" to e.g. /globals/references/integer_references.c
@@ -73,6 +112,12 @@
                 --> close socket after having sent a reply to the requesting client
         * It was decided that "send" operations do NOT run in an own thread (for now and the near future, at least),
             also if querying a server via http, since this would mix up the signal handling mechanism
+
+        * Increase count and size in "*_accessor.c" files automatically and adapt all source code accordingly
+            (e.g. "set_compound_element_by_name" increases count and size; do likewise for "integer_vector" etc.)
+
+        * Assign "sizeof" for each programming language type to a global variable just once at startup
+            and henceforth use that variable instead of each time determining "sizeof", throughout all source code
 
         * Use an OR || and compare for numeric character reference and character entity reference, when parsing http requests
         * Distinguish cybol- from memory abstractions
