@@ -7,41 +7,13 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.23 $ $Date: 2007-12-01 23:57:40 $ $Author: christian $
+# @version $Revision: 1.24 $ $Date: 2007-12-28 19:25:54 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-Res Medicinae
-_____________
+        * Adapt and optimise new functions in "applicator/receive" and "communicator/read"
+        * Adapt module "controller/checker.c"
 
-        * Delete file "residenz/wui/index_input.cybol" (also in CVS)
-
-CYBOP
-_____
-
-        * Change threads:
-            - only leave essential stuff to get notified by key press/ mouse click/ socket request;
-                rename those functions to "sense_tui", "sense_gui", "sense_socket";
-                move the rest to new "receive_*" files
-            - call "handle" function handing over necessary parameters
-            - introduce three new interrupts, one for tui gui, socket (and possibly add to internal memory; see signal checking loop interrupt);
-                these irqs are set when some signal arrives via tui, gui, socket
-                AND an endless loop while(irq) has to get activated in the "sense" function,
-                so that the thread only continues to sense new device signals when the irq has
-                been processed and RESET (probably, in the signal checker loop)
-            - also add one special buffer variable (with its count and size) to internal memory,
-                one buffer for tui, one mouse x,y,z vector for gui and one buffer for socket
-            - only the request is sensed in a thread;
-                afterwards, the corresponding interrupt flag is set;
-                in each cycle, the signal checker loop tests for the three new irqs;
-                if an irq is set, then the checker receives the command by parsing the buffer
-                and either executes the operation directly or sets it as new signal (but then
-                the buffer may get overwritten by a new irq request)
-
-        * Delete directory "applicator/interrupt/" recursively (also in CVS)
-
-        * Allocate key and value in "decode_http_request_parameter" (The knowledge model is deallocated anyway between each receive operation; see RESET below!)
-            --> BUT: Actually, allocation is FORBIDDEN in threads! Check out alternative solution!?
         * CONTINUE in: function "decode_http_request_method", by adding everywhere at "decode_http_request_set_parameter" the new function call like:
             // Add fragment to given compound model.
             set_compound_element_by_name(*d, p1, p2,
@@ -57,15 +29,10 @@ _____
             so that for each new http request, the model is initially empty, in function "receive_socket_message"
         * Adapt function "decode_http_request" accordingly
 
---
-        * Create three different sockets (locak, inet, inet6)? distinguish at socket startup?
+        * Create three different sockets (local, inet, inet6)? distinguish at socket startup?
             and store as different entries in internal memory?
         * move and rename "set_new_signal_identification" to e.g. /globals/references/integer_references.c
             and name function e.g. "get_integer_reference"
-        * when sending via socket in client mode, cyboi has to wait for an answer from the server;
-            the receive functions may be used for that;
-            BUT: move basic receive functions into "socket_communicator.c" and rename into "read_socket_...",
-            so that the "applicator" may access the "memoriser" using a proper unidirectional dependency
         * Implement session on application level (Res Medicinae)
         * Add the following comment to a matching source code file:
 

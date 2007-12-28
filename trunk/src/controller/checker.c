@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.34 $ $Date: 2007-12-01 23:57:41 $ $Author: christian $
+ * @version $Revision: 1.35 $ $Date: 2007-12-28 19:25:54 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -77,38 +77,8 @@ void check_handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
 
         log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Get and handle a signal.");
 
-/*??
-        // The abstraction.
-        void** a = NULL_POINTER;
-        void** ac = NULL_POINTER;
-        // The model (signal operation).
-        void** m = NULL_POINTER;
-        void** mc = NULL_POINTER;
-        // The details (parameters).
-        void** d = NULL_POINTER;
-        void** dc = NULL_POINTER;
-        // The signal priority.
-        void** p = NULL_POINTER;
-        // The main signal identification.
-        void** id = NULL_POINTER;
-        // The direct execution flag.
-        int x = *NUMBER_0_INTEGER;
-*/
-
         // Get signal.
         get_signal(p4, p5, p10, p14, p15, p17, p18, p20, p21, p23, p24);
-
-    /*??
-        //?? For testing only. Delete these lines later!
-        fprintf(stderr, "TEST index: %i\n", *((int*) p10));
-        fprintf(stderr, "TEST a: %s\n", (char*) *a);
-        fprintf(stderr, "TEST ac: %i\n", *((int*) *ac));
-        fprintf(stderr, "TEST m: %s\n", (char*) *m);
-        fprintf(stderr, "TEST mc: %i\n", *((int*) *mc));
-        // CAUTION! d and dc are NULL. DO NOT try to print their values here!
-        fprintf(stderr, "TEST p: %i\n", *((int*) *p));
-        fprintf(stderr, "TEST id: %i\n", *((int*) *id));
-    */
 
         // Lock signal memory mutex.
         pthread_mutex_lock(mt);
@@ -118,11 +88,6 @@ void check_handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
 
         // Unlock signal memory mutex.
         pthread_mutex_unlock(mt);
-
-/*??
-        // Handle signal.
-        handle(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, *a, *ac, *m, *mc, *d, *dc, p, id, &x);
-*/
 
     } else {
 
@@ -304,70 +269,31 @@ void check_wait(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
 /**
  * Checks for interrupt requests.
  *
- * @param p0 the channel
+ * @param p0 the channel (Hand over as reference!)
  * @param p1 the channel count
- * @param p2 the mutex
- * @param p3 the interrupt request flag
- * @param p0 the internal memory
- * @param p1 the knowledge memory
- * @param p2 the knowledge memory count
- * @param p3 the knowledge memory size
- * @param p4 the signal memory
- * @param p5 the signal memory count
- * @param p6 the signal memory size
- * @param p7 the shutdown flag
- * @param p8 the signal memory interrupt request flag (Hand over as reference!)
- * @param p9 the signal memory mutex (Hand over as reference!)
- * @param p10 the gnu/linux console interrupt request flag (Hand over as reference!)
- * @param p11 the gnu/linux console mutex (Hand over as reference!)
- * @param p12 the x window system interrupt request flag (Hand over as reference!)
- * @param p13 the x window system mutex (Hand over as reference!)
- * @param p14 the www service interrupt request flag (Hand over as reference!)
- * @param p15 the www service mutex (Hand over as reference!)
- * @param p16 the cyboi service interrupt request flag (Hand over as reference!)
- * @param p17 the cyboi service mutex (Hand over as reference!)
- * @param p18 the comparison result
- * @param p19 the action name (Hand over as reference!)
- * @param p20 the action name count
- * @param p21 the action name size
- * @param p22 the action abstraction (Hand over as reference!)
- * @param p23 the action abstraction count
- * @param p24 the action abstraction size
- * @param p25 the action model (Hand over as reference!)
- * @param p26 the action model count
- * @param p27 the action model size
- * @param p28 the action details (Hand over as reference!)
- * @param p29 the action details count
- * @param p30 the action details size
- * @param p31 the model
- * @param p32 the model count
- * @param p33 the model size
- * @param p34 the details
- * @param p35 the details count
- * @param p36 the details size
- * @param p37 the commands
- * @param p38 the commands count
- * @param p39 the language
- * @param p40 the language count
- * @param p41 the style
- * @param p42 the style count
- * @param p43 the buffer (Hand over as reference!)
- * @param p44 the buffer count
- * @param p45 the buffer size
+ * @param p2 the interrupt request flag (Hand over as reference!)
+ * @param p3 the mutex (Hand over as reference!)
+ * @param p4 the signal memory interrupt request flag (Hand over as reference!)
+ * @param p5 the signal memory mutex (Hand over as reference!)
+ * @param p6 the gnu/linux console interrupt request flag (Hand over as reference!)
+ * @param p7 the gnu/linux console mutex (Hand over as reference!)
+ * @param p8 the x window system interrupt request flag (Hand over as reference!)
+ * @param p9 the x window system mutex (Hand over as reference!)
+ * @param p10 the www service interrupt request flag (Hand over as reference!)
+ * @param p11 the www service mutex (Hand over as reference!)
+ * @param p12 the cyboi service interrupt request flag (Hand over as reference!)
+ * @param p13 the cyboi service mutex (Hand over as reference!)
  */
-void check_interrupts(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
-    void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14, void* p15, void* p16, void* p17, void* p18,
-    void* p19, void* p20, void* p21, void* p22, void* p23, void* p24, void* p25, void* p26, void* p27, void* p28, void* p29, void* p30,
-    void* p31, void* p32, void* p33, void* p34, void* p35, void* p36, void* p37, void* p38, void* p39, void* p40, void* p41, void* p42,
-    void* p43, void* p44, void* p45) {
+void check_interrupts(void* p0, void* p1, void* p2, void* p3,
+    void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13) {
 
     if (p3 != *NULL_POINTER) {
 
-        void** irq = (void**) p3;
+        void** mt = (void**) p3;
 
         if (p2 != *NULL_POINTER) {
 
-            void** mt = (void**) p2;
+            void** irq = (void**) p2;
 
             if (p1 != *NULL_POINTER) {
 
@@ -379,15 +305,21 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
                     log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Check for interrupt requests.");
 
+                    // CAUTION! The irq and mutex parameters are NOT casted above,
+                    // in order to maintain better readability and extensibility.
+                    // Further channels may be added in the future and adding them
+                    // to the list below is just easier than having to indent and nest whole
+                    // blocks of code, as it would be necessary when casting all parameters above.
+
                     if (*irq == *NULL_POINTER) {
 
-                        if (p9 != *NULL_POINTER) {
+                        if (p5 != *NULL_POINTER) {
 
-                            void** signal_memory_mutex = (void**) p9;
+                            void** signal_memory_mutex = (void**) p5;
 
-                            if (p8 != *NULL_POINTER) {
+                            if (p4 != *NULL_POINTER) {
 
-                                void** signal_memory_irq = (void**) p8;
+                                void** signal_memory_irq = (void**) p4;
 
                                 if (**signal_memory_irq != *NUMBER_0_INTEGER) {
 
@@ -414,13 +346,13 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
                     if (*irq == *NULL_POINTER) {
 
-                        if (p11 != *NULL_POINTER) {
+                        if (p7 != *NULL_POINTER) {
 
-                            void** gnu_linux_console_mutex = (void**) p11;
+                            void** gnu_linux_console_mutex = (void**) p7;
 
-                            if (p10 != *NULL_POINTER) {
+                            if (p6 != *NULL_POINTER) {
 
-                                void** gnu_linux_console_irq = (void**) p10;
+                                void** gnu_linux_console_irq = (void**) p6;
 
                                 if (**gnu_linux_console_irq != *NUMBER_0_INTEGER) {
 
@@ -447,13 +379,13 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
                     if (*irq == *NULL_POINTER) {
 
-                        if (p13 != *NULL_POINTER) {
+                        if (p9 != *NULL_POINTER) {
 
-                            void** x_window_system_mutex = (void**) p13;
+                            void** x_window_system_mutex = (void**) p9;
 
-                            if (p12 != *NULL_POINTER) {
+                            if (p8 != *NULL_POINTER) {
 
-                                void** x_window_system_irq = (void**) p12;
+                                void** x_window_system_irq = (void**) p8;
 
                                 if (**x_window_system_irq != *NUMBER_0_INTEGER) {
 
@@ -480,13 +412,13 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
                     if (*irq == *NULL_POINTER) {
 
-                        if (p15 != *NULL_POINTER) {
+                        if (p11 != *NULL_POINTER) {
 
-                            void** www_service_mutex = (void**) p15;
+                            void** www_service_mutex = (void**) p11;
 
-                            if (p14 != *NULL_POINTER) {
+                            if (p10 != *NULL_POINTER) {
 
-                                void** www_service_irq = (void**) p14;
+                                void** www_service_irq = (void**) p10;
 
                                 if (**www_service_irq != *NUMBER_0_INTEGER) {
 
@@ -513,13 +445,13 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
                     if (*irq == *NULL_POINTER) {
 
-                        if (p17 != *NULL_POINTER) {
+                        if (p13 != *NULL_POINTER) {
 
-                            void** cyboi_service_mutex = (void**) p17;
+                            void** cyboi_service_mutex = (void**) p13;
 
-                            if (p16 != *NULL_POINTER) {
+                            if (p12 != *NULL_POINTER) {
 
-                                void** cyboi_service_irq = (void**) p16;
+                                void** cyboi_service_irq = (void**) p12;
 
                                 if (**cyboi_service_irq != *NUMBER_0_INTEGER) {
 
@@ -629,7 +561,7 @@ void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
     void** ds = NULL_POINTER;
     // The signal priority.
     void** p = NULL_POINTER;
-    // The main signal identification.
+    // The signal identification.
     void** id = NULL_POINTER;
     // The direct execution flag.
     int x = *NUMBER_0_INTEGER;
@@ -641,10 +573,9 @@ void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
 
     if (i >= *NUMBER_0_INTEGER) {
 
-    fprintf(stderr, "TEST signal priority: %i\n", i);
+    fprintf(stderr, "TEST index of signal with highest priority: %i\n", i);
 
         // A signal was found and has to be handled.
-        //
         // Handling a signal has higher priority than checking for new interrupt requests.
 
         check_handle(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, (void*) &i,
@@ -653,6 +584,18 @@ void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
             (void*) &m, (void*) &mc, (void*) &ms,
             (void*) &d, (void*) &dc, (void*) &ds,
             (void*) &p, (void*) &id);
+
+    /*??
+        //?? For testing only. Delete these lines later!
+        fprintf(stderr, "TEST index: %i\n", *((int*) p10));
+        fprintf(stderr, "TEST a: %s\n", (char*) *a);
+        fprintf(stderr, "TEST ac: %i\n", *((int*) *ac));
+        fprintf(stderr, "TEST m: %s\n", (char*) *m);
+        fprintf(stderr, "TEST mc: %i\n", *((int*) *mc));
+        // CAUTION! d and dc are NULL. DO NOT try to print their values here!
+        fprintf(stderr, "TEST p: %i\n", *((int*) *p));
+        fprintf(stderr, "TEST id: %i\n", *((int*) *id));
+    */
 
         // Handle signal.
         handle(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, *a, *ac, *m, *mc, *d, *dc, p, id, &x);
@@ -672,19 +615,30 @@ void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
 
         // Check interrupt request flags and get the appropriate:
         // - channel (to be forwarded to the "receive" function below)
-        // - mutex (to be used to reset the interrupt request flag below)
         // - interrupt request flag (to be reset below)
-        check_interrupts((void*) &c, (void*) &cc, (void*) &mt, (void*) &irq,
-            p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17,
-            (void*) &n, (void*) &nc, (void*) &ns,
-            (void*) &a, (void*) &ac, (void*) &as,
-            (void*) &m, (void*) &mc, (void*) &ms,
-            (void*) &d, (void*) &dc, (void*) &ds,
-            p18, p19, p20, p21, p22, p23, p24, p25, p26, p27, p28, p29, p30, p31, p32);
+        // - mutex (to be blocked while resetting the interrupt request flag below)
+        check_interrupts((void*) &c, (void*) &cc, (void*) &irq, (void*) &mt, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17);
 
     fprintf(stderr, "TEST interrupts r: %i\n", *irq);
 
         if ((irq != *NULL_POINTER) && (*irq != *NUMBER_0_INTEGER)) {
+
+            // Lock cyboi service mutex.
+            pthread_mutex_lock(mt);
+
+            // Reset cyboi service interrupt request.
+            //
+            // The interrupt is reset to zero here because its purpose of
+            // receiving data over some device and handling the corresponding
+            // signals is fulfilled.
+            //
+            // This is done here, right after checking the interrupt flag
+            // and yet BEFORE receiving data and handling the signal below,
+            // so that the system may react faster to new interrupt requests.
+            *irq = *NUMBER_0_INTEGER;
+
+            // Unlock cyboi service mutex.
+            pthread_mutex_unlock(mt);
 
             // Receive data.
             receive(p18, p19, p20, p21, p22, p23, p24, p25, p26, p27, p28, p29, p30, p31, p32, p33, p1, p2, c, (void*) &cc);
@@ -698,19 +652,6 @@ void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
             // But since the signal parses and references these temporary data,
             // the system will not process the signal correctly, if the data have been destroyed.
             handle(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, *a, *ac, *m, *mc, *d, *dc, p, id, &x);
-
-            // Lock cyboi service mutex.
-            pthread_mutex_lock(mt);
-
-            // Reset cyboi service interrupt request.
-            //
-            // The interrupt is reset to zero here because its purpose of
-            // receiving data over some device and handling the corresponding
-            // signals is fulfilled.
-            *irq = *NUMBER_0_INTEGER;
-
-            // Unlock cyboi service mutex.
-            pthread_mutex_unlock(mt);
 
     fprintf(stderr, "TEST empty: %i\n", r);
 

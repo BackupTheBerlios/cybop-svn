@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.45 $ $Date: 2007-12-01 23:57:41 $ $Author: christian $
+ * @version $Revision: 1.46 $ $Date: 2007-12-28 19:25:54 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -84,6 +84,8 @@ void receive_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, 
 
     fprintf(stderr, "TEST 1 l: %s \n", (char*) p8);
     fprintf(stderr, "TEST 1 lc: %i \n", *((int*) p9));
+
+    read_stream_socket(p0, p1, p2, p3);
 
     //?? TODO: The model content p8, p9, p10 needs to be RESET every time since
     //?? otherwise, new commands are just added to the "action" part entry, for example.

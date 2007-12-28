@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.43 $ $Date: 2007-12-01 23:57:41 $ $Author: christian $
+ * @version $Revision: 1.44 $ $Date: 2007-12-28 19:25:54 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -42,6 +42,134 @@
 #include "../globals/logger/logger.c"
 #include "../globals/variables/thread_identification_variables.c"
 #include "../memoriser/accessor/compound_accessor.c"
+
+/**
+ * Receives a message via the given channel.
+ *
+ * @param p0 the internal memory
+ * @param p1 the model
+ * @param p2 the model count
+ * @param p3 the model size
+ * @param p4 the details
+ * @param p5 the details count
+ * @param p6 the details size
+ * @param p7 the root
+ * @param p8 the root count
+ * @param p9 the root size
+ * @param p10 the commands
+ * @param p11 the commands count
+ * @param p12 the commands size
+ * @param p13 the message
+ * @param p14 the message count
+ * @param p15 the meta message
+ * @param p16 the meta message count
+ * @param p17 the language
+ * @param p18 the language count
+ * @param p19 the socket communication style
+ * @param p20 the socket communication style count
+ * @param p21 the channel
+ * @param p22 the channel count
+ */
+void receive_with_parameters(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8) {
+
+    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Receive message with given parameters.");
+
+    // The comparison result.
+    int r = *NUMBER_0_INTEGER;
+
+    if (r == *NUMBER_0_INTEGER) {
+
+        compare_arrays(p21, p22, (void*) FILE_SYSTEM_MODEL, (void*) FILE_SYSTEM_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != *NUMBER_0_INTEGER) {
+
+            // Receive model by reading message data.
+            //
+            // CAUTION! The details are handed over as well, since sometimes,
+            // they are read from the message together with the model, for
+            // example when converting from a file in xdt format.
+            receive_file_system(p1, p2, p3, p4, p5, p6, p13, p14, p17, p18);
+
+            // Receive details by reading meta message data.
+            //
+            // CAUTION! Sometimes, the details are read from a different source than the
+            // model, for example the html attributes of an html table when creating a wui.
+            //
+            // Example:
+            // <part name="receive_table_row" channel="inline" abstraction="operation" model="receive">
+            //     <property name="channel" channel="inline" abstraction="character" model="file"/>
+            //     <property name="language" channel="inline" abstraction="character" model="compound"/>
+            //     <property name="message" channel="inline" abstraction="character" model="residenz/wui/address_table_row.cybol"/>
+            //     <property name="meta" channel="inline" abstraction="character" model="residenz/wui/address_table_row_properties.cybol"/>
+            //     <property name="model" channel="inline" abstraction="encapsulated" model=".residenz.temporary.translation.translate_record_to_wui.wui_patient_row"/>
+            // </part>
+            receive_file_system(p4, p5, p6, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, p15, p16, p17, p18);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER) {
+
+        compare_arrays(p21, p22, (void*) GNU_LINUX_CONSOLE_MODEL, (void*) GNU_LINUX_CONSOLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != *NUMBER_0_INTEGER) {
+
+//??            receive_gnu_linux_console(p0, p10, p11, p12);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER) {
+
+        compare_arrays(p21, p22, (void*) X_WINDOW_SYSTEM_MODEL, (void*) X_WINDOW_SYSTEM_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != *NUMBER_0_INTEGER) {
+
+//??            receive_x_window_system(p0, p7, p8, p9, p10, p11, p12);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER) {
+
+        compare_arrays(p21, p22, (void*) WWW_SERVICE_MODEL, (void*) WWW_SERVICE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != *NUMBER_0_INTEGER) {
+
+            // Receive model by reading http request or response.
+            //
+            // CAUTION! The details are handed over as well,
+            // since they will store http headers as meta data.
+//??            receive_socket(p0, (void*) WWW_BASE_INTERNAL, (void*) WWW_SERVICE_THREAD, (void*) &receive_socket_www, p1, p2, p3, p4, p5, p6, p10, p11, p17, p18, p19, p20);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER) {
+
+        compare_arrays(p21, p22, (void*) CYBOI_SERVICE_MODEL, (void*) CYBOI_SERVICE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != *NUMBER_0_INTEGER) {
+
+            // Receive model by reading http request or response.
+            //
+            // CAUTION! The details are handed over as well,
+            // since they will store http headers as meta data.
+//??            receive_socket(p0, (void*) CYBOI_BASE_INTERNAL, (void*) CYBOI_SERVICE_THREAD, (void*) &receive_socket_cyboi, p1, p2, p3, p4, p5, p6, p10, p11, p17, p18, p19, p20);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER) {
+
+        compare_arrays(p21, p22, (void*) LATEX_MODEL, (void*) LATEX_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != *NUMBER_0_INTEGER) {
+
+//??            receive_latex(p0, p13, p14);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER) {
+
+        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) "Could not receive message with given parameters. The channel model is unknown.");
+    }
+}
 
 /**
  * Receives a message via the given channel.
@@ -98,11 +226,8 @@
  * @param p3 the knowledge memory
  * @param p4 the knowledge memory count
  * @param p5 the knowledge memory size
- * @param p6 the signal memory
- * @param p7 the signal memory count
- * @param p8 the signal memory size
  */
-void receive_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8) {
+void receive_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
     log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Receive message.");
 
@@ -305,101 +430,9 @@ void receive_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
         (void*) &bd, (void*) &bdc, (void*) &bds,
         p3, p4);
 
-    // The comparison result.
-    int r = *NUMBER_0_INTEGER;
-
-    if (r == *NUMBER_0_INTEGER) {
-
-        compare_arrays((void*) *cm, (void*) *cmc, (void*) FILE_SYSTEM_MODEL, (void*) FILE_SYSTEM_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != *NUMBER_0_INTEGER) {
-
-            // Receive model by reading message data.
-            //
-            // CAUTION! The details are handed over as well, since sometimes,
-            // they are read from the message together with the model, for
-            // example when converting from a file in xdt format.
-            receive_file_system((void*) mom, *momc, *moms, (void*) mod, *modc, *mods, *mm, *mmc, *lm, *lmc);
-
-            // Receive details by reading meta message data.
-            //
-            // CAUTION! Sometimes, the details are read from a different source than the
-            // model, for example the html attributes of an html table when creating a wui.
-            //
-            // Example:
-            // <part name="receive_table_row" channel="inline" abstraction="operation" model="receive">
-            //     <property name="channel" channel="inline" abstraction="character" model="file"/>
-            //     <property name="language" channel="inline" abstraction="character" model="compound"/>
-            //     <property name="message" channel="inline" abstraction="character" model="residenz/wui/address_table_row.cybol"/>
-            //     <property name="meta" channel="inline" abstraction="character" model="residenz/wui/address_table_row_properties.cybol"/>
-            //     <property name="model" channel="inline" abstraction="encapsulated" model=".residenz.temporary.translation.translate_record_to_wui.wui_patient_row"/>
-            // </part>
-            receive_file_system((void*) mod, *modc, *mods, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *mem, *memc, *lm, *lmc);
-        }
-    }
-
-    if (r == *NUMBER_0_INTEGER) {
-
-        compare_arrays((void*) *cm, (void*) *cmc, (void*) GNU_LINUX_CONSOLE_MODEL, (void*) GNU_LINUX_CONSOLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != *NUMBER_0_INTEGER) {
-
-//??            receive_gnu_linux_console(p2, *com, *comc, *coms);
-        }
-    }
-
-    if (r == *NUMBER_0_INTEGER) {
-
-        compare_arrays((void*) *cm, (void*) *cmc, (void*) X_WINDOW_SYSTEM_MODEL, (void*) X_WINDOW_SYSTEM_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != *NUMBER_0_INTEGER) {
-
-//??            receive_x_window_system(p2, *rm, *rmc, *rms, *com, *comc, *coms);
-        }
-    }
-
-    if (r == *NUMBER_0_INTEGER) {
-
-        compare_arrays((void*) *cm, (void*) *cmc, (void*) WWW_SERVICE_MODEL, (void*) WWW_SERVICE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != *NUMBER_0_INTEGER) {
-
-            // Receive model by reading http request or response.
-            //
-            // CAUTION! The details are handed over as well,
-            // since they will store http headers as meta data.
-//??            receive_socket(p2, (void*) WWW_BASE_INTERNAL, (void*) WWW_SERVICE_THREAD, (void*) &receive_socket_www, (void*) mom, (void*) momc, (void*) moms, (void*) mod, (void*) modc, (void*) mods, (void*) com, (void*) comc, (void*) lm, (void*) lmc, (void*) stm, (void*) stmc);
-        }
-    }
-
-    if (r == *NUMBER_0_INTEGER) {
-
-        compare_arrays((void*) *cm, (void*) *cmc, (void*) CYBOI_SERVICE_MODEL, (void*) CYBOI_SERVICE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != *NUMBER_0_INTEGER) {
-
-            // Receive model by reading http request or response.
-            //
-            // CAUTION! The details are handed over as well,
-            // since they will store http headers as meta data.
-//??            receive_socket(p2, (void*) CYBOI_BASE_INTERNAL, (void*) CYBOI_SERVICE_THREAD, (void*) &receive_socket_cyboi, (void*) mom, (void*) momc, (void*) moms, (void*) mod, (void*) modc, (void*) mods, (void*) com, (void*) comc, (void*) lm, (void*) lmc, (void*) stm, (void*) stmc);
-        }
-    }
-
-    if (r == *NUMBER_0_INTEGER) {
-
-        compare_arrays((void*) *cm, (void*) *cmc, (void*) LATEX_MODEL, (void*) LATEX_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != *NUMBER_0_INTEGER) {
-
-//??            receive_latex(p2, *mm, *mmc);
-        }
-    }
-
-    if (r == *NUMBER_0_INTEGER) {
-
-        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) "Could not receive message. The channel model is unknown.");
-    }
+    // Receive data using the parameters determined above.
+    receive_with_parameters(p2, (void*) mom, *momc, *moms, (void*) mod, *modc, *mods, *rm, *rmc, *rms,
+        *com, *comc, *coms, *mm, *mmc, *mem, *memc, *lm, *lmc, (void*) stm, (void*) stmc, *cm, *cmc);
 }
 
 /* RECEIVE_SOURCE */

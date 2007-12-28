@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.39 $ $Date: 2007-12-01 23:57:41 $ $Author: christian $
+ * @version $Revision: 1.40 $ $Date: 2007-12-28 19:25:55 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -271,7 +271,7 @@ void handle_operation(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
         if (r != *NUMBER_0_INTEGER) {
 
-            receive_message(p12, p13, p0, p1, p2, p3, p4, p5, p6);
+            receive_message(p12, p13, p0, p1, p2, p3);
         }
     }
 

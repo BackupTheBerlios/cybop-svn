@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.21 $ $Date: 2007-12-01 23:57:41 $ $Author: christian $
+ * @version $Revision: 1.22 $ $Date: 2007-12-28 19:25:54 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -28,15 +28,13 @@
 #define INTERRUPT_SOURCE
 
 /*??
+#include <arpa/inet.h>
+#include <netinet/in.h>
 #include <sys/signal.h>
-#include <pthread.h>
-*/
-/*??
 #include <sys/socket.h>
 #include <sys/types.h>
+#include <pthread.h>
 #include <stdio.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
 #include <unistd.h>
 */
 #include "../globals/constants/cybol/cybol_abstraction_constants.c"
@@ -68,7 +66,7 @@ void interrupt_thread(void* p0, void* p1) {
 
             pthread_t* t = (pthread_t*) p0;
 
-            log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Interrupt thread.");
+            log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Interrupt thread.");
 
             if (*t != *NUMBER_MINUS_1_INTEGER) {
 
@@ -90,6 +88,10 @@ void interrupt_thread(void* p0, void* p1) {
 
                 // Wait for thread to finish.
                 pthread_join(*t, *NULL_POINTER);
+
+                // A mutex is not needed while setting the following parameters,
+                // since the corresponding thread was killed above so that NO
+                // other entities exist that may access the parameters.
 
                 // Reset thread.
                 *t = *NUMBER_MINUS_1_INTEGER;

@@ -14,9 +14,19 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.36 $ $Date: 2007-12-01 23:57:40 $ $Author: christian $
+# @version $Revision: 1.37 $ $Date: 2007-12-28 19:25:54 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2007-12-28  Christian Heller  <christian.heller@tuxtax.de>
+        * Adapt and optimise new functions in "applicator/sense"
+
+2007-12-08  Christian Heller  <christian.heller@tuxtax.de>
+        * Move suitable functions away from "sense_gnu_linux_console.c" into "gnu_linux_console_communicator.c"
+            and add "ungetc" function right after "fgetc", to unread a detected character in the input stream,
+            in order to make it available again to "read_gnu_linux_console"
+        * Move suitable functions away from "sense_x_window_system.c" into "x_window_system_communicator.c"
+            and only leave one function "XEventsQueued" to get notified of a key/ mouse event
 
 2007-12-01  Christian Heller  <christian.heller@tuxtax.de>
         * Move suitable functions away from "sense_socket.c" into special communicator files, e.g.:
@@ -35,7 +45,7 @@
 
 2007-11-17  Christian Heller  <christian.heller@tuxtax.de>
         * Add new interrupt variables for gnu/linux console, x window system, www service and cyboi service
-            and store these in internal memory
+            and store these in internal memory; these irqs are set when some signal arrives via tui, gui, wui
         * Adapt files "manager.c", "initialiser.c", "checker.c"
 
 2007-10-30  Christian Heller  <christian.heller@tuxtax.de>

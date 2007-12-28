@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.32 $ $Date: 2007-12-01 23:57:41 $ $Author: christian $
+ * @version $Revision: 1.33 $ $Date: 2007-12-28 19:25:54 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -58,6 +58,8 @@
 void receive_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
     log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Receive x window system message.");
+
+    //?? read_x_window_system();
 }
 
 /* GNU_LINUX_OPERATING_SYSTEM */

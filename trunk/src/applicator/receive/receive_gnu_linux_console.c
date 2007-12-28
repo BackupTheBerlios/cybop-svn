@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2007-12-01 23:57:41 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2007-12-28 19:25:54 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -59,6 +59,8 @@
 void receive_gnu_linux_console(void* p0, void* p1, void* p2, void* p3) {
 
     log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Receive gnu/linux console message.");
+
+    //?? read_gnu_linux_console();
 }
 
 /* GNU_LINUX_OPERATING_SYSTEM */

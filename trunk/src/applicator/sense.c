@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2007-12-01 23:57:41 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2007-12-28 19:25:54 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -39,6 +39,53 @@
 #include "../globals/logger/logger.c"
 #include "../globals/variables/thread_identification_variables.c"
 #include "../memoriser/accessor/compound_accessor.c"
+
+/**
+ * Senses message.
+ *
+ * @param p0 the internal memory
+ * @param p1 the service thread
+ * @param p2 the thread procedure
+ */
+void sense_message(void* p0, void* p1, void* p2) {
+
+    if (p1 != *NULL_POINTER) {
+
+        int* t = (int*) p1;
+
+        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Sense message.");
+
+        // Only create thread, if not existent.
+        // CAUTION! The "pthread_t" type is an integer, so both can be compared.
+        if (*t == *NUMBER_MINUS_1_INTEGER) {
+
+            log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Create sense message thread.");
+
+            // Create thread.
+            //
+            // CAUTION! Do NOT allocate any resources within the thread procedure!
+            // The reason is that this main process thread gets forked when executing
+            // external programs. A "fork" duplicates ALL resources of the parent process,
+            // including ALL resources of any threads running within the parent process.
+            // However, since the created child process does not have those threads running,
+            // their duplicated resources will never be deallocated, which eats up memory.
+            // See source code file: applicator/run/run_execute.c
+            //
+            // Any dynamically allocated resources needed within the thread have to be:
+            // - allocated at service startup
+            // - added to the internal memory
+            // - handed over to the thread procedure HERE
+            // - deallocated at service shutdown
+            //
+            // The third parameter is the procedure to be called.
+            pthread_create((pthread_t*) p1, *NULL_POINTER, p2, p0);
+        }
+
+    } else {
+
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not sense message. The service thread is null.");
+    }
+}
 
 /**
  * Senses an interrupt request happening on the given device channel.
@@ -291,7 +338,7 @@ void sense(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
 
         if (r != *NUMBER_0_INTEGER) {
 
-            sense_gnu_linux_console(p2, *com, *comc, *coms);
+            sense_message(p2, (void*) GNU_LINUX_CONSOLE_THREAD, (void*) &sense_gnu_linux_console);
         }
     }
 
@@ -301,7 +348,7 @@ void sense(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
 
         if (r != *NUMBER_0_INTEGER) {
 
-            sense_x_window_system(p2, *rm, *rmc, *rms, *com, *comc, *coms);
+            sense_message(p2, (void*) X_WINDOW_SYSTEM_THREAD, (void*) &sense_x_window_system);
         }
     }
 
@@ -315,7 +362,7 @@ void sense(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
             //
             // CAUTION! The details are handed over as well,
             // since they will store http headers as meta data.
-            sense_socket(p2, (void*) WWW_BASE_INTERNAL, (void*) WWW_SERVICE_THREAD, (void*) &sense_socket_www, (void*) mom, (void*) momc, (void*) moms, (void*) mod, (void*) modc, (void*) mods, (void*) com, (void*) comc, (void*) lm, (void*) lmc, (void*) stm, (void*) stmc);
+            sense_message(p2, (void*) WWW_SERVICE_THREAD, (void*) &sense_www_socket);
         }
     }
 
@@ -329,7 +376,7 @@ void sense(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
             //
             // CAUTION! The details are handed over as well,
             // since they will store http headers as meta data.
-            sense_socket(p2, (void*) CYBOI_BASE_INTERNAL, (void*) CYBOI_SERVICE_THREAD, (void*) &sense_socket_cyboi, (void*) mom, (void*) momc, (void*) moms, (void*) mod, (void*) modc, (void*) mods, (void*) com, (void*) comc, (void*) lm, (void*) lmc, (void*) stm, (void*) stmc);
+            sense_message(p2, (void*) CYBOI_SERVICE_THREAD, (void*) &sense_cyboi_socket);
         }
     }
 
