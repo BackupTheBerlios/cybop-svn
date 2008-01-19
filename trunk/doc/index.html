@@ -18,7 +18,7 @@
         - Cybernetics Oriented Programming -
     /-->
     <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1"/>
-    <meta name="date" content="$Revision: 1.48 $ $Date: 2007-08-01 13:59:00 $ $Author: christian $">
+    <meta name="date" content="$Revision: 1.49 $ $Date: 2008-01-19 07:11:20 $ $Author: christian $">
     <meta name="author" content="Christian Heller christian.heller@tuxtax.de">
     <meta name="description" content="CYBOP Homepage"/>
     <meta name="keywords" content="CYBOP,CYBOL,CYBOI,Cybernetics Oriented Programming"/>
@@ -258,5 +258,21 @@
         </td>
     </tr>
     </table>
+    <!-- Start of temporary protest banner using JavaScript. -->
+    <div id="todestag" style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; background-color: #000; text-align: center; color: #fff; font-family: Verdana,sans-serif; visibility: hidden; -moz-opacity: 0.9; filter:alpha(opacity=90); opacity: 0.9; z-index: 100;">
+        <p>
+            <a href="http://www.vorratsdatenspeicherung.de/">
+                <img src="http://www.vorratsdatenspeicherung.de/images/todestag2007.png" style="border: none" alt="Stoppt die Vorratsdatenspeicherung!" title="Stoppt die Vorratsdatenspeicherung!" align="top" width="600" height="300" />
+            </a>
+            <a href="javascript:HideTodestag();" style="color: #fff; font-size: 12px;">X Schlie&szlig;en</a>
+        </p>
+    </div>
+    <script type="text/javascript">
+        <!--
+        function ShowHideTodestag() {id="todestag"; obj = (document.getElementById ? document.getElementById(id) : (document.all ? document.all[id] : (document.layers ? document.layers[id] : null))); obj.style.visibility = (obj.style.visibility == 'visible' ? 'hidden' : 'visible');};
+        function HideTodestag() {ShowHideTodestag()}; if(document.cookie.indexOf('OnlineDemoGesehen=1')==-1){ShowHideTodestag()};
+        // -->
+    </script>
+    <!-- End of temporary protest banner using JavaScript. -->
 </body>
 </html>
