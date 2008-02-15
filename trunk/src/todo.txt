@@ -7,12 +7,13 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.24 $ $Date: 2007-12-28 19:25:54 $ $Author: christian $
+# @version $Revision: 1.25 $ $Date: 2008-02-15 15:47:17 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Adapt and optimise new functions in "applicator/receive" and "communicator/read"
-        * Adapt module "controller/checker.c"
+        * Continue with: "receive_message" function in "check_signal()" of module "checker.c";
+            Rest of "receive_message" function is o.k.
+        * Adapt modules: "controller/checker.c", "applicator/receive", "communicator/read", "converter/gnu_linux_console"
 
         * CONTINUE in: function "decode_http_request_method", by adding everywhere at "decode_http_request_set_parameter" the new function call like:
             // Add fragment to given compound model.
@@ -101,6 +102,9 @@
         * Adapt all source code to wide characters (UTF-32 Unicode character encoding)
         * Convert CYBOL files to UTF-8 Unicode character encoding
         * Decode CYBOL files after having parsed them --> is the libxml2 parser capable of handling UTF-8?
+
+        * Define data types with fixed length (using preprocessor #define??),
+            so that they mean the same on different platforms (see Qt library or Java's types)
 
         * Write an actual manual that is updated as necessary to reflect the current
             state of cybop; just looking at the papers, it is hard to know what is

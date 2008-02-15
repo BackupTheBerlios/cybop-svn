@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.44 $ $Date: 2007-12-28 19:25:54 $ $Author: christian $
+ * @version $Revision: 1.45 $ $Date: 2008-02-15 15:47:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -70,7 +70,9 @@
  * @param p21 the channel
  * @param p22 the channel count
  */
-void receive_with_parameters(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8) {
+void receive_with_parameters(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
+    void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14, void* p15, void* p16,
+    void* p17, void* p18, void* p19, void* p20, void* p21, void* p22) {
 
     log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Receive message with given parameters.");
 
@@ -113,7 +115,15 @@ void receive_with_parameters(void* p0, void* p1, void* p2, void* p3, void* p4, v
 
         if (r != *NUMBER_0_INTEGER) {
 
-//??            receive_gnu_linux_console(p0, p10, p11, p12);
+            // The gnu/linux console input stream.
+            void** is = NULL_POINTER;
+
+            // Get gnu/linux console input stream.
+            get_array_elements(p0, (void*) GNU_LINUX_CONSOLE_INPUT_FILE_DESCRIPTOR_INTERNAL, (void*) &is, (void*) POINTER_ARRAY);
+
+/*??
+            receive_gnu_linux_console(p1, p2, p3, p4, p5, p6, *is);
+*/
         }
     }
 
@@ -216,9 +226,11 @@ void receive_with_parameters(void* p0, void* p1, void* p2, void* p3, void* p4, v
  * - details (required): the compound details to be filled with the data received
  * - root (required): the knowledge model that will serve as the root
  * - style (optional, only if channel is www, cyboi or similar): the style of socket communication
- * - commands (optional, only if a user interface thread is to react to certain commands):
+ * - DELETE LATER (commands are now added directly as signal to signal memory):
+ *   commands (optional, only if a user interface thread is to react to certain commands):
  *   the knowledge model containing the commands that the user interface should react to
- * - blocking (optional, only if channel is www, cyboi or similar): the flag indicating whether the receive process should be blocking
+ * - DELETE LATER (reception is always non-blocking in cyboi; if wished, the service may be interrupted):
+ *   blocking (optional, only if channel is www, cyboi or similar): the flag indicating whether the receive process should be blocking
  *
  * @param p0 the parameters
  * @param p1 the parameters count

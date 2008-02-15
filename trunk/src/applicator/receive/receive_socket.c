@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.46 $ $Date: 2007-12-28 19:25:54 $ $Author: christian $
+ * @version $Revision: 1.47 $ $Date: 2008-02-15 15:47:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -93,7 +93,7 @@ void receive_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, 
 
     // Decode http request and write any parameters into the
     // compound model and details being handed over as parameters.
-    decode(p0, p1, p2, p3, p4, p5, *b, p29, p12, p13, p8, p9);
+//??    decode(p0, p1, p2, p3, p4, p5, *b, p29, p12, p13, p8, p9);
 
     fprintf(stderr, "TEST 2 l: %s \n", (char*) p8);
     fprintf(stderr, "TEST 2 lc: %i \n", *((int*) p9));
@@ -114,6 +114,7 @@ void receive_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, 
     void** ads = NULL_POINTER;
 */
 
+/*??
     // Get action.
     // It is just one of many possibly parameters that were sensed as
     // http request and added to the compound model above.
@@ -146,6 +147,7 @@ void receive_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, 
 
     fprintf(stderr, "TEST 5 bc: %i \n", *((int*) p29));
     fprintf(stderr, "TEST 5 bs: %i \n", *((int*) p30));
+*/
 
     /** The index parameter. */
     static char INDEX_PARAMETER_ARRAY[] = {'i', 'n', 'd', 'e', 'x'};
@@ -166,6 +168,7 @@ void receive_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, 
     void** dc = NULL_POINTER;
     void** ds = NULL_POINTER;
 
+/*??
     if (p16 != *NULL_POINTER) {
 
         // Get actual command belonging to the command name.
@@ -189,6 +192,7 @@ void receive_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, 
             (void*) &d, (void*) &dc, (void*) &ds,
             p0, p1);
     }
+*/
 
 /*??
     fprintf(stderr, "TEST: receive socket signal actual command n: %s \n", (char*) *n);

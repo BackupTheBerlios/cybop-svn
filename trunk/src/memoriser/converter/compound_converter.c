@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.14 $ $Date: 2007-12-01 23:57:42 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2008-02-15 15:47:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -634,7 +634,7 @@ void decode_compound_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4
                 allocate((void*) &rm, (void*) &rms, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
                 // Read read model as persistent byte stream over channel.
-                read_data((void*) &rm, (void*) &rmc, (void*) &rms, sm, (void*) &smc, sc, (void*) &scc);
+                read_data((void*) &rm, (void*) &rmc, (void*) &rms, sm, (void*) &smc, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, sc, (void*) &scc);
 
                 // Allocate destination model.
                 allocate((void*) &dmc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);

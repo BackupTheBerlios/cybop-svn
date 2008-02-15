@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2007-12-28 19:25:54 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2008-02-15 15:47:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -92,7 +92,7 @@ void sense_gnu_linux_console_message(void* p0, void* p1, void* p2, void* p3) {
                     // and check for EOF after the call; once it is verified that the result
                     // is NOT EOF, one can be sure that it will fit in a char variable
                     // without loss of information.
-                    int e = fgetc(is);
+                    int c = fgetc(is);
 
                     // CAUTION! Use 'wint_t' instead of 'int' as return type for
                     // 'getwchar()', since that returns 'WEOF' instead of 'EOF'.
@@ -133,7 +133,7 @@ void sense_gnu_linux_console_message(void* p0, void* p1, void* p2, void* p3) {
                     // makes the character of input available.
                     // After you read that character, trying to read again will
                     // encounter end of file.
-                    ungetc(e, is);
+                    ungetc(c, is);
 
                     // Lock gnu/linux console mutex.
                     pthread_mutex_lock(mt);

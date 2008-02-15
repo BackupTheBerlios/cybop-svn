@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.26 $ $Date: 2007-10-30 13:08:27 $ $Author: christian $
+ * @version $Revision: 1.27 $ $Date: 2008-02-15 15:47:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -46,6 +46,9 @@
 #include "../../globals/constants/mime_type/text_mime_type_constants.c"
 #include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/logger/logger.c"
+#include "../../memoriser/communicator/datagram_socket_communicator.c"
+#include "../../memoriser/communicator/raw_socket_communicator.c"
+#include "../../memoriser/communicator/stream_socket_communicator.c"
 
 /**
  * Gets the socket for server mode.
@@ -602,9 +605,11 @@ void send_socket(void* p0, void* p1, void* p2, void* p3,
     // identical. As a consequence, socket locking using a mutex is
     // not necessary here!
 
+/*??
     // Send message via socket in server mode.
     //?? TEST: For testing reasons, the internal memory parameter p0 is misused as client socket here!
     write_socket(p0, m, (void*) &mc, *NULL_POINTER, *NULL_POINTER, p9, p10, (void*) &st);
+*/
 
     // Send message via socket in client mode.
 //??    write_socket((void*) *s, m, (void*) &mc, (void*) &sa, (void*) &sas, p9, p10, (void*) &st);

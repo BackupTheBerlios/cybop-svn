@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.35 $ $Date: 2007-12-28 19:25:54 $ $Author: christian $
+ * @version $Revision: 1.36 $ $Date: 2008-02-15 15:47:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -42,49 +42,37 @@
 /**
  * Gets and handles a signal.
  *
- * @param p0 the internal memory
- * @param p1 the knowledge memory
- * @param p2 the knowledge memory count
- * @param p3 the knowledge memory size
- * @param p4 the signal memory
- * @param p5 the signal memory count
- * @param p6 the signal memory size
- * @param p7 the shutdown flag
- * @param p8 the signal memory interrupt request flag
- * @param p9 the signal memory mutex
- * @param p10 the signal index
- * @param p11 the action name (Hand over as reference!)
- * @param p12 the action name count
- * @param p13 the action name size
- * @param p14 the action abstraction (Hand over as reference!)
- * @param p15 the action abstraction count
- * @param p16 the action abstraction size
- * @param p17 the action model (Hand over as reference!)
- * @param p18 the action model count
- * @param p19 the action model size
- * @param p20 the action details (Hand over as reference!)
- * @param p21 the action details count
- * @param p22 the action details size
- * @param p23 the signal priority (Hand over as reference!)
- * @param p24 the signal identification (Hand over as reference!)
+ * @param p0 the signal memory
+ * @param p1 the signal memory count
+ * @param p2 the signal memory size
+ * @param p3 the signal memory mutex
+ * @param p4 the signal index
+ * @param p5 the action abstraction (Hand over as reference!)
+ * @param p6 the action abstraction count
+ * @param p7 the action model (Hand over as reference!)
+ * @param p8 the action model count
+ * @param p9 the action details (Hand over as reference!)
+ * @param p10 the action details count
+ * @param p11 the signal priority (Hand over as reference!)
+ * @param p12 the signal identification (Hand over as reference!)
  */
-void check_handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10,
-    void* p11, void* p12, void* p13, void* p14, void* p15, void* p16, void* p17, void* p18, void* p19, void* p20, void* p21, void* p22, void* p23, void* p24) {
+void check_handle(void* p0, void* p1, void* p2, void* p3, void* p4,
+    void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11, void* p12) {
 
-    if (p9 != *NULL_POINTER) {
+    if (p3 != *NULL_POINTER) {
 
-        pthread_mutex_t* mt = (pthread_mutex_t*) p9;
+        pthread_mutex_t* mt = (pthread_mutex_t*) p3;
 
         log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Get and handle a signal.");
 
         // Get signal.
-        get_signal(p4, p5, p10, p14, p15, p17, p18, p20, p21, p23, p24);
+        get_signal(p0, p1, p4, p5, p6, p7, p8, p9, p10, p11, p12);
 
         // Lock signal memory mutex.
         pthread_mutex_lock(mt);
 
         // Remove signal from signal memory.
-        remove_signal(p4, p5, p6, p10);
+        remove_signal(p0, p1, p2, p4);
 
         // Unlock signal memory mutex.
         pthread_mutex_unlock(mt);
@@ -319,9 +307,12 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3,
 
                             if (p4 != *NULL_POINTER) {
 
+                                // CAUTION! Do NOT cast to int** because the value is assigned to *mt below
+                                // and casting to int** might change the expected size.
+                                // (Pointer and integer do not necessarily always have to have the same size.)
                                 void** signal_memory_irq = (void**) p4;
 
-                                if (**signal_memory_irq != *NUMBER_0_INTEGER) {
+                                if (**((int**) signal_memory_irq) != *NUMBER_0_INTEGER) {
 
                                     // Set channel.
                                     *c = SIGNAL_MODEL;
@@ -352,9 +343,12 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3,
 
                             if (p6 != *NULL_POINTER) {
 
+                                // CAUTION! Do NOT cast to int** because the value is assigned to *mt below
+                                // and casting to int** might change the expected size.
+                                // (Pointer and integer do not necessarily always have to have the same size.)
                                 void** gnu_linux_console_irq = (void**) p6;
 
-                                if (**gnu_linux_console_irq != *NUMBER_0_INTEGER) {
+                                if (**((int**) gnu_linux_console_irq) != *NUMBER_0_INTEGER) {
 
                                     // Set channel.
                                     *c = GNU_LINUX_CONSOLE_MODEL;
@@ -385,9 +379,12 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3,
 
                             if (p8 != *NULL_POINTER) {
 
+                                // CAUTION! Do NOT cast to int** because the value is assigned to *mt below
+                                // and casting to int** might change the expected size.
+                                // (Pointer and integer do not necessarily always have to have the same size.)
                                 void** x_window_system_irq = (void**) p8;
 
-                                if (**x_window_system_irq != *NUMBER_0_INTEGER) {
+                                if (**((int**) x_window_system_irq) != *NUMBER_0_INTEGER) {
 
                                     // Set channel.
                                     *c = X_WINDOW_SYSTEM_MODEL;
@@ -418,9 +415,12 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3,
 
                             if (p10 != *NULL_POINTER) {
 
+                                // CAUTION! Do NOT cast to int** because the value is assigned to *mt below
+                                // and casting to int** might change the expected size.
+                                // (Pointer and integer do not necessarily always have to have the same size.)
                                 void** www_service_irq = (void**) p10;
 
-                                if (**www_service_irq != *NUMBER_0_INTEGER) {
+                                if (**((int**) www_service_irq) != *NUMBER_0_INTEGER) {
 
                                     // Set channel.
                                     *c = WWW_SERVICE_MODEL;
@@ -451,9 +451,12 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3,
 
                             if (p12 != *NULL_POINTER) {
 
+                                // CAUTION! Do NOT cast to int** because the value is assigned to *mt below
+                                // and casting to int** might change the expected size.
+                                // (Pointer and integer do not necessarily always have to have the same size.)
                                 void** cyboi_service_irq = (void**) p12;
 
-                                if (**cyboi_service_irq != *NUMBER_0_INTEGER) {
+                                if (**((int**) cyboi_service_irq) != *NUMBER_0_INTEGER) {
 
                                     // Set channel.
                                     *c = CYBOI_SERVICE_MODEL;
@@ -546,10 +549,7 @@ void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
 
     log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Check for signal with highest priority and otherwise, for interrupts.");
 
-    // The action name, abstraction, model, details.
-    void** n = NULL_POINTER;
-    void** nc = NULL_POINTER;
-    void** ns = NULL_POINTER;
+    // The signal abstraction, model, details.
     void** a = NULL_POINTER;
     void** ac = NULL_POINTER;
     void** as = NULL_POINTER;
@@ -578,12 +578,7 @@ void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
         // A signal was found and has to be handled.
         // Handling a signal has higher priority than checking for new interrupt requests.
 
-        check_handle(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, (void*) &i,
-            (void*) &n, (void*) &nc, (void*) &ns,
-            (void*) &a, (void*) &ac, (void*) &as,
-            (void*) &m, (void*) &mc, (void*) &ms,
-            (void*) &d, (void*) &dc, (void*) &ds,
-            (void*) &p, (void*) &id);
+        check_handle(p4, p5, p6, p9, (void*) &i, (void*) &a, (void*) &ac, (void*) &m, (void*) &mc, (void*) &d, (void*) &dc, (void*) &p, (void*) &id);
 
     /*??
         //?? For testing only. Delete these lines later!
@@ -640,20 +635,22 @@ void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
             // Unlock cyboi service mutex.
             pthread_mutex_unlock(mt);
 
-            // Receive data.
-            receive(p18, p19, p20, p21, p22, p23, p24, p25, p26, p27, p28, p29, p30, p31, p32, p33, p1, p2, c, (void*) &cc);
+/*??
+            // Receive signal data via given channel.
+            receive_message(p0, p18, p19, p20, p21, p22, p23, p24, p25, p26, p27, p28, p29, p30, p31, p32, p33, p1, p2, c, (void*) &cc);
+*/
 
             // Handle signal.
             //
             // CAUTION! The "handle" function has to be called DIRECTLY here!
             // Placing a new signal in the signal memory will mostly not work correctly,
-            // because the data received over socket are temporary and get deleted
+            // because the data received e.g. over socket are temporary and get deleted
             // each time, yet before receiving new data over socket.
             // But since the signal parses and references these temporary data,
             // the system will not process the signal correctly, if the data have been destroyed.
             handle(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, *a, *ac, *m, *mc, *d, *dc, p, id, &x);
 
-    fprintf(stderr, "TEST empty: %i\n", r);
+    fprintf(stderr, "TEST empty: %i\n", *irq);
 
             // An interrupt request was detected and the corresponding data received.
             // It is therefore VERY likely that new signals have been generated while handling the data.
@@ -662,7 +659,7 @@ void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
 
         } else {
 
-    fprintf(stderr, "TEST wait: %i\n", r);
+    fprintf(stderr, "TEST wait: %i\n", *irq);
 
             // No interrupt request was detected, so that the cyboi system
             // can be sent to sleep now, in order to save cpu time.
@@ -675,6 +672,7 @@ void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
     // CAUTION! Do NOT destroy here either of the signal's:
     // - abstraction
     // - model
+    // - details
     // - priority
     // - identification
     //

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2007-12-28 19:25:55 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2008-02-15 15:47:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -72,12 +72,15 @@ void read_stream_socket_data(void* p0, void* p1, void* p2, void* p3) {
                 // that might cause an error.
                 errno = *NUMBER_0_INTEGER;
 
+/*??
             fprintf(stderr, "TEST: sense socket thread client socket: %i \n", *ps);
+*/
 
     fprintf(stderr, "TEST pre b: %s \n", (char*) *b);
     fprintf(stderr, "TEST pre bc: %i \n", *bc);
     fprintf(stderr, "TEST pre bs: %i \n", *bs);
 
+/*??
                 // Receive message from client.
                 //
                 // If the flags argument (fourth one) is zero, then one can
@@ -87,6 +90,7 @@ void read_stream_socket_data(void* p0, void* p1, void* p2, void* p3) {
                 //
                 // CAUTION! A message MUST NOT be longer than the given buffer size!
                 *bc = recv(*ps, *b, *bs, *NUMBER_0_INTEGER);
+*/
 
     fprintf(stderr, "TEST post b: %s \n", (char*) *b);
     fprintf(stderr, "TEST post bc: %i \n", *bc);
@@ -178,6 +182,7 @@ void read_stream_socket(void* p0, void* p1, void* p2, void* p3) {
         // that might cause an error.
         errno = *NUMBER_0_INTEGER;
 
+/*??
         if (*ps >= *NUMBER_0_INTEGER) {
 
             read_stream_socket_data();
@@ -211,6 +216,7 @@ void read_stream_socket(void* p0, void* p1, void* p2, void* p3) {
                 log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not sense via stream socket. An unknown error occured while accepting a socket connection.");
             }
         }
+*/
 
     } else {
 

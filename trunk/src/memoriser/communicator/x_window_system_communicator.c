@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.15 $ $Date: 2007-12-28 19:25:55 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2008-02-15 15:47:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -28,6 +28,7 @@
 #define X_WINDOW_SYSTEM_COMMUNICATOR_SOURCE
 
 #include <X11/Xlib.h>
+#include "../../globals/constants/cyboi/cyboi_signal_priority_constants.c"
 #include "../../globals/constants/cybol/cybol_abstraction_constants.c"
 #include "../../globals/constants/log/log_message_constants.c"
 #include "../../globals/constants/pointer/pointer_constants.c"
