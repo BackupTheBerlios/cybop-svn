@@ -14,7 +14,7 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.38 $ $Date: 2008-02-15 15:47:17 $ $Author: christian $
+# @version $Revision: 1.39 $ $Date: 2008-02-19 14:50:39 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
@@ -23,6 +23,10 @@
 
 2008-02-14  Christian Heller  <christian.heller@tuxtax.de>
         * Continue functions "receive_gnu_linux_console.c" and "gnu_linux_console_communicator.c"
+
+2008-01-26  Christian Heller  <christian.heller@tuxtax.de>
+        * Adapt modules "checker.c", "receive_gnu_linux_console.c",
+            "read_gnu_linux_console.c", "decode_gnu_linux_console.c"
 
 2007-12-28  Christian Heller  <christian.heller@tuxtax.de>
         * Adapt and optimise new functions in "applicator/sense"
