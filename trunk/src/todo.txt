@@ -7,9 +7,15 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.25 $ $Date: 2008-02-15 15:47:17 $ $Author: christian $
+# @version $Revision: 1.26 $ $Date: 2008-02-27 13:29:07 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+        * Commands MUESSEN uebergeben werden
+        * Suche nach gedrueckter Taste in commands
+        * Wenn returned command == NULL, dann suche nach "default" in commands
+            (ist Aktion zum Einfuegen von Zeichen an aktueller Cursor-Position im CYBOI knowledge model)
+        * Gedruecktes Zeichen/ Taste muss mit in einem Parameter zurueckgegeben werden!
 
         * Continue with: "receive_message" function in "check_signal()" of module "checker.c";
             Rest of "receive_message" function is o.k.
