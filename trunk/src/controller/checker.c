@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.36 $ $Date: 2008-02-15 15:47:18 $ $Author: christian $
+ * @version $Revision: 1.37 $ $Date: 2008-03-14 14:42:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -68,14 +68,27 @@ void check_handle(void* p0, void* p1, void* p2, void* p3, void* p4,
         // Get signal.
         get_signal(p0, p1, p4, p5, p6, p7, p8, p9, p10, p11, p12);
 
+    fprintf(stderr, "TEST p1: %i\n", *((int*) p1));
+
         // Lock signal memory mutex.
-        pthread_mutex_lock(mt);
+//??        pthread_mutex_lock(mt);
+
+    fprintf(stderr, "TEST p4: %i\n", *((int*) p4));
 
         // Remove signal from signal memory.
         remove_signal(p0, p1, p2, p4);
 
+    fprintf(stderr, "TEST p5: %i\n", *((char**) p5));
+    fprintf(stderr, "TEST p6: %i\n", **((int**) p6));
+
         // Unlock signal memory mutex.
-        pthread_mutex_unlock(mt);
+//??        pthread_mutex_unlock(mt);
+
+    fprintf(stderr, "TEST p8: %i\n", **((int**) p8));
+    fprintf(stderr, "TEST p10: %i\n", **((int**) p10));
+
+    fprintf(stderr, "TEST p11: %i\n", **((int**) p11));
+    fprintf(stderr, "TEST p12: %i\n", **((int**) p12));
 
     } else {
 
@@ -547,6 +560,7 @@ void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
     void* p18, void* p19, void* p20, void* p21, void* p22, void* p23, void* p24, void* p25, void* p26, void* p27, void* p28, void* p29,
     void* p30, void* p31, void* p32) {
 
+    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "\n\n");
     log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Check for signal with highest priority and otherwise, for interrupts.");
 
     // The signal abstraction, model, details.
@@ -580,17 +594,18 @@ void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
 
         check_handle(p4, p5, p6, p9, (void*) &i, (void*) &a, (void*) &ac, (void*) &m, (void*) &mc, (void*) &d, (void*) &dc, (void*) &p, (void*) &id);
 
-    /*??
-        //?? For testing only. Delete these lines later!
-        fprintf(stderr, "TEST index: %i\n", *((int*) p10));
-        fprintf(stderr, "TEST a: %s\n", (char*) *a);
-        fprintf(stderr, "TEST ac: %i\n", *((int*) *ac));
-        fprintf(stderr, "TEST m: %s\n", (char*) *m);
-        fprintf(stderr, "TEST mc: %i\n", *((int*) *mc));
-        // CAUTION! d and dc are NULL. DO NOT try to print their values here!
-        fprintf(stderr, "TEST p: %i\n", *((int*) *p));
-        fprintf(stderr, "TEST id: %i\n", *((int*) *id));
-    */
+    fprintf(stderr, "TEST 222222222 index of signal with highest priority: %i\n", i);
+
+    //?? For testing only. Delete these lines later!
+    fprintf(stderr, "TEST a: %s\n", *((char**) a));
+    fprintf(stderr, "TEST ac: %i\n", **((int**) ac));
+    fprintf(stderr, "TEST m: %s\n", *m);
+    fprintf(stderr, "TEST mc: %i\n", **((int**) mc));
+    // CAUTION! d and dc are NULL. Do NOT try to print their values here!
+/*?? p and id are not used anymore and do not always exist. So printing their value sometimes causes a crash.
+    fprintf(stderr, "TEST p: %i\n", **((int**) p));
+    fprintf(stderr, "TEST id: %i\n", **((int**) id));
+*/
 
         // Handle signal.
         handle(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, *a, *ac, *m, *mc, *d, *dc, p, id, &x);
@@ -847,13 +862,13 @@ void check(void* p0) {
         }
 
         check_signal(p0, *k, *kc, *ks, *s, *sc, *ss, (void*) &f,
-            (void*) signal_memory_irq, (void*) signal_memory_mutex,
-            (void*) gnu_linux_console_irq, (void*) gnu_linux_console_mutex,
-            (void*) x_window_system_irq, (void*) x_window_system_mutex,
-            (void*) www_service_irq, (void*) www_service_mutex,
-            (void*) cyboi_service_irq, (void*) cyboi_service_mutex,
-            (void*) m, (void*) mc, (void*) ms, (void*) d, (void*) dc, (void*) ds,
-            (void*) c, (void*) cc, (void*) l, (void*) lc, (void*) st, (void*) stc,
+            (void*) *signal_memory_irq, (void*) *signal_memory_mutex,
+            (void*) *gnu_linux_console_irq, (void*) *gnu_linux_console_mutex,
+            (void*) *x_window_system_irq, (void*) *x_window_system_mutex,
+            (void*) *www_service_irq, (void*) *www_service_mutex,
+            (void*) *cyboi_service_irq, (void*) *cyboi_service_mutex,
+            (void*) *m, (void*) *mc, (void*) *ms, (void*) *d, (void*) *dc, (void*) *ds,
+            (void*) *c, (void*) *cc, (void*) *l, (void*) *lc, (void*) *st, (void*) *stc,
             (void*) b, (void*) bc, (void*) bs);
     }
 }

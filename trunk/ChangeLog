@@ -14,12 +14,15 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.39 $ $Date: 2008-02-19 14:50:39 $ $Author: christian $
+# @version $Revision: 1.40 $ $Date: 2008-03-14 14:42:48 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2008-03-14  Christian Heller  <christian.heller@tuxtax.de>
+        * Make "Hello, World!" example work again
+
 2008-02-15  Christian Heller  <christian.heller@tuxtax.de>
-        * Fixed or temporarily commented out bugs in source code to make cyboi compilable again
+        * Fix or temporarily commented out bugs in source code to make cyboi compilable again
 
 2008-02-14  Christian Heller  <christian.heller@tuxtax.de>
         * Continue functions "receive_gnu_linux_console.c" and "gnu_linux_console_communicator.c"

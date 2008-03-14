@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2008-02-15 15:47:18 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2008-03-14 14:42:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -413,7 +413,10 @@ void optionalise_option(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
 
             if (r == *NUMBER_0_INTEGER) {
 
-                fputs("Warning: Could not optionalise option. The command line option is unknown.\n", stdout);
+                // CAUTION! Do NOT show this warning message, since the last
+                // option argument read from command line is always null,
+                // so that this warning would always appear and only disturb the user.
+                // fputs("Warning: Could not optionalise option. The command line option is unknown.\n", stdout);
             }
 
         } else {
