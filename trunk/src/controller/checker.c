@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.37 $ $Date: 2008-03-14 14:42:48 $ $Author: christian $
+ * @version $Revision: 1.38 $ $Date: 2008-03-17 15:53:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -68,27 +68,14 @@ void check_handle(void* p0, void* p1, void* p2, void* p3, void* p4,
         // Get signal.
         get_signal(p0, p1, p4, p5, p6, p7, p8, p9, p10, p11, p12);
 
-    fprintf(stderr, "TEST p1: %i\n", *((int*) p1));
-
         // Lock signal memory mutex.
-//??        pthread_mutex_lock(mt);
-
-    fprintf(stderr, "TEST p4: %i\n", *((int*) p4));
+        pthread_mutex_lock(mt);
 
         // Remove signal from signal memory.
         remove_signal(p0, p1, p2, p4);
 
-    fprintf(stderr, "TEST p5: %i\n", *((char**) p5));
-    fprintf(stderr, "TEST p6: %i\n", **((int**) p6));
-
         // Unlock signal memory mutex.
-//??        pthread_mutex_unlock(mt);
-
-    fprintf(stderr, "TEST p8: %i\n", **((int**) p8));
-    fprintf(stderr, "TEST p10: %i\n", **((int**) p10));
-
-    fprintf(stderr, "TEST p11: %i\n", **((int**) p11));
-    fprintf(stderr, "TEST p12: %i\n", **((int**) p12));
+        pthread_mutex_unlock(mt);
 
     } else {
 
@@ -594,15 +581,14 @@ void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
 
         check_handle(p4, p5, p6, p9, (void*) &i, (void*) &a, (void*) &ac, (void*) &m, (void*) &mc, (void*) &d, (void*) &dc, (void*) &p, (void*) &id);
 
-    fprintf(stderr, "TEST 222222222 index of signal with highest priority: %i\n", i);
-
     //?? For testing only. Delete these lines later!
     fprintf(stderr, "TEST a: %s\n", *((char**) a));
     fprintf(stderr, "TEST ac: %i\n", **((int**) ac));
-    fprintf(stderr, "TEST m: %s\n", *m);
+//??    fprintf(stderr, "TEST m: %s\n", *m);
     fprintf(stderr, "TEST mc: %i\n", **((int**) mc));
     // CAUTION! d and dc are NULL. Do NOT try to print their values here!
-/*?? p and id are not used anymore and do not always exist. So printing their value sometimes causes a crash.
+/*??
+    //?? p and id are not used anymore and do not always exist. So printing their value sometimes causes a crash.
     fprintf(stderr, "TEST p: %i\n", **((int**) p));
     fprintf(stderr, "TEST id: %i\n", **((int**) id));
 */
@@ -660,7 +646,7 @@ void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
             // CAUTION! The "handle" function has to be called DIRECTLY here!
             // Placing a new signal in the signal memory will mostly not work correctly,
             // because the data received e.g. over socket are temporary and get deleted
-            // each time, yet before receiving new data over socket.
+            // each time, yet BEFORE receiving NEW data over socket.
             // But since the signal parses and references these temporary data,
             // the system will not process the signal correctly, if the data have been destroyed.
             handle(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, *a, *ac, *m, *mc, *d, *dc, p, id, &x);
