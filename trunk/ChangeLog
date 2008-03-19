@@ -14,9 +14,13 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.40 $ $Date: 2008-03-14 14:42:48 $ $Author: christian $
+# @version $Revision: 1.41 $ $Date: 2008-03-19 16:40:11 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2008-03-19  Christian Heller  <christian.heller@tuxtax.de>
+        * Debug "checker.c" by correcting a number of double-referenced pointer variables
+        * Make "User Interface" example display the TUI again; key presses are not detected yet
 
 2008-03-14  Christian Heller  <christian.heller@tuxtax.de>
         * Make "Hello, World!" example work again

@@ -7,9 +7,11 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.26 $ $Date: 2008-02-27 13:29:07 $ $Author: christian $
+# @version $Revision: 1.27 $ $Date: 2008-03-19 16:40:11 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+        * continue debugging in "checker.c"; UI example works; key presses are not detected yet ...
 
         * Commands MUESSEN uebergeben werden
         * Suche nach gedrueckter Taste in commands

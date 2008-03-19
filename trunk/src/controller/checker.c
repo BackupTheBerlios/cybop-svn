@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.38 $ $Date: 2008-03-17 15:53:21 $ $Author: christian $
+ * @version $Revision: 1.39 $ $Date: 2008-03-19 16:40:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -87,150 +87,136 @@ void check_handle(void* p0, void* p1, void* p2, void* p3, void* p4,
  * Waits for an interrupt request.
  *
  * @param p0 the signal memory interrupt request flag
- * @param p1 the signal memory mutex
- * @param p2 the gnu/linux console interrupt request flag
- * @param p3 the gnu/linux console mutex
- * @param p4 the x window system interrupt request flag
- * @param p5 the x window system mutex
- * @param p6 the www service interrupt request flag
- * @param p7 the www service mutex
- * @param p8 the cyboi service interrupt request flag
- * @param p9 the cyboi service mutex
+ * @param p1 the gnu/linux console interrupt request flag
+ * @param p2 the x window system interrupt request flag
+ * @param p3 the www service interrupt request flag
+ * @param p4 the cyboi service interrupt request flag
  */
-void check_wait(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9) {
+void check_wait(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p8 != *NULL_POINTER) {
+    if (p4 != *NULL_POINTER) {
 
-        int* cyboi_service_irq = (int*) p8;
+        int* cyboi_service_irq = (int*) p4;
 
-        if (p6 != *NULL_POINTER) {
+        if (p3 != *NULL_POINTER) {
 
-            int* www_service_irq = (int*) p6;
+            int* www_service_irq = (int*) p3;
 
-            if (p4 != *NULL_POINTER) {
+            if (p2 != *NULL_POINTER) {
 
-                int* x_window_system_irq = (int*) p4;
+                int* x_window_system_irq = (int*) p2;
 
-                if (p2 != *NULL_POINTER) {
+                if (p1 != *NULL_POINTER) {
 
-                    int* gnu_linux_console_irq = (int*) p2;
+                    int* gnu_linux_console_irq = (int*) p1;
 
-                    if (p1 != *NULL_POINTER) {
+                    if (p0 != *NULL_POINTER) {
 
-                        pthread_mutex_t* signal_memory_mutex = (pthread_mutex_t*) p1;
+                        int* signal_memory_irq = (int*) p0;
 
-                        if (p0 != *NULL_POINTER) {
+                        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Wait for an interrupt request.");
 
-                            int* signal_memory_irq = (int*) p0;
+                        //
+                        // Sleep for some time.
+                        //
+                        // If no signals are waiting in the signal memory (queue)
+                        // and no hardware requests have been received from either the:
+                        // - gnu/linux console
+                        // - x window system
+                        // - www service
+                        // - cyboi service
+                        // then cpu processing time may be saved by sending the system to sleep.
+                        //
+                        // Several possibilities have been considered to achieve this:
+                        //
+                        // 1 pause
+                        //
+                        // The simplicity of pause can conceal serious timing errors
+                        // that can make a program hang mysteriously.
+                        // One can't safely use pause to wait until one more signal
+                        // arrives, and then resume real work. Even if one arranges
+                        // for the signal handler to cooperate by setting a flag,
+                        // one still can't use pause reliably.
+                        //
+                        // Example:
+                        // // The irq flag is set by some signal handler.
+                        // if (irq == 0) {
+                        //     pause();
+                        // }
+                        // // Do work once the signal arrives.
+                        // ...
+                        //
+                        // This has a bug: the signal could arrive after the variable
+                        // irq is checked, but before the call to pause. If no further
+                        // signals arrive, the process would never wake up again.
+                        //
+                        // 2 sleep
+                        //
+                        // One can put an upper limit on the excess waiting by using
+                        // sleep in a loop, instead of using pause.
+                        //
+                        // Example:
+                        // // The irq flag is set by some signal handler.
+                        // while (irq == 0) {
+                        //     sleep(1);
+                        // }
+                        // // Do work once the signal arrives.
+                        // ...
+                        //
+                        // For some purposes, that is good enough.
+                        //
+                        // 3 signals of the operating system
+                        //
+                        // With a little more complexity, one can wait reliably until
+                        // a particular signal handler is run, using sigsuspend.
+                        //
+                        // Solution in CYBOI
+                        //
+                        // The signal handler approach was tried out and implemented.
+                        // However, when the process was sent to sleep with sigsuspend,
+                        // all its threads were sleeping as well. This is a problem,
+                        // because the input/output (including user interface control)
+                        // is running in special threads. Since these were sleeping,
+                        // there was no way to wake up the CYBOI system on user request.
+                        //
+                        // Another approach was to let the input/output run in their
+                        // own process (instead of only a thread), each.
+                        // The problem here is resource sharing between the processes.
+                        // While threads use the same resources as their parent process,
+                        // child processes copy their parent process' resources at
+                        // creation and afterwards work independently on their own resources.
+                        // This is a problem because CYBOI's signal memory needs to be
+                        // accessed by all input/output processes without conflicts.
+                        //
+                        // Furthermore, the usage of operating system signals enforces
+                        // a global interrupt request flag variable. Since a signal
+                        // handler procedure may receive only the numeric code of the
+                        // signal, but not further parameters, the interrupt request
+                        // flag may not be handed over within the internal memory and
+                        // a global flag would have to be used, which is undesirable.
+                        //
+                        // Therefore, the decision fell on the usage of a simple SLEEP
+                        // procedure, which seems sufficient for the purposes of CYBOI.
+                        //
+                        while ((*signal_memory_irq == *NUMBER_0_INTEGER)
+                            && (*gnu_linux_console_irq == *NUMBER_0_INTEGER)
+                            && (*x_window_system_irq == *NUMBER_0_INTEGER)
+                            && (*www_service_irq == *NUMBER_0_INTEGER)
+                            && (*cyboi_service_irq == *NUMBER_0_INTEGER)) {
 
-                            log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Wait for an interrupt request.");
-
-                            //
-                            // Sleep for some time.
-                            //
-                            // If no signals are waiting in the signal memory (queue)
-                            // and no hardware requests have been received from either the:
-                            // - gnu/linux console
-                            // - x window system
-                            // - www service
-                            // - cyboi service
-                            // then cpu processing time may be saved by sending the system to sleep.
-                            //
-                            // Several possibilities have been considered to achieve this:
-                            //
-                            // 1 pause
-                            //
-                            // The simplicity of pause can conceal serious timing errors
-                            // that can make a program hang mysteriously.
-                            // One can't safely use pause to wait until one more signal
-                            // arrives, and then resume real work. Even if one arranges
-                            // for the signal handler to cooperate by setting a flag,
-                            // one still can't use pause reliably.
-                            //
-                            // Example:
-                            // // The irq flag is set by some signal handler.
-                            // if (irq == 0) {
-                            //     pause();
-                            // }
-                            // // Do work once the signal arrives.
-                            // ...
-                            //
-                            // This has a bug: the signal could arrive after the variable
-                            // irq is checked, but before the call to pause. If no further
-                            // signals arrive, the process would never wake up again.
-                            //
-                            // 2 sleep
-                            //
-                            // One can put an upper limit on the excess waiting by using
-                            // sleep in a loop, instead of using pause.
-                            //
-                            // Example:
-                            // // The irq flag is set by some signal handler.
-                            // while (irq == 0) {
-                            //     sleep(1);
-                            // }
-                            // // Do work once the signal arrives.
-                            // ...
-                            //
-                            // For some purposes, that is good enough.
-                            //
-                            // 3 signals of the operating system
-                            //
-                            // With a little more complexity, one can wait reliably until
-                            // a particular signal handler is run, using sigsuspend.
-                            //
-                            // Solution in CYBOI
-                            //
-                            // The signal handler approach was tried out and implemented.
-                            // However, when the process was sent to sleep with sigsuspend,
-                            // all its threads were sleeping as well. This is a problem,
-                            // because the input/output (including user interface control)
-                            // is running in special threads. Since these were sleeping,
-                            // there was no way to wake up the CYBOI system on user request.
-                            //
-                            // Another approach was to let the input/output run in their
-                            // own process (instead of only a thread), each.
-                            // The problem here is resource sharing between the processes.
-                            // While threads use the same resources as their parent process,
-                            // child processes copy their parent process' resources at
-                            // creation and afterwards work independently on their own resources.
-                            // This is a problem because CYBOI's signal memory needs to be
-                            // accessed by all input/output processes without conflicts.
-                            //
-                            // Furthermore, the usage of operating system signals enforces
-                            // a global interrupt request flag variable. Since a signal
-                            // handler procedure may receive only the numeric code of the
-                            // signal, but not further parameters, the interrupt request
-                            // flag may not be handed over within the internal memory and
-                            // a global flag would have to be used, which is undesirable.
-                            //
-                            // Therefore, the decision fell on the usage of a simple SLEEP
-                            // procedure, which seems sufficient for the purposes of CYBOI.
-                            //
-                            while ((*signal_memory_irq == *NUMBER_0_INTEGER)
-                                && (*gnu_linux_console_irq == *NUMBER_0_INTEGER)
-                                && (*x_window_system_irq == *NUMBER_0_INTEGER)
-                                && (*www_service_irq == *NUMBER_0_INTEGER)
-                                && (*cyboi_service_irq == *NUMBER_0_INTEGER)) {
-
-                                sleep(*CHECKER_SLEEP_TIME);
-                            }
-
-                            // The sleep loop above is left as soon as the interrupt variable
-                            // is set to a value other than zero.
-                            // This may happen if some user action is noted in one of the
-                            // receive threads, e.g. linux console, x window system, tcp socket.
-                            // In this case, a signal is placed in the signal memory and
-                            // the interrupt variable is set to *NUMBER_1_INTEGER.
-
-                        } else {
-
-                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not wait for an interrupt request. The signal memory interrupt request flag is null.");
+                            sleep(*CHECKER_SLEEP_TIME);
                         }
+
+                        // The sleep loop above is left as soon as the interrupt variable
+                        // is set to a value other than zero.
+                        // This may happen if some user action is noted in one of the
+                        // receive threads, e.g. linux console, x window system, tcp socket.
+                        // In this case, a signal is placed in the signal memory and
+                        // the interrupt variable is set to *NUMBER_1_INTEGER.
 
                     } else {
 
-                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not wait for an interrupt request. The signal memory mutex is null.");
+                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not wait for an interrupt request. The signal memory interrupt request flag is null.");
                     }
 
                 } else {
@@ -299,13 +285,24 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3,
                     // to the list below is just easier than having to indent and nest whole
                     // blocks of code, as it would be necessary when casting all parameters above.
 
+    fprintf(stderr, "TEST 0 p0 = c: %s\n", *((char**) p0));
+    fprintf(stderr, "TEST 0 p1 = cc: %i\n", *((int*) p1));
+
                     if (*irq == *NULL_POINTER) {
 
+    fprintf(stderr, "TEST 0-0: %i\n", *irq);
+
                         if (p5 != *NULL_POINTER) {
+
+    fprintf(stderr, "TEST 0-1: %i\n", *irq);
 
                             void** signal_memory_mutex = (void**) p5;
 
                             if (p4 != *NULL_POINTER) {
+
+    fprintf(stderr, "TEST 0-2 signal_memory_irq: %i\n", p4);
+    fprintf(stderr, "TEST 0-2 *signal_memory_irq: %i\n", *((int**) p4));
+    fprintf(stderr, "TEST 0-2 **signal_memory_irq: %i\n", **((int**) p4));
 
                                 // CAUTION! Do NOT cast to int** because the value is assigned to *mt below
                                 // and casting to int** might change the expected size.
@@ -314,9 +311,13 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3,
 
                                 if (**((int**) signal_memory_irq) != *NUMBER_0_INTEGER) {
 
+    fprintf(stderr, "TEST 0-3: %i\n", *irq);
+
                                     // Set channel.
                                     *c = SIGNAL_MODEL;
                                     *cc = *SIGNAL_MODEL_COUNT;
+
+    fprintf(stderr, "TEST 0-4: %i\n", *irq);
 
                                     // Set interrupt request flag.
                                     *irq = *signal_memory_irq;
@@ -334,6 +335,8 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3,
                             log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not check for interrupt requests. The signal memory mutex is null.");
                         }
                     }
+
+    fprintf(stderr, "TEST 1: %s\n", (char*) p0);
 
                     if (*irq == *NULL_POINTER) {
 
@@ -371,6 +374,8 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3,
                         }
                     }
 
+    fprintf(stderr, "TEST 2: %s\n", (char*) p0);
+
                     if (*irq == *NULL_POINTER) {
 
                         if (p9 != *NULL_POINTER) {
@@ -407,6 +412,8 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3,
                         }
                     }
 
+    fprintf(stderr, "TEST 3: %s\n", (char*) p0);
+
                     if (*irq == *NULL_POINTER) {
 
                         if (p11 != *NULL_POINTER) {
@@ -442,6 +449,8 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3,
                             log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not check for interrupt requests. The www service mutex is null.");
                         }
                     }
+
+    fprintf(stderr, "TEST 4: %s\n", (char*) p0);
 
                     if (*irq == *NULL_POINTER) {
 
@@ -550,6 +559,21 @@ void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
     log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "\n\n");
     log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Check for signal with highest priority and otherwise, for interrupts.");
 
+    // The interrupts and mutexes.
+    //
+    // CAUTION! These have to be handed over as REFERENCE, since their values
+    // get manipulated in the "check_interrupts" function called further below!
+    void** signal_memory_irq = (void**) p8;
+    void** signal_memory_mutex = (void**) p9;
+    void** gnu_linux_console_irq = (void**) p10;
+    void** gnu_linux_console_mutex = (void**) p11;
+    void** x_window_system_irq = (void**) p12;
+    void** x_window_system_mutex = (void**) p13;
+    void** www_service_irq = (void**) p14;
+    void** www_service_mutex = (void**) p15;
+    void** cyboi_service_irq = (void**) p16;
+    void** cyboi_service_mutex = (void**) p17;
+
     // The signal abstraction, model, details.
     void** a = NULL_POINTER;
     void** ac = NULL_POINTER;
@@ -579,7 +603,7 @@ void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
         // A signal was found and has to be handled.
         // Handling a signal has higher priority than checking for new interrupt requests.
 
-        check_handle(p4, p5, p6, p9, (void*) &i, (void*) &a, (void*) &ac, (void*) &m, (void*) &mc, (void*) &d, (void*) &dc, (void*) &p, (void*) &id);
+        check_handle(p4, p5, p6, *signal_memory_mutex, (void*) &i, (void*) &a, (void*) &ac, (void*) &m, (void*) &mc, (void*) &d, (void*) &dc, (void*) &p, (void*) &id);
 
     //?? For testing only. Delete these lines later!
     fprintf(stderr, "TEST a: %s\n", *((char**) a));
@@ -594,7 +618,7 @@ void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
 */
 
         // Handle signal.
-        handle(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, *a, *ac, *m, *mc, *d, *dc, p, id, &x);
+        handle(p0, p1, p2, p3, p4, p5, p6, p7, *signal_memory_irq, *signal_memory_mutex, *a, *ac, *m, *mc, *d, *dc, p, id, &x);
 
     } else {
 
@@ -615,9 +639,9 @@ void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
         // - mutex (to be blocked while resetting the interrupt request flag below)
         check_interrupts((void*) &c, (void*) &cc, (void*) &irq, (void*) &mt, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17);
 
-    fprintf(stderr, "TEST interrupts r: %i\n", *irq);
-
         if ((irq != *NULL_POINTER) && (*irq != *NUMBER_0_INTEGER)) {
+
+    fprintf(stderr, "TEST irq: %i\n", *irq);
 
             // Lock cyboi service mutex.
             pthread_mutex_lock(mt);
@@ -649,9 +673,7 @@ void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
             // each time, yet BEFORE receiving NEW data over socket.
             // But since the signal parses and references these temporary data,
             // the system will not process the signal correctly, if the data have been destroyed.
-            handle(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, *a, *ac, *m, *mc, *d, *dc, p, id, &x);
-
-    fprintf(stderr, "TEST empty: %i\n", *irq);
+            handle(p0, p1, p2, p3, p4, p5, p6, p7, *signal_memory_irq, *signal_memory_mutex, *a, *ac, *m, *mc, *d, *dc, p, id, &x);
 
             // An interrupt request was detected and the corresponding data received.
             // It is therefore VERY likely that new signals have been generated while handling the data.
@@ -660,12 +682,12 @@ void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
 
         } else {
 
-    fprintf(stderr, "TEST wait: %i\n", *irq);
+    fprintf(stderr, "TEST wait: %i\n", irq);
 
             // No interrupt request was detected, so that the cyboi system
             // can be sent to sleep now, in order to save cpu time.
 
-            check_wait(p8, p9, p10, p11, p12, p13, p14, p15, p16, p17);
+            check_wait(*signal_memory_irq, *gnu_linux_console_irq, *x_window_system_irq, *www_service_irq, *cyboi_service_irq);
         }
     }
 
@@ -848,11 +870,11 @@ void check(void* p0) {
         }
 
         check_signal(p0, *k, *kc, *ks, *s, *sc, *ss, (void*) &f,
-            (void*) *signal_memory_irq, (void*) *signal_memory_mutex,
-            (void*) *gnu_linux_console_irq, (void*) *gnu_linux_console_mutex,
-            (void*) *x_window_system_irq, (void*) *x_window_system_mutex,
-            (void*) *www_service_irq, (void*) *www_service_mutex,
-            (void*) *cyboi_service_irq, (void*) *cyboi_service_mutex,
+            (void*) signal_memory_irq, (void*) signal_memory_mutex,
+            (void*) gnu_linux_console_irq, (void*) gnu_linux_console_mutex,
+            (void*) x_window_system_irq, (void*) x_window_system_mutex,
+            (void*) www_service_irq, (void*) www_service_mutex,
+            (void*) cyboi_service_irq, (void*) cyboi_service_mutex,
             (void*) *m, (void*) *mc, (void*) *ms, (void*) *d, (void*) *dc, (void*) *ds,
             (void*) *c, (void*) *cc, (void*) *l, (void*) *lc, (void*) *st, (void*) *stc,
             (void*) b, (void*) bc, (void*) bs);
