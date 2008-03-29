@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2007-12-01 23:57:41 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2008-03-29 19:22:51 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -39,7 +39,6 @@
 #include "../globals/variables/primitive_type_size_variables.c"
 #include "../globals/variables/reallocation_factor_variables.c"
 #include "../globals/variables/service_interrupt_variables.c"
-#include "../globals/variables/sleep_time_variables.c"
 #include "../globals/variables/thread_identification_variables.c"
 
 /**
@@ -186,17 +185,6 @@ void globalise() {
     // Allocate and initialise signal memory reallocation factor.
     SIGNAL_MEMORY_REALLOCATION_FACTOR = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
     *SIGNAL_MEMORY_REALLOCATION_FACTOR = *NUMBER_2_INTEGER;
-
-    //
-    // Sleep time variables.
-    //
-
-    // Allocate and initialise checker sleep time.
-    CHECKER_SLEEP_TIME = (double*) malloc(*DOUBLE_PRIMITIVE_SIZE);
-    *CHECKER_SLEEP_TIME = *NUMBER_0_1_DOUBLE;
-    // Allocate and initialise x window system sleep time.
-    X_WINDOW_SYSTEM_SLEEP_TIME = (double*) malloc(*DOUBLE_PRIMITIVE_SIZE);
-    *X_WINDOW_SYSTEM_SLEEP_TIME = *NUMBER_0_1_DOUBLE;
 }
 
 /**
@@ -205,15 +193,6 @@ void globalise() {
  * CAUTION! Use descending order, as compared to allocation.
  */
 void unglobalise() {
-
-    //
-    // Sleep time variables.
-    //
-
-    // Free checker sleep time.
-    free(CHECKER_SLEEP_TIME);
-    // Free x window system sleep time.
-    free(X_WINDOW_SYSTEM_SLEEP_TIME);
 
     //
     // Reallocation factor variables.

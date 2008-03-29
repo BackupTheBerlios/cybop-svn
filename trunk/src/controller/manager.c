@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.44 $ $Date: 2007-12-01 23:57:41 $ $Author: christian $
+ * @version $Revision: 1.45 $ $Date: 2008-03-29 19:22:51 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -66,6 +66,10 @@ void manage(void* p0, void* p1) {
 
     log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "\n\n");
     log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Manage system.");
+
+    //
+    // Variable declaration.
+    //
 
     // The internal memory.
     void* i = *NULL_POINTER;
@@ -141,6 +145,21 @@ void manage(void* p0, void* p1) {
     // The cyboi service mutex.
     pthread_mutex_t* cyboi_service_mutex = (pthread_mutex_t*) *NULL_POINTER;
 
+    // The signal memory sleep time.
+    double* signal_memory_sleep_time = (double*) *NULL_POINTER;
+    // The gnu linux console sleep time.
+    double* gnu_linux_console_sleep_time = (double*) *NULL_POINTER;
+    // The x window system sleep time.
+    double* x_window_system_sleep_time = (double*) *NULL_POINTER;
+    // The www service sleep time.
+    double* www_service_sleep_time = (double*) *NULL_POINTER;
+    // The cyboi service sleep time.
+    double* cyboi_service_sleep_time = (double*) *NULL_POINTER;
+
+    //
+    // Variable allocation.
+    //
+
     // Allocate knowledge memory count, size.
     allocate((void*) &kc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
     allocate((void*) &ks, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
@@ -169,6 +188,21 @@ void manage(void* p0, void* p1) {
     www_service_mutex = (pthread_mutex_t*) malloc(sizeof(pthread_mutex_t));
     // Allocate cyboi service mutex.
     cyboi_service_mutex = (pthread_mutex_t*) malloc(sizeof(pthread_mutex_t));
+
+    // Allocate signal memory sleep time.
+    signal_memory_sleep_time = (double*) malloc(*DOUBLE_PRIMITIVE_SIZE);
+    // Allocate gnu linux console sleep time.
+    gnu_linux_console_sleep_time = (double*) malloc(*DOUBLE_PRIMITIVE_SIZE);
+    // Allocate x window system sleep time.
+    x_window_system_sleep_time = (double*) malloc(*DOUBLE_PRIMITIVE_SIZE);
+    // Allocate www service sleep time.
+    www_service_sleep_time = (double*) malloc(*DOUBLE_PRIMITIVE_SIZE);
+    // Allocate cyboi service sleep time.
+    cyboi_service_sleep_time = (double*) malloc(*DOUBLE_PRIMITIVE_SIZE);
+
+    //
+    // Variable initialisation.
+    //
 
     // Initialise knowledge memory count, size.
     *kc = *NUMBER_0_INTEGER;
@@ -214,12 +248,32 @@ void manage(void* p0, void* p1) {
     // initialised with default attributes.
     pthread_mutex_init(cyboi_service_mutex, *NULL_POINTER);
 
+    // Initialise signal memory sleep time.
+    *signal_memory_sleep_time = *NUMBER_0_1_DOUBLE;
+    // Initialise gnu linux console sleep time.
+    *gnu_linux_console_sleep_time = *NUMBER_0_1_DOUBLE;
+    // Initialise x window system sleep time.
+    *x_window_system_sleep_time = *NUMBER_0_1_DOUBLE;
+    // Initialise www service sleep time.
+    *www_service_sleep_time = *NUMBER_0_1_DOUBLE;
+    // Initialise cyboi service sleep time.
+    *cyboi_service_sleep_time = *NUMBER_0_1_DOUBLE;
+
+    //
+    // CAUTION! As an exception, the following allocations have to be done AFTER the sizes
+    // have been initialised above, since the sizes are used for allocation.
+    //
+
     // Allocate internal memory.
     allocate((void*) &i, (void*) is, (void*) INTERNAL_MEMORY_ABSTRACTION, (void*) INTERNAL_MEMORY_ABSTRACTION_COUNT);
     // Allocate knowledge memory.
     allocate((void*) &k, (void*) ks, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
     // Allocate signal memory.
     allocate((void*) &s, (void*) ss, (void*) SIGNAL_MEMORY_ABSTRACTION, (void*) SIGNAL_MEMORY_ABSTRACTION_COUNT);
+
+    //
+    // System startup.
+    //
 
     // Start up internal memory.
     //
@@ -241,17 +295,25 @@ void manage(void* p0, void* p1) {
     startup_internal_memory(i,
         (void*) &k, (void*) &kc, (void*) &ks,
         (void*) &s, (void*) &sc, (void*) &ss,
-        (void*) &signal_memory_irq, (void*) &signal_memory_mutex,
-        (void*) &gnu_linux_console_irq, (void*) &gnu_linux_console_mutex,
-        (void*) &x_window_system_irq, (void*) &x_window_system_mutex,
-        (void*) &www_service_irq, (void*) &www_service_mutex,
-        (void*) &cyboi_service_irq, (void*) &cyboi_service_mutex);
+        (void*) &signal_memory_irq, (void*) &signal_memory_mutex, (void*) &signal_memory_sleep_time,
+        (void*) &gnu_linux_console_irq, (void*) &gnu_linux_console_mutex, (void*) &gnu_linux_console_sleep_time,
+        (void*) &x_window_system_irq, (void*) &x_window_system_mutex, (void*) &x_window_system_sleep_time,
+        (void*) &www_service_irq, (void*) &www_service_mutex, (void*) &www_service_sleep_time,
+        (void*) &cyboi_service_irq, (void*) &cyboi_service_mutex, (void*) &cyboi_service_sleep_time);
 
     // Start up system signal handler.
     startup_system_signal_handler();
 
+    //
+    // System initialisation.
+    //
+
     // Initialise system with an initial signal.
     initialise(i, s, (void*) sc, (void*) ss, p0, p1);
+
+    //
+    // System shutdown.
+    //
 
     // The following calls of "shutdown" procedures are just to be sure,
     // in case a cybol application developer has forgotten to call the
@@ -266,6 +328,10 @@ void manage(void* p0, void* p1) {
     shutdown_socket(i, (void*) WWW_BASE_INTERNAL,(void*) WWW_SERVICE_THREAD, (void*) WWW_SERVICE_EXIT);
     // Shutdown cyboi service.
     shutdown_socket(i, (void*) CYBOI_BASE_INTERNAL, (void*) CYBOI_SERVICE_THREAD, (void*) CYBOI_SERVICE_EXIT);
+
+    //
+    // Variable finalisation.
+    //
 
     // CAUTION! Do NOT remove any internal memory internals!
     // The internals have a fixed position within the internal memory.
@@ -283,6 +349,10 @@ void manage(void* p0, void* p1) {
     pthread_mutex_destroy(www_service_mutex);
     // Destroy cyboi service mutex.
     pthread_mutex_destroy(cyboi_service_mutex);
+
+    //
+    // Variable deallocation.
+    //
 
     // Deallocate signal memory interrupt request flag.
     free((void*) signal_memory_irq);
@@ -305,6 +375,17 @@ void manage(void* p0, void* p1) {
     free((void*) www_service_mutex);
     // Deallocate cyboi service mutex.
     free((void*) cyboi_service_mutex);
+
+    // Deallocate signal memory sleep time.
+    free((void*) signal_memory_sleep_time);
+    // Deallocate gnu linux console sleep time.
+    free((void*) gnu_linux_console_sleep_time);
+    // Deallocate x window system sleep time.
+    free((void*) x_window_system_sleep_time);
+    // Deallocate www service sleep time.
+    free((void*) www_service_sleep_time);
+    // Deallocate cyboi service sleep time.
+    free((void*) cyboi_service_sleep_time);
 
     // Deallocate signal memory.
     deallocate((void*) &s, (void*) ss, (void*) SIGNAL_MEMORY_ABSTRACTION, (void*) SIGNAL_MEMORY_ABSTRACTION_COUNT);

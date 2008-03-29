@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2008-02-15 15:47:17 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2008-03-29 19:22:51 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -31,22 +31,6 @@
 
 #include "../../globals/constants/log/log_level_constants.c"
 #include "../../globals/logger/logger.c"
-/*??
-#include "../../globals/constants/cyboi/cyboi_signal_priority_constants.c"
-#include "../../globals/constants/cybol/cybol_abstraction_constants.c"
-#include "../../globals/constants/character/character_constants.c"
-#include "../../globals/constants/character/wide_character_constants.c"
-#include "../../globals/constants/console/console_control_sequence_constants.c"
-#include "../../globals/constants/cybol/cybol_name_constants.c"
-#include "../../globals/constants/integer/integer_constants.c"
-#include "../../globals/constants/memory_structure/memory_structure_constants.c"
-#include "../../globals/constants/pointer/pointer_constants.c"
-#include "../../memoriser/accessor/compound_accessor.c"
-#include "../../memoriser/accessor/signal_memory_accessor.c"
-#include "../../memoriser/accessor.c"
-#include "../../memoriser/allocator.c"
-#include "../../memoriser/array.c"
-*/
 
 /**
  * Receives textual user interface (tui) message via gnu/linux console.
@@ -70,24 +54,56 @@ void receive_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4,
 
     log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Receive gnu/linux console message.");
 
-    // The character array read from the gnu/linux console (terminal).
+    // The character array read from the gnu/linux console.
     void* a = *NULL_POINTER;
     int ac = *NUMBER_0_INTEGER;
     int as = *NUMBER_0_INTEGER;
 
-    // Allocate array.
+    // Allocate character array.
     allocate((void*) &a, (void*) &as, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
     // Read pressed keyboard keys as message from gnu/linux console.
     read_gnu_linux_console((void*) &a, (void*) &ac, (void*) &as, p12);
 
+    fprintf(stderr, "TEST a: %s\n", (char*) a);
+    fprintf(stderr, "TEST ac: %i\n", ac);
+    fprintf(stderr, "TEST as: %i\n", as);
+
+    // The command.
+    void* c = *NULL_POINTER;
+    int cc = *NUMBER_0_INTEGER;
+    int cs = *NUMBER_0_INTEGER;
+
+    // Allocate command.
+    allocate((void*) &c, (void*) &cs, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
+
+    // Decode character array into command.
+    decode_gnu_linux_console((void*) &c, (void*) &cc, (void*) &cs, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, a, (void*) &ac, (void*) GNU_LINUX_CONSOLE_MODEL, (void*) GNU_LINUX_CONSOLE_MODEL_COUNT);
+
+    // Deallocate character array.
+    deallocate((void*) &a, (void*) &as, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
+
 /*??
-    // Decode character array into signal.
-    decode_gnu_linux_console(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, (void*) &a, (void*) &ac);
+    // The user interface commands.
+    void** c = NULL_POINTER;
+    void** cc = NULL_POINTER;
+    void** cs = NULL_POINTER;
+
+    // Get user interface commands internal.
+    get_element(p0, (void*) GNU_LINUX_CONSOLE_THREAD_COMMANDS_INTERNAL, (void*) &c, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get_element(p0, (void*) GNU_LINUX_CONSOLE_THREAD_COMMANDS_COUNT_INTERNAL, (void*) &cc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get_element(p0, (void*) GNU_LINUX_CONSOLE_THREAD_COMMANDS_SIZE_INTERNAL, (void*) &cs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
+    // Get actual command belonging to the command name.
+    // If the name is not known, the command parameter is left untouched.
+    get_universal_compound_element_by_name(*c, *cc,
+        p13, p14,
+        p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11,
+        *k, *kc);
 */
 
-    // Deallocate array.
-    deallocate((void*) &a, (void*) &as, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
+    // Deallocate command.
+    deallocate((void*) &c, (void*) &cs, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
 }
 
 /* GNU_LINUX_OPERATING_SYSTEM */

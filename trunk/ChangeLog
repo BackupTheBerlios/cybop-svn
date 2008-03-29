@@ -14,9 +14,21 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.41 $ $Date: 2008-03-19 16:40:11 $ $Author: christian $
+# @version $Revision: 1.42 $ $Date: 2008-03-29 19:22:51 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2008-03-29  Christian Heller  <christian.heller@tuxtax.de>
+        * Replace old character-based handling using escape character mode and escape control sequence mode
+            in function "decode_gnu_linux_console" with simple character array comparisons
+            (this has become possible because the input stream is read at once in function "read_gnu_linux_console" now)
+
+2008-03-28  Christian Heller  <christian.heller@tuxtax.de>
+        * Continue and adapt function "receive_gnu_linux_console" and others
+
+2008-03-27  Christian Heller  <christian.heller@tuxtax.de>
+        * Add sleep time variables (existing for all threads/ interrupts) to internal memory
+        * Delete global sleep time variables
 
 2008-03-19  Christian Heller  <christian.heller@tuxtax.de>
         * Debug "checker.c" by correcting a number of double-referenced pointer variables

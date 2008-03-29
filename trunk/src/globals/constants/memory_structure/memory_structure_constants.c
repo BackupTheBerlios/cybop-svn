@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2008-02-15 15:47:18 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2008-03-29 19:22:51 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -208,6 +208,7 @@ static int* SIGNAL_MEMORY_COUNT_INTERNAL = NUMBER_4_INTEGER_ARRAY;
 static int* SIGNAL_MEMORY_SIZE_INTERNAL = NUMBER_5_INTEGER_ARRAY;
 static int* SIGNAL_MEMORY_INTERRUPT_REQUEST_INTERNAL = NUMBER_6_INTEGER_ARRAY;
 static int* SIGNAL_MEMORY_MUTEX_INTERNAL = NUMBER_7_INTEGER_ARRAY;
+static int* SIGNAL_MEMORY_SLEEP_TIME_INTERNAL = NUMBER_8_INTEGER_ARRAY;
 
 /** The gnu linux console. */
 static int* GNU_LINUX_CONSOLE_INPUT_FILE_DESCRIPTOR_INTERNAL = NUMBER_100_INTEGER_ARRAY;

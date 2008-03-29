@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.18 $ $Date: 2007-12-01 23:57:42 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2008-03-29 19:22:51 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -63,17 +63,24 @@
  * @param p6 the signal memory size (Hand over as reference!)
  * @param p7 the signal memory interrupt request flag (Hand over as reference!)
  * @param p8 the signal memory mutex (Hand over as reference!)
- * @param p9 the gnu/linux console interrupt request flag (Hand over as reference!)
- * @param p10 the gnu/linux console mutex (Hand over as reference!)
- * @param p11 the x window system interrupt request flag (Hand over as reference!)
- * @param p12 the x window system mutex (Hand over as reference!)
- * @param p13 the www service interrupt request flag (Hand over as reference!)
- * @param p14 the www service mutex (Hand over as reference!)
- * @param p15 the cyboi service interrupt request flag (Hand over as reference!)
- * @param p16 the cyboi service mutex (Hand over as reference!)
+ * @param p9 the signal memory sleep time (Hand over as reference!)
+ * @param p10 the gnu/linux console interrupt request flag (Hand over as reference!)
+ * @param p11 the gnu/linux console mutex (Hand over as reference!)
+ * @param p12 the gnu/linux console sleep time (Hand over as reference!)
+ * @param p13 the x window system interrupt request flag (Hand over as reference!)
+ * @param p14 the x window system mutex (Hand over as reference!)
+ * @param p15 the x window system sleep time (Hand over as reference!)
+ * @param p16 the www service interrupt request flag (Hand over as reference!)
+ * @param p17 the www service mutex (Hand over as reference!)
+ * @param p18 the www service sleep time (Hand over as reference!)
+ * @param p19 the cyboi service interrupt request flag (Hand over as reference!)
+ * @param p20 the cyboi service mutex (Hand over as reference!)
+ * @param p21 the cyboi service sleep time (Hand over as reference!)
  */
 void startup_internal_memory(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
-    void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14, void* p15, void* p16) {
+    void* p7, void* p8, void* p9, void* p10, void* p11, void* p12,
+    void* p13, void* p14, void* p15, void* p16, void* p17, void* p18,
+    void* p19, void* p20, void* p21) {
 
     log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "\n\n");
     log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Startup internal memory.");
@@ -124,30 +131,42 @@ void startup_internal_memory(void* p0, void* p1, void* p2, void* p3, void* p4, v
     set_element(p0, (void*) SIGNAL_MEMORY_INTERRUPT_REQUEST_INTERNAL, p7, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     // Set signal memory mutex.
     set_element(p0, (void*) SIGNAL_MEMORY_MUTEX_INTERNAL, p8, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    // Set signal memory sleep time.
+    set_element(p0, (void*) SIGNAL_MEMORY_SLEEP_TIME_INTERNAL, p9, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
     // Set gnu/linux console interrupt request flag.
-    set_element(p0, (void*) GNU_LINUX_CONSOLE_INTERRUPT_REQUEST_INTERNAL, p9, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    set_element(p0, (void*) GNU_LINUX_CONSOLE_INTERRUPT_REQUEST_INTERNAL, p10, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     // Set gnu/linux console mutex.
-    set_element(p0, (void*) GNU_LINUX_CONSOLE_MUTEX_INTERNAL, p10, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    set_element(p0, (void*) GNU_LINUX_CONSOLE_MUTEX_INTERNAL, p11, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    // Set gnu/linux console sleep time.
+    set_element(p0, (void*) GNU_LINUX_CONSOLE_SLEEP_TIME_INTERNAL, p12, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
     // Set x window system interrupt request flag.
-    set_element(p0, (void*) X_WINDOW_SYSTEM_INTERRUPT_REQUEST_INTERNAL, p11, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    set_element(p0, (void*) X_WINDOW_SYSTEM_INTERRUPT_REQUEST_INTERNAL, p13, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     // Set x window system mutex.
-    set_element(p0, (void*) X_WINDOW_SYSTEM_MUTEX_INTERNAL, p12, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    set_element(p0, (void*) X_WINDOW_SYSTEM_MUTEX_INTERNAL, p14, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    // Set x window system sleep time.
+    set_element(p0, (void*) X_WINDOW_SYSTEM_SLEEP_TIME_INTERNAL, p15, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
     // Set www service interrupt request flag.
     i = *WWW_BASE_INTERNAL + *SOCKET_INTERRUPT_REQUEST_INTERNAL;
-    set_element(p0, (void*) &i, p13, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    set_element(p0, (void*) &i, p16, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     // Set www service mutex.
     i = *WWW_BASE_INTERNAL + *SOCKET_MUTEX_INTERNAL;
-    set_element(p0, (void*) &i, p14, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    set_element(p0, (void*) &i, p17, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    // Set www service sleep time.
+    i = *WWW_BASE_INTERNAL + *SOCKET_SLEEP_TIME_INTERNAL;
+    set_element(p0, (void*) &i, p18, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
     // Set cyboi service interrupt request flag.
     i = *CYBOI_BASE_INTERNAL + *SOCKET_INTERRUPT_REQUEST_INTERNAL;
-    set_element(p0, (void*) &i, p15, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    set_element(p0, (void*) &i, p19, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     // Set cyboi service mutex.
     i = *CYBOI_BASE_INTERNAL + *SOCKET_MUTEX_INTERNAL;
-    set_element(p0, (void*) &i, p16, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    set_element(p0, (void*) &i, p20, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    // Set cyboi service sleep time.
+    i = *CYBOI_BASE_INTERNAL + *SOCKET_SLEEP_TIME_INTERNAL;
+    set_element(p0, (void*) &i, p21, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 }
 
 /* INTERNAL_MEMORY_MANAGER_SOURCE */

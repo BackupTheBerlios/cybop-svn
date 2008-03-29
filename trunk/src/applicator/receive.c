@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.45 $ $Date: 2008-02-15 15:47:17 $ $Author: christian $
+ * @version $Revision: 1.46 $ $Date: 2008-03-29 19:22:51 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -47,12 +47,12 @@
  * Receives a message via the given channel.
  *
  * @param p0 the internal memory
- * @param p1 the model
- * @param p2 the model count
- * @param p3 the model size
- * @param p4 the details
- * @param p5 the details count
- * @param p6 the details size
+ * @param p1 the model (Hand over as reference!)
+ * @param p2 the model count (Hand over as reference!)
+ * @param p3 the model size (Hand over as reference!)
+ * @param p4 the details (Hand over as reference!)
+ * @param p5 the details count (Hand over as reference!)
+ * @param p6 the details size (Hand over as reference!)
  * @param p7 the root
  * @param p8 the root count
  * @param p9 the root size
@@ -121,9 +121,7 @@ void receive_with_parameters(void* p0, void* p1, void* p2, void* p3, void* p4, v
             // Get gnu/linux console input stream.
             get_array_elements(p0, (void*) GNU_LINUX_CONSOLE_INPUT_FILE_DESCRIPTOR_INTERNAL, (void*) &is, (void*) POINTER_ARRAY);
 
-/*??
-            receive_gnu_linux_console(p1, p2, p3, p4, p5, p6, *is);
-*/
+            receive_gnu_linux_console(NULL_POINTER, NULL_POINTER, NULL_POINTER, NULL_POINTER, NULL_POINTER, NULL_POINTER, p1, p2, p3, p4, p5, p6, *is);
         }
     }
 

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2008-02-15 15:47:18 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2008-03-29 19:22:51 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -78,303 +78,176 @@ void encode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
     void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14);
 
 /**
- * Decodes gnu/linux console signal.
+ * Decodes a gnu/linux console escape control sequence into a command.
  *
- * @param p0 the command name (Hand over as reference!)
- * @param p1 the command name count (Hand over as reference!)
- * @param p2 the command name size (Hand over as reference!)
- * @param p3 the command abstraction (Hand over as reference!)
- * @param p4 the command abstraction count (Hand over as reference!)
- * @param p5 the command abstraction size (Hand over as reference!)
- * @param p6 the command model (Hand over as reference!)
- * @param p7 the command model count (Hand over as reference!)
- * @param p8 the command model size (Hand over as reference!)
- * @param p9 the command details (Hand over as reference!)
- * @param p10 the command details count (Hand over as reference!)
- * @param p11 the command details size (Hand over as reference!)
- * @param p12 the internal memory
- * @param p13 the command name string
- * @param p14 the command name string count
+ * @param p0 the destination command (Hand over as reference!)
+ * @param p1 the destination command count
+ * @param p2 the destination command size
+ * @param p3 the source character array
+ * @param p4 the source character array count
  */
-void decode_gnu_linux_console_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
-    void* p6, void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14) {
+void decode_gnu_linux_console_escape_control_sequence(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    // The knowledge memory.
-    void** k = NULL_POINTER;
-    void** kc = NULL_POINTER;
-    void** ks = NULL_POINTER;
-    // The signal memory.
-    void** s = NULL_POINTER;
-    void** sc = NULL_POINTER;
-    void** ss = NULL_POINTER;
-    // The signal memory mutex.
-    pthread_mutex_t** smt = (pthread_mutex_t**) NULL_POINTER;
-    // The gnu/linux console mutex.
-    pthread_mutex_t** lmt = (pthread_mutex_t**) NULL_POINTER;
-    // The interrupt request flag.
-    sig_atomic_t** irq = (sig_atomic_t**) NULL_POINTER;
-    // The user interface commands.
-    void** c = NULL_POINTER;
-    void** cc = NULL_POINTER;
-    void** cs = NULL_POINTER;
-    // The signal identification.
-    void** id = NULL_POINTER;
-
-    // Get knowledge memory internal.
-    get_element(p0, (void*) KNOWLEDGE_MEMORY_INTERNAL, (void*) &k, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    get_element(p0, (void*) KNOWLEDGE_MEMORY_COUNT_INTERNAL, (void*) &kc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    get_element(p0, (void*) KNOWLEDGE_MEMORY_SIZE_INTERNAL, (void*) &ks, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    // Get signal memory internal.
-    get_element(p0, (void*) SIGNAL_MEMORY_INTERNAL, (void*) &s, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    get_element(p0, (void*) SIGNAL_MEMORY_COUNT_INTERNAL, (void*) &sc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    get_element(p0, (void*) SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &ss, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    // Get signal memory mutex.
-    get_element(p0, (void*) SIGNAL_MEMORY_MUTEX_INTERNAL, (void*) &smt, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    // Get gnu/linux console mutex.
-    get_element(p0, (void*) GNU_LINUX_CONSOLE_MUTEX_INTERNAL, (void*) &lmt, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    // Get interrupt request internal.
-    get_element(p0, (void*) SIGNAL_MEMORY_INTERRUPT_REQUEST_INTERNAL, (void*) &irq, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-
-    // Get user interface commands internal.
-    get_element(p0, (void*) GNU_LINUX_CONSOLE_THREAD_COMMANDS_INTERNAL, (void*) &c, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    get_element(p0, (void*) GNU_LINUX_CONSOLE_THREAD_COMMANDS_COUNT_INTERNAL, (void*) &cc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    get_element(p0, (void*) GNU_LINUX_CONSOLE_THREAD_COMMANDS_SIZE_INTERNAL, (void*) &cs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-
-    // Get actual command belonging to the command name.
-    // If the name is not known, the command parameter is left untouched.
-    get_universal_compound_element_by_name(*c, *cc,
-        p13, p14,
-        p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11,
-        *k, *kc);
-}
-
-/**
- * Decodes a gnu/linux console escape control sequence and
- * forwards the corresponding command, to be sent as signal.
- *
- * @param p0 the internal memory
- * @param p1 the character buffer
- * @param p2 the character buffer count
- */
-void decode_gnu_linux_console_escape_control_sequence(void* p0, void* p1, void* p2) {
+    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Decode gnu/linux console escape control sequence.");
 
     // The comparison result.
     int r = *NUMBER_0_INTEGER;
 
-/*??
-    // Determine escape control sequence and send a corresponding signal.
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p1, p2, (void*) ARROW_UP_CONTROL_SEQUENCE, (void*) ARROW_UP_CONTROL_SEQUENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p3, p4, (void*) ARROW_UP_CONTROL_SEQUENCE, (void*) ARROW_UP_CONTROL_SEQUENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
-            decode_gnu_linux_console_signal(p0, (void*) UI_ARROW_UP_NAME, (void*) UI_ARROW_UP_NAME_COUNT);
+            *c = (void*) &UI_ARROW_UP_NAME;
+            *cc = *UI_ARROW_UP_NAME_COUNT;
         }
     }
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p1, p2, (void*) ARROW_DOWN_CONTROL_SEQUENCE, (void*) ARROW_DOWN_CONTROL_SEQUENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p3, p4, (void*) ARROW_DOWN_CONTROL_SEQUENCE, (void*) ARROW_DOWN_CONTROL_SEQUENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
-            decode_gnu_linux_console_signal(p0, (void*) UI_ARROW_DOWN_NAME, (void*) UI_ARROW_DOWN_NAME_COUNT);
+            *c = (void*) &UI_ARROW_DOWN_NAME;
+            *cc = *UI_ARROW_DOWN_NAME_COUNT;
         }
     }
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p1, p2, (void*) ARROW_LEFT_CONTROL_SEQUENCE, (void*) ARROW_LEFT_CONTROL_SEQUENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p3, p4, (void*) ARROW_LEFT_CONTROL_SEQUENCE, (void*) ARROW_LEFT_CONTROL_SEQUENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
-            decode_gnu_linux_console_signal(p0, (void*) UI_ARROW_LEFT_NAME, (void*) UI_ARROW_LEFT_NAME_COUNT);
+            *c = (void*) &UI_ARROW_LEFT_NAME;
+            *cc = *UI_ARROW_LEFT_NAME_COUNT;
         }
     }
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p1, p2, (void*) ARROW_RIGHT_CONTROL_SEQUENCE, (void*) ARROW_RIGHT_CONTROL_SEQUENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p3, p4, (void*) ARROW_RIGHT_CONTROL_SEQUENCE, (void*) ARROW_RIGHT_CONTROL_SEQUENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
-            decode_gnu_linux_console_signal(p0, (void*) UI_ARROW_RIGHT_NAME, (void*) UI_ARROW_RIGHT_NAME_COUNT);
+            *c = (void*) &UI_ARROW_RIGHT_NAME;
+            *cc = *UI_ARROW_RIGHT_NAME_COUNT;
         }
     }
-*/
 }
 
 /**
- * Decodes a gnu/linux console character and
- * forwards the corresponding command, to be sent as signal.
+ * Decodes a gnu/linux console character into a command.
  *
  * This procedure changes some key codes into real names as defined by CYBOL.
- * Example: The LINE_FEED_CONTROL_CHARACTER (<enter> key)
- * gets converted into UI_ENTER_NAME ("enter"), which is used in CYBOL files.
+ * Example: The LINE_FEED_CONTROL_CHARACTER (<enter> key) gets converted into the
+ * constant UI_ENTER_NAME with the value "enter", which is used so in CYBOL files.
  *
- * @param p0 the internal memory
- * @param p1 the character
+ * @param p0 the destination command (Hand over as reference!)
+ * @param p1 the destination command count
+ * @param p2 the destination command size
+ * @param p3 the source character array
+ * @param p4 the source character array count
  */
-void decode_gnu_linux_console_character(void* p0, void* p1) {
+void decode_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p1 != *NULL_POINTER) {
+    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Decode gnu/linux console character.");
 
-        char* e = (char*) p1;
+    // The comparison result.
+    int r = *NUMBER_0_INTEGER;
 
-/*??
-        if (*e == *LINE_FEED_CONTROL_WIDE_CHARACTER) {
+    if (r == *NUMBER_0_INTEGER) {
 
-            decode_gnu_linux_console_signal(p0, (void*) UI_ENTER_NAME, (void*) UI_ENTER_NAME_COUNT);
+        compare_arrays(p3, p4, (void*) LINE_FEED_CONTROL_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        } else if (*e == *ESCAPE_CONTROL_WIDE_CHARACTER) {
+        if (r != *NUMBER_0_INTEGER) {
 
-            decode_gnu_linux_console_signal(p0, (void*) UI_ESCAPE_NAME, (void*) UI_ESCAPE_NAME_COUNT);
-
-        } else {
-
-            decode_gnu_linux_console_signal(p0, p1, (void*) NUMBER_1_INTEGER);
+            *c = (void*) &UI_ENTER_NAME;
+            *cc = *UI_ENTER_NAME_COUNT;
         }
-*/
+    }
 
-    } else {
+    if (r == *NUMBER_0_INTEGER) {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode gnu/linux console character. The character is null.");
+        compare_arrays(p3, p4, (void*) ESCAPE_CONTROL_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != *NUMBER_0_INTEGER) {
+
+            *c = (void*) &UI_ESCAPE_NAME;
+            *cc = *UI_ESCAPE_NAME_COUNT;
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER) {
+
+        //?? TODO: Copy value of p2!
+        *c = (void*) &p2;
+        *cc = *PRIMITIVE_COUNT;
     }
 }
 
 /**
- * Decodes the gnu/linux console character array into a signal.
+ * Decodes the gnu/linux console character array into a command.
  *
- * @param p0 the signal name (Hand over as reference!)
- * @param p1 the signal name count (Hand over as reference!)
- * @param p2 the signal name size (Hand over as reference!)
- * @param p3 the signal abstraction (Hand over as reference!)
- * @param p4 the signal abstraction count (Hand over as reference!)
- * @param p5 the signal abstraction size (Hand over as reference!)
- * @param p6 the signal model (Hand over as reference!)
- * @param p7 the signal model count (Hand over as reference!)
- * @param p8 the signal model size (Hand over as reference!)
- * @param p9 the signal details (Hand over as reference!)
- * @param p10 the signal details count (Hand over as reference!)
- * @param p11 the signal details size (Hand over as reference!)
- * @param p12 the source character array
- * @param p13 the source character array count
+ * @param p0 the destination command (Hand over as reference!)
+ * @param p1 the destination command count
+ * @param p2 the destination command size
+ * @param p3 the source character array
+ * @param p4 the source character array count
  */
 void decode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Decode gnu/linux console.");
+    if (p4 != *NULL_POINTER) {
 
-/*??
-    // The event character.
-    //
-    // CAUTION! For the narrow stream functions it is important to store the
-    // result of these functions in a variable of type int instead of char,
-    // even if one plans to use it only as a character. Storing EOF in a char
-    // variable truncates its value to the size of a character, so that it
-    // is no longer distinguishable from the valid character (char) -1.
-    // So, one should always use an int for the result of getc and friends,
-    // and check for EOF after the call; once it is verified that the result
-    // is NOT EOF, one can be sure that it will fit in a char variable
-    // without loss of information.
-//??    wint_t e = *NULL_CONTROL_CHARACTER;
-    int e = *NULL_CONTROL_CHARACTER;
-    // The escape character mode.
-    int esc = *NUMBER_0_INTEGER;
-    // The escape control sequence mode.
-    int csi = *NUMBER_0_INTEGER;
-    // The interrupt flag.
-    int** f = (int**) NULL_POINTER;
-    // The loop count.
-    int j = *NUMBER_0_INTEGER;
+        int* sc = (int*) p4;
 
-    if (csi == *NUMBER_1_INTEGER) {
+        if (p3 != *NULL_POINTER) {
 
-        // Reset escape control sequence mode.
-        csi = *NUMBER_0_INTEGER;
+            void* s = (void*) p3;
 
-        // An escape character followed by a left square bracket character
-        // were read before. So this is an escape control sequence.
+            log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Decode gnu/linux console.");
 
-        //?? TODO! Question: Does e have to be casted from int to char BEFORE handing it over here?
-        //?? --> Probably NOT, because it should get casted automatically to char, inside the "set_element" function.
+            // The temporary character sequence.
+            void* t = p3;
+            int tc = *sc;
 
-        // Add character to buffer.
-        set_element(b, (void*) &bc, (void*) &e, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
-        (**bc)++;
+            // The comparison result.
+            int r = *NUMBER_0_INTEGER;
 
-        decode_gnu_linux_console_escape_control_sequence(p0, *b, (void*) *bc);
+            if (r == *NUMBER_0_INTEGER) {
 
-        // Initialise loop count.
-        j = **bc - *NUMBER_1_INTEGER;
+                compare_arrays(t, (void*) tc, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        // Empty the buffer for future results.
-        while (*NUMBER_1_INTEGER) {
+                if (r != *NUMBER_0_INTEGER) {
 
-            if (j < *NUMBER_0_INTEGER) {
+                    // Set new begin character of sequence.
+                    t = t + *ESCAPE_CONTROL_SEQUENCE_COUNT;
+                    tc = tc - *ESCAPE_CONTROL_SEQUENCE_COUNT;
 
-                break;
+                    decode_gnu_linux_console_escape_control_sequence(p0, p1, p2, t, (void*) &tc);
+                }
             }
 
-            // Remove all characters from buffer.
-            remove_element(*b, (void*) *bs, (void*) &j, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+            if (r == *NUMBER_0_INTEGER) {
 
-            // Decrease loop count.
-            j--;
-            // Decrease character buffer count.
-            (**bc)--;
-        }
+                // Set new begin character of sequence.
+                t = t + *ESCAPE_CONTROL_SEQUENCE_COUNT;
+                tc = tc - *ESCAPE_CONTROL_SEQUENCE_COUNT;
 
-    } else if (esc == *NUMBER_1_INTEGER) {
-
-        // Reset escape character mode.
-        esc = *NUMBER_0_INTEGER;
-
-        // An escape character was read before.
-        // Find out if it was just that escape character,
-        // or if a left square bracket character follows now,
-        // in which case this is the start of an escape control sequence.
-
-        if (e == *LEFT_SQUARE_BRACKET_WIDE_CHARACTER) {
-
-            // This is the start of an escape control sequence.
-
-            // Set escape control sequence flag.
-            csi = *NUMBER_1_INTEGER;
-
-            // Add character to buffer.
-            set_element(*b, (void*) *bc, (void*) &e, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
-            (**bc)++;
+                decode_gnu_linux_console_character(p0, p1, p2, t, (void*) &tc);
+            }
 
         } else {
 
-            // This is NOT going to be an escape control sequence.
-            // Send both, the formerly read escape character and the
-            // current character as two independent signals.
-            decode_gnu_linux_console_signal(p0, (void*) UI_ESCAPE_NAME, (void*) UI_ESCAPE_NAME_COUNT);
-
-            if (e != EOF) {
-
-                // Forward character if it is not the end of the console stream.
-                decode_gnu_linux_console_character(p0, (void*) &e);
-            }
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode gnu/linux console. The source character array is null.");
         }
 
-    } else if (e == *ESCAPE_CONTROL_WIDE_CHARACTER) {
+    } else {
 
-        // Set escape character flag.
-        esc = *NUMBER_1_INTEGER;
-
-        // Add character to buffer.
-        set_element(*b, (void*) *bc, (void*) &e, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
-        (**bc)++;
-
-    } else if (e != EOF) {
-
-        // Forward character if it is not the end of the console stream.
-        decode_gnu_linux_console_character(p0, (void*) &e);
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode gnu/linux console. The source character array count is null.");
     }
-*/
 }
 
 /**

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.23 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
+ * @version $Revision: 1.24 $ $Date: 2008-03-29 19:22:51 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -604,7 +604,7 @@ void set_new_signal_identification(void* p0, void* p1) {
             // *** glibc detected *** malloc(): memory corruption (fast): 0x080e0470 ***
             // Aborted
             //
-            // CAUTION! The following advice on pointer assignment is IMPORTANT.
+            // CAUTION! The following advices on pointer assignment are IMPORTANT.
             // If not followed, the whole CYBOI system might get mixed up,
             // with NULL_POINTER having the same address as some NUMBER_X_INTEGER
             // constants etc., resulting in unpredictable, strange errors!

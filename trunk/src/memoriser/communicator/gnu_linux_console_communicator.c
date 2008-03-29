@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2008-02-15 15:47:18 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2008-03-29 19:22:51 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -69,6 +69,7 @@ void read_gnu_linux_console(void* p0, void* p1, void* p2, void* p3) {
         // and check for EOF after the call; once it is verified that the result
         // is NOT EOF, one can be sure that it will fit in a char variable
         // without loss of information.
+//??        wint_t c = fwgetc(s);
         int c = fgetc(s);
 
         while (*NUMBER_1_INTEGER) {
