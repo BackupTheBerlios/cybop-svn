@@ -7,14 +7,19 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.28 $ $Date: 2008-03-29 19:22:51 $ $Author: christian $
+# @version $Revision: 1.29 $ $Date: 2008-03-30 10:49:22 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * continue debugging in "checker.c"; UI example key presses are not detected yet,
-            because the "receive_message()" function call needs to be uncommented!
+        * continue debugging in function "check_signal" of module "checker.c":
+            - UI example key presses are not detected yet
+            - implement in parallel "receive" for gnu/linux console, x window system, socket
+            - NEW IDEA: hand over "receive" knowledge model as "handler" property of the "sense" operation in CYBOL!
+                --> then just call this knowledge model, no matter what it is
+                --> advantage: properties (like a compound structure to store commands)
+                    exist as details in the "receive" knowledge model
 
-        * Commands MUESSEN uebergeben werden
+        * Commands of gnu/linux console MUESSEN uebergeben werden
         * Suche nach gedrueckter Taste in commands
         * Wenn returned command == NULL, dann suche nach "default" in commands
             (ist Aktion zum Einfuegen von Zeichen an aktueller Cursor-Position im CYBOI knowledge model)

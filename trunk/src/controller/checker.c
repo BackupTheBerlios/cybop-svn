@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.40 $ $Date: 2008-03-29 19:22:51 $ $Author: christian $
+ * @version $Revision: 1.41 $ $Date: 2008-03-30 10:49:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -359,7 +359,7 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3,
 
                                 if (**((int**) gnu_linux_console_irq) != *NUMBER_0_INTEGER) {
 
-                                    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Detected gnu linux console interrupt.");
+                                    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Detected gnu/linux console interrupt.");
 
                                     // Set channel.
                                     *c = GNU_LINUX_CONSOLE_MODEL;
@@ -615,6 +615,28 @@ void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
     // Get index of the top priority signal.
     get_highest_priority_signal_index(p4, p5, (void*) &i);
 
+    // There are various possibilities to process signals.
+    //
+    // 1 First process all signals found in the signal memory
+    // and only then check interrupts for new input.
+    // The drawback of this solution is that the processing of a signal with
+    // a long processing time cannot be interrupted by a key press or mouse click,
+    // since these are not recognised as long as the interrupt flags are not checked.
+    //
+    // 2 First check for and process all interrupts
+    // and only then process the signals found in signal memory.
+    // The drawback here might be that the system never comes to processing signals,
+    // for example when acting as web server with thousands of client requests.
+    // In this case, the client requests in form of socket interrupts would be
+    // processed on and on and only if no more client requests could be found,
+    // the actual signals in the signal memory would be processed.
+    //
+    // Further alternatives are welcome!
+    //
+    // The current solution implemented here is number 1.
+    // An alternative for the future might be number 2
+    // (just exchange the following two if-else blocks of source code).
+
     if (i >= *NUMBER_0_INTEGER) {
 
     fprintf(stderr, "TEST index of signal with highest priority: %i\n", i);
@@ -680,20 +702,40 @@ void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
             // Unlock cyboi service mutex.
             pthread_mutex_unlock(mt);
 
+            // REFLEXION: The single input threads deliver various kinds of input:
+            // - gnu/linux console: a sequence of input commands (key presses) as stored in the keyboard buffer
+            // - x window system: just one command (key press or mouse click etc.)
+            // - socket: just one command (action handed over in URL or form data via GET or POST)
+            //
+            // When programming this part, it had to be decided how to store the multiple
+            // input commands received from gnu/linux console. Possible options were:
+            // 1 only read the first command and ignore all others
+            //   --> NOT good because the user expects that all key presses are registered
+            //   and not just forgotten, so that s/he doesn't have to repeat them
+            // 2 create a new signal for each command and store them in signal memory
+            //   --> NOT good because the data received e.g. over socket are temporary
+            //       and get destroyed/ overwritten with each new (socket) data reception;
+            //       but since the generated signals may rely on and reference these temporary data,
+            //       the commands have to be handled AT ONCE, without generating signals first
+            //       (therefore, the "handle" function is called directly below)
+            // 3 create a temporary compound structure and add the single commands
+
             // Receive signal data (message) via the given channel.
+/*??
             receive_with_parameters(p0, (void*) m, (void*) mc, (void*) ms, (void*) d, (void*) dc, (void*) ds,
                 *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
                 *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
                 *NULL_POINTER, *NULL_POINTER, c, (void*) &cc);
+*/
+
+            //?? OPEN QUESTION: How to retrieve the correct "receive" function as knowledge model?
+            //?? It was handed over as property to the "sense" operation.
+            //?? Either store it in the internal memory or get it somehow else?
 
             // Handle signal.
             //
             // CAUTION! The "handle" function has to be called DIRECTLY here!
-            // Placing a new signal in the signal memory will mostly not work correctly,
-            // because the data received e.g. over socket are temporary and get deleted
-            // each time, yet BEFORE receiving NEW data over socket.
-            // But since the signal parses and references these temporary data,
-            // the system will not process the signal correctly, if the data have been destroyed.
+            // For reasons, see the comment block above!
             handle(p0, p1, p2, p3, p4, p5, p6, p7, *signal_memory_irq, *signal_memory_mutex, *a, *ac, *m, *mc, *d, *dc, p, id, &x);
 
             // An interrupt request was detected and the corresponding data received.
