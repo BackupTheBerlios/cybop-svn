@@ -7,11 +7,42 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.29 $ $Date: 2008-03-30 10:49:22 $ $Author: christian $
+# @version $Revision: 1.30 $ $Date: 2008-04-11 16:08:49 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * continue debugging in function "check_signal" of module "checker.c":
+2008-04-??  Christian Heller  <christian.heller@tuxtax.de>
+        * Edit "checker.check" function:
+            - Create special handler variables for tui/ gui/ wui etc. signal reception,
+                which may be called "gnu_linux_console_handler", "x_window_system_handler" etc.
+            - Add these handler variables to the internal_memory
+        * Edit "sense" function:
+            - Hand over the corresponding knowledge model representing/ pointing to
+                CYBOL "receive" operation, as property/ parameter to the "sense" operation
+            - Add that "receive" model to the corresponding handler variable read from
+                internal memory, yet BEFORE the thread is activated in the line after
+            - Set "receive" model in internal memory to NULL in "interrupt" (stop sensing) function,
+                but do NOT destroy, since it belongs to the knowledge model tree
+        * Edit "checker.check_signal" function:
+            - Read the corresponding handler (receive operation) from internal memory
+                (or possibly handed over as parameter to the function),
+                if an IRQ flag has been set
+            - Forward that handler (receive operation) to the "handle" function,
+                in order to be handled as (compound) operation, just like other signals
+        * Edit "receive_message" function:
+            - Make "receive" operation/ function responsible for parsing the given array,
+                in order to identify e.g. a key that was pressed or mouse action etc.
+            - Keep in mind that one of the "receive" operation's properties/ parameters
+                (as coming originally from a CYBOL file)
+                is the list of commands with knowledge model paths mapped to them
+            - Read the actual command from the list of commands now
+            - Call the "handle" function handing over the command determined before
+                (do this DIRECTLY, just like the "loop" and "branch" functions do,
+                and NOT in form of an encapsulating signal)
+
+--
+
+        * Continue debugging in function "check_signal" of module "checker.c":
             - UI example key presses are not detected yet
             - implement in parallel "receive" for gnu/linux console, x window system, socket
             - NEW IDEA: hand over "receive" knowledge model as "handler" property of the "sense" operation in CYBOL!
