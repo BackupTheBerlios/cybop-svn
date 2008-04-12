@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.10 $ $Date: 2007-12-01 23:57:42 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2008-04-12 17:03:23 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -536,6 +536,11 @@ static int* SEND_URL_NAME_COUNT = NUMBER_3_INTEGER_ARRAY;
 static char RECEIVE_CHANNEL_NAME_ARRAY[] = {'c', 'h', 'a', 'n', 'n', 'e', 'l'};
 static char* RECEIVE_CHANNEL_NAME = RECEIVE_CHANNEL_NAME_ARRAY;
 static int* RECEIVE_CHANNEL_NAME_COUNT = NUMBER_7_INTEGER_ARRAY;
+
+/** The receive handler name. */
+static char RECEIVE_HANDLER_NAME_ARRAY[] = {'h', 'a', 'n', 'd', 'l', 'e', 'r'};
+static char* RECEIVE_HANDLER_NAME = RECEIVE_HANDLER_NAME_ARRAY;
+static int* RECEIVE_HANDLER_NAME_COUNT = NUMBER_7_INTEGER_ARRAY;
 
 /** The receive language name. */
 static char RECEIVE_LANGUAGE_NAME_ARRAY[] = {'l', 'a', 'n', 'g', 'u', 'a', 'g', 'e'};

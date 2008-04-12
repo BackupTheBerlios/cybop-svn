@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.46 $ $Date: 2008-03-29 19:22:51 $ $Author: christian $
+ * @version $Revision: 1.47 $ $Date: 2008-04-12 17:03:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -47,32 +47,33 @@
  * Receives a message via the given channel.
  *
  * @param p0 the internal memory
- * @param p1 the model (Hand over as reference!)
- * @param p2 the model count (Hand over as reference!)
- * @param p3 the model size (Hand over as reference!)
- * @param p4 the details (Hand over as reference!)
- * @param p5 the details count (Hand over as reference!)
- * @param p6 the details size (Hand over as reference!)
- * @param p7 the root
- * @param p8 the root count
- * @param p9 the root size
- * @param p10 the commands
- * @param p11 the commands count
- * @param p12 the commands size
- * @param p13 the message
- * @param p14 the message count
- * @param p15 the meta message
- * @param p16 the meta message count
- * @param p17 the language
- * @param p18 the language count
- * @param p19 the socket communication style
- * @param p20 the socket communication style count
- * @param p21 the channel
- * @param p22 the channel count
+ * @param p1 the knowledge memory
+ * @param p2 the knowledge memory count
+ * @param p3 the model (Hand over as reference!)
+ * @param p4 the model count (Hand over as reference!)
+ * @param p5 the model size (Hand over as reference!)
+ * @param p6 the details (Hand over as reference!)
+ * @param p7 the details count (Hand over as reference!)
+ * @param p8 the details size (Hand over as reference!)
+ * @param p9 the root
+ * @param p10 the root count
+ * @param p11 the root size
+ * @param p12 the commands
+ * @param p13 the commands count
+ * @param p14 the message
+ * @param p15 the message count
+ * @param p16 the meta message
+ * @param p17 the meta message count
+ * @param p18 the language
+ * @param p19 the language count
+ * @param p20 the socket communication style
+ * @param p21 the socket communication style count
+ * @param p22 the channel
+ * @param p23 the channel count
  */
 void receive_with_parameters(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
     void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14, void* p15, void* p16,
-    void* p17, void* p18, void* p19, void* p20, void* p21, void* p22) {
+    void* p17, void* p18, void* p19, void* p20, void* p21, void* p22, void* p23) {
 
     log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Receive message with given parameters.");
 
@@ -81,7 +82,7 @@ void receive_with_parameters(void* p0, void* p1, void* p2, void* p3, void* p4, v
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p21, p22, (void*) FILE_SYSTEM_MODEL, (void*) FILE_SYSTEM_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p22, p23, (void*) FILE_SYSTEM_MODEL, (void*) FILE_SYSTEM_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
@@ -90,7 +91,7 @@ void receive_with_parameters(void* p0, void* p1, void* p2, void* p3, void* p4, v
             // CAUTION! The details are handed over as well, since sometimes,
             // they are read from the message together with the model, for
             // example when converting from a file in xdt format.
-            receive_file_system(p1, p2, p3, p4, p5, p6, p13, p14, p17, p18);
+            receive_file_system(p3, p4, p5, p6, p7, p8, p14, p15, p18, p19);
 
             // Receive details by reading meta message data.
             //
@@ -105,13 +106,13 @@ void receive_with_parameters(void* p0, void* p1, void* p2, void* p3, void* p4, v
             //     <property name="meta" channel="inline" abstraction="character" model="residenz/wui/address_table_row_properties.cybol"/>
             //     <property name="model" channel="inline" abstraction="encapsulated" model=".residenz.temporary.translation.translate_record_to_wui.wui_patient_row"/>
             // </part>
-            receive_file_system(p4, p5, p6, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, p15, p16, p17, p18);
+            receive_file_system(p6, p7, p8, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, p16, p17, p18, p19);
         }
     }
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p21, p22, (void*) GNU_LINUX_CONSOLE_MODEL, (void*) GNU_LINUX_CONSOLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p22, p23, (void*) GNU_LINUX_CONSOLE_MODEL, (void*) GNU_LINUX_CONSOLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
@@ -121,13 +122,13 @@ void receive_with_parameters(void* p0, void* p1, void* p2, void* p3, void* p4, v
             // Get gnu/linux console input stream.
             get_array_elements(p0, (void*) GNU_LINUX_CONSOLE_INPUT_FILE_DESCRIPTOR_INTERNAL, (void*) &is, (void*) POINTER_ARRAY);
 
-            receive_gnu_linux_console(NULL_POINTER, NULL_POINTER, NULL_POINTER, NULL_POINTER, NULL_POINTER, NULL_POINTER, p1, p2, p3, p4, p5, p6, *is);
+            receive_gnu_linux_console(NULL_POINTER, NULL_POINTER, NULL_POINTER, NULL_POINTER, NULL_POINTER, NULL_POINTER, p3, p4, p5, p6, p7, p8, *is, p12, p13, p1, p2);
         }
     }
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p21, p22, (void*) X_WINDOW_SYSTEM_MODEL, (void*) X_WINDOW_SYSTEM_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p22, p23, (void*) X_WINDOW_SYSTEM_MODEL, (void*) X_WINDOW_SYSTEM_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
@@ -137,7 +138,7 @@ void receive_with_parameters(void* p0, void* p1, void* p2, void* p3, void* p4, v
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p21, p22, (void*) WWW_SERVICE_MODEL, (void*) WWW_SERVICE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p22, p23, (void*) WWW_SERVICE_MODEL, (void*) WWW_SERVICE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
@@ -151,7 +152,7 @@ void receive_with_parameters(void* p0, void* p1, void* p2, void* p3, void* p4, v
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p21, p22, (void*) CYBOI_SERVICE_MODEL, (void*) CYBOI_SERVICE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p22, p23, (void*) CYBOI_SERVICE_MODEL, (void*) CYBOI_SERVICE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
@@ -165,7 +166,7 @@ void receive_with_parameters(void* p0, void* p1, void* p2, void* p3, void* p4, v
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p21, p22, (void*) LATEX_MODEL, (void*) LATEX_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p22, p23, (void*) LATEX_MODEL, (void*) LATEX_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
@@ -441,7 +442,7 @@ void receive_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5)
         p3, p4);
 
     // Receive data using the parameters determined above.
-    receive_with_parameters(p2, (void*) mom, *momc, *moms, (void*) mod, *modc, *mods, *rm, *rmc, *rms,
+    receive_with_parameters(p2, p3, p4, (void*) mom, *momc, *moms, (void*) mod, *modc, *mods, *rm, *rmc, *rms,
         *com, *comc, *coms, *mm, *mmc, *mem, *memc, *lm, *lmc, (void*) stm, (void*) stmc, *cm, *cmc);
 }
 

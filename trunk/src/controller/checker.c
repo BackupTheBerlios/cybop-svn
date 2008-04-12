@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.41 $ $Date: 2008-03-30 10:49:22 $ $Author: christian $
+ * @version $Revision: 1.42 $ $Date: 2008-04-12 17:03:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -258,39 +258,90 @@ void check_wait(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 /**
  * Checks for interrupt requests.
  *
- * @param p0 the channel (Hand over as reference!)
- * @param p1 the channel count
- * @param p2 the interrupt request flag (Hand over as reference!)
- * @param p3 the mutex (Hand over as reference!)
- * @param p4 the signal memory interrupt request flag (Hand over as reference!)
- * @param p5 the signal memory mutex (Hand over as reference!)
- * @param p6 the gnu/linux console interrupt request flag (Hand over as reference!)
- * @param p7 the gnu/linux console mutex (Hand over as reference!)
- * @param p8 the x window system interrupt request flag (Hand over as reference!)
- * @param p9 the x window system mutex (Hand over as reference!)
- * @param p10 the www service interrupt request flag (Hand over as reference!)
- * @param p11 the www service mutex (Hand over as reference!)
- * @param p12 the cyboi service interrupt request flag (Hand over as reference!)
- * @param p13 the cyboi service mutex (Hand over as reference!)
+ * @param p0 the interrupt request flag (Hand over as reference!)
+ * @param p1 the mutex (Hand over as reference!)
+ * @param p2 the handler abstraction (Hand over as reference!)
+ * @param p3 the handler abstraction count (Hand over as reference!)
+ * @param p4 the handler model (Hand over as reference!)
+ * @param p5 the handler model count (Hand over as reference!)
+ * @param p6 the handler details (Hand over as reference!)
+ * @param p7 the handler details count (Hand over as reference!)
+ * @param p8 the signal memory interrupt request flag (Hand over as reference!)
+ * @param p9 the signal memory mutex (Hand over as reference!)
+ * @param p10 the gnu/linux console interrupt request flag (Hand over as reference!)
+ * @param p11 the gnu/linux console mutex (Hand over as reference!)
+ * @param p12 the gnu/linux console handler abstraction (Hand over as reference!)
+ * @param p13 the gnu/linux console handler abstraction count (Hand over as reference!)
+ * @param p14 the gnu/linux console handler model (Hand over as reference!)
+ * @param p15 the gnu/linux console handler model count (Hand over as reference!)
+ * @param p16 the gnu/linux console handler details (Hand over as reference!)
+ * @param p17 the gnu/linux console handler details count (Hand over as reference!)
+ * @param p18 the x window system interrupt request flag (Hand over as reference!)
+ * @param p19 the x window system mutex (Hand over as reference!)
+ * @param p20 the x window system handler abstraction (Hand over as reference!)
+ * @param p21 the x window system handler abstraction count (Hand over as reference!)
+ * @param p22 the x window system handler model (Hand over as reference!)
+ * @param p23 the x window system handler model count (Hand over as reference!)
+ * @param p24 the x window system handler details (Hand over as reference!)
+ * @param p25 the x window system handler details count (Hand over as reference!)
+ * @param p26 the www service interrupt request flag (Hand over as reference!)
+ * @param p27 the www service mutex (Hand over as reference!)
+ * @param p28 the www service handler abstraction (Hand over as reference!)
+ * @param p29 the www service handler abstraction count (Hand over as reference!)
+ * @param p30 the www service handler model (Hand over as reference!)
+ * @param p31 the www service handler model count (Hand over as reference!)
+ * @param p32 the www service handler details (Hand over as reference!)
+ * @param p33 the www service handler details count (Hand over as reference!)
+ * @param p34 the cyboi service interrupt request flag (Hand over as reference!)
+ * @param p35 the cyboi service mutex (Hand over as reference!)
+ * @param p36 the cyboi service handler abstraction (Hand over as reference!)
+ * @param p37 the cyboi service handler abstraction count (Hand over as reference!)
+ * @param p38 the cyboi service handler model (Hand over as reference!)
+ * @param p39 the cyboi service handler model count (Hand over as reference!)
+ * @param p40 the cyboi service handler details (Hand over as reference!)
+ * @param p41 the cyboi service handler details count (Hand over as reference!)
  */
-void check_interrupts(void* p0, void* p1, void* p2, void* p3,
-    void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13) {
+void check_interrupts(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7,
+    void* p8, void* p9,
+    void* p10, void* p11, void* p12, void* p13, void* p14, void* p15, void* p16, void* p17,
+    void* p18, void* p19, void* p20, void* p21, void* p22, void* p23, void* p24, void* p25,
+    void* p26, void* p27, void* p28, void* p29, void* p30, void* p31, void* p32, void* p33,
+    void* p34, void* p35, void* p36, void* p37, void* p38, void* p39, void* p40, void* p41) {
 
-    if (p3 != *NULL_POINTER) {
+    if (p7 != *NULL_POINTER) {
 
-        void** mt = (void**) p3;
+        void** dc = (void**) p7;
 
-        if (p2 != *NULL_POINTER) {
+        if (p6 != *NULL_POINTER) {
 
-            void** irq = (void**) p2;
+            void** d = (void**) p6;
 
-            if (p1 != *NULL_POINTER) {
+            if (p5 != *NULL_POINTER) {
 
-                int* cc = (int*) p1;
+                void** mc = (void**) p5;
 
-                if (p0 != *NULL_POINTER) {
+                if (p4 != *NULL_POINTER) {
 
-                    void** c = (void**) p0;
+                    void** m = (void**) p4;
+
+                    if (p3 != *NULL_POINTER) {
+
+                        void** ac = (void**) p3;
+
+                        if (p2 != *NULL_POINTER) {
+
+                            void** a = (void**) p2;
+
+                            if (p1 != *NULL_POINTER) {
+
+                                void** mt = (void**) p1;
+
+                                if (p0 != *NULL_POINTER) {
+
+                                    void** irq = (void**) p0;
+
+                                    //?? TODO: Use "set_pointer_array" functions instead of setting values directly below!?
+                                    //?? This would also make the casts above superfluous.
 
                     log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Check for interrupt requests.");
 
@@ -547,51 +598,78 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3,
  * @param p10 the signal memory sleep time (Hand over as reference!)
  * @param p11 the gnu/linux console interrupt request flag (Hand over as reference!)
  * @param p12 the gnu/linux console mutex (Hand over as reference!)
- * @param p13 the x window system interrupt request flag (Hand over as reference!)
- * @param p14 the x window system mutex (Hand over as reference!)
- * @param p15 the www service interrupt request flag (Hand over as reference!)
- * @param p16 the www service mutex (Hand over as reference!)
- * @param p17 the cyboi service interrupt request flag (Hand over as reference!)
- * @param p18 the cyboi service mutex (Hand over as reference!)
- * @param p19 the model (Hand over as reference!)
- * @param p20 the model count (Hand over as reference!)
- * @param p21 the model size (Hand over as reference!)
- * @param p22 the details (Hand over as reference!)
- * @param p23 the details count (Hand over as reference!)
- * @param p24 the details size (Hand over as reference!)
- * @param p25 the commands (Hand over as reference!)
- * @param p26 the commands count (Hand over as reference!)
- * @param p27 the language (Hand over as reference!)
- * @param p28 the language count (Hand over as reference!)
- * @param p29 the style (Hand over as reference!)
- * @param p30 the style count (Hand over as reference!)
- * @param p31 the buffer (Hand over as reference!)
- * @param p32 the buffer count (Hand over as reference!)
- * @param p33 the buffer size (Hand over as reference!)
+ * @param p13 the gnu/linux console handler abstraction (Hand over as reference!)
+ * @param p14 the gnu/linux console handler abstraction count (Hand over as reference!)
+ * @param p15 the gnu/linux console handler model (Hand over as reference!)
+ * @param p16 the gnu/linux console handler model count (Hand over as reference!)
+ * @param p17 the gnu/linux console handler details (Hand over as reference!)
+ * @param p18 the gnu/linux console handler details count (Hand over as reference!)
+ * @param p19 the x window system interrupt request flag (Hand over as reference!)
+ * @param p20 the x window system mutex (Hand over as reference!)
+ * @param p21 the x window system handler abstraction (Hand over as reference!)
+ * @param p22 the x window system handler abstraction count (Hand over as reference!)
+ * @param p23 the x window system handler model (Hand over as reference!)
+ * @param p24 the x window system handler model count (Hand over as reference!)
+ * @param p25 the x window system handler details (Hand over as reference!)
+ * @param p26 the x window system handler details count (Hand over as reference!)
+ * @param p27 the www service interrupt request flag (Hand over as reference!)
+ * @param p28 the www service mutex (Hand over as reference!)
+ * @param p29 the www service handler abstraction (Hand over as reference!)
+ * @param p30 the www service handler abstraction count (Hand over as reference!)
+ * @param p31 the www service handler model (Hand over as reference!)
+ * @param p32 the www service handler model count (Hand over as reference!)
+ * @param p33 the www service handler details (Hand over as reference!)
+ * @param p34 the www service handler details count (Hand over as reference!)
+ * @param p35 the cyboi service interrupt request flag (Hand over as reference!)
+ * @param p36 the cyboi service mutex (Hand over as reference!)
+ * @param p37 the cyboi service handler abstraction (Hand over as reference!)
+ * @param p38 the cyboi service handler abstraction count (Hand over as reference!)
+ * @param p39 the cyboi service handler model (Hand over as reference!)
+ * @param p40 the cyboi service handler model count (Hand over as reference!)
+ * @param p41 the cyboi service handler details (Hand over as reference!)
+ * @param p42 the cyboi service handler details count (Hand over as reference!)
+--
+ * @param p23 the model (Hand over as reference!)
+ * @param p24 the model count (Hand over as reference!)
+ * @param p25 the model size (Hand over as reference!)
+ * @param p26 the details (Hand over as reference!)
+ * @param p27 the details count (Hand over as reference!)
+ * @param p28 the details size (Hand over as reference!)
+ * @param p29 the commands (Hand over as reference!)
+ * @param p30 the commands count (Hand over as reference!)
+ * @param p31 the language (Hand over as reference!)
+ * @param p32 the language count (Hand over as reference!)
+ * @param p33 the style (Hand over as reference!)
+ * @param p34 the style count (Hand over as reference!)
+ * @param p35 the buffer (Hand over as reference!)
+ * @param p36 the buffer count (Hand over as reference!)
+ * @param p37 the buffer size (Hand over as reference!)
  */
-void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
-    void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14, void* p15, void* p16, void* p17,
-    void* p18, void* p19, void* p20, void* p21, void* p22, void* p23, void* p24, void* p25, void* p26, void* p27, void* p28, void* p29,
-    void* p30, void* p31, void* p32, void* p33) {
+void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7,
+    void* p8, void* p9, void* p10,
+    void* p11, void* p12, void* p13, void* p14, void* p15, void* p16, void* p17, void* p18,
+    void* p19, void* p20, void* p21, void* p22, void* p23, void* p24, void* p25, void* p26,
+    void* p27, void* p28, void* p29, void* p30, void* p31, void* p32, void* p33, void* p34,
+    void* p35, void* p36, void* p37, void* p38, void* p39, void* p40, void* p41, void* p42) {
 
     log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "\n\n");
     log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Check for signal with highest priority and otherwise, for interrupts.");
 
     // The interrupts and mutexes.
     //
-    // CAUTION! These have to be handed over as REFERENCE, since their values
-    // get manipulated in the "check_interrupts" function called further below!
+    // CAUTION! These have to be handed over as REFERENCE to this function,
+    // since their values get manipulated in the "check_interrupts" function called further below!
     void** signal_memory_irq = (void**) p8;
     void** signal_memory_mutex = (void**) p9;
     void** signal_memory_sleep_time = (void**) p10;
     void** gnu_linux_console_irq = (void**) p11;
     void** gnu_linux_console_mutex = (void**) p12;
-    void** x_window_system_irq = (void**) p13;
-    void** x_window_system_mutex = (void**) p14;
-    void** www_service_irq = (void**) p15;
-    void** www_service_mutex = (void**) p16;
-    void** cyboi_service_irq = (void**) p17;
-    void** cyboi_service_mutex = (void**) p18;
+    void** x_window_system_irq = (void**) p14;
+    void** x_window_system_mutex = (void**) p15;
+    void** www_service_irq = (void**) p17;
+    void** www_service_mutex = (void**) p18;
+    void** cyboi_service_irq = (void**) p20;
+    void** cyboi_service_mutex = (void**) p21;
 
     // The signal abstraction, model, details.
     void** a = NULL_POINTER;
@@ -667,19 +745,21 @@ void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
         // The signal memory is empty, so that the cyboi system
         // may check for new interrupt requests now.
 
-        // The channel.
-        void* c = *NULL_POINTER;
-        int cc = *NUMBER_0_INTEGER;
-        // The mutex.
-        pthread_mutex_t* mt = (pthread_mutex_t*) *NULL_POINTER;
         // The interrupt request flag.
         int* irq = (int*) *NULL_POINTER;
+        // The mutex.
+        pthread_mutex_t* mt = (pthread_mutex_t*) *NULL_POINTER;
 
         // Check interrupt request flags and get the appropriate:
-        // - channel (to be forwarded to the "receive" function below)
         // - interrupt request flag (to be reset below)
         // - mutex (to be blocked while resetting the interrupt request flag below)
-        check_interrupts((void*) &c, (void*) &cc, (void*) &irq, (void*) &mt, p8, p9, p11, p12, p13, p14, p15, p16, p17, p18);
+        // - handler (to be forwarded to the "handle" function below)
+        check_interrupts((void*) &irq, (void*) &mt, (void*) &a, (void*) &ac, (void*) &m, (void*) &mc, (void*) &d, (void*) &dc,
+            p8, p9,
+            p11, p12, p13, p14, p15, p16, p17, p18,
+            p19, p20, p21, p22, p23, p24, p25, p26,
+            p27, p28, p29, p30, p31, p32, p33, p34,
+            p35, p36, p37, p38, p39, p40, p41, p42);
 
         if ((irq != *NULL_POINTER) && (*irq != *NUMBER_0_INTEGER)) {
 
@@ -811,19 +891,68 @@ void check(void* p0) {
     void** gnu_linux_console_irq = NULL_POINTER;
     // The gnu/linux console mutex.
     void** gnu_linux_console_mutex = NULL_POINTER;
+    // The gnu/linux console handler abstraction.
+    void** gnu_linux_console_handler_a = NULL_POINTER;
+    // The gnu/linux console handler abstraction count.
+    void** gnu_linux_console_handler_ac = NULL_POINTER;
+    // The gnu/linux console handler model.
+    void** gnu_linux_console_handler_m = NULL_POINTER;
+    // The gnu/linux console handler model count.
+    void** gnu_linux_console_handler_mc = NULL_POINTER;
+    // The gnu/linux console handler details.
+    void** gnu_linux_console_handler_d = NULL_POINTER;
+    // The gnu/linux console handler details count.
+    void** gnu_linux_console_handler_dc = NULL_POINTER;
     // The x window system interrupt request flag.
     void** x_window_system_irq = NULL_POINTER;
-    // The signal memory mutex.
+    // The x window system mutex.
     void** x_window_system_mutex = NULL_POINTER;
+    // The x window system handler abstraction.
+    void** x_window_system_handler_a = NULL_POINTER;
+    // The x window system handler abstraction count.
+    void** x_window_system_handler_ac = NULL_POINTER;
+    // The x window system handler model.
+    void** x_window_system_handler_m = NULL_POINTER;
+    // The x window system handler model count.
+    void** x_window_system_handler_mc = NULL_POINTER;
+    // The x window system handler details.
+    void** x_window_system_handler_d = NULL_POINTER;
+    // The x window system handler details count.
+    void** x_window_system_handler_dc = NULL_POINTER;
     // The www service interrupt request flag.
     void** www_service_irq = NULL_POINTER;
     // The www service mutex.
     void** www_service_mutex = NULL_POINTER;
+    // The www service handler abstraction.
+    void** www_service_handler_a = NULL_POINTER;
+    // The www service handler abstraction count.
+    void** www_service_handler_ac = NULL_POINTER;
+    // The www service handler model.
+    void** www_service_handler_m = NULL_POINTER;
+    // The www service handler model count.
+    void** www_service_handler_mc = NULL_POINTER;
+    // The www service handler details.
+    void** www_service_handler_d = NULL_POINTER;
+    // The www service handler details count.
+    void** www_service_handler_dc = NULL_POINTER;
     // The cyboi service interrupt request flag.
     void** cyboi_service_irq = NULL_POINTER;
     // The cyboi service mutex.
     void** cyboi_service_mutex = NULL_POINTER;
+    // The cyboi service handler abstraction.
+    void** cyboi_service_handler_a = NULL_POINTER;
+    // The cyboi service handler abstraction count.
+    void** cyboi_service_handler_ac = NULL_POINTER;
+    // The cyboi service handler model.
+    void** cyboi_service_handler_m = NULL_POINTER;
+    // The cyboi service handler model count.
+    void** cyboi_service_handler_mc = NULL_POINTER;
+    // The cyboi service handler details.
+    void** cyboi_service_handler_d = NULL_POINTER;
+    // The cyboi service handler details count.
+    void** cyboi_service_handler_dc = NULL_POINTER;
 
+/*??
     // The model.
     void** m = NULL_POINTER;
     void** mc = NULL_POINTER;
@@ -848,6 +977,7 @@ void check(void* p0) {
     // The maximum buffer size.
     // CAUTION! A message MUST NOT be longer!
     void** bs = NULL_POINTER;
+*/
 
     // Get knowledge memory internals.
     get_element(p0, (void*) KNOWLEDGE_MEMORY_INTERNAL, (void*) &k, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
@@ -867,23 +997,84 @@ void check(void* p0) {
     get_element(p0, (void*) GNU_LINUX_CONSOLE_INTERRUPT_REQUEST_INTERNAL, (void*) &gnu_linux_console_irq, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     // Get gnu/linux console mutex.
     get_element(p0, (void*) GNU_LINUX_CONSOLE_MUTEX_INTERNAL, (void*) &gnu_linux_console_mutex, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    // Get gnu/linux console handler abstraction.
+    get_element(p0, (void*) GNU_LINUX_CONSOLE_HANDLER_ABSTRACTION_INTERNAL, (void*) &gnu_linux_console_handler_a, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    // Get gnu/linux console handler abstraction count.
+    get_element(p0, (void*) GNU_LINUX_CONSOLE_HANDLER_ABSTRACTION_COUNT_INTERNAL, (void*) &gnu_linux_console_handler_ac, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    // Get gnu/linux console handler model.
+    get_element(p0, (void*) GNU_LINUX_CONSOLE_HANDLER_MODEL_INTERNAL, (void*) &gnu_linux_console_handler_m, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    // Get gnu/linux console handler model count.
+    get_element(p0, (void*) GNU_LINUX_CONSOLE_HANDLER_MODEL_COUNT_INTERNAL, (void*) &gnu_linux_console_handler_mc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    // Get gnu/linux console handler details.
+    get_element(p0, (void*) GNU_LINUX_CONSOLE_HANDLER_DETAILS_INTERNAL, (void*) &gnu_linux_console_handler_d, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    // Get gnu/linux console handler details count.
+    get_element(p0, (void*) GNU_LINUX_CONSOLE_HANDLER_DETAILS_COUNT_INTERNAL, (void*) &gnu_linux_console_handler_dc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     // Get x window system interrupt request flag.
     get_element(p0, (void*) X_WINDOW_SYSTEM_INTERRUPT_REQUEST_INTERNAL, (void*) &x_window_system_irq, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     // Get x window system mutex.
     get_element(p0, (void*) X_WINDOW_SYSTEM_MUTEX_INTERNAL, (void*) &x_window_system_mutex, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    // Get x window system handler abstraction.
+    get_element(p0, (void*) X_WINDOW_SYSTEM_HANDLER_ABSTRACTION_INTERNAL, (void*) &x_window_system_handler_a, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    // Get x window system handler abstraction count.
+    get_element(p0, (void*) X_WINDOW_SYSTEM_HANDLER_ABSTRACTION_COUNT_INTERNAL, (void*) &x_window_system_handler_ac, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    // Get x window system handler model.
+    get_element(p0, (void*) X_WINDOW_SYSTEM_HANDLER_MODEL_INTERNAL, (void*) &x_window_system_handler_m, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    // Get x window system handler model count.
+    get_element(p0, (void*) X_WINDOW_SYSTEM_HANDLER_MODEL_COUNT_INTERNAL, (void*) &x_window_system_handler_mc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    // Get x window system handler details.
+    get_element(p0, (void*) X_WINDOW_SYSTEM_HANDLER_DETAILS_INTERNAL, (void*) &x_window_system_handler_d, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    // Get x window system handler details count.
+    get_element(p0, (void*) X_WINDOW_SYSTEM_HANDLER_DETAILS_COUNT_INTERNAL, (void*) &x_window_system_handler_dc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     // Get www service interrupt request flag.
     i = *WWW_BASE_INTERNAL + *SOCKET_INTERRUPT_REQUEST_INTERNAL;
     get_element(p0, (void*) &i, (void*) &www_service_irq, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     // Get www service mutex.
     i = *WWW_BASE_INTERNAL + *SOCKET_MUTEX_INTERNAL;
     get_element(p0, (void*) &i, (void*) &www_service_mutex, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    // Get www service handler abstraction.
+    i = *WWW_BASE_INTERNAL + *SOCKET_HANDLER_ABSTRACTION_INTERNAL;
+    get_element(p0, (void*) &i, (void*) &www_service_handler_a, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    // Get www service handler abstraction count.
+    i = *WWW_BASE_INTERNAL + *SOCKET_HANDLER_ABSTRACTION_COUNT_INTERNAL;
+    get_element(p0, (void*) &i, (void*) &www_service_handler_ac, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    // Get www service handler model.
+    i = *WWW_BASE_INTERNAL + *SOCKET_HANDLER_MODEL_INTERNAL;
+    get_element(p0, (void*) &i, (void*) &www_service_handler_m, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    // Get www service handler model count.
+    i = *WWW_BASE_INTERNAL + *SOCKET_HANDLER_MODEL_COUNT_INTERNAL;
+    get_element(p0, (void*) &i, (void*) &www_service_handler_mc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    // Get www service handler details.
+    i = *WWW_BASE_INTERNAL + *SOCKET_HANDLER_DETAILS_INTERNAL;
+    get_element(p0, (void*) &i, (void*) &www_service_handler_d, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    // Get www service handler details count.
+    i = *WWW_BASE_INTERNAL + *SOCKET_HANDLER_DETAILS_COUNT_INTERNAL;
+    get_element(p0, (void*) &i, (void*) &www_service_handler_dc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     // Get cyboi service interrupt request flag.
     i = *CYBOI_BASE_INTERNAL + *SOCKET_INTERRUPT_REQUEST_INTERNAL;
     get_element(p0, (void*) &i, (void*) &cyboi_service_irq, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     // Get cyboi service mutex.
     i = *CYBOI_BASE_INTERNAL + *SOCKET_MUTEX_INTERNAL;
     get_element(p0, (void*) &i, (void*) &cyboi_service_mutex, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    // Get cyboi service handler abstraction.
+    i = *CYBOI_BASE_INTERNAL + *SOCKET_HANDLER_ABSTRACTION_INTERNAL;
+    get_element(p0, (void*) &i, (void*) &cyboi_service_handler_a, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    // Get cyboi service handler abstraction count.
+    i = *CYBOI_BASE_INTERNAL + *SOCKET_HANDLER_ABSTRACTION_COUNT_INTERNAL;
+    get_element(p0, (void*) &i, (void*) &cyboi_service_handler_ac, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    // Get cyboi service handler model.
+    i = *CYBOI_BASE_INTERNAL + *SOCKET_HANDLER_MODEL_INTERNAL;
+    get_element(p0, (void*) &i, (void*) &cyboi_service_handler_m, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    // Get cyboi service handler model count.
+    i = *CYBOI_BASE_INTERNAL + *SOCKET_HANDLER_MODEL_COUNT_INTERNAL;
+    get_element(p0, (void*) &i, (void*) &cyboi_service_handler_mc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    // Get cyboi service handler details.
+    i = *CYBOI_BASE_INTERNAL + *SOCKET_HANDLER_DETAILS_INTERNAL;
+    get_element(p0, (void*) &i, (void*) &cyboi_service_handler_d, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    // Get cyboi service handler details count.
+    i = *CYBOI_BASE_INTERNAL + *SOCKET_HANDLER_DETAILS_COUNT_INTERNAL;
+    get_element(p0, (void*) &i, (void*) &cyboi_service_handler_dc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
+/*??
     int base = *CYBOI_BASE_INTERNAL;
 
     // Get model.
@@ -923,6 +1114,7 @@ void check(void* p0) {
     get_element(p0, (void*) &i, (void*) &bc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     i = base + *SOCKET_CHARACTER_BUFFER_SIZE_INTERNAL;
     get_element(p0, (void*) &i, (void*) &bs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+*/
 
     // The shutdown flag.
     int f = *NUMBER_0_INTEGER;
@@ -938,13 +1130,16 @@ void check(void* p0) {
 
         check_signal(p0, *k, *kc, *ks, *s, *sc, *ss, (void*) &f,
             (void*) signal_memory_irq, (void*) signal_memory_mutex, (void*) signal_memory_sleep_time,
-            (void*) gnu_linux_console_irq, (void*) gnu_linux_console_mutex,
-            (void*) x_window_system_irq, (void*) x_window_system_mutex,
-            (void*) www_service_irq, (void*) www_service_mutex,
-            (void*) cyboi_service_irq, (void*) cyboi_service_mutex,
-            (void*) *m, (void*) *mc, (void*) *ms, (void*) *d, (void*) *dc, (void*) *ds,
+            (void*) gnu_linux_console_irq, (void*) gnu_linux_console_mutex, (void*) gnu_linux_console_handler_a, (void*) gnu_linux_console_handler_ac, (void*) gnu_linux_console_handler_m, (void*) gnu_linux_console_handler_mc, (void*) gnu_linux_console_handler_d, (void*) gnu_linux_console_handler_dc,
+            (void*) x_window_system_irq, (void*) x_window_system_mutex, (void*) x_window_system_handler_a, (void*) x_window_system_handler_ac, (void*) x_window_system_handler_m, (void*) x_window_system_handler_mc, (void*) x_window_system_handler_d, (void*) x_window_system_handler_dc,
+            (void*) www_service_irq, (void*) www_service_mutex, (void*) www_service_handler_a, (void*) www_service_handler_ac, (void*) www_service_handler_m, (void*) www_service_handler_mc, (void*) www_service_handler_d, (void*) www_service_handler_dc,
+            (void*) cyboi_service_irq, (void*) cyboi_service_mutex, (void*) cyboi_service_handler_a, (void*) cyboi_service_handler_ac, (void*) cyboi_service_handler_m, (void*) cyboi_service_handler_mc, (void*) cyboi_service_handler_d, (void*) cyboi_service_handler_dc
+/*??
+            , (void*) *m, (void*) *mc, (void*) *ms, (void*) *d, (void*) *dc, (void*) *ds,
             (void*) *c, (void*) *cc, (void*) *l, (void*) *lc, (void*) *st, (void*) *stc,
-            (void*) b, (void*) bc, (void*) bs);
+            (void*) b, (void*) bc, (void*) bs
+*/
+        );
     }
 }
 

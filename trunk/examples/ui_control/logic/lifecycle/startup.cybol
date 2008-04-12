@@ -159,8 +159,7 @@
 -->
     <part name="sense_tui_commands" channel="inline" abstraction="operation" model="sense">
         <property name="channel" channel="inline" abstraction="knowledge" model=".ui_control.settings.user_interface"/>
-        <property name="handler" channel="inline" abstraction="knowledge" model=".ui_control.logic.handler.receive_gnu_linux_console"/>
-        <property name="commands" channel="inline" abstraction="knowledge" model=".ui_control.logic.user_interface.main_window_actions"/>
+        <property name="handler" channel="inline" abstraction="knowledge" model=".ui_control.logic.handler.handle_gnu_linux_console"/>
     </part>
 <!--
     <part name="receive_gui_commands" channel="inline" abstraction="operation" model="receive">
@@ -194,6 +193,6 @@
     http://www.cybop.net
     - Cybernetics Oriented Programming -
 
-    @version $Revision: 1.7 $ $Date: 2008-04-09 06:43:22 $ $Author: christian $
+    @version $Revision: 1.8 $ $Date: 2008-04-12 17:03:22 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->

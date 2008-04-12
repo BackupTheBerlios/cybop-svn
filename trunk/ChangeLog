@@ -14,9 +14,22 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.42 $ $Date: 2008-03-29 19:22:51 $ $Author: christian $
+# @version $Revision: 1.43 $ $Date: 2008-04-12 17:03:22 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2008-04-13  Christian Heller  <christian.heller@tuxtax.de>
+        * Get handler variables "gnu_linux_console_handler" etc. in function "check"
+        * Hand over handler variables to function "check_signal" and further to "check_interrupts",
+            in order to get returned the correct handler corresponding to the detected interrupt channel,
+            whereby the handler gets forwarded as signal and handled by the cyboi system
+        * Adapt module "sense.c" introducing new function "sense_handler"
+        * Adapt modules "receive.c" and "receive_gnu_linux_console.c"
+        * Add necessary system-wide constants
+        * Adapt CYBOL application "examples/ui_control/"
+        * Add new "logic/handler/*" files containing "receive" operations
+        * Hand over knowledge model representing CYBOL "receive" operation,
+            as property of "sense" operation in file "startup.cybol"
 
 2008-03-29  Christian Heller  <christian.heller@tuxtax.de>
         * Replace old character-based handling using escape character mode and escape control sequence mode

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2008-03-30 10:49:22 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2008-04-12 17:03:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -35,22 +35,26 @@
 /**
  * Receives textual user interface (tui) message via gnu/linux console.
  *
- * @param p0 the signal name (Hand over as reference!)
- * @param p1 the signal name count (Hand over as reference!)
- * @param p2 the signal name size (Hand over as reference!)
- * @param p3 the signal abstraction (Hand over as reference!)
- * @param p4 the signal abstraction count (Hand over as reference!)
- * @param p5 the signal abstraction size (Hand over as reference!)
- * @param p6 the signal model (Hand over as reference!)
- * @param p7 the signal model count (Hand over as reference!)
- * @param p8 the signal model size (Hand over as reference!)
- * @param p9 the signal details (Hand over as reference!)
- * @param p10 the signal details count (Hand over as reference!)
- * @param p11 the signal details size (Hand over as reference!)
+ * @param p0 the command name (Hand over as reference!)
+ * @param p1 the command name count (Hand over as reference!)
+ * @param p2 the command name size (Hand over as reference!)
+ * @param p3 the command abstraction (Hand over as reference!)
+ * @param p4 the command abstraction count (Hand over as reference!)
+ * @param p5 the command abstraction size (Hand over as reference!)
+ * @param p6 the command model (Hand over as reference!)
+ * @param p7 the command model count (Hand over as reference!)
+ * @param p8 the command model size (Hand over as reference!)
+ * @param p9 the command details (Hand over as reference!)
+ * @param p10 the command details count (Hand over as reference!)
+ * @param p11 the command details size (Hand over as reference!)
  * @param p12 the gnu/linux console input stream
+ * @param p13 the commands
+ * @param p14 the commands count
+ * @param p15 the knowledge memory
+ * @param p16 the knowledge memory count
  */
 void receive_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
-    void* p6, void* p7, void* p8, void* p9, void* p10, void* p11, void* p12) {
+    void* p6, void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14, void* p15, void* p16) {
 
     log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Receive gnu/linux console message.");
 
@@ -83,24 +87,15 @@ void receive_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4,
     // Deallocate character array.
     deallocate((void*) &a, (void*) &as, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
-/*??
-    // The user interface commands.
-    void** c = NULL_POINTER;
-    void** cc = NULL_POINTER;
-    void** cs = NULL_POINTER;
-
-    // Get user interface commands internal.
-    get_element(p0, (void*) GNU_LINUX_CONSOLE_THREAD_COMMANDS_INTERNAL, (void*) &c, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    get_element(p0, (void*) GNU_LINUX_CONSOLE_THREAD_COMMANDS_COUNT_INTERNAL, (void*) &cc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    get_element(p0, (void*) GNU_LINUX_CONSOLE_THREAD_COMMANDS_SIZE_INTERNAL, (void*) &cs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    //?? TODO: The commands list was handed over as cybol property/ parameter!
+    //?? Replace c and cc with p?? and p??!
 
     // Get actual command belonging to the command name.
     // If the name is not known, the command parameter is left untouched.
-    get_universal_compound_element_by_name(*c, *cc,
-        p13, p14,
+    get_universal_compound_element_by_name(p13, p14,
+        c, (void*) &cc,
         p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11,
-        *k, *kc);
-*/
+        p15, p16);
 
     // Deallocate command.
     deallocate((void*) &c, (void*) &cs, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);

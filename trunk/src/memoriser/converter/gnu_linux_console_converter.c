@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2008-03-29 19:22:51 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2008-04-12 17:03:23 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -88,53 +88,71 @@ void encode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
  */
 void decode_gnu_linux_console_escape_control_sequence(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Decode gnu/linux console escape control sequence.");
+    if (p1 != *NULL_POINTER) {
 
-    // The comparison result.
-    int r = *NUMBER_0_INTEGER;
+        int* dc = (int*) p1;
 
-    if (r == *NUMBER_0_INTEGER) {
+        if (p4 != *NULL_POINTER) {
 
-        compare_arrays(p3, p4, (void*) ARROW_UP_CONTROL_SEQUENCE, (void*) ARROW_UP_CONTROL_SEQUENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+            void** d = (void**) p0;
 
-        if (r != *NUMBER_0_INTEGER) {
+            log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Decode gnu/linux console escape control sequence.");
 
-            *c = (void*) &UI_ARROW_UP_NAME;
-            *cc = *UI_ARROW_UP_NAME_COUNT;
+            // The comparison result.
+            int r = *NUMBER_0_INTEGER;
+
+            if (r == *NUMBER_0_INTEGER) {
+
+                compare_arrays(p3, p4, (void*) ARROW_UP_CONTROL_SEQUENCE, (void*) ARROW_UP_CONTROL_SEQUENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+                if (r != *NUMBER_0_INTEGER) {
+
+                    *d = (void*) &UI_ARROW_UP_NAME;
+                    *dc = *UI_ARROW_UP_NAME_COUNT;
+                }
+            }
+
+            if (r == *NUMBER_0_INTEGER) {
+
+                compare_arrays(p3, p4, (void*) ARROW_DOWN_CONTROL_SEQUENCE, (void*) ARROW_DOWN_CONTROL_SEQUENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+                if (r != *NUMBER_0_INTEGER) {
+
+                    *d = (void*) &UI_ARROW_DOWN_NAME;
+                    *dc = *UI_ARROW_DOWN_NAME_COUNT;
+                }
+            }
+
+            if (r == *NUMBER_0_INTEGER) {
+
+                compare_arrays(p3, p4, (void*) ARROW_LEFT_CONTROL_SEQUENCE, (void*) ARROW_LEFT_CONTROL_SEQUENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+                if (r != *NUMBER_0_INTEGER) {
+
+                    *d = (void*) &UI_ARROW_LEFT_NAME;
+                    *dc = *UI_ARROW_LEFT_NAME_COUNT;
+                }
+            }
+
+            if (r == *NUMBER_0_INTEGER) {
+
+                compare_arrays(p3, p4, (void*) ARROW_RIGHT_CONTROL_SEQUENCE, (void*) ARROW_RIGHT_CONTROL_SEQUENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+                if (r != *NUMBER_0_INTEGER) {
+
+                    *d = (void*) &UI_ARROW_RIGHT_NAME;
+                    *dc = *UI_ARROW_RIGHT_NAME_COUNT;
+                }
+            }
+
+        } else {
+
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode gnu/linux console escape control sequence. The destination command is null.");
         }
-    }
 
-    if (r == *NUMBER_0_INTEGER) {
+    } else {
 
-        compare_arrays(p3, p4, (void*) ARROW_DOWN_CONTROL_SEQUENCE, (void*) ARROW_DOWN_CONTROL_SEQUENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != *NUMBER_0_INTEGER) {
-
-            *c = (void*) &UI_ARROW_DOWN_NAME;
-            *cc = *UI_ARROW_DOWN_NAME_COUNT;
-        }
-    }
-
-    if (r == *NUMBER_0_INTEGER) {
-
-        compare_arrays(p3, p4, (void*) ARROW_LEFT_CONTROL_SEQUENCE, (void*) ARROW_LEFT_CONTROL_SEQUENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != *NUMBER_0_INTEGER) {
-
-            *c = (void*) &UI_ARROW_LEFT_NAME;
-            *cc = *UI_ARROW_LEFT_NAME_COUNT;
-        }
-    }
-
-    if (r == *NUMBER_0_INTEGER) {
-
-        compare_arrays(p3, p4, (void*) ARROW_RIGHT_CONTROL_SEQUENCE, (void*) ARROW_RIGHT_CONTROL_SEQUENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != *NUMBER_0_INTEGER) {
-
-            *c = (void*) &UI_ARROW_RIGHT_NAME;
-            *cc = *UI_ARROW_RIGHT_NAME_COUNT;
-        }
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode gnu/linux console escape control sequence. The destination command count is null.");
     }
 }
 
@@ -153,38 +171,56 @@ void decode_gnu_linux_console_escape_control_sequence(void* p0, void* p1, void* 
  */
 void decode_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Decode gnu/linux console character.");
+    if (p1 != *NULL_POINTER) {
 
-    // The comparison result.
-    int r = *NUMBER_0_INTEGER;
+        int* dc = (int*) p1;
 
-    if (r == *NUMBER_0_INTEGER) {
+        if (p4 != *NULL_POINTER) {
 
-        compare_arrays(p3, p4, (void*) LINE_FEED_CONTROL_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+            void** d = (void**) p0;
 
-        if (r != *NUMBER_0_INTEGER) {
+            log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Decode gnu/linux console character.");
 
-            *c = (void*) &UI_ENTER_NAME;
-            *cc = *UI_ENTER_NAME_COUNT;
+            // The comparison result.
+            int r = *NUMBER_0_INTEGER;
+
+            if (r == *NUMBER_0_INTEGER) {
+
+                compare_arrays(p3, p4, (void*) LINE_FEED_CONTROL_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+                if (r != *NUMBER_0_INTEGER) {
+
+                    *d = (void*) &UI_ENTER_NAME;
+                    *dc = *UI_ENTER_NAME_COUNT;
+                }
+            }
+
+            if (r == *NUMBER_0_INTEGER) {
+
+                compare_arrays(p3, p4, (void*) ESCAPE_CONTROL_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+                if (r != *NUMBER_0_INTEGER) {
+
+                    *d = (void*) &UI_ESCAPE_NAME;
+                    *dc = *UI_ESCAPE_NAME_COUNT;
+                }
+            }
+
+            if (r == *NUMBER_0_INTEGER) {
+
+                //?? TODO: Copy value of p2!
+                *d = (void*) &p2;
+                *dc = *PRIMITIVE_COUNT;
+            }
+
+        } else {
+
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode gnu/linux console character. The destination command is null.");
         }
-    }
 
-    if (r == *NUMBER_0_INTEGER) {
+    } else {
 
-        compare_arrays(p3, p4, (void*) ESCAPE_CONTROL_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r != *NUMBER_0_INTEGER) {
-
-            *c = (void*) &UI_ESCAPE_NAME;
-            *cc = *UI_ESCAPE_NAME_COUNT;
-        }
-    }
-
-    if (r == *NUMBER_0_INTEGER) {
-
-        //?? TODO: Copy value of p2!
-        *c = (void*) &p2;
-        *cc = *PRIMITIVE_COUNT;
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode gnu/linux console character. The destination command count is null.");
     }
 }
 

@@ -2,6 +2,7 @@
 
 <model>
     <part name="functionality" channel="file" abstraction="compound" model="ui_control/logic/functionality.cybol"/>
+    <part name="handler" channel="file" abstraction="compound" model="ui_control/logic/handler.cybol"/>
     <part name="lifecycle" channel="file" abstraction="compound" model="ui_control/logic/lifecycle.cybol"/>
     <part name="translation" channel="file" abstraction="compound" model="ui_control/logic/translation.cybol"/>
     <part name="user_interface" channel="file" abstraction="compound" model="ui_control/logic/user_interface.cybol"/>
@@ -29,6 +30,6 @@
     http://www.cybop.net
     - Cybernetics Oriented Programming -
 
-    @version $Revision: 1.1 $ $Date: 2007-05-31 22:05:24 $ $Author: christian $
+    @version $Revision: 1.2 $ $Date: 2008-04-12 17:03:22 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->
