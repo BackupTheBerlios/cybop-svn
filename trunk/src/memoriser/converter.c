@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.43 $ $Date: 2008-03-29 19:22:51 $ $Author: christian $
+ * @version $Revision: 1.44 $ $Date: 2008-04-22 22:44:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -66,10 +66,12 @@
  * @param p5 the destination details size
  * @param p6 the source
  * @param p7 the source count
- * @param p8 the language
- * @param p9 the language count
+ * @param p8 the knowledge memory
+ * @param p9 the knowledge memory count
+ * @param p10 the language
+ * @param p11 the language count
  */
-void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9) {
+void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11) {
 
     log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Decode.");
 
@@ -78,7 +80,7 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p8, p9, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p10, p11, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
@@ -88,7 +90,7 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p8, p9, (void*) KNOWLEDGE_ABSTRACTION, (void*) KNOWLEDGE_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p10, p11, (void*) KNOWLEDGE_ABSTRACTION, (void*) KNOWLEDGE_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
@@ -98,7 +100,7 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p8, p9, (void*) ENCAPSULATED_KNOWLEDGE_ABSTRACTION, (void*) ENCAPSULATED_KNOWLEDGE_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p10, p11, (void*) ENCAPSULATED_KNOWLEDGE_ABSTRACTION, (void*) ENCAPSULATED_KNOWLEDGE_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
@@ -108,7 +110,7 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p8, p9, (void*) OPERATION_ABSTRACTION, (void*) OPERATION_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p10, p11, (void*) OPERATION_ABSTRACTION, (void*) OPERATION_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
@@ -118,7 +120,7 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p8, p9, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p10, p11, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
@@ -128,7 +130,7 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p8, p9, (void*) BOOLEAN_ABSTRACTION, (void*) BOOLEAN_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p10, p11, (void*) BOOLEAN_ABSTRACTION, (void*) BOOLEAN_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
@@ -138,7 +140,7 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p8, p9, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p10, p11, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
@@ -148,7 +150,7 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p8, p9, (void*) DOUBLE_VECTOR_ABSTRACTION, (void*) DOUBLE_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p10, p11, (void*) DOUBLE_VECTOR_ABSTRACTION, (void*) DOUBLE_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
@@ -158,7 +160,7 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p8, p9, (void*) FRACTION_ABSTRACTION, (void*) FRACTION_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p10, p11, (void*) FRACTION_ABSTRACTION, (void*) FRACTION_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
@@ -168,7 +170,7 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p8, p9, (void*) COMPLEX_ABSTRACTION, (void*) COMPLEX_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p10, p11, (void*) COMPLEX_ABSTRACTION, (void*) COMPLEX_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
@@ -178,7 +180,7 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p8, p9, (void*) DATE_TIME_ABSTRACTION, (void*) DATE_TIME_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p10, p11, (void*) DATE_TIME_ABSTRACTION, (void*) DATE_TIME_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
@@ -188,7 +190,7 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p8, p9, (void*) DDMMYYYY_DATE_TIME_ABSTRACTION, (void*) DDMMYYYY_DATE_TIME_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p10, p11, (void*) DDMMYYYY_DATE_TIME_ABSTRACTION, (void*) DDMMYYYY_DATE_TIME_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
@@ -198,7 +200,7 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p8, p9, (void*) GNU_LINUX_CONSOLE_MODEL, (void*) GNU_LINUX_CONSOLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p10, p11, (void*) GNU_LINUX_CONSOLE_MODEL, (void*) GNU_LINUX_CONSOLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
@@ -208,7 +210,7 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p8, p9, (void*) X_WINDOW_SYSTEM_MODEL, (void*) X_WINDOW_SYSTEM_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p10, p11, (void*) X_WINDOW_SYSTEM_MODEL, (void*) X_WINDOW_SYSTEM_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
@@ -218,7 +220,7 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p8, p9, (void*) XHTML_ABSTRACTION, (void*) XHTML_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p10, p11, (void*) XHTML_ABSTRACTION, (void*) XHTML_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
@@ -228,7 +230,7 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p8, p9, (void*) HTTP_REQUEST_ABSTRACTION, (void*) HTTP_REQUEST_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p10, p11, (void*) HTTP_REQUEST_ABSTRACTION, (void*) HTTP_REQUEST_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
@@ -238,7 +240,7 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p8, p9, (void*) HTTP_RESPONSE_ABSTRACTION, (void*) HTTP_RESPONSE_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p10, p11, (void*) HTTP_RESPONSE_ABSTRACTION, (void*) HTTP_RESPONSE_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
@@ -248,7 +250,7 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p8, p9, (void*) MODEL_DIAGRAM_ABSTRACTION, (void*) MODEL_DIAGRAM_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p10, p11, (void*) MODEL_DIAGRAM_ABSTRACTION, (void*) MODEL_DIAGRAM_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
@@ -258,7 +260,7 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p8, p9, (void*) XDT_ABSTRACTION, (void*) XDT_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p10, p11, (void*) XDT_ABSTRACTION, (void*) XDT_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
@@ -268,7 +270,7 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p8, p9, (void*) LATEX_ABSTRACTION, (void*) LATEX_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p10, p11, (void*) LATEX_ABSTRACTION, (void*) LATEX_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
@@ -278,7 +280,7 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p8, p9, (void*) TERMINAL_BACKGROUND_ABSTRACTION, (void*) TERMINAL_BACKGROUND_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p10, p11, (void*) TERMINAL_BACKGROUND_ABSTRACTION, (void*) TERMINAL_BACKGROUND_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
@@ -288,7 +290,7 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p8, p9, (void*) TERMINAL_FOREGROUND_ABSTRACTION, (void*) TERMINAL_FOREGROUND_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p10, p11, (void*) TERMINAL_FOREGROUND_ABSTRACTION, (void*) TERMINAL_FOREGROUND_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
@@ -298,7 +300,7 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p8, p9, (void*) UTF_8_UNICODE_CHARACTER_ENCODING_ABSTRACTION, (void*) UTF_8_UNICODE_CHARACTER_ENCODING_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p10, p11, (void*) UTF_8_UNICODE_CHARACTER_ENCODING_ABSTRACTION, (void*) UTF_8_UNICODE_CHARACTER_ENCODING_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
@@ -308,7 +310,7 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p8, p9, (void*) UTF_16_UNICODE_CHARACTER_ENCODING_ABSTRACTION, (void*) UTF_16_UNICODE_CHARACTER_ENCODING_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p10, p11, (void*) UTF_16_UNICODE_CHARACTER_ENCODING_ABSTRACTION, (void*) UTF_16_UNICODE_CHARACTER_ENCODING_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 

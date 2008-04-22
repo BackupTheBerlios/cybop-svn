@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2008-04-12 17:03:22 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2008-04-22 22:44:28 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -39,140 +39,6 @@
 #include "../globals/logger/logger.c"
 #include "../globals/variables/thread_identification_variables.c"
 #include "../memoriser/accessor/compound_accessor.c"
-
-/**
- * Senses handler.
- *
- * @param p0 the internal memory
- * @param p1 the handler abstraction
- * @param p2 the handler abstraction count
- * @param p3 the handler model
- * @param p4 the handler model count
- * @param p5 the handler details
- * @param p6 the handler details count
- */
-void sense_handler(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
-
-    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Sense handler.");
-
-    // The gnu/linux console handler abstraction.
-    void** gnu_linux_console_handler_a = NULL_POINTER;
-    // The gnu/linux console handler abstraction count.
-    void** gnu_linux_console_handler_ac = NULL_POINTER;
-    // The gnu/linux console handler model.
-    void** gnu_linux_console_handler_m = NULL_POINTER;
-    // The gnu/linux console handler model count.
-    void** gnu_linux_console_handler_mc = NULL_POINTER;
-    // The gnu/linux console handler details.
-    void** gnu_linux_console_handler_d = NULL_POINTER;
-    // The gnu/linux console handler details count.
-    void** gnu_linux_console_handler_dc = NULL_POINTER;
-    // The x window system handler abstraction.
-    void** x_window_system_handler_a = NULL_POINTER;
-    // The x window system handler abstraction count.
-    void** x_window_system_handler_ac = NULL_POINTER;
-    // The x window system handler model.
-    void** x_window_system_handler_m = NULL_POINTER;
-    // The x window system handler model count.
-    void** x_window_system_handler_mc = NULL_POINTER;
-    // The x window system handler details.
-    void** x_window_system_handler_d = NULL_POINTER;
-    // The x window system handler details count.
-    void** x_window_system_handler_dc = NULL_POINTER;
-    // The www service handler abstraction.
-    void** www_service_handler_a = NULL_POINTER;
-    // The www service handler abstraction count.
-    void** www_service_handler_ac = NULL_POINTER;
-    // The www service handler model.
-    void** www_service_handler_m = NULL_POINTER;
-    // The www service handler model count.
-    void** www_service_handler_mc = NULL_POINTER;
-    // The www service handler details.
-    void** www_service_handler_d = NULL_POINTER;
-    // The www service handler details count.
-    void** www_service_handler_dc = NULL_POINTER;
-    // The cyboi service handler abstraction.
-    void** cyboi_service_handler_a = NULL_POINTER;
-    // The cyboi service handler abstraction count.
-    void** cyboi_service_handler_ac = NULL_POINTER;
-    // The cyboi service handler model.
-    void** cyboi_service_handler_m = NULL_POINTER;
-    // The cyboi service handler model count.
-    void** cyboi_service_handler_mc = NULL_POINTER;
-    // The cyboi service handler details.
-    void** cyboi_service_handler_d = NULL_POINTER;
-    // The cyboi service handler details count.
-    void** cyboi_service_handler_dc = NULL_POINTER;
-
-    // Get gnu/linux console handler abstraction.
-    get_element(p0, (void*) GNU_LINUX_CONSOLE_HANDLER_ABSTRACTION_INTERNAL, (void*) &gnu_linux_console_handler_a, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    // Get gnu/linux console handler abstraction count.
-    get_element(p0, (void*) GNU_LINUX_CONSOLE_HANDLER_ABSTRACTION_COUNT_INTERNAL, (void*) &gnu_linux_console_handler_ac, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    // Get gnu/linux console handler model.
-    get_element(p0, (void*) GNU_LINUX_CONSOLE_HANDLER_MODEL_INTERNAL, (void*) &gnu_linux_console_handler_m, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    // Get gnu/linux console handler model count.
-    get_element(p0, (void*) GNU_LINUX_CONSOLE_HANDLER_MODEL_COUNT_INTERNAL, (void*) &gnu_linux_console_handler_mc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    // Get gnu/linux console handler details.
-    get_element(p0, (void*) GNU_LINUX_CONSOLE_HANDLER_DETAILS_INTERNAL, (void*) &gnu_linux_console_handler_d, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    // Get gnu/linux console handler details count.
-    get_element(p0, (void*) GNU_LINUX_CONSOLE_HANDLER_DETAILS_COUNT_INTERNAL, (void*) &gnu_linux_console_handler_dc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    // Get x window system handler abstraction.
-    get_element(p0, (void*) X_WINDOW_SYSTEM_HANDLER_ABSTRACTION_INTERNAL, (void*) &x_window_system_handler_a, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    // Get x window system handler abstraction count.
-    get_element(p0, (void*) X_WINDOW_SYSTEM_HANDLER_ABSTRACTION_COUNT_INTERNAL, (void*) &x_window_system_handler_ac, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    // Get x window system handler model.
-    get_element(p0, (void*) X_WINDOW_SYSTEM_HANDLER_MODEL_INTERNAL, (void*) &x_window_system_handler_m, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    // Get x window system handler model count.
-    get_element(p0, (void*) X_WINDOW_SYSTEM_HANDLER_MODEL_COUNT_INTERNAL, (void*) &x_window_system_handler_mc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    // Get x window system handler details.
-    get_element(p0, (void*) X_WINDOW_SYSTEM_HANDLER_DETAILS_INTERNAL, (void*) &x_window_system_handler_d, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    // Get x window system handler details count.
-    get_element(p0, (void*) X_WINDOW_SYSTEM_HANDLER_DETAILS_COUNT_INTERNAL, (void*) &x_window_system_handler_dc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    // Get www service handler abstraction.
-    i = *WWW_BASE_INTERNAL + *SOCKET_HANDLER_ABSTRACTION_INTERNAL;
-    get_element(p0, (void*) &i, (void*) &www_service_handler_a, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    // Get www service handler abstraction count.
-    i = *WWW_BASE_INTERNAL + *SOCKET_HANDLER_ABSTRACTION_COUNT_INTERNAL;
-    get_element(p0, (void*) &i, (void*) &www_service_handler_ac, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    // Get www service handler model.
-    i = *WWW_BASE_INTERNAL + *SOCKET_HANDLER_MODEL_INTERNAL;
-    get_element(p0, (void*) &i, (void*) &www_service_handler_m, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    // Get www service handler model count.
-    i = *WWW_BASE_INTERNAL + *SOCKET_HANDLER_MODEL_COUNT_INTERNAL;
-    get_element(p0, (void*) &i, (void*) &www_service_handler_mc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    // Get www service handler details.
-    i = *WWW_BASE_INTERNAL + *SOCKET_HANDLER_DETAILS_INTERNAL;
-    get_element(p0, (void*) &i, (void*) &www_service_handler_d, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    // Get www service handler details count.
-    i = *WWW_BASE_INTERNAL + *SOCKET_HANDLER_DETAILS_COUNT_INTERNAL;
-    get_element(p0, (void*) &i, (void*) &www_service_handler_dc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    // Get cyboi service handler abstraction.
-    i = *CYBOI_BASE_INTERNAL + *SOCKET_HANDLER_ABSTRACTION_INTERNAL;
-    get_element(p0, (void*) &i, (void*) &cyboi_service_handler_a, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    // Get cyboi service handler abstraction count.
-    i = *CYBOI_BASE_INTERNAL + *SOCKET_HANDLER_ABSTRACTION_COUNT_INTERNAL;
-    get_element(p0, (void*) &i, (void*) &cyboi_service_handler_ac, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    // Get cyboi service handler model.
-    i = *CYBOI_BASE_INTERNAL + *SOCKET_HANDLER_MODEL_INTERNAL;
-    get_element(p0, (void*) &i, (void*) &cyboi_service_handler_m, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    // Get cyboi service handler model count.
-    i = *CYBOI_BASE_INTERNAL + *SOCKET_HANDLER_MODEL_COUNT_INTERNAL;
-    get_element(p0, (void*) &i, (void*) &cyboi_service_handler_mc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    // Get cyboi service handler details.
-    i = *CYBOI_BASE_INTERNAL + *SOCKET_HANDLER_DETAILS_INTERNAL;
-    get_element(p0, (void*) &i, (void*) &cyboi_service_handler_d, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    // Get cyboi service handler details count.
-    i = *CYBOI_BASE_INTERNAL + *SOCKET_HANDLER_DETAILS_COUNT_INTERNAL;
-    get_element(p0, (void*) &i, (void*) &cyboi_service_handler_dc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-
-    //?? TODO: Set handler.
-    set_element(a, (void*) X_WINDOW_SYSTEM_HANDLER_MODEL_INTERNAL, p1, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    set_element(a, (void*) X_WINDOW_SYSTEM_HANDLER_MODEL_INTERNAL, p2, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    set_element(a, (void*) X_WINDOW_SYSTEM_HANDLER_MODEL_INTERNAL, p3, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    set_element(a, (void*) X_WINDOW_SYSTEM_HANDLER_MODEL_INTERNAL, p4, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    set_element(a, (void*) X_WINDOW_SYSTEM_HANDLER_MODEL_INTERNAL, p5, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    set_element(a, (void*) X_WINDOW_SYSTEM_HANDLER_MODEL_INTERNAL, p6, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-}
 
 /**
  * Senses message.
@@ -492,6 +358,8 @@ void sense(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
 
     // The comparison result.
     int r = *NUMBER_0_INTEGER;
+    // The internal memory index.
+    int i = *NUMBER_0_INTEGER;
 
     if (r == *NUMBER_0_INTEGER) {
 
@@ -499,7 +367,15 @@ void sense(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
 
         if (r != *NUMBER_0_INTEGER) {
 
-            sense_handler(p2, ha, hac, hm, hmc, hd, hdc);
+            // Set handler abstraction, model, details.
+            set_element(p2, (void*) GNU_LINUX_CONSOLE_HANDLER_ABSTRACTION_INTERNAL, (void*) ha, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            set_element(p2, (void*) GNU_LINUX_CONSOLE_HANDLER_ABSTRACTION_COUNT_INTERNAL, (void*) hac, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            set_element(p2, (void*) GNU_LINUX_CONSOLE_HANDLER_MODEL_INTERNAL, (void*) hm, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            set_element(p2, (void*) GNU_LINUX_CONSOLE_HANDLER_MODEL_COUNT_INTERNAL, (void*) hmc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            set_element(p2, (void*) GNU_LINUX_CONSOLE_HANDLER_DETAILS_INTERNAL, (void*) hd, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            set_element(p2, (void*) GNU_LINUX_CONSOLE_HANDLER_DETAILS_COUNT_INTERNAL, (void*) hdc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
+            // Sense incoming message.
             sense_message(p2, (void*) GNU_LINUX_CONSOLE_THREAD, (void*) &sense_gnu_linux_console);
         }
     }
@@ -510,7 +386,15 @@ void sense(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
 
         if (r != *NUMBER_0_INTEGER) {
 
-            sense_handler(p2, ha, hac, hm, hmc, hd, hdc);
+            // Set handler abstraction, model, details.
+            set_element(p2, (void*) X_WINDOW_SYSTEM_HANDLER_ABSTRACTION_INTERNAL, (void*) ha, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            set_element(p2, (void*) X_WINDOW_SYSTEM_HANDLER_ABSTRACTION_COUNT_INTERNAL, (void*) hac, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            set_element(p2, (void*) X_WINDOW_SYSTEM_HANDLER_MODEL_INTERNAL, (void*) hm, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            set_element(p2, (void*) X_WINDOW_SYSTEM_HANDLER_MODEL_COUNT_INTERNAL, (void*) hmc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            set_element(p2, (void*) X_WINDOW_SYSTEM_HANDLER_DETAILS_INTERNAL, (void*) hd, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            set_element(p2, (void*) X_WINDOW_SYSTEM_HANDLER_DETAILS_COUNT_INTERNAL, (void*) hdc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
+            // Sense incoming message.
             sense_message(p2, (void*) X_WINDOW_SYSTEM_THREAD, (void*) &sense_x_window_system);
         }
     }
@@ -521,11 +405,21 @@ void sense(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
 
         if (r != *NUMBER_0_INTEGER) {
 
-            sense_handler(p2, ha, hac, hm, hmc, hd, hdc);
-            // Sense model by reading http request or response.
-            //
-            // CAUTION! The details are handed over as well,
-            // since they will store http headers as meta data.
+            // Set handler abstraction, model, details.
+            i = *WWW_BASE_INTERNAL + *SOCKET_HANDLER_ABSTRACTION_INTERNAL;
+            set_element(p2, (void*) &i, (void*) ha, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            i = *WWW_BASE_INTERNAL + *SOCKET_HANDLER_ABSTRACTION_COUNT_INTERNAL;
+            set_element(p2, (void*) &i, (void*) hac, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            i = *WWW_BASE_INTERNAL + *SOCKET_HANDLER_MODEL_INTERNAL;
+            set_element(p2, (void*) &i, (void*) hm, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            i = *WWW_BASE_INTERNAL + *SOCKET_HANDLER_MODEL_COUNT_INTERNAL;
+            set_element(p2, (void*) &i, (void*) hmc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            i = *WWW_BASE_INTERNAL + *SOCKET_HANDLER_DETAILS_INTERNAL;
+            set_element(p2, (void*) &i, (void*) hd, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            i = *WWW_BASE_INTERNAL + *SOCKET_HANDLER_DETAILS_COUNT_INTERNAL;
+            set_element(p2, (void*) &i, (void*) hdc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
+            // Sense incoming message (http request or response).
             sense_message(p2, (void*) WWW_SERVICE_THREAD, (void*) &sense_www_socket);
         }
     }
@@ -536,11 +430,21 @@ void sense(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
 
         if (r != *NUMBER_0_INTEGER) {
 
-            sense_handler(p2, ha, hac, hm, hmc, hd, hdc);
-            // Sense model by reading http request or response.
-            //
-            // CAUTION! The details are handed over as well,
-            // since they will store http headers as meta data.
+            // Set handler abstraction, model, details.
+            i = *CYBOI_BASE_INTERNAL + *SOCKET_HANDLER_ABSTRACTION_INTERNAL;
+            set_element(p2, (void*) &i, (void*) ha, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            i = *CYBOI_BASE_INTERNAL + *SOCKET_HANDLER_ABSTRACTION_COUNT_INTERNAL;
+            set_element(p2, (void*) &i, (void*) hac, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            i = *CYBOI_BASE_INTERNAL + *SOCKET_HANDLER_MODEL_INTERNAL;
+            set_element(p2, (void*) &i, (void*) hm, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            i = *CYBOI_BASE_INTERNAL + *SOCKET_HANDLER_MODEL_COUNT_INTERNAL;
+            set_element(p2, (void*) &i, (void*) hmc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            i = *CYBOI_BASE_INTERNAL + *SOCKET_HANDLER_DETAILS_INTERNAL;
+            set_element(p2, (void*) &i, (void*) hd, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            i = *CYBOI_BASE_INTERNAL + *SOCKET_HANDLER_DETAILS_COUNT_INTERNAL;
+            set_element(p2, (void*) &i, (void*) hdc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
+            // Sense incoming message (http request or response).
             sense_message(p2, (void*) CYBOI_SERVICE_THREAD, (void*) &sense_cyboi_socket);
         }
     }

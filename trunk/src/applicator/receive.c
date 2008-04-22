@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.47 $ $Date: 2008-04-12 17:03:22 $ $Author: christian $
+ * @version $Revision: 1.48 $ $Date: 2008-04-22 22:44:28 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -443,7 +443,7 @@ void receive_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5)
 
     // Receive data using the parameters determined above.
     receive_with_parameters(p2, p3, p4, (void*) mom, *momc, *moms, (void*) mod, *modc, *mods, *rm, *rmc, *rms,
-        *com, *comc, *coms, *mm, *mmc, *mem, *memc, *lm, *lmc, (void*) stm, (void*) stmc, *cm, *cmc);
+        *com, *comc, *mm, *mmc, *mem, *memc, *lm, *lmc, (void*) stm, (void*) stmc, *cm, *cmc);
 }
 
 /* RECEIVE_SOURCE */

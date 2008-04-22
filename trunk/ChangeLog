@@ -14,9 +14,13 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.43 $ $Date: 2008-04-12 17:03:22 $ $Author: christian $
+# @version $Revision: 1.44 $ $Date: 2008-04-22 22:44:28 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2008-04-22  Christian Heller  <christian.heller@tuxtax.de>
+        * Set handler abstraction, model, details in function "sense"
+        * Assign correct handler (receive function) in function "check_interrupts" of module "checker.c"
 
 2008-04-13  Christian Heller  <christian.heller@tuxtax.de>
         * Get handler variables "gnu_linux_console_handler" etc. in function "check"

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.12 $ $Date: 2008-04-12 17:03:22 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2008-04-22 22:44:28 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -82,7 +82,7 @@ void receive_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4,
     allocate((void*) &c, (void*) &cs, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
     // Decode character array into command.
-    decode_gnu_linux_console((void*) &c, (void*) &cc, (void*) &cs, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, a, (void*) &ac, (void*) GNU_LINUX_CONSOLE_MODEL, (void*) GNU_LINUX_CONSOLE_MODEL_COUNT);
+    decode((void*) &c, (void*) &cc, (void*) &cs, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, a, (void*) &ac, p15, p16, (void*) GNU_LINUX_CONSOLE_MODEL, (void*) GNU_LINUX_CONSOLE_MODEL_COUNT);
 
     // Deallocate character array.
     deallocate((void*) &a, (void*) &as, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);

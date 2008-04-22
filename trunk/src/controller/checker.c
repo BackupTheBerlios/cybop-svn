@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.42 $ $Date: 2008-04-12 17:03:22 $ $Author: christian $
+ * @version $Revision: 1.43 $ $Date: 2008-04-22 22:44:28 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -308,272 +308,232 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
     void* p26, void* p27, void* p28, void* p29, void* p30, void* p31, void* p32, void* p33,
     void* p34, void* p35, void* p36, void* p37, void* p38, void* p39, void* p40, void* p41) {
 
-    if (p7 != *NULL_POINTER) {
+    if (p0 != *NULL_POINTER) {
 
-        void** dc = (void**) p7;
+        void** irq = (void**) p0;
 
-        if (p6 != *NULL_POINTER) {
+        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Check for interrupt requests.");
 
-            void** d = (void**) p6;
+        if (*irq == *NULL_POINTER) {
+
+            // This interrupt is only checked if the irq flag is null.
+            // If it is not null, then another interrupt has been found before.
 
             if (p5 != *NULL_POINTER) {
 
-                void** mc = (void**) p5;
+                void** signal_memory_mutex = (void**) p5;
 
                 if (p4 != *NULL_POINTER) {
 
-                    void** m = (void**) p4;
-
-                    if (p3 != *NULL_POINTER) {
-
-                        void** ac = (void**) p3;
-
-                        if (p2 != *NULL_POINTER) {
-
-                            void** a = (void**) p2;
-
-                            if (p1 != *NULL_POINTER) {
-
-                                void** mt = (void**) p1;
-
-                                if (p0 != *NULL_POINTER) {
-
-                                    void** irq = (void**) p0;
-
-                                    //?? TODO: Use "set_pointer_array" functions instead of setting values directly below!?
-                                    //?? This would also make the casts above superfluous.
-
-                    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Check for interrupt requests.");
-
-                    // CAUTION! The irq and mutex parameters are NOT casted above,
-                    // in order to maintain better readability and extensibility.
-                    // Further channels may be added in the future and adding them
-                    // to the list below is just easier than having to indent and nest whole
-                    // blocks of code, as it would be necessary when casting all parameters above.
-
-                    if (*irq == *NULL_POINTER) {
-
-                        // This interrupt is only checked if the irq flag is null.
-                        // If it is not null, then another interrupt has been found before.
-
-                        if (p5 != *NULL_POINTER) {
-
-                            void** signal_memory_mutex = (void**) p5;
-
-                            if (p4 != *NULL_POINTER) {
-
-                                // CAUTION! Do NOT cast to int** because the value is assigned to *mt below
-                                // and casting to int** might change the expected size.
-                                // (Pointer and integer do not necessarily always have to have the same size.)
-                                void** signal_memory_irq = (void**) p4;
-
-                                if (**((int**) signal_memory_irq) != *NUMBER_0_INTEGER) {
-
-                                    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Detected signal memory interrupt.");
-
-                                    // Set channel.
-                                    *c = SIGNAL_MODEL;
-                                    *cc = *SIGNAL_MODEL_COUNT;
-
-                                    // Set interrupt request flag.
-                                    *irq = *signal_memory_irq;
-                                    // Set mutex.
-                                    *mt = *signal_memory_mutex;
-                                }
-
-                            } else {
-
-                                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not check for interrupt requests. The signal memory interrupt request flag is null.");
-                            }
-
-                        } else {
-
-                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not check for interrupt requests. The signal memory mutex is null.");
-                        }
-                    }
-
-                    if (*irq == *NULL_POINTER) {
-
-                        // This interrupt is only checked if the irq flag is null.
-                        // If it is not null, then another interrupt has been found before.
-
-                        if (p7 != *NULL_POINTER) {
-
-                            void** gnu_linux_console_mutex = (void**) p7;
-
-                            if (p6 != *NULL_POINTER) {
-
-                                // CAUTION! Do NOT cast to int** because the value is assigned to *mt below
-                                // and casting to int** might change the expected size.
-                                // (Pointer and integer do not necessarily always have to have the same size.)
-                                void** gnu_linux_console_irq = (void**) p6;
-
-                                if (**((int**) gnu_linux_console_irq) != *NUMBER_0_INTEGER) {
-
-                                    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Detected gnu/linux console interrupt.");
-
-                                    // Set channel.
-                                    *c = GNU_LINUX_CONSOLE_MODEL;
-                                    *cc = *GNU_LINUX_CONSOLE_MODEL_COUNT;
-
-                                    // Set interrupt request flag.
-                                    *irq = *gnu_linux_console_irq;
-                                    // Set mutex.
-                                    *mt = *gnu_linux_console_mutex;
-                                }
-
-                            } else {
-
-                                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not check for interrupt requests. The gnu/linux console interrupt request flag is null.");
-                            }
-
-                        } else {
-
-                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not check for interrupt requests. The gnu/linux console mutex is null.");
-                        }
-                    }
-
-                    if (*irq == *NULL_POINTER) {
-
-                        // This interrupt is only checked if the irq flag is null.
-                        // If it is not null, then another interrupt has been found before.
-
-                        if (p9 != *NULL_POINTER) {
-
-                            void** x_window_system_mutex = (void**) p9;
-
-                            if (p8 != *NULL_POINTER) {
-
-                                // CAUTION! Do NOT cast to int** because the value is assigned to *mt below
-                                // and casting to int** might change the expected size.
-                                // (Pointer and integer do not necessarily always have to have the same size.)
-                                void** x_window_system_irq = (void**) p8;
-
-                                if (**((int**) x_window_system_irq) != *NUMBER_0_INTEGER) {
-
-                                    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Detected x window system interrupt.");
-
-                                    // Set channel.
-                                    *c = X_WINDOW_SYSTEM_MODEL;
-                                    *cc = *X_WINDOW_SYSTEM_MODEL_COUNT;
-
-                                    // Set interrupt request flag.
-                                    *irq = *x_window_system_irq;
-                                    // Set mutex.
-                                    *mt = *x_window_system_mutex;
-                                }
-
-                            } else {
-
-                                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not check for interrupt requests. The x window system interrupt request flag is null.");
-                            }
-
-                        } else {
-
-                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not check for interrupt requests. The x window system mutex is null.");
-                        }
-                    }
-
-                    if (*irq == *NULL_POINTER) {
-
-                        // This interrupt is only checked if the irq flag is null.
-                        // If it is not null, then another interrupt has been found before.
-
-                        if (p11 != *NULL_POINTER) {
-
-                            void** www_service_mutex = (void**) p11;
-
-                            if (p10 != *NULL_POINTER) {
-
-                                // CAUTION! Do NOT cast to int** because the value is assigned to *mt below
-                                // and casting to int** might change the expected size.
-                                // (Pointer and integer do not necessarily always have to have the same size.)
-                                void** www_service_irq = (void**) p10;
-
-                                if (**((int**) www_service_irq) != *NUMBER_0_INTEGER) {
-
-                                    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Detected www service interrupt.");
-
-                                    // Set channel.
-                                    *c = WWW_SERVICE_MODEL;
-                                    *cc = *WWW_SERVICE_MODEL_COUNT;
-
-                                    // Set interrupt request flag.
-                                    *irq = *www_service_irq;
-                                    // Set mutex.
-                                    *mt = *www_service_mutex;
-                                }
-
-                            } else {
-
-                                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not check for interrupt requests. The www service interrupt request flag is null.");
-                            }
-
-                        } else {
-
-                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not check for interrupt requests. The www service mutex is null.");
-                        }
-                    }
-
-                    if (*irq == *NULL_POINTER) {
-
-                        // This interrupt is only checked if the irq flag is null.
-                        // If it is not null, then another interrupt has been found before.
-
-                        if (p13 != *NULL_POINTER) {
-
-                            void** cyboi_service_mutex = (void**) p13;
-
-                            if (p12 != *NULL_POINTER) {
-
-                                // CAUTION! Do NOT cast to int** because the value is assigned to *mt below
-                                // and casting to int** might change the expected size.
-                                // (Pointer and integer do not necessarily always have to have the same size.)
-                                void** cyboi_service_irq = (void**) p12;
-
-                                if (**((int**) cyboi_service_irq) != *NUMBER_0_INTEGER) {
-
-                                    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Detected cyboi service interrupt.");
-
-                                    // Set channel.
-                                    *c = CYBOI_SERVICE_MODEL;
-                                    *cc = *CYBOI_SERVICE_MODEL_COUNT;
-
-                                    // Set interrupt request flag.
-                                    *irq = *cyboi_service_irq;
-                                    // Set mutex.
-                                    *mt = *cyboi_service_mutex;
-                                }
-
-                            } else {
-
-                                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not check for interrupt requests. The cyboi service interrupt request flag is null.");
-                            }
-
-                        } else {
-
-                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not check for interrupt requests. The cyboi service mutex is null.");
-                        }
-                    }
-
-                    if (*irq == *NULL_POINTER) {
-
-                        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) "Could not check for interrupt requests. No interrupt request flag is set.");
+                    // CAUTION! Do NOT cast to int** because the value is assigned to *mt below
+                    // and casting to int** might change the expected size.
+                    // (Pointer and integer do not necessarily always have to have the same size.)
+                    void** signal_memory_irq = (void**) p4;
+
+                    if (**((int**) signal_memory_irq) != *NUMBER_0_INTEGER) {
+
+                        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Detected signal memory interrupt.");
+
+                        // Set interrupt request flag.
+                        set_element(p0, (void*) NUMBER_0_INTEGER, p8, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                        // Set mutex.
+                        set_element(p1, (void*) NUMBER_0_INTEGER, p9, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
                     }
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not check for interrupt requests. The channel is null.");
+                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not check for interrupt requests. The signal memory interrupt request flag is null.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not check for interrupt requests. The channel count is null.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not check for interrupt requests. The signal memory mutex is null.");
             }
+        }
 
-        } else {
+        if (*irq == *NULL_POINTER) {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not check for interrupt requests. The mutex is null.");
+            // This interrupt is only checked if the irq flag is null.
+            // If it is not null, then another interrupt has been found before.
+
+            if (p7 != *NULL_POINTER) {
+
+                void** gnu_linux_console_mutex = (void**) p7;
+
+                if (p6 != *NULL_POINTER) {
+
+                    // CAUTION! Do NOT cast to int** because the value is assigned to *mt below
+                    // and casting to int** might change the expected size.
+                    // (Pointer and integer do not necessarily always have to have the same size.)
+                    void** gnu_linux_console_irq = (void**) p6;
+
+                    if (**((int**) gnu_linux_console_irq) != *NUMBER_0_INTEGER) {
+
+                        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Detected gnu/linux console interrupt.");
+
+                        // Set handler.
+                        set_element(p2, (void*) NUMBER_0_INTEGER, p12, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                        set_element(p3, (void*) NUMBER_0_INTEGER, p13, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                        set_element(p4, (void*) NUMBER_0_INTEGER, p14, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                        set_element(p5, (void*) NUMBER_0_INTEGER, p15, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                        set_element(p6, (void*) NUMBER_0_INTEGER, p16, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                        set_element(p7, (void*) NUMBER_0_INTEGER, p17, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
+                        // Set interrupt request flag.
+                        set_element(p0, (void*) NUMBER_0_INTEGER, p10, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                        // Set mutex.
+                        set_element(p0, (void*) NUMBER_0_INTEGER, p11, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                    }
+
+                } else {
+
+                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not check for interrupt requests. The gnu/linux console interrupt request flag is null.");
+                }
+
+            } else {
+
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not check for interrupt requests. The gnu/linux console mutex is null.");
+            }
+        }
+
+        if (*irq == *NULL_POINTER) {
+
+            // This interrupt is only checked if the irq flag is null.
+            // If it is not null, then another interrupt has been found before.
+
+            if (p9 != *NULL_POINTER) {
+
+                void** x_window_system_mutex = (void**) p9;
+
+                if (p8 != *NULL_POINTER) {
+
+                    // CAUTION! Do NOT cast to int** because the value is assigned to *mt below
+                    // and casting to int** might change the expected size.
+                    // (Pointer and integer do not necessarily always have to have the same size.)
+                    void** x_window_system_irq = (void**) p8;
+
+                    if (**((int**) x_window_system_irq) != *NUMBER_0_INTEGER) {
+
+                        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Detected x window system interrupt.");
+
+                        // Set handler.
+                        set_element(p2, (void*) NUMBER_0_INTEGER, p20, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                        set_element(p3, (void*) NUMBER_0_INTEGER, p21, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                        set_element(p4, (void*) NUMBER_0_INTEGER, p22, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                        set_element(p5, (void*) NUMBER_0_INTEGER, p23, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                        set_element(p6, (void*) NUMBER_0_INTEGER, p24, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                        set_element(p7, (void*) NUMBER_0_INTEGER, p25, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
+                        // Set interrupt request flag.
+                        set_element(p0, (void*) NUMBER_0_INTEGER, p18, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                        // Set mutex.
+                        set_element(p0, (void*) NUMBER_0_INTEGER, p19, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                    }
+
+                } else {
+
+                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not check for interrupt requests. The x window system interrupt request flag is null.");
+                }
+
+            } else {
+
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not check for interrupt requests. The x window system mutex is null.");
+            }
+        }
+
+        if (*irq == *NULL_POINTER) {
+
+            // This interrupt is only checked if the irq flag is null.
+            // If it is not null, then another interrupt has been found before.
+
+            if (p11 != *NULL_POINTER) {
+
+                void** www_service_mutex = (void**) p11;
+
+                if (p10 != *NULL_POINTER) {
+
+                    // CAUTION! Do NOT cast to int** because the value is assigned to *mt below
+                    // and casting to int** might change the expected size.
+                    // (Pointer and integer do not necessarily always have to have the same size.)
+                    void** www_service_irq = (void**) p10;
+
+                    if (**((int**) www_service_irq) != *NUMBER_0_INTEGER) {
+
+                        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Detected www service interrupt.");
+
+                        // Set handler.
+                        set_element(p2, (void*) NUMBER_0_INTEGER, p28, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                        set_element(p3, (void*) NUMBER_0_INTEGER, p29, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                        set_element(p4, (void*) NUMBER_0_INTEGER, p30, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                        set_element(p5, (void*) NUMBER_0_INTEGER, p31, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                        set_element(p6, (void*) NUMBER_0_INTEGER, p32, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                        set_element(p7, (void*) NUMBER_0_INTEGER, p33, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
+                        // Set interrupt request flag.
+                        set_element(p0, (void*) NUMBER_0_INTEGER, p26, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                        // Set mutex.
+                        set_element(p0, (void*) NUMBER_0_INTEGER, p27, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                    }
+
+                } else {
+
+                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not check for interrupt requests. The www service interrupt request flag is null.");
+                }
+
+            } else {
+
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not check for interrupt requests. The www service mutex is null.");
+            }
+        }
+
+        if (*irq == *NULL_POINTER) {
+
+            // This interrupt is only checked if the irq flag is null.
+            // If it is not null, then another interrupt has been found before.
+
+            if (p13 != *NULL_POINTER) {
+
+                void** cyboi_service_mutex = (void**) p13;
+
+                if (p12 != *NULL_POINTER) {
+
+                    // CAUTION! Do NOT cast to int** because the value is assigned to *mt below
+                    // and casting to int** might change the expected size.
+                    // (Pointer and integer do not necessarily always have to have the same size.)
+                    void** cyboi_service_irq = (void**) p12;
+
+                    if (**((int**) cyboi_service_irq) != *NUMBER_0_INTEGER) {
+
+                        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Detected cyboi service interrupt.");
+
+                        // Set handler.
+                        set_element(p2, (void*) NUMBER_0_INTEGER, p36, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                        set_element(p3, (void*) NUMBER_0_INTEGER, p37, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                        set_element(p4, (void*) NUMBER_0_INTEGER, p38, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                        set_element(p5, (void*) NUMBER_0_INTEGER, p39, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                        set_element(p6, (void*) NUMBER_0_INTEGER, p40, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                        set_element(p7, (void*) NUMBER_0_INTEGER, p41, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
+                        // Set interrupt request flag.
+                        set_element(p0, (void*) NUMBER_0_INTEGER, p34, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                        // Set mutex.
+                        set_element(p0, (void*) NUMBER_0_INTEGER, p35, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                    }
+
+                } else {
+
+                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not check for interrupt requests. The cyboi service interrupt request flag is null.");
+                }
+
+            } else {
+
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not check for interrupt requests. The cyboi service mutex is null.");
+            }
+        }
+
+        if (*irq == *NULL_POINTER) {
+
+            log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) "Could not check for interrupt requests. No interrupt request flag is set.");
         }
 
     } else {

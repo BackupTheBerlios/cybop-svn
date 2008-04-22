@@ -7,23 +7,12 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.31 $ $Date: 2008-04-12 17:03:22 $ $Author: christian $
+# @version $Revision: 1.32 $ $Date: 2008-04-22 22:44:28 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Continue in "sense_handler":
-            Hand over a, m, d for just one input channel?
-            (Currently, there are too many variables, for each channel!)
-
-        * Edit "checker.check" function:
-            - Create special handler variables for tui/ gui/ wui etc. signal reception,
-                which may be called "gnu_linux_console_handler", "x_window_system_handler" etc.
-            - Add these handler variables to the internal_memory
-        * Edit "sense" function:
-            - Add that "receive" model to the corresponding handler variable read from
-                internal memory, yet BEFORE the thread is activated in the line after
-            - Set "receive" model in internal memory to NULL in "interrupt" (stop sensing) function,
-                but do NOT destroy, since it belongs to the knowledge model tree
+        * Set "receive" model in internal memory to NULL in "interrupt" (stop sensing) function,
+            but do NOT destroy, since it belongs to the knowledge model tree
         * Edit "receive_message" function:
             ?? The following is possibly NOT correct anymore, as the handler is already represented by a receive operation!
             - Call the "handle" function handing over the command determined before
