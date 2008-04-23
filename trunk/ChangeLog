@@ -14,9 +14,12 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.44 $ $Date: 2008-04-22 22:44:28 $ $Author: christian $
+# @version $Revision: 1.45 $ $Date: 2008-04-23 22:47:58 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2008-04-23  Christian Heller  <christian.heller@tuxtax.de>
+        * Correct parameters and bugs in module "checker.c" and others
 
 2008-04-22  Christian Heller  <christian.heller@tuxtax.de>
         * Set handler abstraction, model, details in function "sense"

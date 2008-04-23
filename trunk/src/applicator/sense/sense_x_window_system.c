@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2008-03-29 19:22:51 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2008-04-23 22:47:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -203,7 +203,7 @@ void sense_x_window_system_message(void* p0, void* p1, void* p2, void* p3) {
  */
 void sense_x_window_system(void* p0) {
 
-    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Sense x window system.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Sense x window system.");
 
     // The interrupt.
     void** irq = NULL_POINTER;

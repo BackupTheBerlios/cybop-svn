@@ -7,9 +7,13 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.32 $ $Date: 2008-04-22 22:44:28 $ $Author: christian $
+# @version $Revision: 1.33 $ $Date: 2008-04-23 22:47:59 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+        * continue in module "checker.c" function "check_interrupts";
+            make sure that all values are properly assigned!
+            everything before, i.e. up to this function works fine.
 
         * Set "receive" model in internal memory to NULL in "interrupt" (stop sensing) function,
             but do NOT destroy, since it belongs to the knowledge model tree

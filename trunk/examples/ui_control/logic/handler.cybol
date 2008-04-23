@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 
 <model>
-    <part name="handle_gnu_linux_console" channel="file" abstraction="compound" model="ui_control/logic/handle/handle_gnu_linux_console.cybol"/>
-    <part name="handle_x_window_system" channel="file" abstraction="compound" model="ui_control/logic/handle/handle_x_window_system.cybol"/>
-    <part name="handle_www_service" channel="file" abstraction="compound" model="ui_control/logic/handle/handle_www_service.cybol"/>
-    <part name="handle_cyboi_service" channel="file" abstraction="compound" model="ui_control/logic/handle/handle_cyboi_service.cybol"/>
+    <part name="handle_gnu_linux_console" channel="file" abstraction="compound" model="ui_control/logic/handler/handle_gnu_linux_console.cybol"/>
+    <part name="handle_x_window_system" channel="file" abstraction="compound" model="ui_control/logic/handler/handle_x_window_system.cybol"/>
+    <part name="handle_www_service" channel="file" abstraction="compound" model="ui_control/logic/handler/handle_www_service.cybol"/>
+    <part name="handle_cyboi_service" channel="file" abstraction="compound" model="ui_control/logic/handler/handle_cyboi_service.cybol"/>
 </model>
 
 <!--
@@ -29,6 +29,6 @@
     http://www.cybop.net
     - Cybernetics Oriented Programming -
 
-    @version $Revision: 1.1 $ $Date: 2008-04-14 01:12:45 $ $Author: christian $
+    @version $Revision: 1.2 $ $Date: 2008-04-23 22:47:59 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->

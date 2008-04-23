@@ -158,7 +158,7 @@
     </part>
 -->
     <part name="sense_tui_commands" channel="inline" abstraction="operation" model="sense">
-        <property name="channel" channel="inline" abstraction="knowledge" model=".ui_control.settings.user_interface"/>
+        <property name="channel" channel="inline" abstraction="character" model="gnu_linux_console"/>
         <property name="handler" channel="inline" abstraction="knowledge" model=".ui_control.logic.handler.handle_gnu_linux_console"/>
     </part>
 <!--
@@ -193,6 +193,6 @@
     http://www.cybop.net
     - Cybernetics Oriented Programming -
 
-    @version $Revision: 1.8 $ $Date: 2008-04-12 17:03:22 $ $Author: christian $
+    @version $Revision: 1.9 $ $Date: 2008-04-23 22:47:59 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->

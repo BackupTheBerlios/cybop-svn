@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2008-02-15 15:47:18 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2008-04-23 22:47:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -143,6 +143,8 @@ void sense_gnu_linux_console_message(void* p0, void* p1, void* p2, void* p3) {
                     // which may now be processed in the main thread of this system.
                     *irq = *NUMBER_1_INTEGER;
 
+    fprintf(stderr, "TEST sense gnu/linux console irq value: %i\n", *irq);
+
                     // Unlock gnu/linux console mutex.
                     pthread_mutex_unlock(mt);
 
@@ -182,7 +184,7 @@ void sense_gnu_linux_console_message(void* p0, void* p1, void* p2, void* p3) {
  */
 void sense_gnu_linux_console(void* p0) {
 
-    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Sense gnu/linux console.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Sense gnu/linux console.");
 
     // The interrupt.
     void** irq = NULL_POINTER;
@@ -212,6 +214,8 @@ void sense_gnu_linux_console(void* p0) {
         // (situated in the applicator/interrupt/ directory)
         // and processed in the system signal handler procedure
         // (situated in the controller/checker.c module).
+
+    fprintf(stderr, "TEST sense gnu/linux console irq pointer: %i\n", *irq);
 
         sense_gnu_linux_console_message(*irq, *mt, *st, *is);
     }

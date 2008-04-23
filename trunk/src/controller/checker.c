@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.43 $ $Date: 2008-04-22 22:44:28 $ $Author: christian $
+ * @version $Revision: 1.44 $ $Date: 2008-04-23 22:47:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -308,36 +308,48 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
     void* p26, void* p27, void* p28, void* p29, void* p30, void* p31, void* p32, void* p33,
     void* p34, void* p35, void* p36, void* p37, void* p38, void* p39, void* p40, void* p41) {
 
+    fprintf(stderr, "TEST IRQ 0: %i\n", p0);
+    fprintf(stderr, "TEST IRQ *: %i\n", *((int*) p0));
+    fprintf(stderr, "TEST IRQ **: %i\n", **((int**) p0));
+
     if (p0 != *NULL_POINTER) {
 
         void** irq = (void**) p0;
+
+    fprintf(stderr, "TEST IRQ 1: %i\n", p0);
 
         log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Check for interrupt requests.");
 
         if (*irq == *NULL_POINTER) {
 
+    fprintf(stderr, "TEST IRQ 2: %i\n", p0);
+
             // This interrupt is only checked if the irq flag is null.
             // If it is not null, then another interrupt has been found before.
 
-            if (p5 != *NULL_POINTER) {
+            //?? TODO: The mutex is NOT needed here; delete later!
+            if (p9 != *NULL_POINTER) {
 
-                void** signal_memory_mutex = (void**) p5;
+                void** signal_memory_mutex = (void**) p9;
 
-                if (p4 != *NULL_POINTER) {
+                if (p8 != *NULL_POINTER) {
 
+                    //?? TODO: OLD comment; delete later!
                     // CAUTION! Do NOT cast to int** because the value is assigned to *mt below
                     // and casting to int** might change the expected size.
                     // (Pointer and integer do not necessarily always have to have the same size.)
-                    void** signal_memory_irq = (void**) p4;
+                    void** signal_memory_irq = (void**) p8;
 
                     if (**((int**) signal_memory_irq) != *NUMBER_0_INTEGER) {
 
                         log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Detected signal memory interrupt.");
 
                         // Set interrupt request flag.
-                        set_element(p0, (void*) NUMBER_0_INTEGER, p8, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                        get_element(p8, (void*) NUMBER_0_INTEGER, p0, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
                         // Set mutex.
-                        set_element(p1, (void*) NUMBER_0_INTEGER, p9, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                        get_element(p9, (void*) NUMBER_0_INTEGER, p1, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
+    fprintf(stderr, "TEST detected signal memory irq: %i\n", **((int**) irq));
                     }
 
                 } else {
@@ -353,36 +365,47 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
         if (*irq == *NULL_POINTER) {
 
+    fprintf(stderr, "TEST IRQ 3: %i\n", p0);
+
             // This interrupt is only checked if the irq flag is null.
             // If it is not null, then another interrupt has been found before.
 
-            if (p7 != *NULL_POINTER) {
+            //?? TODO: The mutex is NOT needed here; delete later!
+            if (p11 != *NULL_POINTER) {
 
-                void** gnu_linux_console_mutex = (void**) p7;
+    fprintf(stderr, "TEST IRQ 4: %i\n", p0);
 
-                if (p6 != *NULL_POINTER) {
+                void** gnu_linux_console_mutex = (void**) p11;
 
+                if (p10 != *NULL_POINTER) {
+
+    fprintf(stderr, "TEST IRQ 5: %i\n", p0);
+
+                    //?? TODO: OLD comment; delete later!
                     // CAUTION! Do NOT cast to int** because the value is assigned to *mt below
                     // and casting to int** might change the expected size.
                     // (Pointer and integer do not necessarily always have to have the same size.)
-                    void** gnu_linux_console_irq = (void**) p6;
+                    void** gnu_linux_console_irq = (void**) p10;
 
                     if (**((int**) gnu_linux_console_irq) != *NUMBER_0_INTEGER) {
 
+    fprintf(stderr, "TEST IRQ 6: %i\n", p0);
+
                         log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Detected gnu/linux console interrupt.");
 
-                        // Set handler.
-                        set_element(p2, (void*) NUMBER_0_INTEGER, p12, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-                        set_element(p3, (void*) NUMBER_0_INTEGER, p13, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-                        set_element(p4, (void*) NUMBER_0_INTEGER, p14, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-                        set_element(p5, (void*) NUMBER_0_INTEGER, p15, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-                        set_element(p6, (void*) NUMBER_0_INTEGER, p16, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-                        set_element(p7, (void*) NUMBER_0_INTEGER, p17, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-
                         // Set interrupt request flag.
-                        set_element(p0, (void*) NUMBER_0_INTEGER, p10, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                        get_element(p10, (void*) NUMBER_0_INTEGER, p0, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
                         // Set mutex.
-                        set_element(p0, (void*) NUMBER_0_INTEGER, p11, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                        get_element(p11, (void*) NUMBER_0_INTEGER, p1, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                        // Set handler.
+                        get_element(p12, (void*) NUMBER_0_INTEGER, p2, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                        get_element(p13, (void*) NUMBER_0_INTEGER, p3, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                        get_element(p14, (void*) NUMBER_0_INTEGER, p4, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                        get_element(p15, (void*) NUMBER_0_INTEGER, p5, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                        get_element(p16, (void*) NUMBER_0_INTEGER, p6, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                        get_element(p17, (void*) NUMBER_0_INTEGER, p7, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
+    fprintf(stderr, "TEST detected gnu/linux console irq: %i\n", **((int**) irq));
                     }
 
                 } else {
@@ -401,33 +424,36 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
             // This interrupt is only checked if the irq flag is null.
             // If it is not null, then another interrupt has been found before.
 
-            if (p9 != *NULL_POINTER) {
+            //?? TODO: The mutex is NOT needed here; delete later!
+            if (p19 != *NULL_POINTER) {
 
-                void** x_window_system_mutex = (void**) p9;
+                void** x_window_system_mutex = (void**) p19;
 
-                if (p8 != *NULL_POINTER) {
+                if (p18 != *NULL_POINTER) {
 
+                    //?? TODO: OLD comment; delete later!
                     // CAUTION! Do NOT cast to int** because the value is assigned to *mt below
                     // and casting to int** might change the expected size.
                     // (Pointer and integer do not necessarily always have to have the same size.)
-                    void** x_window_system_irq = (void**) p8;
+                    void** x_window_system_irq = (void**) p18;
 
                     if (**((int**) x_window_system_irq) != *NUMBER_0_INTEGER) {
 
                         log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Detected x window system interrupt.");
 
-                        // Set handler.
-                        set_element(p2, (void*) NUMBER_0_INTEGER, p20, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-                        set_element(p3, (void*) NUMBER_0_INTEGER, p21, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-                        set_element(p4, (void*) NUMBER_0_INTEGER, p22, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-                        set_element(p5, (void*) NUMBER_0_INTEGER, p23, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-                        set_element(p6, (void*) NUMBER_0_INTEGER, p24, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-                        set_element(p7, (void*) NUMBER_0_INTEGER, p25, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-
                         // Set interrupt request flag.
-                        set_element(p0, (void*) NUMBER_0_INTEGER, p18, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                        get_element(p18, (void*) NUMBER_0_INTEGER, p0, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
                         // Set mutex.
-                        set_element(p0, (void*) NUMBER_0_INTEGER, p19, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                        get_element(p19, (void*) NUMBER_0_INTEGER, p1, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                        // Set handler.
+                        get_element(p20, (void*) NUMBER_0_INTEGER, p2, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                        get_element(p21, (void*) NUMBER_0_INTEGER, p3, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                        get_element(p22, (void*) NUMBER_0_INTEGER, p4, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                        get_element(p23, (void*) NUMBER_0_INTEGER, p5, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                        get_element(p24, (void*) NUMBER_0_INTEGER, p6, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                        get_element(p25, (void*) NUMBER_0_INTEGER, p7, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
+    fprintf(stderr, "TEST detected x window system irq: %i\n", **((int**) irq));
                     }
 
                 } else {
@@ -446,33 +472,34 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
             // This interrupt is only checked if the irq flag is null.
             // If it is not null, then another interrupt has been found before.
 
-            if (p11 != *NULL_POINTER) {
+            //?? TODO: The mutex is NOT needed here; delete later!
+            if (p27 != *NULL_POINTER) {
 
-                void** www_service_mutex = (void**) p11;
+                void** www_service_mutex = (void**) p27;
 
-                if (p10 != *NULL_POINTER) {
+                if (p26 != *NULL_POINTER) {
 
+                    //?? TODO: OLD comment; delete later!
                     // CAUTION! Do NOT cast to int** because the value is assigned to *mt below
                     // and casting to int** might change the expected size.
                     // (Pointer and integer do not necessarily always have to have the same size.)
-                    void** www_service_irq = (void**) p10;
+                    void** www_service_irq = (void**) p26;
 
                     if (**((int**) www_service_irq) != *NUMBER_0_INTEGER) {
 
                         log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Detected www service interrupt.");
 
-                        // Set handler.
-                        set_element(p2, (void*) NUMBER_0_INTEGER, p28, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-                        set_element(p3, (void*) NUMBER_0_INTEGER, p29, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-                        set_element(p4, (void*) NUMBER_0_INTEGER, p30, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-                        set_element(p5, (void*) NUMBER_0_INTEGER, p31, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-                        set_element(p6, (void*) NUMBER_0_INTEGER, p32, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-                        set_element(p7, (void*) NUMBER_0_INTEGER, p33, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-
                         // Set interrupt request flag.
-                        set_element(p0, (void*) NUMBER_0_INTEGER, p26, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                        get_element(p26, (void*) NUMBER_0_INTEGER, p0, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
                         // Set mutex.
-                        set_element(p0, (void*) NUMBER_0_INTEGER, p27, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                        get_element(p27, (void*) NUMBER_0_INTEGER, p1, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                        // Set handler.
+                        get_element(p28, (void*) NUMBER_0_INTEGER, p2, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                        get_element(p29, (void*) NUMBER_0_INTEGER, p3, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                        get_element(p30, (void*) NUMBER_0_INTEGER, p4, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                        get_element(p31, (void*) NUMBER_0_INTEGER, p5, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                        get_element(p32, (void*) NUMBER_0_INTEGER, p6, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                        get_element(p33, (void*) NUMBER_0_INTEGER, p7, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
                     }
 
                 } else {
@@ -491,33 +518,34 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
             // This interrupt is only checked if the irq flag is null.
             // If it is not null, then another interrupt has been found before.
 
-            if (p13 != *NULL_POINTER) {
+            //?? TODO: The mutex is NOT needed here; delete later!
+            if (p35 != *NULL_POINTER) {
 
-                void** cyboi_service_mutex = (void**) p13;
+                void** cyboi_service_mutex = (void**) p35;
 
-                if (p12 != *NULL_POINTER) {
+                if (p34 != *NULL_POINTER) {
 
+                    //?? TODO: OLD comment; delete later!
                     // CAUTION! Do NOT cast to int** because the value is assigned to *mt below
                     // and casting to int** might change the expected size.
                     // (Pointer and integer do not necessarily always have to have the same size.)
-                    void** cyboi_service_irq = (void**) p12;
+                    void** cyboi_service_irq = (void**) p34;
 
                     if (**((int**) cyboi_service_irq) != *NUMBER_0_INTEGER) {
 
                         log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Detected cyboi service interrupt.");
 
-                        // Set handler.
-                        set_element(p2, (void*) NUMBER_0_INTEGER, p36, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-                        set_element(p3, (void*) NUMBER_0_INTEGER, p37, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-                        set_element(p4, (void*) NUMBER_0_INTEGER, p38, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-                        set_element(p5, (void*) NUMBER_0_INTEGER, p39, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-                        set_element(p6, (void*) NUMBER_0_INTEGER, p40, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-                        set_element(p7, (void*) NUMBER_0_INTEGER, p41, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-
                         // Set interrupt request flag.
-                        set_element(p0, (void*) NUMBER_0_INTEGER, p34, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                        get_element(p34, (void*) NUMBER_0_INTEGER, p0, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
                         // Set mutex.
-                        set_element(p0, (void*) NUMBER_0_INTEGER, p35, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                        get_element(p35, (void*) NUMBER_0_INTEGER, p1, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                        // Set handler.
+                        get_element(p36, (void*) NUMBER_0_INTEGER, p2, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                        get_element(p37, (void*) NUMBER_0_INTEGER, p3, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                        get_element(p38, (void*) NUMBER_0_INTEGER, p4, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                        get_element(p39, (void*) NUMBER_0_INTEGER, p5, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                        get_element(p40, (void*) NUMBER_0_INTEGER, p6, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                        get_element(p41, (void*) NUMBER_0_INTEGER, p7, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
                     }
 
                 } else {
@@ -706,9 +734,9 @@ void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
         // may check for new interrupt requests now.
 
         // The interrupt request flag.
-        int* irq = (int*) *NULL_POINTER;
+        int** irq = (int**) NULL_POINTER;
         // The mutex.
-        pthread_mutex_t* mt = (pthread_mutex_t*) *NULL_POINTER;
+        pthread_mutex_t** mt = (pthread_mutex_t**) NULL_POINTER;
 
         // Check interrupt request flags and get the appropriate:
         // - interrupt request flag (to be reset below)
@@ -721,26 +749,31 @@ void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
             p27, p28, p29, p30, p31, p32, p33, p34,
             p35, p36, p37, p38, p39, p40, p41, p42);
 
-        if ((irq != *NULL_POINTER) && (*irq != *NUMBER_0_INTEGER)) {
+        if ((irq != (int**) NULL_POINTER) && (*irq != (int*) *NULL_POINTER) && (**irq != *NUMBER_0_INTEGER)) {
 
-    fprintf(stderr, "TEST irq: %i\n", *irq);
+    fprintf(stderr, "TEST irq: %i\n", **irq);
+
+    fprintf(stderr, "TEST a: %s\n", (char*) *a);
+    fprintf(stderr, "TEST ac: %i\n", **((int**) *ac));
+    fprintf(stderr, "TEST mc: %i\n", **((int**) *mc));
+    fprintf(stderr, "TEST dc: %i\n", **((int**) *dc));
 
             // Lock cyboi service mutex.
-            pthread_mutex_lock(mt);
+            pthread_mutex_lock(*mt);
 
             // Reset cyboi service interrupt request.
             //
-            // The interrupt is reset to zero here because its purpose of
-            // receiving data over some device and handling the corresponding
-            // signals is fulfilled.
+            // The interrupt is reset to zero here because its purpose
+            // of receiving data over some device in order to handle
+            // the corresponding signal is fulfilled.
             //
             // This is done here, right after checking the interrupt flag
             // and yet BEFORE receiving data and handling the signal below,
             // so that the system may react faster to new interrupt requests.
-            *irq = *NUMBER_0_INTEGER;
+            **irq = *NUMBER_0_INTEGER;
 
             // Unlock cyboi service mutex.
-            pthread_mutex_unlock(mt);
+            pthread_mutex_unlock(*mt);
 
             // REFLEXION: The single input threads deliver various kinds of input:
             // - gnu/linux console: a sequence of input commands (key presses) as stored in the keyboard buffer
@@ -784,8 +817,6 @@ void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
             // signals may be handled in the next iteration of the signal checker loop.
 
         } else {
-
-    fprintf(stderr, "TEST wait: %i\n", irq);
 
             // No interrupt request was detected, so that the cyboi system
             // can be sent to sleep now, in order to save cpu time.

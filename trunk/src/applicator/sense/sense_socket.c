@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2007-12-28 19:25:54 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2008-04-23 22:47:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -276,7 +276,7 @@ void sense_socket(void* p0, void* p1) {
  */
 void sense_www_socket(void* p0) {
 
-    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Sense www socket.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Sense www socket.");
 
     sense_socket(p0, (void*) WWW_BASE_INTERNAL);
 }
@@ -288,7 +288,7 @@ void sense_www_socket(void* p0) {
  */
 void sense_cyboi_socket(void* p0) {
 
-    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Sense cyboi socket.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Sense cyboi socket.");
 
     sense_socket(p0, (void*) CYBOI_BASE_INTERNAL);
 }
