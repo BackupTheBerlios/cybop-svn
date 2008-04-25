@@ -14,9 +14,14 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.45 $ $Date: 2008-04-23 22:47:58 $ $Author: christian $
+# @version $Revision: 1.46 $ $Date: 2008-04-25 23:07:26 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2008-04-25  Christian Heller  <christian.heller@tuxtax.de>
+        * Correct pointer values in function "check_interrupts" of module "checker.c"
+        * Make example application "ui_control" work with at least "exit" operation
+            in knowledge file "handle_gnu_linux_console.cybol"
 
 2008-04-23  Christian Heller  <christian.heller@tuxtax.de>
         * Correct parameters and bugs in module "checker.c" and others

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.44 $ $Date: 2008-04-23 22:47:59 $ $Author: christian $
+ * @version $Revision: 1.45 $ $Date: 2008-04-25 23:07:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -320,7 +320,18 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
         log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Check for interrupt requests.");
 
-        if (*irq == *NULL_POINTER) {
+    fprintf(stderr, "TEST IRQ &null: %i\n", NULL_POINTER);
+    fprintf(stderr, "TEST IRQ null: %i\n", *NULL_POINTER);
+
+/*??
+        // CAUTION! Compare *irq to NULL_POINTER here!
+        // An alternative would be to do the following cast above:
+        // void*** irq = (void***) p0;
+        // and then compare **irq to *NULL_POINTER.
+        // However, working with *** pointers is not nice,
+        // so that the simpler version of comparing to the
+        // pointer reference NULL_POINTER is used here.
+        if (*irq == NULL_POINTER) {
 
     fprintf(stderr, "TEST IRQ 2: %i\n", p0);
 
@@ -362,8 +373,9 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
                 log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not check for interrupt requests. The signal memory mutex is null.");
             }
         }
+*/
 
-        if (*irq == *NULL_POINTER) {
+        if (*irq == NULL_POINTER) {
 
     fprintf(stderr, "TEST IRQ 3: %i\n", p0);
 
@@ -419,7 +431,7 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
             }
         }
 
-        if (*irq == *NULL_POINTER) {
+        if (*irq == NULL_POINTER) {
 
             // This interrupt is only checked if the irq flag is null.
             // If it is not null, then another interrupt has been found before.
@@ -467,7 +479,7 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
             }
         }
 
-        if (*irq == *NULL_POINTER) {
+        if (*irq == NULL_POINTER) {
 
             // This interrupt is only checked if the irq flag is null.
             // If it is not null, then another interrupt has been found before.
@@ -513,7 +525,7 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
             }
         }
 
-        if (*irq == *NULL_POINTER) {
+        if (*irq == NULL_POINTER) {
 
             // This interrupt is only checked if the irq flag is null.
             // If it is not null, then another interrupt has been found before.
@@ -714,10 +726,10 @@ void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
         check_get(p4, p5, p6, *signal_memory_mutex, (void*) &i, (void*) &a, (void*) &ac, (void*) &m, (void*) &mc, (void*) &d, (void*) &dc, (void*) &p, (void*) &id);
 
     //?? For testing only. Delete these lines later!
-    fprintf(stderr, "TEST a: %s\n", *((char**) a));
-    fprintf(stderr, "TEST ac: %i\n", **((int**) ac));
-//??    fprintf(stderr, "TEST m: %s\n", *m);
-    fprintf(stderr, "TEST mc: %i\n", **((int**) mc));
+    fprintf(stderr, "TEST signal a: %s\n", *((char**) a));
+    fprintf(stderr, "TEST signal ac: %i\n", **((int**) ac));
+//??    fprintf(stderr, "TEST signal m: %s\n", *m);
+    fprintf(stderr, "TEST signal mc: %i\n", **((int**) mc));
     // CAUTION! d and dc are NULL. Do NOT try to print their values here!
 /*??
     //?? p and id are not used anymore and do not always exist. So printing their value sometimes causes a crash.
@@ -753,10 +765,10 @@ void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
 
     fprintf(stderr, "TEST irq: %i\n", **irq);
 
-    fprintf(stderr, "TEST a: %s\n", (char*) *a);
-    fprintf(stderr, "TEST ac: %i\n", **((int**) *ac));
-    fprintf(stderr, "TEST mc: %i\n", **((int**) *mc));
-    fprintf(stderr, "TEST dc: %i\n", **((int**) *dc));
+    fprintf(stderr, "TEST irq a: %s\n", (char*) *a);
+    fprintf(stderr, "TEST irq ac: %i\n", **((int**) ac));
+    fprintf(stderr, "TEST irq mc: %i\n", **((int**) mc));
+    fprintf(stderr, "TEST irq dc: %i\n", **((int**) dc));
 
             // Lock cyboi service mutex.
             pthread_mutex_lock(*mt);

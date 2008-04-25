@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 
 <model>
+    <part name="exit_application" channel="inline" abstraction="operation" model="exit"/>
+<!--
     <part name="receive" channel="inline" abstraction="operation" model="receive">
-        <property name="channel" channel="inline" abstraction="knowledge" model=".ui_control.settings.user_interface"/>
+        <property name="channel" channel="inline" abstraction="character" model="gnu_linux_console"/>
         <property name="commands" channel="inline" abstraction="knowledge" model=".ui_control.logic.user_interface.main_window_actions"/>
     </part>
+-->
 </model>
 
 <!--
@@ -29,6 +32,6 @@
     http://www.cybop.net
     - Cybernetics Oriented Programming -
 
-    @version $Revision: 1.1 $ $Date: 2008-04-14 01:13:09 $ $Author: christian $
+    @version $Revision: 1.2 $ $Date: 2008-04-25 23:07:26 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->
