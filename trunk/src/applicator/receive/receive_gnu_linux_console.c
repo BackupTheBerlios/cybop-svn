@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.13 $ $Date: 2008-04-22 22:44:28 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2008-04-27 22:04:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -66,6 +66,8 @@ void receive_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4,
     // Allocate character array.
     allocate((void*) &a, (void*) &as, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
+    fprintf(stderr, "TEST receive pre read: %i\n", ac);
+
     // Read pressed keyboard keys as message from gnu/linux console.
     read_gnu_linux_console((void*) &a, (void*) &ac, (void*) &as, p12);
 
@@ -83,6 +85,10 @@ void receive_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4,
 
     // Decode character array into command.
     decode((void*) &c, (void*) &cc, (void*) &cs, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, a, (void*) &ac, p15, p16, (void*) GNU_LINUX_CONSOLE_MODEL, (void*) GNU_LINUX_CONSOLE_MODEL_COUNT);
+
+    fprintf(stderr, "TEST c: %s\n", (char*) c);
+    fprintf(stderr, "TEST cc: %i\n", cc);
+    fprintf(stderr, "TEST cs: %i\n", cs);
 
     // Deallocate character array.
     deallocate((void*) &a, (void*) &as, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);

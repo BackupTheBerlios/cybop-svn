@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2008-03-29 19:22:51 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2008-04-27 22:04:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -72,19 +72,25 @@ void read_gnu_linux_console(void* p0, void* p1, void* p2, void* p3) {
 //??        wint_t c = fwgetc(s);
         int c = fgetc(s);
 
+/*??
         while (*NUMBER_1_INTEGER) {
 
             if (c == EOF) {
 
                 break;
             }
+*/
+
+    fprintf(stderr, "TEST read gnu/linux console c: %c\n", c);
 
             // Copy source character to destination character array.
             decode_character_vector(p0, p1, p2, (void*) &c, (void*) NUMBER_1_INTEGER);
 
+/*??
             // Read character from source input stream, e.g. gnu/linux console.
             c = fgetc(s);
         }
+*/
 
     } else {
 

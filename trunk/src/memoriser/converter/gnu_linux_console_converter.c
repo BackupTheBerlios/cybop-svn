@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2008-04-12 17:03:23 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2008-04-27 22:04:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -97,6 +97,8 @@ void decode_gnu_linux_console_escape_control_sequence(void* p0, void* p1, void* 
             void** d = (void**) p0;
 
             log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Decode gnu/linux console escape control sequence.");
+
+    fprintf(stderr, "TEST decode gnu/linux console escape control sequence sc: %i\n", *((int*) p4));
 
             // The comparison result.
             int r = *NUMBER_0_INTEGER;
@@ -181,6 +183,8 @@ void decode_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, 
 
             log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Decode gnu/linux console character.");
 
+    fprintf(stderr, "TEST decode gnu/linux console character sc: %i\n", *((int*) p4));
+
             // The comparison result.
             int r = *NUMBER_0_INTEGER;
 
@@ -249,30 +253,53 @@ void decode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) 
             void* t = p3;
             int tc = *sc;
 
+    fprintf(stderr, "TEST decode gnu/linux console t: %s\n", (char*) t);
+    fprintf(stderr, "TEST decode gnu/linux console tc: %i\n", tc);
+
             // The comparison result.
             int r = *NUMBER_0_INTEGER;
 
+    fprintf(stderr, "TEST a0: %i\n", p3);
+
             if (r == *NUMBER_0_INTEGER) {
 
-                compare_arrays(t, (void*) tc, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+    fprintf(stderr, "TEST a1: %i\n", p3);
+
+                compare_arrays(t, (void*) &tc, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+    fprintf(stderr, "TEST a2: %i\n", p3);
 
                 if (r != *NUMBER_0_INTEGER) {
+
+    fprintf(stderr, "TEST a3: %i\n", p3);
 
                     // Set new begin character of sequence.
                     t = t + *ESCAPE_CONTROL_SEQUENCE_COUNT;
                     tc = tc - *ESCAPE_CONTROL_SEQUENCE_COUNT;
 
+    fprintf(stderr, "TEST a4: %i\n", p3);
+
                     decode_gnu_linux_console_escape_control_sequence(p0, p1, p2, t, (void*) &tc);
+
+    fprintf(stderr, "TEST a5: %i\n", p3);
                 }
             }
 
+    fprintf(stderr, "TEST b0: %i\n", p3);
+
             if (r == *NUMBER_0_INTEGER) {
 
+    fprintf(stderr, "TEST b1: %i\n", p3);
+
+/*??
                 // Set new begin character of sequence.
                 t = t + *ESCAPE_CONTROL_SEQUENCE_COUNT;
                 tc = tc - *ESCAPE_CONTROL_SEQUENCE_COUNT;
+*/
 
                 decode_gnu_linux_console_character(p0, p1, p2, t, (void*) &tc);
+
+    fprintf(stderr, "TEST b2: %i\n", p3);
             }
 
         } else {

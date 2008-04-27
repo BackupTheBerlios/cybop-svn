@@ -14,9 +14,12 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.46 $ $Date: 2008-04-25 23:07:26 $ $Author: christian $
+# @version $Revision: 1.47 $ $Date: 2008-04-27 22:04:46 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2008-04-27  Christian Heller  <christian.heller@tuxtax.de>
+        * Debug functions "receive_gnu_linux_console" and "decode_gnu_linux_console"
 
 2008-04-25  Christian Heller  <christian.heller@tuxtax.de>
         * Correct pointer values in function "check_interrupts" of module "checker.c"

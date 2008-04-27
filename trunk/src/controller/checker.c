@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.45 $ $Date: 2008-04-25 23:07:26 $ $Author: christian $
+ * @version $Revision: 1.46 $ $Date: 2008-04-27 22:04:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -308,20 +308,13 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
     void* p26, void* p27, void* p28, void* p29, void* p30, void* p31, void* p32, void* p33,
     void* p34, void* p35, void* p36, void* p37, void* p38, void* p39, void* p40, void* p41) {
 
-    fprintf(stderr, "TEST IRQ 0: %i\n", p0);
-    fprintf(stderr, "TEST IRQ *: %i\n", *((int*) p0));
-    fprintf(stderr, "TEST IRQ **: %i\n", **((int**) p0));
-
     if (p0 != *NULL_POINTER) {
 
         void** irq = (void**) p0;
 
-    fprintf(stderr, "TEST IRQ 1: %i\n", p0);
+//??    fprintf(stderr, "TEST IRQ 1: %i\n", p0);
 
         log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Check for interrupt requests.");
-
-    fprintf(stderr, "TEST IRQ &null: %i\n", NULL_POINTER);
-    fprintf(stderr, "TEST IRQ null: %i\n", *NULL_POINTER);
 
 /*??
         // CAUTION! Compare *irq to NULL_POINTER here!
@@ -377,7 +370,7 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
         if (*irq == NULL_POINTER) {
 
-    fprintf(stderr, "TEST IRQ 3: %i\n", p0);
+//??    fprintf(stderr, "TEST IRQ 3: %i\n", p0);
 
             // This interrupt is only checked if the irq flag is null.
             // If it is not null, then another interrupt has been found before.
@@ -385,13 +378,13 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
             //?? TODO: The mutex is NOT needed here; delete later!
             if (p11 != *NULL_POINTER) {
 
-    fprintf(stderr, "TEST IRQ 4: %i\n", p0);
+//??    fprintf(stderr, "TEST IRQ 4: %i\n", p0);
 
                 void** gnu_linux_console_mutex = (void**) p11;
 
                 if (p10 != *NULL_POINTER) {
 
-    fprintf(stderr, "TEST IRQ 5: %i\n", p0);
+//??    fprintf(stderr, "TEST IRQ 5: %i\n", p0);
 
                     //?? TODO: OLD comment; delete later!
                     // CAUTION! Do NOT cast to int** because the value is assigned to *mt below
@@ -401,7 +394,7 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
                     if (**((int**) gnu_linux_console_irq) != *NUMBER_0_INTEGER) {
 
-    fprintf(stderr, "TEST IRQ 6: %i\n", p0);
+//??    fprintf(stderr, "TEST IRQ 6: %i\n", p0);
 
                         log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Detected gnu/linux console interrupt.");
 
