@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.14 $ $Date: 2008-04-27 22:04:46 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2008-04-29 22:02:51 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -92,9 +92,6 @@ void receive_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4,
 
     // Deallocate character array.
     deallocate((void*) &a, (void*) &as, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
-
-    //?? TODO: The commands list was handed over as cybol property/ parameter!
-    //?? Replace c and cc with p?? and p??!
 
     // Get actual command belonging to the command name.
     // If the name is not known, the command parameter is left untouched.

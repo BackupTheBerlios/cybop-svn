@@ -7,12 +7,14 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.35 $ $Date: 2008-04-27 22:04:46 $ $Author: christian $
+# @version $Revision: 1.36 $ $Date: 2008-04-29 22:02:51 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Continue in function "decode_gnu_linux_console_character", in last comparison
-            (possibly copy value, since the local variable cannot be referenced)
+        * Continue in function "decode_gnu_linux_console_character":
+            copy values which is o.k. since destination variable was created in "receive...";
+            create a standard "copy" function somewhere in directory "memoriser/",
+            so that reallocation and setting of count as well as size do not have to be coded each time
 
         * Reactivate loop in function "read_gnu_linux_console" (which was blocking the program flow),
             because escape sequences consist of more than one characters (mostly three);

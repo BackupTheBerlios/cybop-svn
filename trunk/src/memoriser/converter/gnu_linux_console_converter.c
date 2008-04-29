@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.10 $ $Date: 2008-04-27 22:04:46 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2008-04-29 22:02:51 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -194,8 +194,10 @@ void decode_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, 
 
                 if (r != *NUMBER_0_INTEGER) {
 
-                    *d = (void*) &UI_ENTER_NAME;
+                    set_array_elements(*d, (void*) NUMBER_0_INTEGER, (void*) UI_ENTER_NAME, (void*) UI_ENTER_NAME_COUNT, (void*) CHARACTER_ARRAY);
                     *dc = *UI_ENTER_NAME_COUNT;
+                    ...
+                    copy value and also reallocate if necessary and set count and size; see function "copy_character_vector"!
                 }
             }
 
@@ -207,14 +209,17 @@ void decode_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, 
 
                     *d = (void*) &UI_ESCAPE_NAME;
                     *dc = *UI_ESCAPE_NAME_COUNT;
+                    ...
+                    copy value and also reallocate if necessary and set count and size; see function "copy_character_vector"!
                 }
             }
 
             if (r == *NUMBER_0_INTEGER) {
 
-                //?? TODO: Copy value of p2!
-                *d = (void*) &p2;
-                *dc = *PRIMITIVE_COUNT;
+                set_array_elements(*d, (void*) NUMBER_0_INTEGER, p3, p4, (void*) CHARACTER_ARRAY);
+                *dc = *UI_ESCAPE_NAME_COUNT;
+                ...
+                copy value and also reallocate if necessary and set count and size; see function "copy_character_vector"!
             }
 
         } else {
