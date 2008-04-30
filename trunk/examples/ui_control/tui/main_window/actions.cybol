@@ -15,7 +15,7 @@
     <part name="r" channel="inline" abstraction="knowledge" model=".ui_control.logic.functionality.account"/>
 -->
     <part name="i" channel="inline" abstraction="knowledge" model=".ui_control.logic.user_interface.show_about_information"/>
-    <part name="b" channel="inline" abstraction="knowledge" model=".ui_control.logic.lifecycle.exit_program"/>
+    <part name="b" channel="inline" abstraction="knowledge" model=".ui_control.logic.user_interface.select_next_part"/>
 </model>
 
 <!--
@@ -40,6 +40,6 @@
     http://www.cybop.net
     - Cybernetics Oriented Programming -
 
-    @version $Revision: 1.1 $ $Date: 2007-05-31 22:05:24 $ $Author: christian $
+    @version $Revision: 1.2 $ $Date: 2008-04-30 14:32:48 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->

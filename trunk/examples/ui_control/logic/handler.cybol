@@ -5,6 +5,8 @@
     <part name="handle_x_window_system" channel="file" abstraction="compound" model="ui_control/logic/handler/handle_x_window_system.cybol"/>
     <part name="handle_www_service" channel="file" abstraction="compound" model="ui_control/logic/handler/handle_www_service.cybol"/>
     <part name="handle_cyboi_service" channel="file" abstraction="compound" model="ui_control/logic/handler/handle_cyboi_service.cybol"/>
+    <part name="gnu_linux_console_command" channel="inline" abstraction="character" model=".ui_control.logic.user_interface.main_window_actions"/>
+    <part name="gnu_linux_console_command_model" channel="inline" abstraction="character" model=""/>
 </model>
 
 <!--
@@ -29,6 +31,6 @@
     http://www.cybop.net
     - Cybernetics Oriented Programming -
 
-    @version $Revision: 1.2 $ $Date: 2008-04-23 22:47:59 $ $Author: christian $
+    @version $Revision: 1.3 $ $Date: 2008-04-30 14:32:48 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.15 $ $Date: 2008-04-29 22:02:51 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2008-04-30 14:32:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -75,33 +75,15 @@ void receive_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4,
     fprintf(stderr, "TEST ac: %i\n", ac);
     fprintf(stderr, "TEST as: %i\n", as);
 
-    // The command.
-    void* c = *NULL_POINTER;
-    int cc = *NUMBER_0_INTEGER;
-    int cs = *NUMBER_0_INTEGER;
-
-    // Allocate command.
-    allocate((void*) &c, (void*) &cs, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
-
     // Decode character array into command.
-    decode((void*) &c, (void*) &cc, (void*) &cs, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, a, (void*) &ac, p15, p16, (void*) GNU_LINUX_CONSOLE_MODEL, (void*) GNU_LINUX_CONSOLE_MODEL_COUNT);
+    decode(p6, p7, p8, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, a, (void*) &ac, p15, p16, (void*) GNU_LINUX_CONSOLE_MODEL, (void*) GNU_LINUX_CONSOLE_MODEL_COUNT);
 
-    fprintf(stderr, "TEST c: %s\n", (char*) c);
-    fprintf(stderr, "TEST cc: %i\n", cc);
-    fprintf(stderr, "TEST cs: %i\n", cs);
+    fprintf(stderr, "TEST m: %s\n", *((char**) p6));
+    fprintf(stderr, "TEST mc: %i\n", *((int*) p7));
+    fprintf(stderr, "TEST ms: %i\n", *((int*) p8));
 
     // Deallocate character array.
     deallocate((void*) &a, (void*) &as, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
-
-    // Get actual command belonging to the command name.
-    // If the name is not known, the command parameter is left untouched.
-    get_universal_compound_element_by_name(p13, p14,
-        c, (void*) &cc,
-        p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11,
-        p15, p16);
-
-    // Deallocate command.
-    deallocate((void*) &c, (void*) &cs, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
 }
 
 /* GNU_LINUX_OPERATING_SYSTEM */

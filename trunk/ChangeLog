@@ -14,9 +14,21 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.47 $ $Date: 2008-04-27 22:04:46 $ $Author: christian $
+# @version $Revision: 1.48 $ $Date: 2008-04-30 14:32:48 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2008-04-30  Christian Heller  <christian.heller@tuxtax.de>
+        * Add new functions "set" and "set_character" automatically adjusting the destination's count and size
+        * Complete function "decode_gnu_linux_console_character" using new "set" function
+        * Correct function "receive_gnu_linux_console";
+            the command is now not determined within the "receive" operations anymore,
+            but instead has to be assembled in CYBOL knowledge files; advantages:
+            1 avoid problems with two calls of the function "get_universal_compound_element_by_name"
+              (once for the operation's "commands" parameter and another time for determining the actual command)
+            2 more flexibility since the knowledge path of a command can be manipulated in CYBOL
+            3 no "commands" parameter has to be handed over to the CYBOL "receive" operation anymore
+        * Make example application "ui_control" work with at least "exit" operation
 
 2008-04-27  Christian Heller  <christian.heller@tuxtax.de>
         * Debug functions "receive_gnu_linux_console" and "decode_gnu_linux_console"

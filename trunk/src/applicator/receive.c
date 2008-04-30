@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.48 $ $Date: 2008-04-22 22:44:28 $ $Author: christian $
+ * @version $Revision: 1.49 $ $Date: 2008-04-30 14:32:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -50,11 +50,11 @@
  * @param p1 the knowledge memory
  * @param p2 the knowledge memory count
  * @param p3 the model (Hand over as reference!)
- * @param p4 the model count (Hand over as reference!)
- * @param p5 the model size (Hand over as reference!)
+ * @param p4 the model count
+ * @param p5 the model size
  * @param p6 the details (Hand over as reference!)
- * @param p7 the details count (Hand over as reference!)
- * @param p8 the details size (Hand over as reference!)
+ * @param p7 the details count
+ * @param p8 the details size
  * @param p9 the root
  * @param p10 the root count
  * @param p11 the root size
@@ -122,7 +122,17 @@ void receive_with_parameters(void* p0, void* p1, void* p2, void* p3, void* p4, v
             // Get gnu/linux console input stream.
             get_array_elements(p0, (void*) GNU_LINUX_CONSOLE_INPUT_FILE_DESCRIPTOR_INTERNAL, (void*) &is, (void*) POINTER_ARRAY);
 
+    fprintf(stderr, "TEST receive pre m: %i\n", p3);
+    fprintf(stderr, "TEST receive pre m: %i\n", *((void**) p3));
+    fprintf(stderr, "TEST receive pre mc: %i\n", p4);
+    fprintf(stderr, "TEST receive pre mc: %i\n", *((int*) p4));
+
             receive_gnu_linux_console(NULL_POINTER, NULL_POINTER, NULL_POINTER, NULL_POINTER, NULL_POINTER, NULL_POINTER, p3, p4, p5, p6, p7, p8, *is, p12, p13, p1, p2);
+
+    fprintf(stderr, "TEST receive post m: %i\n", p3);
+    fprintf(stderr, "TEST receive post m: %i\n", *((void**) p3));
+    fprintf(stderr, "TEST receive post mc: %i\n", p4);
+    fprintf(stderr, "TEST receive post mc: %i\n", *((int*) p4));
         }
     }
 
@@ -442,8 +452,8 @@ void receive_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5)
         p3, p4);
 
     // Receive data using the parameters determined above.
-    receive_with_parameters(p2, p3, p4, (void*) mom, *momc, *moms, (void*) mod, *modc, *mods, *rm, *rmc, *rms,
-        *com, *comc, *mm, *mmc, *mem, *memc, *lm, *lmc, (void*) stm, (void*) stmc, *cm, *cmc);
+    receive_with_parameters(p2, p3, p4, (void*) mom, *momc, *moms, (void*) mod, *modc, *mods,
+        *rm, *rmc, *rms, *com, *comc, *mm, *mmc, *mem, *memc, *lm, *lmc, (void*) stm, (void*) stmc, *cm, *cmc);
 }
 
 /* RECEIVE_SOURCE */

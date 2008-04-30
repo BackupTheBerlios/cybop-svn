@@ -7,27 +7,18 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.36 $ $Date: 2008-04-29 22:02:51 $ $Author: christian $
+# @version $Revision: 1.37 $ $Date: 2008-04-30 14:32:48 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Continue in function "decode_gnu_linux_console_character":
-            copy values which is o.k. since destination variable was created in "receive...";
-            create a standard "copy" function somewhere in directory "memoriser/",
-            so that reallocation and setting of count as well as size do not have to be coded each time
-
         * Reactivate loop in function "read_gnu_linux_console" (which was blocking the program flow),
-            because escape sequences consist of more than one characters (mostly three);
-            find some way to predict the number of characters or find an eof or the like
+            because escape sequences consist of more than one characters (mostly three)
+        * Find some way to predict the number of characters or find an eof or the like,
+            in order to properly handle escape control sequences
 
         * stop thread if irq has already been set to 1; only continue sensing if irq is 0,
             e.g. in function "sense_gnu_linux_console"
         * possibly also wait some time while irq is 0, not only while irq is 1
-
-        * example application "ui_control" works with at least "exit" operation
-            in knowledge file "handle_gnu_linux_console.cybol"
-        * check if "receive" operation works fine for gnu_linux_console,
-            as there seems to be some bug or problem (possibly entered characters are not recognised correctly)
 
         * Set "receive" model in internal memory to NULL in "interrupt" (stop sensing) function,
             but do NOT destroy, since it belongs to the knowledge model tree
@@ -36,6 +27,12 @@
             - Call the "handle" function handing over the command determined before
                 (do this DIRECTLY, just like the "loop" and "branch" functions do,
                 and NOT in form of an encapsulating signal)
+
+        * Create new "set", "remove", "get" functions which automatically adjust the destination's count and size
+            (see module "character_vector_accessor.c")
+
+        * Replace redundant standard functions (arrays, set_elements etc.) with some sort of TEMPLATE replacing the type;
+            this could save hundreds of lines of code; possible use a C++ compiler just because of this reason?
 
 --
 

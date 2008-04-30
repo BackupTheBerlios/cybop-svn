@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2008-04-29 22:02:51 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2008-04-30 14:32:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -97,8 +97,6 @@ void decode_gnu_linux_console_escape_control_sequence(void* p0, void* p1, void* 
             void** d = (void**) p0;
 
             log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Decode gnu/linux console escape control sequence.");
-
-    fprintf(stderr, "TEST decode gnu/linux console escape control sequence sc: %i\n", *((int*) p4));
 
             // The comparison result.
             int r = *NUMBER_0_INTEGER;
@@ -183,8 +181,6 @@ void decode_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, 
 
             log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Decode gnu/linux console character.");
 
-    fprintf(stderr, "TEST decode gnu/linux console character sc: %i\n", *((int*) p4));
-
             // The comparison result.
             int r = *NUMBER_0_INTEGER;
 
@@ -194,10 +190,7 @@ void decode_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, 
 
                 if (r != *NUMBER_0_INTEGER) {
 
-                    set_array_elements(*d, (void*) NUMBER_0_INTEGER, (void*) UI_ENTER_NAME, (void*) UI_ENTER_NAME_COUNT, (void*) CHARACTER_ARRAY);
-                    *dc = *UI_ENTER_NAME_COUNT;
-                    ...
-                    copy value and also reallocate if necessary and set count and size; see function "copy_character_vector"!
+                    set(p0, p1, p2, (void*) UI_ENTER_NAME, (void*) UI_ENTER_NAME_COUNT, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
                 }
             }
 
@@ -207,19 +200,13 @@ void decode_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, 
 
                 if (r != *NUMBER_0_INTEGER) {
 
-                    *d = (void*) &UI_ESCAPE_NAME;
-                    *dc = *UI_ESCAPE_NAME_COUNT;
-                    ...
-                    copy value and also reallocate if necessary and set count and size; see function "copy_character_vector"!
+                    set(p0, p1, p2, (void*) UI_ESCAPE_NAME, (void*) UI_ESCAPE_NAME_COUNT, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
                 }
             }
 
             if (r == *NUMBER_0_INTEGER) {
 
-                set_array_elements(*d, (void*) NUMBER_0_INTEGER, p3, p4, (void*) CHARACTER_ARRAY);
-                *dc = *UI_ESCAPE_NAME_COUNT;
-                ...
-                copy value and also reallocate if necessary and set count and size; see function "copy_character_vector"!
+                set(p0, p1, p2, p3, p4, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
             }
 
         } else {

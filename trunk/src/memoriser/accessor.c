@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.13 $ $Date: 2007-12-01 23:57:42 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2008-04-30 14:32:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -40,6 +40,37 @@
 #include "../memoriser/accessor/signal_memory_accessor.c"
 #include "../memoriser/accessor/wide_character_vector_accessor.c"
 #include "../memoriser/array.c"
+
+/**
+ * Sets the source into the destination.
+ *
+ * This function automatically adjusts the destination's count and size.
+ *
+ * @param p0 the destination (Hand over as reference!)
+ * @param p1 the destination count
+ * @param p2 the destination size
+ * @param p3 the source
+ * @param p4 the source count
+ * @param p5 the abstraction
+ * @param p6 the abstraction count
+ */
+void set(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
+
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Set.");
+
+    // The comparison result.
+    int r = *NUMBER_0_INTEGER;
+
+    if (r == *NUMBER_0_INTEGER) {
+
+        compare_arrays(p5, p6, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != *NUMBER_0_INTEGER) {
+
+            set_character(p0, p1, p2, p3, p4);
+        }
+    }
+}
 
 /**
  * Sets the model element.

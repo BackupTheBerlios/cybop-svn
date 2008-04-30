@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2007-10-03 23:40:05 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2008-04-30 14:32:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -45,6 +45,9 @@
  */
 void copy_character_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
+    set(p0, p1, p2, p3, p4, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+
+/*??
     if (p4 != *NULL_POINTER) {
 
         int* sc = (int*) p4;
@@ -108,6 +111,7 @@ void copy_character_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not copy character vector. The source count is null.");
     }
+*/
 }
 
 /* COPY_CHARACTER_VECTOR_SOURCE */
