@@ -7,12 +7,13 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.38 $ $Date: 2008-05-01 17:11:30 $ $Author: christian $
+# @version $Revision: 1.39 $ $Date: 2008-05-01 22:48:36 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-test
-
+        * Program still crashes:
+            Possibly do not distinguish "escape sequence" and "normal character"
+            in function "decode_gnu_linux_console", just compare all in one function
         * Reactivate loop in function "read_gnu_linux_console" (which was blocking the program flow),
             because escape sequences consist of more than one characters (mostly three)
         * Find some way to predict the number of characters or find an eof or the like,

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2008-04-27 22:04:46 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2008-05-01 22:48:36 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -58,39 +58,112 @@ void read_gnu_linux_console(void* p0, void* p1, void* p2, void* p3) {
 
         log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Read from gnu/linux console.");
 
-        // The input character, initialised with first character read from stream.
-        //
-        // CAUTION! For the narrow stream functions it is important to store the
-        // result of these functions in a variable of type int instead of char,
-        // even if one plans to use it only as a character. Storing EOF in a char
-        // variable truncates its value to the size of a character, so that it
-        // is no longer distinguishable from the valid character (char) -1.
-        // So, one should always use an int for the result of getc and friends,
-        // and check for EOF after the call; once it is verified that the result
-        // is NOT EOF, one can be sure that it will fit in a char variable
-        // without loss of information.
+        // The loop exit flag.
+        int f = *NUMBER_0_INTEGER;
+        // The input character.
 //??        wint_t c = fwgetc(s);
-        int c = fgetc(s);
+        int c = *((int*) NULL_CONTROL_CHARACTER);
+        // The escape character mode.
+        int esc = *NUMBER_0_INTEGER;
+        // The escape control sequence mode.
+        int csi = *NUMBER_0_INTEGER;
 
-/*??
         while (*NUMBER_1_INTEGER) {
 
-            if (c == EOF) {
+            if (f == *NUMBER_1_INTEGER) {
 
                 break;
             }
-*/
+
+            // Read character from source input stream, i.e. gnu/linux console.
+            //
+            // CAUTION! For the narrow stream functions it is important to store the
+            // result of these functions in a variable of type int instead of char,
+            // even if one plans to use it only as a character. Storing EOF in a char
+            // variable truncates its value to the size of a character, so that it
+            // is no longer distinguishable from the valid character (char) -1.
+            // So, one should always use an int for the result of getc and friends,
+            // and check for EOF after the call; once it is verified that the result
+            // is NOT EOF, one can be sure that it will fit in a char variable
+            // without loss of information.
+//??            wint_t c = fwgetc(s);
+            c = fgetc(s);
 
     fprintf(stderr, "TEST read gnu/linux console c: %c\n", c);
 
-            // Copy source character to destination character array.
-            decode_character_vector(p0, p1, p2, (void*) &c, (void*) NUMBER_1_INTEGER);
+            if (csi == *NUMBER_1_INTEGER) {
 
-/*??
-            // Read character from source input stream, e.g. gnu/linux console.
-            c = fgetc(s);
+                // Reset escape control sequence mode.
+                csi = *NUMBER_0_INTEGER;
+
+                // Copy source character to destination character array.
+                decode_character_vector(p0, p1, p2, (void*) &c, (void*) NUMBER_1_INTEGER);
+
+                // An escape character followed by a left square bracket character
+                // were read before. So this is an escape control sequence.
+                // Since all values have been read, the loop can be left now.
+                f = *NUMBER_1_INTEGER;
+
+            } else if (esc == *NUMBER_1_INTEGER) {
+
+                // Reset escape character mode.
+                esc = *NUMBER_0_INTEGER;
+
+                // An escape character was read before.
+                // Find out if it was just that escape character,
+                // or if a left square bracket character follows now,
+                // in which case this is the start of an escape control sequence.
+
+                if (c == *LEFT_SQUARE_BRACKET_WIDE_CHARACTER) {
+
+                    // This is the start of an escape control sequence.
+
+                    // Set escape control sequence flag.
+                    csi = *NUMBER_1_INTEGER;
+
+                    // Copy source character to destination character array.
+                    decode_character_vector(p0, p1, p2, (void*) &c, (void*) NUMBER_1_INTEGER);
+
+                } else {
+
+                    // This is NOT going to be an escape control sequence.
+                    //
+                    // CAUTION! An escape- followed by another character had been detected
+                    // (of which the second may have been an escape character as well).
+                    // Ignore the second character here; the first escape character has already been added!
+                    //
+                    // Unfortunately, there is no other way to do this.
+                    // Application programs will not react when pressing the escape key,
+                    // only when pressing it a second time, or another character.
+                    // This is necessary to figure out whether the escape character
+                    // is the begin of an escape control sequence or just standalone.
+
+                    // Set loop exit flag.
+                    f = *NUMBER_1_INTEGER;
+                }
+
+            } else if (c == *ESCAPE_CONTROL_WIDE_CHARACTER) {
+
+                // Set escape character flag.
+                esc = *NUMBER_1_INTEGER;
+
+                // Copy source character to destination character array.
+                decode_character_vector(p0, p1, p2, (void*) &c, (void*) NUMBER_1_INTEGER);
+
+            } else if (c == EOF) {
+
+                // Set loop exit flag.
+                f = *NUMBER_1_INTEGER;
+
+            } else {
+
+                // Copy source character to destination character array.
+                decode_character_vector(p0, p1, p2, (void*) &c, (void*) NUMBER_1_INTEGER);
+
+                // Set loop exit flag.
+                f = *NUMBER_1_INTEGER;
+            }
         }
-*/
 
     } else {
 
