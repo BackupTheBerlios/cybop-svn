@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.46 $ $Date: 2008-04-27 22:04:46 $ $Author: christian $
+ * @version $Revision: 1.47 $ $Date: 2008-05-02 22:52:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -719,10 +719,10 @@ void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
         check_get(p4, p5, p6, *signal_memory_mutex, (void*) &i, (void*) &a, (void*) &ac, (void*) &m, (void*) &mc, (void*) &d, (void*) &dc, (void*) &p, (void*) &id);
 
     //?? For testing only. Delete these lines later!
-    fprintf(stderr, "TEST signal a: %s\n", *((char**) a));
-    fprintf(stderr, "TEST signal ac: %i\n", **((int**) ac));
+    fprintf(stderr, "TEST checker signal a: %s\n", *((char**) a));
+    fprintf(stderr, "TEST checker signal ac: %i\n", **((int**) ac));
 //??    fprintf(stderr, "TEST signal m: %s\n", *m);
-    fprintf(stderr, "TEST signal mc: %i\n", **((int**) mc));
+    fprintf(stderr, "TEST checker signal mc: %i\n", **((int**) mc));
     // CAUTION! d and dc are NULL. Do NOT try to print their values here!
 /*??
     //?? p and id are not used anymore and do not always exist. So printing their value sometimes causes a crash.
@@ -756,17 +756,17 @@ void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
 
         if ((irq != (int**) NULL_POINTER) && (*irq != (int*) *NULL_POINTER) && (**irq != *NUMBER_0_INTEGER)) {
 
-    fprintf(stderr, "TEST irq: %i\n", **irq);
+    fprintf(stderr, "TEST checker irq: %i\n", **irq);
 
-    fprintf(stderr, "TEST irq a: %s\n", (char*) *a);
-    fprintf(stderr, "TEST irq ac: %i\n", **((int**) ac));
-    fprintf(stderr, "TEST irq mc: %i\n", **((int**) mc));
-    fprintf(stderr, "TEST irq dc: %i\n", **((int**) dc));
+    fprintf(stderr, "TEST checker irq a: %s\n", (char*) *a);
+    fprintf(stderr, "TEST checker irq ac: %i\n", **((int**) ac));
+    fprintf(stderr, "TEST checker irq mc: %i\n", **((int**) mc));
+    fprintf(stderr, "TEST checker irq dc: %i\n", **((int**) dc));
 
-            // Lock cyboi service mutex.
+            // Lock mutex.
             pthread_mutex_lock(*mt);
 
-            // Reset cyboi service interrupt request.
+            // Reset interrupt request flag.
             //
             // The interrupt is reset to zero here because its purpose
             // of receiving data over some device in order to handle
@@ -777,7 +777,7 @@ void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
             // so that the system may react faster to new interrupt requests.
             **irq = *NUMBER_0_INTEGER;
 
-            // Unlock cyboi service mutex.
+            // Unlock mutex.
             pthread_mutex_unlock(*mt);
 
             // REFLEXION: The single input threads deliver various kinds of input:
@@ -806,17 +806,13 @@ void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
                 *NULL_POINTER, *NULL_POINTER, c, (void*) &cc);
 */
 
-            //?? OPEN QUESTION: How to retrieve the correct "receive" function as knowledge model?
-            //?? It was handed over as property to the "sense" operation.
-            //?? Either store it in the internal memory or get it somehow else?
-
             // Handle signal.
             //
             // CAUTION! The "handle" function has to be called DIRECTLY here!
             // For reasons, see the comment block above!
             handle(p0, p1, p2, p3, p4, p5, p6, p7, *signal_memory_irq, *signal_memory_mutex, *a, *ac, *m, *mc, *d, *dc, p, id, &x);
 
-            // An interrupt request was detected and the corresponding data received.
+            // CAUTION! An interrupt request was detected and the corresponding data received.
             // It is therefore VERY likely that new signals have been generated while handling the data.
             // The cyboi system is therefore NOT sent to sleep, so that possibly existing
             // signals may be handled in the next iteration of the signal checker loop.

@@ -7,13 +7,14 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.39 $ $Date: 2008-05-01 22:48:36 $ $Author: christian $
+# @version $Revision: 1.40 $ $Date: 2008-05-02 22:52:18 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
         * Program still crashes:
-            Possibly do not distinguish "escape sequence" and "normal character"
-            in function "decode_gnu_linux_console", just compare all in one function
+            - check if wchar_t has to be used instead of char
+            - check why the escape code sequence (e.g. ESC[B for arrow left) is added to the
+                knowledge tree TEST_SHUTDOWN, instead of the decoded string "arrow_left")
         * Reactivate loop in function "read_gnu_linux_console" (which was blocking the program flow),
             because escape sequences consist of more than one characters (mostly three)
         * Find some way to predict the number of characters or find an eof or the like,

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.10 $ $Date: 2008-05-01 22:48:36 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2008-05-02 22:52:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -61,8 +61,8 @@ void read_gnu_linux_console(void* p0, void* p1, void* p2, void* p3) {
         // The loop exit flag.
         int f = *NUMBER_0_INTEGER;
         // The input character.
-//??        wint_t c = fwgetc(s);
-        int c = *((int*) NULL_CONTROL_CHARACTER);
+        wint_t c = *((wint_t*) NULL_CONTROL_CHARACTER);
+//??        int c = *((int*) NULL_CONTROL_CHARACTER);
         // The escape character mode.
         int esc = *NUMBER_0_INTEGER;
         // The escape control sequence mode.
@@ -86,14 +86,14 @@ void read_gnu_linux_console(void* p0, void* p1, void* p2, void* p3) {
             // and check for EOF after the call; once it is verified that the result
             // is NOT EOF, one can be sure that it will fit in a char variable
             // without loss of information.
-//??            wint_t c = fwgetc(s);
-            c = fgetc(s);
+            c = fwgetc(s);
+//??            c = fgetc(s);
 
     fprintf(stderr, "TEST read gnu/linux console c: %c\n", c);
 
             if (csi == *NUMBER_1_INTEGER) {
 
-                // Reset escape control sequence mode.
+                // Reset escape control sequence flag.
                 csi = *NUMBER_0_INTEGER;
 
                 // Copy source character to destination character array.
@@ -106,7 +106,7 @@ void read_gnu_linux_console(void* p0, void* p1, void* p2, void* p3) {
 
             } else if (esc == *NUMBER_1_INTEGER) {
 
-                // Reset escape character mode.
+                // Reset escape character flag.
                 esc = *NUMBER_0_INTEGER;
 
                 // An escape character was read before.
@@ -127,16 +127,10 @@ void read_gnu_linux_console(void* p0, void* p1, void* p2, void* p3) {
                 } else {
 
                     // This is NOT going to be an escape control sequence.
-                    //
-                    // CAUTION! An escape- followed by another character had been detected
-                    // (of which the second may have been an escape character as well).
-                    // Ignore the second character here; the first escape character has already been added!
-                    //
-                    // Unfortunately, there is no other way to do this.
-                    // Application programs will not react when pressing the escape key,
-                    // only when pressing it a second time, or another character.
-                    // This is necessary to figure out whether the escape character
-                    // is the begin of an escape control sequence or just standalone.
+                    // An escape- followed by another, second character has been detected.
+
+                    // Unget this character so that it may be processed later.
+                    ungetc(c, s);
 
                     // Set loop exit flag.
                     f = *NUMBER_1_INTEGER;

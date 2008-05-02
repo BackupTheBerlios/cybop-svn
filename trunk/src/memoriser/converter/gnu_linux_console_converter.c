@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.12 $ $Date: 2008-04-30 14:32:48 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2008-05-02 22:52:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -80,6 +80,10 @@ void encode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 /**
  * Decodes a gnu/linux console escape control sequence into a command.
  *
+ * This function changes the escape control sequences into real names as defined by CYBOL.
+ * Example: The ARROW_UP_CONTROL_SEQUENCE (ESC[A sequence) gets converted into the
+ * constant UI_ARROW_UP_NAME with the value "arrow_up", which is used so in CYBOL files.
+ *
  * @param p0 the destination command (Hand over as reference!)
  * @param p1 the destination command count
  * @param p2 the destination command size
@@ -88,78 +92,61 @@ void encode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
  */
 void decode_gnu_linux_console_escape_control_sequence(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p1 != *NULL_POINTER) {
+    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Decode gnu/linux console escape control sequence.");
 
-        int* dc = (int*) p1;
+    // The comparison result.
+    int r = *NUMBER_0_INTEGER;
 
-        if (p4 != *NULL_POINTER) {
+    if (r == *NUMBER_0_INTEGER) {
 
-            void** d = (void**) p0;
+        compare_arrays(p3, p4, (void*) ARROW_UP_CONTROL_SEQUENCE, (void*) ARROW_UP_CONTROL_SEQUENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-            log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Decode gnu/linux console escape control sequence.");
+        if (r != *NUMBER_0_INTEGER) {
 
-            // The comparison result.
-            int r = *NUMBER_0_INTEGER;
-
-            if (r == *NUMBER_0_INTEGER) {
-
-                compare_arrays(p3, p4, (void*) ARROW_UP_CONTROL_SEQUENCE, (void*) ARROW_UP_CONTROL_SEQUENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-                if (r != *NUMBER_0_INTEGER) {
-
-                    *d = (void*) &UI_ARROW_UP_NAME;
-                    *dc = *UI_ARROW_UP_NAME_COUNT;
-                }
-            }
-
-            if (r == *NUMBER_0_INTEGER) {
-
-                compare_arrays(p3, p4, (void*) ARROW_DOWN_CONTROL_SEQUENCE, (void*) ARROW_DOWN_CONTROL_SEQUENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-                if (r != *NUMBER_0_INTEGER) {
-
-                    *d = (void*) &UI_ARROW_DOWN_NAME;
-                    *dc = *UI_ARROW_DOWN_NAME_COUNT;
-                }
-            }
-
-            if (r == *NUMBER_0_INTEGER) {
-
-                compare_arrays(p3, p4, (void*) ARROW_LEFT_CONTROL_SEQUENCE, (void*) ARROW_LEFT_CONTROL_SEQUENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-                if (r != *NUMBER_0_INTEGER) {
-
-                    *d = (void*) &UI_ARROW_LEFT_NAME;
-                    *dc = *UI_ARROW_LEFT_NAME_COUNT;
-                }
-            }
-
-            if (r == *NUMBER_0_INTEGER) {
-
-                compare_arrays(p3, p4, (void*) ARROW_RIGHT_CONTROL_SEQUENCE, (void*) ARROW_RIGHT_CONTROL_SEQUENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-                if (r != *NUMBER_0_INTEGER) {
-
-                    *d = (void*) &UI_ARROW_RIGHT_NAME;
-                    *dc = *UI_ARROW_RIGHT_NAME_COUNT;
-                }
-            }
-
-        } else {
-
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode gnu/linux console escape control sequence. The destination command is null.");
+            set(p0, p1, p2, (void*) UI_ARROW_UP_NAME, (void*) UI_ARROW_UP_NAME_COUNT, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
         }
-
-    } else {
-
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode gnu/linux console escape control sequence. The destination command count is null.");
     }
+
+    if (r == *NUMBER_0_INTEGER) {
+
+        compare_arrays(p3, p4, (void*) ARROW_DOWN_CONTROL_SEQUENCE, (void*) ARROW_DOWN_CONTROL_SEQUENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != *NUMBER_0_INTEGER) {
+
+            set(p0, p1, p2, (void*) UI_ARROW_DOWN_NAME, (void*) UI_ARROW_DOWN_NAME_COUNT, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER) {
+
+        compare_arrays(p3, p4, (void*) ARROW_LEFT_CONTROL_SEQUENCE, (void*) ARROW_LEFT_CONTROL_SEQUENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != *NUMBER_0_INTEGER) {
+
+            set(p0, p1, p2, (void*) UI_ARROW_LEFT_NAME, (void*) UI_ARROW_LEFT_NAME_COUNT, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER) {
+
+        compare_arrays(p3, p4, (void*) ARROW_RIGHT_CONTROL_SEQUENCE, (void*) ARROW_RIGHT_CONTROL_SEQUENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != *NUMBER_0_INTEGER) {
+
+            set(p0, p1, p2, (void*) UI_ARROW_RIGHT_NAME, (void*) UI_ARROW_RIGHT_NAME_COUNT, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+        }
+    }
+
+    // Just don't do anything, if none of the escape control sequences above matched.
+    // This was to be an escape control sequence, as it started with the corresponding prefix.
+    // If the sequence's values are not recognised, they probably do not make sense anyway.
+    // So, just ignore this and wait for other, proper sequences and characters to be converted.
 }
 
 /**
  * Decodes a gnu/linux console character into a command.
  *
- * This procedure changes some key codes into real names as defined by CYBOL.
+ * This function changes the key codes into real names as defined by CYBOL.
  * Example: The LINE_FEED_CONTROL_CHARACTER (<enter> key) gets converted into the
  * constant UI_ENTER_NAME with the value "enter", which is used so in CYBOL files.
  *
@@ -171,52 +158,36 @@ void decode_gnu_linux_console_escape_control_sequence(void* p0, void* p1, void* 
  */
 void decode_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p1 != *NULL_POINTER) {
+    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Decode gnu/linux console character.");
 
-        int* dc = (int*) p1;
+    // The comparison result.
+    int r = *NUMBER_0_INTEGER;
 
-        if (p4 != *NULL_POINTER) {
+    if (r == *NUMBER_0_INTEGER) {
 
-            void** d = (void**) p0;
+        compare_arrays(p3, p4, (void*) LINE_FEED_CONTROL_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-            log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Decode gnu/linux console character.");
+        if (r != *NUMBER_0_INTEGER) {
 
-            // The comparison result.
-            int r = *NUMBER_0_INTEGER;
-
-            if (r == *NUMBER_0_INTEGER) {
-
-                compare_arrays(p3, p4, (void*) LINE_FEED_CONTROL_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-                if (r != *NUMBER_0_INTEGER) {
-
-                    set(p0, p1, p2, (void*) UI_ENTER_NAME, (void*) UI_ENTER_NAME_COUNT, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
-                }
-            }
-
-            if (r == *NUMBER_0_INTEGER) {
-
-                compare_arrays(p3, p4, (void*) ESCAPE_CONTROL_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-                if (r != *NUMBER_0_INTEGER) {
-
-                    set(p0, p1, p2, (void*) UI_ESCAPE_NAME, (void*) UI_ESCAPE_NAME_COUNT, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
-                }
-            }
-
-            if (r == *NUMBER_0_INTEGER) {
-
-                set(p0, p1, p2, p3, p4, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
-            }
-
-        } else {
-
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode gnu/linux console character. The destination command is null.");
+            set(p0, p1, p2, (void*) UI_ENTER_NAME, (void*) UI_ENTER_NAME_COUNT, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
         }
+    }
 
-    } else {
+    if (r == *NUMBER_0_INTEGER) {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode gnu/linux console character. The destination command count is null.");
+        compare_arrays(p3, p4, (void*) ESCAPE_CONTROL_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != *NUMBER_0_INTEGER) {
+
+            set(p0, p1, p2, (void*) UI_ESCAPE_NAME, (void*) UI_ESCAPE_NAME_COUNT, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER) {
+
+        // None of the control characters above matched.
+        // Pass along character without modification.
+        set(p0, p1, p2, p3, p4, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
     }
 }
 
@@ -235,29 +206,29 @@ void decode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) 
 
         int* sc = (int*) p4;
 
-        if (p3 != *NULL_POINTER) {
+        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Decode gnu/linux console.");
 
-            void* s = (void*) p3;
+    fprintf(stderr, "TEST decode gnu/linux console s: %s\n", (char*) p3);
+    fprintf(stderr, "TEST decode gnu/linux console sc: %i\n", *((int*) p4));
 
-            log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Decode gnu/linux console.");
-
-            // The temporary character sequence.
-            void* t = p3;
-            int tc = *sc;
-
-    fprintf(stderr, "TEST decode gnu/linux console t: %s\n", (char*) t);
-    fprintf(stderr, "TEST decode gnu/linux console tc: %i\n", tc);
-
-            // The comparison result.
-            int r = *NUMBER_0_INTEGER;
+        // The comparison result.
+        int r = *NUMBER_0_INTEGER;
 
     fprintf(stderr, "TEST a0: %i\n", p3);
 
-            if (r == *NUMBER_0_INTEGER) {
+        if (r == *NUMBER_0_INTEGER) {
 
     fprintf(stderr, "TEST a1: %i\n", p3);
 
-                compare_arrays(t, (void*) &tc, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+            if (*sc > *ESCAPE_CONTROL_SEQUENCE_COUNT) {
+
+                // Only do the following comparison if the source array
+                // is greater than the escape control sequence prefix,
+                // since a value has to follow after the escape control sequence prefix.
+
+                // CAUTION! Use the "ESCAPE_CONTROL_SEQUENCE_COUNT" for both comparison values,
+                // since they would not be equal if their size differed.
+                compare_arrays(p3, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
     fprintf(stderr, "TEST a2: %i\n", p3);
 
@@ -265,9 +236,10 @@ void decode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) 
 
     fprintf(stderr, "TEST a3: %i\n", p3);
 
-                    // Set new begin character of sequence.
-                    t = t + *ESCAPE_CONTROL_SEQUENCE_COUNT;
-                    tc = tc - *ESCAPE_CONTROL_SEQUENCE_COUNT;
+                    // Initialise temporary character sequence with pointer to the
+                    // first character AFTER the escape control sequence prefix.
+                    void* t = p3 + *ESCAPE_CONTROL_SEQUENCE_COUNT;
+                    int tc = *sc - *ESCAPE_CONTROL_SEQUENCE_COUNT;
 
     fprintf(stderr, "TEST a4: %i\n", p3);
 
@@ -276,27 +248,17 @@ void decode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) 
     fprintf(stderr, "TEST a5: %i\n", p3);
                 }
             }
+        }
 
     fprintf(stderr, "TEST b0: %i\n", p3);
 
-            if (r == *NUMBER_0_INTEGER) {
+        if (r == *NUMBER_0_INTEGER) {
 
     fprintf(stderr, "TEST b1: %i\n", p3);
 
-/*??
-                // Set new begin character of sequence.
-                t = t + *ESCAPE_CONTROL_SEQUENCE_COUNT;
-                tc = tc - *ESCAPE_CONTROL_SEQUENCE_COUNT;
-*/
-
-                decode_gnu_linux_console_character(p0, p1, p2, t, (void*) &tc);
+            decode_gnu_linux_console_character(p0, p1, p2, p3, p4);
 
     fprintf(stderr, "TEST b2: %i\n", p3);
-            }
-
-        } else {
-
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode gnu/linux console. The source character array is null.");
         }
 
     } else {

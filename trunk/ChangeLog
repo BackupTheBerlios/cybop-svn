@@ -14,9 +14,12 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.49 $ $Date: 2008-05-01 22:48:36 $ $Author: christian $
+# @version $Revision: 1.50 $ $Date: 2008-05-02 22:52:18 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2008-05-02  Christian Heller  <christian.heller@tuxtax.de>
+        * Find a way to detect a simple escape character but also escape control sequences, using the glibc function "ungetc"
 
 2008-05-01  Christian Heller  <christian.heller@tuxtax.de>
         * Fix bug in function "read_gnu_linux_console" where
