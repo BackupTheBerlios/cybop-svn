@@ -1,7 +1,7 @@
 /*
  * $RCSfile: compound_accessor.c,v $
  *
- * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.45 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
+ * @version $Revision: 1.46 $ $Date: 2008-05-04 00:18:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -103,7 +103,7 @@ void get_compound_element_name_without_prefix(void* p0, void* p1, void* p2, void
 
                         void** e = (void**) p0;
 
-                        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Get compound element name without prefix.");
+                        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Get compound element name without prefix.");
 
                         // Let the name begin behind the separator element.
                         // Example:
@@ -117,27 +117,27 @@ void get_compound_element_name_without_prefix(void* p0, void* p1, void* p2, void
 
                     } else {
 
-                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get compound element name without prefix. The element name is null.");
+                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get compound element name without prefix. The element name is null.");
                     }
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get compound element name without prefix. The element name count is null.");
+                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get compound element name without prefix. The element name count is null.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get compound element name without prefix. The full name is null.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get compound element name without prefix. The full name is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get compound element name without prefix. The full name count is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get compound element name without prefix. The full name count is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get compound element name without prefix. The separator count is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get compound element name without prefix. The separator count is null.");
     }
 }
 
@@ -158,7 +158,7 @@ void get_compound_element_name_length(void* p0, void* p1, void* p2) {
 
             int* nc = (int*) p1;
 
-            log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Get compound element name length.");
+            log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Get compound element name length.");
 
             // The part separator index.
             int p = *NUMBER_MINUS_1_INTEGER;
@@ -208,12 +208,12 @@ void get_compound_element_name_length(void* p0, void* p1, void* p2) {
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get compound element name length. The name count is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get compound element name length. The name count is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get compound element name length. The separator index is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get compound element name length. The separator index is null.");
     }
 }
 
@@ -268,7 +268,7 @@ void get_compound_element_name_and_remaining_name(void* p0, void* p1, void* p2, 
                             // might crash with a segmentation fault!
                             if (p0 != *NULL_POINTER) {
 
-                                log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Get compound element name and remaining name.");
+                                log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Get compound element name and remaining name.");
 
                                 // Check if full name starts with either a
                                 // part separator "." or a meta separator "#".
@@ -305,7 +305,7 @@ void get_compound_element_name_and_remaining_name(void* p0, void* p1, void* p2, 
                                     // CAUTION! Only call this procedure if a prefix was found!
                                     get_compound_element_name_without_prefix((void*) &n, (void*) &nc, p0, p1, (void*) COMPOUND_PART_SEPARATOR_COUNT);
 
-//??    fprintf(stderr, "TEST part f %i\n", *f);
+//??    fwprintf(stderr, L"TEST part f %i\n", *f);
 
                                 } else if (m == *NUMBER_0_INTEGER) {
 
@@ -322,7 +322,7 @@ void get_compound_element_name_and_remaining_name(void* p0, void* p1, void* p2, 
                                     // CAUTION! Only call this procedure if a prefix was found!
                                     get_compound_element_name_without_prefix((void*) &n, (void*) &nc, p0, p1, (void*) COMPOUND_META_SEPARATOR_COUNT);
 
-//??    fprintf(stderr, "TEST meta f %i\n", *f);
+//??    fwprintf(stderr, L"TEST meta f %i\n", *f);
                                 }
 
                                 if ((*f == *NUMBER_0_INTEGER) || (*f == *NUMBER_1_INTEGER)) {
@@ -334,7 +334,7 @@ void get_compound_element_name_and_remaining_name(void* p0, void* p1, void* p2, 
 
                                     get_compound_element_name_length(n, (void*) &nc, (void*) &l);
 
-//??    fprintf(stderr, "TEST length %i\n", l);
+//??    fwprintf(stderr, L"TEST length %i\n", l);
 
                                     // Determine element name.
                                     // It equals the name without prefix.
@@ -386,37 +386,37 @@ void get_compound_element_name_and_remaining_name(void* p0, void* p1, void* p2, 
 
                             } else {
 
-                                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get the compound element name and remaining name. The full name is null.");
+                                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get the compound element name and remaining name. The full name is null.");
                             }
 
                         } else {
 
-                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get the compound element name and remaining name. The full name count is null.");
+                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get the compound element name and remaining name. The full name count is null.");
                         }
 
                     } else {
 
-                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get the compound element name and remaining name. The element name is null.");
+                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get the compound element name and remaining name. The element name is null.");
                     }
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get the compound element name and remaining name. The element name count is null.");
+                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get the compound element name and remaining name. The element name count is null.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get the compound element name and remaining name. The remaining name is null.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get the compound element name and remaining name. The remaining name is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get the compound element name and remaining name. The remaining name count is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get the compound element name and remaining name. The remaining name count is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get the compound element name and remaining name. The meta hierarchy flag is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get the compound element name and remaining name. The meta hierarchy flag is null.");
     }
 }
 
@@ -442,7 +442,7 @@ void get_compound_element_name_by_index(void* p0, void* p1, void* p2, void* p3, 
 
             if (*i >= *NUMBER_0_INTEGER) {
 
-                log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Get compound element name by index.");
+                log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Get compound element name by index.");
 
                 // The names.
                 void** n = NULL_POINTER;
@@ -469,37 +469,37 @@ void get_compound_element_name_by_index(void* p0, void* p1, void* p2, void* p3, 
 
                             } else {
 
-                                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get compound element name by index. The index exceeds the count.");
+                                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get compound element name by index. The index exceeds the count.");
                             }
 
                         } else {
 
-                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get compound element name by index. The names sizes is null.");
+                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get compound element name by index. The names sizes is null.");
                         }
 
                     } else {
 
-                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get compound element name by index. The names counts is null.");
+                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get compound element name by index. The names counts is null.");
                     }
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get compound element name by index. The names is null.");
+                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get compound element name by index. The names is null.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get compound element name by index. The index is negativ.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get compound element name by index. The index is negativ.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get compound element name by index. The compound count is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get compound element name by index. The compound count is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get compound element name by index. The index is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get compound element name by index. The index is null.");
     }
 }
 
@@ -525,7 +525,7 @@ void get_compound_element_abstraction_by_index(void* p0, void* p1, void* p2, voi
 
             if (*i >= *NUMBER_0_INTEGER) {
 
-                log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Get compound element abstraction by index.");
+                log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Get compound element abstraction by index.");
 
                 // The abstractions.
                 void** a = NULL_POINTER;
@@ -552,37 +552,37 @@ void get_compound_element_abstraction_by_index(void* p0, void* p1, void* p2, voi
 
                             } else {
 
-                                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get compound element abstraction by index. The index exceeds the count.");
+                                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get compound element abstraction by index. The index exceeds the count.");
                             }
 
                         } else {
 
-                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get compound element abstraction by index. The abstractions sizes is null.");
+                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get compound element abstraction by index. The abstractions sizes is null.");
                         }
 
                     } else {
 
-                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get compound element abstraction by index. The abstractions counts is null.");
+                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get compound element abstraction by index. The abstractions counts is null.");
                     }
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get compound element abstraction by index. The abstractions is null.");
+                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get compound element abstraction by index. The abstractions is null.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get compound element abstraction by index. The index is negativ.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get compound element abstraction by index. The index is negativ.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get compound element abstraction by index. The compound count is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get compound element abstraction by index. The compound count is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get compound element abstraction by index. The index is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get compound element abstraction by index. The index is null.");
     }
 }
 
@@ -597,7 +597,7 @@ void get_compound_element_abstraction_by_index(void* p0, void* p1, void* p2, voi
  */
 void get_compound_element_model(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Get compound element model.");
+    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Get compound element model.");
 
     // The models.
     void** m = NULL_POINTER;
@@ -622,17 +622,17 @@ void get_compound_element_model(void* p0, void* p1, void* p2, void* p3, void* p4
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get compound element model. The models sizes is null.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get compound element model. The models sizes is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get compound element model. The models counts is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get compound element model. The models counts is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get compound element model. The models is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get compound element model. The models is null.");
     }
 }
 
@@ -647,7 +647,7 @@ void get_compound_element_model(void* p0, void* p1, void* p2, void* p3, void* p4
  */
 void get_compound_element_details(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Get compound element details.");
+    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Get compound element details.");
 
     // The details.
     void** d = NULL_POINTER;
@@ -672,17 +672,17 @@ void get_compound_element_details(void* p0, void* p1, void* p2, void* p3, void* 
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get compound element details. The details sizes is null.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get compound element details. The details sizes is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get compound elementn details. The details counts is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get compound elementn details. The details counts is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get compound element details. The details is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get compound element details. The details is null.");
     }
 }
 
@@ -705,7 +705,7 @@ void get_compound_element_index(void* p0, void* p1, void* p2, void* p3, void* p4
 
             int* cc = (int*) p1;
 
-            log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Get compound element index.");
+            log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Get compound element index.");
 
             // The element names.
             void** n = NULL_POINTER;
@@ -753,12 +753,12 @@ void get_compound_element_index(void* p0, void* p1, void* p2, void* p3, void* p4
 
                             } else {
 
-                                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get compound element index. The name count is null.");
+                                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get compound element index. The name count is null.");
                             }
 
                         } else {
 
-                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get compound element index. The name is null.");
+                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get compound element index. The name is null.");
                         }
 
                         // Reset name and name count.
@@ -770,22 +770,22 @@ void get_compound_element_index(void* p0, void* p1, void* p2, void* p3, void* p4
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get compound element index. The part names counts is null.");
+                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get compound element index. The part names counts is null.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get compound element index. The part names is null.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get compound element index. The part names is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get compound element index. The compound count is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get compound element index. The compound count is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get compound element index. The index is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get compound element index. The index is null.");
     }
 }
 
@@ -833,7 +833,7 @@ void set_compound_element_by_index(void* p0, void* p1, void* p2, void* p3,
 
                 if (*i >= *NUMBER_0_INTEGER) {
 
-                    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Set compound element by index.");
+                    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Set compound element by index.");
 
                     // The names, abstractions, models, details.
                     void** n = NULL_POINTER;
@@ -949,87 +949,87 @@ void set_compound_element_by_index(void* p0, void* p1, void* p2, void* p3,
 
                                                                     } else {
 
-                                                                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not set compound element by index. The index exceeds the size.");
+                                                                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not set compound element by index. The index exceeds the size.");
                                                                     }
 
                                                                 } else {
 
-                                                                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not set compound element by index. The details sizes is null.");
+                                                                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not set compound element by index. The details sizes is null.");
                                                                 }
 
                                                             } else {
 
-                                                                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not set compound element by index. The details counts is null.");
+                                                                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not set compound element by index. The details counts is null.");
                                                             }
 
                                                         } else {
 
-                                                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not set compound element by index. The details is null.");
+                                                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not set compound element by index. The details is null.");
                                                         }
 
                                                     } else {
 
-                                                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not set compound element by index. The models sizes is null.");
+                                                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not set compound element by index. The models sizes is null.");
                                                     }
 
                                                 } else {
 
-                                                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not set compound element by index. The models counts is null.");
+                                                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not set compound element by index. The models counts is null.");
                                                 }
 
                                             } else {
 
-                                                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not set compound element by index. The models is null.");
+                                                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not set compound element by index. The models is null.");
                                             }
 
                                         } else {
 
-                                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not set compound element by index. The abstractions sizes is null.");
+                                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not set compound element by index. The abstractions sizes is null.");
                                         }
 
                                     } else {
 
-                                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not set compound element by index. The abstractions counts is null.");
+                                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not set compound element by index. The abstractions counts is null.");
                                     }
 
                                 } else {
 
-                                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not set compound element by index. The abstractions is null.");
+                                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not set compound element by index. The abstractions is null.");
                                 }
 
                             } else {
 
-                                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not set compound element by index. The names sizes is null.");
+                                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not set compound element by index. The names sizes is null.");
                             }
 
                         } else {
 
-                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not set compound element by index. The names counts is null.");
+                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not set compound element by index. The names counts is null.");
                         }
 
                     } else {
 
-                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not set compound element by index. The names is null.");
+                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not set compound element by index. The names is null.");
                     }
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not set compound element by index. The index is negative.");
+                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not set compound element by index. The index is negative.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not set compound element by index. The compound count is null.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not set compound element by index. The compound count is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not set compound element by index. The compound sizes is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not set compound element by index. The compound sizes is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not set compound element by index. The index is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not set compound element by index. The index is null.");
     }
 }
 
@@ -1056,7 +1056,7 @@ void set_compound_element_by_name(void* p0, void* p1, void* p2,
     void* p3, void* p4, void* p5, void* p6, void* p7, void* p8,
     void* p9, void* p10, void* p11, void* p12, void* p13, void* p14) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Set compound element by name.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Set compound element by name.");
 
     // The element name index.
     int i = *NUMBER_MINUS_1_INTEGER;
@@ -1068,11 +1068,11 @@ void set_compound_element_by_name(void* p0, void* p1, void* p2,
     // Incorrect examples: ".patient", "#patient"
     get_compound_element_index(p0, p1, p3, p4, (void*) &i);
 
-//??    fprintf(stderr, "TEST element index %i\n", i);
+//??    fwprintf(stderr, L"TEST element index %i\n", i);
 
     if (i >= *NUMBER_0_INTEGER) {
 
-        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) "Could not set compound element by name. A compound element with that name does already exist.");
+        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) L"Could not set compound element by name. A compound element with that name does already exist.");
 
     } else {
 
@@ -1121,7 +1121,7 @@ void add_compound_element_by_name(void* p0, void* p1, void* p2,
 
                 void** n = (void**) p3;
 
-                log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Add compound element by name:");
+                log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Add compound element by name:");
 
                 // The name suffix.
                 void* s = *NULL_POINTER;
@@ -1168,17 +1168,17 @@ void add_compound_element_by_name(void* p0, void* p1, void* p2,
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not add compound element by name. The name is null.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not add compound element by name. The name is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not add compound element by name. The name count is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not add compound element by name. The name count is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not add compound element by name. The name size is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not add compound element by name. The name size is null.");
     }
 }
 
@@ -1205,7 +1205,7 @@ void replace_compound_element_by_name(void* p0, void* p1, void* p2,
     void* p3, void* p4, void* p5, void* p6, void* p7, void* p8,
     void* p9, void* p10, void* p11, void* p12, void* p13, void* p14) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Replace compound element by name.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Replace compound element by name.");
 //??    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) (char*) p6);
 
 /*??
@@ -1219,17 +1219,17 @@ void replace_compound_element_by_name(void* p0, void* p1, void* p2,
     // Incorrect examples: ".patient", "#patient"
     get_compound_element_index(p0, p1, e, (void*) &ec, (void*) &i);
 
-//??    fprintf(stderr, "TEST part index %i\n", i);
+//??    fwprintf(stderr, L"TEST part index %i\n", i);
 
     if (i >= *NUMBER_0_INTEGER) {
 
-        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) "Could not replace compound element by name. A compound element with that name does already exist.");
+        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) L"Could not replace compound element by name. A compound element with that name does already exist.");
 
     } else {
 
         // Could not get compound element index. An element with that name does not exist.
         // Therefore, add compound element by name.
-        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Add compound model element by name.");
+        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Add compound model element by name.");
         log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) (char*) e);
 
         // CAUTION! Use compound count as index for adding new elements.
@@ -1273,7 +1273,7 @@ void remove_compound_element_by_index(void* p0, void* p1, void* p2, void* p3) {
 
                 if (*i >= *NUMBER_0_INTEGER) {
 
-                    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Remove compound element by index.");
+                    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Remove compound element by index.");
 
                     // The names, abstractions, models, details.
                     void** n = NULL_POINTER;
@@ -1351,87 +1351,87 @@ void remove_compound_element_by_index(void* p0, void* p1, void* p2, void* p3) {
 
                                                                     } else {
 
-                                                                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not remove compound element by index. The index exceeds the count.");
+                                                                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not remove compound element by index. The index exceeds the count.");
                                                                     }
 
                                                                 } else {
 
-                                                                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not remove compound element by index. The details sizes is null.");
+                                                                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not remove compound element by index. The details sizes is null.");
                                                                 }
 
                                                             } else {
 
-                                                                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not remove compound element by index. The details counts is null.");
+                                                                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not remove compound element by index. The details counts is null.");
                                                             }
 
                                                         } else {
 
-                                                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not remove compound element by index. The details is null.");
+                                                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not remove compound element by index. The details is null.");
                                                         }
 
                                                     } else {
 
-                                                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not remove compound element by index. The models sizes is null.");
+                                                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not remove compound element by index. The models sizes is null.");
                                                     }
 
                                                 } else {
 
-                                                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not remove compound element by index. The models counts is null.");
+                                                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not remove compound element by index. The models counts is null.");
                                                 }
 
                                             } else {
 
-                                                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not remove compound element by index. The models is null.");
+                                                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not remove compound element by index. The models is null.");
                                             }
 
                                         } else {
 
-                                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not remove compound element by index. The abstractions sizes is null.");
+                                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not remove compound element by index. The abstractions sizes is null.");
                                         }
 
                                     } else {
 
-                                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not remove compound element by index. The abstractions counts is null.");
+                                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not remove compound element by index. The abstractions counts is null.");
                                     }
 
                                 } else {
 
-                                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not remove compound element by index. The abstractions is null.");
+                                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not remove compound element by index. The abstractions is null.");
                                 }
 
                             } else {
 
-                                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not remove compound element by index. The names sizes is null.");
+                                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not remove compound element by index. The names sizes is null.");
                             }
 
                         } else {
 
-                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not remove compound element by index. The names counts is null.");
+                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not remove compound element by index. The names counts is null.");
                         }
 
                     } else {
 
-                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not remove compound element by index. The names is null.");
+                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not remove compound element by index. The names is null.");
                     }
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not remove compound element by index. The index is negativ.");
+                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not remove compound element by index. The index is negativ.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not remove compound element by index. The compound count is null.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not remove compound element by index. The compound count is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not remove compound element by index. The compound size is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not remove compound element by index. The compound size is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not remove compound element by index. The index is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not remove compound element by index. The index is null.");
     }
 }
 
@@ -1449,7 +1449,7 @@ void reindex_compound_elements_forming_list(void* p0, void* p1, void* p2, int* p
     if ((p0 != *NULL_POINTER) && (p1 != *NULL_POINTER)
         && (p2 != *NULL_POINTER) && (p3 != *NULL_POINTER)) {
 
-        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Reindex compound elements representing a list.");
+        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Reindex compound elements representing a list.");
 
         // The compound counter.
         int cc = *NUMBER_0_INTEGER;
@@ -1553,7 +1553,7 @@ void reindex_compound_elements_forming_list(void* p0, void* p1, void* p2, int* p
  */
 void remove_compound_element_by_name(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Remove compound element by name.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Remove compound element by name.");
 
     // The element name.
     void* e = *NULL_POINTER;
@@ -1581,9 +1581,9 @@ void remove_compound_element_by_name(void* p0, void* p1, void* p2, void* p3, voi
     // as well as the flag indicating a part- or meta element.
     get_compound_element_name_and_remaining_name(p6, p7, (void*) &e, (void*) &ec, (void*) &r, (void*) &rc, (void*) &f);
 
-//??    fprintf(stderr, "TEST r %s\n", (char*) r);
-//??    fprintf(stderr, "TEST rc %i\n", rc);
-//??    fprintf(stderr, "TEST f %i\n", f);
+//??    fwprintf(stderr, L"TEST r %s\n", (char*) r);
+//??    fwprintf(stderr, L"TEST rc %i\n", rc);
+//??    fwprintf(stderr, L"TEST f %i\n", f);
 
     if (f == *NUMBER_0_INTEGER) {
 
@@ -1594,7 +1594,7 @@ void remove_compound_element_by_name(void* p0, void* p1, void* p2, void* p3, voi
         // Incorrect examples: ".patient", "#patient"
         get_compound_element_index(p0, p1, e, (void*) &ec, (void*) &i);
 
-//??    fprintf(stderr, "TEST part index %i\n", i);
+//??    fwprintf(stderr, L"TEST part index %i\n", i);
 
         if (i >= *NUMBER_0_INTEGER) {
 
@@ -1634,7 +1634,7 @@ void remove_compound_element_by_name(void* p0, void* p1, void* p2, void* p3, voi
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not remove compound element by name. An element with that name does not exist.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not remove compound element by name. An element with that name does not exist.");
         }
 
     } else if (f == *NUMBER_1_INTEGER) {
@@ -1646,7 +1646,7 @@ void remove_compound_element_by_name(void* p0, void* p1, void* p2, void* p3, voi
         // Incorrect examples: ".patient", "#patient"
         get_compound_element_index(p3, p4, e, (void*) &ec, (void*) &i);
 
-//??    fprintf(stderr, "TEST meta index %i\n", i);
+//??    fwprintf(stderr, L"TEST meta index %i\n", i);
 
         if (i >= *NUMBER_0_INTEGER) {
 
@@ -1686,12 +1686,12 @@ void remove_compound_element_by_name(void* p0, void* p1, void* p2, void* p3, voi
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not remove compound element by name. An element with that name does not exist.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not remove compound element by name. An element with that name does not exist.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not remove compound element by name. The name does not represent a compound knowledge element or -hierarchy.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not remove compound element by name. The name does not represent a compound knowledge element or -hierarchy.");
     }
 }
 
@@ -1732,7 +1732,7 @@ void get_compound_element_by_index(void* p0, void* p1, void* p2,
 
             if (*i >= *NUMBER_0_INTEGER) {
 
-                log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Get compound element by index.");
+                log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Get compound element by index.");
 
                 // The names, abstractions, models, details.
                 void** n = NULL_POINTER;
@@ -1804,82 +1804,82 @@ void get_compound_element_by_index(void* p0, void* p1, void* p2,
 
                                                                 } else {
 
-                                                                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get compound element by index. The index exceeds the count.");
+                                                                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get compound element by index. The index exceeds the count.");
                                                                 }
 
                                                             } else {
 
-                                                                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get compound element by index. The details sizes is null.");
+                                                                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get compound element by index. The details sizes is null.");
                                                             }
 
                                                         } else {
 
-                                                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get compound element by index. The details counts is null.");
+                                                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get compound element by index. The details counts is null.");
                                                         }
 
                                                     } else {
 
-                                                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get compound element by index. The details is null.");
+                                                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get compound element by index. The details is null.");
                                                     }
 
                                                 } else {
 
-                                                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get compound element by index. The models sizes is null.");
+                                                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get compound element by index. The models sizes is null.");
                                                 }
 
                                             } else {
 
-                                                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get compound element by index. The models counts is null.");
+                                                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get compound element by index. The models counts is null.");
                                             }
 
                                         } else {
 
-                                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get compound element by index. The models is null.");
+                                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get compound element by index. The models is null.");
                                         }
 
                                     } else {
 
-                                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get compound element by index. The abstractions sizes is null.");
+                                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get compound element by index. The abstractions sizes is null.");
                                     }
 
                                 } else {
 
-                                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get compound element by index. The abstractions counts is null.");
+                                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get compound element by index. The abstractions counts is null.");
                                 }
 
                             } else {
 
-                                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get compound element by index. The abstractions is null.");
+                                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get compound element by index. The abstractions is null.");
                             }
 
                         } else {
 
-                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get compound element by index. The names sizes is null.");
+                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get compound element by index. The names sizes is null.");
                         }
 
                     } else {
 
-                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get compound element by index. The names counts is null.");
+                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get compound element by index. The names counts is null.");
                     }
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get compound element by index. The names is null.");
+                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get compound element by index. The names is null.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get compound element by index. The index is negativ.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get compound element by index. The index is negativ.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get compound element by index. The compound count is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get compound element by index. The compound count is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get compound element by index. The index is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get compound element by index. The index is null.");
     }
 }
 
@@ -1915,7 +1915,7 @@ void get_compound_element_by_name(void* p0, void* p1, void* p2, void* p3, void* 
     void* p6, void* p7, void* p8, void* p9, void* p10, void* p11,
     void* p12, void* p13, void* p14, void* p15, void* p16, void* p17) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Get compound element by name.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Get compound element by name.");
 
     // The element name.
     void* e = *NULL_POINTER;
@@ -1944,9 +1944,9 @@ void get_compound_element_by_name(void* p0, void* p1, void* p2, void* p3, void* 
     get_compound_element_name_and_remaining_name(p4, p5, (void*) &e, (void*) &ec, (void*) &r, (void*) &rc, (void*) &f);
 
 /*??
-    fprintf(stderr, "TEST r %s\n", (char*) r);
-    fprintf(stderr, "TEST rc %i\n", rc);
-    fprintf(stderr, "TEST f %i\n", f);
+    fwprintf(stderr, L"TEST r %s\n", (char*) r);
+    fwprintf(stderr, L"TEST rc %i\n", rc);
+    fwprintf(stderr, L"TEST f %i\n", f);
 */
 
     if (f == *NUMBER_0_INTEGER) {
@@ -1958,7 +1958,7 @@ void get_compound_element_by_name(void* p0, void* p1, void* p2, void* p3, void* 
         // Incorrect examples: ".patient", "#patient"
         get_compound_element_index(p0, p1, e, (void*) &ec, (void*) &i);
 
-//??    fprintf(stderr, "TEST part index %i\n", i);
+//??    fwprintf(stderr, L"TEST part index %i\n", i);
 
         if (i >= *NUMBER_0_INTEGER) {
 
@@ -1986,7 +1986,7 @@ void get_compound_element_by_name(void* p0, void* p1, void* p2, void* p3, void* 
 
         } else {
 
-            log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) "Could not get compound element by name. A part element with that name does not exist.");
+            log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) L"Could not get compound element by name. A part element with that name does not exist.");
         }
 
     } else if (f == *NUMBER_1_INTEGER) {
@@ -1998,7 +1998,7 @@ void get_compound_element_by_name(void* p0, void* p1, void* p2, void* p3, void* 
         // Incorrect examples: ".patient", "#patient"
         get_compound_element_index(p2, p3, e, (void*) &ec, (void*) &i);
 
-//??    fprintf(stderr, "TEST meta index %i\n", i);
+//??    fwprintf(stderr, L"TEST meta index %i\n", i);
 
         if (i >= *NUMBER_0_INTEGER) {
 
@@ -2026,12 +2026,12 @@ void get_compound_element_by_name(void* p0, void* p1, void* p2, void* p3, void* 
 
         } else {
 
-            log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) "Could not get compound element by name. A meta element with that name does not exist.");
+            log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) L"Could not get compound element by name. A meta element with that name does not exist.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get compound element by name. The name does not represent a compound knowledge element or -hierarchy.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get compound element by name. The name does not represent a compound knowledge element or -hierarchy.");
     }
 }
 
@@ -2076,7 +2076,7 @@ void get_universal_compound_element_by_name(void* p0, void* p1, void* p2, void* 
     void* p4, void* p5, void* p6, void* p7, void* p8, void* p9,
     void* p10, void* p11, void* p12, void* p13, void* p14, void* p15, void* p16, void* p17) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Get universal compound element by name.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Get universal compound element by name.");
 
     // The part name, abstraction, model, details.
     void** n = NULL_POINTER;
@@ -2130,7 +2130,7 @@ void get_universal_compound_element_by_name(void* p0, void* p1, void* p2, void* 
 
         if (r != *NUMBER_0_INTEGER) {
 
-            log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Get universal compound element as encapsulated knowledge.");
+            log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Get universal compound element as encapsulated knowledge.");
 
             // Get compound element as double-encapsulated model.
             //
@@ -2165,7 +2165,7 @@ void get_universal_compound_element_by_name(void* p0, void* p1, void* p2, void* 
 
         if (r != *NUMBER_0_INTEGER) {
 
-            log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Get universal compound element as knowledge.");
+            log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Get universal compound element as knowledge.");
 
             // Get compound element as encapsulated model.
             //
@@ -2187,7 +2187,7 @@ void get_universal_compound_element_by_name(void* p0, void* p1, void* p2, void* 
 
     if (r == *NUMBER_0_INTEGER) {
 
-        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Get universal compound element as inline.");
+        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Get universal compound element as inline.");
 
         // Get compound element as direct model.
         //

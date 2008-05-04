@@ -1,7 +1,7 @@
 /*
  * $RCSfile: signal_memory_allocator.c,v $
  *
- * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,7 +23,7 @@
  * This file contains the functionality to:
  * - create a signal memory in memory
  *
- * @version $Revision: 1.16 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2008-05-04 00:18:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -91,7 +91,7 @@ void allocate_signal_memory(void* p0, void* p1) {
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not allocate signal memory. The signal memory parameter is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not allocate signal memory. The signal memory parameter is null.");
     }
 }
 
@@ -188,7 +188,7 @@ void deallocate_signal_memory(void* p0, void* p1) {
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not deallocate signal memory. The signal memory parameter is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not deallocate signal memory. The signal memory parameter is null.");
     }
 }
 

@@ -1,7 +1,7 @@
 /*
  * $RCSfile: xdt_field_constants.c,v $
  *
- * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2007-09-12 08:18:18 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2008-05-04 00:18:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -46,7 +46,7 @@ static int* XDT_FIELD_IDENTIFICATION_COUNT = NUMBER_4_INTEGER_ARRAY;
 /**
  * The kbv test number field.
  *
- * German: KBV-Prüfnummer
+ * German: KBV-Prï¿½fnummer
  * Size: 7
  * Type: integer
  * Rule: 007
@@ -145,7 +145,7 @@ static int* PHYSICIAN_CATEGORY_XDT_FIELD = NUMBER_204_INTEGER_ARRAY;
 /**
  * The physician street field.
  *
- * German: Straße
+ * German: Straï¿½e
  * Size: <= 70
  * Type: character array
  * Rule: -
@@ -160,7 +160,7 @@ static int* PHYSICIAN_STREET_XDT_FIELD = NUMBER_205_INTEGER_ARRAY;
  * Size: <= 70
  * Type: character array
  * Rule: -
- * Example: 50859 Köln
+ * Example: 50859 Kï¿½ln
  */
 static int* PHYSICIAN_POSTCODE_AND_PLACE_XDT_FIELD = NUMBER_206_INTEGER_ARRAY;
 
@@ -211,7 +211,7 @@ static int* PHYSICIAN_MODEM_XDT_FIELD = NUMBER_210_INTEGER_ARRAY;
 /**
  * The physician number within practice field.
  *
- * German: Anzahl Ärzte
+ * German: Anzahl ï¿½rzte
  * Size: 2
  * Type: integer
  * Rule: 350
@@ -248,7 +248,7 @@ static int* FREE_RECORD_0010_CATEGORY_1_VALUE_XDT_FIELD = NUMBER_251_INTEGER_ARR
  * Size: <= 70
  * Type: character array
  * Rule: -
- * Example: Schuhgröße Praxisinhaber
+ * Example: Schuhgrï¿½ï¿½e Praxisinhaber
  */
 static int* FREE_RECORD_0010_CATEGORY_2_NAME_XDT_FIELD = NUMBER_252_INTEGER_ARRAY;
 
@@ -310,7 +310,7 @@ static int* FREE_RECORD_0010_CATEGORY_4_VALUE_XDT_FIELD = NUMBER_257_INTEGER_ARR
 /**
  * The free record 0010 category 5 name field.
  *
- * German: Name der fünften freien Kategorie Satzart "0010"
+ * German: Name der fï¿½nften freien Kategorie Satzart "0010"
  * Size: <= 70
  * Type: character array
  * Rule: -
@@ -321,7 +321,7 @@ static int* FREE_RECORD_0010_CATEGORY_5_NAME_XDT_FIELD = NUMBER_258_INTEGER_ARRA
 /**
  * The free record 0010 category 5 value field.
  *
- * German: Inhalt der fünften freien Kategorie Satzart "0010"
+ * German: Inhalt der fï¿½nften freien Kategorie Satzart "0010"
  * Size: <= 70
  * Type: character array
  * Rule: -
@@ -464,7 +464,7 @@ static int* FREE_RECORD_0010_CATEGORY_11_VALUE_XDT_FIELD = NUMBER_271_INTEGER_AR
 /**
  * The free record 0010 category 12 name field.
  *
- * German: Name der zwölften freien Kategorie Satzart "0010"
+ * German: Name der zwï¿½lften freien Kategorie Satzart "0010"
  * Size: <= 70
  * Type: character array
  * Rule: -
@@ -475,7 +475,7 @@ static int* FREE_RECORD_0010_CATEGORY_12_NAME_XDT_FIELD = NUMBER_272_INTEGER_ARR
 /**
  * The free record 0010 category 12 value field.
  *
- * German: Inhalt der zwölften freien Kategorie Satzart "0010"
+ * German: Inhalt der zwï¿½lften freien Kategorie Satzart "0010"
  * Size: <= 70
  * Type: character array
  * Rule: -
@@ -530,7 +530,7 @@ static int* FREE_RECORD_0010_CATEGORY_14_VALUE_XDT_FIELD = NUMBER_277_INTEGER_AR
 /**
  * The free record 0010 category 15 name field.
  *
- * German: Name der fünfzehnten freien Kategorie Satzart "0010"
+ * German: Name der fï¿½nfzehnten freien Kategorie Satzart "0010"
  * Size: <= 70
  * Type: character array
  * Rule: -
@@ -541,7 +541,7 @@ static int* FREE_RECORD_0010_CATEGORY_15_NAME_XDT_FIELD = NUMBER_278_INTEGER_ARR
 /**
  * The free record 0010 category 15 value field.
  *
- * German: Inhalt der fünfzehnten freien Kategorie Satzart "0010"
+ * German: Inhalt der fï¿½nfzehnten freien Kategorie Satzart "0010"
  * Size: <= 70
  * Type: character array
  * Rule: -
@@ -750,7 +750,7 @@ static int* FREE_RECORD_0010_CATEGORY_24_VALUE_XDT_FIELD = NUMBER_297_INTEGER_AR
 /**
  * The free record 0010 category 25 name field.
  *
- * German: Name der fünfundzwanzigsten (letzten) freien Kategorie Satzart "0010"
+ * German: Name der fï¿½nfundzwanzigsten (letzten) freien Kategorie Satzart "0010"
  * Size: <= 70
  * Type: character array
  * Rule: -
@@ -761,7 +761,7 @@ static int* FREE_RECORD_0010_CATEGORY_25_NAME_XDT_FIELD = NUMBER_298_INTEGER_ARR
 /**
  * The free record 0010 category 25 value field.
  *
- * German: Inhalt der fünfundzwanzigsten (letzten) freien Kategorie Satzart "0010"
+ * German: Inhalt der fï¿½nfundzwanzigsten (letzten) freien Kategorie Satzart "0010"
  * Size: <= 70
  * Type: character array
  * Rule: -
@@ -860,7 +860,7 @@ static int* PATIENT_RESIDENCE_XDT_FIELD = NUMBER_3106_INTEGER_ARRAY;
 /**
  * The patient street field.
  *
- * German: Straße des Patienten
+ * German: Straï¿½e des Patienten
  * Size: <= 28
  * Type: character array
  * Rule: -
@@ -902,14 +902,14 @@ static int* PATIENT_SEX_XDT_FIELD = NUMBER_3110_INTEGER_ARRAY;
  * Size: <= 70
  * Type: character array
  * Rule: -
- * Example: KHD Köln
+ * Example: KHD Kï¿½ln
  */
 static int* PATIENT_EMPLOYER_XDT_FIELD = NUMBER_3150_INTEGER_ARRAY;
 
 /**
  * The patient accident insurance name field.
  *
- * German: Bezeichnung des Unfallversicherungsträgers
+ * German: Bezeichnung des Unfallversicherungstrï¿½gers
  * Size: <= 70
  * Type: character array
  * Rule: -
@@ -957,14 +957,14 @@ static int* INSURANT_BIRTH_DATE_XDT_FIELD = NUMBER_3203_INTEGER_ARRAY;
  * Size: <= 30
  * Type: character array
  * Rule: 338
- * Example: 50859 Köln
+ * Example: 50859 Kï¿½ln
  */
 static int* INSURANT_RESIDENCE_XDT_FIELD = NUMBER_3204_INTEGER_ARRAY;
 
 /**
  * The insurant street field.
  *
- * German: Straße des Hauptversicherten
+ * German: Straï¿½e des Hauptversicherten
  * Size: <= 28
  * Type: character array
  * Rule: 338
@@ -997,11 +997,11 @@ static int* INSURANT_SEX_XDT_FIELD = NUMBER_3210_INTEGER_ARRAY;
 /**
  * The patient x-ray number field.
  *
- * German: Röntgennummer
+ * German: Rï¿½ntgennummer
  * Size: <= 70
  * Type: character array
  * Rule: -
- * Example: rö12345g
+ * Example: rï¿½12345g
  */
 static int* PATIENT_X_RAY_NUMBER_XDT_FIELD = NUMBER_3601_INTEGER_ARRAY;
 
@@ -1063,7 +1063,7 @@ static int* PATIENT_PROFESSION_XDT_FIELD = NUMBER_3620_INTEGER_ARRAY;
 /**
  * The patient body height field.
  *
- * German: Größe des Patienten in cm
+ * German: Grï¿½ï¿½e des Patienten in cm
  * Size: variable
  * Type: float
  * Rule: -
@@ -1089,7 +1089,7 @@ static int* PATIENT_BODY_WEIGHT_XDT_FIELD = NUMBER_3623_INTEGER_ARRAY;
  * Size: <= 70
  * Type: character array
  * Rule: -
- * Example: Müller AG
+ * Example: Mï¿½ller AG
  */
 static int* PATIENT_EMPLOYER_REDUNDANT_XDT_FIELD = NUMBER_3625_INTEGER_ARRAY;
 
@@ -1107,7 +1107,7 @@ static int* PATIENT_PHONE_XDT_FIELD = NUMBER_3626_INTEGER_ARRAY;
 /**
  * The patient nationality field.
  *
- * German: Nationalität Patient
+ * German: Nationalitï¿½t Patient
  * Size: <= 70
  * Type: character array
  * Rule: -
@@ -1122,7 +1122,7 @@ static int* PATIENT_NATIONALITY_XDT_FIELD = NUMBER_3627_INTEGER_ARRAY;
  * Size: <= 60 (taken from new GDT version; was <= 70 in old BDT)
  * Type: character array
  * Rule: -
- * Example: türkisch
+ * Example: tï¿½rkisch
  */
 static int* PATIENT_MOTHER_TONGUE_XDT_FIELD = NUMBER_3628_INTEGER_ARRAY;
 
@@ -1155,7 +1155,7 @@ static int* PATIENT_RESIDENCE_TO_MEDICAL_PRACTICE_DISTANCE_XDT_FIELD = NUMBER_36
  * Size: <= 70
  * Type: character array
  * Rule: -
- * Example: Dr. Müller
+ * Example: Dr. Mï¿½ller
  */
 static int* PATIENT_PHYSICIAN_IDENTIFICATION_IN_GROUP_PRACTICE_XDT_FIELD = NUMBER_3635_INTEGER_ARRAY;
 
@@ -1239,7 +1239,7 @@ static int* PATIENT_ALLERGIES_XDT_FIELD = NUMBER_3656_INTEGER_ARRAY;
 /**
  * The patient accidents field.
  *
- * German: Unfälle
+ * German: Unfï¿½lle
  * Size: <= 70
  * Type: character array
  * Rule: -
@@ -1265,7 +1265,7 @@ static int* PATIENT_SURGERIES_XDT_FIELD = NUMBER_3660_INTEGER_ARRAY;
  * Size: <= 70
  * Type: character array
  * Rule: -
- * Example: Frühgeburt
+ * Example: Frï¿½hgeburt
  */
 static int* PATIENT_ANAMNESIS_XDT_FIELD = NUMBER_3662_INTEGER_ARRAY;
 
@@ -1331,7 +1331,7 @@ static int* PATIENT_RECALL_APPOINTMENT_DATE_XDT_FIELD = NUMBER_3672_INTEGER_ARRA
  * Size: <= 70
  * Type: character array
  * Rule: -
- * Example: Körpergröße
+ * Example: Kï¿½rpergrï¿½ï¿½e
  */
 static int* FREE_RECORD_6100_CATEGORY_1_NAME_XDT_FIELD = NUMBER_3700_INTEGER_ARRAY;
 
@@ -1415,7 +1415,7 @@ static int* FREE_RECORD_6100_CATEGORY_4_VALUE_XDT_FIELD = NUMBER_3707_INTEGER_AR
 /**
  * The free record 6100 category 5 name field.
  *
- * German: Name der fünften freien Kategorie Satzart "6100"
+ * German: Name der fï¿½nften freien Kategorie Satzart "6100"
  * Size: <= 70
  * Type: character array
  * Rule: -
@@ -1426,7 +1426,7 @@ static int* FREE_RECORD_6100_CATEGORY_5_NAME_XDT_FIELD = NUMBER_3708_INTEGER_ARR
 /**
  * The free record 6100 category 5 value field.
  *
- * German: Inhalt der fünften freien Kategorie Satzart "6100"
+ * German: Inhalt der fï¿½nften freien Kategorie Satzart "6100"
  * Size: <= 70
  * Type: character array
  * Rule: -
@@ -1569,7 +1569,7 @@ static int* INVOICE_ISSUANCE_DATE_XDT_FIELD = NUMBER_4102_INTEGER_ARRAY;
 /**
  * The invoice validity date field.
  *
- * German: Gültigkeitsdatum
+ * German: Gï¿½ltigkeitsdatum
  * Size: 8
  * Type: date
  * Rule: 008/314/338
@@ -1591,18 +1591,18 @@ static int* INVOICE_INSURANCE_NUMBER_XDT_FIELD = NUMBER_4104_INTEGER_ARRAY;
 /**
  * The invoice insurance office field.
  *
- * German: Geschäftsstelle
+ * German: Geschï¿½ftsstelle
  * Size: <= 70
  * Type: character array
  * Rule: 338
- * Example: Köln
+ * Example: Kï¿½ln
  */
 static int* INVOICE_INSURANCE_OFFICE_XDT_FIELD = NUMBER_4105_INTEGER_ARRAY;
 
 /**
  * The invoice insurance sub category field.
  *
- * German: Kostenträgeruntergruppe
+ * German: Kostentrï¿½geruntergruppe
  * Size: 2
  * Type: integer
  * Rule: 126
@@ -1635,7 +1635,7 @@ static int* INVOICE_INSURANCE_CARD_LAST_READ_ACCESS_XDT_FIELD = NUMBER_4109_INTE
 /**
  * The invoice insurance card validity date field.
  *
- * German: Bis-Datum der Gültigkeit
+ * German: Bis-Datum der Gï¿½ltigkeit
  * Size: 4
  * Type: integer
  * Rule: 014/335
@@ -1679,7 +1679,7 @@ static int* INVOICE_VK_EAST_WEST_STATUS_XDT_FIELD = NUMBER_4113_INTEGER_ARRAY;
 /**
  * The invoice billing scale field.
  *
- * German: Gebührenordnung
+ * German: Gebï¿½hrenordnung
  * Size: 1
  * Type: integer
  * Rule: 106/323/325
@@ -1712,7 +1712,7 @@ static int* REFERRAL_CAUSE_OF_PAIN_XDT_FIELD = NUMBER_4201_INTEGER_ARRAY;
 /**
  * The referral supposed accouchement date field.
  *
- * German: Mutmaßlicher Tag der Entbindung
+ * German: Mutmaï¿½licher Tag der Entbindung
  * Size: 8
  * Type: date
  * Rule: 008
@@ -1734,11 +1734,11 @@ static int* REFERRAL_DIAGNOSIS_XDT_FIELD = NUMBER_4207_INTEGER_ARRAY;
 /**
  * The referral explanation field.
  *
- * German: Erläuternder Text zur Überweisung
+ * German: Erlï¿½uternder Text zur ï¿½berweisung
  * Size: <= 70
  * Type: character array
  * Rule: 321
- * Example: Röntgen
+ * Example: Rï¿½ntgen
  */
 static int* REFERRAL_EXPLANATION_XDT_FIELD = NUMBER_4209_INTEGER_ARRAY;
 
@@ -1789,7 +1789,7 @@ static int* REFERRAL_CHECK_BOX_AK_XDT_FIELD = NUMBER_4213_INTEGER_ARRAY;
 /**
  * The referral from physician number field.
  *
- * German: Überweisung von Arztnummer
+ * German: ï¿½berweisung von Arztnummer
  * Size: 7-9
  * Type: integer
  * Rule: -
@@ -1800,7 +1800,7 @@ static int* REFERRAL_FROM_PHYSICIAN_NUMBER_XDT_FIELD = NUMBER_4218_INTEGER_ARRAY
 /**
  * The referral to physician name field.
  *
- * German: Überweisung an
+ * German: ï¿½berweisung an
  * Size: <= 70
  * Type: character array
  * Rule: -
@@ -1811,7 +1811,7 @@ static int* REFERRAL_TO_PHYSICIAN_NAME_XDT_FIELD = NUMBER_4220_INTEGER_ARRAY;
 /**
  * The inpatient treatment referral by law field.
  *
- * German: Gesetzlicher Abzug zur stationären Behandlung gemäß § 6a GOÄ
+ * German: Gesetzlicher Abzug zur stationï¿½ren Behandlung gemï¿½ï¿½ ï¿½ 6a GOï¿½
  * Size: 1
  * Type: integer
  * Rule: 112
@@ -1822,7 +1822,7 @@ static int* INPATIENT_TREATMENT_REFERRAL_BY_LAW_XDT_FIELD = NUMBER_4230_INTEGER_
 /**
  * The inpatient treatment from to field.
  *
- * German: Stationäre Behandlung von ... bis ...
+ * German: Stationï¿½re Behandlung von ... bis ...
  * Size: 16
  * Type: integer
  * Rule: 019
@@ -1833,7 +1833,7 @@ static int* INPATIENT_TREATMENT_FROM_TO_XDT_FIELD = NUMBER_4233_INTEGER_ARRAY;
 /**
  * The inpatient treatment class field.
  *
- * German: Klasse bei stationärer Behandlung
+ * German: Klasse bei stationï¿½rer Behandlung
  * Size: 1
  * Type: integer
  * Rule: 106
@@ -1976,7 +1976,7 @@ static int* ACCIDENT_LOCATION_XDT_FIELD = NUMBER_4505_INTEGER_ARRAY;
 /**
  * The accident patient employment as field.
  *
- * German: Beschäftigung als
+ * German: Beschï¿½ftigung als
  * Size: <= 70
  * Type: character array
  * Rule: -
@@ -1987,7 +1987,7 @@ static int* ACCIDENT_PATIENT_EMPLOYMENT_AS_XDT_FIELD = NUMBER_4506_INTEGER_ARRAY
 /**
  * The accident patient employment since field.
  *
- * German: Beschäftigt seit
+ * German: Beschï¿½ftigt seit
  * Size: 8
  * Type: date
  * Rule: 008
@@ -1998,7 +1998,7 @@ static int* ACCIDENT_PATIENT_EMPLOYMENT_SINCE_XDT_FIELD = NUMBER_4507_INTEGER_AR
 /**
  * The accident patient nationality field.
  *
- * German: Staatsangehörigkeit
+ * German: Staatsangehï¿½rigkeit
  * Size: <= 70
  * Type: character array
  * Rule: -
@@ -2064,7 +2064,7 @@ static int* ACCIDENT_TREATMENT_BY_PHYSICIAN_NAME_XDT_FIELD = NUMBER_4514_INTEGER
 /**
  * The accident kind of treatment field.
  *
- * German: Art dieser ersten ärztlichen Behandlung
+ * German: Art dieser ersten ï¿½rztlichen Behandlung
  * Size: <= 70
  * Type: character array
  * Rule: --
@@ -2075,7 +2075,7 @@ static int* ACCIDENT_KIND_OF_TREATMENT_XDT_FIELD = NUMBER_4515_INTEGER_ARRAY;
 /**
  * The accident alcohol influence field.
  *
- * German: Alkoholeinfluß
+ * German: Alkoholeinfluï¿½
  * Size: 1
  * Type: integer
  * Rule: 112
@@ -2112,14 +2112,14 @@ static int* ACCIDENT_BLOOD_WITHDRAWAL_XDT_FIELD = NUMBER_4522_INTEGER_ARRAY;
  * Size: <= 70
  * Type: character array
  * Rule: -
- * Example: erhöhter Blutdruck
+ * Example: erhï¿½hter Blutdruck
  */
 static int* ACCIDENT_FINDINGS_XDT_FIELD = NUMBER_4530_INTEGER_ARRAY;
 
 /**
  * The accident x-ray result field.
  *
- * German: Röntgenergebnis
+ * German: Rï¿½ntgenergebnis
  * Size: <= 70
  * Type: character array
  * Rule: -
@@ -2141,7 +2141,7 @@ static int* ACCIDENT_KIND_OF_FIRST_TREATMENT_XDT_FIELD = NUMBER_4550_INTEGER_ARR
 /**
  * The accident abnormal changes independent from accident field.
  *
- * German: Krankhafte Veränderungen unabhängig vom Unfall
+ * German: Krankhafte Verï¿½nderungen unabhï¿½ngig vom Unfall
  * Size: <= 70
  * Type: character array
  * Rule: -
@@ -2189,14 +2189,14 @@ static int* ACCIDENT_CONCERNS_AGAINST_CLASSIFICATION_AS_ACCIDENT_AT_WORK_XDT_FIE
  * Size: <= 70
  * Type: character array
  * Rule: -
- * Example: keine versicherte Tätigkeit
+ * Example: keine versicherte Tï¿½tigkeit
  */
 static int* ACCIDENT_KIND_OF_CONCERNS_AGAINST_CLASSIFICATION_AS_ACCIDENT_AT_WORK_XDT_FIELD = NUMBER_4555_INTEGER_ARRAY;
 
 /**
  * The accident able to work field.
  *
- * German: arbeitsfähig
+ * German: arbeitsfï¿½hig
  * Size: 1
  * Type: integer
  * Rule: 101
@@ -2207,7 +2207,7 @@ static int* ACCIDENT_ABLE_TO_WORK_XDT_FIELD = NUMBER_4560_INTEGER_ARRAY;
 /**
  * The accident able to work from field.
  *
- * German: wieder arbeitsfähig ab
+ * German: wieder arbeitsfï¿½hig ab
  * Size: 8
  * Type: date
  * Rule: 008
@@ -2306,7 +2306,7 @@ static int* ACCIDENT_GENERAL_CURATIVE_TREATMENT_BY_XDT_FIELD = NUMBER_4581_INTEG
 /**
  * The accident unable to work for longer than three days field.
  *
- * German: AU über 3 Tage
+ * German: AU ï¿½ber 3 Tage
  * Size: 1
  * Type: integer
  * Rule: 101
@@ -2354,16 +2354,16 @@ static int* BILLING_NUMBER_XDT_FIELD = NUMBER_4601_INTEGER_ARRAY;
  * Size: <= 70
  * Type: character array
  * Rule: -
- * Example: Erwin Müller
- *          Ottostraße 123
- *          50859 Köln
+ * Example: Erwin Mï¿½ller
+ *          Ottostraï¿½e 123
+ *          50859 Kï¿½ln
  */
 static int* BILLING_ADDRESS_XDT_FIELD = NUMBER_4602_INTEGER_ARRAY;
 
 /**
  * The billing referring physician name field.
  *
- * German: Überweisender Arzt
+ * German: ï¿½berweisender Arzt
  * Size: <= 70
  * Type: character array
  * Rule: -
@@ -2396,7 +2396,7 @@ static int* BILLING_TOTAL_SUM_XDT_FIELD = NUMBER_4605_INTEGER_ARRAY;
 /**
  * The billing assignment declaration field.
  *
- * German: Abdingungserklärung
+ * German: Abdingungserklï¿½rung
  * Size: 1
  * Type: integer
  * Rule: 112
@@ -2440,7 +2440,7 @@ static int* BILLING_HEADER_XDT_FIELD = NUMBER_4615_INTEGER_ARRAY;
 /**
  * The billing footer field.
  *
- * German: Fußzeile
+ * German: Fuï¿½zeile
  * Size: <= 70
  * Type: character array
  * Rule: -
@@ -2484,7 +2484,7 @@ static int* SERVICE_KIND_OF_EXAMINATION_XDT_FIELD = NUMBER_5002_INTEGER_ARRAY;
 /**
  * The service addressee field.
  *
- * German: Empfänger des Briefes
+ * German: Empfï¿½nger des Briefes
  * Size: <= 70
  * Type: character array
  * Rule: -
@@ -2495,7 +2495,7 @@ static int* SERVICE_ADDRESSEE_XDT_FIELD = NUMBER_5003_INTEGER_ARRAY;
 /**
  * The service distance in kilometres field.
  *
- * German: Kilometer (nur bei GOÄ)
+ * German: Kilometer (nur bei GOï¿½)
  * Size: 1-3
  * Type: integer
  * Rule: 325
@@ -2528,7 +2528,7 @@ static int* SERVICE_TIME_XDT_FIELD = NUMBER_5006_INTEGER_ARRAY;
 /**
  * The service order-execution time field.
  *
- * German: Bestellzeit-Ausführungszeit
+ * German: Bestellzeit-Ausfï¿½hrungszeit
  * Size: 8
  * Type: integer
  * Rule: 006
@@ -2550,7 +2550,7 @@ static int* SERVICE_DKM_XDT_FIELD = NUMBER_5008_INTEGER_ARRAY;
 /**
  * The service free explanatory statement field.
  *
- * German: freier Begründungstext
+ * German: freier Begrï¿½ndungstext
  * Size: <= 70
  * Type: character array
  * Rule: -
@@ -2561,7 +2561,7 @@ static int* SERVICE_FREE_EXPLANATORY_STATEMENT_XDT_FIELD = NUMBER_5009_INTEGER_A
 /**
  * The service explanatory drug field.
  *
- * German: Medikament als Begründung
+ * German: Medikament als Begrï¿½ndung
  * Size: <= 70
  * Type: character array
  * Rule: -
@@ -2642,14 +2642,14 @@ static int* SERVICE_ZONE_XDT_FIELD = NUMBER_5018_INTEGER_ARRAY;
  * Size: <= 70
  * Type: character array
  * Rule: -
- * Example: Injektion, intravenös
+ * Example: Injektion, intravenï¿½s
  */
 static int* SERVICE_GNR_DESCRIPTION_XDT_FIELD = NUMBER_5060_INTEGER_ARRAY;
 
 /**
  * The service fee field.
  *
- * German: Gebühr bei Privatrechnung
+ * German: Gebï¿½hr bei Privatrechnung
  * Size: variable
  * Type: float
  * Rule: -
@@ -2737,7 +2737,7 @@ static int* BILLING_DIAGNOSIS_XDT_FIELD = NUMBER_6000_INTEGER_ARRAY;
 /**
  * The billing icd key field.
  *
- * German: ICD-Schlüssel
+ * German: ICD-Schlï¿½ssel
  * Size: 5
  * Type: character array
  * Rule: -
@@ -2793,7 +2793,7 @@ static int* TREATMENT_DRUG_PRESCRIBED_WITH_PRESCRIPTION_XDT_FIELD = NUMBER_6210_
 /**
  * The treatment drug prescribed without prescription field.
  *
- * German: Außerhalb Rezept verordnetes Medikament
+ * German: Auï¿½erhalb Rezept verordnetes Medikament
  * Size: <= 70
  * Type: character array
  * Rule: -
@@ -2804,7 +2804,7 @@ static int* TREATMENT_DRUG_PRESCRIBED_WITHOUT_PRESCRIPTION_XDT_FIELD = NUMBER_62
 /**
  * The treatment physician sample field.
  *
- * German: Ärztemuster
+ * German: ï¿½rztemuster
  * Size: <= 70
  * Type: character array
  * Rule: -
@@ -2819,7 +2819,7 @@ static int* TREATMENT_PHYSICIAN_SAMPLE_XDT_FIELD = NUMBER_6215_INTEGER_ARRAY;
  * Size: <= 60 (taken from new GDT version; was <= 70 in old BDT)
  * Type: character array
  * Rule: -
- * Example: erhöhter Blutdruck
+ * Example: erhï¿½hter Blutdruck
  */
 static int* TREATMENT_FINDINGS_XDT_FIELD = NUMBER_6220_INTEGER_ARRAY;
 
@@ -2841,14 +2841,14 @@ static int* TREATMENT_EXTERNAL_FINDINGS_XDT_FIELD = NUMBER_6221_INTEGER_ARRAY;
  * Size: <= 70
  * Type: character array
  * Rule: -
- * Example: Eiweiß erhöht
+ * Example: Eiweiï¿½ erhï¿½ht
  */
 static int* TREATMENT_LABORATORY_FINDINGS_XDT_FIELD = NUMBER_6222_INTEGER_ARRAY;
 
 /**
  * The treatment x-ray findings field.
  *
- * German: Röntgenbefund
+ * German: Rï¿½ntgenbefund
  * Size: <= 70
  * Type: character array
  * Rule: -
@@ -2918,7 +2918,7 @@ static int* TREATMENT_SYMPTOMS_XDT_FIELD = NUMBER_6240_INTEGER_ARRAY;
  * Size: <= 70
  * Type: character array
  * Rule: -
- * Example: Novalgin 3x täglich
+ * Example: Novalgin 3x tï¿½glich
  */
 static int* TREATMENT_THERAPY_XDT_FIELD = NUMBER_6260_INTEGER_ARRAY;
 
@@ -2936,11 +2936,11 @@ static int* TREATMENT_PHYSICAL_THERAPY_XDT_FIELD = NUMBER_6265_INTEGER_ARRAY;
 /**
  * The treatment referral content field.
  *
- * German: Überweisung Inhalt
+ * German: ï¿½berweisung Inhalt
  * Size: <= 70
  * Type: character array
  * Rule: -
- * Example: Röntgen Thorax
+ * Example: Rï¿½ntgen Thorax
  */
 static int* TREATMENT_REFERRAL_CONTENT_XDT_FIELD = NUMBER_6280_INTEGER_ARRAY;
 
@@ -3079,11 +3079,11 @@ static int* LETTER_ATTESTATION_CONTENT_XDT_FIELD = NUMBER_6307_INTEGER_ARRAY;
 /**
  * The letter addressee field.
  *
- * German: Name des Briefempfängers
+ * German: Name des Briefempfï¿½ngers
  * Size: <= 70
  * Type: character array
  * Rule: -
- * Example: Egon Müller
+ * Example: Egon Mï¿½ller
  */
 static int* LETTER_ADDRESSEE_XDT_FIELD = NUMBER_6310_INTEGER_ARRAY;
 
@@ -3101,7 +3101,7 @@ static int* LETTER_SALUTATION_XDT_FIELD = NUMBER_6311_INTEGER_ARRAY;
 /**
  * The letter street field.
  *
- * German: Straße
+ * German: Straï¿½e
  * Size: <= 70
  * Type: character array
  * Rule: -
@@ -3127,18 +3127,18 @@ static int* LETTER_POSTCODE_XDT_FIELD = NUMBER_6313_INTEGER_ARRAY;
  * Size: <= 70
  * Type: character array
  * Rule: -
- * Example: Köln
+ * Example: Kï¿½ln
  */
 static int* LETTER_RESIDENCE_XDT_FIELD = NUMBER_6314_INTEGER_ARRAY;
 
 /**
  * The letter complimentary close field.
  *
- * German: Schlußsatz
+ * German: Schluï¿½satz
  * Size: <= 70
  * Type: character array
  * Rule: -
- * Example: Mit kollegialem Gruß
+ * Example: Mit kollegialem Gruï¿½
  */
 static int* LETTER_COMPLIMENTARY_CLOSE_XDT_FIELD = NUMBER_6315_INTEGER_ARRAY;
 
@@ -3310,7 +3310,7 @@ static int* FREE_RECORD_6200_CATEGORY_4_VALUE_XDT_FIELD = NUMBER_6337_INTEGER_AR
 /**
  * The free record 6200 category 5 name field.
  *
- * German: Name der fünften freien Kategorie Satzart "6200"
+ * German: Name der fï¿½nften freien Kategorie Satzart "6200"
  * Size: <= 70
  * Type: character array
  * Rule: -
@@ -3321,7 +3321,7 @@ static int* FREE_RECORD_6200_CATEGORY_5_NAME_XDT_FIELD = NUMBER_6338_INTEGER_ARR
 /**
  * The free record 6200 category 5 value field.
  *
- * German: Inhalt der fünften freien Kategorie Satzart "6200"
+ * German: Inhalt der fï¿½nften freien Kategorie Satzart "6200"
  * Size: <= 70
  * Type: character array
  * Rule: -
@@ -4003,7 +4003,7 @@ static int* RECORD_IDENTIFICATION_XDT_FIELD = NUMBER_8000_INTEGER_ARRAY;
 /**
  * The record size field.
  *
- * German: Satzlänge
+ * German: Satzlï¿½nge
  * Size: 5
  * Type: integer
  * Rule: -
@@ -4014,7 +4014,7 @@ static int* RECORD_SIZE_XDT_FIELD = NUMBER_8100_INTEGER_ARRAY;
 /**
  * The device receiver gdt id field.
  *
- * German: GDT - ID des Empfängers
+ * German: GDT - ID des Empfï¿½ngers
  * Size: 8
  * Type: character array
  * Rule: -
@@ -4047,7 +4047,7 @@ static int* FINDINGS_KIND_XDT_FIELD = NUMBER_8401_INTEGER_ARRAY;
 /**
  * The findings device specifics field.
  *
- * German: Geräte und verfahrensspezifisches Kennfeld
+ * German: Gerï¿½te und verfahrensspezifisches Kennfeld
  * Size: <= 6 (taken from new GDT version; was 2 in old BDT)
  * Type: character array
  * Rule: -
@@ -4192,7 +4192,7 @@ static int* FINDINGS_SAMPLE_COLLECTION_TIME_OLD_FORMAT_XDT_FIELD = NUMBER_8433_I
 /**
  * The findings data stream units field.
  *
- * German: Einheit(en) für Datenstrom
+ * German: Einheit(en) fï¿½r Datenstrom
  * Size: <= 60
  * Type: character array
  * Rule: -
@@ -4368,7 +4368,7 @@ static int* FINDINGS_RESULT_TEXT_XDT_FIELD = NUMBER_8480_INTEGER_ARRAY;
 /**
  * The findings complimentary close field.
  *
- * German: Abschluß-Zeile
+ * German: Abschluï¿½-Zeile
  * Size: <= 70
  * Type: character array
  * Rule: -
@@ -4412,7 +4412,7 @@ static int* DATA_MEDIUM_CREATION_DATE_XDT_FIELD = NUMBER_9103_INTEGER_ARRAY;
 /**
  * The data medium running number field.
  *
- * German: Ordnungsnummer Datenträger (Header) des Datenpaketes
+ * German: Ordnungsnummer Datentrï¿½ger (Header) des Datenpaketes
  * Size: 3
  * Type: integer
  * Rule: -
@@ -4434,7 +4434,7 @@ static int* DATA_MEDIUM_CHARACTER_CODE_XDT_FIELD = NUMBER_9106_INTEGER_ARRAY;
 /**
  * The data package size field.
  *
- * German: Gesamtlänge des Datenpaketes in Byte
+ * German: Gesamtlï¿½nge des Datenpaketes in Byte
  * Size: 8
  * Type: integer
  * Rule: -
@@ -4445,7 +4445,7 @@ static int* DATA_PACKAGE_SIZE_XDT_FIELD = NUMBER_9202_INTEGER_ARRAY;
 /**
  * The data package mediums count field.
  *
- * German: Anzahl Datenträger des Datenpaketes
+ * German: Anzahl Datentrï¿½ger des Datenpaketes
  * Size: 3
  * Type: integer
  * Rule: -
@@ -4489,7 +4489,7 @@ static int* DATA_PACKAGE_BDT_VERSION_XDT_FIELD = NUMBER_9213_INTEGER_ARRAY;
 /**
  * The data package gdt version field.
  *
- * German: Geräte-Datentransfer (GDT) Version
+ * German: Gerï¿½te-Datentransfer (GDT) Version
  * Size: 5
  * Type: character array
  * Rule: -
@@ -4522,7 +4522,7 @@ static int* DATA_PACKAGE_STORAGE_PERIOD_XDT_FIELD = NUMBER_9601_INTEGER_ARRAY;
 /**
  * The data package transfer begin field.
  *
- * German: Beginn der Übertragung
+ * German: Beginn der ï¿½bertragung
  * Size: 8
  * Type: integer
  * Rule: -

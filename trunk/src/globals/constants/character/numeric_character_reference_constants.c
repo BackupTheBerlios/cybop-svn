@@ -1,7 +1,7 @@
 /*
  * $RCSfile: numeric_character_reference_constants.c,v $
  *
- * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2007-08-27 07:07:37 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2008-05-04 00:18:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -625,12 +625,12 @@ static char PLUS_OR_MINUS_NUMERIC_CHARACTER_REFERENCE_ARRAY[] = {'&', '#', '1', 
 static char* PLUS_OR_MINUS_NUMERIC_CHARACTER_REFERENCE = PLUS_OR_MINUS_NUMERIC_CHARACTER_REFERENCE_ARRAY;
 static int* PLUS_OR_MINUS_NUMERIC_CHARACTER_REFERENCE_COUNT = NUMBER_6_INTEGER_ARRAY;
 
-/** The superscript two ² numeric character reference. */
+/** The superscript two ï¿½ numeric character reference. */
 static char SUPERSCRIPT_TWO_NUMERIC_CHARACTER_REFERENCE_ARRAY[] = {'&', '#', '1', '7', '8', ';'};
 static char* SUPERSCRIPT_TWO_NUMERIC_CHARACTER_REFERENCE = SUPERSCRIPT_TWO_NUMERIC_CHARACTER_REFERENCE_ARRAY;
 static int* SUPERSCRIPT_TWO_NUMERIC_CHARACTER_REFERENCE_COUNT = NUMBER_6_INTEGER_ARRAY;
 
-/** The superscript three ³ numeric character reference. */
+/** The superscript three ï¿½ numeric character reference. */
 static char SUPERSCRIPT_THREE_NUMERIC_CHARACTER_REFERENCE_ARRAY[] = {'&', '#', '1', '7', '9', ';'};
 static char* SUPERSCRIPT_THREE_NUMERIC_CHARACTER_REFERENCE = SUPERSCRIPT_THREE_NUMERIC_CHARACTER_REFERENCE_ARRAY;
 static int* SUPERSCRIPT_THREE_NUMERIC_CHARACTER_REFERENCE_COUNT = NUMBER_6_INTEGER_ARRAY;
@@ -645,7 +645,7 @@ static char MICRO_SIGN_NUMERIC_CHARACTER_REFERENCE_ARRAY[] = {'&', '#', '1', '8'
 static char* MICRO_SIGN_NUMERIC_CHARACTER_REFERENCE = MICRO_SIGN_NUMERIC_CHARACTER_REFERENCE_ARRAY;
 static int* MICRO_SIGN_NUMERIC_CHARACTER_REFERENCE_COUNT = NUMBER_6_INTEGER_ARRAY;
 
-/** The paragraph sign § numeric character reference. */
+/** The paragraph sign ï¿½ numeric character reference. */
 static char PARAGRAPH_SIGN_NUMERIC_CHARACTER_REFERENCE_ARRAY[] = {'&', '#', '1', '8', '2', ';'};
 static char* PARAGRAPH_SIGN_NUMERIC_CHARACTER_REFERENCE = PARAGRAPH_SIGN_NUMERIC_CHARACTER_REFERENCE_ARRAY;
 static int* PARAGRAPH_SIGN_NUMERIC_CHARACTER_REFERENCE_COUNT = NUMBER_6_INTEGER_ARRAY;
@@ -660,7 +660,7 @@ static char CEDILLA_NUMERIC_CHARACTER_REFERENCE_ARRAY[] = {'&', '#', '1', '8', '
 static char* CEDILLA_NUMERIC_CHARACTER_REFERENCE = CEDILLA_NUMERIC_CHARACTER_REFERENCE_ARRAY;
 static int* CEDILLA_NUMERIC_CHARACTER_REFERENCE_COUNT = NUMBER_6_INTEGER_ARRAY;
 
-/** The superscript one ¹ numeric character reference. */
+/** The superscript one ï¿½ numeric character reference. */
 static char SUPERSCRIPT_ONE_NUMERIC_CHARACTER_REFERENCE_ARRAY[] = {'&', '#', '1', '8', '5', ';'};
 static char* SUPERSCRIPT_ONE_NUMERIC_CHARACTER_REFERENCE = SUPERSCRIPT_ONE_NUMERIC_CHARACTER_REFERENCE_ARRAY;
 static int* SUPERSCRIPT_ONE_NUMERIC_CHARACTER_REFERENCE_COUNT = NUMBER_6_INTEGER_ARRAY;
@@ -680,12 +680,12 @@ static char FRACTION_ONE_FOURTH_NUMERIC_CHARACTER_REFERENCE_ARRAY[] = {'&', '#',
 static char* FRACTION_ONE_FOURTH_NUMERIC_CHARACTER_REFERENCE = FRACTION_ONE_FOURTH_NUMERIC_CHARACTER_REFERENCE_ARRAY;
 static int* FRACTION_ONE_FOURTH_NUMERIC_CHARACTER_REFERENCE_COUNT = NUMBER_6_INTEGER_ARRAY;
 
-/** The fraction one-half ½ numeric character reference. */
+/** The fraction one-half ï¿½ numeric character reference. */
 static char FRACTION_ONE_HALF_NUMERIC_CHARACTER_REFERENCE_ARRAY[] = {'&', '#', '1', '8', '9', ';'};
 static char* FRACTION_ONE_HALF_NUMERIC_CHARACTER_REFERENCE = FRACTION_ONE_HALF_NUMERIC_CHARACTER_REFERENCE_ARRAY;
 static int* FRACTION_ONE_HALF_NUMERIC_CHARACTER_REFERENCE_COUNT = NUMBER_6_INTEGER_ARRAY;
 
-/** The fraction three-fourths ¼ numeric character reference. */
+/** The fraction three-fourths ï¿½ numeric character reference. */
 static char FRACTION_THREE_FOURTHS_NUMERIC_CHARACTER_REFERENCE_ARRAY[] = {'&', '#', '1', '9', '0', ';'};
 static char* FRACTION_THREE_FOURTHS_NUMERIC_CHARACTER_REFERENCE = FRACTION_THREE_FOURTHS_NUMERIC_CHARACTER_REFERENCE_ARRAY;
 static int* FRACTION_THREE_FOURTHS_NUMERIC_CHARACTER_REFERENCE_COUNT = NUMBER_6_INTEGER_ARRAY;

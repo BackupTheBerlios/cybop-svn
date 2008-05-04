@@ -1,7 +1,7 @@
 /*
  * $RCSfile: initialiser.c,v $
  *
- * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2007-12-01 23:57:41 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2008-05-04 00:18:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -52,8 +52,8 @@
  */
 void initialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "\n\n");
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Initialise system with an initial signal.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"\n\n");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Initialise system with an initial signal.");
 
     // The startup model abstraction, model, details.
     //
@@ -106,8 +106,8 @@ void initialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
     receive_file_system((void*) &mm, (void*) mmc, (void*) mms, (void*) &md, (void*) mdc, (void*) mds,
         p4, p5, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
 
-    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "\n\n");
-    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Add initial signal to signal memory.");
+    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"\n\n");
+    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Add initial signal to signal memory.");
 
     // The signal identification.
     void** id = NULL_POINTER;

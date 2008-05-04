@@ -1,7 +1,7 @@
 /*
  * $RCSfile: compound_converter.c,v $
  *
- * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.15 $ $Date: 2008-02-15 15:47:18 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2008-05-04 00:18:14 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -329,7 +329,7 @@ void decode_compound_cybol_property(void* p0, void* p1, void* p2, void* p3, void
 
                                         void** n = (void**) p0;
 
-                                        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Decode compound cybol property.");
+                                        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Decode compound cybol property.");
 
                                         // The comparison result.
                                         int r = *NUMBER_0_INTEGER;
@@ -453,7 +453,7 @@ void decode_compound_cybol_properties(void* p0, void* p1, void* p2, void* p3, vo
 
         xmlNode* cn = (xmlNode*) p8;
 
-        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Decode compound cybol properties.");
+        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Decode compound cybol properties.");
 
         if (cn != *NULL_POINTER) {
 
@@ -511,7 +511,7 @@ void decode_compound_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4
 
             void** d = (void**) p0;
 
-            log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Decode compound cybol node.");
+            log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Decode compound cybol node.");
 
             // The source name, channel, abstraction, model.
             void* sn = *NULL_POINTER;
@@ -540,14 +540,14 @@ void decode_compound_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4
             decode_compound_cybol_properties((void*) &sn, (void*) &snc, (void*) &sc, (void*) &scc, (void*) &sa, (void*) &sac, (void*) &sm, (void*) &smc, p3);
 
 /*??
-            fprintf(stderr, "sn: %s\n", (char*) sn);
-            fprintf(stderr, "snc: %i\n", snc);
-            fprintf(stderr, "sc: %s\n", (char*) sc);
-            fprintf(stderr, "scc: %i\n", scc);
-            fprintf(stderr, "sa: %s\n", (char*) sa);
-            fprintf(stderr, "sac: %i\n", sac);
-            fprintf(stderr, "sm: %s\n", (char*) sm);
-            fprintf(stderr, "smc: %i\n", smc);
+            fwprintf(stderr, L"sn: %s\n", (char*) sn);
+            fwprintf(stderr, L"snc: %i\n", snc);
+            fwprintf(stderr, L"sc: %s\n", (char*) sc);
+            fwprintf(stderr, L"scc: %i\n", scc);
+            fwprintf(stderr, L"sa: %s\n", (char*) sa);
+            fwprintf(stderr, L"sac: %i\n", sac);
+            fwprintf(stderr, L"sm: %s\n", (char*) sm);
+            fwprintf(stderr, L"smc: %i\n", smc);
 */
 
             //
@@ -693,12 +693,12 @@ void decode_compound_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode compound cybol node. The destination compound is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode compound cybol node. The destination compound is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode compound cybol node. The source xml node is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode compound cybol node. The source xml node is null.");
     }
 }
 
@@ -717,7 +717,7 @@ void decode_compound_cybol_nodes(void* p0, void* p1, void* p2, void* p3, void* p
 
         xmlNode* s = (xmlNode*) p3;
 
-        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Decode compound cybol nodes.");
+        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Decode compound cybol nodes.");
 
         // Determine first child node.
         xmlNode* c = s->children;
@@ -741,7 +741,7 @@ void decode_compound_cybol_nodes(void* p0, void* p1, void* p2, void* p3, void* p
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode compound cybol nodes. The source xml node is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode compound cybol nodes. The source xml node is null.");
     }
 }
 
@@ -780,7 +780,7 @@ void decode_compound_libxml2_parser_workaround(void* p0, void* p1, void* p2, voi
                 // messages of the xml parser.
                 if (*sc > *NUMBER_0_INTEGER) {
 
-                    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Decode compound libxml2 parser workaround.");
+                    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Decode compound libxml2 parser workaround.");
 
                     // The temporary null-terminated file name.
                     void* tmp = *NULL_POINTER;
@@ -826,27 +826,27 @@ void decode_compound_libxml2_parser_workaround(void* p0, void* p1, void* p2, voi
 
                     } else {
 
-                        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) "Could not deallocate xml document. Probably, the given cybol file name was empty.");
+                        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) L"Could not deallocate xml document. Probably, the given cybol file name was empty.");
                     }
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode xml. The file name count is null.");
+                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode xml. The file name count is null.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode xml. The destination is null.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode xml. The destination is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode xml. The source is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode xml. The source is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode xml. The source count is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode xml. The source count is null.");
     }
 }
 
@@ -861,7 +861,7 @@ void decode_compound_libxml2_parser_workaround(void* p0, void* p1, void* p2, voi
  */
 void decode_compound(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Decode compound.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Decode compound.");
 
     decode_compound_libxml2_parser_workaround(p0, p1, p2, p3, p4);
 
@@ -979,7 +979,7 @@ void decode_compound(void* p0, void* p1, void* p2, void* p3, void* p4) {
  */
 void encode_compound(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Encode compound.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Encode compound.");
 }
 
 /* COMPOUND_CONVERTER_SOURCE */

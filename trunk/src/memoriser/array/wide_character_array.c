@@ -1,7 +1,7 @@
 /*
  * $RCSfile: wide_character_array.c,v $
  *
- * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2008-05-04 00:18:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -52,7 +52,7 @@ void allocate_wide_character_array(void* p0, void* p1) {
 
             void** a = (void**) p0;
 
-            log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Allocate wide character array.");
+            log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Allocate wide character array.");
 
             // Determine the memory area to be allocated.
             // It is the product of the given size and the type size.
@@ -68,12 +68,12 @@ void allocate_wide_character_array(void* p0, void* p1) {
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not allocate wide character array. The array is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not allocate wide character array. The array is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not allocate wide character array. The array size is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not allocate wide character array. The array size is null.");
     }
 }
 
@@ -93,18 +93,18 @@ void deallocate_wide_character_array(void* p0, void* p1) {
 
             void** a = (void**) p0;
 
-            log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Deallocate wide character array.");
+            log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Deallocate wide character array.");
 
             free(*a);
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not deallocate wide character array. The array is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not deallocate wide character array. The array is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not deallocate wide character array. The array size is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not deallocate wide character array. The array size is null.");
     }
 }
 
@@ -129,7 +129,7 @@ void reallocate_wide_character_array(void* p0, void* p1, void* p2) {
 
                 void** a = (void**) p0;
 
-                log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Reallocate wide character array.");
+                log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Reallocate wide character array.");
 
                 // Determine the memory area to be allocated.
                 // It is the product of the given size and the type size.
@@ -152,17 +152,17 @@ void reallocate_wide_character_array(void* p0, void* p1, void* p2) {
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not reallocate wide character array. The array is null.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not reallocate wide character array. The array is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not reallocate wide character array. The array count is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not reallocate wide character array. The array count is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not reallocate wide character array. The array size is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not reallocate wide character array. The array size is null.");
     }
 }
 

@@ -1,7 +1,7 @@
 /*
  * $RCSfile: receive_socket.c,v $
  *
- * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.47 $ $Date: 2008-02-15 15:47:18 $ $Author: christian $
+ * @version $Revision: 1.48 $ $Date: 2008-05-04 00:18:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -80,10 +80,10 @@
 void receive_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7,
     void* p8, void* p9, void* p10, void* p11, void* p12, void* p13) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Receive message via socket.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Receive message via socket.");
 
-    fprintf(stderr, "TEST 1 l: %s \n", (char*) p8);
-    fprintf(stderr, "TEST 1 lc: %i \n", *((int*) p9));
+    fwprintf(stderr, L"TEST 1 l: %s \n", (char*) p8);
+    fwprintf(stderr, L"TEST 1 lc: %i \n", *((int*) p9));
 
     read_stream_socket(p0, p1, p2, p3);
 
@@ -95,8 +95,8 @@ void receive_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, 
     // compound model and details being handed over as parameters.
 //??    decode(p0, p1, p2, p3, p4, p5, *b, p29, p12, p13, p8, p9);
 
-    fprintf(stderr, "TEST 2 l: %s \n", (char*) p8);
-    fprintf(stderr, "TEST 2 lc: %i \n", *((int*) p9));
+    fwprintf(stderr, L"TEST 2 l: %s \n", (char*) p8);
+    fwprintf(stderr, L"TEST 2 lc: %i \n", *((int*) p9));
 
 /*??
     // The action name, abstraction, model, details.
@@ -126,27 +126,27 @@ void receive_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, 
         (void*) &ad, (void*) &adc, (void*) &ads,
         p0, p1);
 
-    fprintf(stderr, "TEST 3 bc: %i \n", *((int*) p29));
-    fprintf(stderr, "TEST 3 bs: %i \n", *((int*) p30));
+    fwprintf(stderr, L"TEST 3 bc: %i \n", *((int*) p29));
+    fwprintf(stderr, L"TEST 3 bs: %i \n", *((int*) p30));
 
     if (*am != *NULL_POINTER) {
 
         // The action parameter is NOT null, so it
         // will be used for generating a signal.
 
-    fprintf(stderr, "TEST 4 am: %s \n", (char*) *am);
-    fprintf(stderr, "TEST 4 amc: %i \n", **((int**) amc));
+    fwprintf(stderr, L"TEST 4 am: %s \n", (char*) *am);
+    fwprintf(stderr, L"TEST 4 amc: %i \n", **((int**) amc));
 
         // Receive socket signal.
         receive_socket_signal(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, *am, *amc, p23, p26);
 
     } else {
 
-        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) "Could not receive socket message. The action parameter is null.");
+        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) L"Could not receive socket message. The action parameter is null.");
     }
 
-    fprintf(stderr, "TEST 5 bc: %i \n", *((int*) p29));
-    fprintf(stderr, "TEST 5 bs: %i \n", *((int*) p30));
+    fwprintf(stderr, L"TEST 5 bc: %i \n", *((int*) p29));
+    fwprintf(stderr, L"TEST 5 bs: %i \n", *((int*) p30));
 */
 
     /** The index parameter. */
@@ -195,14 +195,14 @@ void receive_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, 
 */
 
 /*??
-    fprintf(stderr, "TEST: receive socket signal actual command n: %s \n", (char*) *n);
-    fprintf(stderr, "TEST: receive socket signal actual command nc: %i \n", **((int**) nc));
-    fprintf(stderr, "TEST: receive socket signal actual command a: %s \n", (char*) *a);
-    fprintf(stderr, "TEST: receive socket signal actual command ac: %i \n", **((int**) ac));
-    fprintf(stderr, "TEST: receive socket signal actual command m: %s \n", (char*) *m);
-    fprintf(stderr, "TEST: receive socket signal actual command mc: %i \n", **((int**) mc));
-    fprintf(stderr, "TEST: receive socket signal actual command d: %i \n", *d);
-    fprintf(stderr, "TEST: receive socket signal actual command dc: %i \n", **((int**) dc));
+    fwprintf(stderr, L"TEST: receive socket signal actual command n: %s \n", (char*) *n);
+    fwprintf(stderr, L"TEST: receive socket signal actual command nc: %i \n", **((int**) nc));
+    fwprintf(stderr, L"TEST: receive socket signal actual command a: %s \n", (char*) *a);
+    fwprintf(stderr, L"TEST: receive socket signal actual command ac: %i \n", **((int**) ac));
+    fwprintf(stderr, L"TEST: receive socket signal actual command m: %s \n", (char*) *m);
+    fwprintf(stderr, L"TEST: receive socket signal actual command mc: %i \n", **((int**) mc));
+    fwprintf(stderr, L"TEST: receive socket signal actual command d: %i \n", *d);
+    fwprintf(stderr, L"TEST: receive socket signal actual command dc: %i \n", **((int**) dc));
 */
 
 /*??
@@ -217,8 +217,8 @@ void receive_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, 
     //?? possibly move it away from "signal_memory_accessor.c" into another file.
     set_new_signal_identification((void*) &s, p18);
 
-    fprintf(stderr, "TEST: receive socket signal p18: %i \n", *((int*) p18));
-    fprintf(stderr, "TEST: receive socket signal sock: %i \n", **((int**) s));
+    fwprintf(stderr, L"TEST: receive socket signal p18: %i \n", *((int*) p18));
+    fwprintf(stderr, L"TEST: receive socket signal sock: %i \n", **((int**) s));
 
     // Set signal into signal memory.
     set_signal(p3, p4, p5, a, ac, m, mc, d, dc, (void*) &NORMAL_CYBOI_SIGNAL_PRIORITY, (void*) s);

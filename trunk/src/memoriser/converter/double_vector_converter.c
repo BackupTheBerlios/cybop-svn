@@ -1,7 +1,7 @@
 /*
  * $RCSfile: double_vector_converter.c,v $
  *
- * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.14 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2008-05-04 00:18:14 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -55,7 +55,7 @@ void decode_double(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             void** d = (void**) p0;
 
-            log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Decode double.");
+            log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Decode double.");
 
             // The temporary null-terminated string.
             char* tmp = (char*) *NULL_POINTER;
@@ -108,12 +108,12 @@ void decode_double(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode double. The destination is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode double. The destination is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode double. The source count is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode double. The source count is null.");
     }
 }
 
@@ -140,7 +140,7 @@ void encode_double(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 char** d = (char**) p0;
 
-                log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Encode double.");
+                log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Encode double.");
 
                 // The double value.
                 double* v = (double*) *NULL_POINTER;
@@ -214,7 +214,7 @@ void decode_double_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 void** d = (void**) p0;
 
-                log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Decode double vector.");
+                log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Decode double vector.");
 
 /*??
                 // The loop count.
@@ -253,7 +253,7 @@ void decode_double_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                     } else {
 
-                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode double vector. The source string starts with a comma character.");
+                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode double vector. The source string starts with a comma character.");
                     }
 
                     j++;
@@ -351,9 +351,9 @@ void encode_double_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
     remove_array_elements(p0, (void*) INTEGER_ARRAY, (void*) &INTEGER_VECTOR_COUNT, (void*) &Y_INDEX);
     remove_array_elements(p0, (void*) INTEGER_ARRAY, (void*) &INTEGER_VECTOR_COUNT, (void*) &X_INDEX);
 
-//??    fprintf(p1, %d, &(m->x));
-//??    fprintf(p1, %d, &(m->y));
-//??    fprintf(p1, %d, &(m->z));
+//??    fwprintf(p1, %d, &(m->x));
+//??    fwprintf(p1, %d, &(m->y));
+//??    fwprintf(p1, %d, &(m->z));
 */
 }
 

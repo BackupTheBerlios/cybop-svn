@@ -1,7 +1,7 @@
 /*
  * $RCSfile: lcid_language_constants.c,v $
  *
- * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2007-08-12 23:31:48 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2008-05-04 00:18:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -204,7 +204,7 @@ Mongolian (Cyrillic)            0450            1104
 Mongolian (Mongolian)            0850            2128
 Nepali            0461            1121
 Nepali - India            0861            2145
-Norwegian (Bokmål)            0414            1044
+Norwegian (Bokmï¿½l)            0414            1044
 Norwegian (Nynorsk)            0814            2068
 Oriya            0448            1096
 Oromo            0472            1138

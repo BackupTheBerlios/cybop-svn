@@ -1,7 +1,7 @@
 /*
  * $RCSfile: copy.c,v $
  *
- * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.28 $ $Date: 2007-12-01 23:57:41 $ $Author: christian $
+ * @version $Revision: 1.29 $ $Date: 2008-05-04 00:18:09 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -54,7 +54,7 @@
  */
 void copy(void* p0, int* p1, void* p2, void* p3, void* p4) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Copy primitive model.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Copy primitive model.");
 
     // The source name, abstraction, model, details.
     void** sn = NULL_POINTER;
@@ -158,7 +158,7 @@ void copy(void* p0, int* p1, void* p2, void* p3, void* p4) {
 
     if (r == *NUMBER_0_INTEGER) {
 
-        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) "Could not copy primitive model. The abstraction model is unknown.");
+        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) L"Could not copy primitive model. The abstraction model is unknown.");
     }
 }
 

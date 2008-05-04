@@ -1,7 +1,7 @@
 /*
  * $RCSfile: startup_socket.c,v $
  *
- * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.31 $ $Date: 2007-10-23 17:37:45 $ $Author: christian $
+ * @version $Revision: 1.32 $ $Date: 2008-05-04 00:18:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -65,7 +65,7 @@ void startup_socket_get_namespace(void* p0, void* p1, void* p2, void* p3) {
 
             int* sn = (int*) p0;
 
-            log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Startup socket get namespace.");
+            log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Startup socket get namespace.");
 
             // The comparison result.
             int r = *NUMBER_0_INTEGER;
@@ -105,12 +105,12 @@ void startup_socket_get_namespace(void* p0, void* p1, void* p2, void* p3) {
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get startup socket namespace. The socket namespace is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get startup socket namespace. The socket namespace is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get startup socket namespace. The address namespace is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get startup socket namespace. The address namespace is null.");
     }
 }
 
@@ -127,7 +127,7 @@ void startup_socket_get_style(void* p0, void* p1, void* p2) {
 
         int* s = (int*) p0;
 
-        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Startup socket get style.");
+        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Startup socket get style.");
 
         // The comparison result.
         int r = *NUMBER_0_INTEGER;
@@ -164,7 +164,7 @@ void startup_socket_get_style(void* p0, void* p1, void* p2) {
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get startup socket style. The communication style is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get startup socket style. The communication style is null.");
     }
 }
 
@@ -200,7 +200,7 @@ void startup_socket_get_host_address(void* p0, void* p1, void* p2, void* p3) {
                     a6 = (struct in6_addr*) p0;
                 }
 
-                log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Startup socket get host address.");
+                log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Startup socket get host address.");
 
                 // The comparison result.
                 int r = *NUMBER_0_INTEGER;
@@ -266,17 +266,17 @@ void startup_socket_get_host_address(void* p0, void* p1, void* p2, void* p3) {
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get startup socket host address. The host address is null.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get startup socket host address. The host address is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get startup socket host address. The address model count is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get startup socket host address. The address model count is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not get startup socket host address. The address namespace is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get startup socket host address. The address namespace is null.");
     }
 }
 
@@ -304,7 +304,7 @@ void startup_socket_initialise_local_socket_address(void* p0, void* p1, void* p2
                 // Therefore, a cast to void** is done here instead.
                 void** a = (void**) p0;
 
-                log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Startup socket initialise local socket address.");
+                log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Startup socket initialise local socket address.");
 
                 // Determine position of namespace
                 // ("sun_family" field within the "sockaddr_un" structure).
@@ -360,22 +360,22 @@ void startup_socket_initialise_local_socket_address(void* p0, void* p1, void* p2
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not initialise local socket address. The socket file name is longer than the limit 108, as set by the gnu c library.");
+                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not initialise local socket address. The socket file name is longer than the limit 108, as set by the gnu c library.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not initialise local socket address. The socket address is null.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not initialise local socket address. The socket address is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not initialise local socket address. The file name is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not initialise local socket address. The file name is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not initialise local socket address. The file name count is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not initialise local socket address. The file name count is null.");
     }
 }
 
@@ -400,7 +400,7 @@ void startup_socket_initialise_ipv4_socket_address(void* p0, void* p1, void* p2)
 
                 struct sockaddr_in** a = (struct sockaddr_in**) p0;
 
-                log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Startup socket initialise ipv4 socket address.");
+                log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Startup socket initialise ipv4 socket address.");
 
                 // Set namespace (address format/ family).
                 //
@@ -427,17 +427,17 @@ void startup_socket_initialise_ipv4_socket_address(void* p0, void* p1, void* p2)
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not initialise ipv4 socket address. The socket address is null.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not initialise ipv4 socket address. The socket address is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not initialise ipv4 socket address. The host address is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not initialise ipv4 socket address. The host address is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not initialise ipv4 socket address. The socket port is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not initialise ipv4 socket address. The socket port is null.");
     }
 }
 
@@ -462,7 +462,7 @@ void startup_socket_initialise_ipv6_socket_address(void* p0, void* p1, void* p2)
 
                 struct sockaddr_in6** a = (struct sockaddr_in6**) p0;
 
-                log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Startup socket initialise ipv6 socket address.");
+                log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Startup socket initialise ipv6 socket address.");
 
                 // Set namespace (address format/ family).
                 //
@@ -495,17 +495,17 @@ void startup_socket_initialise_ipv6_socket_address(void* p0, void* p1, void* p2)
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not initialise ipv6 socket address. The socket address is null.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not initialise ipv6 socket address. The socket address is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not initialise ipv6 socket address. The host address is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not initialise ipv6 socket address. The host address is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not initialise ipv6 socket address. The socket port is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not initialise ipv6 socket address. The socket port is null.");
     }
 }
 
@@ -532,7 +532,7 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
 
         int* base = (int*) p8;
 
-        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Startup socket.");
+        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Startup socket.");
 
         // The socket namespace.
         int sn = *NUMBER_MINUS_1_INTEGER;
@@ -804,7 +804,7 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not start up socket / set non-blocking mode. The socket file descriptor flags could not be read.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not start up socket / set non-blocking mode. The socket file descriptor flags could not be read.");
             }
 */
 
@@ -825,7 +825,7 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
 
                 r = bind(*s, (struct sockaddr*) ia4, *((socklen_t*) as));
 
-    fprintf(stderr, "TEST: startup socket bind s: %i \n", *s);
+    fwprintf(stderr, L"TEST: startup socket bind s: %i \n", *s);
     sleep(2);
 
             } else if (an == AF_INET6) {
@@ -857,26 +857,26 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
                     // pending client connection requests.
                     r = listen(*s, *NUMBER_1_INTEGER);
 
-    fprintf(stderr, "TEST: startup socket listen s: %i \n", *s);
+    fwprintf(stderr, L"TEST: startup socket listen s: %i \n", *s);
     sleep(2);
 
                     if (r < *NUMBER_0_INTEGER) {
 
                         if (errno == EBADF) {
 
-                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not start up socket. The argument socket is not a valid file descriptor.");
+                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not start up socket. The argument socket is not a valid file descriptor.");
 
                         } else if (errno == ENOTSOCK) {
 
-                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not start up socket. The argument socket is not a socket.");
+                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not start up socket. The argument socket is not a socket.");
 
                         } else if (errno == EOPNOTSUPP) {
 
-                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not start up socket. The socket does not support this operation.");
+                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not start up socket. The socket does not support this operation.");
 
                         } else {
 
-                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not start up socket. An unknown error occured while listening at the socket.");
+                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not start up socket. An unknown error occured while listening at the socket.");
                         }
                     }
                 }
@@ -885,31 +885,31 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
 
                 if (errno == EBADF) {
 
-                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not start up socket. The socket argument is not a valid file descriptor.");
+                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not start up socket. The socket argument is not a valid file descriptor.");
 
                 } else if (errno == ENOTSOCK) {
 
-                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not start up socket. The descriptor socket is not a socket.");
+                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not start up socket. The descriptor socket is not a socket.");
 
                 } else if (errno == EADDRNOTAVAIL) {
 
-                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not start up socket. The specified address is not available on this machine.");
+                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not start up socket. The specified address is not available on this machine.");
 
                 } else if (errno == EADDRINUSE) {
 
-                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not start up socket. The specified address is already used by some other socket.");
+                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not start up socket. The specified address is already used by some other socket.");
 
                 } else if (errno == EINVAL) {
 
-                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not start up socket. The socket socket already has an address.");
+                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not start up socket. The socket socket already has an address.");
 
                 } else if (errno == EACCES) {
 
-                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not start up socket. The permission to access the requested address is missing. (In the internet domain, only the super-user is allowed to specify a port number in the range 0 through IPPORT_RESERVED minus one; see the section called 'Internet Ports'.");
+                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not start up socket. The permission to access the requested address is missing. (In the internet domain, only the super-user is allowed to specify a port number in the range 0 through IPPORT_RESERVED minus one; see the section called 'Internet Ports'.");
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not start up socket. An unknown error occured while binding the socket to the address.");
+                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not start up socket. An unknown error occured while binding the socket to the address.");
                 }
             }
 
@@ -917,33 +917,33 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
 
             if (errno == EPROTONOSUPPORT) {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not start up socket. The protocol or style is not supported by the namespace specified.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not start up socket. The protocol or style is not supported by the namespace specified.");
 
             } else if (errno == EMFILE) {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not start up socket. The process already has too many file descriptors open.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not start up socket. The process already has too many file descriptors open.");
 
             } else if (errno == ENFILE) {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not start up socket. The system already has too many file descriptors open.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not start up socket. The system already has too many file descriptors open.");
 
             } else if (errno == EACCES) {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not start up socket. The process does not have the privilege to create a socket of the specified style or protocol.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not start up socket. The process does not have the privilege to create a socket of the specified style or protocol.");
 
             } else if (errno == ENOBUFS) {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not start up socket. The system ran out of internal buffer space.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not start up socket. The system ran out of internal buffer space.");
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not start up socket. An unknown error occured while initialising the socket.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not start up socket. An unknown error occured while initialising the socket.");
             }
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not start up socket. The base internal is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not start up socket. The base internal is null.");
     }
 }
 

@@ -1,7 +1,7 @@
 /*
  * $RCSfile: gnu_linux_console_communicator.c,v $
  *
- * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2008-05-02 22:52:18 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2008-05-04 00:18:14 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,7 +30,7 @@
 #include <locale.h>
 #include <stdio.h>
 #include <wchar.h>
-#include "../../globals/constants/character/character_constants.c"
+//?? #include "../../globals/constants/character/character_constants.c"
 #include "../../globals/constants/character/wide_character_constants.c"
 #include "../../globals/constants/cybol/cybol_abstraction_constants.c"
 #include "../../globals/constants/integer/integer_constants.c"
@@ -39,7 +39,7 @@
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/logger/logger.c"
-#include "../../memoriser/converter/character_vector_converter.c"
+#include "../../memoriser/converter/wide_character_vector_converter.c"
 #include "../../memoriser/array.c"
 
 /**
@@ -56,7 +56,7 @@ void read_gnu_linux_console(void* p0, void* p1, void* p2, void* p3) {
 
         FILE* s = (FILE*) p3;
 
-        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Read from gnu/linux console.");
+        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Read from gnu/linux console.");
 
         // The loop exit flag.
         int f = *NUMBER_0_INTEGER;
@@ -86,10 +86,10 @@ void read_gnu_linux_console(void* p0, void* p1, void* p2, void* p3) {
             // and check for EOF after the call; once it is verified that the result
             // is NOT EOF, one can be sure that it will fit in a char variable
             // without loss of information.
-            c = fwgetc(s);
+            c = fgetwc(s);
 //??            c = fgetc(s);
 
-    fprintf(stderr, "TEST read gnu/linux console c: %c\n", c);
+    fwprintf(stderr, L"TEST read gnu/linux console c: %c\n", c);
 
             if (csi == *NUMBER_1_INTEGER) {
 
@@ -97,7 +97,7 @@ void read_gnu_linux_console(void* p0, void* p1, void* p2, void* p3) {
                 csi = *NUMBER_0_INTEGER;
 
                 // Copy source character to destination character array.
-                decode_character_vector(p0, p1, p2, (void*) &c, (void*) NUMBER_1_INTEGER);
+                decode_wide_character_vector(p0, p1, p2, (void*) &c, (void*) NUMBER_1_INTEGER);
 
                 // An escape character followed by a left square bracket character
                 // were read before. So this is an escape control sequence.
@@ -122,7 +122,7 @@ void read_gnu_linux_console(void* p0, void* p1, void* p2, void* p3) {
                     csi = *NUMBER_1_INTEGER;
 
                     // Copy source character to destination character array.
-                    decode_character_vector(p0, p1, p2, (void*) &c, (void*) NUMBER_1_INTEGER);
+                    decode_wide_character_vector(p0, p1, p2, (void*) &c, (void*) NUMBER_1_INTEGER);
 
                 } else {
 
@@ -130,7 +130,7 @@ void read_gnu_linux_console(void* p0, void* p1, void* p2, void* p3) {
                     // An escape- followed by another, second character has been detected.
 
                     // Unget this character so that it may be processed later.
-                    ungetc(c, s);
+                    ungetwc(c, s);
 
                     // Set loop exit flag.
                     f = *NUMBER_1_INTEGER;
@@ -142,9 +142,9 @@ void read_gnu_linux_console(void* p0, void* p1, void* p2, void* p3) {
                 esc = *NUMBER_1_INTEGER;
 
                 // Copy source character to destination character array.
-                decode_character_vector(p0, p1, p2, (void*) &c, (void*) NUMBER_1_INTEGER);
+                decode_wide_character_vector(p0, p1, p2, (void*) &c, (void*) NUMBER_1_INTEGER);
 
-            } else if (c == EOF) {
+            } else if (c == WEOF) {
 
                 // Set loop exit flag.
                 f = *NUMBER_1_INTEGER;
@@ -152,7 +152,7 @@ void read_gnu_linux_console(void* p0, void* p1, void* p2, void* p3) {
             } else {
 
                 // Copy source character to destination character array.
-                decode_character_vector(p0, p1, p2, (void*) &c, (void*) NUMBER_1_INTEGER);
+                decode_wide_character_vector(p0, p1, p2, (void*) &c, (void*) NUMBER_1_INTEGER);
 
                 // Set loop exit flag.
                 f = *NUMBER_1_INTEGER;
@@ -161,7 +161,7 @@ void read_gnu_linux_console(void* p0, void* p1, void* p2, void* p3) {
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not read gnu/linux console. The source input stream is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not read gnu/linux console. The source input stream is null.");
     }
 }
 
@@ -184,7 +184,7 @@ void write_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             FILE** d = (FILE**) p0;
 
-            log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Write to gnu/linux console.");
+            log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Write to gnu/linux console.");
 
             // Possible locales are: LANG, LC_CTYPE, LC_ALL.
             // CAUTION! This setting is necessary for UTF-8 Unicode characters to work.
@@ -208,7 +208,7 @@ void write_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 // Write to terminal.
     //??            fputs((char*) ts, *d);
     //??            fputws((wchar_t*) ts, *d);
-                fprintf(*d, "%ls", ts);
+                fwprintf(*d, "%ls", ts);
 
                 // Flush any buffered output on the stream to the file.
                 //
@@ -223,7 +223,7 @@ void write_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not write to gnu/linux console. The destination terminal file is null.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not write to gnu/linux console. The destination terminal file is null.");
             }
 
             // Destroy terminated control sequences.
@@ -231,12 +231,12 @@ void write_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not write to gnu/linux console. The destination terminal file parameter is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not write to gnu/linux console. The destination terminal file parameter is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not write to gnu/linux console. The source terminal control sequences count parameter is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not write to gnu/linux console. The source terminal control sequences count parameter is null.");
     }
 }
 

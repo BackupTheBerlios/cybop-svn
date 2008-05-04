@@ -1,7 +1,7 @@
 /*
  * $RCSfile: receive.c,v $
  *
- * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.49 $ $Date: 2008-04-30 14:32:48 $ $Author: christian $
+ * @version $Revision: 1.50 $ $Date: 2008-05-04 00:18:09 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -75,7 +75,7 @@ void receive_with_parameters(void* p0, void* p1, void* p2, void* p3, void* p4, v
     void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14, void* p15, void* p16,
     void* p17, void* p18, void* p19, void* p20, void* p21, void* p22, void* p23) {
 
-    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Receive message with given parameters.");
+    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Receive message with given parameters.");
 
     // The comparison result.
     int r = *NUMBER_0_INTEGER;
@@ -122,17 +122,17 @@ void receive_with_parameters(void* p0, void* p1, void* p2, void* p3, void* p4, v
             // Get gnu/linux console input stream.
             get_array_elements(p0, (void*) GNU_LINUX_CONSOLE_INPUT_FILE_DESCRIPTOR_INTERNAL, (void*) &is, (void*) POINTER_ARRAY);
 
-    fprintf(stderr, "TEST receive pre m: %i\n", p3);
-    fprintf(stderr, "TEST receive pre m: %i\n", *((void**) p3));
-    fprintf(stderr, "TEST receive pre mc: %i\n", p4);
-    fprintf(stderr, "TEST receive pre mc: %i\n", *((int*) p4));
+    fwprintf(stderr, L"TEST receive pre m: %i\n", p3);
+    fwprintf(stderr, L"TEST receive pre m: %i\n", *((void**) p3));
+    fwprintf(stderr, L"TEST receive pre mc: %i\n", p4);
+    fwprintf(stderr, L"TEST receive pre mc: %i\n", *((int*) p4));
 
             receive_gnu_linux_console(NULL_POINTER, NULL_POINTER, NULL_POINTER, NULL_POINTER, NULL_POINTER, NULL_POINTER, p3, p4, p5, p6, p7, p8, *is, p12, p13, p1, p2);
 
-    fprintf(stderr, "TEST receive post m: %i\n", p3);
-    fprintf(stderr, "TEST receive post m: %i\n", *((void**) p3));
-    fprintf(stderr, "TEST receive post mc: %i\n", p4);
-    fprintf(stderr, "TEST receive post mc: %i\n", *((int*) p4));
+    fwprintf(stderr, L"TEST receive post m: %i\n", p3);
+    fwprintf(stderr, L"TEST receive post m: %i\n", *((void**) p3));
+    fwprintf(stderr, L"TEST receive post mc: %i\n", p4);
+    fwprintf(stderr, L"TEST receive post mc: %i\n", *((int*) p4));
         }
     }
 
@@ -186,7 +186,7 @@ void receive_with_parameters(void* p0, void* p1, void* p2, void* p3, void* p4, v
 
     if (r == *NUMBER_0_INTEGER) {
 
-        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) "Could not receive message with given parameters. The channel model is unknown.");
+        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) L"Could not receive message with given parameters. The channel model is unknown.");
     }
 }
 
@@ -250,7 +250,7 @@ void receive_with_parameters(void* p0, void* p1, void* p2, void* p3, void* p4, v
  */
 void receive_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Receive message.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Receive message.");
 
     // The channel name, abstraction, model, details.
     void** cn = NULL_POINTER;

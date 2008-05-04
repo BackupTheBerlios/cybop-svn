@@ -1,7 +1,7 @@
 /*
  * $RCSfile: internal_memory_allocator.c,v $
  *
- * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.16 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2008-05-04 00:18:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -42,7 +42,7 @@
  */
 void allocate_internal_memory(void* p0, void* p1) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Allocate internal memory.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Allocate internal memory.");
 
     // Allocate internal memory.
     allocate_array(p0, p1, (void*) POINTER_ARRAY);
@@ -67,7 +67,7 @@ void allocate_internal_memory(void* p0, void* p1) {
  */
 void deallocate_internal_memory(void* p0, void* p1) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Deallocate internal memory.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Deallocate internal memory.");
 
     // CAUTION! Do NOT try to REMOVE the parameters!
     // Each configuration parameter has a fixed position within

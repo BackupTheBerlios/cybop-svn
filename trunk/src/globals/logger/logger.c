@@ -1,7 +1,7 @@
 /*
  * $RCSfile: logger.c,v $
  *
- * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,7 +27,7 @@
  * Otherwise, an ENDLESS LOOP will be created, because cyboi's
  * array procedures call the logger in turn.
  *
- * @version $Revision: 1.23 $ $Date: 2007-12-01 23:57:42 $ $Author: christian $
+ * @version $Revision: 1.24 $ $Date: 2008-05-04 00:18:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -38,6 +38,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <wchar.h>
 #include "../../globals/constants/character/character_constants.c"
 #include "../../globals/constants/integer/integer_constants.c"
 #include "../../globals/constants/log/log_level_constants.c"
@@ -93,21 +94,21 @@ void log_get_level_name(void* p0, void* p1, void* p2) {
 
                 // CAUTION! DO NOT use logging functionality here!
                 // The logger cannot log itself.
-                fputs("Error: Could not get log level name. The log level name is null.\n", stdout);
+                fputws(L"Error: Could not get log level name. The log level name is null.\n", stdout);
             }
 
         } else {
 
             // CAUTION! DO NOT use logging functionality here!
             // The logger cannot log itself.
-            fputs("Error: Could not get log level name. The log level name count is null.\n", stdout);
+            fputws(L"Error: Could not get log level name. The log level name count is null.\n", stdout);
         }
 
     } else {
 
         // CAUTION! DO NOT use logging functionality here!
         // The logger cannot log itself.
-        fputs("Error: Could not get log level name. The log level is null.\n", stdout);
+        fputws(L"Error: Could not get log level name. The log level is null.\n", stdout);
     }
 }
 
@@ -177,7 +178,7 @@ void log_message(void* p0, void* p1, void* p2) {
 
                     // CAUTION! DO NOT use logging functionality here!
                     // The logger cannot log itself.
-                    fputs("Error: Could not log message. The log output is undefined.\n", stdout);
+                    fputws(L"Error: Could not log message. The log output is undefined.\n", stdout);
                 }
 
             } else {
@@ -192,14 +193,14 @@ void log_message(void* p0, void* p1, void* p2) {
 
             // CAUTION! DO NOT use logging functionality here!
             // The logger cannot log itself.
-            fputs("Error: Could not log message. The message count is null.\n", stdout);
+            fputws(L"Error: Could not log message. The message count is null.\n", stdout);
         }
 
     } else {
 
         // CAUTION! DO NOT use logging functionality here!
         // The logger cannot log itself.
-        fputs("Error: Could not log message. The log level is null.\n", stdout);
+        fputws(L"Error: Could not log message. The log level is null.\n", stdout);
     }
 }
 
@@ -212,7 +213,7 @@ void log_message(void* p0, void* p1, void* p2) {
 void log_terminated_message(void* p0, void* p1) {
 
     // The message count.
-    int c = strlen(p1);
+    int c = wcslen((wchar_t*) p1);
 
     log_message(p0, p1, (void*) &c);
 }

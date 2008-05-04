@@ -1,7 +1,7 @@
 /*
  * $RCSfile: x_window_system_communicator.c,v $
  *
- * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.16 $ $Date: 2008-02-15 15:47:18 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2008-05-04 00:18:14 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -98,12 +98,12 @@ void sense_x_window_system_mouse_command(void* p0, void* p1, void* p2, void* p3,
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not sense x window system mouse command. The event type is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not sense x window system mouse command. The event type is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not sense x window system mouse command. The mouse button is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not sense x window system mouse command. The mouse button is null.");
     }
 }
 
@@ -153,7 +153,7 @@ void sense_x_window_system_command(void* p0, void* p1, void* p2, void* p3, void*
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not sense x window system command. The event type is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not sense x window system command. The event type is null.");
     }
 }
 
@@ -400,22 +400,22 @@ void sense_x_window_system_part(void* p0, void* p1, void* p2, void* p3, void* p4
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not sense x window system part. The whole model count is null.");
+                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not sense x window system part. The whole model count is null.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not sense x window system part. The mouse x coordinate is null.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not sense x window system part. The mouse x coordinate is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not sense x window system part. The mouse y coordinate is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not sense x window system part. The mouse y coordinate is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not sense x window system part. The mouse z coordinate is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not sense x window system part. The mouse z coordinate is null.");
     }
 }
 
@@ -550,7 +550,7 @@ void read_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 (void*) &cd, (void*) &cdc, (void*) &cds,
                 *k, *kc);
 
-    fprintf(stderr, "TEST expose sense t: %i\n", t);
+    fwprintf(stderr, L"TEST expose sense t: %i\n", t);
 
             // Lock signal memory mutex.
             pthread_mutex_lock(*smt);
@@ -672,7 +672,7 @@ void read_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     } else if ((t == ButtonPress) || (t == ButtonRelease)) {
 
-    fprintf(stderr, "TEST button press sense t: %i\n", t);
+    fwprintf(stderr, L"TEST button press sense t: %i\n", t);
 
         //?? TODO: This is a temporary solution!
         //?? There is no meta information (such as position or size) known
@@ -756,7 +756,7 @@ void write_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         struct _XDisplay** d = (struct _XDisplay**) p0;
 
-        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Write to x window system display.");
+        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Write to x window system display.");
 
         // The window.
         int** w = (int**) NULL_POINTER;
@@ -779,7 +779,7 @@ void write_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not write to x window system display. The destination display is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not write to x window system display. The destination display is null.");
     }
 }
 

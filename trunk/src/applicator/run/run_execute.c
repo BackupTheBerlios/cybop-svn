@@ -1,7 +1,7 @@
 /*
  * $RCSfile: run_execute.c,v $
  *
- * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.14 $ $Date: 2007-10-03 23:40:05 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2008-05-04 00:18:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -44,7 +44,7 @@
  */
 void run_execute(void* p0) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Execute command/ program as process.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Execute command/ program as process.");
 
     // Initialise error number.
     // It is a global variable/ function and other operations
@@ -65,24 +65,24 @@ void run_execute(void* p0) {
 
     if (r == *NUMBER_MINUS_1_INTEGER) {
 
-        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) "Could not execute command/ program as process. A negative value was returned.");
+        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) L"Could not execute command/ program as process. A negative value was returned.");
 
         if (errno == EINTR) {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not execute command/ program as process. The function was interrupted by delivery of a signal to the calling process.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not execute command/ program as process. The function was interrupted by delivery of a signal to the calling process.");
 
         } else if (errno == ECHILD) {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not execute command/ program as process. There are no child processes to wait for, or the specified pid is not a child of the calling process.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not execute command/ program as process. There are no child processes to wait for, or the specified pid is not a child of the calling process.");
 
         } else if (errno == EINVAL) {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not execute command/ program as process. An invalid value was provided for the options argument.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not execute command/ program as process. An invalid value was provided for the options argument.");
         }
 
     } else {
 
-        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Successfully executed command/ program as process. The child process was left; the parent process continues.");
+        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Successfully executed command/ program as process. The child process was left; the parent process continues.");
     }
 
 /*??
@@ -94,7 +94,7 @@ void run_execute(void* p0) {
     //?? Therefore, the "system" function (see above) was used for now.
     //?? It might be even better, since it is platform-neutral (portable).
 
-    fprintf(stdout, "TEST pre-fork: %i\n", p0);
+    fwprintf(stdout, L"TEST pre-fork: %i\n", p0);
 
     // Fork a new process and remember its process identification (PID).
     // In the GNU C library, pid_t corresponds to the int type.
@@ -103,11 +103,11 @@ void run_execute(void* p0) {
     // The child process is a duplicate of the parent (except for a few details).
     pid_t pid = fork();
 
-    fprintf(stdout, "TEST post-fork pid: %i\n", pid);
+    fwprintf(stdout, L"TEST post-fork pid: %i\n", pid);
 
     if (pid == *NUMBER_0_INTEGER) {
 
-    fprintf(stdout, "TEST pid == 0 pid: %i\n", pid);
+    fwprintf(stdout, L"TEST pid == 0 pid: %i\n", pid);
 
         // The "fork" was successful.
         // This is the child process.
@@ -154,17 +154,17 @@ void run_execute(void* p0) {
 
         //?? TEMPORARY TEST!
         char** args = (char**) p0;
-        fprintf(stdout, "TEST args 0: %s\n", *(args + 0));
-        fprintf(stdout, "TEST args 1: %s\n", *(args + 1));
-        fprintf(stdout, "TEST args 2: %s\n", *(args + 2));
-        fprintf(stdout, "TEST args 3: %s\n", *(args + 3));
+        fwprintf(stdout, L"TEST args 0: %s\n", *(args + 0));
+        fwprintf(stdout, L"TEST args 1: %s\n", *(args + 1));
+        fwprintf(stdout, L"TEST args 2: %s\n", *(args + 2));
+        fwprintf(stdout, L"TEST args 3: %s\n", *(args + 3));
         if (*(args + 3) == *NULL_POINTER) {
-            fprintf(stdout, "TEST args 3 IS null pointer: %i\n", *(args + 3));
+            fwprintf(stdout, L"TEST args 3 IS null pointer: %i\n", *(args + 3));
         } else {
-            fprintf(stdout, "TEST args 3 is NOT null pointer: %i\n", *(args + 3));
+            fwprintf(stdout, L"TEST args 3 is NOT null pointer: %i\n", *(args + 3));
         }
 
-    fprintf(stdout, "TEST pre-exec: %i\n", p0);
+    fwprintf(stdout, L"TEST pre-exec: %i\n", p0);
 
         // Initialise error number.
         // It is a global variable/ function and other operations
@@ -199,12 +199,12 @@ void run_execute(void* p0) {
         // execl(SHELL_SYSTEM_EXECUTABLE, SHELL_SYSTEM_EXECUTABLE, "-c", "xdosemu", *NULL_POINTER);
         int e = execv(SHELL_SYSTEM_EXECUTABLE, (char**) p0);
 
-    fprintf(stdout, "TEST post-exec e: %i\n", e);
+    fwprintf(stdout, L"TEST post-exec e: %i\n", e);
 
         // A value of -1 is returned in the event of a failure.
         if (e == *NUMBER_MINUS_1_INTEGER) {
 
-    fprintf(stdout, "TEST e == -1 errno: %i\n", errno);
+    fwprintf(stdout, L"TEST e == -1 errno: %i\n", errno);
 
             //
             // The five "usual file name errors":
@@ -212,14 +212,14 @@ void run_execute(void* p0) {
 
             if (errno == EACCES) {
 
-        fprintf(stdout, "TEST EACCES errno: %i\n", errno);
+        fwprintf(stdout, L"TEST EACCES errno: %i\n", errno);
 
                 // The process does not have search permission for a
                 // directory component of the file name.
 
             } else if (errno == ENAMETOOLONG) {
 
-        fprintf(stdout, "TEST ENAMETOOLONG errno: %i\n", errno);
+        fwprintf(stdout, L"TEST ENAMETOOLONG errno: %i\n", errno);
 
                 // This error is used when either the total length of a file name
                 // is greater than PATH_MAX, or when an individual file name component
@@ -229,7 +229,7 @@ void run_execute(void* p0) {
 
             } else if (errno == ENOENT) {
 
-        fprintf(stdout, "TEST ENOENT errno: %i\n", errno);
+        fwprintf(stdout, L"TEST ENOENT errno: %i\n", errno);
 
                 // This error is reported when a file referenced as a directory component
                 // in the file name doesn't exist, or when a component is a symbolic link
@@ -237,14 +237,14 @@ void run_execute(void* p0) {
 
             } else if (errno == ENOTDIR) {
 
-        fprintf(stdout, "TEST ENOTDIR errno: %i\n", errno);
+        fwprintf(stdout, L"TEST ENOTDIR errno: %i\n", errno);
 
                 // A file that is referenced as a directory component in the file name
                 // exists, but it isn't a directory.
 
             } else if (errno == ELOOP) {
 
-        fprintf(stdout, "TEST ELOOP errno: %i\n", errno);
+        fwprintf(stdout, L"TEST ELOOP errno: %i\n", errno);
 
                 // Too many symbolic links were resolved while trying to look up the file name.
                 // The system has an arbitrary limit on the number of symbolic links
@@ -257,7 +257,7 @@ void run_execute(void* p0) {
 
             } else if (errno == E2BIG) {
 
-        fprintf(stdout, "TEST E2BIG errno: %i\n", errno);
+        fwprintf(stdout, L"TEST E2BIG errno: %i\n", errno);
 
                 // The combined size of the new program's argument list and
                 // environment list is larger than ARG_MAX bytes.
@@ -267,14 +267,14 @@ void run_execute(void* p0) {
 
             } else if (errno == ENOEXEC) {
 
-        fprintf(stdout, "TEST ENOEXEC errno: %i\n", errno);
+        fwprintf(stdout, L"TEST ENOEXEC errno: %i\n", errno);
 
                 // The specified file can't be executed because
                 // it isn't in the right format.
 
             } else if (errno == ENOMEM) {
 
-        fprintf(stdout, "TEST ENOMEM errno: %i\n", errno);
+        fwprintf(stdout, L"TEST ENOMEM errno: %i\n", errno);
 
                 // Executing the specified file requires more storage than is available.
 
@@ -284,7 +284,7 @@ void run_execute(void* p0) {
 
             } else if (errno == EFAULT) {
 
-        fprintf(stdout, "TEST EFAULT errno: %i\n", errno);
+        fwprintf(stdout, L"TEST EFAULT errno: %i\n", errno);
 
                 // Bad address; an invalid pointer was detected.
                 // In the GNU system, this error never happens;
@@ -324,17 +324,17 @@ void run_execute(void* p0) {
             _exit(*NUMBER_1_INTEGER);
         }
 
-    fprintf(stdout, "TEST post-exit errno: %i\n", errno);
+    fwprintf(stdout, L"TEST post-exit errno: %i\n", errno);
 
     } else if (pid < *NUMBER_0_INTEGER) {
 
-    fprintf(stdout, "TEST pid < 0 pid: %i\n", pid);
+    fwprintf(stdout, L"TEST pid < 0 pid: %i\n", pid);
 
         // The "fork" did not succeed. An error occured.
         // This is still the parent process.
         // A child process could not be created.
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not execute command as process. The process fork failed.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not execute command as process. The process fork failed.");
 
     } else {
 
@@ -343,17 +343,17 @@ void run_execute(void* p0) {
         // The following code is only executed by the parent process.
         // A pid > 0 represents the child process's id.
 
-        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Executed command as process. The process fork succeeded. Now waiting for the child process to exit.");
+        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Executed command as process. The process fork succeeded. Now waiting for the child process to exit.");
 
-    fprintf(stdout, "TEST pid > 0 pid: %i\n", pid);
+    fwprintf(stdout, L"TEST pid > 0 pid: %i\n", pid);
 
         // Request status information from child process.
         // In the GNU C library, pid_t corresponds to the int type.
         waitpid(pid, (int*) *NULL_POINTER, *NUMBER_0_INTEGER);
 
-        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "The child process exited. Continue executing parent process.");
+        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"The child process exited. Continue executing parent process.");
 
-    fprintf(stdout, "TEST post-waitpid pid: %i\n", pid);
+    fwprintf(stdout, L"TEST post-waitpid pid: %i\n", pid);
     }
 */
 }

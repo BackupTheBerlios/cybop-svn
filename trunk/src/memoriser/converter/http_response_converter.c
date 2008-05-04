@@ -1,7 +1,7 @@
 /*
  * $RCSfile: http_response_converter.c,v $
  *
- * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2007-10-30 13:08:27 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2008-05-04 00:18:14 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -90,7 +90,7 @@
  */
 void decode_http_response(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Decode http response.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Decode http response.");
 }
 
 /**
@@ -104,7 +104,7 @@ void decode_http_response(void* p0, void* p1, void* p2, void* p3, void* p4, void
  */
 void encode_http_response_status_line(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Encode http response status line.");
+    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Encode http response status line.");
 
     // Encode http protocol version.
     encode(p0, p1, p2, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
@@ -132,7 +132,7 @@ void encode_http_response_status_line(void* p0, void* p1, void* p2, void* p3, vo
  */
 void encode_http_response_headers(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
-    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Encode http response headers.");
+    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Encode http response headers.");
 
     // Encode content type http header.
     encode(p0, p1, p2, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
@@ -192,7 +192,7 @@ void encode_http_response_headers(void* p0, void* p1, void* p2, void* p3, void* 
  */
 void encode_http_response_body(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Encode http response body.");
+    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Encode http response body.");
 
     // Encode http body which was already encoded from a cyboi model into a
     // character byte stream and handed over as such.
@@ -226,7 +226,7 @@ void encode_http_response(void* p0, void* p1, void* p2, void* p3, void* p4, void
 
                 void** d = (void**) p0;
 
-                log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Encode http response.");
+                log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Encode http response.");
 
                 // The temporary body.
                 void* b = *NULL_POINTER;
@@ -276,17 +276,17 @@ void encode_http_response(void* p0, void* p1, void* p2, void* p3, void* p4, void
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode http response. The destination http response is null.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode http response. The destination http response is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode http response. The destination http response count is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode http response. The destination http response count is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode http response. The destination http response size is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode http response. The destination http response size is null.");
     }
 }
 

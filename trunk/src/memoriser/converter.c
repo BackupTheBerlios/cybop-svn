@@ -1,7 +1,7 @@
 /*
  * $RCSfile: converter.c,v $
  *
- * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.44 $ $Date: 2008-04-22 22:44:29 $ $Author: christian $
+ * @version $Revision: 1.45 $ $Date: 2008-05-04 00:18:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -73,7 +73,7 @@
  */
 void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Decode.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Decode.");
 
     // The comparison result.
     int r = *NUMBER_0_INTEGER;
@@ -320,7 +320,7 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
     if (r == *NUMBER_0_INTEGER) {
 
-        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) "Could not decode. The language is unknown.");
+        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) L"Could not decode. The language is unknown.");
     }
 }
 
@@ -346,7 +346,7 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 void encode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
     void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Encode.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Encode.");
 
     // The comparison result.
     int r = *NUMBER_0_INTEGER;
@@ -573,7 +573,7 @@ void encode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
     if (r == *NUMBER_0_INTEGER) {
 
-        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) "Could not encode. The language is unknown.");
+        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) L"Could not encode. The language is unknown.");
     }
 }
 

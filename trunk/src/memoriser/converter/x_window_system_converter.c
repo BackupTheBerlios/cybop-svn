@@ -1,7 +1,7 @@
 /*
  * $RCSfile: x_window_system_converter.c,v $
  *
- * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.20 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
+ * @version $Revision: 1.21 $ $Date: 2008-05-04 00:18:14 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -71,7 +71,7 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
 
         int* sc = (int*) p4;
 
-        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Encode x window system.");
+        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Encode x window system.");
 
         // The display, which is a subsumption of
         // xserver, screens, hardware (input devices etc.).
@@ -346,15 +346,15 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
             get_element(*sm, (void*) NUMBER_1_INTEGER, (void*) &smy, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
             get_element(*sm, (void*) NUMBER_2_INTEGER, (void*) &smz, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
-    fprintf(stderr, "layout: %s\n", *lm);
-    fprintf(stderr, "layout count: %i\n", *((int*) *lmc));
+    fwprintf(stderr, L"layout: %s\n", *lm);
+    fwprintf(stderr, L"layout count: %i\n", *((int*) *lmc));
 
             compare_arrays(*lm, *lmc, (void*) UI_ROOT_LAYOUT_MODEL, (void*) UI_ROOT_LAYOUT_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
             if (r == *NUMBER_0_INTEGER) {
 
                 // The source part is no root window.
-                log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "This is not a root window.");
+                log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"This is not a root window.");
 
                 // Calculate coordinates according to given layout.
 /*??
@@ -514,7 +514,7 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
             } else {
 
                 // The source part is a root window.
-                log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "This is a root window.");
+                log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"This is a root window.");
 
                 // Move window to new position coordinates for part.
                 XMoveWindow(*di, **w, *pmx, *pmy);
@@ -578,7 +578,7 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
             if (r != *NUMBER_0_INTEGER) {
 
                 // The part model is a compound.
-                log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "The part model is a compound.");
+                log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"The part model is a compound.");
 
                 // Recursively call this procedure for compound part model.
                 encode_x_window_system(p0, p1, p2, *m, *mc, *d, *dc, p7, p8);
@@ -666,7 +666,7 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode x window system. The source count is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode x window system. The source count is null.");
     }
 }
 

@@ -1,7 +1,7 @@
 /*
  * $RCSfile: allocator.c,v $
  *
- * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,7 +24,7 @@
  * - create a model in memory
  * - destroy a model in memory
  *
- * @version $Revision: 1.22 $ $Date: 2007-12-01 23:57:42 $ $Author: christian $
+ * @version $Revision: 1.23 $ $Date: 2008-05-04 00:18:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -61,7 +61,7 @@
  */
 void allocate(void* p0, void* p1, void* p2, void* p3) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Allocate model.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Allocate model.");
 
     // The comparison result.
     int r = *NUMBER_0_INTEGER;
@@ -238,7 +238,7 @@ void allocate(void* p0, void* p1, void* p2, void* p3) {
 
     if (r == *NUMBER_0_INTEGER) {
 
-        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) "Could not allocate model. The abstraction is unknown.");
+        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) L"Could not allocate model. The abstraction is unknown.");
     }
 }
 
@@ -253,7 +253,7 @@ void allocate(void* p0, void* p1, void* p2, void* p3) {
  */
 void reallocate(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Reallocate model.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Reallocate model.");
 
     // The comparison result.
     int r = *NUMBER_0_INTEGER;
@@ -410,7 +410,7 @@ void reallocate(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (r == *NUMBER_0_INTEGER) {
 
-        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) "Could not reallocate model. The abstraction is unknown.");
+        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) L"Could not reallocate model. The abstraction is unknown.");
     }
 }
 
@@ -424,7 +424,7 @@ void reallocate(void* p0, void* p1, void* p2, void* p3, void* p4) {
  */
 void deallocate(void* p0, void* p1, void* p2, void* p3) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Deallocate model.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Deallocate model.");
 
     // The comparison result.
     int r = *NUMBER_0_INTEGER;
@@ -581,7 +581,7 @@ void deallocate(void* p0, void* p1, void* p2, void* p3) {
 
     if (r == *NUMBER_0_INTEGER) {
 
-        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) "Could not deallocate model. The abstraction is unknown.");
+        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) L"Could not deallocate model. The abstraction is unknown.");
     }
 }
 

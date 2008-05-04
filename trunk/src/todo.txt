@@ -7,9 +7,16 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.40 $ $Date: 2008-05-02 22:52:18 $ $Author: christian $
+# @version $Revision: 1.41 $ $Date: 2008-05-04 00:18:09 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+        * Go through source code manually searching for potential bugs,
+            after conversion to wide character
+        * Replace function calls to "strlen" with "wcslen"
+        * Adapt "write" function call in module "logger.c" to wide character
+        * Convert more source code modules (logger etc.) to wide character usage,
+            since mixing wide- and narrow characters would cause problems at in-/ output
 
         * Program still crashes:
             - check if wchar_t has to be used instead of char
@@ -260,3 +267,24 @@
             ==> solution 1 seems desirable, but would need some thinking on how to implement this in CYBOI
             ==> for now, as temporary solution, the properties are stored redundantly (twice) in the template
                 that needs them (for example "menu_item" entries in the resmedicinae-revue menu) and in its super template
+
+
+Wide Character Hints
+____________________
+
+1) a file pointer [FP] cannot be used during the same lifetime by
+both char functions [CF]: {fprintf vfprintf fputc fwrite!! fwide(fp,-1)}
+and wide char functions [WCF]: {fwprintf vfwprintf fputwc fwide(fp,1)}
+
+2) to mix char and wide char output the code shall either use CF and write
+wide chars by (%ls,%lc) or use WCF and write chars by (%s,%c).
+
+3) the 'strange' but sane behaviour (that unluckily is not present in
+windows) is due to the internal state of the FP that is imposed either
+by fwide or implicitly by either a call to CF (that inhibits WCF) or a call
+to WCF (that inhibits CF).
+
+4) pay attention to fwrite when you want to mix binary and wide char
+output inside a stream because it switches the FP to accept only CF
+
+5) use swprintf, sprintf, iconv, open and write to start your experiments

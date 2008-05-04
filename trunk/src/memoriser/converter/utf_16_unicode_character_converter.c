@@ -1,7 +1,7 @@
 /*
  * $RCSfile: utf_16_unicode_character_converter.c,v $
  *
- * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2008-05-04 00:18:14 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -40,7 +40,7 @@
 // the resulting encoding is a single 16-bit word. For characters in the other
 // planes, the encoding will result in a pair of 16-bit words, together called
 // a surrogate pair. All possible code points from U+0000 through U+10FFFF, except
-// for the surrogate code points U+D800–U+DFFF, are uniquely mapped by UTF-16
+// for the surrogate code points U+D800ï¿½U+DFFF, are uniquely mapped by UTF-16
 // regardless of the code point's current or future character assignment or use.
 //
 // As many uses in computing require units of bytes (octets), there are three
@@ -85,7 +85,7 @@
  */
 void decode_utf_16_unicode_character_stream(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Decode UTF-16 Unicode character stream.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Decode UTF-16 Unicode character stream.");
 }
 
 /**
@@ -99,7 +99,7 @@ void decode_utf_16_unicode_character_stream(void* p0, void* p1, void* p2, void* 
  */
 void encode_utf_16_unicode_character_stream(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Encode UTF-16 Unicode character stream.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Encode UTF-16 Unicode character stream.");
 }
 
 /* UTF_16_UNICODE_CHARACTER_CONVERTER_SOURCE */

@@ -1,7 +1,7 @@
 /*
  * $RCSfile: receive_file_system.c,v $
  *
- * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.22 $ $Date: 2008-02-15 15:47:17 $ $Author: christian $
+ * @version $Revision: 1.23 $ $Date: 2008-05-04 00:18:10 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -57,7 +57,7 @@
  */
 void receive_file_system(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Receive file system message.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Receive file system message.");
 
     //?? The temporary workaround flag to use the libxml2 parser.
     //?? Later, when an own xml parser is implemented in cyboi,

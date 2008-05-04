@@ -1,7 +1,7 @@
 /*
  * $RCSfile: xhtml_converter.c,v $
  *
- * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.14 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2008-05-04 00:18:14 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -96,7 +96,7 @@ void encode_xhtml_indentation(void* p0, void* p1, void* p2, void* p3) {
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode xhtml indentation. The indentation level is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode xhtml indentation. The indentation level is null.");
     }
 }
 
@@ -117,7 +117,7 @@ void encode_xhtml_attributes(void* p0, void* p1, void* p2, void* p3, void* p4, v
 
         int* sc = (int*) p4;
 
-        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Encode xhtml attributes.");
+        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Encode xhtml attributes.");
 
         // The source part details name, abstraction, model, details.
         void** n = NULL_POINTER;
@@ -196,7 +196,7 @@ void encode_xhtml_attributes(void* p0, void* p1, void* p2, void* p3, void* p4, v
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode xhtml attributes. The source part details count is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode xhtml attributes. The source part details count is null.");
     }
 }
 
@@ -217,7 +217,7 @@ void encode_xhtml_attributes(void* p0, void* p1, void* p2, void* p3, void* p4, v
 void encode_xhtml_begin_tag(void* p0, void* p1, void* p2,
     void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9) {
 
-    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Encode xhtml begin tag.");
+    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Encode xhtml begin tag.");
 
     // Encode indentation.
     encode_xhtml_indentation(p0, p1, p2, p9);
@@ -245,7 +245,7 @@ void encode_xhtml_begin_tag(void* p0, void* p1, void* p2,
  */
 void encode_xhtml_end_tag(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
-    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Encode xhtml end tag.");
+    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Encode xhtml end tag.");
 
     // Encode indentation.
     encode_xhtml_indentation(p0, p1, p2, p5);
@@ -292,7 +292,7 @@ void encode_xhtml_tag_content(void* p0, void* p1, void* p2, void* p3, void* p4, 
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode xhtml tag content. The model count is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode xhtml tag content. The model count is null.");
     }
 }
 
@@ -323,7 +323,7 @@ void encode_xhtml_node(void* p0, void* p1, void* p2, void* p3, void* p4,
 
             int* sc = (int*) p6;
 
-            log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Encode xhtml node.");
+            log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Encode xhtml node.");
 
             // The source part name, abstraction, model, details.
             void** n = NULL_POINTER;
@@ -435,12 +435,12 @@ void encode_xhtml_node(void* p0, void* p1, void* p2, void* p3, void* p4,
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode compound model into xhtml format. The source count parameter is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode compound model into xhtml format. The source count parameter is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode compound model into xhtml format. The indentation level is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode compound model into xhtml format. The indentation level is null.");
     }
 }
 
@@ -462,7 +462,7 @@ void encode_xhtml_node(void* p0, void* p1, void* p2, void* p3, void* p4,
 void encode_xhtml(void* p0, void* p1, void* p2, void* p3, void* p4,
     void* p5, void* p6, void* p7, void* p8, void* p9, void* p10) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Encode xhtml.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Encode xhtml.");
 
     // The tree level.
     int l = *NUMBER_0_INTEGER;

@@ -1,5 +1,5 @@
 /*
- * $RCSfile: pointer_constants.c,v $
+ * $RCSfile: orienter.c,v $
  *
  * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
  *
@@ -20,22 +20,40 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2008-05-04 00:18:12 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2008-05-04 00:18:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef POINTER_CONSTANTS_SOURCE
-#define POINTER_CONSTANTS_SOURCE
+#ifndef ORIENTER_SOURCE
+#define ORIENTER_SOURCE
+
+#include "../globals/constants/pointer/pointer_constants.c"
 
 /**
- * The null pointer.
+ * Deoptionalises the given command line argument options.
  *
- * CAUTION! Do NOT try to use *NUMBER_0_INTEGER here instead of the value 0!
- * Otherwise, the system would show the following error, as it expects a constant value:
- * "error: initializer element is not constant"
+ * @param p0 the orientation (positive value: wide character; negative value: narrow character)
  */
-static void* NULL_POINTER_ARRAY[] = {(void*) 0};
-static void** NULL_POINTER = NULL_POINTER_ARRAY;
+void orient(void* p0) {
 
-/* POINTER_CONSTANTS_SOURCE */
+    if (p0 != *NULL_POINTER) {
+
+        int* o = (int*) p0;
+
+        // Set stdout stream orientation.
+        fwide(stdout, *o);
+        // Set stdin stream orientation.
+        fwide(stdin, *o);
+        // Set stderr stream orientation.
+        fwide(stderr, *o);
+
+    } else {
+
+        // CAUTION! DO NOT use logging functionality here!
+        // The logger will not work before its options are set.
+        fputws(L"Error: Could not orient streams. The orientation is null.\n", stdout);
+    }
+}
+
+/* ORIENTER_SOURCE */
 #endif

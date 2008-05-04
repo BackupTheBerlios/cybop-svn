@@ -1,7 +1,7 @@
 /*
  * $RCSfile: receive_gnu_linux_console.c,v $
  *
- * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.16 $ $Date: 2008-04-30 14:32:48 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2008-05-04 00:18:10 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -56,7 +56,7 @@
 void receive_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
     void* p6, void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14, void* p15, void* p16) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Receive gnu/linux console message.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Receive gnu/linux console message.");
 
     // The character array read from the gnu/linux console.
     void* a = *NULL_POINTER;
@@ -66,21 +66,21 @@ void receive_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4,
     // Allocate character array.
     allocate((void*) &a, (void*) &as, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
-    fprintf(stderr, "TEST receive pre read: %i\n", ac);
+    fwprintf(stderr, L"TEST receive pre read: %i\n", ac);
 
     // Read pressed keyboard keys as message from gnu/linux console.
     read_gnu_linux_console((void*) &a, (void*) &ac, (void*) &as, p12);
 
-    fprintf(stderr, "TEST a: %s\n", (char*) a);
-    fprintf(stderr, "TEST ac: %i\n", ac);
-    fprintf(stderr, "TEST as: %i\n", as);
+    fwprintf(stderr, L"TEST a: %s\n", (char*) a);
+    fwprintf(stderr, L"TEST ac: %i\n", ac);
+    fwprintf(stderr, L"TEST as: %i\n", as);
 
     // Decode character array into command.
     decode(p6, p7, p8, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, a, (void*) &ac, p15, p16, (void*) GNU_LINUX_CONSOLE_MODEL, (void*) GNU_LINUX_CONSOLE_MODEL_COUNT);
 
-    fprintf(stderr, "TEST m: %s\n", *((char**) p6));
-    fprintf(stderr, "TEST mc: %i\n", *((int*) p7));
-    fprintf(stderr, "TEST ms: %i\n", *((int*) p8));
+    fwprintf(stderr, L"TEST m: %s\n", *((char**) p6));
+    fwprintf(stderr, L"TEST mc: %i\n", *((int*) p7));
+    fwprintf(stderr, L"TEST ms: %i\n", *((int*) p8));
 
     // Deallocate character array.
     deallocate((void*) &a, (void*) &as, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);

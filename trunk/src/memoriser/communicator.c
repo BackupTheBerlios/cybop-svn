@@ -1,7 +1,7 @@
 /*
  * $RCSfile: communicator.c,v $
  *
- * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,7 +24,7 @@
  * - read data from a device into a byte array
  * - write data from a byte array to a device
  *
- * @version $Revision: 1.22 $ $Date: 2008-02-15 15:47:18 $ $Author: christian $
+ * @version $Revision: 1.23 $ $Date: 2008-05-04 00:18:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -72,7 +72,7 @@
  */
 void read_data(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Read data.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Read data.");
 
     // The comparison result.
     int r = *NUMBER_0_INTEGER;
@@ -186,7 +186,7 @@ void read_data(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
 
     if (r == *NUMBER_0_INTEGER) {
 
-        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) "Could not read data. The communication type is unknown.");
+        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) L"Could not read data. The communication type is unknown.");
     }
 }
 
@@ -210,7 +210,7 @@ void read_data(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
  */
 void write_data(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Write data.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Write data.");
 
     // The comparison result.
     int r = *NUMBER_0_INTEGER;
@@ -324,7 +324,7 @@ void write_data(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
 
     if (r == *NUMBER_0_INTEGER) {
 
-        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) "Could not write data. The communication type is unknown.");
+        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) L"Could not write data. The communication type is unknown.");
     }
 }
 

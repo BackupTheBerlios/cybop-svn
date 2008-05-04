@@ -1,7 +1,7 @@
 /*
  * $RCSfile: compare_smaller.c,v $
  *
- * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.12 $ $Date: 2007-10-03 23:40:05 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2008-05-04 00:18:10 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -92,7 +92,7 @@ void compare_smaller(void* p0, void* p1, void* p2,
 
             if (p3 != *NULL_POINTER) {
 
-                log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Compare if one parameter is smaller than the other.");
+                log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Compare if one parameter is smaller than the other.");
 
                 // The result parameter comparison result.
                 int r = *NUMBER_0_INTEGER;
@@ -121,7 +121,7 @@ void compare_smaller(void* p0, void* p1, void* p2,
 
                     if ((lr != *NUMBER_0_INTEGER) && (rr != *NUMBER_0_INTEGER)) {
 
-                        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Use character parameters.");
+                        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Use character parameters.");
 
                         if (*((char*) p3) < *((char*) p12)) {
 
@@ -147,7 +147,7 @@ void compare_smaller(void* p0, void* p1, void* p2,
 
                     if ((lr != *NUMBER_0_INTEGER) && (rr != *NUMBER_0_INTEGER)) {
 
-                        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Use integer parameters.");
+                        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Use integer parameters.");
 
                         if (*((int*) p3) < *((int*) p12)) {
 
@@ -173,7 +173,7 @@ void compare_smaller(void* p0, void* p1, void* p2,
 
                     if ((lr != *NUMBER_0_INTEGER) && (rr != *NUMBER_0_INTEGER)) {
 
-                        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Use double parameters.");
+                        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Use double parameters.");
 
                         if (*((double*) p3) < *((double*) p12)) {
 
@@ -187,22 +187,22 @@ void compare_smaller(void* p0, void* p1, void* p2,
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not compare if one parameter is smaller than the other. The result parameter is not a boolean.");
+                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not compare if one parameter is smaller than the other. The result parameter is not a boolean.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not compare if one parameter is smaller than the other. The left side parameter is null.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not compare if one parameter is smaller than the other. The left side parameter is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not compare if one parameter is smaller than the other. The right side parameter is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not compare if one parameter is smaller than the other. The right side parameter is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not compare if one parameter is smaller than the other. The result parameter is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not compare if one parameter is smaller than the other. The result parameter is null.");
     }
 }
 

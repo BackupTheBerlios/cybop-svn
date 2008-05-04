@@ -14,12 +14,28 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.50 $ $Date: 2008-05-02 22:52:18 $ $Author: christian $
+# @version $Revision: 1.51 $ $Date: 2008-05-04 00:18:08 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2008-05-03  Christian Heller  <christian.heller@tuxtax.de>
+        * Update year 2007 to 2008 in copyright notice of each source code file
+        * Replace in all source code
+            "LOG_LEVEL, (void*) "" with ""
+            "stderr, "" with "stderr, L""
+            "fprintf(" with "fwprintf("
+            "fputs("" with "fputws(L""
+        * Add new module "controller/orienter.c" with function "orient" for setting
+            standard stream orientation for "stdout", "stdin" and "stderr" to "wide character"
+        * Investigate problem that wide characters are not printed on standard output stream --
+            each stream has a fixed orientation, either for wide or for (narrow) characters;
+            the orientation is set upon first output of characters or via the function "fwide"
+        * Start adapting source code from "character" to "wide character"
+            (this seems to be necessary to properly catch keyboard events via gnu/linux console)
+
 2008-05-02  Christian Heller  <christian.heller@tuxtax.de>
-        * Find a way to detect a simple escape character but also escape control sequences, using the glibc function "ungetc"
+        * Find a way to detect a simple escape character (key press input),
+            but also escape control sequences, using the glibc function "ungetc"
 
 2008-05-01  Christian Heller  <christian.heller@tuxtax.de>
         * Fix bug in function "read_gnu_linux_console" where

@@ -1,7 +1,7 @@
 /*
  * $RCSfile: run.c,v $
  *
- * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.15 $ $Date: 2007-12-01 23:57:41 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2008-05-04 00:18:09 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -52,7 +52,7 @@
  */
 void run(void* p0, void* p1, void* p2, void* p3) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Run a command.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Run a command.");
 
     // The command name, abstraction, model, details.
     void** cn = NULL_POINTER;
@@ -122,7 +122,7 @@ void run(void* p0, void* p1, void* p2, void* p3) {
 
     if (r == *NUMBER_0_INTEGER) {
 
-        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) "Could not run command. The command model is unknown.");
+        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) L"Could not run command. The command model is unknown.");
     }
 }
 

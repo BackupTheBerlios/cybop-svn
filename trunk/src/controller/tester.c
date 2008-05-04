@@ -1,7 +1,7 @@
 /*
  * $RCSfile: tester.c,v $
  *
- * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,7 +24,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.16 $ $Date: 2007-12-01 23:57:41 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2008-05-04 00:18:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -71,9 +71,9 @@
  */
 void test_logger() {
 
-    fputs("Test logger:\n", stdout);
-    fputs("CAUTION! A log level other than 'OFF' needs to be set for testing!\n", stdout);
-    fputs("For the logging test result, see the corresponding log file that was given as command line argument!\n", stdout);
+    fputws(L"Test logger:\n", stdout);
+    fputws(L"CAUTION! A log level other than 'OFF' needs to be set for testing!\n", stdout);
+    fputws(L"For the logging test result, see the corresponding log file that was given as command line argument!\n", stdout);
 
     /** The log message as constant. */
     static char TEST_LOG_MESSAGE_ARRAY[] = {'T', 'E', 'S', 'T', ' ', 'l', 'o', 'g', ' ', 'm', 'e', 's', 's', 'a', 'g', 'e', '.'};
@@ -82,7 +82,7 @@ void test_logger() {
 
     log_message((void*) INFORMATION_LOG_LEVEL, (void*) TEST_LOG_MESSAGE, (void*) TEST_LOG_MESSAGE_COUNT);
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "TEST terminated log message.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"TEST terminated log message.");
 }
 
 /**
@@ -90,7 +90,7 @@ void test_logger() {
  */
 void test_inline_assembler_code() {
 
-    fputs("Test inline assembler code:\n", stdout);
+    fputws(L"Test inline assembler code:\n", stdout);
 
     // Gegeben ist ein zusammenh�gender Block von Worten im RAM.
     // Die Startadresse des Blockes ist im Register ESI angegeben,
@@ -126,14 +126,14 @@ void test_inline_assembler_code() {
  */
 void test_preprocessor_directives() {
 
-    fputs("Test preprocessor directives:\n", stdout);
+    fputws(L"Test preprocessor directives:\n", stdout);
 
 #ifdef GNU_LINUX_OPERATING_SYSTEM
-    fputs("GNU_LINUX\n", stdout);
+    fputws(L"GNU_LINUX\n", stdout);
 #elif WINDOWS_OPERATING_SYSTEM
-    fputs("WINDOWS\n", stdout);
+    fputws(L"WINDOWS\n", stdout);
 #else
-    fputs("OTHER\n", stdout);
+    fputws(L"OTHER\n", stdout);
 /* GNU_LINUX_OPERATING_SYSTEM */
 #endif
 }
@@ -143,10 +143,10 @@ void test_preprocessor_directives() {
  */
 void test_stdout_stderr() {
 
-    fputs("Test stdout stderr:\n", stdout);
+    fputws(L"Test stdout stderr:\n", stdout);
 
-    fputs("test stdout ok\n", stdout);
-    fputs("test stderr ok\n", stderr);
+    fputws(L"test stdout ok\n", stdout);
+    fputws(L"test stderr ok\n", stderr);
 }
 
 /**
@@ -154,15 +154,15 @@ void test_stdout_stderr() {
  */
 void test_type_sizes() {
 
-    fputs("Test type sizes:\n", stdout);
+    fputws(L"Test type sizes:\n", stdout);
 
-    fprintf(stderr, "null: %i\n", *NULL_POINTER);
-    fprintf(stderr, "int size: %i\n", *INTEGER_PRIMITIVE_SIZE);
-    fprintf(stderr, "char size: %i\n", *CHARACTER_PRIMITIVE_SIZE);
-    fprintf(stderr, "wchar_t size: %i\n", *WIDE_CHARACTER_PRIMITIVE_SIZE);
-    fprintf(stderr, "unsigned long size: %i\n", *UNSIGNED_LONG_PRIMITIVE_SIZE);
-    fprintf(stderr, "void* size: %i\n", *POINTER_PRIMITIVE_SIZE);
-    fprintf(stderr, "double size: %i\n", *DOUBLE_PRIMITIVE_SIZE);
+    fwprintf(stderr, L"null: %i\n", *NULL_POINTER);
+    fwprintf(stderr, L"int size: %i\n", *INTEGER_PRIMITIVE_SIZE);
+    fwprintf(stderr, L"char size: %i\n", *CHARACTER_PRIMITIVE_SIZE);
+    fwprintf(stderr, L"wchar_t size: %i\n", *WIDE_CHARACTER_PRIMITIVE_SIZE);
+    fwprintf(stderr, L"unsigned long size: %i\n", *UNSIGNED_LONG_PRIMITIVE_SIZE);
+    fwprintf(stderr, L"void* size: %i\n", *POINTER_PRIMITIVE_SIZE);
+    fwprintf(stderr, L"double size: %i\n", *DOUBLE_PRIMITIVE_SIZE);
 }
 
 /**
@@ -184,7 +184,7 @@ void test_type_sizes() {
  */
 void test_pointer_addition() {
 
-    fputs("Test pointer addition:\n", stdout);
+    fputws(L"Test pointer addition:\n", stdout);
 
     // Allocate arrays of an arbitrary size.
     void* v = (void*) malloc(*NUMBER_10_INTEGER);
@@ -204,14 +204,14 @@ void test_pointer_addition() {
     void* v6 = ((void*) v) + *NUMBER_1_INTEGER; // increased by 1
     void* v7 = (void*) (v + *NUMBER_1_INTEGER); // increased by 1
 
-    fprintf(stderr, "void pointer v0: %i\n", v0);
-    fprintf(stderr, "void pointer v1: %i\n", v1);
-    fprintf(stderr, "void pointer v2: %i\n", v2);
-    fprintf(stderr, "void pointer v3: %i\n", v3);
-    fprintf(stderr, "void pointer v4: %i\n", v4);
-    fprintf(stderr, "void pointer v5: %i\n", v5);
-    fprintf(stderr, "void pointer v6: %i\n", v6);
-    fprintf(stderr, "void pointer v7: %i\n", v7);
+    fwprintf(stderr, L"void pointer v0: %i\n", v0);
+    fwprintf(stderr, L"void pointer v1: %i\n", v1);
+    fwprintf(stderr, L"void pointer v2: %i\n", v2);
+    fwprintf(stderr, L"void pointer v3: %i\n", v3);
+    fwprintf(stderr, L"void pointer v4: %i\n", v4);
+    fwprintf(stderr, L"void pointer v5: %i\n", v5);
+    fwprintf(stderr, L"void pointer v6: %i\n", v6);
+    fwprintf(stderr, L"void pointer v7: %i\n", v7);
 
     // Calculate int pointer addresses using various formulas and casts.
     int* i0 = i; // unchanged
@@ -223,14 +223,14 @@ void test_pointer_addition() {
     int* i6 = ((void*) i) + *NUMBER_1_INTEGER; // increased by 1
     int* i7 = (void*) (i + *NUMBER_1_INTEGER); // increased by 4
 
-    fprintf(stderr, "int pointer i0: %i\n", i0);
-    fprintf(stderr, "int pointer i1: %i\n", i1);
-    fprintf(stderr, "int pointer i2: %i\n", i2);
-    fprintf(stderr, "int pointer i3: %i\n", i3);
-    fprintf(stderr, "int pointer i4: %i\n", i4);
-    fprintf(stderr, "int pointer i5: %i\n", i5);
-    fprintf(stderr, "int pointer i6: %i\n", i6);
-    fprintf(stderr, "int pointer i7: %i\n", i7);
+    fwprintf(stderr, L"int pointer i0: %i\n", i0);
+    fwprintf(stderr, L"int pointer i1: %i\n", i1);
+    fwprintf(stderr, L"int pointer i2: %i\n", i2);
+    fwprintf(stderr, L"int pointer i3: %i\n", i3);
+    fwprintf(stderr, L"int pointer i4: %i\n", i4);
+    fwprintf(stderr, L"int pointer i5: %i\n", i5);
+    fwprintf(stderr, L"int pointer i6: %i\n", i6);
+    fwprintf(stderr, L"int pointer i7: %i\n", i7);
 
     // Calculate double pointer addresses using various formulas and casts.
     double* d0 = d; // unchanged
@@ -242,14 +242,14 @@ void test_pointer_addition() {
     double* d6 = ((void*) d) + *NUMBER_1_INTEGER; // increased by 1
     double* d7 = (void*) (d + *NUMBER_1_INTEGER); // increased by 8
 
-    fprintf(stderr, "double pointer d0: %i\n", d0);
-    fprintf(stderr, "double pointer d1: %i\n", d1);
-    fprintf(stderr, "double pointer d2: %i\n", d2);
-    fprintf(stderr, "double pointer d3: %i\n", d3);
-    fprintf(stderr, "double pointer d4: %i\n", d4);
-    fprintf(stderr, "double pointer d5: %i\n", d5);
-    fprintf(stderr, "double pointer d6: %i\n", d6);
-    fprintf(stderr, "double pointer d7: %i\n", d7);
+    fwprintf(stderr, L"double pointer d0: %i\n", d0);
+    fwprintf(stderr, L"double pointer d1: %i\n", d1);
+    fwprintf(stderr, L"double pointer d2: %i\n", d2);
+    fwprintf(stderr, L"double pointer d3: %i\n", d3);
+    fwprintf(stderr, L"double pointer d4: %i\n", d4);
+    fwprintf(stderr, L"double pointer d5: %i\n", d5);
+    fwprintf(stderr, L"double pointer d6: %i\n", d6);
+    fwprintf(stderr, L"double pointer d7: %i\n", d7);
 
     // Calculate char pointer addresses using various formulas and casts.
     char* c0 = c; // unchanged
@@ -261,14 +261,14 @@ void test_pointer_addition() {
     char* c6 = ((void*) c) + *NUMBER_1_INTEGER; // increased by 1
     char* c7 = (void*) (c + *NUMBER_1_INTEGER); // increased by 1
 
-    fprintf(stderr, "char pointer c0: %i\n", c0);
-    fprintf(stderr, "char pointer c1: %i\n", c1);
-    fprintf(stderr, "char pointer c2: %i\n", c2);
-    fprintf(stderr, "char pointer c3: %i\n", c3);
-    fprintf(stderr, "char pointer c4: %i\n", c4);
-    fprintf(stderr, "char pointer c5: %i\n", c5);
-    fprintf(stderr, "char pointer c6: %i\n", c6);
-    fprintf(stderr, "char pointer c7: %i\n", c7);
+    fwprintf(stderr, L"char pointer c0: %i\n", c0);
+    fwprintf(stderr, L"char pointer c1: %i\n", c1);
+    fwprintf(stderr, L"char pointer c2: %i\n", c2);
+    fwprintf(stderr, L"char pointer c3: %i\n", c3);
+    fwprintf(stderr, L"char pointer c4: %i\n", c4);
+    fwprintf(stderr, L"char pointer c5: %i\n", c5);
+    fwprintf(stderr, L"char pointer c6: %i\n", c6);
+    fwprintf(stderr, L"char pointer c7: %i\n", c7);
 
     // Calculate wchar_t pointer addresses using various formulas and casts.
     wchar_t* wc0 = wc; // unchanged
@@ -280,14 +280,14 @@ void test_pointer_addition() {
     wchar_t* wc6 = ((void*) wc) + *NUMBER_1_INTEGER; // increased by 1
     wchar_t* wc7 = (void*) (wc + *NUMBER_1_INTEGER); // increased by 4
 
-    fprintf(stderr, "wchar_t pointer wc0: %i\n", wc0);
-    fprintf(stderr, "wchar_t pointer wc1: %i\n", wc1);
-    fprintf(stderr, "wchar_t pointer wc2: %i\n", wc2);
-    fprintf(stderr, "wchar_t pointer wc3: %i\n", wc3);
-    fprintf(stderr, "wchar_t pointer wc4: %i\n", wc4);
-    fprintf(stderr, "wchar_t pointer wc5: %i\n", wc5);
-    fprintf(stderr, "wchar_t pointer wc6: %i\n", wc6);
-    fprintf(stderr, "wchar_t pointer wc7: %i\n", wc7);
+    fwprintf(stderr, L"wchar_t pointer wc0: %i\n", wc0);
+    fwprintf(stderr, L"wchar_t pointer wc1: %i\n", wc1);
+    fwprintf(stderr, L"wchar_t pointer wc2: %i\n", wc2);
+    fwprintf(stderr, L"wchar_t pointer wc3: %i\n", wc3);
+    fwprintf(stderr, L"wchar_t pointer wc4: %i\n", wc4);
+    fwprintf(stderr, L"wchar_t pointer wc5: %i\n", wc5);
+    fwprintf(stderr, L"wchar_t pointer wc6: %i\n", wc6);
+    fwprintf(stderr, L"wchar_t pointer wc7: %i\n", wc7);
 
     // Calculate unsigned long pointer addresses using various formulas and casts.
     unsigned long* ul0 = ul; // unchanged
@@ -299,14 +299,14 @@ void test_pointer_addition() {
     unsigned long* ul6 = ((void*) ul) + *NUMBER_1_INTEGER; // increased by 1
     unsigned long* ul7 = (void*) (ul + *NUMBER_1_INTEGER); // increased by 4
 
-    fprintf(stderr, "unsigned long pointer ul0: %i\n", ul0);
-    fprintf(stderr, "unsigned long pointer ul1: %i\n", ul1);
-    fprintf(stderr, "unsigned long pointer ul2: %i\n", ul2);
-    fprintf(stderr, "unsigned long pointer ul3: %i\n", ul3);
-    fprintf(stderr, "unsigned long pointer ul4: %i\n", ul4);
-    fprintf(stderr, "unsigned long pointer ul5: %i\n", ul5);
-    fprintf(stderr, "unsigned long pointer ul6: %i\n", ul6);
-    fprintf(stderr, "unsigned long pointer ul7: %i\n", ul7);
+    fwprintf(stderr, L"unsigned long pointer ul0: %i\n", ul0);
+    fwprintf(stderr, L"unsigned long pointer ul1: %i\n", ul1);
+    fwprintf(stderr, L"unsigned long pointer ul2: %i\n", ul2);
+    fwprintf(stderr, L"unsigned long pointer ul3: %i\n", ul3);
+    fwprintf(stderr, L"unsigned long pointer ul4: %i\n", ul4);
+    fwprintf(stderr, L"unsigned long pointer ul5: %i\n", ul5);
+    fwprintf(stderr, L"unsigned long pointer ul6: %i\n", ul6);
+    fwprintf(stderr, L"unsigned long pointer ul7: %i\n", ul7);
 
     // Free arrays.
     free(v);
@@ -322,7 +322,7 @@ void test_pointer_addition() {
  */
 void test_integer_array() {
 
-    fputs("Test integer array:\n", stdout);
+    fputws(L"Test integer array:\n", stdout);
 
     // The test value.
     char* test = "2,3,4";
@@ -340,9 +340,9 @@ void test_integer_array() {
     *ms = *NUMBER_0_INTEGER;
     allocate((void*) &m, (void*) ms, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
-    fprintf(stderr, "pre mc: %i\n", *mc);
-    fprintf(stderr, "pre ms: %i\n", *ms);
-    fprintf(stderr, "pre m: %i\n", *m);
+    fwprintf(stderr, L"pre mc: %i\n", *mc);
+    fwprintf(stderr, L"pre ms: %i\n", *ms);
+    fwprintf(stderr, L"pre m: %i\n", *m);
 
     //
     // Use either the "decode" function or the three "set" functions below.
@@ -370,12 +370,12 @@ void test_integer_array() {
     get_element(m, (void*) NUMBER_1_INTEGER, (void*) &result1, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
     get_element(m, (void*) NUMBER_2_INTEGER, (void*) &result2, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
-    fprintf(stderr, "post mc: %i\n", *mc);
-    fprintf(stderr, "post ms: %i\n", *ms);
-    fprintf(stderr, "post m: %i\n", *m);
-    fprintf(stderr, "post result0: %i\n", *result0);
-    fprintf(stderr, "post result1: %i\n", *result1);
-    fprintf(stderr, "post result2: %i\n", *result2);
+    fwprintf(stderr, L"post mc: %i\n", *mc);
+    fwprintf(stderr, L"post ms: %i\n", *ms);
+    fwprintf(stderr, L"post m: %i\n", *m);
+    fwprintf(stderr, L"post result0: %i\n", *result0);
+    fwprintf(stderr, L"post result1: %i\n", *result1);
+    fwprintf(stderr, L"post result2: %i\n", *result2);
 
     // Deallocate test knowledge model.
     deallocate((void*) &m, (void*) ms, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
@@ -388,7 +388,7 @@ void test_integer_array() {
  */
 void test_character_array_with_termination() {
 
-    fputs("Test character array with termination:\n", stdout);
+    fputws(L"Test character array with termination:\n", stdout);
 
     // The brackets indicating an array cannot be avoided or replaced by a pointer.
     // The following line does not work:
@@ -407,7 +407,7 @@ void test_character_array_with_termination() {
  */
 void test_array_resizing() {
 
-    fputs("Test array resizing:\n", stdout);
+    fputws(L"Test array resizing:\n", stdout);
 
     // The text.
     char ta[] = {'t', 'e', 's', 't', '\n', '\0'};
@@ -454,7 +454,7 @@ void test_array_resizing() {
  */
 void test_wide_character_output() {
 
-    fputs("Test wide character array with termination:\n", stdout);
+    fputws(L"Test wide character array with termination:\n", stdout);
 
 #ifdef GNU_LINUX_OPERATING_SYSTEM
     // Possible locales are: LANG, LC_CTYPE, LC_ALL.
@@ -534,7 +534,7 @@ void test_wide_character_output() {
     tsc++;
 
     // Write to terminal.
-    fprintf(t, "%ls", (wchar_t*) ts);
+    fwprintf(t, "%ls\n", (wchar_t*) ts);
 //??    fputws((wchar_t*) ts, t);
 
     // Destroy terminated control sequences.
@@ -579,11 +579,49 @@ void test_wide_character_output() {
 }
 
 /**
+ * Tests the wide character output function "fwprintf".
+ */
+void test_wide_character_wprintf() {
+
+    // Set stream orientation to wide character mode.
+    // The second function argument has the following meaning:
+    // - positive value: wide character mode
+    // - negative value: (narrow) character mode
+    fwide(stdout, *NUMBER_1_INTEGER);
+
+    fputws(L"Test wide character fwprintf function:\n", stdout);
+
+    // Test wide character constants.
+    fputws(L"Test 0:\n", stdout);
+    fwprintf(stdout, L"Test rectangle model character array: %10s \n", "hello world");
+
+    fputws(L"Test 1:\n", stdout);
+    fwprintf(stdout, L"Test rectangle model wide character array converted from char: %10ls \n", (wchar_t*) L"wide hello world");
+
+    fputws(L"Test 2:\n", stdout);
+    wprintf(L"Test without argument.\n");
+
+    fputws(L"Test 3:\n", stdout);
+    fwprintf(stdout, L"Test rectangle model wide character array: %10ls\n", L"wide hello world");
+
+    fputws(L"Test 4:\n", stdout);
+    fwprintf(stdout, L"Test rectangle model: %5ls \n", (wchar_t*) UI_RECTANGLE_SHAPE_MODEL);
+
+    fputws(L"Test 5:\n", stdout);
+    fwprintf(stdout, L"Test fourth wide character of rectangle model: %lc \n", (wchar_t*) UI_RECTANGLE_SHAPE_MODEL[3]);
+
+    fputws(L"Test 6:\n", stdout);
+    fputws((wchar_t*) UI_RECTANGLE_SHAPE_MODEL, stdout);
+
+    fputws(L"Test 7:\n", stdout);
+}
+
+/**
  * Tests the integer-to-wide character conversion.
  */
 void test_integer_to_wide_character_conversion() {
 
-    fputs("Test integer-to-wide character conversion:\n", stdout);
+    fputws(L"Test integer-to-wide character conversion:\n", stdout);
 
     // The test wide character array.
     void* t = *NULL_POINTER;
@@ -608,7 +646,7 @@ void test_integer_to_wide_character_conversion() {
 /* CYGWIN_ENVIRONMENT */
 #endif
 
-    fprintf(stdout, "TEST tc %i\n", tc);
+    fwprintf(stdout, L"TEST tc %i\n", tc);
 
     // Deallocate test wide character array.
     deallocate((void*) &t, (void*) &ts, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
@@ -619,17 +657,17 @@ void test_integer_to_wide_character_conversion() {
  */
 void test_ascii_character_wide_character_equality() {
 
-    fputs("Test ascii character - wide character equality:\n", stdout);
+    fputws(L"Test ascii character - wide character equality:\n", stdout);
 
     char test = 'a';
 
     if (test = *LATIN_SMALL_LETTER_A_WIDE_CHARACTER) {
 
-        fputs("Characters ARE equal.\n", stdout);
+        fputws(L"Characters ARE equal.\n", stdout);
 
     } else {
 
-        fputs("Characters are NOT equal.\n", stdout);
+        fputws(L"Characters are NOT equal.\n", stdout);
     }
 }
 
@@ -638,7 +676,7 @@ void test_ascii_character_wide_character_equality() {
  */
 void test_pointer_cast() {
 
-    fputs("Test pointer cast:\n", stdout);
+    fputws(L"Test pointer cast:\n", stdout);
 
     // Assign a test character array.
     char* test_char = "test pointer cast ok\n";
@@ -662,7 +700,7 @@ void test_pointer_cast() {
  */
 void test_character_array_single_element() {
 
-    fputs("Test character array single element:\n", stdout);
+    fputws(L"Test character array single element:\n", stdout);
 
     // The character array.
     void* c = *NULL_POINTER;
@@ -691,7 +729,7 @@ void test_character_array_single_element() {
         }
 
         catest = (char*) (c + i);
-        fprintf(stderr, "ca: %c\n", *catest);
+        fwprintf(stderr, L"ca: %c\n", *catest);
 
         i++;
     }
@@ -705,7 +743,7 @@ void test_character_array_single_element() {
  */
 void test_character_array_multiple_elements() {
 
-    fputs("Test character array multiple elements:\n", stdout);
+    fputws(L"Test character array multiple elements:\n", stdout);
 
     // The destination array.
     void* d = *NULL_POINTER;
@@ -770,7 +808,7 @@ void test_character_array_multiple_elements() {
  */
 void test_pointer_return() {
 
-    fputs("Test pointer return:\n", stdout);
+    fputws(L"Test pointer return:\n", stdout);
 
     // The character array (including new line and null termination character).
     void* c = *NULL_POINTER;
@@ -794,7 +832,7 @@ void test_pointer_return() {
     get_array_elements(c, (void*) NUMBER_6_INTEGER, (void*) &r, (void*) CHARACTER_ARRAY);
 
     // Print result (character array).
-    fprintf(stderr, "r: %s\n", (char*) r);
+    fwprintf(stderr, L"r: %s\n", (char*) r);
 
     // Destroy character array.
     deallocate((void*) &cs, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
@@ -805,7 +843,7 @@ void test_pointer_return() {
  */
 void test_pointer_array() {
 
-    fputs("Test pointer array:\n", stdout);
+    fputws(L"Test pointer array:\n", stdout);
 
     //
     // Creation.
@@ -815,7 +853,7 @@ void test_pointer_array() {
     void* c = (void*) "Hello World!";
     int cs = *NUMBER_13_INTEGER;
 
-    fprintf(stderr, "c: %s\n", (char*) c);
+    fwprintf(stderr, L"c: %s\n", (char*) c);
 
     // The pointer array.
     void** p = NULL_POINTER;
@@ -824,7 +862,7 @@ void test_pointer_array() {
     // Create pointer array.
     allocate_array((void*) &p, (void*) &ps, (void*) POINTER_ARRAY);
 
-    fprintf(stderr, "p: %i\n", p);
+    fwprintf(stderr, L"p: %i\n", p);
 
     // The result array.
     void** r = NULL_POINTER;
@@ -833,22 +871,22 @@ void test_pointer_array() {
     // Testing.
     //
 
-    fprintf(stderr, "p[0] before set: %i\n", p[0]);
-    fprintf(stderr, "p[1] before set: %i\n", p[1]);
+    fwprintf(stderr, L"p[0] before set: %i\n", p[0]);
+    fwprintf(stderr, L"p[1] before set: %i\n", p[1]);
 
     // Set character array in pointer array.
     // Hand over character array as reference, because pointer array is expected!
     set_array_elements(p, (void*) NUMBER_0_INTEGER, (void*) &c, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
 
-    fprintf(stderr, "p[0] after set: %i\n", p[0]);
-    fprintf(stderr, "p[1] after set: %i\n", p[1]);
+    fwprintf(stderr, L"p[0] after set: %i\n", p[0]);
+    fwprintf(stderr, L"p[1] after set: %i\n", p[1]);
 
     // Get character array from pointer array.
     get_array_elements(p, (void*) NUMBER_0_INTEGER, (void*) &r, (void*) POINTER_ARRAY);
 
     // Print result (character array).
-    fprintf(stderr, "r pointer: %i\n", *r);
-    fprintf(stderr, "r string: %s\n", (char*) *r);
+    fwprintf(stderr, L"r pointer: %i\n", *r);
+    fwprintf(stderr, L"r string: %s\n", (char*) *r);
 
     //
     // Destruction.
@@ -863,7 +901,7 @@ void test_pointer_array() {
  */
 void test_pointer_array_with_null_values() {
 
-    fputs("Test pointer array with null values:\n", stdout);
+    fputws(L"Test pointer array with null values:\n", stdout);
 
     // The pointer array.
     void* a = *NULL_POINTER;
@@ -890,14 +928,14 @@ void test_pointer_array_with_null_values() {
     get_pointer_array_elements(a, (void*) NUMBER_3_INTEGER, (void*) &r3);
     get_pointer_array_elements(a, (void*) NUMBER_4_INTEGER, (void*) &r4);
 
-    fprintf(stdout, "Result pointer as string r0: %s\n", *r0);
-    fprintf(stdout, "Result pointer as integer r1: %i\n", **r1);
-    fprintf(stdout, "Result pointer as pointer r2: %i\n", *r2);
-    fprintf(stdout, "Result pointer as simple pointer r3: %i\n", r3);
-    fprintf(stdout, "Result pointer as characterr4: %c\n", **r4);
+    fwprintf(stdout, L"Result pointer as string r0: %s\n", *r0);
+    fwprintf(stdout, L"Result pointer as integer r1: %i\n", **r1);
+    fwprintf(stdout, L"Result pointer as pointer r2: %i\n", *r2);
+    fwprintf(stdout, L"Result pointer as simple pointer r3: %i\n", r3);
+    fwprintf(stdout, L"Result pointer as characterr4: %c\n", **r4);
 
-    fprintf(stderr, "NULL_POINTER: %i \n", NULL_POINTER);
-    fprintf(stderr, "*NULL_POINTER: %i \n", *NULL_POINTER);
+    fwprintf(stderr, L"NULL_POINTER: %i \n", NULL_POINTER);
+    fwprintf(stderr, L"*NULL_POINTER: %i \n", *NULL_POINTER);
 
     deallocate_pointer_array((void*) &a, (void*) &as);
 }
@@ -907,7 +945,7 @@ void test_pointer_array_with_null_values() {
  */
 void test_file_read() {
 
-    fputs("Test file read:\n", stdout);
+    fputws(L"Test file read:\n", stdout);
 
     // A file named "/home/cybop/tmp/test.cybol" needs to be created
     // in a text editor, for this test to work.
@@ -929,11 +967,11 @@ void test_file_read() {
     allocate_array((void*) &a, (void*) &CHARACTER_ARRAY, (void*) &as);
 //??    read_file((void*) &a, (void*) &as, (void*) &ac, (void*) &fn, (void*) &fnc);
 
-    fprintf(stderr, "a: %i\n", a);
-    fprintf(stderr, "as: %i\n", as);
-    fprintf(stderr, "ac: %i\n", ac);
-    fprintf(stderr, "fn: %i\n", fn);
-    fprintf(stderr, "fnc: %i\n", fnc);
+    fwprintf(stderr, L"a: %i\n", a);
+    fwprintf(stderr, L"as: %i\n", as);
+    fwprintf(stderr, L"ac: %i\n", ac);
+    fwprintf(stderr, L"fn: %i\n", fn);
+    fwprintf(stderr, L"fnc: %i\n", fnc);
 
     int j = *NUMBER_0_INTEGER;
     char* c = (char*) *NULL_POINTER;
@@ -961,7 +999,7 @@ void test_file_read() {
  */
 void test_file_write() {
 
-    fputs("Test file write:\n", stdout);
+    fputws(L"Test file write:\n", stdout);
 
     // The character array.
     char aa[] = {'H', 'e', 'l', 'l', 'o', ',', ' ', 'W', 'o', 'r', 'l', 'd', '!', '\n'};
@@ -986,16 +1024,16 @@ void test_file_write() {
  */
 void test_console() {
 
-    fputs("Test console:\n", stdout);
+    fputws(L"Test console:\n", stdout);
 
     if (strcmp("linux", getenv("TERM")) == *NUMBER_0_INTEGER) {
 
 //        // This is a gnu/linux console.
-//        fputs("This is a gnu/linux console.\n", stdout);
+//        fputws(L"This is a gnu/linux console.\n", stdout);
 //
 //        // Determine device name of controlling terminal.
 //        int n = ttyname();
-//        fprintf(stdout, "The terminal device name is: %i\n", n);
+//        fwprintf(stdout, L"The terminal device name is: %i\n", n);
 //
 //        // Declare test string.
 //        char* s;
@@ -1009,19 +1047,19 @@ void test_console() {
 //        //
 //
 //        // Print bold word.
-//        fputs("This is a \033[1mbold\033[0m word.\n", stdout);
+//        fputws(L"This is a \033[1mbold\033[0m word.\n", stdout);
 //
 //        // Set colours.
 //        // CAUTION! The "m" has to stand after the colour number
 //        // and it must NOT be a capital letter.
-//        fputs("Set colour to \033[32mgreen\033[0m.\n", stdout);
-//        fputs("Set colour to \033[32myellow\041[0m.\n", stdout);
-//        fputs("Set colour to \033[32mred\031[0m.\n", stdout);
+//        fputws(L"Set colour to \033[32mgreen\033[0m.\n", stdout);
+//        fputws(L"Set colour to \033[32myellow\041[0m.\n", stdout);
+//        fputws(L"Set colour to \033[32mred\031[0m.\n", stdout);
 
     } else {
 
         // This is a normal serial terminal.
-        fputs("This is a normal serial terminal.\n", stdout);
+        fputws(L"This is a normal serial terminal.\n", stdout);
     }
 }
 
@@ -1031,7 +1069,7 @@ void test_console() {
 /*??
 void test_mesa_opengl() {
 
-    fputs("Test mesa opengl:\n", stdout);
+    fputws(L"Test mesa opengl:\n", stdout);
 
     // This example will draw a green square on the screen.
     // OpenGL has several ways to accomplish this task, but this is the easiest to understand.
@@ -1081,7 +1119,7 @@ void test_mesa_opengl() {
  */
 void test_decode_integer_vector() {
 
-    fputs("Test decode integer vector:\n", stdout);
+    fputws(L"Test decode integer vector:\n", stdout);
 
     // The source character array.
     char sa[] = {'1', ',', '2', ',', '3', ',', '4', ',', '5'};
@@ -1111,9 +1149,9 @@ void test_decode_integer_vector() {
     // Get integer at index 2 from integer vector.
     get_element(d, (void*) NUMBER_2_INTEGER, (void*) &i2, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
-    fprintf(stderr, "Integer 0: %i\n", *i0);
-    fprintf(stderr, "Integer 1: %i\n", *i1);
-    fprintf(stderr, "Integer 2: %i\n", *i2);
+    fwprintf(stderr, L"Integer 0: %i\n", *i0);
+    fwprintf(stderr, L"Integer 1: %i\n", *i1);
+    fwprintf(stderr, L"Integer 2: %i\n", *i2);
 
     // Deallocate integer vector.
     deallocate((void*) &d, (void*) &ds, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
@@ -1124,7 +1162,7 @@ void test_decode_integer_vector() {
  */
 void test_encode_integer_vector() {
 
-    fputs("Test encode integer vector:\n", stdout);
+    fputws(L"Test encode integer vector:\n", stdout);
 
     // The source integer array.
     int sa[] = {'1', '2', '3'};
@@ -1143,9 +1181,9 @@ void test_encode_integer_vector() {
     // because the element is added at the end of the compound container.
     encode_integer_vector((void*) &d, (void*) &dc, (void*) &ds, s, (void*) &sc);
 
-    fprintf(stdout, "Encoded character array: %s\n", d);
-    fprintf(stdout, "Encoded character array count: %i\n", dc);
-    fprintf(stdout, "Encoded character array size: %i\n", ds);
+    fwprintf(stdout, L"Encoded character array: %s\n", d);
+    fwprintf(stdout, L"Encoded character array count: %i\n", dc);
+    fwprintf(stdout, L"Encoded character array size: %i\n", ds);
 
     // Deallocate destination character vector.
     deallocate((void*) &d, (void*) &ds, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
@@ -1156,7 +1194,7 @@ void test_encode_integer_vector() {
  */
 void test_encode_integer() {
 
-    fputs("Test encode integer:\n", stdout);
+    fputws(L"Test encode integer:\n", stdout);
 
     // The destination character array.
     char* d = (char*) *NULL_POINTER;
@@ -1173,9 +1211,9 @@ void test_encode_integer() {
     // because the element is added at the end of the compound container.
     encode_integer((void*) &d, (void*) &dc, (void*) &ds, (void*) &s, (void*) PRIMITIVE_COUNT);
 
-    fprintf(stdout, "Test: Destination character array: %s\n", d);
-    fprintf(stdout, "Test: Destination character array count: %i\n", dc);
-    fprintf(stdout, "Test: Destination character array size: %i\n", ds);
+    fwprintf(stdout, L"Test: Destination character array: %s\n", d);
+    fwprintf(stdout, L"Test: Destination character array count: %i\n", dc);
+    fwprintf(stdout, L"Test: Destination character array size: %i\n", ds);
 
     // Deallocate destination character array.
     deallocate_array((void*) &d, (void*) &ds, (void*) CHARACTER_ARRAY);
@@ -1186,21 +1224,21 @@ void test_encode_integer() {
  */
 void test_float_constants() {
 
-    fputs("Test float constants:\n", stdout);
+    fputws(L"Test float constants:\n", stdout);
 
-    fprintf(stdout, "Test base of natural logarithms: %f\n", *E_DOUBLE);
-    fprintf(stdout, "Test logarithm to base 2 of M_E: %f\n", *LOG_2_E_DOUBLE);
-    fprintf(stdout, "Test logarithm to base 10 of M_E: %f\n", *LOG_10_E_DOUBLE);
-    fprintf(stdout, "Test natural logarithm of 2: %f\n", *LN_2_DOUBLE);
-    fprintf(stdout, "Test natural logarithm of 10: %f\n", *LN_10_DOUBLE);
-    fprintf(stdout, "Test ratio of a circle's circumference to its diameter, called pi: %f\n", *PI_DOUBLE);
-    fprintf(stdout, "Test pi divided by 2: %f\n", *PI_DIVIDED_BY_2_DOUBLE);
-    fprintf(stdout, "Test pi divided by 4: %f\n", *PI_DIVIDED_BY_4_DOUBLE);
-    fprintf(stdout, "Test reciprocal of pi (1/pi): %f\n", *RECIPROCAL_OF_PI_DOUBLE);
-    fprintf(stdout, "Test two times the reciprocal of pi: %f\n", *TWO_TIMES_THE_RECIPROCAL_OF_PI_DOUBLE);
-    fprintf(stdout, "Test two times the reciprocal of the square root of pi: %f\n", *TWO_TIMES_THE_RECIPROCAL_OF_THE_SQUARE_ROOT_OF_PI_DOUBLE);
-    fprintf(stdout, "Test square root of 2: %f\n", *SQUARE_ROOT_OF_2_DOUBLE);
-    fprintf(stdout, "Test reciprocal of the square root of 2: %f\n", *RECIPROCAL_OF_THE_SQUARE_ROOT_OF_2_DOUBLE);
+    fwprintf(stdout, L"Test base of natural logarithms: %f\n", *E_DOUBLE);
+    fwprintf(stdout, L"Test logarithm to base 2 of M_E: %f\n", *LOG_2_E_DOUBLE);
+    fwprintf(stdout, L"Test logarithm to base 10 of M_E: %f\n", *LOG_10_E_DOUBLE);
+    fwprintf(stdout, L"Test natural logarithm of 2: %f\n", *LN_2_DOUBLE);
+    fwprintf(stdout, L"Test natural logarithm of 10: %f\n", *LN_10_DOUBLE);
+    fwprintf(stdout, L"Test ratio of a circle's circumference to its diameter, called pi: %f\n", *PI_DOUBLE);
+    fwprintf(stdout, L"Test pi divided by 2: %f\n", *PI_DIVIDED_BY_2_DOUBLE);
+    fwprintf(stdout, L"Test pi divided by 4: %f\n", *PI_DIVIDED_BY_4_DOUBLE);
+    fwprintf(stdout, L"Test reciprocal of pi (1/pi): %f\n", *RECIPROCAL_OF_PI_DOUBLE);
+    fwprintf(stdout, L"Test two times the reciprocal of pi: %f\n", *TWO_TIMES_THE_RECIPROCAL_OF_PI_DOUBLE);
+    fwprintf(stdout, L"Test two times the reciprocal of the square root of pi: %f\n", *TWO_TIMES_THE_RECIPROCAL_OF_THE_SQUARE_ROOT_OF_PI_DOUBLE);
+    fwprintf(stdout, L"Test square root of 2: %f\n", *SQUARE_ROOT_OF_2_DOUBLE);
+    fwprintf(stdout, L"Test reciprocal of the square root of 2: %f\n", *RECIPROCAL_OF_THE_SQUARE_ROOT_OF_2_DOUBLE);
 }
 
 //?? ========================================================================================
@@ -1269,16 +1307,16 @@ int test_mesa_opengl(int argc, char **argv) {
  */
 void test() {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Test cyboi.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Test cyboi.");
 
     // How to use printf to check parameter values.
     // The printf function uses stdout for output, but nothing appears on console.
     // Therefore, fprintf is used and stderr is given for output.
     // Example:
     // int x = *NUMBER_2_INTEGER;
-    // fprintf(stderr, "The value of x is: %d\n", x);
+    // fwprintf(stderr, L"The value of x is: %d\n", x);
 
-    test_logger();
+//??    test_logger();
 //??    test_inline_assembler_code();
 //??    test_preprocessor_directives();
 //??    test_stdout_stderr();
@@ -1288,6 +1326,7 @@ void test() {
 //??    test_character_array_with_termination();
 //??    test_array_resizing();
 //??    test_wide_character_output();
+    test_wide_character_wprintf();
 //??    test_integer_to_wide_character_conversion();
 //??    test_ascii_character_wide_character_equality();
 //??    test_pointer_cast();

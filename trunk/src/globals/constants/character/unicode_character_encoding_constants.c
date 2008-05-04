@@ -1,7 +1,7 @@
 /*
  * $RCSfile: unicode_character_encoding_constants.c,v $
  *
- * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2007-10-23 17:37:45 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2008-05-04 00:18:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -63,7 +63,7 @@ static int* UTF_8_UNICODE_CHARACTER_ENCODING_COUNT = NUMBER_5_INTEGER_ARRAY;
 /**
  * The cesu-8 unicode character encoding.
  *
- * The Unicode areas U+D800–U+DBFF and U+DC00–U+DFFF are explicitly no characters,
+ * The Unicode areas U+D800ï¿½U+DBFF and U+DC00ï¿½U+DFFF are explicitly no characters,
  * and only used in UTF-16 to encode characters outside the Basic Multilingual Plane.
  * They were formerly also called "Low-" und "High surrogates".
  * Hence, byte orders that correspond to these areas, are NOT valid UTF-8.
@@ -149,7 +149,7 @@ static int* UTF_EBCDIC_UNICODE_CHARACTER_ENCODING_COUNT = NUMBER_10_INTEGER_ARRA
  * Standard for reducing the number of bytes needed to represent Unicode text,
  * especially if that text uses mostly characters from one or a small number of
  * per-language character blocks. It does so by dynamically mapping values in
- * the range 128–255 to offsets within particular blocks of 128 characters.
+ * the range 128ï¿½255 to offsets within particular blocks of 128 characters.
  *
  * The initial conditions of the encoder mean that existing strings in ASCII
  * and ISO-8859-1 that do not contain C0 control codes other than NULL TAB CR

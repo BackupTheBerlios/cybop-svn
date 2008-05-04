@@ -1,7 +1,7 @@
 /*
  * $RCSfile: sense.c,v $
  *
- * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2008-04-22 22:44:28 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2008-05-04 00:18:10 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -53,13 +53,13 @@ void sense_message(void* p0, void* p1, void* p2) {
 
         int* t = (int*) p1;
 
-        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Sense message.");
+        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Sense message.");
 
         // Only create thread, if not existent.
         // CAUTION! The "pthread_t" type is an integer, so both can be compared.
         if (*t == *NUMBER_MINUS_1_INTEGER) {
 
-            log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Create sense message thread.");
+            log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Create sense message thread.");
 
             // Create thread.
             //
@@ -83,7 +83,7 @@ void sense_message(void* p0, void* p1, void* p2) {
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not sense message. The service thread is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not sense message. The service thread is null.");
     }
 }
 
@@ -129,7 +129,7 @@ void sense_message(void* p0, void* p1, void* p2) {
  */
 void sense(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Sense interrupt request.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Sense interrupt request.");
 
     // The channel name, abstraction, model, details.
     void** cn = NULL_POINTER;
@@ -451,7 +451,7 @@ void sense(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
 
     if (r == *NUMBER_0_INTEGER) {
 
-        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) "Could not sense interrupt request. The channel is unknown.");
+        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) L"Could not sense interrupt request. The channel is unknown.");
     }
 }
 

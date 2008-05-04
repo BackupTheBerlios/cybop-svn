@@ -1,7 +1,7 @@
 /*
  * $RCSfile: sense_gnu_linux_console.c,v $
  *
- * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2008-04-23 22:47:59 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2008-05-04 00:18:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -77,7 +77,7 @@ void sense_gnu_linux_console_message(void* p0, void* p1, void* p2, void* p3) {
 
                     int* irq = (int*) p0;
 
-                    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Sense gnu/linux console message.");
+                    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Sense gnu/linux console message.");
 
                     // Get character from gnu/linux console input stream,
                     // just to detect that some (event) character is available.
@@ -98,7 +98,7 @@ void sense_gnu_linux_console_message(void* p0, void* p1, void* p2, void* p3) {
                     // 'getwchar()', since that returns 'WEOF' instead of 'EOF'.
 //??                    wint_t e = fgetwc(is);
 
-//??                    fprintf(stdout, "TEST character %i\n", e);
+//??                    fwprintf(stdout, L"TEST character %i\n", e);
 
                     // Unread character, that is push it back on the stream to
                     // make it available to be input again from the stream, by the
@@ -143,7 +143,7 @@ void sense_gnu_linux_console_message(void* p0, void* p1, void* p2, void* p3) {
                     // which may now be processed in the main thread of this system.
                     *irq = *NUMBER_1_INTEGER;
 
-    fprintf(stderr, "TEST sense gnu/linux console irq value: %i\n", *irq);
+    fwprintf(stderr, L"TEST sense gnu/linux console irq value: %i\n", *irq);
 
                     // Unlock gnu/linux console mutex.
                     pthread_mutex_unlock(mt);
@@ -158,22 +158,22 @@ void sense_gnu_linux_console_message(void* p0, void* p1, void* p2, void* p3) {
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not sense gnu/linux console message. The interrupt is null.");
+                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not sense gnu/linux console message. The interrupt is null.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not sense gnu/linux console message. The mutex is null.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not sense gnu/linux console message. The mutex is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not sense gnu/linux console message. The sleep time is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not sense gnu/linux console message. The sleep time is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not sense gnu/linux console message. The input stream is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not sense gnu/linux console message. The input stream is null.");
     }
 }
 
@@ -184,7 +184,7 @@ void sense_gnu_linux_console_message(void* p0, void* p1, void* p2, void* p3) {
  */
 void sense_gnu_linux_console(void* p0) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Sense gnu/linux console.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Sense gnu/linux console.");
 
     // The interrupt.
     void** irq = NULL_POINTER;
@@ -215,7 +215,7 @@ void sense_gnu_linux_console(void* p0) {
         // and processed in the system signal handler procedure
         // (situated in the controller/checker.c module).
 
-    fprintf(stderr, "TEST sense gnu/linux console irq pointer: %i\n", *irq);
+    fwprintf(stderr, L"TEST sense gnu/linux console irq pointer: %i\n", *irq);
 
         sense_gnu_linux_console_message(*irq, *mt, *st, *is);
     }

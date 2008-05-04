@@ -1,7 +1,7 @@
 /*
  * $RCSfile: accessor.c,v $
  *
- * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.14 $ $Date: 2008-04-30 14:32:48 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2008-05-04 00:18:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -56,7 +56,7 @@
  */
 void set(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Set.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Set.");
 
     // The comparison result.
     int r = *NUMBER_0_INTEGER;
@@ -83,7 +83,7 @@ void set(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
  */
 void set_element(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Set model element.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Set model element.");
 
     // The comparison result.
     int r = *NUMBER_0_INTEGER;
@@ -170,7 +170,7 @@ void set_element(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (r == *NUMBER_0_INTEGER) {
 
-        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) "Could not set model element. The abstraction is unknown.");
+        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) L"Could not set model element. The abstraction is unknown.");
     }
 }
 
@@ -188,7 +188,7 @@ void set_element(void* p0, void* p1, void* p2, void* p3, void* p4) {
  */
 void remove_element(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Remove model element.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Remove model element.");
 
     // The comparison result.
     int r = *NUMBER_0_INTEGER;
@@ -275,7 +275,7 @@ void remove_element(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (r == *NUMBER_0_INTEGER) {
 
-        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) "Could not remove model element. The abstraction is unknown.");
+        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) L"Could not remove model element. The abstraction is unknown.");
     }
 }
 
@@ -293,7 +293,7 @@ void remove_element(void* p0, void* p1, void* p2, void* p3, void* p4) {
  */
 void get_element(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Get model element.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Get model element.");
 
     // The comparison result.
     int r = *NUMBER_0_INTEGER;
@@ -380,7 +380,7 @@ void get_element(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (r == *NUMBER_0_INTEGER) {
 
-        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) "Could not get model element. The abstraction is unknown.");
+        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) L"Could not get model element. The abstraction is unknown.");
     }
 }
 

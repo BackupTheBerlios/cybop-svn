@@ -1,7 +1,7 @@
 /*
  * $RCSfile: shutdown_socket.c,v $
  *
- * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.22 $ $Date: 2007-12-01 23:57:41 $ $Author: christian $
+ * @version $Revision: 1.23 $ $Date: 2008-05-04 00:18:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -52,7 +52,7 @@ void shutdown_socket(void* p0, void* p1, void* p2, void* p3) {
 
         int* base = (int*) p1;
 
-        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Shutdown socket.");
+        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Shutdown socket.");
 
         // The internal memory index.
         int i = *NUMBER_MINUS_1_INTEGER;
@@ -153,12 +153,12 @@ void shutdown_socket(void* p0, void* p1, void* p2, void* p3) {
 
         } else {
 
-            log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) "Could not shutdown socket. There is no socket of this system running.");
+            log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) L"Could not shutdown socket. There is no socket of this system running.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not shutdown socket. The base internal is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not shutdown socket. The base internal is null.");
     }
 }
 

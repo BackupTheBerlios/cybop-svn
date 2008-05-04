@@ -1,7 +1,7 @@
 /*
  * $RCSfile: compound_allocator.c,v $
  *
- * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,7 +23,7 @@
  * This file contains the functionality to:
  * - create a compound model in memory
  *
- * @version $Revision: 1.14 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2008-05-04 00:18:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -51,7 +51,7 @@ void allocate_compound(void* p0, void* p1) {
 
         void** c = (void**) p0;
 
-        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Allocate compound.");
+        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Allocate compound.");
 
         // Allocate compound.
         allocate_array(p0, (void*) COMPOUND_COUNT, (void*) POINTER_ARRAY);
@@ -102,7 +102,7 @@ void allocate_compound(void* p0, void* p1) {
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not allocate compound. The compound is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not allocate compound. The compound is null.");
     }
 }
 
@@ -118,7 +118,7 @@ void deallocate_compound(void* p0, void* p1) {
 
         void** c = (void**) p0;
 
-        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Deallocate compound.");
+        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Deallocate compound.");
 
         // The names, abstractions, models, details.
         void** n = NULL_POINTER;
@@ -179,7 +179,7 @@ void deallocate_compound(void* p0, void* p1) {
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not deallocate compound. The compound is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not deallocate compound. The compound is null.");
     }
 }
 

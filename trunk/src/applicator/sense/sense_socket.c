@@ -1,7 +1,7 @@
 /*
  * $RCSfile: sense_socket.c,v $
  *
- * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2008-04-23 22:47:59 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2008-05-04 00:18:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -90,9 +90,9 @@ void sense_socket_message(void* p0, void* p1, void* p2, void* p3, void* p4, void
 
                         int* irq = (int*) p0;
 
-                        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Sense socket message.");
+                        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Sense socket message.");
 
-    fprintf(stderr, "TEST: sense (stream) socket server socket: %i \n", *os);
+    fwprintf(stderr, L"TEST: sense (stream) socket server socket: %i \n", *os);
 
                         // Accept client socket request and store client socket.
                         //
@@ -110,7 +110,7 @@ void sense_socket_message(void* p0, void* p1, void* p2, void* p3, void* p4, void
                         // communication partner socket that initiated the connection.
                         *ps = accept(*os, (struct sockaddr*) p4, (socklen_t*) p5);
 
-    fprintf(stderr, "TEST: sense (stream) socket client partner socket ps: %i \n", *ps);
+    fwprintf(stderr, L"TEST: sense (stream) socket client partner socket ps: %i \n", *ps);
 
                         // CAUTION! Do NOT close client socket here!
                         // It is stored in the internal memory and only closed
@@ -165,27 +165,27 @@ void sense_socket_message(void* p0, void* p1, void* p2, void* p3, void* p4, void
 
                     } else {
 
-                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not sense (stream) socket message. The interrupt is null.");
+                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not sense (stream) socket message. The interrupt is null.");
                     }
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not sense (stream) socket message. The mutex is null.");
+                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not sense (stream) socket message. The mutex is null.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not sense (stream) socket message. The sleep time is null.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not sense (stream) socket message. The sleep time is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not sense (stream) socket message. The communication partner-connected socket is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not sense (stream) socket message. The communication partner-connected socket is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not sense (stream) socket message. The original socket of this system is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not sense (stream) socket message. The original socket of this system is null.");
     }
 }
 
@@ -201,7 +201,7 @@ void sense_socket(void* p0, void* p1) {
 
         int* base = (int*) p1;
 
-        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Sense socket.");
+        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Sense socket.");
 
         // The internal memory index.
         int i = *NUMBER_MINUS_1_INTEGER;
@@ -258,7 +258,7 @@ void sense_socket(void* p0, void* p1) {
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not sense socket. The base internal is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not sense socket. The base internal is null.");
     }
 
     // An implicit call to pthread_exit() is made when this thread
@@ -276,7 +276,7 @@ void sense_socket(void* p0, void* p1) {
  */
 void sense_www_socket(void* p0) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Sense www socket.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Sense www socket.");
 
     sense_socket(p0, (void*) WWW_BASE_INTERNAL);
 }
@@ -288,7 +288,7 @@ void sense_www_socket(void* p0) {
  */
 void sense_cyboi_socket(void* p0) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Sense cyboi socket.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Sense cyboi socket.");
 
     sense_socket(p0, (void*) CYBOI_BASE_INTERNAL);
 }

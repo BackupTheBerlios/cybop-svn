@@ -1,7 +1,7 @@
 /*
  * $RCSfile: gnu_linux_console_converter.c,v $
  *
- * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.13 $ $Date: 2008-05-02 22:52:18 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2008-05-04 00:18:14 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -35,7 +35,7 @@
 #include <stdio.h>
 #include <wchar.h>
 #include "../../globals/constants/boolean/boolean_constants.c"
-#include "../../globals/constants/character/character_constants.c"
+//?? #include "../../globals/constants/character/character_constants.c"
 #include "../../globals/constants/character/wide_character_constants.c"
 #include "../../globals/constants/console/console_control_sequence_constants.c"
 #include "../../globals/constants/cybol/cybol_abstraction_constants.c"
@@ -92,48 +92,48 @@ void encode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
  */
 void decode_gnu_linux_console_escape_control_sequence(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Decode gnu/linux console escape control sequence.");
+    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Decode gnu/linux console escape control sequence.");
 
     // The comparison result.
     int r = *NUMBER_0_INTEGER;
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p3, p4, (void*) ARROW_UP_CONTROL_SEQUENCE, (void*) ARROW_UP_CONTROL_SEQUENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p3, p4, (void*) ARROW_UP_CONTROL_SEQUENCE, (void*) ARROW_UP_CONTROL_SEQUENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
-            set(p0, p1, p2, (void*) UI_ARROW_UP_NAME, (void*) UI_ARROW_UP_NAME_COUNT, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+            set(p0, p1, p2, (void*) UI_ARROW_UP_NAME, (void*) UI_ARROW_UP_NAME_COUNT, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
         }
     }
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p3, p4, (void*) ARROW_DOWN_CONTROL_SEQUENCE, (void*) ARROW_DOWN_CONTROL_SEQUENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p3, p4, (void*) ARROW_DOWN_CONTROL_SEQUENCE, (void*) ARROW_DOWN_CONTROL_SEQUENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
-            set(p0, p1, p2, (void*) UI_ARROW_DOWN_NAME, (void*) UI_ARROW_DOWN_NAME_COUNT, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+            set(p0, p1, p2, (void*) UI_ARROW_DOWN_NAME, (void*) UI_ARROW_DOWN_NAME_COUNT, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
         }
     }
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p3, p4, (void*) ARROW_LEFT_CONTROL_SEQUENCE, (void*) ARROW_LEFT_CONTROL_SEQUENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p3, p4, (void*) ARROW_LEFT_CONTROL_SEQUENCE, (void*) ARROW_LEFT_CONTROL_SEQUENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
-            set(p0, p1, p2, (void*) UI_ARROW_LEFT_NAME, (void*) UI_ARROW_LEFT_NAME_COUNT, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+            set(p0, p1, p2, (void*) UI_ARROW_LEFT_NAME, (void*) UI_ARROW_LEFT_NAME_COUNT, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
         }
     }
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p3, p4, (void*) ARROW_RIGHT_CONTROL_SEQUENCE, (void*) ARROW_RIGHT_CONTROL_SEQUENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p3, p4, (void*) ARROW_RIGHT_CONTROL_SEQUENCE, (void*) ARROW_RIGHT_CONTROL_SEQUENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
-            set(p0, p1, p2, (void*) UI_ARROW_RIGHT_NAME, (void*) UI_ARROW_RIGHT_NAME_COUNT, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+            set(p0, p1, p2, (void*) UI_ARROW_RIGHT_NAME, (void*) UI_ARROW_RIGHT_NAME_COUNT, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
         }
     }
 
@@ -158,28 +158,28 @@ void decode_gnu_linux_console_escape_control_sequence(void* p0, void* p1, void* 
  */
 void decode_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Decode gnu/linux console character.");
+    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Decode gnu/linux console character.");
 
     // The comparison result.
     int r = *NUMBER_0_INTEGER;
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p3, p4, (void*) LINE_FEED_CONTROL_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p3, p4, (void*) LINE_FEED_CONTROL_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
-            set(p0, p1, p2, (void*) UI_ENTER_NAME, (void*) UI_ENTER_NAME_COUNT, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+            set(p0, p1, p2, (void*) UI_ENTER_NAME, (void*) UI_ENTER_NAME_COUNT, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
         }
     }
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p3, p4, (void*) ESCAPE_CONTROL_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p3, p4, (void*) ESCAPE_CONTROL_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
-            set(p0, p1, p2, (void*) UI_ESCAPE_NAME, (void*) UI_ESCAPE_NAME_COUNT, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+            set(p0, p1, p2, (void*) UI_ESCAPE_NAME, (void*) UI_ESCAPE_NAME_COUNT, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
         }
     }
 
@@ -187,7 +187,7 @@ void decode_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, 
 
         // None of the control characters above matched.
         // Pass along character without modification.
-        set(p0, p1, p2, p3, p4, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+        set(p0, p1, p2, p3, p4, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
     }
 }
 
@@ -206,19 +206,19 @@ void decode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) 
 
         int* sc = (int*) p4;
 
-        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Decode gnu/linux console.");
+        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Decode gnu/linux console.");
 
-    fprintf(stderr, "TEST decode gnu/linux console s: %s\n", (char*) p3);
-    fprintf(stderr, "TEST decode gnu/linux console sc: %i\n", *((int*) p4));
+    fwprintf(stderr, L"TEST decode gnu/linux console s: %s\n", (char*) p3);
+    fwprintf(stderr, L"TEST decode gnu/linux console sc: %i\n", *((int*) p4));
 
         // The comparison result.
         int r = *NUMBER_0_INTEGER;
 
-    fprintf(stderr, "TEST a0: %i\n", p3);
+    fwprintf(stderr, L"TEST a0: %i\n", p3);
 
         if (r == *NUMBER_0_INTEGER) {
 
-    fprintf(stderr, "TEST a1: %i\n", p3);
+    fwprintf(stderr, L"TEST a1: %i\n", p3);
 
             if (*sc > *ESCAPE_CONTROL_SEQUENCE_COUNT) {
 
@@ -228,42 +228,42 @@ void decode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) 
 
                 // CAUTION! Use the "ESCAPE_CONTROL_SEQUENCE_COUNT" for both comparison values,
                 // since they would not be equal if their size differed.
-                compare_arrays(p3, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                compare_arrays(p3, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
-    fprintf(stderr, "TEST a2: %i\n", p3);
+    fwprintf(stderr, L"TEST a2: %i\n", p3);
 
                 if (r != *NUMBER_0_INTEGER) {
 
-    fprintf(stderr, "TEST a3: %i\n", p3);
+    fwprintf(stderr, L"TEST a3: %i\n", p3);
 
                     // Initialise temporary character sequence with pointer to the
                     // first character AFTER the escape control sequence prefix.
                     void* t = p3 + *ESCAPE_CONTROL_SEQUENCE_COUNT;
                     int tc = *sc - *ESCAPE_CONTROL_SEQUENCE_COUNT;
 
-    fprintf(stderr, "TEST a4: %i\n", p3);
+    fwprintf(stderr, L"TEST a4: %i\n", p3);
 
                     decode_gnu_linux_console_escape_control_sequence(p0, p1, p2, t, (void*) &tc);
 
-    fprintf(stderr, "TEST a5: %i\n", p3);
+    fwprintf(stderr, L"TEST a5: %i\n", p3);
                 }
             }
         }
 
-    fprintf(stderr, "TEST b0: %i\n", p3);
+    fwprintf(stderr, L"TEST b0: %i\n", p3);
 
         if (r == *NUMBER_0_INTEGER) {
 
-    fprintf(stderr, "TEST b1: %i\n", p3);
+    fwprintf(stderr, L"TEST b1: %i\n", p3);
 
             decode_gnu_linux_console_character(p0, p1, p2, p3, p4);
 
-    fprintf(stderr, "TEST b2: %i\n", p3);
+    fwprintf(stderr, L"TEST b2: %i\n", p3);
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode gnu/linux console. The source character array count is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode gnu/linux console. The source character array count is null.");
     }
 }
 
@@ -318,7 +318,7 @@ void encode_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, 
 
                                 void** d = (void**) p0;
 
-                                log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Encode gnu/linux console character.");
+                                log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Encode gnu/linux console character.");
 
                                 if (p15 != *NULL_POINTER) {
 
@@ -565,42 +565,42 @@ void encode_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, 
 
                                 } else {
 
-                                    log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) "Could not encode gnu/linux console properties. The character is null.");
+                                    log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) L"Could not encode gnu/linux console properties. The character is null.");
                                 }
 
                             } else {
 
-                                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode gnu/linux console properties. The destination is null.");
+                                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode gnu/linux console properties. The destination is null.");
                             }
 
                         } else {
 
-                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode gnu/linux console properties. The destination count is null.");
+                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode gnu/linux console properties. The destination count is null.");
                         }
 
                     } else {
 
-                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode gnu/linux console properties. The destination size is null.");
+                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode gnu/linux console properties. The destination size is null.");
                     }
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode gnu/linux console properties. The source y is null.");
+                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode gnu/linux console properties. The source y is null.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode gnu/linux console properties. The source x is null.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode gnu/linux console properties. The source x is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode gnu/linux console properties. The background count is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode gnu/linux console properties. The background count is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode gnu/linux console properties. The foreground count is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode gnu/linux console properties. The foreground count is null.");
     }
 }
 
@@ -643,14 +643,14 @@ void encode_gnu_linux_console_rectangle_border(void* p0, void* p1,
 
                             wchar_t* hc = (wchar_t*) p0;
 
-                            log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Encode gnu/linux console rectangle border.");
+                            log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Encode gnu/linux console rectangle border.");
 
                             // The comparison result.
                             int r = *NUMBER_0_INTEGER;
 
                             if (r == *NUMBER_0_INTEGER) {
 
-                                compare_arrays(p6, p7, (void*) TUI_LINE_BORDER_MODEL, (void*) TUI_LINE_BORDER_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                                compare_arrays(p6, p7, (void*) TUI_LINE_BORDER_MODEL, (void*) TUI_LINE_BORDER_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                                 if (r != *NUMBER_0_INTEGER) {
 
@@ -665,7 +665,7 @@ void encode_gnu_linux_console_rectangle_border(void* p0, void* p1,
 
                             if (r == *NUMBER_0_INTEGER) {
 
-                                compare_arrays(p6, p7, (void*) TUI_ROUND_LINE_BORDER_MODEL, (void*) TUI_ROUND_LINE_BORDER_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                                compare_arrays(p6, p7, (void*) TUI_ROUND_LINE_BORDER_MODEL, (void*) TUI_ROUND_LINE_BORDER_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                                 if (r != *NUMBER_0_INTEGER) {
 
@@ -680,7 +680,7 @@ void encode_gnu_linux_console_rectangle_border(void* p0, void* p1,
 
                             if (r == *NUMBER_0_INTEGER) {
 
-                                compare_arrays(p6, p7, (void*) TUI_DOUBLE_LINE_BORDER_MODEL, (void*) TUI_DOUBLE_LINE_BORDER_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                                compare_arrays(p6, p7, (void*) TUI_DOUBLE_LINE_BORDER_MODEL, (void*) TUI_DOUBLE_LINE_BORDER_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                                 if (r != *NUMBER_0_INTEGER) {
 
@@ -695,32 +695,32 @@ void encode_gnu_linux_console_rectangle_border(void* p0, void* p1,
 
                         } else {
 
-                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode gnu/linux console rectangle border. The horizontal character is null.");
+                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode gnu/linux console rectangle border. The horizontal character is null.");
                         }
 
                     } else {
 
-                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode gnu/linux console rectangle border. The vertical character is null.");
+                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode gnu/linux console rectangle border. The vertical character is null.");
                     }
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode gnu/linux console rectangle border. The left top character is null.");
+                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode gnu/linux console rectangle border. The left top character is null.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode gnu/linux console rectangle border. The right top character is null.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode gnu/linux console rectangle border. The right top character is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode gnu/linux console rectangle border. The left bottom character is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode gnu/linux console rectangle border. The left bottom character is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode gnu/linux console rectangle border. The right bottom character is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode gnu/linux console rectangle border. The right bottom character is null.");
     }
 }
 
@@ -780,7 +780,7 @@ void encode_gnu_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, 
 
                             int* cc = (int*) p4;
 
-                            log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Encode gnu/linux console rectangle.");
+                            log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Encode gnu/linux console rectangle.");
 
                             // The horizontal character.
                             wchar_t hc = *SPACE_WIDE_CHARACTER;
@@ -854,12 +854,11 @@ void encode_gnu_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, 
                                                 }
 
                                                 // Encode character using escape codes.
-                                                encode_gnu_linux_console_character(p0, p1, p2, &x, &y, &z,
-                                                    p10, p11, p12, p13, p5, p6, p7, p8, p9, c);
+                                                encode_gnu_linux_console_character(p0, p1, p2, &x, &y, &z, p10, p11, p12, p13, p5, p6, p7, p8, p9, c);
 
                                             } else {
 
-                                                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode gnu/linux console rectangle. The character count is null.");
+                                                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode gnu/linux console rectangle. The character count is null.");
                                             }
 
                                         } else {
@@ -871,20 +870,17 @@ void encode_gnu_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, 
                                                 if (x == *px) {
 
                                                     // Encode left top border character using escape codes.
-                                                    encode_gnu_linux_console_character(p0, p1, p2, &x, &y, &z,
-                                                        p10, p11, p12, p13, p5, p6, p7, p8, p9, &ltc);
+                                                    encode_gnu_linux_console_character(p0, p1, p2, &x, &y, &z, p10, p11, p12, p13, p5, p6, p7, p8, p9, &ltc);
 
                                                 } else if (x == (xl - *NUMBER_1_INTEGER)) {
 
                                                     // Encode right top border character using escape codes.
-                                                    encode_gnu_linux_console_character(p0, p1, p2, &x, &y, &z,
-                                                        p10, p11, p12, p13, p5, p6, p7, p8, p9, &rtc);
+                                                    encode_gnu_linux_console_character(p0, p1, p2, &x, &y, &z, p10, p11, p12, p13, p5, p6, p7, p8, p9, &rtc);
 
                                                 } else {
 
                                                     // Encode horizontal border character using escape codes.
-                                                    encode_gnu_linux_console_character(p0, p1, p2, &x, &y, &z,
-                                                        p10, p11, p12, p13, p5, p6, p7, p8, p9, &hc);
+                                                    encode_gnu_linux_console_character(p0, p1, p2, &x, &y, &z, p10, p11, p12, p13, p5, p6, p7, p8, p9, &hc);
                                                 }
 
                                             } else if (y == (yl - *NUMBER_1_INTEGER)) {
@@ -892,20 +888,17 @@ void encode_gnu_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, 
                                                 if (x == *px) {
 
                                                     // Encode left bottom border character using escape codes.
-                                                    encode_gnu_linux_console_character(p0, p1, p2, &x, &y, &z,
-                                                        p10, p11, p12, p13, p5, p6, p7, p8, p9, &lbc);
+                                                    encode_gnu_linux_console_character(p0, p1, p2, &x, &y, &z, p10, p11, p12, p13, p5, p6, p7, p8, p9, &lbc);
 
                                                 } else if (x == (xl - *NUMBER_1_INTEGER)) {
 
                                                     // Encode right bottom border character using escape codes.
-                                                    encode_gnu_linux_console_character(p0, p1, p2, &x, &y, &z,
-                                                        p10, p11, p12, p13, p5, p6, p7, p8, p9, &rbc);
+                                                    encode_gnu_linux_console_character(p0, p1, p2, &x, &y, &z, p10, p11, p12, p13, p5, p6, p7, p8, p9, &rbc);
 
                                                 } else {
 
                                                     // Encode horizontal border character using escape codes.
-                                                    encode_gnu_linux_console_character(p0, p1, p2, &x, &y, &z,
-                                                        p10, p11, p12, p13, p5, p6, p7, p8, p9, &hc);
+                                                    encode_gnu_linux_console_character(p0, p1, p2, &x, &y, &z, p10, p11, p12, p13, p5, p6, p7, p8, p9, &hc);
                                                 }
 
                                             } else {
@@ -913,14 +906,12 @@ void encode_gnu_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, 
                                                 if (x == *px) {
 
                                                     // Encode left bottom border character using escape codes.
-                                                    encode_gnu_linux_console_character(p0, p1, p2, &x, &y, &z,
-                                                        p10, p11, p12, p13, p5, p6, p7, p8, p9, &vc);
+                                                    encode_gnu_linux_console_character(p0, p1, p2, &x, &y, &z, p10, p11, p12, p13, p5, p6, p7, p8, p9, &vc);
 
                                                 } else if (x == (xl - *NUMBER_1_INTEGER)) {
 
                                                     // Encode right bottom border character using escape codes.
-                                                    encode_gnu_linux_console_character(p0, p1, p2, &x, &y, &z,
-                                                        p10, p11, p12, p13, p5, p6, p7, p8, p9, &vc);
+                                                    encode_gnu_linux_console_character(p0, p1, p2, &x, &y, &z, p10, p11, p12, p13, p5, p6, p7, p8, p9, &vc);
 
                                                 } else {
 
@@ -938,12 +929,11 @@ void encode_gnu_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, 
 
                                                     } else {
 
-                                                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode gnu/linux console rectangle. The character count is null.");
+                                                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode gnu/linux console rectangle. The character count is null.");
                                                     }
 
                                                     // Encode character using escape codes.
-                                                    encode_gnu_linux_console_character(p0, p1, p2, &x, &y, &z,
-                                                        p10, p11, p12, p13, p5, p6, p7, p8, p9, c);
+                                                    encode_gnu_linux_console_character(p0, p1, p2, &x, &y, &z, p10, p11, p12, p13, p5, p6, p7, p8, p9, c);
                                                 }
                                             }
                                         }
@@ -971,32 +961,32 @@ void encode_gnu_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, 
 
                         } else {
 
-                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode user interface rectangle. The character count is null.");
+                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode user interface rectangle. The character count is null.");
                         }
 
                     } else {
 
-                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode user interface rectangle. The character count is null.");
+                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode user interface rectangle. The character count is null.");
                     }
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode user interface rectangle. The character count is null.");
+                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode user interface rectangle. The character count is null.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode user interface rectangle. The character count is null.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode user interface rectangle. The character count is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode user interface rectangle. The character count is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode user interface rectangle. The character count is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode user interface rectangle. The character count is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode user interface rectangle. The character count is null.");
     }
 }
 
@@ -1019,7 +1009,7 @@ void encode_gnu_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, 
 void encode_gnu_linux_console_rectangle_coordinates_layout(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
     void* p6, void* p7, void* p8, void* p9, void* p10, void* p11) {
 
-    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Encode gnu/linux console rectangle coordinates layout.");
+    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Encode gnu/linux console rectangle coordinates layout.");
 
     int* cpx = (int*) p0;
     int* cpy = (int*) p1;
@@ -1055,7 +1045,7 @@ void encode_gnu_linux_console_rectangle_coordinates_layout(void* p0, void* p1, v
 void encode_gnu_linux_console_rectangle_compass_layout(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
     void* p6, void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13) {
 
-    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Encode gnu/linux console rectangle compass layout.");
+    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Encode gnu/linux console rectangle compass layout.");
 
     int* cpx = (int*) p0;
     int* cpy = (int*) p1;
@@ -1075,7 +1065,7 @@ void encode_gnu_linux_console_rectangle_compass_layout(void* p0, void* p1, void*
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p12, p13, (void*) UI_NORTH_CELL_MODEL, (void*) UI_NORTH_CELL_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p12, p13, (void*) UI_NORTH_CELL_MODEL, (void*) UI_NORTH_CELL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
@@ -1094,7 +1084,7 @@ void encode_gnu_linux_console_rectangle_compass_layout(void* p0, void* p1, void*
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p12, p13, (void*) UI_SOUTH_CELL_MODEL, (void*) UI_SOUTH_CELL_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p12, p13, (void*) UI_SOUTH_CELL_MODEL, (void*) UI_SOUTH_CELL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
@@ -1112,7 +1102,7 @@ void encode_gnu_linux_console_rectangle_compass_layout(void* p0, void* p1, void*
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p12, p13, (void*) UI_WEST_CELL_MODEL, (void*) UI_WEST_CELL_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p12, p13, (void*) UI_WEST_CELL_MODEL, (void*) UI_WEST_CELL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
@@ -1131,7 +1121,7 @@ void encode_gnu_linux_console_rectangle_compass_layout(void* p0, void* p1, void*
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p12, p13, (void*) UI_EAST_CELL_MODEL, (void*) UI_EAST_CELL_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p12, p13, (void*) UI_EAST_CELL_MODEL, (void*) UI_EAST_CELL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
@@ -1149,7 +1139,7 @@ void encode_gnu_linux_console_rectangle_compass_layout(void* p0, void* p1, void*
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p12, p13, (void*) UI_CENTRE_CELL_MODEL, (void*) UI_CENTRE_CELL_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p12, p13, (void*) UI_CENTRE_CELL_MODEL, (void*) UI_CENTRE_CELL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
@@ -1199,14 +1189,14 @@ void encode_gnu_linux_console_rectangle_layout(void* p0, void* p1, void* p2, voi
     void* p12, void* p13, void* p14, void* p15, void* p16, void* p17,
     void* p18, void* p19, void* p20, void* p21) {
 
-    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Encode gnu/linux console rectangle layout.");
+    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Encode gnu/linux console rectangle layout.");
 
     // The comparison result.
     int r = *NUMBER_0_INTEGER;
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p20, p21, (void*) UI_COORDINATES_LAYOUT_MODEL, (void*) UI_COORDINATES_LAYOUT_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p20, p21, (void*) UI_COORDINATES_LAYOUT_MODEL, (void*) UI_COORDINATES_LAYOUT_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
@@ -1217,7 +1207,7 @@ void encode_gnu_linux_console_rectangle_layout(void* p0, void* p1, void* p2, voi
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p20, p21, (void*) UI_COMPASS_LAYOUT_MODEL, (void*) UI_COMPASS_LAYOUT_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p20, p21, (void*) UI_COMPASS_LAYOUT_MODEL, (void*) UI_COMPASS_LAYOUT_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
@@ -1267,7 +1257,7 @@ void encode_gnu_linux_console_coordinates(void* p0, void* p1, void* p2, void* p3
     void* p14, void* p15, void* p16, void* p17, void* p18, void* p19, void* p20, void* p21,
     void* p22, void* p23, void* p24, void* p25, void* p26, void* p27) {
 
-    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Encode gnu/linux console coordinates.");
+    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Encode gnu/linux console coordinates.");
 
     // The source part position x, y, z.
     int* px = (int*) *NULL_POINTER;
@@ -1418,7 +1408,7 @@ void encode_gnu_linux_console_shape(void* p0, void* p1, void* p2, void* p3, void
 
         int* sc = (int*) p4;
 
-        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Encode gnu/linux console shape.");
+        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Encode gnu/linux console shape.");
 
         // The character.
         void* c = *NULL_POINTER;
@@ -1462,7 +1452,7 @@ void encode_gnu_linux_console_shape(void* p0, void* p1, void* p2, void* p3, void
 
         if (r == *NUMBER_0_INTEGER) {
 
-            compare_arrays(p5, p6, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+            compare_arrays(p5, p6, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
             if (r != *NUMBER_0_INTEGER) {
 
@@ -1474,7 +1464,7 @@ void encode_gnu_linux_console_shape(void* p0, void* p1, void* p2, void* p3, void
 
         if (r == *NUMBER_0_INTEGER) {
 
-            compare_arrays(p5, p6, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+            compare_arrays(p5, p6, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
             if (r != *NUMBER_0_INTEGER) {
 
@@ -1487,8 +1477,8 @@ void encode_gnu_linux_console_shape(void* p0, void* p1, void* p2, void* p3, void
 
                 // Set temporary character array by first copying the
                 // given array and then adding the null termination character.
-                set_array_elements(tmp, (void*) NUMBER_0_INTEGER, p3, p4, (void*) CHARACTER_ARRAY);
-                set_array_elements(tmp, p4, (void*) NULL_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+                set_array_elements(tmp, (void*) NUMBER_0_INTEGER, p3, p4, (void*) WIDE_CHARACTER_ARRAY);
+                set_array_elements(tmp, p4, (void*) NULL_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
 
                 // Initialise temporary wide character string size.
                 // CAUTION! One extra place is added for the null termination character.
@@ -1521,7 +1511,7 @@ void encode_gnu_linux_console_shape(void* p0, void* p1, void* p2, void* p3, void
 
         if (r == *NUMBER_0_INTEGER) {
 
-            compare_arrays(p35, p36, (void*) UI_RECTANGLE_SHAPE_MODEL, (void*) UI_RECTANGLE_SHAPE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+            compare_arrays(p35, p36, (void*) UI_RECTANGLE_SHAPE_MODEL, (void*) UI_RECTANGLE_SHAPE_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
             if (r != *NUMBER_0_INTEGER) {
 
@@ -1534,7 +1524,7 @@ void encode_gnu_linux_console_shape(void* p0, void* p1, void* p2, void* p3, void
 
         if (r == *NUMBER_0_INTEGER) {
 
-            compare_arrays(p35, p36, (void*) UI_CIRCLE_SHAPE_MODEL, (void*) UI_CIRCLE_SHAPE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+            compare_arrays(p35, p36, (void*) UI_CIRCLE_SHAPE_MODEL, (void*) UI_CIRCLE_SHAPE_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
             if (r != *NUMBER_0_INTEGER) {
 
@@ -1548,7 +1538,7 @@ void encode_gnu_linux_console_shape(void* p0, void* p1, void* p2, void* p3, void
 
         if (r == *NUMBER_0_INTEGER) {
 
-            compare_arrays(p35, p36, (void*) UI_POLYGON_SHAPE_MODEL, (void*) UI_POLYGON_SHAPE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+            compare_arrays(p35, p36, (void*) UI_POLYGON_SHAPE_MODEL, (void*) UI_POLYGON_SHAPE_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
             if (r != *NUMBER_0_INTEGER) {
 
@@ -1565,7 +1555,7 @@ void encode_gnu_linux_console_shape(void* p0, void* p1, void* p2, void* p3, void
 
         if (r == *NUMBER_0_INTEGER) {
 
-            compare_arrays(p5, p6, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+            compare_arrays(p5, p6, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
             if (r != *NUMBER_0_INTEGER) {
 
@@ -1576,7 +1566,7 @@ void encode_gnu_linux_console_shape(void* p0, void* p1, void* p2, void* p3, void
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode gnu/linux console shape. The character count is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode gnu/linux console shape. The character count is null.");
     }
 }
 
@@ -1602,7 +1592,7 @@ void encode_gnu_linux_console_shape(void* p0, void* p1, void* p2, void* p3, void
 void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
     void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Encode gnu/linux console.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Encode gnu/linux console.");
 
     // The source part name, abstraction, model, details.
     void** n = NULL_POINTER;
@@ -2177,7 +2167,7 @@ void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, 
                 *cm, *cmc, *lm, *lmc, *shm, *shmc);
         }
 
-        compare_arrays(p3, p4, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT, (void*) &ar, (void*) CHARACTER_ARRAY);
+        compare_arrays(p3, p4, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT, (void*) &ar, (void*) WIDE_CHARACTER_ARRAY);
 
         if (ar != *NUMBER_0_INTEGER) {
 
@@ -2203,7 +2193,7 @@ void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, 
                         (void*) &d, (void*) &dc, (void*) &ds);
 
                     // Compare expected name with that of the current compound part element.
-                    compare_arrays(*n, *nc, en, (void*) &enc, (void*) &nr, (void*) CHARACTER_ARRAY);
+                    compare_arrays(*n, *nc, en, (void*) &enc, (void*) &nr, (void*) WIDE_CHARACTER_ARRAY);
 
                     if ((p11 == *NULL_POINTER) || (*((int*) p12) == *NUMBER_0_INTEGER) || (nr != *NUMBER_0_INTEGER)) {
 
@@ -2243,13 +2233,13 @@ void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, 
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode compound model into gnu/linux console control sequences. The source count parameter is null.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode compound model into gnu/linux console control sequences. The source count parameter is null.");
             }
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode compound model into gnu/linux console control sequences. The hierarchical compound element name contains a meta element, while only part elements are permitted.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode compound model into gnu/linux console control sequences. The hierarchical compound element name contains a meta element, while only part elements are permitted.");
     }
 }
 

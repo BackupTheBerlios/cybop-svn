@@ -1,7 +1,7 @@
 /*
  * $RCSfile: xdt_converter.c,v $
  *
- * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.23 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
+ * @version $Revision: 1.24 $ $Date: 2008-05-04 00:18:14 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -161,7 +161,7 @@ void decode_xdt_field(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
                             int* fs = (int*) p0;
 
-                            log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Decode xdt field.");
+                            log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Decode xdt field.");
 
                             // The remaining bytes in the source byte array.
                             // They are used to check that the array border is not crossed.
@@ -242,32 +242,32 @@ void decode_xdt_field(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
                         } else {
 
-                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode xdt field. The field size is null.");
+                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode xdt field. The field size is null.");
                         }
 
                     } else {
 
-                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode xdt field. The field content is null.");
+                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode xdt field. The field content is null.");
                     }
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode xdt field. The field content count is null.");
+                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode xdt field. The field content count is null.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode xdt field. The verification flag is null.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode xdt field. The verification flag is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode xdt field. The source byte array is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode xdt field. The source byte array is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode xdt field. The source count is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode xdt field. The source count is null.");
     }
 }
 
@@ -292,7 +292,7 @@ void decode_xdt_next_field(void* p0, void* p1, void* p2) {
 
                 int* nc = (int*) p0;
 
-                log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Decode next xdt field.");
+                log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Decode next xdt field.");
 
                 // The loop variable.
                 int j = *NUMBER_0_INTEGER;
@@ -333,17 +333,17 @@ void decode_xdt_next_field(void* p0, void* p1, void* p2) {
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode for next xdt field. The next field count is null.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode for next xdt field. The next field count is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode for next xdt field. The byte array is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode for next xdt field. The byte array is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode for next xdt field. The byte array count is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode for next xdt field. The byte array count is null.");
     }
 }
 
@@ -379,7 +379,7 @@ void decode_xdt_record(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
 
                         int* rs = (int*) p0;
 
-                        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Decode xdt record.");
+                        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Decode xdt record.");
 
                         // Reset record size.
                         *rs = *NUMBER_0_INTEGER;
@@ -415,9 +415,9 @@ void decode_xdt_record(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
 
 /*??
                             // Test values.
-                            fprintf(stderr, "Test: Decode xdt record. Field size fs: %i\n", fs);
-                            fprintf(stderr, "Test: Decode xdt record. Field identification id: %i\n", fid);
-                            fprintf(stderr, "Test: Decode xdt record. Field content count fcc: %i\n", fcc);
+                            fwprintf(stderr, L"Test: Decode xdt record. Field size fs: %i\n", fs);
+                            fwprintf(stderr, L"Test: Decode xdt record. Field identification id: %i\n", fid);
+                            fwprintf(stderr, L"Test: Decode xdt record. Field content count fcc: %i\n", fcc);
 */
 
                             if (v == *NUMBER_1_INTEGER) {
@@ -513,7 +513,7 @@ void decode_xdt_record(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
                                 // The verification flag is NOT set, which means
                                 // that the xdt field was NOT decoded correctly.
 
-                                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode xdt record. An invalid field was detected. The parsing will now continue with the next valid field.");
+                                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode xdt record. An invalid field was detected. The parsing will now continue with the next valid field.");
 
                                 // Reset next field count.
                                 nc = *NUMBER_0_INTEGER;
@@ -537,27 +537,27 @@ void decode_xdt_record(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
 
                     } else {
 
-                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode xdt record. The record size is null.");
+                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode xdt record. The record size is null.");
                     }
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode xdt record. The record content is null.");
+                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode xdt record. The record content is null.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode xdt record. The record content count is null.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode xdt record. The record content count is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode xdt record. The source byte array is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode xdt record. The source byte array is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode xdt record. The source byte array count is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode xdt record. The source byte array count is null.");
     }
 }
 
@@ -612,7 +612,7 @@ void decode_xdt_package(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
 
                                         int* ps = (int*) p0;
 
-                                        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Decode xdt package.");
+                                        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Decode xdt package.");
 
                                         // Reset package size.
                                         *ps = *NUMBER_0_INTEGER;
@@ -646,9 +646,9 @@ void decode_xdt_package(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
 
 /*??
                                             // Test values.
-                                            fprintf(stderr, "Test: Decode xdt package. Record size rs: %i\n", rs);
-                                            fprintf(stderr, "Test: Decode xdt package. Record identification id: %i\n", rid);
-                                            fprintf(stderr, "Test: Decode xdt package. Record content count pfc: %i\n\n", *pfc);
+                                            fwprintf(stderr, L"Test: Decode xdt package. Record size rs: %i\n", rs);
+                                            fwprintf(stderr, L"Test: Decode xdt package. Record identification id: %i\n", rid);
+                                            fwprintf(stderr, L"Test: Decode xdt package. Record content count pfc: %i\n\n", *pfc);
 */
 
                                             if (rs > *NUMBER_0_INTEGER) {
@@ -673,8 +673,8 @@ void decode_xdt_package(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
 
 /*??
                                                     // Test values.
-                                                    fprintf(stderr, "Test: Decode xdt package. Package header: %i\n", *ph);
-                                                    fprintf(stderr, "Test: Decode xdt package. Package header count: %i\n\n", *phc);
+                                                    fwprintf(stderr, L"Test: Decode xdt package. Package header: %i\n", *ph);
+                                                    fwprintf(stderr, L"Test: Decode xdt package. Package header count: %i\n\n", *phc);
 */
 
                                                     // Store xdt package content.
@@ -697,8 +697,8 @@ void decode_xdt_package(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
 
 /*??
                                                     // Test values.
-                                                    fprintf(stderr, "Test: Decode xdt package. Package footer: %i\n", *pf);
-                                                    fprintf(stderr, "Test: Decode xdt package. Package footer count: %i\n\n", *pfc);
+                                                    fwprintf(stderr, L"Test: Decode xdt package. Package footer: %i\n", *pf);
+                                                    fwprintf(stderr, L"Test: Decode xdt package. Package footer count: %i\n\n", *pfc);
 */
 
                                                     // Decrement package content count.
@@ -742,47 +742,47 @@ void decode_xdt_package(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
 
                                     } else {
 
-                                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode xdt package. The package size is null.");
+                                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode xdt package. The package size is null.");
                                     }
 
                                 } else {
 
-                                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode xdt package. The package header is null.");
+                                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode xdt package. The package header is null.");
                                 }
 
                             } else {
 
-                                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode xdt package. The package header count is null.");
+                                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode xdt package. The package header count is null.");
                             }
 
                         } else {
 
-                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode xdt package. The package footer is null.");
+                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode xdt package. The package footer is null.");
                         }
 
                     } else {
 
-                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode xdt package. The package footer count is null.");
+                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode xdt package. The package footer count is null.");
                     }
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode xdt package. The package content is null.");
+                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode xdt package. The package content is null.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode xdt package. The package content count is null.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode xdt package. The package content count is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode xdt package. The source byte array is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode xdt package. The source byte array is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode xdt package. The source byte array count is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode xdt package. The source byte array count is null.");
     }
 }
 
@@ -844,7 +844,7 @@ void decode_xdt_decode_model(void* p0, void* p1, void* p2, void* p3, void* p4, v
 
                                     int** nc = (int**) p1;
 
-                                    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Decode model.");
+                                    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Decode model.");
 
                                     // Allocate knowledge model name.
                                     allocate(p1, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
@@ -886,42 +886,42 @@ void decode_xdt_decode_model(void* p0, void* p1, void* p2, void* p3, void* p4, v
 
                                 } else {
 
-                                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode model. The name count is null.");
+                                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode model. The name count is null.");
                                 }
 
                             } else {
 
-                                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode model. The name size is null.");
+                                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode model. The name size is null.");
                             }
 
                         } else {
 
-                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode model. The abstraction count is null.");
+                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode model. The abstraction count is null.");
                         }
 
                     } else {
 
-                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode model. The abstraction size is null.");
+                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode model. The abstraction size is null.");
                     }
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode model. The model count is null.");
+                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode model. The model count is null.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode model. The model size is null.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode model. The model size is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode model. The details count is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode model. The details count is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode model. The details size is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode model. The details size is null.");
     }
 }
 
@@ -941,11 +941,11 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
 
         int* id = (int*) p5;
 
-        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Select xdt field.");
+        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Select xdt field.");
 
 /*??
         // Test values.
-        fprintf(stderr, "Test: Select xdt field. Field identification: %i\n", *id);
+        fwprintf(stderr, L"Test: Select xdt field. Field identification: %i\n", *id);
 */
 
         // The knowledge model name.
@@ -4273,7 +4273,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not select xdt field. The field identification is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not select xdt field. The field identification is null.");
     }
 }
 
@@ -4296,7 +4296,7 @@ void decode_xdt_process_record(void* p0, void* p1, void* p2, void* p3, void* p4)
 
             void* s = (void*) p3;
 
-            log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Process xdt record.");
+            log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Process xdt record.");
 
             // The remaining bytes in the source byte array.
             int rem = *sc;
@@ -4324,9 +4324,9 @@ void decode_xdt_process_record(void* p0, void* p1, void* p2, void* p3, void* p4)
 
 /*??
                 // Test values.
-                fprintf(stderr, "Test: Process xdt record. Field size fs: %i\n", fs);
-                fprintf(stderr, "Test: Process xdt record. Field identification id: %i\n", fid);
-                fprintf(stderr, "Test: Process xdt record. Field content count fcc: %i\n", fcc);
+                fwprintf(stderr, L"Test: Process xdt record. Field size fs: %i\n", fs);
+                fwprintf(stderr, L"Test: Process xdt record. Field identification id: %i\n", fid);
+                fwprintf(stderr, L"Test: Process xdt record. Field content count fcc: %i\n", fcc);
 */
 
                 if (v == *NUMBER_1_INTEGER) {
@@ -4348,7 +4348,7 @@ void decode_xdt_process_record(void* p0, void* p1, void* p2, void* p3, void* p4)
                     // The verification flag is NOT set, which means
                     // that the xdt field was NOT decoded correctly.
 
-                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not process xdt record. An invalid field was detected. The parsing will now continue with the next valid field.");
+                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not process xdt record. An invalid field was detected. The parsing will now continue with the next valid field.");
 
                     // Reset next field count.
                     nc = *NUMBER_0_INTEGER;
@@ -4366,12 +4366,12 @@ void decode_xdt_process_record(void* p0, void* p1, void* p2, void* p3, void* p4)
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not process xdt record. The source record is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not process xdt record. The source record is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not process xdt record. The source record count is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not process xdt record. The source record count is null.");
     }
 }
 
@@ -4391,11 +4391,11 @@ void decode_xdt_select_record(void* p0, void* p1, void* p2, void* p3, void* p4, 
 
         int* id = (int*) p5;
 
-        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Select xdt record.");
+        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Select xdt record.");
 
 /*??
         // Test values.
-        fprintf(stderr, "Test: Select xdt record. Record identification: %i\n", *id);
+        fwprintf(stderr, L"Test: Select xdt record. Record identification: %i\n", *id);
 */
 
         // The knowledge model name.
@@ -4674,7 +4674,7 @@ void decode_xdt_select_record(void* p0, void* p1, void* p2, void* p3, void* p4, 
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not select xdt record. The record identification is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not select xdt record. The record identification is null.");
     }
 }
 
@@ -4697,7 +4697,7 @@ void decode_xdt_process_package(void* p0, void* p1, void* p2, void* p3, void* p4
 
             void* s = (void*) p3;
 
-            log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Process xdt package.");
+            log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Process xdt package.");
 
             // The remaining bytes in the source byte array.
             int rem = *sc;
@@ -4721,9 +4721,9 @@ void decode_xdt_process_package(void* p0, void* p1, void* p2, void* p3, void* p4
 
 /*??
                 // Test values.
-                fprintf(stderr, "\nTest: Process xdt package. Record size rs: %i\n", rs);
-                fprintf(stderr, "Test: Process xdt package. Record identification id: %i\n", rid);
-                fprintf(stderr, "Test: Process xdt package. Record content count pfc: %i\n", rcc);
+                fwprintf(stderr, L"\nTest: Process xdt package. Record size rs: %i\n", rs);
+                fwprintf(stderr, L"Test: Process xdt package. Record identification id: %i\n", rid);
+                fwprintf(stderr, L"Test: Process xdt package. Record content count pfc: %i\n", rcc);
 */
 
                 if (rs > *NUMBER_0_INTEGER) {
@@ -4748,12 +4748,12 @@ void decode_xdt_process_package(void* p0, void* p1, void* p2, void* p3, void* p4
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not process xdt package. The source package is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not process xdt package. The source package is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not process xdt package. The source package count is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not process xdt package. The source package count is null.");
     }
 }
 
@@ -4776,7 +4776,7 @@ void decode_xdt_process_package(void* p0, void* p1, void* p2, void* p3, void* p4
 void decode_xdt_select_package(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
     void* p6, void* p7, void* p8, void* p9, void* p10, void* p11) {
 
-    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Select xdt package.");
+    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Select xdt package.");
 
     // The knowledge model name.
     void* n = *NULL_POINTER;
@@ -4883,7 +4883,7 @@ void decode_xdt(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
 
                     void** dm = (void**) p0;
 
-                    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Decode xdt format into compound model.");
+                    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Decode xdt format into compound model.");
 
                     // The remaining bytes in the source byte array.
                     int rem = *sc;
@@ -4901,7 +4901,7 @@ void decode_xdt(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
 
 /*??
                     // Test values.
-                    fprintf(stderr, "TEST xdt file source count: %i\n\n", *sc);
+                    fwprintf(stderr, L"TEST xdt file source count: %i\n\n", *sc);
 */
 
                     while (*NUMBER_1_INTEGER) {
@@ -4921,10 +4921,10 @@ void decode_xdt(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
 
 /*??
                         // Test values.
-                        fprintf(stderr, "TEST package size: %i\n", ps);
-                        fprintf(stderr, "TEST package header count: %i\n", phc);
-                        fprintf(stderr, "TEST package footer count: %i\n", pfc);
-                        fprintf(stderr, "TEST package content: %i\n", pcc);
+                        fwprintf(stderr, L"TEST package size: %i\n", ps);
+                        fwprintf(stderr, L"TEST package header count: %i\n", phc);
+                        fwprintf(stderr, L"TEST package footer count: %i\n", pfc);
+                        fwprintf(stderr, L"TEST package content: %i\n", pcc);
 */
 
                         if (ps > *NUMBER_0_INTEGER) {
@@ -4934,7 +4934,7 @@ void decode_xdt(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
 
 /*??
                             // Test values.
-                            fprintf(stderr, "TEST package remaining bytes: %i\n\n", rem);
+                            fwprintf(stderr, L"TEST package remaining bytes: %i\n\n", rem);
 */
 
                             // Select xdt package.
@@ -4966,22 +4966,22 @@ void decode_xdt(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode xdt. The destination compound model is null.");
+                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode xdt. The destination compound model is null.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode xdt. The destination compound details is null.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode xdt. The destination compound details is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode xdt. The source byte array is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode xdt. The source byte array is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode xdt. The source byte array count is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode xdt. The source byte array count is null.");
     }
 }
 
@@ -4996,7 +4996,7 @@ void decode_xdt(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
  */
 void encode_xdt(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Encode compound model into xdt format.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Encode compound model into xdt format.");
 }
 
 /* XDT_CONVERTER_SOURCE */

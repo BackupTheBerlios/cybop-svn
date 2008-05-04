@@ -1,7 +1,7 @@
 /*
  * $RCSfile: copy_boolean.c,v $
  *
- * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2007-10-03 23:40:05 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2008-05-04 00:18:10 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -61,7 +61,7 @@ void copy_boolean(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                     void** d = (void**) p0;
 
-                    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Copy boolean.");
+                    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Copy boolean.");
 
                     // CAUTION! The destination array needs to be resized not only
                     // if the source array is greater, but also if it is smaller!
@@ -92,22 +92,22 @@ void copy_boolean(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not copy boolean. The destination is null.");
+                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not copy boolean. The destination is null.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not copy boolean. The destination count is null.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not copy boolean. The destination count is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not copy boolean. The destination size is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not copy boolean. The destination size is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not copy boolean. The source count is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not copy boolean. The source count is null.");
     }
 }
 

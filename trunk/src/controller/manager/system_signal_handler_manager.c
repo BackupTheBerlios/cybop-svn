@@ -1,7 +1,7 @@
 /*
  * $RCSfile: system_signal_handler_manager.c,v $
  *
- * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.14 $ $Date: 2007-12-01 23:57:42 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2008-05-04 00:18:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -64,15 +64,15 @@ void interrupt_service_system_signal_handler(int p0) {
 //??    pthread_id_np_t id = pthread_getthreadid_np();
 */
 
-//??    fprintf(stdout, "TEST signal handler thread t: %l\n", t);
+//??    fwprintf(stdout, L"TEST signal handler thread t: %l\n", t);
 
     if (t == *GNU_LINUX_CONSOLE_THREAD) {
 
-//??    fprintf(stdout, "TEST signal handler gnu/linux console %i\n", p0);
+//??    fwprintf(stdout, L"TEST signal handler gnu/linux console %i\n", p0);
 
         if (*GNU_LINUX_CONSOLE_EXIT != *NUMBER_0_INTEGER) {
 
-//??    fprintf(stdout, "TEST signal handler gnu/linux console irq %i\n", p0);
+//??    fwprintf(stdout, L"TEST signal handler gnu/linux console irq %i\n", p0);
 
             pthread_exit(*NULL_POINTER);
 
@@ -87,11 +87,11 @@ void interrupt_service_system_signal_handler(int p0) {
 
     if (t == *X_WINDOW_SYSTEM_THREAD) {
 
-//??    fprintf(stdout, "TEST signal handler x window system %i\n", p0);
+//??    fwprintf(stdout, L"TEST signal handler x window system %i\n", p0);
 
         if (*X_WINDOW_SYSTEM_EXIT != *NUMBER_0_INTEGER) {
 
-//??    fprintf(stdout, "TEST signal handler x window system irq %i\n", p0);
+//??    fwprintf(stdout, L"TEST signal handler x window system irq %i\n", p0);
 
             pthread_exit(*NULL_POINTER);
 
@@ -106,11 +106,11 @@ void interrupt_service_system_signal_handler(int p0) {
 
     if (t == *WWW_SERVICE_THREAD) {
 
-//??    fprintf(stdout, "TEST signal handler www service %i\n", p0);
+//??    fwprintf(stdout, L"TEST signal handler www service %i\n", p0);
 
         if (*WWW_SERVICE_EXIT != *NUMBER_0_INTEGER) {
 
-//??    fprintf(stdout, "TEST signal handler www service irq %i\n", p0);
+//??    fwprintf(stdout, L"TEST signal handler www service irq %i\n", p0);
 
             pthread_exit(*NULL_POINTER);
 
@@ -125,11 +125,11 @@ void interrupt_service_system_signal_handler(int p0) {
 
     if (t == *CYBOI_SERVICE_THREAD) {
 
-//??    fprintf(stdout, "TEST signal handler cyboi service %i\n", p0);
+//??    fwprintf(stdout, L"TEST signal handler cyboi service %i\n", p0);
 
         if (*CYBOI_SERVICE_EXIT != *NUMBER_0_INTEGER) {
 
-//??    fprintf(stdout, "TEST signal handler cyboi service irq %i\n", p0);
+//??    fwprintf(stdout, L"TEST signal handler cyboi service irq %i\n", p0);
 
             pthread_exit(*NULL_POINTER);
 
@@ -154,7 +154,7 @@ void interrupt_service_system_signal_handler(int p0) {
  */
 void startup_system_signal_handler() {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Startup system signal handler.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Startup system signal handler.");
 
     // The signal set (mask).
     sigset_t mask;

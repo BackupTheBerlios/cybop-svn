@@ -1,7 +1,7 @@
 /*
  * $RCSfile: manager.c,v $
  *
- * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.45 $ $Date: 2008-03-29 19:22:51 $ $Author: christian $
+ * @version $Revision: 1.46 $ $Date: 2008-05-04 00:18:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -64,8 +64,8 @@
  */
 void manage(void* p0, void* p1) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "\n\n");
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Manage system.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"\n\n");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Manage system.");
 
     //
     // Variable declaration.

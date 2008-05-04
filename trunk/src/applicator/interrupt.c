@@ -1,7 +1,7 @@
 /*
  * $RCSfile: interrupt.c,v $
  *
- * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.22 $ $Date: 2007-12-28 19:25:54 $ $Author: christian $
+ * @version $Revision: 1.23 $ $Date: 2008-05-04 00:18:09 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -66,7 +66,7 @@ void interrupt_thread(void* p0, void* p1) {
 
             pthread_t* t = (pthread_t*) p0;
 
-            log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Interrupt thread.");
+            log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Interrupt thread.");
 
             if (*t != *NUMBER_MINUS_1_INTEGER) {
 
@@ -101,17 +101,17 @@ void interrupt_thread(void* p0, void* p1) {
 
             } else {
 
-                log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) "Could not interrupt thread. The service thread is invalid.");
+                log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) L"Could not interrupt thread. The service thread is invalid.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not interrupt thread. The service thread is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not interrupt thread. The service thread is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not interrupt thread. The service thread interrupt is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not interrupt thread. The service thread interrupt is null.");
     }
 }
 
@@ -129,7 +129,7 @@ void interrupt_thread(void* p0, void* p1) {
  */
 void interrupt_service(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Interrupt service.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Interrupt service.");
 
     // The service name, abstraction, model, details.
     void** sn = NULL_POINTER;
@@ -199,7 +199,7 @@ void interrupt_service(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (r == *NUMBER_0_INTEGER) {
 
-        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) "Could not interrupt service. The service model is unknown.");
+        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) L"Could not interrupt service. The service model is unknown.");
     }
 }
 

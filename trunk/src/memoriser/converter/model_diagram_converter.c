@@ -1,7 +1,7 @@
 /*
  * $RCSfile: model_diagram_converter.c,v $
  *
- * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.12 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2008-05-04 00:18:14 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -73,7 +73,7 @@ void encode_model_diagram_node(void* p0, void* p1, void* p2, void* p3, void* p4,
  */
 void decode_model_diagram(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Decode model diagram.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Decode model diagram.");
 }
 
 /**
@@ -95,7 +95,7 @@ void encode_model_diagram_indentation(void* p0, void* p1, void* p2, void* p3, vo
 
             int* l = (int*) p3;
 
-            log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Encode model diagram indentation.");
+            log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Encode model diagram indentation.");
 
             // The loop variable.
             int j = *NUMBER_0_INTEGER;
@@ -151,12 +151,12 @@ void encode_model_diagram_indentation(void* p0, void* p1, void* p2, void* p3, vo
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode model diagram indentation. The tree level is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode model diagram indentation. The tree level is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode model diagram indentation. The details flag is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode model diagram indentation. The details flag is null.");
     }
 }
 
@@ -181,7 +181,7 @@ void encode_model_diagram_compound(void* p0, void* p1, void* p2, void* p3, void*
 
             int* sc = (int*) p4;
 
-            log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Encode model diagram compound.");
+            log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Encode model diagram compound.");
 
             // The loop variable.
             int j = *NUMBER_0_INTEGER;
@@ -234,12 +234,12 @@ void encode_model_diagram_compound(void* p0, void* p1, void* p2, void* p3, void*
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode model diagram compound. The source count is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode model diagram compound. The source count is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode model diagram compound. The tree level is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode model diagram compound. The tree level is null.");
     }
 }
 
@@ -270,7 +270,7 @@ void encode_model_diagram_node(void* p0, void* p1, void* p2, void* p3, void* p4,
 
             int* mc = (int*) p8;
 
-            log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Encode model diagram node.");
+            log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Encode model diagram node.");
 
             // Add indentation.
             encode_model_diagram_indentation(p0, p1, p2, p11, p12);
@@ -415,12 +415,12 @@ void encode_model_diagram_node(void* p0, void* p1, void* p2, void* p3, void* p4,
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode model diagram node. The model count is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode model diagram node. The model count is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode model diagram node. The details count is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode model diagram node. The details count is null.");
     }
 }
 
@@ -444,7 +444,7 @@ void encode_model_diagram_node(void* p0, void* p1, void* p2, void* p3, void* p4,
  */
 void encode_model_diagram(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Encode model diagram.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Encode model diagram.");
 
     // The tree level.
     int l = *NUMBER_0_INTEGER;

@@ -1,7 +1,7 @@
 /*
  * $RCSfile: url_escape_code_converter.c,v $
  *
- * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2007-10-23 17:37:45 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2008-05-04 00:18:14 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -40,7 +40,7 @@
 
 //
 // RFC 3986 does not determine which character set to use for decoding
-// non-ASCII characters (e.g. Umlauts like ä, ö, ü). Since a two-digit
+// non-ASCII characters (e.g. Umlauts like ï¿½, ï¿½, ï¿½). Since a two-digit
 // hexadecimal number (which corresponds to eight Bit) is used for url
 // encoding, it would be theoretically possible to use an 8 Bit character
 // set (e.g. ISO-8859-1 for Umlauts).
@@ -370,17 +370,17 @@ void decode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode url escape code. The destination is null.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode url escape code. The destination is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode url escape code. The destination count is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode url escape code. The destination count is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode url escape code. The destination size is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode url escape code. The destination size is null.");
     }
 }
 
@@ -702,17 +702,17 @@ void encode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode url escape code. The destination is null.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode url escape code. The destination is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode url escape code. The destination count is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode url escape code. The destination count is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode url escape code. The destination size is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode url escape code. The destination size is null.");
     }
 }
 

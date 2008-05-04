@@ -1,7 +1,7 @@
 /*
  * $RCSfile: http_request_converter.c,v $
  *
- * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.12 $ $Date: 2007-12-01 23:57:42 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2008-05-04 00:18:14 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -100,14 +100,14 @@ void decode_http_request_set_parameter(void* p0, void* p1, void* p2, void* p3, v
         // CAUTION! Do NOT use "d" as name, as it is used for "details" below.
         void** dest = (void**) p0;
 
-        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Decode http request set parameter.");
+        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Decode http request set parameter.");
 
         //
         // Setting of parameter.
         //
 
-    fprintf(stderr, "TEST http request parameter dest: %i \n", *dest);
-    fprintf(stderr, "TEST http request parameter destc: %i \n", *((int*) p1));
+    fwprintf(stderr, L"TEST http request parameter dest: %i \n", *dest);
+    fwprintf(stderr, L"TEST http request parameter destc: %i \n", *((int*) p1));
 
         // The parameter name, abstraction, model, details.
         void** n = NULL_POINTER;
@@ -123,8 +123,8 @@ void decode_http_request_set_parameter(void* p0, void* p1, void* p2, void* p3, v
         void** dc = NULL_POINTER;
         void** ds = NULL_POINTER;
 
-    fprintf(stderr, "TEST http request parameter pn: %s \n", (char*) p3);
-    fprintf(stderr, "TEST http request parameter pnc: %i \n", *((int*) p4));
+    fwprintf(stderr, L"TEST http request parameter pn: %s \n", (char*) p3);
+    fwprintf(stderr, L"TEST http request parameter pnc: %i \n", *((int*) p4));
 
         // Get parameter from model, using its key as name.
         get_universal_compound_element_by_name(*dest, p1,
@@ -136,12 +136,12 @@ void decode_http_request_set_parameter(void* p0, void* p1, void* p2, void* p3, v
             p7, p8);
 
 /*??
-    fprintf(stderr, "TEST http request parameter nc: %i \n", **((int**) nc));
-    fprintf(stderr, "TEST http request parameter n: %s \n", (char*) *n);
-    fprintf(stderr, "TEST http request parameter ac: %i \n", **((int**) ac));
-    fprintf(stderr, "TEST http request parameter a: %s \n", (char*) *a);
-    fprintf(stderr, "TEST http request parameter mc: %i \n", **((int**) mc));
-    fprintf(stderr, "TEST http request parameter m: %s \n", (char*) *m);
+    fwprintf(stderr, L"TEST http request parameter nc: %i \n", **((int**) nc));
+    fwprintf(stderr, L"TEST http request parameter n: %s \n", (char*) *n);
+    fwprintf(stderr, L"TEST http request parameter ac: %i \n", **((int**) ac));
+    fwprintf(stderr, L"TEST http request parameter a: %s \n", (char*) *a);
+    fwprintf(stderr, L"TEST http request parameter mc: %i \n", **((int**) mc));
+    fwprintf(stderr, L"TEST http request parameter m: %s \n", (char*) *m);
 */
 
         // Decode and set parameter value according to given abstraction.
@@ -149,7 +149,7 @@ void decode_http_request_set_parameter(void* p0, void* p1, void* p2, void* p3, v
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode http request set parameter. The destination model is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode http request set parameter. The destination model is null.");
     }
 }
 
@@ -176,7 +176,7 @@ void decode_http_request_parameter(void* p0, void* p1, void* p2, void* p3, void*
 
         int* sc = (int*) p4;
 
-        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Decode http request parameter.");
+        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Decode http request parameter.");
 
         // The source index.
         // CAUTION! A local variable is used instead of the parameter
@@ -218,8 +218,8 @@ void decode_http_request_parameter(void* p0, void* p1, void* p2, void* p3, void*
             ic = *NUMBER_0_INTEGER;
         }
 
-    fprintf(stderr, "TEST http request parameter k: %s \n", (char*) k);
-    fprintf(stderr, "TEST http request parameter kc: %i \n", kc);
+    fwprintf(stderr, L"TEST http request parameter k: %s \n", (char*) k);
+    fwprintf(stderr, L"TEST http request parameter kc: %i \n", kc);
 
         //
         // Value.
@@ -231,15 +231,15 @@ void decode_http_request_parameter(void* p0, void* p1, void* p2, void* p3, void*
 
         // No further separators have to be found.
 
-    fprintf(stderr, "TEST http request parameter v: %s \n", (char*) v);
-    fprintf(stderr, "TEST http request parameter vc: %i \n", vc);
+    fwprintf(stderr, L"TEST http request parameter v: %s \n", (char*) v);
+    fwprintf(stderr, L"TEST http request parameter vc: %i \n", vc);
 
         // Sets the value of the parameter with the given key, within the compound.
         decode_http_request_set_parameter(p0, p1, p2, k, (void*) &kc, v, (void*) &vc, p5, p6);
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode http request parameter. The source parameter count is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode http request parameter. The source parameter count is null.");
     }
 }
 
@@ -265,7 +265,7 @@ void decode_http_request_parameters(void* p0, void* p1, void* p2, void* p3, void
 
         int* sc = (int*) p4;
 
-        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Decode http request parameters.");
+        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Decode http request parameters.");
 
         // The source index.
         // CAUTION! A local variable is used instead of the parameter
@@ -315,13 +315,13 @@ void decode_http_request_parameters(void* p0, void* p1, void* p2, void* p3, void
                 break;
             }
 
-    fprintf(stderr, "TEST http request parameters p: %s \n", (char*) p);
-    fprintf(stderr, "TEST http request parameters pc: %i \n", pc);
+    fwprintf(stderr, L"TEST http request parameters p: %s \n", (char*) p);
+    fwprintf(stderr, L"TEST http request parameters pc: %i \n", pc);
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode http request parameters. The source parameters count is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode http request parameters. The source parameters count is null.");
     }
 }
 
@@ -352,7 +352,7 @@ void decode_http_request_method(void* p0, void* p1, void* p2, void* p3, void* p4
 
         void** d = (void**) p0;
 
-        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Decode http request method.");
+        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Decode http request method.");
 
         // The comparison result.
         int r = *NUMBER_0_INTEGER;
@@ -545,12 +545,12 @@ void decode_http_request_method(void* p0, void* p1, void* p2, void* p3, void* p4
 
         if (r == *NUMBER_0_INTEGER) {
 
-            log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) "Could not decode http request method. The source request method is unknown.");
+            log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) L"Could not decode http request method. The source request method is unknown.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode http request method. The destination model is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode http request method. The destination model is null.");
     }
 }
 
@@ -573,7 +573,7 @@ void decode_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p4
 
         int* sc = (int*) p4;
 
-        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Decode http request header.");
+        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Decode http request header.");
 
         // The source index.
         // CAUTION! A local variable is used instead of the parameter
@@ -615,8 +615,8 @@ void decode_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p4
             ic = *NUMBER_0_INTEGER;
         }
 
-    fprintf(stderr, "TEST http request header a: %s \n", (char*) a);
-    fprintf(stderr, "TEST http request header ac: %i \n", ac);
+    fwprintf(stderr, L"TEST http request header a: %s \n", (char*) a);
+    fwprintf(stderr, L"TEST http request header ac: %i \n", ac);
 
         //
         // Value.
@@ -627,12 +627,12 @@ void decode_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p4
         int vc = ic;
         // No further separators have to be found.
 
-    fprintf(stderr, "TEST http request header v: %s \n", (char*) v);
-    fprintf(stderr, "TEST http request header vc: %i \n", vc);
+    fwprintf(stderr, L"TEST http request header v: %s \n", (char*) v);
+    fwprintf(stderr, L"TEST http request header vc: %i \n", vc);
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode http request header. The source http request count is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode http request header. The source http request count is null.");
     }
 }
 
@@ -657,7 +657,7 @@ void decode_http_request_headers(void* p0, void* p1, void* p2, void* p3, void* p
 
         int* sc = (int*) p4;
 
-        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Decode http request headers.");
+        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Decode http request headers.");
 
         // The source index.
         // CAUTION! A local variable is used instead of the parameter
@@ -707,14 +707,14 @@ void decode_http_request_headers(void* p0, void* p1, void* p2, void* p3, void* p
                 break;
             }
 
-    fprintf(stderr, "TEST http request headers h: %s \n", (char*) h);
-    fprintf(stderr, "TEST http request headers hc: %i \n", hc);
+    fwprintf(stderr, L"TEST http request headers h: %s \n", (char*) h);
+    fwprintf(stderr, L"TEST http request headers hc: %i \n", hc);
 
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode http request headers. The source http request count is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode http request headers. The source http request count is null.");
     }
 }
 
@@ -802,7 +802,7 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
 
         int* sc = (int*) p4;
 
-        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Decode uniform resource identifier.");
+        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Decode uniform resource identifier.");
 
         // The source index.
         // CAUTION! A local variable is used instead of the parameter
@@ -848,8 +848,8 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
             schc = *NUMBER_0_INTEGER;
         }
 
-    fprintf(stderr, "TEST http request uri sch: %s \n", (char*) sch);
-    fprintf(stderr, "TEST http request uri schc: %i \n", schc);
+    fwprintf(stderr, L"TEST http request uri sch: %s \n", (char*) sch);
+    fwprintf(stderr, L"TEST http request uri schc: %i \n", schc);
 
         //
         // Authority.
@@ -951,8 +951,8 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
             }
         }
 
-    fprintf(stderr, "TEST http request uri a: %s \n", (char*) a);
-    fprintf(stderr, "TEST http request uri ac: %i \n", ac);
+    fwprintf(stderr, L"TEST http request uri a: %s \n", (char*) a);
+    fwprintf(stderr, L"TEST http request uri ac: %i \n", ac);
 
         //
         // Path.
@@ -1032,8 +1032,8 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
             }
         }
 
-    fprintf(stderr, "TEST http request uri p: %s \n", (char*) p);
-    fprintf(stderr, "TEST http request uri pc: %i \n", pc);
+    fwprintf(stderr, L"TEST http request uri p: %s \n", (char*) p);
+    fwprintf(stderr, L"TEST http request uri pc: %i \n", pc);
 
         //
         // Query.
@@ -1045,7 +1045,7 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
         // Reset separator index.
         sep = *NUMBER_MINUS_1_INTEGER;
 
-    fprintf(stderr, "TEST http request uri qc 0: %i \n", qc);
+    fwprintf(stderr, L"TEST http request uri qc 0: %i \n", qc);
 
         // Get separator index.
         get_array_elements_index(i, (void*) &ic, (void*) URI_QUERY_SEPARATOR, (void*) URI_QUERY_SEPARATOR_COUNT, (void*) &sep, (void*) CHARACTER_ARRAY);
@@ -1059,7 +1059,7 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
             q = i + sep + *URI_QUERY_SEPARATOR_COUNT;
             qc = ic - sep - *URI_QUERY_SEPARATOR_COUNT;
 
-    fprintf(stderr, "TEST http request uri qc 1: %i \n", qc);
+    fwprintf(stderr, L"TEST http request uri qc 1: %i \n", qc);
 
             // Set new source index.
             i = i + sep + *URI_QUERY_SEPARATOR_COUNT;
@@ -1079,7 +1079,7 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
                 // Set new count.
                 qc = sep;
 
-    fprintf(stderr, "TEST http request uri qc 2: %i \n", qc);
+    fwprintf(stderr, L"TEST http request uri qc 2: %i \n", qc);
 
                 // Set new source index.
                 //
@@ -1094,7 +1094,7 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
                 // No separator was found.
                 // The remaining source is assumed to contain no further parts.
 
-    fprintf(stderr, "TEST http request uri qc 3: %i \n", qc);
+    fwprintf(stderr, L"TEST http request uri qc 3: %i \n", qc);
 
                 // Set source index to null.
                 i = *NULL_POINTER;
@@ -1102,8 +1102,8 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
             }
         }
 
-    fprintf(stderr, "TEST http request uri q: %s \n", (char*) q);
-    fprintf(stderr, "TEST http request uri qc: %i \n", qc);
+    fwprintf(stderr, L"TEST http request uri q: %s \n", (char*) q);
+    fwprintf(stderr, L"TEST http request uri qc: %i \n", qc);
 
         //
         // Fragment.
@@ -1128,8 +1128,8 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
             fc = ic - sep - *URI_FRAGMENT_SEPARATOR_COUNT;
         }
 
-    fprintf(stderr, "TEST http request uri f: %s \n", (char*) f);
-    fprintf(stderr, "TEST http request uri fc: %i \n", fc);
+    fwprintf(stderr, L"TEST http request uri f: %s \n", (char*) f);
+    fwprintf(stderr, L"TEST http request uri fc: %i \n", fc);
 
         // Set the scheme value within the compound.
         decode_http_request_set_parameter(p0, p1, p2, (void*) SENSE_MODEL_SCHEME_NAME, (void*) SENSE_MODEL_SCHEME_NAME_COUNT, sch, (void*) &schc, p5, p6);
@@ -1148,7 +1148,7 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode uniform resource identifier. The source uniform resource identifier count is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode uniform resource identifier. The source uniform resource identifier count is null.");
     }
 }
 
@@ -1181,7 +1181,7 @@ void decode_http_request_line(void* p0, void* p1, void* p2, void* p3, void* p4, 
 
         int* sc = (int*) p11;
 
-        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Decode http request request line.");
+        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Decode http request request line.");
 
         // The source index.
         // CAUTION! A local variable is used instead of the parameter
@@ -1223,8 +1223,8 @@ void decode_http_request_line(void* p0, void* p1, void* p2, void* p3, void* p4, 
             ic = *NUMBER_0_INTEGER;
         }
 
-    fprintf(stderr, "TEST http request line rm: %s \n", (char*) rm);
-    fprintf(stderr, "TEST http request line rmc: %i \n", rmc);
+    fwprintf(stderr, L"TEST http request line rm: %s \n", (char*) rm);
+    fwprintf(stderr, L"TEST http request line rmc: %i \n", rmc);
 
         //
         // Uniform resource identifier.
@@ -1258,8 +1258,8 @@ void decode_http_request_line(void* p0, void* p1, void* p2, void* p3, void* p4, 
             ic = *NUMBER_0_INTEGER;
         }
 
-    fprintf(stderr, "TEST http request line uri: %s \n", (char*) uri);
-    fprintf(stderr, "TEST http request line uric: %i \n", uric);
+    fwprintf(stderr, L"TEST http request line uri: %s \n", (char*) uri);
+    fwprintf(stderr, L"TEST http request line uric: %i \n", uric);
 
         //
         // Protocol version.
@@ -1270,8 +1270,8 @@ void decode_http_request_line(void* p0, void* p1, void* p2, void* p3, void* p4, 
         int pvc = ic;
         // No further separators have to be found.
 
-    fprintf(stderr, "TEST http request line pv: %s \n", (char*) pv);
-    fprintf(stderr, "TEST http request line pvc: %i \n", pvc);
+    fwprintf(stderr, L"TEST http request line pv: %s \n", (char*) pv);
+    fwprintf(stderr, L"TEST http request line pvc: %i \n", pvc);
 
         // CAUTION! Do NOT move the function calls below to any other function!
         // The reason is that the http protocol version was decoded here so that
@@ -1297,12 +1297,12 @@ void decode_http_request_line(void* p0, void* p1, void* p2, void* p3, void* p4, 
         // The uri's parts are set as parameters in the destination compound model.
         decode_http_request_uri(p0, p1, p2, uri, (void*) &uric, p12, p13);
 
-    fprintf(stderr, "TEST http request line END i: %s \n", (char*) uri);
-    fprintf(stderr, "TEST http request line END ic: %i \n", uric);
+    fwprintf(stderr, L"TEST http request line END i: %s \n", (char*) uri);
+    fwprintf(stderr, L"TEST http request line END ic: %i \n", uric);
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode http request request line. The source http request count is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode http request request line. The source http request count is null.");
     }
 }
 
@@ -1360,14 +1360,14 @@ void decode_http_request(void* p0, void* p1, void* p2, void* p3, void* p4, void*
 
         int* sc = (int*) p7;
 
-        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Decode http request.");
+        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Decode http request.");
 
-    fprintf(stderr, "TEST http request mc p1: %i \n", *((int*) p1));
-    fprintf(stderr, "TEST http request dc p4: %i \n", *((int*) p4));
-    fprintf(stderr, "TEST http request sc p7: %i \n", *((int*) p7));
-    fprintf(stderr, "TEST http request kmc p9: %i \n", *((int*) p9));
+    fwprintf(stderr, L"TEST http request mc p1: %i \n", *((int*) p1));
+    fwprintf(stderr, L"TEST http request dc p4: %i \n", *((int*) p4));
+    fwprintf(stderr, L"TEST http request sc p7: %i \n", *((int*) p7));
+    fwprintf(stderr, L"TEST http request kmc p9: %i \n", *((int*) p9));
 
-    fprintf(stderr, "TEST http request s p6: %s \n", (char*) p6);
+    fwprintf(stderr, L"TEST http request s p6: %s \n", (char*) p6);
 
         // The source index.
         // CAUTION! A local variable is used instead of the parameter
@@ -1409,8 +1409,8 @@ void decode_http_request(void* p0, void* p1, void* p2, void* p3, void* p4, void*
             ic = *NUMBER_0_INTEGER;
         }
 
-    fprintf(stderr, "TEST http request rl: %s \n", (char*) rl);
-    fprintf(stderr, "TEST http request rlc: %i \n", rlc);
+    fwprintf(stderr, L"TEST http request rl: %s \n", (char*) rl);
+    fwprintf(stderr, L"TEST http request rlc: %i \n", rlc);
 
         //
         // Headers.
@@ -1444,8 +1444,8 @@ void decode_http_request(void* p0, void* p1, void* p2, void* p3, void* p4, void*
             ic = *NUMBER_0_INTEGER;
         }
 
-    fprintf(stderr, "TEST http request h: %s \n", (char*) h);
-    fprintf(stderr, "TEST http request hc: %i \n", hc);
+    fwprintf(stderr, L"TEST http request h: %s \n", (char*) h);
+    fwprintf(stderr, L"TEST http request hc: %i \n", hc);
 
         //
         // Body.
@@ -1471,18 +1471,18 @@ void decode_http_request(void* p0, void* p1, void* p2, void* p3, void* p4, void*
             // The remaining source is assumed to contain no further parts.
         }
 
-    fprintf(stderr, "TEST http request b: %s \n", (char*) b);
-    fprintf(stderr, "TEST http request bc: %i \n", bc);
+    fwprintf(stderr, L"TEST http request b: %s \n", (char*) b);
+    fwprintf(stderr, L"TEST http request bc: %i \n", bc);
 
         // Decode request line containing request method, uniform resource identifier and protocol version.
         decode_http_request_line(p0, p1, p2, p3, p4, p5, b, (void*) &bc, h, (void*) &hc, rl, (void*) &rlc, p8, p9);
 
-    fprintf(stderr, "TEST http request END i: %s \n", (char*) i);
-    fprintf(stderr, "TEST http request END ic: %i \n", ic);
+    fwprintf(stderr, L"TEST http request END i: %s \n", (char*) i);
+    fwprintf(stderr, L"TEST http request END ic: %i \n", ic);
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode http request. The source http request count is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode http request. The source http request count is null.");
     }
 }
 
@@ -1504,7 +1504,7 @@ void decode_http_request(void* p0, void* p1, void* p2, void* p3, void* p4, void*
 void encode_http_request(void* p0, void* p1, void* p2, void* p3, void* p4,
     void* p5, void* p6, void* p7, void* p8, void* p9, void* p10) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Encode http request.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Encode http request.");
 }
 
 /* HTTP_REQUEST_CONVERTER_SOURCE */

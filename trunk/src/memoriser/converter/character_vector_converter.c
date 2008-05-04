@@ -1,7 +1,7 @@
 /*
  * $RCSfile: character_vector_converter.c,v $
  *
- * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.12 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2008-05-04 00:18:14 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -64,7 +64,7 @@ void decode_character_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                     if (*dc >= *NUMBER_0_INTEGER) {
 
-                        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Decode character vector.");
+                        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Decode character vector.");
 
                         // The new destination character vector size.
                         // (Not exactly the size, but the destination character vector index
@@ -91,32 +91,32 @@ void decode_character_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                         } else {
 
-                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode character vector. The destination count exceeds the size.");
+                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode character vector. The destination count exceeds the size.");
                         }
 
                     } else {
 
-                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode character vector. The destination count is negative.");
+                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode character vector. The destination count is negative.");
                     }
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode character vector. The destination is null.");
+                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode character vector. The destination is null.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode character vector. The destination count is null.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode character vector. The destination count is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode character vector. The destination size is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode character vector. The destination size is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode character vector. The source count is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode character vector. The source count is null.");
     }
 }
 
@@ -147,7 +147,7 @@ void encode_character_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                     void** d = (void**) p0;
 
-                    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Encode character vector.");
+                    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Encode character vector.");
 
                     if ((*dc + *sc) >= *ds) {
 
@@ -167,22 +167,22 @@ void encode_character_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode character vector. The destination is null.");
+                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode character vector. The destination is null.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode character vector. The destination count is null.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode character vector. The destination count is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode character vector. The destination size is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode character vector. The destination size is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode character vector. The source count is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode character vector. The source count is null.");
     }
 }
 

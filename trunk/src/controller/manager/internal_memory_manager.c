@@ -1,7 +1,7 @@
 /*
  * $RCSfile: internal_memory_manager.c,v $
  *
- * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.19 $ $Date: 2008-03-29 19:22:51 $ $Author: christian $
+ * @version $Revision: 1.20 $ $Date: 2008-05-04 00:18:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -82,8 +82,8 @@ void startup_internal_memory(void* p0, void* p1, void* p2, void* p3, void* p4, v
     void* p13, void* p14, void* p15, void* p16, void* p17, void* p18,
     void* p19, void* p20, void* p21) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "\n\n");
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Startup internal memory.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"\n\n");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Startup internal memory.");
 
     //
     // Initialise all values with null.

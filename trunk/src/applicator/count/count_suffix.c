@@ -1,7 +1,7 @@
 /*
  * $RCSfile: count_suffix.c,v $
  *
- * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2007-10-03 23:40:05 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2008-05-04 00:18:10 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -61,25 +61,25 @@ void count_suffix(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
 
             void** r = (void**) p0;
 
-            log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Count all compound parts.");
+            log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Count all compound parts.");
 
             // Set result to compound count value.
             // A loop is not needed here, since the compound count already contains
             // the number of parts within that compound.
             set_element(*r, NUMBER_0_INTEGER, (void*) &p4, INTEGER_ABSTRACTION, INTEGER_ABSTRACTION_COUNT);
 
-    fprintf(stderr, "TEST r: %i\n", **r);
-    fprintf(stderr, "TEST rc: %i\n", *((int*) rc));
-    fprintf(stderr, "TEST cc: %i\n", *cc);
+    fwprintf(stderr, L"TEST r: %i\n", **r);
+    fwprintf(stderr, L"TEST rc: %i\n", *((int*) rc));
+    fwprintf(stderr, L"TEST cc: %i\n", *cc);
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not count all compound parts. The result is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not count all compound parts. The result is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not count all compound parts. The compound count is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not count all compound parts. The compound count is null.");
     }
 */
 

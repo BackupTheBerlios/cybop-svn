@@ -1,7 +1,7 @@
 /*
  * $RCSfile: date_time_allocator.c,v $
  *
- * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2008-05-04 00:18:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -49,7 +49,7 @@
  */
 void allocate_date_time(void* p0, void* p1) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Allocate date time.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Allocate date time.");
 
     allocate_array(p0, p1, (void*) INTEGER_ARRAY);
 }
@@ -62,7 +62,7 @@ void allocate_date_time(void* p0, void* p1) {
  */
 void deallocate_date_time(void* p0, void* p1) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Deallocate date time.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Deallocate date time.");
 
     deallocate_array(p0, p1, (void*) INTEGER_ARRAY);
 }

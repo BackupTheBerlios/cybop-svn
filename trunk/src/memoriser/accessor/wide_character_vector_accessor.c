@@ -1,7 +1,7 @@
 /*
  * $RCSfile: wide_character_vector_accessor.c,v $
  *
- * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2008-05-04 00:18:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -43,7 +43,7 @@
  */
 void set_wide_character_vector_element(void* p0, void* p1, void* p2) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Set wide character vector element.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Set wide character vector element.");
 
     set_array_elements(p0, p1, p2, (void*) NUMBER_1_INTEGER, (void*) WIDE_CHARACTER_ARRAY);
 }
@@ -57,7 +57,7 @@ void set_wide_character_vector_element(void* p0, void* p1, void* p2) {
  */
 void remove_wide_character_vector_element(void* p0, void* p1, void* p2) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Remove wide character vector element.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Remove wide character vector element.");
 
     remove_array_elements(p0, p1, p2, (void*) NUMBER_1_INTEGER, (void*) WIDE_CHARACTER_ARRAY);
 }
@@ -71,7 +71,7 @@ void remove_wide_character_vector_element(void* p0, void* p1, void* p2) {
  */
 void get_wide_character_vector_element(void* p0, void* p1, void* p2) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Get wide character vector element.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Get wide character vector element.");
 
     get_array_elements(p0, p1, p2, (void*) WIDE_CHARACTER_ARRAY);
 }

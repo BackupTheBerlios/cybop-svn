@@ -1,7 +1,7 @@
 /*
  * $RCSfile: integer_vector_converter.c,v $
  *
- * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.29 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
+ * @version $Revision: 1.30 $ $Date: 2008-05-04 00:18:14 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -79,7 +79,7 @@ void decode_integer_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                     void** d = (void**) p0;
 
-                    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Decode integer vector.");
+                    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Decode integer vector.");
 
                     // CAUTION! This check is necessary since otherwise,
                     // the array border gets crossed and a comma might be found
@@ -167,27 +167,27 @@ void decode_integer_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                     } else {
 
-                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode integer vector. The source count is zero.");
+                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode integer vector. The source count is zero.");
                     }
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode integer vector. The destination is null.");
+                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode integer vector. The destination is null.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode integer vector. The destination count is null.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode integer vector. The destination count is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode integer vector. The destination size is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode integer vector. The destination size is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not decode integer vector. The source count is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode integer vector. The source count is null.");
     }
 }
 
@@ -223,7 +223,7 @@ void encode_integer_vector_elements(void* p0, void* p1, void* p2, void* p3, void
 
                         void** d = (void**) p0;
 
-                        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Encode integer vector elements.");
+                        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Encode integer vector elements.");
 
                         // The integer.
                         void* i = *NULL_POINTER;
@@ -283,32 +283,32 @@ void encode_integer_vector_elements(void* p0, void* p1, void* p2, void* p3, void
 
                         } else {
 
-                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode integer vector elements. The source count is zero.");
+                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode integer vector elements. The source count is zero.");
                         }
 
                     } else {
 
-                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode integer vector elements. The destination is null.");
+                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode integer vector elements. The destination is null.");
                     }
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode integer vector elements. The destination count is null.");
+                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode integer vector elements. The destination count is null.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode integer vector elements. The destination size is null.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode integer vector elements. The destination size is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode integer vector elements. The source count is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode integer vector elements. The source count is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not encode integer vector elements. The iteration count is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode integer vector elements. The iteration count is null.");
     }
 }
 
@@ -323,7 +323,7 @@ void encode_integer_vector_elements(void* p0, void* p1, void* p2, void* p3, void
  */
 void encode_integer_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Encode integer vector.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Encode integer vector.");
 
     // The iteration count.
     int i = *NUMBER_0_INTEGER;

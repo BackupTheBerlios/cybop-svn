@@ -1,7 +1,7 @@
 /*
  * $RCSfile: activate_tcp_socket.c,v $
  *
- * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.17 $ $Date: 2007-10-23 17:37:45 $ $Author: christian $
+ * @version $Revision: 1.18 $ $Date: 2008-05-04 00:18:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -52,7 +52,7 @@ void activate_tcp_socket( void* internals, void* know, void* know_count, void* k
     void* socket_port_abstr, void* socket_port_abstr_count,
     void* socket_port_model, void* socket_port_model_count) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Startup tcp socket.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Startup tcp socket.");
 
     if (internals != *NULL_POINTER) {
 
@@ -69,7 +69,7 @@ void activate_tcp_socket( void* internals, void* know, void* know_count, void* k
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not activate tcp server socket. The internal is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not activate tcp server socket. The internal is null.");
     }
 }
 

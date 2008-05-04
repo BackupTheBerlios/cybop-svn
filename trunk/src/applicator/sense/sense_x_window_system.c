@@ -1,7 +1,7 @@
 /*
  * $RCSfile: sense_x_window_system.c,v $
  *
- * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2008-04-23 22:47:59 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2008-05-04 00:18:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -127,7 +127,7 @@ void sense_x_window_system_message(void* p0, void* p1, void* p2, void* p3) {
 
                     int* irq = (int*) p0;
 
-                    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) "Sense x window system message.");
+                    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Sense x window system message.");
 
                     // CAUTION! Do NOT use the following statement directly here:
                     // while (XEventsQueued(*d, QueuedAfterReading) == 0) { ...}
@@ -177,22 +177,22 @@ void sense_x_window_system_message(void* p0, void* p1, void* p2, void* p3) {
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not sense x window system message. The interrupt is null.");
+                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not sense x window system message. The interrupt is null.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not sense x window system message. The mutex is null.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not sense x window system message. The mutex is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not sense x window system message. The sleep time is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not sense x window system message. The sleep time is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not sense x window system message. The display is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not sense x window system message. The display is null.");
     }
 }
 
@@ -203,7 +203,7 @@ void sense_x_window_system_message(void* p0, void* p1, void* p2, void* p3) {
  */
 void sense_x_window_system(void* p0) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Sense x window system.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Sense x window system.");
 
     // The interrupt.
     void** irq = NULL_POINTER;

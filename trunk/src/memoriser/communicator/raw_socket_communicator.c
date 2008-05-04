@@ -1,7 +1,7 @@
 /*
  * $RCSfile: raw_socket_communicator.c,v $
  *
- * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2007-12-01 23:57:42 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2008-05-04 00:18:14 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -49,8 +49,8 @@
  */
 void read_raw_socket(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Read from raw socket.");
-    log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) "The raw socket functionality is NOT implemented yet.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Read from raw socket.");
+    log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) L"The raw socket functionality is NOT implemented yet.");
 }
 
 /**
@@ -68,8 +68,8 @@ void read_raw_socket(void* p0, void* p1, void* p2, void* p3, void* p4) {
 void write_raw_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
 
     // Not implemented.
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Write to raw socket.");
-    log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) "The raw socket functionality is NOT implemented yet!");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Write to raw socket.");
+    log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) L"The raw socket functionality is NOT implemented yet!");
 }
 
 /* RAW_SOCKET_COMMUNICATOR_SOURCE */

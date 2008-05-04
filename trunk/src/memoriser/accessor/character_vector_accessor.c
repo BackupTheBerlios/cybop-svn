@@ -1,7 +1,7 @@
 /*
  * $RCSfile: character_vector_accessor.c,v $
  *
- * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2008-04-30 14:32:48 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2008-05-04 00:18:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -61,7 +61,7 @@ void set_character(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                     void** d = (void**) p0;
 
-                    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Set character.");
+                    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Set character.");
 
                     // CAUTION! The destination array needs to be resized not only
                     // if the source array is greater, but also if it is smaller!
@@ -91,22 +91,22 @@ void set_character(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not set character elements. The destination is null.");
+                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not set character elements. The destination is null.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not set character elements. The destination count is null.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not set character elements. The destination count is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not set character elements. The destination size is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not set character elements. The destination size is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) "Could not set character elements. The source count is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not set character elements. The source count is null.");
     }
 }
 
@@ -119,7 +119,7 @@ void set_character(void* p0, void* p1, void* p2, void* p3, void* p4) {
  */
 void set_character_vector_element(void* p0, void* p1, void* p2) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Set character vector element.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Set character vector element.");
 
     set_array_elements(p0, p1, p2, (void*) NUMBER_1_INTEGER, (void*) CHARACTER_ARRAY);
 }
@@ -133,7 +133,7 @@ void set_character_vector_element(void* p0, void* p1, void* p2) {
  */
 void remove_character_vector_element(void* p0, void* p1, void* p2) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Remove character vector element.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Remove character vector element.");
 
     remove_array_elements(p0, p1, p2, (void*) NUMBER_1_INTEGER, (void*) CHARACTER_ARRAY);
 }
@@ -147,7 +147,7 @@ void remove_character_vector_element(void* p0, void* p1, void* p2) {
  */
 void get_character_vector_element(void* p0, void* p1, void* p2) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Get character vector element.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Get character vector element.");
 
     get_array_elements(p0, p1, p2, (void*) CHARACTER_ARRAY);
 }

@@ -1,7 +1,7 @@
 /*
  * $RCSfile: shutdown_gnu_linux_console.c,v $
  *
- * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2007-12-01 23:57:41 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2008-05-04 00:18:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -50,7 +50,7 @@
  */
 void shutdown_gnu_linux_console(void* p0, void* p1, void* p2) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Shutdown gnu/linux console.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Shutdown gnu/linux console.");
 
     // The gnu/linux console input- and output stream internal.
     FILE** ipi = (FILE**) NULL_POINTER;
@@ -112,7 +112,7 @@ void shutdown_gnu_linux_console(void* p0, void* p1, void* p2) {
 
     } else {
 
-        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) "Could not shutdown gnu/linux console. There is no gnu/linux console running.");
+        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) L"Could not shutdown gnu/linux console. There is no gnu/linux console running.");
     }
 }
 

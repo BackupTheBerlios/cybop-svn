@@ -1,7 +1,7 @@
 /*
  * $RCSfile: cyboi.c,v $
  *
- * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,7 +25,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.29 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
+ * @version $Revision: 1.30 $ $Date: 2008-05-04 00:18:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -36,6 +36,7 @@
 #include "../controller/globaliser.c"
 #include "../controller/manager.c"
 #include "../controller/optionaliser.c"
+#include "../controller/orienter.c"
 #include "../controller/tester.c"
 #include "../globals/constants/cyboi/cyboi_identification_constants.c"
 #include "../globals/constants/cyboi/cyboi_operation_mode_constants.c"
@@ -76,10 +77,85 @@ int main(int p0, char** p1) {
 
     if (p1 != *NULL_POINTER) {
 
-        // fputs("Information: Execute cyboi.\n", stdout);
+        // fputws(L"Information: Execute cyboi.\n", stdout);
 
         // Startup global variables.
         globalise();
+
+        // Orient streams.
+        //
+        // CAUTION! This is important for internationalisation!
+        // A stream can be used either for wide operations or for normal operations.
+        // Once it is decided there is no way back.
+        // Only a call to freopen or freopen64 can reset the orientation.
+        //
+        // The orientation can be decided in three ways:
+        // * If any of the normal character functions is used (this includes the fread and fwrite functions) the stream is marked as not wide oriented.
+        // * If any of the wide character functions is used the stream is marked as wide oriented.
+        // * The fwide function can be used to set the orientation either way.
+        //
+        // It is important to never mix the use of wide and not wide operations on a stream.
+        // There are no diagnostics issued. The application behavior will simply be strange
+        // or the application will simply crash. The "fwide" function can help avoiding this.
+        //
+        // int function>fwide/function> (FILE *stream, int mode)
+        // The fwide function can be used to set and query the state of the orientation of the stream stream.
+        // If the mode parameter has a positive value the streams get wide oriented, for negative values narrow oriented.
+        // It is not possible to overwrite previous orientations with fwide.
+        // I.e., if the stream stream was already oriented before the call nothing is done.
+        //
+        // If mode is zero the current orientation state is queried and nothing is changed.
+        // The fwide function returns a negative value, zero, or a positive value if the stream is narrow, not at all, or wide oriented respectively.
+        // This function was introduced in Amendment 1 to ISO C90 and is declared in wchar.h.
+        //
+        // It is generally a good idea to orient a stream as early as possible.
+        // This can prevent surprise especially for the standard streams stdin, stdout, and stderr.
+        // If some library function in some situations uses one of these streams
+        // and this use orients the stream in a different way the rest of the
+        // application expects it one might end up with hard to reproduce errors.
+        // Remember that no errors are signal if the streams are used incorrectly.
+        // Leaving a stream unoriented after creation is normally only necessary for
+        // library functions which create streams which can be used in different contexts.
+        //
+        // When writing code which uses streams and which can be used in different contexts
+        // it is important to query the orientation of the stream before using it
+        // (unless the rules of the library interface demand a specific orientation).
+        // The following little, silly function illustrates this.
+        //
+        // void print_f (FILE *fp) {
+        //     if (fwide (fp, 0)  0)
+        //         /* Positive return value means wide orientation. */
+        //         fputwc (L'f', fp);
+        //     else
+        //         fputc ('f', fp);
+        // }
+        //
+        // Note that in this case the function print_f decides about
+        // the orientation of the stream if it was unoriented before
+        // (will not happen if the advise above is followed).
+        //
+        // The encoding used for the wchar_t values is unspecified
+        // and the user must not make any assumptions about it.
+        // For I/O of wchar_t values this means that it is impossible
+        // to write these values directly to the stream.
+        // This is not what follows from the ISO C locale model either.
+        // What happens instead is that the bytes read from or written
+        // to the underlying media are first converted into the internal
+        // encoding chosen by the implementation for wchar_t.
+        // The external encoding is determined by the LC_CTYPE category
+        // of the current locale or by the ccs part of the mode specification
+        // given to fopen, fopen64, freopen, or freopen64.
+        // How and when the conversion happens is unspecified and it happens invisible to the user.
+        //
+        // Since a stream is created in the unoriented state
+        // it has at that point no conversion associated with it.
+        // The conversion which will be used is determined by the
+        // LC_CTYPE category selected at the time the stream is oriented.
+        // If the locales are changed at the runtime this might
+        // produce surprising results unless one pays attention.
+        // This is just another good reason to orient the stream
+        // explicitly as soon as possible, perhaps with a call to fwide.
+        orient((void*) NUMBER_1_INTEGER);
 
         // The operation mode.
         //
@@ -95,9 +171,9 @@ int main(int p0, char** p1) {
         // Optionalise command line argument options.
         optionalise((void*) &m, (void*) &k, (void*) &kc, (void*) &LOG_LEVEL, (void*) &LOG_OUTPUT, (void*) p1, (void*) &p0);
 
-        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Run cyboi.");
-        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Globalised global variables already.");
-        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Optionalised log file already.");
+        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Run cyboi.");
+        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Globalised global variables already.");
+        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Optionalised log file already.");
 
         if (m == *VERSION_CYBOI_OPERATION_MODE) {
 
@@ -131,7 +207,7 @@ int main(int p0, char** p1) {
 
             } else {
 
-                fputs("Error: Could not execute cyboi in knowledge operation mode. A cybol file name needs to be given behind the '--knowledge' command line argument.\n", stdout);
+                fputws(L"Error: Could not execute cyboi in knowledge operation mode. A cybol file name needs to be given behind the '--knowledge' command line argument.\n", stdout);
 
                 // Write cyboi help message to standard output.
                 write(fileno(stdout), (void*) CYBOI_HELP, *CYBOI_HELP_COUNT);
@@ -139,9 +215,9 @@ int main(int p0, char** p1) {
             }
         }
 
-        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Deoptionalise log file yet.");
-        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Unglobalise global variables yet.");
-        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Exit cyboi normally afterwards.");
+        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Deoptionalise log file yet.");
+        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Unglobalise global variables yet.");
+        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Exit cyboi normally afterwards.");
 
         // Deoptionalise command line argument options.
         deoptionalise((void*) &LOG_OUTPUT);
@@ -149,14 +225,14 @@ int main(int p0, char** p1) {
         // Shutdown global variables.
         unglobalise();
 
-        // fputs("Information: Exit cyboi normally.\n", stdout);
+        // fputws(L"Information: Exit cyboi normally.\n", stdout);
 
         // Set return value to 0, to indicate proper shutdown.
         r = *NUMBER_0_INTEGER;
 
     } else {
 
-        fputs("Error: Could not execute cyboi. The command line argument vector is null.\n", stdout);
+        fputws(L"Error: Could not execute cyboi. The command line argument vector is null.\n", stdout);
     }
 
     return r;

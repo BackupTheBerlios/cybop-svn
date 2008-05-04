@@ -1,7 +1,7 @@
 /*
  * $RCSfile: complex_allocator.c,v $
  *
- * Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
+ * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,7 +23,7 @@
  * This file contains the functionality to:
  * - create a complex model in memory
  *
- * @version $Revision: 1.11 $ $Date: 2007-10-03 23:40:06 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2008-05-04 00:18:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -44,7 +44,7 @@
  */
 void allocate_complex(void* p0, void* p1) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Allocate complex.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Allocate complex.");
 
     // Create complex.
     allocate_array(p0, p1, (void*) DOUBLE_ARRAY);
@@ -58,7 +58,7 @@ void allocate_complex(void* p0, void* p1) {
  */
 void deallocate_complex(void* p0, void* p1) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) "Deallocate complex.");
+    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Deallocate complex.");
 
     // Destroy complex.
     deallocate_array(p0, p1, (void*) DOUBLE_ARRAY);
