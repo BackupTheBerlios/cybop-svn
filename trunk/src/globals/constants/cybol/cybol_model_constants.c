@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2008-05-04 00:18:12 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2008-05-04 22:34:39 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -608,9 +608,7 @@ static int* SQL_MODEL_COUNT = NUMBER_3_INTEGER_ARRAY;
 //
 
 /** The rectangle shape model. */
-static wchar_t UI_RECTANGLE_SHAPE_MODEL_ARRAY[] = {0x0072, 0x0065, 0x0063, 0x0074, 0x0061, 0x006E, 0x0067, 0x006C, 0x0065, 0x0000};
-//?? static wchar_t UI_RECTANGLE_SHAPE_MODEL_ARRAY[] = {L'r', L'e', L'c', L't', L'a', L'n', L'g', L'l', L'e', 0x0000};
-//?? static wchar_t UI_RECTANGLE_SHAPE_MODEL_ARRAY[] = {'r', 'e', 'c', 't', 'a', 'n', 'g', 'l', 'e'};
+static wchar_t UI_RECTANGLE_SHAPE_MODEL_ARRAY[] = {L'r', L'e', L'c', L't', L'a', L'n', L'g', L'l', L'e'};
 static wchar_t* UI_RECTANGLE_SHAPE_MODEL = UI_RECTANGLE_SHAPE_MODEL_ARRAY;
 static int* UI_RECTANGLE_SHAPE_MODEL_COUNT = NUMBER_9_INTEGER_ARRAY;
 

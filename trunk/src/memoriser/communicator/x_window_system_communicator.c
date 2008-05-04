@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.17 $ $Date: 2008-05-04 00:18:14 $ $Author: christian $
+ * @version $Revision: 1.18 $ $Date: 2008-05-04 22:34:39 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -668,7 +668,7 @@ void read_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
         //?? XClearArea (d, w, 0, 0, 0, 0, True);
 
         //?? What is this useful for?
-        //?? XDrawImageString(e.xexpose.display, e.xexpose.window, gc_menu_font, 100, 100, event.xbutton.x, strlen(event.xbutton.x));
+        //?? XDrawImageString(e.xexpose.display, e.xexpose.window, gc_menu_font, 100, 100, event.xbutton.x, wcslen(event.xbutton.x));
 
     } else if ((t == ButtonPress) || (t == ButtonRelease)) {
 

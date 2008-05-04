@@ -14,9 +14,13 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.51 $ $Date: 2008-05-04 00:18:08 $ $Author: christian $
+# @version $Revision: 1.52 $ $Date: 2008-05-04 22:34:38 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2008-05-04  Christian Heller  <christian.heller@tuxtax.de>
+        * Extend module "test.c" with function "test_wide_character_wprintf" to figure out
+            how to properly define and handle wide character arrays
 
 2008-05-03  Christian Heller  <christian.heller@tuxtax.de>
         * Update year 2007 to 2008 in copyright notice of each source code file

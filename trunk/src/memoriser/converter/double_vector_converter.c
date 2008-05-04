@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.15 $ $Date: 2008-05-04 00:18:14 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2008-05-04 22:34:39 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -188,6 +188,92 @@ void encode_double(void* p0, void* p1, void* p2, void* p3, void* p4) {
     } else {
 
 //??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_PARSE_INTEGER_THE_DESTINATION_SIZE_IS_NULL_MESSAGE, (void*) &COULD_NOT_PARSE_INTEGER_THE_DESTINATION_SIZE_IS_NULL_MESSAGE_COUNT);
+    }
+}
+
+/**
+ * Encodes the double model and creates a wide character byte stream from it.
+ *
+ * @param p0 the destination wide character array (Hand over as reference!)
+ * @param p1 the destination count
+ * @param p2 the destination size
+ * @param p3 the source double number
+ * @param p4 the source count
+ */
+void encode_double_wide(void* p0, void* p1, void* p2, void* p3, void* p4) {
+
+    if (p2 != *NULL_POINTER) {
+
+        size_t* ds = (size_t*) p2;
+
+        if (p1 != *NULL_POINTER) {
+
+            int* dc = (int*) p1;
+
+            if (p0 != *NULL_POINTER) {
+
+                wchar_t** d = (wchar_t**) p0;
+
+                log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Encode double into wide character.");
+
+                // The double value.
+                double* v = (double*) *NULL_POINTER;
+
+                // Get double value.
+                get_array_elements(p3, (void*) PRIMITIVE_VALUE_INDEX, (void*) &v, (void*) DOUBLE_ARRAY);
+
+                // Initialise destination count to -1.
+                // CAUTION! It must be negative for the loop to run.
+                *dc = *NUMBER_MINUS_1_INTEGER;
+
+                while (*NUMBER_1_INTEGER) {
+
+                    if (*dc >= *NUMBER_0_INTEGER) {
+
+                        break;
+                    }
+
+                    // Initialise destination string count to zero.
+                    // CAUTION! This is essential because otherwise,
+                    // the array reallocation calculates wrong values.
+                    *dc = *NUMBER_0_INTEGER;
+
+                    // Set destination string size one greater than the count
+                    // to have space for the terminating null character and
+                    // to avoid a zero value in case destination string size is zero.
+                    *ds = *ds * *WIDE_CHARACTER_VECTOR_REALLOCATION_FACTOR + *NUMBER_1_INTEGER;
+
+                    // Reallocate destination string.
+                    reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_ARRAY);
+
+                    // Transform source double to destination string.
+                    // A null wide character is written to mark the end of the string.
+                    // The return value is the number of characters generated
+                    // for the given input, excluding the trailing null.
+                    // If not all output fits into the provided buffer,
+                    // a negative value is returned.
+#ifdef CYGWIN_ENVIRONMENT
+                    *dc = wsprintfW(*d, L"%d", *v);
+/* CYGWIN_ENVIRONMENT */
+#else
+                    *dc = swprintf(*d, *ds, L"%d", *v);
+/* CYGWIN_ENVIRONMENT */
+#endif
+                }
+
+            } else {
+
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode double into wide character. The destination is null.");
+            }
+
+        } else {
+
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode double into wide character. The destination count is null.");
+        }
+
+    } else {
+
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode double into wide character. The destination size is null.");
     }
 }
 

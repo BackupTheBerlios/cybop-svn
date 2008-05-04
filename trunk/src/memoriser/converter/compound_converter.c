@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.16 $ $Date: 2008-05-04 00:18:14 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2008-05-04 22:34:39 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -279,13 +279,13 @@ void decode_compound_tag(void* p0, void* p1, void* p2, void* p3, void* p4) {
 /**
  * Decodes a cybol property.
  *
- * @param p0 the name
+ * @param p0 the name (Hand over as reference!)
  * @param p1 the name count
- * @param p2 the channel
+ * @param p2 the channel (Hand over as reference!)
  * @param p3 the channel count
- * @param p4 the abstraction
+ * @param p4 the abstraction (Hand over as reference!)
  * @param p5 the abstraction count
- * @param p6 the model
+ * @param p6 the model (Hand over as reference!)
  * @param p7 the model count
  * @param p8 the property value
  * @param p9 the name
