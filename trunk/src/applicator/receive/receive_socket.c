@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.48 $ $Date: 2008-05-04 00:18:11 $ $Author: christian $
+ * @version $Revision: 1.49 $ $Date: 2008-05-06 22:36:52 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -150,8 +150,8 @@ void receive_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, 
 */
 
     /** The index parameter. */
-    static char INDEX_PARAMETER_ARRAY[] = {'i', 'n', 'd', 'e', 'x'};
-    static char* INDEX_PARAMETER = INDEX_PARAMETER_ARRAY;
+    static wchar_t INDEX_PARAMETER_ARRAY[] = {L'i', L'n', L'd', L'e', L'x'};
+    static wchar_t* INDEX_PARAMETER = INDEX_PARAMETER_ARRAY;
     static int* INDEX_PARAMETER_COUNT = NUMBER_5_INTEGER_ARRAY;
 
     // The command name, abstraction, model, details.

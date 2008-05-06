@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2008-05-04 00:18:12 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2008-05-06 22:36:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,38 +30,38 @@
 #include "../../../globals/constants/integer/integer_constants.c"
 
 /** The content type http header. */
-static char CONTENT_TYPE_HTTP_HEADER_ARRAY[] = {'c', 'o', 'n', 't', 'e', 'n', 't', '-', 't', 'y', 'p', 'e'};
-static char* CONTENT_TYPE_HTTP_HEADER = CONTENT_TYPE_HTTP_HEADER_ARRAY;
+static wchar_t CONTENT_TYPE_HTTP_HEADER_ARRAY[] = {L'c', L'o', L'n', L't', L'e', L'n', L't', L'-', L't', L'y', L'p', L'e'};
+static wchar_t* CONTENT_TYPE_HTTP_HEADER = CONTENT_TYPE_HTTP_HEADER_ARRAY;
 static int* CONTENT_TYPE_HTTP_HEADER_COUNT = NUMBER_12_INTEGER_ARRAY;
 
 /** The content language http header. */
-static char CONTENT_LANGUAGE_HTTP_HEADER_ARRAY[] = {'c', 'o', 'n', 't', 'e', 'n', 't', '-', 'l', 'a', 'n', 'g', 'u', 'a', 'g', 'e'};
-static char* CONTENT_LANGUAGE_HTTP_HEADER = CONTENT_LANGUAGE_HTTP_HEADER_ARRAY;
+static wchar_t CONTENT_LANGUAGE_HTTP_HEADER_ARRAY[] = {L'c', L'o', L'n', L't', L'e', L'n', L't', L'-', L'l', L'a', L'n', L'g', L'u', L'a', L'g', L'e'};
+static wchar_t* CONTENT_LANGUAGE_HTTP_HEADER = CONTENT_LANGUAGE_HTTP_HEADER_ARRAY;
 static int* CONTENT_LANGUAGE_HTTP_HEADER_COUNT = NUMBER_16_INTEGER_ARRAY;
 
 /** The content encoding http header. */
-static char CONTENT_ENCODING_HTTP_HEADER_ARRAY[] = {'c', 'o', 'n', 't', 'e', 'n', 't', '-', 'e', 'n', 'c', 'o', 'd', 'i', 'n', 'g'};
-static char* CONTENT_ENCODING_HTTP_HEADER = CONTENT_ENCODING_HTTP_HEADER_ARRAY;
+static wchar_t CONTENT_ENCODING_HTTP_HEADER_ARRAY[] = {L'c', L'o', L'n', L't', L'e', L'n', L't', L'-', L'e', L'n', L'c', L'o', L'd', L'i', L'n', L'g'};
+static wchar_t* CONTENT_ENCODING_HTTP_HEADER = CONTENT_ENCODING_HTTP_HEADER_ARRAY;
 static int* CONTENT_ENCODING_HTTP_HEADER_COUNT = NUMBER_16_INTEGER_ARRAY;
 
 /** The content length http header. */
-static char CONTENT_LENGTH_HTTP_HEADER_ARRAY[] = {'c', 'o', 'n', 't', 'e', 'n', 't', '-', 'l', 'e', 'n', 'g', 't', 'h'};
-static char* CONTENT_LENGTH_HTTP_HEADER = CONTENT_LENGTH_HTTP_HEADER_ARRAY;
+static wchar_t CONTENT_LENGTH_HTTP_HEADER_ARRAY[] = {L'c', L'o', L'n', L't', L'e', L'n', L't', L'-', L'l', L'e', L'n', L'g', L't', L'h'};
+static wchar_t* CONTENT_LENGTH_HTTP_HEADER = CONTENT_LENGTH_HTTP_HEADER_ARRAY;
 static int* CONTENT_LENGTH_HTTP_HEADER_COUNT = NUMBER_14_INTEGER_ARRAY;
 
 /** The date http header. */
-static char DATE_HTTP_HEADER_ARRAY[] = {'d', 'a', 't', 'e'};
-static char* DATE_HTTP_HEADER = DATE_HTTP_HEADER_ARRAY;
+static wchar_t DATE_HTTP_HEADER_ARRAY[] = {L'd', L'a', L't', L'e'};
+static wchar_t* DATE_HTTP_HEADER = DATE_HTTP_HEADER_ARRAY;
 static int* DATE_HTTP_HEADER_COUNT = NUMBER_4_INTEGER_ARRAY;
 
 /** The last modified http header. */
-static char LAST_MODIFIED_HTTP_HEADER_ARRAY[] = {'l', 'a', 's', 't', '-', 'm', 'o', 'd', 'i', 'f', 'i', 'e', 'd'};
-static char* LAST_MODIFIED_HTTP_HEADER = LAST_MODIFIED_HTTP_HEADER_ARRAY;
+static wchar_t LAST_MODIFIED_HTTP_HEADER_ARRAY[] = {L'l', L'a', L's', L't', L'-', L'm', L'o', L'd', L'i', L'f', L'i', L'e', L'd'};
+static wchar_t* LAST_MODIFIED_HTTP_HEADER = LAST_MODIFIED_HTTP_HEADER_ARRAY;
 static int* LAST_MODIFIED_HTTP_HEADER_COUNT = NUMBER_13_INTEGER_ARRAY;
 
 /** The set cookie http header. */
-static char SET_COOKIE_HTTP_HEADER_ARRAY[] = {'s', 'e', 't', '-', 'c', 'o', 'o', 'k', 'i', 'e'};
-static char* SET_COOKIE_HTTP_HEADER = SET_COOKIE_HTTP_HEADER_ARRAY;
+static wchar_t SET_COOKIE_HTTP_HEADER_ARRAY[] = {L's', L'e', L't', L'-', L'c', L'o', L'o', L'k', L'i', L'e'};
+static wchar_t* SET_COOKIE_HTTP_HEADER = SET_COOKIE_HTTP_HEADER_ARRAY;
 static int* SET_COOKIE_HTTP_HEADER_COUNT = NUMBER_10_INTEGER_ARRAY;
 
 /* HTTP_HEADER_CONSTANTS_SOURCE */

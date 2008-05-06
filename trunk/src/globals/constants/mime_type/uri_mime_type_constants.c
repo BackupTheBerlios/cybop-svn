@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2008-05-04 00:18:12 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2008-05-06 22:36:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,8 +30,8 @@
 #include "../../../globals/constants/integer/integer_constants.c"
 
 /** The mms uri mime type. */
-static char MMS_URI_MIME_TYPE_ARRAY[] = {'u', 'r', 'i', '/', 'm', 'm', 's'};
-static char* MMS_URI_MIME_TYPE = MMS_URI_MIME_TYPE_ARRAY;
+static wchar_t MMS_URI_MIME_TYPE_ARRAY[] = {L'u', L'r', L'i', L'/', L'm', L'm', L's'};
+static wchar_t* MMS_URI_MIME_TYPE = MMS_URI_MIME_TYPE_ARRAY;
 static int* MMS_URI_MIME_TYPE_COUNT = NUMBER_7_INTEGER_ARRAY;
 
 /* URI_MIME_TYPE_CONSTANTS_SOURCE */

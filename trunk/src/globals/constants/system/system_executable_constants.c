@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2008-05-04 00:18:12 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2008-05-06 22:36:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,13 +30,13 @@
 #include "../../../globals/constants/integer/integer_constants.c"
 
 /** The shell system executable. */
-static char SHELL_SYSTEM_EXECUTABLE_ARRAY[] = {'/', 'b', 'i', 'n', '/', 's', 'h'};
-static char* SHELL_SYSTEM_EXECUTABLE = SHELL_SYSTEM_EXECUTABLE_ARRAY;
+static wchar_t SHELL_SYSTEM_EXECUTABLE_ARRAY[] = {L'/', L'b', L'i', L'n', L'/', L's', L'h'};
+static wchar_t* SHELL_SYSTEM_EXECUTABLE = SHELL_SYSTEM_EXECUTABLE_ARRAY;
 static int* SHELL_SYSTEM_EXECUTABLE_COUNT = NUMBER_7_INTEGER_ARRAY;
 
 /** The shell system executable character argument. */
-static char SHELL_SYSTEM_EXECUTABLE_CHARACTER_ARGUMENT_ARRAY[] = {'-', 'c'};
-static char* SHELL_SYSTEM_EXECUTABLE_CHARACTER_ARGUMENT = SHELL_SYSTEM_EXECUTABLE_CHARACTER_ARGUMENT_ARRAY;
+static wchar_t SHELL_SYSTEM_EXECUTABLE_CHARACTER_ARGUMENT_ARRAY[] = {L'-', L'c'};
+static wchar_t* SHELL_SYSTEM_EXECUTABLE_CHARACTER_ARGUMENT = SHELL_SYSTEM_EXECUTABLE_CHARACTER_ARGUMENT_ARRAY;
 static int* SHELL_SYSTEM_EXECUTABLE_CHARACTER_ARGUMENT_COUNT = NUMBER_2_INTEGER_ARRAY;
 
 /* SYSTEM_EXECUTABLE_CONSTANTS_SOURCE */

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2008-05-04 00:18:12 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2008-05-06 22:36:52 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,18 +30,18 @@
 #include "../../../globals/constants/integer/integer_constants.c"
 
 /** The iso-8859-1 character set. */
-static char ISO_8859_1_CHARACTER_SET_ARRAY[] = {'i', 's', 'o', '-', '8', '8', '5', '9', '-', '1'};
-static char* ISO_8859_1_CHARACTER_SET = ISO_8859_1_CHARACTER_SET_ARRAY;
+static wchar_t ISO_8859_1_CHARACTER_SET_ARRAY[] = {L'i', L's', L'o', L'-', L'8', L'8', L'5', L'9', L'-', L'1'};
+static wchar_t* ISO_8859_1_CHARACTER_SET = ISO_8859_1_CHARACTER_SET_ARRAY;
 static int* ISO_8859_1_CHARACTER_SET_COUNT = NUMBER_10_INTEGER_ARRAY;
 
 /** The utf-8 character set. */
-static char UTF_8_CHARACTER_SET_ARRAY[] = {'u', 't', 'f', '-', '8'};
-static char* UTF_8_CHARACTER_SET = UTF_8_CHARACTER_SET_ARRAY;
+static wchar_t UTF_8_CHARACTER_SET_ARRAY[] = {L'u', L't', L'f', L'-', L'8'};
+static wchar_t* UTF_8_CHARACTER_SET = UTF_8_CHARACTER_SET_ARRAY;
 static int* UTF_8_CHARACTER_SET_COUNT = NUMBER_5_INTEGER_ARRAY;
 
 /** The html coded character set. */
-static char HTML_CODED_CHARACTER_SET_ARRAY[] = {'h', 't', 'm', 'l', ' ', 'c', 'o', 'd', 'e', 'd'};
-static char* HTML_CODED_CHARACTER_SET = HTML_CODED_CHARACTER_SET_ARRAY;
+static wchar_t HTML_CODED_CHARACTER_SET_ARRAY[] = {L'h', L't', L'm', L'l', L' ', L'c', L'o', L'd', L'e', L'd'};
+static wchar_t* HTML_CODED_CHARACTER_SET = HTML_CODED_CHARACTER_SET_ARRAY;
 static int* HTML_CODED_CHARACTER_SET_COUNT = NUMBER_10_INTEGER_ARRAY;
 
 /* CHARACTER_SET_CONSTANTS_SOURCE */

@@ -24,7 +24,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.18 $ $Date: 2008-05-04 22:34:38 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2008-05-06 22:36:52 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -76,8 +76,8 @@ void test_logger() {
     fputws(L"For the logging test result, see the corresponding log file that was given as command line argument!\n", stdout);
 
     /** The log message as constant. */
-    static char TEST_LOG_MESSAGE_ARRAY[] = {'T', 'E', 'S', 'T', ' ', 'l', 'o', 'g', ' ', 'm', 'e', 's', 's', 'a', 'g', 'e', '.'};
-    static char* TEST_LOG_MESSAGE = TEST_LOG_MESSAGE_ARRAY;
+    static wchar_t TEST_LOG_MESSAGE_ARRAY[] = {L'T', L'E', L'S', L'T', L' ', L'l', L'o', L'g', L' ', L'm', L'e', L's', L's', L'a', L'g', L'e', L'.'};
+    static wchar_t* TEST_LOG_MESSAGE = TEST_LOG_MESSAGE_ARRAY;
     static int* TEST_LOG_MESSAGE_COUNT = NUMBER_17_INTEGER_ARRAY;
 
     log_message((void*) INFORMATION_LOG_LEVEL, (void*) TEST_LOG_MESSAGE, (void*) TEST_LOG_MESSAGE_COUNT);
@@ -325,7 +325,7 @@ void test_integer_array() {
     fputws(L"Test integer array:\n", stdout);
 
     // The test value.
-    char* test = "2,3,4";
+    wchar_t* test = L"2,3,4";
     int testc = *NUMBER_5_INTEGER;
 
     // The test knowledge model.
@@ -392,12 +392,12 @@ void test_character_array_with_termination() {
 
     // The brackets indicating an array cannot be avoided or replaced by a pointer.
     // The following line does not work:
-    // char* test = {'t', 'e', 's', 't', '\n', '\0'};
+    // wchar_t* test = {L't', L'e', L's', L't', L'\n', L'\0'};
 
     // The '\n' character is a new line.
     // The character array (string) termination '\0' is necessary when using
     // GNU C library functions such as "fputs".
-    char test[] = {'t', 'e', 's', 't', ' ', 'c', 'h', 'a', 'r', ' ', 'a', 'r', 'r', 'a', 'y', ' ', 'o', 'k', '\n', '\0'};
+    wchar_t test[] = {L't', L'e', L's', L't', L' ', L'c', L'h', L'a', L'r', L' ', L'a', L'r', L'r', L'a', L'y', L' ', L'o', L'k', L'\n', L'\0'};
 
     fputs(test, stdout);
 }
@@ -410,8 +410,8 @@ void test_array_resizing() {
     fputws(L"Test array resizing:\n", stdout);
 
     // The text.
-    char ta[] = {'t', 'e', 's', 't', '\n', '\0'};
-    char* t = ta;
+    wchar_t ta[] = {L't', L'e', L's', L't', L'\n', L'\0'};
+    wchar_t* t = ta;
     int* tc = NUMBER_6_INTEGER_ARRAY;
 
     // The original array.
@@ -459,7 +459,7 @@ void test_wide_character_output() {
 #ifdef GNU_LINUX_OPERATING_SYSTEM
     // Possible locales are: LANG, LC_CTYPE, LC_ALL.
     // CAUTION! This setting is necessary for UTF-8 Unicode characters to work.
-    char* loc = setlocale(LC_ALL, "");
+    wchar_t* loc = setlocale(LC_ALL, "");
 
     // The terminal (device name).
     FILE* t = (FILE*) *NULL_POINTER;
@@ -757,19 +757,19 @@ void test_character_array_single_element() {
     int cs = *NUMBER_5_INTEGER;
 
     // Create character array.
-    allocate_array((void*) &c, (void*) &cs, (void*) CHARACTER_ARRAY);
+    allocate_array((void*) &c, (void*) &cs, (void*) WIDE_CHARACTER_ARRAY);
 
-    set_character_array_elements(c, (void*) NUMBER_0_INTEGER, (void*) LATIN_CAPITAL_LETTER_A_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT);
-    set_character_array_elements(c, (void*) NUMBER_1_INTEGER, (void*) LATIN_CAPITAL_LETTER_B_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT);
-    set_character_array_elements(c, (void*) NUMBER_2_INTEGER, (void*) LATIN_CAPITAL_LETTER_C_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT);
-    set_character_array_elements(c, (void*) NUMBER_3_INTEGER, (void*) LINE_FEED_CONTROL_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT);
-    set_character_array_elements(c, (void*) NUMBER_4_INTEGER, (void*) NULL_CONTROL_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT);
+    set_wide_character_array_elements(c, (void*) NUMBER_0_INTEGER, (void*) LATIN_CAPITAL_LETTER_A_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT);
+    set_wide_character_array_elements(c, (void*) NUMBER_1_INTEGER, (void*) LATIN_CAPITAL_LETTER_B_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT);
+    set_wide_character_array_elements(c, (void*) NUMBER_2_INTEGER, (void*) LATIN_CAPITAL_LETTER_C_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT);
+    set_wide_character_array_elements(c, (void*) NUMBER_3_INTEGER, (void*) LINE_FEED_CONTROL_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT);
+    set_wide_character_array_elements(c, (void*) NUMBER_4_INTEGER, (void*) NULL_CONTROL_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT);
 
     // Print out array contents.
-    fputs((char*) c, stdout);
+    fputws((wchar_t*) c, stdout);
 
     int i = *NUMBER_0_INTEGER;
-    char* catest = (char*) *NULL_POINTER;
+    wchar_t* catest = (wchar_t*) *NULL_POINTER;
 
     while (*NUMBER_1_INTEGER) {
 
@@ -778,14 +778,14 @@ void test_character_array_single_element() {
             break;
         }
 
-        catest = (char*) (c + i);
+        catest = (wchar_t*) (c + i);
         fwprintf(stderr, L"ca: %c\n", *catest);
 
         i++;
     }
 
     // Destroy character array.
-    deallocate_array((void*) &c, (void*) &cs, (void*) CHARACTER_ARRAY);
+    deallocate_array((void*) &c, (void*) &cs, (void*) WIDE_CHARACTER_ARRAY);
 }
 
 /**
@@ -800,54 +800,54 @@ void test_character_array_multiple_elements() {
     int ds = *NUMBER_22_INTEGER;
 
     // Create destination array.
-    allocate_array((void*) &d, (void*) &ds, (void*) CHARACTER_ARRAY);
+    allocate_array((void*) &d, (void*) &ds, (void*) WIDE_CHARACTER_ARRAY);
 
     // The source array.
-    char a[] = {'T', 'h', 'i', 's', ' ', 'i', 's', ' ', 'a', ' ', 't', 'e', 's', 't', '.', '\n', '\0'};
-    char* s = a;
+    wchar_t a[] = {L'T', L'h', L'i', L's', L' ', L'i', L's', L' ', L'a', L' ', L't', L'e', L's', L't', L'.', L'\n', L'\0'};
+    wchar_t* s = a;
     int ssa[] = {17};
     int* ss = ssa;
 
     // The destination index to which to copy the source array.
-    set_character_array_elements(d, (void*) NUMBER_0_INTEGER, (void*) s, (void*) ss);
+    set_wide_character_array_elements(d, (void*) NUMBER_0_INTEGER, (void*) s, (void*) ss);
 
-    fputs((char*) d, stdout);
+    fputws((wchar_t*) d, stdout);
 
     // The source array for overwriting.
-    char oa[] = {'o', 'v', 'e', 'r', 'w', 'r', 'i', 't', 't', 'e', 'n', '.', '\n', '\0'};
-    char* os = oa;
+    wchar_t oa[] = {L'o', L'v', L'e', L'r', L'w', L'r', L'i', L't', L't', L'e', L'n', L'.', L'\n', L'\0'};
+    wchar_t* os = oa;
     int ossa[] = {14};
     int* oss = ossa;
 
-    set_character_array_elements(d, (void*) NUMBER_8_INTEGER, (void*) os, (void*) oss);
+    set_wide_character_array_elements(d, (void*) NUMBER_8_INTEGER, (void*) os, (void*) oss);
 
-    fputs((char*) d, stdout);
+    fputws((wchar_t*) d, stdout);
 
     // The remove index.
     int ri = *NUMBER_12_INTEGER;
 
     remove_character_array_elements(d, (void*) &ds, (void*) &ri, (void*) NUMBER_7_INTEGER);
 
-    fputs((char*) d, stdout);
+    fputws((wchar_t*) d, stdout);
 
     // The new array size to cut off remaining elements,
     // including two places for new line '\n' and c string termination '\0'.
     int ns = *NUMBER_15_INTEGER;
 
-    reallocate_array((void*) &d, (void*) &ns, (void*) &ns, (void*) CHARACTER_ARRAY);
+    reallocate_array((void*) &d, (void*) &ns, (void*) &ns, (void*) WIDE_CHARACTER_ARRAY);
 
-    fputs((char*) d, stdout);
+    fputws((wchar_t*) d, stdout);
 
     // The result array.
     void* r = *NULL_POINTER;
 
     // Test getting a reference.
-    get_character_array_elements(d, (void*) NUMBER_8_INTEGER, (void*) &r);
+    get_wide_character_array_elements(d, (void*) NUMBER_8_INTEGER, (void*) &r);
 
-    fputs((char*) r, stdout);
+    fputws((wchar_t*) r, stdout);
 
     // Destroy destination array.
-    deallocate_array((void*) &d, (void*) &ns, (void*) CHARACTER_ARRAY);
+    deallocate_array((void*) &d, (void*) &ns, (void*) WIDE_CHARACTER_ARRAY);
 }
 
 /**
@@ -865,7 +865,7 @@ void test_pointer_return() {
     int* cs = (int*) *NULL_POINTER;
 
     // Create character array.
-    c = (void*) "Hello World!";
+    c = (void*) L"Hello World!";
     allocate((void*) &cs, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
     *cs = *NUMBER_13_INTEGER;
 
@@ -879,10 +879,10 @@ void test_pointer_return() {
     void* r = *NULL_POINTER;
 
     // Get character from character array.
-    get_array_elements(c, (void*) NUMBER_6_INTEGER, (void*) &r, (void*) CHARACTER_ARRAY);
+    get_array_elements(c, (void*) NUMBER_6_INTEGER, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
     // Print result (character array).
-    fwprintf(stderr, L"r: %s\n", (char*) r);
+    fwprintf(stderr, L"r: %ls\n", (wchar_t*) r);
 
     // Destroy character array.
     deallocate((void*) &cs, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
@@ -900,10 +900,10 @@ void test_pointer_array() {
     //
 
     // The character array (including new line and null termination character).
-    void* c = (void*) "Hello World!";
+    void* c = (void*) L"Hello World!";
     int cs = *NUMBER_13_INTEGER;
 
-    fwprintf(stderr, L"c: %s\n", (char*) c);
+    fwprintf(stderr, L"c: %ls\n", (wchar_t*) c);
 
     // The pointer array.
     void** p = NULL_POINTER;
@@ -936,7 +936,7 @@ void test_pointer_array() {
 
     // Print result (character array).
     fwprintf(stderr, L"r pointer: %i\n", *r);
-    fwprintf(stderr, L"r string: %s\n", (char*) *r);
+    fwprintf(stderr, L"r string: %ls\n", (wchar_t*) *r);
 
     //
     // Destruction.
@@ -982,7 +982,7 @@ void test_pointer_array_with_null_values() {
     fwprintf(stdout, L"Result pointer as integer r1: %i\n", **r1);
     fwprintf(stdout, L"Result pointer as pointer r2: %i\n", *r2);
     fwprintf(stdout, L"Result pointer as simple pointer r3: %i\n", r3);
-    fwprintf(stdout, L"Result pointer as characterr4: %c\n", **r4);
+    fwprintf(stdout, L"Result pointer as character r4: %c\n", **r4);
 
     fwprintf(stderr, L"NULL_POINTER: %i \n", NULL_POINTER);
     fwprintf(stderr, L"*NULL_POINTER: %i \n", *NULL_POINTER);
@@ -1172,7 +1172,7 @@ void test_decode_integer_vector() {
     fputws(L"Test decode integer vector:\n", stdout);
 
     // The source character array.
-    char sa[] = {'1', ',', '2', ',', '3', ',', '4', ',', '5'};
+    wchar_t sa[] = {L'1', L',', L'2', L',', L'3', L',', L'4', L',', L'5'};
     void* s = sa;
     int sc = *NUMBER_5_INTEGER;
 
@@ -1215,28 +1215,30 @@ void test_encode_integer_vector() {
     fputws(L"Test encode integer vector:\n", stdout);
 
     // The source integer array.
+    //?? TODO: Shouldn't this be WITHOUT apostrophes, i.e.:
+    //?? int sa[] = {1, 2, 3};
     int sa[] = {'1', '2', '3'};
     void* s = sa;
     int sc = *NUMBER_3_INTEGER;
 
     // The destination character array.
-    char* d = (char*) *NULL_POINTER;
+    wchar_t* d = (wchar_t*) *NULL_POINTER;
     int dc = *NUMBER_0_INTEGER;
     int ds = *NUMBER_0_INTEGER;
 
     // Allocate destination character vector.
-    allocate((void*) &d, (void*) &ds, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+    allocate((void*) &d, (void*) &ds, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
     // Use compound count as index to create the element name suffix,
     // because the element is added at the end of the compound container.
     encode_integer_vector((void*) &d, (void*) &dc, (void*) &ds, s, (void*) &sc);
 
-    fwprintf(stdout, L"Encoded character array: %s\n", d);
+    fwprintf(stdout, L"Encoded character array: %ls\n", d);
     fwprintf(stdout, L"Encoded character array count: %i\n", dc);
     fwprintf(stdout, L"Encoded character array size: %i\n", ds);
 
     // Deallocate destination character vector.
-    deallocate((void*) &d, (void*) &ds, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+    deallocate((void*) &d, (void*) &ds, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
 }
 
 /**
@@ -1247,7 +1249,7 @@ void test_encode_integer() {
     fputws(L"Test encode integer:\n", stdout);
 
     // The destination character array.
-    char* d = (char*) *NULL_POINTER;
+    wchar_t* d = (wchar_t*) *NULL_POINTER;
     int dc = *NUMBER_0_INTEGER;
     int ds = *NUMBER_0_INTEGER;
 
@@ -1255,18 +1257,18 @@ void test_encode_integer() {
     int s = *NUMBER_18_INTEGER;
 
     // Allocate destination character array.
-    allocate_array((void*) &d, (void*) &ds, (void*) CHARACTER_ARRAY);
+    allocate_array((void*) &d, (void*) &ds, (void*) WIDE_CHARACTER_ARRAY);
 
     // Use compound count as index to create the element name suffix,
     // because the element is added at the end of the compound container.
     encode_integer((void*) &d, (void*) &dc, (void*) &ds, (void*) &s, (void*) PRIMITIVE_COUNT);
 
-    fwprintf(stdout, L"Test: Destination character array: %s\n", d);
+    fwprintf(stdout, L"Test: Destination character array: %ls\n", d);
     fwprintf(stdout, L"Test: Destination character array count: %i\n", dc);
     fwprintf(stdout, L"Test: Destination character array size: %i\n", ds);
 
     // Deallocate destination character array.
-    deallocate_array((void*) &d, (void*) &ds, (void*) CHARACTER_ARRAY);
+    deallocate_array((void*) &d, (void*) &ds, (void*) WIDE_CHARACTER_ARRAY);
 }
 
 /**

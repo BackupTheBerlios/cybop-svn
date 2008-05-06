@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2008-05-04 00:18:12 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2008-05-06 22:36:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,38 +30,38 @@
 #include "../../../globals/constants/integer/integer_constants.c"
 
 /** The propfind request method. Reads properties as resources from an xml file. Retrieves the directory structure of a remote system. */
-static char WEBDAV_PROPFIND_REQUEST_METHOD_ARRAY[] = {'P', 'R', 'O', 'P', 'F', 'I', 'N', 'D'};
-static char* WEBDAV_PROPFIND_REQUEST_METHOD = WEBDAV_PROPFIND_REQUEST_METHOD_ARRAY;
+static wchar_t WEBDAV_PROPFIND_REQUEST_METHOD_ARRAY[] = {L'P', L'R', L'O', L'P', L'F', L'I', L'N', L'D'};
+static wchar_t* WEBDAV_PROPFIND_REQUEST_METHOD = WEBDAV_PROPFIND_REQUEST_METHOD_ARRAY;
 static int* WEBDAV_PROPFIND_REQUEST_METHOD_COUNT = NUMBER_8_INTEGER_ARRAY;
 
 /** The proppatch request method. Changes and deletes various properties of a resource in one single atomic act. */
-static char WEBDAV_PROPPATCH_REQUEST_METHOD_ARRAY[] = {'P', 'R', 'O', 'P', 'P', 'A', 'T', 'C', 'H'};
-static char* WEBDAV_PROPPATCH_REQUEST_METHOD = WEBDAV_PROPPATCH_REQUEST_METHOD_ARRAY;
+static wchar_t WEBDAV_PROPPATCH_REQUEST_METHOD_ARRAY[] = {L'P', L'R', L'O', L'P', L'P', L'A', L'T', L'C', L'H'};
+static wchar_t* WEBDAV_PROPPATCH_REQUEST_METHOD = WEBDAV_PROPPATCH_REQUEST_METHOD_ARRAY;
 static int* WEBDAV_PROPPATCH_REQUEST_METHOD_COUNT = NUMBER_9_INTEGER_ARRAY;
 
 /** The mkcol request method. Creates a collection (also called directory). */
-static char WEBDAV_MKCOL_REQUEST_METHOD_ARRAY[] = {'M', 'K', 'C', 'O', 'L'};
-static char* WEBDAV_MKCOL_REQUEST_METHOD = WEBDAV_MKCOL_REQUEST_METHOD_ARRAY;
+static wchar_t WEBDAV_MKCOL_REQUEST_METHOD_ARRAY[] = {L'M', L'K', L'C', L'O', L'L'};
+static wchar_t* WEBDAV_MKCOL_REQUEST_METHOD = WEBDAV_MKCOL_REQUEST_METHOD_ARRAY;
 static int* WEBDAV_MKCOL_REQUEST_METHOD_COUNT = NUMBER_5_INTEGER_ARRAY;
 
 /** The copy request method. Copies a resource from one uri to another. */
-static char WEBDAV_COPY_REQUEST_METHOD_ARRAY[] = {'C', 'O', 'P', 'Y'};
-static char* WEBDAV_COPY_REQUEST_METHOD = WEBDAV_COPY_REQUEST_METHOD_ARRAY;
+static wchar_t WEBDAV_COPY_REQUEST_METHOD_ARRAY[] = {L'C', L'O', L'P', L'Y'};
+static wchar_t* WEBDAV_COPY_REQUEST_METHOD = WEBDAV_COPY_REQUEST_METHOD_ARRAY;
 static int* WEBDAV_COPY_REQUEST_METHOD_COUNT = NUMBER_4_INTEGER_ARRAY;
 
 /** The move request method. Moves a resource from one uri to another. */
-static char WEBDAV_MOVE_REQUEST_METHOD_ARRAY[] = {'M', 'O', 'V', 'E'};
-static char* WEBDAV_MOVE_REQUEST_METHOD = WEBDAV_MOVE_REQUEST_METHOD_ARRAY;
+static wchar_t WEBDAV_MOVE_REQUEST_METHOD_ARRAY[] = {L'M', L'O', L'V', L'E'};
+static wchar_t* WEBDAV_MOVE_REQUEST_METHOD = WEBDAV_MOVE_REQUEST_METHOD_ARRAY;
 static int* WEBDAV_MOVE_REQUEST_METHOD_COUNT = NUMBER_4_INTEGER_ARRAY;
 
 /** The lock request method. Locks a resource. */
-static char WEBDAV_LOCK_REQUEST_METHOD_ARRAY[] = {'L', 'O', 'C', 'K'};
-static char* WEBDAV_LOCK_REQUEST_METHOD = WEBDAV_LOCK_REQUEST_METHOD_ARRAY;
+static wchar_t WEBDAV_LOCK_REQUEST_METHOD_ARRAY[] = {L'L', L'O', L'C', L'K'};
+static wchar_t* WEBDAV_LOCK_REQUEST_METHOD = WEBDAV_LOCK_REQUEST_METHOD_ARRAY;
 static int* WEBDAV_LOCK_REQUEST_METHOD_COUNT = NUMBER_4_INTEGER_ARRAY;
 
 /** The unlock request method. Unlocks a resource. */
-static char WEBDAV_UNLOCK_REQUEST_METHOD_ARRAY[] = {'U', 'N', 'L', 'O', 'C', 'K'};
-static char* WEBDAV_UNLOCK_REQUEST_METHOD = WEBDAV_UNLOCK_REQUEST_METHOD_ARRAY;
+static wchar_t WEBDAV_UNLOCK_REQUEST_METHOD_ARRAY[] = {L'U', L'N', L'L', L'O', L'C', L'K'};
+static wchar_t* WEBDAV_UNLOCK_REQUEST_METHOD = WEBDAV_UNLOCK_REQUEST_METHOD_ARRAY;
 static int* WEBDAV_UNLOCK_REQUEST_METHOD_COUNT = NUMBER_6_INTEGER_ARRAY;
 
 /* WEBDAV_REQUEST_METHOD_CONSTANTS_SOURCE */

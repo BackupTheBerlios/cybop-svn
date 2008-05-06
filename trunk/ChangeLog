@@ -14,9 +14,18 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.52 $ $Date: 2008-05-04 22:34:38 $ $Author: christian $
+# @version $Revision: 1.53 $ $Date: 2008-05-06 22:36:51 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2008-05-06  Christian Heller  <christian.heller@tuxtax.de>
+        * Adapt source code to wide character, by replacing
+            "static char* " with "static wchar_t* "
+            "static char " with "static wchar_t "
+            "', '" with "', L'"
+            "= {'" with "= {L'"
+            "%s" with "%ls"
+            "CHARACTER_ARRAY" with "WIDE_CHARACTER_ARRAY"
 
 2008-05-04  Christian Heller  <christian.heller@tuxtax.de>
         * Extend module "test.c" with function "test_wide_character_wprintf" to figure out
@@ -24,7 +33,7 @@
 
 2008-05-03  Christian Heller  <christian.heller@tuxtax.de>
         * Update year 2007 to 2008 in copyright notice of each source code file
-        * Replace in all source code
+        * Adapt all source code to wide character, by replacing
             "LOG_LEVEL, (void*) "" with ""
             "stderr, "" with "stderr, L""
             "fprintf(" with "fwprintf("

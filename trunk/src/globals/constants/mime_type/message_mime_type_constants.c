@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2008-05-04 00:18:12 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2008-05-06 22:36:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,8 +30,8 @@
 #include "../../../globals/constants/integer/integer_constants.c"
 
 /** The news message mime type. */
-static char NEWS_MESSAGE_MIME_TYPE_ARRAY[] = {'m', 'e', 's', 's', 'a', 'g', 'e', '/', 'n', 'e', 'w', 's'};
-static char* NEWS_MESSAGE_MIME_TYPE = NEWS_MESSAGE_MIME_TYPE_ARRAY;
+static wchar_t NEWS_MESSAGE_MIME_TYPE_ARRAY[] = {L'm', L'e', L's', L's', L'a', L'g', L'e', L'/', L'n', L'e', L'w', L's'};
+static wchar_t* NEWS_MESSAGE_MIME_TYPE = NEWS_MESSAGE_MIME_TYPE_ARRAY;
 static int* NEWS_MESSAGE_MIME_TYPE_COUNT = NUMBER_12_INTEGER_ARRAY;
 
 /* MESSAGE_MIME_TYPE_CONSTANTS_SOURCE */

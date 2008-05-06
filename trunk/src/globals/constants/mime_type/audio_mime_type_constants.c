@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2008-05-04 00:18:12 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2008-05-06 22:36:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,8 +30,8 @@
 #include "../../../globals/constants/integer/integer_constants.c"
 
 /** The vorbis audio mime type. */
-static char VORBIS_AUDIO_MIME_TYPE_ARRAY[] = {'a', 'u', 'd', 'i', 'o', '/', 'v', 'o', 'r', 'b', 'i', 's'};
-static char* VORBIS_AUDIO_MIME_TYPE = VORBIS_AUDIO_MIME_TYPE_ARRAY;
+static wchar_t VORBIS_AUDIO_MIME_TYPE_ARRAY[] = {L'a', L'u', L'd', L'i', L'o', L'/', L'v', L'o', L'r', L'b', L'i', L's'};
+static wchar_t* VORBIS_AUDIO_MIME_TYPE = VORBIS_AUDIO_MIME_TYPE_ARRAY;
 static int* VORBIS_AUDIO_MIME_TYPE_COUNT = NUMBER_12_INTEGER_ARRAY;
 
 /* AUDIO_MIME_TYPE_CONSTANTS_SOURCE */

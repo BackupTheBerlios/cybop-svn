@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2008-05-04 00:18:12 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2008-05-06 22:36:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,18 +30,18 @@
 #include "../../../globals/constants/integer/integer_constants.c"
 
 /** The html file extension. */
-static char HTML_FILE_EXTENSION_ARRAY[] = {'h', 't', 'm', 'l'};
-static char* HTML_FILE_EXTENSION = HTML_FILE_EXTENSION_ARRAY;
+static wchar_t HTML_FILE_EXTENSION_ARRAY[] = {L'h', L't', L'm', L'l'};
+static wchar_t* HTML_FILE_EXTENSION = HTML_FILE_EXTENSION_ARRAY;
 static int* HTML_FILE_EXTENSION_COUNT = NUMBER_4_INTEGER_ARRAY;
 
 /** The htm file extension. */
-static char HTM_FILE_EXTENSION_ARRAY[] = {'h', 't', 'm'};
-static char* HTM_FILE_EXTENSION = HTM_FILE_EXTENSION_ARRAY;
+static wchar_t HTM_FILE_EXTENSION_ARRAY[] = {L'h', L't', L'm'};
+static wchar_t* HTM_FILE_EXTENSION = HTM_FILE_EXTENSION_ARRAY;
 static int* HTM_FILE_EXTENSION_COUNT = NUMBER_3_INTEGER_ARRAY;
 
 /** The shtml file extension. */
-static char SHTML_FILE_EXTENSION_ARRAY[] = {'s', 'h', 't', 'm', 'l'};
-static char* SHTML_FILE_EXTENSION = SHTML_FILE_EXTENSION_ARRAY;
+static wchar_t SHTML_FILE_EXTENSION_ARRAY[] = {L's', L'h', L't', L'm', L'l'};
+static wchar_t* SHTML_FILE_EXTENSION = SHTML_FILE_EXTENSION_ARRAY;
 static int* SHTML_FILE_EXTENSION_COUNT = NUMBER_5_INTEGER_ARRAY;
 
 /* TEXT_FILE_EXTENSION_CONSTANTS_SOURCE */

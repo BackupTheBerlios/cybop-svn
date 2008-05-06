@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2008-05-04 00:18:12 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2008-05-06 22:36:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -29,10 +29,10 @@
 
 #include "../../../globals/constants/integer/integer_constants.c"
 
-/** The synchronization-profile bluetooth mime type. */
-static char SYNCHRONIZATION_PROFILE_BLUETOOTH_MIME_TYPE_ARRAY[] = {'b', 'l', 'u', 'e', 't', 'o', 'o', 't', 'h', '/', 's', 'y', 'n', 'c', 'h', 'r', 'o', 'n', 'i', 'z', 'a', 't', 'i', 'o', 'n', '-', 'p', 'r', 'o', 'f', 'i', 'l', 'e'};
-static char* SYNCHRONIZATION_PROFILE_BLUETOOTH_MIME_TYPE = SYNCHRONIZATION_PROFILE_BLUETOOTH_MIME_TYPE_ARRAY;
-static int* SYNCHRONIZATION_PROFILE_BLUETOOTH_MIME_TYPE_COUNT = NUMBER_33_INTEGER_ARRAY;
+/** The synchronisation-profile bluetooth mime type. */
+static wchar_t SYNCHRONISATION_PROFILE_BLUETOOTH_MIME_TYPE_ARRAY[] = {L'b', L'l', L'u', L'e', L't', L'o', L'o', L't', L'h', L'/', L's', L'y', L'n', L'c', L'h', L'r', L'o', L'n', L'i', L'z', L'a', L't', L'i', L'o', L'n', L'-', L'p', L'r', L'o', L'f', L'i', L'l', L'e'};
+static wchar_t* SYNCHRONISATION_PROFILE_BLUETOOTH_MIME_TYPE = SYNCHRONISATION_PROFILE_BLUETOOTH_MIME_TYPE_ARRAY;
+static int* SYNCHRONISATION_PROFILE_BLUETOOTH_MIME_TYPE_COUNT = NUMBER_33_INTEGER_ARRAY;
 
 /* BLUETOOTH_MIME_TYPE_CONSTANTS_SOURCE */
 #endif

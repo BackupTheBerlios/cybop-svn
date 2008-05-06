@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2008-05-04 00:18:12 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2008-05-06 22:36:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -54,13 +54,13 @@
 //
 
 /** The 100 continue status code. */
-static char HTTP_100_CONTINUE_STATUS_CODE_ARRAY[] = {'1', '0', '0', ' ', 'C', 'o', 'n', 't', 'i', 'n', 'u', 'e'};
-static char* HTTP_100_CONTINUE_STATUS_CODE = HTTP_100_CONTINUE_STATUS_CODE_ARRAY;
+static wchar_t HTTP_100_CONTINUE_STATUS_CODE_ARRAY[] = {L'1', L'0', L'0', L' ', L'C', L'o', L'n', L't', L'i', L'n', L'u', L'e'};
+static wchar_t* HTTP_100_CONTINUE_STATUS_CODE = HTTP_100_CONTINUE_STATUS_CODE_ARRAY;
 static int* HTTP_100_CONTINUE_STATUS_CODE_COUNT = NUMBER_12_INTEGER_ARRAY;
 
 /** The 101 switching protocols status code. */
-static char HTTP_101_SWITCHING_PROTOCOLS_STATUS_CODE_ARRAY[] = {'1', '0', '1', ' ', 'S', 'w', 'i', 't', 'c', 'h', 'i', 'n', 'g', ' ', 'P', 'r', 'o', 't', 'o', 'c', 'o', 'l', 's'};
-static char* HTTP_101_SWITCHING_PROTOCOLS_STATUS_CODE = HTTP_101_SWITCHING_PROTOCOLS_STATUS_CODE_ARRAY;
+static wchar_t HTTP_101_SWITCHING_PROTOCOLS_STATUS_CODE_ARRAY[] = {L'1', L'0', L'1', L' ', L'S', L'w', L'i', L't', L'c', L'h', L'i', L'n', L'g', L' ', L'P', L'r', L'o', L't', L'o', L'c', L'o', L'l', L's'};
+static wchar_t* HTTP_101_SWITCHING_PROTOCOLS_STATUS_CODE = HTTP_101_SWITCHING_PROTOCOLS_STATUS_CODE_ARRAY;
 static int* HTTP_101_SWITCHING_PROTOCOLS_STATUS_CODE_COUNT = NUMBER_23_INTEGER_ARRAY;
 
 /**
@@ -70,8 +70,8 @@ static int* HTTP_101_SWITCHING_PROTOCOLS_STATUS_CODE_COUNT = NUMBER_23_INTEGER_A
  * http://www.w3.org/Protocols/HTTP/1.1/rfc2616bis/draft-lafon-rfc2616bis-03.html
  */
 /*??
-static char HTTP_102_PROCESSING_STATUS_CODE_ARRAY[] = {'1', '0', '2', ' ', 'P', 'r', 'o', 'c', 'e', 's', 's', 'i', 'n', 'g'};
-static char* HTTP_102_PROCESSING_STATUS_CODE = HTTP_102_PROCESSING_STATUS_CODE_ARRAY;
+static wchar_t HTTP_102_PROCESSING_STATUS_CODE_ARRAY[] = {L'1', L'0', L'2', L' ', L'P', L'r', L'o', L'c', L'e', L's', L's', L'i', L'n', L'g'};
+static wchar_t* HTTP_102_PROCESSING_STATUS_CODE = HTTP_102_PROCESSING_STATUS_CODE_ARRAY;
 static int* HTTP_102_PROCESSING_STATUS_CODE_COUNT = NUMBER_14_INTEGER_ARRAY;
 */
 
@@ -83,38 +83,38 @@ static int* HTTP_102_PROCESSING_STATUS_CODE_COUNT = NUMBER_14_INTEGER_ARRAY;
 //
 
 /** The 200 ok status code. */
-static char HTTP_200_OK_STATUS_CODE_ARRAY[] = {'2', '0', '0', ' ', 'O', 'K'};
-static char* HTTP_200_OK_STATUS_CODE = HTTP_200_OK_STATUS_CODE_ARRAY;
+static wchar_t HTTP_200_OK_STATUS_CODE_ARRAY[] = {L'2', L'0', L'0', L' ', L'O', L'K'};
+static wchar_t* HTTP_200_OK_STATUS_CODE = HTTP_200_OK_STATUS_CODE_ARRAY;
 static int* HTTP_200_OK_STATUS_CODE_COUNT = NUMBER_6_INTEGER_ARRAY;
 
 /** The 201 created status code. */
-static char HTTP_201_CREATED_STATUS_CODE_ARRAY[] = {'2', '0', '1', ' ', 'C', 'r', 'e', 'a', 't', 'e', 'd'};
-static char* HTTP_201_CREATED_STATUS_CODE = HTTP_201_CREATED_STATUS_CODE_ARRAY;
+static wchar_t HTTP_201_CREATED_STATUS_CODE_ARRAY[] = {L'2', L'0', L'1', L' ', L'C', L'r', L'e', L'a', L't', L'e', L'd'};
+static wchar_t* HTTP_201_CREATED_STATUS_CODE = HTTP_201_CREATED_STATUS_CODE_ARRAY;
 static int* HTTP_201_CREATED_STATUS_CODE_COUNT = NUMBER_11_INTEGER_ARRAY;
 
 /** The 202 accepted status code. */
-static char HTTP_202_ACCEPTED_STATUS_CODE_ARRAY[] = {'2', '0', '2', ' ', 'A', 'c', 'c', 'e', 'p', 't', 'e', 'd'};
-static char* HTTP_202_ACCEPTED_STATUS_CODE = HTTP_202_ACCEPTED_STATUS_CODE_ARRAY;
+static wchar_t HTTP_202_ACCEPTED_STATUS_CODE_ARRAY[] = {L'2', L'0', L'2', L' ', L'A', L'c', L'c', L'e', L'p', L't', L'e', L'd'};
+static wchar_t* HTTP_202_ACCEPTED_STATUS_CODE = HTTP_202_ACCEPTED_STATUS_CODE_ARRAY;
 static int* HTTP_202_ACCEPTED_STATUS_CODE_COUNT = NUMBER_12_INTEGER_ARRAY;
 
 /** The 203 non-authoritative information status code. */
-static char HTTP_203_NON_AUTHORITATIVE_STATUS_CODE_ARRAY[] = {'2', '0', '3', ' ', 'N', 'o', 'n', '-', 'A', 'u', 't', 'h', 'o', 'r', 'i', 't', 'a', 't', 'i', 'v', 'e', ' ', 'I', 'n', 'f', 'o', 'r', 'm', 'a', 't', 'i', 'o', 'n'};
-static char* HTTP_203_NON_AUTHORITATIVE_STATUS_CODE = HTTP_203_NON_AUTHORITATIVE_STATUS_CODE_ARRAY;
+static wchar_t HTTP_203_NON_AUTHORITATIVE_STATUS_CODE_ARRAY[] = {L'2', L'0', L'3', L' ', L'N', L'o', L'n', L'-', L'A', L'u', L't', L'h', L'o', L'r', L'i', L't', L'a', L't', L'i', L'v', L'e', L' ', L'I', L'n', L'f', L'o', L'r', L'm', L'a', L't', L'i', L'o', L'n'};
+static wchar_t* HTTP_203_NON_AUTHORITATIVE_STATUS_CODE = HTTP_203_NON_AUTHORITATIVE_STATUS_CODE_ARRAY;
 static int* HTTP_203_NON_AUTHORITATIVE_STATUS_CODE_COUNT = NUMBER_33_INTEGER_ARRAY;
 
 /** The 204 no content status code. */
-static char HTTP_204_NO_CONTENT_STATUS_CODE_ARRAY[] = {'2', '0', '4', ' ', 'N', 'o', ' ', 'C', 'o', 'n', 't', 'e', 'n', 't'};
-static char* HTTP_204_NO_CONTENT_STATUS_CODE = HTTP_204_NO_CONTENT_STATUS_CODE_ARRAY;
+static wchar_t HTTP_204_NO_CONTENT_STATUS_CODE_ARRAY[] = {L'2', L'0', L'4', L' ', L'N', L'o', L' ', L'C', L'o', L'n', L't', L'e', L'n', L't'};
+static wchar_t* HTTP_204_NO_CONTENT_STATUS_CODE = HTTP_204_NO_CONTENT_STATUS_CODE_ARRAY;
 static int* HTTP_204_NO_CONTENT_STATUS_CODE_COUNT = NUMBER_14_INTEGER_ARRAY;
 
 /** The 205 reset content status code. */
-static char HTTP_205_RESET_CONTENT_STATUS_CODE_ARRAY[] = {'2', '0', '5', ' ', 'R', 'e', 's', 'e', 't', ' ', 'C', 'o', 'n', 't', 'e', 'n', 't'};
-static char* HTTP_205_RESET_CONTENT_STATUS_CODE = HTTP_205_RESET_CONTENT_STATUS_CODE_ARRAY;
+static wchar_t HTTP_205_RESET_CONTENT_STATUS_CODE_ARRAY[] = {L'2', L'0', L'5', L' ', L'R', L'e', L's', L'e', L't', L' ', L'C', L'o', L'n', L't', L'e', L'n', L't'};
+static wchar_t* HTTP_205_RESET_CONTENT_STATUS_CODE = HTTP_205_RESET_CONTENT_STATUS_CODE_ARRAY;
 static int* HTTP_205_RESET_CONTENT_STATUS_CODE_COUNT = NUMBER_17_INTEGER_ARRAY;
 
 /** The 206 partial content status code. */
-static char HTTP_206_PARTIAL_CONTENT_STATUS_CODE_ARRAY[] = {'2', '0', '6', ' ', 'P', 'a', 'r', 't', 'i', 'a', 'l', ' ', 'C', 'o', 'n', 't', 'e', 'n', 't'};
-static char* HTTP_206_PARTIAL_CONTENT_STATUS_CODE = HTTP_206_PARTIAL_CONTENT_STATUS_CODE_ARRAY;
+static wchar_t HTTP_206_PARTIAL_CONTENT_STATUS_CODE_ARRAY[] = {L'2', L'0', L'6', L' ', L'P', L'a', L'r', L't', L'i', L'a', L'l', L' ', L'C', L'o', L'n', L't', L'e', L'n', L't'};
+static wchar_t* HTTP_206_PARTIAL_CONTENT_STATUS_CODE = HTTP_206_PARTIAL_CONTENT_STATUS_CODE_ARRAY;
 static int* HTTP_206_PARTIAL_CONTENT_STATUS_CODE_COUNT = NUMBER_19_INTEGER_ARRAY;
 
 /**
@@ -124,8 +124,8 @@ static int* HTTP_206_PARTIAL_CONTENT_STATUS_CODE_COUNT = NUMBER_19_INTEGER_ARRAY
  * http://www.w3.org/Protocols/HTTP/1.1/rfc2616bis/draft-lafon-rfc2616bis-03.html
  */
 /*??
-static char HTTP_207_MULTI_STATUS_STATUS_CODE_ARRAY[] = {'2', '0', '7', ' ', 'M', 'u', 'l', 't', 'i', '-', 'S', 't', 'a', 't', 'u', 's'};
-static char* HTTP_207_MULTI_STATUS_STATUS_CODE = HTTP_207_MULTI_STATUS_STATUS_CODE_ARRAY;
+static wchar_t HTTP_207_MULTI_STATUS_STATUS_CODE_ARRAY[] = {L'2', L'0', L'7', L' ', L'M', L'u', L'l', L't', L'i', L'-', L'S', L't', L'a', L't', L'u', L's'};
+static wchar_t* HTTP_207_MULTI_STATUS_STATUS_CODE = HTTP_207_MULTI_STATUS_STATUS_CODE_ARRAY;
 static int* HTTP_207_MULTI_STATUS_STATUS_CODE_COUNT = NUMBER_16_INTEGER_ARRAY;
 */
 
@@ -144,33 +144,33 @@ static int* HTTP_207_MULTI_STATUS_STATUS_CODE_COUNT = NUMBER_16_INTEGER_ARRAY;
 //
 
 /** The 300 multiple choices status code. */
-static char HTTP_300_MULTIPLE_CHOICEs_STATUS_CODE_ARRAY[] = {'3', '0', '0', ' ', 'M', 'u', 'l', 't', 'i', 'p', 'l', 'e', ' ', 'C', 'h', 'o', 'i', 'c', 'e', 's'};
-static char* HTTP_300_MULTIPLE_CHOICEs_STATUS_CODE = HTTP_300_MULTIPLE_CHOICEs_STATUS_CODE_ARRAY;
+static wchar_t HTTP_300_MULTIPLE_CHOICEs_STATUS_CODE_ARRAY[] = {L'3', L'0', L'0', L' ', L'M', L'u', L'l', L't', L'i', L'p', L'l', L'e', L' ', L'C', L'h', L'o', L'i', L'c', L'e', L's'};
+static wchar_t* HTTP_300_MULTIPLE_CHOICEs_STATUS_CODE = HTTP_300_MULTIPLE_CHOICEs_STATUS_CODE_ARRAY;
 static int* HTTP_300_MULTIPLE_CHOICEs_STATUS_CODE_COUNT = NUMBER_20_INTEGER_ARRAY;
 
 /** The 301 moved permanently status code. */
-static char HTTP_301_MOVED_PERMANENTLY_STATUS_CODE_ARRAY[] = {'3', '0', '1', ' ', 'M', 'o', 'v', 'e', 'd', ' ', 'P', 'e', 'r', 'm', 'a', 'n', 'e', 'n', 't', 'l', 'y'};
-static char* HTTP_301_MOVED_PERMANENTLY_STATUS_CODE = HTTP_301_MOVED_PERMANENTLY_STATUS_CODE_ARRAY;
+static wchar_t HTTP_301_MOVED_PERMANENTLY_STATUS_CODE_ARRAY[] = {L'3', L'0', L'1', L' ', L'M', L'o', L'v', L'e', L'd', L' ', L'P', L'e', L'r', L'm', L'a', L'n', L'e', L'n', L't', L'l', L'y'};
+static wchar_t* HTTP_301_MOVED_PERMANENTLY_STATUS_CODE = HTTP_301_MOVED_PERMANENTLY_STATUS_CODE_ARRAY;
 static int* HTTP_301_MOVED_PERMANENTLY_STATUS_CODE_COUNT = NUMBER_21_INTEGER_ARRAY;
 
 /** The 302 found status code. */
-static char HTTP_302_FOUND_STATUS_CODE_ARRAY[] = {'3', '0', '2', ' ', 'F', 'o', 'u', 'n', 'd'};
-static char* HTTP_302_FOUND_STATUS_CODE = HTTP_302_FOUND_STATUS_CODE_ARRAY;
+static wchar_t HTTP_302_FOUND_STATUS_CODE_ARRAY[] = {L'3', L'0', L'2', L' ', L'F', L'o', L'u', L'n', L'd'};
+static wchar_t* HTTP_302_FOUND_STATUS_CODE = HTTP_302_FOUND_STATUS_CODE_ARRAY;
 static int* HTTP_302_FOUND_STATUS_CODE_COUNT = NUMBER_9_INTEGER_ARRAY;
 
 /** The 303 see other status code. */
-static char HTTP_303_SEE_OTHER_STATUS_CODE_ARRAY[] = {'3', '0', '3', ' ', 'S', 'e', 'e', ' ', 'O', 't', 'h', 'e', 'r'};
-static char* HTTP_303_SEE_OTHER_STATUS_CODE = HTTP_303_SEE_OTHER_STATUS_CODE_ARRAY;
+static wchar_t HTTP_303_SEE_OTHER_STATUS_CODE_ARRAY[] = {L'3', L'0', L'3', L' ', L'S', L'e', L'e', L' ', L'O', L't', L'h', L'e', L'r'};
+static wchar_t* HTTP_303_SEE_OTHER_STATUS_CODE = HTTP_303_SEE_OTHER_STATUS_CODE_ARRAY;
 static int* HTTP_303_SEE_OTHER_STATUS_CODE_COUNT = NUMBER_13_INTEGER_ARRAY;
 
 /** The 304 not modified status code. */
-static char HTTP_304_NOT_MODIFIED_STATUS_CODE_ARRAY[] = {'3', '0', '4', ' ', 'N', 'o', 't', ' ', 'M', 'o', 'd', 'i', 'f', 'i', 'e', 'd'};
-static char* HTTP_304_NOT_MODIFIED_STATUS_CODE = HTTP_304_NOT_MODIFIED_STATUS_CODE_ARRAY;
+static wchar_t HTTP_304_NOT_MODIFIED_STATUS_CODE_ARRAY[] = {L'3', L'0', L'4', L' ', L'N', L'o', L't', L' ', L'M', L'o', L'd', L'i', L'f', L'i', L'e', L'd'};
+static wchar_t* HTTP_304_NOT_MODIFIED_STATUS_CODE = HTTP_304_NOT_MODIFIED_STATUS_CODE_ARRAY;
 static int* HTTP_304_NOT_MODIFIED_STATUS_CODE_COUNT = NUMBER_16_INTEGER_ARRAY;
 
 /** The 305 use proxy status code. */
-static char HTTP_305_USE_PROXY_STATUS_CODE_ARRAY[] = {'3', '0', '5', ' ', 'U', 's', 'e', ' ', 'P', 'r', 'o', 'x', 'y'};
-static char* HTTP_305_USE_PROXY_STATUS_CODE = HTTP_305_USE_PROXY_STATUS_CODE_ARRAY;
+static wchar_t HTTP_305_USE_PROXY_STATUS_CODE_ARRAY[] = {L'3', L'0', L'5', L' ', L'U', L's', L'e', L' ', L'P', L'r', L'o', L'x', L'y'};
+static wchar_t* HTTP_305_USE_PROXY_STATUS_CODE = HTTP_305_USE_PROXY_STATUS_CODE_ARRAY;
 static int* HTTP_305_USE_PROXY_STATUS_CODE_COUNT = NUMBER_13_INTEGER_ARRAY;
 
 /**
@@ -180,14 +180,14 @@ static int* HTTP_305_USE_PROXY_STATUS_CODE_COUNT = NUMBER_13_INTEGER_ARRAY;
  * http://www.w3.org/Protocols/HTTP/1.1/rfc2616bis/draft-lafon-rfc2616bis-03.html
  */
 /*??
-static char HTTP_306_SWITCH_PROXY_STATUS_CODE_ARRAY[] = {'3', '0', '6', ' ', 'S', 'w', 'i', 't', 'c', 'h', ' ', 'P', 'r', 'o', 'x', 'y'};
-static char* HTTP_306_SWITCH_PROXY_STATUS_CODE = HTTP_306_SWITCH_PROXY_STATUS_CODE_ARRAY;
+static wchar_t HTTP_306_SWITCH_PROXY_STATUS_CODE_ARRAY[] = {L'3', L'0', L'6', L' ', L'S', L'w', L'i', L't', L'c', L'h', L' ', L'P', L'r', L'o', L'x', L'y'};
+static wchar_t* HTTP_306_SWITCH_PROXY_STATUS_CODE = HTTP_306_SWITCH_PROXY_STATUS_CODE_ARRAY;
 static int* HTTP_306_SWITCH_PROXY_STATUS_CODE_COUNT = NUMBER_16_INTEGER_ARRAY;
 */
 
 /** The 307 temporary redirect (moved temporarily) status code. */
-static char HTTP_307_TEMPORARY_REDIRECT_STATUS_CODE_ARRAY[] = {'3', '0', '7', ' ', 'T', 'e', 'm', 'p', 'o', 'r', 'a', 'r', 'y', ' ', 'R', 'e', 'd', 'i', 'r', 'e', 'c', 't'};
-static char* HTTP_307_TEMPORARY_REDIRECT_STATUS_CODE = HTTP_307_TEMPORARY_REDIRECT_STATUS_CODE_ARRAY;
+static wchar_t HTTP_307_TEMPORARY_REDIRECT_STATUS_CODE_ARRAY[] = {L'3', L'0', L'7', L' ', L'T', L'e', L'm', L'p', L'o', L'r', L'a', L'r', L'y', L' ', L'R', L'e', L'd', L'i', L'r', L'e', L'c', L't'};
+static wchar_t* HTTP_307_TEMPORARY_REDIRECT_STATUS_CODE = HTTP_307_TEMPORARY_REDIRECT_STATUS_CODE_ARRAY;
 static int* HTTP_307_TEMPORARY_REDIRECT_STATUS_CODE_COUNT = NUMBER_22_INTEGER_ARRAY;
 
 //
@@ -208,93 +208,93 @@ static int* HTTP_307_TEMPORARY_REDIRECT_STATUS_CODE_COUNT = NUMBER_22_INTEGER_AR
 //
 
 /** The 400 bad request status code. */
-static char HTTP_400_BAD_REQUEST_STATUS_CODE_ARRAY[] = {'4', '0', '0', ' ', 'B', 'a', 'd', ' ', 'R', 'e', 'q', 'u', 'e', 's', 't'};
-static char* HTTP_400_BAD_REQUEST_STATUS_CODE = HTTP_400_BAD_REQUEST_STATUS_CODE_ARRAY;
+static wchar_t HTTP_400_BAD_REQUEST_STATUS_CODE_ARRAY[] = {L'4', L'0', L'0', L' ', L'B', L'a', L'd', L' ', L'R', L'e', L'q', L'u', L'e', L's', L't'};
+static wchar_t* HTTP_400_BAD_REQUEST_STATUS_CODE = HTTP_400_BAD_REQUEST_STATUS_CODE_ARRAY;
 static int* HTTP_400_BAD_REQUEST_STATUS_CODE_COUNT = NUMBER_15_INTEGER_ARRAY;
 
 /** The 401 unauthorized status code. */
-static char HTTP_401_UNAUTHORIZED_STATUS_CODE_ARRAY[] = {'4', '0', '1', ' ', 'U', 'n', 'a', 'u', 't', 'h', 'o', 'r', 'i', 'z', 'e', 'd'};
-static char* HTTP_401_UNAUTHORIZED_STATUS_CODE = HTTP_401_UNAUTHORIZED_STATUS_CODE_ARRAY;
+static wchar_t HTTP_401_UNAUTHORIZED_STATUS_CODE_ARRAY[] = {L'4', L'0', L'1', L' ', L'U', L'n', L'a', L'u', L't', L'h', L'o', L'r', L'i', L'z', L'e', L'd'};
+static wchar_t* HTTP_401_UNAUTHORIZED_STATUS_CODE = HTTP_401_UNAUTHORIZED_STATUS_CODE_ARRAY;
 static int* HTTP_401_UNAUTHORIZED_STATUS_CODE_COUNT = NUMBER_16_INTEGER_ARRAY;
 
 /** The 402 payment required status code. */
-static char HTTP_402_PAYMENT_REQUIRED_STATUS_CODE_ARRAY[] = {'4', '0', '2', ' ', 'P', 'a', 'y', 'm', 'e', 'n', 't', ' ', 'R', 'e', 'q', 'u', 'i', 'r', 'e', 'd'};
-static char* HTTP_402_PAYMENT_REQUIRED_STATUS_CODE = HTTP_402_PAYMENT_REQUIRED_STATUS_CODE_ARRAY;
+static wchar_t HTTP_402_PAYMENT_REQUIRED_STATUS_CODE_ARRAY[] = {L'4', L'0', L'2', L' ', L'P', L'a', L'y', L'm', L'e', L'n', L't', L' ', L'R', L'e', L'q', L'u', L'i', L'r', L'e', L'd'};
+static wchar_t* HTTP_402_PAYMENT_REQUIRED_STATUS_CODE = HTTP_402_PAYMENT_REQUIRED_STATUS_CODE_ARRAY;
 static int* HTTP_402_PAYMENT_REQUIRED_STATUS_CODE_COUNT = NUMBER_20_INTEGER_ARRAY;
 
 /** The 403 forbidden status code. */
-static char HTTP_403_FORBIDDEN_STATUS_CODE_ARRAY[] = {'4', '0', '3', ' ', 'F', 'o', 'r', 'b', 'i', 'd', 'd', 'e', 'n'};
-static char* HTTP_403_FORBIDDEN_STATUS_CODE = HTTP_403_FORBIDDEN_STATUS_CODE_ARRAY;
+static wchar_t HTTP_403_FORBIDDEN_STATUS_CODE_ARRAY[] = {L'4', L'0', L'3', L' ', L'F', L'o', L'r', L'b', L'i', L'd', L'd', L'e', L'n'};
+static wchar_t* HTTP_403_FORBIDDEN_STATUS_CODE = HTTP_403_FORBIDDEN_STATUS_CODE_ARRAY;
 static int* HTTP_403_FORBIDDEN_STATUS_CODE_COUNT = NUMBER_13_INTEGER_ARRAY;
 
 /** The 404 not found status code. */
-static char HTTP_404_NOT_FOUND_STATUS_CODE_ARRAY[] = {'4', '0', '4', ' ', 'N', 'o', 't', ' ', 'F', 'o', 'u', 'n', 'd'};
-static char* HTTP_404_NOT_FOUND_STATUS_CODE = HTTP_404_NOT_FOUND_STATUS_CODE_ARRAY;
+static wchar_t HTTP_404_NOT_FOUND_STATUS_CODE_ARRAY[] = {L'4', L'0', L'4', L' ', L'N', L'o', L't', L' ', L'F', L'o', L'u', L'n', L'd'};
+static wchar_t* HTTP_404_NOT_FOUND_STATUS_CODE = HTTP_404_NOT_FOUND_STATUS_CODE_ARRAY;
 static int* HTTP_404_NOT_FOUND_STATUS_CODE_COUNT = NUMBER_13_INTEGER_ARRAY;
 
 /** The 405 method not allowed status code. */
-static char HTTP_405_METHOD_NOT_ALLOWED_STATUS_CODE_ARRAY[] = {'4', '0', '5', ' ', 'M', 'e', 't', 'h', 'o', 'd', ' ', 'N', 'o', 't', ' ', 'A', 'l', 'l', 'o', 'w', 'e', 'd'};
-static char* HTTP_405_METHOD_NOT_ALLOWED_STATUS_CODE = HTTP_405_METHOD_NOT_ALLOWED_STATUS_CODE_ARRAY;
+static wchar_t HTTP_405_METHOD_NOT_ALLOWED_STATUS_CODE_ARRAY[] = {L'4', L'0', L'5', L' ', L'M', L'e', L't', L'h', L'o', L'd', L' ', L'N', L'o', L't', L' ', L'A', L'l', L'l', L'o', L'w', L'e', L'd'};
+static wchar_t* HTTP_405_METHOD_NOT_ALLOWED_STATUS_CODE = HTTP_405_METHOD_NOT_ALLOWED_STATUS_CODE_ARRAY;
 static int* HTTP_405_METHOD_NOT_ALLOWED_STATUS_CODE_COUNT = NUMBER_22_INTEGER_ARRAY;
 
 /** The 406 not acceptable status code. */
-static char HTTP_406_NOT_ACCEPTABLE_STATUS_CODE_ARRAY[] = {'4', '0', '6', ' ', 'N', 'o', 't', ' ', 'A', 'c', 'c', 'e', 'p', 't', 'a', 'b', 'l', 'e'};
-static char* HTTP_406_NOT_ACCEPTABLE_STATUS_CODE = HTTP_406_NOT_ACCEPTABLE_STATUS_CODE_ARRAY;
+static wchar_t HTTP_406_NOT_ACCEPTABLE_STATUS_CODE_ARRAY[] = {L'4', L'0', L'6', L' ', L'N', L'o', L't', L' ', L'A', L'c', L'c', L'e', L'p', L't', L'a', L'b', L'l', L'e'};
+static wchar_t* HTTP_406_NOT_ACCEPTABLE_STATUS_CODE = HTTP_406_NOT_ACCEPTABLE_STATUS_CODE_ARRAY;
 static int* HTTP_406_NOT_ACCEPTABLE_STATUS_CODE_COUNT = NUMBER_18_INTEGER_ARRAY;
 
 /** The 407 proxy authentication required status code. */
-static char HTTP_407_PROXY_AUTHENTICATION_STATUS_CODE_ARRAY[] = {'4', '0', '7', ' ', 'P', 'r', 'o', 'x', 'y', ' ', 'A', 'u', 't', 'h', 'e', 'n', 't', 'i', 'c', 'a', 't', 'i', 'o', 'n', ' ', 'R', 'e', 'q', 'u', 'i', 'r', 'e', 'd'};
-static char* HTTP_407_PROXY_AUTHENTICATION_STATUS_CODE = HTTP_407_PROXY_AUTHENTICATION_STATUS_CODE_ARRAY;
+static wchar_t HTTP_407_PROXY_AUTHENTICATION_STATUS_CODE_ARRAY[] = {L'4', L'0', L'7', L' ', L'P', L'r', L'o', L'x', L'y', L' ', L'A', L'u', L't', L'h', L'e', L'n', L't', L'i', L'c', L'a', L't', L'i', L'o', L'n', L' ', L'R', L'e', L'q', L'u', L'i', L'r', L'e', L'd'};
+static wchar_t* HTTP_407_PROXY_AUTHENTICATION_STATUS_CODE = HTTP_407_PROXY_AUTHENTICATION_STATUS_CODE_ARRAY;
 static int* HTTP_407_PROXY_AUTHENTICATION_STATUS_CODE_COUNT = NUMBER_33_INTEGER_ARRAY;
 
 /** The 408 request timeout status code. */
-static char HTTP_408_REQUEST_TIMEOUT_STATUS_CODE_ARRAY[] = {'4', '0', '8', ' ', 'R', 'e', 'q', 'u', 'e', 's', 't', ' ', 'T', 'i', 'm', 'e', 'o', 'u', 't'};
-static char* HTTP_408_REQUEST_TIMEOUT_STATUS_CODE = HTTP_408_REQUEST_TIMEOUT_STATUS_CODE_ARRAY;
+static wchar_t HTTP_408_REQUEST_TIMEOUT_STATUS_CODE_ARRAY[] = {L'4', L'0', L'8', L' ', L'R', L'e', L'q', L'u', L'e', L's', L't', L' ', L'T', L'i', L'm', L'e', L'o', L'u', L't'};
+static wchar_t* HTTP_408_REQUEST_TIMEOUT_STATUS_CODE = HTTP_408_REQUEST_TIMEOUT_STATUS_CODE_ARRAY;
 static int* HTTP_408_REQUEST_TIMEOUT_STATUS_CODE_COUNT = NUMBER_19_INTEGER_ARRAY;
 
 /** The 409 conflict status code. */
-static char HTTP_409_CONFLICT_STATUS_CODE_ARRAY[] = {'4', '0', '9', ' ', 'C', 'o', 'n', 'f', 'l', 'i', 'c', 't'};
-static char* HTTP_409_CONFLICT_STATUS_CODE = HTTP_409_CONFLICT_STATUS_CODE_ARRAY;
+static wchar_t HTTP_409_CONFLICT_STATUS_CODE_ARRAY[] = {L'4', L'0', L'9', L' ', L'C', L'o', L'n', L'f', L'l', L'i', L'c', L't'};
+static wchar_t* HTTP_409_CONFLICT_STATUS_CODE = HTTP_409_CONFLICT_STATUS_CODE_ARRAY;
 static int* HTTP_409_CONFLICT_STATUS_CODE_COUNT = NUMBER_12_INTEGER_ARRAY;
 
 /** The 410 gone status code. */
-static char HTTP_410_GONE_STATUS_CODE_ARRAY[] = {'4', '1', '0', ' ', 'G', 'o', 'n', 'e'};
-static char* HTTP_410_GONE_STATUS_CODE = HTTP_410_GONE_STATUS_CODE_ARRAY;
+static wchar_t HTTP_410_GONE_STATUS_CODE_ARRAY[] = {L'4', L'1', L'0', L' ', L'G', L'o', L'n', L'e'};
+static wchar_t* HTTP_410_GONE_STATUS_CODE = HTTP_410_GONE_STATUS_CODE_ARRAY;
 static int* HTTP_410_GONE_STATUS_CODE_COUNT = NUMBER_8_INTEGER_ARRAY;
 
 /** The 411 length required status code. */
-static char HTTP_411_LENGTH_REQUIRED_STATUS_CODE_ARRAY[] = {'4', '1', '1', ' ', 'L', 'e', 'n', 'g', 't', 'h', ' ', 'R', 'e', 'q', 'u', 'i', 'r', 'e', 'd'};
-static char* HTTP_411_LENGTH_REQUIRED_STATUS_CODE = HTTP_411_LENGTH_REQUIRED_STATUS_CODE_ARRAY;
+static wchar_t HTTP_411_LENGTH_REQUIRED_STATUS_CODE_ARRAY[] = {L'4', L'1', L'1', L' ', L'L', L'e', L'n', L'g', L't', L'h', L' ', L'R', L'e', L'q', L'u', L'i', L'r', L'e', L'd'};
+static wchar_t* HTTP_411_LENGTH_REQUIRED_STATUS_CODE = HTTP_411_LENGTH_REQUIRED_STATUS_CODE_ARRAY;
 static int* HTTP_411_LENGTH_REQUIRED_STATUS_CODE_COUNT = NUMBER_19_INTEGER_ARRAY;
 
 /** The 412 precondition failed status code. */
-static char HTTP_412_PRECONDITION_FAILED_STATUS_CODE_ARRAY[] = {'4', '1', '2', ' ', 'P', 'r', 'e', 'c', 'o', 'n', 'd', 'i', 't', 'i', 'o', 'n', ' ', 'F', 'a', 'i', 'l', 'e', 'd'};
-static char* HTTP_412_PRECONDITION_FAILED_STATUS_CODE = HTTP_412_PRECONDITION_FAILED_STATUS_CODE_ARRAY;
+static wchar_t HTTP_412_PRECONDITION_FAILED_STATUS_CODE_ARRAY[] = {L'4', L'1', L'2', L' ', L'P', L'r', L'e', L'c', L'o', L'n', L'd', L'i', L't', L'i', L'o', L'n', L' ', L'F', L'a', L'i', L'l', L'e', L'd'};
+static wchar_t* HTTP_412_PRECONDITION_FAILED_STATUS_CODE = HTTP_412_PRECONDITION_FAILED_STATUS_CODE_ARRAY;
 static int* HTTP_412_PRECONDITION_FAILED_STATUS_CODE_COUNT = NUMBER_23_INTEGER_ARRAY;
 
 /** The 413 request entity too large status code. */
-static char HTTP_413_REQUEST_ENTITY_TOO_LARGE_STATUS_CODE_ARRAY[] = {'4', '1', '3', ' ', 'R', 'e', 'q', 'u', 'e', 's', 't', ' ', 'E', 'n', 't', 'i', 't', 'y', ' ', 'T', 'o', 'o', ' ', 'L', 'a', 'r', 'g', 'e'};
-static char* HTTP_413_REQUEST_ENTITY_TOO_LARGE_STATUS_CODE = HTTP_413_REQUEST_ENTITY_TOO_LARGE_STATUS_CODE_ARRAY;
+static wchar_t HTTP_413_REQUEST_ENTITY_TOO_LARGE_STATUS_CODE_ARRAY[] = {L'4', L'1', L'3', L' ', L'R', L'e', L'q', L'u', L'e', L's', L't', L' ', L'E', L'n', L't', L'i', L't', L'y', L' ', L'T', L'o', L'o', L' ', L'L', L'a', L'r', L'g', L'e'};
+static wchar_t* HTTP_413_REQUEST_ENTITY_TOO_LARGE_STATUS_CODE = HTTP_413_REQUEST_ENTITY_TOO_LARGE_STATUS_CODE_ARRAY;
 static int* HTTP_413_REQUEST_ENTITY_TOO_LARGE_STATUS_CODE_COUNT = NUMBER_28_INTEGER_ARRAY;
 
 /** The 414 request-uri too long status code. */
-static char HTTP_414_REQUEST_URI_TOO_LARGE_STATUS_CODE_ARRAY[] = {'4', '1', '4', ' ', 'R', 'e', 'q', 'u', 'e', 's', 't', '-', 'U', 'R', 'I', ' ', 'T', 'o', 'o', ' ', 'L', 'o', 'n', 'g'};
-static char* HTTP_414_REQUEST_URI_TOO_LARGE_STATUS_CODE = HTTP_414_REQUEST_URI_TOO_LARGE_STATUS_CODE_ARRAY;
+static wchar_t HTTP_414_REQUEST_URI_TOO_LARGE_STATUS_CODE_ARRAY[] = {L'4', L'1', L'4', L' ', L'R', L'e', L'q', L'u', L'e', L's', L't', L'-', L'U', L'R', L'I', L' ', L'T', L'o', L'o', L' ', L'L', L'o', L'n', L'g'};
+static wchar_t* HTTP_414_REQUEST_URI_TOO_LARGE_STATUS_CODE = HTTP_414_REQUEST_URI_TOO_LARGE_STATUS_CODE_ARRAY;
 static int* HTTP_414_REQUEST_URI_TOO_LARGE_STATUS_CODE_COUNT = NUMBER_24_INTEGER_ARRAY;
 
 /** The 415 unsupported media type status code. */
-static char HTTP_415_UNSUPPORTED_MEDIA_TYPE_STATUS_CODE_ARRAY[] = {'4', '1', '5', ' ', 'U', 'n', 's', 'u', 'p', 'p', 'o', 'r', 't', 'e', 'd', ' ', 'M', 'e', 'd', 'i', 'a', ' ', 'T', 'y', 'p', 'e'};
-static char* HTTP_415_UNSUPPORTED_MEDIA_TYPE_STATUS_CODE = HTTP_415_UNSUPPORTED_MEDIA_TYPE_STATUS_CODE_ARRAY;
+static wchar_t HTTP_415_UNSUPPORTED_MEDIA_TYPE_STATUS_CODE_ARRAY[] = {L'4', L'1', L'5', L' ', L'U', L'n', L's', L'u', L'p', L'p', L'o', L'r', L't', L'e', L'd', L' ', L'M', L'e', L'd', L'i', L'a', L' ', L'T', L'y', L'p', L'e'};
+static wchar_t* HTTP_415_UNSUPPORTED_MEDIA_TYPE_STATUS_CODE = HTTP_415_UNSUPPORTED_MEDIA_TYPE_STATUS_CODE_ARRAY;
 static int* HTTP_415_UNSUPPORTED_MEDIA_TYPE_STATUS_CODE_COUNT = NUMBER_26_INTEGER_ARRAY;
 
 /** The 416 requested range not satisfiable status code. */
-static char HTTP_416_REQUESTED_RANGE_NOT_SATISFIABLE_STATUS_CODE_ARRAY[] = {'4', '1', '6', ' ', 'R', 'e', 'q', 'u', 'e', 's', 't', 'e', 'd', ' ', 'R', 'a', 'n', 'g', 'e', ' ', 'N', 'o', 't', ' ', 'S', 'a', 't', 'i', 's', 'f', 'i', 'a', 'b', 'l', 'e'};
-static char* HTTP_416_REQUESTED_RANGE_NOT_SATISFIABLE_STATUS_CODE = HTTP_416_REQUESTED_RANGE_NOT_SATISFIABLE_STATUS_CODE_ARRAY;
+static wchar_t HTTP_416_REQUESTED_RANGE_NOT_SATISFIABLE_STATUS_CODE_ARRAY[] = {L'4', L'1', L'6', L' ', L'R', L'e', L'q', L'u', L'e', L's', L't', L'e', L'd', L' ', L'R', L'a', L'n', L'g', L'e', L' ', L'N', L'o', L't', L' ', L'S', L'a', L't', L'i', L's', L'f', L'i', L'a', L'b', L'l', L'e'};
+static wchar_t* HTTP_416_REQUESTED_RANGE_NOT_SATISFIABLE_STATUS_CODE = HTTP_416_REQUESTED_RANGE_NOT_SATISFIABLE_STATUS_CODE_ARRAY;
 static int* HTTP_416_REQUESTED_RANGE_NOT_SATISFIABLE_STATUS_CODE_COUNT = NUMBER_35_INTEGER_ARRAY;
 
 /** The 417 expectation failed status code. */
-static char HTTP_417_EXPECTATION_FAILED_STATUS_CODE_ARRAY[] = {'4', '1', '7', ' ', 'E', 'x', 'p', 'e', 'c', 't', 'a', 't', 'i', 'o', 'n', ' ', 'F', 'a', 'i', 'l', 'e', 'd'};
-static char* HTTP_417_EXPECTATION_FAILED_STATUS_CODE = HTTP_417_EXPECTATION_FAILED_STATUS_CODE_ARRAY;
+static wchar_t HTTP_417_EXPECTATION_FAILED_STATUS_CODE_ARRAY[] = {L'4', L'1', L'7', L' ', L'E', L'x', L'p', L'e', L'c', L't', L'a', L't', L'i', L'o', L'n', L' ', L'F', L'a', L'i', L'l', L'e', L'd'};
+static wchar_t* HTTP_417_EXPECTATION_FAILED_STATUS_CODE = HTTP_417_EXPECTATION_FAILED_STATUS_CODE_ARRAY;
 static int* HTTP_417_EXPECTATION_FAILED_STATUS_CODE_COUNT = NUMBER_22_INTEGER_ARRAY;
 
 /**
@@ -304,8 +304,8 @@ static int* HTTP_417_EXPECTATION_FAILED_STATUS_CODE_COUNT = NUMBER_22_INTEGER_AR
  * http://www.w3.org/Protocols/HTTP/1.1/rfc2616bis/draft-lafon-rfc2616bis-03.html
  */
 /*??
-static char HTTP_422_UNPROCESSABLE_ENTITY_STATUS_CODE_ARRAY[] = {'4', '2', '2', ' ', 'U', 'n', 'p', 'r', 'o', 'c', 'e', 's', 's', 'a', 'b', 'l', 'e', ' ', 'E', 'n', 't', 'i', 't', 'y'};
-static char* HTTP_422_UNPROCESSABLE_ENTITY_STATUS_CODE = HTTP_422_UNPROCESSABLE_ENTITY_STATUS_CODE_ARRAY;
+static wchar_t HTTP_422_UNPROCESSABLE_ENTITY_STATUS_CODE_ARRAY[] = {L'4', L'2', L'2', L' ', L'U', L'n', L'p', L'r', L'o', L'c', L'e', L's', L's', L'a', L'b', L'l', L'e', L' ', L'E', L'n', L't', L'i', L't', L'y'};
+static wchar_t* HTTP_422_UNPROCESSABLE_ENTITY_STATUS_CODE = HTTP_422_UNPROCESSABLE_ENTITY_STATUS_CODE_ARRAY;
 static int* HTTP_422_UNPROCESSABLE_ENTITY_STATUS_CODE_COUNT = NUMBER_24_INTEGER_ARRAY;
 */
 
@@ -316,8 +316,8 @@ static int* HTTP_422_UNPROCESSABLE_ENTITY_STATUS_CODE_COUNT = NUMBER_24_INTEGER_
  * http://www.w3.org/Protocols/HTTP/1.1/rfc2616bis/draft-lafon-rfc2616bis-03.html
  */
 /*??
-static char HTTP_423_LOCKED_STATUS_CODE_ARRAY[] = {'4', '2', '3', ' ', 'L', 'o', 'c', 'k', 'e', 'd'};
-static char* HTTP_423_LOCKED_STATUS_CODE = HTTP_423_LOCKED_STATUS_CODE_ARRAY;
+static wchar_t HTTP_423_LOCKED_STATUS_CODE_ARRAY[] = {L'4', L'2', L'3', L' ', L'L', L'o', L'c', L'k', L'e', L'd'};
+static wchar_t* HTTP_423_LOCKED_STATUS_CODE = HTTP_423_LOCKED_STATUS_CODE_ARRAY;
 static int* HTTP_423_LOCKED_STATUS_CODE_COUNT = NUMBER_10_INTEGER_ARRAY;
 */
 
@@ -328,8 +328,8 @@ static int* HTTP_423_LOCKED_STATUS_CODE_COUNT = NUMBER_10_INTEGER_ARRAY;
  * http://www.w3.org/Protocols/HTTP/1.1/rfc2616bis/draft-lafon-rfc2616bis-03.html
  */
 /*??
-static char HTTP_424_FAILED_DEPENDENCY_STATUS_CODE_ARRAY[] = {'4', '2', '4', ' ', 'F', 'a', 'i', 'l', 'e', 'd', ' ', 'D', 'e', 'p', 'e', 'n', 'd', 'e', 'n', 'c', 'y'};
-static char* HTTP_424_FAILED_DEPENDENCY_STATUS_CODE = HTTP_424_FAILED_DEPENDENCY_STATUS_CODE_ARRAY;
+static wchar_t HTTP_424_FAILED_DEPENDENCY_STATUS_CODE_ARRAY[] = {L'4', L'2', L'4', L' ', L'F', L'a', L'i', L'l', L'e', L'd', L' ', L'D', L'e', L'p', L'e', L'n', L'd', L'e', L'n', L'c', L'y'};
+static wchar_t* HTTP_424_FAILED_DEPENDENCY_STATUS_CODE = HTTP_424_FAILED_DEPENDENCY_STATUS_CODE_ARRAY;
 static int* HTTP_424_FAILED_DEPENDENCY_STATUS_CODE_COUNT = NUMBER_21_INTEGER_ARRAY;
 */
 
@@ -344,33 +344,33 @@ static int* HTTP_424_FAILED_DEPENDENCY_STATUS_CODE_COUNT = NUMBER_21_INTEGER_ARR
 //
 
 /** The 500 internal server error status code. */
-static char HTTP_500_INTERNAL_SERVER_ERROR_STATUS_CODE_ARRAY[] = {'5', '0', '0', ' ', 'I', 'n', 't', 'e', 'r', 'n', 'a', 'l', ' ', 'S', 'e', 'r', 'v', 'e', 'r', ' ', 'E', 'r', 'r', 'o', 'r'};
-static char* HTTP_500_INTERNAL_SERVER_ERROR_STATUS_CODE = HTTP_500_INTERNAL_SERVER_ERROR_STATUS_CODE_ARRAY;
+static wchar_t HTTP_500_INTERNAL_SERVER_ERROR_STATUS_CODE_ARRAY[] = {L'5', L'0', L'0', L' ', L'I', L'n', L't', L'e', L'r', L'n', L'a', L'l', L' ', L'S', L'e', L'r', L'v', L'e', L'r', L' ', L'E', L'r', L'r', L'o', L'r'};
+static wchar_t* HTTP_500_INTERNAL_SERVER_ERROR_STATUS_CODE = HTTP_500_INTERNAL_SERVER_ERROR_STATUS_CODE_ARRAY;
 static int* HTTP_500_INTERNAL_SERVER_ERROR_STATUS_CODE_COUNT = NUMBER_25_INTEGER_ARRAY;
 
 /** The 501 not implemented status code. */
-static char HTTP_501_NOT_IMPLEMENTED_STATUS_CODE_ARRAY[] = {'5', '0', '1', ' ', 'N', 'o', 't', ' ', 'I', 'm', 'p', 'l', 'e', 'm', 'e', 'n', 't', 'e', 'd'};
-static char* HTTP_501_NOT_IMPLEMENTED_STATUS_CODE = HTTP_501_NOT_IMPLEMENTED_STATUS_CODE_ARRAY;
+static wchar_t HTTP_501_NOT_IMPLEMENTED_STATUS_CODE_ARRAY[] = {L'5', L'0', L'1', L' ', L'N', L'o', L't', L' ', L'I', L'm', L'p', L'l', L'e', L'm', L'e', L'n', L't', L'e', L'd'};
+static wchar_t* HTTP_501_NOT_IMPLEMENTED_STATUS_CODE = HTTP_501_NOT_IMPLEMENTED_STATUS_CODE_ARRAY;
 static int* HTTP_501_NOT_IMPLEMENTED_STATUS_CODE_COUNT = NUMBER_19_INTEGER_ARRAY;
 
 /** The 502 bad gateway status code. */
-static char HTTP_502_BAD_GATEWAY_STATUS_CODE_ARRAY[] = {'5', '0', '2', ' ', 'B', 'a', 'd', ' ', 'G', 'a', 't', 'e', 'w', 'a', 'y'};
-static char* HTTP_502_BAD_GATEWAY_STATUS_CODE = HTTP_502_BAD_GATEWAY_STATUS_CODE_ARRAY;
+static wchar_t HTTP_502_BAD_GATEWAY_STATUS_CODE_ARRAY[] = {L'5', L'0', L'2', L' ', L'B', L'a', L'd', L' ', L'G', L'a', L't', L'e', L'w', L'a', L'y'};
+static wchar_t* HTTP_502_BAD_GATEWAY_STATUS_CODE = HTTP_502_BAD_GATEWAY_STATUS_CODE_ARRAY;
 static int* HTTP_502_BAD_GATEWAY_STATUS_CODE_COUNT = NUMBER_15_INTEGER_ARRAY;
 
 /** The 503 service unavailable status code. */
-static char HTTP_503_SERVICE_UNAVAILABLE_STATUS_CODE_ARRAY[] = {'5', '0', '3', ' ', 'S', 'e', 'r', 'v', 'i', 'c', 'e', ' ', 'U', 'n', 'a', 'v', 'a', 'i', 'l', 'a', 'b', 'l', 'e'};
-static char* HTTP_503_SERVICE_UNAVAILABLE_STATUS_CODE = HTTP_503_SERVICE_UNAVAILABLE_STATUS_CODE_ARRAY;
+static wchar_t HTTP_503_SERVICE_UNAVAILABLE_STATUS_CODE_ARRAY[] = {L'5', L'0', L'3', L' ', L'S', L'e', L'r', L'v', L'i', L'c', L'e', L' ', L'U', L'n', L'a', L'v', L'a', L'i', L'l', L'a', L'b', L'l', L'e'};
+static wchar_t* HTTP_503_SERVICE_UNAVAILABLE_STATUS_CODE = HTTP_503_SERVICE_UNAVAILABLE_STATUS_CODE_ARRAY;
 static int* HTTP_503_SERVICE_UNAVAILABLE_STATUS_CODE_COUNT = NUMBER_23_INTEGER_ARRAY;
 
 /** The 504 gateway timeout status code. */
-static char HTTP_504_GATEWAY_TIMEOUT_STATUS_CODE_ARRAY[] = {'5', '0', '4', ' ', 'G', 'a', 't', 'e', 'w', 'a', 'y', ' ', 'T', 'i', 'm', 'e', 'o', 'u', 't'};
-static char* HTTP_504_GATEWAY_TIMEOUT_STATUS_CODE = HTTP_504_GATEWAY_TIMEOUT_STATUS_CODE_ARRAY;
+static wchar_t HTTP_504_GATEWAY_TIMEOUT_STATUS_CODE_ARRAY[] = {L'5', L'0', L'4', L' ', L'G', L'a', L't', L'e', L'w', L'a', L'y', L' ', L'T', L'i', L'm', L'e', L'o', L'u', L't'};
+static wchar_t* HTTP_504_GATEWAY_TIMEOUT_STATUS_CODE = HTTP_504_GATEWAY_TIMEOUT_STATUS_CODE_ARRAY;
 static int* HTTP_504_GATEWAY_TIMEOUT_STATUS_CODE_COUNT = NUMBER_19_INTEGER_ARRAY;
 
 /** The 505 http version not supported status code. */
-static char HTTP_505_HTTP_VERSION_NOT_SUPPORTED_STATUS_CODE_ARRAY[] = {'5', '0', '5', ' ', 'H', 'T', 'T', 'P', ' ', 'V', 'e', 'r', 's', 'i', 'o', 'n', ' ', 'N', 'o', 't', ' ', 'S', 'u', 'p', 'p', 'o', 'r', 't', 'e', 'd'};
-static char* HTTP_505_HTTP_VERSION_NOT_SUPPORTED_STATUS_CODE = HTTP_505_HTTP_VERSION_NOT_SUPPORTED_STATUS_CODE_ARRAY;
+static wchar_t HTTP_505_HTTP_VERSION_NOT_SUPPORTED_STATUS_CODE_ARRAY[] = {L'5', L'0', L'5', L' ', L'H', L'T', L'T', L'P', L' ', L'V', L'e', L'r', L's', L'i', L'o', L'n', L' ', L'N', L'o', L't', L' ', L'S', L'u', L'p', L'p', L'o', L'r', L't', L'e', L'd'};
+static wchar_t* HTTP_505_HTTP_VERSION_NOT_SUPPORTED_STATUS_CODE = HTTP_505_HTTP_VERSION_NOT_SUPPORTED_STATUS_CODE_ARRAY;
 static int* HTTP_505_HTTP_VERSION_NOT_SUPPORTED_STATUS_CODE_COUNT = NUMBER_30_INTEGER_ARRAY;
 
 /**
@@ -380,8 +380,8 @@ static int* HTTP_505_HTTP_VERSION_NOT_SUPPORTED_STATUS_CODE_COUNT = NUMBER_30_IN
  * http://www.w3.org/Protocols/HTTP/1.1/rfc2616bis/draft-lafon-rfc2616bis-03.html
  */
 /*??
-static char HTTP_507_INSUFFICIENT_STORAGE_STATUS_CODE_ARRAY[] = {'5', '0', '7', ' ', 'I', 'n', 's', 'u', 'f', 'f', 'i', 'c', 'i', 'e', 'n', 't', ' ', 'S', 't', 'o', 'r', 'a', 'g', 'e'};
-static char* HTTP_507_INSUFFICIENT_STORAGE_STATUS_CODE = HTTP_507_INSUFFICIENT_STORAGE_STATUS_CODE_ARRAY;
+static wchar_t HTTP_507_INSUFFICIENT_STORAGE_STATUS_CODE_ARRAY[] = {L'5', L'0', L'7', L' ', L'I', L'n', L's', L'u', L'f', L'f', L'i', L'c', L'i', L'e', L'n', L't', L' ', L'S', L't', L'o', L'r', L'a', L'g', L'e'};
+static wchar_t* HTTP_507_INSUFFICIENT_STORAGE_STATUS_CODE = HTTP_507_INSUFFICIENT_STORAGE_STATUS_CODE_ARRAY;
 static int* HTTP_507_INSUFFICIENT_STORAGE_STATUS_CODE_COUNT = NUMBER_24_INTEGER_ARRAY;
 */
 
@@ -392,8 +392,8 @@ static int* HTTP_507_INSUFFICIENT_STORAGE_STATUS_CODE_COUNT = NUMBER_24_INTEGER_
  * http://www.w3.org/Protocols/HTTP/1.1/rfc2616bis/draft-lafon-rfc2616bis-03.html
  */
 /*??
-static char HTTP_509_BANDWIDTH_LIMIT_EXCEEDED_STATUS_CODE_ARRAY[] = {'5', '0', '9', ' ', 'B', 'a', 'n', 'd', 'w', 'i', 'd', 't', 'h', ' ', 'L', 'i', 'm', 'i', 't', ' ', 'E', 'x', 'c', 'e', 'e', 'd', 'e', 'd'};
-static char* HTTP_509_BANDWIDTH_LIMIT_EXCEEDED_STATUS_CODE = HTTP_509_BANDWIDTH_LIMIT_EXCEEDED_STATUS_CODE_ARRAY;
+static wchar_t HTTP_509_BANDWIDTH_LIMIT_EXCEEDED_STATUS_CODE_ARRAY[] = {L'5', L'0', L'9', L' ', L'B', L'a', L'n', L'd', L'w', L'i', L'd', L't', L'h', L' ', L'L', L'i', L'm', L'i', L't', L' ', L'E', L'x', L'c', L'e', L'e', L'd', L'e', L'd'};
+static wchar_t* HTTP_509_BANDWIDTH_LIMIT_EXCEEDED_STATUS_CODE = HTTP_509_BANDWIDTH_LIMIT_EXCEEDED_STATUS_CODE_ARRAY;
 static int* HTTP_509_BANDWIDTH_LIMIT_EXCEEDED_STATUS_CODE_COUNT = NUMBER_28_INTEGER_ARRAY;
 */
 

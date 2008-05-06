@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2008-05-04 00:18:12 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2008-05-06 22:36:52 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,28 +30,28 @@
 #include "../../../globals/constants/integer/integer_constants.c"
 
 /** The quotation mark xml character entity. */
-static char QUOTATION_MARK_XML_CHARACTER_ENTITY_ARRAY[] = {'q', 'u', 'o', 't'};
-static char* QUOTATION_MARK_XML_CHARACTER_ENTITY = QUOTATION_MARK_XML_CHARACTER_ENTITY_ARRAY;
+static wchar_t QUOTATION_MARK_XML_CHARACTER_ENTITY_ARRAY[] = {L'q', L'u', L'o', L't'};
+static wchar_t* QUOTATION_MARK_XML_CHARACTER_ENTITY = QUOTATION_MARK_XML_CHARACTER_ENTITY_ARRAY;
 static int* QUOTATION_MARK_XML_CHARACTER_ENTITY_COUNT = NUMBER_4_INTEGER_ARRAY;
 
 /** The ampersand xml character entity. */
-static char AMPERSAND_XML_CHARACTER_ENTITY_ARRAY[] = {'a', 'm', 'p'};
-static char* AMPERSAND_XML_CHARACTER_ENTITY = AMPERSAND_XML_CHARACTER_ENTITY_ARRAY;
+static wchar_t AMPERSAND_XML_CHARACTER_ENTITY_ARRAY[] = {L'a', L'm', L'p'};
+static wchar_t* AMPERSAND_XML_CHARACTER_ENTITY = AMPERSAND_XML_CHARACTER_ENTITY_ARRAY;
 static int* AMPERSAND_XML_CHARACTER_ENTITY_COUNT = NUMBER_3_INTEGER_ARRAY;
 
 /** The apostrophe xml character entity. CAUTION! It is only used in XHTML. */
-static char APOSTROPHE_XML_CHARACTER_ENTITY_ARRAY[] = {'a', 'p', 'o', 's'};
-static char* APOSTROPHE_XML_CHARACTER_ENTITY = APOSTROPHE_XML_CHARACTER_ENTITY_ARRAY;
+static wchar_t APOSTROPHE_XML_CHARACTER_ENTITY_ARRAY[] = {L'a', L'p', L'o', L's'};
+static wchar_t* APOSTROPHE_XML_CHARACTER_ENTITY = APOSTROPHE_XML_CHARACTER_ENTITY_ARRAY;
 static int* APOSTROPHE_XML_CHARACTER_ENTITY_COUNT = NUMBER_4_INTEGER_ARRAY;
 
 /** The less than sign xml character entity. */
-static char LESS_THAN_SIGN_XML_CHARACTER_ENTITY_ARRAY[] = {'l', 't'};
-static char* LESS_THAN_SIGN_XML_CHARACTER_ENTITY = LESS_THAN_SIGN_XML_CHARACTER_ENTITY_ARRAY;
+static wchar_t LESS_THAN_SIGN_XML_CHARACTER_ENTITY_ARRAY[] = {L'l', L't'};
+static wchar_t* LESS_THAN_SIGN_XML_CHARACTER_ENTITY = LESS_THAN_SIGN_XML_CHARACTER_ENTITY_ARRAY;
 static int* LESS_THAN_SIGN_XML_CHARACTER_ENTITY_COUNT = NUMBER_2_INTEGER_ARRAY;
 
 /** The greater than sign xml character entity. */
-static char GREATER_THAN_SIGN_XML_CHARACTER_ENTITY_ARRAY[] = {'g', 't'};
-static char* GREATER_THAN_SIGN_XML_CHARACTER_ENTITY = GREATER_THAN_SIGN_XML_CHARACTER_ENTITY_ARRAY;
+static wchar_t GREATER_THAN_SIGN_XML_CHARACTER_ENTITY_ARRAY[] = {L'g', L't'};
+static wchar_t* GREATER_THAN_SIGN_XML_CHARACTER_ENTITY = GREATER_THAN_SIGN_XML_CHARACTER_ENTITY_ARRAY;
 static int* GREATER_THAN_SIGN_XML_CHARACTER_ENTITY_COUNT = NUMBER_2_INTEGER_ARRAY;
 
 /* XML_CHARACTER_ENTITY_CONSTANTS_SOURCE */

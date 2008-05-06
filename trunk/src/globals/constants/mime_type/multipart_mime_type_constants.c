@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2008-05-04 00:18:12 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2008-05-06 22:36:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,8 +30,8 @@
 #include "../../../globals/constants/integer/integer_constants.c"
 
 /** The mixed multipart mime type. */
-static char MIXED_MULTIPART_MIME_TYPE_ARRAY[] = {'m', 'u', 'l', 't', 'i', 'p', 'a', 'r', 't', '/', 'm', 'i', 'x', 'e', 'd'};
-static char* MIXED_MULTIPART_MIME_TYPE = MIXED_MULTIPART_MIME_TYPE_ARRAY;
+static wchar_t MIXED_MULTIPART_MIME_TYPE_ARRAY[] = {L'm', L'u', L'l', L't', L'i', L'p', L'a', L'r', L't', L'/', L'm', L'i', L'x', L'e', L'd'};
+static wchar_t* MIXED_MULTIPART_MIME_TYPE = MIXED_MULTIPART_MIME_TYPE_ARRAY;
 static int* MIXED_MULTIPART_MIME_TYPE_COUNT = NUMBER_15_INTEGER_ARRAY;
 
 /* MULTIPART_MIME_TYPE_CONSTANTS_SOURCE */

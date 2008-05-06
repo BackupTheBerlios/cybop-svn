@@ -7,9 +7,17 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.42 $ $Date: 2008-05-04 22:34:38 $ $Author: christian $
+# @version $Revision: 1.43 $ $Date: 2008-05-06 22:36:52 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+done:
+        * All modules in directory "controller"
+
+todo:
+        CONVERT WIDE CHAR INTO MULTIBYTE CHAR (??) FOR THE FOLLOWING:
+        * Change function "write" in module "cyboi.c" etc.
+        * Change function "open" in module "optionaliser.c" etc.
 
     // The type "xmlChar" used by the libxml2 parser is a null-terminated sequence
     // of utf-8 characters. And only utf-8! One needs to convert strings encoded in
@@ -26,14 +34,14 @@
     // or wide character array as done before in CYBOI, i.e. using the "decode" function.
 
 
+        * Check the calls of "decode" in function "decode_compound_cybol_node",
+            since the conversion does not work anymore if changed to wide character!
+            Possibly, use "iconv" to create a wide character array out of the utf8 xmlChar array of libxml2!)
+
         * Go through source code manually searching for potential bugs,
             after conversion to wide character
         * Replace function calls to "strlen" with "wcslen"
         * Replace "char" with "wchar_t" wherever suitable
-        * Replace "CHARACTER_ARRAY" with "WIDE_CHARACTER_ARRAY"
-            (Mind the calls of "decode" in function "decode_compound_cybol_node",
-            since the conversion does not work anymore if changed to wide character!
-            Possibly, use "iconv" to create a wide character array out of the utf8 xmlChar array of libxml2!)
         * Check where possibly to replace "encode_integer" with "encode_integer_wide"
         * Adapt "write" function call in module "logger.c" to wide character
         * Convert more source code modules (logger etc.) to wide character usage,

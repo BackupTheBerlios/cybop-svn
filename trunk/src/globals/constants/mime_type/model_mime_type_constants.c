@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2008-05-04 00:18:12 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2008-05-06 22:36:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,8 +30,8 @@
 #include "../../../globals/constants/integer/integer_constants.c"
 
 /** The vrml model mime type. */
-static char VRML_MODEL_MIME_TYPE_ARRAY[] = {'m', 'o', 'd', 'e', 'l', '/', 'v', 'r', 'm', 'l'};
-static char* VRML_MODEL_MIME_TYPE = VRML_MODEL_MIME_TYPE_ARRAY;
+static wchar_t VRML_MODEL_MIME_TYPE_ARRAY[] = {L'm', L'o', L'd', L'e', L'l', L'/', L'v', L'r', L'm', L'l'};
+static wchar_t* VRML_MODEL_MIME_TYPE = VRML_MODEL_MIME_TYPE_ARRAY;
 static int* VRML_MODEL_MIME_TYPE_COUNT = NUMBER_10_INTEGER_ARRAY;
 
 /* MODEL_MIME_TYPE_CONSTANTS_SOURCE */

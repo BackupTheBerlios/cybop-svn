@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2008-05-04 00:18:12 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2008-05-06 22:36:52 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,45 +30,45 @@
 #include "../../../globals/constants/integer/integer_constants.c"
 
 /** The cyboi name. */
-static char CYBOI_NAME_ARRAY[] = {'C', 'y', 'b', 'e', 'r', 'n', 'e', 't', 'i', 'c', 's', ' ', 'O', 'r', 'i', 'e', 'n', 't', 'e', 'd', ' ', 'I', 'n', 't', 'e', 'r', 'p', 'r', 'e', 't', 'e', 'r', ' ', '(', 'C', 'Y', 'B', 'O', 'I', ')'};
-static char* CYBOI_NAME = CYBOI_NAME_ARRAY;
+static wchar_t CYBOI_NAME_ARRAY[] = {L'C', L'y', L'b', L'e', L'r', L'n', L'e', L't', L'i', L'c', L's', L' ', L'O', L'r', L'i', L'e', L'n', L't', L'e', L'd', L' ', L'I', L'n', L't', L'e', L'r', L'p', L'r', L'e', L't', L'e', L'r', L' ', L'(', L'C', L'Y', L'B', L'O', L'I', L')'};
+static wchar_t* CYBOI_NAME = CYBOI_NAME_ARRAY;
 static int* CYBOI_NAME_COUNT = NUMBER_40_INTEGER_ARRAY;
 
 /** The cyboi version. */
-static char CYBOI_VERSION_ARRAY[] = {'0', '.', '9', '.', '0'};
-static char* CYBOI_VERSION = CYBOI_VERSION_ARRAY;
+static wchar_t CYBOI_VERSION_ARRAY[] = {L'0', L'.', L'9', L'.', L'0'};
+static wchar_t* CYBOI_VERSION = CYBOI_VERSION_ARRAY;
 static int* CYBOI_VERSION_COUNT = NUMBER_5_INTEGER_ARRAY;
 
 /** The cyboi copyright. */
-static char CYBOI_COPYRIGHT_ARRAY[] = {'C', 'o', 'p', 'y', 'r', 'i', 'g', 'h', 't', ' ', '(', 'C', ')', ' ', '1', '9', '9', '9', '-', '2', '0', '0', '7', '.', ' ', 'C', 'h', 'r', 'i', 's', 't', 'i', 'a', 'n', ' ', 'H', 'e', 'l', 'l', 'e', 'r', ' ', 'a', 'n', 'd', ' ', 't', 'h', 'e', ' ', 'C', 'Y', 'B', 'O', 'P', ' ', 'd', 'e', 'v', 'e', 'l', 'o', 'p', 'e', 'r', 's', '.'};
-static char* CYBOI_COPYRIGHT = CYBOI_COPYRIGHT_ARRAY;
+static wchar_t CYBOI_COPYRIGHT_ARRAY[] = {L'C', L'o', L'p', L'y', L'r', L'i', L'g', L'h', L't', L' ', L'(', L'C', L')', L' ', L'1', L'9', L'9', L'9', L'-', L'2', L'0', L'0', L'7', L'.', L' ', L'C', L'h', L'r', L'i', L's', L't', L'i', L'a', L'n', L' ', L'H', L'e', L'l', L'l', L'e', L'r', L' ', L'a', L'n', L'd', L' ', L't', L'h', L'e', L' ', L'C', L'Y', L'B', L'O', L'P', L' ', L'd', L'e', L'v', L'e', L'l', L'o', L'p', L'e', L'r', L's', L'.'};
+static wchar_t* CYBOI_COPYRIGHT = CYBOI_COPYRIGHT_ARRAY;
 static int* CYBOI_COPYRIGHT_COUNT = NUMBER_67_INTEGER_ARRAY;
 
 /** The cyboi licence. */
-static char CYBOI_LICENCE_ARRAY[] = {'C', 'Y', 'B', 'O', 'I', ' ', 'c', 'o', 'm', 'e', 's', ' ', 'w', 'i', 't', 'h', ' ', 'N', 'O', ' ', 'W', 'A', 'R', 'R', 'A', 'N', 'T', 'Y', ',', '\n',
-    't', 'o', ' ', 't', 'h', 'e', ' ', 'e', 'x', 't', 'e', 'n', 't', ' ', 'p', 'e', 'r', 'm', 'i', 't', 't', 'e', 'd', ' ', 'b', 'y', ' ', 'l', 'a', 'w', '.', '\n',
-    'Y', 'o', 'u', ' ', 'm', 'a', 'y', ' ', 'r', 'e', 'd', 'i', 's', 't', 'r', 'i', 'b', 'u', 't', 'e', ' ', 'c', 'o', 'p', 'i', 'e', 's', ' ', 'o', 'f', ' ', 'C', 'Y', 'B', 'O', 'I', '\n',
-    'u', 'n', 'd', 'e', 'r', ' ', 't', 'h', 'e', ' ', 't', 'e', 'r', 'm', 's', ' ', 'o', 'f', ' ', 't', 'h', 'e', ' ', 'G', 'N', 'U', ' ', 'G', 'e', 'n', 'e', 'r', 'a', 'l', ' ', 'P', 'u', 'b', 'l', 'i', 'c', ' ', 'L', 'i', 'c', 'e', 'n', 's', 'e', '.', '\n',
-    'F', 'o', 'r', ' ', 'm', 'o', 'r', 'e', ' ', 'i', 'n', 'f', 'o', 'r', 'm', 'a', 't', 'i', 'o', 'n', ' ', 'a', 'b', 'o', 'u', 't', ' ', 't', 'h', 'e', 's', 'e', ' ', 'm', 'a', 't', 't', 'e', 'r', 's', ',', '\n',
-    's', 'e', 'e', ' ', 't', 'h', 'e', ' ', 'f', 'i', 'l', 'e', 's', ' ', 'n', 'a', 'm', 'e', 'd', ' ', 'C', 'O', 'P', 'Y', 'I', 'N', 'G', '.'};
-static char* CYBOI_LICENCE = CYBOI_LICENCE_ARRAY;
+static wchar_t CYBOI_LICENCE_ARRAY[] = {L'C', L'Y', L'B', L'O', L'I', L' ', L'c', L'o', L'm', L'e', L's', L' ', L'w', L'i', L't', L'h', L' ', L'N', L'O', L' ', L'W', L'A', L'R', L'R', L'A', L'N', L'T', L'Y', L',', L'\n',
+    't', L'o', L' ', L't', L'h', L'e', L' ', L'e', L'x', L't', L'e', L'n', L't', L' ', L'p', L'e', L'r', L'm', L'i', L't', L't', L'e', L'd', L' ', L'b', L'y', L' ', L'l', L'a', L'w', L'.', L'\n',
+    'Y', L'o', L'u', L' ', L'm', L'a', L'y', L' ', L'r', L'e', L'd', L'i', L's', L't', L'r', L'i', L'b', L'u', L't', L'e', L' ', L'c', L'o', L'p', L'i', L'e', L's', L' ', L'o', L'f', L' ', L'C', L'Y', L'B', L'O', L'I', L'\n',
+    'u', L'n', L'd', L'e', L'r', L' ', L't', L'h', L'e', L' ', L't', L'e', L'r', L'm', L's', L' ', L'o', L'f', L' ', L't', L'h', L'e', L' ', L'G', L'N', L'U', L' ', L'G', L'e', L'n', L'e', L'r', L'a', L'l', L' ', L'P', L'u', L'b', L'l', L'i', L'c', L' ', L'L', L'i', L'c', L'e', L'n', L's', L'e', L'.', L'\n',
+    'F', L'o', L'r', L' ', L'm', L'o', L'r', L'e', L' ', L'i', L'n', L'f', L'o', L'r', L'm', L'a', L't', L'i', L'o', L'n', L' ', L'a', L'b', L'o', L'u', L't', L' ', L't', L'h', L'e', L's', L'e', L' ', L'm', L'a', L't', L't', L'e', L'r', L's', L',', L'\n',
+    's', L'e', L'e', L' ', L't', L'h', L'e', L' ', L'f', L'i', L'l', L'e', L's', L' ', L'n', L'a', L'm', L'e', L'd', L' ', L'C', L'O', L'P', L'Y', L'I', L'N', L'G', L'.'};
+static wchar_t* CYBOI_LICENCE = CYBOI_LICENCE_ARRAY;
 static int* CYBOI_LICENCE_COUNT = NUMBER_220_INTEGER_ARRAY;
 
 /** The cyboi help. */
-static char CYBOI_HELP_ARRAY[] = {
-    'P', 'a', 'r', 'a', 'm', 'e', 't', 'e', 'r', 's', ' ', 'h', 'a', 'v', 'e', ' ', 't', 'o', ' ', 'b', 'e', ' ', 'g', 'i', 'v', 'e', 'n', '!', '\n',
-    'U', 's', 'a', 'g', 'e', ':', ' ', 'c', 'y', 'b', 'o', 'i', ' ', '[', '-', '-', 'v', 'e', 'r', 's', 'i', 'o', 'n', ']', ' ', '[', '-', '-', 'h', 'e', 'l', 'p', ']', ' ', '[', '-', '-', 't', 'e', 's', 't', ']', ' ', '[', '-', '-', 'k', 'n', 'o', 'w', 'l', 'e', 'd', 'g', 'e', ' ', 'A', 'R', 'G', ']', ' ', '[', '-', '-', 'l', 'o', 'g', 'l', 'e', 'v', 'e', 'l', ' ', 'A', 'R', 'G', ']', ' ', '[', '-', '-', 'l', 'o', 'g', 'f', 'i', 'l', 'e', ' ', 'A', 'R', 'G', ']', '\n',
-    ' ', ' ', ' ', ' ', '-', '-', 'v', 'e', 'r', 's', 'i', 'o', 'n', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'D', 'i', 's', 'p', 'l', 'a', 'y', 's', ' ', 't', 'h', 'e', ' ', 'c', 'u', 'r', 'r', 'e', 'n', 't', ' ', 'v', 'e', 'r', 's', 'i', 'o', 'n', '.', '\n',
-    ' ', ' ', ' ', ' ', '-', '-', 'h', 'e', 'l', 'p', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'D', 'i', 's', 'p', 'l', 'a', 'y', 's', ' ', 't', 'h', 'i', 's', ' ', 'h', 'e', 'l', 'p', ' ', 'm', 'e', 's', 's', 'a', 'g', 'e', '.', '\n',
-    ' ', ' ', ' ', ' ', '-', '-', 't', 'e', 's', 't', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'S', 't', 'a', 'r', 't', 's', ' ', 'c', 'y', 'b', 'o', 'i', ' ', 'i', 'n', ' ', 't', 'e', 's', 't', ' ', 'm', 'o', 'd', 'e', '.', '\n',
-    ' ', ' ', ' ', ' ', '-', '-', 'k', 'n', 'o', 'w', 'l', 'e', 'd', 'g', 'e', ' ', 'A', 'R', 'G', ' ', 'S', 't', 'a', 'r', 't', 's', ' ', 'c', 'y', 'b', 'o', 'i', ' ', 'i', 'n', ' ', 'k', 'n', 'o', 'w', 'l', 'e', 'd', 'g', 'e', ' ', 'm', 'o', 'd', 'e', '.', ' ', 'T', 'a', 'k', 'e', 's', ' ', 'A', 'R', 'G', ' ', 'a', 's', ' ', 'c', 'y', 'b', 'o', 'l', ' ', 'k', 'n', 'o', 'w', 'l', 'e', 'd', 'g', 'e', ' ', 'f', 'i', 'l', 'e', '.', ' ', 'T', 'h', 'i', 's', ' ', 'i', 's', ' ', 't', 'h', 'e', ' ', 's', 't', 'a', 'n', 'd', 'a', 'r', 'd', ' ', 'w', 'a', 'y', ' ', 't', 'o', ' ', 'u', 's', 'e', ' ', 'c', 'y', 'b', 'o', 'i', '.', '\n',
-    ' ', ' ', ' ', ' ', '-', '-', 'l', 'o', 'g', 'l', 'e', 'v', 'e', 'l', ' ', 'A', 'R', 'G', ' ', ' ', 'S', 'e', 't', 's', ' ', 't', 'h', 'e', ' ', 'l', 'o', 'g', ' ', 'l', 'e', 'v', 'e', 'l', '.', ' ', 'T', 'h', 'e', ' ', 'A', 'R', 'G', ' ', 'm', 'a', 'y', ' ', 'b', 'e', ' ', 'o', 'n', 'e', ' ', 'o', 'f', ':', ' ', 'o', 'f', 'f', ',', ' ', 'e', 'r', 'r', 'o', 'r', ',', ' ', 'w', 'a', 'r', 'n', 'i', 'n', 'g', ',', ' ', 'i', 'n', 'f', 'o', 'r', 'm', 'a', 't', 'i', 'o', 'n', ',', ' ', 'd', 'e', 'b', 'u', 'g', '.', ' ', 'T', 'h', 'e', ' ', 'd', 'e', 'f', 'a', 'u', 'l', 't', ' ', 'i', 's', ' ', 'o', 'f', 'f', '.', '\n',
-    ' ', ' ', ' ', ' ', '-', '-', 'l', 'o', 'g', 'f', 'i', 'l', 'e', ' ', 'A', 'R', 'G', ' ', ' ', ' ', 'L', 'o', 'g', 's', ' ', 'm', 'e', 's', 's', 'a', 'g', 'e', 's', ' ', 't', 'o', ' ', 't', 'h', 'e', ' ', 'f', 'i', 'l', 'e', ' ', 's', 'p', 'e', 'c', 'i', 'f', 'i', 'e', 'd', ' ', 'b', 'y', ' ', 'A', 'R', 'G', '.', '\n',
-    'E', 'x', 'a', 'm', 'p', 'l', 'e', ':', ' ', 'c', 'y', 'b', 'o', 'i', ' ', '-', '-', 'k', 'n', 'o', 'w', 'l', 'e', 'd', 'g', 'e', ' ', 'r', 'e', 's', 'm', 'e', 'd', 'i', 'c', 'i', 'n', 'a', 'e', '/', 'r', 'u', 'n', '.', 'c', 'y', 'b', 'o', 'l', '\n',
-    'R', 'e', 'p', 'o', 'r', 't', ' ', 'b', 'u', 'g', 's', ' ', 't', 'o', ' ',
-    '<', 'c', 'y', 'b', 'o', 'p', '-', 'd', 'e', 'v', 'e', 'l', 'o', 'p', 'e', 'r', 's', '@', 'l', 'i', 's', 't', 's', '.', 'b', 'e', 'r', 'l', 'i', 'o', 's', '.', 'd', 'e', '>', ' ',
-    'o', 'r', ' ', '<', 'c', 'h', 'r', 'i', 's', 't', 'i', 'a', 'n', '.', 'h', 'e', 'l', 'l', 'e', 'r', '@', 't', 'u', 'x', 't', 'a', 'x', '.', 'd', 'e', '>', '.'};
-static char* CYBOI_HELP = CYBOI_HELP_ARRAY;
+static wchar_t CYBOI_HELP_ARRAY[] = {
+    'P', L'a', L'r', L'a', L'm', L'e', L't', L'e', L'r', L's', L' ', L'h', L'a', L'v', L'e', L' ', L't', L'o', L' ', L'b', L'e', L' ', L'g', L'i', L'v', L'e', L'n', L'!', L'\n',
+    'U', L's', L'a', L'g', L'e', L':', L' ', L'c', L'y', L'b', L'o', L'i', L' ', L'[', L'-', L'-', L'v', L'e', L'r', L's', L'i', L'o', L'n', L']', L' ', L'[', L'-', L'-', L'h', L'e', L'l', L'p', L']', L' ', L'[', L'-', L'-', L't', L'e', L's', L't', L']', L' ', L'[', L'-', L'-', L'k', L'n', L'o', L'w', L'l', L'e', L'd', L'g', L'e', L' ', L'A', L'R', L'G', L']', L' ', L'[', L'-', L'-', L'l', L'o', L'g', L'l', L'e', L'v', L'e', L'l', L' ', L'A', L'R', L'G', L']', L' ', L'[', L'-', L'-', L'l', L'o', L'g', L'f', L'i', L'l', L'e', L' ', L'A', L'R', L'G', L']', L'\n',
+    ' ', L' ', L' ', L' ', L'-', L'-', L'v', L'e', L'r', L's', L'i', L'o', L'n', L' ', L' ', L' ', L' ', L' ', L' ', L' ', L'D', L'i', L's', L'p', L'l', L'a', L'y', L's', L' ', L't', L'h', L'e', L' ', L'c', L'u', L'r', L'r', L'e', L'n', L't', L' ', L'v', L'e', L'r', L's', L'i', L'o', L'n', L'.', L'\n',
+    ' ', L' ', L' ', L' ', L'-', L'-', L'h', L'e', L'l', L'p', L' ', L' ', L' ', L' ', L' ', L' ', L' ', L' ', L' ', L' ', L'D', L'i', L's', L'p', L'l', L'a', L'y', L's', L' ', L't', L'h', L'i', L's', L' ', L'h', L'e', L'l', L'p', L' ', L'm', L'e', L's', L's', L'a', L'g', L'e', L'.', L'\n',
+    ' ', L' ', L' ', L' ', L'-', L'-', L't', L'e', L's', L't', L' ', L' ', L' ', L' ', L' ', L' ', L' ', L' ', L' ', L' ', L'S', L't', L'a', L'r', L't', L's', L' ', L'c', L'y', L'b', L'o', L'i', L' ', L'i', L'n', L' ', L't', L'e', L's', L't', L' ', L'm', L'o', L'd', L'e', L'.', L'\n',
+    ' ', L' ', L' ', L' ', L'-', L'-', L'k', L'n', L'o', L'w', L'l', L'e', L'd', L'g', L'e', L' ', L'A', L'R', L'G', L' ', L'S', L't', L'a', L'r', L't', L's', L' ', L'c', L'y', L'b', L'o', L'i', L' ', L'i', L'n', L' ', L'k', L'n', L'o', L'w', L'l', L'e', L'd', L'g', L'e', L' ', L'm', L'o', L'd', L'e', L'.', L' ', L'T', L'a', L'k', L'e', L's', L' ', L'A', L'R', L'G', L' ', L'a', L's', L' ', L'c', L'y', L'b', L'o', L'l', L' ', L'k', L'n', L'o', L'w', L'l', L'e', L'd', L'g', L'e', L' ', L'f', L'i', L'l', L'e', L'.', L' ', L'T', L'h', L'i', L's', L' ', L'i', L's', L' ', L't', L'h', L'e', L' ', L's', L't', L'a', L'n', L'd', L'a', L'r', L'd', L' ', L'w', L'a', L'y', L' ', L't', L'o', L' ', L'u', L's', L'e', L' ', L'c', L'y', L'b', L'o', L'i', L'.', L'\n',
+    ' ', L' ', L' ', L' ', L'-', L'-', L'l', L'o', L'g', L'l', L'e', L'v', L'e', L'l', L' ', L'A', L'R', L'G', L' ', L' ', L'S', L'e', L't', L's', L' ', L't', L'h', L'e', L' ', L'l', L'o', L'g', L' ', L'l', L'e', L'v', L'e', L'l', L'.', L' ', L'T', L'h', L'e', L' ', L'A', L'R', L'G', L' ', L'm', L'a', L'y', L' ', L'b', L'e', L' ', L'o', L'n', L'e', L' ', L'o', L'f', L':', L' ', L'o', L'f', L'f', L',', L' ', L'e', L'r', L'r', L'o', L'r', L',', L' ', L'w', L'a', L'r', L'n', L'i', L'n', L'g', L',', L' ', L'i', L'n', L'f', L'o', L'r', L'm', L'a', L't', L'i', L'o', L'n', L',', L' ', L'd', L'e', L'b', L'u', L'g', L'.', L' ', L'T', L'h', L'e', L' ', L'd', L'e', L'f', L'a', L'u', L'l', L't', L' ', L'i', L's', L' ', L'o', L'f', L'f', L'.', L'\n',
+    ' ', L' ', L' ', L' ', L'-', L'-', L'l', L'o', L'g', L'f', L'i', L'l', L'e', L' ', L'A', L'R', L'G', L' ', L' ', L' ', L'L', L'o', L'g', L's', L' ', L'm', L'e', L's', L's', L'a', L'g', L'e', L's', L' ', L't', L'o', L' ', L't', L'h', L'e', L' ', L'f', L'i', L'l', L'e', L' ', L's', L'p', L'e', L'c', L'i', L'f', L'i', L'e', L'd', L' ', L'b', L'y', L' ', L'A', L'R', L'G', L'.', L'\n',
+    'E', L'x', L'a', L'm', L'p', L'l', L'e', L':', L' ', L'c', L'y', L'b', L'o', L'i', L' ', L'-', L'-', L'k', L'n', L'o', L'w', L'l', L'e', L'd', L'g', L'e', L' ', L'r', L'e', L's', L'm', L'e', L'd', L'i', L'c', L'i', L'n', L'a', L'e', L'/', L'r', L'u', L'n', L'.', L'c', L'y', L'b', L'o', L'l', L'\n',
+    'R', L'e', L'p', L'o', L'r', L't', L' ', L'b', L'u', L'g', L's', L' ', L't', L'o', L' ',
+    '<', L'c', L'y', L'b', L'o', L'p', L'-', L'd', L'e', L'v', L'e', L'l', L'o', L'p', L'e', L'r', L's', L'@', L'l', L'i', L's', L't', L's', L'.', L'b', L'e', L'r', L'l', L'i', L'o', L's', L'.', L'd', L'e', L'>', L' ',
+    'o', L'r', L' ', L'<', L'c', L'h', L'r', L'i', L's', L't', L'i', L'a', L'n', L'.', L'h', L'e', L'l', L'l', L'e', L'r', L'@', L't', L'u', L'x', L't', L'a', L'x', L'.', L'd', L'e', L'>', L'.'};
+static wchar_t* CYBOI_HELP = CYBOI_HELP_ARRAY;
 static int* CYBOI_HELP_COUNT = NUMBER_715_INTEGER_ARRAY;
 
 /* CYBOI_IDENTIFICATION_CONSTANTS_SOURCE */

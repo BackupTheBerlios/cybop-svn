@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2008-05-04 00:18:12 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2008-05-06 22:36:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -34,23 +34,23 @@
 //
 
 /** The name attribute. */
-static char NAME_ATTRIBUTE_ARRAY[] = {'n', 'a', 'm', 'e'};
-static char* NAME_ATTRIBUTE = NAME_ATTRIBUTE_ARRAY;
+static wchar_t NAME_ATTRIBUTE_ARRAY[] = {L'n', L'a', L'm', L'e'};
+static wchar_t* NAME_ATTRIBUTE = NAME_ATTRIBUTE_ARRAY;
 static int* NAME_ATTRIBUTE_COUNT = NUMBER_4_INTEGER_ARRAY;
 
 /** The channel attribute. */
-static char CHANNEL_ATTRIBUTE_ARRAY[] = {'c', 'h', 'a', 'n', 'n', 'e', 'l'};
-static char* CHANNEL_ATTRIBUTE = CHANNEL_ATTRIBUTE_ARRAY;
+static wchar_t CHANNEL_ATTRIBUTE_ARRAY[] = {L'c', L'h', L'a', L'n', L'n', L'e', L'l'};
+static wchar_t* CHANNEL_ATTRIBUTE = CHANNEL_ATTRIBUTE_ARRAY;
 static int* CHANNEL_ATTRIBUTE_COUNT = NUMBER_7_INTEGER_ARRAY;
 
 /** The abstraction attribute. */
-static char ABSTRACTION_ATTRIBUTE_ARRAY[] = {'a', 'b', 's', 't', 'r', 'a', 'c', 't', 'i', 'o', 'n'};
-static char* ABSTRACTION_ATTRIBUTE = ABSTRACTION_ATTRIBUTE_ARRAY;
+static wchar_t ABSTRACTION_ATTRIBUTE_ARRAY[] = {L'a', L'b', L's', L't', L'r', L'a', L'c', L't', L'i', L'o', L'n'};
+static wchar_t* ABSTRACTION_ATTRIBUTE = ABSTRACTION_ATTRIBUTE_ARRAY;
 static int* ABSTRACTION_ATTRIBUTE_COUNT = NUMBER_11_INTEGER_ARRAY;
 
 /** The model attribute. */
-static char MODEL_ATTRIBUTE_ARRAY[] = {'m', 'o', 'd', 'e', 'l'};
-static char* MODEL_ATTRIBUTE = MODEL_ATTRIBUTE_ARRAY;
+static wchar_t MODEL_ATTRIBUTE_ARRAY[] = {L'm', L'o', L'd', L'e', L'l'};
+static wchar_t* MODEL_ATTRIBUTE = MODEL_ATTRIBUTE_ARRAY;
 static int* MODEL_ATTRIBUTE_COUNT = NUMBER_5_INTEGER_ARRAY;
 
 //
@@ -58,23 +58,23 @@ static int* MODEL_ATTRIBUTE_COUNT = NUMBER_5_INTEGER_ARRAY;
 //
 
 /** The compound part separator. */
-static char COMPOUND_PART_SEPARATOR_ARRAY[] = {'.'};
-static char* COMPOUND_PART_SEPARATOR = COMPOUND_PART_SEPARATOR_ARRAY;
+static wchar_t COMPOUND_PART_SEPARATOR_ARRAY[] = {L'.'};
+static wchar_t* COMPOUND_PART_SEPARATOR = COMPOUND_PART_SEPARATOR_ARRAY;
 static int* COMPOUND_PART_SEPARATOR_COUNT = NUMBER_1_INTEGER_ARRAY;
 
 /** The compound meta separator. */
-static char COMPOUND_META_SEPARATOR_ARRAY[] = {'#'};
-static char* COMPOUND_META_SEPARATOR = COMPOUND_META_SEPARATOR_ARRAY;
+static wchar_t COMPOUND_META_SEPARATOR_ARRAY[] = {L'#'};
+static wchar_t* COMPOUND_META_SEPARATOR = COMPOUND_META_SEPARATOR_ARRAY;
 static int* COMPOUND_META_SEPARATOR_COUNT = NUMBER_1_INTEGER_ARRAY;
 
 /** The operation parameter separator. */
-static char OPERATION_PARAMETER_SEPARATOR_ARRAY[] = {','};
-static char* OPERATION_PARAMETER_SEPARATOR = OPERATION_PARAMETER_SEPARATOR_ARRAY;
+static wchar_t OPERATION_PARAMETER_SEPARATOR_ARRAY[] = {L','};
+static wchar_t* OPERATION_PARAMETER_SEPARATOR = OPERATION_PARAMETER_SEPARATOR_ARRAY;
 static int* OPERATION_PARAMETER_SEPARATOR_COUNT = NUMBER_1_INTEGER_ARRAY;
 
 /** The list separator between base name and index. */
-static char LIST_SEPARATOR_ARRAY[] = {'_', '$'};
-static char* LIST_SEPARATOR = LIST_SEPARATOR_ARRAY;
+static wchar_t LIST_SEPARATOR_ARRAY[] = {L'_', L'$'};
+static wchar_t* LIST_SEPARATOR = LIST_SEPARATOR_ARRAY;
 static int* LIST_SEPARATOR_COUNT = NUMBER_2_INTEGER_ARRAY;
 
 //
@@ -82,53 +82,53 @@ static int* LIST_SEPARATOR_COUNT = NUMBER_2_INTEGER_ARRAY;
 //
 
 /** The begin comment tag array, pointer, count. */
-static char BEGIN_COMMENT_TAG_ARRAY[] = {'<', '!', '-', '-'};
-static char* BEGIN_COMMENT_TAG = BEGIN_COMMENT_TAG_ARRAY;
+static wchar_t BEGIN_COMMENT_TAG_ARRAY[] = {L'<', L'!', L'-', L'-'};
+static wchar_t* BEGIN_COMMENT_TAG = BEGIN_COMMENT_TAG_ARRAY;
 static int* BEGIN_COMMENT_TAG_COUNT = NUMBER_4_INTEGER_ARRAY;
 
 /** The end comment tag array, pointer, count. */
-static char END_COMMENT_TAG_ARRAY[] = {'/', '-', '-', '>'};
-static char* END_COMMENT_TAG = END_COMMENT_TAG_ARRAY;
+static wchar_t END_COMMENT_TAG_ARRAY[] = {L'/', L'-', L'-', L'>'};
+static wchar_t* END_COMMENT_TAG = END_COMMENT_TAG_ARRAY;
 static int* END_COMMENT_TAG_COUNT = NUMBER_4_INTEGER_ARRAY;
 
 /** The short end comment tag array, pointer, count. */
-static char SHORT_END_COMMENT_TAG_ARRAY[] = {'-', '-', '>'};
-static char* SHORT_END_COMMENT_TAG = SHORT_END_COMMENT_TAG_ARRAY;
+static wchar_t SHORT_END_COMMENT_TAG_ARRAY[] = {L'-', L'-', L'>'};
+static wchar_t* SHORT_END_COMMENT_TAG = SHORT_END_COMMENT_TAG_ARRAY;
 static int* SHORT_END_COMMENT_TAG_COUNT = NUMBER_3_INTEGER_ARRAY;
 
 /** The begin tag begin array, pointer, count. */
-static char BEGIN_TAG_BEGIN_ARRAY[] = {'<'};
-static char* BEGIN_TAG_BEGIN = BEGIN_TAG_BEGIN_ARRAY;
+static wchar_t BEGIN_TAG_BEGIN_ARRAY[] = {L'<'};
+static wchar_t* BEGIN_TAG_BEGIN = BEGIN_TAG_BEGIN_ARRAY;
 static int* BEGIN_TAG_BEGIN_COUNT = NUMBER_1_INTEGER_ARRAY;
 
 /** The end tag begin array, pointer, count. */
-static char END_TAG_BEGIN_ARRAY[] = {'<', '/'};
-static char* END_TAG_BEGIN = END_TAG_BEGIN_ARRAY;
+static wchar_t END_TAG_BEGIN_ARRAY[] = {L'<', L'/'};
+static wchar_t* END_TAG_BEGIN = END_TAG_BEGIN_ARRAY;
 static int* END_TAG_BEGIN_COUNT = NUMBER_2_INTEGER_ARRAY;
 
 /** The tag end array, pointer, count. */
-static char TAG_END_ARRAY[] = {'>'};
-static char* TAG_END = TAG_END_ARRAY;
+static wchar_t TAG_END_ARRAY[] = {L'>'};
+static wchar_t* TAG_END = TAG_END_ARRAY;
 static int* TAG_END_COUNT = NUMBER_1_INTEGER_ARRAY;
 
 /** The empty tag end array, pointer, count. */
-static char EMPTY_TAG_END_ARRAY[] = {'/', '>'};
-static char* EMPTY_TAG_END = EMPTY_TAG_END_ARRAY;
+static wchar_t EMPTY_TAG_END_ARRAY[] = {L'/', L'>'};
+static wchar_t* EMPTY_TAG_END = EMPTY_TAG_END_ARRAY;
 static int* EMPTY_TAG_END_COUNT = NUMBER_2_INTEGER_ARRAY;
 
 /** The attribute begin array, pointer, count. */
-static char ATTRIBUTE_BEGIN_ARRAY[] = {' '};
-static char* ATTRIBUTE_BEGIN = ATTRIBUTE_BEGIN_ARRAY;
+static wchar_t ATTRIBUTE_BEGIN_ARRAY[] = {L' '};
+static wchar_t* ATTRIBUTE_BEGIN = ATTRIBUTE_BEGIN_ARRAY;
 static int* ATTRIBUTE_BEGIN_COUNT = NUMBER_1_INTEGER_ARRAY;
 
 /** The attribute value begin array, pointer, count. */
-static char ATTRIBUTE_VALUE_BEGIN_ARRAY[] = {'=', '"'};
-static char* ATTRIBUTE_VALUE_BEGIN = ATTRIBUTE_VALUE_BEGIN_ARRAY;
+static wchar_t ATTRIBUTE_VALUE_BEGIN_ARRAY[] = {L'=', L'"'};
+static wchar_t* ATTRIBUTE_VALUE_BEGIN = ATTRIBUTE_VALUE_BEGIN_ARRAY;
 static int* ATTRIBUTE_VALUE_BEGIN_COUNT = NUMBER_1_INTEGER_ARRAY;
 
 /** The attribute value end array, pointer, count. */
-static char ATTRIBUTE_VALUE_END_ARRAY[] = {'"'};
-static char* ATTRIBUTE_VALUE_END = ATTRIBUTE_VALUE_END_ARRAY;
+static wchar_t ATTRIBUTE_VALUE_END_ARRAY[] = {L'"'};
+static wchar_t* ATTRIBUTE_VALUE_END = ATTRIBUTE_VALUE_END_ARRAY;
 static int* ATTRIBUTE_VALUE_END_COUNT = NUMBER_1_INTEGER_ARRAY;
 
 /* CYBOL_CONSTANTS_SOURCE */

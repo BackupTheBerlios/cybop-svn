@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2008-05-04 00:18:12 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2008-05-06 22:36:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,13 +30,13 @@
 #include "../../../globals/constants/integer/integer_constants.c"
 
 /** The http 1.0 protocol version. */
-static char HTTP_1_0_PROTOCOL_VERSION_ARRAY[] = {'H', 'T', 'T', 'P', '/', '1', '.', '0'};
-static char* HTTP_1_0_PROTOCOL_VERSION = HTTP_1_0_PROTOCOL_VERSION_ARRAY;
+static wchar_t HTTP_1_0_PROTOCOL_VERSION_ARRAY[] = {L'H', L'T', L'T', L'P', L'/', L'1', L'.', L'0'};
+static wchar_t* HTTP_1_0_PROTOCOL_VERSION = HTTP_1_0_PROTOCOL_VERSION_ARRAY;
 static int* HTTP_1_0_PROTOCOL_VERSION_COUNT = NUMBER_8_INTEGER_ARRAY;
 
 /** The http 1.1 protocol version. */
-static char HTTP_1_1_PROTOCOL_VERSION_ARRAY[] = {'H', 'T', 'T', 'P', '/', '1', '.', '1'};
-static char* HTTP_1_1_PROTOCOL_VERSION = HTTP_1_1_PROTOCOL_VERSION_ARRAY;
+static wchar_t HTTP_1_1_PROTOCOL_VERSION_ARRAY[] = {L'H', L'T', L'T', L'P', L'/', L'1', L'.', L'1'};
+static wchar_t* HTTP_1_1_PROTOCOL_VERSION = HTTP_1_1_PROTOCOL_VERSION_ARRAY;
 static int* HTTP_1_1_PROTOCOL_VERSION_COUNT = NUMBER_8_INTEGER_ARRAY;
 
 /* HTTP_PROTOCOL_VERSION_CONSTANTS_SOURCE */

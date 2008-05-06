@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2008-05-04 00:18:12 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2008-05-06 22:36:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -34,23 +34,23 @@
 //
 
 /** The error log level name. */
-static char ERROR_LOG_LEVEL_NAME_ARRAY[] = {'E', 'r', 'r', 'o', 'r'};
-static char* ERROR_LOG_LEVEL_NAME = ERROR_LOG_LEVEL_NAME_ARRAY;
+static wchar_t ERROR_LOG_LEVEL_NAME_ARRAY[] = {L'E', L'r', L'r', L'o', L'r'};
+static wchar_t* ERROR_LOG_LEVEL_NAME = ERROR_LOG_LEVEL_NAME_ARRAY;
 static int* ERROR_LOG_LEVEL_NAME_COUNT = NUMBER_5_INTEGER_ARRAY;
 
 /** The warning log level name. */
-static char WARNING_LOG_LEVEL_NAME_ARRAY[] = {'W', 'a', 'r', 'n', 'i', 'n', 'g'};
-static char* WARNING_LOG_LEVEL_NAME = WARNING_LOG_LEVEL_NAME_ARRAY;
+static wchar_t WARNING_LOG_LEVEL_NAME_ARRAY[] = {L'W', L'a', L'r', L'n', L'i', L'n', L'g'};
+static wchar_t* WARNING_LOG_LEVEL_NAME = WARNING_LOG_LEVEL_NAME_ARRAY;
 static int* WARNING_LOG_LEVEL_NAME_COUNT = NUMBER_7_INTEGER_ARRAY;
 
 /** The information log level name. */
-static char INFORMATION_LOG_LEVEL_NAME_ARRAY[] = {'I', 'n', 'f', 'o', 'r', 'm', 'a', 't', 'i', 'o', 'n'};
-static char* INFORMATION_LOG_LEVEL_NAME = INFORMATION_LOG_LEVEL_NAME_ARRAY;
+static wchar_t INFORMATION_LOG_LEVEL_NAME_ARRAY[] = {L'I', L'n', L'f', L'o', L'r', L'm', L'a', L't', L'i', L'o', L'n'};
+static wchar_t* INFORMATION_LOG_LEVEL_NAME = INFORMATION_LOG_LEVEL_NAME_ARRAY;
 static int* INFORMATION_LOG_LEVEL_NAME_COUNT = NUMBER_11_INTEGER_ARRAY;
 
 /** The debug log level name. */
-static char DEBUG_LOG_LEVEL_NAME_ARRAY[] = {'D', 'e', 'b', 'u', 'g'};
-static char* DEBUG_LOG_LEVEL_NAME = DEBUG_LOG_LEVEL_NAME_ARRAY;
+static wchar_t DEBUG_LOG_LEVEL_NAME_ARRAY[] = {L'D', L'e', L'b', L'u', L'g'};
+static wchar_t* DEBUG_LOG_LEVEL_NAME = DEBUG_LOG_LEVEL_NAME_ARRAY;
 static int* DEBUG_LOG_LEVEL_NAME_COUNT = NUMBER_5_INTEGER_ARRAY;
 
 /* LOG_LEVEL_NAME_CONSTANTS_SOURCE */

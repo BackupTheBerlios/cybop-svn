@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2008-05-04 00:18:12 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2008-05-06 22:36:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,8 +30,8 @@
 #include "../../../globals/constants/integer/integer_constants.c"
 
 /** The package fonts mime type. */
-static char PACKAGE_FONTS_MIME_TYPE_ARRAY[] = {'f', 'o', 'n', 't', 's', '/', 'p', 'a', 'c', 'k', 'a', 'g', 'e'};
-static char* PACKAGE_FONTS_MIME_TYPE = PACKAGE_FONTS_MIME_TYPE_ARRAY;
+static wchar_t PACKAGE_FONTS_MIME_TYPE_ARRAY[] = {L'f', L'o', L'n', L't', L's', L'/', L'p', L'a', L'c', L'k', L'a', L'g', L'e'};
+static wchar_t* PACKAGE_FONTS_MIME_TYPE = PACKAGE_FONTS_MIME_TYPE_ARRAY;
 static int* PACKAGE_FONTS_MIME_TYPE_COUNT = NUMBER_13_INTEGER_ARRAY;
 
 /* FONTS_MIME_TYPE_CONSTANTS_SOURCE */

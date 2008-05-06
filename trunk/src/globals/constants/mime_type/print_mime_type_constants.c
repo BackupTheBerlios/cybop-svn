@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2008-05-04 00:18:12 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2008-05-06 22:36:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,8 +30,8 @@
 #include "../../../globals/constants/integer/integer_constants.c"
 
 /** The jobs print mime type. */
-static char JOBS_PRINT_MIME_TYPE_ARRAY[] = {'p', 'r', 'i', 'n', 't', '/', 'j', 'o', 'b', 's'};
-static char* JOBS_PRINT_MIME_TYPE = JOBS_PRINT_MIME_TYPE_ARRAY;
+static wchar_t JOBS_PRINT_MIME_TYPE_ARRAY[] = {L'p', L'r', L'i', L'n', L't', L'/', L'j', L'o', L'b', L's'};
+static wchar_t* JOBS_PRINT_MIME_TYPE = JOBS_PRINT_MIME_TYPE_ARRAY;
 static int* JOBS_PRINT_MIME_TYPE_COUNT = NUMBER_10_INTEGER_ARRAY;
 
 /* PRINT_MIME_TYPE_CONSTANTS_SOURCE */

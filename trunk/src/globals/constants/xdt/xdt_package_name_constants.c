@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2008-05-04 00:18:13 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2008-05-06 22:36:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,8 +30,8 @@
 #include "../../../globals/constants/integer/integer_constants.c"
 
 /** The standard package name. */
-static char STANDARD_XDT_PACKAGE_NAME_ARRAY[] = {'s', 't', 'a', 'n', 'd', 'a', 'r', 'd'};
-static char* STANDARD_XDT_PACKAGE_NAME = STANDARD_XDT_PACKAGE_NAME_ARRAY;
+static wchar_t STANDARD_XDT_PACKAGE_NAME_ARRAY[] = {L's', L't', L'a', L'n', L'd', L'a', L'r', L'd'};
+static wchar_t* STANDARD_XDT_PACKAGE_NAME = STANDARD_XDT_PACKAGE_NAME_ARRAY;
 static int* STANDARD_XDT_PACKAGE_NAME_COUNT = NUMBER_8_INTEGER_ARRAY;
 
 /* XDT_PACKAGE_NAME_CONSTANTS_SOURCE */

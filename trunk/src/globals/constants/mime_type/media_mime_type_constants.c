@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2008-05-04 00:18:12 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2008-05-06 22:36:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,8 +30,8 @@
 #include "../../../globals/constants/integer/integer_constants.c"
 
 /** The vcd media mime type. */
-static char VCD_MEDIA_MIME_TYPE_ARRAY[] = {'m', 'e', 'd', 'i', 'a', '/', 'v', 'c', 'd'};
-static char* VCD_MEDIA_MIME_TYPE = VCD_MEDIA_MIME_TYPE_ARRAY;
+static wchar_t VCD_MEDIA_MIME_TYPE_ARRAY[] = {L'm', L'e', L'd', L'i', L'a', L'/', L'v', L'c', L'd'};
+static wchar_t* VCD_MEDIA_MIME_TYPE = VCD_MEDIA_MIME_TYPE_ARRAY;
 static int* VCD_MEDIA_MIME_TYPE_COUNT = NUMBER_9_INTEGER_ARRAY;
 
 /* MEDIA_MIME_TYPE_CONSTANTS_SOURCE */

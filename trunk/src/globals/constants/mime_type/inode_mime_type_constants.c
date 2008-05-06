@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2008-05-04 00:18:12 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2008-05-06 22:36:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,8 +30,8 @@
 #include "../../../globals/constants/integer/integer_constants.c"
 
 /** The socket inode mime type. */
-static char SOCKET_INODE_MIME_TYPE_ARRAY[] = {'i', 'n', 'o', 'd', 'e', '/', 's', 'o', 'c', 'k', 'e', 't'};
-static char* SOCKET_INODE_MIME_TYPE = SOCKET_INODE_MIME_TYPE_ARRAY;
+static wchar_t SOCKET_INODE_MIME_TYPE_ARRAY[] = {L'i', L'n', L'o', L'd', L'e', L'/', L's', L'o', L'c', L'k', L'e', L't'};
+static wchar_t* SOCKET_INODE_MIME_TYPE = SOCKET_INODE_MIME_TYPE_ARRAY;
 static int* SOCKET_INODE_MIME_TYPE_COUNT = NUMBER_12_INTEGER_ARRAY;
 
 /* INODE_MIME_TYPE_CONSTANTS_SOURCE */

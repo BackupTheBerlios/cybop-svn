@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2008-05-04 00:18:12 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2008-05-06 22:36:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,8 +30,8 @@
 #include "../../../globals/constants/integer/integer_constants.c"
 
 /** The jpeg image mime type. */
-static char JPEG_IMAGE_MIME_TYPE_ARRAY[] = {'i', 'm', 'a', 'g', 'e', '/', 'j', 'p', 'e', 'g'};
-static char* JPEG_IMAGE_MIME_TYPE = JPEG_IMAGE_MIME_TYPE_ARRAY;
+static wchar_t JPEG_IMAGE_MIME_TYPE_ARRAY[] = {L'i', L'm', L'a', L'g', L'e', L'/', L'j', L'p', L'e', L'g'};
+static wchar_t* JPEG_IMAGE_MIME_TYPE = JPEG_IMAGE_MIME_TYPE_ARRAY;
 static int* JPEG_IMAGE_MIME_TYPE_COUNT = NUMBER_10_INTEGER_ARRAY;
 
 /* IMAGE_MIME_TYPE_CONSTANTS_SOURCE */

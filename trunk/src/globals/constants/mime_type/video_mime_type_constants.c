@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2008-05-04 00:18:12 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2008-05-06 22:36:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,8 +30,8 @@
 #include "../../../globals/constants/integer/integer_constants.c"
 
 /** The avi video mime type. */
-static char AVI_VIDEO_MIME_TYPE_ARRAY[] = {'v', 'i', 'd', 'e', 'o', '/', 'a', 'v', 'i'};
-static char* AVI_VIDEO_MIME_TYPE = AVI_VIDEO_MIME_TYPE_ARRAY;
+static wchar_t AVI_VIDEO_MIME_TYPE_ARRAY[] = {L'v', L'i', L'd', L'e', L'o', L'/', L'a', L'v', L'i'};
+static wchar_t* AVI_VIDEO_MIME_TYPE = AVI_VIDEO_MIME_TYPE_ARRAY;
 static int* AVI_VIDEO_MIME_TYPE_COUNT = NUMBER_9_INTEGER_ARRAY;
 
 /* VIDEO_MIME_TYPE_CONSTANTS_SOURCE */

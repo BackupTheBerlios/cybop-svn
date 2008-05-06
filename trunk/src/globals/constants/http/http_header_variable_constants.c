@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2008-05-04 00:18:12 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2008-05-06 22:36:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,8 +30,8 @@
 #include "../../../globals/constants/integer/integer_constants.c"
 
 /** The charset http header variable. */
-static char CHARSET_HTTP_HEADER_VARIABLE_ARRAY[] = {'c', 'h', 'a', 'r', 's', 'e', 't'};
-static char* CHARSET_HTTP_HEADER_VARIABLE = CHARSET_HTTP_HEADER_VARIABLE_ARRAY;
+static wchar_t CHARSET_HTTP_HEADER_VARIABLE_ARRAY[] = {L'c', L'h', L'a', L'r', L's', L'e', L't'};
+static wchar_t* CHARSET_HTTP_HEADER_VARIABLE = CHARSET_HTTP_HEADER_VARIABLE_ARRAY;
 static int* CHARSET_HTTP_HEADER_VARIABLE_COUNT = NUMBER_7_INTEGER_ARRAY;
 
 /* HTTP_HEADER_VARIABLE_CONSTANTS_SOURCE */

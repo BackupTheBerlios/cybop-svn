@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2008-05-04 00:18:12 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2008-05-06 22:36:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,8 +30,8 @@
 #include "../../../globals/constants/integer/integer_constants.c"
 
 /** The x-winamp-skin interface mime type. */
-static char X_WINAMP_SKIN_INTERFACE_MIME_TYPE_ARRAY[] = {'i', 'n', 't', 'e', 'r', 'f', 'a', 'c', 'e', '/', 'x', '-', 'w', 'i', 'n', 'a', 'm', 'p', '-', 's', 'k', 'i', 'n'};
-static char* X_WINAMP_SKIN_INTERFACE_MIME_TYPE = X_WINAMP_SKIN_INTERFACE_MIME_TYPE_ARRAY;
+static wchar_t X_WINAMP_SKIN_INTERFACE_MIME_TYPE_ARRAY[] = {L'i', L'n', L't', L'e', L'r', L'f', L'a', L'c', L'e', L'/', L'x', L'-', L'w', L'i', L'n', L'a', L'm', L'p', L'-', L's', L'k', L'i', L'n'};
+static wchar_t* X_WINAMP_SKIN_INTERFACE_MIME_TYPE = X_WINAMP_SKIN_INTERFACE_MIME_TYPE_ARRAY;
 static int* X_WINAMP_SKIN_INTERFACE_MIME_TYPE_COUNT = NUMBER_23_INTEGER_ARRAY;
 
 /* INTERFACE_MIME_TYPE_CONSTANTS_SOURCE */

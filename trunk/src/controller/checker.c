@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.48 $ $Date: 2008-05-04 00:18:11 $ $Author: christian $
+ * @version $Revision: 1.49 $ $Date: 2008-05-06 22:36:52 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -719,9 +719,9 @@ void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
         check_get(p4, p5, p6, *signal_memory_mutex, (void*) &i, (void*) &a, (void*) &ac, (void*) &m, (void*) &mc, (void*) &d, (void*) &dc, (void*) &p, (void*) &id);
 
     //?? For testing only. Delete these lines later!
-    fwprintf(stderr, L"TEST checker signal a: %s\n", *((char**) a));
+    fwprintf(stderr, L"TEST checker signal a: %ls\n", *((wchar_t**) a));
     fwprintf(stderr, L"TEST checker signal ac: %i\n", **((int**) ac));
-//??    fwprintf(stderr, L"TEST signal m: %s\n", *m);
+//??    fwprintf(stderr, L"TEST signal m: %ls\n", *m);
     fwprintf(stderr, L"TEST checker signal mc: %i\n", **((int**) mc));
     // CAUTION! d and dc are NULL. Do NOT try to print their values here!
 /*??
@@ -758,7 +758,7 @@ void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
 
     fwprintf(stderr, L"TEST checker irq: %i\n", **irq);
 
-    fwprintf(stderr, L"TEST checker irq a: %s\n", (char*) *a);
+    fwprintf(stderr, L"TEST checker irq a: %ls\n", (wchar_t*) *a);
     fwprintf(stderr, L"TEST checker irq ac: %i\n", **((int**) ac));
     fwprintf(stderr, L"TEST checker irq mc: %i\n", **((int**) mc));
     fwprintf(stderr, L"TEST checker irq dc: %i\n", **((int**) dc));

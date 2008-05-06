@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2008-05-04 00:18:12 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2008-05-06 22:36:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,8 +30,8 @@
 #include "../../../globals/constants/integer/integer_constants.c"
 
 /** The pdf application mime type. */
-static char PDF_APPLICATION_MIME_TYPE_ARRAY[] = {'a', 'p', 'p', 'l', 'i', 'c', 'a', 't', 'i', 'o', 'n', '/', 'p', 'd', 'f'};
-static char* PDF_APPLICATION_MIME_TYPE = PDF_APPLICATION_MIME_TYPE_ARRAY;
+static wchar_t PDF_APPLICATION_MIME_TYPE_ARRAY[] = {L'a', L'p', L'p', L'l', L'i', L'c', L'a', L't', L'i', L'o', L'n', L'/', L'p', L'd', L'f'};
+static wchar_t* PDF_APPLICATION_MIME_TYPE = PDF_APPLICATION_MIME_TYPE_ARRAY;
 static int* PDF_APPLICATION_MIME_TYPE_COUNT = NUMBER_15_INTEGER_ARRAY;
 
 /* APPLICATION_MIME_TYPE_CONSTANTS_SOURCE */

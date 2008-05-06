@@ -25,7 +25,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.30 $ $Date: 2008-05-04 00:18:11 $ $Author: christian $
+ * @version $Revision: 1.31 $ $Date: 2008-05-06 22:36:52 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -60,7 +60,7 @@
  * @param p1 the argument vector (argv), the first argument being the command
  * @return the return value (0 for normal shutdown; 1 for error)
  */
-int main(int p0, char** p1) {
+int main(int p0, wchar_t** p1) {
 
     // One note about dynamic memory allocation:
     // There is no point in freeing blocks at the end of a program, because all

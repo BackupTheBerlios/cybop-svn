@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2008-05-04 00:18:12 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2008-05-06 22:36:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,8 +30,8 @@
 #include "../../../globals/constants/integer/integer_constants.c"
 
 /** The html text mime type. */
-static char HTML_TEXT_MIME_TYPE_ARRAY[] = {'t', 'e', 'x', 't', '/', 'h', 't', 'm', 'l'};
-static char* HTML_TEXT_MIME_TYPE = HTML_TEXT_MIME_TYPE_ARRAY;
+static wchar_t HTML_TEXT_MIME_TYPE_ARRAY[] = {L't', L'e', L'x', L't', L'/', L'h', L't', L'm', L'l'};
+static wchar_t* HTML_TEXT_MIME_TYPE = HTML_TEXT_MIME_TYPE_ARRAY;
 static int* HTML_TEXT_MIME_TYPE_COUNT = NUMBER_9_INTEGER_ARRAY;
 
 /* TEXT_MIME_TYPE_CONSTANTS_SOURCE */

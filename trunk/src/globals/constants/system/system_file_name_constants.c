@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2008-05-04 00:18:12 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2008-05-06 22:36:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,18 +30,18 @@
 #include "../../../globals/constants/integer/integer_constants.c"
 
 /** The input system file name. */
-static char INPUT_SYSTEM_FILE_NAME_ARRAY[] = {'s', 't', 'a', 'n', 'd', 'a', 'r', 'd', '_', 'i', 'n', 'p', 'u', 't'};
-static char* INPUT_SYSTEM_FILE_NAME = INPUT_SYSTEM_FILE_NAME_ARRAY;
+static wchar_t INPUT_SYSTEM_FILE_NAME_ARRAY[] = {L's', L't', L'a', L'n', L'd', L'a', L'r', L'd', L'_', L'i', L'n', L'p', L'u', L't'};
+static wchar_t* INPUT_SYSTEM_FILE_NAME = INPUT_SYSTEM_FILE_NAME_ARRAY;
 static int* INPUT_SYSTEM_FILE_NAME_COUNT = NUMBER_14_INTEGER_ARRAY;
 
 /** The output system file name. */
-static char OUTPUT_SYSTEM_FILE_NAME_ARRAY[] = {'s', 't', 'a', 'n', 'd', 'a', 'r', 'd', '_', 'o', 'u', 't', 'p', 'u', 't'};
-static char* OUTPUT_SYSTEM_FILE_NAME = OUTPUT_SYSTEM_FILE_NAME_ARRAY;
+static wchar_t OUTPUT_SYSTEM_FILE_NAME_ARRAY[] = {L's', L't', L'a', L'n', L'd', L'a', L'r', L'd', L'_', L'o', L'u', L't', L'p', L'u', L't'};
+static wchar_t* OUTPUT_SYSTEM_FILE_NAME = OUTPUT_SYSTEM_FILE_NAME_ARRAY;
 static int* OUTPUT_SYSTEM_FILE_NAME_COUNT = NUMBER_15_INTEGER_ARRAY;
 
 /** The error output system file name. */
-static char ERROR_OUTPUT_SYSTEM_FILE_NAME_ARRAY[] = {'s', 't', 'a', 'n', 'd', 'a', 'r', 'd', '_', 'e', 'r', 'r', 'o', 'r', '_', 'o', 'u', 't', 'p', 'u', 't'};
-static char* ERROR_OUTPUT_SYSTEM_FILE_NAME = ERROR_OUTPUT_SYSTEM_FILE_NAME_ARRAY;
+static wchar_t ERROR_OUTPUT_SYSTEM_FILE_NAME_ARRAY[] = {L's', L't', L'a', L'n', L'd', L'a', L'r', L'd', L'_', L'e', L'r', L'r', L'o', L'r', L'_', L'o', L'u', L't', L'p', L'u', L't'};
+static wchar_t* ERROR_OUTPUT_SYSTEM_FILE_NAME = ERROR_OUTPUT_SYSTEM_FILE_NAME_ARRAY;
 static int* ERROR_OUTPUT_SYSTEM_FILE_NAME_COUNT = NUMBER_21_INTEGER_ARRAY;
 
 /* SYSTEM_FILE_NAME_CONSTANTS_SOURCE */

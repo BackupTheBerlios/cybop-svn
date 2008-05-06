@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2008-05-04 00:18:12 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2008-05-06 22:36:52 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -38,8 +38,8 @@
  *
  * UTF-7 is not part of The Unicode Standard, but rather an RFC.
  */
-static char UTF_7_UNICODE_CHARACTER_ENCODING_ARRAY[] = {'U', 'T', 'F', '-', '7'};
-static char* UTF_7_UNICODE_CHARACTER_ENCODING = UTF_7_UNICODE_CHARACTER_ENCODING_ARRAY;
+static wchar_t UTF_7_UNICODE_CHARACTER_ENCODING_ARRAY[] = {L'U', L'T', L'F', L'-', L'7'};
+static wchar_t* UTF_7_UNICODE_CHARACTER_ENCODING = UTF_7_UNICODE_CHARACTER_ENCODING_ARRAY;
 static int* UTF_7_UNICODE_CHARACTER_ENCODING_COUNT = NUMBER_5_INTEGER_ARRAY;
 
 /**
@@ -56,8 +56,8 @@ static int* UTF_7_UNICODE_CHARACTER_ENCODING_COUNT = NUMBER_5_INTEGER_ARRAY;
  * most recent GNU/Linux distributions as a direct replacement for legacy
  * encodings in general text handling.
  */
-static char UTF_8_UNICODE_CHARACTER_ENCODING_ARRAY[] = {'U', 'T', 'F', '-', '8'};
-static char* UTF_8_UNICODE_CHARACTER_ENCODING = UTF_8_UNICODE_CHARACTER_ENCODING_ARRAY;
+static wchar_t UTF_8_UNICODE_CHARACTER_ENCODING_ARRAY[] = {L'U', L'T', L'F', L'-', L'8'};
+static wchar_t* UTF_8_UNICODE_CHARACTER_ENCODING = UTF_8_UNICODE_CHARACTER_ENCODING_ARRAY;
 static int* UTF_8_UNICODE_CHARACTER_ENCODING_COUNT = NUMBER_5_INTEGER_ARRAY;
 
 /**
@@ -73,8 +73,8 @@ static int* UTF_8_UNICODE_CHARACTER_ENCODING_COUNT = NUMBER_5_INTEGER_ARRAY;
  * Java supports this since version 1.5. But due to the wide spread of the
  * encoding, especially in databases, it was standardised as "CESU-8".
  */
-static char CESU_8_UNICODE_CHARACTER_ENCODING_ARRAY[] = {'C', 'E', 'S', 'U', '-', '8'};
-static char* CESU_8_UNICODE_CHARACTER_ENCODING = CESU_8_UNICODE_CHARACTER_ENCODING_ARRAY;
+static wchar_t CESU_8_UNICODE_CHARACTER_ENCODING_ARRAY[] = {L'C', L'E', L'S', L'U', L'-', L'8'};
+static wchar_t* CESU_8_UNICODE_CHARACTER_ENCODING = CESU_8_UNICODE_CHARACTER_ENCODING_ARRAY;
 static int* CESU_8_UNICODE_CHARACTER_ENCODING_COUNT = NUMBER_6_INTEGER_ARRAY;
 
 /**
@@ -96,8 +96,8 @@ static int* CESU_8_UNICODE_CHARACTER_ENCODING_COUNT = NUMBER_6_INTEGER_ARRAY;
  * Also, the units FE and FF never appear in UTF-8.
  * The same character converted to UTF-8 becomes the byte sequence EF BB BF.
  */
-static char UTF_16_UNICODE_CHARACTER_ENCODING_ARRAY[] = {'U', 'T', 'F', '-', '1', '6'};
-static char* UTF_16_UNICODE_CHARACTER_ENCODING = UTF_16_UNICODE_CHARACTER_ENCODING_ARRAY;
+static wchar_t UTF_16_UNICODE_CHARACTER_ENCODING_ARRAY[] = {L'U', L'T', L'F', L'-', L'1', L'6'};
+static wchar_t* UTF_16_UNICODE_CHARACTER_ENCODING = UTF_16_UNICODE_CHARACTER_ENCODING_ARRAY;
 static int* UTF_16_UNICODE_CHARACTER_ENCODING_COUNT = NUMBER_6_INTEGER_ARRAY;
 
 /**
@@ -119,8 +119,8 @@ static int* UTF_16_UNICODE_CHARACTER_ENCODING_COUNT = NUMBER_6_INTEGER_ARRAY;
  * also be configured to use UTF-32 as the representation for unicode strings,
  * effectively disseminating such encoding in high-level coded software.
  */
-static char UTF_32_UNICODE_CHARACTER_ENCODING_ARRAY[] = {'U', 'T', 'F', '-', '3', '2'};
-static char* UTF_32_UNICODE_CHARACTER_ENCODING = UTF_32_UNICODE_CHARACTER_ENCODING_ARRAY;
+static wchar_t UTF_32_UNICODE_CHARACTER_ENCODING_ARRAY[] = {L'U', L'T', L'F', L'-', L'3', L'2'};
+static wchar_t* UTF_32_UNICODE_CHARACTER_ENCODING = UTF_32_UNICODE_CHARACTER_ENCODING_ARRAY;
 static int* UTF_32_UNICODE_CHARACTER_ENCODING_COUNT = NUMBER_6_INTEGER_ARRAY;
 
 /**
@@ -138,8 +138,8 @@ static int* UTF_32_UNICODE_CHARACTER_ENCODING_COUNT = NUMBER_6_INTEGER_ARRAY;
  *
  * UTF-EBCDIC is not part of The Unicode Standard.
  */
-static char UTF_EBCDIC_UNICODE_CHARACTER_ENCODING_ARRAY[] = {'U', 'T', 'F', '-', 'E', 'B', 'C', 'D', 'I', 'C'};
-static char* UTF_EBCDIC_UNICODE_CHARACTER_ENCODING = UTF_EBCDIC_UNICODE_CHARACTER_ENCODING_ARRAY;
+static wchar_t UTF_EBCDIC_UNICODE_CHARACTER_ENCODING_ARRAY[] = {L'U', L'T', L'F', L'-', L'E', L'B', L'C', L'D', L'I', L'C'};
+static wchar_t* UTF_EBCDIC_UNICODE_CHARACTER_ENCODING = UTF_EBCDIC_UNICODE_CHARACTER_ENCODING_ARRAY;
 static int* UTF_EBCDIC_UNICODE_CHARACTER_ENCODING_COUNT = NUMBER_10_INTEGER_ARRAY;
 
 /**
@@ -179,8 +179,8 @@ static int* UTF_EBCDIC_UNICODE_CHARACTER_ENCODING_COUNT = NUMBER_10_INTEGER_ARRA
  * only a few characters long, whereas most full-scale compressors need a few
  * kilobytes of data to break even against their own overhead.
  */
-static char UTF_SCSU_UNICODE_CHARACTER_ENCODING_ARRAY[] = {'U', 'T', 'F', '-', 'S', 'C', 'S', 'U'};
-static char* UTF_SCSU_UNICODE_CHARACTER_ENCODING = UTF_SCSU_UNICODE_CHARACTER_ENCODING_ARRAY;
+static wchar_t UTF_SCSU_UNICODE_CHARACTER_ENCODING_ARRAY[] = {L'U', L'T', L'F', L'-', L'S', L'C', L'S', L'U'};
+static wchar_t* UTF_SCSU_UNICODE_CHARACTER_ENCODING = UTF_SCSU_UNICODE_CHARACTER_ENCODING_ARRAY;
 static int* UTF_SCSU_UNICODE_CHARACTER_ENCODING_COUNT = NUMBER_8_INTEGER_ARRAY;
 
 /**
@@ -192,8 +192,8 @@ static int* UTF_SCSU_UNICODE_CHARACTER_ENCODING_COUNT = NUMBER_8_INTEGER_ARRAY;
  * The encoding is used as part of IDNA, which is a system enabling the use of
  * Internationalized Domain Names in all languages that are supported by Unicode.
  */
-static char PUNYCODE_UNICODE_CHARACTER_ENCODING_ARRAY[] = {'P', 'u', 'n', 'y', 'c', 'o', 'd', 'e'};
-static char* PUNYCODE_UNICODE_CHARACTER_ENCODING = PUNYCODE_UNICODE_CHARACTER_ENCODING_ARRAY;
+static wchar_t PUNYCODE_UNICODE_CHARACTER_ENCODING_ARRAY[] = {L'P', L'u', L'n', L'y', L'c', L'o', L'd', L'e'};
+static wchar_t* PUNYCODE_UNICODE_CHARACTER_ENCODING = PUNYCODE_UNICODE_CHARACTER_ENCODING_ARRAY;
 static int* PUNYCODE_UNICODE_CHARACTER_ENCODING_COUNT = NUMBER_8_INTEGER_ARRAY;
 
 /**
@@ -202,8 +202,8 @@ static int* PUNYCODE_UNICODE_CHARACTER_ENCODING_COUNT = NUMBER_8_INTEGER_ARRAY;
  * GB18030 is defined by the Standardization Administration of China.
  * It is the official character set of the People's Republic of China (PRC).
  */
-static char GB18030_UNICODE_CHARACTER_ENCODING_ARRAY[] = {'G', 'B', '1', '8', '0', '3', '0'};
-static char* GB18030_UNICODE_CHARACTER_ENCODING = GB18030_UNICODE_CHARACTER_ENCODING_ARRAY;
+static wchar_t GB18030_UNICODE_CHARACTER_ENCODING_ARRAY[] = {L'G', L'B', L'1', L'8', L'0', L'3', L'0'};
+static wchar_t* GB18030_UNICODE_CHARACTER_ENCODING = GB18030_UNICODE_CHARACTER_ENCODING_ARRAY;
 static int* GB18030_UNICODE_CHARACTER_ENCODING_COUNT = NUMBER_7_INTEGER_ARRAY;
 
 /* UNICODE_CHARACTER_ENCODING_CONSTANTS_SOURCE */
