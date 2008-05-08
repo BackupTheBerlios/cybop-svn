@@ -7,7 +7,7 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.43 $ $Date: 2008-05-06 22:36:52 $ $Author: christian $
+# @version $Revision: 1.44 $ $Date: 2008-05-08 22:36:15 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
@@ -16,6 +16,7 @@ done:
 
 todo:
         CONVERT WIDE CHAR INTO MULTIBYTE CHAR (??) FOR THE FOLLOWING:
+        * Continue in module "utf_8_unicode_character_converter.c"
         * Change function "write" in module "cyboi.c" etc.
         * Change function "open" in module "optionaliser.c" etc.
 

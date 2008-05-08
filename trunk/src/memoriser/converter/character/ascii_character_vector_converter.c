@@ -1,5 +1,5 @@
 /*
- * $RCSfile: character_vector_converter.c,v $
+ * $RCSfile: ascii_character_vector_converter.c,v $
  *
  * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
  *
@@ -20,23 +20,23 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.13 $ $Date: 2008-05-04 00:18:14 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2008-05-08 22:36:15 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef CHARACTER_VECTOR_CONVERTER_SOURCE
-#define CHARACTER_VECTOR_CONVERTER_SOURCE
+#ifndef ASCII_CHARACTER_VECTOR_CONVERTER_SOURCE
+#define ASCII_CHARACTER_VECTOR_CONVERTER_SOURCE
 
-#include "../../globals/constants/cybol/cybol_abstraction_constants.c"
-#include "../../globals/constants/integer/integer_constants.c"
-#include "../../globals/constants/log/log_message_constants.c"
-#include "../../globals/constants/pointer/pointer_constants.c"
-#include "../../globals/logger/logger.c"
-#include "../../globals/variables/reallocation_factor_variables.c"
-#include "../../memoriser/array.c"
+#include "../../../globals/constants/cybol/cybol_abstraction_constants.c"
+#include "../../../globals/constants/integer/integer_constants.c"
+#include "../../../globals/constants/log/log_message_constants.c"
+#include "../../../globals/constants/pointer/pointer_constants.c"
+#include "../../../globals/logger/logger.c"
+#include "../../../globals/variables/reallocation_factor_variables.c"
+#include "../../../memoriser/array.c"
 
 /**
- * Decodes the byte stream and creates a character vector model from it.
+ * Decodes the ascii character byte stream and creates a character vector model from it.
  *
  * @param p0 the destination (Hand over as reference!)
  * @param p1 the destination count
@@ -44,7 +44,7 @@
  * @param p3 the source
  * @param p4 the source count
  */
-void decode_character_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void decode_ascii_character_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (p4 != *NULL_POINTER) {
 
@@ -64,7 +64,7 @@ void decode_character_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                     if (*dc >= *NUMBER_0_INTEGER) {
 
-                        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Decode character vector.");
+                        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Decode ascii character vector.");
 
                         // The new destination character vector size.
                         // (Not exactly the size, but the destination character vector index
@@ -91,37 +91,37 @@ void decode_character_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                         } else {
 
-                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode character vector. The destination count exceeds the size.");
+                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode ascii character vector. The destination count exceeds the size.");
                         }
 
                     } else {
 
-                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode character vector. The destination count is negative.");
+                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode ascii character vector. The destination count is negative.");
                     }
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode character vector. The destination is null.");
+                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode ascii character vector. The destination is null.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode character vector. The destination count is null.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode ascii character vector. The destination count is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode character vector. The destination size is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode ascii character vector. The destination size is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode character vector. The source count is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode ascii character vector. The source count is null.");
     }
 }
 
 /**
- * Encodes the character vector model and creates a byte stream from it.
+ * Encodes the character vector model and creates an ascii character byte stream from it.
  *
  * @param p0 the destination (Hand over as reference!)
  * @param p1 the destination count
@@ -129,7 +129,7 @@ void decode_character_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
  * @param p3 the source
  * @param p4 the source count
  */
-void encode_character_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void encode_ascii_character_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (p4 != *NULL_POINTER) {
 
@@ -147,7 +147,7 @@ void encode_character_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                     void** d = (void**) p0;
 
-                    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Encode character vector.");
+                    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Encode ascii character vector.");
 
                     if ((*dc + *sc) >= *ds) {
 
@@ -167,24 +167,24 @@ void encode_character_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode character vector. The destination is null.");
+                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode ascii character vector. The destination is null.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode character vector. The destination count is null.");
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode ascii character vector. The destination count is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode character vector. The destination size is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode ascii character vector. The destination size is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode character vector. The source count is null.");
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode ascii character vector. The source count is null.");
     }
 }
 
-/* CHARACTER_VECTOR_CONVERTER_SOURCE */
+/* ASCII_CHARACTER_VECTOR_CONVERTER_SOURCE */
 #endif

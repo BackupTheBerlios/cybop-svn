@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2008-05-04 00:18:14 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2008-05-08 22:36:15 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

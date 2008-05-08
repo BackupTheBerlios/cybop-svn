@@ -24,7 +24,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.19 $ $Date: 2008-05-06 22:36:52 $ $Author: christian $
+ * @version $Revision: 1.20 $ $Date: 2008-05-08 22:36:15 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -399,7 +399,7 @@ void test_character_array_with_termination() {
     // GNU C library functions such as "fputs".
     wchar_t test[] = {L't', L'e', L's', L't', L' ', L'c', L'h', L'a', L'r', L' ', L'a', L'r', L'r', L'a', L'y', L' ', L'o', L'k', L'\n', L'\0'};
 
-    fputs(test, stdout);
+    fputws(test, stdout);
 }
 
 /**
@@ -433,14 +433,14 @@ void test_array_resizing() {
     oc = oc + *tc;
 
     // Print original array content.
-    fputs(t, stdout);
+    fputws(t, stdout);
 
     // Reallocate copied array.
     os = os + *NUMBER_10_INTEGER;
     reallocate_array((void*) &o, (void*) &oc, (void*) &os, (void*) CHARACTER_ARRAY);
 
     // Print original array content.
-    fputs(t, stdout);
+    fputws(t, stdout);
 
     // Deallocate original array.
     deallocate_array((void*) &o, (void*) &os, (void*) CHARACTER_ARRAY);
@@ -459,7 +459,7 @@ void test_wide_character_output() {
 #ifdef GNU_LINUX_OPERATING_SYSTEM
     // Possible locales are: LANG, LC_CTYPE, LC_ALL.
     // CAUTION! This setting is necessary for UTF-8 Unicode characters to work.
-    wchar_t* loc = setlocale(LC_ALL, "");
+    char* loc = setlocale(LC_ALL, "");
 
     // The terminal (device name).
     FILE* t = (FILE*) *NULL_POINTER;

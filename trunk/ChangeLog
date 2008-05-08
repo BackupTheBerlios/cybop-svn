@@ -14,9 +14,13 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.53 $ $Date: 2008-05-06 22:36:51 $ $Author: christian $
+# @version $Revision: 1.54 $ $Date: 2008-05-08 22:36:15 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2008-05-08  Christian Heller  <christian.heller@tuxtax.de>
+        * Move character conversion modules into new directory memoriser/converter/character/
+        * Prepare module "utf_8_unicode_character_converter.c" (not complete yet)
 
 2008-05-06  Christian Heller  <christian.heller@tuxtax.de>
         * Adapt source code to wide character, by replacing
