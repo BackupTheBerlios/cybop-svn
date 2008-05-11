@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2008-05-08 22:36:15 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2008-05-11 23:12:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -84,11 +84,11 @@ void decode_utf_8_unicode_character_stream(void* p0, void* p1, void* p2, void* p
 
     if (p4 != *NULL_POINTER) {
 
-        int* sc = (int*) p4;
+        size_t* sc = (size_t*) p4;
 
         if (p2 != *NULL_POINTER) {
 
-            int* ds = (int*) p2;
+            size_t* ds = (size_t*) p2;
 
             if (p1 != *NULL_POINTER) {
 
@@ -125,26 +125,39 @@ void decode_utf_8_unicode_character_stream(void* p0, void* p1, void* p2, void* p
                         // before the first use and this is achieved here.
                         memset(st, '\0', sizeof(st));
 
-                        // Use state.
-                        ...
+                        // The number of bytes in all the multibyte character sequences
+                        // stored in the destination wide character array.
+                        size_t n = *NUMBER_0_INTEGER;
 
-                        // Test whether the current state corresponds to the initial state.
-                        // This is necessary, for example, to decide whether or not to emit
-                        // escape sequences to set the state to the initial state at certain
-                        // sequence points. Communication protocols often require this.
-                        int i = mbsinit(st);
+                        while (1) {
 
-                        if (i != *NUMBER_0_INTEGER) {
+                            wchar_t linebuf[100];
+                            const char* endp = strchr(src, '\n');
 
-                            // Emit code to return to initial state.
-                            const wchar_t empty[] = L"";
-                            const wchar_t* srcp = empty;
+                            // Exit if there is no more line.
+                            if (endp == NULL) {
 
-                            // Determine the necessary output code.
-                            wcsrtombs(outbuf, srcp, outbuflen, st);
+                                break;
+                            }
+
+                            // Converts the null-terminated wide character string
+                            // into an equivalent multibyte character string.
+                            //
+                            // The null wide character is also converted.
+                            // The third parameter specifies how many bytes at most
+                            // can be used from the multibyte character string.
+                            // That is, the source multibyte character string
+                            // does not have to be null-terminated.
+                            // But if a null byte is found within the first bytes
+                            // of the string, then the conversion stops there.
+                            //
+                            // A null-termination character does not need to be added,
+                            // since the maximum sizes are given for source and destination.
+                            n = mbsnrtowcs(*d, (void*) &s, *sc, *ds, st);
+
+                            linebuf[n] = L'\0';
+                            fprintf(fp, "line %d: \"%S\"\n", linebuf);
                         }
-
-                        //?? TODO: Use conversion function for SINGLE bytes!
 
 /*??
                         // The new destination wide character vector size.
@@ -235,6 +248,51 @@ void encode_utf_8_unicode_character_stream(void* p0, void* p1, void* p2, void* p
 
                     log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Encode UTF-8 Unicode character stream.");
 
+                    // The state of the conversion.
+                    //
+                    // In the introduction of this chapter it was said that
+                    // certain character sets use a stateful encoding.
+                    // That is, the encoded values depend in some way
+                    // on the previous bytes in the text.
+                    //
+                    // Since the conversion functions allow converting a text
+                    // in more than one step, there must be a way to pass this
+                    // information from one call of the functions to another.
+                    //
+                    // A variable of type mbstate_t can contain all the
+                    // information about the shift state needed from one call
+                    // to a conversion function to another.
+                    mbstate_t st;
+
+                    // Clear the whole conversion state variable.
+                    // There is no specific function or initializer to put the
+                    // state object in any specific state. The rules are that
+                    // the object should always represent the initial state
+                    // before the first use and this is achieved here.
+                    memset(st, '\0', sizeof(st));
+
+                    // Use state.
+                    ...
+
+                    // Test whether the current state corresponds to the initial state.
+                    // This is necessary, for example, to decide whether or not to emit
+                    // escape sequences to set the state to the initial state at certain
+                    // sequence points. Communication protocols often require this.
+                    int i = mbsinit(st);
+
+                    if (i != *NUMBER_0_INTEGER) {
+
+                        // Emit code to return to initial state.
+                        //?? TODO: Possibly replace with EMPTY_MODEL defined in "cybol_model_constants.c"!
+                        //?? Problem: The constant EMPTY_MODEL is not null-terminated.
+                        const wchar_t empty[] = L"";
+                        const wchar_t* srcp = empty;
+
+                        // Determine the necessary output code.
+                        wcsrtombs(outbuf, srcp, outbuflen, st);
+                    }
+
+/*??
                     if ((*dc + *sc) >= *ds) {
 
                         // The new destination character vector size.
@@ -250,6 +308,7 @@ void encode_utf_8_unicode_character_stream(void* p0, void* p1, void* p2, void* p
 
                     // Increment destination count.
                     *dc = *dc + *sc;
+*/
 
                 } else {
 
