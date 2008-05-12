@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.10 $ $Date: 2008-05-06 22:36:52 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2008-05-12 10:58:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -126,7 +126,7 @@ void optionalise_log_level(void* p0, void* p1, void* p2) {
 
         if (r == *NUMBER_0_INTEGER) {
 
-            compare_arrays(p1, p2, (void*) OFF_LOG_LEVEL_COMMAND_LINE_VALUE, (void*) OFF_LOG_LEVEL_COMMAND_LINE_VALUE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+            compare_arrays(p1, p2, (void*) OFF_LOG_LEVEL_COMMAND_LINE_VALUE, (void*) OFF_LOG_LEVEL_COMMAND_LINE_VALUE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
             if (r != *NUMBER_0_INTEGER) {
 
@@ -137,7 +137,7 @@ void optionalise_log_level(void* p0, void* p1, void* p2) {
 
         if (r == *NUMBER_0_INTEGER) {
 
-            compare_arrays(p1, p2, (void*) ERROR_LOG_LEVEL_COMMAND_LINE_VALUE, (void*) ERROR_LOG_LEVEL_COMMAND_LINE_VALUE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+            compare_arrays(p1, p2, (void*) ERROR_LOG_LEVEL_COMMAND_LINE_VALUE, (void*) ERROR_LOG_LEVEL_COMMAND_LINE_VALUE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
             if (r != *NUMBER_0_INTEGER) {
 
@@ -148,7 +148,7 @@ void optionalise_log_level(void* p0, void* p1, void* p2) {
 
         if (r == *NUMBER_0_INTEGER) {
 
-            compare_arrays(p1, p2, (void*) WARNING_LOG_LEVEL_COMMAND_LINE_VALUE, (void*) WARNING_LOG_LEVEL_COMMAND_LINE_VALUE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+            compare_arrays(p1, p2, (void*) WARNING_LOG_LEVEL_COMMAND_LINE_VALUE, (void*) WARNING_LOG_LEVEL_COMMAND_LINE_VALUE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
             if (r != *NUMBER_0_INTEGER) {
 
@@ -159,7 +159,7 @@ void optionalise_log_level(void* p0, void* p1, void* p2) {
 
         if (r == *NUMBER_0_INTEGER) {
 
-            compare_arrays(p1, p2, (void*) INFORMATION_LOG_LEVEL_COMMAND_LINE_VALUE, (void*) INFORMATION_LOG_LEVEL_COMMAND_LINE_VALUE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+            compare_arrays(p1, p2, (void*) INFORMATION_LOG_LEVEL_COMMAND_LINE_VALUE, (void*) INFORMATION_LOG_LEVEL_COMMAND_LINE_VALUE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
             if (r != *NUMBER_0_INTEGER) {
 
@@ -170,7 +170,7 @@ void optionalise_log_level(void* p0, void* p1, void* p2) {
 
         if (r == *NUMBER_0_INTEGER) {
 
-            compare_arrays(p1, p2, (void*) DEBUG_LOG_LEVEL_COMMAND_LINE_VALUE, (void*) DEBUG_LOG_LEVEL_COMMAND_LINE_VALUE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+            compare_arrays(p1, p2, (void*) DEBUG_LOG_LEVEL_COMMAND_LINE_VALUE, (void*) DEBUG_LOG_LEVEL_COMMAND_LINE_VALUE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
             if (r != *NUMBER_0_INTEGER) {
 
@@ -178,7 +178,6 @@ void optionalise_log_level(void* p0, void* p1, void* p2) {
                 *l = *DEBUG_LOG_LEVEL;
             }
         }
-
 
         if (r == *NUMBER_0_INTEGER) {
 
@@ -221,17 +220,17 @@ void optionalise_log_file(void* p0, void* p1, void* p2) {
             int ts = *nc + *NUMBER_1_INTEGER;
 
             // Allocate terminated file name.
-            allocate_array((void*) &t, (void*) &ts, (void*) WIDE_CHARACTER_ARRAY);
+            allocate_array((void*) &t, (void*) &ts, (void*) CHARACTER_ARRAY);
 
             // Set terminated file name by first copying the actual name
             // and then adding the null termination character.
-            set_array_elements(t, (void*) NUMBER_0_INTEGER, p1, p2, (void*) WIDE_CHARACTER_ARRAY);
-            set_array_elements(t, p2, (void*) NULL_CONTROL_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+            set_array_elements(t, (void*) NUMBER_0_INTEGER, p1, p2, (void*) CHARACTER_ARRAY);
+            set_array_elements(t, p2, (void*) NULL_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
 
             // The log file status flags.
             int s = O_TRUNC | O_CREAT | O_WRONLY;
             // The log file.
-            *f = open((wchar_t*) t, s);
+            *f = open((char*) t, s);
 
             if (*f >= *NUMBER_0_INTEGER) {
 
@@ -242,7 +241,7 @@ void optionalise_log_file(void* p0, void* p1, void* p2) {
                 int g = *NUMBER_MINUS_1_INTEGER;
 
                 // Set file owner.
-                chown((wchar_t*) t, o, g);
+                chown((char*) t, o, g);
 
                 // The file access rights.
                 //?? TODO: When trying to cross-compile cyboi for windows,
@@ -250,7 +249,7 @@ void optionalise_log_file(void* p0, void* p1, void* p2) {
                 int r = S_IRUSR | S_IWUSR; //?? | S_IRGRP | S_IWGRP;
 
                 // Set file access rights.
-                chmod((wchar_t*) t, r);
+                chmod((char*) t, r);
 
             } else {
 
@@ -260,7 +259,7 @@ void optionalise_log_file(void* p0, void* p1, void* p2) {
             }
 
             // Deallocate terminated file name.
-            deallocate_array((void*) &t, (void*) &ts, (void*) WIDE_CHARACTER_ARRAY);
+            deallocate_array((void*) &t, (void*) &ts, (void*) CHARACTER_ARRAY);
 
         } else {
 
@@ -344,7 +343,7 @@ void optionalise_option(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
 
             if (r == *NUMBER_0_INTEGER) {
 
-                compare_arrays(p7, p8, (void*) VERSION_COMMAND_LINE_OPTION, (void*) VERSION_COMMAND_LINE_OPTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+                compare_arrays(p7, p8, (void*) VERSION_COMMAND_LINE_OPTION, (void*) VERSION_COMMAND_LINE_OPTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
                 if (r != *NUMBER_0_INTEGER) {
 
@@ -355,7 +354,7 @@ void optionalise_option(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
 
             if (r == *NUMBER_0_INTEGER) {
 
-                compare_arrays(p7, p8, (void*) HELP_COMMAND_LINE_OPTION, (void*) HELP_COMMAND_LINE_OPTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+                compare_arrays(p7, p8, (void*) HELP_COMMAND_LINE_OPTION, (void*) HELP_COMMAND_LINE_OPTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
                 if (r != *NUMBER_0_INTEGER) {
 
@@ -366,7 +365,7 @@ void optionalise_option(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
 
             if (r == *NUMBER_0_INTEGER) {
 
-                compare_arrays(p7, p8, (void*) TEST_COMMAND_LINE_OPTION, (void*) TEST_COMMAND_LINE_OPTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+                compare_arrays(p7, p8, (void*) TEST_COMMAND_LINE_OPTION, (void*) TEST_COMMAND_LINE_OPTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
                 if (r != *NUMBER_0_INTEGER) {
 
@@ -377,7 +376,7 @@ void optionalise_option(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
 
             if (r == *NUMBER_0_INTEGER) {
 
-                compare_arrays(p7, p8, (void*) KNOWLEDGE_COMMAND_LINE_OPTION, (void*) KNOWLEDGE_COMMAND_LINE_OPTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+                compare_arrays(p7, p8, (void*) KNOWLEDGE_COMMAND_LINE_OPTION, (void*) KNOWLEDGE_COMMAND_LINE_OPTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
                 if (r != *NUMBER_0_INTEGER) {
 
@@ -391,7 +390,7 @@ void optionalise_option(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
 
             if (r == *NUMBER_0_INTEGER) {
 
-                compare_arrays(p7, p8, (void*) LOG_LEVEL_COMMAND_LINE_OPTION, (void*) LOG_LEVEL_COMMAND_LINE_OPTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+                compare_arrays(p7, p8, (void*) LOG_LEVEL_COMMAND_LINE_OPTION, (void*) LOG_LEVEL_COMMAND_LINE_OPTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
                 if (r != *NUMBER_0_INTEGER) {
 
@@ -402,7 +401,7 @@ void optionalise_option(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
 
             if (r == *NUMBER_0_INTEGER) {
 
-                compare_arrays(p7, p8, (void*) LOG_FILE_COMMAND_LINE_OPTION, (void*) LOG_FILE_COMMAND_LINE_OPTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+                compare_arrays(p7, p8, (void*) LOG_FILE_COMMAND_LINE_OPTION, (void*) LOG_FILE_COMMAND_LINE_OPTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
                 if (r != *NUMBER_0_INTEGER) {
 
@@ -510,7 +509,7 @@ void optionalise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, voi
                 //   (this is a rather dirty workaround, but the strlen function can be used)
                 //
                 // Possibility 2 is applied here.
-                oc = wcslen((wchar_t*) *o);
+                oc = strlen((char*) *o);
 
             } else {
 
@@ -542,7 +541,7 @@ void optionalise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, voi
                     //   (this is a rather dirty workaround, but the strlen function can be used)
                     //
                     // Possibility 2 is applied here.
-                    vc = wcslen((wchar_t*) *v);
+                    vc = strlen((char*) *v);
 
                 } else {
 

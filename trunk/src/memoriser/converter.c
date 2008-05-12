@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.45 $ $Date: 2008-05-04 00:18:13 $ $Author: christian $
+ * @version $Revision: 1.46 $ $Date: 2008-05-12 10:58:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -32,8 +32,10 @@
 #include "../globals/constants/integer/integer_constants.c"
 #include "../globals/constants/memory_structure/memory_abstraction_constants.c"
 #include "../globals/constants/pointer/pointer_constants.c"
+#include "../memoriser/converter/character/ascii_character_vector_converter.c"
+#include "../memoriser/converter/character/utf_16_unicode_character_converter.c"
+#include "../memoriser/converter/character/utf_8_unicode_character_converter.c"
 #include "../memoriser/converter/boolean_converter.c"
-#include "../memoriser/converter/character_vector_converter.c"
 #include "../memoriser/converter/complex_converter.c"
 #include "../memoriser/converter/compound_converter.c"
 #include "../memoriser/converter/date_time_converter.c"
@@ -48,8 +50,6 @@
 #include "../memoriser/converter/model_diagram_converter.c"
 #include "../memoriser/converter/terminal_background_converter.c"
 #include "../memoriser/converter/terminal_foreground_converter.c"
-#include "../memoriser/converter/utf_16_unicode_character_converter.c"
-#include "../memoriser/converter/utf_8_unicode_character_converter.c"
 #include "../memoriser/converter/x_window_system_converter.c"
 #include "../memoriser/converter/xdt_converter.c"
 #include "../memoriser/converter/xhtml_converter.c"
@@ -94,7 +94,7 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
         if (r != *NUMBER_0_INTEGER) {
 
-            decode_character_vector(p0, p1, p2, p6, p7);
+            decode_utf_8_unicode_character_vector(p0, p1, p2, p6, p7);
         }
     }
 
@@ -104,7 +104,7 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
         if (r != *NUMBER_0_INTEGER) {
 
-            decode_character_vector(p0, p1, p2, p6, p7);
+            decode_utf_8_unicode_character_vector(p0, p1, p2, p6, p7);
         }
     }
 
@@ -114,7 +114,7 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
         if (r != *NUMBER_0_INTEGER) {
 
-            decode_character_vector(p0, p1, p2, p6, p7);
+            decode_utf_8_unicode_character_vector(p0, p1, p2, p6, p7);
         }
     }
 
@@ -124,7 +124,7 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
         if (r != *NUMBER_0_INTEGER) {
 
-            decode_character_vector(p0, p1, p2, p6, p7);
+            decode_utf_8_unicode_character_vector(p0, p1, p2, p6, p7);
         }
     }
 
@@ -304,7 +304,7 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
         if (r != *NUMBER_0_INTEGER) {
 
-            decode_utf_8_unicode_character_stream(p0, p1, p2, p6, p7);
+            decode_utf_8_unicode_character_vector(p0, p1, p2, p6, p7);
         }
     }
 
@@ -367,7 +367,7 @@ void encode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
         if (r != *NUMBER_0_INTEGER) {
 
-            encode_character_vector(p0, p1, p2, p7, p8);
+            encode_utf_8_unicode_character_vector(p0, p1, p2, p7, p8);
         }
     }
 
@@ -377,7 +377,7 @@ void encode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
         if (r != *NUMBER_0_INTEGER) {
 
-            encode_character_vector(p0, p1, p2, p7, p8);
+            encode_utf_8_unicode_character_vector(p0, p1, p2, p7, p8);
         }
     }
 
@@ -557,7 +557,7 @@ void encode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
         if (r != *NUMBER_0_INTEGER) {
 
-            encode_utf_8_unicode_character_stream(p0, p1, p2, p7, p8);
+            encode_utf_8_unicode_character_vector(p0, p1, p2, p7, p8);
         }
     }
 

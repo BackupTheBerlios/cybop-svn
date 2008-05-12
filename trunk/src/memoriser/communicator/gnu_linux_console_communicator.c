@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.12 $ $Date: 2008-05-04 00:18:14 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2008-05-12 10:58:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,7 +30,6 @@
 #include <locale.h>
 #include <stdio.h>
 #include <wchar.h>
-//?? #include "../../globals/constants/character/character_constants.c"
 #include "../../globals/constants/character/wide_character_constants.c"
 #include "../../globals/constants/cybol/cybol_abstraction_constants.c"
 #include "../../globals/constants/integer/integer_constants.c"
@@ -39,7 +38,7 @@
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/logger/logger.c"
-#include "../../memoriser/converter/wide_character_vector_converter.c"
+#include "../../memoriser/converter/character/utf_8_unicode_character_converter.c"
 #include "../../memoriser/array.c"
 
 /**
@@ -97,7 +96,7 @@ void read_gnu_linux_console(void* p0, void* p1, void* p2, void* p3) {
                 csi = *NUMBER_0_INTEGER;
 
                 // Copy source character to destination character array.
-                decode_wide_character_vector(p0, p1, p2, (void*) &c, (void*) NUMBER_1_INTEGER);
+                decode_utf_8_unicode_character_vector(p0, p1, p2, (void*) &c, (void*) NUMBER_1_INTEGER);
 
                 // An escape character followed by a left square bracket character
                 // were read before. So this is an escape control sequence.
@@ -122,7 +121,7 @@ void read_gnu_linux_console(void* p0, void* p1, void* p2, void* p3) {
                     csi = *NUMBER_1_INTEGER;
 
                     // Copy source character to destination character array.
-                    decode_wide_character_vector(p0, p1, p2, (void*) &c, (void*) NUMBER_1_INTEGER);
+                    decode_utf_8_unicode_character_vector(p0, p1, p2, (void*) &c, (void*) NUMBER_1_INTEGER);
 
                 } else {
 
@@ -142,7 +141,7 @@ void read_gnu_linux_console(void* p0, void* p1, void* p2, void* p3) {
                 esc = *NUMBER_1_INTEGER;
 
                 // Copy source character to destination character array.
-                decode_wide_character_vector(p0, p1, p2, (void*) &c, (void*) NUMBER_1_INTEGER);
+                decode_utf_8_unicode_character_vector(p0, p1, p2, (void*) &c, (void*) NUMBER_1_INTEGER);
 
             } else if (c == WEOF) {
 
@@ -152,7 +151,7 @@ void read_gnu_linux_console(void* p0, void* p1, void* p2, void* p3) {
             } else {
 
                 // Copy source character to destination character array.
-                decode_wide_character_vector(p0, p1, p2, (void*) &c, (void*) NUMBER_1_INTEGER);
+                decode_utf_8_unicode_character_vector(p0, p1, p2, (void*) &c, (void*) NUMBER_1_INTEGER);
 
                 // Set loop exit flag.
                 f = *NUMBER_1_INTEGER;

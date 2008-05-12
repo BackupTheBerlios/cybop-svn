@@ -14,9 +14,12 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.54 $ $Date: 2008-05-08 22:36:15 $ $Author: christian $
+# @version $Revision: 1.55 $ $Date: 2008-05-12 10:58:58 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2008-05-12  Christian Heller  <christian.heller@tuxtax.de>
+        * Continue converting all source code to wide character
 
 2008-05-08  Christian Heller  <christian.heller@tuxtax.de>
         * Move character conversion modules into new directory memoriser/converter/character/

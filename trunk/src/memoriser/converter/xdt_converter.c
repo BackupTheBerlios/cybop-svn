@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.24 $ $Date: 2008-05-04 00:18:14 $ $Author: christian $
+ * @version $Revision: 1.25 $ $Date: 2008-05-12 10:58:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -38,7 +38,7 @@
 #include "../../globals/constants/xdt/xdt_record_constants.c"
 #include "../../globals/constants/xdt/xdt_record_name_constants.c"
 #include "../../globals/logger/logger.c"
-#include "../../memoriser/converter/character_vector_converter.c"
+#include "../../memoriser/converter/character/ascii_character_vector_converter.c"
 #include "../../memoriser/converter/date_time_converter.c"
 #include "../../memoriser/converter/integer_vector_converter.c"
 #include "../../memoriser/array.c"
@@ -878,9 +878,9 @@ void decode_xdt_decode_model(void* p0, void* p1, void* p2, void* p3, void* p4, v
                                     allocate(p9, (void*) *ds, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
 
                                     // Decode name.
-                                    decode_character_vector(p0, (void*) *nc, (void*) *ns, p16, p17);
+                                    decode_ascii_character_vector(p0, (void*) *nc, (void*) *ns, p16, p17);
                                     // Decode abstraction.
-                                    decode_character_vector(p3, (void*) *ac, (void*) *as, p14, p15);
+                                    decode_ascii_character_vector(p3, (void*) *ac, (void*) *as, p14, p15);
                                     // Decode model.
                                     decode(p6, (void*) *mc, (void*) *ms, p9, (void*) *dc, (void*) *ds, p12, p13, *NULL_POINTER, *NULL_POINTER, p14, p15);
 

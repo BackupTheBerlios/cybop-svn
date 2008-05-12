@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2008-05-11 23:12:13 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2008-05-12 10:58:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -80,7 +80,7 @@
  * @param p3 the source UTF-8 Unicode character stream
  * @param p4 the source UTF-8 Unicode character stream count
  */
-void decode_utf_8_unicode_character_stream(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void decode_utf_8_unicode_character_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (p4 != *NULL_POINTER) {
 
@@ -96,102 +96,73 @@ void decode_utf_8_unicode_character_stream(void* p0, void* p1, void* p2, void* p
 
                 if (p0 != *NULL_POINTER) {
 
-                    void** d = (void**) p0;
+                    wchar_t** d = (wchar_t**) p0;
 
                     if (*dc >= *NUMBER_0_INTEGER) {
 
-                        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Decode UTF-8 Unicode character stream.");
+                        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Decode UTF-8 Unicode character vector.");
 
-                        // The state of the conversion.
-                        //
-                        // In the introduction of this chapter it was said that
-                        // certain character sets use a stateful encoding.
-                        // That is, the encoded values depend in some way
-                        // on the previous bytes in the text.
-                        //
-                        // Since the conversion functions allow converting a text
-                        // in more than one step, there must be a way to pass this
-                        // information from one call of the functions to another.
-                        //
-                        // A variable of type mbstate_t can contain all the
-                        // information about the shift state needed from one call
-                        // to a conversion function to another.
-                        mbstate_t st;
-
-                        // Clear the whole conversion state variable.
-                        // There is no specific function or initializer to put the
-                        // state object in any specific state. The rules are that
-                        // the object should always represent the initial state
-                        // before the first use and this is achieved here.
-                        memset(st, '\0', sizeof(st));
-
-                        // The number of bytes in all the multibyte character sequences
-                        // stored in the destination wide character array.
-                        size_t n = *NUMBER_0_INTEGER;
-
-                        while (1) {
-
-                            wchar_t linebuf[100];
-                            const char* endp = strchr(src, '\n');
-
-                            // Exit if there is no more line.
-                            if (endp == NULL) {
-
-                                break;
-                            }
-
-                            // Converts the null-terminated wide character string
-                            // into an equivalent multibyte character string.
-                            //
-                            // The null wide character is also converted.
-                            // The third parameter specifies how many bytes at most
-                            // can be used from the multibyte character string.
-                            // That is, the source multibyte character string
-                            // does not have to be null-terminated.
-                            // But if a null byte is found within the first bytes
-                            // of the string, then the conversion stops there.
-                            //
-                            // A null-termination character does not need to be added,
-                            // since the maximum sizes are given for source and destination.
-                            n = mbsnrtowcs(*d, (void*) &s, *sc, *ds, st);
-
-                            linebuf[n] = L'\0';
-                            fprintf(fp, "line %d: \"%S\"\n", linebuf);
-                        }
-
-/*??
                         // The new destination wide character vector size.
-                        // (Not exactly the size, but the destination character vector index
-                        // increased by the source array count.)
-                        *ds = *dc + *sc;
+                        //
+                        // CAUTION! The "worst case" is assumed, i.e. that each source character
+                        // represents an ascii character encoded by utf-8 with ONE single byte.
+                        // Therefore, the destination size is adjusted accordingly.
+                        // In case not all source characters are ascii characters -- even better,
+                        // since then more than just one source character were used for encoding,
+                        // and the destination wide character array will have LESS entries (count)
+                        // than the destination size that was set before.
+                        // In this case, the destination size will be too big, but can be reduced
+                        // to the actual destination count below, if so wanted.
+                        *ds = *dc + (*sc * *NUMBER_1_INTEGER);
 
                         // Reallocate destination wide character vector.
                         reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_ARRAY);
 
-                        if (*dc <= (*ds - *sc)) {
+                        if (*dc <= (*ds - (*sc * *NUMBER_1_INTEGER))) {
 
-                            // Set source into destination wide character vector.
-                            set_array_elements(*d, p1, p3, p4, (void*) WIDE_CHARACTER_ARRAY);
+                            // The state of the conversion.
+                            //
+                            // In the introduction of this chapter it was said that
+                            // certain character sets use a stateful encoding.
+                            // That is, the encoded values depend in some way
+                            // on the previous bytes in the text.
+                            //
+                            // Since the conversion functions allow converting a text
+                            // in more than one step, there must be a way to pass this
+                            // information from one call of the functions to another.
+                            //
+                            // A variable of type mbstate_t can contain all the
+                            // information about the shift state needed from one call
+                            // to a conversion function to another.
+                            mbstate_t st;
 
-                            // Increment count.
-                            // Example:
-                            // d = "helloworld"
-                            // dc (as index) = 5
-                            // s = "universe"
-                            // sc = 8
-                            // d (after set) = "hellouniverse"
-                            // dc = dc + sc = 13
-                            // CAUTION! This example presumes normal one-byte
-                            // characters as source. Wide characters occupy
-                            // more bytes in a file/memory, but the principle
-                            // of conversion and counting is the same.
-                            *dc = *dc + *sc;
+                            // Clear the whole conversion state variable.
+                            //
+                            // There is no specific function or initializer to put the
+                            // state object in any specific state. The rules are that
+                            // the object should always represent the initial state
+                            // before the first use and this is achieved here.
+                            memset((void*) &st, '\0', sizeof(st));
+
+                            // Converts the multibyte character string into a wide character string.
+                            //
+                            // Returns the number of wide characters converted.
+                            int n = mbsnrtowcs(*d, (void*) &p3, *sc, *ds, st);
+
+                            if (n >= *NUMBER_0_INTEGER) {
+
+                                // Increment destination count by the number of wide characters converted.
+                                *dc = *dc + n;
+
+                            } else {
+
+                                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode utf-8 unicode character stream. The conversion failed, possibly due to an invalid multibyte sequence.");
+                            }
 
                         } else {
 
                             log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode utf-8 unicode character stream. The destination count exceeds the size.");
                         }
-*/
 
                     } else {
 
@@ -228,7 +199,7 @@ void decode_utf_8_unicode_character_stream(void* p0, void* p1, void* p2, void* p
  * @param p3 the source wide character array
  * @param p4 the source wide character array count
  */
-void encode_utf_8_unicode_character_stream(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void encode_utf_8_unicode_character_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (p4 != *NULL_POINTER) {
 
@@ -246,69 +217,69 @@ void encode_utf_8_unicode_character_stream(void* p0, void* p1, void* p2, void* p
 
                     void** d = (void**) p0;
 
-                    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Encode UTF-8 Unicode character stream.");
+                    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Encode UTF-8 Unicode character vector.");
 
-                    // The state of the conversion.
+                    // The new destination wide character vector size.
                     //
-                    // In the introduction of this chapter it was said that
-                    // certain character sets use a stateful encoding.
-                    // That is, the encoded values depend in some way
-                    // on the previous bytes in the text.
-                    //
-                    // Since the conversion functions allow converting a text
-                    // in more than one step, there must be a way to pass this
-                    // information from one call of the functions to another.
-                    //
-                    // A variable of type mbstate_t can contain all the
-                    // information about the shift state needed from one call
-                    // to a conversion function to another.
-                    mbstate_t st;
+                    // CAUTION! The "worst case" is assumed, i.e. that each source wide character
+                    // represents a non-ascii character encoded by utf-8 with FOUR single bytes.
+                    // Therefore, the destination size is adjusted accordingly.
+                    // In case some source wide characters are ascii characters -- even better,
+                    // since then less than four destination characters are used for encoding,
+                    // and the destination character array will have LESS entries (count)
+                    // than the destination size that was set before.
+                    // In this case, the destination size will be too big, but can be reduced
+                    // to the actual destination count below, if so wanted.
+                    *ds = (*dc * *CHARACTER_VECTOR_REALLOCATION_FACTOR) + (*sc * *NUMBER_4_INTEGER);
 
-                    // Clear the whole conversion state variable.
-                    // There is no specific function or initializer to put the
-                    // state object in any specific state. The rules are that
-                    // the object should always represent the initial state
-                    // before the first use and this is achieved here.
-                    memset(st, '\0', sizeof(st));
+                    // Reallocate destination character vector.
+                    reallocate_array(p0, p1, p2, (void*) CHARACTER_ARRAY);
 
-                    // Use state.
-                    ...
+                    if (*dc <= (*ds - (*sc * *NUMBER_4_INTEGER))) {
 
-                    // Test whether the current state corresponds to the initial state.
-                    // This is necessary, for example, to decide whether or not to emit
-                    // escape sequences to set the state to the initial state at certain
-                    // sequence points. Communication protocols often require this.
-                    int i = mbsinit(st);
+                        // The state of the conversion.
+                        //
+                        // In the introduction of this chapter it was said that
+                        // certain character sets use a stateful encoding.
+                        // That is, the encoded values depend in some way
+                        // on the previous bytes in the text.
+                        //
+                        // Since the conversion functions allow converting a text
+                        // in more than one step, there must be a way to pass this
+                        // information from one call of the functions to another.
+                        //
+                        // A variable of type mbstate_t can contain all the
+                        // information about the shift state needed from one call
+                        // to a conversion function to another.
+                        mbstate_t st;
 
-                    if (i != *NUMBER_0_INTEGER) {
+                        // Clear the whole conversion state variable.
+                        //
+                        // There is no specific function or initializer to put the
+                        // state object in any specific state. The rules are that
+                        // the object should always represent the initial state
+                        // before the first use and this is achieved here.
+                        memset((void*) &st, '\0', sizeof(st));
 
-                        // Emit code to return to initial state.
-                        //?? TODO: Possibly replace with EMPTY_MODEL defined in "cybol_model_constants.c"!
-                        //?? Problem: The constant EMPTY_MODEL is not null-terminated.
-                        const wchar_t empty[] = L"";
-                        const wchar_t* srcp = empty;
+                        // Converts the wide character string into a multibyte character string.
+                        //
+                        // Returns the number of multibyte characters converted.
+                        int n = wcsnrtombs(*d, (void*) &p3, *sc, *ds, st);
 
-                        // Determine the necessary output code.
-                        wcsrtombs(outbuf, srcp, outbuflen, st);
+                        if (n >= *NUMBER_0_INTEGER) {
+
+                            // Increment destination count by the number of multibyte characters converted.
+                            *dc = *dc + n;
+
+                        } else {
+
+                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode utf-8 unicode character stream. The conversion failed, possibly because one of the wide characters in the input string has no valid multibyte character equivalent.");
+                        }
+
+                    } else {
+
+                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode utf-8 unicode character stream. The destination count exceeds the size.");
                     }
-
-/*??
-                    if ((*dc + *sc) >= *ds) {
-
-                        // The new destination character vector size.
-                        // CAUTION! Add constant in case *dc is zero!
-                        *ds = (*dc * *CHARACTER_VECTOR_REALLOCATION_FACTOR) + *sc;
-
-                        // Reallocate destination character vector.
-                        reallocate_array(p0, p1, p2, (void*) CHARACTER_ARRAY);
-                    }
-
-                    // Set source into destination character vector.
-                    set_array_elements(*d, p1, p3, p4, (void*) CHARACTER_ARRAY);
-
-                    // Increment destination count.
-                    *dc = *dc + *sc;
-*/
 
                 } else {
 

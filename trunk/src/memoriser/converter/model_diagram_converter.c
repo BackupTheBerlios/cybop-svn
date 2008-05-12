@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.13 $ $Date: 2008-05-04 00:18:14 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2008-05-12 10:58:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -114,10 +114,10 @@ void encode_model_diagram_indentation(void* p0, void* p1, void* p2, void* p3, vo
                     // Therefore, use a pipe- and space character.
 
                     // Add pipe character to destination array.
-                    encode_character_vector(p0, p1, p2, (void*) VERTICAL_LINE_CHARACTER, (void*) PRIMITIVE_COUNT);
+                    encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) VERTICAL_LINE_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT);
 
                     // Add space character to destination array.
-                    encode_character_vector(p0, p1, p2, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT);
+                    encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) SPACE_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT);
 
                 } else {
 
@@ -128,20 +128,20 @@ void encode_model_diagram_indentation(void* p0, void* p1, void* p2, void* p3, vo
                         // This is the part model, so that a plus- and minus character are used.
 
                         // Add plus character to destination array.
-                        encode_character_vector(p0, p1, p2, (void*) PLUS_SIGN_CHARACTER, (void*) PRIMITIVE_COUNT);
+                        encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) PLUS_SIGN_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT);
 
                         // Add minus character to destination array.
-                        encode_character_vector(p0, p1, p2, (void*) HYPHEN_MINUS_CHARACTER, (void*) PRIMITIVE_COUNT);
+                        encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) HYPHEN_MINUS_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT);
 
                     } else {
 
                         // This is the part details, so that a number sign- and minus character are used.
 
                         // Add plus character to destination array.
-                        encode_character_vector(p0, p1, p2, (void*) NUMBER_SIGN_CHARACTER, (void*) PRIMITIVE_COUNT);
+                        encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) NUMBER_SIGN_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT);
 
                         // Add minus character to destination array.
-                        encode_character_vector(p0, p1, p2, (void*) HYPHEN_MINUS_CHARACTER, (void*) PRIMITIVE_COUNT);
+                        encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) HYPHEN_MINUS_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT);
                     }
                 }
 
@@ -223,7 +223,7 @@ void encode_model_diagram_compound(void* p0, void* p1, void* p2, void* p3, void*
                     (void*) &d, (void*) &dc, (void*) &ds);
 
                 // Add line feed character to destination array.
-                encode_character_vector(p0, p1, p2, (void*) LINE_FEED_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT);
+                encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) LINE_FEED_CONTROL_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT);
 
                 // Encode part.
                 encode_model_diagram_node(p0, p1, p2, *n, *nc, *a, *ac, *m, *mc, *d, *dc, (void*) &nl, p6);
@@ -276,19 +276,19 @@ void encode_model_diagram_node(void* p0, void* p1, void* p2, void* p3, void* p4,
             encode_model_diagram_indentation(p0, p1, p2, p11, p12);
 
             // Add part name to destination array.
-            encode_character_vector(p0, p1, p2, p3, p4);
+            encode_utf_8_unicode_character_vector(p0, p1, p2, p3, p4);
 
             // Add space character to destination array.
-            encode_character_vector(p0, p1, p2, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT);
+            encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) SPACE_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT);
 
             // Add pipe character to destination array.
-            encode_character_vector(p0, p1, p2, (void*) VERTICAL_LINE_CHARACTER, (void*) PRIMITIVE_COUNT);
+            encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) VERTICAL_LINE_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT);
 
             // Add space character to destination array.
-            encode_character_vector(p0, p1, p2, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT);
+            encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) SPACE_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT);
 
             // Add part abstraction to destination array.
-            encode_character_vector(p0, p1, p2, p5, p6);
+            encode_utf_8_unicode_character_vector(p0, p1, p2, p5, p6);
 
             // The comparison result.
             int r = *NUMBER_0_INTEGER;
@@ -332,16 +332,16 @@ void encode_model_diagram_node(void* p0, void* p1, void* p2, void* p3, void* p4,
                 if (r != *NUMBER_0_INTEGER) {
 
                     // Add space character to destination array.
-                    encode_character_vector(p0, p1, p2, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT);
+                    encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) SPACE_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT);
 
                     // Add pipe character to destination array.
-                    encode_character_vector(p0, p1, p2, (void*) VERTICAL_LINE_CHARACTER, (void*) PRIMITIVE_COUNT);
+                    encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) VERTICAL_LINE_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT);
 
                     // Add space character to destination array.
-                    encode_character_vector(p0, p1, p2, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT);
+                    encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) SPACE_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT);
 
                     // Add part model to destination array.
-                    encode_character_vector(p0, p1, p2, p7, p8);
+                    encode_utf_8_unicode_character_vector(p0, p1, p2, p7, p8);
                 }
             }
 
@@ -352,13 +352,13 @@ void encode_model_diagram_node(void* p0, void* p1, void* p2, void* p3, void* p4,
                 if (r != *NUMBER_0_INTEGER) {
 
                     // Add space character to destination array.
-                    encode_character_vector(p0, p1, p2, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT);
+                    encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) SPACE_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT);
 
                     // Add pipe character to destination array.
-                    encode_character_vector(p0, p1, p2, (void*) VERTICAL_LINE_CHARACTER, (void*) PRIMITIVE_COUNT);
+                    encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) VERTICAL_LINE_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT);
 
                     // Add space character to destination array.
-                    encode_character_vector(p0, p1, p2, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT);
+                    encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) SPACE_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT);
 
                     // Add part model to destination array.
                     encode_integer_vector(p0, p1, p2, p7, p8);
@@ -372,13 +372,13 @@ void encode_model_diagram_node(void* p0, void* p1, void* p2, void* p3, void* p4,
                 if (r != *NUMBER_0_INTEGER) {
 
                     // Add space character to destination array.
-                    encode_character_vector(p0, p1, p2, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT);
+                    encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) SPACE_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT);
 
                     // Add pipe character to destination array.
-                    encode_character_vector(p0, p1, p2, (void*) VERTICAL_LINE_CHARACTER, (void*) PRIMITIVE_COUNT);
+                    encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) VERTICAL_LINE_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT);
 
                     // Add space character to destination array.
-                    encode_character_vector(p0, p1, p2, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT);
+                    encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) SPACE_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT);
 
                     // Add part model to destination array.
                     encode_boolean(p0, p1, p2, p7, p8);
@@ -392,13 +392,13 @@ void encode_model_diagram_node(void* p0, void* p1, void* p2, void* p3, void* p4,
                 if (r != *NUMBER_0_INTEGER) {
 
                     // Add space character to destination array.
-                    encode_character_vector(p0, p1, p2, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT);
+                    encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) SPACE_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT);
 
                     // Add pipe character to destination array.
-                    encode_character_vector(p0, p1, p2, (void*) VERTICAL_LINE_CHARACTER, (void*) PRIMITIVE_COUNT);
+                    encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) VERTICAL_LINE_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT);
 
                     // Add space character to destination array.
-                    encode_character_vector(p0, p1, p2, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT);
+                    encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) SPACE_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT);
 
                     // Add part model to destination array.
                     encode_double_vector(p0, p1, p2, p7, p8);

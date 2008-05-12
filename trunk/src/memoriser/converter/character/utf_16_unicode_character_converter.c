@@ -20,15 +20,15 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2008-05-08 22:36:15 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2008-05-12 10:58:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef UTF_16_UNICODE_CHARACTER_CONVERTER_SOURCE
 #define UTF_16_UNICODE_CHARACTER_CONVERTER_SOURCE
 
-#include "../../globals/constants/log/log_message_constants.c"
-#include "../../globals/logger/logger.c"
+#include "../../../globals/constants/log/log_message_constants.c"
+#include "../../../globals/logger/logger.c"
 
 //
 // In computing, UTF-16 (16-bit Unicode Transformation Format) is a variable-
