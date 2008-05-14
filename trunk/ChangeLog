@@ -14,12 +14,16 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.55 $ $Date: 2008-05-12 10:58:58 $ $Author: christian $
+# @version $Revision: 1.56 $ $Date: 2008-05-14 22:25:13 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
 2008-05-12  Christian Heller  <christian.heller@tuxtax.de>
+        * Rollback function "main" in module "cyboi.c" to using standard ascii characters;
+            the command line arguments array of the "main" function uses the "char" type
+        * Rollback function "open" in module "optionaliser.c" to using standard ascii characters
         * Continue converting all source code to wide character
+        * Finish module "utf_8_unicode_character_converter.c"
 
 2008-05-08  Christian Heller  <christian.heller@tuxtax.de>
         * Move character conversion modules into new directory memoriser/converter/character/
@@ -127,7 +131,7 @@
         * Continue functions "receive_gnu_linux_console.c" and "gnu_linux_console_communicator.c"
 
 2008-01-26  Christian Heller  <christian.heller@tuxtax.de>
-        * Adapt modules "checker.c", "receive_gnu_linux_console.c",
+        * Adapt modules "checker.c", "receive_gnu_linux_console.c",
             "read_gnu_linux_console.c", "decode_gnu_linux_console.c"
 
 2007-12-28  Christian Heller  <christian.heller@tuxtax.de>
