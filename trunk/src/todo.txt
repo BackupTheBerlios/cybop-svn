@@ -7,7 +7,7 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.45 $ $Date: 2008-05-14 22:25:13 $ $Author: christian $
+# @version $Revision: 1.46 $ $Date: 2008-05-15 06:17:59 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
@@ -28,6 +28,41 @@ todo:
     // However, since CYBOL knowledge model files contain solely ASCII characters,
     // there should be no problems with converting them to a character array
     // or wide character array as done before in CYBOI, i.e. using the "decode" function.
+
+        // CAUTION! Following some reflexions on logging. There are two possibilities:
+        //
+        // 1 New Console
+        //
+        // A new console has to be opened whenever a textual user interface is used.
+        // This way, the original console where the cyboi process was started may use
+        // standard ASCII characters, as can the log messages, logger and test output.
+        //
+        // 2 Logger Adaptation
+        //
+        // If using just one textual console (the one where the cyboi process was started),
+        // then only wide character functions may be used on it, without exception.
+        // The MIXING of normal characters and wide characters is NOT PERMITTED on
+        // one-and-the-same stream, as it would lead to unpredictable, untraceable errors.
+        // But this also means that all log messages have to be converted to wide characters.
+        // Since the "write" function used by the old version of the logger cannot handle
+        // wide characters, the functions "fputws" or "fwprintf" have to be used instead.
+        // But they in turn require a termination wide character to be added.
+        // Adding such a termination requires the creation of a new wide character array
+        // to built together the whole log message, including log level, actual message ...
+        // and finally termination wide character.
+        // But: the logger must not allocate any memory area, since it is used by thread functions as well.
+        // Therefore, a log message array pre-allocated at system startup needs to be
+        // forwarded (as global variable or via internal memory) and used by the logger.
+        // Whenever a log message is copied to this array and written to console,
+        // a MUTEX has to be set BEFORE, so that log output between the main program flow
+        // and threads do not conflict.
+
+        * Add a new function to logger that handles those messages which are written before
+            the logger is initialised and eliminate the "putws" function calls used before.
+            This has the advantage that changes such as from character to wide character
+            only have to be done on one place.
+            The "fwprintf" function unfortunately cannot be encapsulated this way,
+            since it interprets special placeholder variables whose number is unknown.
 
 2008-05-??  Christian Heller  <christian.heller@tuxtax.de>
         * Rollback log messages in all modules to using standard ascii characters, because the logger expects this;
