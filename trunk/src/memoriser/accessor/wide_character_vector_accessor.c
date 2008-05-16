@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2008-05-04 00:18:13 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2008-05-16 23:15:39 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -33,6 +33,84 @@
 #include "../../globals/constants/memory_structure/array_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../memoriser/array.c"
+
+/**
+ * Sets the source into the destination wide character.
+ *
+ * @param p0 the destination (Hand over as reference!)
+ * @param p1 the destination count
+ * @param p2 the destination size
+ * @param p3 the source
+ * @param p4 the source count
+ */
+void set_wide_character(void* p0, void* p1, void* p2, void* p3, void* p4) {
+
+    if (p4 != *NULL_POINTER) {
+
+        int* sc = (int*) p4;
+
+        if (p2 != *NULL_POINTER) {
+
+            int* ds = (int*) p2;
+
+            if (p1 != *NULL_POINTER) {
+
+                int* dc = (int*) p1;
+
+                if (p0 != *NULL_POINTER) {
+
+                    void** d = (void**) p0;
+
+                    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Set wide character.");
+
+                    // CAUTION! The destination array needs to be resized not only
+                    // if the source array is greater, but also if it is smaller!
+                    // If this is not done, false results may occur.
+                    //
+                    // Example: A colour gets copied from source to destination.
+                    // The source colour is "red" with a count of 3.
+                    // The destination colour is "green" with a count of 5.
+                    // If the source colour gets copied to the destination,
+                    // the resulting destination array is "reden" with a count of 5.
+                    // This colour value does not exist and will cause errors!
+                    //
+                    // Therefore, the destination array count and size ALWAYS
+                    // have to be adapted to the source array count and size.
+                    // If this had been done in the example, the resulting
+                    // destination array would have been "red" with a count of 3,
+                    // which is correct.
+
+                    // CAUTION! Do NOT use < or > here, for the reasons explained above!
+                    if (*sc != *dc) {
+
+                        *dc = *sc;
+                        *ds = *dc;
+
+                        reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_ARRAY);
+                    }
+
+                    set_array_elements(*d, (void*) NUMBER_0_INTEGER, p3, p4, (void*) WIDE_CHARACTER_ARRAY);
+
+                } else {
+
+                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not set wide character elements. The destination is null.");
+                }
+
+            } else {
+
+                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not set wide character elements. The destination count is null.");
+            }
+
+        } else {
+
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not set wide character elements. The destination size is null.");
+        }
+
+    } else {
+
+        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not set wide character elements. The source count is null.");
+    }
+}
 
 /**
  * Sets the wide character vector element.

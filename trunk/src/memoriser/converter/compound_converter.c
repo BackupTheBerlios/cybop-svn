@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.17 $ $Date: 2008-05-04 22:34:39 $ $Author: christian $
+ * @version $Revision: 1.18 $ $Date: 2008-05-16 23:15:39 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -46,6 +46,17 @@
 #include "../../memoriser/array.c"
 #include "../../memoriser/allocator.c"
 #include "../../memoriser/communicator.c"
+
+//
+// The type "xmlChar" used by the libxml2 parser is a null-terminated sequence
+// of utf-8 characters, in other words: a multibyte character array.
+// And only utf-8! One needs to convert strings encoded in different ways
+// to utf-8 before passing them to the libxml2 API.
+//
+// In order to use a null-terminated sequence of utf-8 characters (xmlChar),
+// which represents a multi-byte character string, within CYBOI,
+// it needs to be converted into a wide character array.
+//
 
 //
 // Forward declarations.

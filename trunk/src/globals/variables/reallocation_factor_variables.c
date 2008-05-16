@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2008-05-04 00:18:13 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2008-05-16 23:15:39 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -29,24 +29,35 @@
 
 #include "../../globals/constants/integer/integer_constants.c"
 
-// The cybol file reallocation factor.
-static int* CYBOL_FILE_REALLOCATION_FACTOR = NUMBER_0_INTEGER_ARRAY;
+//
+// CAUTION! Do NOT try to assign any values here!
+//
+// Ideally, of course, *NULL_POINTER would be assigned as initial value.
+// But then, the compiler shows the following error:
+// "error: initializer element is not constant"
+//
+// Therefore, the variable is only initialised in function "globalise"
+// of module "globaliser.c".
+//
+
+/** The cybol file reallocation factor. */
+static int* CYBOL_FILE_REALLOCATION_FACTOR;
 /** The character vector reallocation factor. */
-static int* CHARACTER_VECTOR_REALLOCATION_FACTOR = NUMBER_0_INTEGER_ARRAY;
+static int* CHARACTER_VECTOR_REALLOCATION_FACTOR;
 /** The wide character vector reallocation factor. */
-static int* WIDE_CHARACTER_VECTOR_REALLOCATION_FACTOR = NUMBER_0_INTEGER_ARRAY;
+static int* WIDE_CHARACTER_VECTOR_REALLOCATION_FACTOR;
 /** The integer vector reallocation factor. */
-static int* INTEGER_VECTOR_REALLOCATION_FACTOR = NUMBER_0_INTEGER_ARRAY;
+static int* INTEGER_VECTOR_REALLOCATION_FACTOR;
 /** The unsigned long vector reallocation factor. */
-static int* UNSIGNED_LONG_VECTOR_REALLOCATION_FACTOR = NUMBER_0_INTEGER_ARRAY;
+static int* UNSIGNED_LONG_VECTOR_REALLOCATION_FACTOR;
 /** The double vector reallocation factor. */
-static int* DOUBLE_VECTOR_REALLOCATION_FACTOR = NUMBER_0_INTEGER_ARRAY;
+static int* DOUBLE_VECTOR_REALLOCATION_FACTOR;
 /** The pointer vector reallocation factor. */
-static int* POINTER_VECTOR_REALLOCATION_FACTOR = NUMBER_0_INTEGER_ARRAY;
+static int* POINTER_VECTOR_REALLOCATION_FACTOR;
 /** The compound reallocation factor. */
-static int* COMPOUND_REALLOCATION_FACTOR = NUMBER_0_INTEGER_ARRAY;
+static int* COMPOUND_REALLOCATION_FACTOR;
 /** The signal memory reallocation factor. */
-static int* SIGNAL_MEMORY_REALLOCATION_FACTOR = NUMBER_0_INTEGER_ARRAY;
+static int* SIGNAL_MEMORY_REALLOCATION_FACTOR;
 
 /* REALLOCATION_FACTOR_VARIABLES_SOURCE */
 #endif

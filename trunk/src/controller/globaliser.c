@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2008-05-04 00:18:11 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2008-05-16 23:15:39 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -35,6 +35,8 @@
 #include <unistd.h>
 #include "../globals/constants/float/double_constants.c"
 #include "../globals/constants/integer/integer_constants.c"
+#include "../globals/constants/pointer/pointer_constants.c"
+#include "../globals/constants/log/log_level_constants.c"
 #include "../globals/variables/log_variables.c"
 #include "../globals/variables/primitive_type_size_variables.c"
 #include "../globals/variables/reallocation_factor_variables.c"
@@ -85,6 +87,25 @@ void globalise() {
     // Allocate and initialise double primitive size.
     DOUBLE_PRIMITIVE_SIZE = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
     *DOUBLE_PRIMITIVE_SIZE = sizeof(double);
+
+    //
+    // Log variables.
+    //
+
+    // Allocate and initialise log level.
+    LOG_LEVEL = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
+    *LOG_LEVEL = *OFF_LOG_LEVEL;
+
+    // CAUTION! Do NOT try to allocate or initialise the log output of type FILE!
+    //
+    // FILE objects are allocated and managed internally by the input/ output
+    // library functions. The library creates objects of type FILE.
+    // Programs should deal only with pointers to these objects (FILE* values),
+    // rather than the objects themselves.
+    //
+    // Hence, the following line would not make sense and is forbidden:
+    // LOG_OUTPUT = (FILE*) malloc(sizeof(FILE));
+    LOG_OUTPUT = *NULL_POINTER;
 
     //
     // Thread identification variables.
@@ -242,6 +263,24 @@ void unglobalise() {
     free(WWW_SERVICE_THREAD);
     // Free cyboi service thread.
     free(CYBOI_SERVICE_THREAD);
+
+    //
+    // Log variables.
+    //
+
+    // Free log level.
+    free(LOG_LEVEL);
+
+    // CAUTION! Do NOT try to free the log output of type FILE!
+    // It was already closed in module "optionaliser.c".
+    //
+    // FILE objects are allocated and managed internally by the input/ output
+    // library functions. The library creates objects of type FILE.
+    // Programs should deal only with pointers to these objects (FILE* values),
+    // rather than the objects themselves.
+    //
+    // Hence, the following line would not make sense and is forbidden:
+    // free(LOG_OUTPUT);
 
     //
     // Primitive type size variables.

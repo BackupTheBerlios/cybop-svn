@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2008-05-04 00:18:13 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2008-05-16 23:15:39 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -29,19 +29,22 @@
 
 #include "../../globals/constants/integer/integer_constants.c"
 
-// The log level.
 //
-// CAUTION! Do NOT try to use *OFF_LOG_LEVEL or *NUMBER_0_INTEGER here instead of the value 0!
-// Otherwise, the system would show the following error, as it expects a constant value:
+// CAUTION! Do NOT try to assign any values here!
+//
+// Ideally, of course, *NULL_POINTER would be assigned as initial value.
+// But then, the compiler shows the following error:
 // "error: initializer element is not constant"
-static int LOG_LEVEL = 0;
+//
+// Therefore, the variable is only initialised in function "globalise"
+// of module "globaliser.c".
+//
 
-// The log output.
-//
-// CAUTION! Do NOT try to use *NUMBER_MINUS_1_INTEGER here instead of the value -1!
-// Otherwise, the system would show the following error, as it expects a constant value:
-// "error: initializer element is not constant"
-static int LOG_OUTPUT = -1;
+/** The log level. */
+static int* LOG_LEVEL;
+
+/** The log output. */
+static FILE* LOG_OUTPUT;
 
 /* LOG_VARIABLES_SOURCE */
 #endif

@@ -27,7 +27,7 @@
  * Otherwise, an ENDLESS LOOP will be created, because cyboi's
  * array procedures call the logger in turn.
  *
- * @version $Revision: 1.25 $ $Date: 2008-05-16 00:20:15 $ $Author: christian $
+ * @version $Revision: 1.26 $ $Date: 2008-05-16 23:15:39 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -48,6 +48,38 @@
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/variables/log_variables.c"
+
+//
+// CAUTION! Following some reflexions on logging. There are two possibilities:
+//
+// 1 New Console
+//
+// A new console has to be opened whenever a textual user interface is used.
+// This way, the original console where the cyboi process was started may use
+// standard ASCII characters, as can the log messages, logger and test output.
+//
+// 2 Logger Adaptation
+//
+// If using just one textual console (the one where the cyboi process was started),
+// then only wide character functions may be used on it, without exception.
+// The MIXING of normal characters and wide characters is NOT PERMITTED on
+// one-and-the-same stream, as it would lead to unpredictable, untraceable errors.
+// But this also means that all log messages have to be converted to wide characters.
+//
+// Since the "write" function used by the old version of the logger cannot handle
+// wide characters, the functions "fputws" or "fwprintf" have to be used instead.
+// But they in turn require a termination wide character to be added.
+// Adding such a termination requires the creation of a new wide character array
+// to built together the whole log message, including log level, actual message
+// and finally termination wide character.
+//
+// But: the logger must not allocate any memory area, since it is used by thread functions as well.
+// Therefore, a log message array with fixed size, pre-allocated at system startup,
+// needs to be forwarded (as global variable) and used by the logger.
+// Whenever a log message is copied to this array and written to console,
+// a MUTEX has to be set BEFORE, so that log output between the main program flow
+// and threads do not conflict.
+//
 
 //
 // Forward declarations.
@@ -277,7 +309,7 @@ void log_message(void* p0, void* p1, void* p2) {
             //
 
             // Only log message if log level matches.
-            if (*l <= LOG_LEVEL) {
+            if (*l <= *LOG_LEVEL) {
 
                 // The log level name.
                 void* ln = *NULL_POINTER;
@@ -286,7 +318,7 @@ void log_message(void* p0, void* p1, void* p2) {
                 // Add name of the given log level to log entry.
                 log_get_level_name((void*) &ln, (void*) &lnc, p0);
 
-                if (LOG_OUTPUT >= *NUMBER_0_INTEGER) {
+                if (LOG_OUTPUT != *NULL_POINTER) {
 
                     // The complete message.
                     void* cm = *NULL_POINTER;
@@ -329,9 +361,8 @@ void log_message(void* p0, void* p1, void* p2) {
 
                 } else {
 
-                    // The log output value is smaller than zero.
-                    // Probably, it still has its default value of -1,
-                    // as set in the file "globals/variables/log_variables.c".
+                    // The log output value of type FILE is null.
+                    // Probably, it was not opened correctly in module "optionaliser.c".
 
                     // CAUTION! DO NOT use logging functionality here!
                     // The logger cannot log itself.

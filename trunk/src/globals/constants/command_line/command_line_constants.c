@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2008-05-12 10:58:58 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2008-05-16 23:15:39 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -41,33 +41,33 @@ static int* COMMAND_COMMAND_LINE_ARGUMENT_INDEX = NUMBER_0_INTEGER_ARRAY;
 //
 
 /** The "--version" command line option. */
-static char VERSION_COMMAND_LINE_OPTION_ARRAY[] = {'-', '-', 'v', 'e', 'r', 's', 'i', 'o', 'n'};
-static char* VERSION_COMMAND_LINE_OPTION = VERSION_COMMAND_LINE_OPTION_ARRAY;
+static wchar_t VERSION_COMMAND_LINE_OPTION_ARRAY[] = {L'-', L'-', L'v', L'e', L'r', L's', L'i', L'o', L'n'};
+static wchar_t* VERSION_COMMAND_LINE_OPTION = VERSION_COMMAND_LINE_OPTION_ARRAY;
 static int* VERSION_COMMAND_LINE_OPTION_COUNT = NUMBER_9_INTEGER_ARRAY;
 
 /** The "--help" command line option. */
-static char HELP_COMMAND_LINE_OPTION_ARRAY[] = {'-', '-', 'h', 'e', 'l', 'p'};
-static char* HELP_COMMAND_LINE_OPTION = HELP_COMMAND_LINE_OPTION_ARRAY;
+static wchar_t HELP_COMMAND_LINE_OPTION_ARRAY[] = {L'-', L'-', L'h', L'e', L'l', L'p'};
+static wchar_t* HELP_COMMAND_LINE_OPTION = HELP_COMMAND_LINE_OPTION_ARRAY;
 static int* HELP_COMMAND_LINE_OPTION_COUNT = NUMBER_6_INTEGER_ARRAY;
 
 /** The "--test" command line option. */
-static char TEST_COMMAND_LINE_OPTION_ARRAY[] = {'-', '-', 't', 'e', 's', 't'};
-static char* TEST_COMMAND_LINE_OPTION = TEST_COMMAND_LINE_OPTION_ARRAY;
+static wchar_t TEST_COMMAND_LINE_OPTION_ARRAY[] = {L'-', L'-', L't', L'e', L's', L't'};
+static wchar_t* TEST_COMMAND_LINE_OPTION = TEST_COMMAND_LINE_OPTION_ARRAY;
 static int* TEST_COMMAND_LINE_OPTION_COUNT = NUMBER_6_INTEGER_ARRAY;
 
 /** The "--loglevel" command line option. */
-static char LOG_LEVEL_COMMAND_LINE_OPTION_ARRAY[] = {'-', '-', 'l', 'o', 'g', 'l', 'e', 'v', 'e', 'l'};
-static char* LOG_LEVEL_COMMAND_LINE_OPTION = LOG_LEVEL_COMMAND_LINE_OPTION_ARRAY;
+static wchar_t LOG_LEVEL_COMMAND_LINE_OPTION_ARRAY[] = {L'-', L'-', L'l', L'o', L'g', L'l', L'e', L'v', L'e', L'l'};
+static wchar_t* LOG_LEVEL_COMMAND_LINE_OPTION = LOG_LEVEL_COMMAND_LINE_OPTION_ARRAY;
 static int* LOG_LEVEL_COMMAND_LINE_OPTION_COUNT = NUMBER_10_INTEGER_ARRAY;
 
 /** The "--logfile" command line option. */
-static char LOG_FILE_COMMAND_LINE_OPTION_ARRAY[] = {'-', '-', 'l', 'o', 'g', 'f', 'i', 'l', 'e'};
-static char* LOG_FILE_COMMAND_LINE_OPTION = LOG_FILE_COMMAND_LINE_OPTION_ARRAY;
+static wchar_t LOG_FILE_COMMAND_LINE_OPTION_ARRAY[] = {L'-', L'-', L'l', L'o', L'g', L'f', L'i', L'l', L'e'};
+static wchar_t* LOG_FILE_COMMAND_LINE_OPTION = LOG_FILE_COMMAND_LINE_OPTION_ARRAY;
 static int* LOG_FILE_COMMAND_LINE_OPTION_COUNT = NUMBER_9_INTEGER_ARRAY;
 
 /** The "--knowledge" command line option. */
-static char KNOWLEDGE_COMMAND_LINE_OPTION_ARRAY[] = {'-', '-', 'k', 'n', 'o', 'w', 'l', 'e', 'd', 'g', 'e'};
-static char* KNOWLEDGE_COMMAND_LINE_OPTION = KNOWLEDGE_COMMAND_LINE_OPTION_ARRAY;
+static wchar_t KNOWLEDGE_COMMAND_LINE_OPTION_ARRAY[] = {L'-', L'-', L'k', L'n', L'o', L'w', L'l', L'e', L'd', L'g', L'e'};
+static wchar_t* KNOWLEDGE_COMMAND_LINE_OPTION = KNOWLEDGE_COMMAND_LINE_OPTION_ARRAY;
 static int* KNOWLEDGE_COMMAND_LINE_OPTION_COUNT = NUMBER_11_INTEGER_ARRAY;
 
 //
@@ -75,28 +75,28 @@ static int* KNOWLEDGE_COMMAND_LINE_OPTION_COUNT = NUMBER_11_INTEGER_ARRAY;
 //
 
 /** The "off" log level command line value. */
-static char OFF_LOG_LEVEL_COMMAND_LINE_VALUE_ARRAY[] = {'o', 'f', 'f'};
-static char* OFF_LOG_LEVEL_COMMAND_LINE_VALUE = OFF_LOG_LEVEL_COMMAND_LINE_VALUE_ARRAY;
+static wchar_t OFF_LOG_LEVEL_COMMAND_LINE_VALUE_ARRAY[] = {L'o', L'f', L'f'};
+static wchar_t* OFF_LOG_LEVEL_COMMAND_LINE_VALUE = OFF_LOG_LEVEL_COMMAND_LINE_VALUE_ARRAY;
 static int* OFF_LOG_LEVEL_COMMAND_LINE_VALUE_COUNT = NUMBER_3_INTEGER_ARRAY;
 
 /** The "error" log level command line value. */
-static char ERROR_LOG_LEVEL_COMMAND_LINE_VALUE_ARRAY[] = {'e', 'r', 'r', 'o', 'r'};
-static char* ERROR_LOG_LEVEL_COMMAND_LINE_VALUE = ERROR_LOG_LEVEL_COMMAND_LINE_VALUE_ARRAY;
+static wchar_t ERROR_LOG_LEVEL_COMMAND_LINE_VALUE_ARRAY[] = {L'e', L'r', L'r', L'o', L'r'};
+static wchar_t* ERROR_LOG_LEVEL_COMMAND_LINE_VALUE = ERROR_LOG_LEVEL_COMMAND_LINE_VALUE_ARRAY;
 static int* ERROR_LOG_LEVEL_COMMAND_LINE_VALUE_COUNT = NUMBER_5_INTEGER_ARRAY;
 
 /** The "warning" log level command line value. */
-static char WARNING_LOG_LEVEL_COMMAND_LINE_VALUE_ARRAY[] = {'w', 'a', 'r', 'n', 'i', 'n', 'g'};
-static char* WARNING_LOG_LEVEL_COMMAND_LINE_VALUE = WARNING_LOG_LEVEL_COMMAND_LINE_VALUE_ARRAY;
+static wchar_t WARNING_LOG_LEVEL_COMMAND_LINE_VALUE_ARRAY[] = {L'w', L'a', L'r', L'n', L'i', L'n', L'g'};
+static wchar_t* WARNING_LOG_LEVEL_COMMAND_LINE_VALUE = WARNING_LOG_LEVEL_COMMAND_LINE_VALUE_ARRAY;
 static int* WARNING_LOG_LEVEL_COMMAND_LINE_VALUE_COUNT = NUMBER_7_INTEGER_ARRAY;
 
 /** The "information" log level command line value. */
-static char INFORMATION_LOG_LEVEL_COMMAND_LINE_VALUE_ARRAY[] = {'i', 'n', 'f', 'o', 'r', 'm', 'a', 't', 'i', 'o', 'n'};
-static char* INFORMATION_LOG_LEVEL_COMMAND_LINE_VALUE = INFORMATION_LOG_LEVEL_COMMAND_LINE_VALUE_ARRAY;
+static wchar_t INFORMATION_LOG_LEVEL_COMMAND_LINE_VALUE_ARRAY[] = {L'i', L'n', L'f', L'o', L'r', L'm', L'a', L't', L'i', L'o', L'n'};
+static wchar_t* INFORMATION_LOG_LEVEL_COMMAND_LINE_VALUE = INFORMATION_LOG_LEVEL_COMMAND_LINE_VALUE_ARRAY;
 static int* INFORMATION_LOG_LEVEL_COMMAND_LINE_VALUE_COUNT = NUMBER_11_INTEGER_ARRAY;
 
 /** The "debug" log level command line value. */
-static char DEBUG_LOG_LEVEL_COMMAND_LINE_VALUE_ARRAY[] = {'d', 'e', 'b', 'u', 'g'};
-static char* DEBUG_LOG_LEVEL_COMMAND_LINE_VALUE = DEBUG_LOG_LEVEL_COMMAND_LINE_VALUE_ARRAY;
+static wchar_t DEBUG_LOG_LEVEL_COMMAND_LINE_VALUE_ARRAY[] = {L'd', L'e', L'b', L'u', L'g'};
+static wchar_t* DEBUG_LOG_LEVEL_COMMAND_LINE_VALUE = DEBUG_LOG_LEVEL_COMMAND_LINE_VALUE_ARRAY;
 static int* DEBUG_LOG_LEVEL_COMMAND_LINE_VALUE_COUNT = NUMBER_5_INTEGER_ARRAY;
 
 /* COMMAND_LINE_CONSTANTS_SOURCE */

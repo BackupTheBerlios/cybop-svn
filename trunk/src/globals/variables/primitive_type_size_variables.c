@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2008-05-04 00:18:13 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2008-05-16 23:15:39 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -29,18 +29,29 @@
 
 #include "../../globals/constants/integer/integer_constants.c"
 
-// The character primitive size.
-static int* CHARACTER_PRIMITIVE_SIZE = NUMBER_0_INTEGER_ARRAY;
-// The wide character primitive size.
-static int* WIDE_CHARACTER_PRIMITIVE_SIZE = NUMBER_0_INTEGER_ARRAY;
-// The pointer primitive size.
-static int* POINTER_PRIMITIVE_SIZE = NUMBER_0_INTEGER_ARRAY;
-// The integer primitive size.
-static int* INTEGER_PRIMITIVE_SIZE = NUMBER_0_INTEGER_ARRAY;
-// The unsigned long primitive size.
-static int* UNSIGNED_LONG_PRIMITIVE_SIZE = NUMBER_0_INTEGER_ARRAY;
-// The double primitive size.
-static int* DOUBLE_PRIMITIVE_SIZE = NUMBER_0_INTEGER_ARRAY;
+//
+// CAUTION! Do NOT try to assign any values here!
+//
+// Ideally, of course, *NULL_POINTER would be assigned as initial value.
+// But then, the compiler shows the following error:
+// "error: initializer element is not constant"
+//
+// Therefore, the variable is only initialised in function "globalise"
+// of module "globaliser.c".
+//
+
+/** The character primitive size. */
+static int* CHARACTER_PRIMITIVE_SIZE;
+/** The wide character primitive size. */
+static int* WIDE_CHARACTER_PRIMITIVE_SIZE;
+/** The pointer primitive size. */
+static int* POINTER_PRIMITIVE_SIZE;
+/** The integer primitive size. */
+static int* INTEGER_PRIMITIVE_SIZE;
+/** The unsigned long primitive size. */
+static int* UNSIGNED_LONG_PRIMITIVE_SIZE;
+/** The double primitive size. */
+static int* DOUBLE_PRIMITIVE_SIZE;
 
 /* PRIMITIVE_TYPE_SIZE_VARIABLES_SOURCE */
 #endif

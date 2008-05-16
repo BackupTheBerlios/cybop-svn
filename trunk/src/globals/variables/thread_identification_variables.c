@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2008-05-04 00:18:13 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2008-05-16 23:15:39 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,14 +30,25 @@
 #include <pthread.h>
 #include "../../globals/constants/integer/integer_constants.c"
 
-// The gnu linux console thread.
-static pthread_t* GNU_LINUX_CONSOLE_THREAD = (pthread_t*) NUMBER_0_INTEGER_ARRAY;
-// The x window system thread.
-static pthread_t* X_WINDOW_SYSTEM_THREAD = (pthread_t*) NUMBER_0_INTEGER_ARRAY;
-// The www service thread.
-static pthread_t* WWW_SERVICE_THREAD = (pthread_t*) NUMBER_0_INTEGER_ARRAY;
-// The cyboi service thread.
-static pthread_t* CYBOI_SERVICE_THREAD = (pthread_t*) NUMBER_0_INTEGER_ARRAY;
+//
+// CAUTION! Do NOT try to assign any values here!
+//
+// Ideally, of course, *NULL_POINTER would be assigned as initial value.
+// But then, the compiler shows the following error:
+// "error: initializer element is not constant"
+//
+// Therefore, the variable is only initialised in function "globalise"
+// of module "globaliser.c".
+//
+
+/** The gnu linux console thread. */
+static pthread_t* GNU_LINUX_CONSOLE_THREAD;
+/** The x window system thread. */
+static pthread_t* X_WINDOW_SYSTEM_THREAD;
+/** The www service thread. */
+static pthread_t* WWW_SERVICE_THREAD;
+/** The cyboi service thread. */
+static pthread_t* CYBOI_SERVICE_THREAD;
 
 /* THREAD_IDENTIFICATION_VARIABLES_SOURCE */
 #endif

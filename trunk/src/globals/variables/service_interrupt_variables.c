@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2008-05-04 00:18:13 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2008-05-16 23:15:39 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -29,14 +29,25 @@
 
 #include "../../globals/constants/integer/integer_constants.c"
 
-// The gnu linux console exit flag.
-static int* GNU_LINUX_CONSOLE_EXIT = NUMBER_0_INTEGER_ARRAY;
-// The x window system exit flag.
-static int* X_WINDOW_SYSTEM_EXIT = NUMBER_0_INTEGER_ARRAY;
-// The www service exit flag.
-static int* WWW_SERVICE_EXIT = NUMBER_0_INTEGER_ARRAY;
-// The cyboi service exit flag.
-static int* CYBOI_SERVICE_EXIT = NUMBER_0_INTEGER_ARRAY;
+//
+// CAUTION! Do NOT try to assign any values here!
+//
+// Ideally, of course, *NULL_POINTER would be assigned as initial value.
+// But then, the compiler shows the following error:
+// "error: initializer element is not constant"
+//
+// Therefore, the variable is only initialised in function "globalise"
+// of module "globaliser.c".
+//
+
+/** The gnu linux console exit flag. */
+static int* GNU_LINUX_CONSOLE_EXIT;
+/** The x window system exit flag. */
+static int* X_WINDOW_SYSTEM_EXIT;
+/** The www service exit flag. */
+static int* WWW_SERVICE_EXIT;
+/** The cyboi service exit flag. */
+static int* CYBOI_SERVICE_EXIT;
 
 /* SERVICE_INTERRUPT_VARIABLES_SOURCE */
 #endif

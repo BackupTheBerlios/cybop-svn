@@ -14,11 +14,26 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.57 $ $Date: 2008-05-16 00:20:15 $ $Author: christian $
+# @version $Revision: 1.58 $ $Date: 2008-05-16 23:15:39 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2008-05-16  Christian Heller  <christian.heller@tuxtax.de>
+        * Remove initial values for all variables in modules of directory "globals/variables/"
+            and only initialise variables in function "globalise" of module "globaliser.c"
+            (this avoids compiler errors a la "initializer element is not constant"
+            and also avoids runtime errors, because a proper *NULL_POINTER value can be
+            assigned as initial value, so that variables can be compared to it later)
+        * Revise modules "cyboi.c" and "optionaliser.c" to using wide characters,
+            assuming that the char** received by the "main" function is a pointer array
+            containing multibyte strings, which have to be converted into wide character strings
+        * Change the type of variable "LOG_LEVEL" from "int" to "int*" and
+            the type of variable "LOG_OUTPUT" from "int" to "FILE*"
+            and adapt all affected source code files
+
 2008-05-15  Christian Heller  <christian.heller@tuxtax.de>
+        * Replace "write" function call in module "logger.c" with "log_write_terminated_message"
+        * Assemble complete log message in one array before writing it to console
         * Add new functions "log_write_message" and "log_write_terminated_message" to module "logger.c"
         * Add new files "helper.c" and "informant.c", in order to bundle special output messages
         * Add an extra function call to "orient" for all streams, also the log file,
@@ -454,7 +469,6 @@
 2007-05-16  Christian Heller  <christian.heller@tuxtax.de>
 
         * Update cybol example applications
-
         * Move away NULL_POINTER from "variables.c" into an own file "pointer_constants.c"
         * Change NULL_POINTER so that it is now a void**, pointing to an array containing just a null void pointer;
             Change NULL_POINTER values in all source code into *NULL_POINTER
@@ -473,7 +487,6 @@
 
         * Add name, name count, name size to functions "get_compound_element_by_name" and "get_universal_compound_element_by_name"
         * Adjust all source code by adding name parameters to these function calls
-
         * Fix bug that pointer vector instead of integer vector was used
         * Adjust comma characters to be added only if one element already exists in the destination array
 

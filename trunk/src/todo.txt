@@ -7,76 +7,24 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.47 $ $Date: 2008-05-16 00:20:15 $ $Author: christian $
+# @version $Revision: 1.48 $ $Date: 2008-05-16 23:15:39 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-done:
-        * All modules in directory "controller"
+        * Find unspecific bug causing a segmentation fault in optionaliser,
+            sometimes in function "optionalise_log_file", other times in "optionalise_log_level"
 
-todo:
-    // The type "xmlChar" used by the libxml2 parser is a null-terminated sequence
-    // of utf-8 characters. And only utf-8! One needs to convert strings encoded in
-    // different ways to utf-8 before passing them to the libxml2 API.
-    // This can be accomplished with the "iconv" library, for instance.
-    //
-    // In order to use a null-terminated sequence of utf-8 characters (xmlChar),
-    // which represents a multi-byte character string, within CYBOI,
-    // it needs to be converted into a wide character array.
-    //
-    //?? TODO: CAUTION! The following assumption is not asserted yet!
-    // However, since CYBOL knowledge model files contain solely ASCII characters,
-    // there should be no problems with converting them to a character array
-    // or wide character array as done before in CYBOI, i.e. using the "decode" function.
-
-        // CAUTION! Following some reflexions on logging. There are two possibilities:
-        //
-        // 1 New Console
-        //
-        // A new console has to be opened whenever a textual user interface is used.
-        // This way, the original console where the cyboi process was started may use
-        // standard ASCII characters, as can the log messages, logger and test output.
-        //
-        // 2 Logger Adaptation
-        //
-        // If using just one textual console (the one where the cyboi process was started),
-        // then only wide character functions may be used on it, without exception.
-        // The MIXING of normal characters and wide characters is NOT PERMITTED on
-        // one-and-the-same stream, as it would lead to unpredictable, untraceable errors.
-        // But this also means that all log messages have to be converted to wide characters.
-        // Since the "write" function used by the old version of the logger cannot handle
-        // wide characters, the functions "fputws" or "fwprintf" have to be used instead.
-        // But they in turn require a termination wide character to be added.
-        // Adding such a termination requires the creation of a new wide character array
-        // to built together the whole log message, including log level, actual message ...
-        // and finally termination wide character.
-        // But: the logger must not allocate any memory area, since it is used by thread functions as well.
-        // Therefore, a log message array pre-allocated at system startup needs to be
-        // forwarded (as global variable or via internal memory) and used by the logger.
-        // Whenever a log message is copied to this array and written to console,
-        // a MUTEX has to be set BEFORE, so that log output between the main program flow
-        // and threads do not conflict.
+--
 
         * Check for circular reference between logger and array functions!
             Possibly delete array function calls again.
-
-        * Add a new function to logger that handles those messages which are written before
-            the logger is initialised and eliminate the "putws" function calls used before.
-            This has the advantage that changes such as from character to wide character
-            only have to be done on one place.
-            The "fwprintf" function unfortunately cannot be encapsulated this way,
-            since it interprets special placeholder variables whose number is unknown.
-        * Adapt "write" function call in module "logger.c" to wide character
-
-        * Rollback log messages in all modules to using standard ascii characters, because the logger expects this;
-            it is very likely and recommended that low-level cyboi log messages will always be in english using ASCII characters only
-        * Rollback module "logger.c" to using standard ascii characters, since "write" function is used;
-            if the "fputws" or "fwprintf" function was used, an additional null termination
-            wide character would have to be added, which is unnice and slows down execution speed;
-        * Set orientation for log file output stream to "character" (NOT "wide character") at cyboi system startup
-        * Rollback function "write" in module "cyboi.c" to using standard ascii characters
-        * Leave "fputws" and "fwprintf" in place, since they print to streams "stdout" or "stderr" and,
-            by convention, only one orientation (char or wchar_t) but NO MIX may be used on one and the same stream
+            ==> NO! Better allocate one log array at system startup having a fixed size of let's say 1000
+            and always work on this file within the logger!
+            So only the "set" array function to copy values has to be copied to module "logger.c"
+        * Replace function "fputws" with "log_write_terminated_message", everywhere;
+            this has the advantage that changes such as from character to wide character
+            only have to be done in one place
+        * Replace stdin, stdout, stderr with own global variables (easier to change, since bundled in one place)
 
 --
 
@@ -325,4 +273,5 @@ todo:
 --
 
         * Apply GPL3 to CYBOI source code and to CYBOL knowledge files
-        * Check in LaTeX source files of CYBOP book into CVS
+        * Adapt copyright to me?
+        * Check in to CVS LaTeX source files of CYBOP book

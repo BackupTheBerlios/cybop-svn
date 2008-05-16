@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2008-05-04 00:18:13 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2008-05-16 23:15:39 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -66,12 +66,14 @@ void set_character(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     // CAUTION! The destination array needs to be resized not only
                     // if the source array is greater, but also if it is smaller!
                     // If this is not done, false results may occur.
+                    //
                     // Example: A colour gets copied from source to destination.
                     // The source colour is "red" with a count of 3.
                     // The destination colour is "green" with a count of 5.
                     // If the source colour gets copied to the destination,
                     // the resulting destination array is "reden" with a count of 5.
                     // This colour value does not exist and will cause errors!
+                    //
                     // Therefore, the destination array count and size ALWAYS
                     // have to be adapted to the source array count and size.
                     // If this had been done in the example, the resulting

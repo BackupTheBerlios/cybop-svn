@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2008-05-06 22:36:52 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2008-05-16 23:15:39 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -40,9 +40,9 @@ static wchar_t* CYBOI_VERSION = CYBOI_VERSION_ARRAY;
 static int* CYBOI_VERSION_COUNT = NUMBER_5_INTEGER_ARRAY;
 
 /** The cyboi copyright. */
-static wchar_t CYBOI_COPYRIGHT_ARRAY[] = {L'C', L'o', L'p', L'y', L'r', L'i', L'g', L'h', L't', L' ', L'(', L'C', L')', L' ', L'1', L'9', L'9', L'9', L'-', L'2', L'0', L'0', L'7', L'.', L' ', L'C', L'h', L'r', L'i', L's', L't', L'i', L'a', L'n', L' ', L'H', L'e', L'l', L'l', L'e', L'r', L' ', L'a', L'n', L'd', L' ', L't', L'h', L'e', L' ', L'C', L'Y', L'B', L'O', L'P', L' ', L'd', L'e', L'v', L'e', L'l', L'o', L'p', L'e', L'r', L's', L'.'};
+static wchar_t CYBOI_COPYRIGHT_ARRAY[] = {L'C', L'o', L'p', L'y', L'r', L'i', L'g', L'h', L't', L' ', L'(', L'C', L')', L' ', L'1', L'9', L'9', L'9', L'-', L'2', L'0', L'0', L'8', L'.', L' ', L'C', L'h', L'r', L'i', L's', L't', L'i', L'a', L'n', L' ', L'H', L'e', L'l', L'l', L'e', L'r', L'.'};
 static wchar_t* CYBOI_COPYRIGHT = CYBOI_COPYRIGHT_ARRAY;
-static int* CYBOI_COPYRIGHT_COUNT = NUMBER_67_INTEGER_ARRAY;
+static int* CYBOI_COPYRIGHT_COUNT = NUMBER_42_INTEGER_ARRAY;
 
 /** The cyboi licence. */
 static wchar_t CYBOI_LICENCE_ARRAY[] = {L'C', L'Y', L'B', L'O', L'I', L' ', L'c', L'o', L'm', L'e', L's', L' ', L'w', L'i', L't', L'h', L' ', L'N', L'O', L' ', L'W', L'A', L'R', L'R', L'A', L'N', L'T', L'Y', L',', L'\n',
