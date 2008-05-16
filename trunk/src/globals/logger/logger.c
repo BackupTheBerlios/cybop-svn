@@ -27,7 +27,7 @@
  * Otherwise, an ENDLESS LOOP will be created, because cyboi's
  * array procedures call the logger in turn.
  *
- * @version $Revision: 1.24 $ $Date: 2008-05-04 00:18:13 $ $Author: christian $
+ * @version $Revision: 1.25 $ $Date: 2008-05-16 00:20:15 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -39,14 +39,58 @@
 #include <string.h>
 #include <unistd.h>
 #include <wchar.h>
-#include "../../globals/constants/character/character_constants.c"
+#include "../../globals/constants/character/wide_character_constants.c"
 #include "../../globals/constants/integer/integer_constants.c"
 #include "../../globals/constants/log/log_level_constants.c"
 #include "../../globals/constants/log/log_level_name_constants.c"
 #include "../../globals/constants/log/log_message_constants.c"
+#include "../../globals/constants/memory_structure/array_constants.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../../globals/constants/pointer/pointer_constants.c"
 #include "../../globals/variables/log_variables.c"
+
+//
+// Forward declarations.
+//
+
+/**
+ * Allocates the array.
+ *
+ * The sizeof operation can only be used for real arrays, expressed with [].
+ * Since CYBOI allocates arrays dynamically and stores them as *,
+ * the array size needs to be given extra here because sizeof will not work.
+ * See: http://pegasus.rutgers.edu/~elflord/cpp/gotchas/index.shtml
+ *
+ * @param p0 the array (Hand over as reference!)
+ * @param p1 the size
+ * @param p2 the type
+ */
+void allocate_array(void* p0, void* p1, void* p2);
+
+/**
+ * Deallocates the array.
+ *
+ * The sizeof operation can only be used for real arrays, expressed with [].
+ * Since CYBOI allocates arrays dynamically and stores them as *,
+ * the array size needs to be given extra here because sizeof will not work.
+ * See: http://pegasus.rutgers.edu/~elflord/cpp/gotchas/index.shtml
+ *
+ * @param p0 the array (Hand over as reference!)
+ * @param p1 the size
+ * @param p2 the type
+ */
+void deallocate_array(void* p0, void* p1, void* p2);
+
+/**
+ * Sets the array elements.
+ *
+ * @param p0 the array
+ * @param p1 the index
+ * @param p2 the elements (Hand over as array!)
+ * @param p3 the count
+ * @param p4 the type
+ */
+void set_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4);
 
 /**
  * Gets the log level name.
@@ -113,6 +157,87 @@ void log_get_level_name(void* p0, void* p1, void* p2) {
 }
 
 /**
+ * Writes a terminated log message to the given output stream.
+ *
+ * CAUTION! The "write" function is not used here, because it expects
+ * a multibyte character sequence.
+ * The log message, however, is handed over with a null termination wide character,
+ * so that it may be passed on to either of the "fputws" or "fwprintf" function.
+ * Since it seems simpler and presumably is faster, the decision here fell on the "fputws" function.
+ *
+ * @param p0 the log output stream
+ * @param p1 the log message
+ */
+void log_write_terminated_message(void* p0, void* p1) {
+
+    if (p1 != *NULL_POINTER) {
+
+        wchar_t* m = (wchar_t*) p1;
+
+        if (p0 != *NULL_POINTER) {
+
+            FILE* s = (FILE*) p0;
+
+            fputws(m, s);
+
+        } else {
+
+            // CAUTION! DO NOT use logging functionality here!
+            // The logger cannot log itself.
+            fputws(L"Error: Could not write terminated log message. The log output stream is null.\n", stdout);
+        }
+
+    } else {
+
+        // CAUTION! DO NOT use logging functionality here!
+        // The logger cannot log itself.
+        fputws(L"Error: Could not write terminated log message. The log message is null.\n", stdout);
+    }
+}
+
+/**
+ * Writes a log message.
+ *
+ * The given array containing the log message needs to be resized and
+ * a termination character added at its end.
+ *
+ * @param p0 the log output stream
+ * @param p1 the log message
+ * @param p2 the log message count
+ */
+void log_write_message(void* p0, void* p1, void* p2) {
+
+    if (p2 != *NULL_POINTER) {
+
+        int* mc = (int*) p2;
+
+        // The terminated log message.
+        void* tm = *NULL_POINTER;
+        int tms = *mc + *PRIMITIVE_COUNT;
+
+        // Allocate terminated log message.
+        allocate_array((void*) &tm, (void*) &tms, (void*) WIDE_CHARACTER_ARRAY);
+
+        // Set terminated log message by first copying the actual message
+        // and then adding the null termination character.
+        set_array_elements(tm, (void*) NUMBER_0_INTEGER, p1, p2, (void*) WIDE_CHARACTER_ARRAY);
+        set_array_elements(tm, p2, (void*) NULL_CONTROL_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+
+        // Log terminated message.
+        log_write_terminated_message(p0, tm);
+
+        // Deallocate terminated log message.
+        deallocate_array((void*) &tm, (void*) &tms, (void*) WIDE_CHARACTER_ARRAY);
+
+    } else {
+
+        // CAUTION! DO NOT use logging functionality here!
+        // The logger cannot log itself.
+        fputws(L"Error: Could not write log message. The log message count is null.\n", stdout);
+    }
+}
+
+/**
  * Logs the given message.
  *
  * CAUTION! This function cannot be called "log" as that name
@@ -163,12 +288,44 @@ void log_message(void* p0, void* p1, void* p2) {
 
                 if (LOG_OUTPUT >= *NUMBER_0_INTEGER) {
 
-                    // Send log level, separators, message and line feed to output.
-                    write(LOG_OUTPUT, ln, lnc);
-                    write(LOG_OUTPUT, (void*) COLON_CHARACTER, *PRIMITIVE_COUNT);
-                    write(LOG_OUTPUT, (void*) SPACE_CHARACTER, *PRIMITIVE_COUNT);
-                    write(LOG_OUTPUT, p1, *mc);
-                    write(LOG_OUTPUT, (void*) LINE_FEED_CONTROL_CHARACTER, *PRIMITIVE_COUNT);
+                    // The complete message.
+                    void* cm = *NULL_POINTER;
+                    // The log level + colon + space + message + line feed + termination.
+                    int cms = lnc + *PRIMITIVE_COUNT + *PRIMITIVE_COUNT + *mc + *PRIMITIVE_COUNT + *PRIMITIVE_COUNT;
+                    // The index.
+                    int i = *NUMBER_0_INTEGER;
+
+                    // Allocate message.
+                    allocate_array((void*) &cm, (void*) &cms, (void*) WIDE_CHARACTER_ARRAY);
+
+                    // Copy log level.
+                    set_array_elements(cm, (void*) &i, ln, (void*) &lnc, (void*) WIDE_CHARACTER_ARRAY);
+                    // Increment index.
+                    i = i + lnc;
+                    // Copy colon.
+                    set_array_elements(cm, (void*) &i, (void*) COLON_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+                    // Increment index.
+                    i = i + *PRIMITIVE_COUNT;
+                    // Copy space.
+                    set_array_elements(cm, (void*) &i, (void*) SPACE_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+                    // Increment index.
+                    i = i + *PRIMITIVE_COUNT;
+                    // Copy log message.
+                    set_array_elements(cm, (void*) &i, p1, p2, (void*) WIDE_CHARACTER_ARRAY);
+                    // Increment index.
+                    i = i + *mc;
+                    // Copy line feed control wide character.
+                    set_array_elements(cm, (void*) &i, (void*) LINE_FEED_CONTROL_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+                    // Increment index.
+                    i = i + *PRIMITIVE_COUNT;
+                    // Copy null termination wide character.
+                    set_array_elements(cm, (void*) &i, (void*) NULL_CONTROL_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+
+                    // Log message.
+                    log_write_terminated_message((void*) stdout, cm);
+
+                    // Deallocate message.
+                    deallocate_array((void*) &cm, (void*) &cms, (void*) WIDE_CHARACTER_ARRAY);
 
                 } else {
 

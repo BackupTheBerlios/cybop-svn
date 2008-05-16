@@ -7,7 +7,7 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.46 $ $Date: 2008-05-15 06:17:59 $ $Author: christian $
+# @version $Revision: 1.47 $ $Date: 2008-05-16 00:20:15 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
@@ -57,56 +57,37 @@ todo:
         // a MUTEX has to be set BEFORE, so that log output between the main program flow
         // and threads do not conflict.
 
+        * Check for circular reference between logger and array functions!
+            Possibly delete array function calls again.
+
         * Add a new function to logger that handles those messages which are written before
             the logger is initialised and eliminate the "putws" function calls used before.
             This has the advantage that changes such as from character to wide character
             only have to be done on one place.
             The "fwprintf" function unfortunately cannot be encapsulated this way,
             since it interprets special placeholder variables whose number is unknown.
+        * Adapt "write" function call in module "logger.c" to wide character
 
-2008-05-??  Christian Heller  <christian.heller@tuxtax.de>
         * Rollback log messages in all modules to using standard ascii characters, because the logger expects this;
             it is very likely and recommended that low-level cyboi log messages will always be in english using ASCII characters only
         * Rollback module "logger.c" to using standard ascii characters, since "write" function is used;
             if the "fputws" or "fwprintf" function was used, an additional null termination
             wide character would have to be added, which is unnice and slows down execution speed;
-        * Set orientation for log file output stream to "character" (NOT "wide character")
+        * Set orientation for log file output stream to "character" (NOT "wide character") at cyboi system startup
         * Rollback function "write" in module "cyboi.c" to using standard ascii characters
-        WHAT TO DO WITH LOG MESSAGES? Use wchar_t or char?
-        - If wchar_t, then a conversion to multibyte char utf-8 is needed!
-        - If char, then only output to file is possible, but not to console (NO MIX allowed)!
-        - main.c also uses simple "write" to stdout --> has to use "fputws" and conversion to utf-8, too!
-            Hence, also the logger may use the same conversion!
-            ==> NO ROLLBACK to char??
-
         * Leave "fputws" and "fwprintf" in place, since they print to streams "stdout" or "stderr" and,
             by convention, only one orientation (char or wchar_t) but NO MIX may be used on one and the same stream
 
-2008-05-14  Christian Heller  <christian.heller@tuxtax.de>
-        * Clean up module "checker.c" by removing old code that was commented out
-        * Correct parameter casts in function "check_signal" of module "checker.c"
-        * Add encoding test files
-
-        SEE OLD directory stored in /home/ch*/src
 --
 
-        * Replace "fwprintf" with "fprintf"
-        * Replace all occurences of L"
         * Check the calls of "decode" in function "decode_compound_cybol_node",
             since the conversion does not work anymore if changed to wide character!
-        * Go through source code manually searching for potential bugs,
-            after conversion to wide character
+        * Go through source code manually searching for potential bugs, after conversion to wide character
         * Replace function calls to "strlen" with "wcslen"
         * Replace "char" with "wchar_t" wherever suitable
         * Check where possibly to replace "encode_integer" with "encode_integer_wide"
-        * Adapt "write" function call in module "logger.c" to wide character
-        * Convert more source code modules (logger etc.) to wide character usage,
-            since mixing wide- and narrow characters would cause problems at in-/ output
-
-        * Program still crashes:
-            - check if wchar_t has to be used instead of char
-            - check why the escape code sequence (e.g. ESC[B for arrow left) is added to the
-                knowledge tree TEST_SHUTDOWN, instead of the decoded string "arrow_left")
+        * Check why the escape code sequence (e.g. ESC[B for arrow left) is added to the
+                knowledge tree TEST_SHUTDOWN, instead of the decoded string "arrow_left"
         * Reactivate loop in function "read_gnu_linux_console" (which was blocking the program flow),
             because escape sequences consist of more than one characters (mostly three)
         * Find some way to predict the number of characters or find an eof or the like,
@@ -128,27 +109,15 @@ todo:
             (see module "character_vector_accessor.c")
 
         * Replace redundant standard functions (arrays, set_elements etc.) with some sort of TEMPLATE replacing the type;
-            this could save hundreds of lines of code; possible use a C++ compiler just because of this reason?
+            this could save hundreds of lines of code; possibly use a C++ compiler just because of this reason?
 
 --
-
-        * Continue debugging in function "check_signal" of module "checker.c":
-            - UI example key presses are not detected yet
-            - implement in parallel "receive" for gnu/linux console, x window system, socket
-            - NEW IDEA: hand over "receive" knowledge model as "handler" property of the "sense" operation in CYBOL!
-                --> then just call this knowledge model, no matter what it is
-                --> advantage: properties (like a compound structure to store commands)
-                    exist as details in the "receive" knowledge model
 
         * Commands of gnu/linux console MUESSEN uebergeben werden
         * Suche nach gedrueckter Taste in commands
         * Wenn returned command == NULL, dann suche nach "default" in commands
             (ist Aktion zum Einfuegen von Zeichen an aktueller Cursor-Position im CYBOI knowledge model)
         * Gedruecktes Zeichen/ Taste muss mit in einem Parameter zurueckgegeben werden!
-
-        * Continue with: "receive_message" function in "check_signal()" of module "checker.c";
-            Rest of "receive_message" function is o.k.
-        * Adapt modules: "controller/checker.c", "applicator/receive", "communicator/read", "converter/gnu_linux_console"
 
         * CONTINUE in: function "decode_http_request_method", by adding everywhere at "decode_http_request_set_parameter" the new function call like:
             // Add fragment to given compound model.
@@ -352,3 +321,8 @@ todo:
             ==> solution 1 seems desirable, but would need some thinking on how to implement this in CYBOI
             ==> for now, as temporary solution, the properties are stored redundantly (twice) in the template
                 that needs them (for example "menu_item" entries in the resmedicinae-revue menu) and in its super template
+
+--
+
+        * Apply GPL3 to CYBOI source code and to CYBOL knowledge files
+        * Check in LaTeX source files of CYBOP book into CVS

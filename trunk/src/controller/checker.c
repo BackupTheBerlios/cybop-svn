@@ -20,17 +20,13 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.49 $ $Date: 2008-05-06 22:36:52 $ $Author: christian $
+ * @version $Revision: 1.50 $ $Date: 2008-05-16 00:20:15 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef CHECKER_SOURCE
 #define CHECKER_SOURCE
 
-#include "../controller/checker/cyboi_service_interrupt_checker.c"
-#include "../controller/checker/gnu_linux_console_interrupt_checker.c"
-#include "../controller/checker/www_service_interrupt_checker.c"
-#include "../controller/checker/x_window_system_interrupt_checker.c"
 #include "../controller/handler.c"
 #include "../globals/constants/integer/integer_constants.c"
 #include "../globals/constants/log/log_message_constants.c"
@@ -621,22 +617,6 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
  * @param p40 the cyboi service handler model count (Hand over as reference!)
  * @param p41 the cyboi service handler details (Hand over as reference!)
  * @param p42 the cyboi service handler details count (Hand over as reference!)
---
- * @param p23 the model (Hand over as reference!)
- * @param p24 the model count (Hand over as reference!)
- * @param p25 the model size (Hand over as reference!)
- * @param p26 the details (Hand over as reference!)
- * @param p27 the details count (Hand over as reference!)
- * @param p28 the details size (Hand over as reference!)
- * @param p29 the commands (Hand over as reference!)
- * @param p30 the commands count (Hand over as reference!)
- * @param p31 the language (Hand over as reference!)
- * @param p32 the language count (Hand over as reference!)
- * @param p33 the style (Hand over as reference!)
- * @param p34 the style count (Hand over as reference!)
- * @param p35 the buffer (Hand over as reference!)
- * @param p36 the buffer count (Hand over as reference!)
- * @param p37 the buffer size (Hand over as reference!)
  */
 void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7,
     void* p8, void* p9, void* p10,
@@ -657,12 +637,12 @@ void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
     void** signal_memory_sleep_time = (void**) p10;
     void** gnu_linux_console_irq = (void**) p11;
     void** gnu_linux_console_mutex = (void**) p12;
-    void** x_window_system_irq = (void**) p14;
-    void** x_window_system_mutex = (void**) p15;
-    void** www_service_irq = (void**) p17;
-    void** www_service_mutex = (void**) p18;
-    void** cyboi_service_irq = (void**) p20;
-    void** cyboi_service_mutex = (void**) p21;
+    void** x_window_system_irq = (void**) p19;
+    void** x_window_system_mutex = (void**) p20;
+    void** www_service_irq = (void**) p27;
+    void** www_service_mutex = (void**) p28;
+    void** cyboi_service_irq = (void**) p35;
+    void** cyboi_service_mutex = (void**) p36;
 
     // The signal abstraction, model, details.
     void** a = NULL_POINTER;
@@ -780,32 +760,6 @@ void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
             // Unlock mutex.
             pthread_mutex_unlock(*mt);
 
-            // REFLEXION: The single input threads deliver various kinds of input:
-            // - gnu/linux console: a sequence of input commands (key presses) as stored in the keyboard buffer
-            // - x window system: just one command (key press or mouse click etc.)
-            // - socket: just one command (action handed over in URL or form data via GET or POST)
-            //
-            // When programming this part, it had to be decided how to store the multiple
-            // input commands received from gnu/linux console. Possible options were:
-            // 1 only read the first command and ignore all others
-            //   --> NOT good because the user expects that all key presses are registered
-            //   and not just forgotten, so that s/he doesn't have to repeat them
-            // 2 create a new signal for each command and store them in signal memory
-            //   --> NOT good because the data received e.g. over socket are temporary
-            //       and get destroyed/ overwritten with each new (socket) data reception;
-            //       but since the generated signals may rely on and reference these temporary data,
-            //       the commands have to be handled AT ONCE, without generating signals first
-            //       (therefore, the "handle" function is called directly below)
-            // 3 create a temporary compound structure and add the single commands
-
-            // Receive signal data (message) via the given channel.
-/*??
-            receive_with_parameters(p0, (void*) m, (void*) mc, (void*) ms, (void*) d, (void*) dc, (void*) ds,
-                *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
-                *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
-                *NULL_POINTER, *NULL_POINTER, c, (void*) &cc);
-*/
-
             // Handle signal.
             //
             // CAUTION! The "handle" function has to be called DIRECTLY here!
@@ -856,6 +810,7 @@ void check(void* p0) {
 
     // CAUTION! The parameters were not handed over as function arguments,
     // since it is more flexible to just hand over the internal memory as argument.
+    //
     // It is very likely that new services (besides gnu/linux console, x window system, socket etc.)
     // will be added in the future. So it is easier not to have to change the function arguments,
     // but instead just retrieve them from the internal memory below.
@@ -943,33 +898,6 @@ void check(void* p0) {
     void** cyboi_service_handler_d = NULL_POINTER;
     // The cyboi service handler details count.
     void** cyboi_service_handler_dc = NULL_POINTER;
-
-/*??
-    // The model.
-    void** m = NULL_POINTER;
-    void** mc = NULL_POINTER;
-    void** ms = NULL_POINTER;
-    // The details.
-    void** d = NULL_POINTER;
-    void** dc = NULL_POINTER;
-    void** ds = NULL_POINTER;
-    // The commands.
-    void** c = NULL_POINTER;
-    void** cc = NULL_POINTER;
-    // The language.
-    void** l = NULL_POINTER;
-    void** lc = NULL_POINTER;
-    // The communication style.
-    void** st = NULL_POINTER;
-    void** stc = NULL_POINTER;
-
-    // The character buffer.
-    void** b = NULL_POINTER;
-    void** bc = NULL_POINTER;
-    // The maximum buffer size.
-    // CAUTION! A message MUST NOT be longer!
-    void** bs = NULL_POINTER;
-*/
 
     // Get knowledge memory internals.
     get_element(p0, (void*) KNOWLEDGE_MEMORY_INTERNAL, (void*) &k, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
@@ -1066,48 +994,6 @@ void check(void* p0) {
     i = *CYBOI_BASE_INTERNAL + *SOCKET_HANDLER_DETAILS_COUNT_INTERNAL;
     get_element(p0, (void*) &i, (void*) &cyboi_service_handler_dc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-/*??
-    int base = *CYBOI_BASE_INTERNAL;
-
-    // Get model.
-    i = base + *SOCKET_MODEL_INTERNAL;
-    get_element(p0, (void*) &i, (void*) &m, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    i = base + *SOCKET_MODEL_COUNT_INTERNAL;
-    get_element(p0, (void*) &i, (void*) &mc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    i = base + *SOCKET_MODEL_SIZE_INTERNAL;
-    get_element(p0, (void*) &i, (void*) &ms, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    // Get details.
-    i = base + *SOCKET_DETAILS_INTERNAL;
-    get_element(p0, (void*) &i, (void*) &d, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    i = base + *SOCKET_DETAILS_COUNT_INTERNAL;
-    get_element(p0, (void*) &i, (void*) &dc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    i = base + *SOCKET_DETAILS_SIZE_INTERNAL;
-    get_element(p0, (void*) &i, (void*) &ds, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    // Get commands.
-    i = base + *SOCKET_COMMANDS_INTERNAL;
-    get_element(p0, (void*) &i, (void*) &c, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    i = base + *SOCKET_COMMANDS_COUNT_INTERNAL;
-    get_element(p0, (void*) &i, (void*) &cc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    // Get language.
-    i = base + *SOCKET_LANGUAGE_INTERNAL;
-    get_element(p0, (void*) &i, (void*) &l, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    i = base + *SOCKET_LANGUAGE_COUNT_INTERNAL;
-    get_element(p0, (void*) &i, (void*) &lc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    // Get communication style.
-    i = base + *SOCKET_STYLE_INTERNAL;
-    get_element(p0, (void*) &i, (void*) &st, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    i = base + *SOCKET_STYLE_COUNT_INTERNAL;
-    get_element(p0, (void*) &i, (void*) &stc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-
-    // Get character buffer, which was set at socket startup.
-    i = base + *SOCKET_CHARACTER_BUFFER_INTERNAL;
-    get_element(p0, (void*) &i, (void*) &b, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    i = base + *SOCKET_CHARACTER_BUFFER_COUNT_INTERNAL;
-    get_element(p0, (void*) &i, (void*) &bc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    i = base + *SOCKET_CHARACTER_BUFFER_SIZE_INTERNAL;
-    get_element(p0, (void*) &i, (void*) &bs, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-*/
-
     // The shutdown flag.
     int f = *NUMBER_0_INTEGER;
 
@@ -1125,13 +1011,7 @@ void check(void* p0) {
             (void*) gnu_linux_console_irq, (void*) gnu_linux_console_mutex, (void*) gnu_linux_console_handler_a, (void*) gnu_linux_console_handler_ac, (void*) gnu_linux_console_handler_m, (void*) gnu_linux_console_handler_mc, (void*) gnu_linux_console_handler_d, (void*) gnu_linux_console_handler_dc,
             (void*) x_window_system_irq, (void*) x_window_system_mutex, (void*) x_window_system_handler_a, (void*) x_window_system_handler_ac, (void*) x_window_system_handler_m, (void*) x_window_system_handler_mc, (void*) x_window_system_handler_d, (void*) x_window_system_handler_dc,
             (void*) www_service_irq, (void*) www_service_mutex, (void*) www_service_handler_a, (void*) www_service_handler_ac, (void*) www_service_handler_m, (void*) www_service_handler_mc, (void*) www_service_handler_d, (void*) www_service_handler_dc,
-            (void*) cyboi_service_irq, (void*) cyboi_service_mutex, (void*) cyboi_service_handler_a, (void*) cyboi_service_handler_ac, (void*) cyboi_service_handler_m, (void*) cyboi_service_handler_mc, (void*) cyboi_service_handler_d, (void*) cyboi_service_handler_dc
-/*??
-            , (void*) *m, (void*) *mc, (void*) *ms, (void*) *d, (void*) *dc, (void*) *ds,
-            (void*) *c, (void*) *cc, (void*) *l, (void*) *lc, (void*) *st, (void*) *stc,
-            (void*) b, (void*) bc, (void*) bs
-*/
-        );
+            (void*) cyboi_service_irq, (void*) cyboi_service_mutex, (void*) cyboi_service_handler_a, (void*) cyboi_service_handler_ac, (void*) cyboi_service_handler_m, (void*) cyboi_service_handler_mc, (void*) cyboi_service_handler_d, (void*) cyboi_service_handler_dc);
     }
 }
 

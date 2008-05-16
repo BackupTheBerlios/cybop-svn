@@ -14,13 +14,24 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.56 $ $Date: 2008-05-14 22:25:13 $ $Author: christian $
+# @version $Revision: 1.57 $ $Date: 2008-05-16 00:20:15 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2008-05-15  Christian Heller  <christian.heller@tuxtax.de>
+        * Add new functions "log_write_message" and "log_write_terminated_message" to module "logger.c"
+        * Add new files "helper.c" and "informant.c", in order to bundle special output messages
+        * Add an extra function call to "orient" for all streams, also the log file,
+            in "main" function of module "cyboi.c"
+        * Remove sub directory "controller/checker/", the functionality of whose files
+            is now filled by function "check_interrupts" in module "checker.c"
+        * Clean up module "checker.c" by removing old code that was commented out
+        * Correct parameter casts in function "check_signal" of module "checker.c"
+        * Add encoding test files
+
 2008-05-12  Christian Heller  <christian.heller@tuxtax.de>
-        * Rollback function "main" in module "cyboi.c" to using standard ascii characters;
-            the command line arguments array of the "main" function uses the "char" type
+        * Rollback function "main" in module "cyboi.c" to using standard ascii characters,
+            since the command line arguments array of the "main" function uses the "char" type
         * Rollback function "open" in module "optionaliser.c" to using standard ascii characters
         * Continue converting all source code to wide character
         * Finish module "utf_8_unicode_character_converter.c"
@@ -70,7 +81,7 @@
         * Complete function "decode_gnu_linux_console_character" using new "set" function
         * Correct function "receive_gnu_linux_console";
             the command is now not determined within the "receive" operations anymore,
-            but instead has to be assembled in CYBOL knowledge files; advantages:
+            but instead has to be assembled in CYBOL knowledge files with the advantages:
             1 avoid problems with two calls of the function "get_universal_compound_element_by_name"
               (once for the operation's "commands" parameter and another time for determining the actual command)
             2 more flexibility since the knowledge path of a command can be manipulated in CYBOL

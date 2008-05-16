@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2008-05-04 00:18:11 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2008-05-16 00:20:15 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -32,26 +32,34 @@
 /**
  * Deoptionalises the given command line argument options.
  *
- * @param p0 the orientation (positive value: wide character; negative value: narrow character)
+ * @param p0 the stream
+ * @param p1 the orientation (positive value: wide character; negative value: narrow character)
  */
-void orient(void* p0) {
+void orient(void* p0, void* p1) {
 
-    if (p0 != *NULL_POINTER) {
+    if (p1 != *NULL_POINTER) {
 
-        int* o = (int*) p0;
+        int* o = (int*) p1;
 
-        // Set stdout stream orientation.
-        fwide(stdout, *o);
-        // Set stdin stream orientation.
-        fwide(stdin, *o);
-        // Set stderr stream orientation.
-        fwide(stderr, *o);
+        if (p0 != *NULL_POINTER) {
+
+            FILE* s = (FILE*) p0;
+
+            // Set stream orientation.
+            fwide(s, *o);
+
+        } else {
+
+            // CAUTION! DO NOT use logging functionality here!
+            // The logger will not work before its options are set.
+            fputws(L"Error: Could not orient stream. The stream is null.\n", stdout);
+        }
 
     } else {
 
         // CAUTION! DO NOT use logging functionality here!
         // The logger will not work before its options are set.
-        fputws(L"Error: Could not orient streams. The orientation is null.\n", stdout);
+        fputws(L"Error: Could not orient stream. The orientation is null.\n", stdout);
     }
 }
 
