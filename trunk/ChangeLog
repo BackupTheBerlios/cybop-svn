@@ -14,9 +14,18 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.58 $ $Date: 2008-05-16 23:15:39 $ $Author: christian $
+# @version $Revision: 1.59 $ $Date: 2008-05-20 22:13:43 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2008-05-20  Christian Heller  <christian.heller@tuxtax.de>
+        * Remove function calls of "allocate_array" etc. from module "logger.c"
+            and use the global log message array "LOG_MESSAGE" instead,
+            in order to assure thread safety
+        * Add global variables "LOG_MESSAGE" and "LOG_MESSAGE_COUNT" in module "log_variables.c" and
+            allocate/ initialise them in module "globaliser.c"
+        * Replace function calls of "fputws" with "log_write_terminated_message", everywhere;
+            this has the advantage that changes such as from character to wide character only have to be done in one place
 
 2008-05-16  Christian Heller  <christian.heller@tuxtax.de>
         * Remove initial values for all variables in modules of directory "globals/variables/"

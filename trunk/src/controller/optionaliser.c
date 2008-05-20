@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.12 $ $Date: 2008-05-16 23:15:39 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2008-05-20 22:13:43 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -58,7 +58,7 @@ void optionalise_log_level(void* p0, void* p1, void* p2) {
         // CAUTION! DO NOT use logging functionality here!
         // The logger will not work before its options are set.
         // Do NOT show the following message, as it would only disturb the user!
-        // fputws(L"Debug: Optionalise log level.\n", stdout);
+        // log_write_terminated_message(stdout, L"Debug: Optionalise log level.\n");
 
         // The comparison result.
         int r = *NUMBER_0_INTEGER;
@@ -122,14 +122,14 @@ void optionalise_log_level(void* p0, void* p1, void* p2) {
 
             // CAUTION! DO NOT use logging functionality here!
             // The logger will not work before its options are set.
-            fputws(L"Warning: Could not optionalise log level. The log level name is unknown.\n", stdout);
+            log_write_terminated_message(stdout, L"Warning: Could not optionalise log level. The log level name is unknown.\n");
         }
 
     } else {
 
         // CAUTION! DO NOT use logging functionality here!
         // The logger will not work before its options are set.
-        fputws(L"Error: Could not optionalise log level. The log level is null.\n", stdout);
+        log_write_terminated_message(stdout, L"Error: Could not optionalise log level. The log level is null.\n");
     }
 }
 
@@ -153,14 +153,20 @@ void optionalise_log_file(void* p0, void* p1, void* p2) {
             // CAUTION! DO NOT use logging functionality here!
             // The logger will not work before its options are set.
             // Do NOT show the following message, as it would only disturb the user!
-            fputws(L"Debug: Optionalise log file.\n", stdout);
+            log_write_terminated_message(stdout, L"Debug: Optionalise log file.\n");
 
             // The terminated file name as character array.
             void* t = *NULL_POINTER;
             int tc = *NUMBER_0_INTEGER;
             int ts = *NUMBER_0_INTEGER;
 
-            // Allocate terminated file name as character array.
+            //
+            // CAUTION! Do NOT use a wide character array here!
+            //
+            // The glibc file stream functions expect standard (multibyte) character arrays.
+            //
+
+            // Allocate terminated file name as multibyte character array.
             allocate_array((void*) &t, (void*) &ts, (void*) CHARACTER_ARRAY);
 
     fwprintf(stderr, L"TEST 0 ts: %i\n", ts);
@@ -185,7 +191,7 @@ void optionalise_log_file(void* p0, void* p1, void* p2) {
 
     fwprintf(stderr, L"TEST 3 ts: %i\n", ts);
 
-                // Reallocate terminated file name as character array.
+                // Reallocate terminated file name as multibyte character array.
                 reallocate_array((void*) &t, (void*) &tc, (void*) &ts, (void*) CHARACTER_ARRAY);
             }
 
@@ -233,7 +239,7 @@ void optionalise_log_file(void* p0, void* p1, void* p2) {
 
                 // CAUTION! DO NOT use logging functionality here!
                 // The logger will not work before its options are set.
-                fputws(L"Error: Could not optionalise log file. An error occured when trying to open or create the file for writing.\n", stdout);
+                log_write_terminated_message(stdout, L"Error: Could not optionalise log file. An error occured when trying to open or create the file for writing.\n");
             }
 
     fwprintf(stderr, L"TEST 0: %i\n", *f);
@@ -243,7 +249,7 @@ void optionalise_log_file(void* p0, void* p1, void* p2) {
     fwprintf(stderr, L"TEST tc: %i\n", tc);
     fwprintf(stderr, L"TEST ts: %i\n", ts);
 
-            // Deallocate terminated file name as character array.
+            // Deallocate terminated file name as multibyte character array.
             deallocate_array((void*) &t, (void*) &ts, (void*) CHARACTER_ARRAY);
 
     fwprintf(stderr, L"TEST 1: %i\n", *f);
@@ -252,14 +258,14 @@ void optionalise_log_file(void* p0, void* p1, void* p2) {
 
             // CAUTION! DO NOT use logging functionality here!
             // The logger will not work before its options are set.
-            fputws(L"Error: Could not optionalise log file. The file descriptor is null.\n", stdout);
+            log_write_terminated_message(stdout, L"Error: Could not optionalise log file. The file descriptor is null.\n");
         }
 
     } else {
 
         // CAUTION! DO NOT use logging functionality here!
         // The logger will not work before its options are set.
-        fputws(L"Error: Could not optionalise log file. The file name count is null.\n", stdout);
+        log_write_terminated_message(stdout, L"Error: Could not optionalise log file. The file name count is null.\n");
     }
 }
 
@@ -277,7 +283,7 @@ void deoptionalise_log_file(void* p0) {
         // CAUTION! DO NOT use logging functionality here!
         // The logger will not work before its options are set.
         // Do NOT show the following message, as it would only disturb the user!
-        // fputws(L"Debug: Deoptionalise log file.\n", stdout);
+        // log_write_terminated_message(stdout, L"Debug: Deoptionalise log file.\n");
 
         // Close log file.
         fclose(f);
@@ -287,7 +293,7 @@ void deoptionalise_log_file(void* p0) {
         // CAUTION! DO NOT use logging functionality here!
         // The logger will not work before its options are set.
         // Do NOT show the following message, as it would only disturb the user!
-        // fputws(L"Error: Could not deoptionalise log file. The file descriptor is null.\n", stdout);
+        // log_write_terminated_message(stdout, L"Error: Could not deoptionalise log file. The file descriptor is null.\n");
     }
 }
 
@@ -317,7 +323,7 @@ void optionalise_option(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
         // CAUTION! DO NOT use logging functionality here!
         // The logger will not work before its options are set.
         // Do NOT show the following message, as it would only disturb the user!
-        fputws(L"Debug: Optionalise option.\n", stdout);
+        log_write_terminated_message(stdout, L"Debug: Optionalise option.\n");
 
         // The comparison result.
         int r = *NUMBER_0_INTEGER;
@@ -396,14 +402,14 @@ void optionalise_option(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
             // CAUTION! Do NOT show this warning message, since the last
             // option argument read from command line is always null,
             // so that this warning would always appear and only disturb the user.
-            // fputws(L"Warning: Could not optionalise option. The command line option is unknown.\n", stdout);
+            // log_write_terminated_message(stdout, L"Warning: Could not optionalise option. The command line option is unknown.\n");
         }
 
     } else {
 
         // CAUTION! DO NOT use logging functionality here!
         // The logger will not work before its options are set.
-        fputws(L"Error: Could not optionalise option. The operation mode is null.\n", stdout);
+        log_write_terminated_message(stdout, L"Error: Could not optionalise option. The operation mode is null.\n");
     }
 }
 
@@ -436,7 +442,7 @@ void optionalise_command_line_argument(void* p0, void* p1, void* p2, void* p3, v
             // CAUTION! DO NOT use logging functionality here!
             // The logger will not work before its options are set.
             // Do NOT show the following message, as it would only disturb the user!
-            // fputws(L"Information: Optionalise command line argument.\n", stdout);
+            // log_write_terminated_message(stdout, L"Information: Optionalise command line argument.\n");
 
             // The value index, which is equal to the loop variable increased by one.
             //
@@ -498,7 +504,7 @@ void optionalise_command_line_argument(void* p0, void* p1, void* p2, void* p3, v
 
                 // CAUTION! DO NOT use logging functionality here!
                 // The logger will not work before its options are set.
-                fputws(L"Error: Could not optionalise command line argument. The command line argument option is null.\n", stdout);
+                log_write_terminated_message(stdout, L"Error: Could not optionalise command line argument. The command line argument option is null.\n");
             }
 
             // Calculate value index.
@@ -540,7 +546,7 @@ void optionalise_command_line_argument(void* p0, void* p1, void* p2, void* p3, v
 
                     // CAUTION! DO NOT use logging functionality here!
                     // The logger will not work before its options are set.
-                    fputws(L"Error: Could not optionalise command line argument. The command line argument value is null.\n", stdout);
+                    log_write_terminated_message(stdout, L"Error: Could not optionalise command line argument. The command line argument value is null.\n");
                 }
             }
 
@@ -558,14 +564,14 @@ void optionalise_command_line_argument(void* p0, void* p1, void* p2, void* p3, v
 
             // CAUTION! DO NOT use logging functionality here!
             // The logger will not work before its options are set.
-            fputws(L"Error: Could not optionalise command line argument. The argument count is null.\n", stdout);
+            log_write_terminated_message(stdout, L"Error: Could not optionalise command line argument. The argument count is null.\n");
         }
 
     } else {
 
         // CAUTION! DO NOT use logging functionality here!
         // The logger will not work before its options are set.
-        fputws(L"Error: Could not optionalise command line argument. The index is null.\n", stdout);
+        log_write_terminated_message(stdout, L"Error: Could not optionalise command line argument. The index is null.\n");
     }
 }
 
@@ -605,7 +611,7 @@ void optionalise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, voi
         // CAUTION! DO NOT use logging functionality here!
         // The logger will not work before its options are set.
         // Do NOT show the following message, as it would only disturb the user!
-        // fputws(L"Information: Optionalise command line arguments.\n", stdout);
+        // log_write_terminated_message(stdout, L"Information: Optionalise command line arguments.\n");
 
         // The loop variable.
         //
@@ -634,7 +640,7 @@ void optionalise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, voi
 
         // CAUTION! DO NOT use logging functionality here!
         // The logger will not work before its options are set.
-        fputws(L"Error: Could not optionalise command line argument options. The options count is null.\n", stdout);
+        log_write_terminated_message(stdout, L"Error: Could not optionalise command line argument options. The options count is null.\n");
     }
 }
 
@@ -648,7 +654,7 @@ void deoptionalise(void* p0) {
     // CAUTION! DO NOT use logging functionality here!
     // The logger will not work before its options are set.
     // Do NOT show the following message, as it would only disturb the user!
-    // fputws(L"Information: Deoptionalise command line argument options.\n", stdout);
+    // log_write_terminated_message(stdout, L"Information: Deoptionalise command line argument options.\n");
 
     // Deoptionalise log file.
     deoptionalise_log_file(p0);

@@ -24,7 +24,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.20 $ $Date: 2008-05-08 22:36:15 $ $Author: christian $
+ * @version $Revision: 1.21 $ $Date: 2008-05-20 22:13:43 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -71,9 +71,9 @@
  */
 void test_logger() {
 
-    fputws(L"Test logger:\n", stdout);
-    fputws(L"CAUTION! A log level other than 'OFF' needs to be set for testing!\n", stdout);
-    fputws(L"For the logging test result, see the corresponding log file that was given as command line argument!\n", stdout);
+    log_write_terminated_message((void*) stdout, L"Test logger:\n");
+    log_write_terminated_message((void*) stdout, L"CAUTION! A log level other than 'OFF' needs to be set for testing!\n");
+    log_write_terminated_message((void*) stdout, L"For the logging test result, see the corresponding log file that was given as command line argument!\n");
 
     /** The log message as constant. */
     static wchar_t TEST_LOG_MESSAGE_ARRAY[] = {L'T', L'E', L'S', L'T', L' ', L'l', L'o', L'g', L' ', L'm', L'e', L's', L's', L'a', L'g', L'e', L'.'};
@@ -90,7 +90,7 @@ void test_logger() {
  */
 void test_inline_assembler_code() {
 
-    fputws(L"Test inline assembler code:\n", stdout);
+    log_write_terminated_message((void*) stdout, L"Test inline assembler code:\n");
 
     // Gegeben ist ein zusammenh�gender Block von Worten im RAM.
     // Die Startadresse des Blockes ist im Register ESI angegeben,
@@ -126,14 +126,14 @@ void test_inline_assembler_code() {
  */
 void test_preprocessor_directives() {
 
-    fputws(L"Test preprocessor directives:\n", stdout);
+    log_write_terminated_message((void*) stdout, L"Test preprocessor directives:\n");
 
 #ifdef GNU_LINUX_OPERATING_SYSTEM
-    fputws(L"GNU_LINUX\n", stdout);
+    log_write_terminated_message((void*) stdout, L"GNU_LINUX\n");
 #elif WINDOWS_OPERATING_SYSTEM
-    fputws(L"WINDOWS\n", stdout);
+    log_write_terminated_message((void*) stdout, L"WINDOWS\n");
 #else
-    fputws(L"OTHER\n", stdout);
+    log_write_terminated_message((void*) stdout, L"OTHER\n");
 /* GNU_LINUX_OPERATING_SYSTEM */
 #endif
 }
@@ -143,10 +143,10 @@ void test_preprocessor_directives() {
  */
 void test_stdout_stderr() {
 
-    fputws(L"Test stdout stderr:\n", stdout);
+    log_write_terminated_message((void*) stdout, L"Test stdout stderr:\n");
 
-    fputws(L"test stdout ok\n", stdout);
-    fputws(L"test stderr ok\n", stderr);
+    log_write_terminated_message((void*) stdout, L"test stdout ok\n");
+    log_write_terminated_message((void*) stderr, L"test stderr ok\n");
 }
 
 /**
@@ -154,7 +154,7 @@ void test_stdout_stderr() {
  */
 void test_type_sizes() {
 
-    fputws(L"Test type sizes:\n", stdout);
+    log_write_terminated_message((void*) stdout, L"Test type sizes:\n");
 
     fwprintf(stderr, L"null: %i\n", *NULL_POINTER);
     fwprintf(stderr, L"int size: %i\n", *INTEGER_PRIMITIVE_SIZE);
@@ -184,7 +184,7 @@ void test_type_sizes() {
  */
 void test_pointer_addition() {
 
-    fputws(L"Test pointer addition:\n", stdout);
+    log_write_terminated_message((void*) stdout, L"Test pointer addition:\n");
 
     // Allocate arrays of an arbitrary size.
     void* v = (void*) malloc(*NUMBER_10_INTEGER);
@@ -322,7 +322,7 @@ void test_pointer_addition() {
  */
 void test_integer_array() {
 
-    fputws(L"Test integer array:\n", stdout);
+    log_write_terminated_message((void*) stdout, L"Test integer array:\n");
 
     // The test value.
     wchar_t* test = L"2,3,4";
@@ -388,7 +388,7 @@ void test_integer_array() {
  */
 void test_character_array_with_termination() {
 
-    fputws(L"Test character array with termination:\n", stdout);
+    log_write_terminated_message((void*) stdout, L"Test character array with termination:\n");
 
     // The brackets indicating an array cannot be avoided or replaced by a pointer.
     // The following line does not work:
@@ -399,7 +399,7 @@ void test_character_array_with_termination() {
     // GNU C library functions such as "fputs".
     wchar_t test[] = {L't', L'e', L's', L't', L' ', L'c', L'h', L'a', L'r', L' ', L'a', L'r', L'r', L'a', L'y', L' ', L'o', L'k', L'\n', L'\0'};
 
-    fputws(test, stdout);
+    log_write_terminated_message((void*) stdout, test);
 }
 
 /**
@@ -407,7 +407,7 @@ void test_character_array_with_termination() {
  */
 void test_array_resizing() {
 
-    fputws(L"Test array resizing:\n", stdout);
+    log_write_terminated_message((void*) stdout, L"Test array resizing:\n");
 
     // The text.
     wchar_t ta[] = {L't', L'e', L's', L't', L'\n', L'\0'};
@@ -433,14 +433,14 @@ void test_array_resizing() {
     oc = oc + *tc;
 
     // Print original array content.
-    fputws(t, stdout);
+    log_write_terminated_message((void*) stdout, t);
 
     // Reallocate copied array.
     os = os + *NUMBER_10_INTEGER;
     reallocate_array((void*) &o, (void*) &oc, (void*) &os, (void*) CHARACTER_ARRAY);
 
     // Print original array content.
-    fputws(t, stdout);
+    log_write_terminated_message((void*) stdout, t);
 
     // Deallocate original array.
     deallocate_array((void*) &o, (void*) &os, (void*) CHARACTER_ARRAY);
@@ -454,7 +454,7 @@ void test_array_resizing() {
  */
 void test_wide_character_output() {
 
-    fputws(L"Test wide character array with termination:\n", stdout);
+    log_write_terminated_message((void*) stdout, L"Test wide character array with termination:\n");
 
 #ifdef GNU_LINUX_OPERATING_SYSTEM
     // Possible locales are: LANG, LC_CTYPE, LC_ALL.
@@ -492,7 +492,7 @@ void test_wide_character_output() {
     // The terminated control sequences string.
     void* ts = *NULL_POINTER;
     int tsc = *NUMBER_0_INTEGER;
-    int tss = *NUMBER_100_INTEGER;
+    int tss = *NUMBER_1000_INTEGER;
 
     // Create terminated control sequences string.
     allocate_array((void*) &ts, (void*) &tss, (void*) WIDE_CHARACTER_ARRAY);
@@ -505,7 +505,7 @@ void test_wide_character_output() {
     set_array_elements(ts, (void*) &tsc, (void*) BOX_DRAWINGS_LIGHT_HORIZONTAL_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
     tsc++;
 
-    // printf("\033[32mgreen colour\033[0mswitched off.")
+    wprintf(L"\033[32mgreen colour\033[0mswitched off.");
 
     // \033
     wchar_t wc = 0x001B;
@@ -528,14 +528,17 @@ void test_wide_character_output() {
     set_array_elements(ts, (void*) &tsc, (void*) &wc, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
     tsc++;
 
+    set_array_elements(ts, (void*) &tsc, (void*) LATIN_CAPITAL_LETTER_H_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+    tsc++;
     set_array_elements(ts, (void*) &tsc, (void*) BOX_DRAWINGS_LIGHT_HORIZONTAL_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
     tsc++;
     set_array_elements(ts, (void*) &tsc, (void*) BOX_DRAWINGS_LIGHT_DOWN_AND_LEFT_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
     tsc++;
 
     // Write to terminal.
-    fwprintf(t, "%ls\n", (wchar_t*) ts);
-//??    fputws((wchar_t*) ts, t);
+//??    fwprintf(t, L"%s\n", ts);
+    fwprintf(t, L"%ls\n", (wchar_t*) ts);
+//??    log_write_terminated_message((void*) stdout, (wchar_t*) ts, t);
 
     // Destroy terminated control sequences.
     deallocate_array((void*) &ts, (void*) &tss, (void*) WIDE_CHARACTER_ARRAY);
@@ -635,8 +638,8 @@ void test_wide_character_wprintf() {
     // - negative value: (narrow) character mode
     fwide(stdout, *NUMBER_1_INTEGER);
 
-    fputws(L"Test fputws.\n", stdout);
-    fputws((wchar_t*) TEST_WIDE_CHARACTER_STRING, stdout);
+    log_write_terminated_message((void*) stdout, L"Test fputws.\n");
+    log_write_terminated_message((void*) stdout, (wchar_t*) TEST_WIDE_CHARACTER_STRING);
     wprintf(L"Test wprintf without stream argument.\n");
 
     // Test wide character constants.
@@ -663,7 +666,7 @@ void test_wide_character_wprintf() {
     fwprintf(stdout, L"Test wide character string fourth letter with cast: %lc \n", (wchar_t*) TEST_WIDE_CHARACTER_STRING[3]);
     fwprintf(stdout, L"Test wide character string fourth letter without cast: %lc \n", TEST_WIDE_CHARACTER_STRING[3]);
 
-    fputws(L"Test END.\n", stdout);
+    log_write_terminated_message((void*) stdout, L"Test END.\n");
 }
 
 /**
@@ -671,7 +674,7 @@ void test_wide_character_wprintf() {
  */
 void test_integer_to_wide_character_conversion() {
 
-    fputws(L"Test integer-to-wide character conversion:\n", stdout);
+    log_write_terminated_message((void*) stdout, L"Test integer-to-wide character conversion:\n");
 
     // The test wide character array.
     void* t = *NULL_POINTER;
@@ -707,17 +710,17 @@ void test_integer_to_wide_character_conversion() {
  */
 void test_ascii_character_wide_character_equality() {
 
-    fputws(L"Test ascii character - wide character equality:\n", stdout);
+    log_write_terminated_message((void*) stdout, L"Test ascii character - wide character equality:\n");
 
     char test = 'a';
 
     if (test = *LATIN_SMALL_LETTER_A_WIDE_CHARACTER) {
 
-        fputws(L"Characters ARE equal.\n", stdout);
+        log_write_terminated_message((void*) stdout, L"Characters ARE equal.\n");
 
     } else {
 
-        fputws(L"Characters are NOT equal.\n", stdout);
+        log_write_terminated_message((void*) stdout, L"Characters are NOT equal.\n");
     }
 }
 
@@ -726,23 +729,23 @@ void test_ascii_character_wide_character_equality() {
  */
 void test_pointer_cast() {
 
-    fputws(L"Test pointer cast:\n", stdout);
+    log_write_terminated_message((void*) stdout, L"Test pointer cast:\n");
 
     // Assign a test character array.
-    char* test_char = "test pointer cast ok\n";
+    wchar_t* test_char = L"test pointer cast ok\n";
 
-    // The & operator makes a char** from char*, in other words a pointer pointer.
-    // The char** is then casted to a normal void* which is used to hand
+    // The & operator makes a wchar_t** from wchar_t*, in other words a pointer pointer.
+    // The wchar_t** is then casted to a normal void* which is used to hand
     // over parameters in all procedures of cyboi.
     void* test_void = (void*) &test_char;
 
     // The void* which was for example retrieved as parameter of a procedure
-    // has to be casted back to the original char**.
-    char** test_back = (char**) test_void;
+    // has to be casted back to the original wchar_t**.
+    wchar_t** test_back = (wchar_t**) test_void;
 
-    // The char** has to be dereferenced using the * operator,
-    // because the fputs function expects a char*.
-    fputs(*test_back, stdout);
+    // The wchar_t** has to be dereferenced using the * operator,
+    // because the fputs function expects a wchar_t*.
+    log_write_terminated_message((void*) stdout, *test_back);
 }
 
 /**
@@ -750,7 +753,7 @@ void test_pointer_cast() {
  */
 void test_character_array_single_element() {
 
-    fputws(L"Test character array single element:\n", stdout);
+    log_write_terminated_message((void*) stdout, L"Test character array single element:\n");
 
     // The character array.
     void* c = *NULL_POINTER;
@@ -766,7 +769,7 @@ void test_character_array_single_element() {
     set_wide_character_array_elements(c, (void*) NUMBER_4_INTEGER, (void*) NULL_CONTROL_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT);
 
     // Print out array contents.
-    fputws((wchar_t*) c, stdout);
+    log_write_terminated_message((void*) stdout, (wchar_t*) c);
 
     int i = *NUMBER_0_INTEGER;
     wchar_t* catest = (wchar_t*) *NULL_POINTER;
@@ -793,7 +796,7 @@ void test_character_array_single_element() {
  */
 void test_character_array_multiple_elements() {
 
-    fputws(L"Test character array multiple elements:\n", stdout);
+    log_write_terminated_message((void*) stdout, L"Test character array multiple elements:\n");
 
     // The destination array.
     void* d = *NULL_POINTER;
@@ -811,7 +814,7 @@ void test_character_array_multiple_elements() {
     // The destination index to which to copy the source array.
     set_wide_character_array_elements(d, (void*) NUMBER_0_INTEGER, (void*) s, (void*) ss);
 
-    fputws((wchar_t*) d, stdout);
+    log_write_terminated_message((void*) stdout, (wchar_t*) d);
 
     // The source array for overwriting.
     wchar_t oa[] = {L'o', L'v', L'e', L'r', L'w', L'r', L'i', L't', L't', L'e', L'n', L'.', L'\n', L'\0'};
@@ -821,14 +824,14 @@ void test_character_array_multiple_elements() {
 
     set_wide_character_array_elements(d, (void*) NUMBER_8_INTEGER, (void*) os, (void*) oss);
 
-    fputws((wchar_t*) d, stdout);
+    log_write_terminated_message((void*) stdout, (wchar_t*) d);
 
     // The remove index.
     int ri = *NUMBER_12_INTEGER;
 
     remove_character_array_elements(d, (void*) &ds, (void*) &ri, (void*) NUMBER_7_INTEGER);
 
-    fputws((wchar_t*) d, stdout);
+    log_write_terminated_message((void*) stdout, (wchar_t*) d);
 
     // The new array size to cut off remaining elements,
     // including two places for new line '\n' and c string termination '\0'.
@@ -836,7 +839,7 @@ void test_character_array_multiple_elements() {
 
     reallocate_array((void*) &d, (void*) &ns, (void*) &ns, (void*) WIDE_CHARACTER_ARRAY);
 
-    fputws((wchar_t*) d, stdout);
+    log_write_terminated_message((void*) stdout, (wchar_t*) d);
 
     // The result array.
     void* r = *NULL_POINTER;
@@ -844,7 +847,7 @@ void test_character_array_multiple_elements() {
     // Test getting a reference.
     get_wide_character_array_elements(d, (void*) NUMBER_8_INTEGER, (void*) &r);
 
-    fputws((wchar_t*) r, stdout);
+    log_write_terminated_message((void*) stdout, (wchar_t*) r);
 
     // Destroy destination array.
     deallocate_array((void*) &d, (void*) &ns, (void*) WIDE_CHARACTER_ARRAY);
@@ -858,7 +861,7 @@ void test_character_array_multiple_elements() {
  */
 void test_pointer_return() {
 
-    fputws(L"Test pointer return:\n", stdout);
+    log_write_terminated_message((void*) stdout, L"Test pointer return:\n");
 
     // The character array (including new line and null termination character).
     void* c = *NULL_POINTER;
@@ -893,7 +896,7 @@ void test_pointer_return() {
  */
 void test_pointer_array() {
 
-    fputws(L"Test pointer array:\n", stdout);
+    log_write_terminated_message((void*) stdout, L"Test pointer array:\n");
 
     //
     // Creation.
@@ -951,7 +954,7 @@ void test_pointer_array() {
  */
 void test_pointer_array_with_null_values() {
 
-    fputws(L"Test pointer array with null values:\n", stdout);
+    log_write_terminated_message((void*) stdout, L"Test pointer array with null values:\n");
 
     // The pointer array.
     void* a = *NULL_POINTER;
@@ -995,7 +998,7 @@ void test_pointer_array_with_null_values() {
  */
 void test_file_read() {
 
-    fputws(L"Test file read:\n", stdout);
+    log_write_terminated_message((void*) stdout, L"Test file read:\n");
 
     // A file named "/home/cybop/tmp/test.cybol" needs to be created
     // in a text editor, for this test to work.
@@ -1035,7 +1038,7 @@ void test_file_read() {
         }
 
         get_array_elements((void*) &a, (void*) CHARACTER_ARRAY, (void*) &j, (void*) &c, (void*) &cc);
-        fputs(c, stdout);
+        fputs(c);
 
         j++;
     }
@@ -1049,7 +1052,7 @@ void test_file_read() {
  */
 void test_file_write() {
 
-    fputws(L"Test file write:\n", stdout);
+    log_write_terminated_message((void*) stdout, L"Test file write:\n");
 
     // The character array.
     char aa[] = {'H', 'e', 'l', 'l', 'o', ',', ' ', 'W', 'o', 'r', 'l', 'd', '!', '\n'};
@@ -1074,12 +1077,12 @@ void test_file_write() {
  */
 void test_console() {
 
-    fputws(L"Test console:\n", stdout);
+    log_write_terminated_message((void*) stdout, L"Test console:\n");
 
     if (strcmp("linux", getenv("TERM")) == *NUMBER_0_INTEGER) {
 
 //        // This is a gnu/linux console.
-//        fputws(L"This is a gnu/linux console.\n", stdout);
+//        log_write_terminated_message((void*) stdout, L"This is a gnu/linux console.\n");
 //
 //        // Determine device name of controlling terminal.
 //        int n = ttyname();
@@ -1097,19 +1100,19 @@ void test_console() {
 //        //
 //
 //        // Print bold word.
-//        fputws(L"This is a \033[1mbold\033[0m word.\n", stdout);
+//        log_write_terminated_message((void*) stdout, L"This is a \033[1mbold\033[0m word.\n");
 //
 //        // Set colours.
 //        // CAUTION! The "m" has to stand after the colour number
 //        // and it must NOT be a capital letter.
-//        fputws(L"Set colour to \033[32mgreen\033[0m.\n", stdout);
-//        fputws(L"Set colour to \033[32myellow\041[0m.\n", stdout);
-//        fputws(L"Set colour to \033[32mred\031[0m.\n", stdout);
+//        log_write_terminated_message((void*) stdout, L"Set colour to \033[32mgreen\033[0m.\n");
+//        log_write_terminated_message((void*) stdout, L"Set colour to \033[32myellow\041[0m.\n");
+//        log_write_terminated_message((void*) stdout, L"Set colour to \033[32mred\031[0m.\n");
 
     } else {
 
         // This is a normal serial terminal.
-        fputws(L"This is a normal serial terminal.\n", stdout);
+        log_write_terminated_message((void*) stdout, L"This is a normal serial terminal.\n");
     }
 }
 
@@ -1119,7 +1122,7 @@ void test_console() {
 /*??
 void test_mesa_opengl() {
 
-    fputws(L"Test mesa opengl:\n", stdout);
+    log_write_terminated_message((void*) stdout, L"Test mesa opengl:\n");
 
     // This example will draw a green square on the screen.
     // OpenGL has several ways to accomplish this task, but this is the easiest to understand.
@@ -1169,7 +1172,7 @@ void test_mesa_opengl() {
  */
 void test_decode_integer_vector() {
 
-    fputws(L"Test decode integer vector:\n", stdout);
+    log_write_terminated_message((void*) stdout, L"Test decode integer vector:\n");
 
     // The source character array.
     wchar_t sa[] = {L'1', L',', L'2', L',', L'3', L',', L'4', L',', L'5'};
@@ -1212,7 +1215,7 @@ void test_decode_integer_vector() {
  */
 void test_encode_integer_vector() {
 
-    fputws(L"Test encode integer vector:\n", stdout);
+    log_write_terminated_message((void*) stdout, L"Test encode integer vector:\n");
 
     // The source integer array.
     //?? TODO: Shouldn't this be WITHOUT apostrophes, i.e.:
@@ -1246,7 +1249,7 @@ void test_encode_integer_vector() {
  */
 void test_encode_integer() {
 
-    fputws(L"Test encode integer:\n", stdout);
+    log_write_terminated_message((void*) stdout, L"Test encode integer:\n");
 
     // The destination character array.
     wchar_t* d = (wchar_t*) *NULL_POINTER;
@@ -1276,7 +1279,7 @@ void test_encode_integer() {
  */
 void test_float_constants() {
 
-    fputws(L"Test float constants:\n", stdout);
+    log_write_terminated_message((void*) stdout, L"Test float constants:\n");
 
     fwprintf(stdout, L"Test base of natural logarithms: %f\n", *E_DOUBLE);
     fwprintf(stdout, L"Test logarithm to base 2 of M_E: %f\n", *LOG_2_E_DOUBLE);
@@ -1377,8 +1380,8 @@ void test() {
 //??    test_integer_array();
 //??    test_character_array_with_termination();
 //??    test_array_resizing();
-//??    test_wide_character_output();
-    test_wide_character_wprintf();
+    test_wide_character_output();
+//??    test_wide_character_wprintf();
 //??    test_integer_to_wide_character_conversion();
 //??    test_ascii_character_wide_character_equality();
 //??    test_pointer_cast();

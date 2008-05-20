@@ -7,32 +7,18 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.48 $ $Date: 2008-05-16 23:15:39 $ $Author: christian $
+# @version $Revision: 1.49 $ $Date: 2008-05-20 22:13:43 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
         * Find unspecific bug causing a segmentation fault in optionaliser,
             sometimes in function "optionalise_log_file", other times in "optionalise_log_level"
 
---
-
-        * Check for circular reference between logger and array functions!
-            Possibly delete array function calls again.
-            ==> NO! Better allocate one log array at system startup having a fixed size of let's say 1000
-            and always work on this file within the logger!
-            So only the "set" array function to copy values has to be copied to module "logger.c"
-        * Replace function "fputws" with "log_write_terminated_message", everywhere;
-            this has the advantage that changes such as from character to wide character
-            only have to be done in one place
-        * Replace stdin, stdout, stderr with own global variables (easier to change, since bundled in one place)
-
---
-
+        * Convert all constants from "char" to "wchar_t"
         * Check the calls of "decode" in function "decode_compound_cybol_node",
             since the conversion does not work anymore if changed to wide character!
         * Go through source code manually searching for potential bugs, after conversion to wide character
         * Replace function calls to "strlen" with "wcslen"
-        * Replace "char" with "wchar_t" wherever suitable
         * Check where possibly to replace "encode_integer" with "encode_integer_wide"
         * Check why the escape code sequence (e.g. ESC[B for arrow left) is added to the
                 knowledge tree TEST_SHUTDOWN, instead of the decoded string "arrow_left"
@@ -58,6 +44,8 @@
 
         * Replace redundant standard functions (arrays, set_elements etc.) with some sort of TEMPLATE replacing the type;
             this could save hundreds of lines of code; possibly use a C++ compiler just because of this reason?
+
+        * Does the logger need an own mutex? ... because it is accessed by all threads!
 
 --
 

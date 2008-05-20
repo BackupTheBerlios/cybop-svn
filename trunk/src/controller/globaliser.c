@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2008-05-16 23:15:39 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2008-05-20 22:13:43 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -96,6 +96,13 @@ void globalise() {
     LOG_LEVEL = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
     *LOG_LEVEL = *OFF_LOG_LEVEL;
 
+    // Allocate and initialise log level.
+    LOG_MESSAGE_COUNT = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
+    *LOG_MESSAGE_COUNT = *NUMBER_10000_INTEGER;
+
+    // Allocate log message.
+    LOG_MESSAGE = (wchar_t*) malloc(*LOG_MESSAGE_COUNT);
+
     // CAUTION! Do NOT try to allocate or initialise the log output of type FILE!
     //
     // FILE objects are allocated and managed internally by the input/ output
@@ -103,7 +110,9 @@ void globalise() {
     // Programs should deal only with pointers to these objects (FILE* values),
     // rather than the objects themselves.
     //
-    // Hence, the following line would not make sense and is forbidden:
+    // See module "optionaliser.c", which cares about log file creation!
+    //
+    // Hence, the following line would not make sense and is FORBIDDEN:
     // LOG_OUTPUT = (FILE*) malloc(sizeof(FILE));
     LOG_OUTPUT = *NULL_POINTER;
 
@@ -268,9 +277,6 @@ void unglobalise() {
     // Log variables.
     //
 
-    // Free log level.
-    free(LOG_LEVEL);
-
     // CAUTION! Do NOT try to free the log output of type FILE!
     // It was already closed in module "optionaliser.c".
     //
@@ -279,8 +285,17 @@ void unglobalise() {
     // Programs should deal only with pointers to these objects (FILE* values),
     // rather than the objects themselves.
     //
-    // Hence, the following line would not make sense and is forbidden:
+    // Hence, the following line would not make sense and is FORBIDDEN:
     // free(LOG_OUTPUT);
+
+    // Free log message.
+    free(LOG_MESSAGE);
+
+    // Free log message count.
+    free(LOG_MESSAGE_COUNT);
+
+    // Free log level.
+    free(LOG_LEVEL);
 
     //
     // Primitive type size variables.

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.46 $ $Date: 2008-05-04 00:18:11 $ $Author: christian $
+ * @version $Revision: 1.47 $ $Date: 2008-05-20 22:13:43 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -222,30 +222,21 @@ void manage(void* p0, void* p1) {
     // Initialise cyboi service interrupt request flag.
     *cyboi_service_irq = *NUMBER_0_INTEGER;
 
+    //
+    // In the following mutex initialisation functions, the second parameter
+    // specifies attributes that are to be used to initialise the mutex.
+    // If the parameter is null, the mutex is initialised with default attributes.
+    //
+
     // Initialise signal memory mutex.
-    // The second parameter specifies attributes that are to be used to
-    // initialise the mutex. If the parameter is null, the mutex is
-    // initialised with default attributes.
     pthread_mutex_init(signal_memory_mutex, *NULL_POINTER);
     // Initialise gnu/linux console mutex.
-    // The second parameter specifies attributes that are to be used to
-    // initialise the mutex. If the parameter is null, the mutex is
-    // initialised with default attributes.
     pthread_mutex_init(gnu_linux_console_mutex, *NULL_POINTER);
     // Initialise x window system mutex.
-    // The second parameter specifies attributes that are to be used to
-    // initialise the mutex. If the parameter is null, the mutex is
-    // initialised with default attributes.
     pthread_mutex_init(x_window_system_mutex, *NULL_POINTER);
     // Initialise www service mutex.
-    // The second parameter specifies attributes that are to be used to
-    // initialise the mutex. If the parameter is null, the mutex is
-    // initialised with default attributes.
     pthread_mutex_init(www_service_mutex, *NULL_POINTER);
     // Initialise cyboi service mutex.
-    // The second parameter specifies attributes that are to be used to
-    // initialise the mutex. If the parameter is null, the mutex is
-    // initialised with default attributes.
     pthread_mutex_init(cyboi_service_mutex, *NULL_POINTER);
 
     // Initialise signal memory sleep time.

@@ -25,7 +25,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.34 $ $Date: 2008-05-16 23:15:39 $ $Author: christian $
+ * @version $Revision: 1.35 $ $Date: 2008-05-20 22:13:43 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -76,7 +76,7 @@ int main(int p0, char** p1) {
 
     if (p1 != *NULL_POINTER) {
 
-        // fputws(L"Information: Execute cyboi.\n", stdout);
+        // log_write_terminated_message(stdout, L"Information: Execute cyboi.\n");
 
         // Startup global variables.
         globalise();
@@ -190,7 +190,7 @@ int main(int p0, char** p1) {
 
             } else {
 
-                fputws(L"Error: Could not execute cyboi in knowledge operation mode. A cybol file name needs to be given behind the '--knowledge' command line argument.\n", stdout);
+                log_write_terminated_message(stdout, L"Error: Could not execute cyboi in knowledge operation mode. A cybol file name needs to be given behind the '--knowledge' command line argument.\n");
 
                 help((void*) stdout);
             }
@@ -209,14 +209,14 @@ int main(int p0, char** p1) {
         // Shutdown global variables.
         unglobalise();
 
-        // fputws(L"Information: Exit cyboi normally.\n", stdout);
+        // log_write_terminated_message(stdout, L"Information: Exit cyboi normally.\n");
 
         // Set return value to 0, to indicate proper shutdown.
         r = *NUMBER_0_INTEGER;
 
     } else {
 
-        fputws(L"Error: Could not execute cyboi. The command line argument vector is null.\n", stdout);
+        log_write_terminated_message(stdout, L"Error: Could not execute cyboi. The command line argument vector is null.\n");
     }
 
     return r;

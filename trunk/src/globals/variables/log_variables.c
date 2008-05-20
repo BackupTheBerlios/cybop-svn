@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2008-05-16 23:15:39 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2008-05-20 22:13:43 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -42,6 +42,10 @@
 
 /** The log level. */
 static int* LOG_LEVEL;
+
+/** The log message. */
+static wchar_t* LOG_MESSAGE;
+static int* LOG_MESSAGE_COUNT;
 
 /** The log output. */
 static FILE* LOG_OUTPUT;

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2008-05-16 23:15:39 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2008-05-20 22:13:43 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -48,7 +48,7 @@ void orient(void* p0, void* p1) {
             // CAUTION! DO NOT use logging functionality here!
             // The logger will not work before its options are set.
             // Do NOT show the following error message, as it would only disturb the user!
-            // fputws(L"Information: Orient stream.\n", stdout);
+            // log_write_terminated_message(stdout, L"Information: Orient stream.\n");
 
             // Set stream orientation.
             fwide(s, *o);
@@ -58,14 +58,14 @@ void orient(void* p0, void* p1) {
             // CAUTION! DO NOT use logging functionality here!
             // The logger will not work before its options are set.
             // Do NOT show the following error message, as it would only disturb the user!
-            // fputws(L"Error: Could not orient stream. The stream is null.\n", stdout);
+            // log_write_terminated_message(stdout, L"Error: Could not orient stream. The stream is null.\n");
         }
 
     } else {
 
         // CAUTION! DO NOT use logging functionality here!
         // The logger will not work before its options are set.
-        fputws(L"Error: Could not orient stream. The orientation is null.\n", stdout);
+        log_write_terminated_message(stdout, L"Error: Could not orient stream. The orientation is null.\n");
     }
 }
 

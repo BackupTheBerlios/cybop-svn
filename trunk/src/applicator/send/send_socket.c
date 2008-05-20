@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.28 $ $Date: 2008-05-04 00:18:11 $ $Author: christian $
+ * @version $Revision: 1.29 $ $Date: 2008-05-20 22:13:43 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -550,7 +550,7 @@ void send_socket(void* p0, void* p1, void* p2, void* p3,
         b, (void*) &bc, *NULL_POINTER, *NULL_POINTER,
         *NULL_POINTER, *NULL_POINTER, (void*) HTTP_RESPONSE_ABSTRACTION, (void*) HTTP_RESPONSE_ABSTRACTION_COUNT);
 
-    fputws(L"SUCCESS! Generated http message with xhtml file as body.\n", stdout);
+    log_write_terminated_message(stdout, L"SUCCESS! Generated http message with xhtml file as body.\n");
 
 //?? -- START TEST
     // The log file name.
@@ -586,7 +586,7 @@ void send_socket(void* p0, void* p1, void* p2, void* p3,
 
         // CAUTION! DO NOT use logging functionality here!
         // The logger will not work before these global variables are set.
-        fputws(L"Error: Could open xhtml log file. A file error occured.\n", stdout);
+        log_write_terminated_message(stdout, L"Error: Could open xhtml log file. A file error occured.\n");
     }
 //?? -- END TEST
 
