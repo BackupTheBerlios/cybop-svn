@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.18 $ $Date: 2008-05-04 00:18:14 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2008-05-27 22:52:00 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -67,7 +67,7 @@ void decode_boolean(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_array_elements(p3, (void*) TRUE_MODEL, (void*) TRUE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_array_elements(p3, (void*) TRUE_MODEL, (void*) TRUE_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -81,7 +81,7 @@ void decode_boolean(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_array_elements(p3, (void*) FALSE_MODEL, (void*) FALSE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_array_elements(p3, (void*) FALSE_MODEL, (void*) FALSE_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -162,10 +162,10 @@ void encode_boolean(void* p0, void* p1, void* p2, void* p3, void* p4) {
                                 *ds = *dc + *TRUE_MODEL_COUNT;
 
                                 // Reallocate destination character vector.
-                                reallocate_array(p0, p1, p2, (void*) CHARACTER_ARRAY);
+                                reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_ARRAY);
 
                                 // Set source into destination character vector.
-                                set_array_elements(*d, p1, TRUE_MODEL, TRUE_MODEL_COUNT, (void*) CHARACTER_ARRAY);
+                                set_array_elements(*d, p1, TRUE_MODEL, TRUE_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY);
 
                                 // Increment destination count.
                                 *dc = *dc + *TRUE_MODEL_COUNT;
@@ -176,10 +176,10 @@ void encode_boolean(void* p0, void* p1, void* p2, void* p3, void* p4) {
                                 *ds = *dc + *FALSE_MODEL_COUNT;
 
                                 // Reallocate destination character vector.
-                                reallocate_array(p0, p1, p2, (void*) CHARACTER_ARRAY);
+                                reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_ARRAY);
 
                                 // Set source into destination character vector.
-                                set_array_elements(*d, p1, FALSE_MODEL, FALSE_MODEL_COUNT, (void*) CHARACTER_ARRAY);
+                                set_array_elements(*d, p1, FALSE_MODEL, FALSE_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY);
 
                                 // Increment destination count.
                                 *dc = *dc + *FALSE_MODEL_COUNT;

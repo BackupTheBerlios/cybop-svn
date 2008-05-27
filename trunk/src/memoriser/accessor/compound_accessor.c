@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.46 $ $Date: 2008-05-04 00:18:13 $ $Author: christian $
+ * @version $Revision: 1.47 $ $Date: 2008-05-27 22:52:00 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -165,8 +165,8 @@ void get_compound_element_name_length(void* p0, void* p1, void* p2) {
             // The meta separator index.
             int m = *NUMBER_MINUS_1_INTEGER;
 
-            get_array_elements_index(p0, p1, (void*) COMPOUND_PART_SEPARATOR, (void*) COMPOUND_PART_SEPARATOR_COUNT, (void*) &p, (void*) CHARACTER_ARRAY);
-            get_array_elements_index(p0, p1, (void*) COMPOUND_META_SEPARATOR, (void*) COMPOUND_META_SEPARATOR_COUNT, (void*) &m, (void*) CHARACTER_ARRAY);
+            get_array_elements_index(p0, p1, (void*) COMPOUND_PART_SEPARATOR, (void*) COMPOUND_PART_SEPARATOR_COUNT, (void*) &p, (void*) WIDE_CHARACTER_ARRAY);
+            get_array_elements_index(p0, p1, (void*) COMPOUND_META_SEPARATOR, (void*) COMPOUND_META_SEPARATOR_COUNT, (void*) &m, (void*) WIDE_CHARACTER_ARRAY);
 
             if ((p >= *NUMBER_0_INTEGER) && (m == *NUMBER_MINUS_1_INTEGER)) {
 
@@ -282,9 +282,9 @@ void get_compound_element_name_and_remaining_name(void* p0, void* p1, void* p2, 
                                 int m = *NUMBER_MINUS_1_INTEGER;
 
                                 // Get position of part separator.
-                                get_array_elements_index(p0, p1, (void*) COMPOUND_PART_SEPARATOR, (void*) COMPOUND_PART_SEPARATOR_COUNT, (void*) &p, (void*) CHARACTER_ARRAY);
+                                get_array_elements_index(p0, p1, (void*) COMPOUND_PART_SEPARATOR, (void*) COMPOUND_PART_SEPARATOR_COUNT, (void*) &p, (void*) WIDE_CHARACTER_ARRAY);
                                 // Get position of meta separator.
-                                get_array_elements_index(p0, p1, (void*) COMPOUND_META_SEPARATOR, (void*) COMPOUND_META_SEPARATOR_COUNT, (void*) &m, (void*) CHARACTER_ARRAY);
+                                get_array_elements_index(p0, p1, (void*) COMPOUND_META_SEPARATOR, (void*) COMPOUND_META_SEPARATOR_COUNT, (void*) &m, (void*) WIDE_CHARACTER_ARRAY);
 
                                 // The name without prefix.
                                 void* n = *NULL_POINTER;
@@ -742,7 +742,7 @@ void get_compound_element_index(void* p0, void* p1, void* p2, void* p3, void* p4
 
                             if (*nc1 != *NULL_POINTER) {
 
-                                compare_arrays(p2, p3, (void*) *n1, (void*) *nc1, (void*) &r, (void*) CHARACTER_ARRAY);
+                                compare_arrays(p2, p3, (void*) *n1, (void*) *nc1, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                                 if (r == *NUMBER_1_INTEGER) {
 
@@ -1129,7 +1129,7 @@ void add_compound_element_by_name(void* p0, void* p1, void* p2,
                 int ss = *NUMBER_0_INTEGER;
 
                 // Allocate name suffix.
-                allocate_array((void*) &s, (void*) &ss, (void*) CHARACTER_ARRAY);
+                allocate_array((void*) &s, (void*) &ss, (void*) WIDE_CHARACTER_ARRAY);
 
                 // Use compound count as index to create the element name suffix,
                 // because the element is added at the end of the compound container.
@@ -1144,23 +1144,23 @@ void add_compound_element_by_name(void* p0, void* p1, void* p2,
                     *ns = (*nc * *CHARACTER_VECTOR_REALLOCATION_FACTOR) + *LIST_SEPARATOR_COUNT + sc;
 
                     // Reallocate name character vector.
-                    reallocate_array(p3, p4, p5, (void*) CHARACTER_ARRAY);
+                    reallocate_array(p3, p4, p5, (void*) WIDE_CHARACTER_ARRAY);
                 }
 
                 // The element name already contains the element base name.
 
                 // Add list element separator characters "_$" to element name.
                 // Use name count as index to add the new characters.
-                set_array_elements(*n, p4, (void*) LIST_SEPARATOR, (void*) LIST_SEPARATOR_COUNT, (void*) CHARACTER_ARRAY);
+                set_array_elements(*n, p4, (void*) LIST_SEPARATOR, (void*) LIST_SEPARATOR_COUNT, (void*) WIDE_CHARACTER_ARRAY);
                 *nc = *nc + *LIST_SEPARATOR_COUNT;
 
                 // Set new element name by adding the index determined above.
                 // Use name count as index to add the new characters.
-                set_array_elements(*n, p4, s, (void*) &sc, (void*) CHARACTER_ARRAY);
+                set_array_elements(*n, p4, s, (void*) &sc, (void*) WIDE_CHARACTER_ARRAY);
                 *nc = *nc + sc;
 
                 // Deallocate name suffix.
-                deallocate_array((void*) &s, (void*) &ss, (void*) CHARACTER_ARRAY);
+                deallocate_array((void*) &s, (void*) &ss, (void*) WIDE_CHARACTER_ARRAY);
 
                 // CAUTION! Use compound count as index for adding new elements.
                 // CAUTION! Use DEREFERENCED name, as it was handed over as reference!
@@ -1466,18 +1466,18 @@ void reindex_compound_elements_forming_list(void* p0, void* p1, void* p2, int* p
         int pc = *((int*) p3) + *LIST_SEPARATOR_COUNT;
 
         // Allocate prefix.
-        allocate_array((void*) &p, (void*) &pc, (void*) CHARACTER_ARRAY);
+        allocate_array((void*) &p, (void*) &pc, (void*) WIDE_CHARACTER_ARRAY);
 
         // Set prefix as concatenation of base name and list separator.
-        set_array_elements(p, (void*) NUMBER_0_INTEGER, p2, p3, (void*) CHARACTER_ARRAY);
-        set_array_elements(p, p3, LIST_SEPARATOR, LIST_SEPARATOR_COUNT, (void*) CHARACTER_ARRAY);
+        set_array_elements(p, (void*) NUMBER_0_INTEGER, p2, p3, (void*) WIDE_CHARACTER_ARRAY);
+        set_array_elements(p, p3, LIST_SEPARATOR, LIST_SEPARATOR_COUNT, (void*) WIDE_CHARACTER_ARRAY);
 
         //create integer model for the index
         void* indexstr = *NULL_POINTER;
         int indexstr_count = *NUMBER_0_INTEGER;
         int indexstr_size = *NUMBER_10_INTEGER;
 
-        allocate_array((void*) &indexstr, (void*) &indexstr_size, (void*) CHARACTER_ARRAY);
+        allocate_array((void*) &indexstr, (void*) &indexstr_size, (void*) WIDE_CHARACTER_ARRAY);
 
         // The comparison result.
         int r = *NUMBER_0_INTEGER;
@@ -1498,7 +1498,7 @@ void reindex_compound_elements_forming_list(void* p0, void* p1, void* p2, int* p
                     // Reset comparison result.
                     r = *NUMBER_0_INTEGER;
 
-                    compare_arrays(p, &pc, *n, &pc, &r, CHARACTER_ARRAY);
+                    compare_arrays(p, &pc, *n, &pc, &r, WIDE_CHARACTER_ARRAY);
 
                     if (r == *NUMBER_1_INTEGER) {
 
@@ -1526,9 +1526,9 @@ void reindex_compound_elements_forming_list(void* p0, void* p1, void* p2, int* p
         }
 
         // Deallocate prefix.
-        deallocate_array((void*) &p, (void*) &pc, (void*) CHARACTER_ARRAY);
+        deallocate_array((void*) &p, (void*) &pc, (void*) WIDE_CHARACTER_ARRAY);
         // Deallocate index string.
-        deallocate_array((void*) &indexstr, (void*) &indexstr_count, (void*) CHARACTER_ARRAY);
+        deallocate_array((void*) &indexstr, (void*) &indexstr_count, (void*) WIDE_CHARACTER_ARRAY);
     }
 */
 }
@@ -1621,7 +1621,7 @@ void remove_compound_element_by_name(void* p0, void* p1, void* p2, void* p3, voi
                 // The list element separator.
                 int s = *NUMBER_MINUS_1_INTEGER;
 
-                get_array_elements_index(p6, p7, LIST_SEPARATOR, LIST_SEPARATOR_COUNT, &s, CHARACTER_ARRAY);
+                get_array_elements_index(p6, p7, LIST_SEPARATOR, LIST_SEPARATOR_COUNT, &s, WIDE_CHARACTER_ARRAY);
 
                 remove_compound_element_by_index(p0, p1, p2, (void*) &i);
 
@@ -1673,7 +1673,7 @@ void remove_compound_element_by_name(void* p0, void* p1, void* p2, void* p3, voi
                 // The list element separator.
                 int s = *NUMBER_MINUS_1_INTEGER;
 
-                get_array_elements_index(p6, p7, LIST_SEPARATOR, LIST_SEPARATOR_COUNT, &s, CHARACTER_ARRAY);
+                get_array_elements_index(p6, p7, LIST_SEPARATOR, LIST_SEPARATOR_COUNT, &s, WIDE_CHARACTER_ARRAY);
 
                 remove_compound_element_by_index(p3, p4, p5, (void*) &i);
 
@@ -2126,7 +2126,7 @@ void get_universal_compound_element_by_name(void* p0, void* p1, void* p2, void* 
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(*a, *ac, (void*) ENCAPSULATED_KNOWLEDGE_ABSTRACTION, (void*) ENCAPSULATED_KNOWLEDGE_ABSTRACTION_COUNT, &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(*a, *ac, (void*) ENCAPSULATED_KNOWLEDGE_ABSTRACTION, (void*) ENCAPSULATED_KNOWLEDGE_ABSTRACTION_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
@@ -2161,7 +2161,7 @@ void get_universal_compound_element_by_name(void* p0, void* p1, void* p2, void* 
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(*a, *ac, (void*) KNOWLEDGE_ABSTRACTION, (void*) KNOWLEDGE_ABSTRACTION_COUNT, &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(*a, *ac, (void*) KNOWLEDGE_ABSTRACTION, (void*) KNOWLEDGE_ABSTRACTION_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 

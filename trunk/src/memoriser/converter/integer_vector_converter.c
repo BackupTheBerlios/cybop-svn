@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.30 $ $Date: 2008-05-04 00:18:14 $ $Author: christian $
+ * @version $Revision: 1.31 $ $Date: 2008-05-27 22:52:00 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -97,7 +97,7 @@ void decode_integer_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
                         int ec = *NUMBER_0_INTEGER;
 
                         // Find comma character index.
-                        get_array_elements_index(p3, p4, (void*) COMMA_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &i, (void*) CHARACTER_ARRAY);
+                        get_array_elements_index(p3, p4, (void*) COMMA_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &i, (void*) WIDE_CHARACTER_ARRAY);
 
                         if (i > *NUMBER_0_INTEGER) {
 
@@ -134,7 +134,7 @@ void decode_integer_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
                             //
                             // CAUTION! Add number one as summand at the end to
                             // avoid a zero result, since the initial size is zero!
-                            *ds = (*ds * *INTEGER_VECTOR_REALLOCATION_FACTOR) + *NUMBER_1_INTEGER;
+                            *ds = (*dc * *INTEGER_VECTOR_REALLOCATION_FACTOR) + *NUMBER_1_INTEGER;
 
                             // Reallocate vector.
                             reallocate(p0, p1, p2, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
@@ -158,8 +158,8 @@ void decode_integer_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
                             // Index of first comma: 3
                             // Next vector element starts at index: 4
                             // (which is the comma index plus 1)
-                            e = p3 + (i + *NUMBER_1_INTEGER);
-                            ec = *sc - (i + *NUMBER_1_INTEGER);
+                            e = p3 + (i * *WIDE_CHARACTER_PRIMITIVE_SIZE) + *NUMBER_1_INTEGER;
+                            ec = *sc - (i * *WIDE_CHARACTER_PRIMITIVE_SIZE) + *NUMBER_1_INTEGER;
 
                             // Recursively call this function.
                             decode_integer_vector(p0, p1, p2, e, (void*) &ec);
@@ -249,7 +249,7 @@ void encode_integer_vector_elements(void* p0, void* p1, void* p2, void* p3, void
                                 *ds = (*dc * *INTEGER_VECTOR_REALLOCATION_FACTOR) + *NUMBER_1_INTEGER + cc;
 
                                 // Reallocate destination character array.
-                                reallocate_array(p0, p1, p2, (void*) CHARACTER_ARRAY);
+                                reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_ARRAY);
                             }
 
                             if (*it > *NUMBER_0_INTEGER) {
@@ -259,12 +259,12 @@ void encode_integer_vector_elements(void* p0, void* p1, void* p2, void* p3, void
                                 // in order to separate from already existing elements.
 
                                 // Set comma character.
-                                set_array_elements(*d, p1, (void*) COMMA_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+                                set_array_elements(*d, p1, (void*) COMMA_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
                                 *dc = *dc + *PRIMITIVE_COUNT;
                             }
 
                             // Set integer characters.
-                            set_array_elements(*d, p1, c, (void*) &cc, (void*) CHARACTER_ARRAY);
+                            set_array_elements(*d, p1, c, (void*) &cc, (void*) WIDE_CHARACTER_ARRAY);
                             *dc = *dc + cc;
 
                             // Determine remaining vector elements.

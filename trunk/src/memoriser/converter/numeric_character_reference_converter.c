@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2008-05-04 00:18:14 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2008-05-27 22:52:00 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -75,7 +75,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
 /*??
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -88,7 +88,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 LINE_FEED_NUMERIC_CHARACTER_REFERENCE = LINE_FEED_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -105,7 +105,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 CARRIAGE_RETURN_NUMERIC_CHARACTER_REFERENCE = CARRIAGE_RETURN_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -122,7 +122,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 SPACE_NUMERIC_CHARACTER_REFERENCE = SPACE_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -135,7 +135,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 EXCLAMATION_MARK_NUMERIC_CHARACTER_REFERENCE = EXCLAMATION_MARK_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -148,7 +148,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 QUOTATION_MARK_NUMERIC_CHARACTER_REFERENCE = QUOTATION_MARK_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -161,7 +161,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 NUMBER_SIGN_NUMERIC_CHARACTER_REFERENCE = NUMBER_SIGN_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -174,7 +174,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 DOLLAR_SIGN_NUMERIC_CHARACTER_REFERENCE = DOLLAR_SIGN_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -187,7 +187,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 PERCENT_SIGN_NUMERIC_CHARACTER_REFERENCE = PERCENT_SIGN_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -200,7 +200,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 AMPERSAND_NUMERIC_CHARACTER_REFERENCE = AMPERSAND_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -213,7 +213,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 APOSTROPHE_NUMERIC_CHARACTER_REFERENCE = APOSTROPHE_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -226,7 +226,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 LEFT_PARENTHESIS_NUMERIC_CHARACTER_REFERENCE = LEFT_PARENTHESIS_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -239,7 +239,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 RIGHT_PARENTHESIS_NUMERIC_CHARACTER_REFERENCE = RIGHT_PARENTHESIS_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -252,7 +252,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 ASTERISK_NUMERIC_CHARACTER_REFERENCE = ASTERISK_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -265,7 +265,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 PLUS_SIGN_NUMERIC_CHARACTER_REFERENCE = PLUS_SIGN_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -278,7 +278,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 COMMA_NUMERIC_CHARACTER_REFERENCE = COMMA_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -291,7 +291,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 HYPHEN_NUMERIC_CHARACTER_REFERENCE = HYPHEN_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -304,7 +304,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 PERIOD_NUMERIC_CHARACTER_REFERENCE = PERIOD_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -317,7 +317,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 SOLIDUS_NUMERIC_CHARACTER_REFERENCE = SOLIDUS_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -330,7 +330,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 DIGIT_0_NUMERIC_CHARACTER_REFERENCE = DIGIT_0_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -343,7 +343,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 DIGIT_1_NUMERIC_CHARACTER_REFERENCE = DIGIT_1_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -356,7 +356,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 DIGIT_2_NUMERIC_CHARACTER_REFERENCE = DIGIT_2_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -369,7 +369,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 DIGIT_3_NUMERIC_CHARACTER_REFERENCE = DIGIT_3_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -382,7 +382,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 DIGIT_4_NUMERIC_CHARACTER_REFERENCE = DIGIT_4_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -395,7 +395,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 DIGIT_5_NUMERIC_CHARACTER_REFERENCE = DIGIT_5_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -408,7 +408,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 DIGIT_6_NUMERIC_CHARACTER_REFERENCE = DIGIT_6_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -421,7 +421,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 DIGIT_7_NUMERIC_CHARACTER_REFERENCE = DIGIT_7_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -434,7 +434,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 DIGIT_8_NUMERIC_CHARACTER_REFERENCE = DIGIT_8_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -447,7 +447,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 DIGIT_9_NUMERIC_CHARACTER_REFERENCE = DIGIT_9_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -460,7 +460,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 COLON_NUMERIC_CHARACTER_REFERENCE = COLON_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -473,7 +473,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 SEMICOLON_NUMERIC_CHARACTER_REFERENCE = SEMICOLON_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -486,7 +486,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 LESS_THAN_NUMERIC_CHARACTER_REFERENCE = LESS_THAN_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -499,7 +499,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 EQUALS_SIGN_NUMERIC_CHARACTER_REFERENCE = EQUALS_SIGN_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -512,7 +512,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 GREATER_THAN_NUMERIC_CHARACTER_REFERENCE = GREATER_THAN_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -525,7 +525,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 QUESTION_MARK_NUMERIC_CHARACTER_REFERENCE = QUESTION_MARK_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -538,7 +538,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 COMMERCIAL_AT_NUMERIC_CHARACTER_REFERENCE = COMMERCIAL_AT_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -551,7 +551,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 CAPITAL_LETTER_A_NUMERIC_CHARACTER_REFERENCE = CAPITAL_LETTER_A_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -564,7 +564,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 CAPITAL_LETTER_B_NUMERIC_CHARACTER_REFERENCE = CAPITAL_LETTER_B_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -577,7 +577,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 CAPITAL_LETTER_C_NUMERIC_CHARACTER_REFERENCE = CAPITAL_LETTER_C_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -590,7 +590,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 CAPITAL_LETTER_D_NUMERIC_CHARACTER_REFERENCE = CAPITAL_LETTER_D_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -603,7 +603,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 CAPITAL_LETTER_E_NUMERIC_CHARACTER_REFERENCE = CAPITAL_LETTER_E_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -616,7 +616,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 CAPITAL_LETTER_F_NUMERIC_CHARACTER_REFERENCE = CAPITAL_LETTER_F_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -629,7 +629,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 CAPITAL_LETTER_G_NUMERIC_CHARACTER_REFERENCE = CAPITAL_LETTER_G_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -642,7 +642,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 CAPITAL_LETTER_H_NUMERIC_CHARACTER_REFERENCE = CAPITAL_LETTER_H_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -655,7 +655,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 CAPITAL_LETTER_I_NUMERIC_CHARACTER_REFERENCE = CAPITAL_LETTER_I_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -668,7 +668,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 CAPITAL_LETTER_J_NUMERIC_CHARACTER_REFERENCE = CAPITAL_LETTER_J_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -681,7 +681,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 CAPITAL_LETTER_K_NUMERIC_CHARACTER_REFERENCE = CAPITAL_LETTER_K_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -694,7 +694,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 CAPITAL_LETTER_L_NUMERIC_CHARACTER_REFERENCE = CAPITAL_LETTER_L_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -707,7 +707,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 CAPITAL_LETTER_M_NUMERIC_CHARACTER_REFERENCE = CAPITAL_LETTER_M_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -720,7 +720,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 CAPITAL_LETTER_N_NUMERIC_CHARACTER_REFERENCE = CAPITAL_LETTER_N_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -733,7 +733,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 CAPITAL_LETTER_O_NUMERIC_CHARACTER_REFERENCE = CAPITAL_LETTER_O_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -746,7 +746,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 CAPITAL_LETTER_P_NUMERIC_CHARACTER_REFERENCE = CAPITAL_LETTER_P_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -759,7 +759,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 CAPITAL_LETTER_Q_NUMERIC_CHARACTER_REFERENCE = CAPITAL_LETTER_Q_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -772,7 +772,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 CAPITAL_LETTER_R_NUMERIC_CHARACTER_REFERENCE = CAPITAL_LETTER_R_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -785,7 +785,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 CAPITAL_LETTER_S_NUMERIC_CHARACTER_REFERENCE = CAPITAL_LETTER_S_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -798,7 +798,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 CAPITAL_LETTER_T_NUMERIC_CHARACTER_REFERENCE = CAPITAL_LETTER_T_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -811,7 +811,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 CAPITAL_LETTER_U_NUMERIC_CHARACTER_REFERENCE = CAPITAL_LETTER_U_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -824,7 +824,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 CAPITAL_LETTER_V_NUMERIC_CHARACTER_REFERENCE = CAPITAL_LETTER_V_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -837,7 +837,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 CAPITAL_LETTER_W_NUMERIC_CHARACTER_REFERENCE = CAPITAL_LETTER_W_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -850,7 +850,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 CAPITAL_LETTER_X_NUMERIC_CHARACTER_REFERENCE = CAPITAL_LETTER_X_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -863,7 +863,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 CAPITAL_LETTER_Y_NUMERIC_CHARACTER_REFERENCE = CAPITAL_LETTER_Y_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -876,7 +876,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 CAPITAL_LETTER_Z_NUMERIC_CHARACTER_REFERENCE = CAPITAL_LETTER_Z_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -889,7 +889,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 LEFT_SQUARE_BRACKET_NUMERIC_CHARACTER_REFERENCE = LEFT_SQUARE_BRACKET_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -902,7 +902,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 REVERSE_SOLIDUS_NUMERIC_CHARACTER_REFERENCE = REVERSE_SOLIDUS_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -915,7 +915,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 RIGHT_SQUARE_BRACKET_NUMERIC_CHARACTER_REFERENCE = RIGHT_SQUARE_BRACKET_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -928,7 +928,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 CARET_NUMERIC_CHARACTER_REFERENCE = CARET_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -941,7 +941,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 HORIZONTAL_BAR_NUMERIC_CHARACTER_REFERENCE = HORIZONTAL_BAR_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -954,7 +954,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 GRAVE_ACCENT_NUMERIC_CHARACTER_REFERENCE = GRAVE_ACCENT_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -967,7 +967,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 SMALL_LETTER_A_NUMERIC_CHARACTER_REFERENCE = SMALL_LETTER_A_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -980,7 +980,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 SMALL_LETTER_B_NUMERIC_CHARACTER_REFERENCE = SMALL_LETTER_B_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -993,7 +993,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 SMALL_LETTER_C_NUMERIC_CHARACTER_REFERENCE = SMALL_LETTER_C_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1006,7 +1006,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 SMALL_LETTER_D_NUMERIC_CHARACTER_REFERENCE = SMALL_LETTER_D_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1019,7 +1019,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 SMALL_LETTER_E_NUMERIC_CHARACTER_REFERENCE = SMALL_LETTER_E_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1032,7 +1032,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 SMALL_LETTER_F_NUMERIC_CHARACTER_REFERENCE = SMALL_LETTER_F_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1045,7 +1045,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 SMALL_LETTER_G_NUMERIC_CHARACTER_REFERENCE = SMALL_LETTER_G_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1058,7 +1058,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 SMALL_LETTER_H_NUMERIC_CHARACTER_REFERENCE = SMALL_LETTER_H_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1071,7 +1071,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 SMALL_LETTER_I_NUMERIC_CHARACTER_REFERENCE = SMALL_LETTER_I_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1084,7 +1084,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 SMALL_LETTER_J_NUMERIC_CHARACTER_REFERENCE = SMALL_LETTER_J_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1097,7 +1097,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 SMALL_LETTER_K_NUMERIC_CHARACTER_REFERENCE = SMALL_LETTER_K_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1110,7 +1110,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 SMALL_LETTER_L_NUMERIC_CHARACTER_REFERENCE = SMALL_LETTER_L_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1123,7 +1123,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 SMALL_LETTER_M_NUMERIC_CHARACTER_REFERENCE = SMALL_LETTER_M_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1136,7 +1136,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 SMALL_LETTER_N_NUMERIC_CHARACTER_REFERENCE = SMALL_LETTER_N_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1149,7 +1149,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 SMALL_LETTER_O_NUMERIC_CHARACTER_REFERENCE = SMALL_LETTER_O_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1162,7 +1162,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 SMALL_LETTER_P_NUMERIC_CHARACTER_REFERENCE = SMALL_LETTER_P_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1175,7 +1175,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 SMALL_LETTER_Q_NUMERIC_CHARACTER_REFERENCE = SMALL_LETTER_Q_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1188,7 +1188,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 SMALL_LETTER_R_NUMERIC_CHARACTER_REFERENCE = SMALL_LETTER_R_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1201,7 +1201,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 SMALL_LETTER_S_NUMERIC_CHARACTER_REFERENCE = SMALL_LETTER_S_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1214,7 +1214,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 SMALL_LETTER_T_NUMERIC_CHARACTER_REFERENCE = SMALL_LETTER_T_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1227,7 +1227,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 SMALL_LETTER_U_NUMERIC_CHARACTER_REFERENCE = SMALL_LETTER_U_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1240,7 +1240,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 SMALL_LETTER_V_NUMERIC_CHARACTER_REFERENCE = SMALL_LETTER_V_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1253,7 +1253,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 SMALL_LETTER_W_NUMERIC_CHARACTER_REFERENCE = SMALL_LETTER_W_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1266,7 +1266,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 SMALL_LETTER_X_NUMERIC_CHARACTER_REFERENCE = SMALL_LETTER_X_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1279,7 +1279,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 SMALL_LETTER_Y_NUMERIC_CHARACTER_REFERENCE = SMALL_LETTER_Y_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1292,7 +1292,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 SMALL_LETTER_Z_NUMERIC_CHARACTER_REFERENCE = SMALL_LETTER_Z_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1305,7 +1305,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 LEFT_CURLY_BRACE_NUMERIC_CHARACTER_REFERENCE = LEFT_CURLY_BRACE_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1318,7 +1318,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 VERTICAL_BAR_NUMERIC_CHARACTER_REFERENCE = VERTICAL_BAR_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1331,7 +1331,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 RIGHT_CURLY_BRACE_NUMERIC_CHARACTER_REFERENCE = RIGHT_CURLY_BRACE_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1344,7 +1344,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 TILDE_NUMERIC_CHARACTER_REFERENCE = TILDE_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1361,7 +1361,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 NON_BREAKING_SPACE_NUMERIC_CHARACTER_REFERENCE = NON_BREAKING_SPACE_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1374,7 +1374,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 INVERTED_EXCLAMATION_NUMERIC_CHARACTER_REFERENCE = INVERTED_EXCLAMATION_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1387,7 +1387,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 CENT_SIGN_NUMERIC_CHARACTER_REFERENCE = CENT_SIGN_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1400,7 +1400,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 POUND_STERLING_NUMERIC_CHARACTER_REFERENCE = POUND_STERLING_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1413,7 +1413,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 GENERAL_CURRENCY_NUMERIC_CHARACTER_REFERENCE = GENERAL_CURRENCY_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1426,7 +1426,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 YEN_SIGN_NUMERIC_CHARACTER_REFERENCE = YEN_SIGN_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1439,7 +1439,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 BROKEN_VERTICAL_BAR_NUMERIC_CHARACTER_REFERENCE = BROKEN_VERTICAL_BAR_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1452,7 +1452,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 SECTION_SIGN_NUMERIC_CHARACTER_REFERENCE = SECTION_SIGN_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1465,7 +1465,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 UMLAUT_NUMERIC_CHARACTER_REFERENCE = UMLAUT_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1478,7 +1478,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 COPYRIGHT_NUMERIC_CHARACTER_REFERENCE = COPYRIGHT_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1491,7 +1491,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 FEMININE_ORDINAL_NUMERIC_CHARACTER_REFERENCE = FEMININE_ORDINAL_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1504,7 +1504,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 LEFT_ANGLE_QUOTE_NUMERIC_CHARACTER_REFERENCE = LEFT_ANGLE_QUOTE_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1517,7 +1517,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 NOT_SIGN_NUMERIC_CHARACTER_REFERENCE = NOT_SIGN_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1530,7 +1530,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 SOFT_HYPHEN_NUMERIC_CHARACTER_REFERENCE = SOFT_HYPHEN_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1543,7 +1543,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 REGISTERED_TRADEMARK_NUMERIC_CHARACTER_REFERENCE = REGISTERED_TRADEMARK_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1556,7 +1556,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 MACRON_ACCENT_NUMERIC_CHARACTER_REFERENCE = MACRON_ACCENT_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1569,7 +1569,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 DEGREE_SIGN_NUMERIC_CHARACTER_REFERENCE = DEGREE_SIGN_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1582,7 +1582,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 PLUS_OR_MINUS_NUMERIC_CHARACTER_REFERENCE = PLUS_OR_MINUS_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1595,7 +1595,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 SUPERSCRIPT_TWO_NUMERIC_CHARACTER_REFERENCE = SUPERSCRIPT_TWO_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1608,7 +1608,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 SUPERSCRIPT_THREE_NUMERIC_CHARACTER_REFERENCE = SUPERSCRIPT_THREE_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1621,7 +1621,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 ACUTE_ACCENT_NUMERIC_CHARACTER_REFERENCE = ACUTE_ACCENT_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1634,7 +1634,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 MICRO_SIGN_NUMERIC_CHARACTER_REFERENCE = MICRO_SIGN_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1647,7 +1647,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 PARAGRAPH_SIGN_NUMERIC_CHARACTER_REFERENCE = PARAGRAPH_SIGN_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1660,7 +1660,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 MIDDLE_DOT_NUMERIC_CHARACTER_REFERENCE = MIDDLE_DOT_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1673,7 +1673,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 CEDILLA_NUMERIC_CHARACTER_REFERENCE = CEDILLA_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1686,7 +1686,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 SUPERSCRIPT_ONE_NUMERIC_CHARACTER_REFERENCE = SUPERSCRIPT_ONE_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1699,7 +1699,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 MASCULINE_ORDINAL_NUMERIC_CHARACTER_REFERENCE = MASCULINE_ORDINAL_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1712,7 +1712,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 RIGHT_ANGLE_QUOTE_GUILLEMOTRIGHT_NUMERIC_CHARACTER_REFERENCE = RIGHT_ANGLE_QUOTE_GUILLEMOTRIGHT_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1725,7 +1725,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 FRACTION_ONE_FOURTH_NUMERIC_CHARACTER_REFERENCE = FRACTION_ONE_FOURTH_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1738,7 +1738,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 FRACTION_ONE_HALF_NUMERIC_CHARACTER_REFERENCE = FRACTION_ONE_HALF_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1751,7 +1751,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 FRACTION_THREE_FOURTHS_NUMERIC_CHARACTER_REFERENCE = FRACTION_THREE_FOURTHS_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1764,7 +1764,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 INVERTED_QUESTION_MARK_NUMERIC_CHARACTER_REFERENCE = INVERTED_QUESTION_MARK_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1777,7 +1777,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 CAPITAL_A_GRAVE_ACCENT_NUMERIC_CHARACTER_REFERENCE = CAPITAL_A_GRAVE_ACCENT_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1790,7 +1790,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 CAPITAL_A_ACUTE_ACCENT_NUMERIC_CHARACTER_REFERENCE = CAPITAL_A_ACUTE_ACCENT_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1803,7 +1803,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 CAPITAL_A_CIRCUMFLEX_ACCENT_NUMERIC_CHARACTER_REFERENCE = CAPITAL_A_CIRCUMFLEX_ACCENT_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1816,7 +1816,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 CAPITAL_A_TILDE_NUMERIC_CHARACTER_REFERENCE = CAPITAL_A_TILDE_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1829,7 +1829,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 CAPITAL_A_UMLAUT_MARK_NUMERIC_CHARACTER_REFERENCE = CAPITAL_A_UMLAUT_MARK_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1842,7 +1842,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 CAPITAL_A_RING_NUMERIC_CHARACTER_REFERENCE = CAPITAL_A_RING_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1855,7 +1855,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 CAPITAL_AE_DIPTHONG_NUMERIC_CHARACTER_REFERENCE = CAPITAL_AE_DIPTHONG_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1868,7 +1868,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 CAPITAL_C_CEDILLA_NUMERIC_CHARACTER_REFERENCE = CAPITAL_C_CEDILLA_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1881,7 +1881,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 CAPITAL_E_GRAVE_ACCENT_NUMERIC_CHARACTER_REFERENCE = CAPITAL_E_GRAVE_ACCENT_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1894,7 +1894,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 CAPITAL_E_ACUTE_ACCENT_NUMERIC_CHARACTER_REFERENCE = CAPITAL_E_ACUTE_ACCENT_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1907,7 +1907,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 CAPITAL_E_CIRCUMFLEX_ACCENT_NUMERIC_CHARACTER_REFERENCE = CAPITAL_E_CIRCUMFLEX_ACCENT_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1920,7 +1920,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 CAPITAL_E_UMLAUT_MARK_NUMERIC_CHARACTER_REFERENCE = CAPITAL_E_UMLAUT_MARK_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1933,7 +1933,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 CAPITAL_I_GRAVE_ACCENT_NUMERIC_CHARACTER_REFERENCE = CAPITAL_I_GRAVE_ACCENT_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1946,7 +1946,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 CAPITAL_I_ACUTE_ACCENT_NUMERIC_CHARACTER_REFERENCE = CAPITAL_I_ACUTE_ACCENT_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1959,7 +1959,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 CAPITAL_I_CIRCUMFLEX_ACCENT_NUMERIC_CHARACTER_REFERENCE = CAPITAL_I_CIRCUMFLEX_ACCENT_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1972,7 +1972,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 CAPITAL_I_UMLAUT_MARK_NUMERIC_CHARACTER_REFERENCE = CAPITAL_I_UMLAUT_MARK_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1985,7 +1985,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 CAPITAL_ETH_ICELANDIC_NUMERIC_CHARACTER_REFERENCE = CAPITAL_ETH_ICELANDIC_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -1998,7 +1998,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 CAPITAL_N_TILDE_NUMERIC_CHARACTER_REFERENCE = CAPITAL_N_TILDE_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -2011,7 +2011,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 CAPITAL_O_GRAVE_ACCENT_NUMERIC_CHARACTER_REFERENCE = CAPITAL_O_GRAVE_ACCENT_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -2024,7 +2024,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 CAPITAL_O_ACUTE_ACCENT_NUMERIC_CHARACTER_REFERENCE = CAPITAL_O_ACUTE_ACCENT_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -2037,7 +2037,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 CAPITAL_O_CIRCUMFLEX_ACCENT_NUMERIC_CHARACTER_REFERENCE = CAPITAL_O_CIRCUMFLEX_ACCENT_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -2050,7 +2050,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 CAPITAL_O_TILDE_NUMERIC_CHARACTER_REFERENCE = CAPITAL_O_TILDE_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -2063,7 +2063,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 CAPITAL_O_UMLAUT_MARK_NUMERIC_CHARACTER_REFERENCE = CAPITAL_O_UMLAUT_MARK_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -2076,7 +2076,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 MULTIPLY_SIGN_NUMERIC_CHARACTER_REFERENCE = MULTIPLY_SIGN_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -2089,7 +2089,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 CAPITAL_O_SLASH_NUMERIC_CHARACTER_REFERENCE = CAPITAL_O_SLASH_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -2102,7 +2102,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 CAPITAL_U_GRAVE_ACCENT_NUMERIC_CHARACTER_REFERENCE = CAPITAL_U_GRAVE_ACCENT_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -2115,7 +2115,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 CAPITAL_U_ACUTE_ACCENT_NUMERIC_CHARACTER_REFERENCE = CAPITAL_U_ACUTE_ACCENT_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -2128,7 +2128,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 CAPITAL_U_CIRCUMFLEX_ACCENT_NUMERIC_CHARACTER_REFERENCE = CAPITAL_U_CIRCUMFLEX_ACCENT_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -2141,7 +2141,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 CAPITAL_U_UMLAUT_MARK_NUMERIC_CHARACTER_REFERENCE = CAPITAL_U_UMLAUT_MARK_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -2154,7 +2154,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 CAPITAL_Y_ACUTE_ACCENT_NUMERIC_CHARACTER_REFERENCE = CAPITAL_Y_ACUTE_ACCENT_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -2167,7 +2167,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 CAPITAL_THORN_ICELANDIC_NUMERIC_CHARACTER_REFERENCE = CAPITAL_THORN_ICELANDIC_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -2180,7 +2180,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 SMALL_SHARP_S_GERMAN_NUMERIC_CHARACTER_REFERENCE = SMALL_SHARP_S_GERMAN_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -2193,7 +2193,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 SMALL_A_GRAVE_ACCENT_NUMERIC_CHARACTER_REFERENCE = SMALL_A_GRAVE_ACCENT_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -2206,7 +2206,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 SMALL_A_ACUTE_ACCENT_NUMERIC_CHARACTER_REFERENCE = SMALL_A_ACUTE_ACCENT_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -2219,7 +2219,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 SMALL_A_CIRCUMFLEX_ACCENT_NUMERIC_CHARACTER_REFERENCE = SMALL_A_CIRCUMFLEX_ACCENT_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -2232,7 +2232,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 SMALL_A_TILDE_NUMERIC_CHARACTER_REFERENCE = SMALL_A_TILDE_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -2245,7 +2245,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 SMALL_A_UMLAUT_MARK_NUMERIC_CHARACTER_REFERENCE = SMALL_A_UMLAUT_MARK_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -2258,7 +2258,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 SMALL_A_RING_NUMERIC_CHARACTER_REFERENCE = SMALL_A_RING_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -2271,7 +2271,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 SMALL_AE_DIPTHONG_NUMERIC_CHARACTER_REFERENCE = SMALL_AE_DIPTHONG_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -2284,7 +2284,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 SMALL_C_CEDILLA_NUMERIC_CHARACTER_REFERENCE = SMALL_C_CEDILLA_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -2297,7 +2297,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 SMALL_E_GRAVE_ACCENT_NUMERIC_CHARACTER_REFERENCE = SMALL_E_GRAVE_ACCENT_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -2310,7 +2310,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 SMALL_E_ACUTE_ACCENT_NUMERIC_CHARACTER_REFERENCE = SMALL_E_ACUTE_ACCENT_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -2323,7 +2323,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 SMALL_E_CIRCUMFLEX_ACCENT_NUMERIC_CHARACTER_REFERENCE = SMALL_E_CIRCUMFLEX_ACCENT_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -2336,7 +2336,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 SMALL_E_UMLAUT_MARK_NUMERIC_CHARACTER_REFERENCE = SMALL_E_UMLAUT_MARK_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -2349,7 +2349,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 SMALL_I_GRAVE_ACCENT_NUMERIC_CHARACTER_REFERENCE = SMALL_I_GRAVE_ACCENT_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -2362,7 +2362,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 SMALL_I_ACUTE_ACCENT_NUMERIC_CHARACTER_REFERENCE = SMALL_I_ACUTE_ACCENT_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -2375,7 +2375,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 SMALL_I_CIRCUMFLEX_ACCENT_NUMERIC_CHARACTER_REFERENCE = SMALL_I_CIRCUMFLEX_ACCENT_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -2388,7 +2388,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 SMALL_I_UMLAUT_MARK_NUMERIC_CHARACTER_REFERENCE = SMALL_I_UMLAUT_MARK_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -2401,7 +2401,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 SMALL_ETH_ICELANDIC_NUMERIC_CHARACTER_REFERENCE = SMALL_ETH_ICELANDIC_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -2414,7 +2414,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 SMALL_N_TILDE_NUMERIC_CHARACTER_REFERENCE = SMALL_N_TILDE_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -2427,7 +2427,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 SMALL_O_GRAVE_ACCENT_NUMERIC_CHARACTER_REFERENCE = SMALL_O_GRAVE_ACCENT_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -2440,7 +2440,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 SMALL_O_ACUTE_ACCENT_NUMERIC_CHARACTER_REFERENCE = SMALL_O_ACUTE_ACCENT_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -2453,7 +2453,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 SMALL_O_CIRCUMFLEX_ACCENT_NUMERIC_CHARACTER_REFERENCE = SMALL_O_CIRCUMFLEX_ACCENT_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -2466,7 +2466,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 SMALL_O_TILDE_NUMERIC_CHARACTER_REFERENCE = SMALL_O_TILDE_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -2479,7 +2479,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 SMALL_O_UMLAUT_MARK_NUMERIC_CHARACTER_REFERENCE = SMALL_O_UMLAUT_MARK_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -2492,7 +2492,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 DIVISION_SIGN_NUMERIC_CHARACTER_REFERENCE = DIVISION_SIGN_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -2505,7 +2505,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 SMALL_O_SLASH_NUMERIC_CHARACTER_REFERENCE = SMALL_O_SLASH_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -2518,7 +2518,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 SMALL_U_GRAVE_ACCENT_NUMERIC_CHARACTER_REFERENCE = SMALL_U_GRAVE_ACCENT_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -2531,7 +2531,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 SMALL_U_ACUTE_ACCENT_NUMERIC_CHARACTER_REFERENCE = SMALL_U_ACUTE_ACCENT_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -2544,7 +2544,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 SMALL_U_CIRCUMFLEX_ACCENT_NUMERIC_CHARACTER_REFERENCE = SMALL_U_CIRCUMFLEX_ACCENT_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -2557,7 +2557,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 SMALL_U_UMLAUT_MARK_NUMERIC_CHARACTER_REFERENCE = SMALL_U_UMLAUT_MARK_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -2570,7 +2570,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 SMALL_Y_ACUTE_ACCENT_NUMERIC_CHARACTER_REFERENCE = SMALL_Y_ACUTE_ACCENT_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -2583,7 +2583,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 SMALL_THORN_ICELANDIC_NUMERIC_CHARACTER_REFERENCE = SMALL_THORN_ICELANDIC_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -2596,7 +2596,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                 SMALL_Y_UMLAUT_MARK_NUMERIC_CHARACTER_REFERENCE = SMALL_Y_UMLAUT_MARK_NUMERIC_CHARACTER_REFERENCE_ARRAY;
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE, (void*) HORIZONTAL_TAB_NUMERIC_CHARACTER_REFERENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -2616,14 +2616,14 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                     if ((*dc + tc) > *ds) {
 
                         // Calculate destination size.
-                        *ds = (*CHARACTER_VECTOR_REALLOCATION_FACTOR * (*dc)) + tc;
+                        *ds = (*WIDE_CHARACTER_VECTOR_REALLOCATION_FACTOR * (*dc)) + tc;
 
                         // Reallocate destination.
-                        reallocate(p0, p1, p2, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+                        reallocate(p0, p1, p2, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
                     }
 
                     // Add temporary value to destination.
-                    set_element(*d, p1, (void*) t, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+                    set_element(*d, p1, (void*) t, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
                     // Increase destination count.
                     *dc = *dc + tc;
@@ -2678,7 +2678,7 @@ void encode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
 /*??
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) SPACE_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -2698,14 +2698,14 @@ void encode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                     if ((*dc + tc) > *ds) {
 
                         // Calculate destination size.
-                        *ds = (*CHARACTER_VECTOR_REALLOCATION_FACTOR * (*dc)) + tc;
+                        *ds = (*WIDE_CHARACTER_VECTOR_REALLOCATION_FACTOR * (*dc)) + tc;
 
                         // Reallocate destination.
-                        reallocate(p0, p1, p2, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+                        reallocate(p0, p1, p2, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
                     }
 
                     // Add temporary value to destination.
-                    set_element(*d, p1, (void*) t, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+                    set_element(*d, p1, (void*) t, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
                     // Increase destination count.
                     *dc = *dc + tc;

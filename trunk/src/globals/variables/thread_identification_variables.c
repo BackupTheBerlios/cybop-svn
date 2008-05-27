@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2008-05-16 23:15:39 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2008-05-27 22:52:00 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -37,7 +37,7 @@
 // But then, the compiler shows the following error:
 // "error: initializer element is not constant"
 //
-// Therefore, the variable is only initialised in function "globalise"
+// Therefore, the variables are only initialised in function "globalise"
 // of module "globaliser.c".
 //
 

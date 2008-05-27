@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.16 $ $Date: 2008-05-12 10:58:59 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2008-05-27 22:52:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -153,7 +153,7 @@ void encode_xhtml_attributes(void* p0, void* p1, void* p2, void* p3, void* p4, v
                 (void*) &m, (void*) &mc, (void*) &ms,
                 (void*) &d, (void*) &dc, (void*) &ds);
 
-            compare_arrays(*n, *nc, (void*) WUI_TAG_NAME, (void*) WUI_TAG_NAME_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+            compare_arrays(*n, *nc, (void*) WUI_TAG_NAME, (void*) WUI_TAG_NAME_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
             if (r == *NUMBER_0_INTEGER) {
 
@@ -372,7 +372,7 @@ void encode_xhtml_node(void* p0, void* p1, void* p2, void* p3, void* p4,
 
             if (r == *NUMBER_0_INTEGER) {
 
-                compare_arrays(p3, p4, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                compare_arrays(p3, p4, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                 if (r != *NUMBER_0_INTEGER) {
 
@@ -421,7 +421,7 @@ void encode_xhtml_node(void* p0, void* p1, void* p2, void* p3, void* p4,
 
             if (r == *NUMBER_0_INTEGER) {
 
-                compare_arrays(p3, p4, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                compare_arrays(p3, p4, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                 if (r != *NUMBER_0_INTEGER) {
 

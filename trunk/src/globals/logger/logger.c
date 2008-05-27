@@ -27,7 +27,7 @@
  * Otherwise, an ENDLESS LOOP will be created, because cyboi's
  * array procedures call the logger in turn.
  *
- * @version $Revision: 1.27 $ $Date: 2008-05-20 22:13:43 $ $Author: christian $
+ * @version $Revision: 1.28 $ $Date: 2008-05-27 22:52:00 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -78,8 +78,8 @@
 // Therefore, a log message array with fixed size, pre-allocated at system startup,
 // needs to be forwarded (as global variable) and used by the logger.
 // Whenever a log message is copied to this array and written to console,
-// a MUTEX has to be set BEFORE, so that log output between the main program flow
-// and threads do not conflict.
+// a MUTEX has to be set BEFORE, so that the log output does not conflict
+// between the main program flow and threads.
 //
 
 //

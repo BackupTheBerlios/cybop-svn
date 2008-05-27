@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.13 $ $Date: 2008-05-12 10:58:58 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2008-05-27 22:52:00 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -44,7 +44,7 @@
 /**
  * Reads the gnu/linux console into a character array.
  *
- * @param p0 the destination character array (Hand over as reference!)
+ * @param p0 the destination wide character array (Hand over as reference!)
  * @param p1 the destination count
  * @param p2 the destination size
  * @param p3 the source input stream
@@ -113,7 +113,7 @@ void read_gnu_linux_console(void* p0, void* p1, void* p2, void* p3) {
                 // or if a left square bracket character follows now,
                 // in which case this is the start of an escape control sequence.
 
-                if (c == *LEFT_SQUARE_BRACKET_WIDE_CHARACTER) {
+                if (c == *((wint_t*) LEFT_SQUARE_BRACKET_WIDE_CHARACTER)) {
 
                     // This is the start of an escape control sequence.
 
@@ -135,7 +135,7 @@ void read_gnu_linux_console(void* p0, void* p1, void* p2, void* p3) {
                     f = *NUMBER_1_INTEGER;
                 }
 
-            } else if (c == *ESCAPE_CONTROL_WIDE_CHARACTER) {
+            } else if (c == *((wint_t*) ESCAPE_CONTROL_WIDE_CHARACTER)) {
 
                 // Set escape character flag.
                 esc = *NUMBER_1_INTEGER;

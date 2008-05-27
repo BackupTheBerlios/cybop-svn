@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2008-05-04 00:18:14 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2008-05-27 22:52:00 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -132,37 +132,37 @@ void decode_ddmmyyyy_date_time(void* p0, void* p1, void* p2, void* p3, void* p4)
                         log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Decode ddmmyyyy date time.");
 
                         // The temporary null-terminated day string.
-                        char* tmpd = (char*) *NULL_POINTER;
+                        wchar_t* tmpd = (wchar_t*) *NULL_POINTER;
                         int tmpds = *NUMBER_2_INTEGER + *NUMBER_1_INTEGER;
                         // The temporary null-terminated month string.
-                        char* tmpm = (char*) *NULL_POINTER;
+                        wchar_t* tmpm = (wchar_t*) *NULL_POINTER;
                         int tmpms = *NUMBER_2_INTEGER + *NUMBER_1_INTEGER;
                         // The temporary null-terminated year string.
-                        char* tmpy = (char*) *NULL_POINTER;
+                        wchar_t* tmpy = (wchar_t*) *NULL_POINTER;
                         int tmpys = *NUMBER_4_INTEGER + *NUMBER_1_INTEGER;
 
                         // Create temporary null-terminated day string.
-                        allocate_array((void*) &tmpd, (void*) &tmpds, (void*) CHARACTER_ARRAY);
+                        allocate_array((void*) &tmpd, (void*) &tmpds, (void*) WIDE_CHARACTER_ARRAY);
                         // Create temporary null-terminated month string.
-                        allocate_array((void*) &tmpm, (void*) &tmpms, (void*) CHARACTER_ARRAY);
+                        allocate_array((void*) &tmpm, (void*) &tmpms, (void*) WIDE_CHARACTER_ARRAY);
                         // Create temporary null-terminated year string.
-                        allocate_array((void*) &tmpy, (void*) &tmpys, (void*) CHARACTER_ARRAY);
+                        allocate_array((void*) &tmpy, (void*) &tmpys, (void*) WIDE_CHARACTER_ARRAY);
 
                         // The index.
                         int i = *NUMBER_0_INTEGER;
                         // The source day index.
-                        void* sdi = p3 + *NUMBER_0_INTEGER;
+                        void* sdi = p3 + (*NUMBER_0_INTEGER * *WIDE_CHARACTER_PRIMITIVE_SIZE);
                         // The source month index.
-                        void* smi = p3 + *NUMBER_2_INTEGER;
+                        void* smi = p3 + (*NUMBER_2_INTEGER * *WIDE_CHARACTER_PRIMITIVE_SIZE);
                         // The source year index.
-                        void* syi = p3 + *NUMBER_4_INTEGER;
+                        void* syi = p3 + (*NUMBER_4_INTEGER * *WIDE_CHARACTER_PRIMITIVE_SIZE);
 
                         // Copy original string to temporary null-terminated day string.
-                        set_array_elements((void*) tmpd, (void*) &i, sdi, (void*) NUMBER_2_INTEGER, (void*) CHARACTER_ARRAY);
+                        set_array_elements((void*) tmpd, (void*) &i, sdi, (void*) NUMBER_2_INTEGER, (void*) WIDE_CHARACTER_ARRAY);
                         // Copy original string to temporary null-terminated month string.
-                        set_array_elements((void*) tmpm, (void*) &i, smi, (void*) NUMBER_2_INTEGER, (void*) CHARACTER_ARRAY);
+                        set_array_elements((void*) tmpm, (void*) &i, smi, (void*) NUMBER_2_INTEGER, (void*) WIDE_CHARACTER_ARRAY);
                         // Copy original string to temporary null-terminated year string.
-                        set_array_elements((void*) tmpy, (void*) &i, syi, (void*) NUMBER_4_INTEGER, (void*) CHARACTER_ARRAY);
+                        set_array_elements((void*) tmpy, (void*) &i, syi, (void*) NUMBER_4_INTEGER, (void*) WIDE_CHARACTER_ARRAY);
 
                         // The day termination character index.
                         int dti = *NUMBER_2_INTEGER;
@@ -172,18 +172,18 @@ void decode_ddmmyyyy_date_time(void* p0, void* p1, void* p2, void* p3, void* p4)
                         int yti = *NUMBER_4_INTEGER;
 
                         // Add string termination to temporary null-terminated day string.
-                        set_array_elements((void*) tmpd, (void*) &dti, (void*) NULL_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+                        set_array_elements((void*) tmpd, (void*) &dti, (void*) NULL_CONTROL_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
                         // Add string termination to temporary null-terminated month string.
-                        set_array_elements((void*) tmpm, (void*) &mti, (void*) NULL_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+                        set_array_elements((void*) tmpm, (void*) &mti, (void*) NULL_CONTROL_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
                         // Add string termination to temporary null-terminated year string.
-                        set_array_elements((void*) tmpy, (void*) &yti, (void*) NULL_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+                        set_array_elements((void*) tmpy, (void*) &yti, (void*) NULL_CONTROL_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
 
                         // The tail variable is useless here and only needed for the string
                         // transformation function. If the whole string array consists of
                         // many sub strings, separated by space characters, then each sub
                         // string gets interpreted as integer number.
                         // The tail variable in this case points to the remaining sub string.
-                        char* tail = (char*) *NULL_POINTER;
+                        wchar_t* tail = (wchar_t*) *NULL_POINTER;
 
                         // Transform string to day integer value.
                         // The third parameter is the number base:
@@ -191,21 +191,21 @@ void decode_ddmmyyyy_date_time(void* p0, void* p1, void* p2, void* p3, void* p4)
                         // 8 - octal
                         // 10 - decimal
                         // 16 - hexadecimal
-                        int dv = strtol(tmpd, &tail, *NUMBER_10_INTEGER);
+                        int dv = wcstol(tmpd, &tail, *NUMBER_10_INTEGER);
                         // Transform string to month integer value.
                         // The third parameter is the number base:
                         // 0 - tries to automatically identify the correct number base
                         // 8 - octal
                         // 10 - decimal
                         // 16 - hexadecimal
-                        int mv = strtol(tmpm, &tail, *NUMBER_10_INTEGER);
+                        int mv = wcstol(tmpm, &tail, *NUMBER_10_INTEGER);
                         // Transform string to year integer value.
                         // The third parameter is the number base:
                         // 0 - tries to automatically identify the correct number base
                         // 8 - octal
                         // 10 - decimal
                         // 16 - hexadecimal
-                        int yv = strtol(tmpy, &tail, *NUMBER_10_INTEGER);
+                        int yv = wcstol(tmpy, &tail, *NUMBER_10_INTEGER);
 
                         // Check date time size.
                         if (*dc >= *ds) {
@@ -229,11 +229,11 @@ void decode_ddmmyyyy_date_time(void* p0, void* p1, void* p2, void* p3, void* p4)
                         (*dc)++;
 
                         // Destroy temporary null-terminated day string.
-                        deallocate_array((void*) &tmpd, (void*) &tmpds, (void*) CHARACTER_ARRAY);
+                        deallocate_array((void*) &tmpd, (void*) &tmpds, (void*) WIDE_CHARACTER_ARRAY);
                         // Destroy temporary null-terminated month string.
-                        deallocate_array((void*) &tmpm, (void*) &tmpms, (void*) CHARACTER_ARRAY);
+                        deallocate_array((void*) &tmpm, (void*) &tmpms, (void*) WIDE_CHARACTER_ARRAY);
                         // Destroy temporary null-terminated year string.
-                        deallocate_array((void*) &tmpy, (void*) &tmpys, (void*) CHARACTER_ARRAY);
+                        deallocate_array((void*) &tmpy, (void*) &tmpys, (void*) WIDE_CHARACTER_ARRAY);
 
                     } else {
 

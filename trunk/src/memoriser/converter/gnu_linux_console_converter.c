@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.14 $ $Date: 2008-05-04 00:18:14 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2008-05-27 22:52:00 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -365,8 +365,8 @@ void encode_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, 
                                     allocate((void*) &y, (void*) &ys, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
                                     allocate((void*) &x, (void*) &xs, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
-                                    encode_integer_wide((void*) &y, (void*) &yc, (void*) &ys, (void*) &cy, (void*) PRIMITIVE_COUNT);
-                                    encode_integer_wide((void*) &x, (void*) &xc, (void*) &xs, (void*) &cx, (void*) PRIMITIVE_COUNT);
+                                    encode_integer((void*) &y, (void*) &yc, (void*) &ys, (void*) &cy, (void*) PRIMITIVE_COUNT);
+                                    encode_integer((void*) &x, (void*) &xc, (void*) &xs, (void*) &cx, (void*) PRIMITIVE_COUNT);
 
                                     if ((*dc + *ESCAPE_CONTROL_SEQUENCE_COUNT
                                         + yc + *PRIMITIVE_COUNT
@@ -422,9 +422,9 @@ void encode_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, 
                                     //
 
                                     // Encode background colour integer into character array.
-        //??                            encode_integer_wide((void*) &b, (void*) &bc, (void*) &bs, p6, (void*) PRIMITIVE_COUNT);
+        //??                            encode_integer((void*) &b, (void*) &bc, (void*) &bs, p6, (void*) PRIMITIVE_COUNT);
                                     // Encode foreground colour integer into character array.
-        //??                            encode_integer_wide((void*) &f, (void*) &fc, (void*) &fs, p7, (void*) PRIMITIVE_COUNT);
+        //??                            encode_integer((void*) &f, (void*) &fc, (void*) &fs, p7, (void*) PRIMITIVE_COUNT);
 
                                     if ((*dc
                                         + *ESCAPE_CONTROL_SEQUENCE_COUNT + *bc + *ATTRIBUTE_SUFFIX_CONTROL_SEQUENCE_COUNT

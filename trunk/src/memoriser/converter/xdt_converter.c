@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.25 $ $Date: 2008-05-12 10:58:58 $ $Author: christian $
+ * @version $Revision: 1.26 $ $Date: 2008-05-27 22:52:00 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -28,6 +28,7 @@
 #define XDT_CONVERTER_SOURCE
 
 #include "../../globals/constants/character/character_constants.c"
+#include "../../globals/constants/character/wide_character_constants.c"
 #include "../../globals/constants/integer/integer_constants.c"
 #include "../../globals/constants/log/log_message_constants.c"
 #include "../../globals/constants/memory_structure/memory_abstraction_constants.c"
@@ -165,29 +166,29 @@ void decode_xdt_field(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
                             // The remaining bytes in the source byte array.
                             // They are used to check that the array border is not crossed.
-                            int rem = *sc;
+                            int rem = (*sc * *WIDE_CHARACTER_PRIMITIVE_SIZE);
 
-                            if (rem >= *XDT_FIELD_SIZE_COUNT) {
+                            if (rem >= (*XDT_FIELD_SIZE_COUNT * *WIDE_CHARACTER_PRIMITIVE_SIZE)) {
 
                                 // Decode xdt field size.
                                 decode_integer(p0, *NULL_POINTER, *NULL_POINTER, *s, (void*) XDT_FIELD_SIZE_COUNT);
 
                                 // Increment source xdt byte array index.
-                                *s = *s + *XDT_FIELD_SIZE_COUNT;
-                                rem = rem - *XDT_FIELD_SIZE_COUNT;
+                                *s = *s + (*XDT_FIELD_SIZE_COUNT * *WIDE_CHARACTER_PRIMITIVE_SIZE);
+                                rem = rem - (*XDT_FIELD_SIZE_COUNT * *WIDE_CHARACTER_PRIMITIVE_SIZE);
                             }
 
-                            if (rem >= *XDT_FIELD_IDENTIFICATION_COUNT) {
+                            if (rem >= (*XDT_FIELD_IDENTIFICATION_COUNT * *WIDE_CHARACTER_PRIMITIVE_SIZE)) {
 
                                 // Decode xdt field identification.
                                 decode_integer(p1, *NULL_POINTER, *NULL_POINTER, *s, (void*) XDT_FIELD_IDENTIFICATION_COUNT);
 
                                 // Increment source xdt byte array index.
-                                *s = *s + *XDT_FIELD_IDENTIFICATION_COUNT;
-                                rem = rem - *XDT_FIELD_IDENTIFICATION_COUNT;
+                                *s = *s + (*XDT_FIELD_IDENTIFICATION_COUNT * *WIDE_CHARACTER_PRIMITIVE_SIZE);
+                                rem = rem - (*XDT_FIELD_IDENTIFICATION_COUNT * *WIDE_CHARACTER_PRIMITIVE_SIZE);
                             }
 
-                            if (*fs >= (*XDT_FIELD_SIZE_COUNT + *XDT_FIELD_IDENTIFICATION_COUNT + *PRIMITIVE_COUNT + *PRIMITIVE_COUNT)) {
+                            if (*fs >= ((*XDT_FIELD_SIZE_COUNT + *XDT_FIELD_IDENTIFICATION_COUNT + *PRIMITIVE_COUNT + *PRIMITIVE_COUNT) * *WIDE_CHARACTER_PRIMITIVE_SIZE)) {
 
                                 // Calculate xdt field content count.
                                 //
@@ -200,7 +201,7 @@ void decode_xdt_field(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
                                 //
                                 // It therefore has to be decremented here, so that
                                 // only the actual xdt field content count remains.
-                                *fcc = *fs - *XDT_FIELD_SIZE_COUNT - *XDT_FIELD_IDENTIFICATION_COUNT - *PRIMITIVE_COUNT - *PRIMITIVE_COUNT;
+                                *fcc = *fs - ((*XDT_FIELD_SIZE_COUNT + *XDT_FIELD_IDENTIFICATION_COUNT + *PRIMITIVE_COUNT + *PRIMITIVE_COUNT) * *WIDE_CHARACTER_PRIMITIVE_SIZE);
 
                                 if (rem >= *fcc) {
 
@@ -219,19 +220,19 @@ void decode_xdt_field(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
                                 *fcc = *NUMBER_0_INTEGER;
                             }
 
-                            if (rem >= (*PRIMITIVE_COUNT + *PRIMITIVE_COUNT)) {
+                            if (rem >= ((*PRIMITIVE_COUNT + *PRIMITIVE_COUNT) * *WIDE_CHARACTER_PRIMITIVE_SIZE)) {
 
                                 // Verify if field end is reached (carriage return and line feed).
 
-                                if (*((char*) *s) == *CARRIAGE_RETURN_CONTROL_CHARACTER) {
+                                if (*((wchar_t*) *s) == *CARRIAGE_RETURN_CONTROL_WIDE_CHARACTER) {
 
                                     // Increment source xdt byte array index.
-                                    *s = *s + *PRIMITIVE_COUNT;
+                                    *s = *s + (*PRIMITIVE_COUNT * *WIDE_CHARACTER_PRIMITIVE_SIZE);
 
-                                    if (*((char*) *s) == *LINE_FEED_CONTROL_CHARACTER) {
+                                    if (*((wchar_t*) *s) == *LINE_FEED_CONTROL_WIDE_CHARACTER) {
 
                                         // Increment source xdt byte array index.
-                                        *s = *s + *PRIMITIVE_COUNT;
+                                        *s = *s + (*PRIMITIVE_COUNT * *WIDE_CHARACTER_PRIMITIVE_SIZE);
 
                                         // Set verification flag indicating that
                                         // the xdt field was decoded correctly.
@@ -286,7 +287,7 @@ void decode_xdt_next_field(void* p0, void* p1, void* p2) {
 
         if (p1 != *NULL_POINTER) {
 
-            char* a = (char*) p1;
+            wchar_t* a = (wchar_t*) p1;
 
             if (p0 != *NULL_POINTER) {
 
@@ -310,15 +311,15 @@ void decode_xdt_next_field(void* p0, void* p1, void* p2) {
                         break;
                     }
 
-                    if ((j + *PRIMITIVE_COUNT + *PRIMITIVE_COUNT) <= *ac) {
+                    if ((j + (*PRIMITIVE_COUNT + *PRIMITIVE_COUNT)) <= *ac) {
 
-                        if (*(a + j) == *CARRIAGE_RETURN_CONTROL_CHARACTER) {
+                        if (*(a + (j * *WIDE_CHARACTER_PRIMITIVE_SIZE)) == *CARRIAGE_RETURN_CONTROL_WIDE_CHARACTER) {
 
-                            if (*(a + j + *PRIMITIVE_COUNT) == *LINE_FEED_CONTROL_CHARACTER) {
+                            if (*(a + (j * *WIDE_CHARACTER_PRIMITIVE_SIZE) + *PRIMITIVE_COUNT) == *LINE_FEED_CONTROL_WIDE_CHARACTER) {
 
                                 // Set next field count to the first character following
                                 // the carriage return plus line feed characters.
-                                *nc = j + *PRIMITIVE_COUNT + *PRIMITIVE_COUNT;
+                                *nc = j + (*PRIMITIVE_COUNT + *PRIMITIVE_COUNT);
 
                                 // Set loop variable to full array count ac, as the next
                                 // field has been found, so that the loop can be left.
@@ -385,7 +386,7 @@ void decode_xdt_record(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
                         *rs = *NUMBER_0_INTEGER;
                         // The remaining bytes in the source byte array.
                         // They are used to check that the array border is not crossed.
-                        int rem = *sc;
+                        int rem = (*sc * *WIDE_CHARACTER_PRIMITIVE_SIZE);
                         // The field size.
                         int fs = *NUMBER_0_INTEGER;
                         // The field identification.
@@ -397,7 +398,7 @@ void decode_xdt_record(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
                         int v = *NUMBER_0_INTEGER;
                         // The next field count.
                         int nc = *NUMBER_0_INTEGER;
-                        // The decode/parse mode:
+                        // The decode/ parse mode:
                         // 0 - looking for the begin of a record
                         // 1 - within a record, looking for the begin of the next
                         //     record, which demarcates the end of this record
@@ -851,7 +852,7 @@ void decode_xdt_decode_model(void* p0, void* p1, void* p2, void* p3, void* p4, v
                                     **nc = *NUMBER_0_INTEGER;
                                     allocate(p2, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
                                     **ns = *NUMBER_0_INTEGER;
-                                    allocate(p0, (void*) *ns, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+                                    allocate(p0, (void*) *ns, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
                                     // A knowledge model channel is not received (allocated),
                                     // since that is only needed temporarily for model loading.
@@ -861,7 +862,7 @@ void decode_xdt_decode_model(void* p0, void* p1, void* p2, void* p3, void* p4, v
                                     **ac = *NUMBER_0_INTEGER;
                                     allocate(p5, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
                                     **as = *NUMBER_0_INTEGER;
-                                    allocate(p3, (void*) *as, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+                                    allocate(p3, (void*) *as, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
                                     // Allocate knowledge model model.
                                     allocate(p7, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
@@ -978,7 +979,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) RESPONSIBLE_ENTITY_XDT_FIELD_NAME, (void*) RESPONSIBLE_ENTITY_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *SOFTWARE_XDT_FIELD) {
@@ -986,7 +987,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) SOFTWARE_XDT_FIELD_NAME, (void*) SOFTWARE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *HARDWARE_XDT_FIELD) {
@@ -994,7 +995,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) HARDWARE_XDT_FIELD_NAME, (void*) HARDWARE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *SOFTWARE_RELEASE_XDT_FIELD) {
@@ -1002,7 +1003,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) SOFTWARE_RELEASE_XDT_FIELD_NAME, (void*) SOFTWARE_RELEASE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *PHYSICIAN_IDENTIFICATION_XDT_FIELD) {
@@ -1026,7 +1027,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) PHYSICIAN_NAME_XDT_FIELD_NAME, (void*) PHYSICIAN_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *PHYSICIAN_CATEGORY_XDT_FIELD) {
@@ -1034,7 +1035,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) PHYSICIAN_CATEGORY_XDT_FIELD_NAME, (void*) PHYSICIAN_CATEGORY_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *PHYSICIAN_STREET_XDT_FIELD) {
@@ -1042,7 +1043,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) PHYSICIAN_STREET_XDT_FIELD_NAME, (void*) PHYSICIAN_STREET_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *PHYSICIAN_POSTCODE_AND_PLACE_XDT_FIELD) {
@@ -1050,7 +1051,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) PHYSICIAN_POSTCODE_AND_PLACE_XDT_FIELD_NAME, (void*) PHYSICIAN_POSTCODE_AND_PLACE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *PHYSICIAN_WITH_SERVICE_INDICATOR_XDT_FIELD) {
@@ -1058,7 +1059,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) PHYSICIAN_WITH_SERVICE_INDICATOR_XDT_FIELD_NAME, (void*) PHYSICIAN_WITH_SERVICE_INDICATOR_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *PHYSICIAN_PHONE_XDT_FIELD) {
@@ -1066,7 +1067,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) PHYSICIAN_PHONE_XDT_FIELD_NAME, (void*) PHYSICIAN_PHONE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *PHYSICIAN_FAX_XDT_FIELD) {
@@ -1074,7 +1075,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) PHYSICIAN_FAX_XDT_FIELD_NAME, (void*) PHYSICIAN_FAX_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *PHYSICIAN_MODEM_XDT_FIELD) {
@@ -1082,7 +1083,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) PHYSICIAN_MODEM_XDT_FIELD_NAME, (void*) PHYSICIAN_MODEM_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *PHYSICIAN_NUMBER_WITHIN_PRACTICE_XDT_FIELD) {
@@ -1098,7 +1099,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_0010_CATEGORY_1_NAME_XDT_FIELD_NAME, (void*) FREE_RECORD_0010_CATEGORY_1_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_0010_CATEGORY_1_VALUE_XDT_FIELD) {
@@ -1106,7 +1107,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_0010_CATEGORY_1_VALUE_XDT_FIELD_NAME, (void*) FREE_RECORD_0010_CATEGORY_1_VALUE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_0010_CATEGORY_2_NAME_XDT_FIELD) {
@@ -1114,7 +1115,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_0010_CATEGORY_2_NAME_XDT_FIELD_NAME, (void*) FREE_RECORD_0010_CATEGORY_2_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_0010_CATEGORY_2_VALUE_XDT_FIELD) {
@@ -1122,7 +1123,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_0010_CATEGORY_2_VALUE_XDT_FIELD_NAME, (void*) FREE_RECORD_0010_CATEGORY_2_VALUE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_0010_CATEGORY_3_NAME_XDT_FIELD) {
@@ -1130,7 +1131,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_0010_CATEGORY_3_NAME_XDT_FIELD_NAME, (void*) FREE_RECORD_0010_CATEGORY_3_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_0010_CATEGORY_3_VALUE_XDT_FIELD) {
@@ -1138,7 +1139,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_0010_CATEGORY_3_VALUE_XDT_FIELD_NAME, (void*) FREE_RECORD_0010_CATEGORY_3_VALUE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_0010_CATEGORY_4_NAME_XDT_FIELD) {
@@ -1146,7 +1147,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_0010_CATEGORY_4_NAME_XDT_FIELD_NAME, (void*) FREE_RECORD_0010_CATEGORY_4_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_0010_CATEGORY_4_VALUE_XDT_FIELD) {
@@ -1154,7 +1155,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_0010_CATEGORY_4_VALUE_XDT_FIELD_NAME, (void*) FREE_RECORD_0010_CATEGORY_4_VALUE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_0010_CATEGORY_5_NAME_XDT_FIELD) {
@@ -1162,7 +1163,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_0010_CATEGORY_5_NAME_XDT_FIELD_NAME, (void*) FREE_RECORD_0010_CATEGORY_5_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_0010_CATEGORY_5_VALUE_XDT_FIELD) {
@@ -1170,7 +1171,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_0010_CATEGORY_5_VALUE_XDT_FIELD_NAME, (void*) FREE_RECORD_0010_CATEGORY_5_VALUE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_0010_CATEGORY_6_NAME_XDT_FIELD) {
@@ -1178,7 +1179,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_0010_CATEGORY_6_NAME_XDT_FIELD_NAME, (void*) FREE_RECORD_0010_CATEGORY_6_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_0010_CATEGORY_6_VALUE_XDT_FIELD) {
@@ -1186,7 +1187,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_0010_CATEGORY_6_VALUE_XDT_FIELD_NAME, (void*) FREE_RECORD_0010_CATEGORY_6_VALUE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_0010_CATEGORY_7_NAME_XDT_FIELD) {
@@ -1194,7 +1195,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_0010_CATEGORY_7_NAME_XDT_FIELD_NAME, (void*) FREE_RECORD_0010_CATEGORY_7_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_0010_CATEGORY_7_VALUE_XDT_FIELD) {
@@ -1202,7 +1203,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_0010_CATEGORY_7_VALUE_XDT_FIELD_NAME, (void*) FREE_RECORD_0010_CATEGORY_7_VALUE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_0010_CATEGORY_8_NAME_XDT_FIELD) {
@@ -1210,7 +1211,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_0010_CATEGORY_8_NAME_XDT_FIELD_NAME, (void*) FREE_RECORD_0010_CATEGORY_8_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_0010_CATEGORY_8_VALUE_XDT_FIELD) {
@@ -1218,7 +1219,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_0010_CATEGORY_8_VALUE_XDT_FIELD_NAME, (void*) FREE_RECORD_0010_CATEGORY_8_VALUE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_0010_CATEGORY_9_NAME_XDT_FIELD) {
@@ -1226,7 +1227,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_0010_CATEGORY_9_NAME_XDT_FIELD_NAME, (void*) FREE_RECORD_0010_CATEGORY_9_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_0010_CATEGORY_9_VALUE_XDT_FIELD) {
@@ -1234,7 +1235,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_0010_CATEGORY_9_VALUE_XDT_FIELD_NAME, (void*) FREE_RECORD_0010_CATEGORY_9_VALUE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_0010_CATEGORY_10_NAME_XDT_FIELD) {
@@ -1242,7 +1243,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_0010_CATEGORY_10_NAME_XDT_FIELD_NAME, (void*) FREE_RECORD_0010_CATEGORY_10_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_0010_CATEGORY_10_VALUE_XDT_FIELD) {
@@ -1250,7 +1251,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_0010_CATEGORY_10_VALUE_XDT_FIELD_NAME, (void*) FREE_RECORD_0010_CATEGORY_10_VALUE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_0010_CATEGORY_11_NAME_XDT_FIELD) {
@@ -1258,7 +1259,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_0010_CATEGORY_11_NAME_XDT_FIELD_NAME, (void*) FREE_RECORD_0010_CATEGORY_11_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_0010_CATEGORY_11_VALUE_XDT_FIELD) {
@@ -1266,7 +1267,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_0010_CATEGORY_11_VALUE_XDT_FIELD_NAME, (void*) FREE_RECORD_0010_CATEGORY_11_VALUE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_0010_CATEGORY_12_NAME_XDT_FIELD) {
@@ -1274,7 +1275,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_0010_CATEGORY_12_NAME_XDT_FIELD_NAME, (void*) FREE_RECORD_0010_CATEGORY_12_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_0010_CATEGORY_12_VALUE_XDT_FIELD) {
@@ -1282,7 +1283,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_0010_CATEGORY_12_VALUE_XDT_FIELD_NAME, (void*) FREE_RECORD_0010_CATEGORY_12_VALUE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_0010_CATEGORY_13_NAME_XDT_FIELD) {
@@ -1290,7 +1291,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_0010_CATEGORY_13_NAME_XDT_FIELD_NAME, (void*) FREE_RECORD_0010_CATEGORY_13_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_0010_CATEGORY_13_VALUE_XDT_FIELD) {
@@ -1298,7 +1299,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_0010_CATEGORY_13_VALUE_XDT_FIELD_NAME, (void*) FREE_RECORD_0010_CATEGORY_13_VALUE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_0010_CATEGORY_14_NAME_XDT_FIELD) {
@@ -1306,7 +1307,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_0010_CATEGORY_14_NAME_XDT_FIELD_NAME, (void*) FREE_RECORD_0010_CATEGORY_14_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_0010_CATEGORY_14_VALUE_XDT_FIELD) {
@@ -1314,7 +1315,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_0010_CATEGORY_14_VALUE_XDT_FIELD_NAME, (void*) FREE_RECORD_0010_CATEGORY_14_VALUE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_0010_CATEGORY_15_NAME_XDT_FIELD) {
@@ -1322,7 +1323,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_0010_CATEGORY_15_NAME_XDT_FIELD_NAME, (void*) FREE_RECORD_0010_CATEGORY_15_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_0010_CATEGORY_15_VALUE_XDT_FIELD) {
@@ -1330,7 +1331,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_0010_CATEGORY_15_VALUE_XDT_FIELD_NAME, (void*) FREE_RECORD_0010_CATEGORY_15_VALUE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_0010_CATEGORY_16_NAME_XDT_FIELD) {
@@ -1338,7 +1339,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_0010_CATEGORY_16_NAME_XDT_FIELD_NAME, (void*) FREE_RECORD_0010_CATEGORY_16_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_0010_CATEGORY_16_VALUE_XDT_FIELD) {
@@ -1346,7 +1347,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_0010_CATEGORY_16_VALUE_XDT_FIELD_NAME, (void*) FREE_RECORD_0010_CATEGORY_16_VALUE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_0010_CATEGORY_17_NAME_XDT_FIELD) {
@@ -1354,7 +1355,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_0010_CATEGORY_17_NAME_XDT_FIELD_NAME, (void*) FREE_RECORD_0010_CATEGORY_17_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_0010_CATEGORY_17_VALUE_XDT_FIELD) {
@@ -1362,7 +1363,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_0010_CATEGORY_17_VALUE_XDT_FIELD_NAME, (void*) FREE_RECORD_0010_CATEGORY_17_VALUE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_0010_CATEGORY_18_NAME_XDT_FIELD) {
@@ -1370,7 +1371,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_0010_CATEGORY_18_NAME_XDT_FIELD_NAME, (void*) FREE_RECORD_0010_CATEGORY_18_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_0010_CATEGORY_18_VALUE_XDT_FIELD) {
@@ -1378,7 +1379,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_0010_CATEGORY_18_VALUE_XDT_FIELD_NAME, (void*) FREE_RECORD_0010_CATEGORY_18_VALUE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_0010_CATEGORY_19_NAME_XDT_FIELD) {
@@ -1386,7 +1387,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_0010_CATEGORY_19_NAME_XDT_FIELD_NAME, (void*) FREE_RECORD_0010_CATEGORY_19_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_0010_CATEGORY_19_VALUE_XDT_FIELD) {
@@ -1394,7 +1395,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_0010_CATEGORY_19_VALUE_XDT_FIELD_NAME, (void*) FREE_RECORD_0010_CATEGORY_19_VALUE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_0010_CATEGORY_20_NAME_XDT_FIELD) {
@@ -1402,7 +1403,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_0010_CATEGORY_20_NAME_XDT_FIELD_NAME, (void*) FREE_RECORD_0010_CATEGORY_20_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_0010_CATEGORY_20_VALUE_XDT_FIELD) {
@@ -1410,7 +1411,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_0010_CATEGORY_20_VALUE_XDT_FIELD_NAME, (void*) FREE_RECORD_0010_CATEGORY_20_VALUE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_0010_CATEGORY_21_NAME_XDT_FIELD) {
@@ -1418,7 +1419,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_0010_CATEGORY_21_NAME_XDT_FIELD_NAME, (void*) FREE_RECORD_0010_CATEGORY_21_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_0010_CATEGORY_21_VALUE_XDT_FIELD) {
@@ -1426,7 +1427,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_0010_CATEGORY_21_VALUE_XDT_FIELD_NAME, (void*) FREE_RECORD_0010_CATEGORY_21_VALUE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_0010_CATEGORY_22_NAME_XDT_FIELD) {
@@ -1434,7 +1435,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_0010_CATEGORY_22_NAME_XDT_FIELD_NAME, (void*) FREE_RECORD_0010_CATEGORY_22_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_0010_CATEGORY_22_VALUE_XDT_FIELD) {
@@ -1442,7 +1443,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_0010_CATEGORY_22_VALUE_XDT_FIELD_NAME, (void*) FREE_RECORD_0010_CATEGORY_22_VALUE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_0010_CATEGORY_23_NAME_XDT_FIELD) {
@@ -1450,7 +1451,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_0010_CATEGORY_23_NAME_XDT_FIELD_NAME, (void*) FREE_RECORD_0010_CATEGORY_23_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_0010_CATEGORY_23_VALUE_XDT_FIELD) {
@@ -1458,7 +1459,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_0010_CATEGORY_23_VALUE_XDT_FIELD_NAME, (void*) FREE_RECORD_0010_CATEGORY_23_VALUE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_0010_CATEGORY_24_NAME_XDT_FIELD) {
@@ -1466,7 +1467,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_0010_CATEGORY_24_NAME_XDT_FIELD_NAME, (void*) FREE_RECORD_0010_CATEGORY_24_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_0010_CATEGORY_24_VALUE_XDT_FIELD) {
@@ -1474,7 +1475,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_0010_CATEGORY_24_VALUE_XDT_FIELD_NAME, (void*) FREE_RECORD_0010_CATEGORY_24_VALUE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_0010_CATEGORY_25_NAME_XDT_FIELD) {
@@ -1482,7 +1483,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_0010_CATEGORY_25_NAME_XDT_FIELD_NAME, (void*) FREE_RECORD_0010_CATEGORY_25_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_0010_CATEGORY_25_VALUE_XDT_FIELD) {
@@ -1490,7 +1491,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_0010_CATEGORY_25_VALUE_XDT_FIELD_NAME, (void*) FREE_RECORD_0010_CATEGORY_25_VALUE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *PATIENT_IDENTIFICATION_XDT_FIELD) {
@@ -1498,7 +1499,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) PATIENT_IDENTIFICATION_XDT_FIELD_NAME, (void*) PATIENT_IDENTIFICATION_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *PATIENT_NAME_AFFIX_XDT_FIELD) {
@@ -1506,7 +1507,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) PATIENT_NAME_AFFIX_XDT_FIELD_NAME, (void*) PATIENT_NAME_AFFIX_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *PATIENT_LAST_NAME_XDT_FIELD) {
@@ -1514,7 +1515,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) PATIENT_LAST_NAME_XDT_FIELD_NAME, (void*) PATIENT_LAST_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *PATIENT_FIRST_NAME_XDT_FIELD) {
@@ -1522,7 +1523,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) PATIENT_FIRST_NAME_XDT_FIELD_NAME, (void*) PATIENT_FIRST_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *PATIENT_BIRTH_DATE_XDT_FIELD) {
@@ -1538,7 +1539,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) PATIENT_TITLE_XDT_FIELD_NAME, (void*) PATIENT_TITLE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *PATIENT_HEALTH_INSURANCE_NUMBER_XDT_FIELD) {
@@ -1546,7 +1547,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) PATIENT_HEALTH_INSURANCE_NUMBER_XDT_FIELD_NAME, (void*) PATIENT_HEALTH_INSURANCE_NUMBER_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *PATIENT_RESIDENCE_XDT_FIELD) {
@@ -1554,7 +1555,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) PATIENT_RESIDENCE_XDT_FIELD_NAME, (void*) PATIENT_RESIDENCE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *PATIENT_STREET_XDT_FIELD) {
@@ -1562,7 +1563,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) PATIENT_STREET_XDT_FIELD_NAME, (void*) PATIENT_STREET_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *PATIENT_HEALTH_INSURANCE_TYPE_XDT_FIELD) {
@@ -1586,7 +1587,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) PATIENT_EMPLOYER_XDT_FIELD_NAME, (void*) PATIENT_EMPLOYER_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *PATIENT_ACCIDENT_INSURANCE_NAME_XDT_FIELD) {
@@ -1594,7 +1595,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) PATIENT_ACCIDENT_INSURANCE_NAME_XDT_FIELD_NAME, (void*) PATIENT_ACCIDENT_INSURANCE_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *INSURANT_LAST_NAME_XDT_FIELD) {
@@ -1602,7 +1603,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) INSURANT_LAST_NAME_XDT_FIELD_NAME, (void*) INSURANT_LAST_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *INSURANT_FIRST_NAME_XDT_FIELD) {
@@ -1610,7 +1611,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) INSURANT_FIRST_NAME_XDT_FIELD_NAME, (void*) INSURANT_FIRST_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *INSURANT_BIRTH_DATE_XDT_FIELD) {
@@ -1626,7 +1627,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) INSURANT_RESIDENCE_XDT_FIELD_NAME, (void*) INSURANT_RESIDENCE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *INSURANT_STREET_XDT_FIELD) {
@@ -1634,7 +1635,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) INSURANT_STREET_XDT_FIELD_NAME, (void*) INSURANT_STREET_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *INJURED_PHONE_XDT_FIELD) {
@@ -1642,7 +1643,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) INJURED_PHONE_XDT_FIELD_NAME, (void*) INJURED_PHONE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *INSURANT_SEX_XDT_FIELD) {
@@ -1658,7 +1659,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) PATIENT_X_RAY_NUMBER_XDT_FIELD_NAME, (void*) PATIENT_X_RAY_NUMBER_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *PATIENT_ARCHIVE_NUMBER_XDT_FIELD) {
@@ -1666,7 +1667,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) PATIENT_ARCHIVE_NUMBER_XDT_FIELD_NAME, (void*) PATIENT_ARCHIVE_NUMBER_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *PATIENT_EMPLOYERS_LIABILITY_INSURANCE_ASSOCIATION_NUMBER_XDT_FIELD) {
@@ -1674,7 +1675,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) PATIENT_EMPLOYERS_LIABILITY_INSURANCE_ASSOCIATION_NUMBER_XDT_FIELD_NAME, (void*) PATIENT_EMPLOYERS_LIABILITY_INSURANCE_ASSOCIATION_NUMBER_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *PATIENT_SINCE_DATE_XDT_FIELD) {
@@ -1698,7 +1699,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) PATIENT_PROFESSION_XDT_FIELD_NAME, (void*) PATIENT_PROFESSION_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *PATIENT_BODY_HEIGHT_XDT_FIELD) {
@@ -1722,7 +1723,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) PATIENT_EMPLOYER_REDUNDANT_XDT_FIELD_NAME, (void*) PATIENT_EMPLOYER_REDUNDANT_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *PATIENT_PHONE_XDT_FIELD) {
@@ -1730,7 +1731,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) PATIENT_PHONE_XDT_FIELD_NAME, (void*) PATIENT_PHONE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *PATIENT_NATIONALITY_XDT_FIELD) {
@@ -1738,7 +1739,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) PATIENT_NATIONALITY_XDT_FIELD_NAME, (void*) PATIENT_NATIONALITY_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *PATIENT_MOTHER_TONGUE_XDT_FIELD) {
@@ -1746,7 +1747,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) PATIENT_MOTHER_TONGUE_XDT_FIELD_NAME, (void*) PATIENT_MOTHER_TONGUE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *PATIENT_GENERAL_PRACTITIONER_IDENTIFICATION_XDT_FIELD) {
@@ -1762,7 +1763,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) PATIENT_RESIDENCE_TO_MEDICAL_PRACTICE_DISTANCE_XDT_FIELD_NAME, (void*) PATIENT_RESIDENCE_TO_MEDICAL_PRACTICE_DISTANCE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *PATIENT_PHYSICIAN_IDENTIFICATION_IN_GROUP_PRACTICE_XDT_FIELD) {
@@ -1770,7 +1771,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) PATIENT_PHYSICIAN_IDENTIFICATION_IN_GROUP_PRACTICE_XDT_FIELD_NAME, (void*) PATIENT_PHYSICIAN_IDENTIFICATION_IN_GROUP_PRACTICE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *PATIENT_PRESCRIPTION_IDENTIFICATION_XDT_FIELD) {
@@ -1794,7 +1795,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) PATIENT_PERMANENT_DIAGNOSES_XDT_FIELD_NAME, (void*) PATIENT_PERMANENT_DIAGNOSES_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *PATIENT_PERMANENT_DRUGS_BEGIN_DATE_XDT_FIELD) {
@@ -1810,7 +1811,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) PATIENT_PERMANENT_DRUGS_XDT_FIELD_NAME, (void*) PATIENT_PERMANENT_DRUGS_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *PATIENT_RISK_FACTORS_XDT_FIELD) {
@@ -1818,7 +1819,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) PATIENT_RISK_FACTORS_XDT_FIELD_NAME, (void*) PATIENT_RISK_FACTORS_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *PATIENT_ALLERGIES_XDT_FIELD) {
@@ -1826,7 +1827,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) PATIENT_ALLERGIES_XDT_FIELD_NAME, (void*) PATIENT_ALLERGIES_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *PATIENT_ACCIDENTS_XDT_FIELD) {
@@ -1834,7 +1835,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) PATIENT_ACCIDENTS_XDT_FIELD_NAME, (void*) PATIENT_ACCIDENTS_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *PATIENT_SURGERIES_XDT_FIELD) {
@@ -1842,7 +1843,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) PATIENT_SURGERIES_XDT_FIELD_NAME, (void*) PATIENT_SURGERIES_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *PATIENT_ANAMNESIS_XDT_FIELD) {
@@ -1850,7 +1851,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) PATIENT_ANAMNESIS_XDT_FIELD_NAME, (void*) PATIENT_ANAMNESIS_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *PATIENT_NUMBER_OF_BIRTHS_XDT_FIELD) {
@@ -1882,7 +1883,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) PATIENT_PERMANENT_THERAPY_XDT_FIELD_NAME, (void*) PATIENT_PERMANENT_THERAPY_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *PATIENT_RECALL_APPOINTMENT_DATE_XDT_FIELD) {
@@ -1898,7 +1899,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6100_CATEGORY_1_NAME_XDT_FIELD_NAME, (void*) FREE_RECORD_6100_CATEGORY_1_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6100_CATEGORY_1_VALUE_XDT_FIELD) {
@@ -1906,7 +1907,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6100_CATEGORY_1_VALUE_XDT_FIELD_NAME, (void*) FREE_RECORD_6100_CATEGORY_1_VALUE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6100_CATEGORY_2_NAME_XDT_FIELD) {
@@ -1914,7 +1915,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6100_CATEGORY_2_NAME_XDT_FIELD_NAME, (void*) FREE_RECORD_6100_CATEGORY_2_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6100_CATEGORY_2_VALUE_XDT_FIELD) {
@@ -1922,7 +1923,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6100_CATEGORY_2_VALUE_XDT_FIELD_NAME, (void*) FREE_RECORD_6100_CATEGORY_2_VALUE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6100_CATEGORY_3_NAME_XDT_FIELD) {
@@ -1930,7 +1931,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6100_CATEGORY_3_NAME_XDT_FIELD_NAME, (void*) FREE_RECORD_6100_CATEGORY_3_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6100_CATEGORY_3_VALUE_XDT_FIELD) {
@@ -1938,7 +1939,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6100_CATEGORY_3_VALUE_XDT_FIELD_NAME, (void*) FREE_RECORD_6100_CATEGORY_3_VALUE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6100_CATEGORY_4_NAME_XDT_FIELD) {
@@ -1946,7 +1947,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6100_CATEGORY_4_NAME_XDT_FIELD_NAME, (void*) FREE_RECORD_6100_CATEGORY_4_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6100_CATEGORY_4_VALUE_XDT_FIELD) {
@@ -1954,7 +1955,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6100_CATEGORY_4_VALUE_XDT_FIELD_NAME, (void*) FREE_RECORD_6100_CATEGORY_4_VALUE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6100_CATEGORY_5_NAME_XDT_FIELD) {
@@ -1962,7 +1963,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6100_CATEGORY_5_NAME_XDT_FIELD_NAME, (void*) FREE_RECORD_6100_CATEGORY_5_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6100_CATEGORY_5_VALUE_XDT_FIELD) {
@@ -1970,7 +1971,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6100_CATEGORY_5_VALUE_XDT_FIELD_NAME, (void*) FREE_RECORD_6100_CATEGORY_5_VALUE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6100_CATEGORY_6_NAME_XDT_FIELD) {
@@ -1978,7 +1979,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6100_CATEGORY_6_NAME_XDT_FIELD_NAME, (void*) FREE_RECORD_6100_CATEGORY_6_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6100_CATEGORY_6_VALUE_XDT_FIELD) {
@@ -1986,7 +1987,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6100_CATEGORY_6_VALUE_XDT_FIELD_NAME, (void*) FREE_RECORD_6100_CATEGORY_6_VALUE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6100_CATEGORY_7_NAME_XDT_FIELD) {
@@ -1994,7 +1995,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6100_CATEGORY_7_NAME_XDT_FIELD_NAME, (void*) FREE_RECORD_6100_CATEGORY_7_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6100_CATEGORY_7_VALUE_XDT_FIELD) {
@@ -2002,7 +2003,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6100_CATEGORY_7_VALUE_XDT_FIELD_NAME, (void*) FREE_RECORD_6100_CATEGORY_7_VALUE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6100_CATEGORY_8_NAME_XDT_FIELD) {
@@ -2010,7 +2011,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6100_CATEGORY_8_NAME_XDT_FIELD_NAME, (void*) FREE_RECORD_6100_CATEGORY_8_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6100_CATEGORY_8_VALUE_XDT_FIELD) {
@@ -2018,7 +2019,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6100_CATEGORY_8_VALUE_XDT_FIELD_NAME, (void*) FREE_RECORD_6100_CATEGORY_8_VALUE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6100_CATEGORY_9_NAME_XDT_FIELD) {
@@ -2026,7 +2027,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6100_CATEGORY_9_NAME_XDT_FIELD_NAME, (void*) FREE_RECORD_6100_CATEGORY_9_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6100_CATEGORY_9_VALUE_XDT_FIELD) {
@@ -2034,7 +2035,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6100_CATEGORY_9_VALUE_XDT_FIELD_NAME, (void*) FREE_RECORD_6100_CATEGORY_9_VALUE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6100_CATEGORY_10_NAME_XDT_FIELD) {
@@ -2042,7 +2043,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6100_CATEGORY_10_NAME_XDT_FIELD_NAME, (void*) FREE_RECORD_6100_CATEGORY_10_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6100_CATEGORY_10_VALUE_XDT_FIELD) {
@@ -2050,7 +2051,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6100_CATEGORY_10_VALUE_XDT_FIELD_NAME, (void*) FREE_RECORD_6100_CATEGORY_10_VALUE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *INVOICE_QUARTER_XDT_FIELD) {
@@ -2090,7 +2091,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) INVOICE_INSURANCE_OFFICE_XDT_FIELD_NAME, (void*) INVOICE_INSURANCE_OFFICE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *INVOICE_INSURANCE_SUB_CATEGORY_XDT_FIELD) {
@@ -2186,7 +2187,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) REFERRAL_DIAGNOSIS_XDT_FIELD_NAME, (void*) REFERRAL_DIAGNOSIS_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *REFERRAL_EXPLANATION_XDT_FIELD) {
@@ -2194,7 +2195,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) REFERRAL_EXPLANATION_XDT_FIELD_NAME, (void*) REFERRAL_EXPLANATION_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *REFERRAL_CHECK_BOX_MUVO_LSR_XDT_FIELD) {
@@ -2242,7 +2243,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) REFERRAL_TO_PHYSICIAN_NAME_XDT_FIELD_NAME, (void*) REFERRAL_TO_PHYSICIAN_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *INPATIENT_TREATMENT_REFERRAL_BY_LAW_XDT_FIELD) {
@@ -2274,7 +2275,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) INPATIENT_HOSPITAL_NAME_XDT_FIELD_NAME, (void*) INPATIENT_HOSPITAL_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *INPATIENT_HOSPITAL_STAY_XDT_FIELD) {
@@ -2298,7 +2299,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) EMERGENCY_SUBSEQUENT_TREATMENT_PHYSICIAN_NAME_XDT_FIELD_NAME, (void*) EMERGENCY_SUBSEQUENT_TREATMENT_PHYSICIAN_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *EMERGENCY_FINDINGS_XDT_FIELD) {
@@ -2306,7 +2307,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) EMERGENCY_FINDINGS_XDT_FIELD_NAME, (void*) EMERGENCY_FINDINGS_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *EMERGENCY_SYMPTOMS_XDT_FIELD) {
@@ -2314,7 +2315,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) EMERGENCY_SYMPTOMS_XDT_FIELD_NAME, (void*) EMERGENCY_SYMPTOMS_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *ACCIDENT_DATE_XDT_FIELD) {
@@ -2362,7 +2363,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) ACCIDENT_LOCATION_XDT_FIELD_NAME, (void*) ACCIDENT_LOCATION_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *ACCIDENT_PATIENT_EMPLOYMENT_AS_XDT_FIELD) {
@@ -2370,7 +2371,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) ACCIDENT_PATIENT_EMPLOYMENT_AS_XDT_FIELD_NAME, (void*) ACCIDENT_PATIENT_EMPLOYMENT_AS_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *ACCIDENT_PATIENT_EMPLOYMENT_SINCE_XDT_FIELD) {
@@ -2386,7 +2387,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) ACCIDENT_PATIENT_NATIONALITY_XDT_FIELD_NAME, (void*) ACCIDENT_PATIENT_NATIONALITY_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *ACCIDENT_COMPANY_XDT_FIELD) {
@@ -2394,7 +2395,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) ACCIDENT_COMPANY_XDT_FIELD_NAME, (void*) ACCIDENT_COMPANY_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *ACCIDENT_COURSE_OF_EVENTS_XDT_FIELD) {
@@ -2402,7 +2403,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) ACCIDENT_COURSE_OF_EVENTS_XDT_FIELD_NAME, (void*) ACCIDENT_COURSE_OF_EVENTS_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *ACCIDENT_PATIENT_BEHAVIOUR_AFTERWARDS_XDT_FIELD) {
@@ -2410,7 +2411,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) ACCIDENT_PATIENT_BEHAVIOUR_AFTERWARDS_XDT_FIELD_NAME, (void*) ACCIDENT_PATIENT_BEHAVIOUR_AFTERWARDS_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *ACCIDENT_FIRST_TIME_TREATMENT_DATE_XDT_FIELD) {
@@ -2426,7 +2427,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) ACCIDENT_TREATMENT_BY_PHYSICIAN_NAME_XDT_FIELD_NAME, (void*) ACCIDENT_TREATMENT_BY_PHYSICIAN_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *ACCIDENT_KIND_OF_TREATMENT_XDT_FIELD) {
@@ -2434,7 +2435,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) ACCIDENT_KIND_OF_TREATMENT_XDT_FIELD_NAME, (void*) ACCIDENT_KIND_OF_TREATMENT_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *ACCIDENT_ALCOHOL_INFLUENCE_XDT_FIELD) {
@@ -2450,7 +2451,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) ACCIDENT_SIGNS_FOR_ALCOHOL_INFLUENCE_XDT_FIELD_NAME, (void*) ACCIDENT_SIGNS_FOR_ALCOHOL_INFLUENCE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *ACCIDENT_BLOOD_WITHDRAWAL_XDT_FIELD) {
@@ -2466,7 +2467,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) ACCIDENT_FINDINGS_XDT_FIELD_NAME, (void*) ACCIDENT_FINDINGS_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *ACCIDENT_X_RAY_RESULT_XDT_FIELD) {
@@ -2474,7 +2475,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) ACCIDENT_X_RAY_RESULT_XDT_FIELD_NAME, (void*) ACCIDENT_X_RAY_RESULT_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *ACCIDENT_KIND_OF_FIRST_TREATMENT_XDT_FIELD) {
@@ -2482,7 +2483,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) ACCIDENT_KIND_OF_FIRST_TREATMENT_XDT_FIELD_NAME, (void*) ACCIDENT_KIND_OF_FIRST_TREATMENT_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *ACCIDENT_ABNORMAL_CHANGES_INDEPENDENT_FROM_ACCIDENT_XDT_FIELD) {
@@ -2490,7 +2491,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) ACCIDENT_ABNORMAL_CHANGES_INDEPENDENT_FROM_ACCIDENT_XDT_FIELD_NAME, (void*) ACCIDENT_ABNORMAL_CHANGES_INDEPENDENT_FROM_ACCIDENT_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *ACCIDENT_CONCERNS_AGAINST_STATEMENTS_XDT_FIELD) {
@@ -2506,7 +2507,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) ACCIDENT_KIND_OF_CONCERNS_AGAINST_STATEMENTS_XDT_FIELD_NAME, (void*) ACCIDENT_KIND_OF_CONCERNS_AGAINST_STATEMENTS_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *ACCIDENT_CONCERNS_AGAINST_CLASSIFICATION_AS_ACCIDENT_AT_WORK_XDT_FIELD) {
@@ -2522,7 +2523,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) ACCIDENT_KIND_OF_CONCERNS_AGAINST_CLASSIFICATION_AS_ACCIDENT_AT_WORK_XDT_FIELD_NAME, (void*) ACCIDENT_KIND_OF_CONCERNS_AGAINST_CLASSIFICATION_AS_ACCIDENT_AT_WORK_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *ACCIDENT_ABLE_TO_WORK_XDT_FIELD) {
@@ -2570,7 +2571,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) ACCIDENT_ADDRESS_OF_TREATING_PHYSICIAN_XDT_FIELD_NAME, (void*) ACCIDENT_ADDRESS_OF_TREATING_PHYSICIAN_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *ACCIDENT_UNABLE_TO_WORK_FROM_XDT_FIELD) {
@@ -2634,7 +2635,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) BILLING_NUMBER_XDT_FIELD_NAME, (void*) BILLING_NUMBER_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *BILLING_ADDRESS_XDT_FIELD) {
@@ -2642,7 +2643,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) BILLING_ADDRESS_XDT_FIELD_NAME, (void*) BILLING_ADDRESS_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *BILLING_REFERRING_PHYSICIAN_NAME_XDT_FIELD) {
@@ -2650,7 +2651,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) BILLING_REFERRING_PHYSICIAN_NAME_XDT_FIELD_NAME, (void*) BILLING_REFERRING_PHYSICIAN_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *BILLING_DATE_XDT_FIELD) {
@@ -2666,7 +2667,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) BILLING_TOTAL_SUM_XDT_FIELD_NAME, (void*) BILLING_TOTAL_SUM_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *BILLING_ASSIGNMENT_DECLARATION_XDT_FIELD) {
@@ -2682,7 +2683,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) BILLING_PHYSICIAN_SUB_ACCOUNT_XDT_FIELD_NAME, (void*) BILLING_PHYSICIAN_SUB_ACCOUNT_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *BILLING_ATTACHMENT_XDT_FIELD) {
@@ -2698,7 +2699,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) BILLING_HEADER_XDT_FIELD_NAME, (void*) BILLING_HEADER_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *BILLING_FOOTER_XDT_FIELD) {
@@ -2706,7 +2707,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) BILLING_FOOTER_XDT_FIELD_NAME, (void*) BILLING_FOOTER_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *SERVICE_TREATMENT_DATE_XDT_FIELD) {
@@ -2722,7 +2723,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) SERVICE_GNR_IDENTIFICATION_XDT_FIELD_NAME, (void*) SERVICE_GNR_IDENTIFICATION_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *SERVICE_KIND_OF_EXAMINATION_XDT_FIELD) {
@@ -2730,7 +2731,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) SERVICE_KIND_OF_EXAMINATION_XDT_FIELD_NAME, (void*) SERVICE_KIND_OF_EXAMINATION_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *SERVICE_ADDRESSEE_XDT_FIELD) {
@@ -2738,7 +2739,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) SERVICE_ADDRESSEE_XDT_FIELD_NAME, (void*) SERVICE_ADDRESSEE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *SERVICE_DISTANCE_IN_KILOMETRES_XDT_FIELD) {
@@ -2786,7 +2787,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) SERVICE_FREE_EXPLANATORY_STATEMENT_XDT_FIELD_NAME, (void*) SERVICE_FREE_EXPLANATORY_STATEMENT_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *SERVICE_EXPLANATORY_DRUG_XDT_FIELD) {
@@ -2794,7 +2795,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) SERVICE_EXPLANATORY_DRUG_XDT_FIELD_NAME, (void*) SERVICE_EXPLANATORY_DRUG_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *SERVICE_MATERIAL_COSTS_DESCRIPTION_XDT_FIELD) {
@@ -2802,7 +2803,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) SERVICE_MATERIAL_COSTS_DESCRIPTION_XDT_FIELD_NAME, (void*) SERVICE_MATERIAL_COSTS_DESCRIPTION_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *SERVICE_MATERIAL_COSTS_DPF_XDT_FIELD) {
@@ -2826,7 +2827,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) SERVICE_ORGAN_XDT_FIELD_NAME, (void*) SERVICE_ORGAN_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *SERVICE_LOCATION_XDT_FIELD) {
@@ -2834,7 +2835,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) SERVICE_LOCATION_XDT_FIELD_NAME, (void*) SERVICE_LOCATION_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *SERVICE_ZONE_XDT_FIELD) {
@@ -2850,7 +2851,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) SERVICE_GNR_DESCRIPTION_XDT_FIELD_NAME, (void*) SERVICE_GNR_DESCRIPTION_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *SERVICE_FEE_XDT_FIELD) {
@@ -2890,7 +2891,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) SERVICE_POINT_VALUE_XDT_FIELD_NAME, (void*) SERVICE_POINT_VALUE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *SERVICE_NAME_OF_FEE_XDT_FIELD) {
@@ -2898,7 +2899,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) SERVICE_NAME_OF_FEE_XDT_FIELD_NAME, (void*) SERVICE_NAME_OF_FEE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *SERVICE_NAME_OF_CERTIFICATE_XDT_FIELD) {
@@ -2906,7 +2907,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) SERVICE_NAME_OF_CERTIFICATE_XDT_FIELD_NAME, (void*) SERVICE_NAME_OF_CERTIFICATE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *BILLING_DIAGNOSIS_XDT_FIELD) {
@@ -2914,7 +2915,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) BILLING_DIAGNOSIS_XDT_FIELD_NAME, (void*) BILLING_DIAGNOSIS_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *BILLING_ICD_KEY_XDT_FIELD) {
@@ -2922,7 +2923,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) BILLING_ICD_KEY_XDT_FIELD_NAME, (void*) BILLING_ICD_KEY_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *TREATMENT_DATA_COLLECTION_DATE_XDT_FIELD) {
@@ -2946,7 +2947,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) TREATMENT_CURRENT_DIAGNOSIS_XDT_FIELD_NAME, (void*) TREATMENT_CURRENT_DIAGNOSIS_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *TREATMENT_DRUG_PRESCRIBED_WITH_PRESCRIPTION_XDT_FIELD) {
@@ -2954,7 +2955,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) TREATMENT_DRUG_PRESCRIBED_WITH_PRESCRIPTION_XDT_FIELD_NAME, (void*) TREATMENT_DRUG_PRESCRIBED_WITH_PRESCRIPTION_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *TREATMENT_DRUG_PRESCRIBED_WITHOUT_PRESCRIPTION_XDT_FIELD) {
@@ -2962,7 +2963,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) TREATMENT_DRUG_PRESCRIBED_WITHOUT_PRESCRIPTION_XDT_FIELD_NAME, (void*) TREATMENT_DRUG_PRESCRIBED_WITHOUT_PRESCRIPTION_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *TREATMENT_PHYSICIAN_SAMPLE_XDT_FIELD) {
@@ -2970,7 +2971,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) TREATMENT_PHYSICIAN_SAMPLE_XDT_FIELD_NAME, (void*) TREATMENT_PHYSICIAN_SAMPLE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *TREATMENT_FINDINGS_XDT_FIELD) {
@@ -2978,7 +2979,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) TREATMENT_FINDINGS_XDT_FIELD_NAME, (void*) TREATMENT_FINDINGS_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *TREATMENT_EXTERNAL_FINDINGS_XDT_FIELD) {
@@ -2986,7 +2987,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) TREATMENT_EXTERNAL_FINDINGS_XDT_FIELD_NAME, (void*) TREATMENT_EXTERNAL_FINDINGS_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *TREATMENT_LABORATORY_FINDINGS_XDT_FIELD) {
@@ -2994,7 +2995,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) TREATMENT_LABORATORY_FINDINGS_XDT_FIELD_NAME, (void*) TREATMENT_LABORATORY_FINDINGS_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *TREATMENT_X_RAY_FINDINGS_XDT_FIELD) {
@@ -3002,7 +3003,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) TREATMENT_X_RAY_FINDINGS_XDT_FIELD_NAME, (void*) TREATMENT_X_RAY_FINDINGS_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *TREATMENT_SUBSEQUENT_LINE_COUNT_XDT_FIELD) {
@@ -3018,7 +3019,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) TREATMENT_COMMENT_XDT_FIELD_NAME, (void*) TREATMENT_COMMENT_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *TREATMENT_FORMATTED_RESULT_TABLE_TEXT_XDT_FIELD) {
@@ -3026,7 +3027,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) TREATMENT_FORMATTED_RESULT_TABLE_TEXT_XDT_FIELD_NAME, (void*) TREATMENT_FORMATTED_RESULT_TABLE_TEXT_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *TREATMENT_BLOOD_PRESSURE_XDT_FIELD) {
@@ -3034,7 +3035,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) TREATMENT_BLOOD_PRESSURE_XDT_FIELD_NAME, (void*) TREATMENT_BLOOD_PRESSURE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *TREATMENT_SYMPTOMS_XDT_FIELD) {
@@ -3042,7 +3043,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) TREATMENT_SYMPTOMS_XDT_FIELD_NAME, (void*) TREATMENT_SYMPTOMS_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *TREATMENT_THERAPY_XDT_FIELD) {
@@ -3050,7 +3051,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) TREATMENT_THERAPY_XDT_FIELD_NAME, (void*) TREATMENT_THERAPY_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *TREATMENT_PHYSICAL_THERAPY_XDT_FIELD) {
@@ -3058,7 +3059,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) TREATMENT_PHYSICAL_THERAPY_XDT_FIELD_NAME, (void*) TREATMENT_PHYSICAL_THERAPY_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *TREATMENT_REFERRAL_CONTENT_XDT_FIELD) {
@@ -3066,7 +3067,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) TREATMENT_REFERRAL_CONTENT_XDT_FIELD_NAME, (void*) TREATMENT_REFERRAL_CONTENT_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *TREATMENT_WORK_DISABILITY_DURATION_XDT_FIELD) {
@@ -3082,7 +3083,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) TREATMENT_WORK_DISABILITY_CAUSE_XDT_FIELD_NAME, (void*) TREATMENT_WORK_DISABILITY_CAUSE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *TREATMENT_HOSPITALISATION_XDT_FIELD) {
@@ -3090,7 +3091,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) TREATMENT_HOSPITALISATION_XDT_FIELD_NAME, (void*) TREATMENT_HOSPITALISATION_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *TREATMENT_HOSPITALISATION_CAUSE_XDT_FIELD) {
@@ -3098,7 +3099,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) TREATMENT_HOSPITALISATION_CAUSE_XDT_FIELD_NAME, (void*) TREATMENT_HOSPITALISATION_CAUSE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *LETTER_CERTIFICATE_KIND_XDT_FIELD) {
@@ -3106,7 +3107,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) LETTER_CERTIFICATE_KIND_XDT_FIELD_NAME, (void*) LETTER_CERTIFICATE_KIND_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *LETTER_CERTIFICATE_CONTENT_XDT_FIELD) {
@@ -3114,7 +3115,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) LETTER_CERTIFICATE_CONTENT_XDT_FIELD_NAME, (void*) LETTER_CERTIFICATE_CONTENT_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *LETTER_FILE_ARCHIVE_NUMBER_XDT_FIELD) {
@@ -3122,7 +3123,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) LETTER_FILE_ARCHIVE_NUMBER_XDT_FIELD_NAME, (void*) LETTER_FILE_ARCHIVE_NUMBER_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *LETTER_FILE_FORMAT_XDT_FIELD) {
@@ -3130,7 +3131,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) LETTER_FILE_FORMAT_XDT_FIELD_NAME, (void*) LETTER_FILE_FORMAT_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *LETTER_FILE_CONTENT_XDT_FIELD) {
@@ -3138,7 +3139,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) LETTER_FILE_CONTENT_XDT_FIELD_NAME, (void*) LETTER_FILE_CONTENT_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *LETTER_FILE_URL_XDT_FIELD) {
@@ -3146,7 +3147,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) LETTER_FILE_URL_XDT_FIELD_NAME, (void*) LETTER_FILE_URL_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *LETTER_ATTESTATION_KIND_XDT_FIELD) {
@@ -3154,7 +3155,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) LETTER_ATTESTATION_KIND_XDT_FIELD_NAME, (void*) LETTER_ATTESTATION_KIND_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *LETTER_ATTESTATION_CONTENT_XDT_FIELD) {
@@ -3162,7 +3163,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) LETTER_ATTESTATION_CONTENT_XDT_FIELD_NAME, (void*) LETTER_ATTESTATION_CONTENT_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *LETTER_ADDRESSEE_XDT_FIELD) {
@@ -3170,7 +3171,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) LETTER_ADDRESSEE_XDT_FIELD_NAME, (void*) LETTER_ADDRESSEE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *LETTER_SALUTATION_XDT_FIELD) {
@@ -3178,7 +3179,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) LETTER_SALUTATION_XDT_FIELD_NAME, (void*) LETTER_SALUTATION_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *LETTER_STREET_XDT_FIELD) {
@@ -3186,7 +3187,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) LETTER_STREET_XDT_FIELD_NAME, (void*) LETTER_STREET_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *LETTER_POSTCODE_XDT_FIELD) {
@@ -3194,7 +3195,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) LETTER_POSTCODE_XDT_FIELD_NAME, (void*) LETTER_POSTCODE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *LETTER_RESIDENCE_XDT_FIELD) {
@@ -3202,7 +3203,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) LETTER_RESIDENCE_XDT_FIELD_NAME, (void*) LETTER_RESIDENCE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *LETTER_COMPLIMENTARY_CLOSE_XDT_FIELD) {
@@ -3210,7 +3211,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) LETTER_COMPLIMENTARY_CLOSE_XDT_FIELD_NAME, (void*) LETTER_COMPLIMENTARY_CLOSE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *LETTER_PHONE_XDT_FIELD) {
@@ -3218,7 +3219,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) LETTER_PHONE_XDT_FIELD_NAME, (void*) LETTER_PHONE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *LETTER_FAX_XDT_FIELD) {
@@ -3226,7 +3227,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) LETTER_FAX_XDT_FIELD_NAME, (void*) LETTER_FAX_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *LETTER_PHYSICIAN_NUMBER_XDT_FIELD) {
@@ -3234,7 +3235,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) LETTER_PHYSICIAN_NUMBER_XDT_FIELD_NAME, (void*) LETTER_PHYSICIAN_NUMBER_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *LETTER_CONTENT_XDT_FIELD) {
@@ -3242,7 +3243,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) LETTER_CONTENT_XDT_FIELD_NAME, (void*) LETTER_CONTENT_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *LETTER_IMAGE_ARCHIVE_NUMBER_XDT_FIELD) {
@@ -3250,7 +3251,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) LETTER_IMAGE_ARCHIVE_NUMBER_XDT_FIELD_NAME, (void*) LETTER_IMAGE_ARCHIVE_NUMBER_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *LETTER_GRAPHIC_FORMAT_XDT_FIELD) {
@@ -3258,7 +3259,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) LETTER_GRAPHIC_FORMAT_XDT_FIELD_NAME, (void*) LETTER_GRAPHIC_FORMAT_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *LETTER_IMAGE_CONTENT_XDT_FIELD) {
@@ -3266,7 +3267,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) LETTER_IMAGE_CONTENT_XDT_FIELD_NAME, (void*) LETTER_IMAGE_CONTENT_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6200_CATEGORY_1_NAME_XDT_FIELD) {
@@ -3274,7 +3275,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6200_CATEGORY_1_NAME_XDT_FIELD_NAME, (void*) FREE_RECORD_6200_CATEGORY_1_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6200_CATEGORY_1_VALUE_XDT_FIELD) {
@@ -3282,7 +3283,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6200_CATEGORY_1_VALUE_XDT_FIELD_NAME, (void*) FREE_RECORD_6200_CATEGORY_1_VALUE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6200_CATEGORY_2_NAME_XDT_FIELD) {
@@ -3290,7 +3291,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6200_CATEGORY_2_NAME_XDT_FIELD_NAME, (void*) FREE_RECORD_6200_CATEGORY_2_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6200_CATEGORY_2_VALUE_XDT_FIELD) {
@@ -3298,7 +3299,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6200_CATEGORY_2_VALUE_XDT_FIELD_NAME, (void*) FREE_RECORD_6200_CATEGORY_2_VALUE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6200_CATEGORY_3_NAME_XDT_FIELD) {
@@ -3306,7 +3307,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6200_CATEGORY_3_NAME_XDT_FIELD_NAME, (void*) FREE_RECORD_6200_CATEGORY_3_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6200_CATEGORY_3_VALUE_XDT_FIELD) {
@@ -3314,7 +3315,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6200_CATEGORY_3_VALUE_XDT_FIELD_NAME, (void*) FREE_RECORD_6200_CATEGORY_3_VALUE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6200_CATEGORY_4_NAME_XDT_FIELD) {
@@ -3322,7 +3323,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6200_CATEGORY_4_NAME_XDT_FIELD_NAME, (void*) FREE_RECORD_6200_CATEGORY_4_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6200_CATEGORY_4_VALUE_XDT_FIELD) {
@@ -3330,7 +3331,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6200_CATEGORY_4_VALUE_XDT_FIELD_NAME, (void*) FREE_RECORD_6200_CATEGORY_4_VALUE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6200_CATEGORY_5_NAME_XDT_FIELD) {
@@ -3338,7 +3339,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6200_CATEGORY_5_NAME_XDT_FIELD_NAME, (void*) FREE_RECORD_6200_CATEGORY_5_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6200_CATEGORY_5_VALUE_XDT_FIELD) {
@@ -3346,7 +3347,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6200_CATEGORY_5_VALUE_XDT_FIELD_NAME, (void*) FREE_RECORD_6200_CATEGORY_5_VALUE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6200_CATEGORY_6_NAME_XDT_FIELD) {
@@ -3354,7 +3355,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6200_CATEGORY_6_NAME_XDT_FIELD_NAME, (void*) FREE_RECORD_6200_CATEGORY_6_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6200_CATEGORY_6_VALUE_XDT_FIELD) {
@@ -3362,7 +3363,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6200_CATEGORY_6_VALUE_XDT_FIELD_NAME, (void*) FREE_RECORD_6200_CATEGORY_6_VALUE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6200_CATEGORY_7_NAME_XDT_FIELD) {
@@ -3370,7 +3371,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6200_CATEGORY_7_NAME_XDT_FIELD_NAME, (void*) FREE_RECORD_6200_CATEGORY_7_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6200_CATEGORY_7_VALUE_XDT_FIELD) {
@@ -3378,7 +3379,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6200_CATEGORY_7_VALUE_XDT_FIELD_NAME, (void*) FREE_RECORD_6200_CATEGORY_7_VALUE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6200_CATEGORY_8_NAME_XDT_FIELD) {
@@ -3386,7 +3387,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6200_CATEGORY_8_NAME_XDT_FIELD_NAME, (void*) FREE_RECORD_6200_CATEGORY_8_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6200_CATEGORY_8_VALUE_XDT_FIELD) {
@@ -3394,7 +3395,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6200_CATEGORY_8_VALUE_XDT_FIELD_NAME, (void*) FREE_RECORD_6200_CATEGORY_8_VALUE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6200_CATEGORY_9_NAME_XDT_FIELD) {
@@ -3402,7 +3403,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6200_CATEGORY_9_NAME_XDT_FIELD_NAME, (void*) FREE_RECORD_6200_CATEGORY_9_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6200_CATEGORY_9_VALUE_XDT_FIELD) {
@@ -3410,7 +3411,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6200_CATEGORY_9_VALUE_XDT_FIELD_NAME, (void*) FREE_RECORD_6200_CATEGORY_9_VALUE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6200_CATEGORY_10_NAME_XDT_FIELD) {
@@ -3418,7 +3419,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6200_CATEGORY_10_NAME_XDT_FIELD_NAME, (void*) FREE_RECORD_6200_CATEGORY_10_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6200_CATEGORY_10_VALUE_XDT_FIELD) {
@@ -3426,7 +3427,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6200_CATEGORY_10_VALUE_XDT_FIELD_NAME, (void*) FREE_RECORD_6200_CATEGORY_10_VALUE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6200_CATEGORY_11_NAME_XDT_FIELD) {
@@ -3434,7 +3435,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6200_CATEGORY_11_NAME_XDT_FIELD_NAME, (void*) FREE_RECORD_6200_CATEGORY_11_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6200_CATEGORY_11_VALUE_XDT_FIELD) {
@@ -3442,7 +3443,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6200_CATEGORY_11_VALUE_XDT_FIELD_NAME, (void*) FREE_RECORD_6200_CATEGORY_11_VALUE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6200_CATEGORY_12_NAME_XDT_FIELD) {
@@ -3450,7 +3451,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6200_CATEGORY_12_NAME_XDT_FIELD_NAME, (void*) FREE_RECORD_6200_CATEGORY_12_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6200_CATEGORY_12_VALUE_XDT_FIELD) {
@@ -3458,7 +3459,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6200_CATEGORY_12_VALUE_XDT_FIELD_NAME, (void*) FREE_RECORD_6200_CATEGORY_12_VALUE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6200_CATEGORY_13_NAME_XDT_FIELD) {
@@ -3466,7 +3467,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6200_CATEGORY_13_NAME_XDT_FIELD_NAME, (void*) FREE_RECORD_6200_CATEGORY_13_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6200_CATEGORY_13_VALUE_XDT_FIELD) {
@@ -3474,7 +3475,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6200_CATEGORY_13_VALUE_XDT_FIELD_NAME, (void*) FREE_RECORD_6200_CATEGORY_13_VALUE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6200_CATEGORY_14_NAME_XDT_FIELD) {
@@ -3482,7 +3483,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6200_CATEGORY_14_NAME_XDT_FIELD_NAME, (void*) FREE_RECORD_6200_CATEGORY_14_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6200_CATEGORY_14_VALUE_XDT_FIELD) {
@@ -3490,7 +3491,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6200_CATEGORY_14_VALUE_XDT_FIELD_NAME, (void*) FREE_RECORD_6200_CATEGORY_14_VALUE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6200_CATEGORY_15_NAME_XDT_FIELD) {
@@ -3498,7 +3499,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6200_CATEGORY_15_NAME_XDT_FIELD_NAME, (void*) FREE_RECORD_6200_CATEGORY_15_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6200_CATEGORY_15_VALUE_XDT_FIELD) {
@@ -3506,7 +3507,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6200_CATEGORY_15_VALUE_XDT_FIELD_NAME, (void*) FREE_RECORD_6200_CATEGORY_15_VALUE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6200_CATEGORY_16_NAME_XDT_FIELD) {
@@ -3514,7 +3515,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6200_CATEGORY_16_NAME_XDT_FIELD_NAME, (void*) FREE_RECORD_6200_CATEGORY_16_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6200_CATEGORY_16_VALUE_XDT_FIELD) {
@@ -3522,7 +3523,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6200_CATEGORY_16_VALUE_XDT_FIELD_NAME, (void*) FREE_RECORD_6200_CATEGORY_16_VALUE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6200_CATEGORY_17_NAME_XDT_FIELD) {
@@ -3530,7 +3531,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6200_CATEGORY_17_NAME_XDT_FIELD_NAME, (void*) FREE_RECORD_6200_CATEGORY_17_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6200_CATEGORY_17_VALUE_XDT_FIELD) {
@@ -3538,7 +3539,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6200_CATEGORY_17_VALUE_XDT_FIELD_NAME, (void*) FREE_RECORD_6200_CATEGORY_17_VALUE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6200_CATEGORY_18_NAME_XDT_FIELD) {
@@ -3546,7 +3547,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6200_CATEGORY_18_NAME_XDT_FIELD_NAME, (void*) FREE_RECORD_6200_CATEGORY_18_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6200_CATEGORY_18_VALUE_XDT_FIELD) {
@@ -3554,7 +3555,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6200_CATEGORY_18_VALUE_XDT_FIELD_NAME, (void*) FREE_RECORD_6200_CATEGORY_18_VALUE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6200_CATEGORY_19_NAME_XDT_FIELD) {
@@ -3562,7 +3563,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6200_CATEGORY_19_NAME_XDT_FIELD_NAME, (void*) FREE_RECORD_6200_CATEGORY_19_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6200_CATEGORY_19_VALUE_XDT_FIELD) {
@@ -3570,7 +3571,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6200_CATEGORY_19_VALUE_XDT_FIELD_NAME, (void*) FREE_RECORD_6200_CATEGORY_19_VALUE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6200_CATEGORY_20_NAME_XDT_FIELD) {
@@ -3578,7 +3579,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6200_CATEGORY_20_NAME_XDT_FIELD_NAME, (void*) FREE_RECORD_6200_CATEGORY_20_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6200_CATEGORY_20_VALUE_XDT_FIELD) {
@@ -3586,7 +3587,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6200_CATEGORY_20_VALUE_XDT_FIELD_NAME, (void*) FREE_RECORD_6200_CATEGORY_20_VALUE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6200_CATEGORY_21_NAME_XDT_FIELD) {
@@ -3594,7 +3595,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6200_CATEGORY_21_NAME_XDT_FIELD_NAME, (void*) FREE_RECORD_6200_CATEGORY_21_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6200_CATEGORY_21_VALUE_XDT_FIELD) {
@@ -3602,7 +3603,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6200_CATEGORY_21_VALUE_XDT_FIELD_NAME, (void*) FREE_RECORD_6200_CATEGORY_21_VALUE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6200_CATEGORY_22_NAME_XDT_FIELD) {
@@ -3610,7 +3611,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6200_CATEGORY_22_NAME_XDT_FIELD_NAME, (void*) FREE_RECORD_6200_CATEGORY_22_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6200_CATEGORY_22_VALUE_XDT_FIELD) {
@@ -3618,7 +3619,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6200_CATEGORY_22_VALUE_XDT_FIELD_NAME, (void*) FREE_RECORD_6200_CATEGORY_22_VALUE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6200_CATEGORY_23_NAME_XDT_FIELD) {
@@ -3626,7 +3627,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6200_CATEGORY_23_NAME_XDT_FIELD_NAME, (void*) FREE_RECORD_6200_CATEGORY_23_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6200_CATEGORY_23_VALUE_XDT_FIELD) {
@@ -3634,7 +3635,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6200_CATEGORY_23_VALUE_XDT_FIELD_NAME, (void*) FREE_RECORD_6200_CATEGORY_23_VALUE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6200_CATEGORY_24_NAME_XDT_FIELD) {
@@ -3642,7 +3643,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6200_CATEGORY_24_NAME_XDT_FIELD_NAME, (void*) FREE_RECORD_6200_CATEGORY_24_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6200_CATEGORY_24_VALUE_XDT_FIELD) {
@@ -3650,7 +3651,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6200_CATEGORY_24_VALUE_XDT_FIELD_NAME, (void*) FREE_RECORD_6200_CATEGORY_24_VALUE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6200_CATEGORY_25_NAME_XDT_FIELD) {
@@ -3658,7 +3659,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6200_CATEGORY_25_NAME_XDT_FIELD_NAME, (void*) FREE_RECORD_6200_CATEGORY_25_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6200_CATEGORY_25_VALUE_XDT_FIELD) {
@@ -3666,7 +3667,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6200_CATEGORY_25_VALUE_XDT_FIELD_NAME, (void*) FREE_RECORD_6200_CATEGORY_25_VALUE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6200_CATEGORY_26_NAME_XDT_FIELD) {
@@ -3674,7 +3675,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6200_CATEGORY_26_NAME_XDT_FIELD_NAME, (void*) FREE_RECORD_6200_CATEGORY_26_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6200_CATEGORY_26_VALUE_XDT_FIELD) {
@@ -3682,7 +3683,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6200_CATEGORY_26_VALUE_XDT_FIELD_NAME, (void*) FREE_RECORD_6200_CATEGORY_26_VALUE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6200_CATEGORY_27_NAME_XDT_FIELD) {
@@ -3690,7 +3691,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6200_CATEGORY_27_NAME_XDT_FIELD_NAME, (void*) FREE_RECORD_6200_CATEGORY_27_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6200_CATEGORY_27_VALUE_XDT_FIELD) {
@@ -3698,7 +3699,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6200_CATEGORY_27_VALUE_XDT_FIELD_NAME, (void*) FREE_RECORD_6200_CATEGORY_27_VALUE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6200_CATEGORY_28_NAME_XDT_FIELD) {
@@ -3706,7 +3707,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6200_CATEGORY_28_NAME_XDT_FIELD_NAME, (void*) FREE_RECORD_6200_CATEGORY_28_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6200_CATEGORY_28_VALUE_XDT_FIELD) {
@@ -3714,7 +3715,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6200_CATEGORY_28_VALUE_XDT_FIELD_NAME, (void*) FREE_RECORD_6200_CATEGORY_28_VALUE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6200_CATEGORY_29_NAME_XDT_FIELD) {
@@ -3722,7 +3723,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6200_CATEGORY_29_NAME_XDT_FIELD_NAME, (void*) FREE_RECORD_6200_CATEGORY_29_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6200_CATEGORY_29_VALUE_XDT_FIELD) {
@@ -3730,7 +3731,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6200_CATEGORY_29_VALUE_XDT_FIELD_NAME, (void*) FREE_RECORD_6200_CATEGORY_29_VALUE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6200_CATEGORY_30_NAME_XDT_FIELD) {
@@ -3738,7 +3739,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6200_CATEGORY_30_NAME_XDT_FIELD_NAME, (void*) FREE_RECORD_6200_CATEGORY_30_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6200_CATEGORY_30_VALUE_XDT_FIELD) {
@@ -3746,7 +3747,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6200_CATEGORY_30_VALUE_XDT_FIELD_NAME, (void*) FREE_RECORD_6200_CATEGORY_30_VALUE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6200_CATEGORY_31_NAME_XDT_FIELD) {
@@ -3754,7 +3755,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6200_CATEGORY_31_NAME_XDT_FIELD_NAME, (void*) FREE_RECORD_6200_CATEGORY_31_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6200_CATEGORY_31_VALUE_XDT_FIELD) {
@@ -3762,7 +3763,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6200_CATEGORY_31_VALUE_XDT_FIELD_NAME, (void*) FREE_RECORD_6200_CATEGORY_31_VALUE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6200_CATEGORY_32_NAME_XDT_FIELD) {
@@ -3770,7 +3771,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6200_CATEGORY_32_NAME_XDT_FIELD_NAME, (void*) FREE_RECORD_6200_CATEGORY_32_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6200_CATEGORY_32_VALUE_XDT_FIELD) {
@@ -3778,7 +3779,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6200_CATEGORY_32_VALUE_XDT_FIELD_NAME, (void*) FREE_RECORD_6200_CATEGORY_32_VALUE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6200_CATEGORY_33_NAME_XDT_FIELD) {
@@ -3786,7 +3787,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6200_CATEGORY_33_NAME_XDT_FIELD_NAME, (void*) FREE_RECORD_6200_CATEGORY_33_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6200_CATEGORY_33_VALUE_XDT_FIELD) {
@@ -3794,7 +3795,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6200_CATEGORY_33_VALUE_XDT_FIELD_NAME, (void*) FREE_RECORD_6200_CATEGORY_33_VALUE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6200_CATEGORY_34_NAME_XDT_FIELD) {
@@ -3802,7 +3803,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6200_CATEGORY_34_NAME_XDT_FIELD_NAME, (void*) FREE_RECORD_6200_CATEGORY_34_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6200_CATEGORY_34_VALUE_XDT_FIELD) {
@@ -3810,7 +3811,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6200_CATEGORY_34_VALUE_XDT_FIELD_NAME, (void*) FREE_RECORD_6200_CATEGORY_34_VALUE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6200_CATEGORY_35_NAME_XDT_FIELD) {
@@ -3818,7 +3819,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6200_CATEGORY_35_NAME_XDT_FIELD_NAME, (void*) FREE_RECORD_6200_CATEGORY_35_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FREE_RECORD_6200_CATEGORY_35_VALUE_XDT_FIELD) {
@@ -3826,7 +3827,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FREE_RECORD_6200_CATEGORY_35_VALUE_XDT_FIELD_NAME, (void*) FREE_RECORD_6200_CATEGORY_35_VALUE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *RECORD_IDENTIFICATION_XDT_FIELD) {
@@ -3850,7 +3851,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) DEVICE_RECEIVER_GDT_ID_XDT_FIELD_NAME, (void*) DEVICE_RECEIVER_GDT_ID_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *DEVICE_SENDER_GDT_ID_XDT_FIELD) {
@@ -3858,7 +3859,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) DEVICE_SENDER_GDT_ID_XDT_FIELD_NAME, (void*) DEVICE_SENDER_GDT_ID_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FINDINGS_KIND_XDT_FIELD) {
@@ -3866,7 +3867,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FINDINGS_KIND_XDT_FIELD_NAME, (void*) FINDINGS_KIND_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FINDINGS_DEVICE_SPECIFICS_XDT_FIELD) {
@@ -3874,7 +3875,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FINDINGS_DEVICE_SPECIFICS_XDT_FIELD_NAME, (void*) FINDINGS_DEVICE_SPECIFICS_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FINDINGS_TEST_IDENTIFICATION_XDT_FIELD) {
@@ -3882,7 +3883,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FINDINGS_TEST_IDENTIFICATION_XDT_FIELD_NAME, (void*) FINDINGS_TEST_IDENTIFICATION_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FINDINGS_TEST_NAME_XDT_FIELD) {
@@ -3890,7 +3891,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FINDINGS_TEST_NAME_XDT_FIELD_NAME, (void*) FINDINGS_TEST_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FINDINGS_TEST_STATUS_XDT_FIELD) {
@@ -3898,7 +3899,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FINDINGS_TEST_STATUS_XDT_FIELD_NAME, (void*) FINDINGS_TEST_STATUS_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FINDINGS_TEST_RESULT_VALUE_XDT_FIELD) {
@@ -3914,7 +3915,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FINDINGS_TEST_RESULT_UNIT_XDT_FIELD_NAME, (void*) FINDINGS_TEST_RESULT_UNIT_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FINDINGS_LIMIT_INDICATOR_XDT_FIELD) {
@@ -3922,7 +3923,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FINDINGS_LIMIT_INDICATOR_XDT_FIELD_NAME, (void*) FINDINGS_LIMIT_INDICATOR_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FINDINGS_SAMPLE_MATERIAL_IDENTIFICATION_XDT_FIELD) {
@@ -3930,7 +3931,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FINDINGS_SAMPLE_MATERIAL_IDENTIFICATION_XDT_FIELD_NAME, (void*) FINDINGS_SAMPLE_MATERIAL_IDENTIFICATION_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FINDINGS_SAMPLE_MATERIAL_INDEX_XDT_FIELD) {
@@ -3946,7 +3947,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FINDINGS_SAMPLE_MATERIAL_NAME_XDT_FIELD_NAME, (void*) FINDINGS_SAMPLE_MATERIAL_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FINDINGS_SAMPLE_MATERIAL_SPECIFICATION_XDT_FIELD) {
@@ -3954,7 +3955,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FINDINGS_SAMPLE_MATERIAL_SPECIFICATION_XDT_FIELD_NAME, (void*) FINDINGS_SAMPLE_MATERIAL_SPECIFICATION_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FINDINGS_SAMPLE_COLLECTION_DATE_XDT_FIELD) {
@@ -3978,7 +3979,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FINDINGS_DATA_STREAM_UNITS_XDT_FIELD_NAME, (void*) FINDINGS_DATA_STREAM_UNITS_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FINDINGS_DATA_STREAM_XDT_FIELD) {
@@ -3986,7 +3987,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FINDINGS_DATA_STREAM_XDT_FIELD_NAME, (void*) FINDINGS_DATA_STREAM_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FINDINGS_SAMPLE_COLLECTION_TIME_XDT_FIELD) {
@@ -4002,7 +4003,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FINDINGS_GERM_IDENTIFICATION_XDT_FIELD_NAME, (void*) FINDINGS_GERM_IDENTIFICATION_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FINDINGS_GERM_NAME_XDT_FIELD) {
@@ -4010,7 +4011,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FINDINGS_GERM_NAME_XDT_FIELD_NAME, (void*) FINDINGS_GERM_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FINDINGS_GERM_NUMBER_XDT_FIELD) {
@@ -4034,7 +4035,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FINDINGS_ACTIVE_SUBSTANCE_XDT_FIELD_NAME, (void*) FINDINGS_ACTIVE_SUBSTANCE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FINDINGS_ACTIVE_SUBSTANCE_GENERIC_NAME_XDT_FIELD) {
@@ -4042,7 +4043,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FINDINGS_ACTIVE_SUBSTANCE_GENERIC_NAME_XDT_FIELD_NAME, (void*) FINDINGS_ACTIVE_SUBSTANCE_GENERIC_NAME_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FINDINGS_MHK_BREAKPOINT_VALUE_XDT_FIELD) {
@@ -4050,7 +4051,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FINDINGS_MHK_BREAKPOINT_VALUE_XDT_FIELD_NAME, (void*) FINDINGS_MHK_BREAKPOINT_VALUE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FINDINGS_RESISTANCE_INTERPRETATION_XDT_FIELD) {
@@ -4066,7 +4067,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FINDINGS_NORMAL_VALUE_TEXT_XDT_FIELD_NAME, (void*) FINDINGS_NORMAL_VALUE_TEXT_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FINDINGS_NORMAL_VALUE_LOWER_LIMIT_XDT_FIELD) {
@@ -4090,7 +4091,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FINDINGS_REMARK_XDT_FIELD_NAME, (void*) FINDINGS_REMARK_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FINDINGS_RESULT_TEXT_XDT_FIELD) {
@@ -4098,7 +4099,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FINDINGS_RESULT_TEXT_XDT_FIELD_NAME, (void*) FINDINGS_RESULT_TEXT_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FINDINGS_COMPLIMENTARY_CLOSE_XDT_FIELD) {
@@ -4106,7 +4107,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FINDINGS_COMPLIMENTARY_CLOSE_XDT_FIELD_NAME, (void*) FINDINGS_COMPLIMENTARY_CLOSE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *FINDINGS_SIGNATURE_XDT_FIELD) {
@@ -4114,7 +4115,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) FINDINGS_SIGNATURE_XDT_FIELD_NAME, (void*) FINDINGS_SIGNATURE_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *DATA_MEDIUM_SENDER_PHYSICIAN_NUMBER_XDT_FIELD) {
@@ -4178,7 +4179,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) DATA_PACKAGE_ADT_VERSION_XDT_FIELD_NAME, (void*) DATA_PACKAGE_ADT_VERSION_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *DATA_PACKAGE_BDT_VERSION_XDT_FIELD) {
@@ -4186,7 +4187,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) DATA_PACKAGE_BDT_VERSION_XDT_FIELD_NAME, (void*) DATA_PACKAGE_BDT_VERSION_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *DATA_PACKAGE_GDT_VERSION_XDT_FIELD) {
@@ -4194,7 +4195,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) DATA_PACKAGE_GDT_VERSION_XDT_FIELD_NAME, (void*) DATA_PACKAGE_GDT_VERSION_XDT_FIELD_NAME_COUNT);
 
         } else if (*id == *DATA_PACKAGE_ARCHIVING_TYPE_XDT_FIELD) {
@@ -4226,7 +4227,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT,
                 (void*) SYSTEM_INTERNAL_PARAMETER_XDT_FIELD_NAME, (void*) SYSTEM_INTERNAL_PARAMETER_XDT_FIELD_NAME_COUNT);
         }
 
@@ -4259,14 +4260,14 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             deallocate((void*) &ms, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
             // Deallocate knowledge model abstraction.
-            deallocate((void*) &a, as, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+            deallocate((void*) &a, as, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
             deallocate((void*) &ac, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
             deallocate((void*) &as, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
             // A knowledge model channel was not allocated.
 
             // Deallocate knowledge model name.
-            deallocate((void*) &n, ns, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+            deallocate((void*) &n, ns, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
             deallocate((void*) &nc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
             deallocate((void*) &ns, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
         }
@@ -4660,14 +4661,14 @@ void decode_xdt_select_record(void* p0, void* p1, void* p2, void* p3, void* p4, 
             deallocate((void*) &ms, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
             // Deallocate knowledge model abstraction.
-            deallocate((void*) &a, as, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+            deallocate((void*) &a, as, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
             deallocate((void*) &ac, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
             deallocate((void*) &as, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
             // A knowledge model channel was not allocated.
 
             // Deallocate knowledge model name.
-            deallocate((void*) &n, ns, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+            deallocate((void*) &n, ns, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
             deallocate((void*) &nc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
             deallocate((void*) &ns, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
         }
@@ -4840,14 +4841,14 @@ void decode_xdt_select_package(void* p0, void* p1, void* p2, void* p3, void* p4,
         deallocate((void*) &ms, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
         // Deallocate knowledge model abstraction.
-        deallocate((void*) &a, as, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+        deallocate((void*) &a, as, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
         deallocate((void*) &ac, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
         deallocate((void*) &as, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
         // A knowledge model channel was not allocated.
 
         // Deallocate knowledge model name.
-        deallocate((void*) &n, ns, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+        deallocate((void*) &n, ns, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
         deallocate((void*) &nc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
         deallocate((void*) &ns, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
     }

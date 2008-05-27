@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.16 $ $Date: 2008-05-04 22:34:39 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2008-05-27 22:52:00 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -58,30 +58,30 @@ void decode_double(void* p0, void* p1, void* p2, void* p3, void* p4) {
             log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Decode double.");
 
             // The temporary null-terminated string.
-            char* tmp = (char*) *NULL_POINTER;
+            wchar_t* tmp = (wchar_t*) *NULL_POINTER;
             int tmps = *sc + *NUMBER_1_INTEGER;
 
             // Create temporary null-terminated string.
-            allocate_array((void*) &tmp, (void*) &tmps, (void*) CHARACTER_ARRAY);
+            allocate_array((void*) &tmp, (void*) &tmps, (void*) WIDE_CHARACTER_ARRAY);
 
             // The index.
             int i = *NUMBER_0_INTEGER;
 
             // Copy original string to temporary null-terminated string.
-            set_array_elements((void*) tmp, (void*) &i, p3, p4, (void*) CHARACTER_ARRAY);
+            set_array_elements((void*) tmp, (void*) &i, p3, p4, (void*) WIDE_CHARACTER_ARRAY);
 
             // This is used as index to set the termination character.
             i = *sc;
 
             // Add string termination to temporary null-terminated string.
-            set_array_elements((void*) tmp, (void*) &i, (void*) NULL_CONTROL_CHARACTER, (void*) NUMBER_1_INTEGER, (void*) CHARACTER_ARRAY);
+            set_array_elements((void*) tmp, (void*) &i, (void*) NULL_CONTROL_WIDE_CHARACTER, (void*) NUMBER_1_INTEGER, (void*) WIDE_CHARACTER_ARRAY);
 
             // The tail variable is useless here and only needed for the string
             // transformation function. If the whole string array consists of
             // many sub strings, separated by space characters, then each sub
             // string gets interpreted as integer number.
             // The tail variable in this case points to the remaining sub string.
-            char* tail = (char*) *NULL_POINTER;
+            wchar_t* tail = (wchar_t*) *NULL_POINTER;
 
             // Transform string to double value.
             // The strtod function recognizes four special input strings.
@@ -94,7 +94,7 @@ void decode_double(void* p0, void* p1, void* p2, void* p3, void* p4) {
             // Again, case is ignored.
             // If chars... are provided, they are used in some unspecified fashion
             // to select a particular representation of NaN (there can be several).
-            double v = strtod(tmp, &tail);
+            double v = wcstod(tmp, &tail);
 
             //?? p0 (Hand over as reference!)
             //?? Doesn't p0 need to be reallocated from size 0 to size 1,
@@ -104,7 +104,7 @@ void decode_double(void* p0, void* p1, void* p2, void* p3, void* p4) {
             set_array_elements(*d, (void*) PRIMITIVE_VALUE_INDEX, (void*) &v, (void*) NUMBER_1_INTEGER, (void*) DOUBLE_ARRAY);
 
             // Destroy temporary null-terminated string.
-            deallocate_array((void*) &tmp, (void*) &tmps, (void*) CHARACTER_ARRAY);
+            deallocate_array((void*) &tmp, (void*) &tmps, (void*) WIDE_CHARACTER_ARRAY);
 
         } else {
 
@@ -118,80 +118,6 @@ void decode_double(void* p0, void* p1, void* p2, void* p3, void* p4) {
 }
 
 /**
- * Encodes the double model and creates a byte stream from it.
- *
- * @param p0 the destination (Hand over as reference!)
- * @param p1 the destination count
- * @param p2 the destination size
- * @param p3 the source
- * @param p4 the source count
- */
-void encode_double(void* p0, void* p1, void* p2, void* p3, void* p4) {
-
-    if (p2 != *NULL_POINTER) {
-
-        int* ds = (int*) p2;
-
-        if (p1 != *NULL_POINTER) {
-
-            int* dc = (int*) p1;
-
-            if (p0 != *NULL_POINTER) {
-
-                char** d = (char**) p0;
-
-                log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Encode double.");
-
-                // The double value.
-                double* v = (double*) *NULL_POINTER;
-
-                // Get double value.
-                get_array_elements(p3, (void*) PRIMITIVE_VALUE_INDEX, (void*) &v, (void*) DOUBLE_ARRAY);
-
-                //?? TODO: set_array_elements is missing!
-                //?? The get_array_elements procedure does NOT copy values;
-                //?? it returns just a reference to the corresponding value!
-
-                // Transform source double to destination string.
-                *dc = snprintf(*d, *ds, "%d", *v);
-
-                // Set destination string size one greater than the count
-                // to have space for the terminating null character.
-                *ds = *dc + *NUMBER_1_INTEGER;
-
-                // Reallocate destination string.
-                reallocate_array(p0, p1, p2, (void*) CHARACTER_ARRAY);
-
-                // Transform source double to destination string.
-                *dc = snprintf(*d, *ds, "%d", *v);
-
-                // CAUTION! Recalculate string count because only in versions
-                // of the GNU C library prior to 2.1, the snprintf function
-                // returns the number of characters stored, not including the
-                // terminating null; unless there was not enough space in the
-                // string to store the result in which case -1 is returned.
-                // This was CHANGED in order to comply with the ISO C99 standard.
-                // As usual, the string count does NOT contain the terminating
-                // null character.
-                *dc = strlen(*d);
-
-            } else {
-
-//??                log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_PARSE_INTEGER_THE_DESTINATION_IS_NULL_MESSAGE, (void*) &COULD_NOT_PARSE_INTEGER_THE_DESTINATION_IS_NULL_MESSAGE_COUNT);
-            }
-
-        } else {
-
-//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_PARSE_INTEGER_THE_DESTINATION_COUNT_IS_NULL_MESSAGE, (void*) &COULD_NOT_PARSE_INTEGER_THE_DESTINATION_COUNT_IS_NULL_MESSAGE_COUNT);
-        }
-
-    } else {
-
-//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_PARSE_INTEGER_THE_DESTINATION_SIZE_IS_NULL_MESSAGE, (void*) &COULD_NOT_PARSE_INTEGER_THE_DESTINATION_SIZE_IS_NULL_MESSAGE_COUNT);
-    }
-}
-
-/**
  * Encodes the double model and creates a wide character byte stream from it.
  *
  * @param p0 the destination wide character array (Hand over as reference!)
@@ -200,7 +126,7 @@ void encode_double(void* p0, void* p1, void* p2, void* p3, void* p4) {
  * @param p3 the source double number
  * @param p4 the source count
  */
-void encode_double_wide(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void encode_double(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (p2 != *NULL_POINTER) {
 
@@ -241,7 +167,7 @@ void encode_double_wide(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     // Set destination string size one greater than the count
                     // to have space for the terminating null character and
                     // to avoid a zero value in case destination string size is zero.
-                    *ds = *ds * *WIDE_CHARACTER_VECTOR_REALLOCATION_FACTOR + *NUMBER_1_INTEGER;
+                    *ds = (*dc * *WIDE_CHARACTER_VECTOR_REALLOCATION_FACTOR) + *NUMBER_1_INTEGER;
 
                     // Reallocate destination string.
                     reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_ARRAY);

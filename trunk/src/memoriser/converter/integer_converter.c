@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.23 $ $Date: 2008-05-04 00:18:14 $ $Author: christian $
+ * @version $Revision: 1.24 $ $Date: 2008-05-27 22:52:00 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -74,24 +74,24 @@ void decode_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
             log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Decode integer.");
 
             // The temporary null-terminated string.
-            char* tmp = (char*) *NULL_POINTER;
+            wchar_t* tmp = (wchar_t*) *NULL_POINTER;
             int tmps = *sc + *NUMBER_1_INTEGER;
 
             // Create temporary null-terminated string.
-            allocate_array((void*) &tmp, (void*) &tmps, (void*) CHARACTER_ARRAY);
+            allocate_array((void*) &tmp, (void*) &tmps, (void*) WIDE_CHARACTER_ARRAY);
 
             // Copy original string to temporary null-terminated string.
-            set_array_elements((void*) tmp, (void*) NUMBER_0_INTEGER, p3, p4, (void*) CHARACTER_ARRAY);
+            set_array_elements((void*) tmp, (void*) NUMBER_0_INTEGER, p3, p4, (void*) WIDE_CHARACTER_ARRAY);
             // Add string termination to temporary null-terminated string.
             // The source count is used as index for the termination character.
-            set_array_elements((void*) tmp, p4, (void*) NULL_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+            set_array_elements((void*) tmp, p4, (void*) NULL_CONTROL_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
 
             // The tail variable is useless here and only needed for the string
             // transformation function. If the whole string array consists of
             // many sub strings, separated by space characters, then each sub
             // string gets interpreted as integer number.
             // The tail variable in this case points to the remaining sub string.
-            char* tail = (char*) *NULL_POINTER;
+            wchar_t* tail = (wchar_t*) *NULL_POINTER;
 
             // Set integer value.
             //
@@ -101,10 +101,10 @@ void decode_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
             // 8 - octal
             // 10 - decimal
             // 16 - hexadecimal
-            *d = strtol(tmp, &tail, *NUMBER_10_INTEGER);
+            *d = wcstol(tmp, &tail, *NUMBER_10_INTEGER);
 
             // Destroy temporary null-terminated string.
-            deallocate_array((void*) &tmp, (void*) &tmps, (void*) CHARACTER_ARRAY);
+            deallocate_array((void*) &tmp, (void*) &tmps, (void*) WIDE_CHARACTER_ARRAY);
 
         } else {
 
@@ -118,95 +118,6 @@ void decode_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
 }
 
 /**
- * Encodes the integer model and creates a byte stream from it.
- *
- * @param p0 the destination character array (Hand over as reference!)
- * @param p1 the destination character array count
- * @param p2 the destination character array size
- * @param p3 the source integer
- * @param p4 the source integer count
- */
-void encode_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
-
-    if (p4 != *NULL_POINTER) {
-
-        int* sc = (int*) p4;
-
-        if (p2 != *NULL_POINTER) {
-
-            int* ds = (int*) p2;
-
-            if (p1 != *NULL_POINTER) {
-
-                int* dc = (int*) p1;
-
-                if (p0 != *NULL_POINTER) {
-
-                    char** d = (char**) p0;
-
-                    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Encode integer.");
-
-                    if (*sc > *NUMBER_0_INTEGER) {
-
-                        // CAUTION! Only encode integer, if one exists!
-                        // Otherwise, the "snprintf" function call will cause a segmentation fault.
-
-                        // The integer value.
-                        int* v = (int*) *NULL_POINTER;
-
-                        // Get integer value.
-                        get_array_elements(p3, (void*) PRIMITIVE_VALUE_INDEX, (void*) &v, (void*) INTEGER_ARRAY);
-
-                        // Transform source integer to destination string.
-                        *dc = snprintf(*d, *ds, "%i", *v);
-
-                        // Set destination string size one greater than the count
-                        // to have space for the terminating null character.
-                        *ds = *dc + *NUMBER_1_INTEGER;
-
-                        // Reallocate destination string.
-                        reallocate_array(p0, p1, p2, (void*) CHARACTER_ARRAY);
-
-                        // Transform source integer to destination string.
-                        *dc = snprintf(*d, *ds, "%i", *v);
-
-                        // CAUTION! Recalculate string count because only in versions
-                        // of the GNU C library prior to 2.1, the snprintf function
-                        // returns the number of characters stored, not including the
-                        // terminating null; unless there was not enough space in the
-                        // string to store the result in which case -1 is returned.
-                        // This was CHANGED in order to comply with the ISO C99 standard.
-                        // As usual, the string count does NOT contain the terminating
-                        // null character.
-                        *dc = strlen(*d);
-
-                    } else {
-
-                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode integer. The source count is zero.");
-                    }
-
-                } else {
-
-                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode integer. The destination is null.");
-                }
-
-            } else {
-
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode integer. The destination count is null.");
-            }
-
-        } else {
-
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode integer. The destination size is null.");
-        }
-
-    } else {
-
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode integer. The source count is null.");
-    }
-}
-
-/**
  * Encodes the integer model and creates a wide character byte stream from it.
  *
  * @param p0 the destination wide character array (Hand over as reference!)
@@ -215,7 +126,7 @@ void encode_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
  * @param p3 the source integer number
  * @param p4 the source count
  */
-void encode_integer_wide(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void encode_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (p2 != *NULL_POINTER) {
 
@@ -256,7 +167,7 @@ void encode_integer_wide(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     // Set destination string size one greater than the count
                     // to have space for the terminating null character and
                     // to avoid a zero value in case destination string size is zero.
-                    *ds = *ds * *WIDE_CHARACTER_VECTOR_REALLOCATION_FACTOR + *NUMBER_1_INTEGER;
+                    *ds = (*dc * *WIDE_CHARACTER_VECTOR_REALLOCATION_FACTOR) + *NUMBER_1_INTEGER;
 
                     // Reallocate destination string.
                     reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_ARRAY);

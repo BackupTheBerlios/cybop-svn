@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2008-05-04 00:18:14 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2008-05-27 22:52:00 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -47,6 +47,7 @@
  * @param p3 the source character entity reference (html escape reference)
  * @param p4 the source character entity reference (html escape reference) count
  */
+/*??
 void decode_character_entity_reference(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (p2 != *NULL_POINTER) {
@@ -105,6 +106,7 @@ void decode_character_entity_reference(void* p0, void* p1, void* p2, void* p3, v
         log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode character entity reference. The destination size is null.");
     }
 }
+*/
 
 /**
  * Encodes a character into a character entity reference (html escape reference).
@@ -115,6 +117,7 @@ void decode_character_entity_reference(void* p0, void* p1, void* p2, void* p3, v
  * @param p3 the source character
  * @param p4 the source character count
  */
+/*??
 void encode_character_entity_reference(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (p2 != *NULL_POINTER) {
@@ -150,6 +153,7 @@ void encode_character_entity_reference(void* p0, void* p1, void* p2, void* p3, v
                 }
 */
 
+/*??
                 //
                 // Set actual destination, using the temporary value.
                 //
@@ -187,6 +191,7 @@ void encode_character_entity_reference(void* p0, void* p1, void* p2, void* p3, v
         log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode character entity reference. The destination size is null.");
     }
 }
+*/
 
 /* CHARACTER_ENTITY_REFERENCE_CONVERTER_SOURCE */
 #endif

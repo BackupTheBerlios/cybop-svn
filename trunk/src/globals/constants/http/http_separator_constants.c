@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2008-05-04 00:18:12 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2008-05-27 22:52:00 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -38,23 +38,23 @@
 //
 
 /** The http request line separator ("carriage return" and "line feed"). */
-static char HTTP_REQUEST_LINE_SEPARATOR_ARRAY[] = {0x0D, 0x0A};
-static char* HTTP_REQUEST_LINE_SEPARATOR = HTTP_REQUEST_LINE_SEPARATOR_ARRAY;
+static wchar_t HTTP_REQUEST_LINE_SEPARATOR_ARRAY[] = {0x000D, 0x000A};
+static wchar_t* HTTP_REQUEST_LINE_SEPARATOR = HTTP_REQUEST_LINE_SEPARATOR_ARRAY;
 static int* HTTP_REQUEST_LINE_SEPARATOR_COUNT = NUMBER_2_INTEGER_ARRAY;
 
 /** The http response line separator ("carriage return" and "line feed"). */
-static char HTTP_RESPONSE_LINE_SEPARATOR_ARRAY[] = {0x0D, 0x0A};
-static char* HTTP_RESPONSE_LINE_SEPARATOR = HTTP_RESPONSE_LINE_SEPARATOR_ARRAY;
+static wchar_t HTTP_RESPONSE_LINE_SEPARATOR_ARRAY[] = {0x000D, 0x000A};
+static wchar_t* HTTP_RESPONSE_LINE_SEPARATOR = HTTP_RESPONSE_LINE_SEPARATOR_ARRAY;
 static int* HTTP_RESPONSE_LINE_SEPARATOR_COUNT = NUMBER_2_INTEGER_ARRAY;
 
 /** The http headers separator (twice "carriage return" and "line feed", in other words: an empty line). */
-static char HTTP_HEADERS_SEPARATOR_ARRAY[] = {0x0D, 0x0A, 0x0D, 0x0A};
-static char* HTTP_HEADERS_SEPARATOR = HTTP_HEADERS_SEPARATOR_ARRAY;
+static wchar_t HTTP_HEADERS_SEPARATOR_ARRAY[] = {0x000D, 0x000A, 0x000D, 0x000A};
+static wchar_t* HTTP_HEADERS_SEPARATOR = HTTP_HEADERS_SEPARATOR_ARRAY;
 static int* HTTP_HEADERS_SEPARATOR_COUNT = NUMBER_4_INTEGER_ARRAY;
 
 /** The http body separator ("carriage return" and "line feed"). */
-static char HTTP_BODY_SEPARATOR_ARRAY[] = {0x0D, 0x0A};
-static char* HTTP_BODY_SEPARATOR = HTTP_BODY_SEPARATOR_ARRAY;
+static wchar_t HTTP_BODY_SEPARATOR_ARRAY[] = {0x000D, 0x000A};
+static wchar_t* HTTP_BODY_SEPARATOR = HTTP_BODY_SEPARATOR_ARRAY;
 static int* HTTP_BODY_SEPARATOR_COUNT = NUMBER_2_INTEGER_ARRAY;
 
 //
@@ -62,11 +62,11 @@ static int* HTTP_BODY_SEPARATOR_COUNT = NUMBER_2_INTEGER_ARRAY;
 //
 
 /** The http request method separator. */
-static char* HTTP_REQUEST_METHOD_SEPARATOR = SPACE_CHARACTER_ARRAY;
+static wchar_t* HTTP_REQUEST_METHOD_SEPARATOR = SPACE_WIDE_CHARACTER_ARRAY;
 static int* HTTP_REQUEST_METHOD_SEPARATOR_COUNT = NUMBER_1_INTEGER_ARRAY;
 
 /** The http uniform resource identifier separator. */
-static char* HTTP_UNIFORM_RESOURCE_IDENTIFIER_SEPARATOR = SPACE_CHARACTER_ARRAY;
+static wchar_t* HTTP_UNIFORM_RESOURCE_IDENTIFIER_SEPARATOR = SPACE_WIDE_CHARACTER_ARRAY;
 static int* HTTP_UNIFORM_RESOURCE_IDENTIFIER_SEPARATOR_COUNT = NUMBER_1_INTEGER_ARRAY;
 
 //
@@ -74,7 +74,7 @@ static int* HTTP_UNIFORM_RESOURCE_IDENTIFIER_SEPARATOR_COUNT = NUMBER_1_INTEGER_
 //
 
 /** The http protocol version separator. */
-static char* HTTP_PROTOCOL_VERSION_SEPARATOR = SPACE_CHARACTER_ARRAY;
+static wchar_t* HTTP_PROTOCOL_VERSION_SEPARATOR = SPACE_WIDE_CHARACTER_ARRAY;
 static int* HTTP_PROTOCOL_VERSION_SEPARATOR_COUNT = NUMBER_1_INTEGER_ARRAY;
 
 //
@@ -82,22 +82,22 @@ static int* HTTP_PROTOCOL_VERSION_SEPARATOR_COUNT = NUMBER_1_INTEGER_ARRAY;
 //
 
 /** The http header argument separator ("colon" and "space"). */
-static char HTTP_HEADER_ARGUMENT_SEPARATOR_ARRAY[] = {0x3A, 0x20};
-static char* HTTP_HEADER_ARGUMENT_SEPARATOR = HTTP_HEADER_ARGUMENT_SEPARATOR_ARRAY;
+static wchar_t HTTP_HEADER_ARGUMENT_SEPARATOR_ARRAY[] = {0x003A, 0x0020};
+static wchar_t* HTTP_HEADER_ARGUMENT_SEPARATOR = HTTP_HEADER_ARGUMENT_SEPARATOR_ARRAY;
 static int* HTTP_HEADER_ARGUMENT_SEPARATOR_COUNT = NUMBER_2_INTEGER_ARRAY;
 
 /** The http header value separator ("semicolon" and "space"). */
-static char HTTP_HEADER_VALUE_SEPARATOR_ARRAY[] = {0x3B, 0x20};
-static char* HTTP_HEADER_VALUE_SEPARATOR = HTTP_HEADER_VALUE_SEPARATOR_ARRAY;
+static wchar_t HTTP_HEADER_VALUE_SEPARATOR_ARRAY[] = {0x003B, 0x0020};
+static wchar_t* HTTP_HEADER_VALUE_SEPARATOR = HTTP_HEADER_VALUE_SEPARATOR_ARRAY;
 static int* HTTP_HEADER_VALUE_SEPARATOR_COUNT = NUMBER_2_INTEGER_ARRAY;
 
 /** The http header value assignment separator ("equals sign"). */
-static char* HTTP_HEADER_VALUE_ASSIGNMENT_SEPARATOR = EQUALS_SIGN_CHARACTER_ARRAY;
+static wchar_t* HTTP_HEADER_VALUE_ASSIGNMENT_SEPARATOR = EQUALS_SIGN_WIDE_CHARACTER_ARRAY;
 static int* HTTP_HEADER_VALUE_ASSIGNMENT_SEPARATOR_COUNT = NUMBER_1_INTEGER_ARRAY;
 
 /** The http header separator ("carriage return" and "line feed"). */
-static char HTTP_HEADER_SEPARATOR_ARRAY[] = {0x0D, 0x0A};
-static char* HTTP_HEADER_SEPARATOR = HTTP_HEADER_SEPARATOR_ARRAY;
+static wchar_t HTTP_HEADER_SEPARATOR_ARRAY[] = {0x000D, 0x000A};
+static wchar_t* HTTP_HEADER_SEPARATOR = HTTP_HEADER_SEPARATOR_ARRAY;
 static int* HTTP_HEADER_SEPARATOR_COUNT = NUMBER_2_INTEGER_ARRAY;
 
 /* HTTP_SEPARATOR_CONSTANTS_SOURCE */

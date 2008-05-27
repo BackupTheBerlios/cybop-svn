@@ -14,9 +14,26 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.59 $ $Date: 2008-05-20 22:13:43 $ $Author: christian $
+# @version $Revision: 1.60 $ $Date: 2008-05-27 22:51:59 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2008-05-27  Christian Heller  <christian.heller@tuxtax.de>
+        * Convert some files from "char" to "wchar_t" in directory
+            memoriser/converter/
+
+2008-05-25  Christian Heller  <christian.heller@tuxtax.de>
+        * Convert files from "char" to "wchar_t" in directory
+            memoriser/converter/character/
+
+2008-05-24  Christian Heller  <christian.heller@tuxtax.de>
+        * Verify that no conversion is necessary for files in directories
+            "memoriser/array/", "memoriser/allocator/"
+        * Convert files from "char" to "wchar_t" in directories
+            "memoriser/", "memoriser/accessor/", "memoriser/communicator/"
+
+2008-05-21  Christian Heller  <christian.heller@tuxtax.de>
+        * Convert all files in directory "globals/" from "char" to "wchar_t"
 
 2008-05-20  Christian Heller  <christian.heller@tuxtax.de>
         * Remove function calls of "allocate_array" etc. from module "logger.c"

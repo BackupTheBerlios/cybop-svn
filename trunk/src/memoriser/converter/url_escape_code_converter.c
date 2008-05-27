@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2008-05-04 00:18:14 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2008-05-27 22:52:00 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -84,265 +84,265 @@ void decode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) SPACE_URL_ESCAPE_CODE, (void*) SPACE_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) SPACE_URL_ESCAPE_CODE, (void*) SPACE_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
-                        t = (void**) &SPACE_CHARACTER;
+                        t = (void**) &SPACE_WIDE_CHARACTER;
                         tc = *PRIMITIVE_COUNT;
-                        ts = tc;
+                        ts = *WIDE_CHARACTER_PRIMITIVE_SIZE;
                     }
                 }
 
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) NUMBER_SIGN_URL_ESCAPE_CODE, (void*) NUMBER_SIGN_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) NUMBER_SIGN_URL_ESCAPE_CODE, (void*) NUMBER_SIGN_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
-                        t = (void**) &NUMBER_SIGN_CHARACTER;
+                        t = (void**) &NUMBER_SIGN_WIDE_CHARACTER;
                         tc = *PRIMITIVE_COUNT;
-                        ts = tc;
+                        ts = *WIDE_CHARACTER_PRIMITIVE_SIZE;
                     }
                 }
 
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) DOLLAR_SIGN_URL_ESCAPE_CODE, (void*) DOLLAR_SIGN_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) DOLLAR_SIGN_URL_ESCAPE_CODE, (void*) DOLLAR_SIGN_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
-                        t = (void**) &DOLLAR_SIGN_CHARACTER;
+                        t = (void**) &DOLLAR_SIGN_WIDE_CHARACTER;
                         tc = *PRIMITIVE_COUNT;
-                        ts = tc;
+                        ts = *WIDE_CHARACTER_PRIMITIVE_SIZE;
                     }
                 }
 
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) PERCENT_SIGN_URL_ESCAPE_CODE, (void*) PERCENT_SIGN_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) PERCENT_SIGN_URL_ESCAPE_CODE, (void*) PERCENT_SIGN_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
-                        t = (void**) &PERCENT_SIGN_CHARACTER;
+                        t = (void**) &PERCENT_SIGN_WIDE_CHARACTER;
                         tc = *PRIMITIVE_COUNT;
-                        ts = tc;
+                        ts = *WIDE_CHARACTER_PRIMITIVE_SIZE;
                     }
                 }
 
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) AMPERSAND_URL_ESCAPE_CODE, (void*) AMPERSAND_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) AMPERSAND_URL_ESCAPE_CODE, (void*) AMPERSAND_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
-                        t = (void**) &AMPERSAND_CHARACTER;
+                        t = (void**) &AMPERSAND_WIDE_CHARACTER;
                         tc = *PRIMITIVE_COUNT;
-                        ts = tc;
+                        ts = *WIDE_CHARACTER_PRIMITIVE_SIZE;
                     }
                 }
 
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) SOLIDUS_URL_ESCAPE_CODE, (void*) SOLIDUS_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) SOLIDUS_URL_ESCAPE_CODE, (void*) SOLIDUS_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
-                        t = (void**) &SOLIDUS_CHARACTER;
+                        t = (void**) &SOLIDUS_WIDE_CHARACTER;
                         tc = *PRIMITIVE_COUNT;
-                        ts = tc;
+                        ts = *WIDE_CHARACTER_PRIMITIVE_SIZE;
                     }
                 }
 
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) COLON_URL_ESCAPE_CODE, (void*) COLON_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) COLON_URL_ESCAPE_CODE, (void*) COLON_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
-                        t = (void**) &COLON_CHARACTER;
+                        t = (void**) &COLON_WIDE_CHARACTER;
                         tc = *PRIMITIVE_COUNT;
-                        ts = tc;
+                        ts = *WIDE_CHARACTER_PRIMITIVE_SIZE;
                     }
                 }
 
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) SEMICOLON_URL_ESCAPE_CODE, (void*) SEMICOLON_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) SEMICOLON_URL_ESCAPE_CODE, (void*) SEMICOLON_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
-                        t = (void**) &SEMICOLON_CHARACTER;
+                        t = (void**) &SEMICOLON_WIDE_CHARACTER;
                         tc = *PRIMITIVE_COUNT;
-                        ts = tc;
+                        ts = *WIDE_CHARACTER_PRIMITIVE_SIZE;
                     }
                 }
 
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) LESS_THAN_SIGN_URL_ESCAPE_CODE, (void*) LESS_THAN_SIGN_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) LESS_THAN_SIGN_URL_ESCAPE_CODE, (void*) LESS_THAN_SIGN_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
-                        t = (void**) &LESS_THAN_SIGN_CHARACTER;
+                        t = (void**) &LESS_THAN_SIGN_WIDE_CHARACTER;
                         tc = *PRIMITIVE_COUNT;
-                        ts = tc;
+                        ts = *WIDE_CHARACTER_PRIMITIVE_SIZE;
                     }
                 }
 
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) EQUALS_SIGN_URL_ESCAPE_CODE, (void*) EQUALS_SIGN_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) EQUALS_SIGN_URL_ESCAPE_CODE, (void*) EQUALS_SIGN_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
-                        t = (void**) &EQUALS_SIGN_CHARACTER;
+                        t = (void**) &EQUALS_SIGN_WIDE_CHARACTER;
                         tc = *PRIMITIVE_COUNT;
-                        ts = tc;
+                        ts = *WIDE_CHARACTER_PRIMITIVE_SIZE;
                     }
                 }
 
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) GREATER_THAN_SIGN_URL_ESCAPE_CODE, (void*) GREATER_THAN_SIGN_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) GREATER_THAN_SIGN_URL_ESCAPE_CODE, (void*) GREATER_THAN_SIGN_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
-                        t = (void**) &GREATER_THAN_SIGN_CHARACTER;
+                        t = (void**) &GREATER_THAN_SIGN_WIDE_CHARACTER;
                         tc = *PRIMITIVE_COUNT;
-                        ts = tc;
+                        ts = *WIDE_CHARACTER_PRIMITIVE_SIZE;
                     }
                 }
 
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) QUESTION_MARK_URL_ESCAPE_CODE, (void*) QUESTION_MARK_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) QUESTION_MARK_URL_ESCAPE_CODE, (void*) QUESTION_MARK_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
-                        t = (void**) &QUESTION_MARK_CHARACTER;
+                        t = (void**) &QUESTION_MARK_WIDE_CHARACTER;
                         tc = *PRIMITIVE_COUNT;
-                        ts = tc;
+                        ts = *WIDE_CHARACTER_PRIMITIVE_SIZE;
                     }
                 }
 
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) COMMERCIAL_AT_URL_ESCAPE_CODE, (void*) COMMERCIAL_AT_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) COMMERCIAL_AT_URL_ESCAPE_CODE, (void*) COMMERCIAL_AT_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
-                        t = (void**) &COMMERCIAL_AT_CHARACTER;
+                        t = (void**) &COMMERCIAL_AT_WIDE_CHARACTER;
                         tc = *PRIMITIVE_COUNT;
-                        ts = tc;
+                        ts = *WIDE_CHARACTER_PRIMITIVE_SIZE;
                     }
                 }
 
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) LEFT_SQUARE_BRACKET_URL_ESCAPE_CODE, (void*) LEFT_SQUARE_BRACKET_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) LEFT_SQUARE_BRACKET_URL_ESCAPE_CODE, (void*) LEFT_SQUARE_BRACKET_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
-                        t = (void**) &LEFT_SQUARE_BRACKET_CHARACTER;
+                        t = (void**) &LEFT_SQUARE_BRACKET_WIDE_CHARACTER;
                         tc = *PRIMITIVE_COUNT;
-                        ts = tc;
+                        ts = *WIDE_CHARACTER_PRIMITIVE_SIZE;
                     }
                 }
 
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) REVERSE_SOLIDUS_URL_ESCAPE_CODE, (void*) REVERSE_SOLIDUS_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) REVERSE_SOLIDUS_URL_ESCAPE_CODE, (void*) REVERSE_SOLIDUS_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
-                        t = (void**) &REVERSE_SOLIDUS_CHARACTER;
+                        t = (void**) &REVERSE_SOLIDUS_WIDE_CHARACTER;
                         tc = *PRIMITIVE_COUNT;
-                        ts = tc;
+                        ts = *WIDE_CHARACTER_PRIMITIVE_SIZE;
                     }
                 }
 
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) RIGHT_SQUARE_BRACKET_URL_ESCAPE_CODE, (void*) RIGHT_SQUARE_BRACKET_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) RIGHT_SQUARE_BRACKET_URL_ESCAPE_CODE, (void*) RIGHT_SQUARE_BRACKET_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
-                        t = (void**) &RIGHT_SQUARE_BRACKET_CHARACTER;
+                        t = (void**) &RIGHT_SQUARE_BRACKET_WIDE_CHARACTER;
                         tc = *PRIMITIVE_COUNT;
-                        ts = tc;
+                        ts = *WIDE_CHARACTER_PRIMITIVE_SIZE;
                     }
                 }
 
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) CARET_URL_ESCAPE_CODE, (void*) CARET_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) CARET_URL_ESCAPE_CODE, (void*) CARET_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
-                        t = (void**) &CIRCUMFLEX_ACCENT_CHARACTER;
+                        t = (void**) &CIRCUMFLEX_ACCENT_WIDE_CHARACTER;
                         tc = *PRIMITIVE_COUNT;
-                        ts = tc;
+                        ts = *WIDE_CHARACTER_PRIMITIVE_SIZE;
                     }
                 }
 
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) GRAVE_ACCENT_URL_ESCAPE_CODE, (void*) GRAVE_ACCENT_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) GRAVE_ACCENT_URL_ESCAPE_CODE, (void*) GRAVE_ACCENT_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
-                        t = (void**) &GRAVE_ACCENT_CHARACTER;
+                        t = (void**) &GRAVE_ACCENT_WIDE_CHARACTER;
                         tc = *PRIMITIVE_COUNT;
-                        ts = tc;
+                        ts = *WIDE_CHARACTER_PRIMITIVE_SIZE;
                     }
                 }
 
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) LEFT_CURLY_BRACE_URL_ESCAPE_CODE, (void*) LEFT_CURLY_BRACE_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) LEFT_CURLY_BRACE_URL_ESCAPE_CODE, (void*) LEFT_CURLY_BRACE_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
-                        t = (void**) &LEFT_CURLY_BRACKET_CHARACTER;
+                        t = (void**) &LEFT_CURLY_BRACKET_WIDE_CHARACTER;
                         tc = *PRIMITIVE_COUNT;
-                        ts = tc;
+                        ts = *WIDE_CHARACTER_PRIMITIVE_SIZE;
                     }
                 }
 
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) VERTICAL_BAR_URL_ESCAPE_CODE, (void*) VERTICAL_BAR_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) VERTICAL_BAR_URL_ESCAPE_CODE, (void*) VERTICAL_BAR_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
-                        t = (void**) &VERTICAL_LINE_CHARACTER;
+                        t = (void**) &VERTICAL_LINE_WIDE_CHARACTER;
                         tc = *PRIMITIVE_COUNT;
-                        ts = tc;
+                        ts = *WIDE_CHARACTER_PRIMITIVE_SIZE;
                     }
                 }
 
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) RIGHT_CURLY_BRACE_URL_ESCAPE_CODE, (void*) RIGHT_CURLY_BRACE_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) RIGHT_CURLY_BRACE_URL_ESCAPE_CODE, (void*) RIGHT_CURLY_BRACE_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
-                        t = (void**) &RIGHT_CURLY_BRACKET_CHARACTER;
+                        t = (void**) &RIGHT_CURLY_BRACKET_WIDE_CHARACTER;
                         tc = *PRIMITIVE_COUNT;
-                        ts = tc;
+                        ts = *WIDE_CHARACTER_PRIMITIVE_SIZE;
                     }
                 }
 
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) TILDE_URL_ESCAPE_CODE, (void*) TILDE_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) TILDE_URL_ESCAPE_CODE, (void*) TILDE_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
-                        t = (void**) &TILDE_CHARACTER;
+                        t = (void**) &TILDE_WIDE_CHARACTER;
                         tc = *PRIMITIVE_COUNT;
-                        ts = tc;
+                        ts = *WIDE_CHARACTER_PRIMITIVE_SIZE;
                     }
                 }
 
@@ -355,14 +355,14 @@ void decode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     if ((*dc + tc) > *ds) {
 
                         // Calculate destination size.
-                        *ds = (*CHARACTER_VECTOR_REALLOCATION_FACTOR * (*dc)) + tc;
+                        *ds = (*WIDE_CHARACTER_VECTOR_REALLOCATION_FACTOR * (*dc)) + tc;
 
                         // Reallocate destination.
-                        reallocate(p0, p1, p2, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+                        reallocate(p0, p1, p2, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
                     }
 
                     // Add temporary value to destination.
-                    set_element(*d, p1, (void*) t, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+                    set_element(*d, p1, (void*) t, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
                     // Increase destination count.
                     *dc = *dc + tc;
@@ -416,7 +416,7 @@ void encode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) SPACE_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -428,7 +428,7 @@ void encode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) NUMBER_SIGN_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) NUMBER_SIGN_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -440,7 +440,7 @@ void encode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) DOLLAR_SIGN_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) DOLLAR_SIGN_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -452,7 +452,7 @@ void encode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) PERCENT_SIGN_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) PERCENT_SIGN_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -464,7 +464,7 @@ void encode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) AMPERSAND_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) AMPERSAND_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -476,7 +476,7 @@ void encode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) SOLIDUS_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) SOLIDUS_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -488,7 +488,7 @@ void encode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) COLON_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) COLON_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -500,7 +500,7 @@ void encode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) SEMICOLON_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) SEMICOLON_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -512,7 +512,7 @@ void encode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) LESS_THAN_SIGN_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) LESS_THAN_SIGN_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -524,7 +524,7 @@ void encode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) EQUALS_SIGN_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) EQUALS_SIGN_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -536,7 +536,7 @@ void encode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) GREATER_THAN_SIGN_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) GREATER_THAN_SIGN_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -548,7 +548,7 @@ void encode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) QUESTION_MARK_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) QUESTION_MARK_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -560,7 +560,7 @@ void encode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) COMMERCIAL_AT_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) COMMERCIAL_AT_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -572,7 +572,7 @@ void encode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) LEFT_SQUARE_BRACKET_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) LEFT_SQUARE_BRACKET_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -584,7 +584,7 @@ void encode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) REVERSE_SOLIDUS_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) REVERSE_SOLIDUS_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -596,7 +596,7 @@ void encode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) RIGHT_SQUARE_BRACKET_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) RIGHT_SQUARE_BRACKET_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -608,7 +608,7 @@ void encode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) CIRCUMFLEX_ACCENT_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) CIRCUMFLEX_ACCENT_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -620,7 +620,7 @@ void encode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) GRAVE_ACCENT_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) GRAVE_ACCENT_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -632,7 +632,7 @@ void encode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) LEFT_CURLY_BRACKET_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) LEFT_CURLY_BRACKET_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -644,7 +644,7 @@ void encode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) VERTICAL_LINE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) VERTICAL_LINE_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -656,7 +656,7 @@ void encode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) RIGHT_CURLY_BRACKET_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) RIGHT_CURLY_BRACKET_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -668,7 +668,7 @@ void encode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 if (r == *NUMBER_0_INTEGER) {
 
-                    compare_arrays(p3, p4, (void*) TILDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) TILDE_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (r != *NUMBER_0_INTEGER) {
 
@@ -687,14 +687,14 @@ void encode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     if ((*dc + tc) > *ds) {
 
                         // Calculate destination size.
-                        *ds = (*CHARACTER_VECTOR_REALLOCATION_FACTOR * (*dc)) + tc;
+                        *ds = (*WIDE_CHARACTER_VECTOR_REALLOCATION_FACTOR * (*dc)) + tc;
 
                         // Reallocate destination.
-                        reallocate(p0, p1, p2, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+                        reallocate(p0, p1, p2, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
                     }
 
                     // Add temporary value to destination.
-                    set_element(*d, p1, (void*) t, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+                    set_element(*d, p1, (void*) t, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
                     // Increase destination count.
                     *dc = *dc + tc;

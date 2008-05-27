@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.22 $ $Date: 2008-05-04 22:34:39 $ $Author: christian $
+ * @version $Revision: 1.23 $ $Date: 2008-05-27 22:52:00 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -64,8 +64,7 @@ void decode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
  * @param p7 the knowledge memory
  * @param p8 the knowledge memory count
  */
-void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
-    void* p5, void* p6, void* p7, void* p8) {
+void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8) {
 
     if (p4 != *NULL_POINTER) {
 
@@ -270,9 +269,11 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
 
         // The terminated title.
         void* tt = *NULL_POINTER;
+        int ttc = *NUMBER_MINUS_1_INTEGER;
         int tts = *NUMBER_MINUS_1_INTEGER;
         // The terminated icon name.
         void* ti = *NULL_POINTER;
+        int tic = *NUMBER_MINUS_1_INTEGER;
         int tis = *NUMBER_MINUS_1_INTEGER;
 
         // The source part position coordinates.
@@ -349,7 +350,7 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
     fwprintf(stderr, L"layout: %s\n", *lm);
     fwprintf(stderr, L"layout count: %i\n", *((int*) *lmc));
 
-            compare_arrays(*lm, *lmc, (void*) UI_ROOT_LAYOUT_MODEL, (void*) UI_ROOT_LAYOUT_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+            compare_arrays(*lm, *lmc, (void*) UI_ROOT_LAYOUT_MODEL, (void*) UI_ROOT_LAYOUT_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
             if (r == *NUMBER_0_INTEGER) {
 
@@ -370,24 +371,43 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
                 // Reset comparison result.
                 r = *NUMBER_0_INTEGER;
 
-                compare_arrays(*a, *ac, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                compare_arrays(*a, *ac, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                 if (r != *NUMBER_0_INTEGER) {
 
                     // The terminated text.
                     char* text = (char*) *NULL_POINTER;
-                    int texts = *((int*) *mc) + *NUMBER_1_INTEGER;
+                    int textc = *NUMBER_0_INTEGER;
+                    int texts = *NUMBER_0_INTEGER;
 
                     // Create terminated text.
                     allocate_array((void*) &text, (void*) &texts, (void*) CHARACTER_ARRAY);
 
-                    // Set terminated text by first copying the actual name
-                    // and then adding the null termination character.
-                    set_array_elements(text, (void*) NUMBER_0_INTEGER, *m, *mc, (void*) CHARACTER_ARRAY);
-                    set_array_elements(text, *mc, (void*) NULL_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+                    // Encode wide character name into text, which is a multibyte character array.
+                    encode_utf_8_unicode_character_vector((void*) &text, (void*) &textc, (void*) &texts, *m, *mc);
 
-                    // Draw the text (character vector / string).
-                    XDrawString(*di, **w, *gc, *pmx, *pmy + *NUMBER_20_INTEGER, text, texts);
+                    if (texts <= textc) {
+
+                        // Increase character array size to have place for the termination character.
+                        texts = textc + *NUMBER_1_INTEGER;
+
+                        // Reallocate terminated file name as multibyte character array.
+                        reallocate_array((void*) &text, (void*) &textc, (void*) &texts, (void*) CHARACTER_ARRAY);
+                    }
+
+                    // Add null termination character to text.
+                    set_array_elements(text, (void*) &textc, (void*) NULL_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+
+                    //?? TODO: Create "text" as 2byte character array,
+                    //?? since the xlib C library expects it that way.
+                    //?? Introduce new array modules with functions for a 2byte character array!
+
+                    // Draw the text (character vector/ string).
+                    //
+                    // CAUTION! The Xlib C Library offers a function "XDrawString16"
+                    // to draw 2byte characters in a given drawable.
+                    // However, standard utf-8 encoded characters are used here.
+                    XDrawString(*di, **w, *gc, *pmx, *pmy + *NUMBER_20_INTEGER, text, textc);
 
                     // Destroy terminated text.
                     deallocate_array((void*) &text, (void*) &texts, (void*) CHARACTER_ARRAY);
@@ -540,26 +560,50 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
 
                 // The terminated title.
                 tt = *NULL_POINTER;
-                tts = *((int*) *tmc) + *NUMBER_1_INTEGER;
+                ttc = *NUMBER_0_INTEGER;
+                tts = *NUMBER_0_INTEGER;
                 // The terminated icon name.
                 ti = *NULL_POINTER;
-                tis = *((int*) *imc) + *NUMBER_1_INTEGER;
+                tic = *NUMBER_0_INTEGER;
+                tis = *NUMBER_0_INTEGER;
 
                 // Create terminated title.
                 allocate_array((void*) &tt, (void*) &tts, (void*) CHARACTER_ARRAY);
                 // Create terminated icon name.
                 allocate_array((void*) &ti, (void*) &tis, (void*) CHARACTER_ARRAY);
 
-                // Set terminated title by first copying the actual name
-                // and then adding the null termination character.
-                set_array_elements(tt, (void*) NUMBER_0_INTEGER, *tm, *tmc, (void*) CHARACTER_ARRAY);
-                set_array_elements(tt, *tmc, (void*) NULL_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
-                // Set terminated icon name by first copying the actual name
-                // and then adding the null termination character.
-                set_array_elements(ti, (void*) NUMBER_0_INTEGER, *im, *imc, (void*) CHARACTER_ARRAY);
-                set_array_elements(ti, *imc, (void*) NULL_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+                // Encode wide character name into title, which is a multibyte character array.
+                encode_utf_8_unicode_character_vector((void*) &tt, (void*) &ttc, (void*) &tts, *tm, *tmc);
+                // Encode wide character name into icon name, which is a multibyte character array.
+                encode_utf_8_unicode_character_vector((void*) &ti, (void*) &tic, (void*) &tis, *im, *imc);
+
+                if (tts <= ttc) {
+
+                    // Increase character array size to have place for the termination character.
+                    tts = ttc + *NUMBER_1_INTEGER;
+
+                    // Reallocate title as multibyte character array.
+                    reallocate_array((void*) &tt, (void*) &ttc, (void*) &tts, (void*) CHARACTER_ARRAY);
+                }
+
+                if (tis <= tic) {
+
+                    // Increase character array size to have place for the termination character.
+                    tis = tic + *NUMBER_1_INTEGER;
+
+                    // Reallocate icon name as multibyte character array.
+                    reallocate_array((void*) &ti, (void*) &tic, (void*) &tis, (void*) CHARACTER_ARRAY);
+                }
+
+                // Add null termination character to title.
+                set_array_elements(tt, (void*) &ttc, (void*) NULL_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+                // Add null termination character to icon name.
+                set_array_elements(ti, (void*) &tic, (void*) NULL_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
 
                 // Set terminated window title.
+                //
+                // CAUTION! If the string "tt" is not in the host portable
+                // character encoding, the result is implementation-dependent.
                 XStoreName(*di, **w, (char*) tt);
                 // Set terminated window icon.
                 XSetIconName(*di, **w, (char*) ti);
@@ -573,7 +617,7 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4,
             // Reset comparison result.
             r = *NUMBER_0_INTEGER;
 
-            compare_arrays(*a, *ac, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+            compare_arrays(*a, *ac, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
             if (r != *NUMBER_0_INTEGER) {
 

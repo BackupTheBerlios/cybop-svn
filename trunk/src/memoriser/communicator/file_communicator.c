@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.30 $ $Date: 2008-05-04 00:18:13 $ $Author: christian $
+ * @version $Revision: 1.31 $ $Date: 2008-05-27 22:52:00 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -36,6 +36,7 @@
 #include "../../globals/constants/system/system_file_name_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../globals/variables/reallocation_factor_variables.c"
+#include "../../memoriser/converter/character/utf_8_unicode_character_converter.c"
 #include "../../memoriser/array.c"
 
 /**
@@ -126,10 +127,10 @@ void read_file_stream(void* p0, void* p1, void* p2, void* p3) {
  * Reads a file and writes it into a byte array.
  *
  * @param p0 the destination byte array (Hand over as reference!)
- * @param p1 the destination count
- * @param p2 the destination size
+ * @param p1 the destination byte array count
+ * @param p2 the destination byte array size
  * @param p3 the source file name
- * @param p4 the source count
+ * @param p4 the source file name count
  */
 void read_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
@@ -141,15 +142,12 @@ void read_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         // The comparison result.
         int r = *NUMBER_0_INTEGER;
-        // The terminated file name.
-        void* tn = *NULL_POINTER;
-        int tns = *sc + *NUMBER_1_INTEGER;
         // The file.
         FILE* f = (FILE*) *NULL_POINTER;
 
         if (r == *NUMBER_0_INTEGER) {
 
-            compare_arrays(p3, p4, (void*) INPUT_SYSTEM_FILE_NAME, (void*) INPUT_SYSTEM_FILE_NAME_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+            compare_arrays(p3, p4, (void*) INPUT_SYSTEM_FILE_NAME, (void*) INPUT_SYSTEM_FILE_NAME_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
             if (r != *NUMBER_0_INTEGER) {
 
@@ -164,13 +162,28 @@ void read_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             // If the given name does not match the standard input, then interpret it as file name.
 
+            // The terminated file name.
+            void* tn = *NULL_POINTER;
+            int tnc = *NUMBER_0_INTEGER;
+            int tns = *NUMBER_0_INTEGER;
+
             // Allocate terminated file name.
             allocate_array((void*) &tn, (void*) &tns, (void*) CHARACTER_ARRAY);
 
-            // Set terminated file name by first copying the actual name
-            // and then adding the null termination character.
-            set_array_elements(tn, (void*) NUMBER_0_INTEGER, p3, p4, (void*) CHARACTER_ARRAY);
-            set_array_elements(tn, p4, (void*) NULL_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+            // Encode wide character name into multibyte character array.
+            encode_utf_8_unicode_character_vector((void*) &tn, (void*) &tnc, (void*) &tns, p3, p4);
+
+            if (tns <= tnc) {
+
+                // Increase character array size to have place for the termination character.
+                tns = tnc + *NUMBER_1_INTEGER;
+
+                // Reallocate terminated file name as multibyte character array.
+                reallocate_array((void*) &tn, (void*) &tnc, (void*) &tns, (void*) CHARACTER_ARRAY);
+            }
+
+            // Add null termination character to terminated file name.
+            set_array_elements(tn, (void*) &tnc, (void*) NULL_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
 
             // Open file.
             // CAUTION! The file name cannot be handed over as is.
@@ -284,9 +297,6 @@ void write_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             // The comparison result.
             int r = *NUMBER_0_INTEGER;
-            // The terminated file name.
-            void* tn = *NULL_POINTER;
-            int tns = *dc + *NUMBER_1_INTEGER;
             // The file.
             FILE* f = (FILE*) *NULL_POINTER;
 
@@ -340,15 +350,31 @@ void write_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             if (r == *NUMBER_0_INTEGER) {
 
-                // If the given name does not match the standard input, then interpret it as file name.
+                // If the given name does neither match the standard output
+                // nor the standard error output, then interpret it as file name.
+
+                // The terminated file name.
+                void* tn = *NULL_POINTER;
+                int tnc = *NUMBER_0_INTEGER;
+                int tns = *NUMBER_0_INTEGER;
 
                 // Allocate terminated file name.
                 allocate_array((void*) &tn, (void*) &tns, (void*) CHARACTER_ARRAY);
 
-                // Set terminated file name by first copying the actual name
-                // and then adding the null termination character.
-                set_array_elements(tn, (void*) NUMBER_0_INTEGER, *d, p1, (void*) CHARACTER_ARRAY);
-                set_array_elements(tn, p1, (void*) NULL_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+                // Encode wide character option into multibyte character array.
+                encode_utf_8_unicode_character_vector((void*) &tn, (void*) &tnc, (void*) &tns, *d, p1);
+
+                if (tns <= tnc) {
+
+                    // Increase character array size to have place for the termination character.
+                    tns = tnc + *NUMBER_1_INTEGER;
+
+                    // Reallocate terminated file name as multibyte character array.
+                    reallocate_array((void*) &tn, (void*) &tnc, (void*) &tns, (void*) CHARACTER_ARRAY);
+                }
+
+                // Add null termination character to terminated file name.
+                set_array_elements(tn, (void*) &tnc, (void*) NULL_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
 
                 // Open file.
                 // CAUTION! The file name cannot be handed over as is.
