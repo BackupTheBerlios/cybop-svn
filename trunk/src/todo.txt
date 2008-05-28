@@ -7,28 +7,22 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.50 $ $Date: 2008-05-27 22:51:59 $ $Author: christian $
+# @version $Revision: 1.51 $ $Date: 2008-05-28 22:39:58 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Convert files in directory "memoriser/converter/" from "char" to "wchar_t"
+        * Find unspecific bug causing a segmentation fault in optionaliser,
+            sometimes in function "optionalise_log_file", other times in "optionalise_log_level"
+        * Check why the escape code sequence (e.g. ESC[B for arrow left) is added to the
+            knowledge tree TEST_SHUTDOWN, instead of the decoded string "arrow_left"
+
+        * Check the following files in directory "memoriser/converter/",
+            which were probably not converted correctly from "char" to "wchar_t":
             gnu_linux_console_converter.c
             http_request_converter.c
             http_response_converter.c
             xdt_converter.c
-            xhtml_converter.c
 
-        * Find unspecific bug causing a segmentation fault in optionaliser,
-            sometimes in function "optionalise_log_file", other times in "optionalise_log_level"
-
-        * Convert all files in directory "applicator/" from "char" to "wchar_t"
-        * Check the calls of "decode" in function "decode_compound_cybol_node",
-            since the conversion does not work anymore if changed to wide character!
-        * Go through source code manually searching for potential bugs, after conversion to wide character
-        * Replace function calls to "strlen" with "wcslen"
-        * Check where possibly to replace "encode_integer" with "encode_integer_wide"
-        * Check why the escape code sequence (e.g. ESC[B for arrow left) is added to the
-                knowledge tree TEST_SHUTDOWN, instead of the decoded string "arrow_left"
         * Reactivate loop in function "read_gnu_linux_console" (which was blocking the program flow),
             because escape sequences consist of more than one characters (mostly three)
         * Find some way to predict the number of characters or find an eof or the like,

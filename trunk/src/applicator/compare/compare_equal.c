@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.15 $ $Date: 2008-05-04 00:18:10 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2008-05-28 22:39:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -99,7 +99,7 @@ void compare_equal(void* p0, void* p1, void* p2,
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p27, p28, (void*) COMPARE_ALL_SELECTION_MODEL, (void*) COMPARE_ALL_SELECTION_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p27, p28, (void*) COMPARE_ALL_SELECTION_MODEL, (void*) COMPARE_ALL_SELECTION_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
@@ -111,7 +111,7 @@ void compare_equal(void* p0, void* p1, void* p2,
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p27, p28, (void*) COMPARE_PREFIX_SELECTION_MODEL, (void*) COMPARE_PREFIX_SELECTION_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p27, p28, (void*) COMPARE_PREFIX_SELECTION_MODEL, (void*) COMPARE_PREFIX_SELECTION_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
@@ -123,7 +123,7 @@ void compare_equal(void* p0, void* p1, void* p2,
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p27, p28, (void*) COMPARE_SUFFIX_SELECTION_MODEL, (void*) COMPARE_SUFFIX_SELECTION_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p27, p28, (void*) COMPARE_SUFFIX_SELECTION_MODEL, (void*) COMPARE_SUFFIX_SELECTION_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
@@ -135,7 +135,7 @@ void compare_equal(void* p0, void* p1, void* p2,
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p27, p28, (void*) COMPARE_PART_SELECTION_MODEL, (void*) COMPARE_PART_SELECTION_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p27, p28, (void*) COMPARE_PART_SELECTION_MODEL, (void*) COMPARE_PART_SELECTION_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 

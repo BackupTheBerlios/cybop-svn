@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2008-05-04 00:18:11 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2008-05-28 22:39:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -116,7 +116,7 @@ void startup_gnu_linux_console(void* p0, void* p1, void* p2, void* p3) {
         *bs = *NUMBER_3_INTEGER;
 
         // Allocate character buffer.
-        allocate((void*) &b, (void*) bs, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+        allocate((void*) &b, (void*) bs, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
         // Check for gnu/linux console.
         int l = strcmp("linux", getenv("TERM"));

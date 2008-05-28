@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2008-05-04 00:18:10 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2008-05-28 22:39:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -363,7 +363,7 @@ void sense(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays((void*) *cm, (void*) *cmc, (void*) GNU_LINUX_CONSOLE_MODEL, (void*) GNU_LINUX_CONSOLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays((void*) *cm, (void*) *cmc, (void*) GNU_LINUX_CONSOLE_MODEL, (void*) GNU_LINUX_CONSOLE_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
@@ -382,7 +382,7 @@ void sense(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays((void*) *cm, (void*) *cmc, (void*) X_WINDOW_SYSTEM_MODEL, (void*) X_WINDOW_SYSTEM_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays((void*) *cm, (void*) *cmc, (void*) X_WINDOW_SYSTEM_MODEL, (void*) X_WINDOW_SYSTEM_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
@@ -401,7 +401,7 @@ void sense(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays((void*) *cm, (void*) *cmc, (void*) WWW_SERVICE_MODEL, (void*) WWW_SERVICE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays((void*) *cm, (void*) *cmc, (void*) WWW_SERVICE_MODEL, (void*) WWW_SERVICE_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
@@ -426,7 +426,7 @@ void sense(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays((void*) *cm, (void*) *cmc, (void*) CYBOI_SERVICE_MODEL, (void*) CYBOI_SERVICE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays((void*) *cm, (void*) *cmc, (void*) CYBOI_SERVICE_MODEL, (void*) CYBOI_SERVICE_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 

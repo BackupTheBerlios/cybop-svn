@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.13 $ $Date: 2008-05-04 00:18:11 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2008-05-28 22:39:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -68,7 +68,7 @@ void send_shell(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
     int as = *NUMBER_0_INTEGER;
 
     // Allocate array.
-    allocate((void*) &a, (void*) &as, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+    allocate((void*) &a, (void*) &as, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
     // Encode knowledge model into model diagram (hierarchical text).
     encode((void*) &a, (void*) &ac, (void*) &as, *NULL_POINTER, *NULL_POINTER, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10);
@@ -87,11 +87,11 @@ void send_shell(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
                 as = ac * *CHARACTER_VECTOR_REALLOCATION_FACTOR + *PRIMITIVE_COUNT;
 
                 // Reallocate destination character array.
-                reallocate_array((void*) &a, (void*) &ac, (void*) &as, (void*) CHARACTER_ARRAY);
+                reallocate_array((void*) &a, (void*) &ac, (void*) &as, (void*) WIDE_CHARACTER_ARRAY);
             }
 
             // Set new line character.
-            set_array_elements(a, (void*) &ac, (void*) LINE_FEED_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+            set_array_elements(a, (void*) &ac, (void*) LINE_FEED_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
             ac = ac + *PRIMITIVE_COUNT;
         }
     }
@@ -100,7 +100,7 @@ void send_shell(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
     write_data((void*) &STANDARD_OUTPUT_MODEL, (void*) STANDARD_OUTPUT_MODEL_COUNT, *NULL_POINTER, a, (void*) &ac, (void*) FILE_CHANNEL, (void*) FILE_CHANNEL_COUNT);
 
     // Deallocate array.
-    deallocate((void*) &a, (void*) &as, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+    deallocate((void*) &a, (void*) &as, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
 }
 
 /* SEND_SHELL_SOURCE */

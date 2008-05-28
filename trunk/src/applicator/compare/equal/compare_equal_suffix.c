@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2008-05-04 00:18:10 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2008-05-28 22:39:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -103,7 +103,7 @@ void compare_equal_suffix(void* p0, void* p1, void* p2,
                         int r = *NUMBER_0_INTEGER;
 
                         // Compare result parameter abstraction. It must be a boolean.
-                        compare_arrays(p18, p19, (void*) BOOLEAN_ABSTRACTION, (void*) BOOLEAN_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                        compare_arrays(p18, p19, (void*) BOOLEAN_ABSTRACTION, (void*) BOOLEAN_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                         if (r != *NUMBER_0_INTEGER) {
 
@@ -121,8 +121,8 @@ void compare_equal_suffix(void* p0, void* p1, void* p2,
                             rr = *NUMBER_0_INTEGER;
 
                             // Compare parameter abstractions.
-                            compare_arrays(p0, p1, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &lr, (void*) CHARACTER_ARRAY);
-                            compare_arrays(p9, p10, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &rr, (void*) CHARACTER_ARRAY);
+                            compare_arrays(p0, p1, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &lr, (void*) WIDE_CHARACTER_ARRAY);
+                            compare_arrays(p9, p10, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &rr, (void*) WIDE_CHARACTER_ARRAY);
 
                             if ((lr != *NUMBER_0_INTEGER) && (rr != *NUMBER_0_INTEGER)) {
 
@@ -143,11 +143,11 @@ void compare_equal_suffix(void* p0, void* p1, void* p2,
                                     // right parameter: "ing"
                                     // right parameter count: 3
                                     // left side parameter suffix pointer: 0 + (11 - 3) = 8
-                                    void* p = p3 + (*lsmc - *rsmc);
+                                    void* p = p3 + ((*lsmc - *rsmc) * *WIDE_CHARACTER_PRIMITIVE_SIZE);
 
                                     // CAUTION! Hand over the right side model count as count
                                     // of both, left side parameter and right side parameter!
-                                    compare_arrays(p, p13, p12, p13, (void*) &r, (void*) CHARACTER_ARRAY);
+                                    compare_arrays(p, p13, p12, p13, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                                     if (r != *NUMBER_0_INTEGER) {
 

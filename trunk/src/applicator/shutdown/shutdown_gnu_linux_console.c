@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2008-05-04 00:18:11 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2008-05-28 22:39:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -105,7 +105,7 @@ void shutdown_gnu_linux_console(void* p0, void* p1, void* p2) {
         free(*to);
 
         // Deallocate character buffer.
-        deallocate((void*) b, *bs, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+        deallocate((void*) b, *bs, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
         // Deallocate character buffer count, size.
         deallocate((void*) bc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
         deallocate((void*) bs, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.13 $ $Date: 2008-05-04 00:18:10 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2008-05-28 22:39:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -98,7 +98,7 @@ void compare_greater(void* p0, void* p1, void* p2,
                 int r = *NUMBER_0_INTEGER;
 
                 // Compare result parameter abstraction. It must be a boolean.
-                compare_arrays(p18, p19, (void*) BOOLEAN_ABSTRACTION, (void*) BOOLEAN_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                compare_arrays(p18, p19, (void*) BOOLEAN_ABSTRACTION, (void*) BOOLEAN_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
                 if (r != *NUMBER_0_INTEGER) {
 
@@ -116,14 +116,14 @@ void compare_greater(void* p0, void* p1, void* p2,
                     rr = *NUMBER_0_INTEGER;
 
                     // Compare parameter abstractions.
-                    compare_arrays(p0, p1, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &lr, (void*) CHARACTER_ARRAY);
-                    compare_arrays(p9, p10, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &rr, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p0, p1, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &lr, (void*) WIDE_CHARACTER_ARRAY);
+                    compare_arrays(p9, p10, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &rr, (void*) WIDE_CHARACTER_ARRAY);
 
                     if ((lr != *NUMBER_0_INTEGER) && (rr != *NUMBER_0_INTEGER)) {
 
                         log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Use character parameters.");
 
-                        if (*((char*) p3) > *((char*) p12)) {
+                        if (*((wchar_t*) p3) > *((wchar_t*) p12)) {
 
                             *rm = *TRUE_BOOLEAN;
 
@@ -142,8 +142,8 @@ void compare_greater(void* p0, void* p1, void* p2,
                     rr = *NUMBER_0_INTEGER;
 
                     // Compare parameter abstractions.
-                    compare_arrays(p0, p1, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT, (void*) &lr, (void*) CHARACTER_ARRAY);
-                    compare_arrays(p9, p10, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT, (void*) &rr, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p0, p1, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT, (void*) &lr, (void*) WIDE_CHARACTER_ARRAY);
+                    compare_arrays(p9, p10, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT, (void*) &rr, (void*) WIDE_CHARACTER_ARRAY);
 
                     if ((lr != *NUMBER_0_INTEGER) && (rr != *NUMBER_0_INTEGER)) {
 
@@ -168,8 +168,8 @@ void compare_greater(void* p0, void* p1, void* p2,
                     rr = *NUMBER_0_INTEGER;
 
                     // Compare parameter abstractions.
-                    compare_arrays(p0, p1, (void*) DOUBLE_VECTOR_ABSTRACTION, (void*) DOUBLE_VECTOR_ABSTRACTION_COUNT, (void*) &lr, (void*) CHARACTER_ARRAY);
-                    compare_arrays(p9, p10, (void*) DOUBLE_VECTOR_ABSTRACTION, (void*) DOUBLE_VECTOR_ABSTRACTION_COUNT, (void*) &rr, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p0, p1, (void*) DOUBLE_VECTOR_ABSTRACTION, (void*) DOUBLE_VECTOR_ABSTRACTION_COUNT, (void*) &lr, (void*) WIDE_CHARACTER_ARRAY);
+                    compare_arrays(p9, p10, (void*) DOUBLE_VECTOR_ABSTRACTION, (void*) DOUBLE_VECTOR_ABSTRACTION_COUNT, (void*) &rr, (void*) WIDE_CHARACTER_ARRAY);
 
                     if ((lr != *NUMBER_0_INTEGER) && (rr != *NUMBER_0_INTEGER)) {
 

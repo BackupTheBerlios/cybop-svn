@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2008-05-04 00:18:14 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2008-05-28 22:39:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -109,15 +109,15 @@ void encode_http_response_status_line(void* p0, void* p1, void* p2, void* p3, vo
     // Encode http protocol version.
     encode(p0, p1, p2, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
         (void*) HTTP_1_1_PROTOCOL_VERSION, (void*) HTTP_1_1_PROTOCOL_VERSION_COUNT, *NULL_POINTER, *NULL_POINTER,
-        *NULL_POINTER, *NULL_POINTER, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+        *NULL_POINTER, *NULL_POINTER, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
     // Encode http protocol version separator.
     encode(p0, p1, p2, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
         (void*) HTTP_PROTOCOL_VERSION_SEPARATOR, (void*) HTTP_PROTOCOL_VERSION_SEPARATOR_COUNT, *NULL_POINTER, *NULL_POINTER,
-        *NULL_POINTER, *NULL_POINTER, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+        *NULL_POINTER, *NULL_POINTER, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
     // Encode http status code.
     encode(p0, p1, p2, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
         (void*) HTTP_200_OK_STATUS_CODE, (void*) HTTP_200_OK_STATUS_CODE_COUNT, *NULL_POINTER, *NULL_POINTER,
-        *NULL_POINTER, *NULL_POINTER, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+        *NULL_POINTER, *NULL_POINTER, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
 }
 
 /**
@@ -137,43 +137,43 @@ void encode_http_response_headers(void* p0, void* p1, void* p2, void* p3, void* 
     // Encode content type http header.
     encode(p0, p1, p2, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
         (void*) CONTENT_TYPE_HTTP_HEADER, (void*) CONTENT_TYPE_HTTP_HEADER_COUNT, *NULL_POINTER, *NULL_POINTER,
-        *NULL_POINTER, *NULL_POINTER, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+        *NULL_POINTER, *NULL_POINTER, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
     // Encode http header argument separator.
     encode(p0, p1, p2, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
         (void*) HTTP_HEADER_ARGUMENT_SEPARATOR, (void*) HTTP_HEADER_ARGUMENT_SEPARATOR_COUNT, *NULL_POINTER, *NULL_POINTER,
-        *NULL_POINTER, *NULL_POINTER, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+        *NULL_POINTER, *NULL_POINTER, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
     // Encode content type as mime type.
     encode(p0, p1, p2, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
         (void*) HTML_TEXT_MIME_TYPE, (void*) HTML_TEXT_MIME_TYPE_COUNT, *NULL_POINTER, *NULL_POINTER,
-        *NULL_POINTER, *NULL_POINTER, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+        *NULL_POINTER, *NULL_POINTER, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
     // Encode http header value separator.
     encode(p0, p1, p2, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
         (void*) HTTP_HEADER_VALUE_SEPARATOR, (void*) HTTP_HEADER_VALUE_SEPARATOR_COUNT, *NULL_POINTER, *NULL_POINTER,
-        *NULL_POINTER, *NULL_POINTER, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+        *NULL_POINTER, *NULL_POINTER, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
     // Encode charset http header variable.
     encode(p0, p1, p2, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
         (void*) CHARSET_HTTP_HEADER_VARIABLE, (void*) CHARSET_HTTP_HEADER_VARIABLE_COUNT, *NULL_POINTER, *NULL_POINTER,
-        *NULL_POINTER, *NULL_POINTER, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+        *NULL_POINTER, *NULL_POINTER, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
     // Encode http header value assignment separator.
     encode(p0, p1, p2, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
         (void*) HTTP_HEADER_VALUE_ASSIGNMENT_SEPARATOR, (void*) HTTP_HEADER_VALUE_ASSIGNMENT_SEPARATOR_COUNT, *NULL_POINTER, *NULL_POINTER,
-        *NULL_POINTER, *NULL_POINTER, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+        *NULL_POINTER, *NULL_POINTER, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
     // Encode http charset value.
     encode(p0, p1, p2, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
         (void*) ISO_8859_1_CHARACTER_SET, (void*) ISO_8859_1_CHARACTER_SET_COUNT, *NULL_POINTER, *NULL_POINTER,
-        *NULL_POINTER, *NULL_POINTER, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+        *NULL_POINTER, *NULL_POINTER, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
     // Encode http header separator.
     encode(p0, p1, p2, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
         (void*) HTTP_HEADER_SEPARATOR, (void*) HTTP_HEADER_SEPARATOR_COUNT, *NULL_POINTER, *NULL_POINTER,
-        *NULL_POINTER, *NULL_POINTER, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+        *NULL_POINTER, *NULL_POINTER, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
     // Encode content length http header.
     encode(p0, p1, p2, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
         (void*) CONTENT_LENGTH_HTTP_HEADER, (void*) CONTENT_LENGTH_HTTP_HEADER_COUNT, *NULL_POINTER, *NULL_POINTER,
-        *NULL_POINTER, *NULL_POINTER, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+        *NULL_POINTER, *NULL_POINTER, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
     // Encode http header argument separator.
     encode(p0, p1, p2, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
         (void*) HTTP_HEADER_ARGUMENT_SEPARATOR, (void*) HTTP_HEADER_ARGUMENT_SEPARATOR_COUNT, *NULL_POINTER, *NULL_POINTER,
-        *NULL_POINTER, *NULL_POINTER, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+        *NULL_POINTER, *NULL_POINTER, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
     // Encode content length as http body's length.
     // CAUTION! The source is an integer value!
     encode(p0, p1, p2, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
@@ -198,7 +198,7 @@ void encode_http_response_body(void* p0, void* p1, void* p2, void* p3, void* p4)
     // character byte stream and handed over as such.
     encode(p0, p1, p2, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
         p3, p4, *NULL_POINTER, *NULL_POINTER,
-        *NULL_POINTER, *NULL_POINTER, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+        *NULL_POINTER, *NULL_POINTER, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
 }
 
 /**
@@ -234,7 +234,7 @@ void encode_http_response(void* p0, void* p1, void* p2, void* p3, void* p4, void
                 int bs = bc;
 
                 // Allocate temporary body.
-                allocate_array((void*) &b, (void*) &bs, (void*) CHARACTER_ARRAY);
+                allocate_array((void*) &b, (void*) &bs, (void*) WIDE_CHARACTER_ARRAY);
 
                 // Encode body containing optional user data (such as an encoded/serialised xhtml page).
                 //
@@ -246,7 +246,7 @@ void encode_http_response(void* p0, void* p1, void* p2, void* p3, void* p4, void
                 // Encode http response line separator.
                 encode(p0, p1, p2, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
                     (void*) HTTP_RESPONSE_LINE_SEPARATOR, (void*) HTTP_RESPONSE_LINE_SEPARATOR_COUNT, *NULL_POINTER, *NULL_POINTER,
-                    *NULL_POINTER, *NULL_POINTER, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+                    *NULL_POINTER, *NULL_POINTER, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
                 // Encode headers containing meta data, of which some have the form of variables.
                 //
                 // CAUTION! The body count is handed over as additional parameter.
@@ -254,7 +254,7 @@ void encode_http_response(void* p0, void* p1, void* p2, void* p3, void* p4, void
                 // Encode http headers separator.
                 encode(p0, p1, p2, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
                     (void*) HTTP_HEADERS_SEPARATOR, (void*) HTTP_HEADERS_SEPARATOR_COUNT, *NULL_POINTER, *NULL_POINTER,
-                    *NULL_POINTER, *NULL_POINTER, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+                    *NULL_POINTER, *NULL_POINTER, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
                 if ((*dc + bc) > *ds) {
 
@@ -262,17 +262,17 @@ void encode_http_response(void* p0, void* p1, void* p2, void* p3, void* p4, void
                     *ds = *dc + bc;
 
                     // Reallocate destination http response using the new size.
-                    reallocate_array(p0, p1, p2, (void*) CHARACTER_ARRAY);
+                    reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_ARRAY);
                 }
 
                 // Copy temporary body to the end of the actual destination http response.
-                set_array_elements(*d, p1, b, (void*) &bc, (void*) CHARACTER_ARRAY);
+                set_array_elements(*d, p1, b, (void*) &bc, (void*) WIDE_CHARACTER_ARRAY);
 
                 // Increase destination http response count by the body count.
                 *dc = *dc + bc;
 
                 // Deallocate temporary body.
-                deallocate_array((void*) &b, (void*) &bs, (void*) CHARACTER_ARRAY);
+                deallocate_array((void*) &b, (void*) &bs, (void*) WIDE_CHARACTER_ARRAY);
 
             } else {
 

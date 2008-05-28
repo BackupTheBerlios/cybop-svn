@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.16 $ $Date: 2008-05-04 00:18:09 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2008-05-28 22:39:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -82,7 +82,7 @@ void run(void* p0, void* p1, void* p2, void* p3) {
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(*cm, *cmc, (void*) RUN_PROGRAM_MODEL, (void*) RUN_PROGRAM_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(*cm, *cmc, (void*) RUN_PROGRAM_MODEL, (void*) RUN_PROGRAM_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
@@ -92,7 +92,7 @@ void run(void* p0, void* p1, void* p2, void* p3) {
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(*cm, *cmc, (void*) RUN_LIST_DIRECTORY_CONTENTS_MODEL, (void*) RUN_LIST_DIRECTORY_CONTENTS_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(*cm, *cmc, (void*) RUN_LIST_DIRECTORY_CONTENTS_MODEL, (void*) RUN_LIST_DIRECTORY_CONTENTS_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
@@ -102,7 +102,7 @@ void run(void* p0, void* p1, void* p2, void* p3) {
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(*cm, *cmc, (void*) RUN_COPY_MODEL, (void*) RUN_COPY_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(*cm, *cmc, (void*) RUN_COPY_MODEL, (void*) RUN_COPY_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
@@ -112,7 +112,7 @@ void run(void* p0, void* p1, void* p2, void* p3) {
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(*cm, *cmc, (void*) RUN_ARCHIVE_MODEL, (void*) RUN_ARCHIVE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(*cm, *cmc, (void*) RUN_ARCHIVE_MODEL, (void*) RUN_ARCHIVE_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 

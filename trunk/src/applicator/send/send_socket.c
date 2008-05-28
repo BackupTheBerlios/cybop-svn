@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.29 $ $Date: 2008-05-20 22:13:43 $ $Author: christian $
+ * @version $Revision: 1.30 $ $Date: 2008-05-28 22:39:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -205,7 +205,7 @@ void send_socket_get_socket(void* p0, void* p1, void* p2, void* p3, void* p4, vo
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p5, p6, (void*) SERVER_COMMUNICATION_MODE_MODEL, (void*) SERVER_COMMUNICATION_MODE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p5, p6, (void*) SERVER_COMMUNICATION_MODE_MODEL, (void*) SERVER_COMMUNICATION_MODE_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
@@ -215,7 +215,7 @@ void send_socket_get_socket(void* p0, void* p1, void* p2, void* p3, void* p4, vo
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p5, p6, (void*) CLIENT_COMMUNICATION_MODE_MODEL, (void*) CLIENT_COMMUNICATION_MODE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p5, p6, (void*) CLIENT_COMMUNICATION_MODE_MODEL, (void*) CLIENT_COMMUNICATION_MODE_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
@@ -529,9 +529,9 @@ void send_socket(void* p0, void* p1, void* p2, void* p3,
     send_socket_allocate_socket_address((void*) &sa, (void*) &sas, (void*) &an);
 */
     // Allocate http body character vector.
-    allocate((void*) &b, (void*) &bs, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+    allocate((void*) &b, (void*) &bs, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
     // Allocate http message character vector.
-    allocate((void*) &m, (void*) &ms, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+    allocate((void*) &m, (void*) &ms, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
 /*??
     // Initialise host address.
@@ -624,9 +624,9 @@ void send_socket(void* p0, void* p1, void* p2, void* p3,
     close(*((int*) p0));
 
     // Deallocate http body character vector.
-    deallocate((void*) &b, (void*) &bs, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+    deallocate((void*) &b, (void*) &bs, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
     // Deallocate http message character vector.
-    deallocate((void*) &m, (void*) &ms, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+    deallocate((void*) &m, (void*) &ms, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
 /*??
     // Deallocate socket address.

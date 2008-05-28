@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2008-05-04 00:18:10 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2008-05-28 22:39:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -87,12 +87,12 @@ void add_character_vector(void* p0, void* p1, void* p2, void* p3, void* p4, void
                         int summand2c = *s2c;
 
                         // Allocate temporary input operand arrays.
-                        allocate_array((void*) &summand1, (void*) &summand1c, (void*) CHARACTER_ARRAY);
-                        allocate_array((void*) &summand2, (void*) &summand2c, (void*) CHARACTER_ARRAY);
+                        allocate_array((void*) &summand1, (void*) &summand1c, (void*) WIDE_CHARACTER_ARRAY);
+                        allocate_array((void*) &summand2, (void*) &summand2c, (void*) WIDE_CHARACTER_ARRAY);
 
                         // Set temporary input operand arrays.
-                        set_array_elements(summand1, (void*) NUMBER_0_INTEGER, p3, p4, (void*) CHARACTER_ARRAY);
-                        set_array_elements(summand2, (void*) NUMBER_0_INTEGER, p5, p6, (void*) CHARACTER_ARRAY);
+                        set_array_elements(summand1, (void*) NUMBER_0_INTEGER, p3, p4, (void*) WIDE_CHARACTER_ARRAY);
+                        set_array_elements(summand2, (void*) NUMBER_0_INTEGER, p5, p6, (void*) WIDE_CHARACTER_ARRAY);
 
                         // CAUTION! In order to achieve correct results,
                         // the sum array needs to be resized to the exact size
@@ -104,17 +104,17 @@ void add_character_vector(void* p0, void* p1, void* p2, void* p3, void* p4, void
                         *sc = *NUMBER_0_INTEGER;
 
                         // Reallocate output operand array.
-                        reallocate_array(p0, p1, p2, (void*) CHARACTER_ARRAY);
+                        reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_ARRAY);
 
                         // Set output operand array.
-                        set_array_elements(*s, (void*) sc, summand1, (void*) &summand1c, (void*) CHARACTER_ARRAY);
+                        set_array_elements(*s, (void*) sc, summand1, (void*) &summand1c, (void*) WIDE_CHARACTER_ARRAY);
                         *sc = *sc + summand1c;
-                        set_array_elements(*s, (void*) sc, summand2, (void*) &summand2c, (void*) CHARACTER_ARRAY);
+                        set_array_elements(*s, (void*) sc, summand2, (void*) &summand2c, (void*) WIDE_CHARACTER_ARRAY);
                         *sc = *sc + summand2c;
 
                         // Deallocate temporary operand arrays.
-                        deallocate_array((void*) &summand1, (void*) &summand1c, (void*) CHARACTER_ARRAY);
-                        deallocate_array((void*) &summand2, (void*) &summand2c, (void*) CHARACTER_ARRAY);
+                        deallocate_array((void*) &summand1, (void*) &summand1c, (void*) WIDE_CHARACTER_ARRAY);
+                        deallocate_array((void*) &summand2, (void*) &summand2c, (void*) WIDE_CHARACTER_ARRAY);
 
                     } else {
 

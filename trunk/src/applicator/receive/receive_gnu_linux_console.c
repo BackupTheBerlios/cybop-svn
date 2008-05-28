@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.17 $ $Date: 2008-05-04 00:18:10 $ $Author: christian $
+ * @version $Revision: 1.18 $ $Date: 2008-05-28 22:39:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -71,14 +71,14 @@ void receive_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4,
     // Read pressed keyboard keys as message from gnu/linux console.
     read_gnu_linux_console((void*) &a, (void*) &ac, (void*) &as, p12);
 
-    fwprintf(stderr, L"TEST a: %s\n", (char*) a);
+    fwprintf(stderr, L"TEST a: %s\n", (wchar_t*) a);
     fwprintf(stderr, L"TEST ac: %i\n", ac);
     fwprintf(stderr, L"TEST as: %i\n", as);
 
     // Decode character array into command.
     decode(p6, p7, p8, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, a, (void*) &ac, p15, p16, (void*) GNU_LINUX_CONSOLE_MODEL, (void*) GNU_LINUX_CONSOLE_MODEL_COUNT);
 
-    fwprintf(stderr, L"TEST m: %s\n", *((char**) p6));
+    fwprintf(stderr, L"TEST m: %s\n", *((wchar_t**) p6));
     fwprintf(stderr, L"TEST mc: %i\n", *((int*) p7));
     fwprintf(stderr, L"TEST ms: %i\n", *((int*) p8));
 

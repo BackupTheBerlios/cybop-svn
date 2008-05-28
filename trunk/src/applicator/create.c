@@ -22,7 +22,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.41 $ $Date: 2008-05-04 00:18:09 $ $Author: christian $
+ * @version $Revision: 1.42 $ $Date: 2008-05-28 22:39:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -102,9 +102,9 @@ void create_set(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
 
     // Allocate knowledge model name, abstraction, model, details.
     // CAUTION! The name's abstraction always HAS TO BE "character".
-    allocate((void*) &kmn, (void*) kmns, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+    allocate((void*) &kmn, (void*) kmns, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
     // CAUTION! The abstraction's abstraction always HAS TO BE "character".
-    allocate((void*) &kma, (void*) kmas, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+    allocate((void*) &kma, (void*) kmas, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
     allocate((void*) &kmm, (void*) kmms, p9, p10);
     // CAUTION! The details' abstraction always HAS TO BE "compound".
     allocate((void*) &kmd, (void*) kmds, COMPOUND_ABSTRACTION, COMPOUND_ABSTRACTION_COUNT);
@@ -249,7 +249,7 @@ void create(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(*em, *emc, (void*) CREATE_PART_ELEMENT_MODEL, (void*) CREATE_PART_ELEMENT_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(*em, *emc, (void*) CREATE_PART_ELEMENT_MODEL, (void*) CREATE_PART_ELEMENT_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
@@ -283,7 +283,7 @@ void create(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(*em, *emc, (void*) CREATE_META_ELEMENT_MODEL, (void*) CREATE_META_ELEMENT_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(*em, *emc, (void*) CREATE_META_ELEMENT_MODEL, (void*) CREATE_META_ELEMENT_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 

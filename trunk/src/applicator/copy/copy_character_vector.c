@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2008-05-04 00:18:10 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2008-05-28 22:39:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -45,7 +45,7 @@
  */
 void copy_character_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    set(p0, p1, p2, p3, p4, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+    set(p0, p1, p2, p3, p4, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
 /*??
     if (p4 != *NULL_POINTER) {
@@ -87,10 +87,10 @@ void copy_character_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
                         *dc = *sc;
                         *ds = *dc;
 
-                        reallocate_array(p0, p1, p2, (void*) CHARACTER_ARRAY);
+                        reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_ARRAY);
                     }
 
-                    set_array_elements(*d, (void*) NUMBER_0_INTEGER, p3, p4, (void*) CHARACTER_ARRAY);
+                    set_array_elements(*d, (void*) NUMBER_0_INTEGER, p3, p4, (void*) WIDE_CHARACTER_ARRAY);
 
                 } else {
 

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2008-05-04 00:18:10 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2008-05-28 22:39:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -94,15 +94,15 @@ void count_suffix(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
             *list_counter = *NUMBER_0_INTEGER;
 
             // Create compare string.
-            char* compstring = *NULL_POINTER;
+            wchar_t* compstring = *NULL_POINTER;
             int compstring_count = *((int*) *bnmc) + *LIST_SEPARATOR_COUNT;
 
-            allocate_array((void*) &compstring, (void*) &compstring_count, (void*) CHARACTER_ARRAY);
+            allocate_array((void*) &compstring, (void*) &compstring_count, (void*) WIDE_CHARACTER_ARRAY);
 
             // Set the compare string
             // this is the basisname and the list separat
             set_array_elements(compstring, (void*) NUMBER_0_INTEGER, *bnm, *bnmc,  (void*) CHARACTER_ARRAY);
-            set_array_elements(compstring, *bnmc, LIST_SEPARATOR, LIST_SEPARATOR_COUNT, (void*) CHARACTER_ARRAY);
+            set_array_elements(compstring, *bnmc, LIST_SEPARATOR, LIST_SEPARATOR_COUNT, (void*) WIDE_CHARACTER_ARRAY);
 
             // The loop count.
             int j = *NUMBER_0_INTEGER;
@@ -144,7 +144,7 @@ void count_suffix(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
             }
 
             // destroy compare string.
-            deallocate_array((void*) &compstring, (void*) &compstring_count, (void*) CHARACTER_ARRAY);
+            deallocate_array((void*) &compstring, (void*) &compstring_count, (void*) WIDE_CHARACTER_ARRAY);
 */
 
 /*??

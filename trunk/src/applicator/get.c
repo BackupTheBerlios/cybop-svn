@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2008-05-04 00:18:09 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2008-05-28 22:39:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -148,7 +148,7 @@ void get(void* p0, int* p1, void* p2, void* p3, void* p4) {
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(*dm, *dmc, (void*) GET_NAME_DESCRIPTION_MODEL, (void*) GET_NAME_DESCRIPTION_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(*dm, *dmc, (void*) GET_NAME_DESCRIPTION_MODEL, (void*) GET_NAME_DESCRIPTION_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
@@ -159,7 +159,7 @@ void get(void* p0, int* p1, void* p2, void* p3, void* p4) {
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(*dm, *dmc, (void*) GET_ABSTRACTION_DESCRIPTION_MODEL, (void*) GET_ABSTRACTION_DESCRIPTION_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(*dm, *dmc, (void*) GET_ABSTRACTION_DESCRIPTION_MODEL, (void*) GET_ABSTRACTION_DESCRIPTION_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 

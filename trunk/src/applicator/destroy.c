@@ -22,7 +22,7 @@
  *
  * This file destroys a transient model to a persistent model.
  *
- * @version $Revision: 1.28 $ $Date: 2008-05-04 00:18:09 $ $Author: christian $
+ * @version $Revision: 1.29 $ $Date: 2008-05-28 22:39:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -68,7 +68,7 @@ void check_compound_model(void* p0, void* p1, void* p2) {
 
         if (*p != *NUMBER_1_INTEGER) {
 
-            compare_arrays(p1, p2, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT, p0, (void*) CHARACTER_ARRAY);
+            compare_arrays(p1, p2, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT, p0, (void*) WIDE_CHARACTER_ARRAY);
         }
     }
 }

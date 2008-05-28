@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.27 $ $Date: 2008-05-04 00:18:09 $ $Author: christian $
+ * @version $Revision: 1.28 $ $Date: 2008-05-28 22:39:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -128,32 +128,32 @@ void build_listname(void* p0, void* p1, void* p2, void* p3, void* p4) {
     int comp_res3 = *NUMBER_0_INTEGER;
 
     // Create compare string.
-    char* int_string = *NULL_POINTER;
+    wchar_t* int_string = *NULL_POINTER;
     // todo Konstante noch definieren
     int int_string_count = *NUMBER_0_INTEGER;
     int int_string_size = *NUMBER_10_INTEGER;
 
-    allocate_array((void*) &int_string, (void*) &int_string_size, (void*) CHARACTER_ARRAY);
+    allocate_array((void*) &int_string, (void*) &int_string_size, (void*) WIDE_CHARACTER_ARRAY);
 
-    int_string_count = snprintf(int_string, int_string_size, "%i", *((int*) *idxm));
+    int_string_count = swprintf(int_string, int_string_size, L"%i", *((int*) *idxm));
 
     // destination size
     *(int*)*resms = *((int*) *bnmc) + *LIST_SEPARATOR_COUNT + int_string_count;
     *(int*)*resmc = *((int*) *bnmc) + *LIST_SEPARATOR_COUNT + int_string_count;
 
     // Reallocate result array.
-    reallocate_array(resm, *resms, *resms, CHARACTER_ARRAY);
+    reallocate_array(resm, *resms, *resms, (void*) WIDE_CHARACTER_ARRAY);
 
     // set the result array
-    set_array_elements(*resm, (void*) NUMBER_0_INTEGER, *bnm, *bnmc, (void*) CHARACTER_ARRAY);
-    set_array_elements(*resm, *bnmc, LIST_SEPARATOR, LIST_SEPARATOR_COUNT, (void*) CHARACTER_ARRAY);
+    set_array_elements(*resm, (void*) NUMBER_0_INTEGER, *bnm, *bnmc, (void*) WIDE_CHARACTER_ARRAY);
+    set_array_elements(*resm, *bnmc, LIST_SEPARATOR, LIST_SEPARATOR_COUNT, (void*) WIDE_CHARACTER_ARRAY);
 
     int temp_index = *((int*) *bnmc) + *LIST_SEPARATOR_COUNT;
 
-    set_array_elements(*resm, &temp_index, int_string, &int_string_count, (void*) CHARACTER_ARRAY);
+    set_array_elements(*resm, &temp_index, int_string, &int_string_count, (void*) WIDE_CHARACTER_ARRAY);
 
     // Destroy int_string array.
-    deallocate_array((void*) &int_string, (void*) &int_string_size, (void*) CHARACTER_ARRAY);
+    deallocate_array((void*) &int_string, (void*) &int_string_size, (void*) WIDE_CHARACTER_ARRAY);
 }
 
 /* BUILD_SOURCE */

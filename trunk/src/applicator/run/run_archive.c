@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.17 $ $Date: 2008-05-04 00:18:11 $ $Author: christian $
+ * @version $Revision: 1.18 $ $Date: 2008-05-28 22:39:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -133,11 +133,11 @@ void run_archive(void* p0, void* p1, void* p2, void* p3) {
     args = *ARCHIVE_UNIX_SHELL_COMMAND_COUNT;
 
     // Allocate arguments vector.
-    allocate((void*) &arg, (void*) &args, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+    allocate((void*) &arg, (void*) &args, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
     // Assemble arguments by copying the actual command.
     // A null termination character is added behind the last argument, see below!
-    set_array_elements(arg, (void*) &argc, (void*) ARCHIVE_UNIX_SHELL_COMMAND, (void*) ARCHIVE_UNIX_SHELL_COMMAND_COUNT, (void*) CHARACTER_ARRAY);
+    set_array_elements(arg, (void*) &argc, (void*) ARCHIVE_UNIX_SHELL_COMMAND, (void*) ARCHIVE_UNIX_SHELL_COMMAND_COUNT, (void*) WIDE_CHARACTER_ARRAY);
     argc = argc + *ARCHIVE_UNIX_SHELL_COMMAND_COUNT;
 
     //
@@ -160,9 +160,9 @@ void run_archive(void* p0, void* p1, void* p2, void* p3) {
 
             // Assemble option by copying the actual argument.
             // A null termination character is added behind the last argument, see below!
-            set_array_elements(arg, (void*) &argc, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+            set_array_elements(arg, (void*) &argc, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
             argc = argc + *PRIMITIVE_COUNT;
-            set_array_elements(arg, (void*) &argc, (void*) ARCHIVE_UNIX_SHELL_COMMAND_CREATE, (void*) ARCHIVE_UNIX_SHELL_COMMAND_CREATE_COUNT, (void*) CHARACTER_ARRAY);
+            set_array_elements(arg, (void*) &argc, (void*) ARCHIVE_UNIX_SHELL_COMMAND_CREATE, (void*) ARCHIVE_UNIX_SHELL_COMMAND_CREATE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
             argc = argc + *ARCHIVE_UNIX_SHELL_COMMAND_CREATE_COUNT;
         }
     }
@@ -187,9 +187,9 @@ void run_archive(void* p0, void* p1, void* p2, void* p3) {
 
             // Assemble option by copying the actual argument.
             // A null termination character is added behind the last argument, see below!
-            set_array_elements(arg, (void*) &argc, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+            set_array_elements(arg, (void*) &argc, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
             argc = argc + *PRIMITIVE_COUNT;
-            set_array_elements(arg, (void*) &argc, (void*) ARCHIVE_UNIX_SHELL_COMMAND_UPDATE, (void*) ARCHIVE_UNIX_SHELL_COMMAND_UPDATE_COUNT, (void*) CHARACTER_ARRAY);
+            set_array_elements(arg, (void*) &argc, (void*) ARCHIVE_UNIX_SHELL_COMMAND_UPDATE, (void*) ARCHIVE_UNIX_SHELL_COMMAND_UPDATE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
             argc = argc + *ARCHIVE_UNIX_SHELL_COMMAND_UPDATE_COUNT;
         }
     }
@@ -214,9 +214,9 @@ void run_archive(void* p0, void* p1, void* p2, void* p3) {
 
             // Assemble option by copying the actual argument.
             // A null termination character is added behind the last argument, see below!
-            set_array_elements(arg, (void*) &argc, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+            set_array_elements(arg, (void*) &argc, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
             argc = argc + *PRIMITIVE_COUNT;
-            set_array_elements(arg, (void*) &argc, (void*) ARCHIVE_UNIX_SHELL_COMMAND_BZIP2, (void*) ARCHIVE_UNIX_SHELL_COMMAND_BZIP2_COUNT, (void*) CHARACTER_ARRAY);
+            set_array_elements(arg, (void*) &argc, (void*) ARCHIVE_UNIX_SHELL_COMMAND_BZIP2, (void*) ARCHIVE_UNIX_SHELL_COMMAND_BZIP2_COUNT, (void*) WIDE_CHARACTER_ARRAY);
             argc = argc + *ARCHIVE_UNIX_SHELL_COMMAND_BZIP2_COUNT;
         }
     }
@@ -236,14 +236,14 @@ void run_archive(void* p0, void* p1, void* p2, void* p3) {
     }
 
     // Assemble arguments by adding the null termination character.
-    set_array_elements(arg, (void*) &argc, (void*) NULL_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+    set_array_elements(arg, (void*) &argc, (void*) NULL_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
     argc = argc + *PRIMITIVE_COUNT;
 
     // Execute arguments as process.
     run_execute(arg);
 
     // Deallocate arguments vector.
-    deallocate((void*) &arg, (void*) &args, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+    deallocate((void*) &arg, (void*) &args, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
 /*??
     //?? The following block assembles all arguments for using "fork/execv/wait" in "run_execute.c".
@@ -280,13 +280,13 @@ void run_archive(void* p0, void* p1, void* p2, void* p3) {
     shells = *SHELL_SYSTEM_EXECUTABLE_COUNT + *PRIMITIVE_COUNT;
 
     // Allocate shell.
-    allocate_array((void*) &shell, (void*) &shells, (void*) CHARACTER_ARRAY);
+    allocate_array((void*) &shell, (void*) &shells, (void*) WIDE_CHARACTER_ARRAY);
 
     // Assemble shell by first copying the actual shell command
     // and then adding the null termination character.
-    set_array_elements(shell, (void*) &shellc, (void*) SHELL_SYSTEM_EXECUTABLE, (void*) SHELL_SYSTEM_EXECUTABLE_COUNT, (void*) CHARACTER_ARRAY);
+    set_array_elements(shell, (void*) &shellc, (void*) SHELL_SYSTEM_EXECUTABLE, (void*) SHELL_SYSTEM_EXECUTABLE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
     shellc = shellc + *SHELL_SYSTEM_EXECUTABLE_COUNT;
-    set_array_elements(shell, (void*) &shellc, (void*) NULL_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+    set_array_elements(shell, (void*) &shellc, (void*) NULL_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
     shellc = shellc + *PRIMITIVE_COUNT;
 
     // Increase arguments vector size for shell argument.
@@ -300,13 +300,13 @@ void run_archive(void* p0, void* p1, void* p2, void* p3) {
     characters = *SHELL_SYSTEM_EXECUTABLE_CHARACTER_ARGUMENT_COUNT + *PRIMITIVE_COUNT;
 
     // Allocate character argument.
-    allocate_array((void*) &character, (void*) &characters, (void*) CHARACTER_ARRAY);
+    allocate_array((void*) &character, (void*) &characters, (void*) WIDE_CHARACTER_ARRAY);
 
     // Assemble character argument by first copying the actual argument
     // and then adding the null termination character.
-    set_array_elements(character, (void*) &characterc, (void*) SHELL_SYSTEM_EXECUTABLE_CHARACTER_ARGUMENT, (void*) SHELL_SYSTEM_EXECUTABLE_CHARACTER_ARGUMENT_COUNT, (void*) CHARACTER_ARRAY);
+    set_array_elements(character, (void*) &characterc, (void*) SHELL_SYSTEM_EXECUTABLE_CHARACTER_ARGUMENT, (void*) SHELL_SYSTEM_EXECUTABLE_CHARACTER_ARGUMENT_COUNT, (void*) WIDE_CHARACTER_ARRAY);
     characterc = characterc + *SHELL_SYSTEM_EXECUTABLE_CHARACTER_ARGUMENT_COUNT;
-    set_array_elements(character, (void*) &characterc, (void*) NULL_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+    set_array_elements(character, (void*) &characterc, (void*) NULL_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
     characterc = characterc + *PRIMITIVE_COUNT;
 
     // Increase arguments vector size for shell character argument.
@@ -320,11 +320,11 @@ void run_archive(void* p0, void* p1, void* p2, void* p3) {
     commands = *ARCHIVE_UNIX_SHELL_COMMAND_COUNT;
 
     // Allocate command.
-    allocate_array((void*) &command, (void*) &commands, (void*) CHARACTER_ARRAY);
+    allocate_array((void*) &command, (void*) &commands, (void*) WIDE_CHARACTER_ARRAY);
 
     // Assemble command by copying the actual command.
     // A null termination character is added behind the last argument, see below!
-    set_array_elements(command, (void*) &commandc, (void*) ARCHIVE_UNIX_SHELL_COMMAND, (void*) ARCHIVE_UNIX_SHELL_COMMAND_COUNT, (void*) CHARACTER_ARRAY);
+    set_array_elements(command, (void*) &commandc, (void*) ARCHIVE_UNIX_SHELL_COMMAND, (void*) ARCHIVE_UNIX_SHELL_COMMAND_COUNT, (void*) WIDE_CHARACTER_ARRAY);
     commandc = commandc + *ARCHIVE_UNIX_SHELL_COMMAND_COUNT;
 
     // Increase arguments vector size for command argument.
@@ -350,9 +350,9 @@ void run_archive(void* p0, void* p1, void* p2, void* p3) {
 
             // Assemble option by copying the actual argument.
             // A null termination character is added behind the last argument, see below!
-            set_array_elements(command, (void*) &commandc, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+            set_array_elements(command, (void*) &commandc, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
             commandc = commandc + *PRIMITIVE_COUNT;
-            set_array_elements(command, (void*) &commandc, (void*) ARCHIVE_UNIX_SHELL_COMMAND_CREATE, (void*) ARCHIVE_UNIX_SHELL_COMMAND_CREATE_COUNT, (void*) CHARACTER_ARRAY);
+            set_array_elements(command, (void*) &commandc, (void*) ARCHIVE_UNIX_SHELL_COMMAND_CREATE, (void*) ARCHIVE_UNIX_SHELL_COMMAND_CREATE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
             commandc = commandc + *ARCHIVE_UNIX_SHELL_COMMAND_CREATE_COUNT;
         }
     }
@@ -377,9 +377,9 @@ void run_archive(void* p0, void* p1, void* p2, void* p3) {
 
             // Assemble option by copying the actual argument.
             // A null termination character is added behind the last argument, see below!
-            set_array_elements(command, (void*) &commandc, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+            set_array_elements(command, (void*) &commandc, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
             commandc = commandc + *PRIMITIVE_COUNT;
-            set_array_elements(command, (void*) &commandc, (void*) ARCHIVE_UNIX_SHELL_COMMAND_UPDATE, (void*) ARCHIVE_UNIX_SHELL_COMMAND_UPDATE_COUNT, (void*) CHARACTER_ARRAY);
+            set_array_elements(command, (void*) &commandc, (void*) ARCHIVE_UNIX_SHELL_COMMAND_UPDATE, (void*) ARCHIVE_UNIX_SHELL_COMMAND_UPDATE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
             commandc = commandc + *ARCHIVE_UNIX_SHELL_COMMAND_UPDATE_COUNT;
         }
     }
@@ -404,9 +404,9 @@ void run_archive(void* p0, void* p1, void* p2, void* p3) {
 
             // Assemble option by copying the actual argument.
             // A null termination character is added behind the last argument, see below!
-            set_array_elements(command, (void*) &commandc, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+            set_array_elements(command, (void*) &commandc, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
             commandc = commandc + *PRIMITIVE_COUNT;
-            set_array_elements(command, (void*) &commandc, (void*) ARCHIVE_UNIX_SHELL_COMMAND_BZIP2, (void*) ARCHIVE_UNIX_SHELL_COMMAND_BZIP2_COUNT, (void*) CHARACTER_ARRAY);
+            set_array_elements(command, (void*) &commandc, (void*) ARCHIVE_UNIX_SHELL_COMMAND_BZIP2, (void*) ARCHIVE_UNIX_SHELL_COMMAND_BZIP2_COUNT, (void*) WIDE_CHARACTER_ARRAY);
             commandc = commandc + *ARCHIVE_UNIX_SHELL_COMMAND_BZIP2_COUNT;
         }
     }
@@ -426,7 +426,7 @@ void run_archive(void* p0, void* p1, void* p2, void* p3) {
     }
 
     // Assemble command by adding the null termination character.
-    set_array_elements(command, (void*) &commandc, (void*) NULL_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+    set_array_elements(command, (void*) &commandc, (void*) NULL_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
     commandc = commandc + *PRIMITIVE_COUNT;
 
     //
@@ -467,19 +467,19 @@ void run_archive(void* p0, void* p1, void* p2, void* p3) {
     if (shell != *NULL_POINTER) {
 
         // Deallocate shell argument.
-        deallocate_array((void*) &shell, (void*) &shells, (void*) CHARACTER_ARRAY);
+        deallocate_array((void*) &shell, (void*) &shells, (void*) WIDE_CHARACTER_ARRAY);
     }
 
     if (character != *NULL_POINTER) {
 
         // Deallocate character argument.
-        deallocate_array((void*) &character, (void*) &characters, (void*) CHARACTER_ARRAY);
+        deallocate_array((void*) &character, (void*) &characters, (void*) WIDE_CHARACTER_ARRAY);
     }
 
     if (command != *NULL_POINTER) {
 
         // Deallocate command argument.
-        deallocate_array((void*) &command, (void*) &commands, (void*) CHARACTER_ARRAY);
+        deallocate_array((void*) &command, (void*) &commands, (void*) WIDE_CHARACTER_ARRAY);
     }
 
     // Deallocate arguments vector.

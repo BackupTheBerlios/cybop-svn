@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.28 $ $Date: 2008-05-04 00:18:09 $ $Author: christian $
+ * @version $Revision: 1.29 $ $Date: 2008-05-28 22:39:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -153,7 +153,7 @@ void count(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays((void*) *sm, (void*) *smc, (void*) COUNT_ALL_SELECTION_MODEL, (void*) COUNT_ALL_SELECTION_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays((void*) *sm, (void*) *smc, (void*) COUNT_ALL_SELECTION_MODEL, (void*) COUNT_ALL_SELECTION_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
@@ -163,7 +163,7 @@ void count(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays((void*) *sm, (void*) *smc, (void*) COUNT_PREFIX_SELECTION_MODEL, (void*) COUNT_PREFIX_SELECTION_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays((void*) *sm, (void*) *smc, (void*) COUNT_PREFIX_SELECTION_MODEL, (void*) COUNT_PREFIX_SELECTION_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
@@ -173,7 +173,7 @@ void count(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays((void*) *sm, (void*) *smc, (void*) COUNT_SUFFIX_SELECTION_MODEL, (void*) COUNT_SUFFIX_SELECTION_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays((void*) *sm, (void*) *smc, (void*) COUNT_SUFFIX_SELECTION_MODEL, (void*) COUNT_SUFFIX_SELECTION_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 

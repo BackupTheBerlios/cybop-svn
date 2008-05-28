@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.10 $ $Date: 2008-05-04 00:18:11 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2008-05-28 22:39:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -68,7 +68,7 @@ void send_file_system(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
     int as = *NUMBER_0_INTEGER;
 
     // Allocate array.
-    allocate((void*) &a, (void*) &as, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+    allocate((void*) &a, (void*) &as, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
     // Encode knowledge model into model diagram (hierarchical text).
     encode((void*) &a, (void*) &ac, (void*) &as, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12);
@@ -77,7 +77,7 @@ void send_file_system(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
     write_data((void*) &p15, p16, *NULL_POINTER, a, (void*) &ac, (void*) FILE_CHANNEL, (void*) FILE_CHANNEL_COUNT);
 
     // Deallocate array.
-    deallocate((void*) &a, (void*) &as, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+    deallocate((void*) &a, (void*) &as, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
 }
 
 /* SEND_FILE_SYSTEM_SOURCE */

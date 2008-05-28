@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.13 $ $Date: 2008-05-04 00:18:14 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2008-05-28 22:39:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -123,7 +123,7 @@ void decode_http_request_set_parameter(void* p0, void* p1, void* p2, void* p3, v
         void** dc = NULL_POINTER;
         void** ds = NULL_POINTER;
 
-    fwprintf(stderr, L"TEST http request parameter pn: %s \n", (char*) p3);
+    fwprintf(stderr, L"TEST http request parameter pn: %ls \n", (wchar_t*) p3);
     fwprintf(stderr, L"TEST http request parameter pnc: %i \n", *((int*) p4));
 
         // Get parameter from model, using its key as name.
@@ -137,11 +137,11 @@ void decode_http_request_set_parameter(void* p0, void* p1, void* p2, void* p3, v
 
 /*??
     fwprintf(stderr, L"TEST http request parameter nc: %i \n", **((int**) nc));
-    fwprintf(stderr, L"TEST http request parameter n: %s \n", (char*) *n);
+    fwprintf(stderr, L"TEST http request parameter n: %ls \n", (wchar_t*) *n);
     fwprintf(stderr, L"TEST http request parameter ac: %i \n", **((int**) ac));
-    fwprintf(stderr, L"TEST http request parameter a: %s \n", (char*) *a);
+    fwprintf(stderr, L"TEST http request parameter a: %ls \n", (wchar_t*) *a);
     fwprintf(stderr, L"TEST http request parameter mc: %i \n", **((int**) mc));
-    fwprintf(stderr, L"TEST http request parameter m: %s \n", (char*) *m);
+    fwprintf(stderr, L"TEST http request parameter m: %ls \n", (wchar_t*) *m);
 */
 
         // Decode and set parameter value according to given abstraction.
@@ -197,7 +197,7 @@ void decode_http_request_parameter(void* p0, void* p1, void* p2, void* p3, void*
         sep = *NUMBER_MINUS_1_INTEGER;
 
         // Get separator index.
-        get_array_elements_index(i, (void*) &ic, (void*) URI_VALUE_SEPARATOR, (void*) URI_VALUE_SEPARATOR_COUNT, (void*) &sep, (void*) CHARACTER_ARRAY);
+        get_array_elements_index(i, (void*) &ic, (void*) URI_VALUE_SEPARATOR, (void*) URI_VALUE_SEPARATOR_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY);
 
         if (sep >= *NUMBER_0_INTEGER) {
 
@@ -218,7 +218,7 @@ void decode_http_request_parameter(void* p0, void* p1, void* p2, void* p3, void*
             ic = *NUMBER_0_INTEGER;
         }
 
-    fwprintf(stderr, L"TEST http request parameter k: %s \n", (char*) k);
+    fwprintf(stderr, L"TEST http request parameter k: %ls \n", (wchar_t*) k);
     fwprintf(stderr, L"TEST http request parameter kc: %i \n", kc);
 
         //
@@ -231,7 +231,7 @@ void decode_http_request_parameter(void* p0, void* p1, void* p2, void* p3, void*
 
         // No further separators have to be found.
 
-    fwprintf(stderr, L"TEST http request parameter v: %s \n", (char*) v);
+    fwprintf(stderr, L"TEST http request parameter v: %ls \n", (wchar_t*) v);
     fwprintf(stderr, L"TEST http request parameter vc: %i \n", vc);
 
         // Sets the value of the parameter with the given key, within the compound.
@@ -288,7 +288,7 @@ void decode_http_request_parameters(void* p0, void* p1, void* p2, void* p3, void
             sep = *NUMBER_MINUS_1_INTEGER;
 
             // Get separator index.
-            get_array_elements_index(i, (void*) &ic, (void*) URI_PARAMETER_SEPARATOR, (void*) URI_PARAMETER_SEPARATOR_COUNT, (void*) &sep, (void*) CHARACTER_ARRAY);
+            get_array_elements_index(i, (void*) &ic, (void*) URI_PARAMETER_SEPARATOR, (void*) URI_PARAMETER_SEPARATOR_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY);
 
             if (sep >= *NUMBER_0_INTEGER) {
 
@@ -315,7 +315,7 @@ void decode_http_request_parameters(void* p0, void* p1, void* p2, void* p3, void
                 break;
             }
 
-    fwprintf(stderr, L"TEST http request parameters p: %s \n", (char*) p);
+    fwprintf(stderr, L"TEST http request parameters p: %ls \n", (wchar_t*) p);
     fwprintf(stderr, L"TEST http request parameters pc: %i \n", pc);
         }
 
@@ -359,7 +359,7 @@ void decode_http_request_method(void* p0, void* p1, void* p2, void* p3, void* p4
 
         if (r == *NUMBER_0_INTEGER) {
 
-            compare_arrays(p7, p8, (void*) HTTP_GET_REQUEST_METHOD, (void*) HTTP_GET_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+            compare_arrays(p7, p8, (void*) HTTP_GET_REQUEST_METHOD, (void*) HTTP_GET_REQUEST_METHOD_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
             if (r != *NUMBER_0_INTEGER) {
 
@@ -371,7 +371,7 @@ void decode_http_request_method(void* p0, void* p1, void* p2, void* p3, void* p4
 
         if (r == *NUMBER_0_INTEGER) {
 
-            compare_arrays(p7, p8, (void*) HTTP_POST_REQUEST_METHOD, (void*) HTTP_POST_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+            compare_arrays(p7, p8, (void*) HTTP_POST_REQUEST_METHOD, (void*) HTTP_POST_REQUEST_METHOD_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
             if (r != *NUMBER_0_INTEGER) {
 
@@ -389,7 +389,7 @@ void decode_http_request_method(void* p0, void* p1, void* p2, void* p3, void* p4
 
         if (r == *NUMBER_0_INTEGER) {
 
-            compare_arrays(p7, p8, (void*) HTTP_HEAD_REQUEST_METHOD, (void*) HTTP_HEAD_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+            compare_arrays(p7, p8, (void*) HTTP_HEAD_REQUEST_METHOD, (void*) HTTP_HEAD_REQUEST_METHOD_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
             if (r != *NUMBER_0_INTEGER) {
 
@@ -401,7 +401,7 @@ void decode_http_request_method(void* p0, void* p1, void* p2, void* p3, void* p4
 
         if (r == *NUMBER_0_INTEGER) {
 
-            compare_arrays(p7, p8, (void*) HTTP_PUT_REQUEST_METHOD, (void*) HTTP_PUT_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+            compare_arrays(p7, p8, (void*) HTTP_PUT_REQUEST_METHOD, (void*) HTTP_PUT_REQUEST_METHOD_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
             if (r != *NUMBER_0_INTEGER) {
 
@@ -413,7 +413,7 @@ void decode_http_request_method(void* p0, void* p1, void* p2, void* p3, void* p4
 
         if (r == *NUMBER_0_INTEGER) {
 
-            compare_arrays(p7, p8, (void*) HTTP_DELETE_REQUEST_METHOD, (void*) HTTP_DELETE_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+            compare_arrays(p7, p8, (void*) HTTP_DELETE_REQUEST_METHOD, (void*) HTTP_DELETE_REQUEST_METHOD_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
             if (r != *NUMBER_0_INTEGER) {
 
@@ -425,7 +425,7 @@ void decode_http_request_method(void* p0, void* p1, void* p2, void* p3, void* p4
 
         if (r == *NUMBER_0_INTEGER) {
 
-            compare_arrays(p7, p8, (void*) HTTP_TRACE_REQUEST_METHOD, (void*) HTTP_TRACE_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+            compare_arrays(p7, p8, (void*) HTTP_TRACE_REQUEST_METHOD, (void*) HTTP_TRACE_REQUEST_METHOD_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
             if (r != *NUMBER_0_INTEGER) {
 
@@ -437,7 +437,7 @@ void decode_http_request_method(void* p0, void* p1, void* p2, void* p3, void* p4
 
         if (r == *NUMBER_0_INTEGER) {
 
-            compare_arrays(p7, p8, (void*) HTTP_OPTIONS_REQUEST_METHOD, (void*) HTTP_OPTIONS_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+            compare_arrays(p7, p8, (void*) HTTP_OPTIONS_REQUEST_METHOD, (void*) HTTP_OPTIONS_REQUEST_METHOD_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
             if (r != *NUMBER_0_INTEGER) {
 
@@ -449,7 +449,7 @@ void decode_http_request_method(void* p0, void* p1, void* p2, void* p3, void* p4
 
         if (r == *NUMBER_0_INTEGER) {
 
-            compare_arrays(p7, p8, (void*) HTTP_CONNECT_REQUEST_METHOD, (void*) HTTP_CONNECT_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+            compare_arrays(p7, p8, (void*) HTTP_CONNECT_REQUEST_METHOD, (void*) HTTP_CONNECT_REQUEST_METHOD_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
             if (r != *NUMBER_0_INTEGER) {
 
@@ -461,7 +461,7 @@ void decode_http_request_method(void* p0, void* p1, void* p2, void* p3, void* p4
 
         if (r == *NUMBER_0_INTEGER) {
 
-            compare_arrays(p7, p8, (void*) WEBDAV_PROPFIND_REQUEST_METHOD, (void*) WEBDAV_PROPFIND_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+            compare_arrays(p7, p8, (void*) WEBDAV_PROPFIND_REQUEST_METHOD, (void*) WEBDAV_PROPFIND_REQUEST_METHOD_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
             if (r != *NUMBER_0_INTEGER) {
 
@@ -473,7 +473,7 @@ void decode_http_request_method(void* p0, void* p1, void* p2, void* p3, void* p4
 
         if (r == *NUMBER_0_INTEGER) {
 
-            compare_arrays(p7, p8, (void*) WEBDAV_PROPPATCH_REQUEST_METHOD, (void*) WEBDAV_PROPPATCH_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+            compare_arrays(p7, p8, (void*) WEBDAV_PROPPATCH_REQUEST_METHOD, (void*) WEBDAV_PROPPATCH_REQUEST_METHOD_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
             if (r != *NUMBER_0_INTEGER) {
 
@@ -485,7 +485,7 @@ void decode_http_request_method(void* p0, void* p1, void* p2, void* p3, void* p4
 
         if (r == *NUMBER_0_INTEGER) {
 
-            compare_arrays(p7, p8, (void*) WEBDAV_MKCOL_REQUEST_METHOD, (void*) WEBDAV_MKCOL_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+            compare_arrays(p7, p8, (void*) WEBDAV_MKCOL_REQUEST_METHOD, (void*) WEBDAV_MKCOL_REQUEST_METHOD_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
             if (r != *NUMBER_0_INTEGER) {
 
@@ -497,7 +497,7 @@ void decode_http_request_method(void* p0, void* p1, void* p2, void* p3, void* p4
 
         if (r == *NUMBER_0_INTEGER) {
 
-            compare_arrays(p7, p8, (void*) WEBDAV_COPY_REQUEST_METHOD, (void*) WEBDAV_COPY_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+            compare_arrays(p7, p8, (void*) WEBDAV_COPY_REQUEST_METHOD, (void*) WEBDAV_COPY_REQUEST_METHOD_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
             if (r != *NUMBER_0_INTEGER) {
 
@@ -509,7 +509,7 @@ void decode_http_request_method(void* p0, void* p1, void* p2, void* p3, void* p4
 
         if (r == *NUMBER_0_INTEGER) {
 
-            compare_arrays(p7, p8, (void*) WEBDAV_MOVE_REQUEST_METHOD, (void*) WEBDAV_MOVE_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+            compare_arrays(p7, p8, (void*) WEBDAV_MOVE_REQUEST_METHOD, (void*) WEBDAV_MOVE_REQUEST_METHOD_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
             if (r != *NUMBER_0_INTEGER) {
 
@@ -521,7 +521,7 @@ void decode_http_request_method(void* p0, void* p1, void* p2, void* p3, void* p4
 
         if (r == *NUMBER_0_INTEGER) {
 
-            compare_arrays(p7, p8, (void*) WEBDAV_LOCK_REQUEST_METHOD, (void*) WEBDAV_LOCK_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+            compare_arrays(p7, p8, (void*) WEBDAV_LOCK_REQUEST_METHOD, (void*) WEBDAV_LOCK_REQUEST_METHOD_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
             if (r != *NUMBER_0_INTEGER) {
 
@@ -533,7 +533,7 @@ void decode_http_request_method(void* p0, void* p1, void* p2, void* p3, void* p4
 
         if (r == *NUMBER_0_INTEGER) {
 
-            compare_arrays(p7, p8, (void*) WEBDAV_UNLOCK_REQUEST_METHOD, (void*) WEBDAV_UNLOCK_REQUEST_METHOD_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+            compare_arrays(p7, p8, (void*) WEBDAV_UNLOCK_REQUEST_METHOD, (void*) WEBDAV_UNLOCK_REQUEST_METHOD_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
             if (r != *NUMBER_0_INTEGER) {
 
@@ -594,7 +594,7 @@ void decode_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p4
         sep = *NUMBER_MINUS_1_INTEGER;
 
         // Get separator index.
-        get_array_elements_index(i, (void*) &ic, (void*) HTTP_HEADER_ARGUMENT_SEPARATOR, (void*) HTTP_HEADER_ARGUMENT_SEPARATOR_COUNT, (void*) &sep, (void*) CHARACTER_ARRAY);
+        get_array_elements_index(i, (void*) &ic, (void*) HTTP_HEADER_ARGUMENT_SEPARATOR, (void*) HTTP_HEADER_ARGUMENT_SEPARATOR_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY);
 
         if (sep >= *NUMBER_0_INTEGER) {
 
@@ -615,7 +615,7 @@ void decode_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p4
             ic = *NUMBER_0_INTEGER;
         }
 
-    fwprintf(stderr, L"TEST http request header a: %s \n", (char*) a);
+    fwprintf(stderr, L"TEST http request header a: %ls \n", (wchar_t*) a);
     fwprintf(stderr, L"TEST http request header ac: %i \n", ac);
 
         //
@@ -627,7 +627,7 @@ void decode_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p4
         int vc = ic;
         // No further separators have to be found.
 
-    fwprintf(stderr, L"TEST http request header v: %s \n", (char*) v);
+    fwprintf(stderr, L"TEST http request header v: %ls \n", (wchar_t*) v);
     fwprintf(stderr, L"TEST http request header vc: %i \n", vc);
 
     } else {
@@ -680,7 +680,7 @@ void decode_http_request_headers(void* p0, void* p1, void* p2, void* p3, void* p
             sep = *NUMBER_MINUS_1_INTEGER;
 
             // Get separator index.
-            get_array_elements_index(i, (void*) &ic, (void*) HTTP_HEADER_SEPARATOR, (void*) HTTP_HEADER_SEPARATOR_COUNT, (void*) &sep, (void*) CHARACTER_ARRAY);
+            get_array_elements_index(i, (void*) &ic, (void*) HTTP_HEADER_SEPARATOR, (void*) HTTP_HEADER_SEPARATOR_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY);
 
             if (sep >= *NUMBER_0_INTEGER) {
 
@@ -707,7 +707,7 @@ void decode_http_request_headers(void* p0, void* p1, void* p2, void* p3, void* p
                 break;
             }
 
-    fwprintf(stderr, L"TEST http request headers h: %s \n", (char*) h);
+    fwprintf(stderr, L"TEST http request headers h: %ls \n", (wchar_t*) h);
     fwprintf(stderr, L"TEST http request headers hc: %i \n", hc);
 
         }
@@ -823,7 +823,7 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
         sep = *NUMBER_MINUS_1_INTEGER;
 
         // Get separator index.
-        get_array_elements_index(i, (void*) &ic, (void*) URI_SCHEME_SEPARATOR, (void*) URI_SCHEME_SEPARATOR_COUNT, (void*) &sep, (void*) CHARACTER_ARRAY);
+        get_array_elements_index(i, (void*) &ic, (void*) URI_SCHEME_SEPARATOR, (void*) URI_SCHEME_SEPARATOR_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY);
 
         if (sep >= *NUMBER_0_INTEGER) {
 
@@ -848,7 +848,7 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
             schc = *NUMBER_0_INTEGER;
         }
 
-    fwprintf(stderr, L"TEST http request uri sch: %s \n", (char*) sch);
+    fwprintf(stderr, L"TEST http request uri sch: %ls \n", (wchar_t*) sch);
     fwprintf(stderr, L"TEST http request uri schc: %i \n", schc);
 
         //
@@ -862,7 +862,7 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
         sep = *NUMBER_MINUS_1_INTEGER;
 
         // Get separator index.
-        get_array_elements_index(i, (void*) &ic, (void*) URI_AUTHORITY_SEPARATOR, (void*) URI_AUTHORITY_SEPARATOR_COUNT, (void*) &sep, (void*) CHARACTER_ARRAY);
+        get_array_elements_index(i, (void*) &ic, (void*) URI_AUTHORITY_SEPARATOR, (void*) URI_AUTHORITY_SEPARATOR_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY);
 
         if (sep >= *NUMBER_0_INTEGER) {
 
@@ -878,7 +878,7 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
             ic = ic - sep - *URI_AUTHORITY_SEPARATOR_COUNT;
 
             // Get separator index.
-            get_array_elements_index(i, (void*) &ic, (void*) URI_PATH_SEPARATOR, (void*) URI_PATH_SEPARATOR_COUNT, (void*) &sep, (void*) CHARACTER_ARRAY);
+            get_array_elements_index(i, (void*) &ic, (void*) URI_PATH_SEPARATOR, (void*) URI_PATH_SEPARATOR_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY);
 
             if (sep >= *NUMBER_0_INTEGER) {
 
@@ -899,7 +899,7 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
             } else {
 
                 // Get separator index.
-                get_array_elements_index(i, (void*) &ic, (void*) URI_QUERY_SEPARATOR, (void*) URI_QUERY_SEPARATOR_COUNT, (void*) &sep, (void*) CHARACTER_ARRAY);
+                get_array_elements_index(i, (void*) &ic, (void*) URI_QUERY_SEPARATOR, (void*) URI_QUERY_SEPARATOR_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY);
 
                 if (sep >= *NUMBER_0_INTEGER) {
 
@@ -920,7 +920,7 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
                 } else {
 
                     // Get separator index.
-                    get_array_elements_index(i, (void*) &ic, (void*) URI_FRAGMENT_SEPARATOR, (void*) URI_FRAGMENT_SEPARATOR_COUNT, (void*) &sep, (void*) CHARACTER_ARRAY);
+                    get_array_elements_index(i, (void*) &ic, (void*) URI_FRAGMENT_SEPARATOR, (void*) URI_FRAGMENT_SEPARATOR_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY);
 
                     if (sep >= *NUMBER_0_INTEGER) {
 
@@ -951,7 +951,7 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
             }
         }
 
-    fwprintf(stderr, L"TEST http request uri a: %s \n", (char*) a);
+    fwprintf(stderr, L"TEST http request uri a: %ls \n", (wchar_t*) a);
     fwprintf(stderr, L"TEST http request uri ac: %i \n", ac);
 
         //
@@ -965,7 +965,7 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
         sep = *NUMBER_MINUS_1_INTEGER;
 
         // Get separator index.
-        get_array_elements_index(i, (void*) &ic, (void*) URI_PATH_SEPARATOR, (void*) URI_PATH_SEPARATOR_COUNT, (void*) &sep, (void*) CHARACTER_ARRAY);
+        get_array_elements_index(i, (void*) &ic, (void*) URI_PATH_SEPARATOR, (void*) URI_PATH_SEPARATOR_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY);
 
         if (sep >= *NUMBER_0_INTEGER) {
 
@@ -981,7 +981,7 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
             ic = ic - sep - *URI_PATH_SEPARATOR_COUNT;
 
             // Get separator index.
-            get_array_elements_index(i, (void*) &ic, (void*) URI_QUERY_SEPARATOR, (void*) URI_QUERY_SEPARATOR_COUNT, (void*) &sep, (void*) CHARACTER_ARRAY);
+            get_array_elements_index(i, (void*) &ic, (void*) URI_QUERY_SEPARATOR, (void*) URI_QUERY_SEPARATOR_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY);
 
             if (sep >= *NUMBER_0_INTEGER) {
 
@@ -1002,7 +1002,7 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
             } else {
 
                 // Get separator index.
-                get_array_elements_index(i, (void*) &ic, (void*) URI_FRAGMENT_SEPARATOR, (void*) URI_FRAGMENT_SEPARATOR_COUNT, (void*) &sep, (void*) CHARACTER_ARRAY);
+                get_array_elements_index(i, (void*) &ic, (void*) URI_FRAGMENT_SEPARATOR, (void*) URI_FRAGMENT_SEPARATOR_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY);
 
                 if (sep >= *NUMBER_0_INTEGER) {
 
@@ -1032,7 +1032,7 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
             }
         }
 
-    fwprintf(stderr, L"TEST http request uri p: %s \n", (char*) p);
+    fwprintf(stderr, L"TEST http request uri p: %ls \n", (wchar_t*) p);
     fwprintf(stderr, L"TEST http request uri pc: %i \n", pc);
 
         //
@@ -1048,7 +1048,7 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
     fwprintf(stderr, L"TEST http request uri qc 0: %i \n", qc);
 
         // Get separator index.
-        get_array_elements_index(i, (void*) &ic, (void*) URI_QUERY_SEPARATOR, (void*) URI_QUERY_SEPARATOR_COUNT, (void*) &sep, (void*) CHARACTER_ARRAY);
+        get_array_elements_index(i, (void*) &ic, (void*) URI_QUERY_SEPARATOR, (void*) URI_QUERY_SEPARATOR_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY);
 
         if (sep >= *NUMBER_0_INTEGER) {
 
@@ -1069,7 +1069,7 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
             sep = *NUMBER_MINUS_1_INTEGER;
 
             // Get separator index.
-            get_array_elements_index(i, (void*) &ic, (void*) URI_FRAGMENT_SEPARATOR, (void*) URI_FRAGMENT_SEPARATOR_COUNT, (void*) &sep, (void*) CHARACTER_ARRAY);
+            get_array_elements_index(i, (void*) &ic, (void*) URI_FRAGMENT_SEPARATOR, (void*) URI_FRAGMENT_SEPARATOR_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY);
 
             if (sep >= *NUMBER_0_INTEGER) {
 
@@ -1102,7 +1102,7 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
             }
         }
 
-    fwprintf(stderr, L"TEST http request uri q: %s \n", (char*) q);
+    fwprintf(stderr, L"TEST http request uri q: %ls \n", (wchar_t*) q);
     fwprintf(stderr, L"TEST http request uri qc: %i \n", qc);
 
         //
@@ -1116,7 +1116,7 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
         sep = *NUMBER_MINUS_1_INTEGER;
 
         // Get separator index.
-        get_array_elements_index(i, (void*) &ic, (void*) URI_FRAGMENT_SEPARATOR, (void*) URI_FRAGMENT_SEPARATOR_COUNT, (void*) &sep, (void*) CHARACTER_ARRAY);
+        get_array_elements_index(i, (void*) &ic, (void*) URI_FRAGMENT_SEPARATOR, (void*) URI_FRAGMENT_SEPARATOR_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY);
 
         if (sep >= *NUMBER_0_INTEGER) {
 
@@ -1128,7 +1128,7 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
             fc = ic - sep - *URI_FRAGMENT_SEPARATOR_COUNT;
         }
 
-    fwprintf(stderr, L"TEST http request uri f: %s \n", (char*) f);
+    fwprintf(stderr, L"TEST http request uri f: %ls \n", (wchar_t*) f);
     fwprintf(stderr, L"TEST http request uri fc: %i \n", fc);
 
         // Set the scheme value within the compound.
@@ -1202,7 +1202,7 @@ void decode_http_request_line(void* p0, void* p1, void* p2, void* p3, void* p4, 
         sep = *NUMBER_MINUS_1_INTEGER;
 
         // Get separator index.
-        get_array_elements_index(i, (void*) &ic, (void*) HTTP_REQUEST_METHOD_SEPARATOR, (void*) HTTP_REQUEST_METHOD_SEPARATOR_COUNT, (void*) &sep, (void*) CHARACTER_ARRAY);
+        get_array_elements_index(i, (void*) &ic, (void*) HTTP_REQUEST_METHOD_SEPARATOR, (void*) HTTP_REQUEST_METHOD_SEPARATOR_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY);
 
         if (sep >= *NUMBER_0_INTEGER) {
 
@@ -1223,7 +1223,7 @@ void decode_http_request_line(void* p0, void* p1, void* p2, void* p3, void* p4, 
             ic = *NUMBER_0_INTEGER;
         }
 
-    fwprintf(stderr, L"TEST http request line rm: %s \n", (char*) rm);
+    fwprintf(stderr, L"TEST http request line rm: %ls \n", (wchar_t*) rm);
     fwprintf(stderr, L"TEST http request line rmc: %i \n", rmc);
 
         //
@@ -1237,7 +1237,7 @@ void decode_http_request_line(void* p0, void* p1, void* p2, void* p3, void* p4, 
         sep = *NUMBER_MINUS_1_INTEGER;
 
         // Get separator index.
-        get_array_elements_index(i, (void*) &ic, (void*) HTTP_UNIFORM_RESOURCE_IDENTIFIER_SEPARATOR, (void*) HTTP_UNIFORM_RESOURCE_IDENTIFIER_SEPARATOR_COUNT, (void*) &sep, (void*) CHARACTER_ARRAY);
+        get_array_elements_index(i, (void*) &ic, (void*) HTTP_UNIFORM_RESOURCE_IDENTIFIER_SEPARATOR, (void*) HTTP_UNIFORM_RESOURCE_IDENTIFIER_SEPARATOR_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY);
 
         if (sep >= *NUMBER_0_INTEGER) {
 
@@ -1258,7 +1258,7 @@ void decode_http_request_line(void* p0, void* p1, void* p2, void* p3, void* p4, 
             ic = *NUMBER_0_INTEGER;
         }
 
-    fwprintf(stderr, L"TEST http request line uri: %s \n", (char*) uri);
+    fwprintf(stderr, L"TEST http request line uri: %ls \n", (wchar_t*) uri);
     fwprintf(stderr, L"TEST http request line uric: %i \n", uric);
 
         //
@@ -1270,7 +1270,7 @@ void decode_http_request_line(void* p0, void* p1, void* p2, void* p3, void* p4, 
         int pvc = ic;
         // No further separators have to be found.
 
-    fwprintf(stderr, L"TEST http request line pv: %s \n", (char*) pv);
+    fwprintf(stderr, L"TEST http request line pv: %ls \n", (wchar_t*) pv);
     fwprintf(stderr, L"TEST http request line pvc: %i \n", pvc);
 
         // CAUTION! Do NOT move the function calls below to any other function!
@@ -1297,7 +1297,7 @@ void decode_http_request_line(void* p0, void* p1, void* p2, void* p3, void* p4, 
         // The uri's parts are set as parameters in the destination compound model.
         decode_http_request_uri(p0, p1, p2, uri, (void*) &uric, p12, p13);
 
-    fwprintf(stderr, L"TEST http request line END i: %s \n", (char*) uri);
+    fwprintf(stderr, L"TEST http request line END i: %ls \n", (wchar_t*) uri);
     fwprintf(stderr, L"TEST http request line END ic: %i \n", uric);
 
     } else {
@@ -1367,7 +1367,7 @@ void decode_http_request(void* p0, void* p1, void* p2, void* p3, void* p4, void*
     fwprintf(stderr, L"TEST http request sc p7: %i \n", *((int*) p7));
     fwprintf(stderr, L"TEST http request kmc p9: %i \n", *((int*) p9));
 
-    fwprintf(stderr, L"TEST http request s p6: %s \n", (char*) p6);
+    fwprintf(stderr, L"TEST http request s p6: %ls \n", (wchar_t*) p6);
 
         // The source index.
         // CAUTION! A local variable is used instead of the parameter
@@ -1388,7 +1388,7 @@ void decode_http_request(void* p0, void* p1, void* p2, void* p3, void* p4, void*
         sep = *NUMBER_MINUS_1_INTEGER;
 
         // Get separator index.
-        get_array_elements_index(i, (void*) &ic, (void*) HTTP_REQUEST_LINE_SEPARATOR, (void*) HTTP_REQUEST_LINE_SEPARATOR_COUNT, (void*) &sep, (void*) CHARACTER_ARRAY);
+        get_array_elements_index(i, (void*) &ic, (void*) HTTP_REQUEST_LINE_SEPARATOR, (void*) HTTP_REQUEST_LINE_SEPARATOR_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY);
 
         if (sep >= *NUMBER_0_INTEGER) {
 
@@ -1409,7 +1409,7 @@ void decode_http_request(void* p0, void* p1, void* p2, void* p3, void* p4, void*
             ic = *NUMBER_0_INTEGER;
         }
 
-    fwprintf(stderr, L"TEST http request rl: %s \n", (char*) rl);
+    fwprintf(stderr, L"TEST http request rl: %ls \n", (wchar_t*) rl);
     fwprintf(stderr, L"TEST http request rlc: %i \n", rlc);
 
         //
@@ -1423,7 +1423,7 @@ void decode_http_request(void* p0, void* p1, void* p2, void* p3, void* p4, void*
         sep = *NUMBER_MINUS_1_INTEGER;
 
         // Get separator index.
-        get_array_elements_index(i, (void*) &ic, (void*) HTTP_HEADERS_SEPARATOR, (void*) HTTP_HEADERS_SEPARATOR_COUNT, (void*) &sep, (void*) CHARACTER_ARRAY);
+        get_array_elements_index(i, (void*) &ic, (void*) HTTP_HEADERS_SEPARATOR, (void*) HTTP_HEADERS_SEPARATOR_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY);
 
         if (sep >= *NUMBER_0_INTEGER) {
 
@@ -1444,7 +1444,7 @@ void decode_http_request(void* p0, void* p1, void* p2, void* p3, void* p4, void*
             ic = *NUMBER_0_INTEGER;
         }
 
-    fwprintf(stderr, L"TEST http request h: %s \n", (char*) h);
+    fwprintf(stderr, L"TEST http request h: %ls \n", (wchar_t*) h);
     fwprintf(stderr, L"TEST http request hc: %i \n", hc);
 
         //
@@ -1458,7 +1458,7 @@ void decode_http_request(void* p0, void* p1, void* p2, void* p3, void* p4, void*
         sep = *NUMBER_MINUS_1_INTEGER;
 
         // Get separator index.
-        get_array_elements_index(i, (void*) &ic, (void*) HTTP_BODY_SEPARATOR, (void*) HTTP_BODY_SEPARATOR_COUNT, (void*) &sep, (void*) CHARACTER_ARRAY);
+        get_array_elements_index(i, (void*) &ic, (void*) HTTP_BODY_SEPARATOR, (void*) HTTP_BODY_SEPARATOR_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY);
 
         if (sep >= *NUMBER_0_INTEGER) {
 
@@ -1471,13 +1471,13 @@ void decode_http_request(void* p0, void* p1, void* p2, void* p3, void* p4, void*
             // The remaining source is assumed to contain no further parts.
         }
 
-    fwprintf(stderr, L"TEST http request b: %s \n", (char*) b);
+    fwprintf(stderr, L"TEST http request b: %ls \n", (wchar_t*) b);
     fwprintf(stderr, L"TEST http request bc: %i \n", bc);
 
         // Decode request line containing request method, uniform resource identifier and protocol version.
         decode_http_request_line(p0, p1, p2, p3, p4, p5, b, (void*) &bc, h, (void*) &hc, rl, (void*) &rlc, p8, p9);
 
-    fwprintf(stderr, L"TEST http request END i: %s \n", (char*) i);
+    fwprintf(stderr, L"TEST http request END i: %ls \n", (wchar_t*) i);
     fwprintf(stderr, L"TEST http request END ic: %i \n", ic);
 
     } else {

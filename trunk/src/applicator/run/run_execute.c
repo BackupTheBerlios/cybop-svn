@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.15 $ $Date: 2008-05-04 00:18:11 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2008-05-28 22:39:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -153,7 +153,7 @@ void run_execute(void* p0) {
         // (that is in the child process), since there are none.
 
         //?? TEMPORARY TEST!
-        char** args = (char**) p0;
+        wchar_t** args = (wchar_t**) p0;
         fwprintf(stdout, L"TEST args 0: %s\n", *(args + 0));
         fwprintf(stdout, L"TEST args 1: %s\n", *(args + 1));
         fwprintf(stdout, L"TEST args 2: %s\n", *(args + 2));
@@ -197,7 +197,7 @@ void run_execute(void* p0) {
         // Example:
         // execl(SHELL_SYSTEM_EXECUTABLE, SHELL_SYSTEM_EXECUTABLE, "-c", ARCHIVE_UNIX_SHELL_COMMAND, *NULL_POINTER);
         // execl(SHELL_SYSTEM_EXECUTABLE, SHELL_SYSTEM_EXECUTABLE, "-c", "xdosemu", *NULL_POINTER);
-        int e = execv(SHELL_SYSTEM_EXECUTABLE, (char**) p0);
+        int e = execv(SHELL_SYSTEM_EXECUTABLE, (wchar_t**) p0);
 
     fwprintf(stdout, L"TEST post-exec e: %i\n", e);
 

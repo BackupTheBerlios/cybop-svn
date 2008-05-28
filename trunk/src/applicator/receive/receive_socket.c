@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.49 $ $Date: 2008-05-06 22:36:52 $ $Author: christian $
+ * @version $Revision: 1.50 $ $Date: 2008-05-28 22:39:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -82,7 +82,7 @@ void receive_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, 
 
     log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Receive message via socket.");
 
-    fwprintf(stderr, L"TEST 1 l: %s \n", (char*) p8);
+    fwprintf(stderr, L"TEST 1 l: %s \n", (wchar_t*) p8);
     fwprintf(stderr, L"TEST 1 lc: %i \n", *((int*) p9));
 
     read_stream_socket(p0, p1, p2, p3);
@@ -95,7 +95,7 @@ void receive_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, 
     // compound model and details being handed over as parameters.
 //??    decode(p0, p1, p2, p3, p4, p5, *b, p29, p12, p13, p8, p9);
 
-    fwprintf(stderr, L"TEST 2 l: %s \n", (char*) p8);
+    fwprintf(stderr, L"TEST 2 l: %s \n", (wchar_t*) p8);
     fwprintf(stderr, L"TEST 2 lc: %i \n", *((int*) p9));
 
 /*??
@@ -134,7 +134,7 @@ void receive_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, 
         // The action parameter is NOT null, so it
         // will be used for generating a signal.
 
-    fwprintf(stderr, L"TEST 4 am: %s \n", (char*) *am);
+    fwprintf(stderr, L"TEST 4 am: %s \n", (wchar_t*) *am);
     fwprintf(stderr, L"TEST 4 amc: %i \n", **((int**) amc));
 
         // Receive socket signal.
@@ -195,11 +195,11 @@ void receive_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, 
 */
 
 /*??
-    fwprintf(stderr, L"TEST: receive socket signal actual command n: %s \n", (char*) *n);
+    fwprintf(stderr, L"TEST: receive socket signal actual command n: %s \n", (wchar_t*) *n);
     fwprintf(stderr, L"TEST: receive socket signal actual command nc: %i \n", **((int**) nc));
-    fwprintf(stderr, L"TEST: receive socket signal actual command a: %s \n", (char*) *a);
+    fwprintf(stderr, L"TEST: receive socket signal actual command a: %s \n", (wchar_t*) *a);
     fwprintf(stderr, L"TEST: receive socket signal actual command ac: %i \n", **((int**) ac));
-    fwprintf(stderr, L"TEST: receive socket signal actual command m: %s \n", (char*) *m);
+    fwprintf(stderr, L"TEST: receive socket signal actual command m: %s \n", (wchar_t*) *m);
     fwprintf(stderr, L"TEST: receive socket signal actual command mc: %i \n", **((int**) mc));
     fwprintf(stderr, L"TEST: receive socket signal actual command d: %i \n", *d);
     fwprintf(stderr, L"TEST: receive socket signal actual command dc: %i \n", **((int**) dc));
@@ -226,31 +226,31 @@ void receive_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, 
 
 /*??
     // The url basename.
-    char* url_basename = (char*) *NULL_POINTER;
+    wchar_t* url_basename = (wchar_t*) *NULL_POINTER;
     int url_basename_count = *NUMBER_0_INTEGER;
     // Create url basename.
-    allocate_array((void*) &url_basename, (void*) &url_basename_count, (void*) CHARACTER_ARRAY);
+    allocate_array((void*) &url_basename, (void*) &url_basename_count, (void*) WIDE_CHARACTER_ARRAY);
     // Get url base name.
     receive_socket_url(msg, &msg_count, &url_basename, &url_basename_count);
 
     // The parameter.
-    char* param = (char*) *NULL_POINTER;
+    wchar_t* param = (wchar_t*) *NULL_POINTER;
     int param_count = *NUMBER_0_INTEGER;
     // Create paramater.
-    allocate_array((void*) &param, (void*) &param_count, (void*) CHARACTER_ARRAY);
+    allocate_array((void*) &param, (void*) &param_count, (void*) WIDE_CHARACTER_ARRAY);
     // Get parameters.
     receive_socket_parameter(msg, &msg_count, &param, &param_count);
 
     // The firefox web browser makes a second request
     // to determine the favicon.
     char firefox_request[] = "favicon.ico";
-    char* p_firefox_request = &firefox_request[*NUMBER_0_INTEGER];
+    wchar_t* p_firefox_request = &firefox_request[*NUMBER_0_INTEGER];
     int firefox_request_count = *NUMBER_11_INTEGER;
 
     // The comparison result.
     int r = *NUMBER_0_INTEGER;
 
-    compare_arrays((void*) url_basename, (void*) &url_basename_count, (void*) p_firefox_request, (void*) &firefox_request_count, (void*) &r, (void*) CHARACTER_ARRAY);
+    compare_arrays((void*) url_basename, (void*) &url_basename_count, (void*) p_firefox_request, (void*) &firefox_request_count, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
     if (r != *NUMBER_0_INTEGER) {
 

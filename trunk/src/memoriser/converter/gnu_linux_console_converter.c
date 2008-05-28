@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.15 $ $Date: 2008-05-27 22:52:00 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2008-05-28 22:39:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -238,7 +238,7 @@ void decode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) 
 
                     // Initialise temporary character sequence with pointer to the
                     // first character AFTER the escape control sequence prefix.
-                    void* t = p3 + *ESCAPE_CONTROL_SEQUENCE_COUNT;
+                    void* t = p3 + (*ESCAPE_CONTROL_SEQUENCE_COUNT * *WIDE_CHARACTER_PRIMITIVE_SIZE);
                     int tc = *sc - *ESCAPE_CONTROL_SEQUENCE_COUNT;
 
     fwprintf(stderr, L"TEST a4: %i\n", p3);

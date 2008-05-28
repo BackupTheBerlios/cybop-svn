@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.23 $ $Date: 2008-05-04 00:18:10 $ $Author: christian $
+ * @version $Revision: 1.24 $ $Date: 2008-05-28 22:39:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -66,7 +66,7 @@ void receive_file_system(void* p0, void* p1, void* p2, void* p3, void* p4, void*
     //?? If the abstraction is "compound", then a cybol (xml) file representing
     //?? a compound model is expected, so that the libxml2 parser is to be used.
     //?? Otherwise, the flag remains zero and the file is read and parsed normally.
-    compare_arrays(p8, p9, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT, (void*) &w, (void*) CHARACTER_ARRAY);
+    compare_arrays(p8, p9, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT, (void*) &w, (void*) WIDE_CHARACTER_ARRAY);
 
     if (w != *NUMBER_0_INTEGER) {
 
@@ -84,7 +84,7 @@ void receive_file_system(void* p0, void* p1, void* p2, void* p3, void* p4, void*
         int rms = *NUMBER_0_INTEGER;
 
         // Allocate read model of type character, to read single bytes.
-        allocate((void*) &rm, (void*) &rms, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+        allocate((void*) &rm, (void*) &rms, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
         // Read persistent byte stream over channel.
         read_data((void*) &rm, (void*) &rmc, (void*) &rms, p6, p7, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, (void*) FILE_CHANNEL, (void*) FILE_CHANNEL_COUNT);
@@ -97,7 +97,7 @@ void receive_file_system(void* p0, void* p1, void* p2, void* p3, void* p4, void*
         decode(p0, p1, p2, p3, p4, p5, rm, (void*) &rmc, *NULL_POINTER, *NULL_POINTER, p8, p9);
 
         // Deallocate read model.
-        deallocate((void*) &rm, (void*) &rms, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+        deallocate((void*) &rm, (void*) &rms, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
     }
 }
 
