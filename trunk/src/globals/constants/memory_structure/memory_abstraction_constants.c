@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2008-05-06 22:36:53 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2008-06-07 11:09:27 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -50,6 +50,18 @@ static int* INTERNAL_MEMORY_ABSTRACTION_COUNT = NUMBER_16_INTEGER_ARRAY;
 static wchar_t COMPOUND_ABSTRACTION_ARRAY[] = {L'c', L'o', L'm', L'p', L'o', L'u', L'n', L'd'};
 static wchar_t* COMPOUND_ABSTRACTION = COMPOUND_ABSTRACTION_ARRAY;
 static int* COMPOUND_ABSTRACTION_COUNT = NUMBER_8_INTEGER_ARRAY;
+
+//
+// CAUTION! This redundant constant is necessary, because the module "initialiser.c"
+// needs to hand over a multibyte character string as argument, which later gets decoded
+// into a wide character string.
+// An extra "COMPOUND_ABSTRACTION_ASCII_COUNT" constant is NOT introduced here,
+// but the "COMPOUND_ABSTRACTION_COUNT" from above used instead.
+//
+
+/** The compound abstraction as ascii character string. */
+static char COMPOUND_ABSTRACTION_ASCII_ARRAY[] = {'c', 'o', 'm', 'p', 'o', 'u', 'n', 'd'};
+static char* COMPOUND_ABSTRACTION_ASCII = COMPOUND_ABSTRACTION_ASCII_ARRAY;
 
 //
 // Signal memory abstraction.

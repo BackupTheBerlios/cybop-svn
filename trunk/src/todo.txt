@@ -7,9 +7,11 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.51 $ $Date: 2008-05-28 22:39:58 $ $Author: christian $
+# @version $Revision: 1.52 $ $Date: 2008-06-07 11:09:26 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+        * Fix bug in module "initialiser.c", after function call "decode", in function call "receive_file_system"
 
         * Find unspecific bug causing a segmentation fault in optionaliser,
             sometimes in function "optionalise_log_file", other times in "optionalise_log_level"

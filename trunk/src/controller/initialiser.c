@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.13 $ $Date: 2008-05-06 22:36:52 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2008-06-07 11:09:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -100,8 +100,21 @@ void initialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
     allocate((void*) &md, (void*) mds, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
 
     // Decode startup model name, abstraction.
-    decode((void*) &ma, (void*) mac, (void*) mas, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
-        *NULL_POINTER, *NULL_POINTER, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
+    //
+    // CAUTION! The last arguments have to be "CHARACTER_VECTOR_ABSTRACTION"
+    // and NOT "WIDE_CHARACTER_VECTOR_ABSTRACTION", because the "decode" function
+    // expects multibyte characters (that would normally come from a CYBOL file).
+    //
+    // CAUTION! The source argument has to be "COMPOUND_ABSTRACTION_ASCII"
+    // and NOT "COMPOUND_ABSTRACTION", because a multibyte character string
+    // is expected, for conversion into a wide character string,
+    // just as would be done with strings read from a CYBOL file.
+    decode((void*) &ma, (void*) mac, (void*) mas, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, (void*) COMPOUND_ABSTRACTION_ASCII, (void*) COMPOUND_ABSTRACTION_COUNT,
+        *NULL_POINTER, *NULL_POINTER, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+
+    fwprintf(stderr, L"TEST ma: %ls\n", (wchar_t*) ma);
+    fwprintf(stderr, L"TEST mac: %i\n", *mac);
+
     // Receive startup model model and details (read from file and decode).
     receive_file_system((void*) &mm, (void*) mmc, (void*) mms, (void*) &md, (void*) mdc, (void*) mds,
         p4, p5, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
