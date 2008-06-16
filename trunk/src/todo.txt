@@ -7,11 +7,15 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.52 $ $Date: 2008-06-07 11:09:26 $ $Author: christian $
+# @version $Revision: 1.53 $ $Date: 2008-06-16 22:34:03 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Fix bug in module "initialiser.c", after function call "decode", in function call "receive_file_system"
+        * Fix bug in module "initialiser.c", after function call "decode", in function calls
+            | receive_file_system | decode | decode_compound
+            normally, a file name is handed over as wchar_t* when read from a cybol file;
+            at startup, however, the file name is given as (multibyte) char* on command line;
+            --> find a solution to this problem!
 
         * Find unspecific bug causing a segmentation fault in optionaliser,
             sometimes in function "optionalise_log_file", other times in "optionalise_log_level"

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.14 $ $Date: 2008-06-07 11:09:26 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2008-06-16 22:34:03 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -112,12 +112,47 @@ void initialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
     decode((void*) &ma, (void*) mac, (void*) mas, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, (void*) COMPOUND_ABSTRACTION_ASCII, (void*) COMPOUND_ABSTRACTION_COUNT,
         *NULL_POINTER, *NULL_POINTER, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
+    // CAUTION! The file name needs to be handed over as wide character array,
+    // because the "decode_compound" function called by "receive_file_system | decode"
+    // expects wide character arrays as cybol/ xml file name of the compound.
+    // Normally, a file name is handed over as "wchar_t*" when read from a cybol file;
+    // at startup, however, the file name is given as (multibyte) "char*" on command line.
+
+    // The temporary null-terminated wide character file name.
+    void* tmp = *NULL_POINTER;
+    int tmpc = *NUMBER_0_INTEGER;
+    int tmps = *NUMBER_0_INTEGER;
+
+    // Create temporary null-terminated wide character file name.
+    allocate_array((void*) &tmp, (void*) &tmps, (void*) WIDE_CHARACTER_ARRAY);
+
+    // Decode multibyte character array into wide character name.
+    decode_utf_8_unicode_character_vector((void*) &tmp, (void*) &tmpc, (void*) &tmps, p4, p5);
+
+    if (tmps <= tmpc) {
+
+        // Increase character array size to have place for the termination character.
+        tmps = tmpc + *NUMBER_1_INTEGER;
+
+        // Reallocate terminated file name as wide character array.
+        reallocate_array((void*) &tmp, (void*) &tmpc, (void*) &tmps, (void*) WIDE_CHARACTER_ARRAY);
+    }
+
+    // Add null termination character to terminated wide character file name.
+    set_array_elements(tmp, (void*) &tmpc, (void*) NULL_CONTROL_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+
     fwprintf(stderr, L"TEST ma: %ls\n", (wchar_t*) ma);
     fwprintf(stderr, L"TEST mac: %i\n", *mac);
 
+    fwprintf(stderr, L"TEST tmp: %ls\n", (wchar_t*) tmp);
+    fwprintf(stderr, L"TEST tmpc: %i\n", tmpc);
+
     // Receive startup model model and details (read from file and decode).
     receive_file_system((void*) &mm, (void*) mmc, (void*) mms, (void*) &md, (void*) mdc, (void*) mds,
-        p4, p5, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
+        tmp, (void*) &tmpc, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
+
+    // Destroy temporary null-terminated wide character file name.
+    deallocate_array((void*) &tmp, (void*) &tmps, (void*) WIDE_CHARACTER_ARRAY);
 
     log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"\n\n");
     log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Add initial signal to signal memory.");
