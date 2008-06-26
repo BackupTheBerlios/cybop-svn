@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.23 $ $Date: 2008-05-04 00:18:11 $ $Author: christian $
+ * @version $Revision: 1.24 $ $Date: 2008-06-26 04:57:27 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -55,8 +55,8 @@ void handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
  * @param p7 the shutdown flag
  * @param p8 the signal memory interrupt request flag
  * @param p9 the signal memory mutex
- * @param p10 the signal
- * @param p11 the signal count
+ * @param p10 the signal model
+ * @param p11 the signal model count
  * @param p12 the signal priority (Hand over as reference!)
  * @param p13 the signal identification (Hand over as reference!)
  * @param p14 the direct execution flag
@@ -126,6 +126,10 @@ void handle_compound_part(void* p0, void* p1, void* p2, void* p3, void* p4, void
 /*??
                             if (*x != *NUMBER_0_INTEGER) {
 */
+
+    fwprintf(stderr, L"TEST handle compound part a: %ls\n", *((wchar_t**) a));
+    fwprintf(stderr, L"TEST handle compound part ac: %i\n", **((int**) ac));
+
                                 handle(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, *a, *ac, *m, *mc, *d, *dc, p12, p13, p14);
 
 /*??
@@ -189,8 +193,8 @@ void handle_compound_part(void* p0, void* p1, void* p2, void* p3, void* p4, void
  * @param p7 the shutdown flag
  * @param p8 the signal memory interrupt request flag
  * @param p9 the signal memory mutex
- * @param p10 the signal
- * @param p11 the signal count
+ * @param p10 the signal model
+ * @param p11 the signal model count
  * @param p12 the signal priority (Hand over as reference!)
  * @param p13 the signal identification (Hand over as reference!)
  * @param p14 the direct execution flag
@@ -214,6 +218,8 @@ void handle_compound(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
 
                 break;
             }
+
+    fwprintf(stderr, L"TEST handle compound j: %i\n", j);
 
             handle_compound_part(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, (void*) &j);
 

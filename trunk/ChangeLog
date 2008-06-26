@@ -14,9 +14,13 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.62 $ $Date: 2008-06-07 11:09:26 $ $Author: christian $
+# @version $Revision: 1.63 $ $Date: 2008-06-26 04:57:27 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2008-06-19  Christian Heller  <christian.heller@tuxtax.de>
+        * Rollback changes from 2008-06-06, because function "optionalise" already returns wide character parameters
+        * Hand over "&k" instead of just "k" in function call "optionalise" of function "main"
 
 2008-06-06  Christian Heller  <christian.heller@tuxtax.de>
         * Fix bug in module "initialiser.c" by handing over multibyte character strings

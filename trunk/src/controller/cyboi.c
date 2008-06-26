@@ -25,7 +25,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.35 $ $Date: 2008-05-20 22:13:43 $ $Author: christian $
+ * @version $Revision: 1.36 $ $Date: 2008-06-26 04:57:27 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -151,12 +151,14 @@ int main(int p0, char** p1) {
         // Allocate cybol knowledge file path.
         allocate((void*) &k, (void*) &ks, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
-    fwprintf(stderr, L"TEST pre: %i\n", k);
+    fwprintf(stderr, L"TEST pre k: %ls\n", k);
+    fwprintf(stderr, L"TEST pre kc: %i\n", kc);
 
         // Optionalise command line argument options.
-        optionalise((void*) &m, (void*) k, (void*) &kc, (void*) &ks, (void*) LOG_LEVEL, (void*) &LOG_OUTPUT, (void*) p1, (void*) &p0);
+        optionalise((void*) &m, (void*) &k, (void*) &kc, (void*) &ks, (void*) LOG_LEVEL, (void*) &LOG_OUTPUT, (void*) p1, (void*) &p0);
 
-    fwprintf(stderr, L"TEST post: %i\n", k);
+    fwprintf(stderr, L"TEST post k: %ls\n", k);
+    fwprintf(stderr, L"TEST post kc: %i\n", kc);
 
         // Orient log output file stream.
         //

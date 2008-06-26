@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.27 $ $Date: 2008-05-06 22:36:52 $ $Author: christian $
+ * @version $Revision: 1.28 $ $Date: 2008-06-26 04:57:27 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -97,6 +97,9 @@ void handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
     // The comparison result.
     int r = *NUMBER_0_INTEGER;
+
+    fwprintf(stderr, L"TEST handle a: %ls\n", (wchar_t*) p10);
+    fwprintf(stderr, L"TEST handle ac: %i\n", *((int*) p11));
 
     if (r == *NUMBER_0_INTEGER) {
 

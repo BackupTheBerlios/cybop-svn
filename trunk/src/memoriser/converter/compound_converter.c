@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.19 $ $Date: 2008-05-27 22:52:00 $ $Author: christian $
+ * @version $Revision: 1.20 $ $Date: 2008-06-26 04:57:28 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -566,6 +566,8 @@ void decode_compound_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4
 
             log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Decode compound cybol node.");
 
+    fwprintf(stderr, L"TEST decode compound cybol node p3: %i\n", p3);
+
             // The source name, channel, abstraction, model.
             void* sn = *NULL_POINTER;
             int snc = *NUMBER_0_INTEGER;
@@ -597,16 +599,14 @@ void decode_compound_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4
             decode_compound_cybol_properties((void*) &sn, (void*) &snc, (void*) &sns, (void*) &sc, (void*) &scc, (void*) &scs,
                 (void*) &sa, (void*) &sac, (void*) &sas, (void*) &sm, (void*) &smc, (void*) &sms, p3);
 
-/*??
-            fwprintf(stderr, L"sn: %s\n", (char*) sn);
-            fwprintf(stderr, L"snc: %i\n", snc);
-            fwprintf(stderr, L"sc: %s\n", (char*) sc);
-            fwprintf(stderr, L"scc: %i\n", scc);
-            fwprintf(stderr, L"sa: %s\n", (char*) sa);
-            fwprintf(stderr, L"sac: %i\n", sac);
-            fwprintf(stderr, L"sm: %s\n", (char*) sm);
-            fwprintf(stderr, L"smc: %i\n", smc);
-*/
+    fwprintf(stderr, L"TEST decode compound cybol node sn: %s\n", (char*) sn);
+    fwprintf(stderr, L"TEST decode compound cybol node snc: %i\n", snc);
+    fwprintf(stderr, L"TEST decode compound cybol node sc: %s\n", (char*) sc);
+    fwprintf(stderr, L"TEST decode compound cybol node scc: %i\n", scc);
+    fwprintf(stderr, L"TEST decode compound cybol node sa: %s\n", (char*) sa);
+    fwprintf(stderr, L"TEST decode compound cybol node sac: %i\n", sac);
+    fwprintf(stderr, L"TEST decode compound cybol node sm: %s\n", (char*) sm);
+    fwprintf(stderr, L"TEST decode compound cybol node smc: %i\n", smc);
 
             //
             // Name.
@@ -621,6 +621,9 @@ void decode_compound_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4
 
             // Decode destination name.
             decode((void*) &dn, (void*) dnc, (void*) dns, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, sn, (void*) &snc, *NULL_POINTER, *NULL_POINTER, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
+
+    fwprintf(stderr, L"TEST decode compound cybol node dn: %ls\n", (wchar_t*) dn);
+    fwprintf(stderr, L"TEST decode compound cybol node dnc: %i\n", dnc);
 
             //
             // Channel.
@@ -642,6 +645,9 @@ void decode_compound_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4
 
             // Decode destination abstraction.
             decode((void*) &da, (void*) dac, (void*) das, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, sa, (void*) &sac, *NULL_POINTER, *NULL_POINTER, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
+
+    fwprintf(stderr, L"TEST decode compound cybol node da: %ls\n", (wchar_t*) da);
+    fwprintf(stderr, L"TEST decode compound cybol node dac: %i\n", dac);
 
             //
             // Model.
@@ -671,6 +677,9 @@ void decode_compound_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4
                 // This is just a workaround, until cyboi posesses its own cybol parsing functions.
                 // This source code block can then be deleted completely.
                 decode((void*) &dm, (void*) dmc, (void*) dms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, sm, (void*) &smc, *NULL_POINTER, *NULL_POINTER, sa, (void*) &sac);
+
+    fwprintf(stderr, L"TEST decode compound cybol node dm: %i\n", dm);
+    fwprintf(stderr, L"TEST decode compound cybol node dmc: %i\n", dmc);
 
             } else {
 
@@ -731,6 +740,9 @@ void decode_compound_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4
 
                 // Decode destination details child node children.
                 decode_compound_cybol_nodes((void*) &dd, (void*) ddc, (void*) dds, p3, p4);
+
+    fwprintf(stderr, L"TEST decode compound cybol node dd: %i\n", dd);
+    fwprintf(stderr, L"TEST decode compound cybol node ddc: %i\n", ddc);
             }
 
             // Add model to compound.
@@ -788,6 +800,8 @@ void decode_compound_cybol_nodes(void* p0, void* p1, void* p2, void* p3, void* p
 
                 break;
             }
+
+    fwprintf(stderr, L"TEST decode compound cybol nodes cc: %i\n", cc);
 
             if (c->type == XML_ELEMENT_NODE) {
 
@@ -863,6 +877,9 @@ void decode_compound_libxml2_parser_workaround(void* p0, void* p1, void* p2, voi
                     // Add null termination character to terminated file name.
                     set_array_elements(tmp, (void*) &tmpc, (void*) NULL_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
 
+    fwprintf(stderr, L"TEST decode tmp: %s\n", (char*) tmp);
+    fwprintf(stderr, L"TEST decode tmpc: %i\n", tmpc);
+
                     // Initialise the library.
                     // Check potential ABI mismatches between the version
                     // it was compiled for and the actual shared library used.
@@ -872,11 +889,11 @@ void decode_compound_libxml2_parser_workaround(void* p0, void* p1, void* p2, voi
                     // This function returns a pointer to type: xmlDoc*
                     xmlDoc* doc = (void*) xmlParseFile((char*) tmp);
 
-                    // Free global variables that may have been allocated by the parser.
-                    xmlCleanupParser();
-
                     // Destroy temporary null-terminated file name.
                     deallocate_array((void*) &tmp, (void*) &tmps, (void*) CHARACTER_ARRAY);
+
+                    // Free global variables that may have been allocated by the parser.
+                    xmlCleanupParser();
 
                     // Get root element node.
                     xmlNode* r = xmlDocGetRootElement(doc);
