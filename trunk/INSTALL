@@ -6,7 +6,7 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.6 $ $Date: 2007-09-13 22:48:15 $ $Author: christian $
+# @version $Revision: 1.7 $ $Date: 2008-06-27 14:52:35 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
@@ -51,7 +51,7 @@ of gcc and other binutils. Native 32 bits Linux and Windows was not tested, howe
 CYBOL Application Execution
 ___________________________
 
-- Change into the base directoy of your cybol applications, e.g.:
+- Change into the base directory of your cybol applications, e.g.:
 
     cd /home/cybop/examples
 
