@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.20 $ $Date: 2008-06-26 04:57:28 $ $Author: christian $
+ * @version $Revision: 1.21 $ $Date: 2008-07-03 09:24:27 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -313,169 +313,111 @@ void decode_compound_cybol_property(void* p0, void* p1, void* p2, void* p3, void
 
         xmlNode* pv = (xmlNode*) p12;
 
-/*??
-        if (p7 != *NULL_POINTER) {
+        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Decode compound cybol property.");
 
-            int* mc = (int*) p7;
+        // The comparison result.
+        int r = *NUMBER_0_INTEGER;
 
-            if (p6 != *NULL_POINTER) {
+        if (pv != *NULL_POINTER) {
 
-                void** m = (void**) p6;
+    fwprintf(stderr, L"TEST decode compound cybol property p12: %i\n", pv);
+    fwprintf(stderr, L"TEST decode compound cybol property p13: %s\n", (char*) p13);
+    fwprintf(stderr, L"TEST decode compound cybol property p14: %i\n", *((int*) p14));
 
-                if (p5 != *NULL_POINTER) {
+            if (r == *NUMBER_0_INTEGER) {
 
-                    int* ac = (int*) p5;
+    fwprintf(stderr, L"TEST decode compound cybol property NAME_ATTRIBUTE_AS_CHAR: %s\n", NAME_ATTRIBUTE_AS_CHAR);
+    fwprintf(stderr, L"TEST decode compound cybol property NAME_ATTRIBUTE_AS_CHAR_COUNT: %i\n", *((int*) NAME_ATTRIBUTE_AS_CHAR_COUNT));
 
-                    if (p4 != *NULL_POINTER) {
+    fwprintf(stderr, L"TEST decode compound cybol property 0: %i\n", r);
 
-                        void** a = (void**) p4;
+                compare_arrays(p13, p14, (void*) NAME_ATTRIBUTE_AS_CHAR, (void*) NAME_ATTRIBUTE_AS_CHAR_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-                        if (p3 != *NULL_POINTER) {
+    fwprintf(stderr, L"TEST decode compound cybol property 1: %i\n", r);
 
-                            int* cc = (int*) p3;
+                if (r != *NUMBER_0_INTEGER) {
 
-                            if (p2 != *NULL_POINTER) {
+    fwprintf(stderr, L"TEST decode compound cybol property 2: %i\n", r);
 
-                                void** c = (void**) p2;
+                    // Determine temporary character array count.
+                    int tmpc = strlen((char*) pv->content);
 
-                                if (p1 != *NULL_POINTER) {
+    fwprintf(stderr, L"TEST decode compound cybol property 3 tmpc: %i\n", tmpc);
 
-                                    int* nc = (int*) p1;
+                    // Get source name.
+                    decode_utf_8_unicode_character_vector(p0, p1, p2, (void*) pv->content, (void*) &tmpc);
 
-                                    if (p0 != *NULL_POINTER) {
+    fwprintf(stderr, L"TEST decode compound cybol property name: %ls\n", *((wchar_t**) p0));
+    fwprintf(stderr, L"TEST decode compound cybol property name count: %i\n", *((int*) p1));
 
-                                        void** n = (void**) p0;
-*/
-
-                                        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Decode compound cybol property.");
-
-                                        // The comparison result.
-                                        int r = *NUMBER_0_INTEGER;
-
-                                        if (pv != *NULL_POINTER) {
-
-                                            if (r == *NUMBER_0_INTEGER) {
-
-                                                compare_arrays(p13, p14, (void*) NAME_ATTRIBUTE, (void*) NAME_ATTRIBUTE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-                                                if (r != *NUMBER_0_INTEGER) {
-
-                                                    // Determine temporary character array count.
-                                                    int tmpc = strlen((char*) pv->content);
-
-                                                    // Get source name.
-                                                    decode_utf_8_unicode_character_vector(p0, p1, p2, (void*) pv->content, (void*) &tmpc);
-
-                                                    /*?? OLD solution. Delete later:
-                                                    *n = pv->content;
-                                                    *nc = strlen((char*) *n);
-                                                    */
-                                                }
-                                            }
-
-                                            if (r == *NUMBER_0_INTEGER) {
-
-                                                compare_arrays(p13, p14, (void*) CHANNEL_ATTRIBUTE, (void*) CHANNEL_ATTRIBUTE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-                                                if (r != *NUMBER_0_INTEGER) {
-
-                                                    // Determine temporary character array count.
-                                                    int tmpc = strlen((char*) pv->content);
-
-                                                    // Get source channel.
-                                                    decode_utf_8_unicode_character_vector(p3, p4, p5, (void*) pv->content, (void*) &tmpc);
-
-                                                    /*?? OLD solution. Delete later:
-                                                    *c = pv->content;
-                                                    *cc = strlen((char*) *c);
-                                                    */
-                                                }
-                                            }
-
-                                            if (r == *NUMBER_0_INTEGER) {
-
-                                                compare_arrays(p13, p14, (void*) ABSTRACTION_ATTRIBUTE, (void*) ABSTRACTION_ATTRIBUTE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-                                                if (r != *NUMBER_0_INTEGER) {
-
-                                                    // Determine temporary character array count.
-                                                    int tmpc = strlen((char*) pv->content);
-
-                                                    // Get source abstraction.
-                                                    decode_utf_8_unicode_character_vector(p6, p7, p8, (void*) pv->content, (void*) &tmpc);
-
-                                                    /*?? OLD solution. Delete later:
-                                                    *a = pv->content;
-                                                    *ac = strlen((char*) *a);
-                                                    */
-                                                }
-                                            }
-
-                                            if (r == *NUMBER_0_INTEGER) {
-
-                                                compare_arrays(p13, p14, (void*) MODEL_ATTRIBUTE, (void*) MODEL_ATTRIBUTE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-                                                if (r != *NUMBER_0_INTEGER) {
-
-                                                    // Determine temporary character array count.
-                                                    int tmpc = strlen((char*) pv->content);
-
-                                                    // Get source model.
-                                                    decode_utf_8_unicode_character_vector(p9, p10, p11, (void*) pv->content, (void*) &tmpc);
-
-                                                    /*?? OLD solution. Delete later:
-                                                    *m = pv->content;
-                                                    *mc = strlen((char*) *m);
-                                                    */
-                                                }
-                                            }
-
-                                        } else {
-
-                                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode compound cybol property. The CASTED property value is null.");
-                                        }
-
-/*??
-                                    } else {
-
-//??                                        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not translate xml node. The source parameter count is null.");
-                                    }
-
-                                } else {
-
-//??                                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not translate xml node. The source parameter count is null.");
-                                }
-
-                            } else {
-
-//??                                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not translate xml node. The source parameter count is null.");
-                            }
-
-                        } else {
-
-//??                            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not translate xml node. The source parameter count is null.");
-                        }
-
-                    } else {
-
-//??                        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not translate xml node. The source parameter count is null.");
-                    }
-
-                } else {
-
-//??                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not translate xml node. The source parameter count is null.");
+                    /*?? OLD solution. Delete later:
+                    *n = pv->content;
+                    *nc = strlen((char*) *n);
+                    */
                 }
+            }
 
-            } else {
+            if (r == *NUMBER_0_INTEGER) {
 
-//??                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not translate xml node. The source parameter count is null.");
+                compare_arrays(p13, p14, (void*) CHANNEL_ATTRIBUTE_AS_CHAR, (void*) CHANNEL_ATTRIBUTE_AS_CHAR_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+                if (r != *NUMBER_0_INTEGER) {
+
+                    // Determine temporary character array count.
+                    int tmpc = strlen((char*) pv->content);
+
+                    // Get source channel.
+                    decode_utf_8_unicode_character_vector(p3, p4, p5, (void*) pv->content, (void*) &tmpc);
+
+                    /*?? OLD solution. Delete later:
+                    *c = pv->content;
+                    *cc = strlen((char*) *c);
+                    */
+                }
+            }
+
+            if (r == *NUMBER_0_INTEGER) {
+
+                compare_arrays(p13, p14, (void*) ABSTRACTION_ATTRIBUTE_AS_CHAR, (void*) ABSTRACTION_ATTRIBUTE_AS_CHAR_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+                if (r != *NUMBER_0_INTEGER) {
+
+                    // Determine temporary character array count.
+                    int tmpc = strlen((char*) pv->content);
+
+                    // Get source abstraction.
+                    decode_utf_8_unicode_character_vector(p6, p7, p8, (void*) pv->content, (void*) &tmpc);
+
+                    /*?? OLD solution. Delete later:
+                    *a = pv->content;
+                    *ac = strlen((char*) *a);
+                    */
+                }
+            }
+
+            if (r == *NUMBER_0_INTEGER) {
+
+                compare_arrays(p13, p14, (void*) MODEL_ATTRIBUTE_AS_CHAR, (void*) MODEL_ATTRIBUTE_AS_CHAR_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+                if (r != *NUMBER_0_INTEGER) {
+
+                    // Determine temporary character array count.
+                    int tmpc = strlen((char*) pv->content);
+
+                    // Get source model.
+                    decode_utf_8_unicode_character_vector(p9, p10, p11, (void*) pv->content, (void*) &tmpc);
+
+                    /*?? OLD solution. Delete later:
+                    *m = pv->content;
+                    *mc = strlen((char*) *m);
+                    */
+                }
             }
 
         } else {
 
-//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not translate xml node. The source parameter count is null.");
+            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode compound cybol property. The CASTED property value is null.");
         }
-*/
 
     } else {
 
@@ -599,13 +541,13 @@ void decode_compound_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4
             decode_compound_cybol_properties((void*) &sn, (void*) &snc, (void*) &sns, (void*) &sc, (void*) &scc, (void*) &scs,
                 (void*) &sa, (void*) &sac, (void*) &sas, (void*) &sm, (void*) &smc, (void*) &sms, p3);
 
-    fwprintf(stderr, L"TEST decode compound cybol node sn: %s\n", (char*) sn);
+    fwprintf(stderr, L"TEST decode compound cybol node sn: %ls\n", (wchar_t*) sn);
     fwprintf(stderr, L"TEST decode compound cybol node snc: %i\n", snc);
-    fwprintf(stderr, L"TEST decode compound cybol node sc: %s\n", (char*) sc);
+    fwprintf(stderr, L"TEST decode compound cybol node sc: %ls\n", (wchar_t*) sc);
     fwprintf(stderr, L"TEST decode compound cybol node scc: %i\n", scc);
-    fwprintf(stderr, L"TEST decode compound cybol node sa: %s\n", (char*) sa);
+    fwprintf(stderr, L"TEST decode compound cybol node sa: %ls\n", (wchar_t*) sa);
     fwprintf(stderr, L"TEST decode compound cybol node sac: %i\n", sac);
-    fwprintf(stderr, L"TEST decode compound cybol node sm: %s\n", (char*) sm);
+    fwprintf(stderr, L"TEST decode compound cybol node sm: %ls\n", (wchar_t*) sm);
     fwprintf(stderr, L"TEST decode compound cybol node smc: %i\n", smc);
 
             //
@@ -623,7 +565,7 @@ void decode_compound_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4
             decode((void*) &dn, (void*) dnc, (void*) dns, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, sn, (void*) &snc, *NULL_POINTER, *NULL_POINTER, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
     fwprintf(stderr, L"TEST decode compound cybol node dn: %ls\n", (wchar_t*) dn);
-    fwprintf(stderr, L"TEST decode compound cybol node dnc: %i\n", dnc);
+    fwprintf(stderr, L"TEST decode compound cybol node dnc: %i\n", *dnc);
 
             //
             // Channel.
@@ -647,7 +589,7 @@ void decode_compound_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4
             decode((void*) &da, (void*) dac, (void*) das, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, sa, (void*) &sac, *NULL_POINTER, *NULL_POINTER, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
     fwprintf(stderr, L"TEST decode compound cybol node da: %ls\n", (wchar_t*) da);
-    fwprintf(stderr, L"TEST decode compound cybol node dac: %i\n", dac);
+    fwprintf(stderr, L"TEST decode compound cybol node dac: %i\n", *dac);
 
             //
             // Model.
@@ -678,9 +620,6 @@ void decode_compound_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4
                 // This source code block can then be deleted completely.
                 decode((void*) &dm, (void*) dmc, (void*) dms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, sm, (void*) &smc, *NULL_POINTER, *NULL_POINTER, sa, (void*) &sac);
 
-    fwprintf(stderr, L"TEST decode compound cybol node dm: %i\n", dm);
-    fwprintf(stderr, L"TEST decode compound cybol node dmc: %i\n", dmc);
-
             } else {
 
                 // The runtime abstraction.
@@ -692,16 +631,22 @@ void decode_compound_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4
                 // For example, an "xdt" file is converted into a compound.
                 decode_abstraction((void*) &ra, (void*) &rac, *NULL_POINTER, sa, (void*) &sac);
 
+    fwprintf(stderr, L"TEST decode compound cybol node ra: %ls\n", (wchar_t*) ra);
+    fwprintf(stderr, L"TEST decode compound cybol node rac: %i\n", rac);
+
                 // The read model.
                 void* rm = *NULL_POINTER;
                 int rmc = *NUMBER_0_INTEGER;
                 int rms = *NUMBER_0_INTEGER;
 
                 // Allocate read model of type character, to read single bytes.
-                allocate((void*) &rm, (void*) &rms, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+                allocate((void*) &rm, (void*) &rms, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
                 // Read read model as persistent byte stream over channel.
                 read_data((void*) &rm, (void*) &rmc, (void*) &rms, sm, (void*) &smc, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, sc, (void*) &scc);
+
+    fwprintf(stderr, L"TEST decode compound cybol node rm: %ls\n", (wchar_t*) rm);
+    fwprintf(stderr, L"TEST decode compound cybol node rmc: %i\n", rmc);
 
                 // Allocate destination model.
                 allocate((void*) &dmc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
@@ -717,8 +662,11 @@ void decode_compound_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4
                 decode((void*) &dm, (void*) dmc, (void*) dms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, rm, (void*) &rmc, *NULL_POINTER, *NULL_POINTER, sa, (void*) &sac);
 
                 // Deallocate read model.
-                deallocate((void*) &rm, (void*) &rms, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+                deallocate((void*) &rm, (void*) &rms, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
             }
+
+    fwprintf(stderr, L"TEST decode compound cybol node dm: %i\n", dm);
+    fwprintf(stderr, L"TEST decode compound cybol node dmc: %i\n", *dmc);
 
             //
             // Details.
@@ -742,7 +690,7 @@ void decode_compound_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4
                 decode_compound_cybol_nodes((void*) &dd, (void*) ddc, (void*) dds, p3, p4);
 
     fwprintf(stderr, L"TEST decode compound cybol node dd: %i\n", dd);
-    fwprintf(stderr, L"TEST decode compound cybol node ddc: %i\n", ddc);
+    fwprintf(stderr, L"TEST decode compound cybol node ddc: %i\n", *ddc);
             }
 
             // Add model to compound.

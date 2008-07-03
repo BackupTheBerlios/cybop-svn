@@ -7,13 +7,20 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.54 $ $Date: 2008-06-26 04:57:27 $ $Author: christian $
+# @version $Revision: 1.55 $ $Date: 2008-07-03 09:24:27 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Continue debugging in function call "receive_file_system" of function "initialise";
-            probably, the cybol file is not parsed/ decoded correctly --> compound_converter.c;
-            evaluate debug log messages; probably an error with wide character conversion
+        * Continue debugging in function call "checker.c" and "handler.c"
+
+        * Sort abstraction constants into "globals/constants/cybol/cybol_abstraction_constants.c"
+            or "globals/constants/memory_structure/memory_abstraction_constants.c", respectively;
+            the abstraction constants of cybol and in memory at runtime need to be distinguished,
+            because they are not always identical, e.g.
+            a cybol "knowledge" abstraction gets converted into an in-memory "wide_character" abstraction;
+            a cybol "character" abstraction gets converted into an in-memory "wide_character" abstraction;
+            a cybol "wide_character" abstraction does not exist at all,
+            because the cybol "character" abstraction is always expected to be utf-8 encoded
 
         * Find unspecific bug causing a segmentation fault in optionaliser,
             sometimes in function "optionalise_log_file", other times in "optionalise_log_level"
@@ -56,15 +63,6 @@
         * YES, ALL array functions CAN be unified, if introducing NEW files for handling of primitive data types,
             e.g. with functions like "assign_double", "compare_double", "add_double" etc.;
             that way the different types are outsourced from the array handling files
-
-        * Sort abstraction constants into "globals/constants/cybol/cybol_abstraction_constants.c"
-            or "globals/constants/memory_structure/memory_abstraction_constants.c", respectively;
-            the abstraction constants of cybol and in memory at runtime need to be distinguished,
-            because they are not always identical, e.g.
-            a cybol "knowledge" abstraction gets converted into an in-memory "wide_character" abstraction;
-            a cybol "character" abstraction gets converted into an in-memory "wide_character" abstraction;
-            a cybol "wide_character" abstraction does not exist at all,
-            because the cybol "character" abstraction is always expected to be utf-8 encoded
 
         * Does the logger need an own mutex? ... because it is accessed by all threads!
 

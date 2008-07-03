@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.15 $ $Date: 2008-05-04 00:18:14 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2008-07-03 09:24:27 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -65,12 +65,12 @@ void read_inline(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     *ds = *sc;
 
                     // Reallocate array.
-                    reallocate_array(p0, p1, p2, (void*) CHARACTER_ARRAY);
+                    reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_ARRAY);
 
                     // The destination array index to start writing at.
                     int i = *NUMBER_0_INTEGER;
 
-                    set_array_elements(*d, (void*) &i, p3, p4, (void*) CHARACTER_ARRAY);
+                    set_array_elements(*d, (void*) &i, p3, p4, (void*) WIDE_CHARACTER_ARRAY);
 
                     // Set new array count.
                     *dc = *sc;

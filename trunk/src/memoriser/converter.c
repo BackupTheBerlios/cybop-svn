@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.47 $ $Date: 2008-05-27 22:52:00 $ $Author: christian $
+ * @version $Revision: 1.48 $ $Date: 2008-07-03 09:24:27 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -94,7 +94,8 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
         if (r != *NUMBER_0_INTEGER) {
 
-            decode_utf_8_unicode_character_vector(p0, p1, p2, p6, p7);
+            set(p0, p1, p2, p6, p7, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
+//??            decode_utf_8_unicode_character_vector(p0, p1, p2, p6, p7);
         }
     }
 
@@ -104,7 +105,8 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
         if (r != *NUMBER_0_INTEGER) {
 
-            decode_utf_8_unicode_character_vector(p0, p1, p2, p6, p7);
+            set(p0, p1, p2, p6, p7, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
+//??            decode_utf_8_unicode_character_vector(p0, p1, p2, p6, p7);
         }
     }
 
@@ -114,7 +116,8 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
         if (r != *NUMBER_0_INTEGER) {
 
-            decode_utf_8_unicode_character_vector(p0, p1, p2, p6, p7);
+            set(p0, p1, p2, p6, p7, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
+//??            decode_utf_8_unicode_character_vector(p0, p1, p2, p6, p7);
         }
     }
 
@@ -139,7 +142,18 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
         if (r != *NUMBER_0_INTEGER) {
 
-            decode_utf_8_unicode_character_vector(p0, p1, p2, p6, p7);
+            set(p0, p1, p2, p6, p7, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
+//??            decode_utf_8_unicode_character_vector(p0, p1, p2, p6, p7);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER) {
+
+        compare_arrays(p10, p11, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+
+        if (r != *NUMBER_0_INTEGER) {
+
+            set(p0, p1, p2, p6, p7, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
         }
     }
 

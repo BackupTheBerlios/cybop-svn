@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2008-05-06 22:36:53 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2008-07-03 09:24:27 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -52,6 +52,32 @@ static int* ABSTRACTION_ATTRIBUTE_COUNT = NUMBER_11_INTEGER_ARRAY;
 static wchar_t MODEL_ATTRIBUTE_ARRAY[] = {L'm', L'o', L'd', L'e', L'l'};
 static wchar_t* MODEL_ATTRIBUTE = MODEL_ATTRIBUTE_ARRAY;
 static int* MODEL_ATTRIBUTE_COUNT = NUMBER_5_INTEGER_ARRAY;
+
+//
+// Cybol tag attributes as char.
+// They are needed by the "compound_converter.c" module and
+// may (possibly) be deleted later, if a self-written XML parser is used.
+//
+
+/** The name attribute as char. */
+static char NAME_ATTRIBUTE_AS_CHAR_ARRAY[] = {'n', 'a', 'm', 'e'};
+static char* NAME_ATTRIBUTE_AS_CHAR = NAME_ATTRIBUTE_AS_CHAR_ARRAY;
+static int* NAME_ATTRIBUTE_AS_CHAR_COUNT = NUMBER_4_INTEGER_ARRAY;
+
+/** The channel attribute as char. */
+static char CHANNEL_ATTRIBUTE_AS_CHAR_ARRAY[] = {'c', 'h', 'a', 'n', 'n', 'e', 'l'};
+static char* CHANNEL_ATTRIBUTE_AS_CHAR = CHANNEL_ATTRIBUTE_AS_CHAR_ARRAY;
+static int* CHANNEL_ATTRIBUTE_AS_CHAR_COUNT = NUMBER_7_INTEGER_ARRAY;
+
+/** The abstraction attribute as char. */
+static char ABSTRACTION_ATTRIBUTE_AS_CHAR_ARRAY[] = {'a', 'b', 's', 't', 'r', 'a', 'c', 't', 'i', 'o', 'n'};
+static char* ABSTRACTION_ATTRIBUTE_AS_CHAR = ABSTRACTION_ATTRIBUTE_AS_CHAR_ARRAY;
+static int* ABSTRACTION_ATTRIBUTE_AS_CHAR_COUNT = NUMBER_11_INTEGER_ARRAY;
+
+/** The model attribute as char. */
+static char MODEL_ATTRIBUTE_AS_CHAR_ARRAY[] = {'m', 'o', 'd', 'e', 'l'};
+static char* MODEL_ATTRIBUTE_AS_CHAR = MODEL_ATTRIBUTE_AS_CHAR_ARRAY;
+static int* MODEL_ATTRIBUTE_AS_CHAR_COUNT = NUMBER_5_INTEGER_ARRAY;
 
 //
 // Knowledge model separators.
