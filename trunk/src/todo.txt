@@ -7,11 +7,11 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.55 $ $Date: 2008-07-03 09:24:27 $ $Author: christian $
+# @version $Revision: 1.56 $ $Date: 2008-07-05 13:44:25 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Continue debugging in function call "checker.c" and "handler.c"
+        * Try out example applications and continue debugging
 
         * Sort abstraction constants into "globals/constants/cybol/cybol_abstraction_constants.c"
             or "globals/constants/memory_structure/memory_abstraction_constants.c", respectively;

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.16 $ $Date: 2008-06-26 04:57:27 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2008-07-05 13:44:25 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -109,14 +109,17 @@ void initialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
     // and NOT "COMPOUND_ABSTRACTION", because a multibyte character string
     // is expected, for conversion into a wide character string,
     // just as would be done with strings read from a CYBOL file.
+/*??
     decode((void*) &ma, (void*) mac, (void*) mas, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, (void*) COMPOUND_ABSTRACTION_ASCII, (void*) COMPOUND_ABSTRACTION_COUNT,
         *NULL_POINTER, *NULL_POINTER, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
+*/
+    decode_utf_8_unicode_character_vector((void*) &ma, (void*) mac, (void*) mas, (void*) COMPOUND_ABSTRACTION_ASCII, (void*) COMPOUND_ABSTRACTION_COUNT);
 
-    fwprintf(stderr, L"TEST ma: %ls\n", (wchar_t*) ma);
-    fwprintf(stderr, L"TEST mac: %i\n", *mac);
+    fwprintf(stderr, L"TEST initialiser ma: %ls\n", (wchar_t*) ma);
+    fwprintf(stderr, L"TEST initialiser mac: %i\n", *mac);
 
-    fwprintf(stderr, L"TEST p4: %ls\n", (wchar_t*) p4);
-    fwprintf(stderr, L"TEST p5: %i\n", *((int*) p5));
+    fwprintf(stderr, L"TEST initialiser p4: %ls\n", (wchar_t*) p4);
+    fwprintf(stderr, L"TEST initialiser p5: %i\n", *((int*) p5));
 
     // Receive startup model model and details (read from file and decode).
     receive_file_system((void*) &mm, (void*) mmc, (void*) mms, (void*) &md, (void*) mdc, (void*) mds,
