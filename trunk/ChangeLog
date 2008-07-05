@@ -14,9 +14,19 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.63 $ $Date: 2008-06-26 04:57:27 $ $Author: christian $
+# @version $Revision: 1.64 $ $Date: 2008-07-05 13:58:31 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2008-07-05  Christian Heller  <christian.heller@tuxtax.de>
+        * Fix module "initialiser.c" temporarily by using "decode_utf_8_unicode_character_vector"
+            instead of "decode" for abstraction of initial signal
+
+2008-07-03  Christian Heller  <christian.heller@tuxtax.de>
+        * Add temporary attribute constants to module "cybol_constants.c", e.g. NAME_ATTRIBUTE_AS_CHAR in addition to NAME_ATTRIBUTE
+            (this is necessary for string comparison in module "compound_converter.c", since the libxml2 parser returns UTF-8 strings)
+        * Correct character (string) errors in module "compound_converter.c", which prevented proper decoding of cybol values
+        * Adapt modules "converter.c", "inline_communicator.c"
 
 2008-06-19  Christian Heller  <christian.heller@tuxtax.de>
         * Rollback changes from 2008-06-06, because function "optionalise" already returns wide character parameters
