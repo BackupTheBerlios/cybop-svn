@@ -20,14 +20,14 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2008-05-28 22:39:59 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2008-07-08 07:11:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef HTTP_RESPONSE_CONVERTER_SOURCE
 #define HTTP_RESPONSE_CONVERTER_SOURCE
 
-#include "../../globals/constants/character/character_set_constants.c"
+#include "../../globals/constants/character/set/character_set_constants.c"
 #include "../../globals/constants/cybol/cybol_abstraction_constants.c"
 #include "../../globals/constants/http/http_header_constants.c"
 #include "../../globals/constants/http/http_header_variable_constants.c"

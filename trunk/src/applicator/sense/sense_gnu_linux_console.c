@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2008-05-28 22:39:59 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2008-07-08 07:11:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -33,11 +33,11 @@
 #include <signal.h>
 #include <stdio.h>
 //?? #include <wchar.h>
+#include "../../globals/constants/character/code/character_code_constants.c"
+#include "../../globals/constants/character/code/wide_character_code_constants.c"
+#include "../../globals/constants/console/console_control_sequence_constants.c"
 #include "../../globals/constants/cyboi/cyboi_signal_priority_constants.c"
 #include "../../globals/constants/cybol/cybol_abstraction_constants.c"
-#include "../../globals/constants/character/character_constants.c"
-#include "../../globals/constants/character/wide_character_constants.c"
-#include "../../globals/constants/console/console_control_sequence_constants.c"
 #include "../../globals/constants/cybol/cybol_name_constants.c"
 #include "../../globals/constants/integer/integer_constants.c"
 #include "../../globals/constants/log/log_level_constants.c"

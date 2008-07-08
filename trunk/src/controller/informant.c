@@ -20,14 +20,14 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2008-05-16 00:20:15 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2008-07-08 07:11:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef INFORMANT_SOURCE
 #define INFORMANT_SOURCE
 
-#include "../globals/constants/character/wide_character_constants.c"
+#include "../globals/constants/character/code/wide_character_code_constants.c"
 #include "../globals/constants/cyboi/cyboi_identification_constants.c"
 #include "../globals/constants/memory_structure/memory_structure_constants.c"
 #include "../globals/constants/pointer/pointer_constants.c"

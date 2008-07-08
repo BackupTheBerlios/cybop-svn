@@ -20,14 +20,14 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2008-05-27 22:52:00 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2008-07-08 07:11:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef HTTP_SEPARATOR_CONSTANTS_SOURCE
 #define HTTP_SEPARATOR_CONSTANTS_SOURCE
 
-#include "../../../globals/constants/character/character_constants.c"
+#include "../../../globals/constants/character/code/character_code_constants.c"
 #include "../../../globals/constants/integer/integer_constants.c"
 
 // CAUTION! Use Carriage Return (CR) AND Line Feed (LF) characters to break lines!

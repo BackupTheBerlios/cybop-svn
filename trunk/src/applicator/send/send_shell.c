@@ -20,13 +20,14 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.14 $ $Date: 2008-05-28 22:39:59 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2008-07-08 07:11:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef SEND_SHELL_SOURCE
 #define SEND_SHELL_SOURCE
 
+#include "../../globals/constants/character/code/wide_character_code_constants.c"
 #include "../../globals/constants/cybol/cybol_abstraction_constants.c"
 #include "../../globals/constants/cybol/cybol_channel_constants.c"
 #include "../../globals/constants/cybol/cybol_model_constants.c"

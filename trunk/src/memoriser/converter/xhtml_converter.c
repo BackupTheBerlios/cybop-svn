@@ -20,14 +20,14 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.17 $ $Date: 2008-05-27 22:52:01 $ $Author: christian $
+ * @version $Revision: 1.18 $ $Date: 2008-07-08 07:11:34 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef XHTML_CONVERTER_SOURCE
 #define XHTML_CONVERTER_SOURCE
 
-#include "../../globals/constants/character/character_constants.c"
+#include "../../globals/constants/character/code/character_code_constants.c"
 #include "../../globals/constants/cybol/cybol_abstraction_constants.c"
 #include "../../globals/constants/cybol/cybol_channel_constants.c"
 #include "../../globals/constants/cybol/cybol_model_constants.c"

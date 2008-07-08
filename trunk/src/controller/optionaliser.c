@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.13 $ $Date: 2008-05-20 22:13:43 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2008-07-08 07:11:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -31,7 +31,7 @@
 #include <fcntl.h>
 #include <stdio.h>
 #include <string.h>
-#include "../globals/constants/character/character_constants.c"
+#include "../globals/constants/character/code/character_code_constants.c"
 #include "../globals/constants/command_line/command_line_constants.c"
 #include "../globals/constants/cyboi/cyboi_operation_mode_constants.c"
 #include "../globals/constants/cybol/cybol_abstraction_constants.c"
