@@ -14,9 +14,12 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.64 $ $Date: 2008-07-05 13:58:31 $ $Author: christian $
+# @version $Revision: 1.65 $ $Date: 2008-07-08 06:32:26 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2008-07-07  Christian Heller  <christian.heller@tuxtax.de>
+        * Restructure and rename files in directory "src/globals/constants/character/" and add more constants
 
 2008-07-05  Christian Heller  <christian.heller@tuxtax.de>
         * Fix module "initialiser.c" temporarily by using "decode_utf_8_unicode_character_vector"
