@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2008-07-08 07:11:33 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2008-07-08 17:55:36 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -62,11 +62,11 @@ static int* HTTP_BODY_SEPARATOR_COUNT = NUMBER_2_INTEGER_ARRAY;
 //
 
 /** The http request method separator. */
-static wchar_t* HTTP_REQUEST_METHOD_SEPARATOR = SPACE_WIDE_CHARACTER_ARRAY;
+static wchar_t* HTTP_REQUEST_METHOD_SEPARATOR = SPACE_WIDE_CHARACTER_CODE_ARRAY;
 static int* HTTP_REQUEST_METHOD_SEPARATOR_COUNT = NUMBER_1_INTEGER_ARRAY;
 
 /** The http uniform resource identifier separator. */
-static wchar_t* HTTP_UNIFORM_RESOURCE_IDENTIFIER_SEPARATOR = SPACE_WIDE_CHARACTER_ARRAY;
+static wchar_t* HTTP_UNIFORM_RESOURCE_IDENTIFIER_SEPARATOR = SPACE_WIDE_CHARACTER_CODE_ARRAY;
 static int* HTTP_UNIFORM_RESOURCE_IDENTIFIER_SEPARATOR_COUNT = NUMBER_1_INTEGER_ARRAY;
 
 //
@@ -74,7 +74,7 @@ static int* HTTP_UNIFORM_RESOURCE_IDENTIFIER_SEPARATOR_COUNT = NUMBER_1_INTEGER_
 //
 
 /** The http protocol version separator. */
-static wchar_t* HTTP_PROTOCOL_VERSION_SEPARATOR = SPACE_WIDE_CHARACTER_ARRAY;
+static wchar_t* HTTP_PROTOCOL_VERSION_SEPARATOR = SPACE_WIDE_CHARACTER_CODE_ARRAY;
 static int* HTTP_PROTOCOL_VERSION_SEPARATOR_COUNT = NUMBER_1_INTEGER_ARRAY;
 
 //
@@ -92,7 +92,7 @@ static wchar_t* HTTP_HEADER_VALUE_SEPARATOR = HTTP_HEADER_VALUE_SEPARATOR_ARRAY;
 static int* HTTP_HEADER_VALUE_SEPARATOR_COUNT = NUMBER_2_INTEGER_ARRAY;
 
 /** The http header value assignment separator ("equals sign"). */
-static wchar_t* HTTP_HEADER_VALUE_ASSIGNMENT_SEPARATOR = EQUALS_SIGN_WIDE_CHARACTER_ARRAY;
+static wchar_t* HTTP_HEADER_VALUE_ASSIGNMENT_SEPARATOR = EQUALS_SIGN_WIDE_CHARACTER_CODE_ARRAY;
 static int* HTTP_HEADER_VALUE_ASSIGNMENT_SEPARATOR_COUNT = NUMBER_1_INTEGER_ARRAY;
 
 /** The http header separator ("carriage return" and "line feed"). */

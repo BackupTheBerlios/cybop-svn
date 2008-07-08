@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.24 $ $Date: 2008-07-08 07:11:34 $ $Author: christian $
+ * @version $Revision: 1.25 $ $Date: 2008-07-08 17:55:36 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -396,7 +396,7 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
                     }
 
                     // Add null termination character to text.
-                    set_array_elements(text, (void*) &textc, (void*) NULL_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+                    set_array_elements(text, (void*) &textc, (void*) NULL_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
 
                     //?? TODO: Create "text" as 2byte character array,
                     //?? since the xlib C library expects it that way.
@@ -596,9 +596,9 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
                 }
 
                 // Add null termination character to title.
-                set_array_elements(tt, (void*) &ttc, (void*) NULL_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+                set_array_elements(tt, (void*) &ttc, (void*) NULL_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
                 // Add null termination character to icon name.
-                set_array_elements(ti, (void*) &tic, (void*) NULL_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+                set_array_elements(ti, (void*) &tic, (void*) NULL_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
 
                 // Set terminated window title.
                 //

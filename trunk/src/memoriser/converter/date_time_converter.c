@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2008-07-08 07:11:33 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2008-07-08 17:55:36 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -172,11 +172,11 @@ void decode_ddmmyyyy_date_time(void* p0, void* p1, void* p2, void* p3, void* p4)
                         int yti = *NUMBER_4_INTEGER;
 
                         // Add string termination to temporary null-terminated day string.
-                        set_array_elements((void*) tmpd, (void*) &dti, (void*) NULL_CONTROL_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+                        set_array_elements((void*) tmpd, (void*) &dti, (void*) NULL_CONTROL_WIDE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
                         // Add string termination to temporary null-terminated month string.
-                        set_array_elements((void*) tmpm, (void*) &mti, (void*) NULL_CONTROL_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+                        set_array_elements((void*) tmpm, (void*) &mti, (void*) NULL_CONTROL_WIDE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
                         // Add string termination to temporary null-terminated year string.
-                        set_array_elements((void*) tmpy, (void*) &yti, (void*) NULL_CONTROL_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+                        set_array_elements((void*) tmpy, (void*) &yti, (void*) NULL_CONTROL_WIDE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
 
                         // The tail variable is useless here and only needed for the string
                         // transformation function. If the whole string array consists of

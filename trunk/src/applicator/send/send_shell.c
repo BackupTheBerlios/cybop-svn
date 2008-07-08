@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.15 $ $Date: 2008-07-08 07:11:33 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2008-07-08 17:55:36 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -92,7 +92,7 @@ void send_shell(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
             }
 
             // Set new line character.
-            set_array_elements(a, (void*) &ac, (void*) LINE_FEED_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+            set_array_elements(a, (void*) &ac, (void*) LINE_FEED_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
             ac = ac + *PRIMITIVE_COUNT;
         }
     }

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.32 $ $Date: 2008-07-08 07:11:33 $ $Author: christian $
+ * @version $Revision: 1.33 $ $Date: 2008-07-08 17:55:36 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -183,7 +183,7 @@ void read_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
             }
 
             // Add null termination character to terminated file name.
-            set_array_elements(tn, (void*) &tnc, (void*) NULL_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+            set_array_elements(tn, (void*) &tnc, (void*) NULL_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
 
             // Open file.
             // CAUTION! The file name cannot be handed over as is.
@@ -374,7 +374,7 @@ void write_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 }
 
                 // Add null termination character to terminated file name.
-                set_array_elements(tn, (void*) &tnc, (void*) NULL_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+                set_array_elements(tn, (void*) &tnc, (void*) NULL_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
 
                 // Open file.
                 // CAUTION! The file name cannot be handed over as is.

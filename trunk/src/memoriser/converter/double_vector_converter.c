@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.18 $ $Date: 2008-07-08 07:11:33 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2008-07-08 17:55:36 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -74,7 +74,7 @@ void decode_double(void* p0, void* p1, void* p2, void* p3, void* p4) {
             i = *sc;
 
             // Add string termination to temporary null-terminated string.
-            set_array_elements((void*) tmp, (void*) &i, (void*) NULL_CONTROL_WIDE_CHARACTER, (void*) NUMBER_1_INTEGER, (void*) WIDE_CHARACTER_ARRAY);
+            set_array_elements((void*) tmp, (void*) &i, (void*) NULL_CONTROL_WIDE_CHARACTER_CODE, (void*) NUMBER_1_INTEGER, (void*) WIDE_CHARACTER_ARRAY);
 
             // The tail variable is useless here and only needed for the string
             // transformation function. If the whole string array consists of
@@ -245,7 +245,7 @@ void decode_double_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
                         break;
                     }
 
-                    get_character_array_elements_index(p3, p4, (void*) COMMA_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &i);
+                    get_character_array_elements_index(p3, p4, (void*) COMMA_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) &i);
 
                     if (i > *NUMBER_0_INTEGER) {
 

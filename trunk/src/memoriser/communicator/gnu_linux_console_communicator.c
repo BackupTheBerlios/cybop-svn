@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.15 $ $Date: 2008-07-08 07:11:33 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2008-07-08 17:55:36 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -60,8 +60,8 @@ void read_gnu_linux_console(void* p0, void* p1, void* p2, void* p3) {
         // The loop exit flag.
         int f = *NUMBER_0_INTEGER;
         // The input character.
-        wint_t c = *((wint_t*) NULL_CONTROL_CHARACTER);
-//??        int c = *((int*) NULL_CONTROL_CHARACTER);
+        wint_t c = *((wint_t*) NULL_CONTROL_CHARACTER_CODE);
+//??        int c = *((int*) NULL_CONTROL_CHARACTER_CODE);
         // The escape character mode.
         int esc = *NUMBER_0_INTEGER;
         // The escape control sequence mode.
@@ -113,7 +113,7 @@ void read_gnu_linux_console(void* p0, void* p1, void* p2, void* p3) {
                 // or if a left square bracket character follows now,
                 // in which case this is the start of an escape control sequence.
 
-                if (c == *((wint_t*) LEFT_SQUARE_BRACKET_WIDE_CHARACTER)) {
+                if (c == *((wint_t*) LEFT_SQUARE_BRACKET_WIDE_CHARACTER_CODE)) {
 
                     // This is the start of an escape control sequence.
 
@@ -135,7 +135,7 @@ void read_gnu_linux_console(void* p0, void* p1, void* p2, void* p3) {
                     f = *NUMBER_1_INTEGER;
                 }
 
-            } else if (c == *((wint_t*) ESCAPE_CONTROL_WIDE_CHARACTER)) {
+            } else if (c == *((wint_t*) ESCAPE_CONTROL_WIDE_CHARACTER_CODE)) {
 
                 // Set escape character flag.
                 esc = *NUMBER_1_INTEGER;
@@ -200,7 +200,7 @@ void write_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
             // Set terminated control sequences string by first copying the actual
             // control sequences and then adding the null termination character.
             set_array_elements((void*) ts, (void*) NUMBER_0_INTEGER, p3, p4, (void*) WIDE_CHARACTER_ARRAY);
-            set_array_elements((void*) ts, p4, (void*) NULL_CONTROL_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+            set_array_elements((void*) ts, p4, (void*) NULL_CONTROL_WIDE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
 
             if (*d != *NULL_POINTER) {
 

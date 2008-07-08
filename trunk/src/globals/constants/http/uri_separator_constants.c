@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2008-07-08 07:11:33 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2008-07-08 17:55:36 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -42,7 +42,7 @@
 //
 
 /** The uri scheme separator ("colon"). */
-static wchar_t* URI_SCHEME_SEPARATOR = COLON_WIDE_CHARACTER_ARRAY;
+static wchar_t* URI_SCHEME_SEPARATOR = COLON_WIDE_CHARACTER_CODE_ARRAY;
 static int* URI_SCHEME_SEPARATOR_COUNT = NUMBER_1_INTEGER_ARRAY;
 
 /** The uri authority separator (twice "solidus"). */
@@ -51,15 +51,15 @@ static wchar_t* URI_AUTHORITY_SEPARATOR = URI_AUTHORITY_SEPARATOR_ARRAY;
 static int* URI_AUTHORITY_SEPARATOR_COUNT = NUMBER_2_INTEGER_ARRAY;
 
 /** The uri path separator ("solidus"). */
-static wchar_t* URI_PATH_SEPARATOR = SOLIDUS_WIDE_CHARACTER_ARRAY;
+static wchar_t* URI_PATH_SEPARATOR = SOLIDUS_WIDE_CHARACTER_CODE_ARRAY;
 static int* URI_PATH_SEPARATOR_COUNT = NUMBER_1_INTEGER_ARRAY;
 
 /** The uri query separator ("question mark"). */
-static wchar_t* URI_QUERY_SEPARATOR = QUESTION_MARK_WIDE_CHARACTER_ARRAY;
+static wchar_t* URI_QUERY_SEPARATOR = QUESTION_MARK_WIDE_CHARACTER_CODE_ARRAY;
 static int* URI_QUERY_SEPARATOR_COUNT = NUMBER_1_INTEGER_ARRAY;
 
 /** The uri fragment separator ("number sign"). */
-static wchar_t* URI_FRAGMENT_SEPARATOR = NUMBER_SIGN_WIDE_CHARACTER_ARRAY;
+static wchar_t* URI_FRAGMENT_SEPARATOR = NUMBER_SIGN_WIDE_CHARACTER_CODE_ARRAY;
 static int* URI_FRAGMENT_SEPARATOR_COUNT = NUMBER_1_INTEGER_ARRAY;
 
 //
@@ -72,7 +72,7 @@ static int* URI_FRAGMENT_SEPARATOR_COUNT = NUMBER_1_INTEGER_ARRAY;
  * CAUTION! This separator is NOT defined by IETF's uri specification rfc3986,
  * but commonly used in the internet.
  */
-static wchar_t* URI_PARAMETER_SEPARATOR = AMPERSAND_WIDE_CHARACTER_ARRAY;
+static wchar_t* URI_PARAMETER_SEPARATOR = AMPERSAND_WIDE_CHARACTER_CODE_ARRAY;
 static int* URI_PARAMETER_SEPARATOR_COUNT = NUMBER_1_INTEGER_ARRAY;
 
 /**
@@ -81,7 +81,7 @@ static int* URI_PARAMETER_SEPARATOR_COUNT = NUMBER_1_INTEGER_ARRAY;
  * CAUTION! This separator is NOT defined by IETF's uri specification rfc3986,
  * but commonly used in the internet.
  */
-static wchar_t* URI_PARAMETER_ALTERNATIVE_SEPARATOR = SEMICOLON_WIDE_CHARACTER_ARRAY;
+static wchar_t* URI_PARAMETER_ALTERNATIVE_SEPARATOR = SEMICOLON_WIDE_CHARACTER_CODE_ARRAY;
 static int* URI_PARAMETER_ALTERNATIVE_SEPARATOR_COUNT = NUMBER_1_INTEGER_ARRAY;
 
 /**
@@ -90,7 +90,7 @@ static int* URI_PARAMETER_ALTERNATIVE_SEPARATOR_COUNT = NUMBER_1_INTEGER_ARRAY;
  * CAUTION! This separator is NOT defined by IETF's uri specification rfc3986,
  * but commonly used in the internet.
  */
-static wchar_t* URI_VALUE_SEPARATOR = EQUALS_SIGN_WIDE_CHARACTER_ARRAY;
+static wchar_t* URI_VALUE_SEPARATOR = EQUALS_SIGN_WIDE_CHARACTER_CODE_ARRAY;
 static int* URI_VALUE_SEPARATOR_COUNT = NUMBER_1_INTEGER_ARRAY;
 
 //
@@ -98,11 +98,11 @@ static int* URI_VALUE_SEPARATOR_COUNT = NUMBER_1_INTEGER_ARRAY;
 //
 
 /** The uri host separator ("commercial at"). */
-static wchar_t* URI_HOST_SEPARATOR = COMMERCIAL_AT_WIDE_CHARACTER_ARRAY;
+static wchar_t* URI_HOST_SEPARATOR = COMMERCIAL_AT_WIDE_CHARACTER_CODE_ARRAY;
 static int* URI_HOST_SEPARATOR_COUNT = NUMBER_1_INTEGER_ARRAY;
 
 /** The uri port separator ("colon"). */
-static wchar_t* URI_PORT_SEPARATOR = COLON_WIDE_CHARACTER_ARRAY;
+static wchar_t* URI_PORT_SEPARATOR = COLON_WIDE_CHARACTER_CODE_ARRAY;
 static int* URI_PORT_SEPARATOR_COUNT = NUMBER_1_INTEGER_ARRAY;
 
 /* URI_SEPARATOR_CONSTANTS_SOURCE */

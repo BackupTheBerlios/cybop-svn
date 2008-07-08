@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.27 $ $Date: 2008-07-08 07:11:34 $ $Author: christian $
+ * @version $Revision: 1.28 $ $Date: 2008-07-08 17:55:36 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -224,12 +224,12 @@ void decode_xdt_field(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
                                 // Verify if field end is reached (carriage return and line feed).
 
-                                if (*((wchar_t*) *s) == *CARRIAGE_RETURN_CONTROL_WIDE_CHARACTER) {
+                                if (*((wchar_t*) *s) == *CARRIAGE_RETURN_CONTROL_WIDE_CHARACTER_CODE) {
 
                                     // Increment source xdt byte array index.
                                     *s = *s + (*PRIMITIVE_COUNT * *WIDE_CHARACTER_PRIMITIVE_SIZE);
 
-                                    if (*((wchar_t*) *s) == *LINE_FEED_CONTROL_WIDE_CHARACTER) {
+                                    if (*((wchar_t*) *s) == *LINE_FEED_CONTROL_WIDE_CHARACTER_CODE) {
 
                                         // Increment source xdt byte array index.
                                         *s = *s + (*PRIMITIVE_COUNT * *WIDE_CHARACTER_PRIMITIVE_SIZE);
@@ -313,9 +313,9 @@ void decode_xdt_next_field(void* p0, void* p1, void* p2) {
 
                     if ((j + (*PRIMITIVE_COUNT + *PRIMITIVE_COUNT)) <= *ac) {
 
-                        if (*(a + (j * *WIDE_CHARACTER_PRIMITIVE_SIZE)) == *CARRIAGE_RETURN_CONTROL_WIDE_CHARACTER) {
+                        if (*(a + (j * *WIDE_CHARACTER_PRIMITIVE_SIZE)) == *CARRIAGE_RETURN_CONTROL_WIDE_CHARACTER_CODE) {
 
-                            if (*(a + (j * *WIDE_CHARACTER_PRIMITIVE_SIZE) + *PRIMITIVE_COUNT) == *LINE_FEED_CONTROL_WIDE_CHARACTER) {
+                            if (*(a + (j * *WIDE_CHARACTER_PRIMITIVE_SIZE) + *PRIMITIVE_COUNT) == *LINE_FEED_CONTROL_WIDE_CHARACTER_CODE) {
 
                                 // Set next field count to the first character following
                                 // the carriage return plus line feed characters.

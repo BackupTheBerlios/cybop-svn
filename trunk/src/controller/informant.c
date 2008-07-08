@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2008-07-08 07:11:33 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2008-07-08 17:55:36 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -55,7 +55,7 @@ void inform(void* p0) {
     // Increment index.
     i = i + *CYBOI_NAME_COUNT;
     // Copy space wide character.
-    set_array_elements(m, (void*) &i, (void*) SPACE_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+    set_array_elements(m, (void*) &i, (void*) SPACE_WIDE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
     // Increment index.
     i = i + *PRIMITIVE_COUNT;
     // Copy version.
@@ -63,7 +63,7 @@ void inform(void* p0) {
     // Increment index.
     i = i + *CYBOI_VERSION_COUNT;
     // Copy line feed control wide character.
-    set_array_elements(m, (void*) &i, (void*) LINE_FEED_CONTROL_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+    set_array_elements(m, (void*) &i, (void*) LINE_FEED_CONTROL_WIDE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
     // Increment index.
     i = i + *PRIMITIVE_COUNT;
     // Copy copyright.
@@ -71,7 +71,7 @@ void inform(void* p0) {
     // Increment index.
     i = i + *CYBOI_COPYRIGHT_COUNT;
     // Copy line feed control wide character.
-    set_array_elements(m, (void*) &i, (void*) LINE_FEED_CONTROL_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+    set_array_elements(m, (void*) &i, (void*) LINE_FEED_CONTROL_WIDE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
     // Increment index.
     i = i + *PRIMITIVE_COUNT;
     // Copy licence.
@@ -79,11 +79,11 @@ void inform(void* p0) {
     // Increment index.
     i = i + *CYBOI_LICENCE_COUNT;
     // Copy line feed control wide character.
-    set_array_elements(m, (void*) &i, (void*) LINE_FEED_CONTROL_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+    set_array_elements(m, (void*) &i, (void*) LINE_FEED_CONTROL_WIDE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
     // Increment index.
     i = i + *PRIMITIVE_COUNT;
     // Copy null termination wide character.
-    set_array_elements(m, (void*) &i, (void*) NULL_CONTROL_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+    set_array_elements(m, (void*) &i, (void*) NULL_CONTROL_WIDE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
 
     // Log message.
     log_write_terminated_message(p0, m);

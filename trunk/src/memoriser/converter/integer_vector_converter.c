@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.32 $ $Date: 2008-07-08 07:11:33 $ $Author: christian $
+ * @version $Revision: 1.33 $ $Date: 2008-07-08 17:55:36 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -97,7 +97,7 @@ void decode_integer_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
                         int ec = *NUMBER_0_INTEGER;
 
                         // Find comma character index.
-                        get_array_elements_index(p3, p4, (void*) COMMA_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &i, (void*) WIDE_CHARACTER_ARRAY);
+                        get_array_elements_index(p3, p4, (void*) COMMA_WIDE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) &i, (void*) WIDE_CHARACTER_ARRAY);
 
                         if (i > *NUMBER_0_INTEGER) {
 
@@ -259,7 +259,7 @@ void encode_integer_vector_elements(void* p0, void* p1, void* p2, void* p3, void
                                 // in order to separate from already existing elements.
 
                                 // Set comma character.
-                                set_array_elements(*d, p1, (void*) COMMA_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+                                set_array_elements(*d, p1, (void*) COMMA_WIDE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
                                 *dc = *dc + *PRIMITIVE_COUNT;
                             }
 

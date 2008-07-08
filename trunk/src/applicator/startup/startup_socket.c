@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.34 $ $Date: 2008-07-08 07:11:33 $ $Author: christian $
+ * @version $Revision: 1.35 $ $Date: 2008-07-08 17:55:36 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -265,7 +265,7 @@ void startup_socket_get_host_address(void* p0, void* p1, void* p2, void* p3) {
                     }
 
                     // Add null termination character to terminated file name.
-                    set_array_elements(s, (void*) &sc, (void*) NULL_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+                    set_array_elements(s, (void*) &sc, (void*) NULL_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
 
                     // Convert uint16_t integer hostshort from host byte order
                     // to network byte order.
@@ -367,7 +367,7 @@ void startup_socket_initialise_local_socket_address(void* p0, void* p1, void* p2
                     // Set terminated file name by first copying the actual name
                     // and then adding the null termination character.
                     set_array_elements(path, (void*) NUMBER_0_INTEGER, p1, p2, (void*) WIDE_CHARACTER_ARRAY);
-                    set_array_elements(path, p2, (void*) NULL_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+                    set_array_elements(path, p2, (void*) NULL_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
 
                 } else {
 

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.22 $ $Date: 2008-07-08 07:11:33 $ $Author: christian $
+ * @version $Revision: 1.23 $ $Date: 2008-07-08 17:55:36 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -823,7 +823,7 @@ void decode_compound_libxml2_parser_workaround(void* p0, void* p1, void* p2, voi
                     }
 
                     // Add null termination character to terminated file name.
-                    set_array_elements(tmp, (void*) &tmpc, (void*) NULL_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+                    set_array_elements(tmp, (void*) &tmpc, (void*) NULL_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
 
     fwprintf(stderr, L"TEST decode tmp: %s\n", (char*) tmp);
     fwprintf(stderr, L"TEST decode tmpc: %i\n", tmpc);

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.18 $ $Date: 2008-07-08 07:11:34 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2008-07-08 17:55:37 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -79,16 +79,16 @@ void encode_xhtml_indentation(void* p0, void* p1, void* p2, void* p3) {
             }
 
             // Encode character tabulation character.
-//??            encode_character_vector(p0, p1, p2, (void*) CHARACTER_TABULATION_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT);
+//??            encode_character_vector(p0, p1, p2, (void*) CHARACTER_TABULATION_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_COUNT);
 
             // Encode space character.
-            encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) SPACE_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT);
+            encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) SPACE_WIDE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT);
             // Encode space character.
-            encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) SPACE_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT);
+            encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) SPACE_WIDE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT);
             // Encode space character.
-            encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) SPACE_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT);
+            encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) SPACE_WIDE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT);
             // Encode space character.
-            encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) SPACE_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT);
+            encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) SPACE_WIDE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT);
 
             // Increment loop count.
             j++;
@@ -160,17 +160,17 @@ void encode_xhtml_attributes(void* p0, void* p1, void* p2, void* p3, void* p4, v
                 // Only add attribute, if the details part name is NOT "tag"!
 
                 // Encode space character.
-                encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) SPACE_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT);
+                encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) SPACE_WIDE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT);
                 // Encode attribute name.
                 encode_utf_8_unicode_character_vector(p0, p1, p2, *n, *nc);
                 // Encode equals sign character.
-                encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) EQUALS_SIGN_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT);
+                encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) EQUALS_SIGN_WIDE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT);
                 // Encode quotation mark character.
-                encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) QUOTATION_MARK_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT);
+                encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) QUOTATION_MARK_WIDE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT);
                 // Encode space character.
                 encode_utf_8_unicode_character_vector(p0, p1, p2, *m, *mc);
                 // Encode quotation mark character.
-                encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) QUOTATION_MARK_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT);
+                encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) QUOTATION_MARK_WIDE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT);
             }
 
             // Reset source part name, abstraction, model, details.
@@ -222,15 +222,15 @@ void encode_xhtml_begin_tag(void* p0, void* p1, void* p2,
     // Encode indentation.
     encode_xhtml_indentation(p0, p1, p2, p9);
     // Encode less than character.
-    encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) LESS_THAN_SIGN_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT);
+    encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) LESS_THAN_SIGN_WIDE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT);
     // Encode xhtml tag.
     encode_utf_8_unicode_character_vector(p0, p1, p2, p3, p4);
     // Encode html tag properties.
     encode_xhtml_attributes(p0, p1, p2, p5, p6, p7, p8);
     // Encode greater than character.
-    encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) GREATER_THAN_SIGN_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT);
+    encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) GREATER_THAN_SIGN_WIDE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT);
     // Encode line feed character, for better source reading.
-    encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) LINE_FEED_CONTROL_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT);
+    encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) LINE_FEED_CONTROL_WIDE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT);
 }
 
 /**
@@ -250,15 +250,15 @@ void encode_xhtml_end_tag(void* p0, void* p1, void* p2, void* p3, void* p4, void
     // Encode indentation.
     encode_xhtml_indentation(p0, p1, p2, p5);
     // Encode less than character.
-    encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) LESS_THAN_SIGN_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT);
+    encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) LESS_THAN_SIGN_WIDE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT);
     // Encode solidus character.
-    encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) SOLIDUS_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT);
+    encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) SOLIDUS_WIDE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT);
     // Encode xhtml tag.
     encode_utf_8_unicode_character_vector(p0, p1, p2, p3, p4);
     // Encode greater than character.
-    encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) GREATER_THAN_SIGN_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT);
+    encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) GREATER_THAN_SIGN_WIDE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT);
     // Encode line feed character, for better source reading.
-    encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) LINE_FEED_CONTROL_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT);
+    encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) LINE_FEED_CONTROL_WIDE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT);
 }
 
 /**
@@ -287,7 +287,7 @@ void encode_xhtml_tag_content(void* p0, void* p1, void* p2, void* p3, void* p4, 
             // Encode source part model.
             encode_utf_8_unicode_character_vector(p0, p1, p2, p3, p4);
             // Encode line feed character, for better source reading.
-            encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) LINE_FEED_CONTROL_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT);
+            encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) LINE_FEED_CONTROL_WIDE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT);
         }
 
     } else {

@@ -27,7 +27,7 @@
  * Otherwise, an ENDLESS LOOP will be created, because cyboi's
  * array procedures call the logger in turn.
  *
- * @version $Revision: 1.29 $ $Date: 2008-07-08 07:11:33 $ $Author: christian $
+ * @version $Revision: 1.30 $ $Date: 2008-07-08 17:55:36 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -289,11 +289,11 @@ void log_message(void* p0, void* p1, void* p2) {
                     // Increment index.
                     i = i + lnc;
                     // Copy colon.
-                    set_array_elements((void*) LOG_MESSAGE, (void*) &i, (void*) COLON_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+                    set_array_elements((void*) LOG_MESSAGE, (void*) &i, (void*) COLON_WIDE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
                     // Increment index.
                     i = i + *PRIMITIVE_COUNT;
                     // Copy space.
-                    set_array_elements((void*) LOG_MESSAGE, (void*) &i, (void*) SPACE_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+                    set_array_elements((void*) LOG_MESSAGE, (void*) &i, (void*) SPACE_WIDE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
                     // Increment index.
                     i = i + *PRIMITIVE_COUNT;
                     // Copy log message.
@@ -301,11 +301,11 @@ void log_message(void* p0, void* p1, void* p2) {
                     // Increment index.
                     i = i + mmc;
                     // Copy line feed control wide character.
-                    set_array_elements((void*) LOG_MESSAGE, (void*) &i, (void*) LINE_FEED_CONTROL_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+                    set_array_elements((void*) LOG_MESSAGE, (void*) &i, (void*) LINE_FEED_CONTROL_WIDE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
                     // Increment index.
                     i = i + *PRIMITIVE_COUNT;
                     // Copy null termination wide character.
-                    set_array_elements((void*) LOG_MESSAGE, (void*) &i, (void*) NULL_CONTROL_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+                    set_array_elements((void*) LOG_MESSAGE, (void*) &i, (void*) NULL_CONTROL_WIDE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
 
                     // Log message.
                     log_write_terminated_message((void*) stdout, (void*) LOG_MESSAGE);

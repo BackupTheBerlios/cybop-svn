@@ -24,7 +24,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.22 $ $Date: 2008-07-08 07:11:33 $ $Author: christian $
+ * @version $Revision: 1.23 $ $Date: 2008-07-08 17:55:36 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -500,9 +500,9 @@ void test_wide_character_output() {
     // Set terminated control sequences string by first copying the actual
     // control sequences and then adding the null termination character.
     // (Termination character does not seem to be necessary for wide character strings.)
-    set_array_elements(ts, (void*) &tsc, (void*) BOX_DRAWINGS_LIGHT_DOWN_AND_RIGHT_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+    set_array_elements(ts, (void*) &tsc, (void*) BOX_DRAWINGS_LIGHT_DOWN_AND_RIGHT_WIDE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
     tsc++;
-    set_array_elements(ts, (void*) &tsc, (void*) BOX_DRAWINGS_LIGHT_HORIZONTAL_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+    set_array_elements(ts, (void*) &tsc, (void*) BOX_DRAWINGS_LIGHT_HORIZONTAL_WIDE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
     tsc++;
 
     wprintf(L"\033[32mgreen colour\033[0mswitched off.");
@@ -528,11 +528,11 @@ void test_wide_character_output() {
     set_array_elements(ts, (void*) &tsc, (void*) &wc, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
     tsc++;
 
-    set_array_elements(ts, (void*) &tsc, (void*) LATIN_CAPITAL_LETTER_H_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+    set_array_elements(ts, (void*) &tsc, (void*) LATIN_CAPITAL_LETTER_H_WIDE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
     tsc++;
-    set_array_elements(ts, (void*) &tsc, (void*) BOX_DRAWINGS_LIGHT_HORIZONTAL_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+    set_array_elements(ts, (void*) &tsc, (void*) BOX_DRAWINGS_LIGHT_HORIZONTAL_WIDE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
     tsc++;
-    set_array_elements(ts, (void*) &tsc, (void*) BOX_DRAWINGS_LIGHT_DOWN_AND_LEFT_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+    set_array_elements(ts, (void*) &tsc, (void*) BOX_DRAWINGS_LIGHT_DOWN_AND_LEFT_WIDE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
     tsc++;
 
     // Write to terminal.
@@ -714,7 +714,7 @@ void test_ascii_character_wide_character_equality() {
 
     char test = 'a';
 
-    if (test = *LATIN_SMALL_LETTER_A_WIDE_CHARACTER) {
+    if (test = *LATIN_SMALL_LETTER_A_WIDE_CHARACTER_CODE) {
 
         log_write_terminated_message((void*) stdout, L"Characters ARE equal.\n");
 
@@ -762,11 +762,11 @@ void test_character_array_single_element() {
     // Create character array.
     allocate_array((void*) &c, (void*) &cs, (void*) WIDE_CHARACTER_ARRAY);
 
-    set_wide_character_array_elements(c, (void*) NUMBER_0_INTEGER, (void*) LATIN_CAPITAL_LETTER_A_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT);
-    set_wide_character_array_elements(c, (void*) NUMBER_1_INTEGER, (void*) LATIN_CAPITAL_LETTER_B_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT);
-    set_wide_character_array_elements(c, (void*) NUMBER_2_INTEGER, (void*) LATIN_CAPITAL_LETTER_C_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT);
-    set_wide_character_array_elements(c, (void*) NUMBER_3_INTEGER, (void*) LINE_FEED_CONTROL_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT);
-    set_wide_character_array_elements(c, (void*) NUMBER_4_INTEGER, (void*) NULL_CONTROL_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT);
+    set_wide_character_array_elements(c, (void*) NUMBER_0_INTEGER, (void*) LATIN_CAPITAL_LETTER_A_WIDE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT);
+    set_wide_character_array_elements(c, (void*) NUMBER_1_INTEGER, (void*) LATIN_CAPITAL_LETTER_B_WIDE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT);
+    set_wide_character_array_elements(c, (void*) NUMBER_2_INTEGER, (void*) LATIN_CAPITAL_LETTER_C_WIDE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT);
+    set_wide_character_array_elements(c, (void*) NUMBER_3_INTEGER, (void*) LINE_FEED_CONTROL_WIDE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT);
+    set_wide_character_array_elements(c, (void*) NUMBER_4_INTEGER, (void*) NULL_CONTROL_WIDE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT);
 
     // Print out array contents.
     log_write_terminated_message((void*) stdout, (wchar_t*) c);
@@ -962,11 +962,11 @@ void test_pointer_array_with_null_values() {
 
     allocate_pointer_array((void*) &a, (void*) &as);
 
-    set_pointer_array_elements(a, (void*) NUMBER_0_INTEGER, (void*) &COMMERCIAL_AT_CHARACTER, (void*) NUMBER_1_INTEGER);
+    set_pointer_array_elements(a, (void*) NUMBER_0_INTEGER, (void*) &COMMERCIAL_AT_CHARACTER_CODE, (void*) NUMBER_1_INTEGER);
     set_pointer_array_elements(a, (void*) NUMBER_1_INTEGER, (void*) &NUMBER_333_INTEGER, (void*) NUMBER_1_INTEGER);
     set_pointer_array_elements(a, (void*) NUMBER_2_INTEGER, (void*) NULL_POINTER, (void*) NUMBER_1_INTEGER);
     set_pointer_array_elements(a, (void*) NUMBER_3_INTEGER, (void*) NULL_POINTER, (void*) NUMBER_1_INTEGER);
-    set_pointer_array_elements(a, (void*) NUMBER_4_INTEGER, (void*) &COMMERCIAL_AT_CHARACTER, (void*) NUMBER_1_INTEGER);
+    set_pointer_array_elements(a, (void*) NUMBER_4_INTEGER, (void*) &COMMERCIAL_AT_CHARACTER_CODE, (void*) NUMBER_1_INTEGER);
 
     // The result values.
     char** r0 = (char**) NULL_POINTER;

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2008-07-08 06:31:31 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2008-07-08 17:55:36 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -43,46 +43,46 @@
 //
 
 /**
- * The null control character. U+0000
+ * The null control character code. U+0000
  * It is used as string termination in the C programming language.
  */
 static wchar_t NULL_CONTROL_WIDE_CHARACTER_CODE_ARRAY[] = {0x0000};
 static wchar_t* NULL_CONTROL_WIDE_CHARACTER_CODE = NULL_CONTROL_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The start of heading control character. U+0001 */
+/** The start of heading control character code. U+0001 */
 static wchar_t START_OF_HEADING_CONTROL_WIDE_CHARACTER_CODE_ARRAY[] = {0x0001};
 static wchar_t* START_OF_HEADING_CONTROL_WIDE_CHARACTER_CODE = START_OF_HEADING_CONTROL_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The start of text control character. U+0002 */
+/** The start of text control character code. U+0002 */
 static wchar_t START_OF_TEXT_CONTROL_WIDE_CHARACTER_CODE_ARRAY[] = {0x0002};
 static wchar_t* START_OF_TEXT_CONTROL_WIDE_CHARACTER_CODE = START_OF_TEXT_CONTROL_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The end of text control character. U+0003 */
+/** The end of text control character code. U+0003 */
 static wchar_t END_OF_TEXT_CONTROL_WIDE_CHARACTER_CODE_ARRAY[] = {0x0003};
 static wchar_t* END_OF_TEXT_CONTROL_WIDE_CHARACTER_CODE = END_OF_TEXT_CONTROL_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The end of transmission control character. U+0004 */
+/** The end of transmission control character code. U+0004 */
 static wchar_t END_OF_TRANSMISSION_CONTROL_WIDE_CHARACTER_CODE_ARRAY[] = {0x0004};
 static wchar_t* END_OF_TRANSMISSION_CONTROL_WIDE_CHARACTER_CODE = END_OF_TRANSMISSION_CONTROL_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The enquiry control character. U+0005 */
+/** The enquiry control character code. U+0005 */
 static wchar_t ENQUIRY_CONTROL_WIDE_CHARACTER_CODE_ARRAY[] = {0x0005};
 static wchar_t* ENQUIRY_CONTROL_WIDE_CHARACTER_CODE = ENQUIRY_CONTROL_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The acknowledge control character. U+0006 */
+/** The acknowledge control character code. U+0006 */
 static wchar_t ACKNOWLEDGE_CONTROL_WIDE_CHARACTER_CODE_ARRAY[] = {0x0006};
 static wchar_t* ACKNOWLEDGE_CONTROL_WIDE_CHARACTER_CODE = ACKNOWLEDGE_CONTROL_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The bell control character. U+0007 */
+/** The bell control character code. U+0007 */
 static wchar_t BELL_CONTROL_WIDE_CHARACTER_CODE_ARRAY[] = {0x0007};
 static wchar_t* BELL_CONTROL_WIDE_CHARACTER_CODE = BELL_CONTROL_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The backspace control character. U+0008 */
+/** The backspace control character code. U+0008 */
 static wchar_t BACKSPACE_CONTROL_WIDE_CHARACTER_CODE_ARRAY[] = {0x0008};
 static wchar_t* BACKSPACE_CONTROL_WIDE_CHARACTER_CODE = BACKSPACE_CONTROL_WIDE_CHARACTER_CODE_ARRAY;
 
 /**
- * The character tabulation control character.
+ * The character tabulation control character code.
  *
  * U+0009
  *
@@ -93,7 +93,7 @@ static wchar_t CHARACTER_TABULATION_CONTROL_WIDE_CHARACTER_CODE_ARRAY[] = {0x000
 static wchar_t* CHARACTER_TABULATION_CONTROL_WIDE_CHARACTER_CODE = CHARACTER_TABULATION_CONTROL_WIDE_CHARACTER_CODE_ARRAY;
 
 /**
- * The line feed control character.
+ * The line feed control character code.
  *
  * U+000A
  *
@@ -106,7 +106,7 @@ static wchar_t LINE_FEED_CONTROL_WIDE_CHARACTER_CODE_ARRAY[] = {0x000A};
 static wchar_t* LINE_FEED_CONTROL_WIDE_CHARACTER_CODE = LINE_FEED_CONTROL_WIDE_CHARACTER_CODE_ARRAY;
 
 /**
- * The line tabulation control character.
+ * The line tabulation control character code.
  *
  * U+000B
  *
@@ -116,140 +116,140 @@ static wchar_t* LINE_FEED_CONTROL_WIDE_CHARACTER_CODE = LINE_FEED_CONTROL_WIDE_C
 static wchar_t LINE_TABULATION_CONTROL_WIDE_CHARACTER_CODE_ARRAY[] = {0x000B};
 static wchar_t* LINE_TABULATION_CONTROL_WIDE_CHARACTER_CODE = LINE_TABULATION_CONTROL_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The form feed control character. U+000C */
+/** The form feed control character code. U+000C */
 static wchar_t FORM_FEED_CONTROL_WIDE_CHARACTER_CODE_ARRAY[] = {0x000C};
 static wchar_t* FORM_FEED_CONTROL_WIDE_CHARACTER_CODE = FORM_FEED_CONTROL_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The carriage return (enter) control character. U+000D */
+/** The carriage return (enter) control character code. U+000D */
 static wchar_t CARRIAGE_RETURN_CONTROL_WIDE_CHARACTER_CODE_ARRAY[] = {0x000D};
 static wchar_t* CARRIAGE_RETURN_CONTROL_WIDE_CHARACTER_CODE = CARRIAGE_RETURN_CONTROL_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The shift out control character. U+000E */
+/** The shift out control character code. U+000E */
 static wchar_t SHIFT_OUT_CONTROL_WIDE_CHARACTER_CODE_ARRAY[] = {0x000E};
 static wchar_t* SHIFT_OUT_CONTROL_WIDE_CHARACTER_CODE = SHIFT_OUT_CONTROL_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The shift in control character. U+000F */
+/** The shift in control character code. U+000F */
 static wchar_t SHIFT_IN_CONTROL_WIDE_CHARACTER_CODE_ARRAY[] = {0x000F};
 static wchar_t* SHIFT_IN_CONTROL_WIDE_CHARACTER_CODE = SHIFT_IN_CONTROL_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The data link escape control character. U+0010 */
+/** The data link escape control character code. U+0010 */
 static wchar_t DATA_LINK_ESCAPE_CONTROL_WIDE_CHARACTER_CODE_ARRAY[] = {0x0010};
 static wchar_t* DATA_LINK_ESCAPE_CONTROL_WIDE_CHARACTER_CODE = DATA_LINK_ESCAPE_CONTROL_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The device control one control character. U+0011 */
+/** The device control one control character code. U+0011 */
 static wchar_t DEVICE_CONTROL_ONE_CONTROL_WIDE_CHARACTER_CODE_ARRAY[] = {0x0011};
 static wchar_t* DEVICE_CONTROL_ONE_CONTROL_WIDE_CHARACTER_CODE = DEVICE_CONTROL_ONE_CONTROL_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The device control two control character. U+0012 */
+/** The device control two control character code. U+0012 */
 static wchar_t DEVICE_CONTROL_TWO_CONTROL_WIDE_CHARACTER_CODE_ARRAY[] = {0x0012};
 static wchar_t* DEVICE_CONTROL_TWO_CONTROL_WIDE_CHARACTER_CODE = DEVICE_CONTROL_TWO_CONTROL_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The device control three control character. U+0013 */
+/** The device control three control character code. U+0013 */
 static wchar_t DEVICE_CONTROL_THREE_CONTROL_WIDE_CHARACTER_CODE_ARRAY[] = {0x0013};
 static wchar_t* DEVICE_CONTROL_THREE_CONTROL_WIDE_CHARACTER_CODE = DEVICE_CONTROL_THREE_CONTROL_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The device control four control character. U+0014 */
+/** The device control four control character code. U+0014 */
 static wchar_t DEVICE_CONTROL_FOUR_CONTROL_WIDE_CHARACTER_CODE_ARRAY[] = {0x0014};
 static wchar_t* DEVICE_CONTROL_FOUR_CONTROL_WIDE_CHARACTER_CODE = DEVICE_CONTROL_FOUR_CONTROL_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The negative acknowledge control character. U+0015 */
+/** The negative acknowledge control character code. U+0015 */
 static wchar_t NEGATIVE_ACKNOWLEDGE_CONTROL_WIDE_CHARACTER_CODE_ARRAY[] = {0x0015};
 static wchar_t* NEGATIVE_ACKNOWLEDGE_CONTROL_WIDE_CHARACTER_CODE = NEGATIVE_ACKNOWLEDGE_CONTROL_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The synchronous idle control character. U+0016 */
+/** The synchronous idle control character code. U+0016 */
 static wchar_t SYNCHRONOUS_IDLE_CONTROL_WIDE_CHARACTER_CODE_ARRAY[] = {0x0016};
 static wchar_t* SYNCHRONOUS_IDLE_CONTROL_WIDE_CHARACTER_CODE = SYNCHRONOUS_IDLE_CONTROL_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The end of transmission block control character. U+0017 */
+/** The end of transmission block control character code. U+0017 */
 static wchar_t END_OF_TRANSMISSION_BLOCK_CONTROL_WIDE_CHARACTER_CODE_ARRAY[] = {0x0017};
 static wchar_t* END_OF_TRANSMISSION_BLOCK_CONTROL_WIDE_CHARACTER_CODE = END_OF_TRANSMISSION_BLOCK_CONTROL_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The cancel control character. U+0018 */
+/** The cancel control character code. U+0018 */
 static wchar_t CANCEL_CONTROL_WIDE_CHARACTER_CODE_ARRAY[] = {0x0018};
 static wchar_t* CANCEL_CONTROL_WIDE_CHARACTER_CODE = CANCEL_CONTROL_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The end of medium control character. U+0019 */
+/** The end of medium control character code. U+0019 */
 static wchar_t END_OF_MEDIUM_CONTROL_WIDE_CHARACTER_CODE_ARRAY[] = {0x0019};
 static wchar_t* END_OF_MEDIUM_CONTROL_WIDE_CHARACTER_CODE = END_OF_MEDIUM_CONTROL_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The substitute control character. U+001A */
+/** The substitute control character code. U+001A */
 static wchar_t SUBSTITUTE_CONTROL_WIDE_CHARACTER_CODE_ARRAY[] = {0x001A};
 static wchar_t* SUBSTITUTE_CONTROL_WIDE_CHARACTER_CODE = SUBSTITUTE_CONTROL_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The escape control character. U+001B */
+/** The escape control character code. U+001B */
 static wchar_t ESCAPE_CONTROL_WIDE_CHARACTER_CODE_ARRAY[] = {0x001B};
 static wchar_t* ESCAPE_CONTROL_WIDE_CHARACTER_CODE = ESCAPE_CONTROL_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The file separator control character. U+001C */
+/** The file separator control character code. U+001C */
 static wchar_t FILE_SEPARATOR_CONTROL_WIDE_CHARACTER_CODE_ARRAY[] = {0x001C};
 static wchar_t* FILE_SEPARATOR_CONTROL_WIDE_CHARACTER_CODE = FILE_SEPARATOR_CONTROL_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The group separator control character. U+001D */
+/** The group separator control character code. U+001D */
 static wchar_t GROUP_SEPARATOR_CONTROL_WIDE_CHARACTER_CODE_ARRAY[] = {0x001D};
 static wchar_t* GROUP_SEPARATOR_CONTROL_WIDE_CHARACTER_CODE = GROUP_SEPARATOR_CONTROL_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The record separator control character. U+001E */
+/** The record separator control character code. U+001E */
 static wchar_t RECORD_SEPARATOR_CONTROL_WIDE_CHARACTER_CODE_ARRAY[] = {0x001E};
 static wchar_t* RECORD_SEPARATOR_CONTROL_WIDE_CHARACTER_CODE = RECORD_SEPARATOR_CONTROL_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The unit separator control character. U+001F */
+/** The unit separator control character code. U+001F */
 static wchar_t UNIT_SEPARATOR_CONTROL_WIDE_CHARACTER_CODE_ARRAY[] = {0x001F};
 static wchar_t* UNIT_SEPARATOR_CONTROL_WIDE_CHARACTER_CODE = UNIT_SEPARATOR_CONTROL_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The space character. U+0020 */
+/** The space character code. U+0020 */
 static wchar_t SPACE_WIDE_CHARACTER_CODE_ARRAY[] = {0x0020};
 static wchar_t* SPACE_WIDE_CHARACTER_CODE = SPACE_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The exclamation mark character. U+0021 */
+/** The exclamation mark character code. U+0021 */
 static wchar_t EXCLAMATION_MARK_WIDE_CHARACTER_CODE_ARRAY[] = {0x0021};
 static wchar_t* EXCLAMATION_MARK_WIDE_CHARACTER_CODE = EXCLAMATION_MARK_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The quotation mark character. U+0022 */
+/** The quotation mark character code. U+0022 */
 static wchar_t QUOTATION_MARK_WIDE_CHARACTER_CODE_ARRAY[] = {0x0022};
 static wchar_t* QUOTATION_MARK_WIDE_CHARACTER_CODE = QUOTATION_MARK_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The number sign character. U+0023 */
+/** The number sign character code. U+0023 */
 static wchar_t NUMBER_SIGN_WIDE_CHARACTER_CODE_ARRAY[] = {0x0023};
 static wchar_t* NUMBER_SIGN_WIDE_CHARACTER_CODE = NUMBER_SIGN_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The dollar sign character. U+0024 */
+/** The dollar sign character code. U+0024 */
 static wchar_t DOLLAR_SIGN_WIDE_CHARACTER_CODE_ARRAY[] = {0x0024};
 static wchar_t* DOLLAR_SIGN_WIDE_CHARACTER_CODE = DOLLAR_SIGN_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The percent sign character. U+0025 */
+/** The percent sign character code. U+0025 */
 static wchar_t PERCENT_SIGN_WIDE_CHARACTER_CODE_ARRAY[] = {0x0025};
 static wchar_t* PERCENT_SIGN_WIDE_CHARACTER_CODE = PERCENT_SIGN_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The ampersand character. U+0026 */
+/** The ampersand character code. U+0026 */
 static wchar_t AMPERSAND_WIDE_CHARACTER_CODE_ARRAY[] = {0x0026};
 static wchar_t* AMPERSAND_WIDE_CHARACTER_CODE = AMPERSAND_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The apostrophe character. U+0027 */
+/** The apostrophe character code. U+0027 */
 static wchar_t APOSTROPHE_WIDE_CHARACTER_CODE_ARRAY[] = {0x0027};
 static wchar_t* APOSTROPHE_WIDE_CHARACTER_CODE = APOSTROPHE_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The left parenthesis character. U+0028 */
+/** The left parenthesis character code. U+0028 */
 static wchar_t LEFT_PARENTHESIS_WIDE_CHARACTER_CODE_ARRAY[] = {0x0028};
 static wchar_t* LEFT_PARENTHESIS_WIDE_CHARACTER_CODE = LEFT_PARENTHESIS_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The right parenthesis character. U+0029 */
+/** The right parenthesis character code. U+0029 */
 static wchar_t RIGHT_PARENTHESIS_WIDE_CHARACTER_CODE_ARRAY[] = {0x0029};
 static wchar_t* RIGHT_PARENTHESIS_WIDE_CHARACTER_CODE = RIGHT_PARENTHESIS_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The asterisk character. U+002A */
+/** The asterisk character code. U+002A */
 static wchar_t ASTERISK_WIDE_CHARACTER_CODE_ARRAY[] = {0x002A};
 static wchar_t* ASTERISK_WIDE_CHARACTER_CODE = ASTERISK_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The plus sign character. U+002B */
+/** The plus sign character code. U+002B */
 static wchar_t PLUS_SIGN_WIDE_CHARACTER_CODE_ARRAY[] = {0x002B};
 static wchar_t* PLUS_SIGN_WIDE_CHARACTER_CODE = PLUS_SIGN_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The comma character. U+002C */
+/** The comma character code. U+002C */
 static wchar_t COMMA_WIDE_CHARACTER_CODE_ARRAY[] = {0x002C};
 static wchar_t* COMMA_WIDE_CHARACTER_CODE = COMMA_WIDE_CHARACTER_CODE_ARRAY;
 
 /**
- * The hyphen minus character.
+ * The hyphen minus character code.
  *
  * Unicode category: Punctuation, Dash
  * Unicode: U+002D
@@ -273,68 +273,68 @@ static wchar_t* COMMA_WIDE_CHARACTER_CODE = COMMA_WIDE_CHARACTER_CODE_ARRAY;
 static wchar_t HYPHEN_MINUS_WIDE_CHARACTER_CODE_ARRAY[] = {0x002D};
 static wchar_t* HYPHEN_MINUS_WIDE_CHARACTER_CODE = HYPHEN_MINUS_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The full stop character. U+002E */
+/** The full stop character code. U+002E */
 static wchar_t FULL_STOP_WIDE_CHARACTER_CODE_ARRAY[] = {0x002E};
 static wchar_t* FULL_STOP_WIDE_CHARACTER_CODE = FULL_STOP_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The solidus character. U+002F */
+/** The solidus character code. U+002F */
 static wchar_t SOLIDUS_WIDE_CHARACTER_CODE_ARRAY[] = {0x002F};
 static wchar_t* SOLIDUS_WIDE_CHARACTER_CODE = SOLIDUS_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The digit zero character. U+0030 */
+/** The digit zero character code. U+0030 */
 static wchar_t DIGIT_ZERO_WIDE_CHARACTER_CODE_ARRAY[] = {0x0030};
 static wchar_t* DIGIT_ZERO_WIDE_CHARACTER_CODE = DIGIT_ZERO_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The digit one character. U+0031 */
+/** The digit one character code. U+0031 */
 static wchar_t DIGIT_ONE_WIDE_CHARACTER_CODE_ARRAY[] = {0x0031};
 static wchar_t* DIGIT_ONE_WIDE_CHARACTER_CODE = DIGIT_ONE_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The digit two character. U+0032 */
+/** The digit two character code. U+0032 */
 static wchar_t DIGIT_TWO_WIDE_CHARACTER_CODE_ARRAY[] = {0x0032};
 static wchar_t* DIGIT_TWO_WIDE_CHARACTER_CODE = DIGIT_TWO_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The digit three character. U+0033 */
+/** The digit three character code. U+0033 */
 static wchar_t DIGIT_THREE_WIDE_CHARACTER_CODE_ARRAY[] = {0x0033};
 static wchar_t* DIGIT_THREE_WIDE_CHARACTER_CODE = DIGIT_THREE_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The digit four character. U+0034 */
+/** The digit four character code. U+0034 */
 static wchar_t DIGIT_FOUR_WIDE_CHARACTER_CODE_ARRAY[] = {0x0034};
 static wchar_t* DIGIT_FOUR_WIDE_CHARACTER_CODE = DIGIT_FOUR_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The digit five character. U+0035 */
+/** The digit five character code. U+0035 */
 static wchar_t DIGIT_FIVE_WIDE_CHARACTER_CODE_ARRAY[] = {0x0035};
 static wchar_t* DIGIT_FIVE_WIDE_CHARACTER_CODE = DIGIT_FIVE_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The digit six character. U+0036 */
+/** The digit six character code. U+0036 */
 static wchar_t DIGIT_SIX_WIDE_CHARACTER_CODE_ARRAY[] = {0x0036};
 static wchar_t* DIGIT_SIX_WIDE_CHARACTER_CODE = DIGIT_SIX_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The digit seven character. U+0037 */
+/** The digit seven character code. U+0037 */
 static wchar_t DIGIT_SEVEN_WIDE_CHARACTER_CODE_ARRAY[] = {0x0037};
 static wchar_t* DIGIT_SEVEN_WIDE_CHARACTER_CODE = DIGIT_SEVEN_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The digit eight character. U+0038 */
+/** The digit eight character code. U+0038 */
 static wchar_t DIGIT_EIGHT_WIDE_CHARACTER_CODE_ARRAY[] = {0x0038};
 static wchar_t* DIGIT_EIGHT_WIDE_CHARACTER_CODE = DIGIT_EIGHT_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The digit nine character. U+0039 */
+/** The digit nine character code. U+0039 */
 static wchar_t DIGIT_NINE_WIDE_CHARACTER_CODE_ARRAY[] = {0x0039};
 static wchar_t* DIGIT_NINE_WIDE_CHARACTER_CODE = DIGIT_NINE_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The colon character. U+003A */
+/** The colon character code. U+003A */
 static wchar_t COLON_WIDE_CHARACTER_CODE_ARRAY[] = {0x003A};
 static wchar_t* COLON_WIDE_CHARACTER_CODE = COLON_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The semicolon character. U+003B */
+/** The semicolon character code. U+003B */
 static wchar_t SEMICOLON_WIDE_CHARACTER_CODE_ARRAY[] = {0x003B};
 static wchar_t* SEMICOLON_WIDE_CHARACTER_CODE = SEMICOLON_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The less than sign character. U+003C */
+/** The less than sign character code. U+003C */
 static wchar_t LESS_THAN_SIGN_WIDE_CHARACTER_CODE_ARRAY[] = {0x003C};
 static wchar_t* LESS_THAN_SIGN_WIDE_CHARACTER_CODE = LESS_THAN_SIGN_WIDE_CHARACTER_CODE_ARRAY;
 
 /**
- * The equals sign character.
+ * The equals sign character code.
  *
  * Unicode category: Symbol, Math
  * Unicode: U+003D
@@ -352,256 +352,256 @@ static wchar_t* LESS_THAN_SIGN_WIDE_CHARACTER_CODE = LESS_THAN_SIGN_WIDE_CHARACT
 static wchar_t EQUALS_SIGN_WIDE_CHARACTER_CODE_ARRAY[] = {0x003D};
 static wchar_t* EQUALS_SIGN_WIDE_CHARACTER_CODE = EQUALS_SIGN_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The greater than sign character. U+003E */
+/** The greater than sign character code. U+003E */
 static wchar_t GREATER_THAN_SIGN_WIDE_CHARACTER_CODE_ARRAY[] = {0x003E};
 static wchar_t* GREATER_THAN_SIGN_WIDE_CHARACTER_CODE = GREATER_THAN_SIGN_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The question mark character. U+003F */
+/** The question mark character code. U+003F */
 static wchar_t QUESTION_MARK_WIDE_CHARACTER_CODE_ARRAY[] = {0x003F};
 static wchar_t* QUESTION_MARK_WIDE_CHARACTER_CODE = QUESTION_MARK_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The commercial at character. U+0040 */
+/** The commercial at character code. U+0040 */
 static wchar_t COMMERCIAL_AT_WIDE_CHARACTER_CODE_ARRAY[] = {0x0040};
 static wchar_t* COMMERCIAL_AT_WIDE_CHARACTER_CODE = COMMERCIAL_AT_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The latin capital letter a character. U+0041 */
+/** The latin capital letter a character code. U+0041 */
 static wchar_t LATIN_CAPITAL_LETTER_A_WIDE_CHARACTER_CODE_ARRAY[] = {0x0041};
 static wchar_t* LATIN_CAPITAL_LETTER_A_WIDE_CHARACTER_CODE = LATIN_CAPITAL_LETTER_A_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The latin capital letter b character. U+0042 */
+/** The latin capital letter b character code. U+0042 */
 static wchar_t LATIN_CAPITAL_LETTER_B_WIDE_CHARACTER_CODE_ARRAY[] = {0x0042};
 static wchar_t* LATIN_CAPITAL_LETTER_B_WIDE_CHARACTER_CODE = LATIN_CAPITAL_LETTER_B_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The latin capital letter c character. U+0043 */
+/** The latin capital letter c character code. U+0043 */
 static wchar_t LATIN_CAPITAL_LETTER_C_WIDE_CHARACTER_CODE_ARRAY[] = {0x0043};
 static wchar_t* LATIN_CAPITAL_LETTER_C_WIDE_CHARACTER_CODE = LATIN_CAPITAL_LETTER_C_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The latin capital letter d character. U+0044 */
+/** The latin capital letter d character code. U+0044 */
 static wchar_t LATIN_CAPITAL_LETTER_D_WIDE_CHARACTER_CODE_ARRAY[] = {0x0044};
 static wchar_t* LATIN_CAPITAL_LETTER_D_WIDE_CHARACTER_CODE = LATIN_CAPITAL_LETTER_D_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The latin capital letter e character. U+0045 */
+/** The latin capital letter e character code. U+0045 */
 static wchar_t LATIN_CAPITAL_LETTER_E_WIDE_CHARACTER_CODE_ARRAY[] = {0x0045};
 static wchar_t* LATIN_CAPITAL_LETTER_E_WIDE_CHARACTER_CODE = LATIN_CAPITAL_LETTER_E_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The latin capital letter f character. U+0046 */
+/** The latin capital letter f character code. U+0046 */
 static wchar_t LATIN_CAPITAL_LETTER_F_WIDE_CHARACTER_CODE_ARRAY[] = {0x0046};
 static wchar_t* LATIN_CAPITAL_LETTER_F_WIDE_CHARACTER_CODE = LATIN_CAPITAL_LETTER_F_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The latin capital letter g character. U+0047 */
+/** The latin capital letter g character code. U+0047 */
 static wchar_t LATIN_CAPITAL_LETTER_G_WIDE_CHARACTER_CODE_ARRAY[] = {0x0047};
 static wchar_t* LATIN_CAPITAL_LETTER_G_WIDE_CHARACTER_CODE = LATIN_CAPITAL_LETTER_G_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The latin capital letter h character. U+0048 */
+/** The latin capital letter h character code. U+0048 */
 static wchar_t LATIN_CAPITAL_LETTER_H_WIDE_CHARACTER_CODE_ARRAY[] = {0x0048};
 static wchar_t* LATIN_CAPITAL_LETTER_H_WIDE_CHARACTER_CODE = LATIN_CAPITAL_LETTER_H_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The latin capital letter i character. U+0049 */
+/** The latin capital letter i character code. U+0049 */
 static wchar_t LATIN_CAPITAL_LETTER_I_WIDE_CHARACTER_CODE_ARRAY[] = {0x0049};
 static wchar_t* LATIN_CAPITAL_LETTER_I_WIDE_CHARACTER_CODE = LATIN_CAPITAL_LETTER_I_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The latin capital letter j character. U+004A */
+/** The latin capital letter j character code. U+004A */
 static wchar_t LATIN_CAPITAL_LETTER_J_WIDE_CHARACTER_CODE_ARRAY[] = {0x004A};
 static wchar_t* LATIN_CAPITAL_LETTER_J_WIDE_CHARACTER_CODE = LATIN_CAPITAL_LETTER_J_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The latin capital letter k character. U+004B */
+/** The latin capital letter k character code. U+004B */
 static wchar_t LATIN_CAPITAL_LETTER_K_WIDE_CHARACTER_CODE_ARRAY[] = {0x004B};
 static wchar_t* LATIN_CAPITAL_LETTER_K_WIDE_CHARACTER_CODE = LATIN_CAPITAL_LETTER_K_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The latin capital letter l character. U+004C */
+/** The latin capital letter l character code. U+004C */
 static wchar_t LATIN_CAPITAL_LETTER_L_WIDE_CHARACTER_CODE_ARRAY[] = {0x004C};
 static wchar_t* LATIN_CAPITAL_LETTER_L_WIDE_CHARACTER_CODE = LATIN_CAPITAL_LETTER_L_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The latin capital letter m character. U+004D */
+/** The latin capital letter m character code. U+004D */
 static wchar_t LATIN_CAPITAL_LETTER_M_WIDE_CHARACTER_CODE_ARRAY[] = {0x004D};
 static wchar_t* LATIN_CAPITAL_LETTER_M_WIDE_CHARACTER_CODE = LATIN_CAPITAL_LETTER_M_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The latin capital letter n character. U+004E */
+/** The latin capital letter n character code. U+004E */
 static wchar_t LATIN_CAPITAL_LETTER_N_WIDE_CHARACTER_CODE_ARRAY[] = {0x004E};
 static wchar_t* LATIN_CAPITAL_LETTER_N_WIDE_CHARACTER_CODE = LATIN_CAPITAL_LETTER_N_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The latin capital letter o character. U+004F */
+/** The latin capital letter o character code. U+004F */
 static wchar_t LATIN_CAPITAL_LETTER_O_WIDE_CHARACTER_CODE_ARRAY[] = {0x004F};
 static wchar_t* LATIN_CAPITAL_LETTER_O_WIDE_CHARACTER_CODE = LATIN_CAPITAL_LETTER_O_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The latin capital letter p character. U+0050 */
+/** The latin capital letter p character code. U+0050 */
 static wchar_t LATIN_CAPITAL_LETTER_P_WIDE_CHARACTER_CODE_ARRAY[] = {0x0050};
 static wchar_t* LATIN_CAPITAL_LETTER_P_WIDE_CHARACTER_CODE = LATIN_CAPITAL_LETTER_P_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The latin capital letter q character. U+0051 */
+/** The latin capital letter q character code. U+0051 */
 static wchar_t LATIN_CAPITAL_LETTER_Q_WIDE_CHARACTER_CODE_ARRAY[] = {0x0051};
 static wchar_t* LATIN_CAPITAL_LETTER_Q_WIDE_CHARACTER_CODE = LATIN_CAPITAL_LETTER_Q_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The latin capital letter r character. U+0052 */
+/** The latin capital letter r character code. U+0052 */
 static wchar_t LATIN_CAPITAL_LETTER_R_WIDE_CHARACTER_CODE_ARRAY[] = {0x0052};
 static wchar_t* LATIN_CAPITAL_LETTER_R_WIDE_CHARACTER_CODE = LATIN_CAPITAL_LETTER_R_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The latin capital letter s character. U+0053 */
+/** The latin capital letter s character code. U+0053 */
 static wchar_t LATIN_CAPITAL_LETTER_S_WIDE_CHARACTER_CODE_ARRAY[] = {0x0053};
 static wchar_t* LATIN_CAPITAL_LETTER_S_WIDE_CHARACTER_CODE = LATIN_CAPITAL_LETTER_S_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The latin capital letter t character. U+0054 */
+/** The latin capital letter t character code. U+0054 */
 static wchar_t LATIN_CAPITAL_LETTER_T_WIDE_CHARACTER_CODE_ARRAY[] = {0x0054};
 static wchar_t* LATIN_CAPITAL_LETTER_T_WIDE_CHARACTER_CODE = LATIN_CAPITAL_LETTER_T_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The latin capital letter u character. U+0055 */
+/** The latin capital letter u character code. U+0055 */
 static wchar_t LATIN_CAPITAL_LETTER_U_WIDE_CHARACTER_CODE_ARRAY[] = {0x0055};
 static wchar_t* LATIN_CAPITAL_LETTER_U_WIDE_CHARACTER_CODE = LATIN_CAPITAL_LETTER_U_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The latin capital letter v character. U+0056 */
+/** The latin capital letter v character code. U+0056 */
 static wchar_t LATIN_CAPITAL_LETTER_V_WIDE_CHARACTER_CODE_ARRAY[] = {0x0056};
 static wchar_t* LATIN_CAPITAL_LETTER_V_WIDE_CHARACTER_CODE = LATIN_CAPITAL_LETTER_V_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The latin capital letter w character. U+0057 */
+/** The latin capital letter w character code. U+0057 */
 static wchar_t LATIN_CAPITAL_LETTER_W_WIDE_CHARACTER_CODE_ARRAY[] = {0x0057};
 static wchar_t* LATIN_CAPITAL_LETTER_W_WIDE_CHARACTER_CODE = LATIN_CAPITAL_LETTER_W_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The latin capital letter x character. U+0058 */
+/** The latin capital letter x character code. U+0058 */
 static wchar_t LATIN_CAPITAL_LETTER_X_WIDE_CHARACTER_CODE_ARRAY[] = {0x0058};
 static wchar_t* LATIN_CAPITAL_LETTER_X_WIDE_CHARACTER_CODE = LATIN_CAPITAL_LETTER_X_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The latin capital letter y character. U+0059 */
+/** The latin capital letter y character code. U+0059 */
 static wchar_t LATIN_CAPITAL_LETTER_Y_WIDE_CHARACTER_CODE_ARRAY[] = {0x0059};
 static wchar_t* LATIN_CAPITAL_LETTER_Y_WIDE_CHARACTER_CODE = LATIN_CAPITAL_LETTER_Y_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The latin capital letter z character. U+005A */
+/** The latin capital letter z character code. U+005A */
 static wchar_t LATIN_CAPITAL_LETTER_Z_WIDE_CHARACTER_CODE_ARRAY[] = {0x005A};
 static wchar_t* LATIN_CAPITAL_LETTER_Z_WIDE_CHARACTER_CODE = LATIN_CAPITAL_LETTER_Z_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The left square bracket character. U+005B */
+/** The left square bracket character code. U+005B */
 static wchar_t LEFT_SQUARE_BRACKET_WIDE_CHARACTER_CODE_ARRAY[] = {0x005B};
 static wchar_t* LEFT_SQUARE_BRACKET_WIDE_CHARACTER_CODE = LEFT_SQUARE_BRACKET_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The reverse solidus character. U+005C */
+/** The reverse solidus character code. U+005C */
 static wchar_t REVERSE_SOLIDUS_WIDE_CHARACTER_CODE_ARRAY[] = {0x005C};
 static wchar_t* REVERSE_SOLIDUS_WIDE_CHARACTER_CODE = REVERSE_SOLIDUS_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The right square bracket character. U+005D */
+/** The right square bracket character code. U+005D */
 static wchar_t RIGHT_SQUARE_BRACKET_WIDE_CHARACTER_CODE_ARRAY[] = {0x005D};
 static wchar_t* RIGHT_SQUARE_BRACKET_WIDE_CHARACTER_CODE = RIGHT_SQUARE_BRACKET_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The circumflex accent character. U+005E */
+/** The circumflex accent character code. U+005E */
 static wchar_t CIRCUMFLEX_ACCENT_WIDE_CHARACTER_CODE_ARRAY[] = {0x005E};
 static wchar_t* CIRCUMFLEX_ACCENT_WIDE_CHARACTER_CODE = CIRCUMFLEX_ACCENT_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The low line character. U+005F */
+/** The low line character code. U+005F */
 static wchar_t LOW_LINE_WIDE_CHARACTER_CODE_ARRAY[] = {0x005F};
 static wchar_t* LOW_LINE_WIDE_CHARACTER_CODE = LOW_LINE_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The grave accent character. U+0060 */
+/** The grave accent character code. U+0060 */
 static wchar_t GRAVE_ACCENT_WIDE_CHARACTER_CODE_ARRAY[] = {0x0060};
 static wchar_t* GRAVE_ACCENT_WIDE_CHARACTER_CODE = GRAVE_ACCENT_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The latin small letter a character. U+0061 */
+/** The latin small letter a character code. U+0061 */
 static wchar_t LATIN_SMALL_LETTER_A_WIDE_CHARACTER_CODE_ARRAY[] = {0x0061};
 static wchar_t* LATIN_SMALL_LETTER_A_WIDE_CHARACTER_CODE = LATIN_SMALL_LETTER_A_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The latin small letter b character. U+0062 */
+/** The latin small letter b character code. U+0062 */
 static wchar_t LATIN_SMALL_LETTER_B_WIDE_CHARACTER_CODE_ARRAY[] = {0x0062};
 static wchar_t* LATIN_SMALL_LETTER_B_WIDE_CHARACTER_CODE = LATIN_SMALL_LETTER_B_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The latin small letter c character. U+0063 */
+/** The latin small letter c character code. U+0063 */
 static wchar_t LATIN_SMALL_LETTER_C_WIDE_CHARACTER_CODE_ARRAY[] = {0x0063};
 static wchar_t* LATIN_SMALL_LETTER_C_WIDE_CHARACTER_CODE = LATIN_SMALL_LETTER_C_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The latin small letter d character. U+0064 */
+/** The latin small letter d character code. U+0064 */
 static wchar_t LATIN_SMALL_LETTER_D_WIDE_CHARACTER_CODE_ARRAY[] = {0x0064};
 static wchar_t* LATIN_SMALL_LETTER_D_WIDE_CHARACTER_CODE = LATIN_SMALL_LETTER_D_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The latin small letter e character. U+0065 */
+/** The latin small letter e character code. U+0065 */
 static wchar_t LATIN_SMALL_LETTER_E_WIDE_CHARACTER_CODE_ARRAY[] = {0x0065};
 static wchar_t* LATIN_SMALL_LETTER_E_WIDE_CHARACTER_CODE = LATIN_SMALL_LETTER_E_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The latin small letter f character. U+0066 */
+/** The latin small letter f character code. U+0066 */
 static wchar_t LATIN_SMALL_LETTER_F_WIDE_CHARACTER_CODE_ARRAY[] = {0x0066};
 static wchar_t* LATIN_SMALL_LETTER_F_WIDE_CHARACTER_CODE = LATIN_SMALL_LETTER_F_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The latin small letter g character. U+0067 */
+/** The latin small letter g character code. U+0067 */
 static wchar_t LATIN_SMALL_LETTER_G_WIDE_CHARACTER_CODE_ARRAY[] = {0x0067};
 static wchar_t* LATIN_SMALL_LETTER_G_WIDE_CHARACTER_CODE = LATIN_SMALL_LETTER_G_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The latin small letter h character. U+0068 */
+/** The latin small letter h character code. U+0068 */
 static wchar_t LATIN_SMALL_LETTER_H_WIDE_CHARACTER_CODE_ARRAY[] = {0x0068};
 static wchar_t* LATIN_SMALL_LETTER_H_WIDE_CHARACTER_CODE = LATIN_SMALL_LETTER_H_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The latin small letter i character. U+0069 */
+/** The latin small letter i character code. U+0069 */
 static wchar_t LATIN_SMALL_LETTER_I_WIDE_CHARACTER_CODE_ARRAY[] = {0x0069};
 static wchar_t* LATIN_SMALL_LETTER_I_WIDE_CHARACTER_CODE = LATIN_SMALL_LETTER_I_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The latin small letter j character. U+006A */
+/** The latin small letter j character code. U+006A */
 static wchar_t LATIN_SMALL_LETTER_J_WIDE_CHARACTER_CODE_ARRAY[] = {0x006A};
 static wchar_t* LATIN_SMALL_LETTER_J_WIDE_CHARACTER_CODE = LATIN_SMALL_LETTER_J_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The latin small letter k character. U+006B */
+/** The latin small letter k character code. U+006B */
 static wchar_t LATIN_SMALL_LETTER_K_WIDE_CHARACTER_CODE_ARRAY[] = {0x006B};
 static wchar_t* LATIN_SMALL_LETTER_K_WIDE_CHARACTER_CODE = LATIN_SMALL_LETTER_K_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The latin small letter l character. U+006C */
+/** The latin small letter l character code. U+006C */
 static wchar_t LATIN_SMALL_LETTER_L_WIDE_CHARACTER_CODE_ARRAY[] = {0x006C};
 static wchar_t* LATIN_SMALL_LETTER_L_WIDE_CHARACTER_CODE = LATIN_SMALL_LETTER_L_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The latin small letter m character. U+006D */
+/** The latin small letter m character code. U+006D */
 static wchar_t LATIN_SMALL_LETTER_M_WIDE_CHARACTER_CODE_ARRAY[] = {0x006D};
 static wchar_t* LATIN_SMALL_LETTER_M_WIDE_CHARACTER_CODE = LATIN_SMALL_LETTER_M_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The latin small letter n character. U+006E */
+/** The latin small letter n character code. U+006E */
 static wchar_t LATIN_SMALL_LETTER_N_WIDE_CHARACTER_CODE_ARRAY[] = {0x006E};
 static wchar_t* LATIN_SMALL_LETTER_N_WIDE_CHARACTER_CODE = LATIN_SMALL_LETTER_N_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The latin small letter o character. U+006F */
+/** The latin small letter o character code. U+006F */
 static wchar_t LATIN_SMALL_LETTER_O_WIDE_CHARACTER_CODE_ARRAY[] = {0x006F};
 static wchar_t* LATIN_SMALL_LETTER_O_WIDE_CHARACTER_CODE = LATIN_SMALL_LETTER_O_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The latin small letter p character. U+0070 */
+/** The latin small letter p character code. U+0070 */
 static wchar_t LATIN_SMALL_LETTER_P_WIDE_CHARACTER_CODE_ARRAY[] = {0x0070};
 static wchar_t* LATIN_SMALL_LETTER_P_WIDE_CHARACTER_CODE = LATIN_SMALL_LETTER_P_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The latin small letter q character. U+0071 */
+/** The latin small letter q character code. U+0071 */
 static wchar_t LATIN_SMALL_LETTER_Q_WIDE_CHARACTER_CODE_ARRAY[] = {0x0071};
 static wchar_t* LATIN_SMALL_LETTER_Q_WIDE_CHARACTER_CODE = LATIN_SMALL_LETTER_Q_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The latin small letter r character. U+0072 */
+/** The latin small letter r character code. U+0072 */
 static wchar_t LATIN_SMALL_LETTER_R_WIDE_CHARACTER_CODE_ARRAY[] = {0x0072};
 static wchar_t* LATIN_SMALL_LETTER_R_WIDE_CHARACTER_CODE = LATIN_SMALL_LETTER_R_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The latin small letter s character. U+0073 */
+/** The latin small letter s character code. U+0073 */
 static wchar_t LATIN_SMALL_LETTER_S_WIDE_CHARACTER_CODE_ARRAY[] = {0x0073};
 static wchar_t* LATIN_SMALL_LETTER_S_WIDE_CHARACTER_CODE = LATIN_SMALL_LETTER_S_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The latin small letter t character. U+0074 */
+/** The latin small letter t character code. U+0074 */
 static wchar_t LATIN_SMALL_LETTER_T_WIDE_CHARACTER_CODE_ARRAY[] = {0x0074};
 static wchar_t* LATIN_SMALL_LETTER_T_WIDE_CHARACTER_CODE = LATIN_SMALL_LETTER_T_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The latin small letter u character. U+0075 */
+/** The latin small letter u character code. U+0075 */
 static wchar_t LATIN_SMALL_LETTER_U_WIDE_CHARACTER_CODE_ARRAY[] = {0x0075};
 static wchar_t* LATIN_SMALL_LETTER_U_WIDE_CHARACTER_CODE = LATIN_SMALL_LETTER_U_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The latin small letter v character. U+0076 */
+/** The latin small letter v character code. U+0076 */
 static wchar_t LATIN_SMALL_LETTER_V_WIDE_CHARACTER_CODE_ARRAY[] = {0x0076};
 static wchar_t* LATIN_SMALL_LETTER_V_WIDE_CHARACTER_CODE = LATIN_SMALL_LETTER_V_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The latin small letter w character. U+0077 */
+/** The latin small letter w character code. U+0077 */
 static wchar_t LATIN_SMALL_LETTER_W_WIDE_CHARACTER_CODE_ARRAY[] = {0x0077};
 static wchar_t* LATIN_SMALL_LETTER_W_WIDE_CHARACTER_CODE = LATIN_SMALL_LETTER_W_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The latin small letter x character. U+0078 */
+/** The latin small letter x character code. U+0078 */
 static wchar_t LATIN_SMALL_LETTER_X_WIDE_CHARACTER_CODE_ARRAY[] = {0x0078};
 static wchar_t* LATIN_SMALL_LETTER_X_WIDE_CHARACTER_CODE = LATIN_SMALL_LETTER_X_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The latin small letter y character. U+0079 */
+/** The latin small letter y character code. U+0079 */
 static wchar_t LATIN_SMALL_LETTER_Y_WIDE_CHARACTER_CODE_ARRAY[] = {0x0079};
 static wchar_t* LATIN_SMALL_LETTER_Y_WIDE_CHARACTER_CODE = LATIN_SMALL_LETTER_Y_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The latin small letter z character. U+007A */
+/** The latin small letter z character code. U+007A */
 static wchar_t LATIN_SMALL_LETTER_Z_WIDE_CHARACTER_CODE_ARRAY[] = {0x007A};
 static wchar_t* LATIN_SMALL_LETTER_Z_WIDE_CHARACTER_CODE = LATIN_SMALL_LETTER_Z_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The left curly bracket character. U+007B */
+/** The left curly bracket character code. U+007B */
 static wchar_t LEFT_CURLY_BRACKET_WIDE_CHARACTER_CODE_ARRAY[] = {0x007B};
 static wchar_t* LEFT_CURLY_BRACKET_WIDE_CHARACTER_CODE = LEFT_CURLY_BRACKET_WIDE_CHARACTER_CODE_ARRAY;
 
 /**
- * The vertical line character.
+ * The vertical line character code.
  *
  * Unicode category: Symbol, Math
  * Unicode: U+007C
@@ -624,15 +624,15 @@ static wchar_t* LEFT_CURLY_BRACKET_WIDE_CHARACTER_CODE = LEFT_CURLY_BRACKET_WIDE
 static wchar_t VERTICAL_LINE_WIDE_CHARACTER_CODE_ARRAY[] = {0x007C};
 static wchar_t* VERTICAL_LINE_WIDE_CHARACTER_CODE = VERTICAL_LINE_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The right curly bracket character. U+007D */
+/** The right curly bracket character code. U+007D */
 static wchar_t RIGHT_CURLY_BRACKET_WIDE_CHARACTER_CODE_ARRAY[] = {0x007D};
 static wchar_t* RIGHT_CURLY_BRACKET_WIDE_CHARACTER_CODE = RIGHT_CURLY_BRACKET_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The tilde character. U+007E */
+/** The tilde character code. U+007E */
 static wchar_t TILDE_WIDE_CHARACTER_CODE_ARRAY[] = {0x007E};
 static wchar_t* TILDE_WIDE_CHARACTER_CODE = TILDE_WIDE_CHARACTER_CODE_ARRAY;
 
-/** The delete control character. U+007F */
+/** The delete control character code. U+007F */
 static wchar_t DELETE_CONTROL_WIDE_CHARACTER_CODE_ARRAY[] = {0x007F};
 static wchar_t* DELETE_CONTROL_WIDE_CHARACTER_CODE = DELETE_CONTROL_WIDE_CHARACTER_CODE_ARRAY;
 
@@ -645,7 +645,7 @@ static wchar_t* DELETE_CONTROL_WIDE_CHARACTER_CODE = DELETE_CONTROL_WIDE_CHARACT
 //
 
 /**
- * The latin letter dental click character.
+ * The latin letter dental click character code.
  *
  * Unicode category: Letter, Other
  * Unicode: U+01C0
@@ -670,7 +670,7 @@ static wchar_t LATIN_LETTER_DENTAL_CLICK_WIDE_CHARACTER_CODE_ARRAY[] = {0x01c0};
 static wchar_t* LATIN_LETTER_DENTAL_CLICK_WIDE_CHARACTER_CODE = LATIN_LETTER_DENTAL_CLICK_WIDE_CHARACTER_CODE_ARRAY;
 
 /**
- * The latin letter lateral click character.
+ * The latin letter lateral click character code.
  *
  * Unicode category: Letter, Other
  * Unicode: U+01C1
@@ -697,7 +697,7 @@ static wchar_t* LATIN_LETTER_LATERAL_CLICK_WIDE_CHARACTER_CODE = LATIN_LETTER_LA
 //
 
 /**
- * The box drawings light horizontal character.
+ * The box drawings light horizontal character code.
  *
  * Unicode category: Symbol, Other
  * Unicode: U+2500
@@ -712,7 +712,7 @@ static wchar_t BOX_DRAWINGS_LIGHT_HORIZONTAL_WIDE_CHARACTER_CODE_ARRAY[] = {0x25
 static wchar_t* BOX_DRAWINGS_LIGHT_HORIZONTAL_WIDE_CHARACTER_CODE = BOX_DRAWINGS_LIGHT_HORIZONTAL_WIDE_CHARACTER_CODE_ARRAY;
 
 /**
- * The box drawings heavy horizontal character.
+ * The box drawings heavy horizontal character code.
  *
  * Unicode category: Symbol, Other
  * Unicode: U+2501
@@ -724,7 +724,7 @@ static wchar_t BOX_DRAWINGS_HEAVY_HORIZONTAL_WIDE_CHARACTER_CODE_ARRAY[] = {0x25
 static wchar_t* BOX_DRAWINGS_HEAVY_HORIZONTAL_WIDE_CHARACTER_CODE = BOX_DRAWINGS_HEAVY_HORIZONTAL_WIDE_CHARACTER_CODE_ARRAY;
 
 /**
- * The box drawings light vertical character.
+ * The box drawings light vertical character code.
  *
  * Unicode category: Symbol, Other
  * Unicode: U+2502
@@ -739,7 +739,7 @@ static wchar_t BOX_DRAWINGS_LIGHT_VERTICAL_WIDE_CHARACTER_CODE_ARRAY[] = {0x2502
 static wchar_t* BOX_DRAWINGS_LIGHT_VERTICAL_WIDE_CHARACTER_CODE = BOX_DRAWINGS_LIGHT_VERTICAL_WIDE_CHARACTER_CODE_ARRAY;
 
 /**
- * The box drawings heavy vertical character.
+ * The box drawings heavy vertical character code.
  *
  * Unicode category: Symbol, Other
  * Unicode: U+2503
@@ -751,7 +751,7 @@ static wchar_t BOX_DRAWINGS_HEAVY_VERTICAL_WIDE_CHARACTER_CODE_ARRAY[] = {0x2503
 static wchar_t* BOX_DRAWINGS_HEAVY_VERTICAL_WIDE_CHARACTER_CODE = BOX_DRAWINGS_HEAVY_VERTICAL_WIDE_CHARACTER_CODE_ARRAY;
 
 /**
- * The box drawings light down and right character.
+ * The box drawings light down and right character code.
  *
  * Unicode category: Symbol, Other
  * Unicode: U+250C
@@ -766,7 +766,7 @@ static wchar_t BOX_DRAWINGS_LIGHT_DOWN_AND_RIGHT_WIDE_CHARACTER_CODE_ARRAY[] = {
 static wchar_t* BOX_DRAWINGS_LIGHT_DOWN_AND_RIGHT_WIDE_CHARACTER_CODE = BOX_DRAWINGS_LIGHT_DOWN_AND_RIGHT_WIDE_CHARACTER_CODE_ARRAY;
 
 /**
- * The box drawings heavy down and right character.
+ * The box drawings heavy down and right character code.
  *
  * Unicode category: Symbol, Other
  * Unicode: U+250F
@@ -778,7 +778,7 @@ static wchar_t BOX_DRAWINGS_HEAVY_DOWN_AND_RIGHT_WIDE_CHARACTER_CODE_ARRAY[] = {
 static wchar_t* BOX_DRAWINGS_HEAVY_DOWN_AND_RIGHT_WIDE_CHARACTER_CODE = BOX_DRAWINGS_HEAVY_DOWN_AND_RIGHT_WIDE_CHARACTER_CODE_ARRAY;
 
 /**
- * The box drawings light down and left character.
+ * The box drawings light down and left character code.
  *
  * Unicode category: Symbol, Other
  * Unicode: U+2510
@@ -793,7 +793,7 @@ static wchar_t BOX_DRAWINGS_LIGHT_DOWN_AND_LEFT_WIDE_CHARACTER_CODE_ARRAY[] = {0
 static wchar_t* BOX_DRAWINGS_LIGHT_DOWN_AND_LEFT_WIDE_CHARACTER_CODE = BOX_DRAWINGS_LIGHT_DOWN_AND_LEFT_WIDE_CHARACTER_CODE_ARRAY;
 
 /**
- * The box drawings heavy down and left character.
+ * The box drawings heavy down and left character code.
  *
  * Unicode category: Symbol, Other
  * Unicode: U+2513
@@ -805,7 +805,7 @@ static wchar_t BOX_DRAWINGS_HEAVY_DOWN_AND_LEFT_WIDE_CHARACTER_CODE_ARRAY[] = {0
 static wchar_t* BOX_DRAWINGS_HEAVY_DOWN_AND_LEFT_WIDE_CHARACTER_CODE = BOX_DRAWINGS_HEAVY_DOWN_AND_LEFT_WIDE_CHARACTER_CODE_ARRAY;
 
 /**
- * The box drawings light up and right character.
+ * The box drawings light up and right character code.
  *
  * Unicode category: Symbol, Other
  * Unicode: U+2514
@@ -820,7 +820,7 @@ static wchar_t BOX_DRAWINGS_LIGHT_UP_AND_RIGHT_WIDE_CHARACTER_CODE_ARRAY[] = {0x
 static wchar_t* BOX_DRAWINGS_LIGHT_UP_AND_RIGHT_WIDE_CHARACTER_CODE = BOX_DRAWINGS_LIGHT_UP_AND_RIGHT_WIDE_CHARACTER_CODE_ARRAY;
 
 /**
- * The box drawings heavy up and right character.
+ * The box drawings heavy up and right character code.
  *
  * Unicode category: Symbol, Other
  * Unicode: U+2517
@@ -832,7 +832,7 @@ static wchar_t BOX_DRAWINGS_HEAVY_UP_AND_RIGHT_WIDE_CHARACTER_CODE_ARRAY[] = {0x
 static wchar_t* BOX_DRAWINGS_HEAVY_UP_AND_RIGHT_WIDE_CHARACTER_CODE = BOX_DRAWINGS_HEAVY_UP_AND_RIGHT_WIDE_CHARACTER_CODE_ARRAY;
 
 /**
- * The box drawings light up and left character.
+ * The box drawings light up and left character code.
  *
  * Unicode category: Symbol, Other
  * Unicode: U+2518
@@ -847,7 +847,7 @@ static wchar_t BOX_DRAWINGS_LIGHT_UP_AND_LEFT_WIDE_CHARACTER_CODE_ARRAY[] = {0x2
 static wchar_t* BOX_DRAWINGS_LIGHT_UP_AND_LEFT_WIDE_CHARACTER_CODE = BOX_DRAWINGS_LIGHT_UP_AND_LEFT_WIDE_CHARACTER_CODE_ARRAY;
 
 /**
- * The box drawings heavy up and left character.
+ * The box drawings heavy up and left character code.
  *
  * Unicode category: Symbol, Other
  * Unicode: U+251B
@@ -859,7 +859,7 @@ static wchar_t BOX_DRAWINGS_HEAVY_UP_AND_LEFT_WIDE_CHARACTER_CODE_ARRAY[] = {0x2
 static wchar_t* BOX_DRAWINGS_HEAVY_UP_AND_LEFT_WIDE_CHARACTER_CODE = BOX_DRAWINGS_HEAVY_UP_AND_LEFT_WIDE_CHARACTER_CODE_ARRAY;
 
 /**
- * The box drawings double horizontal character.
+ * The box drawings double horizontal character code.
  *
  * Unicode category: Symbol, Other
  * Unicode: U+2550
@@ -871,7 +871,7 @@ static wchar_t BOX_DRAWINGS_DOUBLE_HORIZONTAL_WIDE_CHARACTER_CODE_ARRAY[] = {0x2
 static wchar_t* BOX_DRAWINGS_DOUBLE_HORIZONTAL_WIDE_CHARACTER_CODE = BOX_DRAWINGS_DOUBLE_HORIZONTAL_WIDE_CHARACTER_CODE_ARRAY;
 
 /**
- * The box drawings double vertical character.
+ * The box drawings double vertical character code.
  *
  * Unicode category: Symbol, Other
  * Unicode: U+2551
@@ -883,7 +883,7 @@ static wchar_t BOX_DRAWINGS_DOUBLE_VERTICAL_WIDE_CHARACTER_CODE_ARRAY[] = {0x255
 static wchar_t* BOX_DRAWINGS_DOUBLE_VERTICAL_WIDE_CHARACTER_CODE = BOX_DRAWINGS_DOUBLE_VERTICAL_WIDE_CHARACTER_CODE_ARRAY;
 
 /**
- * The box drawings double down and right character.
+ * The box drawings double down and right character code.
  *
  * Unicode category: Symbol, Other
  * Unicode: U+2554
@@ -895,7 +895,7 @@ static wchar_t BOX_DRAWINGS_DOUBLE_DOWN_AND_RIGHT_WIDE_CHARACTER_CODE_ARRAY[] = 
 static wchar_t* BOX_DRAWINGS_DOUBLE_DOWN_AND_RIGHT_WIDE_CHARACTER_CODE = BOX_DRAWINGS_DOUBLE_DOWN_AND_RIGHT_WIDE_CHARACTER_CODE_ARRAY;
 
 /**
- * The box drawings double down and left character.
+ * The box drawings double down and left character code.
  *
  * Unicode category: Symbol, Other
  * Unicode: U+2557
@@ -907,7 +907,7 @@ static wchar_t BOX_DRAWINGS_DOUBLE_DOWN_AND_LEFT_WIDE_CHARACTER_CODE_ARRAY[] = {
 static wchar_t* BOX_DRAWINGS_DOUBLE_DOWN_AND_LEFT_WIDE_CHARACTER_CODE = BOX_DRAWINGS_DOUBLE_DOWN_AND_LEFT_WIDE_CHARACTER_CODE_ARRAY;
 
 /**
- * The box drawings double up and right character.
+ * The box drawings double up and right character code.
  *
  * Unicode category: Symbol, Other
  * Unicode: U+255A
@@ -919,7 +919,7 @@ static wchar_t BOX_DRAWINGS_DOUBLE_UP_AND_RIGHT_WIDE_CHARACTER_CODE_ARRAY[] = {0
 static wchar_t* BOX_DRAWINGS_DOUBLE_UP_AND_RIGHT_WIDE_CHARACTER_CODE = BOX_DRAWINGS_DOUBLE_UP_AND_RIGHT_WIDE_CHARACTER_CODE_ARRAY;
 
 /**
- * The box drawings double up and left character.
+ * The box drawings double up and left character code.
  *
  * Unicode category: Symbol, Other
  * Unicode: U+255D
@@ -931,7 +931,7 @@ static wchar_t BOX_DRAWINGS_DOUBLE_UP_AND_LEFT_WIDE_CHARACTER_CODE_ARRAY[] = {0x
 static wchar_t* BOX_DRAWINGS_DOUBLE_UP_AND_LEFT_WIDE_CHARACTER_CODE = BOX_DRAWINGS_DOUBLE_UP_AND_LEFT_WIDE_CHARACTER_CODE_ARRAY;
 
 /**
- * The box drawings light arc down and right character.
+ * The box drawings light arc down and right character code.
  *
  * Unicode category: Symbol, Other
  * Unicode: U+256D
@@ -943,7 +943,7 @@ static wchar_t BOX_DRAWINGS_LIGHT_ARC_DOWN_AND_RIGHT_WIDE_CHARACTER_CODE_ARRAY[]
 static wchar_t* BOX_DRAWINGS_LIGHT_ARC_DOWN_AND_RIGHT_WIDE_CHARACTER_CODE = BOX_DRAWINGS_LIGHT_ARC_DOWN_AND_RIGHT_WIDE_CHARACTER_CODE_ARRAY;
 
 /**
- * The box drawings light arc down and left character.
+ * The box drawings light arc down and left character code.
  *
  * Unicode category: Symbol, Other
  * Unicode: U+256E
@@ -955,7 +955,7 @@ static wchar_t BOX_DRAWINGS_LIGHT_ARC_DOWN_AND_LEFT_WIDE_CHARACTER_CODE_ARRAY[] 
 static wchar_t* BOX_DRAWINGS_LIGHT_ARC_DOWN_AND_LEFT_WIDE_CHARACTER_CODE = BOX_DRAWINGS_LIGHT_ARC_DOWN_AND_LEFT_WIDE_CHARACTER_CODE_ARRAY;
 
 /**
- * The box drawings light arc up and left character.
+ * The box drawings light arc up and left character code.
  *
  * Unicode category: Symbol, Other
  * Unicode: U+256F
@@ -967,7 +967,7 @@ static wchar_t BOX_DRAWINGS_LIGHT_ARC_UP_AND_LEFT_WIDE_CHARACTER_CODE_ARRAY[] = 
 static wchar_t* BOX_DRAWINGS_LIGHT_ARC_UP_AND_LEFT_WIDE_CHARACTER_CODE = BOX_DRAWINGS_LIGHT_ARC_UP_AND_LEFT_WIDE_CHARACTER_CODE_ARRAY;
 
 /**
- * The box drawings light arc up and right character.
+ * The box drawings light arc up and right character code.
  *
  * Unicode category: Symbol, Other
  * Unicode: U+2570

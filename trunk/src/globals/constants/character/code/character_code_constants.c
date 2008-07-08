@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2008-07-08 06:31:31 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2008-07-08 17:55:36 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -41,14 +41,14 @@
 //
 
 /**
- * The null control character. U+0000
+ * The null control character code. U+0000
  * It is used as string termination in the C programming language.
  */
 static char NULL_CONTROL_CHARACTER_CODE_ARRAY[] = {0x00};
 static char* NULL_CONTROL_CHARACTER_CODE = NULL_CONTROL_CHARACTER_CODE_ARRAY;
 
 /**
- * The character tabulation control character.
+ * The character tabulation control character code.
  *
  * U+0009
  *
@@ -60,7 +60,7 @@ static char CHARACTER_TABULATION_CONTROL_CHARACTER_CODE_ARRAY[] = {0x09};
 static char* CHARACTER_TABULATION_CONTROL_CHARACTER_CODE = CHARACTER_TABULATION_CONTROL_CHARACTER_CODE_ARRAY;
 
 /**
- * The line feed control character.
+ * The line feed control character code.
  *
  * U+000A
  *
@@ -73,51 +73,51 @@ static char LINE_FEED_CONTROL_CHARACTER_CODE_ARRAY[] = {0x0A};
 static char* LINE_FEED_CONTROL_CHARACTER_CODE = LINE_FEED_CONTROL_CHARACTER_CODE_ARRAY;
 
 /**
- * The carriage return (enter) control character.
+ * The carriage return (enter) control character code.
  *
  * U+000D
  */
 static char CARRIAGE_RETURN_CONTROL_CHARACTER_CODE_ARRAY[] = {0x0D};
 static char* CARRIAGE_RETURN_CONTROL_CHARACTER_CODE = CARRIAGE_RETURN_CONTROL_CHARACTER_CODE_ARRAY;
 
-/** The space character  . U+0020 */
+/** The space character code  . U+0020 */
 static char SPACE_CHARACTER_CODE_ARRAY[] = {0x20};
 static char* SPACE_CHARACTER_CODE = SPACE_CHARACTER_CODE_ARRAY;
 
-/** The exclamation mark character !. U+0021 */
+/** The exclamation mark character code !. U+0021 */
 static char EXCLAMATION_MARK_CHARACTER_CODE_ARRAY[] = {0x20};
 static char* EXCLAMATION_MARK_CHARACTER_CODE = EXCLAMATION_MARK_CHARACTER_CODE_ARRAY;
 
-/** The quotation mark character ?. U+0022 */
+/** The quotation mark character code ?. U+0022 */
 static char QUOTATION_MARK_CHARACTER_CODE_ARRAY[] = {0x22};
 static char* QUOTATION_MARK_CHARACTER_CODE = QUOTATION_MARK_CHARACTER_CODE_ARRAY;
 
-/** The number sign character #. U+0023 */
+/** The number sign character code #. U+0023 */
 static char NUMBER_SIGN_CHARACTER_CODE_ARRAY[] = {0x23};
 static char* NUMBER_SIGN_CHARACTER_CODE = NUMBER_SIGN_CHARACTER_CODE_ARRAY;
 
-/** The dollar sign character $. U+0024 */
+/** The dollar sign character code $. U+0024 */
 static char DOLLAR_SIGN_CHARACTER_CODE_ARRAY[] = {0x24};
 static char* DOLLAR_SIGN_CHARACTER_CODE = DOLLAR_SIGN_CHARACTER_CODE_ARRAY;
 
-/** The percent sign character %. U+0025 */
+/** The percent sign character code %. U+0025 */
 static char PERCENT_SIGN_CHARACTER_CODE_ARRAY[] = {0x25};
 static char* PERCENT_SIGN_CHARACTER_CODE = PERCENT_SIGN_CHARACTER_CODE_ARRAY;
 
-/** The ampersand character &. U+0026 */
+/** The ampersand character code &. U+0026 */
 static char AMPERSAND_CHARACTER_CODE_ARRAY[] = {0x26};
 static char* AMPERSAND_CHARACTER_CODE = AMPERSAND_CHARACTER_CODE_ARRAY;
 
-/** The plus sign character +. U+002B */
+/** The plus sign character code +. U+002B */
 static char PLUS_SIGN_CHARACTER_CODE_ARRAY[] = {0x2B};
 static char* PLUS_SIGN_CHARACTER_CODE = PLUS_SIGN_CHARACTER_CODE_ARRAY;
 
-/** The comma character ,. U+002C */
+/** The comma character code ,. U+002C */
 static char COMMA_CHARACTER_CODE_ARRAY[] = {0x2C};
 static char* COMMA_CHARACTER_CODE = COMMA_CHARACTER_CODE_ARRAY;
 
 /**
- * The hyphen minus character.
+ * The hyphen minus character code.
  *
  * Unicode category: Punctuation, Dash
  * Unicode: U+002D
@@ -141,28 +141,28 @@ static char* COMMA_CHARACTER_CODE = COMMA_CHARACTER_CODE_ARRAY;
 static char HYPHEN_MINUS_CHARACTER_CODE_ARRAY[] = {0x2D};
 static char* HYPHEN_MINUS_CHARACTER_CODE = HYPHEN_MINUS_CHARACTER_CODE_ARRAY;
 
-/** The full stop (period) character .. U+002E */
+/** The full stop (period) character code .. U+002E */
 static char FULL_STOP_CHARACTER_CODE_ARRAY[] = {0x2E};
 static char* FULL_STOP_CHARACTER_CODE = FULL_STOP_CHARACTER_CODE_ARRAY;
 
-/** The solidus (slash) character /. U+002F */
+/** The solidus (slash) character code /. U+002F */
 static char SOLIDUS_CHARACTER_CODE_ARRAY[] = {0x2F};
 static char* SOLIDUS_CHARACTER_CODE = SOLIDUS_CHARACTER_CODE_ARRAY;
 
-/** The colon character :. U+003A */
+/** The colon character code :. U+003A */
 static char COLON_CHARACTER_CODE_ARRAY[] = {0x3A};
 static char* COLON_CHARACTER_CODE = COLON_CHARACTER_CODE_ARRAY;
 
-/** The semicolon character ;. U+003B */
+/** The semicolon character code ;. U+003B */
 static char SEMICOLON_CHARACTER_CODE_ARRAY[] = {0x3B};
 static char* SEMICOLON_CHARACTER_CODE = SEMICOLON_CHARACTER_CODE_ARRAY;
 
-/** The less than sign character <. U+003C */
+/** The less than sign character code <. U+003C */
 static char LESS_THAN_SIGN_CHARACTER_CODE_ARRAY[] = {0x3C};
 static char* LESS_THAN_SIGN_CHARACTER_CODE = LESS_THAN_SIGN_CHARACTER_CODE_ARRAY;
 
 /**
- * The equals sign character.
+ * The equals sign character code.
  *
  * Unicode category: Symbol, Math
  * Unicode: U+003D
@@ -180,48 +180,48 @@ static char* LESS_THAN_SIGN_CHARACTER_CODE = LESS_THAN_SIGN_CHARACTER_CODE_ARRAY
 static char EQUALS_SIGN_CHARACTER_CODE_ARRAY[] = {0x3D};
 static char* EQUALS_SIGN_CHARACTER_CODE = EQUALS_SIGN_CHARACTER_CODE_ARRAY;
 
-/** The greater than sign character >. U+003E */
+/** The greater than sign character code >. U+003E */
 static char GREATER_THAN_SIGN_CHARACTER_CODE_ARRAY[] = {0x3E};
 static char* GREATER_THAN_SIGN_CHARACTER_CODE = GREATER_THAN_SIGN_CHARACTER_CODE_ARRAY;
 
-/** The question mark character ?. U+003F */
+/** The question mark character code ?. U+003F */
 static char QUESTION_MARK_CHARACTER_CODE_ARRAY[] = {0x3F};
 static char* QUESTION_MARK_CHARACTER_CODE = QUESTION_MARK_CHARACTER_CODE_ARRAY;
 
-/** The commercial at character @. U+0040 */
+/** The commercial at character code @. U+0040 */
 static char COMMERCIAL_AT_CHARACTER_CODE_ARRAY[] = {0x40};
 static char* COMMERCIAL_AT_CHARACTER_CODE = COMMERCIAL_AT_CHARACTER_CODE_ARRAY;
 
-/** The left square bracket character [. U+005B */
+/** The left square bracket character code [. U+005B */
 static char LEFT_SQUARE_BRACKET_CHARACTER_CODE_ARRAY[] = {0x5B};
 static char* LEFT_SQUARE_BRACKET_CHARACTER_CODE = LEFT_SQUARE_BRACKET_CHARACTER_CODE_ARRAY;
 
-/** The reverse solidus character \. U+005C */
+/** The reverse solidus character code \. U+005C */
 static char REVERSE_SOLIDUS_CHARACTER_CODE_ARRAY[] = {0x5C};
 static char* REVERSE_SOLIDUS_CHARACTER_CODE = REVERSE_SOLIDUS_CHARACTER_CODE_ARRAY;
 
-/** The right square bracket character ]. U+005D */
+/** The right square bracket character code ]. U+005D */
 static char RIGHT_SQUARE_BRACKET_CHARACTER_CODE_ARRAY[] = {0x5D};
 static char* RIGHT_SQUARE_BRACKET_CHARACTER_CODE = RIGHT_SQUARE_BRACKET_CHARACTER_CODE_ARRAY;
 
-/** The circumflex accent character ^. U+005E */
+/** The circumflex accent character code ^. U+005E */
 static char CIRCUMFLEX_ACCENT_CHARACTER_CODE_ARRAY[] = {0x5E};
 static char* CIRCUMFLEX_ACCENT_CHARACTER_CODE = CIRCUMFLEX_ACCENT_CHARACTER_CODE_ARRAY;
 
-/** The low line character _. U+005F */
+/** The low line character code _. U+005F */
 static char LOW_LINE_CHARACTER_CODE_ARRAY[] = {0x5F};
 static char* LOW_LINE_CHARACTER_CODE = LOW_LINE_CHARACTER_CODE_ARRAY;
 
-/** The grave accent character `. U+0060 */
+/** The grave accent character code `. U+0060 */
 static char GRAVE_ACCENT_CHARACTER_CODE_ARRAY[] = {0x60};
 static char* GRAVE_ACCENT_CHARACTER_CODE = GRAVE_ACCENT_CHARACTER_CODE_ARRAY;
 
-/** The left curly bracket character {. U+007B */
+/** The left curly bracket character code {. U+007B */
 static char LEFT_CURLY_BRACKET_CHARACTER_CODE_ARRAY[] = {0x7B};
 static char* LEFT_CURLY_BRACKET_CHARACTER_CODE = LEFT_CURLY_BRACKET_CHARACTER_CODE_ARRAY;
 
 /**
- * The vertical line character.
+ * The vertical line character code.
  *
  * Unicode category: Symbol, Math
  * Unicode: U+007C
@@ -244,11 +244,11 @@ static char* LEFT_CURLY_BRACKET_CHARACTER_CODE = LEFT_CURLY_BRACKET_CHARACTER_CO
 static char VERTICAL_LINE_CHARACTER_CODE_ARRAY[] = {0x7C};
 static char* VERTICAL_LINE_CHARACTER_CODE = VERTICAL_LINE_CHARACTER_CODE_ARRAY;
 
-/** The right curly bracket character }. U+007D */
+/** The right curly bracket character code }. U+007D */
 static char RIGHT_CURLY_BRACKET_CHARACTER_CODE_ARRAY[] = {0x7D};
 static char* RIGHT_CURLY_BRACKET_CHARACTER_CODE = RIGHT_CURLY_BRACKET_CHARACTER_CODE_ARRAY;
 
-/** The tilde character ~. U+007E */
+/** The tilde character code ~. U+007E */
 static char TILDE_CHARACTER_CODE_ARRAY[] = {0x7E};
 static char* TILDE_CHARACTER_CODE = TILDE_CHARACTER_CODE_ARRAY;
 

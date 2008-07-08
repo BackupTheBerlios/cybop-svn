@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.16 $ $Date: 2008-05-28 22:39:59 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2008-07-08 17:55:36 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -35,8 +35,7 @@
 #include <stdio.h>
 #include <wchar.h>
 #include "../../globals/constants/boolean/boolean_constants.c"
-//?? #include "../../globals/constants/character/character_constants.c"
-#include "../../globals/constants/character/wide_character_constants.c"
+#include "../../globals/constants/character/code/wide_character_code_constants.c"
 #include "../../globals/constants/console/console_control_sequence_constants.c"
 #include "../../globals/constants/cybol/cybol_abstraction_constants.c"
 #include "../../globals/constants/cybol/cybol_model_constants.c"
@@ -147,7 +146,7 @@ void decode_gnu_linux_console_escape_control_sequence(void* p0, void* p1, void* 
  * Decodes a gnu/linux console character into a command.
  *
  * This function changes the key codes into real names as defined by CYBOL.
- * Example: The LINE_FEED_CONTROL_CHARACTER (<enter> key) gets converted into the
+ * Example: The LINE_FEED_CONTROL_CHARACTER_CODE (<enter> key) gets converted into the
  * constant UI_ENTER_NAME with the value "enter", which is used so in CYBOL files.
  *
  * @param p0 the destination command (Hand over as reference!)
@@ -165,7 +164,7 @@ void decode_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, 
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p3, p4, (void*) LINE_FEED_CONTROL_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+        compare_arrays(p3, p4, (void*) LINE_FEED_CONTROL_WIDE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
@@ -175,7 +174,7 @@ void decode_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, 
 
     if (r == *NUMBER_0_INTEGER) {
 
-        compare_arrays(p3, p4, (void*) ESCAPE_CONTROL_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+        compare_arrays(p3, p4, (void*) ESCAPE_CONTROL_WIDE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
 
         if (r != *NUMBER_0_INTEGER) {
 
@@ -387,11 +386,11 @@ void encode_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, 
                                     *dc = *dc + *ESCAPE_CONTROL_SEQUENCE_COUNT;
                                     set_array_elements(*d, p1, y, (void*) &yc, (void*) WIDE_CHARACTER_ARRAY);
                                     *dc = *dc + yc;
-                                    set_array_elements(*d, p1, (void*) SEMICOLON_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+                                    set_array_elements(*d, p1, (void*) SEMICOLON_WIDE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
                                     *dc = *dc + *PRIMITIVE_COUNT;
                                     set_array_elements(*d, p1, x, (void*) &xc, (void*) WIDE_CHARACTER_ARRAY);
                                     *dc = *dc + xc;
-                                    set_array_elements(*d, p1, (void*) LATIN_CAPITAL_LETTER_H_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+                                    set_array_elements(*d, p1, (void*) LATIN_CAPITAL_LETTER_H_WIDE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
                                     *dc = *dc + *PRIMITIVE_COUNT;
 
                                     // Add attribute off control sequence.
@@ -654,12 +653,12 @@ void encode_gnu_linux_console_rectangle_border(void* p0, void* p1,
 
                                 if (r != *NUMBER_0_INTEGER) {
 
-                                    *hc = *BOX_DRAWINGS_LIGHT_HORIZONTAL_WIDE_CHARACTER;
-                                    *vc = *BOX_DRAWINGS_LIGHT_VERTICAL_WIDE_CHARACTER;
-                                    *ltc = *BOX_DRAWINGS_LIGHT_DOWN_AND_RIGHT_WIDE_CHARACTER;
-                                    *rtc = *BOX_DRAWINGS_LIGHT_DOWN_AND_LEFT_WIDE_CHARACTER;
-                                    *lbc = *BOX_DRAWINGS_LIGHT_UP_AND_RIGHT_WIDE_CHARACTER;
-                                    *rbc = *BOX_DRAWINGS_LIGHT_UP_AND_LEFT_WIDE_CHARACTER;
+                                    *hc = *BOX_DRAWINGS_LIGHT_HORIZONTAL_WIDE_CHARACTER_CODE;
+                                    *vc = *BOX_DRAWINGS_LIGHT_VERTICAL_WIDE_CHARACTER_CODE;
+                                    *ltc = *BOX_DRAWINGS_LIGHT_DOWN_AND_RIGHT_WIDE_CHARACTER_CODE;
+                                    *rtc = *BOX_DRAWINGS_LIGHT_DOWN_AND_LEFT_WIDE_CHARACTER_CODE;
+                                    *lbc = *BOX_DRAWINGS_LIGHT_UP_AND_RIGHT_WIDE_CHARACTER_CODE;
+                                    *rbc = *BOX_DRAWINGS_LIGHT_UP_AND_LEFT_WIDE_CHARACTER_CODE;
                                 }
                             }
 
@@ -669,12 +668,12 @@ void encode_gnu_linux_console_rectangle_border(void* p0, void* p1,
 
                                 if (r != *NUMBER_0_INTEGER) {
 
-                                    *hc = *BOX_DRAWINGS_LIGHT_HORIZONTAL_WIDE_CHARACTER;
-                                    *vc = *BOX_DRAWINGS_LIGHT_VERTICAL_WIDE_CHARACTER;
-                                    *ltc = *BOX_DRAWINGS_LIGHT_ARC_DOWN_AND_RIGHT_WIDE_CHARACTER;
-                                    *rtc = *BOX_DRAWINGS_LIGHT_ARC_DOWN_AND_LEFT_WIDE_CHARACTER;
-                                    *lbc = *BOX_DRAWINGS_LIGHT_ARC_UP_AND_RIGHT_WIDE_CHARACTER;
-                                    *rbc = *BOX_DRAWINGS_LIGHT_ARC_UP_AND_LEFT_WIDE_CHARACTER;
+                                    *hc = *BOX_DRAWINGS_LIGHT_HORIZONTAL_WIDE_CHARACTER_CODE;
+                                    *vc = *BOX_DRAWINGS_LIGHT_VERTICAL_WIDE_CHARACTER_CODE;
+                                    *ltc = *BOX_DRAWINGS_LIGHT_ARC_DOWN_AND_RIGHT_WIDE_CHARACTER_CODE;
+                                    *rtc = *BOX_DRAWINGS_LIGHT_ARC_DOWN_AND_LEFT_WIDE_CHARACTER_CODE;
+                                    *lbc = *BOX_DRAWINGS_LIGHT_ARC_UP_AND_RIGHT_WIDE_CHARACTER_CODE;
+                                    *rbc = *BOX_DRAWINGS_LIGHT_ARC_UP_AND_LEFT_WIDE_CHARACTER_CODE;
                                 }
                             }
 
@@ -684,12 +683,12 @@ void encode_gnu_linux_console_rectangle_border(void* p0, void* p1,
 
                                 if (r != *NUMBER_0_INTEGER) {
 
-                                    *hc = *BOX_DRAWINGS_DOUBLE_HORIZONTAL_WIDE_CHARACTER;
-                                    *vc = *BOX_DRAWINGS_DOUBLE_VERTICAL_WIDE_CHARACTER;
-                                    *ltc = *BOX_DRAWINGS_DOUBLE_DOWN_AND_RIGHT_WIDE_CHARACTER;
-                                    *rtc = *BOX_DRAWINGS_DOUBLE_DOWN_AND_LEFT_WIDE_CHARACTER;
-                                    *lbc = *BOX_DRAWINGS_DOUBLE_UP_AND_RIGHT_WIDE_CHARACTER;
-                                    *rbc = *BOX_DRAWINGS_DOUBLE_UP_AND_LEFT_WIDE_CHARACTER;
+                                    *hc = *BOX_DRAWINGS_DOUBLE_HORIZONTAL_WIDE_CHARACTER_CODE;
+                                    *vc = *BOX_DRAWINGS_DOUBLE_VERTICAL_WIDE_CHARACTER_CODE;
+                                    *ltc = *BOX_DRAWINGS_DOUBLE_DOWN_AND_RIGHT_WIDE_CHARACTER_CODE;
+                                    *rtc = *BOX_DRAWINGS_DOUBLE_DOWN_AND_LEFT_WIDE_CHARACTER_CODE;
+                                    *lbc = *BOX_DRAWINGS_DOUBLE_UP_AND_RIGHT_WIDE_CHARACTER_CODE;
+                                    *rbc = *BOX_DRAWINGS_DOUBLE_UP_AND_LEFT_WIDE_CHARACTER_CODE;
                                 }
                             }
 
@@ -783,17 +782,17 @@ void encode_gnu_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, 
                             log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Encode gnu/linux console rectangle.");
 
                             // The horizontal character.
-                            wchar_t hc = *SPACE_WIDE_CHARACTER;
+                            wchar_t hc = *SPACE_WIDE_CHARACTER_CODE;
                             // The vertical character.
-                            wchar_t vc = *SPACE_WIDE_CHARACTER;
+                            wchar_t vc = *SPACE_WIDE_CHARACTER_CODE;
                             // The left top character.
-                            wchar_t ltc = *SPACE_WIDE_CHARACTER;
+                            wchar_t ltc = *SPACE_WIDE_CHARACTER_CODE;
                             // The right top character.
-                            wchar_t rtc = *SPACE_WIDE_CHARACTER;
+                            wchar_t rtc = *SPACE_WIDE_CHARACTER_CODE;
                             // The left bottom character.
-                            wchar_t lbc = *SPACE_WIDE_CHARACTER;
+                            wchar_t lbc = *SPACE_WIDE_CHARACTER_CODE;
                             // The right bottom character.
-                            wchar_t rbc = *SPACE_WIDE_CHARACTER;
+                            wchar_t rbc = *SPACE_WIDE_CHARACTER_CODE;
 
                             // Determine border characters.
                             encode_gnu_linux_console_rectangle_border((void*) &hc, (void*) &vc,
@@ -815,7 +814,7 @@ void encode_gnu_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, 
                             // The character index.
                             int ci = *NUMBER_0_INTEGER;
                             // The character.
-                            wchar_t* c = SPACE_WIDE_CHARACTER;
+                            wchar_t* c = SPACE_WIDE_CHARACTER_CODE;
 
                             while (*NUMBER_1_INTEGER) {
 
@@ -942,7 +941,7 @@ void encode_gnu_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, 
                                         // as it is always calculated before getting a character.
 
                                         // Reset character.
-                                        c = SPACE_WIDE_CHARACTER;
+                                        c = SPACE_WIDE_CHARACTER_CODE;
 
                                         x++;
                                     }
@@ -1478,7 +1477,7 @@ void encode_gnu_linux_console_shape(void* p0, void* p1, void* p2, void* p3, void
                 // Set temporary character array by first copying the
                 // given array and then adding the null termination character.
                 set_array_elements(tmp, (void*) NUMBER_0_INTEGER, p3, p4, (void*) WIDE_CHARACTER_ARRAY);
-                set_array_elements(tmp, p4, (void*) NULL_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+                set_array_elements(tmp, p4, (void*) NULL_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
 
                 // Initialise temporary wide character string size.
                 // CAUTION! One extra place is added for the null termination character.

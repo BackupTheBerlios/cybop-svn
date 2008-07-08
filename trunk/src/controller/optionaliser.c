@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.14 $ $Date: 2008-07-08 07:11:33 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2008-07-08 17:55:36 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -199,7 +199,7 @@ void optionalise_log_file(void* p0, void* p1, void* p2) {
     fwprintf(stderr, L"TEST 4 tc: %i\n", tc);
 
             // Add null termination character to terminated file name.
-            set_array_elements(t, (void*) &tc, (void*) NULL_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+            set_array_elements(t, (void*) &tc, (void*) NULL_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
 
     fwprintf(stderr, L"TEST 5 ts: %i\n", ts);
     fwprintf(stderr, L"TEST 5 tc: %i\n", tc);

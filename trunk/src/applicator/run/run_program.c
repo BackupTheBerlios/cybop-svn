@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.19 $ $Date: 2008-07-08 07:11:33 $ $Author: christian $
+ * @version $Revision: 1.20 $ $Date: 2008-07-08 17:55:36 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -109,7 +109,7 @@ void run_program(void* p0, void* p1, void* p2, void* p3) {
     }
 
     // Assemble arguments by adding the null termination character.
-    set_array_elements(arg, (void*) &argc, (void*) NULL_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+    set_array_elements(arg, (void*) &argc, (void*) NULL_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
     argc = argc + *PRIMITIVE_COUNT;
 
     // Execute command as process.
@@ -159,7 +159,7 @@ void run_program(void* p0, void* p1, void* p2, void* p3) {
     // and then adding the null termination character.
     set_array_elements(shell, (void*) &shellc, (void*) SHELL_SYSTEM_EXECUTABLE, (void*) SHELL_SYSTEM_EXECUTABLE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
     shellc = shellc + *SHELL_SYSTEM_EXECUTABLE_COUNT;
-    set_array_elements(shell, (void*) &shellc, (void*) NULL_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+    set_array_elements(shell, (void*) &shellc, (void*) NULL_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
     shellc = shellc + *PRIMITIVE_COUNT;
 
     // Increase arguments vector size for shell argument.
@@ -179,7 +179,7 @@ void run_program(void* p0, void* p1, void* p2, void* p3) {
     // and then adding the null termination character.
     set_array_elements(character, (void*) &characterc, (void*) SHELL_SYSTEM_EXECUTABLE_CHARACTER_ARGUMENT, (void*) SHELL_SYSTEM_EXECUTABLE_CHARACTER_ARGUMENT_COUNT, (void*) WIDE_CHARACTER_ARRAY);
     characterc = characterc + *SHELL_SYSTEM_EXECUTABLE_CHARACTER_ARGUMENT_COUNT;
-    set_array_elements(character, (void*) &characterc, (void*) NULL_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+    set_array_elements(character, (void*) &characterc, (void*) NULL_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
     characterc = characterc + *PRIMITIVE_COUNT;
 
     // Increase arguments vector size for shell character argument.
@@ -218,7 +218,7 @@ void run_program(void* p0, void* p1, void* p2, void* p3) {
     }
 
     // Assemble command by adding the null termination character.
-    set_array_elements(command, (void*) &commandc, (void*) NULL_CONTROL_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+    set_array_elements(command, (void*) &commandc, (void*) NULL_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
     commandc = commandc + *PRIMITIVE_COUNT;
 
     //

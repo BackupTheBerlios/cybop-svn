@@ -20,14 +20,14 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2008-07-08 06:31:31 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2008-07-08 17:55:36 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef DOS_CHARACTER_SET_CONSTANTS_SOURCE
 #define DOS_CHARACTER_SET_CONSTANTS_SOURCE
 
-#include "../../../globals/constants/integer/integer_constants.c"
+#include "../../../../globals/constants/integer/integer_constants.c"
 
 //
 // A "Character Set" consists of three parts:
