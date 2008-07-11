@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.15 $ $Date: 2008-05-04 00:18:12 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2008-07-11 23:14:43 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -272,9 +272,9 @@ static int* X_WINDOW_SYSTEM_THREAD_COMMANDS_COUNT_INTERNAL = NUMBER_294_INTEGER_
 static int* X_WINDOW_SYSTEM_THREAD_COMMANDS_SIZE_INTERNAL = NUMBER_295_INTEGER_ARRAY;
 
 /**
- * The server socket base numbers.
+ * The server socket base numbers (segment).
  * There is one for each service.
- * The difference between base numbers depends on the amount of index numbers.
+ * The difference between base numbers (offset) depends on the amount of index numbers.
  * It currently has a value of 25. See further below!
  */
 static int* TCP_MUX_BASE_INTERNAL = NUMBER_500_INTEGER_ARRAY;

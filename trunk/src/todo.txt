@@ -7,20 +7,20 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.56 $ $Date: 2008-07-05 13:44:25 $ $Author: christian $
+# @version $Revision: 1.57 $ $Date: 2008-07-11 23:14:42 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Try out example applications and continue debugging
-
-        * Sort abstraction constants into "globals/constants/cybol/cybol_abstraction_constants.c"
-            or "globals/constants/memory_structure/memory_abstraction_constants.c", respectively;
+        * Create new module "globals/constants/cybol/cybol_message_constants.c" as adapted copy of "cybol_model_constants.c"
+        * Create new memory abstraction constants, which are used when decoding CYBOL into memory;
             the abstraction constants of cybol and in memory at runtime need to be distinguished,
             because they are not always identical, e.g.
             a cybol "knowledge" abstraction gets converted into an in-memory "wide_character" abstraction;
             a cybol "character" abstraction gets converted into an in-memory "wide_character" abstraction;
             a cybol "wide_character" abstraction does not exist at all,
             because the cybol "character" abstraction is always expected to be utf-8 encoded
+
+        * Try out example applications and continue debugging
 
         * Find unspecific bug causing a segmentation fault in optionaliser,
             sometimes in function "optionalise_log_file", other times in "optionalise_log_level"

@@ -14,9 +14,14 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.65 $ $Date: 2008-07-08 06:32:26 $ $Author: christian $
+# @version $Revision: 1.66 $ $Date: 2008-07-11 23:14:42 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2008-07-11  Christian Heller  <christian.heller@tuxtax.de>
+        * Use Internet media types (mime types, content types), which became known as
+            Multipurpose Internet Mail Extensions (MIME) as new CYBOL abstractions
+        * Add CYBOL-specific language (media) types, e.g. "number", "character", (knowledge) "path" etc.
 
 2008-07-07  Christian Heller  <christian.heller@tuxtax.de>
         * Restructure and rename files in directory "src/globals/constants/character/" and add more constants
