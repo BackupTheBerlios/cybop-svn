@@ -1,0 +1,50 @@
+%
+% $RCSfile: model_part_relation.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:07 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsubsection{Model-Part Relation}
+\label{model_part_relation_heading}
+\index{CYBOL Model-Part Relation Example}
+\index{DocBook DTD}
+\index{The Linux Documentation Project}
+\index{TLDP}
+
+The DocBook DTD \cite{docbook} is one of many well-known specifications for
+structuring documents. The Linux Documentation Project \cite{linuxdoc} makes
+heavy use of it. DocBook is based on numerous XML tags with defined meaning.
+
+The following example shows how parts of a \emph{Text Document} can be modelled
+differently, with at most four tags, using CYBOL:
+
+\begin{scriptsize}
+    \begin{verbatim}
+<model>
+    <part name="title" channel="inline" abstraction="string" model="Quo Vadis"/>
+    <part name="author" channel="inline" abstraction="string" model="Henryk Sienkiewicz"/>
+    <part name="date" channel="inline" abstraction="date" model="1896-01-01"/>
+    <part name="contents" channel="file" abstraction="cybol" model="contents.cybol"/>
+    <part name="chapter_1" channel="file" abstraction="cybol" model="chapter_1.cybol"/>
+    <part name="chapter_2" channel="file" abstraction="cybol" model="chapter_2.cybol"/>
+    <part name="chapter_3" channel="file" abstraction="cybol" model="chapter_3.cybol"/>
+    <part name="appendix" channel="file" abstraction="cybol" model="appendix.cybol"/>
+</model>
+    \end{verbatim}
+\end{scriptsize}

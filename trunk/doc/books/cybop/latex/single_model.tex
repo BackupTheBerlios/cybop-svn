@@ -1,0 +1,61 @@
+%
+% $RCSfile: single_model.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:08 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsubsection{Single Model}
+\label{single_model_heading}
+\index{Single Model Approach}
+\index{Entity Relationship Model}
+\index{ERM}
+\index{Object Oriented Model}
+\index{OOM}
+\index{Unified Modelling Language}
+\index{UML}
+
+Today, the most common design approach for standard application software is to
+create a \emph{Single Model} of types whose semantics is often described in
+form of an \emph{Entity Relationship-} (ER) or \emph{Object Oriented} (OO)
+model,
+%(section \ref{data_model_heading}),
+the latter sometimes illustrated
+using diagrams of the \emph{Unified Modeling Language} (UML).
+
+\begin{figure}[ht]
+    \begin{center}
+        \includegraphics[scale=0.3,angle=-90]{graphic/single.pdf}
+        \caption{Single Model Approach (adapted from \cite{archetypes})}
+        \label{single_figure}
+    \end{center}
+\end{figure}
+
+As example, figure \ref{single_figure} shows a UML \emph{Class Diagram} (CsD).
+In its upper half, one can see a class \emph{Person} associated with the
+classes \emph{Name} and \emph{Address}, as modelled at design time. They may be
+part of a much larger model. The lower half of the figure shows the objects
+(instances) at runtime, filled with concrete values. There are a number of
+problems with this approach:
+
+\input{inflexible_architecture}
+\input{concept_mix}
+\input{synchronisation_problems}
+\input{complicated_processing}
+\input{steady_upgrading}
+\input{no_standardisation}

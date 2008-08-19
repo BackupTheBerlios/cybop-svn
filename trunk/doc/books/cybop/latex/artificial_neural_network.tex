@@ -1,0 +1,75 @@
+%
+% $RCSfile: artificial_neural_network.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:05 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsubsection{Artificial Neural Network}
+\label{artificial_neural_network_heading}
+
+\emph{Artificial Neural Networks} (ANN) try to imitate the functioning of the
+human brain. They consist of \emph{Neurons}
+
+ANN consist of many interconnected nodes called \emph{Neuron}.
+It is the strengths of their connections that characterise the network behaviour.
+The connection strength can be set by a so-called \emph{Weight} parameter. The
+process of setting weigths is called \emph{Learning}; the process of using a learnt
+network to carry out calculations is called \emph{Recall} \cite{heller1997}.
+Neural network programs come pretty close in simulating the functioning of the
+human brain. However, to simulate a brain and its parallel processing of
+instructions realistically, billions of processors would be needed, since single
+processor systems can only work sequentially.
+
+\paragraph{Human Brains} store knowledge by strengthening or weakening the
+\emph{Synapses) (connections) between their \emph{Neurons} -- a technique that
+\emph{Artificial Neural Networks} try to imitate with special \emph{Weight}
+variables.
+
+Human \emph{Knowledge} and \emph{Understanding} is based on \emph{Experience}.
+During its lifetime, the human brain gains experience (learns) by realising that
+the stimulation by signals coming from the environment leads to certain results.
+After some time of learning, the brain is able to recognise known signals as
+well as to predict expected results.
+
+Neurons in Brain:
+- Abstraction: nur zwei Zustaende: aktiv oder inaktiv
+- nicht alle Nervenzellen schalten nur zwischen diesen beiden Zustaenden um;
+Informationen ueber eingetroffene Reize koennen auch enthalten sein in:
+1 Mustern von Aktionspotenzialen
+2 Anzahlen von Aktionspotenzialen
+- Codierungstypen:
+1 Lokale Codierung
+2 Populationscodierung
+[G\&G, p. 82-83]
+
+Some types of neural networks \cite{wikipedia} are:
+
+\begin{itemize}
+    \item[-] \emph{Single Layer Perceptron} (SLP): single layer of output nodes;
+        inputs are fed directly to the outputs via a series of weights
+    \item[-] \emph{Multi Layer perceptron} (MLP): multiple layers of computational
+        units, usually interconnected in a feedforward way; each neuron in one
+        layer has directed connections to the neurons of the subsequent layer
+    \item[-] \emph{Recurrent Network} (RN): bidirectional data flow; propagates
+        data from later processing stages to earlier stages
+    \item[-] \emph{Hopfield Network}: recurrent neural network in which all
+        connections are symmetric
+    \item[-] \emph{Self Organising Map} (SOM): referred to as \emph{Kohonen map};
+        unsupervised learning technique
+\end{itemize}

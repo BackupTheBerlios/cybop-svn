@@ -1,0 +1,102 @@
+%
+% $RCSfile: fragile_base_class.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:06 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsubsection{Fragile Base Class}
+\label{fragile_base_class_heading}
+\index{Fragile Base Class (Problem)}
+\index{Implementation Inheritance}
+\index{Subclass}
+\index{Superclass}
+\index{Class Hierarchy}
+\index{Cascade of Change}
+\index{Reusability}
+\index{Flexibility}
+\index{Cyclic Method Dependencies}
+\index{Self-calling Assumptions of a Class Method}
+\index{Base Class Access}
+\index{Modifier Invariant Function}
+
+Despite the possible code reduction through class inheritance, there are some
+negative effects that hinder just this code reduction and reuse. John K.
+Ousterhout writes in his article \cite{ousterhout1998}:
+
+\begin{quote}
+    Implementation inheritance, where one class borrows code that was written
+    for another class, is a bad idea that makes software harder to manage and
+    reuse. It binds the implementations of classes together so that neither
+    class can be understood without the other: a subclass cannot be understood
+    without knowing how the inherited methods are implemented in its superclass,
+    and a superclass cannot be understood without knowing how its methods are
+    inherited in subclasses. In a complex class hierarchy, no individual class
+    can be understood without understanding all the other classes in the
+    hierarchy. Even worse, a class cannot be separated from its hierarchy for
+    reuse. Multiple inheritance makes these problems even worse. Implementation
+    inheritance causes the same intertwining and brittleness that have been
+    observed when goto statements are overused. As a result, object-oriented
+    systems often suffer from complexity and lack of reuse.
+\end{quote}
+
+Unwanted dependencies caused simply by the usage of inheritance are called
+\emph{Fragile Base Class Problem} \cite[section \emph{Layers}; p. 48]{buschmann}.
+The source code changes resulting from base class manipulation are also called
+\emph{Cascade of Change} \cite[Vorwort]{gruhn}. They are just the opposite of
+what inheritance was actually intended to be for: \emph{Reusability}. Leonid
+Mikhajlov and Emil Sekerinski \cite{mikhajlov} write:
+
+\begin{quote}
+    This problem occurs in open object-oriented systems employing code
+    inheritance as an implementation reuse mechanism. System developers unaware
+    of extensions to the system developed by its users may produce a seemingly
+    acceptable revision of a base class which may damage its extensions.
+    The fragile base class problem becomes apparent during maintenance of open
+    object-oriented systems, but requires consideration during design.
+\end{quote}
+
+They identify the following \emph{Restrictions} \cite{mikhajlov} disciplining the
+code inheritance mechanism, thus avoiding the \emph{Fragile Base Class Problem},
+but on the cost of general \emph{Flexibility}:
+
+\begin{itemize}
+    \item[-] \emph{No cycles:} A base class revision and a modifier should not
+        jointly introduce new cyclic method dependencies.
+    \item[-] \emph{No revision self-calling assumptions:} Revision class methods
+        should not make any additional assumptions about the behaviour of the
+        other methods of itself. Only the behaviour described in the base class
+        may be taken into consideration.
+    \item[-] \emph{No base class down-calling assumptions:} Methods of a modifier
+        should disregard the fact that base class self-calls can get redirected
+        to the modifier itself. In this case bodies of the corresponding methods
+        in the base class should be considered instead, as if there were no
+        dynamic binding.
+    \item[-] \emph{No direct access to base class state:} An extension class
+        may not access the state of its base class directly, but only through
+        calling base class methods.
+    \item[-] \emph{No modifier invariant function:} A modifier should not bind
+        values of its instance variables with values of the intended base class
+        instance variables to generate an invariant.
+\end{itemize}
+
+In order to remain highly flexible and to avoid the fragile base class problem,
+the language described in chapter \ref{cybernetics_oriented_language_heading}
+does not use inheritance, although it could be extended to do so. In this case,
+of course, its interpreter (chapter \ref{cybernetics_oriented_interpreter_heading})
+would have to be adapted as well.

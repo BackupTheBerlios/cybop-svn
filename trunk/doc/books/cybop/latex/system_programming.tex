@@ -1,0 +1,84 @@
+%
+% $RCSfile: system_programming.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:09 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{System Programming}
+\label{system_programming_heading}
+\index{System Programming}
+\index{System Programming Language}
+\index{PL/1}
+\index{Pascal}
+\index{C}
+\index{C++}
+\index{Java}
+\index{LISP}
+\index{Fortran}
+\index{Algol}
+\index{Assembly Language}
+\index{Strong Typing}
+\index{Static Typing}
+\index{Typing}
+
+After John K. Ousterhout \cite{ousterhout1998}, \emph{System Programming Languages}
+such as \emph{PL/1}, \emph{Pascal}, \emph{C} or \emph{C++} or \emph{Java}
+(which evolved from higher level languages such as \emph{LISP}, \emph{Fortran} or
+\emph{Algol} -- see section \ref{language_history_heading}) had been introduced
+as an alternative to \emph{Assembly Languages} and both would differ in two
+ways. While in an assembly language, virtually every aspect of a machine were
+reflected in the program, each statement representing a single machine
+instruction so that programmers had to deal with low-level details such as
+register allocation and procedure calling sequences, a system programming
+language were:
+
+\begin{enumerate}
+    \item \emph{higher level} because its statements did not correspond exactly
+        to machine instructions; a compiler would translate each statement in
+        the source program into a sequence of binary instructions and handle
+        register allocation;
+    \item \emph{strongly typed} because programmers needed to declare how each
+        piece of information would be used; the language would prevent the
+        information from being used in any other way.
+\end{enumerate}
+
+Ousterhout uses the term \emph{Typing} to: \textit{refer to the degree to which
+the meaning of information is specified in advance of its use}. After him, the
+strong typing (also called \emph{Static Typing}) of today's system programming
+languages had several advantages, such as:
+
+\begin{itemize}
+    \item[-] Better manageability of large programs by differentiating between
+        things that must be treated differently
+    \item[-] Possible error detection by using type information in compilers
+    \item[-] Improved performance by allowing compilers to generate specialized code
+\end{itemize}
+
+But there were also a number of disadvantages when using system programming
+languages:
+
+\begin{itemize}
+    \item[-] Need to declare each variable with a particular type and to use it
+        in ways that are appropriate for the type
+    \item[-] Difficulty to create new code on the fly due to total segregation
+        of data and code
+    \item[-] Impossibility to use an object of one type where an object of a
+        different type is expected, because variables are collected in objects
+        with well-defined substructure and procedures to manipulate them
+\end{itemize}

@@ -1,0 +1,81 @@
+%
+% $RCSfile: processing.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:08 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Processing}
+\label{processing_heading}
+\index{Processing of Knowledge}
+\index{Signal}
+\index{Event}
+\index{Signal Memory}
+\index{Event Queue}
+\index{Signal Loop}
+\index{Waiting Loop}
+\index{Priority of a Signal}
+\index{Prioritising}
+\index{Operating System}
+\index{OS}
+\index{Intra System Communication}
+\index{Inter System Communication}
+\index{Message}
+
+While knowledge as such is static at a given time instant, its \emph{Processing}
+and manipulation over time are dynamic. The processing is triggered by some
+\emph{Signal} (also called \emph{Event}), which is a state change known to the
+system. Such \textit{signs with defined meaning}, as the Duden Encyclopedia
+\cite{duden} calls them, can be most different in their appearance and
+communication channel used.
+
+Signals are commonly stored in a \emph{Signal Memory} (also called
+\emph{Event Queue}), as mentioned in the previous section. An endlessly running
+\emph{Signal Loop} (also called \emph{Waiting Loop}) as illustrated in figure
+\ref{system_figure} is constantly checking the signal memory for new signals.
+Once a signal is detected, it gets removed from the signal memory and handled
+by the system. The signal with highest \emph{Priority} is processed first. The
+later chapter \ref{cybernetics_oriented_interpreter_heading} will explain
+further details and deliver a more functional illustration (figure
+\ref{dependencies_figure}).
+
+Section \ref{brain_regions_heading} mentioned the \emph{Hypothalamus} and
+\emph{Limbic System} as parts of the human brain producing emotions. Section
+\ref{information_processing_model_heading} wrote that the processing of a signal
+may be greatly influenced by the meaningfulness or \emph{Emotional Content} of
+an item. Well, software systems do not work with emotions, but signals can be
+assigned a \emph{Priority}, which is somewhat comparable. \emph{Prioritising}
+as technique stems from \emph{Operating System} (OS) research and can be well
+applied in the described knowledge-processing system: Signals can be filtered
+in a way that unimportant signals get discarded; urgent signals get processed
+right away; less important but meaningful signals get queued for later handling.
+
+All \emph{intra-system} and \emph{inter-system} communication is based on the
+exchange of knowledge via signals. A signal can transport simple or more complex
+\emph{Messages}, mostly in encoded form. The communication details, including
+encoding and decoding procedures for knowledge model translation, and the logic
+after which an input state gets transferred into an output state are the topic
+of chapter \ref{state_and_logic_heading}.
+
+Besides the \emph{declarative} \emph{Long Term Memory} (LTM), section
+\ref{short_and_long_term_memory_heading} mentioned the \emph{procedural}
+(non-declarative) LTM, enabling humans to carry out a \emph{Background Task},
+without having to consciously control it. A similar principle is applied for
+input/ output (i/o) handling, in the described knowledge processing system.
+Independent \emph{Threads} running their own loops control a special i/o
+mechanism (like \emph{UNIX socket etc.}), each (figure \ref{system_figure}).

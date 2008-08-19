@@ -1,0 +1,48 @@
+%
+% $RCSfile: used_libraries.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:09 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Used Libraries}
+\label{used_libraries_heading}
+\index{CYBOI using External Libraries}
+
+Before interpreting a stream of CYBOL data, a parser has to bring structure
+into it. Since CYBOL bases on the XML standard, one option was to use one of
+the many existing XML parser libraries \cite{dom, sax}, for reading and writing
+CYBOL sources. The current CYBOI version uses \emph{libxml2}, the
+\emph{GNU Network Object Model Environment} (GNOME) XML library, written in C.
+
+Existing libraries, however, bring with a lot of functionality, not all of
+which is actually used in CYBOI. A future version will therefore contain its
+own parsing procedures, tailored to CYBOI's needs. Another argument therefor
+are special requirements (differing XML attribute \emph{begin} and \emph{end}
+characters) when serialising knowledge models into CYBOL files.
+
+Further libraries are needed. The \emph{X Window System} (X) \emph{X Libraries}
+(Xlibs), for example, contain routines to use \emph{Graphical User Interfaces}
+(GUI) under UNIX-like \emph{Operating Systems} (OS); for a Windows OS, it would
+be the \emph{Graphics Device Interface} (GDI). The \emph{UNIX Socket's} pendant
+in the Windows world is the \emph{Windows Socket} (WINSOCK), both serving as
+communication mechanism. A \emph{Textual User Interface} (TUI) for the UNIX
+console is programmed differently than one for a \emph{Disk Operating System}
+(DOS) shell. And so on. Because of the steady changes in CYBOI's source code,
+and not to let this work's volume exceed the worst expectations, these shall
+not be elaborated on here.

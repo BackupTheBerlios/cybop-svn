@@ -1,0 +1,89 @@
+%
+% $RCSfile: building_blocks.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:05 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Building Blocks}
+\label{building_blocks_heading}
+\index{Term}
+\index{Concept}
+\index{Semantic Link}
+\index{Code of a Concept}
+
+As for the word \emph{Ontology}, there are differing definitions for the
+meanings of the words used in the field of \emph{Terminology}. The ones given
+in \cite{metaterminology} differ only slightly from those of Jeremy Rogers, who
+has assembled a very useful website \cite{rogers}. The following explanations
+are based on it. They are necessary background knowledge for the investigations
+on \emph{Human Thinking} and the relations within the new knowledge schema
+introduced in chapter \ref{knowledge_schema_heading}.
+
+An elementary building block is the word \emph{Term}, which is a word or phrase
+(many words) labelling some idea. Another word for idea is \emph{Concept}.
+Commonly distinguished concepts are:
+
+\begin{itemize}
+    \item[-] \emph{Primitive Concept} (Atomic): cannot be
+        completely expressed in terms of other concepts
+    \item[-] \emph{Composed Concept:} can be expressed in terms of other concepts
+    \item[-] \emph{Pre-coordinated Concept} (Composed): has position in concept
+        system that gets determined before the concept is supplied to end users
+    \item[-] \emph{Post-coordinated Concept} (Composed): did not exist in the
+        concept system as delivered to the user
+\end{itemize}
+
+Special kinds of terms are:
+
+\begin{itemize}
+    \item[-] \emph{Synonym:} two different terms that mean the same thing
+    \item[-] \emph{Homonym:} two terms that sound the same but are spelled differently
+    \item[-] \emph{Eponym:} a term that includes a proper name (like \emph{Murphy's Law})
+\end{itemize}
+
+Concepts can be related to each other by a \emph{Link}. Flavours of
+\emph{Semantic Links} are:
+
+\begin{itemize}
+    \item[-] \emph{IS-KIND-OF:} diabetes \emph{is-a} disease
+    \item[-] \emph{IS-PART-OF:} upper limb \emph{has-a} hand
+    \item[-] \emph{CAUSES:} smoking \emph{causes} cancer
+\end{itemize}
+
+A \emph{Code} is an abstract identifier for either a link, or a concept or a
+term. Rogers \cite{rogers} writes on this:
+
+\begin{quote}
+    If the concepts and the terms in a system are represented separately, then
+    each concept and each term are \emph{unique}. Therefore, each can have a
+    unique code assigned to it. By this mechanism, a single concept may be
+    associated with more than one term (e.g. synonyms or foreign language
+    translations) and a given term might be associated with two quite different
+    concepts (homonyms e.g. \emph{cool} meaning \emph{cold} and \emph{cool}
+    meaning \emph{groovy}).
+\end{quote}
+
+The language introduced in chapter \ref{cybernetics_oriented_language_heading}
+has primitive concepts (state- and logic primitives, as mentioned in the
+previous section) and it can express composed concepts. Knowledge templates
+defined in that language represent pre-coordinated concepts which become
+post-coordinated knowledge models when instantiated and altered at runtime.
+Only \emph{IS-PART-OF} relations (links) are of importance in the language.
+Knowledge templates written in it can hold many different codes, may they be
+part of various terminologies or translations into foreign natural languages.

@@ -1,0 +1,143 @@
+%
+% $RCSfile: security.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:08 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Security}
+\label{security_heading}
+\index{Security in CYBOI}
+\index{CYBOI as Secure Architecture}
+\index{CYBOI as Capability Based System}
+\index{CYBOI avoiding Access Control Lists}
+\index{Capability Based System}
+\index{Access Control List}
+\index{ACL}
+\index{Orthogonally Persistent Operating System}
+\index{Flex Machine}
+\index{Ten15}
+
+Berin Loritsch of the former Apache Avalon Project \cite{avalon} writes that
+system \emph{Security} has three distinct concerns, of which \emph{Encryption}
+is only a part:
+
+\begin{enumerate}
+    \item \emph{Authentication:} authoritative validation of the identity of a
+        party, such as a software component
+    \item \emph{Authorisation:} deciding what access a component has to system
+        resources
+    \item \emph{Architecture:} usage of a proper, secure architecture
+\end{enumerate}
+
+Since this chapter is about CYBOI's architecture, what interests the most here
+is point number three. But how to ensure a secure architecture? The avoidance
+of global data access and bidirectional dependencies is clearly a requirement
+(section \ref{recommendation_heading}), which CYBOI accomplishes through
+disregard of the corresponding patterns (section \ref{pattern_merger_heading}).
+Any kind of application knowledge resides in its \emph{Knowledge Memory}, whose
+tree structure may be navigated along well-defined, unidirectional paths.
+
+One may wonder how address spaces of the different applications are protected,
+so that one application may not access another one's models? Traditionally, the
+process concept assures that separation, but with CYBOI being the only process,
+and all applications being part of it, another solution needs to be applied.
+The exact mechanism to solve this in CYBOI yet has to be determined. However,
+since all signals have to pass the same, central signal loop, they all can be
+checked for permissions, before being processed, or filtered out, if necessary.
+It would be imaginable and not difficult, to attach an application name as a
+signal's origin, or a unique passphrase as additional meta information to a
+signal memory's signals, that own an \emph{Identifier} (ID) anyway. The signal
+loop or signal handler could then decide whether or not to send a signal to a
+specific application.
+
+Attached meta information of that kind would be comparable to a concept called
+\emph{Capability}, which is known from \emph{Secure Computing}, a subfield of
+\emph{Security Engineering} \cite{wikipedia}. It is the alternative to
+\emph{Access Control Lists} (ACL), another means of enforcing firstly:
+\emph{Mandatory Access Control}, and secondly: \emph{Privilege Separation}
+(where an entity has only the privileges that are needed for its function).
+Wikipedia \cite{wikipedia} writes on this:
+
+\begin{quote}
+    \emph{Capabilities} (also known as \emph{Key}) achieve their objective of
+    improving system security by being used in place of \emph{Plain References}.
+    A plain reference (for example, a path name) uniquely identifies an object,
+    but does not specify which \emph{Access Rights} are appropriate for that
+    object and the user program which holds that reference. Consequently, any
+    attempt to access the referenced object must be validated by the operating
+    system, typically via the use of an \emph{Access Control List} (ACL). In
+    contrast, in a pure capability-based system, the mere fact that a user
+    program possesses that capability entitles it to use the referenced object
+    in accordance with the rights that are specified by that capability. In
+    theory, a pure capability-based system removes the need for any ACL or
+    similar mechanism, by giving all entities all and only the capabilities
+    they will actually need.
+\end{quote}
+
+With almost all important \emph{Operating Systems} (OS) still using ACL, for
+various historical reasons, CYBOI could be seen as chance to implement a pure
+capability-based system. Since it concentrates all knowledge in one container
+realised as tree structure, and processes all signals in one central loop,
+security by design is given, and security checks of different shade can be
+easily applied to all knowledge models and all signals. These checks of dynamic
+runtime models are a necessary supplement to the checks of static CYBOL template
+files. Traditional OS do the latter via \emph{File Descriptors} (also called
+\emph{File Handles}), which are facilities very similar, but not equal to
+capabilities.
+
+In the opinion of Wikipedia \cite{wikipedia}, one main reason why the benefits
+of a pure capability-based system could not be realised in a traditional OS
+environment, were the fact that entities which might hold capabilities (such as
+processes and files) cannot be made persistent in such a way that maintains the
+integrity of the secure information that a capability represents. The OS could
+not trust a user program to read back a capability and not tamper with the
+object reference or the access rights. Consequently, when a program wished to
+regain access to an object that is referenced on disk, the OS had to have some
+way of validating that access request, and an ACL or similar mechanism were
+mandated.
+
+\emph{Orthogonally Persistent} OS like the \emph{Flex Machine} and its successor
+\emph{Ten15}, as \cite{wikipedia} writes, were a novel approach to solving this
+problem. They maintained the integrity and security of the capabilities contained
+within all storage, both volatile and nonvolatile (dynamic and static), at all
+times. Further, such OS were responsible for storage allocation, deallocation
+and garbage collection, which immediately precluded a whole class of errors
+arising from the misuse (deliberate or accidental) of pointers. Two other
+features were:
+
+\begin{itemize}
+    \item[-] \emph{Tagged, Write-Once Filestore}, which allows arbitrary code
+        and data structures to be written and retrieved transparently, without
+        recourse to external encodings; data could thus be passed safely from
+        program to program
+    \item[-] \emph{Remote Capabilities}, which allow data and procedures on
+        other machines to be accessed over a network connection, again without
+        the application program being involved in external encodings of data,
+        parameters or result values
+\end{itemize}
+
+This reads like a description of CYBOI, which is able to parse/ serialise all
+knowledge from/ to CYBOL sources (e.g. files), and to handle low-level storage-
+and communication mechanisms. More in section \ref{model_transition_heading}.
+If, in this manner, user programs (CYBOL applications) were relieved of these
+responsibilities, there would be no need to trust them to reproduce only legal
+capabilities, nor to validate requests for access using an ACL-like mechanism.
+However, these were just some thoughts on how to bring yet more security into
+CYBOI's architecture. The details will have to be figured out in future works
+(chapter \ref{summary_and_outlook_heading}).

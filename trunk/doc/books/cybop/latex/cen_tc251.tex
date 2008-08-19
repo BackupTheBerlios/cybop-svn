@@ -1,0 +1,109 @@
+%
+% $RCSfile: cen_tc251.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:05 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsubsection{CEN/TC251}
+\label{cen_tc251_heading}
+\index{CEN/TC251}
+\index{European Committee for Standardization}
+\index{CEN}
+\index{Standards Development Organisation}
+\index{SDO}
+\index{Electronic Health Record}
+\index{EHR}
+\index{Technical Committee 251}
+\index{TC251}
+\index{ENV 12265}
+\index{ENV 13606}
+\index{General Purpose Information Component}
+\index{GPIC}
+\index{EHR Communications Task Force}
+\index{EHRcom Task Force}
+\index{OpenEHR Archetype}
+\index{HL7 CDA}
+
+The \emph{European Committee for Standardization} (CEN) as association of
+national \emph{Standards Development Organisations} (SDO) is working on
+technical specifications for an \emph{Electronic Health Record} (EHR). The
+\emph{Technical Committee} (TC) dealing with that task and medical informatics
+in general carries the name \emph{TC251} \cite{centc251}.
+
+While its pre-standard \emph{ENV 12265}, defined in 1995, focused on the EHR
+\emph{Architecture}, the successor pre-standard \emph{ENV 13606}, published in
+1999, placed more emphasis on \emph{Communication}. Among other things, it
+defined a set of reusable components (compositions) called
+\emph{General Purpose Information Component} (GPIC) \cite{marley}.
+The \emph{ENV 13606} pre-standard consisted of four parts:
+
+\begin{enumerate}
+    \item Extended Architecture
+    \item Domain Termlist
+    \item Distribution Rules
+    \item Messages for the Exchange of Information
+\end{enumerate}
+
+A third effort, the \emph{EHR Communications} (EHRcom) task force, set up in
+December 2001, is to refine \emph{ENV 13606} and to propose a revision that
+could be adopted by CEN as formal standard (EN), during 2004. Its current
+activities, as described in \cite{ehrcom}, happen in five areas:
+
+\begin{enumerate}
+    \item \emph{Reference Model:} generic information model for EHR
+        communication
+    \item \emph{Archetype Interchange Specification:} generic language for EHR
+        representation and communication
+    \item \emph{Reference Archetypes and Term Lists:} range of templates
+        reflecting clinical requirements and settings
+    \item \emph{Security Features:} concepts to enable interaction with
+        security components
+    \item \emph{Exchange Models:} set of models that can form the basis of
+        message-based or service-based communication
+\end{enumerate}
+
+\emph{EHRcom} places special focus on the \emph{Harmonisation} of different
+standardisation efforts \cite{kalra2002} like CEN's \emph{GPIC}s, openEHR's
+\emph{Archetypes} or HL7's \emph{CDA}, described in a later section. But this
+is not an easy task. Bert Verhees, for example, reports \cite{openehrtechnical}
+about name clashes between the reserved words of many programming languages and
+HL7 data types (Set, Array) which made it impossible to use the standard as is
+and necessitated a renaming of those types (into something like \emph{HL7Set}
+and \emph{HL7Array}). In his opinion, a standard should be platform independent
+(operating system- and programming language wise). Thomas Beale of openEHR
+writes to this topic \cite{openehrtechnical}:
+
+\begin{quote}
+    \ldots\ almost all the issues \ldots\ are actually due to the HL7 data
+    types, which CEN unfortunately decided to adopt/ adapt a long time ago. Tom
+    Marley and others have struggled to find a version of them which a) remains
+    faithful to the idea of HL7 but b) fixes some problems, like strange
+    inheritance. Personally, \ldots\ I don't find the HL7 data types a good
+    design at all \ldots\ and have made available the reasons in various
+    standards discussions, along with many others who have pointed out the same
+    problems. The result of this recently has been \ldots\ a new ISO work item
+    called \emph{Data Types for Clinical Informatics} \ldots\ which will
+    recognise three layers:
+
+    \begin{enumerate}
+        \item Inbuilt types (like in ISO 11404)
+        \item General purpose clinical types (specified from requirements)
+        \item Bindings to particular model systems (such as HL7)
+    \end{enumerate}
+\end{quote}

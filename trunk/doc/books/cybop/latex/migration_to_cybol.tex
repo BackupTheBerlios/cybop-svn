@@ -1,0 +1,100 @@
+%
+% $RCSfile: migration_to_cybol.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:07 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\section{Migration to CYBOL}
+\label{migration_to_cybol_heading}
+
+Developers who have developed an interest in the \emph{CYBOP} concepts may
+eventually want to switch their systems to the \emph{CYBOL} programming language.
+This section tries to provide these developers with the necessary steps
+(something like a \emph{Hands-on Guide}) that allow a (more or less) careful
+\emph{Migration}. \emph{Careful} means that after each step, one should have a
+running system again, before taking the next step.
+
+The guidelines are especially suited for developers with experience in object
+oriented techniques, ideally programming in Java. Some knowledge in component
+oriented programming (such as lifecycle methods) will be helpful in understanding
+and implementing the following recommendations.
+
+\paragraph{Caution!}
+This migration guide is ad hoc and has not been tested. Use at your own risk!
+
+\begin{itemize}
+    \item[-] Use solely one single \emph{Exception} class. Eliminate any other
+        special exception classes.
+    \item[-] Make sure that instances are only created by special \emph{create}
+        methods, one for every attribute. Eliminate all wild calls of the \emph{new}
+        operator that are spread over the code.
+    \item[-] Create four methods for each attribute (here called \emph{sample}):
+        \emph{createSample}, \emph{destroySample}, \emph{setSample} and
+        \emph{getSample}.
+    \item[-] Collect all \emph{create} methods that are called during system
+        startup and put them into a method \emph{initialise} that is called at
+        startup.
+    \item[-] Introduce a method \emph{finalise} as counterpart to \emph{initialise}
+        and call the \emph{destroy} method of every attribute there. This
+        \emph{finalise} method should be called at system shutdown.
+    \item[-] Insert a new \emph{categorise} method which is called before
+        \emph{initialise}, at system startup. Move all configuration code there.
+    \item[-] Insert a method \emph{decategorise} as counterpart to \emph{categorise}.
+        It should be called at system shutdown, after the \emph{finalise} method.
+        Save (write) any configuration settings there.
+    \item[-] Introduce your own top-most framework class \emph{Item} that all
+        other classes inherit from. This is somewhat difficult. Several classes
+        in a Java application need to inherit from standard JDK classes. For now,
+        only let those classes inherit from \emph{Item} which currently have
+        no (that is the \emph{java.lang.Object}) or an own class as parent.
+    \item[-] Add the lifecycle methods \emph{categorise}, \emph{decategorise},
+        \emph{initialise} and \emph{finalise} to the \emph{Item} class.
+        All subclasses which use any of these methods should also call the
+        superclass' implementation of the used method.
+    \item[-] Build a general \emph{create} method capable of creating instances
+        from a class name that was handed over as string parameter. This method
+        should determine a class with \texttt{Class c = Class.forName(classnameAsString)}.
+        The instance will then be created using \texttt{c.newInstance()}.
+    \item[-] Try to fix certain classes (ideally only one called \emph{Controller})
+        whose task it will be to catch events. Let this class implement all event
+        interfaces used by the system and also implement the necessary event
+        handling methods, enforced by the interfaces.
+    \item[-] Add a method \emph{handle} to the \emph{Controller} class which is
+        called by all other handling methods. It receives an event as parameter
+        and contains simple \emph{if-then} comparisons to filter out the single
+        events and call a method which finally processes the event.
+    \item[-] Move as much method (\emph{not} lifecycle method) functionality as
+        possible into the \emph{Controller} class.
+    \item[-] Structure all other (domain) model classes \emph{hierarchically}.
+        Make sure only \emph{unidirectional} dependencies exist among them.
+    \item[-] Let the \emph{Item} class encapsulate two additional attributes of
+        type \emph{java.lang.Object} and \emph{javax.swing.MutableTreeNode}.
+        Add the corresponding \emph{set} and \emph{get} methods.
+    \item[-] Implement or use an \emph{XML Handler} for reading and writing
+        CYBOL/ XML files.
+    \item[-] Move hierarchical domain model classes into \emph{CYBOL} code.
+        The java code is responsible for reading, altering and writing
+        \emph{CYBOL} files.
+    \item[-] Now structure methods hierarchically as well and move them into
+        \emph{CYBOL} code.
+    \item[-] It is now probably easier to use the \emph{CYBOI} interpreter
+        (written in C) than to further maintain your own interpreter (written
+        in Java).
+    \item[-] That's it. Corrections, hints and improvements are very welcome!
+\end{itemize}

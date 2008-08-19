@@ -1,0 +1,76 @@
+%
+% $RCSfile: call_for_developers.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:05 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\section{Call for Developers}
+\label{call_for_developers_heading}
+
+\emph{CYBOP}'s concepts want to ease application programming. From now on,
+developers can focus on pure domain knowledge, which they encode in form of
+CYBOL (XML) models. For this to become possible, a lot of standard functionality
+had (and has) to be integrated into the CYBOI interpreter. It does contain (or
+will so in future) firstly, all kinds of communication mechanisms and secondly,
+more and more hardware control functionality.
+
+For our CYBOP \emph{Free/ Open Source Software} (FOSS) project, we therefore
+steadily look for developers with interest in one of the following topics:
+
+\begin{itemize}
+    \item[-] \emph{Graphical User Interface} (GUI) Design: Experience with
+        toolkits like \emph{Qt}, \emph{GTK}, \emph{wxWindows}, \emph{Tcl/Tk} or
+        the like may be helpful, but does CYBOI itself not use these. It
+        integrates low-level graphics routines which currently base on the
+        \emph{Xlibs} libraries for UNIX' \emph{X Window System} (XFree86). The
+        corresponding functionality is still missing for other platforms like
+        MS \emph{Windows} or Apple Macintosh \emph{OS X}.
+    \item[-] \emph{Textual User Interface} (TUI) Design: Experience with
+        libraries such as \emph{ncurses} or \emph{slang} may be helpful. For
+        CYBOI, however, low-level \emph{Console}/ \emph{Terminal} programming
+        is necessary.
+    \item[-] Web User Interface (WUI) Design: In CYBOI, pure CYBOL models get
+        translated into pure HTML models. There is no mix-up of HTML with other
+        code, as known from \emph{JSP} or \emph{PHP}. Although knowledge of the
+        latter and related technologies like \emph{JavaScript} may be helpful,
+        these are not used in CYBOI.
+    \item[-] Socket Communication: Sockets are essential for system
+        communication. They differ slightly between platforms and not all kinds
+        have been implemented in CYBOI yet. Some experience with UNIX file-,
+        Win- and TCP sockets is needed.
+    \item[-] Database Communication: Traditional mechanisms like \emph{ODBC} or
+        \emph{JDBC} ease and standardise the communication with database
+        systems. It still needs to be figured out whether to use these or
+        better to write our own low-level SQL statements in CYBOI.
+    \item[-] Data Conversion: Different kinds of communication require
+        different data transfer models. The same counts for persistently
+        storing data in various file formats. Therefore, a huge number of
+        parsers/ serialisers and CYBOL encoders/ decoders will be needed.
+        Experience with import/ export filters and file format conversion is
+        very welcome.
+    \item[-] OS Concepts: CYBOI is the active core system managing passive
+        knowledge models and running directly on an \emph{Operating System}
+        (OS) or \emph{Hardware}. It already provides signalling and
+        prioritising itself and further OS concepts are planned to be
+        integrated, wherever useful. Help in this would be appreciated.
+\end{itemize}
+
+If you think you might like to work on one of these topics, or just want to try
+out and learn by doing, or have further questions, just check out our website
+\emph{http://www.cybop.net} or contact one of the mailing lists mentioned there!

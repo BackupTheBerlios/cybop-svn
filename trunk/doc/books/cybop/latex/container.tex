@@ -1,0 +1,69 @@
+%
+% $RCSfile: container.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:06 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsubsection{Container}
+\label{container_heading}
+\index{Container}
+\index{Primitive Type}
+\index{Java Container Framework}
+\index{Collection}
+\index{Map}
+\index{Tree}
+\index{Standard Template Library}
+\index{STL}
+\index{Sequence}
+\index{Associative Container}
+
+An object that got created through instantiating a class represents an
+allocated area in a computer's memory which needs to be referenced in order to
+be able to work with it, and to finally destroy it. The size of that area may
+change \emph{dynamically}, depending on how the properties of the object are
+manipulated. Primitive types like \emph{integer} or \emph{double} also reserve
+memory space, only that the size of that space is \emph{not} dynamic; it is
+pre-defined by the programming language, for each type. All
+\emph{Structured- and Procedural Programming} (SPP) languages and some
+\emph{Object Oriented Programming} (OOP) languages, like Java, offer standard
+primitive types.
+
+\begin{figure}[ht]
+    \begin{center}
+        \includegraphics[scale=0.3,angle=-90]{graphic/container.pdf}
+        \caption{Java Container Framework Systematics}
+        \label{container_figure}
+    \end{center}
+\end{figure}
+
+One way to store references to more than one dynamic element in memory, or
+primitive data, is a \emph{Container}. Modern programming languages offer many
+different kinds of containers. Figure \ref{container_figure} shows a
+systematics of the Java container framework \cite{java}, as example, which gets
+briefly introduced in the following paragraphs. Its main categories of
+systematisation are \emph{Collection}, \emph{Map} and \emph{Tree}.
+
+A similar library of container classes, algorithms and iterators exists for the
+C++ programming language. It is called \emph{Standard Template Library} (STL)
+\cite{stl} and it talks of \emph{Sequence} and \emph{Associative Container},
+where Java says \emph{Collection} and \emph{Map}.
+
+\input{collection}
+\input{map}
+\input{tree}

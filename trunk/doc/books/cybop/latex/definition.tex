@@ -1,0 +1,82 @@
+%
+% $RCSfile: definition.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:06 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\section{Definition}
+\label{definition_heading}
+\index{CYBOL Definition}
+\index{Language Analysis}
+\index{Linguistics}
+\index{Context of a Language}
+\index{Semantics of a Language}
+\index{Pragmatics of a Language}
+\index{Lexico-Grammar of a Language}
+\index{Phonology of a Language}
+\index{Graphology of a Language}
+\index{Orthography of a Language}
+\index{Vocabulary of a Language}
+\index{Terms of a Language}
+\index{Whole Part Hierarchy}
+\index{Meta Information Hierarchy}
+\index{Extensible Markup Language}
+\index{XML}
+
+When defining a new language, several linguistic aspects have to be considered.
+One way to systematise \emph{Language Analysis} as part of \emph{Linguistics}
+is to stratify it \cite{odonnell} into the four fields:
+
+\begin{itemize}
+    \item[-] \emph{Context:} topic described by the language, relationships
+        between discussants, channel of communication
+    \item[-] \emph{Semantics:} meaning of language symbols and character strings;
+        includes what is usually called \emph{Pragmatics} (\emph{Use} of language)
+    \item[-] \emph{Lexico-Grammar:} syntactic organisation of words into utterances
+    \item[-] \emph{Phonology-Graphology:} study of the sound system and its
+        phonemes \cite{wordnet}; judging a person's character from his
+        handwriting \cite{websters}
+\end{itemize}
+
+Many more (sub) fields like \emph{Orthography} and also other systematics
+\cite{teachsam} exist that will not be considered further in this document.
+\emph{Phonology} and \emph{Graphology} are not considered either, and the
+\emph{Context} of CYBOL is very clear: It is to become a language for knowledge
+modelling. The remaining fields \emph{Syntax} and \emph{Semantics} are
+important for the definition of CYBOL and will get their own sections
+following. Another point receiving attention is the language \emph{Vocabulary}
+(\emph{Terms}) whose background in abstraction was discussed in sections
+\ref{language_heading} and \ref{knowledge_abstraction_and_manipulation_heading}.
+
+The CYBOP knowledge schema (section \ref{knowledge_representation_heading}) is
+based upon two kinds of hierarchies, one representing \emph{Whole-Part}
+relations and the other the \emph{Meta Information} which a whole keeps about
+its parts. The syntax and semantics of CYBOL as new language must be rich
+enough to express abstract models using these kinds of hierarchies.
+
+Yet before inventing a completely new language definition, it seems useful to
+make use of existing technologies and solutions. An interesting candidate is
+the \emph{Extensible Markup Language} (XML), as introduced in section
+\ref{extensible_markup_language_heading}.
+
+\input{syntax}
+\input{vocabulary}
+\input{semantics}
+\input{tag_attribute_swapping}
+%\input{expressiveness}

@@ -1,0 +1,39 @@
+%
+% $RCSfile: development_environment.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:06 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Development Environment}
+\label{development_environment_heading}
+\index{CYBOI Development Environment}
+
+Current CYBOI development happens under the \emph{Linux} OS, using the
+\emph{C Compiler} of the \emph{GNU�Compiler Collection} (gcc) \cite{gcc}.
+CYBOI's code base has been kept simple and following the \emph{C Standard}
+\cite{ansic} of the \emph{American National Standards Institute} (ANSI), which
+is why it should be compilable on other platforms, too. Exceptions to be
+considered are the above-mentioned, platform-dependent libraries with
+differences between UNIX or derivates, Windows-, and other OS. As temporary
+workaround, the \emph{CYGWIN} runtime environment \cite{cygwin} is used for
+running CYBOI under Windows.
+
+The most important development tool is a simple text editor; it is used for
+writing program code. Compilation is started on a console or shell. Likewise,
+the compiled binary is run there, for testing purposes and error debugging.

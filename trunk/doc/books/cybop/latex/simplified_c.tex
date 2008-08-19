@@ -1,0 +1,64 @@
+%
+% $RCSfile: simplified_c.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:08 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Simplified C}
+\label{simplified_c_heading}
+\index{C Programming Language Simplification}
+
+An early version of CYBOI was implemented in the \emph{Java} programming
+language. Since, over time, its functionality was reduced to pure system
+control, by moving application-specific features to CYBOL, there was no longer
+a need for an \emph{Object Oriented Programming} (OOP) language, which Java is.
+The OOP overhead caused by concepts like \emph{Inheritance} inevitably results
+in lower performance, as compared to \emph{Structured and Procedural Programming}
+(SPP) languages. Low-level system programming, close to hardware, focuses on
+fast data processing. OOP concepts would only disturb here. A later (the
+current) version of CYBOI was therefore rewritten in the slimmer \emph{C}
+programming language.
+
+It would, of course, be possible to implement CYBOI in other languages, too.
+Candidates could be \emph{C++} or the increasingly popular \emph{Python}. Both
+are OOP languages having similar dis-/advantages like \emph{Java}. However,
+different CYBOI implementations are possible and as long as the CYBOL format
+gets interpreted correctly, different languages, frameworks and libraries can
+be used.
+
+But also C (as other SPP languages) contains a number of unnecessary,
+redundant constructs (section \ref{structured_and_procedural_programming_heading})
+for one and the same concept (like three kinds of looping, for example) that
+deserve the name \emph{Syntactic Sugar for the Programmer}. Some source code
+simplifications have therefore been issued as implementation guideline, and
+applied to CYBOI:
+
+\begin{itemize}
+    \item[-] Use only \emph{procedures}, not \emph{functions}! (A return value is
+        just another parameter. There is no argument not to hand it over as such.)
+    \item[-] Use only \emph{call by reference}, not \emph{call by value}!
+        (Handing over parameters as copy creates redundant data. It is better
+        to use references instead.)
+    \item[-] Use only \emph{if-else} conditions, not \emph{case} statements!
+        (Branching via simple conditions covers all necessary use cases.)
+    \item[-] Use only \emph{while} \emph{endless} loops, not \emph{do-while-}
+        or \emph{for} loops! (Merging the loop concept with a \emph{break}
+        condition is not a good idea. The condition can be put into the loop's
+        body, in order to realise \emph{pre-} or \emph{post-testing}.)
+\end{itemize}

@@ -1,0 +1,80 @@
+%
+% $RCSfile: generics.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:06 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Generics}
+\label{generics_heading}
+\index{Generics}
+\index{Generic Programming}
+\index{Function Template}
+\index{Class Template}
+\index{Standard Template Library}
+\index{STL}
+\index{Eiffel}
+\index{Java}
+\index{VB.NET}
+\index{C\#}
+\index{Reuse through Parameterisation}
+\index{Dynamic Typing}
+
+\emph{Generic Programming} received its name from the \emph{Generics} it uses.
+Wikipedia \cite{wikipedia} writes: \textit{Generics is a technique that allows
+one value to take different datatypes (so-called polymorphism) as long as
+certain contracts such as subtypes and signature are kept.} \emph{Templates}
+are one technique providing generics. They allow the writing of code without
+considering the data type that code will eventually be used with. Two kinds of
+templates exist \cite{wikipedia}:
+
+\begin{itemize}
+    \item[-] \emph{Function Template:} behaving like a function that can accept
+        arguments of many different types
+    \item[-] \emph{Class Template:} extending the same concept to classes;
+        often used to make generic containers
+\end{itemize}
+
+Using templates of the C++ \emph{Standard Template Library} (STL) \cite{stl},
+a list may be declared by writing \texttt{list<T>}, where \emph{T} represents
+the type that may be substituted as needed. A linked list of integers, for
+example, would be created with \texttt{list<int>}. After \cite{wikipedia},
+there are three primary drawbacks to the use of templates:
+
+\begin{enumerate}
+    \item Less portable code due to the poor support for templates in compilers
+    \item Difficult development of templates due to unhelpful error messages
+        produced by compilers
+    \item Bloated code due to the extra code (instantiated template) generated
+        by compilers
+\end{enumerate}
+
+Meanwhile, many other OOP languages like \emph{Eiffel}, \emph{Java},
+\emph{VB.NET} and \emph{C\#} provide generic facilities. Being used to improve
+the customisability of code at compile time, they retain the efficiency of
+statically configured code. However, in practice (own experience of the author)
+it is often hard for programmers to understand and handle generic techniques.
+Czarnecki \cite{czarnecki}, who summarises generic programming as \textit{Reuse
+through Parameterisation}, criticises that it: \textit{limits code generation
+to substituting generic type parameters with concrete types and welding together
+pre-existing fragments of code in a fixed pattern.} \emph{Dynamic Typing}
+(section \ref{typeless_programming_heading}) is one possibility to circumvent
+the need for generic programming. The interpreter program introduced in chapter
+\ref{cybernetics_oriented_interpreter_heading} uses dynamic typing; it
+references all knowledge via neutral pointers whose meaning gets determined
+only at runtime.

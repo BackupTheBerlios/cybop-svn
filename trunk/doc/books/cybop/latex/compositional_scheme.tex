@@ -1,0 +1,67 @@
+%
+% $RCSfile: compositional_scheme.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:06 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsubsection{Compositional Scheme}
+\label{compositional_scheme_heading}
+\index{Compositional Scheme}
+\index{Compositional Conceptual Scheme}
+\index{Dictionary}
+\index{Generalised Architecture for Languages, Encyclopedias and Nomenclatures in Med.}
+\index{GALEN}
+\index{Systematized Nomenclature of Medicine}
+\index{SNOMED}
+\index{Enumerative-compositional Scheme}
+\index{Logical Observation Identifiers, Names and Codes}
+\index{LOINC}
+\index{International Classification of Nursing Procedures}
+\index{ICNP}
+\index{Combinatorial Explosion}
+
+A \emph{Compositional Conceptual Scheme} typically contains a \emph{controlled}
+and \emph{fixed} list (\emph{Dictionary}) of a relatively small number (a few
+ten-thousand) of \emph{primitive} terms, each of which can have a unique code.
+These primitives may be combined together by users to form more complex terms,
+including those which might be found in an existing enumerative scheme but also
+other, sometimes trivial, variations and expansions \cite{rogers}.
+
+Examples of compositional schemes include the \emph{Generalised Architecture
+for Languages, Encyclopaedias and Nomenclatures in Medicine} (GALEN) and the
+\emph{Systematized Nomenclature of Medicine} (SNOMED). Hybrid
+enumerative-compositional schemes are
+\emph{Logical Observation Identifiers, Names and Codes} (LOINC) and the
+\emph{International Classification of Nursing Procedures} (ICNP).
+
+The sheer unlimited number of possible combinations, when seen as a problem, is
+called \emph{Combinatorial Explosion}. Much worse problems, however, are the:
+
+\begin{itemize}
+    \item[-] \emph{Nonsense} combinations that may be constructed
+        (avoidable with a set of semantic links, a grammar and constraints)
+    \item[-] \emph{Redundancy} which occurs when more than one combination of
+        terms express the same concept
+        (avoidable with formal algorithms helping to identify redundant compositions)
+    \item[-] \emph{Post-hoc Classification} (unforeseeable addition of new,
+        unknown concepts) that may prevent a meaningful data analysis
+        (avoidable with a type hierarchy of primitives and of semantics links)
+    \item[-] \emph{Intractability} of data due to \emph{exploding} computer
+        algorithms so that the computer will never find an answer
+\end{itemize}

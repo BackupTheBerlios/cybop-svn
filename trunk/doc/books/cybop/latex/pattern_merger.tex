@@ -1,0 +1,99 @@
+%
+% $RCSfile: pattern_merger.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:08 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Pattern Merger}
+\label{pattern_merger_heading}
+\index{CYBOI using Patterns}
+\index{Model View Controller Pattern in CYBOI}
+\index{MVC in CYBOI}
+\index{Data Mapper Pattern in CYBOI}
+\index{Data Transfer Object Pattern in CYBOI}
+\index{DTO in CYBOI}
+\index{Pipes and Filters Pattern in CYBOI}
+\index{Microkernel Pattern in CYBOI}
+\index{Broker Pattern in CYBOI}
+\index{CYBOI as Peer to Peer System}
+\index{CYBOI as GUI Renderer}
+\index{Pattern-less Application Development in CYBOI}
+
+A variety of software patterns (section \ref{pattern_heading}) can be found
+when inspecting CYBOI's architecture. Most of them, especially those relying on
+\emph{Object Oriented} (OO) principles, are used in an \emph{adapted} form, as
+described following.
+
+Firstly, there are those that can be summed up under the umbrella term
+\emph{Translator Patterns}: \emph{Model View Controller} (MVC),
+\emph{Data Mapper} and \emph{Data Transfer Object} (DTO). As section
+\ref{translator_architecture_heading} tried to show, they all contain two state
+models, one logic model and a controlling unit, which is why it is possible to
+unify- and place them into one common architecture. CYBOI represents the unit
+controlling all action, on a low system level. It stores state- as well as
+logic models in one common knowledge tree, and uses the rules encoded in logic
+models to translate state models into each other.
+
+Secondly, there is the \emph{Pipes and Filters} pattern which CYBOI uses not
+only to instantiate knowledge templates, but also for system communication.
+An input (i/p) state (like a persistent, serialised knowledge template) runs
+through a cascade of filters, namely \emph{Creator}, \emph{Communicator},
+\emph{Converter} and \emph{Translator}, before it is processed (as transient
+knowledge model) inside the system, to be finally forwarded in opposite
+direction through the same filters, resulting in an output (o/p) state.
+
+Thirdly, CYBOI acts as \emph{Microkernel} and \emph{Broker}, at the same time.
+It calls special threads (internal servers) managing data input/ output (i/o),
+and has the capability to communicate with remote systems (external servers),
+for data transfer. The actual impulse for communication comes from a passive
+knowledge model (adapter) that is actively processed by CYBOI. Since that
+impulse is \emph{not} a direct method call, but either a \emph{send-} or
+\emph{receive} operation with varying parameters, special \emph{Proxy} models
+are not needed anymore. CYBOI may act as client and server, at the same time,
+which enables the applications running within it to act as \emph{Peer to Peer}
+(P2P) systems (section \ref{peer_node_heading}). It incorporates a signal
+(event) loop (like the broker) and handles low-level system (socket)
+communication (like the bridge).
+
+The fact that future versions of CYBOI will be able to interpret CYBOL
+knowledge templates containing \emph{Graphical User Interface} (GUI)
+descriptions, makes it a \emph{GUI Renderer}. The task of a renderer is to
+translate GUI models into hardware-understandable function calls and protocols.
+%(section \ref{user_interface_modelling_heading}).
+In the case of CYBOI, the
+graphical environment supported first will be the \emph{X Window System} (X)
+\emph{XFree86} \cite{xfree86} variant. The step towards rendering models given
+in \emph{Hyper Text Markup Language} (HTML) format is not far then, so that
+CYBOI may act not only as web server, but also as web browser. All that,
+together with further additions, will make it virtually an \emph{All-Rounder}
+system.
+
+The usage of simplified forms of patterns like \emph{Composite} (inheritance
+omitted), \emph{Whole-Part}, \emph{Wrapper} or \emph{Layers}, for knowledge
+storage, was already mentioned in section \ref{hidden_patterns_heading}.
+
+Unfavourable patterns as mentioned in section \ref{pattern_systematics_heading}
+(those with \emph{global access} or \emph{bidirectional dependencies}) were
+avoided.
+
+Finally, the merged appearance of patterns in CYBOI (and CYBOL for that matter)
+brings software development one step closer to \emph{pattern-less} application
+programming. Application developers are freed from the burden of repeatedly
+figuring out suitable patterns, and enabled to concentrate on modelling pure
+domain knowledge, based on the concept of \emph{Hierarchy}, instead.

@@ -1,0 +1,79 @@
+%
+% $RCSfile: software_crisis.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:08 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\section{Software Crisis}
+\label{software_crisis_heading}
+\index{Software Crisis}
+\index{Software Design}
+\index{Reuse}
+\index{Adaptability}
+\index{Flexibility}
+\index{Complexity}
+\index{Performance}
+\index{Complexity Crisis}
+
+An early question in software engineering was how to write programs that control
+a computer system's \emph{Hardware} correctly and efficiently. Over time, the
+importance of hardware shifted in favour of \emph{Software} which nowadays
+contains most of the logic needed to run an application on a computer system.
+Consequently, much more research emphasis is now placed on the finding of clever
+modelling concepts that help writing correct and effective, stable and robust,
+flexible and maintainable, secure software. Another objective is to increase the
+effectiveness and lessen the expenditure of cost and time in software development
+projects, by \emph{reusing} (pieces of) software.
+
+The past 40 years have delivered numerous helpful concepts, for instance
+\emph{Structure} and \emph{Procedure}, \emph{Class} and \emph{Inheritance},
+\emph{Pattern} and \emph{Framework}, \emph{Component} and \emph{Concern}, and
+many more. They undoubtedly have moved software design far forward. Nevertheless,
+the dream of true componentisation and full reusability has not been reached.
+Czarnecki \cite{czarnecki} identifies problems in the four areas: \emph{Reuse},
+\emph{Adaptability} (in this work also called \emph{Flexibility}), management
+of \emph{Complexity} and \emph{Performance}.
+
+Modern software is very \emph{complex}. It runs on different hardware platforms,
+uses multiple communication paradigms and offers various user interfaces. Many
+tools and methods assist experts as well as engineers in creating and maintaining
+software but do they not seem sufficient to cope with the complexity so that
+often, systems still base on buggy source code causing:
+
+\begin{itemize}
+    \item[-] False Results
+    \item[-] Memory Leaks
+    \item[-] Endless Loops
+    \item[-] Weak Performance
+    \item[-] Security Holes
+\end{itemize}
+
+Are these exclusively the fault of software developers? Or, are the used
+concepts perhaps insufficient? Using the same, allegedly unsatisfying concepts
+caused some people to talk about an ongoing \emph{Software Crisis}, sometimes
+\emph{Complexity Crisis}, affecting not only high-level application programming,
+but also low-level microchip design \cite{daene}.
+
+However, answers are not easy to find. Software design is \emph{Arts} and
+\emph{Engineering}, at the same time. Not everything is or can be regulated by
+rules. It is true, developers have to stick to a set of design rules -- and
+tools that support their usage exist -- but they also have to be very creative.
+All the time, they have to have new, innovative ideas and apply them to software.
+This is what makes the creation, integration, test and maintenance of software
+so difficult. There is not really a uniform way of treating it.

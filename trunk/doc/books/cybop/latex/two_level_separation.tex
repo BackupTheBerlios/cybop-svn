@@ -1,0 +1,70 @@
+%
+% $RCSfile: two_level_separation.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:09 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Two Level Separation}
+\label{two_level_separation_heading}
+\index{Two Level Separation}
+\index{Foundation Level of an Ontology}
+\index{Ontology of Principles}
+
+Although there appears to be no standard knowledge classification, a
+\emph{Two Level Separation} of ontologies is often described, as for example in
+\cite{gruber}:
+
+\begin{quote}
+    At the \emph{First Level}, one identifies the basic conceptualizations
+    needed to talk about all instances of \ldots\ some kind of \emph{Process},
+    \emph{Entity} etc. For example, the first level ontology of
+    \emph{Causal Process} would include terms such as \emph{Time Instants},
+    \emph{System}, \emph{System Properties}, \emph{System States},
+    \emph{Causes that change States}, \emph{Effects} (also \emph{States}) and
+    \emph{Causal Relations}.
+
+    At the \emph{Second Level}, one would identify and name different types of
+    (a process) and relate the \emph{Typology} to additional constraints on or
+    types of the concepts in the first-level ontology. For the causal process
+    example, we may identify two types of causal processes,
+    \emph{Discrete Causal Processes} and \emph{Continuous Causal Processes} and
+    define them as the types of process when the time instants are
+    \emph{discrete} or continuous, respectively. These terms and the
+    corresponding conceptualizations are also parts of the ontology of the
+    phenomenon being analyzed. Second-level ontology is essentially open-ended:
+    that is, new types may be identified any time.
+\end{quote}
+
+The \emph{Design Principles for the EHR} document \cite{openehrdesign} writes
+that a separation of this kind divided knowledge types into a
+\emph{Foundation Level} (or what is called an \emph{Ontology of Principles})
+which could be numbered \emph{Level 0} and \emph{Everything else}. Knowledge in
+the latter category were more specific to particular uses and users. It could be
+divided into a number of sub-levels (according to various types of use) which
+could be numbered as \emph{Level 1} to \emph{Level N}. Concepts in levels 1 to N
+represented particular compositions of elements from the principles level into
+structures, similar to the way atoms are composed into molecules.
+
+Knowledge encoded in the new language introduced in chapter
+\ref{cybernetics_oriented_language_heading} is based on state primitives
+(commonly known as \emph{Primitive Types} in classical programming languages)
+and logic primitives (operations), both of which could be assigned to the first
+ontological level as mentioned above. Any knowledge template defined in that
+language is a composition consisting of these primitives and/ or other compound
+templates.

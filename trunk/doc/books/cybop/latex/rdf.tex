@@ -1,0 +1,107 @@
+%
+% $RCSfile: rdf.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:08 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{RDF}
+\label{rdf_heading}
+\index{Resource Description Framework}
+\index{RDF}
+\index{CYBOL-RDF Comparison}
+\index{Uniform Resource Indicator reference}
+\index{URIref}
+
+Using the \emph{Resource Description Framework} (RDF) described in section
+\ref{resource_description_framework_heading}, a catalogue of products available
+at a certain domain \emph{www.example.com} might be encoded as in the following
+example \cite{rdfprimer}:
+
+\begin{scriptsize}
+    \begin{verbatim}
+<?xml version="1.0"?>
+<!DOCTYPE rdf:RDF [<!ENTITY xsd "http://www.w3.org/2001/XMLSchema#">]>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:exterms="http://www.example.com/terms/">
+    <rdf:Description rdf:about="http://www.example.com/2002/04/products#item10245">
+        <rdf:type rdf:resource="http://www.example.com/terms/Tent"/>
+        <exterms:model rdf:datatype="&xsd;string">Overnighter</exterms:model>
+        <exterms:sleeps rdf:datatype="&xsd;integer">2</exterms:sleeps>
+        <exterms:weight rdf:datatype="&xsd;decimal">2.4</exterms:weight>
+        <exterms:packedSize rdf:datatype="&xsd;integer">784</exterms:packedSize>
+    </rdf:Description>
+    ... other product descriptions ...
+</rdf:RDF>
+    \end{verbatim}
+\end{scriptsize}
+
+This piece of code contains just one product description: that of
+\emph{item10245}, which is typed as a \emph{Tent}. It owns properties like its
+\emph{model}, \emph{sleeps}, \emph{weight} and \emph{packed\_size}. The XML
+namespace declaration in line four specifies that the namespace
+\emph{Uniform Resource Indicator reference} (URIref)
+\emph{http://www.example.org/terms/} is to be associated with the
+\emph{exterms:} prefix. URIrefs beginning with the string
+\emph{http://www.example.org/terms/} are used for terms from the vocabulary
+defined by the example organization, \emph{example.org}. The \emph{ENTITY}
+declaration specified as part of the \emph{DOCTYPE} declaration in the second
+line defines the entity \emph{xsd} to be the string representing the namespace
+URIref for XML Schema datatypes. This declaration allows the full namespace
+URIref to be abbreviated elsewhere in the XML document by the entity reference
+\emph{\&xsd;}, so that data types like \emph{string} or \emph{integer} may be
+written as \emph{\&xsd;string} and \emph{\&xsd;integer}, respectively.
+
+The same product catalogue example written in CYBOL would look like this:
+
+\begin{scriptsize}
+    \begin{verbatim}
+<?xml version="1.0"?>
+<model>
+    <part name="item10245" channel="http" abstraction="cybol"
+        model="www.example.com/2002/04/products#item10245">
+        <property name="type" channel="http" abstraction="rdf" model="www.example.com/terms/Tent"/>
+        <property name="model" channel="inline" abstraction="string" model="overnighter"/>
+        <property name="sleeps" channel="inline" abstraction="integer" model="2"/>
+        <property name="weight" channel="inline" abstraction="decimal" model="2.4"/>
+        <property name="packed_size" channel="inline" abstraction="integer" model="784"/>
+    </part>
+    ... other products and their properties ...
+</model>
+    \end{verbatim}
+\end{scriptsize}
+
+One can find the product identifiable by the name \emph{item10245}, as one part
+of the catalogue, as well as its properties representing meta (descriptive)
+information. The product's model has the abstraction \emph{cybol} which means
+that the corresponding resource is available in CYBOL format. The resource's
+channel is \emph{http} which means that it has to be read using that protocol
+and communication mechanism. Other abstractions are possible, of course. The
+\emph{type} property in the example is available in RDF format, as indicated by
+its abstraction attribute.
+
+The meaning of the single XML attributes was explained in previous sections. Up
+to now, there was no need to apply domains for building attribute- or tag
+names. CYBOL's tags, that is their number as well as their names, are fixed.
+The same counts for its attributes. What is changeable, are attribute
+\emph{values} alone.
+
+While RDF's main focus is on providing the means for making \emph{descriptive}
+(meta) statements \emph{about} a subject, CYBOL provides these meta information
+together with structural (whole-part) information, encoded in form of a double
+hierarchy (section \ref{double_hierarchy_heading}).

@@ -1,0 +1,121 @@
+%
+% $RCSfile: extensible_markup_language.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:06 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsubsection{Extensible Markup Language}
+\label{extensible_markup_language_heading}
+\index{Extensible Markup Language}
+\index{XML}
+\index{World Wide Web}
+\index{WWW}
+\index{World Wide Web Consortium}
+\index{W3C}
+\index{Standard Generalized Markup Language}
+\index{SGML}
+\index{Hypertext Markup Language}
+\index{HTML}
+\index{Document Publishing}
+\index{Data Transfer}
+\index{GUI Design}
+\index{Workflow Composition}
+\index{Database Storage}
+\index{Domain Modelling}
+
+A popular, very flexible, yet simple language playing an increasingly important
+role in the exchange of a wide variety of data on the \emph{World Wide Web}
+(WWW) and elsewhere is the \emph{Extensible Markup Language} (XML) \cite{xml},
+defined by the \emph{World Wide Web Consortium} (W3C) \cite{w3c}. Being a text
+format derived as simplified subset (dialect) of the
+\emph{Standard Generalized Markup Language} (SGML) \cite{sgml}, it allows to
+structure and store information hierarchically as \emph{Document} file. Norman
+Walsh \cite{walsh} writes:
+
+\begin{quote}
+    A markup language is a mechanism to \emph{identify structures} in a document.
+    The XML specification defines a standard way to \emph{add markup} to documents.
+\end{quote}
+
+And the XML Cover Pages \cite{sgmlmetamarkup} state:
+
+\begin{quote}
+    Both SGML and XML are \emph{meta} languages because they are used for
+    defining \emph{markup} languages. A markup language defined using SGML or
+    XML has a specific vocabulary (labels for elements and attributes) and a
+    declared syntax (grammar defining the hierarchy and other features).
+\end{quote}
+
+Historically, markup languages became widely known through the
+\emph{Hypertext Markup Language} (HTML) as language of the Web. To overcome its
+limitations, XML was originally \emph{designed to meet the challenges of large-
+scale electronic publishing} \cite{xml}. Today, XML is applied in many different
+areas, for example:
+
+\begin{itemize}
+    \item[-] Document Publishing \cite{docbook}
+    \item[-] Data Transfer \cite{soap}
+    \item[-] GUI Design \cite{xul, uiml, ecml, xaml}
+    \item[-] Workflow Composition \cite{oio, intershop}
+    \item[-] Database Storage \cite{exist, dbxml}
+    \item[-] Domain Modelling \cite{xmlschema, damloil}
+\end{itemize}
+
+Yet in the opinion of Robin Cover \cite{xmlsemantics}, the usability of XML for
+domain modelling is limited. He writes:
+
+\begin{quote}
+    Just like its parent metalanguage (SGML), XML has no formal mechanism to
+    support the declaration of semantic integrity constraints, and XML processors
+    have no means of validating object semantics even if these are declared
+    informally in an XML DTD. XML processors will have no inherent understanding
+    of document object semantics because XML (meta-)markup languages have no
+    predefined application-level processing semantics. XML thus formally governs
+    syntax only -- not semantics.
+
+    In fact, XML syntax is designed for representing an encoded serialization,
+    and thus has a very limited range of expression for modeling complex object
+    semantics, where \emph{Semantics} fundamentally means an intricate web of
+    constrained relationships and properties. Otherwise stated: XML is a poor
+    language for data modelling \ldots
+\end{quote}
+
+The XML-based language described in chapter \ref{cybernetics_oriented_language_heading}
+proves the opposite. By applying a common knowledge modelling schema (chapter
+\ref{knowledge_schema_heading}), it allows to model arbitrary meta information
+(complex object semantics). Robin Cover continues \cite{xmlsemantics}:
+
+\begin{quote}
+    The notion of \emph{Attribute} might have been more useful except that XML
+    supports only a flat data model for the value of an attribute in a
+    name-value pair (essentially \emph{String}). This flat model cannot easily
+    capture complex attribute notions such as would be predicated of abstracted
+    real world objects, where attribute values are themselves typically
+    represented by complex objects, either owned or referenced.
+\end{quote}
+
+This criticism of Cover is absolutely correct. It can be circumvented, though.
+The language introduced in chapter \ref{cybernetics_oriented_language_heading}
+permits one attribute to store a (file) path to an external compound knowledge
+template and is thus capable of representing compound properties (complex
+attribute notions). One problem remains, however: When serialising compound
+knowledge models consisting of other compound models, the quotation mark as
+attribute value delimiter is not sufficient, because the beginning and end of
+an attribute value may get mixed up. Solving it, the XML standard needs to be
+injured (chapter \ref{cybernetics_oriented_language_heading}).

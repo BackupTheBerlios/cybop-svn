@@ -1,0 +1,77 @@
+%
+% $RCSfile: data_creation.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:06 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Data Creation}
+\label{data_creation_heading}
+\index{CYBOI Data Creation}
+\index{CYBOI Data Encapsulation}
+\index{Compound Structure as Multi Dimensional Container}
+\index{Knowledge Memory consisting of Compound- and Primitive Models}
+
+The functionality of CYBOI as system is built around the manipulation of states
+in memory. The question how states, representing data, are stored is therefore
+of great importance. Besides containers like the \emph{Internals Memory},
+\emph{Knowledge Memory} and \emph{Signal Memory}, belonging to its
+infrastructure, CYBOI uses special structures encapsulating primitive data. Not
+only types like \emph{Character}, \emph{Integer}, \emph{Float} or \emph{String}
+are wrapped this way, also \emph{Operations} are. Any compositions of these are
+stored as \emph{Compound}.
+
+Encapsulated primitives have the advantage of being forwardable as reference
+(memory address pointer), instead of as copy. This ensures that redundant data
+are avoided and states of manipulated primitives are not lost. \emph{Logic}
+operations are stored in form of a string indicating their name. Necessary
+references to input/ output (i/o) \emph{State} models need to be provided as
+meta information, by the compound model surrounding the operation.
+
+The \emph{Compound}, as most important CYBOI structure capable of representing
+state- as well as logic knowledge, and capable of emulating a map, collection,
+list and tree, deserves closer inspection. Essentially, it is a container able
+to recursively reference instances of its own, thus spanning up a tree of parent
+nodes (\emph{Whole} models) that may have child nodes (\emph{Part} models). In
+fulfillment of the requirements of the knowledge schema introduced in section
+\ref{knowledge_representation_heading}, a compound consists of a combination of
+many arrays containing a part's:
+
+\begin{itemize}
+    \item[-] \emph{Name:} serving as unique \emph{Identifier} (ID)
+    \item[-] \emph{Model:} the actual contents (may be a part node)
+    \item[-] \emph{Abstraction:} the kind of abstraction (type) of the model
+    \item[-] \emph{Details:} further meta information (properties, constraints)
+\end{itemize}
+
+One may call the \emph{Compound} a \emph{multi-dimensional} container but it is
+probably easier described as large table with many columns, whereby the values
+of one row describe exactly one part model, and thus belong together.
+
+The previously mentioned \emph{Knowledge Memory} may be seen as huge tree
+consisting of compound- as well as primitive models. Its root is always a
+\emph{Compound} -- it, so to say, concentrates all knowledge in just one point,
+the single concepts being branches of it.
+
+The essential procedures for managing data in memory are \emph{create} and
+\emph{destroy} (\emph{creator} modules). Three additional kinds of procedures
+are provided for compound- and other container-like structures: \emph{set},
+\emph{get} and \emph{remove} (\emph{accessor} modules). It should be noted at
+this point that CYBOL applications have no direct access to these procedures,
+so that \emph{wild} memory allocation is not possible. A knowledge model can
+only be created using the corresponding CYBOL operation \emph{create\_part}.

@@ -1,0 +1,92 @@
+%
+% $RCSfile: long-life_software_system.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:07 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Long-Life Software System}
+\label{long-life_software_system_heading}
+\index{CYBOP Long-Life Software System}
+\index{CYBOI}
+\index{CYBOL}
+\index{SPP}
+\index{OOP}
+\index{CYBOP Knowledge Schema}
+\index{Knowledge Template}
+\index{Knowledge Model}
+
+The pure existence of proper knowledge does not suffice to create an improved
+kind of software system, within a slimmer software development process. The new
+systems need to know how to \emph{handle} knowledge, at runtime. The criticism
+is twofold, because traditionally:
+
+\begin{enumerate}
+    \item Operating systems do not have sufficient knowledge handling capabilities
+    \item Applications contain too much low-level system control functionality
+\end{enumerate}
+
+This is changed when using CYBOP. The active CYBOI interpreter encapsulates
+memory allocation, persistence- and communication mechanisms, signal handling,
+logging facilities and more, which belong to the system level. While
+traditional programming philosophies try to make these \emph{reusable}, CYBOI
+implements them just once, in a manner that \emph{all} applications can access
+and use them. As a side-effect, the need for the study and repeated application
+of software patterns disappears. Additionally, and most importantly, CYBOI
+knows how to handle knowledge provided in form of passive CYBOL templates.
+
+Although still dependent on an underlying operating system (for hardware device
+drivers and more), CYBOI is developing towards becoming one itself. Applications,
+on the other hand, do not have to care about communication paradigms and other
+low-level issues anymore; their focus is pure domain knowledge, encoded in CYBOL.
+
+%CYBOI's \emph{Exokernel} OS architecture provides security.
+%All signals have to pass one control loop which invokes signal handling routines.
+%So they all can be checked.
+%CYBOI's architecture is thus similar to \emph{Software Agent} systems.
+
+In classical type-based systems, no matter whether created in an SPP- or OOP
+language, the type of data needs to be known to find out about their structure
+and functionality. In CYBOP systems, all compound knowledge models have the
+same structure. Since they do not differ, they can be manipulated in the same
+manner. Only types (the kind of abstraction) of state primitives and logic
+operations need to be distinguished.
+
+CYBOL knowledge templates, of which a \emph{Clone} is made when a knowledge
+model (instance) gets created, are \emph{not} treated as types. Once a
+knowledge model exists, its original knowledge template can never be accessed
+by it again, since a model holds no reference to its template. A template
+merely delivers the initial values for the model instantiated from it. After
+creation, a model exists on its own. It can be used and modified independently
+of any types, and is thus absolutely flexible.
+
+But that also means that systems implementing the CYBOP knowledge schema are
+more future-proof. Unforeseeable requirements can be implemented anytime,
+without a static type model having to be changed, without fragile classes
+having to be considered, without dependencies causing existing functionality to
+break. CYBOP systems are therefore \emph{Long-Life Systems} without
+architectural decay. Domain-/ application model changes do neither affect the
+structure of the knowledge schema, nor other parts of the static architecture
+of the underlying CYBOI interpreter.
+
+The argument that systems developed in this manner were not safe because they
+lacked the constraints defined by a type does not hold, since also classical
+systems permit runtime objects to get manipulated, and to be assigned values
+not matching their type. In this case, of course, the system is alerted with an
+error, but in the end it is always the application developer who has to handle
+-- or better prevent such errors.

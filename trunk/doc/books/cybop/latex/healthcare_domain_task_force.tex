@@ -1,0 +1,83 @@
+%
+% $RCSfile: healthcare_domain_task_force.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:07 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsubsection{Healthcare Domain Task Force}
+\label{healthcare_domain_task_force_heading}
+\index{Object Management Group}
+\index{OMG}
+\index{Model Driven Architecture}
+\index{MDA}
+\index{Common Object Request Broker Architecture}
+\index{CORBA}
+\index{Interface Definition Language}
+\index{IDL}
+\index{Object Request Broker}
+\index{ORB}
+\index{Internet Inter ORB Protocol}
+\index{IIOP}
+\index{Healthcare Domain Taskforce}
+\index{HDTF}
+\index{CORBAmed}
+\index{Person (Patient) Identification Service}
+\index{PIDS}
+\index{Lexicon (Terminology) Query Service}
+\index{LQS}
+\index{Clinical Observations Access Service}
+\index{COAS}
+\index{Resource Access Decision Service}
+\index{RADS}
+\index{Clinical Image Access Service}
+\index{CIAS}
+
+The \emph{Object Management Group} (OMG) whose mission is: \textit{to help
+computer users solve integration problems by supplying open, vendor-neutral
+interoperability specifications}, is the creator of widely-used de facto
+standards (section \ref{model_driven_architecture_heading}) like UML, MOF, XMI,
+CWM or CORBA, all now belonging to the \emph{Model Driven Architecture} (MDA).
+
+Published in the 1990s, the \emph{Common Object Request Broker Architecture}
+(CORBA) was one of the first standards specifications created by the OMG. It
+tried to separate interfaces of programming objects (components) from their
+implementation, to improve communication between programs, independent of which
+programming language, operating system, computer architecture or network were
+used. The specification includes the neutral \emph{Interface Definition Language}
+(IDL), the \emph{Object Request Broker} (ORB) middleware functionality and a
+corresponding \emph{Internet Inter ORB Protocol} (IIOP).
+
+CORBA has been adopted by many applications, and been adapted for many domains,
+one of them being \emph{Healthcare}. The OMG working group dealing with that
+field is the \emph{Healthcare Domain Taskforce} (HDTF) \cite{omghdtf} (formerly
+called \emph{CORBAmed}). It defined IDL interfaces for a number of different
+healthcare services, for example:
+
+\begin{itemize}
+    \item[-] \emph{Person (Patient) Identification Service} (PIDS)
+    \item[-] \emph{Lexicon (Terminology) Query Service} (LQS)
+    \item[-] \emph{Clinical Observations Access Service} (COAS)
+    \item[-] \emph{Resource Access Decision Service} (RADS)
+    \item[-] \emph{Clinical Image Access Service} (CIAS)
+\end{itemize}
+
+HDTF specifications are helpful in that they standardise certain functionality
+calls that all systems implementing the corresponding interfaces may rely on.
+However, they do not make any assertions about how medical knowledge should be
+structured.

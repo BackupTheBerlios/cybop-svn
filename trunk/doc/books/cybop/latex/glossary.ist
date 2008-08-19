@@ -1,0 +1,50 @@
+%
+% $RCSfile: glossary.ist,v $
+%
+% Copyright (c) 2001-2004. Christian Heller. All rights reserved.
+%
+% No copying, altering, distribution or any other actions concerning this
+% document, except after explicit permission by the author!
+% At some later point in time, this document is planned to be put under
+% the GNU FDL license. For now, _everything_ is _restricted_ by the author.
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% @author Christian Heller <christian.heller@tuxtax.de>
+%
+
+%
+% MakeIndex style file for glossaries.
+%
+% Realized with a description environment.
+%
+% The following commands need to be added to the LaTeX file:
+% \makeglossary
+% \newcommand{\myglossary}[2]{#1\textsuperscript{p. \pageref{glossar}}\glossary{#1}\glossary{#1!#2}}
+% \input{glossary.glx}
+%
+%\setglossaryname{6.2\hspace{4mm}Glossary}
+preamble         "{\\Large\\bfseries 6.2\\hspace{4mm}Glossary}\\vspace{5mm}\n\\begin{description}\n\n"
+postamble        "\n\n\\end{description}\n"
+group_skip       "\n\\vspace{5mm}\n"
+keyword          "\\glossaryentry"
+
+item_0           "\\item["
+delim_0          ", S."
+item_01          "] "
+
+delim_1          " %"
+indent_space     "%"
+delim_t          "\n"
+
+headings_flag    1
+%heading_prefix   "\n\\item[{\\Large\\bfseries "
+heading_prefix   "\n\\item[{\\Large\\textbf "
+heading_suffix   "}]\n\n"
+symhead_positive "Symbole"
+numhead_positive "Zahlen"
+

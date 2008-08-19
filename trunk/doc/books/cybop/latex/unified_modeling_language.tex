@@ -1,0 +1,149 @@
+%
+% $RCSfile: unified_modeling_language.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:09 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsubsection{Unified Modeling Language}
+\label{unified_modeling_language_heading}
+\index{Unified Modeling Language}
+\index{UML}
+\index{Class Diagram}
+\index{Activity Diagram}
+\index{Sequence Diagram}
+\index{Use Case Diagram}
+\index{State Machine Diagram}
+\index{State Chart Diagram}
+\index{Component Diagram}
+\index{Deployment Diagram}
+\index{Object Diagram}
+\index{Instance Diagram}
+\index{Package Diagram}
+\index{Communication Diagram}
+\index{Collaboration Diagram}
+\index{Composite Structure Diagram}
+\index{Interaction Overview Diagram}
+\index{Timing Diagram}
+\index{UML Diagram Type}
+\index{Object Constraint Language}
+\index{OCL}
+\index{Structure Diagram}
+\index{Behaviour Diagram}
+\index{Interaction Diagram}
+\index{Functional Model}
+\index{Object Model}
+\index{Dynamic Model}
+\index{UML Tool}
+\index{Computer Aided Software Engineering Tool}
+\index{CASE Tool}
+\index{Object Process Diagram}
+\index{OPD}
+\index{Entity Relationship Diagram}
+\index{ERD}
+
+Meanwhile, the probably most famous modelling- and specification language is
+the \emph{Unified Modeling Language} (UML) \cite{uml, booch}. It uses a
+graphical notation defining a number of diagrams. UML 2.x specifications
+\cite{uml} extend the number of different diagram types from 9 (UML 1.x) to 13.
+A good overview is given by Ambler in \cite{ambler2005}, which table
+\ref{diagrams_table} reproduces in adapted form, showing only \emph{some}
+diagram elements. The column \emph{Importance} contains a certainly subjective
+recommendation of Ambler, indicating the \emph{Learning Priority} the single
+diagram types have in his opinion (which the author of this work supports).
+
+\begin{table}[ht]
+    \begin{center}
+        \begin{footnotesize}
+        \begin{tabular}{| p{35mm} | p{55mm} | p{15mm} |}
+            \hline
+            \textbf{Diagram} & \textbf{Elements} & \textbf{Importance}\\
+            \hline
+            Class (CsD) & Class, Inheritance, Association & High\\
+            \hline
+            Activity (AD) & Activity, Flow, Fork/ Join, Condition, Decision/ Merge & High\\
+            \hline
+            Sequence (SD) & Object, Lifeline, Activation Box (Method-Invocation Box), Message & High\\
+            \hline
+            Use Case (UCD) & Use Case, Actor, Association & Medium\\
+            \hline
+            State Machine (SMD), formerly State Chart Diagram & State, Transition & Medium\\
+            \hline
+            Component (CmD) & Component, Interface, Dependency & Medium\\
+            \hline
+            Deployment (DD) & Node, Connection & Medium\\
+            \hline
+            Object (ObD), also referred to as Instance Diagram & Object, Relationship & Low\\
+            \hline
+            Package (PD) & Package, Dependency & Low\\
+            \hline
+            Communication (CoD), formerly Collaboration Diagram & Object, Association & Low\\
+            \hline
+            Composite Structure (CSD) & Collaboration, Object, Role & Low\\
+            \hline
+            Interaction Overview (IOD) & Interaction Frame, Interaction Occurrence Frame & Low\\
+            \hline
+            Timing (TiD) & Object, Lifeline, State, Timing Constraint & Low\\
+            \hline
+        \end{tabular}
+        \end{footnotesize}
+        \caption{UML 2.x Diagram Types \cite{ambler2005}}
+        \label{diagrams_table}
+    \end{center}
+\end{table}
+
+One extension to the UML that is now also part of the corresponding de-facto
+standard, is the \emph{Object Constraint Language} (OCL). Being a declarative
+language, it describes rules applying to UML models, in a precise text format.
+This is because not all rules can be expressed by diagrammatic notation
+\cite{wikipedia}. The range of possible rules comprises constraints like pre-
+and post-conditions or object query expressions. \cite{ocl}
+
+A common classification distinguishes UML diagrams as follows \cite{ambler2005}:
+
+\begin{enumerate}
+    \item \emph{Structure:} CsD, CmD, CSD, DD, ObD, PD
+    \item \emph{Behaviour:} AD, SMD, UCD
+    \item \emph{Interaction:} CoD, IOD, SD, TiD
+\end{enumerate}
+
+Others share the information represented by the diagrams according to an
+underlying, independently existing model \cite{wikipedia}:
+
+\begin{itemize}
+    \item[-] \emph{Functional Model} (UCD): Functionality of the system from
+        the user's point of view
+    \item[-] \emph{Object Model} (CsD): Structure and substructure of the
+        system using objects, attributes, operations, and associations
+    \item[-] \emph{Dynamic Model} (AD, SD, SCD): Internal behaviour of the
+        system
+\end{itemize}
+
+A program working with UML diagrams is called \emph{UML Tool}, or more exactly
+\emph{Computer Aided Software Engineering} (CASE) tool. Many of these programs
+have developed and matured, over the past decade of years. Besides the standard
+UML diagram types, they offer source code parsing and -generation,
+documentation creation and more. Some tools introduced their own extensions to
+the UML de-facto standard, for example: \emph{Object Process Diagram} (OPD)
+\cite{burkhardt} and \emph{Entity Relationship Diagram} (ERD) \cite{otw}. The
+description of a hypothetic design tool suggested for the language being
+introduced in chapter \ref{cybernetics_oriented_language_heading} will refer
+back to the UML diagrams as mentioned in this section, and suggest a different
+way to categorise them. Further, chapter \ref{cybernetics_oriented_language_heading}
+will try to define four diagram types to be used in conjunction with the
+language described in it.

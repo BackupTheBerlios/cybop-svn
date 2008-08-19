@@ -1,0 +1,74 @@
+%
+% $RCSfile: separation_of_state_and_logic_knowledge.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:08 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Separation of State- and Logic Knowledge}
+\label{separation_of_state_and_logic_knowledge_heading}
+\index{CYBOP Separation of State- and Logic Knowledge}
+
+A third aspect causing troubles in software system design is the bundling of
+state- and logic knowledge, known from object-oriented programming. It results
+in:
+
+\begin{itemize}
+    \item[a] Difficult handling and repeated implementation of the same
+        communication mechanisms (section \ref{misleading_tiers_heading})
+    \item[b] Differing patterns complicating the handling of communication
+        (section \ref{pattern_heading})
+    \item[c] Bidirectional dependencies (circular references) between classes/
+        objects in object-oriented systems, due to attribute-method bundling
+        (section \ref{bidirectional_dependency_heading})
+    \item[d] Pre-defined logic concepts in structured/ procedural- as well as
+        object-oriented programming
+\end{itemize}
+
+Chapter \ref{state_and_logic_heading} therefore suggested a separation of
+state- and logic concepts, in order to eliminate unnecessary inter-dependencies
+and to be able to apply a unified translator architecture.
+
+\paragraph{a}
+
+Since low-level communication mechanisms are implemented in CYBOI,
+application developers writing CYBOL knowledge templates do not have to bother
+with these anymore.
+
+\paragraph{b}
+
+Since standard communication patterns are unified, the handling of
+communication is simplified. Thanks to this unification, an extensible
+translator architecture can be applied. Using it, any kind of abstract
+knowledge model can be translated into any other. Universal communication
+becomes possible.
+
+\paragraph{c}
+
+Since state- are split from logic concepts, many (partly bidirectional)
+dependencies between knowledge models disappear, which reduces the coupling
+between- and increases cohesion within models. Both kinds use exclusively
+unidirectional relations. Additionally, logic- may access state models and each
+other, but always unidirectionally.
+
+\paragraph{d}
+
+Since logic concepts (algorithms, workflows) are themselves modelled as CYBOL
+knowledge templates, they become configurable. Traditionally, only structures
+representing states are manipulatable at runtime; procedures representing logic
+are fixed and cannot be altered.

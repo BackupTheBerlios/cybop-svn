@@ -1,0 +1,117 @@
+%
+% $RCSfile: kernel_concepts.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:07 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Kernel Concepts}
+\label{kernel_concepts_heading}
+\index{Operating System Concepts in CYBOI}
+\index{OS Concepts in CYBOI}
+\index{Kernel Concepts in CYBOI}
+\index{CYBOI as Monolithic Kernel}
+\index{CYBOI as Microkernel}
+\index{CYBOI as Hybrid Kernel}
+\index{CYBOI as Exokernel}
+\index{CYBOI as Hardware Abstraction Layer}
+\index{CYBOI avoiding Inter Process Communication}
+
+Although certainly not qualifying as \emph{Operating System} (OS), CYBOI uses
+some similar concepts. However, it is not easy to assign CYBOI to one of the four
+broad categories of OS kernels, which the Wikipedia Encyclopedia \cite{wikipedia}
+describes as follows:
+
+\begin{enumerate}
+    \item \emph{Monolithic Kernels:} providing rich and powerful abstractions
+        of the underlying hardware
+    \item \emph{Microkernels:} providing a small set of simple hardware abstractions
+        and using applications called servers to provide more functionality
+    \item \emph{Hybrid Kernels:} being much like pure microkernels, except that
+        they include some additional code in kernelspace to increase performance
+    \item \emph{Exokernels:} providing minimal abstractions but allowing the
+        use of library operating sytems to provide more functionality via
+        direct or nearly direct access to hardware
+\end{enumerate}
+
+Just like a \emph{Monolithic Kernel}, CYBOI encapsulates low-level functionality
+like memory management and provides a high-level virtual interface (operations),
+over which CYBOL applications may access it. Although the processing of signals
+happens in its main process, CYBOI has to rely on a few communication services,
+running in their own threads, and control their data exchange. This is (roughly)
+comparable to the \emph{Microkernel} design which was mentioned as pattern in
+section \ref{pattern_merger_heading} before. But these services sharing a common
+address space (\emph{Internals Memory} and \emph{Signal Memory}) with the CYBOI
+kernel, actually makes CYBOI a \emph{Hybrid Kernel}. The only existing data in
+user address space (\emph{Knowledge Memory}) are knowledge models that have been
+created from CYBOL knowledge templates. The kernel category coming closest to
+CYBOI's design, however, is the \emph{Exokernel}. This is because CYBOI, though
+serving as \emph{Hardware Abstraction Layer} (HAL) to CYBOL applications (what
+is actually known from classic monolithic- and microkernels), also has a central
+\emph{Signal Checker} control loop calling subroutines managing a part of the
+hardware or software, which, after \cite{wikipedia}, were one of the simplest
+methods of creating an exokernel.
+
+The above-mentioned services provide \emph{Input/ Output} (i/o) functionality
+to CYBOI so that it can communicate (\emph{virtual world}) ideas with other
+(human or technical) systems, across (\emph{real world}) hardware. The services
+may be configured, started up, interrupted and shutdown via CYBOL operations.
+Similar to the \emph{Self Awareness} of human systems (mentioned in section
+\ref{self_awareness_heading}), a CYBOL application has to know about available
+i/o services, in order to actually use them. This configuration information may
+be stored in CYBOL files as well.
+
+Another thought turns around the \emph{Process} concept \cite{tanenbaum2001},
+which is used to share computing time of the \emph{Central Processing Unit}
+(CPU) as well as resource space in \emph{Random Access Memory} (RAM) between
+applications. One then says: \textit{Every application runs in a separate
+process.} The example environment in chapter \ref{physical_architecture_heading}
+contained many different kinds of inter-communicating systems, not all of which
+have to run on a separate physical machine, but surely in a separate process,
+if on one-and-the-same machine. That way, one machine may host multiple
+application systems.
+
+However, the existence of many program processes running concurrently in an OS
+holds conflicts. It necessitates ways for \emph{Inter-Process Communication}
+(IPC), that assure the integrity of data in memory and avoid deadlocks
+(blocking of the system). Common IPC methods include \cite{ipc, tanenbaum2001}:
+\emph{Pipes} and \emph{Named Pipes}, \emph{Message Queueing}, \emph{Semaphores},
+\emph{Shared Memory} and \emph{Sockets}.
+
+A different approach was chosen in CYBOI: It is the only process running. CYBOL
+applications reside as separate knowledge models in the \emph{Knowledge Memory}
+(user address space), and CYBOI controls them all. This is the exact opposite
+of running one process per application. However, it is unclear, at first, how
+multiple applications running in parallel receive their corresponding signals.
+CYBOI needs to evaluate incoming signals and then call the right logic of the
+right application. But how to do that?
+
+The application to which a signal is sent can be identified, depending on the
+communication mechanism used. A \emph{keyboard\_pressed} or \emph{mouse\_clicked}
+event, for example, always references the top-most window in a GUI environment.
+Menu-, toolbar- and other buttons of the top-most window in turn reference a
+logic (algorithm) whose dot-separated name starts with that of the application.
+Within CYBOI, applications have to have a unique name, of course, so that
+signals can be addressed correctly, to the right receiver. Once a logic routine
+is identified, it can be sent as new signal to be processed by the signal loop.
+Another example would be signals arriving over network. Also here, applications
+can be identified, for example by a special \emph{Port} that was assigned to
+them beforehand. A remote call references a specific logic by name so that it
+can be processed locally. Equally named local procedures are distinguished by
+the application name identified before. Within an application, logic names have
+to be unique, of course.

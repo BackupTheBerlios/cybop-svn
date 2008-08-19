@@ -1,0 +1,61 @@
+%
+% $RCSfile: formality.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:06 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\section{Formality}
+\label{formality_heading}
+\index{Formality}
+\index{Informal Language}
+\index{Semi-Formal Diagrams}
+\index{Formal Programming Language}
+\index{Machine Language}
+\index{Knowledge Modelling Language}
+
+Abstract models can be described in different ways, for example \cite{philippow}:
+
+\begin{itemize}
+    \item[-] \emph{informally} by natural language
+    \item[-] \emph{semi-formally} by diagrams
+    \item[-] \emph{formally} by a programming language
+\end{itemize}
+
+The use of a programming language eases model abstraction for human programmers.
+Special tools exist that break down models given in form of programming language
+code into their binary form, into sequences of \emph{0} and \emph{1}. These
+sequences are called \emph{Machine Language} because they are understood by
+computers.
+
+Classical programming languages have the linguistic means to express high-level
+\emph{Knowledge} as well as low-level \emph{System Control} operations, such as
+those for \emph{input/ output} (i/o), necessary for communication. The use of
+such languages inevitably leads to a mess in program code because knowledge and
+system control are mixed up. Inflexible, overly complex systems with numerous
+interdependencies are the result. Part \ref{basics_heading} of this work
+criticised some of the weak points of traditional programming language concepts.
+
+This work makes the necessary split: Knowledge gets \emph{separated} from
+system control. Chapter \ref{statics_and_dynamics_heading} already discussed
+this separation giving manifold examples, taken from several sciences. The CYBOL
+language being described in the next sections is just another form of storing
+knowledge. It can therefore also be called a \emph{Knowledge Modelling Language}.
+Any other low-level system control functionality belongs to the
+\emph{Cybernetics Oriented Interpreter} (CYBOI), which gets introduced in the
+later chapter \ref{cybernetics_oriented_interpreter_heading}.

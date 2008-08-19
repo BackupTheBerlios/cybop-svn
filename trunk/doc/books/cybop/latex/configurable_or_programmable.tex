@@ -1,0 +1,94 @@
+%
+% $RCSfile: configurable_or_programmable.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:06 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Configurable or Programmable}
+\label{configurable_or_programmable_heading}
+\index{Configurable System}
+\index{Programmable System}
+\index{Key-Value-Pair}
+\index{Knowledge}
+\index{External Knowledge}
+\index{Operating System}
+\index{OS}
+
+\emph{Knowledge} (first defined in section \ref{knowledge_engineering_heading}
+of this work) is present in all kinds of software systems. It is what
+characterises a system, because: it defines possible states and logic, their
+structure and relations, and thereby a complete application; it such determines
+the way a system process controls the computer hardware it runs on; it thereby
+has the capability to change the properties and behaviour of a whole computer
+system. One can therefore say that knowledge encoded in software represents the
+\emph{Configuration} information necessary to run a computer system in the
+desired way.
+
+In addition to the configuration information hard-coded in the program, most
+applications offer to alter special settings such as paths, language choice and
+spelling, editor and saving options, colours, fonts and further properties.
+Usually, these are made persistent using some kind of external storage like a
+flat file or a database. One popular format for storing simple properties are
+so-called \emph{Key-Value-Pairs}. Modern applications do also make use of
+hierarchical storage for more complex settings.
+
+Yet if a software program already represents all knowledge needed to run an
+application on a computer, why storing extra settings externally? Obviously, a
+standard program is not \emph{flexible} enough; it cannot be changed anymore
+after compilation. But program changes at runtime are often highly desirable.
+
+So, if external storage of properties does make sense, why not storing
+\emph{everything} outside the actual program? This seems to be a crazy but very
+useful idea, as it would result in absolutely flexible application systems. But
+it has limits. There \emph{must} be some core program (\emph{Kernel}) able to
+read and write (\emph{interpret}), and to process (\emph{handle}) external
+properties (\emph{Signals}). The more complex, structured and inter-related
+these properties are, the more suitable it is to call them \emph{Knowledge}.
+
+A technical system may be able to understand external knowledge, just like
+human beings have the cognitive abilities to understand their environment by
+building a \emph{Virtual World} of it. Yet is this not enough. Knowledge about
+the \emph{Real World} environment is one thing; interacting with it another. A
+computer has hardware devices for interacting with the real world. The devices
+need to be operated correctly so that knowledge can be exchanged through them.
+This hardware driving functionality is normally provided by an
+\emph{Operating System} (OS). But current OS have the deficiency of not being
+able to handle knowledge. What is needed, finally, is a system with
+\emph{low-level} hardware control abilities like an operating system
+\emph{plus} additional \emph{high-level} knowledge handling abilities
+\cite{heller2004}.
+
+Other people reflected on this and have come to a similar conclusion. Thomas
+Beale writes in \cite{openhealth}:
+
+\begin{quote}
+    The history of IT \ldots\ has taught us that the only kind of useful system
+    that can be delivered to domain users \ldots\ is one which is not just
+    configurable, but \emph{programmable} -- not by statements of source code,
+    but by high-level \emph{domain-user-oriented} tools.
+\end{quote}
+
+Well, the user-oriented, domain-knowledge handling tools are desirable, but only
+in the second place. The important part of this statement is the realisation that
+systems need to become \emph{programmable}, and this by \emph{External Knowledge}.
+Whether this knowledge gets created and maintained manually or by using graphical
+tools, is of minor importance. What is needed in any case is a formal knowledge
+specification language serving as basis for the people or tools to work on.
+Chapter \ref{cybernetics_oriented_language_heading} will introduce such a
+language.

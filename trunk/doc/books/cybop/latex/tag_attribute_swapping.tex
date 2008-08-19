@@ -1,0 +1,80 @@
+%
+% $RCSfile: tag_attribute_swapping.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:09 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Tag-Attribute Swapping}
+\label{tag_attribute_swapping_heading}
+\index{CYBOL Tag-Attribute Swapping}
+
+CYBOL swaps the meaning attributes and tags traditionally have in XML
+documents, where tags represent elements that may be nested infinitely and
+attributes hold additional (meta) information about a tag. Following an example
+of how CYBOL might have looked that way:
+
+\begin{scriptsize}
+    \begin{verbatim}
+<model>
+    <part>
+        <name="title"/>
+        <channel="inline"/>
+        <abstraction="character"/>
+        <model="Res Medicinae"/>
+    </part>
+    <part layout="compass" position="north">
+        <name="menu_bar"/>
+        <channel="file"/>
+        <abstraction="cybol"/>
+        <model="gui/menu_bar.cybol"/>
+    </part>
+</model>
+    \end{verbatim}
+\end{scriptsize}
+
+The current final specification of CYBOL, on the contrary, uses attributes to
+define a nested element (part) and tags to give properties (meta information)
+about such a nested element, in the following way:
+
+\begin{scriptsize}
+    \begin{verbatim}
+<model>
+    <part name="title" channel="inline" abstraction="character" model="Res Medicinae"/>
+    <part name="menu_bar" channel="file" abstraction="cybol" model="gui/menu_bar.cybol">
+        <property name="layout" channel="inline" abstraction="character" model="compass"/>
+        <property name="position" channel="inline" abstraction="character" model="north"/>
+    </part>
+</model>
+    \end{verbatim}
+\end{scriptsize}
+
+This is because:
+
+\begin{enumerate}
+    \item the number of attributes specifying a part in CYBOL is fixed, whereas
+        the number of tags specifying a property of a part is not, and the
+        number of XML tags is easier extensible than that of attributes;
+    \item that way it is also possible to specify a part without any properties
+        in just one CYBOL code line, while otherwise four tags would always
+        have to be given;
+    \item not only a part may be nested (consist of smaller parts), but also a
+        property may be (for example a position consisting of three coordinates
+        given as parts), which necessitates the four standard attributes to be
+        given for properties and constraints as well.
+\end{enumerate}

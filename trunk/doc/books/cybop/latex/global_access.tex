@@ -1,0 +1,52 @@
+%
+% $RCSfile: global_access.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:07 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsubsection{Global Access}
+\label{global_access_heading}
+\index{Global Data Access}
+\index{Statically Accessible Classes}
+\index{Random Access Memory}
+\index{RAM}
+\index{Instance Tree}
+\index{Unidirectional Structure}
+\index{Anti Pattern}
+\index{Inversion of Control Pattern}
+\index{IoC}
+
+Statically accessible (manager) classes are often introduced to frameworks
+(section \ref{framework_heading}) because some instances can not be reached
+anymore along normal object associations. With instance models having a tree
+structure being directed and acyclic, each object can be reached anytime in a
+consistent way, by navigating down the tree branches. A pure instance tree in a
+computer's \emph{Random Access Memory} (RAM) represents an unidirectional
+structure that permits data access along \emph{well-defined} paths.
+
+Global access via static types, on the other hand, allows \emph{any} instance
+to address data in memory \emph{directly}, which not only complicates software
+development and maintenance, but, due to uncontrollable access, is a potential
+security risk. The usage of static objects accessible by any other part in a
+system is an \emph{Anti Pattern} to \emph{Inversion of Control} (IoC) (section
+\ref{inversion_of_control_heading}), highly insecure and hence undesirable.
+Chapter \ref{knowledge_schema_heading} does therefore classify all patterns
+using global (static) access as not recommendable. And the language and
+interpreter introduced in chapters \ref{cybernetics_oriented_language_heading}
+and \ref{cybernetics_oriented_interpreter_heading} do avoid their usage.

@@ -1,0 +1,97 @@
+%
+% $RCSfile: modelling_mistakes.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:07 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\section{Modelling Mistakes}
+\label{modelling_mistakes_heading}
+\index{Modelling Mistakes}
+
+While the previous chapters elaborated on \emph{Software Engineering Processes}
+(SEP) (chapter \ref{software_engineering_process_heading}) and the
+\emph{Physical Architecture} of an \emph{Information Technology} (IT)
+environment (chapter \ref{physical_architecture_heading}), the sections of this
+chapter discussed state-of-the-art solutions for designing and implementing the
+\emph{Logical Architecture} of software systems, that is their inner structure.
+
+Computers can be controlled by \emph{Software}. It contains the instructions
+after which a computer is run. Instructions can be grouped into levels of
+growing abstraction, starting from low-level \emph{Digital Logic}, implemented
+in hardware, up to higher-level \emph{Problem Oriented Languages} (POL). The
+borders between hardware and software are fluent. Initially, it is up to the
+computer constructor to decide whether functionality gets burned into hardware
+or coded into software.
+
+A set of computer instructions is known as \emph{Program}; the language a
+computer program is written in is known as \emph{Programming Language}. While
+for early application systems, it was acceptable to write programs directly in
+\emph{Machine-} or \emph{Assembly Language}, later tasks required languages
+that were easier and faster to program. A palette of programming languages and
+-paradigms was introduced in section \ref{paradigm_and_language_heading}.
+
+The more complex software requirements became, the better solutions had to be
+found to cope with them. Unfortunately, the complexity of the requirements is
+often targeted with equally complex design- and implementation techniques,
+leading to dependencies and high coupling within a system. A whole variety of
+such techniques, more or less complex, exists today and this chapter tried to
+investigate a rather big percentage of them, mentioning their advantages but
+also trying to identify disadvantages. To the investigated concepts belong:
+
+\begin{itemize}
+    \item[-] Structure and Procedure; Class and Inheritance (section \ref{paradigm_and_language_heading})
+    \item[-] Pattern and Framework (section \ref{pattern_heading})
+    \item[-] Component and Concern; Agent with Knowledge Base (section \ref{component_oriented_programming_heading})
+    \item[-] Application and Domain; Model generated into Code (section \ref{domain_engineering_heading})
+    \item[-] Date and Rule (section \ref{knowledge_engineering_heading})
+    \item[-] Terminology and Ontology; Archetype and Dual Model (section \ref{conceptual_network_heading})
+\end{itemize}
+
+Some of the identified disadvantages are already addressed and improved by
+existing technologies. The inflexible \emph{Static Typing} (section
+\ref{system_programming_heading}), for instance, can be avoided with
+\emph{Typeless Programming} (section \ref{typeless_programming_heading}).
+However, there remains a number of design problems to be solved, the main ones
+of which are listed following:
+
+\begin{itemize}
+    \item[-] Unpredictable behaviour due to container inheritance
+        (section \ref{falsifying_polymorphism_heading})
+    \item[-] Differing communication patterns due to wrong models
+        (section \ref{architectural_heading})
+    \item[-] Bidirectional dependencies due to bad patterns
+        (section \ref{bidirectional_dependency_heading})
+    \item[-] Global data access due to static methods
+        (section \ref{global_access_heading})
+    \item[-] Redundant code or spread functionality due to concerns
+        (section \ref{spread_functionality_heading})
+    \item[-] Provision of a model-only approach to software development
+        (section \ref{model_and_code_heading})
+    \item[-] Finding of a universal schema for knowledge representation
+        (section \ref{dual_model_approach_heading})
+\end{itemize}
+
+Many of these are caused by \emph{Modelling Mistakes} that will only turn out
+to be mistakes while being compared with inter-disciplinary ideas in later
+chapters (part \ref{contribution_heading}). One aim of this work is to improve
+software development by offering solutions to these problems. Yet instead of
+further complicating software design and -implementation, it tries to bethink
+on the elementary principle of programming, namely the: \textit{Abstraction of
+states and logic in form of static knowledge, in order to dynamically control a
+computer system}. More on this in the following chapter.

@@ -1,0 +1,72 @@
+%
+% $RCSfile: syntax.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:09 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Syntax}
+\label{syntax_heading}
+\index{CYBOL Syntax}
+\index{Syntax of a Language}
+\index{Grammar of a Language}
+\index{Extensible Markup Language}
+\index{XML}
+\index{XML Tag}
+\index{XML Attribute}
+\index{Discrimination}
+\index{Composition}
+
+Every language has a special \emph{Syntax}, that is a \emph{Grammar} with rules
+for combining terms and symbols \cite{foldoc}. CYBOL could define its own
+syntax or use an already existing one, of another language. Because of its
+popularity, clear text representation, flexibility, extensibility and ease of
+use, \emph{XML} was chosen to deliver the syntax for CYBOL.
+
+To mention just two of the syntactical elements of XML, \emph{Tag} and
+\emph{Attribute} are considered shortly here. Tags are special, arbitrary
+keywords that have to be defined by the system working with an XML document.
+Attributes keep additional information about the contents enclosed by two tags.
+Two examples:
+
+\begin{scriptsize}
+    \begin{verbatim}
+    <tag attribute="value">
+        contents
+    </tag>
+    \end{verbatim}
+\end{scriptsize}
+
+\begin{scriptsize}
+    \begin{verbatim}
+    <tag attribute1="value" attribute2="contents"/>
+    \end{verbatim}
+\end{scriptsize}
+
+An XML document carries a name and can such represent a \emph{Discrete Item},
+as suggested by the principles of human thinking (section
+\ref{human_thinking_heading}). Being a \emph{Compound}, it consists of parts --
+and, it can link to other documents treated as its parts. That way, a whole
+hierarchy can be formed. Tag attributes can keep additional information about
+the linked parts. Most importantly, XML documents have a hierarchical structure
+based on tags, which may be used to store meta information about a part.
+
+Considering these properties of XML, it seems predestinated for formally
+representing abstract models using the CYBOP concepts. CYBOL, finally, is XML
+\emph{plus} a defined set of tags, attributes and values, used to structure and
+link documents meaningfully.

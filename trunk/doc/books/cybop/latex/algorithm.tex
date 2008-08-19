@@ -1,0 +1,72 @@
+%
+% $RCSfile: algorithm.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:05 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Algorithm}
+\label{algorithm_heading}
+\index{Algorithm}
+\index{Knowledge Engineering}
+\index{KE}
+\index{Ontology}
+\index{Knowledge Schema}
+\index{State Model}
+\index{Logic Model}
+\index{Sequence of (Mapping) Rules}
+\index{Lambda Calculus}
+\index{Turing Machine}
+
+For John F. Sowa \cite{sowa}, \emph{Knowledge Engineering} (KE) is:
+\textit{the application of logic and ontology to the task of building
+computable models of some domain for some purpose.} Section
+\ref{knowledge_representation_heading} showed how an \emph{Ontology} can be
+applied to structure state knowledge of a domain, and introduced a new
+\emph{Knowledge Schema}. This section investigates the universality of that
+knowledge schema, that is its applicability to \emph{State-} as well as
+\emph{Logic} models.
+
+Not only input/ output (i/o) knowledge (states) can be structured
+hierarchically, using an ontology, the operations of a system (logic) can be
+cascaded and nested as well. The resulting logic models are \emph{Sequences} of
+input-to-output mapping rules that can consist of yet finer-grained models. The
+theory of computing uses the word \emph{Algorithm} to label a sequence of
+mapping rules. Banerjee \cite{banerjee} writes on this:
+
+\begin{quote}
+    Each \ldots\ mathematician had to precisely define the notion of an
+    algorithm, and each defined it in a different way. Godel defined algorithm
+    as a \emph{Sequence of Rules} for forming complicated mathematical
+    functions out of simple mathematical functions, Church used a formalism
+    called the \emph{Lambda Calculus}, while Turing used a mathematical object
+    called the \emph{Turing Machine} and defined an algorithm to be any set of
+    instructions for his simple machine. All these seemingly different and
+    independently contrived definitions turned out to be equivalent and they
+    form the basics of the modern theory of computing. No modern programming
+    language can achieve more, in principle, than the Turing machine or the
+    lambda-calculus.
+\end{quote}
+
+\emph{Time} plays an important role in data processing. It dictates the order
+in which steps of an algorithm are executed and thereby ensures a correct
+sequence of actions. Every element of an algorithm needs to be assigned an
+instant (position) in time, as meta information. Although the runtime-processing
+of data, according to an algorithm, is \emph{dynamic}, the models of logic --
+just like i/o state models -- are \emph{static} (chapter
+\ref{statics_and_dynamics_heading}).

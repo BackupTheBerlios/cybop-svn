@@ -1,0 +1,58 @@
+%
+% $RCSfile: error_handling.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:06 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Error Handling}
+\label{error_handling_heading}
+\index{CYBOI Error Handling}
+\index{Error (of Syntax, Logical, at Runtime)}
+
+One possibility to systematise errors frequently appearing during software
+development, is to distinguish between three kinds: \emph{Syntax},
+\emph{Logical} and \emph{Runtime}.
+
+In typed programming languages like C -- the language CYBOI is written in --
+\emph{Syntax Errors} can be found by a compiler. Not so in CYBOL. It is a
+language whose models get interpreted at runtime, according to the abstraction
+assigned to each of them. This is comparable to scripting languages like
+\emph{Python} \ref{typeless_programming_heading} which do not request a type
+for variable declaration. Compilation of CYBOL files is therefore not needed
+and model abstractions (types) are not and cannot be checked before running a
+system. However, since CYBOL is based on XML, at least its correct XML syntax
+can be validated before execution.
+
+\emph{Logical Errors} are mostly more difficult to find than syntax errors.
+They may be a wrong initialisation, a false statement, a loop count mistake or
+comparable errors. They can better be found in a running system, using a tool
+called \emph{Debugger} that allows to check variable values at runtime. Although
+a special CYBOI debugger does not exist yet, it may not be too difficult to
+write one. CYBOI is slim; its transient models in memory are managed from one
+place (knowledge memory root); its signals are processed by just one single
+loop. A debugger would not have to jump through the actual application code,
+it could rely on the few containers and loop in CYBOI, and nevertheless show
+application model values at runtime.
+
+Predictable \emph{Runtime Errors} like crossing the limit of a number space,
+resulting from false user input, or similarly foreseeable activities can be
+notified to a user via an error message -- on console, in a log file, or by
+popping up a graphical dialogue. Unpredictable runtime errors are tricky and
+quite hard to find. The longer CYBOI is used, the better it will be tested and
+the less likely will unpredictable runtime errors caused by wrong code occur.

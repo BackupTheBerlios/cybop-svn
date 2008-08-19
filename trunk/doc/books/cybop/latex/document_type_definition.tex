@@ -1,0 +1,108 @@
+%
+% $RCSfile: document_type_definition.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:06 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsubsection{Document Type Definition}
+\label{document_type_definition_heading}
+\index{CYBOL DTD}
+\index{Document Type Definition}
+\index{DTD}
+\index{Standard Generalized Markup Language}
+\index{SGML}
+\index{Extensible Markup Language}
+\index{XML}
+\index{Markup Tag}
+\index{CYBOP 'model' Tag}
+\index{CYBOP 'part' Tag}
+\index{CYBOP 'property' Tag}
+\index{CYBOP 'constraint' Tag}
+\index{CYBOP 'name' Attribute}
+\index{CYBOP 'channel' Attribute}
+\index{CYBOP 'abstraction' Attribute}
+\index{CYBOP 'model' Attribute}
+
+A DTD represents the type definition of an SGML or XML document. It consists of
+a set of \emph{Markup Tags} and their \emph{Interpretation} \cite{foldoc}. DTDs
+can be declared inline, within a document, or as an external reference
+\cite{w3schools}. Figure \ref{dtd_figure} shows the DTD of the CYBOL language.
+
+\begin{figure}[ht]
+    \bigskip
+    \begin{scriptsize}
+        \begin{verbatim}
+<!ELEMENT model (part*)>
+<!ELEMENT part (property*)>
+<!ELEMENT property (constraint*)>
+<!ELEMENT constraint EMPTY>
+
+<!ATTLIST part
+    name CDATA #REQUIRED
+    channel CDATA #REQUIRED
+    abstraction CDATA #REQUIRED
+    model CDATA #REQUIRED>
+<!ATTLIST property
+    name CDATA #REQUIRED
+    channel CDATA #REQUIRED
+    abstraction CDATA #REQUIRED
+    model CDATA #REQUIRED>
+<!ATTLIST constraint
+    name CDATA #REQUIRED
+    channel CDATA #REQUIRED
+    abstraction CDATA #REQUIRED
+    model CDATA #REQUIRED>
+        \end{verbatim}
+    \end{scriptsize}
+    \caption{Recommended CYBOL DTD}
+    \label{dtd_figure}
+\end{figure}
+
+Following the pure hierarchical structure of the CYBOP knowledge schema (section
+\ref{knowledge_representation_heading}), it would actually suffice to use a DTD
+as simple as the one shown in figure \ref{simpledtd_figure}. Since the three
+elements \emph{part}, \emph{property} and \emph{constraint} (compare figure
+\ref{dtd_figure}) have the same list of required attributes, they could be
+summarised under the name \emph{part}, for example. Because the structure of a
+CYBOL model is non-ambiguous, the meaning of its elements can be guessed from
+their position within the model.
+
+\begin{figure}[ht]
+    \bigskip
+    \begin{scriptsize}
+        \begin{verbatim}
+<!ELEMENT part (part*)>
+
+<!ATTLIST part
+    name CDATA #REQUIRED
+    channel CDATA #REQUIRED
+    abstraction CDATA #REQUIRED
+    model CDATA #REQUIRED>
+        \end{verbatim}
+    \end{scriptsize}
+    \caption{Simplified CYBOL DTD}
+    \label{simpledtd_figure}
+\end{figure}
+
+For the purpose of expressing knowledge in accordance with the schema suggested
+by CYBOP, an XML document does not need to have a root element. The document's
+(file) name clearly identifies a model. For reasons of XML conformity, however,
+an extra root element called \emph{model} was defined (figure \ref{dtd_figure}).
+And for reasons of better readability and programmability, the three kinds of
+embedded elements were given distinct names.

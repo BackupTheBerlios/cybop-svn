@@ -1,0 +1,66 @@
+%
+% $RCSfile: container_mapping.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:06 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Container Mapping}
+\label{container_mapping_heading}
+\index{Containers in CYBOL}
+\index{Mapping Containers to CYBOL}
+
+State-of-the-art programming languages offer a number of different container
+types, partly based on each other through inheritance. Section
+\ref{object_oriented_programming_heading} of this work identified
+\emph{Container Inheritance} as one reason for falsified program results.
+
+\begin{table}[ht]
+    \begin{center}
+        \begin{footnotesize}
+        \begin{tabular}{| p{35mm} | p{70mm} |}
+            \hline
+            \textbf{Classical Container Type} & \textbf{Realisation in CYBOL Knowledge Template}\\
+            \hline
+            Tree & Hierarchical \emph{whole}-\emph{part} structure\\
+            \hline
+            Table & Like a Tree, as hierarchy consisting of rows which consist of columns\\
+            \hline
+            Map & Parts have a \emph{name} (key) and a \emph{model} (value)\\
+            \hline
+            List & Parts may have a \emph{position} property\\
+            \hline
+            Vector & A \emph{model} attribute may hold comma-separated values;
+                an extra template holds a dynamically changeable number of parts\\
+            \hline
+            Array & Like a Vector; characters are interpreted as \emph{string}\\
+            \hline
+        \end{tabular}
+        \end{footnotesize}
+        \caption{Mapping Classical Containers to CYBOL}
+        \label{mapping_table}
+    \end{center}
+\end{table}
+
+Chapter \ref{knowledge_schema_heading} then introduced a \emph{Knowledge Schema}
+which represents each item as \emph{Hierarchy} by default, the result being
+that different types of containers are not needed any longer. A possible
+unification of container types was already discussed in section
+\ref{container_unification_heading}. But how are the different kinds of
+container behaviour implemented in CYBOL? Table \ref{mapping_table} gives an
+answer. As can be seen, CYBOL is able to represent many container types.

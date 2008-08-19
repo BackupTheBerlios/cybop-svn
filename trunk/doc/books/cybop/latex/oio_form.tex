@@ -1,0 +1,90 @@
+%
+% $RCSfile: oio_form.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:07 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{OIO Form}
+\label{oio_form_heading}
+
+\emph{OIO Form}
+Andrew Ho; OpenHealth Mailing List, December 2003 \cite{openhealth}
+
+<form>
+<item>
+  <name>sBP</name>
+  <description>systemic arterial blood pressure,supine</description>
+  <prompt>sBP?</prompt>
+  <itemtype>pressure</itemtype>
+</item>
+<itemtype>
+  <name>pressure</name>
+  <description>mmHg</description>
+  <action>number</action>
+  <choice></choice>
+</itemtype>
+</form>
+
+OpenHealth Mailing List, December 2003 (relates to the OIO form above) \cite{openhealth}
+Andrew Ho answers to Thomas Beale on the topic of OpenEHR Archetypes vs. OIO Forms
+
+this form does not say anything about:
+- systolic or diastolic (or other phases) of blood pressure
+>
+Just add it. Instead of "sBP" - call it "Systolic BP".
+>
+- what data type blood pressure is recorded as
+>
+The itemtype is "pressure". That is the "data type".
+>
+- what will you do if you want the patient standing - another form with
+'standing' instead of 'supine'?
+>
+You can use another form or another item (a posture item).
+>
+- what if you want to record a time-series of BPs, say 3, with the patient
+in a different position prior to each?
+>
+Just have 3 question items on the same form - or have 3 forms. Your choice.
+>
+- what if you want to record the protocol, i.e. instrument, cuff size
+>
+Add a question item called "protocol".
+>
+- how will you provide validation on data input, to e.g.
++ to ensure that
+valid data types are used for each entered item (e.g. a Date is not entered
+for diastolic BP)?
+>
+Use action=number
+>
++ ensure that the systolic bp is in some sane range, e.g. 0-500mmHg?
+
+Use action=number and choice='>20,<500', for example.
+>
++ ensure that sensble positions of patient are offered to the user?
+
+Communicate the "sensible positions" via the question prompt.
+>
+- how will you indicate that the data created by this form was in fact
+created by this form (what is its id?), so that my software can process
+the data according to the form's model of BP?
+>
+All data created via this OIO form are stored and labeled with the name of
+this OIO form.

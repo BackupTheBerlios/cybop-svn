@@ -1,0 +1,41 @@
+%
+% $RCSfile: lifecycle_management.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:07 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Lifecycle Management}
+\label{lifecycle_management_heading}
+\index{CYBOI Lifecycle Management}
+
+To the startup routine belong the creation of the three containers: knowledge
+memory, signal memory and internals memory, and the creation of a startup model
+which is placed as first signal into the signal memory. Additional meta
+information given are the signal's model, its kind of abstraction and priority.
+
+Typical synonyms for \emph{Signal} are \emph{Event} or \emph{Action} -- and
+even an \emph{Operating System} (OS) \emph{Interrupt} is some form of signal,
+only on a lower system level, closer to hardware. In CYBOI, a signal is simply
+a reference to a logic model, which may be either a composed algorithm, or a
+primitive operation.
+
+With the startup signal being placed in the signal memory, the system enters
+the \emph{check} procedure (\emph{checker} module). On shutdown, the system
+runs through similar procedures in opposite direction, only that then startup
+signal, memories and global variables are destroyed.

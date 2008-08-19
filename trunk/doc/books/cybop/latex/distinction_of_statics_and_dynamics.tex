@@ -1,0 +1,126 @@
+%
+% $RCSfile: distinction_of_statics_and_dynamics.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:06 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Distinction of Statics and Dynamics}
+\label{distinction_of_statics_and_dynamics_heading}
+\index{CYBOP Distinction of Statics and Dynamics}
+
+A first major mistake in current language concepts and design solutions is the
+mix-up of static and dynamic parts of software, that is pure application-domain
+knowledge and its processing, close to hardware. It is the reason for:
+
+\begin{itemize}
+    \item[a] Abstraction gap between designed system architecture and implemented
+        source code, in a SEP (section \ref{abstraction_gaps_heading})
+    \item[b] Global data access via static class methods being insecure
+        (section \ref{global_access_heading})
+    \item[c] Bidirectional dependencies caused by some software patterns
+        (section \ref{bidirectional_dependency_heading})
+    \item[d] Usage of reflective techniques which are based on bidirectional
+        dependencies and often cause broken type systems with circular
+        references between super- and sub platform (section \ref{reflection_heading})
+    \item[e] Spread functionality through crosscutting concerns and complicated
+        handling of aspects (section \ref{aspect_oriented_programming_heading})
+    \item[f] Memory leaks
+    \item[g] Repeated implementation of the same platform-dependent functionality
+    \item[h] Repeated usage and copying of the same software patterns (section
+        \ref{pattern_systematics_heading})
+\end{itemize}
+
+Chapter \ref{statics_and_dynamics_heading} therefore recommended a strict distinction
+of high-level static knowledge and low-level dynamic system control functionality.
+The CYBOL language (chapter \ref{cybernetics_oriented_language_heading}) was
+defined to express and specify knowledge in the most general sense; the CYBOI
+interpreter (chapter \ref{cybernetics_oriented_interpreter_heading}) was
+created to control a system based on CYBOL input.
+
+\paragraph{a}
+
+Since CYBOL knowledge templates are a complete formal description of an
+application's architecture, they represent its implementation at the same time.
+But that also means that the transfer of a system's design into a programming
+language, as known from classical application development, becomes superfluous.
+The \emph{Design-} and \emph{Implementation} phases are merged, so that a gap
+does not exist anymore.
+
+\paragraph{b}
+
+Since CYBOI holds all knowledge in one single instance tree whose nodes can
+be accessed along well-defined paths, data are not globally accessible anymore.
+
+\paragraph{c}
+
+Since parts of a knowledge model are accessed unidirectionally, bidirectional
+dependencies are not an issue any longer.
+
+\paragraph{d}
+
+Since CYBOI is based on one standardised knowledge schema providing a
+well-defined type structure which does not have to be changed at runtime, there
+is neither a need nor a possibility for workarounds like reflective mechanisms
+causing a broken type system. Because the knowledge schema's whole-part
+hierarchy already provides meta information such as a part model's name and
+kind of abstraction (comparable to an attribute's name and type hold by the
+meta class of a class), one main reason for using reflective techniques like
+meta classes thereby falls apart. A second reason that does not count any
+longer is the provision of basic features (like persistence or communication)
+through meta techniques; CYBOI already contains these features and may act as
+universal communicator.
+
+\paragraph{e}
+
+Since CYBOI does provide all necessary low-level mechanisms, crosscutting
+concerns become superfluous. These concerns usually want to achieve the same as
+reflection in that they provide basic functionality to all parts of a system.
+However, since CYBOL knowledge templates are free from low-level system control
+information and contain pure domain knowledge instead, crosscutting concerns
+and aspects are not a topic of interest any longer.
+
+\paragraph{f}
+
+Since CYBOI concentrates all knowledge models (instances) in one place, as
+branches of one single knowledge tree, forgotten models can get smoothly
+destroyed at application shutdown. Traditionally, special mechanisms like
+\emph{Garbage Collectors} (GC) had to be applied to achieve this, because
+systems written in classical languages leave it up to the programmer to
+properly reference all instances. If a reference to one instance was lost, it
+could not get destroyed and resided as leak in memory. Often, more and more
+memory space got blocked that way, until all RAM space was taken and a computer
+hung (crashed). In CYBOI, a reference to any instance is always available, via
+the root of the knowledge tree.
+
+\paragraph{g}
+
+Since CYBOI contains all hardware-dependent functionality, the application
+knowledge encoded in CYBOL templates or serialised models is truly
+platform-neutral, easily switchable and exchangeable among systems. The
+low-level system gets uninteresting; high-level knowledge is what application
+developers can now concentrate on. Finally, the old dream of having knowledge
+engineers (domain experts) working independently from software system engineers
+might possibly be coming true.
+
+\paragraph{h}
+
+Since CYBOI already implements all necessary patterns, application developers
+and domain experts are freed from the burden to learn and apply the same
+software patterns again and again; they can now develop application systems
+considering just one concept: that of hierarchical \emph{Composition}.

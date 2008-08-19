@@ -1,0 +1,90 @@
+%
+% $RCSfile: semantic_web.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:08 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Semantic Web}
+\label{semantic_web_heading}
+\index{Semantic Web}
+\index{Extensible Markup Language}
+\index{XML}
+\index{XML Schema}
+\index{XML Data}
+\index{Document Content Description}
+\index{DCD}
+\index{Schema for Object Oriented XML}
+\index{SOX}
+\index{XML Metadata Interchange}
+\index{XMI}
+\index{Resource Description Framework}
+\index{RDF}
+\index{Web Ontology Language}
+\index{OWL}
+
+As mentioned in section \ref{extensible_markup_language_heading}, the
+\emph{Extensible Markup Language} (XML) \cite{rdfowlrelease} provides a:
+\textit{set of rules for creating vocabularies that can bring structure to both
+documents and data on the Web} and it: \textit{gives clear rules for syntax.}
+XML Schemas \cite{xmlschema} served as: \textit{a method for composing XML
+vocabularies.} Yet although XML were a powerful, flexible surface syntax for
+structured documents, it imposed no \emph{Semantic Constraints} on the
+\emph{Meaning} of these documents. Having investigated the usefulness of XML
+for a \emph{meaningful} sharing of information units at the semantic level,
+Robin Cover writes \cite{xmlsemantics}:
+
+\begin{quote}
+    \ldots\ the use of XML for \emph{Data Interchange} may already outweigh its
+    use for \emph{Document Display}. For messaging and other transaction data,
+    specifications approaching the level of formal semantics (e.g. KIF or KQML)
+    are desirable, governing not just common (atomic) data types in business
+    objects, but complex objects used by computer agents in large-scale business
+    transactions. XML vocabularies supporting these applications will need to be
+    defined in terms of precise object semantics.
+\end{quote}
+
+He lists a number of efforts dealing with the support for generic XML semantics,
+that is \emph{Semantic Transparency} of XML in a broader sense, to provide
+unambiguous semantic specification:
+
+\begin{itemize}
+    \item[-] \emph{XML Data} \cite{xmldata}
+    \item[-] \emph{Document Content Description} (DCD) for XML \cite{dcd}
+    \item[-] \emph{Schema for Object Oriented XML} (SOX) \cite{sox}
+    \item[-] \emph{XML Metadata Interchange} (XMI) \cite{mda}
+    \item[-] \emph{Resource Description Framework} (RDF) \cite{rdf}
+    \item[-] \emph{Web Ontology Language} (OWL) \cite{owl}
+\end{itemize}
+
+The RDF and OWL as well-known efforts are mentioned in the following two
+subsections. Both are often comprised under the umbrella term
+\emph{Semantic Web}. Much of what is written about the semantic web sounds as
+if it was a replacement technology for the Web as known today. Yet Eric Miller,
+leader of W3C's semantic web activity, means \cite{rdfowlrelease}:
+
+\begin{quote}
+    In reality, it's more Web Evolution than Revolution. The Semantic Web is
+    made through incremental changes, by bringing machine-readable descriptions
+    to the data and documents already on the Web. XML, RDF and OWL enable the
+    Web to be a global infrastructure for sharing both, documents and data which
+    make searching and reusing information easier and more reliable as well.
+\end{quote}
+
+\input{resource_description_framework}
+\input{web_ontology_language}

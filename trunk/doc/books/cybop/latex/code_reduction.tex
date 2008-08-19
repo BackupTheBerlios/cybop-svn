@@ -1,0 +1,73 @@
+%
+% $RCSfile: code_reduction.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:05 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Code Reduction}
+\label{code_reduction_heading}
+\index{Code Reduction}
+\index{Picture Element}
+\index{Pixel}
+
+In his book \emph{Programming Pearls} \cite[page 128]{bentley}, Jon Bentley
+demonstrates \emph{Code Reduction} on the following graphics program example:
+
+\begin{scriptsize}
+    \begin{verbatim}
+� � for i = [17, 43] set(i, 68)
+� � for i = [18, 42] set(i, 69)
+� � for j = [81, 91] set(30, j)
+� � for j = [82, 92] set(31, j)
+    \end{verbatim}
+\end{scriptsize}
+
+He suggests to replace the \emph{set} procedures that switch a
+\emph{Picture Element} (Pixel) with suitable functions for drawing horizontal
+and vertical lines:
+
+\begin{scriptsize}
+    \begin{verbatim}
+� � hor(17, 43, 68)
+� � hor(18, 42, 69)
+� � vert(81, 91, 30)
+� � vert(82, 92, 31)
+    \end{verbatim}
+\end{scriptsize}
+
+This code, finally, gets reduced to pure data stored in an array:
+
+\begin{scriptsize}
+    \begin{verbatim}
+� � h 17 43 68
+� � h 18 42 69
+� � v 81 91 30
+� � v 82 92 31
+    \end{verbatim}
+\end{scriptsize}
+
+The data can be read by an interpreter program which knows about their meaning.
+
+Bentley's example shows in a nice way how knowledge can be extracted from program
+source code. The graphic application's actual data are represented by the values
+in the array above. All other functionality accessing and manipulating Pixels
+directly does belong to system control and remains in the interpreter program.
+Chapter \ref{cybernetics_oriented_interpreter_heading} will introduce an
+interpreter that is able to read and handle \emph{general} knowledge, only on a
+much larger scale.

@@ -1,0 +1,58 @@
+%
+% $RCSfile: black_box.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:05 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsubsection{Black Box}
+\label{black_box_heading}
+\index{Black Box}
+\index{Operation}
+\index{Functional Elements}
+\index{Complexity Hiding}
+\index{Block Diagram}
+\index{Unified Modeling Language}
+\index{UML}
+
+An \emph{Operation} can be well treated as system: it contains rules of logic
+after which its input gets transformed into its output. But not all systems are
+as easy as a simple operation; many are \emph{composed} of yet smaller systems.
+Biological systems, for example, are extremely difficult to describe in their
+entirety, with a simple mathematical formula.
+
+A system may be seen as a number of interacting \emph{Functional Elements}. It
+is these elements and their interactions which determine the specific
+properties and behaviour of a system. However, for modelling the behaviour of a
+transmission system, its inner structure is not important. Systems theory
+focusses on the time-dependent progression of input- and output signals as well
+as their relation.
+
+A common technique in systems engineering is to reduce complexity by
+\emph{hiding} functionality which is unimportant in the given context, inside a
+system. One then talks of a system as \emph{Black Box} since only its input,
+output and their relation, but not its inside, are considered (figure
+\ref{blackbox_figure}). The black box provides an encapsulation towards the
+infinite microcosm, and it knows nothing about its usage within a greater
+macrocosm (section \ref{knowledge_ontology_heading}).
+
+The usual way to illustrate system elements and their relations is the
+\emph{Block Diagram}. It is an important instrument for system analysis. Many
+structures and processes can be described in that manner. In software
+engineering, the \emph{Unified Modeling Language} (UML) has become the de-facto
+modelling standard instead.

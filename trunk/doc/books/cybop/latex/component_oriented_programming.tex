@@ -1,0 +1,126 @@
+%
+% $RCSfile: component_oriented_programming.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:06 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\section{Component Oriented Programming}
+\label{component_oriented_programming_heading}
+\index{Component Oriented Programming}
+\index{COP}
+\index{Component Based Design}
+\index{CBD}
+\index{Software Component}
+\index{Component}
+\index{Black Box Reuse}
+\index{Graphical User Interface}
+\index{GUI}
+\index{Delphi}
+\index{Visual Component Library}
+\index{VCL}
+\index{Visual Basic}
+\index{VB}
+\index{Java}
+\index{Abstract Window Toolkit}
+\index{AWT}
+\index{Bean}
+\index{Agent}
+\index{Open Source Software}
+\index{OSS}
+\index{Legacy System}
+\index{PL/1}
+\index{Interface Definition Language}
+\index{IDL}
+\index{Common Object Request Broker Architecture}
+\index{CORBA}
+\index{Aspect Oriented Programming}
+\index{AOP}
+\index{Aspect}
+\index{Concern}
+\index{Agent Oriented Programming}
+\index{AGOP}
+\index{Agent}
+
+In the not-so-distant past, there has been a lot of buzz in the industry
+touting \emph{Component Based Design} (CBD). Much of it was more marketing than
+the actual application of new design principles and it is also no surprise that
+the definition of a \emph{Software Component} differs between authors, companies
+and projects. A rather formal one is that of the \emph{Avalon} framework
+\cite{avalon} of the \emph{Apache Jakarta} project \cite{jakarta}, which says:
+
+\begin{quote}
+    \emph{Component Oriented Programming} takes object-oriented programming one
+    step further. Regular object-oriented programming organizes data objects
+    into entities that take care of themselves. There are many advantages to
+    this approach. \ldots\ But it also has a big limitation: that of object
+    \emph{Co-Dependency}. To remove that limitation, a more rigid idea had to
+    be formalized: the \emph{Component}. The key difference between a regular
+    object and a component is that a component is completely replaceable
+    (\emph{Black Box Reuse}).
+\end{quote}
+
+Many kinds of software components exist: There are \emph{Graphical User Interface}
+(GUI) components known from Delphi's \emph{Visual Component Library} (VCL)
+\cite{delphi}, from \emph{Visual Basic} (VB) \cite{visualbasic} or Java's
+\emph{Abstract Window Toolkit} (AWT) \cite{java}, which calls its components
+\emph{Beans}; there are \emph{Business} components containing domain knowledge
+and \emph{Technical} components interacting with infrastructure systems like
+\emph{CORBA-}/ \emph{EJB-}/ \emph{DCOM} middleware, with a \emph{Database} (DB)
+or \emph{Operating System} (OS) (sections \ref{database_server_heading},
+\ref{remote_server_heading}); there are general \emph{Application} components
+as investigated by \emph{Avalon} \cite{avalon}. Whole systems, that is
+self-acting components, are often called \emph{Agents} (section
+\ref{agent_oriented_programming_heading}).
+
+The following sections deal with application components whose principles are
+investigated on the example of the \emph{Avalon} framework, because that is an
+\emph{Open Source Software} (OSS) project providing all sources for free. After
+\emph{Avalon} \cite{avalon}, \emph{Component Oriented Programming} (COP) were
+not necessarily the same as \emph{Component Based Design} (CBD). The latter
+referred to how a system is \emph{designed}; the former to how it is
+\emph{implemented}. In practice, one could not implement COP without first
+designing with components in mind.
+
+By following CBD rules, software projects try to integrate most diverse systems
+into one environment. Although the systems should ideally use COP for the
+implementation of their components, this is not a must. Legacy systems (section
+\ref{legacy_host_heading}) can be encapsulated as well \cite{brown2000}, acting
+as one component to the outside environment. A \emph{Service} offered by a legacy
+system written in \emph{PL/1} \cite{pli}, for example, may be designed and
+treated as component. It may be accessed via \emph{Interface Definition Language}
+(IDL) interfaces and use a \emph{Common Object Request Broker Architecture}
+(CORBA) for communication. The interna of such a system, however, do neither
+have to follow component- nor object-oriented programming principles.
+
+The following sections describe popular COP techniques. Although being
+researched in an own scientific field, \emph{Aspect Oriented Programming} (AOP)
+principles are added as sub-section, because \emph{Aspects} are comparable to
+the \emph{Concerns} of COP. For similar reasons, \emph{Agent Oriented Programming}
+(AGOP) techniques are described following, because \emph{Agents} can be seen as
+self-acting \emph{Components}. All of them, that is COP's concerns, AOP's
+aspects and AGOP's agents owning a knowledge base will be recalled once again
+in part \ref{contribution_heading} of this work.
+
+\input{inversion_of_control}
+\input{component_lifecycle}
+\input{interface_and_implementation}
+\input{separation_of_concerns}
+\input{spread_functionality}
+\input{aspect_oriented_programming}
+\input{agent_oriented_programming}

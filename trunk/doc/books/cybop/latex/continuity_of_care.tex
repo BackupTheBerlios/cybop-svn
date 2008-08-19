@@ -1,0 +1,58 @@
+%
+% $RCSfile: continuity_of_care.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:06 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Continuity of Care}
+\label{continuity_of_care_heading}
+\index{Continuity of Care Record}
+\index{CCR}
+\index{Personal Health Project}
+\index{PHP}
+
+A main result of the opinion stated in the previous section was the realisation
+that a major challenge for EHR design will be to overcome the difference
+between an organisation's evidential record management process with emphasis on
+\emph{legal/ financial aspects} and the record keeping as
+\emph{medical/ health documentation}, that an individual would do.
+
+This is exactly the issue that Philippe Ameline and his French colleagues
+address in their \emph{Nautilus/ Odyssee} project \cite{nautilus}. It
+distinguishes between three levels of data:
+
+\begin{itemize}
+    \item[-] \emph{Individual}: personal, various local
+    \item[-] \emph{Group}: professional, 24 hour availability
+    \item[-] \emph{Collective}: dedicated to continuity of care
+\end{itemize}
+
+The latter is called \emph{Personal Health Project} (PHP). Its health management
+data can be shared between a \emph{Patient} and his \emph{Care Team}, with the
+EHR \emph{passing by} institutions. Ameline writes in \cite{openehrtechnical}
+that the management of these two referentials -- health professional and patient
+-- meant that applications now had to handle differently the \emph{history data}
+with a time duration (which may get changed by someone else) and the data of the
+\emph{instantaneous picture} kind (what one noticed and reported at a given time).
+
+A similar effort with U.S. American roots is called \emph{Continuity of Care Record}
+(CCR) \cite{ccr}. Just like the PHP, it does not want to be a complete EHR, but
+rather: \textit{organise and make transportable a set of basic patient
+information consisting of the most relevant and timely facts about a patient's
+condition.} Through specified XML code, the CCR becomes interoperable.

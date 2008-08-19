@@ -1,0 +1,105 @@
+%
+% $RCSfile: classification.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:05 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsubsection{Classification}
+\label{classification_heading}
+\index{Classification}
+\index{Class}
+\index{Attribute}
+\index{Method}
+\index{Structured Data Type}
+\index{Struct}
+\index{Record}
+\index{Structured and Procedural Programming}
+\index{SPP}
+\index{Java}
+\index{Global Variable}
+\index{Instance}
+\index{Object}
+\index{Instantiation}
+\index{Abstract Class}
+\index{Interface}
+\index{Inner Class}
+\index{Bundling of Attributes and Methods}
+
+The main idea of object oriented programming is to structure program code into
+\emph{Classes} owning \emph{Attributes} and \emph{Methods} (figure
+\ref{classification_figure}). They are comparable to the structured data types
+(\emph{struct}, \emph{record}) of \emph{Structured and Procedural Programming}
+(SPP) (section \ref{structured_and_procedural_programming_heading}) that can
+own fields representing properties, but not behaviour. A class definition in
+\emph{Java} source code looks like this:
+
+\begin{scriptsize}
+    \begin{verbatim}
+    public class Example {
+        private Type attribute;
+        public void method(Type parameter) {
+        }
+    }
+    \end{verbatim}
+\end{scriptsize}
+
+\begin{figure}[ht]
+    \begin{center}
+        \includegraphics[scale=0.3,angle=-90]{graphic/classification.pdf}
+        \caption{Classification as UML Diagram}
+        \label{classification_figure}
+    \end{center}
+\end{figure}
+
+While procedures and many variables in SPP are global, that is only exist once,
+classes are treated as types of which many \emph{Instances} (also called
+\emph{Objects}) can be created, including attributes and methods. In OOP, such
+memory allocation is called \emph{Instantiation}.
+
+Two related data types are \emph{Abstract Class} and \emph{Interface}. An
+abstract class can hold attributes and (partly abstract) methods. Just like
+interfaces, abstract classes cannot be instantiated. An interface is yet more
+restricted in that it can only have constants but not attributes and only
+declarations but not actual implementations of methods. Interfaces are commonly
+used to \cite{steppan}:
+
+\begin{itemize}
+    \item[-] Realise multiple inheritance (section \ref{inheritance_heading})
+    \item[-] Encapsulate components (section \ref{interface_and_implementation_heading})
+    \item[-] Pool common methods (section \ref{separation_of_concerns_heading})
+\end{itemize}
+
+Specialities like \emph{Inner Classes} \cite{java} with limited scope of
+validity are of minor importance to the argumentation of this document and not
+further explained here.
+
+The \emph{Bundling} of attributes and methods (state and logic) causes more
+system interdependencies and complications than were predictable. It is a big
+disadvantage that affects all modern object-oriented systems. \cite{heller2004}
+Certainly, the bundling stems from best intentions to receive cleaner code by
+keeping not only attributes but also methods in a common module, such avoiding
+\emph{wild} and \emph{global} procedures. But now, modules not only have to
+refer to other modules for accessing their state data; the same is needed for
+accessing their logic in form of method calls.
+
+With OOP, the number of cross-relations between modules, and inter-dependencies
+between system layers may rise dramatically. In reality, state- and logic
+properties are two \emph{different} things that have to be kept in different
+places! Both can have a similar, hierarchical structure but each is a concept on
+its own, as chapter \ref{state_and_logic_heading} will show.

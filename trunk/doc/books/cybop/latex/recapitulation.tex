@@ -1,0 +1,113 @@
+%
+% $RCSfile: recapitulation.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:08 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\section{Recapitulation}
+\label{recapitulation_heading}
+
+The concepts that were found by considering other scientific disciplines, reveal
+a number of state-of-the-art software design solutions that do not comply with
+their original in nature, for example the:
+
+\begin{enumerate}
+    \item Mix of static application knowledge and instructions for dynamic
+        system control (chapter \ref{statics_and_dynamics_heading})
+    \item False combination of information ignoring hierarchical structure and
+        mixing in meta information (chapter \ref{knowledge_schema_heading})
+    \item Bundling of state- and logic knowledge (chapter
+        \ref{state_and_logic_heading})
+\end{enumerate}
+
+\newpage
+
+These discrepancies are the major reason for the issues mentioned in section
+\ref{motivation_heading}. They become clearer only later in this work (part
+\ref{contribution_heading}), where more background knowledge will be provided.
+Almost all problems they cause have their root in \emph{Dependencies}. As a
+system grows, the inter-dependencies between its single parts grow with. Why
+does this happen? Simply because a clear architecture is missing. Even if
+developers really try to follow a such -- on some point in the software's
+lifetime, compromises have to be made due to unforeseen requirements and
+dependencies:
+
+\begin{itemize}
+    \item[-] \emph{Meta Techniques} are used to provide basic functionality
+    \item[-] \emph{Static Managers} accessible by any other parts in the system
+        are introduced
+    \item[-] \emph{Multiple Interfaces} are implemented to realise new
+        properties (\emph{Mix-In})
+    \item[-] \emph{Redundant Code} needs to be written to avoid too many
+        unwanted inter-dependencies
+    \item[-] \emph{Varying Mechanisms} are applied to plugin new software layers
+\end{itemize}
+
+It seems that today's software models rarely abstract the real world correctly.
+This is \emph{not} general critics on software development as it exists today,
+\emph{nor} is it critics on the abilities of application developers who use
+current concepts and languages. It is just the neutral, unbiased realisation
+that there are a few concepts in use which cause unclear, unnecessary, wrong
+dependencies within software systems. The application of principles of other
+scientific disciplines might have the potential to solve that.
+
+It was early that, in the style of \emph{Bionics}, parallels between computing
+machines and the human brain were seen, yet unfortunately do both not function
+in exactly the same manner. Concepts like \emph{Artificial Neural Networks} (ANN)
+%(section \ref{artificial_neural_networks_heading})
+that try to imitate the
+physical structure of the human brain exist, but are today's computers with
+deterministic behaviour not built like that; they often have a
+\emph{von Neumann Architecture} \cite{philippow}. This forces human programmers
+to \emph{adapt} their thinking to the machine concepts.
+
+Traditional programming languages and design solutions try to ease application
+development by bridging the gap between concepts of human thinking and those of
+the machine. Software developers are given tools to design programs in a more
+abstract way, independently from the source code which gets generated later.
+But as long as the underlying concepts of abstraction are insufficient, design
+problems are to be expected. The kind and quality of abstractions is so
+important, because it influences -- and \emph{is} influenced by -- all aspects
+of software development (part \ref{basics_heading}) dealing with
+\emph{Knowledge}:
+
+\begin{itemize}
+    \item[-] the \emph{Software Engineering Process} specifies static knowledge
+        models (abstractions resulting from process phases), to be later
+        dynamically processed in a computer system
+    \item[-] the \emph{Physical Architecture} requires the translation of
+        knowledge models (communication) between systems
+    \item[-] the \emph{Logical Architecture} provides the means to represent
+        knowledge models (by languages and various techniques) within a system
+\end{itemize}
+
+They all, consciously or not, are trials to apply human patterns. The structure
+of knowledge models, for example, is based on concepts of \emph{Human Thinking},
+the logical \emph{Mind} -- as opposed to the above-mentioned neural networks
+that want to imitate the functioning of the physical \emph{Brain}. Because of
+the central importance of knowledge, one aim of this work is to investigate new
+techniques for its abstraction, to thereby revise state-of-the-art software
+development. However, probably not all traditional concepts will be thrown
+away. Basic things like control structures (looping, branching etc.)
+abstracting logic knowledge in form of algorithms are still of importance but
+appear in a different form (as will be shown in chapter
+\ref{cybernetics_oriented_language_heading}). It therefore seems to be more
+suitable to say that the new concepts will complement (and not revise
+completely) existing development techniques, as was planned at the beginning of
+this work (figure \ref{method_figure}).

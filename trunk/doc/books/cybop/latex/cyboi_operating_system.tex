@@ -1,0 +1,84 @@
+%
+% $RCSfile: cyboi_operating_system.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:06 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\paragraph{Towards a CYBOI-based Operating System}
+\label{cyboi_operating_system_heading}
+
+The CYBOI interpreter serves as connective link between CYBOL-encoded, passive
+application knowledge and its \emph{input/ output} (i/o) via an underlying
+\emph{Operating System} (OS) with communication facilities. The more low-level
+mechanisms CYBOI implements, the further it is developing towards becoming an
+OS itself. One topic of research could thus be to figure out which of the
+typical OS features \cite[p. 80]{tanenbaum2001} are absolutely essential, and
+how these can be implemented into CYBOI.
+
+Additionally, a number of questions are to be discussed. Is the \emph{Process}
+concept- and are \emph{Threads} really the ideal solution for running different
+applications on one computer? Or, are there ways to circumvent their usage and
+to base on just one signal-processing loop in the system? What are the possible
+algorithms for signal selection \cite[p. 101]{kuehnel}? What effects would this
+have on security? If a system stores all knowledge of all applications running
+in it in just one memory, how can be made sure that an application accesses
+only the knowledge belonging to its scope? Apart from the \emph{Process}
+concept, what other innovative ideas can be delivered for this? Would it make
+sense to assign special \emph{Rights} to branches of the knowledge tree in
+memory? One possibility would be to always check the name of the application
+sending a signal and then allow it to access its own knowledge resources only.
+Another possibility could be to hold something like a resource access decision
+table in the low-level system, where each application is assigned the knowledge
+resources it may access. Further ideas are welcome and to be investigated.
+
+In this context, how can concepts stemming from \emph{Network Operating Systems}
+and \emph{Distributed Operating Systems} \cite[p. 16]{tanenbaum2001} be
+considered in CYBOI?
+
+% http://en.wikipedia.org/wiki/Embedded_system#Types\_of\_embedded\_software\_architectures
+% Exotic custom operating systems
+% "levels of priority had better not exist anywhere, including in the operating system"
+
+An OS does also contain configuration knowledge, such as the information
+whether or not a certain device driver should be loaded on a machine. This
+knowledge can be stored in form of CYBOL templates. Finally, the OS is nothing
+else than an application, only that it is the one started first in a system.
+A corresponding \emph{Cybernetics Oriented Operating System} (CYBOS) could be
+created, whose structure and functionality are specified by CYBOL templates.
+
+In a similar manner, OS in use today may be equipped with knowledge-processing
+capabilities. They would be the instance actively caring about low-level system
+control, as they should do exclusively, anyway, and factor out all configuration
+information into special files -- or CYBOL templates. Further, hardware producers
+should be responsible for providing an OS suiting- and controlling their hardware.
+These systems would have to be able to handle well-specified knowledge, as in
+form of CYBOL templates, and hence be able to run applications accordingly.
+
+The first version of CYBOI was written in \emph{Java} and therefore carried
+some overhead. A second, much slimmer and more performant version (the current
+one) was written in the more low-level system programming language \emph{C}. It
+will have to be investigated if and which parts of a third-version CYBOI could
+eventually be implemented in an \emph{Assembler} language, to further increase
+performance. First preparations were already done in the current, second
+version: Only procedures, no functions were used; all parameters are handed
+over as neutral \emph{void} pointers; only one kind of loop (endless, with
+break condition) was applied. Transformations into assembler code are thereby
+simplified. A fourth and final version of CYBOI would be one being burnt into
+\emph{Hardware} directly, similar to the \emph{Java Chips} \cite{javachips}
+that people used to talk about some years ago.

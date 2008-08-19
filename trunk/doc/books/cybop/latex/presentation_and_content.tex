@@ -1,0 +1,101 @@
+%
+% $RCSfile: presentation_and_content.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:08 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsubsection{Presentation and Content}
+\label{presentation_and_content_heading}
+\index{CYBOL Presentation and Content Example}
+\index{Mathematical Markup Language}
+\index{MathML}
+
+The \emph{Mathematical Markup Language} (MathML) \cite{mathml} provides means
+for representing mathematical expressions. Its specification document states:
+
+\begin{quote}
+    A fundamental challenge in defining a markup language for mathematics on
+    the Web is reconciling the need to encode both the \emph{Presentation} of a
+    mathematical notation and the \emph{Content} of the mathematical idea or
+    object which it represents.\\
+    The relationship between a mathematical notation and a mathematical idea is
+    subtle and deep. On a formal level, the results of mathematical logic raise
+    unsettling questions about the correspondence between systems of symbolic
+    logic and the phenomena they model. At a more intuitive level, anyone who
+    uses mathematical notation knows the difference that a good choice of
+    notation can make; the symbolic structure of the notation suggests the
+    logical structure.
+\end{quote}
+
+This observation is very important because it helps avoid mixing \emph{Content}
+and \emph{Presentation} of data. Both are discrete models, comparable to the
+\emph{Domain} and \emph{User Interface} (UI) of a software application, which
+can be translated into each other (sections \ref{translator_architecture_heading}
+and \ref{logic_manipulates_state_heading}). The good side of MathML is that it
+\cite{mathml}: \textit{allows authors to encode both the notation which
+represents a mathematical object and the mathematical structure of the object
+itself.} Its bad side, however, is that: \textit{authors can mix both kinds of
+encoding in order to specify both the presentation and content of a
+mathematical idea.} Another disadvantage is that different tags are used for
+presentation and contents of a mathematical model.
+
+CYBOL uses just four tags (section \ref{semantics_heading}) but can represent
+mathematical expressions as well. What MathML calls \emph{Content}, becomes a
+\emph{Logic} knowledge template in CYBOL. The mathematical content of the
+formula $(a + b)^{2}$ would be modelled as follows:
+
+\begin{scriptsize}
+    \begin{verbatim}
+<model>
+    <part name="addition" channel="inline" abstraction="operation" model="add">
+        <property name="summand_1" channel="inline" abstraction="knowledge" model="domain.a"/>
+        <property name="summand_2" channel="inline" abstraction="knowledge" model="domain.b"/>
+        <property name="sum" channel="inline" abstraction="knowledge" model="domain.c"/>
+    </part>
+    <part name="exponentiation" channel="inline" abstraction="operation" model="power">
+        <property name="base" channel="inline" abstraction="knowledge" model="domain.c"/>
+        <property name="power" channel="inline" abstraction="integer" model="2"/>
+        <property name="result" channel="inline" abstraction="knowledge" model="domain.r"/>
+    </part>
+</model>
+    \end{verbatim}
+\end{scriptsize}
+
+And the formula's \emph{Presentation} would be defined by the following two
+CYBOL \emph{State} knowledge templates, of which the second one represents the
+\emph{Base} that is referenced by the first one:
+
+\begin{scriptsize}
+    \begin{verbatim}
+<model>
+    <part name="base" channel="inline" abstraction="file" model="domain/base.cybol">
+        <property name="fence" channel="inline" abstraction="boolean" model="true"/>
+    </part>
+    <part name="power" channel="inline" abstraction="integer" model="2">
+        <property name="superscript" channel="inline" abstraction="boolean" model="true"/>
+    </part>
+</model>
+
+<model>
+    <part name="summand_1" channel="inline" abstraction="string" model="a"/>
+    <part name="operator" channel="inline" abstraction="string" model="+"/>
+    <part name="summand_2" channel="inline" abstraction="string" model="b"/>
+</model>
+    \end{verbatim}
+\end{scriptsize}

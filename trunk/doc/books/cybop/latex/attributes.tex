@@ -1,0 +1,74 @@
+%
+% $RCSfile: attributes.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:05 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsubsection{Attributes}
+\label{attributes_heading}
+\index{CYBOL Attributes}
+\index{CYBOL 'name' Attribute}
+\index{CYBOL 'channel' Attribute}
+\index{CYBOL 'abstraction' Attribute}
+\index{CYBOL 'model' Attribute}
+
+Normally, an XML \emph{Attribute} keeps meta information about the contents of
+an XML \emph{Tag}. In CYBOL, however, three attributes keep meta information
+about a fourth attribute. The attributes, altogether, are:
+
+\begin{itemize}
+    \item[-] name
+    \item[-] channel
+    \item[-] abstraction
+    \item[-] model
+\end{itemize}
+
+The attribute of greatest interest is \emph{model}. It contains a model either
+directly, or a path to one. The \emph{channel} attribute indicates whether the
+\emph{model} attribute's value is to be read from:
+
+\begin{itemize}
+    \item[-] inline
+    \item[-] file
+    \item[-] ftp
+    \item[-] http
+\end{itemize}
+
+The \emph{abstraction} attribute specifies how to interpret the model pointed
+to by the \emph{model} attribute's value. A model may be given in formats like
+for example:
+
+\newpage
+
+\begin{itemize}
+    \item[-] cybol (a state- or logic compound model encoded in CYBOL format)
+    \item[-] operation (a primitive logic model)
+    \item[-] string
+    \item[-] double
+    \item[-] integer
+    \item[-] boolean
+\end{itemize}
+
+The \emph{name} attribute, finally, provides the referenced model with a unique
+identifier.
+
+While the interpretation of the \emph{model} attribute's value depends on the
+\emph{channel-} and \emph{abstraction} attributes, the other three attributes
+(\emph{name}, \emph{channel}, \emph{abstraction}) themselves always get
+interpreted as character string.

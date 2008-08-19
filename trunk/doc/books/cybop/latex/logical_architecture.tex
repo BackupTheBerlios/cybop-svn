@@ -1,0 +1,134 @@
+%
+% $RCSfile: logical_architecture.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:07 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\chapter{Logical Architecture}
+\label{logical_architecture_heading}
+\index{Logical Architecture}
+\index{Inside of a Software System}
+\index{Layers}
+\index{Presentation Layer}
+\index{Domain Layer}
+\index{Data Source Layer}
+\index{Physical Tiers}
+\index{Object Oriented Programming}
+\index{OOP}
+\index{Unified Modeling Language}
+\index{UML}
+\index{Computer Language}
+\index{Programming Paradigms}
+\index{Patterns}
+\index{Framework}
+\index{Component}
+\index{Ontology}
+\index{Statics, Terms and Synonyms}
+\index{State, Terms and Synonyms}
+\index{Logic, Terms and Synonyms}
+\index{Dynamics, Terms and Synonyms}
+\index{Structure, Terms and Synonyms}
+
+\begin{flushright}
+    \textsl{
+        Because nothing is more difficult and\\
+        nothing requires more Personality,\\
+        than to be in open Opposition to current Time\\
+        and loudly to say: NO.
+    }\\
+    \textsc{Kurt Tucholsky}
+\end{flushright}
+
+While the previous chapter had a look at the \emph{Physical Architecture} of an
+IT environment, that is the systems and their communication, this chapter will
+discuss the \emph{Logical Architecture}, that is the \emph{Inside} of a software
+system.
+
+The program source code of every system is -- or at least should be -- separated
+into logical parts like \emph{Layers}, for example (figure \ref{logical_figure}).
+Current systems distinguish \emph{Presentation-}, \emph{Domain-} and
+\emph{Data Source} layer \cite{fowler2002}. Each of them contains functionality
+for a specific task: the presentation layer for user interaction; the domain for
+business logic; the data source for database communication.
+
+\begin{figure}[ht]
+    \begin{center}
+        \includegraphics[scale=0.3,angle=-90]{graphic/logical.pdf}
+        \caption{System with Logical Layers}
+        \label{logical_figure}
+    \end{center}
+\end{figure}
+
+Just like physical tiers can be scaled vertically and horizontally, the logical
+layers within a software system can be shared in a similar way. Figure
+\ref{logical_figure} splits the horizontal business logic layer of a healthcare
+environment into the vertical domains \emph{Documentation}, \emph{Laboratory},
+\emph{Reporting}, \emph{Billing}, \emph{Administration}, \emph{Imaging},
+\emph{Devices}.
+
+One must not mix logical layers with the physical tiers that were introduced in
+chapter \ref{physical_architecture_heading}! It is true, logical layers may be
+distributed to physically separated systems -- the presentation layer, for
+example, may be situated on the physical client tier (frontend). But as section
+\ref{misleading_tiers_heading} pointed out: In the end, \emph{all}
+systems (not only the client tier) will have to interact with users and further
+systems in some way and thus cannot only implement one functionality but need
+to be able to communicate \emph{universally}. More on that in part
+\ref{contribution_heading}.
+
+Layers are just one concept aiming to improve a system's architecture. There
+are many more. The introduction of \emph{Object Oriented Programming} (OOP) and
+the \emph{Unified Modeling Language} (UML), for example, animated and enabled
+software developers to structure their program code more and more clearly.
+\emph{Patterns}, \emph{Frameworks}, \emph{Components} and \emph{Ontologies} are
+further techniques which delivered many new concepts and solutions. They all
+represent the state-of-the-art in software design and will be investigated
+together with their \emph{Pros} and \emph{Cons} in the following sections. The
+most general concepts, however, are still provided by computer languages and
+programming paradigms, which is why they are described first.
+
+Over the years, several terms and synonyms describing architectural elements
+were introduced. Following are some examples, grouped arbitrarily into those
+that represent a kind of \emph{State} and others that manipulate states
+according to certain rules of \emph{Logic}. Both will be called \emph{Statics},
+later in this work (parts \ref{contribution_heading} and \ref{proof_heading}).
+Besides these, there are terms for elements that describe the runtime behaviour
+of a system -- its \emph{Dynamics}, and others for some \emph{Structural}
+elements. They all appear in one form or another in the following sections.
+
+\begin{itemize}
+    \item[-] Statics:
+    \begin{itemize}
+        \item[-] State: Operand, Data, Value, Parameter, Attribute
+        \item[-] Logic: Operation, Operator, Function, Procedure, Method,
+            Algorithm, Activity, Workflow
+    \end{itemize}
+    \item[-] Dynamics: Allocated Memory, Array, Instance, Object, Property,
+        Process, Signal, Event, Action
+    \item[-] Structure: Class, Component, Module, Library, Package, Layer
+\end{itemize}
+
+\input{paradigm_and_language}
+\input{pattern}
+\input{component_oriented_programming}
+\input{domain_engineering}
+\input{knowledge_engineering}
+\input{conceptual_network}
+%\input{xml_based_programming}
+\input{modelling_mistakes}

@@ -1,0 +1,57 @@
+%
+% $RCSfile: functionality_in_detail.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:06 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\section{Functionality in Detail}
+\label{functionality_in_detail_heading}
+\index{CYBOI Functionality}
+\index{CYBOI Part Dependencies}
+\index{CYBOI Control Flow}
+
+CYBOI's architecture is based on three main parts, as introduced by figure
+\ref{architecture_figure} before: \emph{Controller}, \emph{Applicator} and
+\emph{Memoriser}. (The \emph{Globals} package is neglectable for the following
+explanations, since it contains static constants and variables that are
+\emph{omnipresent}.) They appear again in figure \ref{dependencies_figure}
+which shows the \emph{Dependencies} between them. Additionally, the
+\emph{Controller} modules and their \emph{Control Flow} is illustrated.
+Starting from the \emph{cyboi} module, the following subsections will
+demonstrate how CYBOI functions internally, along the flow of control touching
+the modules: \emph{manager}, \emph{checker} and \emph{handler}. After that, the
+execution of operations in the \emph{Applicator} as well as the creation and
+transition of data in the \emph{Memoriser} are described.
+
+\begin{figure}[ht]
+    \begin{center}
+        \includegraphics[scale=0.3,angle=-90]{graphic/dependencies.pdf}
+        \caption{CYBOI Part Dependencies and Control Flow}
+        \label{dependencies_figure}
+    \end{center}
+\end{figure}
+
+\input{process_launching}
+\input{lifecycle_management}
+\input{signal_checking}
+\input{signal_handling}
+\input{operation_execution}
+\input{model_transition}
+\input{data_creation}
+%\input{instance}

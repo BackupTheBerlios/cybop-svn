@@ -1,0 +1,79 @@
+%
+% $RCSfile: date_and_rule.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:06 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Date and Rule}
+\label{date_and_rule_heading}
+\index{Date and Rule}
+\index{Expert System}
+\index{Relational Database}
+\index{Structured Query Language}
+\index{SQL}
+\index{Existential Conjunctive Logic}
+\index{EC Logic}
+\index{Modus Ponens, Inference Rule}
+\index{Modus Tollens, Inference Rule}
+\index{Forward Chaining}
+\index{Backward Chaining}
+\index{View, Implication}
+\index{Trigger, Implication}
+\index{Prolog}
+\index{Microplanner}
+\index{Backtracking}
+
+Two kinds of systems that gained greater popularity are \emph{Expert Systems}
+and \emph{Relational Databases}. After Sowa \cite{sowa}, both differed more in
+quantity than in quality: \textit{Expert systems use repeated executions of
+rules on relatively small amounts of data, while database systems execute short
+chains of rules on large amounts of data.} Over time, their differences
+decreased and today, the \emph{Structured Query Language} (SQL) for relational
+databases supports the same logical functions as early expert systems.
+
+Both, expert systems and relational databases, have common logical foundations
+and store data in a subset of logic called \emph{Existential Conjunctive} (EC)
+logic. EC is based on two logical operators: the \emph{Existential Quantifier}
+$\exists$ and the \emph{Conjunction} $\wedge$; the \emph{Universal Quantifier}
+$\forall$ and other operators ($\sim$, $\supset$, $\vee$) are never used.
+Sowa \cite[p. 163]{sowa} writes: \textit{While variables in a query are governed
+by existential quantifiers, those in a rule are governed by universal quantifiers.}
+
+The two primary inference rules of the above-mentioned systems are called
+\emph{Modus Ponens} (putting) and \emph{Modus Tollens} (taking away). Although
+being simple, the power of these rules comes from their combination and
+repeated execution. While repeated execution of modus ponens is called
+\emph{Forward Chaining}, that of modus tollens is called \emph{Backward Chaining}.
+In SQL, an implication used in backward chaining is called \emph{View}, and that
+used in forward chaining is called \emph{Trigger} \cite{sowa}.
+
+Besides \emph{Prolog} (section \ref{logical_programming_heading}) and \emph{SQL}
+(section \ref{data_manipulation_language_heading}), the \emph{Microplanner}
+language \cite[p. 157]{sowa} uses the so-called \emph{Backtracking} technique
+to answer a query: If one of a sequence of aims cannot be satisfied, the language
+tracks back to a previous aim and tries a different option. Although equivalent
+queries in Prolog and SQL differ in their syntax, the semantics is the same.
+\textit{Logic determines the structure of a query}, as Sowa \cite[p. 159]{sowa}
+means.
+
+To sum up, one can say that previous sections distinguished between \emph{Domain-}
+and \emph{Application Models}. What was shown in this section, however, is that
+many systems and their corresponding languages rely on a separation of \emph{Data}
+(in state variables) and \emph{Rules} (logic). This will be of importance in
+chapter \ref{state_and_logic_heading}.

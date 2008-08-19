@@ -1,0 +1,46 @@
+%
+% $RCSfile: signal_checking.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:08 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Signal Checking}
+\label{signal_checking_heading}
+\index{CYBOI Signal Checking}
+
+The \emph{check} procedure consists of an endless loop continuously checking
+for signals residing in signal memory. It provides the dynamics and -- so to
+say -- keeps the system \emph{alive}. Of all queued signals, the one with
+highest priority is retrieved first and forwarded to the \emph{handle}
+procedure (\emph{handler} module).
+
+This principle can be observed not only in operating-, but many other kinds of
+systems. \emph{Servers} run an endless loop waiting for (network) \emph{Client}
+requests. Applications often use signalling mechanisms provided by a framework,
+that handles keyboard press- or mouse click signals stemming from a
+\emph{Graphical User Interface} (GUI). However, as opposed to the event
+handling of such frameworks which relies on bidirectional dependencies since
+child components have to register as listener at their parent, a top-level
+signal checker loop forwards all events in a unidirectional manner to
+interested system parts. It is worth noting that signals may also be produced
+internally, as follow-ups, by other signals.
+
+After having been processed, the signal gets removed from the signal memory.
+Once an \emph{exit} signal occurs, the shutdown flag is set, so that the signal
+checking loop can be left -- and the system be shutdown.

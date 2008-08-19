@@ -1,0 +1,172 @@
+%
+% $RCSfile: exception_handling.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:06 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Exception Handling}
+\label{exception_handling_heading}
+
+- Exceptions (errors) should be logged and can then be sent as signal, to be
+displayed on console or in a graphical dialogue
+- exception handling of languages like Java is not good, since part objects
+need to know about their whole object, in order to forward exceptions to it
+
+jos-general@lists.sourceforge.net
+
+There is one thing about Exceptions that disturbs me in general:
+
+Exceptions are just normal signals, only that they indicate an unnormal
+system behaviour. If an exception occurs, it is forwarded back to the
+calling method/ an object's parent object and so forth until an exception
+handling ("catch" block) is found. To me, this is insecure. A child object
+should _never_ know about its parent object (parent in the sense of
+instance creation, not inheritance). And yes, this is possible!
+
+The flow of information should always go from the absolute root object
+of all systems through the whole object tree, not vice-versa. Somewhere
+in this root object (belonging to the operating system), there must be
+some loop catching all signals/ events/ actions (interrupt handling),
+may it be a keyboard, mouse, network etc. event or also an exception!
+
+(Application or Web Servers do nothing else, they just have a loop
+catching/ filtering out certain signals to react to.)
+
+Wouldn't it be possible that applications send an "ExceptionSignal"
+instead of using the "throw" mechanism of the Java language? This would
+be much more proper, since the exception signal could be catched by
+the top loop and sent through the whole system, top-to-bottom. If all
+objects in an operating system and all applications get forwarded a
+SignalMemory/ EventQueue, they can place any kind of signals there.
+Exception signals would simply have to have higher priority then.
+
+Just some thoughts I am currently musing about ...
+Christian
+
+jos-general@lists.sourceforge.net
+
+--
+
+jos-general@lists.sourceforge.net
+
+Date:
+Thu, 8 May 2003 09:28:02 +0200
+
+> > Exceptions are just normal signals, only that they indicate an unnormal
+> > system behaviour.
+>
+> By signals do you mean h/w interrupts ?
+
+Not exactly. I mean a signal object (instance) that gets created when a
+h/w IRQ occurs. This signal would encapsulate all necessary information.
+
+> Exceptions are not normal, they are exceptional.
+> In particular the performance is _not_ to be relied upon.
+>
+> A specific difference is in the handling - with (shared) interrupts
+> all handlers may need to be run, with exceptions the handlers are nested
+> with only the innermost handler running.
+
+O.k., but that also depends on the framework's philosophy. There are
+abstract layers with different responsibilities, e.g. one part doing some
+calculation, another part organizing the graphical display of results.
+If now an exception occurs in the calculation part, I do not want that
+part to handle (and perhaps display in form of a graphical dialogue) the
+exception. I'd prefer to send that Exception as signal with high priority
+starting from the system root, so that the part which is responsible for
+catching Exception signals (or/and for graphical display) can handle it.
+
+If many handlers may need to be run, depends on how many there are.
+I have to admit not to know exactly yet how this is done on the base
+OS level. In my abstract thinking, however, every system, also the OS,
+inherits from a common parent class. Every such system has a controller
+which handles any signals. If the OS's controller does not handle a
+signal, the signal gets forwarded to the sub systems (applications),
+so that their controllers can filter out and handle the signal, if they
+like.
+
+If, on the other hand, an exception is thrown back to the calling method,
+it may only be catched and handled by some parent method but not by
+a sister node (to where the exception occurred) of the system tree.
+O.k., the parent method might send the exception down another branch
+of the system tree - but perhaps that branch is not "high" enough?
+That is, perhaps another main branch more up in the tree would have
+been the right one. Finally, this can only be assured if the exception
+signal is really sent from top to bottom.
+
+> > If an exception occurs, it is forwarded back to the
+> > calling method/ an object's parent object and so forth until an exception
+> > handling ("catch" block) is found. To me, this is insecure. A child
+> > object should _never_ know about its parent object (parent in the sense
+> > of instance creation, not inheritance). And yes, this is possible!
+>
+> Java does not include a restart option in its exception handling.
+> How does an object throwing an exception learn anything about its
+> creator ?
+
+What do you mean by "restart option"?
+
+An object does not need to learn anything about its creator. No child
+object knows anything about any of its parent (creator) objects.
+The system root object owns a SignalHandler (EventQueue) and this one
+is sent through the whole system. That way, children can place signals
+in the queue without knowing about their parent objects.
+A loop in the system root object then frequently checks the queue for
+new signals to be handled.
+
+> > The flow of information should always go from the absolute root object
+> > of all systems through the whole object tree, not vice-versa.
+>
+> I think passing command line arguments to a program is going down the tree.
+
+Yes. But I don't understand that sentence in the context of our discussion
+about "Exceptions".
+
+> > (Application or Web Servers do nothing else, they just have a loop
+> > catching/ filtering out certain signals to react to.)
+> >
+> > Wouldn't it be possible that applications send an "ExceptionSignal"
+> > instead of using the "throw" mechanism of the Java language? This would
+> > be much more proper, since the exception signal could be catched by
+> > the top loop and sent through the whole system, top-to-bottom.
+>
+> I disagree that top-to-bottom is correct for exceptions.
+>
+> I like the L4 idea of treating interrupts as IPC/method calls and using
+> threads to have multiple handlers.
+
+What is the "L4 idea"?
+
+> > If all
+> > objects in an operating system and all applications get forwarded a
+> > SignalMemory/ EventQueue, they can place any kind of signals there.
+> > Exception signals would simply have to have higher priority then.
+>
+> Perhaps we are talking at different levels of abstraction - something has
+> to map h/w interrupts to the code to enqueue event objects.
+
+Possibly. What you mean seems to be one level nearer to the h/w. In my
+opinion, it would be ideal to have one standard signal format (Class)
+that could be used for system internal messages as well as for h/w
+interrupts etc. As soon as a h/w interrupt occurs, it would have to get
+packed into a new signal object which can then be sent through the
+system. This would bring great flexibility and allow for OO techniques
+to be used.
+
+Christian

@@ -1,0 +1,67 @@
+%
+% $RCSfile: data_mapper_reflection.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:06 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsubsection{Data Mapper Reflection}
+\label{data_mapper_reflection_heading}
+\index{Data Mapper Pattern}
+\index{Domain Model}
+\index{Entity Relationship Model}
+\index{ERM}
+\index{Database Management System}
+\index{DBMS}
+\index{Data Source Layer}
+
+The most important idea of the \emph{Data Mapper} pattern is to abolish the
+interdependency between domain model and data source (persistence medium). All
+information about where a data source like a \emph{File} or \emph{Database}
+(DB) is located, how to talk to it (File Stream, JDBC with SQL etc.) and how to
+map \emph{Domain-} to \emph{Entity Relationship Model} (ERM) data is moved away
+from the domain, into the data mapper layer.
+
+This separation contributes to a clear architecture; it is not enough, though.
+The data mapper layer often concentrates not only \emph{Mapping-}, but also
+\emph{Communication} functionality. \emph{Database Management Systems} (DBMS)
+such as PostgreSQL \cite{hartwig, postgresql, postgresql2002} or MySQL
+\cite{mysql} are often treated different than normal servers. Frequently, they
+are assigned a logical \emph{Data Source} layer (figure \ref{logical_figure}).
+But in fact, DBMS are \emph{Systems}, as their name says, and as such need to
+be addressed using special communication mechanisms (like JDBC or ODBC).
+
+It therefore seems useful to extract all communication functionality from the
+data mapper, and put it directly into the system control layer. Chapter
+\ref{statics_and_dynamics_heading} explained why it is favourable to have
+application knowledge separated from system control mechanisms. While
+persistence/ communication mechanisms as such do not contain any domain
+knowledge, mapper (translator) modules do. The remaining data mapper layer
+would hence contain application-related logic knowledge, for translating data
+from the domain model to the corresponding persistence model and vice-versa.
+
+The \emph{Cybernetics Oriented Interpreter} (CYBOI) that will be introduced in
+chapter \ref{cybernetics_oriented_interpreter_heading} is a system able to
+handle local- as well as remote communication mechanisms. Applications written
+in the \emph{Cybernetics Oriented Language} (CYBOL), introduced in chapter
+\ref{cybernetics_oriented_language_heading}, will have to deliver the necessary
+logic for model translation, but application developers are freed from
+implementing the same low-level system communication functionality (like
+sockets) again and again, leading to clearer code with greatly reduced size.
+CYBOL application developers are offered a number of communication mechanisms
+to choose from.

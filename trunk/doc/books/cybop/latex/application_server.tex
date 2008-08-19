@@ -1,0 +1,71 @@
+%
+% $RCSfile: application_server.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:05 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\section{Application Server}
+\label{application_server_heading}
+\index{Application Server}
+\index{Presentation Clients}
+\index{Standalone Systems}
+\index{Operating System}
+\index{OS}
+\index{Layers}
+\index{Tier}
+\index{1 Tier}
+\index{n Tier}
+\index{Server Process}
+\index{Server}
+\index{Client}
+
+One well-known system, nowadays, is the \emph{Application Server}. The name
+implies that this system is to \emph{serve} other systems, so-called
+\emph{Presentation Clients} (section \ref{presentation_client_heading}). It may
+be programmed in languages like \emph{Java}, \emph{Python}, \emph{Smalltalk},
+\emph{C++}, \emph{C} or others more.
+
+On the other hand, there are systems running all by themselves, without any
+access to/ from another system -- so-called \emph{Standalone Systems}. In
+reality, they hardly exist since most applications run in a surrounding
+\emph{Operating System} (OS) and are thus not really \emph{alone}. An OS may be
+called \emph{standalone} but mostly, even that consists of a number of sub
+processes solving background tasks. That is why the name \emph{standalone} is
+used when one wants to place emphasis on the system itself, neglecting its
+communication with others.
+
+Many kinds of application servers exist. Multiple services are offered by them,
+for example storage or persistence handling but also application- and domain
+specific functionality. A healthcare environment, as example, may contain several
+servers, each fulfilling one task such as person identification, resource access
+decision, image access and so on -- just like people in real life have abilities
+and professions.
+
+Systems of an IT environment are structured into so-called \emph{Layers},
+another name for which is \emph{Tier}. The application server alone represents
+a \emph{1 Tier} environment. The more systems of different type (presentation
+client, application server, database server) are added to an environment, the
+more tiers are added. For that reason, distributed client-server environments
+are called \emph{n Tier}.
+
+When people talk about a \emph{Server}, they very often mean a \emph{Computer}
+on which a \emph{Server Process} is running. This is neither completely wrong nor
+absolutely correct. A computer can run many different processes, only some of
+which may be servers. Hence, the computer can act as \emph{Server} but also as
+\emph{Client}, at the same time.

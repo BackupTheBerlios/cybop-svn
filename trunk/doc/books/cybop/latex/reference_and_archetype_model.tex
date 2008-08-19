@@ -1,0 +1,62 @@
+%
+% $RCSfile: reference_and_archetype_model.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:08 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Reference- and Archetype Model}
+\label{reference_and_archetype_model_heading}
+\index{Reference Model}
+\index{RM}
+\index{Archetype Model}
+\index{AM}
+\index{Archetype}
+\index{Archetype Definition Language}
+\index{ADL}
+\index{Dual Model Approach}
+
+The \emph{Archetype} concept as introduced in section \ref{archetype_heading}
+\emph{does} provide an independent implementation technique (language) for the
+definition of application-specific domain knowledge: the
+\emph{Archetype Definition Language} (ADL). The documents written in it,
+altogether, are referred to as \emph{Archetype Model} (AM). They get parsed and
+instantiated at runtime. These instances are then used to constrain instances
+of a \emph{Reference Model} (RM). Because of the existence of two models
+implemented with two independent techniques, this method of programming is
+called \emph{Dual Model Approach} (section \ref{dual_model_approach_heading}).
+
+It wants to solve the dilemma of lacking domain semantics in classical
+information models. Archetypes are the corresponding knowledge documents
+carrying semantic information. They provide the structures and rules after
+which instances of an RM can be combined meaningfully. Despite its drawbacks
+mentioned in section \ref{dual_model_approach_heading}, the dual model approach
+animated this work to pay attention to two things:
+
+\begin{enumerate}
+    \item the usage of different implementation technologies for domain
+        knowledge (AM) and underlying system-level functionality (RM)
+    \item the need to provide constraint information with knowledge models
+\end{enumerate}
+
+The distinction between domain knowledge and system-level functionality is
+realised by providing a knowledge modelling language (chapter
+\ref{cybernetics_oriented_language_heading}) and a corresponding interpreter
+(chapter \ref{cybernetics_oriented_interpreter_heading}). The language is
+capable of expressing structural- as well as meta information, to which also
+belong constraints.

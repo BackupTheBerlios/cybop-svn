@@ -1,0 +1,68 @@
+%
+% $RCSfile: generative_programming.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:06 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Generative Programming}
+\label{generative_programming_heading}
+\index{Generative Programming}
+\index{GP}
+\index{Aspect Oriented Programming}
+\index{AOP}
+\index{Generic Programming}
+\index{Domain Specific Language}
+\index{DSL}
+\index{Feature Model}
+\index{Generator}
+\index{Model Driven Architecture}
+\index{MDA}
+
+\emph{Generative Programming} (GP), as proposed by Czarnecki \cite{czarnecki},
+is \textit{a comprehensive software development paradigm to achieving high
+intentionality, reusability, and adaptability without the need to compromise
+the runtime performance and computing resources of the produced software.} It
+encompasses techniques of the following, previously described paradigms:
+
+\begin{itemize}
+    \item[-] \emph{Aspect Oriented Programming} (AOP) (section
+        \ref{aspect_oriented_programming_heading}): used to achieve separation
+        of concerns
+    \item[-] \emph{Generic Programming} (section \ref{generics_heading}): used
+        to parameterise over types
+    \item[-] \emph{Domain Specific Language} (DSL) (section
+        \ref{domain_specific_language_heading}): used to improve
+        intentionality, optimisation and error checking of program code
+    \item[-] \emph{Feature Model} (section \ref{feature_model_heading}): used
+        as configuration knowledge, to map between problem- and solution space
+\end{itemize}
+
+Czarnecki's work contributes to the formal specification and extension of the
+\emph{Feature Model}, but does not itself deliver new forms of knowledge
+abstraction. GP, however, is mentioned here because of its idea of applying
+\emph{Generators} (or generative techniques) producing implementation source
+code for a software system from the higher-level specifications defined in the
+design phase. Similar techniques are used in the
+\emph{Model Driven Architecture} (see next section). GP is a trial to automate
+the process of crossing abstraction gap number \emph{2} (with reference to
+figure \ref{gaps_figure}), and it is often quite successful. However, the gap
+between architecture design models and program source code remains. Chapter
+\ref{knowledge_schema_heading} will introduce a \emph{Knowledge Schema} serving
+as universal type, so that differing type-based architectures do not have to be
+designed anymore.

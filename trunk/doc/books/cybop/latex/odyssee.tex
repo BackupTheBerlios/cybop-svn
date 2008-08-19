@@ -1,0 +1,50 @@
+%
+% $RCSfile: odyssee.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:07 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsubsection{Odyssee}
+\label{odyssee_heading}
+\index{Odyssee}
+\index{Logiciel Nautilus}
+
+The \emph{Odyssee} open source project \cite{nautilus} contains a terminology
+(\emph{Lexique}) of more than 35,000 (French) terms, each with a code, at the
+core of its system. Additionally, it contains a \emph{Semantic Network} of
+links between terms of the Lexique, to give sense. Links can be \emph{is a},
+\emph{belongs to} or \emph{has unit}. Philippe Ameline writes
+\cite{openehrtechnical}:
+
+\begin{quotation}
+    In Odyssee, we describe all that we can with trees. If we compare the
+    Lexique with medical vocabulary, trees are sentences made of its words.
+    Each node of a tree is an object with fields like the Lexique's code,
+    complement (to store numbers or external codes), degree of evidence (from
+    0=no to 100=certain). Trees can also contain free text sentences \ldots
+
+    In Odyssee, each and every structured document is a tree; you just have to
+    look at the Lexique term at its root to know what it is. The whole patient
+    record can even be seen as a huge tree with (the) term \emph{Patient} as
+    root. Trees can be shown \emph{as is} or, for report generation, be
+    translated to natural langage sentences.
+\end{quotation}
+
+Scheme: compositional\\
+Maintainer: Odyssee \emph{Non-Profit Organisation} (NPO), \emph{Logiciel Nautilus}

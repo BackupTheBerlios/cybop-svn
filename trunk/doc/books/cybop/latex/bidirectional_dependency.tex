@@ -1,0 +1,67 @@
+%
+% $RCSfile: bidirectional_dependency.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:05 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsubsection{Bidirectional Dependency}
+\label{bidirectional_dependency_heading}
+\index{Bidirectional Dependency}
+\index{Inter-Dependency}
+\index{Endless Loop}
+\index{Tree}
+\index{Directed Acyclic Graph}
+\index{DAG}
+\index{Oriented Acyclic Graph}
+\index{Process Tree}
+\index{Object Tree}
+\index{Database Data Structure}
+\index{File System Structure}
+\index{Syntax Tree}
+\index{Acyclic Graph}
+\index{Circular Reference}
+
+\emph{Bidirectional References} are a nightmare for every software developer.
+They cause \emph{Inter-Dependencies} so that changes in one part of a system can
+affect multiple other parts which in turn affect the originating part, which may
+finally lead to cycles or even endless loops. Also, the actual program flow and
+effects of changes to a system become very hard to trace. Therefore, the avoidance
+of such dependencies belongs to the core principles of good software design.
+
+A \emph{Tree}, in mathematics, is defined as \textit{Directed Acyclic Graph}
+(DAG), also known as \emph{Oriented Acyclic Graph} \cite{nist}. It has a
+\emph{Root Node} and \emph{Child Nodes} which can become \emph{Parent Nodes}
+when having children themselves; otherwise they are called \emph{Leaves}.
+Children of the same node are \emph{Siblings}. \textit{A common constraint is
+that no node can have more than one parent}, as \cite{foldoc} writes and
+continues: \textit{Moreover, for some applications, it is necessary to consider
+a node's children to be an ordered list, instead of merely a set.} A graph is
+\emph{acyclic} if every node can be reached via exactly one path, which then
+also is the shortest possible.
+
+In computing, trees are used in many forms, for example as \emph{Process Tree}
+of an operating system \cite{debian, gnu, linux} or as \emph{Object Tree} of an
+object-oriented application. They represent \emph{Data Structures} in databases
+or file systems and also the \emph{Syntax Tree} of languages. The violation of
+the principle of the \emph{Acyclic Graph} can lead to the same loops, also
+called \emph{Circular References}, as mentioned above, which can result in the
+crossing of memory limits and is a potential security risk. Therefore, one of
+the main aims in the creation of the new concepts introduced in part
+\ref{contribution_heading} of this work was the avoidance of bidirectional
+relations.

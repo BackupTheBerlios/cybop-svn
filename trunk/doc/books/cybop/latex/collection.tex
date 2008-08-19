@@ -1,0 +1,59 @@
+%
+% $RCSfile: collection.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:05 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\paragraph{Collection}
+\label{collection_heading}
+\index{Collection}
+\index{Array}
+\index{Allocated Area}
+\index{Random Access Memory}
+\index{RAM}
+\index{Vector}
+\index{Stack}
+\index{Last-In-First-Out}
+\index{LIFO}
+\index{Set}
+\index{List}
+\index{Duplicate Element}
+\index{Ordered Collection}
+\index{Sequence}
+\index{Enumeration}
+\index{nextElement Method}
+\index{Java Development Kit}
+\index{JDK}
+\index{Iterator}
+
+The \emph{Array} is the most basic form of a container. It represents an allocated
+area in the computer's \emph{Random Access Memory} (RAM). A \emph{Vector}
+implements a dynamically growable array of objects. The \emph{Stack} class extends
+the vector class and represents a \emph{Last-In-First-Out} (LIFO) stack of objects.
+A collection that contains no duplicate elements is called a \emph{Set}. Unlike
+sets, \emph{Lists} typically allow duplicate elements. Synonyms for list are
+\emph{Ordered Collection} and \emph{Sequence}.
+
+Objects that can generate a series of elements, one at a time, implement the
+\emph{Enumeration} interface. Successive calls to the \emph{nextElement} method
+return successive elements of such a series. In recent releases of the
+\emph{Java Development Kit} (JDK) \cite{java}, \emph{Iterator} takes the place
+of enumeration, in the collections framework. An iterator over a collection
+differs from an enumeration in that it allows the caller to remove elements,
+with well-defined semantics, from the underlying collection during an iteration.

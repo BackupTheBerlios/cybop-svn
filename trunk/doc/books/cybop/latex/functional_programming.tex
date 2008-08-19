@@ -1,0 +1,137 @@
+%
+% $RCSfile: functional_programming.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:06 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Functional Programming}
+\label{functional_programming_heading}
+\index{Functional Programming}
+\index{Lisp}
+\index{Automatic Storage Management}
+\index{Integrated Development Environment}
+\index{Prolog}
+\index{Pascal}
+\index{C}
+\index{Special Purpose Language}
+\index{SPL}
+\index{General Purpose Language}
+\index{GPL}
+\index{Imperative Language}
+\index{Functional Language}
+\index{Haskell}
+\index{Side Effect}
+\index{SML}
+\index{Scheme}
+\index{Association of Lisp Users}
+
+Many languages such as \emph{Lisp} and its relatives cannot be characterised
+cleanly as system programming language or scripting language; they are situated
+somewhere between. Concepts like \emph{Interpretation} and \emph{Dynamic Typing},
+now common in scripting languages, stem from Lisp \cite{ousterhout1998}. Others like
+\emph{Automatic Storage Management} and \emph{Integrated Development Environments},
+now used in both scripting- and system programming languages, were introduced by
+Lisp as well. Peter Norvig writes in \cite{norvig}:
+
+\begin{quote}
+    There is a myth that Lisp (and Prolog) are \emph{Special Purpose Languages}
+    (SPL), while languages such as Pascal and C are \emph{General Purpose} (GPL).
+    Actually, just the reverse is true. Pascal and C are special-purpose languages
+    for manipulating the registers and memory of a \emph{von Neumann}-style computer.
+    The majority of their syntax is devoted to arithmetic and Boolean expressions,
+    and while they provide some facilities for forming data structures, they have
+    poor mechanisms for procedural abstraction or control abstraction. In addition,
+    they are designed for the \emph{state-oriented} style of programming: computing
+    a result by changing the value of variables through assignment statements.
+\end{quote}
+
+The \emph{Frequently Asked Questions} (FAQ) edited by Graham Hutton \cite{hutton}
+distinguish between \emph{Imperative Languages} and \emph{Functional Languages}.
+System programming languages as introduced in previous sections belong to the
+first group. To calculate the sum of the integers from 1 to 10, for example,
+they would probably use a simple loop and repeatedly update the values held in
+an accumulator variable \emph{total} and a counter variable \emph{i}:
+
+\begin{scriptsize}
+    \begin{verbatim}
+    int total = 0;
+    for (int i = 1; i <= 10; ++i) {
+        total += i;
+    }
+    \end{verbatim}
+\end{scriptsize}
+
+A functional language like \emph{Haskell} would express the same program
+\emph{without} any variable updates, by evaluating an expression, as shown
+below. Variable updates, that is \textit{computational effects caused by
+expression evaluation that persist after the evaluation is completed}
+\cite{hutton} are called \emph{Side Effects}.
+
+\begin{scriptsize}
+    \begin{verbatim}
+    sum [1..10]
+    \end{verbatim}
+\end{scriptsize}
+
+The following two examples \cite{hutton} show the same program in two other
+functional languages, namely \emph{SML} and \emph{Scheme}:
+
+\begin{scriptsize}
+    \begin{verbatim}
+    let fun sum i tot = if i = 0 then tot else sum (i - 1) (tot + i)
+    in sum 10 0
+    end
+    \end{verbatim}
+\end{scriptsize}
+
+\begin{scriptsize}
+    \begin{verbatim}
+    (define sum
+    (lambda (from total)
+        (if (= 0 from)
+            total
+            (sum (- from 1) (+ total from)))))
+    (sum 10 0)
+    \end{verbatim}
+\end{scriptsize}
+
+The \emph{Association of Lisp Users} \cite{commonlisp} points out the absence
+of side effects and explains \emph{Functional Programming} as follows:
+
+\begin{quote}
+    Functional programming describes all computer operations as mathematical
+    functions on inputs. Typically, a function can be created and returned from
+    other functions as first-class data. This function object may then be passed
+    as input to other functions, perhaps be composed with other functions, and
+    eventually, applied to inputs to produce a value. Objects can be defined in
+    terms of functions that encapsulate certain data, and operations on objects
+    can be defined by functions encapsulating the objects. Purely functional
+    languages do not have assignment, as all side-effecting can be defined in
+    terms of functions that encapsulate the changed data. Procedural languages
+    essentially perform everything as side-effects to data structures. A purely
+    procedural language would have no functions, but might have subroutines of
+    no arguments that returned no values, and performed certain assignments and
+    other operations based on the data it found stored in the system.
+\end{quote}
+
+The interpreter described in chapter \ref{cybernetics_oriented_interpreter_heading}
+manipulates \emph{all} data (knowledge) as if it would be one huge side effect.
+Data (knowledge models) are not bundled with-, but kept completely outside any
+functions/ procedures. Only references to these data are handed over as
+parameters.
