@@ -1,26 +1,25 @@
 /*
- * $RCSfile: boolean_converter.c,v $
+ * Copyright (C) 1999-2008. Christian Heller.
  *
- * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
+ * This file is part of the Cybernetics Oriented Interpreter (CYBOI).
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
+ * CYBOI is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
+ * CYBOI is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * along with CYBOI.  If not, see <http://www.gnu.org/licenses/>.
  *
- * http://www.cybop.net
- * - Cybernetics Oriented Programming -
+ * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
+ * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $Revision: 1.19 $ $Date: 2008-05-27 22:52:00 $ $Author: christian $
+ * @version $RCSfile: boolean_converter.c,v $ $Revision: 1.20 $ $Date: 2008-09-03 22:04:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,10 +29,10 @@
 #include "../../globals/constants/boolean/boolean_constants.c"
 #include "../../globals/constants/cybol/cybol_model_constants.c"
 #include "../../globals/constants/integer/integer_constants.c"
-#include "../../globals/constants/log/log_message_constants.c"
+#include "../../constant/model/log/message_log_model.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
-#include "../../globals/constants/pointer/pointer_constants.c"
-#include "../../globals/logger/logger.c"
+#include "../../constant/model/memory/pointer_memory_model.c"
+#include "../../logger/logger.c"
 #include "../../memoriser/allocator.c"
 #include "../../memoriser/array.c"
 
@@ -48,28 +47,28 @@
  */
 void decode_boolean(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p4 != *NULL_POINTER) {
+    if (p4 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* sc = (int*) p4;
 
-        if (p1 != *NULL_POINTER) {
+        if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
             int* dc = (int*) p1;
 
-            if (p0 != *NULL_POINTER) {
+            if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
                 int** d = (int**) p0;
 
-                log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Decode boolean.");
+                log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Decode boolean.");
 
                 // The comparison result.
-                int r = *NUMBER_0_INTEGER;
+                int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-                if (r == *NUMBER_0_INTEGER) {
+                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    compare_array_elements(p3, (void*) TRUE_MODEL, (void*) TRUE_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+                    compare_array_elements(p3, (void*) TRUE_MODEL, (void*) TRUE_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                    if (r != *NUMBER_0_INTEGER) {
+                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         // Set boolean value to "true", in other words the integer value to "one".
                         set_array_elements(*d, (void*) PRIMITIVE_VALUE_INDEX, (void*) TRUE_BOOLEAN, (void*) NUMBER_1_INTEGER, (void*) INTEGER_ARRAY);
@@ -79,11 +78,11 @@ void decode_boolean(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     }
                 }
 
-                if (r == *NUMBER_0_INTEGER) {
+                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    compare_array_elements(p3, (void*) FALSE_MODEL, (void*) FALSE_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+                    compare_array_elements(p3, (void*) FALSE_MODEL, (void*) FALSE_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                    if (r != *NUMBER_0_INTEGER) {
+                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         // Set boolean value to "false", in other words the integer value to "zero".
                         set_array_elements(*d, (void*) PRIMITIVE_VALUE_INDEX, (void*) FALSE_BOOLEAN, (void*) NUMBER_1_INTEGER, (void*) INTEGER_ARRAY);
@@ -93,7 +92,7 @@ void decode_boolean(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     }
                 }
 
-                if (r == *NUMBER_0_INTEGER) {
+                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                     // If neither "true" nor "false" value were found, then set
                     // the boolean (integer) value to "false" here, by default.
@@ -107,17 +106,17 @@ void decode_boolean(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode boolean. The destination is null.");
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode boolean. The destination is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode boolean. The destination count is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode boolean. The destination count is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode boolean. The source count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode boolean. The source count is null.");
     }
 }
 
@@ -132,29 +131,29 @@ void decode_boolean(void* p0, void* p1, void* p2, void* p3, void* p4) {
  */
 void encode_boolean(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p4 != *NULL_POINTER) {
+    if (p4 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* sc = (int*) p4;
 
-        if (p3 != *NULL_POINTER) {
+        if (p3 != *NULL_POINTER_MEMORY_MODEL) {
 
             int* s = (int*) p3;
 
-            if (p2 != *NULL_POINTER) {
+            if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
                 int* ds = (int*) p2;
 
-                if (p1 != *NULL_POINTER) {
+                if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
                     int* dc = (int*) p1;
 
-                    if (p0 != *NULL_POINTER) {
+                    if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
                         void** d = (void**) p0;
 
-                        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Encode boolean.");
+                        log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Encode boolean.");
 
-                        if (*sc > *NUMBER_0_INTEGER) {
+                        if (*sc > *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                             if (*s == *NUMBER_1_INTEGER) {
 
@@ -162,10 +161,10 @@ void encode_boolean(void* p0, void* p1, void* p2, void* p3, void* p4) {
                                 *ds = *dc + *TRUE_MODEL_COUNT;
 
                                 // Reallocate destination character vector.
-                                reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_ARRAY);
+                                reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                                 // Set source into destination character vector.
-                                set_array_elements(*d, p1, TRUE_MODEL, TRUE_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+                                set_array_elements(*d, p1, TRUE_MODEL, TRUE_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                                 // Increment destination count.
                                 *dc = *dc + *TRUE_MODEL_COUNT;
@@ -176,10 +175,10 @@ void encode_boolean(void* p0, void* p1, void* p2, void* p3, void* p4) {
                                 *ds = *dc + *FALSE_MODEL_COUNT;
 
                                 // Reallocate destination character vector.
-                                reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_ARRAY);
+                                reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                                 // Set source into destination character vector.
-                                set_array_elements(*d, p1, FALSE_MODEL, FALSE_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+                                set_array_elements(*d, p1, FALSE_MODEL, FALSE_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                                 // Increment destination count.
                                 *dc = *dc + *FALSE_MODEL_COUNT;
@@ -187,32 +186,32 @@ void encode_boolean(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                         } else {
 
-                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode boolean. The source count is zero.");
+                            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode boolean. The source count is zero.");
                         }
 
                     } else {
 
-                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode boolean. The destination is null.");
+                        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode boolean. The destination is null.");
                     }
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode boolean. The destination count is null.");
+                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode boolean. The destination count is null.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode boolean. The destination size is null.");
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode boolean. The destination size is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode boolean. The source is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode boolean. The source is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode boolean. The source count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode boolean. The source count is null.");
     }
 }
 

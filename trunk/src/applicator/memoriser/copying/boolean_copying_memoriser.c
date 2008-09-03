@@ -1,0 +1,114 @@
+/*
+ * Copyright (C) 1999-2008. Christian Heller.
+ *
+ * This file is part of the Cybernetics Oriented Interpreter (CYBOI).
+ *
+ * CYBOI is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * CYBOI is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with CYBOI.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
+ * Christian Heller <christian.heller@tuxtax.de>
+ *
+ * @version $RCSfile: boolean_copying_memoriser.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:00 $ $Author: christian $
+ * @author Christian Heller <christian.heller@tuxtax.de>
+ */
+
+#ifndef BOOLEAN_COPIER_SOURCE
+#define BOOLEAN_COPIER_SOURCE
+
+#include "../../globals/constants/cybol/cybol_abstraction_constants.c"
+#include "../../globals/constants/integer/integer_constants.c"
+#include "../../constant/model/log/message_log_model.c"
+#include "../../constant/model/memory/pointer_memory_model.c"
+#include "../../logger/logger.c"
+#include "../../memoriser/array.c"
+
+/**
+ * Copies a boolean.
+ *
+ * @param p0 the destination (Hand over as reference!)
+ * @param p1 the destination count
+ * @param p2 the destination size
+ * @param p3 the source
+ * @param p4 the source count
+ */
+void copy_boolean(void* p0, void* p1, void* p2, void* p3, void* p4) {
+
+    if (p4 != *NULL_POINTER_MEMORY_MODEL) {
+
+        int* sc = (int*) p4;
+
+        if (p2 != *NULL_POINTER_MEMORY_MODEL) {
+
+            int* ds = (int*) p2;
+
+            if (p1 != *NULL_POINTER_MEMORY_MODEL) {
+
+                int* dc = (int*) p1;
+
+                if (p0 != *NULL_POINTER_MEMORY_MODEL) {
+
+                    void** d = (void**) p0;
+
+                    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Copy boolean.");
+
+                    // CAUTION! The destination array needs to be resized not only
+                    // if the source array is greater, but also if it is smaller!
+                    // If this is not done, false results may occur.
+                    // Example: A colour gets copied from source to destination.
+                    // The source colour is "red" with a count of 3.
+                    // The destination colour is "green" with a count of 5.
+                    // If the source colour gets copied to the destination,
+                    // the resulting destination array is "reden" with a count of 5.
+                    // This colour value does not exist and will cause errors!
+                    // Therefore, the destination array count and size ALWAYS
+                    // have to be adapted to the source array count and size.
+                    // If this had been done in the example, the resulting
+                    // destination array would have been "red" with a count of 3,
+                    // which is correct.
+
+                    // CAUTION! Do NOT use < or > here, for the reasons explained above!
+                    if (*sc != *dc) {
+
+                        // Set destination count and size.
+                        *dc = *sc;
+                        *ds = *dc;
+
+                        reallocate_array(p0, p1, p2, (void*) INTEGER_ARRAY);
+                    }
+
+                    set_array_elements(*d, (void*) NUMBER_0_INTEGER, p3, p4, (void*) INTEGER_ARRAY);
+
+                } else {
+
+                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not copy boolean. The destination is null.");
+                }
+
+            } else {
+
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not copy boolean. The destination count is null.");
+            }
+
+        } else {
+
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not copy boolean. The destination size is null.");
+        }
+
+    } else {
+
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not copy boolean. The source count is null.");
+    }
+}
+
+/* BOOLEAN_COPIER_SOURCE */
+#endif

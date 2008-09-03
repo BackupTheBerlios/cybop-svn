@@ -1,26 +1,25 @@
 /*
- * $RCSfile: x_window_system_communicator.c,v $
+ * Copyright (C) 1999-2008. Christian Heller.
  *
- * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
+ * This file is part of the Cybernetics Oriented Interpreter (CYBOI).
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
+ * CYBOI is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
+ * CYBOI is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * along with CYBOI.  If not, see <http://www.gnu.org/licenses/>.
  *
- * http://www.cybop.net
- * - Cybernetics Oriented Programming -
+ * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
+ * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $Revision: 1.19 $ $Date: 2008-05-27 22:52:00 $ $Author: christian $
+ * @version $RCSfile: x_window_system_communicator.c,v $ $Revision: 1.20 $ $Date: 2008-09-03 22:04:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,9 +29,9 @@
 #include <X11/Xlib.h>
 #include "../../globals/constants/cyboi/cyboi_signal_priority_constants.c"
 #include "../../globals/constants/cybol/cybol_abstraction_constants.c"
-#include "../../globals/constants/log/log_message_constants.c"
-#include "../../globals/constants/pointer/pointer_constants.c"
-#include "../../globals/logger/logger.c"
+#include "../../constant/model/log/message_log_model.c"
+#include "../../constant/model/memory/pointer_memory_model.c"
+#include "../../logger/logger.c"
 #include "../../memoriser/accessor.c"
 
 /**
@@ -65,11 +64,11 @@ void sense_x_window_system_mouse_command(void* p0, void* p1, void* p2, void* p3,
     void* p6, void* p7, void* p8, void* p9, void* p10, void* p11,
     void* p12, void* p13, void* p14, void* p15, void* p16, void* p17) {
 
-    if (p15 != *NULL_POINTER) {
+    if (p15 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* b = (int*) p15;
 
-        if (p14 != *NULL_POINTER) {
+        if (p14 != *NULL_POINTER_MEMORY_MODEL) {
 
             int* t = (int*) p14;
 
@@ -98,12 +97,12 @@ void sense_x_window_system_mouse_command(void* p0, void* p1, void* p2, void* p3,
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not sense x window system mouse command. The event type is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not sense x window system mouse command. The event type is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not sense x window system mouse command. The mouse button is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not sense x window system mouse command. The mouse button is null.");
     }
 }
 
@@ -136,7 +135,7 @@ void sense_x_window_system_command(void* p0, void* p1, void* p2, void* p3, void*
     void* p6, void* p7, void* p8, void* p9, void* p10, void* p11,
     void* p12, void* p13, void* p14, void* p15, void* p16, void* p17) {
 
-    if (p14 != *NULL_POINTER) {
+    if (p14 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* t = (int*) p14;
 
@@ -153,7 +152,7 @@ void sense_x_window_system_command(void* p0, void* p1, void* p2, void* p3, void*
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not sense x window system command. The event type is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not sense x window system command. The event type is null.");
     }
 }
 
@@ -198,19 +197,19 @@ void sense_x_window_system_part(void* p0, void* p1, void* p2, void* p3, void* p4
     void* p12, void* p13, void* p14, void* p15, void* p16,
     void* p17, void* p18, void* p19, void* p20) {
 
-    if (p16 != *NULL_POINTER) {
+    if (p16 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* mz = (int*) p16;
 
-        if (p15 != *NULL_POINTER) {
+        if (p15 != *NULL_POINTER_MEMORY_MODEL) {
 
             int* my = (int*) p15;
 
-            if (p14 != *NULL_POINTER) {
+            if (p14 != *NULL_POINTER_MEMORY_MODEL) {
 
                 int* mx = (int*) p14;
 
-                if (p13 != *NULL_POINTER) {
+                if (p13 != *NULL_POINTER_MEMORY_MODEL) {
 
                     int* wmc = (int*) p13;
 
@@ -264,14 +263,14 @@ void sense_x_window_system_part(void* p0, void* p1, void* p2, void* p3, void* p4
                     int** smz = (int**) NULL_POINTER;
 
                     // The new mouse coordinates.
-                    int nx = *NUMBER_0_INTEGER;
-                    int ny = *NUMBER_0_INTEGER;
-                    int nz = *NUMBER_0_INTEGER;
+                    int nx = *NUMBER_0_INTEGER_MEMORY_MODEL;
+                    int ny = *NUMBER_0_INTEGER_MEMORY_MODEL;
+                    int nz = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                     // The loop count.
-                    int j = *NUMBER_0_INTEGER;
+                    int j = *NUMBER_0_INTEGER_MEMORY_MODEL;
                     // The comparison result.
-                    int r = *NUMBER_0_INTEGER;
+                    int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                     while (*NUMBER_1_INTEGER) {
 
@@ -321,9 +320,9 @@ void sense_x_window_system_part(void* p0, void* p1, void* p2, void* p3, void* p4
                             // Sense the graphical part's command.
                             sense_x_window_system_command(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, *d, *dc, p17, p18, p19, p20);
 
-                            compare_arrays(*a, *ac, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+                            compare_arrays(*a, *ac, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                            if (r != *NUMBER_0_INTEGER) {
+                            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                                 // The graphical part model is a compound.
 
@@ -387,12 +386,12 @@ void sense_x_window_system_part(void* p0, void* p1, void* p2, void* p3, void* p4
                         smz = (int**) NULL_POINTER;
 
                         // Reset new mouse coordinates.
-                        nx = *NUMBER_0_INTEGER;
-                        ny = *NUMBER_0_INTEGER;
-                        nz = *NUMBER_0_INTEGER;
+                        nx = *NUMBER_0_INTEGER_MEMORY_MODEL;
+                        ny = *NUMBER_0_INTEGER_MEMORY_MODEL;
+                        nz = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                         // Reset comparison result.
-                        r = *NUMBER_0_INTEGER;
+                        r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                         // Increment loop count.
                         j++;
@@ -400,22 +399,22 @@ void sense_x_window_system_part(void* p0, void* p1, void* p2, void* p3, void* p4
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not sense x window system part. The whole model count is null.");
+                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not sense x window system part. The whole model count is null.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not sense x window system part. The mouse x coordinate is null.");
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not sense x window system part. The mouse x coordinate is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not sense x window system part. The mouse y coordinate is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not sense x window system part. The mouse y coordinate is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not sense x window system part. The mouse z coordinate is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not sense x window system part. The mouse z coordinate is null.");
     }
 }
 
@@ -539,7 +538,7 @@ void read_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
         // when being displayed after having been covered before.
 
         // Consider only the last in a row of multiple expose events.
-        if (e.xexpose.count == *NUMBER_0_INTEGER) {
+        if (e.xexpose.count == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             // Get actual command belonging to the x window system expose event.
             get_universal_compound_element_by_name(*c, *cc,
@@ -752,11 +751,11 @@ void read_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
  */
 void write_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p0 != *NULL_POINTER) {
+    if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
         struct _XDisplay** d = (struct _XDisplay**) p0;
 
-        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Write to x window system display.");
+        log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Write to x window system display.");
 
         // The window.
         int** w = (int**) NULL_POINTER;
@@ -779,7 +778,7 @@ void write_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not write to x window system display. The destination display is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not write to x window system display. The destination display is null.");
     }
 }
 

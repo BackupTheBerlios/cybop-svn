@@ -1,26 +1,25 @@
 /*
- * $RCSfile: system_signal_handler_manager.c,v $
+ * Copyright (C) 1999-2008. Christian Heller.
  *
- * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
+ * This file is part of the Cybernetics Oriented Interpreter (CYBOI).
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
+ * CYBOI is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
+ * CYBOI is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * along with CYBOI.  If not, see <http://www.gnu.org/licenses/>.
  *
- * http://www.cybop.net
- * - Cybernetics Oriented Programming -
+ * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
+ * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $Revision: 1.15 $ $Date: 2008-05-04 00:18:12 $ $Author: christian $
+ * @version $RCSfile: system_signal_handler_manager.c,v $ $Revision: 1.16 $ $Date: 2008-09-03 22:04:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,9 +29,9 @@
 #include <pthread.h>
 #include <signal.h>
 #include "../../globals/constants/integer/integer_constants.c"
-#include "../../globals/constants/log/log_message_constants.c"
-#include "../../globals/constants/pointer/pointer_constants.c"
-#include "../../globals/logger/logger.c"
+#include "../../constant/model/log/message_log_model.c"
+#include "../../constant/model/memory/pointer_memory_model.c"
+#include "../../logger/logger.c"
 #include "../../globals/variables/service_interrupt_variables.c"
 #include "../../globals/variables/thread_identification_variables.c"
 
@@ -70,11 +69,11 @@ void interrupt_service_system_signal_handler(int p0) {
 
 //??    fwprintf(stdout, L"TEST signal handler gnu/linux console %i\n", p0);
 
-        if (*GNU_LINUX_CONSOLE_EXIT != *NUMBER_0_INTEGER) {
+        if (*GNU_LINUX_CONSOLE_EXIT != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
 //??    fwprintf(stdout, L"TEST signal handler gnu/linux console irq %i\n", p0);
 
-            pthread_exit(*NULL_POINTER);
+            pthread_exit(*NULL_POINTER_MEMORY_MODEL);
 
             // CAUTION! The thread CANNOT be reset here with:
             // *GNU_LINUX_CONSOLE_THREAD = *NUMBER_MINUS_1_INTEGER;
@@ -89,11 +88,11 @@ void interrupt_service_system_signal_handler(int p0) {
 
 //??    fwprintf(stdout, L"TEST signal handler x window system %i\n", p0);
 
-        if (*X_WINDOW_SYSTEM_EXIT != *NUMBER_0_INTEGER) {
+        if (*X_WINDOW_SYSTEM_EXIT != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
 //??    fwprintf(stdout, L"TEST signal handler x window system irq %i\n", p0);
 
-            pthread_exit(*NULL_POINTER);
+            pthread_exit(*NULL_POINTER_MEMORY_MODEL);
 
             // CAUTION! The thread CANNOT be reset here with:
             // *X_WINDOW_SYSTEM_THREAD = *NUMBER_MINUS_1_INTEGER;
@@ -108,11 +107,11 @@ void interrupt_service_system_signal_handler(int p0) {
 
 //??    fwprintf(stdout, L"TEST signal handler www service %i\n", p0);
 
-        if (*WWW_SERVICE_EXIT != *NUMBER_0_INTEGER) {
+        if (*WWW_SERVICE_EXIT != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
 //??    fwprintf(stdout, L"TEST signal handler www service irq %i\n", p0);
 
-            pthread_exit(*NULL_POINTER);
+            pthread_exit(*NULL_POINTER_MEMORY_MODEL);
 
             // CAUTION! The thread CANNOT be reset here with:
             // *WWW_SERVICE_THREAD = *NUMBER_MINUS_1_INTEGER;
@@ -127,11 +126,11 @@ void interrupt_service_system_signal_handler(int p0) {
 
 //??    fwprintf(stdout, L"TEST signal handler cyboi service %i\n", p0);
 
-        if (*CYBOI_SERVICE_EXIT != *NUMBER_0_INTEGER) {
+        if (*CYBOI_SERVICE_EXIT != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
 //??    fwprintf(stdout, L"TEST signal handler cyboi service irq %i\n", p0);
 
-            pthread_exit(*NULL_POINTER);
+            pthread_exit(*NULL_POINTER_MEMORY_MODEL);
 
             // CAUTION! The thread CANNOT be reset here with:
             // *CYBOI_SERVICE_THREAD = *NUMBER_MINUS_1_INTEGER;
@@ -154,7 +153,7 @@ void interrupt_service_system_signal_handler(int p0) {
  */
 void startup_system_signal_handler() {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Startup system signal handler.");
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Startup system signal handler.");
 
     // The signal set (mask).
     sigset_t mask;
@@ -178,13 +177,13 @@ void startup_system_signal_handler() {
     // /controller/checker.c
     act.sa_handler = interrupt_service_system_signal_handler;
     act.sa_mask = mask;
-    act.sa_flags = *NUMBER_0_INTEGER;
+    act.sa_flags = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // Establish old signal handler.
     oldact.sa_mask = oldmask;
 
     // Set up a new action for the SIGUSR1 signal.
-    sigaction(SIGUSR1, &act, *NULL_POINTER);
+    sigaction(SIGUSR1, &act, *NULL_POINTER_MEMORY_MODEL);
 
 /*??
     // Examine or change the calling process's signal mask.
@@ -198,7 +197,7 @@ void startup_system_signal_handler() {
     // for example, job control signals. If the process is woken up
     // by a signal that doesn't set INTERRUPT_REQUEST, it just suspends
     // itself again until the "right" kind of signal eventually arrives.
-    while (*INTERRUPT_REQUEST == *NUMBER_0_INTEGER) {
+    while (*INTERRUPT_REQUEST == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
         // This function replaces the process's signal set (mask) with
         // the old set and then suspends the process until a signal is
@@ -221,7 +220,7 @@ void startup_system_signal_handler() {
     // sigsuspend -- in this case, the SIGIO and SIGUSR1 signals are
     // once again blocked. This call to sigprocmask is necessary to
     // explicitly unblock this signal.
-    sigprocmask(SIG_UNBLOCK, &mask, *NULL_POINTER);
+    sigprocmask(SIG_UNBLOCK, &mask, *NULL_POINTER_MEMORY_MODEL);
 */
 }
 

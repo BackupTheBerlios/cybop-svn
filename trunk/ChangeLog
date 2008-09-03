@@ -14,14 +14,66 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.66 $ $Date: 2008-07-11 23:14:42 $ $Author: christian $
+# @version $Revision: 1.67 $ $Date: 2008-09-03 22:03:58 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2008-09-03  Christian Heller  <christian.heller@tuxtax.de>
+        * Adapt source code to match new constants, in directory variable/
+        * Adapt source code to match new constants, in directory logger/
+        * Rename files in directory variable/
+
+2008-08-25  Christian Heller  <christian.heller@tuxtax.de>
+        * Finish adapting files in directory constant/model/
+        * Finish adapting files in directory constant/name/
+
+2008-08-18  Christian Heller  <christian.heller@tuxtax.de>
+        * Finish adapting file in directory constant/channel/
+
+2008-08-14  Christian Heller  <christian.heller@tuxtax.de>
+        * Finish adapting files in directory constant/abstraction/
+
+2008-08-01  Christian Heller  <christian.heller@tuxtax.de>
+        * Continue to restructure directory "constants/" and rename its files
+
+2008-07-25  Christian Heller  <christian.heller@tuxtax.de>
+        * Restructure complete directory "globals/constants/" and move/ rename to just "constant/"
+
+2008-07-24  Christian Heller  <christian.heller@tuxtax.de>
+        * Rename all files and sub directories of directory "applicator/" from verbs into nouns,
+            e.g. "add.c" into "adder.c", "count/" into "counter/" etc.
+
+2008-07-23  Christian Heller  <christian.heller@tuxtax.de>
+        * Apply GPL version 3 licence to CYBOI source code
+
+2008-07-18  Christian Heller  <christian.heller@tuxtax.de>
+        * Split module "cybol_language_constants.c" into many files residing in new directory "globals/constants/cybol/language/"
+        * Remove module "cybol_language_constants.c"
+        * Split module "cybol_model_constants.c" into many files residing in new directory "globals/constants/cybol/message/"
+        * Remove module "cybol_model_constants.c"
+
+2008-07-13  Christian Heller  <christian.heller@tuxtax.de>
+        * Remove module "cybol_constants.c", after having moved its constants into the modules
+            "cybol_attribute_constants.c", "cybol_markup_constants.c" and "cybol_separator_constants.c"
+
+2008-07-12  Christian Heller  <christian.heller@tuxtax.de>
+        * Adapt constants in modules "cybol_language_constants.c", "memory_structure_constants.c" and
+            "memory_abstraction_constants.c", which are used when decoding CYBOL into memory;
+            the "language" constants of cybol and runtime memory "abstraction" constants
+            need to be distinguished, because they are not always identical, e.g.
+            a cybol "path/knowledge" abstraction gets converted into an in-memory "wide_character" abstraction;
+            a cybol "text/plain" abstraction gets converted into an in-memory "wide_character" abstraction;
+            a cybol "wide_character" abstraction does not exist at all,
+            because the cybol "text/plain" abstraction is always expected to be utf-8 encoded
+            (other encodings might get implemented later into CYBOI)
+        * Remove module "cybol_abstraction_constants.c"
+
 2008-07-11  Christian Heller  <christian.heller@tuxtax.de>
         * Use Internet media types (mime types, content types), which became known as
-            Multipurpose Internet Mail Extensions (MIME) as new CYBOL abstractions
-        * Add CYBOL-specific language (media) types, e.g. "number", "character", (knowledge) "path" etc.
+            Multipurpose Internet Mail Extensions (MIME) as new CYBOL "language" constants
+            (formerly called "abstraction" constants), in module "cybol_language_constants.c"
+        * Add CYBOL-specific language (media) types, e.g. "number", (knowledge) "path" etc.
+        * Adhere to ISO/EN/DIN standards for date and time
 
 2008-07-07  Christian Heller  <christian.heller@tuxtax.de>
         * Restructure and rename files in directory "src/globals/constants/character/" and add more constants

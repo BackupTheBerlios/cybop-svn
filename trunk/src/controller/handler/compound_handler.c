@@ -1,26 +1,25 @@
 /*
- * $RCSfile: compound_handler.c,v $
+ * Copyright (C) 1999-2008. Christian Heller.
  *
- * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
+ * This file is part of the Cybernetics Oriented Interpreter (CYBOI).
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
+ * CYBOI is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
+ * CYBOI is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * along with CYBOI.  If not, see <http://www.gnu.org/licenses/>.
  *
- * http://www.cybop.net
- * - Cybernetics Oriented Programming -
+ * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
+ * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $Revision: 1.24 $ $Date: 2008-06-26 04:57:27 $ $Author: christian $
+ * @version $RCSfile: compound_handler.c,v $ $Revision: 1.25 $ $Date: 2008-09-03 22:04:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -28,10 +27,10 @@
 #define COMPOUND_HANDLER_SOURCE
 
 #include "../../globals/constants/integer/integer_constants.c"
-#include "../../globals/constants/log/log_message_constants.c"
+#include "../../constant/model/log/message_log_model.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
-#include "../../globals/constants/pointer/pointer_constants.c"
-#include "../../globals/logger/logger.c"
+#include "../../constant/model/memory/pointer_memory_model.c"
+#include "../../logger/logger.c"
 #include "../../memoriser/array.c"
 
 //
@@ -66,9 +65,9 @@ void handle_compound_part(void* p0, void* p1, void* p2, void* p3, void* p4, void
     void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14, void* p15) {
 
     // The direct execution flag.
-    int* x = (int*) *NULL_POINTER;
+    int* x = (int*) *NULL_POINTER_MEMORY_MODEL;
 
-    if (p14 != *NULL_POINTER) {
+    if (p14 != *NULL_POINTER_MEMORY_MODEL) {
 
         x = (int*) p14;
     };
@@ -89,19 +88,19 @@ void handle_compound_part(void* p0, void* p1, void* p2, void* p3, void* p4, void
     get_array_elements(p10, (void*) DETAILS_INDEX, (void*) &pd, (void*) POINTER_ARRAY);
     get_array_elements(p10, (void*) DETAILS_COUNTS_INDEX, (void*) &pdc, (void*) POINTER_ARRAY);
 
-    if (*pa != *NULL_POINTER) {
+    if (*pa != *NULL_POINTER_MEMORY_MODEL) {
 
-        if (*pac != *NULL_POINTER) {
+        if (*pac != *NULL_POINTER_MEMORY_MODEL) {
 
-            if (*pm != *NULL_POINTER) {
+            if (*pm != *NULL_POINTER_MEMORY_MODEL) {
 
-                if (*pmc != *NULL_POINTER) {
+                if (*pmc != *NULL_POINTER_MEMORY_MODEL) {
 
-                    if (*pd != *NULL_POINTER) {
+                    if (*pd != *NULL_POINTER_MEMORY_MODEL) {
 
-                        if (*pdc != *NULL_POINTER) {
+                        if (*pdc != *NULL_POINTER_MEMORY_MODEL) {
 
-                            log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Handle compound part.");
+                            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Handle compound part.");
 
                             // The abstraction, model, details.
                             void** a = NULL_POINTER;
@@ -124,7 +123,7 @@ void handle_compound_part(void* p0, void* p1, void* p2, void* p3, void* p4, void
                             // signals. The part signals cannot have higher / lower priority
                             // than their original whole signal.)
 /*??
-                            if (*x != *NUMBER_0_INTEGER) {
+                            if (*x != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 */
 
     fwprintf(stderr, L"TEST handle compound part a: %ls\n", *((wchar_t**) a));
@@ -151,32 +150,32 @@ void handle_compound_part(void* p0, void* p1, void* p2, void* p3, void* p4, void
 
                         } else {
 
-                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not handle compound part. The part details counts is null.");
+                            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not handle compound part. The part details counts is null.");
                         }
 
                     } else {
 
-                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not handle compound part. The part details is null.");
+                        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not handle compound part. The part details is null.");
                     }
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not handle compound part. The part models counts is null.");
+                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not handle compound part. The part models counts is null.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not handle compound part. The part models is null.");
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not handle compound part. The part models is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not handle compound part. The part abstractions counts is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not handle compound part. The part abstractions counts is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not handle compound part. The part abstractions is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not handle compound part. The part abstractions is null.");
     }
 }
 
@@ -202,15 +201,15 @@ void handle_compound_part(void* p0, void* p1, void* p2, void* p3, void* p4, void
 void handle_compound(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
     void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14) {
 
-    if (p11 != *NULL_POINTER) {
+    if (p11 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* sc = (int*) p11;
 
-        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"\n\n");
-        log_message((void*) INFORMATION_LOG_LEVEL, (void*) HANDLE_COMPOUND_MESSAGE, (void*) HANDLE_COMPOUND_MESSAGE_COUNT);
+        log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"\n\n");
+        log_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) HANDLE_COMPOUND_MESSAGE, (void*) HANDLE_COMPOUND_MESSAGE_COUNT);
 
         // The loop variable.
-        int j = *NUMBER_0_INTEGER;
+        int j = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
         while (*NUMBER_1_INTEGER) {
 
@@ -229,7 +228,7 @@ void handle_compound(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not handle compound. The signal count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not handle compound. The signal count is null.");
     }
 }
 

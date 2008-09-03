@@ -1,26 +1,25 @@
 /*
- * $RCSfile: http_response_converter.c,v $
+ * Copyright (C) 1999-2008. Christian Heller.
  *
- * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
+ * This file is part of the Cybernetics Oriented Interpreter (CYBOI).
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
+ * CYBOI is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
+ * CYBOI is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * along with CYBOI.  If not, see <http://www.gnu.org/licenses/>.
  *
- * http://www.cybop.net
- * - Cybernetics Oriented Programming -
+ * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
+ * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $Revision: 1.10 $ $Date: 2008-07-08 17:55:36 $ $Author: christian $
+ * @version $RCSfile: http_response_converter.c,v $ $Revision: 1.11 $ $Date: 2008-09-03 22:04:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -34,9 +33,9 @@
 #include "../../globals/constants/http/http_protocol_version_constants.c"
 #include "../../globals/constants/http/http_separator_constants.c"
 #include "../../globals/constants/http/http_status_code_constants.c"
-#include "../../globals/constants/log/log_message_constants.c"
+#include "../../constant/model/log/message_log_model.c"
 #include "../../globals/constants/mime_type/text_mime_type_constants.c"
-#include "../../globals/logger/logger.c"
+#include "../../logger/logger.c"
 
 //
 // An http server response delivers message data in text format (like MIME 1.0),
@@ -90,7 +89,7 @@
  */
 void decode_http_response(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Decode http response.");
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Decode http response.");
 }
 
 /**
@@ -104,7 +103,7 @@ void decode_http_response(void* p0, void* p1, void* p2, void* p3, void* p4, void
  */
 void encode_http_response_status_line(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Encode http response status line.");
+    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Encode http response status line.");
 
     // Encode http protocol version.
     encode(p0, p1, p2, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
@@ -132,7 +131,7 @@ void encode_http_response_status_line(void* p0, void* p1, void* p2, void* p3, vo
  */
 void encode_http_response_headers(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
-    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Encode http response headers.");
+    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Encode http response headers.");
 
     // Encode content type http header.
     encode(p0, p1, p2, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
@@ -192,7 +191,7 @@ void encode_http_response_headers(void* p0, void* p1, void* p2, void* p3, void* 
  */
 void encode_http_response_body(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Encode http response body.");
+    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Encode http response body.");
 
     // Encode http body which was already encoded from a cyboi model into a
     // character byte stream and handed over as such.
@@ -214,27 +213,27 @@ void encode_http_response_body(void* p0, void* p1, void* p2, void* p3, void* p4)
  */
 void encode_http_response(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
-    if (p2 != *NULL_POINTER) {
+    if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* ds = (int*) p2;
 
-        if (p1 != *NULL_POINTER) {
+        if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
             int* dc = (int*) p1;
 
-            if (p0 != *NULL_POINTER) {
+            if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
                 void** d = (void**) p0;
 
-                log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Encode http response.");
+                log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Encode http response.");
 
                 // The temporary body.
-                void* b = *NULL_POINTER;
-                int bc = *NUMBER_0_INTEGER;
+                void* b = *NULL_POINTER_MEMORY_MODEL;
+                int bc = *NUMBER_0_INTEGER_MEMORY_MODEL;
                 int bs = bc;
 
                 // Allocate temporary body.
-                allocate_array((void*) &b, (void*) &bs, (void*) WIDE_CHARACTER_ARRAY);
+                allocate_array((void*) &b, (void*) &bs, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                 // Encode body containing optional user data (such as an encoded/serialised xhtml page).
                 //
@@ -262,31 +261,31 @@ void encode_http_response(void* p0, void* p1, void* p2, void* p3, void* p4, void
                     *ds = *dc + bc;
 
                     // Reallocate destination http response using the new size.
-                    reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_ARRAY);
+                    reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                 }
 
                 // Copy temporary body to the end of the actual destination http response.
-                set_array_elements(*d, p1, b, (void*) &bc, (void*) WIDE_CHARACTER_ARRAY);
+                set_array_elements(*d, p1, b, (void*) &bc, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                 // Increase destination http response count by the body count.
                 *dc = *dc + bc;
 
                 // Deallocate temporary body.
-                deallocate_array((void*) &b, (void*) &bs, (void*) WIDE_CHARACTER_ARRAY);
+                deallocate_array((void*) &b, (void*) &bs, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode http response. The destination http response is null.");
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode http response. The destination http response is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode http response. The destination http response count is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode http response. The destination http response count is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode http response. The destination http response size is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode http response. The destination http response size is null.");
     }
 }
 

@@ -1,26 +1,25 @@
 /*
- * $RCSfile: xdt_converter.c,v $
+ * Copyright (C) 1999-2008. Christian Heller.
  *
- * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
+ * This file is part of the Cybernetics Oriented Interpreter (CYBOI).
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
+ * CYBOI is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
+ * CYBOI is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * along with CYBOI.  If not, see <http://www.gnu.org/licenses/>.
  *
- * http://www.cybop.net
- * - Cybernetics Oriented Programming -
+ * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
+ * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $Revision: 1.28 $ $Date: 2008-07-08 17:55:36 $ $Author: christian $
+ * @version $RCSfile: xdt_converter.c,v $ $Revision: 1.29 $ $Date: 2008-09-03 22:04:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,15 +29,15 @@
 #include "../../globals/constants/character/code/character_code_constants.c"
 #include "../../globals/constants/character/code/wide_character_code_constants.c"
 #include "../../globals/constants/integer/integer_constants.c"
-#include "../../globals/constants/log/log_message_constants.c"
+#include "../../constant/model/log/message_log_model.c"
 #include "../../globals/constants/memory_structure/memory_abstraction_constants.c"
-#include "../../globals/constants/pointer/pointer_constants.c"
+#include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../globals/constants/xdt/xdt_field_constants.c"
 #include "../../globals/constants/xdt/xdt_field_name_constants.c"
 #include "../../globals/constants/xdt/xdt_package_name_constants.c"
 #include "../../globals/constants/xdt/xdt_record_constants.c"
 #include "../../globals/constants/xdt/xdt_record_name_constants.c"
-#include "../../globals/logger/logger.c"
+#include "../../logger/logger.c"
 #include "../../memoriser/converter/character/ascii_character_vector_converter.c"
 #include "../../memoriser/converter/date_time_converter.c"
 #include "../../memoriser/converter/integer_vector_converter.c"
@@ -138,31 +137,31 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
  */
 void decode_xdt_field(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
-    if (p6 != *NULL_POINTER) {
+    if (p6 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* sc = (int*) p6;
 
-        if (p5 != *NULL_POINTER) {
+        if (p5 != *NULL_POINTER_MEMORY_MODEL) {
 
             void** s = (void**) p5;
 
-            if (p4 != *NULL_POINTER) {
+            if (p4 != *NULL_POINTER_MEMORY_MODEL) {
 
                 int* v = (int*) p4;
 
-                if (p3 != *NULL_POINTER) {
+                if (p3 != *NULL_POINTER_MEMORY_MODEL) {
 
                     int* fcc = (int*) p3;
 
-                    if (p2 != *NULL_POINTER) {
+                    if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
                         void** fc = (void**) p2;
 
-                        if (p0 != *NULL_POINTER) {
+                        if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
                             int* fs = (int*) p0;
 
-                            log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Decode xdt field.");
+                            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Decode xdt field.");
 
                             // The remaining bytes in the source byte array.
                             // They are used to check that the array border is not crossed.
@@ -188,7 +187,7 @@ void decode_xdt_field(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
                                 rem = rem - (*XDT_FIELD_IDENTIFICATION_COUNT * *WIDE_CHARACTER_PRIMITIVE_SIZE);
                             }
 
-                            if (*fs >= ((*XDT_FIELD_SIZE_COUNT + *XDT_FIELD_IDENTIFICATION_COUNT + *PRIMITIVE_COUNT + *PRIMITIVE_COUNT) * *WIDE_CHARACTER_PRIMITIVE_SIZE)) {
+                            if (*fs >= ((*XDT_FIELD_SIZE_COUNT + *XDT_FIELD_IDENTIFICATION_COUNT + *PRIMITIVE_MEMORY_MODEL_COUNT + *PRIMITIVE_MEMORY_MODEL_COUNT) * *WIDE_CHARACTER_PRIMITIVE_SIZE)) {
 
                                 // Calculate xdt field content count.
                                 //
@@ -201,7 +200,7 @@ void decode_xdt_field(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
                                 //
                                 // It therefore has to be decremented here, so that
                                 // only the actual xdt field content count remains.
-                                *fcc = *fs - ((*XDT_FIELD_SIZE_COUNT + *XDT_FIELD_IDENTIFICATION_COUNT + *PRIMITIVE_COUNT + *PRIMITIVE_COUNT) * *WIDE_CHARACTER_PRIMITIVE_SIZE);
+                                *fcc = *fs - ((*XDT_FIELD_SIZE_COUNT + *XDT_FIELD_IDENTIFICATION_COUNT + *PRIMITIVE_MEMORY_MODEL_COUNT + *PRIMITIVE_MEMORY_MODEL_COUNT) * *WIDE_CHARACTER_PRIMITIVE_SIZE);
 
                                 if (rem >= *fcc) {
 
@@ -216,23 +215,23 @@ void decode_xdt_field(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
                             } else {
 
                                 // Store xdt field content, to be returned.
-                                *fc = *NULL_POINTER;
-                                *fcc = *NUMBER_0_INTEGER;
+                                *fc = *NULL_POINTER_MEMORY_MODEL;
+                                *fcc = *NUMBER_0_INTEGER_MEMORY_MODEL;
                             }
 
-                            if (rem >= ((*PRIMITIVE_COUNT + *PRIMITIVE_COUNT) * *WIDE_CHARACTER_PRIMITIVE_SIZE)) {
+                            if (rem >= ((*PRIMITIVE_MEMORY_MODEL_COUNT + *PRIMITIVE_MEMORY_MODEL_COUNT) * *WIDE_CHARACTER_PRIMITIVE_SIZE)) {
 
                                 // Verify if field end is reached (carriage return and line feed).
 
-                                if (*((wchar_t*) *s) == *CARRIAGE_RETURN_CONTROL_WIDE_CHARACTER_CODE) {
+                                if (*((wchar_t*) *s) == *CARRIAGE_RETURN_CONTROL_UNICODE_CHARACTER_CODE_MODEL) {
 
                                     // Increment source xdt byte array index.
-                                    *s = *s + (*PRIMITIVE_COUNT * *WIDE_CHARACTER_PRIMITIVE_SIZE);
+                                    *s = *s + (*PRIMITIVE_MEMORY_MODEL_COUNT * *WIDE_CHARACTER_PRIMITIVE_SIZE);
 
-                                    if (*((wchar_t*) *s) == *LINE_FEED_CONTROL_WIDE_CHARACTER_CODE) {
+                                    if (*((wchar_t*) *s) == *LINE_FEED_CONTROL_UNICODE_CHARACTER_CODE_MODEL) {
 
                                         // Increment source xdt byte array index.
-                                        *s = *s + (*PRIMITIVE_COUNT * *WIDE_CHARACTER_PRIMITIVE_SIZE);
+                                        *s = *s + (*PRIMITIVE_MEMORY_MODEL_COUNT * *WIDE_CHARACTER_PRIMITIVE_SIZE);
 
                                         // Set verification flag indicating that
                                         // the xdt field was decoded correctly.
@@ -243,32 +242,32 @@ void decode_xdt_field(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
                         } else {
 
-                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode xdt field. The field size is null.");
+                            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode xdt field. The field size is null.");
                         }
 
                     } else {
 
-                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode xdt field. The field content is null.");
+                        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode xdt field. The field content is null.");
                     }
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode xdt field. The field content count is null.");
+                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode xdt field. The field content count is null.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode xdt field. The verification flag is null.");
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode xdt field. The verification flag is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode xdt field. The source byte array is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode xdt field. The source byte array is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode xdt field. The source count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode xdt field. The source count is null.");
     }
 }
 
@@ -281,22 +280,22 @@ void decode_xdt_field(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
  */
 void decode_xdt_next_field(void* p0, void* p1, void* p2) {
 
-    if (p2 != *NULL_POINTER) {
+    if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* ac = (int*) p2;
 
-        if (p1 != *NULL_POINTER) {
+        if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
             wchar_t* a = (wchar_t*) p1;
 
-            if (p0 != *NULL_POINTER) {
+            if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
                 int* nc = (int*) p0;
 
-                log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Decode next xdt field.");
+                log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Decode next xdt field.");
 
                 // The loop variable.
-                int j = *NUMBER_0_INTEGER;
+                int j = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                 while (*NUMBER_1_INTEGER) {
 
@@ -311,15 +310,15 @@ void decode_xdt_next_field(void* p0, void* p1, void* p2) {
                         break;
                     }
 
-                    if ((j + (*PRIMITIVE_COUNT + *PRIMITIVE_COUNT)) <= *ac) {
+                    if ((j + (*PRIMITIVE_MEMORY_MODEL_COUNT + *PRIMITIVE_MEMORY_MODEL_COUNT)) <= *ac) {
 
-                        if (*(a + (j * *WIDE_CHARACTER_PRIMITIVE_SIZE)) == *CARRIAGE_RETURN_CONTROL_WIDE_CHARACTER_CODE) {
+                        if (*(a + (j * *WIDE_CHARACTER_PRIMITIVE_SIZE)) == *CARRIAGE_RETURN_CONTROL_UNICODE_CHARACTER_CODE_MODEL) {
 
-                            if (*(a + (j * *WIDE_CHARACTER_PRIMITIVE_SIZE) + *PRIMITIVE_COUNT) == *LINE_FEED_CONTROL_WIDE_CHARACTER_CODE) {
+                            if (*(a + (j * *WIDE_CHARACTER_PRIMITIVE_SIZE) + *PRIMITIVE_MEMORY_MODEL_COUNT) == *LINE_FEED_CONTROL_UNICODE_CHARACTER_CODE_MODEL) {
 
                                 // Set next field count to the first character following
                                 // the carriage return plus line feed characters.
-                                *nc = j + (*PRIMITIVE_COUNT + *PRIMITIVE_COUNT);
+                                *nc = j + (*PRIMITIVE_MEMORY_MODEL_COUNT + *PRIMITIVE_MEMORY_MODEL_COUNT);
 
                                 // Set loop variable to full array count ac, as the next
                                 // field has been found, so that the loop can be left.
@@ -334,17 +333,17 @@ void decode_xdt_next_field(void* p0, void* p1, void* p2) {
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode for next xdt field. The next field count is null.");
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode for next xdt field. The next field count is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode for next xdt field. The byte array is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode for next xdt field. The byte array is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode for next xdt field. The byte array count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode for next xdt field. The byte array count is null.");
     }
 }
 
@@ -360,53 +359,53 @@ void decode_xdt_next_field(void* p0, void* p1, void* p2) {
  */
 void decode_xdt_record(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
-    if (p5 != *NULL_POINTER) {
+    if (p5 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* sc = (int*) p5;
 
-        if (p4 != *NULL_POINTER) {
+        if (p4 != *NULL_POINTER_MEMORY_MODEL) {
 
             void** s = (void**) p4;
 
-            if (p3 != *NULL_POINTER) {
+            if (p3 != *NULL_POINTER_MEMORY_MODEL) {
 
                 int* rcc = (int*) p3;
 
-                if (p2 != *NULL_POINTER) {
+                if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
                     void** rc = (void**) p2;
 
-                    if (p0 != *NULL_POINTER) {
+                    if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
                         int* rs = (int*) p0;
 
-                        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Decode xdt record.");
+                        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Decode xdt record.");
 
                         // Reset record size.
-                        *rs = *NUMBER_0_INTEGER;
+                        *rs = *NUMBER_0_INTEGER_MEMORY_MODEL;
                         // The remaining bytes in the source byte array.
                         // They are used to check that the array border is not crossed.
                         int rem = (*sc * *WIDE_CHARACTER_PRIMITIVE_SIZE);
                         // The field size.
-                        int fs = *NUMBER_0_INTEGER;
+                        int fs = *NUMBER_0_INTEGER_MEMORY_MODEL;
                         // The field identification.
-                        int fid = *NUMBER_0_INTEGER;
+                        int fid = *NUMBER_0_INTEGER_MEMORY_MODEL;
                         // The field content.
-                        void* fc = *NULL_POINTER;
-                        int fcc = *NUMBER_0_INTEGER;
+                        void* fc = *NULL_POINTER_MEMORY_MODEL;
+                        int fcc = *NUMBER_0_INTEGER_MEMORY_MODEL;
                         // The verification flag.
-                        int v = *NUMBER_0_INTEGER;
+                        int v = *NUMBER_0_INTEGER_MEMORY_MODEL;
                         // The next field count.
-                        int nc = *NUMBER_0_INTEGER;
+                        int nc = *NUMBER_0_INTEGER_MEMORY_MODEL;
                         // The decode/ parse mode:
                         // 0 - looking for the begin of a record
                         // 1 - within a record, looking for the begin of the next
                         //     record, which demarcates the end of this record
-                        int m = *NUMBER_0_INTEGER;
+                        int m = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                         while (*NUMBER_1_INTEGER) {
 
-                            if (rem <= *NUMBER_0_INTEGER) {
+                            if (rem <= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                                 break;
                             }
@@ -437,7 +436,7 @@ void decode_xdt_record(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
 
                                 if (fid == *RECORD_IDENTIFICATION_XDT_FIELD) {
 
-                                    if (m == *NUMBER_0_INTEGER) {
+                                    if (m == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                                         // Set decode/parse mode to "1".
                                         // This is the begin of a record.
@@ -479,7 +478,7 @@ void decode_xdt_record(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
 
                                         // Set remaining bytes to zero, as the next record
                                         // has been detected and the loop can be left now.
-                                        rem = *NUMBER_0_INTEGER;
+                                        rem = *NUMBER_0_INTEGER_MEMORY_MODEL;
                                     }
 
                                 } else if (fid == *RECORD_SIZE_XDT_FIELD) {
@@ -506,7 +505,7 @@ void decode_xdt_record(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
 
                                     // Reset record content count, in order to
                                     // count the xdt record content now following.
-                                    *rcc = *NUMBER_0_INTEGER;
+                                    *rcc = *NUMBER_0_INTEGER_MEMORY_MODEL;
                                 }
 
                             } else {
@@ -514,10 +513,10 @@ void decode_xdt_record(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
                                 // The verification flag is NOT set, which means
                                 // that the xdt field was NOT decoded correctly.
 
-                                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode xdt record. An invalid field was detected. The parsing will now continue with the next valid field.");
+                                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode xdt record. An invalid field was detected. The parsing will now continue with the next valid field.");
 
                                 // Reset next field count.
-                                nc = *NUMBER_0_INTEGER;
+                                nc = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                                 // Count the number of bytes to the next carriage return-
                                 // plus line feed character.
@@ -538,27 +537,27 @@ void decode_xdt_record(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
 
                     } else {
 
-                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode xdt record. The record size is null.");
+                        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode xdt record. The record size is null.");
                     }
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode xdt record. The record content is null.");
+                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode xdt record. The record content is null.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode xdt record. The record content count is null.");
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode xdt record. The record content count is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode xdt record. The source byte array is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode xdt record. The source byte array is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode xdt record. The source byte array count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode xdt record. The source byte array count is null.");
     }
 }
 
@@ -577,60 +576,60 @@ void decode_xdt_record(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
  */
 void decode_xdt_package(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8) {
 
-    if (p8 != *NULL_POINTER) {
+    if (p8 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* sc = (int*) p8;
 
-        if (p7 != *NULL_POINTER) {
+        if (p7 != *NULL_POINTER_MEMORY_MODEL) {
 
             void** s = (void**) p7;
 
-            if (p6 != *NULL_POINTER) {
+            if (p6 != *NULL_POINTER_MEMORY_MODEL) {
 
                 int* pcc = (int*) p6;
 
-                if (p5 != *NULL_POINTER) {
+                if (p5 != *NULL_POINTER_MEMORY_MODEL) {
 
                     void** pc = (void**) p5;
 
-                    if (p4 != *NULL_POINTER) {
+                    if (p4 != *NULL_POINTER_MEMORY_MODEL) {
 
                         int* pfc = (int*) p4;
 
-                        if (p3 != *NULL_POINTER) {
+                        if (p3 != *NULL_POINTER_MEMORY_MODEL) {
 
                             void** pf = (void**) p3;
 
-                            if (p2 != *NULL_POINTER) {
+                            if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
                                 int* phc = (int*) p2;
 
-                                if (p1 != *NULL_POINTER) {
+                                if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
                                     void** ph = (void**) p1;
 
-                                    if (p0 != *NULL_POINTER) {
+                                    if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
                                         int* ps = (int*) p0;
 
-                                        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Decode xdt package.");
+                                        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Decode xdt package.");
 
                                         // Reset package size.
-                                        *ps = *NUMBER_0_INTEGER;
+                                        *ps = *NUMBER_0_INTEGER_MEMORY_MODEL;
                                         // The remaining bytes in the source byte array.
                                         // They are used to check that the array border
                                         // is not crossed, and to leave the loop.
                                         int rem = *sc;
                                         // The record size.
-                                        int rs = *NUMBER_0_INTEGER;
+                                        int rs = *NUMBER_0_INTEGER_MEMORY_MODEL;
                                         // The record identification.
-                                        int rid = *NUMBER_0_INTEGER;
+                                        int rid = *NUMBER_0_INTEGER_MEMORY_MODEL;
                                         // The loop variable.
-                                        int j = *NUMBER_0_INTEGER;
+                                        int j = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                                         while (*NUMBER_1_INTEGER) {
 
-                                            if (rem <= *NUMBER_0_INTEGER) {
+                                            if (rem <= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                                                 break;
                                             }
@@ -652,7 +651,7 @@ void decode_xdt_package(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
                                             fwprintf(stderr, L"Test: Decode xdt package. Record content count pfc: %i\n\n", *pfc);
 */
 
-                                            if (rs > *NUMBER_0_INTEGER) {
+                                            if (rs > *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                                                 // Decrement remaining bytes in the source byte array.
                                                 rem = rem - rs;
@@ -686,7 +685,7 @@ void decode_xdt_package(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
                                                     *pc = *s;
 
                                                     // Reset loop variable.
-                                                    j = *NUMBER_0_INTEGER;
+                                                    j = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                                                 } else if (rid == *DATA_PACKAGE_FOOTER_XDT_RECORD) {
 
@@ -721,7 +720,7 @@ void decode_xdt_package(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
 
                                                     // Set remaining bytes to zero, as the package footer
                                                     // has been detected and the loop can be left now.
-                                                    rem = *NUMBER_0_INTEGER;
+                                                    rem = *NUMBER_0_INTEGER_MEMORY_MODEL;
                                                 }
 
                                             } else {
@@ -743,47 +742,47 @@ void decode_xdt_package(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
 
                                     } else {
 
-                                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode xdt package. The package size is null.");
+                                        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode xdt package. The package size is null.");
                                     }
 
                                 } else {
 
-                                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode xdt package. The package header is null.");
+                                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode xdt package. The package header is null.");
                                 }
 
                             } else {
 
-                                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode xdt package. The package header count is null.");
+                                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode xdt package. The package header count is null.");
                             }
 
                         } else {
 
-                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode xdt package. The package footer is null.");
+                            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode xdt package. The package footer is null.");
                         }
 
                     } else {
 
-                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode xdt package. The package footer count is null.");
+                        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode xdt package. The package footer count is null.");
                     }
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode xdt package. The package content is null.");
+                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode xdt package. The package content is null.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode xdt package. The package content count is null.");
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode xdt package. The package content count is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode xdt package. The source byte array is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode xdt package. The source byte array is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode xdt package. The source byte array count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode xdt package. The source byte array count is null.");
     }
 }
 
@@ -813,45 +812,45 @@ void decode_xdt_decode_model(void* p0, void* p1, void* p2, void* p3, void* p4, v
     void* p6, void* p7, void* p8, void* p9, void* p10, void* p11,
     void* p12, void* p13, void* p14, void* p15, void* p16, void* p17) {
 
-    if (p11 != *NULL_POINTER) {
+    if (p11 != *NULL_POINTER_MEMORY_MODEL) {
 
         int** ds = (int**) p11;
 
-        if (p10 != *NULL_POINTER) {
+        if (p10 != *NULL_POINTER_MEMORY_MODEL) {
 
             int** dc = (int**) p10;
 
-            if (p8 != *NULL_POINTER) {
+            if (p8 != *NULL_POINTER_MEMORY_MODEL) {
 
                 int** ms = (int**) p8;
 
-                if (p7 != *NULL_POINTER) {
+                if (p7 != *NULL_POINTER_MEMORY_MODEL) {
 
                     int** mc = (int**) p7;
 
-                    if (p5 != *NULL_POINTER) {
+                    if (p5 != *NULL_POINTER_MEMORY_MODEL) {
 
                         int** as = (int**) p5;
 
-                        if (p4 != *NULL_POINTER) {
+                        if (p4 != *NULL_POINTER_MEMORY_MODEL) {
 
                             int** ac = (int**) p4;
 
-                            if (p2 != *NULL_POINTER) {
+                            if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
                                 int** ns = (int**) p2;
 
-                                if (p1 != *NULL_POINTER) {
+                                if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
                                     int** nc = (int**) p1;
 
-                                    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Decode model.");
+                                    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Decode model.");
 
                                     // Allocate knowledge model name.
                                     allocate(p1, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-                                    **nc = *NUMBER_0_INTEGER;
+                                    **nc = *NUMBER_0_INTEGER_MEMORY_MODEL;
                                     allocate(p2, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-                                    **ns = *NUMBER_0_INTEGER;
+                                    **ns = *NUMBER_0_INTEGER_MEMORY_MODEL;
                                     allocate(p0, (void*) *ns, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
                                     // A knowledge model channel is not received (allocated),
@@ -859,23 +858,23 @@ void decode_xdt_decode_model(void* p0, void* p1, void* p2, void* p3, void* p4, v
 
                                     // Allocate knowledge model abstraction.
                                     allocate(p4, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-                                    **ac = *NUMBER_0_INTEGER;
+                                    **ac = *NUMBER_0_INTEGER_MEMORY_MODEL;
                                     allocate(p5, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-                                    **as = *NUMBER_0_INTEGER;
+                                    **as = *NUMBER_0_INTEGER_MEMORY_MODEL;
                                     allocate(p3, (void*) *as, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
                                     // Allocate knowledge model model.
                                     allocate(p7, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-                                    **mc = *NUMBER_0_INTEGER;
+                                    **mc = *NUMBER_0_INTEGER_MEMORY_MODEL;
                                     allocate(p8, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-                                    **ms = *NUMBER_0_INTEGER;
+                                    **ms = *NUMBER_0_INTEGER_MEMORY_MODEL;
                                     allocate(p6, (void*) *ms, p14, p15);
 
                                     // Allocate knowledge model details.
                                     allocate(p10, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-                                    **dc = *NUMBER_0_INTEGER;
+                                    **dc = *NUMBER_0_INTEGER_MEMORY_MODEL;
                                     allocate(p11, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-                                    **ds = *NUMBER_0_INTEGER;
+                                    **ds = *NUMBER_0_INTEGER_MEMORY_MODEL;
                                     allocate(p9, (void*) *ds, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
 
                                     // Decode name.
@@ -887,42 +886,42 @@ void decode_xdt_decode_model(void* p0, void* p1, void* p2, void* p3, void* p4, v
 
                                 } else {
 
-                                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode model. The name count is null.");
+                                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode model. The name count is null.");
                                 }
 
                             } else {
 
-                                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode model. The name size is null.");
+                                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode model. The name size is null.");
                             }
 
                         } else {
 
-                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode model. The abstraction count is null.");
+                            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode model. The abstraction count is null.");
                         }
 
                     } else {
 
-                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode model. The abstraction size is null.");
+                        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode model. The abstraction size is null.");
                     }
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode model. The model count is null.");
+                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode model. The model count is null.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode model. The model size is null.");
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode model. The model size is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode model. The details count is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode model. The details count is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode model. The details size is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode model. The details size is null.");
     }
 }
 
@@ -938,11 +937,11 @@ void decode_xdt_decode_model(void* p0, void* p1, void* p2, void* p3, void* p4, v
  */
 void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
-    if (p5 != *NULL_POINTER) {
+    if (p5 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* id = (int*) p5;
 
-        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Select xdt field.");
+        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Select xdt field.");
 
 /*??
         // Test values.
@@ -950,21 +949,21 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
 */
 
         // The knowledge model name.
-        void* n = *NULL_POINTER;
-        void* nc = *NULL_POINTER;
-        void* ns = *NULL_POINTER;
+        void* n = *NULL_POINTER_MEMORY_MODEL;
+        void* nc = *NULL_POINTER_MEMORY_MODEL;
+        void* ns = *NULL_POINTER_MEMORY_MODEL;
         // The knowledge model abstraction.
-        void* a = *NULL_POINTER;
-        void* ac = *NULL_POINTER;
-        void* as = *NULL_POINTER;
+        void* a = *NULL_POINTER_MEMORY_MODEL;
+        void* ac = *NULL_POINTER_MEMORY_MODEL;
+        void* as = *NULL_POINTER_MEMORY_MODEL;
         // The knowledge model model.
-        void* m = *NULL_POINTER;
-        void* mc = *NULL_POINTER;
-        void* ms = *NULL_POINTER;
+        void* m = *NULL_POINTER_MEMORY_MODEL;
+        void* mc = *NULL_POINTER_MEMORY_MODEL;
+        void* ms = *NULL_POINTER_MEMORY_MODEL;
         // The knowledge model details.
-        void* d = *NULL_POINTER;
-        void* dc = *NULL_POINTER;
-        void* ds = *NULL_POINTER;
+        void* d = *NULL_POINTER_MEMORY_MODEL;
+        void* dc = *NULL_POINTER_MEMORY_MODEL;
+        void* ds = *NULL_POINTER_MEMORY_MODEL;
 
         if (*id == *KBV_TEST_NUMBER_XDT_FIELD) {
 
@@ -4237,8 +4236,8 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
         // Its content is therefore decoded directly.
 
         // CAUTION! This check for null pointers is necessary to avoid segmentation faults!
-        if ((n != *NULL_POINTER) && (nc != *NULL_POINTER) && (ns != *NULL_POINTER)
-            && (a != *NULL_POINTER) && (ac != *NULL_POINTER) && (as != *NULL_POINTER)) {
+        if ((n != *NULL_POINTER_MEMORY_MODEL) && (nc != *NULL_POINTER_MEMORY_MODEL) && (ns != *NULL_POINTER_MEMORY_MODEL)
+            && (a != *NULL_POINTER_MEMORY_MODEL) && (ac != *NULL_POINTER_MEMORY_MODEL) && (as != *NULL_POINTER_MEMORY_MODEL)) {
 
             // Add xdt field to xdt record.
             set_compound_element_by_name(p0, p1, p2, n, nc, ns, a, ac, as, m, mc, ms, d, dc, ds);
@@ -4274,7 +4273,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not select xdt field. The field identification is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not select xdt field. The field identification is null.");
     }
 }
 
@@ -4289,33 +4288,33 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
  */
 void decode_xdt_process_record(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p4 != *NULL_POINTER) {
+    if (p4 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* sc = (int*) p4;
 
-        if (p3 != *NULL_POINTER) {
+        if (p3 != *NULL_POINTER_MEMORY_MODEL) {
 
             void* s = (void*) p3;
 
-            log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Process xdt record.");
+            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Process xdt record.");
 
             // The remaining bytes in the source byte array.
             int rem = *sc;
             // The field size.
-            int fs = *NUMBER_0_INTEGER;
+            int fs = *NUMBER_0_INTEGER_MEMORY_MODEL;
             // The field identification.
-            int fid = *NUMBER_0_INTEGER;
+            int fid = *NUMBER_0_INTEGER_MEMORY_MODEL;
             // The field content.
-            void* fc = *NULL_POINTER;
-            int fcc = *NUMBER_0_INTEGER;
+            void* fc = *NULL_POINTER_MEMORY_MODEL;
+            int fcc = *NUMBER_0_INTEGER_MEMORY_MODEL;
             // The verification flag.
-            int v = *NUMBER_0_INTEGER;
+            int v = *NUMBER_0_INTEGER_MEMORY_MODEL;
             // The next field count.
-            int nc = *NUMBER_0_INTEGER;
+            int nc = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
             while (*NUMBER_1_INTEGER) {
 
-                if (rem <= *NUMBER_0_INTEGER) {
+                if (rem <= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                     break;
                 }
@@ -4349,10 +4348,10 @@ void decode_xdt_process_record(void* p0, void* p1, void* p2, void* p3, void* p4)
                     // The verification flag is NOT set, which means
                     // that the xdt field was NOT decoded correctly.
 
-                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not process xdt record. An invalid field was detected. The parsing will now continue with the next valid field.");
+                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process xdt record. An invalid field was detected. The parsing will now continue with the next valid field.");
 
                     // Reset next field count.
-                    nc = *NUMBER_0_INTEGER;
+                    nc = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                     // Count the number of bytes to the next carriage return-
                     // plus line feed character.
@@ -4367,12 +4366,12 @@ void decode_xdt_process_record(void* p0, void* p1, void* p2, void* p3, void* p4)
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not process xdt record. The source record is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process xdt record. The source record is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not process xdt record. The source record count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process xdt record. The source record count is null.");
     }
 }
 
@@ -4388,11 +4387,11 @@ void decode_xdt_process_record(void* p0, void* p1, void* p2, void* p3, void* p4)
  */
 void decode_xdt_select_record(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
-    if (p5 != *NULL_POINTER) {
+    if (p5 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* id = (int*) p5;
 
-        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Select xdt record.");
+        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Select xdt record.");
 
 /*??
         // Test values.
@@ -4400,21 +4399,21 @@ void decode_xdt_select_record(void* p0, void* p1, void* p2, void* p3, void* p4, 
 */
 
         // The knowledge model name.
-        void* n = *NULL_POINTER;
-        void* nc = *NULL_POINTER;
-        void* ns = *NULL_POINTER;
+        void* n = *NULL_POINTER_MEMORY_MODEL;
+        void* nc = *NULL_POINTER_MEMORY_MODEL;
+        void* ns = *NULL_POINTER_MEMORY_MODEL;
         // The knowledge model abstraction.
-        void* a = *NULL_POINTER;
-        void* ac = *NULL_POINTER;
-        void* as = *NULL_POINTER;
+        void* a = *NULL_POINTER_MEMORY_MODEL;
+        void* ac = *NULL_POINTER_MEMORY_MODEL;
+        void* as = *NULL_POINTER_MEMORY_MODEL;
         // The knowledge model model.
-        void* m = *NULL_POINTER;
-        void* mc = *NULL_POINTER;
-        void* ms = *NULL_POINTER;
+        void* m = *NULL_POINTER_MEMORY_MODEL;
+        void* mc = *NULL_POINTER_MEMORY_MODEL;
+        void* ms = *NULL_POINTER_MEMORY_MODEL;
         // The knowledge model details.
-        void* d = *NULL_POINTER;
-        void* dc = *NULL_POINTER;
-        void* ds = *NULL_POINTER;
+        void* d = *NULL_POINTER_MEMORY_MODEL;
+        void* dc = *NULL_POINTER_MEMORY_MODEL;
+        void* ds = *NULL_POINTER_MEMORY_MODEL;
 
         if (*id == *MEDICAL_PRACTICE_DATA_XDT_RECORD) {
 
@@ -4635,8 +4634,8 @@ void decode_xdt_select_record(void* p0, void* p1, void* p2, void* p3, void* p4, 
         decode_xdt_process_record(m, mc, ms, p3, p4);
 
         // CAUTION! This check for null pointers is necessary to avoid segmentation faults!
-        if ((n != *NULL_POINTER) && (nc != *NULL_POINTER) && (ns != *NULL_POINTER)
-            && (a != *NULL_POINTER) && (ac != *NULL_POINTER) && (as != *NULL_POINTER)) {
+        if ((n != *NULL_POINTER_MEMORY_MODEL) && (nc != *NULL_POINTER_MEMORY_MODEL) && (ns != *NULL_POINTER_MEMORY_MODEL)
+            && (a != *NULL_POINTER_MEMORY_MODEL) && (ac != *NULL_POINTER_MEMORY_MODEL) && (as != *NULL_POINTER_MEMORY_MODEL)) {
 
             // Add xdt record to xdt package.
             //
@@ -4675,7 +4674,7 @@ void decode_xdt_select_record(void* p0, void* p1, void* p2, void* p3, void* p4, 
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not select xdt record. The record identification is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not select xdt record. The record identification is null.");
     }
 }
 
@@ -4690,29 +4689,29 @@ void decode_xdt_select_record(void* p0, void* p1, void* p2, void* p3, void* p4, 
  */
 void decode_xdt_process_package(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p4 != *NULL_POINTER) {
+    if (p4 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* sc = (int*) p4;
 
-        if (p3 != *NULL_POINTER) {
+        if (p3 != *NULL_POINTER_MEMORY_MODEL) {
 
             void* s = (void*) p3;
 
-            log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Process xdt package.");
+            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Process xdt package.");
 
             // The remaining bytes in the source byte array.
             int rem = *sc;
             // The record size.
-            int rs = *NUMBER_0_INTEGER;
+            int rs = *NUMBER_0_INTEGER_MEMORY_MODEL;
             // The record identification.
-            int rid = *NUMBER_0_INTEGER;
+            int rid = *NUMBER_0_INTEGER_MEMORY_MODEL;
             // The record content.
-            void* rc = *NULL_POINTER;
-            int rcc = *NUMBER_0_INTEGER;
+            void* rc = *NULL_POINTER_MEMORY_MODEL;
+            int rcc = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
             while (*NUMBER_1_INTEGER) {
 
-                if (rem <= *NUMBER_0_INTEGER) {
+                if (rem <= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                     break;
                 }
@@ -4727,7 +4726,7 @@ void decode_xdt_process_package(void* p0, void* p1, void* p2, void* p3, void* p4
                 fwprintf(stderr, L"Test: Process xdt package. Record content count pfc: %i\n", rcc);
 */
 
-                if (rs > *NUMBER_0_INTEGER) {
+                if (rs > *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                     // Increment source xdt byte array index,
                     // so that following records may be found
@@ -4749,12 +4748,12 @@ void decode_xdt_process_package(void* p0, void* p1, void* p2, void* p3, void* p4
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not process xdt package. The source package is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process xdt package. The source package is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not process xdt package. The source package count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process xdt package. The source package count is null.");
     }
 }
 
@@ -4777,24 +4776,24 @@ void decode_xdt_process_package(void* p0, void* p1, void* p2, void* p3, void* p4
 void decode_xdt_select_package(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
     void* p6, void* p7, void* p8, void* p9, void* p10, void* p11) {
 
-    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Select xdt package.");
+    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Select xdt package.");
 
     // The knowledge model name.
-    void* n = *NULL_POINTER;
-    void* nc = *NULL_POINTER;
-    void* ns = *NULL_POINTER;
+    void* n = *NULL_POINTER_MEMORY_MODEL;
+    void* nc = *NULL_POINTER_MEMORY_MODEL;
+    void* ns = *NULL_POINTER_MEMORY_MODEL;
     // The knowledge model abstraction.
-    void* a = *NULL_POINTER;
-    void* ac = *NULL_POINTER;
-    void* as = *NULL_POINTER;
+    void* a = *NULL_POINTER_MEMORY_MODEL;
+    void* ac = *NULL_POINTER_MEMORY_MODEL;
+    void* as = *NULL_POINTER_MEMORY_MODEL;
     // The knowledge model model.
-    void* m = *NULL_POINTER;
-    void* mc = *NULL_POINTER;
-    void* ms = *NULL_POINTER;
+    void* m = *NULL_POINTER_MEMORY_MODEL;
+    void* mc = *NULL_POINTER_MEMORY_MODEL;
+    void* ms = *NULL_POINTER_MEMORY_MODEL;
     // The knowledge model details.
-    void* d = *NULL_POINTER;
-    void* dc = *NULL_POINTER;
-    void* ds = *NULL_POINTER;
+    void* d = *NULL_POINTER_MEMORY_MODEL;
+    void* dc = *NULL_POINTER_MEMORY_MODEL;
+    void* ds = *NULL_POINTER_MEMORY_MODEL;
 
     // Decode package content.
     // CAUTION! Hand over a null pointer in place of the model and model count!
@@ -4815,8 +4814,8 @@ void decode_xdt_select_package(void* p0, void* p1, void* p2, void* p3, void* p4,
     decode_xdt_select_record(d, dc, ds, p10, p11, (void*) DATA_PACKAGE_FOOTER_XDT_RECORD);
 
     // CAUTION! This check for null pointers is necessary to avoid segmentation faults!
-    if ((n != *NULL_POINTER) && (nc != *NULL_POINTER) && (ns != *NULL_POINTER)
-        && (a != *NULL_POINTER) && (ac != *NULL_POINTER) && (as != *NULL_POINTER)) {
+    if ((n != *NULL_POINTER_MEMORY_MODEL) && (nc != *NULL_POINTER_MEMORY_MODEL) && (ns != *NULL_POINTER_MEMORY_MODEL)
+        && (a != *NULL_POINTER_MEMORY_MODEL) && (ac != *NULL_POINTER_MEMORY_MODEL) && (as != *NULL_POINTER_MEMORY_MODEL)) {
 
         // Add xdt package to given destination compound model.
         //
@@ -4868,37 +4867,37 @@ void decode_xdt_select_package(void* p0, void* p1, void* p2, void* p3, void* p4,
  */
 void decode_xdt(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
 
-    if (p7 != *NULL_POINTER) {
+    if (p7 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* sc = (int*) p7;
 
-        if (p6 != *NULL_POINTER) {
+        if (p6 != *NULL_POINTER_MEMORY_MODEL) {
 
             void* s = (void*) p6;
 
-            if (p3 != *NULL_POINTER) {
+            if (p3 != *NULL_POINTER_MEMORY_MODEL) {
 
                 void** dd = (void**) p3;
 
-                if (p0 != *NULL_POINTER) {
+                if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
                     void** dm = (void**) p0;
 
-                    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Decode xdt format into compound model.");
+                    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Decode xdt format into compound model.");
 
                     // The remaining bytes in the source byte array.
                     int rem = *sc;
                     // The xdt package size.
-                    int ps = *NUMBER_0_INTEGER;
+                    int ps = *NUMBER_0_INTEGER_MEMORY_MODEL;
                     // The xdt package content.
-                    void* pc = *NULL_POINTER;
-                    int pcc = *NUMBER_0_INTEGER;
+                    void* pc = *NULL_POINTER_MEMORY_MODEL;
+                    int pcc = *NUMBER_0_INTEGER_MEMORY_MODEL;
                     // The xdt package header.
-                    void* ph = *NULL_POINTER;
-                    int phc = *NUMBER_0_INTEGER;
+                    void* ph = *NULL_POINTER_MEMORY_MODEL;
+                    int phc = *NUMBER_0_INTEGER_MEMORY_MODEL;
                     // The xdt package footer.
-                    void* pf = *NULL_POINTER;
-                    int pfc = *NUMBER_0_INTEGER;
+                    void* pf = *NULL_POINTER_MEMORY_MODEL;
+                    int pfc = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
 /*??
                     // Test values.
@@ -4907,7 +4906,7 @@ void decode_xdt(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
 
                     while (*NUMBER_1_INTEGER) {
 
-                        if (rem <= *NUMBER_0_INTEGER) {
+                        if (rem <= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                             break;
                         }
@@ -4928,7 +4927,7 @@ void decode_xdt(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
                         fwprintf(stderr, L"TEST package content: %i\n", pcc);
 */
 
-                        if (ps > *NUMBER_0_INTEGER) {
+                        if (ps > *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                             // Decrement remaining bytes in the source byte array.
                             rem = rem - ps;
@@ -4953,36 +4952,36 @@ void decode_xdt(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
                         }
 
                         // Reset xdt package size.
-                        ps = *NUMBER_0_INTEGER;
+                        ps = *NUMBER_0_INTEGER_MEMORY_MODEL;
                         // Reset xdt package content.
-                        pc = *NULL_POINTER;
-                        pcc = *NUMBER_0_INTEGER;
+                        pc = *NULL_POINTER_MEMORY_MODEL;
+                        pcc = *NUMBER_0_INTEGER_MEMORY_MODEL;
                         // Reset xdt package header.
-                        ph = *NULL_POINTER;
-                        phc = *NUMBER_0_INTEGER;
+                        ph = *NULL_POINTER_MEMORY_MODEL;
+                        phc = *NUMBER_0_INTEGER_MEMORY_MODEL;
                         // Reset xdt package footer.
-                        pf = *NULL_POINTER;
-                        pfc = *NUMBER_0_INTEGER;
+                        pf = *NULL_POINTER_MEMORY_MODEL;
+                        pfc = *NUMBER_0_INTEGER_MEMORY_MODEL;
                     }
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode xdt. The destination compound model is null.");
+                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode xdt. The destination compound model is null.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode xdt. The destination compound details is null.");
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode xdt. The destination compound details is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode xdt. The source byte array is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode xdt. The source byte array is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode xdt. The source byte array count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode xdt. The source byte array count is null.");
     }
 }
 
@@ -4997,7 +4996,7 @@ void decode_xdt(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
  */
 void encode_xdt(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Encode compound model into xdt format.");
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Encode compound model into xdt format.");
 }
 
 /* XDT_CONVERTER_SOURCE */

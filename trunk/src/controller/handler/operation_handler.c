@@ -1,26 +1,25 @@
 /*
- * $RCSfile: operation_handler.c,v $
+ * Copyright (C) 1999-2008. Christian Heller.
  *
- * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
+ * This file is part of the Cybernetics Oriented Interpreter (CYBOI).
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
+ * CYBOI is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
+ * CYBOI is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * along with CYBOI.  If not, see <http://www.gnu.org/licenses/>.
  *
- * http://www.cybop.net
- * - Cybernetics Oriented Programming -
+ * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
+ * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $Revision: 1.42 $ $Date: 2008-05-06 22:36:52 $ $Author: christian $
+ * @version $RCSfile: operation_handler.c,v $ $Revision: 1.43 $ $Date: 2008-09-03 22:04:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -47,8 +46,8 @@
 #include "../../globals/constants/cybol/cybol_abstraction_constants.c"
 #include "../../globals/constants/cybol/cybol_model_constants.c"
 #include "../../globals/constants/integer/integer_constants.c"
-#include "../../globals/constants/log/log_message_constants.c"
-#include "../../globals/logger/logger.c"
+#include "../../constant/model/log/message_log_model.c"
+#include "../../logger/logger.c"
 #include "../../memoriser/array.c"
 
 /**
@@ -74,75 +73,75 @@
 void handle_operation(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
     void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14, void* p15) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"\n\n");
-    log_message((void*) INFORMATION_LOG_LEVEL, (void*) HANDLE_OPERATION_MESSAGE, (void*) HANDLE_OPERATION_MESSAGE_COUNT);
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"\n\n");
+    log_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) HANDLE_OPERATION_MESSAGE, (void*) HANDLE_OPERATION_MESSAGE_COUNT);
 
     fwprintf(stderr, L"TEST handle operation: %ls\n", (wchar_t*) p10);
-    log_terminated_message((void*) DEBUG_LOG_LEVEL, p10);
-    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"\n");
+    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, p10);
+    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"\n");
 
     // The comparison result.
-    int r = *NUMBER_0_INTEGER;
+    int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     //
     // Program flow models.
     //
 
-    if (r == *NUMBER_0_INTEGER) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p10, p11, (void*) COPY_MODEL, (void*) COPY_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+        compare_arrays(p10, p11, (void*) COPY_MODEL, (void*) COPY_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-        if (r != *NUMBER_0_INTEGER) {
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             copy(p12, p13, p1, p2, p3);
         }
     }
 
-    if (r == *NUMBER_0_INTEGER) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p10, p11, (void*) BRANCH_MODEL, (void*) BRANCH_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+        compare_arrays(p10, p11, (void*) BRANCH_MODEL, (void*) BRANCH_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-        if (r != *NUMBER_0_INTEGER) {
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             branch(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p12, p13, p14, p15);
         }
     }
 
-    if (r == *NUMBER_0_INTEGER) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p10, p11, (void*) LOOP_MODEL, (void*) LOOP_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+        compare_arrays(p10, p11, (void*) LOOP_MODEL, (void*) LOOP_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-        if (r != *NUMBER_0_INTEGER) {
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             loop(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p12, p13, p14, p15);
         }
     }
 
-    if (r == *NUMBER_0_INTEGER) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p10, p11, (void*) COUNT_MODEL, (void*) COUNT_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+        compare_arrays(p10, p11, (void*) COUNT_MODEL, (void*) COUNT_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-        if (r != *NUMBER_0_INTEGER) {
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             count(p12, p13, p1, p2, p3);
         }
     }
 
-    if (r == *NUMBER_0_INTEGER) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p10, p11, (void*) BUILD_LISTNAME_MODEL, (void*) BUILD_LISTNAME_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+        compare_arrays(p10, p11, (void*) BUILD_LISTNAME_MODEL, (void*) BUILD_LISTNAME_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-        if (r != *NUMBER_0_INTEGER) {
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             build_listname(p12, p13, p1, p2, p3);
         }
     }
 
-    if (r == *NUMBER_0_INTEGER) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p10, p11, (void*) GET_MODEL, (void*) GET_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+        compare_arrays(p10, p11, (void*) GET_MODEL, (void*) GET_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-        if (r != *NUMBER_0_INTEGER) {
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             get(p12, p13, p1, p2, p3);
         }
@@ -156,11 +155,11 @@ void handle_operation(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
     // Comparison models.
     //
 
-    if (r == *NUMBER_0_INTEGER) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p10, p11, (void*) COMPARE_MODEL, (void*) COMPARE_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+        compare_arrays(p10, p11, (void*) COMPARE_MODEL, (void*) COMPARE_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-        if (r != *NUMBER_0_INTEGER) {
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             compare(p12, p13, p1, p2, p3);
         }
@@ -170,11 +169,11 @@ void handle_operation(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
     // Arithmetic models.
     //
 
-    if (r == *NUMBER_0_INTEGER) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p10, p11, (void*) ADD_MODEL, (void*) ADD_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+        compare_arrays(p10, p11, (void*) ADD_MODEL, (void*) ADD_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-        if (r != *NUMBER_0_INTEGER) {
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             add(p12, p13, p1, p2, p3);
         }
@@ -184,21 +183,21 @@ void handle_operation(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
     // Memory management models.
     //
 
-    if (r == *NUMBER_0_INTEGER) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p10, p11, (void*) CREATE_MODEL, (void*) CREATE_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+        compare_arrays(p10, p11, (void*) CREATE_MODEL, (void*) CREATE_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-        if (r != *NUMBER_0_INTEGER) {
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             create(p12, p13, p1, p2, p3);
         }
     }
 
-    if (r == *NUMBER_0_INTEGER) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p10, p11, (void*) DESTROY_MODEL, (void*) DESTROY_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+        compare_arrays(p10, p11, (void*) DESTROY_MODEL, (void*) DESTROY_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-        if (r != *NUMBER_0_INTEGER) {
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             destroy(p12, p13, p1, p2, p3);
         }
@@ -208,33 +207,33 @@ void handle_operation(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
     // Lifecycle models.
     //
 
-    if (r == *NUMBER_0_INTEGER) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p10, p11, (void*) STARTUP_MODEL, (void*) STARTUP_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+        compare_arrays(p10, p11, (void*) STARTUP_MODEL, (void*) STARTUP_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-        if (r != *NUMBER_0_INTEGER) {
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             startup_service(p12, p13, p1, p2, p3, p0);
         }
     }
 
-    if (r == *NUMBER_0_INTEGER) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p10, p11, (void*) SHUTDOWN_MODEL, (void*) SHUTDOWN_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+        compare_arrays(p10, p11, (void*) SHUTDOWN_MODEL, (void*) SHUTDOWN_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-        if (r != *NUMBER_0_INTEGER) {
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             shutdown_service(p12, p13, p1, p2, p3, p0);
         }
     }
 
-    if (r == *NUMBER_0_INTEGER) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p10, p11, (void*) EXIT_MODEL, (void*) EXIT_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+        compare_arrays(p10, p11, (void*) EXIT_MODEL, (void*) EXIT_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-        if (r != *NUMBER_0_INTEGER) {
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            log_message((void*) INFORMATION_LOG_LEVEL, (void*) SET_SHUTDOWN_FLAG_MESSAGE, (void*) SET_SHUTDOWN_FLAG_MESSAGE_COUNT);
+            log_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) SET_SHUTDOWN_FLAG_MESSAGE, (void*) SET_SHUTDOWN_FLAG_MESSAGE_COUNT);
 
             int* f = (int*) p7;
             *f = *NUMBER_1_INTEGER;
@@ -245,41 +244,41 @@ void handle_operation(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
     // Communication models.
     //
 
-    if (r == *NUMBER_0_INTEGER) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p10, p11, (void*) SENSE_MODEL, (void*) SENSE_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+        compare_arrays(p10, p11, (void*) SENSE_MODEL, (void*) SENSE_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-        if (r != *NUMBER_0_INTEGER) {
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             sense(p12, p13, p0, p1, p2, p3, p4, p5, p6);
         }
     }
 
-    if (r == *NUMBER_0_INTEGER) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p10, p11, (void*) INTERRUPT_MODEL, (void*) INTERRUPT_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+        compare_arrays(p10, p11, (void*) INTERRUPT_MODEL, (void*) INTERRUPT_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-        if (r != *NUMBER_0_INTEGER) {
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             interrupt_service(p12, p13, p1, p2, p3);
         }
     }
 
-    if (r == *NUMBER_0_INTEGER) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p10, p11, (void*) RECEIVE_MODEL, (void*) RECEIVE_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+        compare_arrays(p10, p11, (void*) RECEIVE_MODEL, (void*) RECEIVE_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-        if (r != *NUMBER_0_INTEGER) {
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             receive_message(p12, p13, p0, p1, p2, p3);
         }
     }
 
-    if (r == *NUMBER_0_INTEGER) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p10, p11, (void*) SEND_MODEL, (void*) SEND_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+        compare_arrays(p10, p11, (void*) SEND_MODEL, (void*) SEND_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-        if (r != *NUMBER_0_INTEGER) {
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
 //??            send_message(p12, p13, p0, p1, p2, p3, p4, p5, p6, p15);
 
@@ -293,11 +292,11 @@ void handle_operation(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
     // Shell command models.
     //
 
-    if (r == *NUMBER_0_INTEGER) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p10, p11, (void*) RUN_MODEL, (void*) RUN_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+        compare_arrays(p10, p11, (void*) RUN_MODEL, (void*) RUN_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-        if (r != *NUMBER_0_INTEGER) {
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             run(p12, p13, p1, p2);
         }

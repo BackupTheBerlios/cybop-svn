@@ -1,26 +1,25 @@
 /*
- * $RCSfile: compound_converter.c,v $
+ * Copyright (C) 1999-2008. Christian Heller.
  *
- * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
+ * This file is part of the Cybernetics Oriented Interpreter (CYBOI).
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
+ * CYBOI is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
+ * CYBOI is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * along with CYBOI.  If not, see <http://www.gnu.org/licenses/>.
  *
- * http://www.cybop.net
- * - Cybernetics Oriented Programming -
+ * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
+ * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $Revision: 1.23 $ $Date: 2008-07-08 17:55:36 $ $Author: christian $
+ * @version $RCSfile: compound_converter.c,v $ $Revision: 1.24 $ $Date: 2008-09-03 22:04:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -37,9 +36,9 @@
 #include "../../globals/constants/cybol/cybol_constants.c"
 #include "../../globals/constants/cybol/cybol_name_constants.c"
 #include "../../globals/constants/integer/integer_constants.c"
-#include "../../globals/constants/log/log_message_constants.c"
-#include "../../globals/constants/pointer/pointer_constants.c"
-#include "../../globals/logger/logger.c"
+#include "../../constant/model/log/message_log_model.c"
+#include "../../constant/model/memory/pointer_memory_model.c"
+#include "../../logger/logger.c"
 #include "../../memoriser/allocator/xml_node_allocator.c"
 #include "../../memoriser/allocator/xml_property_allocator.c"
 #include "../../memoriser/converter/abstraction_converter.c"
@@ -126,14 +125,14 @@ void decode_compound_cybol_nodes(void* p0, void* p1, void* p2, void* p3, void* p
 /*??
 void decode_compound_comment_tag(void* p0, void* p1) {
 
-    if (p1 != *NULL_POINTER) {
+    if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* sc = (int*) p1;
 
         // The leave flag.
-        int l = *NUMBER_0_INTEGER;
+        int l = *NUMBER_0_INTEGER_MEMORY_MODEL;
         // The comparison result.
-        int r = *NUMBER_0_INTEGER;
+        int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
         // The current byte within the stream.
         void* b = p0;
         // The remaining bytes count.
@@ -141,18 +140,18 @@ void decode_compound_comment_tag(void* p0, void* p1) {
 
         while (*NUMBER_1_INTEGER) {
 
-            if ((l == *NUMBER_1_INTEGER) || (bc <= *NUMBER_0_INTEGER)) {
+            if ((l == *NUMBER_1_INTEGER) || (bc <= *NUMBER_0_INTEGER_MEMORY_MODEL)) {
 
                 break;
             }
 
-            if (r == *NUMBER_0_INTEGER) {
+            if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 if (bc >= *END_COMMENT_TAG_COUNT) {
 
                     compare_array_elements((void*) b, (void*) END_COMMENT_TAG, (void*) END_COMMENT_TAG_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-                    if (r != *NUMBER_0_INTEGER) {
+                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         // Move current byte pointer
                         // and remaining bytes count.
@@ -165,13 +164,13 @@ void decode_compound_comment_tag(void* p0, void* p1) {
                 }
             }
 
-            if (r == *NUMBER_0_INTEGER) {
+            if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 if (bc >= *SHORT_END_COMMENT_TAG_COUNT) {
 
                     compare_array_elements((void*) b, (void*) SHORT_END_COMMENT_TAG, (void*) SHORT_END_COMMENT_TAG_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-                    if (r != *NUMBER_0_INTEGER) {
+                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         // Move current byte pointer
                         // and remaining bytes count.
@@ -196,12 +195,12 @@ void decode_compound_comment_tag(void* p0, void* p1) {
             }
 
             // Reset comparison result.
-            r = *NUMBER_0_INTEGER;
+            r = *NUMBER_0_INTEGER_MEMORY_MODEL;
         }
 
     } else {
 
-//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialise compound. The persistent model count is null.");
+//??        log_message((void*) &ERROR_LEVEL_LOG_MODEL, (void*) &"Could not initialise compound. The persistent model count is null.");
     }
 }
 */
@@ -218,14 +217,14 @@ void decode_compound_comment_tag(void* p0, void* p1) {
 /*??
 void decode_compound_tag(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p4 != *NULL_POINTER) {
+    if (p4 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* sc = (int*) p4;
 
         // The leave flag.
-        int l = *NUMBER_0_INTEGER;
+        int l = *NUMBER_0_INTEGER_MEMORY_MODEL;
         // The comparison result.
-        int r = *NUMBER_0_INTEGER;
+        int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
         // The current byte within the stream.
         void* b = (void*) p3;
         // The remaining bytes count.
@@ -233,18 +232,18 @@ void decode_compound_tag(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         while (*NUMBER_1_INTEGER) {
 
-            if ((l == *NUMBER_1_INTEGER) || (bc <= *NUMBER_0_INTEGER)) {
+            if ((l == *NUMBER_1_INTEGER) || (bc <= *NUMBER_0_INTEGER_MEMORY_MODEL)) {
 
                 break;
             }
 
-            if (r == *NUMBER_0_INTEGER) {
+            if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 if (bc >= *EMPTY_TAG_END_COUNT) {
 
                     compare_array_elements((void*) b, (void*) EMPTY_TAG_END, (void*) EMPTY_TAG_END_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-                    if (r != *NUMBER_0_INTEGER) {
+                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         // Move current byte pointer
                         // and remaining bytes count.
@@ -257,13 +256,13 @@ void decode_compound_tag(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 }
             }
 
-            if (r == *NUMBER_0_INTEGER) {
+            if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 if (bc >= *TAG_END_COUNT) {
 
                     compare_array_elements((void*) b, (void*) TAG_END, (void*) TAG_END_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-                    if (r != *NUMBER_0_INTEGER) {
+                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         // Move current byte pointer
                         // and remaining bytes count.
@@ -277,12 +276,12 @@ void decode_compound_tag(void* p0, void* p1, void* p2, void* p3, void* p4) {
             }
 
             // Reset comparison result.
-            r = *NUMBER_0_INTEGER;
+            r = *NUMBER_0_INTEGER_MEMORY_MODEL;
         }
 
     } else {
 
-//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialise compound. The persistent model count is null.");
+//??        log_message((void*) &ERROR_LEVEL_LOG_MODEL, (void*) &"Could not initialise compound. The persistent model count is null.");
     }
 }
 */
@@ -309,22 +308,22 @@ void decode_compound_tag(void* p0, void* p1, void* p2, void* p3, void* p4) {
 void decode_compound_cybol_property(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
     void* p6, void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14) {
 
-    if (p12 != *NULL_POINTER) {
+    if (p12 != *NULL_POINTER_MEMORY_MODEL) {
 
         xmlNode* pv = (xmlNode*) p12;
 
-        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Decode compound cybol property.");
+        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Decode compound cybol property.");
 
         // The comparison result.
-        int r = *NUMBER_0_INTEGER;
+        int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-        if (pv != *NULL_POINTER) {
+        if (pv != *NULL_POINTER_MEMORY_MODEL) {
 
     fwprintf(stderr, L"TEST decode compound cybol property p12: %i\n", pv);
     fwprintf(stderr, L"TEST decode compound cybol property p13: %s\n", (char*) p13);
     fwprintf(stderr, L"TEST decode compound cybol property p14: %i\n", *((int*) p14));
 
-            if (r == *NUMBER_0_INTEGER) {
+            if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
     fwprintf(stderr, L"TEST decode compound cybol property NAME_ATTRIBUTE_AS_CHAR: %s\n", NAME_ATTRIBUTE_AS_CHAR);
     fwprintf(stderr, L"TEST decode compound cybol property NAME_ATTRIBUTE_AS_CHAR_COUNT: %i\n", *((int*) NAME_ATTRIBUTE_AS_CHAR_COUNT));
@@ -335,7 +334,7 @@ void decode_compound_cybol_property(void* p0, void* p1, void* p2, void* p3, void
 
     fwprintf(stderr, L"TEST decode compound cybol property 1: %i\n", r);
 
-                if (r != *NUMBER_0_INTEGER) {
+                if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
     fwprintf(stderr, L"TEST decode compound cybol property 2: %i\n", r);
 
@@ -357,11 +356,11 @@ void decode_compound_cybol_property(void* p0, void* p1, void* p2, void* p3, void
                 }
             }
 
-            if (r == *NUMBER_0_INTEGER) {
+            if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 compare_arrays(p13, p14, (void*) CHANNEL_ATTRIBUTE_AS_CHAR, (void*) CHANNEL_ATTRIBUTE_AS_CHAR_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-                if (r != *NUMBER_0_INTEGER) {
+                if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                     // Determine temporary character array count.
                     int tmpc = strlen((char*) pv->content);
@@ -376,11 +375,11 @@ void decode_compound_cybol_property(void* p0, void* p1, void* p2, void* p3, void
                 }
             }
 
-            if (r == *NUMBER_0_INTEGER) {
+            if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 compare_arrays(p13, p14, (void*) ABSTRACTION_ATTRIBUTE_AS_CHAR, (void*) ABSTRACTION_ATTRIBUTE_AS_CHAR_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-                if (r != *NUMBER_0_INTEGER) {
+                if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                     // Determine temporary character array count.
                     int tmpc = strlen((char*) pv->content);
@@ -395,11 +394,11 @@ void decode_compound_cybol_property(void* p0, void* p1, void* p2, void* p3, void
                 }
             }
 
-            if (r == *NUMBER_0_INTEGER) {
+            if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 compare_arrays(p13, p14, (void*) MODEL_ATTRIBUTE_AS_CHAR, (void*) MODEL_ATTRIBUTE_AS_CHAR_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-                if (r != *NUMBER_0_INTEGER) {
+                if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                     // Determine temporary character array count.
                     int tmpc = strlen((char*) pv->content);
@@ -416,12 +415,12 @@ void decode_compound_cybol_property(void* p0, void* p1, void* p2, void* p3, void
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode compound cybol property. The CASTED property value is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode compound cybol property. The CASTED property value is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode compound cybol property. The property value is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode compound cybol property. The property value is null.");
     }
 }
 
@@ -444,23 +443,23 @@ void decode_compound_cybol_property(void* p0, void* p1, void* p2, void* p3, void
  */
 void decode_compound_cybol_properties(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11, void* p12) {
 
-    if (p12 != *NULL_POINTER) {
+    if (p12 != *NULL_POINTER_MEMORY_MODEL) {
 
         xmlNode* cn = (xmlNode*) p12;
 
-        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Decode compound cybol properties.");
+        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Decode compound cybol properties.");
 
-        if (cn != *NULL_POINTER) {
+        if (cn != *NULL_POINTER_MEMORY_MODEL) {
 
             // Determine first child node property.
             xmlAttr* p = cn->properties;
             // The property name.
-            void* pn = *NULL_POINTER;
-            int pnc = *NUMBER_0_INTEGER;
+            void* pn = *NULL_POINTER_MEMORY_MODEL;
+            int pnc = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
             while (*NUMBER_1_INTEGER) {
 
-                if (p == *NULL_POINTER) {
+                if (p == *NULL_POINTER_MEMORY_MODEL) {
 
                     break;
                 }
@@ -478,12 +477,12 @@ void decode_compound_cybol_properties(void* p0, void* p1, void* p2, void* p3, vo
 
         } else {
 
-    //??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not translate xml node. The source parameter count is null.");
+    //??        log_message((void*) &ERROR_LEVEL_LOG_MODEL, (void*) &"Could not translate xml node. The source parameter count is null.");
         }
 
     } else {
 
-//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not translate xml node. The source parameter count is null.");
+//??        log_message((void*) &ERROR_LEVEL_LOG_MODEL, (void*) &"Could not translate xml node. The source parameter count is null.");
     }
 }
 
@@ -498,44 +497,44 @@ void decode_compound_cybol_properties(void* p0, void* p1, void* p2, void* p3, vo
  */
 void decode_compound_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p3 != *NULL_POINTER) {
+    if (p3 != *NULL_POINTER_MEMORY_MODEL) {
 
         xmlNode* s = (xmlNode*) p3;
 
-        if (p0 != *NULL_POINTER) {
+        if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
             void** d = (void**) p0;
 
-            log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Decode compound cybol node.");
+            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Decode compound cybol node.");
 
     fwprintf(stderr, L"TEST decode compound cybol node p3: %i\n", p3);
 
             // The source name, channel, abstraction, model.
-            void* sn = *NULL_POINTER;
-            int snc = *NUMBER_0_INTEGER;
-            int sns = *NUMBER_0_INTEGER;
-            void* sc = *NULL_POINTER;
-            int scc = *NUMBER_0_INTEGER;
-            int scs = *NUMBER_0_INTEGER;
-            void* sa = *NULL_POINTER;
-            int sac = *NUMBER_0_INTEGER;
-            int sas = *NUMBER_0_INTEGER;
-            void* sm = *NULL_POINTER;
-            int smc = *NUMBER_0_INTEGER;
-            int sms = *NUMBER_0_INTEGER;
+            void* sn = *NULL_POINTER_MEMORY_MODEL;
+            int snc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            int sns = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            void* sc = *NULL_POINTER_MEMORY_MODEL;
+            int scc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            int scs = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            void* sa = *NULL_POINTER_MEMORY_MODEL;
+            int sac = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            int sas = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            void* sm = *NULL_POINTER_MEMORY_MODEL;
+            int smc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            int sms = *NUMBER_0_INTEGER_MEMORY_MODEL;
             // The destination name, abstraction, model, details.
-            void* dn = *NULL_POINTER;
-            int* dnc = (int*) *NULL_POINTER;
-            int* dns = (int*) *NULL_POINTER;
-            void* da = *NULL_POINTER;
-            int* dac = (int*) *NULL_POINTER;
-            int* das = (int*) *NULL_POINTER;
-            void* dm = *NULL_POINTER;
-            int* dmc = (int*) *NULL_POINTER;
-            int* dms = (int*) *NULL_POINTER;
-            void* dd = *NULL_POINTER;
-            int* ddc = (int*) *NULL_POINTER;
-            int* dds = (int*) *NULL_POINTER;
+            void* dn = *NULL_POINTER_MEMORY_MODEL;
+            int* dnc = (int*) *NULL_POINTER_MEMORY_MODEL;
+            int* dns = (int*) *NULL_POINTER_MEMORY_MODEL;
+            void* da = *NULL_POINTER_MEMORY_MODEL;
+            int* dac = (int*) *NULL_POINTER_MEMORY_MODEL;
+            int* das = (int*) *NULL_POINTER_MEMORY_MODEL;
+            void* dm = *NULL_POINTER_MEMORY_MODEL;
+            int* dmc = (int*) *NULL_POINTER_MEMORY_MODEL;
+            int* dms = (int*) *NULL_POINTER_MEMORY_MODEL;
+            void* dd = *NULL_POINTER_MEMORY_MODEL;
+            int* ddc = (int*) *NULL_POINTER_MEMORY_MODEL;
+            int* dds = (int*) *NULL_POINTER_MEMORY_MODEL;
 
             // Decode child node properties.
             decode_compound_cybol_properties((void*) &sn, (void*) &snc, (void*) &sns, (void*) &sc, (void*) &scc, (void*) &scs,
@@ -556,9 +555,9 @@ void decode_compound_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4
 
             // Allocate destination name.
             allocate((void*) &dnc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-            *dnc = *NUMBER_0_INTEGER;
+            *dnc = *NUMBER_0_INTEGER_MEMORY_MODEL;
             allocate((void*) &dns, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-            *dns = *NUMBER_0_INTEGER;
+            *dns = *NUMBER_0_INTEGER_MEMORY_MODEL;
             allocate((void*) &dn, (void*) dns, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
             // Decode destination name.
@@ -580,9 +579,9 @@ void decode_compound_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4
 
             // Allocate destination abstraction.
             allocate((void*) &dac, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-            *dac = *NUMBER_0_INTEGER;
+            *dac = *NUMBER_0_INTEGER_MEMORY_MODEL;
             allocate((void*) &das, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-            *das = *NUMBER_0_INTEGER;
+            *das = *NUMBER_0_INTEGER_MEMORY_MODEL;
             allocate((void*) &da, (void*) das, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
             // Decode destination abstraction.
@@ -597,22 +596,22 @@ void decode_compound_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4
 
             // The workaround flags for channel- and abstraction comparison.
             // If these are set, the libxml2 parser is used.
-            int w1 = *NUMBER_0_INTEGER;
-            int w2 = *NUMBER_0_INTEGER;
+            int w1 = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            int w2 = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-            compare_arrays(sc, (void*) &scc, (void*) FILE_CHANNEL, (void*) FILE_CHANNEL_COUNT, (void*) &w1, (void*) WIDE_CHARACTER_ARRAY);
+            compare_arrays(sc, (void*) &scc, (void*) FILE_CHANNEL, (void*) FILE_CHANNEL_COUNT, (void*) &w1, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
             // CAUTION! Use the original source abstraction and NOT the mapped runtime memory abstraction here!
             // This is necessary because not only the CYBOL abstraction is mapped to COMPOUND,
             // but also other abstractions like XDT are.
-            compare_arrays(sa, (void*) &sac, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT, (void*) &w2, (void*) WIDE_CHARACTER_ARRAY);
+            compare_arrays(sa, (void*) &sac, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT, (void*) &w2, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-            if ((w1 != *NUMBER_0_INTEGER) && (w2 != *NUMBER_0_INTEGER)) {
+            if ((w1 != *NUMBER_0_INTEGER_MEMORY_MODEL) && (w2 != *NUMBER_0_INTEGER_MEMORY_MODEL)) {
 
                 // Allocate destination model.
                 allocate((void*) &dmc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-                *dmc = *NUMBER_0_INTEGER;
+                *dmc = *NUMBER_0_INTEGER_MEMORY_MODEL;
                 allocate((void*) &dms, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-                *dms = *NUMBER_0_INTEGER;
+                *dms = *NUMBER_0_INTEGER_MEMORY_MODEL;
                 allocate((void*) &dm, (void*) dms, sa, (void*) &sac);
 
                 // CAUTION! If a cybol file is to be read, then the libxml2 parser is used.
@@ -623,8 +622,8 @@ void decode_compound_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4
             } else {
 
                 // The runtime abstraction.
-                void* ra = *NULL_POINTER;
-                int rac = *NUMBER_0_INTEGER;
+                void* ra = *NULL_POINTER_MEMORY_MODEL;
+                int rac = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                 // Decode source abstraction into runtime abstraction, since a decoded
                 // message does not always have the same runtime abstraction.
@@ -635,9 +634,9 @@ void decode_compound_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4
     fwprintf(stderr, L"TEST decode compound cybol node rac: %i\n", rac);
 
                 // The read model.
-                void* rm = *NULL_POINTER;
-                int rmc = *NUMBER_0_INTEGER;
-                int rms = *NUMBER_0_INTEGER;
+                void* rm = *NULL_POINTER_MEMORY_MODEL;
+                int rmc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+                int rms = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                 // Allocate read model of type character, to read single bytes.
                 allocate((void*) &rm, (void*) &rms, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
@@ -650,9 +649,9 @@ void decode_compound_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4
 
                 // Allocate destination model.
                 allocate((void*) &dmc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-                *dmc = *NUMBER_0_INTEGER;
+                *dmc = *NUMBER_0_INTEGER_MEMORY_MODEL;
                 allocate((void*) &dms, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-                *dms = *NUMBER_0_INTEGER;
+                *dms = *NUMBER_0_INTEGER_MEMORY_MODEL;
                 allocate((void*) &dm, (void*) dms, ra, (void*) &rac);
 
                 // Decode destination model.
@@ -678,13 +677,13 @@ void decode_compound_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4
             // This is because at runtime, properties may be assigned to the details.
             // So, it MUST NOT be null.
             allocate((void*) &ddc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-            *ddc = *NUMBER_0_INTEGER;
+            *ddc = *NUMBER_0_INTEGER_MEMORY_MODEL;
             allocate((void*) &dds, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-            *dds = *NUMBER_0_INTEGER;
+            *dds = *NUMBER_0_INTEGER_MEMORY_MODEL;
             allocate((void*) &dd, (void*) dds, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
 
             // If child node has children, then decode it for destination details.
-            if (s->children != *NULL_POINTER) {
+            if (s->children != *NULL_POINTER_MEMORY_MODEL) {
 
                 // Decode destination details child node children.
                 decode_compound_cybol_nodes((void*) &dd, (void*) ddc, (void*) dds, p3, p4);
@@ -711,12 +710,12 @@ void decode_compound_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode compound cybol node. The destination compound is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode compound cybol node. The destination compound is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode compound cybol node. The source xml node is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode compound cybol node. The source xml node is null.");
     }
 }
 
@@ -731,20 +730,20 @@ void decode_compound_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4
  */
 void decode_compound_cybol_nodes(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p3 != *NULL_POINTER) {
+    if (p3 != *NULL_POINTER_MEMORY_MODEL) {
 
         xmlNode* s = (xmlNode*) p3;
 
-        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Decode compound cybol nodes.");
+        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Decode compound cybol nodes.");
 
         // Determine first child node.
         xmlNode* c = s->children;
         // The child count.
-        int cc = *NUMBER_0_INTEGER;
+        int cc = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
         while (*NUMBER_1_INTEGER) {
 
-            if (c == *NULL_POINTER) {
+            if (c == *NULL_POINTER_MEMORY_MODEL) {
 
                 break;
             }
@@ -761,7 +760,7 @@ void decode_compound_cybol_nodes(void* p0, void* p1, void* p2, void* p3, void* p
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode compound cybol nodes. The source xml node is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode compound cybol nodes. The source xml node is null.");
     }
 }
 
@@ -783,29 +782,29 @@ void decode_compound_cybol_nodes(void* p0, void* p1, void* p2, void* p3, void* p
  */
 void decode_compound_libxml2_parser_workaround(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p4 != *NULL_POINTER) {
+    if (p4 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* sc = (int*) p4;
 
-        if (p3 != *NULL_POINTER) {
+        if (p3 != *NULL_POINTER_MEMORY_MODEL) {
 
             void* s = (void*) p3;
 
-            if (p0 != *NULL_POINTER) {
+            if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
                 void** d = (void**) p0;
 
                 // Following is a special check to avoid:
                 // I/O warning : failed to load external entity ""
                 // messages of the xml parser.
-                if (*sc > *NUMBER_0_INTEGER) {
+                if (*sc > *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Decode compound libxml2 parser workaround.");
+                    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Decode compound libxml2 parser workaround.");
 
                     // The temporary null-terminated file name.
-                    void* tmp = *NULL_POINTER;
-                    int tmpc = *NUMBER_0_INTEGER;
-                    int tmps = *NUMBER_0_INTEGER;
+                    void* tmp = *NULL_POINTER_MEMORY_MODEL;
+                    int tmpc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+                    int tmps = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                     // Create temporary null-terminated file name.
                     allocate_array((void*) &tmp, (void*) &tmps, (void*) CHARACTER_ARRAY);
@@ -847,9 +846,9 @@ void decode_compound_libxml2_parser_workaround(void* p0, void* p1, void* p2, voi
                     xmlNode* r = xmlDocGetRootElement(doc);
 
                     // Decode cybol.
-                    decode_compound_cybol_nodes(p0, p1, p2, (void*) r, *NULL_POINTER);
+                    decode_compound_cybol_nodes(p0, p1, p2, (void*) r, *NULL_POINTER_MEMORY_MODEL);
 
-                    if (doc != *NULL_POINTER) {
+                    if (doc != *NULL_POINTER_MEMORY_MODEL) {
 
                         // Deallocate xml dom document.
                         //
@@ -860,27 +859,27 @@ void decode_compound_libxml2_parser_workaround(void* p0, void* p1, void* p2, voi
 
                     } else {
 
-                        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) L"Could not deallocate xml document. Probably, the given cybol file name was empty.");
+                        log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not deallocate xml document. Probably, the given cybol file name was empty.");
                     }
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode xml. The file name count is null.");
+                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode xml. The file name count is null.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode xml. The destination is null.");
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode xml. The destination is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode xml. The source is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode xml. The source is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode xml. The source count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode xml. The source count is null.");
     }
 }
 
@@ -895,15 +894,15 @@ void decode_compound_libxml2_parser_workaround(void* p0, void* p1, void* p2, voi
  */
 void decode_compound(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Decode compound.");
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Decode compound.");
 
     decode_compound_libxml2_parser_workaround(p0, p1, p2, p3, p4);
 
 /*??
     // The comparison result.
-    int* r = (int*) *NULL_POINTER;
+    int* r = (int*) *NULL_POINTER_MEMORY_MODEL;
     allocate((void*) &r, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    *r = *NUMBER_0_INTEGER;
+    *r = *NUMBER_0_INTEGER_MEMORY_MODEL;
     // The current byte within the stream.
     void* b = *s;
     // The remaining bytes count.
@@ -911,7 +910,7 @@ void decode_compound(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     while (*NUMBER_1_INTEGER) {
 
-        if (bc <= *NUMBER_0_INTEGER) {
+        if (bc <= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             break;
         }
@@ -925,13 +924,13 @@ void decode_compound(void* p0, void* p1, void* p2, void* p3, void* p4) {
         // Otherwise, a comment tag is treated wrongly as normal tag.
         //
 
-        if (d == *NUMBER_0_INTEGER) {
+        if (d == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             if (bc >= BEGIN_COMMENT_TAG_COUNT) {
 
                 compare_array_elements((void*) &b, (void*) &BEGIN_COMMENT_TAG, (void*) &CHARACTER_ARRAY, (void*) &BEGIN_COMMENT_TAG_COUNT, (void*) &r);
 
-                if (r != *NUMBER_0_INTEGER) {
+                if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                     // Move current byte pointer
                     // and remaining bytes count.
@@ -944,13 +943,13 @@ void decode_compound(void* p0, void* p1, void* p2, void* p3, void* p4) {
             }
         }
 
-        if (d == *NUMBER_0_INTEGER) {
+        if (d == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             if (bc >= BEGIN_TAG_BEGIN_COUNT) {
 
                 compare_array_elements((void*) &b, (void*) &BEGIN_TAG_BEGIN, (void*) &CHARACTER_ARRAY, (void*) &BEGIN_TAG_BEGIN_COUNT, (void*) &r);
 
-                if (r != *NUMBER_0_INTEGER) {
+                if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                     // Move current byte pointer
                     // and remaining bytes count.
@@ -958,9 +957,9 @@ void decode_compound(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     bc = bc - BEGIN_TAG_BEGIN_COUNT;
 
                     // Initialise xml tag.
-                    void* t = *NULL_POINTER;
-                    int tc = *NUMBER_0_INTEGER;
-                    int ts = *NUMBER_0_INTEGER;
+                    void* t = *NULL_POINTER_MEMORY_MODEL;
+                    int tc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+                    int ts = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                     // Exceptionally do NOT create and add a new xml tag.
                     // The first tag of an xml file is the root tag.
@@ -988,7 +987,7 @@ void decode_compound(void* p0, void* p1, void* p2, void* p3, void* p4) {
         // If this block is reached, then no known term was found before.
         // The current byte pointer will just be incremented by one so
         // that new characters are read and compared in the next loop cycle.
-        if (d == *NUMBER_0_INTEGER) {
+        if (d == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             // Increment current byte within persistent model.
             b++;
@@ -997,7 +996,7 @@ void decode_compound(void* p0, void* p1, void* p2, void* p3, void* p4) {
         }
 
         // Reset comparison result.
-        *r = *NUMBER_0_INTEGER;
+        *r = *NUMBER_0_INTEGER_MEMORY_MODEL;
     }
 */
 }
@@ -1013,7 +1012,7 @@ void decode_compound(void* p0, void* p1, void* p2, void* p3, void* p4) {
  */
 void encode_compound(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Encode compound.");
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Encode compound.");
 }
 
 /* COMPOUND_CONVERTER_SOURCE */

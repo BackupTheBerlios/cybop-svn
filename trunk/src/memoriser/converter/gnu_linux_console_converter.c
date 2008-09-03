@@ -1,26 +1,25 @@
 /*
- * $RCSfile: gnu_linux_console_converter.c,v $
+ * Copyright (C) 1999-2008. Christian Heller.
  *
- * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
+ * This file is part of the Cybernetics Oriented Interpreter (CYBOI).
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
+ * CYBOI is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
+ * CYBOI is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * along with CYBOI.  If not, see <http://www.gnu.org/licenses/>.
  *
- * http://www.cybop.net
- * - Cybernetics Oriented Programming -
+ * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
+ * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $Revision: 1.17 $ $Date: 2008-07-08 17:55:36 $ $Author: christian $
+ * @version $RCSfile: gnu_linux_console_converter.c,v $ $Revision: 1.18 $ $Date: 2008-09-03 22:04:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -41,11 +40,11 @@
 #include "../../globals/constants/cybol/cybol_model_constants.c"
 #include "../../globals/constants/cybol/cybol_name_constants.c"
 #include "../../globals/constants/integer/integer_constants.c"
-#include "../../globals/constants/log/log_message_constants.c"
+#include "../../constant/model/log/message_log_model.c"
 #include "../../globals/constants/memory_structure/memory_abstraction_constants.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
-#include "../../globals/constants/pointer/pointer_constants.c"
-#include "../../globals/logger/logger.c"
+#include "../../constant/model/memory/pointer_memory_model.c"
+#include "../../logger/logger.c"
 #include "../../globals/variables/reallocation_factor_variables.c"
 #include "../../memoriser/accessor/compound_accessor.c"
 #include "../../memoriser/accessor.c"
@@ -91,46 +90,46 @@ void encode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
  */
 void decode_gnu_linux_console_escape_control_sequence(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Decode gnu/linux console escape control sequence.");
+    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Decode gnu/linux console escape control sequence.");
 
     // The comparison result.
-    int r = *NUMBER_0_INTEGER;
+    int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-    if (r == *NUMBER_0_INTEGER) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p3, p4, (void*) ARROW_UP_CONTROL_SEQUENCE, (void*) ARROW_UP_CONTROL_SEQUENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+        compare_arrays(p3, p4, (void*) ARROW_UP_CONTROL_SEQUENCE, (void*) ARROW_UP_CONTROL_SEQUENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-        if (r != *NUMBER_0_INTEGER) {
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             set(p0, p1, p2, (void*) UI_ARROW_UP_NAME, (void*) UI_ARROW_UP_NAME_COUNT, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
         }
     }
 
-    if (r == *NUMBER_0_INTEGER) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p3, p4, (void*) ARROW_DOWN_CONTROL_SEQUENCE, (void*) ARROW_DOWN_CONTROL_SEQUENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+        compare_arrays(p3, p4, (void*) ARROW_DOWN_CONTROL_SEQUENCE, (void*) ARROW_DOWN_CONTROL_SEQUENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-        if (r != *NUMBER_0_INTEGER) {
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             set(p0, p1, p2, (void*) UI_ARROW_DOWN_NAME, (void*) UI_ARROW_DOWN_NAME_COUNT, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
         }
     }
 
-    if (r == *NUMBER_0_INTEGER) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p3, p4, (void*) ARROW_LEFT_CONTROL_SEQUENCE, (void*) ARROW_LEFT_CONTROL_SEQUENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+        compare_arrays(p3, p4, (void*) ARROW_LEFT_CONTROL_SEQUENCE, (void*) ARROW_LEFT_CONTROL_SEQUENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-        if (r != *NUMBER_0_INTEGER) {
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             set(p0, p1, p2, (void*) UI_ARROW_LEFT_NAME, (void*) UI_ARROW_LEFT_NAME_COUNT, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
         }
     }
 
-    if (r == *NUMBER_0_INTEGER) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p3, p4, (void*) ARROW_RIGHT_CONTROL_SEQUENCE, (void*) ARROW_RIGHT_CONTROL_SEQUENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+        compare_arrays(p3, p4, (void*) ARROW_RIGHT_CONTROL_SEQUENCE, (void*) ARROW_RIGHT_CONTROL_SEQUENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-        if (r != *NUMBER_0_INTEGER) {
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             set(p0, p1, p2, (void*) UI_ARROW_RIGHT_NAME, (void*) UI_ARROW_RIGHT_NAME_COUNT, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
         }
@@ -157,32 +156,32 @@ void decode_gnu_linux_console_escape_control_sequence(void* p0, void* p1, void* 
  */
 void decode_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Decode gnu/linux console character.");
+    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Decode gnu/linux console character.");
 
     // The comparison result.
-    int r = *NUMBER_0_INTEGER;
+    int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-    if (r == *NUMBER_0_INTEGER) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p3, p4, (void*) LINE_FEED_CONTROL_WIDE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+        compare_arrays(p3, p4, (void*) LINE_FEED_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-        if (r != *NUMBER_0_INTEGER) {
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             set(p0, p1, p2, (void*) UI_ENTER_NAME, (void*) UI_ENTER_NAME_COUNT, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
         }
     }
 
-    if (r == *NUMBER_0_INTEGER) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p3, p4, (void*) ESCAPE_CONTROL_WIDE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+        compare_arrays(p3, p4, (void*) ESCAPE_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-        if (r != *NUMBER_0_INTEGER) {
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             set(p0, p1, p2, (void*) UI_ESCAPE_NAME, (void*) UI_ESCAPE_NAME_COUNT, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
         }
     }
 
-    if (r == *NUMBER_0_INTEGER) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
         // None of the control characters above matched.
         // Pass along character without modification.
@@ -201,21 +200,21 @@ void decode_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, 
  */
 void decode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p4 != *NULL_POINTER) {
+    if (p4 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* sc = (int*) p4;
 
-        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Decode gnu/linux console.");
+        log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Decode gnu/linux console.");
 
     fwprintf(stderr, L"TEST decode gnu/linux console s: %s\n", (char*) p3);
     fwprintf(stderr, L"TEST decode gnu/linux console sc: %i\n", *((int*) p4));
 
         // The comparison result.
-        int r = *NUMBER_0_INTEGER;
+        int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     fwprintf(stderr, L"TEST a0: %i\n", p3);
 
-        if (r == *NUMBER_0_INTEGER) {
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
     fwprintf(stderr, L"TEST a1: %i\n", p3);
 
@@ -227,11 +226,11 @@ void decode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) 
 
                 // CAUTION! Use the "ESCAPE_CONTROL_SEQUENCE_COUNT" for both comparison values,
                 // since they would not be equal if their size differed.
-                compare_arrays(p3, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+                compare_arrays(p3, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
     fwprintf(stderr, L"TEST a2: %i\n", p3);
 
-                if (r != *NUMBER_0_INTEGER) {
+                if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
     fwprintf(stderr, L"TEST a3: %i\n", p3);
 
@@ -251,7 +250,7 @@ void decode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) 
 
     fwprintf(stderr, L"TEST b0: %i\n", p3);
 
-        if (r == *NUMBER_0_INTEGER) {
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
     fwprintf(stderr, L"TEST b1: %i\n", p3);
 
@@ -262,7 +261,7 @@ void decode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) 
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode gnu/linux console. The source character array count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode gnu/linux console. The source character array count is null.");
     }
 }
 
@@ -289,37 +288,37 @@ void decode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) 
 void encode_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
     void* p6, void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14, void* p15) {
 
-    if (p9 != *NULL_POINTER) {
+    if (p9 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* fc = (int*) p9;
 
-        if (p7 != *NULL_POINTER) {
+        if (p7 != *NULL_POINTER_MEMORY_MODEL) {
 
             int* bc = (int*) p7;
 
-            if (p4 != *NULL_POINTER) {
+            if (p4 != *NULL_POINTER_MEMORY_MODEL) {
 
                 int* sy = (int*) p4;
 
-                if (p3 != *NULL_POINTER) {
+                if (p3 != *NULL_POINTER_MEMORY_MODEL) {
 
                     int* sx = (int*) p3;
 
-                    if (p2 != *NULL_POINTER) {
+                    if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
                         int* ds = (int*) p2;
 
-                        if (p1 != *NULL_POINTER) {
+                        if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
                             int* dc = (int*) p1;
 
-                            if (p0 != *NULL_POINTER) {
+                            if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
                                 void** d = (void**) p0;
 
-                                log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Encode gnu/linux console character.");
+                                log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Encode gnu/linux console character.");
 
-                                if (p15 != *NULL_POINTER) {
+                                if (p15 != *NULL_POINTER_MEMORY_MODEL) {
 
                                     //
                                     // The *CHARACTER_VECTOR_REALLOCATION_FACTOR is not necessary
@@ -337,21 +336,21 @@ void encode_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, 
                                     // The corrected x.
                                     int cx = *sx + *NUMBER_1_INTEGER;
                                     // The y coordinate.
-                                    void* y = *NULL_POINTER;
-                                    int yc = *NUMBER_0_INTEGER;
-                                    int ys = *NUMBER_0_INTEGER;
+                                    void* y = *NULL_POINTER_MEMORY_MODEL;
+                                    int yc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+                                    int ys = *NUMBER_0_INTEGER_MEMORY_MODEL;
                                     // The x coordinate.
-                                    void* x = *NULL_POINTER;
-                                    int xc = *NUMBER_0_INTEGER;
-                                    int xs = *NUMBER_0_INTEGER;
+                                    void* x = *NULL_POINTER_MEMORY_MODEL;
+                                    int xc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+                                    int xs = *NUMBER_0_INTEGER_MEMORY_MODEL;
                                     // The background colour.
-//??                                    void* b = *NULL_POINTER;
-//??                                    int bc = *NUMBER_0_INTEGER;
-//??                                    int bs = *NUMBER_0_INTEGER;
+//??                                    void* b = *NULL_POINTER_MEMORY_MODEL;
+//??                                    int bc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+//??                                    int bs = *NUMBER_0_INTEGER_MEMORY_MODEL;
                                     // The foreground colour.
-//??                                    void* f = *NULL_POINTER;
-//??                                    int fc = *NUMBER_0_INTEGER;
-//??                                    int fs = *NUMBER_0_INTEGER;
+//??                                    void* f = *NULL_POINTER_MEMORY_MODEL;
+//??                                    int fc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+//??                                    int fs = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                                     //
                                     // Position cursor.
@@ -369,29 +368,29 @@ void encode_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, 
 
                                     if ((*dc + *ESCAPE_CONTROL_SEQUENCE_COUNT
                                         + yc + *PRIMITIVE_COUNT
-                                        + xc + *PRIMITIVE_COUNT) >= *ds) {
+                                        + xc + *PRIMITIVE_MEMORY_MODEL_COUNT) >= *ds) {
 
                                         // Set destination character array size.
                                         // CAUTION! Add constant in case *dc is zero!
                                         *ds = *dc * *WIDE_CHARACTER_VECTOR_REALLOCATION_FACTOR
                                             + *ESCAPE_CONTROL_SEQUENCE_COUNT
                                             + yc + *PRIMITIVE_COUNT
-                                            + xc + *PRIMITIVE_COUNT;
+                                            + xc + *PRIMITIVE_MEMORY_MODEL_COUNT;
 
                                         // Reallocate destination character array.
-                                        reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_ARRAY);
+                                        reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                                     }
 
-                                    set_array_elements(*d, p1, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+                                    set_array_elements(*d, p1, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                                     *dc = *dc + *ESCAPE_CONTROL_SEQUENCE_COUNT;
-                                    set_array_elements(*d, p1, y, (void*) &yc, (void*) WIDE_CHARACTER_ARRAY);
+                                    set_array_elements(*d, p1, y, (void*) &yc, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                                     *dc = *dc + yc;
-                                    set_array_elements(*d, p1, (void*) SEMICOLON_WIDE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
-                                    *dc = *dc + *PRIMITIVE_COUNT;
-                                    set_array_elements(*d, p1, x, (void*) &xc, (void*) WIDE_CHARACTER_ARRAY);
+                                    set_array_elements(*d, p1, (void*) SEMICOLON_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                                    *dc = *dc + *PRIMITIVE_MEMORY_MODEL_COUNT;
+                                    set_array_elements(*d, p1, x, (void*) &xc, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                                     *dc = *dc + xc;
-                                    set_array_elements(*d, p1, (void*) LATIN_CAPITAL_LETTER_H_WIDE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
-                                    *dc = *dc + *PRIMITIVE_COUNT;
+                                    set_array_elements(*d, p1, (void*) LATIN_CAPITAL_LETTER_H_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                                    *dc = *dc + *PRIMITIVE_MEMORY_MODEL_COUNT;
 
                                     // Add attribute off control sequence.
                                     if ((*dc + *ESCAPE_CONTROL_SEQUENCE_COUNT + *ATTRIBUTE_OFF_CONTROL_SEQUENCE_COUNT) >= *ds) {
@@ -401,12 +400,12 @@ void encode_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, 
                                         *ds = *dc * *WIDE_CHARACTER_VECTOR_REALLOCATION_FACTOR + *ESCAPE_CONTROL_SEQUENCE_COUNT + *ATTRIBUTE_OFF_CONTROL_SEQUENCE_COUNT;
 
                                         // Reallocate destination character array.
-                                        reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_ARRAY);
+                                        reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                                     }
 
-                                    set_array_elements(*d, p1, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+                                    set_array_elements(*d, p1, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                                     *dc = *dc + *ESCAPE_CONTROL_SEQUENCE_COUNT;
-                                    set_array_elements(*d, p1, (void*) ATTRIBUTE_OFF_CONTROL_SEQUENCE, (void*) ATTRIBUTE_OFF_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+                                    set_array_elements(*d, p1, (void*) ATTRIBUTE_OFF_CONTROL_SEQUENCE, (void*) ATTRIBUTE_OFF_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                                     *dc = *dc + *ATTRIBUTE_OFF_CONTROL_SEQUENCE_COUNT;
 
                                     // Deallocate arrays.
@@ -436,20 +435,20 @@ void encode_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, 
                                             + *ESCAPE_CONTROL_SEQUENCE_COUNT + *fc + *ATTRIBUTE_SUFFIX_CONTROL_SEQUENCE_COUNT;
 
                                         // Reallocate destination character array.
-                                        reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_ARRAY);
+                                        reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                                     }
 
-                                    set_array_elements(*d, p1, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+                                    set_array_elements(*d, p1, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                                     *dc = *dc + *ESCAPE_CONTROL_SEQUENCE_COUNT;
-                                    set_array_elements(*d, p1, p6, p7, (void*) WIDE_CHARACTER_ARRAY);
+                                    set_array_elements(*d, p1, p6, p7, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                                     *dc = *dc + *bc;
-                                    set_array_elements(*d, p1, (void*) ATTRIBUTE_SUFFIX_CONTROL_SEQUENCE, (void*) ATTRIBUTE_SUFFIX_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+                                    set_array_elements(*d, p1, (void*) ATTRIBUTE_SUFFIX_CONTROL_SEQUENCE, (void*) ATTRIBUTE_SUFFIX_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                                     *dc = *dc + *ATTRIBUTE_SUFFIX_CONTROL_SEQUENCE_COUNT;
-                                    set_array_elements(*d, p1, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+                                    set_array_elements(*d, p1, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                                     *dc = *dc + *ESCAPE_CONTROL_SEQUENCE_COUNT;
-                                    set_array_elements(*d, p1, p8, p9, (void*) WIDE_CHARACTER_ARRAY);
+                                    set_array_elements(*d, p1, p8, p9, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                                     *dc = *dc + *fc;
-                                    set_array_elements(*d, p1, (void*) ATTRIBUTE_SUFFIX_CONTROL_SEQUENCE, (void*) ATTRIBUTE_SUFFIX_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+                                    set_array_elements(*d, p1, (void*) ATTRIBUTE_SUFFIX_CONTROL_SEQUENCE, (void*) ATTRIBUTE_SUFFIX_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                                     *dc = *dc + *ATTRIBUTE_SUFFIX_CONTROL_SEQUENCE_COUNT;
 
                                     //
@@ -467,7 +466,7 @@ void encode_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, 
                                         + *ESCAPE_CONTROL_SEQUENCE_COUNT + *BLINK_CONTROL_SEQUENCE_COUNT
                                         + *ESCAPE_CONTROL_SEQUENCE_COUNT + *UNDERLINE_CONTROL_SEQUENCE_COUNT
                                         + *ESCAPE_CONTROL_SEQUENCE_COUNT + *BOLD_CONTROL_SEQUENCE_COUNT
-                                        + *PRIMITIVE_COUNT) >= *ds) {
+                                        + *PRIMITIVE_MEMORY_MODEL_COUNT) >= *ds) {
 
                                         // Set destination character array size.
                                         // CAUTION! Add constant in case *dc is zero!
@@ -477,129 +476,129 @@ void encode_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, 
                                             + *ESCAPE_CONTROL_SEQUENCE_COUNT + *BLINK_CONTROL_SEQUENCE_COUNT
                                             + *ESCAPE_CONTROL_SEQUENCE_COUNT + *UNDERLINE_CONTROL_SEQUENCE_COUNT
                                             + *ESCAPE_CONTROL_SEQUENCE_COUNT + *BOLD_CONTROL_SEQUENCE_COUNT
-                                            + *PRIMITIVE_COUNT;
+                                            + *PRIMITIVE_MEMORY_MODEL_COUNT;
 
                                         // Reallocate destination character array.
-                                        reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_ARRAY);
+                                        reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                                     }
 
                                     // The comparison result.
-                                    int r = *NUMBER_0_INTEGER;
+                                    int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                                     // Compare hidden property.
                                     compare_arrays(p10, (void*) PRIMITIVE_COUNT, (void*) TRUE_BOOLEAN, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) INTEGER_ARRAY);
 
-                                    if (r != *NUMBER_0_INTEGER) {
+                                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                                         // Set hidden property.
-                                        set_array_elements(*d, p1, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+                                        set_array_elements(*d, p1, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                                         *dc = *dc + *ESCAPE_CONTROL_SEQUENCE_COUNT;
-                                        set_array_elements(*d, p1, (void*) HIDDEN_CONTROL_SEQUENCE, (void*) HIDDEN_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+                                        set_array_elements(*d, p1, (void*) HIDDEN_CONTROL_SEQUENCE, (void*) HIDDEN_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                                         *dc = *dc + *HIDDEN_CONTROL_SEQUENCE_COUNT;
                                     }
 
                                     // Reset comparison result.
-                                    r = *NUMBER_0_INTEGER;
+                                    r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                                     // Compare inverse property.
                                     compare_arrays(p11, (void*) PRIMITIVE_COUNT, (void*) TRUE_BOOLEAN, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) INTEGER_ARRAY);
 
-                                    if (r != *NUMBER_0_INTEGER) {
+                                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                                         // Set inverse property.
-                                        set_array_elements(*d, p1, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+                                        set_array_elements(*d, p1, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                                         *dc = *dc + *ESCAPE_CONTROL_SEQUENCE_COUNT;
-                                        set_array_elements(*d, p1, (void*) INVERSE_CONTROL_SEQUENCE, (void*) INVERSE_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+                                        set_array_elements(*d, p1, (void*) INVERSE_CONTROL_SEQUENCE, (void*) INVERSE_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                                         *dc = *dc + *INVERSE_CONTROL_SEQUENCE_COUNT;
                                     }
 
                                     // Reset comparison result.
-                                    r = *NUMBER_0_INTEGER;
+                                    r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                                     // Compare blink property.
                                     compare_arrays(p12, (void*) PRIMITIVE_COUNT, (void*) TRUE_BOOLEAN, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) INTEGER_ARRAY);
 
-                                    if (r != *NUMBER_0_INTEGER) {
+                                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                                         // Set blink property.
-                                        set_array_elements(*d, p1, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+                                        set_array_elements(*d, p1, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                                         *dc = *dc + *ESCAPE_CONTROL_SEQUENCE_COUNT;
-                                        set_array_elements(*d, p1, (void*) BLINK_CONTROL_SEQUENCE, (void*) BLINK_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+                                        set_array_elements(*d, p1, (void*) BLINK_CONTROL_SEQUENCE, (void*) BLINK_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                                         *dc = *dc + *BLINK_CONTROL_SEQUENCE_COUNT;
                                     }
 
                                     // Reset comparison result.
-                                    r = *NUMBER_0_INTEGER;
+                                    r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                                     // Compare underline property.
                                     compare_arrays(p13, (void*) PRIMITIVE_COUNT, (void*) TRUE_BOOLEAN, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) INTEGER_ARRAY);
 
-                                    if (r != *NUMBER_0_INTEGER) {
+                                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                                         // Set underline property.
-                                        set_array_elements(*d, p1, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+                                        set_array_elements(*d, p1, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                                         *dc = *dc + *ESCAPE_CONTROL_SEQUENCE_COUNT;
-                                        set_array_elements(*d, p1, (void*) UNDERLINE_CONTROL_SEQUENCE, (void*) UNDERLINE_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+                                        set_array_elements(*d, p1, (void*) UNDERLINE_CONTROL_SEQUENCE, (void*) UNDERLINE_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                                         *dc = *dc + *UNDERLINE_CONTROL_SEQUENCE_COUNT;
                                     }
 
                                     // Reset comparison result.
-                                    r = *NUMBER_0_INTEGER;
+                                    r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                                     // Compare bold property.
                                     compare_arrays(p14, (void*) PRIMITIVE_COUNT, (void*) TRUE_BOOLEAN, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) INTEGER_ARRAY);
 
-                                    if (r != *NUMBER_0_INTEGER) {
+                                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                                         // Set bold property.
-                                        set_array_elements(*d, p1, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+                                        set_array_elements(*d, p1, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                                         *dc = *dc + *ESCAPE_CONTROL_SEQUENCE_COUNT;
-                                        set_array_elements(*d, p1, (void*) BOLD_CONTROL_SEQUENCE, (void*) BOLD_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+                                        set_array_elements(*d, p1, (void*) BOLD_CONTROL_SEQUENCE, (void*) BOLD_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                                         *dc = *dc + *BOLD_CONTROL_SEQUENCE_COUNT;
                                     }
 
                                     // Set character.
-                                    set_array_elements(*d, p1, p15, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
-                                    *dc = *dc + *PRIMITIVE_COUNT;
+                                    set_array_elements(*d, p1, p15, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                                    *dc = *dc + *PRIMITIVE_MEMORY_MODEL_COUNT;
 
                                 } else {
 
-                                    log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) L"Could not encode gnu/linux console properties. The character is null.");
+                                    log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not encode gnu/linux console properties. The character is null.");
                                 }
 
                             } else {
 
-                                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode gnu/linux console properties. The destination is null.");
+                                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode gnu/linux console properties. The destination is null.");
                             }
 
                         } else {
 
-                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode gnu/linux console properties. The destination count is null.");
+                            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode gnu/linux console properties. The destination count is null.");
                         }
 
                     } else {
 
-                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode gnu/linux console properties. The destination size is null.");
+                        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode gnu/linux console properties. The destination size is null.");
                     }
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode gnu/linux console properties. The source y is null.");
+                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode gnu/linux console properties. The source y is null.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode gnu/linux console properties. The source x is null.");
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode gnu/linux console properties. The source x is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode gnu/linux console properties. The background count is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode gnu/linux console properties. The background count is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode gnu/linux console properties. The foreground count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode gnu/linux console properties. The foreground count is null.");
     }
 }
 
@@ -618,108 +617,108 @@ void encode_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, 
 void encode_gnu_linux_console_rectangle_border(void* p0, void* p1,
     void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
 
-    if (p5 != *NULL_POINTER) {
+    if (p5 != *NULL_POINTER_MEMORY_MODEL) {
 
         wchar_t* rbc = (wchar_t*) p5;
 
-        if (p4 != *NULL_POINTER) {
+        if (p4 != *NULL_POINTER_MEMORY_MODEL) {
 
             wchar_t* lbc = (wchar_t*) p4;
 
-            if (p3 != *NULL_POINTER) {
+            if (p3 != *NULL_POINTER_MEMORY_MODEL) {
 
                 wchar_t* rtc = (wchar_t*) p3;
 
-                if (p2 != *NULL_POINTER) {
+                if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
                     wchar_t* ltc = (wchar_t*) p2;
 
-                    if (p1 != *NULL_POINTER) {
+                    if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
                         wchar_t* vc = (wchar_t*) p1;
 
-                        if (p0 != *NULL_POINTER) {
+                        if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
                             wchar_t* hc = (wchar_t*) p0;
 
-                            log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Encode gnu/linux console rectangle border.");
+                            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Encode gnu/linux console rectangle border.");
 
                             // The comparison result.
-                            int r = *NUMBER_0_INTEGER;
+                            int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-                            if (r == *NUMBER_0_INTEGER) {
+                            if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                                compare_arrays(p6, p7, (void*) TUI_LINE_BORDER_MODEL, (void*) TUI_LINE_BORDER_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+                                compare_arrays(p6, p7, (void*) TUI_LINE_BORDER_MODEL, (void*) TUI_LINE_BORDER_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                                if (r != *NUMBER_0_INTEGER) {
+                                if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                                    *hc = *BOX_DRAWINGS_LIGHT_HORIZONTAL_WIDE_CHARACTER_CODE;
-                                    *vc = *BOX_DRAWINGS_LIGHT_VERTICAL_WIDE_CHARACTER_CODE;
-                                    *ltc = *BOX_DRAWINGS_LIGHT_DOWN_AND_RIGHT_WIDE_CHARACTER_CODE;
-                                    *rtc = *BOX_DRAWINGS_LIGHT_DOWN_AND_LEFT_WIDE_CHARACTER_CODE;
-                                    *lbc = *BOX_DRAWINGS_LIGHT_UP_AND_RIGHT_WIDE_CHARACTER_CODE;
-                                    *rbc = *BOX_DRAWINGS_LIGHT_UP_AND_LEFT_WIDE_CHARACTER_CODE;
+                                    *hc = *BOX_DRAWINGS_LIGHT_HORIZONTAL_UNICODE_CHARACTER_CODE_MODEL;
+                                    *vc = *BOX_DRAWINGS_LIGHT_VERTICAL_UNICODE_CHARACTER_CODE_MODEL;
+                                    *ltc = *BOX_DRAWINGS_LIGHT_DOWN_AND_RIGHT_UNICODE_CHARACTER_CODE_MODEL;
+                                    *rtc = *BOX_DRAWINGS_LIGHT_DOWN_AND_LEFT_UNICODE_CHARACTER_CODE_MODEL;
+                                    *lbc = *BOX_DRAWINGS_LIGHT_UP_AND_RIGHT_UNICODE_CHARACTER_CODE_MODEL;
+                                    *rbc = *BOX_DRAWINGS_LIGHT_UP_AND_LEFT_UNICODE_CHARACTER_CODE_MODEL;
                                 }
                             }
 
-                            if (r == *NUMBER_0_INTEGER) {
+                            if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                                compare_arrays(p6, p7, (void*) TUI_ROUND_LINE_BORDER_MODEL, (void*) TUI_ROUND_LINE_BORDER_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+                                compare_arrays(p6, p7, (void*) TUI_ROUND_LINE_BORDER_MODEL, (void*) TUI_ROUND_LINE_BORDER_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                                if (r != *NUMBER_0_INTEGER) {
+                                if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                                    *hc = *BOX_DRAWINGS_LIGHT_HORIZONTAL_WIDE_CHARACTER_CODE;
-                                    *vc = *BOX_DRAWINGS_LIGHT_VERTICAL_WIDE_CHARACTER_CODE;
-                                    *ltc = *BOX_DRAWINGS_LIGHT_ARC_DOWN_AND_RIGHT_WIDE_CHARACTER_CODE;
-                                    *rtc = *BOX_DRAWINGS_LIGHT_ARC_DOWN_AND_LEFT_WIDE_CHARACTER_CODE;
-                                    *lbc = *BOX_DRAWINGS_LIGHT_ARC_UP_AND_RIGHT_WIDE_CHARACTER_CODE;
-                                    *rbc = *BOX_DRAWINGS_LIGHT_ARC_UP_AND_LEFT_WIDE_CHARACTER_CODE;
+                                    *hc = *BOX_DRAWINGS_LIGHT_HORIZONTAL_UNICODE_CHARACTER_CODE_MODEL;
+                                    *vc = *BOX_DRAWINGS_LIGHT_VERTICAL_UNICODE_CHARACTER_CODE_MODEL;
+                                    *ltc = *BOX_DRAWINGS_LIGHT_ARC_DOWN_AND_RIGHT_UNICODE_CHARACTER_CODE_MODEL;
+                                    *rtc = *BOX_DRAWINGS_LIGHT_ARC_DOWN_AND_LEFT_UNICODE_CHARACTER_CODE_MODEL;
+                                    *lbc = *BOX_DRAWINGS_LIGHT_ARC_UP_AND_RIGHT_UNICODE_CHARACTER_CODE_MODEL;
+                                    *rbc = *BOX_DRAWINGS_LIGHT_ARC_UP_AND_LEFT_UNICODE_CHARACTER_CODE_MODEL;
                                 }
                             }
 
-                            if (r == *NUMBER_0_INTEGER) {
+                            if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                                compare_arrays(p6, p7, (void*) TUI_DOUBLE_LINE_BORDER_MODEL, (void*) TUI_DOUBLE_LINE_BORDER_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+                                compare_arrays(p6, p7, (void*) TUI_DOUBLE_LINE_BORDER_MODEL, (void*) TUI_DOUBLE_LINE_BORDER_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                                if (r != *NUMBER_0_INTEGER) {
+                                if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                                    *hc = *BOX_DRAWINGS_DOUBLE_HORIZONTAL_WIDE_CHARACTER_CODE;
-                                    *vc = *BOX_DRAWINGS_DOUBLE_VERTICAL_WIDE_CHARACTER_CODE;
-                                    *ltc = *BOX_DRAWINGS_DOUBLE_DOWN_AND_RIGHT_WIDE_CHARACTER_CODE;
-                                    *rtc = *BOX_DRAWINGS_DOUBLE_DOWN_AND_LEFT_WIDE_CHARACTER_CODE;
-                                    *lbc = *BOX_DRAWINGS_DOUBLE_UP_AND_RIGHT_WIDE_CHARACTER_CODE;
-                                    *rbc = *BOX_DRAWINGS_DOUBLE_UP_AND_LEFT_WIDE_CHARACTER_CODE;
+                                    *hc = *BOX_DRAWINGS_DOUBLE_HORIZONTAL_UNICODE_CHARACTER_CODE_MODEL;
+                                    *vc = *BOX_DRAWINGS_DOUBLE_VERTICAL_UNICODE_CHARACTER_CODE_MODEL;
+                                    *ltc = *BOX_DRAWINGS_DOUBLE_DOWN_AND_RIGHT_UNICODE_CHARACTER_CODE_MODEL;
+                                    *rtc = *BOX_DRAWINGS_DOUBLE_DOWN_AND_LEFT_UNICODE_CHARACTER_CODE_MODEL;
+                                    *lbc = *BOX_DRAWINGS_DOUBLE_UP_AND_RIGHT_UNICODE_CHARACTER_CODE_MODEL;
+                                    *rbc = *BOX_DRAWINGS_DOUBLE_UP_AND_LEFT_UNICODE_CHARACTER_CODE_MODEL;
                                 }
                             }
 
                         } else {
 
-                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode gnu/linux console rectangle border. The horizontal character is null.");
+                            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode gnu/linux console rectangle border. The horizontal character is null.");
                         }
 
                     } else {
 
-                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode gnu/linux console rectangle border. The vertical character is null.");
+                        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode gnu/linux console rectangle border. The vertical character is null.");
                     }
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode gnu/linux console rectangle border. The left top character is null.");
+                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode gnu/linux console rectangle border. The left top character is null.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode gnu/linux console rectangle border. The right top character is null.");
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode gnu/linux console rectangle border. The right top character is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode gnu/linux console rectangle border. The left bottom character is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode gnu/linux console rectangle border. The left bottom character is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode gnu/linux console rectangle border. The right bottom character is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode gnu/linux console rectangle border. The right bottom character is null.");
     }
 }
 
@@ -753,46 +752,46 @@ void encode_gnu_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, 
     void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13,
     void* p14, void* p15, void* p16, void* p17, void* p18, void* p19, void* p20, void* p21) {
 
-    if (p19 != *NULL_POINTER) {
+    if (p19 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* sz = (int*) p19;
 
-        if (p18 != *NULL_POINTER) {
+        if (p18 != *NULL_POINTER_MEMORY_MODEL) {
 
             int* sy = (int*) p18;
 
-            if (p17 != *NULL_POINTER) {
+            if (p17 != *NULL_POINTER_MEMORY_MODEL) {
 
                 int* sx = (int*) p17;
 
-                if (p16 != *NULL_POINTER) {
+                if (p16 != *NULL_POINTER_MEMORY_MODEL) {
 
                     int* pz = (int*) p16;
 
-                    if (p15 != *NULL_POINTER) {
+                    if (p15 != *NULL_POINTER_MEMORY_MODEL) {
 
                         int* py = (int*) p15;
 
-                        if (p14 != *NULL_POINTER) {
+                        if (p14 != *NULL_POINTER_MEMORY_MODEL) {
 
                             int* px = (int*) p14;
 
                             int* cc = (int*) p4;
 
-                            log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Encode gnu/linux console rectangle.");
+                            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Encode gnu/linux console rectangle.");
 
                             // The horizontal character.
-                            wchar_t hc = *SPACE_WIDE_CHARACTER_CODE;
+                            wchar_t hc = *SPACE_UNICODE_CHARACTER_CODE_MODEL;
                             // The vertical character.
-                            wchar_t vc = *SPACE_WIDE_CHARACTER_CODE;
+                            wchar_t vc = *SPACE_UNICODE_CHARACTER_CODE_MODEL;
                             // The left top character.
-                            wchar_t ltc = *SPACE_WIDE_CHARACTER_CODE;
+                            wchar_t ltc = *SPACE_UNICODE_CHARACTER_CODE_MODEL;
                             // The right top character.
-                            wchar_t rtc = *SPACE_WIDE_CHARACTER_CODE;
+                            wchar_t rtc = *SPACE_UNICODE_CHARACTER_CODE_MODEL;
                             // The left bottom character.
-                            wchar_t lbc = *SPACE_WIDE_CHARACTER_CODE;
+                            wchar_t lbc = *SPACE_UNICODE_CHARACTER_CODE_MODEL;
                             // The right bottom character.
-                            wchar_t rbc = *SPACE_WIDE_CHARACTER_CODE;
+                            wchar_t rbc = *SPACE_UNICODE_CHARACTER_CODE_MODEL;
 
                             // Determine border characters.
                             encode_gnu_linux_console_rectangle_border((void*) &hc, (void*) &vc,
@@ -812,9 +811,9 @@ void encode_gnu_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, 
                             int xl = *px + *sx;
 
                             // The character index.
-                            int ci = *NUMBER_0_INTEGER;
+                            int ci = *NUMBER_0_INTEGER_MEMORY_MODEL;
                             // The character.
-                            wchar_t* c = SPACE_WIDE_CHARACTER_CODE;
+                            wchar_t* c = SPACE_UNICODE_CHARACTER_CODE_MODEL;
 
                             while (*NUMBER_1_INTEGER) {
 
@@ -837,11 +836,11 @@ void encode_gnu_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, 
                                             break;
                                         }
 
-                                        if (p20 == *NULL_POINTER) {
+                                        if (p20 == *NULL_POINTER_MEMORY_MODEL) {
 
                                             // A border is NOT given.
 
-                                            if (cc != *NULL_POINTER) {
+                                            if (cc != *NULL_POINTER_MEMORY_MODEL) {
 
                                                 // Calculate character index.
                                                 ci = x - *px;
@@ -857,7 +856,7 @@ void encode_gnu_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, 
 
                                             } else {
 
-                                                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode gnu/linux console rectangle. The character count is null.");
+                                                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode gnu/linux console rectangle. The character count is null.");
                                             }
 
                                         } else {
@@ -914,7 +913,7 @@ void encode_gnu_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, 
 
                                                 } else {
 
-                                                    if (cc != *NULL_POINTER) {
+                                                    if (cc != *NULL_POINTER_MEMORY_MODEL) {
 
                                                         // Calculate character index.
                                                         // CAUTION! Subtract one because of the border.
@@ -928,7 +927,7 @@ void encode_gnu_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, 
 
                                                     } else {
 
-                                                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode gnu/linux console rectangle. The character count is null.");
+                                                        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode gnu/linux console rectangle. The character count is null.");
                                                     }
 
                                                     // Encode character using escape codes.
@@ -941,7 +940,7 @@ void encode_gnu_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, 
                                         // as it is always calculated before getting a character.
 
                                         // Reset character.
-                                        c = SPACE_WIDE_CHARACTER_CODE;
+                                        c = SPACE_UNICODE_CHARACTER_CODE_MODEL;
 
                                         x++;
                                     }
@@ -960,32 +959,32 @@ void encode_gnu_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, 
 
                         } else {
 
-                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode user interface rectangle. The character count is null.");
+                            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode user interface rectangle. The character count is null.");
                         }
 
                     } else {
 
-                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode user interface rectangle. The character count is null.");
+                        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode user interface rectangle. The character count is null.");
                     }
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode user interface rectangle. The character count is null.");
+                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode user interface rectangle. The character count is null.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode user interface rectangle. The character count is null.");
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode user interface rectangle. The character count is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode user interface rectangle. The character count is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode user interface rectangle. The character count is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode user interface rectangle. The character count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode user interface rectangle. The character count is null.");
     }
 }
 
@@ -1008,7 +1007,7 @@ void encode_gnu_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, 
 void encode_gnu_linux_console_rectangle_coordinates_layout(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
     void* p6, void* p7, void* p8, void* p9, void* p10, void* p11) {
 
-    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Encode gnu/linux console rectangle coordinates layout.");
+    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Encode gnu/linux console rectangle coordinates layout.");
 
     int* cpx = (int*) p0;
     int* cpy = (int*) p1;
@@ -1044,7 +1043,7 @@ void encode_gnu_linux_console_rectangle_coordinates_layout(void* p0, void* p1, v
 void encode_gnu_linux_console_rectangle_compass_layout(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
     void* p6, void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13) {
 
-    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Encode gnu/linux console rectangle compass layout.");
+    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Encode gnu/linux console rectangle compass layout.");
 
     int* cpx = (int*) p0;
     int* cpy = (int*) p1;
@@ -1060,13 +1059,13 @@ void encode_gnu_linux_console_rectangle_compass_layout(void* p0, void* p1, void*
     int* fasz = (int*) p11;
 
     // The comparison result.
-    int r = *NUMBER_0_INTEGER;
+    int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-    if (r == *NUMBER_0_INTEGER) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p12, p13, (void*) UI_NORTH_CELL_MODEL, (void*) UI_NORTH_CELL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+        compare_arrays(p12, p13, (void*) UI_NORTH_CELL_MODEL, (void*) UI_NORTH_CELL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-        if (r != *NUMBER_0_INTEGER) {
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             // Set cell coordinates.
             *cpx = *fapx;
@@ -1081,11 +1080,11 @@ void encode_gnu_linux_console_rectangle_compass_layout(void* p0, void* p1, void*
         }
     }
 
-    if (r == *NUMBER_0_INTEGER) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p12, p13, (void*) UI_SOUTH_CELL_MODEL, (void*) UI_SOUTH_CELL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+        compare_arrays(p12, p13, (void*) UI_SOUTH_CELL_MODEL, (void*) UI_SOUTH_CELL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-        if (r != *NUMBER_0_INTEGER) {
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             // Set cell coordinates.
             *cpx = *fapx;
@@ -1099,11 +1098,11 @@ void encode_gnu_linux_console_rectangle_compass_layout(void* p0, void* p1, void*
         }
     }
 
-    if (r == *NUMBER_0_INTEGER) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p12, p13, (void*) UI_WEST_CELL_MODEL, (void*) UI_WEST_CELL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+        compare_arrays(p12, p13, (void*) UI_WEST_CELL_MODEL, (void*) UI_WEST_CELL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-        if (r != *NUMBER_0_INTEGER) {
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             // Set cell coordinates.
             *cpx = *fapx;
@@ -1118,11 +1117,11 @@ void encode_gnu_linux_console_rectangle_compass_layout(void* p0, void* p1, void*
         }
     }
 
-    if (r == *NUMBER_0_INTEGER) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p12, p13, (void*) UI_EAST_CELL_MODEL, (void*) UI_EAST_CELL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+        compare_arrays(p12, p13, (void*) UI_EAST_CELL_MODEL, (void*) UI_EAST_CELL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-        if (r != *NUMBER_0_INTEGER) {
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             // Set cell coordinates.
             *cpx = *fapx + (*fasx - *csx);
@@ -1136,11 +1135,11 @@ void encode_gnu_linux_console_rectangle_compass_layout(void* p0, void* p1, void*
         }
     }
 
-    if (r == *NUMBER_0_INTEGER) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p12, p13, (void*) UI_CENTRE_CELL_MODEL, (void*) UI_CENTRE_CELL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+        compare_arrays(p12, p13, (void*) UI_CENTRE_CELL_MODEL, (void*) UI_CENTRE_CELL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-        if (r != *NUMBER_0_INTEGER) {
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             // Set cell coordinates.
             *cpx = *fapx;
@@ -1188,27 +1187,27 @@ void encode_gnu_linux_console_rectangle_layout(void* p0, void* p1, void* p2, voi
     void* p12, void* p13, void* p14, void* p15, void* p16, void* p17,
     void* p18, void* p19, void* p20, void* p21) {
 
-    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Encode gnu/linux console rectangle layout.");
+    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Encode gnu/linux console rectangle layout.");
 
     // The comparison result.
-    int r = *NUMBER_0_INTEGER;
+    int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-    if (r == *NUMBER_0_INTEGER) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p20, p21, (void*) UI_COORDINATES_LAYOUT_MODEL, (void*) UI_COORDINATES_LAYOUT_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+        compare_arrays(p20, p21, (void*) UI_COORDINATES_LAYOUT_MODEL, (void*) UI_COORDINATES_LAYOUT_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-        if (r != *NUMBER_0_INTEGER) {
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             // Determine new position and size coordinates for part.
             encode_gnu_linux_console_rectangle_coordinates_layout(p0, p1, p2, p3, p4, p5, p12, p13, p14, p15, p16, p17);
         }
     }
 
-    if (r == *NUMBER_0_INTEGER) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p20, p21, (void*) UI_COMPASS_LAYOUT_MODEL, (void*) UI_COMPASS_LAYOUT_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+        compare_arrays(p20, p21, (void*) UI_COMPASS_LAYOUT_MODEL, (void*) UI_COMPASS_LAYOUT_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-        if (r != *NUMBER_0_INTEGER) {
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             // Determine new position and size coordinates for part.
             encode_gnu_linux_console_rectangle_compass_layout(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p18, p19);
@@ -1256,40 +1255,40 @@ void encode_gnu_linux_console_coordinates(void* p0, void* p1, void* p2, void* p3
     void* p14, void* p15, void* p16, void* p17, void* p18, void* p19, void* p20, void* p21,
     void* p22, void* p23, void* p24, void* p25, void* p26, void* p27) {
 
-    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Encode gnu/linux console coordinates.");
+    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Encode gnu/linux console coordinates.");
 
     // The source part position x, y, z.
-    int* px = (int*) *NULL_POINTER;
-    int* py = (int*) *NULL_POINTER;
-    int* pz = (int*) *NULL_POINTER;
+    int* px = (int*) *NULL_POINTER_MEMORY_MODEL;
+    int* py = (int*) *NULL_POINTER_MEMORY_MODEL;
+    int* pz = (int*) *NULL_POINTER_MEMORY_MODEL;
     // The source part size x, y, z.
-    int* sx = (int*) *NULL_POINTER;
-    int* sy = (int*) *NULL_POINTER;
-    int* sz = (int*) *NULL_POINTER;
+    int* sx = (int*) *NULL_POINTER_MEMORY_MODEL;
+    int* sy = (int*) *NULL_POINTER_MEMORY_MODEL;
+    int* sz = (int*) *NULL_POINTER_MEMORY_MODEL;
     // The current position x, y, z.
-    int cpx = *NUMBER_0_INTEGER;
-    int cpy = *NUMBER_0_INTEGER;
-    int cpz = *NUMBER_0_INTEGER;
+    int cpx = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    int cpy = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    int cpz = *NUMBER_0_INTEGER_MEMORY_MODEL;
     // The current size x, y, z.
-    int csx = *NUMBER_0_INTEGER;
-    int csy = *NUMBER_0_INTEGER;
-    int csz = *NUMBER_0_INTEGER;
+    int csx = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    int csy = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    int csz = *NUMBER_0_INTEGER_MEMORY_MODEL;
     // The source whole position coordinates.
-    int* wpmx = (int*) *NULL_POINTER;
-    int* wpmy = (int*) *NULL_POINTER;
-    int* wpmz = (int*) *NULL_POINTER;
+    int* wpmx = (int*) *NULL_POINTER_MEMORY_MODEL;
+    int* wpmy = (int*) *NULL_POINTER_MEMORY_MODEL;
+    int* wpmz = (int*) *NULL_POINTER_MEMORY_MODEL;
     // The source whole size coordinates.
-    int* wsmx = (int*) *NULL_POINTER;
-    int* wsmy = (int*) *NULL_POINTER;
-    int* wsmz = (int*) *NULL_POINTER;
+    int* wsmx = (int*) *NULL_POINTER_MEMORY_MODEL;
+    int* wsmy = (int*) *NULL_POINTER_MEMORY_MODEL;
+    int* wsmz = (int*) *NULL_POINTER_MEMORY_MODEL;
     // The original area position coordinates, set to the zero origo.
-    int oapx = *NUMBER_0_INTEGER;
-    int oapy = *NUMBER_0_INTEGER;
-    int oapz = *NUMBER_0_INTEGER;
+    int oapx = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    int oapy = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    int oapz = *NUMBER_0_INTEGER_MEMORY_MODEL;
     // The original area size coordinates, initialised with whole coordinates.
-    int oasx = *NUMBER_0_INTEGER;
-    int oasy = *NUMBER_0_INTEGER;
-    int oasz = *NUMBER_0_INTEGER;
+    int oasx = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    int oasy = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    int oasz = *NUMBER_0_INTEGER_MEMORY_MODEL;
     // The free area position coordinates, initialised with original area position coordinates.
     int fapx = oapx;
     int fapy = oapy;
@@ -1317,7 +1316,7 @@ void encode_gnu_linux_console_coordinates(void* p0, void* p1, void* p2, void* p3
     csy = *sy;
     csz = *sz;
 
-    if (p20 != *NULL_POINTER) {
+    if (p20 != *NULL_POINTER_MEMORY_MODEL) {
 
         // Determine source whole position coordinates.
         get_element(p18, (void*) UI_POSITION_X_INDEX, (void*) &wpmx, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
@@ -1403,34 +1402,34 @@ void encode_gnu_linux_console_shape(void* p0, void* p1, void* p2, void* p3, void
     void* p17, void* p18, void* p19, void* p20, void* p21, void* p22, void* p23, void* p24, void* p25, void* p26,
     void* p27, void* p28, void* p29, void* p30, void* p31, void* p32, void* p33, void* p34, void* p35, void* p36) {
 
-    if (p4 != *NULL_POINTER) {
+    if (p4 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* sc = (int*) p4;
 
-        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Encode gnu/linux console shape.");
+        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Encode gnu/linux console shape.");
 
         // The character.
-        void* c = *NULL_POINTER;
-        int cc = *NUMBER_0_INTEGER;
-        size_t cs = *NUMBER_0_INTEGER;
+        void* c = *NULL_POINTER_MEMORY_MODEL;
+        int cc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+        size_t cs = *NUMBER_0_INTEGER_MEMORY_MODEL;
         // The hidden property.
-        int h = *NUMBER_0_INTEGER;
+        int h = *NUMBER_0_INTEGER_MEMORY_MODEL;
         // The inverse property.
-        int i = *NUMBER_0_INTEGER;
+        int i = *NUMBER_0_INTEGER_MEMORY_MODEL;
         // The blink property.
-        int bl = *NUMBER_0_INTEGER;
+        int bl = *NUMBER_0_INTEGER_MEMORY_MODEL;
         // The underline property.
-        int u = *NUMBER_0_INTEGER;
+        int u = *NUMBER_0_INTEGER_MEMORY_MODEL;
         // The bold property.
-        int b = *NUMBER_0_INTEGER;
+        int b = *NUMBER_0_INTEGER_MEMORY_MODEL;
         // The background colour.
-        void* bg = *NULL_POINTER;
-        int bgc = *NUMBER_0_INTEGER;
-        int bgs = *NUMBER_0_INTEGER;
+        void* bg = *NULL_POINTER_MEMORY_MODEL;
+        int bgc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+        int bgs = *NUMBER_0_INTEGER_MEMORY_MODEL;
         // The foreground colour.
-        void* fg = *NULL_POINTER;
-        int fgc = *NUMBER_0_INTEGER;
-        int fgs = *NUMBER_0_INTEGER;
+        void* fg = *NULL_POINTER_MEMORY_MODEL;
+        int fgc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+        int fgs = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
         //?? TODO: These values should later be given as boolean "true" or "false".
         //?? Currently, they have to be given as "0" or "1" in CYBOL.
@@ -1447,13 +1446,13 @@ void encode_gnu_linux_console_shape(void* p0, void* p1, void* p2, void* p3, void
             *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, (void*) TERMINAL_FOREGROUND_ABSTRACTION, (void*) TERMINAL_FOREGROUND_ABSTRACTION_COUNT);
 
         // The comparison result.
-        int r = *NUMBER_0_INTEGER;
+        int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-        if (r == *NUMBER_0_INTEGER) {
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_arrays(p5, p6, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+            compare_arrays(p5, p6, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-            if (r != *NUMBER_0_INTEGER) {
+            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 // Set character parameter to be handed over.
                 c = p3;
@@ -1461,14 +1460,14 @@ void encode_gnu_linux_console_shape(void* p0, void* p1, void* p2, void* p3, void
             }
         }
 
-        if (r == *NUMBER_0_INTEGER) {
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_arrays(p5, p6, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+            compare_arrays(p5, p6, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-            if (r != *NUMBER_0_INTEGER) {
+            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 // The temporary character array.
-                void* tmp = *NULL_POINTER;
+                void* tmp = *NULL_POINTER_MEMORY_MODEL;
                 int tmps = *sc + *NUMBER_1_INTEGER;
 
                 // Allocate temporary character array.
@@ -1476,8 +1475,8 @@ void encode_gnu_linux_console_shape(void* p0, void* p1, void* p2, void* p3, void
 
                 // Set temporary character array by first copying the
                 // given array and then adding the null termination character.
-                set_array_elements(tmp, (void*) NUMBER_0_INTEGER, p3, p4, (void*) WIDE_CHARACTER_ARRAY);
-                set_array_elements(tmp, p4, (void*) NULL_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+                set_array_elements(tmp, (void*) NUMBER_0_INTEGER, p3, p4, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                set_array_elements(tmp, p4, (void*) NULL_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                 // Initialise temporary wide character string size.
                 // CAUTION! One extra place is added for the null termination character.
@@ -1506,13 +1505,13 @@ void encode_gnu_linux_console_shape(void* p0, void* p1, void* p2, void* p3, void
         // handed over remains a null pointer.
 
         // Reset comparison result.
-        r = *NUMBER_0_INTEGER;
+        r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-        if (r == *NUMBER_0_INTEGER) {
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_arrays(p35, p36, (void*) UI_RECTANGLE_SHAPE_MODEL, (void*) UI_RECTANGLE_SHAPE_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+            compare_arrays(p35, p36, (void*) UI_RECTANGLE_SHAPE_MODEL, (void*) UI_RECTANGLE_SHAPE_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-            if (r != *NUMBER_0_INTEGER) {
+            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 encode_gnu_linux_console_coordinates(p0, p1, p2, c, (void*) &cc,
                     &h, &i, &bl, &u, &b,
@@ -1521,11 +1520,11 @@ void encode_gnu_linux_console_shape(void* p0, void* p1, void* p2, void* p3, void
             }
         }
 
-        if (r == *NUMBER_0_INTEGER) {
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_arrays(p35, p36, (void*) UI_CIRCLE_SHAPE_MODEL, (void*) UI_CIRCLE_SHAPE_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+            compare_arrays(p35, p36, (void*) UI_CIRCLE_SHAPE_MODEL, (void*) UI_CIRCLE_SHAPE_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-            if (r != *NUMBER_0_INTEGER) {
+            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
     /*??
                 encode_gnu_linux_console_coordinates(p0, p1, p2, c, cc, &h, &i, &bl, &u, &b,
@@ -1535,11 +1534,11 @@ void encode_gnu_linux_console_shape(void* p0, void* p1, void* p2, void* p3, void
             }
         }
 
-        if (r == *NUMBER_0_INTEGER) {
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_arrays(p35, p36, (void*) UI_POLYGON_SHAPE_MODEL, (void*) UI_POLYGON_SHAPE_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+            compare_arrays(p35, p36, (void*) UI_POLYGON_SHAPE_MODEL, (void*) UI_POLYGON_SHAPE_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-            if (r != *NUMBER_0_INTEGER) {
+            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
     /*??
                 encode_gnu_linux_console_coordinates(p0, p1, p2, c, cc, &h, &i, &bl, &u, &b,
@@ -1550,13 +1549,13 @@ void encode_gnu_linux_console_shape(void* p0, void* p1, void* p2, void* p3, void
         }
 
         // Reset comparison result.
-        r = *NUMBER_0_INTEGER;
+        r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-        if (r == *NUMBER_0_INTEGER) {
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_arrays(p5, p6, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+            compare_arrays(p5, p6, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-            if (r != *NUMBER_0_INTEGER) {
+            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 // Deallocate temporary wide character string.
                 deallocate((void*) &c, (void*) &cs, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
@@ -1565,7 +1564,7 @@ void encode_gnu_linux_console_shape(void* p0, void* p1, void* p2, void* p3, void
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode gnu/linux console shape. The character count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode gnu/linux console shape. The character count is null.");
     }
 }
 
@@ -1591,7 +1590,7 @@ void encode_gnu_linux_console_shape(void* p0, void* p1, void* p2, void* p3, void
 void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
     void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Encode gnu/linux console.");
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Encode gnu/linux console.");
 
     // The source part name, abstraction, model, details.
     void** n = NULL_POINTER;
@@ -1816,31 +1815,31 @@ void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, 
     void** wsds = NULL_POINTER;
 
     // The element name.
-    void* en = *NULL_POINTER;
-    int enc = *NUMBER_0_INTEGER;
+    void* en = *NULL_POINTER_MEMORY_MODEL;
+    int enc = *NUMBER_0_INTEGER_MEMORY_MODEL;
     // The remaining name.
-    void* rn = *NULL_POINTER;
-    int rnc = *NUMBER_0_INTEGER;
+    void* rn = *NULL_POINTER_MEMORY_MODEL;
+    int rnc = *NUMBER_0_INTEGER_MEMORY_MODEL;
     // The meta hierarchy flag with the following meanings:
     // -1: not a compound knowledge hierarchy
     // 0: part hierarchy
     // 1: meta hierarchy
     int f = *NUMBER_MINUS_1_INTEGER;
     // The loop count.
-    int j = *NUMBER_0_INTEGER;
+    int j = *NUMBER_0_INTEGER_MEMORY_MODEL;
     // The name comparison result.
-    int nr = *NUMBER_0_INTEGER;
+    int nr = *NUMBER_0_INTEGER_MEMORY_MODEL;
     // The abstraction comparison result.
-    int ar = *NUMBER_0_INTEGER;
+    int ar = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // Get compound element (area to be repainted) name and remaining name,
     // as well as the flag indicating a part- or meta element.
     get_compound_element_name_and_remaining_name(p11, p12, (void*) &en, (void*) &enc, (void*) &rn, (void*) &rnc, (void*) &f);
 
-    if ((p11 == *NULL_POINTER) || (*((int*) p12) == *NUMBER_0_INTEGER) || (f == *NUMBER_0_INTEGER)) {
+    if ((p11 == *NULL_POINTER_MEMORY_MODEL) || (*((int*) p12) == *NUMBER_0_INTEGER_MEMORY_MODEL) || (f == *NUMBER_0_INTEGER_MEMORY_MODEL)) {
 
         // Either, no hierarchical element name (repaint area) was given
-        // (p11 == *NULL_POINTER), in which case not just a small area
+        // (p11 == *NULL_POINTER_MEMORY_MODEL), in which case not just a small area
         // but the whole textual user interface (tui) window is repainted,
         // (CAUTION! (*((int*) p12) == 0) is also necessary!)
         // OR:
@@ -1970,7 +1969,7 @@ void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, 
         // property value of the super part is used.
         //
 
-        if (*shm == *NULL_POINTER) {
+        if (*shm == *NULL_POINTER_MEMORY_MODEL) {
 
             // Get part shape from super part.
             get_universal_compound_element_by_name(*superm, *supermc,
@@ -1982,7 +1981,7 @@ void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, 
                 p13, p14);
         }
 
-        if (*lm == *NULL_POINTER) {
+        if (*lm == *NULL_POINTER_MEMORY_MODEL) {
 
             // Get source part layout from details.
             get_universal_compound_element_by_name(*superm, *supermc,
@@ -1994,7 +1993,7 @@ void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, 
                 p13, p14);
         }
 
-        if (*cm == *NULL_POINTER) {
+        if (*cm == *NULL_POINTER_MEMORY_MODEL) {
 
             // Get source part cell from details.
             get_universal_compound_element_by_name(*superm, *supermc,
@@ -2006,7 +2005,7 @@ void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, 
                 p13, p14);
         }
 
-        if (*pm == *NULL_POINTER) {
+        if (*pm == *NULL_POINTER_MEMORY_MODEL) {
 
             // Get part position from super part.
             get_universal_compound_element_by_name(*superm, *supermc,
@@ -2018,7 +2017,7 @@ void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, 
                 p13, p14);
         }
 
-        if (*sm == *NULL_POINTER) {
+        if (*sm == *NULL_POINTER_MEMORY_MODEL) {
 
             // Get part size from super part.
             get_universal_compound_element_by_name(*superm, *supermc,
@@ -2030,7 +2029,7 @@ void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, 
                 p13, p14);
         }
 
-        if (*bgm == *NULL_POINTER) {
+        if (*bgm == *NULL_POINTER_MEMORY_MODEL) {
 
             // Get part background colour from super part.
             get_universal_compound_element_by_name(*superm, *supermc,
@@ -2042,7 +2041,7 @@ void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, 
                 p13, p14);
         }
 
-        if (*fgm == *NULL_POINTER) {
+        if (*fgm == *NULL_POINTER_MEMORY_MODEL) {
 
             // Get part foreground colour from super part.
             get_universal_compound_element_by_name(*superm, *supermc,
@@ -2054,7 +2053,7 @@ void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, 
                 p13, p14);
         }
 
-        if (*bom == *NULL_POINTER) {
+        if (*bom == *NULL_POINTER_MEMORY_MODEL) {
 
             // Get part border from super part.
             get_universal_compound_element_by_name(*superm, *supermc,
@@ -2066,7 +2065,7 @@ void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, 
                 p13, p14);
         }
 
-        if (*hm == *NULL_POINTER) {
+        if (*hm == *NULL_POINTER_MEMORY_MODEL) {
 
             // Get part hidden property from super part.
             get_universal_compound_element_by_name(*superm, *supermc,
@@ -2078,7 +2077,7 @@ void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, 
                 p13, p14);
         }
 
-        if (*im == *NULL_POINTER) {
+        if (*im == *NULL_POINTER_MEMORY_MODEL) {
 
             // Get part inverse property from super part.
             get_universal_compound_element_by_name(*superm, *supermc,
@@ -2090,7 +2089,7 @@ void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, 
                 p13, p14);
         }
 
-        if (*blm == *NULL_POINTER) {
+        if (*blm == *NULL_POINTER_MEMORY_MODEL) {
 
             // Get part blink property from super part.
             get_universal_compound_element_by_name(*superm, *supermc,
@@ -2102,7 +2101,7 @@ void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, 
                 p13, p14);
         }
 
-        if (*um == *NULL_POINTER) {
+        if (*um == *NULL_POINTER_MEMORY_MODEL) {
 
             // Get part underline property from super part.
             get_universal_compound_element_by_name(*superm, *supermc,
@@ -2114,7 +2113,7 @@ void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, 
                 p13, p14);
         }
 
-        if (*bm == *NULL_POINTER) {
+        if (*bm == *NULL_POINTER_MEMORY_MODEL) {
 
             // Get part bold property from super part.
             get_universal_compound_element_by_name(*superm, *supermc,
@@ -2144,11 +2143,11 @@ void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, 
             (void*) &wsd, (void*) &wsdc, (void*) &wsds,
             p13, p14);
 
-        if ((p11 == *NULL_POINTER) || (*((int*) p12) == *NUMBER_0_INTEGER) || (rn == *NULL_POINTER)) {
-//??        if ((p11 == *NULL_POINTER) || (*((int*) p12) == *NUMBER_0_INTEGER)) {
+        if ((p11 == *NULL_POINTER_MEMORY_MODEL) || (*((int*) p12) == *NUMBER_0_INTEGER_MEMORY_MODEL) || (rn == *NULL_POINTER_MEMORY_MODEL)) {
+//??        if ((p11 == *NULL_POINTER_MEMORY_MODEL) || (*((int*) p12) == *NUMBER_0_INTEGER_MEMORY_MODEL)) {
 
             // Either, no hierarchical element name (repaint area) was given
-            // (p11 == *NULL_POINTER), in which case not just a small area
+            // (p11 == *NULL_POINTER_MEMORY_MODEL), in which case not just a small area
             // but the whole textual user interface (tui) window is repainted,
             // (CAUTION! (*((int*) p12) == 0) is also necessary!)
             // OR:
@@ -2166,13 +2165,13 @@ void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, 
                 *cm, *cmc, *lm, *lmc, *shm, *shmc);
         }
 
-        compare_arrays(p3, p4, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT, (void*) &ar, (void*) WIDE_CHARACTER_ARRAY);
+        compare_arrays(p3, p4, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT, (void*) &ar, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-        if (ar != *NUMBER_0_INTEGER) {
+        if (ar != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             // The part model is a compound.
 
-            if (p6 != *NULL_POINTER) {
+            if (p6 != *NULL_POINTER_MEMORY_MODEL) {
 
                 int* sc = (int*) p6;
 
@@ -2192,12 +2191,12 @@ void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, 
                         (void*) &d, (void*) &dc, (void*) &ds);
 
                     // Compare expected name with that of the current compound part element.
-                    compare_arrays(*n, *nc, en, (void*) &enc, (void*) &nr, (void*) WIDE_CHARACTER_ARRAY);
+                    compare_arrays(*n, *nc, en, (void*) &enc, (void*) &nr, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                    if ((p11 == *NULL_POINTER) || (*((int*) p12) == *NUMBER_0_INTEGER) || (nr != *NUMBER_0_INTEGER)) {
+                    if ((p11 == *NULL_POINTER_MEMORY_MODEL) || (*((int*) p12) == *NUMBER_0_INTEGER_MEMORY_MODEL) || (nr != *NUMBER_0_INTEGER_MEMORY_MODEL)) {
 
                         // Either, no hierarchical element name (repaint area) was given
-                        // (p11 == *NULL_POINTER), in which case not just a small area
+                        // (p11 == *NULL_POINTER_MEMORY_MODEL), in which case not just a small area
                         // but the whole textual user interface (tui) window is repainted,
                         // (CAUTION! (*((int*) p12) == 0) is also necessary!)
                         // OR:
@@ -2224,7 +2223,7 @@ void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, 
                     ds = NULL_POINTER;
 
                     // Reset name comparison result.
-                    nr = *NUMBER_0_INTEGER;
+                    nr = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                     // Increment loop count.
                     j++;
@@ -2232,13 +2231,13 @@ void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, 
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode compound model into gnu/linux console control sequences. The source count parameter is null.");
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode compound model into gnu/linux console control sequences. The source count parameter is null.");
             }
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode compound model into gnu/linux console control sequences. The hierarchical compound element name contains a meta element, while only part elements are permitted.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode compound model into gnu/linux console control sequences. The hierarchical compound element name contains a meta element, while only part elements are permitted.");
     }
 }
 

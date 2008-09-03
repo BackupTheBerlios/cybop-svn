@@ -1,26 +1,25 @@
 /*
- * $RCSfile: terminal_background_converter.c,v $
+ * Copyright (C) 1999-2008. Christian Heller.
  *
- * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
+ * This file is part of the Cybernetics Oriented Interpreter (CYBOI).
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
+ * CYBOI is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
+ * CYBOI is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * along with CYBOI.  If not, see <http://www.gnu.org/licenses/>.
  *
- * http://www.cybop.net
- * - Cybernetics Oriented Programming -
+ * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
+ * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $Revision: 1.4 $ $Date: 2008-05-27 22:52:00 $ $Author: christian $
+ * @version $RCSfile: terminal_background_converter.c,v $ $Revision: 1.5 $ $Date: 2008-09-03 22:04:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -31,10 +30,10 @@
 #include "../../globals/constants/cybol/cybol_abstraction_constants.c"
 #include "../../globals/constants/cybol/cybol_model_constants.c"
 #include "../../globals/constants/integer/integer_constants.c"
-#include "../../globals/constants/log/log_message_constants.c"
+#include "../../constant/model/log/message_log_model.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
-#include "../../globals/constants/pointer/pointer_constants.c"
-#include "../../globals/logger/logger.c"
+#include "../../constant/model/memory/pointer_memory_model.c"
+#include "../../logger/logger.c"
 #include "../../memoriser/accessor.c"
 #include "../../memoriser/array.c"
 
@@ -61,99 +60,99 @@ void decode_terminal_background(void* p0, void* p1, void* p2, void* p3, void* p4
  */
 void encode_terminal_background(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p1 != *NULL_POINTER) {
+    if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* dc = (int*) p1;
 
-        if (p0 != *NULL_POINTER) {
+        if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
             void** d = (void**) p0;
 
             // The comparison result.
-            int r = *NUMBER_0_INTEGER;
+            int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-            if (r == *NUMBER_0_INTEGER) {
+            if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_arrays(p3, p4, TERMINAL_COLOUR_BLACK_MODEL, TERMINAL_COLOUR_BLACK_MODEL_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY);
+                compare_arrays(p3, p4, TERMINAL_COLOUR_BLACK_MODEL, TERMINAL_COLOUR_BLACK_MODEL_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                if (r != *NUMBER_0_INTEGER) {
+                if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                     *d = BLACK_BACKGROUND_CONTROL_SEQUENCE;
                     *dc = *BLACK_BACKGROUND_CONTROL_SEQUENCE_COUNT;
                 }
             }
 
-            if (r == *NUMBER_0_INTEGER) {
+            if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_arrays(p3, p4, TERMINAL_COLOUR_RED_MODEL, TERMINAL_COLOUR_RED_MODEL_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY);
+                compare_arrays(p3, p4, TERMINAL_COLOUR_RED_MODEL, TERMINAL_COLOUR_RED_MODEL_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                if (r != *NUMBER_0_INTEGER) {
+                if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                     *d = RED_BACKGROUND_CONTROL_SEQUENCE;
                     *dc = *RED_BACKGROUND_CONTROL_SEQUENCE_COUNT;
                 }
             }
 
-            if (r == *NUMBER_0_INTEGER) {
+            if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_arrays(p3, p4, TERMINAL_COLOUR_GREEN_MODEL, TERMINAL_COLOUR_GREEN_MODEL_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY);
+                compare_arrays(p3, p4, TERMINAL_COLOUR_GREEN_MODEL, TERMINAL_COLOUR_GREEN_MODEL_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                if (r != *NUMBER_0_INTEGER) {
+                if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                     *d = GREEN_BACKGROUND_CONTROL_SEQUENCE;
                     *dc = *GREEN_BACKGROUND_CONTROL_SEQUENCE_COUNT;
                 }
             }
 
-            if (r == *NUMBER_0_INTEGER) {
+            if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_arrays(p3, p4, TERMINAL_COLOUR_YELLOW_MODEL, TERMINAL_COLOUR_YELLOW_MODEL_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY);
+                compare_arrays(p3, p4, TERMINAL_COLOUR_YELLOW_MODEL, TERMINAL_COLOUR_YELLOW_MODEL_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                if (r != *NUMBER_0_INTEGER) {
+                if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                     *d = YELLOW_BACKGROUND_CONTROL_SEQUENCE;
                     *dc = *YELLOW_BACKGROUND_CONTROL_SEQUENCE_COUNT;
                 }
             }
 
-            if (r == *NUMBER_0_INTEGER) {
+            if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_arrays(p3, p4, TERMINAL_COLOUR_BLUE_MODEL, TERMINAL_COLOUR_BLUE_MODEL_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY);
+                compare_arrays(p3, p4, TERMINAL_COLOUR_BLUE_MODEL, TERMINAL_COLOUR_BLUE_MODEL_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                if (r != *NUMBER_0_INTEGER) {
+                if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                     *d = BLUE_BACKGROUND_CONTROL_SEQUENCE;
                     *dc = *BLUE_BACKGROUND_CONTROL_SEQUENCE_COUNT;
                 }
             }
 
-            if (r == *NUMBER_0_INTEGER) {
+            if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_arrays(p3, p4, TERMINAL_COLOUR_MAGENTA_MODEL, TERMINAL_COLOUR_MAGENTA_MODEL_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY);
+                compare_arrays(p3, p4, TERMINAL_COLOUR_MAGENTA_MODEL, TERMINAL_COLOUR_MAGENTA_MODEL_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                if (r != *NUMBER_0_INTEGER) {
+                if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                     *d = MAGENTA_BACKGROUND_CONTROL_SEQUENCE;
                     *dc = *MAGENTA_BACKGROUND_CONTROL_SEQUENCE_COUNT;
                 }
             }
 
-            if (r == *NUMBER_0_INTEGER) {
+            if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_arrays(p3, p4, TERMINAL_COLOUR_COBALT_MODEL, TERMINAL_COLOUR_COBALT_MODEL_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY);
+                compare_arrays(p3, p4, TERMINAL_COLOUR_COBALT_MODEL, TERMINAL_COLOUR_COBALT_MODEL_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                if (r != *NUMBER_0_INTEGER) {
+                if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                     *d = COBALT_BACKGROUND_CONTROL_SEQUENCE;
                     *dc = *COBALT_BACKGROUND_CONTROL_SEQUENCE_COUNT;
                 }
             }
 
-            if (r == *NUMBER_0_INTEGER) {
+            if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_arrays(p3, p4, TERMINAL_COLOUR_WHITE_MODEL, TERMINAL_COLOUR_WHITE_MODEL_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY);
+                compare_arrays(p3, p4, TERMINAL_COLOUR_WHITE_MODEL, TERMINAL_COLOUR_WHITE_MODEL_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                if (r != *NUMBER_0_INTEGER) {
+                if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                     *d = WHITE_BACKGROUND_CONTROL_SEQUENCE;
                     *dc = *WHITE_BACKGROUND_CONTROL_SEQUENCE_COUNT;
@@ -162,12 +161,12 @@ void encode_terminal_background(void* p0, void* p1, void* p2, void* p3, void* p4
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode terminal background. The destination is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode terminal background. The destination is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode terminal background. The destination count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode terminal background. The destination count is null.");
     }
 }
 

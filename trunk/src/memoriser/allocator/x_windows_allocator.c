@@ -1,44 +1,33 @@
 /*
- * $RCSfile: x_windows_allocator.c,v $
+ * Copyright (C) 1999-2008. Christian Heller.
  *
- * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
+ * This file is part of the Cybernetics Oriented Interpreter (CYBOI).
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
+ * CYBOI is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
+ * CYBOI is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * along with CYBOI.  If not, see <http://www.gnu.org/licenses/>.
  *
- * http://www.cybop.net
- * - Cybernetics Oriented Programming -
+ * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
+ * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $Revision: 1.9 $ $Date: 2008-05-04 00:18:13 $ $Author: christian $
+ * @version $RCSfile: x_windows_allocator.c,v $ $Revision: 1.10 $ $Date: 2008-09-03 22:04:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
- * @description
- *
- * A session (display) manager shows a graphical user login,
- * in which it offers a list of window managers to chose from.
- *
- * A window manager cares about all windows displayed on a screen.
- * This includes the resizing, moving, stacking or tiling of windows.
- *
- * CYBOI aims to become both at the same time,
- * a session- (display-) as well as a window manager.
  */
 
 #ifndef X_WINDOW_SYSTEM_ALLOCATOR_SOURCE
 #define X_WINDOW_SYSTEM_ALLOCATOR_SOURCE
 
 #include "../../globals/constants/cybol/cybol_abstraction_constants.c"
-#include "../../globals/constants/memory_structure/array_constants.c"
+#include "../../constant/abstraction/memory/array_memory_abstraction.c"
 
 /**
  * Allocates an x window system window.

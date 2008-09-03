@@ -1,26 +1,25 @@
 /*
- * $RCSfile: double_vector_converter.c,v $
+ * Copyright (C) 1999-2008. Christian Heller.
  *
- * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
+ * This file is part of the Cybernetics Oriented Interpreter (CYBOI).
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
+ * CYBOI is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
+ * CYBOI is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * along with CYBOI.  If not, see <http://www.gnu.org/licenses/>.
  *
- * http://www.cybop.net
- * - Cybernetics Oriented Programming -
+ * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
+ * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $Revision: 1.19 $ $Date: 2008-07-08 17:55:36 $ $Author: christian $
+ * @version $RCSfile: double_vector_converter.c,v $ $Revision: 1.20 $ $Date: 2008-09-03 22:04:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,10 +29,10 @@
 #include <string.h>
 #include "../../globals/constants/character/code/character_code_constants.c"
 #include "../../globals/constants/integer/integer_constants.c"
-#include "../../globals/constants/log/log_message_constants.c"
+#include "../../constant/model/log/message_log_model.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
-#include "../../globals/constants/pointer/pointer_constants.c"
-#include "../../globals/logger/logger.c"
+#include "../../constant/model/memory/pointer_memory_model.c"
+#include "../../logger/logger.c"
 #include "../../memoriser/array.c"
 
 /**
@@ -47,41 +46,41 @@
  */
 void decode_double(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p4 != *NULL_POINTER) {
+    if (p4 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* sc = (int*) p4;
 
-        if (p0 != *NULL_POINTER ) {
+        if (p0 != *NULL_POINTER_MEMORY_MODEL ) {
 
             void** d = (void**) p0;
 
-            log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Decode double.");
+            log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Decode double.");
 
             // The temporary null-terminated string.
-            wchar_t* tmp = (wchar_t*) *NULL_POINTER;
+            wchar_t* tmp = (wchar_t*) *NULL_POINTER_MEMORY_MODEL;
             int tmps = *sc + *NUMBER_1_INTEGER;
 
             // Create temporary null-terminated string.
-            allocate_array((void*) &tmp, (void*) &tmps, (void*) WIDE_CHARACTER_ARRAY);
+            allocate_array((void*) &tmp, (void*) &tmps, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
             // The index.
-            int i = *NUMBER_0_INTEGER;
+            int i = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
             // Copy original string to temporary null-terminated string.
-            set_array_elements((void*) tmp, (void*) &i, p3, p4, (void*) WIDE_CHARACTER_ARRAY);
+            set_array_elements((void*) tmp, (void*) &i, p3, p4, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
             // This is used as index to set the termination character.
             i = *sc;
 
             // Add string termination to temporary null-terminated string.
-            set_array_elements((void*) tmp, (void*) &i, (void*) NULL_CONTROL_WIDE_CHARACTER_CODE, (void*) NUMBER_1_INTEGER, (void*) WIDE_CHARACTER_ARRAY);
+            set_array_elements((void*) tmp, (void*) &i, (void*) NULL_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) NUMBER_1_INTEGER, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
             // The tail variable is useless here and only needed for the string
             // transformation function. If the whole string array consists of
             // many sub strings, separated by space characters, then each sub
             // string gets interpreted as integer number.
             // The tail variable in this case points to the remaining sub string.
-            wchar_t* tail = (wchar_t*) *NULL_POINTER;
+            wchar_t* tail = (wchar_t*) *NULL_POINTER_MEMORY_MODEL;
 
             // Transform string to double value.
             // The strtod function recognizes four special input strings.
@@ -104,16 +103,16 @@ void decode_double(void* p0, void* p1, void* p2, void* p3, void* p4) {
             set_array_elements(*d, (void*) PRIMITIVE_VALUE_INDEX, (void*) &v, (void*) NUMBER_1_INTEGER, (void*) DOUBLE_ARRAY);
 
             // Destroy temporary null-terminated string.
-            deallocate_array((void*) &tmp, (void*) &tmps, (void*) WIDE_CHARACTER_ARRAY);
+            deallocate_array((void*) &tmp, (void*) &tmps, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode double. The destination is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode double. The destination is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode double. The source count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode double. The source count is null.");
     }
 }
 
@@ -128,22 +127,22 @@ void decode_double(void* p0, void* p1, void* p2, void* p3, void* p4) {
  */
 void encode_double(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p2 != *NULL_POINTER) {
+    if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
         size_t* ds = (size_t*) p2;
 
-        if (p1 != *NULL_POINTER) {
+        if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
             int* dc = (int*) p1;
 
-            if (p0 != *NULL_POINTER) {
+            if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
                 wchar_t** d = (wchar_t**) p0;
 
-                log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Encode double into wide character.");
+                log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Encode double into wide character.");
 
                 // The double value.
-                double* v = (double*) *NULL_POINTER;
+                double* v = (double*) *NULL_POINTER_MEMORY_MODEL;
 
                 // Get double value.
                 get_array_elements(p3, (void*) PRIMITIVE_VALUE_INDEX, (void*) &v, (void*) DOUBLE_ARRAY);
@@ -154,7 +153,7 @@ void encode_double(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 while (*NUMBER_1_INTEGER) {
 
-                    if (*dc >= *NUMBER_0_INTEGER) {
+                    if (*dc >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         break;
                     }
@@ -162,7 +161,7 @@ void encode_double(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     // Initialise destination string count to zero.
                     // CAUTION! This is essential because otherwise,
                     // the array reallocation calculates wrong values.
-                    *dc = *NUMBER_0_INTEGER;
+                    *dc = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                     // Set destination string size one greater than the count
                     // to have space for the terminating null character and
@@ -170,7 +169,7 @@ void encode_double(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     *ds = (*dc * *WIDE_CHARACTER_VECTOR_REALLOCATION_FACTOR) + *NUMBER_1_INTEGER;
 
                     // Reallocate destination string.
-                    reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_ARRAY);
+                    reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                     // Transform source double to destination string.
                     // A null wide character is written to mark the end of the string.
@@ -189,17 +188,17 @@ void encode_double(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode double into wide character. The destination is null.");
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode double into wide character. The destination is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode double into wide character. The destination count is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode double into wide character. The destination count is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode double into wide character. The destination size is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode double into wide character. The destination size is null.");
     }
 }
 
@@ -214,29 +213,29 @@ void encode_double(void* p0, void* p1, void* p2, void* p3, void* p4) {
  */
 void decode_double_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p4 != *NULL_POINTER) {
+    if (p4 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* sc = (int*) p4;
 
-        if (p3 != *NULL_POINTER) {
+        if (p3 != *NULL_POINTER_MEMORY_MODEL) {
 
             void** s = (void**) p3;
 
-            if (p0 != *NULL_POINTER) {
+            if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
                 void** d = (void**) p0;
 
-                log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Decode double vector.");
+                log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Decode double vector.");
 
 /*??
                 // The loop count.
-                int j = *NUMBER_0_INTEGER;
+                int j = *NUMBER_0_INTEGER_MEMORY_MODEL;
                 // The comma index.
                 int i = *NUMBER_MINUS_1_INTEGER;
                 // The double vector element count.
-                void* c = *NULL_POINTER;
+                void* c = *NULL_POINTER_MEMORY_MODEL;
                 // The double number.
-                int n = *NUMBER_0_INTEGER;
+                int n = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                 while (*NUMBER_1_INTEGER) {
 
@@ -247,7 +246,7 @@ void decode_double_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                     get_character_array_elements_index(p3, p4, (void*) COMMA_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) &i);
 
-                    if (i > *NUMBER_0_INTEGER) {
+                    if (i > *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         // Determine double vector element count.
                         c = *s + i;
@@ -265,7 +264,7 @@ void decode_double_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                     } else {
 
-                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode double vector. The source string starts with a comma character.");
+                        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode double vector. The source string starts with a comma character.");
                     }
 
                     j++;
@@ -277,9 +276,9 @@ void decode_double_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 //??    fscanf(p1, %d, &(m->z));
 
                 // Initialise elements.
-                int z = *NUMBER_0_INTEGER;
-                int y = *NUMBER_0_INTEGER;
-                int x = *NUMBER_0_INTEGER;
+                int z = *NUMBER_0_INTEGER_MEMORY_MODEL;
+                int y = *NUMBER_0_INTEGER_MEMORY_MODEL;
+                int x = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                 // Set elements.
                 set_array_elements(p0, (void*) INTEGER_ARRAY, (void*) &X_INDEX, (void*) &x);
@@ -307,28 +306,28 @@ void decode_double_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                     } else {
 
-            //??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not create double vector. The vector does not contain a z coordinate.");
+            //??            log_message((void*) &ERROR_LEVEL_LOG_MODEL, (void*) &"Could not create double vector. The vector does not contain a z coordinate.");
                     }
 
                 } else {
 
-            //??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not create double vector. The vector does not contain an y coordinate.");
+            //??        log_message((void*) &ERROR_LEVEL_LOG_MODEL, (void*) &"Could not create double vector. The vector does not contain an y coordinate.");
                 }
 */
 
             } else {
 
-//??                log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_PARSE_INTEGER_THE_DESTINATION_IS_NULL_MESSAGE, (void*) &COULD_NOT_PARSE_INTEGER_THE_DESTINATION_IS_NULL_MESSAGE_COUNT);
+//??                log_message((void*) &ERROR_LEVEL_LOG_MODEL, (void*) &COULD_NOT_PARSE_INTEGER_THE_DESTINATION_IS_NULL_MESSAGE, (void*) &COULD_NOT_PARSE_INTEGER_THE_DESTINATION_IS_NULL_MESSAGE_COUNT);
             }
 
         } else {
 
-//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_PARSE_INTEGER_THE_SOURCE_IS_NULL_MESSAGE, (void*) &COULD_NOT_PARSE_INTEGER_THE_SOURCE_IS_NULL_MESSAGE_COUNT);
+//??            log_message((void*) &ERROR_LEVEL_LOG_MODEL, (void*) &COULD_NOT_PARSE_INTEGER_THE_SOURCE_IS_NULL_MESSAGE, (void*) &COULD_NOT_PARSE_INTEGER_THE_SOURCE_IS_NULL_MESSAGE_COUNT);
         }
 
     } else {
 
-//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_PARSE_INTEGER_THE_SOURCE_COUNT_IS_NULL_MESSAGE, (void*) &COULD_NOT_PARSE_INTEGER_THE_SOURCE_COUNT_IS_NULL_MESSAGE_COUNT);
+//??        log_message((void*) &ERROR_LEVEL_LOG_MODEL, (void*) &COULD_NOT_PARSE_INTEGER_THE_SOURCE_COUNT_IS_NULL_MESSAGE, (void*) &COULD_NOT_PARSE_INTEGER_THE_SOURCE_COUNT_IS_NULL_MESSAGE_COUNT);
     }
 }
 
@@ -344,14 +343,14 @@ void decode_double_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 void encode_double_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
 /*??
-//??    log_message((void*) &INFORMATION_LOG_LEVEL, (void*) &"Finalise double vector.");
+//??    log_message((void*) &INFORMATION_LEVEL_LOG_MODEL, (void*) &"Finalise double vector.");
 
     // Write output stream and transform from double vector.
 
     // Initialise elements.
-    int z = *NUMBER_0_INTEGER;
-    int y = *NUMBER_0_INTEGER;
-    int x = *NUMBER_0_INTEGER;
+    int z = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    int y = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    int x = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // Get elements.
     get_array_elements(p0, (void*) INTEGER_ARRAY, (void*) &Z_INDEX, (void*) &z);

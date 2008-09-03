@@ -1,26 +1,25 @@
 /*
- * $RCSfile: inline_communicator.c,v $
+ * Copyright (C) 1999-2008. Christian Heller.
  *
- * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
+ * This file is part of the Cybernetics Oriented Interpreter (CYBOI).
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
+ * CYBOI is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
+ * CYBOI is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * along with CYBOI.  If not, see <http://www.gnu.org/licenses/>.
  *
- * http://www.cybop.net
- * - Cybernetics Oriented Programming -
+ * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
+ * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $Revision: 1.16 $ $Date: 2008-07-03 09:24:27 $ $Author: christian $
+ * @version $RCSfile: inline_communicator.c,v $ $Revision: 1.17 $ $Date: 2008-09-03 22:04:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -29,9 +28,9 @@
 
 #include <stdio.h>
 #include "../../globals/constants/integer/integer_constants.c"
-#include "../../globals/constants/memory_structure/array_constants.c"
-#include "../../globals/constants/pointer/pointer_constants.c"
-#include "../../globals/logger/logger.c"
+#include "../../constant/abstraction/memory/array_memory_abstraction.c"
+#include "../../constant/model/memory/pointer_memory_model.c"
+#include "../../logger/logger.c"
 #include "../../memoriser/array.c"
 
 /**
@@ -45,19 +44,19 @@
  */
 void read_inline(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p4 != *NULL_POINTER) {
+    if (p4 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* sc = (int*) p4;
 
-        if (p2 != *NULL_POINTER) {
+        if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
             int* ds = (int*) p2;
 
-            if (p1 != *NULL_POINTER) {
+            if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
                 int* dc = (int*) p1;
 
-                if (p0 != *NULL_POINTER) {
+                if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
                     void** d = (void**) p0;
 
@@ -65,34 +64,34 @@ void read_inline(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     *ds = *sc;
 
                     // Reallocate array.
-                    reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_ARRAY);
+                    reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                     // The destination array index to start writing at.
-                    int i = *NUMBER_0_INTEGER;
+                    int i = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-                    set_array_elements(*d, (void*) &i, p3, p4, (void*) WIDE_CHARACTER_ARRAY);
+                    set_array_elements(*d, (void*) &i, p3, p4, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                     // Set new array count.
                     *dc = *sc;
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not read inline. The array count is null.");
+                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not read inline. The array count is null.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not read inline. The array count is null.");
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not read inline. The array count is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not read inline. The array size is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not read inline. The array size is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not read inline. The inline byte stream count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not read inline. The inline byte stream count is null.");
     }
 }
 

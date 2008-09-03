@@ -1,26 +1,25 @@
 /*
- * $RCSfile: checker.c,v $
+ * Copyright (C) 1999-2008. Christian Heller.
  *
- * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
+ * This file is part of the Cybernetics Oriented Interpreter (CYBOI).
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
+ * CYBOI is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
+ * CYBOI is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * along with CYBOI.  If not, see <http://www.gnu.org/licenses/>.
  *
- * http://www.cybop.net
- * - Cybernetics Oriented Programming -
+ * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
+ * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $Revision: 1.50 $ $Date: 2008-05-16 00:20:15 $ $Author: christian $
+ * @version $RCSfile: checker.c,v $ $Revision: 1.51 $ $Date: 2008-09-03 22:04:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -29,9 +28,9 @@
 
 #include "../controller/handler.c"
 #include "../globals/constants/integer/integer_constants.c"
-#include "../globals/constants/log/log_message_constants.c"
-#include "../globals/constants/pointer/pointer_constants.c"
-#include "../globals/logger/logger.c"
+#include "../constant/model/log/message_log_model.c"
+#include "../constant/model/memory/pointer_memory_model.c"
+#include "../logger/logger.c"
 #include "../memoriser/accessor/signal_memory_accessor.c"
 
 /**
@@ -54,11 +53,11 @@
 void check_get(void* p0, void* p1, void* p2, void* p3, void* p4,
     void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11, void* p12) {
 
-    if (p3 != *NULL_POINTER) {
+    if (p3 != *NULL_POINTER_MEMORY_MODEL) {
 
         pthread_mutex_t* mt = (pthread_mutex_t*) p3;
 
-        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Get and handle a signal.");
+        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Get and handle a signal.");
 
         // Get signal.
         get_signal(p0, p1, p4, p5, p6, p7, p8, p9, p10, p11, p12);
@@ -74,7 +73,7 @@ void check_get(void* p0, void* p1, void* p2, void* p3, void* p4,
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get and handle a signal. The signal memory mutex is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not get and handle a signal. The signal memory mutex is null.");
     }
 }
 
@@ -96,31 +95,31 @@ void check_wait(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
     // so that indentation would lead to unreadable source code here.
     //
 
-    if (p5 != *NULL_POINTER) {
+    if (p5 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* cyboi_service_irq = (int*) p5;
 
-    if (p4 != *NULL_POINTER) {
+    if (p4 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* www_service_irq = (int*) p4;
 
-    if (p3 != *NULL_POINTER) {
+    if (p3 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* x_window_system_irq = (int*) p3;
 
-    if (p2 != *NULL_POINTER) {
+    if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* gnu_linux_console_irq = (int*) p2;
 
-    if (p1 != *NULL_POINTER) {
+    if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* signal_memory_irq = (int*) p1;
 
-        if (p0 != *NULL_POINTER) {
+        if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
             double* signal_memory_sleep_time = (double*) p0;
 
-            log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Wait for an interrupt request.");
+            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Wait for an interrupt request.");
 
             //
             // Sleep for some time.
@@ -204,11 +203,11 @@ void check_wait(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
             // Therefore, the decision fell on the usage of a simple SLEEP
             // procedure, which seems sufficient for the purposes of CYBOI.
             //
-            while ((*signal_memory_irq == *NUMBER_0_INTEGER)
-                && (*gnu_linux_console_irq == *NUMBER_0_INTEGER)
-                && (*x_window_system_irq == *NUMBER_0_INTEGER)
-                && (*www_service_irq == *NUMBER_0_INTEGER)
-                && (*cyboi_service_irq == *NUMBER_0_INTEGER)) {
+            while ((*signal_memory_irq == *NUMBER_0_INTEGER_MEMORY_MODEL)
+                && (*gnu_linux_console_irq == *NUMBER_0_INTEGER_MEMORY_MODEL)
+                && (*x_window_system_irq == *NUMBER_0_INTEGER_MEMORY_MODEL)
+                && (*www_service_irq == *NUMBER_0_INTEGER_MEMORY_MODEL)
+                && (*cyboi_service_irq == *NUMBER_0_INTEGER_MEMORY_MODEL)) {
 
                 sleep(*signal_memory_sleep_time);
             }
@@ -222,32 +221,32 @@ void check_wait(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not wait for an interrupt request. The signal memory sleep time is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not wait for an interrupt request. The signal memory sleep time is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not wait for an interrupt request. The signal memory interrupt request flag is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not wait for an interrupt request. The signal memory interrupt request flag is null.");
     }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not wait for an interrupt request. The gnu/linux console interrupt request flag is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not wait for an interrupt request. The gnu/linux console interrupt request flag is null.");
     }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not wait for an interrupt request. The x window system interrupt request flag is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not wait for an interrupt request. The x window system interrupt request flag is null.");
     }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not wait for an interrupt request. The www service interrupt request flag is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not wait for an interrupt request. The www service interrupt request flag is null.");
     }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not wait for an interrupt request. The cyboi service interrupt request flag is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not wait for an interrupt request. The cyboi service interrupt request flag is null.");
     }
 }
 
@@ -304,13 +303,13 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
     void* p26, void* p27, void* p28, void* p29, void* p30, void* p31, void* p32, void* p33,
     void* p34, void* p35, void* p36, void* p37, void* p38, void* p39, void* p40, void* p41) {
 
-    if (p0 != *NULL_POINTER) {
+    if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
         void** irq = (void**) p0;
 
 //??    fwprintf(stderr, L"TEST IRQ 1: %i\n", p0);
 
-        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Check for interrupt requests.");
+        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Check for interrupt requests.");
 
 /*??
         // CAUTION! Compare *irq to NULL_POINTER here!
@@ -328,11 +327,11 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
             // If it is not null, then another interrupt has been found before.
 
             //?? TODO: The mutex is NOT needed here; delete later!
-            if (p9 != *NULL_POINTER) {
+            if (p9 != *NULL_POINTER_MEMORY_MODEL) {
 
                 void** signal_memory_mutex = (void**) p9;
 
-                if (p8 != *NULL_POINTER) {
+                if (p8 != *NULL_POINTER_MEMORY_MODEL) {
 
                     //?? TODO: OLD comment; delete later!
                     // CAUTION! Do NOT cast to int** because the value is assigned to *mt below
@@ -340,9 +339,9 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
                     // (Pointer and integer do not necessarily always have to have the same size.)
                     void** signal_memory_irq = (void**) p8;
 
-                    if (**((int**) signal_memory_irq) != *NUMBER_0_INTEGER) {
+                    if (**((int**) signal_memory_irq) != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Detected signal memory interrupt.");
+                        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Detected signal memory interrupt.");
 
                         // Set interrupt request flag.
                         get_element(p8, (void*) NUMBER_0_INTEGER, p0, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
@@ -354,12 +353,12 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not check for interrupt requests. The signal memory interrupt request flag is null.");
+                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not check for interrupt requests. The signal memory interrupt request flag is null.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not check for interrupt requests. The signal memory mutex is null.");
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not check for interrupt requests. The signal memory mutex is null.");
             }
         }
 */
@@ -372,13 +371,13 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
             // If it is not null, then another interrupt has been found before.
 
             //?? TODO: The mutex is NOT needed here; delete later!
-            if (p11 != *NULL_POINTER) {
+            if (p11 != *NULL_POINTER_MEMORY_MODEL) {
 
 //??    fwprintf(stderr, L"TEST IRQ 4: %i\n", p0);
 
                 void** gnu_linux_console_mutex = (void**) p11;
 
-                if (p10 != *NULL_POINTER) {
+                if (p10 != *NULL_POINTER_MEMORY_MODEL) {
 
 //??    fwprintf(stderr, L"TEST IRQ 5: %i\n", p0);
 
@@ -388,11 +387,11 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
                     // (Pointer and integer do not necessarily always have to have the same size.)
                     void** gnu_linux_console_irq = (void**) p10;
 
-                    if (**((int**) gnu_linux_console_irq) != *NUMBER_0_INTEGER) {
+                    if (**((int**) gnu_linux_console_irq) != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
 //??    fwprintf(stderr, L"TEST IRQ 6: %i\n", p0);
 
-                        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Detected gnu/linux console interrupt.");
+                        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Detected gnu/linux console interrupt.");
 
                         // Set interrupt request flag.
                         get_element(p10, (void*) NUMBER_0_INTEGER, p0, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
@@ -411,12 +410,12 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not check for interrupt requests. The gnu/linux console interrupt request flag is null.");
+                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not check for interrupt requests. The gnu/linux console interrupt request flag is null.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not check for interrupt requests. The gnu/linux console mutex is null.");
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not check for interrupt requests. The gnu/linux console mutex is null.");
             }
         }
 
@@ -426,11 +425,11 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
             // If it is not null, then another interrupt has been found before.
 
             //?? TODO: The mutex is NOT needed here; delete later!
-            if (p19 != *NULL_POINTER) {
+            if (p19 != *NULL_POINTER_MEMORY_MODEL) {
 
                 void** x_window_system_mutex = (void**) p19;
 
-                if (p18 != *NULL_POINTER) {
+                if (p18 != *NULL_POINTER_MEMORY_MODEL) {
 
                     //?? TODO: OLD comment; delete later!
                     // CAUTION! Do NOT cast to int** because the value is assigned to *mt below
@@ -438,9 +437,9 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
                     // (Pointer and integer do not necessarily always have to have the same size.)
                     void** x_window_system_irq = (void**) p18;
 
-                    if (**((int**) x_window_system_irq) != *NUMBER_0_INTEGER) {
+                    if (**((int**) x_window_system_irq) != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Detected x window system interrupt.");
+                        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Detected x window system interrupt.");
 
                         // Set interrupt request flag.
                         get_element(p18, (void*) NUMBER_0_INTEGER, p0, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
@@ -459,12 +458,12 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not check for interrupt requests. The x window system interrupt request flag is null.");
+                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not check for interrupt requests. The x window system interrupt request flag is null.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not check for interrupt requests. The x window system mutex is null.");
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not check for interrupt requests. The x window system mutex is null.");
             }
         }
 
@@ -474,11 +473,11 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
             // If it is not null, then another interrupt has been found before.
 
             //?? TODO: The mutex is NOT needed here; delete later!
-            if (p27 != *NULL_POINTER) {
+            if (p27 != *NULL_POINTER_MEMORY_MODEL) {
 
                 void** www_service_mutex = (void**) p27;
 
-                if (p26 != *NULL_POINTER) {
+                if (p26 != *NULL_POINTER_MEMORY_MODEL) {
 
                     //?? TODO: OLD comment; delete later!
                     // CAUTION! Do NOT cast to int** because the value is assigned to *mt below
@@ -486,9 +485,9 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
                     // (Pointer and integer do not necessarily always have to have the same size.)
                     void** www_service_irq = (void**) p26;
 
-                    if (**((int**) www_service_irq) != *NUMBER_0_INTEGER) {
+                    if (**((int**) www_service_irq) != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Detected www service interrupt.");
+                        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Detected www service interrupt.");
 
                         // Set interrupt request flag.
                         get_element(p26, (void*) NUMBER_0_INTEGER, p0, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
@@ -505,12 +504,12 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not check for interrupt requests. The www service interrupt request flag is null.");
+                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not check for interrupt requests. The www service interrupt request flag is null.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not check for interrupt requests. The www service mutex is null.");
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not check for interrupt requests. The www service mutex is null.");
             }
         }
 
@@ -520,11 +519,11 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
             // If it is not null, then another interrupt has been found before.
 
             //?? TODO: The mutex is NOT needed here; delete later!
-            if (p35 != *NULL_POINTER) {
+            if (p35 != *NULL_POINTER_MEMORY_MODEL) {
 
                 void** cyboi_service_mutex = (void**) p35;
 
-                if (p34 != *NULL_POINTER) {
+                if (p34 != *NULL_POINTER_MEMORY_MODEL) {
 
                     //?? TODO: OLD comment; delete later!
                     // CAUTION! Do NOT cast to int** because the value is assigned to *mt below
@@ -532,9 +531,9 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
                     // (Pointer and integer do not necessarily always have to have the same size.)
                     void** cyboi_service_irq = (void**) p34;
 
-                    if (**((int**) cyboi_service_irq) != *NUMBER_0_INTEGER) {
+                    if (**((int**) cyboi_service_irq) != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Detected cyboi service interrupt.");
+                        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Detected cyboi service interrupt.");
 
                         // Set interrupt request flag.
                         get_element(p34, (void*) NUMBER_0_INTEGER, p0, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
@@ -551,23 +550,23 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not check for interrupt requests. The cyboi service interrupt request flag is null.");
+                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not check for interrupt requests. The cyboi service interrupt request flag is null.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not check for interrupt requests. The cyboi service mutex is null.");
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not check for interrupt requests. The cyboi service mutex is null.");
             }
         }
 
-        if (*irq == *NULL_POINTER) {
+        if (*irq == *NULL_POINTER_MEMORY_MODEL) {
 
-            log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) L"Could not check for interrupt requests. No interrupt request flag is set.");
+            log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not check for interrupt requests. No interrupt request flag is set.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not check for interrupt requests. The interrupt request flag is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not check for interrupt requests. The interrupt request flag is null.");
     }
 }
 
@@ -625,8 +624,8 @@ void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
     void* p27, void* p28, void* p29, void* p30, void* p31, void* p32, void* p33, void* p34,
     void* p35, void* p36, void* p37, void* p38, void* p39, void* p40, void* p41, void* p42) {
 
-    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"\n\n");
-    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Check for signal with highest priority and otherwise, for interrupts.");
+    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"\n\n");
+    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Check for signal with highest priority and otherwise, for interrupts.");
 
     // The interrupts and mutexes.
     //
@@ -659,7 +658,7 @@ void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
     // The signal identification.
     void** id = NULL_POINTER;
     // The direct execution flag.
-    int x = *NUMBER_0_INTEGER;
+    int x = *NUMBER_0_INTEGER_MEMORY_MODEL;
     // The highest priority index.
     int i = *NUMBER_MINUS_1_INTEGER;
 
@@ -688,7 +687,7 @@ void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
     // An alternative for the future might be number 2
     // (just exchange the following two if-else blocks of source code).
 
-    if (i >= *NUMBER_0_INTEGER) {
+    if (i >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
     fwprintf(stderr, L"TEST index of signal with highest priority: %i\n", i);
 
@@ -734,7 +733,7 @@ void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
             p27, p28, p29, p30, p31, p32, p33, p34,
             p35, p36, p37, p38, p39, p40, p41, p42);
 
-        if ((irq != (int**) NULL_POINTER) && (*irq != (int*) *NULL_POINTER) && (**irq != *NUMBER_0_INTEGER)) {
+        if ((irq != (int**) NULL_POINTER) && (*irq != (int*) *NULL_POINTER_MEMORY_MODEL) && (**irq != *NUMBER_0_INTEGER_MEMORY_MODEL)) {
 
     fwprintf(stderr, L"TEST checker irq: %i\n", **irq);
 
@@ -755,7 +754,7 @@ void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
             // This is done here, right after checking the interrupt flag
             // and yet BEFORE receiving data and handling the signal below,
             // so that the system may react faster to new interrupt requests.
-            **irq = *NUMBER_0_INTEGER;
+            **irq = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
             // Unlock mutex.
             pthread_mutex_unlock(*mt);
@@ -805,8 +804,8 @@ void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
  */
 void check(void* p0) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"\n\n");
-    log_message((void*) INFORMATION_LOG_LEVEL, (void*) CHECK_FOR_SIGNALS_MESSAGE, (void*) CHECK_FOR_SIGNALS_MESSAGE_COUNT);
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"\n\n");
+    log_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) CHECK_FOR_SIGNALS_MESSAGE, (void*) CHECK_FOR_SIGNALS_MESSAGE_COUNT);
 
     // CAUTION! The parameters were not handed over as function arguments,
     // since it is more flexible to just hand over the internal memory as argument.
@@ -995,7 +994,7 @@ void check(void* p0) {
     get_element(p0, (void*) &i, (void*) &cyboi_service_handler_dc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
     // The shutdown flag.
-    int f = *NUMBER_0_INTEGER;
+    int f = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // Run endless loop checking signal memory for signals.
     while (*NUMBER_1_INTEGER) {

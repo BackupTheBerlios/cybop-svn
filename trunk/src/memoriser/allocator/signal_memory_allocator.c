@@ -1,29 +1,25 @@
 /*
- * $RCSfile: signal_memory_allocator.c,v $
+ * Copyright (C) 1999-2008. Christian Heller.
  *
- * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
+ * This file is part of the Cybernetics Oriented Interpreter (CYBOI).
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
+ * CYBOI is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
+ * CYBOI is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * along with CYBOI.  If not, see <http://www.gnu.org/licenses/>.
  *
- * http://www.cybop.net
- * - Cybernetics Oriented Programming -
+ * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
+ * Christian Heller <christian.heller@tuxtax.de>
  *
- * This file contains the functionality to:
- * - create a signal memory in memory
- *
- * @version $Revision: 1.17 $ $Date: 2008-05-04 00:18:13 $ $Author: christian $
+ * @version $RCSfile: signal_memory_allocator.c,v $ $Revision: 1.18 $ $Date: 2008-09-03 22:04:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -32,11 +28,11 @@
 
 #include "../../globals/constants/cybol/cybol_abstraction_constants.c"
 #include "../../globals/constants/integer/integer_constants.c"
-#include "../../globals/constants/log/log_message_constants.c"
-#include "../../globals/constants/memory_structure/array_constants.c"
+#include "../../constant/model/log/message_log_model.c"
+#include "../../constant/abstraction/memory/array_memory_abstraction.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
-#include "../../globals/constants/pointer/pointer_constants.c"
-#include "../../globals/logger/logger.c"
+#include "../../constant/model/memory/pointer_memory_model.c"
+#include "../../logger/logger.c"
 #include "../../memoriser/array.c"
 
 /**
@@ -47,24 +43,24 @@
  */
 void allocate_signal_memory(void* p0, void* p1) {
 
-    if (p0 != *NULL_POINTER) {
+    if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
         void** s = (void**) p0;
 
-        log_message((void*) INFORMATION_LOG_LEVEL, (void*) CREATE_SIGNAL_MEMORY_MESSAGE, (void*) CREATE_SIGNAL_MEMORY_MESSAGE_COUNT);
+        log_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) CREATE_SIGNAL_MEMORY_MESSAGE, (void*) CREATE_SIGNAL_MEMORY_MESSAGE_COUNT);
 
         // Allocate signal memory.
         allocate_array(p0, (void*) SIGNAL_MEMORY_COUNT, (void*) POINTER_ARRAY);
 
         // The abstractions, models, details, priorities, identifications.
-        void* a = *NULL_POINTER;
-        void* ac = *NULL_POINTER;
-        void* m = *NULL_POINTER;
-        void* mc = *NULL_POINTER;
-        void* d = *NULL_POINTER;
-        void* dc = *NULL_POINTER;
-        void* p = *NULL_POINTER;
-        void* id = *NULL_POINTER;
+        void* a = *NULL_POINTER_MEMORY_MODEL;
+        void* ac = *NULL_POINTER_MEMORY_MODEL;
+        void* m = *NULL_POINTER_MEMORY_MODEL;
+        void* mc = *NULL_POINTER_MEMORY_MODEL;
+        void* d = *NULL_POINTER_MEMORY_MODEL;
+        void* dc = *NULL_POINTER_MEMORY_MODEL;
+        void* p = *NULL_POINTER_MEMORY_MODEL;
+        void* id = *NULL_POINTER_MEMORY_MODEL;
 
         // Allocate abstractions, models, details, priorities, identifications.
         allocate_array((void*) &a, p1, (void*) POINTER_ARRAY);
@@ -91,7 +87,7 @@ void allocate_signal_memory(void* p0, void* p1) {
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not allocate signal memory. The signal memory parameter is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not allocate signal memory. The signal memory parameter is null.");
     }
 }
 
@@ -103,11 +99,11 @@ void allocate_signal_memory(void* p0, void* p1) {
  */
 void deallocate_signal_memory(void* p0, void* p1) {
 
-    if (p0 != *NULL_POINTER) {
+    if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
         void** s = (void**) p0;
 
-        log_message((void*) INFORMATION_LOG_LEVEL, (void*) DESTROY_SIGNAL_MEMORY_MESSAGE, (void*) DESTROY_SIGNAL_MEMORY_MESSAGE_COUNT);
+        log_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) DESTROY_SIGNAL_MEMORY_MESSAGE, (void*) DESTROY_SIGNAL_MEMORY_MESSAGE_COUNT);
 
         // The abstractions, models, details, priorities, identifications.
         void** a = NULL_POINTER;
@@ -120,15 +116,15 @@ void deallocate_signal_memory(void* p0, void* p1) {
         void** id = NULL_POINTER;
 
     /*??
-        log_message((void*) &INFORMATION_LOG_LEVEL, (void*) &"Destroy all signals left in signal memory.");
+        log_message((void*) &INFORMATION_LEVEL_LOG_MODEL, (void*) &"Destroy all signals left in signal memory.");
 
-        int i = *NUMBER_0_INTEGER;
+        int i = *NUMBER_0_INTEGER_MEMORY_MODEL;
         get_array_count(m->signals, (void*) &i);
         i--;
-        void* s = *NULL_POINTER;
-        void* a = *NULL_POINTER;
+        void* s = *NULL_POINTER_MEMORY_MODEL;
+        void* a = *NULL_POINTER_MEMORY_MODEL;
 
-        while (i >= *NUMBER_0_INTEGER) {
+        while (i >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             s = (void*) get_signal(p0, (void*) &i);
             a = (void*) get_abstraction(p0, (void*) &i);
@@ -188,7 +184,7 @@ void deallocate_signal_memory(void* p0, void* p1) {
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not deallocate signal memory. The signal memory parameter is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not deallocate signal memory. The signal memory parameter is null.");
     }
 }
 

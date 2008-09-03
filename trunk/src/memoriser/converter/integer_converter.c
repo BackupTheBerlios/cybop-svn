@@ -1,26 +1,25 @@
 /*
- * $RCSfile: integer_converter.c,v $
+ * Copyright (C) 1999-2008. Christian Heller.
  *
- * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
+ * This file is part of the Cybernetics Oriented Interpreter (CYBOI).
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
+ * CYBOI is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
+ * CYBOI is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * along with CYBOI.  If not, see <http://www.gnu.org/licenses/>.
  *
- * http://www.cybop.net
- * - Cybernetics Oriented Programming -
+ * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
+ * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $Revision: 1.26 $ $Date: 2008-07-08 17:55:36 $ $Author: christian $
+ * @version $RCSfile: integer_converter.c,v $ $Revision: 1.27 $ $Date: 2008-09-03 22:04:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -38,11 +37,11 @@
 #include "../../globals/constants/character/code/character_code_constants.c"
 #include "../../globals/constants/cybol/cybol_abstraction_constants.c"
 #include "../../globals/constants/integer/integer_constants.c"
-#include "../../globals/constants/log/log_message_constants.c"
-#include "../../globals/constants/memory_structure/array_constants.c"
+#include "../../constant/model/log/message_log_model.c"
+#include "../../constant/abstraction/memory/array_memory_abstraction.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
-#include "../../globals/constants/pointer/pointer_constants.c"
-#include "../../globals/logger/logger.c"
+#include "../../constant/model/memory/pointer_memory_model.c"
+#include "../../logger/logger.c"
 #include "../../globals/variables/reallocation_factor_variables.c"
 #include "../../memoriser/allocator.c"
 
@@ -63,35 +62,35 @@
  */
 void decode_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p4 != *NULL_POINTER) {
+    if (p4 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* sc = (int*) p4;
 
-        if (p0 != *NULL_POINTER) {
+        if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
             int* d = (int*) p0;
 
-            log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Decode integer.");
+            log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Decode integer.");
 
             // The temporary null-terminated string.
-            wchar_t* tmp = (wchar_t*) *NULL_POINTER;
+            wchar_t* tmp = (wchar_t*) *NULL_POINTER_MEMORY_MODEL;
             int tmps = *sc + *NUMBER_1_INTEGER;
 
             // Create temporary null-terminated string.
-            allocate_array((void*) &tmp, (void*) &tmps, (void*) WIDE_CHARACTER_ARRAY);
+            allocate_array((void*) &tmp, (void*) &tmps, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
             // Copy original string to temporary null-terminated string.
-            set_array_elements((void*) tmp, (void*) NUMBER_0_INTEGER, p3, p4, (void*) WIDE_CHARACTER_ARRAY);
+            set_array_elements((void*) tmp, (void*) NUMBER_0_INTEGER, p3, p4, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
             // Add string termination to temporary null-terminated string.
             // The source count is used as index for the termination character.
-            set_array_elements((void*) tmp, p4, (void*) NULL_CONTROL_WIDE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+            set_array_elements((void*) tmp, p4, (void*) NULL_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
             // The tail variable is useless here and only needed for the string
             // transformation function. If the whole string array consists of
             // many sub strings, separated by space characters, then each sub
             // string gets interpreted as integer number.
             // The tail variable in this case points to the remaining sub string.
-            wchar_t* tail = (wchar_t*) *NULL_POINTER;
+            wchar_t* tail = (wchar_t*) *NULL_POINTER_MEMORY_MODEL;
 
             // Set integer value.
             //
@@ -104,16 +103,16 @@ void decode_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
             *d = wcstol(tmp, &tail, *NUMBER_10_INTEGER);
 
             // Destroy temporary null-terminated string.
-            deallocate_array((void*) &tmp, (void*) &tmps, (void*) WIDE_CHARACTER_ARRAY);
+            deallocate_array((void*) &tmp, (void*) &tmps, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode integer. The destination is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode integer. The destination is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode integer. The source count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode integer. The source count is null.");
     }
 }
 
@@ -128,22 +127,22 @@ void decode_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
  */
 void encode_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p2 != *NULL_POINTER) {
+    if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
         size_t* ds = (size_t*) p2;
 
-        if (p1 != *NULL_POINTER) {
+        if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
             int* dc = (int*) p1;
 
-            if (p0 != *NULL_POINTER) {
+            if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
                 wchar_t** d = (wchar_t**) p0;
 
-                log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Encode integer into wide character.");
+                log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Encode integer into wide character.");
 
                 // The integer value.
-                int* v = (int*) *NULL_POINTER;
+                int* v = (int*) *NULL_POINTER_MEMORY_MODEL;
 
                 // Get integer value.
                 get_array_elements(p3, (void*) PRIMITIVE_VALUE_INDEX, (void*) &v, (void*) INTEGER_ARRAY);
@@ -154,7 +153,7 @@ void encode_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 while (*NUMBER_1_INTEGER) {
 
-                    if (*dc >= *NUMBER_0_INTEGER) {
+                    if (*dc >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         break;
                     }
@@ -162,7 +161,7 @@ void encode_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     // Initialise destination string count to zero.
                     // CAUTION! This is essential because otherwise,
                     // the array reallocation calculates wrong values.
-                    *dc = *NUMBER_0_INTEGER;
+                    *dc = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                     // Set destination string size one greater than the count
                     // to have space for the terminating null character and
@@ -170,7 +169,7 @@ void encode_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     *ds = (*dc * *WIDE_CHARACTER_VECTOR_REALLOCATION_FACTOR) + *NUMBER_1_INTEGER;
 
                     // Reallocate destination string.
-                    reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_ARRAY);
+                    reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                     // Transform source integer to destination string.
                     // A null wide character is written to mark the end of the string.
@@ -189,17 +188,17 @@ void encode_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode integer into wide character. The destination is null.");
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode integer into wide character. The destination is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode integer into wide character. The destination count is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode integer into wide character. The destination count is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode integer into wide character. The destination size is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode integer into wide character. The destination size is null.");
     }
 }
 

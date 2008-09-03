@@ -1,26 +1,25 @@
 /*
- * $RCSfile: x_window_system_converter.c,v $
+ * Copyright (C) 1999-2008. Christian Heller.
  *
- * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
+ * This file is part of the Cybernetics Oriented Interpreter (CYBOI).
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
+ * CYBOI is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
+ * CYBOI is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * along with CYBOI.  If not, see <http://www.gnu.org/licenses/>.
  *
- * http://www.cybop.net
- * - Cybernetics Oriented Programming -
+ * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
+ * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $Revision: 1.25 $ $Date: 2008-07-08 17:55:36 $ $Author: christian $
+ * @version $RCSfile: x_window_system_converter.c,v $ $Revision: 1.26 $ $Date: 2008-09-03 22:04:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -36,7 +35,7 @@
 #include "../../globals/constants/integer/integer_constants.c"
 #include "../../globals/constants/memory_structure/memory_abstraction_constants.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
-#include "../../globals/constants/pointer/pointer_constants.c"
+#include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../memoriser/accessor.c"
 
 /**
@@ -66,11 +65,11 @@ void decode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
  */
 void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8) {
 
-    if (p4 != *NULL_POINTER) {
+    if (p4 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* sc = (int*) p4;
 
-        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Encode x window system.");
+        log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Encode x window system.");
 
         // The display, which is a subsumption of
         // xserver, screens, hardware (input devices etc.).
@@ -105,18 +104,18 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
         void** wsds = NULL_POINTER;
 
         // The source whole size coordinates.
-        int* wsmx = (int*) *NULL_POINTER;
-        int* wsmy = (int*) *NULL_POINTER;
-        int* wsmz = (int*) *NULL_POINTER;
+        int* wsmx = (int*) *NULL_POINTER_MEMORY_MODEL;
+        int* wsmy = (int*) *NULL_POINTER_MEMORY_MODEL;
+        int* wsmz = (int*) *NULL_POINTER_MEMORY_MODEL;
 
         // The original area position coordinates, set to the zero origo.
-        int oapx = *NUMBER_0_INTEGER;
-        int oapy = *NUMBER_0_INTEGER;
-        int oapz = *NUMBER_0_INTEGER;
+        int oapx = *NUMBER_0_INTEGER_MEMORY_MODEL;
+        int oapy = *NUMBER_0_INTEGER_MEMORY_MODEL;
+        int oapz = *NUMBER_0_INTEGER_MEMORY_MODEL;
         // The original area size coordinates, initialised with whole coordinates.
-        int oasx = *NUMBER_0_INTEGER;
-        int oasy = *NUMBER_0_INTEGER;
-        int oasz = *NUMBER_0_INTEGER;
+        int oasx = *NUMBER_0_INTEGER_MEMORY_MODEL;
+        int oasy = *NUMBER_0_INTEGER_MEMORY_MODEL;
+        int oasz = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
         // The free area position coordinates, initialised with original area position coordinates.
         int fapx = oapx;
@@ -127,7 +126,7 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
         int fasy = oasy;
         int fasz = oasz;
 
-        if (p5 != *NULL_POINTER) {
+        if (p5 != *NULL_POINTER_MEMORY_MODEL) {
 
             // Get source whole size from details.
             get_universal_compound_element_by_name(p5, p6,
@@ -144,9 +143,9 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
             get_element(*wsm, (void*) NUMBER_2_INTEGER, (void*) &wsmz, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
             // Set original area position coordinates, set to the zero origo.
-            oapx = *NUMBER_0_INTEGER;
-            oapy = *NUMBER_0_INTEGER;
-            oapz = *NUMBER_0_INTEGER;
+            oapx = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            oapy = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            oapz = *NUMBER_0_INTEGER_MEMORY_MODEL;
             // Set original area size coordinates, initialised with whole coordinates.
             oasx = *wsmx;
             oasy = *wsmy;
@@ -268,27 +267,27 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
         void** ids = NULL_POINTER;
 
         // The terminated title.
-        void* tt = *NULL_POINTER;
+        void* tt = *NULL_POINTER_MEMORY_MODEL;
         int ttc = *NUMBER_MINUS_1_INTEGER;
         int tts = *NUMBER_MINUS_1_INTEGER;
         // The terminated icon name.
-        void* ti = *NULL_POINTER;
+        void* ti = *NULL_POINTER_MEMORY_MODEL;
         int tic = *NUMBER_MINUS_1_INTEGER;
         int tis = *NUMBER_MINUS_1_INTEGER;
 
         // The source part position coordinates.
-        int* pmx = (int*) *NULL_POINTER;
-        int* pmy = (int*) *NULL_POINTER;
-        int* pmz = (int*) *NULL_POINTER;
+        int* pmx = (int*) *NULL_POINTER_MEMORY_MODEL;
+        int* pmy = (int*) *NULL_POINTER_MEMORY_MODEL;
+        int* pmz = (int*) *NULL_POINTER_MEMORY_MODEL;
         // The source part size coordinates.
-        int* smx = (int*) *NULL_POINTER;
-        int* smy = (int*) *NULL_POINTER;
-        int* smz = (int*) *NULL_POINTER;
+        int* smx = (int*) *NULL_POINTER_MEMORY_MODEL;
+        int* smy = (int*) *NULL_POINTER_MEMORY_MODEL;
+        int* smz = (int*) *NULL_POINTER_MEMORY_MODEL;
 
         // The loop count.
-        int j = *NUMBER_0_INTEGER;
+        int j = *NUMBER_0_INTEGER_MEMORY_MODEL;
         // The comparison result.
-        int r = *NUMBER_0_INTEGER;
+        int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
         // Iterate through compound parts.
         while (*NUMBER_1_INTEGER) {
@@ -350,12 +349,12 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
     fwprintf(stderr, L"layout: %s\n", *lm);
     fwprintf(stderr, L"layout count: %i\n", *((int*) *lmc));
 
-            compare_arrays(*lm, *lmc, (void*) UI_ROOT_LAYOUT_MODEL, (void*) UI_ROOT_LAYOUT_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+            compare_arrays(*lm, *lmc, (void*) UI_ROOT_LAYOUT_MODEL, (void*) UI_ROOT_LAYOUT_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-            if (r == *NUMBER_0_INTEGER) {
+            if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 // The source part is no root window.
-                log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"This is not a root window.");
+                log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"This is not a root window.");
 
                 // Calculate coordinates according to given layout.
 /*??
@@ -369,16 +368,16 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
                 XDrawRectangle(*di, **w, *gc, *pmx, *pmy, *smx - *NUMBER_1_INTEGER, *smy - *NUMBER_1_INTEGER);
 
                 // Reset comparison result.
-                r = *NUMBER_0_INTEGER;
+                r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-                compare_arrays(*a, *ac, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+                compare_arrays(*a, *ac, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                if (r != *NUMBER_0_INTEGER) {
+                if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                     // The terminated text.
-                    char* text = (char*) *NULL_POINTER;
-                    int textc = *NUMBER_0_INTEGER;
-                    int texts = *NUMBER_0_INTEGER;
+                    char* text = (char*) *NULL_POINTER_MEMORY_MODEL;
+                    int textc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+                    int texts = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                     // Create terminated text.
                     allocate_array((void*) &text, (void*) &texts, (void*) CHARACTER_ARRAY);
@@ -534,7 +533,7 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
             } else {
 
                 // The source part is a root window.
-                log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"This is a root window.");
+                log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"This is a root window.");
 
                 // Move window to new position coordinates for part.
                 XMoveWindow(*di, **w, *pmx, *pmy);
@@ -559,13 +558,13 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
                     p7, p8);
 
                 // The terminated title.
-                tt = *NULL_POINTER;
-                ttc = *NUMBER_0_INTEGER;
-                tts = *NUMBER_0_INTEGER;
+                tt = *NULL_POINTER_MEMORY_MODEL;
+                ttc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+                tts = *NUMBER_0_INTEGER_MEMORY_MODEL;
                 // The terminated icon name.
-                ti = *NULL_POINTER;
-                tic = *NUMBER_0_INTEGER;
-                tis = *NUMBER_0_INTEGER;
+                ti = *NULL_POINTER_MEMORY_MODEL;
+                tic = *NUMBER_0_INTEGER_MEMORY_MODEL;
+                tis = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                 // Create terminated title.
                 allocate_array((void*) &tt, (void*) &tts, (void*) CHARACTER_ARRAY);
@@ -615,14 +614,14 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
             }
 
             // Reset comparison result.
-            r = *NUMBER_0_INTEGER;
+            r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-            compare_arrays(*a, *ac, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+            compare_arrays(*a, *ac, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-            if (r != *NUMBER_0_INTEGER) {
+            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 // The part model is a compound.
-                log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"The part model is a compound.");
+                log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"The part model is a compound.");
 
                 // Recursively call this procedure for compound part model.
                 encode_x_window_system(p0, p1, p2, *m, *mc, *d, *dc, p7, p8);
@@ -686,23 +685,23 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
             // and further windows must not occur as part.
 
             // Reset source part position coordinates.
-            pmx = (int*) *NULL_POINTER;
-            pmy = (int*) *NULL_POINTER;
-            pmz = (int*) *NULL_POINTER;
+            pmx = (int*) *NULL_POINTER_MEMORY_MODEL;
+            pmy = (int*) *NULL_POINTER_MEMORY_MODEL;
+            pmz = (int*) *NULL_POINTER_MEMORY_MODEL;
             // Reset source part size coordinates.
-            smx = (int*) *NULL_POINTER;
-            smy = (int*) *NULL_POINTER;
-            smz = (int*) *NULL_POINTER;
+            smx = (int*) *NULL_POINTER_MEMORY_MODEL;
+            smy = (int*) *NULL_POINTER_MEMORY_MODEL;
+            smz = (int*) *NULL_POINTER_MEMORY_MODEL;
 
             // Reset terminated title.
-            tt = *NULL_POINTER;
+            tt = *NULL_POINTER_MEMORY_MODEL;
             tts = *NUMBER_MINUS_1_INTEGER;
             // Reset terminated icon name.
-            ti = *NULL_POINTER;
+            ti = *NULL_POINTER_MEMORY_MODEL;
             tis = *NUMBER_MINUS_1_INTEGER;
 
             // Reset comparison result.
-            r = *NUMBER_0_INTEGER;
+            r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
             // Increment loop count.
             j++;
@@ -710,7 +709,7 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode x window system. The source count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode x window system. The source count is null.");
     }
 }
 

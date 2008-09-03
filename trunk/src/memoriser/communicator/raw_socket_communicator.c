@@ -1,26 +1,25 @@
 /*
- * $RCSfile: raw_socket_communicator.c,v $
+ * Copyright (C) 1999-2008. Christian Heller.
  *
- * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
+ * This file is part of the Cybernetics Oriented Interpreter (CYBOI).
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
+ * CYBOI is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
+ * CYBOI is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * along with CYBOI.  If not, see <http://www.gnu.org/licenses/>.
  *
- * http://www.cybop.net
- * - Cybernetics Oriented Programming -
+ * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
+ * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $Revision: 1.2 $ $Date: 2008-05-04 00:18:14 $ $Author: christian $
+ * @version $RCSfile: raw_socket_communicator.c,v $ $Revision: 1.3 $ $Date: 2008-09-03 22:04:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -32,10 +31,10 @@
 #include <stdio.h>
 #include "../../globals/constants/cybol/cybol_model_constants.c"
 #include "../../globals/constants/integer/integer_constants.c"
-#include "../../globals/constants/memory_structure/array_constants.c"
+#include "../../constant/abstraction/memory/array_memory_abstraction.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
-#include "../../globals/constants/pointer/pointer_constants.c"
-#include "../../globals/logger/logger.c"
+#include "../../constant/model/memory/pointer_memory_model.c"
+#include "../../logger/logger.c"
 #include "../../memoriser/array.c"
 
 /**
@@ -49,8 +48,8 @@
  */
 void read_raw_socket(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Read from raw socket.");
-    log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) L"The raw socket functionality is NOT implemented yet.");
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Read from raw socket.");
+    log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"The raw socket functionality is NOT implemented yet.");
 }
 
 /**
@@ -68,8 +67,8 @@ void read_raw_socket(void* p0, void* p1, void* p2, void* p3, void* p4) {
 void write_raw_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
 
     // Not implemented.
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Write to raw socket.");
-    log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) L"The raw socket functionality is NOT implemented yet!");
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Write to raw socket.");
+    log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"The raw socket functionality is NOT implemented yet!");
 }
 
 /* RAW_SOCKET_COMMUNICATOR_SOURCE */

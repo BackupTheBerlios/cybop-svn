@@ -1,0 +1,233 @@
+/*
+ * Copyright (C) 1999-2008. Christian Heller.
+ *
+ * This file is part of the Cybernetics Oriented Interpreter (CYBOI).
+ *
+ * CYBOI is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * CYBOI is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with CYBOI.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
+ * Christian Heller <christian.heller@tuxtax.de>
+ *
+ * @version $RCSfile: starting_maintainer.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:00 $ $Author: christian $
+ * @author Christian Heller <christian.heller@tuxtax.de>
+ */
+
+#ifndef STARTER_SOURCE
+#define STARTER_SOURCE
+
+#include "../applicator/starter/gnu_linux_console_starter.c"
+#include "../applicator/starter/socket_starter.c"
+#include "../applicator/starter/x_window_system_starter.c"
+#include "../globals/constants/cybol/cybol_abstraction_constants.c"
+#include "../globals/constants/cybol/cybol_channel_constants.c"
+#include "../globals/constants/cybol/cybol_model_constants.c"
+#include "../globals/constants/cybol/cybol_name_constants.c"
+#include "../globals/constants/integer/integer_constants.c"
+#include "../constant/model/log/message_log_model.c"
+#include "../globals/constants/service_port_constants.c"
+#include "../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../constant/model/memory/pointer_memory_model.c"
+#include "../logger/logger.c"
+#include "../memoriser/accessor/compound_accessor.c"
+#include "../memoriser/array.c"
+#include "../memoriser/allocator.c"
+
+/**
+ * Starts up a service.
+ *
+ * Expected parameters:
+ * - service (required): the service to be started up (gnu_linux_console, tcp_socket, unix_socket, x_window_system, ...)
+ * - namespace (optional, only if service is www, cyboi or similar): the namespace of the socket
+ * - style (optional, only if service is www, cyboi or similar): the namespace of the socket
+ * - style (optional, only if service is www, cyboi or similar): the address of hosts communicating with this system via socket
+ *
+ * @param p0 the parameters
+ * @param p1 the parameters count
+ * @param p2 the knowledge memory
+ * @param p3 the knowledge memory count
+ * @param p4 the knowledge memory size
+ * @param p5 the internal memory
+ */
+void startup_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
+
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Startup service.");
+
+    // The service name, abstraction, model, details.
+    void** sn = NULL_POINTER;
+    void** snc = NULL_POINTER;
+    void** sns = NULL_POINTER;
+    void** sa = NULL_POINTER;
+    void** sac = NULL_POINTER;
+    void** sas = NULL_POINTER;
+    void** sm = NULL_POINTER;
+    void** smc = NULL_POINTER;
+    void** sms = NULL_POINTER;
+    void** sd = NULL_POINTER;
+    void** sdc = NULL_POINTER;
+    void** sds = NULL_POINTER;
+    // The socket namespace name, abstraction, model, details.
+    void** nn = NULL_POINTER;
+    void** nnc = NULL_POINTER;
+    void** nns = NULL_POINTER;
+    void** na = NULL_POINTER;
+    void** nac = NULL_POINTER;
+    void** nas = NULL_POINTER;
+    void** nm = NULL_POINTER;
+    void** nmc = NULL_POINTER;
+    void** nms = NULL_POINTER;
+    void** nd = NULL_POINTER;
+    void** ndc = NULL_POINTER;
+    void** nds = NULL_POINTER;
+    // The communication style name, abstraction, model, details.
+    void** stn = NULL_POINTER;
+    void** stnc = NULL_POINTER;
+    void** stns = NULL_POINTER;
+    void** sta = NULL_POINTER;
+    void** stac = NULL_POINTER;
+    void** stas = NULL_POINTER;
+    void** stm = NULL_POINTER;
+    void** stmc = NULL_POINTER;
+    void** stms = NULL_POINTER;
+    void** std = NULL_POINTER;
+    void** stdc = NULL_POINTER;
+    void** stds = NULL_POINTER;
+    // The host address name, abstraction, model, details.
+    void** an = NULL_POINTER;
+    void** anc = NULL_POINTER;
+    void** ans = NULL_POINTER;
+    void** aa = NULL_POINTER;
+    void** aac = NULL_POINTER;
+    void** aas = NULL_POINTER;
+    void** am = NULL_POINTER;
+    void** amc = NULL_POINTER;
+    void** ams = NULL_POINTER;
+    void** ad = NULL_POINTER;
+    void** adc = NULL_POINTER;
+    void** ads = NULL_POINTER;
+
+    // Get service.
+    get_universal_compound_element_by_name(p0, p1,
+        (void*) SERVICE_NAME, (void*) SERVICE_NAME_COUNT,
+        (void*) &sn, (void*) &snc, (void*) &sns,
+        (void*) &sa, (void*) &sac, (void*) &sas,
+        (void*) &sm, (void*) &smc, (void*) &sms,
+        (void*) &sd, (void*) &sdc, (void*) &sds,
+        p2, p3);
+
+    // Get socket namespace.
+    get_universal_compound_element_by_name(p0, p1,
+        (void*) SERVICE_NAMESPACE_NAME, (void*) SERVICE_NAMESPACE_NAME_COUNT,
+        (void*) &nn, (void*) &nnc, (void*) &nns,
+        (void*) &na, (void*) &nac, (void*) &nas,
+        (void*) &nm, (void*) &nmc, (void*) &nms,
+        (void*) &nd, (void*) &ndc, (void*) &nds,
+        p2, p3);
+
+    // Get communication style.
+    get_universal_compound_element_by_name(p0, p1,
+        (void*) SERVICE_STYLE_NAME, (void*) SERVICE_STYLE_NAME_COUNT,
+        (void*) &stn, (void*) &stnc, (void*) &stns,
+        (void*) &sta, (void*) &stac, (void*) &stas,
+        (void*) &stm, (void*) &stmc, (void*) &stms,
+        (void*) &std, (void*) &stdc, (void*) &stds,
+        p2, p3);
+
+    // Get host address.
+    get_universal_compound_element_by_name(p0, p1,
+        (void*) SERVICE_ADDRESS_NAME, (void*) SERVICE_ADDRESS_NAME_COUNT,
+        (void*) &an, (void*) &anc, (void*) &ans,
+        (void*) &aa, (void*) &aac, (void*) &aas,
+        (void*) &am, (void*) &amc, (void*) &ams,
+        (void*) &ad, (void*) &adc, (void*) &ads,
+        p2, p3);
+
+    // The comparison result.
+    int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    // The internal memory index.
+    int i = *NUMBER_MINUS_1_INTEGER;
+    // The server socket internal.
+    int** s = (int**) NULL_POINTER;
+
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+        compare_arrays((void*) *sm, (void*) *smc, (void*) GNU_LINUX_CONSOLE_MODEL, (void*) GNU_LINUX_CONSOLE_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            startup_gnu_linux_console(p5, p2, p3, p4);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+        compare_arrays((void*) *sm, (void*) *smc, (void*) X_WINDOW_SYSTEM_MODEL, (void*) X_WINDOW_SYSTEM_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            startup_x_window_system(p5, p2, p3, p4);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+        compare_arrays((void*) *sm, (void*) *smc, (void*) WWW_SERVICE_MODEL, (void*) WWW_SERVICE_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            // Get server socket internal.
+            i = *WWW_BASE_INTERNAL + *SOCKET_INTERNAL;
+            get_element(p5, (void*) &i, (void*) &s, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
+            if (*s == *NULL_POINTER_MEMORY_MODEL) {
+
+                // Startup server socket if it does not already exist.
+                startup_socket(p5, *nm, *nmc, *stm, *stmc, *am, *amc, (void*) WWW_PORT, (void*) WWW_BASE_INTERNAL, p2, p3, p4);
+
+            } else {
+
+                log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not start up service. The www service is already running.");
+            }
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+        compare_arrays((void*) *sm, (void*) *smc, (void*) CYBOI_SERVICE_MODEL, (void*) CYBOI_SERVICE_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            // Get server socket internal.
+            i = *CYBOI_BASE_INTERNAL + *SOCKET_INTERNAL;
+            get_element(p5, (void*) &i, (void*) &s, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+
+            if (*s == *NULL_POINTER_MEMORY_MODEL) {
+
+                // Startup server socket if it does not already exist.
+                startup_socket(p5, *nm, *nmc, *stm, *stmc, *am, *amc, (void*) CYBOI_PORT, (void*) CYBOI_BASE_INTERNAL, p2, p3, p4);
+
+            } else {
+
+                log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not start up service. The cyboi service is already running.");
+            }
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+        log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not startup service. The service model is unknown.");
+    }
+}
+
+/* STARTER_SOURCE */
+#endif

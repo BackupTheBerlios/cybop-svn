@@ -1,30 +1,25 @@
 /*
- * $RCSfile: communicator.c,v $
+ * Copyright (C) 1999-2008. Christian Heller.
  *
- * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
+ * This file is part of the Cybernetics Oriented Interpreter (CYBOI).
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
+ * CYBOI is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
+ * CYBOI is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * along with CYBOI.  If not, see <http://www.gnu.org/licenses/>.
  *
- * http://www.cybop.net
- * - Cybernetics Oriented Programming -
+ * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
+ * Christian Heller <christian.heller@tuxtax.de>
  *
- * This file contains the functionality to:
- * - read data from a device into a byte array
- * - write data from a byte array to a device
- *
- * @version $Revision: 1.24 $ $Date: 2008-05-27 22:52:00 $ $Author: christian $
+ * @version $RCSfile: communicator.c,v $ $Revision: 1.25 $ $Date: 2008-09-03 22:04:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -35,7 +30,7 @@
 #include "../globals/constants/cybol/cybol_channel_constants.c"
 #include "../globals/constants/cybol/cybol_model_constants.c"
 #include "../globals/constants/integer/integer_constants.c"
-#include "../globals/constants/memory_structure/array_constants.c"
+#include "../constant/abstraction/memory/array_memory_abstraction.c"
 #include "../globals/constants/system/system_file_name_constants.c"
 #include "../memoriser/communicator/datagram_socket_communicator.c"
 #include "../memoriser/communicator/file_communicator.c"
@@ -72,87 +67,87 @@
  */
 void read_data(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Read data.");
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Read data.");
 
     // The comparison result.
-    int r = *NUMBER_0_INTEGER;
+    int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-    if (r == *NUMBER_0_INTEGER) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p9, p10, (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+        compare_arrays(p9, p10, (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-        if (r != *NUMBER_0_INTEGER) {
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             read_inline(p0, p1, p2, p3, p4);
         }
     }
 
-    if (r == *NUMBER_0_INTEGER) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p9, p10, (void*) FILE_CHANNEL, (void*) FILE_CHANNEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+        compare_arrays(p9, p10, (void*) FILE_CHANNEL, (void*) FILE_CHANNEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-        if (r != *NUMBER_0_INTEGER) {
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             read_file(p0, p1, p2, p3, p4);
         }
     }
 
-    if (r == *NUMBER_0_INTEGER) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p9, p10, (void*) SHELL_CHANNEL, (void*) SHELL_CHANNEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+        compare_arrays(p9, p10, (void*) SHELL_CHANNEL, (void*) SHELL_CHANNEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-        if (r != *NUMBER_0_INTEGER) {
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             // CAUTION! Instead of a file name, the "stdint" standard intput file stream is handed over here!
             read_file(p0, p1, p2, (void*) INPUT_SYSTEM_FILE_NAME, (void*) INPUT_SYSTEM_FILE_NAME_COUNT);
         }
     }
 
-    if (r == *NUMBER_0_INTEGER) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p9, p10, (void*) FTP_CHANNEL, (void*) FTP_CHANNEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+        compare_arrays(p9, p10, (void*) FTP_CHANNEL, (void*) FTP_CHANNEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-        if (r != *NUMBER_0_INTEGER) {
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             read_ftp(p0, p1, p2, p3, p4);
         }
     }
 
-    if (r == *NUMBER_0_INTEGER) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p9, p10, (void*) HTTP_CHANNEL, (void*) HTTP_CHANNEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+        compare_arrays(p9, p10, (void*) HTTP_CHANNEL, (void*) HTTP_CHANNEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-        if (r != *NUMBER_0_INTEGER) {
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             read_http(p0, p1, p2, p3, p4);
         }
     }
 
-    if (r == *NUMBER_0_INTEGER) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p9, p10, (void*) GNU_LINUX_CONSOLE_MODEL, (void*) GNU_LINUX_CONSOLE_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+        compare_arrays(p9, p10, (void*) GNU_LINUX_CONSOLE_MODEL, (void*) GNU_LINUX_CONSOLE_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-        if (r != *NUMBER_0_INTEGER) {
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             read_gnu_linux_console(p0, p1, p2, p3);
         }
     }
 
-    if (r == *NUMBER_0_INTEGER) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p9, p10, (void*) X_WINDOW_SYSTEM_MODEL, (void*) X_WINDOW_SYSTEM_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+        compare_arrays(p9, p10, (void*) X_WINDOW_SYSTEM_MODEL, (void*) X_WINDOW_SYSTEM_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-        if (r != *NUMBER_0_INTEGER) {
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             read_x_window_system(p0, p1, p2, p3, p4);
         }
     }
 
-    if (r == *NUMBER_0_INTEGER) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p9, p10, (void*) STREAM_COMMUNICATION_STYLE_MODEL, (void*) STREAM_COMMUNICATION_STYLE_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+        compare_arrays(p9, p10, (void*) STREAM_COMMUNICATION_STYLE_MODEL, (void*) STREAM_COMMUNICATION_STYLE_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-        if (r != *NUMBER_0_INTEGER) {
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
 /*??
             read_stream_socket(p0, p1, p2, p3, p4, p5, p6, p9);
@@ -160,11 +155,11 @@ void read_data(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
         }
     }
 
-    if (r == *NUMBER_0_INTEGER) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p9, p10, (void*) DATAGRAM_COMMUNICATION_STYLE_MODEL, (void*) DATAGRAM_COMMUNICATION_STYLE_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+        compare_arrays(p9, p10, (void*) DATAGRAM_COMMUNICATION_STYLE_MODEL, (void*) DATAGRAM_COMMUNICATION_STYLE_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-        if (r != *NUMBER_0_INTEGER) {
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
 /*??
             read_datagram_socket(p0, p1, p2, p6, p7, p8, p9);
@@ -172,11 +167,11 @@ void read_data(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
         }
     }
 
-    if (r == *NUMBER_0_INTEGER) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p9, p10, (void*) RAW_COMMUNICATION_STYLE_MODEL, (void*) RAW_COMMUNICATION_STYLE_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+        compare_arrays(p9, p10, (void*) RAW_COMMUNICATION_STYLE_MODEL, (void*) RAW_COMMUNICATION_STYLE_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-        if (r != *NUMBER_0_INTEGER) {
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
 /*??
             read_raw_socket(p0, p1, p2);
@@ -184,9 +179,9 @@ void read_data(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
         }
     }
 
-    if (r == *NUMBER_0_INTEGER) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) L"Could not read data. The communication type is unknown.");
+        log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not read data. The communication type is unknown.");
     }
 }
 
@@ -210,87 +205,87 @@ void read_data(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
  */
 void write_data(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Write data.");
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Write data.");
 
     // The comparison result.
-    int r = *NUMBER_0_INTEGER;
+    int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-    if (r == *NUMBER_0_INTEGER) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p5, p6, (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+        compare_arrays(p5, p6, (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-        if (r != *NUMBER_0_INTEGER) {
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             write_inline(p0, p1, p2, p3, p4);
         }
     }
 
-    if (r == *NUMBER_0_INTEGER) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p5, p6, (void*) FILE_CHANNEL, (void*) FILE_CHANNEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+        compare_arrays(p5, p6, (void*) FILE_CHANNEL, (void*) FILE_CHANNEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-        if (r != *NUMBER_0_INTEGER) {
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             write_file(p0, p1, p2, p3, p4);
         }
     }
 
-    if (r == *NUMBER_0_INTEGER) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p5, p6, (void*) SHELL_CHANNEL, (void*) SHELL_CHANNEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+        compare_arrays(p5, p6, (void*) SHELL_CHANNEL, (void*) SHELL_CHANNEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-        if (r != *NUMBER_0_INTEGER) {
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             // CAUTION! Instead of a file name, the "stdout" standard output file stream is handed over here!
             write_file((void*) OUTPUT_SYSTEM_FILE_NAME, (void*) OUTPUT_SYSTEM_FILE_NAME_COUNT, p2, p3, p4);
         }
     }
 
-    if (r == *NUMBER_0_INTEGER) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p5, p6, (void*) FTP_CHANNEL, (void*) FTP_CHANNEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+        compare_arrays(p5, p6, (void*) FTP_CHANNEL, (void*) FTP_CHANNEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-        if (r != *NUMBER_0_INTEGER) {
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             write_ftp(p0, p1, p2, p3, p4);
         }
     }
 
-    if (r == *NUMBER_0_INTEGER) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p5, p6, (void*) HTTP_CHANNEL, (void*) HTTP_CHANNEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+        compare_arrays(p5, p6, (void*) HTTP_CHANNEL, (void*) HTTP_CHANNEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-        if (r != *NUMBER_0_INTEGER) {
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             write_http(p0, p1, p2, p3, p4);
         }
     }
 
-    if (r == *NUMBER_0_INTEGER) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p5, p6, (void*) GNU_LINUX_CONSOLE_MODEL, (void*) GNU_LINUX_CONSOLE_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+        compare_arrays(p5, p6, (void*) GNU_LINUX_CONSOLE_MODEL, (void*) GNU_LINUX_CONSOLE_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-        if (r != *NUMBER_0_INTEGER) {
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             write_gnu_linux_console(p0, p1, p2, p3, p4);
         }
     }
 
-    if (r == *NUMBER_0_INTEGER) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p5, p6, (void*) X_WINDOW_SYSTEM_MODEL, (void*) X_WINDOW_SYSTEM_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+        compare_arrays(p5, p6, (void*) X_WINDOW_SYSTEM_MODEL, (void*) X_WINDOW_SYSTEM_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-        if (r != *NUMBER_0_INTEGER) {
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             write_x_window_system(p0, p1, p2, p3, p4);
         }
     }
 
-    if (r == *NUMBER_0_INTEGER) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p5, p6, (void*) STREAM_COMMUNICATION_STYLE_MODEL, (void*) STREAM_COMMUNICATION_STYLE_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+        compare_arrays(p5, p6, (void*) STREAM_COMMUNICATION_STYLE_MODEL, (void*) STREAM_COMMUNICATION_STYLE_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-        if (r != *NUMBER_0_INTEGER) {
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
 /*??
             write_stream_socket(p0, p1, p2, p3, p4, p5, p6);
@@ -298,11 +293,11 @@ void write_data(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
         }
     }
 
-    if (r == *NUMBER_0_INTEGER) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p5, p6, (void*) DATAGRAM_COMMUNICATION_STYLE_MODEL, (void*) DATAGRAM_COMMUNICATION_STYLE_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+        compare_arrays(p5, p6, (void*) DATAGRAM_COMMUNICATION_STYLE_MODEL, (void*) DATAGRAM_COMMUNICATION_STYLE_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-        if (r != *NUMBER_0_INTEGER) {
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
 /*??
             write_datagram_socket(p0, p1, p2, p3, p4, p5, p6);
@@ -310,11 +305,11 @@ void write_data(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
         }
     }
 
-    if (r == *NUMBER_0_INTEGER) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p5, p6, (void*) RAW_COMMUNICATION_STYLE_MODEL, (void*) RAW_COMMUNICATION_STYLE_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+        compare_arrays(p5, p6, (void*) RAW_COMMUNICATION_STYLE_MODEL, (void*) RAW_COMMUNICATION_STYLE_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-        if (r != *NUMBER_0_INTEGER) {
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
 /*??
             write_raw_socket(p0, p1, p2);
@@ -322,9 +317,9 @@ void write_data(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
         }
     }
 
-    if (r == *NUMBER_0_INTEGER) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) L"Could not write data. The communication type is unknown.");
+        log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not write data. The communication type is unknown.");
     }
 }
 

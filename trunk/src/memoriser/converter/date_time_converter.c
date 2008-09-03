@@ -1,26 +1,25 @@
 /*
- * $RCSfile: date_time_converter.c,v $
+ * Copyright (C) 1999-2008. Christian Heller.
  *
- * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
+ * This file is part of the Cybernetics Oriented Interpreter (CYBOI).
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
+ * CYBOI is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
+ * CYBOI is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * along with CYBOI.  If not, see <http://www.gnu.org/licenses/>.
  *
- * http://www.cybop.net
- * - Cybernetics Oriented Programming -
+ * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
+ * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $Revision: 1.12 $ $Date: 2008-07-08 17:55:36 $ $Author: christian $
+ * @version $RCSfile: date_time_converter.c,v $ $Revision: 1.13 $ $Date: 2008-09-03 22:04:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,10 +29,10 @@
 #include "../../globals/constants/character/code/character_code_constants.c"
 #include "../../globals/constants/cybol/cybol_abstraction_constants.c"
 #include "../../globals/constants/integer/integer_constants.c"
-#include "../../globals/constants/log/log_message_constants.c"
+#include "../../constant/model/log/message_log_model.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
-#include "../../globals/constants/pointer/pointer_constants.c"
-#include "../../globals/logger/logger.c"
+#include "../../constant/model/memory/pointer_memory_model.c"
+#include "../../logger/logger.c"
 #include "../../globals/variables/reallocation_factor_variables.c"
 #include "../../memoriser/allocator.c"
 
@@ -58,33 +57,33 @@
  */
 void decode_date_time(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p4 != *NULL_POINTER) {
+    if (p4 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* sc = (int*) p4;
 
-        if (p3 != *NULL_POINTER) {
+        if (p3 != *NULL_POINTER_MEMORY_MODEL) {
 
             void* s = (void*) p3;
 
-            if (p0 != *NULL_POINTER) {
+            if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
                 void** d = (void**) p0;
 
-                log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Decode date time.");
+                log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Decode date time.");
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode date time. The destination is null.");
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode date time. The destination is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode date time. The source is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode date time. The source is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode date time. The source count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode date time. The source count is null.");
     }
 }
 
@@ -111,58 +110,58 @@ void encode_date_time(void* p0, void* p1, void* p2, void* p3, void* p4) {
  */
 void decode_ddmmyyyy_date_time(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p4 != *NULL_POINTER) {
+    if (p4 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* sc = (int*) p4;
 
-        if (p2 != *NULL_POINTER) {
+        if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
             int* ds = (int*) p2;
 
-            if (p1 != *NULL_POINTER) {
+            if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
                 int* dc = (int*) p1;
 
-                if (p0 != *NULL_POINTER) {
+                if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
                     void** d = (void**) p0;
 
                     if (*sc == *NUMBER_8_INTEGER) {
 
-                        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Decode ddmmyyyy date time.");
+                        log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Decode ddmmyyyy date time.");
 
                         // The temporary null-terminated day string.
-                        wchar_t* tmpd = (wchar_t*) *NULL_POINTER;
+                        wchar_t* tmpd = (wchar_t*) *NULL_POINTER_MEMORY_MODEL;
                         int tmpds = *NUMBER_2_INTEGER + *NUMBER_1_INTEGER;
                         // The temporary null-terminated month string.
-                        wchar_t* tmpm = (wchar_t*) *NULL_POINTER;
+                        wchar_t* tmpm = (wchar_t*) *NULL_POINTER_MEMORY_MODEL;
                         int tmpms = *NUMBER_2_INTEGER + *NUMBER_1_INTEGER;
                         // The temporary null-terminated year string.
-                        wchar_t* tmpy = (wchar_t*) *NULL_POINTER;
+                        wchar_t* tmpy = (wchar_t*) *NULL_POINTER_MEMORY_MODEL;
                         int tmpys = *NUMBER_4_INTEGER + *NUMBER_1_INTEGER;
 
                         // Create temporary null-terminated day string.
-                        allocate_array((void*) &tmpd, (void*) &tmpds, (void*) WIDE_CHARACTER_ARRAY);
+                        allocate_array((void*) &tmpd, (void*) &tmpds, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                         // Create temporary null-terminated month string.
-                        allocate_array((void*) &tmpm, (void*) &tmpms, (void*) WIDE_CHARACTER_ARRAY);
+                        allocate_array((void*) &tmpm, (void*) &tmpms, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                         // Create temporary null-terminated year string.
-                        allocate_array((void*) &tmpy, (void*) &tmpys, (void*) WIDE_CHARACTER_ARRAY);
+                        allocate_array((void*) &tmpy, (void*) &tmpys, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                         // The index.
-                        int i = *NUMBER_0_INTEGER;
+                        int i = *NUMBER_0_INTEGER_MEMORY_MODEL;
                         // The source day index.
-                        void* sdi = p3 + (*NUMBER_0_INTEGER * *WIDE_CHARACTER_PRIMITIVE_SIZE);
+                        void* sdi = p3 + (*NUMBER_0_INTEGER_MEMORY_MODEL * *WIDE_CHARACTER_PRIMITIVE_SIZE);
                         // The source month index.
                         void* smi = p3 + (*NUMBER_2_INTEGER * *WIDE_CHARACTER_PRIMITIVE_SIZE);
                         // The source year index.
                         void* syi = p3 + (*NUMBER_4_INTEGER * *WIDE_CHARACTER_PRIMITIVE_SIZE);
 
                         // Copy original string to temporary null-terminated day string.
-                        set_array_elements((void*) tmpd, (void*) &i, sdi, (void*) NUMBER_2_INTEGER, (void*) WIDE_CHARACTER_ARRAY);
+                        set_array_elements((void*) tmpd, (void*) &i, sdi, (void*) NUMBER_2_INTEGER, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                         // Copy original string to temporary null-terminated month string.
-                        set_array_elements((void*) tmpm, (void*) &i, smi, (void*) NUMBER_2_INTEGER, (void*) WIDE_CHARACTER_ARRAY);
+                        set_array_elements((void*) tmpm, (void*) &i, smi, (void*) NUMBER_2_INTEGER, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                         // Copy original string to temporary null-terminated year string.
-                        set_array_elements((void*) tmpy, (void*) &i, syi, (void*) NUMBER_4_INTEGER, (void*) WIDE_CHARACTER_ARRAY);
+                        set_array_elements((void*) tmpy, (void*) &i, syi, (void*) NUMBER_4_INTEGER, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                         // The day termination character index.
                         int dti = *NUMBER_2_INTEGER;
@@ -172,18 +171,18 @@ void decode_ddmmyyyy_date_time(void* p0, void* p1, void* p2, void* p3, void* p4)
                         int yti = *NUMBER_4_INTEGER;
 
                         // Add string termination to temporary null-terminated day string.
-                        set_array_elements((void*) tmpd, (void*) &dti, (void*) NULL_CONTROL_WIDE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+                        set_array_elements((void*) tmpd, (void*) &dti, (void*) NULL_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                         // Add string termination to temporary null-terminated month string.
-                        set_array_elements((void*) tmpm, (void*) &mti, (void*) NULL_CONTROL_WIDE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+                        set_array_elements((void*) tmpm, (void*) &mti, (void*) NULL_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                         // Add string termination to temporary null-terminated year string.
-                        set_array_elements((void*) tmpy, (void*) &yti, (void*) NULL_CONTROL_WIDE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+                        set_array_elements((void*) tmpy, (void*) &yti, (void*) NULL_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                         // The tail variable is useless here and only needed for the string
                         // transformation function. If the whole string array consists of
                         // many sub strings, separated by space characters, then each sub
                         // string gets interpreted as integer number.
                         // The tail variable in this case points to the remaining sub string.
-                        wchar_t* tail = (wchar_t*) *NULL_POINTER;
+                        wchar_t* tail = (wchar_t*) *NULL_POINTER_MEMORY_MODEL;
 
                         // Transform string to day integer value.
                         // The third parameter is the number base:
@@ -229,35 +228,35 @@ void decode_ddmmyyyy_date_time(void* p0, void* p1, void* p2, void* p3, void* p4)
                         (*dc)++;
 
                         // Destroy temporary null-terminated day string.
-                        deallocate_array((void*) &tmpd, (void*) &tmpds, (void*) WIDE_CHARACTER_ARRAY);
+                        deallocate_array((void*) &tmpd, (void*) &tmpds, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                         // Destroy temporary null-terminated month string.
-                        deallocate_array((void*) &tmpm, (void*) &tmpms, (void*) WIDE_CHARACTER_ARRAY);
+                        deallocate_array((void*) &tmpm, (void*) &tmpms, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                         // Destroy temporary null-terminated year string.
-                        deallocate_array((void*) &tmpy, (void*) &tmpys, (void*) WIDE_CHARACTER_ARRAY);
+                        deallocate_array((void*) &tmpy, (void*) &tmpys, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                     } else {
 
-                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode ddmmyyyy date time. The source count is unequal eight characters.");
+                        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode ddmmyyyy date time. The source count is unequal eight characters.");
                     }
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode ddmmyyyy date time. The destination is null.");
+                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode ddmmyyyy date time. The destination is null.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode ddmmyyyy date time. The destination count is null.");
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode ddmmyyyy date time. The destination count is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode ddmmyyyy date time. The destination size is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode ddmmyyyy date time. The destination size is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode ddmmyyyy date time. The source count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode ddmmyyyy date time. The source count is null.");
     }
 }
 

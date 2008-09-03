@@ -1,26 +1,25 @@
 /*
- * $RCSfile: utf_8_unicode_character_converter.c,v $
+ * Copyright (C) 1999-2008. Christian Heller.
  *
- * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
+ * This file is part of the Cybernetics Oriented Interpreter (CYBOI).
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
+ * CYBOI is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
+ * CYBOI is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * along with CYBOI.  If not, see <http://www.gnu.org/licenses/>.
  *
- * http://www.cybop.net
- * - Cybernetics Oriented Programming -
+ * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
+ * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $Revision: 1.4 $ $Date: 2008-05-16 23:15:39 $ $Author: christian $
+ * @version $RCSfile: utf_8_unicode_character_converter.c,v $ $Revision: 1.5 $ $Date: 2008-09-03 22:04:03 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -29,10 +28,10 @@
 
 #include "../../../globals/constants/cybol/cybol_abstraction_constants.c"
 #include "../../../globals/constants/integer/integer_constants.c"
-#include "../../../globals/constants/log/log_message_constants.c"
-#include "../../../globals/constants/memory_structure/array_constants.c"
-#include "../../../globals/constants/pointer/pointer_constants.c"
-#include "../../../globals/logger/logger.c"
+#include "../../../constant/model/log/message_log_model.c"
+#include "../../../constant/abstraction/memory/array_memory_abstraction.c"
+#include "../../../constant/model/memory/pointer_memory_model.c"
+#include "../../../logger/logger.c"
 
 //
 // UTF-8 (8-bit UCS/Unicode Transformation Format) is a variable-length
@@ -82,25 +81,25 @@
  */
 void decode_utf_8_unicode_character_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p4 != *NULL_POINTER) {
+    if (p4 != *NULL_POINTER_MEMORY_MODEL) {
 
         size_t* sc = (size_t*) p4;
 
-        if (p2 != *NULL_POINTER) {
+        if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
             size_t* ds = (size_t*) p2;
 
-            if (p1 != *NULL_POINTER) {
+            if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
                 int* dc = (int*) p1;
 
-                if (p0 != *NULL_POINTER) {
+                if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
                     wchar_t** d = (wchar_t**) p0;
 
-                    if (*dc >= *NUMBER_0_INTEGER) {
+                    if (*dc >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Decode UTF-8 Unicode character vector.");
+                        log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Decode UTF-8 Unicode character vector.");
 
                         // The new destination wide character vector size.
                         //
@@ -116,7 +115,7 @@ void decode_utf_8_unicode_character_vector(void* p0, void* p1, void* p2, void* p
                         *ds = *dc + (*sc * *NUMBER_1_INTEGER);
 
                         // Reallocate destination wide character vector.
-                        reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_ARRAY);
+                        reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                         if (*dc <= (*ds - (*sc * *NUMBER_1_INTEGER))) {
 
@@ -149,44 +148,44 @@ void decode_utf_8_unicode_character_vector(void* p0, void* p1, void* p2, void* p
                             // Returns the number of wide characters converted.
                             int n = mbsnrtowcs(*d, (void*) &p3, *sc, *ds, st);
 
-                            if (n >= *NUMBER_0_INTEGER) {
+                            if (n >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                                 // Increment destination count by the number of wide characters converted.
                                 *dc = *dc + n;
 
                             } else {
 
-                                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode utf-8 unicode character stream. The conversion failed, possibly due to an invalid multibyte sequence.");
+                                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode utf-8 unicode character stream. The conversion failed, possibly due to an invalid multibyte sequence.");
                             }
 
                         } else {
 
-                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode utf-8 unicode character stream. The destination count exceeds the size.");
+                            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode utf-8 unicode character stream. The destination count exceeds the size.");
                         }
 
                     } else {
 
-                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode utf-8 unicode character stream. The destination count is negative.");
+                        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode utf-8 unicode character stream. The destination count is negative.");
                     }
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode utf-8 unicode character stream. The destination is null.");
+                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode utf-8 unicode character stream. The destination is null.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode utf-8 unicode character stream. The destination count is null.");
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode utf-8 unicode character stream. The destination count is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode utf-8 unicode character stream. The destination size is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode utf-8 unicode character stream. The destination size is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode utf-8 unicode character stream. The source count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode utf-8 unicode character stream. The source count is null.");
     }
 }
 
@@ -201,23 +200,23 @@ void decode_utf_8_unicode_character_vector(void* p0, void* p1, void* p2, void* p
  */
 void encode_utf_8_unicode_character_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p4 != *NULL_POINTER) {
+    if (p4 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* sc = (int*) p4;
 
-        if (p2 != *NULL_POINTER) {
+        if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
             int* ds = (int*) p2;
 
-            if (p1 != *NULL_POINTER) {
+            if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
                 int* dc = (int*) p1;
 
-                if (p0 != *NULL_POINTER) {
+                if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
                     void** d = (void**) p0;
 
-                    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Encode UTF-8 Unicode character vector.");
+                    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Encode UTF-8 Unicode character vector.");
 
                     // The new destination wide character vector size.
                     //
@@ -266,39 +265,39 @@ void encode_utf_8_unicode_character_vector(void* p0, void* p1, void* p2, void* p
                         // Returns the number of multibyte characters converted.
                         int n = wcsnrtombs(*d, (void*) &p3, *sc, *ds, st);
 
-                        if (n >= *NUMBER_0_INTEGER) {
+                        if (n >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                             // Increment destination count by the number of multibyte characters converted.
                             *dc = *dc + n;
 
                         } else {
 
-                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode utf-8 unicode character stream. The conversion failed, possibly because one of the wide characters in the input string has no valid multibyte character equivalent.");
+                            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode utf-8 unicode character stream. The conversion failed, possibly because one of the wide characters in the input string has no valid multibyte character equivalent.");
                         }
 
                     } else {
 
-                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode utf-8 unicode character stream. The destination count exceeds the size.");
+                        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode utf-8 unicode character stream. The destination count exceeds the size.");
                     }
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode utf-8 unicode character stream. The destination is null.");
+                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode utf-8 unicode character stream. The destination is null.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode utf-8 unicode character stream. The destination count is null.");
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode utf-8 unicode character stream. The destination count is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode utf-8 unicode character stream. The destination size is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode utf-8 unicode character stream. The destination size is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode utf-8 unicode character stream. The source count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode utf-8 unicode character stream. The source count is null.");
     }
 }
 

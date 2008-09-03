@@ -1,31 +1,25 @@
 /*
- * $RCSfile: cyboi.c,v $
+ * Copyright (C) 1999-2008. Christian Heller.
  *
- * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
+ * This file is part of the Cybernetics Oriented Interpreter (CYBOI).
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
+ * CYBOI is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
+ * CYBOI is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * along with CYBOI.  If not, see <http://www.gnu.org/licenses/>.
  *
- * http://www.cybop.net
- * - Cybernetics Oriented Programming -
+ * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
+ * Christian Heller <christian.heller@tuxtax.de>
  *
- * This is the main file of the Cybernetics Oriented Interpreter (CYBOI).
- *
- * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
- * which adhere to the Extended Markup Language (XML) syntax.
- *
- * @version $Revision: 1.36 $ $Date: 2008-06-26 04:57:27 $ $Author: christian $
+ * @version $RCSfile: cyboi.c,v $ $Revision: 1.37 $ $Date: 2008-09-03 22:04:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -42,9 +36,15 @@
 #include "../controller/tester.c"
 #include "../globals/constants/cyboi/cyboi_operation_mode_constants.c"
 #include "../globals/constants/integer/integer_constants.c"
-#include "../globals/constants/log/log_message_constants.c"
-#include "../globals/constants/pointer/pointer_constants.c"
+#include "../constant/model/log/message_log_model.c"
+#include "../constant/model/memory/pointer_memory_model.c"
 #include "../globals/variables/log_variables.c"
+
+//
+// This is the main file of the Cybernetics Oriented Interpreter (CYBOI).
+// CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
+// which adhere to the Extended Markup Language (XML) syntax.
+//
 
 /**
  * The main entry function.
@@ -74,7 +74,7 @@ int main(int p0, char** p1) {
     // Return 1 to indicate an error, by default.
     int r = *NUMBER_1_INTEGER;
 
-    if (p1 != *NULL_POINTER) {
+    if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
         // log_write_terminated_message(stdout, L"Information: Execute cyboi.\n");
 
@@ -144,9 +144,9 @@ int main(int p0, char** p1) {
         int m = *HELP_CYBOI_OPERATION_MODE;
 
         // The cybol knowledge file path.
-        void* k = *NULL_POINTER;
-        int kc = *NUMBER_0_INTEGER;
-        int ks = *NUMBER_0_INTEGER;
+        void* k = *NULL_POINTER_MEMORY_MODEL;
+        int kc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+        int ks = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
         // Allocate cybol knowledge file path.
         allocate((void*) &k, (void*) &ks, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
@@ -166,9 +166,9 @@ int main(int p0, char** p1) {
         // since one of the options determines the log output file name.
         orient((void*) LOG_OUTPUT, (void*) NUMBER_1_INTEGER);
 
-        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Run cyboi.");
-        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Globalised global variables already.");
-        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Optionalised log file already.");
+        log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Run cyboi.");
+        log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Globalised global variables already.");
+        log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Optionalised log file already.");
 
         if (m == *VERSION_CYBOI_OPERATION_MODE) {
 
@@ -185,7 +185,7 @@ int main(int p0, char** p1) {
 
         } else if (m == *KNOWLEDGE_CYBOI_OPERATION_MODE) {
 
-            if ((k != *NULL_POINTER) && (kc >= *NUMBER_0_INTEGER)) {
+            if ((k != *NULL_POINTER_MEMORY_MODEL) && (kc >= *NUMBER_0_INTEGER_MEMORY_MODEL)) {
 
                 // Manage system startup and shutdown using the given cybol knowledge file.
                 manage(k, (void*) &kc);
@@ -198,9 +198,9 @@ int main(int p0, char** p1) {
             }
         }
 
-        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Deoptionalise log file yet.");
-        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Unglobalise global variables yet.");
-        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Exit cyboi normally afterwards.");
+        log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Deoptionalise log file yet.");
+        log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Unglobalise global variables yet.");
+        log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Exit cyboi normally afterwards.");
 
         // Deoptionalise command line argument options.
         deoptionalise((void*) LOG_OUTPUT);
@@ -214,7 +214,7 @@ int main(int p0, char** p1) {
         // log_write_terminated_message(stdout, L"Information: Exit cyboi normally.\n");
 
         // Set return value to 0, to indicate proper shutdown.
-        r = *NUMBER_0_INTEGER;
+        r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     } else {
 

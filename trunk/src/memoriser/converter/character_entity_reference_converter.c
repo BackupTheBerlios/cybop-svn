@@ -1,26 +1,25 @@
 /*
- * $RCSfile: character_entity_reference_converter.c,v $
+ * Copyright (C) 1999-2008. Christian Heller.
  *
- * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
+ * This file is part of the Cybernetics Oriented Interpreter (CYBOI).
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
+ * CYBOI is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
+ * CYBOI is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * along with CYBOI.  If not, see <http://www.gnu.org/licenses/>.
  *
- * http://www.cybop.net
- * - Cybernetics Oriented Programming -
+ * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
+ * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $Revision: 1.5 $ $Date: 2008-05-27 22:52:00 $ $Author: christian $
+ * @version $RCSfile: character_entity_reference_converter.c,v $ $Revision: 1.6 $ $Date: 2008-09-03 22:04:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -31,11 +30,11 @@
 #include "../../globals/constants/character/html_character_entity_constants.c"
 #include "../../globals/constants/cybol/cybol_abstraction_constants.c"
 #include "../../globals/constants/integer/integer_constants.c"
-#include "../../globals/constants/log/log_message_constants.c"
-#include "../../globals/constants/memory_structure/array_constants.c"
+#include "../../constant/model/log/message_log_model.c"
+#include "../../constant/abstraction/memory/array_memory_abstraction.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
-#include "../../globals/constants/pointer/pointer_constants.c"
-#include "../../globals/logger/logger.c"
+#include "../../constant/model/memory/pointer_memory_model.c"
+#include "../../logger/logger.c"
 #include "../../globals/variables/reallocation_factor_variables.c"
 
 /**
@@ -50,30 +49,30 @@
 /*??
 void decode_character_entity_reference(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p2 != *NULL_POINTER) {
+    if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* ds = (int*) p2;
 
-        if (p1 != *NULL_POINTER) {
+        if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
             int* dc = (int*) p1;
 
-            if (p0 != *NULL_POINTER) {
+            if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
                 void** d = (void**) p0;
 
                 // The temporary value.
                 void** t = NULL_POINTER;
-                int tc = *NUMBER_0_INTEGER;
-                int ts = *NUMBER_0_INTEGER;
+                int tc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+                int ts = *NUMBER_0_INTEGER_MEMORY_MODEL;
                 // The comparison result.
-                int r = *NUMBER_0_INTEGER;
+                int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                 //
                 // Set actual destination, using the temporary value.
                 //
 
-                if (r != *NUMBER_0_INTEGER) {
+                if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                     if ((*dc + tc) > *ds) {
 
@@ -93,17 +92,17 @@ void decode_character_entity_reference(void* p0, void* p1, void* p2, void* p3, v
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode character entity reference. The destination is null.");
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode character entity reference. The destination is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode character entity reference. The destination count is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode character entity reference. The destination count is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode character entity reference. The destination size is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode character entity reference. The destination size is null.");
     }
 }
 */
@@ -120,31 +119,31 @@ void decode_character_entity_reference(void* p0, void* p1, void* p2, void* p3, v
 /*??
 void encode_character_entity_reference(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p2 != *NULL_POINTER) {
+    if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* ds = (int*) p2;
 
-        if (p1 != *NULL_POINTER) {
+        if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
             int* dc = (int*) p1;
 
-            if (p0 != *NULL_POINTER) {
+            if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
                 void** d = (void**) p0;
 
                 // The temporary value.
                 void** t = NULL_POINTER;
-                int tc = *NUMBER_0_INTEGER;
-                int ts = *NUMBER_0_INTEGER;
+                int tc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+                int ts = *NUMBER_0_INTEGER_MEMORY_MODEL;
                 // The comparison result.
-                int r = *NUMBER_0_INTEGER;
+                int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
 /*??
-                if (r == *NUMBER_0_INTEGER) {
+                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                     compare_arrays(p3, p4, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-                    if (r != *NUMBER_0_INTEGER) {
+                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         t = (void**) &SPACE_URL_ESCAPE_CODE;
                         tc = *SPACE_URL_ESCAPE_CODE_COUNT;
@@ -158,7 +157,7 @@ void encode_character_entity_reference(void* p0, void* p1, void* p2, void* p3, v
                 // Set actual destination, using the temporary value.
                 //
 
-                if (r != *NUMBER_0_INTEGER) {
+                if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                     if ((*dc + tc) > *ds) {
 
@@ -178,17 +177,17 @@ void encode_character_entity_reference(void* p0, void* p1, void* p2, void* p3, v
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode character entity reference. The destination is null.");
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode character entity reference. The destination is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode character entity reference. The destination count is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode character entity reference. The destination count is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode character entity reference. The destination size is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode character entity reference. The destination size is null.");
     }
 }
 */

@@ -7,20 +7,29 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.57 $ $Date: 2008-07-11 23:14:42 $ $Author: christian $
+# @version $Revision: 1.58 $ $Date: 2008-09-03 22:03:58 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Create new module "globals/constants/cybol/cybol_message_constants.c" as adapted copy of "cybol_model_constants.c"
-        * Create new memory abstraction constants, which are used when decoding CYBOL into memory;
-            the abstraction constants of cybol and in memory at runtime need to be distinguished,
-            because they are not always identical, e.g.
-            a cybol "knowledge" abstraction gets converted into an in-memory "wide_character" abstraction;
-            a cybol "character" abstraction gets converted into an in-memory "wide_character" abstraction;
-            a cybol "wide_character" abstraction does not exist at all,
-            because the cybol "character" abstraction is always expected to be utf-8 encoded
+        * Rename several things in CYBOL files and CYBOI:
+            --> the XML tag descriptions (part, property, constraint) in a CYBOL file are special cases with the
+                exception that "create" and "receive" information are mixed, in order to serialise models easily;
+            --> rename "abstraction" attribute to "language" for all CYBOL tags!
+            --> rename "model" attribute to "message" for all CYBOL tags!
+            --> a "model" attribute (with new meaning as knowledge model to store received data) is not needed,
+                as it gets created internally
+            --> an "element" attribute is not needed, as the CYBOL structure determines parts and properties
+            --> a "whole" attribute is not needed, as due to the CYBOL structure it is clear that
+                    parts belong to the compound in whose file they stand
+            --> a "receiver" attribute is not needed as it is clear that this cyboi system itself is the receiver
 
-        * Try out example applications and continue debugging
+        * Adapt all source code to wide characters (UTF-32 Unicode character encoding)
+        * Convert CYBOL files to UTF-8 Unicode character encoding
+
+        * Replace "libxml2" parser with an own solution
+
+        * Assign "sizeof" for each programming language type to a global variable just once at startup
+            and henceforth use that variable instead of each time determining "sizeof", throughout all source code
 
         * Find unspecific bug causing a segmentation fault in optionaliser,
             sometimes in function "optionalise_log_file", other times in "optionalise_log_level"
@@ -34,8 +43,9 @@
             http_response_converter.c
             xdt_converter.c
 
+        * CAUTION! The following was probably already SOLVED in source code and may get DELETED here!
         * Reactivate loop in function "read_gnu_linux_console" (which was blocking the program flow),
-            because escape sequences consist of more than one characters (mostly three)
+            because escape sequences consist of more than just one character (mostly three)
         * Find some way to predict the number of characters or find an eof or the like,
             in order to properly handle escape control sequences
 
@@ -54,7 +64,8 @@
         * Increase count and size in "*_accessor.c" files automatically and adapt all source code accordingly
             (e.g. "set_compound_element_by_name" increases count and size; do likewise for "integer_vector" etc.)
         * Create new "set", "remove", "get" functions which automatically adjust the destination's count and size
-            (see modules "character_vector_accessor.c" and "wide_character_vector_accessor.c", which already have it)
+            (see modules "character_vector_accessor.c" and "wide_character_vector_accessor.c", which already have it);
+            this is to reduce the amount of source code and to take the burden of handling count and size from the developer working with arrays
 
         * Replace redundant standard functions (arrays, set_elements etc.) with some sort of TEMPLATE replacing the type;
             this could save hundreds of lines of code; possibly use a C++ compiler just because of this reason?
@@ -62,16 +73,12 @@
         * Some functions can be unified without using macros or the like, just by handing over the type's size as argument!
         * YES, ALL array functions CAN be unified, if introducing NEW files for handling of primitive data types,
             e.g. with functions like "assign_double", "compare_double", "add_double" etc.;
-            that way the different types are outsourced from the array handling files
+            that way the different types are outsourced from the array handling files and redundancies are avoided
 
         * Does the logger need an own mutex? ... because it is accessed by all threads!
 
         * Beautify source code and write rules into style guide document,
             e.g. always apply this order: get, set, remove or: read, write or: allocate, deallocate etc.
-
-        * Write an own xml parser, adapted to cybol (special begin- and end tokens for xml attributes), replacing the libxml2 parser
-
---
 
         * Commands of gnu/linux console MUESSEN uebergeben werden
         * Suche nach gedrueckter Taste in commands
@@ -132,6 +139,8 @@
             a session id has to be generated from a range of values that is large enough to
             minimise the probability of guessing another user's session id.
 
+        * The following might be SUPERFLUOUS, since now, a CYBOL operation hands over
+            special properties, e.g. to store the socket number etc.!
         * Store socket of a client, in order to be able to reply to it:
             1 hand over a cybol property, to store the socket in the knowledge tree
                 --> no, since low-level sockets should not be known to cybol applications
@@ -145,14 +154,9 @@
         * It was decided that "send" operations do NOT run in an own thread (for now and the near future, at least),
             also if querying a server via http, since this would mix up the signal handling mechanism
 
-        * Assign "sizeof" for each programming language type to a global variable just once at startup
-            and henceforth use that variable instead of each time determining "sizeof", throughout all source code
-
         * Use an OR || and compare for numeric character reference and character entity reference, when parsing http requests
-        * Distinguish cybol- from memory abstractions
         * Enable multiple abstractions like "character|UTF-32|gzip", separated by
             a "pipe" character and processed one-by-one, in the given order
-        * Add more abstractions for date and time (see Wikipedia and ISO/EN/DIN standards)
         * Correct encode for background- and foreground colour in "encode_gnu_linux_console_shape" function of
             "gnu_linux_console_converter.c": allocate destination variables before handing them over as parameters
         * Check all places where "rellocate" is used, if the new array is SET / ASSIGNED new right afterwards
@@ -160,9 +164,6 @@
             reallocation factor handling and also shrink memory structures appropriately
         * Include the sources of all documents into the distributable tarball cybop-0.9.0/
             --> really? This will grow it up to 500 MB in size due to the images
-        * Adapt all source code to wide characters (UTF-32 Unicode character encoding)
-        * Convert CYBOL files to UTF-8 Unicode character encoding
-        * Decode CYBOL files after having parsed them --> is the libxml2 parser capable of handling UTF-8?
 
         * Define data types with fixed length (using preprocessor #define??),
             so that they mean the same on different platforms (see Qt library or Java's types)
@@ -174,18 +175,6 @@
             first if someone was trying to use the system; also cautioning about ones
             that are partly outdated, etc.; the list of purported "tutorials" doesn't
             really make sense to beginners either
-
-        * Rename several things in CYBOL files and CYBOI:
-            --> the XML tag descriptions (part, property, constraint) in a CYBOL file are special cases with the
-                exception that "create" and "receive" information are mixed, in order to serialise models easily;
-            --> rename "abstraction" attribute to "language" for all CYBOL tags!
-            --> rename "model" attribute to "message" for all CYBOL tags!
-            --> a "model" attribute (with new meaning as knowledge model to store received data) is not needed,
-                as it gets created internally
-            --> an "element" attribute is not needed, as the CYBOL structure determines parts and properties
-            --> a "whole" attribute is not needed, as due to the CYBOL structure it is clear that
-                    parts belong to the compound in whose file they stand
-            --> a "receiver" attribute is not needed as it is clear that this cyboi system itself is the receiver
 
         * Check out handling of "super" property:
             --> if parts exist, then a new part with the same name (stemming from the same
@@ -279,8 +268,4 @@
             ==> for now, as temporary solution, the properties are stored redundantly (twice) in the template
                 that needs them (for example "menu_item" entries in the resmedicinae-revue menu) and in its super template
 
---
-
-        * Apply GPL3 to CYBOI source code and to CYBOL knowledge files
-        * Adapt copyright to me
-        * Check in to CVS LaTeX source files of CYBOP book
+        * Check in LaTeX source files of CYBOP book to CVS

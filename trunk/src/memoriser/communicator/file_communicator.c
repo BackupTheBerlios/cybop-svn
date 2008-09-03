@@ -1,26 +1,25 @@
 /*
- * $RCSfile: file_communicator.c,v $
+ * Copyright (C) 1999-2008. Christian Heller.
  *
- * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
+ * This file is part of the Cybernetics Oriented Interpreter (CYBOI).
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
+ * CYBOI is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
+ * CYBOI is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * along with CYBOI.  If not, see <http://www.gnu.org/licenses/>.
  *
- * http://www.cybop.net
- * - Cybernetics Oriented Programming -
+ * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
+ * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $Revision: 1.33 $ $Date: 2008-07-08 17:55:36 $ $Author: christian $
+ * @version $RCSfile: file_communicator.c,v $ $Revision: 1.34 $ $Date: 2008-09-03 22:04:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,11 +29,11 @@
 #include <stdio.h>
 #include "../../globals/constants/character/code/character_code_constants.c"
 #include "../../globals/constants/integer/integer_constants.c"
-#include "../../globals/constants/memory_structure/array_constants.c"
+#include "../../constant/abstraction/memory/array_memory_abstraction.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
-#include "../../globals/constants/pointer/pointer_constants.c"
+#include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../globals/constants/system/system_file_name_constants.c"
-#include "../../globals/logger/logger.c"
+#include "../../logger/logger.c"
 #include "../../globals/variables/reallocation_factor_variables.c"
 #include "../../memoriser/converter/character/utf_8_unicode_character_converter.c"
 #include "../../memoriser/array.c"
@@ -49,21 +48,21 @@
  */
 void read_file_stream(void* p0, void* p1, void* p2, void* p3) {
 
-    if (p3 != *NULL_POINTER) {
+    if (p3 != *NULL_POINTER_MEMORY_MODEL) {
 
-        if (p2 != *NULL_POINTER) {
+        if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
             int* ds = (int*) p2;
 
-            if (p1 != *NULL_POINTER) {
+            if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
                 int* dc = (int*) p1;
 
-                if (p0 != *NULL_POINTER) {
+                if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
                     void** d = (void**) p0;
 
-                    log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Read file stream.");
+                    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Read file stream.");
 
                     // Read first character.
                     char c = fgetc(p3);
@@ -95,7 +94,7 @@ void read_file_stream(void* p0, void* p1, void* p2, void* p3) {
 
                         } else {
 
-                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not read file stream. The index exceeds the array size.");
+                            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not read file stream. The index exceeds the array size.");
                         }
 
                         // Read next character.
@@ -104,22 +103,22 @@ void read_file_stream(void* p0, void* p1, void* p2, void* p3) {
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not read file stream. The destination is null.");
+                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not read file stream. The destination is null.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not read file stream. The destination count is null.");
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not read file stream. The destination count is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not read file stream. The destination size is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not read file stream. The destination size is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not read file stream. The file is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not read file stream. The file is null.");
     }
 }
 
@@ -134,22 +133,22 @@ void read_file_stream(void* p0, void* p1, void* p2, void* p3) {
  */
 void read_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p4 != *NULL_POINTER) {
+    if (p4 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* sc = (int*) p4;
 
-        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Read file.");
+        log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Read file.");
 
         // The comparison result.
-        int r = *NUMBER_0_INTEGER;
+        int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
         // The file.
-        FILE* f = (FILE*) *NULL_POINTER;
+        FILE* f = (FILE*) *NULL_POINTER_MEMORY_MODEL;
 
-        if (r == *NUMBER_0_INTEGER) {
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_arrays(p3, p4, (void*) INPUT_SYSTEM_FILE_NAME, (void*) INPUT_SYSTEM_FILE_NAME_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+            compare_arrays(p3, p4, (void*) INPUT_SYSTEM_FILE_NAME, (void*) INPUT_SYSTEM_FILE_NAME_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-            if (r != *NUMBER_0_INTEGER) {
+            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 // The given string is not a file name, but specifies the "standard_input".
                 f = stdin;
@@ -158,14 +157,14 @@ void read_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
             }
         }
 
-        if (r == *NUMBER_0_INTEGER) {
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             // If the given name does not match the standard input, then interpret it as file name.
 
             // The terminated file name.
-            void* tn = *NULL_POINTER;
-            int tnc = *NUMBER_0_INTEGER;
-            int tns = *NUMBER_0_INTEGER;
+            void* tn = *NULL_POINTER_MEMORY_MODEL;
+            int tnc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            int tns = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
             // Allocate terminated file name.
             allocate_array((void*) &tn, (void*) &tns, (void*) CHARACTER_ARRAY);
@@ -192,7 +191,7 @@ void read_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
             // must be added to the string before that is used to open the file.
             f = fopen((char*) tn, "r");
 
-            if (f != *NULL_POINTER) {
+            if (f != *NULL_POINTER_MEMORY_MODEL) {
 
                 read_file_stream(p0, p1, p2, (void*) f);
 
@@ -202,7 +201,7 @@ void read_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not read file. The file is null.");
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not read file. The file is null.");
             }
 
             // Deallocate terminated file name.
@@ -211,7 +210,7 @@ void read_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not read file. The source count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not read file. The source count is null.");
     }
 }
 
@@ -224,18 +223,18 @@ void read_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
  */
 void write_file_stream(void* p0, void* p1, void* p2) {
 
-    if (p2 != *NULL_POINTER) {
+    if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* sc = (int*) p2;
 
-        if (p0 != *NULL_POINTER) {
+        if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
-            log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Write file stream.");
+            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Write file stream.");
 
             // The loop variable.
-            int j = *NUMBER_0_INTEGER;
+            int j = *NUMBER_0_INTEGER_MEMORY_MODEL;
             // The character.
-            char* c = (char*) *NULL_POINTER;
+            char* c = (char*) *NULL_POINTER_MEMORY_MODEL;
             // The error value.
             char e = EOF;
 
@@ -265,12 +264,12 @@ void write_file_stream(void* p0, void* p1, void* p2) {
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not write file stream. The file is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not write file stream. The file is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not write file stream. The source count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not write file stream. The source count is null.");
     }
 }
 
@@ -285,26 +284,26 @@ void write_file_stream(void* p0, void* p1, void* p2) {
  */
 void write_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p1 != *NULL_POINTER) {
+    if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* dc = (int*) p1;
 
-        if (p0 != *NULL_POINTER) {
+        if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
             void** d = (void**) p0;
 
-            log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Write file.");
+            log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Write file.");
 
             // The comparison result.
-            int r = *NUMBER_0_INTEGER;
+            int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
             // The file.
-            FILE* f = (FILE*) *NULL_POINTER;
+            FILE* f = (FILE*) *NULL_POINTER_MEMORY_MODEL;
 
-            if (r == *NUMBER_0_INTEGER) {
+            if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 compare_arrays(*d, p1, (void*) OUTPUT_SYSTEM_FILE_NAME, (void*) OUTPUT_SYSTEM_FILE_NAME_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-                if (r != *NUMBER_0_INTEGER) {
+                if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                     // The given string is not a file name, but specifies the "standard_output".
                     f = stdout;
@@ -324,11 +323,11 @@ void write_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 }
             }
 
-            if (r == *NUMBER_0_INTEGER) {
+            if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 compare_arrays(*d, p1, (void*) ERROR_OUTPUT_SYSTEM_FILE_NAME, (void*) ERROR_OUTPUT_SYSTEM_FILE_NAME_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-                if (r != *NUMBER_0_INTEGER) {
+                if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                     // The given string is not a file name, but specifies the "standard_error_output".
                     f = stderr;
@@ -348,15 +347,15 @@ void write_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 }
             }
 
-            if (r == *NUMBER_0_INTEGER) {
+            if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 // If the given name does neither match the standard output
                 // nor the standard error output, then interpret it as file name.
 
                 // The terminated file name.
-                void* tn = *NULL_POINTER;
-                int tnc = *NUMBER_0_INTEGER;
-                int tns = *NUMBER_0_INTEGER;
+                void* tn = *NULL_POINTER_MEMORY_MODEL;
+                int tnc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+                int tns = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                 // Allocate terminated file name.
                 allocate_array((void*) &tn, (void*) &tns, (void*) CHARACTER_ARRAY);
@@ -383,7 +382,7 @@ void write_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 // must be added to the string before that is used to open the file.
                 f = fopen((char*) tn, "w");
 
-                if (f != *NULL_POINTER) {
+                if (f != *NULL_POINTER_MEMORY_MODEL) {
 
                     write_file_stream((void*) f, p3, p4);
 
@@ -404,7 +403,7 @@ void write_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not write file. The file is null.");
+                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not write file. The file is null.");
                 }
 
                 // Deallocate terminated file name.
@@ -413,12 +412,12 @@ void write_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not write file. The destination is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not write file. The destination is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not write file. The destination count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not write file. The destination count is null.");
     }
 }
 

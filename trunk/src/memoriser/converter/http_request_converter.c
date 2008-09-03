@@ -1,26 +1,25 @@
 /*
- * $RCSfile: http_request_converter.c,v $
+ * Copyright (C) 1999-2008. Christian Heller.
  *
- * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
+ * This file is part of the Cybernetics Oriented Interpreter (CYBOI).
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
+ * CYBOI is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
+ * CYBOI is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * along with CYBOI.  If not, see <http://www.gnu.org/licenses/>.
  *
- * http://www.cybop.net
- * - Cybernetics Oriented Programming -
+ * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
+ * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $Revision: 1.14 $ $Date: 2008-05-28 22:39:59 $ $Author: christian $
+ * @version $RCSfile: http_request_converter.c,v $ $Revision: 1.15 $ $Date: 2008-09-03 22:04:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -34,9 +33,9 @@
 #include "../../globals/constants/http/uri_separator_constants.c"
 #include "../../globals/constants/http/webdav_request_method_constants.c"
 #include "../../globals/constants/integer/integer_constants.c"
-#include "../../globals/constants/log/log_message_constants.c"
-#include "../../globals/constants/memory_structure/array_constants.c"
-#include "../../globals/logger/logger.c"
+#include "../../constant/model/log/message_log_model.c"
+#include "../../constant/abstraction/memory/array_memory_abstraction.c"
+#include "../../logger/logger.c"
 
 //
 // An http server request delivers message data in text format (like MIME 1.0),
@@ -95,12 +94,12 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
  */
 void decode_http_request_set_parameter(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8) {
 
-    if (p0 != *NULL_POINTER) {
+    if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
         // CAUTION! Do NOT use "d" as name, as it is used for "details" below.
         void** dest = (void**) p0;
 
-        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Decode http request set parameter.");
+        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Decode http request set parameter.");
 
         //
         // Setting of parameter.
@@ -149,7 +148,7 @@ void decode_http_request_set_parameter(void* p0, void* p1, void* p2, void* p3, v
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode http request set parameter. The destination model is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode http request set parameter. The destination model is null.");
     }
 }
 
@@ -172,11 +171,11 @@ void decode_http_request_set_parameter(void* p0, void* p1, void* p2, void* p3, v
  */
 void decode_http_request_parameter(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
-    if (p4 != *NULL_POINTER) {
+    if (p4 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* sc = (int*) p4;
 
-        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Decode http request parameter.");
+        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Decode http request parameter.");
 
         // The source index.
         // CAUTION! A local variable is used instead of the parameter
@@ -197,9 +196,9 @@ void decode_http_request_parameter(void* p0, void* p1, void* p2, void* p3, void*
         sep = *NUMBER_MINUS_1_INTEGER;
 
         // Get separator index.
-        get_array_elements_index(i, (void*) &ic, (void*) URI_VALUE_SEPARATOR, (void*) URI_VALUE_SEPARATOR_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY);
+        get_array_elements_index(i, (void*) &ic, (void*) URI_VALUE_SEPARATOR, (void*) URI_VALUE_SEPARATOR_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-        if (sep >= *NUMBER_0_INTEGER) {
+        if (sep >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             // Set key count.
             kc = sep;
@@ -214,8 +213,8 @@ void decode_http_request_parameter(void* p0, void* p1, void* p2, void* p3, void*
             // The remaining source is assumed to contain no further parts.
 
             // Set source index to null.
-            i = *NULL_POINTER;
-            ic = *NUMBER_0_INTEGER;
+            i = *NULL_POINTER_MEMORY_MODEL;
+            ic = *NUMBER_0_INTEGER_MEMORY_MODEL;
         }
 
     fwprintf(stderr, L"TEST http request parameter k: %ls \n", (wchar_t*) k);
@@ -239,7 +238,7 @@ void decode_http_request_parameter(void* p0, void* p1, void* p2, void* p3, void*
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode http request parameter. The source parameter count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode http request parameter. The source parameter count is null.");
     }
 }
 
@@ -261,11 +260,11 @@ void decode_http_request_parameter(void* p0, void* p1, void* p2, void* p3, void*
  */
 void decode_http_request_parameters(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
-    if (p4 != *NULL_POINTER) {
+    if (p4 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* sc = (int*) p4;
 
-        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Decode http request parameters.");
+        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Decode http request parameters.");
 
         // The source index.
         // CAUTION! A local variable is used instead of the parameter
@@ -288,9 +287,9 @@ void decode_http_request_parameters(void* p0, void* p1, void* p2, void* p3, void
             sep = *NUMBER_MINUS_1_INTEGER;
 
             // Get separator index.
-            get_array_elements_index(i, (void*) &ic, (void*) URI_PARAMETER_SEPARATOR, (void*) URI_PARAMETER_SEPARATOR_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY);
+            get_array_elements_index(i, (void*) &ic, (void*) URI_PARAMETER_SEPARATOR, (void*) URI_PARAMETER_SEPARATOR_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-            if (sep >= *NUMBER_0_INTEGER) {
+            if (sep >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 // A parameter separator was found. More parameters exist.
 
@@ -321,7 +320,7 @@ void decode_http_request_parameters(void* p0, void* p1, void* p2, void* p3, void
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode http request parameters. The source parameters count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode http request parameters. The source parameters count is null.");
     }
 }
 
@@ -348,20 +347,20 @@ void decode_http_request_parameters(void* p0, void* p1, void* p2, void* p3, void
  */
 void decode_http_request_method(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8) {
 
-    if (p0 != *NULL_POINTER) {
+    if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
         void** d = (void**) p0;
 
-        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Decode http request method.");
+        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Decode http request method.");
 
         // The comparison result.
-        int r = *NUMBER_0_INTEGER;
+        int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-        if (r == *NUMBER_0_INTEGER) {
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_arrays(p7, p8, (void*) HTTP_GET_REQUEST_METHOD, (void*) HTTP_GET_REQUEST_METHOD_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+            compare_arrays(p7, p8, (void*) HTTP_GET_REQUEST_METHOD, (void*) HTTP_GET_REQUEST_METHOD_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-            if (r != *NUMBER_0_INTEGER) {
+            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 // Set request method as action parameter within the compound model.
                 decode_http_request_set_parameter(p0, p1, p2, (void*) SENSE_MODEL_METHOD_NAME, (void*) SENSE_MODEL_METHOD_NAME_COUNT,
@@ -369,11 +368,11 @@ void decode_http_request_method(void* p0, void* p1, void* p2, void* p3, void* p4
             }
         }
 
-        if (r == *NUMBER_0_INTEGER) {
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_arrays(p7, p8, (void*) HTTP_POST_REQUEST_METHOD, (void*) HTTP_POST_REQUEST_METHOD_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+            compare_arrays(p7, p8, (void*) HTTP_POST_REQUEST_METHOD, (void*) HTTP_POST_REQUEST_METHOD_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-            if (r != *NUMBER_0_INTEGER) {
+            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 // Set request method as action parameter within the compound model.
                 decode_http_request_set_parameter(p0, p1, p2, (void*) SENSE_MODEL_METHOD_NAME, (void*) SENSE_MODEL_METHOD_NAME_COUNT,
@@ -387,11 +386,11 @@ void decode_http_request_method(void* p0, void* p1, void* p2, void* p3, void* p4
             }
         }
 
-        if (r == *NUMBER_0_INTEGER) {
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_arrays(p7, p8, (void*) HTTP_HEAD_REQUEST_METHOD, (void*) HTTP_HEAD_REQUEST_METHOD_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+            compare_arrays(p7, p8, (void*) HTTP_HEAD_REQUEST_METHOD, (void*) HTTP_HEAD_REQUEST_METHOD_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-            if (r != *NUMBER_0_INTEGER) {
+            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 // Set request method as action parameter within the compound model.
                 decode_http_request_set_parameter(p0, p1, p2, (void*) SENSE_MODEL_METHOD_NAME, (void*) SENSE_MODEL_METHOD_NAME_COUNT,
@@ -399,11 +398,11 @@ void decode_http_request_method(void* p0, void* p1, void* p2, void* p3, void* p4
             }
         }
 
-        if (r == *NUMBER_0_INTEGER) {
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_arrays(p7, p8, (void*) HTTP_PUT_REQUEST_METHOD, (void*) HTTP_PUT_REQUEST_METHOD_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+            compare_arrays(p7, p8, (void*) HTTP_PUT_REQUEST_METHOD, (void*) HTTP_PUT_REQUEST_METHOD_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-            if (r != *NUMBER_0_INTEGER) {
+            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 // Set request method as action parameter within the compound model.
                 decode_http_request_set_parameter(p0, p1, p2, (void*) SENSE_MODEL_METHOD_NAME, (void*) SENSE_MODEL_METHOD_NAME_COUNT,
@@ -411,11 +410,11 @@ void decode_http_request_method(void* p0, void* p1, void* p2, void* p3, void* p4
             }
         }
 
-        if (r == *NUMBER_0_INTEGER) {
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_arrays(p7, p8, (void*) HTTP_DELETE_REQUEST_METHOD, (void*) HTTP_DELETE_REQUEST_METHOD_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+            compare_arrays(p7, p8, (void*) HTTP_DELETE_REQUEST_METHOD, (void*) HTTP_DELETE_REQUEST_METHOD_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-            if (r != *NUMBER_0_INTEGER) {
+            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 // Set request method as action parameter within the compound model.
                 decode_http_request_set_parameter(p0, p1, p2, (void*) SENSE_MODEL_METHOD_NAME, (void*) SENSE_MODEL_METHOD_NAME_COUNT,
@@ -423,11 +422,11 @@ void decode_http_request_method(void* p0, void* p1, void* p2, void* p3, void* p4
             }
         }
 
-        if (r == *NUMBER_0_INTEGER) {
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_arrays(p7, p8, (void*) HTTP_TRACE_REQUEST_METHOD, (void*) HTTP_TRACE_REQUEST_METHOD_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+            compare_arrays(p7, p8, (void*) HTTP_TRACE_REQUEST_METHOD, (void*) HTTP_TRACE_REQUEST_METHOD_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-            if (r != *NUMBER_0_INTEGER) {
+            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 // Set request method as action parameter within the compound model.
                 decode_http_request_set_parameter(p0, p1, p2, (void*) SENSE_MODEL_METHOD_NAME, (void*) SENSE_MODEL_METHOD_NAME_COUNT,
@@ -435,11 +434,11 @@ void decode_http_request_method(void* p0, void* p1, void* p2, void* p3, void* p4
             }
         }
 
-        if (r == *NUMBER_0_INTEGER) {
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_arrays(p7, p8, (void*) HTTP_OPTIONS_REQUEST_METHOD, (void*) HTTP_OPTIONS_REQUEST_METHOD_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+            compare_arrays(p7, p8, (void*) HTTP_OPTIONS_REQUEST_METHOD, (void*) HTTP_OPTIONS_REQUEST_METHOD_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-            if (r != *NUMBER_0_INTEGER) {
+            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 // Set request method as action parameter within the compound model.
                 decode_http_request_set_parameter(p0, p1, p2, (void*) SENSE_MODEL_METHOD_NAME, (void*) SENSE_MODEL_METHOD_NAME_COUNT,
@@ -447,11 +446,11 @@ void decode_http_request_method(void* p0, void* p1, void* p2, void* p3, void* p4
             }
         }
 
-        if (r == *NUMBER_0_INTEGER) {
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_arrays(p7, p8, (void*) HTTP_CONNECT_REQUEST_METHOD, (void*) HTTP_CONNECT_REQUEST_METHOD_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+            compare_arrays(p7, p8, (void*) HTTP_CONNECT_REQUEST_METHOD, (void*) HTTP_CONNECT_REQUEST_METHOD_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-            if (r != *NUMBER_0_INTEGER) {
+            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 // Set request method as action parameter within the compound model.
                 decode_http_request_set_parameter(p0, p1, p2, (void*) SENSE_MODEL_METHOD_NAME, (void*) SENSE_MODEL_METHOD_NAME_COUNT,
@@ -459,11 +458,11 @@ void decode_http_request_method(void* p0, void* p1, void* p2, void* p3, void* p4
             }
         }
 
-        if (r == *NUMBER_0_INTEGER) {
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_arrays(p7, p8, (void*) WEBDAV_PROPFIND_REQUEST_METHOD, (void*) WEBDAV_PROPFIND_REQUEST_METHOD_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+            compare_arrays(p7, p8, (void*) WEBDAV_PROPFIND_REQUEST_METHOD, (void*) WEBDAV_PROPFIND_REQUEST_METHOD_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-            if (r != *NUMBER_0_INTEGER) {
+            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 // Set request method as action parameter within the compound model.
                 decode_http_request_set_parameter(p0, p1, p2, (void*) SENSE_MODEL_METHOD_NAME, (void*) SENSE_MODEL_METHOD_NAME_COUNT,
@@ -471,11 +470,11 @@ void decode_http_request_method(void* p0, void* p1, void* p2, void* p3, void* p4
             }
         }
 
-        if (r == *NUMBER_0_INTEGER) {
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_arrays(p7, p8, (void*) WEBDAV_PROPPATCH_REQUEST_METHOD, (void*) WEBDAV_PROPPATCH_REQUEST_METHOD_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+            compare_arrays(p7, p8, (void*) WEBDAV_PROPPATCH_REQUEST_METHOD, (void*) WEBDAV_PROPPATCH_REQUEST_METHOD_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-            if (r != *NUMBER_0_INTEGER) {
+            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 // Set request method as action parameter within the compound model.
                 decode_http_request_set_parameter(p0, p1, p2, (void*) SENSE_MODEL_METHOD_NAME, (void*) SENSE_MODEL_METHOD_NAME_COUNT,
@@ -483,11 +482,11 @@ void decode_http_request_method(void* p0, void* p1, void* p2, void* p3, void* p4
             }
         }
 
-        if (r == *NUMBER_0_INTEGER) {
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_arrays(p7, p8, (void*) WEBDAV_MKCOL_REQUEST_METHOD, (void*) WEBDAV_MKCOL_REQUEST_METHOD_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+            compare_arrays(p7, p8, (void*) WEBDAV_MKCOL_REQUEST_METHOD, (void*) WEBDAV_MKCOL_REQUEST_METHOD_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-            if (r != *NUMBER_0_INTEGER) {
+            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 // Set request method as action parameter within the compound model.
                 decode_http_request_set_parameter(p0, p1, p2, (void*) SENSE_MODEL_METHOD_NAME, (void*) SENSE_MODEL_METHOD_NAME_COUNT,
@@ -495,11 +494,11 @@ void decode_http_request_method(void* p0, void* p1, void* p2, void* p3, void* p4
             }
         }
 
-        if (r == *NUMBER_0_INTEGER) {
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_arrays(p7, p8, (void*) WEBDAV_COPY_REQUEST_METHOD, (void*) WEBDAV_COPY_REQUEST_METHOD_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+            compare_arrays(p7, p8, (void*) WEBDAV_COPY_REQUEST_METHOD, (void*) WEBDAV_COPY_REQUEST_METHOD_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-            if (r != *NUMBER_0_INTEGER) {
+            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 // Set request method as action parameter within the compound model.
                 decode_http_request_set_parameter(p0, p1, p2, (void*) SENSE_MODEL_METHOD_NAME, (void*) SENSE_MODEL_METHOD_NAME_COUNT,
@@ -507,11 +506,11 @@ void decode_http_request_method(void* p0, void* p1, void* p2, void* p3, void* p4
             }
         }
 
-        if (r == *NUMBER_0_INTEGER) {
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_arrays(p7, p8, (void*) WEBDAV_MOVE_REQUEST_METHOD, (void*) WEBDAV_MOVE_REQUEST_METHOD_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+            compare_arrays(p7, p8, (void*) WEBDAV_MOVE_REQUEST_METHOD, (void*) WEBDAV_MOVE_REQUEST_METHOD_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-            if (r != *NUMBER_0_INTEGER) {
+            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 // Set request method as action parameter within the compound model.
                 decode_http_request_set_parameter(p0, p1, p2, (void*) SENSE_MODEL_METHOD_NAME, (void*) SENSE_MODEL_METHOD_NAME_COUNT,
@@ -519,11 +518,11 @@ void decode_http_request_method(void* p0, void* p1, void* p2, void* p3, void* p4
             }
         }
 
-        if (r == *NUMBER_0_INTEGER) {
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_arrays(p7, p8, (void*) WEBDAV_LOCK_REQUEST_METHOD, (void*) WEBDAV_LOCK_REQUEST_METHOD_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+            compare_arrays(p7, p8, (void*) WEBDAV_LOCK_REQUEST_METHOD, (void*) WEBDAV_LOCK_REQUEST_METHOD_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-            if (r != *NUMBER_0_INTEGER) {
+            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 // Set request method as action parameter within the compound model.
                 decode_http_request_set_parameter(p0, p1, p2, (void*) SENSE_MODEL_METHOD_NAME, (void*) SENSE_MODEL_METHOD_NAME_COUNT,
@@ -531,11 +530,11 @@ void decode_http_request_method(void* p0, void* p1, void* p2, void* p3, void* p4
             }
         }
 
-        if (r == *NUMBER_0_INTEGER) {
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_arrays(p7, p8, (void*) WEBDAV_UNLOCK_REQUEST_METHOD, (void*) WEBDAV_UNLOCK_REQUEST_METHOD_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+            compare_arrays(p7, p8, (void*) WEBDAV_UNLOCK_REQUEST_METHOD, (void*) WEBDAV_UNLOCK_REQUEST_METHOD_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-            if (r != *NUMBER_0_INTEGER) {
+            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 // Set request method as action parameter within the compound model.
                 decode_http_request_set_parameter(p0, p1, p2, (void*) SENSE_MODEL_METHOD_NAME, (void*) SENSE_MODEL_METHOD_NAME_COUNT,
@@ -543,14 +542,14 @@ void decode_http_request_method(void* p0, void* p1, void* p2, void* p3, void* p4
             }
         }
 
-        if (r == *NUMBER_0_INTEGER) {
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            log_terminated_message((void*) WARNING_LOG_LEVEL, (void*) L"Could not decode http request method. The source request method is unknown.");
+            log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not decode http request method. The source request method is unknown.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode http request method. The destination model is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode http request method. The destination model is null.");
     }
 }
 
@@ -569,11 +568,11 @@ void decode_http_request_method(void* p0, void* p1, void* p2, void* p3, void* p4
  */
 void decode_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p4 != *NULL_POINTER) {
+    if (p4 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* sc = (int*) p4;
 
-        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Decode http request header.");
+        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Decode http request header.");
 
         // The source index.
         // CAUTION! A local variable is used instead of the parameter
@@ -594,9 +593,9 @@ void decode_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p4
         sep = *NUMBER_MINUS_1_INTEGER;
 
         // Get separator index.
-        get_array_elements_index(i, (void*) &ic, (void*) HTTP_HEADER_ARGUMENT_SEPARATOR, (void*) HTTP_HEADER_ARGUMENT_SEPARATOR_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY);
+        get_array_elements_index(i, (void*) &ic, (void*) HTTP_HEADER_ARGUMENT_SEPARATOR, (void*) HTTP_HEADER_ARGUMENT_SEPARATOR_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-        if (sep >= *NUMBER_0_INTEGER) {
+        if (sep >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             // Set new count.
             ac = sep;
@@ -611,8 +610,8 @@ void decode_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p4
             // The remaining source is assumed to contain no further parts.
 
             // Set source index to null.
-            i = *NULL_POINTER;
-            ic = *NUMBER_0_INTEGER;
+            i = *NULL_POINTER_MEMORY_MODEL;
+            ic = *NUMBER_0_INTEGER_MEMORY_MODEL;
         }
 
     fwprintf(stderr, L"TEST http request header a: %ls \n", (wchar_t*) a);
@@ -632,7 +631,7 @@ void decode_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p4
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode http request header. The source http request count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode http request header. The source http request count is null.");
     }
 }
 
@@ -653,11 +652,11 @@ void decode_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p4
  */
 void decode_http_request_headers(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p4 != *NULL_POINTER) {
+    if (p4 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* sc = (int*) p4;
 
-        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Decode http request headers.");
+        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Decode http request headers.");
 
         // The source index.
         // CAUTION! A local variable is used instead of the parameter
@@ -680,9 +679,9 @@ void decode_http_request_headers(void* p0, void* p1, void* p2, void* p3, void* p
             sep = *NUMBER_MINUS_1_INTEGER;
 
             // Get separator index.
-            get_array_elements_index(i, (void*) &ic, (void*) HTTP_HEADER_SEPARATOR, (void*) HTTP_HEADER_SEPARATOR_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY);
+            get_array_elements_index(i, (void*) &ic, (void*) HTTP_HEADER_SEPARATOR, (void*) HTTP_HEADER_SEPARATOR_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-            if (sep >= *NUMBER_0_INTEGER) {
+            if (sep >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 // A header separator was found. More headers exist.
 
@@ -714,7 +713,7 @@ void decode_http_request_headers(void* p0, void* p1, void* p2, void* p3, void* p
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode http request headers. The source http request count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode http request headers. The source http request count is null.");
     }
 }
 
@@ -798,11 +797,11 @@ void decode_http_request_headers(void* p0, void* p1, void* p2, void* p3, void* p
  */
 void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
-    if (p4 != *NULL_POINTER) {
+    if (p4 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* sc = (int*) p4;
 
-        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Decode uniform resource identifier.");
+        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Decode uniform resource identifier.");
 
         // The source index.
         // CAUTION! A local variable is used instead of the parameter
@@ -823,9 +822,9 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
         sep = *NUMBER_MINUS_1_INTEGER;
 
         // Get separator index.
-        get_array_elements_index(i, (void*) &ic, (void*) URI_SCHEME_SEPARATOR, (void*) URI_SCHEME_SEPARATOR_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY);
+        get_array_elements_index(i, (void*) &ic, (void*) URI_SCHEME_SEPARATOR, (void*) URI_SCHEME_SEPARATOR_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-        if (sep >= *NUMBER_0_INTEGER) {
+        if (sep >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             // The scheme separator was found.
             // Further uri parts are expected.
@@ -844,8 +843,8 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
             // The remaining source thus represents the other parts only.
 
             // Set scheme to null.
-            sch = *NULL_POINTER;
-            schc = *NUMBER_0_INTEGER;
+            sch = *NULL_POINTER_MEMORY_MODEL;
+            schc = *NUMBER_0_INTEGER_MEMORY_MODEL;
         }
 
     fwprintf(stderr, L"TEST http request uri sch: %ls \n", (wchar_t*) sch);
@@ -856,15 +855,15 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
         //
 
         // The authority.
-        void* a = *NULL_POINTER;
-        int ac = *NUMBER_0_INTEGER;
+        void* a = *NULL_POINTER_MEMORY_MODEL;
+        int ac = *NUMBER_0_INTEGER_MEMORY_MODEL;
         // Reset separator index.
         sep = *NUMBER_MINUS_1_INTEGER;
 
         // Get separator index.
-        get_array_elements_index(i, (void*) &ic, (void*) URI_AUTHORITY_SEPARATOR, (void*) URI_AUTHORITY_SEPARATOR_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY);
+        get_array_elements_index(i, (void*) &ic, (void*) URI_AUTHORITY_SEPARATOR, (void*) URI_AUTHORITY_SEPARATOR_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-        if (sep >= *NUMBER_0_INTEGER) {
+        if (sep >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             // The authority separator was found.
             // It demarcates the beginning of the uri part.
@@ -878,9 +877,9 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
             ic = ic - sep - *URI_AUTHORITY_SEPARATOR_COUNT;
 
             // Get separator index.
-            get_array_elements_index(i, (void*) &ic, (void*) URI_PATH_SEPARATOR, (void*) URI_PATH_SEPARATOR_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY);
+            get_array_elements_index(i, (void*) &ic, (void*) URI_PATH_SEPARATOR, (void*) URI_PATH_SEPARATOR_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-            if (sep >= *NUMBER_0_INTEGER) {
+            if (sep >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 // The path separator was found.
                 // It demarcates the end of the uri part.
@@ -899,9 +898,9 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
             } else {
 
                 // Get separator index.
-                get_array_elements_index(i, (void*) &ic, (void*) URI_QUERY_SEPARATOR, (void*) URI_QUERY_SEPARATOR_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY);
+                get_array_elements_index(i, (void*) &ic, (void*) URI_QUERY_SEPARATOR, (void*) URI_QUERY_SEPARATOR_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                if (sep >= *NUMBER_0_INTEGER) {
+                if (sep >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                     // The query separator was found.
                     // It demarcates the end of the uri part.
@@ -920,9 +919,9 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
                 } else {
 
                     // Get separator index.
-                    get_array_elements_index(i, (void*) &ic, (void*) URI_FRAGMENT_SEPARATOR, (void*) URI_FRAGMENT_SEPARATOR_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY);
+                    get_array_elements_index(i, (void*) &ic, (void*) URI_FRAGMENT_SEPARATOR, (void*) URI_FRAGMENT_SEPARATOR_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                    if (sep >= *NUMBER_0_INTEGER) {
+                    if (sep >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         // The fragment separator was found.
                         // It demarcates the end of the uri part.
@@ -944,8 +943,8 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
                         // The remaining source is assumed to contain no further parts.
 
                         // Set source index to null.
-                        i = *NULL_POINTER;
-                        ic = *NUMBER_0_INTEGER;
+                        i = *NULL_POINTER_MEMORY_MODEL;
+                        ic = *NUMBER_0_INTEGER_MEMORY_MODEL;
                     }
                 }
             }
@@ -959,15 +958,15 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
         //
 
         // The path, initialised with current source index.
-        void* p = *NULL_POINTER;
-        int pc = *NUMBER_0_INTEGER;
+        void* p = *NULL_POINTER_MEMORY_MODEL;
+        int pc = *NUMBER_0_INTEGER_MEMORY_MODEL;
         // Reset separator index.
         sep = *NUMBER_MINUS_1_INTEGER;
 
         // Get separator index.
-        get_array_elements_index(i, (void*) &ic, (void*) URI_PATH_SEPARATOR, (void*) URI_PATH_SEPARATOR_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY);
+        get_array_elements_index(i, (void*) &ic, (void*) URI_PATH_SEPARATOR, (void*) URI_PATH_SEPARATOR_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-        if (sep >= *NUMBER_0_INTEGER) {
+        if (sep >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             // The path separator was found.
             // It demarcates the beginning of the uri part.
@@ -981,9 +980,9 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
             ic = ic - sep - *URI_PATH_SEPARATOR_COUNT;
 
             // Get separator index.
-            get_array_elements_index(i, (void*) &ic, (void*) URI_QUERY_SEPARATOR, (void*) URI_QUERY_SEPARATOR_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY);
+            get_array_elements_index(i, (void*) &ic, (void*) URI_QUERY_SEPARATOR, (void*) URI_QUERY_SEPARATOR_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-            if (sep >= *NUMBER_0_INTEGER) {
+            if (sep >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 // The query separator was found.
                 // It demarcates the end of the uri part.
@@ -1002,9 +1001,9 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
             } else {
 
                 // Get separator index.
-                get_array_elements_index(i, (void*) &ic, (void*) URI_FRAGMENT_SEPARATOR, (void*) URI_FRAGMENT_SEPARATOR_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY);
+                get_array_elements_index(i, (void*) &ic, (void*) URI_FRAGMENT_SEPARATOR, (void*) URI_FRAGMENT_SEPARATOR_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                if (sep >= *NUMBER_0_INTEGER) {
+                if (sep >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                     // The fragment separator was found.
                     // It demarcates the end of the uri part.
@@ -1026,8 +1025,8 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
                     // The remaining source is assumed to contain no further parts.
 
                     // Set source index to null.
-                    i = *NULL_POINTER;
-                    ic = *NUMBER_0_INTEGER;
+                    i = *NULL_POINTER_MEMORY_MODEL;
+                    ic = *NUMBER_0_INTEGER_MEMORY_MODEL;
                 }
             }
         }
@@ -1040,17 +1039,17 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
         //
 
         // The query, initialised with current source index.
-        void* q = *NULL_POINTER;
-        int qc = *NUMBER_0_INTEGER;
+        void* q = *NULL_POINTER_MEMORY_MODEL;
+        int qc = *NUMBER_0_INTEGER_MEMORY_MODEL;
         // Reset separator index.
         sep = *NUMBER_MINUS_1_INTEGER;
 
     fwprintf(stderr, L"TEST http request uri qc 0: %i \n", qc);
 
         // Get separator index.
-        get_array_elements_index(i, (void*) &ic, (void*) URI_QUERY_SEPARATOR, (void*) URI_QUERY_SEPARATOR_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY);
+        get_array_elements_index(i, (void*) &ic, (void*) URI_QUERY_SEPARATOR, (void*) URI_QUERY_SEPARATOR_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-        if (sep >= *NUMBER_0_INTEGER) {
+        if (sep >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             // The query separator was found.
             // It demarcates the beginning of the uri part.
@@ -1069,9 +1068,9 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
             sep = *NUMBER_MINUS_1_INTEGER;
 
             // Get separator index.
-            get_array_elements_index(i, (void*) &ic, (void*) URI_FRAGMENT_SEPARATOR, (void*) URI_FRAGMENT_SEPARATOR_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY);
+            get_array_elements_index(i, (void*) &ic, (void*) URI_FRAGMENT_SEPARATOR, (void*) URI_FRAGMENT_SEPARATOR_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-            if (sep >= *NUMBER_0_INTEGER) {
+            if (sep >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 // The fragment separator was found.
                 // It demarcates the end of the uri part.
@@ -1097,8 +1096,8 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
     fwprintf(stderr, L"TEST http request uri qc 3: %i \n", qc);
 
                 // Set source index to null.
-                i = *NULL_POINTER;
-                ic = *NUMBER_0_INTEGER;
+                i = *NULL_POINTER_MEMORY_MODEL;
+                ic = *NUMBER_0_INTEGER_MEMORY_MODEL;
             }
         }
 
@@ -1110,15 +1109,15 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
         //
 
         // The fragment, initialised with current source index.
-        void* f = *NULL_POINTER;
-        int fc = *NUMBER_0_INTEGER;
+        void* f = *NULL_POINTER_MEMORY_MODEL;
+        int fc = *NUMBER_0_INTEGER_MEMORY_MODEL;
         // Reset separator index.
         sep = *NUMBER_MINUS_1_INTEGER;
 
         // Get separator index.
-        get_array_elements_index(i, (void*) &ic, (void*) URI_FRAGMENT_SEPARATOR, (void*) URI_FRAGMENT_SEPARATOR_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY);
+        get_array_elements_index(i, (void*) &ic, (void*) URI_FRAGMENT_SEPARATOR, (void*) URI_FRAGMENT_SEPARATOR_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-        if (sep >= *NUMBER_0_INTEGER) {
+        if (sep >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             // The fragment separator was found.
             // It demarcates the beginning of the uri part.
@@ -1148,7 +1147,7 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode uniform resource identifier. The source uniform resource identifier count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode uniform resource identifier. The source uniform resource identifier count is null.");
     }
 }
 
@@ -1177,11 +1176,11 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
 void decode_http_request_line(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
     void* p6, void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13) {
 
-    if (p11 != *NULL_POINTER) {
+    if (p11 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* sc = (int*) p11;
 
-        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Decode http request request line.");
+        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Decode http request request line.");
 
         // The source index.
         // CAUTION! A local variable is used instead of the parameter
@@ -1202,9 +1201,9 @@ void decode_http_request_line(void* p0, void* p1, void* p2, void* p3, void* p4, 
         sep = *NUMBER_MINUS_1_INTEGER;
 
         // Get separator index.
-        get_array_elements_index(i, (void*) &ic, (void*) HTTP_REQUEST_METHOD_SEPARATOR, (void*) HTTP_REQUEST_METHOD_SEPARATOR_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY);
+        get_array_elements_index(i, (void*) &ic, (void*) HTTP_REQUEST_METHOD_SEPARATOR, (void*) HTTP_REQUEST_METHOD_SEPARATOR_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-        if (sep >= *NUMBER_0_INTEGER) {
+        if (sep >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             // Set new count.
             rmc = sep;
@@ -1219,8 +1218,8 @@ void decode_http_request_line(void* p0, void* p1, void* p2, void* p3, void* p4, 
             // The remaining source is assumed to contain no further parts.
 
             // Set source index to null.
-            i = *NULL_POINTER;
-            ic = *NUMBER_0_INTEGER;
+            i = *NULL_POINTER_MEMORY_MODEL;
+            ic = *NUMBER_0_INTEGER_MEMORY_MODEL;
         }
 
     fwprintf(stderr, L"TEST http request line rm: %ls \n", (wchar_t*) rm);
@@ -1237,9 +1236,9 @@ void decode_http_request_line(void* p0, void* p1, void* p2, void* p3, void* p4, 
         sep = *NUMBER_MINUS_1_INTEGER;
 
         // Get separator index.
-        get_array_elements_index(i, (void*) &ic, (void*) HTTP_UNIFORM_RESOURCE_IDENTIFIER_SEPARATOR, (void*) HTTP_UNIFORM_RESOURCE_IDENTIFIER_SEPARATOR_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY);
+        get_array_elements_index(i, (void*) &ic, (void*) HTTP_UNIFORM_RESOURCE_IDENTIFIER_SEPARATOR, (void*) HTTP_UNIFORM_RESOURCE_IDENTIFIER_SEPARATOR_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-        if (sep >= *NUMBER_0_INTEGER) {
+        if (sep >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             // Set new count.
             uric = sep;
@@ -1254,8 +1253,8 @@ void decode_http_request_line(void* p0, void* p1, void* p2, void* p3, void* p4, 
             // The remaining source is assumed to contain no further parts.
 
             // Set source index to null.
-            i = *NULL_POINTER;
-            ic = *NUMBER_0_INTEGER;
+            i = *NULL_POINTER_MEMORY_MODEL;
+            ic = *NUMBER_0_INTEGER_MEMORY_MODEL;
         }
 
     fwprintf(stderr, L"TEST http request line uri: %ls \n", (wchar_t*) uri);
@@ -1302,7 +1301,7 @@ void decode_http_request_line(void* p0, void* p1, void* p2, void* p3, void* p4, 
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode http request request line. The source http request count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode http request request line. The source http request count is null.");
     }
 }
 
@@ -1356,11 +1355,11 @@ void decode_http_request_line(void* p0, void* p1, void* p2, void* p3, void* p4, 
  */
 void decode_http_request(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9) {
 
-    if (p7 != *NULL_POINTER) {
+    if (p7 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* sc = (int*) p7;
 
-        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Decode http request.");
+        log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Decode http request.");
 
     fwprintf(stderr, L"TEST http request mc p1: %i \n", *((int*) p1));
     fwprintf(stderr, L"TEST http request dc p4: %i \n", *((int*) p4));
@@ -1388,9 +1387,9 @@ void decode_http_request(void* p0, void* p1, void* p2, void* p3, void* p4, void*
         sep = *NUMBER_MINUS_1_INTEGER;
 
         // Get separator index.
-        get_array_elements_index(i, (void*) &ic, (void*) HTTP_REQUEST_LINE_SEPARATOR, (void*) HTTP_REQUEST_LINE_SEPARATOR_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY);
+        get_array_elements_index(i, (void*) &ic, (void*) HTTP_REQUEST_LINE_SEPARATOR, (void*) HTTP_REQUEST_LINE_SEPARATOR_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-        if (sep >= *NUMBER_0_INTEGER) {
+        if (sep >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             // Set new count.
             rlc = sep;
@@ -1405,8 +1404,8 @@ void decode_http_request(void* p0, void* p1, void* p2, void* p3, void* p4, void*
             // The remaining source is assumed to contain no further parts.
 
             // Set source index to null.
-            i = *NULL_POINTER;
-            ic = *NUMBER_0_INTEGER;
+            i = *NULL_POINTER_MEMORY_MODEL;
+            ic = *NUMBER_0_INTEGER_MEMORY_MODEL;
         }
 
     fwprintf(stderr, L"TEST http request rl: %ls \n", (wchar_t*) rl);
@@ -1423,9 +1422,9 @@ void decode_http_request(void* p0, void* p1, void* p2, void* p3, void* p4, void*
         sep = *NUMBER_MINUS_1_INTEGER;
 
         // Get separator index.
-        get_array_elements_index(i, (void*) &ic, (void*) HTTP_HEADERS_SEPARATOR, (void*) HTTP_HEADERS_SEPARATOR_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY);
+        get_array_elements_index(i, (void*) &ic, (void*) HTTP_HEADERS_SEPARATOR, (void*) HTTP_HEADERS_SEPARATOR_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-        if (sep >= *NUMBER_0_INTEGER) {
+        if (sep >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             // Set new count.
             hc = sep;
@@ -1440,8 +1439,8 @@ void decode_http_request(void* p0, void* p1, void* p2, void* p3, void* p4, void*
             // The remaining source is assumed to contain no further parts.
 
             // Set source index to null.
-            i = *NULL_POINTER;
-            ic = *NUMBER_0_INTEGER;
+            i = *NULL_POINTER_MEMORY_MODEL;
+            ic = *NUMBER_0_INTEGER_MEMORY_MODEL;
         }
 
     fwprintf(stderr, L"TEST http request h: %ls \n", (wchar_t*) h);
@@ -1458,9 +1457,9 @@ void decode_http_request(void* p0, void* p1, void* p2, void* p3, void* p4, void*
         sep = *NUMBER_MINUS_1_INTEGER;
 
         // Get separator index.
-        get_array_elements_index(i, (void*) &ic, (void*) HTTP_BODY_SEPARATOR, (void*) HTTP_BODY_SEPARATOR_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY);
+        get_array_elements_index(i, (void*) &ic, (void*) HTTP_BODY_SEPARATOR, (void*) HTTP_BODY_SEPARATOR_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-        if (sep >= *NUMBER_0_INTEGER) {
+        if (sep >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             // Set new count.
             bc = sep;
@@ -1482,7 +1481,7 @@ void decode_http_request(void* p0, void* p1, void* p2, void* p3, void* p4, void*
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode http request. The source http request count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode http request. The source http request count is null.");
     }
 }
 
@@ -1504,7 +1503,7 @@ void decode_http_request(void* p0, void* p1, void* p2, void* p3, void* p4, void*
 void encode_http_request(void* p0, void* p1, void* p2, void* p3, void* p4,
     void* p5, void* p6, void* p7, void* p8, void* p9, void* p10) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Encode http request.");
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Encode http request.");
 }
 
 /* HTTP_REQUEST_CONVERTER_SOURCE */

@@ -1,26 +1,25 @@
 /*
- * $RCSfile: integer_vector_converter.c,v $
+ * Copyright (C) 1999-2008. Christian Heller.
  *
- * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
+ * This file is part of the Cybernetics Oriented Interpreter (CYBOI).
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
+ * CYBOI is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
+ * CYBOI is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * along with CYBOI.  If not, see <http://www.gnu.org/licenses/>.
  *
- * http://www.cybop.net
- * - Cybernetics Oriented Programming -
+ * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
+ * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $Revision: 1.33 $ $Date: 2008-07-08 17:55:36 $ $Author: christian $
+ * @version $RCSfile: integer_vector_converter.c,v $ $Revision: 1.34 $ $Date: 2008-09-03 22:04:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -38,11 +37,11 @@
 #include "../../globals/constants/character/code/character_code_constants.c"
 #include "../../globals/constants/cybol/cybol_abstraction_constants.c"
 #include "../../globals/constants/integer/integer_constants.c"
-#include "../../globals/constants/log/log_message_constants.c"
-#include "../../globals/constants/memory_structure/array_constants.c"
+#include "../../constant/model/log/message_log_model.c"
+#include "../../constant/abstraction/memory/array_memory_abstraction.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
-#include "../../globals/constants/pointer/pointer_constants.c"
-#include "../../globals/logger/logger.c"
+#include "../../constant/model/memory/pointer_memory_model.c"
+#include "../../logger/logger.c"
 #include "../../globals/variables/primitive_type_size_variables.c"
 #include "../../globals/variables/reallocation_factor_variables.c"
 #include "../../memoriser/converter/integer_converter.c"
@@ -63,43 +62,43 @@
  */
 void decode_integer_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p4 != *NULL_POINTER) {
+    if (p4 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* sc = (int*) p4;
 
-        if (p2 != *NULL_POINTER) {
+        if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
             int* ds = (int*) p2;
 
-            if (p1 != *NULL_POINTER) {
+            if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
                 int* dc = (int*) p1;
 
-                if (p0 != *NULL_POINTER) {
+                if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
                     void** d = (void**) p0;
 
-                    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Decode integer vector.");
+                    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Decode integer vector.");
 
                     // CAUTION! This check is necessary since otherwise,
                     // the array border gets crossed and a comma might be found
                     // that actually does not belong to the array.
-                    if (*sc > *NUMBER_0_INTEGER) {
+                    if (*sc > *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         // The comma index.
                         int i = *NUMBER_MINUS_1_INTEGER;
                         // The first element count.
-                        int fec = *NUMBER_0_INTEGER;
+                        int fec = *NUMBER_0_INTEGER_MEMORY_MODEL;
                         // The integer value.
-                        int v = *NUMBER_0_INTEGER;
+                        int v = *NUMBER_0_INTEGER_MEMORY_MODEL;
                         // The remaining vector elements.
-                        void* e = *NULL_POINTER;
-                        int ec = *NUMBER_0_INTEGER;
+                        void* e = *NULL_POINTER_MEMORY_MODEL;
+                        int ec = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                         // Find comma character index.
-                        get_array_elements_index(p3, p4, (void*) COMMA_WIDE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) &i, (void*) WIDE_CHARACTER_ARRAY);
+                        get_array_elements_index(p3, p4, (void*) COMMA_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_COUNT, (void*) &i, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                        if (i > *NUMBER_0_INTEGER) {
+                        if (i > *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                             // Set first element count to comma index only if a comma
                             // was found at a position greater than the zero index.
@@ -146,7 +145,7 @@ void decode_integer_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
                         // Increment integer vector count, because of new element.
                         (*dc)++;
 
-                        if (i > *NUMBER_0_INTEGER) {
+                        if (i > *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                             // If a comma was found, then process the remaining integer vector elements.
 
@@ -167,27 +166,27 @@ void decode_integer_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                     } else {
 
-                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode integer vector. The source count is zero.");
+                        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode integer vector. The source count is zero.");
                     }
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode integer vector. The destination is null.");
+                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode integer vector. The destination is null.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode integer vector. The destination count is null.");
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode integer vector. The destination count is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode integer vector. The destination size is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode integer vector. The destination size is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode integer vector. The source count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode integer vector. The source count is null.");
     }
 }
 
@@ -203,36 +202,36 @@ void decode_integer_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
  */
 void encode_integer_vector_elements(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
-    if (p5 != *NULL_POINTER) {
+    if (p5 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* it = (int*) p5;
 
-        if (p4 != *NULL_POINTER) {
+        if (p4 != *NULL_POINTER_MEMORY_MODEL) {
 
             int* sc = (int*) p4;
 
-            if (p2 != *NULL_POINTER) {
+            if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
                 int* ds = (int*) p2;
 
-                if (p1 != *NULL_POINTER) {
+                if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
                     int* dc = (int*) p1;
 
-                    if (p0 != *NULL_POINTER) {
+                    if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
                         void** d = (void**) p0;
 
-                        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Encode integer vector elements.");
+                        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Encode integer vector elements.");
 
                         // The integer.
-                        void* i = *NULL_POINTER;
+                        void* i = *NULL_POINTER_MEMORY_MODEL;
                         // The integer character.
-                        void* c = *NULL_POINTER;
-                        int cc = *NUMBER_0_INTEGER;
-                        int cs = *NUMBER_0_INTEGER;
+                        void* c = *NULL_POINTER_MEMORY_MODEL;
+                        int cc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+                        int cs = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-                        if (*sc > *NUMBER_0_INTEGER) {
+                        if (*sc > *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                             // Get first integer from vector.
                             get_element(p3, (void*) NUMBER_0_INTEGER, &i, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
@@ -249,22 +248,22 @@ void encode_integer_vector_elements(void* p0, void* p1, void* p2, void* p3, void
                                 *ds = (*dc * *INTEGER_VECTOR_REALLOCATION_FACTOR) + *NUMBER_1_INTEGER + cc;
 
                                 // Reallocate destination character array.
-                                reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_ARRAY);
+                                reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                             }
 
-                            if (*it > *NUMBER_0_INTEGER) {
+                            if (*it > *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                                 // If this is NOT the first iteration cycle through the source array,
                                 // then add a comma character before adding a new integer element,
                                 // in order to separate from already existing elements.
 
                                 // Set comma character.
-                                set_array_elements(*d, p1, (void*) COMMA_WIDE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
-                                *dc = *dc + *PRIMITIVE_COUNT;
+                                set_array_elements(*d, p1, (void*) COMMA_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                                *dc = *dc + *PRIMITIVE_MEMORY_MODEL_COUNT;
                             }
 
                             // Set integer characters.
-                            set_array_elements(*d, p1, c, (void*) &cc, (void*) WIDE_CHARACTER_ARRAY);
+                            set_array_elements(*d, p1, c, (void*) &cc, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                             *dc = *dc + cc;
 
                             // Determine remaining vector elements.
@@ -283,32 +282,32 @@ void encode_integer_vector_elements(void* p0, void* p1, void* p2, void* p3, void
 
                         } else {
 
-                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode integer vector elements. The source count is zero.");
+                            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode integer vector elements. The source count is zero.");
                         }
 
                     } else {
 
-                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode integer vector elements. The destination is null.");
+                        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode integer vector elements. The destination is null.");
                     }
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode integer vector elements. The destination count is null.");
+                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode integer vector elements. The destination count is null.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode integer vector elements. The destination size is null.");
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode integer vector elements. The destination size is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode integer vector elements. The source count is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode integer vector elements. The source count is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode integer vector elements. The iteration count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode integer vector elements. The iteration count is null.");
     }
 }
 
@@ -323,10 +322,10 @@ void encode_integer_vector_elements(void* p0, void* p1, void* p2, void* p3, void
  */
 void encode_integer_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Encode integer vector.");
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Encode integer vector.");
 
     // The iteration count.
-    int i = *NUMBER_0_INTEGER;
+    int i = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // Encode integer vector elements.
     // Hand over zero iteration value, since this is the initial call.

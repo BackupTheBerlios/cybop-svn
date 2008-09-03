@@ -1,26 +1,25 @@
 /*
- * $RCSfile: optionaliser.c,v $
+ * Copyright (C) 1999-2008. Christian Heller.
  *
- * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
+ * This file is part of the Cybernetics Oriented Interpreter (CYBOI).
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
+ * CYBOI is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
+ * CYBOI is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * along with CYBOI.  If not, see <http://www.gnu.org/licenses/>.
  *
- * http://www.cybop.net
- * - Cybernetics Oriented Programming -
+ * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
+ * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $Revision: 1.15 $ $Date: 2008-07-08 17:55:36 $ $Author: christian $
+ * @version $RCSfile: optionaliser.c,v $ $Revision: 1.16 $ $Date: 2008-09-03 22:04:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -37,9 +36,9 @@
 #include "../globals/constants/cybol/cybol_abstraction_constants.c"
 #include "../globals/constants/integer/integer_constants.c"
 #include "../globals/constants/log/log_level_constants.c"
-#include "../globals/constants/memory_structure/array_constants.c"
+#include "../constant/abstraction/memory/array_memory_abstraction.c"
 #include "../globals/constants/memory_structure/memory_structure_constants.c"
-#include "../globals/constants/pointer/pointer_constants.c"
+#include "../constant/model/memory/pointer_memory_model.c"
 #include "../memoriser/accessor/wide_character_vector_accessor.c"
 
 /**
@@ -51,7 +50,7 @@
  */
 void optionalise_log_level(void* p0, void* p1, void* p2) {
 
-    if (p0 != *NULL_POINTER) {
+    if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* l = (int*) p0;
 
@@ -61,64 +60,64 @@ void optionalise_log_level(void* p0, void* p1, void* p2) {
         // log_write_terminated_message(stdout, L"Debug: Optionalise log level.\n");
 
         // The comparison result.
-        int r = *NUMBER_0_INTEGER;
+        int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-        if (r == *NUMBER_0_INTEGER) {
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_arrays(p1, p2, (void*) OFF_LOG_LEVEL_COMMAND_LINE_VALUE, (void*) OFF_LOG_LEVEL_COMMAND_LINE_VALUE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+            compare_arrays(p1, p2, (void*) OFF_LOG_LEVEL_COMMAND_LINE_VALUE, (void*) OFF_LOG_LEVEL_COMMAND_LINE_VALUE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-            if (r != *NUMBER_0_INTEGER) {
+            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 // Set log level.
                 *l = *OFF_LOG_LEVEL;
             }
         }
 
-        if (r == *NUMBER_0_INTEGER) {
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_arrays(p1, p2, (void*) ERROR_LOG_LEVEL_COMMAND_LINE_VALUE, (void*) ERROR_LOG_LEVEL_COMMAND_LINE_VALUE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+            compare_arrays(p1, p2, (void*) ERROR_LEVEL_LOG_MODEL_COMMAND_LINE_VALUE, (void*) ERROR_LEVEL_LOG_MODEL_COMMAND_LINE_VALUE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-            if (r != *NUMBER_0_INTEGER) {
+            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 // Set log level.
-                *l = *ERROR_LOG_LEVEL;
+                *l = *ERROR_LEVEL_LOG_MODEL;
             }
         }
 
-        if (r == *NUMBER_0_INTEGER) {
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_arrays(p1, p2, (void*) WARNING_LOG_LEVEL_COMMAND_LINE_VALUE, (void*) WARNING_LOG_LEVEL_COMMAND_LINE_VALUE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+            compare_arrays(p1, p2, (void*) WARNING_LEVEL_LOG_MODEL_COMMAND_LINE_VALUE, (void*) WARNING_LEVEL_LOG_MODEL_COMMAND_LINE_VALUE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-            if (r != *NUMBER_0_INTEGER) {
+            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 // Set log level.
-                *l = *WARNING_LOG_LEVEL;
+                *l = *WARNING_LEVEL_LOG_MODEL;
             }
         }
 
-        if (r == *NUMBER_0_INTEGER) {
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_arrays(p1, p2, (void*) INFORMATION_LOG_LEVEL_COMMAND_LINE_VALUE, (void*) INFORMATION_LOG_LEVEL_COMMAND_LINE_VALUE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+            compare_arrays(p1, p2, (void*) INFORMATION_LEVEL_LOG_MODEL_COMMAND_LINE_VALUE, (void*) INFORMATION_LEVEL_LOG_MODEL_COMMAND_LINE_VALUE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-            if (r != *NUMBER_0_INTEGER) {
+            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 // Set log level.
-                *l = *INFORMATION_LOG_LEVEL;
+                *l = *INFORMATION_LEVEL_LOG_MODEL;
             }
         }
 
-        if (r == *NUMBER_0_INTEGER) {
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_arrays(p1, p2, (void*) DEBUG_LOG_LEVEL_COMMAND_LINE_VALUE, (void*) DEBUG_LOG_LEVEL_COMMAND_LINE_VALUE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+            compare_arrays(p1, p2, (void*) DEBUG_LEVEL_LOG_MODEL_COMMAND_LINE_VALUE, (void*) DEBUG_LEVEL_LOG_MODEL_COMMAND_LINE_VALUE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-            if (r != *NUMBER_0_INTEGER) {
+            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 // Set log level.
-                *l = *DEBUG_LOG_LEVEL;
+                *l = *DEBUG_LEVEL_LOG_MODEL;
             }
         }
 
-        if (r == *NUMBER_0_INTEGER) {
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             // CAUTION! DO NOT use logging functionality here!
             // The logger will not work before its options are set.
@@ -142,11 +141,11 @@ void optionalise_log_level(void* p0, void* p1, void* p2) {
  */
 void optionalise_log_file(void* p0, void* p1, void* p2) {
 
-    if (p2 != *NULL_POINTER) {
+    if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* nc = (int*) p2;
 
-        if (p0 != *NULL_POINTER) {
+        if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
             FILE** f = (FILE**) p0;
 
@@ -156,9 +155,9 @@ void optionalise_log_file(void* p0, void* p1, void* p2) {
             log_write_terminated_message(stdout, L"Debug: Optionalise log file.\n");
 
             // The terminated file name as character array.
-            void* t = *NULL_POINTER;
-            int tc = *NUMBER_0_INTEGER;
-            int ts = *NUMBER_0_INTEGER;
+            void* t = *NULL_POINTER_MEMORY_MODEL;
+            int tc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            int ts = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
             //
             // CAUTION! Do NOT use a wide character array here!
@@ -217,7 +216,7 @@ void optionalise_log_file(void* p0, void* p1, void* p2) {
     fwprintf(stderr, L"TEST 6 ts: %i\n", ts);
     fwprintf(stderr, L"TEST 6 tc: %i\n", tc);
 
-            if (*f != *NULL_POINTER) {
+            if (*f != *NULL_POINTER_MEMORY_MODEL) {
 
                 // The file owner.
                 int o = *NUMBER_MINUS_1_INTEGER;
@@ -276,7 +275,7 @@ void optionalise_log_file(void* p0, void* p1, void* p2) {
  */
 void deoptionalise_log_file(void* p0) {
 
-    if (p0 != *NULL_POINTER) {
+    if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
         FILE* f = (FILE*) p0;
 
@@ -316,7 +315,7 @@ void deoptionalise_log_file(void* p0) {
  */
 void optionalise_option(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9) {
 
-    if (p0 != *NULL_POINTER) {
+    if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* m = (int*) p0;
 
@@ -326,46 +325,46 @@ void optionalise_option(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
         log_write_terminated_message(stdout, L"Debug: Optionalise option.\n");
 
         // The comparison result.
-        int r = *NUMBER_0_INTEGER;
+        int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-        if (r == *NUMBER_0_INTEGER) {
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_arrays(p8, p9, (void*) VERSION_COMMAND_LINE_OPTION, (void*) VERSION_COMMAND_LINE_OPTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+            compare_arrays(p8, p9, (void*) VERSION_COMMAND_LINE_OPTION, (void*) VERSION_COMMAND_LINE_OPTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-            if (r != *NUMBER_0_INTEGER) {
+            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 // Set version operation mode.
                 *m = *VERSION_CYBOI_OPERATION_MODE;
             }
         }
 
-        if (r == *NUMBER_0_INTEGER) {
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_arrays(p8, p9, (void*) HELP_COMMAND_LINE_OPTION, (void*) HELP_COMMAND_LINE_OPTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+            compare_arrays(p8, p9, (void*) HELP_COMMAND_LINE_OPTION, (void*) HELP_COMMAND_LINE_OPTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-            if (r != *NUMBER_0_INTEGER) {
+            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 // Set help operation mode.
                 *m = *HELP_CYBOI_OPERATION_MODE;
             }
         }
 
-        if (r == *NUMBER_0_INTEGER) {
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_arrays(p8, p9, (void*) TEST_COMMAND_LINE_OPTION, (void*) TEST_COMMAND_LINE_OPTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+            compare_arrays(p8, p9, (void*) TEST_COMMAND_LINE_OPTION, (void*) TEST_COMMAND_LINE_OPTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-            if (r != *NUMBER_0_INTEGER) {
+            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 // Set test operation mode.
                 *m = *TEST_CYBOI_OPERATION_MODE;
             }
         }
 
-        if (r == *NUMBER_0_INTEGER) {
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_arrays(p8, p9, (void*) KNOWLEDGE_COMMAND_LINE_OPTION, (void*) KNOWLEDGE_COMMAND_LINE_OPTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+            compare_arrays(p8, p9, (void*) KNOWLEDGE_COMMAND_LINE_OPTION, (void*) KNOWLEDGE_COMMAND_LINE_OPTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-            if (r != *NUMBER_0_INTEGER) {
+            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 // Copy file path from value to cybol knowledge file path.
                 set_wide_character(p1, p2, p3, p6, p7);
@@ -375,29 +374,29 @@ void optionalise_option(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
             }
         }
 
-        if (r == *NUMBER_0_INTEGER) {
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_arrays(p8, p9, (void*) LOG_LEVEL_COMMAND_LINE_OPTION, (void*) LOG_LEVEL_COMMAND_LINE_OPTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+            compare_arrays(p8, p9, (void*) LOG_LEVEL_COMMAND_LINE_OPTION, (void*) LOG_LEVEL_COMMAND_LINE_OPTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-            if (r != *NUMBER_0_INTEGER) {
+            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 // Set log level, which is a global variable.
                 optionalise_log_level(p4, p6, p7);
             }
         }
 
-        if (r == *NUMBER_0_INTEGER) {
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_arrays(p8, p9, (void*) LOG_FILE_COMMAND_LINE_OPTION, (void*) LOG_FILE_COMMAND_LINE_OPTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+            compare_arrays(p8, p9, (void*) LOG_FILE_COMMAND_LINE_OPTION, (void*) LOG_FILE_COMMAND_LINE_OPTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-            if (r != *NUMBER_0_INTEGER) {
+            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 // Set log file to store log messages in.
                 optionalise_log_file(p5, p6, p7);
             }
         }
 
-        if (r == *NUMBER_0_INTEGER) {
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             // CAUTION! Do NOT show this warning message, since the last
             // option argument read from command line is always null,
@@ -431,11 +430,11 @@ void optionalise_option(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
  */
 void optionalise_command_line_argument(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8) {
 
-    if (p8 != *NULL_POINTER) {
+    if (p8 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* j = (int*) p8;
 
-        if (p7 != *NULL_POINTER) {
+        if (p7 != *NULL_POINTER_MEMORY_MODEL) {
 
             int* ac = (int*) p7;
 
@@ -455,18 +454,18 @@ void optionalise_command_line_argument(void* p0, void* p1, void* p2, void* p3, v
             int i = *ac;
             // The command line argument option as multibyte character array.
             void** o = NULL_POINTER;
-            int oc = *NUMBER_0_INTEGER;
+            int oc = *NUMBER_0_INTEGER_MEMORY_MODEL;
             // The option as wide character array.
-            void* ow = *NULL_POINTER;
-            int owc = *NUMBER_0_INTEGER;
-            int ows = *NUMBER_0_INTEGER;
+            void* ow = *NULL_POINTER_MEMORY_MODEL;
+            int owc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            int ows = *NUMBER_0_INTEGER_MEMORY_MODEL;
             // The command line argument value as multibyte character array.
             void** v = NULL_POINTER;
-            int vc = *NUMBER_0_INTEGER;
+            int vc = *NUMBER_0_INTEGER_MEMORY_MODEL;
             // The value as wide character array.
-            void* vw = *NULL_POINTER;
-            int vwc = *NUMBER_0_INTEGER;
-            int vws = *NUMBER_0_INTEGER;
+            void* vw = *NULL_POINTER_MEMORY_MODEL;
+            int vwc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            int vws = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
             // Allocate option as wide character array.
             allocate((void*) &ow, (void*) &ows, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
@@ -479,7 +478,7 @@ void optionalise_command_line_argument(void* p0, void* p1, void* p2, void* p3, v
             // Example: "--loglevel"
             get_array_elements(p6, (void*) j, (void*) &o, (void*) POINTER_ARRAY);
 
-            if (*o != *NULL_POINTER) {
+            if (*o != *NULL_POINTER_MEMORY_MODEL) {
 
                 // Get command line argument option count (number of characters).
                 //
@@ -521,7 +520,7 @@ void optionalise_command_line_argument(void* p0, void* p1, void* p2, void* p3, v
                 // Example: "debug"
                 get_array_elements(p6, (void*) &i, (void*) &v, (void*) POINTER_ARRAY);
 
-                if (*v != *NULL_POINTER) {
+                if (*v != *NULL_POINTER_MEMORY_MODEL) {
 
                     // Get command line argument value count (number of characters).
                     //
@@ -604,7 +603,7 @@ void optionalise_command_line_argument(void* p0, void* p1, void* p2, void* p3, v
  */
 void optionalise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
 
-    if (p7 != *NULL_POINTER) {
+    if (p7 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* ac = (int*) p7;
 

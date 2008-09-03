@@ -1,30 +1,25 @@
 /*
- * $RCSfile: tester.c,v $
+ * Copyright (C) 1999-2008. Christian Heller.
  *
- * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
+ * This file is part of the Cybernetics Oriented Interpreter (CYBOI).
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
+ * CYBOI is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
+ * CYBOI is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * along with CYBOI.  If not, see <http://www.gnu.org/licenses/>.
  *
- * http://www.cybop.net
- * - Cybernetics Oriented Programming -
+ * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
+ * Christian Heller <christian.heller@tuxtax.de>
  *
- * This is the main testing file.
- *
- * From here all tests can be activated or deactivated.
- *
- * @version $Revision: 1.23 $ $Date: 2008-07-08 17:55:36 $ $Author: christian $
+ * @version $RCSfile: tester.c,v $ $Revision: 1.24 $ $Date: 2008-09-03 22:04:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -58,7 +53,7 @@
 #include "../globals/constants/float/double_constants.c"
 #include "../globals/constants/integer/integer_constants.c"
 #include "../globals/constants/memory_structure/memory_structure_constants.c"
-#include "../globals/constants/pointer/pointer_constants.c"
+#include "../constant/model/memory/pointer_memory_model.c"
 #include "../globals/variables/primitive_type_size_variables.c"
 #include "../memoriser/accessor/compound_accessor.c"
 #include "../memoriser/allocator.c"
@@ -80,9 +75,9 @@ void test_logger() {
     static wchar_t* TEST_LOG_MESSAGE = TEST_LOG_MESSAGE_ARRAY;
     static int* TEST_LOG_MESSAGE_COUNT = NUMBER_17_INTEGER_ARRAY;
 
-    log_message((void*) INFORMATION_LOG_LEVEL, (void*) TEST_LOG_MESSAGE, (void*) TEST_LOG_MESSAGE_COUNT);
+    log_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) TEST_LOG_MESSAGE, (void*) TEST_LOG_MESSAGE_COUNT);
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"TEST terminated log message.");
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"TEST terminated log message.");
 }
 
 /**
@@ -156,7 +151,7 @@ void test_type_sizes() {
 
     log_write_terminated_message((void*) stdout, L"Test type sizes:\n");
 
-    fwprintf(stderr, L"null: %i\n", *NULL_POINTER);
+    fwprintf(stderr, L"null: %i\n", *NULL_POINTER_MEMORY_MODEL);
     fwprintf(stderr, L"int size: %i\n", *INTEGER_PRIMITIVE_SIZE);
     fwprintf(stderr, L"char size: %i\n", *CHARACTER_PRIMITIVE_SIZE);
     fwprintf(stderr, L"wchar_t size: %i\n", *WIDE_CHARACTER_PRIMITIVE_SIZE);
@@ -169,13 +164,13 @@ void test_type_sizes() {
  * Tests the pointer addition.
  *
  * CAUTION! The following two lines calculate DIFFERENT results!
- * void* b = (void*) (m + (*NUMBER_0_INTEGER * *INTEGER_PRIMITIVE_SIZE));
- * void* b = (void*) m + (*NUMBER_0_INTEGER * *INTEGER_PRIMITIVE_SIZE);
+ * void* b = (void*) (m + (*NUMBER_0_INTEGER_MEMORY_MODEL * *INTEGER_PRIMITIVE_SIZE));
+ * void* b = (void*) m + (*NUMBER_0_INTEGER_MEMORY_MODEL * *INTEGER_PRIMITIVE_SIZE);
  * The first line is wrong and adds 16 instead of just 4.
  * The problem are the parentheses.
  *
  * The following addition adds 8 instead of just 2.
- * int* m = (int*) *NULL_POINTER;
+ * int* m = (int*) *NULL_POINTER_MEMORY_MODEL;
  * allocate((void*) &m, (void*) NUMBER_1_INTEGER, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
  * set_element(m, (void*) NUMBER_0_INTEGER, (void*) NUMBER_10_INTEGER, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
  * int* c = m + 2;
@@ -329,15 +324,15 @@ void test_integer_array() {
     int testc = *NUMBER_5_INTEGER;
 
     // The test knowledge model.
-    int* m = (int*) *NULL_POINTER;
-    int* mc = (int*) *NULL_POINTER;
-    int* ms = (int*) *NULL_POINTER;
+    int* m = (int*) *NULL_POINTER_MEMORY_MODEL;
+    int* mc = (int*) *NULL_POINTER_MEMORY_MODEL;
+    int* ms = (int*) *NULL_POINTER_MEMORY_MODEL;
 
     // Allocate test knowledge model.
     allocate((void*) &mc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    *mc = *NUMBER_0_INTEGER;
+    *mc = *NUMBER_0_INTEGER_MEMORY_MODEL;
     allocate((void*) &ms, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    *ms = *NUMBER_0_INTEGER;
+    *ms = *NUMBER_0_INTEGER_MEMORY_MODEL;
     allocate((void*) &m, (void*) ms, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
     fwprintf(stderr, L"pre mc: %i\n", *mc);
@@ -361,9 +356,9 @@ void test_integer_array() {
     set_element(m, (void*) NUMBER_2_INTEGER, (void*) NUMBER_4_INTEGER, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
     // The result values read out from the integer vector.
-    int* result0 = (int*) *NULL_POINTER;
-    int* result1 = (int*) *NULL_POINTER;
-    int* result2 = (int*) *NULL_POINTER;
+    int* result0 = (int*) *NULL_POINTER_MEMORY_MODEL;
+    int* result1 = (int*) *NULL_POINTER_MEMORY_MODEL;
+    int* result2 = (int*) *NULL_POINTER_MEMORY_MODEL;
 
     // Get result values.
     get_element(m, (void*) NUMBER_0_INTEGER, (void*) &result0, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
@@ -415,13 +410,13 @@ void test_array_resizing() {
     int* tc = NUMBER_6_INTEGER_ARRAY;
 
     // The original array.
-    void* o = *NULL_POINTER;
-    int oc = *NUMBER_0_INTEGER;
+    void* o = *NULL_POINTER_MEMORY_MODEL;
+    int oc = *NUMBER_0_INTEGER_MEMORY_MODEL;
     int os = *tc;
     // The copied array.
-    void* c = *NULL_POINTER;
-    int cc = *NUMBER_0_INTEGER;
-    int cs = *NUMBER_0_INTEGER;
+    void* c = *NULL_POINTER_MEMORY_MODEL;
+    int cc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    int cs = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // Allocate original array.
     allocate_array((void*) &o, (void*) &os, (void*) CHARACTER_ARRAY);
@@ -462,11 +457,11 @@ void test_wide_character_output() {
     char* loc = setlocale(LC_ALL, "");
 
     // The terminal (device name).
-    FILE* t = (FILE*) *NULL_POINTER;
+    FILE* t = (FILE*) *NULL_POINTER_MEMORY_MODEL;
     // The original termios interface.
-    struct termios* to = (struct termios*) *NULL_POINTER;
+    struct termios* to = (struct termios*) *NULL_POINTER_MEMORY_MODEL;
     // The working termios interface.
-    struct termios* tw = (struct termios*) *NULL_POINTER;
+    struct termios* tw = (struct termios*) *NULL_POINTER_MEMORY_MODEL;
 
     // Create gnu/linux console internals.
 //??        allocate((void*) &t, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
@@ -490,49 +485,49 @@ void test_wide_character_output() {
     tcsetattr(d, TCSANOW, (void*) tw);
 
     // The terminated control sequences string.
-    void* ts = *NULL_POINTER;
-    int tsc = *NUMBER_0_INTEGER;
+    void* ts = *NULL_POINTER_MEMORY_MODEL;
+    int tsc = *NUMBER_0_INTEGER_MEMORY_MODEL;
     int tss = *NUMBER_1000_INTEGER;
 
     // Create terminated control sequences string.
-    allocate_array((void*) &ts, (void*) &tss, (void*) WIDE_CHARACTER_ARRAY);
+    allocate_array((void*) &ts, (void*) &tss, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
     // Set terminated control sequences string by first copying the actual
     // control sequences and then adding the null termination character.
     // (Termination character does not seem to be necessary for wide character strings.)
-    set_array_elements(ts, (void*) &tsc, (void*) BOX_DRAWINGS_LIGHT_DOWN_AND_RIGHT_WIDE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+    set_array_elements(ts, (void*) &tsc, (void*) BOX_DRAWINGS_LIGHT_DOWN_AND_RIGHT_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
     tsc++;
-    set_array_elements(ts, (void*) &tsc, (void*) BOX_DRAWINGS_LIGHT_HORIZONTAL_WIDE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+    set_array_elements(ts, (void*) &tsc, (void*) BOX_DRAWINGS_LIGHT_HORIZONTAL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
     tsc++;
 
     wprintf(L"\033[32mgreen colour\033[0mswitched off.");
 
     // \033
     wchar_t wc = 0x001B;
-    set_array_elements(ts, (void*) &tsc, (void*) &wc, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+    set_array_elements(ts, (void*) &tsc, (void*) &wc, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
     tsc++;
     // [
     wc = 0x005B;
-    set_array_elements(ts, (void*) &tsc, (void*) &wc, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+    set_array_elements(ts, (void*) &tsc, (void*) &wc, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
     tsc++;
     // 3
     wc = 0x0033;
-    set_array_elements(ts, (void*) &tsc, (void*) &wc, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+    set_array_elements(ts, (void*) &tsc, (void*) &wc, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
     tsc++;
     // 2
     wc = 0x0032;
-    set_array_elements(ts, (void*) &tsc, (void*) &wc, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+    set_array_elements(ts, (void*) &tsc, (void*) &wc, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
     tsc++;
     // m
     wc = 0x006d;
-    set_array_elements(ts, (void*) &tsc, (void*) &wc, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+    set_array_elements(ts, (void*) &tsc, (void*) &wc, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
     tsc++;
 
-    set_array_elements(ts, (void*) &tsc, (void*) LATIN_CAPITAL_LETTER_H_WIDE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+    set_array_elements(ts, (void*) &tsc, (void*) LATIN_CAPITAL_LETTER_H_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
     tsc++;
-    set_array_elements(ts, (void*) &tsc, (void*) BOX_DRAWINGS_LIGHT_HORIZONTAL_WIDE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+    set_array_elements(ts, (void*) &tsc, (void*) BOX_DRAWINGS_LIGHT_HORIZONTAL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
     tsc++;
-    set_array_elements(ts, (void*) &tsc, (void*) BOX_DRAWINGS_LIGHT_DOWN_AND_LEFT_WIDE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+    set_array_elements(ts, (void*) &tsc, (void*) BOX_DRAWINGS_LIGHT_DOWN_AND_LEFT_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
     tsc++;
 
     // Write to terminal.
@@ -541,7 +536,7 @@ void test_wide_character_output() {
 //??    log_write_terminated_message((void*) stdout, (wchar_t*) ts, t);
 
     // Destroy terminated control sequences.
-    deallocate_array((void*) &ts, (void*) &tss, (void*) WIDE_CHARACTER_ARRAY);
+    deallocate_array((void*) &ts, (void*) &tss, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
     // UTF-8 still allows you to use C1 control characters such as CSI, even
     // though UTF-8 also uses bytes in the range 0x80-0x9F. It is important to
@@ -677,8 +672,8 @@ void test_integer_to_wide_character_conversion() {
     log_write_terminated_message((void*) stdout, L"Test integer-to-wide character conversion:\n");
 
     // The test wide character array.
-    void* t = *NULL_POINTER;
-    int tc = *NUMBER_0_INTEGER;
+    void* t = *NULL_POINTER_MEMORY_MODEL;
+    int tc = *NUMBER_0_INTEGER_MEMORY_MODEL;
     // One byte for the wide character and another for the trailing null.
     size_t ts = *NUMBER_2_INTEGER;
 
@@ -714,7 +709,7 @@ void test_ascii_character_wide_character_equality() {
 
     char test = 'a';
 
-    if (test = *LATIN_SMALL_LETTER_A_WIDE_CHARACTER_CODE) {
+    if (test = *LATIN_SMALL_LETTER_A_UNICODE_CHARACTER_CODE_MODEL) {
 
         log_write_terminated_message((void*) stdout, L"Characters ARE equal.\n");
 
@@ -756,23 +751,23 @@ void test_character_array_single_element() {
     log_write_terminated_message((void*) stdout, L"Test character array single element:\n");
 
     // The character array.
-    void* c = *NULL_POINTER;
+    void* c = *NULL_POINTER_MEMORY_MODEL;
     int cs = *NUMBER_5_INTEGER;
 
     // Create character array.
-    allocate_array((void*) &c, (void*) &cs, (void*) WIDE_CHARACTER_ARRAY);
+    allocate_array((void*) &c, (void*) &cs, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-    set_wide_character_array_elements(c, (void*) NUMBER_0_INTEGER, (void*) LATIN_CAPITAL_LETTER_A_WIDE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT);
-    set_wide_character_array_elements(c, (void*) NUMBER_1_INTEGER, (void*) LATIN_CAPITAL_LETTER_B_WIDE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT);
-    set_wide_character_array_elements(c, (void*) NUMBER_2_INTEGER, (void*) LATIN_CAPITAL_LETTER_C_WIDE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT);
-    set_wide_character_array_elements(c, (void*) NUMBER_3_INTEGER, (void*) LINE_FEED_CONTROL_WIDE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT);
-    set_wide_character_array_elements(c, (void*) NUMBER_4_INTEGER, (void*) NULL_CONTROL_WIDE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT);
+    set_wide_character_array_elements(c, (void*) NUMBER_0_INTEGER, (void*) LATIN_CAPITAL_LETTER_A_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_COUNT);
+    set_wide_character_array_elements(c, (void*) NUMBER_1_INTEGER, (void*) LATIN_CAPITAL_LETTER_B_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_COUNT);
+    set_wide_character_array_elements(c, (void*) NUMBER_2_INTEGER, (void*) LATIN_CAPITAL_LETTER_C_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_COUNT);
+    set_wide_character_array_elements(c, (void*) NUMBER_3_INTEGER, (void*) LINE_FEED_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_COUNT);
+    set_wide_character_array_elements(c, (void*) NUMBER_4_INTEGER, (void*) NULL_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_COUNT);
 
     // Print out array contents.
     log_write_terminated_message((void*) stdout, (wchar_t*) c);
 
-    int i = *NUMBER_0_INTEGER;
-    wchar_t* catest = (wchar_t*) *NULL_POINTER;
+    int i = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    wchar_t* catest = (wchar_t*) *NULL_POINTER_MEMORY_MODEL;
 
     while (*NUMBER_1_INTEGER) {
 
@@ -788,7 +783,7 @@ void test_character_array_single_element() {
     }
 
     // Destroy character array.
-    deallocate_array((void*) &c, (void*) &cs, (void*) WIDE_CHARACTER_ARRAY);
+    deallocate_array((void*) &c, (void*) &cs, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 }
 
 /**
@@ -799,11 +794,11 @@ void test_character_array_multiple_elements() {
     log_write_terminated_message((void*) stdout, L"Test character array multiple elements:\n");
 
     // The destination array.
-    void* d = *NULL_POINTER;
+    void* d = *NULL_POINTER_MEMORY_MODEL;
     int ds = *NUMBER_22_INTEGER;
 
     // Create destination array.
-    allocate_array((void*) &d, (void*) &ds, (void*) WIDE_CHARACTER_ARRAY);
+    allocate_array((void*) &d, (void*) &ds, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
     // The source array.
     wchar_t a[] = {L'T', L'h', L'i', L's', L' ', L'i', L's', L' ', L'a', L' ', L't', L'e', L's', L't', L'.', L'\n', L'\0'};
@@ -837,12 +832,12 @@ void test_character_array_multiple_elements() {
     // including two places for new line '\n' and c string termination '\0'.
     int ns = *NUMBER_15_INTEGER;
 
-    reallocate_array((void*) &d, (void*) &ns, (void*) &ns, (void*) WIDE_CHARACTER_ARRAY);
+    reallocate_array((void*) &d, (void*) &ns, (void*) &ns, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
     log_write_terminated_message((void*) stdout, (wchar_t*) d);
 
     // The result array.
-    void* r = *NULL_POINTER;
+    void* r = *NULL_POINTER_MEMORY_MODEL;
 
     // Test getting a reference.
     get_wide_character_array_elements(d, (void*) NUMBER_8_INTEGER, (void*) &r);
@@ -850,7 +845,7 @@ void test_character_array_multiple_elements() {
     log_write_terminated_message((void*) stdout, (wchar_t*) r);
 
     // Destroy destination array.
-    deallocate_array((void*) &d, (void*) &ns, (void*) WIDE_CHARACTER_ARRAY);
+    deallocate_array((void*) &d, (void*) &ns, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 }
 
 /**
@@ -864,8 +859,8 @@ void test_pointer_return() {
     log_write_terminated_message((void*) stdout, L"Test pointer return:\n");
 
     // The character array (including new line and null termination character).
-    void* c = *NULL_POINTER;
-    int* cs = (int*) *NULL_POINTER;
+    void* c = *NULL_POINTER_MEMORY_MODEL;
+    int* cs = (int*) *NULL_POINTER_MEMORY_MODEL;
 
     // Create character array.
     c = (void*) L"Hello World!";
@@ -879,10 +874,10 @@ void test_pointer_return() {
     // and use just a null pointer to initialise the result variable.
 
     // The result array.
-    void* r = *NULL_POINTER;
+    void* r = *NULL_POINTER_MEMORY_MODEL;
 
     // Get character from character array.
-    get_array_elements(c, (void*) NUMBER_6_INTEGER, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+    get_array_elements(c, (void*) NUMBER_6_INTEGER, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
     // Print result (character array).
     fwprintf(stderr, L"r: %ls\n", (wchar_t*) r);
@@ -957,7 +952,7 @@ void test_pointer_array_with_null_values() {
     log_write_terminated_message((void*) stdout, L"Test pointer array with null values:\n");
 
     // The pointer array.
-    void* a = *NULL_POINTER;
+    void* a = *NULL_POINTER_MEMORY_MODEL;
     int as = *NUMBER_5_INTEGER;
 
     allocate_pointer_array((void*) &a, (void*) &as);
@@ -972,7 +967,7 @@ void test_pointer_array_with_null_values() {
     char** r0 = (char**) NULL_POINTER;
     int** r1 = (int**) NULL_POINTER;
     void** r2 = (void**) NULL_POINTER;
-    void* r3 = *NULL_POINTER;
+    void* r3 = *NULL_POINTER_MEMORY_MODEL;
     char** r4 = (char**) NULL_POINTER;
 
     get_pointer_array_elements(a, (void*) NUMBER_0_INTEGER, (void*) &r0);
@@ -988,7 +983,7 @@ void test_pointer_array_with_null_values() {
     fwprintf(stdout, L"Result pointer as character r4: %c\n", **r4);
 
     fwprintf(stderr, L"NULL_POINTER: %i \n", NULL_POINTER);
-    fwprintf(stderr, L"*NULL_POINTER: %i \n", *NULL_POINTER);
+    fwprintf(stderr, L"*NULL_POINTER: %i \n", *NULL_POINTER_MEMORY_MODEL);
 
     deallocate_pointer_array((void*) &a, (void*) &as);
 }
@@ -1005,11 +1000,11 @@ void test_file_read() {
 
 /*??
     // The array.
-    void* a = *NULL_POINTER;
+    void* a = *NULL_POINTER_MEMORY_MODEL;
     // The array size.
-    int as = *NUMBER_0_INTEGER;
+    int as = *NUMBER_0_INTEGER_MEMORY_MODEL;
     // The array count.
-    int ac = *NUMBER_0_INTEGER;
+    int ac = *NUMBER_0_INTEGER_MEMORY_MODEL;
     // The file name array.
     char fna[] = {'/', 'h', 'o', 'm', 'e', '/', 'c', 'y', 'b', 'o', 'p', '/', 't', 'm', 'p', '/', 't', 'e', 's', 't', '.', 'c', 'y', 'b', 'o', 'l'};
     // The file name.
@@ -1026,8 +1021,8 @@ void test_file_read() {
     fwprintf(stderr, L"fn: %i\n", fn);
     fwprintf(stderr, L"fnc: %i\n", fnc);
 
-    int j = *NUMBER_0_INTEGER;
-    char* c = (char*) *NULL_POINTER;
+    int j = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    char* c = (char*) *NULL_POINTER_MEMORY_MODEL;
     int* cc = *NUMBER_1_INTEGER;
 
     while (*NUMBER_1_INTEGER) {
@@ -1079,7 +1074,7 @@ void test_console() {
 
     log_write_terminated_message((void*) stdout, L"Test console:\n");
 
-    if (strcmp("linux", getenv("TERM")) == *NUMBER_0_INTEGER) {
+    if (strcmp("linux", getenv("TERM")) == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
 //        // This is a gnu/linux console.
 //        log_write_terminated_message((void*) stdout, L"This is a gnu/linux console.\n");
@@ -1180,9 +1175,9 @@ void test_decode_integer_vector() {
     int sc = *NUMBER_5_INTEGER;
 
     // The destination integer vector.
-    void* d = *NULL_POINTER;
-    int dc = *NUMBER_0_INTEGER;
-    int ds = *NUMBER_0_INTEGER;
+    void* d = *NULL_POINTER_MEMORY_MODEL;
+    int dc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    int ds = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // Allocate integer vector.
     allocate((void*) &d, (void*) &ds, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
@@ -1191,9 +1186,9 @@ void test_decode_integer_vector() {
     decode_integer_vector((void*) &d, (void*) &dc, (void*) &ds, s, (void*) &sc);
 
     // The integer values.
-    int* i0 = (int*) *NULL_POINTER;
-    int* i1 = (int*) *NULL_POINTER;
-    int* i2 = (int*) *NULL_POINTER;
+    int* i0 = (int*) *NULL_POINTER_MEMORY_MODEL;
+    int* i1 = (int*) *NULL_POINTER_MEMORY_MODEL;
+    int* i2 = (int*) *NULL_POINTER_MEMORY_MODEL;
 
     // Get integer at index 0 from integer vector.
     get_element(d, (void*) NUMBER_0_INTEGER, (void*) &i0, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
@@ -1225,9 +1220,9 @@ void test_encode_integer_vector() {
     int sc = *NUMBER_3_INTEGER;
 
     // The destination character array.
-    wchar_t* d = (wchar_t*) *NULL_POINTER;
-    int dc = *NUMBER_0_INTEGER;
-    int ds = *NUMBER_0_INTEGER;
+    wchar_t* d = (wchar_t*) *NULL_POINTER_MEMORY_MODEL;
+    int dc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    int ds = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // Allocate destination character vector.
     allocate((void*) &d, (void*) &ds, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
@@ -1252,15 +1247,15 @@ void test_encode_integer() {
     log_write_terminated_message((void*) stdout, L"Test encode integer:\n");
 
     // The destination character array.
-    wchar_t* d = (wchar_t*) *NULL_POINTER;
-    int dc = *NUMBER_0_INTEGER;
-    int ds = *NUMBER_0_INTEGER;
+    wchar_t* d = (wchar_t*) *NULL_POINTER_MEMORY_MODEL;
+    int dc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    int ds = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // An arbitrary source integer value.
     int s = *NUMBER_18_INTEGER;
 
     // Allocate destination character array.
-    allocate_array((void*) &d, (void*) &ds, (void*) WIDE_CHARACTER_ARRAY);
+    allocate_array((void*) &d, (void*) &ds, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
     // Use compound count as index to create the element name suffix,
     // because the element is added at the end of the compound container.
@@ -1271,7 +1266,7 @@ void test_encode_integer() {
     fwprintf(stdout, L"Test: Destination character array size: %i\n", ds);
 
     // Deallocate destination character array.
-    deallocate_array((void*) &d, (void*) &ds, (void*) WIDE_CHARACTER_ARRAY);
+    deallocate_array((void*) &d, (void*) &ds, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 }
 
 /**
@@ -1362,7 +1357,7 @@ int test_mesa_opengl(int argc, char **argv) {
  */
 void test() {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Test cyboi.");
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Test cyboi.");
 
     // How to use printf to check parameter values.
     // The printf function uses stdout for output, but nothing appears on console.

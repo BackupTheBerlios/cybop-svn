@@ -1,26 +1,25 @@
 /*
- * $RCSfile: wide_character_vector_accessor.c,v $
+ * Copyright (C) 1999-2008. Christian Heller.
  *
- * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
+ * This file is part of the Cybernetics Oriented Interpreter (CYBOI).
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
+ * CYBOI is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
+ * CYBOI is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * along with CYBOI.  If not, see <http://www.gnu.org/licenses/>.
  *
- * http://www.cybop.net
- * - Cybernetics Oriented Programming -
+ * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
+ * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $Revision: 1.9 $ $Date: 2008-05-16 23:15:39 $ $Author: christian $
+ * @version $RCSfile: wide_character_vector_accessor.c,v $ $Revision: 1.10 $ $Date: 2008-09-03 22:04:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -29,9 +28,9 @@
 
 #include "../../globals/constants/cybol/cybol_abstraction_constants.c"
 #include "../../globals/constants/integer/integer_constants.c"
-#include "../../globals/constants/log/log_message_constants.c"
-#include "../../globals/constants/memory_structure/array_constants.c"
-#include "../../globals/logger/logger.c"
+#include "../../constant/model/log/message_log_model.c"
+#include "../../constant/abstraction/memory/array_memory_abstraction.c"
+#include "../../logger/logger.c"
 #include "../../memoriser/array.c"
 
 /**
@@ -45,23 +44,23 @@
  */
 void set_wide_character(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p4 != *NULL_POINTER) {
+    if (p4 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* sc = (int*) p4;
 
-        if (p2 != *NULL_POINTER) {
+        if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
             int* ds = (int*) p2;
 
-            if (p1 != *NULL_POINTER) {
+            if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
                 int* dc = (int*) p1;
 
-                if (p0 != *NULL_POINTER) {
+                if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
                     void** d = (void**) p0;
 
-                    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Set wide character.");
+                    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Set wide character.");
 
                     // CAUTION! The destination array needs to be resized not only
                     // if the source array is greater, but also if it is smaller!
@@ -86,29 +85,29 @@ void set_wide_character(void* p0, void* p1, void* p2, void* p3, void* p4) {
                         *dc = *sc;
                         *ds = *dc;
 
-                        reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_ARRAY);
+                        reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                     }
 
-                    set_array_elements(*d, (void*) NUMBER_0_INTEGER, p3, p4, (void*) WIDE_CHARACTER_ARRAY);
+                    set_array_elements(*d, (void*) NUMBER_0_INTEGER, p3, p4, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not set wide character elements. The destination is null.");
+                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not set wide character elements. The destination is null.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not set wide character elements. The destination count is null.");
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not set wide character elements. The destination count is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not set wide character elements. The destination size is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not set wide character elements. The destination size is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not set wide character elements. The source count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not set wide character elements. The source count is null.");
     }
 }
 
@@ -121,9 +120,9 @@ void set_wide_character(void* p0, void* p1, void* p2, void* p3, void* p4) {
  */
 void set_wide_character_vector_element(void* p0, void* p1, void* p2) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Set wide character vector element.");
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Set wide character vector element.");
 
-    set_array_elements(p0, p1, p2, (void*) NUMBER_1_INTEGER, (void*) WIDE_CHARACTER_ARRAY);
+    set_array_elements(p0, p1, p2, (void*) NUMBER_1_INTEGER, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 }
 
 /**
@@ -135,9 +134,9 @@ void set_wide_character_vector_element(void* p0, void* p1, void* p2) {
  */
 void remove_wide_character_vector_element(void* p0, void* p1, void* p2) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Remove wide character vector element.");
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Remove wide character vector element.");
 
-    remove_array_elements(p0, p1, p2, (void*) NUMBER_1_INTEGER, (void*) WIDE_CHARACTER_ARRAY);
+    remove_array_elements(p0, p1, p2, (void*) NUMBER_1_INTEGER, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 }
 
 /**
@@ -149,9 +148,9 @@ void remove_wide_character_vector_element(void* p0, void* p1, void* p2) {
  */
 void get_wide_character_vector_element(void* p0, void* p1, void* p2) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Get wide character vector element.");
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Get wide character vector element.");
 
-    get_array_elements(p0, p1, p2, (void*) WIDE_CHARACTER_ARRAY);
+    get_array_elements(p0, p1, p2, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 }
 
 /* WIDE_CHARACTER_VECTOR_ACCESSOR_SOURCE */

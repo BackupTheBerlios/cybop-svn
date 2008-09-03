@@ -1,26 +1,25 @@
 /*
- * $RCSfile: signal_memory_accessor.c,v $
+ * Copyright (C) 1999-2008. Christian Heller.
  *
- * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
+ * This file is part of the Cybernetics Oriented Interpreter (CYBOI).
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
+ * CYBOI is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
+ * CYBOI is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * along with CYBOI.  If not, see <http://www.gnu.org/licenses/>.
  *
- * http://www.cybop.net
- * - Cybernetics Oriented Programming -
+ * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
+ * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $Revision: 1.25 $ $Date: 2008-05-04 00:18:13 $ $Author: christian $
+ * @version $RCSfile: signal_memory_accessor.c,v $ $Revision: 1.26 $ $Date: 2008-09-03 22:04:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -28,11 +27,11 @@
 #define SIGNAL_MEMORY_ACCESSOR_SOURCE
 
 #include "../../globals/constants/integer/integer_constants.c"
-#include "../../globals/constants/log/log_message_constants.c"
-#include "../../globals/constants/memory_structure/array_constants.c"
+#include "../../constant/model/log/message_log_model.c"
+#include "../../constant/abstraction/memory/array_memory_abstraction.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
-#include "../../globals/constants/pointer/pointer_constants.c"
-#include "../../globals/logger/logger.c"
+#include "../../constant/model/memory/pointer_memory_model.c"
+#include "../../logger/logger.c"
 #include "../../globals/variables/reallocation_factor_variables.c"
 #include "../../memoriser/allocator.c"
 #include "../../memoriser/array.c"
@@ -54,15 +53,15 @@
  */
 void set_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10) {
 
-    if (p2 != *NULL_POINTER) {
+    if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* sms = (int*) p2;
 
-        if (p1 != *NULL_POINTER) {
+        if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
             int* smc = (int*) p1;
 
-            log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Set signal.");
+            log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Set signal.");
 
             // The abstractions, models, details, priorities, identifications.
             void** a = NULL_POINTER;
@@ -84,26 +83,26 @@ void set_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
             get_array_elements(p0, (void*) SIGNALS_PRIORITIES_INDEX, (void*) &p, (void*) POINTER_ARRAY);
             get_array_elements(p0, (void*) SIGNALS_IDENTIFICATIONS_INDEX, (void*) &id, (void*) POINTER_ARRAY);
 
-            if (*a != *NULL_POINTER) {
+            if (*a != *NULL_POINTER_MEMORY_MODEL) {
 
-                if (*ac != *NULL_POINTER) {
+                if (*ac != *NULL_POINTER_MEMORY_MODEL) {
 
-                    if (*m != *NULL_POINTER) {
+                    if (*m != *NULL_POINTER_MEMORY_MODEL) {
 
-                        if (*mc != *NULL_POINTER) {
+                        if (*mc != *NULL_POINTER_MEMORY_MODEL) {
 
-                            if (*d != *NULL_POINTER) {
+                            if (*d != *NULL_POINTER_MEMORY_MODEL) {
 
-                                if (*dc != *NULL_POINTER) {
+                                if (*dc != *NULL_POINTER_MEMORY_MODEL) {
 
-                                    if (*p != *NULL_POINTER) {
+                                    if (*p != *NULL_POINTER_MEMORY_MODEL) {
 
-                                        if (*id != *NULL_POINTER) {
+                                        if (*id != *NULL_POINTER_MEMORY_MODEL) {
 
                                             // The index.
                                             int i = *smc;
 
-                                            if (i >= *NUMBER_0_INTEGER) {
+                                            if (i >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                                                 if (i == *sms) {
 
@@ -152,62 +151,62 @@ void set_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
 
                                                 } else {
 
-                                                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not set signal. The index exceeds the size.");
+                                                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not set signal. The index exceeds the size.");
                                                 }
 
                                             } else {
 
-                                                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not set signal. The index is negativ.");
+                                                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not set signal. The index is negativ.");
                                             }
 
                                         } else {
 
-                                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not set signal. The identifications is null.");
+                                            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not set signal. The identifications is null.");
                                         }
 
                                     } else {
 
-                                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not set signal. The priorities is null.");
+                                        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not set signal. The priorities is null.");
                                     }
 
                                 } else {
 
-                                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not set signal. The details counts is null.");
+                                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not set signal. The details counts is null.");
                                 }
 
                             } else {
 
-                                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not set signal. The details is null.");
+                                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not set signal. The details is null.");
                             }
 
                         } else {
 
-                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not set signal. The models counts is null.");
+                            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not set signal. The models counts is null.");
                         }
 
                     } else {
 
-                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not set signal. The models is null.");
+                        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not set signal. The models is null.");
                     }
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not set signal. The abstractions counts is null.");
+                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not set signal. The abstractions counts is null.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not set signal. The abstractions is null.");
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not set signal. The abstractions is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not set signal. The signal memory count is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not set signal. The signal memory count is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not set signal. The signal memory size is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not set signal. The signal memory size is null.");
     }
 }
 
@@ -221,19 +220,19 @@ void set_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
  */
 void remove_signal(void* p0, void* p1, void* p2, void* p3) {
 
-    if (p3 != *NULL_POINTER) {
+    if (p3 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* i = (int*) p3;
 
-        if (p2 != *NULL_POINTER) {
+        if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
             int* sms = (int*) p2;
 
-            if (p1 != *NULL_POINTER) {
+            if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
                 int* smc = (int*) p1;
 
-                log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Remove signal.");
+                log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Remove signal.");
 
                 // The abstractions, models, details, priorities, identifications.
                 void** a = NULL_POINTER;
@@ -255,23 +254,23 @@ void remove_signal(void* p0, void* p1, void* p2, void* p3) {
                 get_array_elements(p0, (void*) SIGNALS_PRIORITIES_INDEX, (void*) &p, (void*) POINTER_ARRAY);
                 get_array_elements(p0, (void*) SIGNALS_IDENTIFICATIONS_INDEX, (void*) &id, (void*) POINTER_ARRAY);
 
-                if (*a != *NULL_POINTER) {
+                if (*a != *NULL_POINTER_MEMORY_MODEL) {
 
-                    if (*ac != *NULL_POINTER) {
+                    if (*ac != *NULL_POINTER_MEMORY_MODEL) {
 
-                        if (*m != *NULL_POINTER) {
+                        if (*m != *NULL_POINTER_MEMORY_MODEL) {
 
-                            if (*mc != *NULL_POINTER) {
+                            if (*mc != *NULL_POINTER_MEMORY_MODEL) {
 
-                                if (*d != *NULL_POINTER) {
+                                if (*d != *NULL_POINTER_MEMORY_MODEL) {
 
-                                    if (*dc != *NULL_POINTER) {
+                                    if (*dc != *NULL_POINTER_MEMORY_MODEL) {
 
-                                        if (*p != *NULL_POINTER) {
+                                        if (*p != *NULL_POINTER_MEMORY_MODEL) {
 
-                                            if (*id != *NULL_POINTER) {
+                                            if (*id != *NULL_POINTER_MEMORY_MODEL) {
 
-                                                if (*i >= *NUMBER_0_INTEGER) {
+                                                if (*i >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                                                     if (*i < *smc) {
 
@@ -290,67 +289,67 @@ void remove_signal(void* p0, void* p1, void* p2, void* p3) {
 
                                                     } else {
 
-                                                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not remove signal. The index exceeds the count.");
+                                                        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not remove signal. The index exceeds the count.");
                                                     }
 
                                                 } else {
 
-                                                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not remove signal. The index is negativ.");
+                                                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not remove signal. The index is negativ.");
                                                 }
 
                                             } else {
 
-                                                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not remove signal. The identifications is null.");
+                                                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not remove signal. The identifications is null.");
                                             }
 
                                         } else {
 
-                                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not remove signal. The priorities is null.");
+                                            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not remove signal. The priorities is null.");
                                         }
 
                                     } else {
 
-                                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not remove signal. The details counts is null.");
+                                        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not remove signal. The details counts is null.");
                                     }
 
                                 } else {
 
-                                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not remove signal. The details is null.");
+                                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not remove signal. The details is null.");
                                 }
 
                             } else {
 
-                                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not remove signal. The models counts is null.");
+                                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not remove signal. The models counts is null.");
                             }
 
                         } else {
 
-                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not remove signal. The models is null.");
+                            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not remove signal. The models is null.");
                         }
 
                     } else {
 
-                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not remove signal. The abstractions counts is null.");
+                        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not remove signal. The abstractions counts is null.");
                     }
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not remove signal. The abstractions is null.");
+                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not remove signal. The abstractions is null.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not remove signal. The signal memory count is null.");
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not remove signal. The signal memory count is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not remove signal. The signal memory size is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not remove signal. The signal memory size is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not remove signal. The index is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not remove signal. The index is null.");
     }
 }
 
@@ -372,15 +371,15 @@ void remove_signal(void* p0, void* p1, void* p2, void* p3) {
 void get_signal(void* p0, void* p1, void* p2, void* p3, void* p4,
     void* p5, void* p6, void* p7, void* p8, void* p9, int* p10) {
 
-    if (p2 != *NULL_POINTER) {
+    if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* i = (int*) p2;
 
-        if (p1 != *NULL_POINTER) {
+        if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
             int* smc = (int*) p1;
 
-            log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Get signal.");
+            log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Get signal.");
 
             // The abstractions, models, details, priorities, identifications.
             void** a = NULL_POINTER;
@@ -402,23 +401,23 @@ void get_signal(void* p0, void* p1, void* p2, void* p3, void* p4,
             get_array_elements(p0, (void*) SIGNALS_PRIORITIES_INDEX, (void*) &p, (void*) POINTER_ARRAY);
             get_array_elements(p0, (void*) SIGNALS_IDENTIFICATIONS_INDEX, (void*) &id, (void*) POINTER_ARRAY);
 
-            if (*a != *NULL_POINTER) {
+            if (*a != *NULL_POINTER_MEMORY_MODEL) {
 
-                if (*ac != *NULL_POINTER) {
+                if (*ac != *NULL_POINTER_MEMORY_MODEL) {
 
-                    if (*m != *NULL_POINTER) {
+                    if (*m != *NULL_POINTER_MEMORY_MODEL) {
 
-                        if (*mc != *NULL_POINTER) {
+                        if (*mc != *NULL_POINTER_MEMORY_MODEL) {
 
-                            if (*d != *NULL_POINTER) {
+                            if (*d != *NULL_POINTER_MEMORY_MODEL) {
 
-                                if (*dc != *NULL_POINTER) {
+                                if (*dc != *NULL_POINTER_MEMORY_MODEL) {
 
-                                    if (*p != *NULL_POINTER) {
+                                    if (*p != *NULL_POINTER_MEMORY_MODEL) {
 
-                                        if (*id != *NULL_POINTER) {
+                                        if (*id != *NULL_POINTER_MEMORY_MODEL) {
 
-                                            if (*i >= *NUMBER_0_INTEGER) {
+                                            if (*i >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                                                 if (*i < *smc) {
 
@@ -434,62 +433,62 @@ void get_signal(void* p0, void* p1, void* p2, void* p3, void* p4,
 
                                                 } else {
 
-                                                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get signal. The index exceeds the count.");
+                                                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not get signal. The index exceeds the count.");
                                                 }
 
                                             } else {
 
-                                                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get signal. The index is negativ.");
+                                                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not get signal. The index is negativ.");
                                             }
 
                                         } else {
 
-                                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get signal. The identifications is null.");
+                                            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not get signal. The identifications is null.");
                                         }
 
                                     } else {
 
-                                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get signal. The priorities is null.");
+                                        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not get signal. The priorities is null.");
                                     }
 
                                 } else {
 
-                                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get signal. The details counts is null.");
+                                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not get signal. The details counts is null.");
                                 }
 
                             } else {
 
-                                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get signal. The details is null.");
+                                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not get signal. The details is null.");
                             }
 
                         } else {
 
-                            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get signal. The models counts is null.");
+                            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not get signal. The models counts is null.");
                         }
 
                     } else {
 
-                        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get signal. The models is null.");
+                        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not get signal. The models is null.");
                     }
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get signal. The abstractions counts is null.");
+                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not get signal. The abstractions counts is null.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get signal. The abstractions is null.");
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not get signal. The abstractions is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get signal. The signal memory count is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not get signal. The signal memory count is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get signal. The index is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not get signal. The index is null.");
     }
 }
 
@@ -502,15 +501,15 @@ void get_signal(void* p0, void* p1, void* p2, void* p3, void* p4,
  */
 void get_highest_priority_signal_index(void* p0, void* p1, void* p2) {
 
-    if (p2 != *NULL_POINTER) {
+    if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* i = (int*) p2;
 
-        if (p1 != *NULL_POINTER) {
+        if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
             int* smc = (int*) p1;
 
-            log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Get highest priority signal index.");
+            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Get highest priority signal index.");
 
             // The signal priorities.
             void** sp = NULL_POINTER;
@@ -518,10 +517,10 @@ void get_highest_priority_signal_index(void* p0, void* p1, void* p2) {
             // Get signal priorities.
             get_array_elements(p0, (void*) SIGNALS_PRIORITIES_INDEX, (void*) &sp, (void*) POINTER_ARRAY);
 
-            if (*sp != *NULL_POINTER) {
+            if (*sp != *NULL_POINTER_MEMORY_MODEL) {
 
                 // The loop variable.
-                int j = *NUMBER_0_INTEGER;
+                int j = *NUMBER_0_INTEGER_MEMORY_MODEL;
                 // The priority.
                 int** prio = (int**) NULL_POINTER;
                 // The highest priority.
@@ -557,17 +556,17 @@ void get_highest_priority_signal_index(void* p0, void* p1, void* p2) {
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get highest priority signal index. The signal priorities is null.");
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not get highest priority signal index. The signal priorities is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get highest priority signal index. The signal memory count is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not get highest priority signal index. The signal memory count is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get highest priority signal index. The index is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not get highest priority signal index. The index is null.");
     }
 }
 
@@ -579,15 +578,15 @@ void get_highest_priority_signal_index(void* p0, void* p1, void* p2) {
  */
 void set_new_signal_identification(void* p0, void* p1) {
 
-    if (p1 != *NULL_POINTER) {
+    if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* v = (int*) p1;
 
-        if (p0 != *NULL_POINTER) {
+        if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
             void** id = (void**) p0;
 
-            log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Set new signal identification.");
+            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Set new signal identification.");
 
             //
             // CAUTION! These comparisons can be extended to infinity!
@@ -617,7 +616,7 @@ void set_new_signal_identification(void* p0, void* p1) {
             //   *id = &NUMBER_0_INTEGER;
             //
 
-            if (*v == *NUMBER_0_INTEGER) {
+            if (*v == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 *id = &NUMBER_0_INTEGER;
 
@@ -664,12 +663,12 @@ void set_new_signal_identification(void* p0, void* p1) {
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not set new signal identification. The signal identification is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not set new signal identification. The signal identification is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not set new signal identification. The signal identification value is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not set new signal identification. The signal identification value is null.");
     }
 }
 
@@ -685,11 +684,11 @@ void set_new_signal_identification(void* p0, void* p1) {
  */
 void get_new_signal_identification(void* p0, void* p1, void* p2) {
 
-    if (p1 != *NULL_POINTER) {
+    if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* smc = (int*) p1;
 
-        log_terminated_message((void*) DEBUG_LOG_LEVEL, (void*) L"Get new signal identification.");
+        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Get new signal identification.");
 
         // The signal identifications.
         void** ids = NULL_POINTER;
@@ -697,10 +696,10 @@ void get_new_signal_identification(void* p0, void* p1, void* p2) {
         // Get signal identifications.
         get_array_elements(p0, (void*) SIGNALS_IDENTIFICATIONS_INDEX, (void*) &ids, (void*) POINTER_ARRAY);
 
-        if (*ids != *NULL_POINTER) {
+        if (*ids != *NULL_POINTER_MEMORY_MODEL) {
 
             // The loop variable.
-            int j = *NUMBER_0_INTEGER;
+            int j = *NUMBER_0_INTEGER_MEMORY_MODEL;
             // The maximum signal identification value.
             //
             // CAUTION! Do not initialise it with zero, because then the
@@ -744,12 +743,12 @@ void get_new_signal_identification(void* p0, void* p1, void* p2) {
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get new signal identification. The signal identifications is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not get new signal identification. The signal identifications is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not get new signal identification. The signal memory count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not get new signal identification. The signal memory count is null.");
     }
 }
 

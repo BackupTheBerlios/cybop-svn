@@ -1,26 +1,25 @@
 /*
- * $RCSfile: manager.c,v $
+ * Copyright (C) 1999-2008. Christian Heller.
  *
- * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
+ * This file is part of the Cybernetics Oriented Interpreter (CYBOI).
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
+ * CYBOI is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
+ * CYBOI is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * along with CYBOI.  If not, see <http://www.gnu.org/licenses/>.
  *
- * http://www.cybop.net
- * - Cybernetics Oriented Programming -
+ * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
+ * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $Revision: 1.47 $ $Date: 2008-05-20 22:13:43 $ $Author: christian $
+ * @version $RCSfile: manager.c,v $ $Revision: 1.48 $ $Date: 2008-09-03 22:04:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -35,9 +34,9 @@
 #include "../globals/constants/cybol/cybol_abstraction_constants.c"
 #include "../globals/constants/cybol/cybol_channel_constants.c"
 #include "../globals/constants/integer/integer_constants.c"
-#include "../globals/constants/log/log_message_constants.c"
-#include "../globals/constants/pointer/pointer_constants.c"
-#include "../globals/logger/logger.c"
+#include "../constant/model/log/message_log_model.c"
+#include "../constant/model/memory/pointer_memory_model.c"
+#include "../logger/logger.c"
 #include "../memoriser/allocator.c"
 
 /**
@@ -64,22 +63,22 @@
  */
 void manage(void* p0, void* p1) {
 
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"\n\n");
-    log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Manage system.");
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"\n\n");
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Manage system.");
 
     //
     // Variable declaration.
     //
 
     // The internal memory.
-    void* i = *NULL_POINTER;
+    void* i = *NULL_POINTER_MEMORY_MODEL;
     int* ic = INTERNAL_MEMORY_ELEMENTS_COUNT;
     int* is = INTERNAL_MEMORY_ELEMENTS_COUNT;
 
     // The knowledge memory.
-    void* k = *NULL_POINTER;
-    int* kc = (int*) *NULL_POINTER;
-    int* ks = (int*) *NULL_POINTER;
+    void* k = *NULL_POINTER_MEMORY_MODEL;
+    int* kc = (int*) *NULL_POINTER_MEMORY_MODEL;
+    int* ks = (int*) *NULL_POINTER_MEMORY_MODEL;
 
     // A meta knowledge memory?
     // Theoretically, a meta knowledge memory could be created, too, and be
@@ -95,9 +94,9 @@ void manage(void* p0, void* p1) {
     // #something                               --> meta knowledge about knowledge root = nonsense
 
     // The signal memory.
-    void* s = *NULL_POINTER;
-    int* sc = (int*) *NULL_POINTER;
-    int* ss = (int*) *NULL_POINTER;
+    void* s = *NULL_POINTER_MEMORY_MODEL;
+    int* sc = (int*) *NULL_POINTER_MEMORY_MODEL;
+    int* ss = (int*) *NULL_POINTER_MEMORY_MODEL;
 
     //
     // The signal memory interrupt request flag.
@@ -124,37 +123,37 @@ void manage(void* p0, void* p1) {
     // Both of these assumptions are true on all of the machines that the GNU C
     // library supports and on all known POSIX systems.
     //
-    volatile sig_atomic_t* signal_memory_irq = (volatile sig_atomic_t*) *NULL_POINTER;
+    volatile sig_atomic_t* signal_memory_irq = (volatile sig_atomic_t*) *NULL_POINTER_MEMORY_MODEL;
     // The gnu/linux console interrupt request flag.
-    volatile sig_atomic_t* gnu_linux_console_irq = (volatile sig_atomic_t*) *NULL_POINTER;
+    volatile sig_atomic_t* gnu_linux_console_irq = (volatile sig_atomic_t*) *NULL_POINTER_MEMORY_MODEL;
     // The x window system interrupt request flag.
-    volatile sig_atomic_t* x_window_system_irq = (volatile sig_atomic_t*) *NULL_POINTER;
+    volatile sig_atomic_t* x_window_system_irq = (volatile sig_atomic_t*) *NULL_POINTER_MEMORY_MODEL;
     // The www service interrupt request flag.
-    volatile sig_atomic_t* www_service_irq = (volatile sig_atomic_t*) *NULL_POINTER;
+    volatile sig_atomic_t* www_service_irq = (volatile sig_atomic_t*) *NULL_POINTER_MEMORY_MODEL;
     // The cyboi service interrupt request flag.
-    volatile sig_atomic_t* cyboi_service_irq = (volatile sig_atomic_t*) *NULL_POINTER;
+    volatile sig_atomic_t* cyboi_service_irq = (volatile sig_atomic_t*) *NULL_POINTER_MEMORY_MODEL;
 
     // The signal memory mutex.
-    pthread_mutex_t* signal_memory_mutex = (pthread_mutex_t*) *NULL_POINTER;
+    pthread_mutex_t* signal_memory_mutex = (pthread_mutex_t*) *NULL_POINTER_MEMORY_MODEL;
     // The gnu/linux console mutex.
-    pthread_mutex_t* gnu_linux_console_mutex = (pthread_mutex_t*) *NULL_POINTER;
+    pthread_mutex_t* gnu_linux_console_mutex = (pthread_mutex_t*) *NULL_POINTER_MEMORY_MODEL;
     // The x window system mutex.
-    pthread_mutex_t* x_window_system_mutex = (pthread_mutex_t*) *NULL_POINTER;
+    pthread_mutex_t* x_window_system_mutex = (pthread_mutex_t*) *NULL_POINTER_MEMORY_MODEL;
     // The www service mutex.
-    pthread_mutex_t* www_service_mutex = (pthread_mutex_t*) *NULL_POINTER;
+    pthread_mutex_t* www_service_mutex = (pthread_mutex_t*) *NULL_POINTER_MEMORY_MODEL;
     // The cyboi service mutex.
-    pthread_mutex_t* cyboi_service_mutex = (pthread_mutex_t*) *NULL_POINTER;
+    pthread_mutex_t* cyboi_service_mutex = (pthread_mutex_t*) *NULL_POINTER_MEMORY_MODEL;
 
     // The signal memory sleep time.
-    double* signal_memory_sleep_time = (double*) *NULL_POINTER;
+    double* signal_memory_sleep_time = (double*) *NULL_POINTER_MEMORY_MODEL;
     // The gnu linux console sleep time.
-    double* gnu_linux_console_sleep_time = (double*) *NULL_POINTER;
+    double* gnu_linux_console_sleep_time = (double*) *NULL_POINTER_MEMORY_MODEL;
     // The x window system sleep time.
-    double* x_window_system_sleep_time = (double*) *NULL_POINTER;
+    double* x_window_system_sleep_time = (double*) *NULL_POINTER_MEMORY_MODEL;
     // The www service sleep time.
-    double* www_service_sleep_time = (double*) *NULL_POINTER;
+    double* www_service_sleep_time = (double*) *NULL_POINTER_MEMORY_MODEL;
     // The cyboi service sleep time.
-    double* cyboi_service_sleep_time = (double*) *NULL_POINTER;
+    double* cyboi_service_sleep_time = (double*) *NULL_POINTER_MEMORY_MODEL;
 
     //
     // Variable allocation.
@@ -205,22 +204,22 @@ void manage(void* p0, void* p1) {
     //
 
     // Initialise knowledge memory count, size.
-    *kc = *NUMBER_0_INTEGER;
-    *ks = *NUMBER_0_INTEGER;
+    *kc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    *ks = *NUMBER_0_INTEGER_MEMORY_MODEL;
     // Initialise signal memory count, size.
-    *sc = *NUMBER_0_INTEGER;
-    *ss = *NUMBER_0_INTEGER;
+    *sc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    *ss = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // Initialise signal memory interrupt request flag.
-    *signal_memory_irq = *NUMBER_0_INTEGER;
+    *signal_memory_irq = *NUMBER_0_INTEGER_MEMORY_MODEL;
     // Initialise gnu/linux console interrupt request flag.
-    *gnu_linux_console_irq = *NUMBER_0_INTEGER;
+    *gnu_linux_console_irq = *NUMBER_0_INTEGER_MEMORY_MODEL;
     // Initialise x window system interrupt request flag.
-    *x_window_system_irq = *NUMBER_0_INTEGER;
+    *x_window_system_irq = *NUMBER_0_INTEGER_MEMORY_MODEL;
     // Initialise www service interrupt request flag.
-    *www_service_irq = *NUMBER_0_INTEGER;
+    *www_service_irq = *NUMBER_0_INTEGER_MEMORY_MODEL;
     // Initialise cyboi service interrupt request flag.
-    *cyboi_service_irq = *NUMBER_0_INTEGER;
+    *cyboi_service_irq = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     //
     // In the following mutex initialisation functions, the second parameter
@@ -229,15 +228,15 @@ void manage(void* p0, void* p1) {
     //
 
     // Initialise signal memory mutex.
-    pthread_mutex_init(signal_memory_mutex, *NULL_POINTER);
+    pthread_mutex_init(signal_memory_mutex, *NULL_POINTER_MEMORY_MODEL);
     // Initialise gnu/linux console mutex.
-    pthread_mutex_init(gnu_linux_console_mutex, *NULL_POINTER);
+    pthread_mutex_init(gnu_linux_console_mutex, *NULL_POINTER_MEMORY_MODEL);
     // Initialise x window system mutex.
-    pthread_mutex_init(x_window_system_mutex, *NULL_POINTER);
+    pthread_mutex_init(x_window_system_mutex, *NULL_POINTER_MEMORY_MODEL);
     // Initialise www service mutex.
-    pthread_mutex_init(www_service_mutex, *NULL_POINTER);
+    pthread_mutex_init(www_service_mutex, *NULL_POINTER_MEMORY_MODEL);
     // Initialise cyboi service mutex.
-    pthread_mutex_init(cyboi_service_mutex, *NULL_POINTER);
+    pthread_mutex_init(cyboi_service_mutex, *NULL_POINTER_MEMORY_MODEL);
 
     // Initialise signal memory sleep time.
     *signal_memory_sleep_time = *NUMBER_0_1_DOUBLE;
@@ -272,7 +271,7 @@ void manage(void* p0, void* p1) {
     // determined by constants. The items HAVE TO be assigned an
     // initial value, since all source code relies on them.
     //
-    // Most values are compared against the *NULL_POINTER constant
+    // Most values are compared against the *NULL_POINTER_MEMORY_MODEL constant
     // to find out whether they are set or not. If now initial values
     // would be arbitrary pointers, the program would follow a wrong path,
     // because it would guess that an instance was properly allocated,

@@ -1,26 +1,25 @@
 /*
- * $RCSfile: gnu_linux_console_communicator.c,v $
+ * Copyright (C) 1999-2008. Christian Heller.
  *
- * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
+ * This file is part of the Cybernetics Oriented Interpreter (CYBOI).
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
+ * CYBOI is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
+ * CYBOI is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * along with CYBOI.  If not, see <http://www.gnu.org/licenses/>.
  *
- * http://www.cybop.net
- * - Cybernetics Oriented Programming -
+ * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
+ * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $Revision: 1.16 $ $Date: 2008-07-08 17:55:36 $ $Author: christian $
+ * @version $RCSfile: gnu_linux_console_communicator.c,v $ $Revision: 1.17 $ $Date: 2008-09-03 22:04:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -33,11 +32,11 @@
 #include "../../globals/constants/character/code/wide_character_code_constants.c"
 #include "../../globals/constants/cybol/cybol_abstraction_constants.c"
 #include "../../globals/constants/integer/integer_constants.c"
-#include "../../globals/constants/log/log_message_constants.c"
-#include "../../globals/constants/memory_structure/array_constants.c"
+#include "../../constant/model/log/message_log_model.c"
+#include "../../constant/abstraction/memory/array_memory_abstraction.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
-#include "../../globals/constants/pointer/pointer_constants.c"
-#include "../../globals/logger/logger.c"
+#include "../../constant/model/memory/pointer_memory_model.c"
+#include "../../logger/logger.c"
 #include "../../memoriser/converter/character/utf_8_unicode_character_converter.c"
 #include "../../memoriser/array.c"
 
@@ -51,21 +50,21 @@
  */
 void read_gnu_linux_console(void* p0, void* p1, void* p2, void* p3) {
 
-    if (p3 != *NULL_POINTER) {
+    if (p3 != *NULL_POINTER_MEMORY_MODEL) {
 
         FILE* s = (FILE*) p3;
 
-        log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Read from gnu/linux console.");
+        log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Read from gnu/linux console.");
 
         // The loop exit flag.
-        int f = *NUMBER_0_INTEGER;
+        int f = *NUMBER_0_INTEGER_MEMORY_MODEL;
         // The input character.
         wint_t c = *((wint_t*) NULL_CONTROL_CHARACTER_CODE);
 //??        int c = *((int*) NULL_CONTROL_CHARACTER_CODE);
         // The escape character mode.
-        int esc = *NUMBER_0_INTEGER;
+        int esc = *NUMBER_0_INTEGER_MEMORY_MODEL;
         // The escape control sequence mode.
-        int csi = *NUMBER_0_INTEGER;
+        int csi = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
         while (*NUMBER_1_INTEGER) {
 
@@ -93,7 +92,7 @@ void read_gnu_linux_console(void* p0, void* p1, void* p2, void* p3) {
             if (csi == *NUMBER_1_INTEGER) {
 
                 // Reset escape control sequence flag.
-                csi = *NUMBER_0_INTEGER;
+                csi = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                 // Copy source character to destination character array.
                 decode_utf_8_unicode_character_vector(p0, p1, p2, (void*) &c, (void*) NUMBER_1_INTEGER);
@@ -106,14 +105,14 @@ void read_gnu_linux_console(void* p0, void* p1, void* p2, void* p3) {
             } else if (esc == *NUMBER_1_INTEGER) {
 
                 // Reset escape character flag.
-                esc = *NUMBER_0_INTEGER;
+                esc = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                 // An escape character was read before.
                 // Find out if it was just that escape character,
                 // or if a left square bracket character follows now,
                 // in which case this is the start of an escape control sequence.
 
-                if (c == *((wint_t*) LEFT_SQUARE_BRACKET_WIDE_CHARACTER_CODE)) {
+                if (c == *((wint_t*) LEFT_SQUARE_BRACKET_UNICODE_CHARACTER_CODE_MODEL)) {
 
                     // This is the start of an escape control sequence.
 
@@ -135,7 +134,7 @@ void read_gnu_linux_console(void* p0, void* p1, void* p2, void* p3) {
                     f = *NUMBER_1_INTEGER;
                 }
 
-            } else if (c == *((wint_t*) ESCAPE_CONTROL_WIDE_CHARACTER_CODE)) {
+            } else if (c == *((wint_t*) ESCAPE_CONTROL_UNICODE_CHARACTER_CODE_MODEL)) {
 
                 // Set escape character flag.
                 esc = *NUMBER_1_INTEGER;
@@ -160,7 +159,7 @@ void read_gnu_linux_console(void* p0, void* p1, void* p2, void* p3) {
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not read gnu/linux console. The source input stream is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not read gnu/linux console. The source input stream is null.");
     }
 }
 
@@ -175,34 +174,34 @@ void read_gnu_linux_console(void* p0, void* p1, void* p2, void* p3) {
  */
 void write_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p4 != *NULL_POINTER) {
+    if (p4 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* sc = (int*) p4;
 
-        if (p0 != *NULL_POINTER) {
+        if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
             FILE** d = (FILE**) p0;
 
-            log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Write to gnu/linux console.");
+            log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Write to gnu/linux console.");
 
             // Possible locales are: LANG, LC_CTYPE, LC_ALL.
             // CAUTION! This setting is necessary for UTF-8 Unicode characters to work.
             char* loc = setlocale(LC_ALL, "");
 
             // The terminated control sequences string.
-            wchar_t* ts = (wchar_t*) *NULL_POINTER;
+            wchar_t* ts = (wchar_t*) *NULL_POINTER_MEMORY_MODEL;
             // Increase control sequences count by one, for termination character.
             int tss = *sc + *NUMBER_1_INTEGER;
 
             // Create terminated control sequences string.
-            allocate_array((void*) &ts, (void*) &tss, (void*) WIDE_CHARACTER_ARRAY);
+            allocate_array((void*) &ts, (void*) &tss, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
             // Set terminated control sequences string by first copying the actual
             // control sequences and then adding the null termination character.
-            set_array_elements((void*) ts, (void*) NUMBER_0_INTEGER, p3, p4, (void*) WIDE_CHARACTER_ARRAY);
-            set_array_elements((void*) ts, p4, (void*) NULL_CONTROL_WIDE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+            set_array_elements((void*) ts, (void*) NUMBER_0_INTEGER, p3, p4, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            set_array_elements((void*) ts, p4, (void*) NULL_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-            if (*d != *NULL_POINTER) {
+            if (*d != *NULL_POINTER_MEMORY_MODEL) {
 
                 // Write to terminal.
     //??            fputs((char*) ts, *d);
@@ -222,20 +221,20 @@ void write_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not write to gnu/linux console. The destination terminal file is null.");
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not write to gnu/linux console. The destination terminal file is null.");
             }
 
             // Destroy terminated control sequences.
-            deallocate_array((void*) &ts, (void*) &tss, (void*) WIDE_CHARACTER_ARRAY);
+            deallocate_array((void*) &ts, (void*) &tss, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not write to gnu/linux console. The destination terminal file parameter is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not write to gnu/linux console. The destination terminal file parameter is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not write to gnu/linux console. The source terminal control sequences count parameter is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not write to gnu/linux console. The source terminal control sequences count parameter is null.");
     }
 }
 

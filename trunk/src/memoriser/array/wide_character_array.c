@@ -1,26 +1,25 @@
 /*
- * $RCSfile: wide_character_array.c,v $
+ * Copyright (C) 1999-2008. Christian Heller.
  *
- * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
+ * This file is part of the Cybernetics Oriented Interpreter (CYBOI).
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
+ * CYBOI is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
+ * CYBOI is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * along with CYBOI.  If not, see <http://www.gnu.org/licenses/>.
  *
- * http://www.cybop.net
- * - Cybernetics Oriented Programming -
+ * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
+ * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $Revision: 1.12 $ $Date: 2008-05-04 00:18:13 $ $Author: christian $
+ * @version $RCSfile: wide_character_array.c,v $ $Revision: 1.13 $ $Date: 2008-09-03 22:04:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -31,9 +30,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include "../../globals/constants/integer/integer_constants.c"
-#include "../../globals/constants/log/log_message_constants.c"
-#include "../../globals/constants/pointer/pointer_constants.c"
-#include "../../globals/logger/logger.c"
+#include "../../constant/model/log/message_log_model.c"
+#include "../../constant/model/memory/pointer_memory_model.c"
+#include "../../logger/logger.c"
 #include "../../globals/variables/primitive_type_size_variables.c"
 
 /**
@@ -44,15 +43,15 @@
  */
 void allocate_wide_character_array(void* p0, void* p1) {
 
-    if (p1 != *NULL_POINTER) {
+    if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* s = (int*) p1;
 
-        if (p0 != *NULL_POINTER) {
+        if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
             void** a = (void**) p0;
 
-            log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Allocate wide character array.");
+            log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Allocate wide character array.");
 
             // Determine the memory area to be allocated.
             // It is the product of the given size and the type size.
@@ -68,12 +67,12 @@ void allocate_wide_character_array(void* p0, void* p1) {
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not allocate wide character array. The array is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not allocate wide character array. The array is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not allocate wide character array. The array size is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not allocate wide character array. The array size is null.");
     }
 }
 
@@ -85,26 +84,26 @@ void allocate_wide_character_array(void* p0, void* p1) {
  */
 void deallocate_wide_character_array(void* p0, void* p1) {
 
-    if (p1 != *NULL_POINTER) {
+    if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* s = (int*) p1;
 
-        if (p0 != *NULL_POINTER) {
+        if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
             void** a = (void**) p0;
 
-            log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Deallocate wide character array.");
+            log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Deallocate wide character array.");
 
             free(*a);
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not deallocate wide character array. The array is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not deallocate wide character array. The array is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not deallocate wide character array. The array size is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not deallocate wide character array. The array size is null.");
     }
 }
 
@@ -117,19 +116,19 @@ void deallocate_wide_character_array(void* p0, void* p1) {
  */
 void reallocate_wide_character_array(void* p0, void* p1, void* p2) {
 
-    if (p2 != *NULL_POINTER) {
+    if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* s = (int*) p2;
 
-        if (p1 != *NULL_POINTER) {
+        if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
             int* c = (int*) p1;
 
-            if (p0 != *NULL_POINTER) {
+            if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
                 void** a = (void**) p0;
 
-                log_terminated_message((void*) INFORMATION_LOG_LEVEL, (void*) L"Reallocate wide character array.");
+                log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Reallocate wide character array.");
 
                 // Determine the memory area to be allocated.
                 // It is the product of the given size and the type size.
@@ -152,17 +151,17 @@ void reallocate_wide_character_array(void* p0, void* p1, void* p2) {
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not reallocate wide character array. The array is null.");
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not reallocate wide character array. The array is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not reallocate wide character array. The array count is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not reallocate wide character array. The array count is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not reallocate wide character array. The array size is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not reallocate wide character array. The array size is null.");
     }
 }
 
@@ -179,26 +178,26 @@ void reallocate_wide_character_array(void* p0, void* p1, void* p2) {
  */
 void compare_wide_character_array_elements(void* p0, void* p1, void* p2, void* p3) {
 
-    if (p3 != *NULL_POINTER) {
+    if (p3 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* r = (int*) p3;
 
-        if (p2 != *NULL_POINTER) {
+        if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
             int* c = (int*) p2;
 
-            if (p1 != *NULL_POINTER) {
+            if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
-                if (p0 != *NULL_POINTER) {
+                if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
                     // The loop variable.
-                    int j = *NUMBER_0_INTEGER;
+                    int j = *NUMBER_0_INTEGER_MEMORY_MODEL;
                     // The first element.
-                    wchar_t* e0 = (wchar_t*) *NULL_POINTER;
+                    wchar_t* e0 = (wchar_t*) *NULL_POINTER_MEMORY_MODEL;
                     // The second element.
-                    wchar_t* e1 = (wchar_t*) *NULL_POINTER;
+                    wchar_t* e1 = (wchar_t*) *NULL_POINTER_MEMORY_MODEL;
                     // The size.
-                    int s = *NUMBER_0_INTEGER;
+                    int s = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                     while (*NUMBER_1_INTEGER) {
 
@@ -228,22 +227,22 @@ void compare_wide_character_array_elements(void* p0, void* p1, void* p2, void* p
 
                 } else {
 
-//??                    log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_COMPARE_CHARACTER_ARRAY_ELEMENTS_THE_FIRST_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_COMPARE_CHARACTER_ARRAY_ELEMENTS_THE_FIRST_ARRAY_IS_NULL_MESSAGE_COUNT);
+//??                    log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_COMPARE_CHARACTER_ARRAY_ELEMENTS_THE_FIRST_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_COMPARE_CHARACTER_ARRAY_ELEMENTS_THE_FIRST_ARRAY_IS_NULL_MESSAGE_COUNT);
                 }
 
             } else {
 
-//??                log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_COMPARE_CHARACTER_ARRAY_ELEMENTS_THE_SECOND_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_COMPARE_CHARACTER_ARRAY_ELEMENTS_THE_SECOND_ARRAY_IS_NULL_MESSAGE_COUNT);
+//??                log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_COMPARE_CHARACTER_ARRAY_ELEMENTS_THE_SECOND_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_COMPARE_CHARACTER_ARRAY_ELEMENTS_THE_SECOND_ARRAY_IS_NULL_MESSAGE_COUNT);
             }
 
         } else {
 
-//??            log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_COMPARE_CHARACTER_ARRAY_ELEMENTS_THE_COUNT_IS_NULL_MESSAGE, (void*) COULD_NOT_COMPARE_CHARACTER_ARRAY_ELEMENTS_THE_COUNT_IS_NULL_MESSAGE_COUNT);
+//??            log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_COMPARE_CHARACTER_ARRAY_ELEMENTS_THE_COUNT_IS_NULL_MESSAGE, (void*) COULD_NOT_COMPARE_CHARACTER_ARRAY_ELEMENTS_THE_COUNT_IS_NULL_MESSAGE_COUNT);
         }
 
     } else {
 
-//??        log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_COMPARE_CHARACTER_ARRAY_ELEMENTS_THE_RESULT_IS_NULL_MESSAGE, (void*) COULD_NOT_COMPARE_CHARACTER_ARRAY_ELEMENTS_THE_RESULT_IS_NULL_MESSAGE_COUNT);
+//??        log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_COMPARE_CHARACTER_ARRAY_ELEMENTS_THE_RESULT_IS_NULL_MESSAGE, (void*) COULD_NOT_COMPARE_CHARACTER_ARRAY_ELEMENTS_THE_RESULT_IS_NULL_MESSAGE_COUNT);
     }
 }
 
@@ -257,28 +256,28 @@ void compare_wide_character_array_elements(void* p0, void* p1, void* p2, void* p
  */
 void set_wide_character_array_elements(void* p0, void* p1, void* p2, void* p3) {
 
-    if (p3 != *NULL_POINTER) {
+    if (p3 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* c = (int*) p3;
 
-        if (p2 != *NULL_POINTER) {
+        if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
-            if (p1 != *NULL_POINTER) {
+            if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
                 int* i = (int*) p1;
 
-                if (p0 != *NULL_POINTER) {
+                if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
                     // The destination base.
                     void* db = (void*) (p0 + (*i * *WIDE_CHARACTER_PRIMITIVE_SIZE));
                     // The source element.
-                    wchar_t* se = (wchar_t*) *NULL_POINTER;
+                    wchar_t* se = (wchar_t*) *NULL_POINTER_MEMORY_MODEL;
                     // The destination element.
-                    wchar_t* de = (wchar_t*) *NULL_POINTER;
+                    wchar_t* de = (wchar_t*) *NULL_POINTER_MEMORY_MODEL;
                     // The loop variable.
-                    int j = *NUMBER_0_INTEGER;
+                    int j = *NUMBER_0_INTEGER_MEMORY_MODEL;
                     // The size.
-                    int s = *NUMBER_0_INTEGER;
+                    int s = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                     while (*NUMBER_1_INTEGER) {
 
@@ -302,22 +301,22 @@ void set_wide_character_array_elements(void* p0, void* p1, void* p2, void* p3) {
 
                 } else {
 
-//??                    log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_SET_CHARACTER_ARRAY_ELEMENTS_THE_DESTINATION_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_SET_CHARACTER_ARRAY_ELEMENTS_THE_DESTINATION_ARRAY_IS_NULL_MESSAGE_COUNT);
+//??                    log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_SET_CHARACTER_ARRAY_ELEMENTS_THE_DESTINATION_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_SET_CHARACTER_ARRAY_ELEMENTS_THE_DESTINATION_ARRAY_IS_NULL_MESSAGE_COUNT);
                 }
 
             } else {
 
-//??                log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_SET_CHARACTER_ARRAY_ELEMENTS_THE_INDEX_IS_NULL_MESSAGE, (void*) COULD_NOT_SET_CHARACTER_ARRAY_ELEMENTS_THE_INDEX_IS_NULL_MESSAGE_COUNT);
+//??                log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_SET_CHARACTER_ARRAY_ELEMENTS_THE_INDEX_IS_NULL_MESSAGE, (void*) COULD_NOT_SET_CHARACTER_ARRAY_ELEMENTS_THE_INDEX_IS_NULL_MESSAGE_COUNT);
             }
 
         } else {
 
-//??            log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_SET_CHARACTER_ARRAY_ELEMENTS_THE_SOURCE_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_SET_CHARACTER_ARRAY_ELEMENTS_THE_SOURCE_ARRAY_IS_NULL_MESSAGE_COUNT);
+//??            log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_SET_CHARACTER_ARRAY_ELEMENTS_THE_SOURCE_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_SET_CHARACTER_ARRAY_ELEMENTS_THE_SOURCE_ARRAY_IS_NULL_MESSAGE_COUNT);
         }
 
     } else {
 
-//??        log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_SET_CHARACTER_ARRAY_ELEMENTS_THE_COUNT_IS_NULL_MESSAGE, (void*) COULD_NOT_SET_CHARACTER_ARRAY_ELEMENTS_THE_COUNT_IS_NULL_MESSAGE_COUNT);
+//??        log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_SET_CHARACTER_ARRAY_ELEMENTS_THE_COUNT_IS_NULL_MESSAGE, (void*) COULD_NOT_SET_CHARACTER_ARRAY_ELEMENTS_THE_COUNT_IS_NULL_MESSAGE_COUNT);
     }
 }
 
@@ -331,34 +330,34 @@ void set_wide_character_array_elements(void* p0, void* p1, void* p2, void* p3) {
  */
 void remove_wide_character_array_elements(void* p0, void* p1, void* p2, void* p3) {
 
-    if (p3 != *NULL_POINTER) {
+    if (p3 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* c = (int*) p3;
 
-        if (p2 != *NULL_POINTER) {
+        if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
             int* i = (int*) p2;
 
-            if (p1 != *NULL_POINTER) {
+            if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
                 int* m = (int*) p1;
 
-                if (p0 != *NULL_POINTER) {
+                if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
                     // The destination base.
                     void* db = (void*) (p0 + (*i * *WIDE_CHARACTER_PRIMITIVE_SIZE));
                     // The source base.
                     void* sb = (void*) (db + (*c * *WIDE_CHARACTER_PRIMITIVE_SIZE));
                     // The source element.
-                    wchar_t* se = (wchar_t*) *NULL_POINTER;
+                    wchar_t* se = (wchar_t*) *NULL_POINTER_MEMORY_MODEL;
                     // The destination element.
-                    wchar_t* de = (wchar_t*) *NULL_POINTER;
+                    wchar_t* de = (wchar_t*) *NULL_POINTER_MEMORY_MODEL;
                     // The remaining elements size.
                     int r = *m - (*i + *c);
                     // The loop variable.
-                    int j = *NUMBER_0_INTEGER;
+                    int j = *NUMBER_0_INTEGER_MEMORY_MODEL;
                     // The size.
-                    int s = *NUMBER_0_INTEGER;
+                    int s = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                     // Starting from the given index, move all remaining elements
                     // one place towards the beginning of the elements.
@@ -395,22 +394,22 @@ void remove_wide_character_array_elements(void* p0, void* p1, void* p2, void* p3
 
                 } else {
 
-//??                    log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_REMOVE_CHARACTER_ARRAY_ELEMENTS_THE_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_REMOVE_CHARACTER_ARRAY_ELEMENTS_THE_ARRAY_IS_NULL_MESSAGE_COUNT);
+//??                    log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_REMOVE_CHARACTER_ARRAY_ELEMENTS_THE_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_REMOVE_CHARACTER_ARRAY_ELEMENTS_THE_ARRAY_IS_NULL_MESSAGE_COUNT);
                 }
 
             } else {
 
-//??                log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_REMOVE_CHARACTER_ARRAY_ELEMENTS_THE_SIZE_IS_NULL_MESSAGE, (void*) COULD_NOT_REMOVE_CHARACTER_ARRAY_ELEMENTS_THE_SIZE_IS_NULL_MESSAGE_COUNT);
+//??                log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_REMOVE_CHARACTER_ARRAY_ELEMENTS_THE_SIZE_IS_NULL_MESSAGE, (void*) COULD_NOT_REMOVE_CHARACTER_ARRAY_ELEMENTS_THE_SIZE_IS_NULL_MESSAGE_COUNT);
             }
 
         } else {
 
-//??            log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_REMOVE_CHARACTER_ARRAY_ELEMENTS_THE_INDEX_IS_NULL_MESSAGE, (void*) COULD_NOT_REMOVE_CHARACTER_ARRAY_ELEMENTS_THE_INDEX_IS_NULL_MESSAGE_COUNT);
+//??            log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_REMOVE_CHARACTER_ARRAY_ELEMENTS_THE_INDEX_IS_NULL_MESSAGE, (void*) COULD_NOT_REMOVE_CHARACTER_ARRAY_ELEMENTS_THE_INDEX_IS_NULL_MESSAGE_COUNT);
         }
 
     } else {
 
-//??        log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_REMOVE_CHARACTER_ARRAY_ELEMENTS_THE_COUNT_IS_NULL_MESSAGE, (void*) COULD_NOT_REMOVE_CHARACTER_ARRAY_ELEMENTS_THE_COUNT_IS_NULL_MESSAGE_COUNT);
+//??        log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_REMOVE_CHARACTER_ARRAY_ELEMENTS_THE_COUNT_IS_NULL_MESSAGE, (void*) COULD_NOT_REMOVE_CHARACTER_ARRAY_ELEMENTS_THE_COUNT_IS_NULL_MESSAGE_COUNT);
     }
 }
 
@@ -423,32 +422,32 @@ void remove_wide_character_array_elements(void* p0, void* p1, void* p2, void* p3
  */
 void get_wide_character_array_elements(void* p0, void* p1, void* p2) {
 
-    if (p2 != *NULL_POINTER) {
+    if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
         void** e = (void**) p2;
 
-        if (p1 != *NULL_POINTER) {
+        if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
             int* i = (int*) p1;
 
-            if (p0 != *NULL_POINTER) {
+            if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
                 // Determine element.
                 *e = (void*) (p0 + (*i * *WIDE_CHARACTER_PRIMITIVE_SIZE));
 
             } else {
 
-//??                log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_GET_CHARACTER_ARRAY_ELEMENTS_THE_SOURCE_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_GET_CHARACTER_ARRAY_ELEMENTS_THE_SOURCE_ARRAY_IS_NULL_MESSAGE_COUNT);
+//??                log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_GET_CHARACTER_ARRAY_ELEMENTS_THE_SOURCE_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_GET_CHARACTER_ARRAY_ELEMENTS_THE_SOURCE_ARRAY_IS_NULL_MESSAGE_COUNT);
             }
 
         } else {
 
-//??            log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_GET_CHARACTER_ARRAY_ELEMENTS_THE_INDEX_IS_NULL_MESSAGE, (void*) COULD_NOT_GET_CHARACTER_ARRAY_ELEMENTS_THE_INDEX_IS_NULL_MESSAGE_COUNT);
+//??            log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_GET_CHARACTER_ARRAY_ELEMENTS_THE_INDEX_IS_NULL_MESSAGE, (void*) COULD_NOT_GET_CHARACTER_ARRAY_ELEMENTS_THE_INDEX_IS_NULL_MESSAGE_COUNT);
         }
 
     } else {
 
-//??        log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_GET_CHARACTER_ARRAY_ELEMENTS_THE_DESTINATION_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_GET_CHARACTER_ARRAY_ELEMENTS_THE_DESTINATION_ARRAY_IS_NULL_MESSAGE_COUNT);
+//??        log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_GET_CHARACTER_ARRAY_ELEMENTS_THE_DESTINATION_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_GET_CHARACTER_ARRAY_ELEMENTS_THE_DESTINATION_ARRAY_IS_NULL_MESSAGE_COUNT);
     }
 }
 
@@ -467,28 +466,28 @@ void get_wide_character_array_elements(void* p0, void* p1, void* p2) {
  */
 void get_wide_character_array_elements_index(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p4 != *NULL_POINTER) {
+    if (p4 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* i = (int*) p4;
 
-        if (p3 != *NULL_POINTER) {
+        if (p3 != *NULL_POINTER_MEMORY_MODEL) {
 
             int* ec = (int*) p3;
 
-            if (p1 != *NULL_POINTER) {
+            if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
                 int* ac = (int*) p1;
 
-                if (p0 != *NULL_POINTER) {
+                if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
                     // The iteration limit.
                     int l = *ac - *ec + *NUMBER_1_INTEGER;
                     // The element.
-                    void* e = *NULL_POINTER;
+                    void* e = *NULL_POINTER_MEMORY_MODEL;
                     // The loop variable.
-                    int j = *NUMBER_0_INTEGER;
+                    int j = *NUMBER_0_INTEGER_MEMORY_MODEL;
                     // The comparison result.
-                    int r = *NUMBER_0_INTEGER;
+                    int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                     while (*NUMBER_1_INTEGER) {
 
@@ -514,22 +513,22 @@ void get_wide_character_array_elements_index(void* p0, void* p1, void* p2, void*
 
                 } else {
 
-//??                    log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_GET_CHARACTER_ARRAY_ELEMENT_INDEX_THE_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_GET_CHARACTER_ARRAY_ELEMENT_INDEX_THE_ARRAY_IS_NULL_MESSAGE_COUNT);
+//??                    log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_GET_CHARACTER_ARRAY_ELEMENT_INDEX_THE_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_GET_CHARACTER_ARRAY_ELEMENT_INDEX_THE_ARRAY_IS_NULL_MESSAGE_COUNT);
                 }
 
             } else {
 
-//??                log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_GET_CHARACTER_ARRAY_ELEMENT_INDEX_THE_SIZE_IS_NULL_MESSAGE, (void*) COULD_NOT_GET_CHARACTER_ARRAY_ELEMENT_INDEX_THE_SIZE_IS_NULL_MESSAGE_COUNT);
+//??                log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_GET_CHARACTER_ARRAY_ELEMENT_INDEX_THE_SIZE_IS_NULL_MESSAGE, (void*) COULD_NOT_GET_CHARACTER_ARRAY_ELEMENT_INDEX_THE_SIZE_IS_NULL_MESSAGE_COUNT);
             }
 
         } else {
 
-//??            log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_GET_CHARACTER_ARRAY_ELEMENT_INDEX_THE_COUNT_IS_NULL_MESSAGE, (void*) COULD_NOT_GET_CHARACTER_ARRAY_ELEMENT_INDEX_THE_COUNT_IS_NULL_MESSAGE_COUNT);
+//??            log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_GET_CHARACTER_ARRAY_ELEMENT_INDEX_THE_COUNT_IS_NULL_MESSAGE, (void*) COULD_NOT_GET_CHARACTER_ARRAY_ELEMENT_INDEX_THE_COUNT_IS_NULL_MESSAGE_COUNT);
         }
 
     } else {
 
-//??        log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_GET_CHARACTER_ARRAY_ELEMENT_INDEX_THE_INDEX_IS_NULL_MESSAGE, (void*) COULD_NOT_GET_CHARACTER_ARRAY_ELEMENT_INDEX_THE_INDEX_IS_NULL_MESSAGE_COUNT);
+//??        log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_GET_CHARACTER_ARRAY_ELEMENT_INDEX_THE_INDEX_IS_NULL_MESSAGE, (void*) COULD_NOT_GET_CHARACTER_ARRAY_ELEMENT_INDEX_THE_INDEX_IS_NULL_MESSAGE_COUNT);
     }
 }
 

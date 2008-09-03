@@ -1,26 +1,25 @@
 /*
- * $RCSfile: url_escape_code_converter.c,v $
+ * Copyright (C) 1999-2008. Christian Heller.
  *
- * Copyright (c) 1999-2008. Christian Heller and the CYBOP developers.
+ * This file is part of the Cybernetics Oriented Interpreter (CYBOI).
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
+ * CYBOI is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
+ * CYBOI is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * along with CYBOI.  If not, see <http://www.gnu.org/licenses/>.
  *
- * http://www.cybop.net
- * - Cybernetics Oriented Programming -
+ * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
+ * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $Revision: 1.7 $ $Date: 2008-05-27 22:52:00 $ $Author: christian $
+ * @version $RCSfile: url_escape_code_converter.c,v $ $Revision: 1.8 $ $Date: 2008-09-03 22:04:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -31,11 +30,11 @@
 #include "../../globals/constants/cybol/cybol_abstraction_constants.c"
 #include "../../globals/constants/http/url_escape_code_constants.c"
 #include "../../globals/constants/integer/integer_constants.c"
-#include "../../globals/constants/log/log_message_constants.c"
-#include "../../globals/constants/memory_structure/array_constants.c"
+#include "../../constant/model/log/message_log_model.c"
+#include "../../constant/abstraction/memory/array_memory_abstraction.c"
 #include "../../globals/constants/memory_structure/memory_structure_constants.c"
-#include "../../globals/constants/pointer/pointer_constants.c"
-#include "../../globals/logger/logger.c"
+#include "../../constant/model/memory/pointer_memory_model.c"
+#include "../../logger/logger.c"
 #include "../../globals/variables/reallocation_factor_variables.c"
 
 //
@@ -63,285 +62,285 @@
  */
 void decode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p2 != *NULL_POINTER) {
+    if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* ds = (int*) p2;
 
-        if (p1 != *NULL_POINTER) {
+        if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
             int* dc = (int*) p1;
 
-            if (p0 != *NULL_POINTER) {
+            if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
                 void** d = (void**) p0;
 
                 // The temporary value.
                 void** t = NULL_POINTER;
-                int tc = *NUMBER_0_INTEGER;
-                int ts = *NUMBER_0_INTEGER;
+                int tc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+                int ts = *NUMBER_0_INTEGER_MEMORY_MODEL;
                 // The comparison result.
-                int r = *NUMBER_0_INTEGER;
+                int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-                if (r == *NUMBER_0_INTEGER) {
+                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    compare_arrays(p3, p4, (void*) SPACE_URL_ESCAPE_CODE, (void*) SPACE_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) SPACE_URL_ESCAPE_CODE, (void*) SPACE_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                    if (r != *NUMBER_0_INTEGER) {
+                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         t = (void**) &SPACE_WIDE_CHARACTER;
-                        tc = *PRIMITIVE_COUNT;
+                        tc = *PRIMITIVE_MEMORY_MODEL_COUNT;
                         ts = *WIDE_CHARACTER_PRIMITIVE_SIZE;
                     }
                 }
 
-                if (r == *NUMBER_0_INTEGER) {
+                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    compare_arrays(p3, p4, (void*) NUMBER_SIGN_URL_ESCAPE_CODE, (void*) NUMBER_SIGN_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) NUMBER_SIGN_URL_ESCAPE_CODE, (void*) NUMBER_SIGN_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                    if (r != *NUMBER_0_INTEGER) {
+                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         t = (void**) &NUMBER_SIGN_WIDE_CHARACTER;
-                        tc = *PRIMITIVE_COUNT;
+                        tc = *PRIMITIVE_MEMORY_MODEL_COUNT;
                         ts = *WIDE_CHARACTER_PRIMITIVE_SIZE;
                     }
                 }
 
-                if (r == *NUMBER_0_INTEGER) {
+                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    compare_arrays(p3, p4, (void*) DOLLAR_SIGN_URL_ESCAPE_CODE, (void*) DOLLAR_SIGN_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) DOLLAR_SIGN_URL_ESCAPE_CODE, (void*) DOLLAR_SIGN_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                    if (r != *NUMBER_0_INTEGER) {
+                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         t = (void**) &DOLLAR_SIGN_WIDE_CHARACTER;
-                        tc = *PRIMITIVE_COUNT;
+                        tc = *PRIMITIVE_MEMORY_MODEL_COUNT;
                         ts = *WIDE_CHARACTER_PRIMITIVE_SIZE;
                     }
                 }
 
-                if (r == *NUMBER_0_INTEGER) {
+                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    compare_arrays(p3, p4, (void*) PERCENT_SIGN_URL_ESCAPE_CODE, (void*) PERCENT_SIGN_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) PERCENT_SIGN_URL_ESCAPE_CODE, (void*) PERCENT_SIGN_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                    if (r != *NUMBER_0_INTEGER) {
+                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         t = (void**) &PERCENT_SIGN_WIDE_CHARACTER;
-                        tc = *PRIMITIVE_COUNT;
+                        tc = *PRIMITIVE_MEMORY_MODEL_COUNT;
                         ts = *WIDE_CHARACTER_PRIMITIVE_SIZE;
                     }
                 }
 
-                if (r == *NUMBER_0_INTEGER) {
+                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    compare_arrays(p3, p4, (void*) AMPERSAND_URL_ESCAPE_CODE, (void*) AMPERSAND_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) AMPERSAND_URL_ESCAPE_CODE, (void*) AMPERSAND_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                    if (r != *NUMBER_0_INTEGER) {
+                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         t = (void**) &AMPERSAND_WIDE_CHARACTER;
-                        tc = *PRIMITIVE_COUNT;
+                        tc = *PRIMITIVE_MEMORY_MODEL_COUNT;
                         ts = *WIDE_CHARACTER_PRIMITIVE_SIZE;
                     }
                 }
 
-                if (r == *NUMBER_0_INTEGER) {
+                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    compare_arrays(p3, p4, (void*) SOLIDUS_URL_ESCAPE_CODE, (void*) SOLIDUS_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) SOLIDUS_URL_ESCAPE_CODE, (void*) SOLIDUS_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                    if (r != *NUMBER_0_INTEGER) {
+                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         t = (void**) &SOLIDUS_WIDE_CHARACTER;
-                        tc = *PRIMITIVE_COUNT;
+                        tc = *PRIMITIVE_MEMORY_MODEL_COUNT;
                         ts = *WIDE_CHARACTER_PRIMITIVE_SIZE;
                     }
                 }
 
-                if (r == *NUMBER_0_INTEGER) {
+                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    compare_arrays(p3, p4, (void*) COLON_URL_ESCAPE_CODE, (void*) COLON_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) COLON_URL_ESCAPE_CODE, (void*) COLON_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                    if (r != *NUMBER_0_INTEGER) {
+                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         t = (void**) &COLON_WIDE_CHARACTER;
-                        tc = *PRIMITIVE_COUNT;
+                        tc = *PRIMITIVE_MEMORY_MODEL_COUNT;
                         ts = *WIDE_CHARACTER_PRIMITIVE_SIZE;
                     }
                 }
 
-                if (r == *NUMBER_0_INTEGER) {
+                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    compare_arrays(p3, p4, (void*) SEMICOLON_URL_ESCAPE_CODE, (void*) SEMICOLON_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) SEMICOLON_URL_ESCAPE_CODE, (void*) SEMICOLON_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                    if (r != *NUMBER_0_INTEGER) {
+                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         t = (void**) &SEMICOLON_WIDE_CHARACTER;
-                        tc = *PRIMITIVE_COUNT;
+                        tc = *PRIMITIVE_MEMORY_MODEL_COUNT;
                         ts = *WIDE_CHARACTER_PRIMITIVE_SIZE;
                     }
                 }
 
-                if (r == *NUMBER_0_INTEGER) {
+                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    compare_arrays(p3, p4, (void*) LESS_THAN_SIGN_URL_ESCAPE_CODE, (void*) LESS_THAN_SIGN_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) LESS_THAN_SIGN_URL_ESCAPE_CODE, (void*) LESS_THAN_SIGN_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                    if (r != *NUMBER_0_INTEGER) {
+                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         t = (void**) &LESS_THAN_SIGN_WIDE_CHARACTER;
-                        tc = *PRIMITIVE_COUNT;
+                        tc = *PRIMITIVE_MEMORY_MODEL_COUNT;
                         ts = *WIDE_CHARACTER_PRIMITIVE_SIZE;
                     }
                 }
 
-                if (r == *NUMBER_0_INTEGER) {
+                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    compare_arrays(p3, p4, (void*) EQUALS_SIGN_URL_ESCAPE_CODE, (void*) EQUALS_SIGN_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) EQUALS_SIGN_URL_ESCAPE_CODE, (void*) EQUALS_SIGN_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                    if (r != *NUMBER_0_INTEGER) {
+                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         t = (void**) &EQUALS_SIGN_WIDE_CHARACTER;
-                        tc = *PRIMITIVE_COUNT;
+                        tc = *PRIMITIVE_MEMORY_MODEL_COUNT;
                         ts = *WIDE_CHARACTER_PRIMITIVE_SIZE;
                     }
                 }
 
-                if (r == *NUMBER_0_INTEGER) {
+                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    compare_arrays(p3, p4, (void*) GREATER_THAN_SIGN_URL_ESCAPE_CODE, (void*) GREATER_THAN_SIGN_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) GREATER_THAN_SIGN_URL_ESCAPE_CODE, (void*) GREATER_THAN_SIGN_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                    if (r != *NUMBER_0_INTEGER) {
+                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         t = (void**) &GREATER_THAN_SIGN_WIDE_CHARACTER;
-                        tc = *PRIMITIVE_COUNT;
+                        tc = *PRIMITIVE_MEMORY_MODEL_COUNT;
                         ts = *WIDE_CHARACTER_PRIMITIVE_SIZE;
                     }
                 }
 
-                if (r == *NUMBER_0_INTEGER) {
+                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    compare_arrays(p3, p4, (void*) QUESTION_MARK_URL_ESCAPE_CODE, (void*) QUESTION_MARK_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) QUESTION_MARK_URL_ESCAPE_CODE, (void*) QUESTION_MARK_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                    if (r != *NUMBER_0_INTEGER) {
+                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         t = (void**) &QUESTION_MARK_WIDE_CHARACTER;
-                        tc = *PRIMITIVE_COUNT;
+                        tc = *PRIMITIVE_MEMORY_MODEL_COUNT;
                         ts = *WIDE_CHARACTER_PRIMITIVE_SIZE;
                     }
                 }
 
-                if (r == *NUMBER_0_INTEGER) {
+                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    compare_arrays(p3, p4, (void*) COMMERCIAL_AT_URL_ESCAPE_CODE, (void*) COMMERCIAL_AT_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) COMMERCIAL_AT_URL_ESCAPE_CODE, (void*) COMMERCIAL_AT_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                    if (r != *NUMBER_0_INTEGER) {
+                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         t = (void**) &COMMERCIAL_AT_WIDE_CHARACTER;
-                        tc = *PRIMITIVE_COUNT;
+                        tc = *PRIMITIVE_MEMORY_MODEL_COUNT;
                         ts = *WIDE_CHARACTER_PRIMITIVE_SIZE;
                     }
                 }
 
-                if (r == *NUMBER_0_INTEGER) {
+                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    compare_arrays(p3, p4, (void*) LEFT_SQUARE_BRACKET_URL_ESCAPE_CODE, (void*) LEFT_SQUARE_BRACKET_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) LEFT_SQUARE_BRACKET_URL_ESCAPE_CODE, (void*) LEFT_SQUARE_BRACKET_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                    if (r != *NUMBER_0_INTEGER) {
+                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         t = (void**) &LEFT_SQUARE_BRACKET_WIDE_CHARACTER;
-                        tc = *PRIMITIVE_COUNT;
+                        tc = *PRIMITIVE_MEMORY_MODEL_COUNT;
                         ts = *WIDE_CHARACTER_PRIMITIVE_SIZE;
                     }
                 }
 
-                if (r == *NUMBER_0_INTEGER) {
+                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    compare_arrays(p3, p4, (void*) REVERSE_SOLIDUS_URL_ESCAPE_CODE, (void*) REVERSE_SOLIDUS_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) REVERSE_SOLIDUS_URL_ESCAPE_CODE, (void*) REVERSE_SOLIDUS_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                    if (r != *NUMBER_0_INTEGER) {
+                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         t = (void**) &REVERSE_SOLIDUS_WIDE_CHARACTER;
-                        tc = *PRIMITIVE_COUNT;
+                        tc = *PRIMITIVE_MEMORY_MODEL_COUNT;
                         ts = *WIDE_CHARACTER_PRIMITIVE_SIZE;
                     }
                 }
 
-                if (r == *NUMBER_0_INTEGER) {
+                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    compare_arrays(p3, p4, (void*) RIGHT_SQUARE_BRACKET_URL_ESCAPE_CODE, (void*) RIGHT_SQUARE_BRACKET_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) RIGHT_SQUARE_BRACKET_URL_ESCAPE_CODE, (void*) RIGHT_SQUARE_BRACKET_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                    if (r != *NUMBER_0_INTEGER) {
+                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         t = (void**) &RIGHT_SQUARE_BRACKET_WIDE_CHARACTER;
-                        tc = *PRIMITIVE_COUNT;
+                        tc = *PRIMITIVE_MEMORY_MODEL_COUNT;
                         ts = *WIDE_CHARACTER_PRIMITIVE_SIZE;
                     }
                 }
 
-                if (r == *NUMBER_0_INTEGER) {
+                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    compare_arrays(p3, p4, (void*) CARET_URL_ESCAPE_CODE, (void*) CARET_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) CARET_URL_ESCAPE_CODE, (void*) CARET_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                    if (r != *NUMBER_0_INTEGER) {
+                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         t = (void**) &CIRCUMFLEX_ACCENT_WIDE_CHARACTER;
-                        tc = *PRIMITIVE_COUNT;
+                        tc = *PRIMITIVE_MEMORY_MODEL_COUNT;
                         ts = *WIDE_CHARACTER_PRIMITIVE_SIZE;
                     }
                 }
 
-                if (r == *NUMBER_0_INTEGER) {
+                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    compare_arrays(p3, p4, (void*) GRAVE_ACCENT_URL_ESCAPE_CODE, (void*) GRAVE_ACCENT_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) GRAVE_ACCENT_URL_ESCAPE_CODE, (void*) GRAVE_ACCENT_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                    if (r != *NUMBER_0_INTEGER) {
+                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         t = (void**) &GRAVE_ACCENT_WIDE_CHARACTER;
-                        tc = *PRIMITIVE_COUNT;
+                        tc = *PRIMITIVE_MEMORY_MODEL_COUNT;
                         ts = *WIDE_CHARACTER_PRIMITIVE_SIZE;
                     }
                 }
 
-                if (r == *NUMBER_0_INTEGER) {
+                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    compare_arrays(p3, p4, (void*) LEFT_CURLY_BRACE_URL_ESCAPE_CODE, (void*) LEFT_CURLY_BRACE_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) LEFT_CURLY_BRACE_URL_ESCAPE_CODE, (void*) LEFT_CURLY_BRACE_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                    if (r != *NUMBER_0_INTEGER) {
+                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         t = (void**) &LEFT_CURLY_BRACKET_WIDE_CHARACTER;
-                        tc = *PRIMITIVE_COUNT;
+                        tc = *PRIMITIVE_MEMORY_MODEL_COUNT;
                         ts = *WIDE_CHARACTER_PRIMITIVE_SIZE;
                     }
                 }
 
-                if (r == *NUMBER_0_INTEGER) {
+                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    compare_arrays(p3, p4, (void*) VERTICAL_BAR_URL_ESCAPE_CODE, (void*) VERTICAL_BAR_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) VERTICAL_BAR_URL_ESCAPE_CODE, (void*) VERTICAL_BAR_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                    if (r != *NUMBER_0_INTEGER) {
+                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         t = (void**) &VERTICAL_LINE_WIDE_CHARACTER;
-                        tc = *PRIMITIVE_COUNT;
+                        tc = *PRIMITIVE_MEMORY_MODEL_COUNT;
                         ts = *WIDE_CHARACTER_PRIMITIVE_SIZE;
                     }
                 }
 
-                if (r == *NUMBER_0_INTEGER) {
+                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    compare_arrays(p3, p4, (void*) RIGHT_CURLY_BRACE_URL_ESCAPE_CODE, (void*) RIGHT_CURLY_BRACE_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) RIGHT_CURLY_BRACE_URL_ESCAPE_CODE, (void*) RIGHT_CURLY_BRACE_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                    if (r != *NUMBER_0_INTEGER) {
+                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         t = (void**) &RIGHT_CURLY_BRACKET_WIDE_CHARACTER;
-                        tc = *PRIMITIVE_COUNT;
+                        tc = *PRIMITIVE_MEMORY_MODEL_COUNT;
                         ts = *WIDE_CHARACTER_PRIMITIVE_SIZE;
                     }
                 }
 
-                if (r == *NUMBER_0_INTEGER) {
+                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    compare_arrays(p3, p4, (void*) TILDE_URL_ESCAPE_CODE, (void*) TILDE_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) TILDE_URL_ESCAPE_CODE, (void*) TILDE_URL_ESCAPE_CODE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                    if (r != *NUMBER_0_INTEGER) {
+                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         t = (void**) &TILDE_WIDE_CHARACTER;
-                        tc = *PRIMITIVE_COUNT;
+                        tc = *PRIMITIVE_MEMORY_MODEL_COUNT;
                         ts = *WIDE_CHARACTER_PRIMITIVE_SIZE;
                     }
                 }
@@ -350,7 +349,7 @@ void decode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 // Set actual destination, using the temporary value.
                 //
 
-                if (r != *NUMBER_0_INTEGER) {
+                if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                     if ((*dc + tc) > *ds) {
 
@@ -370,17 +369,17 @@ void decode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode url escape code. The destination is null.");
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode url escape code. The destination is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode url escape code. The destination count is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode url escape code. The destination count is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not decode url escape code. The destination size is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode url escape code. The destination size is null.");
     }
 }
 
@@ -395,30 +394,30 @@ void decode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
  */
 void encode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p2 != *NULL_POINTER) {
+    if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* ds = (int*) p2;
 
-        if (p1 != *NULL_POINTER) {
+        if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
             int* dc = (int*) p1;
 
-            if (p0 != *NULL_POINTER) {
+            if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
                 void** d = (void**) p0;
 
                 // The temporary value.
                 void** t = NULL_POINTER;
-                int tc = *NUMBER_0_INTEGER;
-                int ts = *NUMBER_0_INTEGER;
+                int tc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+                int ts = *NUMBER_0_INTEGER_MEMORY_MODEL;
                 // The comparison result.
-                int r = *NUMBER_0_INTEGER;
+                int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-                if (r == *NUMBER_0_INTEGER) {
+                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    compare_arrays(p3, p4, (void*) SPACE_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) SPACE_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                    if (r != *NUMBER_0_INTEGER) {
+                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         t = (void**) &SPACE_URL_ESCAPE_CODE;
                         tc = *SPACE_URL_ESCAPE_CODE_COUNT;
@@ -426,11 +425,11 @@ void encode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     }
                 }
 
-                if (r == *NUMBER_0_INTEGER) {
+                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    compare_arrays(p3, p4, (void*) NUMBER_SIGN_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) NUMBER_SIGN_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                    if (r != *NUMBER_0_INTEGER) {
+                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         t = (void**) &NUMBER_SIGN_URL_ESCAPE_CODE;
                         tc = *NUMBER_SIGN_URL_ESCAPE_CODE_COUNT;
@@ -438,11 +437,11 @@ void encode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     }
                 }
 
-                if (r == *NUMBER_0_INTEGER) {
+                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    compare_arrays(p3, p4, (void*) DOLLAR_SIGN_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) DOLLAR_SIGN_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                    if (r != *NUMBER_0_INTEGER) {
+                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         t = (void**) &DOLLAR_SIGN_URL_ESCAPE_CODE;
                         tc = *DOLLAR_SIGN_URL_ESCAPE_CODE_COUNT;
@@ -450,11 +449,11 @@ void encode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     }
                 }
 
-                if (r == *NUMBER_0_INTEGER) {
+                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    compare_arrays(p3, p4, (void*) PERCENT_SIGN_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) PERCENT_SIGN_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                    if (r != *NUMBER_0_INTEGER) {
+                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         t = (void**) &PERCENT_SIGN_URL_ESCAPE_CODE;
                         tc = *PERCENT_SIGN_URL_ESCAPE_CODE_COUNT;
@@ -462,11 +461,11 @@ void encode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     }
                 }
 
-                if (r == *NUMBER_0_INTEGER) {
+                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    compare_arrays(p3, p4, (void*) AMPERSAND_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) AMPERSAND_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                    if (r != *NUMBER_0_INTEGER) {
+                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         t = (void**) &AMPERSAND_URL_ESCAPE_CODE;
                         tc = *AMPERSAND_URL_ESCAPE_CODE_COUNT;
@@ -474,11 +473,11 @@ void encode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     }
                 }
 
-                if (r == *NUMBER_0_INTEGER) {
+                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    compare_arrays(p3, p4, (void*) SOLIDUS_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) SOLIDUS_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                    if (r != *NUMBER_0_INTEGER) {
+                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         t = (void**) &SOLIDUS_URL_ESCAPE_CODE;
                         tc = *SOLIDUS_URL_ESCAPE_CODE_COUNT;
@@ -486,11 +485,11 @@ void encode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     }
                 }
 
-                if (r == *NUMBER_0_INTEGER) {
+                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    compare_arrays(p3, p4, (void*) COLON_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) COLON_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                    if (r != *NUMBER_0_INTEGER) {
+                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         t = (void**) &COLON_URL_ESCAPE_CODE;
                         tc = *COLON_URL_ESCAPE_CODE_COUNT;
@@ -498,11 +497,11 @@ void encode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     }
                 }
 
-                if (r == *NUMBER_0_INTEGER) {
+                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    compare_arrays(p3, p4, (void*) SEMICOLON_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) SEMICOLON_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                    if (r != *NUMBER_0_INTEGER) {
+                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         t = (void**) &SEMICOLON_URL_ESCAPE_CODE;
                         tc = *SEMICOLON_URL_ESCAPE_CODE_COUNT;
@@ -510,11 +509,11 @@ void encode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     }
                 }
 
-                if (r == *NUMBER_0_INTEGER) {
+                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    compare_arrays(p3, p4, (void*) LESS_THAN_SIGN_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) LESS_THAN_SIGN_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                    if (r != *NUMBER_0_INTEGER) {
+                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         t = (void**) &LESS_THAN_SIGN_URL_ESCAPE_CODE;
                         tc = *LESS_THAN_SIGN_URL_ESCAPE_CODE_COUNT;
@@ -522,11 +521,11 @@ void encode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     }
                 }
 
-                if (r == *NUMBER_0_INTEGER) {
+                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    compare_arrays(p3, p4, (void*) EQUALS_SIGN_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) EQUALS_SIGN_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                    if (r != *NUMBER_0_INTEGER) {
+                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         t = (void**) &EQUALS_SIGN_URL_ESCAPE_CODE;
                         tc = *EQUALS_SIGN_URL_ESCAPE_CODE_COUNT;
@@ -534,11 +533,11 @@ void encode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     }
                 }
 
-                if (r == *NUMBER_0_INTEGER) {
+                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    compare_arrays(p3, p4, (void*) GREATER_THAN_SIGN_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) GREATER_THAN_SIGN_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                    if (r != *NUMBER_0_INTEGER) {
+                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         t = (void**) &GREATER_THAN_SIGN_URL_ESCAPE_CODE;
                         tc = *GREATER_THAN_SIGN_URL_ESCAPE_CODE_COUNT;
@@ -546,11 +545,11 @@ void encode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     }
                 }
 
-                if (r == *NUMBER_0_INTEGER) {
+                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    compare_arrays(p3, p4, (void*) QUESTION_MARK_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) QUESTION_MARK_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                    if (r != *NUMBER_0_INTEGER) {
+                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         t = (void**) &QUESTION_MARK_URL_ESCAPE_CODE;
                         tc = *QUESTION_MARK_URL_ESCAPE_CODE_COUNT;
@@ -558,11 +557,11 @@ void encode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     }
                 }
 
-                if (r == *NUMBER_0_INTEGER) {
+                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    compare_arrays(p3, p4, (void*) COMMERCIAL_AT_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) COMMERCIAL_AT_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                    if (r != *NUMBER_0_INTEGER) {
+                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         t = (void**) &COMMERCIAL_AT_URL_ESCAPE_CODE;
                         tc = *COMMERCIAL_AT_URL_ESCAPE_CODE_COUNT;
@@ -570,11 +569,11 @@ void encode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     }
                 }
 
-                if (r == *NUMBER_0_INTEGER) {
+                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    compare_arrays(p3, p4, (void*) LEFT_SQUARE_BRACKET_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) LEFT_SQUARE_BRACKET_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                    if (r != *NUMBER_0_INTEGER) {
+                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         t = (void**) &LEFT_SQUARE_BRACKET_URL_ESCAPE_CODE;
                         tc = *LEFT_SQUARE_BRACKET_URL_ESCAPE_CODE_COUNT;
@@ -582,11 +581,11 @@ void encode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     }
                 }
 
-                if (r == *NUMBER_0_INTEGER) {
+                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    compare_arrays(p3, p4, (void*) REVERSE_SOLIDUS_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) REVERSE_SOLIDUS_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                    if (r != *NUMBER_0_INTEGER) {
+                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         t = (void**) &REVERSE_SOLIDUS_URL_ESCAPE_CODE;
                         tc = *REVERSE_SOLIDUS_URL_ESCAPE_CODE_COUNT;
@@ -594,11 +593,11 @@ void encode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     }
                 }
 
-                if (r == *NUMBER_0_INTEGER) {
+                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    compare_arrays(p3, p4, (void*) RIGHT_SQUARE_BRACKET_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) RIGHT_SQUARE_BRACKET_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                    if (r != *NUMBER_0_INTEGER) {
+                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         t = (void**) &RIGHT_SQUARE_BRACKET_URL_ESCAPE_CODE;
                         tc = *RIGHT_SQUARE_BRACKET_URL_ESCAPE_CODE_COUNT;
@@ -606,11 +605,11 @@ void encode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     }
                 }
 
-                if (r == *NUMBER_0_INTEGER) {
+                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    compare_arrays(p3, p4, (void*) CIRCUMFLEX_ACCENT_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) CIRCUMFLEX_ACCENT_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                    if (r != *NUMBER_0_INTEGER) {
+                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         t = (void**) &CARET_URL_ESCAPE_CODE;
                         tc = *CARET_URL_ESCAPE_CODE_COUNT;
@@ -618,11 +617,11 @@ void encode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     }
                 }
 
-                if (r == *NUMBER_0_INTEGER) {
+                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    compare_arrays(p3, p4, (void*) GRAVE_ACCENT_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) GRAVE_ACCENT_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                    if (r != *NUMBER_0_INTEGER) {
+                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         t = (void**) &GRAVE_ACCENT_URL_ESCAPE_CODE;
                         tc = *GRAVE_ACCENT_URL_ESCAPE_CODE_COUNT;
@@ -630,11 +629,11 @@ void encode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     }
                 }
 
-                if (r == *NUMBER_0_INTEGER) {
+                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    compare_arrays(p3, p4, (void*) LEFT_CURLY_BRACKET_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) LEFT_CURLY_BRACKET_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                    if (r != *NUMBER_0_INTEGER) {
+                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         t = (void**) &LEFT_CURLY_BRACE_URL_ESCAPE_CODE;
                         tc = *LEFT_CURLY_BRACE_URL_ESCAPE_CODE_COUNT;
@@ -642,11 +641,11 @@ void encode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     }
                 }
 
-                if (r == *NUMBER_0_INTEGER) {
+                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    compare_arrays(p3, p4, (void*) VERTICAL_LINE_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) VERTICAL_LINE_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                    if (r != *NUMBER_0_INTEGER) {
+                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         t = (void**) &VERTICAL_BAR_URL_ESCAPE_CODE;
                         tc = *VERTICAL_BAR_URL_ESCAPE_CODE_COUNT;
@@ -654,11 +653,11 @@ void encode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     }
                 }
 
-                if (r == *NUMBER_0_INTEGER) {
+                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    compare_arrays(p3, p4, (void*) RIGHT_CURLY_BRACKET_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) RIGHT_CURLY_BRACKET_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                    if (r != *NUMBER_0_INTEGER) {
+                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         t = (void**) &RIGHT_CURLY_BRACE_URL_ESCAPE_CODE;
                         tc = *RIGHT_CURLY_BRACE_URL_ESCAPE_CODE_COUNT;
@@ -666,11 +665,11 @@ void encode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     }
                 }
 
-                if (r == *NUMBER_0_INTEGER) {
+                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    compare_arrays(p3, p4, (void*) TILDE_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY);
+                    compare_arrays(p3, p4, (void*) TILDE_WIDE_CHARACTER, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                    if (r != *NUMBER_0_INTEGER) {
+                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         t = (void**) &TILDE_URL_ESCAPE_CODE;
                         tc = *TILDE_URL_ESCAPE_CODE_COUNT;
@@ -682,7 +681,7 @@ void encode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 // Set actual destination, using the temporary value.
                 //
 
-                if (r != *NUMBER_0_INTEGER) {
+                if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                     if ((*dc + tc) > *ds) {
 
@@ -702,17 +701,17 @@ void encode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             } else {
 
-                log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode url escape code. The destination is null.");
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode url escape code. The destination is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode url escape code. The destination count is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode url escape code. The destination count is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LOG_LEVEL, (void*) L"Could not encode url escape code. The destination size is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode url escape code. The destination size is null.");
     }
 }
 
